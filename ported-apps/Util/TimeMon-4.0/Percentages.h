@@ -27,13 +27,14 @@ typedef unsigned long long CPUTime[CPUSTATES];
 
     BOOL updateFlags[ 3];	// Which percentages to update.
     NSTimer *te;		// The timed entry keeping us alive.
-    NSInvocation *selfStep;			// The invocation describing [self step]
+    NSInvocation *selfStep;	// The invocation describing [self step]
     NSUserDefaults *defaults;
     id periodText;		// Period of the display.
     id lagText;			// Lag factore for the inner circle.
     id factorText;		// Factor between layers.
     id pauseMenuCell;		// To change when we pause/unpause.
     id colorFields;		// Fields that contain the color scheme.
+    id readmeText;              // the readme text...
     NSImage *stipple;		// Icon background color stipple for NS3.0.
 }
 
