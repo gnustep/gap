@@ -1,3 +1,7 @@
+2005-01-09 13:33 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* GNUmakefile: Reverted previous change.
+
 2005-01-09 11:32 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* GNUmakefile: removed some things
