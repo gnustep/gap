@@ -1,3 +1,8 @@
+2005-01-23 19:18 Gregory John Casamento <greg_casamento@yahoo.com>
+                 On behalf of Alex Malmberg, suggested the following changes:
+	* Percentages.m: Change sizeof(long) to sizeof(CPUTime) after the
+	previous change in loadave.h.
+
 2005-01-23 17:28 Gregory John Casamento <greg_casamento@yahoo.com>
                  On behalf of Alex Malmberg, who made the following changes:
 	* GNUmakefile: Updated to show all warnings.

@@ -188,8 +188,8 @@
     unsigned newSize = layerFactor * layerFactor + lagFactor + 1;
     
 	// Allocate info for the array.
-    newTimes = NSZoneMalloc( [self zone], sizeof( float) * CPUSTATES * newSize);
-    bzero( newTimes, sizeof( float) * CPUSTATES * newSize);
+    newTimes = NSZoneMalloc( [self zone], sizeof(CPUTime) * CPUSTATES * newSize);
+    bzero( newTimes, sizeof(CPUTime) * CPUSTATES * newSize);
     
 	// If there was a previous array, copy over values.  First,
 	// an index is found for the first valid time.	Then enough
@@ -295,7 +295,7 @@
     [factorText setIntValue:layerFactor];
     
     [self __reallocOldTimes];
-    bcopy(cp_time, oldTimes[ 0], sizeof( CPUTime));
+    bcopy(cp_time, oldTimes[ 0], sizeof(CPUTime));
     laIndex = 1;
     steps = 1;
     
