@@ -3,14 +3,10 @@
 #include <AppKit/PSOperators.h>
 
 // define the colors...
-/*#define IDLE   PSsetrgbcolor(1.0,1.0,1.0)
-#define NICE   PSsetrgbcolor(0.667,0.667,0.667)
-#define USER   PSsetrgbcolor(0.333,0.333,0.333)
-#define SYSTEM PSsetrgbcolor(0.0,0.0,0.0)*/
-#define IDLE   PSsetrgbcolor(1.0,1.0,1.0)
-#define NICE   PSsetrgbcolor(0.0,1.0,0.0)
-#define USER   PSsetrgbcolor(0.0,0.0,1.0)
-#define SYSTEM PSsetrgbcolor(1.0,0.0,0.0)
+#define IDLE   PSsetrgbcolor(0.667,0.667,0.667) // gray
+#define NICE   PSsetrgbcolor(0.000,0.000,1.000) // really blue
+#define USER   PSsetrgbcolor(0.149,0.380,0.667) // turquoise
+#define SYSTEM PSsetrgbcolor(0.321,0.494,0.784) // light blue
 
 void drawArc2(double radius, double bdeg, double ddeg, double ldeg)
 {
