@@ -23,6 +23,12 @@ enum la_error
   LA_ERROR		/* Problem. */
 };
 
+/* The times are returned in an array of 5 unsigned long long:s, and should
+   be cumulative counts of 'time'.  The unit used doesn't matter.  E.g.
+   number of jiffies since system startup would work ok.  Idle and user are
+   the most important states; the others can be set to 0 if you can't get
+   values for them.  */
+
 /* Get ready for operation and retrieve the current times. */
 int la_init(unsigned long long *times);
 

@@ -1,3 +1,14 @@
+2005-01-31 11:33  Alexander Malmberg  <alexander@malmberg.org>
+
+	* loadave.h: Document.
+
+2005-01-31 11:06  Alexander Malmberg  <alexander@malmberg.org>
+
+	* Percentages.h, Percentages.m, TimeMonWraps.m: Add an io-wait arc.
+	* loadave.c, loadave.h: Add an io-wait cpu-state.
+	* TimeMonWraps.h (drawInit, PSWait, setColor, _doDrawArc1)
+	(_doDrawArc2, drawArc1): Remove.
+
 2005-01-29 17:02 Gregory John Casamento <greg_casamento@yahoo.com>
                  README.rtf from tarzeau.
 	* English.lproj/TimeMon.gorm: Correction to make text view resize
