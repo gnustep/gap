@@ -90,7 +90,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 - connect:sender {
     NSString *key = [[NSString alloc] initWithFormat:@"%@%d",@"Server", [GoServerSelectionList selectedRow]];
-    id server = [myGoServers objectForKey:key];
+    GoServer *server = (GoServer *)[myGoServers objectForKey:key];
     [LoginDefinition setTitle:[server serverName]];
     [ServerLogin setStringValue:[server login]];
     [ServerPassword setStringValue:[server password]];
@@ -104,7 +104,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 - connectToServer:sender {
     NSString *key = [[NSString alloc] initWithFormat:@"%@%d",@"Server", [GoServerSelectionList selectedRow]];
-    id server = [myGoServers objectForKey:key];
+    GoServer *server = (GoServer *)[myGoServers objectForKey:key];
     if ([sender isMemberOfClass:[NSButton class]]) {
 	[server setLogin:[ServerLogin stringValue] ];
 	[server setPassword:[ServerPassword stringValue] ];
@@ -183,7 +183,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 - (BOOL)applicationShouldTerminate:(id)sender {
 
     id key;
-    id defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     NSEnumerator *enumerator = [myGoServers keyEnumerator];
 

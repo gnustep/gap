@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
  
-/* $Id: Board.m,v 1.3 2005/04/03 19:07:17 gcasa Exp $ */
+/* $Id: Board.m,v 1.4 2005/04/06 00:32:58 gcasa Exp $ */
 
 /*
  * $Log: Board.m,v $
+ * Revision 1.4  2005/04/06 00:32:58  gcasa
+ * Cleaned up the code.
+ *
  * Revision 1.3  2005/04/03 19:07:17  gcasa
  * removing debugging.
  *
@@ -212,7 +215,6 @@ void setStoneLoc(int x, int y)
   historyFont = [ [NSFont fontWithName:@"Helvetica" size:9.0] retain];
   blackTerrFont = [ [NSFont fontWithName:@"Helvetica" size:25.0] retain];
   whiteTerrFont = [ [NSFont fontWithName:@"Helvetica" size:22.5] retain];
-#warning
 #ifndef GNUSTEP
   stoneClick = [Sound findSoundFor:@"Pop"];
 #endif

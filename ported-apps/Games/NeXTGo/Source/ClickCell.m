@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
 
-/* $Id: ClickCell.m,v 1.1 2003/01/12 04:01:51 gcasa Exp $ */
+/* $Id: ClickCell.m,v 1.2 2005/04/06 00:32:58 gcasa Exp $ */
 
 /*
  * $Log: ClickCell.m,v $
+ * Revision 1.2  2005/04/06 00:32:58  gcasa
+ * Cleaned up the code.
+ *
  * Revision 1.1  2003/01/12 04:01:51  gcasa
  * Committing the entire GNU Go and NeXT Go application to the repository.
  * See COPYING file for GNU License.
@@ -80,7 +83,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)_untilMouseUp
 {
-    [NSApp cellClicked:self];
+    [(GoApp *)NSApp cellClicked:self];
 
     return  YES;   
 }    

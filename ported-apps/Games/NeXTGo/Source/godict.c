@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
 
-/* $Id: godict.c,v 1.1 2003/01/12 04:01:52 gcasa Exp $ */
+/* $Id: godict.c,v 1.2 2005/04/06 00:32:58 gcasa Exp $ */
 
 /*
  * $Log: godict.c,v $
+ * Revision 1.2  2005/04/06 00:32:58  gcasa
+ * Cleaned up the code.
+ *
  * Revision 1.1  2003/01/12 04:01:52  gcasa
  * Committing the entire GNU Go and NeXT Go application to the repository.
  * See COPYING file for GNU License.
@@ -73,7 +76,6 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 #include "godict.h"
 
 #define LANGENTRY(line,label)    (!strncmp(line,label,strlen(label)))
-#warning
 /*
 #ifndef _TEST_COMPILE_
 extern int NSRunAlertPanel(const char *title, const char *msg, const char *defaultButton, const char *alternateButton, const char *otherButton, ...);
