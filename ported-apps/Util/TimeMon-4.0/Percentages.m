@@ -184,16 +184,16 @@
 - (void)__reallocOldTimes
 {
     CPUTime *newTimes;
-	// Get the new size for the array.
+    // Get the new size for the array.
     unsigned newSize = layerFactor * layerFactor + lagFactor + 1;
     
-	// Allocate info for the array.
-    newTimes = NSZoneMalloc( [self zone], sizeof(CPUTime) * CPUSTATES * newSize);
-    bzero( newTimes, sizeof(CPUTime) * CPUSTATES * newSize);
+    // Allocate info for the array.
+    newTimes = NSZoneMalloc( [self zone], sizeof(CPUTime) * newSize);
+    bzero( newTimes, sizeof(CPUTime) * newSize);
     
-	// If there was a previous array, copy over values.  First,
-	// an index is found for the first valid time.	Then enough
-	// times to fill the rings are copied, if available.
+    // If there was a previous array, copy over values.  First,
+    // an index is found for the first valid time.	Then enough
+    // times to fill the rings are copied, if available.
     if( oldTimes) {
 	unsigned ii, jj, elts;
 
