@@ -1,0 +1,11 @@
+"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };
+"MenuController" = {
+    ACTIONS = {
+        "infoPanel:" = id; 
+        "newShell:" = id; 
+        "preferencesPanel:" = id; 
+        "runCommand:" = id; 
+    }; 
+    OUTLETS = {infoPanel = id; }; 
+    SUPERCLASS = NSObject; 
+};
