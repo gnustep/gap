@@ -1355,6 +1355,12 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	LPUnit* unit;
 	/* run stone */
 	int yy,xx;
+
+	if (stone > 0)
+	{
+		[__owner player:self processStone:stone];
+	}
+
 	yy = 13, xx = 0;
 	while (stone > 0)
 	{
