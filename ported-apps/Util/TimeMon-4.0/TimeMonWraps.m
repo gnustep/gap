@@ -8,6 +8,21 @@
 #define USER   PSsetrgbcolor(0.333,0.333,0.333)
 #define SYSTEM PSsetrgbcolor(0.0,0.0,0.0)
 
+void drawInit()
+{
+  // do nothing.
+}
+
+void PSWait()
+{
+  // do nothing.
+}
+
+void setColor(char *name, float r, float g, float b)
+{
+  // do nothing.
+}
+
 // the drawing functions...
 void _doDrawArc1(double radius, double bdeg, double ddeg)
 {
