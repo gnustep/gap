@@ -269,13 +269,8 @@
 	// Shoot out error codes if there was an error.
     if( (ret = la_init( cp_time)) ) {
 	const id syslogs[] = {
-	    NULL,				// LA_NOERR
-	    @"Cannot nlist /mach.",		// LA_NLIST
-	    @"Must be installed setgid kmem.",	// LA_PERM
-	    @"Cannot open /dev/kmem.",		// LA_KMEM
-	    @"Unable to seek in /dev/kmem",	// LA_SEEK
-	    @"Unable to read from /dev/kmem",	// LA_READ
-	    @"table() call failed.",		// LA_TABLE
+	  NULL,				          // LA_NOERR
+	  @"Cannot read or parse /proc/stat." // LA_ERROR
 	};
 	NSLog(@"TimeMon: %@", syslogs[ret]);
 	NSLog(@"TimeMon: Exiting!");
