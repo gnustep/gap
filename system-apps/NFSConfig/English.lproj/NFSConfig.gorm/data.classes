@@ -142,6 +142,13 @@
 	);
 	Super = NSObject;
     };
+    NFSClientDataSource = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
     NFSClientDelegate = {
 	Actions = (
 	);
@@ -155,6 +162,13 @@
 	Outlets = (
 	    clientWindow,
 	    serverWindow
+	);
+	Super = NSObject;
+    };
+    NFSServerDataSource = {
+	Actions = (
+	);
+	Outlets = (
 	);
 	Super = NSObject;
     };
