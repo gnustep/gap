@@ -1097,6 +1097,43 @@ static float _grid_height;
 
 @implementation LapisPuzzleView
 
+static LPUnitColorType _random_unit_color()
+{
+	return random()%LP_COLOR_ALL;
+}
+
+static LPUnit * _random_unit(id owner, int x, int y)
+{
+	id unit;
+	if (random()%4 == 1)
+	{
+		if (random()%10 == 1)
+		{
+			unit = [[LPSparkerUnit alloc] initWithOwner:owner
+												  color:LP_COLOR_ALL
+													  X:x
+													  Y:y];
+		}
+		else
+		{
+
+			unit = [[LPSparkerUnit alloc] initWithOwner:owner
+												  color:_random_unit_color()
+													  X:x
+													  Y:y];
+		}
+	}
+	else
+	{
+		unit = [[LPJewelUnit alloc] initWithOwner:owner
+											color:_random_unit_color()
+												X:x
+												Y:y];
+	}
+	return AUTORELEASE(unit);
+}
+
+
 - (NSSize) gridSize
 {
 	return NSMakeSize(
@@ -1715,42 +1752,6 @@ static float _grid_height;
 	[self setNeedsDisplay:YES];
 }
 
-static LPUnitColorType _random_unit_color()
-{
-	return random()%LP_COLOR_ALL;
-}
-
-static LPUnit * _random_unit(id owner, int x, int y)
-{
-	id unit;
-	if (random()%4 == 1)
-	{
-		if (random()%10 == 1)
-		{
-			unit = [[LPSparkerUnit alloc] initWithOwner:owner
-												  color:LP_COLOR_ALL
-													  X:x
-													  Y:y];
-		}
-		else
-		{
-
-			unit = [[LPSparkerUnit alloc] initWithOwner:owner
-												  color:_random_unit_color()
-													  X:x
-													  Y:y];
-		}
-	}
-	else
-	{
-		unit = [[LPJewelUnit alloc] initWithOwner:owner
-											color:_random_unit_color()
-												X:x
-												Y:y];
-	}
-	return AUTORELEASE(unit);
-}
-
 - (void) addStone:(int)num
 {
 	stone += num;
@@ -2029,8 +2030,10 @@ static LPUnit * _random_unit(id owner, int x, int y)
 		case 54:
 			[__owner op:self processDir:LP_MOVE_DOWN];
 			break;
+			/*
 		default:
-			//NSLog(@"%d",[event keyCode]);
+			NSLog(@"%d",[event keyCode]);
+			*/
 	}
 	[self setNeedsDisplay:YES];
 }
