@@ -51,22 +51,18 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #import "GoApp.h"
 
-void main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 
     NSAutoreleasePool *myPool = [[NSAutoreleasePool alloc] init];
 
     [GoApp sharedApplication];
-#ifndef GNUSTEP
-    if ([NSBundle loadNibNamed:@"NeXTGo.nib" owner:NSApp])
-	    [NSApp run];
-#else
+
     if ([NSBundle loadNibNamed:@"NeXTGo" owner:NSApp])
 	    [NSApp run];
-#endif
 
     [NSApp release];
 
     [myPool release];
 
-    exit(0);
+    return 0;
 }

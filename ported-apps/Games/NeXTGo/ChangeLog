@@ -1,4 +1,11 @@
+2005-04-03 15:39 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Source/GNUmakefile: Added localized .gorm file.
+	* Source/GoServer.h: Added newline at the end.
+	* Source/NeXTGo_main.m: Cleaned up a little.
+	* Source/English.lproj: Removed.
+	* Source/English.lproj/NeXTGo.gorm: Added new interface.
+
 2005-04-03 15:01 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Source/Board.m: Removed all of the debugging information.
-
