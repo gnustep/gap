@@ -1,3 +1,11 @@
+2005-01-29 17:02 Gregory John Casamento <greg_casamento@yahoo.com>
+                 README.rtf from tarzeau.
+	* English.lproj/TimeMon.gorm: Correction to make text view resize
+	correctly.
+	* README.rtf: Updated with corrected spelling and some additional
+	info.  
+	* TimeMonWraps.h: Removed uneeded prototypes.
+
 2005-01-29 13:42 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* NSColorExtensions.m
