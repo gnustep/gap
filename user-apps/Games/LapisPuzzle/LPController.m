@@ -32,6 +32,8 @@
 - (void) applicationWillFinishLaunching: (NSNotification*)aNotification
 {
 	NSTimer *tickr = nil;
+	attackArray = [NSMutableArray new];
+
 	srandom([[NSCalendarDate date] timeIntervalSince1970]);
 	[lpview1 setBackgroundImage:[NSImage imageNamed:@"bg1.jpg"]];
 	[lpview2 setBackgroundImage:[NSImage imageNamed:@"bg2.jpg"]];
@@ -84,6 +86,19 @@
 			[view processDir:LP_MOVE_FALL];
 		}
 	}
+}
+
+- (void) player:(id)pl processStone:(int)num
+{
+	if (pl == lpview1)
+	{
+		[attackArray addObject:[NSString stringWithFormat:@"<--[%d]---",num]];
+	}
+	else
+	{
+		[attackArray addObject:[NSString stringWithFormat:@"---[%d]-->",num]];
+	}
+	[attackList reloadColumn:0];
 }
 
 - (void) player:(id)pl addStoneToOp:(int)num
@@ -201,6 +216,8 @@
 	[tick invalidate];
 	tick = nil;
 
+	[attackArray removeAllObjects];
+	[attackList reloadColumn:0];
 	[lpview1 restart];
 	[lpview2 restart];
 
@@ -211,5 +228,18 @@
 												 repeats:YES]);
 }
 
+- (int) browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column
+{
+	return [attackArray count];
+}
+
+- (void) browser: (NSBrowser *)sender
+ willDisplayCell: (NSBrowserCell *)cell
+		   atRow: (int)row
+		  column: (int)column
+{
+	[cell setTitle:[attackArray objectAtIndex:row]];
+	[cell setLeaf:YES];
+}
 @end
 

@@ -149,7 +149,8 @@
 	    lpview1,
 	    lpview2,
 	    next1,
-	    next2
+	    next2,
+	    attackList
 	);
 	Super = NSObject;
     };

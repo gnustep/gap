@@ -27,9 +27,11 @@
 	LapisPuzzleView *lpview1;
 	LapisPuzzleView *lpview2;
 
+	id attackList;
 	id next1;
 	id next2;
 
+	NSMutableArray *attackArray;
 	NSTimer *tick;
 }
 @end
