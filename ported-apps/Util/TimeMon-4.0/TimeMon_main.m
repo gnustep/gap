@@ -4,14 +4,15 @@
 
 #import <AppKit/AppKit.h>
 
-int main(int argc, char *argv[]) {
-
+int main(int argc, const char *argv[]) 
+{
+  /*
     [NSApplication sharedApplication];
     if ([NSBundle loadNibNamed:@"TimeMon" owner:NSApp])
-      {
 	    [NSApp run];
-      }
-
+	    
     [NSApp release];
-    exit(0);
+    return 0;
+  */
+  return NSApplicationMain(argc, argv);
 }
