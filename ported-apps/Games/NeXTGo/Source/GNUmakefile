@@ -37,6 +37,9 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 APP_NAME = NeXTGo
 
+# Set the principal class
+NeXTGo_PRINCIPAL_CLASS = GoApp
+
 # The Objective-C source files to be compiled
 NeXTGo_OBJC_FILES = \
 	NeXTGo_main.m Board.m ClickCell.m Controller.m GameInspectorPanel.m \

@@ -49,20 +49,9 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
    NOTE: Do NOT change this file -- Project Builder maintains it.
 */
 
-#import "GoApp.h"
+#include <AppKit/AppKit.h>
 
-int main(int argc, char *argv[]) {
-
-    NSAutoreleasePool *myPool = [[NSAutoreleasePool alloc] init];
-
-    [GoApp sharedApplication];
-
-    if ([NSBundle loadNibNamed:@"NeXTGo" owner:NSApp])
-	    [NSApp run];
-
-    [NSApp release];
-
-    [myPool release];
-
-    return 0;
+int main(int argc, const char *argv[])
+{ 
+  return NSApplicationMain(argc, argv);
 }

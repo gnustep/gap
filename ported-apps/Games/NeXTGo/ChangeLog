@@ -1,3 +1,10 @@
+2005-04-03 15:56 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Source/English.lproj/NeXTGo.gorm: Corrected color on a lot
+	of the text fields.
+	* Source/GNUmakefile: Added PRINCIPAL_CLASS
+	* Source/NeXTGo_main.m: Changed to use standard startup.
+
 2005-04-03 15:39 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Source/GNUmakefile: Added localized .gorm file.
