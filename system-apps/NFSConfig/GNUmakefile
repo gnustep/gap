@@ -41,6 +41,8 @@ APP_NAME = NFSConfig
 NFSConfig_OBJC_FILES = NFSConfig_main.m \
 	NFSClientDelegate.m \
 	NFSServerDelegate.m \
+	NFSClientDataSource.m \
+	NFSServerDataSource.m \
 	NFSController.m
 
 # The Resource files to be copied into the app's resources directory

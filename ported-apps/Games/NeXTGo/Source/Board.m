@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
  
-/* $Id: Board.m,v 1.1 2003/01/12 04:01:51 gcasa Exp $ */
+/* $Id: Board.m,v 1.2 2004/02/22 16:02:13 gcasa Exp $ */
 
 /*
  * $Log: Board.m,v $
+ * Revision 1.2  2004/02/22 16:02:13  gcasa
+ * A lot of improvements to the GAP project
+ *
  * Revision 1.1  2003/01/12 04:01:51  gcasa
  * Committing the entire GNU Go and NeXT Go application to the repository.
  * See COPYING file for GNU License.
@@ -138,6 +141,8 @@ void setStoneLoc(int x, int y)
   
   stoneSize.width = STONEWIDTH;
   stoneSize.height = STONEHEIGHT;
+  
+  NSLog(@"in initWithFrame");
   
   te = 0;
   startZeit = 0;
@@ -440,16 +445,13 @@ void setStoneLoc(int x, int y)
 
   if (finished)
     {
-      NSRunAlertPanel(@"NeXTGo", @"The game has concluded.  The last move was\n\
-the scoring.", @"OK", nil, nil);
-
+      NSRunAlertPanel(@"NeXTGo", @"The game has concluded.  The last move was\n the scoring.", @"OK", nil, nil);
       return self;
     }
 
   if (lastMove == 0)
     {
       NSRunAlertPanel(@"NeXTGo", @"The game has not yet started.", @"OK", nil, nil);
-
       return self;
     }
 
@@ -458,7 +460,6 @@ the scoring.", @"OK", nil, nil);
       if (gameMoves[lastMove-1].changes[i].x < 0)
 	{
 	  NSRunAlertPanel(@"NeXTGo", @"The last move was a pass.", @"OK", nil, nil);
-
 	  return self;
 	}
     }
@@ -1321,33 +1322,20 @@ the scoring.", @"OK", nil, nil);
   
   - drawBlackStone:imageRep 
 {
-  //    PSscale (1.0, 1.0);
-  
-  // First draw the shadow under the stone.
-    
-//    PSarc (RADIUS+SHADOWOFFSET/2, RADIUS-SHADOWOFFSET/2, 
-//	   RADIUS-SHADOWOFFSET, 0.0, 360.0);
-//  PSsetgray (NX_DKGRAY);
-//  if (NXDrawingStatus == NX_DRAWING) {
-//    PSsetalpha (0.666);
-//  }
-//  PSfill ();
-
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
     PSsetalpha (1.0);
   }
   
   // Draw the stone.
-    
-    PSarc (RADIUS, RADIUS, 
-	   RADIUS, 0.0, 360.0);
+  NSLog(@"Draw the black stone...");  
+  PSarc (RADIUS, RADIUS, 
+	 RADIUS, 0.0, 360.0);
   PSsetgray (NSBlack);
   PSfill ();
   
-  // And the lighter & darker spots on the stone...
-    
-    PSarcn (RADIUS, RADIUS, 
-	    RADIUS-SHADOWOFFSET-3.0, 170.0, 100.0);
+  // And the lighter & darker spots on the stone...  
+  PSarcn (RADIUS, RADIUS, 
+	  RADIUS-SHADOWOFFSET-3.0, 170.0, 100.0);
   PSarc (RADIUS, RADIUS, 
 	 RADIUS-SHADOWOFFSET-2.0, 100.0, 170.0);
   PSsetgray (NSDarkGray);
@@ -1364,25 +1352,15 @@ the scoring.", @"OK", nil, nil);
 
 - drawWhiteStone:imageRep 
 {
-  //    PSscale (1.0, 1.0);
+  if ([[NSDPSContext currentContext] isDrawingToScreen]) 
+    {
+      PSsetalpha (1.0);
+    }
   
-  // First draw the shadow under the stone.
-    
-//    PSarc (RADIUS+SHADOWOFFSET/2, RADIUS-SHADOWOFFSET/2, 
-//	   RADIUS-SHADOWOFFSET, 0.0, 360.0);
-//  PSsetgray (NX_DKGRAY);
-//  if (NXDrawingStatus == NX_DRAWING) {
-//    PSsetalpha (0.666);
-//  }
-//  PSfill ();
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
-  
+  NSLog(@"Draw the white stone...");
   // Draw the stone.
-    
-    PSarc (RADIUS, RADIUS, 
-	   RADIUS, 0.0, 360.0);
+  PSarc (RADIUS, RADIUS, 
+	 RADIUS, 0.0, 360.0);
   PSsetgray (NSWhite);
   PSfill ();
   
@@ -1406,34 +1384,21 @@ the scoring.", @"OK", nil, nil);
 
 - drawGrayStone:imageRep 
 {
-  //    PSscale (1.0, 1.0);
+  if ([[NSDPSContext currentContext] isDrawingToScreen]) 
+    {
+      PSsetalpha (1.0);
+    }
   
-  // First draw the shadow under the stone.
-    
-//    PSarc (RADIUS+SHADOWOFFSET/2, RADIUS-SHADOWOFFSET/2, 
-//	   RADIUS-SHADOWOFFSET, 0.0, 360.0);
-//  PSsetgray (NX_DKGRAY);
-//  if (NXDrawingStatus == NX_DRAWING) {
-//    PSsetalpha (0.666);
-//  }
-//  PSfill ();
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
-  
+  NSLog(@"Draw the gray stone...");
   // Draw the stone.
-    
-//    PSarc (RADIUS-SHADOWOFFSET/2, RADIUS+SHADOWOFFSET/2, 
-//	   RADIUS-SHADOWOFFSET, 0.0, 360.0);
-    PSarc (RADIUS, RADIUS, 
-	   RADIUS, 0.0, 360.0);
+  PSarc (RADIUS, RADIUS, 
+	 RADIUS, 0.0, 360.0);
   PSsetgray (NSDarkGray);
   PSfill ();
   
   // And the lighter & darker spots on the stone...
-    
-    PSarcn (RADIUS, RADIUS, 
-	    RADIUS-SHADOWOFFSET-3.0, 170.0, 100.0);
+  PSarcn (RADIUS, RADIUS, 
+	  RADIUS-SHADOWOFFSET-3.0, 170.0, 100.0);
   PSarc (RADIUS, RADIUS, 
 	 RADIUS-SHADOWOFFSET-2.0, 100.0, 170.0);
   PSsetgray (NSLightGray);
@@ -1450,6 +1415,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawUpperLeft:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1472,6 +1438,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawUpperRight:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1494,6 +1461,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawLowerLeft:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1516,6 +1484,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawLowerRight:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1538,6 +1507,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawMidLeft:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1558,6 +1528,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawMidRight:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1578,6 +1549,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawMidTop:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1598,6 +1570,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawMidBottom:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1618,6 +1591,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawInnerSquare:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1636,6 +1610,7 @@ the scoring.", @"OK", nil, nil);
 
 - drawInnerHandicap:imageRep
 {
+  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1657,7 +1632,7 @@ the scoring.", @"OK", nil, nil);
 
 // The following methods show or erase the stones from the board.
   
-  - showBlackStone 
+- showBlackStone 
 {
   NSRect tmpRect = {{floor(stoneX), floor(stoneY)},
 		      {floor(STONEWIDTH), floor(STONEHEIGHT)}};
