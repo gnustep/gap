@@ -2,5 +2,6 @@
 
 #include <AppKit/PSOperators.h>
 
-// the drawing functions...
-void drawArc2(double radius, double bdeg, double ddeg, double ldeg);
+// the drawing function...
+void drawArc2(double radius, double bdeg, double ddeg, double ldeg, double mdeg);
+
