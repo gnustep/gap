@@ -1,0 +1,982 @@
+{
+    "Object    1" = {
+        elements = ("Object    2", "Object   73", "Object   74"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object    2" = {className = NSApplication; isa = IMCustomObject; realObject = "Object    3"; }; 
+    "Object    3" = {
+        delegate = nil; 
+        isa = NSApplication; 
+        keyWindow = nil; 
+        mainMenu = "Object   11"; 
+        mainWindow = nil; 
+        windows = "Object    4"; 
+    }; 
+    "Object    4" = {elements = ("Object    5", "Object    9"); isa = NSMutableArray; }; 
+    "Object    5" = {
+        backgroundColor = "Object    8"; 
+        backingType = 0; 
+        contentFrame = "{x=0.000000; y=0.000000; width=256.000000; height=128.000000}"; 
+        contentView = "Object    6"; 
+        frameAutosaveName = nil; 
+        hidesOnDeactivate = NO; 
+        initialFirstResponder = nil; 
+        isAutodisplay = NO; 
+        isReleasedWhenClosed = NO; 
+        isVisible = NO; 
+        isa = NSWindow; 
+        level = 0; 
+        maxSize = "{width=340282346638528860000000000000000000000.000000; height=340282346638528860000000000000000000000.000000}"; 
+        minSize = "{width=0.000000; height=0.000000}"; 
+        representedFilename = ""; 
+        styleMask = 0; 
+        title = ""; 
+    }; 
+    "Object    6" = {
+        autoresizesSubviews = YES; 
+        autoresizingMask = 0; 
+        bounds = "{x=0.000000; y=0.000000; width=256.000000; height=128.000000}"; 
+        frame = "{x=0.000000; y=0.000000; width=256.000000; height=128.000000}"; 
+        interfaceStyle = 0; 
+        isa = NSView; 
+        nextKeyView = nil; 
+        nextResponder = "Object    5"; 
+        postsBoundsChangedNotifications = YES; 
+        postsFrameChangedNotifications = YES; 
+        previousKeyView = nil; 
+        subviews = "Object    7"; 
+        superview = nil; 
+    }; 
+    "Object    7" = {elements = (); isa = NSMutableArray; }; 
+    "Object    8" = {
+        alpha = 1.000000; 
+        blue = 0.666667; 
+        brightness = 0.666667; 
+        colorSpaceName = NSCalibratedRGBColorSpace; 
+        green = 0.666667; 
+        hue = 0.000000; 
+        isa = NSColor; 
+        red = 0.666667; 
+        saturation = 0.000000; 
+    }; 
+    "Object    9" = {
+        backgroundColor = "Object    8"; 
+        backingType = 0; 
+        contentFrame = "{x=0.000000; y=0.000000; width=193.000000; height=208.000000}"; 
+        contentView = "Object   10"; 
+        frameAutosaveName = nil; 
+        hidesOnDeactivate = NO; 
+        initialFirstResponder = nil; 
+        isAutodisplay = NO; 
+        isReleasedWhenClosed = NO; 
+        isVisible = NO; 
+        isa = NSWindow; 
+        level = 0; 
+        maxSize = "{width=340282346638528860000000000000000000000.000000; height=340282346638528860000000000000000000000.000000}"; 
+        minSize = "{width=0.000000; height=0.000000}"; 
+        representedFilename = ""; 
+        styleMask = 0; 
+        title = ""; 
+    }; 
+    "Object   10" = {
+        autoresizesSubviews = YES; 
+        autoresizingMask = 0; 
+        bounds = "{x=0.000000; y=0.000000; width=193.000000; height=208.000000}"; 
+        frame = "{x=0.000000; y=0.000000; width=193.000000; height=208.000000}"; 
+        interfaceStyle = 0; 
+        isa = NSView; 
+        nextKeyView = nil; 
+        nextResponder = "Object    9"; 
+        postsBoundsChangedNotifications = YES; 
+        postsFrameChangedNotifications = YES; 
+        previousKeyView = nil; 
+        subviews = "Object    7"; 
+        superview = nil; 
+    }; 
+    "Object   11" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   12"; 
+        title = GSTerminal; 
+    }; 
+    "Object   12" = {
+        elements = (
+            "Object   13", 
+            "Object   19", 
+            "Object   24", 
+            "Object   31", 
+            "Object   62", 
+            "Object   68", 
+            "Object   70", 
+            "Object   71", 
+            "Object   72"
+        ); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   13" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   14"; 
+        title = Info; 
+    }; 
+    "Object   14" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   15"; 
+        title = Info; 
+    }; 
+    "Object   15" = {
+        elements = ("Object   16", "Object   17", "Object   18"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   16" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = NO; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Info Panel..."; 
+    }; 
+    "Object   17" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = NO; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Preferences...; 
+    }; 
+    "Object   18" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = "?"; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Help...; 
+    }; 
+    "Object   19" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   20"; 
+        title = Shell; 
+    }; 
+    "Object   20" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   21"; 
+        title = Shell; 
+    }; 
+    "Object   21" = {elements = ("Object   22", "Object   23"); isa = NSMutableArray; }; 
+    "Object   22" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = New; 
+    }; 
+    "Object   23" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Run Command"; 
+    }; 
+    "Object   24" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   25"; 
+        title = Edit; 
+    }; 
+    "Object   25" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   26"; 
+        title = Edit; 
+    }; 
+    "Object   26" = {
+        elements = ("Object   27", "Object   28", "Object   29", "Object   30"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   27" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = x; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Cut; 
+    }; 
+    "Object   28" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = c; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Copy; 
+    }; 
+    "Object   29" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = v; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Paste; 
+    }; 
+    "Object   30" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = a; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Select All"; 
+    }; 
+    "Object   31" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   32"; 
+        title = Font; 
+    }; 
+    "Object   32" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   33"; 
+        title = Font; 
+    }; 
+    "Object   33" = {
+        elements = (
+            "Object   34", 
+            "Object   35", 
+            "Object   36", 
+            "Object   37", 
+            "Object   38", 
+            "Object   45", 
+            "Object   51", 
+            "Object   59", 
+            "Object   60", 
+            "Object   61"
+        ); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   34" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = t; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Font Panel..."; 
+    }; 
+    "Object   35" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = b; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 2; 
+        target = nil; 
+        title = Bold; 
+    }; 
+    "Object   36" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = i; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 1; 
+        target = nil; 
+        title = Italic; 
+    }; 
+    "Object   37" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Underline; 
+    }; 
+    "Object   38" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   39"; 
+        title = Kern; 
+    }; 
+    "Object   39" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   40"; 
+        title = Kern; 
+    }; 
+    "Object   40" = {
+        elements = ("Object   41", "Object   42", "Object   43", "Object   44"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   41" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Use Default"; 
+    }; 
+    "Object   42" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Use None"; 
+    }; 
+    "Object   43" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Tighten; 
+    }; 
+    "Object   44" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Loosen; 
+    }; 
+    "Object   45" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   46"; 
+        title = Ligature; 
+    }; 
+    "Object   46" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   47"; 
+        title = Ligature; 
+    }; 
+    "Object   47" = {
+        elements = ("Object   48", "Object   49", "Object   50"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   48" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Use Default"; 
+    }; 
+    "Object   49" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Use None"; 
+    }; 
+    "Object   50" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Use All"; 
+    }; 
+    "Object   51" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   52"; 
+        title = Baseline; 
+    }; 
+    "Object   52" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   53"; 
+        title = Baseline; 
+    }; 
+    "Object   53" = {
+        elements = ("Object   54", "Object   55", "Object   56", "Object   57", "Object   58"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   54" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Use Default"; 
+    }; 
+    "Object   55" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Superscript; 
+    }; 
+    "Object   56" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Subscript; 
+    }; 
+    "Object   57" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Raise; 
+    }; 
+    "Object   58" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Lower; 
+    }; 
+    "Object   59" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Colors...; 
+    }; 
+    "Object   60" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = 3; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Copy Font"; 
+    }; 
+    "Object   61" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = 4; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Paste Font"; 
+    }; 
+    "Object   62" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   63"; 
+        title = Windows; 
+    }; 
+    "Object   63" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object   64"; 
+        title = Windows; 
+    }; 
+    "Object   64" = {
+        elements = ("Object   65", "Object   66", "Object   67"); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   65" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Arrange in Front"; 
+    }; 
+    "Object   66" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = m; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Miniaturize Window"; 
+    }; 
+    "Object   67" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = w; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = "Close Window"; 
+    }; 
+    "Object   68" = {
+        action = "submenuAction:"; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = "Object   69"; 
+        title = Services; 
+    }; 
+    "Object   69" = {
+        autoenablesItems = YES; 
+        isa = NSMenu; 
+        itemArray = "Object    7"; 
+        title = Services; 
+    }; 
+    "Object   70" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = ""; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Print; 
+    }; 
+    "Object   71" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = h; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Hide; 
+    }; 
+    "Object   72" = {
+        action = nil; 
+        image = nil; 
+        isEnabled = YES; 
+        isa = NSMenuItem; 
+        keyEquivalent = q; 
+        representedObject = nil; 
+        state = 0; 
+        tag = 0; 
+        target = nil; 
+        title = Quit; 
+    }; 
+    "Object   73" = {className = MenuController; isa = IMCustomObject; }; 
+    "Object   74" = {className = NSFontManager; isa = IMCustomObject; }; 
+    "Object   75" = {
+        elements = (
+            "Object   76", 
+            "Object   78", 
+            "Object   80", 
+            "Object   82", 
+            "Object   84", 
+            "Object   86", 
+            "Object   88", 
+            "Object   90", 
+            "Object   92", 
+            "Object   94", 
+            "Object   96", 
+            "Object   98", 
+            "Object  100", 
+            "Object  102", 
+            "Object  104", 
+            "Object  106", 
+            "Object  108", 
+            "Object  110", 
+            "Object  112", 
+            "Object  114", 
+            "Object  116", 
+            "Object  118", 
+            "Object  120", 
+            "Object  122", 
+            "Object  124", 
+            "Object  126", 
+            "Object  127", 
+            "Object  129", 
+            "Object  131", 
+            "Object  133", 
+            "Object  135", 
+            "Object  137"
+        ); 
+        isa = NSMutableArray; 
+    }; 
+    "Object   76" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   77"; 
+        source = "Object   27"; 
+    }; 
+    "Object   77" = {isa = NSString; string = "cut:"; }; 
+    "Object   78" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   79"; 
+        source = "Object   28"; 
+    }; 
+    "Object   79" = {isa = NSString; string = "copy:"; }; 
+    "Object   80" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   81"; 
+        source = "Object   29"; 
+    }; 
+    "Object   81" = {isa = NSString; string = "paste:"; }; 
+    "Object   82" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   83"; 
+        source = "Object   30"; 
+    }; 
+    "Object   83" = {isa = NSString; string = "selectAll:"; }; 
+    "Object   84" = {
+        destination = "Object    2"; 
+        isa = IMControlConnector; 
+        label = "Object   85"; 
+        source = "Object   72"; 
+    }; 
+    "Object   85" = {isa = NSString; string = "terminate:"; }; 
+    "Object   86" = {
+        destination = "Object    2"; 
+        isa = IMControlConnector; 
+        label = "Object   87"; 
+        source = "Object   71"; 
+    }; 
+    "Object   87" = {isa = NSString; string = "hide:"; }; 
+    "Object   88" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   89"; 
+        source = "Object   66"; 
+    }; 
+    "Object   89" = {isa = NSString; string = "performMiniaturize:"; }; 
+    "Object   90" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   91"; 
+        source = "Object   67"; 
+    }; 
+    "Object   91" = {isa = NSString; string = "performClose:"; }; 
+    "Object   92" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   93"; 
+        source = "Object   65"; 
+    }; 
+    "Object   93" = {isa = NSString; string = "arrangeInFront:"; }; 
+    "Object   94" = {
+        destination = "Object   73"; 
+        isa = IMControlConnector; 
+        label = "Object   95"; 
+        source = "Object   22"; 
+    }; 
+    "Object   95" = {isa = NSString; string = "newShell:"; }; 
+    "Object   96" = {
+        destination = "Object   73"; 
+        isa = IMControlConnector; 
+        label = "Object   97"; 
+        source = "Object   23"; 
+    }; 
+    "Object   97" = {isa = NSString; string = "runCommand:"; }; 
+    "Object   98" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object   99"; 
+        source = "Object   59"; 
+    }; 
+    "Object   99" = {isa = NSString; string = "orderFrontColorPanel:"; }; 
+    "Object  100" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  101"; 
+        source = "Object   44"; 
+    }; 
+    "Object  101" = {isa = NSString; string = "loosenKerning:"; }; 
+    "Object  102" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  103"; 
+        source = "Object   43"; 
+    }; 
+    "Object  103" = {isa = NSString; string = "tightenKerning:"; }; 
+    "Object  104" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  105"; 
+        source = "Object   42"; 
+    }; 
+    "Object  105" = {isa = NSString; string = "turnOffKerning:"; }; 
+    "Object  106" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  107"; 
+        source = "Object   41"; 
+    }; 
+    "Object  107" = {isa = NSString; string = "useStandardKerning:"; }; 
+    "Object  108" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  109"; 
+        source = "Object   48"; 
+    }; 
+    "Object  109" = {isa = NSString; string = "useStandardLigatures:"; }; 
+    "Object  110" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  111"; 
+        source = "Object   49"; 
+    }; 
+    "Object  111" = {isa = NSString; string = "turnOffLigatures:"; }; 
+    "Object  112" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  113"; 
+        source = "Object   50"; 
+    }; 
+    "Object  113" = {isa = NSString; string = "useAllLigatures:"; }; 
+    "Object  114" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  115"; 
+        source = "Object   58"; 
+    }; 
+    "Object  115" = {isa = NSString; string = "lowerBaseline:"; }; 
+    "Object  116" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  117"; 
+        source = "Object   57"; 
+    }; 
+    "Object  117" = {isa = NSString; string = "raiseBaseline:"; }; 
+    "Object  118" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  119"; 
+        source = "Object   56"; 
+    }; 
+    "Object  119" = {isa = NSString; string = "subscript:"; }; 
+    "Object  120" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  121"; 
+        source = "Object   55"; 
+    }; 
+    "Object  121" = {isa = NSString; string = "superscript:"; }; 
+    "Object  122" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  123"; 
+        source = "Object   54"; 
+    }; 
+    "Object  123" = {isa = NSString; string = "unscript:"; }; 
+    "Object  124" = {
+        destination = "Object   74"; 
+        isa = IMControlConnector; 
+        label = "Object  125"; 
+        source = "Object   36"; 
+    }; 
+    "Object  125" = {isa = NSString; string = "addFontTrait:"; }; 
+    "Object  126" = {
+        destination = "Object   74"; 
+        isa = IMControlConnector; 
+        label = "Object  125"; 
+        source = "Object   35"; 
+    }; 
+    "Object  127" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  128"; 
+        source = "Object   37"; 
+    }; 
+    "Object  128" = {isa = NSString; string = "underline:"; }; 
+    "Object  129" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  130"; 
+        source = "Object   61"; 
+    }; 
+    "Object  130" = {isa = NSString; string = "pasteFont:"; }; 
+    "Object  131" = {
+        destination = nil; 
+        isa = IMControlConnector; 
+        label = "Object  132"; 
+        source = "Object   60"; 
+    }; 
+    "Object  132" = {isa = NSString; string = "copyFont:"; }; 
+    "Object  133" = {
+        destination = "Object   74"; 
+        isa = IMControlConnector; 
+        label = "Object  134"; 
+        source = "Object   34"; 
+    }; 
+    "Object  134" = {isa = NSString; string = "orderFrontFontPanel:"; }; 
+    "Object  135" = {
+        destination = "Object   73"; 
+        isa = IMControlConnector; 
+        label = "Object  136"; 
+        source = "Object   17"; 
+    }; 
+    "Object  136" = {isa = NSString; string = "preferencesPanel:"; }; 
+    "Object  137" = {
+        destination = "Object   73"; 
+        isa = IMControlConnector; 
+        label = "Object  138"; 
+        source = "Object   16"; 
+    }; 
+    "Object  138" = {isa = NSString; string = "infoPanel:"; }; 
+    RootObject = {Connections = "Object   75"; Objects = "Object    1"; isa = GMModel; }; 
+    TopLevelObjects = (RootObject); 
+    Version = 1; 
+}
