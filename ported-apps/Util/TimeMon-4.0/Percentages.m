@@ -21,10 +21,6 @@
 #define MINFACTOR	4
 #define MINLAGFACTOR	1
 
-void PSWait();
-void drawInit();
-void setColor();
-
 @implementation Percentages
 
 - (id)init
@@ -47,7 +43,7 @@ void setColor();
 
     // Clear to the background color if all rings are to be
     // redrawn.
-    stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
+    // stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
     [stipple lockFocus];
 
     if(updateFlags[0]) {
@@ -84,43 +80,9 @@ void setColor();
     // circles are constant, this _should_ be cached by the
     // server and future draws should be insanely fast.	 Or
     // something like that.
-    if( drawn) 
+    if( drawn ) 
       {
-	/*
-	  static float bbox[]={ 0.0, 0.0, 48.0, 48.0};
-	  static float coords[] =
-	  {
-	  47.5, 24.0,				// moveto
-	  24.0, 24.0,	23.5,	0.0,	360.0,	// arc
-	  41.5, 24.0,				// moveto
-	  24.0, 24.0,	17.5,	0.0,	360.0,	// arc
-	  35.5, 24.0,				// moveto
-	  24.0, 24.0,	11.5,	0.0,	360.0,	// arc
-	  24.0, 24.0,				// moveto
-	  24.0, 48.0,				// lineto
-	  };
-	  static char ops[] =
-	  {
-	  dps_ucache,
-	  dps_moveto,
-	  dps_arc,
-	  dps_moveto,
-	  dps_arc,
-	  dps_moveto,
-	  dps_arc,
-	  dps_moveto,
-	  dps_lineto
-	  };
-	*/
-	
-	
 	PSsetgray(NSBlack);
-	/*
-	  PSDoUserPath( coords, sizeof( coords)/sizeof( coords[ 0]), dps_float,
-	  ops, sizeof( ops)/sizeof( ops[ 0]),
-	  bbox, dps_ustroke);
-	*/
-	// do the operations here...
 	PSmoveto(47.5, 24.0);
 	PSarc(24.0, 24.0, 23.5, 0.0, 360.0);
 	PSmoveto(41.5, 24.0);
@@ -129,7 +91,7 @@ void setColor();
 	PSarc(24.0, 24.0, 11.5, 0.0, 360.0);
 	PSmoveto(24.0, 24.0);
 	PSlineto(24.0, 48.0);
-	// done.
+	PSstroke();
 	
 	[stipple unlockFocus];
 	[NSApp setApplicationIconImage:stipple];

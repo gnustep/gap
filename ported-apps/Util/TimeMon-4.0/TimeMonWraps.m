@@ -31,18 +31,21 @@ void _doDrawArc1(double radius, double bdeg, double ddeg)
   PSmoveto(24,24);
   PSarc(24,24,radius,0,360);
   PSfill();
+  PSstroke();
 
   // Dark gray "pie" slice.
   USER;
   PSmoveto(24,24);
   PSarcn(24,24,radius,90,4);
   PSfill();
+  PSstroke();
 
   // Black slice.
   SYSTEM;
   PSmoveto(24,24);
   PSarcn(24,24,radius,90,4);
   PSfill();
+  PSstroke();
 }
 
 void _doDrawArc2(double radius, double bdeg, double ddeg, double ldeg)
@@ -52,24 +55,28 @@ void _doDrawArc2(double radius, double bdeg, double ddeg, double ldeg)
   PSmoveto(24,24);
   PSarc(24,24,radius,0,360);
   PSfill();
+  PSstroke();
 
   // Light gray "pie" slice.
   NICE;
   PSmoveto(24,24);
   PSarcn(24,24,radius,90,4);
   PSfill();
+  PSstroke();
 
   // Dark gray "pie" slice.
   USER;
   PSmoveto(24,24);
   PSarcn(24,24,radius,90,4);
   PSfill();
+  PSstroke();
 
   // Black slice.
   SYSTEM;
   PSmoveto(24,24);
   PSarcn(24,24,radius,90,4);
   PSfill();
+  PSstroke();
 }
 
 void drawArc1(double radius, double bdeg, double ddeg)
