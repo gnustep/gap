@@ -8,9 +8,11 @@
 #define USER   PSsetrgbcolor(0.333,0.333,0.333)
 #define SYSTEM PSsetrgbcolor(0.0,0.0,0.0)
 
+static NSMutableDictionary *_colors = nil; 
+
 void drawInit()
 {
-  // do nothing.
+  PSinitgraphics();
 }
 
 void PSWait()

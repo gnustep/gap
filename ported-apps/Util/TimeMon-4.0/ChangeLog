@@ -1,3 +1,9 @@
+2005-01-09 11:32 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* GNUmakefile: removed some things
+	* Percentages.m: new image implementation
+	* TimeMonWraps.m: added some dummy methods.
+
 2005-01-02 19:18 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Percentages.m: Removed func. decl.
