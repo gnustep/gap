@@ -16,6 +16,13 @@
 #endif
 #endif
 
+#ifdef GNUSTEP
+#define CPUSTATES 4
+#define CP_SYS 0
+#define CP_USER 1
+#define CP_NICE 2
+#endif
+
 /* These codes are returned from la_init() and la_read(). */
 enum la_error {
     LA_NOERR,		/* No problem. */

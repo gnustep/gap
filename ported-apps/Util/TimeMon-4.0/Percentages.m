@@ -78,38 +78,56 @@
 	// circles are constant, this _should_ be cached by the
 	// server and future draws should be insanely fast.  Or
 	// something like that.
-    if( drawn) {
-        static float bbox[]={ 0.0, 0.0, 48.0, 48.0};
-        static float coords[] =
+    if( drawn) 
+      {
+	/*
+	  static float bbox[]={ 0.0, 0.0, 48.0, 48.0};
+	  static float coords[] =
           {
-              47.5, 24.0,				// moveto
-              24.0, 24.0,	23.5,	0.0,	360.0,	// arc
-              41.5, 24.0,				// moveto
-              24.0, 24.0,	17.5,	0.0,	360.0,	// arc
-              35.5, 24.0,				// moveto
-              24.0, 24.0,	11.5,	0.0,	360.0,	// arc
-              24.0, 24.0,				// moveto
-              24.0, 48.0,				// lineto
+	  47.5, 24.0,				// moveto
+	  24.0, 24.0,	23.5,	0.0,	360.0,	// arc
+	  41.5, 24.0,				// moveto
+	  24.0, 24.0,	17.5,	0.0,	360.0,	// arc
+	  35.5, 24.0,				// moveto
+	  24.0, 24.0,	11.5,	0.0,	360.0,	// arc
+	  24.0, 24.0,				// moveto
+	  24.0, 48.0,				// lineto
           };
-        static char ops[] =
+	  static char ops[] =
           {
-              dps_ucache,
-              dps_moveto,
-              dps_arc,
-              dps_moveto,
-              dps_arc,
-              dps_moveto,
-              dps_arc,
-              dps_moveto,
-              dps_lineto
+	  dps_ucache,
+	  dps_moveto,
+	  dps_arc,
+	  dps_moveto,
+	  dps_arc,
+	  dps_moveto,
+	  dps_arc,
+	  dps_moveto,
+	  dps_lineto
           };
-        PSsetgray( NSBlack);
-        PSDoUserPath( coords, sizeof( coords)/sizeof( coords[ 0]), dps_float,
-                ops, sizeof( ops)/sizeof( ops[ 0]),
-                bbox, dps_ustroke);
-        [stipple unlockFocus];
-        [NSApp setApplicationIconImage:stipple];
-    }
+	*/
+       
+	
+	PSsetgray( NSBlack);
+	/*
+	PSDoUserPath( coords, sizeof( coords)/sizeof( coords[ 0]), dps_float,
+		      ops, sizeof( ops)/sizeof( ops[ 0]),
+		      bbox, dps_ustroke);
+	*/
+	// do the operations here...
+	PSmoveto(47.5, 24.0);
+	PSarc(24.0, 24.0, 23.5, 0.0, 360.0);
+	PSmoveto(41.5, 24.0);
+	PSarc(24.0, 24.0, 17.5, 0.0, 360.0);
+	PSmoveto(35.5, 24.0);
+	PSarc(24.0, 24.0, 11.5, 0.0, 360.0);
+	PSmoveto(24.0, 24.0);
+	PSlineto(24.0, 48.0);
+	// done.
+
+	[stipple unlockFocus];
+	[NSApp setApplicationIconImage:stipple];
+      }
 }
 
 - (void)step
@@ -200,6 +218,7 @@
 // Set up to have a low priority from the get-go.
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
+#ifndef GNUSTEP
     struct task_basic_info tbi;
     unsigned ic = TASK_BASIC_INFO_COUNT;
     
@@ -207,6 +226,7 @@
         return;
     }
     task_priority( task_self(), tbi.base_priority - 4, TRUE);
+#endif
 }
 
 // Resize the oldTimes array and rearrange the values within
