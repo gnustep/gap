@@ -55,7 +55,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 	if([ControlPanel isVisible]) {
 		[ControlPanel makeKeyAndOrderFront:self];
 		[ControlPanel sendEvent:theEvent];
-		[NSApp setCommandSender:self];
+		[(GoApp *)NSApp setCommandSender:self];
 		return;
 	}
 	else 

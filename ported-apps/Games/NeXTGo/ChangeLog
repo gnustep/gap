@@ -1,3 +1,16 @@
+2005-04-05 20:27 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Source/Board.m
+	* Source/ClickCell.m
+	* Source/Controller.m
+	* Source/GameInspectorPanel.m
+	* Source/GoApp.m
+	* Source/godict.c
+	* Source/GoWindow.m
+	* Source/igsglue.m
+	* Source/igssocket.m: Major code cleanup.  Removed any and all
+	warnings, etc.
+
 2005-04-03 15:56 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Source/English.lproj/NeXTGo.gorm: Corrected color on a lot

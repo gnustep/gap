@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
 
-/* $Id: igssocket.m,v 1.1 2003/01/12 04:01:52 gcasa Exp $ */
+/* $Id: igssocket.m,v 1.2 2005/04/06 00:32:58 gcasa Exp $ */
 
 /*
  * $Log: igssocket.m,v $
+ * Revision 1.2  2005/04/06 00:32:58  gcasa
+ * Cleaned up the code.
+ *
  * Revision 1.1  2003/01/12 04:01:52  gcasa
  * Committing the entire GNU Go and NeXT Go application to the repository.
  * See COPYING file for GNU License.
@@ -90,6 +93,11 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 #import <AppKit/AppKit.h>
 #import "GoApp.h"
 
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 /* For some odd systems, which don't put this in errno.h. */
 
 extern int errno;
@@ -127,7 +135,7 @@ int open_connection()
   char s[80];
 
   sprintf(s, "Opening connection to %s %d\n", servename, serveport);
-  [NSApp SetIGSStatus:s];
+  [(GoApp *)NSApp SetIGSStatus:s];
 #ifdef DEBUG
   	{
     	int d;

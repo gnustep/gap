@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
  
-/* $Id: igsglue.m,v 1.1 2003/01/12 04:01:52 gcasa Exp $ */
+/* $Id: igsglue.m,v 1.2 2005/04/06 00:32:58 gcasa Exp $ */
 
 /*
  * $Log: igsglue.m,v $
+ * Revision 1.2  2005/04/06 00:32:58  gcasa
+ * Cleaned up the code.
+ *
  * Revision 1.1  2003/01/12 04:01:52  gcasa
  * Committing the entire GNU Go and NeXT Go application to the repository.
  * See COPYING file for GNU License.
@@ -100,7 +103,7 @@ void showboard(boardtype b) {
 		for (j = 0; j < 19; j++)
 			p[i][j] = b[i][j];
 
-	[[NSApp getGoView] refreshIO];
+	[[(GoApp *)NSApp getGoView] refreshIO];
 }
 
 void igsbeep(void) {
@@ -120,16 +123,16 @@ int startgame(int n) {
 				exit(1);
     	} while (!ret);
     	if (mesg.id == MOVE)
-      	[NSApp SetIGSStatus:"%Premature move.  Restart game.\n"];
+      	[(GoApp *)NSApp SetIGSStatus:"%Premature move.  Restart game.\n"];
   	} while (mesg.id != GAMES);
 	if (mesg.gamecount != 1)
     	return -1;
   	if (mesg.gamelist[0].bsize > 19) {
-    	[NSApp SetIGSStatus:"%Boardsize too large\n"];
+    	[(GoApp *)NSApp SetIGSStatus:"%Boardsize too large\n"];
     	return -1;
   	}
   	if (observing) {
-    	[NSApp SetIGSStatus:"Removing observe\n"];
+    	[(GoApp *)NSApp SetIGSStatus:"Removing observe\n"];
     	sprintf(str, "unobserve\n");
     	sendstr(str);
     	do {
@@ -143,18 +146,18 @@ int startgame(int n) {
   	}
   	ingame = n;
   	MAXX = MAXY = mesg.gamelist[0].bsize;
-  	[[NSApp getGoView] startNewGame];
-  	[[NSApp getGoView] refreshIO];
-  	[[NSApp getGoView] display];
-  	[[NSApp getGoView] setGameNumber:ingame];
+  	[[(GoApp *)NSApp getGoView] startNewGame];
+  	[[(GoApp *)NSApp getGoView] refreshIO];
+  	[[(GoApp *)NSApp getGoView] display];
+  	[[(GoApp *)NSApp getGoView] setGameNumber:ingame];
   	sprintf(str, "%s (%s)", mesg.gamelist[0].white, mesg.gamelist[0].wrank);
-  	[[NSApp getGoView] setWhiteName:str];
+  	[[(GoApp *)NSApp getGoView] setWhiteName:str];
   	sprintf(str, "%s (%s)", mesg.gamelist[0].black, mesg.gamelist[0].brank);
-  	[[NSApp getGoView] setBlackName:str];
-  	[[NSApp getGoView] setIGSHandicap:mesg.gamelist[0].hcap];
+  	[[(GoApp *)NSApp getGoView] setBlackName:str];
+  	[[(GoApp *)NSApp getGoView] setIGSHandicap:mesg.gamelist[0].hcap];
   	sprintf(str, "%3.1f", mesg.gamelist[0].komi);
-  	[[NSApp getGoView] setIGSKomi:str];
-	[[NSApp getGoView] setByoTime:mesg.byo];
+  	[[(GoApp *)NSApp getGoView] setIGSKomi:str];
+	[[(GoApp *)NSApp getGoView] setByoTime:mesg.byo];
   	boardon = 1;
   	return 0;
 }
@@ -164,14 +167,14 @@ void makemove(int x, int y, int movenum, int color, int btime, int bbyo,
     extern void sethand(int);
 	
     if ((x < MAXX) && (y < MAXY)) {
-        [[NSApp getGoView] makeMove: color: x: y];
-        [[NSApp getGoView] setTimeAndByo: btime: bbyo: wtime: wbyo];
-        [[NSApp getGoView] dispTime];
+        [[(GoApp *)NSApp getGoView] makeMove: color: x: y];
+        [[(GoApp *)NSApp getGoView] setTimeAndByo: btime: bbyo: wtime: wbyo];
+        [[(GoApp *)NSApp getGoView] dispTime];
     }
     else if (x > 100) {
         sethand(x-100);
-        [[NSApp getGoView] setIGSHandicap:x-100];
-        [[NSApp getGoView] display];
+        [[(GoApp *)NSApp getGoView] setIGSHandicap:x-100];
+        [[(GoApp *)NSApp getGoView] display];
     }
 }
 
@@ -180,7 +183,7 @@ void makemovesilent(int x, int y, int movenum, int color, int btime, int bbyo,
     extern void sethand(int);
 
     if ((x < MAXX) && (y < MAXY)) {
-        [[NSApp getGoView] makeMoveSilent: color: x: y];
+        [[(GoApp *)NSApp getGoView] makeMoveSilent: color: x: y];
     }
     else if (x > 100) {
       sethand(x-100);
@@ -205,10 +208,10 @@ void removeGroup(int x, int y)	{
                 else
                     whiteCaptured++;
                 }
-    [[NSApp getGoView] setblacksPrisoners:blackCaptured];
-    [[NSApp getGoView] setwhitesPrisoners:whiteCaptured];
+    [[(GoApp *)NSApp getGoView] setblacksPrisoners:blackCaptured];
+    [[(GoApp *)NSApp getGoView] setwhitesPrisoners:whiteCaptured];
 
-    [[NSApp getGoView] refreshIO];
+    [[(GoApp *)NSApp getGoView] refreshIO];
 }
 
 void getmoves(int n) {
@@ -227,13 +230,13 @@ void getmoves(int n) {
             makemovesilent(mesg.x, mesg.y, mesg.movenum, mesg.color, mesg.btime,
                            mesg.bbyo, mesg.wtime, mesg.wbyo);
         else if (mesg.id && mesg.id != PROMPT)
-            [NSApp SetIGSStatus:mesg.text];
+            [(GoApp *)NSApp SetIGSStatus:mesg.text];
     } while (mesg.id != PROMPT);	/* MOVE || mesg.id == 0); */
     lastMove--;
     makemove(mesg.x, mesg.y, mesg.movenum, mesg.color, mesg.btime,
 	   mesg.bbyo, mesg.wtime, mesg.wbyo);
-    [[NSApp getGoView] refreshIO];
-    [[NSApp getGoView] display];
+    [[(GoApp *)NSApp getGoView] refreshIO];
+    [[(GoApp *)NSApp getGoView] display];
 }
 
 void getgames(message *mess) {
@@ -247,7 +250,7 @@ void getgames(message *mess) {
                 exit(1);
         } while (!ret);
         if (mess->id == MOVE)
-            [NSApp SetIGSStatus:"%Premature move.  Restart game.\n"];
+            [(GoApp *)NSApp SetIGSStatus:"%Premature move.  Restart game.\n"];
     } while (mess->id != GAMES);
 }
 
@@ -263,7 +266,7 @@ int observegame(int n) {
 	char str[20];
   
 	if (!observing && ingame != -1) {
-    	[NSApp SetIGSStatus:"Can't observe while playing.\n"];
+    	[(GoApp *)NSApp SetIGSStatus:"Can't observe while playing.\n"];
     	return 1;
   	}
   	if (startgame(n))
@@ -279,7 +282,7 @@ int observegame(int n) {
 				exit(1);
     	} while (!ret);
     	if ((mesg.id == INFO) && !strncmp(mesg.text, "Removing", 8))
-      		[NSApp SetIGSStatus:"%fatal sync error.  Restart igs.\n"];
+      		[(GoApp *)NSApp SetIGSStatus:"%fatal sync error.  Restart igs.\n"];
 	} while (mesg.id != MOVE && mesg.id != UNDO);
   	return 0;
 }
@@ -317,10 +320,10 @@ void loadgame(char *name) {
         if (ret < 0)
             exit(1);
         sprintf(str, "&&%d&&\n", mesg.id);
-        [NSApp SetIGSStatus:str];
+        [(GoApp *)NSApp SetIGSStatus:str];
     } while (mesg.id != MOVE && mesg.id != ERROR);
     if (mesg.id == ERROR)
-        [NSApp SetIGSStatus:mesg.text];
+        [(GoApp *)NSApp SetIGSStatus:mesg.text];
     else {
         if (!startgame(mesg.gamenum))
             getmoves(mesg.gamenum);
@@ -335,21 +338,21 @@ void doserver(void) {
   	idle = 0;
   	ret = getmessage(&mesg, 1);
   	if (ret < 0 && ret != KEY) {
-    	[NSApp SetIGSStatus:"Connection closed\n"];
+    	[(GoApp *)NSApp SetIGSStatus:"Connection closed\n"];
   	}
   	if (ret > 0)
     	switch (mesg.id) {
     		case QUITMESG:
-      			[NSApp SetIGSStatus:mesg.text];
+      			[(GoApp *)NSApp SetIGSStatus:mesg.text];
       			break;
     		case ONSERVER:
-      			[NSApp SetIGSStatus:"Connection established\n"];
+      			[(GoApp *)NSApp SetIGSStatus:"Connection established\n"];
       			break;
     		case BEEP:
     	  		break;
     		case MOVE:
       			if (!boardon)
-				[NSApp SetIGSStatus:"%Error: isolated move received\n"];
+				[(GoApp *)NSApp SetIGSStatus:"%Error: isolated move received\n"];
       			else {
 				makemove(mesg.x, mesg.y, mesg.movenum, mesg.color, 
 					 mesg.btime,
@@ -359,16 +362,16 @@ void doserver(void) {
       			break;
     		case UNDO:
       			if (!boardon)
-				[NSApp SetIGSStatus:"%Error: isolated undo received"];
+				[(GoApp *)NSApp SetIGSStatus:"%Error: isolated undo received"];
       			else {
 				setgame(mesg.gamenum);
-				[[NSApp getGoView] undo];
-				[[NSApp getGoView] display];
+				[(GoView *)[(GoApp *)NSApp getGoView] undo];
+				[(GoView *)[(GoApp *)NSApp getGoView] display];
       			}
       			break;
     		case SCOREUNDO:
       			/*	endgame();  */
-      			[NSApp SetIGSStatus:"Scoring undone."];
+      			[(GoApp *)NSApp SetIGSStatus:"Scoring undone."];
       			break;
     		case LOAD:
       			if (!startgame(mesg.gamenum))
@@ -386,23 +389,23 @@ void doserver(void) {
                             showboard(mesg.board);
                             sprintf(str, "Black: %g\nWhite: %g\n", mesg.bscore,
                                     mesg.wscore);
-                            [NSApp SetIGSStatus:str];
+                            [(GoApp *)NSApp SetIGSStatus:str];
       			}
       			break;
     		case LOOK_M: {
       			int pris[2];
       			if (mesg.boardsize > 19)
-					[NSApp SetIGSStatus:"%Boardsize of saved game too big.\n"];
+					[(GoApp *)NSApp SetIGSStatus:"%Boardsize of saved game too big.\n"];
       			else {
 					MAXX = MAXY = mesg.boardsize;
-					[[NSApp getGoView] startNewGame];
-					[[NSApp getGoView] display];
+					[[(GoApp *)NSApp getGoView] startNewGame];
+					[[(GoApp *)NSApp getGoView] display];
 					boardon = 1;
 					pris[0] = mesg.bcap;
 					pris[1] = mesg.wcap;
-					[[NSApp getGoView] setblacksPrisoners:pris[0]];
-					[[NSApp getGoView] setwhitesPrisoners:pris[1]];
-					[[NSApp getGoView] refreshIO];
+					[[(GoApp *)NSApp getGoView] setblacksPrisoners:pris[0]];
+					[[(GoApp *)NSApp getGoView] setwhitesPrisoners:pris[1]];
+					[[(GoApp *)NSApp getGoView] refreshIO];
 					showboard(mesg.board);
       			}
     			}
@@ -410,14 +413,14 @@ void doserver(void) {
                 case KIBITZ:{
                         char s[300];
       			sprintf(s, "%s: %s\n", mesg.kibitzer, mesg.kibitz);
-      			[NSApp SetIGSStatus:s];
+      			[(GoApp *)NSApp SetIGSStatus:s];
                         }
       			break;
     		case STORED:
       			if (!strlen(mesg.text))
-					[NSApp SetIGSStatus:"No stored games\n"];
+					[(GoApp *)NSApp SetIGSStatus:"No stored games\n"];
       			else
-					[NSApp SetIGSStatus:mesg.text];
+					[(GoApp *)NSApp SetIGSStatus:mesg.text];
       			break;
     		case INFO:
       			if (strstr(mesg.text, "Removing")) {
@@ -425,27 +428,27 @@ void doserver(void) {
 					setgame(-1);
 				}
       			if (strstr(mesg.text, "game completed")) {
-					[NSApp gameCompleted];
+					[(GoApp *)NSApp gameCompleted];
 				}
-				[NSApp SetIGSStatus:mesg.text];
+				[(GoApp *)NSApp SetIGSStatus:mesg.text];
       			break;
     		case PROMPT:
       			if (ingame != -1 && mesg.prompttype == 5) {
 					setgame(-1);
 					observing = 0;
-					[NSApp gameCompleted];
+					[(GoApp *)NSApp gameCompleted];
       			}
 			case 0:
       			break;
     		default:
-      			[NSApp SetIGSStatus:mesg.text];
+      			[(GoApp *)NSApp SetIGSStatus:mesg.text];
       			break;
    		}
   	idle = 1;
 /*
-        if( [NSApp nextEventMatchingMask:NSLeftMouseDownMask untilDate:[NSDate distantFuture]inMode:NSEventTrackingRunLoopMode dequeue:NO] ) {
-            get_ev = [NSApp nextEventMatchingMask:NSLeftMouseDownMask untilDate:[NSDate distantFuture]inMode:NSEventTrackingRunLoopMode dequeue:YES];
-            [NSApp sendEvent:get_ev];
+        if( [(GoApp *)NSApp nextEventMatchingMask:NSLeftMouseDownMask untilDate:[NSDate distantFuture]inMode:NSEventTrackingRunLoopMode dequeue:NO] ) {
+            get_ev = [(GoApp *)NSApp nextEventMatchingMask:NSLeftMouseDownMask untilDate:[NSDate distantFuture]inMode:NSEventTrackingRunLoopMode dequeue:YES];
+            [(GoApp *)NSApp sendEvent:get_ev];
         }
 */
 }
