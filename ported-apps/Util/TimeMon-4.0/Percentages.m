@@ -34,68 +34,57 @@
     return self;
 }
 
+-(void) drawImageRep
+{
+  int i;
+  static float radii[3]={ 23.0, 17.0, 11.0};
+
+  PSsetlinewidth(1.0);
+  PSsetalpha(1.0);
+
+  for(i = 0; i < 3; i++) {
+    // Store away the values we redraw.
+    bcopy(pcents[i], lpcents[ i], sizeof( lpcents[ i]));
+
+    // Don't draw the "nice" segment if there isn't one.
+    if(pcents[i][2]>=MINSHOWN) {
+      drawArc2(radii[ i],
+	   90 - (pcents[i][0]) * 360,
+	   90 - (pcents[i][0] + pcents[i][1]) * 360,
+	   90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
+    } else {
+      drawArc1(radii[ i],
+	   90 - (pcents[i][0]) * 360,
+	   90 - (pcents[i][0] + pcents[i][1]) * 360);
+    }
+  }
+    
+  PSsetgray(NSBlack);
+  PSmoveto(47.5, 24.0);
+  PSarc(24.0, 24.0, 23.5, 0.0, 360.0);
+  PSmoveto(41.5, 24.0);
+  PSarc(24.0, 24.0, 17.5, 0.0, 360.0);
+  PSmoveto(35.5, 24.0);
+  PSarc(24.0, 24.0, 11.5, 0.0, 360.0);
+  PSmoveto(24.0, 24.0);
+  PSlineto(24.0, 48.0);
+  PSstroke();
+}
+
 - (void)update
 {
-    static float radii[3]={ 23.0, 17.0, 11.0};
-    int i;
-    BOOL drawn = NO;
-    PSsetlinewidth(1.0);
+    NSImageRep *r;
 
     // Clear to the background color if all rings are to be
     // redrawn.
-    // stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
-    [stipple lockFocus];
-
-    if(updateFlags[0]) {
-      [stipple compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
-    }
-
-    // For each ring, if it's changed, redraw that ring.
-    for(i = 0; i < 3; i++) {
-      if(updateFlags[i]) {
-	// Note that we need a redraw.
-	drawn=YES;
-	
-	// Note that we redrew this ring.
-	updateFlags[i] = NO;
-	
-	// Store away the values we redraw.
-	bcopy(pcents[i], lpcents[ i], sizeof( lpcents[ i]));
-	
-	// Don't draw the "nice" segment if there isn't one.
-	if(pcents[i][2]>=MINSHOWN) {
-	  drawArc2(radii[ i],
-		   90 - (pcents[i][0]) * 360,
-		   90 - (pcents[i][0] + pcents[i][1]) * 360,
-		   90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
-	} else {
-	  drawArc1(radii[ i],
-		   90 - (pcents[i][0]) * 360,
-		   90 - (pcents[i][0] + pcents[i][1]) * 360);
-	}
-      }
-    }
-    
-    // If any rings redrew, redraw the circles.	 Since the
-    // circles are constant, this _should_ be cached by the
-    // server and future draws should be insanely fast.	 Or
-    // something like that.
-    if( drawn ) 
-      {
-	PSsetgray(NSBlack);
-	PSmoveto(47.5, 24.0);
-	PSarc(24.0, 24.0, 23.5, 0.0, 360.0);
-	PSmoveto(41.5, 24.0);
-	PSarc(24.0, 24.0, 17.5, 0.0, 360.0);
-	PSmoveto(35.5, 24.0);
-	PSarc(24.0, 24.0, 11.5, 0.0, 360.0);
-	PSmoveto(24.0, 24.0);
-	PSlineto(24.0, 48.0);
-	PSstroke();
-	
-	[stipple unlockFocus];
-	[NSApp setApplicationIconImage:stipple];
-      }
+    stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
+    r = [[NSCustomImageRep alloc]
+      initWithDrawSelector: @selector(drawImageRep)
+      delegate: self];
+    [r setSize: NSMakeSize(48,48)];
+    [stipple addRepresentation: r];
+    [NSApp setApplicationIconImage:stipple];
+    DESTROY(stipple);
 }
 
 - (void)step
@@ -354,9 +343,11 @@
     [pauseMenuCell setTitle:@"Continue"];
     [te invalidate];
     te = nil;
+    /*
     [pausedStipple lockFocus];
     [pausedImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceOver];
     [pausedStipple unlockFocus];
+    */
     [NSApp setApplicationIconImage:pausedStipple];
   } else {
     float f;
