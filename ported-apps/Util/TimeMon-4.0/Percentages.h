@@ -10,7 +10,7 @@
 #import <AppKit/AppKit.h>
 #import "loadave.h"
 
-typedef long CPUTime[ CPUSTATES];
+typedef unsigned long long CPUTime[CPUSTATES];
 
 @interface Percentages : NSObject
 {

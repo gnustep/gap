@@ -46,17 +46,10 @@
     // Store away the values we redraw.
     bcopy(pcents[i], lpcents[ i], sizeof( lpcents[ i]));
 
-    // Don't draw the "nice" segment if there isn't one.
-    if(pcents[i][2]>=MINSHOWN) {
-      drawArc2(radii[ i],
-	   90 - (pcents[i][0]) * 360,
-	   90 - (pcents[i][0] + pcents[i][1]) * 360,
-	   90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
-    } else {
-      drawArc1(radii[ i],
-	   90 - (pcents[i][0]) * 360,
-	   90 - (pcents[i][0] + pcents[i][1]) * 360);
-    }
+    drawArc2(radii[ i],
+	 90 - (pcents[i][0]) * 360,
+	 90 - (pcents[i][0] + pcents[i][1]) * 360,
+	 90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
   }
     
   PSsetgray(NSBlack);
@@ -161,7 +154,6 @@
   // If there's a need for updating of any rings, call update.
   if( updateFlags[ 2]) {
     [self update];
-    PSWait();
   }
 }
 
@@ -273,9 +265,6 @@
 	[NSApp terminate:[notification object]];
     }
 
-    // Load up the needed DPS procedures.
-    drawInit();
-    
     // Move ourselves over to the appIcon window.
     [NSApp setApplicationIconImage:stipple];
     

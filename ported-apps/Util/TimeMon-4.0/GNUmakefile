@@ -36,6 +36,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 APP_NAME = TimeMon
 
+ADDITIONAL_OBJCFLAGS += -Wall
+
 # The Objective-C source files to be compiled
 TimeMon_OBJC_FILES = \
 Percentages.m \

@@ -1,3 +1,14 @@
+2005-01-23 17:28 Gregory John Casamento <greg_casamento@yahoo.com>
+                 On behalf of Alex Malmberg, who made the following changes:
+	* GNUmakefile: Updated to show all warnings.
+	* loadave.c: Rewrote entirely
+	* loadave.h: Rewrote entirely
+	* Percentages.h: Redefined CPUTime
+	* Percentages.m: Removed unecessary conditional.
+	* TimeMonColors.m: Added call to setColor.
+	* TimeMonInfo.plist: Added alex, tarzeau and myself as authors.
+	* TimeMonWraps.m: Redefined IDLE, removed the unneeded functions.
+
 2005-01-09 13:33 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* GNUmakefile: Reverted previous change.
