@@ -1,3 +1,8 @@
+2005-04-05 20:42 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Source/GoApp.m: Correction for crash when selecting a server
+	command.
+
 2005-04-05 20:27 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Source/Board.m
