@@ -49,7 +49,10 @@ typedef enum _LPDirType
 @class LPUnit;
 
 @protocol LPUnitOwner
+- (NSArray *) allUnits;
 - (NSSize) gridSize;
+- (id) getUnitAtX:(int)x
+				Y:(int)y;
 /*
 - (unsigned int) numberOfSteps;
 - (BOOL) unit:(LPUnit *)sender
@@ -71,24 +74,39 @@ typedef enum _LPDirType
 - (float) alpha;
 - (void) setAlpha:(float)a;
 - (id) initWithOwner:(id <LPUnitOwner>)owner
-			   color:(LPUnitColorType)color
-				   X:(int)x
-				   Y:(int)y;
+			   color:(LPUnitColorType)color;
+				   /*
 - (BOOL) attachUnit:(LPUnit *)anotherUnit;
 - (BOOL) attachUnit:(LPUnit *)anotherUnit
 		inDirection:(LPDirType)dir;
+		*/
 - (void) setX:(unsigned int)x
 			Y:(unsigned int)y;
-- (void) moveToDir:(LPDirType)dir;
 - (void) round;
 - (void) explode; // release self
-- (void) drawRect:(NSRect)rect;
+- (void) draw;
+//- (void) drawRect:(NSRect)rect;
 - (LPUnitColorType) unitColor;
 - (BOOL) isBlowing;
 - (void) blow;
 - (void) setUnitColor:(LPUnitColorType)color;
 - (int) rows;
 - (int) columns;
+- (void) changePhase;
+- (int) X;
+- (int) Y;
+- (float) phase;
+- (void) setOwner:(id <LPUnitOwner>)owner;
+- (void) fallToBottom;
+- (BOOL) moveInDir:(LPDirType)dir;
+- (BOOL) canMoveInDir:(LPDirType)dir;
+- (BOOL) canRMoveX:(int)rx
+				 Y:(int)ry;
+- (BOOL) rMoveX:(int)rx
+			  Y:(int)ry;
+- (BOOL) hasPartAtX:(int)x
+				  Y:(int)y;
+- (void) softBlow;
 @end
 
 @interface LPJewelUnit:LPUnit
@@ -104,14 +122,12 @@ typedef enum _LPDirType
 				   X:(int)x
 				   Y:(int)y;
 
-- (int) X;
-- (int) Y;
-- (float) phase;
+- (void) addRows:(int)r;
+- (void) addColumns:(int)c;
 @end
 
 @interface LPSparkerUnit:LPJewelUnit
-{
-}
+- (void) spark;
 @end
 
 @interface LPStoneUnit:LPJewelUnit
@@ -122,6 +138,8 @@ typedef enum _LPDirType
 	NSSize strSize[6];
 	*/
 }
+- (void) countDown;
+- (int) count;
 @end
 
 @interface LPGroupUnit:LPUnit <LPUnitOwner>
@@ -147,10 +165,12 @@ typedef enum _LPResultType
 @protocol LPViewOwner
 - (void) lapisPuzzleView:(LapisPuzzleView *)sender
  didFinishUnitWithResult:(LPResultType)result;
+- (void) op:(id)pl processDir:(LPDirType)dir;
+- (void) player:(id)pl addStoneToOp:(int)num;
 @end
 
 #define LP_FALLING_ITEMS 2
-@interface LapisPuzzleView:NSView
+@interface LapisPuzzleView:NSView <LPUnitOwner>
 {
 	BOOL _gameOver;
 	id <LPViewOwner> __owner;
@@ -177,16 +197,30 @@ typedef enum _LPResultType
 	BOOL _lockControl;
 }
 
+- (void) setBackgroundImage:(NSImage *)image;
 - (void) gameOver;
 
 - (void) addJewelUnit;
 - (void) round;
+- (void) addUnit:(id)newUnit;
+- (void) addStone:(int)num;
+- (void) refresh;
+- (void) restart;
+- (void) blowIt;
+- (void) packCell;
+- (void) fallEmDown;
+- (void) runStone;
+
+- (BOOL) processDir:(LPDirType)dir;
+- (id) currentUnit;
+- (BOOL) toggleAI;
+- (BOOL) useAI;
 
 
-- (void) explodeUnit:(LPUnit *)unit; //unit retain;array remove;unit explode
 @end
 
 @interface LapisNextView:LapisPuzzleView
+- (void) removeUnit:(id)unit;
 @end
 
 #endif

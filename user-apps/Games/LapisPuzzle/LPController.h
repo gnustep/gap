@@ -22,14 +22,14 @@
 #include <AppKit/AppKit.h>
 #include "LapisPuzzleView.h"
 
-@interface LPController : NSObject
+@interface LPController : NSObject <LPViewOwner>
 {
-  id lpview1;
-  id lpview2;
+	LapisPuzzleView *lpview1;
+	LapisPuzzleView *lpview2;
 
-  id next1;
-  id next2;
-  
-  NSTimer *tick;
+	id next1;
+	id next2;
+
+	NSTimer *tick;
 }
 @end

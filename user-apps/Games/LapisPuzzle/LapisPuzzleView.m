@@ -165,6 +165,57 @@ static float _grid_height;
 	}
 }
 
+/** subclass responsibility **/
+
+- (BOOL) moveInDir:(LPDirType)dir
+{
+}
+
+- (BOOL) rMoveX:(int)rx
+			  Y:(int)ry
+{
+}
+
+- (void) changePhase
+{
+}
+
+- (int) X
+{
+}
+
+- (int) Y
+{
+}
+
+- (float) phase
+{
+}
+
+- (void) explode
+{
+}
+
+- (void) draw
+{
+}
+
+- (void) round
+{
+}
+
+- (void) setX:(unsigned int)x
+			Y:(unsigned int)y
+{
+}
+
+- (BOOL) canMoveInDir:(LPDirType)dir
+{
+}
+- (BOOL) canRMoveX:(int)rx
+				 Y:(int)ry
+{
+}
 
 @end
 
@@ -701,7 +752,7 @@ static float _grid_height;
 				 Y:(int)ry
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	int cx,cy,i,j;
 
@@ -739,7 +790,7 @@ static float _grid_height;
 - (BOOL) canMoveInDir:(LPDirType)dir
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	int cx,cy;
 
@@ -867,6 +918,13 @@ static float _grid_height;
 	return _units;
 }
 
+- (id) getUnitAtX:(int)x
+				Y:(int)y
+{
+	exit(0);
+	// NYI
+}
+
 - (void) rotateCCW
 {
 	id move = [_units objectAtIndex:0];
@@ -946,7 +1004,7 @@ static float _grid_height;
 - (void) changePhase
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -958,7 +1016,7 @@ static float _grid_height;
 - (void) draw
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -970,7 +1028,7 @@ static float _grid_height;
 - (int) X
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 	float mX;
 	mX = 5;
 
@@ -999,7 +1057,7 @@ static float _grid_height;
 				  Y:(int)y
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -1016,7 +1074,7 @@ static float _grid_height;
 - (BOOL) moveInDir:(LPDirType)dir
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 	BOOL canMove = YES;
 
 	en = [_units objectEnumerator];
@@ -1039,7 +1097,7 @@ static float _grid_height;
 - (BOOL) canMoveInDir:(LPDirType)dir
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -1056,7 +1114,7 @@ static float _grid_height;
 				 Y:(int)ry
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -1073,7 +1131,7 @@ static float _grid_height;
 			  Y:(int)ry
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 	BOOL canMove = YES;
 
 	en = [_units objectEnumerator];
@@ -1104,7 +1162,7 @@ static LPUnitColorType _random_unit_color()
 
 static LPUnit * _random_unit(id owner, int x, int y)
 {
-	id unit;
+	LPUnit* unit;
 	if (random()%4 == 1)
 	{
 		if (random()%10 == 1)
@@ -1179,7 +1237,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 - (void) round
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	if (chain)
 	{
@@ -1219,8 +1277,8 @@ static LPUnit * _random_unit(id owner, int x, int y)
 			{
 				if ([unit isMemberOfClass:[LPStoneUnit class]])
 				{
-					[unit countDown];
-					if ([unit count] == 0)
+					[(LPStoneUnit *)unit countDown];
+					if ([(LPStoneUnit *)unit count] == 0)
 					{
 						[ar addObject:unit];
 					}
@@ -1268,7 +1326,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 
 - (void) runStone
 {
-	id unit;
+	LPUnit* unit;
 	/* run stone */
 	int yy,xx;
 	yy = 13, xx = 0;
@@ -1306,7 +1364,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 				Y:(int)y
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -1324,7 +1382,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 - (void) fallEmDown
 {
 	id en;
-	id unit;
+	LPUnit* unit;
 	BOOL moving;
 
 	/* fall em down */
@@ -1346,7 +1404,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 - (void) packCell
 {
 	id en;
-	id unit;
+	LPJewelUnit* unit;
 	int i,j;
 
 
@@ -1568,7 +1626,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 				all = [self getUnitAtX:[unit X]
 									 Y:[unit Y] - 1];
 			}
-			else [unit spark];
+			else [(LPSparkerUnit *)unit spark];
 		}
 	}
 
@@ -1715,7 +1773,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 	if (_gameOver)
 	{
 		int cc,xx,yy;
-		id unit;
+		LPUnit* unit;
 		cc=xx=yy=0;
 
 		for (yy = 13; yy >= 0 && cc < 8; yy--)
