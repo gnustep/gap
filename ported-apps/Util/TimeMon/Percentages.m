@@ -89,9 +89,9 @@
     // Clear to the background color if all rings are to be
     // redrawn.
     stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
-    r = [[NSCustomImageRep alloc]
-      initWithDrawSelector: @selector(drawImageRep)
-      delegate: self];
+    r = AUTORELEASE([[NSCustomImageRep alloc]
+		      initWithDrawSelector: @selector(drawImageRep)
+		      delegate: self]);
     [r setSize: NSMakeSize(48,48)];
     [stipple addRepresentation: r];
     [NSApp setApplicationIconImage:stipple];
@@ -179,20 +179,21 @@
 // up a menu item to manually call step.
 - (void)cycle:(id)sender
 {
-     [self step];
+  [self step];
 }
 
 // Set up to have a low priority from the get-go.
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
 #ifndef GNUSTEP
-    struct task_basic_info tbi;
-    unsigned ic = TASK_BASIC_INFO_COUNT;
-    
-    if( task_info( task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) {
-	return;
+  struct task_basic_info tbi;
+  unsigned ic = TASK_BASIC_INFO_COUNT;
+  
+  if( task_info( task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) 
+    {
+      return;
     }
-    task_priority( task_self(), tbi.base_priority - 4, TRUE);
+  task_priority( task_self(), tbi.base_priority - 4, TRUE);
 #endif
 }
 
@@ -226,7 +227,7 @@
 	    bcopy( oldTimes + 0, newTimes + jj, (elts - jj) * sizeof( oldTimes[ 0]));
 	}
 
-	    // Free the old times.
+	// Free the old times.
 	NSZoneFree( [self zone], oldTimes);
     }
 
