@@ -1,0 +1,37 @@
+{
+    APPCLASS = NSApplication; 
+    FILESTABLE = {
+        CLASSES = (Percentages.m, TimeMonColors.m); 
+        C_FILES = (); 
+        FRAMEWORKS = (AppKit.framework, Foundation.framework); 
+        FRAMEWORKSEARCH = (); 
+        H_FILES = (loadave.h, Percentages.h, TimeMonColors.h); 
+        IMAGES = (icon.tiff, TimeMonP.tiff); 
+        INTERFACES = (TimeMon.nib); 
+        M_FILES = (); 
+        OTHER_LIBS = (); 
+        OTHER_LINKED = (TimeMonWraps.psw, loadave.c, TimeMon_main.m); 
+        OTHER_SOURCES = (.dir.tiff, .gdbinit, .opendir.tiff, Makefile.postamble, Makefile.preamble); 
+        PSWM_FILES = (); 
+        PSW_FILES = (); 
+        SOUNDS = (); 
+        SUBPROJECTS = (); 
+    }; 
+    GENERATEMAIN = YES; 
+    LANGUAGE = English; 
+    LOCALIZABLE_FILES = {"TimeMon-Nextstep.nib" = "TimeMon-Nextstep.nib"; TimeMon.nib = TimeMon.nib; }; 
+    MAKEFILEDIR = "$(NEXT_ROOT)/NextDeveloper/Makefiles/pb_makefiles"; 
+    NEXTSTEP_APPICON = icon.tiff; 
+    NEXTSTEP_BUILDTOOL = /bin/gnumake; 
+    NEXTSTEP_DOCUMENTEXTENSIONS = (); 
+    NEXTSTEP_INSTALLDIR = ../../../../tmp; 
+    NEXTSTEP_MAINNIB = TimeMon; 
+    PDO_UNIX_INSTALLDIR = "$(HOME)/Apps"; 
+    PDO_UNIX_MAINNIB = TimeMon; 
+    PROJECTNAME = TimeMon; 
+    PROJECTTYPE = Application; 
+    PROJECTVERSION = 2.6; 
+    SYSTEMEXTENSIONS = (); 
+    WINDOWS_INSTALLDIR = "$(HOME)/Apps"; 
+    WINDOWS_MAINNIB = TimeMon; 
+}
