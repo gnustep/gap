@@ -1,3 +1,10 @@
+2005-01-29 13:42 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* NSColorExtensions.m
+	* Percentages.m
+	* TimeMonColors.m
+	* TimeMon_main.m: reformatted to GNU style.
+
 2005-01-29 07:14 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Percentages.m

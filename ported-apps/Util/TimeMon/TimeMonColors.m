@@ -21,7 +21,7 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
   self = [super initWithFrame:frameRect mode:0 cellClass:[NSTextFieldCell class] numberOfRows:1 numberOfColumns:4];
-  if(self) 
+  if (self) 
     {
       NSSize size = { 1, frameRect.size.height};
       [self setIntercellSpacing:size];
@@ -50,12 +50,12 @@ static const id titles[] = {
     BOOL shouldDrawColor = [self shouldDrawColor];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    for( i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
         NSTextFieldCell *tCell = [self cellAtRow:0 column:i];
         [tCell setStringValue:titles[ i]];
 	// If self is in a color window, then load color
 	// information.
-        if( shouldDrawColor) 
+        if (shouldDrawColor) 
 	  {
             NSString *key = [NSString stringWithFormat:@"%@Color",titles[i]];
             NSString *string = [defaults objectForKey:key];
@@ -104,7 +104,7 @@ static const id titles[] = {
     
     // If it's a double-click, load the color into the color
     // panel and bring that panel up.
-    if( [e clickCount] > 1 && ![NSColorPanel sharedColorPanelExists]) 
+    if ([e clickCount] > 1 && ![NSColorPanel sharedColorPanelExists]) 
       {
         id newVar = [NSColorPanel sharedColorPanel];
         [newVar setColor:color];
@@ -119,9 +119,9 @@ static const id titles[] = {
 	
         // If it was a drag, initiate the color drag from
         // ourselves.
-        if( e) 
+        if (e) 
 	  {
-            if([e type] == NSLeftMouseDragged) 
+            if ([e type] == NSLeftMouseDragged) 
 	      {
 		[NSColorPanel dragColor:color withEvent:theEvent fromView:self];
 	      }
@@ -155,7 +155,7 @@ static const id titles[] = {
     NSPasteboard *pasteboard = [sender draggingPasteboard];
     NSColor *color = nil;
 
-    if([[pasteboard types] containsObject:NSColorPboardType]) 
+    if ([[pasteboard types] containsObject:NSColorPboardType]) 
       {
         color = [NSColor colorFromPasteboard:pasteboard];
       }
@@ -178,7 +178,7 @@ static const id titles[] = {
     [self unlockFocus];
 
     // If self is in a color window, save color information.
-    if( [self shouldDrawColor]) 
+    if ([self shouldDrawColor]) 
       {
         NSString *key = [NSString stringWithFormat:@"%@Color",titles[col]];
         [defaults setObject:[color stringRepresentation] forKey:key];
