@@ -29,6 +29,7 @@
 GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
 
 TimeMon_MAIN_MODEL_FILE = TimeMon.gorm
+TimeMon_APPLICATION_ICON = icon.png
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
@@ -47,7 +48,9 @@ loadave.c
 
 # The Resource files to be copied into the app's resources directory
 TimeMon_RESOURCE_FILES = \
-English.lproj/TimeMon.gorm
+English.lproj/TimeMon.gorm \
+icon.png \
+TimeMonP.png
 
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/application.make

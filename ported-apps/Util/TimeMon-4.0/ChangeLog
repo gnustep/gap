@@ -1,3 +1,12 @@
+2005-01-02 16:52 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* English.lproj/TimeMon.gorm: New icon in info panel.
+	* GNUmakefile: Copy images to resources.
+	* Percentages.m: include math.h.  Changed drawing code.
+	* icon.png: New image
+	* TimeMonInfo.plist: New file.
+	* TimeMonP.png: New image
+
 2005-01-02 14:15 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* TimeMonWraps.h: Added file.

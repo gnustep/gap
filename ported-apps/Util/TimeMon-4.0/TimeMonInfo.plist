@@ -1,0 +1,12 @@
+{
+    ApplicationDescription = "CPU time usage monitor";
+    ApplicationIcon = "icon.png";
+    ApplicationName = TimeMon;
+    ApplicationRelease = 4.0;
+    Authors = "Scott Hess";
+    Copyright = "Copyright (C) 1991-1197 by Scott Hess";
+    CopyrightDescription = "All Rights Reserved";
+    FullVersionID = 4.0;
+    NOTE = "Automatically generated!";
+    URL = "";
+}
