@@ -1,0 +1,87 @@
+/* Copyright 1991, 1994, 1997 Scott Hess.  Permission to use, copy, modify,
+ * and distribute this software and its documentation for any purpose
+ * and without fee is hereby granted, provided that this copyright
+ * notice appear in all copies.
+ * 
+ * Scott Hess makes no representations about the suitability of this
+ * software for any purpose.  It is provided "as is" without express
+ * or implied warranty.
+ */
+/* drawInit() initializes DPS, loading default colors for Idle,
+ * Nice, User, and System times, plus two routines, _doDrawArc1
+ * which draws the time except Nice, and _doDrawArc2 which draws
+ * all four times.  drawArc1() executes _doDrawArc1, which drawArc2()
+ * executes _doDrawArc2.
+ */
+defineps drawInit()
+	%% Default values for color drawing.
+    /Idle [1.0 1.0 1.0] def
+    /Nice [0.667 0.667 0.667] def
+    /User [0.333 0.333 0.333] def
+    /System [0 0 0] def
+	%% Draw the system, user, and idle times in color.
+    /_doDrawArc1 {		%% bdeg ddeg radius
+	/rad exch def
+    
+	    %% White circle in back.
+	Idle aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 0 360 arc
+	fill
+    
+	    %% Dark gray "pie" slice.
+	User aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 90 4 index arcn
+	fill
+	pop
+    
+	    %% Black slice.
+	System aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 90 4 index arcn
+	fill
+	pop
+    } bind def
+	%% Draw the system, user, nice, and idle times in gray.
+    /_doDrawArc2 {		%% bdeg ddeg ldeg radius
+	/rad exch def
+    
+	    %% Background.
+	Idle aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 0 360 arc
+	fill
+    
+	    %% Light gray slice.
+	Nice aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 90 4 index arcn
+	fill
+	pop
+    
+	    %% Dark gray slice.
+	User aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 90 4 index arcn
+	fill
+	pop
+    
+	    %% Black slice.
+	System aload pop setrgbcolor
+	24 24 moveto
+	24 24 rad 90 4 index arcn
+	fill
+	pop
+    } bind def
+endps
+    /* These cover for the pre-loaded procedures. */
+defineps drawArc1( double radius, bdeg, ddeg)
+    bdeg ddeg radius _doDrawArc1
+endps
+defineps drawArc2( double radius, bdeg, ddeg, ldeg)
+    bdeg ddeg ldeg radius _doDrawArc2
+endps
+defineps setColor( char *name; float r, g, b)
+    /name r g b 3 array astore def
+endps
