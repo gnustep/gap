@@ -1,3 +1,8 @@
+2005-01-01 15:34 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* English.lproj/TimeMon.gorm: Improved look of text and
+	replaced NSTextView.
+
 2005-01-01 12:56 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* TimeMon_main.m: Corrected main to use NSApplicationMain().
