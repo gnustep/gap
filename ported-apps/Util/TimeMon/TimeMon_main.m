@@ -6,13 +6,5 @@
 
 int main(int argc, const char *argv[]) 
 {
-  /*
-    [NSApplication sharedApplication];
-    if ([NSBundle loadNibNamed:@"TimeMon" owner:NSApp])
-	    [NSApp run];
-	    
-    [NSApp release];
-    return 0;
-  */
   return NSApplicationMain(argc, argv);
 }

@@ -26,7 +26,7 @@
 - (id)init
 {
     self = [super init];
-    if(self) 
+    if (self) 
       {
 	stipple = [NSImage imageNamed:@"NSApplicationIcon"];
 	defaults = [NSUserDefaults standardUserDefaults];
@@ -46,8 +46,8 @@
   for(i = 0; i < 3; i++) 
     {
       // Store away the values we redraw.
-      bcopy(pcents[i], lpcents[ i], sizeof( lpcents[ i])); 
-      drawArc2(radii[ i],
+      bcopy(pcents[i], lpcents[i], sizeof(lpcents[i])); 
+      drawArc2(radii[i],
 	       90 - (pcents[i][0]) * 360,
 	       90 - (pcents[i][0] + pcents[i][1]) * 360,
 	       90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
@@ -70,10 +70,10 @@
   NSString *path = [[NSBundle mainBundle] pathForResource: @"README" 
 					  ofType: @"rtf"];
   // load the readme if it exists.
-  if(path != nil)
+  if (path != nil)
     {
       NSData *data = [NSData dataWithContentsOfFile: path];
-      if(data != nil)
+      if (data != nil)
 	{
 	  NSDictionary *dict = nil;
 	  NSTextStorage *ts = [[NSTextStorage alloc] initWithRTF: data
@@ -120,42 +120,42 @@
   // index.
   
   // Calculate values for the innermost "lag" ring.
-  oIndex=(laIndex-MIN( lagFactor, steps)+laSize)%laSize;
+  oIndex=(laIndex-MIN(lagFactor, steps)+laSize)%laSize;
   for(total=0, i=0; i<CPUSTATES; i++) 
     {
-      total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
+      total+=oldTimes[laIndex][i]-oldTimes[oIndex][i];
     }
-  if( total) 
+  if (total) 
     {
-      pcents[ 2][ 0]=(oldTimes[ laIndex][  CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
-      pcents[ 2][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
-      pcents[ 2][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
+      pcents[2][0]=(oldTimes[laIndex][ CP_SYS]-oldTimes[oIndex][ CP_SYS])/total;
+      pcents[2][1]=(oldTimes[laIndex][CP_USER]-oldTimes[oIndex][CP_USER])/total;
+      pcents[2][2]=(oldTimes[laIndex][CP_NICE]-oldTimes[oIndex][CP_NICE])/total;
     }
   
   // Calculate the middle ring.
-  oIndex=(laIndex-MIN( lagFactor+layerFactor, steps)+laSize)%laSize;
+  oIndex=(laIndex-MIN(lagFactor+layerFactor, steps)+laSize)%laSize;
   for(total=0, i=0; i<CPUSTATES; i++) 
     {
-      total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
+      total+=oldTimes[laIndex][i]-oldTimes[oIndex][i];
     }
-  if( total) 
+  if (total) 
     {
-      pcents[ 1][ 0]=(oldTimes[ laIndex][  CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
-      pcents[ 1][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
-      pcents[ 1][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
+      pcents[1][0]=(oldTimes[laIndex][ CP_SYS]-oldTimes[oIndex][ CP_SYS])/total;
+      pcents[1][1]=(oldTimes[laIndex][CP_USER]-oldTimes[oIndex][CP_USER])/total;
+      pcents[1][2]=(oldTimes[laIndex][CP_NICE]-oldTimes[oIndex][CP_NICE])/total;
     }
   
   // Calculate the outer ring.
-  oIndex=(laIndex-MIN( lagFactor+layerFactor*layerFactor, steps)+laSize)%laSize;
+  oIndex=(laIndex-MIN(lagFactor+layerFactor*layerFactor, steps)+laSize)%laSize;
   for(total=0, i=0; i<CPUSTATES; i++) 
     {
-      total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
+      total+=oldTimes[laIndex][i]-oldTimes[oIndex][i];
     }
-  if(total) 
+  if (total) 
     {
-      pcents[ 0][ 0]=(oldTimes[ laIndex][  CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
-      pcents[ 0][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
-      pcents[ 0][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
+      pcents[0][0]=(oldTimes[laIndex][ CP_SYS]-oldTimes[oIndex][ CP_SYS])/total;
+      pcents[0][1]=(oldTimes[laIndex][CP_USER]-oldTimes[oIndex][CP_USER])/total;
+      pcents[0][2]=(oldTimes[laIndex][CP_NICE]-oldTimes[oIndex][CP_NICE])/total;
     }
   
   // Move the index forward for the next cycle.
@@ -169,9 +169,9 @@
     {
       for(j=0; j < 3; j++) 
 	{
-	  if(rint(pcents[ i][ j] * 100) != rint( lpcents[ i][ j] * 100)) 
+	  if (rint(pcents[i][j] * 100) != rint(lpcents[i][j] * 100)) 
 	    {
-	      for( ; i < 3; i++) {
+	      for(; i < 3; i++) {
 		updateFlags[i]=YES;
 	      }
 	      break;
@@ -180,7 +180,7 @@
     }
   
   // If there's a need for updating of any rings, call update.
-  if(updateFlags[2]) 
+  if (updateFlags[2]) 
     {
       [self update];
     }
@@ -200,11 +200,11 @@
   struct task_basic_info tbi;
   unsigned ic = TASK_BASIC_INFO_COUNT;
   
-  if( task_info( task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) 
+  if (task_info(task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) 
     {
       return;
     }
-  task_priority( task_self(), tbi.base_priority - 4, TRUE);
+  task_priority(task_self(), tbi.base_priority - 4, TRUE);
 #endif
 }
 
@@ -224,21 +224,21 @@
     // If there was a previous array, copy over values.  First,
     // an index is found for the first valid time.	Then enough
     // times to fill the rings are copied, if available.
-    if(oldTimes) 
+    if (oldTimes) 
       {
 	unsigned ii, jj, elts;
 	
-	elts = MIN( lagFactor + layerFactor * layerFactor + 1, steps);
+	elts = MIN(lagFactor + layerFactor * layerFactor + 1, steps);
 	ii = (laIndex + laSize - elts) % laSize;
-	jj = MIN( laSize - ii, elts);
+	jj = MIN(laSize - ii, elts);
 	
-	if(jj) 
+	if (jj) 
 	  {
-	    bcopy( oldTimes + ii, newTimes + 0, jj * sizeof( oldTimes[ 0]));
+	    bcopy(oldTimes + ii, newTimes + 0, jj * sizeof(oldTimes[0]));
 	  }
-	if( jj < elts) 
+	if (jj < elts) 
 	  {
-	    bcopy( oldTimes + 0, newTimes + jj, (elts - jj) * sizeof( oldTimes[ 0]));
+	    bcopy(oldTimes + 0, newTimes + jj, (elts - jj) * sizeof(oldTimes[0]));
 	  }
 	
 	// Free the old times.
@@ -282,7 +282,7 @@
     [defaults synchronize];
 	
 	// Shoot out error codes if there was an error.
-    if( (ret = la_init( cp_time)) ) {
+    if ((ret = la_init(cp_time)) ) {
 	const id syslogs[] = {
 	  NULL,				          // LA_NOERR
 	  @"Cannot read or parse /proc/stat." // LA_ERROR
@@ -298,7 +298,7 @@
     
     // Get us registered for periodic exec.
     f = [defaults floatForKey:@"UpdatePeriod"];
-    f = MAX( f, MINPERIOD);
+    f = MAX(f, MINPERIOD);
     [periodText setFloatValue:f];
     
     {
@@ -314,21 +314,21 @@
     
     // Get the lag factor.
     lagFactor = [defaults integerForKey:@"LagFactor"];
-    lagFactor = MAX( lagFactor, MINLAGFACTOR);
+    lagFactor = MAX(lagFactor, MINLAGFACTOR);
     [lagText setIntValue:lagFactor];
     
     // Get the layer factor.
     layerFactor = [defaults integerForKey:@"LayerFactor"];
-    layerFactor = MAX( layerFactor, MINFACTOR);
+    layerFactor = MAX(layerFactor, MINFACTOR);
     [factorText setIntValue:layerFactor];
     
     [self __reallocOldTimes];
-    bcopy(cp_time, oldTimes[ 0], sizeof(CPUTime));
+    bcopy(cp_time, oldTimes[0], sizeof(CPUTime));
     laIndex = 1;
     steps = 1;
     
     [colorFields readColors];
-    if([defaults boolForKey:@"HideOnAutolaunch"]
+    if ([defaults boolForKey:@"HideOnAutolaunch"]
        && [defaults boolForKey:@"NXAutoLaunch"]) {
       [NSApp hide:self];
     }
@@ -337,7 +337,7 @@
 - (BOOL)applicationShouldTerminate:(id)sender
 { 
   // If te is installed, remove it.
-  if( te) {
+  if (te) {
     [te invalidate];
     te = nil;
   }
@@ -348,13 +348,13 @@
 
 - (void)display
 {
-  updateFlags[ 0] = updateFlags[ 1] = updateFlags[ 2] = YES;
+  updateFlags[0] = updateFlags[1] = updateFlags[2] = YES;
   [self update];
 }
 
 - (void)togglePause:(id)sender
 {
-  if( te) {
+  if (te) {
     NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
     // NSImage *pausedStipple = [NSApp applicationIconImage];
 
@@ -374,7 +374,7 @@
     float f;
     [pauseMenuCell setTitle:@"Pause"];
     f = [defaults floatForKey:@"UpdatePeriod"];
-    f = MAX( f, MINPERIOD);
+    f = MAX(f, MINPERIOD);
     [periodText setFloatValue:f];
     te = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)f invocation:selfStep repeats:YES];
     [self display];
@@ -385,11 +385,11 @@
 {
   [defaults setObject:[periodText stringValue] forKey:@"UpdatePeriod"];
   [defaults synchronize];
-  if( te) {
+  if (te) {
     float f;
     [te invalidate];
     f = [defaults floatForKey:@"UpdatePeriod"];
-    f = MAX( f, MINPERIOD);
+    f = MAX(f, MINPERIOD);
     [periodText setFloatValue:f];
     te = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)f invocation:selfStep repeats:YES];
   }
@@ -400,7 +400,7 @@
   [defaults setObject:[lagText stringValue] forKey:@"LagFactor"];
   [defaults synchronize];
   lagFactor = [defaults integerForKey:@"LagFactor"];
-  lagFactor = MAX( lagFactor, MINLAGFACTOR);
+  lagFactor = MAX(lagFactor, MINLAGFACTOR);
   [lagText setIntValue:lagFactor];
   [self __reallocOldTimes];
 }
@@ -410,7 +410,7 @@
   [defaults setObject:[factorText stringValue] forKey:@"LayerFactor"];
   [defaults synchronize];
   layerFactor = [defaults integerForKey:@"LayerFactor"];
-  layerFactor = MAX( layerFactor, MINFACTOR);
+  layerFactor = MAX(layerFactor, MINFACTOR);
   [factorText setIntValue:layerFactor];
   [self __reallocOldTimes];
 }
@@ -419,13 +419,19 @@
 {
   id delegate = [sender delegate];
   
-  if( delegate == factorText) {
-    [self setFactor:factorText];
-  } else if( delegate == periodText) {
-    [self setPeriod:periodText];
-  } else if( delegate == lagText) {
-    [self setLag:lagText];
-  }
+  if (delegate == factorText) 
+    {
+      [self setFactor:factorText];
+    } 
+  else if (delegate == periodText) 
+    {
+      [self setPeriod:periodText];
+    } 
+  else if (delegate == lagText) 
+    {
+      [self setLag:lagText];
+    }
+
   return YES;
 }
 @end
