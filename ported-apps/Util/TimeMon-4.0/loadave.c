@@ -27,9 +27,10 @@
     int kmem;			/* File descriptor for /dev/kmem. */
 #else
     #import <strings.h>
-    #if 0
+    #ifndef GNUSTEP
+        #if 0
 	#import <sys/table.h>
-    #else
+        #else
 	/* NS3.0 doesn't include the <sys/table.h> file.  Sigh.
 	 * So, I've snarfed the following without permission from
 	 * <sys/table.h> on an NS2.1 system.  The structure, prototype,
@@ -50,6 +51,7 @@
 	    int		ci_phz;			/* profiling hz */
 	    int		ci_cptime[CPUSTATES];	/* cpu state times */
 	};
+        #endif
     #endif
     extern int table( int, int, void *, int, int);
 #endif
@@ -81,6 +83,7 @@ int la_init( long *times)
     /* Return the current CPU time values. */
 int la_read( long *times)
 {
+#ifndef GNUSTEP
 #ifdef KMEM
 	/* Seek in kmem to the location of cp_time. */
     if( lseek( kmem, nl[ 0].n_value, L_SET)!=nl[ 0].n_value) {
@@ -102,17 +105,20 @@ int la_read( long *times)
 	return LA_TABLE;
     }
 #endif
+#endif
     return LA_NOERR;
 }
 
     /* Clean up after ourselves. */
 void la_finish( void)
 {
+#ifndef GNUSTEP
 #ifdef KMEM
 	/* Close up kmem and nuke the fd. */
     if( kmem>-1) {
 	close( kmem);
 	kmem=-1;
     }
+#endif
 #endif
 }
