@@ -1,0 +1,5 @@
+2005-01-01 12:50 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* TimeMon_main.m: Changed sig of main and corrected loadNibNamed call.
+	* TimeMonWraps.m: Empty functions.
+
