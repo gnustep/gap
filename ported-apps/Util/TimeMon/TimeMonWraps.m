@@ -1,37 +1,42 @@
 // translated from the pswraps for GNUstep/MOSX by Gregory John Casamento
 
-#include <AppKit/PSOperators.h>
-
-// define the colors...
-#define IDLE   PSsetrgbcolor(0.667,0.667,0.667) // gray
-#define NICE   PSsetrgbcolor(0.000,0.000,1.000) // really blue
-#define USER   PSsetrgbcolor(0.149,0.380,0.667) // turquoise
-#define SYSTEM PSsetrgbcolor(0.321,0.494,0.784) // light blue
+#import <AppKit/PSOperators.h>
+#import <Foundation/NSUserDefaults.h>
+#import "NSColorExtensions.h"
 
 void drawArc2(double radius, double bdeg, double ddeg, double ldeg)
 {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSColor *idleColor = [NSColor colorFromStringRepresentation: 
+				  [defaults stringForKey: @"IdleColor"]];
+  NSColor *niceColor = [NSColor colorFromStringRepresentation: 
+				  [defaults stringForKey: @"NiceColor"]];
+  NSColor *userColor = [NSColor colorFromStringRepresentation: 
+				  [defaults stringForKey: @"UserColor"]];
+  NSColor *systemColor = [NSColor colorFromStringRepresentation: 
+				    [defaults stringForKey: @"SystemColor"]];
+
   // white circle...
-  IDLE;
+  [idleColor set];
   PSmoveto(24,24);
   PSarc(24,24,radius,0,360);
   PSfill();
 
   // Light gray "pie" slice.
-  SYSTEM;
+  [systemColor set]; 
   PSmoveto(24,24);
   PSarcn(24,24,radius,90,bdeg);
   PSfill();
 
   // Dark gray "pie" slice.
-  USER;
+  [userColor set];
   PSmoveto(24,24);
   PSarcn(24,24,radius,bdeg,ddeg);
   PSfill();
 
   // Black slice.
-  NICE;
+  [niceColor set];
   PSmoveto(24,24);
   PSarcn(24,24,radius,ddeg,ldeg);
   PSfill();
 }
-
