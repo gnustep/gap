@@ -345,17 +345,21 @@
 - (void)togglePause:(id)sender
 {
   if( te) {
-    NSImage *pausedStipple = [NSApp applicationIconImage];
-    // NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
+    NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
+    // NSImage *pausedStipple = [NSApp applicationIconImage];
+
     [pauseMenuCell setTitle:@"Continue"];
     [te invalidate];
     te = nil;
+
     /*
     [pausedStipple lockFocus];
     [pausedImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceOver];
     [pausedStipple unlockFocus];
     */
-    [NSApp setApplicationIconImage:pausedStipple];
+
+    // [NSApp setApplicationIconImage:pausedStipple];
+    [NSApp setApplicationIconImage:pausedImage];
   } else {
     float f;
     [pauseMenuCell setTitle:@"Pause"];

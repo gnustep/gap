@@ -47,8 +47,8 @@
 
 
 @implementation TimeMonColors
-    // Have to set up the cells and stuff manually since we're a
-    // custom view.
+// Have to set up the cells and stuff manually since we're a
+// custom view.
 - (id)initWithFrame:(NSRect)frameRect
 {
     self = [super initWithFrame:frameRect mode:0 cellClass:[NSTextFieldCell class] numberOfRows:1 numberOfColumns:4];
@@ -73,7 +73,7 @@ static const id titles[] = {
     @"Idle", @"Nice", @"User", @"System",
 };
 
-    // Read the colors for each field and stuff them into it.
+// Read the colors for each field and stuff them into it.
 - (void)readColors
 {
     int i;
@@ -83,19 +83,22 @@ static const id titles[] = {
     for( i = 0; i < 4; i++) {
         NSTextFieldCell *tCell = [self cellAtRow:0 column:i];
         [tCell setStringValue:titles[ i]];
-            // If self is in a color window, then load color
-            // information.
-        if( shouldDrawColor) {
+	// If self is in a color window, then load color
+	// information.
+        if( shouldDrawColor) 
+	  {
             NSString *key = [NSString stringWithFormat:@"%@Color",titles[i]];
             NSString *string = [defaults objectForKey:key];
             [tCell setColor:[NSColor colorFromStringRepresentation:string]];
-
+	    
             // Otherwise, load grayscale information.
-        } else {
+	  } 
+	else 
+	  {
             NSString *key = [NSString stringWithFormat:@"%@Gray",titles[i]];
             float color = [defaults floatForKey:key];
             [tCell setColor:[NSColor colorWithCalibratedWhite:color alpha:1.0]];
-        }
+	  }
         [tCell setBezeled:YES];
         [tCell setAlignment:NSCenterTextAlignment];
     }
@@ -220,29 +223,29 @@ static const id titles[] = {
 @end
 
 @implementation NSTextFieldCell (TimeMonTextFieldCell)
-    // Set the colors for the field.  Adjust the foreground color
-    // so that it's visible against the background.
+// Set the colors for the field.  Adjust the foreground color
+// so that it's visible against the background.
 - (void)setColor:(NSColor *)color
 {
     float gray;
     float r, g, b;
     
-	// Remove any alpha component.
+    // Remove any alpha component.
     color = [color colorWithAlphaComponent:1.0];
     
-	// Get the grayscale version.
+    // Get the grayscale version.
     gray = [[color colorUsingColorSpaceName:NSCalibratedWhiteColorSpace] whiteComponent];
     
-	// Set the text to be visible.
+    // Set the text to be visible.
     [self setTextColor:[NSColor colorWithCalibratedWhite:(gray < 0.33 ? NSWhite : NSBlack) alpha:1.0]];
     
-	// Set the color and gray for the field.
+    // Set the color and gray for the field.
     [self setBackgroundColor:color];
     
-	// Tell the windowserver code that we want to use this
-	// color for drawing the appropriate element.  [Note that
-	// stringValue should be one of "Idle", "Nice", "User", or
-	// "System".]
+    // Tell the windowserver code that we want to use this
+    // color for drawing the appropriate element.  [Note that
+    // stringValue should be one of "Idle", "Nice", "User", or
+    // "System".]
     [[color colorUsingColorSpaceName:NSCalibratedRGBColorSpace] getRed:&r green:&g blue:&b alpha:NULL];
 }
 @end
