@@ -2,10 +2,6 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
-	    "indent:",
-	    "orderFrontDataLinkPanel:",
-	    "selectNextKeyView:",
-	    "unhide:",
 	    "setFactor:",
 	    "setLag:",
 	    "setPeriod:",
