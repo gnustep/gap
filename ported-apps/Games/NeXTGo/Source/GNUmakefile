@@ -54,6 +54,7 @@ NeXTGo_C_FILES = \
 NeXTGo_RESOURCE_FILES = \
 	English.lproj/NeXTGo.gmodel \
 	Background.tiff NeXTGo.tiff NeXTGoFile.tiff \
+	BlackPiece.tiff WhitePiece.tiff \
 	intergo.dct \
         NeXTGo.background-2.0.draw NeXTGo.background.draw \
         NeXTGoHelp.rtf
