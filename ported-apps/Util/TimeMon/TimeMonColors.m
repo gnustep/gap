@@ -20,17 +20,18 @@
 // custom view.
 - (id)initWithFrame:(NSRect)frameRect
 {
-    self = [super initWithFrame:frameRect mode:0 cellClass:[NSTextFieldCell class] numberOfRows:1 numberOfColumns:4];
-    if( self) {
-        NSSize size = { 1, frameRect.size.height};
-        [self setIntercellSpacing:size];
-        size.width = ((int)frameRect.size.width-3)/4;
-        [self setCellSize:size];
-        [self setAutosizesCells:YES];
-        [[self window] setAcceptsMouseMovedEvents:YES];
-        [self registerForDraggedTypes:[NSArray arrayWithObject:NSColorPboardType]];
+  self = [super initWithFrame:frameRect mode:0 cellClass:[NSTextFieldCell class] numberOfRows:1 numberOfColumns:4];
+  if(self) 
+    {
+      NSSize size = { 1, frameRect.size.height};
+      [self setIntercellSpacing:size];
+      size.width = ((int)frameRect.size.width-3)/4;
+      [self setCellSize:size];
+      [self setAutosizesCells:YES];
+      [[self window] setAcceptsMouseMovedEvents:YES];
+      [self registerForDraggedTypes:[NSArray arrayWithObject:NSColorPboardType]];
     }
-    return self;
+  return self;
 }
 
 - (BOOL)isFlipped
@@ -87,40 +88,45 @@ static const id titles[] = {
 {
     return YES;
 }
-    // Intercept the mousedown and cause it to drag a color.  If
-    // double-click, pull up the color panel.
+
+// Intercept the mousedown and cause it to drag a color.  If
+// double-click, pull up the color panel.
 - (void)mouseDown:(NSEvent *)e 
 {
     NSPoint loc = [e locationInWindow];
     int row, col;
     NSColor * color;
     
-	// Find the color of the cell the click is in.
+    // Find the color of the cell the click is in.
     loc = [self convertPoint:loc fromView:nil];
     [self getRow:&row column:&col forPoint:loc];
     color = [[self cellAtRow:row column:col] backgroundColor];
     
-	// If it's a double-click, load the color into the color
-	// panel and bring that panel up.
-    if( [e clickCount] > 1 && ![NSColorPanel sharedColorPanelExists]) {
+    // If it's a double-click, load the color into the color
+    // panel and bring that panel up.
+    if( [e clickCount] > 1 && ![NSColorPanel sharedColorPanelExists]) 
+      {
         id newVar = [NSColorPanel sharedColorPanel];
         [newVar setColor:color];
         [newVar orderFront:nil];
-    }
-    else {
+      }
+    else 
+      {
         NSEvent *theEvent = e;
-                
+	
         // Get the next mouse up or dragged event.
         e = [[self window] nextEventMatchingMask:(NSLeftMouseUpMask|NSLeftMouseDraggedMask)];
-                
+	
         // If it was a drag, initiate the color drag from
         // ourselves.
-        if( e) {
-            if([e type] == NSLeftMouseDragged) {
-                [NSColorPanel dragColor:color withEvent:theEvent fromView:self];
-            }
-        }
-    }
+        if( e) 
+	  {
+            if([e type] == NSLeftMouseDragged) 
+	      {
+		[NSColorPanel dragColor:color withEvent:theEvent fromView:self];
+	      }
+	  }
+      }
 }
 
 - (unsigned int)draggingEntered:(id <NSDraggingInfo>)sender
@@ -128,9 +134,10 @@ static const id titles[] = {
     NSPasteboard *pboard;
 
     pboard = [sender draggingPasteboard];
-    if ([[pboard types] indexOfObject:NSColorPboardType] != NSNotFound) {
+    if ([[pboard types] indexOfObject:NSColorPboardType] != NSNotFound) 
+      {
         return NSDragOperationAll;
-    }
+      }
     return NSDragOperationNone;
 }
 
@@ -148,13 +155,15 @@ static const id titles[] = {
     NSPasteboard *pasteboard = [sender draggingPasteboard];
     NSColor *color = nil;
 
-    if([[pasteboard types] containsObject:NSColorPboardType]) {
+    if([[pasteboard types] containsObject:NSColorPboardType]) 
+      {
         color = [NSColor colorFromPasteboard:pasteboard];
-    }
-    else {
+      }
+    else 
+      {
         NSLog(@"No color");
         return NO;
-    }
+      }
 
     // Find the cell for the point.
     loc = [self convertPoint:loc fromView:nil];
@@ -169,25 +178,27 @@ static const id titles[] = {
     [self unlockFocus];
 
     // If self is in a color window, save color information.
-    if( [self shouldDrawColor]) {
+    if( [self shouldDrawColor]) 
+      {
         NSString *key = [NSString stringWithFormat:@"%@Color",titles[col]];
         [defaults setObject:[color stringRepresentation] forKey:key];
-
-    // Otherwise, save grayscale information.
-    } else {
+	// Otherwise, save grayscale information.
+      } 
+    else 
+      {
         float gray, alpha;
         NSString *key = [NSString stringWithFormat:@"%@Gray",titles[col]];
         [[color colorUsingColorSpaceName:NSCalibratedWhiteColorSpace] getWhite:&gray alpha:&alpha];
         [defaults setFloat:gray forKey:key];
-    }
+      }
     [defaults synchronize];
-   
+    
     return YES;
 }
 
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {
-    [[NSApp delegate] display];
+  [[NSApp delegate] display];
 }
 @end
 

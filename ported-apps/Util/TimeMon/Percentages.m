@@ -26,11 +26,12 @@
 - (id)init
 {
     self = [super init];
-    if(self) {
+    if(self) 
+      {
 	stipple = [NSImage imageNamed:@"NSApplicationIcon"];
 	defaults = [NSUserDefaults standardUserDefaults];
 	[NSApp setDelegate:self];
-    }
+      }
     return self;
 }
 
@@ -42,16 +43,16 @@
   PSsetlinewidth(1.0);
   PSsetalpha(1.0);
 
-  for(i = 0; i < 3; i++) {
-    // Store away the values we redraw.
-    bcopy(pcents[i], lpcents[ i], sizeof( lpcents[ i]));
-
-    drawArc2(radii[ i],
-	 90 - (pcents[i][0]) * 360,
-	 90 - (pcents[i][0] + pcents[i][1]) * 360,
-	 90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
-  }
-    
+  for(i = 0; i < 3; i++) 
+    {
+      // Store away the values we redraw.
+      bcopy(pcents[i], lpcents[ i], sizeof( lpcents[ i])); 
+      drawArc2(radii[ i],
+	       90 - (pcents[i][0]) * 360,
+	       90 - (pcents[i][0] + pcents[i][1]) * 360,
+	       90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
+    }
+  
   PSsetgray(NSBlack);
   PSmoveto(47.5, 24.0);
   PSarc(24.0, 24.0, 23.5, 0.0, 360.0);
@@ -104,7 +105,7 @@
   float total;
   
   // Read the new CPU times.
-  la_read( oldTimes[ laIndex]);
+  la_read(oldTimes[laIndex]);
   
   // The general idea for calculating the ring values is to
   // first find the earliest valid index into the oldTimes
@@ -120,36 +121,42 @@
   
   // Calculate values for the innermost "lag" ring.
   oIndex=(laIndex-MIN( lagFactor, steps)+laSize)%laSize;
-  for( total=0, i=0; i<CPUSTATES; i++) {
-    total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
-  }
-  if( total) {
-    pcents[ 2][ 0]=(oldTimes[ laIndex][	 CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
-    pcents[ 2][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
-    pcents[ 2][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
-  }
+  for(total=0, i=0; i<CPUSTATES; i++) 
+    {
+      total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
+    }
+  if( total) 
+    {
+      pcents[ 2][ 0]=(oldTimes[ laIndex][  CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
+      pcents[ 2][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
+      pcents[ 2][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
+    }
   
   // Calculate the middle ring.
   oIndex=(laIndex-MIN( lagFactor+layerFactor, steps)+laSize)%laSize;
-  for( total=0, i=0; i<CPUSTATES; i++) {
-    total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
-  }
-  if( total) {
-    pcents[ 1][ 0]=(oldTimes[ laIndex][	 CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
-    pcents[ 1][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
-    pcents[ 1][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
-  }
+  for(total=0, i=0; i<CPUSTATES; i++) 
+    {
+      total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
+    }
+  if( total) 
+    {
+      pcents[ 1][ 0]=(oldTimes[ laIndex][  CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
+      pcents[ 1][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
+      pcents[ 1][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
+    }
   
   // Calculate the outer ring.
   oIndex=(laIndex-MIN( lagFactor+layerFactor*layerFactor, steps)+laSize)%laSize;
-  for( total=0, i=0; i<CPUSTATES; i++) {
-    total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
-  }
-  if( total) {
-    pcents[ 0][ 0]=(oldTimes[ laIndex][	 CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
-    pcents[ 0][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
-    pcents[ 0][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
-  }
+  for(total=0, i=0; i<CPUSTATES; i++) 
+    {
+      total+=oldTimes[ laIndex][ i]-oldTimes[ oIndex][ i];
+    }
+  if(total) 
+    {
+      pcents[ 0][ 0]=(oldTimes[ laIndex][  CP_SYS]-oldTimes[ oIndex][  CP_SYS])/total;
+      pcents[ 0][ 1]=(oldTimes[ laIndex][ CP_USER]-oldTimes[ oIndex][ CP_USER])/total;
+      pcents[ 0][ 2]=(oldTimes[ laIndex][ CP_NICE]-oldTimes[ oIndex][ CP_NICE])/total;
+    }
   
   // Move the index forward for the next cycle.
   laIndex = (laIndex + 1) % laSize;
@@ -158,21 +165,25 @@
   // Look through the rings and see if any values changed by
   // one percent or more, and if so mark that and inner rings
   // for update.
-  for( i=0; i < 3; i++) {
-    for( j=0; j < 3; j++) {
-      if( rint( pcents[ i][ j] * 100) != rint( lpcents[ i][ j] * 100)) {
-	for( ; i < 3; i++) {
-	  updateFlags[ i]=YES;
+  for(i=0; i < 3; i++) 
+    {
+      for(j=0; j < 3; j++) 
+	{
+	  if(rint(pcents[ i][ j] * 100) != rint( lpcents[ i][ j] * 100)) 
+	    {
+	      for( ; i < 3; i++) {
+		updateFlags[i]=YES;
+	      }
+	      break;
+	    }
 	}
-	break;
-      }
     }
-  }
   
   // If there's a need for updating of any rings, call update.
-  if( updateFlags[ 2]) {
-    [self update];
-  }
+  if(updateFlags[2]) 
+    {
+      [self update];
+    }
 }
 
 // This was for debugging, no longer needed.  I used it to hook
@@ -207,36 +218,39 @@
     unsigned newSize = layerFactor * layerFactor + lagFactor + 1;
     
     // Allocate info for the array.
-    newTimes = NSZoneMalloc( [self zone], sizeof(CPUTime) * newSize);
-    bzero( newTimes, sizeof(CPUTime) * newSize);
+    newTimes = NSZoneMalloc([self zone], sizeof(CPUTime) * newSize);
+    bzero(newTimes, sizeof(CPUTime) * newSize);
     
     // If there was a previous array, copy over values.  First,
     // an index is found for the first valid time.	Then enough
     // times to fill the rings are copied, if available.
-    if( oldTimes) {
+    if(oldTimes) 
+      {
 	unsigned ii, jj, elts;
-
+	
 	elts = MIN( lagFactor + layerFactor * layerFactor + 1, steps);
 	ii = (laIndex + laSize - elts) % laSize;
 	jj = MIN( laSize - ii, elts);
-
-	if( jj) {
+	
+	if(jj) 
+	  {
 	    bcopy( oldTimes + ii, newTimes + 0, jj * sizeof( oldTimes[ 0]));
-	}
-	if( jj < elts) {
+	  }
+	if( jj < elts) 
+	  {
 	    bcopy( oldTimes + 0, newTimes + jj, (elts - jj) * sizeof( oldTimes[ 0]));
-	}
-
+	  }
+	
 	// Free the old times.
-	NSZoneFree( [self zone], oldTimes);
-    }
-
+	NSZoneFree([self zone], oldTimes);
+      }
+    
     // Reset everything so that we only access valid data.
     oldTimes	= newTimes;
-    laIndex	= MIN( steps, laSize);
-    laIndex	= MIN( laIndex, newSize)%newSize;
-    steps	= MIN( steps, laSize);
-    steps	= MIN( steps, newSize);
+    laIndex	= MIN(steps, laSize);
+    laIndex	= MIN(laIndex, newSize)%newSize;
+    steps	= MIN(steps, laSize);
+    steps	= MIN(steps, newSize);
     laSize	= newSize;
 }
 
