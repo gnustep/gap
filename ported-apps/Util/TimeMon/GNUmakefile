@@ -40,6 +40,7 @@ ADDITIONAL_OBJCFLAGS += -Wall
 
 # The Objective-C source files to be compiled
 TimeMon_OBJC_FILES = \
+NSColorExtensions.m \
 Percentages.m \
 TimeMonColors.m \
 TimeMon_main.m \

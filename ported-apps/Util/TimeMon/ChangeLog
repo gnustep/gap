@@ -1,3 +1,20 @@
+2005-01-28 22:50 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* English.lproj/TimeMon.gorm: Corrected resize problem.
+	* GNUmakefile: Added new classes
+	* NSColorExtensions.[hm]: Category which allows the persistence
+	of a color in the defaults.  Used in TimeMonColors and TimeMonWraps.
+	* TimeMonColors.m: Import color extensions.
+	* TimeMonWraps.m: Import color extensions.  Get colors from defaults
+	in drawArc2() function.
+
+2005-01-28 22:49 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* English.lproj/TimeMon.gorm
+	* GNUmakefile
+	* TimeMonColors.m
+	* TimeMonWraps.m
+
 2005-01-25 09:01 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Percentages.m: Removed some of the extra errors and 
