@@ -1,2 +1,0 @@
-"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };
-"PreferencesController" = {ACTIONS = {}; OUTLETS = {preferencesWindow = id; }; SUPERCLASS = NSObject; };
