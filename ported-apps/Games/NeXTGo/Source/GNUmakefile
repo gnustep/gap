@@ -30,7 +30,7 @@ GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
 
 GNUSTEP_MAKEFILES = $(GNUSTEP_SYSTEM_ROOT)/Makefiles
 
-NeXTGo_MAIN_MODEL_FILE = NeXTGo.gmodel
+NeXTGo_MAIN_MODEL_FILE = NeXTGo.gorm
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
@@ -52,12 +52,15 @@ NeXTGo_C_FILES = \
 
 # The Resource files to be copied into the app's resources directory
 NeXTGo_RESOURCE_FILES = \
-	English.lproj/NeXTGo.gmodel \
 	Background.tiff NeXTGo.tiff NeXTGoFile.tiff \
-	BlackPiece.tiff WhitePiece.tiff \
 	intergo.dct \
         NeXTGo.background-2.0.draw NeXTGo.background.draw \
         NeXTGoHelp.rtf
+
+NeXTGo_LOCALIZED_RESOURCE_FILES = \
+	NeXTGo.gorm
+
+NeXTGo_LANGUAGES = English
 
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/application.make
