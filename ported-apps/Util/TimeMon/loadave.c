@@ -18,13 +18,14 @@ int la_read(unsigned long long *times)
     &c_user,&c_nice,&c_sys,&c_idle,&c_iow,&c_xxx,&c_yyy);
   if (i<4)
     return LA_ERROR;
-  if (i>=5)
-    c_idle += c_iow;
+  if (i<5)
+    c_iow=0;
   fclose(f);
   times[CP_IDLE] = c_idle;
   times[CP_SYS] = c_sys;
   times[CP_NICE] = c_nice;
   times[CP_USER] = c_user;
+  times[CP_IOWAIT] = c_iow;
   return LA_NOERR;
 }
 

@@ -22,8 +22,8 @@ typedef unsigned long long CPUTime[CPUSTATES];
     int lagFactor;		// How long to average for the inner circle.
     int layerFactor;		// The factor that differentiates layers.
     unsigned steps;		// Number of steps we've done.
-    float pcents[ 3][ 3];	// Percentages for display.
-    float lpcents[ 3][ 3];	// Last-displayed percentages.
+    float pcents[3][CPUSTATES];	// Percentages for display.
+    float lpcents[3][CPUSTATES];// Last-displayed percentages.
 
     BOOL updateFlags[ 3];	// Which percentages to update.
     NSTimer *te;		// The timed entry keeping us alive.

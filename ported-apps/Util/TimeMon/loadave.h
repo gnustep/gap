@@ -9,16 +9,18 @@
  * or implied warranty.
  */
 
-#define CPUSTATES 4
+#define CPUSTATES 5
 #define CP_SYS 0
 #define CP_USER 1
 #define CP_NICE 2
-#define CP_IDLE 3
+#define CP_IOWAIT 3
+#define CP_IDLE 4
 
 /* These codes are returned from la_init() and la_read(). */
-enum la_error {
-    LA_NOERR,		/* No problem. */
-    LA_ERROR		/* Problem. */
+enum la_error
+{
+  LA_NOERR,		/* No problem. */
+  LA_ERROR		/* Problem. */
 };
 
 /* Get ready for operation and retrieve the current times. */

@@ -50,7 +50,8 @@
       drawArc2(radii[i],
 	       90 - (pcents[i][0]) * 360,
 	       90 - (pcents[i][0] + pcents[i][1]) * 360,
-	       90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360);
+	       90 - (pcents[i][0] + pcents[i][1] + pcents[i][2]) * 360,
+	       90 - (pcents[i][0] + pcents[i][1] + pcents[i][2] + pcents[i][3]) * 360);
     }
   
   PSsetgray(NSBlack);
@@ -127,9 +128,8 @@
     }
   if (total) 
     {
-      pcents[2][0]=(oldTimes[laIndex][ CP_SYS]-oldTimes[oIndex][ CP_SYS])/total;
-      pcents[2][1]=(oldTimes[laIndex][CP_USER]-oldTimes[oIndex][CP_USER])/total;
-      pcents[2][2]=(oldTimes[laIndex][CP_NICE]-oldTimes[oIndex][CP_NICE])/total;
+      for (i = 0; i < CPUSTATES; i++)
+	pcents[2][i] = (oldTimes[laIndex][i] - oldTimes[oIndex][i]) / total;
     }
   
   // Calculate the middle ring.
@@ -140,9 +140,8 @@
     }
   if (total) 
     {
-      pcents[1][0]=(oldTimes[laIndex][ CP_SYS]-oldTimes[oIndex][ CP_SYS])/total;
-      pcents[1][1]=(oldTimes[laIndex][CP_USER]-oldTimes[oIndex][CP_USER])/total;
-      pcents[1][2]=(oldTimes[laIndex][CP_NICE]-oldTimes[oIndex][CP_NICE])/total;
+      for (i = 0; i < CPUSTATES; i++)
+	pcents[1][i] = (oldTimes[laIndex][i] - oldTimes[oIndex][i]) / total;
     }
   
   // Calculate the outer ring.
@@ -153,9 +152,8 @@
     }
   if (total) 
     {
-      pcents[0][0]=(oldTimes[laIndex][ CP_SYS]-oldTimes[oIndex][ CP_SYS])/total;
-      pcents[0][1]=(oldTimes[laIndex][CP_USER]-oldTimes[oIndex][CP_USER])/total;
-      pcents[0][2]=(oldTimes[laIndex][CP_NICE]-oldTimes[oIndex][CP_NICE])/total;
+      for (i = 0; i < CPUSTATES; i++)
+	pcents[0][i] = (oldTimes[laIndex][i] - oldTimes[oIndex][i]) / total;
     }
   
   // Move the index forward for the next cycle.
@@ -165,15 +163,16 @@
   // Look through the rings and see if any values changed by
   // one percent or more, and if so mark that and inner rings
   // for update.
-  for(i=0; i < 3; i++) 
+  for (i = 0; i < CPUSTATES; i++)
     {
-      for(j=0; j < 3; j++) 
+      for (j = 0; j < CPUSTATES; j++)
 	{
 	  if (rint(pcents[i][j] * 100) != rint(lpcents[i][j] * 100)) 
 	    {
-	      for(; i < 3; i++) {
-		updateFlags[i]=YES;
-	      }
+	      for ( ; i < 3; i++)
+		{
+		  updateFlags[i] = YES;
+		}
 	      break;
 	    }
 	}
@@ -271,6 +270,7 @@
 	@"0.333 0.667 0.867",	@"NiceColor",	// A light blue-green
 	@"0.200 0.467 0.800",	@"UserColor",	// A darker blue-green
 	@"0.000 0.000 1.000",	@"SystemColor",	// Blue
+	@"1.000 0.800 0.900",	@"IOWaitColor",	// Light purple
 	// For monochrome systems.
 	@"1.000",		@"IdleGray",	// White
 	@"0.667",		@"NiceGray",	// Light gray
