@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
  
-/* $Id: Board.m,v 1.2 2004/02/22 16:02:13 gcasa Exp $ */
+/* $Id: Board.m,v 1.3 2005/04/03 19:07:17 gcasa Exp $ */
 
 /*
  * $Log: Board.m,v $
+ * Revision 1.3  2005/04/03 19:07:17  gcasa
+ * removing debugging.
+ *
  * Revision 1.2  2004/02/22 16:02:13  gcasa
  * A lot of improvements to the GAP project
  *
@@ -141,8 +144,6 @@ void setStoneLoc(int x, int y)
   
   stoneSize.width = STONEWIDTH;
   stoneSize.height = STONEHEIGHT;
-  
-  NSLog(@"in initWithFrame");
   
   te = 0;
   startZeit = 0;
@@ -1327,7 +1328,6 @@ void setStoneLoc(int x, int y)
   }
   
   // Draw the stone.
-  NSLog(@"Draw the black stone...");  
   PSarc (RADIUS, RADIUS, 
 	 RADIUS, 0.0, 360.0);
   PSsetgray (NSBlack);
@@ -1357,7 +1357,6 @@ void setStoneLoc(int x, int y)
       PSsetalpha (1.0);
     }
   
-  NSLog(@"Draw the white stone...");
   // Draw the stone.
   PSarc (RADIUS, RADIUS, 
 	 RADIUS, 0.0, 360.0);
@@ -1389,7 +1388,6 @@ void setStoneLoc(int x, int y)
       PSsetalpha (1.0);
     }
   
-  NSLog(@"Draw the gray stone...");
   // Draw the stone.
   PSarc (RADIUS, RADIUS, 
 	 RADIUS, 0.0, 360.0);
@@ -1415,7 +1413,6 @@ void setStoneLoc(int x, int y)
 
 - drawUpperLeft:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1438,7 +1435,6 @@ void setStoneLoc(int x, int y)
 
 - drawUpperRight:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1461,7 +1457,6 @@ void setStoneLoc(int x, int y)
 
 - drawLowerLeft:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1484,7 +1479,6 @@ void setStoneLoc(int x, int y)
 
 - drawLowerRight:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1507,7 +1501,6 @@ void setStoneLoc(int x, int y)
 
 - drawMidLeft:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1528,7 +1521,6 @@ void setStoneLoc(int x, int y)
 
 - drawMidRight:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1549,7 +1541,6 @@ void setStoneLoc(int x, int y)
 
 - drawMidTop:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1570,7 +1561,6 @@ void setStoneLoc(int x, int y)
 
 - drawMidBottom:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1591,7 +1581,6 @@ void setStoneLoc(int x, int y)
 
 - drawInnerSquare:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
@@ -1610,7 +1599,6 @@ void setStoneLoc(int x, int y)
 
 - drawInnerHandicap:imageRep
 {
-  NSLog(@"drawing board");
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
   if ([[NSDPSContext currentContext] isDrawingToScreen]) {
