@@ -183,6 +183,15 @@
 		case LP_RESULT_GAMEOVER:
 			[tick invalidate];
 			tick = nil;
+			/* demo mode auto restart */
+			if ([lpview1 useAI] && [lpview2 useAI])
+			{
+				[NSTimer scheduledTimerWithTimeInterval:10
+												 target:self
+											   selector:@selector(restart:)
+											   userInfo:nil
+												repeats:NO];
+			}
 			break;
 	}
 }

@@ -928,6 +928,7 @@ static float _grid_height;
 - (void) rotateCCW
 {
 	id move = [_units objectAtIndex:0];
+	id base = [_units objectAtIndex:1];
 
 	switch(_laydir)
 	{
@@ -935,6 +936,12 @@ static float _grid_height;
 			if ([move rMoveX:-1
 						   Y:-1])
 			{
+				_laydir = LP_MOVE_LEFT;
+			}
+			else if ([base canRMoveX:1 Y:0])
+			{
+				[base rMoveX:1 Y:0];
+				[move rMoveX:0 Y:-1];
 				_laydir = LP_MOVE_LEFT;
 			}
 		break;
@@ -949,6 +956,12 @@ static float _grid_height;
 			if ([move rMoveX:1
 						   Y:1])
 			{
+				_laydir = LP_MOVE_RIGHT;
+			}
+			else if ([base canRMoveX:-1 Y:0])
+			{
+				[base rMoveX:-1 Y:0];
+				[move rMoveX:0 Y:1];
 				_laydir = LP_MOVE_RIGHT;
 			}
 		break;
@@ -966,6 +979,7 @@ static float _grid_height;
 - (void) rotateCW
 {
 	id move = [_units objectAtIndex:0];
+	id base = [_units objectAtIndex:1];
 
 	switch(_laydir)
 	{
@@ -973,6 +987,12 @@ static float _grid_height;
 			if ([move rMoveX:1 // should physically block rotation?
 						   Y:-1])
 			{
+				_laydir = LP_MOVE_RIGHT;
+			}
+			else if ([base canRMoveX:-1 Y:0])
+			{
+				[base rMoveX:-1 Y:0];
+				[move rMoveX:0 Y:-1];
 				_laydir = LP_MOVE_RIGHT;
 			}
 		break;
@@ -987,6 +1007,12 @@ static float _grid_height;
 			if ([move rMoveX:-1
 						   Y:1])
 			{
+				_laydir = LP_MOVE_LEFT;
+			}
+			else if ([base canRMoveX:1 Y:0])
+			{
+				[base rMoveX:1 Y:0];
+				[move rMoveX:0 Y:1];
 				_laydir = LP_MOVE_LEFT;
 			}
 		break;
@@ -1160,12 +1186,12 @@ static LPUnitColorType _random_unit_color()
 	return random()%LP_COLOR_ALL;
 }
 
-static LPUnit * _random_unit(id owner, int x, int y)
+static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 {
 	LPUnit* unit;
-	if (random()%4 == 1)
+	if (random()%20 < 6)
 	{
-		if (random()%10 == 1)
+		if (random()%10 == 1 && diamond)
 		{
 			unit = [[LPSparkerUnit alloc] initWithOwner:owner
 												  color:LP_COLOR_ALL
@@ -1657,7 +1683,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 	{
 //		NSLog(@"blow blocks %d",i);
 	}
-	stone -= (i/6) * chain;
+	stone -= (i/4) * chain + chain>1?chain:0;
 
 	en = [_blowing objectEnumerator];
 	while ((unit = [en nextObject]))
@@ -1666,7 +1692,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 		{
 			if ([unit rows] > 1)
 			{
-				stone -= [unit rows] * [unit columns] * (chain + 1);
+				stone -= [unit rows] * 2 * [unit columns] * (chain + 1);
 			}
 			[_units removeObject:unit];
 		}
@@ -1692,14 +1718,22 @@ static LPUnit * _random_unit(id owner, int x, int y)
 	else
 	{
 		chain = 0;
+
+		if (stone < 0)
+		{
+			[__owner player:self addStoneToOp:-stone];
+			stone = 0;
+		}
 	}
 
+#if 0
 	if (stone < 0)
 	{
 //		NSLog(@"%@ sends %d stones",self,-stone);
 		[__owner player:self addStoneToOp:-stone];
 		stone = 0;
 	}
+#endif
 }
 
 - (void) restart
@@ -1839,6 +1873,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 
 - (void) addJewelUnit
 {
+	/*
 	id newUnit = [LPGroupUnit alloc];
 	[newUnit initWithOwner:self
 					 atoms:[NSArray arrayWithObjects:
@@ -1846,6 +1881,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 								_random_unit(newUnit,3,13),nil]];
 
 	[self addUnit:AUTORELEASE(newUnit)];
+	*/
 }
 
 - (void) drawRect:(NSRect)r
@@ -1893,10 +1929,23 @@ static LPUnit * _random_unit(id owner, int x, int y)
 	}
 
 
-	en = [_units objectEnumerator];
-	while ((unit = [en nextObject]))
 	{
-		[unit draw];
+		int cc,xx,yy;
+		LPUnit* unit;
+		cc=xx=yy=0;
+		NSMutableSet *set = [NSMutableSet setWithCapacity:70];
+
+		for (yy = 13; yy >= 0 && cc < 8; yy--)
+		for (xx = 5; xx >= 0; xx--)
+		{
+			unit = [self getUnitAtX:xx
+								  Y:yy];
+			if (unit != nil)
+			{
+				[set addObject:unit];
+			}
+		}
+		[set makeObjectsPerform:@selector(draw)];
 	}
 
 	PSgsave();
@@ -1944,13 +1993,14 @@ static LPUnit * _random_unit(id owner, int x, int y)
 		PSstroke();
 	PSgrestore();
 
-	if (trip || stone)
+	if (trip || stone > 0)
 	{
+		int istone = stone > 0?stone:0;
 		NSMutableAttributedString *str;
 		NSString *s;
 		NSSize strSize;
 		NSSize gz = [self gridSize];
-		s = [NSString stringWithFormat:@"%d",stone];
+		s = [NSString stringWithFormat:@"%d",istone];
 		str = [[NSMutableAttributedString alloc] initWithString:s];
 		[str addAttribute:NSForegroundColorAttributeName
 					value:[NSColor redColor]
@@ -2047,6 +2097,7 @@ static LPUnit * _random_unit(id owner, int x, int y)
 
 -(void) keyDown: (NSEvent *)event
 {
+//NSLog(@"%d",[event keyCode]);
 	switch ([event keyCode])
 	{
 		case 38:
@@ -2141,8 +2192,8 @@ static LPUnit * _random_unit(id owner, int x, int y)
 	id newUnit = [LPGroupUnit alloc];
 	[newUnit initWithOwner:self
 					 atoms:[NSArray arrayWithObjects:
-						   		_random_unit(newUnit,0,10),
-								_random_unit(newUnit,0,9),nil]];
+						   		_random_unit(newUnit,0,10,YES),
+								_random_unit(newUnit,0,9,NO),nil]];
 
 	[self addUnit:AUTORELEASE(newUnit)];
 }
