@@ -1,6 +1,0 @@
-"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };
-"ShellController" = {
-    ACTIONS = {}; 
-    OUTLETS = {scrollView = id; shellWindow = id; textView = id; }; 
-    SUPERCLASS = NSObject; 
-};
