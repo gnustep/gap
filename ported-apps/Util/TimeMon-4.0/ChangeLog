@@ -1,3 +1,9 @@
+2005-01-25 09:01 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Percentages.m: Removed some of the extra errors and 
+	added one which makes sense for how it is reading the
+	/proc/stat file now.
+
 2005-01-25 00:03 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Percentages.m: Reformatted some code
