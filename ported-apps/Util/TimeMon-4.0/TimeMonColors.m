@@ -162,6 +162,11 @@ static const id titles[] = {
     return NSDragOperationNone;
 }
 
+- (unsigned int)draggingSourceOperationMaskForLocal: (BOOL)isLocal
+{
+  return NSDragOperationGeneric;
+}
+
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
     int row, col;
