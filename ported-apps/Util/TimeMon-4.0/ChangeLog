@@ -1,3 +1,9 @@
+2005-01-02 19:18 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Percentages.m: Removed func. decl.
+	* TimeMonWraps.h: added function decl.
+	* TimeMonWraps.m: added functions.
+
 2005-01-02 16:52 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* English.lproj/TimeMon.gorm: New icon in info panel.
