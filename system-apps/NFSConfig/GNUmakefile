@@ -30,7 +30,7 @@ GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
 
 GNUSTEP_MAKEFILES = $(GNUSTEP_SYSTEM_ROOT)/Makefiles
 
-NFSConfig_MAIN_MODEL_FILE = NFSConfig.gmodel
+NFSConfig_MAIN_MODEL_FILE = NFSConfig.gorm
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
@@ -38,13 +38,14 @@ include $(GNUSTEP_MAKEFILES)/common.make
 APP_NAME = NFSConfig
 
 # The Objective-C source files to be compiled
-NFSConfig_OBJC_FILES = NFSConfig_main.m
+NFSConfig_OBJC_FILES = NFSConfig_main.m \
+	NFSClientDelegate.m \
+	NFSServerDelegate.m \
+	NFSController.m
 
 # The Resource files to be copied into the app's resources directory
 NFSConfig_RESOURCE_FILES = \
-                   NFSConfig.tiff \
-                   English.lproj/NFSConfig.gmodel \
-                   English.lproj/InfoPanel.gmodel
+                   English.lproj/NFSConfig.gorm 
 
 
 -include GNUmakefile.preamble
