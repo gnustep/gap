@@ -46,8 +46,9 @@ GSTerminal_OBJC_FILES = \
 # The Resource files to be copied into the app's resources directory
 GSTerminal_RESOURCE_FILES = \
 	GSTerminal.tiff \
-	English.lproj/Command.gmodel     English.lproj/Preferences.gmodel\
-	English.lproj/GSTerminal.gmodel  English.lproj/Shell.gmodel\
+	English.lproj/Command.gmodel     English.lproj/Preferences.gmodel \
+	English.lproj/GSTerminal.gmodel  English.lproj/Shell.gorm \
+	English.lproj/Shell.classes \
 	English.lproj/Info.gmodel
 
 
