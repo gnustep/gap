@@ -34,13 +34,16 @@ APP_NAME = Installer
 Installer_OBJC_FILES = \
 	Installer_main.m \
 	PKGWindowController.m \
-	PKGDocumentController.m 
+	PKGDocumentController.m \
+	PKGDocument.m 
 
 # The Resource files to be copied into the app's resources directory
 Installer_RESOURCE_FILES = \
         English.lproj/Installer.gorm \
         English.lproj/PackageWindow.gorm \
 	Installer.app.tiff
+
+Installer_APPLICATION_ICON = Installer.app.tiff
 
 
 -include GNUmakefile.preamble

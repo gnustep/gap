@@ -1,12 +1,23 @@
 {
+    NSIcon = "Installer.app.tiff";
     ApplicationDescription = "An Installer for GNUstep";
     ApplicationIcon = "Installer.app.tiff";
     ApplicationName = Installer;
     ApplicationRelease = 0.1;
-    Authors = "Gregory John Casamento";
+    Author = ("Gregory John Casamento");
     Copyright = "Copyright (C) 2003 by Free Software Foundation";
     CopyrightDescription = "Released under GPL";
     FullVersionID = 0.1;
     NOTE = "Automatically generated!";
     URL = "";
+    NSTypes = (
+    {
+        NSName = "pkg";
+        NSHumanReadableName = "GNUstep Package";
+        NSUnixExtensions = ("pkg");
+        NSDOSExtensions = ("pkg");
+        NSRole = Editor;
+        NSDocumentClass = PKGDocument;
+    }
+    )
 }

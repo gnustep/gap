@@ -18,6 +18,12 @@
   id versionNumber;
   id view;
   id viewPulldown;
+  id logWindow;
+  id infoWindow;
+  id progressWindow;
+  id logView;
+  id infoView;
+  id progressView;
 }
 - (void) changeView: (id)sender;
 - (void) deletePackage: (id)sender;
