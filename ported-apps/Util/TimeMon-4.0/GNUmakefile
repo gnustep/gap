@@ -52,7 +52,8 @@ loadave.c
 TimeMon_RESOURCE_FILES = \
 English.lproj/TimeMon.gorm \
 icon.png \
-TimeMonP.png
+TimeMonP.png \
+README.rtf
 
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/application.make

@@ -1,3 +1,12 @@
+2005-01-23 22:47 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* English.lproj/TimeMon.gorm: Added readmeText outlet and 
+	connection.
+	* GNUmakefile: Added README.rtf as a resource.
+	* Percentages.h: Added readmeText outlet
+	* Percentages.m: Added awakeFromNib method.
+	* README.rtf: Updated with information about the GNUStep port
+
 2005-01-23 19:18 Gregory John Casamento <greg_casamento@yahoo.com>
                  On behalf of Alex Malmberg, suggested the following changes:
 	* Percentages.m: Change sizeof(long) to sizeof(CPUTime) after the

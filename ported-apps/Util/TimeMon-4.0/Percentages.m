@@ -64,6 +64,24 @@
   PSstroke();
 }
 
+- (void) awakeFromNib
+{
+  NSString *path = [[NSBundle mainBundle] pathForResource: @"README" 
+					  ofType: @"rtf"];
+  // load the readme if it exists.
+  if(path != nil)
+    {
+      NSData *data = [NSData dataWithContentsOfFile: path];
+      if(data != nil)
+	{
+	  NSDictionary *dict = nil;
+	  NSTextStorage *ts = [[NSTextStorage alloc] initWithRTF: data
+						     documentAttributes: &dict];
+	  [[(NSTextView *)readmeText layoutManager] replaceTextStorage: ts];
+	}
+    }		   
+}
+
 - (void)update
 {
     NSImageRep *r;
@@ -328,7 +346,7 @@
 {
   if( te) {
     NSImage *pausedStipple = [NSApp applicationIconImage];
-    NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
+    // NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
     [pauseMenuCell setTitle:@"Continue"];
     [te invalidate];
     te = nil;

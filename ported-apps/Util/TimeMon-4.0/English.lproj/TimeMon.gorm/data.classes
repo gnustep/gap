@@ -27,7 +27,8 @@
 	    lagText,
 	    factorText,
 	    pauseMenuCell,
-	    colorFields
+	    colorFields,
+	    readmeText
 	);
 	Super = NSObject;
     };
