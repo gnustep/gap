@@ -244,7 +244,6 @@ static const id titles[] = {
 	// stringValue should be one of "Idle", "Nice", "User", or
 	// "System".]
     [[color colorUsingColorSpaceName:NSCalibratedRGBColorSpace] getRed:&r green:&g blue:&b alpha:NULL];
-    setColor( (char *)[[self stringValue] cString], r, g, b);
 }
 @end
 

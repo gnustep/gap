@@ -3,7 +3,7 @@
     ApplicationIcon = "icon.png";
     ApplicationName = TimeMon;
     ApplicationRelease = 4.0;
-    Authors = "Scott Hess";
+    Authors = ("Scott Hess","Gregory Casamento","Alex Malmberg","Gurkan Sengun");
     Copyright = "Copyright (C) 1991-1197 by Scott Hess";
     CopyrightDescription = "All Rights Reserved";
     FullVersionID = 4.0;
