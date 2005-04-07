@@ -1,0 +1,18 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {appendTextToLog = id; showFtpLog = id; showPrefPanel = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                localView = NSTableView; 
+                logTextField = NSTextView; 
+                logWin = NSWindow; 
+                remoteView = NSTableView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
