@@ -35,10 +35,10 @@ static NSMapTable *_blackCacheMap;
 @end
 
 @interface StoneUI (Private)
-
+- (void) prepareImageCacheWithRadius:(float)radius;
+- (void) drawShadowWithRadius:(float)radius;
 - (void) drawWhiteWithRadius:(float)radius;
 - (void) drawBlackWithRadius:(float)radius;
-- (void) _prepareImageCacheWithRadius:(float)radius;
 @end
 
 #define RFACTOR 9.0
@@ -79,7 +79,7 @@ static NSMapTable *_blackCacheMap;
 	[super dealloc];
 }
 
-- (void) _prepareImageCacheWithRadius:(float)radius
+- (void) prepareImageCacheWithRadius:(float)radius
 {
 	NSNumber *v = [[NSNumber alloc] initWithFloat:radius];
 	NSImage *cache;
@@ -126,12 +126,13 @@ static NSMapTable *_blackCacheMap;
 
 
 - (void) drawWithRadius:(float)radius
+				atPoint:(NSPoint)p
 {
 	float f = (radius/RFACTOR)/SHIFT_FACTOR;
 
-	[self _prepareImageCacheWithRadius:radius];
+	[self prepareImageCacheWithRadius:radius];
 
-	[_cache compositeToPoint:NSMakePoint(-radius * CACHE_FACTOR/2 + position.x * f, -radius * CACHE_FACTOR/2 + position.y * f)
+	[_cache compositeToPoint:NSMakePoint(-radius * CACHE_FACTOR/2 + position.x * f + p.x, -radius * CACHE_FACTOR/2 + position.y * f + p.y)
 				   operation:NSCompositeSourceAtop];
 }
 

@@ -5,6 +5,9 @@
 {
 	Go *_go;
 	NSImage *_woodTile;
+
+	StoneUI *_stone;
+	NSPoint mousePoint;
 }
 
 - (id) initWithGo:(Go *)go;
