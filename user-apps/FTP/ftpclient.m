@@ -35,6 +35,36 @@
 
 @implementation ftpclient
 
+/* initializer */
+/* we set possibly unused stuff to NULL */
+- (id)init
+{
+    [super init];
+    controller = NULL;
+    return self;
+}
+
+- (id)initWithController:(id)cont
+{
+    [self init];
+    controller = cont;
+    return self;
+}
+
+/* if we have a valid controller, we suppose it respons to appendTextToLog */
+/* RM: is there a better way to append a newline? */
+- (void)logIt:(NSString *)str
+{
+    NSMutableString *tempStr;
+    
+    if (controller == NULL)
+        return;
+    tempStr = [NSMutableString stringWithCapacity:([str length] + 1)];
+    [tempStr appendString:str];
+    [tempStr appendString:@"\n"];
+    [controller appendTextToLog:tempStr];
+}
+
 /* read the reply of a command, be it single or multi-line */
 /* returned is the first numerical code                    */
 /* NOTE: the parser is NOT robust in handling errors */
@@ -103,7 +133,7 @@
                 if (ch == '\n')
                 {
                     buff[readBytes] = '\0';
-                    NSLog(@"%s", buff);
+                    [self logIt:[NSString stringWithCString:buff]]; 
                     readBytes = 0;
                     if (numCode == startNumCode)
                         state = END;
@@ -122,6 +152,7 @@
     int bytesToSend;
     
     bytesToSend = strlen(line);
+    [self logIt:[NSString stringWithCString:line length:(bytesToSend - 2)]];
     if ((sentBytes = send(controlSocket, line, strlen(line), 0)) < bytesToSend)
         NSLog(@"sent %d out of %d", sentBytes, bytesToSend);
     return sentBytes;
@@ -165,7 +196,7 @@
     addrLen = sizeof(localSockName);
     if (getsockname(controlSocket, (struct sockaddr *)&localSockName, &addrLen) < 0)
     {
-            perror("ftpclient: getsockname");
+        perror("ftpclient: getsockname");
     }
     
     controlInStream = fdopen(controlSocket, "r");
@@ -256,7 +287,6 @@
     readBytes = 0;
     while ((ch = getc(dataStream)) != EOF)
     {
-//        printf("%c", ch);
         if (ch == '\r')
             state = GOTR;
         else if (ch == '\n' && state == GOTR)
