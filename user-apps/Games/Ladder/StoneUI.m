@@ -1,45 +1,5 @@
 #include "StoneUI.h"
-static NSMapTable *_whiteCacheMap;
-static NSMapTable *_blackCacheMap;
-
-@interface StoneUICache : NSImage
-@end
-
-@implementation StoneUICache
-- (void) dealloc
-{
-	NSMapTable *table;
-	NSMapEnumerator * men;
-	NSNumber *radius = nil;
-	id image;
-	if (_color == WhiteStone)
-	{
-		table = _whiteCacheMap;
-	}
-	else
-	{
-		table = _blackCacheMap;
-	}
-	NSEnumerateMapTable(table);
-	while (NSNextMapEnumeratorPair(&men, (void **)&radius, (void **)&image))
-	{
-		if (image == self)
-		{
-			break;
-		}
-	}
-	NSMapRemove(table, radius);
-	NSLog(@"dealloc %@",self);
-	[super dealloc];
-}
-@end
-
-@interface StoneUI (Private)
-- (void) prepareImageCacheWithRadius:(float)radius;
-- (void) drawShadowWithRadius:(float)radius;
-- (void) drawWhiteWithRadius:(float)radius;
-- (void) drawBlackWithRadius:(float)radius;
-@end
+#include <math.h>
 
 #define RFACTOR 9.0
 #define CELLSIZE 1.0
@@ -48,95 +8,28 @@ static NSMapTable *_blackCacheMap;
 #define SHIFT_FACTOR 1.5
 
 
-@implementation StoneUI
+static NSMapTable *_whiteCacheMap;
+static NSMapTable *_blackCacheMap;
 
-+ (void) initialize
+static inline NSSize __image_size_for_radius(float radius)
 {
-	_whiteCacheMap = NSCreateMapTable(NSObjectMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, 20);
-	_blackCacheMap = NSCreateMapTable(NSObjectMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, 20);
-}
-
-
-- (NSPoint) position
-{
-	return position;
-}
-
-- (void) setPosition:(NSPoint)p
-{
-	position = p;
-}
-
-- (id) init
-{
-	[self setPosition:NSMakePoint((random()%20)/10.0 - 1.0,(random()%20)/10.0 - 1.0)];
-	return self;
-}
-
-- (void) dealloc
-{
-	RELEASE(_cache);
-	[super dealloc];
-}
-
-- (void) prepareImageCacheWithRadius:(float)radius
-{
-	NSNumber *v = [[NSNumber alloc] initWithFloat:radius];
-	NSImage *cache;
-	NSMapTable *table;
-	AUTORELEASE(v);
-
 	radius = roundf(radius); // just to reduce math problem in -art
-
-	if (_color == WhiteStone)
-	{
-		table = _whiteCacheMap;
-	}
-	else
-	{
-		table = _blackCacheMap;
-	}
-	cache = NSMapGet(table, v);
-
-	if (cache == nil)
-	{
-		/* generate cache */
-		cache = AUTORELEASE([[StoneUICache alloc] initWithSize:NSMakeSize(radius * CACHE_FACTOR, radius * CACHE_FACTOR)]);
-		[cache lockFocus];
-		PSgsave();
-		PStranslate(radius * CACHE_FACTOR / 2, radius * CACHE_FACTOR / 2);
-		PSscale(radius/RADIUS,radius/RADIUS);
-		[self drawShadowWithRadius:radius];
-		if (_color == WhiteStone)
-		{
-			[self drawWhiteWithRadius:radius];
-		}
-		else
-		{
-			[self drawBlackWithRadius:radius];
-		}
-		PSgrestore();
-		[cache unlockFocus];
-		NSMapInsert(table, v, cache);
-		NSLog(@"gen cache");
-	}
-
-	ASSIGN(_cache, cache);
+	return NSMakeSize(radius * CACHE_FACTOR, radius * CACHE_FACTOR);
 }
 
-
-- (void) drawWithRadius:(float)radius
-				atPoint:(NSPoint)p
+@interface StoneUICache : NSImage
 {
-	float f = (radius/RFACTOR)/SHIFT_FACTOR;
-
-	[self prepareImageCacheWithRadius:radius];
-
-	[_cache compositeToPoint:NSMakePoint(-radius * CACHE_FACTOR/2 + position.x * f + p.x, -radius * CACHE_FACTOR/2 + position.y * f + p.y)
-				   operation:NSCompositeSourceAtop];
+	StoneColor _stoneColor;
 }
++ (id) stoneImageWithRadius:(float)radius
+				 stoneColor:(StoneColor)color;
+- (id) initWithRadius:(float)radius
+		   stoneColor:(StoneColor)color;
+@end
 
-- (void) drawShadowWithRadius:(float)radius
+@implementation StoneUICache
+
+static void __draw_shadow_with_radius(float radius)
 {
 	PSnewpath();
 
@@ -166,11 +59,7 @@ static NSMapTable *_blackCacheMap;
 	PSgrestore();
 }
 
-@end
-
-@implementation StoneUI (Private)
-
-- (void) drawWhiteWithRadius:(float)radius
+static void __draw_white_with_radius(float radius)
 {
 	float bs = CELLSIZE;
 	float rd = RADIUS - RADIUS/RFACTOR;
@@ -209,7 +98,7 @@ static NSMapTable *_blackCacheMap;
 	PSfill();
 }
 
-- (void) drawBlackWithRadius:(float)radius
+static void __draw_black_with_radius(float radius)
 {
 	float bs = CELLSIZE;
 	float ct;
@@ -266,4 +155,145 @@ static NSMapTable *_blackCacheMap;
 	}
 	PSfill();
 }
+
++ (void) initialize
+{
+	_whiteCacheMap = NSCreateMapTable(NSObjectMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, 20);
+	_blackCacheMap = NSCreateMapTable(NSObjectMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, 20);
+}
+
++ (StoneUICache *) stoneImageWithRadius:(float)radius
+				 stoneColor:(StoneColor)color
+{
+	return AUTORELEASE([[self alloc] initWithRadius:radius
+										 stoneColor:color]);
+}
+
+- (id) initWithRadius:(float)radius
+		   stoneColor:(StoneColor)color
+{
+	NSNumber *v = [NSNumber numberWithFloat:radius];
+	NSMapTable *table;
+
+	StoneUICache *cache;
+
+	if (color == WhiteStone)
+	{
+		table = _whiteCacheMap;
+	}
+	else
+	{
+		table = _blackCacheMap;
+	}
+	cache = NSMapGet(table, v);
+
+	if (cache != nil)
+	{
+		_stoneColor = -1;
+		AUTORELEASE(self);
+		return RETAIN(cache);
+	}
+
+//	NSLog(@"generate %p cache for %@ with radius %g",self ,color == BlackStone?@"black":@"white", radius);
+
+	_stoneColor = color;
+	[self initWithSize:__image_size_for_radius(radius)];
+
+	/* generate cache */
+
+	[self lockFocus];
+	PSgsave();
+
+	PStranslate(radius * CACHE_FACTOR / 2, radius * CACHE_FACTOR / 2);
+	PSscale(radius/RADIUS,radius/RADIUS);
+	__draw_shadow_with_radius(radius);
+	if (color == WhiteStone)
+	{
+		__draw_white_with_radius(radius);
+	}
+	else
+	{
+		__draw_black_with_radius(radius);
+	}
+
+	PSgrestore();
+	[self unlockFocus];
+
+	NSMapInsert(table, v, self);
+
+	return self;
+}
+
+- (void) dealloc
+{
+	NSMapTable *table;
+	NSMapEnumerator men;
+	NSValue *vsize = nil;
+	id image;
+	if (_stoneColor == WhiteStone)
+	{
+		table = _whiteCacheMap;
+	}
+	else if (_stoneColor == BlackStone)
+	{
+		table = _blackCacheMap;
+	}
+	else
+	{
+		[super dealloc];
+		return;
+	}
+
+	men = NSEnumerateMapTable(table);
+	while (NSNextMapEnumeratorPair(&men, (void **)&vsize, (void **)&image))
+	{
+		if (image == self)
+		{
+			NSMapRemove(table, vsize);
+			break;
+		}
+	}
+	NSEndMapTableEnumeration(&men);
+	[super dealloc];
+}
 @end
+
+@implementation StoneUI
+
+- (NSPoint) position
+{
+	return position;
+}
+
+- (void) setPosition:(NSPoint)p
+{
+	position = p;
+}
+
+- (id) init
+{
+	[self setPosition:NSMakePoint((random()%20)/10.0 - 1.0,(random()%20)/10.0 - 1.0)];
+	return self;
+}
+
+- (void) dealloc
+{
+	RELEASE(_cache);
+	[super dealloc];
+}
+
+
+- (void) drawWithRadius:(float)radius
+				atPoint:(NSPoint)p
+{
+	float f = (radius/RFACTOR)/SHIFT_FACTOR;
+
+	ASSIGN(_cache, [StoneUICache stoneImageWithRadius:radius
+										   stoneColor:_color]);
+
+	[_cache compositeToPoint:NSMakePoint(-radius * CACHE_FACTOR/2 + position.x * f + p.x, -radius * CACHE_FACTOR/2 + position.y * f + p.y)
+				   operation:NSCompositeSourceAtop];
+}
+
+@end
+

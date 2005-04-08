@@ -20,6 +20,7 @@
  */
 
 #include <AppKit/AppKit.h>
+#include "Go.h"
 
 int main(int argc, char **argv)
 {

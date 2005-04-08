@@ -81,8 +81,11 @@
 {
 	int offset = (location.row - 1) * size + (location.column - 1);
 	ASSIGN(table[offset], stone);
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"GoChanged"
-														object:self];
+	/*
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"GoTurned"
+														object:self
+													  userInfo:dict];
+													  */
 }
 
 - (void) setStoneWithColor:(StoneColor) aColor

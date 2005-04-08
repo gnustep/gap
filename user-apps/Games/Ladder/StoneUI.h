@@ -8,8 +8,6 @@
 }
 - (void) drawWithRadius:(float)radius
 				atPoint:(NSPoint)p;
-- (void) xdrawWithRadius:(float)radius
-				atPoint:(NSPoint)p;
 - (NSPoint) position;
 - (void) setPosition:(NSPoint)p;
 @end
