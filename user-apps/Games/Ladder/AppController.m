@@ -7,7 +7,7 @@
 - (void) applicationWillFinishLaunching: (NSNotification*)aNotification
 {
 	id go = AUTORELEASE([Go new]);
-	[go setBoardSize:15];
+	[go setBoardSize:11];
 	[go setStoneClass:[StoneUI class]];
 
 	int size = [go boardSize];

@@ -1,29 +1,12 @@
 #include "Board.h"
 
 #define BORDER_SIZE 30
-@implementation Board
 
-- (id) initWithFrame:(NSRect)frame
-{
-	[super initWithFrame:frame];
+@interface Board (Private)
+- (void) _update;
+@end
 
-	[self setPostsFrameChangedNotifications:YES];
-	[[NSNotificationCenter defaultCenter]
-		addObserver:self
-		   selector:@selector(_update)
-			   name:NSViewFrameDidChangeNotification
-			 object:self];
-	[self _update];
-
-	return self;
-}
-
-- (id) initWithGo:(Go*)go
-{
-	[self initWithFrame:NSZeroRect];
-	return self;
-}
-
+@implementation Board (Private)
 - (void) _update
 {
 	/*
@@ -46,6 +29,31 @@
 
 	ASSIGN(_stone, stone);
 	*/
+}
+
+@end
+
+@implementation Board
+
+- (id) initWithFrame:(NSRect)frame
+{
+	[super initWithFrame:frame];
+
+	[self setPostsFrameChangedNotifications:YES];
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(_update)
+			   name:NSViewFrameDidChangeNotification
+			 object:self];
+	[self _update];
+
+	return self;
+}
+
+- (id) initWithGo:(Go*)go
+{
+	[self initWithFrame:NSZeroRect];
+	return self;
 }
 
 - (void) viewWillMoveToWindow: (NSWindow*)newWindow
