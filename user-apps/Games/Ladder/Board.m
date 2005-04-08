@@ -1,15 +1,65 @@
 #include "Board.h"
 
+#define BORDER_SIZE 30
 @implementation Board
+
+- (id) initWithFrame:(NSRect)frame
+{
+	[super initWithFrame:frame];
+
+	[self setPostsFrameChangedNotifications:YES];
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(_update)
+			   name:NSViewFrameDidChangeNotification
+			 object:self];
+	[self _update];
+
+	return self;
+}
+
 - (id) initWithGo:(Go*)go
 {
-	[self setGo:go];
+	[self initWithFrame:NSZeroRect];
 	return self;
+}
+
+- (void) _update
+{
+	/*
+	if (_go == nil)
+	{
+		return;
+	}
+
+	NSRect bounds = [self bounds];
+	float boardWidth;
+	float cellWidth;
+	int boardSize = [_go boardSize];
+	StoneUI *stone;
+
+	boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
+	boardSize = [_go boardSize];
+	cellWidth = boardWidth / boardSize;
+
+	stone = [StoneUI stoneWithColor:WhiteStone];
+
+	ASSIGN(_stone, stone);
+	*/
+}
+
+- (void) viewWillMoveToWindow: (NSWindow*)newWindow
+
+{
+	[super viewWillMoveToWindow:newWindow];
+	[newWindow setAcceptsMouseMovedEvents:YES];
 }
 
 - (void) setGo:(Go *)go
 {
 	ASSIGN(_go, go);
+
+	[self _update];
 	[self setNeedsDisplay:YES];
 }
 
@@ -18,7 +68,20 @@
 	ASSIGN(_woodTile, image);
 }
 
-#define BORDER_SIZE 30
+- (void) mouseMoved:(NSEvent *)event
+{
+	mousePoint = [self convertPoint:[event locationInWindow] fromView:nil];
+	[self setNeedsDisplay:YES];
+}
+
+- (void) mouseDown: (NSEvent*)theEvent
+{
+	[[self window] setAcceptsMouseMovedEvents:YES];
+}
+
+- (void) mouseEntered: (NSEvent*)theEvent
+{
+}
 
 - (void) drawRect:(NSRect)r
 {
@@ -116,12 +179,17 @@
 		StoneUI *stone = [_go stoneAtLocation:MakeGoLocation(i,j)];
 		if (stone != nil)
 		{
-			PSgsave();
-			PStranslate(NSMinX(boardRect) + (j * cellWidth) - (cellWidth * 0.5), NSMinY(boardRect) + (i * cellWidth) - (cellWidth * 0.5));
-			[stone drawWithRadius:(cellWidth/2)];// * (random()%10) / 10.0];
-			PSgrestore();
+			NSPoint p = NSMakePoint(NSMinX(boardRect) + (j * cellWidth) - (cellWidth * 0.5),NSMinY(boardRect) + (i * cellWidth) - (cellWidth * 0.5));
+			[stone drawWithRadius:cellWidth/2
+						  atPoint:p];
 		}
 	}
+
+	PSmoveto(mousePoint.x + cellWidth/2, mousePoint.y);
+	[[NSColor blackColor] set];
+	PSsetalpha(0.2);
+	PSarc(mousePoint.x, mousePoint.y, cellWidth/2, 0, 360);
+	PSfill();
 
 }
 @end
