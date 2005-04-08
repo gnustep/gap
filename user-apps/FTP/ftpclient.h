@@ -32,6 +32,7 @@
 
 @interface ftpclient : NSObject
 {
+    id  controller;
     int userDataPort;
     int serverDataPort;
     int dataSocket;
@@ -41,6 +42,11 @@
     struct sockaddr_in  localSockName;
     struct sockaddr_in  dataSockName;
 }
+
+- (id)init;
+- (id)initWithController:(id)cont;
+
+- (void)logIt:(NSString *)str;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
