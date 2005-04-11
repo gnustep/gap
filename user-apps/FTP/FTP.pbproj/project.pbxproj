@@ -17,6 +17,8 @@
 				F5F5F93807FD8CAD01A80101,
 				F5F5F93907FD8CAD01A80101,
 				F5F5F93A07FD8CAD01A80101,
+				F56A03FB080AC70701A80101,
+				F56A03FD080AC71101A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -270,6 +272,7 @@
 			files = (
 				F5F5F93B07FD8CAD01A80101,
 				F5F5F93D07FD8CAD01A80101,
+				F56A03FE080AC71101A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +292,7 @@
 				29B9732CFDCFA39411CA2CEA,
 				F5F5F93C07FD8CAD01A80101,
 				F5F5F93E07FD8CAD01A80101,
+				F56A03FC080AC70701A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +352,28 @@
 //F52
 //F53
 //F54
+		F56A03FB080AC70701A80101 = {
+			isa = PBXFileReference;
+			path = localclient.m;
+			refType = 4;
+		};
+		F56A03FC080AC70701A80101 = {
+			fileRef = F56A03FB080AC70701A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F56A03FD080AC71101A80101 = {
+			isa = PBXFileReference;
+			path = localclient.h;
+			refType = 4;
+		};
+		F56A03FE080AC71101A80101 = {
+			fileRef = F56A03FD080AC71101A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		F5F5F93707FD8CAD01A80101 = {
 			isa = PBXFileReference;
 			path = AppController.h;
