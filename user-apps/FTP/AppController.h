@@ -27,6 +27,7 @@
 
 #import <AppKit/AppKit.h>
 #import "ftpclient.h"
+#import "localclient.h"
 
 @interface AppController : NSObject
 {
@@ -41,9 +42,10 @@
     IBOutlet NSTextField  *connPort;
     IBOutlet NSTextField  *connUser;
     IBOutlet NSTextField  *connPass;
-    IBOutlet NSButton     *connnAnon;
+    IBOutlet NSButton     *connAnon;
     
     ftpclient *ftp;
+    localclient *local;
 }
 
 + (void)initialize;

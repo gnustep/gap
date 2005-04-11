@@ -64,7 +64,18 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
 {
+    NSArray *dirList;
+    NSEnumerator *enumerator;
+    NSString *str;
+
     /* startup code */
+    local = [[localclient alloc] init];
+    dirList = [local getDirList:"/"];
+    enumerator = [dirList objectEnumerator];
+    while (str = [enumerator nextObject])
+    {
+        NSLog(@"%@", str);
+    }
 }
 
 - (BOOL)applicationShouldTerminate:(id)sender
