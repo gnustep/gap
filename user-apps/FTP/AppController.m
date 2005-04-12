@@ -76,6 +76,13 @@
     {
         NSLog(@"%@", str);
     }
+    
+    // we create a data source and set the tableviews
+    localTableData = [[fileTable alloc] init];
+    [localTableData initData:dirList];
+    [localView setDataSource:localTableData];
+    
+    remoteTableData = [[fileTable alloc] init];
 }
 
 - (BOOL)applicationShouldTerminate:(id)sender
@@ -130,6 +137,7 @@
 
 - (IBAction)connectConn:(id)sender
 {
+    NSArray *dirList;
     char tempStr[1024];
     char tempStr2[1024];
     
@@ -142,9 +150,11 @@
     [[connPass stringValue] getCString:tempStr2];
     [ftp authenticate:tempStr :tempStr2];
     NSLog(@"before dirlist");
-    [ftp getDirList:"/"];
+    dirList = [ftp getDirList:"/"];
     NSLog(@"after dirlist");
     [ftp disconnect];
+    [remoteTableData initData:dirList];
+    [remoteView setDataSource:remoteTableData];
 }
 
 - (IBAction)cancelConn:(id)sender
