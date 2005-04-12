@@ -28,6 +28,7 @@
 #import <AppKit/AppKit.h>
 #import "ftpclient.h"
 #import "localclient.h"
+#import "fileTable.h"
 
 @interface AppController : NSObject
 {
@@ -44,6 +45,8 @@
     IBOutlet NSTextField  *connPass;
     IBOutlet NSButton     *connAnon;
     
+    fileTable *localTableData;
+    fileTable *remoteTableData;
     ftpclient *ftp;
     localclient *local;
 }
