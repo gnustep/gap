@@ -1,0 +1,39 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "appendTextToLog:",
+	    "showFtpLog:",
+	    "cancelConn:",
+	    "connectConn:",
+	    "anonymousConn:",
+	    "showConnPanel:"
+	);
+	Outlets = (
+	    localView,
+	    logWin,
+	    logTextField,
+	    remoteView,
+	    connAddress,
+	    connPass,
+	    connPort,
+	    connUser,
+	    connectPanel
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "appendTextToLog:",
+	    "cancelConn:",
+	    "connectConn:",
+	    "anonymousConn:",
+	    "orderFrontFontPanel:",
+	    "showConnPanel:",
+	    "showFtpLog:",
+	    "showPrefPanel:"
+	);
+	Super = NSObject;
+    };
+}
