@@ -10,6 +10,4 @@
     NSMainNibFile = FTP.gorm;
     NSPrincipalClass = NSApplication;
     NSRole = Application;
-    NSTypes = (
-    );
 }
