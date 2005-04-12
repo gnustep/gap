@@ -5,7 +5,8 @@
     CLASS_FILES = (
 	AppController.m,
 	ftpclient.m,
-	localclient.m
+	localclient.m,
+	fileTable.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -17,7 +18,8 @@
     HEADER_FILES = (
 	AppController.h,
 	ftpclient.h,
-	localclient.h
+	localclient.h,
+	fileTable.h
     );
     IMAGES = (
     );
@@ -26,7 +28,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-04-13 00:25:18 +0200";
+    LAST_EDITING = "2005-04-12 07:23:44 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
