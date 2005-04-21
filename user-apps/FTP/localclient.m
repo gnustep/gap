@@ -23,6 +23,7 @@
 */
 
 #import "localclient.h"
+#import "fileElement.h"
 
 @implementation localclient
 
@@ -51,5 +52,41 @@
     }
     return [NSArray arrayWithArray:listArr];
 }
+
+/* RM : fixme put in a better max path limit */
+- (NSArray *)getExtDirList:(char *)path
+{
+    struct dirent   *dp;
+    DIR             *dfd;
+    NSMutableArray  *listArr;
+    fileElement     *aFile;
+    struct stat     fileStats;
+    char            filePath[4096];
+	
+
+    /* create an array with a reasonable starting size */
+    listArr = [NSMutableArray arrayWithCapacity:5];
+
+    if ((dfd = opendir(path)) == NULL)
+    {
+        fprintf(stderr, "Can't open dir: %s\n", path);
+        return NULL;
+    }
+
+    /* read the directory entries */
+    while ((dp = readdir(dfd)) != NULL)
+    {
+        if (strcmp(dp->d_name, "."))
+        {
+            strcpy(filePath, path);
+            strcat(filePath, dp->d_name);
+            stat(filePath, &fileStats);
+            aFile = [[fileElement alloc] initWithFileStats:dp->d_name :fileStats];
+            [listArr addObject:aFile];
+        }
+    }
+    return [NSArray arrayWithArray:listArr];
+}
+
 
 @end

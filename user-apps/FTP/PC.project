@@ -6,7 +6,8 @@
 	AppController.m,
 	ftpclient.m,
 	localclient.m,
-	fileTable.m
+	fileTable.m,
+	fileElement.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -19,7 +20,8 @@
 	AppController.h,
 	ftpclient.h,
 	localclient.h,
-	fileTable.h
+	fileTable.h,
+	fileElement.h
     );
     IMAGES = (
     );
@@ -28,7 +30,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-04-12 07:23:44 +0200";
+    LAST_EDITING = "2005-04-20 05:37:54 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -46,7 +48,9 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "83 87 635 465 0 0  736 600 ";
+	ProjectBuild = "33 116 480 322 0 0  960 768 ";
+	ProjectLaunch = "221 7 480 322 0 0  960 768 ";
+	ProjectWindow = "97 183 710 539 0 0  960 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;

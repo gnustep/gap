@@ -25,6 +25,7 @@
 */
 
 #import "AppController.h"
+#import "fileElement.h"
 
 @implementation AppController
 
@@ -66,20 +67,21 @@
 {
     NSArray *dirList;
     NSEnumerator *enumerator;
-    NSString *str;
+    fileElement *fEl;
 
     /* startup code */
     local = [[localclient alloc] init];
-    dirList = [local getDirList:"/"];
+    dirList = [local getExtDirList:"/"];
     enumerator = [dirList objectEnumerator];
-    while (str = [enumerator nextObject])
+    while (fEl = [enumerator nextObject])
     {
-        NSLog(@"%@", str);
+        NSLog(@"%@, %d %d", [fEl filename], [fEl isDir], [fEl size]);
     }
     
     // we create a data source and set the tableviews
     localTableData = [[fileTable alloc] init];
     [localTableData initData:dirList];
+NSLog(@"table data inited");
     [localView setDataSource:localTableData];
     
     remoteTableData = [[fileTable alloc] init];

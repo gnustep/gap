@@ -54,6 +54,7 @@
 - (int)initDataConn;
 
 - (NSArray *)getDirList:(char *)path;
+- (NSArray *)getExtDirList:(char *)path;
 
 @end
 
