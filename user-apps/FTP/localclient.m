@@ -1,11 +1,13 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005 Free Software Foundation
+   Copyright (C) 2005 Riccardo Mottola
 
-   Author: Riccardo,,,
+   Author: Riccardo Mottola
 
-   Created: 2005-04-09 18:01:07 +0200 by multix
+   Created: 2005-04-09
+
+   Local filesystem class
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
