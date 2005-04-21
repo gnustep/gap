@@ -34,6 +34,8 @@
 {
     IBOutlet NSTableView  *localView;
     IBOutlet NSTableView  *remoteView;
+    IBOutlet NSPopUpButton *localPath;
+    IBOutlet NSPopUpButton *remotePath;
     
     IBOutlet NSWindow     *logWin;
     IBOutlet NSTextView   *logTextField;

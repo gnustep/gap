@@ -13,14 +13,16 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 connAddress = NSTextField; 
+                connAnon = NSButton; 
                 connPass = NSTextField; 
                 connPort = NSTextField; 
                 connUser = NSTextField; 
                 connectPanel = NSPanel; 
-                connnAnon = NSButton; 
+                localPath = NSPopUpButton; 
                 localView = NSTableView; 
                 logTextField = NSTextView; 
                 logWin = NSWindow; 
+                remotePath = NSPopUpButton; 
                 remoteView = NSTableView; 
             }; 
             SUPERCLASS = NSObject; 

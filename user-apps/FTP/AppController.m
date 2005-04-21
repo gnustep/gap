@@ -147,7 +147,10 @@ NSLog(@"table data inited");
     ftp = [[ftpclient alloc] initWithController:self];
     [[connAddress stringValue] getCString:tempStr];
     [ftp connect:[connPort intValue] :tempStr];
-    [[connUser stringValue] getCString:tempStr];
+    if ([connAnon state] == NSOnState)
+        strcpy(tempStr, "anonymous");
+    else
+        [[connUser stringValue] getCString:tempStr];
     [[connPass stringValue] getCString:tempStr2];
     [ftp authenticate:tempStr :tempStr2];
     NSLog(@"before dirlist");
