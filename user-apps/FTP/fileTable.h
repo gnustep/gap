@@ -10,9 +10,9 @@
 
 
 @interface fileTable : NSObject {
-    NSArray        *fileNames;
+    NSArray        *fileStructs;
 }
 
-- (void)initData:(NSArray *)names;
+- (void)initData:(NSArray *)fnames;
 
 @end
