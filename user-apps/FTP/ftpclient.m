@@ -313,6 +313,7 @@
     return [NSArray arrayWithArray:listArr];
 }
 
+/* RM: skipping total here is a bit of a hack. fixme */
 - (NSArray *)getExtDirList:(char *)path
 {
     int                ch;
@@ -355,11 +356,18 @@
             state = GOTR;
         else if (ch == '\n' && state == GOTR)
         {
+            
             buff[readBytes] = '\0';
             fprintf(stderr, "%s\n", buff);
             state = READ; /* reset the state for a new line */
             readBytes = 0;
-            aFile = [[fileElement alloc] initWithLsLine:buff];
+            if (strstr(buff, "total") == buff)
+                fprintf(stderr, "skipped");
+            else
+            {
+                aFile = [[fileElement alloc] initWithLsLine:buff];
+                [listArr addObject:aFile];
+            }
         } else
             buff[readBytes++] = ch;
     }

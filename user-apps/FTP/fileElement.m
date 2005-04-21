@@ -42,14 +42,97 @@
     char *curr;
 
     [super init];
-    
+
+    NSLog (@"fEl: |%s|", line);
     curr = line;
-    sep = strchr(curr, '\t');
+    sep = strchr(curr, ' ');
     if (sep)
     {
-        self->filename = [[NSString stringWithCString:curr length:(sep-curr)] retain];
+        if (*sep == 'd')
+            self->isDir = YES;
+        else
+            self->isDir = NO;
+    } else
+        return self;
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        // 
+    } else
+        return self;
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        // user name
+    } else
+        return self;
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        // group
+    } else
+        return self;
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        NSString *tempStr;
+        tempStr = [NSString stringWithCString:curr length:(sep-curr)];
+        self->size = [tempStr intValue];
+        NSLog(@"size: %ld", [self size]);
     }
-    NSLog (@"%s", line);
+    curr = sep;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        //month
+    }
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        //day
+    }
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        //hour
+    }
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+    sep = strchr(curr, ' ');
+    if (sep)
+    {
+        NSString *tempStr;
+        tempStr = [NSString stringWithCString:curr length:(sep-curr)];
+        self->year = [tempStr intValue];
+        NSLog(@"year: %d", [self year]);
+    }
+    curr = sep;
+    while (*curr == ' ')
+        curr++;
+
+    self->filename = [[NSString stringWithCString:curr] retain];
+    NSLog(@"file name: %@", [self filename]);
+
+    
     return self;
 }
 
