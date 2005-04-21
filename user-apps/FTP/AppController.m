@@ -145,14 +145,13 @@ NSLog(@"table data inited");
     
     [connectPanel performClose:nil];
     ftp = [[ftpclient alloc] initWithController:self];
-    NSLog(@"Finished launching");
     [[connAddress stringValue] getCString:tempStr];
     [ftp connect:[connPort intValue] :tempStr];
     [[connUser stringValue] getCString:tempStr];
     [[connPass stringValue] getCString:tempStr2];
     [ftp authenticate:tempStr :tempStr2];
     NSLog(@"before dirlist");
-    dirList = [ftp getDirList:"/"];
+    dirList = [ftp getExtDirList:"/"];
     NSLog(@"after dirlist");
     [ftp disconnect];
     [remoteTableData initData:dirList];
