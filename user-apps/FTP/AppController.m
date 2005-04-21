@@ -1,11 +1,11 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005 Free Software Foundation
+   Copyright (C) 2005 Riccardo Mottola
 
-   Author: 
+   Author: Riccardo Mottola
 
-   Created: 2005-03-30 09:43:03 +0200 by multix
+   Created: 2005-03-30
    
    Application Controller
 
