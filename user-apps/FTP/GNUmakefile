@@ -29,7 +29,8 @@ AppController.h \
 ftpclient.h \
 localclient.h \
 fileTable.h \
-fileElement.h
+fileElement.h \
+client.h
 
 #
 # Class files
@@ -39,7 +40,8 @@ AppController.m \
 ftpclient.m \
 localclient.m \
 fileTable.m \
-fileElement.m
+fileElement.m \
+client.m
 
 #
 # C files

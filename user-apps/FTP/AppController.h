@@ -65,6 +65,8 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotif;
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName;
 
+- (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray;
+
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)showFtpLog:(id)sender;
 - (void)appendTextToLog:(NSString *)textChunk;

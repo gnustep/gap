@@ -7,7 +7,8 @@
 	ftpclient.m,
 	localclient.m,
 	fileTable.m,
-	fileElement.m
+	fileElement.m,
+	client.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -21,7 +22,8 @@
 	ftpclient.h,
 	localclient.h,
 	fileTable.h,
-	fileElement.h
+	fileElement.h,
+	client.h
     );
     IMAGES = (
     );
@@ -30,7 +32,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-04-20 05:37:54 +0200";
+    LAST_EDITING = "2005-04-21 01:09:50 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -49,17 +51,18 @@
     );
     PC_WINDOWS = {
 	ProjectBuild = "33 116 480 322 0 0  960 768 ";
-	ProjectLaunch = "221 7 480 322 0 0  960 768 ";
-	ProjectWindow = "97 183 710 539 0 0  960 768 ";
+	ProjectLaunch = "349 82 480 322 0 0  960 768 ";
+	ProjectWindow = "130 118 710 539 0 0  960 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
+	"Riccardo Mottola <rmottola@users.sf.net>"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 200x";
-    PROJECT_COPYRIGHT_DESC = "Released under ...";
+    PROJECT_COPYRIGHT = "Copyright (C) 2005";
+    PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
-    PROJECT_DESCRIPTION = "No description avaliable!";
+    PROJECT_DESCRIPTION = "FTP client";
     PROJECT_DOCUMENTEXTENSIONS = (
     );
     PROJECT_DOCUMENTTYPES = (
@@ -70,7 +73,7 @@
     PROJECT_RELEASE = 0.1;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
-    PROJECT_URL = "";
+    PROJECT_URL = "http://savannah.nongnu/project/gap/";
     SEARCH_HEADER_DIRS = (
     );
     SEARCH_LIB_DIRS = (

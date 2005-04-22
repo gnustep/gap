@@ -19,7 +19,9 @@
 	    connPass,
 	    connPort,
 	    connUser,
-	    connectPanel
+	    connectPanel,
+	    localPath,
+	    remotePath
 	);
 	Super = NSObject;
     };
