@@ -71,7 +71,8 @@
 
     /* startup code */
     local = [[localclient alloc] init];
-    dirList = [local getExtDirList:"/"];
+    [local setWorkingDir:@"/home/multix"];
+    dirList = [local getExtDirList];
     enumerator = [dirList objectEnumerator];
     while (fEl = [enumerator nextObject])
     {
@@ -85,6 +86,10 @@ NSLog(@"table data inited");
     [localView setDataSource:localTableData];
     
     remoteTableData = [[fileTable alloc] init];
+
+    //we update the path menu
+    [self updatePath :localPath :[local workDirSplit]];
+// #### and a release of this array ?!?
 }
 
 - (BOOL)applicationShouldTerminate:(id)sender
@@ -99,6 +104,13 @@ NSLog(@"table data inited");
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName
 {
     return NO;
+}
+
+/* update the pop-up menu with a new path */
+- (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray
+{
+    [path removeAllItems];
+    [path addItemsWithTitles:pathArray];
 }
 
 - (IBAction)showPrefPanel:(id)sender
@@ -153,12 +165,16 @@ NSLog(@"table data inited");
         [[connUser stringValue] getCString:tempStr];
     [[connPass stringValue] getCString:tempStr2];
     [ftp authenticate:tempStr :tempStr2];
+    [ftp setWorkingDirWithCString:"/"];
     NSLog(@"before dirlist");
-    dirList = [ftp getExtDirList:"/"];
+    dirList = [ftp getExtDirList];
     NSLog(@"after dirlist");
     [ftp disconnect];
     [remoteTableData initData:dirList];
     [remoteView setDataSource:remoteTableData];
+
+    //we update the path menu
+    [self updatePath :remotePath :[ftp workDirSplit]];
 }
 
 - (IBAction)cancelConn:(id)sender

@@ -70,6 +70,7 @@
     [controller appendTextToLog:tempStr];
 }
 
+
 /* read the reply of a command, be it single or multi-line */
 /* returned is the first numerical code                    */
 /* NOTE: the parser is NOT robust in handling errors */
@@ -255,7 +256,9 @@
     return 0;
 }
 
-- (NSArray *)getDirList:(char *)path
+
+/* RM again: a better path limit is needed */
+- (NSArray *)getDirList
 {
     int                ch;
     FILE               *dataStream;
@@ -267,6 +270,9 @@
     enum               states_m1 { READ, GOTR };
     enum               states_m1 state;
     NSMutableArray     *listArr;
+    char path[4096];
+
+    [self->workingDir getCString:path];
     
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];
@@ -317,7 +323,8 @@
 }
 
 /* RM: skipping total here is a bit of a hack. fixme */
-- (NSArray *)getExtDirList:(char *)path
+/* RM again: a better path limit is needed */
+- (NSArray *)getExtDirList
 {
     int                ch;
     FILE               *dataStream;
@@ -330,6 +337,9 @@
     enum               states_m1 state;
     NSMutableArray     *listArr;
     fileElement        *aFile;
+    char path[4096];
+
+    [self->workingDir getCString:path];
     
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];

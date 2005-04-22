@@ -26,15 +26,12 @@
 
 
 #import <Foundation/Foundation.h>
-#include <dirent.h>
+#import "client.h"
 
-@interface localclient : NSObject
+@interface localclient : client
 {
 
 }
-
-- (NSArray *)getDirList:(char *)path;
-- (NSArray *)getExtDirList:(char *)path;
 
 @end
 

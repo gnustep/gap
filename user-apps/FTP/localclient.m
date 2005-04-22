@@ -24,16 +24,22 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#include <dirent.h>
+
 #import "localclient.h"
 #import "fileElement.h"
 
 @implementation localclient
 
-- (NSArray *)getDirList:(char *)path
+/* RM again: a better path limit is needed */
+- (NSArray *)getDirList
 {
     struct dirent *dp;
     DIR *dfd;
     NSMutableArray     *listArr;
+    char path[4096];
+
+    [self->workingDir getCString:path];
 
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];
@@ -56,7 +62,8 @@
 }
 
 /* RM : fixme put in a better max path limit */
-- (NSArray *)getExtDirList:(char *)path
+/* path could be malloced form the correct strlen? */
+- (NSArray *)getExtDirList
 {
     struct dirent   *dp;
     DIR             *dfd;
@@ -64,7 +71,9 @@
     fileElement     *aFile;
     struct stat     fileStats;
     char            filePath[4096];
+    char            path[4096];
 	
+    [self->workingDir getCString:path];
 
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];

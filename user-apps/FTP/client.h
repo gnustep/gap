@@ -1,13 +1,13 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Riccardo Mottola
+ Copyright (C) 2005 Free Software Foundation
 
  Author: Riccardo Mottola
 
- Created: 2005-03-30
+ Created: 2005-04-21
 
- FTP client class
+ Generic client class, to be subclassed.
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -22,41 +22,21 @@
  You should have received a copy of the GNU Lesser General Public
  License along with this library; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
- */
+#include <Foundation/Foundation.h>
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-
-#include <stdio.h>
-
-#import <Foundation/Foundation.h>
-#import "client.h"
-
-@interface ftpclient : client
+@interface client : NSObject
 {
-    id  controller;
-    int userDataPort;
-    int serverDataPort;
-    int dataSocket;
-    int controlSocket;
-    FILE *controlInStream;
-    struct sockaddr_in  remoteSockName;
-    struct sockaddr_in  localSockName;
-    struct sockaddr_in  dataSockName;
+    NSString *workingDir;
 }
 
-- (id)init;
-- (id)initWithController:(id)cont;
-
-- (void)logIt:(NSString *)str;
-
-- (int)connect:(int)port :(char *)server;
-- (void)disconnect;
-- (int)authenticate:(char *)user :(char *)pass;
-- (int)initDataConn;
-
+- (NSString *)workingDir;
+- (void)setWorkingDirWithCString:(char *)dir;
+- (void)setWorkingDir:(NSString *)dir;
+- (NSArray *)workDirSplit;
+- (NSArray *)getDirList;
+- (NSArray *)getExtDirList;
 
 @end
 
