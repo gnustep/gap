@@ -32,8 +32,6 @@
 
 - (void)initData:(NSArray *)fnames
 {
-    int i;
-    
     fileStructs = [[NSArray arrayWithArray:fnames] retain];
     
     NSLog(@"names count: %d", [fileStructs count]);

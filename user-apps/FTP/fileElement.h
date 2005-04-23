@@ -30,25 +30,16 @@
 
 
 @interface fileElement : NSObject {
-    NSString *filename;
-    BOOL isDir;
-    long int size;
-    int year;
-    int month;
-    int day;
-    int hour;
-    int min;
+    NSString          *filename;
+    BOOL              isDir;
+    unsigned long long size;
+    NSDate             *modifDate;
 }
 
 - (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs;
 - (id)initWithLsLine :(char *)line;
 - (NSString *)filename;
 - (BOOL)isDir;
-- (long int) size;
-- (int) year;
-- (int) month;
-- (int) day;
-- (int) hour;
-- (int) min;
+- (unsigned long long)size;
 
 @end
