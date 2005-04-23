@@ -240,7 +240,11 @@
     dataSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
     {
-        perror("ftpclient: setsockopt (reuse address)");
+        perror("ftpclient: setsockopt (reuse address) on data");
+    }
+    if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+    {
+        perror("ftpclient: setsockopt (reuse address) on control");
     }
     if (bind(dataSocket, (struct sockaddr *)&dataSockName, sizeof (dataSockName)) < 0)
     {
