@@ -82,7 +82,6 @@
     // we create a data source and set the tableviews
     localTableData = [[fileTable alloc] init];
     [localTableData initData:dirList];
-NSLog(@"table data inited");
     [localView setDataSource:localTableData];
     
     remoteTableData = [[fileTable alloc] init];

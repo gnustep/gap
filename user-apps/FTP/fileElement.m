@@ -31,14 +31,20 @@
 
 - (void)dealloc
 {
-    [self->filename release];
+    [filename release];
     [super dealloc];
 }
 
 - (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs
 {
     [super init];
-    
+
+    size = [attribs fileSize];
+    modifDate = [[attribs objectForKey:NSFileModificationDate] retain];
+    if ([attribs fileType] == NSFileTypeDirectory)
+        isDir = YES;
+    else
+        isDir = NO;
     filename = [fname retain];
     return self;
 }
@@ -130,7 +136,7 @@
     {
         NSString *tempStr;
         tempStr = [NSString stringWithCString:curr length:(sep-curr)];
-        year = [tempStr intValue];
+//        year = [tempStr intValue];
 //        NSLog(@"year: %d", [self year]);
     }
     curr = sep;
@@ -154,34 +160,10 @@
     return isDir;
 }
 
-- (long int)size
+- (unsigned long long)size
 {
     return size;
 }
 
-- (int) year
-{
-    return year;
-}
-
-- (int) month
-{
-    return month;
-}
-
-- (int) day
-{
-    return day;
-}
-
-- (int)hour
-{
-    return hour;
-}
-
-- (int)min
-{
-    return min;
-}
 
 @end
