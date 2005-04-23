@@ -160,10 +160,14 @@ NSLog(@"table data inited");
     [[connAddress stringValue] getCString:tempStr];
     [ftp connect:[connPort intValue] :tempStr];
     if ([connAnon state] == NSOnState)
+    {
         strcpy(tempStr, "anonymous");
-    else
+        strcpy(tempStr2, "user@myhost.com");
+    } else
+    {
         [[connUser stringValue] getCString:tempStr];
-    [[connPass stringValue] getCString:tempStr2];
+        [[connPass stringValue] getCString:tempStr2];
+    }
     [ftp authenticate:tempStr :tempStr2];
     [ftp setWorkingDirWithCString:"/"];
     NSLog(@"before dirlist");
