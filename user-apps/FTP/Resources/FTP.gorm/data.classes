@@ -21,7 +21,8 @@
 	    connUser,
 	    connectPanel,
 	    localPath,
-	    remotePath
+	    remotePath,
+	    connAnon
 	);
 	Super = NSObject;
     };
