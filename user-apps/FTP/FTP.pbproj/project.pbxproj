@@ -23,6 +23,8 @@
 				F5BE3AF7080C6A3601A80101,
 				F5C84D6008142DF201A80101,
 				F5C84D6108142DF201A80101,
+				F5EFB6470818FE6E01A80101,
+				F5EFB6450818FE6001A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -279,6 +281,7 @@
 				F56A03FE080AC71101A80101,
 				F5BE3AF8080C6A3601A80101,
 				F5C84D6208142DF201A80101,
+				F5EFB6480818FE6E01A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +304,7 @@
 				F56A03FC080AC70701A80101,
 				F5BE3AF9080C6A3601A80101,
 				F5C84D6308142DF201A80101,
+				F5EFB6460818FE6001A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +426,28 @@
 		};
 		F5C84D6308142DF201A80101 = {
 			fileRef = F5C84D6108142DF201A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5EFB6450818FE6001A80101 = {
+			isa = PBXFileReference;
+			path = client.m;
+			refType = 4;
+		};
+		F5EFB6460818FE6001A80101 = {
+			fileRef = F5EFB6450818FE6001A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5EFB6470818FE6E01A80101 = {
+			isa = PBXFileReference;
+			path = client.h;
+			refType = 4;
+		};
+		F5EFB6480818FE6E01A80101 = {
+			fileRef = F5EFB6470818FE6E01A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};
