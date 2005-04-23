@@ -24,46 +24,35 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#include <sys/types.h>
 #include <dirent.h>
+#include <stdlib.h>
 
 #import "localclient.h"
 #import "fileElement.h"
 
 @implementation localclient
 
-/* RM again: a better path limit is needed */
-- (NSArray *)getDirList
+- (id)init
 {
-    struct dirent *dp;
-    DIR *dfd;
-    NSMutableArray     *listArr;
-    char path[4096];
-
-    [self->workingDir getCString:path];
-
-    /* create an array with a reasonable starting size */
-    listArr = [NSMutableArray arrayWithCapacity:5];
-
-    if ((dfd = opendir(path)) == NULL)
-    {
-        fprintf(stderr, "Can't open dir: %s\n", path);
-        return NULL;
-    }
-
-    /* read the directory entries */
-    while ((dp = readdir(dfd)) != NULL)
-    {
-        if (strcmp(dp->d_name, "."))
-        {
-            [listArr addObject:[NSString stringWithCString:dp->d_name]];
-        }
-    }
-    return [NSArray arrayWithArray:listArr];
+    if (!(self = [super init]))
+        return nil;
+    homeDir = [NSHomeDirectory() retain];
+    return self;
 }
+
+/* RM fixme: when do we release workingDir ? */
+- (void)dealloc
+{
+    [homeDir release];
+    [super dealloc];
+}
+
 
 /* RM : fixme put in a better max path limit */
 /* path could be malloced form the correct strlen? */
-- (NSArray *)getExtDirList
+/* all this should be rewritten using NSFileManager */
+- (NSArray *)dirContents
 {
     struct dirent   *dp;
     DIR             *dfd;
@@ -99,5 +88,9 @@
     return [NSArray arrayWithArray:listArr];
 }
 
+- (NSString *)homeDir
+{
+    return homeDir;
+}
 
 @end

@@ -58,14 +58,10 @@
     return [purgedList retain];
 }
 
-- (NSArray *)getDirList
-{
-    NSLog(@"override me! getDirList superclass method");
-}
-
-- (NSArray *)getExtDirList
+- (NSArray *)dirContents
 {
     NSLog(@"override me! getExtDirList superclass method");
+    return nil;
 }
 
 @end

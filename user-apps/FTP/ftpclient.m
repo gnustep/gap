@@ -257,74 +257,9 @@
 }
 
 
-/* RM again: a better path limit is needed */
-- (NSArray *)getDirList
-{
-    int                ch;
-    FILE               *dataStream;
-    int                localSocket;
-    struct sockaddr_in from;
-    int                fromLen;
-    char               buff[MAX_DATA_BUFF];
-    int                readBytes;
-    enum               states_m1 { READ, GOTR };
-    enum               states_m1 state;
-    NSMutableArray     *listArr;
-    char path[4096];
-
-    [self->workingDir getCString:path];
-    
-    /* create an array with a reasonable starting size */
-    listArr = [NSMutableArray arrayWithCapacity:5];
-    
-    [self initDataConn];
-    [self writeLine:"NLST\r\n"];
-    [self readReply];
-    
-    if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
-    {
-        perror("accepting socket, dir list: ");
-    }
-    dataStream = fdopen(localSocket, "r");
-    if (dataStream == NULL)
-    {
-        perror("data stream opening failed");
-        return NULL;
-    }
-    NSLog(@"data stream open");
-    
-    /* read the directory listing, each line being CR-LF terminated */
-    state = READ;
-    readBytes = 0;
-    while ((ch = getc(dataStream)) != EOF)
-    {
-        if (ch == '\r')
-            state = GOTR;
-        else if (ch == '\n' && state == GOTR)
-        {
-            buff[readBytes] = '\0';
-            printf("%s\n", buff);
-            state = READ; /* reset the state for a new line */
-            readBytes = 0;
-            [listArr addObject:[NSString stringWithCString:buff]];
-        } else
-            buff[readBytes++] = ch;
-    }
-    if (ferror(dataStream))
-    {
-        perror("error in reading data stream: ");
-    } else if (feof(dataStream))
-    {
-         fprintf(stderr, "feof\n");
-    }
-    fclose (dataStream);
-    printf("\n datasockread end\n");
-    return [NSArray arrayWithArray:listArr];
-}
-
 /* RM: skipping total here is a bit of a hack. fixme */
 /* RM again: a better path limit is needed */
-- (NSArray *)getExtDirList
+- (NSArray *)dirContents
 {
     int                ch;
     FILE               *dataStream;

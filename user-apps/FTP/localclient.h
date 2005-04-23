@@ -30,8 +30,10 @@
 
 @interface localclient : client
 {
-
+    @private NSString *homeDir;
 }
+
+- (NSString *)homeDir;
 
 @end
 

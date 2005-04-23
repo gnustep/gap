@@ -35,8 +35,7 @@
 - (void)setWorkingDirWithCString:(char *)dir;
 - (void)setWorkingDir:(NSString *)dir;
 - (NSArray *)workDirSplit;
-- (NSArray *)getDirList;
-- (NSArray *)getExtDirList;
+- (NSArray *)dirContents;
 
 @end
 

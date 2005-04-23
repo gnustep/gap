@@ -71,8 +71,8 @@
 
     /* startup code */
     local = [[localclient alloc] init];
-    [local setWorkingDir:@"/home/multix"];
-    dirList = [local getExtDirList];
+    [local setWorkingDir:[local homeDir]];
+    dirList = [local dirContents];
     enumerator = [dirList objectEnumerator];
     while (fEl = [enumerator nextObject])
     {
@@ -167,7 +167,7 @@ NSLog(@"table data inited");
     [ftp authenticate:tempStr :tempStr2];
     [ftp setWorkingDirWithCString:"/"];
     NSLog(@"before dirlist");
-    dirList = [ftp getExtDirList];
+    dirList = [ftp dirContents];
     NSLog(@"after dirlist");
     [ftp disconnect];
     [remoteTableData initData:dirList];
