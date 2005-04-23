@@ -35,24 +35,14 @@
     [super dealloc];
 }
 
-- (id)initWithFileStats :(char *)fname :(struct stat)fSt
+- (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs
 {
     [super init];
     
-    self->filename = [[NSString stringWithCString:fname] retain];
-    
-    if ((fSt.st_mode & S_IFMT) == S_IFDIR)
-    {    
-        self->isDir = YES;
-        self->size = 0;
-    } else
-    {
-        self->isDir = NO;
-        self->size = fSt.st_size;
-    }
-    
+    filename = [fname retain];
     return self;
 }
+
 
 - (id)initWithLsLine :(char *)line
 {
@@ -61,15 +51,15 @@
 
     [super init];
 
-    NSLog (@"fEl: |%s|", line);
+//    NSLog (@"fEl: |%s|", line);
     curr = line;
     sep = strchr(curr, ' ');
     if (sep)
     {
         if (*sep == 'd')
-            self->isDir = YES;
+            isDir = YES;
         else
-            self->isDir = NO;
+            isDir = NO;
     } else
         return self;
     curr = sep;
@@ -107,8 +97,8 @@
     {
         NSString *tempStr;
         tempStr = [NSString stringWithCString:curr length:(sep-curr)];
-        self->size = [tempStr intValue];
-        NSLog(@"size: %ld", [self size]);
+        size = [tempStr intValue];
+//        NSLog(@"size: %ld", [self size]);
     }
     curr = sep;
     sep = strchr(curr, ' ');
@@ -140,16 +130,15 @@
     {
         NSString *tempStr;
         tempStr = [NSString stringWithCString:curr length:(sep-curr)];
-        self->year = [tempStr intValue];
-        NSLog(@"year: %d", [self year]);
+        year = [tempStr intValue];
+//        NSLog(@"year: %d", [self year]);
     }
     curr = sep;
     while (*curr == ' ')
         curr++;
 
-    self->filename = [[NSString stringWithCString:curr] retain];
-    NSLog(@"file name: %@", [self filename]);
-
+    filename = [[NSString stringWithCString:curr] retain];
+//    NSLog(@"file name: %@", [self filename]);
     
     return self;
 }
@@ -162,37 +151,37 @@
 
 - (BOOL)isDir
 {
-    return self->isDir;
+    return isDir;
 }
 
 - (long int)size
 {
-    return self->size;
+    return size;
 }
 
 - (int) year
 {
-    return self->year;
+    return year;
 }
 
 - (int) month
 {
-    return self->month;
+    return month;
 }
 
 - (int) day
 {
-    return self->day;
+    return day;
 }
 
 - (int)hour
 {
-    return self->hour;
+    return hour;
 }
 
 - (int)min
 {
-    return self->min;
+    return min;
 }
 
 @end

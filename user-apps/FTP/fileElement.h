@@ -24,9 +24,6 @@
  Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
  */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
        
 #import <Foundation/Foundation.h>
 
@@ -43,7 +40,7 @@
     int min;
 }
 
-- (id)initWithFileStats :(char *)fname :(struct stat)fSt;
+- (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs;
 - (id)initWithLsLine :(char *)line;
 - (NSString *)filename;
 - (BOOL)isDir;
