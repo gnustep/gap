@@ -80,9 +80,5 @@
     return [NSArray arrayWithArray:listArr];
 }
 
-- (NSString *)homeDir
-{
-    return homeDir;
-}
 
 @end

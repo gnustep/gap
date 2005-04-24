@@ -64,4 +64,9 @@
     return nil;
 }
 
+- (NSString *)homeDir
+{
+    return homeDir;
+}
+
 @end

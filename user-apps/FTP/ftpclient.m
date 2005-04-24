@@ -44,14 +44,16 @@
 /* we set possibly unused stuff to NULL */
 - (id)init
 {
-    [super init];
+    if (!(self =[super init]))
+        return nil;
     controller = NULL;
     return self;
 }
 
 - (id)initWithController:(id)cont
 {
-    [self init];
+    if (!(self =[super init]))
+        return nil;
     controller = cont;
     return self;
 }
@@ -74,7 +76,7 @@
 /* read the reply of a command, be it single or multi-line */
 /* returned is the first numerical code                    */
 /* NOTE: the parser is NOT robust in handling errors */
-- (int)readReply
+- (int)readReply :(NSMutableArray **)result
 {
     char  buff[MAX_CONTROL_BUFF];
     int   readBytes;
@@ -87,10 +89,14 @@
     char  separator;
     enum  states { N1, N2, N3, SEPARATOR, CHARS, GOTR, END };
     enum  states state;
+    BOOL  multiline;
 
     readBytes = 0;
     state = N1;
     separator = 0;
+    multiline = NO;
+    *result = [NSMutableArray arrayWithCapacity:1];
+
 
     while (!(state == END))
     {
@@ -101,7 +107,10 @@
                 buff[readBytes] = ch;
                 numCodeStr[readBytes] = ch;
                 readBytes++;
-                state = N2;
+                if (ch == ' ') /* skip internal lines of multi-line */
+                    state = CHARS;
+                else
+                    state = N2;
                 break;
             case N2:
                 buff[readBytes] = ch;
@@ -120,11 +129,7 @@
                 numCodeStr[readBytes] = '\0';
                 readBytes++;
                 numCode = atoi(numCodeStr);
-                if (separator == 0);
-                {
-                    separator = ch;
-                    startNumCode = numCode;
-                }
+                separator = ch;
                 state = CHARS;
                 break;
             case CHARS:
@@ -139,16 +144,30 @@
                 if (ch == '\n')
                 {
                     buff[readBytes] = '\0';
-                    [self logIt:[NSString stringWithCString:buff]]; 
+                    [self logIt:[NSString stringWithCString:buff]];
+                    [*result addObject:[NSString stringWithCString:buff]];
                     readBytes = 0;
-                    if (numCode == startNumCode)
-                        state = END;
+                    if (separator == ' ')
+                    {
+                        if (multiline)
+                        {
+                            if (numCode == startNumCode)
+                                state = END;
+                        } else
+                            state = END;
+                    } else
+                    {
+                        startNumCode = numCode;
+                        multiline = YES;
+                        state = N1;
+                    }
                 }
                 break;
             default:
                 NSLog(@"Duh, a case default in the readReply parser");
         }
     }
+    [*result retain];
     return startNumCode;
 }
 
@@ -171,6 +190,7 @@
     struct hostent      *hostentPtr;
     char                *tempStr;
     int                 addrLen; /* socklen_t on some systems? */
+    NSMutableArray      *reply;
 
     NSLog(@"connect to %s : %d", server, port);
 
@@ -184,7 +204,6 @@
     remoteSockName.sin_port = htons(port);
 
     tempStr = inet_ntoa(remoteSockName.sin_addr);
-    NSLog(@"%s", tempStr);
 
     if ((controlSocket = socket(PF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -206,26 +225,45 @@
     }
     
     controlInStream = fdopen(controlSocket, "r");
-    [self readReply];
+    [self readReply :&reply];
+    [reply release];
     return 0;
 }
 
 - (void)disconnect
 {
+    NSMutableArray *reply;
+    
     [self writeLine:"QUIT\r\n"];
-    [self readReply];
+    [self readReply:&reply];
 }
 
 - (int)authenticate:(char *)user :(char *)pass
 {
     char    tempStr[MAX_CONTROL_BUFF];
+    NSMutableArray *reply;
 
     sprintf(tempStr, "USER %s\r\n", user);
     [self writeLine:tempStr];
-    [self readReply];
+    [self readReply:&reply];
+    NSLog(@"user reply is: %@", [reply objectAtIndex:0]);
+    [reply release];
+    
     sprintf(tempStr, "PASS %s\r\n", pass);
     [self writeLine:tempStr];
-    [self readReply];
+    [self readReply:&reply];
+    NSLog(@"pass reply is: %@", [reply objectAtIndex:0]);
+    [reply release];
+
+    /* get home directory as dir we first connected to */
+    [self writeLine:"PWD\r\n"];
+    [self readReply:&reply];
+    if ([reply count] >= 1)
+    {
+        NSString *line;
+        line = [reply objectAtIndex:0];
+        NSLog(@"pwd reply is: %@", line);
+    }
     return 0;
 }
 
@@ -276,7 +314,8 @@
     enum               states_m1 state;
     NSMutableArray     *listArr;
     fileElement        *aFile;
-    char path[4096];
+    char               path[4096];
+    NSMutableArray     *reply;
 
     [self->workingDir getCString:path];
     
@@ -285,7 +324,7 @@
     
     [self initDataConn];
     [self writeLine:"LIST\r\n"];
-    [self readReply];
+    [self readReply:&reply];
     
     if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
     {
@@ -331,7 +370,7 @@
          fprintf(stderr, "feof\n");
     }
     fclose (dataStream);
-    NSLog(@"\n datasockread end\n");
+    [self readReply:&reply];
     return [NSArray arrayWithArray:listArr];
 }
 
