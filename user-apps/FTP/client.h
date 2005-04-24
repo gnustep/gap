@@ -29,6 +29,7 @@
 @interface client : NSObject
 {
     NSString *workingDir;
+    NSString *homeDir;
 }
 
 - (NSString *)workingDir;
@@ -36,6 +37,7 @@
 - (void)setWorkingDir:(NSString *)dir;
 - (NSArray *)workDirSplit;
 - (NSArray *)dirContents;
+- (NSString *)homeDir;
 
 @end
 
