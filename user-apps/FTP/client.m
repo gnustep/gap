@@ -52,19 +52,19 @@
 
 - (NSArray *)workDirSplit
 {
-    NSMutableArray *purgedList;
+    NSMutableArray *reversedList;
     NSArray        *list;
     NSEnumerator   *en;
     NSString       *currElement;
-    
-    purgedList = [NSMutableArray arrayWithCapacity:3];
-    list = [workingDir componentsSeparatedByString:@"/"];
+
+    list = [workingDir pathComponents];
+
+
+    reversedList = [NSMutableArray arrayWithCapacity:[list count]];
     en = [list reverseObjectEnumerator];
     while (currElement = [en nextObject])
-        if ([currElement length])
-            [purgedList addObject:currElement];
-    [purgedList addObject:@"/"];
-    return [purgedList retain];
+            [reversedList addObject:currElement];
+    return [reversedList retain];
 }
 
 - (NSArray *)dirContents
