@@ -74,10 +74,10 @@
     [local setWorkingDir:[local homeDir]];
     dirList = [local dirContents];
     enumerator = [dirList objectEnumerator];
-    while (fEl = [enumerator nextObject])
-    {
-        NSLog(@"%@, %d %d", [fEl filename], [fEl isDir], [fEl size]);
-    }
+//    while (fEl = [enumerator nextObject])
+//    {
+//        NSLog(@"%@, %d %d", [fEl filename], [fEl isDir], [fEl size]);
+//    }
     
     // we create a data source and set the tableviews
     localTableData = [[fileTable alloc] init];
@@ -168,10 +168,8 @@
         [[connPass stringValue] getCString:tempStr2];
     }
     [ftp authenticate:tempStr :tempStr2];
-    [ftp setWorkingDirWithCString:"/"];
-    NSLog(@"before dirlist");
+    [ftp setWorkingDir:[ftp homeDir]];
     dirList = [ftp dirContents];
-    NSLog(@"after dirlist");
     [ftp disconnect];
     [remoteTableData initData:dirList];
     [remoteView setDataSource:remoteTableData];

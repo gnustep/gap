@@ -28,6 +28,15 @@
 
 @implementation client
 
+- (void)dealloc
+{
+    if (homeDir)
+        [homeDir release];
+    if (workingDir)
+        [workingDir release];
+    [super dealloc];
+}
+
 - (NSString *)workingDir
 {
     return [[NSString stringWithString:workingDir] retain];
