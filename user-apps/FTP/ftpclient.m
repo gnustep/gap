@@ -261,8 +261,29 @@
     if ([reply count] >= 1)
     {
         NSString *line;
+        unsigned int length;
+        unsigned int first;
+        unsigned int last;
+        unsigned int i;
+        
         line = [reply objectAtIndex:0];
         NSLog(@"pwd reply is: %@", line);
+        length = [line length];
+        i = 0;
+        while (i < length && ([line characterAtIndex:i] != '\"'))
+            i++;
+        first = i;
+        if (first < length)
+        {
+            first++;
+            i = length-1;
+            while (i > 0 &&  ([line characterAtIndex:i] != '\"'))
+                i--;
+            last = i;
+            homeDir = [[line substringWithRange: NSMakeRange(first, last-first)] retain];
+            NSLog(@"homedir: %@", homeDir);
+        } else
+            homeDir = nil;
     }
     return 0;
 }

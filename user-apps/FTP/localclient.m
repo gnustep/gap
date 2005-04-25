@@ -39,13 +39,6 @@
     return self;
 }
 
-/* RM fixme: when do we release workingDir ? */
-- (void)dealloc
-{
-    [homeDir release];
-    [super dealloc];
-}
-
 
 /* RM : fixme put in a better max path limit */
 /* path could be malloced form the correct strlen? */
