@@ -32,7 +32,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-04-22 11:04:04 +0200";
+    LAST_EDITING = "2005-04-22 11:24:27 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -50,9 +50,9 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBuild = "33 116 480 322 0 0  960 768 ";
-	ProjectLaunch = "349 82 480 322 0 0  960 768 ";
-	ProjectWindow = "130 118 710 539 0 0  960 768 ";
+	ProjectBuild = "40 177 480 322 0 0  1216 1024 ";
+	ProjectLaunch = "497 114 480 322 0 0  1216 1024 ";
+	ProjectWindow = "142 386 710 539 0 0  1216 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;

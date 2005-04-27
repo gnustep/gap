@@ -8,7 +8,8 @@
 	    "cancelConn:",
 	    "connectConn:",
 	    "anonymousConn:",
-	    "showConnPanel:"
+	    "showConnPanel:",
+	    "changePathFromMenu:"
 	);
 	Outlets = (
 	    localView,
@@ -28,10 +29,11 @@
     };
     FirstResponder = {
 	Actions = (
+	    "anonymousConn:",
 	    "appendTextToLog:",
 	    "cancelConn:",
 	    "connectConn:",
-	    "anonymousConn:",
+	    "changePathFromMenu:",
 	    "orderFrontFontPanel:",
 	    "showConnPanel:",
 	    "showFtpLog:",
