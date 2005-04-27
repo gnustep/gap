@@ -67,6 +67,8 @@
 
 - (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray;
 
+- (IBAction)changePathFromMenu:(id)sender;
+
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)showFtpLog:(id)sender;
 - (void)appendTextToLog:(NSString *)textChunk;

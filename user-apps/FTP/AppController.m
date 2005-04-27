@@ -67,7 +67,7 @@
 {
     NSArray *dirList;
     NSEnumerator *enumerator;
-    fileElement *fEl;
+//    fileElement *fEl;
 
     /* startup code */
     local = [[localclient alloc] init];
@@ -110,6 +110,27 @@
 {
     [path removeAllItems];
     [path addItemsWithTitles:pathArray];
+}
+
+- (IBAction)changePathFromMenu:(id)sender
+{
+    client   *theClient;
+    NSString *thePath;
+    NSArray  *items;
+    int      selectedIndex;
+    int      i;
+
+    NSLog(@"%@", [sender class]);
+    if (sender == localPath)
+        theClient = local;
+    else
+        theClient = ftp;
+    thePath = [NSString string];
+    selectedIndex = [sender indexOfItem:[sender selectedItem]];
+    items = [sender itemTitles];
+    for (i = [items count] - 1; i >= selectedIndex; i--)
+        thePath = [thePath stringByAppendingPathComponent: [items objectAtIndex:i]];
+    NSLog(@"selected path: %@", thePath);
 }
 
 - (IBAction)showPrefPanel:(id)sender
