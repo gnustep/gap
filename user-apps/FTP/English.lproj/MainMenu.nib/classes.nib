@@ -4,6 +4,7 @@
             ACTIONS = {
                 anonymousConn = id; 
                 cancelConn = id; 
+                changePathFromMenu = id; 
                 connectConn = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 
