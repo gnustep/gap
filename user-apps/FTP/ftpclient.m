@@ -196,8 +196,8 @@
 
     if((hostentPtr = gethostbyname(server)) == NULL)
     {
-        NSLog(@"Could not resolve %c", server);
-        return -1;
+        NSLog(@"Could not resolve %s", server);
+        return ERR_COULDNT_RESOLVE;
     }
     bcopy((char *)hostentPtr->h_addr, (char *)&remoteSockName.sin_addr, hostentPtr->h_length);
     remoteSockName.sin_family = PF_INET;
@@ -208,12 +208,12 @@
     if ((controlSocket = socket(PF_INET, SOCK_STREAM, 0)) < 0)
     {
         perror("socket failed: ");
-        return -1;
+        return ERR_SOCKET_FAIL;
     }
     if (connect(controlSocket, (struct sockaddr*) &remoteSockName, sizeof(remoteSockName)) < 0)
     {
         perror("connect failed: ");
-        return -1;
+        return ERR_CONNECT_FAIL;
     }
 
     /* we retrieve now the local name of the created socked */
@@ -222,6 +222,7 @@
     if (getsockname(controlSocket, (struct sockaddr *)&localSockName, &addrLen) < 0)
     {
         perror("ftpclient: getsockname");
+        return ERR_GESOCKNAME_FAIL;
     }
     
     controlInStream = fdopen(controlSocket, "r");

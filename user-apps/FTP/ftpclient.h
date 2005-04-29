@@ -34,6 +34,11 @@
 #import <Foundation/Foundation.h>
 #import "client.h"
 
+#define ERR_COULDNT_RESOLVE -1
+#define ERR_SOCKET_FAIL -2
+#define ERR_CONNECT_FAIL -3
+#define ERR_GESOCKNAME_FAIL -4
+
 @interface ftpclient : client
 {
     id  controller;

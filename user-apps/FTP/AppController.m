@@ -188,13 +188,17 @@
 - (IBAction)connectConn:(id)sender
 {
     NSArray *dirList;
-    char tempStr[1024];
-    char tempStr2[1024];
+    char    tempStr[1024];
+    char    tempStr2[1024];
     
     [connectPanel performClose:nil];
     ftp = [[ftpclient alloc] initWithController:self];
     [[connAddress stringValue] getCString:tempStr];
-    [ftp connect:[connPort intValue] :tempStr];
+    if ([ftp connect:[connPort intValue] :tempStr] < 0)
+    {
+        NSLog(@"connection failed in connectConn");
+        return;
+    }
     if ([connAnon state] == NSOnState)
     {
         strcpy(tempStr, "anonymous");
