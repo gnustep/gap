@@ -38,7 +38,6 @@
 - (NSArray *)workDirSplit;
 - (NSArray *)dirContents;
 - (NSString *)homeDir;
-
 @end
 
 

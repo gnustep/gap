@@ -34,20 +34,31 @@
         [homeDir release];
     if (workingDir)
         [workingDir release];
+    if (workingDir)
+        [workingDir release];
     [super dealloc];
 }
 
 - (NSString *)workingDir
 {
-    return [[NSString stringWithString:workingDir] retain];
+    return workingDir;
 }
+
+- (NSString *)homeDir
+{
+    return homeDir;
+}
+
 - (void)setWorkingDirWithCString:(char *)dir
 {
     [self setWorkingDir:[NSString stringWithCString:dir]];
 }
+
 - (void)setWorkingDir:(NSString *)dir
 {
-    self->workingDir = [NSString stringWithString:dir];
+    if (workingDir)
+        [workingDir release];
+    workingDir = [[NSString stringWithString:dir] retain];
 }
 
 - (NSArray *)workDirSplit
@@ -73,9 +84,5 @@
     return nil;
 }
 
-- (NSString *)homeDir
-{
-    return homeDir;
-}
 
 @end
