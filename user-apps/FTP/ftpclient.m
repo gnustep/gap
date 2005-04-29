@@ -24,6 +24,10 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  */
+ 
+#import "ftpclient.h"
+#import "AppController.h"
+#import "fileElement.h"
 
 #include <arpa/inet.h>  /* for inet_ntoa and similar */
 #include <netdb.h>
@@ -31,9 +35,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#import "ftpclient.h"
-#import "AppController.h"
-#import "fileElement.h"
 
 #define MAX_CONTROL_BUFF 2048
 #define MAX_DATA_BUFF 2048
