@@ -66,14 +66,14 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
 {
     NSArray *dirList;
-    NSEnumerator *enumerator;
+//    NSEnumerator *enumerator;
 //    fileElement *fEl;
 
     /* startup code */
     local = [[localclient alloc] init];
     [local setWorkingDir:[local homeDir]];
     dirList = [local dirContents];
-    enumerator = [dirList objectEnumerator];
+//    enumerator = [dirList objectEnumerator];
 //    while (fEl = [enumerator nextObject])
 //    {
 //        NSLog(@"%@, %d %d", [fEl filename], [fEl isDir], [fEl size]);
@@ -115,22 +115,38 @@
 - (IBAction)changePathFromMenu:(id)sender
 {
     client   *theClient;
+    NSTableView *theView;
+    fileTable *theTable;
     NSString *thePath;
     NSArray  *items;
     int      selectedIndex;
     int      i;
+    NSArray *dirList;
 
     NSLog(@"%@", [sender class]);
     if (sender == localPath)
+    {
         theClient = local;
-    else
+        theView = localView;
+        theTable = localTableData;
+    } else
+    {
         theClient = ftp;
+        theView = remoteView;
+        theTable = remoteTableData;
+    }
     thePath = [NSString string];
     selectedIndex = [sender indexOfItem:[sender selectedItem]];
     items = [sender itemTitles];
     for (i = [items count] - 1; i >= selectedIndex; i--)
         thePath = [thePath stringByAppendingPathComponent: [items objectAtIndex:i]];
     NSLog(@"selected path: %@", thePath);
+    [theClient setWorkingDir:thePath];
+    dirList = [local dirContents];
+    [theTable initData:dirList];
+    [theView reloadData];
+    
+    [self updatePath :sender :[theClient workDirSplit]];
 }
 
 - (IBAction)showPrefPanel:(id)sender
