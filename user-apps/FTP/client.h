@@ -36,6 +36,7 @@
 - (NSString *)workingDir;
 - (void)setWorkingDirWithCString:(char *)dir;
 - (void)setWorkingDir:(NSString *)dir;
+- (void)changeWorkingDir:(NSString *)dir;
 - (NSArray *)workDirSplit;
 - (NSArray *)dirContents;
 - (NSString *)homeDir;

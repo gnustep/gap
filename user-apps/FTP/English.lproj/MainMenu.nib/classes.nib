@@ -6,6 +6,7 @@
                 cancelConn = id; 
                 changePathFromMenu = id; 
                 connectConn = id; 
+                disconnect = id; 
                 listDoubleClick = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 

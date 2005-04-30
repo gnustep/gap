@@ -57,6 +57,10 @@
 
 - (void)logIt:(NSString *)str;
 
+- (int)readReply :(NSMutableArray **)result
+    ;
+- (int)writeLine:(char *)line;
+
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
 - (int)authenticate:(char *)user :(char *)pass;

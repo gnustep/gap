@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 
 #define MAX_CONTROL_BUFF 2048
@@ -57,6 +58,23 @@
         return nil;
     controller = cont;
     return self;
+}
+
+/* RM, fxme: should check for 200 result code */
+- (void)changeWorkingDir:(NSString *)dir
+{
+    char            tempStr[MAX_CONTROL_BUFF];
+    char            tempStr2[MAX_CONTROL_BUFF];
+    NSMutableArray *reply;
+
+    [dir getCString:tempStr2];
+    sprintf(tempStr, "CWD %s\r\n", tempStr2);
+    [self writeLine:tempStr];
+    if ([self readReply:&reply] == 250)
+    {
+        NSLog(@"successful cwd");
+        [super changeWorkingDir:dir];
+    }
 }
 
 /* if we have a valid controller, we suppose it respons to appendTextToLog */
@@ -155,7 +173,10 @@
                             if (numCode == startNumCode)
                                 state = END;
                         } else
+                        {
+                            startNumCode = numCode;
                             state = END;
+                        }
                     } else
                     {
                         startNumCode = numCode;
@@ -172,7 +193,7 @@
     return startNumCode;
 }
 
-- (int) writeLine:(char *)line
+- (int)writeLine:(char *)line
 {
     int sentBytes;
     int bytesToSend;
@@ -321,6 +342,11 @@
     return 0;
 }
 
+- (int)closeDataConn
+{
+    close (dataSocket);
+    return 0;
+}
 
 /* RM: skipping total here is a bit of a hack. fixme */
 /* RM again: a better path limit is needed */
@@ -340,7 +366,7 @@
     char               path[4096];
     NSMutableArray     *reply;
 
-    [self->workingDir getCString:path];
+    [workingDir getCString:path];
     
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];
@@ -393,6 +419,7 @@
          fprintf(stderr, "feof\n");
     }
     fclose (dataStream);
+    [self closeDataConn];
     [self readReply:&reply];
     return [NSArray arrayWithArray:listArr];
 }
