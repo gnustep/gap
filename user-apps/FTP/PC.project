@@ -32,7 +32,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-05-27 15:47:08 +0200";
+    LAST_EDITING = "2005-05-29 00:24:14 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
