@@ -150,8 +150,9 @@
     for (i = [items count] - 1; i >= selectedIndex; i--)
         thePath = [thePath stringByAppendingPathComponent: [items objectAtIndex:i]];
     NSLog(@"selected path: %@", thePath);
-    [theClient setWorkingDir:thePath];
-    dirList = [local dirContents];
+    [theClient changeWorkingDir:thePath];
+    if ((dirList = [theClient dirContents]) == nil)
+        return;
     [theTable initData:dirList];
     [theView reloadData];
     
@@ -199,8 +200,9 @@
     if ([fileEl isDir])
     {
         NSLog(@"should cd to %@", thePath);
-        [theClient setWorkingDir:thePath];
-        dirList = [local dirContents];
+        [theClient changeWorkingDir:thePath];
+        if ((dirList = [theClient dirContents]) == nil)
+            return;
         [theTable initData:dirList];
         [theView reloadData];
         [self updatePath :thePathMenu :[theClient workDirSplit]];
@@ -213,6 +215,10 @@
     }
 }
 
+- (IBAction)disconnect:(id)sender
+{
+    [ftp disconnect];
+}
 
 - (IBAction)showPrefPanel:(id)sender
 {
@@ -275,8 +281,8 @@
     }
     [ftp authenticate:tempStr :tempStr2];
     [ftp setWorkingDir:[ftp homeDir]];
-    dirList = [ftp dirContents];
-    [ftp disconnect];
+    if ((dirList = [ftp dirContents]) == nil)
+        return;
     [remoteTableData initData:dirList];
     [remoteView setDataSource:remoteTableData];
 

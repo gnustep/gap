@@ -32,14 +32,15 @@
 
 - (void)initData:(NSArray *)fnames
 {
+    if (fileStructs)
+        [fileStructs release];
     fileStructs = [[NSArray arrayWithArray:fnames] retain];
-    
-    NSLog(@"names count: %d", [fileStructs count]);
 }
 
 - (void)dealloc
 {
-    [fileStructs release];
+    if (fileStructs)
+        [fileStructs release];
     [super dealloc];
 }
 

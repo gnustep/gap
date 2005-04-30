@@ -61,6 +61,11 @@
     workingDir = [[NSString stringWithString:dir] retain];
 }
 
+- (void)changeWorkingDir:(NSString *)dir
+{
+    [self setWorkingDir:dir];
+}
+
 - (NSArray *)workDirSplit
 {
     NSMutableArray *reversedList;

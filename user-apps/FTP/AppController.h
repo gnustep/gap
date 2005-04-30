@@ -70,6 +70,8 @@
 - (IBAction)changePathFromMenu:(id)sender;
 - (void)listDoubleClick:(id)sender;
 
+- (IBAction)disconnect:(id)sender;
+
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)showFtpLog:(id)sender;
 - (void)appendTextToLog:(NSString *)textChunk;
