@@ -26,6 +26,7 @@
 
 
 #import <AppKit/AppKit.h>
+#import "fileElement.h"
 
 
 @interface fileTable : NSObject {
@@ -33,5 +34,6 @@
 }
 
 - (void)initData:(NSArray *)fnames;
+- (fileElement *)elementAtIndex:(unsigned)index;
 
 @end

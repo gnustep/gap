@@ -43,6 +43,11 @@
     [super dealloc];
 }
 
+- (fileElement *)elementAtIndex:(unsigned)index
+{
+    return [fileStructs objectAtIndex:index];
+}
+
 /* methods implemented to follow the informal NSTableView protocol */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {

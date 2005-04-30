@@ -69,6 +69,12 @@
 //    NSEnumerator *enumerator;
 //    fileElement *fEl;
 
+    /* set double actions for tables */
+    [localView setTarget:self];
+    [localView setDoubleAction:@selector(listDoubleClick:)];
+    [remoteView setTarget:self];
+    [remoteView setDoubleAction:@selector(listDoubleClick:)];
+    
     /* startup code */
     local = [[localclient alloc] init];
     [local setWorkingDir:[local homeDir]];
@@ -79,14 +85,14 @@
 //        NSLog(@"%@, %d %d", [fEl filename], [fEl isDir], [fEl size]);
 //    }
     
-    // we create a data source and set the tableviews
+    /* we create a data source and set the tableviews */
     localTableData = [[fileTable alloc] init];
     [localTableData initData:dirList];
     [localView setDataSource:localTableData];
     
     remoteTableData = [[fileTable alloc] init];
 
-    //we update the path menu
+    /* we update the path menu */
     [self updatePath :localPath :[local workDirSplit]];
 // #### and a release of this array ?!?
 }
@@ -112,16 +118,19 @@
     [path addItemsWithTitles:pathArray];
 }
 
+/* performs the action of the path pull-down menu
+   it navigates upwards the tree
+   and works for both the local and remote path */
 - (IBAction)changePathFromMenu:(id)sender
 {
-    client   *theClient;
+    client      *theClient;
     NSTableView *theView;
-    fileTable *theTable;
-    NSString *thePath;
-    NSArray  *items;
-    int      selectedIndex;
-    int      i;
-    NSArray *dirList;
+    fileTable   *theTable;
+    NSString    *thePath;
+    NSArray     *items;
+    int         selectedIndex;
+    int         i;
+    NSArray    *dirList;
 
     NSLog(@"%@", [sender class]);
     if (sender == localPath)
@@ -148,6 +157,62 @@
     
     [self updatePath :sender :[theClient workDirSplit]];
 }
+
+/* perform the action of a double click in a table element
+   a directory should be opened, a file down or uploaded
+   The same method works for local and remote, detecting them */
+- (IBAction)listDoubleClick:(id)sender
+{
+    client        *theClient;
+    NSTableView   *theView;
+    fileTable     *theTable;
+    int           elementIndex;
+    fileElement   *fileEl;
+    NSString      *thePath;
+    NSArray       *dirList;
+    NSPopUpButton *thePathMenu;
+
+    theView = sender;
+    NSLog(@"%@", [theView class]);
+    if (theView == localView)
+    {
+        theClient = local;
+        theTable = localTableData;
+        thePathMenu = localPath;
+    } else
+    {
+        theClient = ftp;
+        theTable = remoteTableData;
+        thePathMenu = remotePath;
+    }
+
+    elementIndex = [sender selectedRow];
+    if (elementIndex < 0)
+    {
+        NSLog(@"error: double click with nothing selected");
+        return;
+    }
+    fileEl = [theTable elementAtIndex:elementIndex];
+    NSLog(@"element: %@ %d", [fileEl filename], [fileEl isDir]);
+    thePath = [NSString stringWithString:[theClient workingDir]];
+    thePath = [thePath stringByAppendingPathComponent: [fileEl filename]];
+    if ([fileEl isDir])
+    {
+        NSLog(@"should cd to %@", thePath);
+        [theClient setWorkingDir:thePath];
+        dirList = [local dirContents];
+        [theTable initData:dirList];
+        [theView reloadData];
+        [self updatePath :thePathMenu :[theClient workDirSplit]];
+    } else
+    {
+        if (theView == localView)
+            NSLog(@"should upload %@", thePath);
+        else
+            NSLog(@"should download %@", thePath);
+    }
+}
+
 
 - (IBAction)showPrefPanel:(id)sender
 {
