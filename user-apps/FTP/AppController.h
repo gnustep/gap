@@ -68,6 +68,7 @@
 - (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray;
 
 - (IBAction)changePathFromMenu:(id)sender;
+- (void)listDoubleClick:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)showFtpLog:(id)sender;
