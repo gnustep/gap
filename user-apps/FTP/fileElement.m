@@ -62,10 +62,11 @@
     sep = strchr(curr, ' ');
     if (sep)
     {
-        if (*sep == 'd')
+        if (curr[0] == 'd')
             isDir = YES;
         else
             isDir = NO;
+//        NSLog(@"dir: %d", isDir);
     } else
         return self;
     curr = sep;
