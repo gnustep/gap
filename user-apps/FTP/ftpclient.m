@@ -205,6 +205,82 @@
     return sentBytes;
 }
 
+- (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath
+{
+//    NSString       *localPath;
+    char           fNameCStr[MAX_CONTROL_BUFF];
+    char           command[MAX_CONTROL_BUFF];
+    NSFileHandle   *remoteFileHandle;
+    NSFileHandle   *localFileHandle;
+    NSMutableArray *reply;
+    NSData         *dataBuff;
+    int            localSocket;
+    struct sockaddr_in from;
+    int                fromLen;
+    int                replyCode;
+    NSFileManager      *localFm;
+    
+    if ([self initDataConn] < 0)
+    {
+        NSLog(@"error initiating data connection, retrieveFile");
+        return;
+    }
+    localPath = [localPath stringByAppendingPathComponent:file];
+    NSLog(@"local path: %@", localPath);
+    
+    [file getCString:fNameCStr];
+    sprintf(command, "RETR %s\r\n", fNameCStr);
+    [self writeLine:command];
+    replyCode = [self readReply:&reply];
+    NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
+
+    if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
+    {
+        perror("accepting socket, retrieveFile: ");
+    }
+
+    NSLog(@"opened socket");
+/*
+    {
+        FILE *myfile;
+        char fn[4096];
+
+        
+    } */
+
+    localFm = [NSFileManager defaultManager];
+
+    if ([localFm fileExistsAtPath:localPath] == NO)
+    {
+        NSLog(@"File does not exist");
+        if ([localFm createFileAtPath:localPath contents:[NSData data] attributes:nil] == NO)
+        {
+            NSLog(@"local file creation error");
+            [self closeDataConn];
+            return;
+        }
+    } else
+    {
+        NSLog(@"File exists...");
+    }
+
+    localFileHandle = [NSFileHandle fileHandleForWritingAtPath:localPath];
+    if(localFileHandle == nil)
+    {
+        NSLog(@"no file exists");
+        [self closeDataConn];
+        return;
+    }
+    remoteFileHandle = [[NSFileHandle alloc] initWithFileDescriptor: localSocket];
+
+    while (dataBuff = [remoteFileHandle availableData])
+        [localFileHandle writeData:dataBuff];
+
+    [self closeDataConn];
+    [self readReply:&reply];
+}
+
+
 /* initialize a connection */
 /* set up and connect the control socket */
 - (int)connect:(int)port :(char *)server
@@ -263,8 +339,9 @@
 
 - (int)authenticate:(char *)user :(char *)pass
 {
-    char    tempStr[MAX_CONTROL_BUFF];
+    char           tempStr[MAX_CONTROL_BUFF];
     NSMutableArray *reply;
+    int            replyCode;
 
     sprintf(tempStr, "USER %s\r\n", user);
     [self writeLine:tempStr];
@@ -274,8 +351,14 @@
     
     sprintf(tempStr, "PASS %s\r\n", pass);
     [self writeLine:tempStr];
-    [self readReply:&reply];
+    replyCode = [self readReply:&reply];
     NSLog(@"pass reply is: %@", [reply objectAtIndex:0]);
+    if (replyCode == 530)
+    {
+        NSLog(@"Not logged in: %@", [reply objectAtIndex:0]);
+        [self disconnect];
+        return -1;
+    }
     [reply release];
 
     /* get home directory as dir we first connected to */

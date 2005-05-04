@@ -211,7 +211,10 @@
         if (theView == localView)
             NSLog(@"should upload %@", thePath);
         else
+        {
             NSLog(@"should download %@", thePath);
+            [ftp retrieveFile: [fileEl filename] toPath:[local workingDir]];
+        }
     }
 }
 
