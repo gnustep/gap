@@ -57,14 +57,15 @@
 
 - (void)logIt:(NSString *)str;
 
-- (int)readReply :(NSMutableArray **)result
-    ;
+- (int)readReply :(NSMutableArray **)result;
 - (int)writeLine:(char *)line;
+- (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
 - (int)authenticate:(char *)user :(char *)pass;
 - (int)initDataConn;
+- (int)closeDataConn;
 
 
 @end

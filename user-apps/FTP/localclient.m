@@ -40,9 +40,6 @@
 }
 
 
-/* RM : fixme put in a better max path limit */
-/* path could be malloced form the correct strlen? */
-/* all this should be rewritten using NSFileManager */
 - (NSArray *)dirContents
 {
     NSFileManager   *fm;
