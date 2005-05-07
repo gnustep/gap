@@ -50,6 +50,8 @@
     struct sockaddr_in  remoteSockName;
     struct sockaddr_in  localSockName;
     struct sockaddr_in  dataSockName;
+    BOOL usesPassive;
+    BOOL usesPorts;
 }
 
 - (id)init;

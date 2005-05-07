@@ -57,6 +57,8 @@
     if (!(self =[super init]))
         return nil;
     controller = cont;
+    usesPassive = NO;
+    usesPorts = YES;
     return self;
 }
 
@@ -219,6 +221,8 @@
     int                fromLen;
     int                replyCode;
     NSFileManager      *localFm;
+    unsigned chunkLen;
+    unsigned totalBytes;
     
     if ([self initDataConn] < 0)
     {
@@ -233,20 +237,13 @@
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
-
+    [reply release];
     if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
     {
         perror("accepting socket, retrieveFile: ");
     }
 
     NSLog(@"opened socket");
-/*
-    {
-        FILE *myfile;
-        char fn[4096];
-
-        
-    } */
 
     localFm = [NSFileManager defaultManager];
 
@@ -273,11 +270,23 @@
     }
     remoteFileHandle = [[NSFileHandle alloc] initWithFileDescriptor: localSocket];
 
-    while (dataBuff = [remoteFileHandle availableData])
-        [localFileHandle writeData:dataBuff];
 
+    totalBytes = 0;
+    chunkLen = 0;
+    dataBuff = [remoteFileHandle availableData];
+    while (chunkLen = [dataBuff length])
+    {
+        totalBytes += chunkLen;
+        [localFileHandle writeData:dataBuff];
+        [dataBuff release];
+        dataBuff = [remoteFileHandle availableData];
+        NSLog(@"chunk %u", chunkLen);
+    }
+
+    NSLog(@"transferred %u", totalBytes);
     [self closeDataConn];
     [self readReply:&reply];
+    [reply release];
 }
 
 
@@ -397,23 +406,49 @@
 /* initialize the data connection */
 - (int)initDataConn
 {
+    int addrLen; /* socklen_t on some systems ? */
     int socketReuse;
     
     socketReuse = YES;
+
+    /* passive mode */
+    if (usesPassive)
+    {
+        return 0;
+    }
+
+    /* active mode, default or PORT arbitrated */
     dataSockName = localSockName;
     
+    if (usesPorts)
+        dataSockName.sin_port = 0;
+    
     dataSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+
+    /* if we use the default port, we set the option to reuse the port */
+    /* linux is happier if we set both ends that way */
+    if (!usesPorts)
     {
-        perror("ftpclient: setsockopt (reuse address) on data");
+        if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+        {
+            perror("ftpclient: setsockopt (reuse address) on data");
+        }
+        if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+        {
+            perror("ftpclient: setsockopt (reuse address) on control");
+        }
     }
-    if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
-    {
-        perror("ftpclient: setsockopt (reuse address) on control");
-    }
+    
     if (bind(dataSocket, (struct sockaddr *)&dataSockName, sizeof (dataSockName)) < 0)
     {
         perror("ftpclient: bind");
+        return -1;
+    }
+
+    addrLen = sizeof (dataSockName);
+    if (getsockname(dataSocket, (struct sockaddr *)&dataSockName, &addrLen) < 0)
+    {
+        perror("ftpclient: getsockname");
         return -1;
     }
     
@@ -421,6 +456,30 @@
     {
         perror("ftpclient: listen");
         return -1;
+    }
+
+    if (usesPorts)
+    {
+        union addrAccess { /* we use this union to extract the 8 bytes of an address */
+            struct in_addr   sinAddr;
+            unsigned char    ipv4[4];
+        } addr;
+        NSMutableArray *reply;
+        char           tempStr[128];
+        unsigned char  p1, p2;
+        int            returnCode;
+
+
+        addr.sinAddr = dataSockName.sin_addr;
+        p1 = (dataSockName.sin_port & 0xFF00) >> 8;
+        p2 = dataSockName.sin_port & 0x00FF;
+        sprintf(tempStr, "PORT %u,%u,%u,%u,%u,%u\r\n", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2);
+        [self writeLine:tempStr];
+        if ((returnCode = [self readReply:&reply]) != 200)
+        {
+            NSLog("error occoured in port command: %@", reply);
+            return -1;
+        }
     }
     return 0;
 }
