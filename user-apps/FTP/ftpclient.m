@@ -207,6 +207,24 @@
     return sentBytes;
 }
 
+- (int)setTypeToI
+{
+    NSMutableArray *reply;
+    
+    [self writeLine:"TYPE I\r\n"];
+    [self readReply:&reply];
+    [reply release];
+}
+
+- (int)setTypeToA
+{
+    NSMutableArray *reply;
+
+    [self writeLine:"TYPE A\r\n"];
+    [self readReply:&reply];
+    [reply release];
+}
+
 - (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath
 {
 //    NSString       *localPath;
@@ -223,6 +241,9 @@
     NSFileManager      *localFm;
     unsigned chunkLen;
     unsigned totalBytes;
+
+    /* lets settle to a plain binary standard type */
+    [self setTypeToI];
     
     if ([self initDataConn] < 0)
     {
@@ -278,7 +299,7 @@
     {
         totalBytes += chunkLen;
         [localFileHandle writeData:dataBuff];
-        [dataBuff release];
+//        [dataBuff release];
         dataBuff = [remoteFileHandle availableData];
         NSLog(@"chunk %u", chunkLen);
     }
@@ -509,6 +530,9 @@
     NSMutableArray     *reply;
 
     [workingDir getCString:path];
+
+    /* lets settle to a plain ascii standard type */
+    [self setTypeToA];
     
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];
