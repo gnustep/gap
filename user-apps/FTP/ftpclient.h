@@ -62,6 +62,7 @@
 - (int)readReply :(NSMutableArray **)result;
 - (int)writeLine:(char *)line;
 - (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath;
+- (void)storeFile:(NSString *)file fromPath:(NSString *)localPath;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;

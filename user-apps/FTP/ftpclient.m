@@ -237,7 +237,6 @@
 
 - (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath
 {
-//    NSString       *localPath;
     char           fNameCStr[MAX_CONTROL_BUFF];
     char           command[MAX_CONTROL_BUFF];
     NSFileHandle   *remoteFileHandle;
@@ -261,7 +260,6 @@
         return;
     }
     localPath = [localPath stringByAppendingPathComponent:file];
-    NSLog(@"local path: %@", localPath);
     
     [file getCString:fNameCStr];
     sprintf(command, "RETR %s\r\n", fNameCStr);
@@ -309,16 +307,83 @@
     {
         totalBytes += chunkLen;
         [localFileHandle writeData:dataBuff];
-//        [dataBuff release];
         dataBuff = [remoteFileHandle availableData];
         NSLog(@"chunk %u", chunkLen);
     }
 
     NSLog(@"transferred %u", totalBytes);
+    close(localSocket);
     [self closeDataConn];
     [self readReply:&reply];
     [reply release];
 }
+
+- (void)storeFile:(NSString *)file fromPath:(NSString *)localPath
+{
+    char           fNameCStr[MAX_CONTROL_BUFF];
+    char           command[MAX_CONTROL_BUFF];
+    NSFileHandle   *remoteFileHandle;
+    NSFileHandle   *localFileHandle;
+    NSMutableArray *reply;
+    NSData         *dataBuff;
+    int            localSocket;
+    struct sockaddr_in from;
+    int                fromLen;
+    int                replyCode;
+    unsigned chunkLen;
+    unsigned totalBytes;
+
+    /* lets settle to a plain binary standard type */
+    [self setTypeToI];
+
+    if ([self initDataConn] < 0)
+    {
+        NSLog(@"error initiating data connection, retrieveFile");
+        return;
+    }
+    localPath = [localPath stringByAppendingPathComponent:file];
+
+    [file getCString:fNameCStr];
+    sprintf(command, "STOR %s\r\n", fNameCStr);
+    [self writeLine:command];
+    replyCode = [self readReply:&reply];
+    NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
+    [reply release];
+    if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
+    {
+        perror("accepting socket, storeFile: ");
+    }
+
+    NSLog(@"opened socket");
+
+    localFileHandle = [NSFileHandle fileHandleForReadingAtPath:localPath];
+    if(localFileHandle == nil)
+    {
+        NSLog(@"no file exists");
+        [self closeDataConn];
+        return;
+    }
+    remoteFileHandle = [[NSFileHandle alloc] initWithFileDescriptor: localSocket];
+
+
+    totalBytes = 0;
+    chunkLen = 0;
+    dataBuff = [localFileHandle availableData];
+    while (chunkLen = [dataBuff length])
+    {
+        totalBytes += chunkLen;
+        [remoteFileHandle writeData:dataBuff];
+        dataBuff = [localFileHandle availableData];
+        NSLog(@"chunk %u", chunkLen);
+    }
+
+    NSLog(@"transferred %u", totalBytes);
+    close(localSocket);
+    [self closeDataConn];
+    [self readReply:&reply];
+    [reply release];
+}
+
 
 
 /* initialize a connection */
