@@ -35,6 +35,9 @@
     [super dealloc];
 }
 
+/*
+ initialize a file element using attrbutes of NSFileManager
+ */
 - (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs
 {
     [super init];
@@ -49,15 +52,30 @@
     return self;
 }
 
+/*
+ tries to parse a single line of LIST
+ currently unix-style results will work, like
 
+ drwx------  22 multix  staff   704 Apr  2 14:46 Documents
+
+ or these where one of user/group are omitted
+ drwxr-xr-x   8 users     4096 Apr 15 19:58 Documents
+
+ it will skip a line that is not considered meaningful, like:
+ total 74184 (typical from Unix ls -l)
+ and return nil.
+ */
 - (id)initWithLsLine :(char *)line
 {
     char *sep;
     char *curr;
+    BOOL foundSize;
 
     [super init];
 
-//    NSLog (@"fEl: |%s|", line);
+    if (strstr(line, "total") == line)
+        return nil;
+
     curr = line;
     sep = strchr(curr, ' ');
     if (sep)
@@ -66,54 +84,66 @@
             isDir = YES;
         else
             isDir = NO;
-//        NSLog(@"dir: %d", isDir);
     } else
         return self;
     curr = sep;
+    
     while (*curr == ' ')
         curr++;
     sep = strchr(curr, ' ');
     if (sep)
     {
-        // 
+        // blocks ?
     } else
         return self;
     curr = sep;
+    
     while (*curr == ' ')
         curr++;
     sep = strchr(curr, ' ');
     if (sep)
     {
-        // user name
+        // user name (but it may be missing and be a group)
     } else
         return self;
     curr = sep;
+    
     while (*curr == ' ')
         curr++;
     sep = strchr(curr, ' ');
     if (sep)
     {
-        // group
+        // group (could be already the size, we check)
+        NSScanner *scan;
+        scan = [NSScanner scannerWithString:[NSString stringWithCString:curr length:(sep-curr)]];
+        foundSize = [scan scanLongLong:&size];
     } else
         return self;
     curr = sep;
-    while (*curr == ' ')
-        curr++;
-    sep = strchr(curr, ' ');
-    if (sep)
+
+    if (!foundSize)
     {
-        NSString *tempStr;
-        tempStr = [NSString stringWithCString:curr length:(sep-curr)];
-        size = [tempStr intValue];
-//        NSLog(@"size: %ld", [self size]);
+        while (*curr == ' ')
+            curr++;
+        sep = strchr(curr, ' ');
+        if (sep)
+        {
+            NSScanner *scan;
+            scan = [NSScanner scannerWithString:[NSString stringWithCString:curr length:(sep-curr)]];
+            foundSize = [scan scanLongLong:&size];
+        }
+        curr = sep;
     }
-    curr = sep;
+    
+    while (*curr == ' ')
+        curr++;
     sep = strchr(curr, ' ');
     if (sep)
     {
         //month
     }
     curr = sep;
+    
     while (*curr == ' ')
         curr++;
     sep = strchr(curr, ' ');
@@ -122,19 +152,13 @@
         //day
     }
     curr = sep;
+    
     while (*curr == ' ')
         curr++;
     sep = strchr(curr, ' ');
     if (sep)
     {
-        //hour
-    }
-    curr = sep;
-    while (*curr == ' ')
-        curr++;
-    sep = strchr(curr, ' ');
-    if (sep)
-    {
+        // hour or year
         NSString *tempStr;
         tempStr = [NSString stringWithCString:curr length:(sep-curr)];
 //        year = [tempStr intValue];
@@ -146,7 +170,7 @@
 
     filename = [[NSString stringWithCString:curr] retain];
 //    NSLog(@"file name: %@", [self filename]);
-    
+
     return self;
 }
 

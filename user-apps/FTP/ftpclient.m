@@ -62,7 +62,10 @@
     return self;
 }
 
-/* RM, fxme: should check for 200 result code */
+/*
+ changes the current working directory
+ this directory is implicit in many other actions
+ */
 - (void)changeWorkingDir:(NSString *)dir
 {
     char            tempStr[MAX_CONTROL_BUFF];
@@ -94,9 +97,11 @@
 }
 
 
-/* read the reply of a command, be it single or multi-line */
-/* returned is the first numerical code                    */
-/* NOTE: the parser is NOT robust in handling errors */
+/*
+ read the reply of a command, be it single or multi-line
+ returned is the first numerical code
+ NOTE: the parser is NOT robust in handling errors
+ */
 - (int)readReply :(NSMutableArray **)result
 {
     char  buff[MAX_CONTROL_BUFF];
@@ -195,6 +200,9 @@
     return startNumCode;
 }
 
+/*
+ writes a single line to the control connection
+ */
 - (int)writeLine:(char *)line
 {
     int sentBytes;
@@ -214,6 +222,7 @@
     [self writeLine:"TYPE I\r\n"];
     [self readReply:&reply];
     [reply release];
+    return 0;
 }
 
 - (int)setTypeToA
@@ -223,6 +232,7 @@
     [self writeLine:"TYPE A\r\n"];
     [self readReply:&reply];
     [reply release];
+    return 0;
 }
 
 - (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath
@@ -498,7 +508,7 @@
         [self writeLine:tempStr];
         if ((returnCode = [self readReply:&reply]) != 200)
         {
-            NSLog("error occoured in port command: %@", reply);
+            NSLog(@"error occoured in port command: %@", reply);
             return -1;
         }
     }
@@ -511,7 +521,6 @@
     return 0;
 }
 
-/* RM: skipping total here is a bit of a hack. fixme */
 /* RM again: a better path limit is needed */
 - (NSArray *)dirContents
 {
@@ -567,13 +576,9 @@
             fprintf(stderr, "%s\n", buff);
             state = READ; /* reset the state for a new line */
             readBytes = 0;
-            if (strstr(buff, "total") == buff)
-                fprintf(stderr, "skipped");
-            else
-            {
-                aFile = [[fileElement alloc] initWithLsLine:buff];
+            aFile = [[fileElement alloc] initWithLsLine:buff];
+            if (aFile)
                 [listArr addObject:aFile];
-            }
         } else
             buff[readBytes++] = ch;
     }
