@@ -220,6 +220,14 @@
     }
 }
 
+- (IBAction)downloadButton:(id)sender
+{
+}
+
+- (IBAction)uploadButton:(id)sender
+{
+}
+
 - (IBAction)disconnect:(id)sender
 {
     [ftp disconnect];

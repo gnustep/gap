@@ -7,10 +7,12 @@
                 changePathFromMenu = id; 
                 connectConn = id; 
                 disconnect = id; 
+                downloadButton = id; 
                 listDoubleClick = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 
                 showPrefPanel = id; 
+                uploadButton = id; 
             }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
@@ -21,10 +23,13 @@
                 connPort = NSTextField; 
                 connUser = NSTextField; 
                 connectPanel = NSPanel; 
+                infoMessage = NSTextField; 
+                infoProgress = NSTextField; 
                 localPath = NSPopUpButton; 
                 localView = NSTableView; 
                 logTextField = NSTextView; 
                 logWin = NSWindow; 
+                progBar = NSProgressIndicator; 
                 remotePath = NSPopUpButton; 
                 remoteView = NSTableView; 
             }; 

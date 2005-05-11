@@ -564,11 +564,14 @@
         char           tempStr[128];
         unsigned char  p1, p2;
         int            returnCode;
+        unsigned int   port;
 
 
         addr.sinAddr = dataSockName.sin_addr;
-        p1 = (dataSockName.sin_port & 0xFF00) >> 8;
-        p2 = dataSockName.sin_port & 0x00FF;
+        port = ntohs(dataSockName.sin_port);
+        p1 = (port & 0xFF00) >> 8;
+        p2 = port & 0x00FF;
+        NSLog(@"%d, %d", dataSockName.sin_port, port);
         sprintf(tempStr, "PORT %u,%u,%u,%u,%u,%u\r\n", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2);
         [self writeLine:tempStr];
         if ((returnCode = [self readReply:&reply]) != 200)

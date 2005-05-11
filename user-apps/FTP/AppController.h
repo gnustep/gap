@@ -32,10 +32,13 @@
 
 @interface AppController : NSObject
 {
-    IBOutlet NSTableView  *localView;
-    IBOutlet NSTableView  *remoteView;
-    IBOutlet NSPopUpButton *localPath;
-    IBOutlet NSPopUpButton *remotePath;
+    IBOutlet NSTableView         *localView;
+    IBOutlet NSTableView         *remoteView;
+    IBOutlet NSPopUpButton       *localPath;
+    IBOutlet NSPopUpButton       *remotePath;
+    IBOutlet NSTextField         *infoMessage;
+    IBOutlet NSTextField         *infoProgress;
+    IBOutlet NSProgressIndicator *progBar;
     
     IBOutlet NSWindow     *logWin;
     IBOutlet NSTextView   *logTextField;
@@ -69,6 +72,8 @@
 
 - (IBAction)changePathFromMenu:(id)sender;
 - (void)listDoubleClick:(id)sender;
+- (IBAction)downloadButton:(id)sender;
+- (IBAction)uploadButton:(id)sender;
 
 - (IBAction)disconnect:(id)sender;
 
