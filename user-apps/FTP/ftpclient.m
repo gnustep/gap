@@ -244,13 +244,14 @@
     NSMutableArray *reply;
     NSData         *dataBuff;
     int            localSocket;
-    struct sockaddr_in from;
+    struct sockaddr    from;
     int                fromLen;
     int                replyCode;
     NSFileManager      *localFm;
     unsigned chunkLen;
     unsigned totalBytes;
 
+    fromLen = sizeof(from);
     /* lets settle to a plain binary standard type */
     [self setTypeToI];
     
@@ -267,7 +268,7 @@
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
     [reply release];
-    if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
+    if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
     {
         perror("accepting socket, retrieveFile: ");
     }
@@ -327,12 +328,13 @@
     NSMutableArray *reply;
     NSData         *dataBuff;
     int            localSocket;
-    struct sockaddr_in from;
+    struct sockaddr  from;
     int                fromLen;
     int                replyCode;
     unsigned chunkLen;
     unsigned totalBytes;
 
+    fromLen = sizeof(from);
     /* lets settle to a plain binary standard type */
     [self setTypeToI];
 
@@ -349,7 +351,7 @@
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
     [reply release];
-    if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
+    if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
     {
         perror("accepting socket, storeFile: ");
     }
@@ -519,7 +521,11 @@
     if (usesPorts)
         dataSockName.sin_port = 0;
     
-    dataSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        perror("socket in initDataConn");
+        return -1;
+    }
 
     /* if we use the default port, we set the option to reuse the port */
     /* linux is happier if we set both ends that way */
@@ -571,7 +577,6 @@
         port = ntohs(dataSockName.sin_port);
         p1 = (port & 0xFF00) >> 8;
         p2 = port & 0x00FF;
-        NSLog(@"%d, %d", dataSockName.sin_port, port);
         sprintf(tempStr, "PORT %u,%u,%u,%u,%u,%u\r\n", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2);
         [self writeLine:tempStr];
         if ((returnCode = [self readReply:&reply]) != 200)
@@ -595,7 +600,7 @@
     int                ch;
     FILE               *dataStream;
     int                localSocket;
-    struct sockaddr_in from;
+    struct sockaddr    from;
     int                fromLen;
     char               buff[MAX_DATA_BUFF];
     int                readBytes;
@@ -617,8 +622,9 @@
     [self initDataConn];
     [self writeLine:"LIST\r\n"];
     [self readReply:&reply];
-    
-    if ((localSocket = accept(dataSocket, (struct sockaddr *) &from, &fromLen)) < 0)
+
+    fromLen = sizeof(from);
+    if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
     {
         perror("accepting socket, dir list: ");
     }
