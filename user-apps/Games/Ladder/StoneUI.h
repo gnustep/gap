@@ -6,8 +6,11 @@
 	NSPoint position;
 	NSImage *_cache;
 }
+
 - (void) drawWithRadius:(float)radius
 				atPoint:(NSPoint)p;
+- (void) drawIndicatorWithRadius:(float)radius
+						 atPoint:(NSPoint)p;
 - (NSPoint) position;
 - (void) setPosition:(NSPoint)p;
 @end

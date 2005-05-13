@@ -1,0 +1,16 @@
+{
+	ApplicationName = "Ladder";
+    ApplicationDescription = "A GNU Go frontend";
+    ApplicationRelease = "0.0.1";
+    Authors = ("Banlu Kemiyatorn <object@gmail.com>");
+    Copyright = "Copyright (c) 2005 Banlu Kemiyatorn";
+    CopyrightDescription = "GNU General Public License";
+	NSTypes = (
+		{
+			NSName = "sfg";
+			NSHumanReadableName = "SGF Document";
+			NSUnixExtensions = ("sgf");
+			NSDocumentClass = GoDocument;
+		}
+	);
+}

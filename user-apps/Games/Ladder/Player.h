@@ -1,0 +1,18 @@
+#include <Foundation/Foundation.h>
+#include "Go.h"
+
+@interface Player : NSObject
+{
+	NSMutableDictionary *_pathDict;
+	NSMutableDictionary *_userInfo;
+}
+
+- (NSDictionary *) info;
+- (void) setInfo:(NSDictionary *)infoDict;
+- (NSDictionary *) dictionaryForPath:(NSString *)path;
+- (void) playGo:(Go *)go
+	   asPlayer:(PlayerColorType)colorType;
+- (void) putStoneWithColorType:(PlayerColorType)colorType
+						  toGo:(Go *)go
+					atLocation:(GoLocation)location;
+@end

@@ -1,0 +1,43 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    Board = {
+	Actions = (
+	    "setGo:",
+	    "setOwner:"
+	);
+	Outlets = (
+	    go,
+	    owner
+	);
+	Super = NSView;
+    };
+    FirstResponder = {
+	Actions = (
+	    "setOwner:",
+	    "setGo:"
+	);
+	Super = NSObject;
+    };
+    Go = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    GoDocument = {
+	Actions = (
+	);
+	Outlets = (
+	    _board
+	);
+	Super = NSDocument;
+    };
+    TestC = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+}

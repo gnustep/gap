@@ -20,13 +20,8 @@
  */
 
 #include <AppKit/AppKit.h>
-#include "Go.h"
 
 int main(int argc, char **argv)
 {
-	NSAutoreleasePool *pool = [NSAutoreleasePool new];
-	[NSApplication sharedApplication];
-	[NSApp run];
-	[pool release];
-	return 0;
+	return NSApplicationMain(argc, (const char **) argv);
 }

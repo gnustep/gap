@@ -1,15 +1,27 @@
+#ifndef GO_H
+#define GO_H
+
 #include <Foundation/Foundation.h>
-typedef enum _StoneColor
-{
-	BlackStone = 0,
-	WhiteStone = 1,
-} StoneColor;
+
+#include "GameVS.h"
 
 typedef struct _GoLocation
 {
 	int row;
 	int column;
 } GoLocation;
+
+static const GoLocation GoNoLocation;
+
+static BOOL GoIsLocation (GoLocation location)
+{
+	if (location.row == 0 || location.column == 0)
+	{
+		return NO;
+	}
+
+	return YES;
+}
 
 static inline GoLocation MakeGoLocation (int row, int column)
 {
@@ -19,34 +31,77 @@ static inline GoLocation MakeGoLocation (int row, int column)
 	return loc;
 }
 
+@class Go;
+
 @protocol Stone
-- (StoneColor) stoneColor;
-- (void) setColor:(StoneColor)newColor;
+- (PlayerColorType) playerColorType;
+- (void) setPlayerColorType:(PlayerColorType)newColorType;
+- (void) setOwner:(Go *)owner;
+- (Go *) owner;
+- (GoLocation) location;
 @end
 
 @interface Stone : NSObject <Stone>
 {
-	StoneColor _color;
+	Go *__owner;
+	PlayerColorType _colorType;
 }
-+ (Stone *) stoneWithColor:(StoneColor)color;
++ (Stone *) stoneWithPlayerColorType:(PlayerColorType)color;
 @end
 
+@interface GoTurn : NSObject
+{
+	GoTurn *__previous;
+	GoLocation location;
+	NSMutableArray *nextList;
+	NSTimeInterval timeIntervalSincePreviousTurn;
+	NSTimeInterval timeIntervalUsedForTurn;
+}
 
-@interface Go : NSObject
+@end
+
+@class Player;
+
+@interface Go : NSObject <GameTurn>
 {
 	Class stoneClass;
 	unsigned int size;
-	id *table;
+	id *_boardTable;
+	PlayerColorType turn;
+	Player * _players[2];
+
+	GoTurn * __currentTurn;
+	GoTurn * _startTurn;
+
+	NSCalendarDate *_gameBeginDate;
+	NSCalendarDate *_turnBeginDate;
+	BOOL isPause;
+	NSTimeInterval timeUsed[2];
+	unsigned long _turnNumber;
+	int _handicapLeft;
+	NSTask *_gnugo;
+	NSPipe *_eventPipe;
+	NSPipe *_commandPipe;
 }
 
 - (void) setStoneClass:(Class)aClass;
 - (void) setBoardSize:(unsigned int)newSize;
 - (unsigned int) boardSize;
+- (void) setHandicap:(unsigned int)handicap;
+- (void) setStone:(id <Stone>) stone
+	   atLocation:(GoLocation) location
+			 date:(NSCalendarDate *)turnTime;
 - (void) setStone:(id <Stone>) stone
 	   atLocation:(GoLocation) location;
-- (void) setStoneWithColor:(StoneColor) aColor
-				atLocation:(GoLocation) location;
-- (id *) table;
+- (void) setStoneWithPlayerColorType:(PlayerColorType) aColorType
+						  atLocation:(GoLocation) location;
+- (void) putStoneAtLocation:(GoLocation) location;
+- (id *) board;
 - (Stone *) stoneAtLocation:(GoLocation) location;
+- (GoLocation) locationForStone:(id <Stone>) stone;
+
+- (void) setBlackPlayer:(Player *)blackPlayer
+			whitePlayer:(Player *)whitePlayer;
 
 @end
+#endif
