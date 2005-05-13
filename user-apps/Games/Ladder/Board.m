@@ -38,7 +38,7 @@
 
 - (void) awakeFromNib
 {
-	[self setTileImage:AUTORELEASE([[NSImage alloc] initWithContentsOfFile:@"wood.jpg"])];
+	[self setTileImage:[NSImage imageNamed:@"wood.jpg"]];
 	[[self window] setAcceptsMouseMovedEvents:YES];
 }
 
