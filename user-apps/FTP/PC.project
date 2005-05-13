@@ -32,7 +32,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-05-29 00:24:14 +0200";
+    LAST_EDITING = "2005-05-13 16:33:34 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -51,7 +51,7 @@
     );
     PC_WINDOWS = {
 	ProjectBuild = "40 177 480 322 0 0  1216 1024 ";
-	ProjectLaunch = "497 114 480 322 0 0  1216 1024 ";
+	ProjectLaunch = "528 100 480 322 0 0  1216 1024 ";
 	ProjectWindow = "142 386 710 539 0 0  1216 1024 ";
 	ShowToolbar = YES;
     };
