@@ -75,6 +75,8 @@
 - (IBAction)downloadButton:(id)sender;
 - (IBAction)uploadButton:(id)sender;
 
+- (void)setProgress:(double)percent;
+
 - (IBAction)disconnect:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;

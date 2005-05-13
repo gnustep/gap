@@ -235,15 +235,17 @@
     return 0;
 }
 
-- (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath
+- (void)retrieveFile:(fileElement *)file toPath:(NSString *)localPath
 {
-    char           fNameCStr[MAX_CONTROL_BUFF];
-    char           command[MAX_CONTROL_BUFF];
-    NSFileHandle   *remoteFileHandle;
-    NSFileHandle   *localFileHandle;
-    NSMutableArray *reply;
-    NSData         *dataBuff;
-    int            localSocket;
+    NSString           *fileName;
+    unsigned long long fileSize;
+    char               fNameCStr[MAX_CONTROL_BUFF];
+    char               command[MAX_CONTROL_BUFF];
+    NSFileHandle       *remoteFileHandle;
+    NSFileHandle       *localFileHandle;
+    NSMutableArray     *reply;
+    NSData             *dataBuff;
+    int                localSocket;
     struct sockaddr    from;
     int                fromLen;
     int                replyCode;
@@ -260,9 +262,12 @@
         NSLog(@"error initiating data connection, retrieveFile");
         return;
     }
-    localPath = [localPath stringByAppendingPathComponent:file];
+
+    fileName = [file filename];
+    fileSize = [file size];
+    localPath = [localPath stringByAppendingPathComponent:fileName];
     
-    [file getCString:fNameCStr];
+    [fileName getCString:fNameCStr];
     sprintf(command, "RETR %s\r\n", fNameCStr);
     [self writeLine:command];
     replyCode = [self readReply:&reply];
@@ -303,15 +308,18 @@
 
     totalBytes = 0;
     chunkLen = 0;
+    [controller setProgress:0];
     dataBuff = [remoteFileHandle availableData];
     while (chunkLen = [dataBuff length])
     {
         totalBytes += chunkLen;
+        [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [localFileHandle writeData:dataBuff];
         dataBuff = [remoteFileHandle availableData];
         NSLog(@"chunk %u", chunkLen);
     }
-
+    [controller setProgress:(((float)totalBytes / fileSize) * 100)];
+    
     NSLog(@"transferred %u", totalBytes);
     close(localSocket);
     [self closeDataConn];
@@ -319,20 +327,23 @@
     [reply release];
 }
 
-- (void)storeFile:(NSString *)file fromPath:(NSString *)localPath
+- (void)storeFile:(fileElement *)file fromPath:(NSString *)localPath
 {
-    char           fNameCStr[MAX_CONTROL_BUFF];
-    char           command[MAX_CONTROL_BUFF];
-    NSFileHandle   *remoteFileHandle;
-    NSFileHandle   *localFileHandle;
-    NSMutableArray *reply;
-    NSData         *dataBuff;
-    int            localSocket;
-    struct sockaddr  from;
+    NSString           *fileName;
+    unsigned long long fileSize;
+    char               fNameCStr[MAX_CONTROL_BUFF];
+    char               command[MAX_CONTROL_BUFF];
+    NSFileHandle       *remoteFileHandle;
+    NSFileHandle       *localFileHandle;
+    NSMutableArray     *reply;
+    NSData             *dataBuff;
+    int                localSocket;
+    struct sockaddr    from;
     int                fromLen;
     int                replyCode;
-    unsigned chunkLen;
-    unsigned totalBytes;
+    unsigned           chunkLen;
+    unsigned           totalBytes;
+    unsigned int       blockSize;
 
     fromLen = sizeof(from);
     /* lets settle to a plain binary standard type */
@@ -343,9 +354,11 @@
         NSLog(@"error initiating data connection, retrieveFile");
         return;
     }
-    localPath = [localPath stringByAppendingPathComponent:file];
+    fileName = [file filename];
+    fileSize = [file size];
+    localPath = [localPath stringByAppendingPathComponent:fileName];
 
-    [file getCString:fNameCStr];
+    [fileName getCString:fNameCStr];
     sprintf(command, "STOR %s\r\n", fNameCStr);
     [self writeLine:command];
     replyCode = [self readReply:&reply];
@@ -370,15 +383,21 @@
 
     totalBytes = 0;
     chunkLen = 0;
-    dataBuff = [localFileHandle availableData];
+    blockSize = fileSize / 100;
+    if (blockSize < 10240)
+        blockSize = 10240;
+    [controller setProgress:0];
+    dataBuff = [localFileHandle readDataOfLength:blockSize];
     while (chunkLen = [dataBuff length])
     {
         totalBytes += chunkLen;
+        [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [remoteFileHandle writeData:dataBuff];
-        dataBuff = [localFileHandle availableData];
+        dataBuff = [localFileHandle readDataOfLength:blockSize];
         NSLog(@"chunk %u", chunkLen);
     }
-
+    [controller setProgress:(((float)totalBytes / fileSize) * 100)];
+    
     NSLog(@"transferred %u", totalBytes);
     close(localSocket);
     [self closeDataConn];

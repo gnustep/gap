@@ -33,6 +33,7 @@
 
 #import <Foundation/Foundation.h>
 #import "client.h"
+#import "fileElement.h"
 
 #define ERR_COULDNT_RESOLVE -1
 #define ERR_SOCKET_FAIL -2
@@ -61,8 +62,8 @@
 
 - (int)readReply :(NSMutableArray **)result;
 - (int)writeLine:(char *)line;
-- (void)retrieveFile:(NSString *)file toPath:(NSString *)localPath;
-- (void)storeFile:(NSString *)file fromPath:(NSString *)localPath;
+- (void)retrieveFile:(fileElement *)file toPath:(NSString *)localPath;
+- (void)storeFile:(fileElement *)file fromPath:(NSString *)localPath;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
