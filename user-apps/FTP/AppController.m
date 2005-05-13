@@ -211,11 +211,11 @@
         if (theView == localView)
         {
             NSLog(@"should upload %@", thePath);
-            [ftp storeFile: [fileEl filename] fromPath:[local workingDir]];
+            [ftp storeFile:fileEl fromPath:[local workingDir]];
         } else
         {
             NSLog(@"should download %@", thePath);
-            [ftp retrieveFile: [fileEl filename] toPath:[local workingDir]];
+            [ftp retrieveFile:fileEl toPath:[local workingDir]];
         }
     }
 }
@@ -226,6 +226,12 @@
 
 - (IBAction)uploadButton:(id)sender
 {
+}
+
+- (void)setProgress:(double)percent
+{
+    NSLog(@"%d", percent);
+    [progBar setDoubleValue:percent];
 }
 
 - (IBAction)disconnect:(id)sender
