@@ -1,0 +1,56 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	);
+	Outlets = (
+	    clockController
+	);
+	Super = NSObject;
+    };
+    ClockController = {
+	Actions = (
+	    "orderFrontClockPanel:",
+	    "matrixUpdate:",
+	    "setTime:"
+	);
+	Outlets = (
+	    blackClock,
+	    turnButton,
+	    whiteClock,
+	    clockPanel,
+	    timePopUp,
+	    pauseButton
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "addPlayer:",
+	    "matrixUpdate:",
+	    "setTime:",
+	    "removePlayer:"
+	);
+	Super = NSObject;
+    };
+    ImageBox = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSBox;
+    };
+    PlayerController = {
+	Actions = (
+	    "addPlayer:",
+	    "removePlayer:"
+	);
+	Outlets = (
+	    addButton,
+	    playerBrowser,
+	    playerInfo,
+	    removeButton
+	);
+	Super = NSObject;
+    };
+}

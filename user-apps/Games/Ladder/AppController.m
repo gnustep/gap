@@ -1,35 +1,59 @@
 #include <AppKit/AppKit.h>
 #include "AppController.h"
 #include "StoneUI.h"
+#include "Player.h"
 
 @implementation AppController
 
 - (void) applicationWillFinishLaunching: (NSNotification*)aNotification
 {
-	id go = AUTORELEASE([Go new]);
-	[go setBoardSize:11];
-	[go setStoneClass:[StoneUI class]];
+	/* add human player */
+	NSMutableDictionary *playerinfo = [NSMutableDictionary dictionary];
+	Player *player;
 
-	int size = [go boardSize];
-	int r,c;
+	player = [Player new];
+	[playerinfo setObject:@"Human Player"
+				   forKey:@"Name"];
+	[playerinfo setObject:AUTORELEASE([[NSImage alloc] initWithContentsOfFile:@"man_icon.png"])
+				   forKey:@"Image"];
+	[player setInfo:playerinfo];
+	[playerController addPlayer:player];
+	RELEASE(player);
 
-	for (r = 1; r <= size; r++)
-	for (c = 1; c <= size; c++)
-	{
-		[go setStoneWithColor:random()%2
-				   atLocation:MakeGoLocation(r,c)];
-	}
 
-	/*
-	[go setStoneWithColor:WhiteStone
-			   atLocation:MakeGoLocation(1,19)];
-	[go setStoneWithColor:WhiteStone
-			   atLocation:MakeGoLocation(19,19)];
-			   */
+	playerinfo = [NSMutableDictionary dictionary];
+	player = [Player new];
+	[playerinfo setObject:@"GNU Go"
+				   forKey:@"Name"];
+	[playerinfo setObject:AUTORELEASE([[NSImage alloc] initWithContentsOfFile:@"machine_icon.png"])
+				   forKey:@"Image"];
+	[player setInfo:playerinfo];
+	[playerController addPlayer:player];
+	RELEASE(player);
 
-	[board setGo:go];
-	[board setTileImage:AUTORELEASE([[NSImage alloc] initWithContentsOfFile:@"wood.jpg"])];
+	NSLog(@"load clock");
+	[NSBundle loadNibNamed:@"Clock"
+					 owner:self];
+	NSLog(@"load clock %@",clockController);
 }
+
+- (void) orderFrontInfoPanel: (id)sender
+{
+	[prefPanel center];
+	[prefPanel orderFront: self];
+}
+
+- (void) orderFrontPlayerPanel: (id)sender
+{
+	[playerPanel center];
+	[playerPanel orderFront: self];
+}
+
+- (void) orderFrontClockPanel: (id)sender
+{
+	[clockController orderFrontClockPanel:sender];
+}
+
 
 @end
 
