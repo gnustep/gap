@@ -9,7 +9,8 @@
 	    "connectConn:",
 	    "anonymousConn:",
 	    "showConnPanel:",
-	    "changePathFromMenu:"
+	    "changePathFromMenu:",
+	    "disconnect:"
 	);
 	Outlets = (
 	    localView,
@@ -23,7 +24,9 @@
 	    connectPanel,
 	    localPath,
 	    remotePath,
-	    connAnon
+	    connAnon,
+	    infoMessage,
+	    progBar
 	);
 	Super = NSObject;
     };
@@ -32,8 +35,9 @@
 	    "anonymousConn:",
 	    "appendTextToLog:",
 	    "cancelConn:",
-	    "connectConn:",
 	    "changePathFromMenu:",
+	    "connectConn:",
+	    "disconnect:",
 	    "orderFrontFontPanel:",
 	    "showConnPanel:",
 	    "showFtpLog:",
