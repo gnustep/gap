@@ -1,6 +1,8 @@
 #include "Go.h"
 #include "Player.h"
 
+NSString * GoStoneNotification = @"GoStoneNotification";
+
 @implementation Stone
 
 - (NSString*) description
@@ -206,7 +208,6 @@
 				offset = i * size + j;
 				if (_boardTable[offset] != nil)
 				{
-					[_boardTable[offset] setOwner:nil];
 					DESTROY(_boardTable[offset]);
 				}
 			}
@@ -408,17 +409,25 @@ static BOOL __check_state(NSString *str)
 	}
 	else
 	{
-		NSLog([self runGTPCommand:@"showboard"]);
+	//	NSLog([self runGTPCommand:@"showboard"]);
 	}
 
 	//timeUsed[turn] = timeUsed[turn] + [turnTime timeIntervalSinceDate:_turnBeginDate];
 
-	if (stone)
+	if (stone != nil)
 	{
 		[stone setOwner:self];
 		ASSIGN(_boardTable[offset], stone);
 		[self _syncBoardWithGNUGo];
+
+		NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+		[dict setObject:stone
+				 forKey:@"Stone"];
+		[[NSNotificationCenter defaultCenter] postNotificationName:GoStoneNotification
+															object:self
+														  userInfo:dict];
 	}
+
 
 }
 

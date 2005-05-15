@@ -101,4 +101,6 @@ static inline GoLocation MakeGoLocation (int row, int column)
 - (GoLocation) locationForStone:(id <Stone>) stone;
 
 @end
+
+extern NSString * GoStoneNotification;
 #endif
