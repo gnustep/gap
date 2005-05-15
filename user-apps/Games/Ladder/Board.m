@@ -88,17 +88,14 @@
 	return self;
 }
 
-- (void) turnBegin:(NSNotification *)notification
+- (void) stoneAdded:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
 	id <Stone> aStone;
-	if ([dict objectForKey:@"IsHandicap"] == nil)
+	aStone = [dict objectForKey:@"Stone"];
+	if (aStone != nil)
 	{
-		aStone = [dict objectForKey:@"Stone"];
-		if (aStone != nil)
-		{
-			lastLocation = [aStone location];
-		}
+		lastLocation = [aStone location];
 	}
 	else
 	{
@@ -117,12 +114,11 @@
 
 - (void) setGo:(Go *)go
 {
-	NSLog(@"set go in board");
 	ASSIGN(_go, go);
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
-		   selector:@selector(turnBegin:)
-			   name:GameTurnDidBeginNotification
+		   selector:@selector(stoneAdded:)
+			   name:GoStoneNotification
 			 object:_go];
 
 	[_go setStoneClass:[StoneUI class]];
