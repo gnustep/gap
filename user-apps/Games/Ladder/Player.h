@@ -11,8 +11,8 @@
 - (void) setInfo:(NSDictionary *)infoDict;
 - (NSDictionary *) dictionaryForPath:(NSString *)path;
 - (void) playGo:(Go *)go
-	   asPlayer:(PlayerColorType)colorType;
-- (void) putStoneWithColorType:(PlayerColorType)colorType
-						  toGo:(Go *)go
-					atLocation:(GoLocation)location;
+   forColorType:(PlayerColorType)colorType;
+- (void) playGo:(Go *)go
+withStoneOfColorType:(PlayerColorType)colorType
+		  atLocation:(GoLocation)location;
 @end

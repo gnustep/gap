@@ -55,15 +55,10 @@
 	array = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",nil];
 	ASSIGN(_horizontalMarks, array);
 
-	ASSIGN(_shadow_stone, [StoneUI stoneWithPlayerColorType:EmptyPlayerType]);
+	ASSIGN(_shadow_stone, [StoneUI stoneWithColorType:EmptyPlayerType]);
 	[super initWithFrame:frame];
 
 	[self setPostsFrameChangedNotifications:YES];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(turnBegin:)
-												 name:GameTurnDidBeginNotification
-											   object:nil];
 
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
@@ -124,6 +119,12 @@
 {
 	NSLog(@"set go in board");
 	ASSIGN(_go, go);
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(turnBegin:)
+			   name:GameTurnDidBeginNotification
+			 object:_go];
+
 	[_go setStoneClass:[StoneUI class]];
 
 
@@ -165,9 +166,7 @@
 	GoLocation downLoc = [self goLocationForPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
 	if ([_go stoneAtLocation:downLoc] == nil)
 	{
-		//[__owner playerShouldPutStoneAtLocation:downLoc];
-
-		[_go putStoneAtLocation:downLoc];
+		[__owner playerShouldPutStoneAtLocation:downLoc];
 	}
 }
 

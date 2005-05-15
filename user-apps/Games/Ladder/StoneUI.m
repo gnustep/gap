@@ -23,9 +23,9 @@ static inline NSSize __image_size_for_radius(float radius)
 	PlayerColorType _stoneColor;
 }
 + (id) stoneImageWithRadius:(float)radius
-			playerColorType:(PlayerColorType)playerColorType;
+				  colorType:(PlayerColorType)playerColorType;
 - (id) initWithRadius:(float)radius
-	  playerColorType:(PlayerColorType)playerColorType;
+			colorType:(PlayerColorType)playerColorType;
 @end
 
 @implementation StoneUICache
@@ -166,14 +166,14 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 }
 
 + (StoneUICache *) stoneImageWithRadius:(float)radius
-						playerColorType:(PlayerColorType)playerColorType
+							  colorType:(PlayerColorType)playerColorType
 {
 	return AUTORELEASE([[self alloc] initWithRadius:radius
-									playerColorType:playerColorType]);
+										  colorType:playerColorType]);
 }
 
 - (id) initWithRadius:(float)radius
-	  playerColorType:(PlayerColorType)playerColorType
+			colorType:(PlayerColorType)playerColorType
 {
 	NSNumber *v = [NSNumber numberWithFloat:radius];
 	NSMapTable *table;
@@ -324,7 +324,7 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 	float f = (radius/RFACTOR)/SHIFT_FACTOR;
 
 	ASSIGN(_cache, [StoneUICache stoneImageWithRadius:radius
-									  playerColorType:_colorType]);
+											colorType:_colorType]);
 
 	[_cache compositeToPoint:NSMakePoint(-radius * CACHE_FACTOR/2 + position.x * f + p.x, -radius * CACHE_FACTOR/2 + position.y * f + p.y)
 				   operation:NSCompositeSourceAtop];

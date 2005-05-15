@@ -34,8 +34,8 @@ static inline GoLocation MakeGoLocation (int row, int column)
 @class Go;
 
 @protocol Stone
-- (PlayerColorType) playerColorType;
-- (void) setPlayerColorType:(PlayerColorType)newColorType;
+- (PlayerColorType) colorType;
+- (void) setColorType:(PlayerColorType)newColorType;
 - (void) setOwner:(Go *)owner;
 - (Go *) owner;
 - (GoLocation) location;
@@ -46,7 +46,7 @@ static inline GoLocation MakeGoLocation (int row, int column)
 	Go *__owner;
 	PlayerColorType _colorType;
 }
-+ (Stone *) stoneWithPlayerColorType:(PlayerColorType)color;
++ (Stone *) stoneWithColorType:(PlayerColorType)color;
 @end
 
 @interface GoTurn : NSObject
@@ -87,21 +87,18 @@ static inline GoLocation MakeGoLocation (int row, int column)
 - (void) setStoneClass:(Class)aClass;
 - (void) setBoardSize:(unsigned int)newSize;
 - (unsigned int) boardSize;
-- (void) setHandicap:(unsigned int)handicap;
+//- (void) setHandicap:(unsigned int)handicap;
 - (void) setStone:(id <Stone>) stone
 	   atLocation:(GoLocation) location
 			 date:(NSCalendarDate *)turnTime;
 - (void) setStone:(id <Stone>) stone
 	   atLocation:(GoLocation) location;
-- (void) setStoneWithPlayerColorType:(PlayerColorType) aColorType
-						  atLocation:(GoLocation) location;
+- (void) setStoneWithColorType:(PlayerColorType) aColorType
+					atLocation:(GoLocation) location;
 - (void) putStoneAtLocation:(GoLocation) location;
 - (id *) board;
 - (Stone *) stoneAtLocation:(GoLocation) location;
 - (GoLocation) locationForStone:(id <Stone>) stone;
-
-- (void) setBlackPlayer:(Player *)blackPlayer
-			whitePlayer:(Player *)whitePlayer;
 
 @end
 #endif

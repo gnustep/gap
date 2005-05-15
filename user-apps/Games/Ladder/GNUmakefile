@@ -13,6 +13,7 @@ Ladder_OBJC_FILES = main.m \
 					StoneUI.m \
 					Board.m \
 					Player.m \
+					GNUGoPlayer.m \
 					PlayerController.m \
 					PlayerCell.m \
 					PlayerInfo.m \
