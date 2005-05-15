@@ -76,6 +76,7 @@
 - (IBAction)uploadButton:(id)sender;
 
 - (void)setProgress:(double)percent;
+- (void)setStatusInfo:(NSString *)str;
 
 - (IBAction)disconnect:(id)sender;
 

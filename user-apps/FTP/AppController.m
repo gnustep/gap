@@ -211,27 +211,56 @@
         if (theView == localView)
         {
             NSLog(@"should upload %@", thePath);
-            [ftp storeFile:fileEl fromPath:[local workingDir]];
+            [ftp storeFile:fileEl from:local beingAt:0];
         } else
         {
             NSLog(@"should download %@", thePath);
-            [ftp retrieveFile:fileEl toPath:[local workingDir]];
+            [ftp retrieveFile:fileEl to:local beingAt:0];
         }
     }
 }
 
 - (IBAction)downloadButton:(id)sender
 {
+    NSEnumerator *elemEnum;
+    fileElement   *fileEl;
+    int          elementIndex;
+
+    elemEnum = [remoteView selectedRowEnumerator];
+
+    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    {
+        fileEl = [remoteTableData elementAtIndex:elementIndex];
+        NSLog(@"should download: %@", [fileEl filename]);
+        [ftp retrieveFile:fileEl to:local beingAt:0];
+    }
+    [self setProgress :0];
 }
 
 - (IBAction)uploadButton:(id)sender
 {
+    NSEnumerator *elemEnum;
+    fileElement   *fileEl;
+    int          elementIndex;
+
+    elemEnum = [localView selectedRowEnumerator];
+
+    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    {
+        fileEl = [localTableData elementAtIndex:elementIndex];
+        [ftp storeFile:fileEl from:local beingAt:0];
+    }
 }
 
 - (void)setProgress:(double)percent
 {
-    NSLog(@"%d", percent);
+//    NSLog(@"%f", percent);
     [progBar setDoubleValue:percent];
+}
+
+- (void)setStatusInfo:(NSString *)str
+{
+    [infoMessage setStringValue:str];
 }
 
 - (IBAction)disconnect:(id)sender

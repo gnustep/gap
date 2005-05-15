@@ -33,6 +33,7 @@
 
 #import <Foundation/Foundation.h>
 #import "client.h"
+#import "localclient.h"
 #import "fileElement.h"
 
 #define ERR_COULDNT_RESOLVE -1
@@ -42,17 +43,17 @@
 
 @interface ftpclient : client
 {
-    id  controller;
-    int userDataPort;
-    int serverDataPort;
-    int dataSocket;
-    int controlSocket;
-    FILE *controlInStream;
+    id                  controller;
+    int                 userDataPort;
+    int                 serverDataPort;
+    int                 dataSocket;
+    int                 controlSocket;
+    FILE                *controlInStream;
     struct sockaddr_in  remoteSockName;
     struct sockaddr_in  localSockName;
     struct sockaddr_in  dataSockName;
-    BOOL usesPassive;
-    BOOL usesPorts;
+    BOOL                usesPassive;
+    BOOL                usesPorts;
 }
 
 - (id)init;
@@ -62,8 +63,8 @@
 
 - (int)readReply :(NSMutableArray **)result;
 - (int)writeLine:(char *)line;
-- (void)retrieveFile:(fileElement *)file toPath:(NSString *)localPath;
-- (void)storeFile:(fileElement *)file fromPath:(NSString *)localPath;
+- (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth;
+- (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;

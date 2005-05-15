@@ -39,6 +39,34 @@
     return self;
 }
 
+/*
+ creates a new directory
+ tries to guess if the given dir is relative (no starting /) or absolute
+ Is this portable to non-unix OS's?
+ */
+- (BOOL)createNewDir:(NSString *)dir
+{
+    NSFileManager *fm;
+    NSString      *localPath;
+    BOOL          isDir;
+
+    fm = [NSFileManager defaultManager];
+    if ([dir hasPrefix:@"/"])
+    {
+        NSLog(@"%@ is an absolute path", dir);
+        localPath = dir;
+    } else
+    {
+        NSLog(@"%@ is a relative path", dir);
+        localPath = [[self workingDir] stringByAppendingPathComponent:dir];
+    }
+    if ([fm fileExistsAtPath:localPath isDirectory:&isDir] == YES)
+        return isDir;
+    if ([fm createDirectoryAtPath:localPath attributes:nil] == NO)
+        return NO;
+    else
+        return YES;
+}
 
 - (NSArray *)dirContents
 {
