@@ -1,4 +1,5 @@
 #include "GoDocument.h"
+#include "GNUGoPlayer.h"
 
 @implementation GoDocument
 
@@ -11,6 +12,17 @@
 	}
 
 	return self;
+}
+
+- (void) awakeFromNib
+{
+	_players[BlackPlayerType] = [Player new];
+	_players[WhitePlayerType] = [GNUGoPlayer new];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(turnBegin:)
+												 name:GameTurnDidBeginNotification
+											   object:[_board go]];
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)aNotification
@@ -26,11 +38,23 @@
 														object:[_board go]];
 }
 
-/*
+- (void) turnBegin:(NSNotification *)notification
+{
+	Go *go = [notification object];
+	PlayerColorType turn = [go turn];
+	[_players[turn] playGo:go
+			  forColorType:turn];
+}
+
 - (void) playerShouldPutStoneAtLocation:(GoLocation)location
 {
+	Go *go = [_board go];
+	PlayerColorType turn = [go turn];
+
+	[_players[turn] playGo:go
+	  withStoneOfColorType:turn
+				atLocation:location];
 }
-*/
 
 - (void) dealloc
 {
@@ -68,6 +92,12 @@
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
 	return YES;
+}
+
+- (void) setPlayer:(Player *)player
+	  forColorType:(PlayerColorType)color
+{
+	ASSIGN(_players[color], player);
 }
 
 @end

@@ -5,7 +5,7 @@
 #include "StoneUI.h"
 
 @protocol BoardOwner
-//- (void) playerShouldPutStoneAtLocation:(GoLocation)location;
+- (void) playerShouldPutStoneAtLocation:(GoLocation)location;
 @end
 
 @interface Board : NSView

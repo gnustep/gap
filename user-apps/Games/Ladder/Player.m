@@ -4,10 +4,6 @@
 @implementation Player
 - (id) init
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(turnBegin:)
-												 name:GameTurnDidBeginNotification
-											   object:nil];
 	return self;
 }
 
@@ -26,21 +22,18 @@
 	return [_pathDict objectForKey:path];
 }
 
-- (void) turnBegin:(NSNotification *)notification
-{
-	NSDictionary *dict = [notification userInfo];
-	/*
-	NSLog(@"turn begin with last player %@",[dict objectForKey:@"LastPlayer"]);
-	NSLog(@"with stone %@",[dict objectForKey:@"Stone"]);
-	NSLog(@"is turn handicap? %@",[dict objectForKey:@"IsHandicap"]);
-	*/
-
-
-}
-
-- (void) putStoneWithColorType:(PlayerColorType)colorType
-						  toGo:(Go *)go
-					atLocation:(GoLocation)location
+- (void) playGo:(Go *)go
+   forColorType:(PlayerColorType)colorType
 {
 }
+
+- (void) playGo:(Go *)go
+withStoneOfColorType:(PlayerColorType)colorType
+		  atLocation:(GoLocation)location
+{
+	NSLog(@"%@ play",self);
+	[go putStoneAtLocation:location];
+	[go turnBegin:nil];
+}
+
 @end

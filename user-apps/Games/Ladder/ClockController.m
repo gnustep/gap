@@ -269,13 +269,13 @@
 
 		if ([_game turn] == BlackPlayerType)
 		{
-			[blackClock setHandsTime:[_game timeUsedForPlayerColorType:BlackPlayerType] + sinceTurn];
-			[whiteClock setHandsTime:[_game timeUsedForPlayerColorType:WhitePlayerType]];
+			[blackClock setHandsTime:[_game timeUsedForPlayerWithColorType:BlackPlayerType] + sinceTurn];
+			[whiteClock setHandsTime:[_game timeUsedForPlayerWithColorType:WhitePlayerType]];
 		}
 		else
 		{
-			[blackClock setHandsTime:[_game timeUsedForPlayerColorType:BlackPlayerType]];
-			[whiteClock setHandsTime:[_game timeUsedForPlayerColorType:WhitePlayerType] + sinceTurn];
+			[blackClock setHandsTime:[_game timeUsedForPlayerWithColorType:BlackPlayerType]];
+			[whiteClock setHandsTime:[_game timeUsedForPlayerWithColorType:WhitePlayerType] + sinceTurn];
 		}
 	}
 }

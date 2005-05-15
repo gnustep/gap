@@ -10,19 +10,19 @@
 }
 
 
-+ (Stone *) stoneWithPlayerColorType:(PlayerColorType)colorType
++ (Stone *) stoneWithColorType:(PlayerColorType)colorType
 {
 	id stone = AUTORELEASE([self new]);
-	[stone setPlayerColorType:colorType];
+	[stone setColorType:colorType];
 	return stone;
 }
 
-- (PlayerColorType) playerColorType
+- (PlayerColorType) colorType
 {
 	return _colorType;
 }
 
-- (void) setPlayerColorType:(PlayerColorType)newColorType
+- (void) setColorType:(PlayerColorType)newColorType
 {
 	_colorType = newColorType;
 }
@@ -55,6 +55,13 @@
 @end
 
 @class StoneUI;
+
+
+@interface Go (Private)
+- (void) _setupGNUGo;
+@end
+
+
 @implementation Go
 
 - (void) awakeFromNib
@@ -73,8 +80,8 @@
 	{
 		if (random()%2)
 		{
-			[self setStoneWithPlayerColorType:random()%2
-								   atLocation:MakeGoLocation(r,c)];
+			[self setStoneWithColorType:random()%2
+							 atLocation:MakeGoLocation(r,c)];
 		}
 	}
 	*/
@@ -104,6 +111,66 @@
 	[self setBoardSize:19];
 	return self;
 }
+
+- (void) turnBegin:(NSCalendarDate *)turnDate
+{
+	/* if no dict */
+	PlayerColorType newTurn;
+
+	if (turnDate == nil)
+	{
+		turnDate = [NSCalendarDate calendarDate];
+	}
+
+	if (_gameBeginDate == nil)
+	{
+		_turnBeginDate = [turnDate copy];
+		_gameBeginDate = [turnDate copy];
+	}
+
+	timeUsed[turn] = timeUsed[turn] + [turnDate timeIntervalSinceDate:_turnBeginDate];
+
+	ASSIGN(_turnBeginDate, turnDate);
+
+	if (turn == WhitePlayerType)
+	{
+		turn = BlackPlayerType;
+	}
+	else
+	{
+		turn = WhitePlayerType;
+	}
+
+	_turnNumber++;
+
+	/* notify the system that new turn has begun */
+	NSMutableDictionary * dict;
+	dict = [NSMutableDictionary dictionary];
+
+	[dict setObject:turn == BlackPlayerType?@"BlackStone":@"WhiteStone"
+			 forKey:@"CurrentTurn"];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:GameTurnDidBeginNotification
+														object:self
+													  userInfo:dict];
+
+}
+
+- (void) newTurnForPlayerWithColorType:(PlayerColorType) playerColorType
+{
+
+
+	if (isPause)
+	{
+		[self continue];
+	}
+
+		/*
+		[dict setObject:stone
+				 forKey:@"Stone"];
+				 */
+}
+
 
 - (void) dealloc
 {
@@ -169,16 +236,13 @@
 	return size;
 }
 
+/*
 - (void) setHandicap:(unsigned int)handicap
 {
 	NSAssert(_turnNumber == 0, @"Set handicap during the game");
 	_handicapLeft = handicap;
 }
-
-- (void) newTurnForPlayerColorType:(PlayerColorType) playerColorType
-{
-	_turnNumber++;
-}
+*/
 
 - (void) _setupGNUGo
 {
@@ -331,11 +395,10 @@ static BOOL __check_state(NSString *str)
 			 date:(NSCalendarDate *)turnTime
 {
 	int offset = (location.row - 1) * size + (location.column - 1);
-	NSMutableDictionary * dict;
 
 	NSString *cmdString;
 
-	cmdString = [NSString stringWithFormat:@"play %@ %@",[stone playerColorType] == BlackPlayerType?@"black":@"white",__string_for_go_location(location)];
+	cmdString = [NSString stringWithFormat:@"play %@ %@",[stone colorType] == BlackPlayerType?@"black":@"white",__string_for_go_location(location)];
 
 
 	if (__check_state([self runGTPCommand:cmdString]) == NO)
@@ -345,111 +408,41 @@ static BOOL __check_state(NSString *str)
 	}
 	else
 	{
-//		NSLog([self runGTPCommand:@"showboard"]);
+		NSLog([self runGTPCommand:@"showboard"]);
 	}
 
-	/*
-	if ([stone playerColorType] == 0)
-	{
-		NSLog(@"SHITHAPPENED");
-	}
-	*/
-
-	dict = [NSMutableDictionary dictionary];
-
-	if (_players[turn])
-	{
-		[dict setObject:_players[turn]
-				 forKey:@"LastPlayer"];
-	}
-
-	if (isPause)
-	{
-		[self continue];
-	}
-
-	if (_turnBeginDate == nil)
-	{
-		_turnBeginDate = [turnTime copy];
-		_gameBeginDate = [turnTime copy];
-	}
-
-	timeUsed[turn] = timeUsed[turn] + [turnTime timeIntervalSinceDate:_turnBeginDate];
+	//timeUsed[turn] = timeUsed[turn] + [turnTime timeIntervalSinceDate:_turnBeginDate];
 
 	if (stone)
 	{
-		[dict setObject:stone
-				 forKey:@"Stone"];
-
 		[stone setOwner:self];
-		if ([stone playerColorType] == BlackPlayerType)
-		{
-			turn = WhitePlayerType;
-			ASSIGN(_boardTable[offset], stone);
-		}
-		else
-		{
-			turn = BlackPlayerType;
-			ASSIGN(_boardTable[offset], stone);
-		}
-	}
-	else
-	{
-		if (turn == BlackPlayerType)
-		{
-			turn = WhitePlayerType;
-		}
-		else
-		{
-			turn = BlackPlayerType;
-		}
+		ASSIGN(_boardTable[offset], stone);
+		[self _syncBoardWithGNUGo];
 	}
 
-	if (_handicapLeft > 0)
-	{
-		[dict setObject:@"YES"
-				 forKey:@"IsHandicap"];
-
-		_handicapLeft--;
-		if (_handicapLeft > 0)
-		{
-			turn = BlackPlayerType;
-		}
-	}
-
-	ASSIGN(_turnBeginDate, turnTime);
-
-	[self _syncBoardWithGNUGo];
-
-	[dict setObject:turn == BlackPlayerType?@"BlackStone":@"WhiteStone"
-			 forKey:@"CurrentTurn"];
-
-	[[NSNotificationCenter defaultCenter] postNotificationName:GameTurnDidBeginNotification
-														object:_players[turn]
-													  userInfo:dict];
-	[self newTurnForPlayerColorType:turn];
 }
 
 - (void) setStone:(id <Stone>) stone
 	   atLocation:(GoLocation) location
 {
+	NSLog(@"%d",[stone colorType]);
 	[self setStone:stone
 		atLocation:location
 			  date:[NSCalendarDate calendarDate]];
 }
 
-- (void) setStoneWithPlayerColorType:(PlayerColorType) aColorType
-						  atLocation:(GoLocation) location
+- (void) setStoneWithColorType:(PlayerColorType) aColorType
+					atLocation:(GoLocation) location
 {
-	[self setStone:[stoneClass stoneWithPlayerColorType:aColorType]
+	[self setStone:[stoneClass stoneWithColorType:aColorType]
 		atLocation:location];
 }
 
 - (void) putStoneAtLocation:(GoLocation) location
 {
 	NSLog(@"TURN %d",turn);
-	[self setStoneWithPlayerColorType:turn
-						   atLocation:location];
+	[self setStoneWithColorType:turn
+					 atLocation:location];
 }
 
 - (void) passTurn
@@ -516,12 +509,12 @@ static BOOL __check_state(NSString *str)
 }
 
 - (void) setTimeUsed:(NSTimeInterval) time
-  forPlayerColorType:(PlayerColorType) playerColorType
+forPlayerWithColorType:(PlayerColorType) playerColorType
 {
 	timeUsed[playerColorType] = time;
 }
 
-- (NSTimeInterval) timeUsedForPlayerColorType:(PlayerColorType) playerColorType
+- (NSTimeInterval) timeUsedForPlayerWithColorType:(PlayerColorType) playerColorType
 {
 	return timeUsed[playerColorType];
 }

@@ -11,23 +11,25 @@ typedef enum _PlayerColorType
 } PlayerColorType;
 
 @protocol GameTurn
-- (NSTimeInterval) timeUsedForPlayerColorType:(PlayerColorType) playerColorType;
+- (NSTimeInterval) timeUsedForPlayerWithColorType:(PlayerColorType) playerColorType;
 - (void) pause;
 - (void) continue;
 - (NSCalendarDate *) gameBeginDate;
 - (NSCalendarDate *) turnBeginDate;
 - (void) setTimeUsed:(NSTimeInterval) time
-  forPlayerColorType:(PlayerColorType) playerColorType;
+forPlayerWithColorType:(PlayerColorType) playerColorType;
 - (unsigned long) turnNumber;
 - (void) setTurnNumber:(unsigned long)turnNumber;
 - (void) passTurn;
-- (void) newTurnForPlayer:(PlayerColorType) playerColorType;
+- (void) newTurnForPlayerWithColorType:(PlayerColorType) playerColorType;
 - (PlayerColorType) turn;
 
 @end
 
-extern NSString *GameDidBecomeMainNotification;
-extern NSString *GameDidResignMainNotification;
-extern NSString *GameTurnDidBeginNotification;
+extern NSString * GameDidBecomeMainNotification;
+extern NSString * GameDidResignMainNotification;
+extern NSString * GameTurnDidBeginNotification;
+extern NSString * GameDidPauseNotification;
+extern NSString * GameOverNotification;
 
 #endif /* GAMEVS_H */
