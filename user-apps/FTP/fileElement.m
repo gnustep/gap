@@ -171,6 +171,12 @@
     filename = [[NSString stringWithCString:curr] retain];
 //    NSLog(@"file name: %@", [self filename]);
 
+    /* let's ignore the current and the parent directory some servers send over... */
+    if([filename isEqualToString:@"."])
+        return nil;
+    else if([filename isEqualToString:@".."])
+        return nil;
+    
     return self;
 }
 
