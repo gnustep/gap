@@ -235,7 +235,7 @@
     return 0;
 }
 
-- (void)retrieveFile:(fileElement *)file toPath:(NSString *)localPath
+- (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -250,10 +250,56 @@
     int                fromLen;
     int                replyCode;
     NSFileManager      *localFm;
-    unsigned chunkLen;
-    unsigned totalBytes;
+    unsigned           chunkLen;
+    unsigned           totalBytes;
+    NSString           *pristineLocalPath; /* original path */
+    NSString           *pristineRemotePath; /* original path */
+    NSString           *localPath;
 
     fromLen = sizeof(from);
+
+    fileName = [file filename];
+    fileSize = [file size];
+    pristineLocalPath = [localClient workingDir];
+    localPath = [pristineLocalPath stringByAppendingPathComponent:fileName];
+    pristineRemotePath = [self workingDir];
+
+    if ([file isDir])
+    {
+        NSArray      *dirList;
+        NSString     *remoteDir;
+        NSEnumerator *en;
+        fileElement  *fEl;
+
+        if (depth > 3)
+        {
+            NSLog(@"Max depth reached: %d", depth);
+            return;
+        }
+        
+        NSLog(@"it is a dir: %@", fileName);
+        remoteDir = [[self workingDir] stringByAppendingPathComponent:fileName];
+        NSLog(@"from %@ to %@", [self workingDir], remoteDir);
+        [self changeWorkingDir:remoteDir];
+        NSLog(@"remote dir changed: %@", [self workingDir]);
+
+        if ([localClient createNewDir:localPath] == YES)
+        {
+            [localClient changeWorkingDir:localPath];
+    
+            dirList = [self dirContents];
+            en = [dirList objectEnumerator];
+            while (fEl = [en nextObject])
+            {
+                NSLog(@"recurse, download : %@", [fEl filename]);
+                [self retrieveFile:fEl to:localClient beingAt:(depth+1)];
+            }
+        }
+        /* we get back were we started */
+        [self changeWorkingDir:pristineRemotePath];
+        return;
+    }
+
     /* lets settle to a plain binary standard type */
     [self setTypeToI];
     
@@ -262,16 +308,16 @@
         NSLog(@"error initiating data connection, retrieveFile");
         return;
     }
-
-    fileName = [file filename];
-    fileSize = [file size];
-    localPath = [localPath stringByAppendingPathComponent:fileName];
     
     [fileName getCString:fNameCStr];
     sprintf(command, "RETR %s\r\n", fNameCStr);
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
+
+    if(replyCode != 150)
+        return; /* we have an error or some unexpected condition */
+    
     [reply release];
     if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
     {
@@ -309,6 +355,7 @@
     totalBytes = 0;
     chunkLen = 0;
     [controller setProgress:0];
+    [controller setStatusInfo:fileName];
     dataBuff = [remoteFileHandle availableData];
     while (chunkLen = [dataBuff length])
     {
@@ -316,7 +363,7 @@
         [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [localFileHandle writeData:dataBuff];
         dataBuff = [remoteFileHandle availableData];
-        NSLog(@"chunk %u", chunkLen);
+//        NSLog(@"chunk %u", chunkLen);
     }
     [controller setProgress:(((float)totalBytes / fileSize) * 100)];
     
@@ -327,7 +374,7 @@
     [reply release];
 }
 
-- (void)storeFile:(fileElement *)file fromPath:(NSString *)localPath
+- (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -344,8 +391,23 @@
     unsigned           chunkLen;
     unsigned           totalBytes;
     unsigned int       blockSize;
+    NSString           *pristinePath; /* original path */
+    NSString           *localPath;
 
     fromLen = sizeof(from);
+
+    fileName = [file filename];
+    fileSize = [file size];
+    pristinePath = [localClient workingDir];
+    localPath = [localPath stringByAppendingPathComponent:fileName];
+
+
+    if ([file isDir])
+    {
+        NSLog(@"it is a dir: %@", fileName);
+        return;
+    }
+    
     /* lets settle to a plain binary standard type */
     [self setTypeToI];
 
@@ -354,9 +416,6 @@
         NSLog(@"error initiating data connection, retrieveFile");
         return;
     }
-    fileName = [file filename];
-    fileSize = [file size];
-    localPath = [localPath stringByAppendingPathComponent:fileName];
 
     [fileName getCString:fNameCStr];
     sprintf(command, "STOR %s\r\n", fNameCStr);
@@ -612,6 +671,23 @@
     close (dataSocket);
     return 0;
 }
+
+/*
+ creates a new directory
+ tries to guess if the given dir is relative (no starting /) or absolute
+ Is this portable to non-unix OS's?
+ */
+- (BOOL)createNewDir:(NSString *)dir
+{
+    NSFileManager *fm;
+    NSString      *localPath;
+
+    if (NO == NO)
+        return NO;
+    else
+        return YES;
+}
+
 
 /* RM again: a better path limit is needed */
 - (NSArray *)dirContents
