@@ -10,7 +10,9 @@
 	    "anonymousConn:",
 	    "showConnPanel:",
 	    "changePathFromMenu:",
-	    "disconnect:"
+	    "disconnect:",
+	    "downloadButton:",
+	    "uploadButton:"
 	);
 	Outlets = (
 	    localView,
@@ -38,6 +40,8 @@
 	    "changePathFromMenu:",
 	    "connectConn:",
 	    "disconnect:",
+	    "downloadButton:",
+	    "uploadButton:",
 	    "orderFrontFontPanel:",
 	    "showConnPanel:",
 	    "showFtpLog:",
