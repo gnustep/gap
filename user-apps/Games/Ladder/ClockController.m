@@ -174,7 +174,7 @@
 
 - (void) checkStartGame:(NSNotification *)notification
 {
-	NSLog(@"check should begin %p",_game);
+	//NSLog(@"check should begin %p",_game);
 	if ([notification object] == _game)
 	{
 		[self checkGame];
@@ -197,7 +197,7 @@
 		/* check if game has begun */
 		if ([_game turnBeginDate] != nil)
 		{
-			NSLog(@"launch");
+			//NSLog(@"launch");
 
 			timer =  [NSTimer scheduledTimerWithTimeInterval:1.0
 													  target:self
@@ -207,7 +207,7 @@
 		}
 		else
 		{
-			NSLog(@"begin date nil");
+			//NSLog(@"begin date nil");
 		}
 
 		[self _adjustClockToGame];
@@ -230,7 +230,7 @@
 
 - (void) setGame:(id <GameTurn>)game
 {
-	NSLog(@"%p %p set",game,_game);
+	//NSLog(@"%p %p set",game,_game);
 	if (_game == game)
 	{
 		return;
@@ -282,7 +282,6 @@
 
 - (void) _tick
 {
-	NSLog(@"tick");
 	[self _adjustClockToGame];
 }
 

@@ -22,9 +22,10 @@
 	return [_pathDict objectForKey:path];
 }
 
-- (void) playGo:(Go *)go
+- (BOOL) playGo:(Go *)go
    forColorType:(PlayerColorType)colorType
 {
+	return NO;
 }
 
 - (void) playGo:(Go *)go

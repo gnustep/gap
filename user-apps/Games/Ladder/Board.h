@@ -21,6 +21,10 @@
 	NSArray *_verticalMarks;
 	NSArray *_horizontalMarks;
 	GoLocation lastLocation;
+	float shalpha;
+	float lialpha;
+	NSTimer *liTimer;
+	BOOL isEditable;
 }
 
 - (id) initWithGo:(Go *)go;
@@ -30,5 +34,6 @@
 - (NSPoint) pointForGoLocation:(GoLocation)loc;
 - (Go *) go;
 - (void) setOwner:(id <BoardOwner>)owner;
+- (void) setEditable:(BOOL)editable;
 @end
 #endif

@@ -299,10 +299,15 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 	return str;
 }
 
+/* change this to dictionary */
 static NSString *columnstr[] = {@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T"};
 
 static NSString * __string_for_go_location(GoLocation loc)
 {
+	if (loc.row == 0 || loc.column == 0)
+	{
+		return @"pass";
+	}
 	return [NSString stringWithFormat:@"%@%d",
 		   columnstr[loc.column-1],
 		   loc.row];
@@ -313,7 +318,7 @@ static GoLocation __go_location_for_string(NSString *str)
 	GoLocation retloc;
 	int i;
 
-	if (str == nil || [str length] < 2)
+	if (str == nil || [str length] < 2 || [str isEqualToString:@"pass"])
 	{
 		return GoNoLocation;
 	}
@@ -322,7 +327,7 @@ static GoLocation __go_location_for_string(NSString *str)
 
 	for (i=0;i<19;i++)
 	{
-		if ([substr isEqualToString:columnstr[i]])
+		if ([substr caseInsensitiveCompare:columnstr[i]] == NSOrderedSame)
 		{
 			retloc.column = i + 1;
 			break;
@@ -414,7 +419,7 @@ static BOOL __check_state(NSString *str)
 
 	//timeUsed[turn] = timeUsed[turn] + [turnTime timeIntervalSinceDate:_turnBeginDate];
 
-	if (stone != nil)
+	if (stone != nil && offset >= 0)
 	{
 		[stone setOwner:self];
 		ASSIGN(_boardTable[offset], stone);
@@ -426,6 +431,12 @@ static BOOL __check_state(NSString *str)
 		[[NSNotificationCenter defaultCenter] postNotificationName:GoStoneNotification
 															object:self
 														  userInfo:dict];
+	}
+	else
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:GoStoneNotification
+															object:self
+														  userInfo:nil];
 	}
 
 
@@ -449,7 +460,7 @@ static BOOL __check_state(NSString *str)
 
 - (void) putStoneAtLocation:(GoLocation) location
 {
-	NSLog(@"TURN %d",turn);
+//	NSLog(@"TURN %d",turn);
 	[self setStoneWithColorType:turn
 					 atLocation:location];
 }

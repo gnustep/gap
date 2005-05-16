@@ -40,6 +40,7 @@
 {
 	[self setTileImage:[NSImage imageNamed:@"wood.jpg"]];
 	[[self window] setAcceptsMouseMovedEvents:YES];
+	isEditable = YES;
 }
 
 - (BOOL) acceptsFirstResponder
@@ -88,21 +89,76 @@
 	return self;
 }
 
+- (void) updateGlowArea:(GoLocation)loc
+{
+	if (loc.row == 0)
+	{
+		return;
+	}
+
+	NSRect bounds = [self bounds];
+	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
+	int boardSize = [_go boardSize];
+	float cellWidth = boardWidth / boardSize;
+	NSRect r;
+
+	r.size.width = cellWidth * 3;
+	r.size.height = cellWidth * 3;
+	r.origin = [self pointForGoLocation:lastLocation];
+	r.origin.x -= cellWidth;
+	r.origin.y -= cellWidth;
+	[self setNeedsDisplayInRect:r];
+}
+
 - (void) stoneAdded:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
 	id <Stone> aStone;
-	aStone = [dict objectForKey:@"Stone"];
-	if (aStone != nil)
+	if (lastLocation.row != 0)
 	{
-		lastLocation = [aStone location];
+		[self updateGlowArea:lastLocation];
 	}
-	else
+
+	if (dict == nil)
 	{
 		lastLocation = GoNoLocation;
 	}
+	else
+	{
+		aStone = [dict objectForKey:@"Stone"];
+		if (aStone != nil)
+		{
+			lastLocation = [aStone location];
+		}
+		else
+		{
+			lastLocation = GoNoLocation;
+		}
+	}
 
-	[self setNeedsDisplay:YES];
+	[self updateGlowArea:lastLocation];
+	lialpha = 0.1;
+
+	[liTimer invalidate];
+
+	liTimer = [NSTimer scheduledTimerWithTimeInterval:0.05
+											   target:self
+											 selector:@selector(_addLight)
+											 userInfo:nil
+											  repeats:YES];
+
+}
+
+- (void) _addLight
+{
+	lialpha *= 1.2;
+	if (lialpha > 1.0)
+	{
+		lialpha = 1.0;
+		[liTimer invalidate];
+		liTimer = nil;
+	}
+	[self updateGlowArea:lastLocation];
 }
 
 - (void) viewWillMoveToWindow: (NSWindow*)newWindow
@@ -110,6 +166,12 @@
 {
 	[super viewWillMoveToWindow:newWindow];
 	[newWindow setAcceptsMouseMovedEvents:YES];
+}
+
+- (void) setEditable:(BOOL)editable
+{
+	isEditable = editable;
+	[self setNeedsDisplay:YES];
 }
 
 - (void) setGo:(Go *)go
@@ -126,6 +188,7 @@
 
 	[self _update];
 	[self setNeedsDisplay:YES];
+
 }
 
 - (void) setTileImage:(NSImage *)image
@@ -137,28 +200,41 @@
 {
 	GoLocation newLoc = [self goLocationForPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
 
-	if (newLoc.row != mouseLocation.row || newLoc.column != mouseLocation.column)
+	NSRect updateRect;
+	NSRect bounds = [self bounds];
+	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
+	int boardSize = [_go boardSize];
+	float cellWidth = boardWidth / boardSize;
+	NSRect boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
+			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
+
+	updateRect = NSMakeRect(NSMinX(boardRect) + (mouseLocation.column * cellWidth) - cellWidth, NSMinY(boardRect) + (mouseLocation.row * cellWidth) - cellWidth, cellWidth, cellWidth);
+	[self setNeedsDisplayInRect:updateRect];
+
+	mouseLocation = newLoc;
+
+	updateRect = NSMakeRect(NSMinX(boardRect) + (mouseLocation.column * cellWidth) - cellWidth, NSMinY(boardRect) + (mouseLocation.row * cellWidth) - cellWidth, cellWidth, cellWidth);
+	[self setNeedsDisplayInRect:updateRect];
+
+	NSPoint p1 = [self convertPoint:[event locationInWindow] fromView:nil];
+	NSPoint p2 = [self pointForGoLocation:mouseLocation];
+
+	shalpha = ((cellWidth/3) - sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)))/(cellWidth/3);
+
+	if (shalpha < 0)
 	{
-		NSRect updateRect;
-		NSRect bounds = [self bounds];
-		float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-		int boardSize = [_go boardSize];
-		float cellWidth = boardWidth / boardSize;
-		NSRect boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
-				(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
-
-		updateRect = NSMakeRect(NSMinX(boardRect) + (mouseLocation.column * cellWidth) - cellWidth, NSMinY(boardRect) + (mouseLocation.row * cellWidth) - cellWidth, cellWidth, cellWidth);
-		[self setNeedsDisplayInRect:updateRect];
-
-		mouseLocation = newLoc;
-
-		updateRect = NSMakeRect(NSMinX(boardRect) + (mouseLocation.column * cellWidth) - cellWidth, NSMinY(boardRect) + (mouseLocation.row * cellWidth) - cellWidth, cellWidth, cellWidth);
-		[self setNeedsDisplayInRect:updateRect];
+		shalpha = 0;
 	}
+
 }
 
 - (void) mouseDown: (NSEvent*)event
 {
+	if (isEditable == NO)
+	{
+		return;
+	}
+
 	GoLocation downLoc = [self goLocationForPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
 	if ([_go stoneAtLocation:downLoc] == nil)
 	{
@@ -178,6 +254,7 @@
 	NSRect boardRect;
 	float ir,ic;
 	int i,j;
+	float k;
 	NSEnumerator *en;
 	NSFont *aFont;
 
@@ -191,6 +268,7 @@
 		return;
 	}
 
+	/* fill the wood tile */
 	if (_woodTile)
 	{
 		for (ir = 0; ir < NSMaxY(bounds); ir += woodSize.height)
@@ -258,11 +336,11 @@
 			ic = NSMinX(boardRect) + cellWidth/2 + cellWidth*3;
 			for (j = 4; j <= boardSize; j+=6, ic+=cellWidth*6)
 			{
-				PSmoveto(ic, ir);
-				PSarc(ic, ir, BORDER_SIZE/10, 0, 360);
+				DPSmoveto(ctxt,ic, ir);
+				DPSarc(ctxt,ic, ir, BORDER_SIZE/10, 0, 360);
 			}
 		}
-		PSfill();
+		DPSfill(ctxt);
 	}
 
 	/* draw text mark */
@@ -321,16 +399,27 @@
 			if (lastLocation.row == i && lastLocation.column == j)
 			{
 				[stone drawIndicatorWithRadius:cellWidth/2
-									   atPoint:p];
+									   atPoint:p
+										 alpha:lialpha];
 			}
 		}
-		else if (mouseLocation.row == i && mouseLocation.column == j)
+		else if (mouseLocation.row == i && mouseLocation.column == j && isEditable)
 		{
 			NSPoint p = [self pointForGoLocation:mouseLocation];
-			p.x += cellWidth/2;
-			p.y += cellWidth/2;
+			/*
 			[_shadow_stone drawWithRadius:cellWidth/2
 								  atPoint:p];
+								  */
+			for (k = cellWidth/2; k > 0; k = k - 1.0)
+			{
+				DPSgsave(ctxt);
+				DPSnewpath(ctxt);
+				DPSsetalpha(ctxt,shalpha * (cellWidth/2 - k)/(cellWidth/2));
+				DPSarc(ctxt,p.x,p.y,k,0,360);
+				DPSarcn(ctxt,p.x,p.y,k-1.0,360,0);
+				DPSfill(ctxt);
+				DPSgrestore(ctxt);
+			}
 		}
 	}
 
@@ -352,6 +441,24 @@
 
 }
 
+- (NSRect) rectForGoLocation:(GoLocation)loc
+{
+	NSRect boardRect;
+	NSRect bounds = [self bounds];
+	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
+	int boardSize = [_go boardSize];
+	float cellWidth = boardWidth / boardSize;
+
+	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
+			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
+
+	NSRect retRect;
+	retRect.origin = [self pointForGoLocation:loc];
+	retRect.size = NSZeroSize;
+	retRect = NSInsetRect(retRect,-cellWidth/2, -cellWidth/2);
+	return retRect;
+}
+
 - (NSPoint) pointForGoLocation:(GoLocation)loc
 {
 	NSRect boardRect;
@@ -364,8 +471,8 @@
 	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
 			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
 
-	retpnt.x = (loc.column - 1) * cellWidth + NSMinX(boardRect);
-	retpnt.y = (loc.row - 1) * cellWidth + NSMinY(boardRect);
+	retpnt.x = (loc.column - 1) * cellWidth + NSMinX(boardRect) + cellWidth/2;
+	retpnt.y = (loc.row - 1) * cellWidth + NSMinY(boardRect) + cellWidth/2;
 
 	return retpnt;
 }

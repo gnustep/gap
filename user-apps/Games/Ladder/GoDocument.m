@@ -42,8 +42,13 @@
 {
 	Go *go = [notification object];
 	PlayerColorType turn = [go turn];
-	[_players[turn] playGo:go
-			  forColorType:turn];
+	if ([_players[turn] playGo:go
+				  forColorType:turn] == NO)
+
+	{
+		NSLog(@"board on");
+		[_board setEditable:YES];
+	}
 }
 
 - (void) playerShouldPutStoneAtLocation:(GoLocation)location
@@ -51,6 +56,8 @@
 	Go *go = [_board go];
 	PlayerColorType turn = [go turn];
 
+		NSLog(@"board off");
+	[_board setEditable:NO];
 	[_players[turn] playGo:go
 	  withStoneOfColorType:turn
 				atLocation:location];
