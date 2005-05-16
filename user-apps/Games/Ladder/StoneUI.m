@@ -296,6 +296,7 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 
 - (void) drawIndicatorWithRadius:(float)radius
 						 atPoint:(NSPoint)p
+						   alpha:(float)alpha
 {
 	NSGraphicsContext *ctxt=GSCurrentContext();
 	float f = (radius/RFACTOR)/SHIFT_FACTOR;
@@ -305,7 +306,7 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 
 	DPSgsave(ctxt);
 	[[NSColor whiteColor] set];
-	DPSsetalpha(ctxt, 0.1);
+	DPSsetalpha(ctxt, 0.1 * alpha);
 
 	for (i = 0; i < 8; i++)
 	{

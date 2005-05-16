@@ -10,7 +10,7 @@
 - (NSDictionary *) info;
 - (void) setInfo:(NSDictionary *)infoDict;
 - (NSDictionary *) dictionaryForPath:(NSString *)path;
-- (void) playGo:(Go *)go
+- (BOOL) playGo:(Go *)go
    forColorType:(PlayerColorType)colorType;
 - (void) playGo:(Go *)go
 withStoneOfColorType:(PlayerColorType)colorType
