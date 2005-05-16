@@ -125,6 +125,7 @@ static GoLocation __go_location_for_string(NSString *str)
 	NSData *data;
 
 	[self runGTPCommand:@"clear_board"];
+	[self runGTPCommand:[NSString stringWithFormat:@"boardsize %d",boardSize]];
 
 	/* FIXME should be smarter than this */
 	for (i = 1; i <= boardSize; i ++)
