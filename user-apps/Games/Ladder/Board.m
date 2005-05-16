@@ -104,7 +104,7 @@
 
 	r.size.width = cellWidth * 2;
 	r.size.height = cellWidth * 2;
-	r.origin = [self pointForGoLocation:lastLocation];
+	r.origin = [self pointForGoLocation:loc];
 	r.origin.x -= cellWidth;
 	r.origin.y -= cellWidth;
 	[self setNeedsDisplayInRect:r];
@@ -118,9 +118,14 @@
 	{
 		[self updateGlowArea:lastLocation];
 	}
+	if (lastLastLocation.row != 0)
+	{
+		[self updateGlowArea:lastLastLocation];
+	}
 
 	if (dict == nil)
 	{
+		lastLastLocation = lastLocation;
 		lastLocation = GoNoLocation;
 	}
 	else
@@ -128,15 +133,18 @@
 		aStone = [dict objectForKey:@"Stone"];
 		if (aStone != nil)
 		{
+			lastLastLocation = lastLocation;
 			lastLocation = [aStone location];
 		}
 		else
 		{
+			lastLastLocation = lastLocation;
 			lastLocation = GoNoLocation;
 		}
 	}
 
 	[self updateGlowArea:lastLocation];
+	[self updateGlowArea:lastLastLocation];
 	lialpha = 0.1;
 
 	[liTimer invalidate];
@@ -157,8 +165,10 @@
 		lialpha = 1.0;
 		[liTimer invalidate];
 		liTimer = nil;
+		lastLastLocation = lastLocation;
 	}
 	[self updateGlowArea:lastLocation];
+	[self updateGlowArea:lastLastLocation];
 }
 
 - (void) viewWillMoveToWindow: (NSWindow*)newWindow
@@ -401,6 +411,12 @@
 				[stone drawIndicatorWithRadius:cellWidth/2
 									   atPoint:p
 										 alpha:lialpha];
+			}
+			else if (lastLastLocation.row == i && lastLastLocation.column == j)
+			{
+				[stone drawIndicatorWithRadius:cellWidth/2
+									   atPoint:p
+										 alpha:1 - lialpha];
 			}
 		}
 		else if (mouseLocation.row == i && mouseLocation.column == j && isEditable)

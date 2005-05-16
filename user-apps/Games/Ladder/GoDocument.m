@@ -16,7 +16,7 @@
 
 - (void) awakeFromNib
 {
-	_players[BlackPlayerType] = [GNUGoPlayer new];
+	_players[BlackPlayerType] = [Player new];
 	_players[WhitePlayerType] = [GNUGoPlayer new];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
