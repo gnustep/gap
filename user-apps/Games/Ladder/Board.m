@@ -114,6 +114,7 @@
 {
 	NSDictionary *dict = [notification userInfo];
 	id <Stone> aStone;
+	/*
 	if (lastLocation.row != 0)
 	{
 		[self updateGlowArea:lastLocation];
@@ -122,6 +123,9 @@
 	{
 		[self updateGlowArea:lastLastLocation];
 	}
+	*/
+
+	[self setNeedsDisplay:YES];
 
 	if (dict == nil)
 	{
