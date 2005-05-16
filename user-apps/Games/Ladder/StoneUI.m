@@ -300,21 +300,38 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 {
 	NSGraphicsContext *ctxt=GSCurrentContext();
 	float f = (radius/RFACTOR)/SHIFT_FACTOR;
-	int i,rad;
+	int i;
+	float a,rad,g;
 
 	rad = radius * 2;
 
 	DPSgsave(ctxt);
-	[[NSColor whiteColor] set];
-	DPSsetalpha(ctxt, 0.1 * alpha);
+	a = 0.05 * alpha;
+	g = 0.05 * alpha;
 
-	for (i = 0; i < 8; i++)
+	for (i = 0; i < 8; i++,rad*= 0.9, a+= g, g*=0.8)
 	{
+		if (a > 1.0)
+		{
+			a = 1.0;
+		}
 		DPSnewpath(ctxt);
+		[[NSColor colorWithDeviceRed:1.0
+							   green:0.9
+								blue:0.6
+							   alpha:a] set];
 		DPSarc(ctxt,position.x * f + p.x, position.y * f + p.y, rad, 0, 360);
+		DPSarcn(ctxt,position.x * f + p.x, position.y * f + p.y, rad * 0.8, 360, 0);
 		DPSfill(ctxt);
-		rad *= 0.9;
 	}
+	if (a > 1.0)
+	{
+		a = 1.0;
+	}
+	DPSnewpath(ctxt);
+	DPSsetalpha(ctxt, a);
+	DPSarc(ctxt,position.x * f + p.x, position.y * f + p.y, rad, 0, 360);
+	DPSfill(ctxt);
 
 	DPSgrestore(ctxt);
 }

@@ -102,8 +102,8 @@
 	float cellWidth = boardWidth / boardSize;
 	NSRect r;
 
-	r.size.width = cellWidth * 3;
-	r.size.height = cellWidth * 3;
+	r.size.width = cellWidth * 2;
+	r.size.height = cellWidth * 2;
 	r.origin = [self pointForGoLocation:lastLocation];
 	r.origin.x -= cellWidth;
 	r.origin.y -= cellWidth;
