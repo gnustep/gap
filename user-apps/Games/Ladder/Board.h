@@ -21,6 +21,7 @@
 	NSArray *_verticalMarks;
 	NSArray *_horizontalMarks;
 	GoLocation lastLocation;
+	GoLocation lastLastLocation;
 	float shalpha;
 	float lialpha;
 	NSTimer *liTimer;
