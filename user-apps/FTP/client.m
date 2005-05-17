@@ -85,9 +85,14 @@
 
 - (NSArray *)dirContents
 {
-    NSLog(@"override me! getExtDirList superclass method");
+    NSLog(@"override me! dirContents superclass method");
     return nil;
 }
 
+- (BOOL)createNewDir:(NSString *)dir
+{
+    NSLog(@"override me! createNewDir superclass method");
+    return NO;
+}
 
 @end
