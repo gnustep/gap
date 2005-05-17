@@ -252,20 +252,18 @@
     NSFileManager      *localFm;
     unsigned           chunkLen;
     unsigned           totalBytes;
-    NSString           *pristineLocalPath; /* original path */
-    NSString           *pristineRemotePath; /* original path */
     NSString           *localPath;
 
     fromLen = sizeof(from);
 
     fileName = [file filename];
     fileSize = [file size];
-    pristineLocalPath = [localClient workingDir];
-    localPath = [pristineLocalPath stringByAppendingPathComponent:fileName];
-    pristineRemotePath = [self workingDir];
+    localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
 
     if ([file isDir])
     {
+        NSString     *pristineLocalPath;  /* original path */
+        NSString     *pristineRemotePath; /* original path */
         NSArray      *dirList;
         NSString     *remoteDir;
         NSEnumerator *en;
@@ -276,10 +274,12 @@
             NSLog(@"Max depth reached: %d", depth);
             return;
         }
+
+        pristineLocalPath = [[localClient workingDir] retain];
+        pristineRemotePath = [[self workingDir] retain];
         
         NSLog(@"it is a dir: %@", fileName);
         remoteDir = [[self workingDir] stringByAppendingPathComponent:fileName];
-        NSLog(@"from %@ to %@", [self workingDir], remoteDir);
         [self changeWorkingDir:remoteDir];
         NSLog(@"remote dir changed: %@", [self workingDir]);
 
@@ -297,6 +297,9 @@
         }
         /* we get back were we started */
         [self changeWorkingDir:pristineRemotePath];
+        [localClient changeWorkingDir:pristineLocalPath];
+        [pristineLocalPath release];
+        [pristineRemotePath release];
         return;
     }
 
@@ -363,7 +366,6 @@
         [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [localFileHandle writeData:dataBuff];
         dataBuff = [remoteFileHandle availableData];
-//        NSLog(@"chunk %u", chunkLen);
     }
     [controller setProgress:(((float)totalBytes / fileSize) * 100)];
     
@@ -391,20 +393,58 @@
     unsigned           chunkLen;
     unsigned           totalBytes;
     unsigned int       blockSize;
-    NSString           *pristinePath; /* original path */
     NSString           *localPath;
 
     fromLen = sizeof(from);
 
     fileName = [file filename];
     fileSize = [file size];
-    pristinePath = [localClient workingDir];
-    localPath = [localPath stringByAppendingPathComponent:fileName];
+    
+    localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
+    
 
 
     if ([file isDir])
     {
+        NSString     *pristineLocalPath;  /* original path */
+        NSString     *pristineRemotePath; /* original path */
+        NSArray      *dirList;
+        NSString     *remotePath;
+        NSEnumerator *en;
+        fileElement  *fEl;
+
+        if (depth > 3)
+        {
+            NSLog(@"Max depth reached: %d", depth);
+            return;
+        }
+
+        pristineLocalPath = [[localClient workingDir] retain];
+        pristineRemotePath = [[self workingDir] retain];
+
         NSLog(@"it is a dir: %@", fileName);
+        remotePath = [pristineRemotePath stringByAppendingPathComponent:fileName];
+        [localClient changeWorkingDir:localPath];
+        NSLog(@"local dir changed: %@", [localClient workingDir]);
+
+        if ([self createNewDir:remotePath] == YES)
+        {
+            NSLog(@"remote dir created succesfully");
+            [self changeWorkingDir:remotePath];
+
+            dirList = [localClient dirContents];
+            en = [dirList objectEnumerator];
+            while (fEl = [en nextObject])
+            {
+                NSLog(@"recurse, upload : %@", [fEl filename]);
+                [self storeFile:fEl from:localClient beingAt:(depth+1)];
+            }
+        }
+        /* we get back were we started */
+        [self changeWorkingDir:pristineRemotePath];
+        [localClient changeWorkingDir:pristineLocalPath];
+        [pristineLocalPath release];
+        [pristineRemotePath release];
         return;
     }
     
@@ -428,7 +468,6 @@
         perror("accepting socket, storeFile: ");
     }
 
-    NSLog(@"opened socket");
 
     localFileHandle = [NSFileHandle fileHandleForReadingAtPath:localPath];
     if(localFileHandle == nil)
@@ -453,7 +492,6 @@
         [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [remoteFileHandle writeData:dataBuff];
         dataBuff = [localFileHandle readDataOfLength:blockSize];
-        NSLog(@"chunk %u", chunkLen);
     }
     [controller setProgress:(((float)totalBytes / fileSize) * 100)];
     
@@ -645,7 +683,7 @@
             unsigned char    ipv4[4];
         } addr;
         NSMutableArray *reply;
-        char           tempStr[128];
+        char           tempStr[256];
         unsigned char  p1, p2;
         int            returnCode;
         unsigned int   port;
@@ -679,13 +717,33 @@
  */
 - (BOOL)createNewDir:(NSString *)dir
 {
-    NSFileManager *fm;
-    NSString      *localPath;
+    NSString       *remotePath;
+    char           command[MAX_CONTROL_BUFF];
+    char           pathCStr[MAX_CONTROL_BUFF];
+    NSMutableArray *reply;
+    int            replyCode;
 
-    if (NO == NO)
-        return NO;
-    else
+    if ([dir hasPrefix:@"/"])
+    {
+        NSLog(@"%@ is an absolute path", dir);
+        remotePath = dir;
+    } else
+    {
+        NSLog(@"%@ is a relative path", dir);
+        remotePath = [[self workingDir] stringByAppendingPathComponent:dir];
+    }
+
+    [remotePath getCString:pathCStr];
+    sprintf(command, "MKD %s\r\n", pathCStr);
+    [self writeLine:command];
+    replyCode = [self readReply:&reply];
+    if (replyCode == 257)
         return YES;
+    else
+    {
+        NSLog(@"remote mkdir code: %d %@", replyCode, [reply objectAtIndex:0]);
+        return NO;
+    }
 }
 
 

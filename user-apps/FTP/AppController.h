@@ -32,6 +32,7 @@
 
 @interface AppController : NSObject
 {
+    IBOutlet NSWindow            *mainWin;
     IBOutlet NSTableView         *localView;
     IBOutlet NSTableView         *remoteView;
     IBOutlet NSPopUpButton       *localPath;

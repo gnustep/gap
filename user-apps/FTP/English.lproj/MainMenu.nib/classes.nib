@@ -29,6 +29,7 @@
                 localView = NSTableView; 
                 logTextField = NSTextView; 
                 logWin = NSWindow; 
+                mainWin = NSWindow; 
                 progBar = NSProgressIndicator; 
                 remotePath = NSPopUpButton; 
                 remoteView = NSTableView; 

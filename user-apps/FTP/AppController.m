@@ -254,8 +254,9 @@
 
 - (void)setProgress:(double)percent
 {
-//    NSLog(@"%f", percent);
     [progBar setDoubleValue:percent];
+    [mainWin displayIfNeeded];
+    [mainWin flushWindowIfNeeded];
 }
 
 - (void)setStatusInfo:(NSString *)str
