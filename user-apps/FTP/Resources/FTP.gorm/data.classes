@@ -28,7 +28,8 @@
 	    remotePath,
 	    connAnon,
 	    infoMessage,
-	    progBar
+	    progBar,
+	    mainWin
 	);
 	Super = NSObject;
     };
