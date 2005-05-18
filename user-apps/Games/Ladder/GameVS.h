@@ -31,5 +31,6 @@ extern NSString * GameDidResignMainNotification;
 extern NSString * GameTurnDidBeginNotification;
 extern NSString * GameDidPauseNotification;
 extern NSString * GameOverNotification;
+extern NSString * GameHelperSuggestionNotification;
 
 #endif /* GAMEVS_H */

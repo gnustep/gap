@@ -461,14 +461,17 @@ static BOOL __check_state(NSString *str)
 - (void) putStoneAtLocation:(GoLocation) location
 {
 //	NSLog(@"TURN %d",turn);
+	if (location.row == 0)
+	{
+		return;
+	}
 	[self setStoneWithColorType:turn
 					 atLocation:location];
 }
 
 - (void) passTurn
 {
-	[self setStone:nil
-		atLocation:MakeGoLocation(0,0)];
+	[self turnBegin:nil];
 }
 
 

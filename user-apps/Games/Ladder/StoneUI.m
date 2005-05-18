@@ -317,8 +317,8 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 		}
 		DPSnewpath(ctxt);
 		[[NSColor colorWithDeviceRed:1.0
-							   green:0.9
-								blue:0.6
+							   green:1.0
+								blue:0.7
 							   alpha:a] set];
 		DPSarc(ctxt,position.x * f + p.x, position.y * f + p.y, rad, 0, 360);
 		DPSarcn(ctxt,position.x * f + p.x, position.y * f + p.y, rad * 0.8, 360, 0);

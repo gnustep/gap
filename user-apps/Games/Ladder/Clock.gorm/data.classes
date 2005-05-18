@@ -12,7 +12,8 @@
 	Actions = (
 	    "orderFrontClockPanel:",
 	    "matrixUpdate:",
-	    "setTime:"
+	    "setTime:",
+	    "turn:"
 	);
 	Outlets = (
 	    blackClock,
@@ -28,8 +29,9 @@
 	Actions = (
 	    "addPlayer:",
 	    "matrixUpdate:",
-	    "setTime:",
-	    "removePlayer:"
+	    "turn:",
+	    "removePlayer:",
+	    "setTime:"
 	);
 	Super = NSObject;
     };

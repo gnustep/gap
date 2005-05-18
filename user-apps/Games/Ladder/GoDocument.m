@@ -19,10 +19,11 @@
 	_players[BlackPlayerType] = [Player new];
 	_players[WhitePlayerType] = [GNUGoPlayer new];
 
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(turnBegin:)
-												 name:GameTurnDidBeginNotification
-											   object:[_board go]];
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(turnBegin:)
+			   name:GameTurnDidBeginNotification
+			 object:[_board go]];
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)aNotification
