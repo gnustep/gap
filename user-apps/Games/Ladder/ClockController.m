@@ -154,6 +154,19 @@
 	[blackClock setShowsArc:YES];
 }
 
+- (void) turn:(id)sender
+{
+	NSMutableDictionary * dict;
+	dict = [NSMutableDictionary dictionary];
+
+	[dict setObject:@"pass"
+			 forKey:@"SuggestedLocation"];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:GameHelperSuggestionNotification
+														object:_game
+													  userInfo:dict];
+}
+
 - (void) setPrefixTimeInterval:(NSTimeInterval)interval
 {
 	timeprefix = interval;

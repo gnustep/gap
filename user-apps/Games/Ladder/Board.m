@@ -48,6 +48,11 @@
 	return YES;
 }
 
+- (BOOL) acceptsFirstMouse: (NSEvent*)theEvent
+{
+	return YES;
+}
+
 - (id) initWithFrame:(NSRect)frame
 {
 	NSArray *array = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",nil];
@@ -161,6 +166,16 @@
 
 }
 
+- (void) shouldPass:(NSNotification *)notification
+{
+	if (isEditable == NO)
+	{
+		return;
+	}
+
+	[__owner playerShouldPutStoneAtLocation:GoNoLocation];
+}
+
 - (void) _addLight
 {
 	lialpha *= 1.2;
@@ -195,6 +210,11 @@
 		addObserver:self
 		   selector:@selector(stoneAdded:)
 			   name:GoStoneNotification
+			 object:_go];
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(shouldPass:)
+			   name:GameHelperSuggestionNotification
 			 object:_go];
 
 	[_go setStoneClass:[StoneUI class]];

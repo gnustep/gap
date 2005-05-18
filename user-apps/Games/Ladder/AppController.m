@@ -37,6 +37,10 @@
 	NSLog(@"load clock %@",clockController);
 }
 
+- (void) applicationDidFinishLaunching: (NSNotification*)aNotification
+{
+}
+
 - (void) orderFrontInfoPanel: (id)sender
 {
 	[prefPanel center];

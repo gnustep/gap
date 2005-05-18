@@ -18,6 +18,7 @@
 }
 - (void) orderFrontClockPanel: (id)sender;
 - (void) setTime:(id)sender;
+- (void) turn:(id)sender;
 - (void) setPrefixTimeInterval:(NSTimeInterval)interval;
 - (void) setGame:(id <GameTurn>)game;
 @end

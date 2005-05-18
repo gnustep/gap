@@ -5,3 +5,4 @@ NSString * GameDidResignMainNotification = @"GameDidResignMainNotification";
 NSString * GameTurnDidBeginNotification = @"GameTurnDidBeginNotification";
 NSString * GameDidPauseNotification =  @"GameDidPauseNotification";
 NSString * GameOverNotification = @"GameOverNotification";
+NSString * GameHelperSuggestionNotification = @"GameHelperSuggestionNotification";
