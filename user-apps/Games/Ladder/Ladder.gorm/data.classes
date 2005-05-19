@@ -9,7 +9,8 @@
 	Outlets = (
 	    prefPanel,
 	    playerController,
-	    playerPanel
+	    playerPanel,
+	    infoTab
 	);
 	Super = NSObject;
     };

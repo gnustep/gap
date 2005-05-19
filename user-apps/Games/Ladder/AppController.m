@@ -35,10 +35,23 @@
 	[NSBundle loadNibNamed:@"Clock"
 					 owner:self];
 	NSLog(@"load clock %@",clockController);
+
+	[self _setupCopying];
+	[self _setupAuthors];
 }
 
-- (void) applicationDidFinishLaunching: (NSNotification*)aNotification
+- (void) _setupAuthors
 {
+}
+
+- (void) _setupCopying
+{
+	/* initialize info */
+	NSTextView *textView = [[[[[infoTab tabViewItemAtIndex:0] view] subviews] lastObject] documentView];
+
+
+	[textView replaceCharactersInRange:NSMakeRange(0,0)
+							withString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@"GPL"]]];
 }
 
 - (void) orderFrontInfoPanel: (id)sender

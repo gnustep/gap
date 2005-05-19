@@ -5,5 +5,6 @@
 	id playerPanel;
 	id playerController;
 	id clockController;
+	id infoTab;
 }
 @end
