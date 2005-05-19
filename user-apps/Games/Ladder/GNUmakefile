@@ -25,7 +25,7 @@ Ladder_OBJC_FILES = main.m \
 
 Ladder_APPLICATION_ICON = Ladder.tiff
 
-Ladder_RESOURCE_FILES = Ladder.gorm Clock.gorm GoDocument.gorm Ladder.tiff LadderInfo.plist wood.jpg man_icon.png machine_icon.png
+Ladder_RESOURCE_FILES = Ladder.gorm Clock.gorm GoDocument.gorm Ladder.tiff LadderInfo.plist wood.jpg man_icon.png machine_icon.png COPYING.GPL
 
 include $(GNUSTEP_MAKEFILES)/application.make
 
