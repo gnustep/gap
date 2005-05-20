@@ -7,6 +7,12 @@
 	return self;
 }
 
+- (void) dealloc
+{
+	RELEASE(_pathDict);
+	RELEASE(_userInfo);
+}
+
 - (NSDictionary *) info
 {
 	return _userInfo;

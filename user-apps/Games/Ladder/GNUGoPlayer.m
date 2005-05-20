@@ -84,6 +84,17 @@ static GoLocation __go_location_for_string(NSString *str)
 	return self;
 }
 
+- (void) dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	RELEASE(_eventPipe);
+	RELEASE(_commandPipe);
+	[_gnugo terminate];
+	RELEASE(_gnugo);
+	[super dealloc];
+}
+
+
 - (NSString *) runGTPCommand:(NSString *)command
 {
 	NSString *str;

@@ -5,9 +5,51 @@
 
 @interface Board (Private)
 - (void) _update;
+- (void) updateGlowArea:(GoLocation)loc;
+@end
+
+@interface SpotLight : NSObject
+{
+@public
+	GoLocation location;
+	float alpha;
+	BOOL shouldDecrease;
+}
+
++ (SpotLight *) spotLightWithLocation:(GoLocation)loc;
+@end
+@implementation SpotLight
++ (SpotLight *) spotLightWithLocation:(GoLocation)loc
+{
+	SpotLight *sp = [[self alloc] init];
+	sp->location = loc;
+	return AUTORELEASE(sp);
+}
+
 @end
 
 @implementation Board (Private)
+- (void) updateGlowArea:(GoLocation)loc
+{
+	if (loc.row == 0)
+	{
+		return;
+	}
+
+	NSRect bounds = [self bounds];
+	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
+	int boardSize = [_go boardSize];
+	float cellWidth = boardWidth / boardSize;
+	NSRect r;
+
+	r.size.width = cellWidth * 2;
+	r.size.height = cellWidth * 2;
+	r.origin = [self pointForGoLocation:loc];
+	r.origin.x -= cellWidth;
+	r.origin.y -= cellWidth;
+	[self setNeedsDisplayInRect:r];
+}
+
 - (void) _update
 {
 	/*
@@ -62,6 +104,7 @@
 	ASSIGN(_horizontalMarks, array);
 
 	ASSIGN(_shadow_stone, [StoneUI stoneWithColorType:EmptyPlayerType]);
+	ASSIGN(_lastStones, [NSMutableArray array]);
 	[super initWithFrame:frame];
 
 	[self setPostsFrameChangedNotifications:YES];
@@ -78,14 +121,20 @@
 
 - (void) dealloc
 {
-	NSLog(@"dealloc board %@",self);
-	RELEASE(_go);
-	RELEASE(_woodTile);
+	NSLog(@"dealloc board %@ %p",self,liTimer);
+	[liTimer invalidate];
+	liTimer = nil;
+	__lastStone = nil;
+	DESTROY(_lastStones);
 
-	RELEASE(_shadow_stone);
+	DESTROY(_go);
+	DESTROY(_woodTile);
+
+	DESTROY(_shadow_stone);
 
 	[super dealloc];
 	NSLog(@"done deboard");
+	fprintf(stderr,"done %p\n",self);
 }
 
 - (id) initWithGo:(Go*)go
@@ -94,73 +143,29 @@
 	return self;
 }
 
-- (void) updateGlowArea:(GoLocation)loc
-{
-	if (loc.row == 0)
-	{
-		return;
-	}
-
-	NSRect bounds = [self bounds];
-	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	int boardSize = [_go boardSize];
-	float cellWidth = boardWidth / boardSize;
-	NSRect r;
-
-	r.size.width = cellWidth * 2;
-	r.size.height = cellWidth * 2;
-	r.origin = [self pointForGoLocation:loc];
-	r.origin.x -= cellWidth;
-	r.origin.y -= cellWidth;
-	[self setNeedsDisplayInRect:r];
-}
-
 - (void) stoneAdded:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
 	id <Stone> aStone;
-	/*
-	if (lastLocation.row != 0)
-	{
-		[self updateGlowArea:lastLocation];
-	}
-	if (lastLastLocation.row != 0)
-	{
-		[self updateGlowArea:lastLastLocation];
-	}
-	*/
+	NSLog(@"here");
 
 	[self setNeedsDisplay:YES];
 
-	if (dict == nil)
-	{
-		lastLastLocation = lastLocation;
-		lastLocation = GoNoLocation;
-	}
-	else
+	if (dict != nil)
 	{
 		aStone = [dict objectForKey:@"Stone"];
 		if (aStone != nil)
 		{
-			lastLastLocation = lastLocation;
-			lastLocation = [aStone location];
-		}
-		else
-		{
-			lastLastLocation = lastLocation;
-			lastLocation = GoNoLocation;
+			__lastStone = [SpotLight spotLightWithLocation:[aStone location]];
+			[_lastStones addObject:__lastStone];
 		}
 	}
-
-	[self updateGlowArea:lastLocation];
-	[self updateGlowArea:lastLastLocation];
-	lialpha = 0.1;
 
 	[liTimer invalidate];
 
 	liTimer = [NSTimer scheduledTimerWithTimeInterval:0.05
 											   target:self
-											 selector:@selector(_addLight)
+											 selector:@selector(_adjustLight)
 											 userInfo:nil
 											  repeats:YES];
 
@@ -174,20 +179,65 @@
 	}
 
 	[__owner playerShouldPutStoneAtLocation:GoNoLocation];
+	__lastStone = nil;
+	[liTimer invalidate];
+
+	if ([_lastStones count] > 0)
+	{
+		liTimer = [NSTimer scheduledTimerWithTimeInterval:0.05
+												   target:self
+												 selector:@selector(_adjustLight)
+												 userInfo:nil
+												  repeats:YES];
+	}
+	else
+	{
+		liTimer = nil;
+	}
 }
 
-- (void) _addLight
+- (void) _adjustLight
 {
-	lialpha *= 1.2;
-	if (lialpha > 1.0)
+	int n = [_lastStones count];
+	SpotLight *spots[n];
+
+	if (n == 0 || (n == 1 && __lastStone && ((SpotLight *)__lastStone)->alpha > 1.0))
 	{
-		lialpha = 1.0;
 		[liTimer invalidate];
 		liTimer = nil;
-		lastLastLocation = lastLocation;
 	}
-	[self updateGlowArea:lastLocation];
-	[self updateGlowArea:lastLastLocation];
+
+	if (_lastStones == nil)
+	{
+		return;
+	}
+
+	[_lastStones getObjects:spots];
+	while (n)
+	{
+		n--;
+		[self updateGlowArea:spots[n]->location];
+
+		if (spots[n]->shouldDecrease && spots[n] != __lastStone)
+//		if (spots[n] != __lastStone)
+		{
+			spots[n]->alpha = spots[n]->alpha - 0.1;
+			if (spots[n]->alpha < 0)
+			{
+				[_lastStones removeObject:spots[n]];
+			}
+		}
+		else if (spots[n]->alpha < 1.0)
+		{
+			spots[n]->alpha = spots[n]->alpha + 0.1;
+			if (spots[n]->alpha > 1.0)
+			{
+				spots[n]->shouldDecrease = YES;
+			}
+		}
+
+	}
+
 }
 
 - (void) viewWillMoveToWindow: (NSWindow*)newWindow
@@ -421,35 +471,18 @@
 
 	/* draw stones */
 
-	/* first round, draw shadow and indicator */
-	for (i = 1; i <= boardSize; i ++)
-	for (j = 1; j <= boardSize; j ++)
+	/* first round, draw shadow */
+	if (isEditable && mouseLocation.row > 0)
 	{
-		StoneUI *stone = [_go stoneAtLocation:MakeGoLocation(i,j)];
-		if (stone != nil)
-		{
-			NSPoint p = NSMakePoint(NSMinX(boardRect) + (j * cellWidth) - (cellWidth * 0.5),NSMinY(boardRect) + (i * cellWidth) - (cellWidth * 0.5));
-
-			if (lastLocation.row == i && lastLocation.column == j)
-			{
-				[stone drawIndicatorWithRadius:cellWidth/2
-									   atPoint:p
-										 alpha:lialpha];
-			}
-			else if (lastLastLocation.row == i && lastLastLocation.column == j)
-			{
-				[stone drawIndicatorWithRadius:cellWidth/2
-									   atPoint:p
-										 alpha:1 - lialpha];
-			}
-		}
-		else if (mouseLocation.row == i && mouseLocation.column == j && isEditable)
+		/* fixme : change this to check if legal */
+		StoneUI *stone = [_go stoneAtLocation:mouseLocation];
+		if (stone == nil)
 		{
 			NSPoint p = [self pointForGoLocation:mouseLocation];
-			/*
-			[_shadow_stone drawWithRadius:cellWidth/2
-								  atPoint:p];
-								  */
+			/* //old code
+			   [_shadow_stone drawWithRadius:cellWidth/2
+									 atPoint:p];
+									 */
 			for (k = cellWidth/2; k > 0; k = k - 1.0)
 			{
 				DPSgsave(ctxt);
@@ -460,6 +493,22 @@
 				DPSfill(ctxt);
 				DPSgrestore(ctxt);
 			}
+		}
+	}
+
+	/* draw spot light */
+	if ([_lastStones count] > 0)
+	{
+		SpotLight *spot;
+
+		en = [_lastStones objectEnumerator];
+
+		while ((spot = [en nextObject]))
+		{
+			/* FIXME */
+			[_shadow_stone drawIndicatorWithRadius:cellWidth/2
+										   atPoint:[self pointForGoLocation:spot->location]
+											 alpha:spot->alpha > 1.0?1.0:spot->alpha];
 		}
 	}
 
