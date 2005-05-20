@@ -16,7 +16,7 @@
 
 - (void) awakeFromNib
 {
-	_players[BlackPlayerType] = [Player new];
+	_players[BlackPlayerType] = [GNUGoPlayer new];
 	_players[WhitePlayerType] = [GNUGoPlayer new];
 
 	[[NSNotificationCenter defaultCenter]
@@ -66,8 +66,9 @@
 
 - (void) dealloc
 {
-	NSLog(@"dealloc GoDocument %@ %d",self,[_board retainCount]);
-//	RELEASE(_board);
+	RELEASE(_players[BlackPlayerType]);
+	RELEASE(_players[WhitePlayerType]);
+//	RELEASE(_board); // need fix in gnustep
 	[super dealloc];
 	NSLog(@"done degodoc");
 }
