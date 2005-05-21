@@ -34,11 +34,38 @@
 	Actions = (
 	    "addPlayer:",
 	    "matrixUpdate:",
+	    "apply:",
 	    "orderFrontClockPanel:",
 	    "orderFrontInfoPanel:",
 	    "orderFrontPlayerPanel:",
 	    "removePlayer:",
+	    "revert:",
+	    "setPlayer:",
+	    "setShowHistory:",
 	    "setTime:"
+	);
+	Super = NSObject;
+    };
+    GoDocumentInspector = {
+	Actions = (
+	    "setShowHistory:",
+	    "setPlayer:",
+	    "apply:",
+	    "revert:"
+	);
+	Outlets = (
+	    blackPlayerButton,
+	    inspectorPanel,
+	    boardSizeChooser,
+	    whitePlayerButton,
+	    handicapStepper,
+	    handicapText,
+	    komiStepper,
+	    komiText,
+	    turnText,
+	    showHistory,
+	    applyButton,
+	    revertButton
 	);
 	Super = NSObject;
     };

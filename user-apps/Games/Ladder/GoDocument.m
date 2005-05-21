@@ -1,6 +1,9 @@
 #include "GoDocument.h"
 #include "GNUGoPlayer.h"
 
+NSString * GoDocumentDidBecomeMainNotification = @"GoDocumentDidBecomeMainNotification";
+NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotification";
+
 @implementation GoDocument
 
 - (id) init
@@ -14,10 +17,34 @@
 	return self;
 }
 
+- (void) setBoardSize:(unsigned int)newSize
+{
+	[[_board go] clearBoard];
+	[[_board go] setBoardSize:newSize];
+	[_board setGo:[_board go]];
+}
+
+- (unsigned int) boardSize
+{
+	return [[_board go] boardSize];
+}
+
+- (void) setShowHistory:(BOOL)show
+{
+	[_board setShowHistory:show];
+}
+
+- (Player *) playerForColorType:(PlayerColorType)color
+{
+	return _players[color];
+}
+
 - (void) awakeFromNib
 {
-	_players[BlackPlayerType] = [GNUGoPlayer new];
-	_players[WhitePlayerType] = [GNUGoPlayer new];
+	NSArray *parray = [[[NSApp delegate] playerController] allPlayers];
+
+	ASSIGN(_players[BlackPlayerType], [parray objectAtIndex:0]);
+	ASSIGN(_players[WhitePlayerType], [parray objectAtIndex:1]);
 
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
@@ -30,6 +57,8 @@
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:GameDidBecomeMainNotification
 														object:[_board go]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:GoDocumentDidBecomeMainNotification
+														object:self];
 	NSLog(@"%@ %d", [_board go],[[_board go] retainCount]);;
 }
 
@@ -37,6 +66,8 @@
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:GameDidResignMainNotification
 														object:[_board go]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:GoDocumentDidResignMainNotification
+														object:self];
 }
 
 - (void) turnBegin:(NSNotification *)notification

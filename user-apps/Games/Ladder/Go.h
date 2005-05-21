@@ -39,12 +39,15 @@ static inline GoLocation MakeGoLocation (int row, int column)
 - (void) setOwner:(Go *)owner;
 - (Go *) owner;
 - (GoLocation) location;
+- (void) setTurnNumber:(unsigned int) num;
+- (unsigned int) turnNumber;
 @end
 
 @interface Stone : NSObject <Stone>
 {
 	Go *__owner;
 	PlayerColorType _colorType;
+	unsigned int turnno;
 }
 + (Stone *) stoneWithColorType:(PlayerColorType)color;
 @end

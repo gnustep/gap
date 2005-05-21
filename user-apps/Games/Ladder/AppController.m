@@ -1,9 +1,14 @@
 #include <AppKit/AppKit.h>
 #include "AppController.h"
 #include "StoneUI.h"
-#include "Player.h"
+#include "GNUGoPlayer.h"
 
 @implementation AppController
+
+- (id) playerController
+{
+	return playerController;
+}
 
 - (void) applicationWillFinishLaunching: (NSNotification*)aNotification
 {
@@ -14,7 +19,7 @@
 	player = [Player new];
 	[playerinfo setObject:@"Human Player"
 				   forKey:@"Name"];
-	[playerinfo setObject:AUTORELEASE([[NSImage alloc] initWithContentsOfFile:@"man_icon.png"])
+	[playerinfo setObject:[NSImage imageNamed:@"man_icon.png"]
 				   forKey:@"Image"];
 	[player setInfo:playerinfo];
 	[playerController addPlayer:player];
@@ -22,19 +27,17 @@
 
 
 	playerinfo = [NSMutableDictionary dictionary];
-	player = [Player new];
+	player = [GNUGoPlayer new];
 	[playerinfo setObject:@"GNU Go"
 				   forKey:@"Name"];
-	[playerinfo setObject:AUTORELEASE([[NSImage alloc] initWithContentsOfFile:@"machine_icon.png"])
+	[playerinfo setObject:[NSImage imageNamed:@"machine_icon.png"]
 				   forKey:@"Image"];
 	[player setInfo:playerinfo];
 	[playerController addPlayer:player];
 	RELEASE(player);
 
-	NSLog(@"load clock");
 	[NSBundle loadNibNamed:@"Clock"
 					 owner:self];
-	NSLog(@"load clock %@",clockController);
 
 	[self _setupCopying];
 	[self _setupAuthors];
@@ -70,7 +73,6 @@
 {
 	[clockController orderFrontClockPanel:sender];
 }
-
 
 @end
 

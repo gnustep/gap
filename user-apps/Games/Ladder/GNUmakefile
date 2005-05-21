@@ -20,7 +20,8 @@ Ladder_OBJC_FILES = main.m \
 					Clock.m \
 					ClockController.m \
 					ImageBox.m \
-					GoDocument.m
+					GoDocument.m \
+					GoDocumentInspector.m
 
 
 Ladder_APPLICATION_ICON = Ladder.tiff

@@ -6,6 +6,7 @@
 @interface Board (Private)
 - (void) _update;
 - (void) updateGlowArea:(GoLocation)loc;
+- (NSRect) rectForGoLocation:(GoLocation)loc;
 @end
 
 @interface SpotLight : NSObject
@@ -253,8 +254,17 @@
 	[self setNeedsDisplay:YES];
 }
 
+- (void) setShowHistory:(BOOL)show
+{
+	showHistory = show;
+	[self setNeedsDisplay:YES];
+}
+
 - (void) setGo:(Go *)go
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:nil
+												  object:_go];
 	ASSIGN(_go, go);
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
@@ -326,6 +336,7 @@
 	}
 }
 
+#define MINFONTSIZE 6
 - (void) drawRect:(NSRect)r
 {
 	NSGraphicsContext *ctxt=GSCurrentContext();
@@ -430,7 +441,12 @@
 	/* draw text mark */
 	float fontSize;
 	fontSize = cellWidth/2;
-	if (fontSize >= 7)
+	if (fontSize > 20)
+	{
+		fontSize = 20;
+	}
+
+	if (fontSize >= MINFONTSIZE)
 	{
 		aFont = [NSFont boldSystemFontOfSize:fontSize];
 
@@ -469,9 +485,7 @@
 		}
 	}
 
-	/* draw stones */
-
-	/* first round, draw shadow */
+	/* draw shadow */
 	if (isEditable && mouseLocation.row > 0)
 	{
 		/* fixme : change this to check if legal */
@@ -512,18 +526,54 @@
 		}
 	}
 
-	/* second round, draw stones */
+	/* draw stones */
+
+	fontSize *= 0.7;
+
+	if (fontSize >= MINFONTSIZE)
+	{
+		aFont = [NSFont systemFontOfSize:fontSize];
+	}
+	else
+	{
+		aFont = nil;
+	}
 
 	for (i = 1; i <= boardSize; i ++)
 	for (j = 1; j <= boardSize; j ++)
 	{
-		StoneUI *stone = [_go stoneAtLocation:MakeGoLocation(i,j)];
+		GoLocation l = MakeGoLocation(i,j);
+		StoneUI *stone = [_go stoneAtLocation:l];
 		if (stone != nil)
 		{
 			NSPoint p = NSMakePoint(NSMinX(boardRect) + (j * cellWidth) - (cellWidth * 0.5),NSMinY(boardRect) + (i * cellWidth) - (cellWidth * 0.5));
 
 			[stone drawWithRadius:cellWidth/2
 						  atPoint:p];
+			if (showHistory && aFont != nil && NSIntersectsRect([self rectForGoLocation:l],r))
+			{
+				NSSize strSize;
+				p = [self pointForGoLocation:l];
+				NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",[stone turnNumber]]];
+				[attrStr addAttribute:NSFontAttributeName
+								value:aFont
+								range:NSMakeRange(0,[attrStr length])];
+				[attrStr addAttribute:NSForegroundColorAttributeName
+								value:[stone colorType]==BlackPlayerType?[NSColor lightGrayColor]:[NSColor darkGrayColor]
+								range:NSMakeRange(0,[attrStr length])];
+				strSize = [attrStr size];
+				[stone centerAttributedString:attrStr
+									  toPoint:NSMakePoint(p.x - strSize.width/2, p.y - strSize.height/2)
+								   withRadius:cellWidth/2];
+				/*
+				[[NSColor redColor] set];
+				PSmoveto(p.x,p.y);
+				PSlineto(p.x+5,p.y+5);
+				PSlineto(p.x+5,p.y);
+				PSfill();
+				*/
+				RELEASE(attrStr);
+			}
 		}
 	}
 
