@@ -294,6 +294,14 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 	[super dealloc];
 }
 
+- (void) centerAttributedString:(NSMutableString *)attrstr
+						toPoint:(NSPoint) p
+					 withRadius:(float)radius
+{
+	float f = (radius/RFACTOR)/SHIFT_FACTOR;
+	[attrstr drawAtPoint:NSMakePoint(position.x * f + p.x, position.y * f + p.y)];
+}
+
 - (void) drawIndicatorWithRadius:(float)radius
 						 atPoint:(NSPoint)p
 						   alpha:(float)alpha

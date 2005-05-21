@@ -23,6 +23,7 @@
 	float shalpha;
 	NSTimer *liTimer;
 	BOOL isEditable;
+	BOOL showHistory;
 	NSMutableArray *_lastStones;
 	id __lastStone;
 }
@@ -35,5 +36,6 @@
 - (Go *) go;
 - (void) setOwner:(id <BoardOwner>)owner;
 - (void) setEditable:(BOOL)editable;
+- (void) setShowHistory:(BOOL)show;
 @end
 #endif

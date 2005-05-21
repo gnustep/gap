@@ -19,6 +19,17 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 	return stone;
 }
 
+
+- (void) setTurnNumber:(unsigned int) num
+{
+	turnno = num;
+}
+
+- (unsigned int) turnNumber
+{
+	return turnno;
+}
+
 - (PlayerColorType) colorType
 {
 	return _colorType;
@@ -422,6 +433,7 @@ static BOOL __check_state(NSString *str)
 	if (stone != nil && offset >= 0)
 	{
 		[stone setOwner:self];
+		[stone setTurnNumber:_turnNumber];
 		ASSIGN(_boardTable[offset], stone);
 		[self _syncBoardWithGNUGo];
 
@@ -493,6 +505,11 @@ static BOOL __check_state(NSString *str)
 
 - (Stone *) stoneAtLocation:(GoLocation) location
 {
+	if (location.row > size || location.column > size)
+	{
+		return nil;
+	}
+
 	return _boardTable[(location.row - 1) * size + (location.column - 1)];
 }
 

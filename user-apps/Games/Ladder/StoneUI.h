@@ -14,4 +14,7 @@
 						   alpha:(float)alpha;
 - (NSPoint) position;
 - (void) setPosition:(NSPoint)p;
+- (void) centerAttributedString:(NSMutableString *)attrstr
+						toPoint:(NSPoint) p
+					 withRadius:(float)radius;
 @end

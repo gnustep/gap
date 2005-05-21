@@ -6,5 +6,6 @@
 	id playerController;
 	id clockController;
 	id infoTab;
+	id documentInspector;
 }
 @end
