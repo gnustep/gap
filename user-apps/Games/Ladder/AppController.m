@@ -13,28 +13,25 @@
 - (void) applicationWillFinishLaunching: (NSNotification*)aNotification
 {
 	/* add human player */
-	NSMutableDictionary *playerinfo = [NSMutableDictionary dictionary];
-	Player *player;
+	NSMutableDictionary *playerinfo;
 
-	player = [Player new];
+	[playerController addPlayerClass:[Player class]];
+	[playerController addPlayerClass:[GNUGoPlayer class]];
+
+	/* TODO change these to messages */
+	playerinfo = [NSMutableDictionary dictionary];
 	[playerinfo setObject:@"Human Player"
 				   forKey:@"Name"];
 	[playerinfo setObject:[NSImage imageNamed:@"man_icon.png"]
 				   forKey:@"Image"];
-	[player setInfo:playerinfo];
-	[playerController addPlayer:player];
-	RELEASE(player);
-
+	[Player setInfo:playerinfo];
 
 	playerinfo = [NSMutableDictionary dictionary];
-	player = [GNUGoPlayer new];
 	[playerinfo setObject:@"GNU Go"
 				   forKey:@"Name"];
 	[playerinfo setObject:[NSImage imageNamed:@"machine_icon.png"]
 				   forKey:@"Image"];
-	[player setInfo:playerinfo];
-	[playerController addPlayer:player];
-	RELEASE(player);
+	[GNUGoPlayer setInfo:playerinfo];
 
 	[NSBundle loadNibNamed:@"Clock"
 					 owner:self];

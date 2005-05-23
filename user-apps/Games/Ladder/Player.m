@@ -2,30 +2,44 @@
 #include "GameVS.h"
 
 @implementation Player
-- (id) init
+
+static NSMutableDictionary *__playerInfo;
+
++ (void) initialize
 {
-	return self;
+	__playerInfo = [NSMutableDictionary new];
 }
 
-- (void) dealloc
++ (Player *) player
 {
-	RELEASE(_pathDict);
-	RELEASE(_userInfo);
+	return AUTORELEASE([[self alloc] init]);
+}
+
++ (NSDictionary *) info
+{
+	return [__playerInfo objectForKey:self];
+}
+
++ (void) setInfo:(NSDictionary *)infoDict
+{
+	[__playerInfo setObject:infoDict
+					 forKey:self];
 }
 
 - (NSDictionary *) info
 {
-	return _userInfo;
+	return [[self class] info];
 }
 
-- (void) setInfo:(NSDictionary *)infoDict
++ (NSDictionary *) dictionaryForPath:(NSString *)path
 {
-	ASSIGN(_userInfo, infoDict);
+	return nil;
 }
 
-- (NSDictionary *) dictionaryForPath:(NSString *)path
+
+- (id) init
 {
-	return [_pathDict objectForKey:path];
+	return self;
 }
 
 - (BOOL) playGo:(Go *)go

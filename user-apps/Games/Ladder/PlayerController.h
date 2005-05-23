@@ -10,6 +10,6 @@
 	id playerBrowser;
 }
 
-- (NSArray *) allPlayers;
-- (void) addPlayer:(Player *)newPlayer;
+- (NSArray *) allPlayerClasses;
+- (void) addPlayerClass:(Class)newPlayerClass;
 @end

@@ -9,46 +9,93 @@
 {
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
-		   selector:@selector(setDocument:)
+		   selector:@selector(setDocumentNotified:)
 			   name:GoDocumentDidBecomeMainNotification
 			 object:nil];
 
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
-		   selector:@selector(unsetDocument:)
-			   name:GoDocumentDidBecomeMainNotification
+		   selector:@selector(unsetDocumentNotified:)
+			   name:GoDocumentDidResignMainNotification
 			 object:nil];
 
 	return self;
 }
 
-- (void) setDocument:(NSNotification *) not
+- (void) awakeFromNib
 {
-	ASSIGN(_document, [not object]);
-	int boardSize = [_document boardSize];
-	NSArray *items = [boardSizeChooser itemArray];
-	NSEnumerator *en = [items objectEnumerator];
-	id item;
+	[self setDocument:nil];
+	NSLog(@"xx %@",showHistory);
+	NSLog(@"xx %@",revertButton);
+	NSLog(@"xx %@",applyButton);
+}
 
-	while ((item = [en nextObject]))
+- (void) setUIEnabled:(BOOL)enable
+{
+	[boardSizeChooser setEnabled:enable];
+	[showHistory setEnabled:enable];
+	[blackPlayerButton setEnabled:enable];
+	[whitePlayerButton setEnabled:enable];
+
+	[handicapStepper setEnabled:enable];
+	[handicapText setEnabled:enable];
+	[komiStepper setEnabled:enable];
+	[komiText setEnabled:enable];
+	[revertButton setEnabled:enable];
+	[applyButton setEnabled:enable];
+}
+
+- (void) setDocument:(GoDocument *)godoc
+{
+	ASSIGN(_document, godoc);
+	int boardSize;
+	if (_document != nil)
 	{
-		if ([item tag] == boardSize)
+		boardSize = [_document boardSize];
+		[self setUIEnabled:YES];
+
+		NSArray *items = [boardSizeChooser itemArray];
+		NSEnumerator *en = [items objectEnumerator];
+		id item;
+
+		while ((item = [en nextObject]))
 		{
-			[boardSizeChooser selectItem:item];
-			break;
+			if ([item tag] == boardSize)
+			{
+				[boardSizeChooser selectItem:item];
+				break;
+			}
 		}
+
+		Player *player = [_document playerForColorType:BlackPlayerType];
+		[blackPlayerButton setImage:[[player info] objectForKey:@"Image"]];
+		NSLog(@"info %@",[player info]);
+		player = [_document playerForColorType:WhitePlayerType];
+		[whitePlayerButton setImage:[[player info] objectForKey:@"Image"]];
+
 	}
-
-	Player *player = [_document playerForColorType:BlackPlayerType];
-	[blackPlayerButton setImage:[[player info] objectForKey:@"Image"]];
-NSLog(@"info %@",[player info]);
-	player = [_document playerForColorType:WhitePlayerType];
-	[whitePlayerButton setImage:[[player info] objectForKey:@"Image"]];
+	else
+	{
+		[self setUIEnabled:NO];
+		boardSize = 0;
+		[blackPlayerButton setImage:nil];
+		[whitePlayerButton setImage:nil];
+	}
 }
 
-- (void) unsetDocument:(NSNotification *) not
+- (void) setDocumentNotified:(NSNotification *) not
 {
+	[self setDocument:[not object]];
 }
+
+- (void) unsetDocumentNotified:(NSNotification *) not
+{
+	if ([not object] == _document)
+	{
+		[self setDocument:nil];
+	}
+}
+
 
 - (void) setShowHistory: (id)sender
 {

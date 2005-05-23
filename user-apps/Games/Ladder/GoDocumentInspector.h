@@ -17,6 +17,8 @@
 	id komiText;
 	id turnText;
 	id showHistory;
+	id revertButton;
+	id applyButton;
 }
 - (void) setShowHistory: (id)sender;
 - (void) setPlayer: (id)sender;
