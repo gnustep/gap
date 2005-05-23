@@ -26,6 +26,14 @@
 	BOOL showHistory;
 	NSMutableArray *_lastStones;
 	id __lastStone;
+
+
+	/* cache values */
+	NSRect boardRect;
+	NSRect bounds;
+	float boardWidth;
+	int boardSize;
+	float cellWidth;
 }
 
 - (id) initWithGo:(Go *)go;

@@ -41,10 +41,10 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 - (void) awakeFromNib
 {
-	NSArray *parray = [[[NSApp delegate] playerController] allPlayers];
+	NSArray *parray = [[[NSApp delegate] playerController] allPlayerClasses];
 
-	ASSIGN(_players[BlackPlayerType], [parray objectAtIndex:0]);
-	ASSIGN(_players[WhitePlayerType], [parray objectAtIndex:1]);
+	ASSIGN(_players[BlackPlayerType], [[parray objectAtIndex:0] player]);
+	ASSIGN(_players[WhitePlayerType], [[parray objectAtIndex:1] player]);
 
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self

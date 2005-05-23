@@ -1,5 +1,5 @@
 FIXME
-- Classify player, always use one player/game
+- save/load SGF
 - 2 pass is game over
 - Alarm
 - Undo

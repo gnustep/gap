@@ -3,13 +3,14 @@
 
 @interface Player : NSObject
 {
-	NSMutableDictionary *_pathDict;
-	NSMutableDictionary *_userInfo;
 }
 
++ (Player *) player;
++ (NSDictionary *) info;
++ (void) setInfo:(NSDictionary *)infoDict;
++ (NSDictionary *) dictionaryForPath:(NSString *)path;
+
 - (NSDictionary *) info;
-- (void) setInfo:(NSDictionary *)infoDict;
-- (NSDictionary *) dictionaryForPath:(NSString *)path;
 - (BOOL) playGo:(Go *)go
    forColorType:(PlayerColorType)colorType;
 - (void) playGo:(Go *)go

@@ -53,26 +53,17 @@
 
 - (void) _update
 {
-	/*
-	if (_go == nil)
+	bounds = [self bounds];
+	boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
+
+	if (_go != nil)
 	{
-		return;
+		boardSize = [_go boardSize];
+		cellWidth = boardWidth / boardSize;
 	}
 
-	NSRect bounds = [self bounds];
-	float boardWidth;
-	float cellWidth;
-	int boardSize = [_go boardSize];
-	StoneUI *stone;
-
-	boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	boardSize = [_go boardSize];
-	cellWidth = boardWidth / boardSize;
-
-	stone = [StoneUI stoneWithColor:WhiteStone];
-
-	ASSIGN(_stone, stone);
-	*/
+	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
+			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
 }
 
 @end
@@ -197,6 +188,7 @@
 	}
 }
 
+/* dimming light */
 - (void) _adjustLight
 {
 	int n = [_lastStones count];
@@ -262,9 +254,13 @@
 
 - (void) setGo:(Go *)go
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:nil
-												  object:_go];
+	if (_go != nil)
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:nil
+													  object:_go];
+	}
+
 	ASSIGN(_go, go);
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
@@ -292,15 +288,14 @@
 
 - (void) mouseMoved:(NSEvent *)event
 {
+	if (_go == nil)
+	{
+		return;
+	}
+
 	GoLocation newLoc = [self goLocationForPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
 
 	NSRect updateRect;
-	NSRect bounds = [self bounds];
-	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	int boardSize = [_go boardSize];
-	float cellWidth = boardWidth / boardSize;
-	NSRect boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
-			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
 
 	updateRect = NSMakeRect(NSMinX(boardRect) + (mouseLocation.column * cellWidth) - cellWidth, NSMinY(boardRect) + (mouseLocation.row * cellWidth) - cellWidth, cellWidth, cellWidth);
 	[self setNeedsDisplayInRect:updateRect];
@@ -324,12 +319,20 @@
 
 - (void) mouseDown: (NSEvent*)event
 {
-	if (isEditable == NO)
+	if (_go == nil)
 	{
 		return;
 	}
 
 	GoLocation downLoc = [self goLocationForPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
+	unsigned int boardSize = [_go boardSize];
+
+	if (isEditable == NO || downLoc.row == 0 || downLoc.column == 0 ||
+			downLoc.row > boardSize || downLoc.column > boardSize)
+	{
+		return;
+	}
+
 	if ([_go stoneAtLocation:downLoc] == nil)
 	{
 		[__owner playerShouldPutStoneAtLocation:downLoc];
@@ -341,27 +344,12 @@
 {
 	NSGraphicsContext *ctxt=GSCurrentContext();
 
-	NSRect bounds = [self bounds];
 	NSSize woodSize = [_woodTile size];
-	float boardWidth;
-	float cellWidth;
-	int boardSize = [_go boardSize];
-	NSRect boardRect;
 	float ir,ic;
 	int i,j;
 	float k;
 	NSEnumerator *en;
 	NSFont *aFont;
-
-	boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	boardSize = [_go boardSize];
-	cellWidth = boardWidth / boardSize;
-
-
-	if (boardWidth < BORDER_SIZE)
-	{
-		return;
-	}
 
 	/* fill the wood tile */
 	if (_woodTile)
@@ -381,13 +369,10 @@
 		NSRectFill(bounds);
 	}
 
-	if (_go == nil)
+	if (_go == nil || boardWidth < BORDER_SIZE)
 	{
 		return;
 	}
-
-	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
-			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
 
 	[[NSColor colorWithCalibratedRed:0.3
 							   green:0.0
@@ -397,6 +382,8 @@
 
 	DPSsetlinewidth(ctxt, 1);
 	[[NSColor blackColor] set];
+
+	cellWidth = boardWidth / boardSize;
 
 	ic = NSMinX(boardRect) + cellWidth/2 + cellWidth;
 	ir = NSMinY(boardRect) + cellWidth/2 + cellWidth;
@@ -408,7 +395,6 @@
 		DPSmoveto(ctxt, ic - ((i - 1) * cellWidth), ir);
 		DPSrlineto(ctxt, boardWidth - cellWidth, 0);
 	}
-
 
 	DPSstroke(ctxt);
 
@@ -422,6 +408,7 @@
 	DPSstroke(ctxt);
 
 	/* draw spots */
+	/* FIXME scale spot */
 	if (cellWidth > 10)
 	{
 		DPSnewpath(ctxt);
@@ -486,7 +473,8 @@
 	}
 
 	/* draw shadow */
-	if (isEditable && mouseLocation.row > 0)
+	if (isEditable && mouseLocation.row > 0 &&
+			mouseLocation.row <= boardSize && mouseLocation.column <= boardSize)
 	{
 		/* fixme : change this to check if legal */
 		StoneUI *stone = [_go stoneAtLocation:mouseLocation];
@@ -582,14 +570,10 @@
 
 - (NSRect) rectForGoLocation:(GoLocation)loc
 {
-	NSRect boardRect;
-	NSRect bounds = [self bounds];
-	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	int boardSize = [_go boardSize];
-	float cellWidth = boardWidth / boardSize;
-
-	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
-			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
+	if (_go == nil)
+	{
+		return NSZeroRect;
+	}
 
 	NSRect retRect;
 	retRect.origin = [self pointForGoLocation:loc];
@@ -600,15 +584,12 @@
 
 - (NSPoint) pointForGoLocation:(GoLocation)loc
 {
-	NSRect boardRect;
-	NSRect bounds = [self bounds];
-	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	int boardSize = [_go boardSize];
-	float cellWidth = boardWidth / boardSize;
 	NSPoint retpnt;
 
-	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
-			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
+	if (_go == nil)
+	{
+		return NSZeroPoint;
+	}
 
 	retpnt.x = (loc.column - 1) * cellWidth + NSMinX(boardRect) + cellWidth/2;
 	retpnt.y = (loc.row - 1) * cellWidth + NSMinY(boardRect) + cellWidth/2;
@@ -618,18 +599,21 @@
 
 - (GoLocation) goLocationForPoint:(NSPoint)p
 {
-	NSRect boardRect;
-	NSRect bounds = [self bounds];
-	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	int boardSize = [_go boardSize];
-	float cellWidth = boardWidth / boardSize;
 	GoLocation retloc;
 
-	boardRect = NSMakeRect((NSWidth(bounds) - boardWidth)/2,
-			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
+	if (_go == nil)
+	{
+		return GoNoLocation;
+	}
 
 	retloc.column = (p.x - NSMinX(boardRect))/cellWidth + 1;
 	retloc.row = (p.y - NSMinY(boardRect))/cellWidth + 1;
+
+	if (retloc.column < 0 || retloc.row < 0 ||
+			retloc.column > boardSize || retloc.row > boardSize)
+	{
+		retloc = GoNoLocation;
+	}
 
 	return retloc;
 }

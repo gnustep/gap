@@ -3,33 +3,45 @@
 
 @class PlayerCell;
 
+static NSMutableArray *__playerClasses;
+
 @implementation PlayerController
+
++ (void) initialize
+{
+	if (__playerClasses == nil)
+	{
+		__playerClasses = [NSMutableArray new];
+	}
+}
+
+- (id) init
+{
+	return self;
+}
+
 - (void) awakeFromNib
 {
 	[playerBrowser setCellClass:[PlayerCell class]];
 	[playerBrowser setMaxVisibleColumns:2];
 }
 
-- (id) init
-{
-	ASSIGN(_players, [NSMutableArray array]);
-	return self;
-}
-
 - (void) dealloc
 {
-	RELEASE(_players);
 	[super dealloc];
 }
 
-- (NSArray *) allPlayers
+- (NSArray *) allPlayerClasses
 {
-	return _players;
+	return __playerClasses;
 }
 
-- (void) addPlayer:(Player *)newPlayer
+- (void) addPlayerClass:(Class)newPlayerClass;
 {
-	[_players addObject:newPlayer];
+	if (![__playerClasses containsObject:newPlayerClass])
+	{
+		[__playerClasses addObject:newPlayerClass];
+	}
 }
 
 - (void) browser: (NSBrowser *)sender
@@ -37,13 +49,13 @@
 		   atRow: (int)row
 		  column: (int)column
 {
-	Player *player;
+	id player;
 	NSDictionary *dict;
 	id value;
 
 	if (column == 0)
 	{
-		player = [_players objectAtIndex:row];
+		player = [__playerClasses objectAtIndex:row];
 		dict = [player info];
 		if (dict)
 		{
@@ -69,7 +81,7 @@
 	}
 	else
 	{
-		player = [_players objectAtIndex:[sender selectedRowInColumn:0]];
+		player = [__playerClasses objectAtIndex:[sender selectedRowInColumn:0]];
 	}
 
 	dict = [player dictionaryForPath:[sender path]];
@@ -97,11 +109,11 @@
 {
 	if (column == 0)
 	{
-		return [_players count];
+		return [__playerClasses count];
 	}
 	else
 	{
-		Player *player = [_players objectAtIndex:[sender selectedRowInColumn:0]];
+		id player = [__playerClasses objectAtIndex:[sender selectedRowInColumn:0]];
 		NSString *path = [NSString pathWithComponents:[[[sender path] pathComponents] subarrayWithRange:NSMakeRange(0, column)]];
 		NSDictionary *dict = [player dictionaryForPath:path];
 		NSArray *leaves = [dict objectForKey:@"LeavesArray"];
