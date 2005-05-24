@@ -16,7 +16,7 @@
 	id komiStepper;
 	id komiText;
 	id turnText;
-	id showHistory;
+	id showHistoryButton;
 	id revertButton;
 	id applyButton;
 }

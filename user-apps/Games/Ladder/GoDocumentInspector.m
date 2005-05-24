@@ -25,15 +25,12 @@
 - (void) awakeFromNib
 {
 	[self setDocument:nil];
-	NSLog(@"xx %@",showHistory);
-	NSLog(@"xx %@",revertButton);
-	NSLog(@"xx %@",applyButton);
 }
 
 - (void) setUIEnabled:(BOOL)enable
 {
 	[boardSizeChooser setEnabled:enable];
-	[showHistory setEnabled:enable];
+	[showHistoryButton setEnabled:enable];
 	[blackPlayerButton setEnabled:enable];
 	[whitePlayerButton setEnabled:enable];
 

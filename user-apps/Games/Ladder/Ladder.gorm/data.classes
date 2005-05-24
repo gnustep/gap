@@ -63,7 +63,7 @@
 	    komiStepper,
 	    komiText,
 	    turnText,
-	    showHistory,
+	    showHistoryButton,
 	    applyButton,
 	    revertButton
 	);
