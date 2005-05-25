@@ -14,19 +14,21 @@ Ladder_OBJC_FILES = main.m \
 					Board.m \
 					Player.m \
 					GNUGoPlayer.m \
+					NetworkPlayer.m \
 					PlayerController.m \
 					PlayerCell.m \
 					PlayerInfo.m \
 					Clock.m \
 					ClockController.m \
 					ImageBox.m \
+					GoWindow.m \
 					GoDocument.m \
 					GoDocumentInspector.m
 
 
 Ladder_APPLICATION_ICON = Ladder.tiff
 
-Ladder_RESOURCE_FILES = Ladder.gorm Clock.gorm GoDocument.gorm Ladder.tiff LadderInfo.plist wood.jpg man_icon.png machine_icon.png COPYING.GPL
+Ladder_RESOURCE_FILES = Ladder.gorm Clock.gorm GoDocument.gorm Ladder.tiff LadderInfo.plist wood.jpg man_icon.png machine_icon.png network_icon.png COPYING.GPL
 
 include $(GNUSTEP_MAKEFILES)/application.make
 

@@ -103,6 +103,9 @@ static inline GoLocation MakeGoLocation (int row, int column)
 - (Stone *) stoneAtLocation:(GoLocation) location;
 - (GoLocation) locationForStone:(id <Stone>) stone;
 
+- (BOOL) printSGFToFile:(NSString *)path;
+- (BOOL) loadSGFFile:(NSString *)path;
+
 @end
 
 extern NSString * GoStoneNotification;

@@ -77,9 +77,9 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 
 @implementation Go
 
+#if 0 
 - (void) awakeFromNib
 {
-	[self setBoardSize:19];
 //	[self setHandicap:100];
 
 	/*
@@ -99,8 +99,8 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 	}
 	*/
 
-	[self _setupGNUGo];
 }
+#endif
 
 /*
 - (id) retain
@@ -122,6 +122,7 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 	stoneClass = [Stone class];
 	turn = BlackPlayerType;
 	[self setBoardSize:19];
+	[self _setupGNUGo];
 	return self;
 }
 
@@ -582,6 +583,29 @@ forPlayerWithColorType:(PlayerColorType) playerColorType
 - (NSCalendarDate *) turnBeginDate
 {
 	return _turnBeginDate;
+}
+
+- (BOOL) printSGFToFile:(NSString *)path
+{
+	if (__check_state([self runGTPCommand:[NSString stringWithFormat:@"printsgf %@",path]]) == NO)
+	{
+		NSLog(@"Cannnot execute printsgf on path %@",path);
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL) loadSGFFile:(NSString *)path
+{
+	NSLog(@"will load %@",path);
+	if (__check_state([self runGTPCommand:[NSString stringWithFormat:@"loadsgf %@",path]]) == NO)
+	{
+		NSLog(@"Cannnot execute loadsgf on path %@",path);
+		return NO;
+	}
+
+	NSLog(@"success");
+	return YES;
 }
 
 @end

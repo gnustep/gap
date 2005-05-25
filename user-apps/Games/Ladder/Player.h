@@ -1,6 +1,9 @@
 #include <Foundation/Foundation.h>
 #include "Go.h"
 
+#ifndef PLAYER_H
+#define PLAYER_H
+
 @interface Player : NSObject
 {
 }
@@ -17,3 +20,4 @@
 withStoneOfColorType:(PlayerColorType)colorType
 		  atLocation:(GoLocation)location;
 @end
+#endif

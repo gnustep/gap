@@ -7,7 +7,7 @@
     CopyrightDescription = "GNU General Public License";
 	NSTypes = (
 		{
-			NSName = "sfg";
+			NSName = "sgf";
 			NSHumanReadableName = "SGF Document";
 			NSUnixExtensions = ("sgf");
 			NSDocumentClass = GoDocument;
