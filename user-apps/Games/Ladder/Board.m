@@ -262,6 +262,9 @@
 	}
 
 	ASSIGN(_go, go);
+	[_lastStones removeAllObjects];
+	[liTimer invalidate];
+	liTimer = nil;
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
 		   selector:@selector(stoneAdded:)
@@ -473,7 +476,7 @@
 	}
 
 	/* draw shadow */
-	if (isEditable && mouseLocation.row > 0 &&
+	if (isEditable && mouseLocation.row > 0 && mouseLocation.column > 0 &&
 			mouseLocation.row <= boardSize && mouseLocation.column <= boardSize)
 	{
 		/* fixme : change this to check if legal */
@@ -542,7 +545,7 @@
 			{
 				NSSize strSize;
 				p = [self pointForGoLocation:l];
-				NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",[stone turnNumber]]];
+				NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",1 + [stone turnNumber]]];
 				[attrStr addAttribute:NSFontAttributeName
 								value:aFont
 								range:NSMakeRange(0,[attrStr length])];
@@ -553,13 +556,6 @@
 				[stone centerAttributedString:attrStr
 									  toPoint:NSMakePoint(p.x - strSize.width/2, p.y - strSize.height/2)
 								   withRadius:cellWidth/2];
-				/*
-				[[NSColor redColor] set];
-				PSmoveto(p.x,p.y);
-				PSlineto(p.x+5,p.y+5);
-				PSlineto(p.x+5,p.y);
-				PSfill();
-				*/
 				RELEASE(attrStr);
 			}
 		}

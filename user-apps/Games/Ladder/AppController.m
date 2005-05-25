@@ -2,6 +2,7 @@
 #include "AppController.h"
 #include "StoneUI.h"
 #include "GNUGoPlayer.h"
+#include "NetworkPlayer.h"
 
 @implementation AppController
 
@@ -17,6 +18,7 @@
 
 	[playerController addPlayerClass:[Player class]];
 	[playerController addPlayerClass:[GNUGoPlayer class]];
+	[playerController addPlayerClass:[NetworkPlayer class]];
 
 	/* TODO change these to messages */
 	playerinfo = [NSMutableDictionary dictionary];
@@ -32,6 +34,13 @@
 	[playerinfo setObject:[NSImage imageNamed:@"machine_icon.png"]
 				   forKey:@"Image"];
 	[GNUGoPlayer setInfo:playerinfo];
+
+	playerinfo = [NSMutableDictionary dictionary];
+	[playerinfo setObject:@"Network (NYI)"
+				   forKey:@"Name"];
+	[playerinfo setObject:[NSImage imageNamed:@"network_icon.png"]
+				   forKey:@"Image"];
+	[NetworkPlayer setInfo:playerinfo];
 
 	[NSBundle loadNibNamed:@"Clock"
 					 owner:self];

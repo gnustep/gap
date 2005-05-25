@@ -1,8 +1,10 @@
 FIXME
-- save/load SGF
+- change player
+- clean up
+- try to attach info to sgf
 - 2 pass is game over
 - Alarm
 - Undo
 - Preference panel
 - Templates
-- Networking
+- Network player

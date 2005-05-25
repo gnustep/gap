@@ -1,5 +1,6 @@
 #include "GoDocument.h"
 #include "GNUGoPlayer.h"
+#include "GoWindow.h"
 
 NSString * GoDocumentDidBecomeMainNotification = @"GoDocumentDidBecomeMainNotification";
 NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotification";
@@ -10,33 +11,80 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 {
 	self = [super init];
 
-	if (self)
-	{
-	}
+	[self setGo:AUTORELEASE([[Go alloc] init])];
 
 	return self;
 }
 
 - (void) setBoardSize:(unsigned int)newSize
 {
-	[[_board go] clearBoard];
-	[[_board go] setBoardSize:newSize];
-	[_board setGo:[_board go]];
+	[_go clearBoard];
+	[_go setBoardSize:newSize];
+	[self setGo:_go]; /* broadcast the change */
 }
 
 - (unsigned int) boardSize
 {
-	return [[_board go] boardSize];
+	return [_go boardSize];
+}
+
+- (Go *) go
+{
+	return _go;
+}
+
+- (void) setGo:(Go *)go
+{
+	ASSIGN(_go, go);
+
+	NSEnumerator *en = [[self windowControllers] objectEnumerator];
+	NSWindowController *winController;
+	GoWindow *window;
+	Class goWinClass = [GoWindow class];
+
+	while ((winController = [en nextObject]))
+	{
+		window = [winController window];
+		if ([window isMemberOfClass:goWinClass])
+		{
+			[[window board] setGo:go];
+		}
+	}
+
+	if (_go != nil && isMain)
+	{
+		[[NSNotificationCenter defaultCenter]
+			postNotificationName:GameDidBecomeMainNotification
+						  object:_go];
+	}
 }
 
 - (void) setShowHistory:(BOOL)show
 {
-	[_board setShowHistory:show];
+	NSEnumerator *en = [[self windowControllers] objectEnumerator];
+	NSWindowController *winController;
+	GoWindow *window;
+	Class goWinClass = [GoWindow class];
+
+	while ((winController = [en nextObject]))
+	{
+		window = [winController window];
+		if ([window isMemberOfClass:goWinClass])
+		{
+			[[window board] setShowHistory:show];
+		}
+	}
+
 }
 
 - (Player *) playerForColorType:(PlayerColorType)color
 {
 	return _players[color];
+}
+
+- (PlayerColorType) turn
+{
+	return [_go turn];
 }
 
 - (void) awakeFromNib
@@ -50,47 +98,91 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 		addObserver:self
 		   selector:@selector(turnBegin:)
 			   name:GameTurnDidBeginNotification
-			 object:[_board go]];
+			 object:_go];
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)aNotification
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:GameDidBecomeMainNotification
-														object:[_board go]];
-	[[NSNotificationCenter defaultCenter] postNotificationName:GoDocumentDidBecomeMainNotification
-														object:self];
-	NSLog(@"%@ %d", [_board go],[[_board go] retainCount]);;
+	if (_go != nil)
+	{
+		[[NSNotificationCenter defaultCenter]
+			postNotificationName:GameDidBecomeMainNotification
+						  object:_go];
+	}
+
+	[[NSNotificationCenter defaultCenter]
+		postNotificationName:GoDocumentDidBecomeMainNotification
+					  object:self];
+	isMain = YES;
 }
 
 - (void) windowDidResignMain: (NSNotification*)aNotification
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:GameDidResignMainNotification
-														object:[_board go]];
+	if (_go != nil)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:GameDidResignMainNotification
+															object:_go];
+	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:GoDocumentDidResignMainNotification
 														object:self];
+	isMain = NO;
+}
+
+- (void)windowControllerDidLoadNib:(NSWindowController *)windowController
+{
+	Class goWinClass = [GoWindow class];
+	GoWindow *window = [windowController window];
+	if ([window isMemberOfClass:goWinClass])
+	{
+		[[window board] setGo:_go];
+	}
 }
 
 - (void) turnBegin:(NSNotification *)notification
 {
 	Go *go = [notification object];
+	NSAssert(_go == go, @"Got notification for non-registered object");
+
 	PlayerColorType turn = [go turn];
 	if ([_players[turn] playGo:go
 				  forColorType:turn] == NO)
 
 	{
-		NSLog(@"board on");
-		[_board setEditable:YES];
+		NSEnumerator *en = [[self windowControllers] objectEnumerator];
+		NSWindowController *winController;
+		GoWindow *window;
+		Class goWinClass = [GoWindow class];
+
+		while ((winController = [en nextObject]))
+		{
+			window = [winController window];
+			if ([window isMemberOfClass:goWinClass])
+			{
+				[[window board] setEditable:YES];
+			}
+		}
 	}
 }
 
 - (void) playerShouldPutStoneAtLocation:(GoLocation)location
 {
-	Go *go = [_board go];
-	PlayerColorType turn = [go turn];
+	NSEnumerator *en = [[self windowControllers] objectEnumerator];
+	NSWindowController *winController;
+	GoWindow *window;
+	Class goWinClass = [GoWindow class];
 
-		NSLog(@"board off");
-	[_board setEditable:NO];
-	[_players[turn] playGo:go
+	while ((winController = [en nextObject]))
+	{
+		window = [winController window];
+		if ([window isMemberOfClass:goWinClass])
+		{
+			[[window board] setEditable:NO];
+		}
+	}
+
+	PlayerColorType turn = [_go turn];
+
+	[_players[turn] playGo:_go
 	  withStoneOfColorType:turn
 				atLocation:location];
 }
@@ -99,9 +191,8 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 {
 	RELEASE(_players[BlackPlayerType]);
 	RELEASE(_players[WhitePlayerType]);
-//	RELEASE(_board); // need fix in gnustep
+	RELEASE(_go);
 	[super dealloc];
-	NSLog(@"done degodoc");
 }
 
 /*
@@ -124,14 +215,51 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 //- (void) windowControllerDidLoadNib:(NSWindowController *) aController
 
+
 - (NSData *)dataRepresentationOfType:(NSString *)aType
 {
-	return nil;
+	NSAssert([aType isEqualToString:@"sgf"], @"Unknown type");
+
+	char path[30] = "/tmp/Ladder.XXXXXX";
+	/* create a temp file */
+	int fd = -1;
+	fd = mkstemp(path);
+	NSAssert(fd != -1, @"Cannot create temporary file");
+
+	NSAssert([_go printSGFToFile:[NSString stringWithCString:path]], @"Error saving file");
+
+	NSData *retData = [NSData dataWithContentsOfFile:[NSString stringWithCString:path]];
+
+	unlink(path);
+	close(fd);
+
+	return retData;
 }
+
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
+	NSAssert([aType isEqualToString:@"sgf"], @"Unknown type");
+
+	char path[30] = "/tmp/Ladder.XXXXXX";
+	/* create a temp file */
+	int fd = -1;
+	fd = mkstemp(path);
+	NSAssert(fd != -1, @"Cannot create temporary file");
+
+	[data writeToFile:[NSString stringWithCString:path]
+		   atomically:NO];
+
+	[_go loadSGFFile:[NSString stringWithCString:path]];
+	NSAssert([_go loadSGFFile:[NSString stringWithCString:path]], @"Error loading file");
+
+	unlink(path);
+	close(fd);
+
+	/* TODO should analyze the data if there is any attached plist */
+
 	return YES;
+
 }
 
 - (void) setPlayer:(Player *)player

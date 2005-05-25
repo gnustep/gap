@@ -18,13 +18,40 @@
 		   selector:@selector(unsetDocumentNotified:)
 			   name:GoDocumentDidResignMainNotification
 			 object:nil];
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(turnBegin:)
+			   name:GameTurnDidBeginNotification
+			 object:nil];
 
 	return self;
+}
+
+- (void) turnBegin:(NSNotification *)notification
+{
+	if ([notification object] != [_document go])
+	{
+		return;
+	}
+
+	if ([_document turn] == BlackPlayerType)
+	{
+		[turnText setStringValue:@"Black Player's Turn"];
+	}
+	else if ([_document turn] == WhitePlayerType)
+	{
+		[turnText setStringValue:@"White Player's Turn"];
+	}
+	else
+	{
+		[turnText setStringValue:@""];
+	}
 }
 
 - (void) awakeFromNib
 {
 	[self setDocument:nil];
+	[self setUIEnabled:NO];
 }
 
 - (void) setUIEnabled:(BOOL)enable
@@ -35,11 +62,23 @@
 	[whitePlayerButton setEnabled:enable];
 
 	[handicapStepper setEnabled:enable];
-	[handicapText setEnabled:enable];
 	[komiStepper setEnabled:enable];
-	[komiText setEnabled:enable];
 	[revertButton setEnabled:enable];
 	[applyButton setEnabled:enable];
+
+	[handicapText setEditable:enable];
+	[komiText setEditable:enable];
+	if (enable)
+	{
+		[handicapText takeIntValueFrom:handicapStepper];
+		[komiText takeFloatValueFrom:komiStepper];
+	}
+	else
+	{
+		[handicapText setStringValue:@""];
+		[komiText setStringValue:@""];
+		[turnText setStringValue:@""];
+	}
 }
 
 - (void) setDocument:(GoDocument *)godoc
@@ -69,6 +108,19 @@
 		NSLog(@"info %@",[player info]);
 		player = [_document playerForColorType:WhitePlayerType];
 		[whitePlayerButton setImage:[[player info] objectForKey:@"Image"]];
+
+		if ([_document turn] == BlackPlayerType)
+		{
+			[turnText setStringValue:@"Black Player's Turn"];
+		}
+		else if ([_document turn] == WhitePlayerType)
+		{
+			[turnText setStringValue:@"White Player's Turn"];
+		}
+		else
+		{
+			[turnText setStringValue:@""];
+		}
 
 	}
 	else
