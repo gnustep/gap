@@ -77,6 +77,56 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 
 @implementation Go
 
+/* FIXME change this to dictionary */
+static NSString *columnstr[] = {@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T"};
+
+static NSString * __string_for_go_location(GoLocation loc)
+{
+	if (loc.row == 0 || loc.column == 0)
+	{
+		return @"pass";
+	}
+	return [NSString stringWithFormat:@"%@%d",
+		   columnstr[loc.column-1],
+		   loc.row];
+}
+
+static GoLocation __go_location_for_string(NSString *str)
+{
+	GoLocation retloc;
+	int i;
+
+	if (str == nil || [str length] < 2 || [str isEqualToString:@"pass"])
+	{
+		return GoNoLocation;
+	}
+
+	NSString *substr = [str substringToIndex:1];
+
+	for (i=0;i<19;i++)
+	{
+		if ([substr caseInsensitiveCompare:columnstr[i]] == NSOrderedSame)
+		{
+			retloc.column = i + 1;
+			break;
+		}
+	}
+	substr = [str substringFromIndex:1];
+	retloc.row = [substr intValue];
+
+	return retloc;
+}
+
+static BOOL __check_state(NSString *str)
+{
+	if ([str characterAtIndex:0] == '=')
+	{
+		return YES;
+	}
+	return NO;
+}
+
+
 #if 0 
 - (void) awakeFromNib
 {
@@ -207,7 +257,7 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 	stoneClass = aClass;
 }
 
-- (void) clearBoard
+- (void) _clearTable
 {
 	int i,j,offset;
 
@@ -225,6 +275,12 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 			}
 		}
 	}
+}
+
+- (void) clearBoard
+{
+	[self _clearTable];
+	NSAssert(__check_state([self runGTPCommand:@"clear_board"]), @"clear board fail");
 }
 
 - (void) setBoardSize:(unsigned int)newSize;
@@ -311,55 +367,6 @@ NSString * GoStoneNotification = @"GoStoneNotification";
 	return str;
 }
 
-/* change this to dictionary */
-static NSString *columnstr[] = {@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T"};
-
-static NSString * __string_for_go_location(GoLocation loc)
-{
-	if (loc.row == 0 || loc.column == 0)
-	{
-		return @"pass";
-	}
-	return [NSString stringWithFormat:@"%@%d",
-		   columnstr[loc.column-1],
-		   loc.row];
-}
-
-static GoLocation __go_location_for_string(NSString *str)
-{
-	GoLocation retloc;
-	int i;
-
-	if (str == nil || [str length] < 2 || [str isEqualToString:@"pass"])
-	{
-		return GoNoLocation;
-	}
-
-	NSString *substr = [str substringToIndex:1];
-
-	for (i=0;i<19;i++)
-	{
-		if ([substr caseInsensitiveCompare:columnstr[i]] == NSOrderedSame)
-		{
-			retloc.column = i + 1;
-			break;
-		}
-	}
-	substr = [str substringFromIndex:1];
-	retloc.row = [substr intValue];
-
-	return retloc;
-}
-
-static BOOL __check_state(NSString *str)
-{
-	if ([str characterAtIndex:0] == '=')
-	{
-		return YES;
-	}
-	return NO;
-}
-
 - (void) _syncBoardWithGNUGo
 {
 	NSString *str;
@@ -396,14 +403,20 @@ static BOOL __check_state(NSString *str)
 					}
 					else
 					{
-						NSLog(@"alertttttt");
+						stone = [stoneClass stoneWithColorType:i];
+						ASSIGN(newTable[offset],stone);
+						if (stone != nil && offset >= 0)
+						{
+							[stone setOwner:self];
+							[stone setTurnNumber: -1];
+						}
 					}
 				}
 			}
 		}
 	}
 
-	[self clearBoard];
+	[self _clearTable];
 	free(_boardTable);
 	_boardTable = newTable;
 }
@@ -422,6 +435,7 @@ static BOOL __check_state(NSString *str)
 	if (__check_state([self runGTPCommand:cmdString]) == NO)
 	{
 		NSLog(@"set stone fail");
+		NSLog([self runGTPCommand:@"showboard"]);
 		return;
 	}
 	else
@@ -603,6 +617,7 @@ forPlayerWithColorType:(PlayerColorType) playerColorType
 		NSLog(@"Cannnot execute loadsgf on path %@",path);
 		return NO;
 	}
+	[self _syncBoardWithGNUGo];
 
 	NSLog(@"success");
 	return YES;

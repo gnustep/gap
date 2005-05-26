@@ -1,9 +1,12 @@
 FIXME
-- change player
+- make sure turn is sync correctly after load
 - clean up
-- try to attach info to sgf
-- 2 pass is game over
 - Alarm
+- rewrite gtp code
+- komi/handicap
+- 2 pass is game over
+- try to attach info to sgf
+- improve changing player
 - Undo
 - Preference panel
 - Templates
