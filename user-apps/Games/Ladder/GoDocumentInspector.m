@@ -79,6 +79,49 @@
 		[komiText setStringValue:@""];
 		[turnText setStringValue:@""];
 	}
+
+
+	if (!enable || _document == nil)
+	{
+		return;
+	}
+
+	/* FIXME Temporary */
+	NSArray *parray = [[[NSApp delegate] playerController] allPlayerClasses];
+	NSArray *items;
+
+	items = [blackPlayerButton itemArray];
+
+	[[items objectAtIndex:0] setTitle:[[parray objectAtIndex:0] description]];
+	[[items objectAtIndex:0] setImage:[[[parray objectAtIndex:0] info] objectForKey:@"Image"]];
+
+	[[items objectAtIndex:1] setTitle:[[parray objectAtIndex:1] description]];
+	[[items objectAtIndex:1] setImage:[[[parray objectAtIndex:1] info] objectForKey:@"Image"]];
+	if ([[_document playerForColorType:BlackPlayerType] isMemberOfClass:[parray objectAtIndex:0]])
+	{
+		[blackPlayerButton selectItemAtIndex:0];
+	}
+	else
+	{
+		[blackPlayerButton selectItemAtIndex:1];
+	}
+
+
+	items = [whitePlayerButton itemArray];
+
+	[[items objectAtIndex:0] setTitle:[[parray objectAtIndex:0] description]];
+	[[items objectAtIndex:0] setImage:[[[parray objectAtIndex:0] info] objectForKey:@"Image"]];
+
+	[[items objectAtIndex:1] setTitle:[[parray objectAtIndex:1] description]];
+	[[items objectAtIndex:1] setImage:[[[parray objectAtIndex:1] info] objectForKey:@"Image"]];
+	if ([[_document playerForColorType:WhitePlayerType] isMemberOfClass:[parray objectAtIndex:0]])
+	{
+		[whitePlayerButton selectItemAtIndex:0];
+	}
+	else
+	{
+		[whitePlayerButton selectItemAtIndex:1];
+	}
 }
 
 - (void) setDocument:(GoDocument *)godoc
@@ -103,11 +146,13 @@
 			}
 		}
 
+		/*
 		Player *player = [_document playerForColorType:BlackPlayerType];
 		[blackPlayerButton setImage:[[player info] objectForKey:@"Image"]];
 		NSLog(@"info %@",[player info]);
 		player = [_document playerForColorType:WhitePlayerType];
 		[whitePlayerButton setImage:[[player info] objectForKey:@"Image"]];
+		*/
 
 		if ([_document turn] == BlackPlayerType)
 		{
@@ -127,8 +172,10 @@
 	{
 		[self setUIEnabled:NO];
 		boardSize = 0;
+		/*
 		[blackPlayerButton setImage:nil];
 		[whitePlayerButton setImage:nil];
+		*/
 	}
 }
 
@@ -154,13 +201,41 @@
 
 - (void) setPlayer: (id)sender
 {
-  /* insert your code here */
+	NSLog(@"set player");
+	/*
+	[[NSApp delegate] orderFrontPlayerPanel:sender];
+	id playerController = [[NSApp delegate] playerController];
+	*/
+
+	NSArray *parray = [[[NSApp delegate] playerController] allPlayerClasses];
+	int i;
+
+	i = [sender indexOfSelectedItem];
+
+	[_document setPlayer:[[parray objectAtIndex:i] player]
+			forColorType:sender == blackPlayerButton?BlackPlayerType:WhitePlayerType];
+
 }
 
 
 - (void) apply: (id)sender
 {
 	[_document setBoardSize:[[boardSizeChooser selectedItem] tag]];
+
+
+	/* FIXME Temporary */
+	NSArray *parray = [[[NSApp delegate] playerController] allPlayerClasses];
+	int i;
+
+	i = [blackPlayerButton indexOfSelectedItem];
+
+	[_document setPlayer:[[parray objectAtIndex:i] player]
+			forColorType:BlackPlayerType];
+
+	i = [whitePlayerButton indexOfSelectedItem];
+
+	[_document setPlayer:[[parray objectAtIndex:i] player]
+			forColorType:WhitePlayerType];
 }
 
 - (void) revert: (id)sender

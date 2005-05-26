@@ -36,6 +36,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 - (void) setGo:(Go *)go
 {
 	ASSIGN(_go, go);
+	[go setStoneClass:[StoneUI class]];
 
 	NSEnumerator *en = [[self windowControllers] objectEnumerator];
 	NSWindowController *winController;
@@ -266,6 +267,27 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 	  forColorType:(PlayerColorType)color
 {
 	ASSIGN(_players[color], player);
+
+	PlayerColorType turn = [_go turn];
+
+	if (turn == color)
+	{
+		NSEnumerator *en = [[self windowControllers] objectEnumerator];
+		NSWindowController *winController;
+		GoWindow *window;
+		Class goWinClass = [GoWindow class];
+		BOOL willPlay = [_players[turn] playGo:_go
+								  forColorType:turn];
+
+		while ((winController = [en nextObject]))
+		{
+			window = [winController window];
+			if ([window isMemberOfClass:goWinClass])
+			{
+				[[window board] setEditable:!willPlay];
+			}
+		}
+	}
 }
 
 @end

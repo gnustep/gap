@@ -33,8 +33,9 @@
     FirstResponder = {
 	Actions = (
 	    "addPlayer:",
-	    "matrixUpdate:",
 	    "apply:",
+	    "matrixUpdate:",
+	    "newAction:",
 	    "orderFrontClockPanel:",
 	    "orderFrontInfoPanel:",
 	    "orderFrontPlayerPanel:",
@@ -79,7 +80,8 @@
     PlayerController = {
 	Actions = (
 	    "addPlayer:",
-	    "removePlayer:"
+	    "removePlayer:",
+	    "setPlayer:"
 	);
 	Outlets = (
 	    addButton,
