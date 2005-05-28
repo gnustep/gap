@@ -21,7 +21,7 @@
 
  You should have received a copy of the GNU Lesser General Public
  License along with this library; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
  
@@ -76,10 +76,9 @@
     sprintf(tempStr, "CWD %s\r\n", tempStr2);
     [self writeLine:tempStr];
     if ([self readReply:&reply] == 250)
-    {
-        NSLog(@"successful cwd");
         [super changeWorkingDir:dir];
-    }
+    else
+        NSLog(@"cwd failed");
 }
 
 /* if we have a valid controller, we suppose it respons to appendTextToLog */
@@ -269,7 +268,7 @@
         NSEnumerator *en;
         fileElement  *fEl;
 
-        if (depth > 3)
+        if (depth > 5)
         {
             NSLog(@"Max depth reached: %d", depth);
             return;
@@ -278,10 +277,8 @@
         pristineLocalPath = [[localClient workingDir] retain];
         pristineRemotePath = [[self workingDir] retain];
         
-        NSLog(@"it is a dir: %@", fileName);
         remoteDir = [[self workingDir] stringByAppendingPathComponent:fileName];
         [self changeWorkingDir:remoteDir];
-        NSLog(@"remote dir changed: %@", [self workingDir]);
 
         if ([localClient createNewDir:localPath] == YES)
         {
@@ -327,16 +324,14 @@
         perror("accepting socket, retrieveFile: ");
     }
 
-    NSLog(@"opened socket");
-
     localFm = [NSFileManager defaultManager];
 
     if ([localFm fileExistsAtPath:localPath] == NO)
     {
-        NSLog(@"File does not exist");
         if ([localFm createFileAtPath:localPath contents:[NSData data] attributes:nil] == NO)
         {
             NSLog(@"local file creation error");
+            close(localSocket);
             [self closeDataConn];
             return;
         }
@@ -349,11 +344,11 @@
     if(localFileHandle == nil)
     {
         NSLog(@"no file exists");
+        close(localSocket);
         [self closeDataConn];
         return;
     }
     remoteFileHandle = [[NSFileHandle alloc] initWithFileDescriptor: localSocket];
-
 
     totalBytes = 0;
     chunkLen = 0;
@@ -370,6 +365,7 @@
     [controller setProgress:(((float)totalBytes / fileSize) * 100)];
     
     NSLog(@"transferred %u", totalBytes);
+    [remoteFileHandle release];
     close(localSocket);
     [self closeDataConn];
     [self readReply:&reply];
@@ -466,6 +462,7 @@
     if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
     {
         perror("accepting socket, storeFile: ");
+        return;
     }
 
 
@@ -473,6 +470,7 @@
     if(localFileHandle == nil)
     {
         NSLog(@"no file exists");
+        close(localSocket);
         [self closeDataConn];
         return;
     }
@@ -496,6 +494,7 @@
     [controller setProgress:(((float)totalBytes / fileSize) * 100)];
     
     NSLog(@"transferred %u", totalBytes);
+    [remoteFileHandle release];
     close(localSocket);
     [self closeDataConn];
     [self readReply:&reply];
