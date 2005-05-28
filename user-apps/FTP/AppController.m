@@ -21,7 +21,7 @@
  
    You should have received a copy of the GNU General Public
    License along with this library; if not, write to the Free
-   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
+   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #import "AppController.h"
@@ -278,9 +278,11 @@
     [logWin makeKeyAndOrderFront:self];
 }
 
-// This routine is called after adding new results to the text view's backing store.
-// We now need to scroll the NSScrollView in which the NSTextView sits to the part
-// that we just added at the end
+/*
+ This routine is called after adding new results to the text view's backing store.
+ We now need to scroll the NSScrollView in which the NSTextView sits to the part
+ that we just added at the end
+ */
 - (void)scrollToVisible:(id)ignore {
     [logTextField scrollRangeToVisible:NSMakeRange([[logTextField string] length], 0)];
 }
