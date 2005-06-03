@@ -30,6 +30,8 @@
 #import "localclient.h"
 #import "fileTable.h"
 
+#include <time.h>
+
 @interface AppController : NSObject
 {
     IBOutlet NSWindow            *mainWin;
@@ -38,7 +40,8 @@
     IBOutlet NSPopUpButton       *localPath;
     IBOutlet NSPopUpButton       *remotePath;
     IBOutlet NSTextField         *infoMessage;
-    IBOutlet NSTextField         *infoProgress;
+    IBOutlet NSTextField         *infoSpeed;
+    IBOutlet NSTextField         *infoSize;
     IBOutlet NSProgressIndicator *progBar;
     
     IBOutlet NSWindow     *logWin;
@@ -55,6 +58,11 @@
     fileTable *remoteTableData;
     ftpclient *ftp;
     localclient *local;
+
+    @private clock_t            transferClockBegin;
+    @private clock_t            transferClockLast;
+    @private unsigned long long transferSize;
+    @private unsigned long long transferredBytes;
 }
 
 + (void)initialize;
@@ -76,8 +84,9 @@
 - (IBAction)downloadButton:(id)sender;
 - (IBAction)uploadButton:(id)sender;
 
-- (void)setProgress:(double)percent;
-- (void)setStatusInfo:(NSString *)str;
+- (void)setTransferBegin:(NSString *)name :(unsigned long long)size;
+- (void)setTransferProgress:(unsigned long)bytes;
+- (void)setTransferEnd:(unsigned long)bytes;
 
 - (IBAction)disconnect:(id)sender;
 
