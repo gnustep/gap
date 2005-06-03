@@ -234,7 +234,7 @@
         NSLog(@"should download: %@", [fileEl filename]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
-    [self setProgress :0];
+//    [self setProgress :0];
 }
 
 - (IBAction)uploadButton:(id)sender
@@ -252,16 +252,69 @@
     }
 }
 
-- (void)setProgress:(double)percent
+- (void)setTransferBegin:(NSString *)name :(unsigned long long)size
 {
-    [progBar setDoubleValue:percent];
+    [infoMessage setStringValue:name];
+    [progBar setDoubleValue:0];
+    transferClockBegin = clock();
+    transferSize = size;
+    transferredBytes = 0;
     [mainWin displayIfNeeded];
     [mainWin flushWindowIfNeeded];
 }
 
-- (void)setStatusInfo:(NSString *)str
+- (void)setTransferProgress:(unsigned long)bytes
 {
-    [infoMessage setStringValue:str];
+    clock_t  timeInterval;
+    double   speed;
+    NSString *str;
+    double   percent;
+
+    transferredBytes += bytes;
+    timeInterval = clock() - transferClockBegin;
+
+    if (timeInterval > 4)
+    {
+        speed = (double)transferredBytes / (double)timeInterval * CLOCKS_PER_SEC;
+        percent = ((double)transferredBytes / (double)transferSize) * 100;
+
+        [progBar setDoubleValue:percent];
+        str = [NSString alloc];
+        if (speed < 1024)
+            str = [str initWithFormat:@"%3.2f B/s", speed];
+        else
+            str = [str initWithFormat:@"%3.2f KB/s", speed/1024];
+        [infoSpeed setStringValue:str];
+        [str release];
+
+        [mainWin displayIfNeeded];
+        [mainWin flushWindowIfNeeded];
+    }
+}
+
+- (void)setTransferEnd:(unsigned long)bytes
+{
+    clock_t  timeInterval;
+    double   speed;
+    NSString *str;
+    double   percent;
+
+    transferredBytes += bytes;
+    timeInterval = clock() - transferClockBegin;
+    percent = ((double)transferredBytes / (double)transferSize) * 100;
+
+    speed = (double)transferredBytes / (double)timeInterval * CLOCKS_PER_SEC;
+    str = [NSString alloc];
+    if (speed < 1024)
+        str = [str initWithFormat:@"%3.2f B/s", speed];
+    else
+        str = [str initWithFormat:@"%3.2f KB/s", speed/1024];
+    [infoSpeed setStringValue:str];
+    [str release];
+    
+    [progBar setDoubleValue:percent];
+    [mainWin displayIfNeeded];
+    [mainWin flushWindowIfNeeded];
 }
 
 - (IBAction)disconnect:(id)sender

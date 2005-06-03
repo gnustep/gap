@@ -35,6 +35,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 
 
 #define MAX_CONTROL_BUFF 2048
@@ -249,8 +250,8 @@
     int                fromLen;
     int                replyCode;
     NSFileManager      *localFm;
-    unsigned           chunkLen;
-    unsigned           totalBytes;
+    unsigned long      chunkLen;
+    unsigned long long totalBytes;
     NSString           *localPath;
 
     fromLen = sizeof(from);
@@ -352,17 +353,16 @@
 
     totalBytes = 0;
     chunkLen = 0;
-    [controller setProgress:0];
-    [controller setStatusInfo:fileName];
+    [controller setTransferBegin:fileName :totalBytes];
     dataBuff = [remoteFileHandle availableData];
     while (chunkLen = [dataBuff length])
     {
         totalBytes += chunkLen;
-        [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [localFileHandle writeData:dataBuff];
+        [controller setTransferProgress:chunkLen];
         dataBuff = [remoteFileHandle availableData];
     }
-    [controller setProgress:(((float)totalBytes / fileSize) * 100)];
+    [controller setTransferEnd:chunkLen];
     
     NSLog(@"transferred %u", totalBytes);
     [remoteFileHandle release];
@@ -482,16 +482,16 @@
     blockSize = fileSize / 100;
     if (blockSize < 10240)
         blockSize = 10240;
-    [controller setProgress:0];
+    [controller setTransferBegin:fileName :totalBytes];
     dataBuff = [localFileHandle readDataOfLength:blockSize];
     while (chunkLen = [dataBuff length])
     {
         totalBytes += chunkLen;
-        [controller setProgress:(((float)totalBytes / fileSize) * 100)];
         [remoteFileHandle writeData:dataBuff];
+        [controller setTransferProgress:chunkLen];
         dataBuff = [localFileHandle readDataOfLength:blockSize];
     }
-    [controller setProgress:(((float)totalBytes / fileSize) * 100)];
+    [controller setTransferEnd:chunkLen];
     
     NSLog(@"transferred %u", totalBytes);
     [remoteFileHandle release];

@@ -24,7 +24,8 @@
                 connUser = NSTextField; 
                 connectPanel = NSPanel; 
                 infoMessage = NSTextField; 
-                infoProgress = NSTextField; 
+                infoSize = NSTextField; 
+                infoSpeed = NSTextField; 
                 localPath = NSPopUpButton; 
                 localView = NSTableView; 
                 logTextField = NSTextView; 
