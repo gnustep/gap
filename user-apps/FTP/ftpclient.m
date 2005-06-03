@@ -353,7 +353,7 @@
 
     totalBytes = 0;
     chunkLen = 0;
-    [controller setTransferBegin:fileName :totalBytes];
+    [controller setTransferBegin:fileName :fileSize];
     dataBuff = [remoteFileHandle availableData];
     while (chunkLen = [dataBuff length])
     {
@@ -482,7 +482,7 @@
     blockSize = fileSize / 100;
     if (blockSize < 10240)
         blockSize = 10240;
-    [controller setTransferBegin:fileName :totalBytes];
+    [controller setTransferBegin:fileName :fileSize];
     dataBuff = [localFileHandle readDataOfLength:blockSize];
     while (chunkLen = [dataBuff length])
     {
