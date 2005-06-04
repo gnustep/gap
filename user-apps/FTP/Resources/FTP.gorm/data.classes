@@ -29,7 +29,9 @@
 	    connAnon,
 	    infoMessage,
 	    progBar,
-	    mainWin
+	    mainWin,
+	    infoSpeed,
+	    infoSize
 	);
 	Super = NSObject;
     };
