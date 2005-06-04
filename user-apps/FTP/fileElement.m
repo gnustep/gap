@@ -49,6 +49,7 @@
     else
         isDir = NO;
     filename = [fname retain];
+    
     return self;
 }
 

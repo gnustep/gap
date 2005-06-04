@@ -30,8 +30,8 @@
 
 
 @interface fileElement : NSObject {
-    NSString          *filename;
-    BOOL              isDir;
+    NSString           *filename;
+    BOOL               isDir;
     unsigned long long size;
     NSDate             *modifDate;
 }

@@ -267,7 +267,8 @@
 {
     clock_t  timeInterval;
     double   speed;
-    NSString *str;
+    NSString *speedStr;
+    NSString *sizeStr;
     double   percent;
 
     transferredBytes += bytes;
@@ -279,14 +280,25 @@
         percent = ((double)transferredBytes / (double)transferSize) * 100;
 
         [progBar setDoubleValue:percent];
-        str = [NSString alloc];
+        speedStr = [NSString alloc];
         if (speed < 1024)
-            str = [str initWithFormat:@"%3.2f B/s", speed];
+            speedStr = [speedStr initWithFormat:@"%3.2fB/s", speed];
+        else if (speed < 1024*1024)
+            speedStr = [speedStr initWithFormat:@"%3.2fKB/s", speed/1024];
         else
-            str = [str initWithFormat:@"%3.2f KB/s", speed/1024];
-        [infoSpeed setStringValue:str];
-        [str release];
+            speedStr = [speedStr initWithFormat:@"%3.2fMB/s", speed/(1024*1024)];
+        [infoSpeed setStringValue:speedStr];
+        [speedStr release];
 
+        sizeStr = [NSString alloc];
+        if (transferSize < 1024)
+            sizeStr = [sizeStr initWithFormat:@"%3.2f: %3.2 fB", (float)transferredBytes, (float)transferSize];
+        else if (speed < 1024*1024)
+            sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f KB", (double)transferredBytes/1024, (double)transferSize/1024];
+        else
+            sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f MB", (double)transferredBytes/(1024*1024), (double)transferSize/(1024*1024)];
+        [infoSize setStringValue:sizeStr];
+        [sizeStr release];
         [mainWin displayIfNeeded];
         [mainWin flushWindowIfNeeded];
     }
@@ -296,7 +308,8 @@
 {
     clock_t  timeInterval;
     double   speed;
-    NSString *str;
+    NSString *speedStr;
+    NSString *sizeStr;
     double   percent;
 
     transferredBytes += bytes;
@@ -304,13 +317,25 @@
     percent = ((double)transferredBytes / (double)transferSize) * 100;
 
     speed = (double)transferredBytes / (double)timeInterval * CLOCKS_PER_SEC;
-    str = [NSString alloc];
+    speedStr = [NSString alloc];
     if (speed < 1024)
-        str = [str initWithFormat:@"%3.2f B/s", speed];
+        speedStr = [speedStr initWithFormat:@"%3.2fB/s", speed];
+    else if (speed < 1024*1024)
+        speedStr = [speedStr initWithFormat:@"%3.2fKB/s", speed/1024];
     else
-        str = [str initWithFormat:@"%3.2f KB/s", speed/1024];
-    [infoSpeed setStringValue:str];
-    [str release];
+        speedStr = [speedStr initWithFormat:@"%3.2fMB/s", speed/(1024*1024)];
+    [infoSpeed setStringValue:speedStr];
+    [speedStr release];
+
+    sizeStr = [NSString alloc];
+    if (transferSize < 1024)
+        sizeStr = [sizeStr initWithFormat:@"%3.2f: %3.2 fB", (float)transferredBytes, (float)transferSize];
+    else if (speed < 1024*1024)
+        sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f KB", (double)transferredBytes/1024, (double)transferSize/1024];
+    else
+        sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f MB", (double)transferredBytes/(1024*1024), (double)transferSize/(1024*1024)];
+    [infoSize setStringValue:sizeStr];
+    [sizeStr release];
     
     [progBar setDoubleValue:percent];
     [mainWin displayIfNeeded];
