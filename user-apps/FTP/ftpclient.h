@@ -48,6 +48,8 @@
     int                 serverDataPort;
     int                 dataSocket;
     int                 controlSocket;
+    int                 localSocket;
+    FILE                *dataStream;
     FILE                *controlInStream;
     struct sockaddr_in  remoteSockName;
     struct sockaddr_in  localSockName;
@@ -70,8 +72,9 @@
 - (void)disconnect;
 - (int)authenticate:(char *)user :(char *)pass;
 - (int)initDataConn;
+- (int)initDataStream;
 - (int)closeDataConn;
-
+- (void)closeDataStream;
 
 @end
 

@@ -58,8 +58,8 @@
     if (!(self =[super init]))
         return nil;
     controller = cont;
-    usesPassive = NO;
-    usesPorts = YES;
+    usesPassive = YES;
+    usesPorts = NO;
     return self;
 }
 
@@ -241,21 +241,20 @@
     unsigned long long fileSize;
     char               fNameCStr[MAX_CONTROL_BUFF];
     char               command[MAX_CONTROL_BUFF];
-    NSFileHandle       *remoteFileHandle;
-    NSFileHandle       *localFileHandle;
+    char               buff[MAX_DATA_BUFF];
+    FILE               *localFileStream;
+    int                bytesRead;
     NSMutableArray     *reply;
-    NSData             *dataBuff;
-    int                localSocket;
     struct sockaddr    from;
     int                fromLen;
     int                replyCode;
-    NSFileManager      *localFm;
-    unsigned long      chunkLen;
     unsigned long long totalBytes;
     NSString           *localPath;
+    BOOL               gotFile;
 
     fromLen = sizeof(from);
 
+    NSLog(@"filesize should be %u", (unsigned)[file size]);
     fileName = [file filename];
     fileSize = [file size];
     localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
@@ -318,56 +317,46 @@
 
     if(replyCode != 150)
         return; /* we have an error or some unexpected condition */
-    
     [reply release];
-    if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
+    
+    if ([self initDataStream] < 0)
+        return;
+    
+    localFileStream = fopen([localPath cString], "w");
+    if (localFileStream == NULL)
     {
-        perror("accepting socket, retrieveFile: ");
-    }
-
-    localFm = [NSFileManager defaultManager];
-
-    if ([localFm fileExistsAtPath:localPath] == NO)
-    {
-        if ([localFm createFileAtPath:localPath contents:[NSData data] attributes:nil] == NO)
-        {
-            NSLog(@"local file creation error");
-            close(localSocket);
-            [self closeDataConn];
-            return;
-        }
-    } else
-    {
-        NSLog(@"File exists...");
-    }
-
-    localFileHandle = [NSFileHandle fileHandleForWritingAtPath:localPath];
-    if(localFileHandle == nil)
-    {
-        NSLog(@"no file exists");
-        close(localSocket);
-        [self closeDataConn];
+        perror("local fopen failed");
         return;
     }
-    remoteFileHandle = [[NSFileHandle alloc] initWithFileDescriptor: localSocket];
-
+    
     totalBytes = 0;
-    chunkLen = 0;
+    gotFile = NO;
     [controller setTransferBegin:fileName :fileSize];
-    dataBuff = [remoteFileHandle availableData];
-    while (chunkLen = [dataBuff length])
+    while (!gotFile)
     {
-        totalBytes += chunkLen;
-        [localFileHandle writeData:dataBuff];
-        [controller setTransferProgress:chunkLen];
-        dataBuff = [remoteFileHandle availableData];
+        bytesRead = read(localSocket, buff, MAX_DATA_BUFF);
+        if (bytesRead == 0)
+            gotFile = YES;
+        else if (bytesRead < 0)
+        {
+            gotFile = YES;
+            NSLog(@"error on socket read, retrieve file");
+        } else
+        {
+            if (fwrite(buff, sizeof(char), bytesRead, localFileStream) < bytesRead)
+            {
+                NSLog(@"file write error, retrieve file");
+            }
+            totalBytes += bytesRead;
+            if (totalBytes >> 6)
+                [controller setTransferProgress:totalBytes];
+        }
     }
-    [controller setTransferEnd:chunkLen];
+    [controller setTransferEnd:totalBytes];
     
     NSLog(@"transferred %u", totalBytes);
-    [remoteFileHandle release];
-    close(localSocket);
-    [self closeDataConn];
+    fclose(localFileStream);
+    [self closeDataStream];
     [self readReply:&reply];
     [reply release];
 }
@@ -378,18 +367,16 @@
     unsigned long long fileSize;
     char               fNameCStr[MAX_CONTROL_BUFF];
     char               command[MAX_CONTROL_BUFF];
-    NSFileHandle       *remoteFileHandle;
-    NSFileHandle       *localFileHandle;
+    char               buff[MAX_DATA_BUFF];
+    FILE               *localFileStream;
     NSMutableArray     *reply;
-    NSData             *dataBuff;
-    int                localSocket;
+    int                bytesRead;
     struct sockaddr    from;
     int                fromLen;
     int                replyCode;
-    unsigned           chunkLen;
     unsigned           totalBytes;
-    unsigned int       blockSize;
     NSString           *localPath;
+    BOOL               gotFile;
 
     fromLen = sizeof(from);
 
@@ -397,8 +384,6 @@
     fileSize = [file size];
     
     localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
-    
-
 
     if ([file isDir])
     {
@@ -459,44 +444,47 @@
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
     [reply release];
-    if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
+
+    if ([self initDataStream] < 0)
+        return;
+
+
+    localFileStream = fopen([localPath cString], "r");
+    if (localFileStream == NULL)
     {
-        perror("accepting socket, storeFile: ");
+        perror("local fopen failed");
         return;
     }
-
-
-    localFileHandle = [NSFileHandle fileHandleForReadingAtPath:localPath];
-    if(localFileHandle == nil)
-    {
-        NSLog(@"no file exists");
-        close(localSocket);
-        [self closeDataConn];
-        return;
-    }
-    remoteFileHandle = [[NSFileHandle alloc] initWithFileDescriptor: localSocket];
-
 
     totalBytes = 0;
-    chunkLen = 0;
-    blockSize = fileSize / 100;
-    if (blockSize < 10240)
-        blockSize = 10240;
+    gotFile = NO;
     [controller setTransferBegin:fileName :fileSize];
-    dataBuff = [localFileHandle readDataOfLength:blockSize];
-    while (chunkLen = [dataBuff length])
+    while (!gotFile)
     {
-        totalBytes += chunkLen;
-        [remoteFileHandle writeData:dataBuff];
-        [controller setTransferProgress:chunkLen];
-        dataBuff = [localFileHandle readDataOfLength:blockSize];
+        bytesRead = fread(buff, sizeof(char), MAX_DATA_BUFF, localFileStream);
+        if (bytesRead == 0)
+        {
+            gotFile = YES;
+            if (!feof(localFileStream))
+                NSLog(@"error on file read, store file");
+            else
+                NSLog(@"feof");
+        } else
+        {
+            if (write(localSocket, buff, bytesRead) < bytesRead)
+            {
+                NSLog(@"socket write error, store file");
+            }
+            totalBytes += bytesRead;
+            if (totalBytes >> 6)
+                [controller setTransferProgress:totalBytes];
+        }
     }
-    [controller setTransferEnd:chunkLen];
+    [controller setTransferEnd:totalBytes];
     
     NSLog(@"transferred %u", totalBytes);
-    [remoteFileHandle release];
-    close(localSocket);
-    [self closeDataConn];
+    fclose(localFileStream);
+    [self closeDataStream];
     [self readReply:&reply];
     [reply release];
 }
@@ -627,12 +615,86 @@
     /* passive mode */
     if (usesPassive)
     {
+        NSMutableArray *reply;
+        int            replyCode;
+        NSScanner      *addrScan;
+        int            a1, a2, a3, a4;
+        int            p1, p2;
+        
+        if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+        {
+            perror("socket in initDataConn");
+            return -1;
+        }
+
+        [self writeLine:"PASV\r\n"];
+        replyCode = [self readReply:&reply];
+        if (replyCode != 227)
+        {
+            NSLog(@"passive mode failed");
+            return -1;
+        }
+        NSLog(@"pasv reply is: %d %@", replyCode, [reply objectAtIndex:0]);
+
+        addrScan = [NSScanner scannerWithString:[reply objectAtIndex:0]];
+        [addrScan setCharactersToBeSkipped:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
+        if ([addrScan scanInt:nil] == NO)
+        {
+            NSLog(@"error while scanning pasv address");
+            return -1;
+        }
+        NSLog(@"skipped result code");
+        if ([addrScan scanInt:&a1] == NO)
+        {
+            NSLog(@"error while scanning pasv address");
+            return -1;
+        }
+        NSLog(@"got first");
+        if ([addrScan scanInt:&a2] == NO)
+        {
+            NSLog(@"error while scanning pasv address");
+            return -1;
+        }
+        NSLog(@"got second");
+        if ([addrScan scanInt:&a3] == NO)
+        {
+            NSLog(@"error while scanning pasv address");
+            return -1;
+        }
+        if ([addrScan scanInt:&a4] == NO)
+        {
+            NSLog(@"error while scanning pasv address");
+            return -1;
+        }
+        if ([addrScan scanInt:&p1] == NO)
+        {
+            NSLog(@"error while scanning pasv port");
+            return -1;
+        }
+        if ([addrScan scanInt:&p2] == NO)
+        {
+            NSLog(@"error while scanning pasv port");
+            return -1;
+        }
+        NSLog(@"read: %d %d %d %d : %d %d", a1, a2, a3, a4, p1, p2);
+
+        dataSockName.sin_family = AF_INET;
+        dataSockName.sin_addr.s_addr = htonl((a1 << 24) | (a2 << 16) | (a3 << 8) | a4);
+        dataSockName.sin_port = htons((p1 << 8) | p2);
+
+        if (connect(dataSocket, (struct sockaddr *) &dataSockName, sizeof(dataSockName)) < 0)
+        {
+            perror("connect in initDataConn");
+            return -1;
+        }
+        
         return 0;
     }
 
     /* active mode, default or PORT arbitrated */
     dataSockName = localSockName;
-    
+
+    /* system picks up a port */
     if (usesPorts)
         dataSockName.sin_port = 0;
     
@@ -703,10 +765,48 @@
     return 0;
 }
 
+- (int)initDataStream
+{
+    struct sockaddr from;
+    int             fromLen;
+    
+    fromLen = sizeof(from);
+    if (usesPassive)
+    {
+        dataStream = fdopen(dataSocket, "r");
+        localSocket = dataSocket;
+    } else
+    {
+        if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
+        {
+            perror("accepting socket, initDataStream: ");
+        }
+        dataStream = fdopen(localSocket, "r");
+    }
+
+    if (dataStream == NULL)
+    {
+        perror("data stream opening failed");
+        return -1;
+    }
+    NSLog(@"data stream open");
+    return 0;
+}
+
 - (int)closeDataConn
 {
     close (dataSocket);
     return 0;
+}
+
+/*
+ since fclose of a stream causes the underlying file descriptor to be closed too,
+ calling closeDataConn is not necessary after closing the stream
+ */
+- (void)closeDataStream
+{
+    fclose (dataStream);
+    close(localSocket);
 }
 
 /*
@@ -750,10 +850,6 @@
 - (NSArray *)dirContents
 {
     int                ch;
-    FILE               *dataStream;
-    int                localSocket;
-    struct sockaddr    from;
-    int                fromLen;
     char               buff[MAX_DATA_BUFF];
     int                readBytes;
     enum               states_m1 { READ, GOTR };
@@ -775,18 +871,8 @@
     [self writeLine:"LIST\r\n"];
     [self readReply:&reply];
 
-    fromLen = sizeof(from);
-    if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
-    {
-        perror("accepting socket, dir list: ");
-    }
-    dataStream = fdopen(localSocket, "r");
-    if (dataStream == NULL)
-    {
-        perror("data stream opening failed");
-        return NULL;
-    }
-    NSLog(@"data stream open");
+    if ([self initDataStream] < 0)
+        return nil;
     
     /* read the directory listing, each line being CR-LF terminated */
     state = READ;
@@ -815,8 +901,7 @@
     {
          fprintf(stderr, "feof\n");
     }
-    fclose (dataStream);
-    [self closeDataConn];
+    [self closeDataStream];
     [self readReply:&reply];
     return [NSArray arrayWithArray:listArr];
 }
