@@ -62,7 +62,6 @@
     @private clock_t            transferClockBegin;
     @private clock_t            transferClockLast;
     @private unsigned long long transferSize;
-    @private unsigned long long transferredBytes;
 }
 
 + (void)initialize;
