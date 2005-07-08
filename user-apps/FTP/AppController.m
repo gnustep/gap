@@ -222,9 +222,9 @@
 
 - (IBAction)downloadButton:(id)sender
 {
-    NSEnumerator *elemEnum;
+    NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int          elementIndex;
+    int           elementIndex;
 
     elemEnum = [remoteView selectedRowEnumerator];
 
@@ -234,14 +234,13 @@
         NSLog(@"should download: %@", [fileEl filename]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
-//    [self setProgress :0];
 }
 
 - (IBAction)uploadButton:(id)sender
 {
-    NSEnumerator *elemEnum;
+    NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int          elementIndex;
+    int           elementIndex;
 
     elemEnum = [localView selectedRowEnumerator];
 
@@ -254,9 +253,9 @@
 
 - (IBAction)localDelete:(id)sender
 {
-    NSEnumerator *elemEnum;
+    NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int          elementIndex;
+    int           elementIndex;
 
     elemEnum = [localView selectedRowEnumerator];
 
@@ -264,6 +263,21 @@
     {
         fileEl = [localTableData elementAtIndex:elementIndex];
         [local deleteFile:fileEl beingAt:0];
+    }
+}
+
+- (IBAction)remoteDelete:(id)sender
+{
+    NSEnumerator  *elemEnum;
+    fileElement   *fileEl;
+    int           elementIndex;
+
+    elemEnum = [remoteView selectedRowEnumerator];
+
+    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    {
+        fileEl = [remoteTableData elementAtIndex:elementIndex];
+        [ftp deleteFile:fileEl beingAt:0];
     }
 }
 
