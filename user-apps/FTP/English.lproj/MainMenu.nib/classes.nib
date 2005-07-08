@@ -9,6 +9,7 @@
                 disconnect = id; 
                 downloadButton = id; 
                 listDoubleClick = id; 
+                localDelete = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 
                 showPrefPanel = id; 
