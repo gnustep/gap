@@ -252,6 +252,21 @@
     }
 }
 
+- (IBAction)localDelete:(id)sender
+{
+    NSEnumerator *elemEnum;
+    fileElement   *fileEl;
+    int          elementIndex;
+
+    elemEnum = [localView selectedRowEnumerator];
+
+    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    {
+        fileEl = [localTableData elementAtIndex:elementIndex];
+        [local deleteFile:fileEl beingAt:0];
+    }
+}
+
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size
 {
     [infoMessage setStringValue:name];

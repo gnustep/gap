@@ -98,5 +98,18 @@
     return [NSArray arrayWithArray:listArr];
 }
 
+- (void)deleteFile:(fileElement *)file beingAt:(int)depth
+{
+    NSString           *fileName;
+    NSString           *localPath;
+    NSFileManager      *fm;
+
+    fm = [NSFileManager defaultManager];
+    fileName = [file filename];
+    localPath = [[self workingDir] stringByAppendingPathComponent:fileName];
+
+    if ([fm removeFileAtPath:(NSString *)localPath handler:nil] == NO)
+        NSLog(@"an error occoured during local delete");
+}
 
 @end
