@@ -10,6 +10,7 @@
                 downloadButton = id; 
                 listDoubleClick = id; 
                 localDelete = id; 
+                remoteDelete = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 
                 showPrefPanel = id; 

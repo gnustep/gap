@@ -489,7 +489,63 @@
     [reply release];
 }
 
+- (void)deleteFile:(fileElement *)file beingAt:(int)depth
+{
+    NSString           *fileName;
+    NSString           *localPath;
+    NSFileManager      *fm;
+    char               command[MAX_CONTROL_BUFF];
+    NSMutableArray     *reply;
+    int                replyCode;
 
+    fm = [NSFileManager defaultManager];
+    fileName = [file filename];
+    localPath = [[self workingDir] stringByAppendingPathComponent:fileName];
+
+    if ([file isDir])
+    {
+        NSString     *pristineRemotePath; /* original path */
+        NSArray      *dirList;
+        NSString     *remotePath;
+        NSEnumerator *en;
+        fileElement  *fEl;
+
+        if (depth > 3)
+        {
+            NSLog(@"Max depth reached: %d", depth);
+            return;
+        }
+
+        pristineRemotePath = [[self workingDir] retain];
+
+        NSLog(@"it is a dir: %@", fileName);
+        remotePath = [pristineRemotePath stringByAppendingPathComponent:fileName];
+
+        NSLog(@"remote dir created succesfully");
+        [self changeWorkingDir:remotePath];
+
+        dirList = [self dirContents];
+        en = [dirList objectEnumerator];
+        while (fEl = [en nextObject])
+        {
+            NSLog(@"recurse, delete : %@", [fEl filename]);
+            [self deleteFile:fEl beingAt:(depth+1)];
+        }
+
+        /* we get back were we started */
+        [self changeWorkingDir:pristineRemotePath];
+        [pristineRemotePath release];
+        return;
+        
+    }
+
+    sprintf(command, "DELE %s\r\n", [fileName cString]);
+    [self writeLine:command];
+    replyCode = [self readReply:&reply];
+    NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
+    [reply release];
+    
+}
 
 /* initialize a connection */
 /* set up and connect the control socket */

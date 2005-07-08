@@ -83,6 +83,7 @@
 - (IBAction)downloadButton:(id)sender;
 - (IBAction)uploadButton:(id)sender;
 - (IBAction)localDelete:(id)sender;
+- (IBAction)remoteDelete:(id)sender;
 
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size;
 - (void)setTransferProgress:(unsigned long)bytes;
