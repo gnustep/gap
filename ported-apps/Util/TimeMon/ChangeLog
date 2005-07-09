@@ -1,3 +1,10 @@
+2005-07-08 23:39 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* English.lproj/TimeMon.nib: Updated to OSX nib.
+	* Percentages.m: Changes to work under OSX
+	* TimeMonWraps.h: ditto
+	* TimeMonWraps.m: dittp
+
 2005-01-31 11:33  Alexander Malmberg  <alexander@malmberg.org>
 
 	* loadave.h: Document.

@@ -1,0 +1,20 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {setFactor = id; setLag = id; setPeriod = id; togglePause = id; }; 
+            CLASS = Percentages; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                colorFields = id; 
+                factorText = id; 
+                lagText = id; 
+                pauseMenuCell = id; 
+                periodText = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = TimeMonColors; LANGUAGE = ObjC; SUPERCLASS = NSMatrix; }
+    ); 
+    IBVersion = 1; 
+}
