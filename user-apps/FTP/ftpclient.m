@@ -535,8 +535,6 @@
         /* we get back were we started */
         [self changeWorkingDir:pristineRemotePath];
         [pristineRemotePath release];
-        return;
-        
     }
 
     sprintf(command, "DELE %s\r\n", [fileName cString]);
