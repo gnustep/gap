@@ -91,9 +91,10 @@
     // Clear to the background color if all rings are to be
     // redrawn.
     stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
-    r = AUTORELEASE([[NSCustomImageRep alloc]
+    r = [[NSCustomImageRep alloc]
 		      initWithDrawSelector: @selector(drawImageRep)
-		      delegate: self]);
+		      delegate: self];
+	[r autorelease];
     [r setSize: NSMakeSize(48,48)];
     [stipple addRepresentation: r];
     [NSApp setApplicationIconImage:stipple];
@@ -195,16 +196,16 @@
 // Set up to have a low priority from the get-go.
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-#ifndef GNUSTEP
-  struct task_basic_info tbi;
-  unsigned ic = TASK_BASIC_INFO_COUNT;
+//#ifndef GNUSTEP
+//  struct task_basic_info tbi;
+//  unsigned ic = TASK_BASIC_INFO_COUNT;
   
-  if (task_info(task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) 
-    {
-      return;
-    }
-  task_priority(task_self(), tbi.base_priority - 4, TRUE);
-#endif
+//  if (task_info(task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) 
+//    {
+//      return;
+//    }
+//  task_priority(task_self(), tbi.base_priority - 4, TRUE);
+//#endif
 }
 
 // Resize the oldTimes array and rearrange the values within

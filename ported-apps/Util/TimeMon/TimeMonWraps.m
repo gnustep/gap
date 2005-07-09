@@ -1,6 +1,9 @@
 // translated from the pswraps for GNUstep/MOSX by Gregory John Casamento
 
+#ifdef GNUSTEP
 #import <AppKit/PSOperators.h>
+#endif
+
 #import <Foundation/NSUserDefaults.h>
 #import "NSColorExtensions.h"
 
