@@ -12,7 +12,9 @@
 	    "changePathFromMenu:",
 	    "disconnect:",
 	    "downloadButton:",
-	    "uploadButton:"
+	    "uploadButton:",
+	    "localDelete:",
+	    "remoteDelete:"
 	);
 	Outlets = (
 	    localView,
@@ -44,11 +46,13 @@
 	    "connectConn:",
 	    "disconnect:",
 	    "downloadButton:",
-	    "uploadButton:",
+	    "localDelete:",
+	    "remoteDelete:",
 	    "orderFrontFontPanel:",
 	    "showConnPanel:",
 	    "showFtpLog:",
-	    "showPrefPanel:"
+	    "showPrefPanel:",
+	    "uploadButton:"
 	);
 	Super = NSObject;
     };
