@@ -10,6 +10,7 @@
                 downloadButton = id; 
                 listDoubleClick = id; 
                 localDelete = id; 
+                prefSave = id; 
                 remoteDelete = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 
@@ -33,6 +34,8 @@
                 logTextField = NSTextView; 
                 logWin = NSWindow; 
                 mainWin = NSWindow; 
+                portType = NSMatri; 
+                prefPanel = NSPanel; 
                 progBar = NSProgressIndicator; 
                 remotePath = NSPopUpButton; 
                 remoteView = NSTableView; 
