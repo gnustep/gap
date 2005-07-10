@@ -690,7 +690,7 @@
 
         addrScan = [NSScanner scannerWithString:[reply objectAtIndex:0]];
         [addrScan setCharactersToBeSkipped:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
-        if ([addrScan scanInt:nil] == NO)
+        if ([addrScan scanInt:NULL] == NO)
         {
             NSLog(@"error while scanning pasv address");
             return -1;

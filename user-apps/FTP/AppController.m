@@ -378,6 +378,12 @@
 
 - (IBAction)showPrefPanel:(id)sender
 {
+    [prefPanel makeKeyAndOrderFront:self];
+}
+
+- (IBAction)prefSave:(id)sender
+{
+    NSLog(@"tag... %d", [sender tag]);
 }
 
 - (IBAction)showFtpLog:(id)sender

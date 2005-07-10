@@ -53,10 +53,13 @@
     IBOutlet NSTextField  *connUser;
     IBOutlet NSTextField  *connPass;
     IBOutlet NSButton     *connAnon;
+
+    IBOutlet NSPanel     *prefPanel;
+    IBOutlet NSMatrix    *portType;
     
-    fileTable *localTableData;
-    fileTable *remoteTableData;
-    ftpclient *ftp;
+    fileTable   *localTableData;
+    fileTable   *remoteTableData;
+    ftpclient   *ftp;
     localclient *local;
 
     @private struct timeval     beginTimeVal;
@@ -92,6 +95,8 @@
 - (IBAction)disconnect:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;
+- (IBAction)prefSave:(id)sender;
+
 - (IBAction)showFtpLog:(id)sender;
 - (void)appendTextToLog:(NSString *)textChunk;
 
