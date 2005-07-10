@@ -30,7 +30,7 @@
 #import "localclient.h"
 #import "fileTable.h"
 
-#include <time.h>
+#include <sys/time.h>
 
 @interface AppController : NSObject
 {
@@ -59,8 +59,8 @@
     ftpclient *ftp;
     localclient *local;
 
-    @private clock_t            transferClockBegin;
-    @private clock_t            transferClockLast;
+    @private struct timeval     beginTimeVal;
+    @private struct timeval     lastTimeVal;
     @private unsigned long long transferSize;
 }
 

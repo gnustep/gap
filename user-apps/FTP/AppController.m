@@ -285,7 +285,7 @@
 {
     [infoMessage setStringValue:name];
     [progBar setDoubleValue:0];
-    transferClockBegin = clock();
+    gettimeofday(&beginTimeVal, NULL);
     transferSize = size;
     [mainWin displayIfNeeded];
     [mainWin flushWindowIfNeeded];
@@ -293,18 +293,19 @@
 
 - (void)setTransferProgress:(unsigned long)bytes
 {
-    clock_t  timeInterval;
-    double   speed;
+    struct timeval currTimeVal;
+    float    speed;
     NSString *speedStr;
     NSString *sizeStr;
     double   percent;
 
-    timeInterval = clock() - transferClockBegin;
+    gettimeofday(&currTimeVal, NULL);
 
-    if (timeInterval > 4)
+    if ((currTimeVal.tv_sec - lastTimeVal.tv_sec) > 1.0)
     {
-        speed = (double)bytes / (double)timeInterval * CLOCKS_PER_SEC;
+        speed = (float)((double)bytes / (double)(currTimeVal.tv_sec - beginTimeVal.tv_sec));
         percent = ((double)bytes / (double)transferSize) * 100;
+        lastTimeVal = currTimeVal;
 
         [progBar setDoubleValue:percent];
         speedStr = [NSString alloc];
@@ -333,16 +334,18 @@
 
 - (void)setTransferEnd:(unsigned long)bytes
 {
-    clock_t  timeInterval;
-    double   speed;
-    NSString *speedStr;
-    NSString *sizeStr;
-    double   percent;
+    struct timeval currTimeVal;
+    double         deltaT;
+    float          speed;
+    NSString       *speedStr;
+    NSString       *sizeStr;
+    double         percent;
 
-    timeInterval = clock() - transferClockBegin;
+    gettimeofday(&currTimeVal, NULL);
+    deltaT = (currTimeVal.tv_sec - beginTimeVal.tv_sec)+((double)(currTimeVal.tv_usec - beginTimeVal.tv_usec)/1000000);
+    speed = (float)((double)bytes / deltaT);
+    NSLog(@"Elapsed time: %f", (float)deltaT);
     percent = ((double)bytes / (double)transferSize) * 100;
-
-    speed = (double)bytes / (double)timeInterval * CLOCKS_PER_SEC;
     speedStr = [NSString alloc];
     if (speed < 1024)
         speedStr = [speedStr initWithFormat:@"%3.2fB/s", speed];
