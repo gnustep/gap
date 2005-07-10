@@ -348,13 +348,12 @@
                 NSLog(@"file write error, retrieve file");
             }
             totalBytes += bytesRead;
-            if (totalBytes >> 6)
-                [controller setTransferProgress:totalBytes];
+            [controller setTransferProgress:totalBytes];
         }
     }
     [controller setTransferEnd:totalBytes];
     
-    NSLog(@"transferred %u", totalBytes);
+    NSLog(@"transferred %u", (unsigned long)totalBytes);
     fclose(localFileStream);
     [self closeDataStream];
     [self readReply:&reply];
@@ -476,8 +475,7 @@
                 NSLog(@"socket write error, store file");
             }
             totalBytes += bytesRead;
-            if (totalBytes >> 6)
-                [controller setTransferProgress:totalBytes];
+            [controller setTransferProgress:totalBytes];
         }
     }
     [controller setTransferEnd:totalBytes];
