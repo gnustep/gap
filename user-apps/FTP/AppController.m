@@ -383,7 +383,24 @@
 
 - (IBAction)prefSave:(id)sender
 {
-    NSLog(@"tag... %d", [sender tag]);
+    NSLog(@"tag... %d", [[portType selectedCell] tag]);
+    switch ([[portType selectedCell] tag])
+    {
+        case 0:
+            //default
+            NSLog(@"default");
+            break;
+        case 1:
+            //port
+            NSLog(@"port");
+            break;
+        case 2:
+            // passive
+            NSLog(@"passive");
+            break;
+        default:
+            NSLog(@"unexpected selection");
+    }
 }
 
 - (IBAction)showFtpLog:(id)sender
