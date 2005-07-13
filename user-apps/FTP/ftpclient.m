@@ -24,6 +24,12 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
+
+/*
+ * this class handles acts as a remote client with the FTP server.
+ * the connection modes, default, active (port) and passive
+ * can be set using the three setPort* methods
+ */
  
 #import "ftpclient.h"
 #import "AppController.h"
@@ -49,18 +55,50 @@
 {
     if (!(self =[super init]))
         return nil;
-    controller = NULL;
+    controller = nil;
     return self;
 }
 
-- (id)initWithController:(id)cont
+- (id)initWithController:(id)cont :(connectionModes)cMode
 {
     if (!(self =[super init]))
         return nil;
     controller = cont;
+    switch (cMode)
+    {
+        case defaultMode:
+            [self setPortDefault];
+            break;
+        case portMode:
+            [self setPortPort];
+            break;
+        case passiveMode:
+            [self setPortPassive];
+            break;
+        default:
+            [self setPortDefault];
+    }
+    [self setPortDefault];
+    return self;
+}
+
+/* three methods to set the connection handling */
+- (void)setPortDefault
+{
+    usesPassive = NO;
+    usesPorts = NO;
+}
+
+- (void)setPortPort
+{
+    usesPassive = NO;
+    usesPorts = YES;
+}
+
+- (void)setPortPassive
+{
     usesPassive = YES;
     usesPorts = NO;
-    return self;
 }
 
 /*
