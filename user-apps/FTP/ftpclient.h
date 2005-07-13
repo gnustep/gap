@@ -41,6 +41,8 @@
 #define ERR_CONNECT_FAIL -3
 #define ERR_GESOCKNAME_FAIL -4
 
+typedef enum { defaultMode, portMode, passiveMode } connectionModes;
+
 @interface ftpclient : client
 {
     id                  controller;
@@ -59,7 +61,10 @@
 }
 
 - (id)init;
-- (id)initWithController:(id)cont;
+- (id)initWithController:(id)cont :(connectionModes)cMode;
+- (void)setPortDefault;
+- (void)setPortPort;
+- (void)setPortPassive;
 
 - (void)logIt:(NSString *)str;
 

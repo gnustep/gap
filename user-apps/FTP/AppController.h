@@ -23,7 +23,8 @@
    License along with this library; if not, write to the Free
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
- 
+
+#define connectionModeKey @"connectionMode" 
 
 #import <AppKit/AppKit.h>
 #import "ftpclient.h"
@@ -62,6 +63,7 @@
     ftpclient   *ftp;
     localclient *local;
 
+    @private connectionModes    connMode;
     @private struct timeval     beginTimeVal;
     @private struct timeval     lastTimeVal;
     @private unsigned long long transferSize;
@@ -105,5 +107,7 @@
 - (IBAction)cancelConn:(id)sender;
 - (IBAction)anonymousConn:(id)sender;
 
+/* accessor */
+- (connectionModes)connectionMode;
 @end
 

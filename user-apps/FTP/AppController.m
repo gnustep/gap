@@ -31,7 +31,7 @@
 
 + (void)initialize
 {
-  NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
+    NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
 
   /*
    * Register your app's defaults here by adding objects to the
@@ -40,22 +40,23 @@
    * [defaults setObject:anObject forKey:keyForThatObject];
    *
    */
-  
-  [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
-  [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (id)init
 {
-  if ((self = [super init]))
+    if ((self = [super init]))
     {
     }
-  return self;
+    connMode = defaultMode;
+    return self;
 }
 
 - (void)dealloc
 {
-  [super dealloc];
+    [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -383,20 +384,33 @@
 
 - (IBAction)prefSave:(id)sender
 {
+    NSUserDefaults *defaults;
+
+    defaults = [NSUserDefaults standardUserDefaults];
+    
     NSLog(@"tag... %d", [[portType selectedCell] tag]);
     switch ([[portType selectedCell] tag])
     {
         case 0:
             //default
             NSLog(@"default");
+            connMode = defaultMode;
+            [ftp setPortDefault];
+            [defaults setObject:@"default" forKey:connectionModeKey];
             break;
         case 1:
             //port
             NSLog(@"port");
+            connMode = portMode;
+            [ftp setPortPort];
+            [defaults setObject:@"port" forKey:connectionModeKey];
             break;
         case 2:
             // passive
             NSLog(@"passive");
+            connMode = passiveMode;
+            [ftp setPortPassive];
+            [defaults setObject:@"passive" forKey:connectionModeKey];
             break;
         default:
             NSLog(@"unexpected selection");
@@ -444,7 +458,7 @@
     char    tempStr2[1024];
     
     [connectPanel performClose:nil];
-    ftp = [[ftpclient alloc] initWithController:self];
+    ftp = [[ftpclient alloc] initWithController:self :connMode];
     [[connAddress stringValue] getCString:tempStr];
     if ([ftp connect:[connPort intValue] :tempStr] < 0)
     {
@@ -478,6 +492,11 @@
 
 - (IBAction)anonymousConn:(id)sender
 {
+}
+
+- (connectionModes)connectionMode
+{
+    return connMode;
 }
 
 @end
