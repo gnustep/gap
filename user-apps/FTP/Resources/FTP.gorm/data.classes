@@ -14,7 +14,8 @@
 	    "downloadButton:",
 	    "uploadButton:",
 	    "localDelete:",
-	    "remoteDelete:"
+	    "remoteDelete:",
+	    "prefSave:"
 	);
 	Outlets = (
 	    localView,
@@ -33,7 +34,9 @@
 	    progBar,
 	    mainWin,
 	    infoSpeed,
-	    infoSize
+	    infoSize,
+	    portType,
+	    prefPanel
 	);
 	Super = NSObject;
     };
@@ -47,8 +50,9 @@
 	    "disconnect:",
 	    "downloadButton:",
 	    "localDelete:",
-	    "remoteDelete:",
+	    "prefSave:",
 	    "orderFrontFontPanel:",
+	    "remoteDelete:",
 	    "showConnPanel:",
 	    "showFtpLog:",
 	    "showPrefPanel:",
