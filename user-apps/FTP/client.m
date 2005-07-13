@@ -95,4 +95,10 @@
     return NO;
 }
 
+- (void)deleteFile:(fileElement *)file beingAt:(int)depth
+{
+    NSLog(@"override me! deleteFile superclass method");
+}
+
+
 @end
