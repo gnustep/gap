@@ -78,7 +78,6 @@
         default:
             [self setPortDefault];
     }
-    [self setPortDefault];
     return self;
 }
 
@@ -796,7 +795,7 @@
 
     /* if we use the default port, we set the option to reuse the port */
     /* linux is happier if we set both ends that way */
-    if (!usesPorts)
+    if (usesPassive == NO)
     {
         if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
         {
@@ -814,11 +813,14 @@
         return -1;
     }
 
-    addrLen = sizeof (dataSockName);
-    if (getsockname(dataSocket, (struct sockaddr *)&dataSockName, &addrLen) < 0)
+    if (usesPorts == NO)
     {
-        perror("ftpclient: getsockname");
-        return -1;
+        addrLen = sizeof (dataSockName);
+        if (getsockname(dataSocket, (struct sockaddr *)&dataSockName, &addrLen) < 0)
+        {
+            perror("ftpclient: getsockname");
+            return -1;
+        }
     }
     
     if (listen(dataSocket, 1) < 0)
@@ -889,14 +891,14 @@
     return 0;
 }
 
-/*
- since fclose of a stream causes the underlying file descriptor to be closed too,
- calling closeDataConn is not necessary after closing the stream
- */
 - (void)closeDataStream
 {
     fclose (dataStream);
     close(localSocket);
+    // apparently it is not true that fclose closes the underlying
+    // descriptor, without closing dataSocket we got a bind error
+    // at the next conneciton attempt
+    [self closeDataConn];
 }
 
 /*
