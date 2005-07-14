@@ -66,10 +66,25 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
 {
-    NSArray *dirList;
-//    NSEnumerator *enumerator;
-//    fileElement *fEl;
+    NSArray        *dirList;
+    NSUserDefaults *defaults;
+    NSString       *readValue;
 
+    /* read the user preferences */
+    defaults = [NSUserDefaults standardUserDefaults];
+    readValue = [defaults stringForKey:connectionModeKey];
+
+    // if no value was set for the key we set default as mode
+    if ([readValue isEqualToString:@"default"] || readValue == nil)
+        connMode = defaultMode;
+    else if ([readValue isEqualToString:@"port"])
+        connMode = portMode;
+    else if ([readValue isEqualToString:@"passive"])
+        connMode = passiveMode;
+    else
+        NSLog(@"Unrecognized value in user preferences for %@: %@", connectionModeKey, readValue);
+    NSLog(@"%@ maps to %d", connectionModeKey, connMode);
+    
     /* set double actions for tables */
     [localView setTarget:self];
     [localView setDoubleAction:@selector(listDoubleClick:)];
@@ -80,11 +95,6 @@
     local = [[localclient alloc] init];
     [local setWorkingDir:[local homeDir]];
     dirList = [local dirContents];
-//    enumerator = [dirList objectEnumerator];
-//    while (fEl = [enumerator nextObject])
-//    {
-//        NSLog(@"%@, %d %d", [fEl filename], [fEl isDir], [fEl size]);
-//    }
     
     /* we create a data source and set the tableviews */
     localTableData = [[fileTable alloc] init];
