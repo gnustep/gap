@@ -34,7 +34,7 @@
                 logTextField = NSTextView; 
                 logWin = NSWindow; 
                 mainWin = NSWindow; 
-                portType = NSMatri; 
+                portType = NSMatrix; 
                 prefPanel = NSPanel; 
                 progBar = NSProgressIndicator; 
                 remotePath = NSPopUpButton; 
