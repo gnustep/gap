@@ -784,7 +784,7 @@
     dataSockName = localSockName;
 
     /* system picks up a port */
-    if (usesPorts)
+    if (usesPorts == YES)
         dataSockName.sin_port = 0;
     
     if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -795,15 +795,11 @@
 
     /* if we use the default port, we set the option to reuse the port */
     /* linux is happier if we set both ends that way */
-    if (usesPassive == NO)
+    if (usesPorts == NO)
     {
         if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
         {
             perror("ftpclient: setsockopt (reuse address) on data");
-        }
-        if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
-        {
-            perror("ftpclient: setsockopt (reuse address) on control");
         }
     }
     
@@ -813,7 +809,7 @@
         return -1;
     }
 
-    if (usesPorts == NO)
+    if (usesPorts == YES)
     {
         addrLen = sizeof (dataSockName);
         if (getsockname(dataSocket, (struct sockaddr *)&dataSockName, &addrLen) < 0)
@@ -829,7 +825,7 @@
         return -1;
     }
 
-    if (usesPorts)
+    if (usesPorts == YES)
     {
         union addrAccess { /* we use this union to extract the 8 bytes of an address */
             struct in_addr   sinAddr;
@@ -848,9 +844,10 @@
         p2 = port & 0x00FF;
         sprintf(tempStr, "PORT %u,%u,%u,%u,%u,%u\r\n", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2);
         [self writeLine:tempStr];
+        NSLog(@"port str: %s", tempStr);
         if ((returnCode = [self readReply:&reply]) != 200)
         {
-            NSLog(@"error occoured in port command: %@", reply);
+            NSLog(@"error occoured in port command: %@", [reply objectAtIndex:0]);
             return -1;
         }
     }
@@ -894,7 +891,9 @@
 - (void)closeDataStream
 {
     fclose (dataStream);
-    close(localSocket);
+    // a passive localSocket is just a copy of the dataSocket
+    if (usesPassive == NO)
+        close(localSocket);
     // apparently it is not true that fclose closes the underlying
     // descriptor, without closing dataSocket we got a bind error
     // at the next conneciton attempt
