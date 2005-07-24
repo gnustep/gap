@@ -517,6 +517,15 @@
 
 - (IBAction)anonymousConn:(id)sender
 {
+    if ([connAnon state] == NSOnState)
+    {
+        [connUser setEnabled:NO];
+        [connPass setEnabled:NO];
+    } else
+    {
+        [connUser setEnabled:YES];
+        [connPass setEnabled:YES];
+    }
 }
 
 - (connectionModes)connectionMode
