@@ -390,6 +390,20 @@
 - (IBAction)showPrefPanel:(id)sender
 {
     [prefPanel makeKeyAndOrderFront:self];
+    switch (connMode)
+    {
+        case defaultMode:
+            [portType selectCellWithTag:0];
+            break;
+        case portMode:
+            [portType selectCellWithTag:1];
+            break;
+        case passiveMode:
+            [portType selectCellWithTag:2];
+            break;
+        default:
+            NSLog(@"Unexpected mode on pref pane setup.");
+    }
 }
 
 - (IBAction)prefSave:(id)sender
@@ -425,6 +439,7 @@
         default:
             NSLog(@"unexpected selection");
     }
+    [prefPanel performClose:nil];
 }
 
 - (IBAction)showFtpLog:(id)sender
