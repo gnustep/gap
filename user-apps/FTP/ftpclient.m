@@ -801,6 +801,10 @@
         {
             perror("ftpclient: setsockopt (reuse address) on data");
         }
+        if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+        {
+            perror("ftpclient: setsockopt (reuse address) on control");
+        }
     }
     
     if (bind(dataSocket, (struct sockaddr *)&dataSockName, sizeof (dataSockName)) < 0)
