@@ -10,6 +10,7 @@
                 downloadButton = id; 
                 listDoubleClick = id; 
                 localDelete = id; 
+                prefCancel = id; 
                 prefSave = id; 
                 remoteDelete = id; 
                 showConnPanel = id; 
