@@ -644,8 +644,15 @@
 
     sprintf(tempStr, "USER %s\r\n", user);
     [self writeLine:tempStr];
-    [self readReply:&reply];
+    replyCode = [self readReply:&reply];
     NSLog(@"user reply is: %@", [reply objectAtIndex:0]);
+    if (replyCode == 530)
+    {
+        NSLog(@"Not logged in: %@", [reply objectAtIndex:0]);
+        [reply release];
+        [self disconnect];
+        return -1;
+    }
     [reply release];
     
     sprintf(tempStr, "PASS %s\r\n", pass);
@@ -655,6 +662,7 @@
     if (replyCode == 530)
     {
         NSLog(@"Not logged in: %@", [reply objectAtIndex:0]);
+        [reply release];
         [self disconnect];
         return -1;
     }

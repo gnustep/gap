@@ -98,6 +98,7 @@
 
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)prefSave:(id)sender;
+- (IBAction)prefCancel:(id)sender;
 
 - (IBAction)showFtpLog:(id)sender;
 - (void)appendTextToLog:(NSString *)textChunk;

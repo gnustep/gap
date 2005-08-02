@@ -442,6 +442,11 @@
     [prefPanel performClose:nil];
 }
 
+- (IBAction)prefCancel:(id)sender
+{
+    [prefPanel performClose:nil];
+}
+
 - (IBAction)showFtpLog:(id)sender
 {
     [logWin makeKeyAndOrderFront:self];
@@ -499,15 +504,20 @@
         [[connUser stringValue] getCString:tempStr];
         [[connPass stringValue] getCString:tempStr2];
     }
-    [ftp authenticate:tempStr :tempStr2];
-    [ftp setWorkingDir:[ftp homeDir]];
-    if ((dirList = [ftp dirContents]) == nil)
+    if ([ftp authenticate:tempStr :tempStr2] < 0)
+    {
+        NSLog(@"authentication failed.");
+    } else
+    {
+        [ftp setWorkingDir:[ftp homeDir]];
+        if ((dirList = [ftp dirContents]) == nil)
         return;
-    [remoteTableData initData:dirList];
-    [remoteView setDataSource:remoteTableData];
+        [remoteTableData initData:dirList];
+        [remoteView setDataSource:remoteTableData];
 
-    //we update the path menu
-    [self updatePath :remotePath :[ftp workDirSplit]];
+        //we update the path menu
+        [self updatePath :remotePath :[ftp workDirSplit]];
+    }
 }
 
 - (IBAction)cancelConn:(id)sender
