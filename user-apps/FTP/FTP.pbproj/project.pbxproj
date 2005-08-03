@@ -177,6 +177,8 @@
 			children = (
 				29B97318FDCFA39411CA2CEA,
 				089C165CFE840E0CC02AAC07,
+				F5C0879F08A0C47B01A8012F,
+				F5C087A108A0C4AF01A8012F,
 			);
 			isa = PBXGroup;
 			name = Resources;
@@ -291,6 +293,8 @@
 			files = (
 				080E96DCFE201CFB7F000001,
 				089C165EFE840E0CC02AAC07,
+				F5C087A008A0C47C01A8012F,
+				F5C087A208A0C4B001A8012F,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +408,28 @@
 		};
 		F5BE3AF9080C6A3601A80101 = {
 			fileRef = F5BE3AF7080C6A3601A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C0879F08A0C47B01A8012F = {
+			isa = PBXFileReference;
+			path = arrow_right.tiff;
+			refType = 4;
+		};
+		F5C087A008A0C47C01A8012F = {
+			fileRef = F5C0879F08A0C47B01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C087A108A0C4AF01A8012F = {
+			isa = PBXFileReference;
+			path = arrow_left.tiff;
+			refType = 4;
+		};
+		F5C087A208A0C4B001A8012F = {
+			fileRef = F5C087A108A0C4AF01A8012F;
 			isa = PBXBuildFile;
 			settings = {
 			};
