@@ -19,6 +19,8 @@ GNUSTEP_INSTALLATION_DIR = $(HOME)/GNUstep
 #
 FTP_RESOURCE_FILES = \
 Resources/FTP.gorm\
+Resources/arrow_left.tiff \
+Resources/arrow_right.tiff\
 Resources/Info-gnustep.plist
 
 #
