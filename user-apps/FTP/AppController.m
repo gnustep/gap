@@ -492,6 +492,7 @@
     [[connAddress stringValue] getCString:tempStr];
     if ([ftp connect:[connPort intValue] :tempStr] < 0)
     {
+        NSRunAlertPanel(@"Error", @"Connection failed.\nCheck that you typed the host name correctly.", @"Ok", nil, nil);
         NSLog(@"connection failed in connectConn");
         return;
     }
@@ -506,7 +507,9 @@
     }
     if ([ftp authenticate:tempStr :tempStr2] < 0)
     {
+        NSRunAlertPanel(@"Error", @"Authentication failed.\nCheck that your username and password are correct.", @"Ok", nil, nil);
         NSLog(@"authentication failed.");
+        return;
     } else
     {
         [ftp setWorkingDir:[ftp homeDir]];
