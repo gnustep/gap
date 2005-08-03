@@ -15,7 +15,8 @@
 	    "uploadButton:",
 	    "localDelete:",
 	    "remoteDelete:",
-	    "prefSave:"
+	    "prefSave:",
+	    "prefCancel:"
 	);
 	Outlets = (
 	    localView,
@@ -50,8 +51,9 @@
 	    "disconnect:",
 	    "downloadButton:",
 	    "localDelete:",
-	    "prefSave:",
+	    "prefCancel:",
 	    "orderFrontFontPanel:",
+	    "prefSave:",
 	    "remoteDelete:",
 	    "showConnPanel:",
 	    "showFtpLog:",
