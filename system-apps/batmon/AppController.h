@@ -1,0 +1,79 @@
+/* 
+   Project: batmon
+
+   Copyright (C) 2005 Riccardo Mottola
+
+   Author: Riccardo Mottola
+
+   Created: 2005-06-25 21:06:19 +0200 by multix
+   
+   Application Controller
+
+   This application is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This application is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU General Public
+   License along with this library; if not, write to the Free
+   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+ 
+
+#import <AppKit/AppKit.h>
+
+@interface AppController : NSObject
+{
+    IBOutlet NSTextField         *voltage;
+    IBOutlet NSTextField         *amperage;
+    IBOutlet NSTextField         *presentCap;
+    IBOutlet NSTextField         *rate;
+    IBOutlet NSTextField         *percent;
+    IBOutlet NSTextField         *timeLeft;
+    IBOutlet NSTextField         *chState;
+    IBOutlet NSProgressIndicator *level;
+
+    IBOutlet NSWindow            *infoWin;
+    IBOutlet NSProgressIndicator *lifeGauge;
+    IBOutlet NSTextField         *lifeGaugePercent;
+    IBOutlet NSTextField         *designCap;
+    IBOutlet NSTextField         *battType;
+    IBOutlet NSTextField         *lastFullCharge;
+    
+    float    volts;
+    float    amps;
+    float    watts;
+    float    desCap;
+    float    lastCap;
+    float    currCap;
+    float    chargePercent;
+    float    timeRemaining;
+    int      hours;
+    int      mins;
+    NSString *chargeState;
+    NSString *batteryType;
+}
+
++ (void)initialize;
+
+- (id)init;
+- (void)dealloc;
+
+- (void)awakeFromNib;
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotif;
+- (BOOL)applicationShouldTerminate:(id)sender;
+- (void)applicationWillTerminate:(NSNotification *)aNotif;
+- (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName;
+
+- (IBAction)showPrefPanel:(id)sender;
+- (IBAction)updateInfo:(id)sender;
+- (IBAction)showBattInfo:(id)sender;
+
+@end
+

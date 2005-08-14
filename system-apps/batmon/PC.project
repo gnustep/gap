@@ -1,0 +1,78 @@
+{
+    APPLICATIONICON = "";
+    APP_DOCUMENT_BASED = NO;
+    CLASS_FILES = (
+	AppController.m
+    );
+    COMPILEROPTIONS = "";
+    CPPOPTIONS = "";
+    CREATION_DATE = "2005-06-25 21:06:19 +0200";
+    DOCU_FILES = (
+	LICENSE,
+	README
+    );
+    FRAMEWORKS = (
+    );
+    HEADER_FILES = (
+	AppController.h
+    );
+    IMAGES = (
+    );
+    INSTALLDIR = "$(HOME)/GNUstep";
+    INTERFACES = (
+	batmon.gorm
+    );
+    LANGUAGE = English;
+    LAST_EDITING = "2005-08-14 14:45:10 +0200";
+    LIBRARIES = (
+	"gnustep-base",
+	"gnustep-gui"
+    );
+    LINKEROPTIONS = "";
+    LOCALIZED_RESOURCES = (
+    );
+    MAININTERFACE = batmon.gorm;
+    MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    OBJC_COMPILEROPTIONS = "";
+    OTHER_RESOURCES = (
+	"Info-gnustep.plist"
+    );
+    OTHER_SOURCES = (
+	main.m
+    );
+    PC_WINDOWS = {
+	ProjectWindow = "164 103 698 600 0 0  960 768 ";
+	ShowToolbar = YES;
+    };
+    PRINCIPAL_CLASS = NSApplication;
+    PROJECT_AUTHORS = (
+	"Riccardo Mottola (rmottola@users.sf.net)"
+    );
+    PROJECT_COPYRIGHT = "Copyright (C) 2005";
+    PROJECT_COPYRIGHT_DESC = "Released under GPL";
+    PROJECT_CREATOR = "";
+    PROJECT_DESCRIPTION = "Battery Monitor";
+    PROJECT_DOCUMENTTYPES = (
+    );
+    PROJECT_GROUP = "No group avaliable!";
+    PROJECT_MAINTAINER = "";
+    PROJECT_NAME = batmon;
+    PROJECT_RELEASE = 0.1;
+    PROJECT_SUMMARY = "No summary avaliable!";
+    PROJECT_TYPE = Application;
+    PROJECT_URL = "";
+    SEARCH_HEADER_DIRS = (
+    );
+    SEARCH_LIB_DIRS = (
+    );
+    SUBPROJECTS = (
+    );
+    SUPPORTING_FILES = (
+	GNUmakefile.preamble,
+	GNUmakefile,
+	GNUmakefile.postamble
+    );
+    USER_LANGUAGES = (
+	English
+    );
+}
