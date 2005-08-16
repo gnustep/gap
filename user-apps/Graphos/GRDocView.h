@@ -1,0 +1,122 @@
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+
+//#import "GRDocument.h"
+#import "GRBezierPathEditor.h"
+#import "GRText.h"
+
+#define PREPAREUNDO(target, method) ({\
+[undoManager beginUndoGrouping]; \
+[[undoManager prepareWithInvocationTarget: target] method]; \
+[undoManager endUndoGrouping]; \
+})
+
+// substitution for crappy gnustep macro until I mreove them all from the face of earth
+#ifndef ASSIGN
+#define ASSIGN(object,value)     ({\
+    id __value = (id)(value); \
+        id __object = (id)(object); \
+            if (__value != __object) \
+            { \
+                if (__value != nil) \
+                { \
+                    [__value retain]; \
+                } \
+                object = __value; \
+                    if (__object != nil) \
+                    { \
+                        [__object release]; \
+                    } \
+            } \
+})
+#endif
+
+@class DDocWin;
+@class GRDocument;
+
+@interface GRDocView : NSView
+{
+	NSMutableArray *objects, *delObjects;
+	int edind;
+	BOOL shiftclick, altclick, ctrlclick;
+	
+	NSUndoManager *undoManager;
+	NSInvocation *doItAgain;
+	
+	NSRect pageRect, a4Rect, zmdRect;
+	int zIndex;
+	float zFactor;
+}
+
+- (id)initWithFrame:(NSRect)aRect;
+
+- (NSDictionary *) objectDictionary;
+
+- (NSArray *)usedFonts;
+
+- (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
+
+- (void)addPathEditor;
+
+- (void)addTextAtPoint:(NSPoint)p;
+
+- (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;
+
+- (void)deleteSelectedObjects;
+
+- (void)undoDeleteObjects;
+
+- (void)startDrawingAtPoint:(NSPoint)p;
+
+- (void)selectObjectAtPoint:(NSPoint)p;
+
+- (void)editPathAtPoint:(NSPoint)p;
+
+- (void)editTextAtPoint:(NSPoint)p;
+
+- (void)editSelectedText;
+
+- (void)moveSelectedObjects:(NSArray *)objs startingPoint:(NSPoint)startp;
+
+- (void)undoMoveObjects:(NSArray *)objs moveBackTo:(NSPoint)p;
+
+- (BOOL)moveControlPointOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
+
+- (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
+
+- (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
+
+- (void)inspectObject: (id)sender;
+
+- (void)moveSelectedObjectsToFront:(id)sender;
+
+- (void)moveSelectedObjectsToBack:(id)sender;
+
+- (void)unselectOtherObjects:(id)anObject;
+
+- (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout;
+
+- (void)movePageFromHandPoint:(NSPoint)handpos;
+
+- (void)cut:(id)sender;
+
+- (void)copy:(id)sender;
+
+- (void)paste:(id)sender;
+
+- (void)doUndo;
+
+- (void)doRedo;
+
+- (void)prepareDoItAgainWithSelector:(SEL)selector 
+        owner:(id)owner target:(id)target , ...;
+
+- (void)verifyModifiersOfEvent:(NSEvent *)theEvent;
+
+- (BOOL)shiftclick;
+
+- (BOOL)altclick;
+
+- (BOOL)ctrlclick;
+
+@end
