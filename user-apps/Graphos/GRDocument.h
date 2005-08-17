@@ -12,6 +12,7 @@
 
 @interface GRDocument : NSDocument
 {
-	GRDocView *docView;   
+    GRDocView *docView;
 }
+
 @end

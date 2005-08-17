@@ -7,8 +7,8 @@
 
 - (id)initInView:(GRDocView *)aView
          atPoint:(NSPoint)p
-                    zoomFactor:(float)zf
-                    openEditor:(BOOL)openedit
+      zoomFactor:(float)zf
+      openEditor:(BOOL)openedit
 {
     int result;
 
@@ -40,11 +40,11 @@
 
         if(openedit) {
             editor = [[GRTextEditor alloc] initAtPoint: pos
-                      withString: nil attributes: nil];
+                                            withString: nil attributes: nil];
             result = [[editor editorView] runModal];
             if(result == NSAlertDefaultReturn)
                 [self setString: [[editor editorView] textString]
-                      attributes: [[editor editorView] textAttributes]];
+                     attributes: [[editor editorView] textAttributes]];
             [editor release];
         }
     }
@@ -119,7 +119,7 @@
     NSDictionary *attrs;
     NSMutableParagraphStyle *style;
 
-		// a cast to get rid of a compiler warning 
+    // a cast to get rid of a compiler warning
     style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
     [style setAlignment: align];
     [style setParagraphSpacing: parspace];
@@ -128,7 +128,7 @@
         font, NSFontAttributeName, style, NSParagraphStyleAttributeName, nil];
 
     gdtxt = [[[GRText alloc] initInView: myView atPoint: pos
-                            zoomFactor: zmFactor openEditor: NO] autorelease];
+                             zoomFactor: zmFactor openEditor: NO] autorelease];
     [gdtxt setString: str attributes: attrs];
     [gdtxt setScalex: scalex scaley: scaley];
     [gdtxt setRotation: rotation];
@@ -247,8 +247,8 @@
     NSDictionary *attrs;
     NSMutableParagraphStyle *style;
     int result;
-		
-		// a cast to get rid of a compiler warning
+
+    // a cast to get rid of a compiler warning
     style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
     [style setAlignment: align];
     [style setParagraphSpacing: parspace];
@@ -258,7 +258,7 @@
         style, NSParagraphStyleAttributeName, nil];
 
     editor = [[GRTextEditor alloc] initAtPoint: pos
-                                                                                  withString: str attributes: attrs];
+                                    withString: str attributes: attrs];
     result = [[editor editorView] runModal];
     if(result == NSAlertDefaultReturn)
         [self setString: [[editor editorView] textString]
@@ -446,10 +446,10 @@
 
         if(filled) {
             color = [NSColor colorWithDeviceCyan: fillColor[0]
-                                                                                                                            magenta: fillColor[1]
-                                                                                                                           yellow: fillColor[2]
-                                                                                                                                     black: fillColor[3]
-                                                                                                                                     alpha: fillAlpha];
+                                         magenta: fillColor[1]
+                                          yellow: fillColor[2]
+                                           black: fillColor[3]
+                                           alpha: fillAlpha];
             color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
             [color set];
         }

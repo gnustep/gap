@@ -6,36 +6,36 @@
 
 @interface GRText : NSObject
 {
-	GRDocView *myView;
-	NSString *str;
-	NSFont *font;
-	NSPoint pos;
-	float fsize;
-	NSTextAlignment align;
-	float parspace;
-	NSSize size;
-	NSRect bounds;
-	float scalex, scaley;
-	float rotation;
-	float strokeColor[4], fillColor[4];
-	float strokeAlpha, fillAlpha;
-	float zmFactor;
-	BOOL stroked, filled;
-	BOOL visible, locked;
-	GRTextEditor *editor;
-	BOOL isSelect;
-	BOOL isvalid;	
-	NSRect selRect;
+    GRDocView *myView;
+    NSString *str;
+    NSFont *font;
+    NSPoint pos;
+    float fsize;
+    NSTextAlignment align;
+    float parspace;
+    NSSize size;
+    NSRect bounds;
+    float scalex, scaley;
+    float rotation;
+    float strokeColor[4], fillColor[4];
+    float strokeAlpha, fillAlpha;
+    float zmFactor;
+    BOOL stroked, filled;
+    BOOL visible, locked;
+    GRTextEditor *editor;
+    BOOL isSelect;
+    BOOL isvalid;
+    NSRect selRect;
 }
 
-- (id)initInView:(GRDocView *)aView 
-                atPoint:(NSPoint)p 
-		zoomFactor:(float)zf
-		openEditor:(BOOL)openedit;
+- (id)initInView:(GRDocView *)aView
+         atPoint:(NSPoint)p
+                    zoomFactor:(float)zf
+                    openEditor:(BOOL)openedit;
 
-- (id)initFromData:(NSDictionary *)description 
-                inView:(GRDocView *)aView 
-                zoomFactor:(float)zf;
+- (id)initFromData:(NSDictionary *)description
+            inView:(GRDocView *)aView
+        zoomFactor:(float)zf;
 
 - (GRText *)duplicate;
 

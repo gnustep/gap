@@ -20,7 +20,8 @@
     NSParagraphStyle *pstyle;
 
     self = [super initWithFrame: frameRect];
-    if(self) {
+    if(self)
+    {
         controlsView = [[NSView alloc] initWithFrame: NSMakeRect(0, 260, 500, 40)];
         [controlsView setAutoresizingMask: ~NSViewMaxYMargin & ~NSViewHeightSizable];
 
@@ -115,7 +116,7 @@
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(sizeFieldDidEndEditing:)
-                                                            name:@"NSControlTextDidEndEditingNotification" object:nil];
+                                                     name:@"NSControlTextDidEndEditingNotification" object:nil];
     }
     return self;
 }
@@ -262,8 +263,8 @@
     NSDictionary *dict;
     NSMutableParagraphStyle *style;
 
-		// there must be a problem with GNUstep's implementation of this
-		// or the compiler is just overly picky
+    // there must be a problem with GNUstep's implementation of this
+    // or the compiler is just overly picky
     style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
     [style setAlignment: textAlignment];
     [style setParagraphSpacing: parSpace];

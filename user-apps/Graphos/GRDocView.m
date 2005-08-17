@@ -28,7 +28,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                         owner: cur userData: NULL
                  assumeInside: YES];
 
-    
+
         objects = [[NSMutableArray alloc] initWithCapacity: 1];
         delObjects = [[NSMutableArray alloc] initWithCapacity: 1];
         undoManager = [[NSUndoManager alloc] init];
@@ -59,83 +59,87 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i, p = 0, t = 0;
 
     objsdict = [NSMutableDictionary dictionaryWithCapacity: 1];
-    for(i = 0; i < [objects count]; i++) {
-    		obj = [objects objectAtIndex: i];
-      	if([obj isKindOfClass: [GRBezierPathEditor class]]) {
-      			str = [NSString stringWithFormat: @"path%i", p];
-        		p++;
-      	} else {
+    for(i = 0; i < [objects count]; i++)
+    {
+        obj = [objects objectAtIndex: i];
+        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        {
+            str = [NSString stringWithFormat: @"path%i", p];
+            p++;
+        } else
+        {
             str = [NSString stringWithFormat: @"text%i", t];
             t++;
         }
         [objsdict setObject: [obj objectDescription] forKey: str];
-		}
+    }
     return [NSDictionary dictionaryWithDictionary: objsdict];
 }
 
 // FIXME I'm not sure if this is necessary
 // it can probably be deleted. need to test.
 /*
-- (void) print: (id)sender
-{
-    NSString *str, *fpath, *prstr, *fname;
-    NSArray *fnames;
-    id obj;
-    int i;
+ - (void) print: (id)sender
+ {
+     NSString *str, *fpath, *prstr, *fname;
+     NSArray *fnames;
+     id obj;
+     int i;
 
-    prstr = [NSString stringWithFormat: @"%%!PS-Adobe-2.0 EPSF-1.2 \
-    %%%%Creator: GDraw 0.1\n\
-    %%%%For: %@\n\
-    %%%%Title: %@\n\
-    %%%%CreationDate: %@\n\
-    %%%%Pages: 1\n\
-    %%%%Copies: 1\n\
-    %%%%DocumentSuppliedResources: procset GDraw_Procset 0 0 \
-    ", NSFullUserName(), docName, [[NSDate date] description]];
+     prstr = [NSString stringWithFormat: @"%%!PS-Adobe-2.0 EPSF-1.2 \
+ %%%%Creator: GDraw 0.1\n\
+ %%%%For: %@\n\
+ %%%%Title: %@\n\
+ %%%%CreationDate: %@\n\
+ %%%%Pages: 1\n\
+ %%%%Copies: 1\n\
+ %%%%DocumentSuppliedResources: procset GDraw_Procset 0 0 \
+ ", NSFullUserName(), docName, [[NSDate date] description]];
 
-    fnames = [self usedFonts];
-    if([fnames count]) {
-        for(i = 0; i < [fnames count]; i++)
-            prstr = [prstr stringByAppendingFormat: @"%%%%+ font %@\n",
-																[fnames objectAtIndex: i]];
-    }
+     fnames = [self usedFonts];
+     if([fnames count]) {
+         for(i = 0; i < [fnames count]; i++)
+             prstr = [prstr stringByAppendingFormat: @"%%%%+ font %@\n",
+                 [fnames objectAtIndex: i]];
+     }
 
-    prstr = [prstr stringByAppendingFormat: @"%%%%BoundingBox: %i %i %i %i\n",
-        (int)a4Rect.origin.x, (int)a4Rect.origin.y,
-        (int)a4Rect.size.width, (int)a4Rect.size.height];
+     prstr = [prstr stringByAppendingFormat: @"%%%%BoundingBox: %i %i %i %i\n",
+         (int)a4Rect.origin.x, (int)a4Rect.origin.y,
+         (int)a4Rect.size.width, (int)a4Rect.size.height];
 
-    prstr = [prstr stringByAppendingString:
-                                    @"%%EndComments\n\n%%BeginResource: procset GDraw_Procset 0 0\n"];
+     prstr = [prstr stringByAppendingString:
+         @"%%EndComments\n\n%%BeginResource: procset GDraw_Procset 0 0\n"];
 
-    fpath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Resources/GDProcSet"];
-    prstr = [prstr stringByAppendingString:
-        [NSString stringWithContentsOfFile: fpath]];
+     fpath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Resources/GDProcSet"];
+     prstr = [prstr stringByAppendingString:
+         [NSString stringWithContentsOfFile: fpath]];
 
-    prstr = [prstr stringByAppendingString: @"%%EndResource\n\n"];
+     prstr = [prstr stringByAppendingString: @"%%EndResource\n\n"];
 
-    if([fnames count]) {
-        for(i = 0; i < [fnames count]; i++) {
-            fname = [fnames objectAtIndex: i];
-            prstr = [prstr stringByAppendingFormat: @"%%%%BeginResource: font %@\n\n", fname];
-            prstr = [prstr stringByAppendingString:
-                [[Draw sharedgdraw] pfaDescriptionOfFont: fname]];
-            prstr = [prstr stringByAppendingString: @"\n%%EndResource\n\n"];
-        }
-    }
+     if([fnames count]) {
+         for(i = 0; i < [fnames count]; i++) {
+             fname = [fnames objectAtIndex: i];
+             prstr = [prstr stringByAppendingFormat: @"%%%%BeginResource: font %@\n\n", fname];
+             prstr = [prstr stringByAppendingString:
+                 [[Draw sharedgdraw] pfaDescriptionOfFont: fname]];
+             prstr = [prstr stringByAppendingString: @"\n%%EndResource\n\n"];
+         }
+     }
 
-    prstr = [prstr stringByAppendingString:
-                       @"\n\n%%BeginProlog\n%%EndProlog\n%%Page: 1 1\nGDraw_Procset begin\n\n"];
+     prstr = [prstr stringByAppendingString:
+   @"\n\n%%BeginProlog\n%%EndProlog\n%%Page: 1 1\nGDraw_Procset begin\n\n"];
 
-    for(i = 0; i < [objects count]; i++) {
-        obj = [objects objectAtIndex: i];
-        str = [obj psDescription];
-        if(str)
-            prstr = [prstr stringByAppendingString: str];
-    }
-    prstr = [prstr stringByAppendingString: @"\nshowpage\n\n%%Trailer\n"];
-    [prstr writeToFile: @"/tmp/gdraw.ps" atomically: NO];
-}
-*/
+     for(i = 0; i < [objects count]; i++) {
+         obj = [objects objectAtIndex: i];
+         str = [obj psDescription];
+         if(str)
+             prstr = [prstr stringByAppendingString: str];
+     }
+     prstr = [prstr stringByAppendingString: @"\nshowpage\n\n%%Trailer\n"];
+     [prstr writeToFile: @"/tmp/gdraw.ps" atomically: NO];
+ }
+ */
+
 - (NSArray *)usedFonts
 {
     NSMutableArray *usedfonts;
@@ -145,13 +149,17 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     BOOL exist;
 
     usedfonts = [NSMutableArray arrayWithCapacity: 1];
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         exist = NO;
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRText class]]) {
+        if([obj isKindOfClass: [GRText class]])
+        {
             fname = [obj fontName];
-            for(j = 0; j < [usedfonts count]; j++) {
-                if([[usedfonts objectAtIndex: j] isEqualToString: fname]) {
+            for(j = 0; j < [usedfonts count]; j++)
+            {
+                if([[usedfonts objectAtIndex: j] isEqualToString: fname])
+                {
                     exist = YES;
                     break;
                 }
@@ -177,20 +185,23 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         return NO;
 
     keys = [dict allKeys];
-    for(i = 0; i < [keys count]; i++) {
+    for(i = 0; i < [keys count]; i++)
+    {
         key = [keys objectAtIndex: i];
         objdict = [dict objectForKey: key];
         if(!objdict)
             return NO;
-        if([key rangeOfString: @"path"].length) {
+        if([key rangeOfString: @"path"].length)
+        {
             bzeditor = [[GRBezierPathEditor alloc] initFromData: objdict
-                                                                                                                                                          inView: self zoomFactor: zFactor];
+                                                         inView: self zoomFactor: zFactor];
             [objects addObject: bzeditor];
             [bzeditor release];
             edind = [objects count] -1;
-        } else {
+        } else
+        {
             gGRText = [[GRText alloc] initFromData: objdict
-                                                                                                                                            inView: self zoomFactor: zFactor];
+                                            inView: self zoomFactor: zFactor];
             [objects addObject: gGRText];
             [gGRText release];
         }
@@ -208,7 +219,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     edind = [objects count] -1;
 }
 
-- (void)adGRTextAtPoint:(NSPoint)p
+- (void)addTextAtPoint:(NSPoint)p
 {
     GRText *gdtxt;
     int i;
@@ -217,7 +228,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         [[objects objectAtIndex: i] unselect];
 
     gdtxt = [[GRText alloc] initInView: self atPoint: p
-                           zoomFactor: zFactor openEditor: YES];
+                            zoomFactor: zFactor openEditor: YES];
     [objects addObject: gdtxt];
     [gdtxt select];
     [gdtxt release];
@@ -265,16 +276,19 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     deleted = [NSMutableArray arrayWithCapacity: 1];
 
     count = [objects count];
-    for(i = 0; i < count; i++) {
+    for(i = 0; i < count; i++)
+    {
         obj = [objects objectAtIndex: i];
-        if([obj isGroupSelected]) {
+        if([obj isGroupSelected])
+        {
             [deleted addObject: obj];
             [objects removeObject: obj];
             count--;
             i--;
         }
     }
-    if([deleted count]) {
+    if([deleted count])
+    {
         [delObjects addObject: deleted];
         // ###		[myWin setSaved: NO];
     }
@@ -292,11 +306,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
         [[objects objectAtIndex: i] unselect];
 
-    if([delObjects count]) {
+    if([delObjects count])
+    {
         index = [delObjects count] -1;
         deleted = [delObjects objectAtIndex: index];
         count = [deleted count];
-        for(i = 0; i < count; i++) {
+        // #### this self-modifying for end looks very crappy. needs a rewrite
+        for(i = 0; i < count; i++)
+        {
             obj = [deleted objectAtIndex: i];
             [objects addObject: obj];
             [deleted removeObject: obj];
@@ -333,15 +350,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
     [self verifyModifiersOfEvent: nextEvent];
 
-    if([nextEvent type] != NSLeftMouseDragged) {
-        if(isneweditor) {
+    if([nextEvent type] != NSLeftMouseDragged)
+    {
+        if(isneweditor)
+        {
             [self addPathEditor];
             editor = [objects objectAtIndex: edind];
             [editor selectForEditing];
             [editor addControlAtPoint: p];
             [self setNeedsDisplay: YES];
             return;
-        } else {
+        } else
+        {
             editor = [objects objectAtIndex: edind];
             [editor selectForEditing];
             if(shiftclick)
@@ -350,13 +370,16 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             [self setNeedsDisplay: YES];
             return;
         }
-    } else {
-        if(isneweditor) {
+    } else
+    {
+        if(isneweditor)
+        {
             [self addPathEditor];
             editor = [objects objectAtIndex: edind];
             [editor selectForEditing];
             [editor addControlAtPoint: p];
-        } else {
+        } else
+        {
             editor = [objects objectAtIndex: edind];
             [editor selectForEditing];
             if(shiftclick)
@@ -365,7 +388,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         }
         [self setNeedsDisplay: YES];
 
-        do {
+        do
+        {
             p = [nextEvent locationInWindow];
             p = [self convertPoint: p fromView: nil];
             if(shiftclick)
@@ -393,15 +417,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     objs = [NSMutableArray arrayWithCapacity: 1];
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]]) {
+        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        {
             if([obj onPathBorder: p])
                 [obj selectAsGroup];
             else
                 if(!shiftclick)
                     [obj unselect];
-        } else {
+        } else
+        {
             if([obj pointInBounds: p])
                 [obj select];
             else
@@ -410,7 +437,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         }
     }
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if([obj isGroupSelected])
             [objs addObject: obj];
@@ -427,21 +455,26 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj;
     int i;
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]]) {
-            if([obj onPathBorder: p]) {
+        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        {
+            if([obj onPathBorder: p])
+            {
                 [obj selectForEditing];
                 [self setNeedsDisplay: YES];
                 [self moveControlPointOfEditor: obj toPoint: p];
                 return;
-            } else {
+            } else
+            {
                 if([self moveBezierHandleOfEditor: obj toPoint: p])
                     return;
                 else
                     [obj unselect];
             }
-        } else {
+        } else
+        {
             [obj unselect];
         }
     }
@@ -456,10 +489,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
         [[objects objectAtIndex: i] unselect];
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRText class]]) {
-            if([obj pointInBounds: p]) {
+        if([obj isKindOfClass: [GRText class]])
+        {
+            if([obj pointInBounds: p])
+            {
                 [obj select];
                 [self setNeedsDisplay: YES];
                 [obj edit];
@@ -471,12 +507,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [self setNeedsDisplay: YES];
 }
 
-- (void)editSelecteGRText
+- (void)editSelectedText
 {
     id obj;
     int i;
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if([obj isKindOfClass: [GRText class]]) {
             if([obj isSelect]) {
@@ -498,28 +535,33 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     nextEvent = [[self window] nextEventMatchingMask:
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([nextEvent type] == NSLeftMouseDragged) {
+    if([nextEvent type] == NSLeftMouseDragged)
+    {
         // ####		[myWin setSaved: NO];
         [self verifyModifiersOfEvent: nextEvent];
         op.x = startp.x;
         op.y = startp.y;
 
-        do {
+        do
+        {
             p = [nextEvent locationInWindow];
             p = [self convertPoint: p fromView: nil];
             if(shiftclick)
                 p = pointApplyingCostrainerToPoint(p, startp);
 
-            if(altclick && !dupl) {
+            if(altclick && !dupl)
+            {
                 moveobjs = [self duplicateObjects: objs andMoveTo: NSMakePoint(0, 0)];
                 dupl = YES;
-            } else if(!moveobjs) {
+            } else if(!moveobjs)
+            {
                 moveobjs = [NSArray arrayWithArray: objs];
             }
 
             diffp.x = p.x - op.x;
             diffp.y = p.y - op.y;
-            for(i = 0; i < [moveobjs count]; i++) {
+            for(i = 0; i < [moveobjs count]; i++)
+            {
                 obj = [moveobjs objectAtIndex: i];
                 [obj moveAddingCoordsOfPoint: diffp];
             }
@@ -531,12 +573,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             [self verifyModifiersOfEvent: nextEvent];
         } while([nextEvent type] != NSLeftMouseUp);
 
-        if(dupl) {
+        if(dupl)
+        {
             diffp.x = p.x - startp.x;
             diffp.y = p.y - startp.y;
             [self prepareDoItAgainWithSelector: @selector(duplicateObjects:andMoveTo:)
-            owner: self target: self , &moveobjs, &diffp, nil];
-        } else {
+                                         owner: self target: self , &moveobjs, &diffp, nil];
+        } else
+        {
             diffp.x = startp.x - p.x;
             diffp.y = startp.y - p.y;
             PREPAREUNDO(self, undoMoveObjects: [moveobjs retain] moveBackTo: diffp);
@@ -552,7 +596,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
         [[objects objectAtIndex: i] unselect];
 
-    for(i = 0; i < [objs count]; i++) {
+    for(i = 0; i < [objs count]; i++)
+    {
         obj = [objs objectAtIndex: i];
         [obj selectAsGroup];
         [obj moveAddingCoordsOfPoint: p];
@@ -596,10 +641,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj;
     int i;
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]]) {
-            if([obj onPathBorder: p]) {
+        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        {
+            if([obj onPathBorder: p])
+            {
                 [obj selectForEditing];
                 [obj subdividePathAtPoint: p splitIt: split];
                 // #####				[myWin setSaved: NO];
@@ -624,13 +672,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     if(![objects count])
         return;
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if([obj isSelect]) {
             objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-            if([obj isKindOfClass: [GRBezierPathEditor class]]) {
+            if([obj isKindOfClass: [GRBezierPathEditor class]])
+            {
                 [objProps setObject: @"path" forKey: @"type"];
-
                 num = [NSNumber numberWithFloat: [obj flatness]];
                 [objProps setObject: num forKey: @"flatness"];
                 num = [NSNumber numberWithInt: [obj lineJoin]];
@@ -641,7 +690,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [objProps setObject: num forKey: @"miterlimit"];
                 num = [NSNumber numberWithFloat: [obj lineWidth]];
                 [objProps setObject: num forKey: @"linewidth"];
-
                 num = [NSNumber numberWithInt: [obj isStroked]];
                 [objProps setObject: num forKey: @"stroked"];
                 color = [obj strokeColor];
@@ -655,7 +703,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [objProps setObject: num forKey: @"strokeblack"];
                 num = [NSNumber numberWithFloat: [obj strokeAlpha]];
                 [objProps setObject: num forKey: @"strokealpha"];
-
                 num = [NSNumber numberWithInt: [obj isFilled]];
                 [objProps setObject: num forKey: @"filled"];
                 color = [obj fillColor];
@@ -669,9 +716,9 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [objProps setObject: num forKey: @"fillblack"];
                 num = [NSNumber numberWithFloat: [obj fillAlpha]];
                 [objProps setObject: num forKey: @"fillalpha"];
-            } else {
+            } else
+            {
                 [objProps setObject: @"text" forKey: @"type"];
-
                 num = [NSNumber numberWithInt: [obj isStroked]];
                 [objProps setObject: num forKey: @"stroked"];
                 color = [obj strokeColor];
@@ -685,7 +732,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [objProps setObject: num forKey: @"strokeblack"];
                 num = [NSNumber numberWithFloat: [obj strokeAlpha]];
                 [objProps setObject: num forKey: @"strokealpha"];
-
                 num = [NSNumber numberWithInt: [obj isFilled]];
                 [objProps setObject: num forKey: @"filled"];
                 color = [obj fillColor];
@@ -708,14 +754,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         return;
 
     epwin = [[NSWindow alloc] initWithContentRect: NSMakeRect(0, 0, 500, 305)
-    				styleMask: style backing: NSBackingStoreRetained defer: NO];
+                                        styleMask: style
+                                          backing: NSBackingStoreRetained
+                                            defer: NO];
+    
     [epwin setTitle: @"Object Properties"];
     propsEditor = [[GRPropsEditor alloc] initWithFrame: NSMakeRect(0, 0, 500, 300)
-            forDocView: self objectProperties: objProps];
+                                            forDocView: self objectProperties: objProps];
     [epwin setContentView: propsEditor];
     [epwin center];
     result = [propsEditor runModal];
-    if(result == NSAlertDefaultReturn) {
+    if(result == NSAlertDefaultReturn)
+    {
         newProps = [propsEditor properties];
         count = 0;
         for(i = 0; i < [objects count]; i++)
@@ -723,17 +773,20 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 count++;
         if(count > 1) {
             result = NSRunAlertPanel(@"Alert", @"You are going to set the properties of many objects! Are you sure?", @"Ok", @"No", nil);
-            if(result != NSAlertDefaultReturn) {
+            if(result != NSAlertDefaultReturn)
+            {
                 [epwin release];
                 return;
             }
         }
 
-        for(i = 0; i < [objects count]; i++) {
+        for(i = 0; i < [objects count]; i++)
+        {
             obj = [objects objectAtIndex: i];
             if([obj isGroupSelected]) {
                 objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-                if([obj isKindOfClass: [GRBezierPathEditor class]]) {
+                if([obj isKindOfClass: [GRBezierPathEditor class]])
+                {
                     [obj setFlat: [[newProps objectForKey: @"flatness"] floatValue]];
                     [obj setLineJoin: [[newProps objectForKey: @"linejoin"] intValue]];
                     [obj setLineCap: [[newProps objectForKey: @"linecap"] intValue]];
@@ -768,8 +821,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj = nil;
     int i;
 
-    for(i = 0; i < [objects count]; i++) {
-        if([[objects objectAtIndex: i] isGroupSelected]) {
+    for(i = 0; i < [objects count]; i++)
+    {
+        if([[objects objectAtIndex: i] isGroupSelected])
+        {
             obj = [[objects objectAtIndex: i] retain];
             break;
         }
@@ -781,8 +836,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         if([objects objectAtIndex: i] != obj)
             [[objects objectAtIndex: i] unselect];
 
-    for(i = 0; i < [objects count]; i++) {
-        if((obj == [objects objectAtIndex: i]) && (i + 1 < [objects count])) {
+    for(i = 0; i < [objects count]; i++)
+    {
+        if((obj == [objects objectAtIndex: i]) && (i + 1 < [objects count]))
+        {
             [objects removeObjectAtIndex: i];
             [objects insertObject: obj atIndex: i + 1];
             [obj release];
@@ -799,8 +856,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj = nil;
     int i;
 
-    for(i = 0; i < [objects count]; i++) {
-        if([[objects objectAtIndex: i] isGroupSelected]) {
+    for(i = 0; i < [objects count]; i++)
+    {
+        if([[objects objectAtIndex: i] isGroupSelected])
+        {
             obj = [[objects objectAtIndex: i] retain];
             break;
         }
@@ -833,7 +892,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     if(shiftclick)
         return;
 
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if(obj != anObject)
             [obj unselect];
@@ -851,13 +911,16 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     if(isout) {
         zIndex--;
-        if(zIndex < 0) {
+        if(zIndex < 0)
+        {
             zIndex = 0;
             return;
         }
-    } else {
+    } else
+    {
         zIndex++;
-        if(zIndex > 8) {
+        if(zIndex > 8)
+        {
             zIndex = 8;
             return;
         }
@@ -927,17 +990,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i;
 
     objsdesc = [NSMutableArray arrayWithCapacity: 1];
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if([obj isGroupSelected])
             [objsdesc addObject: [obj objectDescription]];
     }
 
     if([objsdesc count]) {
-        types = [NSMutableArray arrayWithObjects: @"GDObjectPboardType", nil];
+        types = [NSMutableArray arrayWithObjects: @"GRObjectPboardType", nil];
         pboard = [NSPasteboard generalPasteboard];
         [pboard declareTypes: types owner: self];
-        [pboard setString: [objsdesc description] forType: @"GDObjectPboardType"];
+        [pboard setString: [objsdesc description] forType: @"GRObjectPboardType"];
     }
 }
 
@@ -952,19 +1016,19 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i;
 
     pboard = [NSPasteboard generalPasteboard];
-    types = [NSArray arrayWithObject: @"GDObjectPboardType"];
-    if([[pboard availableTypeFromArray: types] isEqualToString: @"GDObjectPboardType"]) {
-        descriptions = (NSArray *)[[pboard stringForType: @"GDObjectPboardType"] propertyList];
+    types = [NSArray arrayWithObject: @"GRObjectPboardType"];
+    if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"]) {
+        descriptions = (NSArray *)[[pboard stringForType: @"GRObjectPboardType"] propertyList];
 
         for(i = 0; i < [descriptions count]; i++) {
             objdesc = [descriptions objectAtIndex: i];
             str = [objdesc objectForKey: @"type"];
             if([str isEqualToString: @"path"])
                 obj = [[GRBezierPathEditor alloc] initFromData: objdesc
-                                                                                                                                                                inView: self zoomFactor: zFactor];
+                                                        inView: self zoomFactor: zFactor];
             else
                 obj = [[GRText alloc] initFromData: objdesc
-                                                                                                                                                    inView: self zoomFactor: zFactor];
+                                            inView: self zoomFactor: zFactor];
             [objects addObject: obj];
             [obj selectAsGroup];
             [obj release];
@@ -976,7 +1040,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)doUndo
 {
-    if([undoManager canUndo]) {
+    if([undoManager canUndo])
+    {
         [undoManager undoNestedGroup];
         // #####		[myWin setSaved: NO];
     }
@@ -984,14 +1049,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)doRedo
 {
-    if([undoManager canRedo]) {
+    if([undoManager canRedo])
+    {
         [undoManager redo];
         // #####		[myWin setSaved: NO];
     }
 }
 
-- (void)prepareDoItAgainWithSelector:(SEL)selector
-                                                                                       owner:(id)owner target:(id)target , ...
+- (void)prepareDoItAgainWithSelector:(SEL)selector owner:(id)owner target:(id)target , ...
 {
     NSMethodSignature	*sign;
     va_list ap;
@@ -1021,7 +1086,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 - (void)verifyModifiersOfEvent:(NSEvent *)theEvent
 {
     if([theEvent type] == NSLeftMouseDown
-       || [theEvent type] == NSLeftMouseDragged) {
+       || [theEvent type] == NSLeftMouseDragged)
+    {
         if([theEvent modifierFlags] & NSShiftKeyMask)
             shiftclick = YES;
         else
@@ -1036,7 +1102,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             ctrlclick = NO;
     }
 
-    if([theEvent type] == NSLeftMouseUp) {
+    if([theEvent type] == NSLeftMouseUp)
+    {
         if(!([theEvent modifierFlags] & NSShiftKeyMask))
             shiftclick = NO;
         if(!([theEvent modifierFlags] & NSCommandKeyMask))
@@ -1072,7 +1139,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     p = [self convertPoint: p fromView: nil];
 
     if(count == 1) {
-        switch([[NSApp delegate] currentToolType]) {
+        switch([[NSApp delegate] currentToolType])
+        {
             case blackarrowtool:
                 [self selectObjectAtPoint: p];
                 break;
@@ -1172,9 +1240,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     keyCode = [theEvent keyCode];
 
-    if(keyCode == NSDeleteFunctionKey) {
+    if(keyCode == NSDeleteFunctionKey)
+    {
         [self deleteSelectedObjects];
-    } else if(keyCode == NSPageUpFunctionKey) {
+    } else if(keyCode == NSPageUpFunctionKey)
+    {
         vRect = [self visibleRect];
         vPoint = vRect.origin;
         hiddRx = vPoint.x;
@@ -1183,7 +1253,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         hiddRh = vRect.size.height;
         hiddRect = NSMakeRect(hiddRx, hiddRy, hiddRw, hiddRh);
         [self scrollRectToVisible: hiddRect];
-    } else if(keyCode == NSPageDownFunctionKey) {
+    } else if(keyCode == NSPageDownFunctionKey)
+    {
         vRect = [self visibleRect];
         vPoint = vRect.origin;
         hiddRx = vPoint.x;

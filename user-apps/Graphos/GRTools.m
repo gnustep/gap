@@ -30,7 +30,7 @@
         buttons = [[NSMutableArray alloc] initWithCapacity: 14];
 
         barrowButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 120, 25, 20)
-                                                                                               toolType: blackarrowtool];
+                                                toolType: blackarrowtool];
         [barrowButt setButtonType: NSOnOffButton];
         [barrowButt setImage: [NSImage imageNamed: @"blackarrow.tiff"]];
         [barrowButt setImagePosition: NSImageOnly];
@@ -63,7 +63,7 @@
         [bezierButt release];
 
         textButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 100, 25, 20)
-                                                                                             toolType: texttool];
+                                              toolType: texttool];
         [textButt setButtonType: NSOnOffButton];
         [textButt setImage: [NSImage imageNamed: @"text.tiff"]];
         [textButt setImagePosition: NSImageOnly];
@@ -74,7 +74,7 @@
         [textButt release];
 
         circleButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 80, 25, 20)
-                                                                                               toolType: circletool];
+                                                toolType: circletool];
         [circleButt setButtonType: NSOnOffButton];
         [circleButt setImage: [NSImage imageNamed: @"circle.tiff"]];
         [circleButt setImagePosition: NSImageOnly];
@@ -85,7 +85,7 @@
         [circleButt release];
 
         rectangleButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 80, 25, 20)
-                                                                                                         toolType: rectangletool];
+                                                   toolType: rectangletool];
         [rectangleButt setButtonType: NSOnOffButton];
         [rectangleButt setImage: [NSImage imageNamed: @"rectangle.tiff"]];
         [rectangleButt setImagePosition: NSImageOnly];
@@ -96,7 +96,7 @@
         [rectangleButt release];
 
         paintButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 60, 25, 20)
-                                                                                              toolType: painttool];
+                                               toolType: painttool];
         [paintButt setButtonType: NSOnOffButton];
         [paintButt setImage: [NSImage imageNamed: @"paint.tiff"]];
         [paintButt setImagePosition: NSImageOnly];
@@ -107,7 +107,7 @@
         [paintButt release];
 
         pencilButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 60, 25, 20)
-                                                                                               toolType: penciltool];
+                                                toolType: penciltool];
         [pencilButt setButtonType: NSOnOffButton];
         [pencilButt setImage: [NSImage imageNamed: @"pencil.tiff"]];
         [pencilButt setImagePosition: NSImageOnly];
@@ -118,7 +118,7 @@
         [pencilButt release];
 
         roteteButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 40, 25, 20)
-                                                                                               toolType: rotatetool];
+                                                toolType: rotatetool];
         [roteteButt setButtonType: NSOnOffButton];
         [roteteButt setImage: [NSImage imageNamed: @"rotate.tiff"]];
         [roteteButt setImagePosition: NSImageOnly];
@@ -129,7 +129,7 @@
         [roteteButt release];
 
         reduceButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 40, 25, 20)
-                                                                                               toolType: reducetool];
+                                                toolType: reducetool];
         [reduceButt setButtonType: NSOnOffButton];
         [reduceButt setImage: [NSImage imageNamed: @"reduce.tiff"]];
         [reduceButt setImagePosition: NSImageOnly];
@@ -140,7 +140,7 @@
         [reduceButt release];
 
         reflectButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 20, 25, 20)
-                                                                                                toolType: reflecttool];
+                                                 toolType: reflecttool];
         [reflectButt setButtonType: NSOnOffButton];
         [reflectButt setImage: [NSImage imageNamed: @"reflect.tiff"]];
         [reflectButt setImagePosition: NSImageOnly];
@@ -151,7 +151,7 @@
         [reflectButt release];
 
         scissorsButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 20, 25, 20)
-                                                                                                        toolType: scissorstool];
+                                                  toolType: scissorstool];
         [scissorsButt setButtonType: NSOnOffButton];
         [scissorsButt setImage: [NSImage imageNamed: @"shissors.tiff"]];
         [scissorsButt setImagePosition: NSImageOnly];
@@ -241,7 +241,7 @@
 {
     unsigned int style = NSTitledWindowMask;
 
-     NSLog(@"initing GRToolsWindow");
+    NSLog(@"initing GRToolsWindow");
     self = [super initWithContentRect: NSMakeRect(10, 400, 50, 140)
                             styleMask: style
                               backing: NSBackingStoreBuffered

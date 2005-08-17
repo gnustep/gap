@@ -5,7 +5,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect
          forDocView:(GRDocView *)aView
-          objectProperties:(NSDictionary *)objprops
+   objectProperties:(NSDictionary *)objprops
 {
     NSString *type;
 
@@ -213,8 +213,8 @@
         [buttonCell setTitle: @""];
 
         lineCapMatrix = [[[NSMatrix alloc] initWithFrame: NSMakeRect(380, 215, 20, 60)
-                                                                                                     mode: NSRadioModeMatrix prototype: buttonCell
-                                                                                                                  numberOfRows: 3 numberOfColumns: 1] autorelease];
+                                                    mode: NSRadioModeMatrix prototype: buttonCell
+                                            numberOfRows: 3 numberOfColumns: 1] autorelease];
         [lineCapMatrix setCellSize: NSMakeSize(20, 20)];
         [lineCapMatrix setIntercellSpacing: NSZeroSize];
         [[lineCapMatrix cellAtRow: 0 column: 0] setTag: 0];
@@ -243,8 +243,8 @@
         [self addSubview: lineJoinLabel];
 
         lineJoinMatrix = [[[NSMatrix alloc] initWithFrame: NSMakeRect(380, 100, 20, 81)
-                                                                                                      mode: NSRadioModeMatrix prototype: buttonCell
-                                                                                                                   numberOfRows: 3 numberOfColumns: 1] autorelease];
+                                                     mode: NSRadioModeMatrix prototype: buttonCell
+                                             numberOfRows: 3 numberOfColumns: 1] autorelease];
         [lineJoinMatrix setCellSize: NSMakeSize(20, 30)];
         [lineJoinMatrix setIntercellSpacing: NSZeroSize];
         [[lineJoinMatrix cellAtRow: 0 column: 0] setTag: 0];
@@ -329,7 +329,7 @@
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldDidEndEditing:)
-                                                            name:@"NSControlTextDidEndEditingNotification" object:nil];
+                                                     name:@"NSControlTextDidEndEditingNotification" object:nil];
     }
     return self;
 }
@@ -554,10 +554,10 @@
     NSDrawGrayBezel(fillColorRect, fillColorRect);
     if(filled) {
         color = [NSColor colorWithDeviceCyan: fillcyan
-                                                                                                                  magenta: fillmagenta
-                                                                                                                          yellow: fillyellow
-                                                                                                                           black: fillblack
-                                                                                                                           alpha: fillalpha];
+                                     magenta: fillmagenta
+                                      yellow: fillyellow
+                                       black: fillblack
+                                       alpha: fillalpha];
         color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
         [color set];
         NSRectFill(NSMakeRect(fillColorRect.origin.x +2,
@@ -570,10 +570,10 @@
     NSDrawGrayBezel(strokeColorRect, strokeColorRect);
     if(stroked) {
         color = [NSColor colorWithDeviceCyan: strokecyan
-                                                                                                                  magenta: strokemagenta
-                                                                                                                          yellow: strokeyellow
-                                                                                                                           black: strokeblack
-                                                                                                                           alpha: strokealpha];
+                                     magenta: strokemagenta
+                                      yellow: strokeyellow
+                                       black: strokeblack
+                                       alpha: strokealpha];
         color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
         [color set];
         NSRectFill(NSMakeRect(strokeColorRect.origin.x +2,
