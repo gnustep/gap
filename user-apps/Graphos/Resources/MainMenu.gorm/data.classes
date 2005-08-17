@@ -1,0 +1,43 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    DDocView = {
+	Actions = (
+	    "moveSelectedObjectsToFront:",
+	    "moveSelectedObjectsToBack:",
+	    "unselectOtherObjects:",
+	    "cut:",
+	    "copy:",
+	    "paste:",
+	    "inspectObject:"
+	);
+	Outlets = (
+	);
+	Super = NSView;
+    };
+    FirstResponder = {
+	Actions = (
+	    "bringToFront:",
+	    "doRedo:",
+	    "doUndo:",
+	    "editObjectsProperties:",
+	    "method:",
+	    "moveSelectedObjectsToBack:",
+	    "moveSelectedObjectsToFront:",
+	    "new:",
+	    "inspectObject:",
+	    "psprint:",
+	    "save:",
+	    "saveas:",
+	    "sendToBack:",
+	    "unselectOtherObjects:"
+	);
+	Super = NSObject;
+    };
+    Graphos = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+}
