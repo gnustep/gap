@@ -13,7 +13,8 @@
 - (id)init
 {
     [super init];
-    if (self) {
+    if (self)
+    {
         NSLog(@"initing document");
         docView = [[GRDocView alloc] initWithFrame: NSMakeRect(0,0,0,0)];
     }

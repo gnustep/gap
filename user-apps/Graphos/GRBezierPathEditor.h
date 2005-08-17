@@ -3,38 +3,38 @@
 #import "GRBezierControlPoint.h"
 
 typedef struct {
-	GRBezierControlPoint *cp;
-	NSPoint p;
-	double t;
+    GRBezierControlPoint *cp;
+    NSPoint p;
+    double t;
 } hitData;
 
 @class GRDocView;
 
 @interface GRBezierPathEditor : NSObject
 {
-	GRDocView *myView;
-	NSBezierPath *myPath;
-	float strokeColor[4], fillColor[4];
-	float strokeAlpha, fillAlpha;
-	float flatness, miterlimit, linewidth;
-	int linejoin, linecap;
-	BOOL stroked, filled;
-	BOOL visible, locked;
-	NSMutableArray *controlPoints;
-	GRBezierControlPoint *currentPoint;
-	BOOL calculatingHandles;
-	BOOL groupSelected;
-	BOOL editSelected;
-	BOOL isdone;
-	BOOL isvalid;
-	float zmFactor;	
+    GRDocView *myView;
+    NSBezierPath *myPath;
+    float strokeColor[4], fillColor[4];
+    float strokeAlpha, fillAlpha;
+    float flatness, miterlimit, linewidth;
+    int linejoin, linecap;
+    BOOL stroked, filled;
+    BOOL visible, locked;
+    NSMutableArray *controlPoints;
+    GRBezierControlPoint *currentPoint;
+    BOOL calculatingHandles;
+    BOOL groupSelected;
+    BOOL editSelected;
+    BOOL isdone;
+    BOOL isvalid;
+    float zmFactor;
 }
 
 - (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;
 
-- (id)initFromData:(NSDictionary *)description 
-                inView:(GRDocView *)aView 
-                zoomFactor:(float)zf;
+- (id)initFromData:(NSDictionary *)description
+        inView:(GRDocView *)aView
+        zoomFactor:(float)zf;
 
 - (id)duplicate;
 
@@ -58,7 +58,7 @@ typedef struct {
 - (int)lineJoin;
 - (void)setLineCap:(int)cap;
 - (int)lineCap;
-- (void)setMiterLimit:(float)limit;	
+- (void)setMiterLimit:(float)limit;
 - (float)miterLimit;
 - (void)setLineWidth:(float)width;
 - (float)lineWidth;
@@ -80,7 +80,7 @@ typedef struct {
 
 - (void)selectAsGroup;
 - (void)selectForEditing;
-- (void)unselect;		
+- (void)unselect;
 - (BOOL)isGroupSelected;
 - (BOOL)isEditSelected;
 - (BOOL)isSelect;
@@ -94,11 +94,8 @@ typedef struct {
 - (void)remakePath;
 
 - (NSPoint)moveControlAtPoint:(NSPoint)p;
-
 - (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
-
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p;
-
 - (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
 
 - (hitData)hitDataOfPathSegmentOwningPoint:(NSPoint)pt;
@@ -110,9 +107,7 @@ typedef struct {
 - (BOOL)onPathBorder:(NSPoint)p;
 
 - (GRBezierControlPoint *)firstPoint;
-
 - (GRBezierControlPoint *)currentPoint;
-
 - (GRBezierControlPoint *)lastPoint;
 
 - (int)indexOfPoint:(GRBezierControlPoint *)aPoint;

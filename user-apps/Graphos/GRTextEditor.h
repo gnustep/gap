@@ -5,12 +5,12 @@
 
 @interface GRTextEditor : NSWindow
 {
-	GRTextEditorView *myView;
+    GRTextEditorView *myView;
 }
 
-- (id)initAtPoint:(NSPoint)p 
-		 withString:(NSString *)string
-		 attributes:(NSDictionary *)attributes;
+- (id)initAtPoint:(NSPoint)p
+       withString:(NSString *)string
+       attributes:(NSDictionary *)attributes;
 
 - (GRTextEditorView *)editorView;
 

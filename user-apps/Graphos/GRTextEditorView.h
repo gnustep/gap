@@ -26,8 +26,8 @@
 }
 
 - (id)initWithFrame:(NSRect)frameRect
-                             withString:(NSString *)string
-                             attributes:(NSDictionary *)attributes;
+         withString:(NSString *)string
+         attributes:(NSDictionary *)attributes;
 
 - (int)runModal;
 

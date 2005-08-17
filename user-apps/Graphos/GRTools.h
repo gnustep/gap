@@ -3,7 +3,7 @@
 
 @interface GRToolButton : NSButton
 {
-	int tooltype;
+    int tooltype;
 }
 
 - (id)initWithFrame:(NSRect)rect toolType:(int)type;
@@ -13,11 +13,11 @@
 
 @interface GRToolsView : NSView
 {
-	NSMutableArray *buttons;
-	GRToolButton *barrowButt, *warrowButt, *bezierButt, *textButt;
-	GRToolButton *circleButt, *rectangleButt, *paintButt, *pencilButt;
-	GRToolButton *roteteButt, *reduceButt, *reflectButt, *scissorsButt;
-	GRToolButton *handButt, *magnifyButt;
+    NSMutableArray *buttons;
+    GRToolButton *barrowButt, *warrowButt, *bezierButt, *textButt;
+    GRToolButton *circleButt, *rectangleButt, *paintButt, *pencilButt;
+    GRToolButton *roteteButt, *reduceButt, *reflectButt, *scissorsButt;
+    GRToolButton *handButt, *magnifyButt;
 }
 
 - (id)initWithFrame:(NSRect)rect;
@@ -28,7 +28,7 @@
 
 @interface GRToolsWindow : NSWindow
 {
-	GRToolsView *toolsView;
+    GRToolsView *toolsView;
 }
 
 - (id)init;
