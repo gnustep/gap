@@ -251,6 +251,15 @@
 				F539B1E708A2D84101A8012F,
 				F539B1E908A2D85401A8012F,
 				F539B1EB08A2D86901A8012F,
+				F507216008B5ECA701A8012F,
+				F507216208B5ED3E01A8012F,
+				F507216308B5ED3E01A8012F,
+				F507216408B5ED3E01A8012F,
+				F507216508B5ED3E01A8012F,
+				F507216608B5ED3E01A8012F,
+				F507216708B5ED3E01A8012F,
+				F507216E08B5ED7501A8012F,
+				F507217208B5EEE201A8012F,
 			);
 			isa = PBXGroup;
 			name = Resources;
@@ -404,6 +413,15 @@
 				F539B1EA08A2D85601A8012F,
 				F539B1EC08A2D86B01A8012F,
 				F539B26208A3676E01A8012F,
+				F507216108B5ECA701A8012F,
+				F507216808B5ED3E01A8012F,
+				F507216908B5ED3E01A8012F,
+				F507216A08B5ED3E01A8012F,
+				F507216B08B5ED3E01A8012F,
+				F507216C08B5ED3E01A8012F,
+				F507216D08B5ED3E01A8012F,
+				F507216F08B5ED7501A8012F,
+				F507217308B5EEE201A8012F,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +508,114 @@
 //F52
 //F53
 //F54
+		F507216008B5ECA701A8012F = {
+			isa = PBXFileReference;
+			name = magnify.tiff;
+			path = Resources/magnify.tiff;
+			refType = 4;
+		};
+		F507216108B5ECA701A8012F = {
+			fileRef = F507216008B5ECA701A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216208B5ED3E01A8012F = {
+			isa = PBXFileReference;
+			name = pencil.tiff;
+			path = Resources/pencil.tiff;
+			refType = 4;
+		};
+		F507216308B5ED3E01A8012F = {
+			isa = PBXFileReference;
+			name = rectangle.tiff;
+			path = Resources/rectangle.tiff;
+			refType = 4;
+		};
+		F507216408B5ED3E01A8012F = {
+			isa = PBXFileReference;
+			name = reduce.tiff;
+			path = Resources/reduce.tiff;
+			refType = 4;
+		};
+		F507216508B5ED3E01A8012F = {
+			isa = PBXFileReference;
+			name = reflect.tiff;
+			path = Resources/reflect.tiff;
+			refType = 4;
+		};
+		F507216608B5ED3E01A8012F = {
+			isa = PBXFileReference;
+			name = rotate.tiff;
+			path = Resources/rotate.tiff;
+			refType = 4;
+		};
+		F507216708B5ED3E01A8012F = {
+			isa = PBXFileReference;
+			name = shissors.tiff;
+			path = Resources/shissors.tiff;
+			refType = 4;
+		};
+		F507216808B5ED3E01A8012F = {
+			fileRef = F507216208B5ED3E01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216908B5ED3E01A8012F = {
+			fileRef = F507216308B5ED3E01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216A08B5ED3E01A8012F = {
+			fileRef = F507216408B5ED3E01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216B08B5ED3E01A8012F = {
+			fileRef = F507216508B5ED3E01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216C08B5ED3E01A8012F = {
+			fileRef = F507216608B5ED3E01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216D08B5ED3E01A8012F = {
+			fileRef = F507216708B5ED3E01A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507216E08B5ED7501A8012F = {
+			isa = PBXFileReference;
+			name = paint.tiff;
+			path = Resources/paint.tiff;
+			refType = 4;
+		};
+		F507216F08B5ED7501A8012F = {
+			fileRef = F507216E08B5ED7501A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F507217208B5EEE201A8012F = {
+			isa = PBXFileReference;
+			name = hand.tiff;
+			path = Resources/hand.tiff;
+			refType = 4;
+		};
+		F507217308B5EEE201A8012F = {
+			fileRef = F507217208B5EEE201A8012F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		F539B1E108A2D3D101A8012F = {
 			isa = PBXFileReference;
 			name = blackarrow.tiff;
