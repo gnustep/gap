@@ -18,13 +18,15 @@
         if([type isEqualToString: @"path"])
             ispath = YES;
 
-        if(ispath) {
+        if(ispath)
+        {
             flatness = [[objprops objectForKey: @"flatness"] floatValue];
             linejoin = [[objprops objectForKey: @"linejoin"] intValue];
             linecap = [[objprops objectForKey: @"linecap"] intValue];
             miterlimit = [[objprops objectForKey: @"miterlimit"] floatValue];
             linewidth = [[objprops objectForKey: @"linewidth"] floatValue];
-        } else {
+        } else
+        {
             flatness = miterlimit = linewidth = 0.0;
             linejoin = linecap = 0;
         }
