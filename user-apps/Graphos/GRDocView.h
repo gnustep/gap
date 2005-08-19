@@ -69,17 +69,17 @@
 - (BOOL)moveControlPointOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
-- (void)inspectObject: (id)sender;
+- (IBAction)inspectObject: (id)sender;
 
-- (void)moveSelectedObjectsToFront:(id)sender;
-- (void)moveSelectedObjectsToBack:(id)sender;
+- (IBAction)moveSelectedObjectsToFront:(id)sender;
+- (IBAction)moveSelectedObjectsToBack:(id)sender;
 - (void)unselectOtherObjects:(id)anObject;
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout;
 - (void)movePageFromHandPoint:(NSPoint)handpos;
 
-- (void)cut:(id)sender;
-- (void)copy:(id)sender;
-- (void)paste:(id)sender;
+- (IBAction)cut:(id)sender;
+- (IBAction)copy:(id)sender;
+- (IBAction)paste:(id)sender;
 - (void)doUndo;
 - (void)doRedo;
 - (void)prepareDoItAgainWithSelector:(SEL)selector owner:(id)owner target:(id)target , ...;
