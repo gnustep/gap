@@ -755,7 +755,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     epwin = [[NSWindow alloc] initWithContentRect: NSMakeRect(0, 0, 500, 305)
                                         styleMask: style
-                                          backing: NSBackingStoreRetained
+                                          backing: NSBackingStoreBuffered
                                             defer: NO];
     
     [epwin setTitle: @"Object Properties"];

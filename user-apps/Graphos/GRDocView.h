@@ -30,8 +30,6 @@
 })
 #endif
 
-@class GRDocument;
-
 @interface GRDocView : NSView
 {
     NSMutableArray *objects, *delObjects;
