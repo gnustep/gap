@@ -9,7 +9,8 @@ static double k = 0.025;
 - (id)initInView:(GRDocView *)aView zoomFactor:(float)zf
 {
     self = [super init];
-    if(self) {
+    if(self)
+    {
         myView = aView;
         zmFactor = zf;
         myPath = [[NSBezierPath bezierPath] retain];
@@ -1064,10 +1065,13 @@ static double k = 0.025;
         return;
 
     bzp = [NSBezierPath bezierPath];
-    if(stroked) {
-        [bzp setLineJoinStyle:linejoin];
-        [bzp setLineCapStyle:linecap];
-        [bzp setLineWidth:linewidth];
+    if(stroked)
+    {
+        NSLog(@"line width: %f", linewidth);
+        [NSGraphicsContext saveGraphicsState];
+        [myPath setLineJoinStyle:linejoin];
+        [myPath setLineCapStyle:linecap];
+        [myPath setLineWidth:linewidth];
         // #### and alpha strokeAlpha ????
         color = [NSColor colorWithDeviceCyan: strokeColor[0]
                                      magenta: strokeColor[1]
@@ -1076,14 +1080,14 @@ static double k = 0.025;
                                        alpha: strokeAlpha];
         color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
         [color set];
-        [myPath stroke];
-        //		PSgrestore();
+        [myPath stroke];   // FIXME why this twice... need to understand mypath
+        [NSGraphicsContext restoreGraphicsState];
     }
 
-    if(filled) {
+    if(filled)
+    {
         // #### and alpha strokeAlpha ????
-        // #### and PS save and restore... do we ned a Bezier equiv?
-        //		PSgsave();
+        [NSGraphicsContext saveGraphicsState];
         //		PSsetalpha(fillAlpha);
         color = [NSColor colorWithDeviceCyan: fillColor[0]
                                      magenta: fillColor[1]
@@ -1093,7 +1097,7 @@ static double k = 0.025;
         color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
         [color set];
         [myPath fill];
-        //		PSgrestore();
+        [NSGraphicsContext restoreGraphicsState];
     }
 
     [bzp setLineWidth:1];
@@ -1108,7 +1112,8 @@ static double k = 0.025;
         }
     }
 
-    if(editSelected) {
+    if(editSelected)
+    {
         for(i = 0; i < [controlPoints count]; i++)
         {
             cp = [controlPoints objectAtIndex: i];
@@ -1121,19 +1126,19 @@ static double k = 0.025;
                     [[NSColor blackColor] set];
                     NSRectFill(bzhandle.firstHandleRect);
                     [bzp moveToPoint:NSMakePoint(bzhandle.firstHandle.x, bzhandle.firstHandle.y)];
-                    // ### and this empty moveto?
-                    //					PSmoveto();
                     [bzp lineToPoint:NSMakePoint(bzhandle.center.x, bzhandle.center.y)];
                     [bzp lineToPoint:NSMakePoint(bzhandle.secondHandle.x, bzhandle.secondHandle.y)];
                     [bzp stroke];
                     NSRectFill(bzhandle.secondHandleRect);
                 }
-            } else {
+            } else
+            {
                 [[NSColor whiteColor] set];
                 NSRectFill(r);
 
                 ponpoint = [self pointOnPoint: cp];
-                if(ponpoint) {
+                if(ponpoint)
+                {
                     if([ponpoint isSelect])
                     {
                         r = [ponpoint centerRect];
