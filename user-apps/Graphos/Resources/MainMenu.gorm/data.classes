@@ -1,19 +1,5 @@
 {
     "## Comment" = "Do NOT change this file, Gorm maintains it";
-    DDocView = {
-	Actions = (
-	    "moveSelectedObjectsToFront:",
-	    "moveSelectedObjectsToBack:",
-	    "unselectOtherObjects:",
-	    "cut:",
-	    "copy:",
-	    "paste:",
-	    "inspectObject:"
-	);
-	Outlets = (
-	);
-	Super = NSView;
-    };
     FirstResponder = {
 	Actions = (
 	    "bringToFront:",
@@ -32,6 +18,20 @@
 	    "unselectOtherObjects:"
 	);
 	Super = NSObject;
+    };
+    GRDocView = {
+	Actions = (
+	    "inspectObject:",
+	    "moveSelectedObjectsToFront:",
+	    "moveSelectedObjectsToBack:",
+	    "unselectOtherObjects:",
+	    "cut:",
+	    "copy:",
+	    "paste:"
+	);
+	Outlets = (
+	);
+	Super = NSView;
     };
     Graphos = {
 	Actions = (
