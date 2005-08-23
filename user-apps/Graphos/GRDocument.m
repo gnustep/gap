@@ -58,4 +58,10 @@
     return NO;
 }
 
+- (BOOL)shouldChangePrintInfo:(NSPrintInfo *)newPrintInfo
+{
+    [docView updatePrintInfo: newPrintInfo];
+    return YES;
+}
+      
 @end
