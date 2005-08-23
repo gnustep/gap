@@ -267,6 +267,21 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     return duplObjs;
 }
 
+- (NSArray *)updatePrintInfo: (NSPrintInfo *)pi;
+{
+    pageRect = NSMakeRect(0,0,[pi paperSize].width, [pi paperSize].height);
+    a4Rect = NSMakeRect([pi leftMargin], [pi bottomMargin],
+             pageRect.size.width-([pi leftMargin]+[pi rightMargin]),
+             pageRect.size.height-([pi topMargin]+[pi bottomMargin]));
+    
+    zmdRect = a4Rect;
+    zIndex = 2;
+    zFactor = zFactors[zIndex];
+                                                          
+    [self setFrame: pageRect];
+    [self setNeedsDisplay:YES];
+}
+                                                              
 - (void)deleteSelectedObjects
 {
     id obj;

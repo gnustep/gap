@@ -51,6 +51,7 @@
 - (void)addPathEditor;
 - (void)addTextAtPoint:(NSPoint)p;
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;
+- (NSArray *)updatePrintInfo: (NSPrintInfo *)pi;
 
 - (void)deleteSelectedObjects;
 - (void)undoDeleteObjects;
