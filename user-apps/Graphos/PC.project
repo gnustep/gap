@@ -71,7 +71,7 @@
 	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-08-19 16:11:07 +0200";
+    LAST_EDITING = "2005-08-27 14:03:38 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -89,7 +89,7 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "137 38 677 600 0 0  960 768 ";
+	ProjectWindow = "138 37 677 600 0 0  960 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
@@ -104,7 +104,7 @@
 	    NSDocumentClass = GRDocument;
 	    NSHumanReadableName = "Graphos drawing";
 	    NSIcon = Graphos.tiff;
-	    NSName = gdr;
+	    NSName = "graphos design";
 	    NSRole = Editor;
 	    NSUnixExtensions = (
 		gdr
