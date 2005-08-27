@@ -15,7 +15,7 @@
 	    NSDocumentClass = GRDocument;
 	    NSHumanReadableName = "Graphos drawing";
 	    NSIcon = Graphos.tiff;
-	    NSName = gdr;
+	    NSName = "graphos design";
 	    NSRole = Editor;
 	    NSUnixExtensions = (
 		gdr
