@@ -46,7 +46,7 @@
     NSString *tmp = [[[NSString alloc] initWithData: data
                                            encoding: NSASCIIStringEncoding] autorelease];
 
-    if( [aType isEqualToString: @"gdr"] && tmp != nil )
+    if( [aType isEqualToString: @"graphos design"] && tmp != nil )
     {
         if( [tmp rangeOfString: @"<?xml"].length > 0 )
         {

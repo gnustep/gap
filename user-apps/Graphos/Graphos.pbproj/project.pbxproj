@@ -343,7 +343,7 @@
 				<string>gdr</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Draw design</string>
+			<string>graphos design</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>
