@@ -37,17 +37,17 @@
 		return;
 	}
 
-	NSRect bounds = [self bounds];
-	float boardWidth =  MIN(NSWidth(bounds),NSHeight(bounds)) - BORDER_SIZE * 2;
-	int boardSize = [_go boardSize];
-	float cellWidth = boardWidth / boardSize;
+	NSRect bnds = [self bounds];
+	float boardw =  MIN(NSWidth(bnds),NSHeight(bnds)) - BORDER_SIZE * 2;
+	int boards = [_go boardSize];
+	float cellw = boardw / boards;
 	NSRect r;
 
-	r.size.width = cellWidth * 2;
-	r.size.height = cellWidth * 2;
+	r.size.width = cellw * 2;
+	r.size.height = cellw * 2;
 	r.origin = [self pointForGoLocation:loc];
-	r.origin.x -= cellWidth;
-	r.origin.y -= cellWidth;
+	r.origin.x -= cellw;
+	r.origin.y -= cellw;
 	[self setNeedsDisplayInRect:r];
 }
 
@@ -66,6 +66,19 @@
 			(NSHeight(bounds) - boardWidth)/2, boardWidth, boardWidth);
 }
 
+- (NSRect) rectForGoLocation:(GoLocation)loc
+{
+	if (_go == nil)
+	{
+		return NSZeroRect;
+	}
+
+	NSRect retRect;
+	retRect.origin = [self pointForGoLocation:loc];
+	retRect.size = NSZeroSize;
+	retRect = NSInsetRect(retRect,-cellWidth/2, -cellWidth/2);
+	return retRect;
+}
 @end
 
 @implementation Board
@@ -328,10 +341,10 @@
 	}
 
 	GoLocation downLoc = [self goLocationForPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
-	unsigned int boardSize = [_go boardSize];
+	unsigned int boards = [_go boardSize];
 
 	if (isEditable == NO || downLoc.row == 0 || downLoc.column == 0 ||
-			downLoc.row > boardSize || downLoc.column > boardSize)
+			downLoc.row > boards || downLoc.column > boards)
 	{
 		return;
 	}
@@ -545,7 +558,8 @@
 			{
 				NSSize strSize;
 				p = [self pointForGoLocation:l];
-				NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",1 + [stone turnNumber]]];
+				NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] 
+									 initWithString: [NSString stringWithFormat:@"%d",1 + [stone turnNumber]]];
 				[attrStr addAttribute:NSFontAttributeName
 								value:aFont
 								range:NSMakeRange(0,[attrStr length])];
@@ -553,29 +567,15 @@
 								value:[stone colorType]==BlackPlayerType?[NSColor lightGrayColor]:[NSColor darkGrayColor]
 								range:NSMakeRange(0,[attrStr length])];
 				strSize = [attrStr size];
-				[stone centerAttributedString:attrStr
-									  toPoint:NSMakePoint(p.x - strSize.width/2, p.y - strSize.height/2)
-								   withRadius:cellWidth/2];
+				[stone centerAttributedString: (NSAttributedString *)attrStr
+				       toPoint: NSMakePoint(p.x - strSize.width/2, p.y - strSize.height/2)
+				       withRadius: cellWidth/2];
 				RELEASE(attrStr);
 			}
 		}
 	}
 
 
-}
-
-- (NSRect) rectForGoLocation:(GoLocation)loc
-{
-	if (_go == nil)
-	{
-		return NSZeroRect;
-	}
-
-	NSRect retRect;
-	retRect.origin = [self pointForGoLocation:loc];
-	retRect.size = NSZeroSize;
-	retRect = NSInsetRect(retRect,-cellWidth/2, -cellWidth/2);
-	return retRect;
 }
 
 - (NSPoint) pointForGoLocation:(GoLocation)loc

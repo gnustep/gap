@@ -1,6 +1,8 @@
 #include "GoDocument.h"
 #include "GNUGoPlayer.h"
 #include "GoWindow.h"
+#include "PlayerController.h"
+#include "AppController.h"
 
 NSString * GoDocumentDidBecomeMainNotification = @"GoDocumentDidBecomeMainNotification";
 NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotification";
@@ -45,7 +47,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 	while ((winController = [en nextObject]))
 	{
-		window = [winController window];
+		window = (GoWindow *)[winController window];
 		if ([window isMemberOfClass:goWinClass])
 		{
 			[[window board] setGo:go];
@@ -69,7 +71,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 	while ((winController = [en nextObject]))
 	{
-		window = [winController window];
+		window = (GoWindow *)[winController window];
 		if ([window isMemberOfClass:goWinClass])
 		{
 			[[window board] setShowHistory:show];
@@ -90,7 +92,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 - (void) awakeFromNib
 {
-	NSArray *parray = [[[NSApp delegate] playerController] allPlayerClasses];
+	NSArray *parray = [(PlayerController *)[[NSApp delegate] playerController] allPlayerClasses];
 
 	ASSIGN(_players[BlackPlayerType], [[parray objectAtIndex:0] player]);
 	ASSIGN(_players[WhitePlayerType], [[parray objectAtIndex:1] player]);
@@ -156,7 +158,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 		while ((winController = [en nextObject]))
 		{
-			window = [winController window];
+			window = (GoWindow *)[winController window];
 			if ([window isMemberOfClass:goWinClass])
 			{
 				[[window board] setEditable:YES];
@@ -174,7 +176,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 	while ((winController = [en nextObject]))
 	{
-		window = [winController window];
+		window = (GoWindow *)[winController window];
 		if ([window isMemberOfClass:goWinClass])
 		{
 			[[window board] setEditable:NO];
@@ -281,7 +283,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 
 		while ((winController = [en nextObject]))
 		{
-			window = [winController window];
+			window = (GoWindow *)[winController window];
 			if ([window isMemberOfClass:goWinClass])
 			{
 				[[window board] setEditable:!willPlay];

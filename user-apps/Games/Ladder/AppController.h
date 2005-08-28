@@ -8,4 +8,5 @@
 	id infoTab;
 	id documentInspector;
 }
+- (id) playerController;
 @end
