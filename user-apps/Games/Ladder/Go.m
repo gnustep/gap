@@ -1,6 +1,8 @@
 #include "Go.h"
 #include "Player.h"
 
+#include <Foundation/NSFileHandle.h>
+
 NSString * GoStoneNotification = @"GoStoneNotification";
 
 @implementation Stone
@@ -176,6 +178,36 @@ static BOOL __check_state(NSString *str)
 	return self;
 }
 
+
+- (NSString *) runGTPCommand:(NSString *)command
+{
+	NSString *str;
+	NSFileHandle *fh  = [_commandPipe fileHandleForWriting];
+	NSData *data = [[command stringByAppendingString:@"\n"] dataUsingEncoding:NSASCIIStringEncoding];
+
+	[fh writeData:data];
+
+	fh = [_eventPipe fileHandleForReading];
+
+	str = @"";
+
+	while ((data = [fh availableData]))
+	{
+		const char *bytes = [data bytes];
+		unsigned offset = [data length];
+		str = [str stringByAppendingString:
+			AUTORELEASE([[NSString alloc] initWithData:data
+											  encoding:NSASCIIStringEncoding])];
+		if (bytes[offset - 2] == 0x0A && bytes[offset - 1] == 0x0A)
+		{
+			break;
+		}
+	}
+
+	return str;
+}
+
+
 - (void) turnBegin:(NSCalendarDate *)turnDate
 {
 	/* if no dict */
@@ -339,34 +371,6 @@ static BOOL __check_state(NSString *str)
 	}
 }
 
-- (NSString *) runGTPCommand:(NSString *)command
-{
-	NSString *str;
-	id fh  = [_commandPipe fileHandleForWriting];
-	NSData *data = [[command stringByAppendingString:@"\n"] dataUsingEncoding:NSASCIIStringEncoding];
-
-	[fh writeData:data];
-
-	fh = [_eventPipe fileHandleForReading];
-
-	str = @"";
-
-	while ((data = [fh availableData]))
-	{
-		char *bytes = [data bytes];
-		unsigned offset = [data length];
-		str = [str stringByAppendingString:
-			AUTORELEASE([[NSString alloc] initWithData:data
-											  encoding:NSASCIIStringEncoding])];
-		if (bytes[offset - 2] == 0x0A && bytes[offset - 1] == 0x0A)
-		{
-			break;
-		}
-	}
-
-	return str;
-}
-
 - (void) _syncBoardWithGNUGo
 {
 	NSString *str;
@@ -408,7 +412,7 @@ static BOOL __check_state(NSString *str)
 						if (stone != nil && offset >= 0)
 						{
 							[stone setOwner:self];
-							[stone setTurnNumber: -1];
+							[(id<GameTurn>)stone setTurnNumber: -1];
 						}
 					}
 				}

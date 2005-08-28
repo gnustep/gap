@@ -86,6 +86,48 @@
 	return self;
 }
 
+- (void) setEnabled:(BOOL)enable
+{
+	[pauseButton setEnabled:enable];
+	[turnButton setEnabled:enable];
+	[timePopUp setEnabled:enable];
+	[whiteClock setShowsArc:enable];
+	[blackClock setShowsArc:enable];
+}
+
+- (void) checkGame
+{
+	[timer invalidate];
+
+	if (_game == nil)
+	{
+		timer = nil;
+		[self setEnabled:NO];
+	}
+	else
+	{
+		[self setEnabled:YES];
+
+		/* check if game has begun */
+		if ([_game turnBeginDate] != nil)
+		{
+			//NSLog(@"launch");
+
+			timer =  [NSTimer scheduledTimerWithTimeInterval:1.0
+													  target:self
+													selector:@selector(_tick)
+													userInfo:nil
+													 repeats:YES];
+		}
+		else
+		{
+			//NSLog(@"begin date nil");
+		}
+
+		[self _adjustClockToGame];
+	}
+}
+
 - (void) awakeFromNib
 {
 	NSMutableArray *cells_array;
@@ -194,51 +236,9 @@
 	}
 }
 
-- (void) checkGame
-{
-	[timer invalidate];
-
-	if (_game == nil)
-	{
-		timer = nil;
-		[self setEnabled:NO];
-	}
-	else
-	{
-		[self setEnabled:YES];
-
-		/* check if game has begun */
-		if ([_game turnBeginDate] != nil)
-		{
-			//NSLog(@"launch");
-
-			timer =  [NSTimer scheduledTimerWithTimeInterval:1.0
-													  target:self
-													selector:@selector(_tick)
-													userInfo:nil
-													 repeats:YES];
-		}
-		else
-		{
-			//NSLog(@"begin date nil");
-		}
-
-		[self _adjustClockToGame];
-	}
-}
-
 - (void) gameDidBecomeMain:(NSNotification *)notification
 {
 	[self setGame:[notification object]];
-}
-
-- (void) setEnabled:(BOOL)enable
-{
-	[pauseButton setEnabled:enable];
-	[turnButton setEnabled:enable];
-	[timePopUp setEnabled:enable];
-	[whiteClock setShowsArc:enable];
-	[blackClock setShowsArc:enable];
 }
 
 - (void) setGame:(id <GameTurn>)game

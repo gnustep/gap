@@ -3,8 +3,24 @@
 #include "StoneUI.h"
 #include "GNUGoPlayer.h"
 #include "NetworkPlayer.h"
+#include "PlayerController.h"
 
 @implementation AppController
+
+- (void) _setupAuthors
+{
+}
+
+- (void) _setupCopying
+{
+	/* initialize info */
+	NSTextView *textView = [[[[[infoTab tabViewItemAtIndex:0] view] subviews] lastObject] documentView];
+
+
+	[textView replaceCharactersInRange:NSMakeRange(0,0)
+							withString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@"GPL"]]];
+}
+
 
 - (id) playerController
 {
@@ -47,20 +63,6 @@
 
 	[self _setupCopying];
 	[self _setupAuthors];
-}
-
-- (void) _setupAuthors
-{
-}
-
-- (void) _setupCopying
-{
-	/* initialize info */
-	NSTextView *textView = [[[[[infoTab tabViewItemAtIndex:0] view] subviews] lastObject] documentView];
-
-
-	[textView replaceCharactersInRange:NSMakeRange(0,0)
-							withString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@"GPL"]]];
 }
 
 - (void) orderFrontInfoPanel: (id)sender

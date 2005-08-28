@@ -16,6 +16,7 @@
 	  forColorType:(PlayerColorType)color;
 - (Player *) playerForColorType:(PlayerColorType)color;
 - (PlayerColorType) turn;
+- (void) setBoardSize:(unsigned int)newSize;
 @end
 
 extern NSString * GoDocumentDidBecomeMainNotification;

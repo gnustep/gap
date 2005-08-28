@@ -1,3 +1,6 @@
+#include <Foundation/Foundation.h>
+#include <AppKit/AppKit.h>
+
 #include "StoneUI.h"
 #include <math.h>
 
@@ -299,7 +302,7 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 					 withRadius:(float)radius
 {
 	float f = (radius/RFACTOR)/SHIFT_FACTOR;
-	[attrstr drawAtPoint:NSMakePoint(position.x * f + p.x, position.y * f + p.y)];
+	[attrstr drawAtPoint: NSMakePoint(position.x * f + p.x, position.y * f + p.y)];
 }
 
 - (void) drawIndicatorWithRadius:(float)radius

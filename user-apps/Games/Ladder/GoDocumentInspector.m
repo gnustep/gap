@@ -1,7 +1,11 @@
 /* All Rights reserved */
 
+#include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
+
 #include "GoDocumentInspector.h"
+#include "AppController.h"
+#include "PlayerController.h"
 
 @implementation GoDocumentInspector
 
@@ -25,33 +29,6 @@
 			 object:nil];
 
 	return self;
-}
-
-- (void) turnBegin:(NSNotification *)notification
-{
-	if ([notification object] != [_document go])
-	{
-		return;
-	}
-
-	if ([_document turn] == BlackPlayerType)
-	{
-		[turnText setStringValue:@"Black Player's Turn"];
-	}
-	else if ([_document turn] == WhitePlayerType)
-	{
-		[turnText setStringValue:@"White Player's Turn"];
-	}
-	else
-	{
-		[turnText setStringValue:@""];
-	}
-}
-
-- (void) awakeFromNib
-{
-	[self setDocument:nil];
-	[self setUIEnabled:NO];
 }
 
 - (void) setUIEnabled:(BOOL)enable
@@ -179,6 +156,27 @@
 	}
 }
 
+- (void) turnBegin:(NSNotification *)notification
+{
+	if ([notification object] != [_document go])
+	{
+		return;
+	}
+
+	if ([_document turn] == BlackPlayerType)
+	{
+		[turnText setStringValue:@"Black Player's Turn"];
+	}
+	else if ([_document turn] == WhitePlayerType)
+	{
+		[turnText setStringValue:@"White Player's Turn"];
+	}
+	else
+	{
+		[turnText setStringValue:@""];
+	}
+}
+
 - (void) setDocumentNotified:(NSNotification *) not
 {
 	[self setDocument:[not object]];
@@ -241,6 +239,12 @@
 - (void) revert: (id)sender
 {
 	NSLog(@"revert");
+}
+
+- (void) awakeFromNib
+{
+	[self setDocument:nil];
+	[self setUIEnabled:NO];
 }
 
 @end

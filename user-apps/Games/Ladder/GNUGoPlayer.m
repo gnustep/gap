@@ -1,4 +1,5 @@
 #include "GNUGoPlayer.h"
+#include <Foundation/NSFileHandle.h>
 
 @implementation GNUGoPlayer
 
@@ -47,7 +48,7 @@ static GoLocation __go_location_for_string(NSString *str)
 
 	while ((data = [fh availableData]))
 	{
-		char *bytes = [data bytes];
+		const char *bytes = [data bytes];
 		unsigned offset = [data length];
 		str = [str stringByAppendingString:
 			AUTORELEASE([[NSString alloc] initWithData:data
@@ -98,7 +99,7 @@ static GoLocation __go_location_for_string(NSString *str)
 - (NSString *) runGTPCommand:(NSString *)command
 {
 	NSString *str;
-	id fh  = [_commandPipe fileHandleForWriting];
+	NSFileHandle *fh  = [_commandPipe fileHandleForWriting];
 	NSData *data = [[command stringByAppendingString:@"\n"] dataUsingEncoding:NSASCIIStringEncoding];
 
 	[fh writeData:data];
@@ -109,7 +110,7 @@ static GoLocation __go_location_for_string(NSString *str)
 
 	while ((data = [fh availableData]))
 	{
-		char *bytes = [data bytes];
+	        const char *bytes = [data bytes];
 		unsigned offset = [data length];
 		str = [str stringByAppendingString:
 			AUTORELEASE([[NSString alloc] initWithData:data

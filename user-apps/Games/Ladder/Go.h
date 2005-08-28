@@ -106,6 +106,7 @@ static inline GoLocation MakeGoLocation (int row, int column)
 - (BOOL) printSGFToFile:(NSString *)path;
 - (BOOL) loadSGFFile:(NSString *)path;
 
+- (void) clearBoard;
 @end
 
 extern NSString * GoStoneNotification;

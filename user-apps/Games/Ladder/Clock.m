@@ -3,6 +3,7 @@ copyright 2003 Alexander Malmberg <alexander@malmberg.org>
 */
 
 #include "Clock.h"
+#include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 
 #include <math.h>
@@ -12,7 +13,13 @@ copyright 2003 Alexander Malmberg <alexander@malmberg.org>
 
 #include <AppKit/NSColor.h>
 #include <AppKit/DPSOperators.h>
-#include <AppKit/GSDisplayServer.h>
+#include <GNUstepGUI/GSDisplayServer.h>
+
+
+@interface NSColor (Private)
++ (NSColor*) colorFromString: (NSString*)string;
+@end
+
 
 
 @implementation Clock
