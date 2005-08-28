@@ -1,0 +1,26 @@
+{
+    PPCConfig = {
+	key_change_cd_0 = none;
+	key_compose_dialog = F11;
+	key_toggle_full_screen = F10;
+	key_toggle_mouse_grab = F12;
+	nvram_file = nvram;
+	pci_3c90x_installed = 0;
+	pci_3c90x_mac = "de:ad:ca:fe:12:34";
+	pci_ide0_master_image = "/home/heron/pearpc/macosx-6gb.img";
+	pci_ide0_master_installed = 1;
+	pci_ide0_master_type = hd;
+	pci_ide0_slave_image = "/home/heron/ISOImages/macosx-10.4-disk1.iso";
+	pci_ide0_slave_installed = 0;
+	pci_ide0_slave_type = cdrom;
+	pci_rtl8139_installed = 0;
+	pci_rtl8139_mac = "de:ad:ca:fe:12:35";
+	pci_usb_installed = 1;
+	ppc_start_full_screen = 0;
+	ppc_start_resolution = 1280x1024x15;
+	prom_bootmethod = auto;
+	prom_driver_graphic = "/home/heron/pearpc/video.x";
+	prom_env_bootargs = "";
+	redraw_interval_msec = 100;
+    };
+}

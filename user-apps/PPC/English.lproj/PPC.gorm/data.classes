@@ -1,0 +1,55 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "showOutput:",
+	    "revert:",
+	    "setMasterPath:",
+	    "setPPCUserHome:",
+	    "setPathToPPC:",
+	    "setSlavePath:",
+	    "startEmulator:"
+	);
+	Super = NSObject;
+    };
+    PPCController = {
+	Actions = (
+	    "setSlavePath:",
+	    "ok:",
+	    "revert:",
+	    "setMasterPath:",
+	    "showOutput:",
+	    "setPPCUserHome:",
+	    "setPathToPPC:",
+	    "startEmulator:"
+	);
+	Outlets = (
+	    activeMaster,
+	    activeSlave,
+	    bootArgs,
+	    bootMethod,
+	    bpp,
+	    fullScreen,
+	    keyCodeMatrix,
+	    networkMatrix,
+	    panel,
+	    okButton,
+	    pathMaster,
+	    pathSlave,
+	    redrawInterval,
+	    revertButton,
+	    setMaster,
+	    setSlave,
+	    typeMaster,
+	    typeSlave,
+	    usbEnabled,
+	    xres,
+	    yres,
+	    setPathToPPC,
+	    setPPCUserHome,
+	    pathToPPC,
+	    ppcUserHome
+	);
+	Super = NSObject;
+    };
+}
