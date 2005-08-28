@@ -157,20 +157,20 @@ static BOOL __check_state(NSString *str)
 /*
 - (id) retain
 {
-	NSLog(@"retain Go %d",[self retainCount]);
+	NSDebugLog(@"retain Go %d",[self retainCount]);
 	return [super retain];
 }
 
 - (void) release
 {
-	NSLog(@"release Go %d",[self retainCount]);
+	NSDebugLog(@"release Go %d",[self retainCount]);
 	[super release];
 }
 */
 
 - (id) init
 {
-//	NSLog(@"init %d",[self retainCount]);
+//	NSDebugLog(@"init %d",[self retainCount]);
 	stoneClass = [Stone class];
 	turn = BlackPlayerType;
 	[self setBoardSize:19];
@@ -270,7 +270,7 @@ static BOOL __check_state(NSString *str)
 
 - (void) dealloc
 {
-	NSLog(@"Go %@ dealloc",self);
+	NSDebugLog(@"Go %@ dealloc",self);
 	[self setBoardSize:1];
 	free(_boardTable);
 	RELEASE(_players[BlackPlayerType]);
@@ -366,7 +366,7 @@ static BOOL __check_state(NSString *str)
 		[_gnugo setLaunchPath:@"gnugo"];
 		[_gnugo setArguments:[NSArray arrayWithObjects:@"--mode",@"gtp",nil]];
 		[_gnugo launch];
-		NSLog(@"launch gnugo");
+		NSDebugLog(@"launch gnugo");
 
 	}
 }
@@ -438,13 +438,13 @@ static BOOL __check_state(NSString *str)
 
 	if (__check_state([self runGTPCommand:cmdString]) == NO)
 	{
-		NSLog(@"set stone fail");
-		NSLog([self runGTPCommand:@"showboard"]);
+		NSDebugLog(@"set stone fail");
+		NSDebugLog([self runGTPCommand:@"showboard"]);
 		return;
 	}
 	else
 	{
-	//	NSLog([self runGTPCommand:@"showboard"]);
+	//	NSDebugLog([self runGTPCommand:@"showboard"]);
 	}
 
 	//timeUsed[turn] = timeUsed[turn] + [turnTime timeIntervalSinceDate:_turnBeginDate];
@@ -476,7 +476,7 @@ static BOOL __check_state(NSString *str)
 - (void) setStone:(id <Stone>) stone
 	   atLocation:(GoLocation) location
 {
-	NSLog(@"%d",[stone colorType]);
+	NSDebugLog(@"%d",[stone colorType]);
 	[self setStone:stone
 		atLocation:location
 			  date:[NSCalendarDate calendarDate]];
@@ -491,7 +491,7 @@ static BOOL __check_state(NSString *str)
 
 - (void) putStoneAtLocation:(GoLocation) location
 {
-//	NSLog(@"TURN %d",turn);
+//	NSDebugLog(@"TURN %d",turn);
 	if (location.row == 0)
 	{
 		return;
@@ -607,7 +607,7 @@ forPlayerWithColorType:(PlayerColorType) playerColorType
 {
 	if (__check_state([self runGTPCommand:[NSString stringWithFormat:@"printsgf %@",path]]) == NO)
 	{
-		NSLog(@"Cannnot execute printsgf on path %@",path);
+		NSDebugLog(@"Cannnot execute printsgf on path %@",path);
 		return NO;
 	}
 	return YES;
@@ -615,15 +615,15 @@ forPlayerWithColorType:(PlayerColorType) playerColorType
 
 - (BOOL) loadSGFFile:(NSString *)path
 {
-	NSLog(@"will load %@",path);
+	NSDebugLog(@"will load %@",path);
 	if (__check_state([self runGTPCommand:[NSString stringWithFormat:@"loadsgf %@",path]]) == NO)
 	{
-		NSLog(@"Cannnot execute loadsgf on path %@",path);
+		NSDebugLog(@"Cannnot execute loadsgf on path %@",path);
 		return NO;
 	}
 	[self _syncBoardWithGNUGo];
 
-	NSLog(@"success");
+	NSDebugLog(@"success");
 	return YES;
 }
 
