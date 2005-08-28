@@ -235,13 +235,13 @@
 {
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int           elementIndex;
+    id            currEl;
 
     elemEnum = [remoteView selectedRowEnumerator];
 
-    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [remoteTableData elementAtIndex:elementIndex];
+        fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
         NSLog(@"should download: %@", [fileEl filename]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
@@ -251,13 +251,13 @@
 {
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int           elementIndex;
+    id            currEl;
 
     elemEnum = [localView selectedRowEnumerator];
 
-    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [localTableData elementAtIndex:elementIndex];
+        fileEl = [localTableData elementAtIndex:[currEl intValue]];
         [ftp storeFile:fileEl from:local beingAt:0];
     }
 }
@@ -266,13 +266,13 @@
 {
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int           elementIndex;
+    id            currEl;
 
     elemEnum = [localView selectedRowEnumerator];
-
-    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    
+    while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [localTableData elementAtIndex:elementIndex];
+        fileEl = [localTableData elementAtIndex:[currEl intValue]];
         [local deleteFile:fileEl beingAt:0];
     }
 }
@@ -281,13 +281,13 @@
 {
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
-    int           elementIndex;
+    id            currEl;    
 
     elemEnum = [remoteView selectedRowEnumerator];
 
-    while ((elementIndex = [[elemEnum nextObject] intValue]))
+    while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [remoteTableData elementAtIndex:elementIndex];
+        fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
         [ftp deleteFile:fileEl beingAt:0];
     }
 }
