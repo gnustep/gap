@@ -126,7 +126,7 @@
 
 - (void) dealloc
 {
-	NSLog(@"dealloc board %@ %p",self,liTimer);
+	NSDebugLog(@"dealloc board %@ %p",self,liTimer);
 	[liTimer invalidate];
 	liTimer = nil;
 	__lastStone = nil;
@@ -138,7 +138,7 @@
 	DESTROY(_shadow_stone);
 
 	[super dealloc];
-	NSLog(@"done deboard");
+	NSDebugLog(@"done deboard");
 	fprintf(stderr,"done %p\n",self);
 }
 
@@ -152,7 +152,7 @@
 {
 	NSDictionary *dict = [notification userInfo];
 	id <Stone> aStone;
-	NSLog(@"here");
+	NSDebugLog(@"here");
 
 	[self setNeedsDisplay:YES];
 

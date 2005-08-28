@@ -205,7 +205,7 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 		return RETAIN(cache);
 	}
 
-//	NSLog(@"generate %p cache for %@ with radius %g",self ,color == BlackStone?@"black":@"white", radius);
+//	NSDebugLog(@"generate %p cache for %@ with radius %g",self ,color == BlackStone?@"black":@"white", radius);
 
 	_stoneColor = playerColorType;
 	[self initWithSize:__image_size_for_radius(radius)];

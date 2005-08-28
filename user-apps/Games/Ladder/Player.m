@@ -52,7 +52,7 @@ static NSMutableDictionary *__playerInfo;
 withStoneOfColorType:(PlayerColorType)colorType
 		  atLocation:(GoLocation)location
 {
-	NSLog(@"%@ play",self);
+	NSDebugLog(@"%@ play",self);
 	[go putStoneAtLocation:location];
 	[go turnBegin:nil];
 }

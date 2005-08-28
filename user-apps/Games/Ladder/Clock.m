@@ -305,9 +305,9 @@ static double wrap_time(double time)
 /*
 - (void)mouseDragged:(NSEvent *)event
 {
-//	NSLog(@"%@", [self target]);
+//	NSDebugLog(@"%@", [self target]);
 
-//	NSLog(@"down %g", atan(p.y/p.x)/(2 * M_PI) * 360);
+//	NSDebugLog(@"down %g", atan(p.y/p.x)/(2 * M_PI) * 360);
 
 	[self setNeedsDisplay:YES];
 
@@ -389,7 +389,7 @@ static double wrap_time(double time)
 
 		[_cacheFrame unlockFocus];
 
-		NSLog(@"create frame cache");
+		NSDebugLog(@"create frame cache");
 	}
 
 	if (_cacheMark == nil)
@@ -492,7 +492,7 @@ static double wrap_time(double time)
 		}
 
 		[_cacheMark unlockFocus];
-		NSLog(@"create mark cache");
+		NSDebugLog(@"create mark cache");
 	}
 
 	[_cacheFrame compositeToPoint:NSZeroPoint

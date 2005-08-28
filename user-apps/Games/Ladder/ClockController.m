@@ -49,7 +49,7 @@
 @implementation NSCell (Priv)
 - (id) obj
 {
-	NSLog(@"%d valid",_cell.has_valid_object_value);
+	NSDebugLog(@"%d valid",_cell.has_valid_object_value);
 	return _contents;
 }
 @end
@@ -111,7 +111,7 @@
 		/* check if game has begun */
 		if ([_game turnBeginDate] != nil)
 		{
-			//NSLog(@"launch");
+			//NSDebugLog(@"launch");
 
 			timer =  [NSTimer scheduledTimerWithTimeInterval:1.0
 													  target:self
@@ -121,7 +121,7 @@
 		}
 		else
 		{
-			//NSLog(@"begin date nil");
+			//NSDebugLog(@"begin date nil");
 		}
 
 		[self _adjustClockToGame];
@@ -168,16 +168,16 @@
 	cell = AUTORELEASE([[NSButtonCell alloc] init]);
 
 	[cell setFormatter:formatter];
-	NSLog(@"%@ f", [cell formatter]);
-	NSLog(@"%@ %@<",objv,[cell obj]);
+	NSDebugLog(@"%@ f", [cell formatter]);
+	NSDebugLog(@"%@ %@<",objv,[cell obj]);
 	[cell setObjectValue:objv];
-	NSLog(@"%@ %@<",objv,[cell obj]);
+	NSDebugLog(@"%@ %@<",objv,[cell obj]);
 
 	[cells_array addObject:cell];
 	*/
 
 
-//	NSLog([formatter stringForObjectValue:[NSCalendarDate dateWithTimeIntervalSinceReferenceDate:30 * 60]]);
+//	NSDebugLog([formatter stringForObjectValue:[NSCalendarDate dateWithTimeIntervalSinceReferenceDate:30 * 60]]);
 
 	[[blackClock window] setFrameAutosaveName:@"ClockPanel"];
 	
@@ -222,14 +222,14 @@
 	}
 	else
 	{
-		NSLog(@"looks like a bug");
+		NSDebugLog(@"looks like a bug");
 	}
 }
 
 
 - (void) checkStartGame:(NSNotification *)notification
 {
-	//NSLog(@"check should begin %p",_game);
+	//NSDebugLog(@"check should begin %p",_game);
 	if ([notification object] == _game)
 	{
 		[self checkGame];
@@ -243,7 +243,7 @@
 
 - (void) setGame:(id <GameTurn>)game
 {
-	//NSLog(@"%p %p set",game,_game);
+	//NSDebugLog(@"%p %p set",game,_game);
 	if (_game == game)
 	{
 		return;

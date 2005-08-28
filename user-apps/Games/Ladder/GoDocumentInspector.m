@@ -126,7 +126,7 @@
 		/*
 		Player *player = [_document playerForColorType:BlackPlayerType];
 		[blackPlayerButton setImage:[[player info] objectForKey:@"Image"]];
-		NSLog(@"info %@",[player info]);
+		NSDebugLog(@"info %@",[player info]);
 		player = [_document playerForColorType:WhitePlayerType];
 		[whitePlayerButton setImage:[[player info] objectForKey:@"Image"]];
 		*/
@@ -199,7 +199,7 @@
 
 - (void) setPlayer: (id)sender
 {
-	NSLog(@"set player");
+	NSDebugLog(@"set player");
 	/*
 	[[NSApp delegate] orderFrontPlayerPanel:sender];
 	id playerController = [[NSApp delegate] playerController];
@@ -238,7 +238,7 @@
 
 - (void) revert: (id)sender
 {
-	NSLog(@"revert");
+	NSDebugLog(@"revert");
 }
 
 - (void) awakeFromNib

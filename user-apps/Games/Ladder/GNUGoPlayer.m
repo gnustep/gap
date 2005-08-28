@@ -59,7 +59,7 @@ static GoLocation __go_location_for_string(NSString *str)
 		}
 	}
 	str = [str substringWithRange:NSMakeRange(2,[str length]-4)];
-	NSLog(@"play %@",str);
+	NSDebugLog(@"play %@",str);
 	[self playGo:currentGo
 		withStoneOfColorType:[currentGo turn]
 				  atLocation:__go_location_for_string(str)];
