@@ -1294,9 +1294,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 - (void)drawRect:(NSRect)rect
 {
     int          i;
+    NSRect       frameRect;
     NSBezierPath *bzp;
 
-    [NSGraphicsContext saveGraphicsState];
+    frameRect = [self frame];
     
     [[NSColor whiteColor] set];
     NSRectFill(rect);
@@ -1305,16 +1306,16 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     bzp = [NSBezierPath bezierPath];
     [bzp moveToPoint:NSMakePoint(0, zmdRect.origin.y)];
+    [bzp lineToPoint:NSMakePoint(frameRect.size.width, zmdRect.origin.y)];
     [bzp lineToPoint:NSMakePoint(rect.size.width, zmdRect.origin.y)];
     [bzp moveToPoint:NSMakePoint(0, zmdRect.origin.y + zmdRect.size.height)];
-    [bzp lineToPoint:NSMakePoint(rect.size.width, zmdRect.origin.y + zmdRect.size.height)];
+    [bzp lineToPoint:NSMakePoint(frameRect.size.width, zmdRect.origin.y + zmdRect.size.height)];
     [bzp moveToPoint:NSMakePoint(zmdRect.origin.x, 0)];
-    [bzp lineToPoint:NSMakePoint(zmdRect.origin.x, rect.size.height)];
+    [bzp lineToPoint:NSMakePoint(zmdRect.origin.x, frameRect.size.height)];
     [bzp moveToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, 0)];
-    [bzp lineToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, rect.size.height)];
+    [bzp lineToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, frameRect.size.height)];
     [bzp stroke];
 
-    [NSGraphicsContext restoreGraphicsState];
 
     for(i = 0; i < [objects count]; i++)
         [[objects objectAtIndex: i] Draw];
