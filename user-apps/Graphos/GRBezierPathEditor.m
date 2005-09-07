@@ -246,6 +246,8 @@ static double k = 0.025;
     return dict;
 }
 
+// FIXME probably useless or should be rewritten non-PS anyway
+/*
 - (NSString *)psDescription
 {
     NSString *pss;
@@ -280,6 +282,7 @@ static double k = 0.025;
 
     return pss;
 }
+*/
 
 - (void)dealloc
 {
@@ -396,7 +399,7 @@ static double k = 0.025;
     int i, pcount, index;
     double y, s, ax, ay;
 
-    printf("%s\n", [[self psDescription] cString]);
+//    printf("%s\n", [[self psDescription] cString]);
     return;
     // #### FIXME what the crap is this? we always return... the rest of the method is useless!!!
     pcount = 0;

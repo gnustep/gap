@@ -39,7 +39,7 @@ typedef struct {
 - (id)duplicate;
 
 - (NSDictionary *)objectDescription;
-- (NSString *)psDescription;
+//- (NSString *)psDescription;
 
 - (void)addControlAtPoint:(NSPoint)aPoint;
 - (void)addLineToPoint:(NSPoint)aPoint;
