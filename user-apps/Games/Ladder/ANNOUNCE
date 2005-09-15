@@ -1,0 +1,13 @@
+Ladder
+===========
+By Banlu Kemiyatorn.
+
+This application is a Go game.  It requires that you have a fairly recent
+version of the gnugo program as this is what is used as the engine to allow
+the program to play.
+
+The program is available for download at:
+
+http://www.nongnu.org/gap
+
+GJC
