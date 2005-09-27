@@ -23,7 +23,7 @@
 	batmon.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-09-28 00:22:52 +0200";
+    LAST_EDITING = "2005-09-28 00:30:52 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -57,7 +57,7 @@
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "";
     PROJECT_NAME = batmon;
-    PROJECT_RELEASE = 0.1;
+    PROJECT_RELEASE = 0.2;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "";
