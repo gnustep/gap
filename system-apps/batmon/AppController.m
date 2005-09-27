@@ -4,6 +4,7 @@
    Copyright (C) 2005 Riccardo Mottola
 
    Author: Riccardo Mottola
+   FreeBSD support by Chris B. Vetter
 
    Created: 2005-06-25 21:06:19 +0200 by multix
    
@@ -26,6 +27,13 @@
 
 #include <math.h>
 #import "AppController.h"
+
+#if defined(freebsd)
+#  include <fcntl.h>
+#  include <sys/ioctl.h>
+#  include <dev/acpica/acpiio.h>
+#  define ACPIDEV	"/dev/acpi"
+#endif
 
 @implementation AppController
 
@@ -106,6 +114,63 @@
 
 - (void)getInfo
 {
+#if defined(freebsd)
+  
+  union acpi_battery_ioctl_arg
+    battio;
+  int
+    acpifd;
+  BOOL
+    charged = YES;
+  
+  battio.unit = 0;
+  
+  acpifd = open(ACPIDEV, O_RDWR);
+  if (acpifd == -1) acpifd = open(ACPIDEV, O_RDONLY);
+  if (acpifd == -1) return;
+  if( -1 == ioctl(acpifd, ACPIIO_CMBAT_GET_BIF, &battio) ) return;
+  close(acpifd);
+  
+  desCap = (float)battio.bif.dcap / 1000;
+  lastCap = (float)battio.bif.lfcap / 1000;
+  currCap = (float)battio.bst.cap / 1000;
+  
+  volts = (float)battio.bst.volt / 1000;
+  watts = (float)battio.bst.rate / 1000;
+  amps = watts / volts;
+  
+  batteryType = @"Charged";
+  if( ACPI_BATT_STAT_NOT_PRESENT != battio.bst.state )
+  {
+    if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
+      batteryType = @"CRITICAL";
+    if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
+      batteryType = @"Discharging";
+    if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
+      batteryType = @"Charging";
+  }
+  
+  chargeState = [NSString stringWithString: batteryType];
+  batteryType = [NSString stringWithFormat: @"%s", battio.bif.type];
+  
+  if( [chargeState isEqualToString: @"Charged"] )
+  {
+    chargePercent = 100;
+    timeRemaining = 0;
+  }
+  else if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
+  {
+    timeRemaining = (lastCap-currCap) / watts;
+    chargePercent = currCap/lastCap*100;
+  }
+  else
+  {
+    timeRemaining = currCap / watts;
+    chargePercent = currCap/lastCap*100;
+  }
+  
+#elif defined(linux)
+
     FILE *stateFile;
     FILE *infoFile;
     char line[128];
@@ -208,6 +273,8 @@
         timeRemaining = currCap / watts;
         chargePercent = currCap/lastCap*100;
     }
+
+#endif /* OS */
 }
 
 - (IBAction)updateInfo:(id)sender
