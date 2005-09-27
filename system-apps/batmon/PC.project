@@ -23,7 +23,7 @@
 	batmon.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-09-26 01:13:34 +0200";
+    LAST_EDITING = "2005-09-28 00:22:52 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"

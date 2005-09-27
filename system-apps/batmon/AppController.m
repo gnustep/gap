@@ -72,8 +72,17 @@
 
 - (void)awakeFromNib
 {
-  [[NSApp mainMenu] setTitle:@"batmon"];
+    NSTimer *timer;
+
+    [[NSApp mainMenu] setTitle:@"batmon"];
     [self updateInfo:nil];
+  
+    if (YES)
+    {
+        NSLog(@"app initialized, setting timer");
+        timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
+        [timer fire];
+    }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
