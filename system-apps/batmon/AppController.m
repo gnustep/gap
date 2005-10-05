@@ -286,6 +286,39 @@
 #endif /* OS */
 }
 
+#define HEIGHT 47
+#define WIDTH  20
+- (void)drawImageRep
+{
+    NSBezierPath *bzp;
+
+    [[NSColor blackColor] set];
+    bzp = [NSBezierPath bezierPath];
+    [bzp appendBezierPathWithRect: NSMakeRect(0, 1, WIDTH, HEIGHT)];
+    [bzp stroke];
+    
+    bzp = [NSBezierPath bezierPath];
+    [[NSColor whiteColor] set];
+    [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, (chargePercent/100) * HEIGHT -2)];
+    [bzp stroke];  
+}
+
+- (void)drawIcon
+{
+    NSImageRep *rep;
+    NSImage    *icon;
+    
+    icon = [[NSImage alloc] initWithSize: NSMakeSize(48, 48)];
+    rep = [[NSCustomImageRep alloc]
+            initWithDrawSelector: @selector(drawImageRep)
+            delegate:self];
+    [rep setSize: NSMakeSize(48, 48)];
+    [icon addRepresentation: rep];
+    [NSApp setApplicationIconImage:icon];
+//    [icon release];
+}
+
+
 - (IBAction)updateInfo:(id)sender
 {
     float lifeVal;
@@ -312,7 +345,10 @@
     [designCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", desCap]];
     [lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Wh", lastCap]];
     [battType setStringValue:batteryType];
+
+    [self drawIcon];
 }
+
 
 - (IBAction)showBattInfo:(id)sender
 {
