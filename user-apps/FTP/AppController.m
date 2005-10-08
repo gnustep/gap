@@ -95,6 +95,7 @@
     local = [[localclient alloc] init];
     [local setWorkingDir:[local homeDir]];
     dirList = [local dirContents];
+    [progBar setDoubleValue:0.0];  // reset the progress bar
     
     /* we create a data source and set the tableviews */
     localTableData = [[fileTable alloc] init];
