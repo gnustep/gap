@@ -47,6 +47,13 @@
 #define MAX_CONTROL_BUFF 2048
 #define MAX_DATA_BUFF 2048
 
+#if defined(__linux__)
+#define socklentype socklen_t
+#else
+#define socklentype int
+#endif
+
+
 @implementation ftpclient
 
 /* initializer */
@@ -586,7 +593,7 @@
 {
     struct hostent      *hostentPtr;
     char                *tempStr;
-    int                 addrLen; /* socklen_t on some systems? */
+    socklentype         addrLen; /* socklen_t on some systems? */
     NSMutableArray      *reply;
 
     NSLog(@"connect to %s : %d", server, port);
@@ -704,8 +711,8 @@
 /* initialize the data connection */
 - (int)initDataConn
 {
-    int addrLen; /* socklen_t on some systems ? */
-    int socketReuse;
+    socklentype addrLen; /* socklen_t on some systems ? */
+    int         socketReuse;
     
     socketReuse = YES;
 
@@ -869,7 +876,7 @@
 - (int)initDataStream
 {
     struct sockaddr from;
-    int             fromLen;
+    socklentype     fromLen;
     
     fromLen = sizeof(from);
     if (usesPassive)

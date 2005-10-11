@@ -261,7 +261,7 @@
             isDir = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
-            [[NSScanner scannerWithString: [splitLine objectAtIndex:4]] scanLongLong:&size];
+            [[NSScanner scannerWithString: [splitLine objectAtIndex:4]] scanLongLong:(long long*)&size];
             filename = [[splitLine objectAtIndex:8] retain];
         } else if (foundOneBeforeMonth && elementsFound == 8)
         {
@@ -269,7 +269,7 @@
             isDir = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
-            [[NSScanner scannerWithString: [splitLine objectAtIndex:3]] scanLongLong:&size];
+            [[NSScanner scannerWithString: [splitLine objectAtIndex:3]] scanLongLong:(long long*)&size];
             filename = [[splitLine objectAtIndex:7] retain];
         } else
             return nil;
