@@ -1,0 +1,32 @@
+STEPULATOR
+
+An RPN Calculator
+
+currently for MacOS X and GNUstep!
+(a port for Motif and C++ is under way, called "moxrpn")
+
+By Riccardo Mottola
+Email: rmottola@users.sourceforge.net
+
+
+TODO & KNOWN BUGS
+- x! for fractional number is not implemented
+- GNUstep version does not have all keyboard bindings, waiting for a better Gorm & GNUstep!
+
+HISTORY
+
+-- version 1.1 --
+- fixed bug in Percent calculation
+- unified gnustep and macosx sources
+- changed license to GPL
+
+-- version 1.0 --
+- name changed to Stepulator
+- "backspace" (<- key) now works
+
+-- version 0.9 beta 2 --
+- change sign in exponent implemented
+
+-- version 0.9 beta ---
+11 July 2003
+- First release to the public
