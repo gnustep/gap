@@ -1,0 +1,54 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                butt0 = id; 
+                butt1 = id; 
+                butt2 = id; 
+                butt3 = id; 
+                butt4 = id; 
+                butt5 = id; 
+                butt6 = id; 
+                butt7 = id; 
+                butt8 = id; 
+                butt9 = id; 
+                buttACos = id; 
+                buttASin = id; 
+                buttATan = id; 
+                buttBksp = id; 
+                buttCanc = id; 
+                buttChangeSign = id; 
+                buttCos = id; 
+                buttDivide = id; 
+                buttDot = id; 
+                buttE = id; 
+                buttEnter = id; 
+                buttExp = id; 
+                buttExp10 = id; 
+                buttFact = id; 
+                buttInv = id; 
+                buttLn = id; 
+                buttLog = id; 
+                buttMinus = id; 
+                buttMultiply = id; 
+                buttPercent = id; 
+                buttPi = id; 
+                buttPlus = id; 
+                buttRot = id; 
+                buttSin = id; 
+                buttSqr = id; 
+                buttSqrt = id; 
+                buttSwapXY = id; 
+                buttTan = id; 
+                buttXPowY = id; 
+                buttXRootY = id; 
+            }; 
+            CLASS = CalcController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {displayField = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
