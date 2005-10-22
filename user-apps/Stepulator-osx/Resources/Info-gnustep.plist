@@ -6,11 +6,12 @@
 	"Riccardo Mottola (rmottola@users.sf.net)"
     );
     Copyright = "Released under";
-    CopyrightDescription = BSD;
+    CopyrightDescription = GPL;
     FullVersionID = 1.1;
     NOTE = "Automatically generated!";
     NSExecutable = Stepulator;
     NSMainNibFile = Stepulator.gorm;
     NSPrincipalClass = NSApplication;
     NSRole = Application;
+    URL = "http://gap.nongnu.org";
 }

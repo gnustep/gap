@@ -30,7 +30,7 @@
 	Stepulator.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-10-12 00:57:18 +0200";
+    LAST_EDITING = "2005-10-22 12:57:48 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -49,7 +49,7 @@
     OTHER_SOURCES = (
     );
     PC_WINDOWS = {
-	ProjectWindow = "130 124 710 539 0 0  960 768 ";
+	ProjectWindow = "132 122 710 539 0 0  960 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
@@ -57,7 +57,7 @@
 	"Riccardo Mottola (rmottola@users.sf.net)"
     );
     PROJECT_COPYRIGHT = "Released under";
-    PROJECT_COPYRIGHT_DESC = BSD;
+    PROJECT_COPYRIGHT_DESC = GPL;
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "Scientific RPN Calculator";
     PROJECT_DOCUMENTTYPES = (
@@ -69,7 +69,7 @@
     PROJECT_SOURCE = "%{gs_name}-%{gs_version}.tar.gz";
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
-    PROJECT_URL = "";
+    PROJECT_URL = "http://gap.nongnu.org";
     PROJECT_VERSION = 1.0;
     SEARCH_HEADER_DIRS = (
     );
