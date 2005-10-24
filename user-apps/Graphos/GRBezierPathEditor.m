@@ -148,7 +148,7 @@ static double k = 0.025;
 {
     GRBezierPathEditor *bzedit;
     GRBezierControlPoint *cp;
-    DBezierHandle handle;
+    GRBezierHandle handle;
     int i;
 
     bzedit = [[[GRBezierPathEditor alloc]
@@ -309,7 +309,7 @@ static double k = 0.025;
 - (void)addLineToPoint:(NSPoint)aPoint
 {
     GRBezierControlPoint *mtopoint, *prevpoint;
-    DBezierHandle handle;
+    GRBezierHandle handle;
 
     [self addControlAtPoint: aPoint];
     mtopoint = [controlPoints objectAtIndex: 0];
@@ -338,7 +338,7 @@ static double k = 0.025;
 - (void)addCurveWithBezierHandlePosition:(NSPoint)handlePos
 {
     GRBezierControlPoint *mtopoint;
-    DBezierHandle handle1, handle2;
+    GRBezierHandle handle1, handle2;
     NSBezierPathElement type;
     NSPoint pts[3];
 
@@ -393,7 +393,7 @@ static double k = 0.025;
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
 {
     GRBezierControlPoint *ncp, *prevcp, *nextcp, *cp = nil;
-    DBezierHandle handle1, handle2;
+    GRBezierHandle handle1, handle2;
     hitData hitdata;
     NSPoint pp[81], newpp[7];
     int i, pcount, index;
@@ -513,7 +513,7 @@ static double k = 0.025;
 - (void)remakePath
 {
     GRBezierControlPoint *cp, *prevcp, *mtopoint;
-    DBezierHandle handle1, handle2;
+    GRBezierHandle handle1, handle2;
     int i;
 
     [myPath removeAllPoints];
@@ -621,7 +621,7 @@ static double k = 0.025;
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p
 {
     GRBezierControlPoint *cp, *pntonpnt;
-    DBezierHandle handle;
+    GRBezierHandle handle;
     BOOL found = NO;
     NSEvent *event;
     NSPoint op, pp, c;
@@ -683,7 +683,7 @@ static double k = 0.025;
 - (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
 {
     GRBezierControlPoint *cp, *pntonpnt;
-    DBezierHandle handle;
+    GRBezierHandle handle;
     BOOL found = NO;
     int i;
 
@@ -720,7 +720,7 @@ static double k = 0.025;
 {
     hitData hitdata;
     GRBezierControlPoint *cp, *prevcp;
-    DBezierHandle handle1, handle2;
+    GRBezierHandle handle1, handle2;
     NSPoint p, bp;
     NSRect r;
     double t;
@@ -801,7 +801,7 @@ static double k = 0.025;
 {
     int i;
     GRBezierControlPoint *cp;
-    DBezierHandle handle;
+    GRBezierHandle handle;
 
     for(i = 0; i < [controlPoints count]; i++)
     {
@@ -1059,7 +1059,7 @@ static double k = 0.025;
 {
     GRBezierControlPoint *cp, *ponpoint = nil;
     NSRect r;
-    DBezierHandle bzhandle;
+    GRBezierHandle bzhandle;
     NSColor *color;
     int i;
     NSBezierPath *bzp;
