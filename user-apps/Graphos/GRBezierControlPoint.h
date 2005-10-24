@@ -8,14 +8,14 @@ typedef struct {
     NSRect centerRect;
     NSPoint secondHandle;
     NSRect secondHandleRect;
-} DBezierHandle;
+} GRBezierHandle;
 
 @class GRBezierPathEditor;
 
 @interface GRBezierControlPoint : NSObject
 {
     GRBezierPathEditor *myEditor;
-    DBezierHandle bzHandle;
+    GRBezierHandle bzHandle;
     BOOL isActiveHandle;
     BOOL isSelect;
     float zmFactor;
@@ -31,7 +31,7 @@ typedef struct {
 
 - (void)setZoomFactor:(float)f;
 
-- (DBezierHandle)bzHandle;
+- (GRBezierHandle)bzHandle;
 - (NSPoint)center;
 - (NSRect)centerRect;
 

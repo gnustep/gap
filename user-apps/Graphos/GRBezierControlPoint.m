@@ -124,7 +124,7 @@
     zmFactor = f;
 }
 
-- (DBezierHandle)bzHandle
+- (GRBezierHandle)bzHandle
 {
     return bzHandle;
 }
