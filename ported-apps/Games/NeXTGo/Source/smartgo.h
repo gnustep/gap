@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
 
-/* $Id: smartgo.h,v 1.1 2003/01/12 04:01:52 gcasa Exp $ */
+/* $Id: smartgo.h,v 1.2 2005/11/05 20:28:08 gcasa Exp $ */
 
 /*
  * $Log: smartgo.h,v $
+ * Revision 1.2  2005/11/05 20:28:08  gcasa
+ * Updated declarations.
+ *
  * Revision 1.1  2003/01/12 04:01:52  gcasa
  * Committing the entire GNU Go and NeXT Go application to the repository.
  * See COPYING file for GNU License.
@@ -122,7 +125,7 @@ typedef struct _node {
 extern node* parse_tree(char* inputBuffer);
 
 /*   Routines from smartgoeval.c needed by other routines.   */
-extern void evaluateNode(char *c, unsigned char b[][]);
+extern void evaluateNode(char *c, unsigned char b[19][19]);
 
 
 /*   Routines from smartgotree.c needed by other routines.  */
@@ -134,7 +137,7 @@ extern node* findLast0(node* currentNode);
 extern node* forwardOneVariant(node* currentNode);
 extern node* backOneVariant(node* currentNode);
 extern void clearNodeFlags(node* currentNode);
-extern int evaluateSteps(node* currentNode, node* targetNode, unsigned char b[][]);
+extern int evaluateSteps(node* currentNode, node* targetNode, unsigned char b[19][19]);
 extern void buildToNode(node* targetNode);
 extern node* stepForward(node* currentNode);
 extern node* stepBackward(node* currentNode);
