@@ -36,6 +36,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 # The application to be compiled
 APP_NAME = NeXTGo
+VERSION = 3.0
+PACKAGE_NAME = NeXTGo
 
 # Set the principal class
 NeXTGo_PRINCIPAL_CLASS = GoApp
