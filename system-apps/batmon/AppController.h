@@ -44,7 +44,12 @@
     IBOutlet NSTextField         *designCap;
     IBOutlet NSTextField         *battType;
     IBOutlet NSTextField         *lastFullCharge;
-    
+
+#if defined (linux)
+    char     batteryStatePath0[1024];
+    char     batteryInfoPath0[1024];
+#endif
+
     float    volts;
     float    amps;
     float    watts;
@@ -71,9 +76,12 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotif;
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName;
 
+- (void)getInfo;
+
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)updateInfo:(id)sender;
 - (IBAction)showBattInfo:(id)sender;
 
+- (void)readLine :(FILE *)f :(char *)l;
 @end
 
