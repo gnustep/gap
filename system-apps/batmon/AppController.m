@@ -41,6 +41,7 @@
 {
   NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
 
+
   /*
    * Register your app's defaults here by adding objects to the
    * dictionary, eg
@@ -51,12 +52,66 @@
   
   [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
   [[NSUserDefaults standardUserDefaults] synchronize];
+
+
 }
 
 - (id)init
 {
+#if defined(linux)
+  NSFileManager       *fm;
+  NSArray             *dirNames;
+  NSEnumerator        *en;
+  NSString            *dirName;
+  BOOL                done;
+  FILE                *stateFile;
+  char                alarmFilePath[1024];
+  char                presentStr[16];
+  char                line[128];
+#endif /* linux */
+
   if ((self = [super init]))
     {
+#if defined(linux)
+  /* look for a battery */
+  NSLog(@"look for a present battery");
+  fm = [NSFileManager defaultManager];
+  dirNames = [fm directoryContentsAtPath:@"/proc/acpi/battery"];
+  if (dirNames != nil)
+  {
+     done = NO;
+     en = [dirNames objectEnumerator];
+     while (done == NO)
+     {
+        dirName = [en nextObject];
+        if (dirName != nil)
+        {
+           /* scan for the first present battery */
+           dirName = [[NSString stringWithString:@"/proc/acpi/battery"] stringByAppendingPathComponent:dirName];
+           [dirName getCString:batteryStatePath0];
+           strcat(batteryStatePath0, "/state");
+           NSLog(@"checking: %s", batteryStatePath0);
+           stateFile = fopen(batteryStatePath0, "r");
+           if (stateFile != NULL)
+           {
+              [self readLine :stateFile :line];
+              sscanf(line, "present: %s", presentStr);
+              if (!strcmp(presentStr, "yes"))
+              {
+                 done = YES;
+                 NSLog(@"found it!: %@", dirName);
+                 [dirName getCString:batteryInfoPath0];
+                 strcat(batteryInfoPath0, "/info");
+              }
+              fclose(stateFile);
+           }           
+        } else
+        {
+           done = YES;
+        }
+     }
+  }
+#endif /* linux */
     }
   return self;
 }
@@ -180,6 +235,8 @@
   
 #elif defined(linux)
 
+    char infoFilePath[1024];
+    char stateFilePath[1024];
     FILE *stateFile;
     FILE *infoFile;
     char line[128];
@@ -201,7 +258,7 @@
 
     
 
-    stateFile = fopen("/proc/acpi/battery/BAT0/state", "r");
+    stateFile = fopen(batteryStatePath0, "r");
     assert(stateFile != NULL);
 
     [self readLine :stateFile :line];
@@ -222,7 +279,7 @@
     capacityVal = atoi(capacityStr);
     voltageVal = atoi(voltageStr);
 
-    infoFile = fopen("/proc/acpi/battery/BAT0/info", "r");
+    infoFile = fopen(batteryInfoPath0, "r");
     assert(infoFile != NULL);
 
     [self readLine :infoFile :line];
