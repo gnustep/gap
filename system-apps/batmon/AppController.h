@@ -56,6 +56,7 @@
     float    desCap;
     float    lastCap;
     float    currCap;
+    float    warnCap;
     float    chargePercent;
     float    timeRemaining;
     int      hours;

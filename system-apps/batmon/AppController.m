@@ -65,7 +65,6 @@
   NSString            *dirName;
   BOOL                done;
   FILE                *stateFile;
-  char                alarmFilePath[1024];
   char                presentStr[16];
   char                line[128];
 #endif /* linux */
@@ -250,11 +249,13 @@
     int  rateVal;
     int  capacityVal;
     int  voltageVal;
+    int  warnVal;
 
     char present2Str[16];
     char desCapStr[16];
     char lastCapStr[16];
     char batTypeStr[16];
+    char warnCapStr[16];
 
     
 
@@ -288,9 +289,10 @@
     sscanf(line, "design capacity: %s", desCapStr);
     [self readLine :infoFile :line];
     sscanf(line, "last full capacity: %s", lastCapStr);
-    [self readLine :infoFile :line];
-    [self readLine :infoFile :line];
-    [self readLine :infoFile :line];    
+    [self readLine :infoFile :line]; // battery technology
+    [self readLine :infoFile :line]; // design voltage
+    [self readLine :infoFile :line]; //design capacity warning
+    sscanf(line, "design capacity warning: %s", warnCapStr);
     [self readLine :infoFile :line];    
     [self readLine :infoFile :line];
     [self readLine :infoFile :line];
@@ -310,6 +312,7 @@
     desCap = (float)atoi(desCapStr)/1000;
     lastCap = (float)atoi(lastCapStr)/1000;
     currCap = capacityVal / 1000;
+    warnCap = (float)atoi(warnCapStr)/1000;
 
     if (chargeState != nil)
         [chargeState release];
@@ -355,7 +358,10 @@
     [bzp stroke];
     
     bzp = [NSBezierPath bezierPath];
-    [[NSColor whiteColor] set];
+    if (currCap < warnCap)
+       [[NSColor redColor] set];
+    else
+       [[NSColor whiteColor] set];
     [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, (chargePercent/100) * HEIGHT -2)];
     [bzp stroke];  
 }
