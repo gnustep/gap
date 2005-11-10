@@ -23,7 +23,7 @@
 	batmon.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-11-03 18:09:18 +0100";
+    LAST_EDITING = "2005-11-10 19:07:58 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -41,7 +41,7 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "164 52 698 600 0 0  960 768 ";
+	ProjectWindow = "262 101 698 600 0 0  960 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
