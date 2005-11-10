@@ -28,7 +28,7 @@
 #include <math.h>
 #import "AppController.h"
 
-#if defined(freebsd)
+#if defined(freebsd) || defined( __FreeBSD__ )
 #  include <fcntl.h>
 #  include <sys/ioctl.h>
 #  include <dev/acpica/acpiio.h>
@@ -177,7 +177,7 @@
 
 - (void)getInfo
 {
-#if defined(freebsd)
+#if defined(freebsd) || defined( __FreeBSD__ )
   
   union acpi_battery_ioctl_arg
     battio;
@@ -192,30 +192,45 @@
   if (acpifd == -1) acpifd = open(ACPIDEV, O_RDONLY);
   if (acpifd == -1) return;
   if( -1 == ioctl(acpifd, ACPIIO_CMBAT_GET_BIF, &battio) ) return;
+
+  desCap = (float)battio.bif.dcap / 1000;	// design capacity
+  lastCap = (float)battio.bif.lfcap / 1000;	// last full capacity
+
+  if( -1 == ioctl(acpifd, ACPIIO_CMBAT_GET_BST, &battio) ) return;
   close(acpifd);
-  
-  desCap = (float)battio.bif.dcap / 1000;
-  lastCap = (float)battio.bif.lfcap / 1000;
-  currCap = (float)battio.bst.cap / 1000;
-  
-  volts = (float)battio.bst.volt / 1000;
-  watts = (float)battio.bst.rate / 1000;
+
+  currCap = (float)battio.bst.cap / 1000;	// remaining capacity
+  volts = (float)battio.bst.volt / 1000;	// present voltage
+  watts = (float)battio.bst.rate / 1000;	// present rate
   amps = watts / volts;
   
-  batteryType = @"Charged";
+  batteryType = @"";
   if( ACPI_BATT_STAT_NOT_PRESENT != battio.bst.state )
   {
+    NSString *status = nil;
+
     if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
-      batteryType = @"CRITICAL";
-    if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
-      batteryType = @"Discharging";
+      batteryType = @"CRITICAL ";		// could be complementary!
+    
+    if( battio.bst.state & ACPI_BATT_STAT_MAX )
+      status = @"Charged";
     if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
-      batteryType = @"Charging";
+      status = @"Charging";
+    if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
+      status = @"Discharging";
+
+    batteryType = [NSString stringWithFormat: @"%@%@", batteryType, status];
   }
-  
+  else
+    batteryType = @"Missing";
+
   chargeState = [NSString stringWithString: batteryType];
   batteryType = [NSString stringWithFormat: @"%s", battio.bif.type];
   
+  //
+  // Note: I cannot really tell whether the calculation is correct because
+  //       my laptop's battery is kinda screwed up...
+  //
   if( [chargeState isEqualToString: @"Charged"] )
   {
     chargePercent = 100;
