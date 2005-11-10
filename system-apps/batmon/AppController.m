@@ -322,6 +322,12 @@
     fclose(infoFile);
 
     watts = (float)rateVal / 1000;
+
+    // a sanity check, a laptop won't consume 1000W
+    // necessary since sometimes ACPI returns bogus stuff
+
+    if (watts > 1000)
+        watts = 0;
     volts = (float)voltageVal / 1000;
     amps = watts / volts;
     desCap = (float)atoi(desCapStr)/1000;
@@ -333,28 +339,23 @@
         [chargeState release];
     chargeState = [[NSString stringWithCString:chStateStr] retain];
 
-    NSLog(@"state %s", presentStr);
-    NSLog(@"state %s", stateStr);
-    NSLog(@"ch state %s", chStateStr);
-    NSLog(@"rate: %s, %d", rateStr, rateVal);
-    NSLog(@"cap: %s %d", capacityStr, capacityVal);
-    NSLog(@"volt: %s %f", voltageStr, volts);
-    NSLog(@"amps: %f", amps);
-    NSLog(@"des cap: %f", desCap);
-    NSLog(@"last capg: %f", lastCap);
-    NSLog(@"time remaining: %f", timeRemaining);
-
     if (!strcmp(chStateStr, "charged"))
     {
         chargePercent = 100;
         timeRemaining = 0;
     } else if (!strcmp(chStateStr, "charging"))
     {
-        timeRemaining = (lastCap-currCap) / watts;
+        if (watts > 0)
+            timeRemaining = (lastCap-currCap) / watts;
+        else
+            timeRemaining = -1;
         chargePercent = currCap/lastCap*100;
     } else
     {
-        timeRemaining = currCap / watts;
+        if (watts > 0)
+            timeRemaining = currCap / watts;
+        else
+            timeRemaining = -1;
         chargePercent = currCap/lastCap*100;
     }
 
@@ -393,7 +394,6 @@
     [rep setSize: NSMakeSize(48, 48)];
     [icon addRepresentation: rep];
     [NSApp setApplicationIconImage:icon];
-//    [icon release];
 }
 
 
@@ -413,7 +413,10 @@
     [percent setStringValue:[NSString stringWithFormat:@"%3.1f%", chargePercent]];
     [rate setStringValue:[NSString stringWithFormat:@"%3.2f W", watts]];
     [amperage setStringValue:[NSString stringWithFormat:@"%3.2f A", amps]];
-    [timeLeft setStringValue:[NSString stringWithFormat:@"%dh %d\'", hours, mins]];
+    if (timeRemaining >= 0)
+        [timeLeft setStringValue:[NSString stringWithFormat:@"%dh %d\'", hours, mins]];
+    else
+        [timeLeft setStringValue:@"unknown"];
     [chState setStringValue:chargeState];
 
     /* info window */
