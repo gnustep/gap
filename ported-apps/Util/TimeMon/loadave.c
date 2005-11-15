@@ -1,4 +1,4 @@
-#import "loadave.h"
+#include "loadave.h"
 
 #include <stdio.h>
 
