@@ -26,6 +26,7 @@
  
 
 #import <AppKit/AppKit.h>
+#import "BatteryModel.h"
 
 @interface AppController : NSObject
 {
@@ -45,30 +46,11 @@
     IBOutlet NSTextField         *battType;
     IBOutlet NSTextField         *lastFullCharge;
 
-#if defined (linux)
-    char     batteryStatePath0[1024];
-    char     batteryInfoPath0[1024];
-#endif
 
-    float    volts;
-    float    amps;
-    float    watts;
-    float    desCap;
-    float    lastCap;
-    float    currCap;
-    float    warnCap;
-    float    chargePercent;
-    float    timeRemaining;
-    int      hours;
-    int      mins;
-    NSString *chargeState;
-    NSString *batteryType;
+    BatteryModel *batModel;
+    @private int hours;
+    @private int mins;
 }
-
-+ (void)initialize;
-
-- (id)init;
-- (void)dealloc;
 
 - (void)awakeFromNib;
 
@@ -82,7 +64,5 @@
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)updateInfo:(id)sender;
 - (IBAction)showBattInfo:(id)sender;
-
-- (void)readLine :(FILE *)f :(char *)l;
 @end
 

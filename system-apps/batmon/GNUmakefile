@@ -7,7 +7,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.2
+VERSION = 0.3
 PACKAGE_NAME = batmon
 APP_NAME = batmon
 batmon_APPLICATION_ICON = 
@@ -27,13 +27,15 @@ Resources/README
 # Header files
 #
 batmon_HEADER_FILES = \
-AppController.h
+AppController.h \
+BatteryModel.h
 
 #
 # Class files
 #
 batmon_OBJC_FILES = \
-AppController.m
+AppController.m \
+BatteryModel.m
 
 #
 # C files
