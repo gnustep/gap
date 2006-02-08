@@ -1,10 +1,8 @@
 // translated from the pswraps for GNUstep/MOSX by Gregory John Casamento
 
-#ifdef GNUSTEP
-#import <AppKit/PSOperators.h>
-#endif
-
 #import <Foundation/NSUserDefaults.h>
+#import <Foundation/NSGeometry.h>
+#import <AppKit/NSBezierPath.h>
 #import "NSColorExtensions.h"
 
 #import "TimeMonWraps.h"
@@ -12,6 +10,8 @@
 void drawArc2(double radius, double bdeg, double ddeg, double ldeg,
 	      double mdeg)
 {
+  NSBezierPath *bp = nil;
+  NSPoint point = NSMakePoint(24,24);
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSColor *idleColor = [NSColor colorFromStringRepresentation: 
 				  [defaults stringForKey: @"IdleColor"]];
@@ -21,31 +21,36 @@ void drawArc2(double radius, double bdeg, double ddeg, double ldeg,
 				  [defaults stringForKey: @"UserColor"]];
   NSColor *systemColor = [NSColor colorFromStringRepresentation: 
 				    [defaults stringForKey: @"SystemColor"]];
-  NSColor *IOWaitColor = [NSColor colorFromStringRepresentation:
+  NSColor *ioWaitColor = [NSColor colorFromStringRepresentation:
 				    [defaults stringForKey: @"IOWaitColor"]];
 
   [idleColor set];
-  PSmoveto(24,24);
-  PSarc(24,24,radius,0,360);
-  PSfill();
+  bp = [NSBezierPath bezierPath];
+  [bp moveToPoint: point];
+  [bp appendBezierPathWithArcWithCenter: point radius: radius startAngle: 0 endAngle: 360 clockwise: NO];
+  [bp fill];
 
   [systemColor set]; 
-  PSmoveto(24,24);
-  PSarcn(24,24,radius,90,bdeg);
-  PSfill();
+  bp = [NSBezierPath bezierPath];
+  [bp moveToPoint: point];
+  [bp appendBezierPathWithArcWithCenter: point radius: radius startAngle: 90 endAngle: bdeg clockwise: YES];
+  [bp fill];
 
   [userColor set];
-  PSmoveto(24,24);
-  PSarcn(24,24,radius,bdeg,ddeg);
-  PSfill();
+  bp = [NSBezierPath bezierPath];
+  [bp moveToPoint: point];
+  [bp appendBezierPathWithArcWithCenter: point radius: radius startAngle: bdeg endAngle: ddeg clockwise: YES];
+  [bp fill];
 
   [niceColor set];
-  PSmoveto(24,24);
-  PSarcn(24,24,radius,ddeg,ldeg);
-  PSfill();
+  bp = [NSBezierPath bezierPath];
+  [bp moveToPoint: point];
+  [bp appendBezierPathWithArcWithCenter: point radius: radius startAngle: ddeg endAngle: ldeg clockwise: YES];
+  [bp fill];
 
-  [IOWaitColor set];
-  PSmoveto(24,24);
-  PSarcn(24,24,radius,ldeg,mdeg);
-  PSfill();
+  [ioWaitColor set];
+  bp = [NSBezierPath bezierPath];
+  [bp moveToPoint: point];
+  [bp appendBezierPathWithArcWithCenter: point radius: radius startAngle: ldeg endAngle: mdeg clockwise: YES];
+  [bp fill];
 }

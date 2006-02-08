@@ -1,3 +1,9 @@
+2006-02-08 08:49 Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Percentages.m:
+	* TimeMonWraps.m: Changed PS code to use NSBezierPath instead, so 
+	that the code is more portable to Mac OS X.
+
 2005-11-15 12:19 Riccardo Mottola <rmottola@users.sf.net>
 	* loadave.c: changed import to include, since it is a pure C file
 

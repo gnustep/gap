@@ -39,9 +39,12 @@
 {
   int i;
   static float radii[3]={ 23.0, 17.0, 11.0};
-
-  PSsetlinewidth(1.0);
-  PSsetalpha(1.0);
+  NSPoint point = NSMakePoint(24,24);
+  NSBezierPath *bp = [NSBezierPath bezierPath];
+  NSPoint outer = NSMakePoint(47.5, 24.0);
+  NSPoint middle = NSMakePoint(41.5, 24.0);
+  NSPoint inner = NSMakePoint(35.5, 24.0);
+  NSPoint lineEnd = NSMakePoint(24.0, 48.0);
 
   for(i = 0; i < 3; i++) 
     {
@@ -54,16 +57,19 @@
 	       90 - (pcents[i][0] + pcents[i][1] + pcents[i][2] + pcents[i][3]) * 360);
     }
   
-  PSsetgray(NSBlack);
-  PSmoveto(47.5, 24.0);
-  PSarc(24.0, 24.0, 23.5, 0.0, 360.0);
-  PSmoveto(41.5, 24.0);
-  PSarc(24.0, 24.0, 17.5, 0.0, 360.0);
-  PSmoveto(35.5, 24.0);
-  PSarc(24.0, 24.0, 11.5, 0.0, 360.0);
-  PSmoveto(24.0, 24.0);
-  PSlineto(24.0, 48.0);
-  PSstroke();
+  [[NSColor blackColor] set];
+  [bp moveToPoint: outer];
+  [bp appendBezierPathWithArcWithCenter: point radius: 23.5 startAngle: 0 endAngle: 360 clockwise: NO];
+
+  [bp moveToPoint: middle];
+  [bp appendBezierPathWithArcWithCenter: point radius: 17.5 startAngle: 0 endAngle: 360 clockwise: NO];
+
+  [bp moveToPoint: inner];
+  [bp appendBezierPathWithArcWithCenter: point radius: 11.5 startAngle: 0 endAngle: 360 clockwise: NO];
+
+  [bp moveToPoint: point];
+  [bp lineToPoint: lineEnd];
+  [bp stroke];
 }
 
 - (void) awakeFromNib
