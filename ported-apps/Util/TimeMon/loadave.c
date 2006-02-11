@@ -7,6 +7,8 @@ int la_init(unsigned long long *times)
   return la_read(times);
 }
 
+#if defined( linux )
+
 int la_read(unsigned long long *times)
 {
   int i;
@@ -29,7 +31,53 @@ int la_read(unsigned long long *times)
   return LA_NOERR;
 }
 
+#elif defined( freebsd )
+
+#include <sys/types.h>
+#include <sys/errno.h>
+#include <sys/resource.h>	// CPUSTATES
+#include <sys/sysctl.h>		// sysctlbyname()
+          
+int la_read(unsigned long long *times)
+{
+  const char
+    *name = "kern.cp_time";
+  int
+    cpu_states[CPUSTATES];
+  size_t
+    nlen = sizeof cpu_states,
+    len = nlen;
+  int
+    err;
+  
+  err= sysctlbyname(name, &cpu_states, &nlen, NULL, 0);
+  if( -1 == err )
+  {
+    fprintf(stderr, "sysctl(%s...) failed: %s\n", name, strerror(errno));
+    exit(errno);
+  }
+  if( nlen != len )
+  {
+    fprintf(stderr, "sysctl(%s...) expected %lu, got %lu\n",
+                    name, (unsigned long) len, (unsigned long) nlen);
+    exit(errno);
+  }
+  perror("sysctl");
+  times[CP_IDLE] = cpu_states[4];
+  times[CP_SYS] = cpu_states[2];
+  times[CP_NICE] = cpu_states[1];
+  times[CP_USER] = cpu_states[0];
+  times[CP_IOWAIT] = cpu_states[3];
+  
+  return LA_NOERR;
+}
+
+#else
+
+#error Do not know how to retrieve CPU statistics on this platform.
+
+#endif
+
 void la_finish(void)
 {
 }
-

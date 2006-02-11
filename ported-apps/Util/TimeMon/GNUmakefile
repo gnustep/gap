@@ -36,7 +36,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 APP_NAME = TimeMon
 
-ADDITIONAL_OBJCFLAGS += -Wall
+ADDITIONAL_OBJCFLAGS += -Wall -D$(GNUSTEP_HOST_OS)
+ADDITIONAL_CFLAGS += -D$(GNUSTEP_HOST_OS)
 
 # The Objective-C source files to be compiled
 TimeMon_OBJC_FILES = \
