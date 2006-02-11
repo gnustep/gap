@@ -62,7 +62,6 @@ int la_read(unsigned long long *times)
                     name, (unsigned long) len, (unsigned long) nlen);
     exit(errno);
   }
-  perror("sysctl");
   times[CP_IDLE] = cpu_states[4];
   times[CP_SYS] = cpu_states[2];
   times[CP_NICE] = cpu_states[1];
