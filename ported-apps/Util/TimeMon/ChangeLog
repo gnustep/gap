@@ -1,3 +1,9 @@
+2006-02-11 06:31 Chris B. Vetter <chris.vetter@gmail.com>
+        committed by Greg Casamento
+	
+	* GNUmakefile: Changes to define the host OS
+	* loadave.c: FreeBSD specific changes to pull information for display.
+
 2006-02-08 08:49 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Percentages.m:
