@@ -71,9 +71,43 @@ int la_read(unsigned long long *times)
   return LA_NOERR;
 }
 
-#else
+#else 
+// Darwin should always be the always the last option...
 
-#error Do not know how to retrieve CPU statistics on this platform.
+#include <sys/sysctl.h>
+
+#include <mach/mach_init.h>
+#include <mach/mach_host.h>
+#include <mach/mach_error.h>
+#include <mach/mach_port.h>
+#include <mach/mach_types.h>
+
+int la_read(unsigned long long *times)
+{
+  kern_return_t ret;
+  host_cpu_load_info_data_t cpuStats;
+  mach_msg_type_number_t count;
+  static mach_port_t timemon_port = NULL;
+  long long totalticks;
+
+  if(timemon_port == NULL)
+    {
+      timemon_port = mach_host_self();
+    }
+
+  count = HOST_CPU_LOAD_INFO_COUNT;
+  ret = host_statistics(timemon_port,HOST_CPU_LOAD_INFO,(host_info_t)&cpuStats,&count);
+
+  totalticks = cpuStats.cpu_ticks[CPU_STATE_IDLE] + cpuStats.cpu_ticks[CPU_STATE_USER] +
+    cpuStats.cpu_ticks[CPU_STATE_NICE] + cpuStats.cpu_ticks[CPU_STATE_SYSTEM];
+
+  times[CP_IDLE] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_IDLE]) * 100;
+  times[CP_SYS] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_SYSTEM]) * 100;
+  times[CP_NICE] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_NICE]) * 100;
+  times[CP_USER] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_USER]) * 100;
+  times[CP_IOWAIT] = 0; //(totalticks/cpuStats.cpu_ticks[CPU_STATE_IDLE]) * 100;
+  return LA_NOERR;
+}
 
 #endif
 
