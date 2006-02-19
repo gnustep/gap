@@ -87,10 +87,10 @@ int la_read(unsigned long long *times)
   kern_return_t ret;
   host_cpu_load_info_data_t cpuStats;
   mach_msg_type_number_t count;
-  static mach_port_t timemon_port = NULL;
+  static mach_port_t timemon_port = 0L;
   long long totalticks;
 
-  if(timemon_port == NULL)
+  if(timemon_port == 0L)
     {
       timemon_port = mach_host_self();
     }
