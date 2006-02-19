@@ -7,6 +7,9 @@
 // this software for any purpose.  It is provided "as is" without
 // express or implied warranty.
 //
+// Modifications to run on Cocoa made by Gregory Casamento and 
+// Alex Malmberg
+//
 #import "Percentages.h"
 #import "TimeMonWraps.h"
 #import "loadave.h"
@@ -81,12 +84,12 @@
     {
       NSData *data = [NSData dataWithContentsOfFile: path];
       if (data != nil)
-	{
-	  NSDictionary *dict = nil;
-	  NSTextStorage *ts = [[NSTextStorage alloc] initWithRTF: data
+		{
+			NSDictionary *dict = nil;
+			NSTextStorage *ts = [[NSTextStorage alloc] initWithRTF: data
 						     documentAttributes: &dict];
-	  [[(NSTextView *)readmeText layoutManager] replaceTextStorage: ts];
-	}
+			[[(NSTextView *)readmeText layoutManager] replaceTextStorage: ts];
+		}
     }		   
 }
 
@@ -104,7 +107,8 @@
     [r setSize: NSMakeSize(48,48)];
     [stipple addRepresentation: r];
     [NSApp setApplicationIconImage:stipple];
-    DESTROY(stipple);
+    [stipple release];
+	stipple = nil;
 }
 
 - (void)step
@@ -363,20 +367,17 @@
 {
   if (te) {
     NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
-    // NSImage *pausedStipple = [NSApp applicationIconImage];
+    NSImage *pausedStipple = [NSApp applicationIconImage];
 
     [pauseMenuCell setTitle:@"Continue"];
     [te invalidate];
     te = nil;
 
-    /*
     [pausedStipple lockFocus];
     [pausedImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceOver];
     [pausedStipple unlockFocus];
-    */
 
-    // [NSApp setApplicationIconImage:pausedStipple];
-    [NSApp setApplicationIconImage:pausedImage];
+    [NSApp setApplicationIconImage:pausedStipple];
   } else {
     float f;
     [pauseMenuCell setTitle:@"Pause"];

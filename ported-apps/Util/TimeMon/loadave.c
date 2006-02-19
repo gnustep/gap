@@ -101,11 +101,11 @@ int la_read(unsigned long long *times)
   totalticks = cpuStats.cpu_ticks[CPU_STATE_IDLE] + cpuStats.cpu_ticks[CPU_STATE_USER] +
     cpuStats.cpu_ticks[CPU_STATE_NICE] + cpuStats.cpu_ticks[CPU_STATE_SYSTEM];
 
-  times[CP_IDLE] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_IDLE]) * 100;
-  times[CP_SYS] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_SYSTEM]) * 100;
-  times[CP_NICE] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_NICE]) * 100;
-  times[CP_USER] = (totalticks/cpuStats.cpu_ticks[CPU_STATE_USER]) * 100;
-  times[CP_IOWAIT] = 0; //(totalticks/cpuStats.cpu_ticks[CPU_STATE_IDLE]) * 100;
+  times[CP_IDLE] = cpuStats.cpu_ticks[CPU_STATE_IDLE];
+  times[CP_SYS] =  cpuStats.cpu_ticks[CPU_STATE_SYSTEM];
+  times[CP_NICE] = cpuStats.cpu_ticks[CPU_STATE_NICE];
+  times[CP_USER] = cpuStats.cpu_ticks[CPU_STATE_USER];
+  times[CP_IOWAIT] = 0; 
   return LA_NOERR;
 }
 
