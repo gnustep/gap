@@ -138,6 +138,7 @@
 				4A9504CCFFE6A4B311CA0CBA,
 				4A9504CDFFE6A4B311CA0CBA,
 			);
+			hasScannedForEncodings = 1;
 			isa = PBXProject;
 			mainGroup = 29B97314FDCFA39411CA2CEA;
 			projectDirPath = "";
@@ -265,7 +266,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -273,7 +274,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 1;
 		};
 		29B97327FDCFA39411CA2CEA = {
 			buildActionMask = 2147483647;
@@ -369,6 +369,7 @@
 //F53
 //F54
 		F56A03FB080AC70701A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = localclient.m;
 			refType = 4;
@@ -380,6 +381,7 @@
 			};
 		};
 		F56A03FD080AC71101A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = localclient.h;
 			refType = 4;
@@ -391,11 +393,13 @@
 			};
 		};
 		F5BE3AF6080C6A3601A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = fileTable.h;
 			refType = 4;
 		};
 		F5BE3AF7080C6A3601A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = fileTable.m;
 			refType = 4;
@@ -435,11 +439,13 @@
 			};
 		};
 		F5C84D6008142DF201A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = fileElement.h;
 			refType = 4;
 		};
 		F5C84D6108142DF201A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = fileElement.m;
 			refType = 4;
@@ -457,6 +463,7 @@
 			};
 		};
 		F5EFB6450818FE6001A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = client.m;
 			refType = 4;
@@ -468,6 +475,7 @@
 			};
 		};
 		F5EFB6470818FE6E01A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = client.h;
 			refType = 4;
@@ -479,21 +487,25 @@
 			};
 		};
 		F5F5F93707FD8CAD01A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = AppController.h;
 			refType = 4;
 		};
 		F5F5F93807FD8CAD01A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = AppController.m;
 			refType = 4;
 		};
 		F5F5F93907FD8CAD01A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = ftpclient.h;
 			refType = 4;
 		};
 		F5F5F93A07FD8CAD01A80101 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = ftpclient.m;
 			refType = 4;
