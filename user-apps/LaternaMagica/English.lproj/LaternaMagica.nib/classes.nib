@@ -1,0 +1,22 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {addFiles = id; setScaleToFit = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controlWin = NSWindow; 
+                fileListData = FileTable; 
+                fileListView = NSTableView; 
+                fitButton = NSButton; 
+                scrollView = NSScrollView; 
+                view = NSImageView; 
+                window = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FileTable; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
