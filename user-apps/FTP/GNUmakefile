@@ -7,7 +7,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.1
+VERSION = 0.2
 PACKAGE_NAME = FTP
 APP_NAME = FTP
 FTP_APPLICATION_ICON = 
