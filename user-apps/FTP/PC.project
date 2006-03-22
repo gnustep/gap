@@ -34,7 +34,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2005-10-12 00:07:44 +0200";
+    LAST_EDITING = "2006-03-23 00:29:18 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -52,16 +52,14 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBuild = "17 117 480 322 0 0  960 768 ";
-	ProjectLaunch = "141 82 480 322 0 0  960 768 ";
-	ProjectWindow = "189 88 710 539 0 0  960 768 ";
+	ProjectWindow = "132 149 710 539 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
 	"Riccardo Mottola <rmottola@users.sf.net>"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2005";
+    PROJECT_COPYRIGHT = "Copyright (C) 2005-2006";
     PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "FTP client";
@@ -72,7 +70,7 @@
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "";
     PROJECT_NAME = FTP;
-    PROJECT_RELEASE = 0.1;
+    PROJECT_RELEASE = 0.2;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "http://savannah.nongnu/project/gap/";
