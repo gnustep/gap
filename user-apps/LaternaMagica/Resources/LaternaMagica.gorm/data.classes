@@ -1,0 +1,36 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "addFiles:",
+	    "setScaleToFit:"
+	);
+	Outlets = (
+	    controlWin,
+	    fileListData,
+	    fitButton,
+	    fileListView,
+	    scrollView,
+	    view,
+	    window
+	);
+	Super = NSObject;
+    };
+    FileTable = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "addFiles:",
+	    "setScaleToFit:",
+	    "orderFrontFontPanel:",
+	    "showPrefPanel:"
+	);
+	Super = NSObject;
+    };
+}
