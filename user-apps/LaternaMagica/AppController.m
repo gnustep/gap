@@ -3,7 +3,7 @@
 //  LaternaMagica
 //
 //  Created by Riccardo Mottola on Mon Jan 16 2006.
-//  Copyright (c) 2006 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2006 Carduus. All rights reserved.
 //
 
 #import "AppController.h"
@@ -25,9 +25,22 @@
 
 - (void)awakeFromNib
 {
+    NSRect frame;
     [self setScaleToFit:self];
 
     [view setImageAlignment:NSImageAlignTopLeft];
+    window = smallWindow;
+
+    frame = [[NSScreen mainScreen] frame];
+    fullWindow = [[NSWindow alloc] initWithContentRect: frame
+                                             styleMask: NSBorderlessWindowMask
+                                               backing: NSBackingStoreBuffered
+                                                 defer: NO];
+    [fullWindow setAutodisplay:YES];
+    [fullWindow setExcludedFromWindowsMenu: YES];
+    [fullWindow setBackgroundColor: [NSColor blackColor]];
+    [fullWindow setOneShot:YES];
+    
 }
 
 - (void)dealloc
@@ -169,4 +182,59 @@
     }
 }
 
+- (IBAction)setFullScreen :(id)sender
+{
+    NSImage *image;
+
+    // check the sender and set the other item accordingly
+    if (sender == fullScreenButton)
+        [fullScreenMenuItem setState:[fullScreenButton state]];
+    else {
+        if ([fullScreenMenuItem state] == NSOnState)
+            [fullScreenMenuItem setState:NSOffState];
+        else
+            [fullScreenMenuItem setState:NSOnState];
+        [fullScreenButton setState:[fullScreenMenuItem state]];
+        NSLog(@"from menu");
+    }
+    NSLog(@"the m state is %d", [fullScreenMenuItem state]);
+    NSLog(@"the b state is %d", [fullScreenButton state]);
+
+
+    if ([fullScreenButton state] == NSOnState)
+    {
+        [fullWindow setLevel: NSScreenSaverWindowLevel];
+        image = [[view image] retain];
+        view = [[NSImageView alloc] init];
+        [view setImage:image];
+        [fullWindow setContentView: view];
+        //[fullWindow retain];
+        window = fullWindow;
+    } else
+    {
+        [fullWindow orderOut:self];
+        window = smallWindow;
+    }
+    [window makeKeyAndOrderFront: self];
+}
+
+- (IBAction)prevImage:(id)sender
+{
+    int sr;
+
+    sr = [fileListView selectedRow];
+    if (sr > 0)
+        [fileListView selectRow:sr-1 byExtendingSelection:NO];
+    NSLog(@"selected prev");
+}
+
+- (IBAction)nextImage:(id)sender
+{
+    int sr;
+
+    sr = [fileListView selectedRow];
+    if (sr < [fileListView numberOfRows])
+        [fileListView selectRow:sr+1 byExtendingSelection:NO];
+    NSLog(@"selected next");
+}
 @end
