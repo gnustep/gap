@@ -1,7 +1,13 @@
 {
     IBClasses = (
         {
-            ACTIONS = {addFiles = id; setScaleToFit = id; }; 
+            ACTIONS = {
+                addFiles = id; 
+                nextImage = id; 
+                prevImage = id; 
+                setFullScreen = id; 
+                setScaleToFit = id; 
+            }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -9,9 +15,11 @@
                 fileListData = FileTable; 
                 fileListView = NSTableView; 
                 fitButton = NSButton; 
+                fullScreenButton = NSButton; 
+                fullScreenMenuItem = NSMenuItem; 
                 scrollView = NSScrollView; 
+                smallWindow = NSWindow; 
                 view = NSImageView; 
-                window = NSWindow; 
             }; 
             SUPERCLASS = NSObject; 
         }, 
