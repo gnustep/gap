@@ -55,7 +55,8 @@
     image = [[NSImage alloc] initByReferencingFile:file];
     [window orderWindow:NSWindowBelow relativeTo:[controlWin windowNumber]];
     [view setImage: image];
-    [view setFrameSize:[window frame].size];
+    [view setFrameSize: [image size]];
+    [view setNeedsDisplay];
 }
 
 
@@ -130,6 +131,7 @@
     {
         scaleToFit = NO;
         [view setImageScaling:NSScaleNone];
+        [view setFrameSize: [[view image] size]];
     }
     [scrollView setHasVerticalScroller:!scaleToFit];
     [scrollView setHasHorizontalScroller:!scaleToFit];
@@ -150,14 +152,14 @@
 // or if scale preferences changed
 - (void)_windowDidResize :(NSNotification *)notif
 {
-    [view setFrameSize:[window frame].size];
     [self scaleView];
 }
 
 // scale image according to options
 - (void)scaleView
 {
-    if (scaleToFit) {
+    if (scaleToFit)
+    {
         NSSize imageSize;
         NSSize rectSize;
         NSAffineTransform *at;
@@ -195,11 +197,7 @@
         else
             [fullScreenMenuItem setState:NSOnState];
         [fullScreenButton setState:[fullScreenMenuItem state]];
-        NSLog(@"from menu");
     }
-    NSLog(@"the m state is %d", [fullScreenMenuItem state]);
-    NSLog(@"the b state is %d", [fullScreenButton state]);
-
 
     if ([fullScreenButton state] == NSOnState)
     {
@@ -208,7 +206,6 @@
         view = [[NSImageView alloc] init];
         [view setImage:image];
         [fullWindow setContentView: view];
-        //[fullWindow retain];
         window = fullWindow;
     } else
     {
@@ -225,7 +222,6 @@
     sr = [fileListView selectedRow];
     if (sr > 0)
         [fileListView selectRow:sr-1 byExtendingSelection:NO];
-    NSLog(@"selected prev");
 }
 
 - (IBAction)nextImage:(id)sender
@@ -235,6 +231,5 @@
     sr = [fileListView selectedRow];
     if (sr < [fileListView numberOfRows])
         [fileListView selectRow:sr+1 byExtendingSelection:NO];
-    NSLog(@"selected next");
 }
 @end
