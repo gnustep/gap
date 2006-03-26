@@ -4,7 +4,10 @@
 	Actions = (
 	    "showPrefPanel:",
 	    "addFiles:",
-	    "setScaleToFit:"
+	    "setScaleToFit:",
+	    "setFullScreen:",
+	    "nextImage:",
+	    "prevImage:"
 	);
 	Outlets = (
 	    controlWin,
@@ -13,7 +16,9 @@
 	    fileListView,
 	    scrollView,
 	    view,
-	    window
+	    window,
+	    fullScreenButton,
+	    fullScreenMenuItem
 	);
 	Super = NSObject;
     };
@@ -27,8 +32,11 @@
     FirstResponder = {
 	Actions = (
 	    "addFiles:",
-	    "setScaleToFit:",
+	    "setFullScreen:",
+	    "nextImage:",
 	    "orderFrontFontPanel:",
+	    "prevImage:",
+	    "setScaleToFit:",
 	    "showPrefPanel:"
 	);
 	Super = NSObject;
