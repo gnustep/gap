@@ -23,7 +23,7 @@
 	LaternaMagica.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-03-16 00:28:15 +0100";
+    LAST_EDITING = "2006-03-26 14:03:33 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
