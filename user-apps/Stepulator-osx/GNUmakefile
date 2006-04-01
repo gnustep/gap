@@ -10,7 +10,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 1.1
 PACKAGE_NAME = Stepulator
 APP_NAME = Stepulator
-Stepulator_APPLICATION_ICON = 
+Stepulator_APPLICATION_ICON=Stepulator.tiff
 GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)/
 
 
@@ -21,7 +21,8 @@ Stepulator_RESOURCE_FILES = \
 Resources/Stepulator.gorm\
 Resources/Info-gnustep.plist\
 Resources/README \
-Resources/LICENSE
+Resources/LICENSE \
+Resources/Stepulator.tiff
 
 #
 # Header files
