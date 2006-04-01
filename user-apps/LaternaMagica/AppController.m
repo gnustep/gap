@@ -121,6 +121,35 @@
     }
 }
 
+// scale image according to options
+- (void)scaleView
+{
+    if (scaleToFit)
+    {
+        NSSize imageSize;
+        NSSize rectSize;
+        NSAffineTransform *at;
+        float scaleH, scaleW;
+        float scale;
+
+        imageSize = [[view image] size];
+        rectSize =  [window frame].size;
+
+        scaleW = rectSize.width / imageSize.width;
+        scaleH =  rectSize.height / imageSize.height;
+
+        if (scaleW < scaleH)
+            scale = scaleW;
+        else
+            scale = scaleH;
+        NSLog(@"sclae: %f", scale);
+        at = [NSAffineTransform transform];
+        [at scaleBy:scale];
+        [view setFrameSize:[at transformSize:imageSize]];
+        [view setNeedsDisplay:YES];
+    }
+}
+
 - (IBAction)setScaleToFit:(id)sender
 {
     if ([fitButton state] == NSOnState)
@@ -155,34 +184,6 @@
     [self scaleView];
 }
 
-// scale image according to options
-- (void)scaleView
-{
-    if (scaleToFit)
-    {
-        NSSize imageSize;
-        NSSize rectSize;
-        NSAffineTransform *at;
-        float scaleH, scaleW;
-        float scale;
-
-        imageSize = [[view image] size];
-        rectSize =  [window frame].size;
-
-        scaleW = rectSize.width / imageSize.width;
-        scaleH =  rectSize.height / imageSize.height;
-
-        if (scaleW < scaleH)
-            scale = scaleW;
-        else
-            scale = scaleH;
-        NSLog(@"sclae: %f", scale);
-        at = [NSAffineTransform transform];
-        [at scaleBy:scale];
-        [view setFrameSize:[at transformSize:imageSize]];
-        [view setNeedsDisplay:YES];
-    }
-}
 
 - (IBAction)setFullScreen :(id)sender
 {
@@ -231,5 +232,14 @@
     sr = [fileListView selectedRow];
     if (sr < [fileListView numberOfRows])
         [fileListView selectRow:sr+1 byExtendingSelection:NO];
+}
+
+- (IBAction)removeImage:(id)sender
+{
+    int sr;
+
+    sr = [fileListView selectedRow];
+    [fileListData removeObjectAtIndex:sr];
+    [fileListView reloadData];
 }
 @end

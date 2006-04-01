@@ -30,5 +30,6 @@
 - (IBAction)setFullScreen :(id)sender;
 - (IBAction)prevImage:(id)sender;
 - (IBAction)nextImage:(id)sender;
+- (IBAction)removeImage:(id)sender;
 
 @end
