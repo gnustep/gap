@@ -10,6 +10,7 @@
     NSMainNibFile = MainMenu.gorm;
     NSPrincipalClass = NSApplication;
     NSRole = Application;
+    NSIcon = "Graphos.tiff";
     NSTypes = (
 	{
 	    NSDocumentClass = GRDocument;
