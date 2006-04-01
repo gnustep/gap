@@ -29,7 +29,8 @@
     [super dealloc];
 }
 
-- (void)addPath :(NSString*)path {
+- (void)addPath :(NSString*)path
+{
     [filePaths addObject:path];
     [fileNames addObject:[path lastPathComponent]];
 }
@@ -38,6 +39,13 @@
 {
     return [filePaths objectAtIndex:index];
 }
+
+- (void)removeObjectAtIndex:(int)index
+{
+    [fileNames removeObjectAtIndex:index];
+    [filePaths removeObjectAtIndex:index];
+}
+
 
 /* methods implemented to follow the informal NSTableView protocol */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView

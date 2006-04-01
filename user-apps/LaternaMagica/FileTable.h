@@ -17,5 +17,6 @@
 
 - (void)addPath:(NSString *)filename;
 - (NSString *)pathAtIndex :(int)index;
+- (void)removeObjectAtIndex:(int)index;
 
 @end
