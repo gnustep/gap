@@ -15,7 +15,7 @@
     IBOutlet NSTableView  *fileListView;
     IBOutlet NSWindow     *controlWin;
     IBOutlet NSWindow     *smallWindow;
-    IBOutlet NSImageView  *view;
+    IBOutlet NSImageView  *smallView;
     IBOutlet NSScrollView *scrollView;
     IBOutlet NSButton     *fitButton;
     IBOutlet NSMenuItem   *fullScreenMenuItem;
@@ -23,6 +23,8 @@
     BOOL                  scaleToFit;
     NSWindow              *window;
     NSWindow              *fullWindow;
+    NSImageView           *view;
+    NSImageView           *fullView;
 }
 
 - (IBAction)addFiles:(id)sender;
