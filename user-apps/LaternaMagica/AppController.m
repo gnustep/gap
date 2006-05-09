@@ -30,6 +30,7 @@
 
     [view setImageAlignment:NSImageAlignTopLeft];
     window = smallWindow;
+    view = smallView;
 
     frame = [[NSScreen mainScreen] frame];
     fullWindow = [[NSWindow alloc] initWithContentRect: frame
@@ -41,6 +42,8 @@
     [fullWindow setBackgroundColor: [NSColor blackColor]];
     [fullWindow setOneShot:YES];
     
+    fullView = [[NSImageView alloc] init];
+    [fullWindow setContentView: fullView];
 }
 
 - (void)dealloc
@@ -53,7 +56,7 @@
     NSImage *image;
 
     image = [[NSImage alloc] initByReferencingFile:file];
-    [window orderWindow:NSWindowBelow relativeTo:[controlWin windowNumber]];
+    [smallWindow orderWindow:NSWindowBelow relativeTo:[controlWin windowNumber]];
     [view setImage: image];
     [view setFrameSize: [image size]];
     [view setNeedsDisplay];
@@ -142,7 +145,7 @@
             scale = scaleW;
         else
             scale = scaleH;
-        NSLog(@"sclae: %f", scale);
+        NSLog(@"scale: %f", scale);
         at = [NSAffineTransform transform];
         [at scaleBy:scale];
         [view setFrameSize:[at transformSize:imageSize]];
@@ -189,6 +192,8 @@
 {
     NSImage *image;
 
+    image = [view image];
+
     // check the sender and set the other item accordingly
     if (sender == fullScreenButton)
         [fullScreenMenuItem setState:[fullScreenButton state]];
@@ -203,16 +208,16 @@
     if ([fullScreenButton state] == NSOnState)
     {
         [fullWindow setLevel: NSScreenSaverWindowLevel];
-        image = [[view image] retain];
-        view = [[NSImageView alloc] init];
-        [view setImage:image];
-        [fullWindow setContentView: view];
         window = fullWindow;
+        view = fullView;
     } else
     {
         [fullWindow orderOut:self];
         window = smallWindow;
+        view = smallView;
     }
+    [view  setImage: image];
+    [self scaleView];
     [window makeKeyAndOrderFront: self];
 }
 

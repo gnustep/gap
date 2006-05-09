@@ -19,8 +19,8 @@
                 fullScreenButton = NSButton; 
                 fullScreenMenuItem = NSMenuItem; 
                 scrollView = NSScrollView; 
+                smallView = NSImageView; 
                 smallWindow = NSWindow; 
-                view = NSImageView; 
             }; 
             SUPERCLASS = NSObject; 
         }, 
