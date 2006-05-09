@@ -15,8 +15,8 @@
 	    fitButton,
 	    fileListView,
 	    scrollView,
-	    view,
-	    window,
+	    smallView,
+	    smallWindow,
 	    fullScreenButton,
 	    fullScreenMenuItem
 	);
