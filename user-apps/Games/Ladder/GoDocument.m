@@ -134,7 +134,7 @@ NSString * GoDocumentDidResignMainNotification = @"GoDocumentDidResignMainNotifi
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController
 {
 	Class goWinClass = [GoWindow class];
-	GoWindow *window = [windowController window];
+	GoWindow *window = (GoWindow *)[windowController window];
 	if ([window isMemberOfClass:goWinClass])
 	{
 		[[window board] setGo:_go];

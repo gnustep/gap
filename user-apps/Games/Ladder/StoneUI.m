@@ -25,10 +25,10 @@ static inline NSSize __image_size_for_radius(float radius)
 {
 	PlayerColorType _stoneColor;
 }
-+ (id) stoneImageWithRadius:(float)radius
-				  colorType:(PlayerColorType)playerColorType;
++ (StoneUICache *) stoneImageWithRadius:(float)radius
+			      colorType:(PlayerColorType)playerColorType;
 - (id) initWithRadius:(float)radius
-			colorType:(PlayerColorType)playerColorType;
+	    colorType:(PlayerColorType)playerColorType;
 @end
 
 @implementation StoneUICache
@@ -302,7 +302,7 @@ static void __draw_black_with_radius(NSGraphicsContext *ctxt, float radius)
 					 withRadius:(float)radius
 {
 	float f = (radius/RFACTOR)/SHIFT_FACTOR;
-	[attrstr drawAtPoint: NSMakePoint(position.x * f + p.x, position.y * f + p.y)];
+	[(NSAttributedString *)attrstr drawAtPoint: NSMakePoint(position.x * f + p.x, position.y * f + p.y)];
 }
 
 - (void) drawIndicatorWithRadius:(float)radius
