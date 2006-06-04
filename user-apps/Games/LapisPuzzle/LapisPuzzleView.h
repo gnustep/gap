@@ -52,7 +52,7 @@ typedef enum _LPDirType
 - (NSArray *) allUnits;
 - (NSSize) gridSize;
 - (id) getUnitAtX:(int)x
-				Y:(int)y;
+                Y:(int)y;
 /*
 - (unsigned int) numberOfSteps;
 - (BOOL) unit:(LPUnit *)sender

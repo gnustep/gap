@@ -34,4 +34,5 @@
 	NSMutableArray *attackArray;
 	NSTimer *tick;
 }
+- (void) player:(id)pl processStone:(int)num;
 @end

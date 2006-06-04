@@ -20,6 +20,7 @@
  */
 
 #include "LapisPuzzleView.h"
+#include "LPController.h"
 #include <math.h>
 
 static float _grid_height;
@@ -130,7 +131,7 @@ static float _grid_height;
 	for (i = 0; i < unit_columns; i++)
 	{
 		m = [__owner getUnitAtX:unit_x + i
-							  Y:unit_y - 1];
+			     Y:unit_y - 1];
 
 		if (m && (MATCH_COLOR([m unitColor], _color) || [m isMemberOfClass:[LPStoneUnit class]]))
 		{
@@ -138,7 +139,7 @@ static float _grid_height;
 		}
 
 		m = [__owner getUnitAtX:unit_x + i
-							  Y:unit_y + unit_rows];
+			     Y:unit_y + unit_rows];
 		if (m && (MATCH_COLOR([m unitColor], _color) || [m isMemberOfClass:[LPStoneUnit class]]))
 		{
 			[m blow];
@@ -149,14 +150,14 @@ static float _grid_height;
 	for (i = 0; i < unit_rows; i++)
 	{
 		m = [__owner getUnitAtX:unit_x - 1
-							  Y:unit_y + i];
+			     Y:unit_y + i];
 		if (m && (MATCH_COLOR([m unitColor], _color) || [m isMemberOfClass:[LPStoneUnit class]]))
 		{
 			[m blow];
 		}
 
 		m = [__owner getUnitAtX:unit_x + unit_columns
-							  Y:unit_y + i];
+			     Y:unit_y + i];
 		if (m && (MATCH_COLOR([m unitColor], _color) || [m isMemberOfClass:[LPStoneUnit class]]))
 		{
 			[m blow];
@@ -1358,7 +1359,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 
 	if (stone > 0)
 	{
-		[__owner player:self processStone:stone];
+		[(LPController *)__owner player:self processStone:stone];
 	}
 
 	yy = 13, xx = 0;
@@ -1372,9 +1373,9 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 				if ([self getUnitAtX:xx Y:yy] == nil)
 				{
 					unit = [[LPStoneUnit alloc] initWithOwner:self
-														color:_random_unit_color()
-															X:xx
-															Y:yy];
+								    color:_random_unit_color()
+								    X:xx
+								    Y:yy];
 					[_units addObject:unit];
 					[unit fallToBottom];
 					RELEASE(unit);
