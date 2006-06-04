@@ -6,4 +6,5 @@
 {
 	NSImage *_woodTile;
 }
+- (void) setTileImage:(NSImage *)image;
 @end

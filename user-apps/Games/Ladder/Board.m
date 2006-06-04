@@ -493,7 +493,7 @@
 			mouseLocation.row <= boardSize && mouseLocation.column <= boardSize)
 	{
 		/* fixme : change this to check if legal */
-		StoneUI *stone = [_go stoneAtLocation:mouseLocation];
+	        StoneUI *stone = (StoneUI *)[_go stoneAtLocation:mouseLocation];
 		if (stone == nil)
 		{
 			NSPoint p = [self pointForGoLocation:mouseLocation];
@@ -547,7 +547,7 @@
 	for (j = 1; j <= boardSize; j ++)
 	{
 		GoLocation l = MakeGoLocation(i,j);
-		StoneUI *stone = [_go stoneAtLocation:l];
+		StoneUI *stone = (StoneUI *)[_go stoneAtLocation:l];
 		if (stone != nil)
 		{
 			NSPoint p = NSMakePoint(NSMinX(boardRect) + (j * cellWidth) - (cellWidth * 0.5),NSMinY(boardRect) + (i * cellWidth) - (cellWidth * 0.5));
@@ -567,7 +567,7 @@
 								value:[stone colorType]==BlackPlayerType?[NSColor lightGrayColor]:[NSColor darkGrayColor]
 								range:NSMakeRange(0,[attrStr length])];
 				strSize = [attrStr size];
-				[stone centerAttributedString: (NSAttributedString *)attrStr
+				[stone centerAttributedString: (NSMutableString *)attrStr
 				       toPoint: NSMakePoint(p.x - strSize.width/2, p.y - strSize.height/2)
 				       withRadius: cellWidth/2];
 				RELEASE(attrStr);

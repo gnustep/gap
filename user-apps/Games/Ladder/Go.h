@@ -107,6 +107,7 @@ static inline GoLocation MakeGoLocation (int row, int column)
 - (BOOL) loadSGFFile:(NSString *)path;
 
 - (void) clearBoard;
+- (void) turnBegin:(NSCalendarDate *)turnDate;
 @end
 
 extern NSString * GoStoneNotification;
