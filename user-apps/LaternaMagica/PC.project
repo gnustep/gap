@@ -3,7 +3,8 @@
     APP_DOCUMENT_BASED = NO;
     CLASS_FILES = (
 	AppController.m,
-	FileTable.m
+	FileTable.m,
+	LMFlipView.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -14,7 +15,8 @@
     );
     HEADER_FILES = (
 	AppController.h,
-	FileTable.h
+	FileTable.h,
+	LMFlipView.h
     );
     IMAGES = (
     );
@@ -23,7 +25,7 @@
 	LaternaMagica.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-05-10 01:07:16 +0200";
+    LAST_EDITING = "2006-06-11 12:29:21 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -41,16 +43,17 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "211 219 693 630 0 0  1280 1024 ";
+	ProjectWindow = "151 83 693 630 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
+	"Riccardo Mottola"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 200x";
-    PROJECT_COPYRIGHT_DESC = "Released under ...";
+    PROJECT_COPYRIGHT = "Copyright (C) 2006";
+    PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
-    PROJECT_DESCRIPTION = "No description avaliable!";
+    PROJECT_DESCRIPTION = "Image Viewer Tool";
     PROJECT_DOCUMENTTYPES = (
     );
     PROJECT_GROUP = "No group avaliable!";
@@ -59,7 +62,7 @@
     PROJECT_RELEASE = 0.1;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
-    PROJECT_URL = "";
+    PROJECT_URL = "http://gap.nongnu.org";
     SEARCH_HEADER_DIRS = (
     );
     SEARCH_LIB_DIRS = (
