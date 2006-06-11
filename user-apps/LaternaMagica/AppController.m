@@ -26,9 +26,8 @@
 - (void)awakeFromNib
 {
     NSRect frame;
-    [self setScaleToFit:self];
-
-    [view setImageAlignment:NSImageAlignTopLeft];
+//    [self setScaleToFit:self];
+    
     window = smallWindow;
     view = smallView;
 
@@ -40,9 +39,14 @@
     [fullWindow setAutodisplay:YES];
     [fullWindow setExcludedFromWindowsMenu: YES];
     [fullWindow setBackgroundColor: [NSColor blackColor]];
-    [fullWindow setOneShot:YES];
+//    [fullWindow setOneShot:YES];
+
+    [smallView setFrame:[scrollView documentVisibleRect]];
+    [smallView setImageAlignment:NSImageAlignTopLeft];
+
     
-    fullView = [[NSImageView alloc] init];
+    [fullView setImageAlignment:NSImageAlignCenter];
+    fullView = [[LMFlipView alloc] init];
     [fullWindow setContentView: fullView];
 }
 
@@ -56,10 +60,11 @@
     NSImage *image;
 
     image = [[NSImage alloc] initByReferencingFile:file];
-    [smallWindow orderWindow:NSWindowBelow relativeTo:[controlWin windowNumber]];
+
+    [self scaleView:image];
     [view setImage: image];
-    [view setFrameSize: [image size]];
-    [view setNeedsDisplay];
+    [view setNeedsDisplay:YES];
+    [window displayIfNeeded];
 }
 
 
@@ -125,32 +130,68 @@
 }
 
 // scale image according to options
-- (void)scaleView
+- (void)scaleView:(NSImage *) image
 {
-    if (scaleToFit)
+    if ([fullScreenMenuItem state] == NSOnState)
     {
-        NSSize imageSize;
-        NSSize rectSize;
-        NSAffineTransform *at;
-        float scaleH, scaleW;
-        float scale;
+        if (0)
+        {
+            NSSize imageSize;
+            NSSize rectSize;
+            NSAffineTransform *at;
+            float scaleH, scaleW;
+            float scale;
 
-        imageSize = [[view image] size];
-        rectSize =  [window frame].size;
+            rectSize =  [window frame].size;
+            imageSize = [image size];
 
-        scaleW = rectSize.width / imageSize.width;
-        scaleH =  rectSize.height / imageSize.height;
 
-        if (scaleW < scaleH)
-            scale = scaleW;
-        else
-            scale = scaleH;
-        NSLog(@"scale: %f", scale);
-        at = [NSAffineTransform transform];
-        [at scaleBy:scale];
-        [view setFrameSize:[at transformSize:imageSize]];
-        [view setNeedsDisplay:YES];
+            scaleW = rectSize.width / imageSize.width;
+            scaleH =  rectSize.height / imageSize.height;
+
+            if (scaleW < scaleH)
+                scale = scaleW;
+            else
+                scale = scaleH;
+            NSLog(@"scale: %f", scale);
+            at = [NSAffineTransform transform];
+            [at scaleBy:scale];
+            [view setFrameSize:[at transformSize:imageSize]];
+        } else
+        {
+        }
+    } else
+    {
+        if (scaleToFit)
+        {
+            NSSize imageSize;
+            NSSize rectSize;
+            NSAffineTransform *at;
+            float scaleH, scaleW;
+            float scale;
+
+            rectSize =  [scrollView frame].size;
+            imageSize = [image size];
+
+
+            scaleW = rectSize.width / imageSize.width;
+            scaleH =  rectSize.height / imageSize.height;
+
+            if (scaleW < scaleH)
+                scale = scaleW;
+            else
+                scale = scaleH;
+            NSLog(@"scale: %f", scale);
+            at = [NSAffineTransform transform];
+            [at scaleBy:scale];
+            [view setFrameSize:[at transformSize:imageSize]];
+        } else
+        {
+            [view setFrameSize:[image size]];
+        }
     }
+    
+    [view setNeedsDisplay:YES];
 }
 
 - (IBAction)setScaleToFit:(id)sender
@@ -163,11 +204,10 @@
     {
         scaleToFit = NO;
         [view setImageScaling:NSScaleNone];
-        [view setFrameSize: [[view image] size]];
     }
     [scrollView setHasVerticalScroller:!scaleToFit];
     [scrollView setHasHorizontalScroller:!scaleToFit];
-    [self scaleView];
+    [self scaleView:[view image]];
 }
 
 // method called as a notification from the selection change
@@ -177,14 +217,13 @@
     
     table = [notif object];
     [self changeImage:[fileListData pathAtIndex:[table selectedRow]]];
-    [self scaleView];
 }
 
 // method called as a notification from the window resize
 // or if scale preferences changed
 - (void)_windowDidResize :(NSNotification *)notif
 {
-    [self scaleView];
+    [self scaleView: [view image]];
 }
 
 
@@ -216,8 +255,8 @@
         window = smallWindow;
         view = smallView;
     }
+    [self scaleView: image];
     [view  setImage: image];
-    [self scaleView];
     [window makeKeyAndOrderFront: self];
 }
 
