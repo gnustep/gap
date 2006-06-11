@@ -17,6 +17,8 @@
 				F5D00DFA097C409A01A80101,
 				F5D00DFD097C40DD01A80101,
 				F5D00DFE097C40DD01A80101,
+				85DA40910A3B94BE00A80101,
+				85DA40920A3B94BE00A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -270,6 +272,7 @@
 			files = (
 				F5D00DFB097C409A01A80101,
 				F5D00DFF097C40DD01A80101,
+				85DA40930A3B94BE00A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +292,7 @@
 				29B9732CFDCFA39411CA2CEA,
 				F5D00DFC097C409A01A80101,
 				F5D00E00097C40DD01A80101,
+				85DA40940A3B94BE00A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +347,40 @@
 //4A2
 //4A3
 //4A4
+//850
+//851
+//852
+//853
+//854
+		85DA40910A3B94BE00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = LMFlipView.h;
+			refType = 4;
+		};
+		85DA40920A3B94BE00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = LMFlipView.m;
+			refType = 4;
+		};
+		85DA40930A3B94BE00A80101 = {
+			fileRef = 85DA40910A3B94BE00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DA40940A3B94BE00A80101 = {
+			fileRef = 85DA40920A3B94BE00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//850
+//851
+//852
+//853
+//854
 //F50
 //F51
 //F52

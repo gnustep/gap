@@ -8,14 +8,14 @@
 
 #import <AppKit/AppKit.h>
 #import <FileTable.h>
-
+#import <LMFlipView.h>
 
 @interface AppController : NSObject {
     IBOutlet FileTable    *fileListData;
     IBOutlet NSTableView  *fileListView;
     IBOutlet NSWindow     *controlWin;
     IBOutlet NSWindow     *smallWindow;
-    IBOutlet NSImageView  *smallView;
+    IBOutlet LMFlipView   *smallView;
     IBOutlet NSScrollView *scrollView;
     IBOutlet NSButton     *fitButton;
     IBOutlet NSMenuItem   *fullScreenMenuItem;
@@ -24,7 +24,7 @@
     NSWindow              *window;
     NSWindow              *fullWindow;
     NSImageView           *view;
-    NSImageView           *fullView;
+    LMFlipView            *fullView;
 }
 
 - (IBAction)addFiles:(id)sender;
