@@ -1,3 +1,7 @@
+2006-07-29 19:17-EDT Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* GNUmakefile: Change GNUSTEP_SYSTEM_ROOT to GNUSTEP_LOCAL_ROOT.
+
 2006-02-11 06:31 Chris B. Vetter <chris.vetter@gmail.com>
         committed by Greg Casamento
 	

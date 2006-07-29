@@ -26,7 +26,7 @@
 #  If not, write to the Free Software Foundation,
 #  59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
+GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)
 
 TimeMon_MAIN_MODEL_FILE = TimeMon.gorm
 TimeMon_APPLICATION_ICON = TimeMon.tiff
