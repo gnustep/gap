@@ -284,6 +284,30 @@
 
     sr = [fileListView selectedRow];
     [fileListData removeObjectAtIndex:sr];
+    [fileListView deselectAll:self];
     [fileListView reloadData];
+    if (sr <= [fileListView numberOfRows])
+        [fileListView selectRow:sr byExtendingSelection:NO];
+    else
+        [fileListView selectRow:[fileListView numberOfRows] byExtendingSelection:NO];
+    
+}
+
+- (IBAction)eraseImage:(id)sender
+{
+    int sr;
+    
+    sr = [fileListView selectedRow];
+    if (sr > 0)
+        if (NSRunAlertPanel(nil, @"Really delete the image from disk?", @"Delete", @"Abort", nil) == NSAlertDefaultReturn)
+        {
+            NSFileManager *fm;
+            
+            fm = [NSFileManager defaultManager];
+            // TODO should implement a handelr and error messages
+            [fm removeFileAtPath:[fileListData pathAtIndex:sr] handler:nil];
+            
+            [self removeImage:self];
+        }
 }
 @end

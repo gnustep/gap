@@ -33,5 +33,6 @@
 - (IBAction)prevImage:(id)sender;
 - (IBAction)nextImage:(id)sender;
 - (IBAction)removeImage:(id)sender;
+- (IBAction)eraseImage:(id)sender;
 
 @end
