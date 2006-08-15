@@ -55,18 +55,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)changeImage:(NSString *) file
-{
-    NSImage *image;
-
-    image = [[NSImage alloc] initByReferencingFile:file];
-
-    [self scaleView:image];
-    [view setImage: image];
-    [view setNeedsDisplay:YES];
-    [window displayIfNeeded];
-}
-
 
 - (void)addFile:(NSString *)filename
 {
@@ -192,6 +180,18 @@
     }
     
     [view setNeedsDisplay:YES];
+}
+
+- (void)changeImage:(NSString *) file
+{
+    NSImage *image;
+
+    image = [[NSImage alloc] initByReferencingFile:file];
+
+    [self scaleView:image];
+    [view setImage: image];
+    [view setNeedsDisplay:YES];
+    [window displayIfNeeded];
 }
 
 - (IBAction)setScaleToFit:(id)sender
