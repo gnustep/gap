@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 addFiles = id; 
+                eraseImage = id; 
                 nextImage = id; 
                 prevImage = id; 
                 removeImage = id; 
