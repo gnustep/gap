@@ -13,7 +13,7 @@
 
 - (id) init
 {
-    if (self = [super init])
+    if ((self = [super init]))
     {
         // add an observer for the file table view
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_selectionDidChange:) name:NSTableViewSelectionDidChangeNotification object:fileListView];
@@ -44,9 +44,8 @@
     [smallView setFrame:[scrollView documentVisibleRect]];
     [smallView setImageAlignment:NSImageAlignTopLeft];
 
-    
+    fullView = [[LMFlipView alloc] init];    
     [fullView setImageAlignment:NSImageAlignCenter];
-    fullView = [[LMFlipView alloc] init];
     [fullWindow setContentView: fullView];
 }
 
@@ -83,7 +82,7 @@
     files = [openPanel filenames];
     e = [files objectEnumerator];
     fmgr = [NSFileManager defaultManager];
-    while (filename = (NSString*)[e nextObject]) {
+    while ((filename = (NSString*)[e nextObject])) {
         attrs = [fmgr fileAttributesAtPath:filename traverseLink:YES];
         if (attrs)
             if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
@@ -188,11 +187,11 @@
     NSImage *image;
 
     image = [[NSImage alloc] initByReferencingFile:file];
-
     [self scaleView:image];
     [view setImage: image];
     [view setNeedsDisplay:YES];
     [window displayIfNeeded];
+    [image release];
 }
 
 - (IBAction)setScaleToFit:(id)sender
@@ -264,34 +263,62 @@
 - (IBAction)prevImage:(id)sender
 {
     int sr;
+    int rows;
 
-    sr = [fileListView selectedRow];
-    if (sr > 0)
-        [fileListView selectRow:sr-1 byExtendingSelection:NO];
+    rows = [fileListView numberOfRows];
+    if (rows > 0)
+    {
+        sr = [fileListView selectedRow];
+
+        if (sr > 0)
+            sr--;
+        else
+            sr = (rows - 1);
+
+        [fileListView selectRow: sr byExtendingSelection: NO];
+    }
 }
 
 - (IBAction)nextImage:(id)sender
 {
     int sr;
+    int rows;
 
-    sr = [fileListView selectedRow];
-    if (sr < [fileListView numberOfRows])
-        [fileListView selectRow:sr+1 byExtendingSelection:NO];
+    rows = [fileListView numberOfRows];
+
+    if (rows > 0) {
+        sr = [fileListView selectedRow];
+
+        if (sr < (rows - 1))
+            sr++;
+        else
+            sr = 0;
+
+        [fileListView selectRow: sr byExtendingSelection: NO];
+    }    
 }
 
 - (IBAction)removeImage:(id)sender
 {
     int sr;
+    int rows;
 
+    rows = [fileListView numberOfRows];
     sr = [fileListView selectedRow];
-    [fileListData removeObjectAtIndex:sr];
-    [fileListView deselectAll:self];
-    [fileListView reloadData];
-    if (sr <= [fileListView numberOfRows])
-        [fileListView selectRow:sr byExtendingSelection:NO];
-    else
-        [fileListView selectRow:[fileListView numberOfRows] byExtendingSelection:NO];
-    
+    if (rows > 0 && sr >= 0) {
+        [view setImage: nil];
+        [fileListData removeObjectAtIndex: sr];
+        [fileListView reloadData];
+
+        rows = [fileListView numberOfRows];
+        if (rows > 0)
+        {
+            if (sr >= rows)
+                sr = rows-1;
+
+            [fileListView selectRow: sr byExtendingSelection: NO];
+        }
+    }
 }
 
 - (IBAction)eraseImage:(id)sender
