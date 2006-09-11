@@ -14,5 +14,4 @@
     NSPrincipalClass = NSApplication;
     NSRole = Application;
     URL = "http://gap.nongnu.org";
-    NSIcon = "Stepulator.tiff";
 }
