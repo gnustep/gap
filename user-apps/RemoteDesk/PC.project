@@ -1,36 +1,27 @@
 {
-    APPCLASS = NSApplication;
-    APPKIT = "GNUSTEP-GUI";
     APPLICATIONICON = "";
     APP_DOCUMENT_BASED = NO;
-    BUILDTOOL = "/usr/bin/make";
     CLASS_FILES = (
-	main.m,
-	CalcController.m,
-	CalcModel.m
+	AppController.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
-    CREATION_DATE = "";
+    CREATION_DATE = "2006-09-11 10:38:28 +0200";
     DOCU_FILES = (
-	README,
-	LICENSE
     );
-    FOUNDATION = "GNUSTEP-BASE";
     FRAMEWORKS = (
     );
     HEADER_FILES = (
-	CalcController.h,
-	CalcModel.h
+	AppController.h
     );
     IMAGES = (
     );
-    INSTALLDIR = "$(GNUSTEP_LOCAL_ROOT)/";
+    INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	Stepulator.gorm
+	RemoteDesk.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-06-27 20:59:47 +0200";
+    LAST_EDITING = "2006-09-11 12:15:39 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -38,39 +29,36 @@
     LINKEROPTIONS = "";
     LOCALIZED_RESOURCES = (
     );
-    MAININTERFACE = Stepulator.gorm;
-    MAKEFILEDIR = "$(GNUSTEP_SYSTEM_ROOT)/Makefiles";
+    MAININTERFACE = RemoteDesk.gorm;
+    MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     OBJC_COMPILEROPTIONS = "";
-    OTHER_FILES = (
-    );
     OTHER_RESOURCES = (
 	"Info-gnustep.plist"
     );
     OTHER_SOURCES = (
+	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "142 120 710 539 0 0  1024 768 ";
+	ProjectWindow = "86 130 817 627 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
-	"Riccardo Mottola (rmottola@users.sf.net)"
+	"Riccardo Mottola"
     );
-    PROJECT_COPYRIGHT = "Released under";
-    PROJECT_COPYRIGHT_DESC = GPL;
+    PROJECT_COPYRIGHT = "Copyright (C) 2006";
+    PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
-    PROJECT_DESCRIPTION = "Scientific RPN Calculator";
+    PROJECT_DESCRIPTION = "Remote Desktop";
     PROJECT_DOCUMENTTYPES = (
     );
-    PROJECT_GROUP = "No description avaliable!";
+    PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "";
-    PROJECT_NAME = Stepulator;
-    PROJECT_RELEASE = 1.1;
-    PROJECT_SOURCE = "%{gs_name}-%{gs_version}.tar.gz";
+    PROJECT_NAME = RemoteDesk;
+    PROJECT_RELEASE = 0.1;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "http://gap.nongnu.org";
-    PROJECT_VERSION = 1.0;
     SEARCH_HEADER_DIRS = (
     );
     SEARCH_LIB_DIRS = (

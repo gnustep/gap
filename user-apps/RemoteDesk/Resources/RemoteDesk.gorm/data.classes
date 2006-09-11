@@ -1,0 +1,23 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "connect:"
+	);
+	Outlets = (
+	    password,
+	    remoteHost,
+	    userName
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "connect:",
+	    "orderFrontFontPanel:",
+	    "showPrefPanel:"
+	);
+	Super = NSObject;
+    };
+}
