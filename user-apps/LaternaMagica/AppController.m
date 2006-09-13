@@ -94,7 +94,7 @@
 
                 dirContents = [fmgr subpathsAtPath:filename];
                 e2 = [dirContents objectEnumerator];
-                while (filename2 = (NSString*)[e2 nextObject])
+                while ((filename2 = (NSString*)[e2 nextObject]))
                 {
                     NSString *tempName;
 
@@ -304,19 +304,27 @@
     int rows;
 
     rows = [fileListView numberOfRows];
-    sr = [fileListView selectedRow];
-    if (rows > 0 && sr >= 0) {
-        [view setImage: nil];
+    if (rows > 0)
+    {
+        sr = [fileListView selectedRow];
         [fileListData removeObjectAtIndex: sr];
         [fileListView reloadData];
 
         rows = [fileListView numberOfRows];
         if (rows > 0)
         {
+            // if we remove the last image, the selection changes
+            // otherwise no selection change notification is generated
+            // and thus we update simply the image
             if (sr >= rows)
-                sr = rows-1;
-
-            [fileListView selectRow: sr byExtendingSelection: NO];
+                [fileListView selectRow: rows-1 byExtendingSelection: NO];
+            else
+                [self changeImage: [fileListData pathAtIndex: sr]];
+            
+        } else
+        {
+            // no image to select, we clear the display
+            [view setImage: nil];
         }
     }
 }
