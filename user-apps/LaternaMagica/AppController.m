@@ -46,7 +46,10 @@
 
     fullView = [[LMFlipView alloc] init];    
     [fullView setImageAlignment:NSImageAlignCenter];
-    [fullWindow setContentView: fullView];
+	[fullView setFrame: frame];
+	[fullView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+	[[fullWindow contentView] addSubview: fullView];
+// [fullWindow setContentView: fullView];
 }
 
 - (void)dealloc
@@ -108,9 +111,12 @@
                         }
                     }
                 }
-            } else {
+            } 
+			else 
+			{
                 [self addFile:filename];
-        } else
+			} 
+		else
         {
             NSLog(@"open panel did not return a valid path");
         }
@@ -145,10 +151,12 @@
             at = [NSAffineTransform transform];
             [at scaleBy:scale];
             [view setFrameSize:[at transformSize:imageSize]];
-        } else
+        } 
+		else
         {
         }
-    } else
+    } 
+	else
     {
         if (scaleToFit)
         {
@@ -173,7 +181,8 @@
             at = [NSAffineTransform transform];
             [at scaleBy:scale];
             [view setFrameSize:[at transformSize:imageSize]];
-        } else
+        } 
+		else
         {
             [view setFrameSize:[image size]];
         }
@@ -199,10 +208,12 @@
     if ([fitButton state] == NSOnState)
     {
         scaleToFit = YES;
+		[fullView setImageScaling: NSScaleToFit];
         [view setImageScaling:NSScaleToFit];
     } else
     {
         scaleToFit = NO;
+		[fullView setImageScaling: NSScaleNone];
         [view setImageScaling:NSScaleNone];
     }
     [scrollView setHasVerticalScroller:!scaleToFit];
