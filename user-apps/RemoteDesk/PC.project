@@ -21,7 +21,7 @@
 	RemoteDesk.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-09-11 12:15:39 +0200";
+    LAST_EDITING = "2006-10-03 16:25:56 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -39,7 +39,7 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "86 130 817 627 0 0  1024 768 ";
+	ProjectWindow = "107 174 817 627 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
