@@ -44,12 +44,14 @@
     [smallView setFrame:[scrollView documentVisibleRect]];
     [smallView setImageAlignment:NSImageAlignTopLeft];
 
-    fullView = [[LMFlipView alloc] init];    
+    fullView = [[LMFlipView alloc] initWithFrame:[fullWindow frame]];    
     [fullView setImageAlignment:NSImageAlignCenter];
-	[fullView setFrame: frame];
-	[fullView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-	[[fullWindow contentView] addSubview: fullView];
-// [fullWindow setContentView: fullView];
+    [fullView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [fullView setImageScaling: NSScaleNone];
+
+    // avoid replacing the contentview with a NSControl subclass, thus add a subview instead
+    [[fullWindow contentView] addSubview: fullView];
+//    [[fullWindow contentView] setAutoresizesSubviews:true];
 }
 
 - (void)dealloc
@@ -111,12 +113,11 @@
                         }
                     }
                 }
-            } 
-			else 
-			{
+            } else
+            {
                 [self addFile:filename];
-			} 
-		else
+            }
+        else
         {
             NSLog(@"open panel did not return a valid path");
         }
@@ -128,7 +129,7 @@
 {
     if ([fullScreenMenuItem state] == NSOnState)
     {
-        if (0)
+        if (scaleToFit)
         {
             NSSize imageSize;
             NSSize rectSize;
@@ -151,12 +152,12 @@
             at = [NSAffineTransform transform];
             [at scaleBy:scale];
             [view setFrameSize:[at transformSize:imageSize]];
-        } 
-		else
+        } else
         {
+            [view setFrameSize:[image size]];
         }
     } 
-	else
+    else
     {
         if (scaleToFit)
         {
@@ -182,7 +183,7 @@
             [at scaleBy:scale];
             [view setFrameSize:[at transformSize:imageSize]];
         } 
-		else
+        else
         {
             [view setFrameSize:[image size]];
         }
@@ -208,12 +209,10 @@
     if ([fitButton state] == NSOnState)
     {
         scaleToFit = YES;
-		[fullView setImageScaling: NSScaleToFit];
         [view setImageScaling:NSScaleToFit];
     } else
     {
         scaleToFit = NO;
-		[fullView setImageScaling: NSScaleNone];
         [view setImageScaling:NSScaleNone];
     }
     [scrollView setHasVerticalScroller:!scaleToFit];
@@ -266,6 +265,7 @@
         window = smallWindow;
         view = smallView;
     }
+    [self setScaleToFit: self];
     [self scaleView: image];
     [view  setImage: image];
     [window makeKeyAndOrderFront: self];
