@@ -83,6 +83,11 @@
 {
 }
 
+- (IBAction)setDisplaySize:(id)sender
+{
+}
+
+
 - (IBAction)connect:(id)sender
 {
     NSTask *task;
@@ -91,6 +96,7 @@
     NSString *remote;
     NSString *pass;
     NSString *username;
+    NSString *dW, *dH;
 
     remote = [remoteHost stringValue];
     if (remote == nil || [remote length] == 0)
@@ -109,6 +115,15 @@ NSLog(@"host: %@", remote);
         [arguments addObject:[@"-u" stringByAppendingString:username]];
     	if (pass != nil && [pass length] > 0)
             [arguments addObject:[@"-p" stringByAppendingString:pass]];
+    }
+    dW = [dispW stringValue];
+    dH = [dispH stringValue];
+    if ((dW != nil && [dW length] > 0) && (dH != nil && [dH length] > 0))
+    {
+        NSString *s;
+        s = [@"-g" stringByAppendingString:dW];
+        s = [s stringByAppendingString:@"x"];
+        s = [s stringByAppendingString:dH];
     }
     [arguments addObject:remote];
     task = [NSTask launchedTaskWithLaunchPath:launchPath arguments:[NSArray arrayWithArray:arguments]];
