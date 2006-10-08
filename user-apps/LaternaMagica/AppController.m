@@ -26,7 +26,6 @@
 - (void)awakeFromNib
 {
     NSRect frame;
-//    [self setScaleToFit:self];
     
     window = smallWindow;
     view = smallView;
@@ -39,19 +38,18 @@
     [fullWindow setAutodisplay:YES];
     [fullWindow setExcludedFromWindowsMenu: YES];
     [fullWindow setBackgroundColor: [NSColor blackColor]];
-//    [fullWindow setOneShot:YES];
 
     [smallView setFrame:[scrollView documentVisibleRect]];
     [smallView setImageAlignment:NSImageAlignTopLeft];
 
-    fullView = [[LMFlipView alloc] initWithFrame:[fullWindow frame]];    
+    fullView = [[LMFlipView alloc] initWithFrame:[fullWindow frame]];
+    [fullView setImageScaling: NSScaleNone];
     [fullView setImageAlignment:NSImageAlignCenter];
     [fullView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-    [fullView setImageScaling: NSScaleNone];
+    
 
     // avoid replacing the contentview with a NSControl subclass, thus add a subview instead
     [[fullWindow contentView] addSubview: fullView];
-//    [[fullWindow contentView] setAutoresizesSubviews:true];
 }
 
 - (void)dealloc
@@ -127,68 +125,37 @@
 // scale image according to options
 - (void)scaleView:(NSImage *) image
 {
-    if ([fullScreenMenuItem state] == NSOnState)
+    NSPoint rectOrigin;
+    NSSize rectSize;
+
+    rectSize =  [window frame].size;
+    if (scaleToFit)
     {
-        if (scaleToFit)
-        {
-            NSSize imageSize;
-            NSSize rectSize;
-            NSAffineTransform *at;
-            float scaleH, scaleW;
-            float scale;
+        NSSize imageSize;
+        NSAffineTransform *at;
+        float scaleH, scaleW;
+        float scale;
 
-            rectSize =  [window frame].size;
-            imageSize = [image size];
+        
+        imageSize = [image size];
 
+        scaleW = rectSize.width / imageSize.width;
+        scaleH =  rectSize.height / imageSize.height;
 
-            scaleW = rectSize.width / imageSize.width;
-            scaleH =  rectSize.height / imageSize.height;
-
-            if (scaleW < scaleH)
-                scale = scaleW;
-            else
-                scale = scaleH;
-            NSLog(@"scale: %f", scale);
-            at = [NSAffineTransform transform];
-            [at scaleBy:scale];
-            [view setFrameSize:[at transformSize:imageSize]];
-        } else
-        {
-            [view setFrameSize:[image size]];
-        }
-    } 
-    else
-    {
-        if (scaleToFit)
-        {
-            NSSize imageSize;
-            NSSize rectSize;
-            NSAffineTransform *at;
-            float scaleH, scaleW;
-            float scale;
-
-            rectSize =  [scrollView frame].size;
-            imageSize = [image size];
-
-
-            scaleW = rectSize.width / imageSize.width;
-            scaleH =  rectSize.height / imageSize.height;
-
-            if (scaleW < scaleH)
-                scale = scaleW;
-            else
-                scale = scaleH;
-            NSLog(@"scale: %f", scale);
-            at = [NSAffineTransform transform];
-            [at scaleBy:scale];
-            [view setFrameSize:[at transformSize:imageSize]];
-        } 
+        if (scaleW < scaleH)
+            scale = scaleW;
         else
-        {
-            [view setFrameSize:[image size]];
-        }
+            scale = scaleH;
+
+        at = [NSAffineTransform transform];
+        [at scaleBy:scale];
+        [view setFrameSize:[at transformSize:imageSize]];
+    } else
+    {
+        [view setFrameSize:[image size]];
     }
-    
+    rectOrigin = NSMakePoint((rectSize.width - [view frame].size.width)/2, (rectSize.height - [view frame].size.height)/2);
+    [view setFrameOrigin:rectOrigin];
     [view setNeedsDisplay:YES];
 }
 
@@ -200,6 +167,7 @@
     [self scaleView:image];
     [view setImage: image];
     [view setNeedsDisplay:YES];
+    [[view superview] setNeedsDisplay:YES];
     [window displayIfNeeded];
     [image release];
 }
@@ -246,7 +214,8 @@
     // check the sender and set the other item accordingly
     if (sender == fullScreenButton)
         [fullScreenMenuItem setState:[fullScreenButton state]];
-    else {
+    else
+    {
         if ([fullScreenMenuItem state] == NSOnState)
             [fullScreenMenuItem setState:NSOffState];
         else
@@ -268,6 +237,9 @@
     [self setScaleToFit: self];
     [self scaleView: image];
     [view  setImage: image];
+    [view setNeedsDisplay:YES];
+    [[view superview] setNeedsDisplay:YES];
+    [window displayIfNeeded];
     [window makeKeyAndOrderFront: self];
 }
 
