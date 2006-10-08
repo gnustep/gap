@@ -3,12 +3,18 @@
     AppController = {
 	Actions = (
 	    "showPrefPanel:",
-	    "connect:"
+	    "connect:",
+	    "setDisplaySize:"
 	);
 	Outlets = (
 	    password,
 	    remoteHost,
-	    userName
+	    userName,
+	    dispBitDepth,
+	    dispH,
+	    dispPresets,
+	    dispW,
+	    keybLayout
 	);
 	Super = NSObject;
     };
@@ -16,6 +22,7 @@
 	Actions = (
 	    "connect:",
 	    "orderFrontFontPanel:",
+	    "setDisplaySize:",
 	    "showPrefPanel:"
 	);
 	Super = NSObject;

@@ -28,9 +28,14 @@
 
 @interface AppController : NSObject
 {
-    IBOutlet NSTextField *remoteHost;
-    IBOutlet NSTextField *userName;
-    IBOutlet NSTextField *password;
+    IBOutlet NSTextField   *remoteHost;
+    IBOutlet NSTextField   *userName;
+    IBOutlet NSTextField   *password;
+    IBOutlet NSTextField   *dispW;
+    IBOutlet NSTextField   *dispH;
+    IBOutlet NSPopUpButton *dispPresets;
+    IBOutlet NSPopUpButton *dispBitDepth;
+    IBOutlet NSPopUpButton *keybLayout;
 }
 
 + (void)initialize;
@@ -47,6 +52,7 @@
 
 - (void)showPrefPanel:(id)sender;
 
+- (IBAction)setDisplaySize:(id)sender;
 - (IBAction)connect:(id)sender;
 
 @end
