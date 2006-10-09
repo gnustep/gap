@@ -8,7 +8,8 @@
 	    "setFullScreen:",
 	    "nextImage:",
 	    "prevImage:",
-	    "removeImage:"
+	    "removeImage:",
+	    "eraseImage:"
 	);
 	Outlets = (
 	    controlWin,
@@ -33,10 +34,11 @@
     FirstResponder = {
 	Actions = (
 	    "addFiles:",
-	    "removeImage:",
+	    "eraseImage:",
 	    "nextImage:",
 	    "orderFrontFontPanel:",
 	    "prevImage:",
+	    "removeImage:",
 	    "setFullScreen:",
 	    "setScaleToFit:",
 	    "showPrefPanel:"
