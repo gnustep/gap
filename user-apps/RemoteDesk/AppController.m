@@ -126,7 +126,7 @@
     }
     pass = [password stringValue];
     username = [userName stringValue];
-NSLog(@"host: %@", remote);
+
     arguments = [NSMutableArray arrayWithCapacity:3];
     if ([dispBitDepth indexOfSelectedItem] >= 0)
     {
@@ -149,6 +149,12 @@ NSLog(@"host: %@", remote);
         s = [s stringByAppendingString:dH];
         [arguments addObject:s];
     }
+
+    if ([keybLayout indexOfSelectedItem] >= 0)
+    {
+        [arguments addObject:[@"-k" stringByAppendingString:[keybLayout stringValue]]];
+    }
+
     [arguments addObject:remote];
     task = [NSTask launchedTaskWithLaunchPath:launchPath arguments:[NSArray arrayWithArray:arguments]];
 }
