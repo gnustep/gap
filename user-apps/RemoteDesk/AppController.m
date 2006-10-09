@@ -128,7 +128,11 @@
     username = [userName stringValue];
 NSLog(@"host: %@", remote);
     arguments = [NSMutableArray arrayWithCapacity:3];
-    [arguments addObject:@"-a 16"];
+    if ([dispBitDepth indexOfSelectedItem] >= 0)
+    {
+        [arguments addObject:[@"-a" stringByAppendingString:[dispBitDepth stringValue]]];
+    }
+    
     if (username != nil && [username length] > 0)
     {
         [arguments addObject:[@"-u" stringByAppendingString:username]];
