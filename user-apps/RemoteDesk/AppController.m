@@ -85,6 +85,25 @@
 
 - (IBAction)setDisplaySize:(id)sender
 {
+    int item;
+    item = [dispPresets indexOfSelectedItem];
+    switch(item)
+    {
+        case 0:
+            [dispW setStringValue:@"1280"];
+            [dispH setStringValue:@"1024"];
+            break;
+        case 1:
+            [dispW setStringValue:@"1024"];
+            [dispH setStringValue:@"768"];
+            break;
+        case 2:
+            [dispW setStringValue:@"800"];
+            [dispH setStringValue:@"600"];
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -124,6 +143,7 @@ NSLog(@"host: %@", remote);
         s = [@"-g" stringByAppendingString:dW];
         s = [s stringByAppendingString:@"x"];
         s = [s stringByAppendingString:dH];
+        [arguments addObject:s];
     }
     [arguments addObject:remote];
     task = [NSTask launchedTaskWithLaunchPath:launchPath arguments:[NSArray arrayWithArray:arguments]];
