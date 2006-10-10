@@ -58,6 +58,8 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
     struct sockaddr_in  dataSockName;
     BOOL                usesPassive;
     BOOL                usesPorts;
+    
+    @private BOOL threadRunning;
 }
 
 - (id)init;
@@ -83,4 +85,11 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
 
 @end
 
+@interface ftpFileTransmitParameters : NSObject
+{
+    @public fileElement *file;
+    @public localclient *localClient;
+    @public int         depth;
+}
+@end
 
