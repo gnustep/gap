@@ -53,6 +53,8 @@
 #define socklentype int
 #endif
 
+@implementation ftpFileTransmitParameters
+@end
 
 @implementation ftpclient
 
@@ -63,6 +65,9 @@
     if (!(self =[super init]))
         return nil;
     controller = nil;
+        
+    threadRunning = NO;
+    
     return self;
 }
 
@@ -279,7 +284,7 @@
     return 0;
 }
 
-- (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth
+- (void)performRetrieveFile:(id)parameters
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -295,6 +300,19 @@
     unsigned long long totalBytes;
     NSString           *localPath;
     BOOL               gotFile;
+    fileElement        *file;
+    localclient        *localClient;
+    int                depth;
+    NSAutoreleasePool  *pool;
+    ftpFileTransmitParameters *parms;
+    
+    threadRunning = YES;
+    parms = (ftpFileTransmitParameters *)parameters;
+    pool = [[NSAutoreleasePool alloc] init];
+    
+    file = parms->file;
+    localClient = parms->localClient;
+    depth = parms->depth;
 
     fromLen = sizeof(from);
 
@@ -333,7 +351,9 @@
             while (fEl = [en nextObject])
             {
                 NSLog(@"recurse, download : %@", [fEl filename]);
-                [self retrieveFile:fEl to:localClient beingAt:(depth+1)];
+                parms->file = fEl;
+                parms->depth = depth+1;
+                [self performRetrieveFile:parms];
             }
         }
         /* we get back were we started */
@@ -402,6 +422,8 @@
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
+    [pool release];
+    threadRunning = NO;
 }
 
 - (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth
@@ -529,6 +551,21 @@
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
+}
+
+- (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth
+{
+    ftpFileTransmitParameters *parms;
+    
+    if (threadRunning)
+        return;
+    
+    parms = [ftpFileTransmitParameters alloc];
+    parms->file = file;
+    parms->localClient = localClient;
+    parms->depth = depth;
+    
+    [NSThread detachNewThreadSelector:@selector(performRetrieveFile:) toTarget:self withObject:parms];
 }
 
 - (void)deleteFile:(fileElement *)file beingAt:(int)depth
