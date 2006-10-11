@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Riccardo Mottola
+ Copyright (C) 2005-2006 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -301,8 +301,8 @@
     NSString           *localPath;
     BOOL               gotFile;
     fileElement        *file;
-    localclient        *localClient;
     int                depth;
+    localclient        *localClient;
     NSAutoreleasePool  *pool;
     ftpFileTransmitParameters *parms;
     
@@ -311,8 +311,8 @@
     pool = [[NSAutoreleasePool alloc] init];
     
     file = parms->file;
-    localClient = parms->localClient;
     depth = parms->depth;
+    localClient = parms->localClient;
 
     fromLen = sizeof(from);
 
@@ -361,6 +361,8 @@
         [localClient changeWorkingDir:pristineLocalPath];
         [pristineLocalPath release];
         [pristineRemotePath release];
+        [pool release];
+        threadRunning = NO;
         return;
     }
 
@@ -370,6 +372,8 @@
     if ([self initDataConn] < 0)
     {
         NSLog(@"error initiating data connection, retrieveFile");
+        [pool release];
+        threadRunning = NO;
         return;
     }
     
@@ -380,16 +384,27 @@
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
 
     if(replyCode != 150)
+    {
+        NSLog(@"Unexpected condition in retrieve");
+        [pool release];
+        threadRunning = NO;
         return; /* we have an error or some unexpected condition */
+    }
     [reply release];
     
     if ([self initDataStream] < 0)
+    {
+        [pool release];
+        threadRunning = NO;
         return;
+    }
     
     localFileStream = fopen([localPath cString], "w");
     if (localFileStream == NULL)
     {
         perror("local fopen failed");
+        [pool release];
+        threadRunning = NO;
         return;
     }
     
@@ -426,7 +441,7 @@
     threadRunning = NO;
 }
 
-- (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth
+- (void)performStoreFile:(id)parameters
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -442,7 +457,19 @@
     unsigned           totalBytes;
     NSString           *localPath;
     BOOL               gotFile;
+    fileElement        *file;
+    int                depth;
+    localclient        *localClient;
+    NSAutoreleasePool  *pool;
+    ftpFileTransmitParameters *parms;
 
+    threadRunning = YES;
+    parms = (ftpFileTransmitParameters *)parameters;
+    pool = [[NSAutoreleasePool alloc] init];
+    file = parms->file;
+    depth = parms->depth;
+    localClient = parms->localClient;
+    
     fromLen = sizeof(from);
 
     fileName = [file filename];
@@ -491,6 +518,8 @@
         [localClient changeWorkingDir:pristineLocalPath];
         [pristineLocalPath release];
         [pristineRemotePath release];
+        [pool release];
+        threadRunning = NO;
         return;
     }
     
@@ -499,7 +528,9 @@
 
     if ([self initDataConn] < 0)
     {
-        NSLog(@"error initiating data connection, retrieveFile");
+        NSLog(@"error initiating data connection, storeFile");
+        [pool release];
+        threadRunning = NO;
         return;
     }
 
@@ -511,13 +542,19 @@
     [reply release];
 
     if ([self initDataStream] < 0)
+    {
+        [pool release];
+        threadRunning = NO;
         return;
+    }
 
 
     localFileStream = fopen([localPath cString], "r");
     if (localFileStream == NULL)
     {
         perror("local fopen failed");
+        [pool release];
+        threadRunning = NO;
         return;
     }
 
@@ -551,6 +588,8 @@
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
+    [pool release];
+    threadRunning = NO;
 }
 
 - (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth
@@ -558,7 +597,10 @@
     ftpFileTransmitParameters *parms;
     
     if (threadRunning)
+    {
+        NSLog(@"thread was still running");
         return;
+    }
     
     parms = [ftpFileTransmitParameters alloc];
     parms->file = file;
@@ -566,6 +608,24 @@
     parms->depth = depth;
     
     [NSThread detachNewThreadSelector:@selector(performRetrieveFile:) toTarget:self withObject:parms];
+}
+
+- (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth
+{
+    ftpFileTransmitParameters *parms;
+
+    if (threadRunning)
+    {
+        NSLog(@"thread was still running");
+        return;
+    }
+    
+    parms = [ftpFileTransmitParameters alloc];
+    parms->file = file;
+    parms->localClient = localClient;
+    parms->depth = depth;
+
+    [NSThread detachNewThreadSelector:@selector(performStoreFile:) toTarget:self withObject:parms];
 }
 
 - (void)deleteFile:(fileElement *)file beingAt:(int)depth
