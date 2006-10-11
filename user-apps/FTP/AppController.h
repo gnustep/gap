@@ -67,6 +67,7 @@
     @private struct timeval     beginTimeVal;
     @private struct timeval     lastTimeVal;
     @private unsigned long long transferSize;
+    @private BOOL               threadRunning;
 }
 
 + (void)initialize;
@@ -112,3 +113,10 @@
 - (connectionModes)connectionMode;
 @end
 
+@interface fileTransmitParms : NSObject
+{
+    @public fileElement *file;
+    @public localclient *localClient;
+    @public int         depth;
+}
+@end

@@ -27,6 +27,9 @@
 #import "AppController.h"
 #import "fileElement.h"
 
+@implementation fileTransmitParms
+@end
+
 @implementation AppController
 
 + (void)initialize
@@ -51,6 +54,8 @@
     {
     }
     connMode = defaultMode;
+
+    threadRunning = NO;
     return self;
 }
 
@@ -185,6 +190,12 @@
     NSArray       *dirList;
     NSPopUpButton *thePathMenu;
 
+    if (threadRunning)
+    {
+        NSLog(@"thread was still running");
+        return;
+    }
+    
     theView = sender;
     NSLog(@"%@", [theView class]);
     if (theView == localView)
@@ -223,21 +234,30 @@
         if (theView == localView)
         {
             NSLog(@"should upload %@", thePath);
-            [ftp storeFile:fileEl from:local beingAt:0];
+            [NSThread detachNewThreadSelector:@selector(performStoreFile:) toTarget:self withObject:nil];
         } else
         {
             NSLog(@"should download %@", thePath);
-            [ftp retrieveFile:fileEl to:local beingAt:0];
+            [NSThread detachNewThreadSelector:@selector(performRetrieveFile:) toTarget:self withObject:nil];
         }
     }
 }
 
-- (IBAction)downloadButton:(id)sender
+- (void)performRetrieveFile:(id)parameters
 {
+    fileTransmitParms  *parms;
+    NSAutoreleasePool  *pool;
+
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
     id            currEl;
 
+    threadRunning = YES;
+    parms = (fileTransmitParms *)parameters;
+    pool = [[NSAutoreleasePool alloc] init];
+
+
+    // We should actually do a copy of the selection
     elemEnum = [remoteView selectedRowEnumerator];
 
     while ((currEl = [elemEnum nextObject]) != nil)
@@ -246,21 +266,59 @@
         NSLog(@"should download: %@", [fileEl filename]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
+
+    [pool release];
+    threadRunning = NO;
 }
 
-- (IBAction)uploadButton:(id)sender
+- (void)performStoreFile:(id)parameters
 {
+    fileTransmitParms  *parms;
+    NSAutoreleasePool  *pool;
+
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
     id            currEl;
 
+    threadRunning = YES;
+    parms = (fileTransmitParms *)parameters;
+    pool = [[NSAutoreleasePool alloc] init];
+
+
+    // We should actually do a copy of the selection
     elemEnum = [localView selectedRowEnumerator];
 
     while ((currEl = [elemEnum nextObject]) != nil)
     {
         fileEl = [localTableData elementAtIndex:[currEl intValue]];
+        NSLog(@"should upload: %@", [fileEl filename]);
         [ftp storeFile:fileEl from:local beingAt:0];
     }
+
+    [pool release];
+    threadRunning = NO;
+}
+
+- (IBAction)downloadButton:(id)sender
+{
+    if (threadRunning)
+    {
+        NSLog(@"thread was still running");
+        return;
+    }
+
+    [NSThread detachNewThreadSelector:@selector(performRetrieveFile:) toTarget:self withObject:nil];
+}
+
+- (IBAction)uploadButton:(id)sender
+{
+    if (threadRunning)
+    {
+        NSLog(@"thread was still running");
+        return;
+    }
+
+    [NSThread detachNewThreadSelector:@selector(performStoreFile:) toTarget:self withObject:nil];
 }
 
 - (IBAction)localDelete:(id)sender
