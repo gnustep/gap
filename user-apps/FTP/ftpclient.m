@@ -330,7 +330,7 @@
     
             dirList = [self dirContents];
             en = [dirList objectEnumerator];
-            while (fEl = [en nextObject])
+            while ((fEl = [en nextObject]))
             {
                 NSLog(@"recurse, download : %@", [fEl filename]);
                 [self retrieveFile:fEl to:localClient beingAt:depth+1];
@@ -462,7 +462,7 @@
 
             dirList = [localClient dirContents];
             en = [dirList objectEnumerator];
-            while (fEl = [en nextObject])
+            while ((fEl = [en nextObject]))
             {
                 NSLog(@"recurse, upload : %@", [fEl filename]);
                 [self storeFile:fEl from:localClient beingAt:(depth+1)];
@@ -574,7 +574,7 @@
 
         dirList = [self dirContents];
         en = [dirList objectEnumerator];
-        while (fEl = [en nextObject])
+        while ((fEl = [en nextObject]))
         {
             NSLog(@"recurse, delete : %@", [fEl filename]);
             [self deleteFile:fEl beingAt:(depth+1)];
