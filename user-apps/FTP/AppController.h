@@ -40,6 +40,8 @@
     IBOutlet NSTableView         *remoteView;
     IBOutlet NSPopUpButton       *localPath;
     IBOutlet NSPopUpButton       *remotePath;
+    IBOutlet NSButton            *buttDownload;
+    IBOutlet NSButton            *buttUpload;
     IBOutlet NSTextField         *infoMessage;
     IBOutlet NSTextField         *infoSpeed;
     IBOutlet NSTextField         *infoSize;

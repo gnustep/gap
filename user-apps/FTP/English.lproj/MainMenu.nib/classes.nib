@@ -21,6 +21,8 @@
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                buttDownload = NSButton; 
+                buttUpload = NSButton; 
                 connAddress = NSTextField; 
                 connAnon = NSButton; 
                 connPass = NSTextField; 
@@ -43,7 +45,8 @@
             }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = fileTransmitParms; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
     ); 
     IBVersion = 1; 
 }

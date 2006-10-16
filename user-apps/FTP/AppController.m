@@ -243,6 +243,16 @@
     }
 }
 
+- (void)setInterfaceEnabled:(BOOL)flag
+{
+    [localView setEnabled:flag];
+    [remoteView setEnabled:flag];
+    [localPath setEnabled:flag];
+    [remotePath setEnabled:flag];
+    [buttUpload setEnabled:flag];
+    [buttDownload setEnabled:flag];
+}
+
 - (void)performRetrieveFile:(id)parameters
 {
     fileTransmitParms  *parms;
@@ -253,6 +263,7 @@
     id            currEl;
 
     threadRunning = YES;
+    [self setInterfaceEnabled:NO];
     parms = (fileTransmitParms *)parameters;
     pool = [[NSAutoreleasePool alloc] init];
 
@@ -269,6 +280,7 @@
 
     [pool release];
     threadRunning = NO;
+    [self setInterfaceEnabled:YES];
 }
 
 - (void)performStoreFile:(id)parameters
@@ -281,6 +293,7 @@
     id            currEl;
 
     threadRunning = YES;
+    [self setInterfaceEnabled:NO];
     parms = (fileTransmitParms *)parameters;
     pool = [[NSAutoreleasePool alloc] init];
 
@@ -297,6 +310,7 @@
 
     [pool release];
     threadRunning = NO;
+    [self setInterfaceEnabled:YES];
 }
 
 - (IBAction)downloadButton:(id)sender
