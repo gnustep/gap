@@ -404,11 +404,11 @@
 
         sizeStr = [NSString alloc];
         if (transferSize < 1024)
-            sizeStr = [sizeStr initWithFormat:@"%3.2f: %3.2 fB", (float)bytes, (float)transferSize];
+            sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f B", (float)bytes, (float)transferSize];
         else if (transferSize < 1024*1024)
-            sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
+            sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
         else
-            sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
+            sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
         [infoSize setStringValue:sizeStr];
         [sizeStr release];
         [mainWin displayIfNeeded];
@@ -442,11 +442,11 @@
 
     sizeStr = [NSString alloc];
     if (transferSize < 1024)
-        sizeStr = [sizeStr initWithFormat:@"%3.2f: %3.2 fB", (float)bytes, (float)transferSize];
+        sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f B", (float)bytes, (float)transferSize];
     else if (transferSize < 1024*1024)
-        sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
+        sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
     else
-        sizeStr = [sizeStr initWithFormat:@"%3.2f %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
+        sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
     [infoSize setStringValue:sizeStr];
     [sizeStr release];
     
