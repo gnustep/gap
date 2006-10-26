@@ -37,7 +37,9 @@
 	    infoSpeed,
 	    infoSize,
 	    portType,
-	    prefPanel
+	    prefPanel,
+	    buttDownload,
+	    buttUpload
 	);
 	Super = NSObject;
     };
