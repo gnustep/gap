@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = "";
+    APPLICATIONICON = remotedesk.tiff;
     APP_DOCUMENT_BASED = NO;
     CLASS_FILES = (
 	AppController.m
@@ -15,13 +15,14 @@
 	AppController.h
     );
     IMAGES = (
+	remotedesk.tiff
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
 	RemoteDesk.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-10-09 17:54:31 +0200";
+    LAST_EDITING = "2006-11-01 18:42:14 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
