@@ -46,10 +46,10 @@
 
 - (id)init
 {
-  if ((self = [super init]))
+    if ((self = [super init]))
     {
     }
-  return self;
+    return self;
 }
 
 - (void)dealloc
@@ -59,7 +59,7 @@
 
 - (void)awakeFromNib
 {
-  [[NSApp mainMenu] setTitle:@"RemoteDesk"];
+    [[NSApp mainMenu] setTitle:@"RemoteDesk"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
@@ -68,7 +68,7 @@
 
 - (BOOL)applicationShouldTerminate:(id)sender
 {
-  return YES;
+    return YES;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotif
@@ -77,6 +77,7 @@
 
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName
 {
+    return NO;
 }
 
 - (void)showPrefPanel:(id)sender
