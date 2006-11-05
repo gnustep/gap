@@ -1,0 +1,48 @@
+=========================
+   R e m o t e D e s k
+=========================
+
+        written by Riccardo Mottola for the GNUstep Application Project
+        riccardo (at) kaffe (dot) org
+
+http://gap.nongnu.org/remotedesk/
+http://savannah.nongnu.org/projects/gap/
+
+Document Revision: 5 November 2006
+Current Revision: 0.1
+
+
+WHAT IS IT ?
+--------------
+RemoteDesk offers you an easy interface to connect remotely to a windows computer.
+
+
+NOTES
+-----
+RemoteDesk relies on rdesktop. Be sure to have it installed and accessible.
+
+HISTORY
+-------
+
+-- what's new in 0.1
+(5 November 2006)
+Initial public release.
+
+LICENSE  and DISCLAIMER
+-----------------------
+
+PRICE  Copyright (C) 2006 Riccardo Mottola
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; version 2 of the License.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the
+Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor,
+Boston, MA  02110-1301, USA.
