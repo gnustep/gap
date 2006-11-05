@@ -20,7 +20,9 @@ GNUSTEP_INSTALLATION_DIR = $(HOME)/GNUstep
 RemoteDesk_RESOURCE_FILES = \
 Resources/RemoteDesk.gorm\
 Resources/remotedesk.tiff\
-Resources/Info-gnustep.plist
+Resources/Info-gnustep.plist\
+Resources/README \
+Resources/LICENSE
 
 #
 # Header files
