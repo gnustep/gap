@@ -192,9 +192,12 @@
 - (void)_selectionDidChange :(NSNotification *)notif
 {
     NSTableView *table;
+    int         selectedRow;
     
     table = [notif object];
-    [self changeImage:[fileListData pathAtIndex:[table selectedRow]]];
+    selectedRow = [table selectedRow];
+    if (selectedRow >= 0)
+        [self changeImage:[fileListData pathAtIndex:selectedRow]];
 }
 
 // method called as a notification from the window resize
