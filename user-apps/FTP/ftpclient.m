@@ -492,6 +492,15 @@
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
     [reply release];
 
+    if (replyCode == 550)
+    {
+        [reply release];
+        [self logIt: [reply objectAtIndex:0]];
+        return;
+    }
+    [reply release];
+
+    
     if ([self initDataStream] < 0)
     {
         return;
