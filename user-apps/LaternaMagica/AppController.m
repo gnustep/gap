@@ -290,7 +290,7 @@
     int rows;
 
     rows = [fileListView numberOfRows];
-    if (rows > 0)
+    if (rows >= 0)
     {
         sr = [fileListView selectedRow];
         [fileListData removeObjectAtIndex: sr];
@@ -320,7 +320,7 @@
     int sr;
     
     sr = [fileListView selectedRow];
-    if (sr > 0)
+    if (sr >= 0)
         if (NSRunAlertPanel(nil, @"Really delete the image from disk?", @"Delete", @"Abort", nil) == NSAlertDefaultReturn)
         {
             NSFileManager *fm;
