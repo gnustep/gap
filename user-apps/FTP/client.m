@@ -100,5 +100,13 @@
     NSLog(@"override me! deleteFile superclass method");
 }
 
+- (void)showAlertDialog:(NSString *)message
+{
+#ifdef ENABLE_GUI_MESSAGES
+    [message retain];
+    NSRunAlertPanel(@"Attention", message, @"Ok", nil, nil);
+    [message release];
+#endif
+}
 
 @end

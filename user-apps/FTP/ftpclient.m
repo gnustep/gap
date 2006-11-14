@@ -361,17 +361,22 @@
 
     if(replyCode != 150)
     {
+        [self showAlertDialog:@"Unexpected server error."];
         NSLog(@"Unexpected condition in retrieve");
         return; /* we have an error or some unexpected condition */
     }
     [reply release];
     
     if ([self initDataStream] < 0)
+    {
+        [self showAlertDialog:@"Unexpected connection error."];
         return;
+    }
     
     localFileStream = fopen([localPath cString], "w");
     if (localFileStream == NULL)
     {
+        [self showAlertDialog:@"Opening of local file failed.\nCheck permissions and free space."];
         perror("local fopen failed");
         return;
     }
@@ -481,6 +486,7 @@
 
     if ([self initDataConn] < 0)
     {
+        [self showAlertDialog:@"Error initiating the Data Connection."];
         NSLog(@"error initiating data connection, storeFile");
         return;
     }
@@ -490,12 +496,12 @@
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
-    [reply release];
 
-    if (replyCode == 550)
+    if (replyCode >= 550 && replyCode <= 559)
     {
-        [reply release];
+        [self showAlertDialog:[reply objectAtIndex:0]];
         [self logIt: [reply objectAtIndex:0]];
+        [reply release];
         return;
     }
     [reply release];
@@ -503,6 +509,7 @@
     
     if ([self initDataStream] < 0)
     {
+        [self showAlertDialog:@"Unexpected connection error."];
         return;
     }
 
@@ -510,6 +517,7 @@
     localFileStream = fopen([localPath cString], "r");
     if (localFileStream == NULL)
     {
+        [self showAlertDialog:@"Opening of local file failed.\n Check permissions."];
         perror("local fopen failed");
         return;
     }
