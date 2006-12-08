@@ -28,6 +28,26 @@
 
 @implementation client
 
+/* initializer */
+/* we set possibly unused stuff to NULL */
+- (id)init
+{
+    if (!(self =[super init]))
+        return nil;
+    controller = nil;
+
+    return self;
+}
+
+- (id)initWithController:(id)cont
+{
+    if (!(self =[super init]))
+        return nil;
+    controller = cont;
+
+    return self;
+}
+
 - (void)dealloc
 {
     if (homeDir)
@@ -100,13 +120,5 @@
     NSLog(@"override me! deleteFile superclass method");
 }
 
-- (void)showAlertDialog:(NSString *)message
-{
-#ifdef ENABLE_GUI_MESSAGES
-    [message retain];
-    NSRunAlertPanel(@"Attention", message, @"Ok", nil, nil);
-    [message release];
-#endif
-}
 
 @end

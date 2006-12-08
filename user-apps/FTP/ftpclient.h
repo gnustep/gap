@@ -45,7 +45,6 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
 
 @interface ftpclient : client
 {
-    id                  controller;
     int                 userDataPort;
     int                 serverDataPort;
     int                 dataSocket;
@@ -60,7 +59,6 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
     BOOL                usesPorts;
 }
 
-- (id)init;
 - (id)initWithController:(id)cont :(connectionModes)cMode;
 - (void)setPortDefault;
 - (void)setPortPort;

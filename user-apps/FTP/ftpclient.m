@@ -55,22 +55,11 @@
 
 @implementation ftpclient
 
-/* initializer */
-/* we set possibly unused stuff to NULL */
-- (id)init
-{
-    if (!(self =[super init]))
-        return nil;
-    controller = nil;
-    
-    return self;
-}
-
 - (id)initWithController:(id)cont :(connectionModes)cMode
 {
-    if (!(self =[super init]))
+    if (!(self =[super initWithController:cont]))
         return nil;
-    controller = cont;
+
     switch (cMode)
     {
         case defaultMode:
@@ -361,7 +350,7 @@
 
     if(replyCode != 150)
     {
-        [self showAlertDialog:@"Unexpected server error."];
+        [controller showAlertDialog:@"Unexpected server error."];
         NSLog(@"Unexpected condition in retrieve");
         return; /* we have an error or some unexpected condition */
     }
@@ -369,14 +358,14 @@
     
     if ([self initDataStream] < 0)
     {
-        [self showAlertDialog:@"Unexpected connection error."];
+        [controller showAlertDialog:@"Unexpected connection error."];
         return;
     }
     
     localFileStream = fopen([localPath cString], "w");
     if (localFileStream == NULL)
     {
-        [self showAlertDialog:@"Opening of local file failed.\nCheck permissions and free space."];
+        [controller showAlertDialog:@"Opening of local file failed.\nCheck permissions and free space."];
         perror("local fopen failed");
         return;
     }
@@ -486,7 +475,7 @@
 
     if ([self initDataConn] < 0)
     {
-        [self showAlertDialog:@"Error initiating the Data Connection."];
+        [controller showAlertDialog:@"Error initiating the Data Connection."];
         NSLog(@"error initiating data connection, storeFile");
         return;
     }
@@ -499,7 +488,7 @@
 
     if (replyCode >= 550 && replyCode <= 559)
     {
-        [self showAlertDialog:[reply objectAtIndex:0]];
+        [controller showAlertDialog:[reply objectAtIndex:0]];
         [self logIt: [reply objectAtIndex:0]];
         [reply release];
         return;
@@ -509,7 +498,7 @@
     
     if ([self initDataStream] < 0)
     {
-        [self showAlertDialog:@"Unexpected connection error."];
+        [controller showAlertDialog:@"Unexpected connection error."];
         return;
     }
 
@@ -517,7 +506,7 @@
     localFileStream = fopen([localPath cString], "r");
     if (localFileStream == NULL)
     {
-        [self showAlertDialog:@"Opening of local file failed.\n Check permissions."];
+        [controller showAlertDialog:@"Opening of local file failed.\n Check permissions."];
         perror("local fopen failed");
         return;
     }

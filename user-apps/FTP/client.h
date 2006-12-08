@@ -24,24 +24,20 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-// this enables the output of NSDialogs
-#define ENABLE_GUI_MESSAGES 0
-
 #import <Foundation/Foundation.h>
-
-#ifdef ENABLE_GUI_MESSAGES
-#import <AppKit/AppKit.h>
-#endif
 
 #import "fileElement.h"
 
 
 @interface client : NSObject
 {
+    id       controller;
     NSString *workingDir;
     NSString *homeDir;
 }
 
+- (id)init;
+- (id)initWithController:(id)cont;
 - (NSString *)workingDir;
 - (void)setWorkingDirWithCString:(char *)dir;
 - (void)setWorkingDir:(NSString *)dir;
@@ -51,7 +47,6 @@
 - (NSArray *)workDirSplit;
 - (NSArray *)dirContents;
 - (NSString *)homeDir;
-- (void)showAlertDialog:(NSString*)message;
 @end
 
 
