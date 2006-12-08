@@ -111,6 +111,8 @@
 - (IBAction)cancelConn:(id)sender;
 - (IBAction)anonymousConn:(id)sender;
 
+- (void)showAlertDialog:(NSString*)message;
+
 /* accessor */
 - (connectionModes)connectionMode;
 @end

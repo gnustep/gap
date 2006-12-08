@@ -614,6 +614,14 @@
     }
 }
 
+
+- (void)showAlertDialog:(NSString *)message
+{
+    [message retain];
+    NSRunAlertPanel(@"Attention", message, @"Ok", nil, nil);
+    [message release];
+}
+
 - (connectionModes)connectionMode
 {
     return connMode;
