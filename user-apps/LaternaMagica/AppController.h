@@ -3,7 +3,7 @@
 //  LaternaMagica
 //
 //  Created by Riccardo Mottola on Mon Jan 16 2006.
-//  Copyright (c) 2006 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2006-2007 Carduus. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
@@ -34,5 +34,8 @@
 - (IBAction)nextImage:(id)sender;
 - (IBAction)removeImage:(id)sender;
 - (IBAction)eraseImage:(id)sender;
+- (IBAction)rotateImage90:(id)sender;
+- (IBAction)rotateImage180:(id)sender;
+- (IBAction)rotateImage270:(id)sender;
 
 @end

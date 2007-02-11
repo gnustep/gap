@@ -7,6 +7,9 @@
                 nextImage = id; 
                 prevImage = id; 
                 removeImage = id; 
+                rotateImage180 = id; 
+                rotateImage270 = id; 
+                rotateImage90 = id; 
                 setFullScreen = id; 
                 setScaleToFit = id; 
             }; 
@@ -20,7 +23,7 @@
                 fullScreenButton = NSButton; 
                 fullScreenMenuItem = NSMenuItem; 
                 scrollView = NSScrollView; 
-                smallView = NSImageView; 
+                smallView = LMFlipView; 
                 smallWindow = NSWindow; 
             }; 
             SUPERCLASS = NSObject; 

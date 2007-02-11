@@ -3,7 +3,7 @@
 //  LaternaMagica
 //
 //  Created by Riccardo Mottola on Mon Jan 16 2006.
-//  Copyright (c) 2006 Carduus. All rights reserved.
+//  Copyright (c) 2006-2007 Carduus. All rights reserved.
 //
 
 #import "AppController.h"
@@ -332,4 +332,178 @@
             [self removeImage:self];
         }
 }
+
+- (IBAction)rotateImage90:(id)sender
+{
+    NSImage *srcImage;
+    NSBitmapImageRep *srcImageRep;
+    NSImage *destImage;
+    NSBitmapImageRep *destImageRep;
+    int x, y;
+    int w, h;
+    int s;
+    int bytesPerPixel;
+    unsigned char *srcData;
+    unsigned char *destData;
+    unsigned char *p1, *p2;
+
+    srcImage = [view image];
+    /* get source image representation and associated information */
+    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+
+    w = [srcImageRep pixelsWide];
+    h = [srcImageRep pixelsHigh];
+    bytesPerPixel = [srcImageRep bitsPerPixel] /8;
+
+    destImage = [[NSImage alloc] initWithSize:NSMakeSize(h, w)]; /* we swap h and w */
+    destImageRep = [[NSBitmapImageRep alloc]
+                initWithBitmapDataPlanes:NULL
+                              pixelsWide:h
+                              pixelsHigh:w
+                           bitsPerSample:[srcImageRep bitsPerSample]
+                         samplesPerPixel:[srcImageRep samplesPerPixel]
+                                hasAlpha:[srcImageRep hasAlpha]
+                                isPlanar:[srcImageRep isPlanar]
+                          colorSpaceName:[srcImageRep colorSpaceName]
+                             bytesPerRow:0
+                            bitsPerPixel:0];
+
+    srcData = [srcImageRep bitmapData];
+    destData = [destImageRep bitmapData];
+    
+    for (y = 0; y < h; y++)
+        for (x = 0; x < w; x++)
+        {
+            p1 = srcData + bytesPerPixel * (y * w + x);
+            p2 = destData + bytesPerPixel * ((w-x-1) * h + y);
+            for (s = 0; s < bytesPerPixel; s++)
+                p2[s] = p1[s];
+        }
+
+    [destImage addRepresentation:destImageRep];
+    [destImageRep release];
+
+    [self scaleView:destImage];
+    [view setImage: destImage];
+    [view setNeedsDisplay:YES];
+    [[view superview] setNeedsDisplay:YES];
+    [window displayIfNeeded];
+    [destImage release];
+}
+
+- (IBAction)rotateImage180:(id)sender
+{
+    NSImage *srcImage;
+    NSBitmapImageRep *srcImageRep;
+    NSImage *destImage;
+    NSBitmapImageRep *destImageRep;
+    int x, y;
+    int w, h;
+    int s;
+    int bytesPerPixel;
+    unsigned char *srcData;
+    unsigned char *destData;
+    unsigned char *p1, *p2;
+
+    srcImage = [view image];
+    /* get source image representation and associated information */
+    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+
+    w = [srcImageRep pixelsWide];
+    h = [srcImageRep pixelsHigh];
+    bytesPerPixel = [srcImageRep bitsPerPixel] /8;
+
+    destImage = [[NSImage alloc] initWithSize:NSMakeSize(w, h)];
+    destImageRep = [[NSBitmapImageRep alloc]
+                initWithBitmapDataPlanes:NULL
+                              pixelsWide:w
+                              pixelsHigh:h
+                           bitsPerSample:[srcImageRep bitsPerSample]
+                         samplesPerPixel:[srcImageRep samplesPerPixel]
+                                hasAlpha:[srcImageRep hasAlpha]
+                                isPlanar:[srcImageRep isPlanar]
+                          colorSpaceName:[srcImageRep colorSpaceName]
+                             bytesPerRow:0
+                            bitsPerPixel:0];
+
+    srcData = [srcImageRep bitmapData];
+    destData = [destImageRep bitmapData];
+
+    for (y = 0; y < h; y++)
+        for (x = 0; x < w; x++)
+        {
+            p1 = srcData + bytesPerPixel * (y * w + x);
+            p2 = destData + bytesPerPixel * ((h-y-1) * w + (w-x-1));
+            for (s = 0; s < bytesPerPixel; s++)
+                p2[s] = p1[s];
+        }
+
+    [destImage addRepresentation:destImageRep];
+    [destImageRep release];
+
+    [self scaleView:destImage];
+    [view setImage: destImage];
+    [window displayIfNeeded];
+    [destImage release];
+}
+
+
+- (IBAction)rotateImage270:(id)sender
+{
+    NSImage *srcImage;
+    NSBitmapImageRep *srcImageRep;
+    NSImage *destImage;
+    NSBitmapImageRep *destImageRep;
+    int x, y;
+    int w, h;
+    int s;
+    int bytesPerPixel;
+    unsigned char *srcData;
+    unsigned char *destData;
+    unsigned char *p1, *p2;
+
+    srcImage = [view image];
+    /* get source image representation and associated information */
+    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+
+    w = [srcImageRep pixelsWide];
+    h = [srcImageRep pixelsHigh];
+    bytesPerPixel = [srcImageRep bitsPerPixel] /8;
+
+    destImage = [[NSImage alloc] initWithSize:NSMakeSize(h, w)]; /* we swap h and w */
+    destImageRep = [[NSBitmapImageRep alloc]
+                initWithBitmapDataPlanes:NULL
+                              pixelsWide:h
+                              pixelsHigh:w
+                           bitsPerSample:[srcImageRep bitsPerSample]
+                         samplesPerPixel:[srcImageRep samplesPerPixel]
+                                hasAlpha:[srcImageRep hasAlpha]
+                                isPlanar:[srcImageRep isPlanar]
+                          colorSpaceName:[srcImageRep colorSpaceName]
+                             bytesPerRow:0
+                            bitsPerPixel:0];
+
+    srcData = [srcImageRep bitmapData];
+    destData = [destImageRep bitmapData];
+
+    for (y = 0; y < h; y++)
+        for (x = 0; x < w; x++)
+        {
+            p1 = srcData + bytesPerPixel * (y * w + x);
+            p2 = destData + bytesPerPixel * (x * h + (h-y-1));
+            for (s = 0; s < bytesPerPixel; s++)
+                p2[s] = p1[s];
+        }
+
+    [destImage addRepresentation:destImageRep];
+    [destImageRep release];
+
+    [self scaleView:destImage];
+    [view setImage: destImage];
+    [view setNeedsDisplay:YES];
+    [[view superview] setNeedsDisplay:YES];
+    [window displayIfNeeded];
+    [destImage release];
+}
+
 @end
