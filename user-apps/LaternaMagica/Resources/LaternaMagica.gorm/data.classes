@@ -2,25 +2,27 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
-	    "showPrefPanel:",
 	    "addFiles:",
 	    "setScaleToFit:",
 	    "setFullScreen:",
-	    "nextImage:",
 	    "prevImage:",
+	    "nextImage:",
 	    "removeImage:",
-	    "eraseImage:"
+	    "eraseImage:",
+	    "rotateImage90:",
+	    "rotateImage180:",
+	    "rotateImage270:"
 	);
 	Outlets = (
-	    controlWin,
 	    fileListData,
-	    fitButton,
 	    fileListView,
-	    scrollView,
-	    smallView,
+	    controlWin,
 	    smallWindow,
-	    fullScreenButton,
-	    fullScreenMenuItem
+	    smallView,
+	    scrollView,
+	    fitButton,
+	    fullScreenMenuItem,
+	    fullScreenButton
 	);
 	Super = NSObject;
     };
@@ -39,6 +41,10 @@
 	    "orderFrontFontPanel:",
 	    "prevImage:",
 	    "removeImage:",
+	    "rotateImage180:",
+	    "rotateImage270:",
+	    "rotateImage90:",
+	    "setFullScreen :",
 	    "setFullScreen:",
 	    "setScaleToFit:",
 	    "showPrefPanel:"
