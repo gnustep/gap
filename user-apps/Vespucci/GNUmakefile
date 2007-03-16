@@ -8,40 +8,37 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # Application
 #
 VERSION = 0.1
-PACKAGE_NAME = LaternaMagica
-APP_NAME = LaternaMagica
-LaternaMagica_APPLICATION_ICON = 
+PACKAGE_NAME = Vespucci
+APP_NAME = Vespucci
+Vespucci_APPLICATION_ICON = 
+GNUSTEP_INSTALLATION_DIR = $(HOME)/GNUstep
 
 
 #
 # Resource files
 #
-LaternaMagica_RESOURCE_FILES = \
-Resources/LaternaMagica.gorm\
+Vespucci_RESOURCE_FILES = \
+Resources/MainMenu.gorm\
 Resources/Info-gnustep.plist
 
 #
 # Header files
 #
-LaternaMagica_HEADER_FILES = \
-AppController.h \
-FileTable.h \
-LMFlipView.h
+Vespucci_HEADER_FILES = \
+VEWinController.h
 
 #
 # Class files
 #
-LaternaMagica_OBJC_FILES = \
-AppController.m \
-FileTable.m \
-LMFlipView.m
+Vespucci_OBJC_FILES = \
+VEWinController.m
 
 #
 # C files
 #
-LaternaMagica_C_FILES = 
+Vespucci_C_FILES = 
 
-LaternaMagica_OBJC_FILES += \
+Vespucci_OBJC_FILES += \
 main.m 
 
 #

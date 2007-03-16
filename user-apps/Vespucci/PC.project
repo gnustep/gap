@@ -1,48 +1,37 @@
 {
     APPLICATIONICON = "";
     APP_DOCUMENT_BASED = NO;
-    BUILDTOOL = "/usr/bin/make";
+    APP_TYPE = GORM;
     CLASS_FILES = (
-	AppController.m,
-	ftpclient.m,
-	localclient.m,
-	fileTable.m,
-	fileElement.m,
-	client.m
+	VEWinController.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
-    CREATION_DATE = "2005-03-30 09:43:03 +0200";
+    CREATION_DATE = "2007-03-07 22:56:30 +0100";
     DOCU_FILES = (
     );
     FRAMEWORKS = (
     );
     HEADER_FILES = (
-	AppController.h,
-	ftpclient.h,
-	localclient.h,
-	fileTable.h,
-	fileElement.h,
-	client.h
+	VEWinController.h
     );
     IMAGES = (
-	arrow_left.tiff,
-	arrow_right.tiff
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	FTP.gorm
+	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-11-29 21:35:11 +0100";
+    LAST_EDITING = "2007-03-13 20:10:04 +0100";
     LIBRARIES = (
 	"gnustep-base",
-	"gnustep-gui"
+	"gnustep-gui",
+	SimpleWebKit
     );
     LINKEROPTIONS = "";
     LOCALIZED_RESOURCES = (
     );
-    MAININTERFACE = FTP.gorm;
+    MAININTERFACE = MainMenu.gorm;
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     OBJC_COMPILEROPTIONS = "";
     OTHER_RESOURCES = (
@@ -52,38 +41,38 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "419 72 883 910 0 0  1280 1024 ";
+	ProjectWindow = "201 155 677 600 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
-	"Riccardo Mottola <rmottola@users.sf.net>"
+	"Riccardo Mottola"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2005-2006";
-    PROJECT_COPYRIGHT_DESC = "Released under GPL";
+    PROJECT_COPYRIGHT = "Copyright (C) 2007";
+    PROJECT_COPYRIGHT_DESC = "Released under GPL v2";
     PROJECT_CREATOR = "";
-    PROJECT_DESCRIPTION = "FTP client";
-    PROJECT_DOCUMENTEXTENSIONS = (
-    );
+    PROJECT_DESCRIPTION = "WorldWideWeb Browser";
     PROJECT_DOCUMENTTYPES = (
     );
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "";
-    PROJECT_NAME = FTP;
-    PROJECT_RELEASE = 0.2;
+    PROJECT_NAME = Vespucci;
+    PROJECT_RELEASE = 0.1;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
-    PROJECT_URL = "http://savannah.nongnu/project/gap/";
+    PROJECT_URL = "";
     SEARCH_HEADER_DIRS = (
     );
     SEARCH_LIB_DIRS = (
+	"/usr/GNUstep/Local/Library/Libraries",
+	"/usr/GNUstep/Local/Library/Frameworks",
+	"/usr/GNUstep/Local/Library/Frameworks/SimpleWebKit.framework/Versions/A",
+	"/usr/GNUstep/Local/Library/Libraries"
     );
     SUBPROJECTS = (
     );
     SUPPORTING_FILES = (
-	GNUmakefile.preamble,
-	GNUmakefile,
-	GNUmakefile.postamble
+	VespucciInfo.plist
     );
     USER_LANGUAGES = (
 	English

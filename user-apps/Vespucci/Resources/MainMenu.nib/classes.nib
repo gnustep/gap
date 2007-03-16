@@ -1,0 +1,93 @@
+{
+    IBClasses = (
+	{
+	    ACTIONS = {
+		setUrl = id;
+	    };
+	    CLASS = VEWinController;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		status = id;
+		urlField = id;
+		webView = id;
+	    };
+	    SUPERCLASS = NSObject;
+	},
+	{
+	    ACTIONS = {
+		alignCenter = id;
+		alignJustified = id;
+		alignLeft = id;
+		alignRight = id;
+		changeAttributes = id;
+		changeColor = id;
+		changeDocumentBackgroundColor = id;
+		changeFont = id;
+		checkSpelling = id;
+		copy = id;
+		copyFont = id;
+		cut = id;
+		delete = id;
+		goBack = id;
+		goForward = id;
+		makeTextLarger = id;
+		makeTextSmaller = id;
+		paste = id;
+		pasteAsPlainText = id;
+		pasteAsRichText = id;
+		pasteFont = id;
+		performFindPanelAction = id;
+		reload = id;
+		setDownloadDelegate = id;
+		setEditingDelegate = id;
+		setFrameLoadDelegate = id;
+		setPolicyDelegate = id;
+		setResourceLoadDelegate = id;
+		setUIDelegate = id;
+		showGuessPanel = id;
+		startSpeaking = id;
+		stopLoading = id;
+		stopSpeaking = id;
+		takeStringURLFrom = id;
+	    };
+	    CLASS = WebView;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		_downloadDelegate = id;
+		_editingDelegate = id;
+		_frameLoadDelegate = id;
+		_policyDelegate = id;
+		_resourceLoadDelegate = id;
+		_uiDelegate = id;
+	    };
+	    SUPERCLASS = NSView;
+	},
+	{
+	    ACTIONS = {
+		changeAttributes = id;
+		changeDocumentBackgroundColor = id;
+		goBack = id;
+		goForward = id;
+		makeTextLarger = id;
+		makeTextSmaller = id;
+		performFindPanelAction = id;
+		reload = id;
+		setDownloadDelegate = id;
+		setEditingDelegate = id;
+		setFrameLoadDelegate = id;
+		setPolicyDelegate = id;
+		setResourceLoadDelegate = id;
+		setUIDelegate = id;
+		setUrl = id;
+		startSpeaking = id;
+		stopLoading = id;
+		stopSpeaking = id;
+		takeStringURLFrom = id;
+	    };
+	    CLASS = FirstResponder;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	}
+    );
+    IBVersion = 1;
+}
