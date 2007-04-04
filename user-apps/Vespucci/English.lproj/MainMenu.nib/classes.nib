@@ -1,0 +1,27 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {setUrl = id; }; 
+            CLASS = VEWinController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {status = NSTextField; urlField = NSTextField; webView = WebView; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                goBack = id; 
+                goForward = id; 
+                makeTextLarger = id; 
+                makeTextSmaller = id; 
+                reload = id; 
+                stopLoading = id; 
+                takeStringURLFrom = id; 
+            }; 
+            CLASS = WebView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
