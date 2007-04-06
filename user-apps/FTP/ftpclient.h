@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2006 Riccardo Mottola
+ Copyright (C) 2005-2007 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -68,6 +68,7 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
 
 - (int)readReply :(NSMutableArray **)result;
 - (int)writeLine:(char *)line;
+- (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog;
 - (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth;
 - (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth;
 

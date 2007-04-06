@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2006 Riccardo Mottola
+ Copyright (C) 2005-2007 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -234,19 +234,29 @@
 }
 
 /*
- writes a single line to the control connection
+ writes a single line to the control connection, logging it always
  */
 - (int)writeLine:(char *)line
 {
+    return [self writeLine:line byLoggingIt:YES];
+}
+
+/*
+ writes a single line to the control connection
+ */
+- (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog
+{
     int sentBytes;
     int bytesToSend;
-    
+
     bytesToSend = strlen(line);
-    [self logIt:[NSString stringWithCString:line length:(bytesToSend - 2)]];
+    if (doLog)
+        [self logIt:[NSString stringWithCString:line length:(bytesToSend - 2)]];
     if ((sentBytes = send(controlSocket, line, strlen(line), 0)) < bytesToSend)
         NSLog(@"sent %d out of %d", sentBytes, bytesToSend);
     return sentBytes;
 }
+
 
 - (int)setTypeToI
 {
@@ -664,7 +674,6 @@
     sprintf(tempStr, "USER %s\r\n", user);
     [self writeLine:tempStr];
     replyCode = [self readReply:&reply];
-    NSLog(@"user reply is: %@", [reply objectAtIndex:0]);
     if (replyCode == 530)
     {
         NSLog(@"Not logged in: %@", [reply objectAtIndex:0]);
@@ -675,9 +684,8 @@
     [reply release];
     
     sprintf(tempStr, "PASS %s\r\n", pass);
-    [self writeLine:tempStr];
+    [self writeLine:tempStr byLoggingIt:NO];
     replyCode = [self readReply:&reply];
-    NSLog(@"pass reply is: %@", [reply objectAtIndex:0]);
     if (replyCode == 530)
     {
         NSLog(@"Not logged in: %@", [reply objectAtIndex:0]);
@@ -1008,6 +1016,7 @@
             
             buff[readBytes] = '\0';
             fprintf(stderr, "%s\n", buff);
+            [self logIt:[NSString stringWithCString:buff]];
             state = READ; /* reset the state for a new line */
             readBytes = 0;
             aFile = [[fileElement alloc] initWithLsLine:buff];
