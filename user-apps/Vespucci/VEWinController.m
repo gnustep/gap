@@ -22,6 +22,8 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+//#define HAVE_BROKEN_NSURLREQUEST 0
+
 #import "VEWinController.h"
 
 @implementation VEWinController
@@ -100,7 +102,12 @@
    
    url = [urlField stringValue];
    NSLog(@"set url to %@", url);
-   [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]]; 
+#ifdef HAVE_BROKEN_NSURLREQUEST
+    NSData *data=[NSData dataWithContentsOfURL:url];
+    [[webView mainFrame] loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+#else
+   [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+#endif
 }
 
 @end
