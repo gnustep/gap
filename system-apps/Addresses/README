@@ -82,9 +82,10 @@ EXTENDING VIA PLUGINS
 To keep the library and application as open as possible, it is extensible via
 plugins. These are loaded from the usual places: 
 
-	 $(GNUSTEP_ROOT)/System/Library/Addresses 
-	 $(GNUSTEP_ROOT)/Local/Library/Addresses 
-	 $(HOME)/GNUstep/Library/Addresses 
+	 $(GNUSTEP_SYSTEM_LIBRARY)/Addresses
+	 $(GNUSTEP_NETWORK_LIBRARY)/Addresses  
+	 $(GNUSTEP_LOCAL_LIBRARY)/Addresses
+	 $(GNUSTEP_USER_LIBRARY)/Addresses 
 
 There are currently two kinds of plugins, and they usually appear in pairs of
 two: plugins that provide new address book classes, and plugins that contain
