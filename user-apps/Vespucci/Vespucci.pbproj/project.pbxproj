@@ -63,7 +63,7 @@
 			children = (
 				29B97325FDCFA39411CA2CEA,
 				29B97324FDCFA39411CA2CEA,
-				8506F5A00BC39A8400A80110,
+				85C7B90F0BC6EB0A00A80101,
 			);
 			isa = PBXGroup;
 			name = "Other Frameworks";
@@ -281,7 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1058C7A3FEA54F0111CA2CBB,
-				8506F5A10BC39A8400A80110,
+				85C7B9100BC6EB0A00A80101,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,18 +325,6 @@
 //852
 //853
 //854
-		8506F5A00BC39A8400A80110 = {
-			isa = PBXFrameworkReference;
-			name = WebKit.framework;
-			path = /System/Library/Frameworks/WebKit.framework;
-			refType = 0;
-		};
-		8506F5A10BC39A8400A80110 = {
-			fileRef = 8506F5A00BC39A8400A80110;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85A1AA730BB9497300A80110 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -378,6 +366,18 @@
 		};
 		85A386C70BC3AD6600A80110 = {
 			fileRef = 85A386C50BC3AD6600A80110;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85C7B90F0BC6EB0A00A80101 = {
+			isa = PBXFrameworkReference;
+			name = WebKit.framework;
+			path = /System/Library/Frameworks/WebKit.framework;
+			refType = 0;
+		};
+		85C7B9100BC6EB0A00A80101 = {
+			fileRef = 85C7B90F0BC6EB0A00A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};
