@@ -23,8 +23,8 @@ AddressManager_LOCALIZED_RESOURCE_FILES=\
 AddressManager_LANGUAGES=Dutch English French German Spanish
 AddressManager_OBJCFLAGS=-I../Frameworks -Wall
 AddressManager_LDFLAGS=\
-	-L../Frameworks/AddressView/AddressView.framework/Versions/A \
-	-L../Frameworks/Addresses/Addresses.framework/Versions/A     \
+	-L../Frameworks/AddressView/AddressView.framework/$(GNUSTEP_TARGET_LDIR) \
+	-L../Frameworks/Addresses/Addresses.framework/$(GNUSTEP_TARGET_LDIR)     \
 	-lAddressView -lAddresses
 
 -include GNUmakefile.preamble
