@@ -19,8 +19,6 @@
 #  If not, write to the Free Software Foundation,
 #  59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
-
 Installer_MAIN_MODEL_FILE = Installer.gorm
 
 include $(GNUSTEP_MAKEFILES)/common.make
@@ -46,5 +44,4 @@ Installer_APPLICATION_ICON = Installer.app.tiff
 
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/application.make
-include $(GNUSTEP_MAKEFILES)/aggregate.make
 -include GNUmakefile.postamble
