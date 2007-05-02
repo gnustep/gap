@@ -11,7 +11,6 @@ VERSION = 0.1
 PACKAGE_NAME = RemoteDesk
 APP_NAME = RemoteDesk
 RemoteDesk_APPLICATION_ICON = remotedesk.tiff
-GNUSTEP_INSTALLATION_DIR = $(HOME)/GNUstep
 
 
 #

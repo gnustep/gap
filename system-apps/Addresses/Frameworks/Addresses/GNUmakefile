@@ -1,4 +1,3 @@
-debug=yes
 include $(GNUSTEP_MAKEFILES)/common.make
 
 FRAMEWORK_NAME=Addresses
@@ -49,6 +48,6 @@ include $(GNUSTEP_MAKEFILES)/framework.make
 -include GNUmakefile.postamble
 
 after-Addresses-install::
-	ln -sf $(GNUSTEP_INSTALLATION_DIR)/Library/Headers/Addresses \
-	       $(GNUSTEP_INSTALLATION_DIR)/Library/Headers/AddressBook
+	ln -sf $(GNUSTEP_HEADERS)/Addresses \
+	       $(GNUSTEP_HEADERS)/AddressBook
 
