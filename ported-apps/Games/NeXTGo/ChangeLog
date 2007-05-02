@@ -1,3 +1,12 @@
+2007-05-02  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/GNUmakefile (GNUSTEP_INSTALLATION_DIR): Do not
+	set GNUSTEP_INSTALLATION_DIR.
+	(GNUSTEP_MAKEFILES): Do not set GNUSTEP_MAKEFILES.
+	(aggregate.make): Do not include aggregate.make
+	* Source/GNUmakefile.preamble: Removed unused/meaningless -I and
+	-L flags.  Removed -g flags that are already used by default.
+	
 2005-11-05 15:27 Gregory John Casamento <greg_casamento@yahoo.com>
 
 	* Source/smartgo.h: Updated declarations.
