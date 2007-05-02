@@ -1,4 +1,3 @@
-debug=yes
 include $(GNUSTEP_MAKEFILES)/common.make
 
 FRAMEWORK_NAME=AddressView
@@ -35,4 +34,3 @@ AddressView_LDFLAGS=-L..
 -include GNUmakefile.local
 include $(GNUSTEP_MAKEFILES)/framework.make
 -include GNUmakefile.postamble
-
