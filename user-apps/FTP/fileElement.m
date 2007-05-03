@@ -121,6 +121,14 @@
  it will skip a line that is not considered meaningful, like:
  total 74184 (typical from Unix ls -l)
  and return nil.
+ 
+ some attempt at scanning OS400 / i5 ftp listings is attempted too,
+ those are in the style of:
+ SVIFELMA        32768 02/05/07 15:32:42 *FILE      INSOLUTO
+ SVIFELMA                                *MEM       INSOLUTO.INSOLUTO
+
+ the feof line is ignored
+ 
  */
 - (id)initWithLsLine :(char *)line
 {
@@ -139,8 +147,14 @@
 
     [super init];
 
+    // typical Unix end of listing
     if (strstr(line, "total") == line)
         return nil;
+    
+    // typical IBM OS400 end of listing
+    if (strstr(line, "feof") == line)
+        return nil;
+
     
     whiteSet = [NSCharacterSet whitespaceCharacterSet];
     splitLine = [NSMutableArray arrayWithCapacity:5];
@@ -274,6 +288,81 @@
         } else
             return nil;
         
+    } else if ((fullLine != NULL) && ([fullLine rangeOfString: @"*FILE"].location != NSNotFound))
+    {
+        // maybe it is an IBM AS400 / i5 style line
+	// this is an IBM listing, having the *FILE element
+        unsigned cursor;
+
+        // username block
+        cursor = 0;
+        searchRange = NSMakeRange(cursor, lineLen-cursor);
+        tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
+        tokenRange = NSMakeRange(cursor, tokenEnd.location-cursor);
+        [splitLine addObject:[fullLine substringWithRange:tokenRange]];
+        cursor = NSMaxRange(tokenEnd);
+
+        while ([fullLine characterAtIndex:cursor] == ' ' && cursor <= lineLen)
+            cursor++;
+
+    	// file size        
+        searchRange = NSMakeRange(cursor, lineLen-cursor);
+        tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
+    	tokenRange = NSMakeRange(cursor, tokenEnd.location-cursor);
+        [splitLine addObject:[fullLine substringWithRange:tokenRange]];
+        cursor = NSMaxRange(tokenEnd);
+
+        while ([fullLine characterAtIndex:cursor] == ' ' && cursor <= lineLen)
+            cursor++;
+
+    	// date     
+        searchRange = NSMakeRange(cursor, lineLen-cursor);
+        tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
+    	tokenRange = NSMakeRange(cursor, tokenEnd.location-cursor);
+        [splitLine addObject:[fullLine substringWithRange:tokenRange]];
+        cursor = NSMaxRange(tokenEnd);
+
+        while ([fullLine characterAtIndex:cursor] == ' ' && cursor <= lineLen)
+            cursor++;
+
+    	// time       
+        searchRange = NSMakeRange(cursor, lineLen-cursor);
+        tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
+    	tokenRange = NSMakeRange(cursor, tokenEnd.location-cursor);
+        [splitLine addObject:[fullLine substringWithRange:tokenRange]];
+        cursor = NSMaxRange(tokenEnd);
+
+        while ([fullLine characterAtIndex:cursor] == ' ' && cursor <= lineLen)
+            cursor++;
+
+    	// record type       
+        searchRange = NSMakeRange(cursor, lineLen-cursor);
+        tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
+    	tokenRange = NSMakeRange(cursor, tokenEnd.location-cursor);
+        [splitLine addObject:[fullLine substringWithRange:tokenRange]];
+        cursor = NSMaxRange(tokenEnd);
+
+        while ([fullLine characterAtIndex:cursor] == ' ' && cursor <= lineLen)
+            cursor++;
+
+    	// file name    
+                // typically the filename
+        if (cursor < lineLen)
+        {
+            tokenRange = NSMakeRange(cursor, lineLen-cursor);
+//            NSLog(@"last token: %@ %@", NSStringFromRange(tokenEnd), NSStringFromRange(tokenRange));
+            [splitLine addObject:[fullLine substringWithRange:tokenRange]];
+        }
+
+    	// everything is fine and ok, we have a full-blown listing and parsed it well;            
+        isDir = NO; /* OS400 is not hierarchical */
+        [[NSScanner scannerWithString: [splitLine objectAtIndex:1]] scanLongLong:(long long*)&size];
+        filename = [[splitLine objectAtIndex:5] retain];
+
+    } else
+    {
+	/* we don't know better */
+	return nil;
     }
     
     /* let's ignore the current and the parent directory some servers send over... */
