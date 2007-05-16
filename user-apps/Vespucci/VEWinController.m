@@ -22,16 +22,12 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-//#define HAVE_BROKEN_NSURLREQUEST 1
-
 #import "VEWinController.h"
 
 @implementation VEWinController
 
 - (void) awakeFromNib
 {
-    NSLog(@"AppController awakeFromNib");
-    [[webView mainFrame] loadHTMLString:@"<html><head><title>Document Title</title></head><body>This is HTML displayed by loadHTMLString</body></html>" baseURL:nil];
 }
 
 - (void) showStatus:(NSString *) str;
@@ -102,12 +98,7 @@
    
    url = [urlField stringValue];
    NSLog(@"set url to %@", url);
-#ifdef HAVE_BROKEN_NSURLREQUEST
-    NSData *data=[NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    [[webView mainFrame] loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
-#else
    [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-#endif
 }
 
 @end
