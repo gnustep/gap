@@ -3,9 +3,9 @@
 
  Copyright (C) 2007
 
- Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
+ Author: Ing. Riccardo Mottola
 
- Created: 2007-03-13
+ Created: 2007-06-26
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -23,15 +23,10 @@
  */
 
 #import <AppKit/AppKit.h>
-#import <WebKit/WebKit.h>
+#import "VEWinController.h"
 
-@interface VEWinController : NSWindowController
-{
-   IBOutlet NSTextField *urlField;	// web addresssearch field
-   IBOutlet WebView *webView;		// the Web view
-   IBOutlet NSTextField *status;	// the status
+@interface VEDocument : NSDocument {
+    VEWinController *windowController;
 }
-
-- (IBAction) setUrl:(id)sender;
 
 @end
