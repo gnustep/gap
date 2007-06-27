@@ -1,0 +1,85 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "changeAttributes:",
+	    "changeDocumentBackgroundColor:",
+	    "goBack:",
+	    "goForward:",
+	    "makeTextLarger:",
+	    "makeTextSmaller:",
+	    "performFindPanelAction:",
+	    "reload:",
+	    "setDownloadDelegate:",
+	    "setEditingDelegate:",
+	    "setFrameLoadDelegate:",
+	    "setPolicyDelegate:",
+	    "setResourceLoadDelegate:",
+	    "setUIDelegate:",
+	    "setUrl:",
+	    "startSpeaking:",
+	    "stopLoading:",
+	    "stopSpeaking:",
+	    "takeStringURLFrom:"
+	);
+	Super = NSObject;
+    };
+    VEWinController = {
+	Actions = (
+	    "setUrl:"
+	);
+	Outlets = (
+	    urlField,
+	    webView,
+	    status
+	);
+	Super = NSObject;
+    };
+    WebView = {
+	Actions = (
+	    "alignCenter:",
+	    "alignJustified:",
+	    "alignLeft:",
+	    "alignRight:",
+	    "changeAttributes:",
+	    "changeColor:",
+	    "changeDocumentBackgroundColor:",
+	    "changeFont:",
+	    "checkSpelling:",
+	    "copy:",
+	    "copyFont:",
+	    "cut:",
+	    "delete:",
+	    "goBack:",
+	    "goForward:",
+	    "makeTextLarger:",
+	    "makeTextSmaller:",
+	    "paste:",
+	    "pasteAsPlainText:",
+	    "pasteAsRichText:",
+	    "pasteFont:",
+	    "performFindPanelAction:",
+	    "reload:",
+	    "setDownloadDelegate:",
+	    "setEditingDelegate:",
+	    "setFrameLoadDelegate:",
+	    "setPolicyDelegate:",
+	    "setResourceLoadDelegate:",
+	    "setUIDelegate:",
+	    "showGuessPanel:",
+	    "startSpeaking:",
+	    "stopLoading:",
+	    "stopSpeaking:",
+	    "takeStringURLFrom:"
+	);
+	Outlets = (
+	    _downloadDelegate,
+	    _editingDelegate,
+	    _frameLoadDelegate,
+	    _policyDelegate,
+	    _resourceLoadDelegate,
+	    _uiDelegate
+	);
+	Super = NSView;
+    };
+}
