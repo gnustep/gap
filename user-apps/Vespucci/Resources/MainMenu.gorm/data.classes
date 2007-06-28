@@ -24,6 +24,13 @@
 	);
 	Super = NSObject;
     };
+    VEAppContoller = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
     VEWinController = {
 	Actions = (
 	    "setUrl:"

@@ -14,29 +14,39 @@ Vespucci_APPLICATION_ICON =
 
 
 #
+# Libraries
+#
+Vespucci_LIBRARIES_DEPEND_UPON += -lSimpleWebKit 
+
+#
 # Resource files
 #
 Vespucci_RESOURCE_FILES = \
-Resources/MainMenu.gorm\
-Resources/Info-gnustep.plist
+Resources/MainMenu.gorm \
+Resources/VEDocument.gorm \
+Resources/Info-gnustep.plist 
+
 
 #
 # Header files
 #
 Vespucci_HEADER_FILES = \
-VEWinController.h
+VEWinController.h \
+VEAppContoller.h \
+VEAppController.h \
+VEDocument.h
 
 #
 # Class files
 #
 Vespucci_OBJC_FILES = \
-VEWinController.m
+VEWinController.m \
+VEAppController.m \
+VEDocument.m
 
 #
-# C files
+# Other sources
 #
-Vespucci_C_FILES = 
-
 Vespucci_OBJC_FILES += \
 main.m 
 
