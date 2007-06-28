@@ -3,7 +3,9 @@
     APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     CLASS_FILES = (
-	VEWinController.m
+	VEWinController.m,
+	VEAppController.m,
+	VEDocument.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -13,16 +15,20 @@
     FRAMEWORKS = (
     );
     HEADER_FILES = (
-	VEWinController.h
+	VEWinController.h,
+	VEAppContoller.h,
+	VEAppController.h,
+	VEDocument.h
     );
     IMAGES = (
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	MainMenu.gorm
+	MainMenu.gorm,
+	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2007-03-13 20:10:04 +0100";
+    LAST_EDITING = "2007-06-28 23:18:09 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -41,7 +47,8 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "201 155 677 600 0 0  1280 1024 ";
+	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 524; height = 236}";
+	ProjectWindow = "160 117 677 600 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
