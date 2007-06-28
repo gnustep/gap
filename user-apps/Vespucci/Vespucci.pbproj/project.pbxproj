@@ -434,13 +434,13 @@
 		85D522AA0C307FCD00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			path = VEAppContoller.h;
+			path = VEAppController.h;
 			refType = 4;
 		};
 		85D522AB0C307FCD00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			path = VEAppContoller.m;
+			path = VEAppController.m;
 			refType = 4;
 		};
 		85D522AC0C307FCD00A80101 = {
