@@ -13,4 +13,16 @@
     NSMainNibFile = MainMenu.gorm;
     NSPrincipalClass = NSApplication;
     NSRole = Application;
+    NSTypes = (
+	{
+	    NSDocumentClass = VEDocument;
+	    NSHumanReadableName = HTML;
+	    NSIcon = "";
+	    NSName = HTML;
+	    NSRole = Viewer;
+	    NSUnixExtensions = (
+		"htm html"
+	    );
+	}
+    );
 }

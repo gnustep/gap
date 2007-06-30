@@ -32,7 +32,6 @@ Resources/Info-gnustep.plist
 #
 Vespucci_HEADER_FILES = \
 VEWinController.h \
-VEAppContoller.h \
 VEAppController.h \
 VEDocument.h
 
