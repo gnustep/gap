@@ -26,8 +26,19 @@
 
 @implementation VEWinController
 
+- (void)dealloc
+{
+    [webView release];
+    [super dealloc];
+}
+
 - (void) awakeFromNib
 {
+}
+
+- (void)windowDidLoad
+{
+    webView = [[WebView alloc] init];
 }
 
 - (void) showStatus:(NSString *) str;
