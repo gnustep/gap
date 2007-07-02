@@ -39,9 +39,11 @@
 - (void)windowDidLoad
 {
     webView = [[WebView alloc] init];
+    [webView setFrameLoadDelegate:self];
+    [webView setUIDelegate:self];
 }
 
-- (void) showStatus:(NSString *) str;
+- (void) showStatus:(NSString *) str
 {
     [status setStringValue:str];
     NSLog(@"status: %@", str);
