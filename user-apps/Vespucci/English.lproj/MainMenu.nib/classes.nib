@@ -1,13 +1,18 @@
 {
     IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {goBackHistory = id; goForwardHistory = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = VEAppContoller; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
-            ACTIONS = {setUrl = id; }; 
+            ACTIONS = {goBackHistory = id; goForwardHistory = id; setUrl = id; }; 
             CLASS = VEWinController; 
             LANGUAGE = ObjC; 
             OUTLETS = {status = NSTextField; urlField = NSTextField; webView = WebView; }; 
-            SUPERCLASS = NSObject; 
+            SUPERCLASS = NSWindowController; 
         }, 
         {
             ACTIONS = {

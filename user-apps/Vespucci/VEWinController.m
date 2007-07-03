@@ -41,6 +41,7 @@
     webView = [[WebView alloc] init];
     [webView setFrameLoadDelegate:self];
     [webView setUIDelegate:self];
+    [webView setMaintainsBackForwardList:YES];
 }
 
 - (void) showStatus:(NSString *) str
@@ -112,6 +113,20 @@
    url = [urlField stringValue];
    NSLog(@"set url to %@", url);
    [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+}
+
+- (IBAction) goBackHistory:(id)sender
+{
+    NSLog(@"go back wc");
+    NSLog(@"backlist is long: %d", [[webView backForwardList] backListCount]);
+    [webView goBack];
+}
+
+- (IBAction) goForwardHistory:(id)sender
+{
+    NSLog(@"go forward wc");
+    NSLog(@"backlist is long: %d", [[webView backForwardList] forwardListCount]);
+    [webView goForward];
 }
 
 @end
