@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2007/07/15 22:23:13 $
 
 /* system includes */
 /* (none) */
@@ -77,10 +77,44 @@
 	  
 	  r = NSMakeRange(i+1, 2);
 	  hex = [self substringWithRange: r];
-	  c = (unsigned char)[hex hexLongValue];
-
-	  [str appendString: [NSString stringWithFormat: @"%c", c]];
-	  i+=2;
+	  
+	  BOOL hexDecodeWorked = YES;
+	  
+	  NS_DURING
+	    {
+	      c = (unsigned char)[hex hexLongValue];
+	    }
+	  NS_HANDLER
+	    {
+	      hexDecodeWorked = NO;
+	    }
+	  NS_ENDHANDLER;
+	  
+	  if (hexDecodeWorked)
+	    {
+	      [str appendString: [NSString stringWithFormat: @"%c", c]];
+	      i+=2;
+	    }
+	  else // hex decode failed!
+	    {
+	      /*
+	       * Note: This is maybe not the true and plain VCard
+	       * specification, but some Vcard files (e.g. when exported
+	       * from the Apple Address Book) don't take care when encoding
+	       * URLs (and possibly other fields). So we fall back to not
+	       * interpreting the hex characters.
+	       *
+	       * The URL format in question is this:
+	       * http://www.somesearchengine.com/query=blablabla
+	       *                                      ^
+	       *          This is not an escaped special character
+	       *
+	       * XXX: May produce problems with some URLS containing
+	       *      valid alphanumerical hex numbers after the '='.
+	       * FIX: No fix known.
+	       */
+	      [str appendString: s]; // note: s equals @"="
+	    }
 	}
       else
 	[str appendString: s];
@@ -389,20 +423,71 @@ static NSArray *knownItems;
 	    stringByTrimmingCharactersInSet: wsp];
 
   if(![str length]) return NO;
-  while(*retLine < [arr count] &&
-	[[arr objectAtIndex: *retLine] length] &&
-	[[[arr objectAtIndex: *retLine]
-	   substringWithRange: NSMakeRange(0, 1)]
-	  isEqualToString: @" "])
+  
+  /*
+   * Unfolding multi-line value fields conforming to RFC 2425
+   */
+  
+  
+  // While "there is a next line that begins with a space character"...
+  BOOL lastLineWasReadable = YES;
+  while(*retLine < [arr count] && lastLineWasReadable)
     {
-      NSString *str2;
-
-      str2 = [[arr objectAtIndex: (*retLine)++]
-	       stringByTrimmingCharactersInSet: wsp];
-      str = [str stringByAppendingString: @" "];
-      str = [str stringByAppendingString: str2];
+      NSString* str2 = [arr objectAtIndex: *retLine];
+      
+      if ([str2 length] == 0)
+	{
+	  lastLineWasReadable = NO;
+	}
+      else
+	{
+	  NSString* firstCharacter =
+	    [str2 substringWithRange: NSMakeRange(0,1)];
+	  
+	  //if ( firstCharacter == (unichar)' ' || // Space
+	  //     firstCharacter == (unichar)'\t') // TAB
+	  NSLog(@"firstChar: '%@' (%d)", firstCharacter,
+		[firstCharacter characterAtIndex:0]);
+	  if ([firstCharacter isEqualToString: @" "] || // Space
+	      [firstCharacter isEqualToString: @"\t"]) // Tab
+	    {
+	      
+	      // ...add that next line (without 'space') to the value string:
+	      
+	      /*
+	       * Ignore all spaces in front of the real data. IIRC not
+	       * compliant to the VCard standard, but the Apple Address
+	       * book does it this way, too. :-/
+	       */
+	      int startCol = 1;
+	      while (startCol < ([str2 length]-1) &&
+		     [str2 characterAtIndex: startCol] == (unichar)' ') {
+		startCol++;
+	      }
+	      
+	      /* 
+	       * Trim the first characters (usually the whitespace) and
+	       * the last two characters (the CRLF)!
+	       */
+	      str2 = [str2 substringWithRange: NSMakeRange(startCol,[str2 length]-3)];
+	      
+	      
+	      str = [str stringByAppendingString: str2];
+	      
+	      // we parsed a line more, so increase the counter
+	      (*retLine)++;
+	    }
+	  else
+	    lastLineWasReadable = NO;
+	}
     }
-		 
+  
+  #ifdef DEBUGGING
+  if (*retLine > line+1) { // XXX deleteme!
+    NSLog(@"from line %d to %d parsed value: %@", line, *retLine, str);
+  }
+  #endif // DEBUGGING
+  
   r = [str rangeOfString: @":"];
   if(r.location == NSNotFound)
     {
@@ -599,22 +684,27 @@ static NSArray *knownItems;
       NSString *encoding;
       NSString *type;
       NSData *data;
-
+      
+      NSLog(@"Photo str found. Keys %@", k);
+      
       encoding = [k restOfStringStartingWith: @"encoding="];
-      if(![encoding isEqualToString: @"base64"])
+      if(![encoding isEqualToString: @"base64"] &&
+	 ![k containsObject: @"base64"])
 	{
 	  NSLog(@"Cannot integrate image -- unknown "
 		@"encoding '%@'\n", encoding);
 	  return;
 	}
       type = [k restOfStringStartingWith: @"type="];
-
+      
       data = base64Decode([v objectAtIndex: 0]);
-
+      
       // Let's hope NSImage handles this
       [p setImageData: data];
       if(type)
 	[p setImageDataType: type];
+      else
+	[p setImageDataType: @"jpg"]; // XXX: This is a fallback solution :-(
     }
 
   // FIXME: The following keys (specified in the vcard spec) aren't
