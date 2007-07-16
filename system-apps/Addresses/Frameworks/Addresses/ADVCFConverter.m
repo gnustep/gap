@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2007/07/15 22:23:13 $
+// $Revision: 1.3 $
+// $Date: 2007/07/16 22:45:54 $
 
 /* system includes */
 /* (none) */
@@ -61,22 +61,37 @@
 {
   int i;
   NSMutableString *str;
-
-  str = [NSMutableString stringWithCapacity: [self length]];
-  for(i=0; i<[self length]; i++)
+  NSMutableString *str2;
+  
+  // process \ escaped chars
+  str = [NSMutableString stringWithString:self];
+  for (i = 0; i < [self length]; i++)
     {
       NSRange r;
       NSString *s;
 
       r = NSMakeRange(i, 1);
       s = [self substringWithRange: r];
-      if([s isEqualToString: @"="] && i < [self length]-2)
+      if([s isEqualToString: @"\\"])
+        [str deleteCharactersInRange:r];
+    }
+
+
+  str2 = [NSMutableString stringWithCapacity: [str length]];
+  for(i=0; i<[str length]; i++)
+    {
+      NSRange r;
+      NSString *s;
+
+      r = NSMakeRange(i, 1);
+      s = [str substringWithRange: r];
+      if([s isEqualToString: @"="] && i < [str length]-2)
 	{
 	  unsigned char c;
 	  NSString *hex;
 	  
 	  r = NSMakeRange(i+1, 2);
-	  hex = [self substringWithRange: r];
+	  hex = [str substringWithRange: r];
 	  
 	  BOOL hexDecodeWorked = YES;
 	  
@@ -92,7 +107,7 @@
 	  
 	  if (hexDecodeWorked)
 	    {
-	      [str appendString: [NSString stringWithFormat: @"%c", c]];
+	      [str2 appendString: [NSString stringWithFormat: @"%c", c]];
 	      i+=2;
 	    }
 	  else // hex decode failed!
@@ -113,15 +128,15 @@
 	       *      valid alphanumerical hex numbers after the '='.
 	       * FIX: No fix known.
 	       */
-	      [str appendString: s]; // note: s equals @"="
+	      [str2 appendString: s]; // note: s equals @"="
 	    }
 	}
       else
-	[str appendString: s];
+	[str2 appendString: s];
     }
 
-  str = [NSString stringWithUTF8String: [str cString]];
-  return str;
+  str2 = [NSString stringWithUTF8String: [str2 cString]];
+  return str2;
 }
 
 - (NSString*) stringByQuotedPrintableEncoding
@@ -446,8 +461,8 @@ static NSArray *knownItems;
 	  
 	  //if ( firstCharacter == (unichar)' ' || // Space
 	  //     firstCharacter == (unichar)'\t') // TAB
-	  NSLog(@"firstChar: '%@' (%d)", firstCharacter,
-		[firstCharacter characterAtIndex:0]);
+//	  NSLog(@"firstChar: '%@' (%d)", firstCharacter,
+//		[firstCharacter characterAtIndex:0]);
 	  if ([firstCharacter isEqualToString: @" "] || // Space
 	      [firstCharacter isEqualToString: @"\t"]) // Tab
 	    {
@@ -499,18 +514,19 @@ static NSArray *knownItems;
   *k = [[keyblock lowercaseString] componentsSeparatedByString: @";"];
   
   value = [str substringFromIndex: r.location+r.length];
-
+  NSLog(@"value: %@", value);
   if([value isEqualToString: @"="]) // escape to next line
     {
       value = [[arr objectAtIndex: (*retLine)++]
 		stringByTrimmingCharactersInSet: wsp];
+		NSLog(@"value2: %@", value);
       *v = [[value stringByQuotedPrintableDecoding]
 	     componentsSeparatedByString: @";"];
     }
   else
     *v = [[value stringByQuotedPrintableDecoding]
 	   componentsSeparatedByString: @";"];
-
+  NSLog(@"v: %@", *v);
   return YES;
 }
 
