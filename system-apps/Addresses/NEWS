@@ -1,9 +1,17 @@
-Current version is 0.4.6.
+Current version is 0.4.7.
+
+Since 0.4.7:
+============
+
+  o Updated Makefiles to GNUstep Make 2.0
+  o Fixed text editing to work with current GNUstep gui
+  o Improved import of VCF files: tries to interpret HEX and
+    the escape \, from Apple cards
 
 Since 0.4.6:
 ============
 
-  o Updated Makefiles to GNUstep Make 2.0
+  o Fixed output that caused broken database files
 
 Since 0.4.5:
 ============
