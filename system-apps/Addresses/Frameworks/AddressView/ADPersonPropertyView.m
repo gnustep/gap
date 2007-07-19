@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2007/07/19 17:25:20 $
 
 /* system includes */
 #include <Foundation/Foundation.h>
@@ -548,8 +548,8 @@ static float _globalFontSize;
       id cell;
 
       cell = [_cells objectAtIndex: _editingCellIndex];
-      [cell endEditing: _textObject];
       [cell setStringValue: [[[_textObject string] copy] autorelease]];
+      [cell endEditing: _textObject];
       
       if([[cell stringValue] isEmptyString])
 	{
@@ -833,8 +833,8 @@ static float _globalFontSize;
   id details;
 
   c = [_cells objectAtIndex: _editingCellIndex];
-  [c endEditing: _textObject];
   [c setStringValue: [[[_textObject string] copy] autorelease]];
+  [c endEditing: _textObject];
 
   [self updatePersonWithValueFromCell: c];
   
