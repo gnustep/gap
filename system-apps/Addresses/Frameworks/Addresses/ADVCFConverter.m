@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2007/07/16 22:45:54 $
+// $Revision: 1.4 $
+// $Date: 2007/07/19 23:01:14 $
 
 /* system includes */
 /* (none) */
@@ -89,11 +89,12 @@
 	{
 	  unsigned char c;
 	  NSString *hex;
+	  BOOL hexDecodeWorked;
 	  
 	  r = NSMakeRange(i+1, 2);
 	  hex = [str substringWithRange: r];
 	  
-	  BOOL hexDecodeWorked = YES;
+	  hexDecodeWorked = YES;
 	  
 	  NS_DURING
 	    {
@@ -430,6 +431,7 @@ static NSArray *knownItems;
   NSString *str, *keyblock, *value;
   NSCharacterSet *wsp;
   NSRange r;
+  BOOL lastLineWasReadable;
 
   wsp = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   *retLine = line;
@@ -445,7 +447,7 @@ static NSArray *knownItems;
   
   
   // While "there is a next line that begins with a space character"...
-  BOOL lastLineWasReadable = YES;
+  lastLineWasReadable = YES;
   while(*retLine < [arr count] && lastLineWasReadable)
     {
       NSString* str2 = [arr objectAtIndex: *retLine];
