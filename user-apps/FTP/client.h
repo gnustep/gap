@@ -29,7 +29,7 @@
 #import "fileElement.h"
 
 
-@interface client : NSObject
+@interface Client : NSObject
 {
     id       controller;
     NSString *workingDir;

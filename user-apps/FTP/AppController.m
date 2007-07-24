@@ -97,7 +97,7 @@
     [remoteView setDoubleAction:@selector(listDoubleClick:)];
     
     /* startup code */
-    local = [[localclient alloc] init];
+    local = [[LocalClient alloc] init];
     [local setWorkingDir:[local homeDir]];
     dirList = [local dirContents];
     [progBar setDoubleValue:0.0];  // reset the progress bar
@@ -140,7 +140,7 @@
    and works for both the local and remote path */
 - (IBAction)changePathFromMenu:(id)sender
 {
-    client      *theClient;
+    Client      *theClient;
     NSTableView *theView;
     fileTable   *theTable;
     NSString    *thePath;
@@ -181,7 +181,7 @@
    The same method works for local and remote, detecting them */
 - (IBAction)listDoubleClick:(id)sender
 {
-    client        *theClient;
+    Client        *theClient;
     NSTableView   *theView;
     fileTable     *theTable;
     int           elementIndex;
@@ -561,7 +561,7 @@
     char    tempStr2[1024];
     
     [connectPanel performClose:nil];
-    ftp = [[ftpclient alloc] initWithController:self :connMode];
+    ftp = [[FtpClient alloc] initWithController:self :connMode];
     [[connAddress stringValue] getCString:tempStr];
     if ([ftp connect:[connPort intValue] :tempStr] < 0)
     {
