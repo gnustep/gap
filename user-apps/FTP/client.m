@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Free Software Foundation
+ Copyright (C) 2005-2007 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -26,7 +26,7 @@
 
 #import "client.h"
 
-@implementation client
+@implementation Client
 
 /* initializer */
 /* we set possibly unused stuff to NULL */

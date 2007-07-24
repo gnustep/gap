@@ -53,7 +53,7 @@
 #define socklentype int
 #endif
 
-@implementation ftpclient
+@implementation FtpClient
 
 - (id)initWithController:(id)cont :(connectionModes)cMode
 {
@@ -278,7 +278,7 @@
     return 0;
 }
 
-- (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth;
+- (void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -411,7 +411,7 @@
     [reply release];
 }
 
-- (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth
+- (void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
 {
     NSString           *fileName;
     unsigned long long fileSize;

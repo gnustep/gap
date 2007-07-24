@@ -43,7 +43,7 @@
 
 typedef enum { defaultMode, portMode, passiveMode } connectionModes;
 
-@interface ftpclient : client
+@interface FtpClient : Client
 {
     int                 userDataPort;
     int                 serverDataPort;
@@ -69,8 +69,8 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
 - (int)readReply :(NSMutableArray **)result;
 - (int)writeLine:(char *)line;
 - (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog;
-- (void)retrieveFile:(fileElement *)file to:(localclient *)localClient beingAt:(int)depth;
-- (void)storeFile:(fileElement *)file from:(localclient *)localClient beingAt:(int)depth;
+- (void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;

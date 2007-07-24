@@ -62,8 +62,8 @@
     
     fileTable   *localTableData;
     fileTable   *remoteTableData;
-    ftpclient   *ftp;
-    localclient *local;
+    FtpClient   *ftp;
+    LocalClient *local;
 
     @private connectionModes    connMode;
     @private struct timeval     beginTimeVal;
@@ -120,7 +120,7 @@
 @interface fileTransmitParms : NSObject
 {
     @public fileElement *file;
-    @public localclient *localClient;
+    @public LocalClient *localClient;
     @public int         depth;
 }
 @end

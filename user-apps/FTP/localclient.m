@@ -1,7 +1,7 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005 Riccardo Mottola
+   Copyright (C) 2005-2007 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -29,7 +29,7 @@
 #import "localclient.h"
 #import "fileElement.h"
 
-@implementation localclient
+@implementation LocalClient
 
 - (id)init
 {

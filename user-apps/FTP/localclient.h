@@ -1,7 +1,7 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005 Riccardo Mottola
+   Copyright (C) 2005-2007 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -28,7 +28,7 @@
 #import <Foundation/Foundation.h>
 #import "client.h"
 
-@interface localclient : client
+@interface LocalClient : Client
 {
     
 }
