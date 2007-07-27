@@ -5,8 +5,8 @@ Since 0.4.7:
 
   o Updated Makefiles to GNUstep Make 2.0
   o Fixed text editing to work with current GNUstep gui
-  o Improved import of VCF files: tries to interpret HEX and
-    the escape \, from Apple cards
+  o Improved import of VCF files: tries to interpret HEX (by Guenther
+    Noack) and the escape \, from Apple cards
 
 Since 0.4.6:
 ============
