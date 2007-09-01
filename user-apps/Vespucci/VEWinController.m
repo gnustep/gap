@@ -38,7 +38,6 @@
 
 - (void)windowDidLoad
 {
-    webView = [[WebView alloc] init];
     [webView setFrameLoadDelegate:self];
     [webView setUIDelegate:self];
     [webView setMaintainsBackForwardList:YES];
@@ -73,7 +72,8 @@
 
 - (void) webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
-    if(frame == [sender mainFrame])
+  NSLog(@"XXX set title! %@", title);
+  if(frame == [sender mainFrame])
         [[sender window] setTitle:title];
 }
 
@@ -88,7 +88,6 @@
     NSLog(@"frame dataSource=%@", [frame dataSource]);
     NSLog(@"frame dataSource pageTitle=%@", [[frame dataSource] pageTitle]);
     NSLog(@"frame dataSource textEncodingName=%@", [[frame dataSource] textEncodingName]);
-    NSLog(@"frame DOMDocument=%@", [frame DOMDocument]);
     NSLog(@"frame frameElement=%@", [frame frameElement]);
     NSLog(@"frame frameView=%@", [frame frameView]);
     NSLog(@"frame name=%@", [frame name]);
