@@ -46,7 +46,6 @@
 - (void) showStatus:(NSString *) str
 {
     [status setStringValue:str];
-    NSLog(@"status: %@", str);
 }
 
 // delegate methods
@@ -72,7 +71,6 @@
 
 - (void) webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
-  NSLog(@"XXX set title! %@", title);
   if(frame == [sender mainFrame])
         [[sender window] setTitle:title];
 }
@@ -81,14 +79,12 @@
 {
     // Only report feedback for the main frame.
     NSLog(@"webview=%@", sender);
-    NSLog(@"webview subviews=%@", [sender subviews]);
     NSLog(@"webview mainFrame=%@", [sender mainFrame]);
     NSLog(@"frame=%@", frame);
     NSLog(@"frame childFrames=%@", [frame childFrames]);
     NSLog(@"frame dataSource=%@", [frame dataSource]);
     NSLog(@"frame dataSource pageTitle=%@", [[frame dataSource] pageTitle]);
     NSLog(@"frame dataSource textEncodingName=%@", [[frame dataSource] textEncodingName]);
-    NSLog(@"frame frameElement=%@", [frame frameElement]);
     NSLog(@"frame frameView=%@", [frame frameView]);
     NSLog(@"frame name=%@", [frame name]);
     NSLog(@"frame parentFrame=%@", [frame parentFrame]);
