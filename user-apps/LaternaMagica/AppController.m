@@ -187,6 +187,7 @@
     [[view superview] setNeedsDisplay:YES];
     [window displayIfNeeded];
     [image release];
+    [window setTitleWithRepresentedFilename:file];
 }
 
 - (IBAction)setScaleToFit:(id)sender
