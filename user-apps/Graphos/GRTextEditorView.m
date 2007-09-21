@@ -107,7 +107,7 @@
 
         theText = [[NSText alloc] initWithFrame: NSMakeRect(20, 0, 480, 250)];
         [theText setAlignment: textAlignment];
-        [theText setText: firstStr];
+        [theText setString: firstStr];
         [self makeFontsPopUp: fname];
 
         [scrollView setDocumentView: theText];

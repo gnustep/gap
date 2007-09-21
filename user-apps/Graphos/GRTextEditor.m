@@ -17,8 +17,7 @@
         [self setMaxSize: NSMakeSize(500, 2000)];
         [self setMinSize: NSMakeSize(500, 300)];
         [self setTitle: @"Text Editor"];
-        // ##### this must be fixed, frame is undeclared !
-        //		myView = [[TextEditorView alloc] initWithFrame: frame withString: string attributes: attributes];
+        myView = [[GRTextEditorView alloc] initWithFrame: [self frame] withString: string attributes: attributes];
         [self setContentView: myView];
         [self center];
     }
