@@ -151,43 +151,25 @@
     NSString *sysFontsListPath, *usrFontsListPath;
     BOOL fileExists;
     int i;
+    
+    // these just because we do it programmatically at the moment
+    NSFontManager *fontMgr;
+    NSArray *fontList;
 
-    fontsDict = [NSMutableDictionary dictionaryWithCapacity: 1];
-    env = [[NSProcessInfo processInfo] environment];
+    fontMgr = [NSFontManager sharedFontManager];
+    fontList = [fontMgr availableFonts];
 
-    sysFontsListPath = [NSString stringWithFormat:
-        @"%@/Libraries/Resources/GNUstepSystemXFontList",
-        [env objectForKey: @"GNUSTEP_SYSTEM_ROOT"]];
 
-    usrFontsListPath = [NSString stringWithFormat:
-        @"%@/GNUstep/.GNUstepXFontList", NSHomeDirectory()];
 
-    fileExists  = [[NSFileManager defaultManager] fileExistsAtPath: sysFontsListPath];
-
-    if(fileExists) {
-        [fontsDict addEntriesFromDictionary: [NSMutableDictionary
-                                                dictionaryWithContentsOfFile: sysFontsListPath]];
-    }
-
-    fileExists  = [[NSFileManager defaultManager] fileExistsAtPath: usrFontsListPath];
-
-    if(fileExists) {
-        [fontsDict addEntriesFromDictionary: [NSMutableDictionary
-                                                dictionaryWithContentsOfFile: usrFontsListPath]];
-    }
-
-    if([fontsDict count] > 0) {
-        [fontsPopUp removeAllItems];
-        fontsList = [NSArray arrayWithArray: [fontsDict allKeys]];
-        for(i = 0; i < [fontsDict count]; i++)
-            if(i < 30)
-                [fontsPopUp addItemWithTitle: [fontsList objectAtIndex: i]];
-    }
+    [fontsPopUp removeAllItems];
+    for(i = 0; i < [fontList count]; i++)
+    	[fontsPopUp addItemWithTitle: [fontList objectAtIndex: i]];
 
     if(selFontName)
         [fontsPopUp selectItemWithTitle: selFontName];
 
-    font = [NSFont fontWithName: [fontsPopUp titleOfSelectedItem] size: fontSize];
+//    font = [NSFont fontWithName: [fontsPopUp titleOfSelectedItem] size: fontSize];
+    font = [NSFont systemFontOfSize:0];
     [theText setFont: font];
     [theText setNeedsDisplay: YES];
 }
