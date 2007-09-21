@@ -247,7 +247,7 @@
     NSDictionary *attrs;
     NSMutableParagraphStyle *style;
     int result;
-
+    NSLog(@"GRText:edit");
     // a cast to get rid of a compiler warning
     style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
     [style setAlignment: align];
