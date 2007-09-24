@@ -10,7 +10,7 @@
 
     self = [super initWithContentRect: NSMakeRect(0, 0, 500, 300)
                             styleMask: style
-                              backing: NSBackingStoreRetained
+                              backing: NSBackingStoreBuffered
                                 defer: NO];
     if(self)
     {
