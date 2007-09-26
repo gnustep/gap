@@ -16,6 +16,8 @@
     if(self) {
         myView = aView;
         zmFactor = zf;
+        bzp = [[NSBezierPath bezierPath] retain];
+        [bzp setCachesBezierPath: NO];
         pos = NSMakePoint(p.x / zf, p.y / zf);
         rotation = 0;
         scalex = 1;
@@ -261,8 +263,12 @@
                                     withString: str attributes: attrs];
     result = [[editor editorView] runModal];
     if(result == NSAlertDefaultReturn)
+    {
         [self setString: [[editor editorView] textString]
              attributes: [[editor editorView] textAttributes]];
+        [bzp release];
+        bzp = [[self makePathFromString:str forFont:font] retain];
+    }
     [editor release];
     [[NSApp delegate] updateCurrentWindow];
 }
@@ -428,6 +434,42 @@
     return isvalid;
 }
 
+- (NSBezierPath *) makePathFromString: (NSString *) string
+                              forFont: (NSFont *) font
+{
+    NSTextView *textview;
+    NSGlyph *glyphs;
+    NSBezierPath *path;
+    
+    textview = [[NSTextView alloc] init];
+
+    [textview setString: string];
+    [textview setFont: font];
+
+    NSLayoutManager *layoutManager;
+    layoutManager = [textview layoutManager];
+
+    NSRange range;
+    range = [layoutManager glyphRangeForCharacterRange:
+        NSMakeRange (0, [string length])
+                                  actualCharacterRange: NULL];
+    
+    glyphs = (NSGlyph *) malloc (sizeof(NSGlyph) * (range.length * 2));
+    [layoutManager getGlyphs: glyphs  range: range];
+
+    
+    path = [NSBezierPath bezierPath];
+
+    [path moveToPoint: NSMakePoint (20.0, 20.0)];
+    [path appendBezierPathWithGlyphs: glyphs
+                               count: range.length  inFont: font];
+
+    free (glyphs);
+    [textview release];
+
+    return (path);
+}    
+
 - (void)Draw
 {
     NSArray *lines;
@@ -435,16 +477,18 @@
     float baselny = pos.y;
     NSColor *color;
     int i;
-    NSBezierPath *bzp;
+    NSBezierPath *bezp;
 
     if(!visible)
         return;
 
-    bzp = [NSBezierPath bezierPath];
-    if(strlen([str cString]) > 0) {
+    bezp = [NSBezierPath bezierPath];
+    [bezp appendBezierPath:bzp];
+    if([str length] > 0) {
         [font set];
 
-        if(filled) {
+        if(stroked) {
+            [NSGraphicsContext saveGraphicsState];
             color = [NSColor colorWithDeviceCyan: fillColor[0]
                                          magenta: fillColor[1]
                                           yellow: fillColor[2]
@@ -452,22 +496,32 @@
                                            alpha: fillAlpha];
             color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
             [color set];
+            [bezp stroke];
+            [NSGraphicsContext restoreGraphicsState];
+        }
+        
+        if(filled) {
+            [NSGraphicsContext saveGraphicsState];
+            color = [NSColor colorWithDeviceCyan: fillColor[0]
+                                         magenta: fillColor[1]
+                                          yellow: fillColor[2]
+                                           black: fillColor[3]
+                                           alpha: fillAlpha];
+            color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+            [color set];
+            [bezp fill];
+            [NSGraphicsContext restoreGraphicsState];
         }
 
+        
         lines = [str componentsSeparatedByString: @"\n"];
         for(i = 0; i < [lines count]; i++) {
             line = [lines objectAtIndex: i];
 
-            /*
-             PSmoveto(pos.x, baselny);
-             PSscale(scalex, scaley);
-             //	PSrotate(rotation);
-             PSshow([line cString]);
-             */
             if(isSelect) {
                 [[NSColor blackColor] set];
-                [bzp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
-                [bzp stroke];
+                [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
+                [bezp stroke];
                 //				PSlineto(pos.x + bounds.size.width, baselny);
                 //				PSstroke();
             }

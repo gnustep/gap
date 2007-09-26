@@ -19,6 +19,7 @@
     NSString *fname = nil;
     NSParagraphStyle *pstyle;
 
+
     self = [super initWithFrame: frameRect];
     if(self)
     {
@@ -117,6 +118,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(sizeFieldDidEndEditing:)
                                                      name:@"NSControlTextDidEndEditingNotification" object:nil];
+
     }
     return self;
 }
@@ -168,8 +170,7 @@
     if(selFontName)
         [fontsPopUp selectItemWithTitle: selFontName];
 
-//    font = [NSFont fontWithName: [fontsPopUp titleOfSelectedItem] size: fontSize];
-    font = [NSFont systemFontOfSize:0];
+    font = [NSFont fontWithName: [fontsPopUp titleOfSelectedItem] size: fontSize];
     [theText setFont: font];
     [theText setNeedsDisplay: YES];
 }

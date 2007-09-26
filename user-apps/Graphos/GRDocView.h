@@ -2,7 +2,7 @@
 #import <AppKit/AppKit.h>
 
 #import "GRBezierPathEditor.h"
-#import "GRText.h"
+
 
 #define PREPAREUNDO(target, method) ({\
     [undoManager beginUndoGrouping]; \
@@ -49,6 +49,7 @@
 - (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
 - (void)addPathEditor;
+- (void)addBoxAtPoint:(NSPoint)p;
 - (void)addTextAtPoint:(NSPoint)p;
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;
 - (NSArray *)updatePrintInfo: (NSPrintInfo *)pi;

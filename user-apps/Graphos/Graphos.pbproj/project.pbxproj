@@ -131,6 +131,7 @@
 				4A9504D0FFE6A4CB11CA0CBA,
 				4A9504D1FFE6A4CB11CA0CBA,
 			);
+			hasScannedForEncodings = 1;
 			isa = PBXProject;
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA;
 			projectDirPath = "";
@@ -161,12 +162,18 @@
 				F539B1EE08A2D91C01A8012F,
 				F539B1F708A3570901A8012F,
 				F539B1F808A3570901A8012F,
+				85DE3FF40CA06C2200A80101,
+				85DE3FF50CA06C2200A80101,
 				F539B1FB08A3578301A8012F,
 				F539B1FC08A3578301A8012F,
 				F539B1FF08A3578C01A8012F,
 				F539B20008A3578C01A8012F,
+				85DE40060CA0772E00A80101,
+				85DE40070CA0772E00A80101,
 				F539B20308A3589601A8012F,
 				F539B20408A3589601A8012F,
+				85AEB2950CA43E7A00A80101,
+				85AEB2960CA43E7A00A80101,
 				F539B20708A3595201A8012F,
 				F539B20808A3595201A8012F,
 				F539B20B08A359DC01A8012F,
@@ -373,7 +380,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 1;
 		};
 		2A37F4C7FDCFA73011CA2CEA = {
 			buildActionMask = 2147483647;
@@ -389,6 +395,9 @@
 				F539B21108A35A5001A8012F,
 				F539B25908A35E7001A8012F,
 				F539B25D08A35ECD01A8012F,
+				85DE3FF60CA06C2200A80101,
+				85DE40080CA0772E00A80101,
+				85AEB2970CA43E7A00A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +450,9 @@
 				F539B21208A35A5001A8012F,
 				F539B25A08A35E7001A8012F,
 				F539B25E08A35ECD01A8012F,
+				85DE3FF70CA06C2200A80101,
+				85DE40090CA0772E00A80101,
+				85AEB2980CA43E7A00A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +515,88 @@
 //4A2
 //4A3
 //4A4
+//850
+//851
+//852
+//853
+//854
+		85AEB2950CA43E7A00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRBox.h;
+			refType = 4;
+		};
+		85AEB2960CA43E7A00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRBox.m;
+			refType = 4;
+		};
+		85AEB2970CA43E7A00A80101 = {
+			fileRef = 85AEB2950CA43E7A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85AEB2980CA43E7A00A80101 = {
+			fileRef = 85AEB2960CA43E7A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DE3FF40CA06C2200A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRBoxEditor.h;
+			refType = 4;
+		};
+		85DE3FF50CA06C2200A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRBoxEditor.m;
+			refType = 4;
+		};
+		85DE3FF60CA06C2200A80101 = {
+			fileRef = 85DE3FF40CA06C2200A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DE3FF70CA06C2200A80101 = {
+			fileRef = 85DE3FF50CA06C2200A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DE40060CA0772E00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRObjectControlPoint.h;
+			refType = 4;
+		};
+		85DE40070CA0772E00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRObjectControlPoint.m;
+			refType = 4;
+		};
+		85DE40080CA0772E00A80101 = {
+			fileRef = 85DE40060CA0772E00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DE40090CA0772E00A80101 = {
+			fileRef = 85DE40070CA0772E00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//850
+//851
+//852
+//853
+//854
 //F50
 //F51
 //F52
@@ -689,11 +783,13 @@
 			};
 		};
 		F539B1ED08A2D91C01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRDocView.h;
 			refType = 4;
 		};
 		F539B1EE08A2D91C01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRDocView.m;
 			refType = 4;
@@ -711,11 +807,13 @@
 			};
 		};
 		F539B1F708A3570901A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRBezierPathEditor.h;
 			refType = 4;
 		};
 		F539B1F808A3570901A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRBezierPathEditor.m;
 			refType = 4;
@@ -733,11 +831,13 @@
 			};
 		};
 		F539B1FB08A3578301A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRFunctions.h;
 			refType = 4;
 		};
 		F539B1FC08A3578301A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRFunctions.m;
 			refType = 4;
@@ -755,11 +855,13 @@
 			};
 		};
 		F539B1FF08A3578C01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRBezierControlPoint.h;
 			refType = 4;
 		};
 		F539B20008A3578C01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRBezierControlPoint.m;
 			refType = 4;
@@ -777,11 +879,13 @@
 			};
 		};
 		F539B20308A3589601A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRText.h;
 			refType = 4;
 		};
 		F539B20408A3589601A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRText.m;
 			refType = 4;
@@ -799,11 +903,13 @@
 			};
 		};
 		F539B20708A3595201A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRPropsEditor.h;
 			refType = 4;
 		};
 		F539B20808A3595201A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRPropsEditor.m;
 			refType = 4;
@@ -821,11 +927,13 @@
 			};
 		};
 		F539B20B08A359DC01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRTextEditor.h;
 			refType = 4;
 		};
 		F539B20C08A359DC01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRTextEditor.m;
 			refType = 4;
@@ -843,11 +951,13 @@
 			};
 		};
 		F539B20F08A35A5001A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRTextEditorView.h;
 			refType = 4;
 		};
 		F539B21008A35A5001A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRTextEditorView.m;
 			refType = 4;
@@ -865,11 +975,13 @@
 			};
 		};
 		F539B25708A35E7001A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Graphos.h;
 			refType = 4;
 		};
 		F539B25808A35E7001A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Graphos.m;
 			refType = 4;
@@ -887,11 +999,13 @@
 			};
 		};
 		F539B25B08A35ECD01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRTools.h;
 			refType = 4;
 		};
 		F539B25C08A35ECD01A8012F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GRTools.m;
 			refType = 4;

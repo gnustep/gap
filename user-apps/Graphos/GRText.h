@@ -7,6 +7,7 @@
 @interface GRText : NSObject
 {
     GRDocView *myView;
+    NSBezierPath *bzp;
     NSString *str;
     NSFont *font;
     NSPoint pos;
