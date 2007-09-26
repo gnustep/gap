@@ -1,6 +1,9 @@
 #import "GRDocView.h"
 #import "Graphos.h"
 #import "GRFunctions.h"
+#import "GRBox.h"
+#import "GRBoxEditor.h"
+#import "GRText.h"
 #import "GRTextEditor.h"
 #import "GRPropsEditor.h"
 
@@ -223,7 +226,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     GRText *gdtxt;
     int i;
-
+    
+    NSLog(@"AddTextAtPoint");
     for(i = 0; i < [objects count]; i++)
         [[objects objectAtIndex: i] unselect];
 
@@ -234,6 +238,23 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [gdtxt release];
     [self setNeedsDisplay: YES];
     // ####	[myWin setSaved: NO];
+}
+
+- (void)addBoxAtPoint:(NSPoint)p
+{
+    GRBoxEditor *box;
+    int i;
+
+    NSLog(@"AddBoxtAtPoint");
+    for(i = 0; i < [objects count]; i++)
+        [[objects objectAtIndex: i] unselect];
+
+    box = [[GRBox alloc] initInView: self atPoint: p
+                            zoomFactor: zFactor];
+    [objects addObject: box];
+//    [box select];
+    [box release];
+    [self setNeedsDisplay: YES];
 }
 
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p
@@ -1172,7 +1193,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
                 break;
             case rectangletool:
-
+                [self addBoxAtPoint: p];
                 break;
             case painttool:
 
