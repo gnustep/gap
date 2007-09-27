@@ -76,7 +76,7 @@
 	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2007-09-27 19:35:07 +0200";
+    LAST_EDITING = "2007-09-27 19:43:11 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
