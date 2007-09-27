@@ -1,6 +1,7 @@
 {
     APPLICATIONICON = "";
     APP_DOCUMENT_BASED = YES;
+    APP_TYPE = GORM;
     CLASS_FILES = (
 	Graphos.m,
 	GRBezierControlPoint.m,
@@ -12,7 +13,9 @@
 	GRText.m,
 	GRTextEditor.m,
 	GRTextEditorView.m,
-	GRTools.m
+	GRTools.m,
+	GRBox.m,
+	GRBoxEditor.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -32,7 +35,9 @@
 	GRText.h,
 	GRTextEditor.h,
 	GRTextEditorView.h,
-	GRTools.h
+	GRTools.h,
+	GRBox.h,
+	GRBoxEditor.h
     );
     IMAGES = (
 	bezier.tiff,
@@ -71,7 +76,7 @@
 	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-06-27 20:56:02 +0200";
+    LAST_EDITING = "2007-09-27 19:35:07 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -89,6 +94,7 @@
 	main.m
     );
     PC_WINDOWS = {
+	ProjectBrowser = "{x = -1.55079; y = -1.39468e-05; width = 541; height = 154}";
 	ProjectWindow = "149 36 677 599 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
@@ -125,9 +131,7 @@
     SUBPROJECTS = (
     );
     SUPPORTING_FILES = (
-	GNUmakefile.preamble,
-	GNUmakefile,
-	GNUmakefile.postamble
+	GraphosInfo.plist
     );
     USER_LANGUAGES = (
 	English
