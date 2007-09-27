@@ -267,6 +267,19 @@
 				F507216708B5ED3E01A8012F,
 				F507216E08B5ED7501A8012F,
 				F507217208B5EEE201A8012F,
+				85DC414D0CAC69E400A80101,
+				85DC414E0CAC69E400A80101,
+				85DC414F0CAC69E400A80101,
+				85DC41530CAC6A3B00A80101,
+				85DC41540CAC6A3B00A80101,
+				85DC41550CAC6A3B00A80101,
+				85DC41560CAC6A3C00A80101,
+				85DC41570CAC6A3C00A80101,
+				85DC41580CAC6A3C00A80101,
+				85DC415F0CAC6A4A00A80101,
+				85DC41600CAC6A4A00A80101,
+				85DC41610CAC6A4A00A80101,
+				85DC41620CAC6A4A00A80101,
 			);
 			isa = PBXGroup;
 			name = Resources;
@@ -431,6 +444,19 @@
 				F507216D08B5ED3E01A8012F,
 				F507216F08B5ED7501A8012F,
 				F507217308B5EEE201A8012F,
+				85DC41500CAC69E400A80101,
+				85DC41510CAC69E400A80101,
+				85DC41520CAC69E400A80101,
+				85DC41590CAC6A3C00A80101,
+				85DC415A0CAC6A3C00A80101,
+				85DC415B0CAC6A3C00A80101,
+				85DC415C0CAC6A3C00A80101,
+				85DC415D0CAC6A3C00A80101,
+				85DC415E0CAC6A3C00A80101,
+				85DC41630CAC6A4A00A80101,
+				85DC41640CAC6A4A00A80101,
+				85DC41650CAC6A4A00A80101,
+				85DC41660CAC6A4A00A80101,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +566,162 @@
 		};
 		85AEB2980CA43E7A00A80101 = {
 			fileRef = 85AEB2960CA43E7A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC414D0CAC69E400A80101 = {
+			isa = PBXFileReference;
+			name = txtAlignCenter.tiff;
+			path = Resources/txtAlignCenter.tiff;
+			refType = 4;
+		};
+		85DC414E0CAC69E400A80101 = {
+			isa = PBXFileReference;
+			name = txtAlignLeft.tiff;
+			path = Resources/txtAlignLeft.tiff;
+			refType = 4;
+		};
+		85DC414F0CAC69E400A80101 = {
+			isa = PBXFileReference;
+			name = txtAlignRight.tiff;
+			path = Resources/txtAlignRight.tiff;
+			refType = 4;
+		};
+		85DC41500CAC69E400A80101 = {
+			fileRef = 85DC414D0CAC69E400A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC41510CAC69E400A80101 = {
+			fileRef = 85DC414E0CAC69E400A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC41520CAC69E400A80101 = {
+			fileRef = 85DC414F0CAC69E400A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC41530CAC6A3B00A80101 = {
+			isa = PBXFileReference;
+			name = LineCap1.tiff;
+			path = Resources/LineCap1.tiff;
+			refType = 4;
+		};
+		85DC41540CAC6A3B00A80101 = {
+			isa = PBXFileReference;
+			name = LineCap2.tiff;
+			path = Resources/LineCap2.tiff;
+			refType = 4;
+		};
+		85DC41550CAC6A3B00A80101 = {
+			isa = PBXFileReference;
+			name = LineCap3.tiff;
+			path = Resources/LineCap3.tiff;
+			refType = 4;
+		};
+		85DC41560CAC6A3C00A80101 = {
+			isa = PBXFileReference;
+			name = LineJoin1.tiff;
+			path = Resources/LineJoin1.tiff;
+			refType = 4;
+		};
+		85DC41570CAC6A3C00A80101 = {
+			isa = PBXFileReference;
+			name = LineJoin2.tiff;
+			path = Resources/LineJoin2.tiff;
+			refType = 4;
+		};
+		85DC41580CAC6A3C00A80101 = {
+			isa = PBXFileReference;
+			name = LineJoin3.tiff;
+			path = Resources/LineJoin3.tiff;
+			refType = 4;
+		};
+		85DC41590CAC6A3C00A80101 = {
+			fileRef = 85DC41530CAC6A3B00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC415A0CAC6A3C00A80101 = {
+			fileRef = 85DC41540CAC6A3B00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC415B0CAC6A3C00A80101 = {
+			fileRef = 85DC41550CAC6A3B00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC415C0CAC6A3C00A80101 = {
+			fileRef = 85DC41560CAC6A3C00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC415D0CAC6A3C00A80101 = {
+			fileRef = 85DC41570CAC6A3C00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC415E0CAC6A3C00A80101 = {
+			fileRef = 85DC41580CAC6A3C00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC415F0CAC6A4A00A80101 = {
+			isa = PBXFileReference;
+			name = curs1.tiff;
+			path = Resources/curs1.tiff;
+			refType = 4;
+		};
+		85DC41600CAC6A4A00A80101 = {
+			isa = PBXFileReference;
+			name = curs2.tiff;
+			path = Resources/curs2.tiff;
+			refType = 4;
+		};
+		85DC41610CAC6A4A00A80101 = {
+			isa = PBXFileReference;
+			name = curs3.tiff;
+			path = Resources/curs3.tiff;
+			refType = 4;
+		};
+		85DC41620CAC6A4A00A80101 = {
+			isa = PBXFileReference;
+			name = curs4.tiff;
+			path = Resources/curs4.tiff;
+			refType = 4;
+		};
+		85DC41630CAC6A4A00A80101 = {
+			fileRef = 85DC415F0CAC6A4A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC41640CAC6A4A00A80101 = {
+			fileRef = 85DC41600CAC6A4A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC41650CAC6A4A00A80101 = {
+			fileRef = 85DC41610CAC6A4A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DC41660CAC6A4A00A80101 = {
+			fileRef = 85DC41620CAC6A4A00A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};
