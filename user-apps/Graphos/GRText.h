@@ -104,5 +104,8 @@
 
 - (BOOL)isValid;
 
+- (NSBezierPath *) makePathFromString: (NSString *) aString
+                              forFont: (NSFont *) aFont
+                              atPoint: (NSPoint) aPoint;
 @end
 
