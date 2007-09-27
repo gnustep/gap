@@ -18,7 +18,7 @@ Graphos_APPLICATION_ICON =
 #
 Graphos_RESOURCE_FILES = \
 Resources/GRDocument.gorm \
-Resources/MainMenu.gorm\
+Resources/MainMenu.gorm \
 Resources/bezier.tiff \
 Resources/blackarrow.tiff \
 Resources/circle.tiff \
@@ -47,8 +47,9 @@ Resources/txtAlignLeft.tiff \
 Resources/txtAlignRight.tiff \
 Resources/whitearrow.tiff \
 Resources/x.tiff \
-Resources/Graphos.tiff\
-Resources/Info-gnustep.plist
+Resources/Graphos.tiff \
+Resources/Info-gnustep.plist 
+
 
 #
 # Header files
@@ -64,7 +65,9 @@ GRPropsEditor.h \
 GRText.h \
 GRTextEditor.h \
 GRTextEditorView.h \
-GRTools.h
+GRTools.h \
+GRBox.h \
+GRBoxEditor.h
 
 #
 # Class files
@@ -80,13 +83,13 @@ GRPropsEditor.m \
 GRText.m \
 GRTextEditor.m \
 GRTextEditorView.m \
-GRTools.m
+GRTools.m \
+GRBox.m \
+GRBoxEditor.m
 
 #
-# C files
+# Other sources
 #
-Graphos_C_FILES = 
-
 Graphos_OBJC_FILES += \
 main.m 
 
