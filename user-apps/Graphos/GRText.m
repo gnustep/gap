@@ -249,7 +249,7 @@
     NSDictionary *attrs;
     NSMutableParagraphStyle *style;
     int result;
-    NSLog(@"GRText:edit");
+
     // a cast to get rid of a compiler warning
     style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
     [style setAlignment: align];
@@ -263,12 +263,8 @@
                                     withString: str attributes: attrs];
     result = [[editor editorView] runModal];
     if(result == NSAlertDefaultReturn)
-    {
         [self setString: [[editor editorView] textString]
              attributes: [[editor editorView] textAttributes]];
-        [bzp release];
-        bzp = [[self makePathFromString:str forFont:font] retain];
-    }
     [editor release];
     [[NSApp delegate] updateCurrentWindow];
 }
@@ -434,33 +430,34 @@
     return isvalid;
 }
 
-- (NSBezierPath *) makePathFromString: (NSString *) string
-                              forFont: (NSFont *) font
+- (NSBezierPath *) makePathFromString: (NSString *) aString
+                              forFont: (NSFont *) aFont
+                              atPoint: (NSPoint) aPoint
 {
     NSTextView *textview;
     NSGlyph *glyphs;
     NSBezierPath *path;
-    
+
     textview = [[NSTextView alloc] init];
 
-    [textview setString: string];
-    [textview setFont: font];
+    [textview setString: aString];
+    [textview setFont: aFont];
 
     NSLayoutManager *layoutManager;
     layoutManager = [textview layoutManager];
 
     NSRange range;
     range = [layoutManager glyphRangeForCharacterRange:
-        NSMakeRange (0, [string length])
+        NSMakeRange (0, [aString length])
                                   actualCharacterRange: NULL];
-    
+
     glyphs = (NSGlyph *) malloc (sizeof(NSGlyph) * (range.length * 2));
     [layoutManager getGlyphs: glyphs  range: range];
 
     
     path = [NSBezierPath bezierPath];
 
-    [path moveToPoint: NSMakePoint (20.0, 20.0)];
+    [path moveToPoint: aPoint];
     [path appendBezierPathWithGlyphs: glyphs
                                count: range.length  inFont: font];
 
@@ -482,6 +479,9 @@
     if(!visible)
         return;
 
+    [bzp release];
+    bzp = [[self makePathFromString:str forFont:font atPoint:pos] retain];
+    
     bezp = [NSBezierPath bezierPath];
     [bezp appendBezierPath:bzp];
     if([str length] > 0) {
@@ -522,8 +522,6 @@
                 [[NSColor blackColor] set];
                 [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
                 [bezp stroke];
-                //				PSlineto(pos.x + bounds.size.width, baselny);
-                //				PSstroke();
             }
 
             baselny -= parspace;

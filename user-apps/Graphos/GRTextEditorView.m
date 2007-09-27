@@ -220,8 +220,11 @@
             parSpace = fontSize * 1.2;
             selFontName = [fontsPopUp titleOfSelectedItem];
             font = [NSFont fontWithName: selFontName size: fontSize];
-            [theText setFont: font];
-            [theText setNeedsDisplay: YES];
+            if (font != nil)
+            {
+              [theText setFont: font];
+              [theText setNeedsDisplay: YES];
+            }
         }
     }
 }
@@ -246,9 +249,8 @@
     NSDictionary *dict;
     NSMutableParagraphStyle *style;
 
-    // there must be a problem with GNUstep's implementation of this
-    // or the compiler is just overly picky
-    style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
+    style = [[NSMutableParagraphStyle alloc] init];
+    [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     [style setAlignment: textAlignment];
     [style setParagraphSpacing: parSpace];
     dict = [NSDictionary dictionaryWithObjectsAndKeys:
