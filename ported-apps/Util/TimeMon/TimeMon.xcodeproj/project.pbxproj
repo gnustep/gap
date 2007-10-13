@@ -1,0 +1,350 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1458358309A7AF4B00D10324 /* TimeMonP.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1458358209A7AF4B00D10324 /* TimeMonP.tiff */; };
+		14DBF36B09A8AAA5008AA192 /* AppIcons.icns in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF36A09A8AAA5008AA192 /* AppIcons.icns */; };
+		14F5DE1E09A6ADBB006C515F /* TimeMon_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F5DE1D09A6ADBB006C515F /* TimeMon_main.m */; };
+		14F5DE2609A6ADDB006C515F /* NSColorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F5DE2109A6ADDB006C515F /* NSColorExtensions.m */; };
+		14F5DE2709A6ADDB006C515F /* Percentages.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F5DE2309A6ADDB006C515F /* Percentages.m */; };
+		14F5DE2809A6ADDB006C515F /* TimeMonColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F5DE2509A6ADDB006C515F /* TimeMonColors.m */; };
+		14F5DE2D09A6ADEF006C515F /* loadave.c in Sources */ = {isa = PBXBuildFile; fileRef = 14F5DE2909A6ADEF006C515F /* loadave.c */; };
+		14F5DE2E09A6ADEF006C515F /* TimeMonWraps.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F5DE2C09A6ADEF006C515F /* TimeMonWraps.m */; };
+		14F5DE3109A6AE1E006C515F /* TimeMon.nib in Resources */ = {isa = PBXBuildFile; fileRef = 14F5DE2F09A6AE1E006C515F /* TimeMon.nib */; };
+		14F5DE4A09A76955006C515F /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 14F5DE4909A76955006C515F /* README.rtf */; };
+		14F5DE6D09A7839B006C515F /* TimeMon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 14F5DE6C09A7839B006C515F /* TimeMon.tiff */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1458358209A7AF4B00D10324 /* TimeMonP.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TimeMonP.tiff; sourceTree = "<group>"; };
+		14DBF36A09A8AAA5008AA192 /* AppIcons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcons.icns; sourceTree = "<group>"; };
+		14F5DE1D09A6ADBB006C515F /* TimeMon_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TimeMon_main.m; sourceTree = "<group>"; };
+		14F5DE2009A6ADDB006C515F /* NSColorExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSColorExtensions.h; sourceTree = "<group>"; };
+		14F5DE2109A6ADDB006C515F /* NSColorExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSColorExtensions.m; sourceTree = "<group>"; };
+		14F5DE2209A6ADDB006C515F /* Percentages.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Percentages.h; sourceTree = "<group>"; };
+		14F5DE2309A6ADDB006C515F /* Percentages.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Percentages.m; sourceTree = "<group>"; };
+		14F5DE2409A6ADDB006C515F /* TimeMonColors.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TimeMonColors.h; sourceTree = "<group>"; };
+		14F5DE2509A6ADDB006C515F /* TimeMonColors.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TimeMonColors.m; sourceTree = "<group>"; };
+		14F5DE2909A6ADEF006C515F /* loadave.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = loadave.c; sourceTree = "<group>"; };
+		14F5DE2A09A6ADEF006C515F /* loadave.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = loadave.h; sourceTree = "<group>"; };
+		14F5DE2B09A6ADEF006C515F /* TimeMonWraps.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TimeMonWraps.h; sourceTree = "<group>"; };
+		14F5DE2C09A6ADEF006C515F /* TimeMonWraps.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TimeMonWraps.m; sourceTree = "<group>"; };
+		14F5DE3009A6AE1E006C515F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/TimeMon.nib; sourceTree = "<group>"; };
+		14F5DE4909A76955006C515F /* README.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
+		14F5DE6C09A7839B006C515F /* TimeMon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TimeMon.tiff; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* TimeMon_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeMon_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* TimeMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				14F5DE2009A6ADDB006C515F /* NSColorExtensions.h */,
+				14F5DE2109A6ADDB006C515F /* NSColorExtensions.m */,
+				14F5DE2209A6ADDB006C515F /* Percentages.h */,
+				14F5DE2309A6ADDB006C515F /* Percentages.m */,
+				14F5DE2409A6ADDB006C515F /* TimeMonColors.h */,
+				14F5DE2509A6ADDB006C515F /* TimeMonColors.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* TimeMon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* TimeMon */ = {
+			isa = PBXGroup;
+			children = (
+				14F5DE1D09A6ADBB006C515F /* TimeMon_main.m */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = TimeMon;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				14F5DE2909A6ADEF006C515F /* loadave.c */,
+				14F5DE2A09A6ADEF006C515F /* loadave.h */,
+				14F5DE2B09A6ADEF006C515F /* TimeMonWraps.h */,
+				14F5DE2C09A6ADEF006C515F /* TimeMonWraps.m */,
+				32CA4F630368D1EE00C91783 /* TimeMon_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				14DBF36A09A8AAA5008AA192 /* AppIcons.icns */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				1458358209A7AF4B00D10324 /* TimeMonP.tiff */,
+				14F5DE6C09A7839B006C515F /* TimeMon.tiff */,
+				14F5DE4909A76955006C515F /* README.rtf */,
+				14F5DE2F09A6AE1E006C515F /* TimeMon.nib */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* TimeMon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14F126810C808F9C0090F480 /* Build configuration list for PBXNativeTarget "TimeMon" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimeMon;
+			productInstallPath = "$(HOME)/Applications";
+			productName = TimeMon;
+			productReference = 8D1107320486CEB800E47090 /* TimeMon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 14F126850C808F9C0090F480 /* Build configuration list for PBXProject "TimeMon" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* TimeMon */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* TimeMon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				14F5DE3109A6AE1E006C515F /* TimeMon.nib in Resources */,
+				14F5DE4A09A76955006C515F /* README.rtf in Resources */,
+				14F5DE6D09A7839B006C515F /* TimeMon.tiff in Resources */,
+				1458358309A7AF4B00D10324 /* TimeMonP.tiff in Resources */,
+				14DBF36B09A8AAA5008AA192 /* AppIcons.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F5DE1E09A6ADBB006C515F /* TimeMon_main.m in Sources */,
+				14F5DE2609A6ADDB006C515F /* NSColorExtensions.m in Sources */,
+				14F5DE2709A6ADDB006C515F /* Percentages.m in Sources */,
+				14F5DE2809A6ADDB006C515F /* TimeMonColors.m in Sources */,
+				14F5DE2D09A6ADEF006C515F /* loadave.c in Sources */,
+				14F5DE2E09A6ADEF006C515F /* TimeMonWraps.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		14F5DE2F09A6AE1E006C515F /* TimeMon.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14F5DE3009A6AE1E006C515F /* English */,
+			);
+			name = TimeMon.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		14F126820C808F9C0090F480 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TimeMon_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PREBINDING = NO;
+				PRODUCT_NAME = TimeMon;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		14F126830C808F9C0090F480 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TimeMon_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PREBINDING = NO;
+				PRODUCT_NAME = TimeMon;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		14F126840C808F9C0090F480 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TimeMon_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = TimeMon;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		14F126860C808F9C0090F480 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+			};
+			name = Development;
+		};
+		14F126870C808F9C0090F480 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+			};
+			name = Deployment;
+		};
+		14F126880C808F9C0090F480 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14F126810C808F9C0090F480 /* Build configuration list for PBXNativeTarget "TimeMon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F126820C808F9C0090F480 /* Development */,
+				14F126830C808F9C0090F480 /* Deployment */,
+				14F126840C808F9C0090F480 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		14F126850C808F9C0090F480 /* Build configuration list for PBXProject "TimeMon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F126860C808F9C0090F480 /* Development */,
+				14F126870C808F9C0090F480 /* Deployment */,
+				14F126880C808F9C0090F480 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
