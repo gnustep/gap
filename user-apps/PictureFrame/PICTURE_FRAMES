@@ -22,7 +22,7 @@ You need to install a very basic Unix (Linux, BSD, etc) system with some
 additional software:
 - wireless modem softare (can be quite difficult to set up)
 - ntpdate or ntpd (to keep the clock on time) [OPTIONAL]
-- vncserver (to remote login and and change options) [OPTIONAL]
+- vncserver/x11vnc (to remote login and and change options) [OPTIONAL]
 - file transfer software (ftp, rsync, unison) (To upload photos)
 - A web download program (w3m, curl, etc) (If you want to show the weather)
 - GNUstep core libraries
@@ -36,7 +36,7 @@ put
 vncserver -shared -forever -notruecolor -display :0 &
 
 in your .xserverrc file (You could also use x11vnc and just make sure to run
-x11vnc -many & before starting PictureFrame).  In the .profile script, 
+x11vnc -bg -many before starting PictureFrame).  In the .profile script, 
 make sure you start PictureFrame.app automatically.
 
 You could just leave at that, which PictureFrame.app running all the time.

@@ -3,6 +3,8 @@
 #
 include $(GNUSTEP_MAKEFILES)/common.make
 
+VERSION=1.0.0
+
 PACKAGE_NAME=PictureFrame
 APP_NAME=PictureFrame
 SUBPROJECTS = SimpleWeather

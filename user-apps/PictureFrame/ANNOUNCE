@@ -1,4 +1,6 @@
 
+PictureFrame vesion 1.0.0 is available.
+
 PictureFrame.app
 ======================
 
@@ -22,5 +24,9 @@ Initial release
 Where to Get it
 ===============
 
+http://savannah.nongnu.org/download/gap/PictureFrame-1.0.0.tar.gz
 
+Or via CVS:
+
+cvs -d:pserver:anonymous@cvs.sv.gnu.org:/sources/gap co gap/user-apps/PictureFrame
 
