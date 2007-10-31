@@ -10,7 +10,7 @@ it should be able to do more than just display photos! PictureFrame.app
 does do more. At the bottom of the screen, it will display an information
 frame containing a clock (digital or analog), information about the photo
 being displayed and the current weather and forecast! PictureFrame.app is
-expandable, and in the future, people might add more things it can do.
+expandable, and in the future, people might add more features.
 
 It's possible it could be used as a screensaver as well, but it's not really
 set up for that. 
@@ -51,7 +51,4 @@ preferences to set up things the way you want. For instance, if you want
 to display the weather, you will have to set your Zip/Postal code to 
 display weather for the right area. In full-screen mode, you can bring up the
 preferences with Command-, (and remove it using the same keys).
-
-
-
 

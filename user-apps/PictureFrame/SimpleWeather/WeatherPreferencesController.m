@@ -120,7 +120,7 @@ static WeatherPreferencesController *sharedController = nil;
           str = [[sender cellAtIndex: 0] stringValue];
           [dfltmgr setObject: str forKey: DWWW];
           str = [[sender cellAtIndex: 1] stringValue];
-	  if ([str len] == 0)
+	  if ([str length] == 0)
             [dfltmgr setObject: [NSArray array]  forKey: DWWWArgs];
 	  else
             [dfltmgr setObject: [str componentsSeparatedByString: @""] 

@@ -53,21 +53,6 @@
 		9FF608A80C25F63C00505A09 /* wind.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF608860C25F63C00505A09 /* wind.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		014CEA420018CDE011CA2923 /* Debug */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		014CEA430018CDE011CA2923 /* Release */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-			};
-			name = Release;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		9F58FC440C26C8AD00404F27 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -278,8 +263,6 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-			};
 			dependencies = (
 			);
 			name = SimpleWeather;
@@ -294,12 +277,6 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "SimpleWeather" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				014CEA420018CDE011CA2923 /* Debug */,
-				014CEA430018CDE011CA2923 /* Release */,
-			);
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* SimpleWeather */;
 			projectDirPath = "";

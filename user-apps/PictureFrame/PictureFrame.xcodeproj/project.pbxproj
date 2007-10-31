@@ -21,23 +21,6 @@
 		9FF57BF90C04F9AB009CE88D /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF57BF80C04F9AB009CE88D /* PreferencesController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		9FF74FD90C03D55D000D6890 /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		9FF74FDA0C03D55D000D6890 /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXContainerItemProxy section */
 		9F58FC390C26484400404F27 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -240,50 +223,11 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INFOPLIST_FILE = "SimpleWeather-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = SimpleWeather;
-				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
-			};
 			dependencies = (
 			);
 			name = SimpleWeather;
 			productName = SimpleWeather;
 			productReference = 9F0D82620C287B4A00A8685A /* SimpleWeather.bundle */;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>SimpleWeather</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.SimpleWeather</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>BNDL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>CSResourcesFileMapped</key>
-	<string>yes</string>
-</dict>
-</plist>
-";
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -292,12 +236,6 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PictureFrame" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				9FF74FD90C03D55D000D6890 /* Development */,
-				9FF74FDA0C03D55D000D6890 /* Deployment */,
-			);
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* PictureFrame */;
 			projectDirPath = "";
