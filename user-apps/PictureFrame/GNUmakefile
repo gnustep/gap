@@ -6,6 +6,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION=1.0.0
 
 PACKAGE_NAME=PictureFrame
+CVS_MODULE_NAME = gap/user-apps/PictureFrame
+CVS_TAG_NAME=$(PACKAGE_NAME)
 APP_NAME=PictureFrame
 SUBPROJECTS = SimpleWeather
 
