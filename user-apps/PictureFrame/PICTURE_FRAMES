@@ -1,0 +1,163 @@
+
+Setting Up A Digital Picture Frame
+==================================
+
+There are several web pages that describe how to create your own digital
+picture frame - including details on taking apart the computer,
+mounting it in a picture frame and setting up the software. Search on the
+web for "digital picture frame" for more information.
+
+I'll only go into the barest details of setting up the software side, and
+describe how, instead of using the basic image viewer that most web
+sites recommend, you can use PictureFrame, a much more complete and
+full featured picture frame viewer.
+
+
+Your basic computer should have a nice screen, a reasonabe hard disk
+(5 to 10 GB or however much memory it takes to store your photos) and a
+wireless modem (unless you happen to have an ethernet plug close to where
+you want to hang the frame).
+
+You need to install a very basic Unix (Linux, BSD, etc) system with some
+additional software:
+- wireless modem softare (can be quite difficult to set up)
+- ntpdate or ntpd (to keep the clock on time) [OPTIONAL]
+- vncserver (to remote login and and change options) [OPTIONAL]
+- file transfer software (ftp, rsync, unison) (To upload photos)
+- A web download program (w3m, curl, etc) (If you want to show the weather)
+- GNUstep core libraries
+- PictureFrame.app (this program)
+
+Set up the computer to start X11 and automatically log in to a standard
+user account, so that when someone turns the DPF on, it can start up
+without any intervention. Set up vncserver to be your XServer. For instance,
+put
+
+vncserver -shared -forever -notruecolor -display :0 &
+
+in your .xserverrc file (You could also use x11vnc and just make sure to run
+x11vnc -many & before starting PictureFrame).  In the .profile script, 
+make sure you start PictureFrame.app automatically.
+
+You could just leave at that, which PictureFrame.app running all the time.
+However, I like to turn my frame off at night to save energy, so I've set up
+a cron script and a bunch of other scripts to automatically start and
+shutdown the app at the desired times.  First the cron script:
+
+---------------------------------------------------------------------------
+Edit this script with crontab -e
+---------------------------------------------------------------------------
+# Turn on frame during the day:
+35 22 * * * /home/dpf/bin/turn_off_screen.sh
+05 7 * * * /home/dpf/bin/turn_on_screen.sh
+---------------------------------------------------------------------------
+
+The cron script turns on the screen around 7 am and off at 11:30 pm. The
+turn_on_screen script looks like this:
+
+---------------------------------------------------------------------------
+turn_on_screen.sh
+---------------------------------------------------------------------------
+#!/bin/sh
+#
+# Script to turn off display
+#
+
+# Set display so that script will effect screen on frame
+export DISPLAY=:0
+
+/usr/X11R6/bin/xset dpms  0 0 0
+/usr/X11R6/bin/xset dpms force on
+/usr/X11R6/bin/xset s reset
+/usr/X11R6/bin/xset s off
+
+# Stop any old frame
+/home/dpf/bin/stop_frame.sh
+
+for n in 5 4 3 2 1 0; do
+  mv frame$n.log frame$(($n+1)).log
+done
+mv frame.log frame0.log
+
+# Start PictureFrame
+rm -f frame.log
+openapp PictureFrame.app > frame.log 2>&1 &
+
+exit 0
+---------------------------------------------------------------------------
+
+First the script turns the screen back on (which is turned off in the other
+script), then it does a bunch of stuff to rotate log files - I use the log
+files for debugging. You don't really need them yourself. Then it starts
+the PictureFrame.app app.  The turn_off_screen script looks like this:
+
+---------------------------------------------------------------------------
+turn_off_screen.sh
+---------------------------------------------------------------------------
+#!/bin/sh
+#
+# Script to turn off display
+#
+
+# Set display so that script will effect screen on frame
+export DISPLAY=:0
+
+# Stop PictureFrame
+/home/dpf/bin/stop_frame.sh
+
+# Power Save
+/usr/X11R6/bin/xset +dpms
+/usr/X11R6/bin/xset dpms force off
+---------------------------------------------------------------------------
+
+Where the stop_frame script actually kills PictureFrame.app:
+
+
+---------------------------------------------------------------------------
+stop_frame.sh
+---------------------------------------------------------------------------
+#!/bin/sh
+#
+# Stop PictureFrame
+ppid=`defaults read PictureFrame IsRunningPID | awk '{print $3}'`
+if [ $ppid != 0 ]; then
+  kill -TERM $ppid
+fi
+---------------------------------------------------------------------------
+
+Picture frame also responds to a number of keys on the keypad for easy 
+control of the picture frame.  I could never figure out a good way to
+mount the keypad so it is easy to reach, so I just mounted it on the back. It's
+a bit difficult to reach/see the keys, but I don't use it much. The keys
+are configurable via defaults, but by default, they are:
+
+r - Stop PictureFrame.app and turn the computer off
+y - Change the information displayed (increment OverlayInfo default)
+u - Go back to the previous photo
+i - Double the time between photo changes
+o - Half the time between photo changes
+
+Turning off the computer requires an extra custom script that needs to
+be installed as /usr/local/bin/poweroff:
+
+---------------------------------------------------------------------------
+poweroff
+---------------------------------------------------------------------------
+!/bin/sh
+/usr/local/bin/poweroff.sh $*
+---------------------------------------------------------------------------
+
+where the poweroff.sh script is suid and just does this:
+
+---------------------------------------------------------------------------
+poweroff.sh
+---------------------------------------------------------------------------
+!/bin/bash
+/sbin/shutdown -h 0
+---------------------------------------------------------------------------
+
+
+Now you're ready to setup PictureFrame.app
+Read the README file for information on that.
+
+
