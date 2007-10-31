@@ -16,10 +16,12 @@ PictureFrame_MAIN_MODEL_FILE=MainMenu.nib
 
 PictureFrame_LOCALIZED_RESOURCE_FILES=
 
+
 PictureFrame_LANGUAGES= English 
 
-PictureFrame_RESOURCE_FILES= English.lproj/MainMenu.nib Preferences.nib \
-  SimpleWeather/SimpleWeather.bundle
+PictureFrame_RESOURCE_FILES= English.lproj/MainMenu.nib \
+	English.lproj/Preferences.nib \
+	SimpleWeather/SimpleWeather.bundle
 
 PictureFrame_HEADER_FILES= \
 ClockView.h \
