@@ -23,7 +23,9 @@
 extern NSString *DFullScreen;
 extern NSString *DStartTime;
 extern NSString *DStopTime;
+extern NSString *DPhotoPath;
 extern NSString *DAlbum;
+extern NSString *DKeyword;
 extern NSString *DSpeed;
 extern NSString *DShowOverlay;
 extern NSString *DOverlayInfo;
