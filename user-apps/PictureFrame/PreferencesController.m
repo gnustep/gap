@@ -19,7 +19,9 @@
 NSString *DFullScreen = @"FullScreen";
 NSString *DStartTime = @"StartTime";
 NSString *DStopTime = @"StopTime";
+NSString *DPhotoPath = @"PhotoPath";
 NSString *DAlbum = @"Album";
+NSString *DKeyword = @"Keyword";
 NSString *DSpeed = @"Speed";
 NSString *DShowOverlay = @"ShowOverlay";
 NSString *DOverlayInfo = @"OverlayInfo";
@@ -61,6 +63,7 @@ static PreferencesController *sharedController = nil;
     }
 
   defKeys = [NSArray arrayWithObjects:
+		     DPhotoPath,
 		     DFullScreen,
 		     DStartTime,
 		     DStopTime,
@@ -78,6 +81,7 @@ static PreferencesController *sharedController = nil;
 		     nil];
   
     defObjs = [NSArray arrayWithObjects:
+		       [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures"],
 		       [NSNumber numberWithBool: NO],
 		       [NSNumber numberWithFloat: 730],
 		       [NSNumber numberWithFloat: 2259],
@@ -100,11 +104,9 @@ static PreferencesController *sharedController = nil;
 
 - (IBAction)showPreferences:(id)sender
 {
-#if 1
   if ([[tabView window] isVisible])
     [[tabView window] orderOut: sender];
   else 
-#endif
     {
     [[tabView window] orderFront: sender];
     [self loadValues];
@@ -159,10 +161,18 @@ static PreferencesController *sharedController = nil;
   [(NSButton *)view setState: [mgr integerForKey: DAnalogClock]];
   
   form = [TABVIEW(1) viewWithTag: TAG_ALBUM];
+  str = [mgr stringForKey: DPhotoPath];
+  if (str == nil)
+    str = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures"];
+  [[form cellAtIndex: 0] setStringValue: str];
   str = [mgr stringForKey: DAlbum];
   if (str == nil)
     str = @"";
-  [[form cellAtIndex: 0] setStringValue: str];
+  [[form cellAtIndex: 1] setStringValue: str];
+  str = [mgr stringForKey: DKeyword];
+  if (str == nil)
+    str = @"";
+  [[form cellAtIndex: 2] setStringValue: str];
 }
 
 - (IBAction)setValue: (id)sender
@@ -233,7 +243,9 @@ static PreferencesController *sharedController = nil;
 	}
       break;
     case TAG_ALBUM:
-      [dfltmgr setObject: [[sender cellAtIndex: 0] stringValue] forKey: DAlbum];
+      [dfltmgr setObject: [[sender cellAtIndex: 0] stringValue] forKey: DPhotoPath];
+      [dfltmgr setObject: [[sender cellAtIndex: 1] stringValue] forKey: DAlbum];
+      [dfltmgr setObject: [[sender cellAtIndex: 2] stringValue] forKey: DKeyword];
       break;
     default:
       break;

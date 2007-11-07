@@ -63,7 +63,6 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
 
 /* We are looking in a directory structure that contains iPhoto albums, so we look at the iPhoto meta-data about Albums and images
 */
-
 - (NSDictionary *) nextAlbum: (NSString *)newDir
 {
   BOOL done;
@@ -81,7 +80,15 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
       str = [NSString stringWithContentsOfFile: str];
       TEST_RELEASE(photoAlbums);
       TEST_RELEASE(albumEnum);
-      photoAlbums = RETAIN([str propertyList]);
+      NS_DURING
+	/* Er... I have one iPhoto album that Cocoa can't read! */
+	photoAlbums = RETAIN([str propertyList]);
+      NS_HANDLER
+	NSLog(@"EXCEPTION while reading iPhoto album xml: %@",localException);
+	photoAlbums = nil;
+	albumEnum = nil;
+	return nil;
+      NS_ENDHANDLER
       albumList = [photoAlbums objectForKey: @"List of Albums"];
       albumEnum = RETAIN([albumList objectEnumerator]);
       /* Don't need the rest of the files in this directory */
@@ -126,17 +133,57 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
   range = [photo rangeOfString: @"Pictures"];
   if (range.location != NSNotFound)
     {
+      range.location += range.length + 1;
       range.length = [photo length] - range.location;
       photo = [photo substringWithRange: range];
-      photo = [NSHomeDirectory() stringByAppendingPathComponent: photo];
+      photo = [[dfltmgr objectForKey: DPhotoPath] stringByAppendingPathComponent: photo];
     }
   return photo;
 }
 
+- (BOOL) photoMatchesAlbumKeyword: (NSDictionary *)photo
+{
+  NSEnumerator *kenum;
+  NSString *keyword, *key, *k;
+  NSDictionary *keys;
+  NSArray *photoKeys;
+  NSRange range;
+  keyword = [dfltmgr objectForKey: DKeyword];
+  /* Always match if there is no search string */
+  if (keyword == nil || [keyword length] == 0)
+    return YES;
+
+  keys = [photoAlbums objectForKey: @"List of Keywords"];
+  kenum = [keys keyEnumerator];
+  key = nil;
+  while ((k = [kenum nextObject]))
+    {
+      NSString *str = [keys objectForKey: k];
+      range = [str rangeOfString: keyword];
+      /* FIXME: Only matches one key */
+      if (range.location != NSNotFound)
+        key = k;
+    }
+  photoKeys = [photo objectForKey: @"Keywords"];
+  if (key && photoKeys && [photoKeys indexOfObject: key] != NSNotFound)
+    return YES;
+  /* Didn't find a matching keyword, look for a matching comment */
+  k = [photo objectForKey: @"Comment"];
+  if (k && [k length] > 0)
+    {
+      range = [k rangeOfString: keyword];
+      if (range.location != NSNotFound)
+        return YES;
+    }
+  return NO;
+}
+
+/* We found an iPhoto Album. Now find the next photo in that album.
+*/
 - (NSString *) nextAlbumPhoto: (NSString *)newDir
 {
   BOOL isDir;
-  NSDictionary *imageList;
+  NSDictionary *imageList, *nextPhoto;
   NSString *imageKey;
   NSString *photo = nil;
   NSFileManager *fmgr = [NSFileManager defaultManager];
@@ -161,8 +208,12 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
 	    }
 	  imageKey = [imageEnum nextObject];
         }          
-      currentPhoto = [imageList objectForKey: imageKey];
-      photo = [currentPhoto objectForKey: @"ImagePath"];
+      nextPhoto = [imageList objectForKey: imageKey];
+      if ([self photoMatchesAlbumKeyword: nextPhoto] == NO)
+        {
+	  continue;
+	}
+      photo = [nextPhoto objectForKey: @"ImagePath"];
       photo = [self convertPhotoPath: photo];
       if ([fmgr fileExistsAtPath: photo isDirectory: &isDir] == NO)
         photo = nil;
@@ -170,7 +221,7 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
   [dfltmgr setObject: photo forKey: DCurrentPhoto];
   [lastPhotos addObject: photo];
   lastPhotoIndex++;
-  RETAIN(currentPhoto);
+  currentPhoto = RETAIN(nextPhoto);
   if (verbose)
     NSLog(@"Album photo %@", photo);
   return photo;
@@ -183,11 +234,10 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
   NSString *album;
   NSString *picDir;
   NSFileManager *fmgr = [NSFileManager defaultManager];
-  picDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures"];
+  picDir = [dfltmgr objectForKey: DPhotoPath];
   if (photoDirEnum == nil)
     {
-      photoDirEnum = [fmgr enumeratorAtPath: picDir];
-      [photoDirEnum retain];
+      photoDirEnum = RETAIN([fmgr enumeratorAtPath: picDir]);
     }
   
   if (lastPhotoIndex < [lastPhotos count])
@@ -247,8 +297,7 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
         }
       else if (album && [album length] > 0)
         range = [file rangeOfString: album];
-      if (range.location != NSNotFound
-          && [self fileIsImage: file])
+      if (range.location != NSNotFound && [self fileIsImage: file])
         photo = file;
     }
   if (photo)
@@ -273,9 +322,6 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
 {
   int i;
   NSString *file, *photo, *album, *reqalbum;
-  NSString *picDir;
-  NSFileManager *fmgr = [NSFileManager defaultManager];
-  picDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures"];
   
   photo = [dfltmgr objectForKey: DCurrentPhoto];
   album = [dfltmgr objectForKey: DCurrentAlbum];
@@ -315,24 +361,21 @@ NSString *DCurrentAlbum = @"CurrentAlbum";
       while(1)
         {
 	  file = [self nextPhoto];
-	/* file will be nil at the end of an album, so make sure we can continue on to the next album */
-	if (file == nil && i < 3)
+	/* file will be nil at the end of a dir, so make sure we can continue on to the next dir
+	    but not forever. */
+	if (file == nil && i <= 3)
 	  {
 	  i++;
 	  continue;
 	  }
-	if (file != nil)
-	  i = 0;
-	
-	  if ([photo isEqual: file] || file == nil)
+	  if (file == nil || [photo isEqual: file])
 	    break;
         }
     }
   if (photo && file == nil)
     {
       /* Couldn't find the file, just start at the beginning */
-      RELEASE(photoDirEnum);
-      photoDirEnum = RETAIN([fmgr enumeratorAtPath: picDir]);
+      DESTROY(photoDirEnum);
       [dfltmgr removeObjectForKey: DCurrentAlbum];
       [dfltmgr removeObjectForKey: DCurrentPhoto];
     }
