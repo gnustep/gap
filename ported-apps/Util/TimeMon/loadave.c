@@ -31,7 +31,7 @@ int la_read(unsigned long long *times)
   return LA_NOERR;
 }
 
-#elif defined( freebsd )
+#elif defined( freebsd ) 
 
 #include <sys/types.h>
 #include <sys/errno.h>
@@ -70,6 +70,53 @@ int la_read(unsigned long long *times)
   
   return LA_NOERR;
 }
+
+#elif  defined( __NetBSD__ )
+
+#include <sys/types.h>
+#include <errno.h>
+#include <sys/resource.h>	// CPUSTATES
+#include <sys/param.h>
+#include <sys/sysctl.h>		// sysctlbyname()
+#include <string.h>             // strerror()
+#include <machine/cpu.h>        // second level machdep identifiers
+          
+int la_read(unsigned long long *times)
+{
+  int mib[2];
+  uint64_t
+    cpu_states[CPUSTATES];
+  size_t
+    nlen = sizeof cpu_states,
+    len = nlen;
+  int
+    err;
+  
+  mib[0] = CTL_HW;
+  mib[1] = KERN_CP_TIME;
+
+  fprintf(stderr, "cpustates n. = %d\n", CPUSTATES);
+  err= sysctl(mib, 2, &cpu_states, &nlen, NULL, 0);
+  if( -1 == err )
+  {
+    fprintf(stderr, "sysctl(...) failed: %s\n", strerror(errno));
+    exit(errno);
+  }
+  if( nlen != len )
+  {
+    fprintf(stderr, "sysctl(...) expected %lu, got %lu\n",
+                    (unsigned long) len, (unsigned long) nlen);
+    exit(errno);
+  }
+  times[CP_IDLE] = cpu_states[4];
+  times[CP_SYS] = cpu_states[2];
+  times[CP_NICE] = cpu_states[1];
+  times[CP_USER] = cpu_states[0];
+  times[CP_IOWAIT] = cpu_states[3];
+  
+  return LA_NOERR;
+}
+
 
 #else 
 // Darwin should always be the always the last option...
