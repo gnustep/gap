@@ -1,3 +1,6 @@
+2007-11-23 Riccardo Mottola <rmottola@users.sf.net>
+	* loadave.c: added and fixed NetBSD section
+	
 2007-05-02  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* GNUmakefile (GNUSTEP_INSTALLATION_DIR): Removed
