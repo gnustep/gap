@@ -92,7 +92,7 @@ int la_read(unsigned long long *times)
   int
     err;
   
-  mib[0] = CTL_HW;
+  mib[0] = CTL_KERN;
   mib[1] = KERN_CP_TIME;
 
   fprintf(stderr, "cpustates n. = %d\n", CPUSTATES);
