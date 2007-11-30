@@ -74,6 +74,8 @@ static NSString *homePage = @"";
 {
     if (page != nil)
         homePage = page;
+    else
+        homePage = @"";
 }
 
 @end
