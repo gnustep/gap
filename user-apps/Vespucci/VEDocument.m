@@ -24,13 +24,19 @@
 
 #import "VEDocument.h"
 
+static NSString *homePage = @"";
 
 @implementation VEDocument
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
+    NSUserDefaults *defaults;
+    NSString *hp;
+
     [super windowControllerDidLoadNib:aController];
-    // Add any code here that need to be executed once the windowController has loaded the document's window.
+    defaults = [NSUserDefaults standardUserDefaults];
+    hp = [defaults stringForKey:@"Homepage"];
+    [self setHomePage:hp];
 }
 
 - (NSData *)dataRepresentationOfType:(NSString *)type {
@@ -52,6 +58,22 @@
 
     /* set undo levels */
     [[self undoManager] setLevelsOfUndo:1];
+}
+
+- (WebView *)webView
+{
+    return [windowController webView];
+}
+
+- (NSString *)homePage
+{
+    return homePage;
+}
+
+- (void)setHomePage:(NSString *)page
+{
+    if (page != nil)
+        homePage = page;
 }
 
 @end

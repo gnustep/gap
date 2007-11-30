@@ -46,16 +46,46 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-    NSUserDefaults *defaults;
-    NSDictionary   *defDic;
 
+}
+
+- (IBAction)showPreferences:(id)sender
+{
+    [prefPanel makeKeyAndOrderFront:self];
+}
+
+- (IBAction) savePrefs:(id)sender
+{
+    NSUserDefaults *defaults;
+    NSString *homePage;
 
     defaults = [NSUserDefaults standardUserDefaults];
 
-    /* we register default settings */
+    homePage = [homePageField stringValue];
+    NSLog(@"should save homepage: %@", homePage);
+    [defaults setObject: homePage forKey:@"Homepage"];
 
-    /* we read the last recorded value in the user defaults */
+    [prefPanel performClose:self];
+    [defaults synchronize];
 }
 
+- (IBAction) cancelPrefs:(id)sender
+{
+    [prefPanel performClose:self];
+}
+
+- (void)windowDidBecomeKey:(NSNotification *)aNotification
+{
+    if ([aNotification object] == prefPanel)
+    {
+        NSUserDefaults *defaults;
+        NSString *hp;
+
+        defaults = [NSUserDefaults standardUserDefaults];
+        hp = [defaults stringForKey:@"Homepage"];
+        NSLog(@"in windowDidBecomeKey homepage is %@", hp);
+        [homePageField setStringValue:hp];
+    }
+}
 
 @end

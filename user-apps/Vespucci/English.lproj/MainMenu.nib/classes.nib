@@ -6,7 +6,13 @@
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = VEAppContoller; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {cancelPrefs = id; savePrefs = id; showPreferences = id; }; 
+            CLASS = VEAppContoller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {homePageField = NSTextField; prefPanel = NSPanel; }; 
+            SUPERCLASS = NSObject; 
+        }, 
         {
             ACTIONS = {goBackHistory = id; goForwardHistory = id; setUrl = id; }; 
             CLASS = VEWinController; 

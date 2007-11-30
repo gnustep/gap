@@ -23,13 +23,19 @@
  */
 
 #import <AppKit/AppKit.h>
+#import <WebKit/WebPreferences.h>
 #import <WebKit/WebKit.h>
+
+
 
 @interface VEWinController : NSWindowController
 {
-   IBOutlet NSTextField *urlField;	// web addresssearch field
+   IBOutlet NSTextField *urlField;	// web address field
    IBOutlet WebView *webView;		// the Web view
    IBOutlet NSTextField *status;	// the status
+
+
+   WebPreferences *webPrefs;
 }
 
 - (IBAction) setUrl:(id)sender;

@@ -23,6 +23,7 @@
  */
 
 #import "VEWinController.h"
+#import "VEDocument.h"
 
 @implementation VEWinController
 
@@ -34,13 +35,28 @@
 
 - (void) awakeFromNib
 {
+    NSUserDefaults *defaults;
+    NSString *hp;
+    
+    [webView setPreferencesIdentifier:@"Vespucci"];
+    webPrefs = [webView preferences];
+    [webPrefs setAutosaves:YES];
+
+    defaults = [NSUserDefaults standardUserDefaults];
+    hp = [defaults stringForKey:@"Homepage"];
+    NSLog(@"read from defaults homepage = %@", hp);
+    [[[NSDocumentController sharedDocumentController] currentDocument] setHomePage:hp];
 }
 
 - (void)windowDidLoad
 {
     [webView setFrameLoadDelegate:self];
     [webView setUIDelegate:self];
+    [webView setGroupName:@"VEDocument"];
     [webView setMaintainsBackForwardList:YES];
+
+    [urlField setStringValue:[[[NSDocumentController sharedDocumentController] currentDocument] homePage]];
+    [self setUrl: self];
 }
 
 - (void) showStatus:(NSString *) str
@@ -51,26 +67,39 @@
 // delegate methods
 - (WebView *) webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-    [self showStatus:@"create web view"];
-    return sender;
+    id doc;
+
+    doc = [[NSDocumentController sharedDocumentController] openUntitledDocumentOfType: @"DocumentType" display:YES];
+    [[webView mainFrame] loadRequest:request];
+    return [doc webView];
 }
 
 - (void) webViewShow:(WebView *)sender
 {
-    [self showStatus:@"show web view in new window"];
+    id doc;
+    
+    doc = [[NSDocumentController sharedDocumentController] documentForWindow: [sender window]];
+    [doc showWindows];
 }
 
 - (void) webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
+    NSString *loadingTag = @"Loading...";
+    
     // Only report feedback for the main frame.
     if(frame == [sender mainFrame])
     {
-    	[self showStatus:@"Loading..."];
+        NSString *url;
+        url = [[[[frame provisionalDataSource] request] URL] absoluteString];
+        [urlField setStringValue: url];
+        [self showStatus:[loadingTag stringByAppendingString:url]];
     }
 }
 
 - (void) webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
+    NSLog(@"did receive title %@", title);
+
   if(frame == [sender mainFrame])
         [[sender window] setTitle:title];
 }
@@ -123,5 +152,7 @@
     NSLog(@"backlist is long: %d", [[webView backForwardList] forwardListCount]);
     [webView goForward];
 }
+
+
 
 @end
