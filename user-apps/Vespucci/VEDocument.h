@@ -29,4 +29,9 @@
     VEWinController *windowController;
 }
 
+- (WebView *)webView;
+- (NSString *)homePage;
+- (void)setHomePage:(NSString *)page;
+
+
 @end

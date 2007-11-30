@@ -23,10 +23,16 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 
 @interface VEAppContoller : NSObject {
-
+    IBOutlet NSPanel *prefPanel;
+    IBOutlet NSTextField *homePageField;
 }
+
+- (IBAction) showPreferences:(id)sender;
+- (IBAction) savePrefs:(id)sender;
+- (IBAction) cancelPrefs:(id)sender;
 
 @end
