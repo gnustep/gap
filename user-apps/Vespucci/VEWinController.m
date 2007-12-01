@@ -50,12 +50,18 @@
 
 - (void)windowDidLoad
 {
+    NSUserDefaults *defaults;
+    NSString *hp;
+    
     [webView setFrameLoadDelegate:self];
     [webView setUIDelegate:self];
     [webView setGroupName:@"VEDocument"];
     [webView setMaintainsBackForwardList:YES];
-
-    [urlField setStringValue:[[[NSDocumentController sharedDocumentController] currentDocument] homePage]];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    hp = [defaults stringForKey:@"Homepage"];
+    NSLog(@"WindowdDidLoad: read from defaults homepage = %@", hp);
+    [urlField setStringValue:hp];
     [self setUrl: self];
 }
 
@@ -136,7 +142,8 @@
    
    url = [urlField stringValue];
    NSLog(@"set url to %@", url);
-   [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+   if (url != nil)
+      [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
 - (IBAction) goBackHistory:(id)sender
