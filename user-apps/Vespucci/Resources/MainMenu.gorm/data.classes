@@ -2,14 +2,17 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
+	    "cancelPrefs:",
 	    "changeAttributes:",
 	    "changeDocumentBackgroundColor:",
 	    "goBack:",
 	    "goForward:",
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
+	    "showPreferences:",
 	    "performFindPanelAction:",
 	    "reload:",
+	    "savePrefs:",
 	    "setDownloadDelegate:",
 	    "setEditingDelegate:",
 	    "setFrameLoadDelegate:",
@@ -26,8 +29,13 @@
     };
     VEAppContoller = {
 	Actions = (
+	    "cancelPrefs:",
+	    "showPreferences:",
+	    "savePrefs:"
 	);
 	Outlets = (
+	    homePageField,
+	    prefPanel
 	);
 	Super = NSObject;
     };
