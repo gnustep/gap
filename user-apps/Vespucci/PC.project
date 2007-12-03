@@ -27,7 +27,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2007-12-01 01:44:36 +0100";
+    LAST_EDITING = "2007-12-03 22:31:43 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -47,7 +47,7 @@
     );
     PC_WINDOWS = {
 	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 524; height = 173}";
-	ProjectWindow = "121 114 677 600 0 0  1024 768 ";
+	ProjectWindow = "151 152 677 600 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
