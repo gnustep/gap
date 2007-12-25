@@ -5,7 +5,7 @@
 */
 #import <AppKit/AppKit.h>
 #import "OverlayView.h"
-#import "PhotoView.h"
+#import "PhotoController.h"
 #import "PreferencesController.h"
 #import "GNUstep.h"
 #include <math.h>
@@ -85,8 +85,8 @@ p2w (double perc, NSRect frame)
     if (bundle)
       {
       weatherView = [(NSView *)[[bundle principalClass] alloc] initWithFrame: rect];
-      [[PreferencesController sharedPreferences] addPreferenceView: 
-	  [weatherView preferenceView] withName: @"Weather"];
+      [[PreferencesController sharedPreferences] addPreferenceController: 
+	  [weatherView preferenceController]];
       }
     
     }
@@ -141,10 +141,10 @@ p2w (double perc, NSRect frame)
       view = nil;
     }
   
-  photoDir = [(PhotoView *)view currentPhoto];
+  photoDir = [[PhotoController sharedPhotoController] currentPhoto];
   created = [[photoDir objectForKey: @"DateAsTimerInterval"] doubleValue];
   date = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate: created];
-  album = [(PhotoView *)view currentAlbum];
+  album = [[PhotoController sharedPhotoController] currentAlbum];
   if (album == nil)
     album = @"";
   [date setCalendarFormat: @"%b,%d %Y"];

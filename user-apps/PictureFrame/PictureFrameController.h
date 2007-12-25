@@ -7,12 +7,12 @@
 #import <AppKit/AppKit.h>
 #import "PictureWindow.h"
 #import "OverlayView.h"
-#import "FrameView.h"
+#import "FrameDisplay.h"
 
 @interface PictureFrameController : NSObject
 {
   PictureWindow *pWindow;
-  NSView<FrameView> *currentView;
+  id<FrameDisplay> currentFrame;
   OverlayView *overlayView;
   id userInfoView;
   NSTimer *timer, *userTimer;

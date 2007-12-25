@@ -12,6 +12,8 @@
 #define TAG_PICKFONT   15
 #define TAG_ANALOG     16
 #define TAG_ALBUM      20
+#define TAG_TRANS      21
+#define TAG_TRANSTIME  22
 
 #define dfltmgr [NSUserDefaults standardUserDefaults]
 #define TABVIEW(tag) [[tabView tabViewItemAtIndex: tag] view]
@@ -33,6 +35,9 @@ NSString *DBackKey = @"BackKey";
 NSString *DSpeedDownKey = @"SpeedDownKey";
 NSString *DSpeedUpKey = @"SpeedUpKey";
 NSString *DToggleScreenKey = @"ToggleScreenKey";
+
+NSString *DTransition = @"Transition";
+NSString *DTransitionTime = @"TransitionTime";
 
 
 
@@ -109,7 +114,7 @@ static PreferencesController *sharedController = nil;
   else 
     {
     [[tabView window] orderFront: sender];
-    [self loadValues];
+    [self loadValues: self];
     }
 }
 
@@ -126,7 +131,7 @@ static PreferencesController *sharedController = nil;
     }
 }
 
-- (void) loadValues
+- (void) loadPhotoValues
 {
   int info, c;
   NSView *view;
@@ -173,6 +178,18 @@ static PreferencesController *sharedController = nil;
   if (str == nil)
     str = @"";
   [[form cellAtIndex: 2] setStringValue: str];
+
+  view = [TABVIEW(1) viewWithTag: TAG_TRANS];
+  info = [mgr integerForKey: DTransition];
+  if (info >= 0)
+    [(NSPopUpButton *)view selectItemAtIndex: info];
+  form = [TABVIEW(1) viewWithTag: TAG_TRANSTIME];
+  [[form cellAtIndex: 0] setIntValue: [mgr integerForKey: DTransitionTime]];
+}
+
+- (IBAction) loadValues: (id)sender
+{
+  [self loadPhotoValues];
 }
 
 - (IBAction)setValue: (id)sender
@@ -247,20 +264,28 @@ static PreferencesController *sharedController = nil;
       [dfltmgr setObject: [[sender cellAtIndex: 1] stringValue] forKey: DAlbum];
       [dfltmgr setObject: [[sender cellAtIndex: 2] stringValue] forKey: DKeyword];
       break;
+    case TAG_TRANS:
+	info = [(NSPopUpButton *)[TABVIEW(1) viewWithTag: TAG_TRANS] indexOfSelectedItem];
+        [dfltmgr setInteger: info forKey: DTransition];
+    case TAG_TRANSTIME:
+      value = [[sender cellAtIndex: 0] intValue];
+      [dfltmgr setInteger: value forKey: DTransitionTime];
     default:
       break;
     }
 }
 
-- (void) addPreferenceView: (id)theView withName: (NSString *)name
+- (void) addPreferenceController: (id)controller
 {
-  if ([tabView indexOfTabViewItemWithIdentifier: theView] == NSNotFound)
+  if ([tabView indexOfTabViewItemWithIdentifier: controller] == NSNotFound)
     {
     NSTabViewItem *titem;
-    titem = [[NSTabViewItem alloc] initWithIdentifier:  theView];
-    [titem setLabel: name];
-    [titem setView: theView];
+    titem = [[NSTabViewItem alloc] initWithIdentifier:  controller];
+    [titem setLabel: [controller preferenceName]];
+    [titem setView: [controller preferenceView]];
     [tabView addTabViewItem: titem];
+    /* FIXME: Need to do these whenever the tab view comes up */
+    [controller loadValues: self];
     }
 }
 

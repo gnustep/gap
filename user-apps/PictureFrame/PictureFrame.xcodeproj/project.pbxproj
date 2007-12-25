@@ -18,6 +18,9 @@
 		9F9663610C9792750073A070 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 9F9663600C9792750073A070 /* Preferences.nib */; };
 		9FBC43180C0F1494002FB7BB /* ClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC43170C0F1494002FB7BB /* ClockView.m */; };
 		9FC75E050BF59A210018B22C /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC75E040BF59A210018B22C /* PhotoView.m */; };
+		9FF436B90D1F6A180074B697 /* FrameDisplay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FF436B80D1F6A180074B697 /* FrameDisplay.h */; };
+		9FF436BC0D1F6A250074B697 /* PhotoController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FF436BA0D1F6A250074B697 /* PhotoController.h */; };
+		9FF436BD0D1F6A250074B697 /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF436BB0D1F6A250074B697 /* PhotoController.m */; };
 		9FF57BF90C04F9AB009CE88D /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF57BF80C04F9AB009CE88D /* PreferencesController.m */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +42,8 @@
 			dstSubfolderSpec = 7;
 			files = (
 				9F58FC4D0C26C93F00404F27 /* SimpleWeather.bundle in CopyFiles */,
+				9FF436B90D1F6A180074B697 /* FrameDisplay.h in CopyFiles */,
+				9FF436BC0D1F6A250074B697 /* PhotoController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,11 +68,13 @@
 		9F38D27B0C07E593001F4877 /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
 		9F38D27C0C07E593001F4877 /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
 		9F58FC350C26484400404F27 /* SimpleWeather.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimpleWeather.xcodeproj; path = SimpleWeather/SimpleWeather.xcodeproj; sourceTree = "<group>"; };
-		9F961BF90BF4F8190089B12C /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
 		9FBC43170C0F1494002FB7BB /* ClockView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ClockView.m; sourceTree = "<group>"; };
 		9FBC43190C0F14A6002FB7BB /* ClockView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ClockView.h; sourceTree = "<group>"; };
 		9FC75E040BF59A210018B22C /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		9FC75E060BF59A2A0018B22C /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
+		9FF436B80D1F6A180074B697 /* FrameDisplay.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FrameDisplay.h; sourceTree = "<group>"; };
+		9FF436BA0D1F6A250074B697 /* PhotoController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhotoController.h; sourceTree = "<group>"; };
+		9FF436BB0D1F6A250074B697 /* PhotoController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PhotoController.m; sourceTree = "<group>"; };
 		9FF57BED0C04F254009CE88D /* GNUstep.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GNUstep.h; sourceTree = "<group>"; };
 		9FF57BF50C04F992009CE88D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		9FF57BF70C04F9AB009CE88D /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
@@ -96,6 +103,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9FF436BA0D1F6A250074B697 /* PhotoController.h */,
+				9FF436BB0D1F6A250074B697 /* PhotoController.m */,
+				9FF436B80D1F6A180074B697 /* FrameDisplay.h */,
 				9FBC43190C0F14A6002FB7BB /* ClockView.h */,
 				9FBC43170C0F1494002FB7BB /* ClockView.m */,
 				9FF57BED0C04F254009CE88D /* GNUstep.h */,
@@ -105,7 +115,6 @@
 				9FC75E040BF59A210018B22C /* PhotoView.m */,
 				9F10EABB0C03F10E00B91883 /* PictureWindow.h */,
 				9F10EABC0C03F10E00B91883 /* PictureWindow.m */,
-				9F961BF90BF4F8190089B12C /* FrameView.h */,
 				9FF57BF70C04F9AB009CE88D /* PreferencesController.h */,
 				9FF57BF80C04F9AB009CE88D /* PreferencesController.m */,
 				9F38D27B0C07E593001F4877 /* OverlayView.h */,
@@ -294,6 +303,7 @@
 				9FF57BF90C04F9AB009CE88D /* PreferencesController.m in Sources */,
 				9F38D27D0C07E593001F4877 /* OverlayView.m in Sources */,
 				9FBC43180C0F1494002FB7BB /* ClockView.m in Sources */,
+				9FF436BD0D1F6A250074B697 /* PhotoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

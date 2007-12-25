@@ -14,6 +14,6 @@
   int units;
 }
 
-- (id) preferenceView;
+- (id) preferenceController;
 
 @end

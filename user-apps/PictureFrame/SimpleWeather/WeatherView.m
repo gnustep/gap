@@ -285,9 +285,9 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
   [self DrawRadar];
 }
 
-- (id) preferenceView
+- (id) preferenceController
 {
-  return [[WeatherPreferencesController sharedPreferences] preferenceView];
+  return [WeatherPreferencesController sharedPreferences];
 }
 
 

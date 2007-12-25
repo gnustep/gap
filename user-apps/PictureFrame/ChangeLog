@@ -1,3 +1,10 @@
+2007-12-24  Adam Fedor  <fedor@gnu.org>
+
+	* Rearrange PhotoView so that it displays the images and most
+	of the control stuff goes in PhotoController.
+	* Added transition preferences (not implemented).
+	* Fix loading weather preference values;
+
 2007-11-06  Adam Fedor  <fedor@gnu.org>
 
 	* PhotoView.m, PreferencesController.m: Add Keyword and Photo Path

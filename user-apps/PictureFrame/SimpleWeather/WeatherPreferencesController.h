@@ -11,9 +11,10 @@
 
 + sharedPreferences;
 
-- (void) loadValues;
-- (IBAction)setValue:(id)sender;
+- (IBAction) loadValues: (id)sender;
+- (IBAction) setValue: (id)sender;
 - (id) preferenceView;
+- (NSString *) preferenceName;
 
 @end
 
