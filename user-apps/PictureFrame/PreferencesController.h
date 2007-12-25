@@ -12,11 +12,11 @@
 
 + sharedPreferences;
 
-- (IBAction)showPreferences:(id)sender;
-- (void) loadValues;
-- (IBAction)setValue:(id)sender;
+- (IBAction) showPreferences: (id)sender;
+- (IBAction) loadValues: (id)sender;
+- (IBAction) setValue: (id)sender;
 - (void) changeFont: (id)sender;
-- (void) addPreferenceView: (id)theView withName: (NSString *)name;
+- (void) addPreferenceController: (id)controller;
 
 @end
 
@@ -30,6 +30,9 @@ extern NSString *DSpeed;
 extern NSString *DShowOverlay;
 extern NSString *DOverlayInfo;
 extern NSString *DFontName;
+
+extern NSString *DTransition;
+extern NSString *DTransitionTime;
 
 enum {
   INFO_NONE = 0,

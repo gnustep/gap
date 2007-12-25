@@ -64,7 +64,7 @@ static WeatherPreferencesController *sharedController = nil;
   return self;
 }
 
-- (void) loadValues
+- (IBAction) loadValues: (id)sender
 {
   NSView *view;
   NSForm *form;
@@ -105,8 +105,9 @@ static WeatherPreferencesController *sharedController = nil;
   switch (tag)
     {
     case TAG_ZIP:
-          str = [[sender cellAtIndex: 0] stringValue];
-          [dfltmgr setObject: str forKey: DZipCode];
+      str = [[sender cellAtIndex: 0] stringValue];
+      if ([str lenght])
+	[dfltmgr setObject: str forKey: DZipCode];
       break;
     case TAG_SOURCE:
       str = [(NSPopUpButton *)sender titleOfSelectedItem];
@@ -117,14 +118,15 @@ static WeatherPreferencesController *sharedController = nil;
       [dfltmgr setObject: str forKey: DUnits];
       break;
     case TAG_WWW:
-          str = [[sender cellAtIndex: 0] stringValue];
-          [dfltmgr setObject: str forKey: DWWW];
-          str = [[sender cellAtIndex: 1] stringValue];
-	  if ([str length] == 0)
-            [dfltmgr setObject: [NSArray array]  forKey: DWWWArgs];
-	  else
-            [dfltmgr setObject: [str componentsSeparatedByString: @""] 
-	    	 	forKey: DWWWArgs];
+      str = [[sender cellAtIndex: 0] stringValue];
+      if ([str length])
+	[dfltmgr setObject: str forKey: DWWW];
+      str = [[sender cellAtIndex: 1] stringValue];
+      if ([str length] == 0)
+	[dfltmgr setObject: [NSArray array]  forKey: DWWWArgs];
+      else
+	[dfltmgr setObject: [str componentsSeparatedByString: @""] 
+		    forKey: DWWWArgs];
       break;
     default:
       break;
@@ -134,6 +136,11 @@ static WeatherPreferencesController *sharedController = nil;
 - (id) preferenceView
 {
   return otherView;
+}
+
+- (NSString *) preferenceName
+{
+  return @"Weather";
 }
 
 

@@ -8,7 +8,7 @@
 #import <Foundation/NSUserDefaults.h>
 #import "PictureFrameController.h"
 #import "PreferencesController.h"
-#import "PhotoView.h"
+#import "PhotoController.h"
 #import "GNUstep.h"
 #include <signal.h>
 #include <math.h>
@@ -54,6 +54,7 @@ void
 handle_user_term(int sig)
 {
   fprintf(stdout, "*** Caught signal SIGTERM\n");
+  fprintf(stdout, "       Quiting application\n");
   [NSApp terminate: nil];
 }
 
@@ -110,7 +111,7 @@ handle_user_term(int sig)
   [dfltmgr setInteger: 0 forKey: DIsRunningPID];
   [self stopTimer];
   RELEASE(pWindow);
-  RELEASE(currentView);
+  RELEASE(currentFrame);
   RELEASE(overlayView);
   [super dealloc];
 }
@@ -162,24 +163,15 @@ handle_user_term(int sig)
       mask = NSTitledWindowMask;
     }
   
-  if (currentView == nil)
+  if (currentFrame == nil)
     {
       NSRect rect = frame;
       rect.origin = NSZeroPoint;
-      currentView = [[PhotoView alloc] initWithFrame: rect];
+      currentFrame = [[PhotoController alloc] initWithFrame: rect];
     }
 
-  // dertermine backing type...
-  NS_DURING
-    if ([currentView useBufferedWindow])
-      {
-	store = NSBackingStoreBuffered;
-      }
-  NS_HANDLER
-    store = NSBackingStoreBuffered;
-  NS_ENDHANDLER
-
   // create the window...
+  store = NSBackingStoreBuffered;
   pWindow = [[PictureWindow alloc] initWithContentRect: frame
 				     styleMask: mask
 				     backing: store
@@ -205,14 +197,9 @@ handle_user_term(int sig)
 
   // load the view from the currently active module, if
   // there is one...
-  if (currentView)
+  if (currentFrame)
     {
-      [[pWindow contentView] addSubview: currentView];
-      NS_DURING
-	[currentView willEnterScreenSaverMode];
-      NS_HANDLER
-	NSLog(@"EXCEPTION while creating saver window %@",localException);
-      NS_ENDHANDLER
+      [[pWindow contentView] addSubview: [currentFrame displayView]];
     }
   
   /* Make sure defaults are set */
@@ -364,12 +351,12 @@ handle_user_term(int sig)
   
       [(UserInfoView *)userInfoView setDisplayString: 
 			  [NSString stringWithFormat: @"Info: %d", info]];
-      [[PreferencesController sharedPreferences] loadValues];
+      [[PreferencesController sharedPreferences] loadValues: self];
     }
   else if (character == backchar)
     {
       [(UserInfoView *)userInfoView setDisplayString: @"Previous"];
-      [currentView reverseStep];
+      [currentFrame reverseStep];
     }
   else if (character == downchar || character == upchar)
     {
@@ -383,7 +370,7 @@ handle_user_term(int sig)
       [mgr setInteger: speed forKey: DSpeed];
       [(UserInfoView *)userInfoView setDisplayString: 
 			[NSString stringWithFormat: @"Delay: %d", speed]];
-      [[PreferencesController sharedPreferences] loadValues];
+      [[PreferencesController sharedPreferences] loadValues: self];
     }
   else if (character == togchar)
     {
@@ -425,7 +412,7 @@ handle_user_term(int sig)
   runSpeed = [dfltmgr floatForKey: DSpeed];
   NS_DURING
     if (runSpeed <= 0)
-      runSpeed = [currentView animationDelayTime];
+      runSpeed = [currentFrame animationDelayTime];
   NS_HANDLER
     NSLog(@"EXCEPTION: %@", localException);
   NS_ENDHANDLER
@@ -463,7 +450,7 @@ handle_user_term(int sig)
     }
 
   NS_DURING
-    [currentView oneStep];
+    [currentFrame oneStep];
   NS_HANDLER
     NSLog(@"EXCEPTION while in running animation: %@",localException);
   NS_ENDHANDLER
