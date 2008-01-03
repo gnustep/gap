@@ -33,6 +33,12 @@
     return YES;
 }
 
+- (void) applicationOpenUntitledFile: (id)sender
+{
+  [[NSDocumentController sharedDocumentController] 
+    openUntitledDocumentOfType: @"HTML" display: YES];
+}
+
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
     NSDocumentController *dc;
