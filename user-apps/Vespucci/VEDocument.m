@@ -39,6 +39,12 @@ static NSString *homePage = @"";
     [self setHomePage:hp];
 }
 
+- (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)flag
+{
+    NSLog(@"fileName: %@", fileName);
+    return nil;
+}
+
 - (NSData *)dataRepresentationOfType:(NSString *)type {
     // Implement to provide a persistent data representation of your document OR remove this and implement the file-wrapper or file path based save methods.
     return nil;

@@ -48,6 +48,7 @@
     NSDocumentController *dc;
     VEDocument *doc;
 
+    NSLog(@"fileName: %@", filename);
     dc = [NSDocumentController sharedDocumentController];
     doc = [dc openDocumentWithContentsOfFile:filename display:YES];
 
