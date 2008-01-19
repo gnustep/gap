@@ -70,6 +70,11 @@
     [status setStringValue:str];
 }
 
+- (WebView *)webView
+{
+    return  webView;
+}
+
 // delegate methods
 - (WebView *) webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
@@ -138,12 +143,18 @@
 
 - (IBAction) setUrl:(id)sender
 {
-   NSString *url;
+    NSString *url;
+    VEDocument *doc;
+
+    url = [urlField stringValue];
    
-   url = [urlField stringValue];
-   NSLog(@"set url to %@", url);
-   if (url != nil)
-      [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    NSLog(@"set url to %@", url);
+    doc = [[NSDocumentController sharedDocumentController] currentDocument];
+    if (doc == nil)
+        NSLog(@"shit");
+    [doc loadUrl:[NSURL URLWithString:url]];
+//   if (url != nil)
+//      [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
 - (IBAction) goBackHistory:(id)sender
