@@ -39,10 +39,18 @@ static NSString *homePage = @"";
     [self setHomePage:hp];
 }
 
-- (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)flag
+- (id)initWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
 {
-    NSLog(@"fileName: %@", fileName);
-    return nil;
+    VEDocument *doc;
+    NSString *urlStr;
+    
+    NSLog(@"filename: %@", fileName);
+    urlStr = [@"file://" stringByAppendingString:fileName];
+    NSLog(@"url: %@", urlStr);
+    doc = [[VEDocument alloc] init];
+    [doc  loadUrl:[NSURL URLWithString:[NSURL URLWithString:urlStr]]];
+    
+    return doc;
 }
 
 - (NSData *)dataRepresentationOfType:(NSString *)type {
@@ -82,6 +90,13 @@ static NSString *homePage = @"";
         homePage = page;
     else
         homePage = @"";
+}
+
+- (void)loadUrl:(NSURL *)anUrl
+{
+    NSLog(@"Document - set url to %@", anUrl);
+    if (anUrl != nil)
+        [[[self webView] mainFrame] loadRequest:[NSURLRequest requestWithURL:anUrl]];
 }
 
 @end

@@ -23,7 +23,9 @@
  */
 
 #import <AppKit/AppKit.h>
+#import <WebKit/WebKit.h>
 #import "VEWinController.h"
+
 
 @interface VEDocument : NSDocument {
     VEWinController *windowController;
@@ -32,6 +34,7 @@
 - (WebView *)webView;
 - (NSString *)homePage;
 - (void)setHomePage:(NSString *)page;
+- (void)loadUrl:(NSURL*)anUrl;
 
 
 @end
