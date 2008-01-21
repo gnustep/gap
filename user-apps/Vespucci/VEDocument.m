@@ -36,6 +36,7 @@ static NSString *homePage = @"";
     [super windowControllerDidLoadNib:aController];
     defaults = [NSUserDefaults standardUserDefaults];
     hp = [defaults stringForKey:@"Homepage"];
+    NSLog(@"VEDocument - read from defaults homepage = %@", hp);
     [self setHomePage:hp];
 }
 
@@ -48,10 +49,12 @@ static NSString *homePage = @"";
     urlStr = [@"file://" stringByAppendingString:fileName];
     NSLog(@"url: %@", urlStr);
     doc = [[VEDocument alloc] init];
-    [doc  loadUrl:[NSURL URLWithString:[NSURL URLWithString:urlStr]]];
+     NSAssert(doc != NULL, @"VEDocument - current document can't be NULL");
+    [doc  loadUrl:[NSURL URLWithString:urlStr]];
     
     return doc;
 }
+
 
 - (NSData *)dataRepresentationOfType:(NSString *)type {
     // Implement to provide a persistent data representation of your document OR remove this and implement the file-wrapper or file path based save methods.
