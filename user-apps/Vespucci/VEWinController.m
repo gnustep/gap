@@ -36,23 +36,19 @@
 - (void) awakeFromNib
 {
     NSUserDefaults *defaults;
-    NSString *hp;
     
     [webView setPreferencesIdentifier:@"Vespucci"];
     webPrefs = [webView preferences];
     [webPrefs setAutosaves:YES];
-
-    defaults = [NSUserDefaults standardUserDefaults];
-    hp = [defaults stringForKey:@"Homepage"];
-    NSLog(@"read from defaults homepage = %@", hp);
-    [[[NSDocumentController sharedDocumentController] currentDocument] setHomePage:hp];
 }
 
 - (void)windowDidLoad
 {
     NSUserDefaults *defaults;
     NSString *hp;
-    
+    VEDocument *doc;
+
+    doc = (VEDocument *)[self document];
     [webView setFrameLoadDelegate:self];
     [webView setUIDelegate:self];
     [webView setGroupName:@"VEDocument"];
@@ -149,7 +145,7 @@
     url = [urlField stringValue];
    
     NSLog(@"set url to %@", url);
-    doc = [[NSDocumentController sharedDocumentController] currentDocument];
+    doc = (VEDocument *)[self document];
     if (doc == nil)
         NSLog(@"shit");
     [doc loadUrl:[NSURL URLWithString:url]];
