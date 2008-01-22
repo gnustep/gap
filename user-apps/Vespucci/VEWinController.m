@@ -35,8 +35,6 @@
 
 - (void) awakeFromNib
 {
-    NSUserDefaults *defaults;
-    
     [webView setPreferencesIdentifier:@"Vespucci"];
     webPrefs = [webView preferences];
     [webPrefs setAutosaves:YES];
@@ -57,8 +55,11 @@
     defaults = [NSUserDefaults standardUserDefaults];
     hp = [defaults stringForKey:@"Homepage"];
     NSLog(@"WindowdDidLoad: read from defaults homepage = %@", hp);
-    [urlField setStringValue:hp];
-    [self setUrl: self];
+    if (hp != nil)
+    {
+        [urlField setStringValue:hp];
+        [self setUrl: self];
+    }
 }
 
 - (void) showStatus:(NSString *) str
@@ -137,20 +138,27 @@
     }
 }
 
+/* ***** end of Delegates ***** */
+
+/* Loads the URL currently in the URL Field */
 - (IBAction) setUrl:(id)sender
 {
     NSString *url;
     VEDocument *doc;
 
     url = [urlField stringValue];
-   
-    NSLog(@"set url to %@", url);
-    doc = (VEDocument *)[self document];
-    if (doc == nil)
-        NSLog(@"shit");
-    [doc loadUrl:[NSURL URLWithString:url]];
-//   if (url != nil)
-//      [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    if (url != nil)
+    {
+        if ([[url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] > 0)
+        {
+            NSString *canonUrl;
+            canonUrl = [self canonicizeUrl:url];
+            NSLog(@"set url to %@", canonUrl);
+            doc = (VEDocument *)[self document];
+            NSAssert(doc != nil, @"VEWinController setUrl: document can't be nil");
+            [doc loadUrl:[NSURL URLWithString:canonUrl]];
+        }
+    }
 }
 
 - (IBAction) goBackHistory:(id)sender
@@ -167,6 +175,28 @@
     [webView goForward];
 }
 
+- (NSString *)canonicizeUrl:(NSString *)urlStr
+{
+    NSString *canonicizedUrl;
 
+    canonicizedUrl = nil;
+    if ([urlStr hasPrefix:@"http://"] ||
+        [urlStr hasPrefix:@"https://"] ||
+        [urlStr hasPrefix:@"file://"]
+        )
+    {
+        canonicizedUrl = [NSString stringWithString:urlStr];
+    } else
+    {
+        if ([urlStr hasPrefix:@"www"])
+        {
+            canonicizedUrl = [@"http://" stringByAppendingString:urlStr]; 
+        } else
+        {
+            canonicizedUrl = [@"http://" stringByAppendingString:urlStr];
+        }
+    }
+    return canonicizedUrl;
+}
 
 @end

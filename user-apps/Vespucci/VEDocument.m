@@ -49,7 +49,7 @@ static NSString *homePage = @"";
     urlStr = [@"file://" stringByAppendingString:fileName];
     NSLog(@"url: %@", urlStr);
     doc = [[VEDocument alloc] init];
-     NSAssert(doc != NULL, @"VEDocument - current document can't be NULL");
+    NSAssert(doc != NULL, @"VEDocument - current document can't be nil");
     [doc  loadUrl:[NSURL URLWithString:urlStr]];
     
     return doc;
