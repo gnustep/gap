@@ -1,7 +1,8 @@
 /*
  Project: Vespucci
+ VEAppController.m
 
- Copyright (C) 2007
+ Copyright (C) 2007-2008
 
  Author: Ing. Riccardo Mottola
 
@@ -24,6 +25,7 @@
 
 #import "VEAppController.h"
 #import "VEDocument.h"
+#import "VEDocumentController.h";
 
 
 @implementation VEAppContoller
@@ -37,7 +39,7 @@
 {
     VEDocument *doc;
 
-    doc = [[NSDocumentController sharedDocumentController] 
+    doc = [[VEDocumentController sharedDocumentController] 
     openUntitledDocumentOfType: @"HTML" display: YES];
 
     return (doc != nil);
@@ -45,10 +47,10 @@
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
-    NSDocumentController *dc;
+    VEDocumentController *dc;
     VEDocument *doc;
 
-    dc = [NSDocumentController sharedDocumentController];
+    dc = [VEDocumentController sharedDocumentController];
     NSLog(@"appcontroller: should create ui? %@", [dc shouldCreateUI]);
     doc = [dc openDocumentWithContentsOfFile:filename display:YES];
 
@@ -98,6 +100,5 @@
         [homePageField setStringValue:hp];
     }
 }
-
 
 @end

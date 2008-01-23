@@ -13,6 +13,8 @@
 				85D522A30C3076A000A80101,
 				85D522AA0C307FCD00A80101,
 				85D522AB0C307FCD00A80101,
+				85DAD5910D47EC0D00A80101,
+				85DAD5920D47EC0D00A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -272,6 +274,7 @@
 				85A1AA760BB9497300A80110,
 				85D522A40C3076A000A80101,
 				85D522AC0C307FCD00A80101,
+				85DAD5930D47EC0D00A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +296,7 @@
 				85A1AA770BB9497300A80110,
 				85D522A50C3076A000A80101,
 				85D522AD0C307FCD00A80101,
+				85DAD5940D47EC0D00A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +479,30 @@
 		};
 		85D522AD0C307FCD00A80101 = {
 			fileRef = 85D522AB0C307FCD00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DAD5910D47EC0D00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = VEDocumentController.h;
+			refType = 4;
+		};
+		85DAD5920D47EC0D00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = VEDocumentController.m;
+			refType = 4;
+		};
+		85DAD5930D47EC0D00A80101 = {
+			fileRef = 85DAD5910D47EC0D00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85DAD5940D47EC0D00A80101 = {
+			fileRef = 85DAD5920D47EC0D00A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};

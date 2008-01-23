@@ -1,7 +1,8 @@
 /*
  Project: Vespucci
+ VEWinController.h
 
- Copyright (C) 2007
+ Copyright (C) 2007-2008
 
  Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
 

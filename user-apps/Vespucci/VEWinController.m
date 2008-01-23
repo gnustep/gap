@@ -1,5 +1,6 @@
 /*
  Project: Vespucci
+ VEWinController.m
 
  Copyright (C) 2007-2008
 
@@ -54,11 +55,7 @@
     defaults = [NSUserDefaults standardUserDefaults];
     hp = [defaults stringForKey:@"Homepage"];
     NSLog(@"WindowdDidLoad: read from defaults homepage = %@", hp);
-    if (hp != nil)
-    {
-//        [urlField setStringValue:hp];
-//        [self setUrl: self];
-    }
+    [doc setHomePage:hp];
 }
 
 - (void) showStatus:(NSString *) str
