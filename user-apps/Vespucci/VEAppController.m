@@ -48,8 +48,8 @@
     NSDocumentController *dc;
     VEDocument *doc;
 
-    NSLog(@"fileName: %@", filename);
     dc = [NSDocumentController sharedDocumentController];
+    NSLog(@"appcontroller: should create ui? %@", [dc shouldCreateUI]);
     doc = [dc openDocumentWithContentsOfFile:filename display:YES];
 
     return (doc != nil);
@@ -98,5 +98,6 @@
         [homePageField setStringValue:hp];
     }
 }
+
 
 @end
