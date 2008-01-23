@@ -5,7 +5,8 @@
     CLASS_FILES = (
 	VEWinController.m,
 	VEAppController.m,
-	VEDocument.m
+	VEDocument.m,
+	VEDocumentController.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -17,7 +18,8 @@
     HEADER_FILES = (
 	VEWinController.h,
 	VEAppController.h,
-	VEDocument.h
+	VEDocument.h,
+	VEDocumentController.h
     );
     IMAGES = (
     );
@@ -27,7 +29,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2007-12-03 22:31:43 +0100";
+    LAST_EDITING = "2008-01-23 23:58:11 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -46,15 +48,16 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 524; height = 173}";
-	ProjectWindow = "151 152 677 600 0 0  1280 1024 ";
+	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 659; height = 173}";
+	ProjectWindow = "151 137 677 615 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
+	"GNUstep Application Project",
 	"Riccardo Mottola"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2007";
+    PROJECT_COPYRIGHT = "Copyright (C) 2007-2008\033\033ffGAP, Riccardo";
     PROJECT_COPYRIGHT_DESC = "Released under GPL v2";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "WorldWideWeb Browser";
@@ -81,9 +84,7 @@
     );
     SEARCH_LIB_DIRS = (
 	"/usr/GNUstep/Local/Library/Libraries",
-	"/usr/GNUstep/Local/Library/Frameworks",
-	"/usr/GNUstep/Local/Library/Frameworks/SimpleWebKit.framework/Versions/A",
-	"/usr/GNUstep/Local/Library/Libraries"
+	"/usr/GNUstep/Local/Library/Frameworks"
     );
     SUBPROJECTS = (
     );
