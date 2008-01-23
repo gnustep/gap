@@ -1,12 +1,12 @@
 /*
  Project: Vespucci
- VEAppController.h
+ VEDocumentController.m
 
- Copyright (C) 2007-2008
+ Copyright (C) 2008
 
  Author: Ing. Riccardo Mottola
 
- Created: 2007-06-26
+ Created: 2008-01-23
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -23,17 +23,34 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+
+#import "VEDocumentController.h"
+#import "VEDocument.h"
 
 
-@interface VEAppContoller : NSObject {
-    IBOutlet NSPanel *prefPanel;
-    IBOutlet NSTextField *homePageField;
+@implementation VEDocumentController
+
+
+- (id)openUntitledDocumentOfType:(NSString *)docType display:(BOOL)display
+{
+    VEDocument *doc;
+
+    doc = [super openUntitledDocumentOfType:docType display:display];
+    [doc loadUrl:[NSURL URLWithString:[doc homePage]]];
+    return doc;
 }
 
-- (IBAction) showPreferences:(id)sender;
-- (IBAction) savePrefs:(id)sender;
-- (IBAction) cancelPrefs:(id)sender;
+- (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)flag
+{
+    VEDocument *doc;
+    NSString *urlStr;
+
+    urlStr = [@"file://" stringByAppendingString:fileName];
+
+    doc = [super openDocumentWithContentsOfFile:fileName display:flag];
+    [doc  loadUrl:[NSURL URLWithString:urlStr]];
+    return doc;
+}
+
 
 @end

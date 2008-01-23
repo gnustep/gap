@@ -1,5 +1,6 @@
 /*
  Project: Vespucci
+ VEDocument.m
 
  Copyright (C) 2007-2008
 
@@ -30,26 +31,15 @@ static NSString *homePage = @"";
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
-    NSUserDefaults *defaults;
-    NSString *hp;
-
     [super windowControllerDidLoadNib:aController];
-    defaults = [NSUserDefaults standardUserDefaults];
-    hp = [defaults stringForKey:@"Homepage"];
-    NSLog(@"VEDocument - read from defaults homepage = %@", hp);
-    [self setHomePage:hp];
 }
 
 - (id)initWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
 {
     VEDocument *doc;
-    NSString *urlStr;
     
-    urlStr = [@"file://" stringByAppendingString:fileName];
-    NSLog(@"VEDocument - initWithContentsOfFile url: %@", urlStr);
     doc = [[VEDocument alloc] init];
     NSAssert(doc != NULL, @"VEDocument - document can't be nil");
-// no view exists yet    [doc  loadUrl:[NSURL URLWithString:urlStr]];
     
     return doc;
 }
