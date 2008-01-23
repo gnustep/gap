@@ -1,7 +1,7 @@
 /*
  Project: Vespucci
 
- Copyright (C) 2007
+ Copyright (C) 2007-2008
 
  Author: Ing. Riccardo Mottola
 
@@ -45,12 +45,11 @@ static NSString *homePage = @"";
     VEDocument *doc;
     NSString *urlStr;
     
-    NSLog(@"filename: %@", fileName);
     urlStr = [@"file://" stringByAppendingString:fileName];
-    NSLog(@"url: %@", urlStr);
+    NSLog(@"VEDocument - initWithContentsOfFile url: %@", urlStr);
     doc = [[VEDocument alloc] init];
-    NSAssert(doc != NULL, @"VEDocument - current document can't be nil");
-    [doc  loadUrl:[NSURL URLWithString:urlStr]];
+    NSAssert(doc != NULL, @"VEDocument - document can't be nil");
+// no view exists yet    [doc  loadUrl:[NSURL URLWithString:urlStr]];
     
     return doc;
 }
@@ -67,7 +66,6 @@ static NSString *homePage = @"";
 }
 
 - (void)makeWindowControllers
-    /* instantiate PRWindowController */
 {
     windowController = [[VEWinController alloc] initWithWindowNibName:@"VEDocument"];
     [self addWindowController:windowController];
@@ -97,7 +95,8 @@ static NSString *homePage = @"";
 
 - (void)loadUrl:(NSURL *)anUrl
 {
-    NSLog(@"Document - set url to %@", anUrl);
+    NSLog(@"VEDocument - set url to %@", anUrl);
+    NSAssert([self webView] != nil, @"loadUrl: webView can't be nil");
     if (anUrl != nil)
         [[[self webView] mainFrame] loadRequest:[NSURLRequest requestWithURL:anUrl]];
 }

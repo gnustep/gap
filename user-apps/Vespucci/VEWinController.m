@@ -1,7 +1,7 @@
 /*
  Project: Vespucci
 
- Copyright (C) 2007
+ Copyright (C) 2007-2008
 
  Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
 
@@ -29,7 +29,6 @@
 
 - (void)dealloc
 {
-    [webView release];
     [super dealloc];
 }
 
@@ -57,8 +56,8 @@
     NSLog(@"WindowdDidLoad: read from defaults homepage = %@", hp);
     if (hp != nil)
     {
-        [urlField setStringValue:hp];
-        [self setUrl: self];
+//        [urlField setStringValue:hp];
+//        [self setUrl: self];
     }
 }
 
@@ -75,11 +74,8 @@
 // delegate methods
 - (WebView *) webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-    id doc;
-
-    doc = [[NSDocumentController sharedDocumentController] openUntitledDocumentOfType: @"DocumentType" display:YES];
     [[webView mainFrame] loadRequest:request];
-    return [doc webView];
+    return webView;
 }
 
 - (void) webViewShow:(WebView *)sender
@@ -114,21 +110,6 @@
 
 - (void) webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    // Only report feedback for the main frame.
-    NSLog(@"webview=%@", sender);
-    NSLog(@"webview mainFrame=%@", [sender mainFrame]);
-    NSLog(@"frame=%@", frame);
-    NSLog(@"frame childFrames=%@", [frame childFrames]);
-    NSLog(@"frame dataSource=%@", [frame dataSource]);
-    NSLog(@"frame dataSource pageTitle=%@", [[frame dataSource] pageTitle]);
-    NSLog(@"frame dataSource textEncodingName=%@", [[frame dataSource] textEncodingName]);
-    NSLog(@"frame frameView=%@", [frame frameView]);
-    NSLog(@"frame name=%@", [frame name]);
-    NSLog(@"frame parentFrame=%@", [frame parentFrame]);
-    NSLog(@"frame provisionalDataSource=%@", [frame provisionalDataSource]);
-    NSLog(@"frame webView=%@", [frame webView]);
-  
-    // test: print subviews hierarchy
     if(frame == [sender mainFrame])
     {
       [self showStatus:@"Done."];
