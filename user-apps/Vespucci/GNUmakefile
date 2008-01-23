@@ -33,7 +33,8 @@ Resources/Info-gnustep.plist
 Vespucci_HEADER_FILES = \
 VEWinController.h \
 VEAppController.h \
-VEDocument.h
+VEDocument.h \
+VEDocumentController.h
 
 #
 # Class files
@@ -41,7 +42,8 @@ VEDocument.h
 Vespucci_OBJC_FILES = \
 VEWinController.m \
 VEAppController.m \
-VEDocument.m
+VEDocument.m \
+VEDocumentController.m
 
 #
 # Other sources

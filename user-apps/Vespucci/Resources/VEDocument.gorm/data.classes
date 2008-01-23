@@ -31,7 +31,8 @@
 	Outlets = (
 	    urlField,
 	    webView,
-	    status
+	    status,
+	    window
 	);
 	Super = NSObject;
     };

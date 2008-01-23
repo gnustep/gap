@@ -4,9 +4,10 @@
     ApplicationName = Vespucci;
     ApplicationRelease = 0.1;
     Authors = (
+	"GNUstep Application Project",
 	"Riccardo Mottola"
     );
-    Copyright = "Copyright (C) 2007";
+    Copyright = "Copyright (C) 2007-2008\033\033ffGAP, Riccardo";
     CopyrightDescription = "Released under GPL v2";
     FullVersionID = 0.1;
     NSExecutable = Vespucci;

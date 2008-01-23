@@ -39,6 +39,13 @@
 	);
 	Super = NSObject;
     };
+    VEDocumentController = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSDocumentController;
+    };
     VEWinController = {
 	Actions = (
 	    "setUrl:"
