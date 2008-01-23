@@ -25,7 +25,7 @@
 
 #import "VEAppController.h"
 #import "VEDocument.h"
-#import "VEDocumentController.h";
+#import "VEDocumentController.h"
 
 
 @implementation VEAppContoller
