@@ -29,7 +29,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-01-23 23:58:11 +0100";
+    LAST_EDITING = "2008-01-24 19:34:41 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -66,10 +66,30 @@
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = HTML;
 	    NSIcon = "";
-	    NSName = HTML;
+	    NSName = "HTML Document";
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		"htm html"
+	    );
+	},
+	{
+	    NSDocumentClass = VEDocument;
+	    NSHumanReadableName = XHTML;
+	    NSIcon = "";
+	    NSName = "XHTML Document";
+	    NSRole = Viewer;
+	    NSUnixExtensions = (
+		"xhtm xhtml"
+	    );
+	},
+	{
+	    NSDocumentClass = VEDocument;
+	    NSHumanReadableName = TEXT;
+	    NSIcon = "";
+	    NSName = "Plain Text Document";
+	    NSRole = Viewer;
+	    NSUnixExtensions = (
+		"txt text"
 	    );
 	}
     );
