@@ -19,10 +19,30 @@
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = HTML;
 	    NSIcon = "";
-	    NSName = HTML;
+	    NSName = "HTML Document";
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		"htm html"
+	    );
+	},
+	{
+	    NSDocumentClass = VEDocument;
+	    NSHumanReadableName = XHTML;
+	    NSIcon = "";
+	    NSName = "XHTML Document";
+	    NSRole = Viewer;
+	    NSUnixExtensions = (
+		"xhtm xhtml"
+	    );
+	},
+	{
+	    NSDocumentClass = VEDocument;
+	    NSHumanReadableName = TEXT;
+	    NSIcon = "";
+	    NSName = "Plain Text Document";
+	    NSRole = Viewer;
+	    NSUnixExtensions = (
+		"txt text"
 	    );
 	}
     );
