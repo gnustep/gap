@@ -34,9 +34,12 @@
 - (id)openUntitledDocumentOfType:(NSString *)docType display:(BOOL)display
 {
     VEDocument *doc;
+    NSString *hp;
 
     doc = [super openUntitledDocumentOfType:docType display:display];
-    [doc loadUrl:[NSURL URLWithString:[doc homePage]]];
+    hp = [doc homePage];
+    if (hp != nil)
+        [doc loadUrl:[NSURL URLWithString:hp]];
     return doc;
 }
 

@@ -40,7 +40,7 @@
     VEDocument *doc;
 
     doc = [[VEDocumentController sharedDocumentController] 
-    openUntitledDocumentOfType: @"HTML" display: YES];
+    openUntitledDocumentOfType: @"HTML Document" display: YES];
 
     return (doc != nil);
 }
