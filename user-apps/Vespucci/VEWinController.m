@@ -177,4 +177,9 @@
     return canonicizedUrl;
 }
 
+- (NSString *)loadedUrl
+{
+    return [urlField stringValue];
+}
+
 @end

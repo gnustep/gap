@@ -47,7 +47,18 @@
 
     urlStr = [@"file://" stringByAppendingString:fileName];
 
-    doc = [super openDocumentWithContentsOfFile:fileName display:flag];
+    /* check if there is a current document open which is empty and reuse it
+        else create a new document */
+    doc = [self currentDocument];
+    NSLog(@"current loaded url in document: %@", [doc loadedUrl]);
+    if (doc != nil)
+    {
+        if (([doc loadedUrl] != nil) && [[doc loadedUrl] length] > 0)
+            doc = [super openDocumentWithContentsOfFile:fileName display:flag];
+    } else {
+        doc = [super openDocumentWithContentsOfFile:fileName display:flag];
+    }
+    
     [doc  loadUrl:[NSURL URLWithString:urlStr]];
     return doc;
 }
