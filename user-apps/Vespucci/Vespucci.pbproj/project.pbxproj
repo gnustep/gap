@@ -237,10 +237,69 @@
 				<string>text/html</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>HTML</string>
+			<string>HTML Document</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>HTML</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>NSDocumentClass</key>
+			<string>VEDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>xhtml</string>
+				<string>xhtm</string>
+			</array>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/xhtml+xml</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>XHTML Document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>XHTML</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>NSDocumentClass</key>
+			<string>VEDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>webloc</string>
+				<string>url</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Web Link</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>LINK</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>NSDocumentClass</key>
+			<string>VEDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>txt</string>
+				<string>text</string>
+			</array>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>text/plain</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Plain Text Document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
