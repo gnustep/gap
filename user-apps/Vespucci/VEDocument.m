@@ -91,4 +91,9 @@ static NSString *homePage = @"";
         [[[self webView] mainFrame] loadRequest:[NSURLRequest requestWithURL:anUrl]];
 }
 
+- (NSString *)loadedUrl
+{
+    return [windowController loadedUrl];
+}
+
 @end
