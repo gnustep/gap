@@ -51,7 +51,6 @@
     VEDocument *doc;
 
     dc = [VEDocumentController sharedDocumentController];
-    NSLog(@"appcontroller: should create ui? %@", [dc shouldCreateUI]);
     doc = [dc openDocumentWithContentsOfFile:filename display:YES];
 
     return (doc != nil);
