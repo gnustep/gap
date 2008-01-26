@@ -25,6 +25,7 @@
 
 #import "VEWinController.h"
 #import "VEDocument.h"
+#import "VEFunctions.h"
 
 @implementation VEWinController
 
@@ -130,7 +131,7 @@
         if ([[url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] > 0)
         {
             NSString *canonUrl;
-            canonUrl = [self canonicizeUrl:url];
+            canonUrl = canonicizeUrl(url);
             NSLog(@"set url to %@", canonUrl);
             doc = (VEDocument *)[self document];
             NSAssert(doc != nil, @"VEWinController setUrl: document can't be nil");
@@ -153,29 +154,6 @@
     [webView goForward];
 }
 
-- (NSString *)canonicizeUrl:(NSString *)urlStr
-{
-    NSString *canonicizedUrl;
-
-    canonicizedUrl = nil;
-    if ([urlStr hasPrefix:@"http://"] ||
-        [urlStr hasPrefix:@"https://"] ||
-        [urlStr hasPrefix:@"file://"]
-        )
-    {
-        canonicizedUrl = [NSString stringWithString:urlStr];
-    } else
-    {
-        if ([urlStr hasPrefix:@"www"])
-        {
-            canonicizedUrl = [@"http://" stringByAppendingString:urlStr]; 
-        } else
-        {
-            canonicizedUrl = [@"http://" stringByAppendingString:urlStr];
-        }
-    }
-    return canonicizedUrl;
-}
 
 - (NSString *)loadedUrl
 {
