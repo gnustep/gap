@@ -1,12 +1,14 @@
 /*
  Project: Vespucci
- VEWinController.h
+ VEFunctions.m
 
- Copyright (C) 2007-2008
+ Utility Functions
+
+ Copyright (C) 2008
 
  Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
 
- Created: 2007-03-13
+ Created: 2008-01-25
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -23,27 +25,32 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#import <AppKit/AppKit.h>
-#import <WebKit/WebPreferences.h>
-#import <WebKit/WebKit.h>
+
+#import "VEFunctions.h"
 
 
-
-@interface VEWinController : NSWindowController
+NSString *canonicizeUrl (NSString *urlStr)
 {
-   IBOutlet NSTextField *urlField;	// web address field
-   IBOutlet WebView *webView;		// the Web view
-   IBOutlet NSTextField *status;	// the status
+    NSString *canonicizedUrl;
 
-
-   WebPreferences *webPrefs;
+    canonicizedUrl = nil;
+    if ([urlStr hasPrefix:@"http://"] ||
+        [urlStr hasPrefix:@"https://"] ||
+        [urlStr hasPrefix:@"file://"]
+        )
+    {
+        canonicizedUrl = [NSString stringWithString:urlStr];
+    } else
+    {
+        if ([urlStr hasPrefix:@"www"])
+        {
+            canonicizedUrl = [@"http://" stringByAppendingString:urlStr];
+        } else if ([urlStr hasPrefix:@"/"])
+        {
+            canonicizedUrl = [@"file://" stringByAppendingString:urlStr];
+        } else {
+            canonicizedUrl = [@"http://" stringByAppendingString:urlStr];
+        }
+    }
+    return canonicizedUrl;
 }
-
-- (WebView *)webView;
-
-- (IBAction) setUrl:(id)sender;
-- (IBAction) goBackHistory:(id)sender;
-- (IBAction) goForwardHistory:(id)sender;
-- (NSString *)loadedUrl;
-
-@end

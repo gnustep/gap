@@ -26,6 +26,7 @@
 #import "VEAppController.h"
 #import "VEDocument.h"
 #import "VEDocumentController.h"
+#import "VEFunctions.h"
 
 
 @implementation VEAppContoller
@@ -58,7 +59,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-
+    [NSApp setServicesProvider:self];
 }
 
 - (IBAction)showPreferences:(id)sender
@@ -98,6 +99,38 @@
         NSLog(@"in windowDidBecomeKey homepage is %@", hp);
         [homePageField setStringValue:hp];
     }
+}
+
+/* service provider */
+- (void)openURL:(NSPasteboard *)pboard
+                 userData:(NSString *)data
+                    error:(NSString **)error
+{
+    NSString *pboardString;
+    NSArray *types;
+    NSString *urlStr;
+    VEDocumentController *dc;
+    VEDocument *doc;
+
+    types = [pboard types];
+
+    if (![types containsObject:NSStringPboardType] || !(pboardString = [pboard stringForType:NSStringPboardType]))
+    {
+        *error = NSLocalizedString(@"Error: Pasteboard doesn't contain a string.",
+                                   @"Pasteboard couldn't give string.");
+        return;
+    }
+
+    NSLog(@"Received string from service: %@", pboardString);
+
+
+    dc = [VEDocumentController sharedDocumentController];
+    doc = [dc openUntitledDocumentOfType:@"HTML Document" display:YES];
+    urlStr = canonicizeUrl(pboardString);
+    [doc  loadUrl:[NSURL URLWithString:urlStr]];
+
+
+    return;
 }
 
 @end

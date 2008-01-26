@@ -147,6 +147,8 @@
 		29B97315FDCFA39411CA2CEA = {
 			children = (
 				29B97316FDCFA39411CA2CEA,
+				85F552960D4A773400A80101,
+				85F552970D4A773400A80101,
 			);
 			isa = PBXGroup;
 			name = "Other Sources";
@@ -323,6 +325,25 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Open URL in Vespucci</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>openURL</string>
+			<key>NSPortName</key>
+			<string>Vespucci</string>
+			<key>NSSendTypes</key>
+			<array>
+				<string>NSURLPboardType</string>
+				<string>NSStringPboardType</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
 ";
@@ -334,6 +355,7 @@
 				85D522A40C3076A000A80101,
 				85D522AC0C307FCD00A80101,
 				85DAD5930D47EC0D00A80101,
+				85F552980D4A773400A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +378,7 @@
 				85D522A50C3076A000A80101,
 				85D522AD0C307FCD00A80101,
 				85DAD5940D47EC0D00A80101,
+				85F552990D4A773400A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +591,30 @@
 		};
 		85DBBE460C288D7900A80101 = {
 			fileRef = 1058C7A1FEA54F0111CA2CBB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85F552960D4A773400A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = VEFunctions.h;
+			refType = 4;
+		};
+		85F552970D4A773400A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = VEFunctions.m;
+			refType = 4;
+		};
+		85F552980D4A773400A80101 = {
+			fileRef = 85F552960D4A773400A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85F552990D4A773400A80101 = {
+			fileRef = 85F552970D4A773400A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};

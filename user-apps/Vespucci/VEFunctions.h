@@ -1,12 +1,14 @@
 /*
  Project: Vespucci
- VEWinController.h
+ VEFunctions.h
 
- Copyright (C) 2007-2008
+ Utility Functions
+
+ Copyright (C) 2008
 
  Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
 
- Created: 2007-03-13
+ Created: 2008-01-25
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -23,27 +25,9 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#import <AppKit/AppKit.h>
-#import <WebKit/WebPreferences.h>
-#import <WebKit/WebKit.h>
+
+#import <Foundation/Foundation.h>
+
+NSString *canonicizeUrl (NSString *urlStr);
 
 
-
-@interface VEWinController : NSWindowController
-{
-   IBOutlet NSTextField *urlField;	// web address field
-   IBOutlet WebView *webView;		// the Web view
-   IBOutlet NSTextField *status;	// the status
-
-
-   WebPreferences *webPrefs;
-}
-
-- (WebView *)webView;
-
-- (IBAction) setUrl:(id)sender;
-- (IBAction) goBackHistory:(id)sender;
-- (IBAction) goForwardHistory:(id)sender;
-- (NSString *)loadedUrl;
-
-@end
