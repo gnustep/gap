@@ -34,7 +34,8 @@ Vespucci_HEADER_FILES = \
 VEWinController.h \
 VEAppController.h \
 VEDocument.h \
-VEDocumentController.h
+VEDocumentController.h \
+VEFunctions.h
 
 #
 # Class files
@@ -43,7 +44,8 @@ Vespucci_OBJC_FILES = \
 VEWinController.m \
 VEAppController.m \
 VEDocument.m \
-VEDocumentController.m
+VEDocumentController.m \
+VEFunctions.m
 
 #
 # Other sources

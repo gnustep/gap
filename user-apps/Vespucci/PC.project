@@ -6,7 +6,8 @@
 	VEWinController.m,
 	VEAppController.m,
 	VEDocument.m,
-	VEDocumentController.m
+	VEDocumentController.m,
+	VEFunctions.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -19,7 +20,8 @@
 	VEWinController.h,
 	VEAppController.h,
 	VEDocument.h,
-	VEDocumentController.h
+	VEDocumentController.h,
+	VEFunctions.h
     );
     IMAGES = (
     );
@@ -29,7 +31,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-01-24 19:34:41 +0100";
+    LAST_EDITING = "2008-01-26 10:16:09 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -49,7 +51,7 @@
     );
     PC_WINDOWS = {
 	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 659; height = 173}";
-	ProjectWindow = "151 137 677 615 0 0  1280 1024 ";
+	ProjectWindow = "120 103 677 615 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
