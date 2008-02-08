@@ -6,10 +6,11 @@
 	    "changeAttributes:",
 	    "changeDocumentBackgroundColor:",
 	    "goBack:",
+	    "goBackHistory:",
 	    "goForward:",
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
-	    "showPreferences:",
+	    "goForwardHistory:",
 	    "performFindPanelAction:",
 	    "reload:",
 	    "savePrefs:",
@@ -20,6 +21,7 @@
 	    "setResourceLoadDelegate:",
 	    "setUIDelegate:",
 	    "setUrl:",
+	    "showPreferences:",
 	    "startSpeaking:",
 	    "stopLoading:",
 	    "stopSpeaking:",
@@ -48,7 +50,9 @@
     };
     VEWinController = {
 	Actions = (
-	    "setUrl:"
+	    "setUrl:",
+	    "goBackHistory:",
+	    "goForwardHistory:"
 	);
 	Outlets = (
 	    urlField,
