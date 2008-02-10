@@ -1,4 +1,9 @@
+2008-02-10 12:10-EST Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Percentages.m: Cleaned up code.
+	
 2007-11-23 Riccardo Mottola <rmottola@users.sf.net>
+
 	* loadave.c: added and fixed NetBSD section
 	
 2007-05-02  Nicola Pero  <nicola.pero@meta-innovation.com>

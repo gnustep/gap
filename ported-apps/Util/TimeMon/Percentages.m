@@ -84,31 +84,31 @@
     {
       NSData *data = [NSData dataWithContentsOfFile: path];
       if (data != nil)
-		{
-			NSDictionary *dict = nil;
-			NSTextStorage *ts = [[NSTextStorage alloc] initWithRTF: data
+        {
+          NSDictionary *dict = nil;
+          NSTextStorage *ts = [[NSTextStorage alloc] initWithRTF: data
 						     documentAttributes: &dict];
-			[[(NSTextView *)readmeText layoutManager] replaceTextStorage: ts];
-		}
+          [[(NSTextView *)readmeText layoutManager] replaceTextStorage: ts];
+        }
     }		   
 }
 
 - (void)update
 {
-    NSImageRep *r;
-
-    // Clear to the background color if all rings are to be
-    // redrawn.
-    stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
-    r = [[NSCustomImageRep alloc]
-		      initWithDrawSelector: @selector(drawImageRep)
-		      delegate: self];
-	[r autorelease];
-    [r setSize: NSMakeSize(48,48)];
-    [stipple addRepresentation: r];
-    [NSApp setApplicationIconImage:stipple];
-    [stipple release];
-	stipple = nil;
+  NSImageRep *r;
+  
+  // Clear to the background color if all rings are to be
+  // redrawn.
+  stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
+  r = [[NSCustomImageRep alloc]
+        initWithDrawSelector: @selector(drawImageRep)
+        delegate: self];
+  [r autorelease];
+  [r setSize: NSMakeSize(48,48)];
+  [stipple addRepresentation: r];
+  [NSApp setApplicationIconImage:stipple];
+  [stipple release];
+  stipple = nil;
 }
 
 - (void)step
@@ -203,19 +203,8 @@
   [self step];
 }
 
-// Set up to have a low priority from the get-go.
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-//#ifndef GNUSTEP
-//  struct task_basic_info tbi;
-//  unsigned ic = TASK_BASIC_INFO_COUNT;
-  
-//  if (task_info(task_self(), TASK_BASIC_INFO, (task_info_t)&tbi, &ic) != KERN_SUCCESS) 
-//    {
-//      return;
-//    }
-//  task_priority(task_self(), tbi.base_priority - 4, TRUE);
-//#endif
 }
 
 // Resize the oldTimes array and rearrange the values within
@@ -269,7 +258,8 @@
     float f;
     int ret;
     CPUTime cp_time;
-
+    SEL stepSel = @selector(step);
+    NSMethodSignature *sig = [self methodSignatureForSelector:stepSel];  
     NSDictionary *defs = [NSDictionary dictionaryWithObjectsAndKeys:
 	@"0.5",			@"UpdatePeriod",
 	@"4",			@"LagFactor",
@@ -293,7 +283,8 @@
     [defaults synchronize];
 	
 	// Shoot out error codes if there was an error.
-    if ((ret = la_init(cp_time)) ) {
+    if ((ret = la_init(cp_time)) ) 
+      {
 	const id syslogs[] = {
 	  NULL,				          // LA_NOERR
 	  @"Cannot read or parse /proc/stat." // LA_ERROR
@@ -302,7 +293,7 @@
 	NSLog(@"TimeMon: Exiting!");
 	NSRunAlertPanel(@"TimeMon", syslogs[ret], @"OK", nil, nil, nil);
 	[NSApp terminate:[notification object]];
-    }
+      }
 
     // Move ourselves over to the appIcon window.
     [NSApp setApplicationIconImage:stipple];
@@ -312,16 +303,11 @@
     f = MAX(f, MINPERIOD);
     [periodText setFloatValue:f];
     
-    {
-      SEL stepSel = @selector(step);
-      NSMethodSignature *sig = [self methodSignatureForSelector:stepSel];
-      
-      selfStep = [[NSInvocation invocationWithMethodSignature:sig] retain];
-      [selfStep setSelector:stepSel];
-      [selfStep setTarget:self];
-      [selfStep retainArguments];
-      te = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)f invocation:selfStep repeats:YES];
-    }
+    selfStep = [[NSInvocation invocationWithMethodSignature:sig] retain];
+    [selfStep setSelector:stepSel];
+    [selfStep setTarget:self];
+    [selfStep retainArguments];
+    te = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)f invocation:selfStep repeats:YES];
     
     // Get the lag factor.
     lagFactor = [defaults integerForKey:@"LagFactor"];
@@ -348,10 +334,11 @@
 - (BOOL)applicationShouldTerminate:(id)sender
 { 
   // If te is installed, remove it.
-  if (te) {
-    [te invalidate];
-    te = nil;
-  }
+  if (te) 
+    {
+      [te invalidate];
+      te = nil;
+    }
   [stipple release];
   la_finish();
   return YES;
@@ -365,28 +352,31 @@
 
 - (void)togglePause:(id)sender
 {
-  if (te) {
-    NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
-    NSImage *pausedStipple = [NSApp applicationIconImage];
-
-    [pauseMenuCell setTitle:@"Continue"];
-    [te invalidate];
-    te = nil;
-
-    [pausedStipple lockFocus];
-    [pausedImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceOver];
-    [pausedStipple unlockFocus];
-
-    [NSApp setApplicationIconImage:pausedStipple];
-  } else {
-    float f;
-    [pauseMenuCell setTitle:@"Pause"];
-    f = [defaults floatForKey:@"UpdatePeriod"];
-    f = MAX(f, MINPERIOD);
-    [periodText setFloatValue:f];
-    te = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)f invocation:selfStep repeats:YES];
-    [self display];
-  }
+  if (te) 
+    {
+      NSImage *pausedImage = [NSImage imageNamed:@"TimeMonP"];
+      NSImage *pausedStipple = [NSApp applicationIconImage];
+      
+      [pauseMenuCell setTitle:@"Continue"];
+      [te invalidate];
+      te = nil;
+      
+      [pausedStipple lockFocus];
+      [pausedImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceOver];
+      [pausedStipple unlockFocus];
+      
+      [NSApp setApplicationIconImage:pausedStipple];
+    } 
+  else 
+    {
+      float f;
+      [pauseMenuCell setTitle:@"Pause"];
+      f = [defaults floatForKey:@"UpdatePeriod"];
+      f = MAX(f, MINPERIOD);
+      [periodText setFloatValue:f];
+      te = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)f invocation:selfStep repeats:YES];
+      [self display];
+    }
 }
 
 - (void)setPeriod:(id)sender
