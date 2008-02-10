@@ -5,7 +5,9 @@
 	    "changeAttributes:",
 	    "changeDocumentBackgroundColor:",
 	    "goBack:",
+	    "goBackHistory:",
 	    "goForward:",
+	    "goForwardHistory:",
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
 	    "performFindPanelAction:",
@@ -26,15 +28,16 @@
     };
     VEWinController = {
 	Actions = (
-	    "setUrl:"
+	    "setUrl:",
+	    "goBackHistory:",
+	    "goForwardHistory:"
 	);
 	Outlets = (
 	    urlField,
 	    webView,
-	    status,
-	    window
+	    status
 	);
-	Super = NSObject;
+	Super = NSWindowController;
     };
     WebView = {
 	Actions = (
