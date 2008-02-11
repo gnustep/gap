@@ -72,8 +72,11 @@
 // delegate methods
 - (WebView *) webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-    [[webView mainFrame] loadRequest:request];
-    return webView;
+    id doc;
+
+    doc = [[NSDocumentController sharedDocumentController] openUntitledDocumentOfType:@"HTML Document" display:YES];
+    [[[doc webView] mainFrame] loadRequest:request];
+    return [doc webView];
 }
 
 - (void) webViewShow:(WebView *)sender
