@@ -12,13 +12,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSArray *fontsDirs;
-    NSString *fdpath;
-
     NSLog(@"Graphos: applicationDidFinishLaunching");
-    // #### fdpath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Resources/fontsPaths"];
-    // #### fontsDirs = [NSArray arrayWithContentsOfFile: fdpath];
-    // ####	pfbPathForFont = [[NSDictionary alloc] initWithDictionary: pfbFilesInFontsDirs(fontsDirs)];
     tools = [[GRToolsWindow alloc] init];
     [tools display];
     [tools orderFront:nil];
@@ -44,20 +38,6 @@
 }
 
 
-- (NSString *)pfaDescriptionOfFont:(NSString *)fontName
-{
-    NSString *pfbPath, *pfaData = nil;
-
-    pfbPath = [pfbPathForFont objectForKey: fontName];
-    if(pfbPath) {
-        if([[pfbPath pathExtension] isEqualToString: @"pfa"])
-            pfaData = [NSString stringWithContentsOfFile: pfbPath];
-        else
-            pfaData = [NSString stringWithString: pfaDataOfBinaryFontAtPath(pfbPath)];
-    }
-
-    return pfaData;
-}
 
 @end
 
