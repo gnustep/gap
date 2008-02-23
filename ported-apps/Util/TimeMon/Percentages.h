@@ -35,7 +35,6 @@ typedef unsigned long long CPUTime[CPUSTATES];
     id pauseMenuCell;		// To change when we pause/unpause.
     id colorFields;		// Fields that contain the color scheme.
     id readmeText;              // the readme text...
-    NSImage *stipple;		// Icon background color stipple for NS3.0.
 }
 
 // Action methods
