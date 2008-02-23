@@ -249,7 +249,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     NSLog(@"AddBoxtAtPoint");
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] unselect];
+        [[[objects objectAtIndex: i] editor] unselect];
 
     box = [[GRBox alloc] initInView: self atPoint: p
                             zoomFactor: zFactor];
@@ -276,7 +276,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             duplObj = [(GRBox *)obj duplicate];
         else
             duplObj = [(GRText *)obj duplicate];
-        [obj unselect];
+        [[obj editor] unselect];
         [duplObj selectAsGroup];
         [duplObj moveAddingCoordsOfPoint: p];
         [objects addObject: duplObj];
@@ -511,7 +511,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 if([self moveBezierHandleOfEditor: obj toPoint: p])
                     return;
                 else
-                    [obj unselect];
+                    [[obj editor] unselect];
             }
         } else
         {
@@ -527,7 +527,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i;
 
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] unselect];
+        [[[objects objectAtIndex: i] editor] unselect];
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -634,7 +634,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i;
 
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] unselect];
+        [[[objects objectAtIndex: i] editor] unselect];
 
     for(i = 0; i < [objs count]; i++)
     {
@@ -874,7 +874,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     for(i = 0; i < [objects count]; i++)
         if([objects objectAtIndex: i] != obj)
-            [[objects objectAtIndex: i] unselect];
+            [[[objects objectAtIndex: i] editor] unselect];
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -909,7 +909,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     for(i = 0; i < [objects count]; i++)
         if([objects objectAtIndex: i] != obj)
-            [[objects objectAtIndex: i] unselect];
+            [[[objects objectAtIndex: i] editor] unselect];
 
     for(i = 0; i < [objects count]; i++) {
         if((obj == [objects objectAtIndex: i]) && ((i - 1) >= 0)) {
@@ -936,7 +936,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     {
         obj = [objects objectAtIndex: i];
         if(obj != anObject)
-            [obj unselect];
+            [[obj editor] unselect];
     }
 
     [self setNeedsDisplay: YES];
