@@ -1,0 +1,18 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	);
+	Outlets = (
+	    clockMatrix
+	);
+	Super = NSObject;
+    };
+    QSTimeControl = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSControl;
+    };
+}

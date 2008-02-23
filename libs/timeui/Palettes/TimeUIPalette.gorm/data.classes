@@ -1,0 +1,18 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    QSTimeControl = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSControl;
+    };
+    TimeUIPalette = {
+	Actions = (
+	);
+	Outlets = (
+	    clock
+	);
+	Super = IBPalette;
+    };
+}

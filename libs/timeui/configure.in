@@ -1,0 +1,29 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.57)
+AC_INIT(FULL-PACKAGE-NAME, VERSION, BUG-REPORT-ADDRESS)
+AC_CONFIG_SRCDIR([TestTimeUI/main.m])
+AC_CONFIG_HEADER([config.h])
+
+# Checks for programs.
+AC_PROG_AWK
+AC_PROG_CC
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+
+# Checks for library functions.
+AC_HEADER_STDC
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([bzero strdup])
+
+# What should we check for? Gorm's location?
+
+AC_CONFIG_FILES([server.make])
+AC_OUTPUT

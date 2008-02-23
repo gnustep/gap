@@ -31,7 +31,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-01-26 10:16:09 +0100";
+    LAST_EDITING = "2008-02-13 15:19:13 -0500";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -51,7 +51,8 @@
     );
     PC_WINDOWS = {
 	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 659; height = 173}";
-	ProjectWindow = "120 103 677 615 0 0  1024 768 ";
+	ProjectBuild = "0 0 0 0 -2147483648 -2147483648 -2147483648 -2147483648 ";
+	ProjectWindow = "187 161 677 615 0 0  1600 1200 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
@@ -114,6 +115,7 @@
 	VespucciInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
 	English
     );
 }

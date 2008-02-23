@@ -31,7 +31,7 @@
     self = [super init];
     if (self) 
       {
-	stipple = [NSImage imageNamed:@"NSApplicationIcon"];
+	// stipple = [NSImage imageNamed:@"NSApplicationIcon"];
 	defaults = [NSUserDefaults standardUserDefaults];
 	[NSApp setDelegate:self];
       }
@@ -96,19 +96,18 @@
 - (void)update
 {
   NSImageRep *r;
+  NSImage *stipple;
   
-  // Clear to the background color if all rings are to be
-  // redrawn.
   stipple = [[NSImage alloc] initWithSize: NSMakeSize(48,48)];
   r = [[NSCustomImageRep alloc]
         initWithDrawSelector: @selector(drawImageRep)
         delegate: self];
-  [r autorelease];
+  // [r autorelease];
   [r setSize: NSMakeSize(48,48)];
   [stipple addRepresentation: r];
   [NSApp setApplicationIconImage:stipple];
-  [stipple release];
-  stipple = nil;
+  // [stipple release];
+  // stipple = nil;
 }
 
 - (void)step
@@ -296,7 +295,7 @@
       }
 
     // Move ourselves over to the appIcon window.
-    [NSApp setApplicationIconImage:stipple];
+    // [NSApp setApplicationIconImage:stipple];
     
     // Get us registered for periodic exec.
     f = [defaults floatForKey:@"UpdatePeriod"];
@@ -339,7 +338,7 @@
       [te invalidate];
       te = nil;
     }
-  [stipple release];
+  // [stipple release];
   la_finish();
   return YES;
 }
@@ -362,10 +361,11 @@
       te = nil;
       
       [pausedStipple lockFocus];
-      [pausedImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceOver];
+      [pausedImage compositeToPoint:NSZeroPoint 
+                   operation:NSCompositeSourceOver];
       [pausedStipple unlockFocus];
       
-      [NSApp setApplicationIconImage:pausedStipple];
+      [NSApp setApplicationIconImage: pausedStipple];
     } 
   else 
     {
