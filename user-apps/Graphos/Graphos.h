@@ -32,7 +32,6 @@ typedef enum {
 
 - (void)updateCurrentWindow;
 
-- (NSString *)pfaDescriptionOfFont:(NSString *)fontName;
 
 @end
 
