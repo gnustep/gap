@@ -17,6 +17,6 @@
 
 - (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;
 
-- (void)Draw;
+- (void)draw;
 
 @end

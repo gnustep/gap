@@ -5,12 +5,13 @@
 @implementation GRBezierControlPoint
 
 - (id)initAtPoint:(NSPoint)aPoint
-        forEditor:(GRBezierPathEditor *)editor
+        forPath:(GRBezierPath *)aPath
        zoomFactor:(float)zf
 {
     self = [super init];
-    if(self) {
-        myEditor = editor;
+    if(self)
+    {
+        path = aPath;
         zmFactor = zf;
         bzHandle.center = aPoint;
         bzHandle.centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
@@ -72,9 +73,9 @@
     GRBezierControlPoint *mtopoint, *ponpoint = nil;
     double distx, disty;
 
-    mtopoint = [myEditor firstPoint];
-    ponpoint = [myEditor pointOnPoint: self];
-    if(ponpoint && [myEditor isdone] && (self == mtopoint))
+    mtopoint = [path firstPoint];
+    ponpoint = [path pointOnPoint: self];
+    if(ponpoint && [[path editor] isdone] && (self == mtopoint))
         [ponpoint moveBezierHandleToPosition: newp oldPosition: oldp];
 
     if(pointInRect(bzHandle.firstHandleRect, oldp)) {
@@ -144,7 +145,7 @@
     double distx, disty;
 
     isSelect = YES;
-    [myEditor unselectOtherControls: self];
+    [[path editor] unselectOtherControls: self];
     distx = max(bzHandle.firstHandle.x, bzHandle.center.x) - min(bzHandle.firstHandle.x, bzHandle.center.x);
     disty = max(bzHandle.firstHandle.y, bzHandle.center.y) - min(bzHandle.firstHandle.y, bzHandle.center.y);
     if(distx || disty)

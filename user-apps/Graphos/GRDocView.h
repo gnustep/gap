@@ -48,7 +48,7 @@
 - (NSDictionary *) objectDictionary;
 - (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
-- (void)addPathEditor;
+- (void)addPath;
 - (void)addBoxAtPoint:(NSPoint)p;
 - (void)addTextAtPoint:(NSPoint)p;
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;

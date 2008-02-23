@@ -10,11 +10,11 @@ typedef struct {
     NSRect secondHandleRect;
 } GRBezierHandle;
 
-@class GRBezierPathEditor;
+@class GRBezierPath;
 
 @interface GRBezierControlPoint : NSObject
 {
-    GRBezierPathEditor *myEditor;
+    GRBezierPath *path;
     GRBezierHandle bzHandle;
     BOOL isActiveHandle;
     BOOL isSelect;
@@ -22,7 +22,7 @@ typedef struct {
 }
 
 - (id)initAtPoint:(NSPoint)aPoint
-        forEditor:(GRBezierPathEditor *)editor
+        forPath:(GRBezierPath *)aPath
        zoomFactor:(float)zf;
 
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePosition;

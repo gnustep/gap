@@ -94,11 +94,12 @@
 
 - (void)unselect;
 
+// shall go into the editor
 - (BOOL)isSelect;
 
 - (BOOL)isGroupSelected;
 
-- (void)Draw;
+- (void)draw;
 
 - (void)setIsValid:(BOOL)value;
 
