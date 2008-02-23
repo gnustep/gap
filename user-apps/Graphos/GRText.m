@@ -467,7 +467,7 @@
     return (path);
 }    
 
-- (void)Draw
+- (void)draw
 {
     NSArray *lines;
     NSString *line;

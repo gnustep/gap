@@ -1,6 +1,7 @@
 #import "GRDocView.h"
 #import "Graphos.h"
 #import "GRFunctions.h"
+#import "GRBezierPath.h"
 #import "GRBox.h"
 #import "GRBoxEditor.h"
 #import "GRText.h"
@@ -65,7 +66,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        if([obj isKindOfClass: [GRBezierPath class]])
         {
             str = [NSString stringWithFormat: @"path%i", p];
             p++;
@@ -180,7 +181,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSArray *keys;
     NSString *key;
     NSDictionary *objdict;
-    GRBezierPathEditor *bzeditor;
+    GRBezierPath *bzPath;
     GRText *gGRText;
     int i;
 
@@ -194,12 +195,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         objdict = [dict objectForKey: key];
         if(!objdict)
             return NO;
+        // ### fixme extend for other objects
         if([key rangeOfString: @"path"].length)
         {
-            bzeditor = [[GRBezierPathEditor alloc] initFromData: objdict
+            bzPath = [[GRBezierPath alloc] initFromData: objdict
                                                          inView: self zoomFactor: zFactor];
-            [objects addObject: bzeditor];
-            [bzeditor release];
+            [objects addObject: bzPath];
+            [bzPath release];
             edind = [objects count] -1;
         } else
         {
@@ -212,13 +214,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     return YES;
 }
 
-- (void)addPathEditor
+- (void)addPath
 {
-    GRBezierPathEditor *editor;
+    GRBezierPath *path;
 
-    editor = [[GRBezierPathEditor alloc] initInView: self zoomFactor: zFactor];
-    [objects addObject: editor];
-    [editor release];
+    path = [[GRBezierPath alloc] initInView: self zoomFactor: zFactor];
+    [objects addObject: path];
+    [path release];
     edind = [objects count] -1;
 }
 
@@ -229,7 +231,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     
     NSLog(@"AddTextAtPoint");
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] unselect];
+        [[[objects objectAtIndex: i] editor] unselect];
 
     gdtxt = [[GRText alloc] initInView: self atPoint: p
                             zoomFactor: zFactor openEditor: YES];
@@ -267,8 +269,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     for(i = 0; i < [objs count]; i++) {
         obj = [objs objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]])
-            duplObj = [(GRBezierPathEditor *)obj duplicate];
+        // ##### FIXME in case of superclass
+        if([obj isKindOfClass: [GRBezierPath class]])
+            duplObj = [(GRBezierPath *)obj duplicate];
+        else if ([obj isKindOfClass: [GRBox class]])
+            duplObj = [(GRBox *)obj duplicate];
         else
             duplObj = [(GRText *)obj duplicate];
         [obj unselect];
@@ -315,7 +320,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < count; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isGroupSelected])
+        if([[obj editor] isGroupSelected])
         {
             [deleted addObject: obj];
             [objects removeObject: obj];
@@ -340,7 +345,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i, index, count;
 
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] unselect];
+        [[[objects objectAtIndex: i] editor] unselect];
 
     if([delObjects count])
     {
@@ -365,7 +370,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 - (void)startDrawingAtPoint:(NSPoint)p
 {
     NSEvent *nextEvent;
-    GRBezierPathEditor *editor;
+    GRBezierPath *bzpath;
     id obj;
     BOOL isneweditor = YES;
     int i;
@@ -373,14 +378,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     // #### [myWin setSaved: NO];
     for(i = 0; i < [objects count]; i++) {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]])
-            if(![obj isdone])
+        if([obj isKindOfClass: [GRBezierPath class]])
+            if(![[obj editor] isdone])
                 isneweditor = NO;
     }
 
     if(isneweditor)
         for(i = 0; i < [objects count]; i++)
-            [[objects objectAtIndex: i] unselect];
+            [[[objects objectAtIndex: i] editor] unselect];
 
     nextEvent = [[self window] nextEventMatchingMask:
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
@@ -390,19 +395,19 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     {
         if(isneweditor)
         {
-            [self addPathEditor];
-            editor = [objects objectAtIndex: edind];
-            [editor selectForEditing];
-            [editor addControlAtPoint: p];
+            [self addPath];
+            bzpath = [objects objectAtIndex: edind];
+            [[bzpath editor] selectForEditing];
+            [bzpath addControlAtPoint: p];
             [self setNeedsDisplay: YES];
             return;
         } else
         {
-            editor = [objects objectAtIndex: edind];
-            [editor selectForEditing];
+            bzpath = [objects objectAtIndex: edind];
+            [[bzpath editor] selectForEditing];
             if(shiftclick)
-                p = pointApplyingCostrainerToPoint(p, [[editor lastPoint] center]);
-            [editor addLineToPoint: p];
+                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [bzpath addLineToPoint: p];
             [self setNeedsDisplay: YES];
             return;
         }
@@ -410,17 +415,17 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     {
         if(isneweditor)
         {
-            [self addPathEditor];
-            editor = [objects objectAtIndex: edind];
-            [editor selectForEditing];
-            [editor addControlAtPoint: p];
+            [self addPath];
+            bzpath = [objects objectAtIndex: edind];
+            [[bzpath editor] selectForEditing];
+            [bzpath addControlAtPoint: p];
         } else
         {
-            editor = [objects objectAtIndex: edind];
-            [editor selectForEditing];
+            bzpath = [objects objectAtIndex: edind];
+            [[bzpath editor] selectForEditing];
             if(shiftclick)
-                p = pointApplyingCostrainerToPoint(p, [[editor lastPoint] center]);
-            [editor addControlAtPoint: p];
+                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [bzpath addControlAtPoint: p];
         }
         [self setNeedsDisplay: YES];
 
@@ -429,9 +434,9 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             p = [nextEvent locationInWindow];
             p = [self convertPoint: p fromView: nil];
             if(shiftclick)
-                p = pointApplyingCostrainerToPoint(p, [[editor lastPoint] center]);
+                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
 
-            [editor addCurveWithBezierHandlePosition: p];
+            [bzpath addCurveWithBezierHandlePosition: p];
 
             [self setNeedsDisplay: YES];
 
@@ -440,7 +445,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             [self verifyModifiersOfEvent: nextEvent];
         } while([nextEvent type] != NSLeftMouseUp);
 
-        [editor confirmNewCurve];
+        [bzpath confirmNewCurve];
         [self setNeedsDisplay: YES];
     }
 }
@@ -456,27 +461,26 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        if([obj isKindOfClass: [GRBezierPath class]])
         {
             if([obj onPathBorder: p])
-                [obj selectAsGroup];
+                [[obj editor] selectAsGroup];
             else
                 if(!shiftclick)
-                    [obj unselect];
+                    [[obj editor] unselect];
         } else
         {
             if([obj pointInBounds: p])
                 [obj select];
-            else
-                if(!shiftclick)
-                    [obj unselect];
+            else if(!shiftclick)
+                [obj unselect];
         }
     }
 
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isGroupSelected])
+        if([[obj editor] isGroupSelected])
             [objs addObject: obj];
     }
 
@@ -494,11 +498,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]])
+        if([obj isKindOfClass: [GRBezierPath class]])
         {
             if([obj onPathBorder: p])
             {
-                [obj selectForEditing];
+                [[obj editor] selectForEditing];
                 [self setNeedsDisplay: YES];
                 [self moveControlPointOfEditor: obj toPoint: p];
                 return;
@@ -711,7 +715,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isSelect]) {
+        if([[obj editor] isSelect]) {
             objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
             if([obj isKindOfClass: [GRBezierPathEditor class]])
             {
@@ -805,7 +809,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         newProps = [propsEditor properties];
         count = 0;
         for(i = 0; i < [objects count]; i++)
-            if([[objects objectAtIndex: i] isGroupSelected])
+            if([[[objects objectAtIndex: i] editor] isGroupSelected])
                 count++;
         if(count > 1) {
             result = NSRunAlertPanel(@"Alert", @"You are going to set the properties of many objects! Are you sure?", @"Ok", @"No", nil);
@@ -819,7 +823,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         for(i = 0; i < [objects count]; i++)
         {
             obj = [objects objectAtIndex: i];
-            if([obj isGroupSelected]) {
+            if([[obj editor] isGroupSelected]) {
                 objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
                 if([obj isKindOfClass: [GRBezierPathEditor class]])
                 {
@@ -859,7 +863,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     for(i = 0; i < [objects count]; i++)
     {
-        if([[objects objectAtIndex: i] isGroupSelected])
+        if([[[objects objectAtIndex: i] editor] isGroupSelected])
         {
             obj = [[objects objectAtIndex: i] retain];
             break;
@@ -894,7 +898,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     for(i = 0; i < [objects count]; i++)
     {
-        if([[objects objectAtIndex: i] isGroupSelected])
+        if([[[objects objectAtIndex: i] editor] isGroupSelected])
         {
             obj = [[objects objectAtIndex: i] retain];
             break;
@@ -1029,7 +1033,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([obj isGroupSelected])
+        if([[obj editor] isGroupSelected])
             [objsdesc addObject: [obj objectDescription]];
     }
 
@@ -1339,7 +1343,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] Draw];
+        [[objects objectAtIndex: i] draw];
 
 }
 
