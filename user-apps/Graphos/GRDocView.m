@@ -504,11 +504,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             {
                 [[obj editor] selectForEditing];
                 [self setNeedsDisplay: YES];
-                [self moveControlPointOfEditor: obj toPoint: p];
+                [self moveControlPointOfEditor: [obj editor] toPoint: p];
                 return;
             } else
             {
-                if([self moveBezierHandleOfEditor: obj toPoint: p])
+                if([self moveBezierHandleOfEditor: [obj editor] toPoint: p])
                     return;
                 else
                     [[obj editor] unselect];
