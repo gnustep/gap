@@ -39,7 +39,7 @@
         groupSelected = YES;
         editSelected = NO;
         isvalid = NO;
-        [[object view] unselectOtherObjects: self];
+        [[object view] unselectOtherObjects: object];
     }
 }
 

@@ -45,7 +45,6 @@ static double k = 0.025;
         strokeAlpha = 1;
         fillAlpha = 1;
         editor = [[GRBezierPathEditor alloc] initEditor:self];
-
     }
     return self;
 }
@@ -64,7 +63,7 @@ static double k = 0.025;
     self = [super init];
     if(self != nil)
     {
-        editor = [[GRBezierPathEditor alloc] init];
+        editor = [[GRBezierPathEditor alloc] initEditor:self];
         myView = aView;
         zmFactor = zf;
         myPath = [[NSBezierPath bezierPath] retain];
@@ -534,7 +533,8 @@ static double k = 0.025;
     [myPath removeAllPoints];
     mtopoint = [controlPoints objectAtIndex: 0];
     [myPath moveToPoint: [mtopoint center]];
-    for(i = 1; i < [controlPoints count]; i++) {
+    for(i = 1; i < [controlPoints count]; i++)
+    {
         cp = [controlPoints objectAtIndex: i];
         prevcp = [controlPoints objectAtIndex: i -1];
         if([prevcp isActiveHandle] || [cp isActiveHandle])
