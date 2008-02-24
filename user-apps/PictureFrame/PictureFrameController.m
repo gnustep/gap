@@ -6,6 +6,9 @@
 #import <AppKit/AppKit.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSUserDefaults.h>
+#ifndef GNUSTEP
+#import "DBOverlayWindow.h"
+#endif
 #import "PictureFrameController.h"
 #import "PreferencesController.h"
 #import "PhotoController.h"
@@ -110,9 +113,12 @@ handle_user_term(int sig)
 {
   [dfltmgr setInteger: 0 forKey: DIsRunningPID];
   [self stopTimer];
+#ifndef GNUSTEP
+  [pWindow removeChildWindow: overlayWindow];
+  RELEASE(overlayWindow);
+#endif
   RELEASE(pWindow);
   RELEASE(currentFrame);
-  RELEASE(overlayView);
   [super dealloc];
 }
 
@@ -390,6 +396,7 @@ handle_user_term(int sig)
 
 - (void) showOverlay
 {
+#ifdef GNUSTEP
   if (overlayView == nil)
     {
       NSRect rect = [[pWindow contentView] frame];
@@ -398,12 +405,35 @@ handle_user_term(int sig)
     }
   if ([overlayView superview] == nil)
     [[pWindow contentView] addSubview: overlayView];
+#else
+  if (overlayWindow == nil)
+    {
+      NSView *overlayView;
+      NSRect rect = [[pWindow contentView] frame];
+      rect.size.height = MIN(160, rect.size.height/4);
+      overlayView = [[OverlayView alloc] initWithFrame: rect];
+      AUTORELEASE(overlayView);
+      rect = [pWindow frame];
+      rect.size.height = MIN(160, rect.size.height/4);
+      overlayWindow = [[DBOverlayWindow alloc] initWithContentRect: rect
+							 styleMask: NSBorderlessWindowMask
+							   backing: NSBackingStoreBuffered
+							     defer: NO];
+      [[overlayWindow contentView] addSubview: overlayView];
+      [pWindow addChildWindow: overlayWindow ordered: NSWindowAbove];
+    }
+  [overlayWindow orderFront: self];
+#endif
 }
 
 - (void) removeOverlay
 {
+#ifdef GNUSTEP
   if ([overlayView superview])
     [overlayView removeFromSuperview];
+#else
+  [overlayWindow orderOut: self];
+#endif
 }
 
 // timer managment

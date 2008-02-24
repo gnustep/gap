@@ -120,7 +120,25 @@
     [pipeTask setLaunchPath: path];
     [pipeTask setArguments: wargs];
     [pipeTask launch];
-    [pipeTask waitUntilExit];
+    
+    // FIXME: Busy wait sucks, but it's better than waiting forever if the
+    // process hangs
+    //[pipeTask waitUntilExit];
+    { 
+      int i;
+      for (i = 0; i < 10; i++)
+        {
+	  [NSThread sleepUntilDate: [NSDate dateWithTimeIntervalSinceNow: 5]];
+	  if ([pipeTask isRunning] == NO)
+	    break;
+	}
+      if ([pipeTask isRunning] == YES)
+        {
+	  [NSException raise: NSGenericException 
+	              format: @"Hung process reading weather"];
+	  [pipeTask terminate];
+	}
+    }
   
     if ((inData = [readHandle availableData]) && [inData length]) 
       {
@@ -129,7 +147,7 @@
       }
   NS_HANDLER
     /* Failed, possible as this command doesn't exist. Don't try again */
-    NSLog(@"NSTask failed to download");
+    NSLog(@"Failed to download weather: %@", localException);
   NS_ENDHANDLER
   [pipeTask release];
   return str;

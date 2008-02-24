@@ -13,6 +13,10 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		9F10EABD0C03F10E00B91883 /* PictureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F10EABC0C03F10E00B91883 /* PictureWindow.m */; };
 		9F10EAD20C03F28A00B91883 /* PictureFrameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F10EAD10C03F28A00B91883 /* PictureFrameController.m */; };
+		9F2CA9BF0D52E1E300755BE1 /* DBOverlayWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9F2CA9BD0D52E1E300755BE1 /* DBOverlayWindow.h */; };
+		9F2CA9C00D52E1E300755BE1 /* DBOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2CA9BE0D52E1E300755BE1 /* DBOverlayWindow.m */; };
+		9F2CA9C30D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9F2CA9C10D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.h */; };
+		9F2CA9C40D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2CA9C20D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.m */; };
 		9F38D27D0C07E593001F4877 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F38D27C0C07E593001F4877 /* OverlayView.m */; };
 		9F58FC4D0C26C93F00404F27 /* SimpleWeather.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9F58FC3A0C26484400404F27 /* SimpleWeather.bundle */; };
 		9F9663610C9792750073A070 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 9F9663600C9792750073A070 /* Preferences.nib */; };
@@ -44,6 +48,8 @@
 				9F58FC4D0C26C93F00404F27 /* SimpleWeather.bundle in CopyFiles */,
 				9FF436B90D1F6A180074B697 /* FrameDisplay.h in CopyFiles */,
 				9FF436BC0D1F6A250074B697 /* PhotoController.h in CopyFiles */,
+				9F2CA9BF0D52E1E300755BE1 /* DBOverlayWindow.h in CopyFiles */,
+				9F2CA9C30D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +71,10 @@
 		9F10EABC0C03F10E00B91883 /* PictureWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureWindow.m; sourceTree = "<group>"; };
 		9F10EAD10C03F28A00B91883 /* PictureFrameController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PictureFrameController.m; sourceTree = "<group>"; };
 		9F10EAD30C03F29600B91883 /* PictureFrameController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PictureFrameController.h; sourceTree = "<group>"; };
+		9F2CA9BD0D52E1E300755BE1 /* DBOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DBOverlayWindow.h; sourceTree = "<group>"; };
+		9F2CA9BE0D52E1E300755BE1 /* DBOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DBOverlayWindow.m; sourceTree = "<group>"; };
+		9F2CA9C10D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DBOverlayWindowBkgrnd.h; sourceTree = "<group>"; };
+		9F2CA9C20D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DBOverlayWindowBkgrnd.m; sourceTree = "<group>"; };
 		9F38D27B0C07E593001F4877 /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
 		9F38D27C0C07E593001F4877 /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
 		9F58FC350C26484400404F27 /* SimpleWeather.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimpleWeather.xcodeproj; path = SimpleWeather/SimpleWeather.xcodeproj; sourceTree = "<group>"; };
@@ -103,6 +113,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F2CA9BD0D52E1E300755BE1 /* DBOverlayWindow.h */,
+				9F2CA9BE0D52E1E300755BE1 /* DBOverlayWindow.m */,
+				9F2CA9C10D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.h */,
+				9F2CA9C20D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.m */,
 				9FF436BA0D1F6A250074B697 /* PhotoController.h */,
 				9FF436BB0D1F6A250074B697 /* PhotoController.m */,
 				9FF436B80D1F6A180074B697 /* FrameDisplay.h */,
@@ -304,6 +318,8 @@
 				9F38D27D0C07E593001F4877 /* OverlayView.m in Sources */,
 				9FBC43180C0F1494002FB7BB /* ClockView.m in Sources */,
 				9FF436BD0D1F6A250074B697 /* PhotoController.m in Sources */,
+				9F2CA9C00D52E1E300755BE1 /* DBOverlayWindow.m in Sources */,
+				9F2CA9C40D52E1ED00755BE1 /* DBOverlayWindowBkgrnd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

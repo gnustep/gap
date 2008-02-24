@@ -267,9 +267,11 @@ static PreferencesController *sharedController = nil;
     case TAG_TRANS:
 	info = [(NSPopUpButton *)[TABVIEW(1) viewWithTag: TAG_TRANS] indexOfSelectedItem];
         [dfltmgr setInteger: info forKey: DTransition];
+      break;
     case TAG_TRANSTIME:
       value = [[sender cellAtIndex: 0] intValue];
       [dfltmgr setInteger: value forKey: DTransitionTime];
+      break;
     default:
       break;
     }

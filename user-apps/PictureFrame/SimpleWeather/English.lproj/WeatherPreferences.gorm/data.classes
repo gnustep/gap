@@ -1,0 +1,18 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "setValue:"
+	);
+	Super = NSObject;
+    };
+    WeatherPreferencesController = {
+	Actions = (
+	    "setValue:"
+	);
+	Outlets = (
+	    otherView
+	);
+	Super = NSObject;
+    };
+}
