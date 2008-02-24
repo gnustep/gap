@@ -7,7 +7,7 @@
 - (id)initEditor:(GRBezierPath *)anObject
 {
     self = [super init];
-    if(self)
+    if(self != nil)
     {
         object = anObject;
         groupSelected = NO;
@@ -223,7 +223,7 @@
         groupSelected = YES;
         editSelected = NO;
         isvalid = NO;
-        [[object view] unselectOtherObjects: self];
+        [[object view] unselectOtherObjects: object];
     }
 }
 
@@ -234,7 +234,7 @@
     editSelected = YES;
     groupSelected = NO;
     isvalid = NO;
-    [[object view] unselectOtherObjects: self];
+    [[object view] unselectOtherObjects: object];
 }
 
 - (void)unselect
