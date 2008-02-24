@@ -14,7 +14,7 @@
 - (id)initEditor:(GRBox *)anObject
 {
     self = [super init];
-    if(self)
+    if(self != nil)
     {
         object = anObject;
         groupSelected = NO;

@@ -88,6 +88,7 @@
 - (BOOL)locked;
 - (void)setLocked:(BOOL)value;
 
+- (GRDocView *)view;
 
 - (void)draw;
 

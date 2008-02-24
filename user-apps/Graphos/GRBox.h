@@ -38,6 +38,8 @@
          atPoint:(NSPoint)p
       zoomFactor:(float)zf;
 
+- (GRBoxEditor *)editor;
+
 - (BOOL)locked;
 - (void)setLocked:(BOOL)value;
 
