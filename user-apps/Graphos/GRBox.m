@@ -51,39 +51,28 @@
         fillColor[3] = 0;
         strokeAlpha = 1;
         fillAlpha = 1;
+        editor = [[GRBoxEditor alloc] initEditor:self];
     }
 
     return self;
 }
 
-- (void)select
+- (BOOL)locked
 {
-    [self selectAsGroup];
+    return locked;
 }
 
-- (void)selectAsGroup
+- (void)setLocked:(BOOL)value
 {
-    if(locked)
-        return;
-    isSelect = YES;
+    locked = value;
+    if(!locked)
+        [editor unselect];
+    else
+        [editor selectAsGroup];
 }
 
-- (void)unselect
-{
-    isSelect = NO;
-}
 
-- (BOOL)isSelect
-{
-    return isSelect;
-}
-
-- (BOOL)isGroupSelected
-{
-    return isSelect;
-}
-
-- (void)Draw
+- (void)draw
 {
     //    GRBezierControlPoint *cp, *ponpoint = nil;
     NSRect r;

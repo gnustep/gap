@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import "GRTextEditor.h"
 
+@class GRTextEditor;
 @class GRDocView;
 
 @interface GRText : NSObject
@@ -24,8 +24,6 @@
     BOOL stroked, filled;
     BOOL visible, locked;
     GRTextEditor *editor;
-    BOOL isSelect;
-    BOOL isvalid;
     NSRect selRect;
 }
 
@@ -88,22 +86,9 @@
 
 - (void)setLocked:(BOOL)value;
 
-- (void)select;
-
-- (void)selectAsGroup;
-
-- (void)unselect;
-
-// shall go into the editor
-- (BOOL)isSelect;
-
-- (BOOL)isGroupSelected;
 
 - (void)draw;
 
-- (void)setIsValid:(BOOL)value;
-
-- (BOOL)isValid;
 
 - (NSBezierPath *) makePathFromString: (NSString *) aString
                               forFont: (NSFont *) aFont

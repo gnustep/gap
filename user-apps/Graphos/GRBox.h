@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GRDocView.h"
 
-#import "GRBoxEditor.h"
+@class GRBoxEditor;
 
 @interface GRBox : NSObject {
     GRDocView *myView;
@@ -37,16 +38,9 @@
          atPoint:(NSPoint)p
       zoomFactor:(float)zf;
 
-- (void)select;
+- (BOOL)locked;
+- (void)setLocked:(BOOL)value;
 
-- (void)selectAsGroup;
-
-- (void)unselect;
-
-- (BOOL)isSelect;
-
-- (BOOL)isGroupSelected;
-
-- (void)Draw;
+- (void)draw;
 
 @end

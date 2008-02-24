@@ -13,7 +13,8 @@
     int result;
 
     self = [super init];
-    if(self) {
+    if(self)
+    {
         myView = aView;
         zmFactor = zf;
         bzp = [[NSBezierPath bezierPath] retain];
@@ -22,12 +23,10 @@
         rotation = 0;
         scalex = 1;
         scaley = 1;
-        isSelect = NO;
         stroked = NO;
         filled = YES;
         visible = YES;
         locked = NO;
-        isvalid = NO;
         strokeColor[0] = 0;
         strokeColor[1] = 0;
         strokeColor[2] = 0;
@@ -63,10 +62,10 @@
     NSArray *linearr;
 
     self = [super init];
-    if(self) {
+    if(self)
+    {
         myView = aView;
         zmFactor = zf;
-        isvalid = NO;
         ASSIGN(str, [description objectForKey: @"string"]);
         pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);
@@ -142,7 +141,7 @@
     [gdtxt setFillAlpha: fillAlpha];
     [gdtxt setVisible: visible];
     [gdtxt setLocked: locked];
-    [gdtxt setIsValid: NO];
+    [[gdtxt editor] setIsValid: NO];
 
     return gdtxt;
 }
@@ -381,54 +380,19 @@
 {
     visible = value;
     if(!visible)
-        [self unselect];
+        [editor unselect];
 }
 
 - (void)setLocked:(BOOL)value
 {
     locked = value;
     if(!locked)
-        [self unselect];
+        [editor unselect];
     else
-        [self selectAsGroup];
+        [editor selectAsGroup];
 }
 
-- (void)select
-{
-    [self selectAsGroup];
-}
 
-- (void)selectAsGroup
-{
-    if(locked)
-        return;
-    isSelect = YES;
-}
-
-- (void)unselect
-{
-    isSelect = NO;
-}
-
-- (BOOL)isSelect
-{
-    return isSelect;
-}
-
-- (BOOL)isGroupSelected
-{
-    return isSelect;
-}
-
-- (void)setIsValid:(BOOL)value
-{
-    isvalid = value;
-}
-
-- (BOOL)isValid
-{
-    return isvalid;
-}
 
 - (NSBezierPath *) makePathFromString: (NSString *) aString
                               forFont: (NSFont *) aFont
@@ -515,10 +479,11 @@
 
         
         lines = [str componentsSeparatedByString: @"\n"];
-        for(i = 0; i < [lines count]; i++) {
+        for(i = 0; i < [lines count]; i++)
+        {
             line = [lines objectAtIndex: i];
 
-            if(isSelect) {
+            if([editor isSelect]) {
                 [[NSColor blackColor] set];
                 [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
                 [bezp stroke];
@@ -527,7 +492,8 @@
             baselny -= parspace;
         }
 
-        if(isSelect) {
+        if([editor isSelect])
+        {
             [[NSColor blackColor] set];
             NSRectFill(selRect);
         }
