@@ -36,6 +36,8 @@
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;
 
+- (GRTextEditor *)editor;
+
 - (GRText *)duplicate;
 
 - (NSDictionary *)objectDescription;
@@ -83,7 +85,7 @@
 - (float)fillAlpha;
 
 - (void)setVisible:(BOOL)value;
-
+- (BOOL)locked;
 - (void)setLocked:(BOOL)value;
 
 
