@@ -46,7 +46,7 @@
 
 - (void)selectAsGroup
 {
-    if([object isLocked])
+    if([object locked])
         return;
     isSelect = YES;
 }

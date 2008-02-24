@@ -190,6 +190,7 @@ static double k = 0.025;
 
     return bzpath;
 }
+
 - (GRBezierPathEditor *)editor
 {
     return editor;

@@ -114,6 +114,11 @@
     return self;
 }
 
+- (GRTextEditor *)editor
+{
+    return editor;
+}
+
 - (GRText *)duplicate
 {
     GRText *gdtxt;
@@ -381,6 +386,11 @@
     visible = value;
     if(!visible)
         [editor unselect];
+}
+
+- (BOOL)locked
+{
+    return locked;
 }
 
 - (void)setLocked:(BOOL)value
