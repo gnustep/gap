@@ -536,13 +536,15 @@ static double k = 0.025;
     for(i = 1; i < [controlPoints count]; i++) {
         cp = [controlPoints objectAtIndex: i];
         prevcp = [controlPoints objectAtIndex: i -1];
-        if([prevcp isActiveHandle] || [cp isActiveHandle]) {
+        if([prevcp isActiveHandle] || [cp isActiveHandle])
+        {
             handle1 = [prevcp bzHandle];
             handle2 = [cp bzHandle];
             [myPath curveToPoint: [cp center]
                    controlPoint1: handle1.firstHandle
                    controlPoint2: handle2.secondHandle];
-        } else {
+        } else
+        {
             [myPath lineToPoint: [cp center]];
         }
         if([self isPoint: cp onPoint: mtopoint])
@@ -550,185 +552,6 @@ static double k = 0.025;
     }
 }
 
-- (NSPoint)moveControlAtPoint:(NSPoint)p
-{
-    GRBezierControlPoint *cp, *pntonpnt;
-    NSEvent *event;
-    NSPoint pp;
-    BOOL found = NO;
-    int i;
-
-    for(i = 0; i < [controlPoints count]; i++)
-    {
-        cp = [controlPoints objectAtIndex: i];
-        if(pointInRect([cp centerRect], p))
-        {
-            [[self editor] selectForEditing];
-            currentPoint = cp;
-            [cp select];
-            found = YES;
-        }
-    }
-    if(!found)
-        return p;
-
-    event = [[myView window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([event type] == NSLeftMouseDragged)
-    {
-        [myView verifyModifiersOfEvent: event];
-        do {
-            pp = [event locationInWindow];
-            pp = [myView convertPoint: pp fromView: nil];
-            if([myView shiftclick])
-                pp = pointApplyingCostrainerToPoint(pp, p);
-
-            pntonpnt = [self pointOnPoint: currentPoint];
-            if(pntonpnt) {
-                if(currentPoint == [self firstPoint] || pntonpnt == [self firstPoint])
-                    [pntonpnt moveToPoint: pp];
-            }
-            [currentPoint moveToPoint: pp];
-            [self remakePath];
-
-            [myView setNeedsDisplay: YES];
-            event = [[myView window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [myView verifyModifiersOfEvent: event];
-        } while([event type] != NSLeftMouseUp);
-    }
-
-    return pp;
-}
-
-- (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
-{
-    GRBezierControlPoint *cp, *pntonpnt;
-    BOOL found = NO;
-    int i;
-
-    for(i = 0; i < [controlPoints count]; i++)
-    {
-        cp = [controlPoints objectAtIndex: i];
-        if(pointInRect([cp centerRect], oldp))
-        {
-            [[self editor] selectForEditing];
-            currentPoint = cp;
-            [cp select];
-            found = YES;
-        }
-    }
-    if(!found)
-        return;
-
-    pntonpnt = [self pointOnPoint: currentPoint];
-    if(pntonpnt)
-    {
-        if(currentPoint == [self firstPoint] || pntonpnt == [self firstPoint])
-            [pntonpnt moveToPoint: newp];
-    }
-    [currentPoint moveToPoint: newp];
-    [self remakePath];
-    [myView setNeedsDisplay: YES];
-}
-
-- (NSPoint)moveBezierHandleAtPoint:(NSPoint)p
-{
-    GRBezierControlPoint *cp, *pntonpnt;
-    GRBezierHandle handle;
-    BOOL found = NO;
-    NSEvent *event;
-    NSPoint op, pp, c;
-    int i;
-
-    if(![editor isEditSelected]) 
-        return p;
-
-    for(i = 0; i < [controlPoints count]; i++)
-    {
-        cp = [controlPoints objectAtIndex: i];
-        if([cp isActiveHandle]) {
-            handle = [cp bzHandle];
-            if(pointInRect(handle.firstHandleRect, p)
-               || pointInRect(handle.secondHandleRect, p))
-            {
-                [cp select];
-                currentPoint = cp;
-                found = YES;
-            }
-        }
-    }
-    if(!found)
-        return p;
-
-    event = [[myView window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([event type] == NSLeftMouseDragged) {
-        [myView verifyModifiersOfEvent: event];
-        op.x = p.x;
-        op.y = p.y;
-        do {
-            pp = [event locationInWindow];
-            pp = [myView convertPoint: pp fromView: nil];
-            if([myView shiftclick]) {
-                c = [currentPoint center];
-                pp = pointApplyingCostrainerToPoint(pp, c);
-            }
-
-            pntonpnt = [self pointOnPoint: currentPoint];
-            if(pntonpnt) {
-                if(currentPoint == [self firstPoint] || pntonpnt == [self firstPoint])
-                    [pntonpnt moveBezierHandleToPosition: pp oldPosition: op];
-            }
-            [currentPoint moveBezierHandleToPosition: pp oldPosition: op];
-            [self remakePath];
-
-            op.x = pp.x;
-            op.y = pp.y;
-            [myView setNeedsDisplay: YES];
-            event = [[myView window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [myView verifyModifiersOfEvent: event];
-        } while([event type] != NSLeftMouseUp);
-    }
-
-    return pp;
-}
-
-- (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
-{
-    GRBezierControlPoint *cp, *pntonpnt;
-    GRBezierHandle handle;
-    BOOL found = NO;
-    int i;
-
-    for(i = 0; i < [controlPoints count]; i++)
-    {
-        cp = [controlPoints objectAtIndex: i];
-        if([cp isActiveHandle])
-        {
-            handle = [cp bzHandle];
-            if(pointInRect(handle.firstHandleRect, oldp)
-               || pointInRect(handle.secondHandleRect, oldp))
-            {
-                [cp select];
-                currentPoint = cp;
-                found = YES;
-            }
-        }
-    }
-    if(!found)
-        return;
-
-    pntonpnt = [self pointOnPoint: currentPoint];
-    if(pntonpnt)
-    {
-        if(currentPoint == [self firstPoint] || pntonpnt == [self firstPoint])
-            [pntonpnt moveBezierHandleToPosition: newp oldPosition: oldp];
-    }
-    [currentPoint moveBezierHandleToPosition: newp oldPosition: oldp];
-    [self remakePath];
-    [myView setNeedsDisplay: YES];
-}
 
 - (hitData)hitDataOfPathSegmentOwningPoint:(NSPoint)pt
 {
