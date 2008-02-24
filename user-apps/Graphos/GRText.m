@@ -441,6 +441,11 @@
     return (path);
 }    
 
+- (GRDocView *)view
+{
+    return myView;
+}
+
 - (void)draw
 {
     NSArray *lines;

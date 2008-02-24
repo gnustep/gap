@@ -7,7 +7,7 @@
 //
 
 #import "GRBox.h"
-
+#import "GRBoxEditor.h"
 
 @implementation GRBox
 
@@ -51,10 +51,15 @@
         fillColor[3] = 0;
         strokeAlpha = 1;
         fillAlpha = 1;
-        editor = [[GRBoxEditor alloc] initEditor:self];
+        editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
     }
 
     return self;
+}
+
+- (GRBoxEditor *)editor
+{
+    return editor;
 }
 
 - (BOOL)locked
@@ -81,8 +86,6 @@
     int i;
     NSBezierPath *bzp;
 
-    if(![[editor controlPoints] count] || !visible)
-        return;
 
     bzp = [NSBezierPath bezierPath];
     if(stroked)
