@@ -39,9 +39,12 @@
         fillAlpha = 1;
         ASSIGN(str, @"");
 
-        if(openedit) {
+        if(openedit)
+        {
             editor = [[GRTextEditor alloc] initAtPoint: pos
-                                            withString: nil attributes: nil];
+                                            withString: nil
+                                              withText: self
+                                            attributes: nil];
             result = [[editor editorView] runModal];
             if(result == NSAlertDefaultReturn)
                 [self setString: [[editor editorView] textString]

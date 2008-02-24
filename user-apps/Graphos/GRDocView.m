@@ -236,7 +236,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     gdtxt = [[GRText alloc] initInView: self atPoint: p
                             zoomFactor: zFactor openEditor: YES];
     [objects addObject: gdtxt];
-    [gdtxt select];
+    [[gdtxt editor] select];
     [gdtxt release];
     [self setNeedsDisplay: YES];
     // ####	[myWin setSaved: NO];
@@ -254,7 +254,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     box = [[GRBox alloc] initInView: self atPoint: p
                             zoomFactor: zFactor];
     [objects addObject: box];
-//    [box select];
+    [[box editor] select];
     [box release];
     [self setNeedsDisplay: YES];
 }

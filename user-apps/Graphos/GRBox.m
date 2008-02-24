@@ -76,6 +76,10 @@
         [editor selectAsGroup];
 }
 
+- (GRDocView *)view
+{
+    return myView;
+}
 
 - (void)draw
 {
