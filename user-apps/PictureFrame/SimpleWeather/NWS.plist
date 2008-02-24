@@ -171,6 +171,8 @@
 	<dict>
 		<key>bkn</key>
 		<string>mcloudy.png</string>
+		<key>ovc</key>
+		<string>mcloudy.png</string>
 		<key>blizzard</key>
 		<string>blizzard.png</string>
 		<key>cold</key>
@@ -232,6 +234,8 @@
 		<key>mix</key>
 		<string>rainandsnow.png</string>
 		<key>nbkn</key>
+		<string>mcloudyn.png</string>
+		<key>novc</key>
 		<string>mcloudyn.png</string>
 		<key>nfew</key>
 		<string>pcloudyn.png</string>

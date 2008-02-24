@@ -86,6 +86,7 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
   path = [bundle pathForResource: imageName ofType: nil];
   if (path == nil)
     {
+      NSLog(@"Failed to find imageWithName: %@", imageName);
       path = [bundle pathForResource: @"na" ofType: @"png"];
       if (path == nil)
         return nil;

@@ -1,9 +1,15 @@
+2008-02-22  Adam Fedor  <fedor@gnu.org>
+
+	* Add overlay window and implement transition animation (commented
+	out for GNUstep until we get child windows working).
+	* Add timeout for getting weather info on GNUstep.
+
 2007-12-24  Adam Fedor  <fedor@gnu.org>
 
 	* Rearrange PhotoView so that it displays the images and most
 	of the control stuff goes in PhotoController.
 	* Added transition preferences (not implemented).
-	* Fix loading weather preference values;
+	* Fix loading weather preference values.
 
 2007-11-06  Adam Fedor  <fedor@gnu.org>
 

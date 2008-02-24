@@ -106,7 +106,7 @@ static WeatherPreferencesController *sharedController = nil;
     {
     case TAG_ZIP:
       str = [[sender cellAtIndex: 0] stringValue];
-      if ([str lenght])
+      if ([str length])
 	[dfltmgr setObject: str forKey: DZipCode];
       break;
     case TAG_SOURCE:

@@ -13,7 +13,11 @@
 {
   PictureWindow *pWindow;
   id<FrameDisplay> currentFrame;
-  OverlayView *overlayView;
+#ifdef GNUSTEP
+  NSView *overlayView;
+#else
+  NSWindow *overlayWindow;
+#endif
   id userInfoView;
   NSTimer *timer, *userTimer;
   NSTimeInterval runSpeed;

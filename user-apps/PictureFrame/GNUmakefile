@@ -12,15 +12,15 @@ APP_NAME=PictureFrame
 SUBPROJECTS = SimpleWeather
 
 #PictureFrame_APPLICATION_ICON=icon.tiff
-PictureFrame_MAIN_MODEL_FILE=MainMenu.nib
+PictureFrame_MAIN_MODEL_FILE=MainMenu.gorm
 
 PictureFrame_LOCALIZED_RESOURCE_FILES=
 
 
 PictureFrame_LANGUAGES= English 
 
-PictureFrame_RESOURCE_FILES= English.lproj/MainMenu.nib \
-	English.lproj/Preferences.nib \
+PictureFrame_RESOURCE_FILES= English.lproj/MainMenu.gorm \
+	English.lproj/Preferences.gorm \
 	SimpleWeather/SimpleWeather.bundle
 
 PictureFrame_HEADER_FILES= \
@@ -28,6 +28,7 @@ ClockView.h \
 FrameView.h \
 GNUstep.h \
 OverlayView.h \
+PhotoController.h \
 PhotoView.h \
 PictureFrameController.h \
 PictureWindow.h \
@@ -37,6 +38,7 @@ PictureFrame_OBJC_FILES= \
 main.m \
 ClockView.m \
 OverlayView.m \
+PhotoController.m \
 PhotoView.m \
 PictureFrameController.m \
 PictureWindow.m \
