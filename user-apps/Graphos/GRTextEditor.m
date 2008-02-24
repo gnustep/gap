@@ -4,6 +4,7 @@
 
 - (id)initAtPoint:(NSPoint)p
        withString:(NSString *)string
+         withText:(GRText *)aText
        attributes:(NSDictionary *)attributes
 {
     unsigned int style = NSTitledWindowMask | NSResizableWindowMask;
@@ -14,6 +15,9 @@
                                 defer: NO];
     if(self)
     {
+        isSelect = NO;
+        isvalid = NO;
+        object = aText;
         [self setMaxSize: NSMakeSize(500, 2000)];
         [self setMinSize: NSMakeSize(500, 300)];
         [self setTitle: @"Text Editor"];
@@ -33,6 +37,43 @@
 - (GRTextEditorView *)editorView
 {
     return myView;
+}
+
+- (void)select
+{
+    [self selectAsGroup];
+}
+
+- (void)selectAsGroup
+{
+    if([object isLocked])
+        return;
+    isSelect = YES;
+}
+
+- (void)unselect
+{
+    isSelect = NO;
+}
+
+- (BOOL)isSelect
+{
+    return isSelect;
+}
+
+- (BOOL)isGroupSelected
+{
+    return isSelect;
+}
+
+- (void)setIsValid:(BOOL)value
+{
+    isvalid = value;
+}
+
+- (BOOL)isValid
+{
+    return isvalid;
 }
 
 @end

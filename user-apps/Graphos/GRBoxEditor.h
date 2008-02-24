@@ -8,14 +8,30 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "GRBox.h"
 
 @class GRDocView;
 
-@interface GRBoxEditor : NSObject {
-    NSArray *controlPoints;  
+@interface GRBoxEditor : NSObject
+{
+    GRBox *object;
+    BOOL groupSelected;
+    BOOL editSelected;
+    BOOL isdone;
+    BOOL isvalid;
 }
 
-- (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;
+- (id)initEditor:(GRBox *)anObject;
+
+- (void)select;
+
+- (void)selectAsGroup;
+
+- (void)unselect;
+
+- (BOOL)isSelect;
+
+- (BOOL)isGroupSelected;
 
 - (void)draw;
 

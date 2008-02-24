@@ -11,14 +11,58 @@
 
 @implementation GRBoxEditor
 
-- (id)initInView:(GRDocView *)aView zoomFactor:(float)zf
+- (id)initEditor:(GRBox *)anObject
 {
     self = [super init];
     if(self)
     {
-        controlPoints = [[NSArray alloc] initWithCapacity: 2];
+        object = anObject;
+        groupSelected = NO;
+        editSelected = NO;
+        isdone = NO;
+        isvalid = NO;
     }
     return self;
+}
+
+- (void)select
+{
+    [self selectAsGroup];
+}
+
+- (void)selectAsGroup
+{
+    if([object locked])
+        return;
+    if(!groupSelected)
+    {
+        groupSelected = YES;
+        editSelected = NO;
+        isvalid = NO;
+        [[object view] unselectOtherObjects: self];
+    }
+}
+
+- (void)unselect
+{
+    int i;
+
+    groupSelected = NO;
+    editSelected = NO;
+    isvalid = YES;
+    isdone = YES;
+}
+
+- (BOOL)isSelect
+{
+    if(editSelected || groupSelected)
+        return YES;
+    return NO;
+}
+
+- (BOOL)isGroupSelected
+{
+    return groupSelected;
 }
 
 - (void)draw
