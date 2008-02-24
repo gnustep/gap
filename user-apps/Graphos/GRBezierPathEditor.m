@@ -9,7 +9,7 @@
     self = [super init];
     if(self)
     {
-        object = object;
+        object = anObject;
         groupSelected = NO;
         editSelected = NO;
         isdone = NO;
@@ -202,17 +202,6 @@
     [[object view] setNeedsDisplay: YES];
 }
 
-- (void)moveAddingCoordsOfPoint:(NSPoint)p
-{
-    int i;
-
-    for(i = 0; i < [[object controlPoints] count]; i++)
-    {
-        GRBezierControlPoint *cp = [[object controlPoints] objectAtIndex: i];
-        [cp moveToPoint: NSMakePoint([cp center].x + p.x, [cp center].y + p.y)];
-    }
-    [object remakePath];
-}
 
 
 - (BOOL)isdone
