@@ -97,11 +97,6 @@ typedef struct {
 
 - (void)remakePath;
 
-- (NSPoint)moveControlAtPoint:(NSPoint)p;
-- (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
-- (NSPoint)moveBezierHandleAtPoint:(NSPoint)p;
-- (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
-
 - (hitData)hitDataOfPathSegmentOwningPoint:(NSPoint)pt;
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p;
