@@ -14,6 +14,7 @@
 
 - (id)initAtPoint:(NSPoint)p
        withString:(NSString *)string
+         withText:(GRText *)aText
        attributes:(NSDictionary *)attributes;
 
 - (GRTextEditorView *)editorView;
