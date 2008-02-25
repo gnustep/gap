@@ -473,7 +473,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             if([obj pointInBounds: p])
                 [obj select];
             else if(!shiftclick)
-                [obj unselect];
+                [[obj editor] unselect];
         }
     }
 

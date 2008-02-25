@@ -12,12 +12,13 @@
     BOOL isvalid;
 }
 
-- (id)initAtPoint:(NSPoint)p
-       withString:(NSString *)string
-         withText:(GRText *)aText
-       attributes:(NSDictionary *)attributes;
+- (id)initEditor:(GRText *)anObject;
 
 - (GRTextEditorView *)editorView;
+
+- (void)setPoint:(NSPoint)p
+    withString:(NSString *)string
+    attributes:(NSDictionary *)attributes;
 
 - (void)select;
 
