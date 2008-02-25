@@ -68,7 +68,9 @@ GRTextEditorView.h \
 GRTools.h \
 GRBox.h \
 GRBoxEditor.h \
-GRBezierPath.h
+GRBezierPath.h \
+GRObjectEditor.h \
+GRDrawableObject.h
 
 #
 # Class files
@@ -87,7 +89,9 @@ GRTextEditorView.m \
 GRTools.m \
 GRBox.m \
 GRBoxEditor.m \
-GRBezierPath.m
+GRBezierPath.m \
+GRObjectEditor.m \
+GRDrawableObject.m
 
 #
 # Other sources

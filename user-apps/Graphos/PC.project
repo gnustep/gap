@@ -16,7 +16,9 @@
 	GRTools.m,
 	GRBox.m,
 	GRBoxEditor.m,
-	GRBezierPath.m
+	GRBezierPath.m,
+	GRObjectEditor.m,
+	GRDrawableObject.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -39,7 +41,9 @@
 	GRTools.h,
 	GRBox.h,
 	GRBoxEditor.h,
-	GRBezierPath.h
+	GRBezierPath.h,
+	GRObjectEditor.h,
+	GRDrawableObject.h
     );
     IMAGES = (
 	bezier.tiff,
@@ -78,7 +82,7 @@
 	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-02-25 01:52:12 +0100";
+    LAST_EDITING = "2008-02-25 23:53:58 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
