@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GRDocView.h"
+#import <AppKit/NSBezierPath.h>
+#import "GRDrawableObject.h"
 
-@class GRBoxEditor;
-
-@interface GRBox : NSObject {
-    GRDocView *myView;
+@interface GRBox : GRDrawableObject
+{
     NSBezierPath *myPath;
     NSPoint pos;
     NSSize size;
@@ -23,10 +22,7 @@
     float flatness, miterlimit, linewidth;
     float scalex, scaley;
     int linejoin, linecap;
-    BOOL stroked, filled;
-    BOOL visible, locked;    
-    GRBoxEditor *editor;
-    BOOL groupSelected;
+    BOOL stroked, filled;    BOOL groupSelected;
     BOOL editSelected;
     BOOL isSelect;
     BOOL isdone;
@@ -38,13 +34,6 @@
          atPoint:(NSPoint)p
       zoomFactor:(float)zf;
 
-- (GRBoxEditor *)editor;
 
-- (BOOL)locked;
-- (void)setLocked:(BOOL)value;
-
-- (GRDocView *)view;
-
-- (void)draw;
 
 @end

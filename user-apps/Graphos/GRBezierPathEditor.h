@@ -2,13 +2,12 @@
 #import <AppKit/AppKit.h>
 #import "GRBezierControlPoint.h"
 #import "GRBezierPath.h"
-
+#import "GRObjectEditor.h"
 
 @class GRDocView;
 
-@interface GRBezierPathEditor : NSObject
+@interface GRBezierPathEditor : GRObjectEditor
 {
-    GRBezierPath *object;
     BOOL groupSelected;
     BOOL editSelected;
     BOOL isdone;

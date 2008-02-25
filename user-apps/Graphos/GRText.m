@@ -2,6 +2,7 @@
 #import "GRDocView.h"
 #import "GRFunctions.h"
 #import "Graphos.h"
+#import "GRTextEditor.h"
 
 @implementation GRText
 
@@ -15,7 +16,7 @@
     self = [super init];
     if(self)
     {
-        myView = aView;
+        docView = aView;
         zmFactor = zf;
         bzp = [[NSBezierPath bezierPath] retain];
         [bzp setCachesBezierPath: NO];
@@ -66,7 +67,7 @@
     self = [super init];
     if(self)
     {
-        myView = aView;
+        docView = aView;
         zmFactor = zf;
         editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
         ASSIGN(str, [description objectForKey: @"string"]);
@@ -117,10 +118,6 @@
     return self;
 }
 
-- (GRTextEditor *)editor
-{
-    return editor;
-}
 
 - (GRText *)duplicate
 {
@@ -136,7 +133,7 @@
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
         font, NSFontAttributeName, style, NSParagraphStyleAttributeName, nil];
 
-    gdtxt = [[[GRText alloc] initInView: myView atPoint: pos
+    gdtxt = [[[GRText alloc] initInView: docView atPoint: pos
                              zoomFactor: zmFactor openEditor: NO] autorelease];
     [gdtxt setString: str attributes: attrs];
     [gdtxt setScalex: scalex scaley: scaley];
@@ -252,14 +249,15 @@
     [self setZoomFactor: zmFactor];
 }
 
+// maybe should be moved into the editor
 - (void)edit
 {
     NSDictionary *attrs;
     NSMutableParagraphStyle *style;
     int result;
 
-    // a cast to get rid of a compiler warning
-    style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
+    style = [[NSMutableParagraphStyle alloc] init];
+    [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     [style setAlignment: align];
     [style setParagraphSpacing: parspace];
 
@@ -267,8 +265,10 @@
         font, NSFontAttributeName,
         style, NSParagraphStyleAttributeName, nil];
 
-    editor = [[GRTextEditor alloc] initAtPoint: pos
-                                    withString: str attributes: attrs];
+    editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
+    [editor setPoint: pos
+          withString: str
+          attributes: attrs];
     result = [[editor editorView] runModal];
     if(result == NSAlertDefaultReturn)
         [self setString: [[editor editorView] textString]
@@ -385,21 +385,9 @@
     return fillAlpha;
 }
 
-- (void)setVisible:(BOOL)value
-{
-    visible = value;
-    if(!visible)
-        [editor unselect];
-}
-
-- (BOOL)locked
-{
-    return locked;
-}
-
 - (void)setLocked:(BOOL)value
 {
-    locked = value;
+    [super setLocked:value];
     if(!locked)
         [editor unselect];
     else
@@ -444,11 +432,6 @@
     [textview release];
 
     return (path);
-}    
-
-- (GRDocView *)view
-{
-    return myView;
 }
 
 - (void)draw

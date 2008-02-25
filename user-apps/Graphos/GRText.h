@@ -1,12 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "GRDrawableObject.h"
 
-@class GRTextEditor;
 @class GRDocView;
 
-@interface GRText : NSObject
+@interface GRText : GRDrawableObject
 {
-    GRDocView *myView;
     NSBezierPath *bzp;
     NSString *str;
     NSFont *font;
@@ -22,8 +21,6 @@
     float strokeAlpha, fillAlpha;
     float zmFactor;
     BOOL stroked, filled;
-    BOOL visible, locked;
-    GRTextEditor *editor;
     NSRect selRect;
 }
 
@@ -35,8 +32,6 @@
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;
-
-- (GRTextEditor *)editor;
 
 - (GRText *)duplicate;
 
@@ -84,11 +79,6 @@
 
 - (float)fillAlpha;
 
-- (void)setVisible:(BOOL)value;
-- (BOOL)locked;
-- (void)setLocked:(BOOL)value;
-
-- (GRDocView *)view;
 
 - (void)draw;
 

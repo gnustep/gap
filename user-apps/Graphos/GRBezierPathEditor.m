@@ -139,11 +139,13 @@
         [[object view] verifyModifiersOfEvent: event];
         op.x = p.x;
         op.y = p.y;
-        do {
+        do
+        {
             pp = [event locationInWindow];
             pp = [[object view] convertPoint: pp fromView: nil];
-            if([[object view] shiftclick]) {
-                c = [[object currentPoint] center];
+            if([[object view] shiftclick])
+            {
+                c = [[(GRBezierPath *)object currentPoint] center];
                 pp = pointApplyingCostrainerToPoint(pp, c);
             }
 

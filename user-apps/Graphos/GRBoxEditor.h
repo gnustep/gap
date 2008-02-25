@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "GRBox.h"
+#import "GRObjectEditor.h"
 
-@class GRDocView;
-
-@interface GRBoxEditor : NSObject
+@interface GRBoxEditor : GRObjectEditor
 {
-    GRBox *object;
     BOOL groupSelected;
     BOOL editSelected;
     BOOL isdone;
