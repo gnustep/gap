@@ -192,20 +192,6 @@
 - (void)dealloc
 {
     [buttons release];
-    [barrowButt release];
-    [warrowButt release];
-    [bezierButt release];
-    [textButt release];
-    [circleButt release];
-    [rectangleButt release];
-    [paintButt release];
-    [pencilButt release];
-    [roteteButt release];
-    [reduceButt release];
-    [reflectButt release];
-    [scissorsButt release];
-    [handButt release];
-    [magnifyButt release];
     [super dealloc];
 }
 
