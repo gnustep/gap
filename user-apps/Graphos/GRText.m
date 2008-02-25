@@ -415,16 +415,17 @@
     NSTextView *textview;
     NSGlyph *glyphs;
     NSBezierPath *path;
+    NSRange range;
+    NSLayoutManager *layoutManager;
+
 
     textview = [[NSTextView alloc] init];
 
     [textview setString: aString];
     [textview setFont: aFont];
 
-    NSLayoutManager *layoutManager;
     layoutManager = [textview layoutManager];
 
-    NSRange range;
     range = [layoutManager glyphRangeForCharacterRange:
         NSMakeRange (0, [aString length])
                                   actualCharacterRange: NULL];
