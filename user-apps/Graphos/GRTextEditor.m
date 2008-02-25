@@ -2,10 +2,7 @@
 
 @implementation GRTextEditor
 
-- (id)initAtPoint:(NSPoint)p
-       withString:(NSString *)string
-         withText:(GRText *)aText
-       attributes:(NSDictionary *)attributes
+- (id)initEditor:(GRText *)anObject
 {
     unsigned int style = NSTitledWindowMask | NSResizableWindowMask;
 
@@ -17,15 +14,25 @@
     {
         isSelect = NO;
         isvalid = NO;
-        object = aText;
         [self setMaxSize: NSMakeSize(500, 2000)];
         [self setMinSize: NSMakeSize(500, 300)];
         [self setTitle: @"Text Editor"];
-        myView = [[GRTextEditorView alloc] initWithFrame: [self frame] withString: string attributes: attributes];
-        [self setContentView: myView];
-        [self center];
+        object = anObject;
+        myView = nil;
     }
     return self;
+}
+
+- (void)setPoint:(NSPoint)p
+      withString:(NSString *)string
+      attributes:(NSDictionary *)attributes
+{
+        if (myView == nil)
+        {
+            myView = [[GRTextEditorView alloc] initWithFrame: [self frame] withString: string attributes: attributes];
+            [self setContentView: myView];
+        }
+        [self center];
 }
 
 - (void)dealloc

@@ -39,17 +39,16 @@
         fillAlpha = 1;
         ASSIGN(str, @"");
 
+        editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
         if(openedit)
         {
-            editor = [[GRTextEditor alloc] initAtPoint: pos
-                                            withString: nil
-                                              withText: self
-                                            attributes: nil];
+            [editor setPoint: pos
+                  withString: nil
+                  attributes: nil];
             result = [[editor editorView] runModal];
             if(result == NSAlertDefaultReturn)
                 [self setString: [[editor editorView] textString]
                      attributes: [[editor editorView] textAttributes]];
-            [editor release];
         }
     }
     return self;
@@ -69,6 +68,7 @@
     {
         myView = aView;
         zmFactor = zf;
+        editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
         ASSIGN(str, [description objectForKey: @"string"]);
         pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);
@@ -78,8 +78,8 @@
 
         align = [[description objectForKey: @"txtalign"] intValue];
         parspace = [[description objectForKey: @"parspace"] floatValue];
-        // a cast to get rid of a compiler warning
-        style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
+        style = [[NSMutableParagraphStyle alloc] init];
+        [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
         [style setAlignment: align];
         [style setParagraphSpacing: parspace];
         attrs = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -232,6 +232,7 @@
 
 - (void)dealloc
 {
+    [editor release];
     [str release];
     [font release];
     [super dealloc];
