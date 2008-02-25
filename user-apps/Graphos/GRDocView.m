@@ -717,7 +717,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         obj = [objects objectAtIndex: i];
         if([[obj editor] isSelect]) {
             objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-            if([obj isKindOfClass: [GRBezierPathEditor class]])
+            if([obj isKindOfClass: [GRBezierPath class]])
             {
                 [objProps setObject: @"path" forKey: @"type"];
                 num = [NSNumber numberWithFloat: [obj flatness]];
@@ -825,7 +825,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             obj = [objects objectAtIndex: i];
             if([[obj editor] isGroupSelected]) {
                 objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-                if([obj isKindOfClass: [GRBezierPathEditor class]])
+                if([obj isKindOfClass: [GRBezierPath class]])
                 {
                     [obj setFlat: [[newProps objectForKey: @"flatness"] floatValue]];
                     [obj setLineJoin: [[newProps objectForKey: @"linejoin"] intValue]];
