@@ -20,7 +20,7 @@ static double k = 0.025;
     self = [super init];
     if(self)
     {
-        myView = aView;
+        docView = aView;
         zmFactor = zf;
         myPath = [[NSBezierPath bezierPath] retain];
         [myPath setCachesBezierPath: NO];
@@ -64,7 +64,7 @@ static double k = 0.025;
     if(self != nil)
     {
         editor = [[GRBezierPathEditor alloc] initEditor:self];
-        myView = aView;
+        docView = aView;
         zmFactor = zf;
         myPath = [[NSBezierPath bezierPath] retain];
         [myPath setCachesBezierPath: NO];
@@ -155,7 +155,7 @@ static double k = 0.025;
     int i;
 
     bzpath = [[[GRBezierPath alloc]
-                initInView: myView zoomFactor: zmFactor] autorelease];
+                initInView: docView zoomFactor: zmFactor] autorelease];
     for(i = 0; i < [controlPoints count]; i++)
     {
         cp = [controlPoints objectAtIndex: i];
@@ -188,11 +188,6 @@ static double k = 0.025;
     [[bzpath editor] setIsValid: NO];
 
     return bzpath;
-}
-
-- (GRBezierPathEditor *)editor
-{
-    return editor;
 }
 
 - (NSDictionary *)objectDescription
@@ -803,26 +798,11 @@ static double k = 0.025;
     return fillAlpha;
 }
 
-- (BOOL)visible
-{
-    return visible;
-}
-
-- (void)setVisible:(BOOL)value
-{
-    visible = value;
-    if(!visible)
-        [editor unselect];
-}
-
-- (BOOL)locked
-{
-    return locked;
-}
-
+/* override for editor handling */
 - (void)setLocked:(BOOL)value
 {
-    locked = value;
+    [super setLocked:value];
+    
     if(!locked)
         [editor unselect];
     else
@@ -845,11 +825,6 @@ static double k = 0.025;
     }
 }
 
-
-- (GRDocView *)view
-{
-    return myView;
-}
 
 - (void)draw
 {

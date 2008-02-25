@@ -160,6 +160,10 @@
 				2A37F4ACFDCFA73011CA2CEA,
 				F539B1ED08A2D91C01A8012F,
 				F539B1EE08A2D91C01A8012F,
+				85CB5DF20D72C0F000A80101,
+				85CB5DF30D72C0F000A80101,
+				85CB5DF60D72C8D000A80101,
+				85CB5DF70D72C8D000A80101,
 				85D2B0910D701D4E00A80101,
 				85D2B0920D701D4E00A80101,
 				F539B1F708A3570901A8012F,
@@ -414,6 +418,8 @@
 				85DE40080CA0772E00A80101,
 				85AEB2970CA43E7A00A80101,
 				85D2B0930D701D4E00A80101,
+				85CB5DF40D72C0F000A80101,
+				85CB5DF80D72C8D000A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,6 +489,8 @@
 				85DE40090CA0772E00A80101,
 				85AEB2980CA43E7A00A80101,
 				85D2B0940D701D4E00A80101,
+				85CB5DF50D72C0F000A80101,
+				85CB5DF90D72C8D000A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +578,54 @@
 		};
 		85AEB2980CA43E7A00A80101 = {
 			fileRef = 85AEB2960CA43E7A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85CB5DF20D72C0F000A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRDrawableObject.h;
+			refType = 4;
+		};
+		85CB5DF30D72C0F000A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRDrawableObject.m;
+			refType = 4;
+		};
+		85CB5DF40D72C0F000A80101 = {
+			fileRef = 85CB5DF20D72C0F000A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85CB5DF50D72C0F000A80101 = {
+			fileRef = 85CB5DF30D72C0F000A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85CB5DF60D72C8D000A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRObjectEditor.h;
+			refType = 4;
+		};
+		85CB5DF70D72C8D000A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRObjectEditor.m;
+			refType = 4;
+		};
+		85CB5DF80D72C8D000A80101 = {
+			fileRef = 85CB5DF60D72C8D000A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85CB5DF90D72C8D000A80101 = {
+			fileRef = 85CB5DF70D72C8D000A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};

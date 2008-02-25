@@ -8,29 +8,25 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "GRDrawableObject.h"
 #import "GRBezierControlPoint.h"
 
-@class GRBezierPathEditor;
 
-typedef struct {
+typedef struct
+{
     GRBezierControlPoint *cp;
     NSPoint p;
     double t;
 } hitData;
 
-@class GRDocView;
-
-@interface GRBezierPath : NSObject
+@interface GRBezierPath : GRDrawableObject
 {
-    GRDocView *myView;
     NSBezierPath *myPath;
-    GRBezierPathEditor *editor;
     float strokeColor[4], fillColor[4];
     float strokeAlpha, fillAlpha;
     float flatness, miterlimit, linewidth;
     int linejoin, linecap;
     BOOL stroked, filled;
-    BOOL visible, locked;
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;
     GRBezierControlPoint *currentPoint;
@@ -42,8 +38,6 @@ typedef struct {
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;
-
-- (GRBezierPathEditor *)editor;
 
 - (id)duplicate;
 
@@ -86,11 +80,6 @@ typedef struct {
 - (float *)fillColor;
 - (void)setFillAlpha:(float)alpha;
 - (float)fillAlpha;
-- (BOOL)visible;
-- (void)setVisible:(BOOL)value;
-- (BOOL)locked;
-- (void)setLocked:(BOOL)value;
-
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
@@ -111,9 +100,6 @@ typedef struct {
 
 - (int)indexOfPoint:(GRBezierControlPoint *)aPoint;
 
-- (GRDocView *)view;
-
-- (void)draw;
 
 @end
 

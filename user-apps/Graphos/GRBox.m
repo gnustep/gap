@@ -20,7 +20,7 @@
     self = [super init];
     if(self)
     {
-        myView = aView;
+        docView = aView;
         zmFactor = zf;
         myPath = [[NSBezierPath bezierPath] retain];
         [myPath setCachesBezierPath: NO];
@@ -57,28 +57,14 @@
     return self;
 }
 
-- (GRBoxEditor *)editor
-{
-    return editor;
-}
-
-- (BOOL)locked
-{
-    return locked;
-}
 
 - (void)setLocked:(BOOL)value
 {
-    locked = value;
+    [super setLocked:value];
     if(!locked)
         [editor unselect];
     else
         [editor selectAsGroup];
-}
-
-- (GRDocView *)view
-{
-    return myView;
 }
 
 - (void)draw

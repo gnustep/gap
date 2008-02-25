@@ -1,13 +1,13 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-
 #import "GRText.h"
 #import "GRTextEditorView.h"
+#import "GRObjectEditor.h"
 
-@interface GRTextEditor : NSWindow
+@interface GRTextEditor : GRObjectEditor
 {
+    NSWindow *myWindow;
     GRTextEditorView *myView;
-    GRText *object;
     BOOL isSelect;
     BOOL isvalid;
 }

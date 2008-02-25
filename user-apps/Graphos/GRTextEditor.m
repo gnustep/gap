@@ -6,17 +6,19 @@
 {
     unsigned int style = NSTitledWindowMask | NSResizableWindowMask;
 
-    self = [super initWithContentRect: NSMakeRect(0, 0, 500, 300)
-                            styleMask: style
-                              backing: NSBackingStoreBuffered
-                                defer: NO];
+    self = [super init];
+
     if(self)
     {
+        myWindow = [[NSWindow alloc] initWithContentRect: NSMakeRect(0, 0, 500, 300)
+                                styleMask: style
+                                  backing: NSBackingStoreBuffered
+                                    defer: NO];
         isSelect = NO;
         isvalid = NO;
-        [self setMaxSize: NSMakeSize(500, 2000)];
-        [self setMinSize: NSMakeSize(500, 300)];
-        [self setTitle: @"Text Editor"];
+        [myWindow setMaxSize: NSMakeSize(500, 2000)];
+        [myWindow setMinSize: NSMakeSize(500, 300)];
+        [myWindow setTitle: @"Text Editor"];
         object = anObject;
         myView = nil;
     }
@@ -29,10 +31,10 @@
 {
         if (myView == nil)
         {
-            myView = [[GRTextEditorView alloc] initWithFrame: [self frame] withString: string attributes: attributes];
-            [self setContentView: myView];
+            myView = [[GRTextEditorView alloc] initWithFrame: [myWindow frame] withString: string attributes: attributes];
+            [myWindow setContentView: myView];
         }
-        [self center];
+        [myWindow center];
 }
 
 - (void)dealloc
