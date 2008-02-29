@@ -371,8 +371,8 @@
     [progBar setDoubleValue:0];
     gettimeofday(&beginTimeVal, NULL);
     transferSize = size;
-    [mainWin displayIfNeeded];
-    [mainWin flushWindowIfNeeded];
+    // [mainWin displayIfNeeded];
+    // [mainWin flushWindowIfNeeded];
 }
 
 - (void)setTransferProgress:(unsigned long)bytes
@@ -411,8 +411,8 @@
             sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
         [infoSize setStringValue:sizeStr];
         [sizeStr release];
-        [mainWin displayIfNeeded];
-        [mainWin flushWindowIfNeeded];
+        // [mainWin displayIfNeeded];
+        // [mainWin flushWindowIfNeeded];
     }
 }
 
@@ -451,8 +451,8 @@
     [sizeStr release];
     
     [progBar setDoubleValue:percent];
-    [mainWin displayIfNeeded];
-    [mainWin flushWindowIfNeeded];
+    // [mainWin displayIfNeeded];
+    // [mainWin flushWindowIfNeeded];
 }
 
 - (IBAction)disconnect:(id)sender
