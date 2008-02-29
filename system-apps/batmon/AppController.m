@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005 Riccardo Mottola
+   Copyright (C) 2005-2007 Riccardo Mottola
 
    Author: Riccardo Mottola
    FreeBSD support by Chris B. Vetter
@@ -109,6 +109,8 @@
 - (void)drawImageRep
 {
     NSBezierPath *bzp;
+    NSMutableString *str;
+    char *cStr;
 
     [[NSColor blackColor] set];
     bzp = [NSBezierPath bezierPath];
@@ -121,7 +123,13 @@
     else
        [[NSColor whiteColor] set];
     [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, ([batModel chargePercent]/100) * HEIGHT -2)];
-    [bzp fill];  
+    [bzp fill];
+
+    cStr = calloc(3, sizeof(char));
+    sprintf(cStr, "%2.0f", [batModel chargePercent]);
+    str = [NSMutableString stringWithCString:cStr];
+    [str drawAtPoint: NSMakePoint(WIDTH + 5 , 1) withAttributes:nil];
+    free(cStr);
 }
 
 - (void)drawIcon
