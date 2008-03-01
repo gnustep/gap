@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2007 Riccardo Mottola
+   Copyright (C) 2005-2008 Riccardo Mottola
 
    Author: Riccardo Mottola
    FreeBSD support by Chris B. Vetter
@@ -55,11 +55,26 @@
 {
     if ((self = [super init]))
     {
+        NSMutableParagraphStyle *style;
+	NSFont *font;
+
         batModel = [[BatteryModel alloc] init];
+        style = [[NSMutableParagraphStyle alloc] init];
+    	[style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+    	
+	font = [NSFont systemFontOfSize:9.0];
+	stateStrAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
+        font, NSFontAttributeName,
+        style, NSParagraphStyleAttributeName, nil] retain];
     }
     return self;
 }
 
+- (void)dealloc
+{
+    [super dealloc];
+    [stateStrAttributes release];
+}
 
 - (void)awakeFromNib
 {
@@ -125,10 +140,10 @@
     [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, ([batModel chargePercent]/100) * HEIGHT -2)];
     [bzp fill];
 
-    cStr = calloc(3, sizeof(char));
-    sprintf(cStr, "%2.0f", [batModel chargePercent]);
+    cStr = calloc(4, sizeof(char));
+    sprintf(cStr, "%2.0f%%", [batModel chargePercent]);
     str = [NSMutableString stringWithCString:cStr];
-    [str drawAtPoint: NSMakePoint(WIDTH + 5 , 1) withAttributes:nil];
+    [str drawAtPoint: NSMakePoint(WIDTH + 5 , 1) withAttributes:stateStrAttributes];
     free(cStr);
 }
 
