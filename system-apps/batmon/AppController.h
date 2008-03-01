@@ -46,6 +46,7 @@
     IBOutlet NSTextField         *battType;
     IBOutlet NSTextField         *lastFullCharge;
 
+    NSDictionary *stateStrAttributes;
 
     BatteryModel *batModel;
     @private int hours;
