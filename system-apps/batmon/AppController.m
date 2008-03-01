@@ -72,8 +72,8 @@
 
 - (void)dealloc
 {
-    [super dealloc];
     [stateStrAttributes release];
+    [super dealloc];
 }
 
 - (void)awakeFromNib

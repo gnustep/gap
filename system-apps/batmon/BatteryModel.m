@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006 Free Software Foundation
+   Copyright (C) 2006-2008 Free Software Foundation
 
    Author: 
 
@@ -114,13 +114,14 @@
 
 }
 
-- (void)dealloc
+- (void)deallo
 {
-  [super dealloc];
   if (chargeState != nil)
         [chargeState release];
   if (batteryType != nil)
         [batteryType release];
+  [super dealloc];
+
 }
 
 
