@@ -1,6 +1,7 @@
 {
     APPLICATIONICON = "";
     APP_DOCUMENT_BASED = NO;
+    APP_TYPE = GORM;
     CLASS_FILES = (
 	AppController.m,
 	BatteryModel.m
@@ -25,7 +26,7 @@
 	batmon.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2006-09-04 16:02:25 +0200";
+    LAST_EDITING = "2008-03-01 09:48:52 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -43,14 +44,15 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectWindow = "90 76 859 599 0 0  1024 768 ";
+	ProjectBrowser = "{x = -1.54416; y = -1.34037e-05; width = 692; height = 191}";
+	ProjectWindow = "84 128 859 599 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
 	"Riccardo Mottola (rmottola@users.sf.net)"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2005";
+    PROJECT_COPYRIGHT = "Copyright (C) 2005-2008";
     PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "Battery Monitor";
@@ -62,7 +64,7 @@
     PROJECT_RELEASE = 0.3;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
-    PROJECT_URL = "";
+    PROJECT_URL = "http://gap.nongnu.org/batmon/";
     SEARCH_HEADER_DIRS = (
     );
     SEARCH_LIB_DIRS = (
@@ -70,9 +72,7 @@
     SUBPROJECTS = (
     );
     SUPPORTING_FILES = (
-	GNUmakefile.preamble,
-	GNUmakefile,
-	GNUmakefile.postamble
+	batmonInfo.plist
     );
     USER_LANGUAGES = (
 	English
