@@ -17,10 +17,11 @@ batmon_APPLICATION_ICON =
 # Resource files
 #
 batmon_RESOURCE_FILES = \
-Resources/batmon.gorm\
-Resources/Info-gnustep.plist\
+Resources/batmon.gorm \
 Resources/LICENSE \
-Resources/README
+Resources/README \
+Resources/Info-gnustep.plist 
+
 
 #
 # Header files
@@ -37,10 +38,8 @@ AppController.m \
 BatteryModel.m
 
 #
-# C files
+# Other sources
 #
-batmon_C_FILES = 
-
 batmon_OBJC_FILES += \
 main.m 
 

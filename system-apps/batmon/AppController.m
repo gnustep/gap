@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2008 Riccardo Mottola
+   Copyright (C) 2005-2008 GNUstep Application Project
 
    Author: Riccardo Mottola
    FreeBSD support by Chris B. Vetter

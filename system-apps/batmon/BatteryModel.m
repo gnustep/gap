@@ -1,11 +1,11 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2008 Free Software Foundation
+   Copyright (C) 2006-2008 GNUstep Application Project
 
-   Author: 
+   Author: Riccardo Mottola 
 
-   Created: 2006-01-14 23:58:48 +0100 by multix
+   Created: 2006-01-14 23:58:48 Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
