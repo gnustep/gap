@@ -22,7 +22,8 @@
     float flatness, miterlimit, linewidth;
     float scalex, scaley;
     int linejoin, linecap;
-    BOOL stroked, filled;    BOOL groupSelected;
+    BOOL stroked, filled;
+    BOOL groupSelected;
     BOOL editSelected;
     BOOL isSelect;
     BOOL isdone;
