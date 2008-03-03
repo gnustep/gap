@@ -82,7 +82,7 @@
 	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-02-25 23:53:58 +0100";
+    LAST_EDITING = "2008-02-26 00:01:14 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -100,8 +100,8 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBrowser = "{x = -1.55079; y = -1.39468e-05; width = 659; height = 154}";
-	ProjectWindow = "118 93 779 670 0 0  1024 768 ";
+	ProjectBrowser = "{x = -1.55079; y = -1.39468e-05; width = 761; height = 154}";
+	ProjectWindow = "147 124 779 670 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;

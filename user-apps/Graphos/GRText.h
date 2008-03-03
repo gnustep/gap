@@ -6,7 +6,6 @@
 
 @interface GRText : GRDrawableObject
 {
-    NSBezierPath *bzp;
     NSString *str;
     NSFont *font;
     NSPoint pos;
