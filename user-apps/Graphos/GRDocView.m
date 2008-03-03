@@ -1343,7 +1343,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 
     for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] draw];
+        [(GRDrawableObject *)[objects objectAtIndex: i] draw];
 
 }
 
