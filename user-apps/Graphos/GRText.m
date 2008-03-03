@@ -18,8 +18,6 @@
     {
         docView = aView;
         zmFactor = zf;
-        bzp = [[NSBezierPath bezierPath] retain];
-        [bzp setCachesBezierPath: NO];
         pos = NSMakePoint(p.x / zf, p.y / zf);
         rotation = 0;
         scalex = 1;
@@ -442,51 +440,36 @@
     NSColor *color;
     int i;
     NSBezierPath *bezp;
+    NSMutableParagraphStyle *style;
+    NSDictionary *strAttr;
+    NSFont *tempFont;
 
     if(!visible)
         return;
+	
+    style = [[NSMutableParagraphStyle alloc] init];
+    [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+    [style setAlignment: align];
+    [style setParagraphSpacing: parspace];
+    tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
+    strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+    tempFont, NSFontAttributeName,
+    style, NSParagraphStyleAttributeName, nil] retain];
 
-    [bzp release];
-    bzp = [[self makePathFromString:str forFont:font atPoint:pos] retain];
     
     bezp = [NSBezierPath bezierPath];
-    [bezp appendBezierPath:bzp];
-    if([str length] > 0) {
-        [font set];
-
-        if(stroked) {
-            [NSGraphicsContext saveGraphicsState];
-            color = [NSColor colorWithDeviceCyan: fillColor[0]
-                                         magenta: fillColor[1]
-                                          yellow: fillColor[2]
-                                           black: fillColor[3]
-                                           alpha: fillAlpha];
-            color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-            [color set];
-            [bezp stroke];
-            [NSGraphicsContext restoreGraphicsState];
-        }
-        
-        if(filled) {
-            [NSGraphicsContext saveGraphicsState];
-            color = [NSColor colorWithDeviceCyan: fillColor[0]
-                                         magenta: fillColor[1]
-                                          yellow: fillColor[2]
-                                           black: fillColor[3]
-                                           alpha: fillAlpha];
-            color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-            [color set];
-            [bezp fill];
-            [NSGraphicsContext restoreGraphicsState];
-        }
-
-        
+    if([str length] > 0)
+    {
         lines = [str componentsSeparatedByString: @"\n"];
         for(i = 0; i < [lines count]; i++)
         {
             line = [lines objectAtIndex: i];
+	    
+            [line drawAtPoint: NSMakePoint(pos.x, baselny) withAttributes:strAttr];
 
-            if([editor isSelect]) {
+
+            if([editor isSelect])
+	    {
                 [[NSColor blackColor] set];
                 [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
                 [bezp stroke];
