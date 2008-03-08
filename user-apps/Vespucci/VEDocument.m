@@ -32,6 +32,9 @@ static NSString *homePage = @"";
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
     [super windowControllerDidLoadNib:aController];
+
+    /* useless call to fool the MS Windows linker */
+    [WebView class];
 }
 
 - (id)initWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
