@@ -12,8 +12,8 @@ NSPoint pointApplyingCostrainerToPoint(NSPoint p, NSPoint sp)
     double cy22, cy45, cy67, diffx, diffy;
     NSPoint cp;
 
-    diffx = max(p.x, sp.x) - min(p.x, sp.x);
-    diffy = max(p.y, sp.y) - min(p.y, sp.y);
+    diffx = grmax(p.x, sp.x) - grmin(p.x, sp.x);
+    diffy = grmax(p.y, sp.y) - grmin(p.y, sp.y);
 
     cy22 = diffx * pow(1 - pow(cos22, 2), 0.5) / cos22;
     cy45 = diffx * pow(1 - pow(cos45, 2), 0.5) / cos45;
