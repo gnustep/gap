@@ -33,13 +33,13 @@
     bzHandle.firstHandle = draggedHandlePos;
     bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
 
-    distx = max(bzHandle.firstHandle.x, bzHandle.center.x) - min(bzHandle.firstHandle.x, bzHandle.center.x);
+    distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
     if(bzHandle.firstHandle.x > bzHandle.center.x)
         bzHandle.secondHandle.x = bzHandle.center.x - distx;
     else
         bzHandle.secondHandle.x = bzHandle.center.x + distx;
 
-    disty = max(bzHandle.firstHandle.y, bzHandle.center.y) - min(bzHandle.firstHandle.y, bzHandle.center.y);
+    disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
     if(bzHandle.firstHandle.y > bzHandle.center.y)
         bzHandle.secondHandle.y = bzHandle.center.y - disty;
     else
@@ -80,7 +80,7 @@
 
     if(pointInRect(bzHandle.firstHandleRect, oldp)) {
         bzHandle.firstHandle = newp;
-        distx = max(bzHandle.firstHandle.x, bzHandle.center.x) - min(bzHandle.firstHandle.x, bzHandle.center.x);
+        distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
         disty = max(bzHandle.firstHandle.y, bzHandle.center.y) - min(bzHandle.firstHandle.y, bzHandle.center.y);
         if(bzHandle.firstHandle.x > bzHandle.center.x)
             bzHandle.secondHandle.x = bzHandle.center.x - distx;
@@ -94,8 +94,8 @@
 
     if(pointInRect(bzHandle.secondHandleRect, oldp)) {
         bzHandle.secondHandle = newp;
-        distx = max(bzHandle.secondHandle.x, bzHandle.center.x) - min(bzHandle.secondHandle.x, bzHandle.center.x);
-        disty = max(bzHandle.secondHandle.y, bzHandle.center.y) - min(bzHandle.secondHandle.y, bzHandle.center.y);
+        distx = grmax(bzHandle.secondHandle.x, bzHandle.center.x) - grmin(bzHandle.secondHandle.x, bzHandle.center.x);
+        disty = grmax(bzHandle.secondHandle.y, bzHandle.center.y) - grmin(bzHandle.secondHandle.y, bzHandle.center.y);
         if(bzHandle.secondHandle.x > bzHandle.center.x)
             bzHandle.firstHandle.x = bzHandle.center.x - distx;
         else
@@ -146,8 +146,8 @@
 
     isSelect = YES;
     [[path editor] unselectOtherControls: self];
-    distx = max(bzHandle.firstHandle.x, bzHandle.center.x) - min(bzHandle.firstHandle.x, bzHandle.center.x);
-    disty = max(bzHandle.firstHandle.y, bzHandle.center.y) - min(bzHandle.firstHandle.y, bzHandle.center.y);
+    distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
+    disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
     if(distx || disty)
         isActiveHandle = YES;
 }
