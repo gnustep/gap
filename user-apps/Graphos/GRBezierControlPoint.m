@@ -81,7 +81,7 @@
     if(pointInRect(bzHandle.firstHandleRect, oldp)) {
         bzHandle.firstHandle = newp;
         distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
-        disty = max(bzHandle.firstHandle.y, bzHandle.center.y) - min(bzHandle.firstHandle.y, bzHandle.center.y);
+        disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
         if(bzHandle.firstHandle.x > bzHandle.center.x)
             bzHandle.secondHandle.x = bzHandle.center.x - distx;
         else
