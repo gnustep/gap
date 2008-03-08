@@ -50,14 +50,14 @@ BOOL pointInRect(NSRect rect, NSPoint p)
     return NO;
 }
 
-double min(double a, double b) {
+double grmin(double a, double b) {
     if(a < b)
         return a;
     else
         return b;
 }
 
-double max(double a, double b) {
+double grmax(double a, double b) {
     if(a > b)
         return a;
     else

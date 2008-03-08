@@ -99,13 +99,13 @@ static double k = 0.025;
                 prevcp = [controlPoints objectAtIndex: [controlPoints count] -2];
                 [prevcp calculateBezierHandles: pp[0]];
 
-                distx = max(pp[1].x, pp[2].x) - min(pp[1].x, pp[2].x);
+                distx = grmax(pp[1].x, pp[2].x) - grmin(pp[1].x, pp[2].x);
                 if(pp[1].x > pp[2].x)
                     p.x = pp[2].x - distx;
                 else
                     p.x = pp[2].x + distx;
 
-                disty = max(pp[1].y, pp[2].y) - min(pp[1].y, pp[2].y);
+                disty = grmax(pp[1].y, pp[2].y) - grmin(pp[1].y, pp[2].y);
                 if(pp[1].y > pp[2].y)
                     p.y = pp[2].y - disty;
                 else
