@@ -1,11 +1,11 @@
 {
 ApplicationDescription = "An Address Book.";
 ApplicationName = "AddressManager";
-ApplicationRelease = "0.4.7";
+ApplicationRelease = "0.4.7.1";
 ApplicationURL = "http://gap.nongnu.org/addresses/";
 NSIcon = "AddressManager.tiff";
 Authors = ("The Team of the GNUstep Application Project", "Bj\u00f6rn Giesler <bjoern@giesler.de>");
-Copyright = "Copyright (C) 2003-2007 The GNUstep Application Project\n
+Copyright = "Copyright (C) 2003-2008 The GNUstep Application Project\n
 Distributed under the terms of the LGPL.";
 NSTypes = (
 	{
