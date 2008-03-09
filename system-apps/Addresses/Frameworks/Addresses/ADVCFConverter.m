@@ -4,10 +4,10 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
+// $Author: gcasa $
 // $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2007/07/19 23:01:14 $
+// $Revision: 1.5 $
+// $Date: 2008/03/09 18:37:32 $
 
 /* system includes */
 /* (none) */
@@ -203,7 +203,7 @@ NSData *base64Decode(NSString* nsstr)
   for(i=0, j=0; i < strlen(str); i+=4, j+=3)
     {
       unsigned char s1, s2, s3, s4;
-      u_int32_t v;
+      uint32_t v;
 
       while(!strchr(b64chars, str[i]) && i<strlen(str))
 	i++;
@@ -240,7 +240,7 @@ NSString *base64Encode(NSData* data)
   for(i=0,j=0; i<len-2; i+=3,j+=4)
     {
       unsigned char s1, s2, s3, s4;
-      u_int32_t v;
+      uint32_t v;
 
       v = (bytes[i] << 16);
       v |= (bytes[i+1] << 8);
