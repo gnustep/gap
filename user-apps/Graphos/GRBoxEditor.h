@@ -21,9 +21,14 @@
 
 - (id)initEditor:(GRBox *)anObject;
 
+- (BOOL)isdone;
+- (void)setIsDone:(BOOL)status;
+
 - (void)select;
 
 - (void)selectAsGroup;
+
+- (void)selectForEditing;
 
 - (void)unselect;
 
