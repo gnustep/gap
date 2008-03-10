@@ -242,21 +242,21 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     // ####	[myWin setSaved: NO];
 }
 
-- (void)addBoxAtPoint:(NSPoint)p
+- (void)addBox
 {
-    GRBoxEditor *box;
-    int i;
+    GRBox *box;
 
-    NSLog(@"AddBoxtAtPoint");
-    for(i = 0; i < [objects count]; i++)
-        [[[objects objectAtIndex: i] editor] unselect];
+//    for(i = 0; i < [objects count]; i++)
+//        [[[objects objectAtIndex: i] editor] unselect];
 
-    box = [[GRBox alloc] initInView: self atPoint: p
+    box = [[GRBox alloc] initInView: self  
                             zoomFactor: zFactor];
+
     [objects addObject: box];
     [[box editor] select];
     [box release];
     [self setNeedsDisplay: YES];
+    edind = [objects count] -1;
 }
 
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p
@@ -447,6 +447,109 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
         [bzpath confirmNewCurve];
         [self setNeedsDisplay: YES];
+    }
+}
+
+- (void)startBoxAtPoint:(NSPoint)p
+{
+    NSEvent *nextEvent;
+    GRBox *box;
+    id obj;
+    BOOL isneweditor = YES;
+    int i;
+
+    // #### [myWin setSaved: NO];
+    for(i = 0; i < [objects count]; i++) {
+        obj = [objects objectAtIndex: i];
+        if([obj isKindOfClass: [GRBox class]])
+            if(![[obj editor] isdone])
+                isneweditor = NO;
+    }
+
+    if(isneweditor)
+        for(i = 0; i < [objects count]; i++)
+            [[[objects objectAtIndex: i] editor] unselect];
+
+    nextEvent = [[self window] nextEventMatchingMask:
+        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+    [self verifyModifiersOfEvent: nextEvent];
+
+    if([nextEvent type] != NSLeftMouseDragged)
+    {
+       NSLog(@"is not left mouse dragged");
+        if(isneweditor)
+        {
+            [self addBox];
+//            bzpath = [objects objectAtIndex: edind];
+            [[box editor] selectForEditing];
+            [box setStartAtPoint: p];
+            [self setNeedsDisplay: YES];
+            return;
+        } else
+        {
+            box = [objects objectAtIndex: edind];
+            [[box editor] selectForEditing];
+//            if(shiftclick)
+//                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [box setEndAtPoint: p];
+            [self setNeedsDisplay: YES];
+            return;
+        }
+    } else
+    {
+       NSLog(@"is left mouse dragged");
+        if(isneweditor)
+        {
+       NSLog(@"is new editor");
+            [self addBox];
+            box = [objects objectAtIndex: edind];
+       NSLog(@"will set start selectForEditing");
+            [[box editor] selectForEditing];
+       NSLog(@"will set start at point");
+            [box setStartAtPoint: p];
+       NSLog(@"will set needs display");
+            [self setNeedsDisplay: YES];
+/*	    
+            [self addPath];
+            bzpath = [objects objectAtIndex: edind];
+            [[bzpath editor] selectForEditing];
+            [bzpath addControlAtPoint: p]; */
+        } else
+        {
+       NSLog(@"is old editor");
+            box = [objects objectAtIndex: edind];
+            [[box editor] selectForEditing];
+//            if(shiftclick)
+//                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [box setEndAtPoint: p];
+            [self setNeedsDisplay: YES];
+	    /*
+            bzpath = [objects objectAtIndex: edind];
+            [[bzpath editor] selectForEditing];
+            if(shiftclick)
+                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [bzpath addControlAtPoint: p]; */
+        }
+//        [self setNeedsDisplay: YES];
+
+        do
+        {
+            p = [nextEvent locationInWindow];
+            p = [self convertPoint: p fromView: nil];
+//            if(shiftclick)
+//                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+
+            [box setEndAtPoint: p];
+
+            [self setNeedsDisplay: YES];
+
+            nextEvent = [[self window] nextEventMatchingMask:
+                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+            [self verifyModifiersOfEvent: nextEvent];
+        } while([nextEvent type] != NSLeftMouseUp);
+
+//        [box confirmNewCurve];
+        [self setNeedsDisplay: YES]; 
     }
 }
 
@@ -825,7 +928,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             obj = [objects objectAtIndex: i];
             if([[obj editor] isGroupSelected]) {
                 objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-                if([obj isKindOfClass: [GRBezierPath class]])
+                if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]])
                 {
                     [obj setFlat: [[newProps objectForKey: @"flatness"] floatValue]];
                     [obj setLineJoin: [[newProps objectForKey: @"linejoin"] intValue]];
@@ -1197,7 +1300,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
                 break;
             case rectangletool:
-                [self addBoxAtPoint: p];
+                [self startBoxAtPoint: p];
                 break;
             case painttool:
 

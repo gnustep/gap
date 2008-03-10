@@ -841,7 +841,6 @@ static double k = 0.025;
     bzp = [NSBezierPath bezierPath];
     if(stroked)
     {
-        NSLog(@"line width: %f", linewidth);
         [NSGraphicsContext saveGraphicsState];
         [myPath setLineJoinStyle:linejoin];
         [myPath setLineCapStyle:linecap];
