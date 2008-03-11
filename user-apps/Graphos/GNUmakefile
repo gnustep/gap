@@ -70,7 +70,8 @@ GRBox.h \
 GRBoxEditor.h \
 GRBezierPath.h \
 GRObjectEditor.h \
-GRDrawableObject.h
+GRDrawableObject.h \
+GRObjectControlPoint.h
 
 #
 # Class files
@@ -91,7 +92,8 @@ GRBox.m \
 GRBoxEditor.m \
 GRBezierPath.m \
 GRObjectEditor.m \
-GRDrawableObject.m
+GRDrawableObject.m \
+GRObjectControlPoint.m
 
 #
 # Other sources
