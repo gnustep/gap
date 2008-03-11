@@ -60,7 +60,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSMutableDictionary *objsdict;
     NSString *str;
     id obj;
-    int i, p = 0, t = 0;
+    int i;
+    int p = 0;
+    int t = 0;
+    int b = 0;
 
     objsdict = [NSMutableDictionary dictionaryWithCapacity: 1];
     for(i = 0; i < [objects count]; i++)
@@ -70,11 +73,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             str = [NSString stringWithFormat: @"path%i", p];
             p++;
-        } else
+        } else if([obj isKindOfClass: [GRBox class]])
+        {
+            str = [NSString stringWithFormat: @"box%i", b];
+            b++;
+        } else if([obj isKindOfClass: [GRText class]])
         {
             str = [NSString stringWithFormat: @"text%i", t];
             t++;
-        }
+        } else
+	{
+	    [NSException raise:@"Unhandled object type" format:@"%@", [obj class]];
+	}
         [objsdict setObject: [obj objectDescription] forKey: str];
     }
     return [NSDictionary dictionaryWithDictionary: objsdict];
