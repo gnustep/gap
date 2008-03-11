@@ -39,6 +39,21 @@ NSPoint pointApplyingCostrainerToPoint(NSPoint p, NSPoint sp)
     return cp;
 }
 
+NSRect GRMakeBounds(float x, float y, float width, float height)
+{
+    if (width < 0)
+    {
+        width = -width;
+        x = x - width;
+    }
+    if (height < 0)
+    {
+        height = -height;
+        y = y - height;
+    }
+    return NSMakeRect(x, y, width, height);
+}
+
 BOOL pointInRect(NSRect rect, NSPoint p)
 {
     if(p.x >= rect.origin.x
