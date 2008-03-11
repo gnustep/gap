@@ -28,6 +28,20 @@
 
 @implementation GRDrawableObject
 
+
+- (NSDictionary *)objectDescription
+{
+    NSLog(@"objectDescription: This method must be subclassed.");
+    return nil;
+}
+
+- (GRDrawableObject *)duplicate
+{
+    NSLog(@"duplicate: This method must be subclassed.");
+    return  nil;
+}
+
+
 - (GRDocView *)view
 {
     return docView;

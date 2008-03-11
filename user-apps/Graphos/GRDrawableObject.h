@@ -23,6 +23,10 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/**
+ * DrawableObject  is a superclass for every graphics object of Graphos.
+ * It is abstract and created to standardize behaviour, it is not instantiatable itself.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -36,6 +40,14 @@
     BOOL visible, locked;
 }
 
+/**
+ * Returns a description of the object, used for saving to file.
+ * This method must be overridden by each drawable object.
+ */
+- (NSDictionary *)objectDescription;
+
+- (GRDrawableObject *)duplicate;
+
 - (GRDocView *)view;
 - (GRObjectEditor *)editor;
 
@@ -44,6 +56,10 @@
 - (BOOL)locked;
 - (void)setLocked:(BOOL)value;
 
+/**
+ * Draws the object in the view. Called from GRDocView.
+ * This method must be subclassed.
+ */ 
 - (void)draw;
 
 @end

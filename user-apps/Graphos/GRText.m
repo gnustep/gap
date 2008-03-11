@@ -4,6 +4,8 @@
 #import "Graphos.h"
 #import "GRTextEditor.h"
 
+// FIXME should zmfactor really be saved?
+
 @implementation GRText
 
 - (id)initInView:(GRDocView *)aView
