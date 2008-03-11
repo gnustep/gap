@@ -18,7 +18,6 @@
     float rotation;
     float strokeColor[4], fillColor[4];
     float strokeAlpha, fillAlpha;
-    float zmFactor;
     BOOL stroked, filled;
     NSRect selRect;
 }

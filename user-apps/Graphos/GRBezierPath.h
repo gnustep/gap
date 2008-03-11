@@ -30,7 +30,6 @@ typedef struct
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;
     GRBezierControlPoint *currentPoint;
-    float zmFactor;
 }
 
 - (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;

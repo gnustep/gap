@@ -26,7 +26,6 @@
     float scalex, scaley;
     int linejoin, linecap;
     BOOL stroked, filled;
-    float zmFactor;  
 }
 
 - (id)initInView:(GRDocView *)aView
