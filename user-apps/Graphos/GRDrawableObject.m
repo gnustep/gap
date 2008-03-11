@@ -31,12 +31,14 @@
 
 - (NSDictionary *)objectDescription
 {
+    [NSException raise:@"Object should override objectDescription" format:@"%@", [self class]];
     NSLog(@"objectDescription: This method must be subclassed.");
     return nil;
 }
 
 - (GRDrawableObject *)duplicate
 {
+    [NSException raise:@"Object should override duplicate" format:@"%@", [self class]];
     NSLog(@"duplicate: This method must be subclassed.");
     return  nil;
 }
