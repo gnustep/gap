@@ -863,9 +863,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
-        if([[obj editor] isSelect]) {
+        if([[obj editor] isSelect])
+        {
             objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-            if([obj isKindOfClass: [GRBezierPath class]])
+            if([obj isKindOfClass: [GRBezierPath class]] ||
+               [obj isKindOfClass: [GRBox class]])
             {
                 [objProps setObject: @"path" forKey: @"type"];
                 num = [NSNumber numberWithFloat: [obj flatness]];
@@ -972,7 +974,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         for(i = 0; i < [objects count]; i++)
         {
             obj = [objects objectAtIndex: i];
-            if([[obj editor] isGroupSelected]) {
+            if([[obj editor] isGroupSelected])
+            {
                 objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
                 if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]])
                 {
