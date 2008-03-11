@@ -88,6 +88,12 @@
     return groupSelected;
 }
 
+- (BOOL)isEditSelected
+{
+    return editSelected;
+}
+
+
 - (void)draw
 {
 }

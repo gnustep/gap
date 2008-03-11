@@ -8,6 +8,7 @@
 
 #import "GRBox.h"
 #import "GRBoxEditor.h"
+#import "GRFunctions.h"
 
 @implementation GRBox
 
@@ -25,12 +26,11 @@
         [myPath setCachesBezierPath: NO];
         pos = NSMakePoint(0, 0);
 	size = NSMakeSize(0, 0);
+        startControlPoint = nil;
+        endControlPoint = nil;
         rotation = 0;
         scalex = 1;
         scaley = 1;
-        groupSelected = NO;
-        editSelected = NO;
-        isdone = NO;
         flatness = 0.0;
         miterlimit = 2.0;
         linewidth = 1.5;
@@ -40,7 +40,6 @@
         filled = NO;
         visible = YES;
         locked = NO;
-        isvalid = NO;
         strokeColor[0] = 0;
         strokeColor[1] = 0;
         strokeColor[2] = 0;
@@ -61,18 +60,8 @@
 - (void)setStartAtPoint:(NSPoint)aPoint
 {
     pos = aPoint;
-/*    GRBezierControlPoint *cp;
-
-    cp = [[GRBezierControlPoint alloc] initAtPoint: aPoint
-                                         forPath: self zoomFactor: zmFactor];
-    [controlPoints addObject: cp];
-    [cp select];
-    currentPoint = cp;
-    [cp release];
-
-    if([controlPoints count] == 1)
-        [myPath moveToPoint: aPoint];
-	*/
+    startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: aPoint];
+    [startControlPoint select];
 }
 
 - (void)setEndAtPoint:(NSPoint)aPoint
@@ -228,9 +217,9 @@
 {
     [super setLocked:value];
     if(!locked)
-        [editor unselect];
+        [(GRBoxEditor *)editor unselect];
     else
-        [editor selectAsGroup];
+        [(GRBoxEditor *)editor selectAsGroup];
 }
 
 - (BOOL)pointInBounds:(NSPoint)p
@@ -242,10 +231,8 @@
 - (void)draw
 {
     NSColor *color;
-    int i;
     NSBezierPath *bzp;
 
-    NSLog(@"position %f, %f, size %f, %f", pos.x, pos.y, size.width, size.height);
 
     bzp = [NSBezierPath bezierPath];
     [bzp appendBezierPathWithRect:bounds];
@@ -283,9 +270,30 @@
 
     [bzp setLineWidth:1];
 
-    if(editSelected)
+    if([editor isGroupSelected])
     {
-        // put in here code to draw handles
+        NSRect r;
+        
+        NSLog(@"is group selected");
+        r = [startControlPoint centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+        r = [endControlPoint centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+    }
+    
+    if([editor isEditSelected])
+    {
+        NSRect r;
+
+        NSLog(@"is edit selected");
+        r = [startControlPoint centerRect];
+        if([startControlPoint isSelect])
+        {
+            [[NSColor blackColor] set];
+            NSRectFill(r);
+        }
     }
 }
 
