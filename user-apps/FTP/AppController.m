@@ -278,9 +278,9 @@
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
 
-    [pool release];
     threadRunning = NO;
     [self setInterfaceEnabled:YES];
+    [pool release];
 }
 
 - (void)performStoreFile:(id)parameters
@@ -308,9 +308,9 @@
         [ftp storeFile:fileEl from:local beingAt:0];
     }
 
-    [pool release];
     threadRunning = NO;
     [self setInterfaceEnabled:YES];
+    [pool release];
 }
 
 - (IBAction)downloadButton:(id)sender
