@@ -32,8 +32,6 @@
 - (id)initInView:(GRDocView *)aView
       zoomFactor:(float)zf
 {
-    int result;
-
     self = [super init];
     if(self)
     {
@@ -77,8 +75,6 @@
             inView:(GRDocView *)aView
         zoomFactor:(float)zf
 {
-    NSMutableParagraphStyle *style;
-    NSDictionary *attrs;
     NSString *str;
     NSArray *linearr;
 
@@ -131,7 +127,6 @@
 {
     NSMutableDictionary *dict;
     NSString *str;
-    NSBezierPathElement type;
 
     dict = [NSMutableDictionary dictionaryWithCapacity: 1];
     [dict setObject: @"box" forKey: @"type"];
