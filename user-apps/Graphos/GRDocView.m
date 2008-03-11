@@ -42,7 +42,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         ctrlclick = NO;
         zIndex = 2;
         zFactor = zFactors[zIndex];
-        NSLog (@"inited doc view with win");
     }
     return self;
 }
@@ -923,7 +922,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         for(i = 0; i < [objects count]; i++)
             if([[[objects objectAtIndex: i] editor] isGroupSelected])
                 count++;
-        if(count > 1) {
+        if(count > 1)
+	{
             result = NSRunAlertPanel(@"Alert", @"You are going to set the properties of many objects! Are you sure?", @"Ok", @"No", nil);
             if(result != NSAlertDefaultReturn)
             {
@@ -1023,8 +1023,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         if([objects objectAtIndex: i] != obj)
             [[[objects objectAtIndex: i] editor] unselect];
 
-    for(i = 0; i < [objects count]; i++) {
-        if((obj == [objects objectAtIndex: i]) && ((i - 1) >= 0)) {
+    for(i = 0; i < [objects count]; i++)
+    {
+        if((obj == [objects objectAtIndex: i]) && ((i - 1) >= 0)) 
+	{
             [objects removeObjectAtIndex: i];
             [objects insertObject: obj atIndex: i - 1];
             [obj release];
@@ -1061,7 +1063,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSPoint pp;
     int i;
 
-    if(isout) {
+    if(isout)
+    {
         zIndex--;
         if(zIndex < 0)
         {
@@ -1345,7 +1348,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             default:
                 break;
         }
-    } else {
+    } else
+    {
         if([[NSApp delegate] currentToolType] == blackarrowtool)
             [self editTextAtPoint: p];
     }
