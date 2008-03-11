@@ -11,4 +11,8 @@
 
 @implementation GRObjectEditor
 
+- (void)unselect
+{
+}
+
 @end

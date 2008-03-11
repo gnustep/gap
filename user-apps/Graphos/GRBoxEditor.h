@@ -30,8 +30,6 @@
 
 - (void)selectForEditing;
 
-- (void)unselect;
-
 - (BOOL)isSelect;
 
 - (BOOL)isGroupSelected;

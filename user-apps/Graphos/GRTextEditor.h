@@ -24,8 +24,6 @@
 
 - (void)selectAsGroup;
 
-- (void)unselect;
-
 - (BOOL)isSelect;
 
 - (BOOL)isGroupSelected;

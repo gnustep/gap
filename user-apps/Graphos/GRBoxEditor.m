@@ -68,8 +68,6 @@
 
 - (void)unselect
 {
-    int i;
-
     groupSelected = NO;
     editSelected = NO;
     isvalid = YES;
