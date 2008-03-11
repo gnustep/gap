@@ -35,7 +35,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#define BCOPY(SRC, DST, LEN) bcopy(SRC, DEST, LEN)
+#define BCOPY(SRC, DST, LEN) bcopy(SRC, DST, LEN)
 #endif /* WIN32 */
 
 #include <stdio.h>
