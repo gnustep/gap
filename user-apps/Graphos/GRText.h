@@ -32,9 +32,6 @@
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;
 
-- (GRText *)duplicate;
-
-- (NSDictionary *)objectDescription;
 
 - (NSString *)psDescription;
 

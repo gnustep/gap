@@ -39,10 +39,6 @@ typedef struct
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;
 
-- (id)duplicate;
-
-- (NSDictionary *)objectDescription;
-
 
 - (void)addControlAtPoint:(NSPoint)aPoint;
 - (void)addLineToPoint:(NSPoint)aPoint;
