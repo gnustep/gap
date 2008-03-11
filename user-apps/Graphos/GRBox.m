@@ -91,7 +91,7 @@
                           [[description objectForKey: @"posy"]  floatValue]);
         size = NSMakeSize([[description objectForKey: @"width"]  floatValue],
                           [[description objectForKey: @"height"]  floatValue]);
-
+        bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
         scalex = [[description objectForKey: @"scalex"] floatValue];
         scaley = [[description objectForKey: @"scaley"] floatValue];
         rotation = [[description objectForKey: @"rotation"] floatValue];
@@ -355,7 +355,7 @@
     pos.x = pos.x / zmFactor * f;
     pos.y = pos.y / zmFactor * f;
     size = NSMakeSize(size.width / zmFactor * f, size.height / zmFactor * f);
-    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height /2);
+    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
 }
 
 - (void)draw
