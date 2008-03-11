@@ -27,6 +27,7 @@
 #import "GRBoxEditor.h"
 #import "GRFunctions.h"
 
+
 @implementation GRBox
 
 - (id)initInView:(GRDocView *)aView
@@ -66,6 +67,8 @@
         strokeAlpha = 1;
         fillAlpha = 1;
         editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
+        startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos];
+        endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
     }
 
     return self;
@@ -87,7 +90,7 @@
                           [[description objectForKey: @"posy"]  floatValue]);
         size = NSMakeSize([[description objectForKey: @"width"]  floatValue],
                           [[description objectForKey: @"height"]  floatValue]);
-        bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
+        bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
         scalex = [[description objectForKey: @"scalex"] floatValue];
         scaley = [[description objectForKey: @"scaley"] floatValue];
         rotation = [[description objectForKey: @"rotation"] floatValue];
@@ -119,8 +122,17 @@
         visible = (BOOL)[[description objectForKey: @"visible"] intValue];
         locked = (BOOL)[[description objectForKey: @"locked"] intValue];
         [self setZoomFactor: zf];
+        startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos];
+        endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [startControlPoint dealloc];
+    [endControlPoint dealloc];
+    [super dealloc];
 }
 
 - (NSDictionary *)objectDescription
@@ -176,7 +188,7 @@
 - (void)setStartAtPoint:(NSPoint)aPoint
 {
     pos = aPoint;
-    startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: aPoint];
+    [startControlPoint moveToPoint: aPoint];
     [startControlPoint select];
 }
 
@@ -184,32 +196,9 @@
 {
     size.width = aPoint.x - pos.x;
     size.height = aPoint.y- pos.y;
-    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
-/*    GRBezierControlPoint *mtopoint, *prevpoint;
-    GRBezierHandle handle;
-
-    [self addControlAtPoint: aPoint];
-    mtopoint = [controlPoints objectAtIndex: 0];
-    prevpoint = [controlPoints objectAtIndex: [controlPoints count] -2];
-
-    if([prevpoint isActiveHandle])
-    {
-        handle = [prevpoint bzHandle];
-        [myPath curveToPoint: [currentPoint center]
-               controlPoint1: handle.firstHandle
-               controlPoint2: [currentPoint center]];
-        [self confirmNewCurve];
-        return;
-    }
-
-    if([self isPoint: currentPoint onPoint: mtopoint])
-    {
-        [currentPoint moveToPoint: [mtopoint center]];
-        [myPath lineToPoint: [mtopoint center]];
-        [editor setIsDone:YES];
-    } else {
-        [myPath lineToPoint: aPoint];
-    } */
+    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+    [endControlPoint moveToPoint: aPoint];
+    [endControlPoint select];
 }
 
 - (void)setFlat:(float)flat
@@ -344,13 +333,22 @@
 }
 
 
+- (void)moveAddingCoordsOfPoint:(NSPoint)p
+{
+    pos.x += p.x;
+    pos.y += p.y;
+    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+    [startControlPoint moveToPoint: pos];
+    [endControlPoint moveToPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+}
+
 - (void)setZoomFactor:(float)f
 {
     [super setZoomFactor:f];
     pos.x = pos.x / zmFactor * f;
     pos.y = pos.y / zmFactor * f;
     size = NSMakeSize(size.width / zmFactor * f, size.height / zmFactor * f);
-    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
+    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
 }
 
 - (void)draw

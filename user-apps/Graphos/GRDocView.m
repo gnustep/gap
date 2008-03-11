@@ -1334,7 +1334,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     p = [theEvent locationInWindow];
     p = [self convertPoint: p fromView: nil];
 
-    if(count == 1) {
+    if(count == 1)
+    {
         switch([[NSApp delegate] currentToolType])
         {
             case blackarrowtool:
