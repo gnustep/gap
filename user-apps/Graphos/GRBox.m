@@ -56,6 +56,56 @@
     return self;
 }
 
+- (NSDictionary *)objectDescription
+{
+    NSMutableDictionary *dict;
+    NSString *str;
+    NSBezierPathElement type;
+
+    dict = [NSMutableDictionary dictionaryWithCapacity: 1];
+    [dict setObject: @"box" forKey: @"type"];
+
+    str = [NSString stringWithFormat: @"%.3f", pos.x];
+    [dict setObject: str forKey: @"posx"];
+    str = [NSString stringWithFormat: @"%.3f", pos.y];
+    [dict setObject: str forKey: @"posy"];
+    
+    str = [NSString stringWithFormat: @"%.3f", size.width];
+    [dict setObject: str forKey: @"width"];
+    str = [NSString stringWithFormat: @"%.3f", size.height];
+    [dict setObject: str forKey: @"height"];
+
+    str = [NSString stringWithFormat: @"%.3f", flatness];
+    [dict setObject: str forKey: @"flatness"];
+    str = [NSString stringWithFormat: @"%i", linejoin];
+    [dict setObject: str forKey: @"linejoin"];
+    str = [NSString stringWithFormat: @"%i", linecap];
+    [dict setObject: str forKey: @"linecap"];
+    str = [NSString stringWithFormat: @"%.3f", miterlimit];
+    [dict setObject: str forKey: @"miterlimit"];
+    str = [NSString stringWithFormat: @"%.3f", linewidth];
+    [dict setObject: str forKey: @"linewidth"];
+    str = [NSString stringWithFormat: @"%i", stroked];
+    [dict setObject: str forKey: @"stroked"];
+    str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
+        strokeColor[0], strokeColor[1], strokeColor[2], strokeColor[3]];
+    [dict setObject: str forKey: @"strokecolor"];
+    str = [NSString stringWithFormat: @"%.3f", strokeAlpha];
+    [dict setObject: str forKey: @"strokealpha"];
+    str = [NSString stringWithFormat: @"%i", filled];
+    [dict setObject: str forKey: @"filled"];
+    str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
+        fillColor[0], fillColor[1], fillColor[2], fillColor[3]];
+    [dict setObject: str forKey: @"fillcolor"];
+    str = [NSString stringWithFormat: @"%.3f", fillAlpha];
+    [dict setObject: str forKey: @"fillalpha"];
+    str = [NSString stringWithFormat: @"%i", visible];
+    [dict setObject: str forKey: @"visible"];
+    str = [NSString stringWithFormat: @"%i", locked];
+    [dict setObject: str forKey: @"locked"];
+
+    return dict;
+}
 
 - (void)setStartAtPoint:(NSPoint)aPoint
 {
