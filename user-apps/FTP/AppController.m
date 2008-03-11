@@ -369,7 +369,13 @@
 {
     [infoMessage setStringValue:name];
     [progBar setDoubleValue:0];
+#ifdef WIN32
+    DWORD msecs = timeGetTime();
+    beginTimeVal.tv_sec=msecs/1000;
+    beginTimeVal.tv_usec=(msecs - beginTimeVal.tv_sec*1000) * 1000; 
+#else
     gettimeofday(&beginTimeVal, NULL);
+#endif
     transferSize = size;
     // [mainWin displayIfNeeded];
     // [mainWin flushWindowIfNeeded];
@@ -383,7 +389,13 @@
     NSString *sizeStr;
     double   percent;
 
+#ifdef WIN32
+    DWORD msecs = timeGetTime();
+    currTimeVal.tv_sec=msecs/1000;
+    currTimeVal.tv_usec=(msecs - currTimeVal.tv_sec*1000) * 1000; 
+#else
     gettimeofday(&currTimeVal, NULL);
+#endif
 
     if ((currTimeVal.tv_sec - lastTimeVal.tv_sec) > 1.0)
     {
@@ -425,7 +437,13 @@
     NSString       *sizeStr;
     double         percent;
 
+#ifdef WIN32
+    DWORD msecs = timeGetTime();
+    currTimeVal.tv_sec=msecs/1000;
+    currTimeVal.tv_usec=(msecs - currTimeVal.tv_sec*1000) * 1000; 
+#else
     gettimeofday(&currTimeVal, NULL);
+#endif
     deltaT = (currTimeVal.tv_sec - beginTimeVal.tv_sec)+((double)(currTimeVal.tv_usec - beginTimeVal.tv_usec)/1000000);
     speed = (float)((double)bytes / deltaT);
     NSLog(@"Elapsed time: %f", (float)deltaT);

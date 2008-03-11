@@ -25,9 +25,18 @@
 
  */
 
+#include <string.h> /* for bcopy or memcpy */
+
+#ifdef WIN32
+#include <windows.h>
+#include <winsock.h>
+#define BCOPY(SRC, DST, LEN) memcpy(DST, SRC, LEN)
+#else
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#define BCOPY(SRC, DST, LEN) bcopy(SRC, DEST, LEN)
+#endif /* WIN32 */
 
 #include <stdio.h>
 

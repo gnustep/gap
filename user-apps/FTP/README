@@ -1,0 +1,6 @@
+NOTES
+
+To compile on windows, please att the following to your GNUmakefile.preamble
+
+ADDITIONAL_GUI_LIBS += -lwinmm
+
