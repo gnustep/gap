@@ -262,10 +262,10 @@
     fileElement   *fileEl;
     id            currEl;
 
+    pool = [[NSAutoreleasePool alloc] init];
     threadRunning = YES;
     [self setInterfaceEnabled:NO];
     parms = (fileTransmitParms *)parameters;
-    pool = [[NSAutoreleasePool alloc] init];
 
 
     // We should actually do a copy of the selection
@@ -292,10 +292,10 @@
     fileElement   *fileEl;
     id            currEl;
 
+    pool = [[NSAutoreleasePool alloc] init];
     threadRunning = YES;
     [self setInterfaceEnabled:NO];
     parms = (fileTransmitParms *)parameters;
-    pool = [[NSAutoreleasePool alloc] init];
 
 
     // We should actually do a copy of the selection
