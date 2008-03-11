@@ -14,4 +14,6 @@
     GRDrawableObject *object;
 }
 
+- (void)unselect;
+
 @end
