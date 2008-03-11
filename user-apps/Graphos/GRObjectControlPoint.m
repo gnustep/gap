@@ -14,7 +14,8 @@
 - (id)initAtPoint:(NSPoint)aPoint
 {
     self = [super init];
-    if(self) {
+    if(self)
+    {
         center = aPoint;
         centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
         isSelect = NO;
@@ -41,7 +42,8 @@
 
 - (void)select
 {
-    isSelect = YES;}
+    isSelect = YES;
+}
 
 - (void)unselect
 {

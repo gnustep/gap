@@ -376,7 +376,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i;
 
     // #### [myWin setSaved: NO];
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if([obj isKindOfClass: [GRBezierPath class]])
             if(![[obj editor] isdone])
@@ -459,7 +460,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     int i;
 
     // #### [myWin setSaved: NO];
-    for(i = 0; i < [objects count]; i++) {
+    for(i = 0; i < [objects count]; i++)
+    {
         obj = [objects objectAtIndex: i];
         if([obj isKindOfClass: [GRBox class]])
             if(![[obj editor] isdone])
@@ -480,7 +482,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         if(isneweditor)
         {
             [self addBox];
-//            bzpath = [objects objectAtIndex: edind];
+            box = [box objectAtIndex: edind];
             [[box editor] selectForEditing];
             [box setStartAtPoint: p];
             [self setNeedsDisplay: YES];
@@ -503,11 +505,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
        NSLog(@"is new editor");
             [self addBox];
             box = [objects objectAtIndex: edind];
-       NSLog(@"will set start selectForEditing");
             [[box editor] selectForEditing];
-       NSLog(@"will set start at point");
             [box setStartAtPoint: p];
-       NSLog(@"will set needs display");
             [self setNeedsDisplay: YES];
 /*	    
             [self addPath];
@@ -742,7 +741,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objs count]; i++)
     {
         obj = [objs objectAtIndex: i];
-        [obj selectAsGroup];
+        [[obj editor] selectAsGroup];
         [obj moveAddingCoordsOfPoint: p];
     }
     [self setNeedsDisplay: YES];
@@ -1173,7 +1172,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 obj = [[GRText alloc] initFromData: objdesc
                                             inView: self zoomFactor: zFactor];
             [objects addObject: obj];
-            [obj selectAsGroup];
+            [[obj editor] selectAsGroup];
             [obj release];
         }
         [self setNeedsDisplay: YES];
@@ -1214,7 +1213,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [doItAgain setSelector: selector];
 
     va_start(ap, target);
-    while(1) {
+    while(1)
+    {
         arg = va_arg(ap, id);
         if(!arg)
             break;

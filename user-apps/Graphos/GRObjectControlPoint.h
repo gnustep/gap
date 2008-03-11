@@ -22,6 +22,8 @@
 
 - (void)moveToPoint:(NSPoint)p;
 
+- (NSRect)centerRect;
+
 - (void)select;
 - (void)unselect;
 - (BOOL)isSelect;
