@@ -38,6 +38,7 @@
     GRDocView *docView;
     GRObjectEditor *editor;
     BOOL visible, locked;
+    float zmFactor;
 }
 
 /**
@@ -55,6 +56,8 @@
 - (void)setVisible:(BOOL)value;
 - (BOOL)locked;
 - (void)setLocked:(BOOL)value;
+
+- (void)setZoomFactor:(float)f;
 
 /**
  * Draws the object in the view. Called from GRDocView.

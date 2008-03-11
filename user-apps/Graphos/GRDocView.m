@@ -192,6 +192,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSDictionary *objdict;
     GRBezierPath *bzPath;
     GRText *gGRText;
+    GRBox *box;
     int i;
 
     if(!dict)
@@ -204,7 +205,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         objdict = [dict objectForKey: key];
         if(!objdict)
             return NO;
-        // ### fixme extend for other objects
+
         if([key rangeOfString: @"path"].length)
         {
             bzPath = [[GRBezierPath alloc] initFromData: objdict
@@ -212,12 +213,24 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             [objects addObject: bzPath];
             [bzPath release];
             edind = [objects count] -1;
-        } else
+	} else if([key rangeOfString: @"text"].length)
         {
             gGRText = [[GRText alloc] initFromData: objdict
                                             inView: self zoomFactor: zFactor];
             [objects addObject: gGRText];
             [gGRText release];
+        
+        } else if([key rangeOfString: @"box"].length)
+        {
+            box = [[GRBox alloc] initFromData: objdict
+                                            inView: self zoomFactor: zFactor];
+            [objects addObject: box];
+            [box release];
+        
+
+        } else
+        {
+	    [NSException raise:@"Unsupported object in file." format:@"Key: %@", key]; 
         }
     }
     return YES;

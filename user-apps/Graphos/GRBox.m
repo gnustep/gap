@@ -56,6 +56,60 @@
     return self;
 }
 
+- (id)initFromData:(NSDictionary *)description
+            inView:(GRDocView *)aView
+        zoomFactor:(float)zf
+{
+    NSMutableParagraphStyle *style;
+    NSDictionary *attrs;
+    NSString *str;
+    NSArray *linearr;
+
+    self = [super init];
+    if(self)
+    {
+        docView = aView;
+        editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
+        pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
+                          [[description objectForKey: @"posy"]  floatValue]);
+        size = NSMakeSize([[description objectForKey: @"width"]  floatValue],
+                          [[description objectForKey: @"height"]  floatValue]);
+
+        scalex = [[description objectForKey: @"scalex"] floatValue];
+        scaley = [[description objectForKey: @"scaley"] floatValue];
+        rotation = [[description objectForKey: @"rotation"] floatValue];
+
+        flatness = [[description objectForKey: @"flatness"] floatValue];
+        linejoin = [[description objectForKey: @"linejoin"] intValue];
+        linecap = [[description objectForKey: @"linecap"] intValue];
+        miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
+        linewidth = [[description objectForKey: @"linewidth"] floatValue];
+
+        stroked = (BOOL)[[description objectForKey: @"stroked"] intValue];
+        str = [description objectForKey: @"strokecolor"];
+        linearr = [str componentsSeparatedByString: @" "];
+        strokeColor[0] = [[linearr objectAtIndex: 0] floatValue];
+        strokeColor[1] = [[linearr objectAtIndex: 1] floatValue];
+        strokeColor[2] = [[linearr objectAtIndex: 2] floatValue];
+        strokeColor[3] = [[linearr objectAtIndex: 3] floatValue];
+        strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
+
+        filled = (BOOL)[[description objectForKey: @"filled"] intValue];
+        str = [description objectForKey: @"fillcolor"];
+        linearr = [str componentsSeparatedByString: @" "];
+        fillColor[0] = [[linearr objectAtIndex: 0] floatValue];
+        fillColor[1] = [[linearr objectAtIndex: 1] floatValue];
+        fillColor[2] = [[linearr objectAtIndex: 2] floatValue];
+        fillColor[3] = [[linearr objectAtIndex: 3] floatValue];
+        fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
+
+        visible = (BOOL)[[description objectForKey: @"visible"] intValue];
+        locked = (BOOL)[[description objectForKey: @"locked"] intValue];
+        [self setZoomFactor: zf];
+    }
+    return self;
+}
+
 - (NSDictionary *)objectDescription
 {
     NSMutableDictionary *dict;
@@ -277,6 +331,15 @@
     return (pointInRect(bounds, p));
 }
 
+
+- (void)setZoomFactor:(float)f
+{
+    [super setZoomFactor:f];
+    pos.x = pos.x / zmFactor * f;
+    pos.y = pos.y / zmFactor * f;
+    size = NSMakeSize(size.width / zmFactor * f, size.height / zmFactor * f);
+    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height /2);
+}
 
 - (void)draw
 {

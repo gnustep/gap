@@ -76,8 +76,14 @@
     locked = value;
 }
 
+- (void)setZoomFactor:(float)f
+{
+    zmFactor = f;
+}
+
 - (void)draw
 {
 }
+
 
 @end
