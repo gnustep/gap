@@ -30,18 +30,25 @@
  * the connection modes, default, active (port) and passive
  * can be set using the three setPort* methods
  */
- 
+
+
 #import "ftpclient.h"
 #import "AppController.h"
 #import "fileElement.h"
 
-#include <arpa/inet.h>  /* for inet_ntoa and similar */
-#include <netdb.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+
+#ifdef WIN32
+#else
+#include <arpa/inet.h>  /* for inet_ntoa and similar */
+#include <netdb.h>
+#define INVALID_SOCKET -1
+#endif /* WIN32 */
+
 
 
 #define MAX_CONTROL_BUFF 2048
@@ -625,13 +632,13 @@
         NSLog(@"Could not resolve %s", server);
         return ERR_COULDNT_RESOLVE;
     }
-    bcopy((char *)hostentPtr->h_addr, (char *)&remoteSockName.sin_addr, hostentPtr->h_length);
+    BCOPY((char *)hostentPtr->h_addr, (char *)&remoteSockName.sin_addr, hostentPtr->h_length);
     remoteSockName.sin_family = PF_INET;
     remoteSockName.sin_port = htons(port);
 
     tempStr = inet_ntoa(remoteSockName.sin_addr);
 
-    if ((controlSocket = socket(PF_INET, SOCK_STREAM, 0)) < 0)
+    if ((controlSocket = socket(PF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     {
         perror("socket failed: ");
         return ERR_SOCKET_FAIL;
@@ -745,7 +752,7 @@
         int            a1, a2, a3, a4;
         int            p1, p2;
         
-        if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+        if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
         {
             perror("socket in initDataConn");
             return -1;
@@ -822,7 +829,7 @@
     if (usesPorts == YES)
         dataSockName.sin_port = 0;
     
-    if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    if ((dataSocket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     {
         perror("socket in initDataConn");
         return -1;
