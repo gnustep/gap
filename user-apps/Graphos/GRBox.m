@@ -361,7 +361,6 @@
     [bzp appendBezierPathWithRect:bounds];
     if(stroked)
     {
-        NSLog(@"line width: %f", linewidth);
         [NSGraphicsContext saveGraphicsState];
         [bzp setLineJoinStyle:linejoin];
         [bzp setLineCapStyle:linecap];
@@ -397,7 +396,6 @@
     {
         NSRect r;
         
-        NSLog(@"is group selected");
         r = [startControlPoint centerRect];
         [[NSColor blackColor] set];
         NSRectFill(r);
@@ -410,11 +408,23 @@
     {
         NSRect r;
 
-        NSLog(@"is edit selected");
         r = [startControlPoint centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+        r = [endControlPoint centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+        
         if([startControlPoint isSelect])
         {
-            [[NSColor blackColor] set];
+            r = [startControlPoint innerRect];
+            [[NSColor whiteColor] set];
+            NSRectFill(r);
+        }
+        if([endControlPoint isSelect])
+        {
+            r = [endControlPoint innerRect];
+            [[NSColor whiteColor] set];
             NSRectFill(r);
         }
     }
