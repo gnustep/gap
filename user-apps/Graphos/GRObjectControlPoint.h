@@ -34,6 +34,7 @@
     BOOL isSelect;
     NSPoint center;
     NSRect centerRect;
+    NSRect innerRect;
 }
 
 - (id)initAtPoint:(NSPoint)aPoint;
@@ -41,6 +42,8 @@
 - (void)moveToPoint:(NSPoint)p;
 
 - (NSRect)centerRect;
+- (NSRect)innerRect;
+
 
 - (void)select;
 - (void)unselect;
