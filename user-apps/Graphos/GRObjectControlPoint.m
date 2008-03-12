@@ -45,6 +45,7 @@
     center.x = p.x;
     center.y = p.y;
     centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
+    innerRect = NSMakeRect(p.x-2, p.y-2, 4, 4);
 }
 
 - (NSPoint)center
@@ -55,6 +56,11 @@
 - (NSRect)centerRect;
 {
     return centerRect;
+}
+
+- (NSRect)innerRect;
+{
+    return innerRect;
 }
 
 - (void)select
