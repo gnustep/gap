@@ -554,11 +554,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             [[box editor] selectForEditing];
             [box setStartAtPoint: p];
             [self setNeedsDisplay: YES];
-/*	    
-            [self addPath];
-            bzpath = [objects objectAtIndex: edind];
-            [[bzpath editor] selectForEditing];
-            [bzpath addControlAtPoint: p]; */
         } else
         {
        NSLog(@"is old editor");
@@ -568,14 +563,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
             [box setEndAtPoint: p];
             [self setNeedsDisplay: YES];
-	    /*
-            bzpath = [objects objectAtIndex: edind];
-            [[bzpath editor] selectForEditing];
-            if(shiftclick)
-                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
-            [bzpath addControlAtPoint: p]; */
         }
-//        [self setNeedsDisplay: YES];
 
         do
         {
@@ -589,12 +577,9 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             [self setNeedsDisplay: YES];
 
             nextEvent = [[self window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+                        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
             [self verifyModifiersOfEvent: nextEvent];
         } while([nextEvent type] != NSLeftMouseUp);
-
-//        [box confirmNewCurve];
-        [self setNeedsDisplay: YES]; 
     }
 }
 
