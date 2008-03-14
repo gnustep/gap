@@ -24,7 +24,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import "GRDrawableObject.h"
+#import "GRPathObject.h"
 #import "GRBezierControlPoint.h"
 
 
@@ -35,14 +35,13 @@ typedef struct
     double t;
 } hitData;
 
-@interface GRBezierPath : GRDrawableObject
+@interface GRBezierPath : GRPathObject
 {
     NSBezierPath *myPath;
     float strokeColor[4], fillColor[4];
     float strokeAlpha, fillAlpha;
     float flatness, miterlimit, linewidth;
     int linejoin, linecap;
-    BOOL stroked, filled;
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;
     GRBezierControlPoint *currentPoint;
