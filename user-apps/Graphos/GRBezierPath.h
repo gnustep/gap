@@ -78,14 +78,10 @@ typedef struct
 - (void)setLineWidth:(float)width;
 - (float)lineWidth;
 
-- (void)setStroked:(BOOL)value;
-- (BOOL)isStroked;
 - (void)setStrokeColor:(float *)c;
 - (float *)strokeColor;
 - (void)setStrokeAlpha:(float)alpha;
 - (float)strokeAlpha;
-- (void)setFilled:(BOOL)value;
-- (BOOL)isFilled;
 - (void)setFillColor:(float *)c;
 - (float *)fillColor;
 - (void)setFillAlpha:(float)alpha;
