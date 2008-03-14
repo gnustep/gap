@@ -1,12 +1,12 @@
 /*
  Project: Graphos
- GRBox.h
+ GRPathObject.h
 
- Copyright (C) 2007-2008 GNUstep Application Project
+ Copyright (C) 2008 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
- Created: 2007-09-21
+ Created: 2008-03-14
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -23,31 +23,24 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/**
+ * PathObject is a superclass for every graphics object consisting of
+ * a fillable path. It is itself a subclass of GRDrawableObject.
+ * It is abstract and created to standardize behaviour, it is not instantiatable itself.
+ */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/NSBezierPath.h>
-#import "GRPathObject.h"
-#import "GRObjectControlPoint.h"
+#import "GRDrawableObject.h"
 
-@interface GRBox : GRPathObject
+@interface GRPathObject : GRDrawableObject
 {
-    NSBezierPath *myPath;
-    NSPoint pos;
-    NSSize size;
-    NSRect bounds;
-    GRObjectControlPoint *startControlPoint;
-    GRObjectControlPoint *endControlPoint;
-    float rotation;
-    float strokeColor[4], fillColor[4];
-    float strokeAlpha, fillAlpha;
-    float flatness, miterlimit, linewidth;
-    float scalex, scaley;
-    int linejoin, linecap;
+    BOOL stroked, filled;
 }
 
-- (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf;
-
+- (void)setFilled:(BOOL)value;
+- (BOOL)isFilled;
+- (void)setStroked:(BOOL)value;
+- (BOOL)isStroked;
 
 
 @end

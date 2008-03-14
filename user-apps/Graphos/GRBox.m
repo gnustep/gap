@@ -251,15 +251,6 @@
     return linewidth;
 }
 
-- (void)setStroked:(BOOL)value
-{
-    stroked = value;
-}
-
-- (BOOL)isStroked
-{
-    return stroked;
-}
 
 - (void)setStrokeColor:(float *)c
 {
@@ -282,16 +273,6 @@
 - (float)strokeAlpha
 {
     return strokeAlpha;
-}
-
-- (void)setFilled:(BOOL)value
-{
-    filled = value;
-}
-
-- (BOOL)isFilled
-{
-    return filled;
 }
 
 - (void)setFillColor:(float *)c

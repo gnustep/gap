@@ -748,16 +748,6 @@ static double k = 0.025;
     return linewidth;
 }
 
-- (void)setStroked:(BOOL)value
-{
-    stroked = value;
-}
-
-- (BOOL)isStroked
-{
-    return stroked;
-}
-
 - (void)setStrokeColor:(float *)c
 {
     int i;
@@ -779,16 +769,6 @@ static double k = 0.025;
 - (float)strokeAlpha
 {
     return strokeAlpha;
-}
-
-- (void)setFilled:(BOOL)value
-{
-    filled = value;
-}
-
-- (BOOL)isFilled
-{
-    return filled;
 }
 
 - (void)setFillColor:(float *)c
