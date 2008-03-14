@@ -72,7 +72,7 @@
 - (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
 - (void)addPath;
-- (void)addBoxAtPoint:(NSPoint)p;
+- (void)addBox;
 - (void)addTextAtPoint:(NSPoint)p;
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;
 - (NSArray *)updatePrintInfo: (NSPrintInfo *)pi;
