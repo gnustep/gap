@@ -19,7 +19,8 @@
 	GRBezierPath.m,
 	GRObjectEditor.m,
 	GRDrawableObject.m,
-	GRObjectControlPoint.m
+	GRObjectControlPoint.m,
+	GRPathObject.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -45,7 +46,8 @@
 	GRBezierPath.h,
 	GRObjectEditor.h,
 	GRDrawableObject.h,
-	GRObjectControlPoint.h
+	GRObjectControlPoint.h,
+	GRPathObject.h
     );
     IMAGES = (
 	bezier.tiff,
@@ -84,7 +86,7 @@
 	MainMenu.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-03-10 15:30:31 +0100";
+    LAST_EDITING = "2008-03-16 01:33:39 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -102,8 +104,8 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBrowser = "{x = -1.55079; y = -1.39468e-05; width = 761; height = 154}";
-	ProjectWindow = "63 -44 800 622 0 0  800 600 ";
+	ProjectBrowser = "{x = -1.55079; y = -1.39468e-05; width = 634.551; height = 154}";
+	ProjectWindow = "86 50 800 622 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
