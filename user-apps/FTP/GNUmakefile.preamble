@@ -20,4 +20,4 @@ ADDITIONAL_INCLUDE_DIRS +=
 # Additional library directories the linker should search
 ADDITIONAL_LIB_DIRS += 
 
-ADDITIONAL_GUI_LIBS += -lwinmm
+ADDITIONAL_GUI_LIBS +=
