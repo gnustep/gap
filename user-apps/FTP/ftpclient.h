@@ -27,7 +27,7 @@
 
 #include <string.h> /* for bcopy or memcpy */
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #include <winsock.h>
 #define BCOPY(SRC, DST, LEN) memcpy(DST, SRC, LEN)
