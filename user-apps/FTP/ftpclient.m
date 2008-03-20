@@ -42,11 +42,13 @@
 #include <unistd.h>
 #include <time.h>
 
-#ifdef WIN32
+#ifdef _WIN32
+#include <fcntl.h>
 #else
 #include <arpa/inet.h>  /* for inet_ntoa and similar */
 #include <netdb.h>
 #define INVALID_SOCKET -1
+#define closesocket close
 #endif /* WIN32 */
 
 
@@ -81,6 +83,14 @@
         default:
             [self setPortDefault];
     }
+#ifdef _WIN32
+    WORD wVersionRequested;
+    WSADATA wsaData;
+    wVersionRequested = MAKEWORD( 1, 1 );
+
+    WSAStartup(wVersionRequested, &wsaData);
+    NSLog(@"inited WinSock");
+#endif
     return self;
 }
 
@@ -142,6 +152,8 @@
  returned is the first numerical code
  NOTE: the parser is NOT robust in handling errors
  */
+#define NUMCODELEN 4
+
 - (int)readReply :(NSMutableArray **)result
 {
     char  buff[MAX_CONTROL_BUFF];
@@ -149,7 +161,7 @@
     int   ch;
     /* the first numerical code, in case of multi-line output it is followed
        by '-' in the first line and by ' ' in the last line */
-    char  numCodeStr[4];
+    char  numCodeStr[NUMCODELEN];
     int   numCode;
     int   startNumCode;
     char  separator;
@@ -163,15 +175,20 @@
     multiline = NO;
     *result = [NSMutableArray arrayWithCapacity:1];
 
-
+    // TODO: protect against numCodeStr overflow
     while (!(state == END))
     {
         ch = getc(controlInStream);
+	NSLog(@"read char: %c", ch);
+        if (ch == eof)
+            state = END;
+
         switch (state)
         {
             case N1:
                 buff[readBytes] = ch;
-                numCodeStr[readBytes] = ch;
+                if (readBytes < NUMCODELEN)
+                    numCodeStr[readBytes] = ch;
                 readBytes++;
                 if (ch == ' ') /* skip internal lines of multi-line */
                     state = CHARS;
@@ -231,6 +248,9 @@
                         state = N1;
                     }
                 }
+                break;
+            case END:
+                NSLog(@"EOF reached prematurely");
                 break;
             default:
                 NSLog(@"Duh, a case default in the readReply parser");
@@ -658,7 +678,14 @@
         return ERR_GESOCKNAME_FAIL;
     }
     
+#ifdef WIN32
+    int fhandle = _open_osfhandle( controlSocket, _O_RDONLY );
+    NSAssert(fhandle != -1, @"windowfs osfhandle is invalid");
+    controlInStream = fdopen(fhandle, "r");
+#else
     controlInStream = fdopen(controlSocket, "r");
+#endif
+    NSAssert(controlInStream != NULL, @"InStream file handle is NULL");
     [self readReply :&reply];
     [reply release];
     return 0;
@@ -930,7 +957,7 @@
 
 - (int)closeDataConn
 {
-    close (dataSocket);
+    closesocket(dataSocket);
     return 0;
 }
 
@@ -939,10 +966,10 @@
     fclose (dataStream);
     // a passive localSocket is just a copy of the dataSocket
     if (usesPassive == NO)
-        close(localSocket);
+        closesocket(localSocket);
     // apparently it is not true that fclose closes the underlying
     // descriptor, without closing dataSocket we got a bind error
-    // at the next conneciton attempt
+    // at the next connection attempt
     [self closeDataConn];
 }
 
