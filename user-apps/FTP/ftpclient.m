@@ -180,7 +180,7 @@
     {
         ch = getc(controlInStream);
 	NSLog(@"read char: %c", ch);
-        if (ch == eof)
+        if (ch == EOF)
             state = END;
 
         switch (state)
