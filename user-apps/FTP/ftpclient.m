@@ -77,17 +77,11 @@ int getChar(streamStruct* ss)
     if (ss->position == ss->len)
     {
         int read;
-        int retry;
 
-        retry = 1;
-        while (retry > 0 && retry < 3)
-        {
-
-        read = recv(ss->socket, &(ss->buffer), MAX_SOCK_BUFF, 0);
+        read = recv(ss->socket, ss->buffer, MAX_SOCK_BUFF, 0);
         NSLog(@"read bytes: %d", read);
         if (read > 0)
         {
-            retry = 0;
             ss->len = read;
             ss->position = 0;
         } else if (read == 0)
@@ -95,19 +89,15 @@ int getChar(streamStruct* ss)
             ss->len = 0;
             ss->position = 0;
             NSLog(@"Empty sock read");
-            retry++;
             ss->buffer[0] = EOF;
         } else
         {
-            retry = 0;
             ss->len = 0;
             ss->position = 0;
             NSLog(@"error sock read");
             perror("read");
             ss->buffer[0] = EOF;
         }
-        }
-        
     }
     result = ss->buffer[ss->position];
     ss->position++;
@@ -464,7 +454,7 @@ int getChar(streamStruct* ss)
     [controller setTransferBegin:fileName :fileSize];
     while (!gotFile)
     {
-        bytesRead = read(localSocket, buff, MAX_DATA_BUFF);
+        bytesRead = recv(localSocket, buff, MAX_DATA_BUFF, 0);
         if (bytesRead == 0)
             gotFile = YES;
         else if (bytesRead < 0)
