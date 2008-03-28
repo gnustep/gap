@@ -52,7 +52,6 @@
 #endif /* WIN32 */
 
 
-
 #define MAX_CONTROL_BUFF 2048
 #define MAX_DATA_BUFF 2048
 
@@ -61,6 +60,59 @@
 #else
 #define socklentype int
 #endif
+
+void initStream(streamStruct *ss, int socket)
+{
+    ss->socket = socket;
+    ss->position = 0;
+    ss->len = 0;
+    ss->buffer[0] = '\0';
+}
+
+int getChar(streamStruct* ss)
+{
+    int result;
+
+//    NSLog(@"getChar pos: %d len %d", ss->position, ss->len);
+    if (ss->position == ss->len)
+    {
+        int read;
+        int retry;
+
+        retry = 1;
+        while (retry > 0 && retry < 3)
+        {
+
+        read = recv(ss->socket, &(ss->buffer), MAX_SOCK_BUFF, 0);
+        NSLog(@"read bytes: %d", read);
+        if (read > 0)
+        {
+            retry = 0;
+            ss->len = read;
+            ss->position = 0;
+        } else if (read == 0)
+        {
+            ss->len = 0;
+            ss->position = 0;
+            NSLog(@"Empty sock read");
+            retry++;
+            ss->buffer[0] = EOF;
+        } else
+        {
+            retry = 0;
+            ss->len = 0;
+            ss->position = 0;
+            NSLog(@"error sock read");
+            perror("read");
+            ss->buffer[0] = EOF;
+        }
+        }
+        
+    }
+    result = ss->buffer[ss->position];
+    ss->position++;
+    return result;
+}
 
 @implementation FtpClient
 
@@ -178,8 +230,8 @@
     // TODO: protect against numCodeStr overflow
     while (!(state == END))
     {
-        ch = getc(controlInStream);
-	NSLog(@"read char: %c", ch);
+        ch = getChar(&ctrlStream);
+//	NSLog(@"read char: %c", ch);
         if (ch == EOF)
             state = END;
 
@@ -678,14 +730,8 @@
         return ERR_GESOCKNAME_FAIL;
     }
     
-#ifdef WIN32
-    int fhandle = _open_osfhandle( controlSocket, _O_RDONLY );
-    NSAssert(fhandle != -1, @"windowfs osfhandle is invalid");
-    controlInStream = fdopen(fhandle, "r");
-#else
-    controlInStream = fdopen(controlSocket, "r");
-#endif
-    NSAssert(controlInStream != NULL, @"InStream file handle is NULL");
+    initStream(&ctrlStream, controlSocket);
+    NSLog(@"the stream socket is %d", ctrlStream.socket);
     [self readReply :&reply];
     [reply release];
     return 0;
@@ -935,7 +981,7 @@
     fromLen = sizeof(from);
     if (usesPassive)
     {
-        dataStream = fdopen(dataSocket, "r");
+        initStream(&dataStream, dataSocket);
         localSocket = dataSocket;
     } else
     {
@@ -943,14 +989,14 @@
         {
             perror("accepting socket, initDataStream: ");
         }
-        dataStream = fdopen(localSocket, "r");
+        initStream(&dataStream, localSocket);
     }
-
+/*
     if (dataStream == NULL)
     {
         perror("data stream opening failed");
         return -1;
-    }
+    } */
     NSLog(@"data stream open");
     return 0;
 }
@@ -963,7 +1009,6 @@
 
 - (void)closeDataStream
 {
-    fclose (dataStream);
     // a passive localSocket is just a copy of the dataSocket
     if (usesPassive == NO)
         closesocket(localSocket);
@@ -1041,7 +1086,7 @@
     /* read the directory listing, each line being CR-LF terminated */
     state = READ;
     readBytes = 0;
-    while ((ch = getc(dataStream)) != EOF)
+    while ((ch = getChar(&dataStream)) != EOF)
     {
         if (ch == '\r')
             state = GOTR;
@@ -1059,13 +1104,13 @@
         } else
             buff[readBytes++] = ch;
     }
-    if (ferror(dataStream))
+/* FIXME ***********    if (ferror(dataStream))
     {
         perror("error in reading data stream: ");
     } else if (feof(dataStream))
     {
          fprintf(stderr, "feof\n");
-    }
+    } */
     [self closeDataStream];
     [self readReply:&reply];
     return [NSArray arrayWithArray:listArr];

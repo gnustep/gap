@@ -45,12 +45,23 @@
 #import "localclient.h"
 #import "fileElement.h"
 
+
+#define MAX_SOCK_BUFF 1024
+
 #define ERR_COULDNT_RESOLVE -1
 #define ERR_SOCKET_FAIL -2
 #define ERR_CONNECT_FAIL -3
 #define ERR_GESOCKNAME_FAIL -4
 
 typedef enum { defaultMode, portMode, passiveMode } connectionModes;
+
+typedef struct
+{
+    int socket;
+    int position;
+    int len;
+    char buffer[MAX_SOCK_BUFF];
+} streamStruct;
 
 @interface FtpClient : Client
 {
@@ -59,8 +70,8 @@ typedef enum { defaultMode, portMode, passiveMode } connectionModes;
     int                 dataSocket;
     int                 controlSocket;
     int                 localSocket;
-    FILE                *dataStream;
-    FILE                *controlInStream;
+    streamStruct        dataStream;
+    streamStruct        ctrlStream;
     struct sockaddr_in  remoteSockName;
     struct sockaddr_in  localSockName;
     struct sockaddr_in  dataSockName;
