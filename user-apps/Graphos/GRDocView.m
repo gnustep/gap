@@ -580,6 +580,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
             [self verifyModifiersOfEvent: nextEvent];
         } while([nextEvent type] != NSLeftMouseUp);
+        if (isneweditor)
+        {
+            [[box editor] unselect];
+            [[box editor] selectAsGroup];
+        }
     }
 }
 
