@@ -2,11 +2,11 @@
   ApplicationDescription = "A garma puzzle game";
   ApplicationName = LapisPuzzle;
   ApplicationIcon = LapisPuzzle;
-  ApplicationRelease = "0.9.2";
-  Authors = ("Banlu Kemiyatorn <object@gmail.com>");
-  Copyright = "Copyright \u00a9 2004 by Banlu Kemiyatorn <object@gmail.com>";
+  ApplicationRelease = "0.9.3";
+  Authors = ("GAP","Banlu Kemiyatorn <object@gmail.com>");
+  Copyright = "Copyright \u00a9 2004-2008 GNUstep Application Project";
   CopyrightDescription = "Released under the GNU General Public License 2.0 and later version";
-  URL = "http://maliwan.sourceforge.net/lapispuzzle.html";
-  FullVersionID = "0.9.2";
+  URL = "http://gap.nongnu.org/lapispuzzle/index.html";
+  FullVersionID = "0.9.3";
 }
 
