@@ -2056,7 +2056,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 
 -(BOOL) performKeyEquivalent: (NSEvent *)event
 {
-	return YES;
+	return NO;
 }
 
 - (id) currentUnit
@@ -2104,52 +2104,51 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 
 -(void) keyDown: (NSEvent *)event
 {
-//NSLog(@"%d",[event keyCode]);
-	switch ([event keyCode])
+//NSLog(@"%d %@",[event keyCode], [event characters]);
+
+	switch ([[event characters] characterAtIndex:0])
 	{
-		case 38:
+		case 'a':
 			_useAI = !_useAI;
 			break;
-		case 59:
+		case ',':
 			[self processDir:LP_MOVE_CW];
 			break;
-		case 60:
+		case '.':
 			[self processDir:LP_MOVE_CCW];
 			break;
-		case 65:
+		case ' ':
 			[self processDir:LP_MOVE_FALL];
 			break;
-		case 98:
+		case NSUpArrowFunctionKey:
 			[self processDir:LP_MOVE_CCW];
 			break;
-		case 100:
+		case NSLeftArrowFunctionKey:
 			[self processDir:LP_MOVE_LEFT];
 			break;
-		case 102:
+		case NSRightArrowFunctionKey:
 			[self processDir:LP_MOVE_RIGHT];
 			break;
-		case 104:
+		case NSDownArrowFunctionKey:
 			[self processDir:LP_MOVE_DOWN];
 			break;
-		case 40:
+		case 'd':
 			[__owner op:self processDir:LP_MOVE_CW];
 			break;
-		case 41:
+		case 'f':
 			[__owner op:self processDir:LP_MOVE_CCW];
 			break;
-		case 53:
+		case 'x':
 	   		[__owner op:self processDir:LP_MOVE_LEFT];
 			break;
-		case 55:
+		case 'v':
 	   		[__owner op:self processDir:LP_MOVE_RIGHT];
 			break;
-		case 54:
+		case 'c':
 			[__owner op:self processDir:LP_MOVE_DOWN];
 			break;
-			/*
 		default:
-			NSLog(@"%d",[event keyCode]);
-			*/
+			break;
 	}
 	[self setNeedsDisplay:YES];
 }
