@@ -1,7 +1,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = LapisPuzzle
-VERSION = 0.9.2
+VERSION = 0.9.3
 APP_NAME = LapisPuzzle
 #agendum-client
 
