@@ -162,10 +162,14 @@
 				F539B1EE08A2D91C01A8012F,
 				85CB5DF20D72C0F000A80101,
 				85CB5DF30D72C0F000A80101,
+				85B1DAAA0D8B2E2400A80103,
+				85B1DAAB0D8B2E2400A80103,
 				85CB5DF60D72C8D000A80101,
 				85CB5DF70D72C8D000A80101,
 				85D2B0910D701D4E00A80101,
 				85D2B0920D701D4E00A80101,
+				853877F40DA0375200A80103,
+				853877F50DA0375200A80103,
 				F539B1F708A3570901A8012F,
 				F539B1F808A3570901A8012F,
 				F539B1FB08A3578301A8012F,
@@ -420,6 +424,8 @@
 				85D2B0930D701D4E00A80101,
 				85CB5DF40D72C0F000A80101,
 				85CB5DF80D72C8D000A80101,
+				85B1DAAC0D8B2E2400A80103,
+				853877F60DA0375200A80103,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +497,8 @@
 				85D2B0940D701D4E00A80101,
 				85CB5DF50D72C0F000A80101,
 				85CB5DF90D72C8D000A80101,
+				85B1DAAD0D8B2E2400A80103,
+				853877F70DA0375200A80103,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +566,30 @@
 //852
 //853
 //854
+		853877F40DA0375200A80103 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRPathEditor.h;
+			refType = 4;
+		};
+		853877F50DA0375200A80103 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRPathEditor.m;
+			refType = 4;
+		};
+		853877F60DA0375200A80103 = {
+			fileRef = 853877F40DA0375200A80103;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		853877F70DA0375200A80103 = {
+			fileRef = 853877F50DA0375200A80103;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		85AEB2950CA43E7A00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -578,6 +610,30 @@
 		};
 		85AEB2980CA43E7A00A80101 = {
 			fileRef = 85AEB2960CA43E7A00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85B1DAAA0D8B2E2400A80103 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRPathObject.h;
+			refType = 4;
+		};
+		85B1DAAB0D8B2E2400A80103 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRPathObject.m;
+			refType = 4;
+		};
+		85B1DAAC0D8B2E2400A80103 = {
+			fileRef = 85B1DAAA0D8B2E2400A80103;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85B1DAAD0D8B2E2400A80103 = {
+			fileRef = 85B1DAAB0D8B2E2400A80103;
 			isa = PBXBuildFile;
 			settings = {
 			};
