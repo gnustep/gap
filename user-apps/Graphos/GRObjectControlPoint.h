@@ -41,6 +41,7 @@
 
 - (void)moveToPoint:(NSPoint)p;
 
+- (NSPoint)center;
 - (NSRect)centerRect;
 - (NSRect)innerRect;
 
