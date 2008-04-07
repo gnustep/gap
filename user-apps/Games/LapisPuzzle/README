@@ -6,3 +6,8 @@ click to select view first.
 I know this is ugly.
 A proper preference panel will be added later,
 I just need to release it today.
+
+
+BUILD NOTES:
+
+On Windows, do add -liberty to ADDITIONAL_GUI_LIBS so that random and srandom implementations get linked.
