@@ -343,19 +343,20 @@ static double k = 0.025;
     if([prevpoint isActiveHandle])
     {
         handle = [prevpoint bzHandle];
-        [myPath curveToPoint: [currentPoint center]
+        [myPath curveToPoint: [(GRBezierControlPoint *)currentPoint center]
                controlPoint1: handle.firstHandle
-               controlPoint2: [currentPoint center]];
+               controlPoint2: [(GRBezierControlPoint *)currentPoint center]];
         [self confirmNewCurve];
         return;
     }
 
-    if([self isPoint: currentPoint onPoint: mtopoint])
+    if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: mtopoint])
     {
         [currentPoint moveToPoint: [mtopoint center]];
         [myPath lineToPoint: [mtopoint center]];
         [editor setIsDone:YES];
-    } else {
+    } else
+    {
         [myPath lineToPoint: aPoint];
     }
 }
@@ -368,7 +369,7 @@ static double k = 0.025;
     NSPoint pts[3];
 
     mtopoint = [controlPoints objectAtIndex: 0];
-    if([self isPoint: currentPoint onPoint: mtopoint] && [controlPoints count] != 1)
+    if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: mtopoint] && [controlPoints count] != 1)
     {
         if(!calculatingHandles)
         {
@@ -391,24 +392,25 @@ static double k = 0.025;
         }
     }
 
-    [currentPoint calculateBezierHandles: handlePos];
+    [(GRBezierControlPoint *)currentPoint calculateBezierHandles: handlePos];
     if([controlPoints count] == 1)
         return;
 
     handle1 = [[controlPoints objectAtIndex: [controlPoints count] -2] bzHandle];
-    handle2 = [currentPoint bzHandle];
+    handle2 = [(GRBezierControlPoint *)currentPoint bzHandle];
 
-    if(calculatingHandles) {
+    if(calculatingHandles)
+    {
         pts[0].x = handle1.firstHandle.x;
         pts[0].y = handle1.firstHandle.y;
         pts[1].x = handle2.secondHandle.x;
         pts[1].y = handle2.secondHandle.y;
-        pts[2].x = [currentPoint center].x;
-        pts[2].y = [currentPoint center].y;
+        pts[2].x = [(GRBezierControlPoint *)currentPoint center].x;
+        pts[2].y = [(GRBezierControlPoint *)currentPoint center].y;
         [myPath setAssociatedPoints: pts atIndex: [controlPoints count] -1];
     } else
     {
-        [myPath curveToPoint: [currentPoint center]
+        [myPath curveToPoint: [(GRBezierControlPoint *)currentPoint center]
                controlPoint1: handle1.firstHandle
                controlPoint2: handle2.secondHandle];
         calculatingHandles = YES;
@@ -492,12 +494,12 @@ static double k = 0.025;
     newpp[3].y = s * newpp[2].y + hitdata.t * newpp[4].y;
 
 
-    printf("%i %i - %i %i\n", (int)[currentPoint center].x,
-           (int)[currentPoint center].y, (int)newpp[3].x, (int)newpp[3].y);
+    printf("%i %i - %i %i\n", (int)[(GRBezierControlPoint *)currentPoint center].x,
+           (int)[(GRBezierControlPoint *)currentPoint center].y, (int)newpp[3].x, (int)newpp[3].y);
 
 
     [prevcp calculateBezierHandles: newpp[1]];
-    [currentPoint calculateBezierHandles: newpp[4]];
+    [(GRBezierControlPoint *)currentPoint calculateBezierHandles: newpp[4]];
     //	[nextcp calculateBezierHandles: newpp[5]];
 
     [self remakePath];
@@ -531,7 +533,7 @@ static double k = 0.025;
     calculatingHandles = NO;
     if([controlPoints count] == 1)
         return;
-    if([self isPoint: currentPoint onPoint: [controlPoints objectAtIndex: 0]])
+    if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
         [editor setIsDone:YES];
 }
 
@@ -671,15 +673,7 @@ static double k = 0.025;
     return (GRBezierControlPoint *)[controlPoints objectAtIndex: 0];
 }
 
-- (void)setCurrentPoint:(GRBezierControlPoint *)aPoint
-{
-    currentPoint = aPoint;
-}
 
-- (GRBezierControlPoint *)currentPoint
-{
-    return currentPoint;
-}
 
 - (GRBezierControlPoint *)lastPoint
 {
