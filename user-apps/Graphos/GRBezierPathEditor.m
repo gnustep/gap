@@ -169,7 +169,7 @@
             pp = [[object view] convertPoint: pp fromView: nil];
             if([[object view] shiftclick])
             {
-                c = [[(GRBezierPath *)object currentPoint] center];
+                c = [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] center];
                 pp = pointApplyingCostrainerToPoint(pp, c);
             }
 
