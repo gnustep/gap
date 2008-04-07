@@ -30,5 +30,14 @@
 {
     return stroked;
 }
+- (void)setCurrentPoint:(GRObjectControlPoint *)aPoint
+{
+    currentPoint = aPoint;
+}
+
+- (GRObjectControlPoint *)currentPoint
+{
+    return currentPoint;
+}
 
 @end
