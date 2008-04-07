@@ -108,6 +108,102 @@
     return editSelected;
 }
 
+- (NSPoint)moveControlAtPoint:(NSPoint)p
+{
+    GRObjectControlPoint *cp, *pntonpnt;
+    NSEvent *event;
+    NSPoint pp;
+    BOOL found = NO;
+    int i;
+
+    cp = [object startControlPoint];
+    if (pointInRect([cp centerRect], p))
+    {
+        [self selectForEditing];
+        [object setCurrentPoint:cp];
+        [cp select];
+        found =  YES;
+    }
+    cp = [object endControlPoint];
+    if (pointInRect([cp centerRect], p))
+    {
+        [self selectForEditing];
+        [object setCurrentPoint:cp];
+        [cp select];
+        found =  YES;
+    }
+    
+    if(!found)
+        return p;
+
+    event = [[[object view] window] nextEventMatchingMask:
+        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+    if([event type] == NSLeftMouseDragged)
+    {
+        [[object view] verifyModifiersOfEvent: event];
+        do
+        {
+            pp = [event locationInWindow];
+            pp = [[object view] convertPoint: pp fromView: nil];
+//            if([[object view] shiftclick])
+//                pp = pointApplyingCostrainerToPoint(pp, p);
+
+/*            pntonpnt = [object pointOnPoint: [object currentPoint]];
+            if(pntonpnt)
+            {
+                if([object currentPoint] == [object firstPoint] || pntonpnt == [object firstPoint])
+                    [pntonpnt moveToPoint: pp];
+            } */
+            [[object currentPoint] moveToPoint: pp];
+            [object remakePath];
+
+            [[object view] setNeedsDisplay: YES];
+            event = [[[object view] window] nextEventMatchingMask:
+                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+            [[object view] verifyModifiersOfEvent: event];
+        } while([event type] != NSLeftMouseUp);
+    }
+
+    return pp;
+}
+
+- (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
+{
+    GRObjectControlPoint *cp, *pntonpnt;
+    BOOL found = NO;
+    int i;
+
+    cp = [object startControlPoint];
+    if (pointInRect([cp centerRect], oldp))
+    {
+        [self selectForEditing];//
+        [object setCurrentPoint:cp];
+        [cp select];
+        found =  YES;
+    }
+    cp = [object endControlPoint];
+    if (pointInRect([cp centerRect], oldp))
+    {
+        [self selectForEditing];
+        [object setCurrentPoint:cp];
+        [cp select];
+        found =  YES;
+    }
+    
+    if(!found)
+        return;
+/*
+    pntonpnt = [object pointOnPoint: [object currentPoint]];
+    if(pntonpnt)
+    {
+        if([object currentPoint] == [object firstPoint] || pntonpnt == [object firstPoint])
+            [pntonpnt moveToPoint: newp];
+    }*/
+    [[object currentPoint] moveToPoint: newp];
+//    [object remakePath];
+    [[object view] setNeedsDisplay: YES];
+}
+
 
 - (void)draw
 {
