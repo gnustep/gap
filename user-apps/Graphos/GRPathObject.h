@@ -31,16 +31,19 @@
 
 #import <Foundation/Foundation.h>
 #import "GRDrawableObject.h"
+#import "GRObjectControlPoint.h"
 
 @interface GRPathObject : GRDrawableObject
 {
     BOOL stroked, filled;
+    GRObjectControlPoint *currentPoint;
 }
 
 - (void)setFilled:(BOOL)value;
 - (BOOL)isFilled;
 - (void)setStroked:(BOOL)value;
 - (BOOL)isStroked;
-
+- (void)setCurrentPoint:(GRObjectControlPoint *)aPoint;
+- (GRObjectControlPoint *)currentPoint;
 
 @end
