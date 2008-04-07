@@ -201,6 +201,13 @@
     [endControlPoint select];
 }
 
+- (void)remakePath
+{
+    [self setStartAtPoint:[startControlPoint center]];
+    [self setEndAtPoint:[endControlPoint center]];
+    [editor setIsDone:YES];
+}
+
 - (void)setFlat:(float)flat
 {
     flatness = flat;
@@ -311,6 +318,25 @@
 - (BOOL)pointInBounds:(NSPoint)p
 {
     return (pointInRect(bounds, p));
+}
+
+- (BOOL)onControlPoint:(NSPoint)p
+{
+    if (pointInRect([startControlPoint centerRect], p))
+        return YES;
+    if (pointInRect([endControlPoint centerRect], p))
+        return YES;
+    return NO;
+}
+
+- (GRObjectControlPoint *) startControlPoint
+{
+    return startControlPoint;
+}
+
+- (GRObjectControlPoint *) endControlPoint
+{
+    return endControlPoint;
 }
 
 
