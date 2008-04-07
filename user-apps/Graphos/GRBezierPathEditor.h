@@ -26,7 +26,7 @@
 #import <AppKit/AppKit.h>
 #import "GRBezierControlPoint.h"
 #import "GRBezierPath.h"
-#import "GRObjectEditor.h"
+#import "GRPathEditor.h"
 
 @class GRDocView;
 
@@ -56,8 +56,7 @@
 - (void)setIsValid:(BOOL)value;
 - (BOOL)isValid;
 
-- (NSPoint)moveControlAtPoint:(NSPoint)p;
-- (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
+
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p;
 - (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
 
