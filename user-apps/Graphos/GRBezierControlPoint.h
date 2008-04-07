@@ -24,6 +24,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "GRObjectControlPoint.h"
 
 typedef struct
 {
@@ -37,12 +38,10 @@ typedef struct
 
 @class GRBezierPath;
 
-@interface GRBezierControlPoint : NSObject
+@interface GRBezierControlPoint : GRObjectControlPoint
 {
     GRBezierPath *path;
     GRBezierHandle bzHandle;
-    BOOL isActiveHandle;
-    BOOL isSelect;
     float zmFactor;
 }
 
@@ -57,8 +56,6 @@ typedef struct
 - (void)setZoomFactor:(float)f;
 
 - (GRBezierHandle)bzHandle;
-- (NSPoint)center;
-- (NSRect)centerRect;
 
 - (void)select;
 - (void)unselect;
