@@ -44,7 +44,6 @@ typedef struct
     int linejoin, linecap;
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;
-    GRBezierControlPoint *currentPoint;
 }
 
 - (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;
@@ -61,8 +60,6 @@ typedef struct
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 
 - (NSMutableArray *)controlPoints;
-- (void)setCurrentPoint:(GRBezierControlPoint *)aPoint;
-- (GRBezierControlPoint *)currentPoint;
 - (BOOL)isPoint:(GRBezierControlPoint *)cp1 onPoint:(GRBezierControlPoint *)cp2;
 - (GRBezierControlPoint *)pointOnPoint:(GRBezierControlPoint *)aPoint;
 - (void)confirmNewCurve;
@@ -101,7 +98,6 @@ typedef struct
 - (BOOL)onPathBorder:(NSPoint)p;
 
 - (GRBezierControlPoint *)firstPoint;
-- (GRBezierControlPoint *)currentPoint;
 - (GRBezierControlPoint *)lastPoint;
 
 - (int)indexOfPoint:(GRBezierControlPoint *)aPoint;
