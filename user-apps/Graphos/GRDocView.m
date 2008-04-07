@@ -641,7 +641,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             if([obj onPathBorder: p])
             {
                 [[obj editor] selectForEditing];
-                [self setNeedsDisplay: YES];
                 [self moveControlPointOfEditor: [obj editor] toPoint: p];
                 return;
             } else
@@ -649,6 +648,17 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 if([self moveBezierHandleOfEditor: [obj editor] toPoint: p])
                     return;
                 else
+                    [[obj editor] unselect];
+            }
+        } else if ([obj isKindOfClass: [GRBox class]])
+        {
+            if([obj onControlPoint: p])
+            {
+                [[obj editor] selectForEditing];
+                [self moveControlPointOfEditor: [obj editor] toPoint: p];
+                return;
+            } else
+            {
                     [[obj editor] unselect];
             }
         } else
@@ -784,7 +794,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     // ##### [myWin setSaved: NO];
 }
 
-- (BOOL)moveControlPointOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos
+- (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos
 {
     NSPoint p;
 
