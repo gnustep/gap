@@ -27,6 +27,10 @@
 #import <Foundation/Foundation.h>
 #import "GRDrawableObject.h"
 
+/**
+ * This abstract class is the companion of the GRDrawableObject class.
+ * It defines the most generic behaviour of an object editor.
+ */
 @interface GRObjectEditor : NSObject
 {
     GRDrawableObject *object;

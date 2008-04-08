@@ -27,6 +27,7 @@
  * PathObject is a superclass for every graphics object consisting of
  * a fillable path. It is itself a subclass of GRDrawableObject.
  * It is abstract and created to standardize behaviour, it is not instantiatable itself.
+ * Instances are like BezierPaths and Boxes.
  */
 
 #import <Foundation/Foundation.h>
@@ -39,11 +40,22 @@
     GRObjectControlPoint *currentPoint;
 }
 
+/** sets if the object is drawn filled */
 - (void)setFilled:(BOOL)value;
+
+/** returns if the object is drawn filled */
 - (BOOL)isFilled;
+
+/** sets if the object border is drawn */
 - (void)setStroked:(BOOL)value;
+
+/** returns if the object border is drawn */
 - (BOOL)isStroked;
+
+/** sets the current selected control point */
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint;
+
+/** returns the currently selected control point */
 - (GRObjectControlPoint *)currentPoint;
 
 @end

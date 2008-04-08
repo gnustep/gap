@@ -25,6 +25,10 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+/**
+ * Toolbox
+ */
+
 @interface GRToolButton : NSButton
 {
     int tooltype;
