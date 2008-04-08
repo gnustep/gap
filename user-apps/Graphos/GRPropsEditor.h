@@ -26,6 +26,9 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+/**
+ * Object properties editor
+ */
 @class GRDocView;
 
 @interface GRPropsEditor : NSView

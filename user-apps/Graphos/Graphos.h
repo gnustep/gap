@@ -26,7 +26,11 @@
 #import <AppKit/AppKit.h>
 #import "GRTools.h"
 
-typedef enum {
+/**
+ * tool types structure
+ */
+typedef enum
+{
     blackarrowtool,
     whitearrowtool,
     beziertool,

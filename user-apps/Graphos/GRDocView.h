@@ -71,10 +71,27 @@
 - (NSDictionary *) objectDictionary;
 - (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
+
+/**
+ * add a GRBezierPath
+ */
 - (void)addPath;
+
+/**
+ * add a GRBox
+ */
 - (void)addBox;
+
+/**
+ * add a GRText at the specified point
+ */
 - (void)addTextAtPoint:(NSPoint)p;
+
+/**
+ * make a copy of the objects invoking the object's duplicate method
+ */
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;
+
 - (NSArray *)updatePrintInfo: (NSPrintInfo *)pi;
 
 - (void)deleteSelectedObjects;

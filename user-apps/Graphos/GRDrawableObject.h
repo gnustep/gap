@@ -47,16 +47,30 @@
  */
 - (NSDictionary *)objectDescription;
 
+/**
+ * Each object is able to clone itself with this method.
+ * Needs to be subclassed.
+ */
 - (GRDrawableObject *)duplicate;
 
 - (GRDocView *)view;
 - (GRObjectEditor *)editor;
 
+/** returns if the object is currently visible */
 - (BOOL)visible;
+
+/** sets if the object is visible */
 - (void)setVisible:(BOOL)value;
+
+/** returns if the object is locked */
 - (BOOL)locked;
+
+/** locks an object */
 - (void)setLocked:(BOOL)value;
 
+/** the zoom factor is used to draw an object in the proper size
+ * when zooming in our out the view
+ */
 - (void)setZoomFactor:(float)f;
 
 /**
