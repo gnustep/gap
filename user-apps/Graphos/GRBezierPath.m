@@ -874,58 +874,7 @@ static double k = 0.025;
             NSRectFill(r);
         }
     }
-// shall be done from the editor ??
-    if([editor isEditSelected])
-    {
-        for(i = 0; i < [controlPoints count]; i++)
-        {
-            cp = [controlPoints objectAtIndex: i];
-            r = [cp centerRect];
-            if([cp isSelect]) {
-                [[NSColor blackColor] set];
-                NSRectFill(r);
-                if([cp isActiveHandle]) {
-                    bzhandle = [cp bzHandle];
-                    [[NSColor blackColor] set];
-                    NSRectFill(bzhandle.firstHandleRect);
-                    [bzp moveToPoint:NSMakePoint(bzhandle.firstHandle.x, bzhandle.firstHandle.y)];
-                    [bzp lineToPoint:NSMakePoint(bzhandle.center.x, bzhandle.center.y)];
-                    [bzp lineToPoint:NSMakePoint(bzhandle.secondHandle.x, bzhandle.secondHandle.y)];
-                    [bzp stroke];
-                    NSRectFill(bzhandle.secondHandleRect);
-                }
-            } else
-            {
-                [[NSColor whiteColor] set];
-                NSRectFill(r);
-
-                ponpoint = [self pointOnPoint: cp];
-                if(ponpoint)
-                {
-                    if([ponpoint isSelect])
-                    {
-                        r = [ponpoint centerRect];
-                        [[NSColor blackColor] set];
-                        NSRectFill(r);
-                        if([ponpoint isActiveHandle])
-                        {
-                            bzhandle = [ponpoint bzHandle];
-                            [[NSColor blackColor] set];
-                            NSRectFill(bzhandle.firstHandleRect);
-                            [bzp moveToPoint:NSMakePoint(bzhandle.firstHandle.x, bzhandle.firstHandle.y)];
-                            [bzp lineToPoint:NSMakePoint(bzhandle.center.x, bzhandle.center.y)];
-                            [bzp lineToPoint:NSMakePoint(bzhandle.secondHandle.x, bzhandle.secondHandle.y)];
-                            [bzp stroke];
-                            NSRectFill(bzhandle.secondHandleRect);
-                        }
-                    }
-                }
-
-            }
-            [[NSColor blackColor] set];
-            NSFrameRect(r);
-        }
-    }
+    [editor draw];
 }
 
 @end

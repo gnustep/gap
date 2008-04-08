@@ -207,6 +207,51 @@
 
 - (void)draw
 {
+    NSBezierPath *bzp;
+
+    if(![object visible])
+        return;
+
+    bzp = [NSBezierPath bezierPath];
+    
+    [bzp setLineWidth:1];
+
+    if([self isGroupSelected])
+    {
+        NSRect r;
+
+        r = [[object startControlPoint] centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+        r = [[object endControlPoint] centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+    }
+
+    if([self isEditSelected])
+    {
+        NSRect r;
+
+        r = [[object startControlPoint] centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+        r = [[object endControlPoint] centerRect];
+        [[NSColor blackColor] set];
+        NSRectFill(r);
+
+        if([[object startControlPoint] isSelect])
+        {
+            r = [[object startControlPoint] innerRect];
+            [[NSColor whiteColor] set];
+            NSRectFill(r);
+        }
+        if([[object endControlPoint] isSelect])
+        {
+            r = [[object endControlPoint] innerRect];
+            [[NSColor whiteColor] set];
+            NSRectFill(r);
+        }
+    }    
 }
 
 @end
