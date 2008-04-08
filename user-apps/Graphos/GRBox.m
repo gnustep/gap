@@ -396,45 +396,7 @@
         [bzp fill];
         [NSGraphicsContext restoreGraphicsState];
     }
-
-    [bzp setLineWidth:1];
-
-    if([editor isGroupSelected])
-    {
-        NSRect r;
-        
-        r = [startControlPoint centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        r = [endControlPoint centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-    }
-    
-    if([editor isEditSelected])
-    {
-        NSRect r;
-
-        r = [startControlPoint centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        r = [endControlPoint centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        
-        if([startControlPoint isSelect])
-        {
-            r = [startControlPoint innerRect];
-            [[NSColor whiteColor] set];
-            NSRectFill(r);
-        }
-        if([endControlPoint isSelect])
-        {
-            r = [endControlPoint innerRect];
-            [[NSColor whiteColor] set];
-            NSRectFill(r);
-        }
-    }
+    [editor draw];
 }
 
 
