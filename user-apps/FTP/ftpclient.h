@@ -53,8 +53,10 @@
 #define ERR_CONNECT_FAIL -3
 #define ERR_GESOCKNAME_FAIL -4
 
+/** connection types: PASV or PORT */
 typedef enum { defaultMode, portMode, passiveMode } connectionModes;
 
+/** private structure to use a socket like it was a file stream */
 typedef struct
 {
     int socket;
@@ -86,7 +88,9 @@ typedef struct
 
 - (void)logIt:(NSString *)str;
 
+/** reads a reply from the control socket */
 - (int)readReply :(NSMutableArray **)result;
+
 - (int)writeLine:(char *)line;
 - (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog;
 - (void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;

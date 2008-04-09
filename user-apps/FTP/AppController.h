@@ -97,6 +97,7 @@
 - (void)setTransferProgress:(unsigned long)bytes;
 - (void)setTransferEnd:(unsigned long)bytes;
 
+/** closes the open connections and quits teh session with the remote server */
 - (IBAction)disconnect:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;
