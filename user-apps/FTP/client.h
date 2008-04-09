@@ -28,7 +28,13 @@
 
 #import "fileElement.h"
 
-
+/**
+ * Clas that represents an object to access files, be them remote or local.
+ * It must be subclassed to be useful. This object holds porperties genrealy
+ * valid for both local and remote instances as the working directory and the
+ * home directory of the user. It also defines common methods for creating,
+ * changing and deleting directories.
+ */
 @interface Client : NSObject
 {
     id       controller;
@@ -38,14 +44,22 @@
 
 - (id)init;
 - (id)initWithController:(id)cont;
+
+/** returns the current working directory */
 - (NSString *)workingDir;
+
 - (void)setWorkingDirWithCString:(char *)dir;
 - (void)setWorkingDir:(NSString *)dir;
 - (void)changeWorkingDir:(NSString *)dir;
 - (BOOL)createNewDir:(NSString *)dir;
 - (void)deleteFile:(fileElement *)file beingAt:(int)depth;
+
 - (NSArray *)workDirSplit;
+
+/** returns an array with the directory listing */
 - (NSArray *)dirContents;
+
+/** returns the current home directory */
 - (NSString *)homeDir;
 @end
 
