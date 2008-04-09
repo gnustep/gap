@@ -247,8 +247,13 @@ static float _grid_height;
 
 - (void) draw
 {
+	int i;
+	NSColor *tcolor;
+	NSMutableAttributedString *str;
+	NSSize strSize;
 	NSSize gz = [__owner gridSize];
 	float border = gz.width/6;
+
 	[super draw];
 
 	PSsetrgbcolor(0.7,0.7,0.7);
@@ -272,7 +277,6 @@ static float _grid_height;
 	PSlineto((_x+_columns) * gz.width, (_y+_rows) * gz.height);
 	PSfill();
 
-	int i;
 	for (i = 0; i <_rows; i+=2)
 	{
 		PSgsave();
@@ -321,9 +325,6 @@ static float _grid_height;
 
 
 	/****/
-	NSColor *tcolor;
-	NSMutableAttributedString *str;
-	NSSize strSize;
 
 	PSsetrgbcolor(0,0,0);
 	PSsetalpha(0.8);
@@ -1294,10 +1295,10 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	{
 		if (__currentUnit)
 		{
-			_lockControl = YES;
 			/* replace timer stone with jewel */
-
 			NSMutableArray *ar;
+
+			_lockControl = YES;
 			ar = [NSMutableArray array];
 			en = [_units objectEnumerator];
 			while ((unit = [en nextObject]))
@@ -1439,6 +1440,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	id en;
 	LPJewelUnit* unit;
 	int i,j;
+	BOOL merge;
 
 
 	id m1,m2,m3;
@@ -1483,7 +1485,6 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 		}
 	}
 
-	BOOL merge;
 	do
 	{
 		merge = NO;
@@ -1497,6 +1498,8 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 
 			if (unit_rows >= 2)
 			{
+				NSMutableArray *ar = [NSMutableArray array];
+
 				color = [unit unitColor];
 				unit_x = [unit X];
 				unit_y = [unit Y];
@@ -1529,7 +1532,6 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 
 
 				/* check right side */
-				NSMutableArray *ar = [NSMutableArray array];
 				for (i = 0; i < unit_rows; i++)
 				{
 					m1 = [self getUnitAtX:unit_x + unit_columns
@@ -1542,8 +1544,9 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 				}
 				if ([ar count] == unit_rows)
 				{
-					merge = YES;
 					id en2, unit2;
+
+					merge = YES;
 					en2 = [ar objectEnumerator];
 					while ((unit2 = [en2 nextObject]))
 					{
@@ -1567,8 +1570,9 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 				}
 				if ([ar count] == unit_rows)
 				{
-					merge = YES;
 					id en2, unit2;
+
+					merge = YES;
 					en2 = [ar objectEnumerator];
 					while ((unit2 = [en2 nextObject]))
 					{
@@ -1593,8 +1597,9 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 				}
 				if ([ar count] == unit_columns)
 				{
-					merge = YES;
 					id en2, unit2;
+
+					merge = YES;
 					en2 = [ar objectEnumerator];
 					while ((unit2 = [en2 nextObject]))
 					{
@@ -1618,8 +1623,9 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 				}
 				if ([ar count] == unit_columns)
 				{
-					merge = YES;
 					id en2, unit2;
+
+					merge = YES;
 					en2 = [ar objectEnumerator];
 					while ((unit2 = [en2 nextObject]))
 					{
@@ -1894,6 +1900,9 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 - (void) drawRect:(NSRect)r
 {
 	int i;
+	id en;
+	LPUnit *unit;
+
 	/*
 	[_background compositeToPoint:NSZeroPoint
 						operation:NSCompositeCopy];
@@ -1921,9 +1930,6 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	}
 	PSstroke();
 
-	id en;
-	LPUnit *unit;
-
 	en = [_blowing objectEnumerator];
 	while ((unit = [en nextObject]))
 	{
@@ -1939,8 +1945,8 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	{
 		int cc,xx,yy;
 		LPUnit* unit;
-		cc=xx=yy=0;
 		NSMutableSet *set = [NSMutableSet setWithCapacity:70];
+		cc=xx=yy=0;
 
 		for (yy = 13; yy >= 0 && cc < 8; yy--)
 		for (xx = 5; xx >= 0; xx--)
