@@ -102,12 +102,12 @@
   r = [[NSCustomImageRep alloc]
         initWithDrawSelector: @selector(drawImageRep)
         delegate: self];
-  // [r autorelease];
   [r setSize: NSMakeSize(48,48)];
   [stipple addRepresentation: r];
   [NSApp setApplicationIconImage:stipple];
-  // [stipple release];
-  // stipple = nil;
+
+  [r release];
+  [stipple release];  /* setApplicationIconImage does a retain, so we release */
 }
 
 - (void)step
