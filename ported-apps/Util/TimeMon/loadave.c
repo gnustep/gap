@@ -31,7 +31,7 @@ int la_read(unsigned long long *times)
   return LA_NOERR;
 }
 
-#elif defined( freebsd ) 
+#elif defined( __FreeBSD__ ) 
 
 #include <sys/types.h>
 #include <sys/errno.h>
@@ -71,7 +71,7 @@ int la_read(unsigned long long *times)
   return LA_NOERR;
 }
 
-#elif  defined( __NetBSD__ )
+#elif  defined( __NetBSD__ ) || defined ( __OpenBSD__)
 
 #include <sys/types.h>
 #include <errno.h>
@@ -84,18 +84,29 @@ int la_read(unsigned long long *times)
 int la_read(unsigned long long *times)
 {
   int mib[2];
+
+#ifdef __NetBSD__
   uint64_t
     cpu_states[CPUSTATES];
+#else
+  long
+    cpu_states[CPUSTATES];
+#endif
+
   size_t
     nlen = sizeof cpu_states,
     len = nlen;
   int
     err;
   
+#ifdef __NetBSD__
   mib[0] = CTL_KERN;
   mib[1] = KERN_CP_TIME;
+#else
+  mib[0] = CTL_KERN;
+  mib[1] = KERN_CPTIME;
+#endif
 
-  fprintf(stderr, "cpustates n. = %d\n", CPUSTATES);
   err= sysctl(mib, 2, &cpu_states, &nlen, NULL, 0);
   if( -1 == err )
   {
@@ -116,7 +127,6 @@ int la_read(unsigned long long *times)
   
   return LA_NOERR;
 }
-
 
 #else 
 // Darwin should always be the always the last option...
