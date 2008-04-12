@@ -32,10 +32,12 @@ TimeMon_APPLICATION_ICON = TimeMon.tiff
 include $(GNUSTEP_MAKEFILES)/common.make
 
 # The application to be compiled
+VERSION = 4.1
+PACKAGE_NAME = TimeMon
 APP_NAME = TimeMon
 
-ADDITIONAL_OBJCFLAGS += -Wall -D$(GNUSTEP_HOST_OS)
-ADDITIONAL_CFLAGS += -D$(GNUSTEP_HOST_OS)
+#ADDITIONAL_OBJCFLAGS += -Wall -D$(GNUSTEP_HOST_OS)
+#ADDITIONAL_CFLAGS += -D$(GNUSTEP_HOST_OS)
 
 # The Objective-C source files to be compiled
 TimeMon_OBJC_FILES = \
@@ -58,4 +60,3 @@ README.rtf
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/application.make
 -include GNUmakefile.postamble
-
