@@ -108,6 +108,7 @@
         [self addSubview: circleButt];
         [buttons addObject: circleButt];
         [circleButt release];
+        [circleButt setEnabled:NO];
 
         rectangleButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 80, 25, 20)
                                                    toolType: rectangletool];
@@ -130,6 +131,8 @@
         [self addSubview: paintButt];
         [buttons addObject: paintButt];
         [paintButt release];
+        [paintButt setEnabled:NO];
+
 
         pencilButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 60, 25, 20)
                                                 toolType: penciltool];
@@ -141,6 +144,7 @@
         [self addSubview: pencilButt];
         [buttons addObject: pencilButt];
         [pencilButt release];
+        [pencilButt setEnabled:NO];
 
         rotateButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 40, 25, 20)
                                                 toolType: rotatetool];
@@ -164,6 +168,7 @@
         [self addSubview: reduceButt];
         [buttons addObject: reduceButt];
         [reduceButt release];
+        [reduceButt setEnabled:NO];
 
         reflectButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 20, 25, 20)
                                                  toolType: reflecttool];
