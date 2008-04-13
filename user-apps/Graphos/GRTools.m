@@ -142,17 +142,17 @@
         [buttons addObject: pencilButt];
         [pencilButt release];
 
-        roteteButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 40, 25, 20)
+        rotateButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 40, 25, 20)
                                                 toolType: rotatetool];
-        [roteteButt setButtonType: NSOnOffButton];
-        [roteteButt setImage: [NSImage imageNamed: @"rotate.tiff"]];
-        [roteteButt setImagePosition: NSImageOnly];
-        [roteteButt setTarget:self];
-        [roteteButt setAction:@selector(buttonPressed:)];
-        [self addSubview: roteteButt];
-        [buttons addObject: roteteButt];
-        [roteteButt release];
-        [roteteButt setEnabled:NO];
+        [rotateButt setButtonType: NSOnOffButton];
+        [rotateButt setImage: [NSImage imageNamed: @"rotate.tiff"]];
+        [rotateButt setImagePosition: NSImageOnly];
+        [rotateButt setTarget:self];
+        [rotateButt setAction:@selector(buttonPressed:)];
+        [self addSubview: rotateButt];
+        [buttons addObject: rotateButt];
+        [rotateButt release];
+        [rotateButt setEnabled:NO];
 
         reduceButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 40, 25, 20)
                                                 toolType: reducetool];
