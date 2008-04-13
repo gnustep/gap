@@ -152,6 +152,7 @@
         [self addSubview: roteteButt];
         [buttons addObject: roteteButt];
         [roteteButt release];
+        [roteteButt setEnabled:NO];
 
         reduceButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 40, 25, 20)
                                                 toolType: reducetool];
@@ -174,6 +175,7 @@
         [self addSubview: reflectButt];
         [buttons addObject: reflectButt];
         [reflectButt release];
+        [reflectButt setEnabled:NO];
 
         scissorsButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 20, 25, 20)
                                                   toolType: scissorstool];
@@ -185,6 +187,7 @@
         [self addSubview: scissorsButt];
         [buttons addObject: scissorsButt];
         [scissorsButt release];
+        [scissorsButt setEnabled:NO];
 
         handButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 0, 25, 20)
                                               toolType: handtool];
@@ -196,6 +199,7 @@
         [self addSubview: handButt];
         [buttons addObject: handButt];
         [handButt release];
+        [handButt setEnabled:NO];
 
         magnifyButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 0, 25, 20)
                                                  toolType: magnifytool];
