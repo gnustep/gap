@@ -42,7 +42,6 @@ typedef struct
 {
     GRBezierPath *path;
     GRBezierHandle bzHandle;
-    float zmFactor;
 }
 
 - (id)initAtPoint:(NSPoint)aPoint
@@ -52,8 +51,6 @@ typedef struct
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePosition;
 - (void)moveToPoint:(NSPoint)p;
 - (void)moveBezierHandleToPosition:(NSPoint)newp oldPosition:(NSPoint)oldp;
-
-- (void)setZoomFactor:(float)f;
 
 - (GRBezierHandle)bzHandle;
 

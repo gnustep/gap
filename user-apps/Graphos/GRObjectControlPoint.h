@@ -35,11 +35,14 @@
     NSPoint center;
     NSRect centerRect;
     NSRect innerRect;
+    float zmFactor;
 }
 
-- (id)initAtPoint:(NSPoint)aPoint;
+- (id)initAtPoint:(NSPoint)aPoint zoomFactor:(float)zf;
 
 - (void)moveToPoint:(NSPoint)p;
+
+- (void)setZoomFactor:(float)f;
 
 - (NSPoint)center;
 - (NSRect)centerRect;
