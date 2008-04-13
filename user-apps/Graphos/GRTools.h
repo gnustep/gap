@@ -44,7 +44,7 @@
     NSMutableArray *buttons;
     GRToolButton *barrowButt, *warrowButt, *bezierButt, *textButt;
     GRToolButton *circleButt, *rectangleButt, *paintButt, *pencilButt;
-    GRToolButton *roteteButt, *reduceButt, *reflectButt, *scissorsButt;
+    GRToolButton *rotateButt, *reduceButt, *reflectButt, *scissorsButt;
     GRToolButton *handButt, *magnifyButt;
 }
 
