@@ -24,6 +24,7 @@
  */
 
 #import "GRDrawableObject.h"
+#import "GRObjectEditor.h"
 
 
 @implementation GRDrawableObject

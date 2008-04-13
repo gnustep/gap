@@ -60,7 +60,5 @@
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p;
 - (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
 
-- (void)draw;
-
 @end
 

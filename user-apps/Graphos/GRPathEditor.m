@@ -30,6 +30,7 @@
 
 - (NSPoint)moveControlAtPoint:(NSPoint)p
 {
+    return p;
 }
 
 - (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp

@@ -205,7 +205,7 @@
 {
     [self setStartAtPoint:[startControlPoint center]];
     [self setEndAtPoint:[endControlPoint center]];
-    [editor setIsDone:YES];
+    [(GRBoxEditor *)editor setIsDone:YES];
 }
 
 - (void)setFlat:(float)flat
