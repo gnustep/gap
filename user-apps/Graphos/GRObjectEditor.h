@@ -37,5 +37,6 @@
 }
 
 - (void)unselect;
+- (void)draw;
 
 @end

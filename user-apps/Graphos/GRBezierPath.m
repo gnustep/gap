@@ -201,7 +201,7 @@ static double k = 0.025;
     [bzpath setFillAlpha: fillAlpha];
     [bzpath setVisible: visible];
     [bzpath setLocked: locked];
-    [[bzpath editor] setIsValid: NO];
+    [(GRBezierPathEditor *)[bzpath editor] setIsValid: NO];
 
     return bzpath;
 }
@@ -354,7 +354,7 @@ static double k = 0.025;
     {
         [currentPoint moveToPoint: [mtopoint center]];
         [myPath lineToPoint: [mtopoint center]];
-        [editor setIsDone:YES];
+        [(GRBezierPathEditor *)editor setIsDone:YES];
     } else
     {
         [myPath lineToPoint: aPoint];
@@ -534,7 +534,7 @@ static double k = 0.025;
     if([controlPoints count] == 1)
         return;
     if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
-        [editor setIsDone:YES];
+        [(GRBezierPathEditor *)editor setIsDone:YES];
 }
 
 - (void)remakePath
@@ -562,7 +562,7 @@ static double k = 0.025;
             [myPath lineToPoint: [cp center]];
         }
         if([self isPoint: cp onPoint: mtopoint])
-            [editor setIsDone:YES];
+            [(GRBezierPathEditor *)editor setIsDone:YES];
     }
 }
 
@@ -796,7 +796,7 @@ static double k = 0.025;
     if(!locked)
         [editor unselect];
     else
-        [editor selectAsGroup];
+        [(GRBezierPathEditor *)editor selectAsGroup];
 }
 
 
@@ -818,9 +818,8 @@ static double k = 0.025;
 
 - (void)draw
 {
-    GRBezierControlPoint *cp, *ponpoint = nil;
+    GRBezierControlPoint *cp;
     NSRect r;
-    GRBezierHandle bzhandle;
     NSColor *color;
     int i;
     NSBezierPath *bzp;
@@ -864,7 +863,7 @@ static double k = 0.025;
     }
 
     [bzp setLineWidth:1];
-    if([editor isGroupSelected])
+    if([(GRBezierPathEditor *)editor isGroupSelected])
     {
         for(i = 0; i < [controlPoints count]; i++)
         {
