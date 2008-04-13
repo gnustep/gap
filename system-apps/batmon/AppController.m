@@ -159,6 +159,8 @@
     [rep setSize: NSMakeSize(48, 48)];
     [icon addRepresentation: rep];
     [NSApp setApplicationIconImage:icon];
+    [rep release];
+    [icon release]; /* setApplicationIconImage does a retain */
 }
 
 
