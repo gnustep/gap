@@ -67,8 +67,8 @@
         strokeAlpha = 1;
         fillAlpha = 1;
         editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
-        startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos];
-        endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+        startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
+        endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
     }
 
     return self;
@@ -122,8 +122,8 @@
         visible = (BOOL)[[description objectForKey: @"visible"] intValue];
         locked = (BOOL)[[description objectForKey: @"locked"] intValue];
         [self setZoomFactor: zf];
-        startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos];
-        endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+        startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
+        endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
     }
     return self;
 }
@@ -352,10 +352,13 @@
 - (void)setZoomFactor:(float)f
 {
     [super setZoomFactor:f];
-    pos.x = pos.x / zmFactor * f;
-    pos.y = pos.y / zmFactor * f;
-    size = NSMakeSize(size.width / zmFactor * f, size.height / zmFactor * f);
-    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+
+    linewidth = linewidth / zmFactor * f;
+    zmFactor = f;
+    
+    [startControlPoint setZoomFactor:f];
+    [endControlPoint setZoomFactor:f];
+    [self remakePath];
 }
 
 - (void)draw

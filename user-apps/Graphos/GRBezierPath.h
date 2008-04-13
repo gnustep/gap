@@ -40,7 +40,7 @@ typedef struct
     NSBezierPath *myPath;
     float strokeColor[4], fillColor[4];
     float strokeAlpha, fillAlpha;
-    float flatness, miterlimit, linewidth;
+    float flatness, miterlimit;
     int linejoin, linecap;
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;

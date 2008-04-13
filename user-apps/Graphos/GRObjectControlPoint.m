@@ -28,7 +28,7 @@
 
 @implementation GRObjectControlPoint
 
-- (id)initAtPoint:(NSPoint)aPoint
+- (id)initAtPoint:(NSPoint)aPoint zoomFactor:(float)zf
 {
     self = [super init];
     if(self)
@@ -36,6 +36,7 @@
         center = aPoint;
         centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
         isSelect = NO;
+        zmFactor = zf;
     }
     return self;
 }
@@ -46,6 +47,15 @@
     center.y = p.y;
     centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
     innerRect = NSMakeRect(p.x-2, p.y-2, 4, 4);
+}
+
+- (void)setZoomFactor:(float)f
+{
+    center.x = center.x / zmFactor * f;
+    center.y = center.y / zmFactor * f;
+    centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
+    innerRect = NSMakeRect(center.x-2, center.y-2, 4, 4);
+    zmFactor = f;
 }
 
 - (NSPoint)center

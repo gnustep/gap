@@ -37,6 +37,7 @@
 @interface GRPathObject : GRDrawableObject
 {
     BOOL stroked, filled;
+    float linewidth;
     GRObjectControlPoint *currentPoint;
 }
 
