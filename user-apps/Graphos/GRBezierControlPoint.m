@@ -100,7 +100,7 @@
 
     mtopoint = [path firstPoint];
     ponpoint = [path pointOnPoint: self];
-    if(ponpoint && [[path editor] isdone] && (self == mtopoint))
+    if(ponpoint && [(GRPathEditor *)[path editor] isdone] && (self == mtopoint))
         [ponpoint moveBezierHandleToPosition: newp oldPosition: oldp];
 
     if(pointInRect(bzHandle.firstHandleRect, oldp)) {
@@ -171,7 +171,7 @@
     double distx, disty;
 
     isSelect = YES;
-    [[path editor] unselectOtherControls: self];
+    [(GRBezierPathEditor *)[path editor] unselectOtherControls: self];
     distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
     disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
     if(distx || disty)

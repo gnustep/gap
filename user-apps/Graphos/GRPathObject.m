@@ -40,4 +40,8 @@
     return currentPoint;
 }
 
+- (void)remakePath
+{
+}
+
 @end

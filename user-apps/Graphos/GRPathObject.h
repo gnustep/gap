@@ -59,4 +59,7 @@
 /** returns the currently selected control point */
 - (GRObjectControlPoint *)currentPoint;
 
+/** recompute the path object based on its controlpoints */
+- (void)remakePath;
+
 @end

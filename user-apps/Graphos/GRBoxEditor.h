@@ -27,20 +27,16 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "GRBox.h"
-#import "GRObjectEditor.h"
+#import "GRPathEditor.h"
 
-@interface GRBoxEditor : GRObjectEditor
+@interface GRBoxEditor : GRPathEditor
 {
     BOOL groupSelected;
     BOOL editSelected;
-    BOOL isdone;
     BOOL isvalid;
 }
 
 - (id)initEditor:(GRBox *)anObject;
-
-- (BOOL)isdone;
-- (void)setIsDone:(BOOL)status;
 
 - (void)select;
 
