@@ -30,20 +30,16 @@
 
 @class GRDocView;
 
-@interface GRBezierPathEditor : GRObjectEditor
+@interface GRBezierPathEditor : GRPathEditor
 {
     BOOL groupSelected;
     BOOL editSelected;
-    BOOL isdone;
     BOOL isvalid;
     float zmFactor;
 }
 
 - (id)initEditor:(GRBezierPath *)anObject;
 
-
-- (BOOL)isdone;
-- (void)setIsDone:(BOOL)status;
 
 - (void)selectAsGroup;
 - (void)selectForEditing;

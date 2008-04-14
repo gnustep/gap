@@ -42,16 +42,7 @@
     return self;
 }
 
-- (BOOL)isdone
-{
-    return isdone;
-}
 
-- (void)setIsDone:(BOOL)status
-{
-    isdone = status;
-
-}
 - (void)select
 {
     [self selectAsGroup];

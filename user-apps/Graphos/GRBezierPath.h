@@ -87,8 +87,6 @@ typedef struct
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
 
-- (void)remakePath;
-
 - (hitData)hitDataOfPathSegmentOwningPoint:(NSPoint)pt;
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p;

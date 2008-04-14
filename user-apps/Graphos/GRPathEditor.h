@@ -28,10 +28,14 @@
 
 @interface GRPathEditor : GRObjectEditor
 {
-
+    BOOL isdone;
 }
 
 - (NSPoint)moveControlAtPoint:(NSPoint)p;
 - (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
+
+- (BOOL)isdone;
+- (void)setIsDone:(BOOL)status;
+
 
 @end
