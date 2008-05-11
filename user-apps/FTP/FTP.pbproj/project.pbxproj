@@ -176,6 +176,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				85FC29710DD7B28300A80101,
 				29B97318FDCFA39411CA2CEA,
 				089C165CFE840E0CC02AAC07,
 				F5C0879F08A0C47B01A8012F,
@@ -258,7 +259,7 @@
 	<key>CFBundleExecutable</key>
 	<string>FTP</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>FTP_icon_osx.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -295,6 +296,7 @@
 				089C165EFE840E0CC02AAC07,
 				F5C087A008A0C47C01A8012F,
 				F5C087A208A0C4B001A8012F,
+				85FC29720DD7B28300A80101,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +365,27 @@
 //4A2
 //4A3
 //4A4
+//850
+//851
+//852
+//853
+//854
+		85FC29710DD7B28300A80101 = {
+			isa = PBXFileReference;
+			path = FTP_icon_osx.icns;
+			refType = 4;
+		};
+		85FC29720DD7B28300A80101 = {
+			fileRef = 85FC29710DD7B28300A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//850
+//851
+//852
+//853
+//854
 //F50
 //F51
 //F52
