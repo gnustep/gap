@@ -10,17 +10,19 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.2
 PACKAGE_NAME = FTP
 APP_NAME = FTP
-FTP_APPLICATION_ICON = 
+FTP_APPLICATION_ICON = FTP_icon_gs.tif
 
 
 #
 # Resource files
 #
 FTP_RESOURCE_FILES = \
-Resources/FTP.gorm\
+Resources/FTP.gorm \
 Resources/arrow_left.tiff \
-Resources/arrow_right.tiff\
-Resources/Info-gnustep.plist
+Resources/arrow_right.tiff \
+Resources/FTP_icon_gs.tif \
+Resources/Info-gnustep.plist 
+
 
 #
 # Header files
@@ -45,10 +47,8 @@ fileElement.m \
 client.m
 
 #
-# C files
+# Other sources
 #
-FTP_C_FILES = 
-
 FTP_OBJC_FILES += \
 main.m 
 
