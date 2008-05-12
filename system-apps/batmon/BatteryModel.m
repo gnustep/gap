@@ -23,6 +23,7 @@
 */
 
 #if defined(freebsd) || defined( __FreeBSD__ )
+#  include <stdint.h>
 #  include <fcntl.h>
 #  include <sys/ioctl.h>
 #  include <dev/acpica/acpiio.h>
