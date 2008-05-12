@@ -7,7 +7,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.1
+VERSION = 0.2
 PACKAGE_NAME = LaternaMagica
 APP_NAME = LaternaMagica
 LaternaMagica_APPLICATION_ICON = 
@@ -17,8 +17,9 @@ LaternaMagica_APPLICATION_ICON =
 # Resource files
 #
 LaternaMagica_RESOURCE_FILES = \
-Resources/LaternaMagica.gorm\
-Resources/Info-gnustep.plist
+Resources/LaternaMagica.gorm \
+Resources/Info-gnustep.plist 
+
 
 #
 # Header files
@@ -37,10 +38,8 @@ FileTable.m \
 LMFlipView.m
 
 #
-# C files
+# Other sources
 #
-LaternaMagica_C_FILES = 
-
 LaternaMagica_OBJC_FILES += \
 main.m 
 
