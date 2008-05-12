@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2007 Riccardo Mottola
+   Copyright (C) 2006-2008 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -524,4 +524,9 @@
     [destImage release];
 }
 
+/* ===== delegates =====*/
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+{
+    [self addFile:filename];
+}
 @end
