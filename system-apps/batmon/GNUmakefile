@@ -10,7 +10,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.3
 PACKAGE_NAME = batmon
 APP_NAME = batmon
-batmon_APPLICATION_ICON = 
+batmon_APPLICATION_ICON = BatMon_icon.tif
 
 
 #
@@ -18,6 +18,7 @@ batmon_APPLICATION_ICON =
 #
 batmon_RESOURCE_FILES = \
 Resources/batmon.gorm \
+Resources/BatMon_icon.tif \
 Resources/LICENSE \
 Resources/README \
 Resources/Info-gnustep.plist 

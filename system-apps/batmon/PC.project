@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = "";
+    APPLICATIONICON = BatMon_icon.tif;
     APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     CLASS_FILES = (
@@ -20,13 +20,14 @@
 	BatteryModel.h
     );
     IMAGES = (
+	BatMon_icon.tif
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
 	batmon.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-03-01 09:48:52 +0100";
+    LAST_EDITING = "2008-05-12 02:04:27 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -44,8 +45,8 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBrowser = "{x = -1.54416; y = -1.34037e-05; width = 692; height = 191}";
-	ProjectWindow = "84 128 859 599 0 0  1024 768 ";
+	ProjectBrowser = "{x = -1.54416; y = -1.34037e-05; width = 841; height = 191}";
+	ProjectWindow = "105 171 859 599 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
