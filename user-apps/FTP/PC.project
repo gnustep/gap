@@ -36,7 +36,7 @@
 	FTP.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-05-12 01:28:36 +0200";
+    LAST_EDITING = "2008-05-13 10:49:25 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -48,14 +48,13 @@
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     OBJC_COMPILEROPTIONS = "";
     OTHER_RESOURCES = (
-	"Info-gnustep.plist"
     );
     OTHER_SOURCES = (
 	main.m
     );
     PC_WINDOWS = {
 	ProjectBrowser = "{x = 0; y = 0; width = 865; height = 436}";
-	ProjectWindow = "139 103 883 910 0 0  1280 1024 ";
+	ProjectWindow = "200 102 883 914 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
