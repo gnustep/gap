@@ -200,8 +200,6 @@
   
 #elif defined(linux)
 
-    char infoFilePath[1024];
-    char stateFilePath[1024];
     FILE *stateFile;
     FILE *infoFile;
     char line[128];
@@ -215,7 +213,6 @@
     int  rateVal;
     int  capacityVal;
     int  voltageVal;
-    int  warnVal;
 
     char present2Str[16];
     char desCapStr[16];
