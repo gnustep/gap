@@ -126,6 +126,11 @@
     NSBezierPath *bzp;
     NSMutableString *str;
     char *cStr;
+    float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
+
+    chargePercentToDraw = [batModel chargePercent];
+    if (chargePercentToDraw > 100)
+        chargePercentToDraw = 100;
 
     [[NSColor blackColor] set];
     bzp = [NSBezierPath bezierPath];
@@ -137,7 +142,7 @@
        [[NSColor redColor] set];
     else
        [[NSColor whiteColor] set];
-    [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, ([batModel chargePercent]/100) * HEIGHT -2)];
+    [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, (chargePercentToDraw/100) * HEIGHT -2)];
     [bzp fill];
 
     cStr = calloc(4, sizeof(char));
@@ -168,8 +173,13 @@
 {
     float lifeVal;
     float timeRem;
+    float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
 
     [batModel update];
+
+    chargePercentToDraw = [batModel chargePercent];
+    if (chargePercentToDraw > 100)
+        chargePercentToDraw = 100;
 
     /* main window */
     timeRem = [batModel timeRemaining];
@@ -178,7 +188,7 @@
 
     [voltage setStringValue:[NSString stringWithFormat:@"%3.2f V", [batModel volts]]];
     [presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel remainingCapacity]]];
-    [level setDoubleValue:[batModel chargePercent]];
+    [level setDoubleValue:chargePercentToDraw];
     [percent setStringValue:[NSString stringWithFormat:@"%3.1f%", [batModel chargePercent]]];
     [rate setStringValue:[NSString stringWithFormat:@"%3.2f W", [batModel watts]]];
     [amperage setStringValue:[NSString stringWithFormat:@"%3.2f A", [batModel amps]]];
