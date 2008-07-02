@@ -106,6 +106,29 @@ int getChar(streamStruct* ss)
 
 @implementation FtpClient
 
++ (void)connectWithPorts:(NSArray *)portArray
+{
+    NSAutoreleasePool *pool;
+    NSConnection *serverConnection;
+    FtpClient    *serverObject;
+	
+    pool = [[NSAutoreleasePool alloc] init];
+	
+    serverConnection = [NSConnection
+            connectionWithReceivePort:[portArray objectAtIndex:0]
+							 sendPort:[portArray objectAtIndex:1]];
+	
+//    serverObject = [[self alloc] init];
+    serverObject = [self alloc];
+    [(id)[serverConnection rootProxy] setServer:serverObject];
+    [serverObject release];
+	
+    [[NSRunLoop currentRunLoop] run];
+    [pool release];
+	
+    return;
+}
+
 - (id)initWithController:(id)cont :(connectionModes)cMode
 {
     if (!(self =[super initWithController:cont]))
@@ -347,7 +370,7 @@ int getChar(streamStruct* ss)
     return 0;
 }
 
-- (void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -380,7 +403,7 @@ int getChar(streamStruct* ss)
         NSEnumerator *en;
         fileElement  *fEl;
 
-        if (depth > 5)
+        if (depth > MAX_DIR_RECURSION)
         {
             NSLog(@"Max depth reached: %d", depth);
             return;
@@ -451,6 +474,7 @@ int getChar(streamStruct* ss)
     
     totalBytes = 0;
     gotFile = NO;
+    [controller setThreadRunningState:YES];
     [controller setTransferBegin:fileName :fileSize];
     while (!gotFile)
     {
@@ -468,19 +492,20 @@ int getChar(streamStruct* ss)
                 NSLog(@"file write error, retrieve file");
             }
             totalBytes += bytesRead;
-            [controller setTransferProgress:totalBytes];
+            [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:totalBytes]];
         }
     }
-    [controller setTransferEnd:totalBytes];
+
+    [controller setTransferEnd:[NSNumber numberWithUnsignedLongLong:totalBytes]];
     
-    NSLog(@"transferred %u", (unsigned long)totalBytes);
     fclose(localFileStream);
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
+    [controller setThreadRunningState:NO];
 }
 
-- (void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
+- (oneway void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -493,7 +518,7 @@ int getChar(streamStruct* ss)
     struct sockaddr    from;
     int                fromLen;
     int                replyCode;
-    unsigned           totalBytes;
+    unsigned long long totalBytes;
     NSString           *localPath;
     BOOL               gotFile;
 
@@ -514,7 +539,7 @@ int getChar(streamStruct* ss)
         NSEnumerator *en;
         fileElement  *fEl;
 
-        if (depth > 3)
+        if (depth > MAX_DIR_RECURSION)
         {
             NSLog(@"Max depth reached: %d", depth);
             return;
@@ -592,6 +617,7 @@ int getChar(streamStruct* ss)
 
     totalBytes = 0;
     gotFile = NO;
+    [controller setThreadRunningState:YES];
     [controller setTransferBegin:fileName :fileSize];
     while (!gotFile)
     {
@@ -610,16 +636,16 @@ int getChar(streamStruct* ss)
                 NSLog(@"socket write error, store file");
             }
             totalBytes += bytesRead;
-            [controller setTransferProgress:totalBytes];
+            [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:totalBytes]];
         }
     }
-    [controller setTransferEnd:totalBytes];
+    [controller setTransferEnd:[NSNumber numberWithUnsignedLongLong:totalBytes]];
     
-    NSLog(@"transferred %u", totalBytes);
     fclose(localFileStream);
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
+    [controller setThreadRunningState:NO];
 }
 
 - (void)deleteFile:(fileElement *)file beingAt:(int)depth

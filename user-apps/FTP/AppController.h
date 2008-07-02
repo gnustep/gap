@@ -93,9 +93,11 @@
 - (IBAction)localDelete:(id)sender;
 - (IBAction)remoteDelete:(id)sender;
 
+- (void)setThreadRunningState:(BOOL)flag;
+
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size;
-- (void)setTransferProgress:(unsigned long)bytes;
-- (void)setTransferEnd:(unsigned long)bytes;
+- (void)setTransferProgress:(NSNumber *)bytesTransferred;
+- (void)setTransferEnd:(NSNumber *)bytesTransferred;
 
 /** closes the open connections and quits teh session with the remote server */
 - (IBAction)disconnect:(id)sender;
@@ -105,6 +107,9 @@
 - (IBAction)prefCancel:(id)sender;
 
 - (IBAction)showFtpLog:(id)sender;
+
+/** Called by the server object to register itself */
+- (void)setServer:(id)anObject;
 - (void)appendTextToLog:(NSString *)textChunk;
 
 - (IBAction)showConnPanel:(id)sender;

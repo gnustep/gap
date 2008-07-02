@@ -74,6 +74,11 @@
     NSArray        *dirList;
     NSUserDefaults *defaults;
     NSString       *readValue;
+    NSPort         *port1;
+    NSPort         *port2;
+    NSArray        *portArray;
+    NSConnection   *kitConnection;
+	
 
     /* read the user preferences */
     defaults = [NSUserDefaults standardUserDefaults];
@@ -111,7 +116,21 @@
 
     /* we update the path menu */
     [self updatePath :localPath :[local workDirSplit]];
-// #### and a release of this array ?!?
+    // #### and a release of this array ?!?
+	
+	// we set up distributed objects
+    port1 = [NSPort port];
+    port2 = [NSPort port];
+    kitConnection = [[NSConnection alloc] initWithReceivePort:port1
+													 sendPort:port2];
+    [kitConnection setRootObject:self];
+	
+    /* Ports switched here. */
+    portArray = [NSArray arrayWithObjects:port2, port1, nil];
+    [NSThread detachNewThreadSelector: @selector(connectWithPorts:)
+                             toTarget: [FtpClient class] 
+                           withObject: portArray];
+    return;
 }
 
 - (BOOL)applicationShouldTerminate:(id)sender
@@ -253,21 +272,20 @@
     [buttDownload setEnabled:flag];
 }
 
+- (void)setThreadRunningState:(BOOL)flag
+{
+    threadRunning = flag;
+    [self setInterfaceEnabled:!flag];
+}
+
 - (void)performRetrieveFile:(id)parameters
 {
-    fileTransmitParms  *parms;
-    NSAutoreleasePool  *pool;
-
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
     id            currEl;
 
-    pool = [[NSAutoreleasePool alloc] init];
-    threadRunning = YES;
-    [self setInterfaceEnabled:NO];
-    parms = (fileTransmitParms *)parameters;
-
-
+    [self setThreadRunningState:YES];
+	
     // We should actually do a copy of the selection
     elemEnum = [remoteView selectedRowEnumerator];
 
@@ -277,26 +295,15 @@
         NSLog(@"should download: %@", [fileEl filename]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
-
-    threadRunning = NO;
-    [self setInterfaceEnabled:YES];
-    [pool release];
 }
 
 - (void)performStoreFile:(id)parameters
 {
-    fileTransmitParms  *parms;
-    NSAutoreleasePool  *pool;
-
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
     id            currEl;
 
-    pool = [[NSAutoreleasePool alloc] init];
-    threadRunning = YES;
-    [self setInterfaceEnabled:NO];
-    parms = (fileTransmitParms *)parameters;
-
+    [self setThreadRunningState:YES];
 
     // We should actually do a copy of the selection
     elemEnum = [localView selectedRowEnumerator];
@@ -307,10 +314,6 @@
         NSLog(@"should upload: %@", [fileEl filename]);
         [ftp storeFile:fileEl from:local beingAt:0];
     }
-
-    threadRunning = NO;
-    [self setInterfaceEnabled:YES];
-    [pool release];
 }
 
 - (IBAction)downloadButton:(id)sender
@@ -321,7 +324,7 @@
         return;
     }
 
-    [NSThread detachNewThreadSelector:@selector(performRetrieveFile:) toTarget:self withObject:nil];
+	[self performRetrieveFile:self];
 }
 
 - (IBAction)uploadButton:(id)sender
@@ -332,7 +335,7 @@
         return;
     }
 
-    [NSThread detachNewThreadSelector:@selector(performStoreFile:) toTarget:self withObject:nil];
+	[self performStoreFile:self];
 }
 
 - (IBAction)localDelete:(id)sender
@@ -377,18 +380,19 @@
     gettimeofday(&beginTimeVal, NULL);
 #endif
     transferSize = size;
-    // [mainWin displayIfNeeded];
-    // [mainWin flushWindowIfNeeded];
+    [mainWin displayIfNeeded];
 }
 
-- (void)setTransferProgress:(unsigned long)bytes
+- (void)setTransferProgress:(NSNumber *)bytesTransferred
 {
     struct timeval currTimeVal;
     float    speed;
     NSString *speedStr;
     NSString *sizeStr;
     double   percent;
+	unsigned long long bytes;
 
+	bytes = [bytesTransferred unsignedLongLongValue];
 #ifdef WIN32
     DWORD msecs = timeGetTime();
     currTimeVal.tv_sec=msecs/1000;
@@ -423,12 +427,10 @@
             sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
         [infoSize setStringValue:sizeStr];
         [sizeStr release];
-        // [mainWin displayIfNeeded];
-        // [mainWin flushWindowIfNeeded];
     }
 }
 
-- (void)setTransferEnd:(unsigned long)bytes
+- (void)setTransferEnd:(NSNumber *)bytesTransferred
 {
     struct timeval currTimeVal;
     double         deltaT;
@@ -436,6 +438,9 @@
     NSString       *speedStr;
     NSString       *sizeStr;
     double         percent;
+	unsigned long long bytes;
+	
+	bytes = [bytesTransferred unsignedLongLongValue];
 
 #ifdef WIN32
     DWORD msecs = timeGetTime();
@@ -469,8 +474,7 @@
     [sizeStr release];
     
     [progBar setDoubleValue:percent];
-    // [mainWin displayIfNeeded];
-    // [mainWin flushWindowIfNeeded];
+    [mainWin displayIfNeeded];
 }
 
 - (IBAction)disconnect:(id)sender
@@ -543,12 +547,24 @@
     [logWin makeKeyAndOrderFront:self];
 }
 
+/**
+ Called by the server object to register itself.
+ */
+- (void)setServer:(id)anObject
+{
+	ftp = (FtpClient*)[anObject retain];
+	
+	NSLog(@"FTP server object set");
+    return;
+}
+
 /*
  This routine is called after adding new results to the text view's backing store.
  We now need to scroll the NSScrollView in which the NSTextView sits to the part
  that we just added at the end
  */
-- (void)scrollToVisible:(id)ignore {
+- (void)scrollToVisible:(id)ignore
+{
     [logTextField scrollRangeToVisible:NSMakeRange([[logTextField string] length], 0)];
 }
 
@@ -579,7 +595,7 @@
     char    tempStr2[1024];
     
     [connectPanel performClose:nil];
-    ftp = [[FtpClient alloc] initWithController:self :connMode];
+    ftp = [ftp initWithController:self :connMode];
     [[connAddress stringValue] getCString:tempStr];
     if ([ftp connect:[connPort intValue] :tempStr] < 0)
     {

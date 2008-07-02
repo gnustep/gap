@@ -48,6 +48,8 @@
 
 #define MAX_SOCK_BUFF 1024
 
+#define MAX_DIR_RECURSION 5
+
 #define ERR_COULDNT_RESOLVE -1
 #define ERR_SOCKET_FAIL -2
 #define ERR_CONNECT_FAIL -3
@@ -93,8 +95,8 @@ typedef struct
 
 - (int)writeLine:(char *)line;
 - (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog;
-- (void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
-- (void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
