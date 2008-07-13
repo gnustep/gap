@@ -84,10 +84,10 @@
     defaults = [NSUserDefaults standardUserDefaults];
     readValue = [defaults stringForKey:connectionModeKey];
 
-    // if no value was set for the key we set default as mode
-    if ([readValue isEqualToString:@"default"] || readValue == nil)
+    // if no value was set for the key we set port as mode
+    if ([readValue isEqualToString:@"default"])
         connMode = defaultMode;
-    else if ([readValue isEqualToString:@"port"])
+    else if ([readValue isEqualToString:@"port"]  || readValue == nil)
         connMode = portMode;
     else if ([readValue isEqualToString:@"passive"])
         connMode = passiveMode;
