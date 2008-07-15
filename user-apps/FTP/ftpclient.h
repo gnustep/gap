@@ -81,6 +81,7 @@ typedef struct
     struct sockaddr_in  dataSockName;
     BOOL                usesPassive;
     BOOL                usesPorts;
+    @protected BOOL     connected;
 }
 
 - (id)initWithController:(id)cont :(connectionModes)cMode;
