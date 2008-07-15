@@ -20,8 +20,7 @@ FTP_RESOURCE_FILES = \
 Resources/FTP.gorm \
 Resources/arrow_left.tiff \
 Resources/arrow_right.tiff \
-Resources/FTP_icon_gs.tif \
-Resources/Info-gnustep.plist 
+Resources/FTP_icon_gs.tif 
 
 
 #
