@@ -156,6 +156,7 @@ int getChar(streamStruct* ss)
     WSAStartup(wVersionRequested, &wsaData);
     NSLog(@"inited WinSock");
 #endif
+    connected = NO;
     return self;
 }
 
@@ -759,6 +760,7 @@ int getChar(streamStruct* ss)
     
     [self writeLine:"QUIT\r\n"];
     [self readReply:&reply];
+    connected = NO;
 }
 
 - (int)authenticate:(char *)user :(char *)pass
@@ -790,6 +792,8 @@ int getChar(streamStruct* ss)
         return -1;
     }
     [reply release];
+    
+    connected = YES;
 
     /* get home directory as dir we first connected to */
     [self writeLine:"PWD\r\n"];
@@ -1084,6 +1088,9 @@ int getChar(streamStruct* ss)
     char               path[4096];
     NSMutableArray     *reply;
 
+    if (!connected)
+        return nil;
+    
     [workingDir getCString:path];
 
     /* lets settle to a plain ascii standard type */

@@ -621,7 +621,7 @@
     {
         [ftp setWorkingDir:[ftp homeDir]];
         if ((dirList = [ftp dirContents]) == nil)
-        return;
+            return;
         [remoteTableData initData:dirList];
         [remoteView setDataSource:remoteTableData];
 
