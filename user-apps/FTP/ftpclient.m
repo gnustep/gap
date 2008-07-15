@@ -189,6 +189,9 @@ int getChar(streamStruct* ss)
     char            tempStr2[MAX_CONTROL_BUFF];
     NSMutableArray *reply;
 
+    if (!connected)
+        return;
+	
     [dir getCString:tempStr2];
     sprintf(tempStr, "CWD %s\r\n", tempStr2);
     [self writeLine:tempStr];
@@ -1087,7 +1090,7 @@ int getChar(streamStruct* ss)
     fileElement        *aFile;
     char               path[4096];
     NSMutableArray     *reply;
-
+    
     if (!connected)
         return nil;
     
