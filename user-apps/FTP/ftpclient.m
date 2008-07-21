@@ -386,16 +386,19 @@ int getChar(streamStruct* ss)
     NSMutableArray     *reply;
     struct sockaddr    from;
     int                fromLen;
+    unsigned int       minimumPercentIncrement;
+    unsigned int       progressIncBytes;
     int                replyCode;
     unsigned long long totalBytes;
     NSString           *localPath;
     BOOL               gotFile;
 
-    fromLen = sizeof(from);
+    fromLen = sizeof(from);    
 
-    NSLog(@"filesize should be %u", (unsigned)[file size]);
     fileName = [file filename];
     fileSize = [file size];
+    minimumPercentIncrement = fileSize / 100; // we should guard against maxint
+
     localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
 
     if ([file isDir])
@@ -477,6 +480,7 @@ int getChar(streamStruct* ss)
     }
     
     totalBytes = 0;
+    progressIncBytes = 0;
     gotFile = NO;
     [controller setThreadRunningState:YES];
     [controller setTransferBegin:fileName :fileSize];
@@ -496,7 +500,12 @@ int getChar(streamStruct* ss)
                 NSLog(@"file write error, retrieve file");
             }
             totalBytes += bytesRead;
-            [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:totalBytes]];
+            progressIncBytes += bytesRead;
+            if (progressIncBytes > minimumPercentIncrement) 
+            {
+                [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:totalBytes]];
+                progressIncBytes = 0;
+            }
         }
     }
 
@@ -521,6 +530,8 @@ int getChar(streamStruct* ss)
     int                bytesRead;
     struct sockaddr    from;
     int                fromLen;
+    unsigned int       minimumPercentIncrement;
+    unsigned int       progressIncBytes;
     int                replyCode;
     unsigned long long totalBytes;
     NSString           *localPath;
@@ -531,7 +542,8 @@ int getChar(streamStruct* ss)
 
     fileName = [file filename];
     fileSize = [file size];
-    
+    minimumPercentIncrement = fileSize / 100; // we should guard against maxint
+
     localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
 
     if ([file isDir])
@@ -620,6 +632,7 @@ int getChar(streamStruct* ss)
     }
 
     totalBytes = 0;
+    progressIncBytes = 0;
     gotFile = NO;
     [controller setThreadRunningState:YES];
     [controller setTransferBegin:fileName :fileSize];
@@ -640,7 +653,12 @@ int getChar(streamStruct* ss)
                 NSLog(@"socket write error, store file");
             }
             totalBytes += bytesRead;
-            [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:totalBytes]];
+            progressIncBytes += bytesRead;
+            if (progressIncBytes > minimumPercentIncrement) 
+            {
+                [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:totalBytes]];
+                progressIncBytes = 0;
+            }
         }
     }
     [controller setTransferEnd:[NSNumber numberWithUnsignedLongLong:totalBytes]];
