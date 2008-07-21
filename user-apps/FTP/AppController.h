@@ -67,7 +67,6 @@
 
     @private connectionModes    connMode;
     @private struct timeval     beginTimeVal;
-    @private struct timeval     lastTimeVal;
     @private unsigned long long transferSize;
     @private BOOL               threadRunning;
 }

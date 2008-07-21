@@ -253,11 +253,11 @@
         if (theView == localView)
         {
             NSLog(@"should upload %@", thePath);
-            [NSThread detachNewThreadSelector:@selector(performStoreFile:) toTarget:self withObject:nil];
+            [self performStoreFile:self];
         } else
         {
             NSLog(@"should download %@", thePath);
-            [NSThread detachNewThreadSelector:@selector(performRetrieveFile:) toTarget:self withObject:nil];
+            [self performRetrieveFile:self];
         }
     }
 }
@@ -400,34 +400,29 @@
 #else
     gettimeofday(&currTimeVal, NULL);
 #endif
+    speed = (float)((double)bytes / (double)(currTimeVal.tv_sec - beginTimeVal.tv_sec));
+    percent = ((double)bytes / (double)transferSize) * 100;
 
-    if ((currTimeVal.tv_sec - lastTimeVal.tv_sec) > 1.0)
-    {
-        speed = (float)((double)bytes / (double)(currTimeVal.tv_sec - beginTimeVal.tv_sec));
-        percent = ((double)bytes / (double)transferSize) * 100;
-        lastTimeVal = currTimeVal;
+    [progBar setDoubleValue:percent];
+    speedStr = [NSString alloc];
+    if (speed < 1024)
+        speedStr = [speedStr initWithFormat:@"%3.2fB/s", speed];
+    else if (speed < 1024*1024)
+        speedStr = [speedStr initWithFormat:@"%3.2fKB/s", speed/1024];
+    else
+        speedStr = [speedStr initWithFormat:@"%3.2fMB/s", speed/(1024*1024)];
+    [infoSpeed setStringValue:speedStr];
+    [speedStr release];
 
-        [progBar setDoubleValue:percent];
-        speedStr = [NSString alloc];
-        if (speed < 1024)
-            speedStr = [speedStr initWithFormat:@"%3.2fB/s", speed];
-        else if (speed < 1024*1024)
-            speedStr = [speedStr initWithFormat:@"%3.2fKB/s", speed/1024];
-        else
-            speedStr = [speedStr initWithFormat:@"%3.2fMB/s", speed/(1024*1024)];
-        [infoSpeed setStringValue:speedStr];
-        [speedStr release];
-
-        sizeStr = [NSString alloc];
-        if (transferSize < 1024)
-            sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f B", (float)bytes, (float)transferSize];
-        else if (transferSize < 1024*1024)
-            sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
-        else
-            sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
-        [infoSize setStringValue:sizeStr];
-        [sizeStr release];
-    }
+    sizeStr = [NSString alloc];
+    if (transferSize < 1024)
+        sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f B", (float)bytes, (float)transferSize];
+    else if (transferSize < 1024*1024)
+        sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
+    else
+        sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
+    [infoSize setStringValue:sizeStr];
+    [sizeStr release];
 }
 
 - (void)setTransferEnd:(NSNumber *)bytesTransferred
