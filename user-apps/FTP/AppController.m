@@ -252,11 +252,11 @@
         if (theView == localView)
         {
             NSLog(@"should upload %@", thePath);
-            [self performStoreFile:self];
+            [self performStoreFile];
         } else
         {
             NSLog(@"should download %@", thePath);
-            [self performRetrieveFile:self];
+            [self performRetrieveFile];
         }
     }
 }
@@ -277,7 +277,7 @@
     [self setInterfaceEnabled:!flag];
 }
 
-- (void)performRetrieveFile:(id)parameters
+- (void)performRetrieveFile
 {
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
@@ -296,7 +296,7 @@
     }
 }
 
-- (void)performStoreFile:(id)parameters
+- (void)performStoreFile
 {
     NSEnumerator  *elemEnum;
     fileElement   *fileEl;
@@ -323,7 +323,7 @@
         return;
     }
 
-	[self performRetrieveFile:self];
+	[self performRetrieveFile];
 }
 
 - (IBAction)uploadButton:(id)sender
@@ -334,7 +334,7 @@
         return;
     }
 
-	[self performStoreFile:self];
+	[self performStoreFile];
 }
 
 - (IBAction)localDelete:(id)sender

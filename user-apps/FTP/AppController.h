@@ -120,6 +120,11 @@
 
 /* accessor */
 - (connectionModes)connectionMode;
+
+/* internal methods */
+- (void)performRetrieveFile;
+- (void)performStoreFile;
+
 @end
 
 @interface fileTransmitParms : NSObject
