@@ -79,12 +79,11 @@
     NSArray        *portArray;
     NSConnection   *kitConnection;
 	
-
     /* read the user preferences */
     defaults = [NSUserDefaults standardUserDefaults];
     readValue = [defaults stringForKey:connectionModeKey];
 
-    // if no value was set for the key we set port as mode
+    /* if no value was set for the key we set port as mode */
     if ([readValue isEqualToString:@"default"])
         connMode = defaultMode;
     else if ([readValue isEqualToString:@"port"]  || readValue == nil)
@@ -93,7 +92,6 @@
         connMode = passiveMode;
     else
         NSLog(@"Unrecognized value in user preferences for %@: %@", connectionModeKey, readValue);
-    NSLog(@"%@ maps to %d", connectionModeKey, connMode);
     
     /* set double actions for tables */
     [localView setTarget:self];
@@ -130,6 +128,7 @@
     [NSThread detachNewThreadSelector: @selector(connectWithPorts:)
                              toTarget: [FtpClient class] 
                            withObject: portArray];
+
     return;
 }
 
@@ -565,9 +564,9 @@
 
 - (IBAction)appendTextToLog:(NSString *)textChunk
 {
-    /* add the textChunk to the NSTextView's backing store as an attributed string */
-    [[logTextField textStorage] appendAttributedString: [[[NSAttributedString alloc]
-                             initWithString: textChunk] autorelease]];
+    [logTextField replaceCharactersInRange: NSMakeRange([[logTextField textStorage]length], 0)
+                                withString: textChunk];
+    [[logTextField textStorage] setFont:[NSFont userFixedPitchFontOfSize:0]];
 
     /* setup a selector to be called the next time through the event loop to scroll
        the view to the just pasted text.  We don't want to scroll right now,

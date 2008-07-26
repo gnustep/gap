@@ -73,13 +73,11 @@ int getChar(streamStruct* ss)
 {
     int result;
 
-//    NSLog(@"getChar pos: %d len %d", ss->position, ss->len);
     if (ss->position == ss->len)
     {
         int read;
 
         read = recv(ss->socket, ss->buffer, MAX_SOCK_BUFF, 0);
-        NSLog(@"read bytes: %d", read);
         if (read > 0)
         {
             ss->len = read;
@@ -88,14 +86,13 @@ int getChar(streamStruct* ss)
         {
             ss->len = 0;
             ss->position = 0;
-            NSLog(@"Empty sock read");
             ss->buffer[0] = EOF;
         } else
         {
             ss->len = 0;
             ss->position = 0;
             NSLog(@"error sock read");
-            perror("read");
+            perror("getChar:read");
             ss->buffer[0] = EOF;
         }
     }
@@ -118,7 +115,6 @@ int getChar(streamStruct* ss)
             connectionWithReceivePort:[portArray objectAtIndex:0]
 							 sendPort:[portArray objectAtIndex:1]];
 	
-//    serverObject = [[self alloc] init];
     serverObject = [self alloc];
     [(id)[serverConnection rootProxy] setServer:serverObject];
     [serverObject release];
@@ -769,7 +765,6 @@ int getChar(streamStruct* ss)
     }
     
     initStream(&ctrlStream, controlSocket);
-    NSLog(@"the stream socket is %d", ctrlStream.socket);
     [self readReply :&reply];
     [reply release];
     return 0;
