@@ -353,21 +353,32 @@ int getChar(streamStruct* ss)
 - (int)setTypeToI
 {
     NSMutableArray *reply;
+    int            retVal;
     
-    [self writeLine:"TYPE I\r\n"];
-    [self readReply:&reply];
-    [reply release];
-    return 0;
+    retVal = [self writeLine:"TYPE I\r\n"];
+    if ( retVal > 0)
+    {
+        [self readReply:&reply];
+        [reply release];
+    }
+       
+    return retVal;
 }
 
 - (int)setTypeToA
 {
     NSMutableArray *reply;
+    int            retVal;
 
-    [self writeLine:"TYPE A\r\n"];
-    [self readReply:&reply];
-    [reply release];
-    return 0;
+    retVal = [self writeLine:"TYPE A\r\n"];
+    NSLog(@"retval: %d", retVal);
+    if ( retVal > 0)
+    {
+        [self readReply:&reply];
+        [reply release];
+    }
+    
+    return retVal;
 }
 
 - (oneway void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
@@ -1103,6 +1114,7 @@ int getChar(streamStruct* ss)
     fileElement        *aFile;
     char               path[4096];
     NSMutableArray     *reply;
+    int                replyCode;
     
     if (!connected)
         return nil;
@@ -1110,7 +1122,12 @@ int getChar(streamStruct* ss)
     [workingDir getCString:path];
 
     /* lets settle to a plain ascii standard type */
-    [self setTypeToA];
+    if ([self setTypeToA] < 0)
+    {
+        connected = NO;
+        NSLog(@"Timed out.");
+        return nil;
+    }
     
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];
@@ -1121,7 +1138,7 @@ int getChar(streamStruct* ss)
 
     if ([self initDataStream] < 0)
         return nil;
-    
+
     /* read the directory listing, each line being CR-LF terminated */
     state = READ;
     readBytes = 0;
@@ -1151,7 +1168,9 @@ int getChar(streamStruct* ss)
          fprintf(stderr, "feof\n");
     } */
     [self closeDataStream];
-    [self readReply:&reply];
+
+    replyCode = [self readReply:&reply];
+    
     return [NSArray arrayWithArray:listArr];
 }
 
