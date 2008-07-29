@@ -60,6 +60,8 @@
     IBOutlet NSPanel     *prefPanel;
     IBOutlet NSMatrix    *portType;
     
+    NSMutableDictionary  *textAttributes;
+    
     fileTable   *localTableData;
     fileTable   *remoteTableData;
     FtpClient   *ftp;
