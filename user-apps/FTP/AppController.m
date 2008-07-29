@@ -50,17 +50,25 @@
 
 - (id)init
 {
+    NSFont *font;
+    
     if ((self = [super init]))
     {
     }
     connMode = defaultMode;
 
     threadRunning = NO;
+    
+    font = [NSFont userFixedPitchFontOfSize: 0];
+    textAttributes =
+    [NSMutableDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+   [textAttributes retain];
     return self;
 }
 
 - (void)dealloc
 {
+    [textAttributes release];
     [super dealloc];
 }
 
@@ -564,9 +572,13 @@
 
 - (IBAction)appendTextToLog:(NSString *)textChunk
 {
-    [logTextField replaceCharactersInRange: NSMakeRange([[logTextField textStorage]length], 0)
-                                withString: textChunk];
-    [[logTextField textStorage] setFont:[NSFont userFixedPitchFontOfSize:0]];
+    NSAttributedString *attrStr;
+    
+    attrStr = [[NSAttributedString alloc] initWithString: textChunk
+                                              attributes: textAttributes];
+
+    /* add the textChunk to the NSTextView's backing store as an attributed string */
+    [[logTextField textStorage] appendAttributedString: attrStr];
 
     /* setup a selector to be called the next time through the event loop to scroll
        the view to the just pasted text.  We don't want to scroll right now,
@@ -574,6 +586,7 @@
        of a text storage update to starve the app of events */
     [self performSelector:@selector(scrollToVisible:) withObject:nil afterDelay:0.0];
 
+    [attrStr autorelease];
 }
 
 /* --- connection panel methods --- */
