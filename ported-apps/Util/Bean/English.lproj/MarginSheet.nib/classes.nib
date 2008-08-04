@@ -1,0 +1,35 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                close = id; 
+                doPageLayout = id; 
+                printDocument = id; 
+                printMarginsWereSet = id; 
+                revert = id; 
+                richTextDocumentFormatChanged = id; 
+                save = id; 
+                saveAs = id; 
+                saveTo = id; 
+                setPrintMargins = id; 
+                togglePageBreaks = id; 
+                toggleReadOnly = id; 
+                toggleRich = id; 
+            }; 
+            CLASS = MarginSheet; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                measurementUnitTextField = NSTextField; 
+                printMarginSheet = NSWindow; 
+                rangeLabel = id; 
+                tfBottomMargin = NSTextField; 
+                tfLeftMargin = NSTextField; 
+                tfRightMargin = NSTextField; 
+                tfTopMargin = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = SaveInfoView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}

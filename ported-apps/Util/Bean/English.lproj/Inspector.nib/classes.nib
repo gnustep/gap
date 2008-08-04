@@ -1,0 +1,69 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                "" = id; 
+                fontStylesAction = id; 
+                inspectorBoldAction = id; 
+                inspectorSpacingAction = id; 
+                orderFrontSpacingPanel = id; 
+                orderFrontStylesPanelAction = id; 
+                removeTraitsAction = id; 
+                showAddTabStopPanelAction = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = InspectorController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                afterParagraphSpacingSlider = NSSlider; 
+                afterParagraphSpacingStepper = id; 
+                afterParagraphSpacingTextField = id; 
+                alignmentCenterButton = NSButton; 
+                alignmentJustifyButton = NSButton; 
+                alignmentLeftButton = NSButton; 
+                alignmentRightButton = NSButton; 
+                beforeParagraphSpacingSlider = NSSlider; 
+                beforeParagraphSpacingStepper = NSStepper; 
+                beforeParagraphSpacingTextField = NSTextField; 
+                characterSpacingDefaultButton = id; 
+                characterSpacingSlider = NSSlider; 
+                characterSpacingStepper = NSStepper; 
+                characterSpacingTextField = NSTextField; 
+                firstLineIndentStepper = id; 
+                firstLineIndentTextField = id; 
+                fontStylesMenu = NSPopUpButton; 
+                forceLineHeightDefaultButton = id; 
+                headIndentStepper = id; 
+                headIndentTextField = id; 
+                highlightBlueButton = id; 
+                highlightGreenButton = id; 
+                highlightOrangeButton = id; 
+                highlightPinkButton = id; 
+                highlightRemoveButton = id; 
+                highlightYellowButton = id; 
+                indentLabelTextField = id; 
+                inspectorPanel = NSPanel; 
+                interlineSpacingSlider = NSSlider; 
+                interlineSpacingStepper = NSStepper; 
+                interlineSpacingTextField = NSTextField; 
+                maxLineHeightStepper = id; 
+                maxLineHeightTextField = id; 
+                minLineHeightStepper = id; 
+                minLineHeightTextField = id; 
+                multipleSpacingDefaultButton = id; 
+                multipleSpacingSlider = id; 
+                multipleSpacingStepper = id; 
+                multipleSpacingTextField = id; 
+                tailIndentStepper = id; 
+                tailIndentTextField = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = "java.lang.Object"; LANGUAGE = Java; }
+    ); 
+    IBVersion = 1; 
+}
