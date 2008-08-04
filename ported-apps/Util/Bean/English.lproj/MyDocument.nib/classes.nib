@@ -1,0 +1,131 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {getInfoSheet = id; }; 
+            CLASS = ASKNibObjectInfo; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                getInfoSheet = id; 
+                pageDown = id; 
+                pageUp = id; 
+                removeTraitsAction = id; 
+                scrollPageDown = id; 
+                scrollPageUp = id; 
+                selectLiveWordCounting = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = JHDocumentController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSDocumentController; 
+        }, 
+        {CLASS = JHScrollView; LANGUAGE = ObjC; SUPERCLASS = NSScrollView; }, 
+        {
+            CLASS = JHScroller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {pageDownButton = id; pageUpButton = id; }; 
+            SUPERCLASS = NSScroller; 
+        }, 
+        {
+            ACTIONS = {
+                addTabStopAction = id; 
+                backupAutomaticallyAction = id; 
+                cancelAddTabStopAction = id; 
+                changeEncodingAction = id; 
+                closeEncodingSheet = id; 
+                closeEncodingSheetWithCancel = id; 
+                closeInfoSheet = id; 
+                closePropertiesSheet = id; 
+                displayHelp = id; 
+                encodingPreviewAction = id; 
+                imageSheetCloseAction = id; 
+                imageSliderAction = id; 
+                lockedFileButtonAction = id; 
+                readOnlyButtonAction = id; 
+                revealFileInFinder = id; 
+                setAutosaveAction = id; 
+                startAndStopAutosaveAction = id; 
+                zoomSlider = id; 
+            }; 
+            CLASS = MyDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                backupAutomaticallyButton = id; 
+                backupAutomaticallyLabel = id; 
+                charCountField = NSTextField; 
+                charCountMinusSpacesField = NSTextField; 
+                condensedTextView = NSTextView; 
+                doAutosaveButton = id; 
+                doAutosaveLabel = id; 
+                doAutosaveStepper = id; 
+                doAutosaveTextField = id; 
+                docWindow = NSWindow; 
+                encodingCancelButton = id; 
+                encodingOKButton = id; 
+                encodingPopup = NSPopUpButton; 
+                encodingPreviewTextView = id; 
+                encodingSheet = id; 
+                floatImage = id; 
+                imageSheet = NSPanel; 
+                imageSlider = id; 
+                imageSliderTextField = id; 
+                infoSheet = NSPanel; 
+                infoSheetEncoding = id; 
+                infoSheetEncodingBox = id; 
+                infoSheetEncodingButton = id; 
+                lineCountField = NSTextField; 
+                lineFragCountField = NSTextField; 
+                liveWordCountField = NSTextField; 
+                lockedFileButton = NSButton; 
+                lockedFileLabel = NSTextField; 
+                pageCountField = NSTextField; 
+                pageDownButton = id; 
+                pageUpButton = id; 
+                pageView = PageView; 
+                paragraphCountField = NSTextField; 
+                propertiesSheet = id; 
+                propsAuthor = id; 
+                propsComment = id; 
+                propsCompany = id; 
+                propsCopyright = id; 
+                propsKeywords = id; 
+                propsSubject = id; 
+                propsTitle = id; 
+                readOnlyButton = NSButton; 
+                removeTabStopsButton = NSButton; 
+                revealFileInFinderButton = id; 
+                selCharCountField = NSTextField; 
+                selWordCountField = NSTextField; 
+                tabStopAlignmentButton = NSButton; 
+                tabStopPanel = id; 
+                tabStopValueField = id; 
+                tabStopValueLabel = id; 
+                theScrollView = JHScrollView; 
+                wordCountField = NSTextField; 
+                zoomAmt = NSTextField; 
+                zoomSlider = NSSlider; 
+            }; 
+            SUPERCLASS = NSDocument; 
+        }, 
+        {CLASS = MyTextView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
+        {
+            CLASS = MyWindowController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            ACTIONS = {doPageLayout = id; textColors = id; }; 
+            CLASS = PageView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
