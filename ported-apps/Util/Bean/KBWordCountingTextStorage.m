@@ -83,7 +83,11 @@ NSString *KBTextStorageStatisticsDidChangeNotification = @"KBTextStorageStatisti
 
 - (id)init
 {
+#ifdef GNUSTEP
 	if (self = [super initWithString: nil attributes: nil])
+#else
+	if (self = [super init])
+#endif
 	{
 		text = [[NSMutableAttributedString alloc] init];
 		wordCount = 0;
@@ -93,8 +97,12 @@ NSString *KBTextStorageStatisticsDidChangeNotification = @"KBTextStorageStatisti
 
 - (id)initWithString:(NSString *)aString
 {
+#ifdef GNUSTEP
 	if (self = [super initWithString: aString attributes: nil])
-	{
+#else
+	if (self = [super init])
+#endif	
+        {
 		text = [[NSMutableAttributedString alloc] initWithString:aString];
 		wordCount = [self wordCountForRange:NSMakeRange(0,[text length])];
 	}
@@ -103,7 +111,11 @@ NSString *KBTextStorageStatisticsDidChangeNotification = @"KBTextStorageStatisti
 
 - (id)initWithString:(NSString *)aString attributes:(NSDictionary *)attributes
 {
+#ifdef GNUSTEP
 	if (self = [super initWithString: aString attributes: attributes])
+#else
+	if (self = [super init])
+#endif	
 	{
 		text = [[NSMutableAttributedString alloc] initWithString:aString attributes:attributes];
 		wordCount = [self wordCountForRange:NSMakeRange(0,[text length])];
@@ -113,7 +125,11 @@ NSString *KBTextStorageStatisticsDidChangeNotification = @"KBTextStorageStatisti
 
 - (id)initWithAttributedString:(NSAttributedString *)aString
 {
+#ifdef GNUSTEP
 	if (self = [super initWithAttributedString: aString])
+#else
+	if (self = [super init])
+#endif	
 	{
 		text = [aString mutableCopy];
 		wordCount = [self wordCountForRange:NSMakeRange(0,[text length])];
