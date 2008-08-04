@@ -324,9 +324,13 @@ const OSType kMyAppCreatorCode = 'bEAN';
 		}
 		//	get first line indent from defaults in preferences
 		float firstLineIndent = 0.0;
+
+#ifndef GNUSTEP
 		firstLineIndent = [defaults boolForKey:@"prefIsMetric"]
 					? [[defaults valueForKey:@"prefDefaultFirstLineIndent"] floatValue] * 28.35 
 					: [[defaults valueForKey:@"prefDefaultFirstLineIndent"] floatValue] * 72.0;
+#endif
+
 		if (firstLineIndent) { [theParagraphStyle setFirstLineHeadIndent:firstLineIndent]; }
 
 		//	make a dictionary of the attributes
@@ -335,8 +339,13 @@ const OSType kMyAppCreatorCode = 'bEAN';
 		[theParagraphStyle release];
 		
 		//	retrieve the default font name and size from user prefs; add to dictionary
+#ifdef GNUSTEP
+		NSString *richTextFontName = @"Helvetica";
+		float richTextFontSize = 12;
+#else
 		NSString *richTextFontName = [defaults valueForKey:@"prefRichTextFontName"];
 		float richTextFontSize = [[defaults valueForKey:@"prefRichTextFontSize"] floatValue];
+#endif
 		//	create NSFont from name and size
 		NSFont *aFont = [NSFont fontWithName:richTextFontName size:richTextFontSize];
 		//	use system font on error (Lucida Grande, it's nice)
@@ -1405,33 +1414,42 @@ NSString *universalTypeForFile(NSString *filename)
 	
 	//	get left margin from defaults in preferences
 	float leftMargin = 0.0;
+#ifndef GNUSTEP
 	leftMargin = [defaults boolForKey:@"prefIsMetric"] 
 				? [[defaults valueForKey:@"prefDefaultLeftMargin"] floatValue] * 28.35 
 				: [[defaults valueForKey:@"prefDefaultLeftMargin"] floatValue] * 72.0;
+#endif
+
 	if (leftMargin) { [printInfo setLeftMargin:leftMargin]; }
 	else { [printInfo setLeftMargin:0.0]; }
 	
 	//	get right margin from defaults in preferences
 	float rightMargin = 0.0;
+#ifndef GNUSTEP
 	rightMargin = [defaults boolForKey:@"prefIsMetric"] 
 				? [[defaults valueForKey:@"prefDefaultRightMargin"] floatValue] * 28.35 
 				: [[defaults valueForKey:@"prefDefaultRightMargin"] floatValue] * 72.0;
+#endif
 	if (leftMargin) { [printInfo setRightMargin:rightMargin]; }
 	else { [printInfo setRightMargin:0.0]; }
 
 	//	get top margin from defaults in preferences
 	float topMargin = 0.0;
+#ifndef GNUSTEP
 	topMargin = [defaults boolForKey:@"prefIsMetric"] 
 				? [[defaults valueForKey:@"prefDefaultTopMargin"] floatValue] * 28.35 
 				: [[defaults valueForKey:@"prefDefaultTopMargin"] floatValue] * 72.0;
+#endif
 	if (topMargin) { [printInfo setTopMargin:topMargin]; }
 	else { [printInfo setTopMargin:0.0]; }
 	
 	//	get bottom margin from defaults in preferences
 	float bottomMargin = 0.0;
+#ifndef GNUSTEP
 	bottomMargin = [defaults boolForKey:@"prefIsMetric"] 
 				? [[defaults valueForKey:@"prefDefaultBottomMargin"] floatValue] * 28.35 
 				: [[defaults valueForKey:@"prefDefaultBottomMargin"] floatValue] * 72.0;
+#endif
 	if (bottomMargin) { [printInfo setBottomMargin:bottomMargin]; }
 	else { [printInfo setBottomMargin:0.0]; }
 	
@@ -3612,7 +3630,9 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 //	store 'alternate' text colors for later when user decides to use them
 -(void)applyAltTextColors
 {
+#ifndef GNUSTEP
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
+
 	NSData *dataAltTextColor = [defaults objectForKey:@"altTextColor"];
 	NSColor *theTextColor = [NSUnarchiver unarchiveObjectWithData:dataAltTextColor];
 	[self setTextViewTextColor:theTextColor];
@@ -3621,6 +3641,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 	[self setTextViewBackgroundColor:theBackgroundColor];
 	dataAltTextColor = nil;
 	dataAltBackgroundColor = nil;
+#endif
 }
 
 // ******************* Toggle Show Alternate Text Colors ********************
@@ -6910,7 +6931,9 @@ todo: selection panel with checkboxes for different types of matching selections
     [toolbar setAllowsUserCustomization: YES];
     [toolbar setAutosavesConfiguration: YES];
     [toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
-	[toolbar setShowsBaselineSeparator:YES];
+#ifndef GNUSTEP
+    [toolbar setShowsBaselineSeparator:YES];
+#endif
     // We are the delegate
     [toolbar setDelegate:self];
     // Attach the toolbar to the document window 
