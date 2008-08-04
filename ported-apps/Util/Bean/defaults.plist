@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSColorPanelMode</key>
+	<string>6</string>
+	<key>NSColorPanelVisibleSwatchRows</key>
+	<integer>1</integer>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
+	<key>NSFontPanelPreviewHeight</key>
+	<real>73</real>
+	<key>NSNavLastUserSetHideExtensionButtonState</key>
+	<false/>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{518, 401}</string>
+	<key>NSNavPanelExpandedStateForSaveMode</key>
+	<true/>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>843 95 214 309 0 0 1280 832 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>766 100 451 392 0 0 1280 832 </string>
+	<key>altBackgroundColor</key>
+	<data>
+	BAt0eXBlZHN0cmVhbYED6IQBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmgzyXxIiDPlaH04M+mOesAYY=
+	</data>
+	<key>altTextColor</key>
+	<data>
+	BAt0eXBlZHN0cmVhbYED6IQBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAQEBAYY=
+	</data>
+	<key>prefConstrainScroll</key>
+	<true/>
+	<key>prefDefaultBottomMargin</key>
+	<integer>1</integer>
+	<key>prefDefaultFirstLineIndent</key>
+	<integer>0</integer>
+	<key>prefDefaultFontTypeTag</key>
+	<integer>0</integer>
+	<key>prefDefaultLeftMargin</key>
+	<real>0.69999999999999996</real>
+	<key>prefDefaultLineSpacing</key>
+	<real>1.5</real>
+	<key>prefDefaultRightMargin</key>
+	<real>0.69999999999999996</real>
+	<key>prefDefaultSaveFormatIndex</key>
+	<integer>0</integer>
+	<key>prefDefaultTopMargin</key>
+	<real>0.69999999999999996</real>
+	<key>prefIsMetric</key>
+	<false/>
+	<key>prefLiveWordCount</key>
+	<true/>
+	<key>prefPlainTextFontName</key>
+	<string>Courier</string>
+	<key>prefPlainTextFontSize</key>
+	<real>13</real>
+	<key>prefPrintHeaderFooter</key>
+	<false/>
+	<key>prefRichTextFontName</key>
+	<string>Times</string>
+	<key>prefRichTextFontSize</key>
+	<real>13</real>
+	<key>prefShowHorizontalScroller</key>
+	<false/>
+	<key>prefShowInvisibles</key>
+	<false/>
+	<key>prefShowLayoutView</key>
+	<true/>
+	<key>prefShowMarginGuides</key>
+	<true/>
+	<key>prefShowPageShadow</key>
+	<true/>
+	<key>prefShowRuler</key>
+	<false/>
+	<key>prefShowRulerWidgets</key>
+	<false/>
+	<key>prefSmartQuotes</key>
+	<true/>
+	<key>prefSmartQuotesStyleTag</key>
+	<integer>0</integer>
+	<key>prefUseAltColors</key>
+	<false/>
+	<key>prefUseFitWidth</key>
+	<true/>
+	<key>prefUseSpellcheck</key>
+	<true/>
+</dict>
+</plist>

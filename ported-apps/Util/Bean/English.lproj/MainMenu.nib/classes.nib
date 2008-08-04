@@ -1,0 +1,151 @@
+{
+    IBClasses = (
+        {CLASS = Controller; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                applyPrefs = id; 
+                backupDocumentAction = id; 
+                checkForUpdate = id; 
+                convertQuotesAction = id; 
+                copyAndPasteFontOrRulerAction = id; 
+                defineWord = id; 
+                doPageLayout = id; 
+                exportToHTML = id; 
+                floatWindow = id; 
+                getInfoSheet = id; 
+                insertBacktab = id; 
+                insertBreakAction = id; 
+                insertContainerBreak = id; 
+                insertDateTimeStamp = id; 
+                insertImageAction = id; 
+                insertLineBreak = id; 
+                insertNewline = id; 
+                insertTab = id; 
+                inspectorSpacingAction = id; 
+                invertSelection = id; 
+                listItemIndent = id; 
+                listItemUnindent = id; 
+                myAction = id; 
+                orderFrontLinkPanel = id; 
+                orderFrontListPanel = id; 
+                orderFrontSpacingPanel = id; 
+                orderFrontTablePanel = id; 
+                prepareToSaveDocument = id; 
+                propertiesSheetAction = id; 
+                restoreCursorLocationAction = id; 
+                saveRTFwithPictures = id; 
+                saveTheDocument = id; 
+                selectLiveWordCounting = id; 
+                sendToMail = id; 
+                setPrintMargins = id; 
+                setSmartQuotesStyleInAllDocuments = id; 
+                setSpacing = id; 
+                setTheViewType = id; 
+                showAddTabStopPanelAction = id; 
+                showInspectorPanelAction = id; 
+                showLinkSheet = id; 
+                showResizeImageSheetAction = id; 
+                specialTextListAction = id; 
+                startAndStopAutosaveAction = id; 
+                switchTextColors = id; 
+                testMethod = id; 
+                toggleBothRulers = id; 
+                toggleInvisiblesAction = id; 
+                toggleMarginsAction = id; 
+                toggleReadOnly = id; 
+                toggleRich = id; 
+                useSmartQuotesAction = id; 
+                zoomInAction = id; 
+                zoomOutAction = id; 
+                zoomSelect = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = JHDocumentController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {defaultSaveFormatPopupButton = id; }; 
+            SUPERCLASS = NSDocumentController; 
+        }, 
+        {
+            CLASS = MenuController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {dateTimeStampMenu = id; }; 
+            SUPERCLASS = NSApplication; 
+        }, 
+        {
+            ACTIONS = {modifyOptionsViaPanel = id; myAction = id; }; 
+            CLASS = NSFontManager; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = NSLevelIndicator; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            ACTIONS = {
+                changeRichTextFont = id; 
+                returnToDefaultColors = id; 
+                revertSettings = id; 
+                saveAndApplyPrefs = id; 
+            }; 
+            CLASS = PrefController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                altBackgroundColorWell = NSColorWell; 
+                altTextColorWell = NSColorWell; 
+                plainTextFontField = NSTextField; 
+                prefWindow = NSWindow; 
+                richTextFontField = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                applyChangesAction = id; 
+                changeColorExampleAction = id; 
+                changeFontAction = id; 
+                closeAction = id; 
+                enableChangeButtonAction = id; 
+                selectDefaultSaveFormatAction = id; 
+                useAltColorsAction = id; 
+                useMetricAction = id; 
+            }; 
+            CLASS = PrefWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                altBackgroundColorWell = id; 
+                altTextColorWell = id; 
+                applyChangesButton = id; 
+                defaultBottomMarginTextField = id; 
+                defaultFirstLineIndentStepper = id; 
+                defaultFirstLineIndentTextField = id; 
+                defaultIsMetric = id; 
+                defaultLeftMarginTextField = id; 
+                defaultLineSpacingPopUpButton = id; 
+                defaultRightMarginTextField = id; 
+                defaultSaveFormatPopupButton = id; 
+                defaultTopMarginTextField = id; 
+                defaultUnitsTextField = id; 
+                plainTextColorTextField = id; 
+                plainTextFontNameField = id; 
+                prefWindow = id; 
+                richTextColorTextField = id; 
+                richTextFontNameField = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {
+                menuChoiceChangeFavoriteFont = id; 
+                menuChoiceChangeFont = id; 
+                rebuildMenu = id; 
+            }; 
+            CLASS = UKFontMenuController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {fontMenu = NSMenu; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
