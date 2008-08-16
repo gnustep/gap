@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005 Riccardo Mottola
+   Copyright (C) 2005-2008 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -54,15 +54,14 @@
     
     if ((self = [super init]))
     {
+        connMode = defaultMode;
+        
+        threadRunning = NO;
+        
+        font = [NSFont userFixedPitchFontOfSize: 0];
+        textAttributes = [NSMutableDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+        [textAttributes retain];        
     }
-    connMode = defaultMode;
-
-    threadRunning = NO;
-    
-    font = [NSFont userFixedPitchFontOfSize: 0];
-    textAttributes =
-    [NSMutableDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
-   [textAttributes retain];
     return self;
 }
 
@@ -74,7 +73,6 @@
 
 - (void)awakeFromNib
 {
-//  [[NSApp mainMenu] setTitle:@"FTP"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
@@ -482,6 +480,8 @@
 - (IBAction)disconnect:(id)sender
 {
     [ftp disconnect];
+    [mainWin setTitle:@"FTP"];
+
 }
 
 - (IBAction)showPrefPanel:(id)sender
@@ -632,8 +632,11 @@
         [remoteTableData initData:dirList];
         [remoteView setDataSource:remoteTableData];
 
-        //we update the path menu
+        /* update the path menu */
         [self updatePath :remotePath :[ftp workDirSplit]];
+        
+        /* set the window title */
+        [mainWin setTitle:[connAddress stringValue]];
     }
 }
 
