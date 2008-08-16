@@ -10,6 +10,9 @@
                 rotateImage180 = id; 
                 rotateImage270 = id; 
                 rotateImage90 = id; 
+                saveImageAs = id; 
+                setCompressionLevel = id; 
+                setCompressionType = id; 
                 setFullScreen = id; 
                 setScaleToFit = id; 
             }; 
@@ -19,9 +22,13 @@
                 controlWin = NSWindow; 
                 fileListData = FileTable; 
                 fileListView = NSTableView; 
+                fileTypePopUp = NSPopUpButton; 
                 fitButton = NSButton; 
                 fullScreenButton = NSButton; 
                 fullScreenMenuItem = NSMenuItem; 
+                jpegCompressionField = NSTextField; 
+                jpegCompressionSlider = NSSlider; 
+                saveOptionsView = NSView; 
                 scrollView = NSScrollView; 
                 smallView = LMFlipView; 
                 smallWindow = NSWindow; 
