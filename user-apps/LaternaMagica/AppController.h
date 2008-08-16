@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2007 Riccardo Mottola
+   Copyright (C) 2006-2008 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -38,11 +38,18 @@
     IBOutlet NSButton     *fitButton;
     IBOutlet NSMenuItem   *fullScreenMenuItem;
     IBOutlet NSButton     *fullScreenButton;
+    
+    IBOutlet NSView        *saveOptionsView;
+    IBOutlet NSPopUpButton *fileTypePopUp;
+    IBOutlet NSTextField   *jpegCompressionField;
+    IBOutlet NSSlider      *jpegCompressionSlider;
+    
     BOOL                  scaleToFit;
     NSWindow              *window;
     NSWindow              *fullWindow;
     NSImageView           *view;
     LMFlipView            *fullView;
+    NSSavePanel           *savePanel;
 }
 
 - (IBAction)addFiles:(id)sender;
@@ -55,5 +62,9 @@
 - (IBAction)rotateImage90:(id)sender;
 - (IBAction)rotateImage180:(id)sender;
 - (IBAction)rotateImage270:(id)sender;
+
+- (IBAction)saveImageAs:(id)sender;
+- (IBAction)setCompressionType:(id)sender;
+- (IBAction)setCompressionLevel:(id)sender;
 
 @end

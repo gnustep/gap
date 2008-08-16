@@ -290,7 +290,8 @@
 
     rows = [fileListView numberOfRows];
 
-    if (rows > 0) {
+    if (rows > 0)
+    {
         sr = [fileListView selectedRow];
 
         if (sr < (rows - 1))
@@ -344,7 +345,7 @@
             NSFileManager *fm;
             
             fm = [NSFileManager defaultManager];
-            // TODO should implement a handelr and error messages
+            // TODO should implement a handler and error messages
             [fm removeFileAtPath:[fileListData pathAtIndex:sr] handler:nil];
             
             [self removeImage:self];
@@ -524,9 +525,88 @@
     [destImage release];
 }
 
+- (IBAction)saveImageAs:(id)sender
+{
+    NSImage *srcImage;
+    NSBitmapImageRep *srcImageRep;
+    NSData *dataOfRep;
+    NSDictionary *repProperties;
+    NSString *origFileName;
+    
+
+    origFileName = [[fileListData pathAtIndex:[fileListView selectedRow]] lastPathComponent];
+    
+    savePanel = [NSSavePanel savePanel];
+    [savePanel setDelegate: self];
+    [savePanel setAccessoryView: saveOptionsView];
+    [jpegCompressionSlider performClick:nil];
+    [fileTypePopUp selectItem:[fileTypePopUp itemAtIndex:0]];
+    
+    
+    if ([savePanel runModalForDirectory:@"" file:origFileName] ==  NSFileHandlingPanelOKButton)
+    {
+        NSString *fileName;
+        int selItem;
+
+        srcImage = [view image];
+        srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+
+        fileName = [savePanel filename];
+                
+        selItem = [fileTypePopUp indexOfSelectedItem];
+        if (selItem == 0)
+        {
+            NSLog(@"Tiff");
+            repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:NSTIFFCompressionLZW] forKey:NSImageCompressionMethod];
+            dataOfRep = [srcImageRep representationUsingType: NSTIFFFileType properties:repProperties];
+
+        } else if (selItem == 1)
+        {
+            NSLog(@"Jpeg");
+            repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[jpegCompressionSlider floatValue]/100] forKey:NSImageCompressionFactor];
+            dataOfRep = [srcImageRep representationUsingType: NSJPEGFileType properties:repProperties];
+        }
+        [dataOfRep writeToFile:fileName atomically:NO];            
+    }
+//    [savePanel release];
+}
+
 /* ===== delegates =====*/
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
     [self addFile:filename];
+    return YES;
 }
+
+/* save panel delegates */
+/** change the file type */
+- (IBAction)setCompressionType:(id)sender
+{
+    int selItem;
+    
+    selItem = [fileTypePopUp indexOfSelectedItem];
+    if (selItem == 0)
+    {
+        NSLog(@"Tiff");
+        [jpegCompressionSlider setEnabled:NO];
+        [jpegCompressionField setEnabled:NO];
+        [savePanel setRequiredFileType:@"tiff"];
+    } else if (selItem == 1)
+    {
+        NSLog(@"Jpeg");
+        [jpegCompressionSlider setEnabled:YES];
+        [jpegCompressionField setEnabled:YES];
+        [savePanel setRequiredFileType:@"jpg"];
+    }
+}
+
+/** keep the slider and the text view of the compression level in sync */
+- (IBAction)setCompressionLevel:(id)sender
+{
+    if (sender == jpegCompressionField)
+        [jpegCompressionSlider takeFloatValueFrom:sender];
+    else
+        [jpegCompressionField takeFloatValueFrom:sender];
+}
+
 @end
