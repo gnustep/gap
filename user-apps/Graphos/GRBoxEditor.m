@@ -25,6 +25,7 @@
 
 #import "GRBoxEditor.h"
 #import "GRDocView.h"
+#import "GRFunctions.h"
 
 @implementation GRBoxEditor
 
@@ -43,83 +44,26 @@
 }
 
 
-- (void)select
-{
-    [self selectAsGroup];
-}
-
-- (void)selectAsGroup
-{
-    if([object locked])
-        return;
-
-    if(!groupSelected)
-    {
-        groupSelected = YES;
-        editSelected = NO;
-        isvalid = NO;
-
-        [[object view] unselectOtherObjects: object];
-    }
-}
-
-- (void)selectForEditing
-{
-    if([object locked])
-        return;
-    editSelected = YES;
-    groupSelected = NO;
-    isvalid = NO;
-    [[object view] unselectOtherObjects: object];
-}
-
-
-- (void)unselect
-{
-    groupSelected = NO;
-    editSelected = NO;
-    isvalid = YES;
-    isdone = YES;
-}
-
-- (BOOL)isSelect
-{
-    if(editSelected || groupSelected)
-        return YES;
-    return NO;
-}
-
-- (BOOL)isGroupSelected
-{
-    return groupSelected;
-}
-
-- (BOOL)isEditSelected
-{
-    return editSelected;
-}
-
 - (NSPoint)moveControlAtPoint:(NSPoint)p
 {
-    GRObjectControlPoint *cp, *pntonpnt;
+    GRObjectControlPoint *cp;
     NSEvent *event;
     NSPoint pp;
     BOOL found = NO;
-    int i;
 
-    cp = [object startControlPoint];
+    cp = [(GRBox *)object startControlPoint];
     if (pointInRect([cp centerRect], p))
     {
         [self selectForEditing];
-        [object setCurrentPoint:cp];
+        [(GRPathObject *)object setCurrentPoint:cp];
         [cp select];
         found =  YES;
     }
-    cp = [object endControlPoint];
+    cp = [(GRBox *)object endControlPoint];
     if (pointInRect([cp centerRect], p))
     {
         [self selectForEditing];
-        [object setCurrentPoint:cp];
+        [(GRPathObject *)object setCurrentPoint:cp];
         [cp select];
         found =  YES;
     }
@@ -145,8 +89,8 @@
                 if([object currentPoint] == [object firstPoint] || pntonpnt == [object firstPoint])
                     [pntonpnt moveToPoint: pp];
             } */
-            [[object currentPoint] moveToPoint: pp];
-            [object remakePath];
+            [[(GRPathObject *)object currentPoint] moveToPoint: pp];
+            [(GRPathObject *)object remakePath];
 
             [[object view] setNeedsDisplay: YES];
             event = [[[object view] window] nextEventMatchingMask:
@@ -160,23 +104,22 @@
 
 - (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
 {
-    GRObjectControlPoint *cp, *pntonpnt;
+    GRObjectControlPoint *cp;
     BOOL found = NO;
-    int i;
 
-    cp = [object startControlPoint];
-    if (pointInRect([cp centerRect], oldp))
-    {
-        [self selectForEditing];//
-        [object setCurrentPoint:cp];
-        [cp select];
-        found =  YES;
-    }
-    cp = [object endControlPoint];
+    cp = [(GRBox *)object startControlPoint];
     if (pointInRect([cp centerRect], oldp))
     {
         [self selectForEditing];
-        [object setCurrentPoint:cp];
+        [(GRPathObject *)object setCurrentPoint:cp];
+        [cp select];
+        found =  YES;
+    }
+    cp = [(GRBox *)object endControlPoint];
+    if (pointInRect([cp centerRect], oldp))
+    {
+        [self selectForEditing];
+        [(GRBox *)object setCurrentPoint:cp];
         [cp select];
         found =  YES;
     }
@@ -190,7 +133,7 @@
         if([object currentPoint] == [object firstPoint] || pntonpnt == [object firstPoint])
             [pntonpnt moveToPoint: newp];
     }*/
-    [[object currentPoint] moveToPoint: newp];
+    [[(GRPathObject *)object currentPoint] moveToPoint: newp];
 //    [object remakePath];
     [[object view] setNeedsDisplay: YES];
 }
@@ -211,10 +154,10 @@
     {
         NSRect r;
 
-        r = [[object startControlPoint] centerRect];
+        r = [[(GRBox *)object startControlPoint] centerRect];
         [[NSColor blackColor] set];
         NSRectFill(r);
-        r = [[object endControlPoint] centerRect];
+        r = [[(GRBox *)object endControlPoint] centerRect];
         [[NSColor blackColor] set];
         NSRectFill(r);
     }
@@ -223,22 +166,22 @@
     {
         NSRect r;
 
-        r = [[object startControlPoint] centerRect];
+        r = [[(GRBox *)object startControlPoint] centerRect];
         [[NSColor blackColor] set];
         NSRectFill(r);
-        r = [[object endControlPoint] centerRect];
+        r = [[(GRBox *)object endControlPoint] centerRect];
         [[NSColor blackColor] set];
         NSRectFill(r);
 
-        if([[object startControlPoint] isSelect])
+        if([[(GRBox *)object startControlPoint] isSelect])
         {
-            r = [[object startControlPoint] innerRect];
+            r = [[(GRBox *)object startControlPoint] innerRect];
             [[NSColor whiteColor] set];
             NSRectFill(r);
         }
-        if([[object endControlPoint] isSelect])
+        if([[(GRBox *)object endControlPoint] isSelect])
         {
-            r = [[object endControlPoint] innerRect];
+            r = [[(GRBox *)object endControlPoint] innerRect];
             [[NSColor whiteColor] set];
             NSRectFill(r);
         }

@@ -92,7 +92,10 @@
  */
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p;
 
-- (NSArray *)updatePrintInfo: (NSPrintInfo *)pi;
+/**
+ * update the view orientation and size according to the new print info object
+ */
+- (void)updatePrintInfo: (NSPrintInfo *)pi;
 
 - (void)deleteSelectedObjects;
 - (void)undoDeleteObjects;
@@ -113,7 +116,7 @@
 
 - (IBAction)moveSelectedObjectsToFront:(id)sender;
 - (IBAction)moveSelectedObjectsToBack:(id)sender;
-- (void)unselectOtherObjects:(id)anObject;
+- (void)unselectOtherObjects:(GRDrawableObject *)anObject;
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout;
 - (void)movePageFromHandPoint:(NSPoint)handpos;
 

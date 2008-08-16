@@ -34,7 +34,6 @@
     NSWindow *myWindow;
     GRTextEditorView *myView;
     BOOL isSelect;
-    BOOL isvalid;
 }
 
 - (id)initEditor:(GRText *)anObject;

@@ -45,7 +45,7 @@ typedef struct
 }
 
 - (id)initAtPoint:(NSPoint)aPoint
-        forPath:(GRBezierPath *)aPath
+          forPath:(GRBezierPath *)aPath
        zoomFactor:(float)zf;
 
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePosition;

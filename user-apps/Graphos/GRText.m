@@ -68,13 +68,13 @@
         editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
         if(openedit)
         {
-            [editor setPoint: pos
+            [(GRTextEditor *)editor setPoint: pos
                   withString: nil
                   attributes: nil];
-            result = [[editor editorView] runModal];
+            result = [[(GRTextEditor *)editor editorView] runModal];
             if(result == NSAlertDefaultReturn)
-                [self setString: [[editor editorView] textString]
-                     attributes: [[editor editorView] textAttributes]];
+                [self setString: [[(GRTextEditor *)editor editorView] textString]
+                     attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
         }
     }
     return self;
@@ -171,7 +171,7 @@
     [gdtxt setFillAlpha: fillAlpha];
     [gdtxt setVisible: visible];
     [gdtxt setLocked: locked];
-    [[gdtxt editor] setIsValid: NO];
+    [(GRTextEditor *)[gdtxt editor] setIsValid: NO];
 
     return gdtxt;
 }
@@ -291,13 +291,13 @@
         style, NSParagraphStyleAttributeName, nil];
 
     editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
-    [editor setPoint: pos
+    [(GRTextEditor *)editor setPoint: pos
           withString: str
           attributes: attrs];
-    result = [[editor editorView] runModal];
+    result = [[(GRTextEditor *)editor editorView] runModal];
     if(result == NSAlertDefaultReturn)
-        [self setString: [[editor editorView] textString]
-             attributes: [[editor editorView] textAttributes]];
+        [self setString: [[(GRTextEditor *)editor editorView] textString]
+             attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
     [editor release];
     [[NSApp delegate] updateCurrentWindow];
 }
@@ -464,7 +464,6 @@
     NSArray *lines;
     NSString *line;
     float baselny = pos.y;
-    NSColor *color;
     int i;
     NSBezierPath *bezp;
     NSMutableParagraphStyle *style;
@@ -496,7 +495,7 @@
 
 
             if([editor isSelect])
-	    {
+	        {
                 [[NSColor blackColor] set];
                 [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
                 [bezp stroke];

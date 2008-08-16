@@ -165,11 +165,6 @@
 
 - (void)makeFontsPopUp:(NSString *)selFontName
 {
-    NSDictionary *env;
-    NSMutableDictionary *fontsDict;
-    NSArray *fontsList;
-    NSString *sysFontsListPath, *usrFontsListPath;
-    BOOL fileExists;
     int i;
     
     // these just because we do it programmatically at the moment
@@ -178,8 +173,6 @@
 
     fontMgr = [NSFontManager sharedFontManager];
     fontList = [fontMgr availableFonts];
-
-
 
     [fontsPopUp removeAllItems];
     for(i = 0; i < [fontList count]; i++)

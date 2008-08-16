@@ -34,9 +34,21 @@
 @interface GRObjectEditor : NSObject
 {
     GRDrawableObject *object;
+    BOOL groupSelected;
+    BOOL editSelected;
+    BOOL isvalid;
+    BOOL isdone;
 }
 
+- (void)select;
+- (void)selectAsGroup;
+- (void)selectForEditing;
+- (BOOL)isSelect;
+- (BOOL)isGroupSelected;
 - (void)unselect;
+- (BOOL)isEditSelected;
+- (BOOL)isdone;
+- (void)setIsDone:(BOOL)status;
 - (void)draw;
 
 @end

@@ -47,11 +47,13 @@ typedef enum
     magnifytool
 } ToolType;
 
+/**
+ * Application Controller
+ */
 @interface Graphos : NSObject
 {
     GRToolsWindow *tools;
     ToolType tooltype;
-    NSDictionary *pfbPathForFont;
 }
 
 - (void)setToolType:(ToolType)type;
