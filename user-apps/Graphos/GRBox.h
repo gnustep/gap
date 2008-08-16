@@ -48,6 +48,8 @@
 - (id)initInView:(GRDocView *)aView
       zoomFactor:(float)zf;
 - (BOOL)onControlPoint:(NSPoint)p;
+- (void)setStartAtPoint:(NSPoint)aPoint;
+- (void)setEndAtPoint:(NSPoint)aPoint;
 - (GRObjectControlPoint *) startControlPoint;
 - (GRObjectControlPoint *) endControlPoint;
 

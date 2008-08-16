@@ -31,22 +31,9 @@
 
 @interface GRBoxEditor : GRPathEditor
 {
-    BOOL groupSelected;
-    BOOL editSelected;
-    BOOL isvalid;
 }
 
 - (id)initEditor:(GRBox *)anObject;
-
-- (void)select;
-
-- (void)selectAsGroup;
-
-- (void)selectForEditing;
-
-- (BOOL)isSelect;
-
-- (BOOL)isGroupSelected;
 
 - (void)draw;
 

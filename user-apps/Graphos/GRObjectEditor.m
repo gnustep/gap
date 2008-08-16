@@ -29,8 +29,70 @@
 
 @implementation GRObjectEditor
 
+- (void)select
+{
+    [self selectAsGroup];
+}
+
+- (void)selectAsGroup
+{
+    if([object locked])
+        return;
+    
+    if(!groupSelected)
+    {
+        groupSelected = YES;
+        editSelected = NO;
+        isvalid = NO;
+        
+        [[object view] unselectOtherObjects: object];
+    }
+}
+
+- (void)selectForEditing
+{
+    if([object locked])
+        return;
+    editSelected = YES;
+    groupSelected = NO;
+    isvalid = NO;
+    [[object view] unselectOtherObjects: object];
+}
+
+
 - (void)unselect
 {
+    groupSelected = NO;
+    editSelected = NO;
+    isvalid = YES;
+    isdone = YES;
+}
+
+- (BOOL)isSelect
+{
+    if(editSelected || groupSelected)
+        return YES;
+    return NO;
+}
+
+- (BOOL)isGroupSelected
+{
+    return groupSelected;
+}
+
+- (BOOL)isEditSelected
+{
+    return editSelected;
+}
+
+- (BOOL)isdone
+{
+    return isdone;
+}
+
+- (void)setIsDone:(BOOL)status
+{
+    isdone = status;
 }
 
 - (void)draw

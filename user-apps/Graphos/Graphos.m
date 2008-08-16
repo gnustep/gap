@@ -30,7 +30,6 @@
 - (void)dealloc
 {
     [tools release];
-    [pfbPathForFont release];
     [super dealloc];
 }
 

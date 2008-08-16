@@ -259,30 +259,11 @@
 {
     int i;
 
-    groupSelected = NO;
-    editSelected = NO;
-    isvalid = YES;
-    isdone = YES;
+    [super unselect];
     for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
         [[[(GRBezierPath *)object controlPoints] objectAtIndex: i] unselect];
 }
 
-- (BOOL)isGroupSelected
-{
-    return groupSelected;
-}
-
-- (BOOL)isEditSelected
-{
-    return editSelected;
-}
-
-- (BOOL)isSelect
-{
-    if(editSelected || groupSelected)
-        return YES;
-    return NO;
-}
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp
 {

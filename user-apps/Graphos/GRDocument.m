@@ -74,9 +74,33 @@
     return NO;
 }
 
+- (void)printShowingPrintPanel:(BOOL)flag
+{
+    NSPrintOperation *op;
+    
+    op = [NSPrintOperation printOperationWithView:docView
+                                        printInfo:[self printInfo]];
+    [op setShowPanels:flag];
+    [op runOperationModalForWindow:[[[self windowControllers] objectAtIndex: 0] window]
+                          delegate:nil
+                    didRunSelector:nil 
+                       contextInfo:nil];    
+}
+
+/**
+ * after the page layout is changed, update the view
+ */
+- (void)setPrintInfo:(NSPrintInfo *)printInfo
+{
+    [super setPrintInfo: printInfo];
+    [docView updatePrintInfo: printInfo];
+}
+
+/**
+ * overridden so to allow changing the page layout
+ */
 - (BOOL)shouldChangePrintInfo:(NSPrintInfo *)newPrintInfo
 {
-    [docView updatePrintInfo: newPrintInfo];
     return YES;
 }
       

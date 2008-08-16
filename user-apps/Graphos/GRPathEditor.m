@@ -38,14 +38,4 @@
 }
 
 
-- (BOOL)isdone
-{
-    return isdone;
-}
-
-- (void)setIsDone:(BOOL)status
-{
-    isdone = status;
-}
-
 @end

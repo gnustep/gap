@@ -32,20 +32,10 @@
 
 @interface GRBezierPathEditor : GRPathEditor
 {
-    BOOL groupSelected;
-    BOOL editSelected;
-    BOOL isvalid;
     float zmFactor;
 }
 
 - (id)initEditor:(GRBezierPath *)anObject;
-
-
-- (void)selectAsGroup;
-- (void)selectForEditing;
-- (BOOL)isGroupSelected;
-- (BOOL)isEditSelected;
-- (BOOL)isSelect;
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
