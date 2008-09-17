@@ -602,6 +602,8 @@
     char    tempStr2[1024];
     
     [connectPanel performClose:nil];
+    [mainWin makeKeyAndOrderFront:self];
+
     ftp = [ftp initWithController:self :connMode];
     [[connAddress stringValue] getCString:tempStr];
     if ([ftp connect:[connPort intValue] :tempStr] < 0)
