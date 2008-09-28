@@ -72,7 +72,9 @@ void initStream(streamStruct *ss, int socket)
 int getChar(streamStruct* ss)
 {
     int result;
+    BOOL gotEof;
 
+    gotEof = NO;
     if (ss->position == ss->len)
     {
         int read;
@@ -86,18 +88,24 @@ int getChar(streamStruct* ss)
         {
             ss->len = 0;
             ss->position = 0;
-            ss->buffer[0] = EOF;
+            ss->buffer[0] = '\0';
+            gotEof = YES;
         } else
         {
             ss->len = 0;
             ss->position = 0;
             NSLog(@"error sock read");
             perror("getChar:read");
-            ss->buffer[0] = EOF;
+            ss->buffer[0] = '\0';
+            gotEof = YES;
         }
     }
-    result = ss->buffer[ss->position];
-    ss->position++;
+    if (gotEof)
+        result = EOF;
+    else {    
+        result = ss->buffer[ss->position];
+        ss->position++;
+    }
     return result;
 }
 
