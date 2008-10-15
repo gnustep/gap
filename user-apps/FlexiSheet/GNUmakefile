@@ -18,7 +18,7 @@ VERSION = 0.5.7
 APP_NAME = FlexiSheet
 
 FlexiSheet_SUBPROJECTS = \
-Core \
+FSCore \
 Functions \
 Operators \
 Application 
