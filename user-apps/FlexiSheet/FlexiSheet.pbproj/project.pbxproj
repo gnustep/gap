@@ -115,8 +115,7 @@
 				015D385600257A857F000001,
 			);
 			isa = PBXGroup;
-			name = "Core Framework";
-			path = Core;
+			path = FSCore;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -165,7 +164,6 @@
 				F67D580401801B58019AFA80,
 				F63D7E900185AF330109C908,
 				6616B64601CA868500A8010B,
-				66BDC54601532E49007388DD,
 				01484B2D00277C1A7F000001,
 				66BBC7D20298E8FD00A8010A,
 				669ECC5301CB97DF00A8010B,
@@ -887,7 +885,6 @@
 				665EF970014C10B9009902E8,
 				660F68C9014DB0D100A8000B,
 				F62CBB25014F93C2011DAD80,
-				66BDC54901532E49007388DD,
 				F6EE64EC015A078B0163AE3D,
 				6655F5120165D15100FF4B52,
 				665D7531017228EA00C5E943,
@@ -1064,7 +1061,6 @@
 				668A86580192694F0066B853,
 				668A86590192694F0066B853,
 				1058C7A9FEA54F5311CA2CBB,
-				66C280EF01CA908F00A8010B,
 				73E2BC0B0506742300A8010F,
 			);
 			isa = PBXFrameworksBuildPhase;
@@ -4321,38 +4317,6 @@
 			settings = {
 			};
 		};
-		66BDC54601532E49007388DD = {
-			children = (
-				66BDC54701532E49007388DD,
-				66BDC54801532E49007388DD,
-			);
-			isa = PBXGroup;
-			name = Compression;
-			path = CompressedSaving;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		66BDC54701532E49007388DD = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = bzlib.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		66BDC54801532E49007388DD = {
-			isa = PBXFileReference;
-			lastKnownFileType = archive.ar;
-			path = libbz2.a;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		66BDC54901532E49007388DD = {
-			fileRef = 66BDC54701532E49007388DD;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		66BDF549016F484C004FCF9B = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -4417,12 +4381,6 @@
 		};
 		66C14DF8028022C000A8010B = {
 			fileRef = 6648FDFF027F129300A8010B;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		66C280EF01CA908F00A8010B = {
-			fileRef = 66BDC54801532E49007388DD;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -5482,8 +5440,7 @@
 				669D6EEA0167AF2300052BA8,
 			);
 			isa = PBXGroup;
-			name = "Formula Evaluation";
-			path = Core;
+			path = FSCore;
 			refType = 4;
 			sourceTree = "<group>";
 		};
