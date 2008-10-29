@@ -14,7 +14,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 SUBPROJECT_NAME = FSOperators
 
-OBJCFLAGS += -Wall -I.. -I../Core -I../Functions -I../Operators 
+OBJCFLAGS += -Wall -I.. -I../FSCore -I../Functions -I../Operators 
 
 FSOperators_OBJC_FILES = \
 FSCatOperator.m \
