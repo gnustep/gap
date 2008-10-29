@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 SUBPROJECT_NAME = UI
 
-OBJCFLAGS += -Wall -I.. -I../.. -I../../Core -I../../Functions -I../../Operators -I../ChartView -I../Inspection
+OBJCFLAGS += -Wall -I.. -I../.. -I../../FSCore -I../../Functions -I../../Operators -I../ChartView -I../Inspection
 
 UI_OBJC_FILES = \
 FSFormulaTable.m        FSTableView+Scrolling.m  SLCornerMenu.m \

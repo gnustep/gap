@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 SUBPROJECT_NAME = Inspection
 
-OBJCFLAGS += -Wall -I.. -I../.. -I../../Core -I../../Functions -I../../Operators -I../ChartView -I../UI
+OBJCFLAGS += -Wall -I.. -I../.. -I../../FSCore -I../../Functions -I../../Operators -I../ChartView -I../UI
 
 Inspection_OBJC_FILES = \
 FSCellInspectorPane.m      FSItemInspectorPane.m \

@@ -14,7 +14,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 SUBPROJECT_NAME = Application
 
-OBJCFLAGS += -Wall -I.. -I../Core -I../Functions -I../Operators -IUI -IChartView -IInspection
+OBJCFLAGS += -Wall -I.. -I../FSCore -I../Functions -I../Operators -IUI -IChartView -IInspection
 
 Application_SUBPROJECTS = \
 UI \
