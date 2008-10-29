@@ -14,7 +14,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 # The application to be compiled
 SUBPROJECT_NAME = FSFunctions
 
-OBJCFLAGS += -Wall -I.. -I../Core -I../Functions -I../Operators 
+OBJCFLAGS += -Wall -I.. -I../FSCore -I../Functions -I../Operators 
 
 FSFunctions_OBJC_FILES = \
 FSAbsFunction.m \
@@ -59,7 +59,7 @@ FSLnFunction.h \
 FSSinFunction.h
 
 # The Resource files to be copied into the app's resources directory
-FSFuntions_RESOURCE_FILES = 
+FSFunctions_RESOURCE_FILES = 
 
 -include GNUmakefile.preamble
 
