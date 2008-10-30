@@ -742,7 +742,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01484B250027781F7F000001 /* Core Framework */ = {
+		01484B250027781F7F000001 /* FSCore */ = {
 			isa = PBXGroup;
 			children = (
 				EEB462190E2DC31D000DEA28 /* GNUmakefile */,
@@ -771,8 +771,7 @@
 				039200960024E3C57F000001 /* FSValue.h */,
 				015D385600257A857F000001 /* FSValue.m */,
 			);
-			name = "Core Framework";
-			path = Core;
+			path = FSCore;
 			sourceTree = "<group>";
 		};
 		01484B260027781F7F000001 /* GUI Elements */ = {
@@ -858,8 +857,8 @@
 				EEFA5F5A0E28F47A00B86693 /* mySTEP.make */,
 				EE6C69800E34C9BA007443AB /* objc */,
 				EE6C69480E34C975007443AB /* libobjc */,
-				01484B250027781F7F000001 /* Core Framework */,
-				F62B76AB01685D8001A89AF4 /* Formula Evaluation */,
+				01484B250027781F7F000001 /* FSCore */,
+				F62B76AB01685D8001A89AF4 /* FSFunctions */,
 				F648352C013B8D5001A80099 /* Math */,
 				66F508630199D84800A8010A /* Unit Test */,
 				01484B270027781F7F000001 /* Application Source */,
@@ -1158,7 +1157,7 @@
 			name = Formula;
 			sourceTree = "<group>";
 		};
-		F62B76AB01685D8001A89AF4 /* Formula Evaluation */ = {
+		F62B76AB01685D8001A89AF4 /* FSFunctions */ = {
 			isa = PBXGroup;
 			children = (
 				669D6EED0167AF4E00052BA8 /* FSConstant.h */,
@@ -1184,8 +1183,8 @@
 				669D6EE90167AF2300052BA8 /* FSVariable.h */,
 				669D6EEA0167AF2300052BA8 /* FSVariable.m */,
 			);
-			name = "Formula Evaluation";
-			path = Core;
+			name = FSFunctions;
+			path = FSCore;
 			sourceTree = "<group>";
 		};
 		F62B76AD01685D8001A89AF4 /* Operators */ = {
@@ -1702,7 +1701,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SOURCES=\"Core/*.m\"                # all source codes\nexport CFLAGS=\"-ICore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport LIBS=\t\t\t\t\t   # add any additional\nexport FRAMEWORKS=\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L)\nexport INSTALL_PATH=/Library/Frameworks   # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install on build host to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=false\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
+			shellScript = "export SOURCES=\"FSCore/*.m\"                # all source codes\nexport CFLAGS=\"-IFSCore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport LIBS=\t\t\t\t\t   # add any additional\nexport FRAMEWORKS=\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L)\nexport INSTALL_PATH=/Library/Frameworks   # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install on build host to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=false\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
 		};
 		EEFA60240E28F58500B86693 /* Build Autodoc */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1735,7 +1734,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SOURCES=\"Functions/*.m Operators/*.m\"                # all source codes\nexport LIBS=\t\t\t\t\t   # add any additional\nexport CFLAGS=\"-ICore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport FRAMEWORKS=\t\t\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L searching in standard locations)\nexport INSTALL_PATH=/Library/Frameworks   # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install locally to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=false\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
+			shellScript = "export SOURCES=\"Functions/*.m Operators/*.m\"                # all source codes\nexport LIBS=\t\t\t\t\t   # add any additional\nexport CFLAGS=\"-IFSCore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport FRAMEWORKS=\t\t\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L searching in standard locations)\nexport INSTALL_PATH=/Library/Frameworks   # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install locally to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=false\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
 		};
 		EEFA77430E2951B900B86693 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1748,7 +1747,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SOURCES=\"Application/*.m Application/ChartView/*.m Application/Inspection/*.m Application/UI/*.m\"                # all source codes\nexport LIBS=\t\t\t\t\t   # add any additional\nexport CFLAGS=\"-ICore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport FRAMEWORKS=\"FSCore FSFunctions WebKit\"\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L)\nexport INSTALL_PATH=/Applications  # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install locally to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=true\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
+			shellScript = "export SOURCES=\"Application/*.m Application/ChartView/*.m Application/Inspection/*.m Application/UI/*.m\"                # all source codes\nexport LIBS=\t\t\t\t\t   # add any additional\nexport CFLAGS=\"-IFSCore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport FRAMEWORKS=\"FSCore FSFunctions WebKit\"\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L)\nexport INSTALL_PATH=/Applications  # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install locally to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=true\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
 		};
 /* End PBXShellScriptBuildPhase section */
 
