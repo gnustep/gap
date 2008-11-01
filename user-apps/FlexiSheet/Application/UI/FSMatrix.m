@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 27-AUG-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSMatrix.m,v 1.1 2008/10/28 13:10:31 hns Exp $
+//  $Id: FSMatrix.m,v 1.2 2008/11/01 14:52:51 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -27,7 +27,8 @@
         size.width += _colWidths[col];
     }
 
-    [self setFrameSize:size];
+    if(_dataSource != nil)
+        [self setFrameSize:size];
 }
 
 - (void)resetCursorRects
