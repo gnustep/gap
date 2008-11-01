@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 27-AUG-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSMatrix.m,v 1.2 2008/11/01 14:52:51 rmottola Exp $
+//  $Id: FSMatrix.m,v 1.3 2008/11/01 15:27:32 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -85,13 +85,17 @@
 - (float)widthForColumn:(int)col
     // Asks the datasource or returns default value.
 {
-    return [_dataSource matrix:self sizeForCell:FSMakeCell(0,col)].width;
+    if (_dataSource != nil)
+        return [_dataSource matrix:self sizeForCell:FSMakeCell(0,col)].width;
+    return 0;
 }
 
 - (float)heightForRow:(int)row
     // Asks the datasource or returns default value.
 {
-    return [_dataSource matrix:self sizeForCell:FSMakeCell(row,0)].height;
+    if (_dataSource != nil)
+      return [_dataSource matrix:self sizeForCell:FSMakeCell(row,0)].height;
+    return 0;
 }
 
 
@@ -352,6 +356,8 @@
 
 - (void)reloadData
 {
+    if (_dataSource = nil)
+       return;
     _numRows = [_dataSource numberOfRowsInMatrix:self];
     free(_rowHeights);
     _rowHeights = malloc(sizeof(float)*_numRows);
