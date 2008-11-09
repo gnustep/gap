@@ -1460,8 +1460,34 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
  */
 - (NSRect ) rectForPage: (int) pageNumber
 {
-    NSPrintInfo *pi = [[[NSDocumentController sharedDocumentController] currentDocument] printInfo];
-    return [pi imageablePageBounds]; // FIXME only 10.2
+    NSRect pageRec;
+    NSSize pageSize;
+    NSPrintInfo *pi;
+    float  leftMargin;
+    float  rightMargin;
+    float  topMargin;
+    float  bottomMargin;
+    
+    pi = [[[NSDocumentController sharedDocumentController] currentDocument] printInfo];
+    pageSize = [pi paperSize];
+    NSLog(@"page size %f %f", pageSize.width, pageSize.height);
+    leftMargin = [pi leftMargin];
+    rightMargin = [pi rightMargin];
+    topMargin = [pi topMargin];
+    bottomMargin = [pi bottomMargin];
+    pageRec = NSMakeRect(leftMargin,
+                        bottomMargin,
+                        pageSize.width - (leftMargin + rightMargin),
+                        pageSize.height - (topMargin + bottomMargin));
+
+    NSLog(@"calculated %f %f %f %f", pageRec.origin.x, pageRec.origin.y, pageRec.size.width, pageRec.size.height);
+
+    pageRec = [[pi printer] imageRectForPaper: [pi paperName]];
+
+    NSLog(@"calculated %f %f %f %f", pageRec.origin.x, pageRec.origin.y, pageRec.size.width, pageRec.size.height);
+    NSLog(@"official %f %f %f %f", [pi imageablePageBounds].origin.x, [pi imageablePageBounds].origin.y, [pi imageablePageBounds].size.width, [pi imageablePageBounds].size.height);
+
+    return pageRec;
 }
 
 @end
