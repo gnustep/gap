@@ -1,3 +1,8 @@
+2008-11-21 01:21-EST Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* Source/Board.m: Slight correction to allow compilation under latest
+	GNUstep.  Removed definition of PSWait.
+
 2007-05-02  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/GNUmakefile (GNUSTEP_INSTALLATION_DIR): Do not

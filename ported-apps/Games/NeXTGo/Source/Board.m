@@ -47,10 +47,13 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 
 #include "comment.header"
  
-/* $Id: Board.m,v 1.4 2005/04/06 00:32:58 gcasa Exp $ */
+/* $Id: Board.m,v 1.5 2008/11/21 06:15:51 gcasa Exp $ */
 
 /*
  * $Log: Board.m,v $
+ * Revision 1.5  2008/11/21 06:15:51  gcasa
+ * removed definition of PSWait
+ *
  * Revision 1.4  2005/04/06 00:32:58  gcasa
  * Cleaned up the code.
  *
@@ -108,7 +111,6 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 // Do this define so to avoid about 15 later on ;)
 #ifdef GNUSTEP
 #define NSDPSContext NSGraphicsContext
-void PSWait() {}
 #endif
 
 // The following values are the default sizes for the various pieces. 
