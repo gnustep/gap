@@ -23,7 +23,9 @@
 
 #import "MyDocument.h"
 
-#ifdef GNUSTEP
+#if defined(freebsd) || defined( __FreeBSD__ )
+#import <float.h>
+#else if defined (linux)
 #import <values.h>
 #endif
 
