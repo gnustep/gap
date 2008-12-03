@@ -2,7 +2,6 @@
   ApplicationName = "FlexiSheet";
   ApplicationDescription = "FlexiSheet Technology Preview";
   ApplicationRelease = "0.5.7";
-  Authors = ("");
   Copyright = "";
   CopyrightDescription = ""; 
   NSIcon = Application;
