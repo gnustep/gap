@@ -1,4 +1,4 @@
-//  $Id: FlexiSheet.h,v 1.1 2008/10/14 15:03:49 hns Exp $
+//  $Id: FlexiSheet.h,v 1.2 2008/12/15 14:44:25 rmottola Exp $
 //
 //  FlexiSheet.h
 //  FlexiSheet
@@ -46,3 +46,8 @@
 // No header files yet
 
 //#define FSActiveDocumentChangedNotification @"FSActiveDocumentChangedNotification"
+
+/* Function Replacements */
+#ifdef __MINGW__
+#define bzero(s, n) memset ((s), 0, (n))
+#endif
