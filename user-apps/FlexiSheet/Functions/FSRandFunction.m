@@ -1,4 +1,4 @@
-//  $Id: FSRandFunction.m,v 1.1 2008/10/14 15:04:28 hns Exp $
+//  $Id: FSRandFunction.m,v 1.2 2008/12/15 14:44:25 rmottola Exp $
 //
 //  FSRandFunction.m
 //  FlexiSheet
@@ -40,6 +40,10 @@
 
 #import "FSRandFunction.h"
 
+/* Function Replacements */
+#ifdef __MINGW__
+#define random(n) rand(n)
+#endif
 
 @implementation FSRandFunction
 
