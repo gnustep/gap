@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 27-AUG-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSMatrix.m,v 1.3 2008/11/01 15:27:32 rmottola Exp $
+//  $Id: FSMatrix.m,v 1.4 2008/12/15 14:50:38 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -356,7 +356,7 @@
 
 - (void)reloadData
 {
-    if (_dataSource = nil)
+    if (_dataSource == nil)
        return;
     _numRows = [_dataSource numberOfRowsInMatrix:self];
     free(_rowHeights);
