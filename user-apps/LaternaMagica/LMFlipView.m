@@ -33,4 +33,47 @@
     return YES;
 }
 
+/* ---- Key event methods ---- */
+
+/** respond to key equivalents which are not bound do menu items */
+-(BOOL)performKeyEquivalent: (NSEvent*)theEvent
+{
+    NSString *chars;
+    
+    chars = [theEvent characters];
+    if ([chars length] == 1)
+    {
+        unichar c;
+        NSLog(@"characters: %@", chars);
+        c = [chars characterAtIndex: 0];
+        
+        if (c == NSDeleteCharFunctionKey)
+        {
+            NSLog(@"Delete!");
+            return YES;
+        } else if (c == NSBackspaceCharacter)
+        {
+            NSLog(@"Backspace!");
+            return YES;
+        } else {
+            NSLog(@"theEvent %@", theEvent);
+        }
+    }
+    
+    unsigned short keyCode;
+    keyCode = [theEvent keyCode];
+    
+    if (keyCode == 53)
+    {
+        NSLog(@"Escape!");
+        return YES;
+    } else if (keyCode == 51)
+    {
+        NSLog(@"Backspace!");
+        return YES;
+    }
+    
+    return [super performKeyEquivalent:theEvent];
+}
+
 @end
