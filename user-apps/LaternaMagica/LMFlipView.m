@@ -49,11 +49,11 @@
         
         if (c == NSDeleteCharFunctionKey)
         {
-            NSLog(@"Delete!");
+            NSLog(@"(chars) Delete!");
             return YES;
         } else if (c == NSBackspaceCharacter)
         {
-            NSLog(@"Backspace!");
+            NSLog(@"(chars) Backspace!");
             return YES;
         } else {
             NSLog(@"theEvent %@", theEvent);
@@ -65,11 +65,11 @@
     
     if (keyCode == 53)
     {
-        NSLog(@"Escape!");
+        NSLog(@"(keyCode) Escape!");
         return YES;
     } else if (keyCode == 51)
     {
-        NSLog(@"Backspace!");
+        NSLog(@"(keyCode) Backspace!");
         return YES;
     }
     
