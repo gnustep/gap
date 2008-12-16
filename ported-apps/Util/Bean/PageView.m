@@ -117,6 +117,7 @@
 -(void)setNumberOfPages:(int)newNumberOfPages
 {
     numberOfPages = newNumberOfPages;
+    NSLog(@"self = %@, numberOfPages = %d",self,numberOfPages);
 }
 
 - (void)setShouldUseAltTextColors:(BOOL)flag
@@ -251,7 +252,17 @@
 #endif		
 		//get paper size
 		NSSize paperSize = [printInfo paperSize];
-		
+
+
+
+#ifdef GNUSTEP
+		// Compensate for the difference in the text system... GNUstep doesn't create text containers
+		// until they're needed and bean is incorrectly assuming that they're present when they're not.
+		if(numberOfPages == 0)
+		  {
+		    numberOfPages = 1;
+		  }
+#endif
 		//DRAW PAGE				
 		unsigned cnt;
 		for (cnt = 0; cnt <= ([self numberOfPages] - 1); cnt++) 
