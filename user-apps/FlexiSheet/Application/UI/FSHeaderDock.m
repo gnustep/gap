@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 04-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSHeaderDock.m,v 1.1 2008/10/28 13:10:31 hns Exp $
+//  $Id: FSHeaderDock.m,v 1.2 2008/12/16 14:14:42 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -588,7 +588,7 @@ static NSString *FSHeaderPboardType = @"FSHeaderPboardType";
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag
 {
     if (flag) {
-        return NSDragOperationLink;
+        return NSDragOperationLink | NSDragOperationGeneric;
     }
     return NSDragOperationNone;
 }
