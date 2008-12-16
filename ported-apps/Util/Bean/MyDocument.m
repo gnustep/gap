@@ -2172,7 +2172,7 @@ int encSort(id array1, id array2, void *context)
 	}
 	
 	//	here we save the typingAttributes so that when an attachment is pasted in replaceCharactersInRange in the textStorage, it is overlaid first with the typingAttributes instead of nil attributes, which makes the inspector controls go crazy among other things
-	if (![[textStorage oldAttributes] isEqualTo:newTypingAttributes])
+	if (![[textStorage oldAttributes] isEqual :newTypingAttributes])
 	{
 		[textStorage setOldAttributes:newTypingAttributes];
 	}
@@ -3062,7 +3062,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 	//	validate getInfoSheet
 	else if (action == @selector(getInfoSheet:))
 	{
-		if (![[NSApp keyWindow] isEqualTo:[theScrollView window]]) //another sheet is up
+		if (![[NSApp keyWindow] isEqual:[theScrollView window]]) //another sheet is up
 		{
 			return NO;
 		}
@@ -3140,7 +3140,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 		NSRange selRange = [[self firstTextView] selectedRange];
 		if ([[textStorage string] length]==0 //no text 
 				|| selRange.location==[[textStorage string] length] //at end
-				|| ![[NSApp keyWindow] isEqualTo:[theScrollView window]] //another sheet is up
+				|| ![[NSApp keyWindow] isEqual:[theScrollView window]] //another sheet is up
 				|| [self readOnlyDoc]) 
 		{
 			return NO;
@@ -3416,7 +3416,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 			[[self currentFileType] isEqualToString:HTMLDoc] 
 			|| [[self currentFileType] isEqualToString:TXTwExtDoc]
 			|| [[self currentFileType] isEqualToString:TXTDoc]
-			|| ![[NSApp keyWindow] isEqualTo:[theScrollView window]] //another sheet is up
+			|| ![[NSApp keyWindow] isEqual:[theScrollView window]] //another sheet is up
 			)
 		{	
 			return NO;
