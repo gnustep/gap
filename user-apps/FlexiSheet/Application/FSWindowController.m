@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSWindowController.m,v 1.1 2008/10/14 15:03:48 hns Exp $
+//  $Id: FSWindowController.m,v 1.2 2008/12/17 18:16:03 rmottola Exp $
 
 #import "FlexiSheet.h"
 #import "FSExporter.h"
@@ -402,7 +402,7 @@ static NSArray*    __FSTCPBTYPES = nil;
     //
     // If item selected, insert new item.
     //
-    if (sel = [tableView selectedItems]) {
+    if ((sel = [tableView selectedItems])) {
         NSRange idx = [sel indexRange];
         int     pos = idx.location+idx.length;
         name = [[[sel itemsInRange] lastObject] label];
@@ -430,7 +430,7 @@ static NSArray*    __FSTCPBTYPES = nil;
     //
     // If items selected, delete selected items.
     //
-    if (sel = [tableView selectedItems]) {
+    if ((sel = [tableView selectedItems])) {
         FSKeyGroup *group = [sel group];
         NSRange     range = [sel indexRange];
         [group deleteItemsInRange:range];
@@ -507,7 +507,7 @@ static NSArray*    __FSTCPBTYPES = nil;
         if ([type isEqualToString:FSTableItemPboardType]) {
             FSKeyRange *range;
             
-            if (range = [tableView selectedItems]) {
+            if ((range = [tableView selectedItems])) {
                 NSRange idx = [range indexRange];
                 int pos = (idx.location+idx.length);
                 int c = [[range group] pasteAtIndex:pos];
@@ -627,10 +627,10 @@ static NSArray*    __FSTCPBTYPES = nil;
         NSString   *title = @"Move Item Up";
         FSKeyRange *range = nil;
         
-        if (range = [tableView selectedRowItems]) {
+        if ((range = [tableView selectedRowItems])) {
             title = ([range indexRange].length>1)?@"Move Rows Up":@"Move Row Up";
         } else
-        if (range = [tableView selectedColumnItems]) {
+        if ((range = [tableView selectedColumnItems])) {
             title = ([range indexRange].length>1)?@"Move Columns Left":@"Move Column Left";
         }
         if (title && [anItem respondsToSelector:@selector(setTitle:)])
@@ -641,10 +641,10 @@ static NSArray*    __FSTCPBTYPES = nil;
         NSString   *title = @"Move Item Down";
         FSKeyRange *range = nil;
         
-        if (range = [tableView selectedRowItems]) {
+        if ((range = [tableView selectedRowItems])) {
             title = ([range indexRange].length>1)?@"Move Rows Down":@"Move Row Down";
         } else
-        if (range = [tableView selectedColumnItems]) {
+        if ((range = [tableView selectedColumnItems])) {
             title = ([range indexRange].length>1)?@"Move Columns Right":@"Move Column Right";
         }
         if (title && [anItem respondsToSelector:@selector(setTitle:)])

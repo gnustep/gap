@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 28-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSDocument+Quantrix.m,v 1.1 2008/10/14 15:03:44 hns Exp $
+//  $Id: FSDocument+Quantrix.m,v 1.2 2008/12/17 18:16:02 rmottola Exp $
 
 #import "FlexiSheet.h"
 #import "FSArchiving.h"
@@ -297,7 +297,7 @@
                     // Page
                     headers = [NSMutableArray array];
                     nc = [[dict objectForKey:@"zCategories"] objectEnumerator];
-                    while (no = [nc nextObject]) {
+                    while ((no = [nc nextObject])) {
                         [headers addObject:[[table headers] objectAtIndex:[no intValue]]];
                     }
                     if ([headers count] > 0) [controller setPageHeaders:headers];
