@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 08-OCT-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSHeaderLayout.m,v 1.1 2008/10/14 15:03:45 hns Exp $
+//  $Id: FSHeaderLayout.m,v 1.2 2008/12/17 18:16:03 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -79,7 +79,7 @@
         }
     }
     if (item) {
-        if (value = [_dict objectForKey:oldPath]) {
+        if ((value = [_dict objectForKey:oldPath])) {
             [value retain];
             [_dict removeObjectForKey:oldPath];
             [_dict setObject:value forKey:[item fullPath]];

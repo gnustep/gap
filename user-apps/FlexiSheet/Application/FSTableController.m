@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSTableController.m,v 1.1 2008/10/14 15:03:47 hns Exp $
+//  $Id: FSTableController.m,v 1.2 2008/12/17 18:16:03 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -331,7 +331,7 @@ static NSArray*    __FSFTPBTYPES = nil;
 - (void)cut:(id)sender
 {
     FSKeyRange *range;
-    if (range = [tableView selectedItems]) {
+    if ((range = [tableView selectedItems])) {
         NSRange     idx = [range indexRange];
         FSKeyGroup *group = [range group];
         [group cutRange:idx];
@@ -358,7 +358,7 @@ static NSArray*    __FSFTPBTYPES = nil;
 - (void)copy:(id)sender
 {
     FSKeyRange *range;
-    if (range = [tableView selectedItems]) {
+    if ((range = [tableView selectedItems])) {
         [[range group] copyRange:[range indexRange]]; 
     } else if ([tableView hasDataSelection]) {
         [self _fillPasteboardWithDataCells];
