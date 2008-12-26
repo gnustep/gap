@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>WeatherData</key>
 	<array>
 		<dict>
 			<key>key</key>
-			<string>Forecast Date</string>
+			<string>Date</string>
 			<key>left</key>
 			<string>Updated:</string>
 			<key>right</key>
-			<string>&amp;raquo;</string>
+			<string>&lt;/b&gt;</string>
 			<key>stripTags</key>
 			<true/>
 		</dict>
@@ -18,9 +18,9 @@
 			<key>key</key>
 			<string>City</string>
 			<key>left</key>
-			<string>Observed at:</string>
+			<string>Observed at</string>
 			<key>right</key>
-			<string>Elevation</string>
+			<string>&lt;/b&gt;</string>
 			<key>stripTags</key>
 			<true/>
 		</dict>
@@ -28,7 +28,7 @@
 			<key>key</key>
 			<string>Temperature</string>
 			<key>left</key>
-			<string>&lt;tr class="vaT"&gt;</string>
+			<string>Temperature</string>
 			<key>right</key>
 			<string>&amp;nbsp;&amp;#176;F</string>
 			<key>stripTags</key>
@@ -36,19 +36,20 @@
 		</dict>
 		<dict>
 			<key>key</key>
-			<string>Description</string>
+			<string>Wind Chill</string>
 			<key>left</key>
-			<string>&amp;nbsp;&amp;#176;C</string>
+			<string>Windchill</string>
 			<key>right</key>
-			<string>&lt;/div&gt;</string>
+			<string>&amp;nbsp;&amp;#176;F</string>
 			<key>stripTags</key>
 			<true/>
 		</dict>
+
 		<dict>
 			<key>key</key>
 			<string>Humidity</string>
 			<key>left</key>
-			<string>Humidity:</string>
+			<string>Humidity</string>
 			<key>right</key>
 			<string>%</string>
 			<key>stripTags</key>
@@ -58,9 +59,9 @@
 			<key>key</key>
 			<string>Wind</string>
 			<key>left</key>
-			<string>Wind:</string>
+			<string>Wind</string>
 			<key>right</key>
-			<string>&lt;/span&gt;</string>
+			<string>&amp;nbsp;mph</string>
 			<key>stripTags</key>
 			<true/>
 		</dict>
@@ -68,7 +69,7 @@
 			<key>key</key>
 			<string>Pressure</string>
 			<key>left</key>
-			<string>Pressure:</string>
+			<string>Pressure</string>
 			<key>right</key>
 			<string>&amp;nbsp</string>
 			<key>stripTags</key>
@@ -76,29 +77,25 @@
 		</dict>
 		<dict>
 			<key>key</key>
+			<string>Description</string>
+			<key>left</key>
+			<string>Conditions</string>
+			<key>right</key>
+			<string>&lt;/b&gt;</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
 			<string>Forecast Zip</string>
 			<key>left</key>
-			<string>ZIP Code</string>
+			<string>Forecast for</string>
 			<key>right</key>
-			<string>&lt;/h3&gt;</string>
+			<string>&lt;/b&gt;</string>
 		</dict>
 		<dict>
 			<key>count</key>
-			<integer>1</integer>
-			<key>key</key>
-			<string>repeat</string>
-		</dict>
-		<dict>
-			<key>key</key>
-			<string>Forecast</string>
-			<key>left</key>
-			<string>&lt;h4&gt;</string>
-			<key>right</key>
-			<string>&lt;/h4&gt;</string>
-		</dict>
-		<dict>
-			<key>count</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>key</key>
 			<string>repeat</string>
 		</dict>
@@ -112,19 +109,11 @@
 		</dict>
 		<dict>
 			<key>key</key>
-			<string>Forecast-description</string>
+			<string>Forecast</string>
 			<key>left</key>
-			<string>title="</string>
+			<string>&lt;b&gt;</string>
 			<key>right</key>
-			<string>"</string>
-		</dict>
-		<dict>
-			<key>key</key>
-			<string>Forecast-temperature</string>
-			<key>left</key>
-			<string>color: #900;"&gt;</string>
-			<key>right</key>
-			<string>&amp;deg</string>
+			<string>&lt;/b&gt;</string>
 		</dict>
 	</array>
 	<key>WeatherImages</key>
@@ -153,22 +142,6 @@
 		<string>mcloudy.png</string>
 		<key>mostlysunny</key>
 		<string>sunny.png</string>
-		<key>partlycloudy</key>
-		<string>pcloudy.png</string>
-		<key>partysunny</key>
-		<string>pcloudy.png</string>
-		<key>rain</key>
-		<string>rain.png</string>
-		<key>sleet</key>
-		<string>rainandsnow.png</string>
-		<key>snow</key>
-		<string>snow.png</string>
-		<key>sunny</key>
-		<string>sunny.png</string>
-		<key>tstorms</key>
-		<string>tstorm.png</string>
-		<key>unknown</key>
-		<string>na.png</string>
 		<key>nt_chanceflurries</key>
 		<string>flurries.png</string>
 		<key>nt_chancerain</key>
@@ -209,10 +182,26 @@
 		<string>tstormn.png</string>
 		<key>nt_unknown</key>
 		<string>na.png</string>
+		<key>partlycloudy</key>
+		<string>pcloudy.png</string>
+		<key>partysunny</key>
+		<string>pcloudy.png</string>
+		<key>rain</key>
+		<string>rain.png</string>
+		<key>sleet</key>
+		<string>rainandsnow.png</string>
+		<key>snow</key>
+		<string>snow.png</string>
+		<key>sunny</key>
+		<string>sunny.png</string>
+		<key>tstorms</key>
+		<string>tstorm.png</string>
+		<key>unknown</key>
+		<string>na.png</string>
 	</dict>
 	<key>version</key>
 	<string>1</string>
 	<key>zipurl</key>
-	<string>http://www.wunderground.com/cgi-bin/findweather/getForecast?query=%@</string>
+	<string>http://www.wunderground.com/cgi-bin/findweather/getForecast?query=%@&amp;wuSelect=WEATHER</string>
 </dict>
 </plist>

@@ -16,26 +16,20 @@ typedef enum {
   TRANS_LAST
 } photo_trans_t;
 
-#ifndef GNUSTEP
 @interface PhotoAnimation : NSAnimation
 @end
-#endif
 
 @interface PhotoView : NSView
 {
   NSImage *currentImage;
   NSImage *lastImage;
-#ifndef GNUSTEP
   PhotoAnimation *animate;
-#endif
   photo_trans_t transition;
   BOOL vertical;
 }
 
 - (void) setTransition: (photo_trans_t) newTransition;
-#ifndef GNUSTEP
 - (void) setAnimation: (PhotoAnimation *)newAnimation;
-#endif
 - (void) setImage: (NSImage *)newImage;
 
 @end

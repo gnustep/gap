@@ -10,7 +10,6 @@ Date: Nov 2007
 
 #define dfltmgr [NSUserDefaults standardUserDefaults]
 
-#ifndef GNUSTEP
 @interface PhotoView (Private)
 - (void) drawTransition: (NSAnimationProgress)progress;
 @end
@@ -22,7 +21,6 @@ Date: Nov 2007
     [(PhotoView *)[self delegate] drawTransition: progress];
 }
 @end
-#endif
 
 @implementation PhotoView
 
@@ -38,15 +36,12 @@ Date: Nov 2007
 {
   TEST_RELEASE(currentImage);
   TEST_RELEASE(lastImage);
-#ifndef GNUSTEP
   RELEASE(animate);
-#endif
   [super dealloc];
 }
 
 - (void) resetAnimation
 {
-#ifndef GNUSTEP
   int ttime, speed;
   if (animate)
     return;
@@ -60,7 +55,6 @@ Date: Nov 2007
                                     animationCurve: NSAnimationEaseOut];
   [animate setFrameRate: 30.0];
   [animate setDelegate: self];
-#endif
 }
 
 - (void) setTransition: (photo_trans_t) newTransition
@@ -68,21 +62,17 @@ Date: Nov 2007
   transition = newTransition;
 }
 
-#ifndef GNUSTEP
 - (void) setAnimation: (PhotoAnimation *)newAnimation
 {
   ASSIGN(animate, newAnimation);
 }
-#endif
 
 - (void) setImage: (NSImage *)newImage
 {
   ASSIGN(lastImage, currentImage);
   ASSIGN(currentImage, newImage);
   [self resetAnimation];
-#ifndef GNUSTEP
   [animate startAnimation];
-#endif
 }
 
 - (NSRect) drawFrame: (NSRect)frame forImage: (NSImage *)image
@@ -93,14 +83,15 @@ Date: Nov 2007
   drawFrame = frame;
   imageFrame.size = [image size];
   pos = NSMakePoint(0, 0);
-  if (vertical == NO && NSHeight(imageFrame) > NSWidth(imageFrame))
+  /* Expand but keep the aspect ratio */
+  if (NSHeight(imageFrame) > NSWidth(imageFrame))
     {
       drawFrame.size.width = NSWidth(imageFrame) 
 	* NSHeight(frame) / NSHeight(imageFrame);
       pos.x = (NSWidth(frame)  - NSWidth(imageFrame) 
 		    * NSHeight(frame) / NSHeight(imageFrame)) / 2.0;
     }
-  else if (vertical == YES && NSWidth(imageFrame) > NSHeight(imageFrame))
+  else if (NSWidth(imageFrame) > NSHeight(imageFrame))
     {
       drawFrame.size.height = NSHeight(imageFrame) 
 	* NSWidth(frame) / NSWidth(imageFrame);
@@ -118,9 +109,6 @@ Date: Nov 2007
   return drawFrame;
 }
 
-#ifdef GNUSTEP
-#define NSAnimationProgress int
-#endif
 - (void) drawTransition: (NSAnimationProgress)progress
 {
   double fraction;
