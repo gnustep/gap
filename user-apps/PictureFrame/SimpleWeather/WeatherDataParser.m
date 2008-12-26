@@ -8,6 +8,47 @@
 #import "WeatherPreferencesController.h"
 #include "GNUstep.h"
 
+/* WeatherDataParser parses a downloaded html page to find specific
+   weather related information.  The information it is looking for is:
+
+   Current Information:
+   City
+   Location
+   Date
+   Description - description of the weather (e.g. Cloudy)
+   Temperature
+   Humidity
+   Wind
+   Pressure
+   Wind Chill
+   Heat Index
+
+   Forecast Information:
+   Forecast (Day)
+   Forecast-image
+   Forecast-description
+   Forecast-temperature
+   Forecast-tempdir (High or Low temperature specification)
+
+   The parsing information comes from a property list that contains an
+   array of dictionaries. Each dictionary specifies a string to look
+   for or some addtional supported command (for instance, to repeat a
+   previous dictionary). The dictionaries use the following keys:
+
+   key    - The key we are looking for (see above)
+   left   - the string to look for in the html file that is on the left side 
+            of the key
+   right  - The string that marks the end (Where to stop reading the info)
+   optional:
+   repeat - Repeat the next "count" array items until one is not found.
+   count  - Goes with the repeat key.
+   stripTags - If true, delete any html tags inside the found string
+   onFail - If the left/right tag was not found, do the action indicated
+            (goto 8 - goto the 8th array item, stop - stop parsing)
+   keepRight - Keep the "right" string as part of the found item
+
+*/
+
 #define dfltmgr [NSUserDefaults standardUserDefaults]
 
 #define SCAN_START 0
@@ -279,6 +320,11 @@
 			     options: 0 
 			       range: NSMakeRange(0, [output length])];
   [output replaceOccurrencesOfString: @"&nbsp;" 
+			  withString: @""
+			     options: 0 
+			       range: NSMakeRange(0, [output length])];
+  /* And returns */
+  [output replaceOccurrencesOfString: @"\n" 
 			  withString: @""
 			     options: 0 
 			       range: NSMakeRange(0, [output length])];

@@ -1,3 +1,9 @@
+2008-12-26  Adam Fedor  <fedor@gnu.org>
+
+	* Add animations back for GNUstep (with new releases).
+	* Add toggle screen so you can bring up preferences
+	* Update WUnderground parser.
+
 2008-02-22  Adam Fedor  <fedor@gnu.org>
 
 	* Add overlay window and implement transition animation (commented

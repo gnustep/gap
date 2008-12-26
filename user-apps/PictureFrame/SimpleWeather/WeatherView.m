@@ -15,7 +15,7 @@
 #define DEFAULT_STATION @"KBJC"
 #define DEFAULT_FORMAT  @"NWS"
 #define DEFAULT_ZIP     @"80305"
-#define UPDATE_INTERVAL 500
+#define UPDATE_INTERVAL 50
 
 #define WHITE [NSColor whiteColor]
 #define RED   [NSColor colorWithCalibratedRed: 1.0 green: 0.5 blue: 0.5 alpha: 1.0]
@@ -110,6 +110,8 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
 
   WMDrawString(0, 0.80, @"Current", finfo, 0.16);
   value = [dict objectForKey: @"Temperature"];
+  if (value == nil)
+    value = @"NA";
   str = [NSString stringWithFormat: @"%@%C", value, 0x02da];
   finfo.maxlength = 4;
   WMDrawString(0.10, 0.53, str, finfo, 0.24);

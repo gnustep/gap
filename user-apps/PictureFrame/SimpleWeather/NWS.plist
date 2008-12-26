@@ -181,6 +181,10 @@
 		<string>na.png</string>
 		<key>few</key>
 		<string>hazy.png</string>
+		<key>fg</key>
+		<string>fog.png</string>
+		<key>nbknfg</key>
+		<string>fog.png</string>
 		<key>fzra</key>
 		<string>freezingrain.png</string>
 		<key>hi_nshwrs</key>

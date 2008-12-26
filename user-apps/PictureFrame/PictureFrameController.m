@@ -157,6 +157,15 @@ handle_user_term(int sig)
   NSRect frame;
   int store = NSBackingStoreRetained;
 
+  if (pWindow)
+    {
+      [currentFrame release];
+      currentFrame = nil;
+      [pWindow orderOut: self];
+      [pWindow release];
+      pWindow = nil;
+    }
+
   full_screen = [dfltmgr integerForKey: DFullScreen];
   if (full_screen)
     {
@@ -213,6 +222,8 @@ handle_user_term(int sig)
   
   if (full_screen)
     [NSCursor hide];
+  else
+    [NSCursor unhide];
   [pWindow makeKeyAndOrderFront: self];
   [self runAnimation: nil];
 }
@@ -383,8 +394,10 @@ handle_user_term(int sig)
     int full_screen = [mgr integerForKey: DFullScreen];
     [mgr setInteger: 1-full_screen forKey: DFullScreen];
     [(UserInfoView *)userInfoView setDisplayString: @"Toggle Screen"];
-    /* Probably need to recreate the window */
-    NSLog(@"Toggle screen not implemented - will change on app restart.");
+    /* Need to recreate the window */
+      [self stopTimer];
+    [self createPictureWindow];
+      [self startTimer];
     }
   else if (character == ',')
     {
