@@ -6,72 +6,11 @@
 	<array>
 		<dict>
 			<key>key</key>
-			<string>Date</string>
-			<key>left</key>
-			<string>Updated:</string>
-			<key>right</key>
-			<string>&lt;/b&gt;</string>
-			<key>stripTags</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>key</key>
 			<string>City</string>
 			<key>left</key>
-			<string>Observed at</string>
+			<string>&lt;h1&gt;</string>
 			<key>right</key>
-			<string>&lt;/b&gt;</string>
-			<key>stripTags</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>key</key>
-			<string>Temperature</string>
-			<key>left</key>
-			<string>Temperature</string>
-			<key>right</key>
-			<string>&amp;nbsp;&amp;#176;F</string>
-			<key>stripTags</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>key</key>
-			<string>Wind Chill</string>
-			<key>left</key>
-			<string>Windchill</string>
-			<key>right</key>
-			<string>&amp;nbsp;&amp;#176;F</string>
-			<key>stripTags</key>
-			<true/>
-		</dict>
-
-		<dict>
-			<key>key</key>
-			<string>Humidity</string>
-			<key>left</key>
-			<string>Humidity</string>
-			<key>right</key>
-			<string>%</string>
-			<key>stripTags</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>key</key>
-			<string>Wind</string>
-			<key>left</key>
-			<string>Wind</string>
-			<key>right</key>
-			<string>&amp;nbsp;mph</string>
-			<key>stripTags</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>key</key>
-			<string>Pressure</string>
-			<key>left</key>
-			<string>Pressure</string>
-			<key>right</key>
-			<string>&amp;nbsp</string>
+			<string>&lt;/h1&gt;</string>
 			<key>stripTags</key>
 			<true/>
 		</dict>
@@ -79,9 +18,69 @@
 			<key>key</key>
 			<string>Description</string>
 			<key>left</key>
-			<string>Conditions</string>
+			<string>alt="</string>
 			<key>right</key>
-			<string>&lt;/b&gt;</string>
+			<string>"</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Temperature</string>
+			<key>left</key>
+			<string>&lt;span&gt;</string>
+			<key>right</key>
+			<string>&lt;/span&gt;</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Wind</string>
+			<key>left</key>
+			<string>Wind:</string>
+			<key>right</key>
+			<string>&amp;nbsp</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Pressure</string>
+			<key>left</key>
+			<string>Pressure:</string>
+			<key>right</key>
+			<string>&amp;nbsp</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Wind Chill</string>
+			<key>left</key>
+			<string>Windchill:</string>
+			<key>right</key>
+			<string>&amp;nbsp;&amp;#176;F</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Humidity</string>
+			<key>left</key>
+			<string>Humidity:</string>
+			<key>right</key>
+			<string>%</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Date</string>
+			<key>left</key>
+			<string>Updated &amp;mdash;</string>
+			<key>right</key>
+			<string>on</string>
 			<key>stripTags</key>
 			<true/>
 		</dict>
@@ -91,29 +90,65 @@
 			<key>left</key>
 			<string>Forecast for</string>
 			<key>right</key>
-			<string>&lt;/b&gt;</string>
+			<string>&lt;</string>
+			<key>stripTags</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>count</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>key</key>
 			<string>repeat</string>
 		</dict>
 		<dict>
 			<key>key</key>
-			<string>Forecast-image</string>
+			<string>Forecast</string>
 			<key>left</key>
-			<string>conds/</string>
+			<string>&lt;span&gt;</string>
 			<key>right</key>
-			<string>.GIF</string>
+			<string>&lt;/span&gt;</string>
+			<key>stripTags</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>key</key>
-			<string>Forecast</string>
+			<string>Forecast-image</string>
 			<key>left</key>
-			<string>&lt;b&gt;</string>
+			<string>conds/2005/</string>
 			<key>right</key>
-			<string>&lt;/b&gt;</string>
+			<string>.gif</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Forecast-description</string>
+			<key>left</key>
+			<string>&lt;div&gt;</string>
+			<key>right</key>
+			<string>&lt;/div&gt;</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Forecast-temperature</string>
+			<key>left</key>
+			<string>H </string>
+			<key>right</key>
+			<string>&amp;deg</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Forecast-skip1</string>
+			<key>left</key>
+			<string>click</string>
+			<key>right</key>
+			<string>showDetails</string>
+			<key>stripTags</key>
+			<true/>
 		</dict>
 	</array>
 	<key>WeatherImages</key>
@@ -202,6 +237,6 @@
 	<key>version</key>
 	<string>1</string>
 	<key>zipurl</key>
-	<string>http://www.wunderground.com/cgi-bin/findweather/getForecast?query=%@&amp;wuSelect=WEATHER</string>
+	<string>http://www.wund.com/cgi-bin/findweather/getForecast?query=%@</string>
 </dict>
 </plist>

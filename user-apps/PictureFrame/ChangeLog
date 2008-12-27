@@ -3,6 +3,7 @@
 	* Add animations back for GNUstep (with new releases).
 	* Add toggle screen so you can bring up preferences
 	* Update WUnderground parser.
+	* Handle w3m when it doesn't quit.
 
 2008-02-22  Adam Fedor  <fedor@gnu.org>
 

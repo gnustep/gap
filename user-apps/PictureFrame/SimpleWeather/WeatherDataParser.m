@@ -146,6 +146,7 @@
   NSString *path;
   NSArray *args;
   NSMutableArray *wargs;
+  BOOL gotError = NO;
  
   pipeTask = [[NSTask alloc] init];
   newPipe = [NSPipe pipe];
@@ -167,7 +168,7 @@
     //[pipeTask waitUntilExit];
     { 
       int i;
-      for (i = 0; i < 10; i++)
+      for (i = 0; i < 5; i++)
         {
 	  [NSThread sleepUntilDate: [NSDate dateWithTimeIntervalSinceNow: 5]];
 	  if ([pipeTask isRunning] == NO)
@@ -175,9 +176,8 @@
 	}
       if ([pipeTask isRunning] == YES)
         {
-	  [NSException raise: NSGenericException 
-	              format: @"Hung process reading weather"];
 	  [pipeTask terminate];
+	  gotError = YES;
 	}
     }
   
@@ -185,6 +185,18 @@
       {
 	str = [[NSString alloc] initWithData: inData
 				    encoding: NSASCIIStringEncoding];
+      }
+    if (gotError && str)
+      {
+	/* Sometimes w3m doesn't quit, but it still got all the data */
+	NSRange range = [str rangeOfString: @"</html>"];			
+	if (range.location != NSNotFound)
+	  gotError = NO;
+      }
+    if (gotError)
+      {
+	[NSException raise: NSGenericException 
+		    format: @"Hung process reading weather"];
       }
   NS_HANDLER
     /* Failed, possible as this command doesn't exist. Don't try again */

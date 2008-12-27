@@ -5,6 +5,7 @@ Date: May 2007
 
 */
 #import "PhotoController.h"
+#import "PhotoView.h"
 #import "PreferencesController.h"
 #import "GNUstep.h"
 
@@ -27,14 +28,14 @@ static PhotoController *sharedPhotoController = nil;
     if (sharedPhotoController)
       {
       [self dealloc];
-      return sharedPhotoController;
+      return [sharedPhotoController retain];
       }
   sharedPhotoController = self = [super init];
   photoView = [[PhotoView alloc] initWithFrame: aFrame];
   verbose = YES;
   lastPhotos = RETAIN([NSMutableArray arrayWithCapacity: 100]);
   lastPhotoIndex = 0;
-  return self;
+  return [self retain];
 }
 
 - (NSView *) displayView
