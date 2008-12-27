@@ -3,7 +3,7 @@
 #
 include $(GNUSTEP_MAKEFILES)/common.make
 
-VERSION=1.0.0
+VERSION=1.1.0
 
 PACKAGE_NAME=$(NAME)
 CVS_MODULE_NAME = gap/user-apps/$(NAME)
