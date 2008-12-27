@@ -302,11 +302,11 @@ handle_user_term(int sig)
 	temperature = 0;
 	if ([scn scanDouble: &temperature])
 	  {
-	    if (temperature > 55)
+	    if (temperature > 50)
 	      NSLog(@"Temperature: %g", temperature);
-	    if (temperature > 59)
+	    if (temperature > 61)
 	      heatIndex++;
-	    else if (temperature < 50)
+	    else if (temperature < 55)
 	      heatIndex--;
 	    if (heatIndex < 0)
 	      heatIndex = 0;

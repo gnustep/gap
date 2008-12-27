@@ -57,7 +57,7 @@ static WeatherPreferencesController *sharedController = nil;
 			@"NWS",
 			@"English",
 			@"w3m",
-			[NSArray arrayWithObjects: @"-dump_source", nil],
+			[NSArray arrayWithObjects: @"-dump_source", @"-cookie", nil],
 		       nil];
   [mgr registerDefaults: 
 	 [NSDictionary dictionaryWithObjects: defObjs forKeys: defKeys]];

@@ -15,7 +15,7 @@
 #define DEFAULT_STATION @"KBJC"
 #define DEFAULT_FORMAT  @"NWS"
 #define DEFAULT_ZIP     @"80305"
-#define UPDATE_INTERVAL 50
+#define UPDATE_INTERVAL 500
 
 #define WHITE [NSColor whiteColor]
 #define RED   [NSColor colorWithCalibratedRed: 1.0 green: 0.5 blue: 0.5 alpha: 1.0]
@@ -215,17 +215,30 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
     value = [dict objectForKey: key];
     WMDrawString(x+(index-1)*SPC, 0.30, value, finfo, 0.08);
 
-    key = [NSString stringWithFormat: @"Forecast-temperature%0d", index];
+    key = [NSString stringWithFormat: @"Forecast-hi%0d", index];
     value = [dict objectForKey: key];
-    key = [NSString stringWithFormat: @"Forecast-tempdir%0d", index];
-    str = [dict objectForKey: key];
-    if (str == nil)
-      str = @"";
-    else if ([str caseInsensitiveCompare: @"Hi"] == NSOrderedSame)
-      finfo.fcolor = RED;
-    else if ([str caseInsensitiveCompare: @"Lo"] == NSOrderedSame)
-      finfo.fcolor = BLUE;
-    str = [NSString stringWithFormat: @"%@ %@%C", str, value, 0x02da];
+    if (value)
+      {
+        NSString *low;
+        key = [NSString stringWithFormat: @"Forecast-low%0d", index];
+        low = [dict objectForKey: key];
+        str = [NSString stringWithFormat: @"Hi %@%C/Lo %@%C", 
+		value, 0x02da, low, 0x02da];
+      }
+    else
+      {
+        key = [NSString stringWithFormat: @"Forecast-temperature%0d", index];
+        value = [dict objectForKey: key];
+        key = [NSString stringWithFormat: @"Forecast-tempdir%0d", index];
+        str = [dict objectForKey: key];
+        if (str == nil)
+          str = @"";
+        else if ([str caseInsensitiveCompare: @"Hi"] == NSOrderedSame)
+          finfo.fcolor = RED;
+        else if ([str caseInsensitiveCompare: @"Lo"] == NSOrderedSame)
+          finfo.fcolor = BLUE;
+        str = [NSString stringWithFormat: @"%@ %@%C", str, value, 0x02da];
+      }
     WMDrawString(x+(index-1)*SPC, 0.16, str, finfo, 0.12);
     finfo.fcolor = WHITE;
     }    

@@ -16,6 +16,16 @@
 		</dict>
 		<dict>
 			<key>key</key>
+			<string>Image</string>
+			<key>left</key>
+			<string>conds/2005/</string>
+			<key>right</key>
+			<string>.gif</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
 			<string>Description</string>
 			<key>left</key>
 			<string>alt="</string>
@@ -132,9 +142,19 @@
 		</dict>
 		<dict>
 			<key>key</key>
-			<string>Forecast-temperature</string>
+			<string>Forecast-hi</string>
 			<key>left</key>
 			<string>H </string>
+			<key>right</key>
+			<string>&amp;deg</string>
+			<key>stripTags</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>key</key>
+			<string>Forecast-low</string>
+			<key>left</key>
+			<string>L </string>
 			<key>right</key>
 			<string>&amp;deg</string>
 			<key>stripTags</key>
