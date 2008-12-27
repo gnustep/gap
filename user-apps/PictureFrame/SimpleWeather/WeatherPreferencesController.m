@@ -13,7 +13,7 @@
 #define dfltmgr [NSUserDefaults standardUserDefaults]
 
 NSString *DZipCode = @"ZipCode";
-NSString *DWeatherSource = @"WeatherFormat";
+NSString *DWeatherSource = @"WeatherSource";
 NSString *DUnits = @"Units";
 NSString *DWWW = @"WWW";
 NSString *DWWWArgs = @"WWWArgs";
@@ -90,7 +90,7 @@ static WeatherPreferencesController *sharedController = nil;
     {
       str = [mgr stringForKey: DWWW];
       [[form cellAtIndex: 0] setObjectValue: str];
-      str = [mgr stringForKey: DWWWArgs];
+      str = [[mgr stringForKey: DWWWArgs] componentsJoinedByString: @" "];
       [[form cellAtIndex: 1] setObjectValue: str];
     }
   
@@ -125,7 +125,7 @@ static WeatherPreferencesController *sharedController = nil;
       if ([str length] == 0)
 	[dfltmgr setObject: [NSArray array]  forKey: DWWWArgs];
       else
-	[dfltmgr setObject: [str componentsSeparatedByString: @""] 
+	[dfltmgr setObject: [str componentsSeparatedByString: @" "] 
 		    forKey: DWWWArgs];
       break;
     default:

@@ -18,7 +18,9 @@ Date: Nov 2007
 - (void) setCurrentProgress: (NSAnimationProgress)progress
 {
     [super setCurrentProgress: progress];
+    [(PhotoView *)[self delegate] lockFocus];
     [(PhotoView *)[self delegate] drawTransition: progress];
+    [(PhotoView *)[self delegate] unlockFocus];
 }
 @end
 
@@ -42,7 +44,7 @@ Date: Nov 2007
 
 - (void) resetAnimation
 {
-  int ttime, speed;
+  float ttime, speed;
   if (animate)
     return;
   speed = [dfltmgr floatForKey: DSpeed];

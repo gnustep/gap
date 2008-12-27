@@ -391,12 +391,12 @@ handle_user_term(int sig)
     }
   else if (character == togchar)
     {
-    int full_screen = [mgr integerForKey: DFullScreen];
-    [mgr setInteger: 1-full_screen forKey: DFullScreen];
-    [(UserInfoView *)userInfoView setDisplayString: @"Toggle Screen"];
-    /* Need to recreate the window */
+      int full_screen = [mgr integerForKey: DFullScreen];
+      [mgr setInteger: 1-full_screen forKey: DFullScreen];
+      [(UserInfoView *)userInfoView setDisplayString: @"Toggle Screen"];
+      /* Need to recreate the window */
       [self stopTimer];
-    [self createPictureWindow];
+      [self createPictureWindow];
       [self startTimer];
     }
   else if (character == ',')
