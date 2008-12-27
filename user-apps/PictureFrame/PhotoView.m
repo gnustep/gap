@@ -73,8 +73,11 @@ Date: Nov 2007
 {
   ASSIGN(lastImage, currentImage);
   ASSIGN(currentImage, newImage);
-  [self resetAnimation];
-  [animate startAnimation];
+  if (transition)
+    {
+      [self resetAnimation];
+      [animate startAnimation];
+    }
 }
 
 - (NSRect) drawFrame: (NSRect)frame forImage: (NSImage *)image

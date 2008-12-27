@@ -1,5 +1,5 @@
 
-PictureFrame version 1.1.0 is available.
+PictureFrame version 1.1.1 is available.
 
 PictureFrame.app
 ======================
@@ -18,9 +18,7 @@ expandable, and in the future, people might add more things it can do.
 Changes
 =======
 
-Updated preferences.
-Added keyword preference.
-Updated WUnderground parser and added hack to fixed downloads via w3m
+More WUnderground updates.
 
 Where to Get it
 ===============

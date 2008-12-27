@@ -1,3 +1,9 @@
+2008-12-28  Adam Fedor  <fedor@gnu.org>
+
+	* Version 1.1.1
+	* Don't run animation if transition=0
+	* More improvements for WUnderground.
+
 2008-12-27  Adam Fedor  <fedor@gnu.org>
 
 	* Version 1.1.0

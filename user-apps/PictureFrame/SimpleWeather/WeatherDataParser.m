@@ -13,9 +13,9 @@
 
    Current Information:
    City
-   Location
    Date
-   Description - description of the weather (e.g. Cloudy)
+   Description 		(Description of the weather (e.g. Cloudy))
+   Image
    Temperature
    Humidity
    Wind
@@ -24,11 +24,13 @@
    Heat Index
 
    Forecast Information:
-   Forecast (Day)
+   Forecast 		(The day of the forecast)
    Forecast-image
    Forecast-description
    Forecast-temperature
-   Forecast-tempdir (High or Low temperature specification)
+   Forecast-tempdir 	(High or Low temperature specification)
+   Forecast-hi		(Alternate to temperature)
+   Forecast-low		(Alternate to temperature)
 
    The parsing information comes from a property list that contains an
    array of dictionaries. Each dictionary specifies a string to look
