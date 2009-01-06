@@ -119,7 +119,7 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
   finfo.maxlength = 18;
   WMDrawString(0, 0.40, value, finfo, 0.10);  
   value = [dict objectForKey: @"Wind"];
-  str = [NSString stringWithFormat: @"Wind: %@ MPH", value];
+  str = [NSString stringWithFormat: @"Wind: %@", value];
   finfo.maxlength = 18;
   WMDrawString(0, 0.30, str, finfo, 0.08);
   value = [dict objectForKey: @"Humidity"];
@@ -247,6 +247,30 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
 
 - (void) DrawRadar
 {
+  NSRect frame;
+  NSSize isize;
+  NSString *value;
+  NSURL *url;
+  NSImage *rimage;
+  NSPoint point;
+  NSDictionary *dict = [weatherDataParser weatherDictionary];
+
+  value = [dict objectForKey: @"Radar"];
+  if (value == nil)
+    return;
+  url = [NSURL URLWithString: value];
+  rimage = [[[NSImage alloc] initWithContentsOfURL: url] autorelease];
+  if (rimage == nil)
+    return;
+
+  frame = [self frame];
+  point = NSMakePoint(p2h(1.10+2*SPC, frame), p2h(0.05, frame)); // Just past forecast
+  isize = NSMakeSize(MIN(NSHeight(frame), NSWidth(frame)-point.x), 0 );
+  isize.height = isize.width;
+  if (isize.width < 100)
+    return;
+  [rimage setSize: isize];
+  [rimage compositeToPoint: point operation: NSCompositeSourceOver];
 }
 
 - (void) newWeatherModel
@@ -298,7 +322,8 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
   [self updateWeatherData];
   [self DrawCurrent];
   [self DrawForecast];
-  [self DrawRadar];
+  if ([[dfltmgr objectForKey: DShowRadar] boolValue])
+    [self DrawRadar];
 }
 
 - (id) preferenceController

@@ -174,7 +174,7 @@ handle_user_term(int sig)
     }
   else
     {
-      frame = NSMakeRect(100, 100, 800, 600);
+      frame = NSMakeRect(100, 300, 1024, 768);
       mask = NSTitledWindowMask;
     }
   

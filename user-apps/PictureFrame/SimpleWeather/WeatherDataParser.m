@@ -334,12 +334,17 @@
 			     options: 0 
 			       range: NSMakeRange(0, [output length])];
   [output replaceOccurrencesOfString: @"&nbsp;" 
-			  withString: @""
+			  withString: @" "
 			     options: 0 
 			       range: NSMakeRange(0, [output length])];
   /* And returns */
   [output replaceOccurrencesOfString: @"\n" 
-			  withString: @""
+			  withString: @" "
+			     options: 0 
+			       range: NSMakeRange(0, [output length])];
+  /* This is for Wind from WUnderground */
+  [output replaceOccurrencesOfString: @"from the " 
+			  withString: @" "
 			     options: 0 
 			       range: NSMakeRange(0, [output length])];
   /* Now remove any other <> tags */
@@ -446,7 +451,7 @@
 	}
       if (stripTags)
 	value = [self stripTags: value];
-      if ([value length] > 50)
+      if ([value length] > 50 && [value hasPrefix: @"http"] == NO)
 	{
 	  /* Too long. Must be an error in the parsing */
 	value = [value substringWithRange: NSMakeRange(0, 50)];
