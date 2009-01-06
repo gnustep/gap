@@ -23,3 +23,5 @@ extern NSString *DWeatherSource;
 extern NSString *DUnits;
 extern NSString *DWWW;
 extern NSString *DWWWArgs;
+extern NSString *DShowRadar;
+

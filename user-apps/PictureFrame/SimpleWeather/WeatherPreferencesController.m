@@ -17,6 +17,7 @@ NSString *DWeatherSource = @"WeatherSource";
 NSString *DUnits = @"Units";
 NSString *DWWW = @"WWW";
 NSString *DWWWArgs = @"WWWArgs";
+NSString *DShowRadar = @"ShowRadar";
 
 static WeatherPreferencesController *sharedController = nil;
 
@@ -50,6 +51,7 @@ static WeatherPreferencesController *sharedController = nil;
 		     DUnits,
 		     DWWW,
 		     DWWWArgs,
+		     DShowRadar,
 		     nil];
   
     defObjs = [NSArray arrayWithObjects:
@@ -58,6 +60,7 @@ static WeatherPreferencesController *sharedController = nil;
 			@"English",
 			@"w3m",
 			[NSArray arrayWithObjects: @"-dump_source", @"-cookie", nil],
+			[NSNumber numberWithBool: YES],
 		       nil];
   [mgr registerDefaults: 
 	 [NSDictionary dictionaryWithObjects: defObjs forKeys: defKeys]];
@@ -90,7 +93,7 @@ static WeatherPreferencesController *sharedController = nil;
     {
       str = [mgr stringForKey: DWWW];
       [[form cellAtIndex: 0] setObjectValue: str];
-      str = [[mgr stringForKey: DWWWArgs] componentsJoinedByString: @" "];
+      str = [[mgr arrayForKey: DWWWArgs] componentsJoinedByString: @" "];
       [[form cellAtIndex: 1] setObjectValue: str];
     }
   
