@@ -41,7 +41,6 @@
     float strokeColor[4], fillColor[4];
     float strokeAlpha, fillAlpha;
     float flatness, miterlimit;
-    float scalex, scaley;
     int linejoin, linecap;
 }
 
