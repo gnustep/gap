@@ -45,8 +45,6 @@
         startControlPoint = nil;
         endControlPoint = nil;
         rotation = 0;
-        scalex = 1;
-        scaley = 1;
         flatness = 0.0;
         miterlimit = 2.0;
         linewidth = 1.5;
@@ -91,8 +89,6 @@
         size = NSMakeSize([[description objectForKey: @"width"]  floatValue],
                           [[description objectForKey: @"height"]  floatValue]);
         bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
-        scalex = [[description objectForKey: @"scalex"] floatValue];
-        scaley = [[description objectForKey: @"scaley"] floatValue];
         rotation = [[description objectForKey: @"rotation"] floatValue];
 
         flatness = [[description objectForKey: @"flatness"] floatValue];
