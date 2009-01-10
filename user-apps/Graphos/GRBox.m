@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.m
 
- Copyright (C) 2007-2008 GNUstep Application Project
+ Copyright (C) 2007-2009 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -72,6 +72,7 @@
     return self;
 }
 
+/** initializes all parameters from a description dictionary */
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
         zoomFactor:(float)zf
@@ -356,6 +357,7 @@
     [self remakePath];
 }
 
+/** draws the object and calls the editor to draw itself afterwards */
 - (void)draw
 {
     NSColor *color;
