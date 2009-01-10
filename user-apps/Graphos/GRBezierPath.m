@@ -265,44 +265,6 @@ static double k = 0.025;
     return dict;
 }
 
-// FIXME probably useless or should be rewritten non-PS anyway
-/*
-- (NSString *)psDescription
-{
-    NSString *pss;
-    NSBezierPathElement type;
-    NSPoint p[3];
-    int i;
-
-    if(!visible)
-        return nil;
-
-    pss = [NSString stringWithFormat:
-        @"n\n%.3f i\n%i J\n%i j\n%.3f w\n%.3f M\n[]0 d\n",
-        flatness, linecap, linejoin, linewidth, miterlimit];
-
-    for(i = 0; i < [myPath elementCount]; i++)
-    {
-        type = [myPath elementAtIndex: i associatedPoints: p];
-        if(type == NSMoveToBezierPathElement)
-            pss = [pss stringByAppendingFormat: @"%.3f %.3f m\n", p[0].x, p[0].y];
-        else if(type == NSLineToBezierPathElement)
-            pss = [pss stringByAppendingFormat: @"%.3f %.3f l\n", p[0].x, p[0].y];
-        else if(type == NSCurveToBezierPathElement)
-            pss = [pss stringByAppendingFormat: @"%.3f %.3f %.3f %.3f %.3f %.3f c\n",
-                p[0].x, p[0].y, p[1].x, p[1].y, p[2].x, p[2].y];
-    }
-    if(stroked)
-        pss = [pss stringByAppendingFormat: @"%.3f %.3f %.3f %.3f k\nstroke\n",
-            strokeColor[0], strokeColor[1], strokeColor[2], strokeColor[3]];
-    if(filled)
-        pss = [pss stringByAppendingFormat: @"%.3f %.3f %.3f %.3f k\nfill\n",
-            fillColor[0], fillColor[1], fillColor[2], fillColor[3]];
-
-    return pss;
-}
-*/
-
 - (void)dealloc
 {
     [myPath release];
