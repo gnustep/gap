@@ -117,9 +117,9 @@
 
         visible = (BOOL)[[description objectForKey: @"visible"] intValue];
         locked = (BOOL)[[description objectForKey: @"locked"] intValue];
-        [self setZoomFactor: zf];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
+        [self setZoomFactor: zf];
     }
     return self;
 }
@@ -350,8 +350,7 @@
     [super setZoomFactor:f];
 
     linewidth = linewidth / zmFactor * f;
-    zmFactor = f;
-    
+
     [startControlPoint setZoomFactor:f];
     [endControlPoint setZoomFactor:f];
     [self remakePath];
