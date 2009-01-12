@@ -2,7 +2,7 @@
  Project: Vespucci
  VEAppController.m
 
- Copyright (C) 2007-2008
+ Copyright (C) 2007-2009
 
  Author: Ing. Riccardo Mottola
 
@@ -27,6 +27,7 @@
 #import "VEDocument.h"
 #import "VEDocumentController.h"
 #import "VEFunctions.h"
+#import "VEMenuItem.h"
 
 
 @implementation VEAppContoller
@@ -59,7 +60,20 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    NSMutableDictionary *bookmarks;
+    VEMenuItem *mi;
+    NSArray *b1;
+
     [NSApp setServicesProvider:self];
+    
+    bookmarks = [NSMutableDictionary dictionaryWithCapacity:1];
+    b1 = [NSArray arrayWithObjects:@"http://gap.nongnu.org", @"GAP Project", nil];
+    
+    mi = [[VEMenuItem alloc] initWithTitle:@"title" action:@selector(loadBookmark:) keyEquivalent:@""];
+    [mi setUrl:[b1 objectAtIndex:0]];
+    [mi setUrlTitle:[b1 objectAtIndex:1]];
+    
+    [[bookmarksMenu submenu] addItem:mi];
 }
 
 - (IBAction)showPreferences:(id)sender
@@ -85,6 +99,18 @@
 - (IBAction) cancelPrefs:(id)sender
 {
     [prefPanel performClose:self];
+}
+
+- (IBAction) loadBookmark:(id)sender
+{
+    VEMenuItem *senderMenu;
+    
+    NSLog(@"load bookmark!");
+    senderMenu = (VEMenuItem *)sender;
+    NSLog(@"url: %@", [senderMenu url]);
+    NSLog(@"title: %@", [senderMenu title]);
+    
+    [[[VEDocumentController sharedDocumentController] currentDocument] loadUrl:[NSURL URLWithString:[senderMenu url]]];
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)aNotification
