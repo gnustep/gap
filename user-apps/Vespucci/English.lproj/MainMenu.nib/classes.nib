@@ -10,7 +10,11 @@
             ACTIONS = {cancelPrefs = id; savePrefs = id; showPreferences = id; }; 
             CLASS = VEAppContoller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {homePageField = NSTextField; prefPanel = NSPanel; }; 
+            OUTLETS = {
+                bookmarksMenu = NSMenuItem; 
+                homePageField = NSTextField; 
+                prefPanel = NSPanel; 
+            }; 
             SUPERCLASS = NSObject; 
         }, 
         {
