@@ -37,7 +37,8 @@
 	);
 	Outlets = (
 	    homePageField,
-	    prefPanel
+	    prefPanel,
+	    bookmarksMenu
 	);
 	Super = NSObject;
     };
