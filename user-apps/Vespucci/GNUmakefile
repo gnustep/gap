@@ -35,7 +35,8 @@ VEWinController.h \
 VEAppController.h \
 VEDocument.h \
 VEDocumentController.h \
-VEFunctions.h
+VEFunctions.h \
+VEMenuItem.h
 
 #
 # Class files
@@ -45,7 +46,8 @@ VEWinController.m \
 VEAppController.m \
 VEDocument.m \
 VEDocumentController.m \
-VEFunctions.m
+VEFunctions.m \
+VEMenuItem.m
 
 #
 # Other sources
