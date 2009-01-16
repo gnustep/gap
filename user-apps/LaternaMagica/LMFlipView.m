@@ -2,7 +2,7 @@
    Project: LaternaMagica
    LMFlipView.m
 
-   Copyright (C) 2006-2007 Riccardo Mottola
+   Copyright (C) 2006-2009 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -24,7 +24,13 @@
 */
 
 #import "LMFlipView.h"
+#import "AppController.h"
 
+#ifdef __GNUSTEP__
+#define KC_ESCAPE 51
+#else
+#define KC_ESCAPE 53
+#endif
 
 @implementation LMFlipView
 
@@ -38,38 +44,14 @@
 /** respond to key equivalents which are not bound do menu items */
 -(BOOL)performKeyEquivalent: (NSEvent*)theEvent
 {
-    NSString *chars;
-    
-    chars = [theEvent characters];
-    if ([chars length] == 1)
-    {
-        unichar c;
-        NSLog(@"characters: %@", chars);
-        c = [chars characterAtIndex: 0];
-        
-        if (c == NSDeleteCharFunctionKey)
-        {
-            NSLog(@"(chars) Delete!");
-            return YES;
-        } else if (c == NSBackspaceCharacter)
-        {
-            NSLog(@"(chars) Backspace!");
-            return YES;
-        } else {
-            NSLog(@"theEvent %@", theEvent);
-        }
-    }
-    
     unsigned short keyCode;
+
     keyCode = [theEvent keyCode];
-    
-    if (keyCode == 53)
+    NSLog(@"keyCode %d", keyCode);
+    if (keyCode == KC_ESCAPE)
     {
         NSLog(@"(keyCode) Escape!");
-        return YES;
-    } else if (keyCode == 51)
-    {
-        NSLog(@"(keyCode) Backspace!");
+        [controller setFullScreen:theEvent];
         return YES;
     }
     
