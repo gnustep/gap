@@ -26,8 +26,8 @@
 #import "LMFlipView.h"
 #import "AppController.h"
 
-#ifdef __GNUSTEP__
-#define KC_ESCAPE 51
+#ifdef GNUSTEP
+#define KC_ESCAPE 9
 #else
 #define KC_ESCAPE 53
 #endif

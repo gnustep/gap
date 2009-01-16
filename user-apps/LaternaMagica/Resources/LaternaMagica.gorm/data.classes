@@ -55,6 +55,7 @@
 	Actions = (
 	);
 	Outlets = (
+	    controller
 	);
 	Super = NSImageView;
     };
