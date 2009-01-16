@@ -37,7 +37,12 @@
         }, 
         {CLASS = FileTable; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = LMFlipView; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }
+        {
+            CLASS = LMFlipView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = id; }; 
+            SUPERCLASS = NSImageView; 
+        }
     ); 
     IBVersion = 1; 
 }

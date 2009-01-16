@@ -2,7 +2,7 @@
    Project: LaternaMagica
    LMFlipView.h
 
-   Copyright (C) 2006-2007 Riccardo Mottola
+   Copyright (C) 2006-2009 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -26,9 +26,11 @@
 
 #import <AppKit/AppKit.h>
 
+@class AppController;
 
-@interface LMFlipView : NSImageView {
-
+@interface LMFlipView : NSImageView
+{
+    IBOutlet AppController *controller;
 }
 
 @end

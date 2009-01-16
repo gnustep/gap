@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2008 Riccardo Mottola
+   Copyright (C) 2006-2009 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -206,7 +206,7 @@
     [self scaleView:[view image]];
 }
 
-// method called as a notification from the selection change
+/** method called as a notification from the selection change */
 - (void)_selectionDidChange :(NSNotification *)notif
 {
     NSTableView *table;
@@ -218,8 +218,8 @@
         [self changeImage:[fileListData pathAtIndex:selectedRow]];
 }
 
-// method called as a notification from the window resize
-// or if scale preferences changed
+/** method called as a notification from the window resize
+  or if scale preferences changed */
 - (void)_windowDidResize :(NSNotification *)notif
 {
     [self scaleView: [view image]];
@@ -232,7 +232,12 @@
 
     image = [view image];
 
-    // check the sender and set the other item accordingly
+    
+    /* we choose not to respond to key events if not in fullscreen */
+    if ([sender isKindOfClass:[NSEvent class]] && [fullScreenMenuItem state] == NSOffState)
+        return;
+
+    /* check the sender and set the other item accordingly */    
     if (sender == fullScreenButton)
         [fullScreenMenuItem setState:[fullScreenButton state]];
     else
@@ -243,6 +248,7 @@
             [fullScreenMenuItem setState:NSOnState];
         [fullScreenButton setState:[fullScreenMenuItem state]];
     }
+
 
     if ([fullScreenButton state] == NSOnState)
     {
@@ -608,5 +614,6 @@
     else
         [jpegCompressionField takeFloatValueFrom:sender];
 }
+
 
 @end

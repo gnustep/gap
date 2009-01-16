@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2008 Riccardo Mottola
+   Copyright (C) 2006-2009 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -28,7 +28,8 @@
 #import <FileTable.h>
 #import <LMFlipView.h>
 
-@interface AppController : NSObject {
+@interface AppController : NSObject
+{
     IBOutlet FileTable    *fileListData;
     IBOutlet NSTableView  *fileListView;
     IBOutlet NSWindow     *controlWin;
