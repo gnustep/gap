@@ -32,11 +32,17 @@ static PhotoController *sharedPhotoController = nil;
       }
   sharedPhotoController = self = [super init];
   photoView = [[PhotoView alloc] initWithFrame: aFrame];
-  verbose = YES;
+  verbose = 1;
   lastPhotos = RETAIN([NSMutableArray arrayWithCapacity: 100]);
   lastPhotoIndex = 0;
   return [self retain];
 }
+
+- (void) setVerbose: (int)state
+{
+  verbose = state;
+}
+
 
 - (NSView *) displayView
 {
@@ -50,7 +56,7 @@ static PhotoController *sharedPhotoController = nil;
   TEST_RELEASE(albumEnum);
   TEST_RELEASE(imageEnum);
   TEST_RELEASE(currentAlbum);
-  TEST_RELEASE(currentPhoto);
+  TEST_RELEASE(currentPhotoInfo);
   RELEASE(photoDirEnum);
   RELEASE(lastPhotos);
   RELEASE(photoView);
@@ -67,9 +73,9 @@ static PhotoController *sharedPhotoController = nil;
   return a;
 }
 
-- (NSDictionary *) currentPhoto
+- (NSDictionary *) currentPhotoInfo
 {
-  return currentPhoto;
+  return currentPhotoInfo;
 }
 
 - (BOOL) fileIsImage: (NSString *)file
@@ -91,7 +97,7 @@ static PhotoController *sharedPhotoController = nil;
 
   DESTROY(imageEnum);
   DESTROY(currentAlbum);
-  DESTROY(currentPhoto);
+  DESTROY(currentPhotoInfo);
   if (newDir)
     {
       /* New directory to look at */
@@ -202,7 +208,7 @@ static PhotoController *sharedPhotoController = nil;
 - (NSString *) nextAlbumPhoto: (NSString *)newDir
 {
   BOOL isDir;
-  NSDictionary *imageList, *nextPhoto;
+  NSDictionary *imageList, *nextPhotoInfo;
   NSString *imageKey;
   NSString *photo = nil;
   NSFileManager *fmgr = [NSFileManager defaultManager];
@@ -213,7 +219,7 @@ static PhotoController *sharedPhotoController = nil;
     return nil;
 
   imageList = [photoAlbums objectForKey: @"Master Image List"];
-  DESTROY(currentPhoto);
+  DESTROY(currentPhotoInfo);
   while (photo == nil)
     {
       imageKey = [imageEnum nextObject];
@@ -227,12 +233,12 @@ static PhotoController *sharedPhotoController = nil;
 	    }
 	  imageKey = [imageEnum nextObject];
         }          
-      nextPhoto = [imageList objectForKey: imageKey];
-      if ([self photoMatchesAlbumKeyword: nextPhoto] == NO)
+      nextPhotoInfo = [imageList objectForKey: imageKey];
+      if ([self photoMatchesAlbumKeyword: nextPhotoInfo] == NO)
         {
 	  continue;
 	}
-      photo = [nextPhoto objectForKey: @"ImagePath"];
+      photo = [nextPhotoInfo objectForKey: @"ImagePath"];
       photo = [self convertPhotoPath: photo];
       if ([fmgr fileExistsAtPath: photo isDirectory: &isDir] == NO)
         photo = nil;
@@ -240,9 +246,11 @@ static PhotoController *sharedPhotoController = nil;
   [dfltmgr setObject: photo forKey: DCurrentPhoto];
   [lastPhotos addObject: photo];
   lastPhotoIndex++;
-  currentPhoto = RETAIN(nextPhoto);
-  if (verbose)
+  currentPhotoInfo = RETAIN(nextPhotoInfo);
+  if (verbose == 1)
     NSLog(@"Album photo %@", photo);
+  else if (verbose == 2)
+    printf("%s\n", [photo fileSystemRepresentation]);
   return photo;
 }
 
@@ -317,7 +325,12 @@ static PhotoController *sharedPhotoController = nil;
       else if (album && [album length] > 0)
         range = [file rangeOfString: album];
       if (range.location != NSNotFound && [self fileIsImage: file])
-        photo = file;
+	{
+	  /* Don't display thumbnails */
+	  range = [file rangeOfString: @"Thumbs"];
+	  if (range.location == NSNotFound)
+	    photo = file;
+	}
     }
   if (photo)
     {
@@ -325,19 +338,21 @@ static PhotoController *sharedPhotoController = nil;
       range.location = [picDir length] + 1;
       range.length = [photo length] - [picDir length] - 1;
       [dfltmgr setObject: [photo substringWithRange: range] forKey: DCurrentPhoto];
-      TEST_RELEASE(currentPhoto);
-      currentPhoto = [NSDictionary dictionaryWithObjectsAndKeys: photo, @"ImagePath", nil];
-      RETAIN(currentPhoto);
+      TEST_RELEASE(currentPhotoInfo);
+      currentPhotoInfo = [NSDictionary dictionaryWithObjectsAndKeys: photo, @"ImagePath", nil];
+      RETAIN(currentPhotoInfo);
       [lastPhotos addObject: photo];
       lastPhotoIndex++;
     }
-  if (verbose)
-    NSLog(@"Found photo %@", photo);
+  if (verbose == 1)
+    NSLog(@"Photo %@", photo);
+  else if (verbose == 2)
+    printf("%s\n", [photo fileSystemRepresentation]);
   return photo;
 }
 
 /* Find where we left off last */
-- (NSString *) gotoCurrentPhoto;
+- (NSString *) gotoCurrentPhoto
 {
   int i;
   NSString *file, *photo, *album, *reqalbum;
@@ -355,7 +370,7 @@ static PhotoController *sharedPhotoController = nil;
       [dfltmgr removeObjectForKey: DCurrentPhoto];
     }
 
-  verbose = NO;
+  verbose = 0;
   i = 0;
   if (photo && album == nil)
     {
@@ -398,7 +413,7 @@ static PhotoController *sharedPhotoController = nil;
       [dfltmgr removeObjectForKey: DCurrentAlbum];
       [dfltmgr removeObjectForKey: DCurrentPhoto];
     }
-  verbose = YES;
+  verbose = 1;
   return photo;
 }
 

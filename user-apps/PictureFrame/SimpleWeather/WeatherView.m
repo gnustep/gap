@@ -249,11 +249,18 @@ WMDrawString(double x, double y, NSString *str, finfo_t finfo, double fsize)
 {
   NSRect frame;
   NSSize isize;
-  NSString *value;
+  NSString *value, *current;
   NSURL *url;
   NSImage *rimage;
   NSPoint point;
   NSDictionary *dict = [weatherDataParser weatherDictionary];
+  
+  current = [dict objectForKey: @"Description"];
+  /* Don't draw the radar if there's not much to show */
+  if ([current rangeOfString: @"Clear"].location != NSNotFound 
+      || [current rangeOfString: @"Cloud"].location != NSNotFound
+      || [current rangeOfString: @"Sun"].location != NSNotFound)
+    return;
 
   value = [dict objectForKey: @"Radar"];
   if (value == nil)
