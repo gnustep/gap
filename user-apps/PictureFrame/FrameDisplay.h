@@ -8,9 +8,11 @@
 @protocol FrameDisplay <NSObject>
 
 - initWithFrame: (NSRect) frame;
+- (void) setVerbose: (int)state;
 - (NSView *) displayView;
 
 // animation methods...
+- (NSString *) nextPhoto;
 - (void) oneStep;
 - (void) reverseStep;
 - (NSTimeInterval) animationDelayTime;

@@ -96,6 +96,16 @@
 		</dict>
 		<dict>
 			<key>key</key>
+			<string>Radar Header</string>
+			<key>left</key>
+			<string>Local</string>
+			<key>right</key>
+			<string>adar</string>
+			<key>onFail</key>
+			<string>goto 2</string>
+		</dict>
+		<dict>
+			<key>key</key>
 			<string>Radar</string>
 			<key>left</key>
 			<string>src="</string>

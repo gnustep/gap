@@ -125,7 +125,7 @@ p2w (double perc, NSRect frame)
   NSView *view;
   NSArray *views;
   NSDictionary *photoDir;
-  NSString *str, *album;
+  NSString *str, *album, *comment;
   NSCalendarDate *date;
   NSTimeInterval created;
   view = [self superview];
@@ -136,23 +136,34 @@ p2w (double perc, NSRect frame)
   for (i = 0; i < [views count]; i++)
     {
       view = [views objectAtIndex: i];
-      if (view != self && [view respondsToSelector: @selector(currentPhoto)])
+      if (view != self && [view respondsToSelector: @selector(currentPhotoInfo)])
 	break;
       view = nil;
     }
   
-  photoDir = [[PhotoController sharedPhotoController] currentPhoto];
-  created = [[photoDir objectForKey: @"DateAsTimerInterval"] doubleValue];
-  date = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate: created];
+  photoDir = [[PhotoController sharedPhotoController] currentPhotoInfo];
+  if ([photoDir objectForKey: @"DateAsTimerInterval"])
+    {
+      created = [[photoDir objectForKey: @"DateAsTimerInterval"] doubleValue];
+      date = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate: created];
+      [date setCalendarFormat: @"%b,%d %Y"];
+    }
+  else
+    date = nil;
   album = [[PhotoController sharedPhotoController] currentAlbum];
   if (album == nil)
     album = @"";
-  [date setCalendarFormat: @"%b,%d %Y"];
-  str = [NSString stringWithFormat: _(@"Photo: %@\nDate: %@\nAlbum: %@\n%@"),
+  comment = [photoDir objectForKey: @"Comment"];
+  if (comment == nil)
+    comment = @"";
+  if (date)
+    str = [NSString stringWithFormat: _(@"Photo: %@\nDate: %@\nAlbum: %@\n%@"),
 	   [[photoDir objectForKey: @"ImagePath"] lastPathComponent],
-		  date, album,
-	    [photoDir objectForKey: @"Comment"]
-  ];
+		  date, album, comment];
+  else
+    str = [NSString stringWithFormat: _(@"Photo: %@\nDate: \nAlbum: %@\n%@"),
+	   [[photoDir objectForKey: @"ImagePath"] lastPathComponent],
+		  album, comment];
   return str;
 }
 

@@ -151,6 +151,32 @@ handle_user_term(int sig)
   [self stopRunning];
 }
 
+/* Debugging method to show which photos we will be displaying */
+- (void) printPhotoList
+{
+  int i;
+  NSString *firstPhoto = nil;
+  NSString *currentPhoto = nil;
+  i = 0;
+  printf("Start Photo List\n==============\n");
+  [currentFrame setVerbose: 2];
+  while (i < 5)
+    {
+      currentPhoto = [currentFrame nextPhoto];
+      if (currentPhoto == nil)
+        {
+	  i++;
+	  continue;
+	}
+      if (firstPhoto && [currentPhoto isEqual: firstPhoto])
+        break;
+      if (firstPhoto == nil)
+        firstPhoto = currentPhoto;
+    }
+  [currentFrame setVerbose: 1];
+  printf("==============\n");
+}
+
 - (void) createPictureWindow
 {
   int full_screen, mask;
@@ -225,6 +251,11 @@ handle_user_term(int sig)
   else
     [NSCursor unhide];
   [pWindow makeKeyAndOrderFront: self];
+  {
+    NSArray *args = [[NSProcessInfo processInfo] arguments];
+    if ([args count] > 1 && [[args objectAtIndex: 1] isEqual: @"--photolist"])
+      [self printPhotoList];
+  }
   [self runAnimation: nil];
 }
 

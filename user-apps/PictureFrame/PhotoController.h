@@ -14,20 +14,20 @@
   
   NSDictionary *photoAlbums;
   NSDictionary *currentAlbum;
-  NSDictionary *currentPhoto;
+  NSDictionary *currentPhotoInfo;
   NSEnumerator *albumEnum;
   NSEnumerator *imageEnum;
   NSDirectoryEnumerator *photoDirEnum;
   NSMutableArray *lastPhotos;
   int lastPhotoIndex;
-  BOOL verbose;
+  int verbose;
 }
 
 + (PhotoController *)sharedPhotoController;
-- (NSString *) nextPhoto;
+- (void) setVerbose: (int)state;
 - (NSString *) previousPhoto;
 
 - (NSString *) currentAlbum;
-- (NSDictionary *) currentPhoto;
+- (NSDictionary *) currentPhotoInfo;
 
 @end
