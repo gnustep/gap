@@ -273,7 +273,7 @@
 				<string>HTML</string>
 			</array>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+			<string>Editor</string>
 			<key>NSDocumentClass</key>
 			<string>VEDocument</string>
 		</dict>

@@ -58,22 +58,72 @@
     return (doc != nil);
 }
 
+- (void)addBookmarksFromDictionary:(NSDictionary *)dict toMenu:(NSMenu *)menu
+{
+    int i;
+    NSArray *children;
+
+    children = [dict objectForKey:@"Children"];
+    
+    for (i = 0; i < [children count]; i++)
+    {
+        NSDictionary *bmDict;
+        NSString *bmType;
+        NSString *bmTitle;
+        
+        bmDict = [children objectAtIndex:i];
+        bmType = [bmDict objectForKey:@"WebBookmarkType"];
+        if ([bmType isEqualToString:@"WebBookmarkTypeList"])
+        {
+            NSMenuItem *subMenuItem;
+            NSMenu *subMenu;
+            
+            bmTitle = [bmDict objectForKey:@"Title"];
+            
+            subMenu = [[NSMenu alloc] init];
+
+            subMenuItem = [[NSMenuItem alloc] init];
+            [subMenuItem setTitle:bmTitle];
+            
+            [subMenuItem setSubmenu:subMenu];
+            [menu addItem:subMenuItem];
+            [self addBookmarksFromDictionary:bmDict toMenu:subMenu];
+        } else if ([bmType isEqualToString:@"WebBookmarkTypeLeaf"])
+        {
+            NSDictionary *uriDict;
+            NSString   *bmUrl;
+            VEMenuItem *mi;
+
+            uriDict = [bmDict objectForKey:@"URIDictionary"];
+            bmTitle = [uriDict objectForKey:@"title"];
+            bmUrl = [bmDict objectForKey:@"URLString"];
+
+            mi = [[VEMenuItem alloc] initWithTitle:@"title" action:@selector(loadBookmark:) keyEquivalent:@""];
+            [mi setUrl:bmUrl];
+            [mi setUrlTitle:bmTitle];
+            
+            [menu addItem:mi];            
+        }
+    }
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     NSMutableDictionary *bookmarks;
-    VEMenuItem *mi;
-    NSArray *b1;
+    NSString *bookmarksFile;
 
     [NSApp setServicesProvider:self];
     
-    bookmarks = [NSMutableDictionary dictionaryWithCapacity:1];
-    b1 = [NSArray arrayWithObjects:@"http://gap.nongnu.org", @"GAP Project", nil];
+    bookmarksFile = NSHomeDirectory();
+    bookmarksFile = [bookmarksFile stringByAppendingPathComponent:@"Library"];
+    bookmarksFile = [bookmarksFile stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
+    bookmarksFile = [bookmarksFile stringByAppendingPathComponent:@"Bookmarks.plist"];
+
+    NSLog(@"%@", bookmarksFile);
+
     
-    mi = [[VEMenuItem alloc] initWithTitle:@"title" action:@selector(loadBookmark:) keyEquivalent:@""];
-    [mi setUrl:[b1 objectAtIndex:0]];
-    [mi setUrlTitle:[b1 objectAtIndex:1]];
-    
-    [[bookmarksMenu submenu] addItem:mi];
+    bookmarks = [NSMutableDictionary dictionaryWithContentsOfFile:bookmarksFile];
+    [self addBookmarksFromDictionary:bookmarks toMenu:[bookmarksMenu submenu]];
 }
 
 - (IBAction)showPreferences:(id)sender
