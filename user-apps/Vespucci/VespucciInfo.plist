@@ -18,11 +18,11 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = HTML;
-	    NSIcon = "";
 	    NSName = "HTML Document";
-	    NSRole = Viewer;
+	    NSRole = Editor;
 	    NSUnixExtensions = (
-		"htm html"
+		htm,
+		html
 	    );
 	},
 	{
