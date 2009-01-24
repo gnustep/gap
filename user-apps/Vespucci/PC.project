@@ -33,7 +33,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-01-13 01:14:39 +0100";
+    LAST_EDITING = "2009-01-24 15:43:32 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -69,11 +69,11 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = HTML;
-	    NSIcon = "";
 	    NSName = "HTML Document";
-	    NSRole = Viewer;
+	    NSRole = Editor;
 	    NSUnixExtensions = (
-		"htm html"
+		htm,
+		html
 	    );
 	},
 	{
