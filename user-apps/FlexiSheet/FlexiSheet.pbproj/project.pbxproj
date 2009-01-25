@@ -113,6 +113,28 @@
 				66DF64CD03581BDA00A8010F,
 				039200960024E3C57F000001,
 				015D385600257A857F000001,
+				669D6EED0167AF4E00052BA8,
+				669D6EEE0167AF4E00052BA8,
+				F648352D013B8DA001A80099,
+				F648352E013B8DA001A80099,
+				F668DB170168A86901487148,
+				F668DB180168A86901487148,
+				668066760170C930000BD935,
+				668066770170C930000BD935,
+				F63CF75D0169B82301D560A0,
+				F63CF75E0169B82301D560A0,
+				66C9F2740166FBD000D9DECA,
+				66C9F2750166FBD000D9DECA,
+				66C9F27A0166FDF700D9DECA,
+				66C9F27B0166FDF700D9DECA,
+				66C9F2780166FDF700D9DECA,
+				66C9F2790166FDF700D9DECA,
+				669D6EF50167B05200052BA8,
+				669D6EF60167B05200052BA8,
+				669D6EF10167AFEB00052BA8,
+				669D6EF20167AFEB00052BA8,
+				669D6EE90167AF2300052BA8,
+				669D6EEA0167AF2300052BA8,
 			);
 			isa = PBXGroup;
 			path = FSCore;
@@ -302,8 +324,6 @@
 //034
 		038F9E4E0024DEEC7F000001 = {
 			children = (
-				04FA6A140025A6BB7F000001,
-				04FA6A150025A6BB7F000001,
 				038F9E540024DF357F000001,
 				039200940024E38F7F000001,
 				0553A0A300278C557F000001,
@@ -389,22 +409,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
 			path = FSHeader.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		04FA6A140025A6BB7F000001 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = FSLabel.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		04FA6A150025A6BB7F000001 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = FSLabel.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -604,7 +608,6 @@
 		2A37F4AAFDCFA73011CA2CEA = {
 			children = (
 				01484B250027781F7F000001,
-				F62B76AB01685D8001A89AF4,
 				F648352C013B8D5001A80099,
 				66F508630199D84800A8010A,
 				01484B270027781F7F000001,
@@ -667,7 +670,6 @@
 		2A37F4B6FDCFA73011CA2CEA = {
 			children = (
 				2A37F4B7FDCFA73011CA2CEA,
-				F6FBC33B0156004401C493A5,
 			);
 			isa = PBXVariantGroup;
 			name = MainMenu.nib;
@@ -751,8 +753,6 @@
 		};
 		2A37F4C6FDCFA73011CA2CEA = {
 			buildPhases = (
-				66F9AAAE014AB157008F44F4,
-				668C02B501BA04A900A8010B,
 				2A37F4C7FDCFA73011CA2CEA,
 				2A37F4C9FDCFA73011CA2CEA,
 				2A37F4CEFDCFA73011CA2CEA,
@@ -777,7 +777,6 @@
 			dependencies = (
 				F6188009019BED1D01A8010B,
 				66E2C0A60193507D00747A0D,
-				F6C14A2902157D4201A8010A,
 			);
 			isa = PBXApplicationTarget;
 			name = FlexiSheet;
@@ -3544,7 +3543,7 @@
 				668C029F01BA030200A8010B,
 			);
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Volumes/StefansDaten/Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks\"";
 				OPTIMIZATION_CFLAGS = "-O3";
 				OTHER_CFLAGS = "-ObjC";
 				OTHER_LDFLAGS = "";
@@ -3675,15 +3674,6 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
-		};
-		668C02B501BA04A900A8010B = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			isa = PBXShellScriptBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./build/FSUnitTest\n";
 		};
 		669CA424022774DD00A8010B = {
 			isa = PBXFileReference;
@@ -3943,7 +3933,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = ObjcUnit.framework;
-			path = /Volumes/StefansDaten/Library/Frameworks/ObjcUnit.framework;
+			path = /Library/Frameworks/ObjcUnit.framework;
 			refType = 0;
 			sourceTree = "<absolute>";
 		};
@@ -4947,15 +4937,6 @@
 				);
 			};
 		};
-		66F9AAAE014AB157008F44F4 = {
-			buildActionMask = 8;
-			files = (
-			);
-			isa = PBXShellScriptBuildPhase;
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "~/unix/bin/autodoc -copyright \"Stefan Leuker\" -format html -dest Documentation -allclasses -project .";
-		};
 //660
 //661
 //662
@@ -5043,13 +5024,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 665361690181E884004AAD35;
 			remoteInfo = FSCore;
-		};
-		73F74B16052C9BDE008399DE = {
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA;
-			isa = PBXContainerItemProxy;
-			proxyType = 1;
-			remoteGlobalIDString = 668C029901BA030200A8010B;
-			remoteInfo = FSUnitTest;
 		};
 		73F74B17052C9BDE008399DE = {
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA;
@@ -5413,36 +5387,6 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
-		};
-		F62B76AB01685D8001A89AF4 = {
-			children = (
-				669D6EED0167AF4E00052BA8,
-				669D6EEE0167AF4E00052BA8,
-				F648352D013B8DA001A80099,
-				F648352E013B8DA001A80099,
-				F668DB170168A86901487148,
-				F668DB180168A86901487148,
-				668066760170C930000BD935,
-				668066770170C930000BD935,
-				F63CF75D0169B82301D560A0,
-				F63CF75E0169B82301D560A0,
-				66C9F2740166FBD000D9DECA,
-				66C9F2750166FBD000D9DECA,
-				66C9F27A0166FDF700D9DECA,
-				66C9F27B0166FDF700D9DECA,
-				66C9F2780166FDF700D9DECA,
-				66C9F2790166FDF700D9DECA,
-				669D6EF50167B05200052BA8,
-				669D6EF60167B05200052BA8,
-				669D6EF10167AFEB00052BA8,
-				669D6EF20167AFEB00052BA8,
-				669D6EE90167AF2300052BA8,
-				669D6EEA0167AF2300052BA8,
-			);
-			isa = PBXGroup;
-			path = FSCore;
-			refType = 4;
-			sourceTree = "<group>";
 		};
 		F62B76AD01685D8001A89AF4 = {
 			children = (
@@ -6137,11 +6081,6 @@
 			settings = {
 			};
 		};
-		F6C14A2902157D4201A8010A = {
-			isa = PBXTargetDependency;
-			target = 668C029901BA030200A8010B;
-			targetProxy = 73F74B16052C9BDE008399DE;
-		};
 		F6C14A2A02157E2D01A8010A = {
 			fileRef = 2A37F4B6FDCFA73011CA2CEA;
 			isa = PBXBuildFile;
@@ -6300,14 +6239,6 @@
 			lastKnownFileType = text.plist.strings;
 			name = German;
 			path = German.lproj/InfoPlist.strings;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		F6FBC33B0156004401C493A5 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
-			name = German;
-			path = German.lproj/MainMenu.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
