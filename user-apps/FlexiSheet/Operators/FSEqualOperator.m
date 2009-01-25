@@ -1,4 +1,4 @@
-//  $Id: FSEqualOperator.m,v 1.1 2008/10/14 15:04:38 hns Exp $
+//  $Id: FSEqualOperator.m,v 1.2 2009/01/25 15:10:00 rmottola Exp $
 //
 //  FSEqualOperator.m
 //  FlexiSheet
@@ -38,8 +38,8 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 //  
 
+#import <FSCore/FSFormulaSpace.h>
 #import "FSEqualOperator.h"
-#import "FSFormulaSpace.h"
 #import "FSLog.h"
 
 @implementation FSEqualOperator
