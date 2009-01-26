@@ -114,8 +114,7 @@
 
     [NSApp setServicesProvider:self];
     
-    bookmarksFile = NSHomeDirectory();
-    bookmarksFile = [bookmarksFile stringByAppendingPathComponent:@"Library"];
+    bookmarksFile = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
     bookmarksFile = [bookmarksFile stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
     bookmarksFile = [bookmarksFile stringByAppendingPathComponent:@"Bookmarks.plist"];
 
