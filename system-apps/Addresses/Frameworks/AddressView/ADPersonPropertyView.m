@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2007/07/19 17:25:20 $
+// $Revision: 1.3 $
+// $Date: 2009/01/27 23:55:58 $
 
 /* system includes */
 #include <Foundation/Foundation.h>
@@ -276,6 +276,7 @@ static float _globalFontSize;
   [_delegate release];
   [_addImg release];
   [_chgImg release];
+  [super dealloc];
 }
 
 - (void) setDelegate: (id) delegate
