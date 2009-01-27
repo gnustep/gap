@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2009/01/27 23:55:58 $
 
 /* system includes */
 /* (none) */
@@ -257,6 +257,7 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver: self];
+  [super dealloc];
 }
 
 - (void) setDisplayedProperty: (NSString*) property
@@ -283,6 +284,8 @@
   [[_peopleTable headerView] setNeedsDisplay: YES];
   [_peopleTable deselectAll: self];
   [_peopleTable reloadData];
+  
+  [super dealloc];
 }
 
 - (NSString*) displayedProperty

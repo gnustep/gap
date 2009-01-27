@@ -4,10 +4,10 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: gcasa $
+// $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.5 $
-// $Date: 2008/03/09 18:37:32 $
+// $Revision: 1.6 $
+// $Date: 2009/01/27 23:55:58 $
 
 /* system includes */
 /* (none) */
@@ -293,6 +293,7 @@ static NSArray *knownItems;
 {
   [_str release];
   [_out release];
+  [super dealloc];
 }
 
 - initForInput
