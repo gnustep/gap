@@ -162,6 +162,49 @@
     [[[VEDocumentController sharedDocumentController] currentDocument] loadUrl:[NSURL URLWithString:[senderMenu url]]];
 }
 
+/* Add Bookmark Panel handling */
+
+/** called to show the add bookmark panel */
+- (IBAction) addBookmark:(id)sender
+{
+    NSString *title;
+    NSString *url;
+    
+    url = [[[VEDocumentController sharedDocumentController] currentDocument] loadedUrl];
+    title = [[[VEDocumentController sharedDocumentController] currentDocument] loadedPageTitle];
+ 
+    [addBkUrlField setStringValue:url];    
+    [addBkTitleField setStringValue:title];    
+
+    [addBookmarkPanel makeKeyAndOrderFront:self];
+}
+
+/** Add action of the Bookmark Add Panel */
+- (IBAction) addBkPanelAdd:(id)sender
+{
+    NSString *title;
+    NSString *url;
+    VEMenuItem *mi;
+    
+    url = [addBkUrlField stringValue];
+    title = [addBkTitleField stringValue];
+    NSLog(@"Url %@", url);
+    NSLog(@"Title %@", title );
+
+    mi = [[VEMenuItem alloc] initWithTitle:@"title" action:@selector(loadBookmark:) keyEquivalent:@""];
+    [mi setUrl:url];
+    [mi setUrlTitle:title];
+    
+    [[bookmarksMenu submenu] addItem:mi];
+    [addBookmarkPanel performClose:self];
+}
+
+- (IBAction) addBkPanelCancel:(id)sender
+{
+    [addBookmarkPanel performClose:self];
+}
+
+
 - (void)windowDidBecomeKey:(NSNotification *)aNotification
 {
     if ([aNotification object] == prefPanel)

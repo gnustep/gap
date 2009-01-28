@@ -32,11 +32,18 @@
     IBOutlet NSPanel *prefPanel;
     IBOutlet NSTextField *homePageField;
     IBOutlet NSMenuItem *bookmarksMenu;
+
+    IBOutlet NSPanel *addBookmarkPanel;
+    IBOutlet NSTextField *addBkTitleField;
+    IBOutlet NSTextField *addBkUrlField;
 }
 
 - (IBAction) showPreferences:(id)sender;
 - (IBAction) savePrefs:(id)sender;
 - (IBAction) cancelPrefs:(id)sender;
 - (IBAction) loadBookmark:(id)sender;
+- (IBAction) addBookmark:(id)sender;
+- (IBAction) addBkPanelAdd:(id)sender;
+- (IBAction) addBkPanelCancel:(id)sender;
 
 @end

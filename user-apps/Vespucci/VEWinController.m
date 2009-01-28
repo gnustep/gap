@@ -163,4 +163,9 @@
     return [urlField stringValue];
 }
 
+- (NSString *)loadedPageTitle
+{
+    return [[self window] title];
+}
+
 @end
