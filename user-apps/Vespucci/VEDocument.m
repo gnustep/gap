@@ -99,4 +99,9 @@ static NSString *homePage = @"";
     return [windowController loadedUrl];
 }
 
+- (NSString *)loadedPageTitle
+{
+    return [windowController loadedPageTitle];
+}
+
 @end

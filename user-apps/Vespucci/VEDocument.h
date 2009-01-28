@@ -37,6 +37,7 @@
 - (void)setHomePage:(NSString *)page;
 - (void)loadUrl:(NSURL*)anUrl;
 - (NSString *)loadedUrl;
+- (NSString *)loadedPageTitle;
 
 
 @end

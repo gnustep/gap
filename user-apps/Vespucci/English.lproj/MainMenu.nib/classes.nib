@@ -7,10 +7,21 @@
             SUPERCLASS = NSObject; 
         }, 
         {
-            ACTIONS = {cancelPrefs = id; savePrefs = id; showPreferences = id; }; 
+            ACTIONS = {
+                addBkPanelAdd = id; 
+                addBkPanelCancel = id; 
+                addBookmark = id; 
+                cancelPrefs = id; 
+                loadBookmark = id; 
+                savePrefs = id; 
+                showPreferences = id; 
+            }; 
             CLASS = VEAppContoller; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                addBkTitleField = NSTextField; 
+                addBkUrlField = NSTextField; 
+                addBookmarkPanel = NSPanel; 
                 bookmarksMenu = NSMenuItem; 
                 homePageField = NSTextField; 
                 prefPanel = NSPanel; 

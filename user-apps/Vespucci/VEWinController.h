@@ -45,5 +45,6 @@
 - (IBAction) goBackHistory:(id)sender;
 - (IBAction) goForwardHistory:(id)sender;
 - (NSString *)loadedUrl;
+- (NSString *)loadedPageTitle;
 
 @end
