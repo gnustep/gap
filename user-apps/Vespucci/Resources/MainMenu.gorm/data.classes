@@ -2,15 +2,19 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
+	    "addBkPanelAdd:",
+	    "addBkPanelCancel:",
+	    "addBookmark:",
 	    "cancelPrefs:",
 	    "changeAttributes:",
 	    "changeDocumentBackgroundColor:",
 	    "goBack:",
 	    "goBackHistory:",
 	    "goForward:",
+	    "goForwardHistory:",
+	    "loadBookmark:",
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
-	    "goForwardHistory:",
 	    "performFindPanelAction:",
 	    "reload:",
 	    "savePrefs:",
@@ -31,14 +35,21 @@
     };
     VEAppContoller = {
 	Actions = (
-	    "cancelPrefs:",
 	    "showPreferences:",
-	    "savePrefs:"
+	    "savePrefs:",
+	    "cancelPrefs:",
+	    "loadBookmark:",
+	    "addBookmark:",
+	    "addBkPanelAdd:",
+	    "addBkPanelCancel:"
 	);
 	Outlets = (
-	    homePageField,
 	    prefPanel,
-	    bookmarksMenu
+	    homePageField,
+	    bookmarksMenu,
+	    addBookmarkPanel,
+	    addBkTitleField,
+	    addBkUrlField
 	);
 	Super = NSObject;
     };
