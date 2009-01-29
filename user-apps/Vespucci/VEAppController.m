@@ -110,14 +110,14 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     NSMutableDictionary *bookmarks;
-    NSString *bookmarksFile;
 
     [NSApp setServicesProvider:self];
     
     bookmarksFile = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
     bookmarksFile = [bookmarksFile stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
     bookmarksFile = [bookmarksFile stringByAppendingPathComponent:@"Bookmarks.plist"];
-
+    [bookmarksFile retain];
+    
     NSLog(@"%@", bookmarksFile);
 
     
@@ -250,5 +250,12 @@
 
     return;
 }
+
+- (void)dealloc
+{
+    [bookmarksFile release];
+    [super dealloc];
+}
+
 
 @end

@@ -36,6 +36,8 @@
     IBOutlet NSPanel *addBookmarkPanel;
     IBOutlet NSTextField *addBkTitleField;
     IBOutlet NSTextField *addBkUrlField;
+    
+    NSString *bookmarksFile;
 }
 
 - (IBAction) showPreferences:(id)sender;
