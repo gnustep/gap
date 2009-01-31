@@ -47,6 +47,56 @@
     return (doc != nil);
 }
 
+- (NSMutableDictionary *)bookmarksFromMenu:(NSMenu *)menu
+{
+    int i;
+    NSMutableArray *children;
+    NSMutableDictionary *dict;
+    
+    children = [NSMutableArray arrayWithCapacity:[menu numberOfItems]];
+    dict = [NSMutableDictionary dictionaryWithCapacity:4];
+
+    [dict setObject:children forKey:@"Children"];
+    [dict setObject:[menu title] forKey:@"Title"];
+    [dict setObject:@"WebBookmarkTypeList" forKey:@"WebBookmarkType"];
+    [dict setObject:@"" forKey:@"WebBookmarkUUID"];
+
+    for (i = 0; i < [menu numberOfItems]; i++)
+    {
+        NSMenuItem *mi;
+        
+        mi = (NSMenuItem *)[menu itemAtIndex:i];
+        if ([mi isKindOfClass:[VEMenuItem class]])
+        {
+            VEMenuItem *vi;
+            NSString *title;
+            NSString *url;
+            NSMutableDictionary *leafDict;
+            NSMutableDictionary *uriDict;
+            
+            vi = (VEMenuItem *)mi;
+            leafDict = [NSMutableDictionary dictionaryWithCapacity:3];
+            uriDict = [NSMutableDictionary dictionaryWithCapacity:2];
+            
+            [leafDict setObject:uriDict forKey:@"URIDictionary"];
+            [leafDict setObject:[vi url] forKey:@"URLString"];
+            [leafDict setObject:@"WebBookmarkTypeLeaf" forKey:@"WebBookmarkType"];
+            [leafDict setObject:@"leaf-uuid" forKey:@"WebBookmarkUUID"];
+            
+            [uriDict setObject:[vi url] forKey:@""];
+            [uriDict setObject:[vi title] forKey:@"title"];
+            
+            title = [vi title];
+            url = [vi url];
+            [children addObject:leafDict];
+        } else if ([mi hasSubmenu] == YES)
+        {
+            [children addObject:[self bookmarksFromMenu:[mi submenu]]];
+        }
+    }
+    return dict;
+}
+
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
     VEDocumentController *dc;
@@ -81,7 +131,7 @@
             bmTitle = [bmDict objectForKey:@"Title"];
             
             subMenu = [[NSMenu alloc] init];
-
+            [subMenu setTitle:bmTitle];
             subMenuItem = [[NSMenuItem alloc] init];
             [subMenuItem setTitle:bmTitle];
             
@@ -117,9 +167,6 @@
     bookmarksFile = [bookmarksFile stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
     bookmarksFile = [bookmarksFile stringByAppendingPathComponent:@"Bookmarks.plist"];
     [bookmarksFile retain];
-    
-    NSLog(@"%@", bookmarksFile);
-
     
     bookmarks = [NSMutableDictionary dictionaryWithContentsOfFile:bookmarksFile];
     [self addBookmarksFromDictionary:bookmarks toMenu:[bookmarksMenu submenu]];
@@ -249,6 +296,21 @@
 
 
     return;
+}
+
+/** delegate called on NSApplication termination */
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+    NSMutableDictionary *bkDict;
+    
+    bkDict = [self bookmarksFromMenu: [bookmarksMenu submenu]];
+    [bkDict removeObjectForKey:@"Title"];
+    [bkDict setObject:@"Root" forKey:@"WebBookmarkUUID"];
+    [bkDict setObject:@"1" forKey:@"WebBookmarkFileVersion"];
+    if ([bkDict writeToFile:bookmarksFile atomically:NO] == NO)
+    {
+        NSRunAlertPanel(@"Attention", @"Could not save Bookmarks", @"Ok", nil, nil);
+    }
 }
 
 - (void)dealloc
