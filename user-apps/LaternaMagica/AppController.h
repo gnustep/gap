@@ -27,6 +27,7 @@
 #import <AppKit/AppKit.h>
 #import <FileTable.h>
 #import <LMFlipView.h>
+#import "LMWindow.h"
 
 @interface AppController : NSObject
 {
@@ -47,7 +48,7 @@
     
     BOOL                  scaleToFit;
     NSWindow              *window;
-    NSWindow              *fullWindow;
+    LMWindow              *fullWindow;
     NSImageView           *view;
     LMFlipView            *fullView;
     NSSavePanel           *savePanel;

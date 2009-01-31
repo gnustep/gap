@@ -39,6 +39,11 @@
     return YES;
 }
 
+- (void)setController:(AppController *)aController
+{
+    controller = aController;
+}
+
 /* ---- Key event methods ---- */
 
 /** respond to key equivalents which are not bound do menu items */
