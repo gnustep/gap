@@ -5,7 +5,8 @@
     CLASS_FILES = (
 	AppController.m,
 	FileTable.m,
-	LMFlipView.m
+	LMFlipView.m,
+	LMWindow.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -17,7 +18,8 @@
     HEADER_FILES = (
 	AppController.h,
 	FileTable.h,
-	LMFlipView.h
+	LMFlipView.h,
+	LMWindow.h
     );
     IMAGES = (
     );
@@ -26,7 +28,7 @@
 	LaternaMagica.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-01-16 23:53:23 +0100";
+    LAST_EDITING = "2009-02-01 00:24:10 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -45,7 +47,7 @@
     );
     PC_WINDOWS = {
 	ProjectBrowser = "{x = -0.00280953; y = 0; width = 550; height = 167}";
-	ProjectWindow = "147 126 682 567 0 0  1024 768 ";
+	ProjectWindow = "128 329 682 567 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
@@ -117,6 +119,7 @@
 	LaternaMagicaInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
 	English
     );
 }

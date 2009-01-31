@@ -27,7 +27,8 @@ Resources/Info-gnustep.plist
 LaternaMagica_HEADER_FILES = \
 AppController.h \
 FileTable.h \
-LMFlipView.h
+LMFlipView.h \
+LMWindow.h
 
 #
 # Class files
@@ -35,7 +36,8 @@ LMFlipView.h
 LaternaMagica_OBJC_FILES = \
 AppController.m \
 FileTable.m \
-LMFlipView.m
+LMFlipView.m \
+LMWindow.m
 
 #
 # Other sources
