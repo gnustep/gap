@@ -129,6 +129,8 @@
 		080E96DCFE201CFB7F000001 /* LaternaMagica.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* LaternaMagica.nib */; };
 		089C165EFE840E0CC02AAC07 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		1058C7A3FEA54F0111CA2CBB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		14A3B2740F350A2000C314E6 /* LMWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 14A3B2720F350A2000C314E6 /* LMWindow.h */; };
+		14A3B2750F350A2000C314E6 /* LMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3B2730F350A2000C314E6 /* LMWindow.m */; };
 		29B9732CFDCFA39411CA2CEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		85DA40930A3B94BE00A80101 /* LMFlipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DA40910A3B94BE00A80101 /* LMFlipView.h */; };
 		85DA40940A3B94BE00A80101 /* LMFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DA40920A3B94BE00A80101 /* LMFlipView.m */; };
@@ -141,6 +143,8 @@
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		14A3B2720F350A2000C314E6 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
+		14A3B2730F350A2000C314E6 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		17587328FF379C6511CA2CBB /* LaternaMagica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = LaternaMagica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* LaternaMagica.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = LaternaMagica.nib; path = English.lproj/LaternaMagica.nib; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				14A3B2720F350A2000C314E6 /* LMWindow.h */,
+				14A3B2730F350A2000C314E6 /* LMWindow.m */,
 				F5D00DF9097C409A01A80101 /* FileTable.h */,
 				F5D00DFA097C409A01A80101 /* FileTable.m */,
 				F5D00DFD097C40DD01A80101 /* AppController.h */,
@@ -252,6 +258,7 @@
 				F5D00DFB097C409A01A80101 /* FileTable.h in Headers */,
 				F5D00DFF097C40DD01A80101 /* AppController.h in Headers */,
 				85DA40930A3B94BE00A80101 /* LMFlipView.h in Headers */,
+				14A3B2740F350A2000C314E6 /* LMWindow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +300,7 @@
 				F5D00DFC097C409A01A80101 /* FileTable.m in Sources */,
 				F5D00E00097C40DD01A80101 /* AppController.m in Sources */,
 				85DA40940A3B94BE00A80101 /* LMFlipView.m in Sources */,
+				14A3B2750F350A2000C314E6 /* LMWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
