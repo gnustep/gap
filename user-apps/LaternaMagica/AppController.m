@@ -48,7 +48,7 @@
     view = smallView;
 
     frame = [[NSScreen mainScreen] frame];
-    fullWindow = [[NSWindow alloc] initWithContentRect: frame
+    fullWindow = [[LMWindow alloc] initWithContentRect: frame
                                              styleMask: NSBorderlessWindowMask
                                                backing: NSBackingStoreBuffered
                                                  defer: NO];
@@ -63,10 +63,12 @@
     [fullView setImageScaling: NSScaleNone];
     [fullView setImageAlignment:NSImageAlignCenter];
     [fullView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [fullView setController:self];
     
 
     // avoid replacing the contentview with a NSControl subclass, thus add a subview instead
     [[fullWindow contentView] addSubview: fullView];
+    [fullWindow setInitialFirstResponder:fullView];
 }
 
 - (void)dealloc
@@ -231,7 +233,6 @@
     NSImage *image;
 
     image = [view image];
-
     
     /* we choose not to respond to key events if not in fullscreen */
     if ([sender isKindOfClass:[NSEvent class]] && [fullScreenMenuItem state] == NSOffState)
@@ -249,7 +250,6 @@
         [fullScreenButton setState:[fullScreenMenuItem state]];
     }
 
-
     if ([fullScreenButton state] == NSOnState)
     {
         [fullWindow setLevel: NSScreenSaverWindowLevel];
@@ -263,7 +263,7 @@
     }
     [self setScaleToFit: self];
     [self scaleView: image];
-    [view  setImage: image];
+    [view setImage: image];
     [view setNeedsDisplay:YES];
     [[view superview] setNeedsDisplay:YES];
     [window displayIfNeeded];

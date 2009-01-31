@@ -33,4 +33,6 @@
     IBOutlet AppController *controller;
 }
 
+- (void)setController:(AppController *)aController;
+
 @end
