@@ -185,6 +185,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				853AAB430F36609C006B331C,
 				089C165CFE840E0CC02AAC07,
 				85A386C50BC3AD6600A80110,
 				85D522A60C30790200A80101,
@@ -340,7 +341,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Vespucci</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>VE_icons_mac</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -395,6 +396,7 @@
 				089C165EFE840E0CC02AAC07,
 				85A386C70BC3AD6600A80110,
 				85D522A80C30790200A80101,
+				853AAB450F36609C006B331C,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +510,25 @@
 		};
 		8503A3FE0F1AA4E100E34E67 = {
 			fileRef = 8503A3FA0F1AA4E100E34E67;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		853AAB430F36609C006B331C = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = VE_icons_mac.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		853AAB440F36609C006B331C = {
+			fileRef = 853AAB430F36609C006B331C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		853AAB450F36609C006B331C = {
+			fileRef = 853AAB430F36609C006B331C;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -682,7 +703,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Vespucci</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>VE_icons_mac</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -767,6 +788,7 @@
 				85BA5E590E29547F0016CAD5,
 				85BA5E5A0E29547F0016CAD5,
 				85BA5E5B0E29547F0016CAD5,
+				853AAB440F36609C006B331C,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
