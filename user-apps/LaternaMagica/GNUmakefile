@@ -10,7 +10,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.2
 PACKAGE_NAME = LaternaMagica
 APP_NAME = LaternaMagica
-LaternaMagica_APPLICATION_ICON = 
+LaternaMagica_APPLICATION_ICON = laternamagica_64.tif
 
 
 #
@@ -18,6 +18,7 @@ LaternaMagica_APPLICATION_ICON =
 #
 LaternaMagica_RESOURCE_FILES = \
 Resources/LaternaMagica.gorm \
+Resources/laternamagica_64.tif \
 Resources/Info-gnustep.plist 
 
 
