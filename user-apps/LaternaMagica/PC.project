@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = "";
+    APPLICATIONICON = laternamagica_64.tif;
     APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     CLASS_FILES = (
@@ -22,13 +22,14 @@
 	LMWindow.h
     );
     IMAGES = (
+	laternamagica_64.tif
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
 	LaternaMagica.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-02-01 00:24:10 +0100";
+    LAST_EDITING = "2009-02-01 22:50:44 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"

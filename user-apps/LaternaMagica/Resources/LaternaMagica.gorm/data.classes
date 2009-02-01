@@ -4,14 +4,17 @@
 	Actions = (
 	    "addFiles:",
 	    "setScaleToFit:",
-	    "setFullScreen:",
+	    "setFullScreen :",
 	    "prevImage:",
 	    "nextImage:",
 	    "removeImage:",
 	    "eraseImage:",
 	    "rotateImage90:",
 	    "rotateImage180:",
-	    "rotateImage270:"
+	    "rotateImage270:",
+	    "saveImageAs:",
+	    "setCompressionType:",
+	    "setCompressionLevel:"
 	);
 	Outlets = (
 	    fileListData,
@@ -22,7 +25,11 @@
 	    scrollView,
 	    fitButton,
 	    fullScreenMenuItem,
-	    fullScreenButton
+	    fullScreenButton,
+	    saveOptionsView,
+	    fileTypePopUp,
+	    jpegCompressionField,
+	    jpegCompressionSlider
 	);
 	Super = NSObject;
     };
@@ -44,6 +51,9 @@
 	    "rotateImage180:",
 	    "rotateImage270:",
 	    "rotateImage90:",
+	    "saveImageAs:",
+	    "setCompressionLevel:",
+	    "setCompressionType:",
 	    "setFullScreen :",
 	    "setFullScreen:",
 	    "setScaleToFit:",
