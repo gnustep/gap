@@ -189,6 +189,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				858E59FA0F365467009E7B11,
 				29B97318FDCFA39411CA2CEA,
 				089C165CFE840E0CC02AAC07,
 			);
@@ -351,7 +352,7 @@
 	<key>CFBundleExecutable</key>
 	<string>LaternaMagica</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>LM_icons_osx</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -386,6 +387,7 @@
 			files = (
 				080E96DCFE201CFB7F000001,
 				089C165EFE840E0CC02AAC07,
+				858E59FB0F365467009E7B11,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +486,19 @@
 		};
 		855F873F0F34FE6400C1D9A8 = {
 			fileRef = 855F873D0F34FE6400C1D9A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		858E59FA0F365467009E7B11 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = LM_icons_osx.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		858E59FB0F365467009E7B11 = {
+			fileRef = 858E59FA0F365467009E7B11;
 			isa = PBXBuildFile;
 			settings = {
 			};
