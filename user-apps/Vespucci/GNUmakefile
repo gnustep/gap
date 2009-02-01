@@ -10,7 +10,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.1
 PACKAGE_NAME = Vespucci
 APP_NAME = Vespucci
-Vespucci_APPLICATION_ICON = 
+Vespucci_APPLICATION_ICON = vespucci_pastel_64.tif
 
 
 #
@@ -24,6 +24,7 @@ Vespucci_LIBRARIES_DEPEND_UPON += -lSimpleWebKit
 Vespucci_RESOURCE_FILES = \
 Resources/MainMenu.gorm \
 Resources/VEDocument.gorm \
+Resources/vespucci_pastel_64.tif \
 Resources/Info-gnustep.plist 
 
 

@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = "";
+    APPLICATIONICON = vespucci_pastel_64.tif;
     APP_DOCUMENT_BASED = YES;
     APP_TYPE = GORM;
     CLASS_FILES = (
@@ -26,6 +26,7 @@
 	VEMenuItem.h
     );
     IMAGES = (
+	vespucci_pastel_64.tif
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
@@ -33,7 +34,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-01-29 00:23:46 +0100";
+    LAST_EDITING = "2009-02-02 00:18:44 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -53,7 +54,7 @@
     );
     PC_WINDOWS = {
 	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 659; height = 173}";
-	ProjectWindow = "206 197 677 615 0 0  1280 1024 ";
+	ProjectWindow = "164 202 677 615 0 0  1280 1024 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
