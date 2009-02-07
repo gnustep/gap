@@ -228,7 +228,7 @@
 }
 
 
-- (IBAction)setFullScreen :(id)sender
+- (IBAction)setFullScreen: (id)sender
 {
     NSImage *image;
 
