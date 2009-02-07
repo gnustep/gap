@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/01/27 23:55:58 $
+// $Revision: 1.3 $
+// $Date: 2009/02/07 16:35:34 $
 
 /* system includes */
 /* (none) */
@@ -284,8 +284,6 @@
   [[_peopleTable headerView] setNeedsDisplay: YES];
   [_peopleTable deselectAll: self];
   [_peopleTable reloadData];
-  
-  [super dealloc];
 }
 
 - (NSString*) displayedProperty
