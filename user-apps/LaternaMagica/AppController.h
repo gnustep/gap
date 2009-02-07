@@ -56,7 +56,7 @@
 
 - (IBAction)addFiles:(id)sender;
 - (IBAction)setScaleToFit:(id)sender;
-- (IBAction)setFullScreen :(id)sender;
+- (IBAction)setFullScreen:(id)sender;
 - (IBAction)prevImage:(id)sender;
 - (IBAction)nextImage:(id)sender;
 - (IBAction)removeImage:(id)sender;
