@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.m
 
-   Copyright (C) 2006-2007 Riccardo Mottola
+   Copyright (C) 2006-2009 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -30,7 +30,7 @@
 
 - (id)init
 {
-    if (self = [super init])
+    if ((self = [super init]))
     {
         fileNames = [[NSMutableArray arrayWithCapacity:5] retain];
         filePaths = [[NSMutableArray arrayWithCapacity:5] retain];
