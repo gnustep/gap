@@ -40,6 +40,7 @@
     IBOutlet NSButton     *fitButton;
     IBOutlet NSMenuItem   *fullScreenMenuItem;
     IBOutlet NSButton     *fullScreenButton;
+    IBOutlet NSMenuItem   *saveAsMenuItem;
     
     IBOutlet NSView        *saveOptionsView;
     IBOutlet NSPopUpButton *fileTypePopUp;

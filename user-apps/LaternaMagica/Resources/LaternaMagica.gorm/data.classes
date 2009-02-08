@@ -23,7 +23,12 @@
 	    scrollView,
 	    fitButton,
 	    fullScreenMenuItem,
-	    fullScreenButton
+	    fullScreenButton,
+	    saveAsMenuItem,
+	    fileTypePopUp,
+	    jpegCompressionField,
+	    jpegCompressionSlider,
+	    saveOptionsView
 	);
 	Super = NSObject;
     };

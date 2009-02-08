@@ -535,6 +535,17 @@
     [destImage release];
 }
 
+- (BOOL)validateMenuItem:(id)sender
+{
+    /* the menu item returned is not the same object, so we use isEqual */
+    if ([sender isEqual:saveAsMenuItem])
+    {
+        if ([view image] == nil)
+            return NO;
+    }
+    return YES;
+}
+
 - (IBAction)saveImageAs:(id)sender
 {
     NSImage *srcImage;
@@ -580,6 +591,7 @@
     }
 //    [savePanel release];
 }
+
 
 /* ===== delegates =====*/
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
