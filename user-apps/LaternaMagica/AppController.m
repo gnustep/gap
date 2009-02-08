@@ -322,24 +322,28 @@
     if (rows >= 0)
     {
         sr = [fileListView selectedRow];
-        [fileListData removeObjectAtIndex: sr];
-        [fileListView reloadData];
+        if (sr >= 0)
+        {
+            [fileListData removeObjectAtIndex: sr];
+            [fileListView reloadData];
 
-        rows = [fileListView numberOfRows];
-        if (rows > 0)
-        {
-            // if we remove the last image, the selection changes
-            // otherwise no selection change notification is generated
-            // and thus we update simply the image
-            if (sr >= rows)
-                [fileListView selectRow: rows-1 byExtendingSelection: NO];
-            else
-                [self changeImage: [fileListData pathAtIndex: sr]];
+            rows = [fileListView numberOfRows];
+            if (rows > 0)
+            {
+                // if we remove the last image, the selection changes
+                // otherwise no selection change notification is generated
+                // and thus we update simply the image
+                if (sr >= rows)
+                    [fileListView selectRow: rows-1 byExtendingSelection: NO];
+                else
+                    [self changeImage: [fileListData pathAtIndex: sr]];
             
-        } else
-        {
-            // no image to select, we clear the display
-            [view setImage: nil];
+            } else
+            {
+                // no image to select, we clear the display
+                [view setImage: nil];
+                [window setTitle:@"None"]; 
+            }
         }
     }
 }
