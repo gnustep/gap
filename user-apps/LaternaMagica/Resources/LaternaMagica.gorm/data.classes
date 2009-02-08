@@ -11,7 +11,8 @@
 	    "eraseImage:",
 	    "rotateImage90:",
 	    "rotateImage180:",
-	    "rotateImage270:"
+	    "rotateImage270:",
+	    "saveImageAs:"
 	);
 	Outlets = (
 	    fileListData,
@@ -37,6 +38,7 @@
 	Actions = (
 	    "addFiles:",
 	    "eraseImage:",
+	    "newAction:",
 	    "nextImage:",
 	    "orderFrontFontPanel:",
 	    "prevImage:",
