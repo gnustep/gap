@@ -104,7 +104,8 @@
     files = [openPanel filenames];
     e = [files objectEnumerator];
     fmgr = [NSFileManager defaultManager];
-    while ((filename = (NSString*)[e nextObject])) {
+    while ((filename = (NSString*)[e nextObject]))
+    {
         attrs = [fmgr fileAttributesAtPath:filename traverseLink:YES];
         if (attrs)
             if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
@@ -126,7 +127,10 @@
                     {
                         if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
                         {
-                            [self addFile:tempName];
+                            if (!([filename2 isEqualToString:@".gwdir"] || [filename2 isEqualToString:@".DS_Store"]))
+                            {
+                                [self addFile:tempName];
+                            }
                         }
                     }
                 }
