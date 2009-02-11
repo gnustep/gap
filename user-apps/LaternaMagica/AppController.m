@@ -120,23 +120,22 @@
                 while ((filename2 = (NSString*)[e2 nextObject]))
                 {
                     NSString *tempName;
+                    NSString *lastPathComponent;
 
+                    lastPathComponent = [filename2 lastPathComponent];
                     tempName = [filename stringByAppendingPathComponent:filename2];
                     attrs2 = [[NSFileManager defaultManager] fileAttributesAtPath:tempName traverseLink:YES];
                     if (attrs2)
                     {
                         if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
                         {
-                            if (!([filename2 isEqualToString:@".gwdir"] || [filename2 isEqualToString:@".DS_Store"]))
+                            if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
                             {
                                 [self addFile:tempName];
                             }
                         }
                     }
                 }
-            } else
-            {
-                [self addFile:filename];
             }
         else
         {
