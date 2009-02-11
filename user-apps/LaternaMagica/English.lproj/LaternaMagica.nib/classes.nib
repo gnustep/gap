@@ -28,6 +28,7 @@
                 fullScreenMenuItem = NSMenuItem; 
                 jpegCompressionField = NSTextField; 
                 jpegCompressionSlider = NSSlider; 
+                saveAsMenuItem = NSMenuItem; 
                 saveOptionsView = NSView; 
                 scrollView = NSScrollView; 
                 smallView = LMFlipView; 
