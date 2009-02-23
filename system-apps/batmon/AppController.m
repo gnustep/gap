@@ -106,6 +106,12 @@
 
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName
 {
+  return NO;
+}
+
+- (IBAction)showMonitor:(id)sender
+{
+  [monitorWin makeKeyAndOrderFront:nil];
 }
 
 - (void)showPrefPanel:(id)sender

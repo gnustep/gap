@@ -39,6 +39,7 @@
     IBOutlet NSTextField         *chState;
     IBOutlet NSProgressIndicator *level;
 
+    IBOutlet NSWindow            *monitorWin;
     IBOutlet NSWindow            *infoWin;
     IBOutlet NSProgressIndicator *lifeGauge;
     IBOutlet NSTextField         *lifeGaugePercent;
@@ -62,6 +63,7 @@
 
 - (void)getInfo;
 
+- (IBAction)showMonitor:(id)sender;
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)updateInfo:(id)sender;
 - (IBAction)showBattInfo:(id)sender;
