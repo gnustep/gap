@@ -27,7 +27,7 @@
 	batmon.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2008-05-12 02:04:27 +0200";
+    LAST_EDITING = "2009-02-23 23:03:39 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -53,7 +53,7 @@
     PROJECT_AUTHORS = (
 	"Riccardo Mottola (rmottola@users.sf.net)"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2005-2008";
+    PROJECT_COPYRIGHT = "Copyright (C) 2005-2009";
     PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "Battery Monitor";
@@ -62,7 +62,7 @@
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "";
     PROJECT_NAME = batmon;
-    PROJECT_RELEASE = 0.3;
+    PROJECT_RELEASE = 0.4;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "http://gap.nongnu.org/batmon/";

@@ -3,13 +3,13 @@
     ApplicationDescription = "Battery Monitor";
     ApplicationIcon = BatMon_icon.tif;
     ApplicationName = batmon;
-    ApplicationRelease = 0.3;
+    ApplicationRelease = 0.4;
     Authors = (
 	"Riccardo Mottola (rmottola@users.sf.net)"
     );
-    Copyright = "Copyright (C) 2005-2008";
+    Copyright = "Copyright (C) 2005-2009";
     CopyrightDescription = "Released under GPL";
-    FullVersionID = 0.3;
+    FullVersionID = 0.4;
     NSExecutable = batmon;
     NSIcon = BatMon_icon.tif;
     NSMainNibFile = batmon.gorm;

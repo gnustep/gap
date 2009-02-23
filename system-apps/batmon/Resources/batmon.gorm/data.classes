@@ -2,31 +2,34 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
+	    "showMonitor:",
 	    "showPrefPanel:",
 	    "updateInfo:",
 	    "showBattInfo:"
 	);
 	Outlets = (
-	    rate,
-	    presentCap,
 	    voltage,
-	    level,
-	    percent,
-	    chState,
-	    timeLeft,
 	    amperage,
+	    presentCap,
+	    rate,
+	    percent,
+	    timeLeft,
+	    chState,
+	    level,
+	    monitorWin,
 	    infoWin,
-	    battType,
-	    designCap,
-	    lastFullCharge,
 	    lifeGauge,
-	    lifeGaugePercent
+	    lifeGaugePercent,
+	    designCap,
+	    battType,
+	    lastFullCharge
 	);
 	Super = NSObject;
     };
     FirstResponder = {
 	Actions = (
 	    "showBattInfo:",
+	    "showMonitor:",
 	    "showPrefPanel:",
 	    "updateInfo:"
 	);
