@@ -70,6 +70,9 @@
 
   if ((self = [super init]))
     {
+      useACPI = NO;
+      useAPM = NO;
+      
 #if defined(linux)
       /* look for a battery */
       NSLog(@"look for a present battery");
@@ -102,20 +105,31 @@
                      strcat(batteryInfoPath0, "/info");
         	  }
         	  fclose(stateFile);
+		  useACPI = YES;
                }           
             } else
             {
                done = YES;
             }
 	 }
+      } else
+      {
+         /* no acpi, but maybe apm */
+	 if([fm fileExistsAtPath:@"/proc/apm"] == YES)
+	 {
+	    NSLog(@"found apm");
+	    useAPM = YES;
+	    strcpy(apmPath, "/proc/apm");
+	 }
       }
+      
 #endif /* linux */
     }
   return self;
 
 }
 
-- (void)deallo
+- (void)dealloc
 {
   if (chargeState != nil)
         [chargeState release];
@@ -178,7 +192,7 @@
   chargeState = [NSString stringWithString: batteryType];
   batteryType = [NSString stringWithFormat: @"%s", battio.bif.type];
   
-  //
+  // CBV
   // Note: I cannot really tell whether the calculation is correct because
   //       my laptop's battery is kinda screwed up...
   //
@@ -222,6 +236,8 @@
 
     
 
+if (useACPI)
+{
     stateFile = fopen(batteryStatePath0, "r");
     assert(stateFile != NULL);
 
@@ -254,7 +270,7 @@
     sscanf(line, "last full capacity: %s", lastCapStr);
     [self _readLine :infoFile :line]; // battery technology
     [self _readLine :infoFile :line]; // design voltage
-    [self _readLine :infoFile :line]; //design capacity warning
+    [self _readLine :infoFile :line]; // design capacity warning
     sscanf(line, "design capacity warning: %s", warnCapStr);
     [self _readLine :infoFile :line];    
     [self _readLine :infoFile :line];
@@ -306,6 +322,66 @@
             timeRemaining = -1;
         chargePercent = currCap/lastCap*100;
     }
+} else if (useAPM)
+{
+    char drvVersionStr[16];
+    char apmBiosVersionStr[16];
+    char apmBiosFlagsStr[16];
+    char acLineStatusStr[16];
+    char battStatusStr[16];
+    char battFlagsStr[16];
+    char percentStr[16];
+    char timeRemainingStr[16];
+    char timeUnitStr[16];
+
+    stateFile = fopen(apmPath, "r");
+    assert(stateFile != NULL);
+
+
+    [self _readLine :stateFile :line];
+    NSLog(@"line: %s", line);
+    sscanf(line, "%s %s %s %s %s %s %s %s %s", drvVersionStr, apmBiosVersionStr, apmBiosFlagsStr, acLineStatusStr, battStatusStr, battFlagsStr, percentStr, timeRemainingStr, timeUnitStr);
+
+    if (percentStr != NULL && strlen(percentStr) > 0)
+    {
+      if (percentStr[strlen(percentStr)-1] == '%')
+        percentStr[strlen(percentStr)-1] = '\0';
+      NSLog(@"%s %s %s", drvVersionStr, apmBiosVersionStr, percentStr);
+    
+      chargePercent = (float)atof(percentStr);
+      if (chargePercent > 100)
+        chargePercent = 100;
+      if (chargePercent < 0)
+        chargePercent = 0;
+      NSLog(@"percent %f", chargePercent);
+    }
+    if (battStatusStr != NULL && strlen(battStatusStr) > 0)
+    {
+      if (battStatusStr[3] == '0')
+        chargeState = @"High";
+      else if (battStatusStr[3] == '1')
+        chargeState = @"Low";
+      else if (battStatusStr[3] == '2')
+        chargeState = @"Critical";
+      else if (battStatusStr[3] == '3')
+        chargeState = @"Charging";
+      else if (battStatusStr[3] == '4')
+        chargeState = @"Not present";
+      else
+        chargeState = @"Unknown";
+
+
+
+      if (percentStr[strlen(percentStr)-1] == '%')
+        percentStr[strlen(percentStr)-1] = '\0';
+      NSLog(@"%s %s %s", drvVersionStr, apmBiosVersionStr, percentStr);
+    
+      chargePercent = (float)atof(percentStr);
+      NSLog(@"percent %f", chargePercent);
+    }
+    
+    fclose(stateFile);
+}
 
 #endif /* OS */
 }
@@ -365,5 +441,16 @@
     return batteryType;
 }
 
+- (BOOL)isCritical
+{
+  if(useACPI)
+  {
+    return  [self remainingCapacity] < [self warningCapacity];
+  } else if (useAPM)
+  {
+    return[chargeState isEqualToString:@"Critical"];
+  } else
+    return NO;
+}
 
 @end

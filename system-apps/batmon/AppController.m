@@ -144,7 +144,7 @@
     [bzp stroke];
     
     bzp = [NSBezierPath bezierPath];
-    if ([batModel remainingCapacity] < [batModel warningCapacity])
+    if ([batModel isCritical] == YES)
        [[NSColor redColor] set];
     else
        [[NSColor whiteColor] set];

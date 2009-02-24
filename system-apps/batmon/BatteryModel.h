@@ -30,8 +30,11 @@
 #if defined (linux)
     @private char     batteryStatePath0[1024];
     @private char     batteryInfoPath0[1024];
+    @private char     apmPath[1024];
 #endif
 
+    @private BOOL     useACPI;
+    @private BOOL     useAPM;
     @private float    volts;
     @private float    amps;
     @private float    watts;
@@ -57,6 +60,8 @@
 - (float)lastCapacity;
 - (float)designCapacity;
 - (float)chargePercent;
+
+- (BOOL)isCritical;
 
 - (NSString *)state;
 - (NSString *)batteryType;
