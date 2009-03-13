@@ -2,10 +2,11 @@
  *  GSPdfDocument.m: Implementation of the GSPdfDocument Class 
  *  of the GNUstep GWorkspace application
  *
- *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2002-2009 GNUstep Application Project
  *  
  *  Author: Enrico Sersale
  *  Date: February 2002
+ *  Author: Riccardo Mottola
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -311,6 +312,7 @@ NSLog(@"mypath %@", myPath);
 	args = [NSMutableArray arrayWithCapacity: 1];		
 	[args addObject: @"-dQUIET"];
 	[args addObject: @"-dSAFER"];
+    [args addObject: @"-dDELAYSAFER"];
 	[args addObject: @"-dSHORTERRORS"];
 	[args addObject: @"-dDOINTERPOLATE"];	
 	[args addObject: [NSString stringWithFormat: @"-dDEVICEXRESOLUTION=%i", (int)resolution]];	
