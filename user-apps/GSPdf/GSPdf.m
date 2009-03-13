@@ -205,23 +205,7 @@ static GSPdf *gspdf = nil;
 
 - (void)runInfoPanel:(id)sender
 {
-  NSMutableDictionary *d;
-
-  d = AUTORELEASE ([NSMutableDictionary new]);
-  [d setObject: @"GSPdf" forKey: @"ApplicationName"];
-  [d setObject: @"pdf-ps viewer" 
-     forKey: @"ApplicationDescription"];
-  [d setObject: @"GSPdf 0.1" forKey: @"ApplicationRelease"];
-  [d setObject: @"July 2002" forKey: @"FullVersionID"];
-  [d setObject: [NSArray arrayWithObject: @" Enrico Sersale <enrico@imago.ro>"]
-     forKey: @"Authors"];
-  [d setObject: @"See http://www.imago.ro/gspdf" forKey: @"URL"];
-  [d setObject: @"Copyright (C) 2002 Free Software Foundation, Inc."
-     forKey: @"Copyright"];
-  [d setObject: @"Released under the GNU General Public License 2.0"
-     forKey: @"CopyrightDescription"];
-  
-  [NSApp orderFrontStandardInfoPanelWithOptions:d];
+  [NSApp orderFrontStandardInfoPanel:self];
 }
 
 - (BOOL)windowShouldClose:(id)sender
