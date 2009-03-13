@@ -48,8 +48,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     self = [super initWithFrame: pageRect];
     if(self)
     {
-        NSImage *img = [NSImage imageNamed: @"blackarrow.tiff"];
-        NSCursor *cur = [[NSCursor alloc] initWithImage: img hotSpot: NSMakePoint(0, 0)];
+        NSImage *img;
+        NSCursor *cur;
+        
+        img = [NSImage imageNamed: @"blackarrow.tiff"];
+        cur = [[NSCursor alloc] initWithImage: img hotSpot: NSMakePoint(0, 0)];
         [cur setOnMouseEntered: YES];
         [cur setOnMouseExited: YES];
         [self addTrackingRect: [self frame]
