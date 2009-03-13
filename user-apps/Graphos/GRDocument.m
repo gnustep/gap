@@ -30,8 +30,7 @@
 {
     [super init];
     if (self)
-    {
-        NSLog(@"initing document");
+    {        
         docView = [[GRDocView alloc] initWithFrame: NSMakeRect(0,0,0,0)];
     }
     return self;
@@ -50,6 +49,17 @@
         NSScrollView *sv = [[[[aController window] contentView] subviews] objectAtIndex: 0];
         [sv setDocumentView: docView];
     }
+    
+    NSPrintInfo *p;
+    
+    NSLog(@"initing document");
+    /* initialize the image view to the default size if possible */
+    p = [self printInfo];
+    if (p != nil)
+        [self setPrintInfo:p];
+    else
+        NSLog(@"pi nil!");
+    
 }
 
 - (NSData *)dataRepresentationOfType:(NSString *)aType
