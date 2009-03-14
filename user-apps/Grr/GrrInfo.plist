@@ -1,7 +1,7 @@
 {
     ApplicationDescription = "G\U00FCnthers reliable RSS Reader";
     ApplicationName = Grr;
-    ApplicationRelease = 0.8-Beta;
+    ApplicationRelease = 0.9-Beta;
     ApplicationIcon = Grr-Icon;
     NSIcon = Grr-Icon;
     Authors = (
