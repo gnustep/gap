@@ -24,52 +24,55 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "GSConsole.h"
-#include "GNUstep.h"
+#import "GSConsole.h"
+#import "GNUstep.h"
 
 @implementation GSConsole
 
 - (void)dealloc
 {
-	RELEASE (textView);
-	if (window && ([window isVisible])) {
-		[window close];
-	}
-	RELEASE (window);
+  RELEASE (textView);
+  if (window && ([window isVisible]))
+    {
+      [window close];
+    }
+  RELEASE (window);
 	
   [super dealloc];
 }
 
 - (id)init
 {
-	self = [super init];
+  self = [super init];
 
-	if (self) {		
-		[NSBundle loadNibNamed: @"GSConsole.gorm" owner: self];
-		[window setDelegate: self];
-		[window setTitle: @"Console"];
+  if (self)
+    {		
+      [NSBundle loadNibNamed: @"GSConsole.gorm" owner: self];
+      [window setDelegate: self];
+      [window setTitle: @"Console"];
 		
-  	if ([window setFrameUsingName: @"gsconsole"] == NO) {
-    	[window setFrame: NSMakeRect(300, 200, 500, 333) display: NO];
+      if ([window setFrameUsingName: @"gsconsole"] == NO)
+	{
+	  [window setFrame: NSMakeRect(300, 200, 500, 333) display: NO];
   	}    	
-	}
+    }
 	
-	return self;
+  return self;
 }
 
 - (NSWindow *)window
 {
-	return window;
+  return window;
 }
 
 - (NSTextView *)textView
 {
-	return textView;
+  return textView;
 }
 
 - (BOOL)windowShouldClose:(id)sender
 {
-	[window saveFrameUsingName: @"gsconsole"];
+  [window saveFrameUsingName: @"gsconsole"];
   return YES;
 }
 

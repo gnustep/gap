@@ -35,7 +35,6 @@ Resources/zoomout.tiff
 # Header files
 #
 GSPdf_HEADER_FILES = \
-AppController.h \
 Functions.h \
 GSConsole.h \
 GSPdf.h \

@@ -24,124 +24,127 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "GSPdfDocWin.h"
-#include "GNUstep.h"
+#import "GSPdfDocWin.h"
+#import "GNUstep.h"
 
 @implementation GSPdfDocWin
 
 - (void)dealloc
 {
-	RELEASE (leftButt);
-	RELEASE (rightButt);
-	RELEASE (matrixScroll);
-	RELEASE (zoomField);
-	RELEASE (zoomStepper);
-	RELEASE (zoomButt);
-	RELEASE (handButt);
-	RELEASE (scroll);	
-	if (window && ([window isVisible])) {
-		[window close];
-	}
-	RELEASE (window);
+  RELEASE (leftButt);
+  RELEASE (rightButt);
+  RELEASE (matrixScroll);
+  RELEASE (zoomField);
+  RELEASE (zoomStepper);
+  RELEASE (zoomButt);
+  RELEASE (handButt);
+  RELEASE (scroll);	
+  if (window && ([window isVisible]))
+    {
+      [window close];
+    }
+  RELEASE (window);
 	
   [super dealloc];
 }
 
 - (id)init
 {
-	self = [super init];
+  self = [super init];
 
-	if (self) {		
-		nc = [NSNotificationCenter defaultCenter];
+  if (self)
+    {		
+      nc = [NSNotificationCenter defaultCenter];
 
-		[NSBundle loadNibNamed: @"GSPdfDocWin.gorm" owner: self];
-		[[window contentView] setPostsFrameChangedNotifications: YES];
+      [NSBundle loadNibNamed: @"GSPdfDocWin.gorm" owner: self];
+      [[window contentView] setPostsFrameChangedNotifications: YES];
 		
-    [nc addObserver: self
-           selector: @selector(mainViewDidResize:)
-               name: NSViewFrameDidChangeNotification
-             object: [window contentView]];    		
+      [nc addObserver: self
+	  selector: @selector(mainViewDidResize:)
+	  name: NSViewFrameDidChangeNotification
+	  object: [window contentView]];    		
 		
-		[leftButt	setImage: [NSImage imageNamed: @"left.tiff"]];
-		[rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
+      [leftButt	setImage: [NSImage imageNamed: @"left.tiff"]];
+      [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
 		
-		[matrixScroll setHasHorizontalScroller: YES];
-    [matrixScroll setHasVerticalScroller: NO]; 
+      [matrixScroll setHasHorizontalScroller: YES];
+      [matrixScroll setHasVerticalScroller: NO]; 
 		
-		[zoomButt	setImage: [NSImage imageNamed: @"zoomin.tiff"]];
-		[handButt setImage: [NSImage imageNamed: @"hand.tiff"]];
+      [zoomButt	setImage: [NSImage imageNamed: @"zoomin.tiff"]];
+      [handButt setImage: [NSImage imageNamed: @"hand.tiff"]];
 		
-	 	[scroll setHasHorizontalScroller: YES];
-  	[scroll setHasVerticalScroller: YES]; 
-		[scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+      [scroll setHasHorizontalScroller: YES];
+      [scroll setHasVerticalScroller: YES]; 
+      [scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
 
-  	if ([window setFrameUsingName: @"gspdfdoc"] == NO) {
-    	[window setFrame: NSMakeRect(300, 200, 500, 400) display: NO];
+      if ([window setFrameUsingName: @"gspdfdoc"] == NO)
+	{
+	  [window setFrame: NSMakeRect(300, 200, 500, 400) display: NO];
   	}    		
-		[window orderFrontRegardless];
-	}
+      [window orderFrontRegardless];
+    }
 	
-	return self;
+  return self;
 }
 
 - (void)mainViewDidResize:(NSNotification *)notif
 {
-	NSRect r = [[window contentView] frame];
+  NSRect r = [[window contentView] frame];
 
-	float h = r.size.height;
+  float h = r.size.height;
 	
-	[leftButt setFrameOrigin: NSMakePoint(7, h - 54)];
-	[rightButt setFrameOrigin: NSMakePoint(63, h - 54)];
-	[matrixScroll setFrameOrigin: NSMakePoint(122, h - 54)];
-	[zoomField setFrameOrigin: NSMakePoint(351, h - 53)];
-	[zoomStepper setFrameOrigin: NSMakePoint(416, h - 54)];
-	[zoomButt setFrameOrigin: NSMakePoint(440, h - 54)];
-	[handButt setFrameOrigin: NSMakePoint(473, h - 54)];
+  [leftButt setFrameOrigin: NSMakePoint(7, h - 54)];
+  [rightButt setFrameOrigin: NSMakePoint(63, h - 54)];
+  [matrixScroll setFrameOrigin: NSMakePoint(122, h - 54)];
+  [zoomField setFrameOrigin: NSMakePoint(351, h - 53)];
+  [zoomStepper setFrameOrigin: NSMakePoint(416, h - 54)];
+  [zoomButt setFrameOrigin: NSMakePoint(440, h - 54)];
+  [handButt setFrameOrigin: NSMakePoint(473, h - 54)];
 }
 
 - (NSWindow *)window
 {
-	return window;
+  return window;
 }
 
 - (NSScrollView *)scroll
 {
-	return scroll;
+  return scroll;
 }
 
 - (NSButton *)leftButt
 {
-	return leftButt;
+  return leftButt;
 }
 
 - (NSButton *)rightButt
 {
-	return rightButt;
+  return rightButt;
 }
 
 - (NSScrollView *)matrixScroll
 {
-	return matrixScroll;
+  return matrixScroll;
 }
 
 - (NSTextField *)zoomField
 {
-	return zoomField;
+  return zoomField;
 }
 
 - (NSStepper *)zoomStepper
 {
-	return zoomStepper;
+  return zoomStepper;
 }
 
 - (NSButton *)zoomButt
 {
-	return zoomButt;
+  return zoomButt;
 }
 
 - (NSButton *)handButt
 {
-	return handButt;
+  return handButt;
 }
 
 @end

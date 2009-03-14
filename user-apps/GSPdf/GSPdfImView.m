@@ -24,9 +24,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "GSPdfImView.h"
-#include "GSPdfDocument.h"
-#include "GNUstep.h"
+#import "GSPdfImView.h"
+#import "GSPdfDocument.h"
+#import "GNUstep.h"
 
 @implementation GSPdfImView
 
@@ -37,13 +37,14 @@
 
 - (id)initForDocument:(GSPdfDocument *)doc
 {
-	self = [super init];
+  self = [super init];
 
-	if (self) {		
-		document = doc;
-	}
+  if (self)
+    {		
+      document = doc;
+    }
 	
-	return self;
+  return self;
 }
 
 @end
