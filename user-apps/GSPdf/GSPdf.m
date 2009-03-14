@@ -24,12 +24,12 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "GSPdf.h"
-#include "PSDocument.h"
-#include "GSPdfDocument.h"
-#include "GSPdfDocWin.h"
-#include "GSConsole.h"
-#include "Functions.h"
+#import "GSPdf.h"
+#import "PSDocument.h"
+#import "GSPdfDocument.h"
+#import "GSPdfDocWin.h"
+#import "GSConsole.h"
+#import "Functions.h"
 
 #define MAXPAGES 9999
 
@@ -39,168 +39,179 @@ static GSPdf *gspdf = nil;
 
 + (void)initialize
 {
-	static BOOL initialized = NO;
+  static BOOL initialized = NO;
 	
-	if (initialized == YES) {
-		return;
-  }
+  if (initialized == YES)
+    {
+      return;
+    }
 	
-	initialized = YES;
+  initialized = YES;
 }
 
 + (GSPdf *)gspdf
 {
-	if (gspdf == nil) {
-		gspdf = [[GSPdf alloc] init];
-	}	
+  if (gspdf == nil)
+    {
+      gspdf = [[GSPdf alloc] init];
+    }	
   return gspdf;
 }
 
 - (void)dealloc
 {
-	RELEASE (documents);
-	RELEASE (workPath);
-	RELEASE (paperSizes);
-	RELEASE (gsConsole);
+  RELEASE (documents);
+  RELEASE (workPath);
+  RELEASE (paperSizes);
+  RELEASE (gsConsole);
 	
-	[super dealloc];
+  [super dealloc];
 }
 
 - (id)init
 {
-	self = [super init];
+  self = [super init];
 
-	if (self) {		
-		processId = [NSNumber numberWithInt: [[NSProcessInfo processInfo] processIdentifier]];
-		pageIdentifier = 0;
-		documents = [[NSMutableArray alloc] initWithCapacity: 1];
-		ASSIGN (workPath, NSHomeDirectory());
-		gsConsole = [GSConsole new];
-		nc = [NSNotificationCenter defaultCenter];
-	}
+  if (self)
+    {		
+      processId = [NSNumber numberWithInt: [[NSProcessInfo processInfo] processIdentifier]];
+      pageIdentifier = 0;
+      documents = [[NSMutableArray alloc] initWithCapacity: 1];
+      ASSIGN (workPath, NSHomeDirectory());
+      gsConsole = [GSConsole new];
+      nc = [NSNotificationCenter defaultCenter];
+    }
 
-	return self;
+  return self;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	NSString *path = [[NSBundle mainBundle] pathForResource: @"papersizes" ofType: @"plist"];
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+  NSString *path = [[NSBundle mainBundle] pathForResource: @"papersizes" ofType: @"plist"];
+  NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
 
-	if (dict && [dict objectForKey: @"papersizes"]) {
-		NSArray *names;
-		NSMenu *menu;
-		int i;
+  if (dict && [dict objectForKey: @"papersizes"])
+    {
+      NSArray *names;
+      NSMenu *menu;
+      int i;
 		
-		ASSIGN (paperSizes, [dict objectForKey: @"papersizes"]);
-		names = [paperSizes allKeys];		
-		menu = [[[NSApp mainMenu] itemWithTitle: NSLocalizedString(@"Document", @"")] submenu];
-		menu = [[menu itemWithTitle: NSLocalizedString(@"Page Size", @"")] submenu];
+      ASSIGN (paperSizes, [dict objectForKey: @"papersizes"]);
+      names = [paperSizes allKeys];		
+      menu = [[[NSApp mainMenu] itemWithTitle: NSLocalizedString(@"Document", @"")] submenu];
+      menu = [[menu itemWithTitle: NSLocalizedString(@"Page Size", @"")] submenu];
 		
-		for (i = 0; i < [names count]; i++) {
-			addItemToMenu(menu, [names objectAtIndex: i], @"", @"setPaperSize:", @"");
-		}
-
-	} else {
-		paperSizes = [NSDictionary new];
+      for (i = 0; i < [names count]; i++)
+	{
+	  addItemToMenu(menu, [names objectAtIndex: i], @"", @"setPaperSize:", @"");
 	}
+
+    }
+  else
+    {
+      paperSizes = [NSDictionary new];
+    }
 }
 
 - (BOOL)application:(NSApplication *)app openFile:(NSString *)filename
 {
-	return [self openDocumentForPath: filename];
+  return [self openDocumentForPath: filename];
 }
 
 - (BOOL)applicationShouldTerminate:(NSApplication *)app 
 {
-	int i;
+  int i;
 
-	for (i = 0; i < [documents count]; i++) {
-		GSPdfDocument *doc = [documents objectAtIndex: i];
-		BOOL isPdf = [doc isPdf];
+  for (i = 0; i < [documents count]; i++)
+    {
+      GSPdfDocument *doc = [documents objectAtIndex: i];
+      BOOL isPdf = [doc isPdf];
 				
-		[doc clearTempFiles];
+      [doc clearTempFiles];
 		
-		if (isPdf) {
-			[[NSFileManager defaultManager] removeFileAtPath: [doc myPath] 
-																							 handler: nil];		
-		}
-	}	
+      if (isPdf) {
+	[[NSFileManager defaultManager] removeFileAtPath: [doc myPath] 
+					handler: nil];		
+      }
+    }	
 
-	return YES;
+  return YES;
 }
 
 - (BOOL)openDocumentForPath:(NSString *)path
 {
-	GSPdfDocument *doc = [[GSPdfDocument alloc] initForPath: path];
+  GSPdfDocument *doc = [[GSPdfDocument alloc] initForPath: path];
 
-	if (doc) {
-		[documents addObject: doc];
-		RELEASE (doc);
-		ASSIGN (workPath, [path stringByDeletingLastPathComponent]);
-		return YES;
-	}	
-	return NO;
+  if (doc)
+    {
+      [documents addObject: doc];
+      RELEASE (doc);
+      ASSIGN (workPath, [path stringByDeletingLastPathComponent]);
+      return YES;
+    }	
+  return NO;
 }
 
 - (void)openFile:(id)sender
 {
-	NSOpenPanel *openPanel;
-	int result;
+  NSOpenPanel *openPanel;
+  int result;
 
-	openPanel = [NSOpenPanel openPanel];
-	[openPanel setTitle: @"open"];	
-	[openPanel setAllowsMultipleSelection: NO];
-	[openPanel setCanChooseFiles: YES];
-	[openPanel setCanChooseDirectories: NO];
+  openPanel = [NSOpenPanel openPanel];
+  [openPanel setTitle: @"open"];	
+  [openPanel setAllowsMultipleSelection: NO];
+  [openPanel setCanChooseFiles: YES];
+  [openPanel setCanChooseDirectories: NO];
 
-	result = [openPanel runModalForDirectory: workPath file: nil 
-							types: [NSArray arrayWithObjects: @"ps", @"PS", @"eps", @"EPS", @"pdf", @"PDF", nil]];
+  result = [openPanel runModalForDirectory: workPath file: nil 
+		      types: [NSArray arrayWithObjects: @"ps", @"PS", @"eps", @"EPS", @"pdf", @"PDF", nil]];
 
-	if(result != NSOKButton) {
-		return;
-	}
+  if(result != NSOKButton)
+    {
+      return;
+    }
 	
-	[self openDocumentForPath: [openPanel filename]];
+  [self openDocumentForPath: [openPanel filename]];
 }
 
 - (void)documentHasClosed:(GSPdfDocument *)doc
 {
-	[doc clearTempFiles];
-	[documents removeObject: doc];
+  [doc clearTempFiles];
+  [documents removeObject: doc];
 }
 
 - (NSDictionary *)uniquePageIdentifier
 {
-	NSString *tempName = [NSString stringWithFormat: @"gspdf_%@_%i", [processId stringValue], pageIdentifier];	
- 	NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent: tempName];
-	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity: 1];
+  NSString *tempName = [NSString stringWithFormat: @"gspdf_%@_%i", [processId stringValue], pageIdentifier];	
+  NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent: tempName];
+  NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity: 1];
 
-	[dict setObject: [tempPath stringByAppendingPathExtension: @"ps"] forKey: @"pspath"];
-	[dict setObject: [tempPath stringByAppendingPathExtension: @"tiff"] forKey: @"tiffpath"];
-	[dict setObject: [tempPath stringByAppendingPathExtension: @"dsc"] forKey: @"dscpath"];
+  [dict setObject: [tempPath stringByAppendingPathExtension: @"ps"] forKey: @"pspath"];
+  [dict setObject: [tempPath stringByAppendingPathExtension: @"tiff"] forKey: @"tiffpath"];
+  [dict setObject: [tempPath stringByAppendingPathExtension: @"dsc"] forKey: @"dscpath"];
 
-	pageIdentifier++;
-	if (pageIdentifier >= MAXPAGES) {
-		pageIdentifier = 0;
-	}
+  pageIdentifier++;
+  if (pageIdentifier >= MAXPAGES)
+    {
+      pageIdentifier = 0;
+    }
 	
-	return dict;
+  return dict;
 }
 
 - (NSDictionary *)paperSizes
 {
-	return paperSizes;
+  return paperSizes;
 }
 
 - (GSConsole *)console
 {
-	return gsConsole;
+  return gsConsole;
 }
 
 - (void)showConsole:(id)sender
 {
-	[[gsConsole window] orderFrontRegardless];
+  [[gsConsole window] orderFrontRegardless];
 }
 
 - (void)runInfoPanel:(id)sender
