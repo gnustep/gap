@@ -1,6 +1,9 @@
 ==============
 Grr ChangeLog
 ==============
+2009-03-14 18:46-EDT Gregory John Casamento <greg_casamento@yahoo.com>
+
+        * Fixed issue with caching selectors as numbers in the dictionary.
 
 Dec-07-2007  Quentin Mathe
 	* Fixed compilation by taking care of linking EtoileFoundation now that 
