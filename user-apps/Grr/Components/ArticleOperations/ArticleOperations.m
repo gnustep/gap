@@ -133,7 +133,11 @@ willBeInsertedIntoToolbar: (BOOL)flag
     id<RSSArticle> article;
     
     while ((article = [enumerator nextObject]) != nil) {
-        NSLog(@"FIXME: Browse article %@ here! :-)", [article headline]);
+        NSString *urlStr;
+
+        urlStr = [article url];
+        NSLog(@"FIXME: Should article %@", urlStr);
+        [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:urlStr]];
     }
 }
 
@@ -143,7 +147,8 @@ willBeInsertedIntoToolbar: (BOOL)flag
     NSEnumerator* enumerator = [selectedArticles objectEnumerator];
     id<Article> article;
     
-    while ((article = [enumerator nextObject]) != nil) {
+    while ((article = [enumerator nextObject]) != nil)
+    {
         NSLog(@"Article %@ is \n%@", [article headline], [article plistDictionary]);
         NSLog(@"Storage reseult: %d", [article store]);
     }
