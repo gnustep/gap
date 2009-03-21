@@ -10,7 +10,6 @@ SUBPROJECTS = \
 # Mostly independent components with preference panels
 SUBPROJECTS += \
 	Proxy \
-	URLOpening \
 	Fonts \
 
 # Database components
