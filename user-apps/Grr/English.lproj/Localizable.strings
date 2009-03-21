@@ -43,18 +43,3 @@ add comments above this one
 /* Comment: The name of the Feed menu entry. It's important that this is the same name as in the Gorm file, otherwise the menu will not be filled. */
 /* Flag: unmatched */
 "Feed" = "Feed";
-
-/* File: NSWorkspace+URLOpening.m:34 */
-/* Comment: header of the failure alert message */
-/* Flag: untranslated */
-"Browsing failed" = "Browsing failed";
-
-/* File: NSWorkspace+URLOpening.m:39 */
-/* Comment: The failure alert message text when a URL can't be opened. */
-/* Flag: untranslated */
-"Unable to open this URL:\n%@\n\nPlease check your Grr web browser preferences."
-= "Unable to open this URL:\n%@\n\nPlease check your Grr web browser preferences.";
-
-/* File: NSWorkspace+URLOpening.m:40 */
-/* Flag: untranslated */
-"Ok" = "Ok";

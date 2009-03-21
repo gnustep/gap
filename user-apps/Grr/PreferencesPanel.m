@@ -29,7 +29,6 @@
         
         // Set up preferences
         [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Proxy"]];
-        [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"URLOpening"]];
         [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Fonts"]];
         
         NSToolbar* toolbar = AUTORELEASE(

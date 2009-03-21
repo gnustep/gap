@@ -40,7 +40,6 @@ Grr_main.m \
 ImageTextCell.m \
 NSBundle+Extensions.m \
 NSURL+Proxy.m \
-NSWorkspace+URLOpening.m \
 NumberedImageTextCell.m \
 PipeType.m \
 PreferencesComponent.m \
