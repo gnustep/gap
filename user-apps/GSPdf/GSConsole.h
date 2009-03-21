@@ -2,10 +2,11 @@
  *  GSConsole.h: Interface and declarations for the GSConsole 
  *  Class of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2002-2009 GNUstep Application Project
  *  
  *  Author: Enrico Sersale
  *  Date: July 2002
+ *  Author: Riccardo Mottola
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,19 +23,17 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef GSCONSOLE_H
-#define GSCONSOLE_H
 
-#include <Foundation/Foundation.h>
-#include <AppKit/NSView.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/NSTextView.h>
 
 @class NSWindow;
 @class NSTextView;
 
 @interface GSConsole : NSObject
 {
-	id window;
-	id textView;
+	IBOutlet NSWindow *window;
+	IBOutlet NSTextView *textView;
 }
 
 - (NSWindow *)window;
@@ -43,5 +42,4 @@
 
 @end
 
-#endif // GSCONSOLE_H
 
