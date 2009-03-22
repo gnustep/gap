@@ -22,20 +22,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef GSPDFDOCUMENT_H
-#define GSPDFDOCUMENT_H
 
-#include <Foundation/Foundation.h>
-#include <AppKit/NSView.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-@class NSWindow;
-@class NSScrollView;
-@class NSImageView;
-@class NSTextField;
-@class NSMatrix;
-@class NSButton;
-@class NSStepper;
-@class NSTextField;
 @class GSPdfDocWin;
 @class PSDocument;
 @class PSDocumentPage;
@@ -105,5 +95,4 @@
 
 @end
 
-#endif // GSPDFDOCUMENT_H
 
