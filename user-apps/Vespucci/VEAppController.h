@@ -29,13 +29,16 @@
 
 @interface VEAppContoller : NSObject
 {
+    /* preferences */
     IBOutlet NSPanel *prefPanel;
     IBOutlet NSTextField *homePageField;
     IBOutlet NSMenuItem *bookmarksMenu;
 
+    /* bookmarks */
     IBOutlet NSPanel *addBookmarkPanel;
     IBOutlet NSTextField *addBkTitleField;
     IBOutlet NSTextField *addBkUrlField;
+    IBOutlet NSButton *javaScriptCheck;
     
     NSString *bookmarksFile;
 }

@@ -8,7 +8,16 @@
 	"GNUstep Application Project",
 	"Riccardo Mottola"
     );
-    Copyright = "Copyright (C) 2007-2009\033\033";
+    CFBundleURLTypes = (
+	{
+	    CFBundleURLName = "Web site URL";
+	    CFBundleURLSchemes = (
+		http,
+		https
+	    );
+	}
+    );
+    Copyright = "Copyright (C) 2007-2009";
     CopyrightDescription = "Released under GPL v2+";
     FullVersionID = 0.1;
     NSExecutable = Vespucci;
@@ -16,6 +25,19 @@
     NSMainNibFile = MainMenu.gorm;
     NSPrincipalClass = NSApplication;
     NSRole = Application;
+    NSServices = (
+	{
+	    NSMenuItem = {
+		default = "Open URL in Vespucci";
+	    };
+	    NSMessage = openURL;
+	    NSPortName = Vespucci;
+	    NSSendTypes = (
+		NSURLPboardType,
+		NSStringPboardType
+	    );
+	}
+    );
     NSTypes = (
 	{
 	    NSDocumentClass = VEDocument;

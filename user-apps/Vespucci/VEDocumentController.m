@@ -48,21 +48,33 @@
     VEDocument *doc;
     NSString *urlStr;
 
-    urlStr = [@"file://" stringByAppendingString:fileName];
+    if (!([fileName hasPrefix:@"http://"] || [fileName hasPrefix:@"https://"] || [fileName hasPrefix:@"file://"]))
+      urlStr = [@"file://" stringByAppendingString:fileName];
+    else
+      urlStr = [NSString stringWithString:fileName];
 
+    return [self openDocumentWithContentsOfURL:[NSURL URLWithString:urlStr] display:flag];
+} 
+
+- (id)openDocumentWithContentsOfURL:(NSURL *)aURL display:(BOOL)flag
+{
+    VEDocument *doc;
+
+    NSLog(@"openDocWithURL: %@", [aURL absoluteURL]);
     /* check if there is a current document open which is empty and reuse it
         else create a new document */
     doc = [self currentDocument];
-    NSLog(@"current loaded url in document: %@", [doc loadedUrl]);
+    NSLog(@"[openURL] current loaded url in document: %@", [doc loadedUrl]);
     if (doc != nil)
     {
         if (([doc loadedUrl] != nil) && [[doc loadedUrl] length] > 0)
-            doc = [super openDocumentWithContentsOfFile:fileName display:flag];
+            doc = [super openDocumentWithContentsOfURL:aURL display:flag];
     } else {
-        doc = [super openDocumentWithContentsOfFile:fileName display:flag];
+        doc = [super openDocumentWithContentsOfURL:aURL display:flag];
+        NSAssert(doc != nil, @"openDocWithURL: document can't be nil here");
     }
     
-    [doc  loadUrl:[NSURL URLWithString:urlStr]];
+    [doc  loadUrl:aURL];
     return doc;
 }
 

@@ -1,6 +1,6 @@
 {
     APPLICATIONICON = vespucci_pastel_64.tif;
-    APP_DOCUMENT_BASED = YES;
+    APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     CLASS_FILES = (
 	VEWinController.m,
@@ -34,7 +34,7 @@
 	VEDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-02-02 00:18:44 +0100";
+    LAST_EDITING = "2009-03-22 02:36:10 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
@@ -47,14 +47,15 @@
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     OBJC_COMPILEROPTIONS = "";
     OTHER_RESOURCES = (
-	"Info-gnustep.plist"
     );
     OTHER_SOURCES = (
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBrowser = "{x = -1.69512; y = -1.41491e-05; width = 659; height = 173}";
-	ProjectWindow = "164 202 677 615 0 0  1280 1024 ";
+	ProjectBrowser = "{x = 0; y = 0; width = 659; height = 165}";
+	ProjectBuild = "0 0 0 0 0 0  0 -1 ";
+	ProjectLaunch = "279 65 482 376 0 0  1024 768 ";
+	ProjectWindow = "158 119 677 615 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
@@ -62,7 +63,7 @@
 	"GNUstep Application Project",
 	"Riccardo Mottola"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2007-2009\033\033";
+    PROJECT_COPYRIGHT = "Copyright (C) 2007-2009";
     PROJECT_COPYRIGHT_DESC = "Released under GPL v2+";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "WorldWideWeb Browser";
@@ -117,7 +118,6 @@
 	VespucciInfo.plist
     );
     USER_LANGUAGES = (
-	AmericanEnglish,
 	English
     );
 }

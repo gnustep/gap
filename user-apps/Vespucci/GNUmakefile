@@ -24,8 +24,7 @@ Vespucci_LIBRARIES_DEPEND_UPON += -lSimpleWebKit
 Vespucci_RESOURCE_FILES = \
 Resources/MainMenu.gorm \
 Resources/VEDocument.gorm \
-Resources/vespucci_pastel_64.tif \
-Resources/Info-gnustep.plist 
+Resources/vespucci_pastel_64.tif 
 
 
 #
