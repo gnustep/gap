@@ -22,13 +22,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef GSPDF_H
-#define GSPDF_H
-
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
+#import "GSConsole.h"
 
 @class GSPdfDocument;
-@class GSConsole;
 
 @interface GSPdf : NSObject
 {
@@ -61,4 +58,3 @@
 
 @end
 
-#endif // GSPDF_H

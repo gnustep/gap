@@ -22,17 +22,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef GSPDFDOCWIN_H
-#define GSPDFDOCWIN_H
-
-#include <Foundation/Foundation.h>
-#include <AppKit/NSView.h>
-
-@class NSWindow;
-@class NSScrollView;
-@class NSButton;
-@class NSTextField;
-@class NSStepper;
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 @interface GSPdfDocWin : NSObject
 {
@@ -70,6 +61,4 @@
 - (void)mainViewDidResize:(NSNotification *)notif;
 
 @end
-
-#endif // GSPDFDOCWIN_H
 

@@ -22,10 +22,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef PSDOCUMENT_H
-#define PSDOCUMENT_H
-
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
 @interface PSDocumentMedia : NSObject											
 {
@@ -145,4 +142,3 @@
 
 @end
 
-#endif // PSDOCUMENT_H
