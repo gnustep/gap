@@ -1,0 +1,32 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "nextPage:",
+	    "openFile:",
+	    "previousPage:",
+	    "runInfoPanel:",
+	    "showConsole:"
+	);
+	Super = NSObject;
+    };
+    GSPdf = {
+	Actions = (
+	    "openFile:",
+	    "showConsole:",
+	    "runInfoPanel:"
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    NSApplication = {
+	Actions = (
+	    "openFile:",
+	    "nextPage:",
+	    "previousPage:",
+	    "showConsole:"
+	);
+	Super = NSResponder;
+    };
+}

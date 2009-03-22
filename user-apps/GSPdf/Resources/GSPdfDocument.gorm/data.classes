@@ -1,0 +1,19 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    GSPdfDocWin = {
+	Actions = (
+	);
+	Outlets = (
+	    handButt,
+	    leftButt,
+	    matrixScroll,
+	    rightButt,
+	    scroll,
+	    window,
+	    zoomButt,
+	    zoomField,
+	    zoomStepper
+	);
+	Super = NSObject;
+    };
+}
