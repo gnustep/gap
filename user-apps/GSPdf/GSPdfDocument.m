@@ -80,7 +80,7 @@
       ext = [myPath pathExtension];
       isPdf = (([ext isEqual: @"pdf"]) || ([ext isEqual: @"PDF"]));
       ASSIGN (myName, [myPath lastPathComponent]);		
-      gsComm = @"/usr/pkg/bin/gs";
+      gsComm = @"/usr/bin/gs";
       pageindex = 0;
       resolution = 72;
       pagew = 595;
