@@ -17,8 +17,9 @@ GSPdf_APPLICATION_ICON = GSPdf.tiff
 # Resource files
 #
 GSPdf_RESOURCE_FILES = \
-Resources/GSConsole.gorm \
-Resources/GSPdfDocWin.gorm \
+Resources/GSPdf.gorm \
+Resources/GSPdfConsole.gorm \
+Resources/GSPdfDocument.gorm \
 Resources/FileEPS.tiff \
 Resources/FilePDF.tiff \
 Resources/FilePS.tiff \

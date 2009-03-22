@@ -47,7 +47,7 @@
 
   if (self)
     {		
-      [NSBundle loadNibNamed: @"GSConsole.gorm" owner: self];
+      [NSBundle loadNibNamed: @"GSPdfConsole.gorm" owner: self];
       [window setDelegate: self];
       [window setTitle: @"Console"];
 		

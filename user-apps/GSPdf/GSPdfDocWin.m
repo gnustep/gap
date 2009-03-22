@@ -56,7 +56,7 @@
     {		
       nc = [NSNotificationCenter defaultCenter];
 
-      [NSBundle loadNibNamed: @"GSPdfDocWin.gorm" owner: self];
+      [NSBundle loadNibNamed: @"GSPdfDocument.gorm" owner: self];
       [[window contentView] setPostsFrameChangedNotifications: YES];
 		
       [nc addObserver: self
