@@ -105,17 +105,69 @@
 #include <stdlib.h>	/* malloc, rand, srand */
 #include <time.h>	/* time */
 
+
+struct MoveInfo {
+  short side;
+  short alpha;
+  short beta;
+  short iop;
+  short rpt;
+};
+
+struct leaf
+  {
+    short f,t,score,reply;
+    unsigned short flags;
+  };
+struct GameRec
+  {
+    unsigned short gmove;
+    short score,depth,time,piece,color;
+    long nodes;
+  };
+struct TimeControlRec
+  {
+    short moves[2];
+    long clock[2];
+  };
+struct BookEntry
+  {
+    struct BookEntry *next;
+    unsigned short *mv;
+  };
+struct hashval
+  {
+    unsigned long bd;
+    unsigned short key;
+  };
+struct hashentry
+  {
+    unsigned long hashbd;
+    unsigned short mv,flags;
+    short score,depth;
+  };
+
 /* glue functions */
-void ShowMessage(char *s), UpdateDisplay(int a, int b, int c, int d), ElapsedTime(int t), ClrScreen();
-void SetTimeControl(), SelectLevel(), GetOpenings();
+void ShowMessage(char *s);
+void UpdateDisplay(int a, int b, int c, int d);
+void ElapsedTime(int t);
+void ClrScreen();
+void SetTimeControl();
+void SelectLevel();
+void GetOpenings();
 void ShowDepth(char c);
 void ShowResults( short score, unsigned short bstline[], char ch );
-void ShowSidetomove(), SearchStartStuff(short side), OutputMove();
-void GameEnd(short score), ShowCurrentMove( short pnt, short f, short t );
+void ShowSidetomove();
+void SearchStartStuff(short side);
+void OutputMove();
+void GameEnd(short score);
+void ShowCurrentMove( short pnt, short f, short t );
 
 /* functions for glue */
 void gnuchess_main_init(), NewGame();
-void InitializeStats(), SelectMoveStart( struct MoveInfo *mi ), SelectLoop( struct MoveInfo *mi );
+void SelectLoop( struct MoveInfo *mi );
+void InitializeStats();
+void SelectMoveStart( struct MoveInfo *mi );
 
 void algbr(short f, short t, short iscastle);
 
@@ -175,46 +227,7 @@ static void  KingScan(short sq,short *s);
 static void  CopyBoard(short a[64], short b[64]);
 static void  BlendBoard(short a[64], short b[64], short c[64]);
 
-struct MoveInfo {
-  short side;
-  short alpha;
-  short beta;
-  short iop;
-  short rpt;
-};
 
-struct leaf
-  {
-    short f,t,score,reply;
-    unsigned short flags;
-  };
-struct GameRec
-  {
-    unsigned short gmove;
-    short score,depth,time,piece,color;
-    long nodes;
-  };
-struct TimeControlRec
-  {
-    short moves[2];
-    long clock[2];
-  };
-struct BookEntry
-  {
-    struct BookEntry *next;
-    unsigned short *mv;
-  };
-struct hashval
-  {
-    unsigned long bd;
-    unsigned short key;
-  };
-struct hashentry
-  {
-    unsigned long hashbd;
-    unsigned short mv,flags;
-    short score,depth;
-  };
 
 char mvstr1[5],mvstr2[5];
 struct leaf Tree[2000],*root;
