@@ -65,12 +65,6 @@ Chess_LOCALIZED_RESOURCE_FILES=\
 Chess_LANGUAGES=\
 	English
 
-#Chess_INCLUDE_DIRS=\
-#	-I./gnuchess.subproj
-
-#before-all::
-#	mkdir -p ./obj/gnuchess.subproj
-
 ADDITIONAL_CPPFLAGS+= -DGNUSTEP
 
 -include GNUmakefile.preamble

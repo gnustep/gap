@@ -74,6 +74,7 @@ static struct tms  tmbuf1, tmbuf2;
 #define RIGHT_CASTLE  0x2
 
 /* external functions (gnuchess.c) */
+/*
 extern void gnuchess_main_init();
 extern void NewGame();
 extern void algbr();
@@ -85,6 +86,17 @@ extern int  SqAtakd();
 extern void SelectMoveStart();
 extern int  SelectMoveEnd();
 extern void SelectLoop();
+*/
+
+extern void gnuchess_main_init(), NewGame();
+extern void InitializeStats(), SelectMoveStart( struct MoveInfo *mi ), 
+  SelectLoop( struct MoveInfo *mi );
+extern void algbr(short f, short t, short iscastle);
+extern int VerifyMove(char *s, short iop,unsigned short *mv);
+extern int SelectMoveEnd( struct MoveInfo *mi );
+extern int SqAtakd(short sq, short side);
+extern int castle(short side,short kf,short kt,short iop);
+extern int distance(short a,short b);
 
 /* static variables */
 static struct MoveInfo  move_info;
