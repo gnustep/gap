@@ -1,0 +1,6 @@
+2009-03-22 23:58-EDT Gregory John Casamento <greg_casamento@yahoo.com>
+
+	* MyDocument.m:
+	* PageView.m: Changed to correct issues with pageView coming up
+	as one line.
+
