@@ -161,6 +161,19 @@ const OSType kMyAppCreatorCode = 'bEAN';
 		[textStorage addLayoutManager:[self layoutManager]];
 		[layoutManager release];
 		
+#ifdef GNUSTEP
+		{
+		  PageView *pageView = [theScrollView documentView];
+		  NSTextView *textView = [self firstTextView];
+
+		  if (textView) { [[self layoutManager] removeTextContainerAtIndex:0]; }
+		  [self doForegroundLayoutToCharacterIndex:INT_MAX];
+		  [pageView setNumberOfPages:[[layoutManager textContainers] count]];
+		  if ([self shouldUseAltTextColors]) { [self setShouldUseAltTextColors:YES]; }
+		  [pageView recalculateFrame];
+		}
+#endif
+
 		//	set defaults for accessors
 		[self setFloating:NO];
 		[self setRestoreAltTextColors:NO];
@@ -373,6 +386,14 @@ const OSType kMyAppCreatorCode = 'bEAN';
 		richTextFontSize = 0.0;
 	}
 	
+#ifdef GNUSTEP
+		{
+		  [self setTheViewType: nil];
+		  [self setTheViewType: nil];		  
+		}
+#endif
+
+
 	//	if text or html, use default _plain_ text font from user defaults and some default margins
 	if ([[self currentFileType] isEqualToString:TXTDoc] 
 				|| [[self currentFileType] isEqualToString:HTMLDoc]

@@ -32,54 +32,62 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-    if (self = [super initWithFrame:frame]) {
-		delegate = self; 
-        [self setBackgroundColor:[NSColor lightGrayColor]];	
-        [self setPrintInfo:[NSPrintInfo sharedPrintInfo]];
-		[self setNumberOfPages:1];
-		[self setShowPageShadow:YES];
+  if (self = [super initWithFrame:frame]) 
+    {
+      delegate = self; 
+      [self setBackgroundColor:[NSColor lightGrayColor]];	
+      [self setPrintInfo:[NSPrintInfo sharedPrintInfo]];
+      [self setNumberOfPages:1];
+      [self setShowPageShadow:YES];
     }
-    return self;
+  return self;
 }
 
 - (void)dealloc
 {
-	[backgroundColor release];
-	[super dealloc];
+  [backgroundColor release];
+  [super dealloc];
 }
 
 -(BOOL)isFlipped
 {
-	return YES;
+  return YES;
 }
 
 -(BOOL)isOpaque
 {
-	return YES;
+  return YES;
 }
 
 - (void)awakeFromNib
 {
-	// Make sure scroll view has same colour as our background
-	if ([self enclosingScrollView] && backgroundColor)
-	[[self enclosingScrollView] setBackgroundColor:[NSColor lightGrayColor]]; //backgroundColor];
-	//set up ruler view
-	NSScrollView *theScrollView = [self enclosingScrollView];
-	[theScrollView setHasHorizontalRuler:YES];
-	[theScrollView setHasVerticalRuler:NO];
-	//conpensate ruler for page position offset
-	NSRulerView *xruler = [theScrollView horizontalRulerView];
-	[xruler setOriginOffset:[self pageSeparatorLength]];
-	NSRulerView *yruler = [theScrollView verticalRulerView];
-	[yruler setOriginOffset:[self pageSeparatorLength]];
-	[self setShouldSetupRuler:YES];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if ([defaults boolForKey:@"prefShowPageShadow"]) {
-		[self setShowPageShadow:YES];
-	} else {
-		[self setShowPageShadow:NO];
-	}
-	
+  // Make sure scroll view has same colour as our background
+  if ([self enclosingScrollView] && backgroundColor)
+    {
+      [[self enclosingScrollView] setBackgroundColor:[NSColor lightGrayColor]]; //backgroundColor];
+    }
+
+  //set up ruler view
+  NSScrollView *theScrollView = [self enclosingScrollView];
+  [theScrollView setHasHorizontalRuler:YES];
+  [theScrollView setHasVerticalRuler:NO];
+
+  //conpensate ruler for page position offset
+  NSRulerView *xruler = [theScrollView horizontalRulerView];
+  [xruler setOriginOffset:[self pageSeparatorLength]];
+  NSRulerView *yruler = [theScrollView verticalRulerView];
+  [yruler setOriginOffset:[self pageSeparatorLength]];
+  [self setShouldSetupRuler:YES];
+
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([defaults boolForKey:@"prefShowPageShadow"]) 
+    {
+      [self setShowPageShadow:YES];
+    } 
+  else 
+    {
+      [self setShowPageShadow:NO];
+    }
 }
 
 #pragma mark -
