@@ -7,7 +7,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.2
+VERSION = 0.3
 PACKAGE_NAME = GSPdf
 APP_NAME = GSPdf
 GSPdf_APPLICATION_ICON = GSPdf.tiff
@@ -29,7 +29,8 @@ Resources/left.tiff \
 Resources/page.tiff \
 Resources/right.tiff \
 Resources/zoomin.tiff \
-Resources/zoomout.tiff 
+Resources/zoomout.tiff \
+Resources/papersizes.plist 
 
 
 #

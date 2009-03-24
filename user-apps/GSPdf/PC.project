@@ -55,7 +55,7 @@
 	GSPdfDocument.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-03-23 00:51:30 +0100";
+    LAST_EDITING = "2009-03-24 23:13:37 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -67,6 +67,7 @@
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     OBJC_COMPILEROPTIONS = "";
     OTHER_RESOURCES = (
+	papersizes.plist
     );
     OTHER_SOURCES = (
 	main.m,
@@ -121,7 +122,7 @@
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "Riccardo Mottola,,,";
     PROJECT_NAME = GSPdf;
-    PROJECT_RELEASE = 0.2;
+    PROJECT_RELEASE = 0.3;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "http://gap.nongnu.org/gspdf/";
