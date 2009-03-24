@@ -65,6 +65,10 @@ Chess_LOCALIZED_RESOURCE_FILES=\
 Chess_LANGUAGES=\
 	English
 
+Chess_PRINCIPAL_CLASS=Chess
+
+Chess_MAIN_MODEL_FILE=Chess
+
 ADDITIONAL_CPPFLAGS+= -DGNUSTEP
 
 -include GNUmakefile.preamble
