@@ -2,7 +2,7 @@
     ApplicationDescription = "PDF-PS viewer";
     ApplicationIcon = GSPdf.tiff;
     ApplicationName = GSPdf;
-    ApplicationRelease = 0.2;
+    ApplicationRelease = 0.3;
     Authors = (
 	"GAP Team",
 	"Riccardo Mottola",
@@ -10,7 +10,7 @@
     );
     Copyright = "Copyright (C) 2002-2009";
     CopyrightDescription = "Released under the GNU General Public License v2.0";
-    FullVersionID = 0.2;
+    FullVersionID = 0.3;
     NSExecutable = GSPdf;
     NSIcon = GSPdf.tiff;
     NSMainNibFile = GSPdf.gorm;
