@@ -64,7 +64,8 @@ static GSPdf *gspdf = nil;
   RELEASE (workPath);
   RELEASE (paperSizes);
   RELEASE (gsConsole);
-	
+  RELEASE (processId);
+
   [super dealloc];
 }
 
@@ -74,7 +75,7 @@ static GSPdf *gspdf = nil;
 
   if (self)
     {		
-      processId = [NSNumber numberWithInt: [[NSProcessInfo processInfo] processIdentifier]];
+      processId = RETAIN([NSNumber numberWithInt: [[NSProcessInfo processInfo] processIdentifier]]);
       pageIdentifier = 0;
       documents = [[NSMutableArray alloc] initWithCapacity: 1];
       ASSIGN (workPath, NSHomeDirectory());
