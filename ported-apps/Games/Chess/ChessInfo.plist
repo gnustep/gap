@@ -1,0 +1,16 @@
+{
+  NSExecutable = "Chess";
+  NSMainNibFile = "Chess";
+  GSMainMarkupFile = "";
+  NSPrincipalClass = "Chess";
+  NSIcon = "chess.icns";
+
+  CFBundleDocumentTypes = (
+	{
+            CFBundleTypeName = "chess";
+            CFBundleTypeRole = Editor;
+            CFBundleTypeIconFile = (chess.icns);
+            CFBundleTypeExtensions = (chess);
+	}    
+  );  
+}
