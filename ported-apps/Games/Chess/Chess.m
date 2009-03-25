@@ -159,7 +159,7 @@ void CL_ScheduleInit()
 
 	[self setWhiteColor: self];
 	[self setBlackColor: self];
-    [self renderColors: self];		// default color pieces
+	// [self renderColors: self];		// default color pieces
 
 	[self chooseSide: whiteSideName];
 	[self levelSliding: levelSlider];
