@@ -533,9 +533,10 @@ void algbr(short f, short t, short iscastle)
   mvstr2[0] = qxx[board[f]];
   mvstr2[1] = mvstr1[2]; mvstr2[2] = mvstr1[3];
   mvstr1[4] = '\0'; mvstr2[3] = '\0';
-  if (iscastle)
+  if (iscastle){
     if (t > f) strcpy(mvstr2,"o-o");
     else strcpy(mvstr2,"o-o-o");
+  }
 }
 
 
@@ -776,7 +777,7 @@ struct BookEntry *p;
 }
 
 
-#define UpdateSearchStatus\
+#define UpdateSearchStatus \
 {\
   if (post) ShowCurrentMove(pnt,node->f,node->t);\
   if (pnt > TrPnt[1])\
@@ -931,10 +932,11 @@ struct leaf *node,tmp;
 	      Tree[0] = tmp;
 	      pbst = 0;
 	    }
-	  if (Sdepth > 2)
+	  if (Sdepth > 2) {
 	    if (best > beta) ShowResults(best,bstline,'+');
 	    else if (best < alpha) ShowResults(best,bstline,'-');
 	    else ShowResults(best,bstline,'&');
+	  }
 	}
     }
     if (NodeCnt > ETnodes)
@@ -949,14 +951,17 @@ struct leaf *node,tmp;
     PutInTTable(side,best,depth,alpha,beta,mv);
   if (depth > 0){
     j = (node->f<<6) + node->t; if (side == black) j |= 0x1000;
-    if (history[j] < 150) history[j] += 2*depth;
-    if (node->t != (GameList[GameCnt].gmove & 0xFF))
+    if (history[j] < 150) {
+      history[j] += 2*depth;
+    }
+    if (node->t != (GameList[GameCnt].gmove & 0xFF)) {
       if (best <= beta) killr3[ply] = mv;
       else if (mv != killr1[ply])
 	{
 	  killr2[ply] = killr1[ply];
 	  killr1[ply] = mv;
 	}
+    }
     if (best > 9000)
       killr0[ply] = mv;
     else
@@ -1228,7 +1233,7 @@ struct leaf *node;
       if (t == TOsquare) s += 500;
       s += value[board[t]] - board[f];
     }
-  if (board[f] == pawn)
+  if (board[f] == pawn) {
     if (row[t] == 0 || row[t] == 7)
       {
         node->flags |= promote;
@@ -1240,6 +1245,7 @@ struct leaf *node;
         s += 600;
       }
     else if (t == epsquare) node->flags |= epmask;
+  }
   z = (f<<6) + t; if (xside == white) z |= 0x1000;
   s += history[z];
   node->score = s - 20000;
@@ -1252,7 +1258,7 @@ void CaptureList(short side,short xside,short ply)
     Generate captures and Pawn promotions only.
 */
 
-#define LinkCapture\
+#define LinkCapture \
 {\
   node->f = sq; node->t = u;\
   node->reply = 0;\
@@ -1451,9 +1457,10 @@ short xside,ct,cf;
       color[t] = color[f]; board[t] = board[f]; svalue[t] = svalue[f];
       Pindex[t] = Pindex[f]; PieceList[side][Pindex[t]] = t;
       color[f] = neutral; board[f] = no_piece;
-      if (board[t] == pawn)
+      if (board[t] == pawn) {
         if (t-f == 16) epsquare = f+8;
         else if (f-t == 16) epsquare = f-8;
+      }
       if (node->flags & promote)
         {
           board[t] = queen;
@@ -1794,13 +1801,14 @@ short i,xside,pscore[3];
   *score = mtl[side] - mtl[xside] + pscore[side] - pscore[xside] + 10;
   if (dither) *score += rand() % dither;
   
-  if (*score > 0 && pmtl[side] == 0)
+  if (*score > 0 && pmtl[side] == 0) {
     if (emtl[side] < valueR) *score = 0;
     else if (*score < valueR) *score /= 2;
-  if (*score < 0 && pmtl[xside] == 0)
+  }
+  if (*score < 0 && pmtl[xside] == 0) {
     if (emtl[xside] < valueR) *score = 0;
     else if (-*score < valueR) *score /= 2;
-    
+  }
   if (mtl[xside] == valueK && emtl[side] > valueB) *score += 200;
   if (mtl[side] == valueK && emtl[xside] > valueB) *score -= 200;
 }
@@ -2036,10 +2044,11 @@ void KingScan(short sq,short *s)
    or if there are no pawns near the king.
 */
 
-#define ScoreThreat\
-  if (color[u] != c2)\
+#define ScoreThreat \
+  if (color[u] != c2)       			\
     if (atk1[u] == 0 || (atk2[u] & 0xFF) > 1) ++cnt;\
     else *s -= 3
+
 
 {
 register short m,u;
@@ -2304,8 +2313,9 @@ short wpadv,bpadv,wstrong,bstrong,z,side,pp,j,val,Pd,fyle,rank;
       if (HasKnight[white] == 2) Mknight[white][sq] += 5;
       if (HasKnight[black] == 2) Mknight[black][sq] += 5;
       
-      if (board[sq] == bishop)
+      if (board[sq] == bishop) {
         if (rank % 2 == fyle % 2) KBNKsq = 0; else KBNKsq = 7;
+      }
         
       Kfield[white][sq] = Kfield[black][sq] = 0;
       if (distance(sq,wking) == 1) Kfield[black][sq] = KATAK;
