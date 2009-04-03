@@ -10,17 +10,19 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 1.1
 PACKAGE_NAME = Stepulator
 APP_NAME = Stepulator
-Stepulator_APPLICATION_ICON = 
+Stepulator_APPLICATION_ICON = Stepulator.tiff
 
 
 #
 # Resource files
 #
 Stepulator_RESOURCE_FILES = \
-Resources/Stepulator.gorm\
-Resources/Info-gnustep.plist\
+Resources/Stepulator.gorm \
+Resources/Stepulator.tiff \
 Resources/README \
-Resources/LICENSE
+Resources/LICENSE \
+Resources/Info-gnustep.plist 
+
 
 #
 # Header files
@@ -36,11 +38,6 @@ Stepulator_OBJC_FILES = \
 main.m \
 CalcController.m \
 CalcModel.m
-
-#
-# C files
-#
-Stepulator_C_FILES = 
 
 #
 # Makefiles
