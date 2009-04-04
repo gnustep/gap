@@ -157,11 +157,11 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 
 - (void) setLinks: (NSArray *) someLinks
 {
+  int i;
   DESTROY(enclosure);
   
   [links setArray: someLinks];
   
-  int i;
   for (i=0; i<[links count]; i++) {
       [self _checkLinkForEnclosure: [links objectAtIndex: i]];
   }
