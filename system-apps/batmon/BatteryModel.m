@@ -329,11 +329,14 @@ if (useACPI)
     char apmBiosFlagsStr[16];
     char acLineStatusStr[16];
     char battStatusStr[16];
+    int  battStatusInt;
     char battFlagsStr[16];
     char percentStr[16];
     char timeRemainingStr[16];
     char timeUnitStr[16];
+    BOOL percentIsInvalid;
 
+    percentIsInvalid = NO;
     stateFile = fopen(apmPath, "r");
     assert(stateFile != NULL);
 
@@ -352,31 +355,59 @@ if (useACPI)
       if (chargePercent > 100)
         chargePercent = 100;
       if (chargePercent < 0)
-        chargePercent = 0;
+      {
+         chargePercent = 0;
+         percentIsInvalid = YES;
+      }
       NSLog(@"percent %f", chargePercent);
     }
+
     if (battStatusStr != NULL && strlen(battStatusStr) > 0)
     {
       if (battStatusStr[3] == '0')
-        chargeState = @"High";
+        battStatusInt = 0;
       else if (battStatusStr[3] == '1')
-        chargeState = @"Low";
+        battStatusInt = 1;
       else if (battStatusStr[3] == '2')
-        chargeState = @"Critical";
+        battStatusInt = 2;
       else if (battStatusStr[3] == '3')
-        chargeState = @"Charging";
+        battStatusInt = 3;
       else if (battStatusStr[3] == '4')
+        battStatusInt = 4;
+      else
+        battStatusInt = -1;
+
+      if (battStatusInt == 0)
+        chargeState = @"High";
+      else if (battStatusInt == 1)
+        chargeState = @"Low";
+      else if (battStatusInt == 2)
+        chargeState = @"Critical";
+      else if (battStatusInt == 3)
+        chargeState = @"Charging";
+      else if (battStatusInt == 4)
         chargeState = @"Not present";
       else
         chargeState = @"Unknown";
 
 
+      if (percentIsInvalid)
+      {
+        NSLog(@"Battery percent information is invalid.");
 
-      if (percentStr[strlen(percentStr)-1] == '%')
-        percentStr[strlen(percentStr)-1] = '\0';
-      NSLog(@"%s %s %s", drvVersionStr, apmBiosVersionStr, percentStr);
-    
-      chargePercent = (float)atof(percentStr);
+        if (battStatusInt == 0)
+          chargePercent = 75;
+        else if (battStatusInt == 1)
+          chargePercent = 25;
+        else if (battStatusInt == 2)
+          chargePercent = 5;
+        else if (battStatusInt == 3)
+          chargePercent = 100;
+        else if (battStatusInt == 4)
+          chargePercent = 0;
+        else
+          chargePercent = 0;
+      }
       NSLog(@"percent %f", chargePercent);
     }
     
