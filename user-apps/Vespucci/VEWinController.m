@@ -89,15 +89,18 @@
 
 - (void) webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-    NSString *loadingTag = @"Loading...";
+  NSString *loadingTag = @"Loading...";
     
-    // Only report feedback for the main frame.
-    if(frame == [sender mainFrame])
+  // Only report feedback for the main frame.
+  if(frame == [sender mainFrame])
     {
-        NSString *url;
-        url = [[[[frame provisionalDataSource] request] URL] absoluteString];
-        [urlField setStringValue: url];
-        [self showStatus:[loadingTag stringByAppendingString:url]];
+      NSURL *url;
+      NSString *urlStr;
+
+      url = [[[frame provisionalDataSource] request] URL];
+      urlStr = [url absoluteString];
+      [urlField setStringValue: urlStr];
+      [self showStatus:[loadingTag stringByAppendingString:urlStr]];
     }
 }
 
