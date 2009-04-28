@@ -1,10 +1,10 @@
 /*
- Project: Vespucci
- VEDocumentController.m
+ project: vespucci
+ vedocumentcontroller.m
 
- Copyright (C) 2008
+ copyright (c) 2008
 
- Author: Ing. Riccardo Mottola
+ author: Ing. Riccardo Mottola
 
  Created: 2008-01-23
 
@@ -67,9 +67,9 @@
     if (doc != nil)
     {
         if (([doc loadedUrl] != nil) && [[doc loadedUrl] length] > 0)
-            doc = [super openDocumentWithContentsOfURL:aURL display:flag];
+            doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
     } else {
-        doc = [super openDocumentWithContentsOfURL:aURL display:flag];
+        doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
         NSAssert(doc != nil, @"openDocWithURL: document can't be nil here");
     }
     
