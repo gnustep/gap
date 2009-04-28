@@ -45,7 +45,6 @@
 
 - (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)flag
 {
-    VEDocument *doc;
     NSString *urlStr;
 
     if (!([fileName hasPrefix:@"http://"] || [fileName hasPrefix:@"https://"] || [fileName hasPrefix:@"file://"]))
