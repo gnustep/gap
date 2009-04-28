@@ -47,13 +47,24 @@ static NSString *homePage = @"";
     return doc;
 }
 
+- (id)initWithContentsOfURL:(NSURL *)url display:(BOOL)flag
+{
+    VEDocument *doc;
+    
+    doc = [[VEDocument alloc] init];
+    NSAssert(doc != NULL, @"VEDocument - document can't be nil");
+    
+    return doc;
+}
 
-- (NSData *)dataRepresentationOfType:(NSString *)type {
+- (NSData *)dataRepresentationOfType:(NSString *)type
+{
     // Implement to provide a persistent data representation of your document OR remove this and implement the file-wrapper or file path based save methods.
     return nil;
 }
 
-- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type {
+- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type
+{
     // Implement to load a persistent data representation of your document OR remove this and implement the file-wrapper or file path based load methods.
     return YES;
 }
