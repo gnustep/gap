@@ -58,11 +58,18 @@
 - (id)openDocumentWithContentsOfURL:(NSURL *)aURL display:(BOOL)flag
 {
     VEDocument *doc;
+    NSWindow *topWindow;
 
     NSLog(@"openDocWithURL: %@", [aURL absoluteURL]);
+    
     /* check if there is a current document open which is empty and reuse it
         else create a new document */
-    doc = [self currentDocument];
+    /* we use orderedWindows because orderedDocuments is not implemented in GNUstep */
+    doc = nil;
+    topWindow = nil;
+    topWindow = [[[NSApplication sharedApplication] orderedWindows] objectAtIndex:0];
+    if (topWindow != nil)
+        doc = [self documentForWindow:topWindow];
     NSLog(@"[openURL] current loaded url in document: %@", [doc loadedUrl]);
     if (doc != nil)
     {

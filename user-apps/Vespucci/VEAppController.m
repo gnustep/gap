@@ -276,6 +276,7 @@
     NSString *urlStr;
     VEDocumentController *dc;
     VEDocument *doc;
+    NSWindow *topWindow;
 
     types = [pboard types];
 
@@ -288,12 +289,28 @@
 
     NSLog(@"Received string from service: %@", pboardString);
 
-
+    /* check if there is a current document open which is empty and reuse it
+        else create a new document */
+    /* we use orderedWindows because orderedDocuments is not implemented in GNUstep */
     dc = [VEDocumentController sharedDocumentController];
-    doc = [dc openUntitledDocumentOfType:@"HTML Document" display:YES];
+    doc = nil;
+    topWindow = nil;
+    topWindow = [[[NSApplication sharedApplication] orderedWindows] objectAtIndex:0];
+    if (topWindow != nil)
+        doc = [dc documentForWindow:topWindow];
+    NSLog(@"[openURL] current loaded url in document: %@", [doc loadedUrl]);
+    
+    if (doc != nil)
+    {
+        if (([doc loadedUrl] != nil) && [[doc loadedUrl] length] > 0)
+            doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
+    } else {
+        doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
+        NSAssert(doc != nil, @"openDocWithURL: document can't be nil here");
+    }
+
     urlStr = canonicizeUrl(pboardString);
     [doc  loadUrl:[NSURL URLWithString:urlStr]];
-
 
     return;
 }
