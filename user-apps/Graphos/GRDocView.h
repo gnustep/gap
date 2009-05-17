@@ -65,12 +65,14 @@
     NSRect pageRect, a4Rect, zmdRect;
     int zIndex;
     float zFactor;
+    BOOL isDrawingForPrinting;
 }
 
 - (id)initWithFrame:(NSRect)aRect;
 - (NSDictionary *) objectDictionary;
 - (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
+- (BOOL)isDrawingForPrinting;
 
 /**
  * add a GRBezierPath

@@ -396,7 +396,9 @@
         [bzp fill];
         [NSGraphicsContext restoreGraphicsState];
     }
-    [editor draw];
+    
+    if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+        [editor draw];
 }
 
 

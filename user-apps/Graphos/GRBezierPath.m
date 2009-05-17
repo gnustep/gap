@@ -835,7 +835,9 @@ static double k = 0.025;
             NSRectFill(r);
         }
     }
-    [editor draw];
+    
+    if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+        [editor draw];
 }
 
 @end
