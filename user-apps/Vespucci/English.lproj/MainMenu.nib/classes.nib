@@ -24,6 +24,7 @@
                 addBookmarkPanel = NSPanel; 
                 bookmarksMenu = NSMenuItem; 
                 homePageField = NSTextField; 
+                javaScriptCheck = NSButton; 
                 prefPanel = NSPanel; 
             }; 
             SUPERCLASS = NSObject; 

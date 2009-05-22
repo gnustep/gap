@@ -174,7 +174,12 @@
 
 - (IBAction)showPreferences:(id)sender
 {
+    WebPreferences *webPrefs;
+    
+    webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
+    [javaScriptCheck setState:[webPrefs isJavaScriptEnabled] ? NSOnState : NSOffState];
     [prefPanel makeKeyAndOrderFront:self];
+    [webPrefs release];
 }
 
 - (IBAction) savePrefs:(id)sender
@@ -182,14 +187,20 @@
     NSUserDefaults *defaults;
     NSString *homePage;
 
+    WebPreferences *webPrefs;
+
     defaults = [NSUserDefaults standardUserDefaults];
+    webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
 
     homePage = [homePageField stringValue];
     NSLog(@"should save homepage: %@", homePage);
     [defaults setObject: homePage forKey:@"Homepage"];
+    
+    [webPrefs setJavaScriptEnabled: [javaScriptCheck state] == NSOnState];
 
     [prefPanel performClose:self];
     [defaults synchronize];
+    [webPrefs release];
 }
 
 - (IBAction) cancelPrefs:(id)sender
