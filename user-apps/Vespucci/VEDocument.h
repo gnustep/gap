@@ -28,7 +28,8 @@
 #import "VEWinController.h"
 
 
-@interface VEDocument : NSDocument {
+@interface VEDocument : NSDocument
+{
     VEWinController *windowController;
 }
 

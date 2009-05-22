@@ -46,12 +46,14 @@
     NSUserDefaults *defaults;
     NSString *hp;
     VEDocument *doc;
-
+    
+    webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
     doc = (VEDocument *)[self document];
     [webView setFrameLoadDelegate:self];
     [webView setUIDelegate:self];
     [webView setGroupName:@"VEDocument"];
     [webView setMaintainsBackForwardList:YES];
+    [webView setPreferences:webPrefs];
     
     defaults = [NSUserDefaults standardUserDefaults];
     hp = [defaults stringForKey:@"Homepage"];
