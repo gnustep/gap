@@ -108,6 +108,7 @@
     {
         attrs = [fmgr fileAttributesAtPath:filename traverseLink:YES];
         if (attrs)
+        {
             if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
             {
                 NSArray      *dirContents;
@@ -136,8 +137,11 @@
                         }
                     }
                 }
+            } else
+            { /* not a directory */
+                [self addFile:filename];
             }
-        else
+        } else
         {
             NSLog(@"open panel did not return a valid path");
         }
