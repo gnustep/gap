@@ -194,7 +194,8 @@
 
     homePage = [homePageField stringValue];
     NSLog(@"should save homepage: %@", homePage);
-    [defaults setObject: homePage forKey:@"Homepage"];
+    if (homePage != nil)
+      [defaults setObject: homePage forKey:@"Homepage"];
     
     [webPrefs setJavaScriptEnabled: [javaScriptCheck state] == NSOnState];
 
