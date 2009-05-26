@@ -36,6 +36,9 @@
 	NSDictionary *paperSizes;
 	NSString *workPath;
 	GSConsole *gsConsole;
+
+	IBOutlet NSPanel *prefPanel;
+	IBOutlet NSTextField *gvPathField;
 }
 
 + (GSPdf *)gspdf;
@@ -53,6 +56,11 @@
 - (GSConsole *)console;
 
 - (void)showConsole:(id)sender;
+
+- (IBAction)showPrefPanel:(id)sender;
+- (IBAction)prefSave:(id)sender;
+- (IBAction)prefCancel:(id)sender;
+- (IBAction)chooseGVPath:(id)sender;
 
 - (void)runInfoPanel:(id)sender;
 

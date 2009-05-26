@@ -2,11 +2,15 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
+	    "chooseGVPath:",
 	    "nextPage:",
 	    "openFile:",
+	    "prefCancel:",
+	    "prefSave:",
 	    "previousPage:",
 	    "runInfoPanel:",
-	    "showConsole:"
+	    "showConsole:",
+	    "showPrefPanel:"
 	);
 	Super = NSObject;
     };
@@ -14,9 +18,15 @@
 	Actions = (
 	    "openFile:",
 	    "showConsole:",
+	    "showPrefPanel:",
+	    "prefSave:",
+	    "prefCancel:",
+	    "chooseGVPath:",
 	    "runInfoPanel:"
 	);
 	Outlets = (
+	    prefPanel,
+	    gvPathField
 	);
 	Super = NSObject;
     };

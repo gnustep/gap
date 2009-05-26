@@ -32,6 +32,7 @@
 #import "Functions.h"
 
 #define MAXPAGES 9999
+#define GHOSTVIEW_PATH_KEY @"GhostViewPath"
 
 static GSPdf *gspdf = nil;
 
@@ -88,6 +89,8 @@ static GSPdf *gspdf = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+  NSUserDefaults *defaults;
+  NSString *gvPathStr;
   NSString *path = [[NSBundle mainBundle] pathForResource: @"papersizes" ofType: @"plist"];
   NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
 
@@ -112,6 +115,9 @@ static GSPdf *gspdf = nil;
     {
       paperSizes = [NSDictionary new];
     }
+
+  defaults = [NSUserDefaults standardUserDefaults];
+  gvPathStr = [defaults stringForKey:GHOSTVIEW_PATH_KEY];
 }
 
 - (BOOL)application:(NSApplication *)app openFile:(NSString *)filename
@@ -213,6 +219,33 @@ static GSPdf *gspdf = nil;
 - (void)showConsole:(id)sender
 {
   [[gsConsole window] orderFrontRegardless];
+}
+
+- (IBAction)showPrefPanel:(id)sender
+{
+  [prefPanel makeKeyAndOrderFront:self];
+}
+
+- (IBAction)prefSave:(id)sender
+{
+  NSUserDefaults *defaults;
+  NSString *gvPathStr;
+
+  defaults = [NSUserDefaults standardUserDefaults];
+  gvPathStr = [gvPathField stringValue];
+  if (gvPathStr != nil)
+    [defaults setObject:gvPathStr forKey:GHOSTVIEW_PATH_KEY];
+
+  [prefPanel performClose:nil];
+}
+
+- (IBAction)prefCancel:(id)sender
+{
+  [prefPanel performClose:nil];
+}
+
+- (IBAction)chooseGVPath:(id)sender
+{
 }
 
 - (void)runInfoPanel:(id)sender
