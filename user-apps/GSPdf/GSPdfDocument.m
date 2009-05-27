@@ -1,6 +1,6 @@
 /*  -*-objc-*-
  *  GSPdfDocument.m: Implementation of the GSPdfDocument Class 
- *  of the GNUstep GWorkspace application
+ *  of the GSPdf application
  *
  *  Copyright (c) 2002-2009 GNUstep Application Project
  *  
@@ -80,7 +80,7 @@
       ext = [myPath pathExtension];
       isPdf = (([ext isEqual: @"pdf"]) || ([ext isEqual: @"PDF"]));
       ASSIGN (myName, [myPath lastPathComponent]);		
-      gsComm = @"/usr/pkg/bin/gs";
+      gsComm = [gspdf gvPath];
       pageindex = 0;
       resolution = 72;
       pagew = 595;

@@ -2,8 +2,11 @@
  *  GSPdf.h: Principal Class  
  *  of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2002-2009 GNUstep Application Project
  *  
+ *  Author: Riccardo Mottola
+ *  
+ *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
  *  Author: Enrico Sersale
  *  Date: August 2002
  *
@@ -36,6 +39,7 @@
 	NSDictionary *paperSizes;
 	NSString *workPath;
 	GSConsole *gsConsole;
+	NSString *gvPath;
 
 	IBOutlet NSPanel *prefPanel;
 	IBOutlet NSTextField *gvPathField;
@@ -44,6 +48,9 @@
 + (GSPdf *)gspdf;
 
 - (BOOL)openDocumentForPath:(NSString *)path;
+
+/** return the current GhostView executable path */
+- (NSString *)gvPath;
 
 - (void)openFile:(id)sender;
 
@@ -55,6 +62,7 @@
 
 - (GSConsole *)console;
 
+/** shows the GSPdf console */
 - (void)showConsole:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;

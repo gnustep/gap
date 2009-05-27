@@ -2,6 +2,9 @@
  *  GSPdf.m: Principal Class  
  *  of the GNUstep GSPdf application
  *
+ *  Copyright (c) 2002-2009 GNUstep Application Project
+ *  
+ *  Author: Riccardo Mottola
  *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
  *  
  *  Author: Enrico Sersale
@@ -67,6 +70,8 @@ static GSPdf *gspdf = nil;
   RELEASE (gsConsole);
   RELEASE (processId);
 
+  [gvPath release];
+
   [super dealloc];
 }
 
@@ -118,6 +123,10 @@ static GSPdf *gspdf = nil;
 
   defaults = [NSUserDefaults standardUserDefaults];
   gvPathStr = [defaults stringForKey:GHOSTVIEW_PATH_KEY];
+  if (gvPathStr == nil)
+    gvPathStr = @"/usr/bin/gv";
+
+  gvPath = [[NSString stringWithString:gvPathStr] retain];
 }
 
 - (BOOL)application:(NSApplication *)app openFile:(NSString *)filename
@@ -223,6 +232,7 @@ static GSPdf *gspdf = nil;
 
 - (IBAction)showPrefPanel:(id)sender
 {
+  [gvPathField setStringValue:gvPath];
   [prefPanel makeKeyAndOrderFront:self];
 }
 
@@ -234,7 +244,10 @@ static GSPdf *gspdf = nil;
   defaults = [NSUserDefaults standardUserDefaults];
   gvPathStr = [gvPathField stringValue];
   if (gvPathStr != nil)
-    [defaults setObject:gvPathStr forKey:GHOSTVIEW_PATH_KEY];
+    {
+      [defaults setObject:gvPathStr forKey:GHOSTVIEW_PATH_KEY];
+      gvPath = gvPathStr;
+    }
 
   [prefPanel performClose:nil];
 }
@@ -246,6 +259,24 @@ static GSPdf *gspdf = nil;
 
 - (IBAction)chooseGVPath:(id)sender
 {
+  NSOpenPanel *openPanel;
+  int result;
+
+  openPanel = [NSOpenPanel openPanel];
+  [openPanel setTitle: @"Select executable"];	
+  [openPanel setAllowsMultipleSelection: NO];
+  [openPanel setCanChooseFiles: YES];
+  [openPanel setCanChooseDirectories: NO];
+
+  result = [openPanel runModalForDirectory: workPath file: nil 
+		      types: nil];
+
+  if(result != NSOKButton)
+    {
+      return;
+    }
+  [gvPathField setStringValue:[openPanel filename]];
+  NSLog(@"path %@", [openPanel filename]);
 }
 
 - (void)runInfoPanel:(id)sender
@@ -257,5 +288,11 @@ static GSPdf *gspdf = nil;
 {
   return YES;
 }
+
+- (NSString *)gvPath
+{
+  return gvPath;
+}
+
 
 @end
