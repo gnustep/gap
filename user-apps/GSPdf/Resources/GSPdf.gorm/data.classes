@@ -3,6 +3,7 @@
     FirstResponder = {
 	Actions = (
 	    "chooseGVPath:",
+	    "chooseGsPath:",
 	    "nextPage:",
 	    "openFile:",
 	    "prefCancel:",
@@ -21,12 +22,12 @@
 	    "showPrefPanel:",
 	    "prefSave:",
 	    "prefCancel:",
-	    "chooseGVPath:",
+	    "chooseGsPath:",
 	    "runInfoPanel:"
 	);
 	Outlets = (
 	    prefPanel,
-	    gvPathField
+	    gsPathField
 	);
 	Super = NSObject;
     };

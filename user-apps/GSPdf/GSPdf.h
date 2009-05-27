@@ -39,18 +39,18 @@
 	NSDictionary *paperSizes;
 	NSString *workPath;
 	GSConsole *gsConsole;
-	NSString *gvPath;
+	NSString *gsPath;
 
 	IBOutlet NSPanel *prefPanel;
-	IBOutlet NSTextField *gvPathField;
+	IBOutlet NSTextField *gsPathField;
 }
 
 + (GSPdf *)gspdf;
 
 - (BOOL)openDocumentForPath:(NSString *)path;
 
-/** return the current GhostView executable path */
-- (NSString *)gvPath;
+/** return the current GhostScript executable path */
+- (NSString *)gsPath;
 
 - (void)openFile:(id)sender;
 
@@ -68,7 +68,7 @@
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)prefSave:(id)sender;
 - (IBAction)prefCancel:(id)sender;
-- (IBAction)chooseGVPath:(id)sender;
+- (IBAction)chooseGsPath:(id)sender;
 
 - (void)runInfoPanel:(id)sender;
 

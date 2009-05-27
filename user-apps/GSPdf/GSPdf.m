@@ -35,7 +35,7 @@
 #import "Functions.h"
 
 #define MAXPAGES 9999
-#define GHOSTVIEW_PATH_KEY @"GhostViewPath"
+#define GHOSTSCRIPT_PATH_KEY @"GhostScriptPath"
 
 static GSPdf *gspdf = nil;
 
@@ -70,7 +70,7 @@ static GSPdf *gspdf = nil;
   RELEASE (gsConsole);
   RELEASE (processId);
 
-  [gvPath release];
+  [gsPath release];
 
   [super dealloc];
 }
@@ -87,6 +87,7 @@ static GSPdf *gspdf = nil;
       ASSIGN (workPath, NSHomeDirectory());
       gsConsole = [GSConsole new];
       nc = [NSNotificationCenter defaultCenter];
+      gspdf = self;
     }
 
   return self;
@@ -95,7 +96,7 @@ static GSPdf *gspdf = nil;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   NSUserDefaults *defaults;
-  NSString *gvPathStr;
+  NSString *gsPathStr;
   NSString *path = [[NSBundle mainBundle] pathForResource: @"papersizes" ofType: @"plist"];
   NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
 
@@ -122,11 +123,17 @@ static GSPdf *gspdf = nil;
     }
 
   defaults = [NSUserDefaults standardUserDefaults];
-  gvPathStr = [defaults stringForKey:GHOSTVIEW_PATH_KEY];
-  if (gvPathStr == nil)
-    gvPathStr = @"/usr/bin/gv";
+  gsPathStr = [defaults stringForKey:GHOSTSCRIPT_PATH_KEY];
+  if (gsPathStr == nil)
+    {
+#if defined __NetBSD__
+    gsPathStr = @"/usr/pkg/bin/gs";
+#else
+    gsPathStr = @"/usr/bin/gs";
+#endif
+    }
 
-  gvPath = [[NSString stringWithString:gvPathStr] retain];
+  gsPath = [[NSString stringWithString:gsPathStr] retain];
 }
 
 - (BOOL)application:(NSApplication *)app openFile:(NSString *)filename
@@ -232,21 +239,21 @@ static GSPdf *gspdf = nil;
 
 - (IBAction)showPrefPanel:(id)sender
 {
-  [gvPathField setStringValue:gvPath];
+  [gsPathField setStringValue:gsPath];
   [prefPanel makeKeyAndOrderFront:self];
 }
 
 - (IBAction)prefSave:(id)sender
 {
   NSUserDefaults *defaults;
-  NSString *gvPathStr;
+  NSString *gsPathStr;
 
   defaults = [NSUserDefaults standardUserDefaults];
-  gvPathStr = [gvPathField stringValue];
-  if (gvPathStr != nil)
+  gsPathStr = [gsPathField stringValue];
+  if (gsPathStr != nil)
     {
-      [defaults setObject:gvPathStr forKey:GHOSTVIEW_PATH_KEY];
-      gvPath = gvPathStr;
+      [defaults setObject:gsPathStr forKey:GHOSTSCRIPT_PATH_KEY];
+      gsPath = gsPathStr;
     }
 
   [prefPanel performClose:nil];
@@ -257,7 +264,7 @@ static GSPdf *gspdf = nil;
   [prefPanel performClose:nil];
 }
 
-- (IBAction)chooseGVPath:(id)sender
+- (IBAction)chooseGsPath:(id)sender
 {
   NSOpenPanel *openPanel;
   int result;
@@ -275,7 +282,7 @@ static GSPdf *gspdf = nil;
     {
       return;
     }
-  [gvPathField setStringValue:[openPanel filename]];
+  [gsPathField setStringValue:[openPanel filename]];
   NSLog(@"path %@", [openPanel filename]);
 }
 
@@ -289,9 +296,9 @@ static GSPdf *gspdf = nil;
   return YES;
 }
 
-- (NSString *)gvPath
+- (NSString *)gsPath
 {
-  return gvPath;
+  return [NSString stringWithString:gsPath];
 }
 
 
