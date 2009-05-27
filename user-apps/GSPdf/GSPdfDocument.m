@@ -48,6 +48,7 @@
   TEST_RELEASE (psdoc);
   RELEASE (imageView);
   RELEASE (pagesMatrix);
+  [gsComm release];
 
   [super dealloc];
 }
@@ -80,7 +81,7 @@
       ext = [myPath pathExtension];
       isPdf = (([ext isEqual: @"pdf"]) || ([ext isEqual: @"PDF"]));
       ASSIGN (myName, [myPath lastPathComponent]);		
-      gsComm = [gspdf gvPath];
+      gsComm = [[gspdf gsPath] retain];
       pageindex = 0;
       resolution = 72;
       pagew = 595;
