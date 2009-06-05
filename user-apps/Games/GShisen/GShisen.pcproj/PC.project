@@ -113,7 +113,7 @@
 	GShisen.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-06-06 00:19:57 +0200";
+    LAST_EDITING = "2009-06-06 02:33:22 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"

@@ -7,8 +7,12 @@
 
 @interface GShisen : NSObject
 {
-	IBOutlet NSWindow *win;
-	IBOutlet GSBoard *board;
+  IBOutlet NSWindow *win;
+  IBOutlet GSBoard *board;
+  IBOutlet NSPanel *askNamePanel;
+  IBOutlet NSPanel *hallOfFamePanel;
+  IBOutlet NSMatrix *scoresMatrix;
+  NSView *myView;
 }
 
 + (GShisen *)sharedshisen;
@@ -17,7 +21,6 @@
 - (IBAction)pause:(id)sender;
 - (IBAction)getHint:(id)sender;
 - (IBAction)undo:(id)sender;
-- (IBAction)runInfoPanel:(id)sender;
 - (IBAction)showHallOfFame:(id)sender;
 
 @end

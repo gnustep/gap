@@ -61,37 +61,61 @@ static GShisen *sharedshisen = nil;
 
 - (void)showHallOfFame:(id)sender
 {
-  [board showHallOfFame]; 
-}
-
-- (void)runInfoPanel:(id)sender
-{
-  NSMutableDictionary *d;
-
-  d = [NSMutableDictionary new];
-  [d setObject: @"GShisen" forKey: @"ApplicationName"];
-  [d setObject: @"The first GNUstep Game!" 
-     forKey: @"ApplicationDescription"];
-  [d setObject: @"GShisen 1.2.1" forKey: @"ApplicationRelease"];
-  [d setObject: @"June 2006" forKey: @"FullVersionID"];
-  [d setObject: [NSArray arrayWithObjects: 
-			   @"James Dessart <james@skwirl.ca>",
-				@" Enrico Sersale <enrico@imago.ro>", 
-				@"Larry Coleman <larryliberty@yahoo.com>",
-				nil]
-     forKey: @"Authors"];
-  [d setObject: @"See http://www.imago.ro/gshisen" forKey: @"URL"];
-  [d setObject: @"Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc."
-     forKey: @"Copyright"];
-  [d setObject: @"Released under the GNU General Public License 2.0"
-     forKey: @"CopyrightDescription"];
+  NSMutableArray *scores;
+  NSDictionary *scoresEntry;
+  NSString *userName, *minutes, *seconds, *totTime;
+  NSRect myRect = {{0, 0}, {150, 300}};
+  NSRect matrixRect = {{0, 0}, {150, 300}};
+  unsigned int style;
+  int i;
+  NSButtonCell *buttonCell;
+  NSScrollView *scoresScroll;
   
-#ifdef GNUSTEP	
-  [NSApp orderFrontStandardInfoPanelWithOptions: d];
-#else
-	[NSApp orderFrontStandardAboutPanel: d];
-#endif
+  scores = [board scores];
+  if ([scores count] >= 20) {
+    matrixRect.size.height = [scores count] * 15;
+  }
+
+  [hallOfFamePanel makeKeyAndOrderFront:self];
+  myView = [[NSView alloc] initWithFrame: [hallOfFamePanel frame]];
+  [hallOfFamePanel setContentView: myView];
+
+
+  buttonCell = [[NSButtonCell new] autorelease];
+  [buttonCell setButtonType: NSPushOnPushOffButton];
+  [buttonCell setBordered:NO];
+  [buttonCell setAlignment:NSLeftTextAlignment];	
+  //	NSLog(@"Height: %d", [buttonCell cellSize].height);
+
+  scoresMatrix = [[NSMatrix alloc] initWithFrame:matrixRect mode:NSRadioModeMatrix
+				   prototype:buttonCell 
+				   numberOfRows:[scores count] 
+				   numberOfColumns:2];
+
+  [scoresMatrix setAutoresizingMask: NSViewWidthSizable];
+											
+  scoresScroll = [[NSScrollView alloc] initWithFrame: myRect];
+  [scoresScroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+  [scoresScroll setHasVerticalScroller: YES];
+  [scoresScroll setHasHorizontalScroller: NO];
+		
+  for(i = 0; i < [scores count]; i++) {
+    scoresEntry = [scores objectAtIndex: i];
+    userName = [scoresEntry objectForKey: @"username"];
+    minutes = [scoresEntry objectForKey: @"minutes"];
+    seconds = [scoresEntry objectForKey: @"seconds"];
+    totTime = [NSString stringWithFormat:@"%@:%@", minutes, seconds];
+    //		[scoresMatrix addRow];
+    [[scoresMatrix cellAtRow:i column:0] setTitle: userName];
+    [[scoresMatrix cellAtRow:i column:1] setTitle: totTime];
+  }
+		
+  [scoresScroll setDocumentView: scoresMatrix];
+  [myView addSubview: scoresScroll];
+	
+  [hallOfFamePanel makeKeyAndOrderFront:self];
 }
+
 
 @end
 

@@ -28,7 +28,9 @@
 	);
 	Outlets = (
 	    win,
-	    board
+	    board,
+	    askNamePanel,
+	    hallOfFamePanel
 	);
 	Super = NSObject;
     };

@@ -9,10 +9,10 @@
 
 @interface GSUserNameDialog : NSWindow
 {
-	GSDlogView *dialogView;
-	NSTextField *titlefield, *editfield;	
-	NSButton *okbutt;
-	int result;
+  GSDlogView *dialogView;
+  NSTextField *titlefield, *editfield;	
+  NSButton *okbutt;
+  int result;
 }
 
 - (id)initWithTitle:(NSString *)title;
@@ -20,17 +20,6 @@
 - (NSString *)getEditFieldText;
 - (void)buttonAction:(id)sender;
 
-@end
-
-@interface GSHallOfFameWin : NSWindow
-{
-	NSView *myView;
-  	NSScrollView *scoresScroll;
-  	NSMatrix *scoresMatrix;	
-  	NSButtonCell *buttonCell;
-}
-
-- (id)initWithScoreArray:(NSArray *)scores;
 
 @end
 
