@@ -12,18 +12,18 @@
 
 @interface GSBoard : NSView
 {
-	NSUserDefaults *defaults;
-	NSMutableArray *scores;
-	NSArray *iconsNamesRefs;
-	NSMutableArray *tiles;
-	GSTile *firstTile, *secondTile;
-	NSTextField *timeField;
-	NSTimer *tmr;
-	int seconds, minutes;
-        BOOL hadEndOfGame;
-        NSMutableArray *undoArray;
-        int gameState;
-				int numScoresToKeep;
+  NSUserDefaults *defaults;
+  NSMutableArray *scores;
+  NSArray *iconsNamesRefs;
+  NSMutableArray *tiles;
+  GSTile *firstTile, *secondTile;
+  NSTextField *timeField;
+  NSTimer *tmr;
+  int seconds, minutes;
+  BOOL hadEndOfGame;
+  NSMutableArray *undoArray;
+  int gameState;
+  int numScoresToKeep;
 }
 
 - (id)initWithFrame:(NSRect)frameRect;
@@ -44,7 +44,7 @@
 - (NSArray *)tilesAtYPosition:(int)ypos;
 - (GSTile *)tileAtxPosition:(int)xpos yPosition:(int)ypos;
 - (int)gameState;
-- (void)showHallOfFame;
+- (NSMutableArray *)scores;
 
 @end
 

@@ -482,7 +482,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     [defaults setObject: scores forKey: @"scores"];
     [defaults synchronize];
 	
-    [self showHallOfFame];
+    [[GShisen sharedshisen] showHallOfFame:self];
 
     seconds = 0;
     minutes = 0;
@@ -490,14 +490,9 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     [self setNeedsDisplay:YES];
 }
 
-- (void)showHallOfFame
+- (NSMutableArray *)scores
 {
-    GSHallOfFameWin *hofWin;
-
-    hofWin = [[GSHallOfFameWin alloc] initWithScoreArray: scores];
-    [hofWin center];
-    [hofWin display];
-    [hofWin orderFront:nil];
+  return scores;
 }
 
 - (NSArray *)tilesAtXPosition:(int)xpos
