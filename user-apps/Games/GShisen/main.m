@@ -1,6 +1,6 @@
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "gshisen.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "gshisen.h"
 
 void createMenu();
 

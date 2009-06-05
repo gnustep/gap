@@ -1,14 +1,11 @@
-#ifndef BOARD_H
-#define BOARD_H
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "tile.h"
+#import "gsdialogs.h"
+#import "tilepair.h"
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "tile.h"
-#include "gsdialogs.h"
-#include "tilepair.h"
-
-#define	GAME_STATE_RUNNING	1
-#define GAME_STATE_PAUSED	0
+#define GAME_STATE_RUNNING     1
+#define GAME_STATE_PAUSED      0
 
 @interface GSBoard : NSView
 {
@@ -48,4 +45,3 @@
 
 @end
 
-#endif // BOARD_H

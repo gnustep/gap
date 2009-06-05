@@ -1,7 +1,4 @@
-#ifndef TILEPAIR_H
-#define TILEPAIR_H
-
-#include "tile.h"
+#import "tile.h"
 
 @interface GSTilePair : NSObject
 {
@@ -16,4 +13,3 @@
 
 @end
 
-#endif // TILEPAIR_H
