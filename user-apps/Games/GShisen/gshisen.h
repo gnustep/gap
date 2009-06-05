@@ -1,9 +1,6 @@
-#ifndef GSHISEN_H
-#define GSHISEN_H
-
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "board.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "board.h"
 
 @interface GShisen : NSObject
 {
@@ -25,4 +22,3 @@
 
 @end
 
-#endif // GSHISEN_H

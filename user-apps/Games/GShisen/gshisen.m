@@ -66,7 +66,6 @@ static GShisen *sharedshisen = nil;
   NSString *userName, *minutes, *seconds, *totTime;
   NSRect myRect = {{0, 0}, {150, 300}};
   NSRect matrixRect = {{0, 0}, {150, 300}};
-  unsigned int style;
   int i;
   NSButtonCell *buttonCell;
   NSScrollView *scoresScroll;

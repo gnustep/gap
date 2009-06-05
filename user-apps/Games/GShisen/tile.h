@@ -1,8 +1,5 @@
-#ifndef TILE_H
-#define TILE_H
-
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 @class GSBoard;
 
@@ -38,5 +35,4 @@
 
 @end
 
-#endif // TILE_H
 
