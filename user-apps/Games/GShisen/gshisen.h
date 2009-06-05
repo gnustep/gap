@@ -7,18 +7,18 @@
 
 @interface GShisen : NSObject
 {
-	NSWindow *win;
-	GSBoard *board;
+	IBOutlet NSWindow *win;
+	IBOutlet GSBoard *board;
 }
 
 + (GShisen *)sharedshisen;
 
-- (void)newGame:(id)sender;
-- (void)pause:(id)sender;
-- (void)getHint:(id)sender;
-- (void)undo:(id)sender;
-- (void)runInfoPanel:(id)sender;
-- (void)showHallOfFame:(id)sender;
+- (IBAction)newGame:(id)sender;
+- (IBAction)pause:(id)sender;
+- (IBAction)getHint:(id)sender;
+- (IBAction)undo:(id)sender;
+- (IBAction)runInfoPanel:(id)sender;
+- (IBAction)showHallOfFame:(id)sender;
 
 @end
 

@@ -29,17 +29,6 @@ static GShisen *sharedshisen = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    unsigned int style = NSTitledWindowMask | NSClosableWindowMask	| NSMiniaturizableWindowMask;
-
-    win = [[NSWindow alloc] initWithContentRect: NSMakeRect(0, 0, 740, 490)
-                            styleMask: style
-                            backing: NSBackingStoreBuffered
-                            defer: NO];
-    [win setMaxSize: NSMakeSize(740, 520)];
-    [win setMinSize: NSMakeSize(740, 490)];
-    [win setTitle: @"GShisen"];
-    board = [[GSBoard alloc] initWithFrame: NSMakeRect(0, 0, 740, 490)];
-    [win setContentView: board];
     [win center];
     [win display];
     [win orderFront:nil];

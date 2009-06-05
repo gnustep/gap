@@ -15,6 +15,7 @@
     FullVersionID = 1.2.2;
     NSExecutable = GShisen;
     NSIcon = GShisen.tiff;
+    NSMainNibFile = GShisen.gorm;
     NSPrincipalClass = NSApplication;
     NSRole = Application;
     URL = "http://gap.nongnu.org";
