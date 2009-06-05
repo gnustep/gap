@@ -110,9 +110,10 @@
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
+	GShisen.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-05-28 00:55:44 +0200";
+    LAST_EDITING = "2009-06-06 00:19:57 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -120,7 +121,7 @@
     LINKEROPTIONS = "";
     LOCALIZED_RESOURCES = (
     );
-    MAININTERFACE = "";
+    MAININTERFACE = GShisen.gorm;
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     OBJC_COMPILEROPTIONS = "";
     OTHER_RESOURCES = (
@@ -161,5 +162,7 @@
 	GShisenInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
+	English
     );
 }

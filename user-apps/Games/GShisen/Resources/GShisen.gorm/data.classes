@@ -1,0 +1,35 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "getHint:",
+	    "newGame:",
+	    "pause:",
+	    "runInfoPanel:",
+	    "showHallOfFame:"
+	);
+	Super = NSObject;
+    };
+    GSBoard = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSView;
+    };
+    GShisen = {
+	Actions = (
+	    "newGame:",
+	    "pause:",
+	    "getHint:",
+	    "undo:",
+	    "runInfoPanel:",
+	    "showHallOfFame:"
+	);
+	Outlets = (
+	    win,
+	    board
+	);
+	Super = NSObject;
+    };
+}

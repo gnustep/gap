@@ -17,6 +17,7 @@ GShisen_APPLICATION_ICON = GShisen.tiff
 # Resource files
 #
 GShisen_RESOURCE_FILES = \
+Resources/GShisen.gorm \
 Resources/1-1-h.tiff \
 Resources/1-1.tiff \
 Resources/1-2-h.tiff \
