@@ -2,6 +2,7 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
+	    "buttonOk:",
 	    "getHint:",
 	    "newGame:",
 	    "pause:",
@@ -23,14 +24,16 @@
 	    "pause:",
 	    "getHint:",
 	    "undo:",
-	    "runInfoPanel:",
-	    "showHallOfFame:"
+	    "showHallOfFame:",
+	    "buttonOk:"
 	);
 	Outlets = (
 	    win,
 	    board,
 	    askNamePanel,
-	    hallOfFamePanel
+	    nameField,
+	    hallOfFamePanel,
+	    scoresMatrix
 	);
 	Super = NSObject;
     };

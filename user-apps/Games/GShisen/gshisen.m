@@ -20,6 +20,12 @@ static GShisen *sharedshisen = nil;
     return sharedshisen;
 }
 
+- (id)init
+{
+  sharedshisen = self;
+  return sharedshisen;
+}
+
 - (void)dealloc
 {
     [board release];
@@ -61,18 +67,18 @@ static GShisen *sharedshisen = nil;
 
 - (NSString *)getUserName
 {
-  GSUserNameDialog *dlog;
   NSString *username;
 
-  dlog = [[GSUserNameDialog alloc] initWithTitle: @"Hall Of Fame"];
-  [dlog center];
-  [dlog makeKeyWindow];
-  [dlog orderFrontRegardless];
-  [dlog runModal];
-  username = [dlog getEditFieldText];
-  [dlog release];
+  [[NSApplication sharedApplication] runModalForWindow:askNamePanel];
+  username = [nameField stringValue];
   
   return username;
+}
+
+- (IBAction)buttonOk:(id)sender
+{	
+  [askNamePanel orderOut: self];
+  [[NSApplication sharedApplication] stopModal];
 }
 
 - (void)showHallOfFame:(id)sender

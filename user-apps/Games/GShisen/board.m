@@ -1,6 +1,8 @@
-#include "board.h"
-#include "gshisen.h"
 #include <sys/times.h>
+
+#import "board.h"
+#import "gshisen.h"
+
 
 int min(int a, int b) {
     if(a < b)
