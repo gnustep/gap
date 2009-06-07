@@ -446,7 +446,6 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 
 - (void)endOfGame
 {
-    GSUserNameDialog *dlog;
     NSString *username;
     NSMutableDictionary *gameData;
     NSString *entry;
@@ -457,13 +456,8 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
         [tmr invalidate];
     
     gameState = GAME_STATE_PAUSED;
-    dlog = [[GSUserNameDialog alloc] initWithTitle: @"Hall Of Fame"];
-    [dlog center];
-    [dlog makeKeyWindow];
-    [dlog orderFrontRegardless];
-    [dlog runModal];
-    username = [dlog getEditFieldText];
-    [dlog release];
+
+    username = [[GShisen sharedshisen] getUserName];
 	
     gameData = [NSMutableDictionary dictionaryWithCapacity: 3];
     [gameData setObject: username forKey: @"username"];

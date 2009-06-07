@@ -59,6 +59,22 @@ static GShisen *sharedshisen = nil;
     [board getHint];
 }
 
+- (NSString *)getUserName
+{
+  GSUserNameDialog *dlog;
+  NSString *username;
+
+  dlog = [[GSUserNameDialog alloc] initWithTitle: @"Hall Of Fame"];
+  [dlog center];
+  [dlog makeKeyWindow];
+  [dlog orderFrontRegardless];
+  [dlog runModal];
+  username = [dlog getEditFieldText];
+  [dlog release];
+  
+  return username;
+}
+
 - (void)showHallOfFame:(id)sender
 {
   NSMutableArray *scores;
