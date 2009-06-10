@@ -40,7 +40,7 @@ static GShisen *sharedshisen = nil;
     [win orderFront:nil];
 }
 
-- (BOOL)applicationShouldTerminate:(NSApplication *)app 
+- (BOOL)applicationShouldTerminate:(id)sender 
 {
     return YES;
 }
