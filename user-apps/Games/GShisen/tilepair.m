@@ -1,4 +1,4 @@
-#include "tilepair.h"
+#import "tilepair.h"
 
 @implementation GSTilePair
 

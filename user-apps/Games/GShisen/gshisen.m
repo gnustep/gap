@@ -1,4 +1,4 @@
-#include "gshisen.h"
+#import "gshisen.h"
 
 static GShisen *sharedshisen = nil;
 

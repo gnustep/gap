@@ -1,5 +1,5 @@
-#include "tile.h"
-#include "board.h"
+#import "tile.h"
+#import "board.h"
 
 @implementation GSTile
 
