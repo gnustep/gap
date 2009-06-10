@@ -4,8 +4,6 @@
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
-GNUSTEP_BUILD_DIR = (nil)
-
 #
 # Application
 #
