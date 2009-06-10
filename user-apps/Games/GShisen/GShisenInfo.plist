@@ -3,7 +3,7 @@
     ApplicationDescription = "The first GNUstep Game!";
     ApplicationIcon = GShisen.tiff;
     ApplicationName = GShisen;
-    ApplicationRelease = 1.2.2;
+    ApplicationRelease = 1.3.0;
     Authors = (
 	"The GAP Team",
 	"James Dessart <james@skwirl.ca>",
@@ -12,7 +12,7 @@
     );
     Copyright = "Copyright (C) 2003-2009";
     CopyrightDescription = "Released under GPL v2";
-    FullVersionID = 1.2.2;
+    FullVersionID = 1.3.0;
     NSExecutable = GShisen;
     NSIcon = GShisen.tiff;
     NSMainNibFile = GShisen.gorm;
