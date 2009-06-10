@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "tile.h"
-#import "gsdialogs.h"
 #import "tilepair.h"
 
 #define GAME_STATE_RUNNING     1
