@@ -2,6 +2,8 @@
     APPLICATIONICON = GShisen.tiff;
     APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
+    BUILDER_ARGS = (
+    );
     BUILDER_TARGETS = (
 	all,
 	install,
@@ -12,7 +14,6 @@
     );
     CLASS_FILES = (
 	board.m,
-	gsdialogs.m,
 	gshisen.m,
 	tile.m,
 	tilepair.m
@@ -26,7 +27,6 @@
     );
     HEADER_FILES = (
 	board.h,
-	gsdialogs.h,
 	gshisen.h,
 	tile.h,
 	tilepair.h
@@ -113,7 +113,6 @@
 	GShisen.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-06-06 15:40:55 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -145,7 +144,7 @@
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "Riccardo Mottola,,,";
     PROJECT_NAME = GShisen;
-    PROJECT_RELEASE = 1.2.2;
+    PROJECT_RELEASE = 1.3.0;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "http://gap.nongnu.org";
@@ -162,7 +161,6 @@
 	GShisenInfo.plist
     );
     USER_LANGUAGES = (
-	AmericanEnglish,
 	English
     );
 }

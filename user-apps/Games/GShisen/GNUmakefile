@@ -4,10 +4,12 @@
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
+GNUSTEP_BUILD_DIR = (nil)
+
 #
 # Application
 #
-VERSION = 1.2.2
+VERSION = 1.3.0
 PACKAGE_NAME = GShisen
 APP_NAME = GShisen
 GShisen_APPLICATION_ICON = GShisen.tiff
@@ -100,7 +102,6 @@ Resources/GShisen.tiff
 #
 GShisen_HEADER_FILES = \
 board.h \
-gsdialogs.h \
 gshisen.h \
 tile.h \
 tilepair.h
@@ -110,7 +111,6 @@ tilepair.h
 #
 GShisen_OBJC_FILES = \
 board.m \
-gsdialogs.m \
 gshisen.m \
 tile.m \
 tilepair.m
