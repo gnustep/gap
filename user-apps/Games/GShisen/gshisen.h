@@ -15,6 +15,9 @@
 
 + (GShisen *)sharedshisen;
 
+
+- (BOOL)applicationShouldTerminate:(id)sender;
+
 - (IBAction)newGame:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)getHint:(id)sender;
