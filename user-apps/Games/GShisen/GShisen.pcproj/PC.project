@@ -113,6 +113,7 @@
 	GShisen.gorm
     );
     LANGUAGE = English;
+    LAST_EDITING = "2009-06-11 23:19:05 +0200";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -136,7 +137,7 @@
 	"Larry Coleman <larryliberty@yahoo.com>"
     );
     PROJECT_COPYRIGHT = "Copyright (C) 2003-2009";
-    PROJECT_COPYRIGHT_DESC = "Released under GPL v2";
+    PROJECT_COPYRIGHT_DESC = "Released under GPL v2 or later";
     PROJECT_CREATOR = "Riccardo Mottola,,,";
     PROJECT_DESCRIPTION = "The first GNUstep Game!";
     PROJECT_DOCUMENTTYPES = (
@@ -161,6 +162,7 @@
 	GShisenInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
 	English
     );
 }
