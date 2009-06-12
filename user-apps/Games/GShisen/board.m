@@ -22,20 +22,18 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <sys/times.h>
 
-#import "board.h"
 #import "gshisen.h"
+#import "board.h"
 
-
-int min(int a, int b) {
+int imin(int a, int b) {
     if(a < b)
     	return a;
     else
     	return b;
 }
 
-int max(int a, int b) {
+int imax(int a, int b) {
     if(a > b)
     	return a;
     else
@@ -136,8 +134,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     NSMutableArray *tmptiles;
     GSTile *tile;
     NSString *ref;
-    clock_t t;
-    struct tms dummy;
+    NSTimeInterval timeInterval;
     int i, j, p;
     BOOL bordt;
     int borderPositions[56] = 
@@ -152,8 +149,9 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
      160,                                                              179,
      180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 
      194, 195, 196, 197, 198, 199};
-    t = times(&dummy); 
-    srand((int)t);
+
+    timeInterval = [NSDate timeIntervalSinceReferenceDate];
+    srand((int)timeInterval);
 
     if(undoArray != nil)
     {
@@ -351,7 +349,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 	
     if(x1 == x2) {
         lineOfTiles = [self tilesAtXPosition: x1];
-    	for(i = min(y1, y2)+1; i < max(y1, y2); i++) {
+    	for(i = imin(y1, y2)+1; i < imax(y1, y2); i++) {
             tile = [lineOfTiles objectAtIndex: i];
             if([tile isActive])
                 return NO;
@@ -361,7 +359,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 	
     if(y1 == y2) {
         lineOfTiles = [self tilesAtYPosition: y1];
-    	for(i = min(x1, x2)+1; i < max(x1, x2); i++) {
+    	for(i = imin(x1, x2)+1; i < imax(x1, x2); i++) {
             tile = [lineOfTiles objectAtIndex: i];
             if([tile isActive])
                 return NO;
