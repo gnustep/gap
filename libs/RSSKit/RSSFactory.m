@@ -38,14 +38,16 @@ NSString* stringToFSString( NSString* aString )
     NSCharacterSet* allowedSet = [NSCharacterSet alphanumericCharacterSet];
     
     do {
+        NSString* nextPart;
+        BOOL success;
+
         // discard any unknown characters
         if ([scanner scanUpToCharactersFromSet: allowedSet intoString: NULL] == YES) {
             [string appendString: @"_"];
         }
         
         // scan known characters...
-        NSString* nextPart;
-        BOOL success = [scanner scanCharactersFromSet: allowedSet intoString: &nextPart];
+        success = [scanner scanCharactersFromSet: allowedSet intoString: &nextPart];
         
         // ...and add them to the string
         if (success == YES) {
@@ -134,11 +136,13 @@ NSString* stringToFSString( NSString* aString )
 -(NSString*) storagePathForURL: (NSString*) anURL
 {
     if (RSSArticleStorageDirectory == nil) {
+        NSFileManager* manager;
+        BOOL isDir, exists;
+
         ASSIGN(RSSArticleStorageDirectory, [@"~/GNUstep/Library/RSSArticles" stringByExpandingTildeInPath]);
         
-        NSFileManager* manager = [NSFileManager defaultManager];
+        manager = [NSFileManager defaultManager];
         
-        BOOL isDir, exists;
         exists = [manager fileExistsAtPath: RSSArticleStorageDirectory isDirectory: &isDir];
         
         if (exists) {

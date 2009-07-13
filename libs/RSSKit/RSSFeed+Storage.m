@@ -35,6 +35,8 @@
  */
 -(NSDictionary*) plistDictionary
 {
+    int i;
+    NSMutableArray* articleIndex;
     NSMutableDictionary* dict = AUTORELEASE([[NSMutableDictionary alloc] init]);
     
     [dict setObject: lastRetrieval forKey: @"lastRetrievalDate"];
@@ -48,8 +50,7 @@
     [dict setObject: [feedURL description] forKey: @"feedURL"];
     [dict setObject: [articleClass description] forKey: @"articleClass"];
     
-    int i;
-    NSMutableArray* articleIndex = AUTORELEASE([NSMutableArray new]);
+    articleIndex = AUTORELEASE([NSMutableArray new]);
     
     for (i=0; i<[articles count]; i++) {
         NSMutableDictionary* articleDict = AUTORELEASE([[NSMutableDictionary alloc] init]);
@@ -77,6 +78,10 @@
 -(id)initFromPlistDictionary: (NSDictionary*) plistDictionary
 {
     if ((self = [super init]) != nil) {
+        NSArray* articleIndex;
+        NSMutableArray* mutArticles;
+        int i;
+
         // This is just an alias (my hands hurt)
         NSDictionary* dict = plistDictionary;
         
@@ -89,9 +94,8 @@
         lastError = RSSFeedErrorNoError;
         status = RSSFeedIsIdle;
         
-        NSArray* articleIndex = [dict objectForKey: @"articleIndex"];
-        NSMutableArray* mutArticles = AUTORELEASE([[NSMutableArray alloc] init]);
-        int i;
+        articleIndex = [dict objectForKey: @"articleIndex"];
+        mutArticles = AUTORELEASE([[NSMutableArray alloc] init]);
         for (i=0; i<[articleIndex count]; i++) {
             NSString* articleURL = [(NSDictionary*)[articleIndex objectAtIndex: i] objectForKey: @"URL"];
             id<RSSMutableArticle> article = [articleClass articleFromStorageWithURL: articleURL];

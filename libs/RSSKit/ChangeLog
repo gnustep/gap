@@ -2,6 +2,9 @@
 RSSKit Changelog
 ================
 
+July-13-2009 Riccardo Mottola
+	* Removed several c99-isms
+
 May-01-2007  Yen-Ju Chen
 	* Turn into framework
 

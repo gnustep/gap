@@ -107,9 +107,10 @@
  */
 -(void) newArticleFound: (id<RSSMutableArticle>) anArticle
 {
+  int oldArticleIdx;
   NSAssert([articles isKindOfClass: [NSMutableArray class]], @"articles not mutable!");
   
-  int oldArticleIdx = [articles indexOfObject: anArticle];
+  oldArticleIdx = [articles indexOfObject: anArticle];
   if (oldArticleIdx != NSNotFound) {
       // replace the found older version with the new one, but first
       // make sure local changes to the old version get transferred to
