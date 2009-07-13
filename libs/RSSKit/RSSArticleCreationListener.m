@@ -75,6 +75,7 @@
   id<RSSArticle> article = nil;
   NSDate* articleDate = nil;
   NSString* desc = nil;
+  id<RSSMutableArticle> mutArt;
   
   // date
   if( date == nil )
@@ -121,7 +122,7 @@
       @"Article %@ must be mutable for proper creation!", article
   );
   
-  id<RSSMutableArticle> mutArt = (id<RSSMutableArticle>) article;
+  mutArt = (id<RSSMutableArticle>) article;
   // add links
   if ([links count] > 0)
     {
@@ -237,11 +238,13 @@
 		andRel: (NSString*) aRelation
 	       andType: (NSString*) aType
 {
+  RSSLink* link;
+
 #ifdef DEBUG
   NSLog(@"addLinkWithURL: %@ andRel: %@ andType: %@",
 	anURL, aRelation, aType);
 #endif
-  RSSLink* link = [RSSLink linkWithString: anURL
+  link = [RSSLink linkWithString: anURL
 			     andRel: aRelation
 			     andType: aType];
   /* Keep the default URL */
@@ -278,6 +281,7 @@
 
 -(void) setDateFromString: (NSString*) str
 {
+    int i;
     NSDate* d = nil;
     static NSArray* timeformats = nil;
     
@@ -313,7 +317,6 @@
         ];
     }
     
-    int i;
     for (i=0; i<[timeformats count] && d == nil; i++) {
         d = [NSCalendarDate dateWithString: str
                             calendarFormat: [timeformats objectAtIndex: i]

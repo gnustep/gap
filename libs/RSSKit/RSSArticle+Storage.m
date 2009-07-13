@@ -106,6 +106,9 @@
 -(id) initWithDictionary: (NSDictionary*) aDictionary
 {
     if ((self = [super init]) != nil) {
+	NSArray* arr;
+	int i;
+
         if (aDictionary == nil) {
             DESTROY(self);
             return nil;
@@ -116,10 +119,9 @@
         ASSIGN( description,  [aDictionary objectForKey: @"article content"] );
         ASSIGN( date,         [aDictionary objectForKey: @"date"] );
 	
-	NSArray* arr = [aDictionary objectForKey: @"links"];
+	arr = [aDictionary objectForKey: @"links"];
 	ASSIGN(links, AUTORELEASE([[NSMutableArray alloc] init]));
 	
-	int i;
 	for (i=0; i<[arr count]; i++) {
 	  [links addObject: [RSSLink urlFromPlistDictionary: [arr objectAtIndex: i]]];
 	}

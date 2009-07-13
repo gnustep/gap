@@ -185,6 +185,7 @@ NSString *const RSSFeedFetchFailedNotification = @"RSSFeedFetchFailedNotificatio
   NSXMLParser* parser;
   XMLNode* root;
   XMLNode* document;
+  int i;
   
   parser = AUTORELEASE([[NSXMLParser alloc] initWithData: data]);
   
@@ -259,7 +260,6 @@ NSString *const RSSFeedFetchFailedNotification = @"RSSFeedFetchFailedNotificatio
     }
   
   // make sure all articles know their parent feed
-  int i;
   for (i=0; i<[articles count]; i++) {
       // We're in a RSSFeed, so we can assume this is a RSSArticle object.
       [(RSSArticle*)[articles objectAtIndex: i] setFeed: self];
