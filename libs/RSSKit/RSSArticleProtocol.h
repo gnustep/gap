@@ -29,9 +29,6 @@
 extern NSString* RSSArticleChangedNotification;
 
 
-// This protocol can be found at the bottom of this file.
-@protocol RSSMutableArticle;
-
 
 /**
  * Classes implementing this protocol can be used as RSSArticles.
@@ -104,7 +101,7 @@ extern NSString* RSSArticleChangedNotification;
  * 
  * @return The source feed of this article
  */
-- (id<RSSFeed>) feed;
+- (id) feed;
 
 /**
  * Returns a NSDictionary that represents the article and that can be used
@@ -123,7 +120,7 @@ extern NSString* RSSArticleChangedNotification;
  * to override this, but shouldn't forget calling the super implementation,
  * first.
  */
-- (void) willBeReplacedByArticle: (id<RSSMutableArticle>) newArticle;
+- (void) willBeReplacedByArticle: (id) newArticle;
 
 @end
 
@@ -154,7 +151,7 @@ extern NSString* RSSArticleChangedNotification;
 - (void) setLinks: (NSArray*) someLinks;
 
 // only used internally
-- (void) setFeed: (id<RSSMutableFeed>) aFeed;
+- (void) setFeed: (id) aFeed;
 
 /**
  * Sets the article's date.
