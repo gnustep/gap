@@ -40,7 +40,7 @@ xpdfbridge_OBJC_FILES = \
 	DPS.m		\
 	CountingRef.m
 
-xpdfbridge_C_FILES = \
-	XPDFBridge.c 
+xpdfbridge_CC_FILES = \
+	XPDFBridge.cc 
 
 include $(GNUSTEP_MAKEFILES)/subproject.make
