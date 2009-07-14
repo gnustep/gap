@@ -113,13 +113,17 @@
 
 -(void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {
+    NSSize size;
+    NSPoint position;
+    int i;
+    int num;
+
     if (star == nil) {
         // init didn't take place, let's do something about it fast!
         ASSIGN(star, [NSImage imageNamed: @"Star"]);
     }
     
-    NSSize size = [star size];
-    NSPoint position;
+    size = [star size];
     
     position.x = MAX(NSMidX(cellFrame) - (size.width * 2.5),  0.0);
     position.y = MAX(NSMidY(cellFrame) - (size.height / 2.0), 0.0);
@@ -128,8 +132,7 @@
         position.y += size.height;
     }
     
-    int i;
-    int num = [self intValue];
+    num = [self intValue];
     
     for (i=0; i<num; i++) {
         [star compositeToPoint: position

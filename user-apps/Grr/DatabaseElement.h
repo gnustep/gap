@@ -11,9 +11,6 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSString.h>
 
-#import "Category.h"
-
-@protocol Category;
 
 /**
  * Send a notification with this name and a database element as the
@@ -28,12 +25,12 @@ extern NSString* const DatabaseElementFocusRequestNotification;
  * Returns the super element of this database element. Note that
  * top level elements will return nil here.
  */
--(id<Category>) superElement;
+-(id) superElement;
 
 /**
  * Sets the super element for an element
  */
--(void) setSuperElement: (id<Category>) superElement;
+-(void) setSuperElement: (id) superElement;
 
 /**
  * Archives the element and all its subelements to a plist-conformant

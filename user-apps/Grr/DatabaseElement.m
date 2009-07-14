@@ -16,9 +16,13 @@ NSString* const DatabaseElementFocusRequestNotification = @"DatabaseElementFocus
 
 id<DatabaseElement> DatabaseElementFromPlistDictionary( NSDictionary* plistDictionary )
 {
+  id classObject;
+  NSString* className;
+  id<DatabaseElement> elem;
+
     NSCParameterAssert([plistDictionary isKindOfClass: [NSDictionary class]]);
     
-    NSString* className = [plistDictionary objectForKey: @"isa"];
+    className = [plistDictionary objectForKey: @"isa"];
     
     NSCAssert1(
         [className isKindOfClass: [NSString class]],
@@ -26,7 +30,7 @@ id<DatabaseElement> DatabaseElementFromPlistDictionary( NSDictionary* plistDicti
         className
     );
     
-    id classObject = NSClassFromString(className);
+    classObject = NSClassFromString(className);
     
     NSCAssert1(
         classObject != nil,
@@ -34,7 +38,7 @@ id<DatabaseElement> DatabaseElementFromPlistDictionary( NSDictionary* plistDicti
         className
     );
     
-    id<DatabaseElement> elem = [classObject alloc];
+    elem = [classObject alloc];
     elem = [elem initWithDictionary: plistDictionary];
     
     return elem;

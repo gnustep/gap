@@ -26,6 +26,7 @@ NSString* const ArticleReadFlagChangedNotification = @"ArticleReadFlagChangedNot
     NSAssert(aDictionary != nil, @"Cannot initialise an article from the nil dictionary");
     
     if ((self = [super initWithDictionary: aDictionary]) != nil) {
+        NSNumber* ratingNumber;
         NSNumber* readFlagNumber = [aDictionary objectForKey: @"readFlag"];
         
         if (readFlagNumber) {
@@ -34,7 +35,7 @@ NSString* const ArticleReadFlagChangedNotification = @"ArticleReadFlagChangedNot
             _read = YES;
         }
         
-        NSNumber* ratingNumber = [aDictionary objectForKey: @"rating"];
+        ratingNumber = [aDictionary objectForKey: @"rating"];
         
         if (ratingNumber) {
             _rating = [ratingNumber intValue];
@@ -105,9 +106,10 @@ NSString* const ArticleReadFlagChangedNotification = @"ArticleReadFlagChangedNot
 
 -(void)willBeReplacedByArticle: (id<RSSMutableArticle>) newArticle
 {
+    id a;
     NSParameterAssert([newArticle conformsToProtocol: @protocol(Article)]);
     
-    id a = newArticle;
+    a = newArticle;
     [a setFeed: (id<RSSMutableFeed>)[self feed]];
     
     [super willBeReplacedByArticle: newArticle];

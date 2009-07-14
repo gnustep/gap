@@ -93,17 +93,20 @@
  */
 -(BOOL) loadNib
 {
+  NSBundle *bundle;
+  NSDictionary *ent;
+
     // Ensure we don't load the Nib multiple times.
     if (nibLoaded == YES)
         return YES;
     
     // get my bundle
-    NSBundle* bundle = [self bundle];
+    bundle = [self bundle];
     
     // ensure the bundle has been found
     NSAssert1(bundle != nil, @"Failed finding bundle for NibOwner %@", self);
     
-    NSDictionary* ent = [NSDictionary dictionaryWithObjectsAndKeys:
+    ent = [NSDictionary dictionaryWithObjectsAndKeys:
                                         self, @"NSOwner", nil];
     
     // load Nib belonging to bundle

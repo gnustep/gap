@@ -21,6 +21,8 @@ NSString* const DatabaseChangeNotification = @"DatabaseChangeNotification";
 +(id<Database>) shared
 {
     if (sharedDatabase == nil) {
+        id<Database> database;
+
         // Find out the name of the database plugin to be loaded. The default is
         // "TreeDatabase", but it can be overridden using the DatabasePluginName
         // user default. For details, see the documentation on hacking a database
@@ -32,7 +34,7 @@ NSString* const DatabaseChangeNotification = @"DatabaseChangeNotification";
             databasePluginName = @"TreeDatabase";
         }
         
-        id<Database> database = [NSBundle instanceForBundleWithName: databasePluginName type: @"grrdb"];
+        database = [NSBundle instanceForBundleWithName: databasePluginName type: @"grrdb"];
         
         NSAssert(database != nil, @"The database could not be loaded!");
         NSAssert1(

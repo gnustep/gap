@@ -20,7 +20,7 @@
 
 @interface Feed : RSSFeed <Feed>
 {
-    id<Category> superElem;
+    id superElem;
     NSString* databaseElementName;
 }
 

@@ -79,12 +79,12 @@
     return self;
 }
 
--(id<Category>) superElement
+-(id) superElement
 {
     return superElem;
 }
 
--(void) setSuperElement: (id<Category>) superElement
+-(void) setSuperElement: (id) superElement
 {
     ASSIGN(superElem, superElement);
 }
