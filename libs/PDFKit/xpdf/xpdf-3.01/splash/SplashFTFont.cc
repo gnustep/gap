@@ -14,7 +14,8 @@
 
 #include <ft2build.h>
 #include FT_OUTLINE_H
-#include FT_INTERNAL_OBJECTS_H // needed for FT_New_Size decl
+#include FT_SIZES_H
+#include FT_GLYPH_H
 #include "gmem.h"
 #include "SplashMath.h"
 #include "SplashGlyphBitmap.h"
@@ -25,11 +26,11 @@
 
 //------------------------------------------------------------------------
 
-static int glyphPathMoveTo(FT_Vector *pt, void *path);
-static int glyphPathLineTo(FT_Vector *pt, void *path);
-static int glyphPathConicTo(FT_Vector *ctrl, FT_Vector *pt, void *path);
-static int glyphPathCubicTo(FT_Vector *ctrl1, FT_Vector *ctrl2,
-			    FT_Vector *pt, void *path);
+static int glyphPathMoveTo(const FT_Vector *pt, void *path);
+static int glyphPathLineTo(const FT_Vector *pt, void *path);
+static int glyphPathConicTo(const FT_Vector *ctrl, const FT_Vector *pt, void *path);
+static int glyphPathCubicTo(const FT_Vector *ctrl1, const FT_Vector *ctrl2,
+			    const FT_Vector *pt, void *path);
 
 //------------------------------------------------------------------------
 // SplashFTFont
@@ -249,7 +250,7 @@ SplashPath *SplashFTFont::getGlyphPath(int c) {
   return path.path;
 }
 
-static int glyphPathMoveTo(FT_Vector *pt, void *path) {
+static int glyphPathMoveTo(const FT_Vector *pt, void *path) {
   SplashFTFontPath *p = (SplashFTFontPath *)path;
 
   if (p->needClose) {
@@ -260,7 +261,7 @@ static int glyphPathMoveTo(FT_Vector *pt, void *path) {
   return 0;
 }
 
-static int glyphPathLineTo(FT_Vector *pt, void *path) {
+static int glyphPathLineTo(const FT_Vector *pt, void *path) {
   SplashFTFontPath *p = (SplashFTFontPath *)path;
 
   p->path->lineTo(pt->x / 64.0, -pt->y / 64.0);
@@ -268,7 +269,7 @@ static int glyphPathLineTo(FT_Vector *pt, void *path) {
   return 0;
 }
 
-static int glyphPathConicTo(FT_Vector *ctrl, FT_Vector *pt, void *path) {
+static int glyphPathConicTo(const FT_Vector *ctrl, const FT_Vector *pt, void *path) {
   SplashFTFontPath *p = (SplashFTFontPath *)path;
   SplashCoord x0, y0, x1, y1, x2, y2, x3, y3, xc, yc;
 
@@ -306,8 +307,8 @@ static int glyphPathConicTo(FT_Vector *ctrl, FT_Vector *pt, void *path) {
   return 0;
 }
 
-static int glyphPathCubicTo(FT_Vector *ctrl1, FT_Vector *ctrl2,
-			    FT_Vector *pt, void *path) {
+static int glyphPathCubicTo(const FT_Vector *ctrl1, const FT_Vector *ctrl2,
+			    const FT_Vector *pt, void *path) {
   SplashFTFontPath *p = (SplashFTFontPath *)path;
 
   p->path->curveTo(ctrl1->x / 64.0, -ctrl1->y / 64.0,
