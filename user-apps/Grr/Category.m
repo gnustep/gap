@@ -21,15 +21,19 @@
 // conforming to DatabaseElement protocol
 -(id) initWithDictionary: (NSDictionary*) dict
 {
+    NSString* aName;
+    NSArray* subElemDicts;
+    NSMutableArray* subElements;
+    int i;
+
     NSParameterAssert([dict isKindOfClass: [NSDictionary class]]);
     
-    NSString* aName = [dict objectForKey: @"name"];
+    aName = [dict objectForKey: @"name"];
     NSAssert1([aName isKindOfClass: [NSString class]], @"%@ is not a string", aName);
     
-    NSArray* subElemDicts = [dict objectForKey: @"elements"];
-    NSMutableArray* subElements = [NSMutableArray new];
+    subElemDicts = [dict objectForKey: @"elements"];
+    subElements = [NSMutableArray new];
     
-    int i;
     for (i=0; i<[subElemDicts count]; i++) {
         id<DatabaseElement> elem = DatabaseElementFromPlistDictionary([subElemDicts objectAtIndex: i]);
         NSAssert1(

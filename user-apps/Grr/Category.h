@@ -13,7 +13,6 @@
 
 #import "DatabaseElement.h"
 
-@protocol DatabaseElement;
 
 @protocol Category <DatabaseElement>
 

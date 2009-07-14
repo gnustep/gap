@@ -30,6 +30,9 @@
                            type: (NSString*) type
 {
     NSString* bundlePathName;
+    NSBundle* bundle;
+    id pClass;
+
 #ifdef MACOSX
     bundlePathName =
         [[[NSBundle mainBundle] builtInPlugInsPath] stringByAppendingPathComponent:
@@ -60,8 +63,8 @@
     
     NSLog(@"Loading bundle at %@", bundlePathName);
     
-    NSBundle* bundle = [NSBundle bundleWithPath: bundlePathName];
-    id pClass = [bundle principalClass];
+    bundle = [NSBundle bundleWithPath: bundlePathName];
+    pClass = [bundle principalClass];
     
     if ([pClass respondsToSelector: @selector(shared)]) {
         return [pClass shared];

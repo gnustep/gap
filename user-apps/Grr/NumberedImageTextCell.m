@@ -27,6 +27,10 @@ static NSImageCell* imageCell;
 - (void) drawWithFrame: (NSRect) theFrame
                 inView: (NSView *) theView
 {
+    NSString* numStr;
+    NSSize size;
+    NSRect leftRect, leftBadgeRect, midBadgeRect, rightBadgeRect;
+
     // Draw no badge if number is 0
     if (_number == 0) {
         [super drawWithFrame: theFrame inView: theView];
@@ -46,10 +50,9 @@ static NSImageCell* imageCell;
     }
     
     // FIXME: There must be an easier way to convert integers to strings.
-    NSString* numStr = [[NSNumber numberWithInt: _number] description];
-    NSSize size = [numStr sizeWithAttributes: numberDrawingAttributes];
+    numStr = [[NSNumber numberWithInt: _number] description];
+    size = [numStr sizeWithAttributes: numberDrawingAttributes];
     
-    NSRect leftRect, leftBadgeRect, midBadgeRect, rightBadgeRect;
     // FIXME: Hard-coded: 10.0 is the width of both round corners together
     NSDivideRect(theFrame, &rightBadgeRect, &leftRect, size.width + 10.0, NSMaxXEdge);
     

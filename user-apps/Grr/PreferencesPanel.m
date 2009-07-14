@@ -20,6 +20,8 @@
 -(id) init
 {
     if ((self = [super init]) != nil) {
+      NSToolbar* toolbar;
+
         RETAIN(window);
         RETAIN(replacableView);
         
@@ -31,7 +33,7 @@
         [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Proxy"]];
         [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Fonts"]];
         
-        NSToolbar* toolbar = AUTORELEASE(
+        toolbar = AUTORELEASE(
             [(NSToolbar*)[NSToolbar alloc] initWithIdentifier: @"pref panel toolbar"]
         );
         [toolbar setDelegate: self];
@@ -77,6 +79,7 @@
 
 -(BOOL) addPreferencesComponent: (id<PreferencesComponent>) aPrefComponent
 {
+  NSToolbarItem* item;
     NSAssert(
         [prefComponents count] == [toolbarItemIdentifiers count],
         @"Internal inconsistency: Number of toolbar items != number of pref panes."
@@ -84,8 +87,7 @@
     
     [prefComponents addObject: aPrefComponent];
     
-    NSToolbarItem* item =
-        [[NSToolbarItem alloc] initWithItemIdentifier: [aPrefComponent prefPaneName]];
+    item = [[NSToolbarItem alloc] initWithItemIdentifier: [aPrefComponent prefPaneName]];
     [item setLabel: [aPrefComponent prefPaneName]];
     [item setImage: [aPrefComponent prefPaneIcon]];
     [item setAction: @selector(changeViewAction:)];
@@ -147,7 +149,8 @@ willBeInsertedIntoToolbar: (BOOL)flag
 
 -(void) changeViewAction: (NSToolbarItem*)sender
 {
-    id<ViewProvidingComponent, NSObject> comp;
+  id<ViewProvidingComponent, NSObject> comp;
+  NSView* newView;
     
     comp = [prefComponents objectAtIndex: 
         [toolbarItemIdentifiers indexOfObject: [sender itemIdentifier]]];
@@ -157,7 +160,7 @@ willBeInsertedIntoToolbar: (BOOL)flag
         @"Component %@ should be a view providing component!", comp
     );
     
-    NSView* newView = [comp view];
+    newView = [comp view];
     [newView setFrame: [replacableView frame]];
     [[replacableView superview] replaceSubview: replacableView with: newView];
     

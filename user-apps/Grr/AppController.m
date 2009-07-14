@@ -25,6 +25,7 @@
  */
 -(void)loadViewProvidingComponent: (id<ViewProvidingComponent>) aComponent overriddenView: (NSView**) overriddenView
 {
+    NSView* newView;
     id<ViewProvidingComponent, NSObject> component = (id<NSObject>) aComponent;
     
     NSAssert1(
@@ -33,7 +34,7 @@
     );
     
     NSDebugLog(@"Module %@ is being loaded.", component);
-    NSView* newView = [component view];
+    newView = [component view];
     
     NSAssert1(newView != nil, @"Component %@ had no view, although it should.", component);
     
@@ -137,11 +138,22 @@
 
 -(void) applicationDidFinishLaunching: (NSNotification*) aNotification
 {
+    id<OutputProvidingComponent> db;
+    id<ViewProvidingComponent,FilterComponent> plugin1;
+    id<ViewProvidingComponent,FilterComponent> plugin2;
+    id<ViewProvidingComponent,FilterComponent> feedPlugin;
+    id<ToolbarDelegate> articleOpsToolbar;
+    id<ToolbarDelegate> feedOpsToolbar;
+    id<ToolbarDelegate,FilterComponent> searchingComponent;
+    NSNotificationCenter* defaultCenter;
+    NSUserDefaults* defaults;
+
+
     // First create a different RSSFactory and replace the current one with that.
     [RSSFactory setFactory: [ArticleFactory new]];
     
     // Make sure the fonts are set.
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
     SET_FAMILY( [NSFont systemFontOfSize: [NSFont systemFontSize]], @"RSSReaderFeedListFontDefaults" );
     SET_SIZE( [NSFont systemFontSize], @"RSSReaderFeedListSizeDefaults" );
     SET_FAMILY( [NSFont systemFontOfSize: [NSFont systemFontSize]], @"RSSReaderArticleListFontDefaults" );
@@ -153,20 +165,20 @@
     
     
     // Create different Grr components
-    id<OutputProvidingComponent> db = [Database shared];
-    id<ViewProvidingComponent,FilterComponent> plugin1 = [NSBundle instanceForBundleWithName: @"ArticleTable"];
-    id<ViewProvidingComponent,FilterComponent> plugin2 = [NSBundle instanceForBundleWithName: @"ArticleView"];
-    id<ViewProvidingComponent,FilterComponent> feedPlugin = [NSBundle instanceForBundleWithName: @"DatabaseTreeView"];
-    id<ToolbarDelegate> articleOpsToolbar = [NSBundle instanceForBundleWithName: @"ArticleOperations"];
-    id<ToolbarDelegate> feedOpsToolbar = [NSBundle instanceForBundleWithName: @"DatabaseOperations"];
-    id<ToolbarDelegate,FilterComponent> searchingComponent = [NSBundle instanceForBundleWithName: @"Searching"];
+    db = [Database shared];
+    plugin1 = [NSBundle instanceForBundleWithName: @"ArticleTable"];
+    plugin2 = [NSBundle instanceForBundleWithName: @"ArticleView"];
+    feedPlugin = [NSBundle instanceForBundleWithName: @"DatabaseTreeView"];
+    articleOpsToolbar = [NSBundle instanceForBundleWithName: @"ArticleOperations"];
+    feedOpsToolbar = [NSBundle instanceForBundleWithName: @"DatabaseOperations"];
+    searchingComponent = [NSBundle instanceForBundleWithName: @"Searching"];
     
     NSAssert(plugin1 != nil, @"Article Table plugin could not be loaded.");
     NSAssert(plugin2 != nil, @"Article View plugin could not be loaded.");
     NSAssert(feedPlugin != nil, @"Feed Table plugin could not be loaded.");
     
     // Connect the created components...
-    NSNotificationCenter* defaultCenter = [NSNotificationCenter defaultCenter];
+    defaultCenter = [NSNotificationCenter defaultCenter];
     
     [defaultCenter addObserver: searchingComponent
         selector: @selector(componentDidUpdateSet:)
