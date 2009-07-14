@@ -252,7 +252,7 @@ enum RSSFeedStatus
 /**
  * RSSFeed also implements the NewRSSArticleListener informal protocol.
  */
--(void) newArticleFound: (id<RSSArticle>) anArticle;
+-(void) newArticleFound: (id) anArticle;
 
 @end
 

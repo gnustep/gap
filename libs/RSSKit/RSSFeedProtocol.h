@@ -20,7 +20,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 // --- Notifications ---
 
 /** 
@@ -44,10 +43,6 @@ extern NSString *const RSSFeedFetchFailedNotification;
 extern NSString *const RSSFeedWillFetchNotification;
 
 // ---------------------
-
-// There's also a RSSArticle protocol, but we don't need to know details,
-// as we're only passing references around in the RSSFeed protocol.
-@protocol RSSArticle;
 
 /**
  * The errors that can occur when fetching a feed.
@@ -139,7 +134,7 @@ enum RSSFeedError
  *
  * @param article The article to delete.
  */
-- (void) removeArticle: (id<RSSArticle>) article;
+- (void) removeArticle: (id) article;
 
 
 /**

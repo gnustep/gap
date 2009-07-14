@@ -20,7 +20,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol XMLTextOrNode;
 @class XMLNode;
 
 @protocol XMLTextOrNode <NSObject>
