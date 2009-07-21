@@ -30,7 +30,7 @@
 #import "VEMenuItem.h"
 
 
-@implementation VEAppContoller
+@implementation VEAppController
 
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)theApplication
 {
@@ -207,6 +207,65 @@
 - (IBAction) cancelPrefs:(id)sender
 {
     [prefPanel performClose:self];
+}
+
+- (IBAction) chooseFont:(id)sender
+{
+  NSFontManager *fontMgr;
+  NSTextField *fontField;
+
+  fontMgr = [NSFontManager sharedFontManager];
+
+  if (sender == chooseSerifFontButton)
+    fontField = fontSerifField;
+  else if (sender == chooseSansFontButton)
+    fontField == fontSansSerifField;
+  else if (sender == chooseMonoFontButton)
+    fontField = fontMonoField;
+  else
+    NSLog(@"Unexpected sender in choose Font.");
+ 
+  currentFontField = fontField;
+
+  [fontMgr setSelectedFont: [fontField font]  isMultiple:NO];
+  [fontMgr setDelegate:self];
+  [fontMgr orderFrontFontPanel: self];
+}
+
+- (void) changeFont:(id)sender
+{
+  NSTextField *fontField;
+  NSFont *newFont;
+  NSLog(@"change font!");
+
+  fontField = currentFontField;
+  newFont = [sender convertFont: [fontField font]];
+
+
+  if (newFont != nil)
+    {
+
+      [self updateFontPreview:fontField :newFont];
+    }
+}
+
+- (void) updateFontPreview:(NSTextField *)previewField :(NSFont *)font
+{
+  NSString *fontName;
+  NSLog(@"Update FontPreview!");
+
+  fontName = [font fontName];
+  if (fontName)
+    {
+      [previewField setFont:[NSFont fontWithName: fontName size:12.0]];
+      [previewField setStringValue: fontName];
+    }
+  else
+    {
+      [previewField setFont:[NSFont systemFontOfSize: -1]];
+      [previewField setStringValue: @"(unset)"];
+    }
+
 }
 
 - (IBAction) loadBookmark:(id)sender

@@ -27,20 +27,30 @@
 #import <AppKit/AppKit.h>
 
 
-@interface VEAppContoller : NSObject
+@interface VEAppController : NSObject
 {
-    /* preferences */
-    IBOutlet NSPanel *prefPanel;
-    IBOutlet NSTextField *homePageField;
-    IBOutlet NSMenuItem *bookmarksMenu;
+  /* preferences */
+  IBOutlet NSPanel     *prefPanel;
+  IBOutlet NSTextField *homePageField;
+  IBOutlet NSMenuItem  *bookmarksMenu;
+  IBOutlet NSButton    *javaScriptCheck;
+  IBOutlet NSTextField *fontSerifField;
+  IBOutlet NSTextField *fontSansSerifField;
+  IBOutlet NSTextField *fontMonoField;
+  NSTextField          *currentFontField;
+  IBOutlet NSButton    *chooseSerifFontButton;
+  IBOutlet NSButton    *chooseSansFontButton;
+  IBOutlet NSButton    *chooseMonoFontButton;
+  NSFont               *serifFont;
+  NSFont               *sansSerifFont;
+  NSFont               *monospacedFont;
 
-    /* bookmarks */
-    IBOutlet NSPanel *addBookmarkPanel;
-    IBOutlet NSTextField *addBkTitleField;
-    IBOutlet NSTextField *addBkUrlField;
-    IBOutlet NSButton *javaScriptCheck;
+  /* bookmarks */
+  IBOutlet NSPanel     *addBookmarkPanel;
+  IBOutlet NSTextField *addBkTitleField;
+  IBOutlet NSTextField *addBkUrlField;
     
-    NSString *bookmarksFile;
+  NSString *bookmarksFile;
 }
 
 - (IBAction) showPreferences:(id)sender;
@@ -50,5 +60,7 @@
 - (IBAction) addBookmark:(id)sender;
 - (IBAction) addBkPanelAdd:(id)sender;
 - (IBAction) addBkPanelCancel:(id)sender;
+- (IBAction) chooseFont:(id)sender;
+- (void) updateFontPreview:(NSTextField *)previewField :(NSFont *)font;
 
 @end

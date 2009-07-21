@@ -15,6 +15,7 @@
 	    "loadBookmark:",
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
+	    "chooseFont:",
 	    "performFindPanelAction:",
 	    "reload:",
 	    "savePrefs:",
@@ -33,7 +34,7 @@
 	);
 	Super = NSObject;
     };
-    VEAppContoller = {
+    VEAppController = {
 	Actions = (
 	    "showPreferences:",
 	    "savePrefs:",
@@ -41,18 +42,32 @@
 	    "loadBookmark:",
 	    "addBookmark:",
 	    "addBkPanelAdd:",
-	    "addBkPanelCancel:"
+	    "addBkPanelCancel:",
+	    "chooseFont:"
 	);
 	Outlets = (
 	    prefPanel,
 	    homePageField,
 	    bookmarksMenu,
+	    javaScriptCheck,
+	    fontSerifField,
+	    fontSansSerifField,
+	    fontMonoField,
+	    chooseSerifFontButton,
+	    chooseSansFontButton,
+	    chooseMonoFontButton,
 	    addBookmarkPanel,
 	    addBkTitleField,
-	    addBkUrlField,
-	    javaScriptCheck
+	    addBkUrlField
 	);
 	Super = NSObject;
+    };
+    VEDocument = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSDocument;
     };
     VEDocumentController = {
 	Actions = (
