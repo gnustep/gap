@@ -176,14 +176,25 @@
 {
     WebPreferences *webPrefs;
     NSFont *font;
+    NSString *fontName;
     
     webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
     [javaScriptCheck setState:[webPrefs isJavaScriptEnabled] ? NSOnState : NSOffState];
 
-    font = nil;
+    fontName = [webPrefs serifFontFamily];
+    font = [NSFont fontWithName: fontName size:12.0];
     [self updateFontPreview:fontSerifField :font];
+    serifFont = font;
+    
+    fontName = [webPrefs sansSerifFontFamily];
+    font = [NSFont fontWithName: fontName size:12.0];
     [self updateFontPreview:fontSansSerifField :font];
+    sansSerifFont = font;
+    
+    fontName = [webPrefs fixedFontFamily];
+    font = [NSFont fontWithName: fontName size:12.0];
     [self updateFontPreview:fontMonoField :font];
+    monospacedFont = font;
 
     [prefPanel makeKeyAndOrderFront:self];
     [webPrefs release];
