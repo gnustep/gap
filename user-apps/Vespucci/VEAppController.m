@@ -219,7 +219,7 @@
   if (sender == chooseSerifFontButton)
     fontField = fontSerifField;
   else if (sender == chooseSansFontButton)
-    fontField == fontSansSerifField;
+    fontField = fontSansSerifField;
   else if (sender == chooseMonoFontButton)
     fontField = fontMonoField;
   else
