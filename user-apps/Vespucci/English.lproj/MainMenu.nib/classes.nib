@@ -12,17 +12,24 @@
                 addBkPanelCancel = id; 
                 addBookmark = id; 
                 cancelPrefs = id; 
+                chooseFont = id; 
                 loadBookmark = id; 
                 savePrefs = id; 
                 showPreferences = id; 
             }; 
-            CLASS = VEAppContoller; 
+            CLASS = VEAppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 addBkTitleField = NSTextField; 
                 addBkUrlField = NSTextField; 
                 addBookmarkPanel = NSPanel; 
                 bookmarksMenu = NSMenuItem; 
+                chooseMonoFontButton = NSButton; 
+                chooseSansFontButton = NSButton; 
+                chooseSerifFontButton = NSButton; 
+                fontMonoField = NSTextField; 
+                fontSansSerifField = NSTextField; 
+                fontSerifField = NSTextField; 
                 homePageField = NSTextField; 
                 javaScriptCheck = NSButton; 
                 prefPanel = NSPanel; 
