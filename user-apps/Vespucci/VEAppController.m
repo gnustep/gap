@@ -175,9 +175,16 @@
 - (IBAction)showPreferences:(id)sender
 {
     WebPreferences *webPrefs;
+    NSFont *font;
     
     webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
     [javaScriptCheck setState:[webPrefs isJavaScriptEnabled] ? NSOnState : NSOffState];
+
+    font = nil;
+    [self updateFontPreview:fontSerifField :font];
+    [self updateFontPreview:fontSansSerifField :font];
+    [self updateFontPreview:fontMonoField :font];
+
     [prefPanel makeKeyAndOrderFront:self];
     [webPrefs release];
 }
@@ -198,6 +205,10 @@
       [defaults setObject: homePage forKey:@"Homepage"];
     
     [webPrefs setJavaScriptEnabled: [javaScriptCheck state] == NSOnState];
+
+    [webPrefs setSerifFontFamily:[serifFont fontName]];
+    [webPrefs setSansSerifFontFamily:[sansSerifFont fontName]];
+    [webPrefs setFixedFontFamily:[monospacedFont fontName]];
 
     [prefPanel performClose:self];
     [defaults synchronize];
@@ -244,6 +255,12 @@
 
   if (newFont != nil)
     {
+      if (fontField == fontSerifField)
+        serifFont = newFont;
+      else if (fontField == fontSansSerifField)
+        sansSerifFont = newFont;
+      else if (fontField == fontMonoField)
+        monospacedFont = newFont;
 
       [self updateFontPreview:fontField :newFont];
     }
