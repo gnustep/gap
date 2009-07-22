@@ -418,11 +418,20 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     NSMutableDictionary *bkDict;
+    NSString *pathStr;
+    NSFileManager *fileMgr;
     
+    fileMgr = [NSFileManager defaultManager];
     bkDict = [self bookmarksFromMenu: [bookmarksMenu submenu]];
     [bkDict removeObjectForKey:@"Title"];
     [bkDict setObject:@"Root" forKey:@"WebBookmarkUUID"];
     [bkDict setObject:@"1" forKey:@"WebBookmarkFileVersion"];
+
+    pathStr = [bookmarksFile stringByDeletingLastPathComponent];
+    if (![fileMgr fileExistsAtPath:pathStr])
+      {
+	[fileMgr createDirectoryAtPath:pathStr attributes:nil];
+      }
     if ([bkDict writeToFile:bookmarksFile atomically:NO] == NO)
     {
         NSRunAlertPanel(@"Attention", @"Could not save Bookmarks", @"Ok", nil, nil);
