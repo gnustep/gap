@@ -2747,7 +2747,7 @@ fi
 
 
 
-                                        ac_config_files="$ac_config_files GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-3.01/GNUmakefile"
+                                        ac_config_files="$ac_config_files GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-3.02/GNUmakefile"
 
 
 cat >confcache <<\_ACEOF
@@ -3303,7 +3303,7 @@ do
   "GNUmakefile" ) CONFIG_FILES="$CONFIG_FILES GNUmakefile" ;;
   "xpdf/GNUmakefile" ) CONFIG_FILES="$CONFIG_FILES xpdf/GNUmakefile" ;;
   "xpdf/bridge/GNUmakefile" ) CONFIG_FILES="$CONFIG_FILES xpdf/bridge/GNUmakefile" ;;
-  "xpdf/xpdf-3.01/GNUmakefile" ) CONFIG_FILES="$CONFIG_FILES xpdf/xpdf-3.01/GNUmakefile" ;;
+  "xpdf/xpdf-3.02/GNUmakefile" ) CONFIG_FILES="$CONFIG_FILES xpdf/xpdf-3.02/GNUmakefile" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
