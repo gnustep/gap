@@ -79,7 +79,7 @@ AC_SUBST(lib_freetype_libs)
 AC_SUBST(lib_freetype_includes)
 AC_SUBST(lib_freetype_add_includes)
 
-AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-3.01/GNUmakefile])
+AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-3.02/GNUmakefile])
 
 AC_OUTPUT
 
