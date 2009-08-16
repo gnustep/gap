@@ -251,6 +251,7 @@
 
   [fontMgr setSelectedFont: [fontField font]  isMultiple:NO];
   [fontMgr setDelegate:self];
+  [prefPanel endEditingFor:nil]; /* Mac needs this */
   [fontMgr orderFrontFontPanel: self];
 }
 
