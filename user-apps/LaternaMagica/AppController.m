@@ -560,15 +560,22 @@
     NSData *dataOfRep;
     NSDictionary *repProperties;
     NSString *origFileName;
+    int selectedItemIndex;
     
 
     origFileName = [[fileListData pathAtIndex:[fileListView selectedRow]] lastPathComponent];
     
     savePanel = [NSSavePanel savePanel];
     [savePanel setDelegate: self];
-    [savePanel setAccessoryView: saveOptionsView];
+    /* if the accessory view comes from a window it needs a retain */
+    [savePanel setAccessoryView: [saveOptionsView retain]];
+
+    /* simulate clicks to be sure interface is consistent */
     [jpegCompressionSlider performClick:nil];
-    [fileTypePopUp selectItem:[fileTypePopUp itemAtIndex:0]];
+    selectedItemIndex = [fileTypePopUp indexOfSelectedItem];
+    if (selectedItemIndex < 0)
+        selectedItemIndex = 0;
+    [fileTypePopUp selectItemAtIndex:selectedItemIndex];
     
     
     if ([savePanel runModalForDirectory:@"" file:origFileName] ==  NSFileHandlingPanelOKButton)
