@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2008 GNUstep Application Project
+   Copyright (C) 2006-2009 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -44,6 +44,7 @@
     @private float    warnCap;
     @private float    chargePercent;
     @private float    timeRemaining;
+    @private BOOL     isCharging;
   
     @private NSString *chargeState;
     @private NSString *batteryType;
@@ -62,6 +63,7 @@
 - (float)chargePercent;
 
 - (BOOL)isCritical;
+- (BOOL)isCharging;
 
 - (NSString *)state;
 - (NSString *)batteryType;
