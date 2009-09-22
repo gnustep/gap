@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2008 GNUstep Application Project
+   Copyright (C) 2006-2009 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -72,6 +72,8 @@
     {
       useACPI = NO;
       useAPM = NO;
+      
+      isCharging = NO;
       
 #if defined(linux)
       /* look for a battery */
@@ -200,16 +202,19 @@
   {
     chargePercent = 100;
     timeRemaining = 0;
+    isCharging = YES;
   }
   else if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
   {
     timeRemaining = (lastCap-currCap) / watts;
     chargePercent = currCap/lastCap*100;
+    isCharging = YES;
   }
   else
   {
     timeRemaining = currCap / watts;
     chargePercent = currCap/lastCap*100;
+    isCharging = NO;
   }
   
 #elif defined(linux)
@@ -307,6 +312,7 @@ if (useACPI)
     {
         chargePercent = 100;
         timeRemaining = 0;
+        isCharging = YES;
     } else if (!strcmp(chStateStr, "charging"))
     {
         if (watts > 0)
@@ -314,6 +320,7 @@ if (useACPI)
         else
             timeRemaining = -1;
         chargePercent = currCap/lastCap*100;
+        isCharging = YES;
     } else
     {
         if (watts > 0)
@@ -321,6 +328,7 @@ if (useACPI)
         else
             timeRemaining = -1;
         chargePercent = currCap/lastCap*100;
+        isCharging = NO;
     }
 } else if (useAPM)
 {
@@ -377,6 +385,7 @@ if (useACPI)
       else
         battStatusInt = -1;
 
+      isCharging = NO;
       if (battStatusInt == 0)
         chargeState = @"High";
       else if (battStatusInt == 1)
@@ -384,8 +393,10 @@ if (useACPI)
       else if (battStatusInt == 2)
         chargeState = @"Critical";
       else if (battStatusInt == 3)
+      {
         chargeState = @"Charging";
-      else if (battStatusInt == 4)
+        isCharging = YES;
+      } else if (battStatusInt == 4)
         chargeState = @"Not present";
       else
         chargeState = @"Unknown";
@@ -482,6 +493,11 @@ if (useACPI)
     return[chargeState isEqualToString:@"Critical"];
   } else
     return NO;
+}
+
+- (BOOL)isCharging
+{
+  return isCharging;
 }
 
 @end
