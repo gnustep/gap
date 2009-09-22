@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2008 GNUstep Application Project
+   Copyright (C) 2005-2009 GNUstep Application Project
 
    Author: Riccardo Mottola
    FreeBSD support by Chris B. Vetter
@@ -56,16 +56,18 @@
     if ((self = [super init]))
     {
         NSMutableParagraphStyle *style;
-	NSFont *font;
+	    NSFont *font;
 
         batModel = [[BatteryModel alloc] init];
         style = [[NSMutableParagraphStyle alloc] init];
     	[style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     	
-	font = [NSFont systemFontOfSize:9.0];
-	stateStrAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
+	    font = [NSFont systemFontOfSize:9.0];
+	    stateStrAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
         font, NSFontAttributeName,
         style, NSParagraphStyleAttributeName, nil] retain];
+        iconPlug = [[NSImage imageNamed:@"small_plug.tif"] retain];
+        iconBattery = [[NSImage imageNamed:@"small_battery.tif"] retain];
     }
     return self;
 }
@@ -133,6 +135,14 @@
     NSMutableString *str;
     char *cStr;
     float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
+    NSImage *chargeStatusIcon;
+
+    if ([batModel isCharging])
+      chargeStatusIcon = iconPlug;
+    else
+      chargeStatusIcon = iconBattery;
+
+    [chargeStatusIcon compositeToPoint: NSMakePoint(WIDTH+6, HEIGHT-15) operation:NSCompositeSourceOver];
 
     chargePercentToDraw = [batModel chargePercent];
     if (chargePercentToDraw > 100)

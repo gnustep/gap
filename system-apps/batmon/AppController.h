@@ -48,6 +48,9 @@
     IBOutlet NSTextField         *lastFullCharge;
 
     NSDictionary *stateStrAttributes;
+    
+    NSImage *iconBattery;
+    NSImage *iconPlug;
 
     BatteryModel *batModel;
     @private int hours;
