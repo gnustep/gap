@@ -12,7 +12,9 @@
 	    "rotateImage90:",
 	    "rotateImage180:",
 	    "rotateImage270:",
-	    "saveImageAs:"
+	    "saveImageAs:",
+	    "setCompressionType:",
+	    "setCompressionLevel:"
 	);
 	Outlets = (
 	    fileListData,
@@ -25,10 +27,10 @@
 	    fullScreenMenuItem,
 	    fullScreenButton,
 	    saveAsMenuItem,
+	    saveOptionsView,
 	    fileTypePopUp,
 	    jpegCompressionField,
-	    jpegCompressionSlider,
-	    saveOptionsView
+	    jpegCompressionSlider
 	);
 	Super = NSObject;
     };
