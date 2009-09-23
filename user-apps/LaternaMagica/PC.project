@@ -29,7 +29,7 @@
 	LaternaMagica.gorm
     );
     LANGUAGE = English;
-    LAST_EDITING = "2009-02-08 15:12:23 +0100";
+    LAST_EDITING = "2009-03-22 11:17:59 +0100";
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui"
@@ -47,8 +47,11 @@
 	main.m
     );
     PC_WINDOWS = {
-	ProjectBrowser = "{x = -0.00280953; y = 0; width = 550; height = 167}";
-	ProjectWindow = "90 178 682 567 0 0  1024 768 ";
+	LoadedFiles = "666 242 222 376 0 0  1024 768 ";
+	ProjectBrowser = "{x = 0; y = 0; width = 664; height = 165}";
+	ProjectBuild = "0 0 0 0 0 0  0 -1 ";
+	ProjectLaunch = "338 40 482 387 0 0  1024 768 ";
+	ProjectWindow = "155 53 682 568 0 0  1024 768 ";
 	ShowToolbar = YES;
     };
     PRINCIPAL_CLASS = NSApplication;
