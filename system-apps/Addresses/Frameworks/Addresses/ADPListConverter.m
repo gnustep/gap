@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2009/09/25 20:15:20 $
 
 /* system includes */
 /* (none) */
@@ -29,7 +29,7 @@
 - (BOOL) useString: (NSString*) str
 {
   _plist = [str propertyList];
-  if(![_plist isKindOf: [NSDictionary class]])
+  if(![_plist isKindOfClass: [NSDictionary class]])
     {
       NSLog(@"String (%@) does not contain valid property list!\n", str);
       return NO;

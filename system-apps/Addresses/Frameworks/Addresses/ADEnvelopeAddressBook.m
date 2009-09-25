@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2009/09/25 20:15:20 $
 
 /* system includes */
 /* (none) */
@@ -133,6 +133,7 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 - (void) dealloc
 {
   [_books release];
+  [super dealloc];
 }
 
 - (BOOL) addAddressBook: (ADAddressBook*) book
