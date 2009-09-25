@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/01/27 23:55:58 $
+// $Revision: 1.3 $
+// $Date: 2009/09/25 19:48:01 $
 
 #include "ADPersonView.h"
 #include "ADPersonPropertyView.h"
@@ -562,7 +562,7 @@ static NSString *__defaultCountryCode = nil;
 
   panel = [NSOpenPanel openPanel];
   types = [NSArray arrayWithObjects: @"jpg", @"JPG", @"jpeg", @"JPEG",
-			    @"tiff", @"TIFF", @"tif", @"TIF", nil];
+			    @"tiff", @"TIFF", @"tif", @"TIF", @"png", @"PNG", nil];
   [panel setCanChooseFiles: YES];
   [panel setCanChooseDirectories: NO];
   [panel setAllowsMultipleSelection: NO];
