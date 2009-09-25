@@ -1,16 +1,13 @@
 Current version is 0.4.7.1
 
-Since 0.4.8:
+
+Since 0.4.7.1:
 ==============
 
   o relative link during framework installing, helps building in a separate
     root, like when building RPMs
   o fixed some portability issues of the Framework to solaris and windows
   o handle also PNG images
-
-Since 0.4.7.1:
-==============
-
   o fixed a link in the framework from absolute to relative, for FHS
     (fix by Richard Stonehouse)
 
