@@ -6,14 +6,10 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/05/01 23:07:09 $
+// $Revision: 1.2 $
+// $Date: 2009/09/28 21:18:03 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "VCFViewer.h"
+#import "VCFViewer.h"
 
 @implementation VCFViewer
 - (id) initInPanel: (id) aPanel
