@@ -133,7 +133,7 @@
 {
     NSBezierPath *bzp;
     NSMutableString *str;
-    char *cStr;
+    char cStr[5];
     float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
     NSImage *chargeStatusIcon;
 
@@ -161,11 +161,9 @@
     [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, (chargePercentToDraw/100) * HEIGHT -2)];
     [bzp fill];
 
-    cStr = calloc(4, sizeof(char));
     sprintf(cStr, "%2.0f%%", [batModel chargePercent]);
     str = [NSMutableString stringWithCString:cStr];
     [str drawAtPoint: NSMakePoint(WIDTH + 5 , 1) withAttributes:stateStrAttributes];
-    free(cStr);
 }
 
 - (void)drawIcon
