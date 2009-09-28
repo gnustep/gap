@@ -6,15 +6,15 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/05/01 23:07:09 $
+// $Revision: 1.2 $
+// $Date: 2009/09/28 21:14:10 $
 
 #ifndef VCFVIEWER_H
 #define VCFVIEWER_H
 
 /* system includes */
 #include <Foundation/Foundation.h>
-#include <GWorkspace/ContentViewersProtocol.h>
+#include <Inspector/ContentViewersProtocol.h>
 #include <Addresses/Addresses.h>
 #include <AddressView/ADPersonView.h>
 
