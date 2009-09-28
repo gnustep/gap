@@ -12,7 +12,7 @@ GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_USER_ROOT)
 VCFViewer_HAS_RESOURCE_BUNDLE = yes
 
 VCFViewer_OBJCFLAGS += -Wall
-VCFViewer_LDFLAGS += -lGWorkspace -lAddresses -lAddressView
+VCFViewer_LDFLAGS += -lInspector -lAddresses -lAddressView
 
 VCFViewer_OBJC_FILES = VCFViewer.m 
 VCFViewer_PRINCIPAL_CLASS = VCFViewer
