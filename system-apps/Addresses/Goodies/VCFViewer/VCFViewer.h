@@ -6,28 +6,27 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/09/28 21:14:10 $
+// $Revision: 1.3 $
+// $Date: 2009/09/28 21:18:03 $
 
-#ifndef VCFVIEWER_H
-#define VCFVIEWER_H
 
-/* system includes */
-#include <Foundation/Foundation.h>
-#include <Inspector/ContentViewersProtocol.h>
-#include <Addresses/Addresses.h>
-#include <AddressView/ADPersonView.h>
+#import <Foundation/Foundation.h>
+#import <Inspector/ContentViewersProtocol.h>
+#import <Addresses/Addresses.h>
+#import <AddressView/ADPersonView.h>
 
-/* my includes */
-/* (none) */
 
 @interface VCFViewer: NSView <ContentViewersProtocol>
 {
   id panel;
-  NSArray *people; int currentPerson;
+  NSArray *people;
+  int currentPerson;
 
-  NSScrollView *sv; NSClipView *cv; ADPersonView *pv;
-  NSButton *nb, *pb; NSTextField *lbl;
+  NSScrollView *sv;
+  NSClipView *cv;
+  ADPersonView *pv;
+  NSButton *nb, *pb;
+  NSTextField *lbl;
   NSButton *ifb, *dfb;
 
   NSString *bundlePath;
@@ -42,4 +41,3 @@
 - (void) decreaseFontSize: (id) sender;
 @end
 
-#endif /* VCFVIEWER_H */
