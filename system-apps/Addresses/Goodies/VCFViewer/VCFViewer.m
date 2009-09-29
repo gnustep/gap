@@ -6,17 +6,17 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/09/28 21:18:03 $
+// $Revision: 1.3 $
+// $Date: 2009/09/29 21:20:24 $
 
 #import "VCFViewer.h"
 
 @implementation VCFViewer
-- (id) initInPanel: (id) aPanel
-	 withFrame: (NSRect) frame
-	     index: (int) idx
+- (id)initWithFrame:(NSRect)frameRect inspector:(id)insp
 {
-  [super init];
+  self = [super initWithFrame:frameRect];
+  if (!self)
+    return nil;
 
   sv = [[[NSScrollView alloc] initWithFrame: NSMakeRect(0, 30, 257, 215)]
 	 autorelease];
@@ -79,7 +79,9 @@
 
   people = nil;
   bundlePath = nil;
-  
+  vcfPath = nil;
+  ws = [NSWorkspace sharedWorkspace];  
+  inspector = insp;
   return self;
 }
 
@@ -94,91 +96,120 @@
   return bundlePath;
 }
 
-- (void) setIndex: (int) idx
+- (void)displayPath:(NSString *)path
 {
-  index = idx;
+  ASSIGNCOPY(vcfPath, path);
 }
 
-- (void) activateForPath: (NSString*) path
+- (void)displayLastPath:(BOOL)forced
 {
-  id conv;
-  NSMutableArray *ppl;
-  ADRecord *r;
-
-  conv = [[ADConverterManager sharedManager]
-	   inputConverterWithFile: path];
-  [people release];
-  ppl = [NSMutableArray array];
-
-  while((r = [conv nextRecord]))
-    if([r isKindOfClass: [ADPerson class]])
-      [ppl addObject: r];
-  people = [[NSArray alloc] initWithArray: ppl];
-  
-  currentPerson = 0;
-  if([people count])
-    {
-      [pv setPerson: [people objectAtIndex: currentPerson]];
-      [ifb setEnabled: YES];
-      [dfb setEnabled: YES];
-      [lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
-				     currentPerson+1, [people count]]];
-    }
-  else
-    {
-      [pv setPerson: nil];
-      [ifb setEnabled: NO];
-      [dfb setEnabled: NO];
-      [lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
-				     currentPerson+1, [people count]]];
-    }
-
-  if([people count] > 1)
-    {
-      [nb setEnabled: YES];
-      [pb setEnabled: YES];
-    }
-  else
-    {
-      [nb setEnabled: NO];
-      [pb setEnabled: NO];
-    }
-
-  [sv setNeedsDisplay: YES];
+  if (vcfPath) {
+    if (forced)
+      [self displayPath: vcfPath];
+    else
+      [inspector contentsReadyAt: vcfPath];
+  }
 }
 
-- (BOOL) displayData: (NSData*) data
-	      ofType: (NSString*) type
+- (BOOL)canDisplayDataOfType:(NSString *)type
 {
-  return NO;
+    return NO;
 }
 
-- (BOOL) stopTasks
+- (void)displayData: (NSData*) data
+	     ofType: (NSString*) type
 {
-  return YES;
+}
+
+- (void) stopTasks
+{
 }
 
 - (void) deactivate
 {
   [self removeFromSuperview];
+  DESTROY(people);
 }
 
-- (BOOL)canDisplayFileAtPath:(NSString *)path
+- (NSString *)currentPath
 {
-  if([[NSArray arrayWithObjects: @"vcf", @"vcard", nil]
-       containsObject: [[path pathExtension] lowercaseString]])
+    return vcfPath;
+}
+
+- (BOOL)canDisplayPath:(NSString *)path
+{
+  id conv;
+  ADRecord *r;
+  NSMutableArray *ppl;
+
+  NSDictionary *attributes;
+  NSString *defApp, *fileType, *extension;
+  NSArray *types;
+
+  attributes = [[NSFileManager defaultManager] fileAttributesAtPath: path
+					       traverseLink: YES];
+  if ([attributes objectForKey: NSFileType] == NSFileTypeDirectory) {
+    return NO;
+  }		
+			
+  [ws getInfoForFile: path application: &defApp type: &fileType];
+	
+  if(([fileType isEqual: NSPlainFileType] == NO)
+     && ([fileType isEqual: NSShellCommandFileType] == NO)) {
+    return NO;
+  }
+
+  extension = [path pathExtension];
+  types = [NSArray arrayWithObjects: @"vcf", @"vcard", nil];
+
+  if ([types containsObject: [extension lowercaseString]]) {
+
+    conv = [[ADConverterManager sharedManager]
+	     inputConverterWithFile: path];
+    [people release];
+    ppl = [NSMutableArray array];
+    while((r = [conv nextRecord]))
+      if([r isKindOfClass: [ADPerson class]])
+	[ppl addObject: r];
+    people = [[NSArray alloc] initWithArray: ppl];
+    currentPerson = 0;
+    if([people count])
+      {
+	[pv setPerson: [people objectAtIndex: currentPerson]];
+	[ifb setEnabled: YES];
+	[dfb setEnabled: YES];
+	[lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
+				       currentPerson+1, [people count]]];
+      }
+    else
+      {
+	[pv setPerson: nil];
+	[ifb setEnabled: NO];
+	[dfb setEnabled: NO];
+	[lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
+				       currentPerson+1, [people count]]];
+      }
+
+    if([people count] > 1)
+      {
+	[nb setEnabled: YES];
+	[pb setEnabled: YES];
+      }
+    else
+      {
+	[nb setEnabled: NO];
+	[pb setEnabled: NO];
+      }
+
+    [sv setNeedsDisplay: YES];
     return YES;
+  }
   return NO;
 }
 
-- (BOOL)canDisplayData:(NSData *)data ofType:(NSString *)type
+- (NSString *)description
 {
-  return NO;
-}
-
-- (int)index
-{
-  return index;
+    return NSLocalizedString(@"This Inspector Displays content of vcard files", @"");
 }
 
 - (NSString *)winname
