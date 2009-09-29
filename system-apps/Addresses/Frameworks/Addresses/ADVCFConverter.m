@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.6 $
-// $Date: 2009/01/27 23:55:58 $
+// $Revision: 1.7 $
+// $Date: 2009/09/29 21:45:51 $
 
 /* system includes */
 /* (none) */
@@ -18,6 +18,7 @@
 #include "ADGlobals.h"
 #include "ADImageLoading.h"
 #include "ADMultiValue.h"
+#include <GNUstepBase/GSMime.h>
 
 @interface NSString(QuotedPrintable)
 - (unsigned long) hexLongValue;
@@ -143,21 +144,21 @@
 - (NSString*) stringByQuotedPrintableEncoding
 {
   int i;
+  size_t len;
   const unsigned char *cstr;
   NSMutableString *str;
 
-  cstr = [self UTF8String];
-  
-  str = [NSMutableString stringWithCapacity: strlen(cstr)];
-  for(i=0; i<strlen(cstr); i++)
-    {
-      if(cstr[i] == ' ')
+  cstr = (unsigned char *)[self UTF8String];  
+  len = strlen((char *)cstr);
+  str = [NSMutableString stringWithCapacity: len];
+  for (i = 0; i < len; i++) {
+      if (cstr[i] == ' ')
 	[str appendString: @"=20"];
       else if(cstr[i] > 127)
 	[str appendFormat: @"=%X", cstr[i]];
       else
 	[str appendFormat: @"%c", cstr[i]];
-    }
+  }
   return str;
 }
 @end
@@ -189,72 +190,12 @@
 
 NSData *base64Decode(NSString* nsstr)
 {
-  char *b64chars;
-  int i, j;
-  unsigned char *bytes; const char *str;
-
-  b64chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
-  str = [nsstr lossyCString];
-  
-  bytes = (unsigned char*)calloc(([nsstr length]/4)*3, 1);
-  
-  for(i=0, j=0; i < strlen(str); i+=4, j+=3)
-    {
-      unsigned char s1, s2, s3, s4;
-      uint32_t v;
-
-      while(!strchr(b64chars, str[i]) && i<strlen(str))
-	i++;
-      if(i>=strlen(str))
-	{
-	  NSLog(@"Error: No good characters in string\n");
-	  break;
-	}
-      
-      s1 = strchr(b64chars, str[i]) - b64chars;
-      s2 = strchr(b64chars, str[i+1]) - b64chars;
-      s3 = strchr(b64chars, str[i+2]) - b64chars;
-      s4 = strchr(b64chars, str[i+3]) - b64chars;
-      v = (s1 << 18) | (s2 << 12) | (s3 << 6) | s4;
-      bytes[j] = (v & 0xff0000) >> 16;
-      bytes[j+1] = (v & 0xff00) >> 8;
-      bytes[j+2] = v & 0xff;
-    }
-  return [NSData dataWithBytes: bytes length: ([nsstr length]/4)*3];
+  return [GSMimeDocument decodeBase64:[nsstr dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 NSString *base64Encode(NSData* data)
 {
-  char *b64chars;
-  unsigned char *bytes; int len;
-  NSMutableString *str;
-  int i, j;
-
-  b64chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-  bytes = (unsigned char*) [data bytes]; len = [data length];
-  str = [NSMutableString stringWithCapacity: len*3];
-
-  for(i=0,j=0; i<len-2; i+=3,j+=4)
-    {
-      unsigned char s1, s2, s3, s4;
-      uint32_t v;
-
-      v = (bytes[i] << 16);
-      v |= (bytes[i+1] << 8);
-      v |= bytes[i+2];
-
-      s1 = b64chars[(v & 0x3f)];
-      s2 = b64chars[(v & (0x3f << 6)) >> 6];
-      s3 = b64chars[(v & (0x3f << 12)) >> 12];
-      s4 = b64chars[(v & (0x3f << 18)) >> 18];
-
-      [str appendFormat: @"%c%c%c%c", s4, s3, s2, s1];
-    }
-      
-  return [NSString stringWithString: str];
+  return AUTORELEASE([[NSString alloc] initWithData:[GSMimeDocument encodeBase64:data] encoding:NSUTF8StringEncoding]);
 }  
   
       
