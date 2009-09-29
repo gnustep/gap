@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2009/09/28 21:18:03 $
+// $Revision: 1.4 $
+// $Date: 2009/09/29 21:20:24 $
 
 
 #import <Foundation/Foundation.h>
@@ -15,6 +15,9 @@
 #import <Addresses/Addresses.h>
 #import <AddressView/ADPersonView.h>
 
+@protocol ContentInspectorProtocol
+- (void)contentsReadyAt:(NSString *)path;
+@end
 
 @interface VCFViewer: NSView <ContentViewersProtocol>
 {
@@ -30,8 +33,9 @@
   NSButton *ifb, *dfb;
 
   NSString *bundlePath;
-
-  int index;
+  NSString *vcfPath;
+  NSWorkspace *ws;
+  id<ContentInspectorProtocol> inspector;
 }
 
 - (void) nextPerson: (id) sender;
