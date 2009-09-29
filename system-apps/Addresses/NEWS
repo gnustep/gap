@@ -10,6 +10,8 @@ Since 0.4.7.1:
   o handle also PNG images
   o fixed a link in the framework from absolute to relative, for FHS
     (fix by Richard Stonehouse)
+  o Many fixes in VCFviewer GWorkspace inspector, thanks also to Philippe Roussel
+  o use GSMimeDocument to decode base64 instead of custom code
 
 Since 0.4.7:
 ============
