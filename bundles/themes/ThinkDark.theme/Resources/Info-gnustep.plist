@@ -1,0 +1,9 @@
+{
+    GSThemeAuthors = (
+	"Riccardo Mottola	"
+    );
+    GSThemeDetails = "Think dark.";
+    GSThemeDomain = {
+    };
+    GSThemeIcon = Thematic.png;
+}
