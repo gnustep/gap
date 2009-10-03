@@ -83,18 +83,20 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
 
 -(void) setNewArrayWithoutNotification: (NSArray*) newArray
 {
+    NSMutableIndexSet* indexSet;
+    int i;
+
     if ([newArray isEqual: articles]) {
         return;  // nothing changed
     }
     
     // Calculates the indexes of the currently selected articles
     // in the new table (if they are present)
-    NSMutableIndexSet* indexSet = [NSMutableIndexSet new];
+    indexSet = [NSMutableIndexSet new];
     
-    int i;
     for (i=0; i<[articles count]; i++) { // for all row numbers in table
         if ([table isRowSelected: i]) {
-            id<Article> article = [articles objectAtIndex: i];
+            id article = [articles objectAtIndex: i];
             int newIndex = [newArray indexOfObject: article];
             if (newIndex != NSNotFound) {
                 [indexSet addIndex: newIndex];
@@ -235,6 +237,8 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
               row: (int) rowIndex
 {
     if (aTableColumn == ratingCol) {
+	id article;
+
         /* We can't keep that as an assertion now, as it can easily fail when
          * the broken GNUstep NSTableView lets you edit the string value for the cell.
          */
@@ -242,7 +246,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
             NSLog(@"Warning: %@ is not a number value.", anObj);
         }
         
-        id<Article> article = [articles objectAtIndex: rowIndex];
+        article = [articles objectAtIndex: rowIndex];
         [article setRating: [anObj intValue]];
     }
 }

@@ -23,13 +23,18 @@
 
 -(void) awakeFromNib
 {
-    NSLog(@"Font component awoke from Nib.");
     NSFontManager* fontManager = [NSFontManager sharedFontManager];
+    NSArray* fonts;
+    NSArray* sizeArray;
+    NSString* imgPath;
+    NSImage* fontsImage;
+
+    NSLog(@"Font component awoke from Nib.");
     
-    NSArray* fonts = [[fontManager availableFontNamesWithTraits: 0]
+    fonts = [[fontManager availableFontNamesWithTraits: 0]
         sortedArrayUsingSelector: @selector(compare:)];
     
-    NSArray* sizeArray = [NSArray arrayWithObjects:
+    sizeArray = [NSArray arrayWithObjects:
         [NSNumber numberWithFloat: 7],
         [NSNumber numberWithFloat: 8],
         [NSNumber numberWithFloat: 9],
@@ -69,10 +74,10 @@
     [articleFixedFontBox attachToSizeDefault: @"RSSReaderFixedArticleContentSizeDefaults"];
     
     // Load font image and give name
-    NSString* imgPath = [[NSBundle bundleForClass: [self class]]
+    imgPath = [[NSBundle bundleForClass: [self class]]
         pathForResource: @"Fonts" ofType: @"tiff" ];
     NSAssert1([imgPath length] > 0, @"Bad image path %@", imgPath);
-    NSImage* fontsImage = [[NSImage alloc] initWithContentsOfFile: imgPath];
+    fontsImage = [[NSImage alloc] initWithContentsOfFile: imgPath];
     NSAssert(fontsImage != nil, @"\"Fonts\" image couldn't be loaded from the resources.");
     [fontsImage setName: @"Fonts"];
 }

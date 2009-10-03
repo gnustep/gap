@@ -63,6 +63,7 @@ static NSMutableDictionary* titleToFontSizeDict = nil;
 
 -(void) setSizeOptions: (NSArray*) sizeOptions
 {
+    int i;
     NSMutableArray* sizeOptionsTitles = [NSMutableArray new];
     NSAssert(sizeSelector != nil, @"Where is my size selector?");
     
@@ -70,7 +71,6 @@ static NSMutableDictionary* titleToFontSizeDict = nil;
         ASSIGN(titleToFontSizeDict, [NSMutableDictionary new]);
     }
     
-    int i;
     for (i=0; i<[sizeOptions count]; i++) {
         NSString* floatObj = [sizeOptions objectAtIndex: i];
         NSString* title = [floatObj description];
@@ -91,8 +91,9 @@ static NSMutableDictionary* titleToFontSizeDict = nil;
 
 -(void) attachToNameDefault: (NSString*) nameDefaultName;
 {
+    NSString* selName;
     ASSIGN(nameDefault, nameDefaultName);
-    NSString* selName = [[NSUserDefaults standardUserDefaults] objectForKey: nameDefault];
+    selName = [[NSUserDefaults standardUserDefaults] objectForKey: nameDefault];
     
     [fontSelector selectItemWithTitle: selName];
     
@@ -101,8 +102,9 @@ static NSMutableDictionary* titleToFontSizeDict = nil;
 
 -(void) attachToSizeDefault: (NSString*) sizeDefaultName
 {
+    NSNumber* size;
     ASSIGN(sizeDefault, sizeDefaultName);
-    NSNumber* size = [[NSUserDefaults standardUserDefaults] objectForKey: sizeDefault];
+    size = [[NSUserDefaults standardUserDefaults] objectForKey: sizeDefault];
     
     [sizeSelector selectItemWithTitle: [size description]];
 }

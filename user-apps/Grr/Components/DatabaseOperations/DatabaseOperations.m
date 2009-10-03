@@ -35,6 +35,9 @@
 - (id) init
 {
     if ((self = [super init]) != nil) {
+        NSMenu* feedMenu;
+        NSArray* identifiers;
+
         // ------------------------------
         // Toolbar items
         // ------------------------------
@@ -104,7 +107,7 @@
         // FIXME: Add category item
         
         // Link with main menu
-        NSMenu* feedMenu = [[[NSMenu alloc] init] autorelease];
+        feedMenu = [[[NSMenu alloc] init] autorelease];
         [feedMenu addItem: fetchAllMenuItem];
         [feedMenu addItem: fetchMenuItem];
         [feedMenu addItem: subscribeMenuItem];
@@ -120,7 +123,7 @@
         // -------------------------------------
         // Prepare toolbar delegation
         // -------------------------------------
-        NSArray* identifiers = [NSArray arrayWithObjects:
+        identifiers = [NSArray arrayWithObjects:
             FETCH_ALL_IDENTIFIER,
             FETCH_IDENTIFIER,
             SUBSCRIBE_IDENTIFIER,
@@ -143,6 +146,7 @@
 -(void)componentDidUpdateSet: (NSNotification*) aNotification
 {
     id<OutputProvidingComponent> component = [aNotification object];
+    BOOL isEnabled;
     
     ASSIGN(selectedFeeds, [component objectsForPipeType: [PipeType feedType]]);
     ASSIGN(selectedElements, [component objectsForPipeType: [PipeType databaseElementType]]);
@@ -166,7 +170,7 @@
     }
     
     // change the enabled state for the feed operation items
-    BOOL isEnabled = ([selectedFeeds count] > 0) ? YES : NO;
+    isEnabled = ([selectedFeeds count] > 0) ? YES : NO;
     [fetchItem setEnabled: isEnabled];
     [deleteMenuItem setEnabled: isEnabled];
     [fetchMenuItem setEnabled: isEnabled];
@@ -262,13 +266,14 @@ willBeInsertedIntoToolbar: (BOOL)flag
                                inCategory: cat
                                  position: [[cat elements] count]];
         } else {
+            id<Category> cat;
+            int index;
             NSAssert(
                 [subscriptionReferenceElement conformsToProtocol: @protocol(DatabaseElement)],
                 @"Bad subscription reference element"
             );
             
-            id<Category> cat = [subscriptionReferenceElement superElement];
-            int index;
+            cat = [subscriptionReferenceElement superElement];
             
             if (cat == nil) {
                 index = [[db topLevelElements] indexOfObject: subscriptionReferenceElement];

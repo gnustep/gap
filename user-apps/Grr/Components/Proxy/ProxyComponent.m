@@ -89,11 +89,11 @@
 
 -(void) proxyUseButtonChanged: (id)sender
 {
+    BOOL enabled;
     int state = [proxyUseButton state];
     
     NSAssert1(state == NSOnState || state == NSOffState, @"Bad button state %d", state);
     
-    BOOL enabled;
     if (state == NSOnState) {
         enabled = YES;
     } else { // NSOffState
