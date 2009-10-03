@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/05/01 23:08:38 $
+// $Revision: 1.2 $
+// $Date: 2009/10/03 12:41:44 $
 
 /* system includes */
 #include <Addresses/Addresses.h>
@@ -108,14 +108,14 @@ char *ok = "OK\n";
       sockaddr.sin_port = GSSwapHostI16ToBig(port);
 
       if((sock = socket(AF_INET, SOCK_STREAM, PF_UNSPEC)) == -1)
-	NSLog(@"Unable to create socket - %s\n", GSLastErrorStr(errno));
+	NSLog(@"Unable to create socket - %s\n", strerror(errno));
       else if(setsockopt(sock, SOL_SOCKET, SO_REUSEADDR,
 			 (char*)&reuse, sizeof(int)) == -1) 
-	NSLog(@"Couldn't set reuse on socket - %s\n", GSLastErrorStr(errno));
+	NSLog(@"Couldn't set reuse on socket - %s\n", strerror(errno));
       else if(bind(sock, (struct sockaddr*)&sockaddr, sizeof(sockaddr)))
-	NSLog(@"Couldn't bind to port %d - %s\n", port, GSLastErrorStr(errno));
+	NSLog(@"Couldn't bind to port %d - %s\n", port, strerror(errno));
       else if(listen(sock, 5) == -1)
-	NSLog(@"Couldn't listen - %s\n", port, GSLastErrorStr(errno));
+	NSLog(@"Couldn't listen - %s\n", port, strerror(errno));
       else
 	{
 	  _handle = [[NSFileHandle alloc] initWithFileDescriptor: sock
