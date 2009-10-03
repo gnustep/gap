@@ -27,12 +27,14 @@
 
 -(void)awakeFromNib
 {
+    NSNotificationCenter* notifCenter;
+
     [_view retain];
     ASSIGN(textView, [scrollView documentView]);
     
     [textView setDelegate: self];
     
-    NSNotificationCenter* notifCenter = [NSNotificationCenter defaultCenter];
+    notifCenter = [NSNotificationCenter defaultCenter];
     
     [notifCenter addObserver: self
                     selector: @selector(scrollUp:)
@@ -123,8 +125,8 @@
    clickedOnLink: (id) link
          atIndex: (unsigned) charIndex
 {
-    NSLog(@"textView:clickedOnLink: %@ atIndex: %d", link, charIndex);
     BOOL result = NO;
+    NSLog(@"textView:clickedOnLink: %@ atIndex: %d", link, charIndex);
     
     if ([link isKindOfClass: [NSURL class]]) {
         result = [[NSWorkspace sharedWorkspace] openURL: (NSURL*)link];

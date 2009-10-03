@@ -128,11 +128,12 @@ static NSImage* arrowDown = nil;
 
 -(void) databaseChanged: (NSNotification*) notif
 {
+    int index;
     NSAssert(outlineView != nil, @"No outline view");
     
 #ifdef OUTLINEVIEW_SELECTION_HACK
     // FIXME: This strange hack tries to keep the selection. (Needed for -gui 0.11.0)
-    int index = [outlineView selectedRow];
+    index = [outlineView selectedRow];
 #endif
     [outlineView reloadData];
 #ifdef OUTLINEVIEW_SELECTION_HACK
@@ -157,6 +158,7 @@ static NSImage* arrowDown = nil;
 -(void) databaseElementRequestsFocus: (NSNotification*) notif
 {
     id<DatabaseElement> databaseElement = [notif object];
+    int index;
     
     // First iterate through all parent elements and expand them all
     id<Category> parent = [databaseElement superElement];
@@ -167,7 +169,7 @@ static NSImage* arrowDown = nil;
     
     // Get row index and select
     [outlineView reloadData];
-    int index = [outlineView rowForItem: databaseElement];
+    index = [outlineView rowForItem: databaseElement];
     if (index != -1) {
         [outlineView selectRowIndexes: [NSIndexSet indexSetWithIndex: index]
                  byExtendingSelection: NO];
@@ -179,15 +181,16 @@ static NSImage* arrowDown = nil;
  */
 -(void) redrawFeedNotification: (NSNotification*) notif
 {
+    int index;
     id<Feed> feed = [notif object];
     
     [self redrawFeed: feed];
 
-	int index = [outlineView selectedRow];
-	if ((index < 0) || (index == NSNotFound))
-		return;
-	if (feed == [outlineView itemAtRow: index])
-	    [self notifyChanges];
+    index = [outlineView selectedRow];
+    if ((index < 0) || (index == NSNotFound))
+	return;
+    if (feed == [outlineView itemAtRow: index])
+	[self notifyChanges];
 }
 
 
@@ -294,14 +297,18 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 -(NSSet*) objectsForPipeType: (id<PipeType>)aPipeType
 {
+    id elem;
+    NSSet* result;
+
     // If nothing is selected, just return nothing
     int index = [outlineView selectedRow];
+
     if (index == -1) {
         return [NSSet new];
     }
     
-    id<DatabaseElement> elem = [outlineView itemAtRow: index];
-    NSSet* result = nil;
+    elem = [outlineView itemAtRow: index];
+    result = nil;
     
     if (aPipeType == [PipeType articleType]) {
         if ([elem conformsToProtocol: @protocol(ArticleGroup)]) {
@@ -339,8 +346,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
  */
 - (void) outlineViewSelectionDidChange: (NSNotification *)aNotification
 {
-    static id<DatabaseElement> currentSelection = nil;
-    id<DatabaseElement> newSelection = nil;
+    static id currentSelection = nil;
+    id newSelection = nil;
     
     int rowIndex = [outlineView selectedRow];
     
@@ -440,13 +447,14 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 {
     NSPasteboard* pboard = [info draggingPasteboard];
     if ([[pboard types] containsObject: DatabaseElementRefPboardType]) {
+        BOOL result;
         NSData* data = [pboard dataForType: DatabaseElementRefPboardType];
         
-        id<DatabaseElement> elem = nil;
+        id elem = nil;
         [data getBytes: &elem length: 4]; // FIXME: Won't work with 64 bit processors!
         
         // I hope that's a pointer. :-]
-        BOOL result = [[Database shared] moveElement: elem
+        result = [[Database shared] moveElement: elem
                                         intoCategory: item
                                             position: index];
         return result;
@@ -471,23 +479,26 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
        toPasteboard: (NSPasteboard*)pboard
 {
     NSMutableArray* types = [NSMutableArray new];
+    NSData* databaseElemData;
+    id item;
+    NSURL* url;
     
     if ([items count] != 1) {
         return NO;
     }
     
-    id item = [items objectAtIndex: 0];
+    item = [items objectAtIndex: 0];
     
-    NSURL* url = nil;
+    url = nil;
     if ([item conformsToProtocol: @protocol(Feed)]) {
-        id<Feed> feed = item;
+        id feed = item;
         NSURL* url = [feed feedURL];
         if (url != nil) {
             [types addObject: NSURLPboardType];
         }
     }
     
-    NSData* databaseElemData = nil;
+    databaseElemData = nil;
     if ([item conformsToProtocol: @protocol(DatabaseElement)]) {
         // FIXME: This works only on systems with 32 bit pointers. What is the clean solution?
         databaseElemData = [NSData dataWithBytes: &item length: 4];

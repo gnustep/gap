@@ -33,19 +33,22 @@
 @implementation TreeDatabaseComponent (Private)
 -(NSDictionary*)plistDictionary
 {
+    NSMutableDictionary* dict;
+    NSMutableArray* mutArr;
+    int i;
+
     NSAssert(
         topLevelElements != nil,
         @"Database was not initialized before archiving!"
     );
     
-    NSMutableDictionary* dict = [NSMutableDictionary new];
+    dict = [NSMutableDictionary new];
     
     [dict setObject: @"Grr TreeDatabaseComponent" forKey: @"generator"];
     [dict setObject: [NSDate new] forKey: @"modified"];
     
-    NSMutableArray* mutArr = [NSMutableArray new];
+    mutArr = [NSMutableArray new];
     
-    int i;
     for (i=0; i<[topLevelElements count]; i++) {
         id<DatabaseElement> elem = [topLevelElements objectAtIndex: i];
         
@@ -130,24 +133,27 @@
 {
     NSDictionary* dict =
         [NSDictionary dictionaryWithContentsOfFile: [self databaseStoragePath]];
+    NSArray* elems;
+    int i; // for iterations
+    NSArray* feeds;
     
     // Create new empty database
     ASSIGN(topLevelElements, [NSMutableArray new]);
     ASSIGN(allArticles, [NSMutableSet new]);
     
-    int i; // for iterations
     
 #ifdef BACKWARDS_COMPATIBILITY
     // Backwards compatibility with Article Database Component
-    NSArray* feeds = [dict objectForKey: @"feeds"];
+    feeds = [dict objectForKey: @"feeds"];
     for (i=0; i<[feeds count]; i++) {
+        NSEnumerator* enumerator;
+        id<RSSArticle> article;
         id<Feed> feed = [Feed feedFromPlistDictionary: [feeds objectAtIndex: i]];
         
         NSLog(@"Unarchived feed %@", [feed feedName]);
         [topLevelElements addObject: feed];
         
-        NSEnumerator* enumerator = [feed articleEnumerator];
-        id<RSSArticle> article;
+        enumerator = [feed articleEnumerator];
         while ((article = [enumerator nextObject]) != nil) {
             //NSLog(@"  - article %@ (feed=%@)", [article headline], [[article feed] feedName]);
             [allArticles addObject: article];
@@ -155,7 +161,7 @@
     }
 #endif
     
-    NSArray* elems = [dict objectForKey: @"topLevelElements"];
+    elems = [dict objectForKey: @"topLevelElements"];
     for (i=0; i<[elems count]; i++) {
         NSDictionary* elemDict = [elems objectAtIndex: i];
         id<DatabaseElement> elem = DatabaseElementFromPlistDictionary(elemDict);
@@ -244,13 +250,13 @@
 -(BOOL)_removeElement: (id<DatabaseElement>)anElement
      fromMutableArray: (NSMutableArray*)array
 {
+    int i;
     BOOL success = NO;
     if ([array containsObject: anElement]) {
         [array removeObject: anElement];
         success = YES;
     }
     
-    int i;
     for (i=0; i<[array count]; i++) {
         id<DatabaseElement> elem = [array objectAtIndex: i];
         
@@ -291,6 +297,8 @@
            inCategory: (id<Category>)aCategory
              position: (int)index
 {
+    id<Feed> feed;
+
     if (aURL == nil) {
         return NO;
     }
@@ -324,7 +332,7 @@
 #endif // VERSION
 #endif // GNUSTEP
     
-    id<Feed> feed = [[RSSFactory sharedFactory] feedWithURL: aURL];
+    feed = [[RSSFactory sharedFactory] feedWithURL: aURL];
     
     if (feed == nil) {
         return NO;
@@ -450,6 +458,8 @@
       intoCategory: (id<Category>)aCategory
           position: (int)targetIndex
 {
+    id<Category> origSuperCategory;
+    BOOL result = YES;
     // First check if we're just trying to move a category into a subcategory
     // of itself. The method directly fails in this case.
     id<Category> tmpCategory = aCategory;
@@ -460,8 +470,7 @@
         tmpCategory = [tmpCategory superElement];
     }
     
-    id<Category> origSuperCategory = [anElement superElement];
-    BOOL result = YES;
+    origSuperCategory = [anElement superElement];
     
     // Delete
     if (origSuperCategory == nil) {

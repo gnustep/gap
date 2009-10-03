@@ -55,6 +55,10 @@ static NSDictionary* entityDictionary = nil;
  * Initialises the constants for the parser. (see above)
  */
 void init_constants() {
+    NSMutableCharacterSet* wsAndTagClosing;
+    NSMutableCharacterSet* wsAndRightTagBrackets;
+
+
     // Assume that when this is nil, every variable is nil and vice versa
     if (openingTagsHandlers != nil) {
         return;
@@ -87,12 +91,12 @@ void init_constants() {
     outOfTagStopSet = [[NSCharacterSet characterSetWithCharactersInString: @"&<"] retain];
     whitespaces = [[NSCharacterSet whitespaceAndNewlineCharacterSet] retain];
     
-    NSMutableCharacterSet* wsAndTagClosing = [NSMutableCharacterSet new];
+    wsAndTagClosing = [NSMutableCharacterSet new];
     [wsAndTagClosing addCharactersInString: @"/>"];
     [wsAndTagClosing formUnionWithCharacterSet: whitespaces];
     whitespacesAndTagClosing = [wsAndTagClosing retain];
     
-    NSMutableCharacterSet* wsAndRightTagBrackets = [NSMutableCharacterSet new];
+    wsAndRightTagBrackets = [NSMutableCharacterSet new];
     [wsAndRightTagBrackets addCharactersInString: @">"];
     [wsAndRightTagBrackets formUnionWithCharacterSet: whitespaces];
     whitespacesAndRightTagBrackets = [wsAndRightTagBrackets retain];
@@ -260,16 +264,18 @@ void init_constants() {
 
 -(void) foundEscape: (NSString*) escape
 {
+    unichar value;
+    unichar ch;
+
     NSAssert([escape length] > 0, @"Empty escape sequence &;!");
     
-    unichar value;
-    unichar ch = [escape characterAtIndex: 0];
+    ch = [escape characterAtIndex: 0];
     if (ch == '#') {
+        int i;
         // FIXME: Is that a UNICODE number?
         
         // this parses the number (faster than using NSScanner and easily done)
         value = 0; // a character is a number, too. (value is a unichar)
-        int i;
         for (i=1; i<[escape length]; i++) {
             value = value * 10;
             value += [escape characterAtIndex: i] - '0';
@@ -432,6 +438,7 @@ void init_constants() {
     NSScanner* scanner = [NSScanner scannerWithString: self];
     NSString* str = nil;
     HTMLInterpreter* interpreter = [HTMLInterpreter sharedInterpreter];
+    NSAttributedString* result;
     
     init_constants();
     
@@ -454,19 +461,24 @@ void init_constants() {
                 [interpreter foundEscape: str];
                 [scanner scanString: @";" intoString: (NSString**)nil];
             } else if (ch == '\n') {
+                BOOL res;
+
                 NSLog(@"parse newline");
-                BOOL res = [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
+                res = [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
                 NSAssert(res == YES, @"Couldn't parse newline!");
                 [interpreter foundNewline];
             } else {
-                // ASSERT: At the beginning of a tag.
-                NSAssert1(ch == '<', @"Beginning of a tag expected, got '%c' instead", ch);
-                NSMutableDictionary* attrDict = [NSMutableDictionary new];
                 NSString* name = nil;
-                
-                // default values, change dependent on if it's <xxx>, <xxx/> or </xxx>
                 BOOL opening = YES;
                 BOOL closing = NO;
+                NSMutableDictionary* attrDict;
+                unichar nextChar;
+
+                // ASSERT: At the beginning of a tag.
+                NSAssert1(ch == '<', @"Beginning of a tag expected, got '%c' instead", ch);
+                attrDict = [NSMutableDictionary new];
+                
+                // default values, change dependent on if it's <xxx>, <xxx/> or </xxx>
                 
                 [scanner scanString: @"<" intoString: (NSString**)nil];
                 
@@ -479,7 +491,7 @@ void init_constants() {
                 [scanner scanUpToCharactersFromSet: whitespacesAndTagClosing intoString: &name];
                 [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
                 
-                unichar nextChar = [self characterAtIndex: [scanner scanLocation]];
+                nextChar = [self characterAtIndex: [scanner scanLocation]];
                 while (nextChar != '>' && nextChar != '/') {
                     // ASSERT: At the beginning of a new attribute
                     NSString* attrName;
@@ -547,7 +559,7 @@ void init_constants() {
         }
     }
     
-    NSAttributedString* result = [interpreter result];
+    result = [interpreter result];
     [interpreter stopParsing];
     return result;
 }
