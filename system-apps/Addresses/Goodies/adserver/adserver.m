@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/10/03 12:41:44 $
+// $Revision: 1.3 $
+// $Date: 2009/10/03 12:42:45 $
 
 /* system includes */
 #include <Addresses/Addresses.h>
@@ -46,6 +46,7 @@ char *ok = "OK\n";
 - (void) dealloc
 {
   [_handle release];
+  [super dealloc];
 }
 - (NSFileHandle*) fileHandle
 {
@@ -145,6 +146,7 @@ char *ok = "OK\n";
   [_handle autorelease];
   [_connections autorelease];
   [[NSNotificationCenter defaultCenter] removeObserver: self];
+  [super dealloc];
 }
 
 - (ADAddressBook*) addressBookForReadOnlyAccessWithAuth: (id) auth
