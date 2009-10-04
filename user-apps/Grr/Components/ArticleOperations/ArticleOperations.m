@@ -30,6 +30,9 @@
 -(id)init
 {
     if ((self = [super init]) != nil) {
+        NSArray* identifiers;
+        NSMenu* menu;
+
         // Article browsing toolbar item
         browseItem = [[NSToolbarItem alloc] initWithItemIdentifier: BROWSE_IDENTIFIER];
         [browseItem setLabel: _(@"View in WWW")];
@@ -52,7 +55,7 @@
         #endif
         
         // Provided identifiers
-        NSArray* identifiers = [NSArray arrayWithObjects:
+        identifiers = [NSArray arrayWithObjects:
             BROWSE_IDENTIFIER,
             #ifdef GRRRDEBUG
             @"Grr Debug Article",
@@ -66,7 +69,7 @@
         ASSIGN(selectedArticles, [NSSet new]);
         
         // Putting together the article menu
-        NSMenu* menu = [[[NSMenu alloc] init] autorelease];
+        menu = [[[NSMenu alloc] init] autorelease];
         [menu addItem: browseMenuItem];
         [[NSApp mainMenu] setSubmenu: menu forItem:
             [[NSApp mainMenu] itemWithTitle:
@@ -82,11 +85,12 @@
 
 -(void)componentDidUpdateSet: (NSNotification*) aNotification
 {
+    BOOL isEnabled;
     id<OutputProvidingComponent> component = [aNotification object];
     
     ASSIGN(selectedArticles, [component objectsForPipeType: [PipeType articleType]]);
     
-    BOOL isEnabled = ([selectedArticles count] > 0) ? YES : NO;
+    isEnabled = ([selectedArticles count] > 0) ? YES : NO;
     [browseItem setEnabled: isEnabled];
     
     #ifdef GRRRDEBUG

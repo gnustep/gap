@@ -133,9 +133,10 @@ willBeInsertedIntoToolbar: (BOOL)flag
 {
 	// Note: For outputSet == nil, this evaluates to TRUE.
 	if ([outputSet isEqualToSet: newOutputSet] == NO) {
+		NSNotificationCenter* center;
 		ASSIGN(outputSet, newOutputSet);
 		
-		NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+		center = [NSNotificationCenter defaultCenter];
 		[center postNotificationName: ComponentDidUpdateNotification
 		                      object: self];
 	}
