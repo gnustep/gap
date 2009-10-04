@@ -78,6 +78,9 @@
             result = [[Database shared] subscribeToURL: url
                                             inCategory: (id<Category>)referenceElement];
         } else {
+            int index = 0;
+            id<Category> category;
+
             NSAssert1(
                 [referenceElement conformsToProtocol: @protocol(DatabaseElement)],
                 @"The reference element %@ is not a DatabaseElement.", referenceElement
@@ -85,8 +88,7 @@
             
             // The category to put the subscription into is the super category of the
             // reference element, the index is one below the reference element.
-            id<Category> category = [referenceElement superElement];
-            int index = 0;
+            category = [referenceElement superElement];
             if (category != nil) {
                 index = [[category elements] indexOfObject: referenceElement] + 1;
             } else {
@@ -114,8 +116,8 @@
 
 -(IBAction) subscribe: (id)sender
 {
-    NSLog(@"URL: %@", [urlField stringValue]);
     NSURL* URL = [NSURL URLWithString: [urlField stringValue]];
+    NSLog(@"URL: %@", [urlField stringValue]);
     
     if (URL == nil) {
         NSRunAlertPanel(
