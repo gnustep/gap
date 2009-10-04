@@ -73,12 +73,11 @@
         // ----------------------- FILL ------------------------
         fllLabel = [[[NSTextField alloc] init] autorelease];
         [fllLabel setFrame: NSMakeRect(35, 275, 40, 20)];
-        [fllLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [fllLabel setTextColor:[NSColor darkGrayColor]];
         [fllLabel setBezeled:NO];
         [fllLabel setEditable:NO];
         [fllLabel setSelectable:NO];
         [fllLabel setStringValue: @"filled"];
+        [fllLabel setDrawsBackground:NO];
         [self addSubview: fllLabel];
 
         fllCyanField = [[[NSTextField alloc] init] autorelease];
@@ -86,8 +85,7 @@
         [self addSubview: fllCyanField];
         fllCyanLabel = [[[NSTextField alloc] init] autorelease];
         [fllCyanLabel setFrame: NSMakeRect(125, 250, 60, 20)];
-        [fllCyanLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [fllCyanLabel setTextColor:[NSColor darkGrayColor]];
+        [fllCyanLabel setDrawsBackground:NO];
         [fllCyanLabel setBezeled:NO];
         [fllCyanLabel setEditable:NO];
         [fllCyanLabel setSelectable:NO];
@@ -99,8 +97,7 @@
         [self addSubview: fllMagentaField];
         fllMagentaLabel = [[[NSTextField alloc] init] autorelease];
         [fllMagentaLabel setFrame: NSMakeRect(125, 220, 60, 20)];
-        [fllMagentaLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [fllMagentaLabel setTextColor:[NSColor darkGrayColor]];
+        [fllMagentaLabel setDrawsBackground:NO];
         [fllMagentaLabel setBezeled:NO];
         [fllMagentaLabel setEditable:NO];
         [fllMagentaLabel setSelectable:NO];
@@ -112,8 +109,7 @@
         [self addSubview: fllYellowField];
         fllYellowLabel = [[[NSTextField alloc] init] autorelease];
         [fllYellowLabel setFrame: NSMakeRect(125, 190, 60, 20)];
-        [fllYellowLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [fllYellowLabel setTextColor:[NSColor darkGrayColor]];
+        [fllYellowLabel setDrawsBackground:NO];
         [fllYellowLabel setBezeled:NO];
         [fllYellowLabel setEditable:NO];
         [fllYellowLabel setSelectable:NO];
@@ -125,8 +121,7 @@
         [self addSubview: fllBlakField];
         fllBlakLabel = [[[NSTextField alloc] init] autorelease];
         [fllBlakLabel setFrame: NSMakeRect(125, 160, 60, 20)];
-        [fllBlakLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [fllBlakLabel setTextColor:[NSColor darkGrayColor]];
+        [fllBlakLabel setDrawsBackground:NO];
         [fllBlakLabel setBezeled:NO];
         [fllBlakLabel setEditable:NO];
         [fllBlakLabel setSelectable:NO];
@@ -149,8 +144,7 @@
         // ---------------------- STROKE -----------------------
         stkLabel = [[[NSTextField alloc] init] autorelease];
         [stkLabel setFrame: NSMakeRect(210, 275, 40, 20)];
-        [stkLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [stkLabel setTextColor:[NSColor darkGrayColor]];
+        [stkLabel setDrawsBackground:NO];
         [stkLabel setBezeled:NO];
         [stkLabel setEditable:NO];
         [stkLabel setSelectable:NO];
@@ -162,8 +156,7 @@
         [self addSubview: stkCyanField];
         stkCyanLabel = [[[NSTextField alloc] init] autorelease];
         [stkCyanLabel setFrame: NSMakeRect(300, 250, 60, 20)];
-        [stkCyanLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [stkCyanLabel setTextColor:[NSColor darkGrayColor]];
+        [stkCyanLabel setDrawsBackground:NO];
         [stkCyanLabel setBezeled:NO];
         [stkCyanLabel setEditable:NO];
         [stkCyanLabel setSelectable:NO];
@@ -175,8 +168,7 @@
         [self addSubview: stkMagentaField];
         stkMagentaLabel = [[[NSTextField alloc] init] autorelease];
         [stkMagentaLabel setFrame: NSMakeRect(300, 220, 60, 20)];
-        [stkMagentaLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [stkMagentaLabel setTextColor:[NSColor darkGrayColor]];
+        [stkMagentaLabel setDrawsBackground:NO];
         [stkMagentaLabel setBezeled:NO];
         [stkMagentaLabel setEditable:NO];
         [stkMagentaLabel setSelectable:NO];
@@ -188,8 +180,7 @@
         [self addSubview: stkYellowField];
         stkYellowLabel = [[[NSTextField alloc] init] autorelease];
         [stkYellowLabel setFrame: NSMakeRect(300, 190, 60, 20)];
-        [stkYellowLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [stkYellowLabel setTextColor:[NSColor darkGrayColor]];
+        [stkYellowLabel setDrawsBackground:NO];
         [stkYellowLabel setBezeled:NO];
         [stkYellowLabel setEditable:NO];
         [stkYellowLabel setSelectable:NO];
@@ -201,8 +192,7 @@
         [self addSubview: stkBlakField];
         stkBlakLabel = [[[NSTextField alloc] init] autorelease];
         [stkBlakLabel setFrame: NSMakeRect(300, 160, 60, 20)];
-        [stkBlakLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [stkBlakLabel setTextColor:[NSColor darkGrayColor]];
+        [stkBlakLabel setDrawsBackground:NO];
         [stkBlakLabel setBezeled:NO];
         [stkBlakLabel setEditable:NO];
         [stkBlakLabel setSelectable:NO];
@@ -225,8 +215,7 @@
         // ---------------------- LINE CAP ----------------------
         lineCapLabel = [[[NSTextField alloc] init] autorelease];
         [lineCapLabel setFrame: NSMakeRect(380, 275, 80, 20)];
-        [lineCapLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [lineCapLabel setTextColor:[NSColor darkGrayColor]];
+        [lineCapLabel setDrawsBackground:NO];
         [lineCapLabel setBezeled:NO];
         [lineCapLabel setEditable:NO];
         [lineCapLabel setSelectable:NO];
@@ -260,8 +249,7 @@
         // ---------------------- LINE JOIN ----------------------
         lineJoinLabel = [[[NSTextField alloc] init] autorelease];
         [lineJoinLabel setFrame: NSMakeRect(380, 190, 80, 20)];
-        [lineJoinLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [lineJoinLabel setTextColor:[NSColor darkGrayColor]];
+        [lineJoinLabel setDrawsBackground:NO];
         [lineJoinLabel setBezeled:NO];
         [lineJoinLabel setEditable:NO];
         [lineJoinLabel setSelectable:NO];
@@ -295,8 +283,7 @@
         [self addSubview: flatnessField];
         flatnessLabel = [[[NSTextField alloc] init] autorelease];
         [flatnessLabel setFrame: NSMakeRect(55, 120, 60, 20)];
-        [flatnessLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [flatnessLabel setTextColor:[NSColor darkGrayColor]];
+        [flatnessLabel setDrawsBackground:NO];
         [flatnessLabel setBezeled:NO];
         [flatnessLabel setEditable:NO];
         [flatnessLabel setSelectable:NO];
@@ -312,8 +299,7 @@
         [self addSubview: miterlimitField];
         miterlimitLabel = [[[NSTextField alloc] init] autorelease];
         [miterlimitLabel setFrame: NSMakeRect(175, 120, 60, 20)];
-        [miterlimitLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [miterlimitLabel setTextColor:[NSColor darkGrayColor]];
+        [miterlimitLabel setDrawsBackground:NO];
         [miterlimitLabel setBezeled:NO];
         [miterlimitLabel setEditable:NO];
         [miterlimitLabel setSelectable:NO];
@@ -329,8 +315,7 @@
         [self addSubview: linewidthField];
         linewidthLabel = [[[NSTextField alloc] init] autorelease];
         [linewidthLabel setFrame: NSMakeRect(295, 120, 60, 20)];
-        [linewidthLabel setBackgroundColor:[NSColor lightGrayColor]];
-        [linewidthLabel setTextColor:[NSColor darkGrayColor]];
+        [linewidthLabel setDrawsBackground:NO];
         [linewidthLabel setBezeled:NO];
         [linewidthLabel setEditable:NO];
         [linewidthLabel setSelectable:NO];
@@ -417,44 +402,38 @@
 - (void)fllButtPressed:(id)sender
 {
     id butt = (NSButton *)sender;
-    if([butt state] == NSOnState) {
+    if([butt state] == NSOnState)
+    {
         filled = YES;
         [fllCyanField setStringValue:
             [NSString stringWithFormat:@"%i", (int)fillcyan * 100]];
-        [fllCyanField setBackgroundColor: [NSColor whiteColor]];
         [fllCyanField setEditable: YES];
         [fllCyanField setSelectable: YES];
         [fllMagentaField setStringValue:
             [NSString stringWithFormat:@"%i", (int)fillmagenta * 100]];
-        [fllMagentaField setBackgroundColor: [NSColor whiteColor]];
         [fllMagentaField setEditable: YES];
         [fllMagentaField setSelectable: YES];
         [fllYellowField setStringValue:
             [NSString stringWithFormat:@"%i", (int)fillyellow * 100]];
-        [fllYellowField setBackgroundColor: [NSColor whiteColor]];
         [fllYellowField setEditable: YES];
         [fllYellowField setSelectable: YES];
         [fllBlakField setStringValue:
             [NSString stringWithFormat:@"%i", (int)fillblack * 100]];
-        [fllBlakField setBackgroundColor: [NSColor whiteColor]];
         [fllBlakField setEditable: YES];
         [fllBlakField setSelectable: YES];
-    } else {
+    } else
+    {
         filled = NO;
         [fllCyanField setStringValue: @""];
-        [fllCyanField setBackgroundColor: [NSColor lightGrayColor]];
         [fllCyanField setEditable: NO];
         [fllCyanField setSelectable: NO];
         [fllMagentaField setStringValue: @""];
-        [fllMagentaField setBackgroundColor: [NSColor lightGrayColor]];
         [fllMagentaField setEditable: NO];
         [fllMagentaField setSelectable: NO];
         [fllYellowField setStringValue: @""];
-        [fllYellowField setBackgroundColor: [NSColor lightGrayColor]];
         [fllYellowField setEditable: NO];
         [fllYellowField setSelectable: NO];
         [fllBlakField setStringValue: @""];
-        [fllBlakField setBackgroundColor: [NSColor lightGrayColor]];
         [fllBlakField setEditable: NO];
         [fllBlakField setSelectable: NO];
     }
@@ -469,40 +448,32 @@
         stroked = YES;
         [stkCyanField setStringValue:
             [NSString stringWithFormat:@"%i", (int)strokecyan * 100]];
-        [stkCyanField setBackgroundColor: [NSColor whiteColor]];
         [stkCyanField setEditable: YES];
         [stkCyanField setSelectable: YES];
         [stkMagentaField setStringValue:
             [NSString stringWithFormat:@"%i", (int)strokemagenta * 100]];
-        [stkMagentaField setBackgroundColor: [NSColor whiteColor]];
         [stkMagentaField setEditable: YES];
         [stkMagentaField setSelectable: YES];
         [stkYellowField setStringValue:
             [NSString stringWithFormat:@"%i", (int)strokeyellow * 100]];
-        [stkYellowField setBackgroundColor: [NSColor whiteColor]];
         [stkYellowField setEditable: YES];
         [stkYellowField setSelectable: YES];
         [stkBlakField setStringValue:
             [NSString stringWithFormat:@"%i", (int)strokeblack * 100]];
-        [stkBlakField setBackgroundColor: [NSColor whiteColor]];
         [stkBlakField setEditable: YES];
         [stkBlakField setSelectable: YES];
     } else {
         stroked = NO;
         [stkCyanField setStringValue: @""];
-        [stkCyanField setBackgroundColor: [NSColor lightGrayColor]];
         [stkCyanField setEditable: NO];
         [stkCyanField setSelectable: NO];
         [stkMagentaField setStringValue: @""];
-        [stkMagentaField setBackgroundColor: [NSColor lightGrayColor]];
         [stkMagentaField setEditable: NO];
         [stkMagentaField setSelectable: NO];
         [stkYellowField setStringValue: @""];
-        [stkYellowField setBackgroundColor: [NSColor lightGrayColor]];
         [stkYellowField setEditable: NO];
         [stkYellowField setSelectable: NO];
         [stkBlakField setStringValue: @""];
-        [stkBlakField setBackgroundColor: [NSColor lightGrayColor]];
         [stkBlakField setEditable: NO];
         [stkBlakField setSelectable: NO];
     }
