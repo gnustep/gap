@@ -144,17 +144,21 @@ willBeInsertedIntoToolbar: (BOOL)flag
 
 -(NSSet*) objectsForPipeType: (id<PipeType>)aPipeType;
 {
+    NSSet *retval;
+
     NSAssert2(
         aPipeType == [PipeType articleType],
         @"%@ component does not support pipe type %@",
         self, aPipeType
     );
 
+    retval = nil;
     if (outputSet != nil) {
-	return [NSSet setWithSet: outputSet];
+	retval = [NSSet setWithSet: outputSet];
     } else {
-        return [NSSet set];
+        retval = (NSSet *)[NSSet set];
     }
+    return retval;
 }
 
 @end
