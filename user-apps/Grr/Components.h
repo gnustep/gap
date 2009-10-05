@@ -11,7 +11,6 @@
 #ifndef _PLUGINCONTROLLER_H_
 #define _PLUGINCONTROLLER_H_
 
-#import <objc/Protocol.h>
 #import <Foundation/NSObject.h>
 
 #ifdef ETOILE
