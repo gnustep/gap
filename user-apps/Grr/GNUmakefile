@@ -18,10 +18,6 @@ ADDITIONAL_CFLAGS += -Wall
 ADDITIONAL_CPPFLAGS += -Wall
 endif
 
-ifeq ($(debug), yes)
-ADDITIONAL_FLAGS += -fprofile-arcs -ftest-coverage
-ADDITIONAL_OBJC_LIBS += -lgcov
-endif
 
 APP_NAME = Grr
 
