@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2009/10/05 19:20:50 $
 
 /* system includes */
 /* (none) */
@@ -27,6 +27,7 @@ static ADPluginManager *manager = NULL;
 - (void) dealloc
 {
     [abClassPlugins release];
+    [super dealloc];
 }
 
 + (ADPluginManager*) sharedPluginManager
