@@ -34,11 +34,13 @@
  */
 @interface RSSArticle : NSObject <RSSMutableArticle>
 {
-@private
+  @protected
   NSString*  headline;
   NSString*  url;
   NSString*  description;
   NSDate*    date;
+
+  @private
   NSURL*     enclosure;
   
   /// Links and multimedia content
