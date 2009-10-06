@@ -137,11 +137,7 @@ willBeInsertedIntoToolbar: (BOOL)flag
     id<RSSArticle> article;
     
     while ((article = [enumerator nextObject]) != nil) {
-        NSString *urlStr;
-
-        urlStr = [article url];
-        NSLog(@"FIXME: Should article %@", urlStr);
-        [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:urlStr]];
+        [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:[article url]]];
     }
 }
 
