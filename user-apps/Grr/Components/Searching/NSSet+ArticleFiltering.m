@@ -29,16 +29,20 @@
  */
 - (NSSet*) subsetFilteredForString: (NSString*) searchString
 {
+	NSArray* articles;
+	unsigned subsetSize = 0;
+	id<Article>* subsetObjects;
+	int i;
+	NSSet* resultSet;
+
 	if (searchString == nil || [searchString length] == 0) {
 		return self;
 	}
 	
-	NSArray* articles = [self allObjects];
+	articles = [self allObjects];
 
-	unsigned subsetSize = 0;
-	id<Article>* subsetObjects = malloc( sizeof(id) * [articles count] );
+	subsetObjects = malloc( sizeof(id) * [articles count] );
 	
-	int i;
 	for (i=0; i<[articles count]; i++) {
 	    id<Article> article = [articles objectAtIndex: i];
 	    
@@ -51,7 +55,7 @@
 	    }
 	}
 	NSLog(@"filtered down to %d of %d articles.", subsetSize, [articles count]);
-	NSSet* resultSet = [NSSet setWithObjects: subsetObjects count: subsetSize];
+	resultSet = [NSSet setWithObjects: subsetObjects count: subsetSize];
 
 	free( subsetObjects );
 
