@@ -156,7 +156,7 @@ willBeInsertedIntoToolbar: (BOOL)flag
     if (outputSet != nil) {
 	retval = [NSSet setWithSet: outputSet];
     } else {
-        retval = (NSSet *)[NSSet set];
+        retval = [[NSSet new] autorelease];
     }
     return retval;
 }
