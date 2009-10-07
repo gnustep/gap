@@ -47,7 +47,9 @@ Addresses_LANGUAGES=Dutch English French German Spanish
 include $(GNUSTEP_MAKEFILES)/framework.make
 -include GNUmakefile.postamble
 
+ifneq ($(FOUNDATION_LIB), apple)
 after-Addresses-install::
-	ln -sf Addresses \
-	       $(GNUSTEP_HEADERS)/AddressBook
-
+	@echo "Installing the compatibility header <AddressBook/AddressBook.h> ..."
+	-$(MKINSTALLDIRS) $(GNUSTEP_HEADERS)/AddressBook
+	-$(INSTALL_DATA)  AddressBook.h $(GNUSTEP_HEADERS)/AddressBook/
+endif
