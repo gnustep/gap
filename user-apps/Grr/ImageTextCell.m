@@ -13,6 +13,10 @@
 
 #include "ImageTextCell.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 #include <math.h>
 
 //

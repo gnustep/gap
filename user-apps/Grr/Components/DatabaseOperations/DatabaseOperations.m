@@ -23,6 +23,10 @@
 #import "Database.h"
 #import "NSBundle+Extensions.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 
 #define DELETE_IDENTIFIER @"DB.Ops.Delete"
 #define SUBSCRIBE_IDENTIFIER @"Feed.Ops.Subscribe"

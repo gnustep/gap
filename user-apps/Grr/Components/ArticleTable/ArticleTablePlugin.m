@@ -21,6 +21,9 @@
 
 #import "Article.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
 
 int compareArticleHeadlines( id articleA, id articleB, void* context ) {
     id<Article> a = (id<Article>) articleA;

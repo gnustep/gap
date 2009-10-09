@@ -12,6 +12,10 @@
 
 #import "Category.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 @implementation GrrCategory
 
 // ---------------------------------------------------------

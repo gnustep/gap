@@ -11,6 +11,10 @@
 #import "PipeType.h"
 #import <Foundation/NSString.h>
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 @implementation PipeType
 
 + (id) pipeTypeWithDescription: (NSString*) aDescription

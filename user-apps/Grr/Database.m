@@ -11,6 +11,10 @@
 #import "Database.h"
 #import "NSBundle+Extensions.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 static id<Database> sharedDatabase = nil;
 
 NSString* const GrrDatabasePluginNameDefaults = @"DatabasePluginName";

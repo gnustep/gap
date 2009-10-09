@@ -10,6 +10,10 @@
 
 #import "ArticleGroup.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 NSString* ArticleGroupChangedNotification = @"ArticleGroupChangedNotification";
 
 @implementation ArticleGroup

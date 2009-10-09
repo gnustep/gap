@@ -11,6 +11,10 @@
 #import "PreferencesPanel.h"
 #import "NSBundle+Extensions.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 @implementation PreferencesPanel
 
 // ---------------------------------

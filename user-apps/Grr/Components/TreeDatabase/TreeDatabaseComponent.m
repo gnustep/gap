@@ -24,6 +24,9 @@
 #import "Article.h"
 #import "Feed.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
 
 @interface TreeDatabaseComponent (Private)
 -(NSDictionary*)plistDictionary;
