@@ -16,6 +16,18 @@
 #import "PreferencesPanel.h"
 #import "NSBundle+Extensions.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
+@interface AppController (Private)
+-(void)loadViewProvidingComponent: (id<ViewProvidingComponent>) aComponent overriddenView: (NSView**) overriddenView;
+-(BOOL) loadToolbarProvidingComponent: (id<ToolbarDelegate>) aComponent;
+-(NSArray*) askToolbarProvidersForArrayUsingSelector: (SEL) aSelector
+                                              toolbar: (NSToolbar*) toolbar
+                                       optionalMethod: (BOOL) optionalMethod;
+@end
+
 @implementation AppController (Private)
 
 /**

@@ -23,6 +23,10 @@
 #import "NSString+TolerantHTML.h"
 #import "ExtendedWindow.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 @implementation ArticleTextViewPlugin
 
 -(void)awakeFromNib

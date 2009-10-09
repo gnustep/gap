@@ -21,6 +21,10 @@
 
 #import "Database.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 @implementation SubscriptionPanel
 
 // -----------------------------------------------------

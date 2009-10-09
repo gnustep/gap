@@ -22,6 +22,10 @@
 #import "ArticleOperations.h"
 #import "Article.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 #define BROWSE_IDENTIFIER @"Article.Ops.Browse"
 
 @implementation ArticleOperationsComponent

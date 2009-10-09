@@ -10,6 +10,10 @@
 
 #import "GNRatingCell.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 /**
  * This cell shows a rating displayed as 0 to 5 horizontally aligned stars. You can
  * modify the rating by clicking the desired position of the rightmost star. A click

@@ -19,6 +19,10 @@
 
 #import "FontBox.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 NSString* const FontBoxChangedNotification = @"FontBoxChangedNotification";
 
 static NSMutableDictionary* titleToFontSizeDict = nil;

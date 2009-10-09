@@ -21,6 +21,9 @@
 #import "Database.h"
 #import "NumberedImageTextCell.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
 
 /**
  * Identify GNUstep versions with NSOutlineView selection bug

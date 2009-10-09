@@ -38,5 +38,3 @@ willBeInsertedIntoToolbar: (BOOL)flag;
 
 @end
 
-@interface AppController (Private)
-@end

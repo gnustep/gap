@@ -15,6 +15,10 @@
 #import "NSURL+Proxy.h"
 #endif
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 // ----------------------------------------------
 //    Feed Private interface.
 // ----------------------------------------------

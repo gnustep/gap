@@ -20,6 +20,10 @@
 #import "Searching.h"
 #import "NSSet+ArticleFiltering.h"
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 #define IDENTIFIER @"Search"
 
 

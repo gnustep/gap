@@ -21,6 +21,10 @@
 
 #import <AppKit/AppKit.h>
 
+#ifdef __APPLE__
+#import "GNUstep.h"
+#endif
+
 // #define TAG_SEL_PAIR(tag, sel) [NSNumber numberWithInt: (int)(@selector(sel))], (tag)
 
 
