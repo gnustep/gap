@@ -1,0 +1,48 @@
+{
+    IBClasses = (
+	{
+	    ACTIONS = {
+		hostnameChanged = id;
+		portChanged = id;
+		proxyUseButtonChanged = id;
+	    };
+	    CLASS = ProxyComponent;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		hostnameControl = id;
+		portControl = id;
+		proxyUseButton = id;
+	    };
+	    SUPERCLASS = PreferencesComponent;
+	},
+	{
+	    CLASS = ViewProvidingComponent;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		_view = id;
+	    };
+	    SUPERCLASS = UKNibOwner;
+	},
+	{
+	    CLASS = PreferencesComponent;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = ViewProvidingComponent;
+	},
+	{
+	    CLASS = UKNibOwner;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	},
+	{
+	    ACTIONS = {
+		hostnameChanged = id;
+		portChanged = id;
+		proxyUseButtonChanged = id;
+	    };
+	    CLASS = FirstResponder;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	}
+    );
+    IBVersion = 1;
+}
