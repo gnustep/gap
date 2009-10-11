@@ -300,7 +300,7 @@
            inCategory: (id<Category>)aCategory
              position: (int)index
 {
-    id<Feed> feed;
+    <Feed> feed;
 
     if (aURL == nil) {
         return NO;
