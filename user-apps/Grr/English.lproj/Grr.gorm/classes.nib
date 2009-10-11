@@ -1,0 +1,19 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {openPreferencesPanel = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {articleSetView = id; articleView = id; databaseView = id; window = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = ExtendedWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            ACTIONS = {openPreferencesPanel = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
