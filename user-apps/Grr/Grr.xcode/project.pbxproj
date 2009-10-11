@@ -7,7 +7,6 @@
 	objects = {
 		080E96DDFE201D6D7F000001 = {
 			children = (
-				85687D83107BF7D700B55A9A,
 				85687D35107BF7D000B55A9A,
 				85687D36107BF7D000B55A9A,
 				85687D37107BF7D000B55A9A,
@@ -156,6 +155,7 @@
 		};
 		29B97314FDCFA39411CA2CEA = {
 			children = (
+				85687D83107BF7D700B55A9A,
 				080E96DDFE201D6D7F000001,
 				29B97315FDCFA39411CA2CEA,
 				29B97317FDCFA39411CA2CEA,
@@ -857,6 +857,7 @@
 			);
 			isa = PBXGroup;
 			name = Components;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1196,6 +1197,7 @@
 		};
 		85687DB8107BF97200B55A9A = {
 			children = (
+				857AA8991082A4CB00829DD6,
 				85687DBA107BF98200B55A9A,
 				85687DBB107BF98200B55A9A,
 			);
@@ -1942,6 +1944,30 @@
 			settings = {
 			};
 		};
+		857AA8991082A4CB00829DD6 = {
+			children = (
+				857AA89A1082A4CB00829DD6,
+			);
+			isa = PBXVariantGroup;
+			name = ProxyComponent.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		857AA89A1082A4CB00829DD6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = Components/Proxy/English.lproj/ProxyComponent.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		857AA89B1082A4CB00829DD6 = {
+			fileRef = 857AA8991082A4CB00829DD6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //850
 //851
 //852
@@ -2052,6 +2078,7 @@
 				85687E3E107BFEE600B55A9A,
 				85687E3F107BFEE600B55A9A,
 				85687E4D107C001500B55A9A,
+				857AA89B1082A4CB00829DD6,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
