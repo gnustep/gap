@@ -1,0 +1,46 @@
+{
+    IBClasses = (
+	{
+	    CLASS = ImageTextCell;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSTextFieldCell;
+	},
+	{
+	    CLASS = ViewProvidingComponent;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		_view = id;
+	    };
+	    SUPERCLASS = Component;
+	},
+	{
+	    CLASS = NumberedImageTextCell;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = ImageTextCell;
+	},
+	{
+	    CLASS = DatabaseTreeViewController;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		outlineView = id;
+	    };
+	    SUPERCLASS = ViewProvidingComponent;
+	},
+	{
+	    CLASS = Component;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = UKNibOwner;
+	},
+	{
+	    CLASS = UKNibOwner;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	},
+	{
+	    CLASS = FirstResponder;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	}
+    );
+    IBVersion = 1;
+}
