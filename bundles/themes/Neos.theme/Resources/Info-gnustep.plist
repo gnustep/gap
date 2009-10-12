@@ -1,0 +1,12 @@
+{
+    GSThemeAuthors = (
+	"Riccardo Mottola"
+    );
+    GSThemeDetails = "Neos. The next step in theming.";
+    GSThemeDomain = {
+	GSBackHandlesWindowDecorations = YES;
+    };
+    GSThemeIcon = Thematic.png;
+    GSThemeTiles = {
+    };
+}
