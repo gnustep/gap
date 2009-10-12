@@ -957,6 +957,7 @@
 		};
 		85687D92107BF8BB00B55A9A = {
 			children = (
+				857AA8B51082AC6800829DD6,
 				85687D93107BF8CB00B55A9A,
 				85687D94107BF8CB00B55A9A,
 				85687D95107BF8CB00B55A9A,
@@ -1085,6 +1086,7 @@
 		};
 		85687DA2107BF8FB00B55A9A = {
 			children = (
+				857AA8BA1082AC8700829DD6,
 				85687DA3107BF90A00B55A9A,
 				85687DA4107BF90A00B55A9A,
 			);
@@ -1968,6 +1970,54 @@
 			settings = {
 			};
 		};
+		857AA8B51082AC6800829DD6 = {
+			children = (
+				857AA8B61082AC6800829DD6,
+			);
+			isa = PBXVariantGroup;
+			name = ArticleTextViewPlugin.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		857AA8B61082AC6800829DD6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = Components/ArticleView/English.lproj/ArticleTextViewPlugin.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		857AA8B71082AC6800829DD6 = {
+			fileRef = 857AA8B51082AC6800829DD6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		857AA8BA1082AC8700829DD6 = {
+			children = (
+				857AA8BB1082AC8700829DD6,
+			);
+			isa = PBXVariantGroup;
+			name = DatabaseTreeViewController.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		857AA8BB1082AC8700829DD6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = Components/DatabaseTreeView/English.lproj/DatabaseTreeViewController.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		857AA8BC1082AC8700829DD6 = {
+			fileRef = 857AA8BA1082AC8700829DD6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //850
 //851
 //852
@@ -2079,6 +2129,8 @@
 				85687E3F107BFEE600B55A9A,
 				85687E4D107C001500B55A9A,
 				857AA89B1082A4CB00829DD6,
+				857AA8B71082AC6800829DD6,
+				857AA8BC1082AC8700829DD6,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
