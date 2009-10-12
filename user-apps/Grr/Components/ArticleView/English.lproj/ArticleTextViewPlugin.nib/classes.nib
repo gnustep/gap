@@ -1,0 +1,32 @@
+{
+    IBClasses = (
+	{
+	    CLASS = ViewProvidingComponent;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		_view = id;
+	    };
+	    SUPERCLASS = UKNibOwner;
+	},
+	{
+	    CLASS = UKNibOwner;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	},
+	{
+	    CLASS = ArticleTextViewPlugin;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		headlineView = id;
+		scrollView = id;
+	    };
+	    SUPERCLASS = ViewProvidingComponent;
+	},
+	{
+	    CLASS = FirstResponder;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	}
+    );
+    IBVersion = 1;
+}
