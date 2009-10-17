@@ -22,10 +22,10 @@
 
 @interface FontsComponent : PreferencesComponent
 {
-    FontBox* feedTableFontBox;
-    FontBox* articleTableFontBox;
-    FontBox* articleFontBox;
-    FontBox* articleFixedFontBox;
+    IBOutlet FontBox* feedTableFontBox;
+    IBOutlet FontBox* articleTableFontBox;
+    IBOutlet FontBox* articleFontBox;
+    IBOutlet FontBox* articleFixedFontBox;
 }
 
 @end
