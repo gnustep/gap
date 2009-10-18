@@ -1,0 +1,19 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {subscribe = id; }; 
+            CLASS = SubscriptionPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                panel = NSPanel; 
+                referenceElement = id; 
+                subscriptionButton = NSButton; 
+                urlField = NSTextField; 
+            }; 
+            SUPERCLASS = UKNibOwner; 
+        }, 
+        {CLASS = UKNibOwner; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

@@ -1,0 +1,19 @@
+{
+    IBClasses = (
+        {
+            CLASS = ArticleTablePlugin; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {table = NSTableView; }; 
+            SUPERCLASS = ViewProvidingComponent; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = UKNibOwner; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = ViewProvidingComponent; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"_view" = NSView; }; 
+            SUPERCLASS = UKNibOwner; 
+        }
+    ); 
+    IBVersion = 1; 
+}
