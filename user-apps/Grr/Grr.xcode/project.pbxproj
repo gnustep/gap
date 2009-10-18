@@ -122,6 +122,8 @@
 		19C28FACFE9D520D11CA2CBB = {
 			children = (
 				8D1107320486CEB800E47090,
+				850F6427108BB9A80035D594,
+				850F6480108BC0650035D594,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -150,7 +152,9 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA;
 			projectDirPath = "";
 			targets = (
+				850F6426108BB9A80035D594,
 				8D1107260486CEB800E47090,
+				850F647F108BC0650035D594,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -161,6 +165,8 @@
 				29B97317FDCFA39411CA2CEA,
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
+				850F6428108BB9A80035D594,
+				850F6481108BC0650035D594,
 			);
 			isa = PBXGroup;
 			name = Grr;
@@ -350,6 +356,371 @@
 		};
 		850F63FC108A37E50035D594 = {
 			fileRef = 850F63FA108A37E50035D594;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6423108BB9A80035D594 = {
+			buildActionMask = 2147483647;
+			files = (
+				850F64D6108BCCE90035D594,
+				850F64D9108BCD120035D594,
+				850F64DD108BCD3E0035D594,
+				850F64E5108BCD920035D594,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850F6424108BB9A80035D594 = {
+			buildActionMask = 2147483647;
+			files = (
+				850F64A9108BC5990035D594,
+				850F642B108BBA480035D594,
+				850F64D7108BCD080035D594,
+				850F64D8108BCD0E0035D594,
+				850F64DB108BCD3A0035D594,
+				850F64E4108BCD900035D594,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850F6425108BB9A80035D594 = {
+			buildActionMask = 2147483647;
+			files = (
+				850F646A108BBD450035D594,
+				850F6465108BBC3D0035D594,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850F6426108BB9A80035D594 = {
+			buildPhases = (
+				850F6423108BB9A80035D594,
+				850F6424108BB9A80035D594,
+				850F6425108BB9A80035D594,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "TreeDatabase-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				LIBRARY_STYLE = BUNDLE;
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = TreeDatabase;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+				WRAPPER_EXTENSION = grrdb;
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = TreeDatabase;
+			productName = TreeDatabase;
+			productReference = 850F6427108BB9A80035D594;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>TreeDatabase</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.TreeDatabase</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		850F6427108BB9A80035D594 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = TreeDatabase.grrdb;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		850F6428108BB9A80035D594 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "TreeDatabase-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/Grr/TreeDatabase-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		850F642B108BBA480035D594 = {
+			fileRef = 85687DD4107BFA2600B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6465108BBC3D0035D594 = {
+			fileRef = 1058C7A1FEA54F0111CA2CBB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F646A108BBD450035D594 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F647C108BC0650035D594 = {
+			buildActionMask = 2147483647;
+			files = (
+				850F6513108BCE870035D594,
+				850F652C108BCF490035D594,
+				850F6530108BD0060035D594,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850F647D108BC0650035D594 = {
+			buildActionMask = 2147483647;
+			files = (
+				850F6483108BC0A20035D594,
+				850F6484108BC0A20035D594,
+				850F6512108BCE860035D594,
+				850F652B108BCF470035D594,
+				850F652F108BD0050035D594,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850F647E108BC0650035D594 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850F647F108BC0650035D594 = {
+			buildPhases = (
+				850F647C108BC0650035D594,
+				850F647D108BC0650035D594,
+				850F647E108BC0650035D594,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Searching-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Searching;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+				WRAPPER_EXTENSION = grrdb;
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = Searching;
+			productName = Searching;
+			productReference = 850F6480108BC0650035D594;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Searching</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.Searching</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		850F6480108BC0650035D594 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = Searching.grrdb;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		850F6481108BC0650035D594 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "Searching-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/Grr/Searching-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		850F6483108BC0A20035D594 = {
+			fileRef = 85687DC1107BF99B00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6484108BC0A20035D594 = {
+			fileRef = 85687DC3107BF99B00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64A9108BC5990035D594 = {
+			fileRef = 85687DD3107BFA2600B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64D6108BCCE90035D594 = {
+			fileRef = 85687D43107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64D7108BCD080035D594 = {
+			fileRef = 85687D44107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64D8108BCD0E0035D594 = {
+			fileRef = 85687D54107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64D9108BCD120035D594 = {
+			fileRef = 85687D53107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64DB108BCD3A0035D594 = {
+			fileRef = 85687D3E107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64DD108BCD3E0035D594 = {
+			fileRef = 85687D3D107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64E4108BCD900035D594 = {
+			fileRef = 85687D42107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64E5108BCD920035D594 = {
+			fileRef = 85687D41107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64E6108BCDD90035D594 = {
+			fileRef = 850F6427108BB9A80035D594;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F64F2108BCDDD0035D594 = {
+			fileRef = 850F6480108BC0650035D594;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6512108BCE860035D594 = {
+			fileRef = 85687D54107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6513108BCE870035D594 = {
+			fileRef = 85687D53107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6514108BCED50035D594 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 850F6426108BB9A80035D594;
+			remoteInfo = TreeDatabase;
+		};
+		850F6515108BCED50035D594 = {
+			isa = PBXTargetDependency;
+			target = 850F6426108BB9A80035D594;
+			targetProxy = 850F6514108BCED50035D594;
+		};
+		850F6516108BCEDB0035D594 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 850F647F108BC0650035D594;
+			remoteInfo = Searching;
+		};
+		850F6517108BCEDB0035D594 = {
+			isa = PBXTargetDependency;
+			target = 850F647F108BC0650035D594;
+			targetProxy = 850F6516108BCEDB0035D594;
+		};
+		850F652B108BCF470035D594 = {
+			fileRef = 85687D40107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F652C108BCF490035D594 = {
+			fileRef = 85687D3F107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F652F108BD0050035D594 = {
+			fileRef = 85687D5B107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850F6530108BD0060035D594 = {
+			fileRef = 85687D5A107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -2112,6 +2483,9 @@
 			buildRules = (
 			);
 			buildSettings = {
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2122,6 +2496,8 @@
 				WRAPPER_EXTENSION = app;
 			};
 			dependencies = (
+				850F6515108BCED50035D594,
+				850F6517108BCEDB0035D594,
 			);
 			isa = PBXNativeTarget;
 			name = Grr;
@@ -2133,6 +2509,8 @@
 		8D1107290486CEB800E47090 = {
 			buildActionMask = 2147483647;
 			files = (
+				850F64F2108BCDDD0035D594,
+				850F64E6108BCDD90035D594,
 				8D11072B0486CEB800E47090,
 				85687D5C107BF7D000B55A9A,
 				85687D5E107BF7D000B55A9A,
