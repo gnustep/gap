@@ -124,6 +124,7 @@
 				8D1107320486CEB800E47090,
 				850F6427108BB9A80035D594,
 				850F6480108BC0650035D594,
+				85A5FDCD108D229D00AC6AA4,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -152,9 +153,10 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA;
 			projectDirPath = "";
 			targets = (
+				850F647F108BC0650035D594,
 				850F6426108BB9A80035D594,
 				8D1107260486CEB800E47090,
-				850F647F108BC0650035D594,
+				85A5FDCC108D229D00AC6AA4,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -167,6 +169,7 @@
 				19C28FACFE9D520D11CA2CBB,
 				850F6428108BB9A80035D594,
 				850F6481108BC0650035D594,
+				85A5FDCE108D229D00AC6AA4,
 			);
 			isa = PBXGroup;
 			name = Grr;
@@ -413,7 +416,6 @@
 				INFOPLIST_FILE = "TreeDatabase-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				LIBRARY_STYLE = BUNDLE;
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -533,7 +535,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Searching-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -2464,6 +2465,159 @@
 			settings = {
 			};
 		};
+		85A5FDC9108D229D00AC6AA4 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A5FDD0108D22CC00AC6AA4,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A5FDCA108D229D00AC6AA4 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A5FDD1108D22D100AC6AA4,
+				85A5FDD2108D22D600AC6AA4,
+				85A5FDDD108D23D900AC6AA4,
+				85A5FDE6108D252700AC6AA4,
+				85A5FDF1108D259700AC6AA4,
+				85A5FDF4108D25C500AC6AA4,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A5FDCB108D229D00AC6AA4 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A5FDCC108D229D00AC6AA4 = {
+			buildPhases = (
+				85A5FDC9108D229D00AC6AA4,
+				85A5FDCA108D229D00AC6AA4,
+				85A5FDCB108D229D00AC6AA4,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "ArticleView-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ArticleView;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+				WRAPPER_EXTENSION = grrdb;
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = ArticleView;
+			productName = ArticleView;
+			productReference = 85A5FDCD108D229D00AC6AA4;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>ArticleView</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.ArticleView</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		85A5FDCD108D229D00AC6AA4 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = ArticleView.grrdb;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		85A5FDCE108D229D00AC6AA4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "ArticleView-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/Grr/ArticleView-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		85A5FDD0108D22CC00AC6AA4 = {
+			fileRef = 857AA8B51082AC6800829DD6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDD1108D22D100AC6AA4 = {
+			fileRef = 85687D94107BF8CB00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDD2108D22D600AC6AA4 = {
+			fileRef = 85687D96107BF8CB00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDDD108D23D900AC6AA4 = {
+			fileRef = 85687D54107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDE6108D252700AC6AA4 = {
+			fileRef = 85687D40107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDF1108D259700AC6AA4 = {
+			fileRef = 85687D46107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDF4108D25C500AC6AA4 = {
+			fileRef = 85687D5B107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A5FDF5108D25FD00AC6AA4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 85A5FDCC108D229D00AC6AA4;
+			remoteInfo = ArticleView;
+		};
+		85A5FDF6108D25FD00AC6AA4 = {
+			isa = PBXTargetDependency;
+			target = 85A5FDCC108D229D00AC6AA4;
+			targetProxy = 85A5FDF5108D25FD00AC6AA4;
+		};
 //850
 //851
 //852
@@ -2498,6 +2652,7 @@
 			dependencies = (
 				850F6515108BCED50035D594,
 				850F6517108BCEDB0035D594,
+				85A5FDF6108D25FD00AC6AA4,
 			);
 			isa = PBXNativeTarget;
 			name = Grr;
