@@ -45,7 +45,7 @@
         @"Grr component %@ provides no view. So it cannot be used as such.", component
     );
     
-    NSDebugLog(@"Module %@ is being loaded.", component);
+    NSLog(@"Module %@ is being loaded.", component);
     newView = [component view];
     
     NSAssert1(newView != nil, @"Component %@ had no view, although it should.", component);
