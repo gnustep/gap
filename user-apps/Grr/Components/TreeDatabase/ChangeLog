@@ -1,3 +1,6 @@
+21-Sep-2009 Riccardo Mottola
+	* use path component operations and use user library path
+	  and not a hard-coded gnustep path
 
 21-Feb-2007  Guenther Noack
 	* Replaced all occurences of "Grrr" with "Grr". This includes the
