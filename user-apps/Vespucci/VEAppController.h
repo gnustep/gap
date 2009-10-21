@@ -34,13 +34,16 @@
   IBOutlet NSTextField *homePageField;
   IBOutlet NSMenuItem  *bookmarksMenu;
   IBOutlet NSButton    *javaScriptCheck;
+  IBOutlet NSTextField *fontStandardField;
   IBOutlet NSTextField *fontSerifField;
   IBOutlet NSTextField *fontSansSerifField;
   IBOutlet NSTextField *fontMonoField;
   NSTextField          *currentFontField;
+  IBOutlet NSButton    *chooseStandardFontButton;
   IBOutlet NSButton    *chooseSerifFontButton;
   IBOutlet NSButton    *chooseSansFontButton;
   IBOutlet NSButton    *chooseMonoFontButton;
+  NSFont               *standardFont;
   NSFont               *serifFont;
   NSFont               *sansSerifFont;
   NSFont               *monospacedFont;
