@@ -27,9 +27,11 @@
                 chooseMonoFontButton = NSButton; 
                 chooseSansFontButton = NSButton; 
                 chooseSerifFontButton = NSButton; 
+                chooseStandardFontButton = NSButton; 
                 fontMonoField = NSTextField; 
                 fontSansSerifField = NSTextField; 
                 fontSerifField = NSTextField; 
+                fontStandardField = NSTextField; 
                 homePageField = NSTextField; 
                 javaScriptCheck = NSButton; 
                 prefPanel = NSPanel; 
