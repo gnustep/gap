@@ -5,11 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>Grr</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>ArticleOperations</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.gap.Grr</string>
+	<string>org.gap.ArticleOperations</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -18,9 +16,7 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>NSMainNibFile</key>
-	<string>Grr</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>ArticleOperationsComponent</string>
 </dict>
 </plist>
