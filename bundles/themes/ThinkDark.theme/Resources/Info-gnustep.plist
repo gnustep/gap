@@ -6,4 +6,6 @@
     GSThemeDomain = {
     };
     GSThemeIcon = Thematic.png;
+    GSThemeTiles = {
+    };
 }
