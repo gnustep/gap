@@ -127,11 +127,10 @@
 
 }
 
-#define HEIGHT 47
+#define HEIGHT 42
 #define WIDTH  20
 - (void)drawImageRep
 {
-    NSBezierPath *bzp;
     NSMutableString *str;
     char cStr[5];
     float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
@@ -148,18 +147,24 @@
     if (chargePercentToDraw > 100)
         chargePercentToDraw = 100;
 
-    [[NSColor blackColor] set];
-    bzp = [NSBezierPath bezierPath];
-    [bzp appendBezierPathWithRect: NSMakeRect(0, 1, WIDTH, HEIGHT)];
-    [bzp stroke];
+    [[NSColor darkGrayColor] set];
+    /* main body */
+    [NSBezierPath strokeRect: NSMakeRect(0, 1, WIDTH, HEIGHT)];
+    /* top nib */
+    [NSBezierPath strokeRect: NSMakeRect((WIDTH/2)-3, HEIGHT, 6, 4)];
+
+    [[NSColor grayColor] set];
+    /* right light shadow */
+    [NSBezierPath strokeLineFromPoint:NSMakePoint(WIDTH+1, 0) toPoint:NSMakePoint(WIDTH+1, HEIGHT-1)];
+    /* nib filler */
+    [NSBezierPath fillRect: NSMakeRect((WIDTH/2)-2, HEIGHT+1, 4, 2)];
     
-    bzp = [NSBezierPath bezierPath];
+    /* draw the charge status */
     if ([batModel isCritical] == YES)
        [[NSColor redColor] set];
     else
-       [[NSColor whiteColor] set];
-    [bzp appendBezierPathWithRect: NSMakeRect(0+1, 1+1, WIDTH - 2, (chargePercentToDraw/100) * HEIGHT -2)];
-    [bzp fill];
+       [[NSColor greenColor] set];
+    [NSBezierPath fillRect: NSMakeRect(0+1, 1+1, WIDTH-2, (chargePercentToDraw/100) * HEIGHT -2)];
 
     sprintf(cStr, "%2.0f%%", [batModel chargePercent]);
     str = [NSMutableString stringWithCString:cStr];
