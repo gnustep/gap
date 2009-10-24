@@ -1,19 +1,13 @@
 {
     IBClasses = (
-	{
-	    CLASS = PreferencesPanel;
-	    LANGUAGE = ObjC;
-	    OUTLETS = {
-		replacableView = id;
-		window = id;
-	    };
-	    SUPERCLASS = NSObject;
-	},
-	{
-	    CLASS = FirstResponder;
-	    LANGUAGE = ObjC;
-	    SUPERCLASS = NSObject;
-	}
-    );
-    IBVersion = 1;
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = PreferencesPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {replacableView = NSView; window = NSPanel; }; 
+            SUPERCLASS = UKNibOwner; 
+        }, 
+        {CLASS = UKNibOwner; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
 }
