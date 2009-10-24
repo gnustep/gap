@@ -1,21 +1,18 @@
 {
     IBClasses = (
-        {CLASS = Component; LANGUAGE = ObjC; SUPERCLASS = UKNibOwner; }, 
         {
             CLASS = DatabaseTreeViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {outlineView = id; }; 
+            OUTLETS = {outlineView = NSOutlineView; }; 
             SUPERCLASS = ViewProvidingComponent; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = ImageTextCell; LANGUAGE = ObjC; SUPERCLASS = NSTextFieldCell; }, 
-        {CLASS = NumberedImageTextCell; LANGUAGE = ObjC; SUPERCLASS = ImageTextCell; }, 
         {CLASS = UKNibOwner; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             CLASS = ViewProvidingComponent; 
             LANGUAGE = ObjC; 
-            OUTLETS = {"_view" = id; }; 
-            SUPERCLASS = Component; 
+            OUTLETS = {"_view" = NSView; }; 
+            SUPERCLASS = UKNibOwner; 
         }
     ); 
     IBVersion = 1; 
