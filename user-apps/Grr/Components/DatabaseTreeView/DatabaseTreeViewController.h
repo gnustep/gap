@@ -27,7 +27,7 @@
  */
 @interface DatabaseTreeViewController : ViewProvidingComponent
 {
-    NSOutlineView* outlineView;
+    IBOutlet NSOutlineView* outlineView;
 }
 
 // -------------------------------------------------------------------
