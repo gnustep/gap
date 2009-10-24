@@ -3,7 +3,7 @@
         {
             CLASS = ArticleTextViewPlugin; 
             LANGUAGE = ObjC; 
-            OUTLETS = {headlineView = id; scrollView = id; }; 
+            OUTLETS = {headlineView = NSControl; scrollView = NSScrollView; }; 
             SUPERCLASS = ViewProvidingComponent; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
@@ -11,7 +11,7 @@
         {
             CLASS = ViewProvidingComponent; 
             LANGUAGE = ObjC; 
-            OUTLETS = {"_view" = id; }; 
+            OUTLETS = {"_view" = NSView; }; 
             SUPERCLASS = UKNibOwner; 
         }
     ); 

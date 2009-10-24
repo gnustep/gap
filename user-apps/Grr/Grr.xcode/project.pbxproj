@@ -1352,6 +1352,7 @@
 				85687D94107BF8CB00B55A9A,
 				85687D95107BF8CB00B55A9A,
 				85687D96107BF8CB00B55A9A,
+				85C0D2FC1093BB810095C185,
 			);
 			isa = PBXGroup;
 			name = ArticleView;
@@ -3463,6 +3464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85A5FDD0108D22CC00AC6AA4,
+				85C0D2FE1093BB810095C185,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3612,6 +3614,26 @@
 			target = 85A5FDCC108D229D00AC6AA4;
 			targetProxy = 85A5FDF5108D25FD00AC6AA4;
 		};
+		85C0D2FC1093BB810095C185 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = bluebg.png;
+			path = Components/ArticleView/English.lproj/ArticleTextViewPlugin.gorm/bluebg.png;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85C0D2FD1093BB810095C185 = {
+			fileRef = 85C0D2FC1093BB810095C185;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85C0D2FE1093BB810095C185 = {
+			fileRef = 85C0D2FC1093BB810095C185;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //850
 //851
 //852
@@ -3751,6 +3773,7 @@
 				850F63D3108A300D0035D594,
 				850F63ED108A33320035D594,
 				850F63FC108A37E50035D594,
+				85C0D2FD1093BB810095C185,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
