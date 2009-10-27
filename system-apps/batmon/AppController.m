@@ -56,15 +56,16 @@
     if ((self = [super init]))
     {
         NSMutableParagraphStyle *style;
-	    NSFont *font;
+	NSFont *font;
 
         batModel = [[BatteryModel alloc] init];
         style = [[NSMutableParagraphStyle alloc] init];
     	[style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     	
-	    font = [NSFont systemFontOfSize:9.0];
-	    stateStrAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
+	font = [NSFont systemFontOfSize:9.0];
+	stateStrAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
         font, NSFontAttributeName,
+	[NSColor blueColor], NSForegroundColorAttributeName,
         style, NSParagraphStyleAttributeName, nil] retain];
         iconPlug = [[NSImage imageNamed:@"small_plug.tif"] retain];
         iconBattery = [[NSImage imageNamed:@"small_battery.tif"] retain];
