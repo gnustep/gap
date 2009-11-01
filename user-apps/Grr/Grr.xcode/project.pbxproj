@@ -668,6 +668,20 @@
 			settings = {
 			};
 		};
+		851B402D109E14920036C28D = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = Fonts.tiff;
+			path = Components/Fonts/Resources/Fonts.tiff;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		851B402E109E14920036C28D = {
+			fileRef = 851B402D109E14920036C28D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		85687D1A107BF79C00B55A9A = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -1520,6 +1534,7 @@
 		};
 		85687DAC107BF93C00B55A9A = {
 			children = (
+				851B402D109E14920036C28D,
 				85792FD2108E7347001B900E,
 				850F63EB108A33320035D594,
 				85687DAE107BF94E00B55A9A,
@@ -2700,6 +2715,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85792FD5108E74B9001B900E,
+				851B402E109E14920036C28D,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
