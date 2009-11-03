@@ -385,6 +385,7 @@
     NSString *urlStr;
     VEDocumentController *dc;
     VEDocument *doc;
+    NSArray *winArray;
     NSWindow *topWindow;
 
     types = [pboard types];
@@ -404,7 +405,9 @@
     dc = [VEDocumentController sharedDocumentController];
     doc = nil;
     topWindow = nil;
-    topWindow = [[[NSApplication sharedApplication] orderedWindows] objectAtIndex:0];
+    winArray = [[NSApplication sharedApplication] orderedWindows];
+    if ([winArray count] > 0)
+      topWindow = [winArray objectAtIndex:0];
     if (topWindow != nil)
         doc = [dc documentForWindow:topWindow];
     NSLog(@"[openURL] current loaded url in document: %@", [doc loadedUrl]);
