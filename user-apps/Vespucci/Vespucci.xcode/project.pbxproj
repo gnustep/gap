@@ -133,7 +133,6 @@
 				29B97317FDCFA39411CA2CEA,
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
-				85792E68108E5226001B900E,
 			);
 			isa = PBXGroup;
 			name = Vespucci;
@@ -163,6 +162,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				851B405410A0B0000036C28D,
 				853AAB430F36609C006B331C,
 				089C165CFE840E0CC02AAC07,
 				85A386C50BC3AD6600A80110,
@@ -258,6 +258,26 @@
 			path = VEMenuItem.m;
 			refType = 4;
 			sourceTree = "<group>";
+		};
+		851B405410A0B0000036C28D = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = "Info-Vespucci.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		851B405510A0B0000036C28D = {
+			fileRef = 851B405410A0B0000036C28D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		851B405610A0B0000036C28D = {
+			fileRef = 851B405410A0B0000036C28D;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		853AAB430F36609C006B331C = {
 			isa = PBXFileReference;
@@ -358,6 +378,7 @@
 				85792E5A108E5226001B900E,
 				85792E5B108E5226001B900E,
 				85792E5C108E5226001B900E,
+				851B405510A0B0000036C28D,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,13 +486,6 @@
 			settings = {
 			};
 		};
-		85792E68108E5226001B900E = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.xml;
-			path = "Info-Vespucci.plist";
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		85792E69108E5226001B900E = {
 			explicitFileType = wrapper.application;
 			includeInIndex = 0;
@@ -572,6 +586,7 @@
 				85792E75108E5226001B900E,
 				85792E76108E5226001B900E,
 				85792E77108E5226001B900E,
+				851B405610A0B0000036C28D,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
