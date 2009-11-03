@@ -2,7 +2,7 @@
  project: vespucci
  vedocumentcontroller.m
 
- copyright (c) 2008
+ copyright (c) 2008-2009
 
  author: Ing. Riccardo Mottola
 
@@ -58,6 +58,8 @@
 - (id)openDocumentWithContentsOfURL:(NSURL *)aURL display:(BOOL)flag
 {
     VEDocument *doc;
+    VEDocumentController *dc;
+    NSArray *winArray;
     NSWindow *topWindow;
 
     NSLog(@"openDocWithURL: %@", [aURL absoluteURL]);
@@ -65,18 +67,21 @@
     /* check if there is a current document open which is empty and reuse it
         else create a new document */
     /* we use orderedWindows because orderedDocuments is not implemented in GNUstep */
+    dc = [VEDocumentController sharedDocumentController];
     doc = nil;
     topWindow = nil;
-    topWindow = [[[NSApplication sharedApplication] orderedWindows] objectAtIndex:0];
+    winArray = [[NSApplication sharedApplication] orderedWindows];
+    if ([winArray count] > 0)
+      topWindow = [winArray objectAtIndex:0];
     if (topWindow != nil)
         doc = [self documentForWindow:topWindow];
     NSLog(@"[openURL] current loaded url in document: %@", [doc loadedUrl]);
     if (doc != nil)
     {
         if (([doc loadedUrl] != nil) && [[doc loadedUrl] length] > 0)
-            doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
+            doc = [dc openUntitledDocumentOfType:@"HTML Document" display:YES];
     } else {
-        doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
+        doc = [dc openUntitledDocumentOfType:@"HTML Document" display:YES];
         NSAssert(doc != nil, @"openDocWithURL: document can't be nil here");
     }
     
