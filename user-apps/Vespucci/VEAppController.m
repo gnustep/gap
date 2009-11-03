@@ -181,6 +181,11 @@
     webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
     [javaScriptCheck setState:[webPrefs isJavaScriptEnabled] ? NSOnState : NSOffState];
 
+    fontName = [webPrefs standardFontFamily];
+    font = [NSFont fontWithName: fontName size:12.0];
+    [self updateFontPreview:fontStandardField :font];
+    standardFont = font;
+    
     fontName = [webPrefs serifFontFamily];
     font = [NSFont fontWithName: fontName size:12.0];
     [self updateFontPreview:fontSerifField :font];
@@ -217,6 +222,7 @@
     
     [webPrefs setJavaScriptEnabled: [javaScriptCheck state] == NSOnState];
 
+    [webPrefs setStandardFontFamily:[standardFont fontName]];
     [webPrefs setSerifFontFamily:[serifFont fontName]];
     [webPrefs setSansSerifFontFamily:[sansSerifFont fontName]];
     [webPrefs setFixedFontFamily:[monospacedFont fontName]];
@@ -238,7 +244,9 @@
 
   fontMgr = [NSFontManager sharedFontManager];
 
-  if (sender == chooseSerifFontButton)
+  if (sender == chooseStandardFontButton)
+    fontField = fontStandardField;
+  else if (sender == chooseSerifFontButton)
     fontField = fontSerifField;
   else if (sender == chooseSansFontButton)
     fontField = fontSansSerifField;
@@ -264,10 +272,11 @@
   fontField = currentFontField;
   newFont = [sender convertFont: [fontField font]];
 
-
   if (newFont != nil)
     {
-      if (fontField == fontSerifField)
+      if (fontField == fontStandardField)
+        standardFont = newFont;
+      else if (fontField == fontSerifField)
         serifFont = newFont;
       else if (fontField == fontSansSerifField)
         sansSerifFont = newFont;
@@ -403,9 +412,9 @@
     if (doc != nil)
     {
         if (([doc loadedUrl] != nil) && [[doc loadedUrl] length] > 0)
-            doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
+            doc = [dc openUntitledDocumentOfType:@"HTML Document" display:YES];
     } else {
-        doc = [super openUntitledDocumentOfType:@"HTML Document" display:YES];
+        doc = [dc openUntitledDocumentOfType:@"HTML Document" display:YES];
         NSAssert(doc != nil, @"openDocWithURL: document can't be nil here");
     }
 
