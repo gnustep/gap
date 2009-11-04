@@ -13,7 +13,7 @@ SubscriptionPanel_OBJC_FILES = \
 SubscriptionPanel_HEADERS = \
 	SubscriptionPanel.h \
 
-SubscriptionPanel_PRINCIPAL_CLASS = SubscriptionPanelController
+SubscriptionPanel_PRINCIPAL_CLASS = SubscriptionPanel
 
 SubscriptionPanel_LANGUAGES = English German
 
