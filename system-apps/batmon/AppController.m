@@ -152,20 +152,20 @@
     /* main body */
     [NSBezierPath strokeRect: NSMakeRect(0, 1, WIDTH, HEIGHT)];
     /* top nib */
-    [NSBezierPath strokeRect: NSMakeRect((WIDTH/2)-3, HEIGHT, 6, 4)];
+    [NSBezierPath strokeRect: NSMakeRect((WIDTH/2)-3, HEIGHT+1, 6, 4)];
 
     [[NSColor grayColor] set];
     /* right light shadow */
     [NSBezierPath strokeLineFromPoint:NSMakePoint(WIDTH+1, 0) toPoint:NSMakePoint(WIDTH+1, HEIGHT-1)];
     /* nib filler */
-    [NSBezierPath fillRect: NSMakeRect((WIDTH/2)-2, HEIGHT+1, 4, 2)];
+    [NSBezierPath fillRect: NSMakeRect((WIDTH/2)-2, HEIGHT+1+1, 4, 2)];
     
     /* draw the charge status */
     if ([batModel isCritical] == YES)
        [[NSColor redColor] set];
     else
        [[NSColor greenColor] set];
-    [NSBezierPath fillRect: NSMakeRect(0+1, 1+1, WIDTH-2, (chargePercentToDraw/100) * HEIGHT -2)];
+    [NSBezierPath fillRect: NSMakeRect(0+1, 1, WIDTH-1, (chargePercentToDraw/100) * HEIGHT -2)];
 
     sprintf(cStr, "%2.0f%%", [batModel chargePercent]);
     str = [NSMutableString stringWithCString:cStr];
