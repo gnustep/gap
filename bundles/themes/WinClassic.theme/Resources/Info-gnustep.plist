@@ -4,7 +4,7 @@
     );
     GSThemeDetails = "Windows classic them\000\000\000e\000\000";
     GSThemeDomain = {
-	GSBackHandlesWindowDecorations = YES;
+	GSBackHandlesWindowDecorations = NO;
 	NSMenuInterfaceStyle = NSWindows95InterfaceStyle;
 	NSScrollViewInterfaceStyle = NSWindows95InterfaceStyle;
 	NSScrollerInterfaceStyle = NSWindows95InterfaceStyle;
@@ -20,11 +20,6 @@
 	    FileName = GSScrollerUpArrow.tif;
 	    HorizontalDivision = 2;
 	    VerticalDivision = 2;
-	};
-	GSScrollerVerticalKnob = {
-	    FileName = GSScrollerVerticalKnob.tif;
-	    HorizontalDivision = 3;
-	    VerticalDivision = 4;
 	};
     };
 }
