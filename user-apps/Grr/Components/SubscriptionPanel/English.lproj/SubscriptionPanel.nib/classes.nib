@@ -11,7 +11,7 @@
                 subscriptionButton = NSButton; 
                 urlField = NSTextField; 
             }; 
-            SUPERCLASS = UKNibOwner; 
+            SUPERCLASS = NSObject; 
         }, 
         {CLASS = UKNibOwner; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
     ); 
