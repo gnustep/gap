@@ -121,13 +121,11 @@
   NSString *hostName;
   
   hostName = [defaults stringForKey: @"ProxyHostname"];
-//  if(hostName != nil)
-  //    [hostnameControl setStringValue: hostName];
-//    [hostnameControl setStringValue: nil];
-    [portControl setStringValue: nil];
+  if(hostName != nil) // FIXME: this is a hack for MacOS 
+      [hostnameControl setStringValue: hostName];
   
-//    [portControl setIntValue: [defaults integerForKey: @"ProxyPort"]];
-    [proxyUseButton setIntValue: [defaults boolForKey: @"ProxyEnabled"]];
+  [portControl setIntValue: [defaults integerForKey: @"ProxyPort"]];
+  [proxyUseButton setIntValue: [defaults boolForKey: @"ProxyEnabled"]];
 }
 
 @end
