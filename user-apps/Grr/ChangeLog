@@ -2,10 +2,18 @@
 Grr ChangeLog
 ==============
 
+2009-11-16 Riccardo Mottola
+	* Components.h,
+	Components.m,
+	GNUmakefile,
+	PreferencesPanel.h,
+	PreferencesPanel.m: Removed dependency on UKNibOwner
+	UKNibOwner.[h,m]: removed
+
 2009-11-01 Riccardo Mottola
 
-	* Uniformed to GPL v3+ license with conest of Mr. Noack
-	
+	* Uniformed to GPL v3+ license with consent of Mr. Noack
+
 2009-03-14 19:22-EDT Gregory John Casamento <greg_casamento@yahoo.com>
 
         * Added new files.
@@ -15,7 +23,7 @@ Grr ChangeLog
         * Fixed issue with caching selectors as numbers in the dictionary.
 
 Dec-07-2007  Quentin Mathe
-	* Fixed compilation by taking care of linking EtoileFoundation now that 
+	* Fixed compilation by taking care of linking EtoileFoundation now that
 	  EtoileUI depends on it (see r2634 for the first occurence of this issue).
 
 Jun-29-2007  Yen-Ju Chen

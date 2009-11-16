@@ -23,13 +23,8 @@
 #ifndef _PLUGINCONTROLLER_H_
 #define _PLUGINCONTROLLER_H_
 
-#import <Foundation/NSObject.h>
-
-#ifdef ETOILE
-#import <EtoileFoundation/UKNibOwner.h>
-#else
-#import "UKNibOwner.h"
-#endif
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 #import "PipeType.h"
 
@@ -103,7 +98,7 @@ extern NSString* ComponentDidUpdateNotification;
  * </li>
  * </ul>
  */
-@interface ViewProvidingComponent : UKNibOwner <ViewProvidingComponent>
+@interface ViewProvidingComponent : NSObject <ViewProvidingComponent>
 {
     IBOutlet NSView* _view;
 }

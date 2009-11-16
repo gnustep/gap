@@ -28,11 +28,22 @@ NSString* ComponentDidUpdateNotification = @"ComponentDidUpdateNotification";
 
 -(id) init
 {
-    if ((self = [super init]) != nil) {
-        [_view retain]; // make sure _view is ours!
+  if ((self = [super init]) != nil)
+    {
+      BOOL nibLoaded;
+      NSString *nibName;
+
+      nibName = NSStringFromClass([self class]);
+      nibLoaded = [NSBundle loadNibNamed:nibName owner:self];
+      if (nibLoaded == NO)
+	{
+	  NSLog(@"ViewProvidingComponent: Failed to load nib %@.", nibName);
+	  return nil;
+	}
+      [_view retain]; // make sure _view is ours!
     }
     
-    return self;
+  return self;
 }
 
 -(void)dealloc
