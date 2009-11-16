@@ -36,13 +36,31 @@
 
 +(id) shared
 {
-    static SubscriptionPanel* controller = nil;
+  static SubscriptionPanel* controller = nil;
     
-    if (controller == nil) {
-        ASSIGN(controller, [SubscriptionPanel new]);
+  if (controller == nil)
+    {
+      ASSIGN(controller, [SubscriptionPanel new]);
     }
     
-    return controller;
+  return controller;
+}
+
+-(id) init
+{
+  if ((self = [super init]) != nil)
+  {
+    BOOL nibLoaded;
+    
+    nibLoaded = [NSBundle loadNibNamed:@"SubscriptionPanel" owner:self];
+    if (nibLoaded == NO)
+    {
+      NSLog(@"SubscriptionPanel: Failed to load nib.");
+      return nil;
+    }
+  }
+  
+  return self;
 }
 
 -(void) dealloc
