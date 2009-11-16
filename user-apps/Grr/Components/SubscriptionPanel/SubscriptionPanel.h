@@ -25,16 +25,11 @@
 
 #import "../DatabaseOperations/SubscriptionPanelProtocol.h"
 
-#ifdef ETOILE
-#import <EtoileFoundation/UKNibOwner.h>
-#else
-#import "UKNibOwner.h"
-#endif
 
 /**
  * The controller for the subscription panel.
  */
-@interface SubscriptionPanel : UKNibOwner <SubscriptionPanel>
+@interface SubscriptionPanel : NSObject <SubscriptionPanel>
 {
     IBOutlet NSPanel* panel;
     IBOutlet NSTextField* urlField;

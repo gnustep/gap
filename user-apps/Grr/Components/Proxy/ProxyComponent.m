@@ -118,8 +118,15 @@
 
 -(void) updateGUI
 {
-    [hostnameControl setStringValue: [defaults stringForKey: @"ProxyHostname"]];
-    [portControl setIntValue: [defaults integerForKey: @"ProxyPort"]];
+  NSString *hostName;
+  
+  hostName = [defaults stringForKey: @"ProxyHostname"];
+//  if(hostName != nil)
+  //    [hostnameControl setStringValue: hostName];
+//    [hostnameControl setStringValue: nil];
+    [portControl setStringValue: nil];
+  
+//    [portControl setIntValue: [defaults integerForKey: @"ProxyPort"]];
     [proxyUseButton setIntValue: [defaults boolForKey: @"ProxyEnabled"]];
 }
 
