@@ -10,7 +10,7 @@
         "Riccardo Mottola"
     );
     URL = "http://savannah.nongnu/project/gap/";
-    Copyright = "Copyright \U00A9 2006,2007 G\U00FCnther Noack";
+    Copyright = "Copyright GNUstep Application Project team";
     CopyrightDescription = "Released under the terms of the GNU General Public License";
     NSTypes = (
 	{

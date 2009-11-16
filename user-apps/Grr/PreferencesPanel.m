@@ -35,31 +35,39 @@
 
 -(id) init
 {
-    if ((self = [super init]) != nil) {
-      NSToolbar* toolbar;
+  if ((self = [super init]) != nil)
+    {
+      NSToolbar    *toolbar;
+      BOOL         nibLoaded;
 
-        RETAIN(window);
-        RETAIN(replacableView);
+      nibLoaded = [NSBundle loadNibNamed:@"PreferencesPanel" owner:self];
+      if (nibLoaded == NO)
+	{
+	  NSLog(@"PreferencesPanel: Failed to load nib.");
+	  return nil;
+	}
+
+      RETAIN(window);
+      RETAIN(replacableView);
         
-        ASSIGN(prefComponents, [NSMutableArray new]);
-        ASSIGN(toolbarItemIdentifiers, [NSMutableArray new]);
-        ASSIGN(toolbarItems, [NSMutableDictionary new]);
+      ASSIGN(prefComponents, [NSMutableArray new]);
+      ASSIGN(toolbarItemIdentifiers, [NSMutableArray new]);
+      ASSIGN(toolbarItems, [NSMutableDictionary new]);
         
-        // Set up preferences
-        [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Proxy"]];
-        [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Fonts"]];
+      // Set up preferences
+      [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Proxy"]];
+      [self addPreferencesComponent: [NSBundle instanceForBundleWithName: @"Fonts"]];
         
-        toolbar = AUTORELEASE(
-            [(NSToolbar*)[NSToolbar alloc] initWithIdentifier: @"pref panel toolbar"]
-        );
-        [toolbar setDelegate: self];
-        [toolbar setAllowsUserCustomization: NO];
+      toolbar = [(NSToolbar*)[NSToolbar alloc] initWithIdentifier: @"pref panel toolbar"];
+      [toolbar autorelease];
+      [toolbar setDelegate: self];
+      [toolbar setAllowsUserCustomization: NO];
         
-        [window setToolbar: toolbar];
-        [window setFloatingPanel: YES];
+      [window setToolbar: toolbar];
+      [window setFloatingPanel: YES];
     }
     
-    return self;
+  return self;
 }
 
 -(void) dealloc

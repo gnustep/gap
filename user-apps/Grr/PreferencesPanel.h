@@ -26,7 +26,7 @@
 #import "PreferencesComponent.h"
 #import "ToolbarDelegate.h"
 
-@interface PreferencesPanel : UKNibOwner <ToolbarDelegate>
+@interface PreferencesPanel : NSObject <ToolbarDelegate>
 {
     IBOutlet NSPanel* window;
     IBOutlet NSView* replacableView;
