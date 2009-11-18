@@ -303,7 +303,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-LaternaMagica__Upgraded_.plist";
+				INFOPLIST_FILE = "Info-LaternaMagica.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
@@ -446,7 +446,7 @@
 		85DB9A6D10B3D3C100DC1358 = {
 			isa = PBXFileReference;
 			lastKnownFileType = text.xml;
-			path = "Info-LaternaMagica__Upgraded_.plist";
+			path = "Info-LaternaMagica.plist";
 			refType = 4;
 			sourceTree = "<group>";
 		};
