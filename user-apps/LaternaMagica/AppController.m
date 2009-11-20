@@ -560,7 +560,6 @@
     NSData *dataOfRep;
     NSDictionary *repProperties;
     NSString *origFileName;
-    int selectedItemIndex;
     
 
     origFileName = [[fileListData pathAtIndex:[fileListView selectedRow]] lastPathComponent];
@@ -572,11 +571,7 @@
 
     /* simulate clicks to be sure interface is consistent */
     [jpegCompressionSlider performClick:nil];
-    selectedItemIndex = [fileTypePopUp indexOfSelectedItem];
-    if (selectedItemIndex < 0)
-        selectedItemIndex = 0;
-    [fileTypePopUp selectItemAtIndex:selectedItemIndex];
-    
+    [fileTypePopUp sendAction:@selector(setCompressionType:) to:self];
     
     if ([savePanel runModalForDirectory:@"" file:origFileName] ==  NSFileHandlingPanelOKButton)
     {
