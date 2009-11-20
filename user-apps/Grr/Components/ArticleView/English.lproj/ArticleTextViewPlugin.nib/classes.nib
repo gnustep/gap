@@ -12,7 +12,7 @@
             CLASS = ViewProvidingComponent; 
             LANGUAGE = ObjC; 
             OUTLETS = {"_view" = NSView; }; 
-            SUPERCLASS = UKNibOwner; 
+            SUPERCLASS = NSObject; 
         }
     ); 
     IBVersion = 1; 
