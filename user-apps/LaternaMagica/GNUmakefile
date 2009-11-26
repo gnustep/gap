@@ -16,7 +16,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.2
 PACKAGE_NAME = LaternaMagica
 APP_NAME = LaternaMagica
-LaternaMagica_APPLICATION_ICON = laternamagica_64.tif
+LaternaMagica_APPLICATION_ICON = laternamagica_48.tif
 
 
 #
@@ -24,7 +24,8 @@ LaternaMagica_APPLICATION_ICON = laternamagica_64.tif
 #
 LaternaMagica_RESOURCE_FILES = \
 Resources/LaternaMagica.gorm \
-Resources/laternamagica_64.tif 
+Resources/laternamagica_64.tif \
+Resources/laternamagica_48.tif 
 
 
 #
