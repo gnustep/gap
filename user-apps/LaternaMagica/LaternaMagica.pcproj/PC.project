@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = laternamagica_64.tif;
+    APPLICATIONICON = laternamagica_48.tif;
     APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     BUILDER_TARGETS = (
@@ -30,7 +30,8 @@
 	LMWindow.h
     );
     IMAGES = (
-	laternamagica_64.tif
+	laternamagica_64.tif,
+	laternamagica_48.tif
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
