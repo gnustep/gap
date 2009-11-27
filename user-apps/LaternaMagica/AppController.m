@@ -560,10 +560,11 @@
     NSData *dataOfRep;
     NSDictionary *repProperties;
     NSString *origFileName;
+    NSString *filenameNoExtension;
     
 
     origFileName = [[fileListData pathAtIndex:[fileListView selectedRow]] lastPathComponent];
-    
+    filenameNoExtension = [origFileName stringByDeletingPathExtension];
     savePanel = [NSSavePanel savePanel];
     [savePanel setDelegate: self];
     /* if the accessory view comes from a window it needs a retain */
@@ -572,14 +573,15 @@
     /* simulate clicks to be sure interface is consistent */
     [jpegCompressionSlider performClick:nil];
     [fileTypePopUp sendAction:@selector(setCompressionType:) to:self];
-    
-    if ([savePanel runModalForDirectory:@"" file:origFileName] ==  NSFileHandlingPanelOKButton)
+
+    if ([savePanel runModalForDirectory:@"" file:filenameNoExtension] ==  NSFileHandlingPanelOKButton)
     {
         NSString *fileName;
         int selItem;
 
         srcImage = [view image];
         srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+
 
         fileName = [savePanel filename];
                 
@@ -621,13 +623,21 @@
         NSLog(@"Tiff");
         [jpegCompressionSlider setEnabled:NO];
         [jpegCompressionField setEnabled:NO];
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2)
         [savePanel setRequiredFileType:@"tiff"];
+#else
+        [savePanel setAllowedFileTypes:[NSArray arrayWithObjects: @"tif", @"tiff", nil]];
+#endif 
     } else if (selItem == 1)
     {
         NSLog(@"Jpeg");
         [jpegCompressionSlider setEnabled:YES];
         [jpegCompressionField setEnabled:YES];
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2)
         [savePanel setRequiredFileType:@"jpg"];
+#else
+        [savePanel setAllowedFileTypes:[NSArray arrayWithObjects: @"jpg", @"jpeg", nil]];
+#endif 
     }
 }
 
