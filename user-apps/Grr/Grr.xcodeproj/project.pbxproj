@@ -143,6 +143,23 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildStyle section */
+		85DEB49610B7577D007D810A /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		85DEB49710B7577D007D810A /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
 /* Begin PBXContainerItemProxy section */
 		850F6514108BCED50035D594 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -690,11 +707,15 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 14A08F39108D1DD100455799 /* Build configuration list for PBXProject "Grr" */;
-			compatibilityVersion = "Xcode 2.4";
+			buildSettings = {
+			};
+			buildStyles = (
+				85DEB49610B7577D007D810A /* Development */,
+				85DEB49710B7577D007D810A /* Deployment */,
+			);
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Grr */;
 			projectDirPath = "";
-			projectRoot = "";
 			targets = (
 				850F6426108BB9A80035D594 /* TreeDatabase */,
 				8D1107260486CEB800E47090 /* Grr */,

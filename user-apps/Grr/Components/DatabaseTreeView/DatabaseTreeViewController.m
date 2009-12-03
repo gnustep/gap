@@ -91,6 +91,11 @@ static NSImage* arrowDown = nil;
 // -------------------------------------------------------------------
 -(void) awakeFromNib
 {
+  NumberedImageTextCell *imageTextCell;
+  
+  imageTextCell = [[NumberedImageTextCell alloc] init];
+  [outlineView setCell:imageTextCell];
+  
     // Dropping
     [outlineView registerForDraggedTypes: [NSArray arrayWithObjects:
         NSURLPboardType,

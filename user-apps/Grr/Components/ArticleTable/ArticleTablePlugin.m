@@ -23,6 +23,7 @@
 #import "ArticleTablePlugin.h"
 
 #import "Article.h"
+#import "GNRatingCell.h"
 
 #ifdef __APPLE__
 #import "GNUstep.h"
@@ -69,10 +70,15 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
 
 -(void)awakeFromNib
 {
-    ASSIGN(table, [(NSScrollView*)_view documentView]);
-    ASSIGN(headlineCol, [table tableColumnWithIdentifier: @"headline"]);
-    ASSIGN(dateCol, [table tableColumnWithIdentifier: @"date"]);
-    ASSIGN(ratingCol, [table tableColumnWithIdentifier: @"rating"]);
+  GNRatingCell *ratingCell;
+  
+  ASSIGN(table, [(NSScrollView*)_view documentView]);
+  ASSIGN(headlineCol, [table tableColumnWithIdentifier: @"headline"]);
+  ASSIGN(dateCol, [table tableColumnWithIdentifier: @"date"]);
+  ASSIGN(ratingCol, [table tableColumnWithIdentifier: @"rating"]);
+  
+  ratingCell = [[GNRatingCell alloc] init]; 
+  [ratingCol setDataCell:ratingCell];
     
     // Register for change notifications
     [[NSNotificationCenter defaultCenter] addObserver: self
