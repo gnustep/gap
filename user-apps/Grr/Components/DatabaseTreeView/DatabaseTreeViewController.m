@@ -93,8 +93,8 @@ static NSImage* arrowDown = nil;
 {
   NumberedImageTextCell *imageTextCell;
   
-  imageTextCell = [[NumberedImageTextCell alloc] init];
-  [outlineView setCell:imageTextCell];
+  imageTextCell = [[NumberedImageTextCell alloc] initTextCell:@""];
+  [[outlineView outlineTableColumn] setDataCell:imageTextCell];
   
     // Dropping
     [outlineView registerForDraggedTypes: [NSArray arrayWithObjects:
