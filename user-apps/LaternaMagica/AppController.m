@@ -378,7 +378,8 @@
     int x, y;
     int w, h;
     int s;
-    int bytesPerPixel;
+    int srcSamplesPerPixel;
+    int destSamplesPerPixel;
     unsigned char *srcData;
     unsigned char *destData;
     unsigned char *p1, *p2;
@@ -389,8 +390,8 @@
 
     w = [srcImageRep pixelsWide];
     h = [srcImageRep pixelsHigh];
-    bytesPerPixel = [srcImageRep bitsPerPixel] /8;
-
+    srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+    destSamplesPerPixel = srcSamplesPerPixel;
     destImage = [[NSImage alloc] initWithSize:NSMakeSize(h, w)]; /* we swap h and w */
     destImageRep = [[NSBitmapImageRep alloc]
                 initWithBitmapDataPlanes:NULL
@@ -401,7 +402,7 @@
                                 hasAlpha:[srcImageRep hasAlpha]
                                 isPlanar:[srcImageRep isPlanar]
                           colorSpaceName:[srcImageRep colorSpaceName]
-                             bytesPerRow:0
+                             bytesPerRow:h*destSamplesPerPixel  // we need to set this because otherwise mac > 10.4 will set a padded value
                             bitsPerPixel:0];
 
     srcData = [srcImageRep bitmapData];
@@ -410,9 +411,9 @@
     for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
         {
-            p1 = srcData + bytesPerPixel * (y * w + x);
-            p2 = destData + bytesPerPixel * ((w-x-1) * h + y);
-            for (s = 0; s < bytesPerPixel; s++)
+            p1 = srcData + srcSamplesPerPixel * (y * w + x);
+            p2 = destData + destSamplesPerPixel * ((w-x-1) * h + y);
+            for (s = 0; s < srcSamplesPerPixel; s++)
                 p2[s] = p1[s];
         }
 
@@ -436,7 +437,8 @@
     int x, y;
     int w, h;
     int s;
-    int bytesPerPixel;
+    int srcSamplesPerPixel;
+    int destSamplesPerPixel;
     unsigned char *srcData;
     unsigned char *destData;
     unsigned char *p1, *p2;
@@ -447,7 +449,8 @@
 
     w = [srcImageRep pixelsWide];
     h = [srcImageRep pixelsHigh];
-    bytesPerPixel = [srcImageRep bitsPerPixel] /8;
+    srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+    destSamplesPerPixel = srcSamplesPerPixel;
 
     destImage = [[NSImage alloc] initWithSize:NSMakeSize(w, h)];
     destImageRep = [[NSBitmapImageRep alloc]
@@ -459,7 +462,7 @@
                                 hasAlpha:[srcImageRep hasAlpha]
                                 isPlanar:[srcImageRep isPlanar]
                           colorSpaceName:[srcImageRep colorSpaceName]
-                             bytesPerRow:0
+                             bytesPerRow:w*destSamplesPerPixel
                             bitsPerPixel:0];
 
     srcData = [srcImageRep bitmapData];
@@ -468,9 +471,9 @@
     for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
         {
-            p1 = srcData + bytesPerPixel * (y * w + x);
-            p2 = destData + bytesPerPixel * ((h-y-1) * w + (w-x-1));
-            for (s = 0; s < bytesPerPixel; s++)
+            p1 = srcData + srcSamplesPerPixel * (y * w + x);
+            p2 = destData + srcSamplesPerPixel * ((h-y-1) * w + (w-x-1));
+            for (s = 0; s < srcSamplesPerPixel; s++)
                 p2[s] = p1[s];
         }
 
@@ -493,7 +496,8 @@
     int x, y;
     int w, h;
     int s;
-    int bytesPerPixel;
+    int srcSamplesPerPixel;
+    int destSamplesPerPixel;
     unsigned char *srcData;
     unsigned char *destData;
     unsigned char *p1, *p2;
@@ -504,7 +508,8 @@
 
     w = [srcImageRep pixelsWide];
     h = [srcImageRep pixelsHigh];
-    bytesPerPixel = [srcImageRep bitsPerPixel] /8;
+    srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+    destSamplesPerPixel = srcSamplesPerPixel;
 
     destImage = [[NSImage alloc] initWithSize:NSMakeSize(h, w)]; /* we swap h and w */
     destImageRep = [[NSBitmapImageRep alloc]
@@ -516,7 +521,7 @@
                                 hasAlpha:[srcImageRep hasAlpha]
                                 isPlanar:[srcImageRep isPlanar]
                           colorSpaceName:[srcImageRep colorSpaceName]
-                             bytesPerRow:0
+                             bytesPerRow:h*destSamplesPerPixel
                             bitsPerPixel:0];
 
     srcData = [srcImageRep bitmapData];
@@ -525,9 +530,9 @@
     for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
         {
-            p1 = srcData + bytesPerPixel * (y * w + x);
-            p2 = destData + bytesPerPixel * (x * h + (h-y-1));
-            for (s = 0; s < bytesPerPixel; s++)
+            p1 = srcData + srcSamplesPerPixel * (y * w + x);
+            p2 = destData + destSamplesPerPixel * (x * h + (h-y-1));
+            for (s = 0; s < srcSamplesPerPixel; s++)
                 p2[s] = p1[s];
         }
 
