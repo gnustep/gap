@@ -1163,7 +1163,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             objdesc = [descriptions objectAtIndex: i];
             str = [objdesc objectForKey: @"type"];
             if([str isEqualToString: @"path"])
-                obj = [[GRBezierPathEditor alloc] initFromData: objdesc
+                obj = [[GRBezierPath alloc] initFromData: objdesc
                                                         inView: self zoomFactor: zFactor];
             else
                 obj = [[GRText alloc] initFromData: objdesc
