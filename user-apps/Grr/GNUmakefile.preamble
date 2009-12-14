@@ -1,1 +1,3 @@
 # Preamble Definitions
+ADDITIONAL_INCLUDE_DIRS += -I../../libs/RSSKit/RSSKit.framework/Headers
+ADDITIONAL_LIB_DIRS += -L../../libs/RSSKit/RSSKit.framework/
