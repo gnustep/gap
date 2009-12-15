@@ -21,7 +21,7 @@
 #import "RSSFeed.h"
 
 @interface RSSFeed (Storage)
--(NSDictionary*) plistDictionary;
+-(NSMutableDictionary*) plistDictionary;
 +(id)feedFromPlistDictionary: (NSDictionary*) plistDictionary;
 -(id)initFromPlistDictionary: (NSDictionary*) plistDictionary;
 @end
