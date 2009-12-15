@@ -125,7 +125,7 @@ enum RSSFeedError
  * Returns a NSDictionary object that is property-list compatible and
  * contains all information required to rebuild this article object.
  */
-- (NSDictionary*) plistDictionary;
+- (NSMutableDictionary*) plistDictionary;
 @end
 
 @protocol RSSMutableFeed <RSSFeed>

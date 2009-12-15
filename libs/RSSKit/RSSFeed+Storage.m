@@ -33,7 +33,7 @@
 /**
  * Returns a Plist-able dictionary representation of this feed.
  */
--(NSDictionary*) plistDictionary
+-(NSMutableDictionary*) plistDictionary
 {
     int i;
     NSMutableArray* articleIndex;

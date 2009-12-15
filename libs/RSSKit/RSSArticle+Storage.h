@@ -46,7 +46,7 @@
 /**
  * Returns the dictionary that stores the information for this article object.
  */
--(NSDictionary*) plistDictionary;
+-(NSMutableDictionary*) plistDictionary;
 
 @end
 
