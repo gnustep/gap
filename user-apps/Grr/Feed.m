@@ -177,9 +177,9 @@
 -(void) beginsFetching
 {
 	// FIXME: why was this enabled only for GNUstep?
-//#ifdef GNUSTEP
+#ifdef GNUSTEP
     [feedURL applyProxySettings];
-//#endif
+#endif
 }
 
 @end
