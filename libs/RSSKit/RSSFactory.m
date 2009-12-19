@@ -138,8 +138,14 @@ NSString* stringToFSString( NSString* aString )
     if (RSSArticleStorageDirectory == nil) {
         NSFileManager* manager;
         BOOL isDir, exists;
+        NSString *storagePath;
+        
+        storagePath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+        storagePath = [storagePath stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
+        storagePath = [storagePath stringByAppendingPathComponent:@"RSSArticles"];
 
-        ASSIGN(RSSArticleStorageDirectory, [@"~/GNUstep/Library/RSSArticles" stringByExpandingTildeInPath]);
+
+        ASSIGN(RSSArticleStorageDirectory, storagePath);
         
         manager = [NSFileManager defaultManager];
         
