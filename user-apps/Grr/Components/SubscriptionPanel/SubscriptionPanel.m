@@ -66,8 +66,6 @@
 -(void) dealloc
 {
     DESTROY(panel);
-    DESTROY(urlField);
-    DESTROY(subscriptionButton);
     DESTROY(referenceElement);
     
     [super dealloc];
