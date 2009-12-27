@@ -27,11 +27,11 @@
 
 @implementation GRTextEditor
 
-- (id)initEditor:(GRText *)anObject
+- (id)initEditor:(GRDrawableObject *)anObject
 {
     unsigned int style = NSTitledWindowMask | NSResizableWindowMask;
 
-    self = [super init];
+    self = [super initEditor:anObject];
 
     if(self)
     {
@@ -40,7 +40,6 @@
                                   backing: NSBackingStoreBuffered
                                     defer: NO];
         isSelect = NO;
-        isvalid = NO;
         [myWindow setMaxSize: NSMakeSize(500, 2000)];
         [myWindow setMinSize: NSMakeSize(500, 300)];
         [myWindow setTitle: @"Text Editor"];

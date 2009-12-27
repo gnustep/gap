@@ -33,8 +33,6 @@
 
 }
 
-- (id)initEditor:(GRCircle *)anObject;
-
 - (void)draw;
 
 @end

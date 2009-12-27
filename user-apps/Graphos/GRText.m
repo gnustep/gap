@@ -94,7 +94,7 @@
     {
         docView = aView;
         zmFactor = zf;
-        editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
+        editor = [[GRTextEditor alloc] initEditor:self];
         ASSIGN(str, [description objectForKey: @"string"]);
         pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);

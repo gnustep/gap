@@ -72,7 +72,6 @@
 - (NSDictionary *) objectDictionary;
 - (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
-- (BOOL)isDrawingForPrinting;
 
 /**
  * add a GRBezierPath

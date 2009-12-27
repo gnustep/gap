@@ -29,6 +29,20 @@
 
 @implementation GRObjectEditor
 
+- (id)initEditor:(GRDrawableObject *)anObject
+{
+    self = [super init];
+    if(self != nil)
+    {
+        object = anObject;
+        groupSelected = NO;
+        editSelected = NO;
+        isdone = NO;
+        isvalid = NO;
+    }
+    return self;
+}
+
 - (void)select
 {
     [self selectAsGroup];
