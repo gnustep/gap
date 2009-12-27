@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 39;
+	objectVersion = 38;
 	objects = {
 		080E96D9FE201CDB7F000001 = {
 			fileRef = 2A37F4B9FDCFA73011CA2CEA;
@@ -30,16 +30,13 @@
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C1660FE840EACC02AAC07 = {
 			fileEncoding = 10;
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
 			name = English;
 			path = English.lproj/InfoPlist.strings;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C1661FE840EACC02AAC07 = {
 			fileRef = 089C165FFE840EACC02AAC07;
@@ -64,15 +61,12 @@
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		1058C7A7FEA54F5311CA2CBB = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		1058C7A8FEA54F5311CA2CBB = {
 			children = (
@@ -82,7 +76,6 @@
 			isa = PBXGroup;
 			name = "Other Frameworks";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		1058C7A9FEA54F5311CA2CBB = {
 			fileRef = 1058C7A7FEA54F5311CA2CBB;
@@ -95,23 +88,6 @@
 //102
 //103
 //104
-//170
-//171
-//172
-//173
-//174
-		1758732AFF379DA111CA2CBB = {
-			explicitFileType = wrapper.application;
-			isa = PBXFileReference;
-			path = Graphos.app;
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-//170
-//171
-//172
-//173
-//174
 //190
 //191
 //192
@@ -119,12 +95,11 @@
 //194
 		19C28FB0FE9D524F11CA2CBB = {
 			children = (
-				1758732AFF379DA111CA2CBB,
+				85CB2C500F13D72900A80101,
 			);
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 //190
 //191
@@ -137,8 +112,6 @@
 //2A3
 //2A4
 		2A37F4A9FDCFA73011CA2CEA = {
-			buildSettings = {
-			};
 			buildStyles = (
 				4A9504D0FFE6A4CB11CA0CBA,
 				4A9504D1FFE6A4CB11CA0CBA,
@@ -163,7 +136,6 @@
 			name = Draw;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4ABFDCFA73011CA2CEA = {
 			children = (
@@ -205,28 +177,27 @@
 				F539B21008A35A5001A8012F,
 				F539B25B08A35ECD01A8012F,
 				F539B25C08A35ECD01A8012F,
+				85C853A310E6D98200A80101,
+				85C853A410E6D98200A80101,
+				85C853A710E6DA9100A80101,
+				85C853A810E6DA9100A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4ACFDCFA73011CA2CEA = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRDocument.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4AEFDCFA73011CA2CEA = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRDocument.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4AFFDCFA73011CA2CEA = {
 			children = (
@@ -236,15 +207,12 @@
 			name = "Other Sources";
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B0FDCFA73011CA2CEA = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = main.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B4FDCFA73011CA2CEA = {
 			children = (
@@ -254,15 +222,12 @@
 			name = GRDocument.nib;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B5FDCFA73011CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
 			name = GRDocument.nib;
 			path = English.lproj/GRDocument.nib;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B6FDCFA73011CA2CEA = {
 			children = (
@@ -272,15 +237,12 @@
 			name = MainMenu.nib;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B7FDCFA73011CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
 			name = English;
 			path = English.lproj/MainMenu.nib;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B8FDCFA73011CA2CEA = {
 			children = (
@@ -322,7 +284,6 @@
 			name = Resources;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4B9FDCFA73011CA2CEA = {
 			children = (
@@ -332,15 +293,12 @@
 			name = Credits.rtf;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4BAFDCFA73011CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = text.rtf;
 			name = English;
 			path = English.lproj/Credits.rtf;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4C3FDCFA73011CA2CEA = {
 			children = (
@@ -351,23 +309,18 @@
 			name = Frameworks;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		2A37F4C4FDCFA73011CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		2A37F4C5FDCFA73011CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		2A37F4C6FDCFA73011CA2CEA = {
 			buildPhases = (
@@ -394,7 +347,7 @@
 			name = Draw;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Draw;
-			productReference = 1758732AFF379DA111CA2CBB;
+			productReference = 85CB2C500F13D72900A80101;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -462,6 +415,8 @@
 				85CB5DF80D72C8D000A80101,
 				85B1DAAC0D8B2E2400A80103,
 				853877F60DA0375200A80103,
+				85C853A510E6D98200A80101,
+				85C853A910E6DA9100A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +490,8 @@
 				85CB5DF90D72C8D000A80101,
 				85B1DAAD0D8B2E2400A80103,
 				853877F70DA0375200A80103,
+				85C853A610E6D98200A80101,
+				85C853AA10E6DA9100A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,18 +565,14 @@
 		853877F40DA0375200A80103 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRPathEditor.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		853877F50DA0375200A80103 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRPathEditor.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		853877F60DA0375200A80103 = {
 			fileRef = 853877F40DA0375200A80103;
@@ -636,18 +589,14 @@
 		85AEB2950CA43E7A00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRBox.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85AEB2960CA43E7A00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRBox.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85AEB2970CA43E7A00A80101 = {
 			fileRef = 85AEB2950CA43E7A00A80101;
@@ -664,18 +613,14 @@
 		85B1DAAA0D8B2E2400A80103 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRPathObject.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85B1DAAB0D8B2E2400A80103 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRPathObject.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85B1DAAC0D8B2E2400A80103 = {
 			fileRef = 85B1DAAA0D8B2E2400A80103;
@@ -689,21 +634,70 @@
 			settings = {
 			};
 		};
+		85C853A310E6D98200A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRCircle.h;
+			refType = 4;
+		};
+		85C853A410E6D98200A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRCircle.m;
+			refType = 4;
+		};
+		85C853A510E6D98200A80101 = {
+			fileRef = 85C853A310E6D98200A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85C853A610E6D98200A80101 = {
+			fileRef = 85C853A410E6D98200A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85C853A710E6DA9100A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRCircleEditor.h;
+			refType = 4;
+		};
+		85C853A810E6DA9100A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRCircleEditor.m;
+			refType = 4;
+		};
+		85C853A910E6DA9100A80101 = {
+			fileRef = 85C853A710E6DA9100A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85C853AA10E6DA9100A80101 = {
+			fileRef = 85C853A810E6DA9100A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85CB2C500F13D72900A80101 = {
+			isa = PBXApplicationReference;
+			path = Graphos.app;
+			refType = 3;
+		};
 		85CB5DF20D72C0F000A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRDrawableObject.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85CB5DF30D72C0F000A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRDrawableObject.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85CB5DF40D72C0F000A80101 = {
 			fileRef = 85CB5DF20D72C0F000A80101;
@@ -720,18 +714,14 @@
 		85CB5DF60D72C8D000A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRObjectEditor.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85CB5DF70D72C8D000A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRObjectEditor.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85CB5DF80D72C8D000A80101 = {
 			fileRef = 85CB5DF60D72C8D000A80101;
@@ -748,18 +738,14 @@
 		85D2B0910D701D4E00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRBezierPath.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D2B0920D701D4E00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRBezierPath.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D2B0930D701D4E00A80101 = {
 			fileRef = 85D2B0910D701D4E00A80101;
@@ -775,27 +761,21 @@
 		};
 		85DC414D0CAC69E400A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = txtAlignCenter.tiff;
 			path = Resources/txtAlignCenter.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC414E0CAC69E400A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = txtAlignLeft.tiff;
 			path = Resources/txtAlignLeft.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC414F0CAC69E400A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = txtAlignRight.tiff;
 			path = Resources/txtAlignRight.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41500CAC69E400A80101 = {
 			fileRef = 85DC414D0CAC69E400A80101;
@@ -817,51 +797,39 @@
 		};
 		85DC41530CAC6A3B00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = LineCap1.tiff;
 			path = Resources/LineCap1.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41540CAC6A3B00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = LineCap2.tiff;
 			path = Resources/LineCap2.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41550CAC6A3B00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = LineCap3.tiff;
 			path = Resources/LineCap3.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41560CAC6A3C00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = LineJoin1.tiff;
 			path = Resources/LineJoin1.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41570CAC6A3C00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = LineJoin2.tiff;
 			path = Resources/LineJoin2.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41580CAC6A3C00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = LineJoin3.tiff;
 			path = Resources/LineJoin3.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41590CAC6A3C00A80101 = {
 			fileRef = 85DC41530CAC6A3B00A80101;
@@ -901,35 +869,27 @@
 		};
 		85DC415F0CAC6A4A00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = curs1.tiff;
 			path = Resources/curs1.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41600CAC6A4A00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = curs2.tiff;
 			path = Resources/curs2.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41610CAC6A4A00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = curs3.tiff;
 			path = Resources/curs3.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41620CAC6A4A00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = curs4.tiff;
 			path = Resources/curs4.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DC41630CAC6A4A00A80101 = {
 			fileRef = 85DC415F0CAC6A4A00A80101;
@@ -958,18 +918,14 @@
 		85DE3FF40CA06C2200A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRBoxEditor.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DE3FF50CA06C2200A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRBoxEditor.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DE3FF60CA06C2200A80101 = {
 			fileRef = 85DE3FF40CA06C2200A80101;
@@ -986,18 +942,14 @@
 		85DE40060CA0772E00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRObjectControlPoint.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DE40070CA0772E00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRObjectControlPoint.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DE40080CA0772E00A80101 = {
 			fileRef = 85DE40060CA0772E00A80101;
@@ -1023,11 +975,9 @@
 //F54
 		F507216008B5ECA701A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = magnify.tiff;
 			path = Resources/magnify.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216108B5ECA701A8012F = {
 			fileRef = F507216008B5ECA701A8012F;
@@ -1037,51 +987,39 @@
 		};
 		F507216208B5ED3E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = pencil.tiff;
 			path = Resources/pencil.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216308B5ED3E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = rectangle.tiff;
 			path = Resources/rectangle.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216408B5ED3E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = reduce.tiff;
 			path = Resources/reduce.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216508B5ED3E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = reflect.tiff;
 			path = Resources/reflect.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216608B5ED3E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = rotate.tiff;
 			path = Resources/rotate.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216708B5ED3E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = shissors.tiff;
 			path = Resources/shissors.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216808B5ED3E01A8012F = {
 			fileRef = F507216208B5ED3E01A8012F;
@@ -1121,11 +1059,9 @@
 		};
 		F507216E08B5ED7501A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = paint.tiff;
 			path = Resources/paint.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507216F08B5ED7501A8012F = {
 			fileRef = F507216E08B5ED7501A8012F;
@@ -1135,11 +1071,9 @@
 		};
 		F507217208B5EEE201A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = hand.tiff;
 			path = Resources/hand.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F507217308B5EEE201A8012F = {
 			fileRef = F507217208B5EEE201A8012F;
@@ -1149,11 +1083,9 @@
 		};
 		F539B1E108A2D3D101A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = blackarrow.tiff;
 			path = Resources/blackarrow.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1E208A2D3D201A8012F = {
 			fileRef = F539B1E108A2D3D101A8012F;
@@ -1163,11 +1095,9 @@
 		};
 		F539B1E308A2D3DD01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = whitearrow.tiff;
 			path = Resources/whitearrow.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1E408A2D3DF01A8012F = {
 			fileRef = F539B1E308A2D3DD01A8012F;
@@ -1177,11 +1107,9 @@
 		};
 		F539B1E508A2D67E01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = bezier.tiff;
 			path = Resources/bezier.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1E608A2D67F01A8012F = {
 			fileRef = F539B1E508A2D67E01A8012F;
@@ -1191,11 +1119,9 @@
 		};
 		F539B1E708A2D84101A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = text.tiff;
 			path = Resources/text.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1E808A2D84201A8012F = {
 			fileRef = F539B1E708A2D84101A8012F;
@@ -1205,11 +1131,9 @@
 		};
 		F539B1E908A2D85401A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = circle.tiff;
 			path = Resources/circle.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1EA08A2D85601A8012F = {
 			fileRef = F539B1E908A2D85401A8012F;
@@ -1219,11 +1143,9 @@
 		};
 		F539B1EB08A2D86901A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = rectangle.tiff;
 			path = Resources/rectangle.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1EC08A2D86B01A8012F = {
 			fileRef = F539B1EB08A2D86901A8012F;
@@ -1234,18 +1156,14 @@
 		F539B1ED08A2D91C01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRDocView.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1EE08A2D91C01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRDocView.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1EF08A2D96001A8012F = {
 			fileRef = F539B1ED08A2D91C01A8012F;
@@ -1262,18 +1180,14 @@
 		F539B1F708A3570901A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRBezierPathEditor.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1F808A3570901A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRBezierPathEditor.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1F908A3570901A8012F = {
 			fileRef = F539B1F708A3570901A8012F;
@@ -1290,18 +1204,14 @@
 		F539B1FB08A3578301A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRFunctions.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1FC08A3578301A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRFunctions.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B1FD08A3578301A8012F = {
 			fileRef = F539B1FB08A3578301A8012F;
@@ -1318,18 +1228,14 @@
 		F539B1FF08A3578C01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRBezierControlPoint.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20008A3578C01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRBezierControlPoint.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20108A3578C01A8012F = {
 			fileRef = F539B1FF08A3578C01A8012F;
@@ -1346,18 +1252,14 @@
 		F539B20308A3589601A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRText.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20408A3589601A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRText.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20508A3589601A8012F = {
 			fileRef = F539B20308A3589601A8012F;
@@ -1374,18 +1276,14 @@
 		F539B20708A3595201A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRPropsEditor.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20808A3595201A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRPropsEditor.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20908A3595601A8012F = {
 			fileRef = F539B20808A3595201A8012F;
@@ -1402,18 +1300,14 @@
 		F539B20B08A359DC01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRTextEditor.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20C08A359DC01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRTextEditor.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B20D08A359DC01A8012F = {
 			fileRef = F539B20B08A359DC01A8012F;
@@ -1430,18 +1324,14 @@
 		F539B20F08A35A5001A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRTextEditorView.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B21008A35A5001A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRTextEditorView.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B21108A35A5001A8012F = {
 			fileRef = F539B20F08A35A5001A8012F;
@@ -1458,18 +1348,14 @@
 		F539B25708A35E7001A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = Graphos.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B25808A35E7001A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = Graphos.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B25908A35E7001A8012F = {
 			fileRef = F539B25708A35E7001A8012F;
@@ -1486,18 +1372,14 @@
 		F539B25B08A35ECD01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = GRTools.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B25C08A35ECD01A8012F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = GRTools.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B25D08A35ECD01A8012F = {
 			fileRef = F539B25B08A35ECD01A8012F;
@@ -1513,11 +1395,9 @@
 		};
 		F539B26108A3676D01A8012F = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.tiff;
 			name = x.tiff;
 			path = Resources/x.tiff;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F539B26208A3676E01A8012F = {
 			fileRef = F539B26108A3676D01A8012F;
