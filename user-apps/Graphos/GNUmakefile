@@ -54,7 +54,7 @@ Resources/txtAlignRight.tiff \
 Resources/whitearrow.tiff \
 Resources/x.tiff \
 Resources/Graphos.tiff \
-Resources/Info-gnustep.plist 
+Resources/GraphosInfo.plist 
 
 
 #
@@ -79,7 +79,9 @@ GRObjectEditor.h \
 GRDrawableObject.h \
 GRObjectControlPoint.h \
 GRPathObject.h \
-GRPathEditor.h
+GRPathEditor.h \
+GRCircle.h \
+GRCircleEditor.h
 
 #
 # Class files
@@ -103,7 +105,9 @@ GRObjectEditor.m \
 GRDrawableObject.m \
 GRObjectControlPoint.m \
 GRPathObject.m \
-GRPathEditor.m
+GRPathEditor.m \
+GRCircle.m \
+GRCircleEditor.m
 
 #
 # Other sources

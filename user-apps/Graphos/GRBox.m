@@ -24,6 +24,7 @@
  */
 
 #import <AppKit/NSColor.h>
+#import <AppKit/NSGraphics.h>
 #import <AppKit/NSGraphicsContext.h>
 #import "GRBox.h"
 #import "GRBoxEditor.h"
