@@ -180,7 +180,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         if([key rangeOfString: @"path"].length)
         {
             bzPath = [[GRBezierPath alloc] initFromData: objdict
-                                                         inView: self zoomFactor: zFactor];
+                                                 inView: self zoomFactor: zFactor];
             [objects addObject: bzPath];
             [bzPath release];
             edind = [objects count] -1;
@@ -1281,22 +1281,34 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     pboard = [NSPasteboard generalPasteboard];
     types = [NSArray arrayWithObject: @"GRObjectPboardType"];
-    if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"]) {
+    if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"])
+    {
         descriptions = (NSArray *)[[pboard stringForType: @"GRObjectPboardType"] propertyList];
 
         for(i = 0; i < [descriptions count]; i++)
         {
             objdesc = [descriptions objectAtIndex: i];
             str = [objdesc objectForKey: @"type"];
+
+            obj = nil;
             if([str isEqualToString: @"path"])
-                obj = [[GRBezierPath alloc] initFromData: objdesc
-                                                        inView: self zoomFactor: zFactor];
+                obj = [GRBezierPath alloc];
+            else if([str isEqualToString: @"text"])
+                obj = [GRText alloc];
+            else if([str isEqualToString: @"box"])
+                obj = [GRBox alloc];
+            else if([str isEqualToString: @"circle"])
+                obj = [GRCircle alloc];
             else
-                obj = [[GRText alloc] initFromData: objdesc
-                                            inView: self zoomFactor: zFactor];
-            [objects addObject: obj];
-            [[obj editor] selectAsGroup];
-            [obj release];
+                NSLog(@"Unknown object to paste");
+            if (obj != nil)
+            {
+                obj = [obj initFromData: objdesc
+                                 inView: self zoomFactor: zFactor];
+                [objects addObject: obj];
+                [[obj editor] selectAsGroup];
+                [obj release];
+            }
         }
         [self setNeedsDisplay: YES];
     }

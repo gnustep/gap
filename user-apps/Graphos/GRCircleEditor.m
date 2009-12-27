@@ -143,17 +143,12 @@
         return;
 
     bzp = [NSBezierPath bezierPath];
-
-    [bzp appendBezierPathWithRect:[(GRCircle *)object bounds]];
-    [bzp setLineWidth:0.2];
-    [[NSColor lightGrayColor] set];
-    [bzp stroke];
     
-    [bzp setLineWidth:1];
-
     if([self isGroupSelected])
     {
         NSRect r;
+
+        [bzp setLineWidth:1];
 
         r = [[(GRCircle *)object startControlPoint] centerRect];
         [[NSColor blackColor] set];
@@ -167,6 +162,13 @@
     {
         NSRect r;
 
+        [bzp appendBezierPathWithRect:[(GRCircle *)object bounds]];
+        [bzp setLineWidth:0.2];
+        [[NSColor lightGrayColor] set];
+        [bzp stroke];
+
+        [bzp setLineWidth:1];
+        
         r = [[(GRCircle *)object startControlPoint] centerRect];
         [[NSColor blackColor] set];
         NSRectFill(r);
