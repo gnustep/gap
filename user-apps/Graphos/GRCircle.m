@@ -1,12 +1,12 @@
 /*
  Project: Graphos
- GRBox.m
+ GRCircle.m
 
- Copyright (C) 2007-2009 GNUstep Application Project
+ Copyright (C) 2009 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
- Created: 2007-09-21
+ Created: 2009-12-27
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -25,12 +25,11 @@
 
 #import <AppKit/NSColor.h>
 #import <AppKit/NSGraphicsContext.h>
-#import "GRBox.h"
-#import "GRBoxEditor.h"
+#import "GRCircle.h"
+#import "GRCircleEditor.h"
 #import "GRFunctions.h"
 
-
-@implementation GRBox
+@implementation GRCircle
 
 - (id)initInView:(GRDocView *)aView
       zoomFactor:(float)zf
@@ -43,7 +42,7 @@
         myPath = [[NSBezierPath bezierPath] retain];
         [myPath setCachesBezierPath: NO];
         pos = NSMakePoint(0, 0);
-	size = NSMakeSize(0, 0);
+        size = NSMakeSize(0, 0);
         startControlPoint = nil;
         endControlPoint = nil;
         rotation = 0;
@@ -66,7 +65,7 @@
         fillColor[3] = 0;
         strokeAlpha = 1;
         fillAlpha = 1;
-        editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
+        editor = [[GRCircleEditor alloc] initEditor:(GRCircle*)self];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
     }
@@ -86,7 +85,7 @@
     if(self)
     {
         docView = aView;
-        editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
+        editor = [[GRCircleEditor alloc] initEditor:(GRCircle*)self];
         pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);
         size = NSMakeSize([[description objectForKey: @"width"]  floatValue],
@@ -204,7 +203,7 @@
 {
     [self setStartAtPoint:[startControlPoint center]];
     [self setEndAtPoint:[endControlPoint center]];
-    [(GRBoxEditor *)editor setIsDone:YES];
+    [(GRCircleEditor *)editor setIsDone:YES];
 }
 
 - (void)setFlat:(float)flat
@@ -309,9 +308,9 @@
 {
     [super setLocked:value];
     if(!locked)
-        [(GRBoxEditor *)editor unselect];
+        [(GRCircleEditor *)editor unselect];
     else
-        [(GRBoxEditor *)editor selectAsGroup];
+        [(GRCircleEditor *)editor selectAsGroup];
 }
 
 - (BOOL)pointInBounds:(NSPoint)p
@@ -359,15 +358,35 @@
     [self remakePath];
 }
 
+/** bounds accessor */
+- (NSRect)bounds
+{
+    return bounds;
+}
+
 /** draws the object and calls the editor to draw itself afterwards */
 - (void)draw
 {
     NSColor *color;
     NSBezierPath *bzp;
+    NSPoint center;
+    float radius;
+    float w,h;
+    float minLength;
 
+    center = NSMakePoint(NSMidX(bounds), NSMidY(bounds));
+    w = NSWidth(bounds);
+    h = NSWidth(bounds);
+    if (w > h)
+        minLength = h;
+    else
+        minLength = w;
+    radius = minLength / 2;
 
     bzp = [NSBezierPath bezierPath];
-    [bzp appendBezierPathWithRect:bounds];
+    [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
+    
+
     if(stroked)
     {
         [NSGraphicsContext saveGraphicsState];

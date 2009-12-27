@@ -1,12 +1,12 @@
 /*
  Project: Graphos
- GRBoxEditor.h
+ GRCircleEditor.h
 
- Copyright (C) 2007-2008 GNUstep Application Project
+ Copyright (C) 2009 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
- Created: 2007-09-18
+ Created: 2009-12-27
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -23,16 +23,17 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #import <Foundation/Foundation.h>
-#import "GRBox.h"
+#import "GRCircle.h"
 #import "GRPathEditor.h"
 
-@interface GRBoxEditor : GRPathEditor
+
+@interface GRCircleEditor : GRPathEditor
 {
+
 }
 
-- (id)initEditor:(GRBox *)anObject;
+- (id)initEditor:(GRCircle *)anObject;
 
 - (void)draw;
 

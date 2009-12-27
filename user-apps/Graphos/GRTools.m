@@ -108,7 +108,6 @@
         [self addSubview: circleButt];
         [buttons addObject: circleButt];
         [circleButt release];
-        [circleButt setEnabled:NO];
 
         rectangleButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(25, 80, 25, 20)
                                                    toolType: rectangletool];

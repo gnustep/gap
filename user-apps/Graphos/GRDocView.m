@@ -30,6 +30,8 @@
 #import "GRBoxEditor.h"
 #import "GRText.h"
 #import "GRTextEditor.h"
+#import "GRCircle.h"
+#import "GRCircleEditor.h"
 #import "GRPropsEditor.h"
 
 
@@ -103,6 +105,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             str = [NSString stringWithFormat: @"box%i", b];
             b++;
+        } else if([obj isKindOfClass: [GRCircle class]])
+        {
+            str = [NSString stringWithFormat: @"circle%i", t];
+            t++;
         } else if([obj isKindOfClass: [GRText class]])
         {
             str = [NSString stringWithFormat: @"text%i", t];
@@ -157,6 +163,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     GRBezierPath *bzPath;
     GRText *gGRText;
     GRBox *box;
+    GRCircle *circle;
     int i;
 
     if(!dict)
@@ -183,15 +190,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                                             inView: self zoomFactor: zFactor];
             [objects addObject: gGRText];
             [gGRText release];
-        
         } else if([key rangeOfString: @"box"].length)
         {
             box = [[GRBox alloc] initFromData: objdict
                                             inView: self zoomFactor: zFactor];
             [objects addObject: box];
             [box release];
-        
-
+        } else if([key rangeOfString: @"circle"].length)
+        {
+            circle = [[GRCircle alloc] initFromData: objdict
+                                       inView: self zoomFactor: zFactor];
+            [objects addObject: circle];
+            [circle release];
         } else
         {
 	       [NSException raise:@"Unsupported object in file." format:@"Key: %@", key]; 
@@ -240,6 +250,23 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [objects addObject: box];
     [[box editor] select];
     [box release];
+    [self setNeedsDisplay: YES];
+    edind = [objects count] -1;
+}
+
+- (void)addCircle
+{
+    GRCircle *circle;
+
+    //    for(i = 0; i < [objects count]; i++)
+    //        [[[objects objectAtIndex: i] editor] unselect];
+
+    circle = [[GRCircle alloc] initInView: self
+                         zoomFactor: zFactor];
+
+    [objects addObject: circle];
+    [[circle editor] select];
+    [circle release];
     [self setNeedsDisplay: YES];
     edind = [objects count] -1;
 }
@@ -540,6 +567,104 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
+/* this has a lot in common with startBoxAtPoint */
+- (void)startCircleAtPoint:(NSPoint)p
+{
+    NSEvent *nextEvent;
+    GRCircle *circle;
+    id obj;
+    BOOL isneweditor = YES;
+    int i;
+
+    for(i = 0; i < [objects count]; i++)
+    {
+        obj = [objects objectAtIndex: i];
+        if([obj isKindOfClass: [GRCircle class]])
+            if(![[obj editor] isdone])
+                isneweditor = NO;
+    }
+
+    if(isneweditor)
+        for(i = 0; i < [objects count]; i++)
+        {
+            GRObjectEditor *objEdi;
+
+            objEdi = [[objects objectAtIndex: i] editor];
+            if (![objEdi isSelect])
+                [objEdi unselect];
+        }
+
+            nextEvent = [[self window] nextEventMatchingMask:
+                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+    [self verifyModifiersOfEvent: nextEvent];
+
+    if([nextEvent type] != NSLeftMouseDragged)
+    {
+        NSLog(@"is not left mouse dragged");
+        if(isneweditor)
+        {
+            [self addBox];
+            circle = [objects objectAtIndex: edind];
+            [[circle editor] selectForEditing];
+            [circle setStartAtPoint: p];
+            [self setNeedsDisplay: YES];
+            return;
+        } else
+        {
+            circle = [objects objectAtIndex: edind];
+            [[circle editor] selectForEditing];
+            //            if(shiftclick)
+            //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [circle setEndAtPoint: p];
+            [self setNeedsDisplay: YES];
+            return;
+        }
+    } else
+    {
+        NSLog(@"is left mouse dragged");
+        if(isneweditor)
+        {
+            NSLog(@"is new editor");
+            [self addCircle];
+            circle = [objects objectAtIndex: edind];
+            [[circle editor] selectForEditing];
+            [circle setStartAtPoint: p];
+            [self setNeedsDisplay: YES];
+        } else
+        {
+            NSLog(@"is old editor");
+            circle = [objects objectAtIndex: edind];
+            [[circle editor] selectForEditing];
+            //            if(shiftclick)
+            //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+            [circle setEndAtPoint: p];
+            [self setNeedsDisplay: YES];
+        }
+
+        do
+        {
+            p = [nextEvent locationInWindow];
+            p = [self convertPoint: p fromView: nil];
+            //            if(shiftclick)
+            //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+
+            [circle setEndAtPoint: p];
+
+            [self setNeedsDisplay: YES];
+
+            nextEvent = [[self window] nextEventMatchingMask:
+                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+            [self verifyModifiersOfEvent: nextEvent];
+        } while([nextEvent type] != NSLeftMouseUp);
+        if (isneweditor)
+        {
+            [[circle editor] unselect];
+            [[circle editor] selectAsGroup];
+        }
+    }
+}
+
+
 - (void)selectObjectAtPoint:(NSPoint)p
 {
     id obj;
@@ -812,6 +937,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
             if([obj isKindOfClass: [GRBezierPath class]] ||
+               [obj isKindOfClass: [GRCircle class]] ||
                [obj isKindOfClass: [GRBox class]])
             {
                 [objProps setObject: @"path" forKey: @"type"];
@@ -1292,7 +1418,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [self addTextAtPoint: p];
                 break;
             case circletool:
-
+                [self startCircleAtPoint: p];
                 break;
             case rectangletool:
                 [self startBoxAtPoint: p];

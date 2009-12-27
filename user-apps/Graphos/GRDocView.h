@@ -85,6 +85,11 @@
 - (void)addBox;
 
 /**
+ * add a GRCircle
+ */
+- (void)addCircle;
+
+/**
  * add a GRText at the specified point
  */
 - (void)addTextAtPoint:(NSPoint)p;
