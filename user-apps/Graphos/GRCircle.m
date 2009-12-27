@@ -140,7 +140,7 @@
     NSString *str;
 
     dict = [NSMutableDictionary dictionaryWithCapacity: 1];
-    [dict setObject: @"box" forKey: @"type"];
+    [dict setObject: @"circle" forKey: @"type"];
 
     str = [NSString stringWithFormat: @"%.3f", pos.x];
     [dict setObject: str forKey: @"posx"];

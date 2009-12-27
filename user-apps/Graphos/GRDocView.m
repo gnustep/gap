@@ -1308,9 +1308,9 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [objects addObject: obj];
                 [[obj editor] selectAsGroup];
                 [obj release];
+                [self setNeedsDisplay: YES];
             }
         }
-        [self setNeedsDisplay: YES];
     }
 }
 
