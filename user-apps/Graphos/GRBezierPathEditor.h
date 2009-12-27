@@ -35,8 +35,6 @@
     float zmFactor;
 }
 
-- (id)initEditor:(GRBezierPath *)anObject;
-
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
 - (void)setIsValid:(BOOL)value;

@@ -36,8 +36,6 @@
     BOOL isSelect;
 }
 
-- (id)initEditor:(GRText *)anObject;
-
 - (GRTextEditorView *)editorView;
 
 - (void)setPoint:(NSPoint)p

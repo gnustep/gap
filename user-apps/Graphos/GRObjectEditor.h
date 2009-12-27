@@ -40,6 +40,7 @@
     BOOL isdone;
 }
 
+- (id)initEditor:(GRDrawableObject *)anObject;
 - (void)select;
 - (void)selectAsGroup;
 - (void)selectForEditing;

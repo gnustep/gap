@@ -65,7 +65,7 @@
         fillColor[3] = 0;
         strokeAlpha = 1;
         fillAlpha = 1;
-        editor = [[GRCircleEditor alloc] initEditor:(GRCircle*)self];
+        editor = [[GRCircleEditor alloc] initEditor:self];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
     }

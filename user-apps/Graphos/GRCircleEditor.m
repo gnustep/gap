@@ -30,16 +30,11 @@
 
 @implementation GRCircleEditor
 
-- (id)initEditor:(GRCircle *)anObject
+- (id)initEditor:(GRDrawableObject *)anObject
 {
-    self = [super init];
+    self = [super initEditor:anObject];
     if(self != nil)
     {
-        object = anObject;
-        groupSelected = NO;
-        editSelected = NO;
-        isdone = NO;
-        isvalid = NO;
     }
     return self;
 }
