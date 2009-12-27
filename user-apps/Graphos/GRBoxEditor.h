@@ -2,7 +2,7 @@
  Project: Graphos
  GRBoxEditor.h
 
- Copyright (C) 2007-2008 GNUstep Application Project
+ Copyright (C) 2007-2009 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 

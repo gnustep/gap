@@ -248,15 +248,15 @@
 				},
 			);
 			"PBXTemplateGeometry-F5CA7ECB015C094F0DCA290F" = {
-				ContentSize = "{668, 621}";
+				ContentSize = "{930, 819}";
 				LeftSlideOut = {
 					Collapsed = NO;
-					Frame = "{{0, 0}, {668, 621}}";
+					Frame = "{{0, 0}, {930, 819}}";
 					Split0 = {
 						Collapsed = NO;
-						Frame = "{{0, 0}, {668, 621}}";
+						Frame = "{{0, 0}, {930, 819}}";
 						Split0 = {
-							Frame = "{{0, 0}, {668, 621}}";
+							Frame = "{{0, 0}, {930, 819}}";
 						};
 						SplitCount = 1;
 						Tab0 = {
@@ -371,7 +371,7 @@
 				StatusViewVisible = NO;
 				Template = F5CA7ECB015C094F0DCA290F;
 				ToolbarVisible = NO;
-				WindowLocation = "{610, 71}";
+				WindowLocation = "{90, 93}";
 			};
 			PBXWorkspaceContents = (
 				{
@@ -1154,7 +1154,7 @@
 		isa = PBXTextBookmark;
 		name = "GRDocView.m: drawRect:";
 		rLen = 31;
-		rLoc = 45025;
+		rLoc = 45301;
 		rType = 0;
 		vrLen = 1056;
 		vrLoc = 44415;
@@ -1194,7 +1194,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircle.m: draw";
 		rLen = 0;
-		rLoc = 10466;
+		rLoc = 10455;
 		rType = 0;
 		vrLen = 1404;
 		vrLoc = 10306;
@@ -1424,7 +1424,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircleEditor.h: 36";
 		rLen = 0;
-		rLoc = 1012;
+		rLoc = 984;
 		rType = 0;
 		vrLen = 1043;
 		vrLoc = 0;
@@ -1444,7 +1444,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircle.m: 293";
 		rLen = 0;
-		rLoc = 8671;
+		rLoc = 8660;
 		rType = 0;
 		vrLen = 698;
 		vrLoc = 8472;
@@ -1464,7 +1464,7 @@
 		isa = PBXTextBookmark;
 		name = "GRDocView.m: startCircleAtPoint:";
 		rLen = 0;
-		rLoc = 18492;
+		rLoc = 18484;
 		rType = 0;
 		vrLen = 1199;
 		vrLoc = 17778;
@@ -1474,7 +1474,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircle.m: draw";
 		rLen = 20;
-		rLoc = 10008;
+		rLoc = 9997;
 		rType = 0;
 		vrLen = 1084;
 		vrLoc = 0;
@@ -1494,7 +1494,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircle.m: draw";
 		rLen = 20;
-		rLoc = 10008;
+		rLoc = 9997;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 114;
@@ -1514,7 +1514,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircleEditor.h: initEditor:";
 		rLen = 0;
-		rLoc = 1012;
+		rLoc = 984;
 		rType = 0;
 		vrLen = 1037;
 		vrLoc = 0;
@@ -1584,7 +1584,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircle.m: draw";
 		rLen = 0;
-		rLoc = 10466;
+		rLoc = 10455;
 		rType = 0;
 		vrLen = 1404;
 		vrLoc = 10306;
@@ -1624,7 +1624,7 @@
 		isa = PBXTextBookmark;
 		name = "GRDocView.m: drawRect:";
 		rLen = 31;
-		rLoc = 45025;
+		rLoc = 45301;
 		rType = 0;
 		vrLen = 1056;
 		vrLoc = 44415;
@@ -1674,7 +1674,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircle.m: 361";
 		rLen = 0;
-		rLoc = 9880;
+		rLoc = 9869;
 		rType = 0;
 		vrLen = 887;
 		vrLoc = 9446;
@@ -1688,7 +1688,7 @@
 		isa = PBXTextBookmark;
 		name = "GRDocView.m: mouseDown:";
 		rLen = 0;
-		rLoc = 41864;
+		rLoc = 42140;
 		rType = 0;
 		vrLen = 875;
 		vrLoc = 45777;
@@ -1702,7 +1702,7 @@
 		isa = PBXTextBookmark;
 		name = "GRCircleEditor.m: draw";
 		rLen = 0;
-		rLoc = 4286;
+		rLoc = 4037;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 3577;
