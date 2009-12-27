@@ -727,7 +727,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 else
                     [[obj editor] unselect];
             }
-        } else if ([obj isKindOfClass: [GRBox class]])
+        } else if ([obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
         {
             if([obj onControlPoint: p])
             {
@@ -736,7 +736,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 return;
             } else
             {
-                    [[obj editor] unselect];
+                [[obj editor] unselect];
             }
         } else
         {
