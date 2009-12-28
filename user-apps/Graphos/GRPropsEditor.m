@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2009 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -337,6 +337,18 @@
         [okButt setTarget: self];
         [okButt setAction: @selector(okCancelPressed:)];
         [self addSubview: okButt];
+        
+        
+        /* set field values */
+        [fllCyanField setIntValue:fillcyan*100];
+        [fllMagentaField setIntValue:fillmagenta*100];
+        [fllYellowField setIntValue:fillyellow*100];
+        [fllBlakField setIntValue:fillblack*100];
+
+        [stkCyanField setIntValue:strokecyan*100];
+        [stkMagentaField setIntValue:strokemagenta*100];
+        [stkYellowField setIntValue:strokeyellow*100];
+        [stkBlakField setIntValue:strokeblack*100];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldDidEndEditing:)
