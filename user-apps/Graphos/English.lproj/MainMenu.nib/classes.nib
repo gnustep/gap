@@ -1,13 +1,17 @@
 {
     IBClasses = (
         {
-            ACTIONS = {inspectObject = id; }; 
+            ACTIONS = {
+                inspectObject = id; 
+                moveSelectedObjectsToBack = id; 
+                moveSelectedObjectsToFront = id; 
+            }; 
             CLASS = FirstResponder; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
         }, 
         {
-            ACTIONS = {inspectObject = id; }; 
+            ACTIONS = {moveSelectedObjectsToBack = id; moveSelectedObjectsToFront = id; }; 
             CLASS = GRDocView; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSView; 
