@@ -56,11 +56,12 @@
 @interface GRDocView : NSView
 {
     NSMutableArray *objects, *delObjects;
+    NSMutableArray *lastObjects;
     int edind;
     BOOL shiftclick, altclick, ctrlclick;
 
+    // FIXME still needed ?
     NSUndoManager *undoManager;
-    NSInvocation *doItAgain;
 
     NSRect pageRect, a4Rect, zmdRect;
     int zIndex;
@@ -129,9 +130,10 @@
 - (IBAction)cut:(id)sender;
 - (IBAction)copy:(id)sender;
 - (IBAction)paste:(id)sender;
-- (void)doUndo;
-- (void)doRedo;
-- (void)prepareDoItAgainWithSelector:(SEL)selector owner:(id)owner target:(id)target , ...;
+
+- (void)saveCurrentObjects;
+- (void)restoreLastObjects;
+
 - (void)verifyModifiersOfEvent:(NSEvent *)theEvent;
 
 - (BOOL)shiftclick;

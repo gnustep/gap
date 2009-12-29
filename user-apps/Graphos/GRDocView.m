@@ -64,8 +64,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
         objects = [[NSMutableArray alloc] initWithCapacity: 1];
         delObjects = [[NSMutableArray alloc] initWithCapacity: 1];
+        lastObjects = nil;
         undoManager = [[NSUndoManager alloc] init];
-        doItAgain = nil;
         shiftclick = NO;
         altclick = NO;
         ctrlclick = NO;
@@ -298,10 +298,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     edind = [objects count] -1;
     [self setNeedsDisplay: YES];
 
-    [doItAgain setArgument: &duplObjs atIndex: 2];
-    [doItAgain setArgument: &p atIndex: 3];
-    [doItAgain retainArguments];
-
     return duplObjs;
 }
 
@@ -478,7 +474,15 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj;
     BOOL isneweditor = YES;
     int i;
-
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Create Box"];
+    
+    [self saveCurrentObjects];
+    
     for(i = 0; i < [objects count]; i++)
     {
         obj = [objects objectAtIndex: i];
@@ -850,6 +854,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
+// FIXME review this. still needed? to adapt?
 - (void)undoMoveObjects:(NSArray *)objs moveBackTo:(NSPoint)p
 {
     id obj;
@@ -1314,49 +1319,27 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
-- (void)doUndo
+/* ----- Undo Methods ----- */
+
+- (void)saveCurrentObjects
 {
-    if([undoManager canUndo])
+    if (objects != nil)
     {
-        [undoManager undoNestedGroup];
+        lastObjects = [[NSMutableArray arrayWithArray:objects] retain];
     }
 }
 
-- (void)doRedo
+- (void)restoreLastObjects
 {
-    if([undoManager canRedo])
+    if (lastObjects != nil)
     {
-        [undoManager redo];
+        [objects release];
+        objects = [lastObjects retain];
+        [self setNeedsDisplay: YES];
     }
 }
 
-- (void)prepareDoItAgainWithSelector:(SEL)selector owner:(id)owner target:(id)target , ...
-{
-    NSMethodSignature	*sign;
-    va_list ap;
-    id arg;
-    int i = 2;
-
-    sign = [owner methodSignatureForSelector: selector];
-    if(doItAgain)
-        [doItAgain release];
-    doItAgain = [[NSInvocation invocationWithMethodSignature: sign] retain];
-    [doItAgain setTarget: target];
-    [doItAgain setSelector: selector];
-
-    va_start(ap, target);
-    while(1)
-    {
-        arg = va_arg(ap, id);
-        if(!arg)
-            break;
-        [doItAgain setArgument: arg atIndex: i];
-        i++;
-    }
-    va_end(ap);
-
-    [doItAgain retainArguments];
-}
+/* ----- Mouse Methods ----- */
 
 - (void)verifyModifiersOfEvent:(NSEvent *)theEvent
 {
@@ -1497,10 +1480,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         return YES;
     }
     if([commchar isEqualToString: @"d"]) {
-        if(doItAgain) {
-            [doItAgain invoke];
-            [self setNeedsDisplay: YES];
-        }
         return YES;
     }
 
