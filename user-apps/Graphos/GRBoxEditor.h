@@ -32,8 +32,6 @@
 {
 }
 
-- (id)initEditor:(GRBox *)anObject;
-
 - (void)draw;
 
 @end

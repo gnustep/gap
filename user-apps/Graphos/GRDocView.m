@@ -385,6 +385,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj;
     BOOL isneweditor = YES;
     int i;
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Create Path"];
+    
+    [self saveCurrentObjects];
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -579,6 +587,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj;
     BOOL isneweditor = YES;
     int i;
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Create Circle"];
+    
+    [self saveCurrentObjects];
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -713,6 +729,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     id obj;
     int i;
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Edit Path"];
+    
+    [self saveCurrentObjects];
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -754,6 +778,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     id obj;
     int i;
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Edit Text"];
+    
+    [self saveCurrentObjects];
 
     for(i = 0; i < [objects count]; i++)
         [[[objects objectAtIndex: i] editor] unselect];
@@ -799,6 +831,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSPoint p, op, diffp;
     BOOL dupl = NO;
     int i;
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Move Object"];
+    
+    [self saveCurrentObjects];
 
     nextEvent = [[self window] nextEventMatchingMask:
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
@@ -931,9 +971,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSNumber *num;
     float *color, newcolor[4];
     int i, count, result;
+    NSUndoManager *uMgr;
 
     if(![objects count])
         return;
+            
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Change Object Properties"];
+    
+    [self saveCurrentObjects];
+
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -1469,14 +1518,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     if([commchar isEqualToString: @"t"]) {
         [self editSelectedText];
-        return YES;
-    }
-    if([commchar isEqualToString: @"z"]) {
-        [self doUndo];
-        return YES;
-    }
-    if([commchar isEqualToString: @"r"]) {
-        [self doRedo];
         return YES;
     }
     if([commchar isEqualToString: @"d"]) {
