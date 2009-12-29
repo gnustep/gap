@@ -17,45 +17,31 @@
     NSRole = Application;
     NSTypes = (
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
 		jpg,
-		" jpeg"
+		jpeg,
+		JPEG,
+		JPG
 	    );
 	},
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
 		tif,
-		" tiff"
+		tiff,
+		TIF,
+		TIFF
 	    );
 	},
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
-		gif
+		gif,
+		GIF
 	    );
 	},
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
-		png
+		png,
+		PNG
 	    );
 	}
     );
