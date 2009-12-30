@@ -79,15 +79,15 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
   
   ratingCell = [[GNRatingCell alloc] init]; 
   [ratingCol setDataCell:ratingCell];
-    
-    // Register for change notifications
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                          selector: @selector(articleChanged:)
-                                          name: RSSArticleChangedNotification
-                                          object: nil];
+  
+  // Register for change notifications
+  [[NSNotificationCenter defaultCenter] addObserver: self
+                                           selector: @selector(articleChanged:)
+                                               name: RSSArticleChangedNotification
+                                             object: nil];
 
-	[table setAutoresizesAllColumnsToFit: YES];
-//	[table sizeLastColumnToFit];
+    [table setAutoresizesAllColumnsToFit: YES];
+
     // Ensure table is autosaved
     [table setAutosaveName: @"Article Table"];
     [table setAutosaveTableColumns: YES];
