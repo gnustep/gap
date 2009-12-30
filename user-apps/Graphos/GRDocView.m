@@ -983,12 +983,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     if(![objects count])
         return;
-            
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Change Object Properties"];
-    
+                
     [self saveCurrentObjects];
 
 
@@ -1103,6 +1098,12 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 return;
             }
         }
+
+	uMgr = [self undoManager];
+	/* save the method on the undo stack */
+	[[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+	[uMgr setActionName:@"Change Object Properties"];
+
 
         for(i = 0; i < [objects count]; i++)
         {
