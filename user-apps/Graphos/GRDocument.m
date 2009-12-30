@@ -43,6 +43,8 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
+    NSPrintInfo *p;
+
     [super windowControllerDidLoadNib:aController];
     if (aController == [[self windowControllers] objectAtIndex: 0])
     {
@@ -50,7 +52,6 @@
         [sv setDocumentView: docView];
     }
     
-    NSPrintInfo *p;
     
     NSLog(@"initing document");
     /* initialize the image view to the default size if possible */
@@ -60,6 +61,9 @@
     else
         NSLog(@"pi nil!");
     
+    /* set undo levels */
+    [[self undoManager] setLevelsOfUndo:1];
+
 }
 
 - (NSData *)dataRepresentationOfType:(NSString *)aType
