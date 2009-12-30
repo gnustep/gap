@@ -77,6 +77,10 @@
                 untilMouseUp: flag];
 }
 
+- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
+{
+    return YES;
+}
 
 -(void) stopTracking: (NSPoint)lastPoint
                   at: (NSPoint)stopPoint
