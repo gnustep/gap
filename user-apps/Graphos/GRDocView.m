@@ -224,6 +224,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     GRText *gdtxt;
     int i;
+    NSUndoManager *uMgr;
+    
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Add Text"];
+    
+    [self saveCurrentObjects];
     
     NSLog(@"AddTextAtPoint");
     for(i = 0; i < [objects count]; i++)
@@ -240,7 +248,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 - (void)addBox
 {
     GRBox *box;
-
+    
 //    for(i = 0; i < [objects count]; i++)
 //        [[[objects objectAtIndex: i] editor] unselect];
 
