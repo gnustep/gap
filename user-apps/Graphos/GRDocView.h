@@ -60,9 +60,6 @@
     int edind;
     BOOL shiftclick, altclick, ctrlclick;
 
-    // FIXME still needed ?
-    NSUndoManager *undoManager;
-
     NSRect pageRect, a4Rect, zmdRect;
     int zIndex;
     float zFactor;

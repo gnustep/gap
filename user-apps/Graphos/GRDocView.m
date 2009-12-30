@@ -65,7 +65,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         objects = [[NSMutableArray alloc] initWithCapacity: 1];
         delObjects = [[NSMutableArray alloc] initWithCapacity: 1];
         lastObjects = nil;
-        undoManager = [[NSUndoManager alloc] init];
         shiftclick = NO;
         altclick = NO;
         ctrlclick = NO;
@@ -79,7 +78,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     [objects release];
     [delObjects release];
-    [undoManager release];
+    [lastObjects release];
     [super dealloc];
 }
 
@@ -355,7 +354,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
     [self setNeedsDisplay: YES];
 
-    PREPAREUNDO(self, undoDeleteObjects);
+    //    PREPAREUNDO(self, undoDeleteObjects);
 }
 
 - (void)undoDeleteObjects
