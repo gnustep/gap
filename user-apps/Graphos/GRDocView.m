@@ -837,7 +837,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     /* save the method on the undo stack */
     [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
     [uMgr setActionName:@"Move Object"];
-    
+
     [self saveCurrentObjects];
 
     nextEvent = [[self window] nextEventMatchingMask:
@@ -883,13 +883,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             diffp.x = p.x - startp.x;
             diffp.y = p.y - startp.y;
-            [self prepareDoItAgainWithSelector: @selector(duplicateObjects:andMoveTo:)
-                                         owner: self target: self , &moveobjs, &diffp, nil];
+//            [self prepareDoItAgainWithSelector: @selector(duplicateObjects:andMoveTo:)
+//                                         owner: self target: self , &moveobjs, &diffp, nil];
         } else
         {
             diffp.x = startp.x - p.x;
             diffp.y = startp.y - p.y;
-            PREPAREUNDO(self, undoMoveObjects: [moveobjs retain] moveBackTo: diffp);
+//            PREPAREUNDO(self, undoMoveObjects: [moveobjs retain] moveBackTo: diffp);
         }
     }
 }
@@ -920,7 +920,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     if(p.x == pos.x && p.y == pos.y)
         return NO;
 
-    PREPAREUNDO(editor, moveControlAtPoint: p toPoint: pos);
+//    PREPAREUNDO(editor, moveControlAtPoint: p toPoint: pos);
 
     [self setNeedsDisplay: YES];
     return YES;
@@ -934,7 +934,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     if(p.x == pos.x && p.y == pos.y)
         return NO;
 
-    PREPAREUNDO(editor, moveBezierHandleAtPoint: p toPoint: pos);
+//    PREPAREUNDO(editor, moveBezierHandleAtPoint: p toPoint: pos);
 
     [self setNeedsDisplay: YES];
     return YES;
@@ -1374,18 +1374,30 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     if (objects != nil)
     {
+        if (lastObjects != nil)
+            [lastObjects release];
         lastObjects = [[NSMutableArray arrayWithArray:objects] retain];
     }
 }
 
 - (void)restoreLastObjects
 {
-    if (lastObjects != nil)
-    {
-        [objects release];
-        objects = [lastObjects retain];
-        [self setNeedsDisplay: YES];
-    }
+    NSMutableArray *tempObjects;
+    NSLog(@"restore!");
+    /* backup the current status */
+    tempObjects = [NSMutableArray arrayWithArray:objects];
+    [objects release];
+    
+    /* re-register for redo */
+    [[[self undoManager] prepareWithInvocationTarget: self] restoreLastObjects];
+
+    /* get the last status */
+    objects = [lastObjects retain];
+    [lastObjects release];
+    
+    /* set the last status to the backup */
+    lastObjects = [tempObjects retain];
+    [self setNeedsDisplay: YES];
 }
 
 /* ----- Mouse Methods ----- */
