@@ -16,7 +16,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.1
 PACKAGE_NAME = Graphos
 APP_NAME = Graphos
-Graphos_APPLICATION_ICON = 
+Graphos_APPLICATION_ICON = graphos_appicon_48.tif
 
 
 #
@@ -27,11 +27,6 @@ Resources/GRDocument.gorm \
 Resources/MainMenu.gorm \
 Resources/bezier.tiff \
 Resources/blackarrow.tiff \
-Resources/circle.tiff \
-Resources/curs1.tiff \
-Resources/curs2.tiff \
-Resources/curs3.tiff \
-Resources/curs4.tiff \
 Resources/hand.tiff \
 Resources/LineCap1.tiff \
 Resources/LineCap2.tiff \
@@ -53,7 +48,7 @@ Resources/txtAlignLeft.tiff \
 Resources/txtAlignRight.tiff \
 Resources/whitearrow.tiff \
 Resources/x.tiff \
-Resources/Graphos.tiff \
+Resources/graphos_appicon_48.tif \
 Resources/GraphosInfo.plist 
 
 
