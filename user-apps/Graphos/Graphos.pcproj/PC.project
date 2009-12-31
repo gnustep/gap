@@ -1,6 +1,6 @@
 {
-    APPLICATIONICON = "";
-    APP_DOCUMENT_BASED = YES;
+    APPLICATIONICON = graphos_appicon_48.tif;
+    APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     BUILDER_TARGETS = (
 	all,
@@ -66,11 +66,6 @@
     IMAGES = (
 	bezier.tiff,
 	blackarrow.tiff,
-	circle.tiff,
-	curs1.tiff,
-	curs2.tiff,
-	curs3.tiff,
-	curs4.tiff,
 	hand.tiff,
 	LineCap1.tiff,
 	LineCap2.tiff,
@@ -92,7 +87,7 @@
 	txtAlignRight.tiff,
 	whitearrow.tiff,
 	x.tiff,
-	Graphos.tiff
+	graphos_appicon_48.tif
     );
     INSTALLDIR = "$(GNUSTEP_LOCAL_ROOT)/";
     INTERFACES = (
@@ -118,8 +113,11 @@
     );
     PRINCIPAL_CLASS = NSApplication;
     PROJECT_AUTHORS = (
+	"Riccardo Mottola",
+	"Enrico Sersale",
+	"Rob Burns"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2005";
+    PROJECT_COPYRIGHT = "Copyright (C) 2005-2009";
     PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "Vector drawing";
@@ -127,7 +125,7 @@
 	{
 	    NSDocumentClass = GRDocument;
 	    NSHumanReadableName = "Graphos drawing";
-	    NSIcon = Graphos.tiff;
+	    NSIcon = graphos_doc_icon_48.tif;
 	    NSName = "graphos design";
 	    NSRole = Editor;
 	    NSUnixExtensions = (
