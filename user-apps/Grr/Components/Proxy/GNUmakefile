@@ -28,5 +28,8 @@ ADDITIONAL_INCLUDE_DIRS += -I../..
 
 include $(GNUSTEP_MAKEFILES)/bundle.make
 
+ADDITIONAL_INCLUDE_DIRS += -I../../../../libs/
+ADDITIONAL_LIB_DIRS += -L../../../../libs/RSSKit/RSSKit.framework/
+
 -include GNUmakefile.postamble
 
