@@ -30,3 +30,5 @@ SUBPROJECTS += \
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 
 
+ADDITIONAL_INCLUDE_DIRS += -I../../../../libs/
+ADDITIONAL_LIB_DIRS += -L../../../../libs/RSSKit/RSSKit.framework/

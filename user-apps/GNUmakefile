@@ -24,8 +24,8 @@ LaternaMagica \
 RemoteDesk \
 GSPdf \
 PictureFrame \
-Stepulator-osx
-
+Stepulator-osx \
+Grr
 #
 # Makefiles
 #

@@ -38,3 +38,6 @@ after-all::
 	echo "Purging bogus SVN entries from app..." && \
 	find "$(APP_NAME)".app -type d -name '.svn' $(FIND_ARGS) | xargs $(XARGS_ARGS) /bin/rm -rf
 
+# Preamble Definitions
+ADDITIONAL_INCLUDE_DIRS += -I../../libs/
+ADDITIONAL_LIB_DIRS += -L../../libs/RSSKit/RSSKit.framework/
