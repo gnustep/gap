@@ -1144,6 +1144,15 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     id obj = nil;
     int i;
+    NSUndoManager *uMgr;
+
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Move to front"];
+
+    [self saveCurrentObjects];
+
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -1178,7 +1187,15 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 {
     id obj = nil;
     int i;
+    NSUndoManager *uMgr;
 
+    uMgr = [self undoManager];
+    /* save the method on the undo stack */
+    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [uMgr setActionName:@"Move to back"];
+
+    [self saveCurrentObjects];
+    
     for(i = 0; i < [objects count]; i++)
     {
         if([[[objects objectAtIndex: i] editor] isGroupSelected])
