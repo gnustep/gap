@@ -10,5 +10,5 @@
     GSThemePreview = neos_preview_128.tif;
     GSThemeTiles = {
     };
-    GSThemeVersion = 1.0;
+    GSThemeVersion = 0.2;
 }
