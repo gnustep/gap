@@ -54,7 +54,7 @@
 
 @end
 
-@interface GRToolsWindow : NSWindow
+@interface GRToolsWindow : NSPanel
 {
     GRToolsView *toolsView;
 }
