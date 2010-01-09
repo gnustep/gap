@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2010  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -88,45 +88,36 @@
         // Menu items
         // ----------------------------
         
+        feedMenu = [[[NSApp mainMenu] itemWithTag:1] submenu];
+        
         // Feed fetching menu items
         fetchMenuItem = [[NSMenuItem alloc] initWithTitle: _(@"Fetch feed")
                                                    action: @selector(fetchSelectedFeeds)
                                             keyEquivalent: @""];
         [fetchMenuItem setTarget: self];
+        [feedMenu addItem: fetchMenuItem];
         
         fetchAllMenuItem = [[NSMenuItem alloc] initWithTitle: _(@"Fetch all")
                                                       action: @selector(fetchAllFeeds)
                                                keyEquivalent: @""];
         [fetchAllMenuItem setTarget: self];
+        [feedMenu addItem: fetchAllMenuItem];
         
         // "Subscribe to feed" menu item
         subscribeMenuItem = [[NSMenuItem alloc] initWithTitle: _(@"Subscribe to URL...")
                                                  action: @selector(subscribeFeed)
                                           keyEquivalent: @""];
         [subscribeMenuItem setTarget: self];
+        [feedMenu addItem: subscribeMenuItem];
         
         // "Delete feed" menu item
         deleteMenuItem = [[NSMenuItem alloc] initWithTitle: _(@"Delete feed")
                                                     action: @selector(deleteSelectedFeeds)
                                              keyEquivalent: @"r"];
         [deleteMenuItem setTarget: self];
-        
-        // FIXME: Add category item
-        
-        // Link with main menu
-        feedMenu = [[[NSMenu alloc] init] autorelease];
-        [feedMenu addItem: fetchAllMenuItem];
-        [feedMenu addItem: fetchMenuItem];
-        [feedMenu addItem: subscribeMenuItem];
         [feedMenu addItem: deleteMenuItem];
-        
-        [[NSApp mainMenu] setSubmenu: feedMenu forItem:
-            [[NSApp mainMenu] itemWithTitle: NSLocalizedString(
-                @"Feed",
-                @"The name of the Feed menu entry. It's important that this is the same "
-                @"name as in the Gorm file, otherwise the menu will not be filled."
-                )]];
-        
+                
+                
         // -------------------------------------
         // Prepare toolbar delegation
         // -------------------------------------
