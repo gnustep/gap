@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2010  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -36,9 +36,12 @@
 
 -(id)init
 {
-    if ((self = [super init]) != nil) {
+    if ((self = [super init]) != nil)
+    {
         NSArray* identifiers;
         NSMenu* menu;
+        
+        menu = [[[NSApp mainMenu] itemWithTag:2] submenu];
 
         // Article browsing toolbar item
         browseItem = [[NSToolbarItem alloc] initWithItemIdentifier: BROWSE_IDENTIFIER];
@@ -53,36 +56,20 @@
                                              keyEquivalent: @"b"];
         [browseMenuItem setTarget: self];
         
-        #ifdef GRRRDEBUG
-        debugItem = [[NSToolbarItem alloc] initWithItemIdentifier: @"Grr Debug Article"];
-        [debugItem setLabel: @"Debug article"];
-        [debugItem setImage: [NSImage imageNamed: @"PlainArticle"]];
-        [debugItem setAction: @selector(debugSelectedArticles)];
-        [debugItem setTarget: self];
-        #endif
+        // Add the menu
+        [menu addItem: browseMenuItem];
+
         
         // Provided identifiers
         identifiers = [NSArray arrayWithObjects:
             BROWSE_IDENTIFIER,
-            #ifdef GRRRDEBUG
-            @"Grr Debug Article",
-            #endif
             nil
         ];
         ASSIGN(allowedIdentifiers, identifiers);
         ASSIGN(defaultIdentifiers, allowedIdentifiers);
         
         // Init selected articles with empty set
-        ASSIGN(selectedArticles, [NSSet new]);
-        
-        // Putting together the article menu
-        menu = [[[NSMenu alloc] init] autorelease];
-        [menu addItem: browseMenuItem];
-        [[NSApp mainMenu] setSubmenu: menu forItem:
-            [[NSApp mainMenu] itemWithTitle:
-                NSLocalizedString(@"Article",
-                    @"This translates to the name of the 'Article' main menu entry in the "
-                    @"main Nib file. If you get it wrong, the menu will not be filled correctly.")]];
+        ASSIGN(selectedArticles, [NSSet new]);        
     }
     
     return self;
