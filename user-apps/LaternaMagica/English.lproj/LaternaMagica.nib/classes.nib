@@ -43,7 +43,8 @@
             LANGUAGE = ObjC; 
             OUTLETS = {controller = id; }; 
             SUPERCLASS = NSImageView; 
-        }
+        }, 
+        {CLASS = LMWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }
     ); 
     IBVersion = 1; 
 }

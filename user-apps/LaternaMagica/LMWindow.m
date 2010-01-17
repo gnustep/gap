@@ -36,5 +36,11 @@
     return YES;
 }
 
+/** we subclass canBecomeMainWindow so that the window doesn't get an in-window
+    menu under GNUstep*/
+- (BOOL)canBecomeMainWindow
+{
+  return NO;
+}
 
 @end
