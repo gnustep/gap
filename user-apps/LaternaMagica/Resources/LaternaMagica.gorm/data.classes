@@ -71,4 +71,11 @@
 	);
 	Super = NSImageView;
     };
+    LMWindow = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSWindow;
+    };
 }
