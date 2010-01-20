@@ -7,7 +7,7 @@
     Authors = (
 	"Riccardo Mottola"
     );
-    Copyright = "Copyright (C) 2006-2009";
+    Copyright = "Copyright (C) 2006-2010";
     CopyrightDescription = "Released under GPL";
     FullVersionID = 0.2;
     NSExecutable = LaternaMagica;
@@ -17,33 +17,47 @@
     NSRole = Application;
     NSTypes = (
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
 		jpg,
-		jpeg,
-		JPEG,
-		JPG
+		" jpeg"
 	    );
 	},
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
 		tif,
-		tiff,
-		TIF,
-		TIFF
+		" tiff"
 	    );
 	},
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
-		gif,
-		GIF
+		gif
 	    );
 	},
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
-		png,
-		PNG
+		png
 	    );
 	}
     );
-    URL = "http://gap.nongnu.org";
+    URL = "http://gap.nongnu.org/laternamagica/";
 }
