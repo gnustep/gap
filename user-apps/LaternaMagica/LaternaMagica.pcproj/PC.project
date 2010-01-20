@@ -57,7 +57,7 @@
     PROJECT_AUTHORS = (
 	"Riccardo Mottola"
     );
-    PROJECT_COPYRIGHT = "Copyright (C) 2006-2009";
+    PROJECT_COPYRIGHT = "Copyright (C) 2006-2010";
     PROJECT_COPYRIGHT_DESC = "Released under GPL";
     PROJECT_CREATOR = "";
     PROJECT_DESCRIPTION = "Image Viewer Tool";
@@ -111,7 +111,7 @@
     PROJECT_RELEASE = 0.2;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
-    PROJECT_URL = "http://gap.nongnu.org";
+    PROJECT_URL = "http://gap.nongnu.org/laternamagica/";
     SEARCH_HEADER_DIRS = (
     );
     SEARCH_LIB_DIRS = (
@@ -122,6 +122,7 @@
 	LaternaMagicaInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
 	English
     );
 }

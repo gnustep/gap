@@ -2,7 +2,7 @@
  Project: LaternaMagica
  LMWindow.m
  
- Copyright (C) 2009 Riccardo Mottola
+ Copyright (C) 2009-2010 Riccardo Mottola
  
  Author: Riccardo Mottola
  
