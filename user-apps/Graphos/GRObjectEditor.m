@@ -25,7 +25,7 @@
 
 
 #import "GRObjectEditor.h"
-
+#import "GRDocView.h"
 
 @implementation GRObjectEditor
 
@@ -59,7 +59,7 @@
         editSelected = NO;
         isvalid = NO;
         
-        [[object view] unselectOtherObjects: object];
+        [[object view] unselectOtherObjects: (GRDrawableObject *)object];
     }
 }
 
@@ -70,7 +70,7 @@
     editSelected = YES;
     groupSelected = NO;
     isvalid = NO;
-    [[object view] unselectOtherObjects: object];
+    [[object view] unselectOtherObjects: (GRDrawableObject *)object];
 }
 
 
