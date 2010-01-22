@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -743,7 +743,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
     [uMgr setActionName:@"Edit Path"];
     
-    [self saveCurrentObjects];
+    [self saveCurrentObjectsDeep];
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -845,7 +845,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
     [uMgr setActionName:@"Move Object"];
 
-    [self saveCurrentObjects];
+    [self saveCurrentObjectsDeep];
 
     nextEvent = [[self window] nextEventMatchingMask:
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
@@ -982,9 +982,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     if(![objects count])
         return;
-                
-    [self saveCurrentObjects];
-
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -1098,6 +1095,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             }
         }
 
+        [self saveCurrentObjectsDeep];
+
 	uMgr = [self undoManager];
 	/* save the method on the undo stack */
 	[[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
@@ -1107,10 +1106,9 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         for(i = 0; i < [objects count]; i++)
         {
             obj = [objects objectAtIndex: i];
-            if([[obj editor] isGroupSelected])
+            if([[obj editor] isSelect])
             {
-                objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-                if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]])
+                if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
                 {
                     [obj setFlat: [[newProps objectForKey: @"flatness"] floatValue]];
                     [obj setLineJoin: [[newProps objectForKey: @"linejoin"] intValue]];
@@ -1151,7 +1149,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
     [uMgr setActionName:@"Move to front"];
 
-    [self saveCurrentObjects];
+    [self saveCurrentObjectsDeep];
 
 
     for(i = 0; i < [objects count]; i++)
@@ -1405,10 +1403,30 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
+- (void)saveCurrentObjectsDeep
+{
+    NSEnumerator *e;
+    NSObject *o;
+    
+    if (objects != nil)
+    {
+        if (lastObjects != nil)
+            [lastObjects release];
+        lastObjects = [[NSMutableArray arrayWithCapacity:[objects count]] retain];
+        
+        e = [objects objectEnumerator];
+        while (o = [e nextObject])
+        {
+            [lastObjects addObject:[o copy]];
+        }
+    }
+}
+
+
 - (void)restoreLastObjects
 {
     NSMutableArray *tempObjects;
-    NSLog(@"restore!");
+
     /* backup the current status */
     tempObjects = [NSMutableArray arrayWithArray:objects];
     [objects release];
