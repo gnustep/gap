@@ -128,6 +128,21 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    GRBox *objCopy;
+    
+    objCopy = [super copyWithZone:zone];
+
+    objCopy->myPath = nil;
+    objCopy->startControlPoint = nil;
+    objCopy->startControlPoint = [self startControlPoint];
+    objCopy->endControlPoint = nil;
+    objCopy->endControlPoint = [self endControlPoint];
+    
+    return objCopy;
+}
+
 - (void)dealloc
 {
     [startControlPoint dealloc];

@@ -1,5 +1,13 @@
 // !$*UTF8*$!
 {
+	089C1660FE840EACC02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 716}}";
+			sepNavSelRange = "{267, 0}";
+			sepNavVisRect = "{{0, 0}, {935, 716}}";
+			sepNavWindowFrame = "{{15, 88}, {974, 845}}";
+		};
+	};
 	2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Development;
 		activeBuildStyle = 85A6DBC410D41AEB0048FE0B /* Development */;
@@ -9,10 +17,6 @@
 			2A37F4C6FDCFA73011CA2CEA /* Draw */,
 		);
 		breakpoints = (
-			8523196C0D86017F00A80103 /* GRBox.m:213 */,
-			85B4157C0D873A0F00A80103 /* GRBox.m:253 */,
-			85B4157E0D873A9D00A80103 /* GRDocView.m:957 */,
-			85B415800D873B5300A80103 /* GRDocView.m:977 */,
 		);
 		codeSenseManager = 85A6DBCF10D41AEF0048FE0B /* Code sense */;
 		executables = (
@@ -63,7 +67,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 283682870;
+			PBXPerProjectTemplateStateSaveDate = 285892426;
 			PBXWorkspaceContents = (
 				{
 					LeftSlideOut = {
@@ -648,22 +652,7 @@
 					WindowLocation = "{2, 61}";
 				},
 			);
-			PBXWorkspaceStateSaveDate = 283682870;
-		};
-		perUserProjectItems = {
-			8518AB1510E8A83D004A2013 /* PBXTextBookmark */ = 8518AB1510E8A83D004A2013 /* PBXTextBookmark */;
-			8518AB2010E8ACF6004A2013 /* PBXBookmark */ = 8518AB2010E8ACF6004A2013 /* PBXBookmark */;
-			8518AB3210E8C6A8004A2013 /* PBXBookmark */ = 8518AB3210E8C6A8004A2013 /* PBXBookmark */;
-			8518AB3810E8C6DD004A2013 /* PBXTextBookmark */ = 8518AB3810E8C6DD004A2013 /* PBXTextBookmark */;
-			8518AB3B10E8C6DD004A2013 /* PBXTextBookmark */ = 8518AB3B10E8C6DD004A2013 /* PBXTextBookmark */;
-			8518AB4510E8D244004A2013 /* PBXTargetBookmark */ = 8518AB4510E8D244004A2013 /* PBXTargetBookmark */;
-			8518AB4610E8D244004A2013 /* PBXTargetBookmark */ = 8518AB4610E8D244004A2013 /* PBXTargetBookmark */;
-			8518AB4710E8D244004A2013 /* PBXTextBookmark */ = 8518AB4710E8D244004A2013 /* PBXTextBookmark */;
-			8518AB4810E8D244004A2013 /* PBXTextBookmark */ = 8518AB4810E8D244004A2013 /* PBXTextBookmark */;
-			8518AB6610E8ED60004A2013 /* PBXTargetBookmark */ = 8518AB6610E8ED60004A2013 /* PBXTargetBookmark */;
-			8518AB6710E8ED60004A2013 /* PBXTextBookmark */ = 8518AB6710E8ED60004A2013 /* PBXTextBookmark */;
-			85A6DC1410D466650048FE0B = 85A6DC1410D466650048FE0B /* PBXTextBookmark */;
-			85A6DC1510D466650048FE0B = 85A6DC1510D466650048FE0B /* PBXTextBookmark */;
+			PBXWorkspaceStateSaveDate = 285892426;
 		};
 		sourceControlManager = 85A6DBCE10D41AEF0048FE0B /* Source Control */;
 		userBuildSettings = {
@@ -671,10 +660,10 @@
 	};
 	2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {914, 1652}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {914, 544}}";
-			sepNavWindowFrame = "{{418, 243}, {953, 673}}";
+			sepNavIntBoundsRect = "{{0, 0}, {935, 1708}}";
+			sepNavSelRange = "{1249, 0}";
+			sepNavVisRect = "{{0, 992}, {935, 716}}";
+			sepNavWindowFrame = "{{418, 71}, {974, 845}}";
 		};
 	};
 	2A37F4AEFDCFA73011CA2CEA /* GRDocument.h */ = {
@@ -682,7 +671,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {820, 649}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRect = "{{0, 0}, {820, 649}}";
-			sepNavWindowFrame = "{{61, 113}, {859, 778}}";
+			sepNavWindowFrame = "{{528, 106}, {859, 778}}";
 		};
 	};
 	2A37F4C6FDCFA73011CA2CEA /* Draw */ = {
@@ -690,114 +679,6 @@
 		executables = (
 			8523196A0D85E4E100A80103 /* Draw */,
 		);
-	};
-	8518AB1510E8A83D004A2013 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */;
-		name = "GRDocument.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1126;
-		vrLoc = 0;
-	};
-	8518AB2010E8ACF6004A2013 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = F539B20808A3595201A8012F /* GRPropsEditor.m */;
-	};
-	8518AB3210E8C6A8004A2013 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = F539B25708A35E7001A8012F /* Graphos.h */;
-	};
-	8518AB3810E8C6DD004A2013 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F539B25708A35E7001A8012F /* Graphos.h */;
-		name = "Graphos.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 691;
-		vrLoc = 788;
-	};
-	8518AB3B10E8C6DD004A2013 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F539B20808A3595201A8012F /* GRPropsEditor.m */;
-		name = "GRPropsEditor.m: 5";
-		rLen = 0;
-		rLoc = 63;
-		rType = 0;
-		vrLen = 1483;
-		vrLoc = 0;
-	};
-	8518AB4510E8D244004A2013 /* PBXTargetBookmark */ = {
-		isa = PBXTargetBookmark;
-		trg = 2A37F4C6FDCFA73011CA2CEA /* Draw */;
-	};
-	8518AB4610E8D244004A2013 /* PBXTargetBookmark */ = {
-		isa = PBXTargetBookmark;
-		trg = 2A37F4C6FDCFA73011CA2CEA /* Draw */;
-		uiCtxt = {
-			TOCViewDetailVisibleRect = "{{0, 0}, {587, 290}}";
-			TOCViewExpandedItems = (
-				"com.apple.target-editor-pane.settings",
-				"com.apple.target-editor-pane.settings.simple",
-				"com.apple.target-editor-pane.info-plist",
-				"com.apple.target-editor-pane.info-plist.simple",
-				"com.apple.target-editor-pane.buildphases",
-			);
-			TOCViewMasterVisibleRect = "{{0, 0}, {233, 603}}";
-			TOCViewSelectedItems = (
-				PBXProductDocumentTypesSettingsModule,
-			);
-		};
-	};
-	8518AB4710E8D244004A2013 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F539B25708A35E7001A8012F /* Graphos.h */;
-		name = "Graphos.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1244;
-		vrLoc = 0;
-	};
-	8518AB4810E8D244004A2013 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F539B20808A3595201A8012F /* GRPropsEditor.m */;
-		name = "GRPropsEditor.m: 5";
-		rLen = 0;
-		rLoc = 63;
-		rType = 0;
-		vrLen = 1483;
-		vrLoc = 0;
-	};
-	8518AB6610E8ED60004A2013 /* PBXTargetBookmark */ = {
-		isa = PBXTargetBookmark;
-		trg = 2A37F4C6FDCFA73011CA2CEA /* Draw */;
-		uiCtxt = {
-			TOCViewDetailVisibleRect = "{{0, 0}, {587, 104}}";
-			TOCViewExpandedItems = (
-				"com.apple.target-editor-pane.settings",
-				"com.apple.target-editor-pane.settings.simple",
-				"com.apple.target-editor-pane.info-plist",
-				"com.apple.target-editor-pane.info-plist.simple",
-				"com.apple.target-editor-pane.buildphases",
-			);
-			TOCViewMasterVisibleRect = "{{0, 0}, {233, 603}}";
-			TOCViewSelectedItems = (
-				PBXProductIconSettingsModule,
-			);
-		};
-	};
-	8518AB6710E8ED60004A2013 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F539B20808A3595201A8012F /* GRPropsEditor.m */;
-		name = "GRPropsEditor.m: 5";
-		rLen = 0;
-		rLoc = 63;
-		rType = 0;
-		vrLen = 1483;
-		vrLoc = 0;
 	};
 	8523196A0D85E4E100A80103 /* Draw */ = {
 		isa = PBXExecutable;
@@ -821,18 +702,10 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = Draw;
+		savedGlobals = {
+		};
 		sourceDirectories = (
 		);
-	};
-	8523196C0D86017F00A80103 /* GRBox.m:213 */ = {
-		isa = PBXFileBreakpoint;
-		continueAfterActions = 0;
-		delayBeforeContinue = 0;
-		fileReference = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
-		hitCount = 0;
-		lineNumber = 213;
-		modificationTime = 0;
-		state = 1;
 	};
 	853877F50DA0375200A80103 /* GRPathEditor.m */ = {
 		uiCtxt = {
@@ -854,74 +727,84 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
-	85A6DC1410D466650048FE0B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */;
-		name = "GRDocument.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1126;
-		vrLoc = 0;
+	85AEB2950CA43E7A00A80101 /* GRBox.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 798}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 69}, {935, 716}}";
+			sepNavWindowFrame = "{{109, 55}, {974, 845}}";
+		};
 	};
-	85A6DC1510D466650048FE0B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */;
-		name = "GRDocument.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1126;
-		vrLoc = 0;
+	85AEB2960CA43E7A00A80101 /* GRBox.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 5936}}";
+			sepNavSelRange = "{5238, 0}";
+			sepNavVisRect = "{{0, 1405}, {935, 716}}";
+			sepNavWindowFrame = "{{284, 93}, {974, 845}}";
+		};
 	};
-	85B4157C0D873A0F00A80103 /* GRBox.m:253 */ = {
-		isa = PBXFileBreakpoint;
-		continueAfterActions = 0;
-		delayBeforeContinue = 0;
-		fileReference = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
-		hitCount = 0;
-		lineNumber = 253;
-		modificationTime = 0;
-		state = 1;
+	85B1DAAA0D8B2E2400A80103 /* GRPathObject.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 924}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 175}, {935, 716}}";
+			sepNavWindowFrame = "{{143, 56}, {974, 845}}";
+		};
 	};
-	85B4157E0D873A9D00A80103 /* GRDocView.m:957 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		continueAfterActions = 0;
-		delayBeforeContinue = 0;
-		fileReference = F539B1EE08A2D91C01A8012F /* GRDocView.m */;
-		hitCount = 0;
-		lineNumber = 957;
-		modificationTime = 0;
-		state = 1;
+	85B1DAAB0D8B2E2400A80103 /* GRPathObject.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 1050}}";
+			sepNavSelRange = "{1111, 0}";
+			sepNavVisRect = "{{0, 0}, {935, 716}}";
+			sepNavWindowFrame = "{{221, 39}, {974, 845}}";
+		};
 	};
-	85B415800D873B5300A80103 /* GRDocView.m:977 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		continueAfterActions = 0;
-		delayBeforeContinue = 0;
-		fileReference = F539B1EE08A2D91C01A8012F /* GRDocView.m */;
-		hitCount = 0;
-		lineNumber = 977;
-		modificationTime = 0;
-		state = 1;
+	85CB5DF20D72C0F000A80101 /* GRDrawableObject.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 1162}}";
+			sepNavSelRange = "{1162, 0}";
+			sepNavVisRect = "{{0, 0}, {935, 716}}";
+			sepNavWindowFrame = "{{148, 53}, {974, 845}}";
+		};
+	};
+	85CB5DF30D72C0F000A80101 /* GRDrawableObject.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 1414}}";
+			sepNavSelRange = "{66, 0}";
+			sepNavVisRect = "{{0, 0}, {935, 716}}";
+			sepNavWindowFrame = "{{256, 93}, {974, 845}}";
+		};
+	};
+	85CB5DF60D72C8D000A80101 /* GRObjectEditor.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 784}}";
+			sepNavSelRange = "{1333, 0}";
+			sepNavVisRect = "{{0, 0}, {935, 716}}";
+			sepNavWindowFrame = "{{256, 93}, {974, 845}}";
+		};
+	};
+	85CB5DF70D72C8D000A80101 /* GRObjectEditor.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {935, 1638}}";
+			sepNavSelRange = "{1193, 0}";
+			sepNavVisRect = "{{0, 184}, {935, 716}}";
+			sepNavWindowFrame = "{{15, 88}, {974, 845}}";
+		};
 	};
 	F539B1ED08A2D91C01A8012F /* GRDocView.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {820, 1988}}";
-			sepNavSelRange = "{3275, 26}";
-			sepNavVisRect = "{{0, 1339}, {820, 649}}";
+			sepNavSelRange = "{59, 0}";
+			sepNavVisRect = "{{0, 0}, {820, 649}}";
 			sepNavWindowFrame = "{{84, 92}, {859, 778}}";
 		};
 	};
 	F539B1EE08A2D91C01A8012F /* GRDocView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {914, 22666}}";
-			sepNavSelRange = "{30969, 0}";
-			sepNavVisRect = "{{0, 14169}, {914, 544}}";
-			sepNavWindowFrame = "{{443, 147}, {953, 673}}";
+			sepNavIntBoundsRect = "{{0, 0}, {923, 23716}}";
+			sepNavSelRange = "{33067, 0}";
+			sepNavVisRect = "{{0, 14938}, {923, 702}}";
+			sepNavWindowFrame = "{{297, 55}, {962, 831}}";
 		};
 	};
 	F539B1F708A3570901A8012F /* GRBezierPathEditor.h */ = {
@@ -945,6 +828,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {820, 8638}}";
 			sepNavSelRange = "{63, 0}";
 			sepNavVisRect = "{{0, 0}, {820, 649}}";
+			sepNavWindowFrame = "{{461, 105}, {859, 778}}";
 		};
 	};
 	F539B25708A35E7001A8012F /* Graphos.h */ = {

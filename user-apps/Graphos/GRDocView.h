@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.h
 
- Copyright (C) 2000-2009 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -113,7 +113,7 @@
 - (void)moveSelectedObjects:(NSArray *)objs startingPoint:(NSPoint)startp;
 - (void)undoMoveObjects:(NSArray *)objs moveBackTo:(NSPoint)p;
 
-- (BOOL)moveControlPointOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
+- (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos;
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 - (IBAction)inspectObject: (id)sender;
@@ -129,6 +129,7 @@
 - (IBAction)paste:(id)sender;
 
 - (void)saveCurrentObjects;
+- (void)saveCurrentObjectsDeep;
 - (void)restoreLastObjects;
 
 - (void)verifyModifiersOfEvent:(NSEvent *)theEvent;

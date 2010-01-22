@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008 GNUstep Application Project
+ Copyright (C) 2008-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -33,7 +33,7 @@
 @class GRDocView;
 @class GRObjectEditor;
 
-@interface GRDrawableObject : NSObject
+@interface GRDrawableObject : NSObject <NSCopying>
 {
     GRDocView *docView;
     GRObjectEditor *editor;

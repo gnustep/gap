@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008 GNUstep Application Project
+ Copyright (C) 2008-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -42,6 +42,16 @@
     [NSException raise:@"Object should override duplicate" format:@"%@", [self class]];
     NSLog(@"duplicate: This method must be subclassed.");
     return  nil;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    GRDrawableObject *objCopy = NSCopyObject(self, 0, zone);
+    
+    objCopy->docView = [self view];
+    objCopy->editor = [self editor];
+    
+    return objCopy;
 }
 
 
