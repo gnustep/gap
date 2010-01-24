@@ -29,18 +29,21 @@
 
 @implementation GRDrawableObject
 
+- (void)dealloc
+{
+    [editor dealloc];
+    [super dealloc];
+}
 
 - (NSDictionary *)objectDescription
 {
-    [NSException raise:@"Object should override objectDescription" format:@"%@", [self class]];
-    NSLog(@"objectDescription: This method must be subclassed.");
+    [self subclassResponsibility: _cmd];
     return nil;
 }
 
 - (GRDrawableObject *)duplicate
 {
-    [NSException raise:@"Object should override duplicate" format:@"%@", [self class]];
-    NSLog(@"duplicate: This method must be subclassed.");
+    [self subclassResponsibility: _cmd];
     return  nil;
 }
 
@@ -49,7 +52,7 @@
     GRDrawableObject *objCopy = NSCopyObject(self, 0, zone);
     
     objCopy->docView = [self view];
-    objCopy->editor = [self editor];
+    objCopy->editor = [[self editor] retain];
     
     return objCopy;
 }
