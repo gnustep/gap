@@ -129,8 +129,8 @@
 
 - (void)dealloc
 {
-    [startControlPoint dealloc];
-    [endControlPoint dealloc];
+    [startControlPoint release];
+    [endControlPoint release];
     [super dealloc];
 }
 
