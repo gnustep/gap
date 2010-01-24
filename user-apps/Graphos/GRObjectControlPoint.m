@@ -2,7 +2,7 @@
  Project: Graphos
  GRObjectControlPoint.m
 
- Copyright (C) 2007-2008 GNUstep Application Project
+ Copyright (C) 2007-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -40,6 +40,16 @@
     }
     return self;
 }
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    GRObjectControlPoint *objCopy;
+
+    objCopy = NSCopyObject(self, 0, zone);
+
+    return objCopy;
+}
+
 
 - (void)moveToPoint:(NSPoint)p
 {
