@@ -2,7 +2,7 @@
  Project: Graphos
  Graphos.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -35,7 +35,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSLog(@"Graphos: applicationDidFinishLaunching");
     tools = [[GRToolsWindow alloc] init];
     [tools display];
     [tools orderFront:nil];

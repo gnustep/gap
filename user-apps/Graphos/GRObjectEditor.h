@@ -41,6 +41,7 @@
 }
 
 - (id)initEditor:(GRDrawableObject *)anObject;
+- (void)setObject:(GRDrawableObject *)anObject;
 - (void)select;
 - (void)selectAsGroup;
 - (void)selectForEditing;

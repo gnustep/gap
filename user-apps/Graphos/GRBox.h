@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.h
 
- Copyright (C) 2007-2009 GNUstep Application Project
+ Copyright (C) 2007-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -31,7 +31,6 @@
 
 @interface GRBox : GRPathObject
 {
-    NSBezierPath *myPath;
     NSPoint pos;
     NSSize size;
     NSRect bounds;

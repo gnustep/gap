@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.h
 
- Copyright (C) 2008 GNUstep Application Project
+ Copyright (C) 2008-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -31,11 +31,13 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/NSBezierPath.h>
 #import "GRDrawableObject.h"
 #import "GRObjectControlPoint.h"
 
 @interface GRPathObject : GRDrawableObject
 {
+    NSBezierPath *myPath;
     BOOL stroked, filled;
     float linewidth;
     GRObjectControlPoint *currentPoint;

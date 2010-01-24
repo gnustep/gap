@@ -275,10 +275,8 @@
 				85DC41560CAC6A3C00A80101,
 				85DC41570CAC6A3C00A80101,
 				85DC41580CAC6A3C00A80101,
-				85DC415F0CAC6A4A00A80101,
-				85DC41600CAC6A4A00A80101,
-				85DC41610CAC6A4A00A80101,
-				85DC41620CAC6A4A00A80101,
+				85BEE4CA10E9365B00A80101,
+				85BEE4CB10E9365B00A80101,
 			);
 			isa = PBXGroup;
 			name = Resources;
@@ -361,6 +359,8 @@
 			<array>
 				<string>gdr</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>graphos_doc_icons</string>
 			<key>CFBundleTypeName</key>
 			<string>graphos design</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -376,7 +376,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Graphos</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>graphos_icons</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -459,10 +459,8 @@
 				85DC415C0CAC6A3C00A80101,
 				85DC415D0CAC6A3C00A80101,
 				85DC415E0CAC6A3C00A80101,
-				85DC41630CAC6A4A00A80101,
-				85DC41640CAC6A4A00A80101,
-				85DC41650CAC6A4A00A80101,
-				85DC41660CAC6A4A00A80101,
+				85BEE4CC10E9365B00A80101,
+				85BEE4CD10E9365B00A80101,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +628,28 @@
 		};
 		85B1DAAD0D8B2E2400A80103 = {
 			fileRef = 85B1DAAB0D8B2E2400A80103;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BEE4CA10E9365B00A80101 = {
+			isa = PBXFileReference;
+			path = graphos_doc_icons.icns;
+			refType = 4;
+		};
+		85BEE4CB10E9365B00A80101 = {
+			isa = PBXFileReference;
+			path = graphos_icons.icns;
+			refType = 4;
+		};
+		85BEE4CC10E9365B00A80101 = {
+			fileRef = 85BEE4CA10E9365B00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BEE4CD10E9365B00A80101 = {
+			fileRef = 85BEE4CB10E9365B00A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -863,54 +883,6 @@
 		};
 		85DC415E0CAC6A3C00A80101 = {
 			fileRef = 85DC41580CAC6A3C00A80101;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85DC415F0CAC6A4A00A80101 = {
-			isa = PBXFileReference;
-			name = curs1.tiff;
-			path = Resources/curs1.tiff;
-			refType = 4;
-		};
-		85DC41600CAC6A4A00A80101 = {
-			isa = PBXFileReference;
-			name = curs2.tiff;
-			path = Resources/curs2.tiff;
-			refType = 4;
-		};
-		85DC41610CAC6A4A00A80101 = {
-			isa = PBXFileReference;
-			name = curs3.tiff;
-			path = Resources/curs3.tiff;
-			refType = 4;
-		};
-		85DC41620CAC6A4A00A80101 = {
-			isa = PBXFileReference;
-			name = curs4.tiff;
-			path = Resources/curs4.tiff;
-			refType = 4;
-		};
-		85DC41630CAC6A4A00A80101 = {
-			fileRef = 85DC415F0CAC6A4A00A80101;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85DC41640CAC6A4A00A80101 = {
-			fileRef = 85DC41600CAC6A4A00A80101;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85DC41650CAC6A4A00A80101 = {
-			fileRef = 85DC41610CAC6A4A00A80101;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85DC41660CAC6A4A00A80101 = {
-			fileRef = 85DC41620CAC6A4A00A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};

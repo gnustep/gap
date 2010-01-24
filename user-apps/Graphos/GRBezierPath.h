@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.h
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -37,7 +37,6 @@ typedef struct
 
 @interface GRBezierPath : GRPathObject
 {
-    NSBezierPath *myPath;
     float strokeColor[4], fillColor[4];
     float strokeAlpha, fillAlpha;
     float flatness, miterlimit;

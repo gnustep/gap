@@ -43,6 +43,22 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    GRObjectEditor *objCopy;
+
+    objCopy = NSCopyObject(self, 0, zone);
+    objCopy->object = nil;
+    
+    return objCopy;
+}
+
+
+- (void)setObject:(GRDrawableObject *)anObject
+{
+    object = anObject;
+}
+
 - (void)select
 {
     [self selectAsGroup];

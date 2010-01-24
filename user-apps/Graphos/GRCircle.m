@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009 GNUstep Application Project
+ Copyright (C) 2009-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -125,6 +125,18 @@
         [self setZoomFactor: zf];
     }
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    GRCircle *objCopy;
+
+    objCopy = [super copyWithZone:zone];
+
+    objCopy->startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zmFactor];
+    objCopy->endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zmFactor];
+
+    return objCopy;
 }
 
 - (void)dealloc

@@ -1393,6 +1393,24 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 /* ----- Undo Methods ----- */
 
+- (NSMutableArray *)deepCopyObjects: (NSMutableArray *)objArray
+{
+    NSMutableArray *copyArray;
+    NSEnumerator *e;
+    NSObject *o;
+
+    
+    copyArray = [[NSMutableArray arrayWithCapacity:[objArray count]] retain];
+
+    e = [objArray objectEnumerator];
+    while (o = [e nextObject])
+    {
+        [copyArray addObject:[o copy]];
+    }
+
+    return copyArray;
+}
+
 - (void)saveCurrentObjects
 {
     if (objects != nil)
@@ -1405,20 +1423,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)saveCurrentObjectsDeep
 {
-    NSEnumerator *e;
-    NSObject *o;
-    
     if (objects != nil)
     {
         if (lastObjects != nil)
             [lastObjects release];
-        lastObjects = [[NSMutableArray arrayWithCapacity:[objects count]] retain];
-        
-        e = [objects objectEnumerator];
-        while (o = [e nextObject])
-        {
-            [lastObjects addObject:[o copy]];
-        }
+        lastObjects = [self deepCopyObjects: objects];
     }
 }
 
