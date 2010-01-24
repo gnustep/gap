@@ -8,7 +8,7 @@
 	"Enrico Sersale",
 	"Rob Burns"
     );
-    Copyright = "Copyright (C) 2005-2009";
+    Copyright = "Copyright (C) 2005-2010";
     CopyrightDescription = "Released under GPL";
     FullVersionID = 0.1;
     NSExecutable = Graphos;
