@@ -86,24 +86,28 @@ static double k = 0.025;
         [myPath setCachesBezierPath: NO];
         controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
         psops = [description objectForKey: @"psdata"];
-        for(i = 0; i < [psops count]; i++) {
+        for(i = 0; i < [psops count]; i++)
+        {
             linearr = [[psops objectAtIndex: i] componentsSeparatedByString: @" "];
             count = [linearr count];
             str = [linearr objectAtIndex: count -1];
 
-            if([str isEqualToString: @"moveto"]) {
+            if([str isEqualToString: @"moveto"])
+            {
                 pp[0].x = [[linearr objectAtIndex: 0] floatValue];
                 pp[0].y = [[linearr objectAtIndex: 1] floatValue];
                 [self addControlAtPoint: pp[0]];
             }
 
-            if([str isEqualToString: @"lineto"]) {
+            if([str isEqualToString: @"lineto"])
+            {
                 pp[0].x = [[linearr objectAtIndex: 0] floatValue];
                 pp[0].y = [[linearr objectAtIndex: 1] floatValue];
                 [self addLineToPoint: pp[0]];
             }
 
-            if([str isEqualToString: @"curveto"]) {
+            if([str isEqualToString: @"curveto"])
+            {
                 pp[0].x = [[linearr objectAtIndex: 0] floatValue];
                 pp[0].y = [[linearr objectAtIndex: 1] floatValue];
                 pp[1].x = [[linearr objectAtIndex: 2] floatValue];
@@ -268,10 +272,20 @@ static double k = 0.025;
 - (id)copyWithZone:(NSZone *)zone
 {
     GRBezierPath *objCopy;
+    NSMutableArray *cpsCopy;
+    NSEnumerator *e;
+    GRBezierControlPoint *cp;
 
     objCopy = [super copyWithZone:zone];
 
-    objCopy->controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
+    cpsCopy = [[NSMutableArray alloc] initWithCapacity: [controlPoints count]];
+    e = [controlPoints objectEnumerator];
+    while (cp = [e nextObject])
+    {
+        [cpsCopy addObject:[cp copy]];
+    }
+    
+    objCopy->controlPoints = cpsCopy;
 
     return objCopy;
 }
