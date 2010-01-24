@@ -44,7 +44,7 @@
         myPath = [[NSBezierPath bezierPath] retain];
         [myPath setCachesBezierPath: NO];
         pos = NSMakePoint(0, 0);
-	size = NSMakeSize(0, 0);
+	    size = NSMakeSize(0, 0);
         startControlPoint = nil;
         endControlPoint = nil;
         rotation = 0;
