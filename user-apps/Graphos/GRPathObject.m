@@ -30,12 +30,21 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     GRPathObject *objCopy;
+    NSBezierPath *bzpCopy;
+
+    bzpCopy = [myPath copy];
     
     objCopy = [super copyWithZone:zone];
-    
+    objCopy->myPath = bzpCopy;
     [objCopy setCurrentPoint:[self currentPoint]];
     
     return objCopy;
+}
+
+- (void)dealloc
+{
+    [myPath release];
+    [super dealloc];
 }
 
 - (void)setFilled:(BOOL)value

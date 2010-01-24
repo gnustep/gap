@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -265,9 +265,19 @@ static double k = 0.025;
     return dict;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    GRBezierPath *objCopy;
+
+    objCopy = [super copyWithZone:zone];
+
+    objCopy->controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
+
+    return objCopy;
+}
+
 - (void)dealloc
 {
-    [myPath release];
     [controlPoints release];
     [super dealloc];
 }

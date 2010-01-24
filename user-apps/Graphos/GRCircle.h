@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.h
 
- Copyright (C) 2009 GNUstep Application Project
+ Copyright (C) 2009-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -25,14 +25,12 @@
 
 
 #import <Foundation/Foundation.h>
-#import <AppKit/NSBezierPath.h>
 #import "GRPathObject.h"
 #import "GRObjectControlPoint.h"
 
 
 @interface GRCircle : GRPathObject
 {
-    NSBezierPath *myPath;
     NSPoint      pos;
     NSSize       size;
     NSRect bounds;

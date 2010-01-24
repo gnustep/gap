@@ -49,10 +49,15 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    GRDrawableObject *objCopy = NSCopyObject(self, 0, zone);
+    GRDrawableObject *objCopy;
+    GRObjectEditor *editorCopy;
+
+    objCopy = NSCopyObject(self, 0, zone);
+    editorCopy = [[self editor] copy];
+    [editorCopy setObject: objCopy];
     
     objCopy->docView = [self view];
-    objCopy->editor = [[self editor] retain];
+    objCopy->editor = editorCopy;
     
     return objCopy;
 }

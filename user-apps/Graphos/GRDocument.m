@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocument.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -53,13 +53,12 @@
     }
     
     
-    NSLog(@"initing document");
     /* initialize the image view to the default size if possible */
     p = [self printInfo];
     if (p != nil)
         [self setPrintInfo:p];
     else
-        NSLog(@"pi nil!");
+        NSLog(@"printInfo nil!");
     
     /* set undo levels */
     [[self undoManager] setLevelsOfUndo:1];

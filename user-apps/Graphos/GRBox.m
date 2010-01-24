@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.m
 
- Copyright (C) 2007-2009 GNUstep Application Project
+ Copyright (C) 2007-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -134,11 +134,8 @@
     
     objCopy = [super copyWithZone:zone];
 
-    objCopy->myPath = nil;
-    objCopy->startControlPoint = nil;
-    objCopy->startControlPoint = [self startControlPoint];
-    objCopy->endControlPoint = nil;
-    objCopy->endControlPoint = [self endControlPoint];
+    objCopy->startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zmFactor];
+    objCopy->endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zmFactor];
     
     return objCopy;
 }
