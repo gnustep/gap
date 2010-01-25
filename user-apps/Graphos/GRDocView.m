@@ -353,36 +353,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         // ###		[myWin setSaved: NO];
     }
     [self setNeedsDisplay: YES];
-
-    //    PREPAREUNDO(self, undoDeleteObjects);
-}
-
-- (void)undoDeleteObjects
-{
-    NSMutableArray *deleted;
-    id obj;
-    int i, index, count;
-
-    for(i = 0; i < [objects count]; i++)
-        [[[objects objectAtIndex: i] editor] unselect];
-
-    if([delObjects count])
-    {
-        index = [delObjects count] -1;
-        deleted = [delObjects objectAtIndex: index];
-        count = [deleted count];
-        // #### this self-modifying for end looks very crappy. needs a rewrite
-        for(i = 0; i < count; i++)
-        {
-            obj = [deleted objectAtIndex: i];
-            [objects addObject: obj];
-            [deleted removeObject: obj];
-            count--;
-            i--;
-        }
-        [delObjects removeObjectAtIndex: index];
-    }
-    [self setNeedsDisplay: YES];
 }
 
 - (void)startDrawingAtPoint:(NSPoint)p
@@ -890,34 +860,14 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             diffp.x = p.x - startp.x;
             diffp.y = p.y - startp.y;
-//            [self prepareDoItAgainWithSelector: @selector(duplicateObjects:andMoveTo:)
-//                                         owner: self target: self , &moveobjs, &diffp, nil];
         } else
         {
             diffp.x = startp.x - p.x;
             diffp.y = startp.y - p.y;
-//            PREPAREUNDO(self, undoMoveObjects: [moveobjs retain] moveBackTo: diffp);
         }
     }
 }
 
-// FIXME review this. still needed? to adapt?
-- (void)undoMoveObjects:(NSArray *)objs moveBackTo:(NSPoint)p
-{
-    id obj;
-    int i;
-
-    for(i = 0; i < [objects count]; i++)
-        [[[objects objectAtIndex: i] editor] unselect];
-
-    for(i = 0; i < [objs count]; i++)
-    {
-        obj = [objs objectAtIndex: i];
-        [[obj editor] selectAsGroup];
-        [obj moveAddingCoordsOfPoint: p];
-    }
-    [self setNeedsDisplay: YES];
-}
 
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos
 {
@@ -926,8 +876,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     p = [editor moveControlAtPoint: pos];
     if(p.x == pos.x && p.y == pos.y)
         return NO;
-
-//    PREPAREUNDO(editor, moveControlAtPoint: p toPoint: pos);
 
     [self setNeedsDisplay: YES];
     return YES;
@@ -940,8 +888,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     p = [editor moveBezierHandleAtPoint: pos];
     if(p.x == pos.x && p.y == pos.y)
         return NO;
-
-//    PREPAREUNDO(editor, moveBezierHandleAtPoint: p toPoint: pos);
 
     [self setNeedsDisplay: YES];
     return YES;
