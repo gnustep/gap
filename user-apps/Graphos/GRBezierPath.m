@@ -167,48 +167,6 @@ static double k = 0.025;
     return self;
 }
 
-- (id)duplicate
-{
-    GRBezierPath *bzpath;
-    GRBezierControlPoint *cp;
-    GRBezierHandle handle;
-    int i;
-
-    bzpath = [[[GRBezierPath alloc]
-                initInView: docView zoomFactor: zmFactor] autorelease];
-    for(i = 0; i < [controlPoints count]; i++)
-    {
-        cp = [controlPoints objectAtIndex: i];
-        [bzpath addControlAtPoint: [cp center]];
-        if([cp isActiveHandle])
-        {
-            handle = [cp bzHandle];
-            [bzpath addCurveWithBezierHandlePosition: handle.firstHandle];
-            [bzpath confirmNewCurve];
-        } else
-        {
-            if(i != 0)
-                [bzpath addLineToPoint: [cp center]];
-        }
-    }
-
-    [bzpath setFlat: flatness];
-    [bzpath setLineJoin: linejoin];
-    [bzpath setLineCap: linecap];
-    [bzpath setMiterLimit: miterlimit];
-    [bzpath setLineWidth: linewidth];
-    [bzpath setStroked: stroked];
-    [bzpath setStrokeColor: strokeColor];
-    [bzpath setStrokeAlpha: strokeAlpha];
-    [bzpath setFilled: filled];
-    [bzpath setFillColor: fillColor];
-    [bzpath setFillAlpha: fillAlpha];
-    [bzpath setVisible: visible];
-    [bzpath setLocked: locked];
-    [(GRBezierPathEditor *)[bzpath editor] setIsValid: NO];
-
-    return bzpath;
-}
 
 - (NSDictionary *)objectDescription
 {
