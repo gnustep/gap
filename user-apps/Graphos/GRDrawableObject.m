@@ -37,22 +37,19 @@
 
 - (NSDictionary *)objectDescription
 {
+#ifdef GNUSTEP
     [self subclassResponsibility: _cmd];
+#endif
     return nil;
 }
 
-- (GRDrawableObject *)duplicate
-{
-    [self subclassResponsibility: _cmd];
-    return  nil;
-}
 
 - (id)copyWithZone:(NSZone *)zone
 {
     GRDrawableObject *objCopy;
     GRObjectEditor *editorCopy;
 
-    objCopy = NSCopyObject(self, 0, zone);
+    objCopy = (GRDrawableObject *)NSCopyObject(self, 0, zone);
     editorCopy = [[self editor] copy];
     [editorCopy setObject: objCopy];
     

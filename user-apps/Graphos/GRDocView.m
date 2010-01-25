@@ -289,13 +289,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     for(i = 0; i < [objs count]; i++)
     {
         obj = [objs objectAtIndex: i];
-        // ##### FIXME in case of superclass
-        if([obj isKindOfClass: [GRBezierPath class]])
-            duplObj = [(GRBezierPath *)obj duplicate];
-        else if ([obj isKindOfClass: [GRBox class]])
-            duplObj = [(GRBox *)obj duplicate];
-        else
-            duplObj = [(GRText *)obj duplicate];
+        duplObj = [obj copy];
         [[obj editor] unselect];
         [duplObj selectAsGroup];
         [duplObj moveAddingCoordsOfPoint: p];

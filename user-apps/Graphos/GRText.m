@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -143,38 +143,6 @@
     return self;
 }
 
-
-- (GRText *)duplicate
-{
-    GRText *gdtxt;
-    NSDictionary *attrs;
-    NSMutableParagraphStyle *style;
-
-    // a cast to get rid of a compiler warning
-    style = (NSMutableParagraphStyle *)[NSMutableParagraphStyle defaultParagraphStyle];
-    [style setAlignment: align];
-    [style setParagraphSpacing: parspace];
-
-    attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-        font, NSFontAttributeName, style, NSParagraphStyleAttributeName, nil];
-
-    gdtxt = [[[GRText alloc] initInView: docView atPoint: pos
-                             zoomFactor: zmFactor openEditor: NO] autorelease];
-    [gdtxt setString: str attributes: attrs];
-    [gdtxt setScalex: scalex scaley: scaley];
-    [gdtxt setRotation: rotation];
-    [gdtxt setStroked: stroked];
-    [gdtxt setStrokeColor: strokeColor];
-    [gdtxt setStrokeAlpha: strokeAlpha];
-    [gdtxt setFilled: filled];
-    [gdtxt setFillColor: fillColor];
-    [gdtxt setFillAlpha: fillAlpha];
-    [gdtxt setVisible: visible];
-    [gdtxt setLocked: locked];
-    [(GRTextEditor *)[gdtxt editor] setIsValid: NO];
-
-    return gdtxt;
-}
 
 - (NSDictionary *)objectDescription
 {

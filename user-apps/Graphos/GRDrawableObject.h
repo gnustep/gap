@@ -47,12 +47,6 @@
  */
 - (NSDictionary *)objectDescription;
 
-/**
- * Each object is able to clone itself with this method.
- * Needs to be subclassed.
- */
-- (GRDrawableObject *)duplicate;
-
 - (GRDocView *)view;
 - (GRObjectEditor *)editor;
 

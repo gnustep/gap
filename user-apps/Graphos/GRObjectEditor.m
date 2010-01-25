@@ -2,7 +2,7 @@
  Project: Graphos
  GRObjectEditor.m
 
- Copyright (C) 2008-2009 GNUstep Application Project
+ Copyright (C) 2008-2010 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -47,7 +47,7 @@
 {
     GRObjectEditor *objCopy;
 
-    objCopy = NSCopyObject(self, 0, zone);
+    objCopy = (GRObjectEditor *)NSCopyObject(self, 0, zone);
     objCopy->object = nil;
     
     return objCopy;
