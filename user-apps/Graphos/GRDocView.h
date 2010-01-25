@@ -28,12 +28,6 @@
 #import "GRBezierPathEditor.h"
 
 
-#define PREPAREUNDO(target, method) ({\
-    [undoManager beginUndoGrouping]; \
-    [[undoManager prepareWithInvocationTarget: target] method]; \
-    [undoManager endUndoGrouping]; \
-})
-
 #ifndef ASSIGN
 #define ASSIGN(object,value)     ({\
     id __value = (id)(value); \
@@ -102,7 +96,6 @@
 - (void)updatePrintInfo: (NSPrintInfo *)pi;
 
 - (void)deleteSelectedObjects;
-- (void)undoDeleteObjects;
 - (void)startDrawingAtPoint:(NSPoint)p;
 - (void)selectObjectAtPoint:(NSPoint)p;
 - (void)editPathAtPoint:(NSPoint)p;
@@ -111,7 +104,6 @@
 - (void)editSelectedText;
 
 - (void)moveSelectedObjects:(NSArray *)objs startingPoint:(NSPoint)startp;
-- (void)undoMoveObjects:(NSArray *)objs moveBackTo:(NSPoint)p;
 
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos;
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
