@@ -45,7 +45,7 @@
 {
     GRObjectControlPoint *objCopy;
 
-    objCopy = NSCopyObject(self, 0, zone);
+    objCopy = (GRObjectControlPoint *)NSCopyObject(self, 0, zone);
 
     return objCopy;
 }
