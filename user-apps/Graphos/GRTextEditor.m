@@ -61,6 +61,13 @@
         [myWindow center];
 }
 
+- (int) runModal
+{
+    NSApplication *app = [NSApplication sharedApplication];
+    [app runModalForWindow: myWindow];
+    return [myView result];
+}
+
 - (void)dealloc
 {
     [myView release];

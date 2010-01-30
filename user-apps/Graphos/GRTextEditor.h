@@ -42,6 +42,9 @@
     withString:(NSString *)string
     attributes:(NSDictionary *)attributes;
 
+/** runs the editor window in a modal loop and gets the return value like an Alert Panel */
+- (int)runModal;
+
 - (void)select;
 
 - (void)selectAsGroup;

@@ -71,7 +71,7 @@
             [(GRTextEditor *)editor setPoint: pos
                   withString: nil
                   attributes: nil];
-            result = [[(GRTextEditor *)editor editorView] runModal];
+            result = [(GRTextEditor *)editor runModal];
             if(result == NSAlertDefaultReturn)
                 [self setString: [[(GRTextEditor *)editor editorView] textString]
                      attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
@@ -262,7 +262,7 @@
     [(GRTextEditor *)editor setPoint: pos
           withString: str
           attributes: attrs];
-    result = [[(GRTextEditor *)editor editorView] runModal];
+    result = [(GRTextEditor *)editor runModal];
     if(result == NSAlertDefaultReturn)
         [self setString: [[(GRTextEditor *)editor editorView] textString]
              attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
