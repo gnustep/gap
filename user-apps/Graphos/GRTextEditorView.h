@@ -46,8 +46,6 @@
          withString:(NSString *)string
          attributes:(NSDictionary *)attributes;
 
-- (int)runModal;
-
 - (void)makeFontsPopUp:(NSString *)selFontName;
 
 - (void)changeTextAlignment:(id)sender;
@@ -61,5 +59,7 @@
 - (NSString *)textString;
 
 - (NSDictionary *)textAttributes;
+
+- (int)result;
 
 @end

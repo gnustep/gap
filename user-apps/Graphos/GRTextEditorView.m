@@ -156,12 +156,6 @@
     [super dealloc];
 }
 
-- (int)runModal
-{
-    NSApplication *app = [NSApplication sharedApplication];
-    [app runModalForWindow: [self window]];
-    return result;
-}
 
 - (void)makeFontsPopUp:(NSString *)selFontName
 {
@@ -268,6 +262,11 @@
         [theText font], NSFontAttributeName,
         style, NSParagraphStyleAttributeName, nil];
     return dict;
+}
+
+- (int)result
+{
+    return result;
 }
 
 @end
