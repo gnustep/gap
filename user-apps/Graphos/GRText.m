@@ -431,7 +431,7 @@
 {
     NSArray *lines;
     NSString *line;
-    float baselny = pos.y;
+    float baselny;
     int i;
     NSBezierPath *bezp;
     NSMutableParagraphStyle *style;
@@ -440,7 +440,7 @@
 
     if(!visible)
         return;
-	
+
     style = [[NSMutableParagraphStyle alloc] init];
     [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     [style setAlignment: align];
@@ -450,8 +450,9 @@
     tempFont, NSFontAttributeName,
     style, NSParagraphStyleAttributeName, nil] retain];
 
-    
+    baselny = pos.y;
     bezp = [NSBezierPath bezierPath];
+    [bezp setLineWidth:0];
     if([str length] > 0)
     {
         lines = [str componentsSeparatedByString: @"\n"];
@@ -463,10 +464,10 @@
 
 
             if([editor isSelect])
-	        {
+            {
                 [[NSColor blackColor] set];
+                [bezp moveToPoint:NSMakePoint(pos.x, baselny)];
                 [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
-                [bezp stroke];
             }
 
             baselny -= parspace;
@@ -474,10 +475,11 @@
 
         if([editor isSelect])
         {
+            [bezp stroke];
             [[NSColor blackColor] set];
             NSRectFill(selRect);
         }
     }
-}
+} 
 
 @end
