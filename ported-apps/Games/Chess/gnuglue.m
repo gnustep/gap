@@ -553,8 +553,10 @@ static void ExitChess()
 static void Die()
 {
     if( [NSApp canFinishGame] ) {
+#ifndef __MINGW32__
 	signal( SIGINT,  SIG_IGN );
 	signal( SIGQUIT, SIG_IGN );
+#endif
 	ExitChess();
     }
     return;
@@ -562,18 +564,22 @@ static void Die()
 
 static void TerminateSearch()
 {
+#ifndef __MINGW32__
     signal( SIGINT,  SIG_IGN );
     signal( SIGQUIT, SIG_IGN );
     timeout = true;
     signal( SIGINT,  Die );	/* Die() */
     signal( SIGQUIT, Die );
+#endif
     return;
 }
 
 void SearchStartStuff( short side )
 {
+#ifndef __MINGW32__
     signal( SIGINT,  TerminateSearch );	/* TerminateSearch() */
     signal( SIGQUIT, TerminateSearch );
+#endif
     return;
 }
 
