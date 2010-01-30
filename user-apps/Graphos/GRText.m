@@ -270,7 +270,6 @@
         font, NSFontAttributeName,
         style, NSParagraphStyleAttributeName, nil];
 
-    editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
     [(GRTextEditor *)editor setPoint: pos
           withString: str
           attributes: attrs];
@@ -278,8 +277,6 @@
     if(result == NSAlertDefaultReturn)
         [self setString: [[(GRTextEditor *)editor editorView] textString]
              attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
-    [editor release];
-    [[NSApp delegate] updateCurrentWindow];
 }
 
 - (BOOL)pointInBounds:(NSPoint)p
