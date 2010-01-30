@@ -143,6 +143,19 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  GRText *objCopy;
+  
+  objCopy = [super copyWithZone:zone];
+  
+  objCopy->str = [str copy];
+  objCopy->font = [font copy];
+  
+  return objCopy;
+}
+
+
 
 - (NSDictionary *)objectDescription
 {
@@ -222,7 +235,6 @@
 
 - (void)dealloc
 {
-    [editor release];
     [str release];
     [font release];
     [super dealloc];
