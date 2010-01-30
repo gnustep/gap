@@ -31,7 +31,7 @@
  * This abstract class is the companion of the GRDrawableObject class.
  * It defines the most generic behaviour of an object editor.
  */
-@interface GRObjectEditor : NSObject
+@interface GRObjectEditor : NSObject <NSCopying>
 {
     GRDrawableObject *object;
     BOOL groupSelected;

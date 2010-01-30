@@ -756,7 +756,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
     [uMgr setActionName:@"Edit Text"];
     
-    [self saveCurrentObjects];
+    [self saveCurrentObjectsDeep];
 
     for(i = 0; i < [objects count]; i++)
         [[[objects objectAtIndex: i] editor] unselect];

@@ -31,7 +31,7 @@
 
 - (void)dealloc
 {
-    [editor dealloc];
+    [editor release];
     [super dealloc];
 }
 

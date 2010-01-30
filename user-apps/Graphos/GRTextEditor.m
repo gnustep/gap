@@ -49,6 +49,19 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  GRTextEditor *objCopy;
+  
+  objCopy = (GRTextEditor *)[super copyWithZone:zone];
+  
+  objCopy->myWindow = [myWindow retain];
+  objCopy->myView = nil;
+  
+  return objCopy;
+}
+
+
 - (void)setPoint:(NSPoint)p
       withString:(NSString *)string
       attributes:(NSDictionary *)attributes
