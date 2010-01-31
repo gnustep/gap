@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.m
 
- Copyright (C) 2000-2009 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -33,9 +33,9 @@
 {
     NSString *type;
 
-    NSLog(@"prop editor inited");
     self = [super initWithFrame: frameRect];
-    if(self) {
+    if(self)
+    {
         docview = aView;
         ispath = NO;
         type = [objprops objectForKey: @"type"];
@@ -52,7 +52,7 @@
         } else
         {
             flatness = miterlimit = linewidth = 0.0;
-            linejoin = linecap = 0;
+            linejoin = linecap = -1;
         }
 
         filled = (BOOL)[[objprops objectForKey: @"filled"] intValue];
@@ -143,7 +143,7 @@
 
         // ---------------------- STROKE -----------------------
         stkLabel = [[[NSTextField alloc] init] autorelease];
-        [stkLabel setFrame: NSMakeRect(210, 275, 40, 20)];
+        [stkLabel setFrame: NSMakeRect(210, 275, 50, 20)];
         [stkLabel setDrawsBackground:NO];
         [stkLabel setBezeled:NO];
         [stkLabel setEditable:NO];
@@ -235,15 +235,11 @@
         [[lineCapMatrix cellAtRow: 0 column: 0] setTag: 0];
         [[lineCapMatrix cellAtRow: 1 column: 0] setTag: 1];
         [[lineCapMatrix cellAtRow: 2 column: 0] setTag: 2];
-        if(linecap == 0)
-            [[lineCapMatrix cellAtRow: 0 column: 0] setState: NSOnState];
-        if(linecap == 1)
-            [[lineCapMatrix cellAtRow: 1 column: 0] setState: NSOnState];
-        if(linecap == 2)
-            [[lineCapMatrix cellAtRow: 2 column: 0] setState: NSOnState];
         [lineCapMatrix setTarget: self];
         [lineCapMatrix setAction: @selector(setLnCap:)];
         [self addSubview: lineCapMatrix];
+        [lineCapMatrix setAllowsEmptySelection:YES];
+        [lineCapMatrix deselectAllCells];
 
 
         // ---------------------- LINE JOIN ----------------------
@@ -264,22 +260,16 @@
         [[lineJoinMatrix cellAtRow: 0 column: 0] setTag: 0];
         [[lineJoinMatrix cellAtRow: 1 column: 0] setTag: 1];
         [[lineJoinMatrix cellAtRow: 2 column: 0] setTag: 2];
-        if(linejoin == 0)
-            [[lineJoinMatrix cellAtRow: 0 column: 0] setState: NSOnState];
-        if(linejoin == 1)
-            [[lineJoinMatrix cellAtRow: 1 column: 0] setState: NSOnState];
-        if(linejoin == 2)
-            [[lineJoinMatrix cellAtRow: 2 column: 0] setState: NSOnState];
         [lineJoinMatrix setTarget: self];
         [lineJoinMatrix setAction: @selector(setLnJoin:)];
         [self addSubview: lineJoinMatrix];
+        [lineJoinMatrix setAllowsEmptySelection:YES];
+        [lineJoinMatrix deselectAllCells];
 
 
         // ---------------------- FLATNESS ----------------------
         flatnessField = [[[NSTextField alloc] init] autorelease];
         [flatnessField setFrame: NSMakeRect(10, 120, 40, 20)];
-        [flatnessField setStringValue:
-            [NSString stringWithFormat:@"%.2f", flatness]];
         [self addSubview: flatnessField];
         flatnessLabel = [[[NSTextField alloc] init] autorelease];
         [flatnessLabel setFrame: NSMakeRect(55, 120, 60, 20)];
@@ -294,8 +284,6 @@
         // -------------------- MITER LIMIT --------------------
         miterlimitField = [[[NSTextField alloc] init] autorelease];
         [miterlimitField setFrame: NSMakeRect(130, 120, 40, 20)];
-        [miterlimitField setStringValue:
-            [NSString stringWithFormat:@"%.2f", miterlimit]];
         [self addSubview: miterlimitField];
         miterlimitLabel = [[[NSTextField alloc] init] autorelease];
         [miterlimitLabel setFrame: NSMakeRect(175, 120, 60, 20)];
@@ -310,8 +298,6 @@
         // -------------------- LINE WIDTH --------------------
         linewidthField = [[[NSTextField alloc] init] autorelease];
         [linewidthField setFrame: NSMakeRect(250, 120, 40, 20)];
-        [linewidthField setStringValue:
-            [NSString stringWithFormat:@"%.2f", linewidth]];
         [self addSubview: linewidthField];
         linewidthLabel = [[[NSTextField alloc] init] autorelease];
         [linewidthLabel setFrame: NSMakeRect(295, 120, 60, 20)];
@@ -338,6 +324,15 @@
         [okButt setAction: @selector(okCancelPressed:)];
         [self addSubview: okButt];
         
+        /* disable not used controls */
+        if (!ispath)
+        {
+          [lineCapMatrix setEnabled:NO];
+          [lineJoinMatrix setEnabled:NO];
+          [flatnessField setEnabled:NO];
+          [miterlimitField setEnabled:NO];
+          [linewidthField setEnabled:NO];
+        }
         
         /* set field values */
         [fllCyanField setIntValue:fillcyan*100];
@@ -349,7 +344,25 @@
         [stkMagentaField setIntValue:strokemagenta*100];
         [stkYellowField setIntValue:strokeyellow*100];
         [stkBlakField setIntValue:strokeblack*100];
-
+        
+        [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
+        [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
+        [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
+        
+        if(linecap == 0)
+          [[lineCapMatrix cellAtRow: 0 column: 0] setState: NSOnState];
+        else if(linecap == 1)
+          [[lineCapMatrix cellAtRow: 1 column: 0] setState: NSOnState];
+        else if(linecap == 2)
+          [[lineCapMatrix cellAtRow: 2 column: 0] setState: NSOnState];
+        
+        if(linejoin == 0)
+          [[lineJoinMatrix cellAtRow: 0 column: 0] setState: NSOnState];
+        else if(linejoin == 1)
+          [[lineJoinMatrix cellAtRow: 1 column: 0] setState: NSOnState];
+        else if(linejoin == 2)
+          [[lineJoinMatrix cellAtRow: 2 column: 0] setState: NSOnState];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldDidEndEditing:)
                                                      name:@"NSControlTextDidEndEditingNotification" object:nil];
