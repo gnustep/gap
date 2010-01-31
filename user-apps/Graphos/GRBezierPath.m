@@ -772,24 +772,6 @@ static double k = 0.025;
         return;
 
     bzp = [NSBezierPath bezierPath];
-    if(stroked)
-    {
-        [NSGraphicsContext saveGraphicsState];
-        [myPath setLineJoinStyle:linejoin];
-        [myPath setLineCapStyle:linecap];
-        [myPath setLineWidth:linewidth];
-        // #### and alpha strokeAlpha ????
-        color = [NSColor colorWithDeviceCyan: strokeColor[0]
-                                     magenta: strokeColor[1]
-                                      yellow: strokeColor[2]
-                                       black: strokeColor[3]
-                                       alpha: strokeAlpha];
-        color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-        [color set];
-        [myPath stroke];   // FIXME why this twice... need to understand mypath
-        [NSGraphicsContext restoreGraphicsState];
-    }
-
     if(filled)
     {
         // #### and alpha strokeAlpha ????
@@ -805,7 +787,25 @@ static double k = 0.025;
         [myPath fill];
         [NSGraphicsContext restoreGraphicsState];
     }
-
+    if(stroked)
+    {
+      [NSGraphicsContext saveGraphicsState];
+      [myPath setLineJoinStyle:linejoin];
+      [myPath setLineCapStyle:linecap];
+      [myPath setLineWidth:linewidth];
+      // #### and alpha strokeAlpha ????
+      color = [NSColor colorWithDeviceCyan: strokeColor[0]
+                                   magenta: strokeColor[1]
+                                    yellow: strokeColor[2]
+                                     black: strokeColor[3]
+                                     alpha: strokeAlpha];
+      color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+      [color set];
+      [myPath stroke];
+      [NSGraphicsContext restoreGraphicsState];
+    }
+    
+    
     [bzp setLineWidth:1];
     if([(GRBezierPathEditor *)editor isGroupSelected])
     {
