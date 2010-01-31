@@ -286,7 +286,7 @@
         [miterlimitField setFrame: NSMakeRect(130, 120, 40, 20)];
         [self addSubview: miterlimitField];
         miterlimitLabel = [[[NSTextField alloc] init] autorelease];
-        [miterlimitLabel setFrame: NSMakeRect(175, 120, 60, 20)];
+        [miterlimitLabel setFrame: NSMakeRect(175, 120, 65, 20)];
         [miterlimitLabel setDrawsBackground:NO];
         [miterlimitLabel setBezeled:NO];
         [miterlimitLabel setEditable:NO];
@@ -348,20 +348,21 @@
         [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
         [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
         [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
-        
+
+                
         if(linecap == 0)
-          [[lineCapMatrix cellAtRow: 0 column: 0] setState: NSOnState];
+          [lineCapMatrix setState: NSOnState atRow: 0 column: 0];
         else if(linecap == 1)
-          [[lineCapMatrix cellAtRow: 1 column: 0] setState: NSOnState];
+          [lineCapMatrix setState: NSOnState atRow: 1 column: 0];
         else if(linecap == 2)
-          [[lineCapMatrix cellAtRow: 2 column: 0] setState: NSOnState];
+          [lineCapMatrix setState: NSOnState atRow: 2 column: 0];
         
         if(linejoin == 0)
-          [[lineJoinMatrix cellAtRow: 0 column: 0] setState: NSOnState];
+          [lineJoinMatrix setState: NSOnState atRow: 0 column: 0];
         else if(linejoin == 1)
-          [[lineJoinMatrix cellAtRow: 1 column: 0] setState: NSOnState];
+          [lineJoinMatrix setState: NSOnState atRow: 1 column: 0];
         else if(linejoin == 2)
-          [[lineJoinMatrix cellAtRow: 2 column: 0] setState: NSOnState];
+          [lineJoinMatrix setState: NSOnState atRow: 2 column: 0];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldDidEndEditing:)
