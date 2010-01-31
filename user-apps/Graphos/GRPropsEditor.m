@@ -398,7 +398,6 @@
 
     [self setNeedsDisplayInRect: strokeColorRect];
     [self setNeedsDisplayInRect: fillColorRect];
-    NSLog(@"read line width: %f", linewidth);
 }
 
 - (void)setLnCap:(id)sender
