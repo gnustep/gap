@@ -381,23 +381,6 @@
 
     bzp = [NSBezierPath bezierPath];
     [bzp appendBezierPathWithRect:bounds];
-    if(stroked)
-    {
-        [NSGraphicsContext saveGraphicsState];
-        [bzp setLineJoinStyle:linejoin];
-        [bzp setLineCapStyle:linecap];
-        [bzp setLineWidth:linewidth];
-        color = [NSColor colorWithDeviceCyan: strokeColor[0]
-                                     magenta: strokeColor[1]
-                                      yellow: strokeColor[2]
-                                       black: strokeColor[3]
-                                       alpha: strokeAlpha];
-        color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-        [color set];
-        [bzp stroke]; 
-        [NSGraphicsContext restoreGraphicsState];
-    }
-
     if(filled)
     {
         [NSGraphicsContext saveGraphicsState];
@@ -410,6 +393,22 @@
         [color set];
         [bzp fill];
         [NSGraphicsContext restoreGraphicsState];
+    }
+    if(stroked)
+    {
+      [NSGraphicsContext saveGraphicsState];
+      [bzp setLineJoinStyle:linejoin];
+      [bzp setLineCapStyle:linecap];
+      [bzp setLineWidth:linewidth];
+      color = [NSColor colorWithDeviceCyan: strokeColor[0]
+                                   magenta: strokeColor[1]
+                                    yellow: strokeColor[2]
+                                     black: strokeColor[3]
+                                     alpha: strokeAlpha];
+      color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+      [color set];
+      [bzp stroke]; 
+      [NSGraphicsContext restoreGraphicsState];
     }
     
     if ([[NSGraphicsContext currentContext] isDrawingToScreen])
