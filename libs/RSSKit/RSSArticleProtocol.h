@@ -101,7 +101,7 @@ extern NSString* RSSArticleChangedNotification;
  * 
  * @return The source feed of this article
  */
-- (id) feed;
+- (id<RSSFeed>) feed;
 
 /**
  * Returns a NSDictionary that represents the article and that can be used

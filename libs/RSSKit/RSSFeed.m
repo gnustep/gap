@@ -105,7 +105,7 @@
 /**
  * Implementation of the NewRSSArticleListener protocol.
  */
--(void) newArticleFound: (id<RSSMutableArticle>) anArticle
+-(void) newArticleFound: (id) anArticle
 {
   int oldArticleIdx;
   NSAssert([articles isKindOfClass: [NSMutableArray class]], @"articles not mutable!");
