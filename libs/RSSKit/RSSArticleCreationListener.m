@@ -282,25 +282,20 @@
 -(void) setDateFromString: (NSString*) str
 {
     int i;
-    NSDate* d = nil;
+    NSDate* d;
     static NSArray* timeformats = nil;
-    
-#ifdef GNUSTEP
-    // FIXME: Create directory yourself and remove #ifdef, so that it will work on OSX, too.
-    static NSDictionary* unlocalizedDefaults = nil;
-    
-    if (unlocalizedDefaults == nil) {
-        unlocalizedDefaults = [NSUserDefaults _unlocalizedDefaults]; // private NSDictionary method.
-    }
-#endif
     
     if (timeformats == nil) {
         // Everything that can be found in the wild is considered 'verified'.
         timeformats = [[NSArray alloc] initWithObjects:
-            @"%a, %d %b %Y %T %Z", // found in thedailywtf, RFC822?
-            @"%a, %d %B %Y %T %Z", // same with full month name, verified by example
-            @"%a, %d %b %Y %T %z", // verified by example (symlink RSS0.9 feed, channel's lastBuildDate)
-            @"%a, %d %B %Y %T %z", // not verified
+            @"%a, %d %b %Y %H:%M:%S %z", // blogspot
+
+            @"%a, %d %b %Y %H:%M:%S %Z", // found in thedailywtf, RFC822?
+            @"%a, %d %b %Y %H:%M %Z",
+            @"%a, %d %B %Y %H:%M:%S %Z", // same with full month name
+            @"%a, %d %b %Y %H:%M:%S %z", 
+            @"%a, %d %B %Y %H:%M:%S %z",
+
             @"%B %d, %Y", 
             @"%b %d, %Y", // verified by example
             @"%d %b %Y %H:%M:%S %Z", // verified by example (Joel on Software)
@@ -317,15 +312,17 @@
         ];
     }
     
+    d = nil;
     for (i=0; i<[timeformats count] && d == nil; i++) {
         d = [NSCalendarDate dateWithString: str
                             calendarFormat: [timeformats objectAtIndex: i]
-#ifdef GNUSTEP
-                            locale: unlocalizedDefaults
-#endif
         ];
-	  if (d!=nil) NSLog(@"Date=%@, calc'd from %@, which matched to %@ (%dth try)", d, str, [timeformats objectAtIndex: i], i); 
     }
+    if (d!=nil)
+        NSLog(@"Date=%@, calc'd from %@, which matched to %@ (%dth try)", d, str, [timeformats objectAtIndex: i], i);
+    else
+        NSLog(@"Could not parse Date: %@", str);
+    
    
     if (d==nil) {
         d = parseDublinCoreDate(str); // resistance is futile, nasty timezone definition!
