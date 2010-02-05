@@ -52,10 +52,12 @@ static NSArray* itemIdentifiers = nil;
 	searchField = [[NSSearchField alloc] initWithFrame: NSMakeRect(0, 0, 200, 22)];
 	[searchField setRecentsAutosaveName: @"recent article searches"];
 	[toolbarItem setView: searchField];
+        [toolbarItem setMinSize:NSMakeSize(32.0, 32.0)];    // set min and max size or the item won't appear on Cocoa
+        [toolbarItem setMaxSize:NSMakeSize(210.0, 210.0)];  // when a view is set in a toolbar item
 	[searchField setTarget: self];
 	[searchField setAction: @selector(searchAction:)];
 	[toolbarItem setLabel: NSLocalizedString(@"Search", @"search toolbar item label")];
-
+        
 	if (itemIdentifiers == nil) {
 	    itemIdentifiers = [[NSArray alloc] initWithObjects:
 	        NSToolbarFlexibleSpaceItemIdentifier,
