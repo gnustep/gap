@@ -76,6 +76,7 @@
 -(BOOL) loadToolbarProvidingComponent: (id<ToolbarDelegate>) aComponent
 {
     if ([aComponent conformsToProtocol: @protocol(ToolbarDelegate)] == NO) {
+        NSLog(@"Tried to add component not conforming to the ToolbarDelegate protocol: @%", [aComponent class]);
         return NO;
     }
     
@@ -201,6 +202,7 @@
     NSAssert(plugin1 != nil, @"Article Table plugin could not be loaded.");
     NSAssert(plugin2 != nil, @"Article View plugin could not be loaded.");
     NSAssert(feedPlugin != nil, @"Feed Table plugin could not be loaded.");
+    NSAssert(searchingComponent != nil, @"Searching plugin could not be loaded.");
     
     // Connect the created components...
     defaultCenter = [NSNotificationCenter defaultCenter];
