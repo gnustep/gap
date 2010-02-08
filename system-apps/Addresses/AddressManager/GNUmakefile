@@ -22,7 +22,7 @@ AddressManager_LOCALIZED_RESOURCE_FILES=\
 			ISOCountryCodes.dict
 AddressManager_LANGUAGES=Dutch English French German Spanish
 AddressManager_OBJCFLAGS=-I../Frameworks -Wall
-AddressManager_LDFLAGS=\
+#AddressManager_LDFLAGS=\
 	-L../Frameworks/AddressView/AddressView.framework/$(GNUSTEP_TARGET_LDIR) \
 	-L../Frameworks/Addresses/Addresses.framework/$(GNUSTEP_TARGET_LDIR)     \
 	-lAddressView -lAddresses

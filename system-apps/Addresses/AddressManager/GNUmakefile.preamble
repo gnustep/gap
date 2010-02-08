@@ -14,14 +14,15 @@ ADDITIONAL_INCLUDE_DIRS +=
 ADDITIONAL_LDFLAGS += 
 
 # Additional library directories the linker should search
-ADDITIONAL_LIB_DIRS +=
+ADDITIONAL_LIB_DIRS += -L../Frameworks/Addresses/Addresses.framework \
+                       -L../Frameworks/AddressView/AddressView.framework
 
 # Additional libraries
 
 # GNUstepWeb
 ADDITIONAL_GSW_LIBS +=
 # GUI apps
-ADDITIONAL_GUI_LIBS +=
+ADDITIONAL_GUI_LIBS += -lAddresses  -lAddressView
 # Libraries
 ADDITIONAL_LIBRARY_LIBS +=
 # ObjC stuff

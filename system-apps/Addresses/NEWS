@@ -12,6 +12,7 @@ Since 0.4.7.1:
     (fix by Richard Stonehouse)
   o Many fixes in VCFviewer GWorkspace inspector, thanks also to Philippe Roussel
   o use GSMimeDocument to decode base64 instead of custom code
+  o Makefiles work on windows
 
 Since 0.4.7:
 ============
