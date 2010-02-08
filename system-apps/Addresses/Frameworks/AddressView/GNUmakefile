@@ -34,3 +34,6 @@ AddressView_LDFLAGS=-L..
 -include GNUmakefile.local
 include $(GNUSTEP_MAKEFILES)/framework.make
 -include GNUmakefile.postamble
+
+ADDITIONAL_LIB_DIRS += -L../Addresses/Addresses.framework 
+ADDITIONAL_GUI_LIBS = -lAddresses
