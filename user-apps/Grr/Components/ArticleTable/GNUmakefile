@@ -32,5 +32,5 @@ include ../../GNUmakefile.preamble
 ADDITIONAL_INCLUDE_DIRS += -I../../../../libs/
 
 ifeq ($(GNUSTEP_TARGET_OS),mingw32)
-ADDITIONAL_LIB_DIRS += -L../../$(GNUSTEP_OBJ_DIR)
+ADDITIONAL_LIB_DIRS += ../../$(GNUSTEP_OBJ_DIR)/GNRatingCell.m.o ../../$(GNUSTEP_OBJ_DIR)/PipeType.m.o ../../$(GNUSTEP_OBJ_DIR)/Components.m.o
 endif
