@@ -28,8 +28,9 @@ ADDITIONAL_INCLUDE_DIRS += -I../..
 
 include $(GNUSTEP_MAKEFILES)/bundle.make
 
-ADDITIONAL_INCLUDE_DIRS += -I../../../../libs/
-ADDITIONAL_LIB_DIRS += -L../../../../libs/RSSKit/RSSKit.framework/
+include ../../GNUmakefile.preamble
 
--include GNUmakefile.postamble
-
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+ADDITIONAL_LIB_DIRS += ../../$(GNUSTEP_OBJ_DIR)/PreferencesComponent.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/Components.m.o
+endif

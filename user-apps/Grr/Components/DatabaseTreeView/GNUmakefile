@@ -29,5 +29,14 @@ include $(GNUSTEP_MAKEFILES)/bundle.make
 
 -include GNUmakefile.postamble
 
-ADDITIONAL_INCLUDE_DIRS += -I../../../../libs/
-ADDITIONAL_LIB_DIRS += -L../../../../libs/RSSKit/RSSKit.framework/
+include ../../GNUmakefile.preamble
+
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+ADDITIONAL_LIB_DIRS += ../../$(GNUSTEP_OBJ_DIR)/Database.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/DatabaseElement.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/Article.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/ImageTextCell.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/NumberedImageTextCell.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/Components.m.o \
+		       ../../$(GNUSTEP_OBJ_DIR)/PipeType.m.o
+endif
