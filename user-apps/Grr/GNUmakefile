@@ -42,7 +42,6 @@ PreferencesComponent.m \
 PreferencesPanel.m \
 
 
-Grr_OBJCC_FILES = 
 Grr_C_FILES = 
 Grr_RESOURCE_FILES = \
 Resources/Icons/Category.tiff \
@@ -90,14 +89,12 @@ Grr_LOCALIZED_RESOURCE_FILES += Localizable.strings
 
 Grr_MAIN_MODEL_FILE = Grr.gorm
 
-ADDITIONAL_GUI_LIBS = -lRSSKit
 
 
 # The usual makefile inclusion code
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/application.make
 include $(GNUSTEP_MAKEFILES)/aggregate.make
--include ../../../etoile.make
 -include GNUmakefile.postamble
 
 
