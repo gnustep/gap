@@ -1007,7 +1007,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     if(!objProps)
         return;
 
-    epwin = [[NSWindow alloc] initWithContentRect: NSMakeRect(0, 0, 500, 305)
+    epwin = [[NSPanel alloc] initWithContentRect: NSMakeRect(0, 0, 500, 305)
                                         styleMask: style
                                           backing: NSBackingStoreBuffered
                                             defer: NO];
