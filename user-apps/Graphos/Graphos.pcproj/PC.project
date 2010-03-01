@@ -87,7 +87,8 @@
 	txtAlignRight.tiff,
 	whitearrow.tiff,
 	x.tiff,
-	graphos_appicon_48.tif
+	graphos_appicon_48.tif,
+	circle.tiff
     );
     INSTALLDIR = "$(GNUSTEP_LOCAL_ROOT)/";
     INTERFACES = (
