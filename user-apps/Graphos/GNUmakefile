@@ -49,6 +49,7 @@ Resources/txtAlignRight.tiff \
 Resources/whitearrow.tiff \
 Resources/x.tiff \
 Resources/graphos_appicon_48.tif \
+Resources/circle.tiff \
 Resources/GraphosInfo.plist 
 
 
