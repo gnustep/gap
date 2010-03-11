@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2010/03/11 22:39:19 $
 
 /* system includes */
 /* (none) */
@@ -364,6 +364,8 @@
 	val = [NSString stringWithFormat: @"%f", [val floatValue]];
 	break;
       case ADDateProperty:
+	val = [val descriptionWithCalendarFormat:[[NSUserDefaults standardUserDefaults] objectForKey:NSShortDateFormatString]];
+	break;
       case ADArrayProperty:
       case ADDictionaryProperty:
       case ADDataProperty:
@@ -591,6 +593,8 @@
       val = [NSString stringWithFormat: @"%f", [val floatValue]];
       break;
     case ADDateProperty:
+      val = [val descriptionWithCalendarFormat:[[NSUserDefaults standardUserDefaults] objectForKey:NSShortDateFormatString]];
+      break;
     case ADArrayProperty:
     case ADDictionaryProperty:
     case ADDataProperty:
