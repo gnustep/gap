@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2009/09/25 19:48:01 $
+// $Revision: 1.4 $
+// $Date: 2010/03/11 22:39:19 $
 
 #include "ADPersonView.h"
 #include "ADPersonPropertyView.h"
@@ -207,7 +207,8 @@ static NSString *__defaultCountryCode = nil;
   NSRect noteRect;
   id label;
 
-  properties = [NSArray arrayWithObjects: ADHomePageProperty,
+  properties = [NSArray arrayWithObjects: ADBirthdayProperty,
+			ADHomePageProperty,
 			ADPhoneProperty,
 			ADEmailProperty,
 			ADAddressProperty,
@@ -1239,6 +1240,7 @@ changedHeightFrom: (float) oldH
   ADPropertyType type = [ADPerson typeOfProperty: property];
   switch(type)
     {
+    case ADDateProperty:
     case ADStringProperty:
     case ADMultiStringProperty:
       return [NSString stringWithFormat: @"[%@]",

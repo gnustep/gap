@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2009/01/27 23:55:58 $
+// $Revision: 1.4 $
+// $Date: 2010/03/11 22:39:19 $
 
 /* system includes */
 #include <Foundation/Foundation.h>
@@ -411,8 +411,16 @@ static float _globalFontSize;
   switch(type)
     {
     case ADDateProperty:
-      value  = [NSDate dateWithString: value];
+      if([value isEmptyString])
+	 {
+	   if([_person valueForProperty: _property])
+	     return [_person removeValueForProperty: _property];
+	   else
+	     return NO;
+	 }
+      value = [NSCalendarDate dateWithNaturalLanguageString: value];
       if(!value) return NO;
+      return [_person setValue: value forProperty: _property];
 
     case ADStringProperty:
       if([value isEmptyString])

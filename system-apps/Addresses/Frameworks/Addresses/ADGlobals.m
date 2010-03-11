@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2010/03/11 22:39:19 $
 
 /* system includes */
 #include <Foundation/Foundation.h>
@@ -28,7 +28,7 @@ NSString* const ADLastNameProperty = @"LastName";
 NSString* const ADFirstNamePhoneticProperty = @"FirstNamePhonetic";
 NSString* const ADLastNamePhoneticProperty = @"LastNamePhonetic";
 
-NSString* const ADBirthdayProperty = @"Birthday";
+NSString* const ADBirthdayProperty = @"BirthDate";
 NSString* const ADOrganizationProperty = @"Organization";
 NSString* const ADJobTitleProperty = @"JobTitle"; 
 NSString* const ADHomePageProperty = @"HomePage";
