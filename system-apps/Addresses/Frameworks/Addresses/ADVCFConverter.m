@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.7 $
-// $Date: 2009/09/29 21:45:51 $
+// $Revision: 1.8 $
+// $Date: 2010/03/15 22:48:17 $
 
 /* system includes */
 /* (none) */
@@ -426,13 +426,10 @@ static NSArray *knownItems;
 	      
 	      /* 
 	       * Trim the first characters (usually the whitespace) and
-	       * the last two characters (the CRLF)!
+	       * the last character(s) (the CRLF)!
 	       */
-	      str2 = [str2 substringWithRange: NSMakeRange(startCol,[str2 length]-3)];
-	      
-	      
+	      str2 = [str2 stringByTrimmingCharactersInSet:wsp];
 	      str = [str stringByAppendingString: str2];
-	      
 	      // we parsed a line more, so increase the counter
 	      (*retLine)++;
 	    }
