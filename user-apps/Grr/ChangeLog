@@ -2,6 +2,20 @@
 Grr ChangeLog
 ==============
 
+2010-03-15 Nicola Pero
+	* GNUmakefile.postamble
+	Components/ArticleOperations/GNUmakefile
+	Components/ArticleTable/GNUmakefile
+	Components/ArticleView/GNUmakefile
+	Components/DatabaseOperations/GNUmakefile
+	Components/DatabaseTreeView/GNUmakefile
+	Components/Fonts/GNUmakefile
+	Components/Proxy/GNUmakefile
+	Components/Searching/GNUmakefile
+	Components/SubscriptionPanel/GNUmakefile
+	Components/TreeDatabase/GNUmakefile:
+	updated makefiles to make 2.4 and better windows compilation
+
 2009-11-16 Riccardo Mottola
 	* Components.h,
 	Components.m,
