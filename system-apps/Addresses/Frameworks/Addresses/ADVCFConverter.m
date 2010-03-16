@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.8 $
-// $Date: 2010/03/15 22:48:17 $
+// $Revision: 1.9 $
+// $Date: 2010/03/16 10:14:57 $
 
 /* system includes */
 /* (none) */
@@ -646,6 +646,7 @@ static NSArray *knownItems;
       
       encoding = [k restOfStringStartingWith: @"encoding="];
       if(![encoding isEqualToString: @"base64"] &&
+	 ![encoding isEqualToString: @"b"] &&  // Evolution exports this way
 	 ![k containsObject: @"base64"])
 	{
 	  NSLog(@"Cannot integrate image -- unknown "
@@ -661,7 +662,7 @@ static NSArray *knownItems;
       if(type)
 	[p setImageDataType: type];
       else
-	[p setImageDataType: @"jpg"]; // XXX: This is a fallback solution :-(
+	[p setImageDataType: @"jpg"]; // FIXME: This is a fallback solution :-(
     }
 
   // FIXME: The following keys (specified in the vcard spec) aren't
