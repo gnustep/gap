@@ -1,7 +1,7 @@
-Current version is 0.4.7.1
+Current version is 0.4.8
 
 
-Since 0.4.7.1:
+Since 0.4.8:
 ==============
 
   o relative link during framework installing, helps building in a separate
@@ -14,6 +14,7 @@ Since 0.4.7.1:
   o use GSMimeDocument to decode base64 instead of custom code
   o Makefiles work on windows
   o Birthday support (for SimpleAgenda)
+  o fixes in VCF import (encoding, CR-LF)
 
 Since 0.4.7:
 ============
