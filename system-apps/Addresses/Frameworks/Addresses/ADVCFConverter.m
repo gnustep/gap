@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.9 $
-// $Date: 2010/03/16 10:14:57 $
+// $Revision: 1.10 $
+// $Date: 2010/03/18 22:28:57 $
 
 /* system includes */
 /* (none) */
@@ -403,28 +403,14 @@ static NSArray *knownItems;
 	  NSString* firstCharacter =
 	    [str2 substringWithRange: NSMakeRange(0,1)];
 	  
-	  //if ( firstCharacter == (unichar)' ' || // Space
-	  //     firstCharacter == (unichar)'\t') // TAB
-//	  NSLog(@"firstChar: '%@' (%d)", firstCharacter,
-//		[firstCharacter characterAtIndex:0]);
 	  if ([firstCharacter isEqualToString: @" "] || // Space
 	      [firstCharacter isEqualToString: @"\t"]) // Tab
 	    {
-	      
-	      // ...add that next line (without 'space') to the value string:
-	      
 	      /*
 	       * Ignore all spaces in front of the real data. IIRC not
 	       * compliant to the VCard standard, but the Apple Address
 	       * book does it this way, too. :-/
-	       */
-	      int startCol = 1;
-	      while (startCol < ([str2 length]-1) &&
-		     [str2 characterAtIndex: startCol] == (unichar)' ') {
-		startCol++;
-	      }
-	      
-	      /* 
+	       *
 	       * Trim the first characters (usually the whitespace) and
 	       * the last character(s) (the CRLF)!
 	       */
@@ -437,13 +423,9 @@ static NSArray *knownItems;
 	    lastLineWasReadable = NO;
 	}
     }
-  
-  #ifdef DEBUGGING
-  if (*retLine > line+1) { // XXX deleteme!
-    NSLog(@"from line %d to %d parsed value: %@", line, *retLine, str);
-  }
-  #endif // DEBUGGING
-  
+#ifdef DEBUGGING  
+  NSLog(@"Input line : %@", str);
+#endif
   r = [str rangeOfString: @":"];
   if(r.location == NSNotFound)
     {
@@ -476,6 +458,7 @@ static NSArray *knownItems;
 		intoPerson: (ADPerson*) p
 {
   NSString* key;
+  NSRange r;
 
   if(![k count])
     {
@@ -489,6 +472,23 @@ static NSArray *knownItems;
     }
   
   key = [k objectAtIndex: 0];
+  /*
+   * Strip any group from the key (ie item1.ADR)
+   * See http://tools.ietf.org/search/rfc2426#section-4
+   * and http://tools.ietf.org/search/rfc2425 which says :
+   *
+   * The group construct is used to group related attributes together.
+   * The group name is a syntactic convention used to indicate that all
+   * type names prefaced with the same group name SHOULD be grouped
+   * together when displayed by an application. It has no other
+   * significance.  Implementations that do not understand or support
+   * grouping MAY simply strip off any text before a "." to the left of
+   * the type name and present the types and values as normal.
+   */
+  r = [key rangeOfString: @"."];
+  if (r.location != NSNotFound)
+    key = [key substringFromIndex: r.location+1];
+
 #if 0
   if(![knownItems containsObject: key])
     {
