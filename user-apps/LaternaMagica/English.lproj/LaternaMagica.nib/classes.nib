@@ -4,6 +4,8 @@
             ACTIONS = {
                 addFiles = id; 
                 eraseImage = id; 
+                execExportImages = id; 
+                exportImages = id; 
                 nextImage = id; 
                 prevImage = id; 
                 removeImage = id; 
@@ -13,6 +15,7 @@
                 saveImageAs = id; 
                 setCompressionLevel = id; 
                 setCompressionType = id; 
+                setExportPath = id; 
                 setFullScreen = id; 
                 setScaleToFit = id; 
             }; 
@@ -20,6 +23,11 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 controlWin = NSWindow; 
+                exportProgress = NSProgressIndicator; 
+                exporterPanel = NSPanel; 
+                fieldHeight = NSTextField; 
+                fieldOutputPath = NSTextField; 
+                fieldWidth = NSTextField; 
                 fileListData = FileTable; 
                 fileListView = NSTableView; 
                 fileTypePopUp = NSPopUpButton; 
@@ -28,6 +36,7 @@
                 fullScreenMenuItem = NSMenuItem; 
                 jpegCompressionField = NSTextField; 
                 jpegCompressionSlider = NSSlider; 
+                popupConstraints = NSPopUpButton; 
                 saveAsMenuItem = NSMenuItem; 
                 saveOptionsView = NSView; 
                 scrollView = NSScrollView; 

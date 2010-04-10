@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2009 Riccardo Mottola
+   Copyright (C) 2006-2010 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -53,6 +53,14 @@
     NSImageView           *view;
     LMFlipView            *fullView;
     NSSavePanel           *savePanel;
+    
+    /* exporter */
+    IBOutlet NSPanel             *exporterPanel;
+    IBOutlet NSTextField         *fieldOutputPath;
+    IBOutlet NSTextField         *fieldWidth;
+    IBOutlet NSTextField         *fieldHeight;
+    IBOutlet NSProgressIndicator *exportProgress;
+    IBOutlet NSPopUpButton       *popupConstraints;
 }
 
 - (IBAction)addFiles:(id)sender;
@@ -69,5 +77,10 @@
 - (IBAction)saveImageAs:(id)sender;
 - (IBAction)setCompressionType:(id)sender;
 - (IBAction)setCompressionLevel:(id)sender;
+
+/* exporter */
+- (IBAction)exportImages:(id)sender;
+- (IBAction)setExportPath:(id)sender;
+- (IBAction)execExportImages:(id)sender;
 
 @end

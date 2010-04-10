@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2009 Riccardo Mottola
+   Copyright (C) 2006-2010 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -369,6 +369,7 @@
         }
 }
 
+
 - (IBAction)rotateImage90:(id)sender
 {
     NSImage *srcImage;
@@ -655,5 +656,18 @@
         [jpegCompressionField takeFloatValueFrom:sender];
 }
 
+/* exporter */
+- (IBAction)exportImages:(id)sender
+{
+  [exporterPanel makeKeyAndOrderFront:self];
+}
+
+- (IBAction)setExportPath:(id)sender
+{
+}
+
+- (IBAction)execExportImages:(id)sender
+{
+}
 
 @end
