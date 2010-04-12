@@ -96,6 +96,7 @@
     openPanel = [NSOpenPanel openPanel];
     [openPanel setAllowsMultipleSelection:YES];
     [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanChooseFiles:YES];
     if ([openPanel runModalForTypes:NULL] != NSOKButton)
     {
         return;
@@ -664,10 +665,30 @@
 
 - (IBAction)setExportPath:(id)sender
 {
+  NSOpenPanel *openPanel;
+  NSString    *choosenFilePath;
+  
+  openPanel = [NSOpenPanel openPanel];
+  [openPanel setAllowsMultipleSelection:NO];
+  [openPanel setCanChooseDirectories:YES];
+  [openPanel setCanChooseFiles:NO];
+  if ([openPanel runModalForTypes:NULL] != NSOKButton)
+    {
+      return;
+    }
+  
+  choosenFilePath = [openPanel filename];
+  [fieldOutputPath setStringValue:choosenFilePath];
 }
 
 - (IBAction)execExportImages:(id)sender
 {
+  int height;
+  int width;
+  
+  height = [fieldHeight intValue];
+  width = [fieldWidth intValue];
+  
 }
 
 @end
