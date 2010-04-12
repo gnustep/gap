@@ -155,6 +155,9 @@
     NSPoint rectOrigin;
     NSSize rectSize;
 
+    if (image == nil)
+      return;
+      
     rectSize =  [window frame].size;
     if (scaleToFit)
     {
