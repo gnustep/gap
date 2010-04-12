@@ -14,7 +14,10 @@
 	    "rotateImage270:",
 	    "saveImageAs:",
 	    "setCompressionType:",
-	    "setCompressionLevel:"
+	    "setCompressionLevel:",
+	    "exportImages:",
+	    "setExportPath:",
+	    "execExportImages:"
 	);
 	Outlets = (
 	    fileListData,
@@ -30,7 +33,13 @@
 	    saveOptionsView,
 	    fileTypePopUp,
 	    jpegCompressionField,
-	    jpegCompressionSlider
+	    jpegCompressionSlider,
+	    exporterPanel,
+	    fieldOutputPath,
+	    fieldWidth,
+	    fieldHeight,
+	    exportProgress,
+	    popupConstraints
 	);
 	Super = NSObject;
     };
@@ -45,6 +54,8 @@
 	Actions = (
 	    "addFiles:",
 	    "eraseImage:",
+	    "execExportImages:",
+	    "exportImages:",
 	    "newAction:",
 	    "nextImage:",
 	    "orderFrontFontPanel:",
@@ -56,6 +67,7 @@
 	    "saveImageAs:",
 	    "setCompressionLevel:",
 	    "setCompressionType:",
+	    "setExportPath:",
 	    "setFullScreen :",
 	    "setFullScreen:",
 	    "setScaleToFit:",
