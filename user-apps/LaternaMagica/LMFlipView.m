@@ -2,7 +2,7 @@
    Project: LaternaMagica
    LMFlipView.m
 
-   Copyright (C) 2006-2009 Riccardo Mottola
+   Copyright (C) 2006-2010 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -28,8 +28,8 @@
 
 #ifdef GNUSTEP
 #define KC_ESCAPE 9
-#define KC_LEFTARROW 123
-#define KC_RIGHTARROW 124
+#define KC_LEFTARROW 100
+#define KC_RIGHTARROW 102
 #else
 #define KC_ESCAPE 53
 #define KC_LEFTARROW 123
