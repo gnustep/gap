@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 39;
+	objectVersion = 38;
 	objects = {
 		080E96DCFE201CFB7F000001 = {
 			fileRef = 29B97318FDCFA39411CA2CEA;
@@ -25,7 +25,6 @@
 			isa = PBXGroup;
 			name = Classes;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C165CFE840E0CC02AAC07 = {
 			children = (
@@ -34,16 +33,13 @@
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C165DFE840E0CC02AAC07 = {
 			fileEncoding = 10;
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
 			name = English;
 			path = English.lproj/InfoPlist.strings;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C165EFE840E0CC02AAC07 = {
 			fileRef = 089C165CFE840E0CC02AAC07;
@@ -68,15 +64,12 @@
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		1058C7A1FEA54F0111CA2CBB = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		1058C7A2FEA54F0111CA2CBB = {
 			children = (
@@ -86,7 +79,6 @@
 			isa = PBXGroup;
 			name = "Other Frameworks";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		1058C7A3FEA54F0111CA2CBB = {
 			fileRef = 1058C7A1FEA54F0111CA2CBB;
@@ -99,23 +91,6 @@
 //102
 //103
 //104
-//170
-//171
-//172
-//173
-//174
-		17587328FF379C6511CA2CBB = {
-			explicitFileType = wrapper.application;
-			isa = PBXFileReference;
-			path = LaternaMagica.app;
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-//170
-//171
-//172
-//173
-//174
 //190
 //191
 //192
@@ -123,12 +98,11 @@
 //194
 		19C28FACFE9D520D11CA2CBB = {
 			children = (
-				17587328FF379C6511CA2CBB,
+				85CCFEAD0F3D005700A80101,
 			);
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 //190
 //191
@@ -141,8 +115,6 @@
 //293
 //294
 		29B97313FDCFA39411CA2CEA = {
-			buildSettings = {
-			};
 			buildStyles = (
 				4A9504CCFFE6A4B311CA0CBA,
 				4A9504CDFFE6A4B311CA0CBA,
@@ -167,7 +139,6 @@
 			name = LaternaMagica;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA = {
 			children = (
@@ -177,15 +148,12 @@
 			name = "Other Sources";
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97316FDCFA39411CA2CEA = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = main.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
@@ -197,7 +165,6 @@
 			name = Resources;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97318FDCFA39411CA2CEA = {
 			children = (
@@ -207,15 +174,12 @@
 			name = LaternaMagica.nib;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97319FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
 			name = LaternaMagica.nib;
 			path = English.lproj/LaternaMagica.nib;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA = {
 			children = (
@@ -226,23 +190,18 @@
 			name = Frameworks;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97324FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		29B97325FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		29B97326FDCFA39411CA2CEA = {
 			buildPhases = (
@@ -269,7 +228,7 @@
 			name = LaternaMagica;
 			productInstallPath = "$(HOME)/Applications";
 			productName = LaternaMagica;
-			productReference = 17587328FF379C6511CA2CBB;
+			productReference = 85CCFEAD0F3D005700A80101;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -358,11 +317,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2</string>
+	<string>0.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.2</string>
+	<string>0.3</string>
 	<key>NSMainNibFile</key>
 	<string>LaternaMagica</string>
 	<key>NSPrincipalClass</key>
@@ -465,18 +424,14 @@
 		855F873C0F34FE6400C1D9A8 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = LMWindow.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		855F873D0F34FE6400C1D9A8 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = LMWindow.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		855F873E0F34FE6400C1D9A8 = {
 			fileRef = 855F873C0F34FE6400C1D9A8;
@@ -492,10 +447,8 @@
 		};
 		858E59FA0F365467009E7B11 = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.icns;
 			path = LM_icons_osx.icns;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		858E59FB0F365467009E7B11 = {
 			fileRef = 858E59FA0F365467009E7B11;
@@ -503,21 +456,22 @@
 			settings = {
 			};
 		};
+		85CCFEAD0F3D005700A80101 = {
+			isa = PBXApplicationReference;
+			path = LaternaMagica.app;
+			refType = 3;
+		};
 		85DA40910A3B94BE00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = LMFlipView.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DA40920A3B94BE00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = LMFlipView.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DA40930A3B94BE00A80101 = {
 			fileRef = 85DA40910A3B94BE00A80101;
@@ -544,18 +498,14 @@
 		F5D00DF9097C409A01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = FileTable.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F5D00DFA097C409A01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = FileTable.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F5D00DFB097C409A01A80101 = {
 			fileRef = F5D00DF9097C409A01A80101;
@@ -572,18 +522,14 @@
 		F5D00DFD097C40DD01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = AppController.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F5D00DFE097C40DD01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = AppController.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		F5D00DFF097C40DD01A80101 = {
 			fileRef = F5D00DFD097C40DD01A80101;

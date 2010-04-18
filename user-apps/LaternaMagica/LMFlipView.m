@@ -54,6 +54,12 @@
 -(BOOL)performKeyEquivalent: (NSEvent*)theEvent
 {
     unsigned short keyCode;
+#ifdef __APPLE__
+/* Apple is definitively broken here and on all versions tested it returns for the arrow key
+    also a KeyUp event, which it should not, as the Event is specified to be keyDown */
+    if ([theEvent type] == NSKeyUp)
+        return [super performKeyEquivalent:theEvent];
+#endif
 
     keyCode = [theEvent keyCode];
     if (keyCode == KC_ESCAPE)
