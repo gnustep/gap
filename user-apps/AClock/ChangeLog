@@ -1,0 +1,9 @@
+0.2.3	Patch for major speed improvement (thanks Banlu Kemiyatorn)
+0.2.1	Patch for autoscaling (thanks Matt Rice)
+0.2	Hide Main Menu (thanks Alex Perez), new icon, new background image
+0.1.0	Release
+0.0.9	Add alarm, bug fixes.
+0.0.8	Remove SmoothSeconds. Preferences panel. Eye candies.
+0.0.5	Seconds pointer moves smoothly (changeable with the "defaults" tool)
+0.0.4	Added license information, seconds pointer is red, hourpointer
+	length increased (thanks Banlu Kemiyatorn and Alex Malmberg)
