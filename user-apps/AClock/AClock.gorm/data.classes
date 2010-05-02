@@ -1,0 +1,74 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "openPreferences:",
+	    "setFrameColor:",
+	    "setFaceColor:",
+	    "setFaceTransparency:",
+	    "setShowsAMPM:",
+	    "setSecondHandColor:",
+	    "setHandColor:",
+	    "setShadow:",
+	    "setMarkColor:",
+	    "setFrequency:",
+	    "setSecond:",
+	    "setNumberType:",
+	    "clockUpdate:",
+	    "setCuckoo:",
+	    "setRing:",
+	    "setRingLoop:",
+	    "stopRing:",
+	    "setIncreasesVolume:"
+	);
+	Outlets = (
+	    prefPanel,
+	    frameColorW,
+	    secColorW,
+	    handColorW,
+	    transSlider,
+	    ampmSwitch,
+	    faceColorW,
+	    shadowSwitch,
+	    bigClock,
+	    markColorW,
+	    freqText,
+	    secondSwitch,
+	    numberPopUp,
+	    alarmWindow,
+	    alarmClock,
+	    cuckooSwitch,
+	    ringSwitch,
+	    freqSlider,
+	    ringText,
+	    ringSlider,
+	    incsVolume
+	);
+	Super = NSObject;
+    };
+    Clock = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSControl;
+    };
+    FirstResponder = {
+	Actions = (
+	    "setIncreasesVolume:",
+	    "orderFrontFontPanel:",
+	    "setCuckoo:",
+	    "setRing:",
+	    "setRingLoop:",
+	    "stopRing:"
+	);
+	Super = NSObject;
+    };
+    InfoClock = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = Clock;
+    };
+}
