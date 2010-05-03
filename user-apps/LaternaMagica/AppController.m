@@ -688,10 +688,54 @@
 {
   int height;
   int width;
+  NSDictionary *repProperties;
+  NSString *origFileName;
+  NSString *filenameNoExtension;
+  NSImage *srcImage;
+  NSBitmapImageRep *srcImageRep;
+  NSData *dataOfRep;
+  NSString *destFileName;
+  NSString *destFileExtension;
+  NSString *destFolder;
+  int i;
   
   height = [fieldHeight intValue];
   width = [fieldWidth intValue];
+
+  destFolder = [fieldOutputPath stringValue];
   
+  if (1)
+    destFileExtension = @"tiff";
+  else
+    destFileExtension = @"jpeg";
+
+  for (i = 0; i < [fileListView numberOfRows]; i++)
+    {
+      NSString *fullOrigPath;
+
+      fullOrigPath = [fileListData pathAtIndex:i];
+      origFileName = [fullOrigPath lastPathComponent];
+      filenameNoExtension = [origFileName stringByDeletingPathExtension];
+      
+
+      srcImage = [[NSImage alloc] initByReferencingFile:fullOrigPath];
+      srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+      
+      if (1)
+        {
+          repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:NSTIFFCompressionLZW] forKey:NSImageCompressionMethod];
+          dataOfRep = [srcImageRep representationUsingType: NSTIFFFileType properties:repProperties];
+        }
+      else
+        {
+          repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[jpegCompressionSlider floatValue]/100] forKey:NSImageCompressionFactor];
+          dataOfRep = [srcImageRep representationUsingType: NSJPEGFileType properties:repProperties];
+        }
+
+      destFileName = [destFolder stringByAppendingPathComponent:[filenameNoExtension stringByAppendingPathExtension: destFileExtension]];
+      NSLog(@"%@", destFileName);
+      [dataOfRep writeToFile:destFileName atomically:NO];
+    }
 }
 
 @end
