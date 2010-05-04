@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/01/27 23:55:58 $
+// $Revision: 1.3 $
+// $Date: 2010/05/04 08:14:44 $
 
 /* system includes */
 /* (none) */
@@ -177,7 +177,7 @@
 
 - (void) setPerson: (ADPerson*) person
 {
-  NSString *imgPath;
+  NSString *imgPath = nil;
 
   if(person == _person)
     return;
