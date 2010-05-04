@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2010/05/04 08:14:44 $
+// $Revision: 1.5 $
+// $Date: 2010/05/04 12:58:54 $
 
 /* system includes */
 /* (none) */
@@ -321,7 +321,7 @@
 - (void) autoselectAccordingToMode: (ADAutoselectMode) mode
 {
   int i;
-  ADPerson *p = nil;
+  ADPerson *p;
 
   [_peopleTable reloadData];
   switch(mode)
@@ -330,13 +330,17 @@
       [_peopleTable selectAll: self];
       return;
     case ADAutoselectFirstValue:
+      /* extend selection without duplicates */
       [_peopleTable deselectAll: self];
+
+      p = nil;
       for(i=0; i<[_people count]; i++)
 	{
-	  /* FIXME : I don't understand the purpose of the following 2 lines */
-	  if(p == [_people objectAtIndex: i]) continue;
-	  p = [_people objectAtIndex: i];
-	  [_peopleTable selectRow: i byExtendingSelection: YES];
+	  if(p != [_people objectAtIndex: i])
+	    {
+	      p = [_people objectAtIndex: i];
+	      [_peopleTable selectRow: i byExtendingSelection: YES];
+	    }
 	}
       return;
     default:
