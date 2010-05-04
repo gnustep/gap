@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.5 $
-// $Date: 2010/05/04 12:58:54 $
+// $Revision: 1.6 $
+// $Date: 2010/05/04 15:02:44 $
 
 /* system includes */
 /* (none) */
@@ -203,7 +203,7 @@
   _ptScrollView = [[[NSScrollView alloc] initWithFrame: r] autorelease];
   [_ptScrollView setRulersVisible: YES];
   [_ptScrollView setHasVerticalScroller: YES];
-  [_ptScrollView setHasHorizontalScroller: YES];
+  [_ptScrollView setHasHorizontalScroller: NO];
   [_ptScrollView setBorderType: NSBezelBorder];
   [_ptScrollView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
   [_splitView addSubview: _ptScrollView];
