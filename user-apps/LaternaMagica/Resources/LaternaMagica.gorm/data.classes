@@ -39,7 +39,9 @@
 	    fieldWidth,
 	    fieldHeight,
 	    exportProgress,
-	    popupConstraints
+	    popupConstraints,
+	    popupFIleQuality,
+	    popupFileType
 	);
 	Super = NSObject;
     };

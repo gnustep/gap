@@ -704,7 +704,7 @@
 
   destFolder = [fieldOutputPath stringValue];
   
-  if (1)
+  if ([popupFileType indexOfSelectedItem] == 0)
     destFileExtension = @"tiff";
   else
     destFileExtension = @"jpeg";
@@ -721,14 +721,35 @@
       srcImage = [[NSImage alloc] initByReferencingFile:fullOrigPath];
       srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
       
-      if (1)
+      if ([popupFileType indexOfSelectedItem] == 0)
         {
           repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:NSTIFFCompressionLZW] forKey:NSImageCompressionMethod];
           dataOfRep = [srcImageRep representationUsingType: NSTIFFFileType properties:repProperties];
         }
       else
         {
-          repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[jpegCompressionSlider floatValue]/100] forKey:NSImageCompressionFactor];
+	  float quality;
+	  
+	  quality = 1;
+	  switch ([popupFileQuality indexOfSelectedItem])
+	    {
+	      case 0:
+	        quality = 1.0;
+		break;
+	      case 1:
+	        quality = 0.75;
+		break;
+	      case 2:
+	        quality = 0.66;
+		break;
+	      case 3:
+	        quality = 0.4;
+		break;
+	      default:
+	        quality = 0.5;
+	    }
+          repProperties = [NSDictionary dictionaryWithObject:[NSNumber
+	  numberWithFloat:quality] forKey:NSImageCompressionFactor];
           dataOfRep = [srcImageRep representationUsingType: NSJPEGFileType properties:repProperties];
         }
 

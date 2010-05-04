@@ -61,6 +61,8 @@
     IBOutlet NSTextField         *fieldHeight;
     IBOutlet NSProgressIndicator *exportProgress;
     IBOutlet NSPopUpButton       *popupConstraints;
+    IBOutlet NSPopUpButton       *popupFileType;
+    IBOutlet NSPopUpButton       *popupFileQuality;
 }
 
 - (IBAction)addFiles:(id)sender;
