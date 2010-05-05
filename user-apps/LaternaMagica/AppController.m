@@ -709,6 +709,7 @@
   else
     destFileExtension = @"jpeg";
 
+  [exportProgress setDoubleValue: 0.0];
   for (i = 0; i < [fileListView numberOfRows]; i++)
     {
       NSString *fullOrigPath;
@@ -728,34 +729,37 @@
         }
       else
         {
-	  float quality;
+          float quality;
 	  
-	  quality = 1;
-	  switch ([popupFileQuality indexOfSelectedItem])
-	    {
-	      case 0:
-	        quality = 1.0;
-		break;
-	      case 1:
-	        quality = 0.75;
-		break;
-	      case 2:
-	        quality = 0.66;
-		break;
-	      case 3:
-	        quality = 0.4;
-		break;
-	      default:
-	        quality = 0.5;
-	    }
-          repProperties = [NSDictionary dictionaryWithObject:[NSNumber
-	  numberWithFloat:quality] forKey:NSImageCompressionFactor];
+	      quality = 1;
+	      switch ([popupFileQuality indexOfSelectedItem])
+	        {
+	          case 0:
+	            quality = 1.0;
+                break;
+              case 1:
+	            quality = 0.75;
+		        break;
+	          case 2:
+	            quality = 0.66;
+		        break;
+	          case 3:
+                quality = 0.4;
+		        break;
+	          default:
+	            quality = 0.5;
+            }
+          repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:quality] forKey:NSImageCompressionFactor];
           dataOfRep = [srcImageRep representationUsingType: NSJPEGFileType properties:repProperties];
         }
 
       destFileName = [destFolder stringByAppendingPathComponent:[filenameNoExtension stringByAppendingPathExtension: destFileExtension]];
       NSLog(@"%@", destFileName);
-      [dataOfRep writeToFile:destFileName atomically:NO];
+      if (dataOfRep != nil)
+        {
+          [dataOfRep writeToFile:destFileName atomically:NO];
+        }
+      [exportProgress setDoubleValue: (double)([fileListView numberOfRows]*100)/(double)i];
     }
 }
 
