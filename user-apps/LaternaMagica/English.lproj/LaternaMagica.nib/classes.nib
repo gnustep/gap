@@ -37,6 +37,8 @@
                 jpegCompressionField = NSTextField; 
                 jpegCompressionSlider = NSSlider; 
                 popupConstraints = NSPopUpButton; 
+                popupFileQuality = NSPopUpButton; 
+                popupFileType = NSPopUpButton; 
                 saveAsMenuItem = NSMenuItem; 
                 saveOptionsView = NSView; 
                 scrollView = NSScrollView; 
