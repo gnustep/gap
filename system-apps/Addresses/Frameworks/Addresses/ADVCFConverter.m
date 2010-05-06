@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.11 $
-// $Date: 2010/05/06 09:14:56 $
+// $Revision: 1.12 $
+// $Date: 2010/05/06 09:50:10 $
 
 /* system includes */
 /* (none) */
@@ -520,7 +520,8 @@ static NSArray *knownItems;
     [p setValue: [v objectAtIndex: 0] forProperty: ADJobTitleProperty];
   else if([key isEqualToString: @"url"])
     [p setValue: [v objectAtIndex: 0] forProperty: ADHomePageProperty];
-
+  else if([key isEqualToString: @"fn"])
+    [p setValue: [v objectAtIndex: 0] forProperty: ADFormattedNameProperty];
   else if([key isEqualToString: @"bday"])
     {
       NSCalendarDate *d;
