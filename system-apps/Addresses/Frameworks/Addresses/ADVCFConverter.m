@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.10 $
-// $Date: 2010/03/18 22:28:57 $
+// $Revision: 1.11 $
+// $Date: 2010/05/06 09:14:56 $
 
 /* system includes */
 /* (none) */
@@ -803,9 +803,12 @@ static NSArray *knownItems;
     }
   else if([prop isEqualToString: ADImageProperty])
     {
-      hdr = [NSString stringWithFormat: @"PHOTO;TYPE=%@;ENCODING=BASE64",
+      if ([p valueForProperty: ADImageTypeProperty])
+        hdr = [NSString stringWithFormat: @"PHOTO;TYPE=%@;ENCODING=BASE64",
 		      [[p valueForProperty: ADImageTypeProperty]
 			uppercaseString]];
+      else
+        hdr = [NSString stringWithFormat: @"PHOTO;ENCODING=BASE64"];
       [self appendStringWithHeader: hdr
 	    value: base64Encode(val)
 	    binaryLinebreak: YES];
