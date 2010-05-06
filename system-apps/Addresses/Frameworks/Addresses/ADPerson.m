@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2010/05/06 09:50:10 $
 
 /* system includes */
 /* (none) */
@@ -279,18 +279,23 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 
 - (NSString*) screenNameWithFormat: (ADScreenNameFormat) aFormat
 {
-  NSString *last, *first;
+  NSString *last, *first, *fn;
 
   last = [self valueForProperty: ADLastNameProperty];
   first = [self valueForProperty: ADFirstNameProperty];
-  if(!last && !first)
+  if (!last && !first) {
+    fn = [self valueForProperty: ADFormattedNameProperty];
+    if (fn)
+      return fn;
     return @"New Person";
-  else if(!first) return last;
-  else if(!last) return first;
-  else if(aFormat == ADScreenNameFirstNameFirst)
+  }
+  if (!first)
+    return last;
+  if (!last)
+    return first;
+  if(aFormat == ADScreenNameFirstNameFirst)
     return [NSString stringWithFormat: @"%@ %@", first, last];
-  else
-    return [NSString stringWithFormat: @"%@, %@", last, first];
+  return [NSString stringWithFormat: @"%@, %@", last, first];
 }
 
 - (NSComparisonResult) compareByScreenName: (ADPerson*) theOtherGuy

@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2010/05/06 09:50:10 $
 
 #ifndef CGLOBALS_H
 #define CGLOBALS_H
@@ -39,6 +39,8 @@ extern NSString * const ADTitleProperty;	      // string UNSUPP
 extern NSString * const ADSuffixProperty;             // string UNSUPP
 extern NSString * const ADNicknameProperty;           // string UNSUPP
 extern NSString * const ADMaidenNameProperty;         // string UNSUPP
+
+extern NSString * const ADFormattedNameProperty;
 
 extern NSString * const ADBirthdayProperty;           // date
 extern NSString * const ADOrganizationProperty;       // string
