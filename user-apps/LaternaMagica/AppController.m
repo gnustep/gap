@@ -147,6 +147,7 @@
             NSLog(@"open panel did not return a valid path");
         }
     }
+  [fileListView selectRow: [fileListView numberOfRows]-1 byExtendingSelection: NO];
 }
 
 // scale image according to options
@@ -618,7 +619,6 @@
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
   [self addFile:filename];
-  NSLog(@"select");
   [fileListView selectRow: [fileListView numberOfRows]-1 byExtendingSelection: NO];
   return YES;
 }
