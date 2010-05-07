@@ -568,7 +568,7 @@
 {
     NSImage *srcImage;
     NSBitmapImageRep *srcImageRep;
-    NSData *dataOfRep;
+    NSData *dataOfRep = nil;
     NSDictionary *repProperties;
     NSString *origFileName;
     NSString *filenameNoExtension;
@@ -611,7 +611,6 @@
         }
         [dataOfRep writeToFile:fileName atomically:NO];            
     }
-//    [savePanel release];
 }
 
 
@@ -761,7 +760,8 @@
         {
           [dataOfRep writeToFile:destFileName atomically:NO];
         }
-      [exportProgress setDoubleValue: (double)([fileListView numberOfRows]*100)/(double)i];
+      [exportProgress setDoubleValue: ((double)(i+1)*100)/(double)[fileListView numberOfRows]];
+      [exporterPanel displayIfNeeded];
     }
 }
 
