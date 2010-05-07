@@ -617,8 +617,10 @@
 /* ===== delegates =====*/
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
-    [self addFile:filename];
-    return YES;
+  [self addFile:filename];
+  NSLog(@"select");
+  [fileListView selectRow: [fileListView numberOfRows]-1 byExtendingSelection: NO];
+  return YES;
 }
 
 /* save panel delegates */
