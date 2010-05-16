@@ -67,7 +67,6 @@
 		1058C7A2FEA54F0111CA2CBB = {
 			children = (
 				29B97324FDCFA39411CA2CEA,
-				13E42FB307B3F0F600E4EEF1,
 				29B97325FDCFA39411CA2CEA,
 			);
 			isa = PBXGroup;
@@ -80,24 +79,6 @@
 //102
 //103
 //104
-//130
-//131
-//132
-//133
-//134
-		13E42FB307B3F0F600E4EEF1 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = CoreData.framework;
-			path = /System/Library/Frameworks/CoreData.framework;
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-//130
-//131
-//132
-//133
-//134
 //140
 //141
 //142

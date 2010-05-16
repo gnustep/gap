@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 38;
+	objectVersion = 39;
 	objects = {
 		080E96DCFE201CFB7F000001 = {
 			fileRef = 29B97318FDCFA39411CA2CEA;
@@ -29,6 +29,7 @@
 			isa = PBXGroup;
 			name = Classes;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C165CFE840E0CC02AAC07 = {
 			children = (
@@ -37,13 +38,16 @@
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C165DFE840E0CC02AAC07 = {
 			fileEncoding = 10;
 			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
 			name = English;
 			path = English.lproj/InfoPlist.strings;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C165EFE840E0CC02AAC07 = {
 			fileRef = 089C165CFE840E0CC02AAC07;
@@ -68,12 +72,15 @@
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1058C7A1FEA54F0111CA2CBB = {
 			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		1058C7A2FEA54F0111CA2CBB = {
 			children = (
@@ -83,6 +90,7 @@
 			isa = PBXGroup;
 			name = "Other Frameworks";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1058C7A3FEA54F0111CA2CBB = {
 			fileRef = 1058C7A1FEA54F0111CA2CBB;
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 //190
 //191
@@ -119,6 +128,8 @@
 //293
 //294
 		29B97313FDCFA39411CA2CEA = {
+			buildSettings = {
+			};
 			buildStyles = (
 				4A9504CCFFE6A4B311CA0CBA,
 				4A9504CDFFE6A4B311CA0CBA,
@@ -143,6 +154,7 @@
 			name = FTP;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA = {
 			children = (
@@ -152,12 +164,15 @@
 			name = "Other Sources";
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97316FDCFA39411CA2CEA = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = main.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
@@ -171,6 +186,7 @@
 			name = Resources;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97318FDCFA39411CA2CEA = {
 			children = (
@@ -180,12 +196,15 @@
 			name = MainMenu.nib;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97319FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
 			name = English;
 			path = English.lproj/MainMenu.nib;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA = {
 			children = (
@@ -196,18 +215,23 @@
 			name = Frameworks;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97324FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		29B97325FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		29B97326FDCFA39411CA2CEA = {
 			buildPhases = (
@@ -359,14 +383,18 @@
 //853
 //854
 		8518DC1E0E354C3500A80101 = {
-			isa = PBXApplicationReference;
+			explicitFileType = wrapper.application;
+			isa = PBXFileReference;
 			path = FTP.app;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		85FC29710DD7B28300A80101 = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
 			path = FTP_icon_osx.icns;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		85FC29720DD7B28300A80101 = {
 			fileRef = 85FC29710DD7B28300A80101;
@@ -387,8 +415,10 @@
 		F56A03FB080AC70701A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = localclient.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F56A03FC080AC70701A80101 = {
 			fileRef = F56A03FB080AC70701A80101;
@@ -399,8 +429,10 @@
 		F56A03FD080AC71101A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = localclient.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F56A03FE080AC71101A80101 = {
 			fileRef = F56A03FD080AC71101A80101;
@@ -411,14 +443,18 @@
 		F5BE3AF6080C6A3601A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = fileTable.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5BE3AF7080C6A3601A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = fileTable.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5BE3AF8080C6A3601A80101 = {
 			fileRef = F5BE3AF6080C6A3601A80101;
@@ -434,8 +470,10 @@
 		};
 		F5C0879F08A0C47B01A8012F = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
 			path = arrow_right.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C087A008A0C47C01A8012F = {
 			fileRef = F5C0879F08A0C47B01A8012F;
@@ -445,8 +483,10 @@
 		};
 		F5C087A108A0C4AF01A8012F = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
 			path = arrow_left.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C087A208A0C4B001A8012F = {
 			fileRef = F5C087A108A0C4AF01A8012F;
@@ -457,14 +497,18 @@
 		F5C84D6008142DF201A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = fileElement.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C84D6108142DF201A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = fileElement.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C84D6208142DF201A80101 = {
 			fileRef = F5C84D6008142DF201A80101;
@@ -481,8 +525,10 @@
 		F5EFB6450818FE6001A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = client.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5EFB6460818FE6001A80101 = {
 			fileRef = F5EFB6450818FE6001A80101;
@@ -493,8 +539,10 @@
 		F5EFB6470818FE6E01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = client.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5EFB6480818FE6E01A80101 = {
 			fileRef = F5EFB6470818FE6E01A80101;
@@ -505,26 +553,34 @@
 		F5F5F93707FD8CAD01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = AppController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5F5F93807FD8CAD01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = AppController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5F5F93907FD8CAD01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = ftpclient.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5F5F93A07FD8CAD01A80101 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = ftpclient.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5F5F93B07FD8CAD01A80101 = {
 			fileRef = F5F5F93707FD8CAD01A80101;
