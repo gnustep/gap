@@ -30,6 +30,10 @@
 #  define ACPIDEV	"/dev/acpi"
 #endif
 
+#if defined(__APPLE__)
+#include <stdio.h>
+#endif
+
 
 #import <Foundation/NSString.h>
 #import <Foundation/NSArray.h>
