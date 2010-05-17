@@ -3,13 +3,13 @@
     ApplicationDescription = "Image Viewer Tool";
     ApplicationIcon = laternamagica_48.tif;
     ApplicationName = LaternaMagica;
-    ApplicationRelease = 0.2;
+    ApplicationRelease = 0.3;
     Authors = (
 	"Riccardo Mottola"
     );
     Copyright = "Copyright (C) 2006-2010";
     CopyrightDescription = "Released under GPL";
-    FullVersionID = 0.2;
+    FullVersionID = 0.3;
     NSExecutable = LaternaMagica;
     NSIcon = laternamagica_48.tif;
     NSMainNibFile = LaternaMagica.gorm;
@@ -17,25 +17,19 @@
     NSRole = Application;
     NSTypes = (
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
 		jpg,
-		" jpeg"
+		jpeg,
+		JPG,
+		JPEG
 	    );
 	},
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
 		tif,
-		" tiff"
+		tiff,
+		TIF,
+		TIFF
 	    );
 	},
 	{
@@ -49,13 +43,9 @@
 	    );
 	},
 	{
-	    NSDocumentClass = "";
-	    NSHumanReadableName = "";
-	    NSIcon = "";
-	    NSName = "";
-	    NSRole = "";
 	    NSUnixExtensions = (
-		png
+		png,
+		PNG
 	    );
 	}
     );
