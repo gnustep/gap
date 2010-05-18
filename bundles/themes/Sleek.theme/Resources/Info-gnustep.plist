@@ -6,7 +6,8 @@
     GSThemeDomain = {
     };
     GSThemeIcon = Thematic.png;
+    GSThemePreview = sleek_preview_128.tif;
     GSThemeTiles = {
     };
-    GSThemeVersion = 0.0;
+    GSThemeVersion = 0.1;
 }
