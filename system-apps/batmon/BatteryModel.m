@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2009 GNUstep Application Project
+   Copyright (C) 2006-2010 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -30,8 +30,12 @@
 #  define ACPIDEV	"/dev/acpi"
 #endif
 
+#if defined (linux)
+#define DEV_SYS_POWERSUPPLY  @"/sys/class/power_supply"
+#endif
+
 #if defined(__APPLE__)
-#include <stdio.h>
+#  include <stdio.h>
 #endif
 
 
@@ -74,60 +78,92 @@
 
   if ((self = [super init]))
     {
-      useACPI = NO;
-      useAPM = NO;
+      useACPIproc = NO;
+      useACPIsys  = NO;
+      useAPM      = NO;
       
       isCharging = NO;
       
 #if defined(linux)
       /* look for a battery */
-      NSLog(@"look for a present battery");
+      NSLog(@"looking for ACPI...");
       fm = [NSFileManager defaultManager];
-      dirNames = [fm directoryContentsAtPath:@"/proc/acpi/battery"];
+      dirNames = [fm directoryContentsAtPath:DEV_SYS_POWERSUPPLY];
       if (dirNames != nil)
-      {
-	 done = NO;
-	 en = [dirNames objectEnumerator];
-	 while (done == NO)
-	 {
-            dirName = [en nextObject];
-            if (dirName != nil)
-            {
-               /* scan for the first present battery */
-               dirName = [[NSString stringWithString:@"/proc/acpi/battery"] stringByAppendingPathComponent:dirName];
-               [dirName getCString:batteryStatePath0];
-               strcat(batteryStatePath0, "/state");
-               NSLog(@"checking: %s", batteryStatePath0);
-               stateFile = fopen(batteryStatePath0, "r");
-               if (stateFile != NULL)
-               {
-        	  [self _readLine :stateFile :line];
-        	  sscanf(line, "present: %s", presentStr);
-        	  if (!strcmp(presentStr, "yes"))
-        	  {
-                     done = YES;
-                     NSLog(@"found it!: %@", dirName);
-                     [dirName getCString:batteryInfoPath0];
-                     strcat(batteryInfoPath0, "/info");
-        	  }
-        	  fclose(stateFile);
-		  useACPI = YES;
-               }           
-            } else
-            {
-               done = YES;
-            }
-	 }
-      } else
-      {
-         /* no acpi, but maybe apm */
-	 if([fm fileExistsAtPath:@"/proc/apm"] == YES)
-	 {
-	    NSLog(@"found apm");
-	    useAPM = YES;
-	    strcpy(apmPath, "/proc/apm");
-	 }
-      }
+        {
+	  done = NO;
+	  en = [dirNames objectEnumerator];
+	  while (done == NO)
+	    {
+	      dirName = [en nextObject];
+	      if (dirName != nil)
+		{
+		  NSString *presentFStr;
+		  NSString *presentFileName;
+
+		  /* scan for the first present battery */
+		  presentFileName = [dirName stringByAppendingPathComponent:@"present"];
+		  presentFStr = [NSString stringWithContentsOfFile: [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName]];
+		  NSLog(@"%@, %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName], presentFStr);
+		  if ([presentFStr intValue] == 1)
+		    {
+		      done = YES;
+		      NSLog(@"found it!: %@", dirName);
+		      useACPIsys = YES;
+		    }
+		} else
+		{
+		  done = YES;
+		}
+	    }
+	} else
+	{
+	  dirNames = [fm directoryContentsAtPath:@"/proc/acpi/battery"];
+	  if (dirNames != nil)
+	    {
+	      done = NO;
+	      en = [dirNames objectEnumerator];
+	      while (done == NO)
+		{
+		  dirName = [en nextObject];
+		  if (dirName != nil)
+		    {
+		      /* scan for the first present battery */
+		      dirName = [[NSString stringWithString:@"/proc/acpi/battery"] stringByAppendingPathComponent:dirName];
+		      [dirName getCString:batteryStatePath0];
+		      strcat(batteryStatePath0, "/state");
+		      NSLog(@"checking: %s", batteryStatePath0);
+		      stateFile = fopen(batteryStatePath0, "r");
+		      if (stateFile != NULL)
+			{
+			  [self _readLine :stateFile :line];
+			  sscanf(line, "present: %s", presentStr);
+			  if (!strcmp(presentStr, "yes"))
+			    {
+			      done = YES;
+			      NSLog(@"found it!: %@", dirName);
+			      [dirName getCString:batteryInfoPath0];
+			      strcat(batteryInfoPath0, "/info");
+			    }
+			  fclose(stateFile);
+			  useACPIproc = YES;
+			}           
+		    } else
+		    {
+		      done = YES;
+		    }
+		}
+	    } else
+	    {
+	      /* no acpi, but maybe apm */
+	      if([fm fileExistsAtPath:@"/proc/apm"] == YES)
+		{
+		  NSLog(@"found apm");
+		  useAPM = YES;
+		  strcpy(apmPath, "/proc/apm");
+		}
+	    }
+	}
       
 #endif /* linux */
     }
@@ -243,9 +279,16 @@
     char batTypeStr[16];
     char warnCapStr[16];
 
-    
+    if (useACPIsys)
+      {
+	NSString *ueventFStr;
+	NSString *ueventFileName;
 
-if (useACPI)
+	ueventFileName = [@"BAT0" stringByAppendingPathComponent:@"uevent"];
+	ueventFStr = [NSString stringWithContentsOfFile: [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:ueventFileName]];
+	NSLog(@"%@, %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:ueventFileName], ueventFStr);
+      }
+    else if (useACPIproc)
 {
     stateFile = fopen(batteryStatePath0, "r");
     assert(stateFile != NULL);
@@ -489,7 +532,7 @@ if (useACPI)
 
 - (BOOL)isCritical
 {
-  if(useACPI)
+  if(useACPIsys || useACPIproc)
   {
     return  [self remainingCapacity] < [self warningCapacity];
   } else if (useAPM)
