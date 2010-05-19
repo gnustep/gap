@@ -31,9 +31,11 @@
     @private char     batteryStatePath0[1024];
     @private char     batteryInfoPath0[1024];
     @private char     apmPath[1024];
+
 #endif
 
-    @private BOOL     useACPI;
+    @private BOOL     useACPIsys;
+    @private BOOL     useACPIproc;
     @private BOOL     useAPM;
     @private float    volts;
     @private float    amps;
