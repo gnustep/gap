@@ -238,7 +238,7 @@ static double k = 0.025;
 
     cpsCopy = [[NSMutableArray alloc] initWithCapacity: [controlPoints count]];
     e = [controlPoints objectEnumerator];
-    while (cp = [e nextObject])
+    while ((cp = [e nextObject]))
     {
         [cpsCopy addObject:[cp copy]];
     }
