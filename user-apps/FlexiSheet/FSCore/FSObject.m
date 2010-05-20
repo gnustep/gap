@@ -1,4 +1,4 @@
-//  $Id: FSObject.m,v 1.1 2008/10/14 15:04:22 hns Exp $
+//  $Id: FSObject.m,v 1.2 2010/05/20 09:39:11 rmottola Exp $
 //
 //  FSObject.m
 //  FlexiSheet
@@ -114,6 +114,7 @@ static NSString  *COMPLAIN_MISSING_IMP = @"Class %@ needs this code:\n\
     //NSLog(@"Adding instance of %@ to pool.", pool->poolClass);
     pool->pool[pool->high] = self;
     pool->high = next;
+    [super dealloc];
 }
 
 
