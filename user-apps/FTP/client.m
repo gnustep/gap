@@ -98,7 +98,7 @@
 
     reversedList = [NSMutableArray arrayWithCapacity:[list count]];
     en = [list reverseObjectEnumerator];
-    while (currElement = [en nextObject])
+    while ((currElement = [en nextObject]))
             [reversedList addObject:currElement];
     return [reversedList retain];
 }
