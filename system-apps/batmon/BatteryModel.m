@@ -100,17 +100,29 @@
 		{
 		  NSString *presentFStr;
 		  NSString *presentFileName;
+		  FILE *presentFile;
 
 		  /* scan for the first present battery */
 		  presentFileName = [dirName stringByAppendingPathComponent:@"present"];
-		  presentFStr = [NSString stringWithContentsOfFile: [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName]];
-		  NSLog(@"%@, %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName], presentFStr);
-		  if ([presentFStr intValue] == 1)
-		    {
-		      done = YES;
-		      NSLog(@"found it!: %@", dirName);
-		      useACPIsys = YES;
-		    }
+		  //		  presentFStr = [NSString stringWithContentsOfFile: [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName]];
+		  //		  NSLog(@"%@, %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName], presentFStr);
+
+		  [[DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName] getCString:batteryStatePath0];
+		  NSLog(@"/sys checking: %s", batteryStatePath0);
+		      presentFile = fopen(batteryStatePath0, "r");
+		      if (presentFile != NULL)
+			{
+			  [self _readLine :presentFile :line];
+			  //			  sscanf(line, "present: %s", presentStr);
+			  if (!strcmp(line, "1"))
+			    {
+			      done = YES;
+			      NSLog(@"/sys: found it!: %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:dirName]);
+                              batterySysAcpiString = [[DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:dirName] retain];
+			    }
+			  fclose(presentFile);
+			  useACPIsys = YES;
+			}           
 		} else
 		{
 		  done = YES;
@@ -141,7 +153,7 @@
 			  if (!strcmp(presentStr, "yes"))
 			    {
 			      done = YES;
-			      NSLog(@"found it!: %@", dirName);
+			      NSLog(@"/proc found it!: %@", dirName);
 			      [dirName getCString:batteryInfoPath0];
 			      strcat(batteryInfoPath0, "/info");
 			    }
@@ -283,194 +295,344 @@
       {
 	NSString *ueventFStr;
 	NSString *ueventFileName;
+        NSMutableDictionary *ueventDict;
+        NSString *lineStr;
+        NSRange  sepRange;
+	NSString *valueStr;
+	NSString *keyStr;
 
-	ueventFileName = [@"BAT0" stringByAppendingPathComponent:@"uevent"];
-	ueventFStr = [NSString stringWithContentsOfFile: [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:ueventFileName]];
-	NSLog(@"%@, %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:ueventFileName], ueventFStr);
+	NSLog(@"reading %@", batterySysAcpiString);
+
+	ueventFileName = [batterySysAcpiString stringByAppendingPathComponent:@"uevent"];
+
+        [ueventFileName getCString:batteryStatePath0];
+        stateFile = fopen(batteryStatePath0, "r");
+        assert(stateFile != NULL);
+
+        ueventDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	keyStr = [lineStr substringToIndex: sepRange.location];
+        valueStr = [lineStr substringFromIndex: sepRange.location+1];
+        [ueventDict setObject: valueStr forKey: keyStr];
+
+        NSLog(@"%@", ueventDict);
+
+
+        amps = [[ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"] floatValue] / 1000000;
+	volts = [[ueventDict objectForKey:@"POWER_SUPPLY_VOLTAGE_NOW"] floatValue] / 1000000;
+	watts = volts*amps;
+
+
+        desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL_DESIGN"] floatValue] / 1000000;
+	lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL"] floatValue] / 1000000;
+	currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_NOW"] floatValue] / 1000000;
+	warnCap = 0; //fixme
+
+        chargeState = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_STATUS"];
+        batteryType = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_TECHNOLOGY"];
+
+        isCharging = NO;
+        if ([chargeState isEqualToString:@"Charging"])
+	  {
+	    if (amps > 0)
+	      timeRemaining = (lastCap-currCap) / amps;
+	    else
+	      timeRemaining = -1;
+	    chargePercent = currCap/lastCap*100;
+	    isCharging = YES;
+	  }
+	else if ([chargeState isEqualToString:@"Discharging"])
+	  {
+	    if (amps > 0)
+	      timeRemaining = currCap / amps;
+	    else
+	      timeRemaining = -1;
+	    chargePercent = currCap/lastCap*100;
+	  }
+	else if ([chargeState isEqualToString:@"Charged"])
+	  {
+	    chargePercent = 100;
+	    timeRemaining = 0;
+	    isCharging = YES;
+	  }
       }
     else if (useACPIproc)
-{
-    stateFile = fopen(batteryStatePath0, "r");
-    assert(stateFile != NULL);
-
-    [self _readLine :stateFile :line];
-    sscanf(line, "present: %s", presentStr);
-    [self _readLine :stateFile :line];
-    sscanf(line, "capacity state: %s", stateStr);
-    [self _readLine :stateFile :line];
-    sscanf(line, "charging state: %s", chStateStr);
-    [self _readLine :stateFile :line];
-    sscanf(line, "present rate: %s mW", rateStr);
-    [self _readLine :stateFile :line];
-    sscanf(line, "remaining capacity: %s mWh", capacityStr);
-    [self _readLine :stateFile :line];
-    sscanf(line, "present voltage: %s mV", voltageStr);
-    fclose(stateFile);
-
-    rateVal = atoi(rateStr);
-    capacityVal = atoi(capacityStr);
-    voltageVal = atoi(voltageStr);
-
-    infoFile = fopen(batteryInfoPath0, "r");
-    assert(infoFile != NULL);
-
-    [self _readLine :infoFile :line];
-    sscanf(line, "present: %s", present2Str);
-    [self _readLine :infoFile :line];
-    sscanf(line, "design capacity: %s", desCapStr);
-    [self _readLine :infoFile :line];
-    sscanf(line, "last full capacity: %s", lastCapStr);
-    [self _readLine :infoFile :line]; // battery technology
-    [self _readLine :infoFile :line]; // design voltage
-    [self _readLine :infoFile :line]; // design capacity warning
-    sscanf(line, "design capacity warning: %s", warnCapStr);
-    [self _readLine :infoFile :line];    
-    [self _readLine :infoFile :line];
-    [self _readLine :infoFile :line];
-    [self _readLine :infoFile :line];
-    [self _readLine :infoFile :line];
-    [self _readLine :infoFile :line];
-    sscanf(line, "battery type: %s", batTypeStr);
-    if (batteryType != nil)
-        [batteryType release];
-    batteryType = [[NSString stringWithCString:batTypeStr] retain];
-
-    fclose(infoFile);
-
-    watts = (float)rateVal / 1000;
-
-    // a sanity check, a laptop won't consume 1000W
-    // necessary since sometimes ACPI returns bogus stuff
-
-    if (watts > 1000)
-        watts = 0;
-    volts = (float)voltageVal / 1000;
-    amps = watts / volts;
-    desCap = (float)atoi(desCapStr)/1000;
-    lastCap = (float)atoi(lastCapStr)/1000;
-    currCap = capacityVal / 1000;
-    warnCap = (float)atoi(warnCapStr)/1000;
-
-    if (chargeState != nil)
-        [chargeState release];
-    chargeState = [[NSString stringWithCString:chStateStr] retain];
-
-    if (!strcmp(chStateStr, "charged"))
-    {
-        chargePercent = 100;
-        timeRemaining = 0;
-        isCharging = YES;
-    } else if (!strcmp(chStateStr, "charging"))
-    {
-        if (watts > 0)
-            timeRemaining = (lastCap-currCap) / watts;
-        else
-            timeRemaining = -1;
-        chargePercent = currCap/lastCap*100;
-        isCharging = YES;
-    } else
-    {
-        if (watts > 0)
-            timeRemaining = currCap / watts;
-        else
-            timeRemaining = -1;
-        chargePercent = currCap/lastCap*100;
-        isCharging = NO;
-    }
-} else if (useAPM)
-{
-    char drvVersionStr[16];
-    char apmBiosVersionStr[16];
-    char apmBiosFlagsStr[16];
-    char acLineStatusStr[16];
-    char battStatusStr[16];
-    int  battStatusInt;
-    char battFlagsStr[16];
-    char percentStr[16];
-    char timeRemainingStr[16];
-    char timeUnitStr[16];
-    BOOL percentIsInvalid;
-
-    percentIsInvalid = NO;
-    stateFile = fopen(apmPath, "r");
-    assert(stateFile != NULL);
-
-
-    [self _readLine :stateFile :line];
-    NSLog(@"line: %s", line);
-    sscanf(line, "%s %s %s %s %s %s %s %s %s", drvVersionStr, apmBiosVersionStr, apmBiosFlagsStr, acLineStatusStr, battStatusStr, battFlagsStr, percentStr, timeRemainingStr, timeUnitStr);
-
-    if (percentStr != NULL && strlen(percentStr) > 0)
-    {
-      if (percentStr[strlen(percentStr)-1] == '%')
-        percentStr[strlen(percentStr)-1] = '\0';
-      NSLog(@"%s %s %s", drvVersionStr, apmBiosVersionStr, percentStr);
-    
-      chargePercent = (float)atof(percentStr);
-      if (chargePercent > 100)
-        chargePercent = 100;
-      if (chargePercent < 0)
       {
-         chargePercent = 0;
-         percentIsInvalid = YES;
+	stateFile = fopen(batteryStatePath0, "r");
+	assert(stateFile != NULL);
+
+	[self _readLine :stateFile :line];
+	sscanf(line, "present: %s", presentStr);
+	[self _readLine :stateFile :line];
+	sscanf(line, "capacity state: %s", stateStr);
+	[self _readLine :stateFile :line];
+	sscanf(line, "charging state: %s", chStateStr);
+	[self _readLine :stateFile :line];
+	sscanf(line, "present rate: %s mW", rateStr);
+	[self _readLine :stateFile :line];
+	sscanf(line, "remaining capacity: %s mWh", capacityStr);
+	[self _readLine :stateFile :line];
+	sscanf(line, "present voltage: %s mV", voltageStr);
+	fclose(stateFile);
+
+	rateVal = atoi(rateStr);
+	capacityVal = atoi(capacityStr);
+	voltageVal = atoi(voltageStr);
+
+	infoFile = fopen(batteryInfoPath0, "r");
+	assert(infoFile != NULL);
+
+	[self _readLine :infoFile :line];
+	sscanf(line, "present: %s", present2Str);
+	[self _readLine :infoFile :line];
+	sscanf(line, "design capacity: %s", desCapStr);
+	[self _readLine :infoFile :line];
+	sscanf(line, "last full capacity: %s", lastCapStr);
+	[self _readLine :infoFile :line]; // battery technology
+	[self _readLine :infoFile :line]; // design voltage
+	[self _readLine :infoFile :line]; // design capacity warning
+	sscanf(line, "design capacity warning: %s", warnCapStr);
+	[self _readLine :infoFile :line];    
+	[self _readLine :infoFile :line];
+	[self _readLine :infoFile :line];
+	[self _readLine :infoFile :line];
+	[self _readLine :infoFile :line];
+	[self _readLine :infoFile :line];
+	sscanf(line, "battery type: %s", batTypeStr);
+	if (batteryType != nil)
+	  [batteryType release];
+	batteryType = [[NSString stringWithCString:batTypeStr] retain];
+
+	fclose(infoFile);
+
+	watts = (float)rateVal / 1000;
+
+	// a sanity check, a laptop won't consume 1000W
+	// necessary since sometimes ACPI returns bogus stuff
+
+	if (watts > 1000)
+	  watts = 0;
+	volts = (float)voltageVal / 1000;
+	amps = watts / volts;
+	desCap = (float)atoi(desCapStr)/1000;
+	lastCap = (float)atoi(lastCapStr)/1000;
+	currCap = capacityVal / 1000;
+	warnCap = (float)atoi(warnCapStr)/1000;
+
+	if (chargeState != nil)
+	  [chargeState release];
+	chargeState = [[NSString stringWithCString:chStateStr] retain];
+
+	if (!strcmp(chStateStr, "charged"))
+	  {
+	    chargePercent = 100;
+	    timeRemaining = 0;
+	    isCharging = YES;
+	  } else if (!strcmp(chStateStr, "charging"))
+	  {
+	    if (watts > 0)
+	      timeRemaining = (lastCap-currCap) / watts;
+	    else
+	      timeRemaining = -1;
+	    chargePercent = currCap/lastCap*100;
+	    isCharging = YES;
+	  } else
+	  {
+	    if (watts > 0)
+	      timeRemaining = currCap / watts;
+	    else
+	      timeRemaining = -1;
+	    chargePercent = currCap/lastCap*100;
+	    isCharging = NO;
+	  }
       }
-      NSLog(@"percent %f", chargePercent);
-    }
-
-    if (battStatusStr != NULL && strlen(battStatusStr) > 0)
-    {
-      if (battStatusStr[3] == '0')
-        battStatusInt = 0;
-      else if (battStatusStr[3] == '1')
-        battStatusInt = 1;
-      else if (battStatusStr[3] == '2')
-        battStatusInt = 2;
-      else if (battStatusStr[3] == '3')
-        battStatusInt = 3;
-      else if (battStatusStr[3] == '4')
-        battStatusInt = 4;
-      else
-        battStatusInt = -1;
-
-      isCharging = NO;
-      if (battStatusInt == 0)
-        chargeState = @"High";
-      else if (battStatusInt == 1)
-        chargeState = @"Low";
-      else if (battStatusInt == 2)
-        chargeState = @"Critical";
-      else if (battStatusInt == 3)
+    else if (useAPM)
       {
-        chargeState = @"Charging";
-        isCharging = YES;
-      } else if (battStatusInt == 4)
-        chargeState = @"Not present";
-      else
-        chargeState = @"Unknown";
+	char drvVersionStr[16];
+	char apmBiosVersionStr[16];
+	char apmBiosFlagsStr[16];
+	char acLineStatusStr[16];
+	char battStatusStr[16];
+	int  battStatusInt;
+	char battFlagsStr[16];
+	char percentStr[16];
+	char timeRemainingStr[16];
+	char timeUnitStr[16];
+	BOOL percentIsInvalid;
+
+	percentIsInvalid = NO;
+	stateFile = fopen(apmPath, "r");
+	assert(stateFile != NULL);
 
 
-      if (percentIsInvalid)
-      {
-        NSLog(@"Battery percent information is invalid.");
+	[self _readLine :stateFile :line];
+	NSLog(@"line: %s", line);
+	sscanf(line, "%s %s %s %s %s %s %s %s %s", drvVersionStr, apmBiosVersionStr, apmBiosFlagsStr, acLineStatusStr, battStatusStr, battFlagsStr, percentStr, timeRemainingStr, timeUnitStr);
 
-        if (battStatusInt == 0)
-          chargePercent = 75;
-        else if (battStatusInt == 1)
-          chargePercent = 25;
-        else if (battStatusInt == 2)
-          chargePercent = 5;
-        else if (battStatusInt == 3)
-          chargePercent = 100;
-        else if (battStatusInt == 4)
-          chargePercent = 0;
-        else
-          chargePercent = 0;
-      }
-      NSLog(@"percent %f", chargePercent);
-    }
+	if (percentStr != NULL && strlen(percentStr) > 0)
+	  {
+	    if (percentStr[strlen(percentStr)-1] == '%')
+	      percentStr[strlen(percentStr)-1] = '\0';
+	    NSLog(@"%s %s %s", drvVersionStr, apmBiosVersionStr, percentStr);
     
-    fclose(stateFile);
-}
+	    chargePercent = (float)atof(percentStr);
+	    if (chargePercent > 100)
+	      chargePercent = 100;
+	    if (chargePercent < 0)
+	      {
+		chargePercent = 0;
+		percentIsInvalid = YES;
+	      }
+	    NSLog(@"percent %f", chargePercent);
+	  }
+
+	if (battStatusStr != NULL && strlen(battStatusStr) > 0)
+	  {
+	    if (battStatusStr[3] == '0')
+	      battStatusInt = 0;
+	    else if (battStatusStr[3] == '1')
+	      battStatusInt = 1;
+	    else if (battStatusStr[3] == '2')
+	      battStatusInt = 2;
+	    else if (battStatusStr[3] == '3')
+	      battStatusInt = 3;
+	    else if (battStatusStr[3] == '4')
+	      battStatusInt = 4;
+	    else
+	      battStatusInt = -1;
+
+	    isCharging = NO;
+	    if (battStatusInt == 0)
+	      chargeState = @"High";
+	    else if (battStatusInt == 1)
+	      chargeState = @"Low";
+	    else if (battStatusInt == 2)
+	      chargeState = @"Critical";
+	    else if (battStatusInt == 3)
+	      {
+		chargeState = @"Charging";
+		isCharging = YES;
+	      } else if (battStatusInt == 4)
+	      chargeState = @"Not present";
+	    else
+	      chargeState = @"Unknown";
+
+
+	    if (percentIsInvalid)
+	      {
+		NSLog(@"Battery percent information is invalid.");
+
+		if (battStatusInt == 0)
+		  chargePercent = 75;
+		else if (battStatusInt == 1)
+		  chargePercent = 25;
+		else if (battStatusInt == 2)
+		  chargePercent = 5;
+		else if (battStatusInt == 3)
+		  chargePercent = 100;
+		else if (battStatusInt == 4)
+		  chargePercent = 0;
+		else
+		  chargePercent = 0;
+	      }
+	    NSLog(@"percent %f", chargePercent);
+	  }
+    
+	fclose(stateFile);
+      }
 
 #endif /* OS */
 }
@@ -545,6 +707,11 @@
 - (BOOL)isCharging
 {
   return isCharging;
+}
+
+- (BOOL)isUsingACPIsys
+{
+  return useACPIsys;
 }
 
 @end
