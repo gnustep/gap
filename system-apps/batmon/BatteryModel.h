@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2009 GNUstep Application Project
+   Copyright (C) 2006-2010 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -31,6 +31,7 @@
     @private char     batteryStatePath0[1024];
     @private char     batteryInfoPath0[1024];
     @private char     apmPath[1024];
+    @private NSString *batterySysAcpiString;
 
 #endif
 
@@ -66,6 +67,8 @@
 
 - (BOOL)isCritical;
 - (BOOL)isCharging;
+
+- (BOOL)isUsingACPIsys;
 
 - (NSString *)state;
 - (NSString *)batteryType;

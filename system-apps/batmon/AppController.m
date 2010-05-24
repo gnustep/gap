@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2009 GNUstep Application Project
+   Copyright (C) 2005-2010 GNUstep Application Project
 
    Author: Riccardo Mottola
    FreeBSD support by Chris B. Vetter
@@ -207,24 +207,44 @@
     mins = (int)((timeRem - (float)hours) * 60);
 
     [voltage setStringValue:[NSString stringWithFormat:@"%3.2f V", [batModel volts]]];
-    [presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel remainingCapacity]]];
     [level setDoubleValue:chargePercentToDraw];
     [percent setStringValue:[NSString stringWithFormat:@"%3.1f%", [batModel chargePercent]]];
-    [rate setStringValue:[NSString stringWithFormat:@"%3.2f W", [batModel watts]]];
     [amperage setStringValue:[NSString stringWithFormat:@"%3.2f A", [batModel amps]]];
+	[rate setStringValue:[NSString stringWithFormat:@"%3.2f W", [batModel watts]]];
     if (timeRem >= 0)
         [timeLeft setStringValue:[NSString stringWithFormat:@"%dh %d\'", hours, mins]];
     else
         [timeLeft setStringValue:@"unknown"];
     [chState setStringValue:[batModel state]];
 
+    if ([batModel isUsingACPIsys])
+      {
+	[presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel remainingCapacity]]];
+      }
+    else 
+      {
+	[presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel remainingCapacity]]];
+
+      }
+
     /* info window */
     lifeVal = [batModel lastCapacity]/[batModel designCapacity];
     [lifeGauge setDoubleValue:lifeVal*100];
     [lifeGaugePercent setStringValue:[NSString stringWithFormat:@"%3.1f%", lifeVal*100]];
-    [designCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel designCapacity]]];
-    [lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel lastCapacity]]];
+
     [battType setStringValue:[batModel batteryType]];
+
+    if ([batModel isUsingACPIsys])
+      {
+	[designCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel designCapacity]]];
+	[lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel lastCapacity]]];
+      }
+    else
+      {
+	[designCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel designCapacity]]];
+	[lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel lastCapacity]]];
+      }
+
 
     [self drawIcon];
 }
