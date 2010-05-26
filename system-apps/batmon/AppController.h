@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2008 GNUstep Application Project
+   Copyright (C) 2005-2010 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -45,6 +45,7 @@
     IBOutlet NSTextField         *lifeGaugePercent;
     IBOutlet NSTextField         *designCap;
     IBOutlet NSTextField         *battType;
+    IBOutlet NSTextField         *manufacturer;
     IBOutlet NSTextField         *lastFullCharge;
 
     NSDictionary *stateStrAttributes;

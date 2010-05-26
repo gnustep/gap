@@ -22,6 +22,7 @@
 	    lifeGaugePercent,
 	    designCap,
 	    battType,
+	    manufacturer,
 	    lastFullCharge
 	);
 	Super = NSObject;

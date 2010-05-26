@@ -83,6 +83,7 @@
       useAPM      = NO;
       
       isCharging = NO;
+      batteryManufacturer = nil;
       
 #if defined(linux)
       /* look for a battery */
@@ -465,6 +466,7 @@
 
         chargeState = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_STATUS"];
         batteryType = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_TECHNOLOGY"];
+	batteryManufacturer = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_MANUFACTURER"];
 
         isCharging = NO;
         if ([chargeState isEqualToString:@"Charging"])
@@ -741,6 +743,11 @@
 - (NSString *)batteryType
 {
     return batteryType;
+}
+
+- (NSString *)manufacturer
+{
+  return batteryManufacturer;
 }
 
 - (BOOL)isCritical
