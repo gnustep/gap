@@ -310,12 +310,26 @@
         assert(stateFile != NULL);
 
         ueventDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
+
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
         sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
 
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
@@ -327,9 +341,52 @@
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
         sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
+
+        [self _readLine :stateFile :line];
+	lineStr = [NSString stringWithCString: line];
+        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
 
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
@@ -341,9 +398,12 @@
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
         sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
 
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
@@ -355,9 +415,13 @@
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
         sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
+
 
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
@@ -369,44 +433,22 @@
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
         sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
 
         [self _readLine :stateFile :line];
 	lineStr = [NSString stringWithCString: line];
         sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
-
-        [self _readLine :stateFile :line];
-	lineStr = [NSString stringWithCString: line];
-        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
-
-        [self _readLine :stateFile :line];
-	lineStr = [NSString stringWithCString: line];
-        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
-
-        [self _readLine :stateFile :line];
-	lineStr = [NSString stringWithCString: line];
-        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
-
-        [self _readLine :stateFile :line];
-	lineStr = [NSString stringWithCString: line];
-        sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
-	keyStr = [lineStr substringToIndex: sepRange.location];
-        valueStr = [lineStr substringFromIndex: sepRange.location+1];
-        [ueventDict setObject: valueStr forKey: keyStr];
+	if (sepRange.location != NSNotFound)
+	  {
+	    keyStr = [lineStr substringToIndex: sepRange.location];
+	    valueStr = [lineStr substringFromIndex: sepRange.location+1];
+	    [ueventDict setObject: valueStr forKey: keyStr];
+	  }
 
         NSLog(@"%@", ueventDict);
 
