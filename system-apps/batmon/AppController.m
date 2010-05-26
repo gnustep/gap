@@ -233,6 +233,7 @@
     [lifeGaugePercent setStringValue:[NSString stringWithFormat:@"%3.1f%", lifeVal*100]];
 
     [battType setStringValue:[batModel batteryType]];
+    [manufacturer setStringValue:[batModel manufacturer]];
 
     if ([batModel isUsingACPIsys])
       {

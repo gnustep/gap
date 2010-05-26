@@ -51,6 +51,7 @@
   
     @private NSString *chargeState;
     @private NSString *batteryType;
+    @private NSString *batteryManufacturer;
 
 }
 
@@ -72,6 +73,7 @@
 
 - (NSString *)state;
 - (NSString *)batteryType;
+- (NSString *)manufacturer;
 
 @end
 
