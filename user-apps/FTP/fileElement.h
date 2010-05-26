@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Riccardo Mottola
+ Copyright (C) 2005-2010 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -29,9 +29,12 @@
 
 
 
-@interface fileElement : NSObject {
+@interface fileElement : NSObject
+{
     NSString           *filename;
+    NSString           *linkTargetName;
     BOOL               isDir;
+    BOOL               isLink;
     unsigned long long size;
     NSDate             *modifDate;
 }
@@ -39,7 +42,9 @@
 - (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs;
 - (id)initWithLsLine :(char *)line;
 - (NSString *)filename;
+- (NSString *)linkTargetName;
 - (BOOL)isDir;
+- (BOOL)isLink;
 - (unsigned long long)size;
 
 @end

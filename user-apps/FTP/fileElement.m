@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Riccardo Mottola
+ Copyright (C) 2005-2010 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -48,6 +48,7 @@
         isDir = YES;
     else
         isDir = NO;
+    isLink = NO;
     filename = [fname retain];
     
     return self;
@@ -155,6 +156,10 @@
     if (strstr(line, "feof") == line)
         return nil;
 
+    filename = nil;
+    linkTargetName = nil;
+    isLink = NO;
+    isDir = NO;
     
     whiteSet = [NSCharacterSet whitespaceCharacterSet];
     splitLine = [NSMutableArray arrayWithCapacity:5];
@@ -250,7 +255,7 @@
             searchRange = NSMakeRange(cursor, lineLen-cursor);
             tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
             tokenRange = NSMakeRange(cursor, tokenEnd.location-cursor);
-//            NSLog(@"eighth token: %@ %@ %@", NSStringFromRange(tokenEnd), NSStringFromRange(tokenRange), [fullLine substringWithRange:tokenRange]);
+	    //            NSLog(@"eighth token: %@ %@ %@", NSStringFromRange(tokenEnd), NSStringFromRange(tokenRange), [fullLine substringWithRange:tokenRange]);
             [splitLine addObject:[fullLine substringWithRange:tokenRange]];
             cursor = NSMaxRange(tokenEnd);
         
@@ -262,7 +267,7 @@
         if (cursor < lineLen)
         {
             tokenRange = NSMakeRange(cursor, lineLen-cursor);
-//            NSLog(@"last token: %@ %@", NSStringFromRange(tokenEnd), NSStringFromRange(tokenRange));
+	    //            NSLog(@"last token: %@ %@ %@", NSStringFromRange(tokenEnd), NSStringFromRange(tokenRange), [fullLine substringWithRange:tokenRange]);
             [splitLine addObject:[fullLine substringWithRange:tokenRange]];
         }
         
@@ -271,20 +276,46 @@
         // copy back the found data
         if (foundStandardMonth && elementsFound == 9)
         {
+	  NSRange linkArrowRange;
+
             // everything is fine and ok, we have a full-blown listing and parsed it well;            
             isDir = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
             [[NSScanner scannerWithString: [splitLine objectAtIndex:4]] scanLongLong:(long long*)&size];
-            filename = [[splitLine objectAtIndex:8] retain];
+	    linkArrowRange = [[splitLine objectAtIndex:8] rangeOfString: @" -> "];
+	    if (linkArrowRange.location == NSNotFound)
+	      {
+		filename = [[splitLine objectAtIndex:8] retain];
+	      }
+	    else
+	      {
+                isLink = YES;
+		filename = [[[splitLine objectAtIndex:8] substringToIndex: linkArrowRange.location] retain];
+		linkTargetName = [[[splitLine objectAtIndex:8] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
+		NSLog(@"we have a link %@", linkTargetName);
+	      }
         } else if (foundOneBeforeMonth && elementsFound == 8)
         {
+	  NSRange linkArrowRange;
+
             // we miss the link count or user probably
             isDir = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
             [[NSScanner scannerWithString: [splitLine objectAtIndex:3]] scanLongLong:(long long*)&size];
-            filename = [[splitLine objectAtIndex:7] retain];
+            linkArrowRange = [[splitLine objectAtIndex:7] rangeOfString: @" -> "];
+	    if (linkArrowRange.location == NSNotFound)
+	      {
+		filename = [[splitLine objectAtIndex:7] retain];
+	      }
+	    else
+	      {
+                isLink = YES;
+		filename = [[[splitLine objectAtIndex:7] substringToIndex: linkArrowRange.location] retain];
+		linkTargetName = [[[splitLine objectAtIndex:7] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
+		NSLog(@"we have a link %@", linkTargetName);
+	      }
         } else
             return nil;
         
@@ -380,9 +411,19 @@
     return self->filename;
 }
 
+- (NSString *)linkTargetName
+{
+    return self->linkTargetName;
+}
+
 - (BOOL)isDir
 {
     return isDir;
+}
+
+- (BOOL)isLink
+{
+  return isLink;
 }
 
 - (unsigned long long)size
