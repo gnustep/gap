@@ -484,11 +484,20 @@
 	      timeRemaining = -1;
 	    chargePercent = currCap/lastCap*100;
 	  }
-	else if ([chargeState isEqualToString:@"Charged"])
+	else if ([chargeState isEqualToString:@"Charged"] || [chargeState isEqualToString:@"Full"])
 	  {
 	    chargePercent = 100;
 	    timeRemaining = 0;
 	    isCharging = YES;
+	  }
+	else if ([chargeState isEqualToString:@"Unknown"])
+	  {
+       	    timeRemaining = 0;
+	    if (amps == 0)
+	      {
+		chargePercent = 100;
+		isCharging = YES;
+	      }
 	  }
       }
     else if (useACPIproc)
