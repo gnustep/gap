@@ -246,6 +246,7 @@ int getChar(streamStruct* ss)
     state = N1;
     separator = 0;
     multiline = NO;
+    startNumCode = numCode = 0;
     *result = [NSMutableArray arrayWithCapacity:1];
 
     // TODO: protect against numCodeStr overflow

@@ -1,7 +1,7 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005-2007 Riccardo Mottola
+   Copyright (C) 2005-2010 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -85,7 +85,7 @@
     listArr = [NSMutableArray arrayWithCapacity:[fileNames count]];
     
     en = [fileNames objectEnumerator];
-    while (fileName = [en nextObject])
+    while ((fileName = [en nextObject]))
     {
         NSString *p;
         NSDictionary *attr;
