@@ -81,6 +81,7 @@
       useACPIproc = NO;
       useACPIsys  = NO;
       useAPM      = NO;
+      useWattHours= YES;
       
       isCharging = NO;
       batteryManufacturer = nil;
@@ -334,12 +335,23 @@
 
         amps = [[ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"] floatValue] / 1000000;
 	volts = [[ueventDict objectForKey:@"POWER_SUPPLY_VOLTAGE_NOW"] floatValue] / 1000000;
-	watts = volts*amps;
+	if ([ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] == nil)
+	  watts = volts*amps;
+	else
+	  watts = [[ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] floatValue] / 1000000;
 
 
-        desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL_DESIGN"] floatValue] / 1000000;
-	lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL"] floatValue] / 1000000;
-	currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_NOW"] floatValue] / 1000000;
+        desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL_DESIGN"] floatValue] / 1000000;
+	lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL"] floatValue] / 1000000;
+	currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_NOW"] floatValue] / 1000000;
+
+	if (desCap <= 0)
+	  {
+            desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL_DESIGN"] floatValue] / 1000000;
+	    lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL"] floatValue] / 1000000;
+	    currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_NOW"] floatValue] / 1000000;
+	    useWattHours = NO;
+	  }
 	warnCap = 0; //fixme
 
         chargeState = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_STATUS"];
@@ -349,19 +361,39 @@
         isCharging = NO;
         if ([chargeState isEqualToString:@"Charging"])
 	  {
-	    if (amps > 0)
-	      timeRemaining = (lastCap-currCap) / amps;
+	    if (useWattHours)
+	      {
+	        if (amps > 0)
+	          timeRemaining = (lastCap-currCap) / watts;
+	        else
+	          timeRemaining = -1;
+	      }
 	    else
-	      timeRemaining = -1;
+	      {
+	        if (watts > 0)
+	          timeRemaining = (lastCap-currCap) / amps;
+	        else
+	          timeRemaining = -1;
+	      }
 	    chargePercent = currCap/lastCap*100;
 	    isCharging = YES;
 	  }
 	else if ([chargeState isEqualToString:@"Discharging"])
 	  {
-	    if (amps > 0)
-	      timeRemaining = currCap / amps;
+	    if (useWattHours)
+	      {
+	        if (amps > 0)
+	          timeRemaining = currCap / watts;
+	        else
+	          timeRemaining = -1;
+	      }
 	    else
-	      timeRemaining = -1;
+	      {
+	        if (watts > 0)
+	          timeRemaining = currCap / amps;
+	        else
+	          timeRemaining = -1;
+	      }
 	    chargePercent = currCap/lastCap*100;
 	  }
 	else if ([chargeState isEqualToString:@"Charged"] || [chargeState isEqualToString:@"Full"])
@@ -645,9 +677,9 @@
   return isCharging;
 }
 
-- (BOOL)isUsingACPIsys
+- (BOOL)isUsingWattHours
 {
-  return useACPIsys;
+  return useWattHours;
 }
 
 @end

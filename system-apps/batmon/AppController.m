@@ -215,15 +215,11 @@
         [timeLeft setStringValue:@"unknown"];
     [chState setStringValue:[batModel state]];
 
-    if ([batModel isUsingACPIsys])
-      {
-	[presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel remainingCapacity]]];
-      }
+    if ([batModel isUsingWattHours])
+      [presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel remainingCapacity]]];
     else 
-      {
-	[presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel remainingCapacity]]];
+      [presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel remainingCapacity]]];
 
-      }
 
     /* info window */
     lifeVal = [batModel lastCapacity]/[batModel designCapacity];
@@ -233,15 +229,15 @@
     [battType setStringValue:[batModel batteryType]];
     [manufacturer setStringValue:[batModel manufacturer]];
 
-    if ([batModel isUsingACPIsys])
-      {
-	[designCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel designCapacity]]];
-	[lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel lastCapacity]]];
-      }
-    else
+    if ([batModel isUsingWattHours])
       {
 	[designCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel designCapacity]]];
 	[lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel lastCapacity]]];
+      }
+    else
+      {
+	[designCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel designCapacity]]];
+	[lastFullCharge setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel lastCapacity]]];
       }
 
 

@@ -38,6 +38,7 @@
     @private BOOL     useACPIsys;
     @private BOOL     useACPIproc;
     @private BOOL     useAPM;
+    @private BOOL     useWattHours;
     @private float    volts;
     @private float    amps;
     @private float    watts;
@@ -69,7 +70,7 @@
 - (BOOL)isCritical;
 - (BOOL)isCharging;
 
-- (BOOL)isUsingACPIsys;
+- (BOOL)isUsingWattHours;
 
 - (NSString *)state;
 - (NSString *)batteryType;
