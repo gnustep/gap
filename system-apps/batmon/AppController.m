@@ -132,8 +132,7 @@
 #define WIDTH  20
 - (void)drawImageRep
 {
-    NSMutableString *str;
-    char cStr[5];
+    NSString *str;
     float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
     NSImage *chargeStatusIcon;
 
@@ -167,8 +166,7 @@
        [[NSColor greenColor] set];
     [NSBezierPath fillRect: NSMakeRect(0+1, 1, WIDTH-1, (chargePercentToDraw/100) * HEIGHT -2)];
 
-    sprintf(cStr, "%2.0f%%", [batModel chargePercent]);
-    str = [NSMutableString stringWithCString:cStr];
+    str = [NSString stringWithFormat:@"%2.0f%%", [batModel chargePercent]];
     [str drawAtPoint: NSMakePoint(WIDTH + 5 , 1) withAttributes:stateStrAttributes];
 }
 
@@ -208,7 +206,7 @@
 
     [voltage setStringValue:[NSString stringWithFormat:@"%3.2f V", [batModel volts]]];
     [level setDoubleValue:chargePercentToDraw];
-    [percent setStringValue:[NSString stringWithFormat:@"%3.1f%", [batModel chargePercent]]];
+    [percent setStringValue:[NSString stringWithFormat:@"%3.1f%%", [batModel chargePercent]]];
     [amperage setStringValue:[NSString stringWithFormat:@"%3.2f A", [batModel amps]]];
 	[rate setStringValue:[NSString stringWithFormat:@"%3.2f W", [batModel watts]]];
     if (timeRem >= 0)
