@@ -100,14 +100,11 @@
 	      dirName = [en nextObject];
 	      if (dirName != nil)
 		{
-		  NSString *presentFStr;
 		  NSString *presentFileName;
 		  FILE *presentFile;
 
 		  /* scan for the first present battery */
 		  presentFileName = [dirName stringByAppendingPathComponent:@"present"];
-		  //		  presentFStr = [NSString stringWithContentsOfFile: [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName]];
-		  //		  NSLog(@"%@, %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName], presentFStr);
 
 		  [[DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName] getCString:batteryStatePath0];
 		  NSLog(@"/sys checking: %s", batteryStatePath0);
@@ -115,7 +112,6 @@
 		      if (presentFile != NULL)
 			{
 			  [self _readLine :presentFile :line];
-			  //			  sscanf(line, "present: %s", presentStr);
 			  if (!strcmp(line, "1"))
 			    {
 			      done = YES;
@@ -295,7 +291,6 @@
 
     if (useACPIsys)
       {
-	NSString *ueventFStr;
 	NSString *ueventFileName;
         NSMutableDictionary *ueventDict;
         NSString *lineStr;
