@@ -336,11 +336,13 @@
 	  watts = [[ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] floatValue] / 1000000;
 
 
-        desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL_DESIGN"] floatValue] / 1000000;
-	lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL"] floatValue] / 1000000;
-	currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_NOW"] floatValue] / 1000000;
-
-	if (desCap <= 0)
+	if ([ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL_DESIGN"] != nil)
+	  {
+	    desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL_DESIGN"] floatValue] / 1000000;
+	    lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL"] floatValue] / 1000000;
+	    currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_NOW"] floatValue] / 1000000;
+	  }
+	else
 	  {
             desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL_DESIGN"] floatValue] / 1000000;
 	    lastCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_FULL"] floatValue] / 1000000;
