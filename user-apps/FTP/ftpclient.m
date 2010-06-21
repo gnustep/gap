@@ -587,7 +587,7 @@ int getChar(streamStruct* ss)
 
         if ([self createNewDir:remotePath] == YES)
         {
-            NSLog(@"remote dir created succesfully");
+            NSLog(@"remote dir created successfully");
             [self changeWorkingDir:remotePath];
 
             dirList = [localClient dirContents];
@@ -718,7 +718,7 @@ int getChar(streamStruct* ss)
         NSLog(@"it is a dir: %@", fileName);
         remotePath = [pristineRemotePath stringByAppendingPathComponent:fileName];
 
-        NSLog(@"remote dir created succesfully");
+        NSLog(@"remote dir created successfully");
         [self changeWorkingDir:remotePath];
 
         dirList = [self dirContents];
