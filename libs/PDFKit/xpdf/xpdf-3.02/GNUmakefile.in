@@ -23,6 +23,9 @@ include $(GNUSTEP_MAKEFILES)/common.make
 LIB_FREETYPE_LIBS=@lib_freetype_libs@
 LIB_FREETYPE_INCLUDES=@lib_freetype_includes@
 LIB_FREETYPE_ADD_INCLUDES=@lib_freetype_add_includes@
+CPPFLAGS := -I$(LIB_FREETYPE_ADD_INCLUDES)
+CXXFLAGS := -I$(LIB_FREETYPE_ADD_INCLUDES)
+export CPPFLAGS CXXFLAGS
 
 default: all
 
@@ -31,9 +34,7 @@ all: compile
 configure: Makefile
 
 Makefile:
-	echo "configure xpdf ..."
-	ADD_FT_INCLUDE_PATH="$(LIB_FREETYPE_ADD_INCLUDES)" \
-      CC=@CC@ CXX=@CXX@ ./configure --without-x \
+	CC=@CC@ CXX=@CXX@ ./configure --without-x \
 	    --with-freetype2-library=$(LIB_FREETYPE_LIBS) \
 	    --with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
 

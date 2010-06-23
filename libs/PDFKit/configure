@@ -3275,6 +3275,9 @@ else
     freebsd*)
     	lib_freetype_libs=/usr/local/lib
       ;;
+    netbsd*)
+    	lib_freetype_libs=/usr/pkg/lib
+      ;;
     *)
       lib_freetype_libs=$(sh freetype-config --prefix)/lib
       ;;
@@ -3287,6 +3290,9 @@ else
   case "$target_os" in
     freebsd*)
     	lib_freetype_add_includes=/usr/local/include
+      ;;
+    netbsd*)
+	lib_freetype_add_includes=/usr/pkg/include
       ;;
     *)
       lib_freetype_add_includes=$(sh freetype-config --cflags)
