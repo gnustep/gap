@@ -17,19 +17,25 @@
     NSRole = Application;
     NSTypes = (
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
 		jpg,
-		jpeg,
-		JPG,
-		JPEG
+		" jpeg"
 	    );
 	},
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
 		tif,
-		tiff,
-		TIF,
-		TIFF
+		" tiff"
 	    );
 	},
 	{
@@ -43,9 +49,13 @@
 	    );
 	},
 	{
+	    NSDocumentClass = "";
+	    NSHumanReadableName = "";
+	    NSIcon = "";
+	    NSName = "";
+	    NSRole = "";
 	    NSUnixExtensions = (
-		png,
-		PNG
+		png
 	    );
 	}
     );

@@ -24,6 +24,7 @@
 */
 
 #import "AppController.h"
+#import "PRScale.h"
 
 
 @implementation AppController
@@ -687,8 +688,8 @@
 
 - (IBAction)execExportImages:(id)sender
 {
-  int height;
-  int width;
+  int givenHeight;
+  int givenWidth;
   NSDictionary *repProperties;
   NSString *origFileName;
   NSString *filenameNoExtension;
@@ -700,8 +701,8 @@
   NSString *destFolder;
   int i;
   
-  height = [fieldHeight intValue];
-  width = [fieldWidth intValue];
+  givenHeight = [fieldHeight intValue];
+  givenWidth = [fieldWidth intValue];
 
   destFolder = [fieldOutputPath stringValue];
   
@@ -714,6 +715,9 @@
   for (i = 0; i < [fileListView numberOfRows]; i++)
     {
       NSString *fullOrigPath;
+      int newW, newH;
+      double aspectRatio;
+      NSBitmapImageRep *scaledImageRep;
 
       fullOrigPath = [fileListData pathAtIndex:i];
       origFileName = [fullOrigPath lastPathComponent];
@@ -722,11 +726,79 @@
 
       srcImage = [[NSImage alloc] initByReferencingFile:fullOrigPath];
       srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
-      
+
+      newW = [srcImageRep size].width;
+      newH = [srcImageRep size].height;
+      aspectRatio = (double)newW / newH;
+      NSLog(@"aspect ratio: %f", aspectRatio);
+      switch([popupConstraints indexOfSelectedItem])
+	{
+	case 0: /* none */
+	  break;
+	case 1: /* width */
+	  newW = givenWidth;
+	  newH = givenWidth / aspectRatio;
+	  break;
+	case 2: /* height */
+	  newH = givenHeight;
+	  newW = givenHeight * aspectRatio;
+	  break;
+	case 3: /* both */
+	  newW = givenWidth;
+	  newH = givenWidth / aspectRatio;
+	  if (givenWidth > [srcImageRep size].width)
+	    {
+	      if (newH < givenHeight)
+		{
+		  newH = givenHeight;
+		  newW = givenHeight * aspectRatio;
+		}
+	    }
+	  else
+	    {
+	      if (newH > givenHeight)
+		{
+		  newH = givenHeight;
+		  newW = givenHeight * aspectRatio;
+		}
+	    }
+	  break;
+	case 4: /* largest side */
+	  if ([srcImageRep size].height > [srcImageRep size].width)
+	    {
+	      newH = givenHeight;
+	      newW = givenHeight * aspectRatio;
+	    }
+	  else
+	    {
+	      newW = givenWidth;
+	      newH = givenWidth / aspectRatio;
+	    }
+	  break;
+	default:
+	  NSLog(@"Unexpected constraint selection value.");
+	}
+      NSLog(@"%d %d", newW, newH);
+      if (newW == [srcImageRep size].width)
+	{
+	  NSLog(@"nothing");
+	  scaledImageRep = srcImageRep;
+	}
+      else
+	{
+	  NSImage *scaledImage;
+	  PRScale *scaleFilter;
+	  
+	  scaleFilter = [[PRScale alloc] init];
+	  scaledImage = [scaleFilter scaleImage:srcImage :newW :newH :LINEAR_HV :nil];
+	  [scaleFilter release];
+	  scaledImageRep = [NSBitmapImageRep imageRepWithData:[scaledImage TIFFRepresentation]];
+	}
+
       if ([popupFileType indexOfSelectedItem] == 0)
         {
           repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:NSTIFFCompressionLZW] forKey:NSImageCompressionMethod];
-          dataOfRep = [srcImageRep representationUsingType: NSTIFFFileType properties:repProperties];
+          dataOfRep = [scaledImageRep representationUsingType: NSTIFFFileType properties:repProperties];
         }
       else
         {
@@ -751,7 +823,7 @@
 	            quality = 0.5;
             }
           repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:quality] forKey:NSImageCompressionFactor];
-          dataOfRep = [srcImageRep representationUsingType: NSJPEGFileType properties:repProperties];
+          dataOfRep = [scaledImageRep representationUsingType: NSJPEGFileType properties:repProperties];
         }
 
       destFileName = [destFolder stringByAppendingPathComponent:[filenameNoExtension stringByAppendingPathExtension: destFileExtension]];
