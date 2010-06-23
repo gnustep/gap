@@ -712,6 +712,7 @@
     destFileExtension = @"jpeg";
 
   [exportProgress setDoubleValue: 0.0];
+  [exporterPanel displayIfNeeded];
   for (i = 0; i < [fileListView numberOfRows]; i++)
     {
       NSString *fullOrigPath;
@@ -766,8 +767,8 @@
 	case 4: /* largest side */
 	  if ([srcImageRep size].height > [srcImageRep size].width)
 	    {
-	      newH = givenHeight;
-	      newW = givenHeight * aspectRatio;
+	      newH = givenWidth;
+	      newW = givenWidth * aspectRatio;
 	    }
 	  else
 	    {
