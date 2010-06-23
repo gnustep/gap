@@ -69,6 +69,9 @@ else
     freebsd*)
     	lib_freetype_includes=/usr/local/include/freetype2
       ;;
+    netbsd*)
+    	lib_freetype_includes=/usr/pkg/include/freetype2
+      ;;
     *)	
       lib_freetype_includes=$(sh freetype-config --prefix)/include/freetype2
       ;;
