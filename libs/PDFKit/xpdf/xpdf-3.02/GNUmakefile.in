@@ -35,7 +35,7 @@ Makefile:
 	ADD_FT_INCLUDE_PATH="$(LIB_FREETYPE_ADD_INCLUDES)" \
       CC=@CC@ CXX=@CXX@ ./configure --without-x \
 	    --with-freetype2-library=$(LIB_FREETYPE_LIBS) \
-	    -with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
+	    --with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
 
 compile: configure
 	$(MAKE) -f Makefile pdfkit
