@@ -93,7 +93,7 @@ static GSPdf *gspdf = nil;
   return self;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
   NSUserDefaults *defaults;
   NSString *gsPathStr;
