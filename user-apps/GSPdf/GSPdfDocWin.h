@@ -63,7 +63,5 @@
 
 - (NSButton *)antiAliasSwitch;
 
-- (void)mainViewDidResize:(NSNotification *)notif;
-
 @end
 

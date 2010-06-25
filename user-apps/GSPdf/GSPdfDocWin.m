@@ -59,12 +59,6 @@
       nc = [NSNotificationCenter defaultCenter];
 
       [NSBundle loadNibNamed: @"GSPdfDocument.gorm" owner: self];
-      [[window contentView] setPostsFrameChangedNotifications: YES];
-		
-      [nc addObserver: self
-	  selector: @selector(mainViewDidResize:)
-	  name: NSViewFrameDidChangeNotification
-	  object: [window contentView]];    		
 		
       [leftButt	setImage: [NSImage imageNamed: @"left.tiff"]];
       [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
@@ -87,22 +81,6 @@
     }
 	
   return self;
-}
-
-- (void)mainViewDidResize:(NSNotification *)notif
-{
-  NSRect r = [[window contentView] frame];
-
-  float h = r.size.height;
-	
-  [leftButt setFrameOrigin: NSMakePoint(7, h - 54)];
-  [rightButt setFrameOrigin: NSMakePoint(63, h - 54)];
-  [matrixScroll setFrameOrigin: NSMakePoint(122, h - 54)];
-  [zoomField setFrameOrigin: NSMakePoint(351, h - 53)];
-  [zoomStepper setFrameOrigin: NSMakePoint(416, h - 54)];
-  [zoomButt setFrameOrigin: NSMakePoint(440, h - 54)];
-  [handButt setFrameOrigin: NSMakePoint(473, h - 54)];
-  [antiAliasSwitch setFrameOrigin: NSMakePoint(351, h - 22)];
 }
 
 - (NSWindow *)window
