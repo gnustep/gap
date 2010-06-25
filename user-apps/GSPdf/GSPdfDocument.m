@@ -2,7 +2,7 @@
  *  GSPdfDocument.m: Implementation of the GSPdfDocument Class 
  *  of the GSPdf application
  *
- *  Copyright (c) 2002-2009 GNUstep Application Project
+ *  Copyright (c) 2002-2010 GNUstep Application Project
  *  
  *  Author: Enrico Sersale
  *  Date: February 2002
@@ -42,10 +42,10 @@
     {
       [task terminate];
     } 
-  TEST_RELEASE (task);
+  RELEASE (task);
   RELEASE (myPath);
   RELEASE (myName);
-  TEST_RELEASE (psdoc);
+  RELEASE (psdoc);
   RELEASE (imageView);
   RELEASE (pagesMatrix);
   [gsComm release];
