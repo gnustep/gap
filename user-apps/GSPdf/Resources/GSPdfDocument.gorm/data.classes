@@ -4,15 +4,16 @@
 	Actions = (
 	);
 	Outlets = (
-	    handButt,
-	    leftButt,
-	    matrixScroll,
-	    rightButt,
-	    scroll,
 	    window,
-	    zoomButt,
+	    scroll,
+	    leftButt,
+	    rightButt,
+	    matrixScroll,
 	    zoomField,
-	    zoomStepper
+	    zoomStepper,
+	    zoomButt,
+	    handButt,
+	    antiAliasSwitch
 	);
 	Super = NSObject;
     };

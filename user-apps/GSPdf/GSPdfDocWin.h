@@ -2,7 +2,9 @@
  *  GSPdfDocWin.h: Interface and declarations for the GSPdfDocWin 
  *  Class of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2002-2010
+ *  Riccardo Mottola
+ *  Enrico Sersale <enrico@imago.ro>
  *  
  *  Author: Enrico Sersale
  *  Date: February 2002
@@ -36,6 +38,7 @@
 	id zoomStepper;
 	id zoomButt;
 	id handButt;
+	IBOutlet NSButton *antiAliasSwitch;
 	
 	NSNotificationCenter *nc;
 }
@@ -57,6 +60,8 @@
 - (NSButton *)zoomButt;
 
 - (NSButton *)handButt;
+
+- (NSButton *)antiAliasSwitch;
 
 - (void)mainViewDidResize:(NSNotification *)notif;
 

@@ -128,6 +128,9 @@
       [zoomField setSelectable: NO];
       [zoomField setEditable: NO];
 
+      antiAliasSwitch = [docwin antiAliasSwitch];
+      [antiAliasSwitch setAction: @selector(setAntiAlias:)];
+
       zoomStepper = [docwin zoomStepper];
       [zoomStepper setTarget: self];
       [zoomStepper setAction: @selector(setZoomValue:)];
@@ -228,7 +231,7 @@
   return myPath;
 }
 
--	(BOOL)isPdf
+- (BOOL)isPdf
 {
   return isPdf;
 }
@@ -322,7 +325,12 @@
   [args addObject: @"-dSAFER"];
   [args addObject: @"-dDELAYSAFER"];
   [args addObject: @"-dSHORTERRORS"];
-  [args addObject: @"-dDOINTERPOLATE"];	
+  [args addObject: @"-dDOINTERPOLATE"];
+  if ([antiAliasSwitch state] == NSOnState)
+    {
+      [args addObject: @"-dTextAlphaBits=4"];
+      [args addObject: @"-dGraphicsAlphaBits=4"];
+    }
   [args addObject: [NSString stringWithFormat: @"-dDEVICEXRESOLUTION=%i", (int)resolution]];	
   [args addObject: [NSString stringWithFormat: @"-dDEVICEYRESOLUTION=%i", (int)resolution]];	
   [args addObject: [NSString stringWithFormat: @"-dDEVICEWIDTHPOINTS=%i", pagew]];	
@@ -370,6 +378,12 @@
   int value = [sender intValue];
   resolution = ((72.00 / 100) * value);
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", value]];		
+  [self clearTempFiles];	
+  [self makePage];
+}
+
+- (void)setAntiAlias:(id)sender
+{		
   [self clearTempFiles];	
   [self makePage];
 }

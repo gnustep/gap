@@ -2,7 +2,9 @@
  *  GSPdfDocWin.m: Implementation of the GSPdfDocWin Class 
  *  of the GNUstep GWorkspace application
  *
- *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2002-2010
+ *  Riccardo Mottola
+ *  Enrico Sersale <enrico@imago.ro>
  *  
  *  Author: Enrico Sersale
  *  Date: February 2002
@@ -100,6 +102,7 @@
   [zoomStepper setFrameOrigin: NSMakePoint(416, h - 54)];
   [zoomButt setFrameOrigin: NSMakePoint(440, h - 54)];
   [handButt setFrameOrigin: NSMakePoint(473, h - 54)];
+  [antiAliasSwitch setFrameOrigin: NSMakePoint(351, h - 22)];
 }
 
 - (NSWindow *)window
@@ -145,6 +148,11 @@
 - (NSButton *)handButt
 {
   return handButt;
+}
+
+- (NSButton *)antiAliasSwitch
+{
+  return antiAliasSwitch;
 }
 
 @end
