@@ -2,7 +2,9 @@
  *  GSPdfDocument.h: Interface and declarations for the GSPdfDocument 
  *  Class of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2002-2010
+ *  Riccardo Mottola
+ *  Enrico Sersale <enrico@imago.ro>
  *  
  *  Author: Enrico Sersale
  *  Date: February 2002
@@ -61,13 +63,14 @@
 	NSNotificationCenter *nc;	
 	GSPdf *gspdf;
 	GSConsole *console;
+	NSButton *antiAliasSwitch;
 }
 
 - (id)initForPath:(NSString *)apath;
 
--	(NSString *)myPath;
+- (NSString *)myPath;
 
--	(BOOL)isPdf;
+- (BOOL)isPdf;
 
 - (void)nextPage:(id)sender;
 
@@ -78,6 +81,8 @@
 - (void)makePage;
 
 - (void)setZoomValue:(id)sender;
+
+- (void)setAntiAlias:(id)sender;
 
 - (void)setPaperSize:(id)sender;
 
