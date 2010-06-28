@@ -144,11 +144,11 @@ static GSPdf *gspdf = nil;
 {
   NSDocumentController *dc;
   GSPdfDocument *doc;
- NSLog(@"openFile...");   
+
   dc = [NSDocumentController sharedDocumentController];
   doc = [dc openDocumentWithContentsOfFile:filename display:YES];
 
-    if (doc)
+  if (doc)
     {
       ASSIGN (workPath, [filename stringByDeletingLastPathComponent]);
       return YES;
@@ -262,7 +262,6 @@ static GSPdf *gspdf = nil;
       return;
     }
   [gsPathField setStringValue:[openPanel filename]];
-  NSLog(@"path %@", [openPanel filename]);
 }
 
 - (void)runInfoPanel:(id)sender
