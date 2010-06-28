@@ -56,7 +56,6 @@
 
 - (id)initWithContentsOfFile: (NSString *)fileName ofType:(NSString *)docType
 {
-NSLog(@"initWithContentsOfFile");
   self = [super init];
 
   if (self) 
@@ -86,106 +85,104 @@ NSLog(@"GSPdfDocument-initWithCOntentsOfFile-Doctype: %@", docType);
   id cell;
   int i, count;
       
-  NSLog(@"windowControllerDidLoadNib");
   [super windowControllerDidLoadNib: winController];
   
   [self setBusy: NO];
 
-      imageView = [[GSPdfImView alloc] initForDocument: self];
-      [imageView setImageAlignment: NSImageAlignBottomLeft];
-      [imageView setImageScaling: NSScaleNone];
+  imageView = [[GSPdfImView alloc] initForDocument: self];
+  [imageView setImageAlignment: NSImageAlignBottomLeft];
+  [imageView setImageScaling: NSScaleNone];
 
-      scroll = [docwin scroll];
-      [scroll setDocumentView: imageView];
+  scroll = [docwin scroll];
+  [scroll setDocumentView: imageView];
 
-      matrixScroll = [docwin matrixScroll];
+  matrixScroll = [docwin matrixScroll];
 
-      cell = AUTORELEASE ([NSButtonCell new]);
-      [cell setButtonType: NSPushOnPushOffButton];
-      [cell setImagePosition: NSImageOverlaps]; 
+  cell = AUTORELEASE ([NSButtonCell new]);
+  [cell setButtonType: NSPushOnPushOffButton];
+  [cell setImagePosition: NSImageOverlaps]; 
 
-      pagesMatrix = [[NSMatrix alloc] initWithFrame: NSZeroRect
-				      mode: NSRadioModeMatrix prototype: cell
-				      numberOfRows: 0 numberOfColumns: 0];
-      [pagesMatrix setIntercellSpacing: NSZeroSize];
-      [pagesMatrix setCellSize: NSMakeSize(26, 24)];
-      [pagesMatrix setAllowsEmptySelection: YES];
-      [pagesMatrix setTarget: self];
-      [pagesMatrix setAction: @selector(goToPage:)];
-      [matrixScroll setDocumentView: pagesMatrix];	
+  pagesMatrix = [[NSMatrix alloc] initWithFrame: NSZeroRect
+					   mode: NSRadioModeMatrix prototype: cell
+				   numberOfRows: 0 numberOfColumns: 0];
+  [pagesMatrix setIntercellSpacing: NSZeroSize];
+  [pagesMatrix setCellSize: NSMakeSize(26, 24)];
+  [pagesMatrix setAllowsEmptySelection: YES];
+  [pagesMatrix setTarget: self];
+  [pagesMatrix setAction: @selector(goToPage:)];
+  [matrixScroll setDocumentView: pagesMatrix];	
 
-      if (isPdf)
+  if (isPdf)
+    {
+      NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
+      NSString *dscPath = [pageIdent objectForKey: @"dscpath"];
+      NSMutableArray *args = [NSMutableArray arrayWithCapacity: 1];		
+
+      [args addObject: @"-q"];
+      [args addObject: @"-dNODISPLAY"];
+      [args addObject: @"-dSAFER"];
+      [args addObject: @"-dDELAYSAFER"];
+      [args addObject: [NSString stringWithFormat: @"-sPDFname=%@", myPath]];
+      [args addObject: [NSString stringWithFormat: @"-sDSCname=%@", dscPath]];
+      [args addObject: @"pdf2dsc.ps"];
+      [args addObject: @"-c"];
+      [args addObject: @"quit"];
+
+      ASSIGN (task, [NSTask new]);
+      [task setLaunchPath: gsComm];
+      [task setArguments: args];		
+      [task launch];
+      [task waitUntilExit];
+
+      if ([task terminationStatus] == 0)
 	{
-	  NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
-	  NSString *dscPath = [pageIdent objectForKey: @"dscpath"];
-	  NSMutableArray *args = [NSMutableArray arrayWithCapacity: 1];		
-
-	  [args addObject: @"-q"];
-	  [args addObject: @"-dNODISPLAY"];
-	  [args addObject: @"-dSAFER"];
-	  [args addObject: @"-dDELAYSAFER"];
-	  [args addObject: [NSString stringWithFormat: @"-sPDFname=%@", myPath]];
-	  [args addObject: [NSString stringWithFormat: @"-sDSCname=%@", dscPath]];
-	  [args addObject: @"pdf2dsc.ps"];
-	  [args addObject: @"-c"];
-	  [args addObject: @"quit"];
-NSLog(@"task1 -> %@", args);
-
-	  ASSIGN (task, [NSTask new]);
-	  [task setLaunchPath: gsComm];
-	  [task setArguments: args];		
-	  [task launch];
-	  [task waitUntilExit];
-
-	  if ([task terminationStatus] == 0)
-	    {
-	      ASSIGN (myPath, dscPath);
-	      psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
-	      if (psdoc == nil)
-       {
-       NSLog(@"init with ps file failed");
-		  return;
-    }
-	    }					 
-
-	} else
-	{
+	  ASSIGN (myPath, dscPath);
 	  psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
-	  if (psdoc == nil) {
-	    return;
-	  }
-	}
+	  if (psdoc == nil)
+	    {
+	      NSLog(@"init with ps file failed");
+	      return;
+	    }
+	}					 
 
-      docPages = [psdoc pages];
-      count = [docPages count];
-
-      [pagesMatrix renewRows: 1 columns: count];		
-      miniPage = [NSImage imageNamed: @"page.tiff"];
-
-      for (i = 0; i < count; i++) {
-	NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
-	NSString *psPath = [pageIdent objectForKey: @"pspath"];
-	NSString *tiffPath = [pageIdent objectForKey: @"tiffpath"];
-	NSString *dscPath = [pageIdent objectForKey: @"dscpath"];		
-	PSDocumentPage *pspage = [docPages objectAtIndex: i];
-
-	[pspage setPsPath: psPath];
-	[pspage setTiffPath: tiffPath];
-	[pspage setDscPath: dscPath];
-
-	cell = [pagesMatrix cellAtRow: 0 column: i];
-	if (i < 100)
-	  {
-	    [cell setFont: [NSFont systemFontOfSize: 10]];
-	  } else {
-	  [cell setFont: [NSFont systemFontOfSize: 8]];
-	}
-	[cell setImage: miniPage];	   
-	[cell setTitle: [NSString stringWithFormat: @"%i", i+1]];	  
+    } else
+    {
+      psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
+      if (psdoc == nil) {
+	return;
       }
-      [pagesMatrix sizeToCells];
+    }
 
-      [self makePage];
+  docPages = [psdoc pages];
+  count = [docPages count];
+
+  [pagesMatrix renewRows: 1 columns: count];		
+  miniPage = [NSImage imageNamed: @"page.tiff"];
+
+  for (i = 0; i < count; i++)
+    {
+      NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
+      NSString *psPath = [pageIdent objectForKey: @"pspath"];
+      NSString *tiffPath = [pageIdent objectForKey: @"tiffpath"];
+      NSString *dscPath = [pageIdent objectForKey: @"dscpath"];		
+      PSDocumentPage *pspage = [docPages objectAtIndex: i];
+
+      [pspage setPsPath: psPath];
+      [pspage setTiffPath: tiffPath];
+      [pspage setDscPath: dscPath];
+
+      cell = [pagesMatrix cellAtRow: 0 column: i];
+      if (i < 100)
+	[cell setFont: [NSFont systemFontOfSize: 10]];
+      else
+	[cell setFont: [NSFont systemFontOfSize: 8]];
+    }
+  [cell setImage: miniPage];	   
+  [cell setTitle: [NSString stringWithFormat: @"%i", i+1]];	  
+}
+[pagesMatrix sizeToCells];
+
+[self makePage];
 }
 
 - (void)setBusy:(BOOL)value
