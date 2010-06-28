@@ -61,21 +61,19 @@
 - (void)windowDidLoad
 /* some initialization stuff */
 {
-  [leftButt	setImage: [NSImage imageNamed: @"left.tiff"]];
+  NSLog(@"windowDidLoad");
+  [leftButt  setImage: [NSImage imageNamed: @"left.tiff"]];
   [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
 		
   [matrixScroll setHasHorizontalScroller: YES];
   [matrixScroll setHasVerticalScroller: NO];
 		
-  [zoomButt	setImage: [NSImage imageNamed: @"zoomin.tiff"]];
+  [zoomButt setImage: [NSImage imageNamed: @"zoomin.tiff"]];
   [handButt setImage: [NSImage imageNamed: @"hand.tiff"]];
 		
   [scroll setHasHorizontalScroller: YES];
   [scroll setHasVerticalScroller: YES]; 
   [scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
-  
-  /* the controller is the file owner and not the document, so we invoke it ourselves */
-  [[self document] windowControllerDidLoadNib: self];
 }
 
 - (BOOL)windowShouldClose:(id)sender
