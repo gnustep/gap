@@ -61,7 +61,6 @@
 - (void)windowDidLoad
 /* some initialization stuff */
 {
-  NSLog(@"windowDidLoad");
   [leftButt  setImage: [NSImage imageNamed: @"left.tiff"]];
   [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
 		
