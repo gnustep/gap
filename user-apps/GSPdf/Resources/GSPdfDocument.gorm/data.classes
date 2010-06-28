@@ -1,10 +1,22 @@
 {
     "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "nextPage:",
+	    "previousPage:",
+	    "setAntiAlias:",
+	    "setZoomValue:"
+	);
+	Super = NSObject;
+    };
     GSPdfDocWin = {
 	Actions = (
+	    "nextPage:",
+	    "previousPage:",
+	    "setAntiAlias:",
+	    "setZoomValue:"
 	);
 	Outlets = (
-	    window,
 	    scroll,
 	    leftButt,
 	    rightButt,
@@ -15,6 +27,6 @@
 	    handButt,
 	    antiAliasSwitch
 	);
-	Super = NSObject;
+	Super = NSWindowController;
     };
 }
