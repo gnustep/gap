@@ -17,7 +17,6 @@
     };
     GSPdf = {
 	Actions = (
-	    "openFile:",
 	    "showConsole:",
 	    "showPrefPanel:",
 	    "prefSave:",
