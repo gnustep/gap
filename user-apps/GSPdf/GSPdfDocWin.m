@@ -109,7 +109,7 @@ NSLog(@"should close!!");
 - (IBAction)setZoomValue:(id)sender
 {
   int value = [sender intValue];
-  [[self document] setZoomValue: value];
+  [(GSPdfDocument*)[self document] setZoomValue: value];
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", value]];		
 }
 
