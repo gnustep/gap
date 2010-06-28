@@ -33,6 +33,7 @@
 #import "GSConsole.h"
 #import "GNUstep.h"
 
+
 @implementation GSPdfDocument
 
 - (void)dealloc
@@ -53,45 +54,42 @@
   [super dealloc];
 }
 
-- (id)initForPath:(NSString *)apath
+- (id)initWithContentsOfFile: (NSString *)fileName ofType:(NSString *)docType
 {
+NSLog(@"initWithContentsOfFile");
   self = [super init];
 
   if (self) 
     {	
-      NSArray *docPages;
-      NSString *ext;
-      NSImage *miniPage;
-      id cell;
-      int i, count;
-
-#define RETURNERR {						\
-	NSString *msg = NSLocalizedString(@"Can't load ", @""); \
-	NSRunAlertPanel(@"error",				\
-			[msg stringByAppendingString: myName],	\
-			@"Continue", nil, nil);			\
-	return self;						\
-      }
-
+NSLog(@"GSPdfDocument-initWithCOntentsOfFile-Doctype: %@", docType);
       gspdf = [GSPdf gspdf];
       console = [gspdf console];
       nc = [NSNotificationCenter defaultCenter];
       fm = [NSFileManager defaultManager];		
-      ASSIGN (myPath, apath);
-      ext = [myPath pathExtension];
-      isPdf = (([ext isEqual: @"pdf"]) || ([ext isEqual: @"PDF"]));
+      ASSIGN (myPath, fileName);
+      isPdf = [docType isEqual: @"PDF"];
       ASSIGN (myName, [myPath lastPathComponent]);		
       gsComm = [[gspdf gsPath] retain];
       pageindex = 0;
       resolution = 72;
       pagew = 595;
       pageh = 842;
-      [self setBusy: NO];
+    }
 
-      docwin = [GSPdfDocWin new];
-      window = [docwin window];
-      [window setTitle: myName];
-      [window setDelegate: self];
+  return self;
+}
+
+- (void)windowControllerDidLoadNib: (NSWindowController *)winController
+{
+  NSArray *docPages;
+  NSImage *miniPage;
+  id cell;
+  int i, count;
+      
+  NSLog(@"windowControllerDidLoadNib");
+  [super windowControllerDidLoadNib: winController];
+  
+  [self setBusy: NO];
 
       imageView = [[GSPdfImView alloc] initForDocument: self];
       [imageView setImageAlignment: NSImageAlignBottomLeft];
@@ -99,14 +97,6 @@
 
       scroll = [docwin scroll];
       [scroll setDocumentView: imageView];
-
-      leftButt = [docwin leftButt];
-      [leftButt setTarget: self];
-      [leftButt setAction: @selector(previousPage:)];
-
-      rightButt = [docwin rightButt];
-      [rightButt setTarget: self];
-      [rightButt setAction: @selector(nextPage:)];
 
       matrixScroll = [docwin matrixScroll];
 
@@ -124,22 +114,6 @@
       [pagesMatrix setAction: @selector(goToPage:)];
       [matrixScroll setDocumentView: pagesMatrix];	
 
-      zoomField = [docwin zoomField];
-      [zoomField setSelectable: NO];
-      [zoomField setEditable: NO];
-
-      antiAliasSwitch = [docwin antiAliasSwitch];
-      [antiAliasSwitch setAction: @selector(setAntiAlias:)];
-
-      zoomStepper = [docwin zoomStepper];
-      [zoomStepper setTarget: self];
-      [zoomStepper setAction: @selector(setZoomValue:)];
-      [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]]; 
-
-      zoomButt = [docwin zoomButt];
-
-      handButt = [docwin handButt];
-
       if (isPdf)
 	{
 	  NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
@@ -155,7 +129,7 @@
 	  [args addObject: @"pdf2dsc.ps"];
 	  [args addObject: @"-c"];
 	  [args addObject: @"quit"];
-
+NSLog(@"task1 -> %@", args);
 
 	  ASSIGN (task, [NSTask new]);
 	  [task setLaunchPath: gsComm];
@@ -167,20 +141,18 @@
 	    {
 	      ASSIGN (myPath, dscPath);
 	      psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
-	      if (psdoc == nil) 
-		{
-		  RETURNERR;
-		}
-	    } else
-	    {
-	      RETURNERR;
+	      if (psdoc == nil)
+       {
+       NSLog(@"init with ps file failed");
+		  return;
+    }
 	    }					 
 
 	} else
 	{
 	  psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
 	  if (psdoc == nil) {
-	    RETURNERR;
+	    return;
 	  }
 	}
 
@@ -214,16 +186,12 @@
       [pagesMatrix sizeToCells];
 
       [self makePage];
-    }
-
-  return self;
 }
 
 - (void)setBusy:(BOOL)value
 {
   busy = value;
-  [leftButt setEnabled: !busy];
-  [rightButt setEnabled: !busy];
+  [docwin setBusy: value];
 }
 
 - (NSString *)myPath
@@ -236,7 +204,7 @@
   return isPdf;
 }
 
-- (void)nextPage:(id)sender
+- (void)nextPage
 {
   pageindex++;
   if (pageindex == [[psdoc pages] count])
@@ -247,7 +215,7 @@
   [self makePage];	
 }
 
-- (void)previousPage:(id)sender
+- (void)previousPage
 {
   pageindex--;
   if (pageindex < 0)
@@ -326,7 +294,7 @@
   [args addObject: @"-dDELAYSAFER"];
   [args addObject: @"-dSHORTERRORS"];
   [args addObject: @"-dDOINTERPOLATE"];
-  if ([antiAliasSwitch state] == NSOnState)
+  if ([docwin antiAlias])
     {
       [args addObject: @"-dTextAlphaBits=4"];
       [args addObject: @"-dGraphicsAlphaBits=4"];
@@ -373,16 +341,13 @@
   [task launch]; 
 }
 
-- (void)setZoomValue:(id)sender
+- (void)setZoomValue:(int)value
 {
-  int value = [sender intValue];
-  resolution = ((72.00 / 100) * value);
-  [zoomField setStringValue: [NSString stringWithFormat: @"%i", value]];		
-  [self clearTempFiles];	
-  [self makePage];
+  resolution = ((72.00 / 100) * value);		
+  [self regeneratePage];	
 }
 
-- (void)setAntiAlias:(id)sender
+- (void)regeneratePage
 {		
   [self clearTempFiles];	
   [self makePage];
@@ -509,8 +474,17 @@
     {
       [fm removeFileAtPath: myPath handler: nil];
     }	
-  [window saveFrameUsingName: @"gspdfdoc"];
+//  [window saveFrameUsingName: @"gspdfdoc"];
   return YES;
+}
+
+- (void)makeWindowControllers
+{
+
+NSLog(@"GSPdfDoc - make win controllers");
+  docwin = [[GSPdfDocWin alloc] initWithWindowNibName:@"GSPdfDocument"];
+  NSAssert (docwin, @"created doc nib nil");
+  [self addWindowController: docwin];
 }
 
 @end

@@ -27,65 +27,13 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "GSPdfDocWin.h"
-#import "GNUstep.h"
+#import "GSPdfDocument.h"
 
 @implementation GSPdfDocWin
 
 - (void)dealloc
-{
-  RELEASE (leftButt);
-  RELEASE (rightButt);
-  RELEASE (matrixScroll);
-  RELEASE (zoomField);
-  RELEASE (zoomStepper);
-  RELEASE (zoomButt);
-  RELEASE (handButt);
-  RELEASE (scroll);	
-  if (window && ([window isVisible]))
-    {
-      [window close];
-    }
-  RELEASE (window);
-	
+{	
   [super dealloc];
-}
-
-- (id)init
-{
-  self = [super init];
-
-  if (self)
-    {		
-      nc = [NSNotificationCenter defaultCenter];
-
-      [NSBundle loadNibNamed: @"GSPdfDocument.gorm" owner: self];
-		
-      [leftButt	setImage: [NSImage imageNamed: @"left.tiff"]];
-      [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
-		
-      [matrixScroll setHasHorizontalScroller: YES];
-      [matrixScroll setHasVerticalScroller: NO]; 
-		
-      [zoomButt	setImage: [NSImage imageNamed: @"zoomin.tiff"]];
-      [handButt setImage: [NSImage imageNamed: @"hand.tiff"]];
-		
-      [scroll setHasHorizontalScroller: YES];
-      [scroll setHasVerticalScroller: YES]; 
-      [scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
-
-      if ([window setFrameUsingName: @"gspdfdoc"] == NO)
-	{
-	  [window setFrame: NSMakeRect(300, 200, 500, 400) display: NO];
-  	}    		
-      [window orderFrontRegardless];
-    }
-	
-  return self;
-}
-
-- (NSWindow *)window
-{
-  return window;
 }
 
 - (NSScrollView *)scroll
@@ -93,44 +41,76 @@
   return scroll;
 }
 
-- (NSButton *)leftButt
-{
-  return leftButt;
-}
-
-- (NSButton *)rightButt
-{
-  return rightButt;
-}
-
 - (NSScrollView *)matrixScroll
 {
   return matrixScroll;
 }
 
-- (NSTextField *)zoomField
+
+- (void)setBusy:(BOOL)value
 {
-  return zoomField;
+  [leftButt setEnabled: !value];
+  [rightButt setEnabled: !value];
 }
 
-- (NSStepper *)zoomStepper
+- (BOOL)antiAlias
 {
-  return zoomStepper;
+  return ([antiAliasSwitch state] == NSOnState);
 }
 
-- (NSButton *)zoomButt
+- (void)windowDidLoad
+/* some initialization stuff */
 {
-  return zoomButt;
+  [leftButt	setImage: [NSImage imageNamed: @"left.tiff"]];
+  [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
+		
+  [matrixScroll setHasHorizontalScroller: YES];
+  [matrixScroll setHasVerticalScroller: NO];
+		
+  [zoomButt	setImage: [NSImage imageNamed: @"zoomin.tiff"]];
+  [handButt setImage: [NSImage imageNamed: @"hand.tiff"]];
+		
+  [scroll setHasHorizontalScroller: YES];
+  [scroll setHasVerticalScroller: YES]; 
+  [scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+  
+  /* the controller is the file owner and not the document, so we invoke it ourselves */
+  [[self document] windowControllerDidLoadNib: self];
 }
 
-- (NSButton *)handButt
+- (BOOL)windowShouldClose:(id)sender
 {
-  return handButt;
+NSLog(@"should close!!");
+  [[self document] clearTempFiles];
+/*  if (isPdf)
+    {
+      [fm removeFileAtPath: myPath handler: nil];
+    }	
+  [window saveFrameUsingName: @"gspdfdoc"]; */
+  return YES;
 }
 
-- (NSButton *)antiAliasSwitch
+/* --- ACTIONS --- */
+- (IBAction)nextPage:(id)sender
 {
-  return antiAliasSwitch;
+  [[self document] nextPage];
+}
+
+- (IBAction)previousPage:(id)sender
+{
+  [[self document] previousPage];
+}
+
+- (IBAction)setAntiAlias:(id)sender
+{
+  [[self document] regeneratePage];
+}
+
+- (IBAction)setZoomValue:(id)sender
+{
+  int value = [sender intValue];
+  [[self document] setZoomValue: value];
+  [zoomField setStringValue: [NSString stringWithFormat: @"%i", value]];		
 }
 
 @end

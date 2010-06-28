@@ -62,9 +62,13 @@ static GSPdf *gspdf = nil;
   return gspdf;
 }
 
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)theApplication
+{
+    return NO;
+}
+
 - (void)dealloc
 {
-  RELEASE (documents);
   RELEASE (workPath);
   RELEASE (paperSizes);
   RELEASE (gsConsole);
@@ -138,7 +142,18 @@ static GSPdf *gspdf = nil;
 
 - (BOOL)application:(NSApplication *)app openFile:(NSString *)filename
 {
-  return [self openDocumentForPath: filename];
+  NSDocumentController *dc;
+  GSPdfDocument *doc;
+ NSLog(@"openFile...");   
+  dc = [NSDocumentController sharedDocumentController];
+  doc = [dc openDocumentWithContentsOfFile:filename display:YES];
+
+    if (doc)
+    {
+      ASSIGN (workPath, [filename stringByDeletingLastPathComponent]);
+      return YES;
+    }	
+  return NO;
 }
 
 - (BOOL)applicationShouldTerminate:(NSApplication *)app 
@@ -159,42 +174,6 @@ static GSPdf *gspdf = nil;
     }	
 
   return YES;
-}
-
-- (BOOL)openDocumentForPath:(NSString *)path
-{
-  GSPdfDocument *doc = [[GSPdfDocument alloc] initForPath: path];
-
-  if (doc)
-    {
-      [documents addObject: doc];
-      RELEASE (doc);
-      ASSIGN (workPath, [path stringByDeletingLastPathComponent]);
-      return YES;
-    }	
-  return NO;
-}
-
-- (void)openFile:(id)sender
-{
-  NSOpenPanel *openPanel;
-  int result;
-
-  openPanel = [NSOpenPanel openPanel];
-  [openPanel setTitle: @"open"];	
-  [openPanel setAllowsMultipleSelection: NO];
-  [openPanel setCanChooseFiles: YES];
-  [openPanel setCanChooseDirectories: NO];
-
-  result = [openPanel runModalForDirectory: workPath file: nil 
-		      types: [NSArray arrayWithObjects: @"ps", @"PS", @"eps", @"EPS", @"pdf", @"PDF", nil]];
-
-  if(result != NSOKButton)
-    {
-      return;
-    }
-	
-  [self openDocumentForPath: [openPanel filename]];
 }
 
 - (void)documentHasClosed:(GSPdfDocument *)doc
