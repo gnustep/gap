@@ -27,41 +27,29 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-@interface GSPdfDocWin : NSObject
+@interface GSPdfDocWin : NSWindowController
 {
-	id window;
-	id scroll;
-	id leftButt;
-	id rightButt;
-	id matrixScroll;
-	id zoomField;
-	id zoomStepper;
-	id zoomButt;
-	id handButt;
-	IBOutlet NSButton *antiAliasSwitch;
-	
-	NSNotificationCenter *nc;
+  IBOutlet NSWindow *window;
+  IBOutlet NSScrollView *scroll;
+  IBOutlet NSButton *leftButt;
+  IBOutlet NSButton *rightButt;
+  IBOutlet NSScrollView *matrixScroll;
+  IBOutlet NSTextField *zoomField;
+  IBOutlet NSStepper *zoomStepper;
+  IBOutlet NSButton *zoomButt;
+  IBOutlet NSButton *handButt;
+  IBOutlet NSButton *antiAliasSwitch;
 }
 
-- (NSWindow *)window;
-
 - (NSScrollView *)scroll;
-
-- (NSButton *)leftButt;
-
-- (NSButton *)rightButt;
-
 - (NSScrollView *)matrixScroll;
 
-- (NSTextField *)zoomField;
+- (BOOL)antiAlias;
+- (void)setBusy:(BOOL)value;
 
-- (NSStepper *)zoomStepper;
-
-- (NSButton *)zoomButt;
-
-- (NSButton *)handButt;
-
-- (NSButton *)antiAliasSwitch;
-
+- (IBAction)nextPage:(id)sender;
+- (IBAction)previousPage:(id)sender;
+- (IBAction)setAntiAlias:(id)sender;
+- (IBAction)setZoomValue:(id)sender;
 @end
 

@@ -18,8 +18,10 @@
     NSRole = Application;
     NSTypes = (
 	{
+	    NSDocumentClass = GSPdfDocument;
 	    NSHumanReadableName = NSPostScriptPboardType;
 	    NSIcon = FilePS.tiff;
+	    NSName = PS;
 	    NSRole = Editor;
 	    NSUnixExtensions = (
 		ps,
@@ -27,8 +29,10 @@
 	    );
 	},
 	{
+	    NSDocumentClass = GSPdfDocument;
 	    NSHumanReadableName = NSPostScriptPboardType;
 	    NSIcon = FileEPS.tiff;
+	    NSName = EPS;
 	    NSRole = Editor;
 	    NSUnixExtensions = (
 		eps,
@@ -36,8 +40,10 @@
 	    );
 	},
 	{
+	    NSDocumentClass = GSPdfDocument;
 	    NSHumanReadableName = NSPDFPboardType;
 	    NSIcon = FilePDF.tiff;
+	    NSName = PDF;
 	    NSRole = Editor;
 	    NSUnixExtensions = (
 		pdf,

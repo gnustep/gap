@@ -47,12 +47,12 @@
 
 + (GSPdf *)gspdf;
 
-- (BOOL)openDocumentForPath:(NSString *)path;
+//- (BOOL)openDocumentForPath:(NSString *)path;
 
 /** return the current GhostScript executable path */
 - (NSString *)gsPath;
 
-- (void)openFile:(id)sender;
+//- (void)openFile:(id)sender;
 
 - (void)documentHasClosed:(GSPdfDocument *)doc;
 

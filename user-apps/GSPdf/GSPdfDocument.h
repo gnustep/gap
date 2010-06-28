@@ -35,9 +35,12 @@
 @class GSPdf;
 @class GSConsole;
 
-@interface GSPdfDocument : NSObject
+@interface GSPdfDocument : NSDocument
 {
-	NSString *myPath;
+  NSScrollView *matrixScroll;
+  NSMatrix *pagesMatrix;
+
+ 	NSString *myPath;
 	NSString *myName;
 	PSDocument *psdoc;
 	int pageindex;
@@ -45,17 +48,9 @@
 	int pagew, pageh;
 	NSSize papersize;
 	BOOL isPdf;
-	GSPdfDocWin *docwin;	
-	NSWindow *window;
+	GSPdfDocWin *docwin; /* window controller */
 	NSScrollView *scroll;
 	GSPdfImView *imageView;
-	NSButton *leftButt, *rightButt;
-	NSScrollView *matrixScroll;
-	NSMatrix *pagesMatrix;
-	NSTextField *zoomField;
-	NSStepper *zoomStepper;
-	NSButton *zoomButt;
-	NSButton *handButt;
 	NSString *gsComm;
 	NSTask *task;
 	BOOL busy;	
@@ -63,26 +58,20 @@
 	NSNotificationCenter *nc;	
 	GSPdf *gspdf;
 	GSConsole *console;
-	NSButton *antiAliasSwitch;
 }
-
-- (id)initForPath:(NSString *)apath;
 
 - (NSString *)myPath;
 
 - (BOOL)isPdf;
 
-- (void)nextPage:(id)sender;
-
-- (void)previousPage:(id)sender;
+- (void)nextPage;
+- (void)previousPage;
+- (void)regeneratePage;
 
 - (void)goToPage:(id)sender;
 
 - (void)makePage;
-
-- (void)setZoomValue:(id)sender;
-
-- (void)setAntiAlias:(id)sender;
+- (void)setZoomValue:(int)value;
 
 - (void)setPaperSize:(id)sender;
 
