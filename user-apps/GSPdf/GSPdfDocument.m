@@ -176,13 +176,12 @@ NSLog(@"GSPdfDocument-initWithCOntentsOfFile-Doctype: %@", docType);
 	[cell setFont: [NSFont systemFontOfSize: 10]];
       else
 	[cell setFont: [NSFont systemFontOfSize: 8]];
+      [cell setImage: miniPage];	   
+      [cell setTitle: [NSString stringWithFormat: @"%i", i+1]];	  
     }
-  [cell setImage: miniPage];	   
-  [cell setTitle: [NSString stringWithFormat: @"%i", i+1]];	  
-}
-[pagesMatrix sizeToCells];
+  [pagesMatrix sizeToCells];
 
-[self makePage];
+  [self makePage];
 }
 
 - (void)setBusy:(BOOL)value
@@ -477,8 +476,6 @@ NSLog(@"GSPdfDocument-initWithCOntentsOfFile-Doctype: %@", docType);
 
 - (void)makeWindowControllers
 {
-
-NSLog(@"GSPdfDoc - make win controllers");
   docwin = [[GSPdfDocWin alloc] initWithWindowNibName:@"GSPdfDocument"];
   NSAssert (docwin, @"created doc nib nil");
   [self addWindowController: docwin];
