@@ -48,7 +48,6 @@ GSConsole.h \
 GSPdf.h \
 GSPdfDocument.h \
 GSPdfDocWin.h \
-GSPdfImView.h \
 PSDocument.h \
 ps.h
 
@@ -61,7 +60,6 @@ GSConsole.m \
 GSPdf.m \
 GSPdfDocument.m \
 GSPdfDocWin.m \
-GSPdfImView.m \
 PSDocument.m
 
 #
