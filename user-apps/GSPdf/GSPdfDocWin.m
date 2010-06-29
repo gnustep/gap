@@ -73,6 +73,8 @@
   [scroll setHasHorizontalScroller: YES];
   [scroll setHasVerticalScroller: YES]; 
   [scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+  
+  [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]];
 }
 
 - (BOOL)windowShouldClose:(id)sender
