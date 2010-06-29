@@ -4,12 +4,14 @@
 	Actions = (
 	    "chooseGVPath:",
 	    "chooseGsPath:",
+	    "goToPage:",
 	    "nextPage:",
 	    "openFile:",
 	    "prefCancel:",
 	    "prefSave:",
 	    "previousPage:",
 	    "runInfoPanel:",
+	    "setPaperSize:",
 	    "showConsole:",
 	    "showPrefPanel:"
 	);
@@ -22,6 +24,8 @@
 	    "prefSave:",
 	    "prefCancel:",
 	    "chooseGsPath:",
+	    "previousPage:",
+	    "nextPage:",
 	    "runInfoPanel:"
 	);
 	Outlets = (
@@ -29,6 +33,15 @@
 	    gsPathField
 	);
 	Super = NSObject;
+    };
+    GSPdfDocument = {
+	Actions = (
+	    "goToPage:",
+	    "setPaperSize:"
+	);
+	Outlets = (
+	);
+	Super = NSDocument;
     };
     NSApplication = {
 	Actions = (

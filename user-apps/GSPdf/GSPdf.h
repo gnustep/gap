@@ -69,6 +69,8 @@
 - (IBAction)prefSave:(id)sender;
 - (IBAction)prefCancel:(id)sender;
 - (IBAction)chooseGsPath:(id)sender;
+- (IBAction)previousPage:(id)sender;
+- (IBAction)nextPage:(id)sender;
 
 - (void)runInfoPanel:(id)sender;
 
