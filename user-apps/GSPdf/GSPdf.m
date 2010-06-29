@@ -2,7 +2,7 @@
  *  GSPdf.m: Principal Class  
  *  of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002-2009 GNUstep Application Project
+ *  Copyright (c) 2002-2010 GNUstep Application Project
  *  
  *  Author: Riccardo Mottola
  *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
@@ -262,6 +262,16 @@ static GSPdf *gspdf = nil;
       return;
     }
   [gsPathField setStringValue:[openPanel filename]];
+}
+
+- (IBAction)previousPage:(id)sender
+{
+  [[[NSDocumentController sharedDocumentController] currentDocument] previousPage];
+}
+
+- (IBAction)nextPage:(id)sender
+{
+  [[[NSDocumentController sharedDocumentController] currentDocument] nextPage];
 }
 
 - (void)runInfoPanel:(id)sender
