@@ -45,7 +45,6 @@
     } 
   RELEASE (task);
   RELEASE (myPath);
-  RELEASE (myName);
   RELEASE (psdoc);
   RELEASE (imageView);
   RELEASE (pagesMatrix);
@@ -54,28 +53,64 @@
   [super dealloc];
 }
 
-- (id)initWithContentsOfFile: (NSString *)fileName ofType:(NSString *)docType
+- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)docType
 {
-  self = [super init];
+  NSLog(@"GSPdfDocument-readFromFile-Doctype: %@", docType);
+  gspdf = [GSPdf gspdf];
+  console = [gspdf console];
+  nc = [NSNotificationCenter defaultCenter];
+  fm = [NSFileManager defaultManager];		
+  ASSIGN (myPath, fileName);
+  isPdf = [docType isEqual: @"PDF"];	
+  gsComm = [[gspdf gsPath] retain];
+  pageindex = 0;
+  resolution = 72;
+  pagew = 595;
+  pageh = 842;
 
-  if (self) 
-    {	
-NSLog(@"GSPdfDocument-initWithCOntentsOfFile-Doctype: %@", docType);
-      gspdf = [GSPdf gspdf];
-      console = [gspdf console];
-      nc = [NSNotificationCenter defaultCenter];
-      fm = [NSFileManager defaultManager];		
-      ASSIGN (myPath, fileName);
-      isPdf = [docType isEqual: @"PDF"];
-      ASSIGN (myName, [myPath lastPathComponent]);		
-      gsComm = [[gspdf gsPath] retain];
-      pageindex = 0;
-      resolution = 72;
-      pagew = 595;
-      pageh = 842;
+  if (isPdf)
+    {
+      NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
+      NSString *dscPath = [pageIdent objectForKey: @"dscpath"];
+      NSMutableArray *args = [NSMutableArray arrayWithCapacity: 1];		
+
+      [args addObject: @"-q"];
+      [args addObject: @"-dNODISPLAY"];
+      [args addObject: @"-dSAFER"];
+      [args addObject: @"-dDELAYSAFER"];
+      [args addObject: [NSString stringWithFormat: @"-sPDFname=%@", myPath]];
+      [args addObject: [NSString stringWithFormat: @"-sDSCname=%@", dscPath]];
+      [args addObject: @"pdf2dsc.ps"];
+      [args addObject: @"-c"];
+      [args addObject: @"quit"];
+
+      ASSIGN (task, [NSTask new]);
+      [task setLaunchPath: gsComm];
+      [task setArguments: args];		
+      [task launch];
+      [task waitUntilExit];
+
+      if ([task terminationStatus] == 0)
+	{
+	  ASSIGN (myPath, dscPath);
+	  psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
+	  if (psdoc == nil)
+	    {
+	      NSLog(@"init with ps file failed");
+	      return NO;
+	    }
+	}					 
+
+    } else
+    {
+      psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
+      if (psdoc == nil)
+	{
+	  return NO;
+	}
     }
 
-  return self;
+  return YES;
 }
 
 - (void)windowControllerDidLoadNib: (NSWindowController *)winController
@@ -112,46 +147,6 @@ NSLog(@"GSPdfDocument-initWithCOntentsOfFile-Doctype: %@", docType);
   [pagesMatrix setAction: @selector(goToPage:)];
   [matrixScroll setDocumentView: pagesMatrix];	
 
-  if (isPdf)
-    {
-      NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
-      NSString *dscPath = [pageIdent objectForKey: @"dscpath"];
-      NSMutableArray *args = [NSMutableArray arrayWithCapacity: 1];		
-
-      [args addObject: @"-q"];
-      [args addObject: @"-dNODISPLAY"];
-      [args addObject: @"-dSAFER"];
-      [args addObject: @"-dDELAYSAFER"];
-      [args addObject: [NSString stringWithFormat: @"-sPDFname=%@", myPath]];
-      [args addObject: [NSString stringWithFormat: @"-sDSCname=%@", dscPath]];
-      [args addObject: @"pdf2dsc.ps"];
-      [args addObject: @"-c"];
-      [args addObject: @"quit"];
-
-      ASSIGN (task, [NSTask new]);
-      [task setLaunchPath: gsComm];
-      [task setArguments: args];		
-      [task launch];
-      [task waitUntilExit];
-
-      if ([task terminationStatus] == 0)
-	{
-	  ASSIGN (myPath, dscPath);
-	  psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
-	  if (psdoc == nil)
-	    {
-	      NSLog(@"init with ps file failed");
-	      return;
-	    }
-	}					 
-
-    } else
-    {
-      psdoc = [[PSDocument alloc] initWithPsFileAtPath: myPath];
-      if (psdoc == nil) {
-	return;
-      }
-    }
 
   docPages = [psdoc pages];
   count = [docPages count];

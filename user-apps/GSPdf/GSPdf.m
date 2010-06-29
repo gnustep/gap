@@ -163,11 +163,11 @@ static GSPdf *gspdf = nil;
   for (i = 0; i < [documents count]; i++)
     {
       GSPdfDocument *doc = [documents objectAtIndex: i];
-      BOOL isPdf = [doc isPdf];
 				
-      [doc clearTempFiles];
+      [doc clearTempFiles]; 
 		
-      if (isPdf) {
+      if ([doc isPdf])
+      { // TODO shouldn't the document handle this by itselsf?
 	[[NSFileManager defaultManager] removeFileAtPath: [doc myPath] 
 					handler: nil];		
       }
