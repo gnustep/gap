@@ -31,7 +31,6 @@
 @class GSPdfDocWin;
 @class PSDocument;
 @class PSDocumentPage;
-@class GSPdfImView;
 @class GSPdf;
 @class GSConsole;
 
@@ -39,24 +38,26 @@
 {
   NSScrollView *matrixScroll;
   NSMatrix *pagesMatrix;
+  NSImageView *imageView;
+  NSScrollView *scroll;
 
- 	NSString *myPath;
-	PSDocument *psdoc;
-	int pageindex;
-	float resolution;
-	int pagew, pageh;
-	NSSize papersize;
-	BOOL isPdf;
-	GSPdfDocWin *docwin; /* window controller */
-	NSScrollView *scroll;
-	GSPdfImView *imageView;
-	NSString *gsComm;
-	NSTask *task;
-	BOOL busy;	
-	NSFileManager *fm;
-	NSNotificationCenter *nc;	
-	GSPdf *gspdf;
-	GSConsole *console;
+  GSConsole *console;
+
+  NSString *myPath;
+  PSDocument *psdoc;
+  int pageindex;
+  float resolution;
+  int pagew, pageh;
+  NSSize papersize;
+  BOOL isPdf;
+  GSPdfDocWin *docwin; /* window controller */  
+  NSString *gsComm;
+  NSTask *task;
+  BOOL busy;	
+  NSFileManager *fm;
+  NSNotificationCenter *nc;	
+  GSPdf *gspdf;
+  
 }
 
 - (NSString *)myPath;

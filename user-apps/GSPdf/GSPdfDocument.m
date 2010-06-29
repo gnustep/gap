@@ -29,7 +29,6 @@
 #import "GSPdfDocWin.h"
 #import "PSDocument.h"
 #import "GSPdf.h"
-#import "GSPdfImView.h"
 #import "GSConsole.h"
 #import "GNUstep.h"
 
@@ -124,7 +123,7 @@
   
   [self setBusy: NO];
 
-  imageView = [[GSPdfImView alloc] initForDocument: self];
+  imageView = [[NSImageView alloc] init];
   [imageView setImageAlignment: NSImageAlignBottomLeft];
   [imageView setImageScaling: NSScaleNone];
 
