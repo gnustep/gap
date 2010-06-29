@@ -41,7 +41,6 @@
   NSMatrix *pagesMatrix;
 
  	NSString *myPath;
-	NSString *myName;
 	PSDocument *psdoc;
 	int pageindex;
 	float resolution;
