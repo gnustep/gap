@@ -36,7 +36,12 @@
 @implementation GSPdfDocument
 
 - (void)dealloc
-{	
+{
+  [self clearTempFiles];
+  if (isPdf)
+    {
+      [fm removeFileAtPath: myPath handler: nil];
+    }
   [[NSNotificationCenter defaultCenter] removeObserver: self];
   if (task && [task isRunning])
     {
@@ -457,16 +462,6 @@
     }
 }
 
-- (BOOL)windowShouldClose:(id)sender
-{
-  [self clearTempFiles];
-  if (isPdf)
-    {
-      [fm removeFileAtPath: myPath handler: nil];
-    }	
-//  [window saveFrameUsingName: @"gspdfdoc"];
-  return YES;
-}
 
 - (void)makeWindowControllers
 {

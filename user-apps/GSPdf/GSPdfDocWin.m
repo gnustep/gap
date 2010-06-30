@@ -77,17 +77,6 @@
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]];
 }
 
-- (BOOL)windowShouldClose:(id)sender
-{
-NSLog(@"should close!!");
-  [[self document] clearTempFiles];
-/*  if (isPdf)
-    {
-      [fm removeFileAtPath: myPath handler: nil];
-    }	
-  [window saveFrameUsingName: @"gspdfdoc"]; */
-  return YES;
-}
 
 /* --- ACTIONS --- */
 - (IBAction)nextPage:(id)sender
