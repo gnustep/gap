@@ -495,7 +495,7 @@
   [personView beginEditingInFirstCell];
 }
 
-- (void) doDeletePerson: (id) sender
+- (IBAction) doDeletePerson: (id) sender
 {
   NSArray *a;
   NSEnumerator *e;
