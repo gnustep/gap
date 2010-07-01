@@ -1,13 +1,11 @@
 // ADConverter.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
-// 
+// author: BjÃ¶rn Giesler <giesler@ira.uka.de>
+// Riccardo Mottola
+
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+
 
 /* system includes */
 /* (none) */
@@ -89,15 +87,52 @@ ADConverterManager *_manager = nil;
 {
   id<ADInputConverting> obj;
   Class c;
+  NSData *data;
+  NSString *string;
 
   c = [_icClasses objectForKey: [[filename pathExtension]
 				  lowercaseString]];
   if(!c) return nil;
 
   obj = [[[c alloc] initForInput] autorelease];
-  if(![obj useString: [NSString stringWithContentsOfFile: filename]])
+  data = [NSData dataWithContentsOfFile: filename];
+  if (!data) {
+    NSLog(@"Error while reading file %@", filename);
     return nil;
-
+  }
+  string = [[NSString alloc] initWithData:data encoding:NSUnicodeStringEncoding];
+  if (string) {
+    NSLog(@"File in NSUnicodeStringEncoding");
+    goto encoding;
+  }
+  string = [[NSString alloc] initWithData:data encoding: NSUTF16BigEndianStringEncoding];
+  if (string) {
+    NSLog(@"File in NSUTF16BigEndianStringEncoding");
+    goto encoding;
+  }
+  string = [[NSString alloc] initWithData:data encoding: NSUTF16LittleEndianStringEncoding];
+  if (string) {
+    NSLog(@"File in NSUTF16LittleEndianStringEncoding");
+    goto encoding;
+  }
+  string = [[NSString alloc] initWithData:data encoding: NSUTF16LittleEndianStringEncoding];
+  if (string) {
+    NSLog(@"File in NSUTF16LittleEndianStringEncoding");
+    goto encoding;
+  }
+  string = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
+  if (string) {
+    NSLog(@"File in NSUTF8StringEncoding");
+    goto encoding;
+  }
+  string = [[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding];
+  if (!string) {
+    NSLog(@"No encoding found for file %@, aborting.", filename);
+    return nil;
+  }
+ encoding:
+  if (![obj useString: AUTORELEASE(string)])
+    return nil;
   return obj;
 }
 
