@@ -15,6 +15,7 @@ Since 0.4.8:
   o Makefiles work on windows
   o Birthday support (for SimpleAgenda)
   o fixes in VCF import (encoding, CR-LF)
+  o fixed deleting of a person
 
 Since 0.4.7:
 ============

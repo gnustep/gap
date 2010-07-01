@@ -12,6 +12,7 @@
 	    "doEditPerson:",
 	    "doTogglePersonEditable:",
 	    "doCreatePerson:",
+	    "doDeletePerson:",
 	    "doImportPerson:",
 	    "doExportPerson:",
 	    "doSetMe:",

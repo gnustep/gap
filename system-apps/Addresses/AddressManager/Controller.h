@@ -42,6 +42,7 @@
 - (void) doEditPerson: (id) sender;
 - (void) doTogglePersonEditable: (id) sender;
 - (void) doCreatePerson: (id) sender;
+- (IBAction) doDeletePerson: (id) sender;
 - (void) doImportPerson: (id) sender;
 - (void) doExportPerson: (id) sender;
 - (void) doSetMe: (id) sender;
