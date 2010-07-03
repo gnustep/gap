@@ -25,7 +25,14 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSWindow.h>
+#import <AppKit/NSWindowController.h>
+#import <AppKit/NSScrollView.h>
+#import <AppKit/NSTextView.h>
+#import <AppKit/NSStepper.h>
+#import <AppKit/NSButton.h>
+
+#import "GSPdfView.h"
 
 @interface GSPdfDocWin : NSWindowController
 {
@@ -39,10 +46,14 @@
   IBOutlet NSButton *zoomButt;
   IBOutlet NSButton *handButt;
   IBOutlet NSButton *antiAliasSwitch;
+
+  GSPdfView *imageView;
 }
 
-- (NSScrollView *)scroll;
+- (GSPdfView *)imageView;
 - (NSScrollView *)matrixScroll;
+
+- (void)mouseDown:(NSEvent *)theEvent;
 
 - (BOOL)antiAlias;
 - (void)setBusy:(BOOL)value;

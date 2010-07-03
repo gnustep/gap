@@ -32,13 +32,9 @@
 @implementation GSPdfDocWin
 
 - (void)dealloc
-{	
-  [super dealloc];
-}
-
-- (NSScrollView *)scroll
 {
-  return scroll;
+  RELEASE (imageView);
+  [super dealloc];
 }
 
 - (NSScrollView *)matrixScroll
@@ -46,6 +42,10 @@
   return matrixScroll;
 }
 
+- (GSPdfView *)imageView
+{
+  return imageView;
+}
 
 - (void)setBusy:(BOOL)value
 {
@@ -73,10 +73,28 @@
   [scroll setHasHorizontalScroller: YES];
   [scroll setHasVerticalScroller: YES]; 
   [scroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+
+  imageView = [[GSPdfView alloc] init];
+  [imageView setImageAlignment: NSImageAlignBottomLeft];
+  [imageView setImageScaling: NSScaleNone];
+  [imageView setDelegate: self];
+
+  [scroll setDocumentView: imageView];
   
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]];
 }
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+  if ([zoomButt state] == NSOnState)
+    {
+      NSLog(@"zoom");
+    }
+  else if([handButt state] == NSOnState)
+    {
+      NSLog(@"pan");
+    }
+}
 
 /* --- ACTIONS --- */
 - (IBAction)nextPage:(id)sender

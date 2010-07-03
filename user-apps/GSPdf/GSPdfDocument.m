@@ -50,7 +50,6 @@
   RELEASE (task);
   RELEASE (myPath);
   RELEASE (psdoc);
-  RELEASE (imageView);
   RELEASE (pagesMatrix);
   [gsComm release];
 
@@ -59,7 +58,6 @@
 
 - (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)docType
 {
-  NSLog(@"GSPdfDocument-readFromFile-Doctype: %@", docType);
   gspdf = [GSPdf gspdf];
   console = [gspdf console];
   nc = [NSNotificationCenter defaultCenter];
@@ -127,13 +125,6 @@
   [super windowControllerDidLoadNib: winController];
   
   [self setBusy: NO];
-
-  imageView = [[NSImageView alloc] init];
-  [imageView setImageAlignment: NSImageAlignBottomLeft];
-  [imageView setImageScaling: NSScaleNone];
-
-  scroll = [docwin scroll];
-  [scroll setDocumentView: imageView];
 
   matrixScroll = [docwin matrixScroll];
 
@@ -252,8 +243,8 @@
   if ([fm fileExistsAtPath: tiffPath])
     {
       NSImage *image = [[NSImage alloc] initWithContentsOfFile: tiffPath];
-      [imageView setFrameSize: [image size]];
-      [imageView setImage: image];
+      [[docwin imageView] setFrameSize: [image size]];
+      [[docwin imageView] setImage: image];
       RELEASE (image);
       [self setBusy: NO];
       return;
@@ -405,8 +396,8 @@
 	  [image setBackgroundColor: [NSColor windowBackgroundColor]];
 
 	  frame.size = [image size];
-	  [imageView setFrame: frame];
-	  [imageView setImage: image];
+	  [[docwin imageView] setFrame: frame];
+	  [[docwin imageView] setImage: image];
 	  RELEASE (image);
 
 	  if (task && [task isRunning])

@@ -38,8 +38,6 @@
 {
   NSScrollView *matrixScroll;
   NSMatrix *pagesMatrix;
-  NSImageView *imageView;
-  NSScrollView *scroll;
 
   GSConsole *console;
 

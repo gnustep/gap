@@ -16,7 +16,8 @@
 	GSPdf.m,
 	GSPdfDocument.m,
 	GSPdfDocWin.m,
-	PSDocument.m
+	PSDocument.m,
+	GSPdfView.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -32,7 +33,8 @@
 	GSPdfDocument.h,
 	GSPdfDocWin.h,
 	PSDocument.h,
-	ps.h
+	ps.h,
+	GSPdfView.h
     );
     IMAGES = (
 	FileEPS.tiff,
