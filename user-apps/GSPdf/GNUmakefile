@@ -49,7 +49,8 @@ GSPdf.h \
 GSPdfDocument.h \
 GSPdfDocWin.h \
 PSDocument.h \
-ps.h
+ps.h \
+GSPdfView.h
 
 #
 # Class files
@@ -60,7 +61,8 @@ GSConsole.m \
 GSPdf.m \
 GSPdfDocument.m \
 GSPdfDocWin.m \
-PSDocument.m
+PSDocument.m \
+GSPdfView.m
 
 #
 # Other sources
