@@ -58,6 +58,8 @@
 - (BOOL)antiAlias;
 - (void)setBusy:(BOOL)value;
 
+- (IBAction)selectZoomButt:(id)sender;
+- (IBAction)selectHandButt:(id)sender;
 - (IBAction)nextPage:(id)sender;
 - (IBAction)previousPage:(id)sender;
 - (IBAction)setAntiAlias:(id)sender;

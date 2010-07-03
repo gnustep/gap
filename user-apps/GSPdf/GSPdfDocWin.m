@@ -97,6 +97,18 @@
 }
 
 /* --- ACTIONS --- */
+
+- (IBAction)selectZoomButt:(id)sender
+{
+  [handButt setState: NSOffState];
+}
+
+- (IBAction)selectHandButt:(id)sender
+{
+  [zoomButt setState: NSOffState];
+}
+
+
 - (IBAction)nextPage:(id)sender
 {
   [[self document] nextPage];
