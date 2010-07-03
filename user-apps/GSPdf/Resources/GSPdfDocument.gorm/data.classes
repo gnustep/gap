@@ -4,6 +4,8 @@
 	Actions = (
 	    "nextPage:",
 	    "previousPage:",
+	    "selectHandButt:",
+	    "selectZoomButt:",
 	    "setAntiAlias:",
 	    "setZoomValue:"
 	);
@@ -11,6 +13,8 @@
     };
     GSPdfDocWin = {
 	Actions = (
+	    "selectZoomButt:",
+	    "selectHandButt:",
 	    "nextPage:",
 	    "previousPage:",
 	    "setAntiAlias:",
