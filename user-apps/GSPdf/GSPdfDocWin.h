@@ -54,6 +54,8 @@
 - (NSScrollView *)matrixScroll;
 
 - (void)mouseDown:(NSEvent *)theEvent;
+- (void)mouseDragged:(NSEvent *)theEvent;
+- (void)mouseUp:(NSEvent *)theEvent;
 
 - (BOOL)antiAlias;
 - (void)setBusy:(BOOL)value;
