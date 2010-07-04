@@ -37,4 +37,16 @@
   [delegate mouseDown: theEvent];
 }
 
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+  [super mouseDragged: theEvent];
+  [delegate mouseDragged: theEvent];
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+  [super mouseUp: theEvent];
+  [delegate mouseUp: theEvent];
+}
+
 @end

@@ -88,12 +88,46 @@
 {
   if ([zoomButt state] == NSOnState)
     {
-      NSLog(@"zoom");
+      if([theEvent type] == NSLeftMouseDown)
+        {
+          if ([theEvent modifierFlags] & NSControlKeyMask)
+            {
+              [zoomStepper setIntValue: [zoomStepper intValue] - [zoomStepper increment]];
+              [self setZoomValue: zoomStepper];
+            }
+          else
+            {
+              [zoomStepper setIntValue: [zoomStepper intValue] + [zoomStepper increment]];
+              [self setZoomValue: zoomStepper];
+            }
+        }
     }
-  else if([handButt state] == NSOnState)
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+NSLog(@"drag");
+  if([handButt state] == NSOnState)
     {
-      NSLog(@"pan");
+      if ([theEvent type] == NSLeftMouseDragged)
+      {
+        float deltaX, deltaY;
+        
+        deltaX = [theEvent deltaX];
+        deltaY = [theEvent deltaY];
+        NSLog(@"pan %f %f", deltaX, deltaY);
+        if ([scroll hasHorizontalScoller])
+          {
+            NSLog(@"horiz");
+            [[scroll horizontalScoller] setFloatValue: [[scroll horizontalScoller] floatValue] + deltaX];
+          }
+      }
     }
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+  NSLog(@"up");
 }
 
 /* --- ACTIONS --- */
