@@ -22,7 +22,7 @@
 	    NSHumanReadableName = NSPostScriptPboardType;
 	    NSIcon = FilePS.tiff;
 	    NSName = PS;
-	    NSRole = Editor;
+	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		ps,
 		PS
@@ -33,7 +33,7 @@
 	    NSHumanReadableName = NSPostScriptPboardType;
 	    NSIcon = FileEPS.tiff;
 	    NSName = EPS;
-	    NSRole = Editor;
+	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		eps,
 		EPS
@@ -44,7 +44,7 @@
 	    NSHumanReadableName = NSPDFPboardType;
 	    NSIcon = FilePDF.tiff;
 	    NSName = PDF;
-	    NSRole = Editor;
+	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		pdf,
 		PDF
