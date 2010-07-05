@@ -116,10 +116,10 @@ NSLog(@"drag");
         deltaX = [theEvent deltaX];
         deltaY = [theEvent deltaY];
         NSLog(@"pan %f %f", deltaX, deltaY);
-        if ([scroll hasHorizontalScoller])
+        if ([scroll hasHorizontalScroller])
           {
             NSLog(@"horiz");
-            [[scroll horizontalScoller] setFloatValue: [[scroll horizontalScoller] floatValue] + deltaX];
+            [[scroll horizontalScroller] setFloatValue: [[scroll horizontalScroller] floatValue] + deltaX];
           }
       }
     }
