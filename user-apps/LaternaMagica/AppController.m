@@ -747,22 +747,11 @@
 	case 3: /* both */
 	  newW = givenWidth;
 	  newH = givenWidth / aspectRatio;
-	  if (givenWidth > [srcImageRep size].width)
-	    {
-	      if (newH < givenHeight)
-		{
-		  newH = givenHeight;
-		  newW = givenHeight * aspectRatio;
-		}
-	    }
-	  else
-	    {
-	      if (newH > givenHeight)
-		{
-		  newH = givenHeight;
-		  newW = givenHeight * aspectRatio;
-		}
-	    }
+          if (newH > givenHeight)
+            {
+              newH = givenHeight;
+              newW = givenHeight * aspectRatio;
+            }
 	  break;
 	case 4: /* largest side */
 	  if ([srcImageRep size].height > [srcImageRep size].width)
