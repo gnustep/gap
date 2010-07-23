@@ -53,6 +53,8 @@
 - (GSPdfView *)imageView;
 - (NSScrollView *)matrixScroll;
 
+- (void)scrollToOrigin;
+
 - (void)mouseDown:(NSEvent *)theEvent;
 - (void)mouseDragged:(NSEvent *)theEvent;
 - (void)mouseUp:(NSEvent *)theEvent;
@@ -66,5 +68,6 @@
 - (IBAction)previousPage:(id)sender;
 - (IBAction)setAntiAlias:(id)sender;
 - (IBAction)setZoomValue:(id)sender;
+
 @end
 
