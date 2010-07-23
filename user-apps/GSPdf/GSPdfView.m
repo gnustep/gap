@@ -33,7 +33,7 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-  [super mouseDown: theEvent];
+  //  [super mouseDown: theEvent];
   [delegate mouseDown: theEvent];
 }
 

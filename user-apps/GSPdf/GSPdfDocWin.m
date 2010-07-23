@@ -77,11 +77,21 @@
   imageView = [[GSPdfView alloc] init];
   [imageView setImageAlignment: NSImageAlignBottomLeft];
   [imageView setImageScaling: NSScaleNone];
+  [imageView setEditable: NO];
   [imageView setDelegate: self];
 
   [scroll setDocumentView: imageView];
-  
+
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]];
+}
+
+- (void)scrollToOrigin
+{
+  
+  NSLog(@"height: %f",  [[scroll contentView] bounds].size.height);
+  //  [[scroll contentView] scrollToPoint: NSMakePoint(0, [[scroll contentView] bounds].origin.y + [[scroll contentView] bounds].size.height)];
+  [scroll reflectScrolledClipView: [scroll contentView]];
+  [scroll setNeedsDisplay: YES];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
@@ -112,15 +122,17 @@ NSLog(@"drag");
       if ([theEvent type] == NSLeftMouseDragged)
       {
         float deltaX, deltaY;
+	NSPoint oldPoint;
+	NSClipView *contentView;
         
         deltaX = [theEvent deltaX];
         deltaY = [theEvent deltaY];
         NSLog(@"pan %f %f", deltaX, deltaY);
-        if ([scroll hasHorizontalScroller])
-          {
-            NSLog(@"horiz");
-            [[scroll horizontalScroller] setFloatValue: [[scroll horizontalScroller] floatValue] + deltaX];
-          }
+
+	contentView = [scroll contentView];
+	oldPoint = [contentView bounds].origin;
+        [contentView scrollToPoint: NSMakePoint(oldPoint.x + deltaX, oldPoint.y + deltaY)];
+      	[scroll setNeedsDisplay: YES];
       }
     }
 }

@@ -111,7 +111,7 @@
 	  return NO;
 	}
     }
-
+ 
   return YES;
 }
 
@@ -121,7 +121,7 @@
   NSImage *miniPage;
   id cell;
   int i, count;
-      
+    
   [super windowControllerDidLoadNib: winController];
   
   [self setBusy: NO];
@@ -172,6 +172,7 @@
   [pagesMatrix sizeToCells];
 
   [self makePage];
+  [(GSPdfDocWin*)winController scrollToOrigin];
 }
 
 - (void)setBusy:(BOOL)value
