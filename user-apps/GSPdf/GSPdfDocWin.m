@@ -116,7 +116,6 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-NSLog(@"drag");
   if([handButt state] == NSOnState)
     {
       if ([theEvent type] == NSLeftMouseDragged)
@@ -127,11 +126,10 @@ NSLog(@"drag");
         
         deltaX = [theEvent deltaX];
         deltaY = [theEvent deltaY];
-        NSLog(@"pan %f %f", deltaX, deltaY);
 
 	contentView = [scroll contentView];
 	oldPoint = [contentView bounds].origin;
-        [contentView scrollToPoint: NSMakePoint(oldPoint.x + deltaX, oldPoint.y + deltaY)];
+        [contentView scrollToPoint: NSMakePoint(oldPoint.x - deltaX, oldPoint.y - deltaY)];
       	[scroll setNeedsDisplay: YES];
       }
     }
