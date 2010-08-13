@@ -82,6 +82,7 @@
 		854931F311143DF600C4D928 /* GRCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */; };
 		854931F411143DF600C4D928 /* GRCircleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8518AB1B10E8A8ED004A2013 /* GRCircleEditor.m */; };
 		854931F611143DF600C4D928 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85BB08521215F83A00B9699B /* PropertiesEditor.nib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
@@ -126,6 +127,7 @@
 		85AEB2960CA43E7A00A80101 /* GRBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBox.m; sourceTree = "<group>"; };
 		85B1DAAA0D8B2E2400A80103 /* GRPathObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPathObject.h; sourceTree = "<group>"; };
 		85B1DAAB0D8B2E2400A80103 /* GRPathObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPathObject.m; sourceTree = "<group>"; };
+		85BB08531215F83A00B9699B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PropertiesEditor.nib; sourceTree = "<group>"; };
 		85CB5DF20D72C0F000A80101 /* GRDrawableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDrawableObject.h; sourceTree = "<group>"; };
 		85CB5DF30D72C0F000A80101 /* GRDrawableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDrawableObject.m; sourceTree = "<group>"; };
 		85CB5DF60D72C8D000A80101 /* GRObjectEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRObjectEditor.h; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
+				85BB08521215F83A00B9699B /* PropertiesEditor.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
 				2A37F4B4FDCFA73011CA2CEA /* GRDocument.nib */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
@@ -447,6 +450,7 @@
 				854931DB11143DF600C4D928 /* LineJoin3.tiff in Resources */,
 				854931DC11143DF600C4D928 /* graphos_icons.icns in Resources */,
 				854931DD11143DF600C4D928 /* graphos_doc_icons.icns in Resources */,
+				85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +519,14 @@
 				2A37F4BAFDCFA73011CA2CEA /* English */,
 			);
 			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		85BB08521215F83A00B9699B /* PropertiesEditor.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85BB08531215F83A00B9699B /* English */,
+			);
+			name = PropertiesEditor.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

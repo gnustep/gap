@@ -14,6 +14,7 @@
 		activeExecutable = 854931FD11143DF600C4D928 /* Draw */;
 		activeTarget = 854931A711143DF600C4D928 /* Draw */;
 		addToTargets = (
+			854931A711143DF600C4D928 /* Draw */,
 		);
 		breakpoints = (
 		);
@@ -66,7 +67,7 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 289123119;
+			PBXPerProjectTemplateStateSaveDate = 303429524;
 			PBXWorkspaceContents = (
 				{
 					LeftSlideOut = {
@@ -651,7 +652,16 @@
 					WindowLocation = "{2, 61}";
 				},
 			);
-			PBXWorkspaceStateSaveDate = 289123119;
+			PBXWorkspaceStateSaveDate = 303429524;
+		};
+		perUserProjectItems = {
+			8509888A11D810DC00473551 = 8509888A11D810DC00473551 /* PBXTextBookmark */;
+			8509888B11D810DC00473551 = 8509888B11D810DC00473551 /* PBXTextBookmark */;
+			8509888D11D810DC00473551 = 8509888D11D810DC00473551 /* PBXTextBookmark */;
+			8509888E11D810DC00473551 = 8509888E11D810DC00473551 /* PBXTextBookmark */;
+			8509889211D810DC00473551 = 8509889211D810DC00473551 /* PBXTextBookmark */;
+			8509889311D810DC00473551 = 8509889311D810DC00473551 /* PBXTextBookmark */;
+			85D68BBD11DEA3410049A062 = 85D68BBD11DEA3410049A062 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 85A6DBCE10D41AEF0048FE0B /* Source Control */;
 		userBuildSettings = {
@@ -659,17 +669,17 @@
 	};
 	2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {935, 1708}}";
-			sepNavSelRange = "{1249, 0}";
-			sepNavVisRect = "{{0, 992}, {935, 716}}";
+			sepNavIntBoundsRect = "{{0, 0}, {615, 1694}}";
+			sepNavSelRange = "{1945, 71}";
+			sepNavVisRect = "{{0, 515}, {615, 552}}";
 			sepNavWindowFrame = "{{418, 71}, {974, 845}}";
 		};
 	};
 	2A37F4AEFDCFA73011CA2CEA /* GRDocument.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {820, 649}}";
+			sepNavIntBoundsRect = "{{0, 0}, {615, 552}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {820, 649}}";
+			sepNavVisRect = "{{0, 0}, {615, 552}}";
 			sepNavWindowFrame = "{{528, 106}, {859, 778}}";
 		};
 	};
@@ -680,6 +690,66 @@
 			sepNavVisRect = "{{0, 0}, {899, 661}}";
 			sepNavWindowFrame = "{{15, 158}, {938, 775}}";
 		};
+	};
+	8509888A11D810DC00473551 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2A37F4AEFDCFA73011CA2CEA /* GRDocument.h */;
+		name = "GRDocument.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1004;
+		vrLoc = 0;
+	};
+	8509888B11D810DC00473551 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F539B1ED08A2D91C01A8012F /* GRDocView.h */;
+		name = "GRDocView.h: 5";
+		rLen = 0;
+		rLoc = 59;
+		rType = 0;
+		vrLen = 918;
+		vrLoc = 1037;
+	};
+	8509888D11D810DC00473551 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */;
+		name = loadDataRepresentation;
+		rLen = 22;
+		rLoc = 1953;
+		rType = 0;
+		vrLen = 1123;
+		vrLoc = 1508;
+	};
+	8509888E11D810DC00473551 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2A37F4AEFDCFA73011CA2CEA /* GRDocument.h */;
+		name = "GRDocument.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1004;
+		vrLoc = 0;
+	};
+	8509889211D810DC00473551 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F539B1ED08A2D91C01A8012F /* GRDocView.h */;
+		name = "GRDocView.h: 5";
+		rLen = 0;
+		rLoc = 59;
+		rType = 0;
+		vrLen = 918;
+		vrLoc = 1037;
+	};
+	8509889311D810DC00473551 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */;
+		name = "- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType";
+		rLen = 71;
+		rLoc = 1945;
+		rType = 0;
+		vrLen = 1071;
+		vrLoc = 1096;
 	};
 	853877F50DA0375200A80103 /* GRPathEditor.m */ = {
 		uiCtxt = {
@@ -804,6 +874,16 @@
 			sepNavWindowFrame = "{{15, 88}, {974, 845}}";
 		};
 	};
+	85D68BBD11DEA3410049A062 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2A37F4ACFDCFA73011CA2CEA /* GRDocument.m */;
+		name = "- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType";
+		rLen = 71;
+		rLoc = 1945;
+		rType = 0;
+		vrLen = 1073;
+		vrLoc = 1094;
+	};
 	85DC414F0CAC69E400A80101 /* txtAlignRight.tiff */ = {
 		uiCtxt = {
 			sepNavWindowFrame = "{{15, 88}, {974, 845}}";
@@ -843,9 +923,9 @@
 	};
 	F539B1ED08A2D91C01A8012F /* GRDocView.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {820, 1876}}";
+			sepNavIntBoundsRect = "{{0, 0}, {615, 1876}}";
 			sepNavSelRange = "{59, 0}";
-			sepNavVisRect = "{{0, 0}, {820, 649}}";
+			sepNavVisRect = "{{0, 448}, {615, 552}}";
 			sepNavWindowFrame = "{{173, 103}, {859, 778}}";
 		};
 	};
@@ -901,13 +981,13 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {820, 952}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {820, 649}}";
+			sepNavVisRect = "{{0, 303}, {820, 649}}";
 			sepNavWindowFrame = "{{307, 127}, {859, 778}}";
 		};
 	};
 	F539B25808A35E7001A8012F /* Graphos.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {842, 1120}}";
+			sepNavIntBoundsRect = "{{0, 0}, {842, 1106}}";
 			sepNavSelRange = "{1087, 0}";
 			sepNavVisRect = "{{0, 0}, {820, 649}}";
 			sepNavWindowFrame = "{{329, 159}, {859, 778}}";
