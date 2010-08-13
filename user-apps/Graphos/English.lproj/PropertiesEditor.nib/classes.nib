@@ -1,0 +1,32 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                fllButtPressed = id; 
+                okCancelPressed = id; 
+                setLnCap = id; 
+                setLnJoin = id; 
+                stkButtPressed = id; 
+            }; 
+            CLASS = GRPropsEditor; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                cancelButt = NSButton; 
+                fillColorWell = NSColorWell; 
+                flatnessField = NSTextField; 
+                fllButt = NSButton; 
+                lineCapMatrix = NSMatrix; 
+                lineJoinMatrix = NSMatrix; 
+                linewidthField = NSTextField; 
+                miterlimitField = NSTextField; 
+                okButt = NSButton; 
+                propsPanel = NSPanel; 
+                stkButt = NSButton; 
+                strokeColorWell = NSColorWell; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

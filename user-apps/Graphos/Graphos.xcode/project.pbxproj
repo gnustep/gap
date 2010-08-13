@@ -242,6 +242,7 @@
 		};
 		2A37F4B8FDCFA73011CA2CEA = {
 			children = (
+				85155D4C1211E4E0006F7B99,
 				2A37F4B9FDCFA73011CA2CEA,
 				2A37F4B6FDCFA73011CA2CEA,
 				2A37F4B4FDCFA73011CA2CEA,
@@ -367,6 +368,30 @@
 //852
 //853
 //854
+		85155D4C1211E4E0006F7B99 = {
+			children = (
+				85155D4D1211E4E0006F7B99,
+			);
+			isa = PBXVariantGroup;
+			name = PropertiesEditor.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85155D4D1211E4E0006F7B99 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = English.lproj/PropertiesEditor.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85155D4E1211E4E0006F7B99 = {
+			fileRef = 85155D4C1211E4E0006F7B99;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		853877F40DA0375200A80103 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -605,6 +630,7 @@
 				8572BBAD1114E8D800F6A240,
 				8572BBAE1114E8D800F6A240,
 				8572BBCE1114E90E00F6A240,
+				85155D4E1211E4E0006F7B99,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1366,11 +1392,14 @@
 		};
 		F539B1EE08A2D91C01A8012F = {
 			fileEncoding = 4;
+			indentWidth = 2;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
 			path = GRDocView.m;
 			refType = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		F539B1F708A3570901A8012F = {
 			fileEncoding = 4;
@@ -1438,11 +1467,14 @@
 		};
 		F539B20708A3595201A8012F = {
 			fileEncoding = 4;
+			indentWidth = 2;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			path = GRPropsEditor.h;
 			refType = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		F539B20808A3595201A8012F = {
 			fileEncoding = 4;
