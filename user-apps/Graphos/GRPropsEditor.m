@@ -41,6 +41,8 @@
       [[lineJoinMatrix cellWithTag: 0] setTitle: @""];
       [[lineJoinMatrix cellWithTag: 0] setImage: [NSImage imageNamed: @"LineJoin1.tiff"]];
 
+      [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
+      
         ispath = NO;
         type = [objprops objectForKey: @"type"];
         if([type isEqualToString: @"path"])
