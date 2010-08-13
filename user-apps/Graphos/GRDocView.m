@@ -909,9 +909,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)inspectObject:(id)sender
 {
-    NSWindow *epwin;
     GRPropsEditor *propsEditor;
-    unsigned int style = NSTitledWindowMask;
     NSMutableDictionary *objProps = nil;
     NSDictionary *newProps;
     id obj;
@@ -1006,17 +1004,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     if(!objProps)
         return;
-
-    epwin = [[NSPanel alloc] initWithContentRect: NSMakeRect(0, 0, 500, 305)
-                                        styleMask: style
-                                          backing: NSBackingStoreBuffered
-                                            defer: NO];
-    
-    [epwin setTitle: @"Object Properties"];
-    propsEditor = [[GRPropsEditor alloc] initWithFrame: NSMakeRect(0, 0, 500, 300)
-                                            forDocView: self objectProperties: objProps];
-    [epwin setContentView: propsEditor];
-    [epwin center];
+    propsEditor = [[GRPropsEditor alloc] initWithObjectProperties: objProps];
+//    [epwin center];
     result = [propsEditor runModal];
     if(result == NSAlertDefaultReturn)
     {
@@ -1030,7 +1019,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             result = NSRunAlertPanel(@"Alert", @"You are going to set the properties of many objects! Are you sure?", @"Ok", @"No", nil);
             if(result != NSAlertDefaultReturn)
             {
-                [epwin release];
                 return;
             }
         }
@@ -1074,7 +1062,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         }
     }
 
-    [epwin release];
     [self setNeedsDisplay: YES];
 }
 

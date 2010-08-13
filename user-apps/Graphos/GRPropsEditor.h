@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.h
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -29,65 +29,57 @@
 /**
  * Object properties editor
  */
-@class GRDocView;
 
-@interface GRPropsEditor : NSView
+
+@interface GRPropsEditor : NSObject
 {
-    GRDocView *docview;
-    int result;
+  IBOutlet NSPanel *propsPanel;
+  
+  int result;
 
-    NSButton *stkButt;
-    NSTextField *stkLabel;
-    NSTextField *stkCyanLabel, *stkMagentaLabel, *stkYellowLabel, *stkBlakLabel;
-    NSTextField *stkCyanField, *stkMagentaField, *stkYellowField, *stkBlakField;
-    NSButton *fllButt;
-    NSTextField *fllLabel;
-    NSTextField *fllCyanLabel, *fllMagentaLabel, *fllYellowLabel, *fllBlakLabel;
-    NSTextField *fllCyanField, *fllMagentaField, *fllYellowField, *fllBlakField;
+  IBOutlet NSButton *stkButt;
+  IBOutlet NSButton *fllButt;
 
-    NSTextField *lineCapLabel;
-    NSMatrix* lineCapMatrix;
-    NSTextField *lineJoinLabel;
-    NSMatrix* lineJoinMatrix;
+  IBOutlet NSMatrix* lineCapMatrix;
+  IBOutlet NSMatrix* lineJoinMatrix;
     NSButtonCell* buttonCell;
 
-    NSTextField *flatnessLabel;
-    NSTextField *flatnessField;
-    NSTextField *miterlimitLabel;
-    NSTextField *miterlimitField;
-    NSTextField *linewidthLabel;
-    NSTextField *linewidthField;
+  IBOutlet NSTextField *flatnessField;
+  IBOutlet NSTextField *miterlimitField;
+  IBOutlet NSTextField *linewidthField;
 
-    NSButton *cancelButt, *okButt;
+  IBOutlet NSColorWell *strokeColorWell;
+  IBOutlet NSColorWell *fillColorWell;
 
-    NSRect strokeColorRect, fillColorRect;
+  IBOutlet NSButton *cancelButt;
+  IBOutlet NSButton *okButt;
 
     BOOL ispath;
     float flatness, miterlimit, linewidth;
     int linejoin, linecap;
     BOOL stroked;
+  NSColor *strokeColor;
     float strokecyan, strokemagenta, strokeyellow, strokeblack, strokealpha;
     BOOL filled;
+  NSColor *fillColor;
     float fillcyan, fillmagenta, fillyellow, fillblack, fillalpha;
 }
 
-- (id)initWithFrame:(NSRect)frameRect
-                              forDocView:(GRDocView *)aView
-          objectProperties:(NSDictionary *)objprops;
+- (id)initWithObjectProperties:(NSDictionary *)objprops;
 
 - (int)runModal;
 
 - (void)textFieldDidEndEditing:(NSNotification *)notification;
 
-- (void)setLnJoin:(id)sender;
+- (IBAction)setLnCap:(id)sender;
 
-- (void)setLnJoin:(id)sender;
+- (IBAction)setLnJoin:(id)sender;
 
-- (void)fllButtPressed:(id)sender;
+- (IBAction)fllButtPressed:(id)sender;
 
-- (void)stkButtPressed:(id)sender;
+- (IBAction)stkButtPressed:(id)sender;
 
-- (void)okCancelPressed:(id)sender;
+- (IBAction)okCancelPressed:(id)sender;
 
 - (NSDictionary *)properties;
 
