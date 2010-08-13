@@ -33,6 +33,9 @@
   self = [super init];
   if(self)
     {
+      float strokecyan, strokemagenta, strokeyellow, strokeblack, strokealpha;
+      float fillcyan, fillmagenta, fillyellow, fillblack, fillalpha;
+
       [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
       [[lineCapMatrix cellWithTag: 0] setTitle: @""];
       [[lineCapMatrix cellWithTag: 0] setImage: [NSImage imageNamed: @"LineCap1.tiff"]];

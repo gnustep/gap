@@ -42,7 +42,6 @@
 
   IBOutlet NSMatrix* lineCapMatrix;
   IBOutlet NSMatrix* lineJoinMatrix;
-    NSButtonCell* buttonCell;
 
   IBOutlet NSTextField *flatnessField;
   IBOutlet NSTextField *miterlimitField;
@@ -59,10 +58,8 @@
     int linejoin, linecap;
     BOOL stroked;
   NSColor *strokeColor;
-    float strokecyan, strokemagenta, strokeyellow, strokeblack, strokealpha;
     BOOL filled;
   NSColor *fillColor;
-    float fillcyan, fillmagenta, fillyellow, fillblack, fillalpha;
 }
 
 - (id)initWithObjectProperties:(NSDictionary *)objprops;
