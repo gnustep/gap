@@ -37,13 +37,7 @@
       float fillcyan, fillmagenta, fillyellow, fillblack, fillalpha;
 
       [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
-      [[lineCapMatrix cellWithTag: 0] setTitle: @""];
-      [[lineCapMatrix cellWithTag: 0] setImage: [NSImage imageNamed: @"LineCap1.tiff"]];
-      [[lineCapMatrix cellWithTag: 1] setImage: [NSImage imageNamed: @"LineCap2.tiff"]];
-
-      [[lineJoinMatrix cellWithTag: 0] setTitle: @""];
-      [[lineJoinMatrix cellWithTag: 0] setImage: [NSImage imageNamed: @"LineJoin1.tiff"]];
-
+      
       [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
       
         ispath = NO;
@@ -80,63 +74,6 @@
         strokealpha = [[objprops objectForKey: @"strokealpha"] floatValue];
         strokeColor = [NSColor colorWithDeviceCyan:strokecyan magenta:strokemagenta yellow:strokeyellow black:strokeblack alpha:strokealpha];
 
-#if 0
-        // ---------------------- LINE CAP ----------------------
-        lineCapLabel = [[[NSTextField alloc] init] autorelease];
-        [lineCapLabel setFrame: NSMakeRect(380, 275, 80, 20)];
-        [lineCapLabel setDrawsBackground:NO];
-        [lineCapLabel setBezeled:NO];
-        [lineCapLabel setEditable:NO];
-        [lineCapLabel setSelectable:NO];
-        [lineCapLabel setStringValue: @"line cap"];
-        [self addSubview: lineCapLabel];
-
-        buttonCell = [[NSButtonCell new] autorelease];
-        [buttonCell setButtonType: NSRadioButton];
-        [buttonCell setBordered: NO];
-        [buttonCell setTitle: @""];
-
-        lineCapMatrix = [[[NSMatrix alloc] initWithFrame: NSMakeRect(380, 215, 20, 60)
-                                                    mode: NSRadioModeMatrix prototype: buttonCell
-                                            numberOfRows: 3 numberOfColumns: 1] autorelease];
-        [lineCapMatrix setCellSize: NSMakeSize(20, 20)];
-        [lineCapMatrix setIntercellSpacing: NSZeroSize];
-        [[lineCapMatrix cellAtRow: 0 column: 0] setTag: 0];
-        [[lineCapMatrix cellAtRow: 1 column: 0] setTag: 1];
-        [[lineCapMatrix cellAtRow: 2 column: 0] setTag: 2];
-        [lineCapMatrix setTarget: self];
-        [lineCapMatrix setAction: @selector(setLnCap:)];
-        [self addSubview: lineCapMatrix];
-        [lineCapMatrix setAllowsEmptySelection:YES];
-        [lineCapMatrix deselectAllCells];
-
-
-        // ---------------------- LINE JOIN ----------------------
-        lineJoinLabel = [[[NSTextField alloc] init] autorelease];
-        [lineJoinLabel setFrame: NSMakeRect(380, 190, 80, 20)];
-        [lineJoinLabel setDrawsBackground:NO];
-        [lineJoinLabel setBezeled:NO];
-        [lineJoinLabel setEditable:NO];
-        [lineJoinLabel setSelectable:NO];
-        [lineJoinLabel setStringValue: @"line join"];
-        [self addSubview: lineJoinLabel];
-
-        lineJoinMatrix = [[[NSMatrix alloc] initWithFrame: NSMakeRect(380, 100, 20, 81)
-                                                     mode: NSRadioModeMatrix prototype: buttonCell
-                                             numberOfRows: 3 numberOfColumns: 1] autorelease];
-        [lineJoinMatrix setCellSize: NSMakeSize(20, 30)];
-        [lineJoinMatrix setIntercellSpacing: NSZeroSize];
-        [[lineJoinMatrix cellAtRow: 0 column: 0] setTag: 0];
-        [[lineJoinMatrix cellAtRow: 1 column: 0] setTag: 1];
-        [[lineJoinMatrix cellAtRow: 2 column: 0] setTag: 2];
-        [lineJoinMatrix setTarget: self];
-        [lineJoinMatrix setAction: @selector(setLnJoin:)];
-        [self addSubview: lineJoinMatrix];
-        [lineJoinMatrix setAllowsEmptySelection:YES];
-        [lineJoinMatrix deselectAllCells];
-        
-
-#endif        
         /* disable not used controls */
         if (!ispath)
           {
