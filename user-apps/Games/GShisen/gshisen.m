@@ -110,53 +110,66 @@ static GShisen *sharedshisen = nil;
   NSMutableArray *scores;
   NSDictionary *scoresEntry;
   NSString *userName, *minutes, *seconds, *totTime;
-  NSRect myRect = {{0, 0}, {150, 300}};
-  NSRect matrixRect = {{0, 0}, {150, 300}};
   int i;
   NSButtonCell *buttonCell;
   NSScrollView *scoresScroll;
   
   scores = [board scores];
-  if ([scores count] >= 20) {
-    matrixRect.size.height = [scores count] * 15;
-  }
 
   [hallOfFamePanel makeKeyAndOrderFront:self];
-  myView = [[NSView alloc] initWithFrame: [hallOfFamePanel frame]];
-  [hallOfFamePanel setContentView: myView];
 
 
   buttonCell = [[NSButtonCell new] autorelease];
   [buttonCell setButtonType: NSPushOnPushOffButton];
   [buttonCell setBordered:NO];
-  [buttonCell setAlignment:NSLeftTextAlignment];	
-  //	NSLog(@"Height: %d", [buttonCell cellSize].height);
-
-  scoresMatrix = [[NSMatrix alloc] initWithFrame:matrixRect mode:NSRadioModeMatrix
-				   prototype:buttonCell 
-				   numberOfRows:[scores count] 
-				   numberOfColumns:2];
-
-  [scoresMatrix setAutoresizingMask: NSViewWidthSizable];
+  [buttonCell setAlignment:NSLeftTextAlignment];
 											
-  scoresScroll = [[NSScrollView alloc] initWithFrame: myRect];
+  scoresScroll = [[NSScrollView alloc] initWithFrame: [[hallOfFamePanel contentView] frame]];
   [scoresScroll setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
   [scoresScroll setHasVerticalScroller: YES];
   [scoresScroll setHasHorizontalScroller: NO];
+  [hallOfFamePanel setContentView: scoresScroll];
+
+  scoresMatrix = [[NSMatrix alloc] initWithFrame: NSMakeRect(0, 0, [[hallOfFamePanel contentView] frame].size.width, [scores count] * 18) mode:NSListModeMatrix
+                                       prototype: buttonCell 
+                                    numberOfRows: [scores count] 
+                                 numberOfColumns: 3];
+  
+  [scoresMatrix setAutoresizingMask: NSViewWidthSizable];
+  [scoresMatrix setAutosizesCells: YES];
+  
+  [scoresScroll setDocumentView: scoresMatrix];
 		
-  for(i = 0; i < [scores count]; i++) {
+  for(i = 0; i < [scores count]; i++)
+  {
+    NSString *dateOfGame;
+    NSDate *date;
+    NSCalendarDate *calDate;
+    
     scoresEntry = [scores objectAtIndex: i];
     userName = [scoresEntry objectForKey: @"username"];
     minutes = [scoresEntry objectForKey: @"minutes"];
     seconds = [scoresEntry objectForKey: @"seconds"];
+    date = [scoresEntry objectForKey: @"date"];
+    if (date != nil)
+      {
+        calDate = [date dateWithCalendarFormat:nil timeZone:nil];
+        dateOfGame = [calDate descriptionWithCalendarFormat:@"%Y-%m-%d"  locale: [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+        NSLog(@"date: %@", dateOfGame);
+      }
+    else
+      {
+        dateOfGame = @"";
+      }
     totTime = [NSString stringWithFormat:@"%@:%@", minutes, seconds];
     //		[scoresMatrix addRow];
-    [[scoresMatrix cellAtRow:i column:0] setTitle: userName];
-    [[scoresMatrix cellAtRow:i column:1] setTitle: totTime];
+    [[scoresMatrix cellAtRow:i column:0] setTitle: dateOfGame];
+    [[scoresMatrix cellAtRow:i column:1] setTitle: userName];
+    [[scoresMatrix cellAtRow:i column:2] setTitle: totTime];
   }
 		
-  [scoresScroll setDocumentView: scoresMatrix];
-  [myView addSubview: scoresScroll];
+//  [scoresScroll setDocumentView: scoresMatrix];
+//  [myView addSubview: scoresScroll];
 	
   [hallOfFamePanel makeKeyAndOrderFront:self];
 }

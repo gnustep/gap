@@ -489,6 +489,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     [gameData setObject: entry forKey: @"minutes"];
     entry = [NSString stringWithFormat: @"%02i", seconds];
     [gameData setObject: entry forKey: @"seconds"];
+    [gameData setObject: [NSDate date] forKey: @"date"];
 
     [scores addObject: gameData];
     [scores sortUsingFunction:(int (*)(id, id, void*))sortScores context:self];
