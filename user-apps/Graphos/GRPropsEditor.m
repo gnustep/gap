@@ -64,7 +64,7 @@
         fillyellow = [[objprops objectForKey: @"fillyellow"] floatValue];
         fillblack = [[objprops objectForKey: @"fillblack"] floatValue];
         fillalpha = [[objprops objectForKey: @"fillalpha"] floatValue];
-        fillColor = [NSColor colorWithDeviceCyan:fillcyan magenta:fillmagenta yellow:fillyellow black:fillblack alpha:fillalpha];
+        fillColor = [[NSColor colorWithDeviceCyan:fillcyan magenta:fillmagenta yellow:fillyellow black:fillblack alpha:fillalpha] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 
         stroked = (BOOL)[[objprops objectForKey: @"stroked"] intValue];
         strokecyan = [[objprops objectForKey: @"strokecyan"] floatValue];
@@ -72,7 +72,7 @@
         strokeyellow = [[objprops objectForKey: @"strokeyellow"] floatValue];
         strokeblack = [[objprops objectForKey: @"strokeblack"] floatValue];
         strokealpha = [[objprops objectForKey: @"strokealpha"] floatValue];
-        strokeColor = [NSColor colorWithDeviceCyan:strokecyan magenta:strokemagenta yellow:strokeyellow black:strokeblack alpha:strokealpha];
+        strokeColor = [[NSColor colorWithDeviceCyan:strokecyan magenta:strokemagenta yellow:strokeyellow black:strokeblack alpha:strokealpha] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 
         /* disable not used controls */
         if (!ispath)
