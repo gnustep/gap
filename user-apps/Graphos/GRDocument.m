@@ -96,7 +96,7 @@
     [op setShowPanels:flag];
     [op runOperationModalForWindow:[[[self windowControllers] objectAtIndex: 0] window]
                           delegate:nil
-                    didRunSelector:nil 
+                    didRunSelector:NULL 
                        contextInfo:nil];    
 }
 
