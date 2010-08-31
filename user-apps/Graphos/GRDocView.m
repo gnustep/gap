@@ -89,6 +89,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     id obj;
     int i;
     int p = 0;
+    int c = 0;
     int t = 0;
     int b = 0;
 
@@ -106,8 +107,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             b++;
         } else if([obj isKindOfClass: [GRCircle class]])
         {
-            str = [NSString stringWithFormat: @"circle%i", t];
-            t++;
+            str = [NSString stringWithFormat: @"circle%i", c];
+            c++;
         } else if([obj isKindOfClass: [GRText class]])
         {
             str = [NSString stringWithFormat: @"text%i", t];
