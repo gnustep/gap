@@ -915,7 +915,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     NSDictionary *newProps;
     id obj;
     NSNumber *num;
-    float *color, newcolor[4];
     int i, count, result;
     NSUndoManager *uMgr;
 
@@ -945,59 +944,19 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                 [objProps setObject: num forKey: @"linewidth"];
                 num = [NSNumber numberWithInt: [obj isStroked]];
                 [objProps setObject: num forKey: @"stroked"];
-                color = [obj strokeColor];
-                num = [NSNumber numberWithFloat: color[0]];
-                [objProps setObject: num forKey: @"strokecyan"];
-                num = [NSNumber numberWithFloat: color[1]];
-                [objProps setObject: num forKey: @"strokemagenta"];
-                num = [NSNumber numberWithFloat: color[2]];
-                [objProps setObject: num forKey: @"strokeyellow"];
-                num = [NSNumber numberWithFloat: color[3]];
-                [objProps setObject: num forKey: @"strokeblack"];
-                num = [NSNumber numberWithFloat: [obj strokeAlpha]];
-                [objProps setObject: num forKey: @"strokealpha"];
-                num = [NSNumber numberWithInt: [obj isFilled]];
+                [objProps setObject: [obj strokeColor] forKey: @"strokecolor"];
+		num = [NSNumber numberWithInt: [obj isFilled]];
                 [objProps setObject: num forKey: @"filled"];
-                color = [obj fillColor];
-                num = [NSNumber numberWithFloat: color[0]];
-                [objProps setObject: num forKey: @"fillcyan"];
-                num = [NSNumber numberWithFloat: color[1]];
-                [objProps setObject: num forKey: @"fillmagenta"];
-                num = [NSNumber numberWithFloat: color[2]];
-                [objProps setObject: num forKey: @"fillyellow"];
-                num = [NSNumber numberWithFloat: color[3]];
-                [objProps setObject: num forKey: @"fillblack"];
-                num = [NSNumber numberWithFloat: [obj fillAlpha]];
-                [objProps setObject: num forKey: @"fillalpha"];
+                [objProps setObject: [obj fillColor] forKey: @"fillcolor"];
             } else
             {
                 [objProps setObject: @"text" forKey: @"type"];
                 num = [NSNumber numberWithInt: [obj isStroked]];
                 [objProps setObject: num forKey: @"stroked"];
-                color = [obj strokeColor];
-                num = [NSNumber numberWithFloat: color[0]];
-                [objProps setObject: num forKey: @"strokecyan"];
-                num = [NSNumber numberWithFloat: color[1]];
-                [objProps setObject: num forKey: @"strokemagenta"];
-                num = [NSNumber numberWithFloat: color[2]];
-                [objProps setObject: num forKey: @"strokeyellow"];
-                num = [NSNumber numberWithFloat: color[3]];
-                [objProps setObject: num forKey: @"strokeblack"];
-                num = [NSNumber numberWithFloat: [obj strokeAlpha]];
-                [objProps setObject: num forKey: @"strokealpha"];
-                num = [NSNumber numberWithInt: [obj isFilled]];
+                [objProps setObject: [obj strokeColor] forKey: @"strokecolor"];
+		num = [NSNumber numberWithInt: [obj isFilled]];
                 [objProps setObject: num forKey: @"filled"];
-                color = [obj fillColor];
-                num = [NSNumber numberWithFloat: color[0]];
-                [objProps setObject: num forKey: @"fillcyan"];
-                num = [NSNumber numberWithFloat: color[1]];
-                [objProps setObject: num forKey: @"fillmagenta"];
-                num = [NSNumber numberWithFloat: color[2]];
-                [objProps setObject: num forKey: @"fillyellow"];
-                num = [NSNumber numberWithFloat: color[3]];
-                [objProps setObject: num forKey: @"fillblack"];
-                num = [NSNumber numberWithFloat: [obj fillAlpha]];
-                [objProps setObject: num forKey: @"fillalpha"];
+                [objProps setObject: [obj fillColor] forKey: @"fillcolor"];
             }
             break;
         }
@@ -1037,6 +996,8 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
             obj = [objects objectAtIndex: i];
             if([[obj editor] isSelect])
             {
+	      NSColor *newColor;
+
                 if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
                 {
                     [obj setFlat: [[newProps objectForKey: @"flatness"] floatValue]];
@@ -1046,19 +1007,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
                     [obj setLineWidth: [[newProps objectForKey: @"linewidth"] floatValue]];
                 }
                 [obj setStroked: (BOOL)[[newProps objectForKey: @"stroked"] intValue]];
-                newcolor[0] = [[newProps objectForKey: @"strokecyan"] floatValue];
-                newcolor[1] = [[newProps objectForKey: @"strokemagenta"] floatValue];
-                newcolor[2] = [[newProps objectForKey: @"strokeyellow"] floatValue];
-                newcolor[3] = [[newProps objectForKey: @"strokeblack"] floatValue];
-                [obj setStrokeColor: newcolor];
-                [obj setStrokeAlpha: [[newProps objectForKey: @"strokealpha"] floatValue]];
+                newColor = (NSColor *)[newProps objectForKey: @"strokecolor"];
+                [obj setStrokeColor: newColor];
                 [obj setFilled: (BOOL)[[newProps objectForKey: @"filled"] intValue]];
-                newcolor[0] = [[newProps objectForKey: @"fillcyan"] floatValue];
-                newcolor[1] = [[newProps objectForKey: @"fillmagenta"] floatValue];
-                newcolor[2] = [[newProps objectForKey: @"fillyellow"] floatValue];
-                newcolor[3] = [[newProps objectForKey: @"fillblack"] floatValue];
-                [obj setFillColor: newcolor];
-                [obj setFillAlpha: [[newProps objectForKey: @"fillalpha"] floatValue]];
+                newColor = (NSColor *)[newProps objectForKey: @"fillcolor"];
+                [obj setFillColor: newColor];
             }
         }
     }

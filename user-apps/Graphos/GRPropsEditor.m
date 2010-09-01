@@ -33,10 +33,7 @@
   self = [super init];
   if(self)
     {
-      float strokecyan, strokemagenta, strokeyellow, strokeblack, strokealpha;
-      float fillcyan, fillmagenta, fillyellow, fillblack, fillalpha;
-
-      [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
+       [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
       
       [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
       
@@ -59,20 +56,10 @@
         }
 
         filled = (BOOL)[[objprops objectForKey: @"filled"] intValue];
-        fillcyan = [[objprops objectForKey: @"fillcyan"] floatValue];
-        fillmagenta = [[objprops objectForKey: @"fillmagenta"] floatValue];
-        fillyellow = [[objprops objectForKey: @"fillyellow"] floatValue];
-        fillblack = [[objprops objectForKey: @"fillblack"] floatValue];
-        fillalpha = [[objprops objectForKey: @"fillalpha"] floatValue];
-        fillColor = [[NSColor colorWithDeviceCyan:fillcyan magenta:fillmagenta yellow:fillyellow black:fillblack alpha:fillalpha] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+        fillColor = (NSColor *)[objprops objectForKey: @"fillcolor"];
 
         stroked = (BOOL)[[objprops objectForKey: @"stroked"] intValue];
-        strokecyan = [[objprops objectForKey: @"strokecyan"] floatValue];
-        strokemagenta = [[objprops objectForKey: @"strokemagenta"] floatValue];
-        strokeyellow = [[objprops objectForKey: @"strokeyellow"] floatValue];
-        strokeblack = [[objprops objectForKey: @"strokeblack"] floatValue];
-        strokealpha = [[objprops objectForKey: @"strokealpha"] floatValue];
-        strokeColor = [[NSColor colorWithDeviceCyan:strokecyan magenta:strokemagenta yellow:strokeyellow black:strokeblack alpha:strokealpha] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+        strokeColor = (NSColor *)[objprops objectForKey: @"strokecolor"];
 
         /* disable not used controls */
         if (!ispath)
@@ -187,8 +174,8 @@
 
 - (IBAction)okCancelPressed:(id)sender;
 {
-  fillColor = [[[fillColorWell color] colorUsingColorSpaceName: NSDeviceCMYKColorSpace] retain];
-  strokeColor = [[[strokeColorWell color] colorUsingColorSpaceName: NSDeviceCMYKColorSpace] retain];
+  fillColor = [[fillColorWell color] retain];
+  strokeColor = [[strokeColorWell color] retain];
 
     if(sender == okButt)
         result = NSAlertDefaultReturn;
@@ -225,29 +212,11 @@
       }
     num = [NSNumber numberWithInt: stroked];
     [dict setObject: num forKey: @"stroked"];
-    num = [NSNumber numberWithFloat: [strokeColor cyanComponent]];
-    [dict setObject: num forKey: @"strokecyan"];
-    num = [NSNumber numberWithFloat: [strokeColor magentaComponent]];
-    [dict setObject: num forKey: @"strokemagenta"];
-    num = [NSNumber numberWithFloat: [strokeColor yellowComponent]];
-    [dict setObject: num forKey: @"strokeyellow"];
-    num = [NSNumber numberWithFloat: [strokeColor blackComponent]];
-    [dict setObject: num forKey: @"strokeblack"];
-    num = [NSNumber numberWithFloat: [strokeColor alphaComponent]];
-    [dict setObject: num forKey: @"strokealpha"];
+    [dict setObject: strokeColor forKey: @"strokecolor"];
 
     num = [NSNumber numberWithInt: filled];
     [dict setObject: num forKey: @"filled"];
-    num = [NSNumber numberWithFloat: [fillColor cyanComponent]];
-    [dict setObject: num forKey: @"fillcyan"];
-    num = [NSNumber numberWithFloat: [fillColor magentaComponent]];
-    [dict setObject: num forKey: @"fillmagenta"];
-    num = [NSNumber numberWithFloat: [fillColor yellowComponent]];
-    [dict setObject: num forKey: @"fillyellow"];
-    num = [NSNumber numberWithFloat: [fillColor blackComponent]];
-    [dict setObject: num forKey: @"fillblack"];
-    num = [NSNumber numberWithFloat: [fillColor alphaComponent]];
-    [dict setObject: num forKey: @"fillalpha"];
+    [dict setObject: fillColor forKey: @"fillcolor"];
 
     return dict;
 }

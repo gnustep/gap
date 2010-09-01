@@ -23,6 +23,7 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#import <AppKit/NSGraphics.h>
 #import "GRDrawableObject.h"
 #import "GRObjectEditor.h"
 
@@ -32,6 +33,8 @@
 - (void)dealloc
 {
     [editor release];
+    [strokeColor release];
+    [fillColor release];
     [super dealloc];
 }
 
@@ -55,6 +58,9 @@
     
     objCopy->docView = [self view];
     objCopy->editor = editorCopy;
+
+    objCopy->strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+    objCopy->fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
     
     return objCopy;
 }
@@ -97,8 +103,53 @@
     zmFactor = f;
 }
 
+- (void)setStrokeColor:(NSColor *)c
+{
+  [strokeColor release];
+  strokeColor = [[c colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+}
+
+- (NSColor *)strokeColor
+{
+    return strokeColor;
+}
+
+- (void)setFillColor:(NSColor *)c
+{
+  [fillColor release];
+  fillColor = [[c colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+}
+
+- (NSColor *)fillColor
+{
+    return fillColor;
+}
+
+- (void)setFilled:(BOOL)value
+{
+    filled = value;
+}
+
+- (BOOL)isFilled
+{
+    return filled;
+}
+
+- (void)setStroked:(BOOL)value
+{
+    stroked = value;
+}
+
+- (BOOL)isStroked
+{
+    return stroked;
+}
+
 - (void)draw
 {
+#ifdef GNUSTEP
+    [self subclassResponsibility: _cmd];
+#endif
 }
 
 

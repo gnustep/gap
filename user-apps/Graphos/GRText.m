@@ -53,16 +53,8 @@
         filled = YES;
         visible = YES;
         locked = NO;
-        strokeColor[0] = 0;
-        strokeColor[1] = 0;
-        strokeColor[2] = 0;
-        strokeColor[3] = 1;
-        fillColor[0] = 0;
-        fillColor[1] = 0;
-        fillColor[2] = 0;
-        fillColor[3] = 1;
-        strokeAlpha = 1;
-        fillAlpha = 1;
+        strokeColor = [NSColor blackColor];
+        fillColor = [NSColor whiteColor];
         ASSIGN(str, @"");
 
         editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
@@ -91,7 +83,12 @@
 
     self = [super init];
     if(self)
-    {
+      {
+        float strokeCol[4];
+        float fillCol[4];
+	float strokeAlpha;
+	float fillAlpha;
+
         docView = aView;
         zmFactor = zf;
         editor = [[GRTextEditor alloc] initEditor:self];
@@ -119,20 +116,33 @@
         stroked = (BOOL)[[description objectForKey: @"stroked"] intValue];
         s = [description objectForKey: @"strokecolor"];
         linearr = [s componentsSeparatedByString: @" "];
-        strokeColor[0] = [[linearr objectAtIndex: 0] floatValue];
-        strokeColor[1] = [[linearr objectAtIndex: 1] floatValue];
-        strokeColor[2] = [[linearr objectAtIndex: 2] floatValue];
-        strokeColor[3] = [[linearr objectAtIndex: 3] floatValue];
+        strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+        strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+        strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+        strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
         strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
+	strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
+					   magenta: strokeCol[1]
+					    yellow: strokeCol[2]
+					     black: strokeCol[3]
+					     alpha: strokeAlpha];
+	strokeColor = [strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 
         filled = (BOOL)[[description objectForKey: @"filled"] intValue];
         s = [description objectForKey: @"fillcolor"];
         linearr = [s componentsSeparatedByString: @" "];
-        fillColor[0] = [[linearr objectAtIndex: 0] floatValue];
-        fillColor[1] = [[linearr objectAtIndex: 1] floatValue];
-        fillColor[2] = [[linearr objectAtIndex: 2] floatValue];
-        fillColor[3] = [[linearr objectAtIndex: 3] floatValue];
+        fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+        fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+        fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+        fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
         fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
+        fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
+	fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
+					 magenta: fillCol[1]
+					  yellow: fillCol[2]
+					   black: fillCol[3]
+					   alpha: fillAlpha];
+	fillColor = [fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 
         visible = (BOOL)[[description objectForKey: @"visible"] intValue];
         locked = (BOOL)[[description objectForKey: @"locked"] intValue];
@@ -161,6 +171,26 @@
 {
     NSMutableDictionary *dict;
     NSString *s;
+    NSColor *strokeColorCMYK;
+    NSColor *fillColorCMYK;
+    float strokeCol[4];
+    float fillCol[4];
+    float strokeAlpha;
+    float fillAlpha;
+
+    strokeColorCMYK = [strokeColor colorUsingColorSpaceName: NSDeviceCMYKColorSpace]; 
+    strokeCol[0] = [strokeColorCMYK cyanComponent];
+    strokeCol[1] = [strokeColorCMYK magentaComponent];
+    strokeCol[2] = [strokeColorCMYK yellowComponent];
+    strokeCol[3] = [strokeColorCMYK blackComponent];
+    strokeAlpha = [strokeColorCMYK alphaComponent];
+
+    fillColorCMYK = [fillColor colorUsingColorSpaceName: NSDeviceCMYKColorSpace]; 
+    fillCol[0] = [fillColorCMYK cyanComponent];
+    fillCol[1] = [fillColorCMYK magentaComponent];
+    fillCol[2] = [fillColorCMYK yellowComponent];
+    fillCol[3] = [fillColorCMYK blackComponent];
+    fillAlpha = [fillColorCMYK alphaComponent];
 
     dict = [NSMutableDictionary dictionaryWithCapacity: 1];
     [dict setObject: @"text" forKey: @"type"];
@@ -187,14 +217,14 @@
     s = [NSString stringWithFormat: @"%i", stroked];
     [dict setObject: s forKey: @"stroked"];
     s = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
-        strokeColor[0], strokeColor[1], strokeColor[2], strokeColor[3]];
+        strokeCol[0], strokeCol[1], strokeCol[2], strokeCol[3]];
     [dict setObject: s forKey: @"strokecolor"];
     s = [NSString stringWithFormat: @"%.3f", strokeAlpha];
     [dict setObject: s forKey: @"strokealpha"];
     s = [NSString stringWithFormat: @"%i", filled];
     [dict setObject: s forKey: @"filled"];
     s = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
-        fillColor[0], fillColor[1], fillColor[2], fillColor[3]];
+        fillCol[0], fillCol[1], fillCol[2], fillCol[3]];
     [dict setObject: s forKey: @"fillcolor"];
     s = [NSString stringWithFormat: @"%.3f", fillAlpha];
     [dict setObject: s forKey: @"fillalpha"];
@@ -319,72 +349,6 @@
 - (void)setRotation:(float)r
 {
     rotation = r;
-}
-
-- (void)setStroked:(BOOL)value
-{
-    stroked = value;
-}
-
-- (BOOL)isStroked
-{
-    return stroked;
-}
-
-- (void)setStrokeColor:(float *)c
-{
-    int i;
-
-    for(i = 0; i < 4; i++)
-        strokeColor[i] = c[i];
-}
-
-- (float *)strokeColor
-{
-    return strokeColor;
-}
-
-- (void)setStrokeAlpha:(float)alpha
-{
-    strokeAlpha = alpha;
-}
-
-- (float)strokeAlpha
-{
-    return strokeAlpha;
-}
-
-- (void)setFilled:(BOOL)value
-{
-    filled = value;
-}
-
-- (BOOL)isFilled
-{
-    return filled;
-}
-
-- (void)setFillColor:(float *)c
-{
-    int i;
-
-    for(i = 0; i < 4; i++)
-        fillColor[i] = c[i];
-}
-
-- (float *)fillColor
-{
-    return fillColor;
-}
-
-- (void)setFillAlpha:(float)alpha
-{
-    fillAlpha = alpha;
-}
-
-- (float)fillAlpha
-{
-    return fillAlpha;
 }
 
 - (void)setLocked:(BOOL)value
