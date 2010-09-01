@@ -37,8 +37,6 @@
     GRObjectControlPoint *startControlPoint;
     GRObjectControlPoint *endControlPoint;
     float rotation;
-    float strokeColor[4], fillColor[4];
-    float strokeAlpha, fillAlpha;
     float flatness, miterlimit;
     int linejoin, linecap;
 }

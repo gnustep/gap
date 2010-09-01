@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.h
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2010 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -41,9 +41,6 @@
     NSRect bounds;
     float scalex, scaley;
     float rotation;
-    float strokeColor[4], fillColor[4];
-    float strokeAlpha, fillAlpha;
-    BOOL stroked, filled;
     NSRect selRect;
 }
 
@@ -74,31 +71,6 @@
 - (void)setScalex:(float)x scaley:(float)y;
 
 - (void)setRotation:(float)r;
-
-- (void)setStroked:(BOOL)value;
-
-- (BOOL)isStroked;
-
-- (void)setStrokeColor:(float *)c;
-
-- (float *)strokeColor;
-
-- (void)setStrokeAlpha:(float)alpha;
-
-- (float)strokeAlpha;
-
-- (void)setFilled:(BOOL)value;
-
-- (BOOL)isFilled;
-
-- (void)setFillColor:(float *)c;
-
-- (float *)fillColor;
-
-- (void)setFillAlpha:(float)alpha;
-
-- (float)fillAlpha;
-
 
 - (void)draw;
 

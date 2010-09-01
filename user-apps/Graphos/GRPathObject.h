@@ -38,22 +38,10 @@
 @interface GRPathObject : GRDrawableObject
 {
     NSBezierPath *myPath;
-    BOOL stroked, filled;
+
     float linewidth;
     GRObjectControlPoint *currentPoint;
 }
-
-/** sets if the object is drawn filled */
-- (void)setFilled:(BOOL)value;
-
-/** returns if the object is drawn filled */
-- (BOOL)isFilled;
-
-/** sets if the object border is drawn */
-- (void)setStroked:(BOOL)value;
-
-/** returns if the object border is drawn */
-- (BOOL)isStroked;
 
 /** sets the current selected control point */
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint;

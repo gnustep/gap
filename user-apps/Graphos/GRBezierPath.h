@@ -37,8 +37,6 @@ typedef struct
 
 @interface GRBezierPath : GRPathObject
 {
-    float strokeColor[4], fillColor[4];
-    float strokeAlpha, fillAlpha;
     float flatness, miterlimit;
     int linejoin, linecap;
     BOOL calculatingHandles;
@@ -73,15 +71,6 @@ typedef struct
 - (float)miterLimit;
 - (void)setLineWidth:(float)width;
 - (float)lineWidth;
-
-- (void)setStrokeColor:(float *)c;
-- (float *)strokeColor;
-- (void)setStrokeAlpha:(float)alpha;
-- (float)strokeAlpha;
-- (void)setFillColor:(float *)c;
-- (float *)fillColor;
-- (void)setFillAlpha:(float)alpha;
-- (float)fillAlpha;
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 

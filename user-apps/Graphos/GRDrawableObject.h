@@ -29,16 +29,20 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/NSColor.h>
 
 @class GRDocView;
 @class GRObjectEditor;
 
 @interface GRDrawableObject : NSObject <NSCopying>
 {
-    GRDocView *docView;
-    GRObjectEditor *editor;
-    BOOL visible, locked;
-    float zmFactor;
+  GRDocView *docView;
+  GRObjectEditor *editor;
+  BOOL visible, locked;
+  float zmFactor;
+  BOOL stroked, filled;
+  NSColor *fillColor;
+  NSColor *strokeColor;
 }
 
 /**
@@ -66,6 +70,15 @@
  * when zooming in our out the view
  */
 - (void)setZoomFactor:(float)f;
+
+- (void)setStrokeColor:(NSColor *)c;
+- (NSColor *)strokeColor;
+- (void)setFillColor:(NSColor *)c;
+- (NSColor *)fillColor;
+- (void)setFilled:(BOOL)value;
+- (BOOL)isFilled;
+- (void)setStroked:(BOOL)value;
+- (BOOL)isStroked;
 
 /**
  * Draws the object in the view. Called from GRDocView.

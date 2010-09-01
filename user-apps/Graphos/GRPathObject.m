@@ -47,25 +47,6 @@
     [super dealloc];
 }
 
-- (void)setFilled:(BOOL)value
-{
-    filled = value;
-}
-
-- (BOOL)isFilled
-{
-    return filled;
-}
-
-- (void)setStroked:(BOOL)value
-{
-    stroked = value;
-}
-
-- (BOOL)isStroked
-{
-    return stroked;
-}
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint
 {
     currentPoint = aPoint;
