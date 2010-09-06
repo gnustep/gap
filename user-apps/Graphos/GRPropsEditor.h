@@ -40,8 +40,8 @@
   IBOutlet NSButton *stkButt;
   IBOutlet NSButton *fllButt;
 
-  IBOutlet NSMatrix* lineCapMatrix;
-  IBOutlet NSMatrix* lineJoinMatrix;
+  IBOutlet NSMatrix *lineCapMatrix;
+  IBOutlet NSMatrix *lineJoinMatrix;
 
   IBOutlet NSTextField *flatnessField;
   IBOutlet NSTextField *miterlimitField;
