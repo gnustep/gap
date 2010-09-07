@@ -25,6 +25,7 @@ Graphos_APPLICATION_ICON = graphos_appicon_48.tif
 Graphos_RESOURCE_FILES = \
 Resources/GRDocument.gorm \
 Resources/MainMenu.gorm \
+Resources/PropertiesEditor.gorm \
 Resources/bezier.tiff \
 Resources/blackarrow.tiff \
 Resources/hand.tiff \

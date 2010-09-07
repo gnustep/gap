@@ -93,7 +93,8 @@
     INSTALLDIR = "$(GNUSTEP_LOCAL_ROOT)/";
     INTERFACES = (
 	GRDocument.gorm,
-	MainMenu.gorm
+	MainMenu.gorm,
+	PropertiesEditor.gorm
     );
     LANGUAGE = English;
     LIBRARIES = (
@@ -151,6 +152,7 @@
 	GraphosInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
 	English
     );
 }
