@@ -1,0 +1,37 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "fllButtPressed:",
+	    "okCancelPressed:",
+	    "setLnCap:",
+	    "setLnJoin:",
+	    "stkButtPressed:"
+	);
+	Super = NSObject;
+    };
+    GRPropsEditor = {
+	Actions = (
+	    "setLnCap:",
+	    "setLnJoin:",
+	    "fllButtPressed:",
+	    "stkButtPressed:",
+	    "okCancelPressed:"
+	);
+	Outlets = (
+	    propsPanel,
+	    stkButt,
+	    fllButt,
+	    lineCapMatrix,
+	    lineJoinMatrix,
+	    flatnessField,
+	    miterlimitField,
+	    linewidthField,
+	    strokeColorWell,
+	    fillColorWell,
+	    cancelButt,
+	    okButt
+	);
+	Super = NSObject;
+    };
+}
