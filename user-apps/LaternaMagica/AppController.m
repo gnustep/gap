@@ -134,6 +134,8 @@
                         {
                             if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
                             {
+			      /* hide dot files, eventually a preference could be implemented */
+			      if (![filename2 hasPrefix: @"."])
                                 [self addFile:tempName];
                             }
                         }
