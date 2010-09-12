@@ -814,6 +814,7 @@
           repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:quality] forKey:NSImageCompressionFactor];
           dataOfRep = [scaledImageRep representationUsingType: NSJPEGFileType properties:repProperties];
         }
+      [srcImage release];
 
       destFileName = [destFolder stringByAppendingPathComponent:[filenameNoExtension stringByAppendingPathExtension: destFileExtension]];
       NSLog(@"%@", destFileName);
