@@ -794,7 +794,6 @@
         {
           float quality;
 	  
-	      quality = 1;
 	      switch ([popupFileQuality indexOfSelectedItem])
 	        {
 	          case 0:
