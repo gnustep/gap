@@ -794,22 +794,22 @@
         {
           float quality;
 	  
-	      switch ([popupFileQuality indexOfSelectedItem])
-	        {
-	          case 0:
-	            quality = 1.0;
-                break;
-              case 1:
-	            quality = 0.75;
-		        break;
-	          case 2:
-	            quality = 0.66;
-		        break;
-	          case 3:
-                quality = 0.4;
-		        break;
-	          default:
-	            quality = 0.5;
+	  switch ([popupFileQuality indexOfSelectedItem])
+	    {
+	    case 0:
+	      quality = 1.0;
+	      break;
+	    case 1:
+	      quality = 0.75;
+	      break;
+	    case 2:
+	      quality = 0.66;
+	      break;
+	    case 3:
+	      quality = 0.4;
+	      break;
+	    default:
+	      quality = 0.5;
             }
           repProperties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:quality] forKey:NSImageCompressionFactor];
           dataOfRep = [scaledImageRep representationUsingType: NSJPEGFileType properties:repProperties];
