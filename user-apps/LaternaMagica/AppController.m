@@ -721,7 +721,10 @@
       int newW, newH;
       double aspectRatio;
       NSBitmapImageRep *scaledImageRep;
+      NSAutoreleasePool *pool;
 
+      /* create a local pool to avoid the autorelease to grow too much */
+      pool = [[NSAutoreleasePool alloc] init];
       fullOrigPath = [fileListData pathAtIndex:i];
       origFileName = [fullOrigPath lastPathComponent];
       filenameNoExtension = [origFileName stringByDeletingPathExtension];
@@ -826,6 +829,7 @@
         }
       [exportProgress setDoubleValue: ((double)(i+1)*100)/(double)[fileListView numberOfRows]];
       [exporterPanel displayIfNeeded];
+      [pool release];
     }
 }
 
