@@ -200,7 +200,7 @@
 }
 
 // Equality and hash codes
-- (unsigned) hash
+- (NSUInteger) hash
 {
   return [feedURL hash];
 }

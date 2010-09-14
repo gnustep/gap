@@ -1,6 +1,8 @@
-================
-RSSKit Changelog
-================
+2010-09-14 Riccardo Mottola
+
+	* GNUstep.h: added define for NSUInteger for old macs
+	* RSSArticle.[h,m],
+	* RSSFeed.[h,m] : change signature of hash to NSUInteger
 
 July-13-2009 Riccardo Mottola
 	* Removed several c99-isms

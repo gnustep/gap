@@ -187,7 +187,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 }
 
 // Equality and hash codes
-- (unsigned) hash
+- (NSUInteger) hash
 {
   return [headline hash] ^ [url hash];
 }
