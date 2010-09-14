@@ -26,6 +26,10 @@
 
 #ifndef GNUSTEP
 
+#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#define NSUInteger unsigned
+#endif
+
 #define AUTORELEASE(object)      [object autorelease]
 #define TEST_AUTORELEASE(object) ({ if (object) [object autorelease]; })
 

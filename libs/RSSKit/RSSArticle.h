@@ -106,7 +106,6 @@
 
 
 // Equality and hash codes
-- (unsigned) hash;
 - (BOOL) isEqual: (id)anObject;
 
 /**
