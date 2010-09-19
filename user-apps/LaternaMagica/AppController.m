@@ -668,6 +668,7 @@
 - (IBAction)exportImages:(id)sender
 {
   [exporterPanel makeKeyAndOrderFront:self];
+  [exportProgress setDoubleValue: 0.0];
 }
 
 - (IBAction)setExportPath:(id)sender
