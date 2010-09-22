@@ -1,4 +1,4 @@
-//  $Id: FoundationExtentions.m,v 1.2 2010/09/22 16:20:41 rmottola Exp $
+//  $Id: FoundationExtentions.m,v 1.3 2010/09/22 19:04:22 rmottola Exp $
 //
 //  FoundationExtentions.m
 //  FSCore Framework
@@ -45,13 +45,13 @@
 #ifdef __APPLE__
 #import <objc/objc-class.h>
 #import <objc/objc-runtime.h>
-#endif
 
-#if defined(APPLE_RUNTIME) && MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
-Class class_getSuperClass(Class subClass)
+#if !(MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_4)
+Class class_getSuperclass(Class subClass)
 {
-  class = subClass -> super_class:
+  return subClass -> super_class;
 }
+#endif
 #endif
 
 @implementation NSObject (Introspection)
