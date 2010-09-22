@@ -1,4 +1,4 @@
-//  $Id: FSKeyGroup.m,v 1.1 2008/10/14 15:04:20 hns Exp $
+//  $Id: FSKeyGroup.m,v 1.2 2010/09/22 21:47:28 rmottola Exp $
 //
 //  FSKeyGroup.m
 //  FlexiSheet
@@ -6,6 +6,8 @@
 //  Created by Stefan Leuker on 26-SEP-2001.
 //
 //  Copyright (c) 2001-2004, Stefan Leuker.        All rights reserved.
+//  2008-2010 GNUstep Application Project
+//            Riccardo Mottola
 //  
 //  Redistribution and use in source and binary forms,  with or without
 //  modification,  are permitted provided that the following conditions
@@ -37,6 +39,8 @@
 //  ANY WAY  OUT  OF  THE USE OF THIS SOFTWARE,  EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 //  
+
+#include <assert.h>
 
 #import "FSCore.h"
 #import "FoundationExtentions.h"

@@ -1,4 +1,4 @@
-//  $Id: FoundationExtentions.m,v 1.4 2010/09/22 19:44:32 rmottola Exp $
+//  $Id: FoundationExtentions.m,v 1.5 2010/09/22 21:47:28 rmottola Exp $
 //
 //  FoundationExtentions.m
 //  FSCore Framework
@@ -6,6 +6,8 @@
 //  Created by Stefan Leuker on 11-SEP-2001.
 //
 //  Copyright (c) 2001-2004, Stefan Leuker.        All rights reserved.
+//  2008-2010 Riccardo Mottola
+//            GNUstep Application Project
 //  
 //  Redistribution and use in source and binary forms,  with or without
 //  modification,  are permitted provided that the following conditions
@@ -39,6 +41,8 @@
 //  
 
 // NOTE: This code isn't portable at all and very specific for the Obj-C Runtime
+
+#include <assert.h>
 
 #import "FoundationExtentions.h"
 #import <objc/objc-api.h>

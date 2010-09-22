@@ -1,4 +1,4 @@
-//  $Id: FSCellnameFunction.m,v 1.1 2008/10/14 15:04:25 hns Exp $
+//  $Id: FSCellnameFunction.m,v 1.2 2010/09/22 21:47:28 rmottola Exp $
 //
 //  FSCellnameFunction.m
 //  FlexiSheet
@@ -37,6 +37,8 @@
 //  ANY WAY  OUT  OF  THE USE OF THIS SOFTWARE,  EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 //  
+
+#include <assert.h>
 
 #import "FSCellnameFunction.h"
 #import "FSExpressionError.h"
