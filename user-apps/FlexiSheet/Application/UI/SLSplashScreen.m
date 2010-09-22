@@ -22,7 +22,7 @@
     cRect.size = [image size];
     self = [super initWithFrame:cRect];
     window = [[NSWindow alloc] initWithContentRect:cRect
-                                         styleMask:NSBorderlessWindowMask
+                                         styleMask:NSBorderlessWindowMask|NSResizableWindowMask
                                            backing:NSBackingStoreBuffered defer:YES];
     [window setContentView:self];
     [window setOpaque:NO];
@@ -30,6 +30,7 @@
     [window center];
     [window setLevel:NSFloatingWindowLevel];
     [window orderFrontRegardless];
+    [window makeKeyWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidFinishLaunching:)
                                                  name:NSApplicationDidFinishLaunchingNotification
