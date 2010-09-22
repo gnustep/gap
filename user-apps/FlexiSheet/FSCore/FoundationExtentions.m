@@ -1,4 +1,4 @@
-//  $Id: FoundationExtentions.m,v 1.3 2010/09/22 19:04:22 rmottola Exp $
+//  $Id: FoundationExtentions.m,v 1.4 2010/09/22 19:44:32 rmottola Exp $
 //
 //  FoundationExtentions.m
 //  FSCore Framework
@@ -74,7 +74,7 @@ BOOL FXClassIsSuperclassOfClass(Class aClass, Class subClass)
 NSArray *FXSubclassesOfClass(Class aClass)
 { // get all subclasses (nested) of given class
     NSMutableArray *subclasses = [NSMutableArray array];
-#ifdef __APPLE__
+#if defined( __APPLE__) || defined(__GNUSTEP_RUNTIME__)
     Class          *classes;
     int            numClasses = 0, newNumClasses, i;
 	// Apple objc runtime

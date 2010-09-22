@@ -1,4 +1,4 @@
-//  $Id: FSObject.m,v 1.2 2010/05/20 09:39:11 rmottola Exp $
+//  $Id: FSObject.m,v 1.3 2010/09/22 19:44:32 rmottola Exp $
 //
 //  FSObject.m
 //  FlexiSheet
@@ -85,10 +85,10 @@ static NSString  *COMPLAIN_MISSING_IMP = @"Class %@ needs this code:\n\
     //NSLog(@"Reusing instance of %@", self);
     obj = pool->pool[pool->low];
     pool->low = (pool->low + 1) % pool->poolSize;
-#ifdef __APPLE__
-    memset(obj+1, 0, ((struct objc_class *) self)->instance_size - 4);
+#if (defined(APPLE_RUNTIME) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5) || defined (__GNUSTEP_RUNTIME__)
+    memset(obj+1, 0, class_getInstanceSize(self)- 4);
 #else
-    memset(obj+1, 0, class_get_instance_size(self) - 4);
+    memset(obj+1, 0, ((struct objc_class *) self)->instance_size - 4);
 #endif
     return obj;
 }
