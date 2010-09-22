@@ -4,8 +4,9 @@
 //
 //  Created by Stefan Leuker on 08-OCT-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
-//
-//  $Id: FSHeaderLayout.m,v 1.2 2008/12/17 18:16:03 rmottola Exp $
+//  2008-2010 GNUstep Application Project, Riccardo Mottola
+//  
+//  $Id: FSHeaderLayout.m,v 1.3 2010/09/22 21:59:32 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -14,7 +15,8 @@
 - (id)initWithHeader:(FSHeader*)header
 {
     self = [super init];
-    if (self) {
+    if (self)
+      {
         _header = [header retain];
         _dict = [[NSMutableDictionary alloc] init];
         _keys = nil;
@@ -27,8 +29,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
             selector:@selector(itemDidCangeName:)
             name:FSItemDidChangeNotification object:[_header table]];
+      [FSLog logDebug:@"FSHeaderLayout created for header %@.", [_header label]];
     }
-    [FSLog logDebug:@"FSHeaderLayout created for header %@.", [_header label]];
     return self;
 }
 
