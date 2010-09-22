@@ -1,4 +1,4 @@
-//  $Id: FoundationExtentions.m,v 1.1 2008/10/14 15:04:24 hns Exp $
+//  $Id: FoundationExtentions.m,v 1.2 2010/09/22 16:20:41 rmottola Exp $
 //
 //  FoundationExtentions.m
 //  FSCore Framework
@@ -47,25 +47,24 @@
 #import <objc/objc-runtime.h>
 #endif
 
+#if defined(APPLE_RUNTIME) && MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
+Class class_getSuperClass(Class subClass)
+{
+  class = subClass -> super_class:
+}
+#endif
+
 @implementation NSObject (Introspection)
 
 BOOL FXClassIsSuperclassOfClass(Class aClass, Class subClass)
 {	
     Class class;
-#if defined(APPLE_RUNTIME) && defined(MAC_OS_X_VERSION_10_5) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-	class = class_getSuperclass(subClass);
-#else
-	class = subClass -> super_class;
-#endif
+    class = class_getSuperclass(subClass);
     while(class != nil)
         {
 			if(class == aClass)
 				return YES;
-#if defined(APPLE_RUNTIME) && defined(MAC_OS_X_VERSION_10_5) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-					class = class_getSuperclass(class);
-#else
-					class = class -> super_class;
-#endif
+			class = class_getSuperclass(class);
         }
     return NO;
 }
