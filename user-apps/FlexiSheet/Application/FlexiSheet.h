@@ -1,4 +1,4 @@
-//  $Id: FlexiSheet.h,v 1.2 2008/12/15 14:44:25 rmottola Exp $
+//  $Id: FlexiSheet.h,v 1.3 2010/09/22 21:47:28 rmottola Exp $
 //
 //  FlexiSheet.h
 //  FlexiSheet
@@ -6,8 +6,10 @@
 //  Created by Stefan Leuker on 09-MAY-2002.
 //
 
-// Based on Apple's cool Cocoa frameworks
-#import <Cocoa/Cocoa.h>
+#include <assert.h>
+
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 #define FS_LOCALIZE(__STRG__) [[NSBundle mainBundle] localizedStringForKey:(__STRG__) value:@"" table:nil]
 
