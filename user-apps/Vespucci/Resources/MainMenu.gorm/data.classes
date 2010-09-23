@@ -16,7 +16,6 @@
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
 	    "chooseFont:",
-	    "performFindPanelAction:",
 	    "reload:",
 	    "savePrefs:",
 	    "setDownloadDelegate:",
