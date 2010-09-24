@@ -2,7 +2,7 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
+   Copyright (C) 2009-2010  GNUstep Application Team
                        Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
@@ -319,7 +319,6 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     
     elem = [outlineView itemAtRow: index];
-    result = nil;
     
     if (aPipeType == [PipeType articleType]) {
         if ([elem conformsToProtocol: @protocol(ArticleGroup)]) {
@@ -489,25 +488,25 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
          writeItems: (NSArray*)items
        toPasteboard: (NSPasteboard*)pboard
 {
-    NSMutableArray* types = [NSMutableArray new];
+    NSMutableArray* types;
     NSData* databaseElemData;
     id item;
     NSURL* url;
     
-    if ([items count] != 1) {
-        return NO;
-    }
+    if ([items count] != 1)
+      return NO;
     
     item = [items objectAtIndex: 0];
-    
+    types = [[NSMutableArray alloc] initWithCapacity:1];
     url = nil;
-    if ([item conformsToProtocol: @protocol(Feed)]) {
+    if ([item conformsToProtocol: @protocol(Feed)])
+      {
         id feed = item;
         NSURL* url = [feed feedURL];
         if (url != nil) {
             [types addObject: NSURLPboardType];
         }
-    }
+      }
     
     databaseElemData = nil;
     if ([item conformsToProtocol: @protocol(DatabaseElement)]) {
