@@ -69,7 +69,7 @@
 //    Database element protocol
 // ----------------------------------------------
 
--(NSDictionary*) plistDictionary
+-(NSMutableDictionary*) plistDictionary
 {
     NSMutableDictionary* dict = [super plistDictionary];
     
