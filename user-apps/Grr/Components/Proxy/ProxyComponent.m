@@ -54,6 +54,7 @@
     DESTROY(portControl);
     DESTROY(proxyUseButton);
     DESTROY(defaults);
+    [super dealloc];
 }
 
 // ---------------------------------------
