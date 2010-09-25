@@ -138,36 +138,15 @@
 
 -(BOOL)unarchive
 {
-    NSDictionary* dict =
-        [NSDictionary dictionaryWithContentsOfFile: [self databaseStoragePath]];
+    NSDictionary* dict;
     NSArray* elems;
     int i; // for iterations
-    NSArray* feeds;
     
     // Create new empty database
     ASSIGN(topLevelElements, [NSMutableArray new]);
     ASSIGN(allArticles, [NSMutableSet new]);
     
-    
-#ifdef BACKWARDS_COMPATIBILITY
-    // Backwards compatibility with Article Database Component
-    feeds = [dict objectForKey: @"feeds"];
-    for (i=0; i<[feeds count]; i++) {
-        NSEnumerator* enumerator;
-        id<RSSArticle> article;
-        id<Feed> feed = [Feed feedFromPlistDictionary: [feeds objectAtIndex: i]];
-        
-        NSLog(@"Unarchived feed %@", [feed feedName]);
-        [topLevelElements addObject: feed];
-        
-        enumerator = [feed articleEnumerator];
-        while ((article = [enumerator nextObject]) != nil) {
-            //NSLog(@"  - article %@ (feed=%@)", [article headline], [[article feed] feedName]);
-            [allArticles addObject: article];
-        }
-    }
-#endif
-    
+    dict = [NSDictionary dictionaryWithContentsOfFile: [self databaseStoragePath]];
     elems = [dict objectForKey: @"topLevelElements"];
     for (i=0; i<[elems count]; i++) {
         NSDictionary* elemDict = [elems objectAtIndex: i];
