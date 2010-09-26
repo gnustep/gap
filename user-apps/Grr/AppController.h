@@ -36,6 +36,8 @@
     BOOL applicationStartupFinished;
 }
 
+-(IBAction) openPreferencesPanel: (id)sender;
+
 // Toolbar delegate
 
 // required method

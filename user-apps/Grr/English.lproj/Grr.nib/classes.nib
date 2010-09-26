@@ -1,6 +1,7 @@
 {
     IBClasses = (
         {
+            ACTIONS = {openPreferencesPanel = id; }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
