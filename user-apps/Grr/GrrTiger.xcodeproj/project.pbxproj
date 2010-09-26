@@ -169,6 +169,7 @@
 		857AA89B1082A4CB00829DD6 /* ProxyComponent.nib in Resources */ = {isa = PBXBuildFile; fileRef = 857AA8991082A4CB00829DD6 /* ProxyComponent.nib */; };
 		857AA8B71082AC6800829DD6 /* ArticleTextViewPlugin.nib in Resources */ = {isa = PBXBuildFile; fileRef = 857AA8B51082AC6800829DD6 /* ArticleTextViewPlugin.nib */; };
 		857AA8BC1082AC8700829DD6 /* DatabaseTreeViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 857AA8BA1082AC8700829DD6 /* DatabaseTreeViewController.nib */; };
+		857BF870125013040085BF64 /* Fonts.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 851B402D109E14920036C28D /* Fonts.tiff */; };
 		85A5FDD0108D22CC00AC6AA4 /* ArticleTextViewPlugin.nib in Resources */ = {isa = PBXBuildFile; fileRef = 857AA8B51082AC6800829DD6 /* ArticleTextViewPlugin.nib */; };
 		85A5FDD1108D22D100AC6AA4 /* ArticleTextViewPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D94107BF8CB00B55A9A /* ArticleTextViewPlugin.m */; };
 		85A5FDD2108D22D600AC6AA4 /* NSString+TolerantHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D96107BF8CB00B55A9A /* NSString+TolerantHTML.m */; };
@@ -1209,6 +1210,7 @@
 				850F63FC108A37E50035D594 /* ArticleTablePlugin.nib in Resources */,
 				85C0D2FD1093BB810095C185 /* bluebg.png in Resources */,
 				8540B03F10B69963008281E2 /* Grr-Icon.icns in Resources */,
+				857BF870125013040085BF64 /* Fonts.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

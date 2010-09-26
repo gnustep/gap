@@ -304,7 +304,7 @@
 //    Handlers for actions
 // ------------------------------------------------
 
--(void) openPreferencesPanel: (id)sender
+-(IBAction) openPreferencesPanel: (id)sender
 {
     [[PreferencesPanel shared] open];
 }
