@@ -176,7 +176,7 @@
 
 
     // First create a different RSSFactory and replace the current one with that.
-    [RSSFactory setFactory: [ArticleFactory new]];
+    [RSSFactory setFactory: [[[ArticleFactory alloc] init] autorelease]];
     
     // Make sure the fonts are set.
     defaults = [NSUserDefaults standardUserDefaults];
