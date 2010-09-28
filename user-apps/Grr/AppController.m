@@ -1,9 +1,9 @@
 /*
    Grr RSS Reader
    
-   Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2006-2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
+   Copyright (C) 2009-2010 GNUstep Application Team
+                           Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -20,8 +20,9 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA. 
 */
 
-#import "AppController.h"
 #import <AppKit/AppKit.h>
+
+#import "AppController.h"
 #import "Components.h"
 #import "Database.h"
 #import "ToolbarDelegate.h"
@@ -51,7 +52,7 @@
 -(void)loadViewProvidingComponent: (id<ViewProvidingComponent>) aComponent overriddenView: (NSView**) overriddenView
 {
     NSView* newView;
-    id<ViewProvidingComponent, NSObject> component = (id<NSObject>) aComponent;
+    id<ViewProvidingComponent, NSObject> component = (id<ViewProvidingComponent, NSObject>) aComponent;
     
     NSAssert1(
         [component conformsToProtocol: @protocol(ViewProvidingComponent)],
