@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 39;
+	objectVersion = 38;
 	objects = {
 		080E96DDFE201D6D7F000001 = {
 			children = (
@@ -21,7 +21,6 @@
 			isa = PBXGroup;
 			name = Classes;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C165CFE840E0CC02AAC07 = {
 			children = (
@@ -30,16 +29,13 @@
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C165DFE840E0CC02AAC07 = {
 			fileEncoding = 10;
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
 			name = English;
 			path = English.lproj/InfoPlist.strings;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		089C165EFE840E0CC02AAC07 = {
 			fileRef = 089C165CFE840E0CC02AAC07;
@@ -64,15 +60,12 @@
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		1058C7A1FEA54F0111CA2CBB = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		1058C7A2FEA54F0111CA2CBB = {
 			children = (
@@ -84,30 +77,12 @@
 			isa = PBXGroup;
 			name = "Other Frameworks";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 //100
 //101
 //102
 //103
 //104
-//170
-//171
-//172
-//173
-//174
-		17587328FF379C6511CA2CBB = {
-			explicitFileType = wrapper.application;
-			isa = PBXFileReference;
-			path = Vespucci.app;
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-//170
-//171
-//172
-//173
-//174
 //190
 //191
 //192
@@ -115,13 +90,12 @@
 //194
 		19C28FACFE9D520D11CA2CBB = {
 			children = (
-				17587328FF379C6511CA2CBB,
-				85BA5E660E29547F0016CAD5,
+				8517AF7E0F8C0D2400A80101,
+				8517AF800F8C0D2400A80101,
 			);
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 //190
 //191
@@ -134,8 +108,6 @@
 //293
 //294
 		29B97313FDCFA39411CA2CEA = {
-			buildSettings = {
-			};
 			buildStyles = (
 				4A9504CCFFE6A4B311CA0CBA,
 				4A9504CDFFE6A4B311CA0CBA,
@@ -161,7 +133,6 @@
 			name = Vespucci;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA = {
 			children = (
@@ -173,15 +144,12 @@
 			name = "Other Sources";
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97316FDCFA39411CA2CEA = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = main.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
@@ -194,7 +162,6 @@
 			name = Resources;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA = {
 			children = (
@@ -205,23 +172,18 @@
 			name = Frameworks;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		29B97324FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		29B97325FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		29B97326FDCFA39411CA2CEA = {
 			buildPhases = (
@@ -248,7 +210,7 @@
 			name = Vespucci;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vespucci;
-			productReference = 17587328FF379C6511CA2CBB;
+			productReference = 8517AF800F8C0D2400A80101;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -477,18 +439,14 @@
 		8503A3F90F1AA4E100E34E67 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = VEMenuItem.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		8503A3FA0F1AA4E100E34E67 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = VEMenuItem.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		8503A3FB0F1AA4E100E34E67 = {
 			fileRef = 8503A3F90F1AA4E100E34E67;
@@ -514,12 +472,20 @@
 			settings = {
 			};
 		};
+		8517AF7E0F8C0D2400A80101 = {
+			isa = PBXApplicationReference;
+			path = Vespucci.app;
+			refType = 3;
+		};
+		8517AF800F8C0D2400A80101 = {
+			isa = PBXApplicationReference;
+			path = Vespucci.app;
+			refType = 3;
+		};
 		853AAB430F36609C006B331C = {
 			isa = PBXFileReference;
-			lastKnownFileType = image.icns;
 			path = VE_icons_mac.icns;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		853AAB440F36609C006B331C = {
 			fileRef = 853AAB430F36609C006B331C;
@@ -536,18 +502,14 @@
 		85A1AA730BB9497300A80110 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = VEWinController.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85A1AA740BB9497300A80110 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = VEWinController.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85A1AA760BB9497300A80110 = {
 			fileRef = 85A1AA730BB9497300A80110;
@@ -569,15 +531,12 @@
 			name = MainMenu.nib;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85A386C60BC3AD6600A80110 = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
 			name = English;
 			path = English.lproj/MainMenu.nib;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85A386C70BC3AD6600A80110 = {
 			fileRef = 85A386C50BC3AD6600A80110;
@@ -610,7 +569,7 @@
 			name = "Vespucci-SWK";
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vespucci;
-			productReference = 85BA5E660E29547F0016CAD5;
+			productReference = 8517AF7E0F8C0D2400A80101;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -878,21 +837,11 @@
 			settings = {
 			};
 		};
-		85BA5E660E29547F0016CAD5 = {
-			explicitFileType = wrapper.application;
-			includeInIndex = 0;
-			isa = PBXFileReference;
-			path = Vespucci.app;
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		85BA5E820E29551C0016CAD5 = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = WebKit.framework;
 			path = /Library/Frameworks/WebKit.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		85BA5E830E29551C0016CAD5 = {
 			fileRef = 85BA5E820E29551C0016CAD5;
@@ -902,11 +851,9 @@
 		};
 		85C8839E0C29C4CD00A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
 			name = WebKit.framework;
 			path = /System/Library/Frameworks/WebKit.framework;
 			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		85C8839F0C29C4CD00A80101 = {
 			fileRef = 85C8839E0C29C4CD00A80101;
@@ -917,18 +864,14 @@
 		85D522A20C3076A000A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = VEDocument.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D522A30C3076A000A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = VEDocument.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D522A40C3076A000A80101 = {
 			fileRef = 85D522A20C3076A000A80101;
@@ -950,15 +893,12 @@
 			name = VEDocument.nib;
 			path = "";
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D522A70C30790200A80101 = {
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
 			name = English;
 			path = English.lproj/VEDocument.nib;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D522A80C30790200A80101 = {
 			fileRef = 85D522A60C30790200A80101;
@@ -969,18 +909,14 @@
 		85D522AA0C307FCD00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = VEAppController.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D522AB0C307FCD00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = VEAppController.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85D522AC0C307FCD00A80101 = {
 			fileRef = 85D522AA0C307FCD00A80101;
@@ -997,18 +933,14 @@
 		85DAD5910D47EC0D00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = VEDocumentController.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DAD5920D47EC0D00A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = VEDocumentController.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85DAD5930D47EC0D00A80101 = {
 			fileRef = 85DAD5910D47EC0D00A80101;
@@ -1031,18 +963,14 @@
 		85F552960D4A773400A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
 			path = VEFunctions.h;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85F552970D4A773400A80101 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
 			path = VEFunctions.m;
 			refType = 4;
-			sourceTree = "<group>";
 		};
 		85F552980D4A773400A80101 = {
 			fileRef = 85F552960D4A773400A80101;

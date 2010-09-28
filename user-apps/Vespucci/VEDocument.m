@@ -57,27 +57,14 @@ static NSString *homePage = @"";
     return doc;
 }
 
-- (NSData *)dataRepresentationOfType:(NSString *)type
-{
-    // Implement to provide a persistent data representation of your document OR remove this and implement the file-wrapper or file path based save methods.
-    return nil;
-}
-
-- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type
-{
-    // Implement to load a persistent data representation of your document OR remove this and implement the file-wrapper or file path based load methods.
-    return YES;
-}
 
 - (void)makeWindowControllers
 {
     windowController = [[VEWinController alloc] initWithWindowNibName:@"VEDocument"];
     [self addWindowController:windowController];
     [windowController release];
-
-    /* set undo levels */
-    [[self undoManager] setLevelsOfUndo:1];
 }
+
 
 - (WebView *)webView
 {
