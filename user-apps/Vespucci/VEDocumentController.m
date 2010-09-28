@@ -2,7 +2,7 @@
  project: vespucci
  vedocumentcontroller.m
 
- copyright (c) 2008-2009
+ copyright (c) 2008-2010
 
  author: Ing. Riccardo Mottola
 
@@ -45,14 +45,14 @@
 
 - (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)flag
 {
-    NSString *urlStr;
+    NSURL *url;
 
     if (!([fileName hasPrefix:@"http://"] || [fileName hasPrefix:@"https://"] || [fileName hasPrefix:@"file://"]))
-      urlStr = [@"file://" stringByAppendingString:fileName];
+      url = [NSURL fileURLWithPath: fileName];
     else
-      urlStr = [NSString stringWithString:fileName];
+      url = [NSURL URLWithString:fileName];
 
-    return [self openDocumentWithContentsOfURL:[NSURL URLWithString:urlStr] display:flag];
+    return [self openDocumentWithContentsOfURL: url display: flag];
 } 
 
 - (id)openDocumentWithContentsOfURL:(NSURL *)aURL display:(BOOL)flag
