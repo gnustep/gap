@@ -1,6 +1,13 @@
-==============
-Grr ChangeLog
-==============
+2010-09-28 Riccardo Mottola
+
+	* AppController.m
+	* Database.h
+	* Components/DatabaseOperations/DatabaseOperations.m
+	* Components/DatabaseTreeView/DatabaseTreeViewController.h
+	* Components/DatabaseTreeView/DatabaseTreeViewController.m
+	* Components/TreeDatabase/TreeDatabaseComponent.m:
+	Warning fixes about categories.
+
 
 2010-03-15 Nicola Pero
 	* GNUmakefile.postamble

@@ -1,9 +1,9 @@
 /*
    Grr RSS Reader
    
-   Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009-2010  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2006-2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
+   Copyright (C) 2009-2010 GNUstep Application Team
+                           Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -157,7 +157,7 @@ static NSImage* arrowDown = nil;
 
 -(void) articleReadFlagChanged: (NSNotification*) notification
 {
-    id<Feed> feed = [(id<Article>)[notification object] feed];
+  id<Feed> feed = (id<Feed>)[(id<Article>)[notification object] feed];
     
     [self redrawFeed: feed];
 }

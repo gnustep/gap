@@ -1,9 +1,9 @@
 /*
    Grr RSS Reader
    
-   Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2006-2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
+   Copyright (C) 2009-2010 GNUstep Application Team
+                           Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -322,7 +322,7 @@
 #endif // VERSION
 #endif // GNUSTEP
     
-    feed = [[RSSFactory sharedFactory] feedWithURL: aURL];
+    feed = (id<Feed>)[[RSSFactory sharedFactory] feedWithURL: aURL];
     
     if (feed == nil) {
         return NO;
