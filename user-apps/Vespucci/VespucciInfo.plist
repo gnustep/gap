@@ -17,7 +17,7 @@
 	    );
 	}
     );
-    Copyright = "Copyright (C) 2007-2009";
+    Copyright = "Copyright (C) 2007-2010";
     CopyrightDescription = "Released under GPL v2+";
     FullVersionID = 0.1;
     NSExecutable = Vespucci;
