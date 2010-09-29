@@ -37,27 +37,6 @@ static NSString *homePage = @"";
     [WebView class];
 }
 
-- (id)initWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
-{
-    VEDocument *doc;
-    
-    doc = [[VEDocument alloc] init];
-    NSAssert(doc != NULL, @"VEDocument - document can't be nil");
-    
-    return doc;
-}
-
-- (id)initWithContentsOfURL:(NSURL *)url display:(BOOL)flag
-{
-    VEDocument *doc;
-    
-    doc = [[VEDocument alloc] init];
-    NSAssert(doc != NULL, @"VEDocument - document can't be nil");
-    
-    return doc;
-}
-
-
 - (void)makeWindowControllers
 {
     windowController = [[VEWinController alloc] initWithWindowNibName:@"VEDocument"];
