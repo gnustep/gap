@@ -26,7 +26,7 @@
 
 #ifndef GNUSTEP
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if !defined( MAC_OS_X_VERSION_10_5 )
 #define NSUInteger unsigned
 #endif
 
