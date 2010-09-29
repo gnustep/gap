@@ -10,7 +10,6 @@
 	    "goForwardHistory:",
 	    "makeTextLarger:",
 	    "makeTextSmaller:",
-	    "performFindPanelAction:",
 	    "reload:",
 	    "setDownloadDelegate:",
 	    "setEditingDelegate:",
