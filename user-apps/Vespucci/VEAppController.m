@@ -2,7 +2,7 @@
  Project: Vespucci
  VEAppController.m
 
- Copyright (C) 2007-2009
+ Copyright (C) 2007-2010
 
  Author: Ing. Riccardo Mottola
 
@@ -177,7 +177,10 @@
     WebPreferences *webPrefs;
     NSFont *font;
     NSString *fontName;
-    
+    NSUserDefaults *defaults;
+
+    defaults = [NSUserDefaults standardUserDefaults];
+
     webPrefs = [[WebPreferences alloc] initWithIdentifier:@"Vespucci"];
     [javaScriptCheck setState:[webPrefs isJavaScriptEnabled] ? NSOnState : NSOffState];
 
@@ -200,6 +203,8 @@
     font = [NSFont fontWithName: fontName size:12.0];
     [self updateFontPreview:fontMonoField :font];
     monospacedFont = font;
+
+    [homePageField setStringValue: [defaults valueForKey:@"Homepage"]];
 
     [prefPanel makeKeyAndOrderFront:self];
     [webPrefs release];
