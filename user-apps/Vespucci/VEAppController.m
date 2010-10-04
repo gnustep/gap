@@ -249,6 +249,7 @@
 
   fontMgr = [NSFontManager sharedFontManager];
 
+  fontField = nil;
   if (sender == chooseStandardFontButton)
     fontField = fontStandardField;
   else if (sender == chooseSerifFontButton)
@@ -357,6 +358,7 @@
     [mi setUrlTitle:title];
     
     [[bookmarksMenu submenu] addItem:mi];
+    [mi release];
     [addBookmarkPanel performClose:self];
 }
 
