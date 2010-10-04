@@ -138,6 +138,7 @@
             [subMenuItem setSubmenu:subMenu];
             [menu addItem:subMenuItem];
             [self addBookmarksFromDictionary:bmDict toMenu:subMenu];
+	    [subMenuItem release];
         } else if ([bmType isEqualToString:@"WebBookmarkTypeLeaf"])
         {
             NSDictionary *uriDict;
@@ -152,7 +153,8 @@
             [mi setUrl:bmUrl];
             [mi setUrlTitle:bmTitle];
             
-            [menu addItem:mi];            
+            [menu addItem:mi];
+	    [mi release];
         }
     }
 }
