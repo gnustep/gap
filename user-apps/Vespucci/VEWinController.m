@@ -59,6 +59,8 @@
     hp = [defaults stringForKey:@"Homepage"];
     NSLog(@"WindowdDidLoad: read from defaults homepage = %@", hp);
     [doc setHomePage:hp];
+    
+    [doc windowControllerDidLoadNib: self];
 }
 
 - (void) showStatus:(NSString *) str

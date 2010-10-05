@@ -30,7 +30,6 @@
 
 @implementation VEDocumentController
 
-
 - (id)openUntitledDocumentOfType:(NSString *)docType display:(BOOL)display
 {
     VEDocument *doc;
@@ -43,6 +42,7 @@
     return doc;
 }
 
+#if 0
 - (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)flag
 {
     NSURL *url;
@@ -88,6 +88,7 @@
     [doc  loadUrl:aURL];
     return doc;
 }
+#endif
 
 
 @end

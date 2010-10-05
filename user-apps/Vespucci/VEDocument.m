@@ -29,21 +29,50 @@ static NSString *homePage = @"";
 
 @implementation VEDocument
 
-- (void)windowControllerDidLoadNib:(NSWindowController *) aController
-{
-    [super windowControllerDidLoadNib:aController];
 
-    /* useless call to fool the MS Windows linker */
-    [WebView class];
+- (id)initWithContentsOfURL:(NSURL *)aURL ofType:(NSString *)docType error:(NSError **)outError
+{
+  self = [self init];
+  if (self != nil)
+    {
+      NSLog(@"initWithContentsOfURL %@", aURL);
+      [self setFileType: docType];
+      
+      /* at this point the NIB is not loaded yet so the WebView is not valid yet
+        we set the URL and filename to load it later once the controller is instantiated */
+      [self setFileURL: aURL];
+      [self setFileName: [aURL path]];
+    }
+  
+  return self;
+}
+
+/* subclassed instead of loadDataRepresentation:ofType: to load local files from the open menu */
+- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)docType
+{
+  [self setFileType: docType];
+  
+  /* at this point the NIB is not loaded yet so the WebView is not valid yet
+  we set the URL and filename to load it later once the controller is instantiated */
+  [self setFileURL: [NSURL fileURLWithPath: fileName]];
+  [self setFileName: fileName];
+  return YES;
+}
+
+
+- (void)windowControllerDidLoadNib:(NSWindowController *)windowController
+{
+  NSLog(@"window did load nib URL: %@", [self fileURL]);
+  /* now that the window has loaded we load the previously set URL */
+  [self loadUrl: [self fileURL]];
 }
 
 - (void)makeWindowControllers
 {
     windowController = [[VEWinController alloc] initWithWindowNibName:@"VEDocument"];
     [self addWindowController:windowController];
-    [windowController release];
+    [windowController release];    
 }
-
 
 - (WebView *)webView
 {
@@ -66,9 +95,11 @@ static NSString *homePage = @"";
 - (void)loadUrl:(NSURL *)anUrl
 {
     NSLog(@"VEDocument - set url to %@", anUrl);
-    NSAssert([self webView] != nil, @"loadUrl: webView can't be nil");
     if (anUrl != nil)
+      {
+        NSAssert([self webView] != nil, @"loadUrl: webView can't be nil");
         [[[self webView] mainFrame] loadRequest:[NSURLRequest requestWithURL:anUrl]];
+      }
 }
 
 - (NSString *)loadedUrl
@@ -80,5 +111,26 @@ static NSString *homePage = @"";
 {
     return [windowController loadedPageTitle];
 }
+
+
+/* implementation of older methods for compatibility */
+
+#if defined (__APPLE__) && !defined(MAC_OS_X_VERSION_10_4)
+- (void)setFileURL:(NSURL *)absoluteURL
+{
+  _docURL = absoluteURL;
+}
+- (NSURL *)fileURL
+{
+  return _docURL;
+}
+
+- (id)initWithContentsOfURL:(NSURL *)aURL ofType:(NSString *)docType
+{
+  self = [self initWithContentsOfURL: aURL ofType:docType error:nil];  
+  return self;
+}
+
+#endif
 
 @end

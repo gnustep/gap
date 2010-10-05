@@ -36,7 +36,7 @@
 {
     return YES;
 }
-
+/*
 - (BOOL) applicationOpenUntitledFile: (id)sender
 {
     VEDocument *doc;
@@ -46,6 +46,7 @@
 
     return (doc != nil);
 }
+*/
 
 - (NSMutableDictionary *)bookmarksFromMenu:(NSMenu *)menu
 {
