@@ -1,0 +1,605 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		851B405510A0B0000036C28D /* Info-Vespucci.plist in Resources */ = {isa = PBXBuildFile; fileRef = 851B405410A0B0000036C28D /* Info-Vespucci.plist */; };
+		851B405610A0B0000036C28D /* Info-Vespucci.plist in Resources */ = {isa = PBXBuildFile; fileRef = 851B405410A0B0000036C28D /* Info-Vespucci.plist */; };
+		85792E52108E5226001B900E /* VEWinController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85A1AA730BB9497300A80110 /* VEWinController.h */; };
+		85792E53108E5226001B900E /* VEDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D522A20C3076A000A80101 /* VEDocument.h */; };
+		85792E54108E5226001B900E /* VEAppController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D522AA0C307FCD00A80101 /* VEAppController.h */; };
+		85792E55108E5226001B900E /* VEDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DAD5910D47EC0D00A80101 /* VEDocumentController.h */; };
+		85792E56108E5226001B900E /* VEFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 85F552960D4A773400A80101 /* VEFunctions.h */; };
+		85792E57108E5226001B900E /* VEMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8503A3F90F1AA4E100E34E67 /* VEMenuItem.h */; };
+		85792E59108E5226001B900E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		85792E5A108E5226001B900E /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85A386C50BC3AD6600A80110 /* MainMenu.nib */; };
+		85792E5B108E5226001B900E /* VEDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85D522A60C30790200A80101 /* VEDocument.nib */; };
+		85792E5C108E5226001B900E /* VE_icons_mac.icns in Resources */ = {isa = PBXBuildFile; fileRef = 853AAB430F36609C006B331C /* VE_icons_mac.icns */; };
+		85792E5E108E5226001B900E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		85792E5F108E5226001B900E /* VEWinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A1AA740BB9497300A80110 /* VEWinController.m */; };
+		85792E60108E5226001B900E /* VEDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D522A30C3076A000A80101 /* VEDocument.m */; };
+		85792E61108E5226001B900E /* VEAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D522AB0C307FCD00A80101 /* VEAppController.m */; };
+		85792E62108E5226001B900E /* VEDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DAD5920D47EC0D00A80101 /* VEDocumentController.m */; };
+		85792E63108E5226001B900E /* VEFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F552970D4A773400A80101 /* VEFunctions.m */; };
+		85792E64108E5226001B900E /* VEMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8503A3FA0F1AA4E100E34E67 /* VEMenuItem.m */; };
+		85792E66108E5226001B900E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		85792E67108E5226001B900E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C8839E0C29C4CD00A80101 /* WebKit.framework */; };
+		85792E6D108E5226001B900E /* VEWinController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85A1AA730BB9497300A80110 /* VEWinController.h */; };
+		85792E6E108E5226001B900E /* VEDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D522A20C3076A000A80101 /* VEDocument.h */; };
+		85792E6F108E5226001B900E /* VEAppController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D522AA0C307FCD00A80101 /* VEAppController.h */; };
+		85792E70108E5226001B900E /* VEDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DAD5910D47EC0D00A80101 /* VEDocumentController.h */; };
+		85792E71108E5226001B900E /* VEFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 85F552960D4A773400A80101 /* VEFunctions.h */; };
+		85792E72108E5226001B900E /* VEMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8503A3F90F1AA4E100E34E67 /* VEMenuItem.h */; };
+		85792E74108E5226001B900E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		85792E75108E5226001B900E /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85A386C50BC3AD6600A80110 /* MainMenu.nib */; };
+		85792E76108E5226001B900E /* VEDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85D522A60C30790200A80101 /* VEDocument.nib */; };
+		85792E77108E5226001B900E /* VE_icons_mac.icns in Resources */ = {isa = PBXBuildFile; fileRef = 853AAB430F36609C006B331C /* VE_icons_mac.icns */; };
+		85792E79108E5226001B900E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		85792E7A108E5226001B900E /* VEWinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A1AA740BB9497300A80110 /* VEWinController.m */; };
+		85792E7B108E5226001B900E /* VEDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D522A30C3076A000A80101 /* VEDocument.m */; };
+		85792E7C108E5226001B900E /* VEAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D522AB0C307FCD00A80101 /* VEAppController.m */; };
+		85792E7D108E5226001B900E /* VEDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DAD5920D47EC0D00A80101 /* VEDocumentController.m */; };
+		85792E7E108E5226001B900E /* VEFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F552970D4A773400A80101 /* VEFunctions.m */; };
+		85792E7F108E5226001B900E /* VEMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8503A3FA0F1AA4E100E34E67 /* VEMenuItem.m */; };
+		85792E81108E5226001B900E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		85792E82108E5226001B900E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BA5E820E29551C0016CAD5 /* WebKit.framework */; };
+		85F37F0D1253BACF00555E68 /* back_arrow.tif in Resources */ = {isa = PBXBuildFile; fileRef = 85F37F0B1253BACF00555E68 /* back_arrow.tif */; };
+		85F37F0E1253BACF00555E68 /* forward_arrow.tif in Resources */ = {isa = PBXBuildFile; fileRef = 85F37F0C1253BACF00555E68 /* forward_arrow.tif */; };
+		85F37F0F1253BACF00555E68 /* back_arrow.tif in Resources */ = {isa = PBXBuildFile; fileRef = 85F37F0B1253BACF00555E68 /* back_arrow.tif */; };
+		85F37F101253BACF00555E68 /* forward_arrow.tif in Resources */ = {isa = PBXBuildFile; fileRef = 85F37F0C1253BACF00555E68 /* forward_arrow.tif */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8503A3F90F1AA4E100E34E67 /* VEMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEMenuItem.h; sourceTree = "<group>"; };
+		8503A3FA0F1AA4E100E34E67 /* VEMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEMenuItem.m; sourceTree = "<group>"; };
+		851B405410A0B0000036C28D /* Info-Vespucci.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = "Info-Vespucci.plist"; sourceTree = "<group>"; };
+		853AAB430F36609C006B331C /* VE_icons_mac.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = VE_icons_mac.icns; sourceTree = "<group>"; };
+		85792E69108E5226001B900E /* Vespucci.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vespucci.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85792E84108E5226001B900E /* Vespucci.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vespucci.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85A1AA730BB9497300A80110 /* VEWinController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VEWinController.h; sourceTree = "<group>"; };
+		85A1AA740BB9497300A80110 /* VEWinController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = VEWinController.m; sourceTree = "<group>"; };
+		85A386C60BC3AD6600A80110 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		85BA5E820E29551C0016CAD5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		85C8839E0C29C4CD00A80101 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		85D522A20C3076A000A80101 /* VEDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEDocument.h; sourceTree = "<group>"; };
+		85D522A30C3076A000A80101 /* VEDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEDocument.m; sourceTree = "<group>"; };
+		85D522A70C30790200A80101 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/VEDocument.nib; sourceTree = "<group>"; };
+		85D522AA0C307FCD00A80101 /* VEAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEAppController.h; sourceTree = "<group>"; };
+		85D522AB0C307FCD00A80101 /* VEAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEAppController.m; sourceTree = "<group>"; };
+		85DAD5910D47EC0D00A80101 /* VEDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEDocumentController.h; sourceTree = "<group>"; };
+		85DAD5920D47EC0D00A80101 /* VEDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEDocumentController.m; sourceTree = "<group>"; };
+		85F37F0B1253BACF00555E68 /* back_arrow.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = back_arrow.tif; path = Resources/back_arrow.tif; sourceTree = "<group>"; };
+		85F37F0C1253BACF00555E68 /* forward_arrow.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = forward_arrow.tif; path = Resources/forward_arrow.tif; sourceTree = "<group>"; };
+		85F552960D4A773400A80101 /* VEFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEFunctions.h; sourceTree = "<group>"; };
+		85F552970D4A773400A80101 /* VEFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEFunctions.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85792E65108E5226001B900E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E66108E5226001B900E /* Cocoa.framework in Frameworks */,
+				85792E67108E5226001B900E /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85792E80108E5226001B900E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E81108E5226001B900E /* Cocoa.framework in Frameworks */,
+				85792E82108E5226001B900E /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8503A3F90F1AA4E100E34E67 /* VEMenuItem.h */,
+				8503A3FA0F1AA4E100E34E67 /* VEMenuItem.m */,
+				85A1AA730BB9497300A80110 /* VEWinController.h */,
+				85A1AA740BB9497300A80110 /* VEWinController.m */,
+				85D522A20C3076A000A80101 /* VEDocument.h */,
+				85D522A30C3076A000A80101 /* VEDocument.m */,
+				85D522AA0C307FCD00A80101 /* VEAppController.h */,
+				85D522AB0C307FCD00A80101 /* VEAppController.m */,
+				85DAD5910D47EC0D00A80101 /* VEDocumentController.h */,
+				85DAD5920D47EC0D00A80101 /* VEDocumentController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85C8839E0C29C4CD00A80101 /* WebKit.framework */,
+				85BA5E820E29551C0016CAD5 /* WebKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85792E69108E5226001B900E /* Vespucci.app */,
+				85792E84108E5226001B900E /* Vespucci.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Vespucci */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Vespucci;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+				85F552960D4A773400A80101 /* VEFunctions.h */,
+				85F552970D4A773400A80101 /* VEFunctions.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				851B405410A0B0000036C28D /* Info-Vespucci.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				85A386C50BC3AD6600A80110 /* MainMenu.nib */,
+				85D522A60C30790200A80101 /* VEDocument.nib */,
+				853AAB430F36609C006B331C /* VE_icons_mac.icns */,
+				85F37F0B1253BACF00555E68 /* back_arrow.tif */,
+				85F37F0C1253BACF00555E68 /* forward_arrow.tif */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		85792E51108E5226001B900E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E52108E5226001B900E /* VEWinController.h in Headers */,
+				85792E53108E5226001B900E /* VEDocument.h in Headers */,
+				85792E54108E5226001B900E /* VEAppController.h in Headers */,
+				85792E55108E5226001B900E /* VEDocumentController.h in Headers */,
+				85792E56108E5226001B900E /* VEFunctions.h in Headers */,
+				85792E57108E5226001B900E /* VEMenuItem.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85792E6C108E5226001B900E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E6D108E5226001B900E /* VEWinController.h in Headers */,
+				85792E6E108E5226001B900E /* VEDocument.h in Headers */,
+				85792E6F108E5226001B900E /* VEAppController.h in Headers */,
+				85792E70108E5226001B900E /* VEDocumentController.h in Headers */,
+				85792E71108E5226001B900E /* VEFunctions.h in Headers */,
+				85792E72108E5226001B900E /* VEMenuItem.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		85792E50108E5226001B900E /* Vespucci */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8582CACD12232581007CA669 /* Build configuration list for PBXNativeTarget "Vespucci" */;
+			buildPhases = (
+				85792E51108E5226001B900E /* Headers */,
+				85792E58108E5226001B900E /* Resources */,
+				85792E5D108E5226001B900E /* Sources */,
+				85792E65108E5226001B900E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vespucci;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Vespucci;
+			productReference = 85792E69108E5226001B900E /* Vespucci.app */;
+			productType = "com.apple.product-type.application";
+		};
+		85792E6B108E5226001B900E /* Vespucci-SWK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8582CAD112232581007CA669 /* Build configuration list for PBXNativeTarget "Vespucci-SWK" */;
+			buildPhases = (
+				85792E6C108E5226001B900E /* Headers */,
+				85792E73108E5226001B900E /* Resources */,
+				85792E78108E5226001B900E /* Sources */,
+				85792E80108E5226001B900E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Vespucci-SWK";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Vespucci;
+			productReference = 85792E84108E5226001B900E /* Vespucci.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 8582CAD512232581007CA669 /* Build configuration list for PBXProject "Vespucci" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Vespucci */;
+			projectDirPath = "";
+			targets = (
+				85792E50108E5226001B900E /* Vespucci */,
+				85792E6B108E5226001B900E /* Vespucci-SWK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85792E58108E5226001B900E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E59108E5226001B900E /* InfoPlist.strings in Resources */,
+				85792E5A108E5226001B900E /* MainMenu.nib in Resources */,
+				85792E5B108E5226001B900E /* VEDocument.nib in Resources */,
+				85792E5C108E5226001B900E /* VE_icons_mac.icns in Resources */,
+				851B405510A0B0000036C28D /* Info-Vespucci.plist in Resources */,
+				85F37F0F1253BACF00555E68 /* back_arrow.tif in Resources */,
+				85F37F101253BACF00555E68 /* forward_arrow.tif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85792E73108E5226001B900E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E74108E5226001B900E /* InfoPlist.strings in Resources */,
+				85792E75108E5226001B900E /* MainMenu.nib in Resources */,
+				85792E76108E5226001B900E /* VEDocument.nib in Resources */,
+				85792E77108E5226001B900E /* VE_icons_mac.icns in Resources */,
+				851B405610A0B0000036C28D /* Info-Vespucci.plist in Resources */,
+				85F37F0D1253BACF00555E68 /* back_arrow.tif in Resources */,
+				85F37F0E1253BACF00555E68 /* forward_arrow.tif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85792E5D108E5226001B900E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E5E108E5226001B900E /* main.m in Sources */,
+				85792E5F108E5226001B900E /* VEWinController.m in Sources */,
+				85792E60108E5226001B900E /* VEDocument.m in Sources */,
+				85792E61108E5226001B900E /* VEAppController.m in Sources */,
+				85792E62108E5226001B900E /* VEDocumentController.m in Sources */,
+				85792E63108E5226001B900E /* VEFunctions.m in Sources */,
+				85792E64108E5226001B900E /* VEMenuItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85792E78108E5226001B900E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85792E79108E5226001B900E /* main.m in Sources */,
+				85792E7A108E5226001B900E /* VEWinController.m in Sources */,
+				85792E7B108E5226001B900E /* VEDocument.m in Sources */,
+				85792E7C108E5226001B900E /* VEAppController.m in Sources */,
+				85792E7D108E5226001B900E /* VEDocumentController.m in Sources */,
+				85792E7E108E5226001B900E /* VEFunctions.m in Sources */,
+				85792E7F108E5226001B900E /* VEMenuItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		85A386C50BC3AD6600A80110 /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85A386C60BC3AD6600A80110 /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		85D522A60C30790200A80101 /* VEDocument.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85D522A70C30790200A80101 /* English */,
+			);
+			name = VEDocument.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8582CACE12232581007CA669 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks\"";
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G3;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Vespucci.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(value)";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = Vespucci;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		8582CACF12232581007CA669 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks\"";
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Vespucci.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(value)";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Vespucci;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		8582CAD012232581007CA669 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks\"";
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Vespucci.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\U0001";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Vespucci;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		8582CAD212232581007CA669 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks\"";
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G3;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Vespucci.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(value)";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Vespucci;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		8582CAD312232581007CA669 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks\"";
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Vespucci.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(value)";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Vespucci;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		8582CAD412232581007CA669 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks\"";
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Vespucci.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\U0001";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Vespucci;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		8582CAD612232581007CA669 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		8582CAD712232581007CA669 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		8582CAD812232581007CA669 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8582CACD12232581007CA669 /* Build configuration list for PBXNativeTarget "Vespucci" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8582CACE12232581007CA669 /* Development */,
+				8582CACF12232581007CA669 /* Deployment */,
+				8582CAD012232581007CA669 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		8582CAD112232581007CA669 /* Build configuration list for PBXNativeTarget "Vespucci-SWK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8582CAD212232581007CA669 /* Development */,
+				8582CAD312232581007CA669 /* Deployment */,
+				8582CAD412232581007CA669 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		8582CAD512232581007CA669 /* Build configuration list for PBXProject "Vespucci" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8582CAD612232581007CA669 /* Development */,
+				8582CAD712232581007CA669 /* Deployment */,
+				8582CAD812232581007CA669 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
