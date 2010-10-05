@@ -207,7 +207,7 @@
     [self updateFontPreview:fontMonoField :font];
     monospacedFont = font;
 
-    [homePageField setStringValue: [defaults valueForKey:@"Homepage"]];
+    [homePageField setStringValue: [defaults objectForKey:@"Homepage"]];
 
     [prefPanel makeKeyAndOrderFront:self];
     [webPrefs release];
