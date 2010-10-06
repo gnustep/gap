@@ -27,7 +27,7 @@
 #import <WebKit/WebKit.h>
 #import "VEWinController.h"
 
-#if defined (__APPLE__) && !defined(MAC_OS_X_VERSION_10_3)
+#if defined (__APPLE__) &&  MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_3
 @class NSError;
 #endif
 
@@ -36,7 +36,7 @@
 {
     VEWinController *windowController;
   
-#if defined (__APPLE__) && !defined(MAC_OS_X_VERSION_10_4)
+#if defined (__APPLE__) &&  MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
   @protected NSURL *_docURL;
 #endif
 }
@@ -48,7 +48,7 @@
 - (NSString *)loadedUrl;
 - (NSString *)loadedPageTitle;
 
-#if defined (__APPLE__) && !defined(MAC_OS_X_VERSION_10_4)
+#if defined (__APPLE__) &&  MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
 - (void)setFileURL:(NSURL *)absoluteURL;
 - (NSURL *)fileURL;
 - (id)initWithContentsOfURL:(NSURL *)aURL ofType:(NSString *)docType error:(NSError **)outError;
