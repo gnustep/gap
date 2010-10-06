@@ -115,7 +115,7 @@ static NSString *homePage = @"";
 
 /* implementation of older methods for compatibility */
 
-#if defined (__APPLE__) &&  MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
+#if defined (__APPLE__) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3)
 - (void)setFileURL:(NSURL *)absoluteURL
 {
   _docURL = absoluteURL;
