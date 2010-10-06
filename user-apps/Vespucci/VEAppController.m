@@ -36,17 +36,7 @@
 {
     return YES;
 }
-/*
-- (BOOL) applicationOpenUntitledFile: (id)sender
-{
-    VEDocument *doc;
 
-    doc = [[VEDocumentController sharedDocumentController] 
-    openUntitledDocumentOfType: @"HTML Document" display: YES];
-
-    return (doc != nil);
-}
-*/
 
 - (NSMutableDictionary *)bookmarksFromMenu:(NSMenu *)menu
 {
