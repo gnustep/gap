@@ -317,14 +317,22 @@
 
 - (IBAction) loadBookmark:(id)sender
 {
-    VEMenuItem *senderMenu;
+  VEMenuItem *senderMenu;
+  VEDocument *doc;
+  NSURL *url;
     
     NSLog(@"load bookmark!");
     senderMenu = (VEMenuItem *)sender;
     NSLog(@"url: %@", [senderMenu url]);
     NSLog(@"title: %@", [senderMenu title]);
     
-    [[[VEDocumentController sharedDocumentController] currentDocument] loadUrl:[NSURL URLWithString:[senderMenu url]]];
+    url = [NSURL URLWithString:[senderMenu url]];
+    doc = [[VEDocumentController sharedDocumentController] currentDocument];
+    
+    if (doc != nil)
+      [doc loadUrl: url];
+    else
+      [[VEDocumentController sharedDocumentController] openDocumentWithContentsOfURL: url display:YES];
 }
 
 /* Add Bookmark Panel handling */
