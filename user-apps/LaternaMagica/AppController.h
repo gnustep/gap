@@ -54,6 +54,11 @@
     LMFlipView            *fullView;
     NSSavePanel           *savePanel;
     
+    /* preferences */
+    IBOutlet NSPanel *prefPanel;
+    IBOutlet NSButton *destroyOrRecycleButton;
+    IBOutlet NSButton *askBeforeDeletingButton;
+    
     /* exporter */
     IBOutlet NSPanel             *exporterPanel;
     IBOutlet NSTextField         *fieldOutputPath;
@@ -84,5 +89,10 @@
 - (IBAction)exportImages:(id)sender;
 - (IBAction)setExportPath:(id)sender;
 - (IBAction)execExportImages:(id)sender;
+
+/* preferences */
+- (IBAction)showPreferences:(id)sender;
+- (IBAction)savePreferences:(id)sender;
+- (IBAction)cancelPreferences:(id)sender;
 
 @end
