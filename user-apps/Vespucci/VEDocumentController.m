@@ -42,4 +42,17 @@
     return doc;
 }
 
+- (BOOL) readFromURL: (NSURL*)url ofType: (NSString*)type
+{
+  VEDocument *doc;
+
+  if (url != nil)
+    {
+      doc = [[VEDocument alloc] initWithContentsOfURL: url ofType:type error:nil];
+      if (doc != nil)
+	return YES;
+    }
+  return NO;
+}
+
 @end
