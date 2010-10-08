@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 addFiles = id; 
+                cancelPreferences = id; 
                 eraseImage = id; 
                 execExportImages = id; 
                 exportImages = id; 
@@ -13,16 +14,20 @@
                 rotateImage270 = id; 
                 rotateImage90 = id; 
                 saveImageAs = id; 
+                savePreferences = id; 
                 setCompressionLevel = id; 
                 setCompressionType = id; 
                 setExportPath = id; 
                 setFullScreen = id; 
                 setScaleToFit = id; 
+                showPreferences = id; 
             }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                askBeforeDeletingButton = NSButton; 
                 controlWin = NSWindow; 
+                destroyOrRecycleButton = NSButton; 
                 exportProgress = NSProgressIndicator; 
                 exporterPanel = NSPanel; 
                 fieldHeight = NSTextField; 
@@ -39,6 +44,7 @@
                 popupConstraints = NSPopUpButton; 
                 popupFileQuality = NSPopUpButton; 
                 popupFileType = NSPopUpButton; 
+                prefPanel = NSPanel; 
                 saveAsMenuItem = NSMenuItem; 
                 saveOptionsView = NSView; 
                 scrollView = NSScrollView; 

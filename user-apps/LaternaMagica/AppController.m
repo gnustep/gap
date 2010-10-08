@@ -23,6 +23,10 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSInteger int
+#endif
+
 #import "AppController.h"
 #import "PRScale.h"
 
@@ -361,20 +365,35 @@
 
 - (IBAction)eraseImage:(id)sender
 {
-    int sr;
+  int sr;
     
-    sr = [fileListView selectedRow];
-    if (sr >= 0)
-        if (NSRunAlertPanel(nil, @"Really delete the image from disk?", @"Delete", @"Abort", nil) == NSAlertDefaultReturn)
-        {
-            NSFileManager *fm;
+  sr = [fileListView selectedRow];
+  if (sr >= 0)
+    if (NSRunAlertPanel(nil, @"Really delete the image from disk?", @"Delete", @"Abort", nil) == NSAlertDefaultReturn)
+      {
+	NSWorkspace *ws;
+	NSString *fileOperation;
+	NSInteger opTag;
+	NSString *folder;
+	NSString *file;
+
+	if (1)
+	  fileOperation = NSWorkspaceRecycleOperation;
+	else
+	  fileOperation = NSWorkspaceDestroyOperation;
+
+	folder = [[fileListData pathAtIndex:sr]stringByDeletingLastPathComponent];
+	file = [[fileListData pathAtIndex:sr] lastPathComponent];
+	ws = [NSWorkspace sharedWorkspace];
+	opTag = 1;
+	[ws performFileOperation:fileOperation
+			  source:folder
+		     destination:nil
+			   files:[NSArray arrayWithObject: file]
+			     tag:&opTag];
             
-            fm = [NSFileManager defaultManager];
-            // TODO should implement a handler and error messages
-            [fm removeFileAtPath:[fileListData pathAtIndex:sr] handler:nil];
-            
-            [self removeImage:self];
-        }
+	[self removeImage:self];
+      }
 }
 
 
@@ -832,6 +851,22 @@
       [exporterPanel displayIfNeeded];
       [pool release];
     }
+}
+
+/* preferences */
+- (IBAction)showPreferences:(id)sender
+{
+  [prefPanel makeKeyAndOrderFront: sender];
+}
+
+- (IBAction)savePreferences:(id)sender
+{
+  [prefPanel performClose:self];
+}
+
+- (IBAction)cancelPreferences:(id)sender
+{
+  [prefPanel performClose:self];
 }
 
 @end
