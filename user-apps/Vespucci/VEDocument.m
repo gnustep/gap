@@ -47,16 +47,22 @@ static NSString *homePage = @"";
   return self;
 }
 
-/* subclassed instead of loadDataRepresentation:ofType: to load local files from the open menu */
-- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)docType
+- (BOOL)readFromURL:(NSURL *)aURL ofType:(NSString *)docType
 {
   [self setFileType: docType];
   
   /* at this point the NIB is not loaded yet so the WebView is not valid yet
   we set the URL and filename to load it later once the controller is instantiated */
-  [self setFileURL: [NSURL fileURLWithPath: fileName]];
-  [self setFileName: fileName];
+  [self setFileURL: aURL];
+//  [self setFileName: fileName];
   return YES;
+}
+
+
+/* subclassed instead of loadDataRepresentation:ofType: to load local files from the open menu */
+- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)docType
+{
+  return [self readFromURL: [NSURL fileURLWithPath: fileName] ofType: docType];
 }
 
 
