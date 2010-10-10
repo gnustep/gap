@@ -30,6 +30,8 @@
 #import "AppController.h"
 #import "PRScale.h"
 
+#define LM_KEY_DESTROYRECYCLE @"DestroyOrRecycle"
+#define LM_KEY_ASKDELETING @"AskBeforeDeleting"
 
 @implementation AppController
 
@@ -366,34 +368,50 @@
 - (IBAction)eraseImage:(id)sender
 {
   int sr;
-    
+  BOOL shallErase;
+  NSUserDefaults *defaults;
+  
+  defaults = [NSUserDefaults standardUserDefaults];
   sr = [fileListView selectedRow];
   if (sr >= 0)
-    if (NSRunAlertPanel(nil, @"Really delete the image from disk?", @"Delete", @"Abort", nil) == NSAlertDefaultReturn)
-      {
-	NSWorkspace *ws;
-	NSString *fileOperation;
-	NSInteger opTag;
-	NSString *folder;
-	NSString *file;
+    {
+      if ([defaults boolForKey:LM_KEY_ASKDELETING])
+	{
+	  int result;
 
-	if (1)
-	  fileOperation = NSWorkspaceRecycleOperation;
-	else
-	  fileOperation = NSWorkspaceDestroyOperation;
+	  result = NSRunAlertPanel(nil, @"Really delete the image from disk?", @"Delete", @"Abort", nil);
+	  shallErase = NO;
+	  if (result == NSAlertDefaultReturn)
+	    shallErase = YES;
+	}
+      else
+	shallErase = YES;
+      if (shallErase)
+	{
+	  NSWorkspace *ws;
+	  NSString *fileOperation;
+	  NSInteger opTag;
+	  NSString *folder;
+	  NSString *file;
 
-	folder = [[fileListData pathAtIndex:sr]stringByDeletingLastPathComponent];
-	file = [[fileListData pathAtIndex:sr] lastPathComponent];
-	ws = [NSWorkspace sharedWorkspace];
-	opTag = 1;
-	[ws performFileOperation:fileOperation
-			  source:folder
-		     destination:nil
-			   files:[NSArray arrayWithObject: file]
-			     tag:&opTag];
+	  if ([defaults boolForKey:LM_KEY_DESTROYRECYCLE])
+	    fileOperation = NSWorkspaceRecycleOperation;
+	  else
+	    fileOperation = NSWorkspaceDestroyOperation;
+
+	  folder = [[fileListData pathAtIndex:sr]stringByDeletingLastPathComponent];
+	  file = [[fileListData pathAtIndex:sr] lastPathComponent];
+	  ws = [NSWorkspace sharedWorkspace];
+	  opTag = 1;
+	  [ws performFileOperation:fileOperation
+			    source:folder
+		       destination:nil
+			     files:[NSArray arrayWithObject: file]
+			       tag:&opTag];
             
-	[self removeImage:self];
-      }
+	  [self removeImage:self];
+	}
+    }
 }
 
 
@@ -856,11 +874,22 @@
 /* preferences */
 - (IBAction)showPreferences:(id)sender
 {
+  NSUserDefaults *defaults;
+
+  defaults = [NSUserDefaults standardUserDefaults];
+
+  [destroyOrRecycleButton setState:[defaults boolForKey:LM_KEY_DESTROYRECYCLE] ? NSOnState : NSOffState];
+  [askBeforeDeletingButton setState:[defaults boolForKey:LM_KEY_ASKDELETING] ? NSOnState : NSOffState];
   [prefPanel makeKeyAndOrderFront: sender];
 }
 
 - (IBAction)savePreferences:(id)sender
 {
+  NSUserDefaults *defaults;
+
+  defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setBool:[destroyOrRecycleButton state] forKey:LM_KEY_DESTROYRECYCLE];
+  [defaults setBool:[askBeforeDeletingButton state] forKey:LM_KEY_ASKDELETING];
   [prefPanel performClose:self];
 }
 
