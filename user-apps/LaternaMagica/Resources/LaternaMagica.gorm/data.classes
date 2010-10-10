@@ -17,7 +17,10 @@
 	    "setCompressionLevel:",
 	    "exportImages:",
 	    "setExportPath:",
-	    "execExportImages:"
+	    "execExportImages:",
+	    "showPreferences:",
+	    "savePreferences:",
+	    "cancelPreferences:"
 	);
 	Outlets = (
 	    fileListData,
@@ -34,14 +37,17 @@
 	    fileTypePopUp,
 	    jpegCompressionField,
 	    jpegCompressionSlider,
+	    prefPanel,
+	    destroyOrRecycleButton,
+	    askBeforeDeletingButton,
 	    exporterPanel,
 	    fieldOutputPath,
 	    fieldWidth,
 	    fieldHeight,
 	    exportProgress,
 	    popupConstraints,
-	    popupFIleQuality,
-	    popupFileType
+	    popupFileType,
+	    popupFileQuality
 	);
 	Super = NSObject;
     };
@@ -55,6 +61,7 @@
     FirstResponder = {
 	Actions = (
 	    "addFiles:",
+	    "cancelPreferences:",
 	    "eraseImage:",
 	    "execExportImages:",
 	    "exportImages:",
@@ -67,13 +74,15 @@
 	    "rotateImage270:",
 	    "rotateImage90:",
 	    "saveImageAs:",
+	    "savePreferences:",
 	    "setCompressionLevel:",
 	    "setCompressionType:",
 	    "setExportPath:",
 	    "setFullScreen :",
 	    "setFullScreen:",
 	    "setScaleToFit:",
-	    "showPrefPanel:"
+	    "showPrefPanel:",
+	    "showPreferences:"
 	);
 	Super = NSObject;
     };
