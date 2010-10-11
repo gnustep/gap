@@ -44,6 +44,7 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSEnumerator.h>
 #import <Foundation/NSFileManager.h>
+#import <Foundation/NSException.h>
 
 #import "BatteryModel.h"
 
@@ -305,7 +306,7 @@
 
         [ueventFileName getCString:batteryStatePath0];
         stateFile = fopen(batteryStatePath0, "r");
-        assert(stateFile != NULL);
+        NSAssert(stateFile != NULL, @"ACPI - /sys: state file shall not be NULL");
 
         ueventDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
 
@@ -413,7 +414,7 @@
     else if (useACPIproc)
       {
 	stateFile = fopen(batteryStatePath0, "r");
-	assert(stateFile != NULL);
+	NSAssert(stateFile != NULL, @"ACPI - /proc: state file shall not be NULL");
 
 	[self _readLine :stateFile :line];
 	sscanf(line, "present: %s", presentStr);
@@ -434,7 +435,7 @@
 	voltageVal = atoi(voltageStr);
 
 	infoFile = fopen(batteryInfoPath0, "r");
-	assert(infoFile != NULL);
+	NSAssert(infoFile != NULL, @"ACPI - /proc: info file shall not be NULL");
 
 	[self _readLine :infoFile :line];
 	sscanf(line, "present: %s", present2Str);
@@ -516,7 +517,7 @@
 
 	percentIsInvalid = NO;
 	stateFile = fopen(apmPath, "r");
-	assert(stateFile != NULL);
+	NSAssert(stateFile != NULL, @"APM - state file shall not be null");
 
 
 	[self _readLine :stateFile :line];
