@@ -62,7 +62,20 @@ static NSString *homePage = @"";
 /* subclassed instead of loadDataRepresentation:ofType: to load local files from the open menu */
 - (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)docType
 {
-  return [self readFromURL: [NSURL fileURLWithPath: fileName] ofType: docType];
+  NSURL *urlToLoad;
+  NSLog(@"file name extension %@", [fileName pathExtension]);
+  
+  urlToLoad = [NSURL fileURLWithPath: fileName];
+  if ([[fileName pathExtension] isEqualToString: @"webloc"])
+    {
+      NSDictionary *weblocDict;
+      NSString *urlString;
+      
+      weblocDict = [NSDictionary dictionaryWithContentsOfFile: fileName];
+      urlString = [weblocDict objectForKey:@"URL"];
+      urlToLoad = [NSURL URLWithString: urlString];
+    }
+  return [self readFromURL: urlToLoad ofType: docType];
 }
 
 
