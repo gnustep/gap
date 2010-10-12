@@ -66,7 +66,7 @@ static NSString *homePage = @"";
   NSLog(@"file name extension %@", [fileName pathExtension]);
   
   urlToLoad = [NSURL fileURLWithPath: fileName];
-  if ([[fileName pathExtension] isEqualToString: @"webloc"])
+  if ([docType isEqualToString: @"Web Link"])
     {
       NSDictionary *weblocDict;
       NSString *urlString;
