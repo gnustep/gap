@@ -120,7 +120,6 @@
 	VespucciInfo.plist
     );
     USER_LANGUAGES = (
-	AmericanEnglish,
 	English
     );
 }
