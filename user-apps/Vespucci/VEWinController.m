@@ -73,6 +73,28 @@
     return  webView;
 }
 
+- (BOOL)validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)item
+{
+  NSString *action = NSStringFromSelector([item action]);
+  
+  /* back/forward buttons and back/forward menu items use these actions */
+  
+  if ([action isEqualToString:@"goBackHistory:"])
+    return [[webView backForwardList] backListCount] > 0;
+  if ([action isEqualToString:@"goForwardHistory:"])
+    return [[webView backForwardList] forwardListCount] > 0;
+  
+  /* enable all other items */
+  return YES;
+}
+
+- (void)windowDidUpdate: (NSNotification *)notification
+{
+  [backButton    setEnabled: [self validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)backButton]];
+  [forwardButton setEnabled: [self validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)forwardButton]];
+}
+
+
 // delegate methods
 - (WebView *) webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
