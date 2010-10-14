@@ -34,7 +34,9 @@
 	Outlets = (
 	    urlField,
 	    webView,
-	    status
+	    status,
+	    backButton,
+	    forwardButton
 	);
 	Super = NSWindowController;
     };
