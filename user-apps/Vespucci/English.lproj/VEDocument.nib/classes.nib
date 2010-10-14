@@ -5,7 +5,13 @@
             ACTIONS = {goBackHistory = id; goForwardHistory = id; setUrl = id; }; 
             CLASS = VEWinController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {status = NSTextField; urlField = NSTextField; webView = WebView; }; 
+            OUTLETS = {
+                backButton = NSButton; 
+                forwardButton = NSButton; 
+                status = NSTextField; 
+                urlField = NSTextField; 
+                webView = WebView; 
+            }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {
