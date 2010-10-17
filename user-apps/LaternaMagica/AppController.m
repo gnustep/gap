@@ -395,9 +395,9 @@
 	  NSString *file;
 
 	  if ([defaults boolForKey:LM_KEY_DESTROYRECYCLE])
-	    fileOperation = NSWorkspaceRecycleOperation;
-	  else
 	    fileOperation = NSWorkspaceDestroyOperation;
+	  else
+	    fileOperation = NSWorkspaceRecycleOperation;
 
 	  folder = [[fileListData pathAtIndex:sr]stringByDeletingLastPathComponent];
 	  file = [[fileListData pathAtIndex:sr] lastPathComponent];
