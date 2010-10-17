@@ -35,8 +35,8 @@
    IBOutlet WebView *webView;		// the Web view
    IBOutlet NSTextField *status;	// the status
 
-   IBOutlet NSButton *backButton;
-   IBOutlet NSButton *forwardButton;
+   IBOutlet NSButton<NSValidatedUserInterfaceItem> *backButton;
+   IBOutlet NSButton<NSValidatedUserInterfaceItem> *forwardButton;
    
    WebPreferences *webPrefs;
 }

@@ -90,8 +90,8 @@
 
 - (void)windowDidUpdate: (NSNotification *)notification
 {
-  [backButton    setEnabled: [self validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)backButton]];
-  [forwardButton setEnabled: [self validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)forwardButton]];
+  [backButton    setEnabled: [self validateUserInterfaceItem: backButton]];
+  [forwardButton setEnabled: [self validateUserInterfaceItem: forwardButton]];
 }
 
 
