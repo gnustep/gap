@@ -32,7 +32,8 @@ Resources/MainMenu.gorm \
 Resources/VEDocument.gorm \
 Resources/vespucci_pastel_64.tif \
 Resources/back_arrow.tif \
-Resources/forward_arrow.tif 
+Resources/forward_arrow.tif \
+Resources/Vespucci_FileIcon_html.tiff 
 
 
 #

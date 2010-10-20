@@ -1,6 +1,6 @@
 {
     APPLICATIONICON = vespucci_pastel_64.tif;
-    APP_DOCUMENT_BASED = NO;
+    APP_DOCUMENT_BASED = YES;
     APP_TYPE = GORM;
     BUILDER_TARGETS = (
 	all,
@@ -36,7 +36,8 @@
     IMAGES = (
 	vespucci_pastel_64.tif,
 	back_arrow.tif,
-	forward_arrow.tif
+	forward_arrow.tif,
+	Vespucci_FileIcon_html.tiff
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
@@ -73,6 +74,7 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = HTML;
+	    NSIcon = Vespucci_FileIcon_html;
 	    NSName = "HTML Document";
 	    NSRole = Editor;
 	    NSUnixExtensions = (
@@ -83,7 +85,7 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = XHTML;
-	    NSIcon = "";
+	    NSIcon = Vespucci_FileIcon_html;
 	    NSName = "XHTML Document";
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
@@ -93,7 +95,6 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = TEXT;
-	    NSIcon = "";
 	    NSName = "Plain Text Document";
 	    NSRole = Viewer;
 	    NSUnixExtensions = (

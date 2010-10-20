@@ -42,6 +42,7 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = HTML;
+	    NSIcon = Vespucci_FileIcon_html;
 	    NSName = "HTML Document";
 	    NSRole = Editor;
 	    NSUnixExtensions = (
@@ -52,7 +53,7 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = XHTML;
-	    NSIcon = "";
+	    NSIcon = Vespucci_FileIcon_html;
 	    NSName = "XHTML Document";
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
@@ -62,7 +63,6 @@
 	{
 	    NSDocumentClass = VEDocument;
 	    NSHumanReadableName = TEXT;
-	    NSIcon = "";
 	    NSName = "Plain Text Document";
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
