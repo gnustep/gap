@@ -53,6 +53,7 @@
 - (GSPdfView *)imageView;
 - (NSScrollView *)matrixScroll;
 
+- (void)setImage:(NSImage *)anImage;
 - (void)scrollToOrigin;
 
 - (void)mouseDown:(NSEvent *)theEvent;

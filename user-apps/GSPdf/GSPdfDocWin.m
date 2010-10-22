@@ -87,13 +87,27 @@
   [[self document] windowControllerDidLoadNib: self];
 }
 
+/* set the image of the view and tries to scroll up if the size is changed */
+- (void)setImage:(NSImage *)anImage
+{
+  NSSize oldSize;
+  NSSize newSize;
+
+  oldSize = [imageView frame].size;
+  newSize  = [anImage size];
+  [imageView setImage: anImage];
+  if (oldSize.width != newSize.width || oldSize.height != newSize.height)
+    {
+ 
+      [[self imageView] setFrameSize: newSize];
+      [self scrollToOrigin];
+    }
+}
+
 - (void)scrollToOrigin
 {
-  
-  NSLog(@"height: %f",  [[scroll contentView] bounds].size.height);
-  //  [[scroll contentView] scrollToPoint: NSMakePoint(0, [[scroll contentView] bounds].origin.y + [[scroll contentView] bounds].size.height)];
-  [scroll reflectScrolledClipView: [scroll contentView]];
-  [scroll setNeedsDisplay: YES];
+  NSRect bounds = [[scroll contentView] bounds];
+  [[scroll contentView] scrollToPoint: NSMakePoint(NSMinX(bounds), NSMaxY(bounds))];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
