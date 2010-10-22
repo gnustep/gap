@@ -172,7 +172,6 @@
   [pagesMatrix sizeToCells];
 
   [self makePage];
-  [(GSPdfDocWin*)winController scrollToOrigin];
 }
 
 - (void)setBusy:(BOOL)value
@@ -245,7 +244,7 @@
     {
       NSImage *image = [[NSImage alloc] initWithContentsOfFile: tiffPath];
       [[docwin imageView] setFrameSize: [image size]];
-      [[docwin imageView] setImage: image];
+      [docwin setImage: image];
       RELEASE (image);
       [self setBusy: NO];
       return;
@@ -397,8 +396,7 @@
 	  [image setBackgroundColor: [NSColor windowBackgroundColor]];
 
 	  frame.size = [image size];
-	  [[docwin imageView] setFrame: frame];
-	  [[docwin imageView] setImage: image];
+	  [docwin setImage: image];
 	  RELEASE (image);
 
 	  if (task && [task isRunning])
