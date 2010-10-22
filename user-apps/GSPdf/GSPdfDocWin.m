@@ -83,6 +83,8 @@
   [scroll setDocumentView: imageView];
 
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]];
+
+  [[self document] windowControllerDidLoadNib: self];
 }
 
 - (void)scrollToOrigin
