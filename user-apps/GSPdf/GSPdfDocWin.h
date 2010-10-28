@@ -48,6 +48,8 @@
   IBOutlet NSButton *antiAliasSwitch;
 
   GSPdfView *imageView;
+  BOOL isZooming;
+  NSPoint newZoomPoint;
 }
 
 - (GSPdfView *)imageView;
