@@ -61,6 +61,7 @@
 - (void)windowDidLoad
 /* some initialization stuff */
 {
+  isZooming = NO;
   [leftButt  setImage: [NSImage imageNamed: @"left.tiff"]];
   [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
 		
@@ -98,9 +99,16 @@
   [imageView setImage: anImage];
   if (oldSize.width != newSize.width || oldSize.height != newSize.height)
     {
- 
       [[self imageView] setFrameSize: newSize];
-      [self scrollToOrigin];
+      if (isZooming)
+	{
+	  [[scroll contentView] scrollToPoint: newZoomPoint];
+	  isZooming = NO;
+	}
+      else
+	{
+	  [self scrollToOrigin];
+	}
     }
 }
 
@@ -112,17 +120,34 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+  NSPoint pointWinCoord;
+  NSPoint oldPoint;
+  NSPoint clickPoint;
+  float   scale;
+  NSClipView *contentView;
+  int zoomValue;
+
+  contentView = [scroll contentView];
+  pointWinCoord = [theEvent locationInWindow];
+  oldPoint = [contentView convertPoint:pointWinCoord fromView:nil];
+  clickPoint = [scroll convertPoint:pointWinCoord fromView:nil];
+  zoomValue = [zoomStepper intValue];
+  scale = (float)zoomValue / 100;
+  newZoomPoint = NSMakePoint(oldPoint.x * scale - clickPoint.x, oldPoint.y * scale - clickPoint.y);
+ 
   if ([zoomButt state] == NSOnState)
     {
       if([theEvent type] == NSLeftMouseDown)
         {
           if ([theEvent modifierFlags] & NSControlKeyMask)
             {
+              isZooming = YES;
               [zoomStepper setIntValue: [zoomStepper intValue] - [zoomStepper increment]];
               [self setZoomValue: zoomStepper];
             }
           else
             {
+	      isZooming = YES;
               [zoomStepper setIntValue: [zoomStepper intValue] + [zoomStepper increment]];
               [self setZoomValue: zoomStepper];
             }
@@ -153,7 +178,6 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-  NSLog(@"up");
 }
 
 /* --- ACTIONS --- */
