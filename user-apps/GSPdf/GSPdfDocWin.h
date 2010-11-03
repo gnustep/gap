@@ -49,14 +49,13 @@
 
   GSPdfView *imageView;
   BOOL isZooming;
-  NSPoint newZoomPoint;
+  NSPoint zoomPoint;
 }
 
 - (GSPdfView *)imageView;
 - (NSScrollView *)matrixScroll;
 
 - (void)setImage:(NSImage *)anImage;
-- (void)scrollToOrigin;
 
 - (void)mouseDown:(NSEvent *)theEvent;
 - (void)mouseDragged:(NSEvent *)theEvent;

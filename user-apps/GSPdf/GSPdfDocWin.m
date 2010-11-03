@@ -99,44 +99,87 @@
   [imageView setImage: anImage];
   if (oldSize.width != newSize.width || oldSize.height != newSize.height)
     {
-      [[self imageView] setFrameSize: newSize];
-      if (isZooming)
+      float scale;
+      NSRect visible;
+
+      /* if the user did not click into the view try to preserve the center
+         of the visible rectangle in its position */
+      visible = [scroll documentVisibleRect];
+      if (isZooming == NO)
 	{
-	  [[scroll contentView] scrollToPoint: newZoomPoint];
-	  isZooming = NO;
+	  zoomPoint.x = NSMinX(visible) + NSWidth(visible) / 2;
+	  zoomPoint.y = NSMinY(visible) + NSHeight(visible) / 2;
+	}
+
+      /* update the image */
+      [[self imageView] setFrameSize: newSize];
+
+      /* compute (the origin of) the new visible rectangle */
+      if (oldSize.width == 0 && oldSize.height == 0)
+	{
+	  /* If the image is new (the view was empty before) scroll to the upper left corner. */
+	  visible.origin = NSMakePoint(newSize.width, newSize.height);
 	}
       else
 	{
-	  [self scrollToOrigin];
-	}
-    }
-}
+	  /* The image size changed and we e distinguish three cases here (independently for X and Y dimensions)
+	   a) the new image is smaller than the visible rectangle
+	     The origin we set in this case is rather irrelevant as the clip view
+	     will constrain the origin such that the document view is placed at
+	     the lower left corner of the visible rectangle.
+	     FIXME Change the image view's size to the visible rectangle, set
+	     the image view's alignment to NSImageAlignCenter and scaling to
+	     NSScaleNone to center the image in the visible rectangle. Note
+	     that this requires tracking frame size changes to adjust the
+	     image view's size when the user resizes the window.
+	   b) the old image was smaller than the visible rectangle
+	     In this case, we center the new image under the visible rectangle.
+	     Note that this case in particular is used when the first page is
+	     displayed, as the image view is initialized with zero width and
+	     height.
+	   c) the old and new images are larger than the visible rectangle
+	     In this case, we attempt to preserve the position of the zoom point.
+	  */
+	  if (newSize.width <= visible.size.width)
+	    {
+	      visible.origin.x = 0;
+	    }
+	  else if (oldSize.width <= visible.size.width)
+	    {
+	      visible.origin.x = (newSize.width - visible.size.width) / 2;
+	    }
+	  else
+	    {
+	      scale = newSize.width / oldSize.width;
+	      visible.origin.x += zoomPoint.x * (scale - 1);
+	    }
 
-- (void)scrollToOrigin
-{
-  NSRect bounds = [[scroll contentView] bounds];
-  [[scroll contentView] scrollToPoint: NSMakePoint(NSMinX(bounds), NSMaxY(bounds))];
+	  if (newSize.height <= visible.size.height)
+	    {
+	      visible.origin.y = 0;
+	    }
+	  else if (oldSize.height <= visible.size.height)
+	    {
+	      visible.origin.y = (newSize.height - visible.size.height) / 2;
+	    }
+	  else
+	    {
+	      scale = newSize.height / oldSize.height;
+	      visible.origin.y += zoomPoint.y * (scale - 1);
+	    }
+	}
+      [[scroll contentView] scrollToPoint: visible.origin];
+    }
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-  NSPoint pointWinCoord;
-  NSPoint oldPoint;
-  NSPoint clickPoint;
-  float   scale;
-  NSClipView *contentView;
-  int zoomValue;
-
-  contentView = [scroll contentView];
-  pointWinCoord = [theEvent locationInWindow];
-  oldPoint = [contentView convertPoint:pointWinCoord fromView:nil];
-  clickPoint = [scroll convertPoint:pointWinCoord fromView:nil];
-  zoomValue = [zoomStepper intValue];
-  scale = (float)zoomValue / 100;
-  newZoomPoint = NSMakePoint(oldPoint.x * scale - clickPoint.x, oldPoint.y * scale - clickPoint.y);
- 
   if ([zoomButt state] == NSOnState)
     {
+      NSView *documentView = [scroll documentView];
+      NSPoint pointWinCoord = [theEvent locationInWindow];
+
+      zoomPoint = [documentView convertPoint:pointWinCoord fromView:nil];
       if([theEvent type] == NSLeftMouseDown)
         {
           if ([theEvent modifierFlags] & NSControlKeyMask)
