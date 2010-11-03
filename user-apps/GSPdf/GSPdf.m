@@ -232,7 +232,7 @@ static GSPdf *gspdf = nil;
   if (gsPathStr != nil)
     {
       [defaults setObject:gsPathStr forKey:GHOSTSCRIPT_PATH_KEY];
-      gsPath = gsPathStr;
+      gsPath = [[NSString stringWithString:gsPathStr] retain];
     }
 
   [prefPanel performClose:nil];
