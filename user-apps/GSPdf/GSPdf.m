@@ -136,7 +136,7 @@ static GSPdf *gspdf = nil;
     gsPathStr = @"/usr/bin/gs";
 #endif
     }
-
+  [gsPath release];
   gsPath = [[NSString stringWithString:gsPathStr] retain];
 }
 
@@ -232,6 +232,7 @@ static GSPdf *gspdf = nil;
   if (gsPathStr != nil)
     {
       [defaults setObject:gsPathStr forKey:GHOSTSCRIPT_PATH_KEY];
+      [gsPath release];
       gsPath = [[NSString stringWithString:gsPathStr] retain];
     }
 
