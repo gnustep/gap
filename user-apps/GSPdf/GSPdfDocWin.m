@@ -118,7 +118,7 @@
       if (oldSize.width == 0 && oldSize.height == 0)
 	{
 	  /* If the image is new (the view was empty before) scroll to the upper left corner. */
-	  visible.origin = NSMakePoint(newSize.width, newSize.height);
+	  visible.origin = NSMakePoint(0, newSize.height);
 	}
       else
 	{
