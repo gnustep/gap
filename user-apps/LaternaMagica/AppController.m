@@ -823,7 +823,7 @@
 	  PRScale *scaleFilter;
 	  
 	  scaleFilter = [[PRScale alloc] init];
-	  scaledImage = [scaleFilter scaleImage:srcImage :newW :newH :LINEAR_HV :nil];
+	  scaledImage = [scaleFilter scaleImage:srcImage :newW :newH :BILINEAR :nil];
 	  [scaleFilter release];
 	  scaledImageRep = [NSBitmapImageRep imageRepWithData:[scaledImage TIFFRepresentation]];
 	}

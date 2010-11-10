@@ -35,8 +35,7 @@ LaternaMagica_HEADER_FILES = \
 AppController.h \
 FileTable.h \
 LMFlipView.h \
-LMWindow.h \
-PRScale.h
+LMWindow.h
 
 #
 # Class files
@@ -45,8 +44,7 @@ LaternaMagica_OBJC_FILES = \
 AppController.m \
 FileTable.m \
 LMFlipView.m \
-LMWindow.m \
-PRScale.m
+LMWindow.m
 
 #
 # Other sources
