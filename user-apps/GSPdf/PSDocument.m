@@ -2,7 +2,7 @@
  *  PSDocument.m: Implementation of the PSDocument Class 
  *  of the GNUstep GWorkspace application
  *
- *  Copyright (c) 2001 Enrico Sersale <enrico@imago.ro>
+ *  Copyright (c) 2001-2010 GNUstep Applicaiton Project
  *  
  *  Author: Enrico Sersale
  *  Date: August 2001
@@ -330,8 +330,8 @@
 	  if (doc->pages[i].media != NULL)
 	    {
 	      [psdmedia setName: MAKESTRING (doc->pages[i].media->name)];
-	      [psdmedia setWidth: doc->media[i].width];
-	      [psdmedia setHeight: doc->media[i].height];			
+	      [psdmedia setWidth: doc->pages[i].media->width];
+	      [psdmedia setHeight: doc->pages[i].media->height];
 	    }
 			
 	  [psdpage setMedia: psdmedia];
