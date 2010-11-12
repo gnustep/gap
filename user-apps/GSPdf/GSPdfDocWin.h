@@ -34,6 +34,8 @@
 
 #import "GSPdfView.h"
 
+#define ANTI_ALIASING_KEY @"UseAntiAliasing"
+
 @interface GSPdfDocWin : NSWindowController
 {
   IBOutlet NSWindow *window;
