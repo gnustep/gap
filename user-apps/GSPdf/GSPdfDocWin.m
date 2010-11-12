@@ -61,6 +61,8 @@
 - (void)windowDidLoad
 /* some initialization stuff */
 {
+  NSUserDefaults *defaults;
+
   isZooming = NO;
   [leftButt  setImage: [NSImage imageNamed: @"left.tiff"]];
   [rightButt setImage: [NSImage imageNamed: @"right.tiff"]];
@@ -84,6 +86,12 @@
   [scroll setDocumentView: imageView];
 
   [zoomField setStringValue: [NSString stringWithFormat: @"%i", [zoomStepper intValue]]];
+
+  defaults = [NSUserDefaults standardUserDefaults];
+  if ([defaults boolForKey: ANTI_ALIASING_KEY] == YES)
+    [antiAliasSwitch setState: NSOnState];
+  else
+    [antiAliasSwitch setState: NSOffState];
 
   [[self document] windowControllerDidLoadNib: self];
 }
@@ -248,7 +256,15 @@
 
 - (IBAction)setAntiAlias:(id)sender
 {
+  NSUserDefaults *defaults;
+
   [[self document] regeneratePage];
+  defaults = [NSUserDefaults standardUserDefaults];
+
+  if ([antiAliasSwitch state] == NSOnState)
+    [defaults setBool: YES forKey: ANTI_ALIASING_KEY];
+  else 
+    [defaults setBool: NO forKey: ANTI_ALIASING_KEY];
 }
 
 - (IBAction)setZoomValue:(id)sender
