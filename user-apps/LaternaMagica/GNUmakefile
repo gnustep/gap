@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.3
+VERSION = 0.4
 PACKAGE_NAME = LaternaMagica
 APP_NAME = LaternaMagica
 LaternaMagica_APPLICATION_ICON = laternamagica_48.tif
@@ -35,7 +35,8 @@ LaternaMagica_HEADER_FILES = \
 AppController.h \
 FileTable.h \
 LMFlipView.h \
-LMWindow.h
+LMWindow.h \
+PRScale.h
 
 #
 # Class files
@@ -44,7 +45,8 @@ LaternaMagica_OBJC_FILES = \
 AppController.m \
 FileTable.m \
 LMFlipView.m \
-LMWindow.m
+LMWindow.m \
+PRScale.m
 
 #
 # Other sources
