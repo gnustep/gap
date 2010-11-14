@@ -14,7 +14,8 @@
 	AppController.m,
 	FileTable.m,
 	LMFlipView.m,
-	LMWindow.m
+	LMWindow.m,
+	PRScale.m
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -27,7 +28,8 @@
 	AppController.h,
 	FileTable.h,
 	LMFlipView.h,
-	LMWindow.h
+	LMWindow.h,
+	PRScale.h
     );
     IMAGES = (
 	laternamagica_64.tif,
@@ -108,7 +110,7 @@
     PROJECT_GROUP = "No group avaliable!";
     PROJECT_MAINTAINER = "";
     PROJECT_NAME = LaternaMagica;
-    PROJECT_RELEASE = 0.3;
+    PROJECT_RELEASE = 0.4;
     PROJECT_SUMMARY = "No summary avaliable!";
     PROJECT_TYPE = Application;
     PROJECT_URL = "http://gap.nongnu.org/laternamagica/";
@@ -122,7 +124,6 @@
 	LaternaMagicaInfo.plist
     );
     USER_LANGUAGES = (
-	AmericanEnglish,
 	English
     );
 }
