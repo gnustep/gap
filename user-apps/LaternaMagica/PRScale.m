@@ -48,8 +48,6 @@
     int srcSamplesPerPixel;
     int destSamplesPerPixel;
     int srcBytesPerRow;
-    int destBytesPerRow;
-    BOOL isColored;
     float xRatio, yRatio;
     
     progressSteps = 0;
@@ -94,7 +92,6 @@
                               colorSpaceName:NSCalibratedWhiteColorSpace
                                  bytesPerRow:destSamplesPerPixel*sizeX
                                 bitsPerPixel:0];
-            isColored = NO;
         } else
         {
             destSamplesPerPixel = 3;
@@ -109,13 +106,11 @@
                               colorSpaceName:NSCalibratedRGBColorSpace
                                  bytesPerRow:destSamplesPerPixel*sizeX
                                 bitsPerPixel:0];
-            isColored = YES;
         }
     }
     
     srcData = [srcImageRep bitmapData];
     destData = [destImageRep bitmapData];
-    destBytesPerRow = [destImageRep bytesPerRow];
     
     if (method == NEAREST_NEIGHBOUR)
     {
