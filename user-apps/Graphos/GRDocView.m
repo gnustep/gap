@@ -1,3 +1,4 @@
+
 /*
  Project: Graphos
  GRDocView.m
@@ -296,6 +297,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         [duplObj moveAddingCoordsOfPoint: p];
         [objects addObject: duplObj];
         [duplObjs addObject: duplObj];
+	[duplObj release];
     }
     edind = [objects count] -1;
     [self setNeedsDisplay: YES];
@@ -1054,11 +1056,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             [objects removeObjectAtIndex: i];
             [objects insertObject: obj atIndex: i + 1];
-            [obj release];
             break;
         }
     }
-
+    [obj release];
     [self setNeedsDisplay: YES];
 }
 
@@ -1096,11 +1097,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
             [objects removeObjectAtIndex: i];
             [objects insertObject: obj atIndex: i - 1];
-            [obj release];
             break;
         }
     }
-
+    [obj release];
     [self setNeedsDisplay: YES];
 }
 

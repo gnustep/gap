@@ -48,8 +48,13 @@
     [super windowControllerDidLoadNib:aController];
     if (aController == [[self windowControllers] objectAtIndex: 0])
     {
-        NSScrollView *sv = [[[[aController window] contentView] subviews] objectAtIndex: 0];
-        [sv setDocumentView: docView];
+      NSScrollView *sv;
+      NSClipView *cv;
+
+      sv = [[[[aController window] contentView] subviews] objectAtIndex: 0];
+      [sv setDocumentView: docView];
+      cv = [sv contentView];
+      [cv scrollToPoint: NSMakePoint(0, NSMaxY([docView bounds]))];
     }
     
     

@@ -53,8 +53,8 @@
         filled = YES;
         visible = YES;
         locked = NO;
-        strokeColor = [NSColor blackColor];
-        fillColor = [NSColor whiteColor];
+        strokeColor = [[NSColor blackColor] retain];
+        fillColor = [[NSColor whiteColor] retain];
         ASSIGN(str, @"");
 
         editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
@@ -420,8 +420,10 @@
     [style setParagraphSpacing: parspace];
     tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
     strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
-    tempFont, NSFontAttributeName,
-    style, NSParagraphStyleAttributeName, nil] retain];
+      tempFont, NSFontAttributeName,
+      strokeColor, NSForegroundColorAttributeName,
+      fillColor, NSBackgroundColorAttributeName,
+      style, NSParagraphStyleAttributeName, nil] retain];
 
     baselny = pos.y;
     bezp = [NSBezierPath bezierPath];

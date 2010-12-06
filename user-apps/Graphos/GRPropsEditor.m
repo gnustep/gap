@@ -174,15 +174,18 @@
 
 - (IBAction)okCancelPressed:(id)sender;
 {
+  [fillColor release];
+  [strokeColor release];
   fillColor = [[fillColorWell color] retain];
   strokeColor = [[strokeColorWell color] retain];
 
-    if(sender == okButt)
-        result = NSAlertDefaultReturn;
-    else
-        result = NSAlertAlternateReturn;
-    [propsPanel orderOut: propsPanel];
-    [[NSApplication sharedApplication] stopModal];
+  if(sender == okButt)
+    result = NSAlertDefaultReturn;
+  else
+    result = NSAlertAlternateReturn;
+
+  [propsPanel orderOut: propsPanel];
+  [[NSApplication sharedApplication] stopModal];
 }
 
 - (NSDictionary *)properties
