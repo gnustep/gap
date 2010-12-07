@@ -49,8 +49,8 @@
         rotation = 0;
         scalex = 1;
         scaley = 1;
-        stroked = NO;
-        filled = YES;
+        stroked = YES;
+        filled = NO;
         visible = YES;
         locked = NO;
         strokeColor = [[NSColor blackColor] retain];
