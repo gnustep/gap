@@ -33,77 +33,79 @@
   self = [super init];
   if(self)
     {
-       [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
+      [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
       
       [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
       
-        ispath = NO;
-        type = [objprops objectForKey: @"type"];
-        if([type isEqualToString: @"path"])
-            ispath = YES;
+      ispath = NO;
+      type = [objprops objectForKey: @"type"];
+      if([type isEqualToString: @"path"])
+	ispath = YES;
 
-        if(ispath)
+      if(ispath)
         {
-            flatness = [[objprops objectForKey: @"flatness"] floatValue];
-            linejoin = [[objprops objectForKey: @"linejoin"] intValue];
-            linecap = [[objprops objectForKey: @"linecap"] intValue];
-            miterlimit = [[objprops objectForKey: @"miterlimit"] floatValue];
-            linewidth = [[objprops objectForKey: @"linewidth"] floatValue];
+	  flatness = [[objprops objectForKey: @"flatness"] floatValue];
+	  linejoin = [[objprops objectForKey: @"linejoin"] intValue];
+	  linecap = [[objprops objectForKey: @"linecap"] intValue];
+	  miterlimit = [[objprops objectForKey: @"miterlimit"] floatValue];
+	  linewidth = [[objprops objectForKey: @"linewidth"] floatValue];
         } else
         {
-            flatness = miterlimit = linewidth = 0.0;
-            linejoin = linecap = -1;
+	  flatness = miterlimit = linewidth = 0.0;
+	  linejoin = linecap = -1;
         }
 
-        filled = (BOOL)[[objprops objectForKey: @"filled"] intValue];
-        fillColor = (NSColor *)[objprops objectForKey: @"fillcolor"];
+      filled = (BOOL)[[objprops objectForKey: @"filled"] intValue];
+      fillColor = (NSColor *)[objprops objectForKey: @"fillcolor"];
+      [fillColor retain];
 
-        stroked = (BOOL)[[objprops objectForKey: @"stroked"] intValue];
-        strokeColor = (NSColor *)[objprops objectForKey: @"strokecolor"];
+      stroked = (BOOL)[[objprops objectForKey: @"stroked"] intValue];
+      strokeColor = (NSColor *)[objprops objectForKey: @"strokecolor"];
+      [strokeColor retain];
 
-        /* disable not used controls */
-        if (!ispath)
-          {
-            [lineCapMatrix setEnabled:NO];
-            [lineJoinMatrix setEnabled:NO];
-            [flatnessField setEnabled:NO];
-            [miterlimitField setEnabled:NO];
-            [linewidthField setEnabled:NO];
-          }
+      /* disable not used controls */
+      if (!ispath)
+	{
+	  [lineCapMatrix setEnabled:NO];
+	  [lineJoinMatrix setEnabled:NO];
+	  [flatnessField setEnabled:NO];
+	  [miterlimitField setEnabled:NO];
+	  [linewidthField setEnabled:NO];
+	}
         
-        if(filled)
-          [fllButt setState: NSOnState];
-        if(stroked)
-          [stkButt setState: NSOnState];
+      if(filled)
+	[fllButt setState: NSOnState];
+      if(stroked)
+	[stkButt setState: NSOnState];
 
-        [fillColorWell setColor: fillColor];
-        [strokeColorWell setColor: strokeColor];
+      [fillColorWell setColor: fillColor];
+      [strokeColorWell setColor: strokeColor];
         
-        [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
-        [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
-        [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
+      [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
+      [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
+      [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
 
                 
-        if(linecap == 0)
-          [lineCapMatrix setState: NSOnState atRow: 0 column: 0];
-        else if(linecap == 1)
-          [lineCapMatrix setState: NSOnState atRow: 1 column: 0];
-        else if(linecap == 2)
-          [lineCapMatrix setState: NSOnState atRow: 2 column: 0];
+      if(linecap == 0)
+	[lineCapMatrix setState: NSOnState atRow: 0 column: 0];
+      else if(linecap == 1)
+	[lineCapMatrix setState: NSOnState atRow: 1 column: 0];
+      else if(linecap == 2)
+	[lineCapMatrix setState: NSOnState atRow: 2 column: 0];
         
-        if(linejoin == 0)
-          [lineJoinMatrix setState: NSOnState atRow: 0 column: 0];
-        else if(linejoin == 1)
-          [lineJoinMatrix setState: NSOnState atRow: 1 column: 0];
-        else if(linejoin == 2)
-          [lineJoinMatrix setState: NSOnState atRow: 2 column: 0];
+      if(linejoin == 0)
+	[lineJoinMatrix setState: NSOnState atRow: 0 column: 0];
+      else if(linejoin == 1)
+	[lineJoinMatrix setState: NSOnState atRow: 1 column: 0];
+      else if(linejoin == 2)
+	[lineJoinMatrix setState: NSOnState atRow: 2 column: 0];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(textFieldDidEndEditing:)
-                                                     name:@"NSControlTextDidEndEditingNotification" object:nil];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+					       selector:@selector(textFieldDidEndEditing:)
+						   name:@"NSControlTextDidEndEditingNotification" object:nil];
 
     }
-    return self;
+  return self;
 }
 
 - (void) dealloc
