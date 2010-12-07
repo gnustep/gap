@@ -1,6 +1,6 @@
 {
     APPLICATIONICON = vespucci_pastel_64.tif;
-    APP_DOCUMENT_BASED = YES;
+    APP_DOCUMENT_BASED = NO;
     APP_TYPE = GORM;
     BUILDER_TARGETS = (
 	all,
@@ -121,6 +121,7 @@
 	VespucciInfo.plist
     );
     USER_LANGUAGES = (
+	AmericanEnglish,
 	English
     );
 }
