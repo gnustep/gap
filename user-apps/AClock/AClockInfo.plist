@@ -1,8 +1,10 @@
 {
     ApplicationDescription = "Analog Clock Dockapp";
     ApplicationRelease = "0.2.3";
-    Authors = ("Alexander Malmberg <alexander@malmberg.org>,\nBanlu Kemiyatorn <object@gmail.com>,\nGürkan Sengün <gurkan@linuks.mine.nu>");
-    Copyright = "Copyright 2003 - 2004 Alexander Malmberg, Banlu Kemiyatorn, Gürkan Sengün";
+    Authors = ("Alexander Malmberg <alexander@malmberg.org>",
+    	       "Banlu Kemiyatorn <object@gmail.com>",
+	       "Gurkan Sengun <gurkan@linuks.mine.nu>");
+    Copyright = "Copyright 2003 - 2004 Alexander Malmberg, Banlu Kemiyatorn, Gurkan Sengun";
     CopyrightDescription = "GNU General Public License";
     URL = "http://www.linuks.mine.nu/aclock/";
 }
