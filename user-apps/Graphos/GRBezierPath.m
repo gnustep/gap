@@ -750,7 +750,6 @@ static double k = 0.025;
 {
     GRBezierControlPoint *cp;
     NSRect r;
-    NSColor *color;
     int i;
     NSBezierPath *bzp;
 

@@ -364,7 +364,6 @@
 /** draws the object and calls the editor to draw itself afterwards */
 - (void)draw
 {
-    NSColor *color;
     NSBezierPath *bzp;
     NSPoint center;
     float radius;
