@@ -61,7 +61,7 @@
     /* initialize the image view to the default size if possible */
     p = [self printInfo];
     if (p != nil)
-        [self setPrintInfo:p];
+        [docView updatePrintInfo: p];
     else
         NSLog(@"printInfo nil!");
     
