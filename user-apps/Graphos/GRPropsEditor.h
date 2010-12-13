@@ -66,7 +66,7 @@
 
 - (int)runModal;
 
-- (void)textFieldDidEndEditing:(NSNotification *)notification;
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification;
 
 - (IBAction)setLnCap:(id)sender;
 
