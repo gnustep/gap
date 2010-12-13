@@ -99,11 +99,6 @@
 	[lineJoinMatrix setState: NSOnState atRow: 1 column: 0];
       else if(linejoin == 2)
 	[lineJoinMatrix setState: NSOnState atRow: 2 column: 0];
-        
-      [[NSNotificationCenter defaultCenter] addObserver:self
-					       selector:@selector(textFieldDidEndEditing:)
-						   name:@"NSControlTextDidEndEditingNotification" object:nil];
-
     }
   return self;
 }
@@ -122,7 +117,7 @@
     return result;
 }
 
-- (void)textFieldDidEndEditing:(NSNotification *)aNotification
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
     NSTextField *field = (NSTextField *)[aNotification object];
 
