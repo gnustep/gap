@@ -117,6 +117,7 @@
     return result;
 }
 
+/* as delegate */
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
     NSTextField *field = (NSTextField *)[aNotification object];
@@ -183,6 +184,13 @@
 
   [propsPanel orderOut: propsPanel];
   [[NSApplication sharedApplication] stopModal];
+}
+
+/* panel delegate */
+- (BOOL)windowShouldClose:(id)sender
+{
+  [self okCancelPressed:sender];
+  return YES;
 }
 
 - (NSDictionary *)properties
