@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.h
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -53,16 +53,18 @@
   IBOutlet NSButton *cancelButt;
   IBOutlet NSButton *okButt;
 
-    BOOL ispath;
-    float flatness, miterlimit, linewidth;
-    int linejoin, linecap;
-    BOOL stroked;
+  BOOL ispath;
+  float flatness, miterlimit, linewidth;
+  int linejoin, linecap;
+  BOOL stroked;
   NSColor *strokeColor;
-    BOOL filled;
+  BOOL filled;
   NSColor *fillColor;
 }
 
 - (id)initWithObjectProperties:(NSDictionary *)objprops;
+
+- (void)setObjectProperties:(NSDictionary *)objprops;
 
 - (int)runModal;
 
