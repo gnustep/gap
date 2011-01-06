@@ -2,7 +2,7 @@
  Project: Graphos
  Graphos.m
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -26,6 +26,20 @@
 #import "GRFunctions.h"
 
 @implementation Graphos
+
+- (id) init
+{
+  if ((self = [super init]))
+    {
+  	  [[NSNotificationCenter defaultCenter] addObserver:self
+	  										   selector:@selector(mainWindowChanged:)
+												   name:NSWindowDidBecomeMainNotification object:nil];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+											   selector:@selector(mainWindowResigned:)
+												   name:NSWindowDidResignMainNotification object:nil];
+    }
+  return self;
+}
 
 - (void)dealloc
 {
@@ -59,20 +73,17 @@
     [curWin display];
 }
 
+/* notification */
+- (void)mainWindowChanged :(NSNotification *)notif
+{
+  NSLog(@"main window did change");
+}
+
+/* notification */
+- (void)mainWindowResigned :(NSNotification *)notif
+{
+  NSLog(@"main window did resign");
+}
 
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
