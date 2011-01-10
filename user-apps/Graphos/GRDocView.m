@@ -910,6 +910,122 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
+- (NSMutableDictionary *)selectionProperties
+{
+  NSMutableDictionary *propDict;
+  int i;
+  int selectedObjects;
+  int pathObjNum;
+  int textObjNum;
+  NSNumber *num;
+  
+  if(![objects count])
+    return nil;
+
+  selectedObjects = 0;
+  pathObjNum = 0;
+  textObjNum = 0;
+  propDict = [NSMutableDictionary dictionaryWithCapacity: 1];
+  for(i = 0; i < [objects count]; i++)
+    {
+      id obj;
+      obj = [objects objectAtIndex: i];
+      
+      if([[obj editor] isSelect])
+        {
+          selectedObjects++;
+        
+          num = [NSNumber numberWithInt: [obj isStroked]];
+          [propDict setObject: num forKey: @"stroked"];
+          [propDict setObject: [obj strokeColor] forKey: @"strokecolor"];
+          num = [NSNumber numberWithInt: [obj isFilled]];
+          [propDict setObject: num forKey: @"filled"];
+          [propDict setObject: [obj fillColor] forKey: @"fillcolor"];
+
+          if([obj isKindOfClass: [GRPathObject class]])
+            {
+              pathObjNum++;
+              num = [NSNumber numberWithFloat: [obj flatness]];
+              [propDict setObject: num forKey: @"flatness"];
+              num = [NSNumber numberWithInt: [obj lineJoin]];
+              [propDict setObject: num forKey: @"linejoin"];
+              num = [NSNumber numberWithInt: [obj lineCap]];
+              [propDict setObject: num forKey: @"linecap"];
+              num = [NSNumber numberWithFloat: [obj miterLimit]];
+              [propDict setObject: num forKey: @"miterlimit"];
+              num = [NSNumber numberWithFloat: [obj lineWidth]];
+              [propDict setObject: num forKey: @"linewidth"];
+              num = [NSNumber numberWithInt: [obj isStroked]];
+            }
+          else if([obj isKindOfClass: [GRText class]])
+            {
+              textObjNum++;
+              [propDict setObject: @"text" forKey: @"type"];
+            }
+        }
+    }
+  
+  if(selectedObjects == 0)
+    return nil;
+  
+  if (textObjNum + pathObjNum != selectedObjects)
+    {
+      NSLog(@"Internal error: Help we lost some objects.");
+    }
+  
+  /* we check if the selection is homogeneous or not
+     and in case remove the keys that are not common among all objects */
+  if (textObjNum > 0 && pathObjNum > 0)
+    {
+      [propDict removeObjectForKey: @"flatness"];
+      [propDict removeObjectForKey: @"linejoin"];
+      [propDict removeObjectForKey: @"linecap"];
+      [propDict removeObjectForKey: @"miterlimit"];
+      [propDict removeObjectForKey: @"linewidth"];
+    }
+  
+  return propDict;
+}
+
+- (void)setSelectionProperties: (NSMutableDictionary *)properties;
+{
+  NSUndoManager *uMgr;
+  id obj;
+  int i;
+
+  [self saveCurrentObjectsDeep];
+  
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Change Object Properties"];
+  
+  for(i = 0; i < [objects count]; i++)
+    {
+      obj = [objects objectAtIndex: i];
+      if([[obj editor] isSelect])
+        {
+          NSColor *newColor;
+      
+          if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
+            {
+              [obj setFlat: [[properties objectForKey: @"flatness"] floatValue]];
+              [obj setLineJoin: [[properties objectForKey: @"linejoin"] intValue]];
+              [obj setLineCap: [[properties objectForKey: @"linecap"] intValue]];
+              [obj setMiterLimit: [[properties objectForKey: @"miterlimit"] floatValue]];
+              [obj setLineWidth: [[properties objectForKey: @"linewidth"] floatValue]];
+            }
+          [obj setStroked: (BOOL)[[properties objectForKey: @"stroked"] intValue]];
+          newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
+          [obj setStrokeColor: newColor];
+          [obj setFilled: (BOOL)[[properties objectForKey: @"filled"] intValue]];
+          newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
+          [obj setFillColor: newColor];
+        }
+    }
+}
+
+
 - (void)inspectObject:(id)sender
 {
     GRPropsEditor *propsEditor;
