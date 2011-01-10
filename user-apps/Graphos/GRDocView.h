@@ -110,6 +110,9 @@
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 - (IBAction)inspectObject: (id)sender;
 
+- (NSMutableDictionary *)selectionProperties;
+- (void)setSelectionProperties: (NSMutableDictionary *)properties;
+
 - (IBAction)moveSelectedObjectsToFront:(id)sender;
 - (IBAction)moveSelectedObjectsToBack:(id)sender;
 - (void)unselectOtherObjects:(GRDrawableObject *)anObject;
