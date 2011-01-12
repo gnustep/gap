@@ -36,6 +36,27 @@
   return self;
 }
 
+
+- (void)setControlsEnabled:(BOOL)state
+{
+  [fllButt setEnabled: state];
+  [stkButt setEnabled: state];
+
+  [fillColorWell setEnabled: state];
+  [strokeColorWell setEnabled: state];
+        
+  [flatnessField setEnabled: state];
+  [miterlimitField setEnabled: state];
+  [linewidthField setEnabled: state];
+
+  [lineCapMatrix setEnabled: state];
+  [lineJoinMatrix setEnabled: state];
+
+  [flatnessField setEnabled: state];
+  [miterlimitField setEnabled: state];
+  [linewidthField setEnabled: state];
+}
+
 - (void)setObjectProperties:(NSDictionary *)objprops
 {
   NSString *type;
