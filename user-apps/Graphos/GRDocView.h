@@ -108,7 +108,6 @@
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos;
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
-- (IBAction)inspectObject: (id)sender;
 
 - (NSDictionary *)selectionProperties;
 - (void)setSelectionProperties: (NSDictionary *)properties;

@@ -697,6 +697,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
     if([objs count])
         [self moveSelectedObjects: objs startingPoint: p];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 - (void)editPathAtPoint:(NSPoint)p
@@ -1023,118 +1024,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
           [obj setFillColor: newColor];
         }
     }
-}
-
-
-- (void)inspectObject:(id)sender
-{
-    GRPropsEditor *propsEditor;
-    NSMutableDictionary *objProps = nil;
-    NSDictionary *newProps;
-    id obj;
-    NSNumber *num;
-    int i, count, result;
-    NSUndoManager *uMgr;
-
-    if(![objects count])
-        return;
-
-    for(i = 0; i < [objects count]; i++)
-    {
-        obj = [objects objectAtIndex: i];
-        if([[obj editor] isSelect])
-        {
-            objProps = [NSMutableDictionary dictionaryWithCapacity: 1];
-            if([obj isKindOfClass: [GRBezierPath class]] ||
-               [obj isKindOfClass: [GRCircle class]] ||
-               [obj isKindOfClass: [GRBox class]])
-            {
-                [objProps setObject: @"path" forKey: @"type"];
-                num = [NSNumber numberWithFloat: [obj flatness]];
-                [objProps setObject: num forKey: @"flatness"];
-                num = [NSNumber numberWithInt: [obj lineJoin]];
-                [objProps setObject: num forKey: @"linejoin"];
-                num = [NSNumber numberWithInt: [obj lineCap]];
-                [objProps setObject: num forKey: @"linecap"];
-                num = [NSNumber numberWithFloat: [obj miterLimit]];
-                [objProps setObject: num forKey: @"miterlimit"];
-                num = [NSNumber numberWithFloat: [obj lineWidth]];
-                [objProps setObject: num forKey: @"linewidth"];
-                num = [NSNumber numberWithInt: [obj isStroked]];
-                [objProps setObject: num forKey: @"stroked"];
-                [objProps setObject: [obj strokeColor] forKey: @"strokecolor"];
-		num = [NSNumber numberWithInt: [obj isFilled]];
-                [objProps setObject: num forKey: @"filled"];
-                [objProps setObject: [obj fillColor] forKey: @"fillcolor"];
-            } else
-            {
-                [objProps setObject: @"text" forKey: @"type"];
-                num = [NSNumber numberWithInt: [obj isStroked]];
-                [objProps setObject: num forKey: @"stroked"];
-                [objProps setObject: [obj strokeColor] forKey: @"strokecolor"];
-		num = [NSNumber numberWithInt: [obj isFilled]];
-                [objProps setObject: num forKey: @"filled"];
-                [objProps setObject: [obj fillColor] forKey: @"fillcolor"];
-            }
-            break;
-        }
-    }
-
-    if(!objProps)
-        return;
-    propsEditor = [[GRPropsEditor alloc] initWithObjectProperties: objProps];
-//    [epwin center];
-    result = [propsEditor runModal];
-    if(result == NSAlertDefaultReturn)
-    {
-        newProps = [propsEditor properties];
-        count = 0;
-        for(i = 0; i < [objects count]; i++)
-            if([[[objects objectAtIndex: i] editor] isGroupSelected])
-                count++;
-        if(count > 1)
-	{
-            result = NSRunAlertPanel(@"Alert", @"You are going to set the properties of many objects! Are you sure?", @"Ok", @"No", nil);
-            if(result != NSAlertDefaultReturn)
-            {
-                return;
-            }
-        }
-
-        [self saveCurrentObjectsDeep];
-
-	uMgr = [self undoManager];
-	/* save the method on the undo stack */
-	[[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-	[uMgr setActionName:@"Change Object Properties"];
-
-
-        for(i = 0; i < [objects count]; i++)
-        {
-            obj = [objects objectAtIndex: i];
-            if([[obj editor] isSelect])
-            {
-	      NSColor *newColor;
-
-                if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
-                {
-                    [obj setFlat: [[newProps objectForKey: @"flatness"] floatValue]];
-                    [obj setLineJoin: [[newProps objectForKey: @"linejoin"] intValue]];
-                    [obj setLineCap: [[newProps objectForKey: @"linecap"] intValue]];
-                    [obj setMiterLimit: [[newProps objectForKey: @"miterlimit"] floatValue]];
-                    [obj setLineWidth: [[newProps objectForKey: @"linewidth"] floatValue]];
-                }
-                [obj setStroked: (BOOL)[[newProps objectForKey: @"stroked"] intValue]];
-                newColor = (NSColor *)[newProps objectForKey: @"strokecolor"];
-                [obj setStrokeColor: newColor];
-                [obj setFilled: (BOOL)[[newProps objectForKey: @"filled"] intValue]];
-                newColor = (NSColor *)[newProps objectForKey: @"fillcolor"];
-                [obj setFillColor: newColor];
-            }
-        }
-    }
-
-    [self setNeedsDisplay: YES];
+  [self setNeedsDisplay: YES];
 }
 
 - (void)moveSelectedObjectsToFront:(id)sender

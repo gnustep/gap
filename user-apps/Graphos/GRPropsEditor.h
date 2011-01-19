@@ -78,6 +78,8 @@
 
 - (void)makeKeyAndOrderFront:(id)sender;
 
+- (void)selectionChanged: (NSNotification *)notif;
+
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;
 
 - (IBAction)setLnCap:(id)sender;

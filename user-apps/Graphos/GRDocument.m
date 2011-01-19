@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocument.m
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola

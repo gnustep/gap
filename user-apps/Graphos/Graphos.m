@@ -24,6 +24,7 @@
 
 #import "Graphos.h"
 #import "GRFunctions.h"
+#import "GRDocument.h"
 
 @implementation Graphos
 
@@ -31,14 +32,14 @@
 {
   if ((self = [super init]))
     {
-  	  [[NSNotificationCenter defaultCenter] addObserver:self
-	  										   selector:@selector(mainWindowChanged:)
-												   name:NSWindowDidBecomeMainNotification object:nil];
       [[NSNotificationCenter defaultCenter] addObserver:self
-											   selector:@selector(mainWindowResigned:)
-												   name:NSWindowDidResignMainNotification object:nil];
-	  objectInspector = nil;
-	}
+					    selector:@selector(mainWindowChanged:)
+					    name:NSWindowDidBecomeMainNotification object:nil];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+					    selector:@selector(mainWindowResigned:)
+					    name:NSWindowDidResignMainNotification object:nil];
+      objectInspector = nil;
+    }
   return self;
 }
 
@@ -59,7 +60,7 @@
 - (IBAction)showObjectInspector: (id)sender
 {
   if (objectInspector == nil)
-	objectInspector = [[GRPropsEditor alloc] init];
+    objectInspector = [[GRPropsEditor alloc] init];
   [objectInspector setDocView: [[[NSDocumentController sharedDocumentController] currentDocument] docView]];
   [objectInspector readProperties];
   [objectInspector makeKeyAndOrderFront: sender];
@@ -87,13 +88,15 @@
 /* notification */
 - (void)mainWindowChanged :(NSNotification *)notif
 {
-  NSLog(@"main window did change");
+  [objectInspector setDocView: [[[NSDocumentController sharedDocumentController] currentDocument] docView]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 /* notification */
 - (void)mainWindowResigned :(NSNotification *)notif
 {
-  NSLog(@"main window did resign");
+  [objectInspector setDocView: nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 
