@@ -62,6 +62,7 @@
 - (void)setProperties:(NSDictionary *)props
 {
   NSString *type;
+  id obj;
 
   [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
       
@@ -74,14 +75,14 @@
     {
       flatness = [[props objectForKey: @"flatness"] floatValue];
       linejoin = [[props objectForKey: @"linejoin"] intValue];
-      linecap = [[props objectForKey: @"linecap"] intValue];
+      
       miterlimit = [[props objectForKey: @"miterlimit"] floatValue];
       linewidth = [[props objectForKey: @"linewidth"] floatValue];
     }
   else
     {
       flatness = miterlimit = linewidth = 0.0;
-      linejoin = linecap = -1;
+      linejoin = -1;
     }
 
   filled = (BOOL)[[props objectForKey: @"filled"] intValue];
@@ -119,6 +120,14 @@
   [linewidthField setEnabled: YES];
   [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
 
+  obj = [props objectForKey:@"linecap"];
+  if (obj != nil)
+    {
+      linecap = [[props objectForKey: @"linecap"] intValue];
+      [lineCapMatrix setEnabled: YES];
+    }
+  else
+    linecap = -1;
                 
   if(linecap == 0)
     [lineCapMatrix setState: NSOnState atRow: 0 column: 0];
