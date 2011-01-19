@@ -35,6 +35,11 @@
       [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
       docView = nil;
       [self setControlsEnabled: NO];
+
+      [[NSNotificationCenter defaultCenter] addObserver:self
+					    selector:@selector(selectionChanged:)
+					    name:@"ObjectSelectionChanged" object:nil];
+
     }
   return self;
 }
@@ -183,6 +188,11 @@
   [fillColor release];
 }
 
+- (void)selectionChanged: (NSNotification *)notif
+{
+  [self readProperties];
+}
+
 - (void)makeKeyAndOrderFront:(id)sender
 {
   [propsPanel makeKeyAndOrderFront:sender];
@@ -283,38 +293,50 @@
 
 - (NSDictionary *)properties
 {
-    NSMutableDictionary *dict;
-    NSNumber *num;
+  NSMutableDictionary *dict;
+  NSNumber *num;
 
-    dict = [NSMutableDictionary dictionaryWithCapacity: 1];
+  dict = [NSMutableDictionary dictionaryWithCapacity: 1];
 
-    if(ispath)
-      {
-        [dict setObject: @"path" forKey: @"type"];
-        num = [NSNumber numberWithFloat: flatness];
-        [dict setObject: num forKey: @"flatness"];
-        num = [NSNumber numberWithInt: linejoin];
-        [dict setObject: num forKey: @"linejoin"];
-        num = [NSNumber numberWithInt: linecap];
-        [dict setObject: num forKey: @"linecap"];
-        num = [NSNumber numberWithFloat: miterlimit];
-        [dict setObject: num forKey: @"miterlimit"];
-        num = [NSNumber numberWithFloat: linewidth];
-        [dict setObject: num forKey: @"linewidth"];
-      }
-    else
-      {
-        [dict setObject: @"text" forKey: @"type"];
-      }
-    num = [NSNumber numberWithInt: stroked];
-    [dict setObject: num forKey: @"stroked"];
-    [dict setObject: strokeColor forKey: @"strokecolor"];
+  if ([flatnessField isEnabled])
+    {
+      num = [NSNumber numberWithFloat: flatness];
+      [dict setObject: num forKey: @"flatness"];
+    }
 
-    num = [NSNumber numberWithInt: filled];
-    [dict setObject: num forKey: @"filled"];
-    [dict setObject: fillColor forKey: @"fillcolor"];
+  if ([lineJoinMatrix isEnabled])
+    {
+      num = [NSNumber numberWithInt: linejoin];
+      [dict setObject: num forKey: @"linejoin"];
+    }
 
-    return dict;
+  if ([lineCapMatrix isEnabled])
+    {
+      num = [NSNumber numberWithInt: linecap];
+      [dict setObject: num forKey: @"linecap"];
+    }
+
+  if ([miterlimitField isEnabled])
+    {
+      num = [NSNumber numberWithFloat: miterlimit];
+      [dict setObject: num forKey: @"miterlimit"];
+    }
+
+  if ([linewidthField isEnabled])
+    {
+      num = [NSNumber numberWithFloat: linewidth];
+      [dict setObject: num forKey: @"linewidth"];
+    }
+
+  num = [NSNumber numberWithInt: stroked];
+  [dict setObject: num forKey: @"stroked"];
+  [dict setObject: strokeColor forKey: @"strokecolor"];
+
+  num = [NSNumber numberWithInt: filled];
+  [dict setObject: num forKey: @"filled"];
+  [dict setObject: fillColor forKey: @"fillcolor"];
+
+  return dict;
 }
 
 
