@@ -31,9 +31,9 @@
   self = [super init];
   if(self)
     {
-	  [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
+      [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
 	
-	  [self setControlsEnabled: NO];
+      [self setControlsEnabled: NO];
     }
   return self;
 }
@@ -72,16 +72,15 @@
     ispath = YES;
 
   if(ispath)
-    {
-      flatness = [[props objectForKey: @"flatness"] floatValue];
+    { 
       linejoin = [[props objectForKey: @"linejoin"] intValue];
       
       miterlimit = [[props objectForKey: @"miterlimit"] floatValue];
-      linewidth = [[props objectForKey: @"linewidth"] floatValue];
+      
     }
   else
     {
-      flatness = miterlimit = linewidth = 0.0;
+      miterlimit = 0.0;
       linejoin = -1;
     }
 
@@ -113,11 +112,27 @@
   [strokeColorWell setEnabled: YES];
   [strokeColorWell setColor: strokeColor];
   
-  [flatnessField setEnabled: YES];
+  obj = [props objectForKey: @"flatness"];
+  if (obj != nil)
+    {
+      flatness = [obj floatValue];
+      [flatnessField setEnabled: YES];
+    }
+  else
+    flatness = 0;
   [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
+
   [miterlimitField setEnabled: YES];
   [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
-  [linewidthField setEnabled: YES];
+
+  obj = [props objectForKey: @"linewidth"];
+  if (obj != nil)
+    {
+      linewidth = [obj floatValue];
+      [linewidthField setEnabled: YES];
+    }
+  else
+    linewidth = 0.0;
   [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
 
   obj = [props objectForKey:@"linecap"];
