@@ -110,8 +110,8 @@
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 - (IBAction)inspectObject: (id)sender;
 
-- (NSMutableDictionary *)selectionProperties;
-- (void)setSelectionProperties: (NSMutableDictionary *)properties;
+- (NSDictionary *)selectionProperties;
+- (void)setSelectionProperties: (NSDictionary *)properties;
 
 - (IBAction)moveSelectedObjectsToFront:(id)sender;
 - (IBAction)moveSelectedObjectsToBack:(id)sender;

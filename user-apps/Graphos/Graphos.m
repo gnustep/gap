@@ -60,7 +60,8 @@
 {
   if (objectInspector == nil)
 	objectInspector = [[GRPropsEditor alloc] init];
-  [objectInspector setProperties: [[[[NSDocumentController sharedDocumentController] currentDocument] docView] selectionProperties]];
+  [objectInspector setDocView: [[[NSDocumentController sharedDocumentController] currentDocument] docView]];
+  [objectInspector readProperties];
   [objectInspector makeKeyAndOrderFront: sender];
 }
 
