@@ -3,9 +3,9 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {
+                cancelPressed = id; 
                 fllButtPressed = id; 
                 makeKeyAndOrderFront = id; 
-                okCancelPressed = id; 
                 okPressed = id; 
                 setLnCap = id; 
                 setLnJoin = id; 
