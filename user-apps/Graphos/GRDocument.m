@@ -92,6 +92,12 @@
     return NO;
 }
 
+- (GRDocView *)docView
+{
+  return docView;
+}
+
+
 - (void)printShowingPrintPanel:(BOOL)flag
 {
     NSPrintOperation *op;

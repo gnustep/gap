@@ -26,12 +26,14 @@
 
 @implementation GRPropsEditor
 
-- (id)initWithObjectProperties:(NSDictionary *)objprops
+- (id)init
 {
   self = [super init];
   if(self)
     {
-      [self setObjectProperties: objprops];
+	  [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
+	
+	  [self setControlsEnabled: NO];
     }
   return self;
 }
@@ -57,26 +59,24 @@
   [linewidthField setEnabled: state];
 }
 
-- (void)setObjectProperties:(NSDictionary *)objprops
+- (void)setProperties:(NSDictionary *)props
 {
   NSString *type;
 
-  [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
-      
   [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
       
   ispath = NO;
-  type = [objprops objectForKey: @"type"];
+  type = [props objectForKey: @"type"];
   if([type isEqualToString: @"path"])
     ispath = YES;
 
   if(ispath)
     {
-      flatness = [[objprops objectForKey: @"flatness"] floatValue];
-      linejoin = [[objprops objectForKey: @"linejoin"] intValue];
-      linecap = [[objprops objectForKey: @"linecap"] intValue];
-      miterlimit = [[objprops objectForKey: @"miterlimit"] floatValue];
-      linewidth = [[objprops objectForKey: @"linewidth"] floatValue];
+      flatness = [[props objectForKey: @"flatness"] floatValue];
+      linejoin = [[props objectForKey: @"linejoin"] intValue];
+      linecap = [[props objectForKey: @"linecap"] intValue];
+      miterlimit = [[props objectForKey: @"miterlimit"] floatValue];
+      linewidth = [[props objectForKey: @"linewidth"] floatValue];
     }
   else
     {
@@ -84,12 +84,12 @@
       linejoin = linecap = -1;
     }
 
-  filled = (BOOL)[[objprops objectForKey: @"filled"] intValue];
-  fillColor = (NSColor *)[objprops objectForKey: @"fillcolor"];
+  filled = (BOOL)[[props objectForKey: @"filled"] intValue];
+  fillColor = (NSColor *)[props objectForKey: @"fillcolor"];
   [fillColor retain];
 
-  stroked = (BOOL)[[objprops objectForKey: @"stroked"] intValue];
-  strokeColor = (NSColor *)[objprops objectForKey: @"strokecolor"];
+  stroked = (BOOL)[[props objectForKey: @"stroked"] intValue];
+  strokeColor = (NSColor *)[props objectForKey: @"strokecolor"];
   [strokeColor retain];
 
   /* disable not used controls */
@@ -107,11 +107,16 @@
   if(stroked)
     [stkButt setState: NSOnState];
 
+  [fillColorWell setEnabled: YES];
   [fillColorWell setColor: fillColor];
+  [strokeColorWell setEnabled: YES];
   [strokeColorWell setColor: strokeColor];
-        
+  
+  [flatnessField setEnabled: YES];
   [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
+  [miterlimitField setEnabled: YES];
   [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
+  [linewidthField setEnabled: YES];
   [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
 
                 
@@ -135,6 +140,11 @@
   [super dealloc];
   [strokeColor release];
   [fillColor release];
+}
+
+- (void)makeKeyAndOrderFront:(id)sender
+{
+  [propsPanel makeKeyAndOrderFront:sender];
 }
 
 - (int)runModal

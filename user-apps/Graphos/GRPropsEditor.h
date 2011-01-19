@@ -62,9 +62,11 @@
   NSColor *fillColor;
 }
 
-- (id)initWithObjectProperties:(NSDictionary *)objprops;
+- (void)setControlsEnabled:(BOOL)state;
 
-- (void)setObjectProperties:(NSDictionary *)objprops;
+- (void)setProperties:(NSDictionary *)props;
+
+- (void)makeKeyAndOrderFront:(id)sender;
 
 - (int)runModal;
 

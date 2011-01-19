@@ -2,7 +2,7 @@
  Project: Graphos
  Graphos.h
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -25,6 +25,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "GRTools.h"
+#import "GRPropsEditor.h"
 
 /**
  * tool types structure
@@ -54,7 +55,10 @@ typedef enum
 {
     GRToolsWindow *tools;
     ToolType tooltype;
+	GRPropsEditor *objectInspector;
 }
+
+- (IBAction)showObjectInspector: (id)sender;
 
 - (void)setToolType:(ToolType)type;
 
