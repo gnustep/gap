@@ -37,14 +37,16 @@
       [[NSNotificationCenter defaultCenter] addObserver:self
 											   selector:@selector(mainWindowResigned:)
 												   name:NSWindowDidResignMainNotification object:nil];
-    }
+	  objectInspector = nil;
+	}
   return self;
 }
 
 - (void)dealloc
 {
-    [tools release];
-    [super dealloc];
+  [tools release];
+  [objectInspector release];
+  [super dealloc];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -52,6 +54,14 @@
     tools = [[GRToolsWindow alloc] init];
     [tools display];
     [tools orderFront:nil];
+}
+
+- (IBAction)showObjectInspector: (id)sender
+{
+  if (objectInspector == nil)
+	objectInspector = [[GRPropsEditor alloc] init];
+  [objectInspector setProperties: [[[[NSDocumentController sharedDocumentController] currentDocument] docView] selectionProperties]];
+  [objectInspector makeKeyAndOrderFront: sender];
 }
 
 - (void)setToolType:(ToolType)type

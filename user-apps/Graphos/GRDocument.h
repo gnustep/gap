@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocument.h
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -27,7 +27,10 @@
 
 @interface GRDocument : NSDocument
 {
-    GRDocView *docView;
+  GRDocView *docView;
 }
+
+/** accessor to the current View of the document */
+- (GRDocView *)docView;
 
 @end
