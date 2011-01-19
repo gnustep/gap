@@ -26,6 +26,8 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+@class GRDocView;
+
 /**
  * Object properties editor
  */
@@ -60,15 +62,21 @@
   NSColor *strokeColor;
   BOOL filled;
   NSColor *fillColor;
+  
+  GRDocView *docView;
 }
 
 - (void)setControlsEnabled:(BOOL)state;
 
-- (void)setProperties:(NSDictionary *)props;
+/** reads the selection properties from the current view */
+- (void)readProperties;
+
+/** sets the view which contains the objects.
+  The view needs to needs to be set so that the selection properties
+  can be read or applied. */
+- (void)setDocView: (GRDocView *)view;
 
 - (void)makeKeyAndOrderFront:(id)sender;
-
-- (int)runModal;
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;
 
@@ -81,6 +89,8 @@
 - (IBAction)stkButtPressed:(id)sender;
 
 - (IBAction)okCancelPressed:(id)sender;
+
+- (IBAction)okPressed:(id)sender;
 
 - (NSDictionary *)properties;
 

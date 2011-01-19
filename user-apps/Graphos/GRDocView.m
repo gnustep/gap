@@ -910,7 +910,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
-- (NSMutableDictionary *)selectionProperties
+- (NSDictionary *)selectionProperties
 {
   NSMutableDictionary *propDict;
   int i;
@@ -987,7 +987,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   return propDict;
 }
 
-- (void)setSelectionProperties: (NSMutableDictionary *)properties;
+- (void)setSelectionProperties: (NSDictionary *)properties;
 {
   NSUndoManager *uMgr;
   id obj;

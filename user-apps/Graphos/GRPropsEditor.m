@@ -23,6 +23,7 @@
  */
 
 #import "GRPropsEditor.h"
+#import "GRDocView.h"
 
 @implementation GRPropsEditor
 
@@ -32,7 +33,7 @@
   if(self)
     {
       [NSBundle loadNibNamed:@"PropertiesEditor" owner:self];
-	
+      docView = nil;
       [self setControlsEnabled: NO];
     }
   return self;
@@ -59,57 +60,52 @@
   [linewidthField setEnabled: state];
 }
 
-- (void)setProperties:(NSDictionary *)props
+- (void)readProperties
 {
-  NSString *type;
   id obj;
+  NSDictionary *props;
 
   [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
       
-  ispath = NO;
-  type = [props objectForKey: @"type"];
-  if([type isEqualToString: @"path"])
-    ispath = YES;
+  [self setControlsEnabled: NO];
+  
+  props = nil;
+  props = [docView selectionProperties];
+  if (props == nil)
+    return;
 
-  if(ispath)
-    { 
-      linejoin = [[props objectForKey: @"linejoin"] intValue];
-      
-      miterlimit = [[props objectForKey: @"miterlimit"] floatValue];
-      
+  obj = [props objectForKey: @"filled"];
+  if (obj != nil)
+    {
+      filled = (BOOL)[obj intValue];
+      fillColor = (NSColor *)[props objectForKey: @"fillcolor"];
+      [fillColor retain];
+      [fllButt setEnabled: YES];
+      if (filled)
+	[fllButt setState: NSOnState];
+      else
+        [fllButt setState: NSOffState];
+      [fillColorWell setEnabled: YES];
     }
   else
-    {
-      miterlimit = 0.0;
-      linejoin = -1;
-    }
-
-  filled = (BOOL)[[props objectForKey: @"filled"] intValue];
-  fillColor = (NSColor *)[props objectForKey: @"fillcolor"];
-  [fillColor retain];
-
-  stroked = (BOOL)[[props objectForKey: @"stroked"] intValue];
-  strokeColor = (NSColor *)[props objectForKey: @"strokecolor"];
-  [strokeColor retain];
-
-  /* disable not used controls */
-  if (!ispath)
-    {
-      [lineCapMatrix setEnabled:NO];
-      [lineJoinMatrix setEnabled:NO];
-      [flatnessField setEnabled:NO];
-      [miterlimitField setEnabled:NO];
-      [linewidthField setEnabled:NO];
-    }
-        
-  if(filled)
-    [fllButt setState: NSOnState];
-  if(stroked)
-    [stkButt setState: NSOnState];
-
-  [fillColorWell setEnabled: YES];
+    fillColor = nil;
   [fillColorWell setColor: fillColor];
-  [strokeColorWell setEnabled: YES];
+
+  obj = [props objectForKey: @"stroked"];
+  if (obj != nil)
+    {
+      stroked = (BOOL)[obj intValue];
+      strokeColor = (NSColor *)[props objectForKey: @"strokecolor"];
+      [strokeColor retain];
+      [stkButt setEnabled: YES];
+      if (stroked)
+	[stkButt setState: NSOnState];
+      else
+        [stkButt setState: NSOffState];
+      [strokeColorWell setEnabled: YES];
+    }
+  else
+    strokeColor = nil;
   [strokeColorWell setColor: strokeColor];
   
   obj = [props objectForKey: @"flatness"];
@@ -122,7 +118,14 @@
     flatness = 0;
   [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
 
-  [miterlimitField setEnabled: YES];
+  obj = [props objectForKey: @"miterlimit"];
+  if (obj != nil)
+    {
+      miterlimit = [obj floatValue];
+      [miterlimitField setEnabled: YES];
+    }
+  else
+    miterlimit = 0;
   [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
 
   obj = [props objectForKey: @"linewidth"];
@@ -143,20 +146,34 @@
     }
   else
     linecap = -1;
-                
+     
   if(linecap == 0)
     [lineCapMatrix setState: NSOnState atRow: 0 column: 0];
   else if(linecap == 1)
     [lineCapMatrix setState: NSOnState atRow: 1 column: 0];
   else if(linecap == 2)
     [lineCapMatrix setState: NSOnState atRow: 2 column: 0];
-        
+  
+  obj = [props objectForKey: @"linejoin"];
+  if (obj != nil)
+    {
+      linejoin = [obj intValue];
+      [lineJoinMatrix setEnabled: YES];
+    }
+  else
+    linejoin = -1;
+
   if(linejoin == 0)
     [lineJoinMatrix setState: NSOnState atRow: 0 column: 0];
   else if(linejoin == 1)
     [lineJoinMatrix setState: NSOnState atRow: 1 column: 0];
   else if(linejoin == 2)
     [lineJoinMatrix setState: NSOnState atRow: 2 column: 0];
+}
+
+- (void)setDocView: (GRDocView *)view
+{
+  docView = view;
 }
 
 - (void) dealloc
@@ -231,7 +248,7 @@
       }
 }
 
-- (IBAction)okCancelPressed:(id)sender;
+- (IBAction)okCancelPressed:(id)sender
 {
   [fillColor release];
   [strokeColor release];
@@ -244,8 +261,18 @@
     result = NSAlertAlternateReturn;
 
   [propsPanel orderOut: propsPanel];
-  [[NSApplication sharedApplication] stopModal];
 }
+
+- (IBAction)okPressed:(id)sender
+{
+  [fillColor release];
+  [strokeColor release];
+  fillColor = [[fillColorWell color] retain];
+  strokeColor = [[strokeColorWell color] retain];
+
+  [docView setSelectionProperties: [self properties]];
+}
+
 
 /* panel delegate */
 - (BOOL)windowShouldClose:(id)sender
