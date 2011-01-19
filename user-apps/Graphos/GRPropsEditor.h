@@ -36,8 +36,6 @@
 @interface GRPropsEditor : NSObject
 {
   IBOutlet NSPanel *propsPanel;
-  
-  int result;
 
   IBOutlet NSButton *stkButt;
   IBOutlet NSButton *fllButt;
@@ -90,7 +88,7 @@
 
 - (IBAction)stkButtPressed:(id)sender;
 
-- (IBAction)okCancelPressed:(id)sender;
+- (IBAction)cancelPressed:(id)sender;
 
 - (IBAction)okPressed:(id)sender;
 

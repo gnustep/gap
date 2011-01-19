@@ -198,13 +198,6 @@
   [propsPanel makeKeyAndOrderFront:sender];
 }
 
-- (int)runModal
-{
-    NSApplication *app = [NSApplication sharedApplication];
-    [app runModalForWindow: propsPanel];
-    return result;
-}
-
 /* as delegate */
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
@@ -258,18 +251,8 @@
       }
 }
 
-- (IBAction)okCancelPressed:(id)sender
+- (IBAction)cancelPressed:(id)sender
 {
-  [fillColor release];
-  [strokeColor release];
-  fillColor = [[fillColorWell color] retain];
-  strokeColor = [[strokeColorWell color] retain];
-
-  if(sender == okButt)
-    result = NSAlertDefaultReturn;
-  else
-    result = NSAlertAlternateReturn;
-
   [propsPanel orderOut: propsPanel];
 }
 
