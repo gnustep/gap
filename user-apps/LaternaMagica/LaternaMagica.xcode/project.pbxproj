@@ -155,6 +155,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				853E828E12EA4D0E002A3BCE,
 				858E59FA0F365467009E7B11,
 				29B97318FDCFA39411CA2CEA,
 				089C165CFE840E0CC02AAC07,
@@ -252,6 +253,20 @@
 //852
 //853
 //854
+		853E828E12EA4D0E002A3BCE = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = ChangeLog;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		853E828F12EA4D0E002A3BCE = {
+			fileRef = 853E828E12EA4D0E002A3BCE;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		855F873C0F34FE6400C1D9A8 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -363,6 +378,7 @@
 				85DB9A6210B3D3C100DC1358,
 				85DB9A6310B3D3C100DC1358,
 				85DB9A6410B3D3C100DC1358,
+				853E828F12EA4D0E002A3BCE,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
