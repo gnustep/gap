@@ -15,6 +15,7 @@
 	    "save:",
 	    "saveas:",
 	    "sendToBack:",
+	    "showObjectInspector:",
 	    "unselectOtherObjects:"
 	);
 	Super = NSObject;
@@ -35,6 +36,7 @@
     };
     Graphos = {
 	Actions = (
+	    "showObjectInspector:"
 	);
 	Outlets = (
 	);
