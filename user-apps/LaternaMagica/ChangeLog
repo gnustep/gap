@@ -1,0 +1,3 @@
+2011-01-22 Riccardo Mottola <rm@gnu.org>
+	*  LMFlipView.m
+	Track delete, backspace, up and down events
