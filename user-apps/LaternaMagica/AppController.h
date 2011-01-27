@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2010 Riccardo Mottola
+   Copyright (C) 2006-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -75,6 +75,7 @@
 - (IBAction)setFullScreen:(id)sender;
 - (IBAction)prevImage:(id)sender;
 - (IBAction)nextImage:(id)sender;
+- (IBAction)removeAllImages:(id)sender;
 - (IBAction)removeImage:(id)sender;
 - (IBAction)eraseImage:(id)sender;
 - (IBAction)rotateImage90:(id)sender;
