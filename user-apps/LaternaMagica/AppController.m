@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2010 Riccardo Mottola
+   Copyright (C) 2006-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -328,6 +328,19 @@
 
         [fileListView selectRow: sr byExtendingSelection: NO];
     }    
+}
+
+- (IBAction)removeAllImages:(id)sender
+{
+  int rows;
+  int i;
+  
+  rows = [fileListView numberOfRows];
+  for (i = ([fileListView numberOfRows]  - 1); i >= 0 ; i--)
+    [fileListData removeObjectAtIndex: i];
+  [fileListView reloadData];
+  [view setImage: nil];
+  [window setTitle:@"None"];
 }
 
 - (IBAction)removeImage:(id)sender
