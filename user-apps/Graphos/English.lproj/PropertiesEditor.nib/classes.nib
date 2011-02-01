@@ -3,18 +3,16 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {
-                cancelPressed = id; 
                 fllButtPressed = id; 
                 makeKeyAndOrderFront = id; 
-                okPressed = id; 
                 setLnCap = id; 
                 setLnJoin = id; 
                 stkButtPressed = id; 
+                valuesChanged = id; 
             }; 
             CLASS = GRPropsEditor; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                cancelButt = NSButton; 
                 fillColorWell = NSColorWell; 
                 flatnessField = NSTextField; 
                 fllButt = NSButton; 
@@ -22,7 +20,6 @@
                 lineJoinMatrix = NSMatrix; 
                 linewidthField = NSTextField; 
                 miterlimitField = NSTextField; 
-                okButt = NSButton; 
                 propsPanel = NSPanel; 
                 stkButt = NSButton; 
                 strokeColorWell = NSColorWell; 

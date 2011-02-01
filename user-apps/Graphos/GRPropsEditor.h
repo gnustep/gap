@@ -50,9 +50,6 @@
   IBOutlet NSColorWell *strokeColorWell;
   IBOutlet NSColorWell *fillColorWell;
 
-  IBOutlet NSButton *cancelButt;
-  IBOutlet NSButton *okButt;
-
   BOOL ispath;
   float flatness, miterlimit, linewidth;
   int linejoin, linecap;
@@ -88,9 +85,7 @@
 
 - (IBAction)stkButtPressed:(id)sender;
 
-- (IBAction)cancelPressed:(id)sender;
-
-- (IBAction)okPressed:(id)sender;
+- (IBAction)valuesChanged:(id)sender;
 
 - (NSDictionary *)properties;
 
