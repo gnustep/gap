@@ -209,16 +209,20 @@
         miterlimit = [miterlimitField floatValue];
     else if(field == linewidthField)
         linewidth = [linewidthField floatValue];
+
+  [self valuesChanged: field];
 }
 
 - (IBAction)setLnCap:(id)sender
 {
-    linecap = [[sender selectedCell] tag];
+  linecap = [[sender selectedCell] tag];
+  [self valuesChanged: sender];
 }
 
 - (IBAction)setLnJoin:(id)sender
 {
-    linejoin = [[sender selectedCell] tag];
+  linejoin = [[sender selectedCell] tag];
+  [self valuesChanged: sender];
 }
 
 - (IBAction)fllButtPressed:(id)sender
@@ -234,6 +238,7 @@
         filled = NO;
         [fillColorWell setEnabled: NO];
       }
+  [self valuesChanged: sender];
 }
 
 - (IBAction)stkButtPressed:(id)sender
@@ -249,28 +254,23 @@
         stroked = NO;
         [strokeColorWell setEnabled: NO];
       }
+  [self valuesChanged: sender];
 }
 
-- (IBAction)cancelPressed:(id)sender
-{
-  [propsPanel orderOut: propsPanel];
-}
-
-- (IBAction)okPressed:(id)sender
+- (IBAction)valuesChanged:(id)sender
 {
   [fillColor release];
   [strokeColor release];
   fillColor = [[fillColorWell color] retain];
   strokeColor = [[strokeColorWell color] retain];
-
-  [docView setSelectionProperties: [self properties]];
+  
+  [docView setSelectionProperties: [self properties]];  
 }
 
 
 /* panel delegate */
 - (BOOL)windowShouldClose:(id)sender
 {
-  [self okCancelPressed:sender];
   return YES;
 }
 
