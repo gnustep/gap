@@ -28,4 +28,9 @@ There are a couple of things in the subdirectory Goodies, which for
 some reason aren't built by default. You can build all of them in
 precisely the same way (make, make install), or you can just type
 "make goodies" followed by "make goodies-install" in the main
-directory. Look at Goodies/README for details.
+directory. Look at Goodies/README for details
+
+If you have toubles parsing certain VCF files because of special characters, be sure your LANG settings.
+For example, to get UTF8 and Italian support:
+
+setenv LANG "it_IT.UTF-8"
