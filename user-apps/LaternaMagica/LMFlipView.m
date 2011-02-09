@@ -26,23 +26,11 @@
 #import "LMFlipView.h"
 #import "AppController.h"
 
-#ifdef GNUSTEP
-#define KC_ESCAPE 9
-#define KC_LEFTARROW 113
-#define KC_RIGHTARROW 114
-#define KC_UPARROW 111
-#define KC_DOWNARROW 116
-#define KC_DELETE 119
-#define KC_BACKSPACE 22
-#else
-#define KC_ESCAPE 53
-#define KC_LEFTARROW 123
-#define KC_RIGHTARROW 124
-#define KC_UPARROW 126
-#define KC_DOWNARROW 125
-#define KC_DELETE 117
-#define KC_BACKSPACE 51
-#endif
+/* we define our own constants */
+enum
+{
+  NSEscapeCharacter = 0x001b
+};
 
 @implementation LMFlipView
 
@@ -61,7 +49,8 @@
 /** respond to key equivalents which are not bound do menu items */
 -(BOOL)performKeyEquivalent: (NSEvent*)theEvent
 {
-  unsigned short keyCode;
+  NSString *keyStr;
+  unichar keyCh;
   unsigned int modifierFlags;
 
 #ifdef __APPLE__
@@ -71,25 +60,28 @@
         return [super performKeyEquivalent:theEvent];
 #endif
 
-    keyCode = [theEvent keyCode];
+    keyCh = 0x0;
+    keyStr = [theEvent characters];
+    if ([keyStr length] > 0)
+      keyCh = [keyStr characterAtIndex:0];
     modifierFlags = [theEvent modifierFlags];
-    if (keyCode == KC_ESCAPE)
+
+    if (keyCh == NSEscapeCharacter)
       {
-        NSLog(@"(keyCode) Escape!");
         [controller setFullScreen:theEvent];
         return YES;
       }
-    else if (keyCode == KC_LEFTARROW || keyCode == KC_UPARROW)
+    else if (keyCh == NSLeftArrowFunctionKey || keyCh == NSUpArrowFunctionKey)
       {
         [controller prevImage:theEvent];
         return YES;
       }
-    else if (keyCode == KC_RIGHTARROW || keyCode == KC_DOWNARROW)
+    else if (keyCh == NSRightArrowFunctionKey || keyCh == NSDownArrowFunctionKey)
       {
         [controller nextImage:theEvent];
         return YES;
       }
-    else if (keyCode == KC_BACKSPACE || keyCode == KC_DELETE)
+    else if (keyCh == NSDeleteFunctionKey || keyCh == NSDeleteCharacter)
       {
 	if (modifierFlags & NSShiftKeyMask)
 	  [controller removeImage:theEvent];
@@ -98,7 +90,7 @@
         return YES;
       }
     else
-      NSLog(@"keyCode %d", keyCode);    
+      NSLog(@"keyCh %x", keyCh);    
     return [super performKeyEquivalent:theEvent];
 }
 
