@@ -96,40 +96,59 @@ ADConverterManager *_manager = nil;
 
   obj = [[[c alloc] initForInput] autorelease];
   data = [NSData dataWithContentsOfFile: filename];
-  if (!data) {
-    NSLog(@"Error while reading file %@", filename);
-    return nil;
-  }
+  if (!data)
+    {
+      NSLog(@"Error while reading file %@", filename);
+      return nil;
+    }
   string = [[NSString alloc] initWithData:data encoding:NSUnicodeStringEncoding];
-  if (string) {
-    NSLog(@"File in NSUnicodeStringEncoding");
-    goto encoding;
-  }
+  if (string)
+    {
+      NSLog(@"File in NSUnicodeStringEncoding");
+      goto encoding;
+    }
   string = [[NSString alloc] initWithData:data encoding: NSUTF16BigEndianStringEncoding];
-  if (string) {
-    NSLog(@"File in NSUTF16BigEndianStringEncoding");
-    goto encoding;
-  }
+  if (string)
+    {
+      NSLog(@"File in NSUTF16BigEndianStringEncoding");
+      goto encoding;
+    }
   string = [[NSString alloc] initWithData:data encoding: NSUTF16LittleEndianStringEncoding];
-  if (string) {
-    NSLog(@"File in NSUTF16LittleEndianStringEncoding");
-    goto encoding;
-  }
+  if (string)
+    {
+      NSLog(@"File in NSUTF16LittleEndianStringEncoding");
+      goto encoding;
+    }
   string = [[NSString alloc] initWithData:data encoding: NSUTF16LittleEndianStringEncoding];
-  if (string) {
-    NSLog(@"File in NSUTF16LittleEndianStringEncoding");
-    goto encoding;
-  }
+  if (string)
+    {
+      NSLog(@"File in NSUTF16LittleEndianStringEncoding");
+      goto encoding;
+    }
   string = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
-  if (string) {
-    NSLog(@"File in NSUTF8StringEncoding");
-    goto encoding;
-  }
+  if (string)
+    {
+      NSLog(@"File in NSUTF8StringEncoding");
+      goto encoding;
+    }
+  string = [[NSString alloc] initWithData:data encoding: NSISOLatin1StringEncoding];
+  if (string)
+    {
+      NSLog(@"File in NSISOLatin1StringEncoding");
+      goto encoding;
+    }
+  string = [[NSString alloc] initWithData:data encoding: NSISOLatin2StringEncoding];
+  if (string)
+    {
+      NSLog(@"File in NSISOLatin2StringEncoding");
+      goto encoding;
+    }
   string = [[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding];
-  if (!string) {
-    NSLog(@"No encoding found for file %@, aborting.", filename);
-    return nil;
-  }
+  if (!string)
+    {
+      NSLog(@"No encoding found for file %@, aborting.", filename);
+      return nil;
+    }
  encoding:
   if (![obj useString: AUTORELEASE(string)])
     return nil;
