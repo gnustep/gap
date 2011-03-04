@@ -209,8 +209,7 @@ NSString *const RSSFeedFetchFailedNotification = @"RSSFeedFetchFailedNotificatio
     {
       status = RSSFeedIsIdle;
       [self clearArticles];
-    }
-  
+    }  
   
   // FIXME: Catch errors here which are returned from parsing methods!
   if ([[root name] isEqualToString: @"RDF"]) // RSS 1.0 detected
@@ -226,11 +225,17 @@ NSString *const RSSFeedFetchFailedNotification = @"RSSFeedFetchFailedNotificatio
       [self parseRSS20WithRootNode: root];
     }
   else if ([[root name] isEqualToString: @"rss"] &&
-	   [[[root attributes] objectForKey: @"version"]
-	     isEqualToString: @"0.91"]) // RSS 0.91 detected
+	   [[[root attributes] objectForKey: @"version"] isEqualToString: @"0.91"]) // RSS 0.91 detected
     {
       rssVersion = @"RSS 0.91";
       NSLog(@"WARNING: RSS 0.91 support is a *hack* at the moment");
+      [self parseRSS20WithRootNode: root];
+    }
+  else if ([[root name] isEqualToString: @"rss"] &&
+	   [[[root attributes] objectForKey: @"version"] isEqualToString: @"0.92"]) // RSS 0.92 detected
+    {
+      rssVersion = @"RSS 0.92";
+      NSLog(@"WARNING: RSS 0.92 support is a *hack* at the moment");
       [self parseRSS20WithRootNode: root];
     }
   else if ([[root name] isEqualToString: @"feed"] &&
@@ -249,6 +254,7 @@ NSString *const RSSFeedFetchFailedNotification = @"RSSFeedFetchFailedNotificatio
   else
     {
       NSLog(@"Failed to decide RSS version");
+      NSLog(@"Root name: %@", [root name]);
       rssVersion = @"Malformed RSS?";
       status = RSSFeedIsIdle;
       [[NSNotificationCenter defaultCenter]
