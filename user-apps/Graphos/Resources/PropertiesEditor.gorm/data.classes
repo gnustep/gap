@@ -8,7 +8,8 @@
 	    "okPressed:",
 	    "setLnCap:",
 	    "setLnJoin:",
-	    "stkButtPressed:"
+	    "stkButtPressed:",
+	    "valuesChanged:"
 	);
 	Super = NSObject;
     };
@@ -19,8 +20,7 @@
 	    "setLnJoin:",
 	    "fllButtPressed:",
 	    "stkButtPressed:",
-	    "cancelPressed:",
-	    "okPressed:"
+	    "valuesChanged:"
 	);
 	Outlets = (
 	    propsPanel,
@@ -32,9 +32,7 @@
 	    miterlimitField,
 	    linewidthField,
 	    strokeColorWell,
-	    fillColorWell,
-	    cancelButt,
-	    okButt
+	    fillColorWell
 	);
 	Super = NSObject;
     };
