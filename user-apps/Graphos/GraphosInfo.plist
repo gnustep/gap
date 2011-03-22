@@ -1,26 +1,26 @@
 {
     ApplicationDescription = "Vector drawing";
-    ApplicationIcon = graphos_appicon_48.tif;
+    ApplicationIcon = "graphos_appicon_48.tif";
     ApplicationName = Graphos;
-    ApplicationRelease = 0.2;
+    ApplicationRelease = "0.3";
     Authors = (
 	"Riccardo Mottola",
 	"Enrico Sersale",
 	"Rob Burns"
     );
-    Copyright = "Copyright (C) 2005-2010";
+    Copyright = "Copyright (C) 2005-2011";
     CopyrightDescription = "Released under GPL";
-    FullVersionID = 0.2;
+    FullVersionID = "0.3";
     NSExecutable = Graphos;
-    NSIcon = graphos_appicon_48.tif;
-    NSMainNibFile = MainMenu.gorm;
+    NSIcon = "graphos_appicon_48.tif";
+    NSMainNibFile = "MainMenu.gorm";
     NSPrincipalClass = NSApplication;
     NSRole = Application;
     NSTypes = (
 	{
 	    NSDocumentClass = GRDocument;
 	    NSHumanReadableName = "Graphos drawing";
-	    NSIcon = graphos_doc_icon_48.tif;
+	    NSIcon = "graphos_doc_icon_48.tif";
 	    NSName = "graphos design";
 	    NSRole = Editor;
 	    NSUnixExtensions = (
