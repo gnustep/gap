@@ -35,6 +35,7 @@
 #import "GRCircleEditor.h"
 #import "GRPropsEditor.h"
 
+#define UNDO_ACTION_OBJPROPS @"Change Object Properties"
 
 float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
@@ -993,13 +994,15 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   NSUndoManager *uMgr;
   id obj;
   int i;
-
-  [self saveCurrentObjectsDeep];
   
   uMgr = [self undoManager];
-  /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-  [uMgr setActionName:@"Change Object Properties"];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_OBJPROPS] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [uMgr setActionName: UNDO_ACTION_OBJPROPS];
+    }
   
   for(i = 0; i < [objects count]; i++)
     {
