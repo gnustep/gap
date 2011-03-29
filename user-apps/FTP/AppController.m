@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2008 Riccardo Mottola
+   Copyright (C) 2005-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -264,6 +264,20 @@
             NSLog(@"should download %@", thePath);
             [self performRetrieveFile];
         }
+    }
+}
+
+- (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
+{
+  if (tableView == localView)
+    {
+      NSLog(@"local");
+      [localTableData sortByIdent: [tableColumn identifier]];
+    }
+  else
+    {
+      NSLog(@"remote");
+      [remoteTableData sortByIdent: [tableColumn identifier]];
     }
 }
 

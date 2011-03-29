@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Riccardo Mottola
+ Copyright (C) 2005-2011 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -28,12 +28,16 @@
 #import <AppKit/AppKit.h>
 #import "fileElement.h"
 
+#define TAG_FILENAME @"filename"
 
-@interface fileTable : NSObject {
-    NSArray        *fileStructs;
+@interface fileTable : NSObject
+{
+  NSArray   *fileStructs;
+  NSString  *sortByIdent;
 }
 
 - (void)initData:(NSArray *)fnames;
 - (fileElement *)elementAtIndex:(unsigned)index;
+- (void)sortByIdent:(NSString *)idStr;
 
 @end

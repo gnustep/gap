@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005 Riccardo Mottola
+   Copyright (C) 2005-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
