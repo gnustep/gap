@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005 Riccardo Mottola
+ Copyright (C) 2005-2011 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -32,6 +32,8 @@
 
 - (void)initData:(NSArray *)fnames
 {
+  sortByIdent = nil;
+  
     if (fileStructs)
         [fileStructs release];
     fileStructs = [[NSArray arrayWithArray:fnames] retain];
@@ -49,6 +51,19 @@
     return [fileStructs objectAtIndex:index];
 }
 
+- (void)sortByIdent:(NSString *)idStr
+{
+  if ([idStr isEqualToString: sortByIdent])
+    {
+      NSLog(@"reverse");
+    }
+  else
+    {
+      NSLog(@"Sort by: %@", idStr);
+    }
+  sortByIdent = idStr;
+}
+
 /* methods implemented to follow the informal NSTableView protocol */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
@@ -61,7 +76,7 @@
     
     theElement = NULL;
     NSParameterAssert(rowIndex >= 0 && rowIndex < [fileStructs count]);
-    if ([[aTableColumn identifier] isEqualToString:@"filename"])
+    if ([[aTableColumn identifier] isEqualToString:TAG_FILENAME])
         theElement = [[fileStructs objectAtIndex:rowIndex] filename];
     else
         NSLog(@"unknown table column ident");
