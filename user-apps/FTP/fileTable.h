@@ -32,8 +32,9 @@
 
 @interface fileTable : NSObject
 {
-  NSArray   *fileStructs;
-  NSString  *sortByIdent;
+  NSArray        *fileStructs;
+  NSMutableArray *sortedArray;
+  NSString       *sortByIdent;
 }
 
 - (void)initData:(NSArray *)fnames;
