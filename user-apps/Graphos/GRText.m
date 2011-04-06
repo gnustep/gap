@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -236,26 +236,6 @@
     [dict setObject: s forKey: @"zmfactor"];
 
     return dict;
-}
-
-- (NSString *)psDescription
-{
-    NSString *pss;
-
-    if(!visible)
-        return nil;
-
-    pss = [NSString stringWithFormat:
-        @"\n/%@ %.3f sf\nn\n%.3f %.3f m\n(%@)show\n",
-        [font fontName], fsize, pos.x, pos.y, str];
-    if(stroked)
-        pss = [pss stringByAppendingFormat: @"%.3f %.3f %.3f %.3f k\nstroke\n",
-            strokeColor[0], strokeColor[1], strokeColor[2], strokeColor[3]];
-    if(filled)
-        pss = [pss stringByAppendingFormat: @"%.3f %.3f %.3f %.3f k\nfill\n",
-            fillColor[0], fillColor[1], fillColor[2], fillColor[3]];
-
-    return pss;
 }
 
 - (NSString *)fontName
