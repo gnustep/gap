@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -401,7 +401,6 @@ static double k = 0.025;
     int i, pcount, index;
     double y, s, ax, ay;
 
-//    printf("%s\n", [[self psDescription] cString]);
     return;
     // #### FIXME what the crap is this? we always return... the rest of the method is useless!!!
     pcount = 0;

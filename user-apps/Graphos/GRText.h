@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.h
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -53,8 +53,6 @@
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;
 
-
-- (NSString *)psDescription;
 
 - (NSString *)fontName;
 
