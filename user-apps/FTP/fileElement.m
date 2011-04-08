@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2010 Riccardo Mottola
+ Copyright (C) 2005-2011 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -27,7 +27,7 @@
 #import "fileElement.h"
 
 
-@implementation fileElement
+@implementation FileElement
 
 - (void)dealloc
 {
@@ -57,43 +57,43 @@
 /* as a parser aid, check if a string is a month */
 - (int)checkMonth: (NSString *)token
 {
-    if ([token compare:@"Jan" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 1;
+  if ([token compare:@"Jan" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 1;
     
-    if ([token compare:@"Feb" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 2;
+  if ([token compare:@"Feb" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 2;
     
-    if ([token compare:@"Mar" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 3;
+  if ([token compare:@"Mar" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 3;
     
-    if ([token compare:@"Apr" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 4;
+  if ([token compare:@"Apr" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 4;
     
-    if ([token compare:@"May" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 5;
+  if ([token compare:@"May" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 5;
     
-    if ([token compare:@"Jun" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 6;
+  if ([token compare:@"Jun" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 6;
     
-    if ([token compare:@"Jul" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 7;
+  if ([token compare:@"Jul" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 7;
     
-    if ([token compare:@"Aug" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 8;
+  if ([token compare:@"Aug" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 8;
     
-    if ([token compare:@"Sep" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 9;
+  if ([token compare:@"Sep" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 9;
     
-    if ([token compare:@"Oct" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 10;
+  if ([token compare:@"Oct" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 10;
     
-    if ([token compare:@"Nov" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 11;
+  if ([token compare:@"Nov" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 11;
     
-    if ([token compare:@"Dec" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
-        return 12;
+  if ([token compare:@"Dec" options:NSCaseInsensitiveSearch ] == NSOrderedSame)
+    return 12;
     
-    return 0;
+  return 0;
 }
 
 /*
@@ -377,11 +377,10 @@
             cursor++;
 
     	// file name    
-                // typically the filename
+        // typically the filename
         if (cursor < lineLen)
         {
             tokenRange = NSMakeRange(cursor, lineLen-cursor);
-//            NSLog(@"last token: %@ %@", NSStringFromRange(tokenEnd), NSStringFromRange(tokenRange));
             [splitLine addObject:[fullLine substringWithRange:tokenRange]];
         }
 
@@ -408,17 +407,17 @@
 /* accessors */
 - (NSString *)filename
 {
-    return self->filename;
+  return self->filename;
 }
 
 - (NSString *)linkTargetName
 {
-    return self->linkTargetName;
+  return self->linkTargetName;
 }
 
 - (BOOL)isDir
 {
-    return isDir;
+  return isDir;
 }
 
 - (BOOL)isLink
@@ -428,7 +427,7 @@
 
 - (unsigned long long)size
 {
-    return size;
+  return size;
 }
 
 

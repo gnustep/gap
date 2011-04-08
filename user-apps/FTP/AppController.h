@@ -62,8 +62,8 @@
     
     NSMutableDictionary  *textAttributes;
     
-    fileTable   *localTableData;
-    fileTable   *remoteTableData;
+    FileTable   *localTableData;
+    FileTable   *remoteTableData;
     FtpClient   *ftp;
     LocalClient *local;
 
@@ -131,7 +131,7 @@
 
 @interface fileTransmitParms : NSObject
 {
-    @public fileElement *file;
+    @public FileElement *file;
     @public LocalClient *localClient;
     @public int         depth;
 }

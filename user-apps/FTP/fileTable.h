@@ -30,7 +30,7 @@
 
 #define TAG_FILENAME @"filename"
 
-@interface fileTable : NSObject
+@interface FileTable : NSObject
 {
   NSArray        *fileStructs;
   NSMutableArray *sortedArray;
@@ -38,7 +38,7 @@
 }
 
 - (void)initData:(NSArray *)fnames;
-- (fileElement *)elementAtIndex:(unsigned)index;
+- (FileElement *)elementAtIndex:(unsigned)index;
 - (void)sortByIdent:(NSString *)idStr;
 
 @end

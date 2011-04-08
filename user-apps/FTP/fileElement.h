@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2010 Riccardo Mottola
+ Copyright (C) 2005-2011 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -29,7 +29,7 @@
 
 
 
-@interface fileElement : NSObject
+@interface FileElement : NSObject
 {
     NSString           *filename;
     NSString           *linkTargetName;

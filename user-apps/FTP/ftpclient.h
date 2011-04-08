@@ -96,8 +96,8 @@ typedef struct
 
 - (int)writeLine:(char *)line;
 - (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog;
-- (oneway void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
-- (oneway void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;

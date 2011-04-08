@@ -390,7 +390,7 @@ int getChar(streamStruct* ss)
     return retVal;
 }
 
-- (oneway void)retrieveFile:(fileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -424,7 +424,7 @@ int getChar(streamStruct* ss)
         NSArray      *dirList;
         NSString     *remoteDir;
         NSEnumerator *en;
-        fileElement  *fEl;
+        FileElement  *fEl;
 
         if (depth > MAX_DIR_RECURSION)
         {
@@ -534,7 +534,7 @@ int getChar(streamStruct* ss)
     [controller setThreadRunningState:NO];
 }
 
-- (oneway void)storeFile:(fileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
+- (oneway void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -569,7 +569,7 @@ int getChar(streamStruct* ss)
         NSArray      *dirList;
         NSString     *remotePath;
         NSEnumerator *en;
-        fileElement  *fEl;
+        FileElement  *fEl;
 
         if (depth > MAX_DIR_RECURSION)
         {
@@ -686,7 +686,7 @@ int getChar(streamStruct* ss)
     [controller setThreadRunningState:NO];
 }
 
-- (void)deleteFile:(fileElement *)file beingAt:(int)depth
+- (void)deleteFile:(FileElement *)file beingAt:(int)depth
 {
     NSString           *fileName;
     NSString           *localPath;
@@ -705,7 +705,7 @@ int getChar(streamStruct* ss)
         NSArray      *dirList;
         NSString     *remotePath;
         NSEnumerator *en;
-        fileElement  *fEl;
+        FileElement  *fEl;
 
         if (depth > 3)
         {
@@ -1120,7 +1120,7 @@ int getChar(streamStruct* ss)
     enum               states_m1 { READ, GOTR };
     enum               states_m1 state;
     NSMutableArray     *listArr;
-    fileElement        *aFile;
+    FileElement        *aFile;
     char               path[4096];
     NSMutableArray     *reply;
     int                replyCode;
@@ -1163,7 +1163,7 @@ int getChar(streamStruct* ss)
             [self logIt:[NSString stringWithCString:buff]];
             state = READ; /* reset the state for a new line */
             readBytes = 0;
-            aFile = [[fileElement alloc] initWithLsLine:buff];
+            aFile = [[FileElement alloc] initWithLsLine:buff];
             if (aFile)
                 [listArr addObject:aFile];
         } else
