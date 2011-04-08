@@ -52,7 +52,7 @@
 - (void)setWorkingDir:(NSString *)dir;
 - (void)changeWorkingDir:(NSString *)dir;
 - (BOOL)createNewDir:(NSString *)dir;
-- (void)deleteFile:(fileElement *)file beingAt:(int)depth;
+- (void)deleteFile:(FileElement *)file beingAt:(int)depth;
 
 - (NSArray *)workDirSplit;
 

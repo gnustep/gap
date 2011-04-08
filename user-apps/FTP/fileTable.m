@@ -28,7 +28,7 @@
 #import "fileElement.h"
 
 
-@implementation fileTable
+@implementation FileTable
 
 - (void)initData:(NSArray *)fnames
 {
@@ -47,7 +47,7 @@
     {
       NSNumber *n;
       NSMutableDictionary *dict;
-      fileElement *fe;
+      FileElement *fe;
 
       fe = [fileStructs objectAtIndex: i];
       n = [NSNumber numberWithInt: i];
@@ -65,7 +65,7 @@
   [super dealloc];
 }
 
-- (fileElement *)elementAtIndex:(unsigned)index
+- (FileElement *)elementAtIndex:(unsigned)index
 {
     return [fileStructs objectAtIndex:index];
 }

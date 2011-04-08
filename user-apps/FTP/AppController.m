@@ -112,11 +112,11 @@
     [progBar setDoubleValue:0.0];  // reset the progress bar
     
     /* we create a data source and set the tableviews */
-    localTableData = [[fileTable alloc] init];
+    localTableData = [[FileTable alloc] init];
     [localTableData initData:dirList];
     [localView setDataSource:localTableData];
     
-    remoteTableData = [[fileTable alloc] init];
+    remoteTableData = [[FileTable alloc] init];
 
     /* we update the path menu */
     [self updatePath :localPath :[local workDirSplit]];
@@ -166,7 +166,7 @@
 {
     Client      *theClient;
     NSTableView *theView;
-    fileTable   *theTable;
+    FileTable   *theTable;
     NSString    *thePath;
     NSArray     *items;
     int         selectedIndex;
@@ -207,9 +207,9 @@
 {
     Client        *theClient;
     NSTableView   *theView;
-    fileTable     *theTable;
+    FileTable     *theTable;
     int           elementIndex;
-    fileElement   *fileEl;
+    FileElement   *fileEl;
     NSString      *thePath;
     NSArray       *dirList;
     NSPopUpButton *thePathMenu;
@@ -300,7 +300,7 @@
 - (void)performRetrieveFile
 {
     NSEnumerator  *elemEnum;
-    fileElement   *fileEl;
+    FileElement   *fileEl;
     id            currEl;
 
     [self setThreadRunningState:YES];
@@ -319,7 +319,7 @@
 - (void)performStoreFile
 {
     NSEnumerator  *elemEnum;
-    fileElement   *fileEl;
+    FileElement   *fileEl;
     id            currEl;
 
     [self setThreadRunningState:YES];
@@ -360,7 +360,7 @@
 - (IBAction)localDelete:(id)sender
 {
     NSEnumerator  *elemEnum;
-    fileElement   *fileEl;
+    FileElement   *fileEl;
     id            currEl;
 
     elemEnum = [localView selectedRowEnumerator];
@@ -375,7 +375,7 @@
 - (IBAction)remoteDelete:(id)sender
 {
     NSEnumerator  *elemEnum;
-    fileElement   *fileEl;
+    FileElement   *fileEl;
     id            currEl;    
 
     elemEnum = [remoteView selectedRowEnumerator];
@@ -404,14 +404,14 @@
 
 - (void)setTransferProgress:(NSNumber *)bytesTransferred
 {
-    struct timeval currTimeVal;
-    float    speed;
-    NSString *speedStr;
-    NSString *sizeStr;
-    double   percent;
-	unsigned long long bytes;
+  struct timeval currTimeVal;
+  float    speed;
+  NSString *speedStr;
+  NSString *sizeStr;
+  double   percent;
+  unsigned long long bytes;
 
-	bytes = [bytesTransferred unsignedLongLongValue];
+  bytes = [bytesTransferred unsignedLongLongValue];
 #ifdef WIN32
     DWORD msecs = timeGetTime();
     currTimeVal.tv_sec=msecs/1000;
@@ -446,15 +446,15 @@
 
 - (void)setTransferEnd:(NSNumber *)bytesTransferred
 {
-    struct timeval currTimeVal;
-    double         deltaT;
-    float          speed;
-    NSString       *speedStr;
-    NSString       *sizeStr;
-    double         percent;
-	unsigned long long bytes;
+  struct timeval currTimeVal;
+  double         deltaT;
+  float          speed;
+  NSString       *speedStr;
+  NSString       *sizeStr;
+  double         percent;
+  unsigned long long bytes;
 	
-	bytes = [bytesTransferred unsignedLongLongValue];
+  bytes = [bytesTransferred unsignedLongLongValue];
 
 #ifdef WIN32
     DWORD msecs = timeGetTime();

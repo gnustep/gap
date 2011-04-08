@@ -1,7 +1,7 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005-2010 Riccardo Mottola
+   Copyright (C) 2005-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -75,7 +75,7 @@
     NSEnumerator    *en;
     NSString        *fileName;
     NSMutableArray  *listArr;
-    fileElement     *aFile;
+    FileElement     *aFile;
 
     fm = [NSFileManager defaultManager];
     fileNames = [fm directoryContentsAtPath:workingDir];
@@ -92,13 +92,13 @@
 
         p = [workingDir stringByAppendingPathComponent:fileName];
         attr = [fm fileAttributesAtPath :p traverseLink:YES];
-        aFile = [[fileElement alloc] initWithFileAttributes:fileName :attr];
+        aFile = [[FileElement alloc] initWithFileAttributes:fileName :attr];
         [listArr addObject:aFile];
     }
     return [NSArray arrayWithArray:listArr];
 }
 
-- (void)deleteFile:(fileElement *)file beingAt:(int)depth
+- (void)deleteFile:(FileElement *)file beingAt:(int)depth
 {
     NSString           *fileName;
     NSString           *localPath;
