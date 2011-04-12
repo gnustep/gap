@@ -30,11 +30,17 @@
 
 #define TAG_FILENAME @"filename"
 
+enum sortOrderDef
+{
+  ascending, descending, undefined
+};
+
 @interface FileTable : NSObject
 {
   NSArray        *fileStructs;
   NSMutableArray *sortedArray;
   NSString       *sortByIdent;
+  enum sortOrderDef   sortOrder;
 }
 
 - (void)initData:(NSArray *)fnames;

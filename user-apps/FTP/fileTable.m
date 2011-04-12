@@ -27,6 +27,28 @@
 #import "fileTable.h"
 #import "fileElement.h"
 
+/* we sort the already existing sorted array which contains only the keys to sort on */
+NSComparisonResult compareDictElements(id e1, id e2, void *context)
+{
+  NSString *s1;
+  NSString *s2;
+  NSComparisonResult r;
+  enum sortOrderDef sortOrder;
+
+  s1 = [(NSDictionary *)e1 objectForKey: @"name"];
+  s2 = [(NSDictionary *)e2 objectForKey: @"name"];
+  sortOrder = *(enum sortOrderDef *)context;
+
+  r = [s1 compare: s2];
+  if (sortOrder == descending)
+    {
+      if (r == NSOrderedAscending)
+	r = NSOrderedDescending;
+      else if (r == NSOrderedDescending)
+	r = NSOrderedAscending;
+    }
+  return r;
+}
 
 @implementation FileTable
 
@@ -56,6 +78,7 @@
       [dict setObject: n forKey: @"row"];
       [sortedArray addObject: dict];
     }
+  sortOrder = undefined;
 }
 
 - (void)dealloc
@@ -74,14 +97,21 @@
 {
   if ([idStr isEqualToString: sortByIdent])
     {
-      NSLog(@"reverse");
+      if (sortOrder == ascending)
+	sortOrder = descending;
+      else
+	sortOrder = ascending;
     }
   else
     {
       NSLog(@"Sort by: %@", idStr);
+      sortOrder = ascending;
     }
   sortByIdent = idStr;
+  [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
 }
+
+
 
 /* methods implemented to follow the informal NSTableView protocol */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
