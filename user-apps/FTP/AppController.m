@@ -273,11 +273,13 @@
     {
       NSLog(@"local");
       [localTableData sortByIdent: [tableColumn identifier]];
+      [localView reloadData];
     }
   else
     {
       NSLog(@"remote");
       [remoteTableData sortByIdent: [tableColumn identifier]];
+      [remoteView reloadData];
     }
 }
 
