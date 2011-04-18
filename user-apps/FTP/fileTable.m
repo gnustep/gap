@@ -88,9 +88,13 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [super dealloc];
 }
 
+/** retunrs the object after resolving sorting */
 - (FileElement *)elementAtIndex:(unsigned)index
 {
-    return [fileStructs objectAtIndex:index];
+  int originalRow;
+
+  originalRow = [[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
+  return [fileStructs objectAtIndex:originalRow];
 }
 
 - (void)sortByIdent:(NSString *)idStr
