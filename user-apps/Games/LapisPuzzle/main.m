@@ -2,6 +2,8 @@
  * main.m
 
  * Copyright (C) 2004 Banlu Kemiyatorn.
+ *               2004-2011 The GNUstep Application Project
+ *
  * July 19, 2004
  * Written by Banlu Kemiyatorn <object at gmail dot com>
  * This library is free software; you can redistribute it and/or
@@ -19,13 +21,9 @@
  * Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
  */
 
-#include <AppKit/AppKit.h>
+#import <AppKit/AppKit.h>
 
 int main(int argc, char **argv)
 {
-	NSAutoreleasePool *pool = [NSAutoreleasePool new];
-	[NSApplication sharedApplication];
-	[NSApp run];
-	[pool release];
-	return 0;
+  return NSApplicationMain (argc, argv);
 }
