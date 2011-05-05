@@ -1103,7 +1103,6 @@ static float _grid_height;
 {
 	id en;
 	LPUnit* unit;
-	BOOL canMove = YES;
 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))

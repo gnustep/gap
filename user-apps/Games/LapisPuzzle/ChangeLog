@@ -1,4 +1,10 @@
 2011-05-05 Riccardo Mottola <rm@gnu.org>
 
 	* main.m:
+	* LapisPuzzleView.m:
+	Trivial warning fix.
+
+2011-05-05 Riccardo Mottola <rm@gnu.org>
+
+	* main.m:
 	Cleanup and make work with latest gnustep.
