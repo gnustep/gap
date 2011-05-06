@@ -1,3 +1,8 @@
+2011-05-06 Riccardo Mottola <rm@gnu.org>
+
+	* main.c:
+	Use standard main.
+
 0.2.3	Patch for major speed improvement (thanks Banlu Kemiyatorn)
 0.2.1	Patch for autoscaling (thanks Matt Rice)
 0.2	Hide Main Menu (thanks Alex Perez), new icon, new background image
