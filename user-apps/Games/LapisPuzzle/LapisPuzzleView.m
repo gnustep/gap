@@ -1,6 +1,8 @@
 /*
  * LapisPuzzleView.m
-
+ 
+ * Copyright 2004-2011 The Free Software Foundation
+ * 
  * Copyright (C) 2004 Banlu Kemiyatorn.
  * July 19, 2004
  * Written by Banlu Kemiyatorn <object at gmail dot com>
@@ -19,8 +21,8 @@
  * Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
  */
 
-#include "LapisPuzzleView.h"
-#include "LPController.h"
+#import "LapisPuzzleView.h"
+#import "LPController.h"
 #include <math.h>
 
 static float _grid_height;

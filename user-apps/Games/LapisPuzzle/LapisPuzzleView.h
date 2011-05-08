@@ -1,6 +1,8 @@
 /*
  * LapisPuzzleView.h
 
+ * Copyright 2004-2011 The Free Software Foundation
+ *
  * Copyright (C) 2004 Banlu Kemiyatorn.
  * July 19, 2004
  * Written by Banlu Kemiyatorn <object at gmail dot com>
@@ -19,12 +21,9 @@
  * Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
  */
 
-#ifndef CalendarEventView_h
-#define CalendarEventView_h
-
-#include <Foundation/NSCalendarDate.h>
-#include <AppKit/AppKit.h>
-#include "LapisPuzzle.h"
+#import <Foundation/NSCalendarDate.h>
+#import <AppKit/AppKit.h>
+#import "LapisPuzzle.h"
 
 typedef enum _LPUnitColorType
 {
@@ -62,7 +61,7 @@ typedef enum _LPDirType
 
 @interface LPUnit:NSObject
 {
-	id <LPUnitOwner> __owner;
+    id <LPUnitOwner> __owner;
 	LPUnitColorType _color;
 	LPDirType _d;
 	BOOL _isBlowing;
@@ -173,7 +172,7 @@ typedef enum _LPResultType
 @interface LapisPuzzleView:NSView <LPUnitOwner>
 {
 	BOOL _gameOver;
-	id <LPViewOwner> __owner;
+	IBOutlet id <LPViewOwner> __owner;
 
 	float _stepHeight;
 	float _stepWidth;
@@ -222,5 +221,3 @@ typedef enum _LPResultType
 @interface LapisNextView:LapisPuzzleView
 - (void) removeUnit:(id)unit;
 @end
-
-#endif
