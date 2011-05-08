@@ -1,6 +1,8 @@
 /*
  * LPController.h
 
+ * Copyright 2004-2011 The Free Software Foundation
+ *
  * Copyright (C) 2004 Banlu Kemiyatorn.
  * July 19, 2004
  * Written by Banlu Kemiyatorn <object at gmail dot com>
@@ -19,20 +21,21 @@
  * Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
  */
 
-#include <AppKit/AppKit.h>
-#include "LapisPuzzleView.h"
+#import <AppKit/AppKit.h>
+#import "LapisPuzzleView.h"
 
 @interface LPController : NSObject <LPViewOwner>
 {
-	LapisPuzzleView *lpview1;
-	LapisPuzzleView *lpview2;
+	IBOutlet LapisPuzzleView *lpview1;
+	IBOutlet LapisPuzzleView *lpview2;
 
-	id attackList;
-	id next1;
-	id next2;
+	IBOutlet id attackList;
+	IBOutlet id next1;
+	IBOutlet id next2;
 
 	NSMutableArray *attackArray;
 	NSTimer *tick;
 }
+- (IBAction) restart:(id)sender;
 - (void) player:(id)pl processStone:(int)num;
 @end

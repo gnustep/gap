@@ -1,6 +1,8 @@
 /*
  * LPController.m
-
+ 
+ * Copyright 2004-2011 The Free Software Foundation
+ * 
  * Copyright (C) 2004 Banlu Kemiyatorn.
  * July 19, 2004
  * Written by Banlu Kemiyatorn <object at gmail dot com>
@@ -20,8 +22,8 @@
  */
 
 
-#include <AppKit/AppKit.h>
-#include "LPController.h"
+#import <AppKit/AppKit.h>
+#import "LPController.h"
 
 #define ROUND_TIME 0.8
 #define AI_SPEED 0.1
@@ -211,7 +213,7 @@
 	}
 }
 
-- (void) restart:(id)sender
+- (IBAction) restart:(id)sender
 {
 	[tick invalidate];
 	tick = nil;
