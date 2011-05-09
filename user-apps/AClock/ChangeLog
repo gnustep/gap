@@ -1,3 +1,8 @@
+2011-05-10 Riccardo Mottola <rm@gnu.org>
+
+	* Clock.m:
+	Use more widespread rint. Cleanups.
+
 2011-05-06 Riccardo Mottola <rm@gnu.org>
 
 	* main.c:

@@ -2,16 +2,16 @@
 copyright 2003 Alexander Malmberg <alexander@malmberg.org>
 */
 
-#include "Clock.h"
-#include <AppKit/AppKit.h>
-
 #include <math.h>
+
+#import <AppKit/AppKit.h>
+#import <AppKit/DPSOperators.h>
+#import "Clock.h"
+
 #ifndef PI
 #define PI 3.1415926535897932384626434
 #endif
 
-#include <AppKit/NSColor.h>
-#include <AppKit/DPSOperators.h>
 
 
 @implementation Clock
@@ -300,7 +300,7 @@ static double wrap_time(double time)
 
 	if (mf & NSShiftKeyMask)
 	{
-		a1 -= nearbyint(a2/30.) * 30.;
+		a1 -= rint(a2/30.) * 30.;
 	}
 	else if (mf & NSControlKeyMask)
 	{
