@@ -1,7 +1,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = AClock
-VERSION = 0.4.0-RC8
+VERSION = 0.4.0
 APP_NAME = AClock
 AClock_MAIN_MODEL_FILE=AClock.gorm
 AClock_APPLICATION_ICON=AClock.tiff
