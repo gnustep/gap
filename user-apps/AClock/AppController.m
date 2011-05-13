@@ -1,13 +1,17 @@
 /* All Rights reserved */
 
-#include <AppKit/AppKit.h>
-#include "AppController.h"
+#import <AppKit/AppKit.h>
+#import "AppController.h"
 
 @implementation AppController
 static NSUserDefaults *defaults;
 static Clock* clicon = nil;
 static BOOL useCuckoo = NO;
 static BOOL useRing = NO;
+static NSInteger lastHourOfDay = -1;
+BOOL keepSoundPlaying = YES;
+static int rounds = 0;		// how often to play a sound
+static int rounds_done = 0;	// how often a sound was played already
 
 + (void) initialize
 {
@@ -33,7 +37,18 @@ static BOOL useRing = NO;
 	[defaults synchronize];
 }
 
-static NSInteger lastHourOfDay = -1;
+- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)aBool{
+  NSLog(@"NSSound delegate was called rounds_done: %i, rounds: %i", rounds_done, rounds);
+  if (rounds_done < rounds - 1) {
+	rounds_done++;
+	[sound play];
+  } else {
+  	keepSoundPlaying = NO;
+	rounds_done=0;
+	rounds=0;
+	[sound release];
+  }
+}
 
 - (void) setCuckoo: (id) sender
 {
@@ -46,8 +61,13 @@ static NSInteger lastHourOfDay = -1;
 - (void) setRing: (id) sender
 {
 	useRing = [sender intValue]?YES:NO;
-	if (useRing)
-		system([[NSString stringWithFormat:@"playsound %@ &", [[NSBundle mainBundle] pathForResource:@"ring.wav" ofType:nil]] lossyCString]);
+	if (useRing) {
+		NSSound *ring = [[NSSound alloc] initWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"ring.wav" ofType:nil] byReference: NO];
+		rounds=1;
+		rounds_done=0;
+		[ring setDelegate: self];
+		[ring play];
+	}
 	[defaults setObject:useRing?@"YES":@"NO" forKey:@"Ring"];
 	[defaults synchronize];
 }
@@ -158,8 +178,11 @@ static float volume_append = 1.0;
 {
 	if ([alarmWindow isVisible] && extracount)
 	{
-		NSLog([NSString stringWithFormat:@"playsound --volume %0.1f %@ &",volume, [[NSBundle mainBundle] pathForResource:@"ring.wav" ofType:nil]]);
-		system([[NSString stringWithFormat:@"playsound --volume %0.1f %@ &",volume, [[NSBundle mainBundle] pathForResource:@"ring.wav" ofType:nil]] lossyCString]);
+		NSSound *ring = [[NSSound alloc] initWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"ring.wav" ofType:nil] byReference: NO];
+		[ring setVolume: volume];
+		rounds=1;
+		rounds_done=0;
+		[ring play];
 		extracount--;
 		volume += volume_append;
 		if (volume > 1.0) volume = 1.0;
@@ -291,7 +314,6 @@ static float volume_append = 1.0;
 
 	{ /* initialize the clock so it won't flick */
 		NSCalendarDate *d = [NSCalendarDate date];
-		NSTimeInterval g = [d timeIntervalSinceReferenceDate];
 		double time;
 		time = [d hourOfDay] * 3600 + [d minuteOfHour] * 60 + [d secondOfMinute];
 		[_clock setHandsTimeNoAlarm: time];
@@ -314,12 +336,12 @@ static float volume_append = 1.0;
 	NSTimeInterval g = [d timeIntervalSinceReferenceDate];
 	double time;
 	NSInteger hod = [d hourOfDay];
-	NSInteger moh = [d minuteOfHour];
 
 	if (useCuckoo && lastHourOfDay != hod)
 	{
 		int h12clock = hod % 12;
-		[self playCuckoo:(h12clock?h12clock:12)];
+		rounds = h12clock?h12clock:12;
+		[self playCuckoo];
 		lastHourOfDay = hod;
 		if ([defaults boolForKey: @"ShowsDate"])
 				 [_clock setDate:d];
@@ -339,7 +361,6 @@ static float volume_append = 1.0;
 	[clicon setHandsTime: time];
 }
 
-static int cround;
 static int cstate = -1;
 NSTimer *ctimer;
 - (void) cuckoo
@@ -358,18 +379,24 @@ NSTimer *ctimer;
 }
 
 
-- (void) playCuckoo:(int) round
+- (void) playCuckoo
 {
 	if (cstate == -1)
 	{
-		cstate = 20 * round;
-		system([[NSString stringWithFormat:@"playsound --loop %d %@ &", round - 1, [[NSBundle mainBundle] pathForResource:@"cuckoo.wav" ofType:nil]] lossyCString]);
+		cstate = 20 * rounds;
+		keepSoundPlaying = YES;
+		NSSound *cuckoo = [[NSSound alloc] initWithContentsOfFile: 
+			[[NSBundle mainBundle] pathForResource:@"cuckoo.wav" ofType:nil] byReference: NO];
+		[cuckoo setDelegate:self];
+		
+		[cuckoo play];
 		NSInvocation *inv;
 		inv = [NSInvocation invocationWithMethodSignature:
 						 [self methodSignatureForSelector:@selector(cuckoo)]];
 		[inv setSelector:@selector(cuckoo)];
 		[inv setTarget:self];
 		ctimer=[NSTimer scheduledTimerWithTimeInterval:0.05 invocation:inv repeats:YES];
+
 	}
 
 }

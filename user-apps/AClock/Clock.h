@@ -88,6 +88,7 @@ TODO?
 -(double) alarmInterval;
 -(void) setAlarmInterval: (double)time;
 -(void) setHandsTimeNoAlarm: (double)time;
+- (void) setCuckooState:(int)st;
 
 @end
 
