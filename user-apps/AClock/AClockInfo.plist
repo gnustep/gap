@@ -1,11 +1,13 @@
 {
-    ApplicationDescription = "Analog Clock Dockapp";
+    ApplicationDescription = "Analog Clock";
+    ApplicationName = AClock;
     ApplicationRelease = "0.4.0";
-    Authors = ("Alexander Malmberg <alexander@malmberg.org>",
-    	       "Banlu Kemiyatorn <object@gmail.com>",
-	       "Gurkan Sengun <gurkan@linuks.mine.nu>",
-	       "Riccardo Mottola <rm@gnu.org>");
-    Copyright = "Copyright 2003 - 2011 The GNUstep Application Project";
-    CopyrightDescription = "GNU General Public License";
+    Copyright = "Copyright (C) 2003-2011";
+    CopyrightDescription = "Released under GPL";
+    FullVersionID = "0.4.0";
+    NSExecutable = AClock;
+    NSMainNibFile = "AClock.gorm";
+    NSPrincipalClass = NSApplication;
+    NSRole = Application;
     URL = "http://gap.nongnu.org/aclock/";
 }

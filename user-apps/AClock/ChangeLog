@@ -1,3 +1,9 @@
+2011-05-13 Riccardo Mottola <rm@gnu.org>
+
+	* AClock.pcproj
+	* Resources
+	New ProjectCenter project structure.
+
 2011-05-13 Riccardo Mottola for Sebastian Reitenbach
 
 	* AppController.h
