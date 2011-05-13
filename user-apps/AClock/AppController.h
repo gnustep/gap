@@ -1,8 +1,8 @@
 /* All Rights reserved */
 
-#include <AppKit/AppKit.h>
-#include "Clock.h"
-#include <math.h>
+#import <AppKit/AppKit.h>
+#import "Clock.h"
+#import <math.h>
 
 @interface AppController : NSObject
 {
@@ -45,4 +45,5 @@
 - (void) setFrequency: (id)sender;
 - (void) setSecond: (id)sender;
 - (void) setNumberType: (id)sender;
+- (void) playCuckoo;
 @end

@@ -57,14 +57,6 @@ static NSArray *dayWeek;
 
 /** Internally used functions/methods **/
 
-static double wrap_time(double time)
-{
-	int i;
-	i=floor(time/1440);
-	return time-i*1440;
-}
-
-
 -(void) _frameChanged
 {
 	NSRect r=[self bounds];
@@ -363,7 +355,6 @@ static double wrap_time(double time)
 -(void) drawRect: (NSRect)r
 {
 	NSGraphicsContext *ctxt=GSCurrentContext();
-	id defaults = [NSUserDefaults standardUserDefaults];
 	/*
 	BOOL smoothSeconds = [defaults boolForKey: @"SmoothSeconds"];
 	*/
@@ -687,7 +678,7 @@ static double wrap_time(double time)
 	/* draw arc */
 	if (showsArc)
 	{
-		double a1,a2,x,y;
+		double a1,a2;
 		double r1;
 
 		a1 = 90 - (handsTime - 43200 * floor(handsTime/43200))/43200 * 360;
@@ -919,7 +910,7 @@ static double wrap_time(double time)
 	}
 }
 
-- (void) setCuckooState:(int)st;
+- (void) setCuckooState:(int)st
 {
 	if (st != cstate)
 	{
@@ -1021,8 +1012,6 @@ static double wrap_time(double time)
 
 -(void) setAlarmInterval: (double)time
 {
-	int n = handsTime / 43200;
-
 	alarmInterval = floor(handsTime / 43200) * 43200 + fmod(time, 43200.);
 
 	if (alarmInterval < handsTime) alarmInterval += 43200;

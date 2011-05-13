@@ -1,3 +1,9 @@
+2011-05-13 Riccardo Mottola for Sebastian Reitenbach
+
+	* AppController.h
+	* AppController.m
+	Use NSSound directly instead of external playsound.
+
 2011-05-10 Riccardo Mottola <rm@gnu.org>
 
 	* Clock.m:
