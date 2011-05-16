@@ -1,5 +1,6 @@
 /*
    Project: AClock
+   main.m
 
    Copyright (C) 2003-2011 Free Software Foundation
 

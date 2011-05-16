@@ -1,13 +1,32 @@
 /*
-copyright 2003 Alexander Malmberg <alexander@malmberg.org>
-*/
+ Project: AClock
+ Clock.h
 
-#ifndef Clock_h
-#define Clock_h
+ Copyright (C) 2003-2011 GNUstep Application Project
 
-#include <AppKit/NSControl.h>
+ Author: Alexander Malmberg
+         Banlu Kemiyatorn 
+         Gürkan Sengün
+         Ing. Riccardo Mottola <rm@gnu.org>
 
-@class NSColor;
+ This application is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This application is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+
+ You should have received a copy of the GNU General Public
+ License along with this library; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+#import <Foundation/Foundation.h>
+#import <AppKit/NSColor.h>
+#import <AppKit/NSControl.h>
 
 @interface Clock : NSControl
 {
@@ -88,9 +107,7 @@ TODO?
 -(double) alarmInterval;
 -(void) setAlarmInterval: (double)time;
 -(void) setHandsTimeNoAlarm: (double)time;
-- (void) setCuckooState:(int)st;
+-(void) setCuckooState:(int)st;
 
 @end
-
-#endif
 
