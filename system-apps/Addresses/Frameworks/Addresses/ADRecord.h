@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2011/05/18 10:21:23 $
 
 #ifndef ADRECORD_H
 #define ADRECORD_H
@@ -40,7 +40,7 @@
   \note This is a non-Apple extension; Apple's API doesn't need it as
   it knows nothing about multiple address books.
 */
-- (id) addressBook;
+- (ADAddressBook *) addressBook;
 
 /*!
   \brief Set the address book this record is part of.

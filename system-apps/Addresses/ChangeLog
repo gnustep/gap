@@ -1,0 +1,4 @@
+2011-05-18 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/Addresses/ADRecord.h
+	Warning fix (match implementation)
