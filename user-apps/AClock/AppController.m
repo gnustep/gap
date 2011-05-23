@@ -356,33 +356,37 @@ static float volume_append = 1.0;
 
 - (void) tick
 {
-	NSCalendarDate *d = [NSCalendarDate date];
-	NSTimeInterval g = [d timeIntervalSinceReferenceDate];
-	double time;
-	NSInteger hod = [d hourOfDay];
+  NSCalendarDate *d = [NSCalendarDate date];
+  NSTimeInterval g = [d timeIntervalSinceReferenceDate];
+  double time;
+  NSInteger hod = [d hourOfDay];
 
-	if (useCuckoo && lastHourOfDay != hod)
-	{
-		int h12clock = hod % 12;
-		rounds = h12clock?h12clock:12;
-		[self playCuckoo];
-		lastHourOfDay = hod;
-		if ([defaults boolForKey: @"ShowsDate"])
-				 [_clock setDate:d];
-	}
+  if (useCuckoo && lastHourOfDay != hod)
+    {
+      int h12clock = hod % 12;
+      rounds = h12clock?h12clock:12;
+      [self playCuckoo];
+      lastHourOfDay = hod;
+      if ([defaults boolForKey: @"ShowsDate"])
+	[_clock setDate:d];
+    }
+  if ([_clock showsAMPM])
+    {
+      [_clock setShowsAMPM:YES];
+    }
 
-	if (doFloor)
-	{
-		time = hod * 3600 + [d minuteOfHour] * 60 + [d secondOfMinute];
-	}
-	else
-	{
-		time = hod * 3600 + [d minuteOfHour] * 60 + [d secondOfMinute] + (g - floor(g));
-	}
+  if (doFloor)
+    {
+      time = hod * 3600 + [d minuteOfHour] * 60 + [d secondOfMinute];
+    }
+  else
+    {
+      time = hod * 3600 + [d minuteOfHour] * 60 + [d secondOfMinute] + (g - floor(g));
+    }
 
-	[_clock setHandsTime: time];
-	[bigClock setHandsTime: time];
-	[clicon setHandsTime: time];
+  [_clock setHandsTime: time];
+  [bigClock setHandsTime: time];
+  [clicon setHandsTime: time];
 }
 
 static int cstate = -1;
