@@ -87,4 +87,21 @@
 {
 }
 
+- (IBAction) outMainLevelChanged: (id)sender
+{
+  int level;
+
+  level = [sliderOutMainLevel intValue];
+  [fieldOutMainLevel setIntValue: level];
+}
+
+- (IBAction) outMainBalanceChanged: (id)sender
+{
+  int balance;
+
+  balance = [sliderOutMainBalance intValue];
+  [fieldOutMainBalance setIntValue: balance];
+}
+
+
 @end

@@ -2,16 +2,24 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
-	    "showPrefPanel:"
+	    "showPrefPanel:",
+	    "outMainLevelChanged:",
+	    "outMainBalanceChanged:"
 	);
 	Outlets = (
-	    outMain
+	    outMainWin,
+	    sliderOutMainLevel,
+	    sliderOutMainBalance,
+	    fieldOutMainLevel,
+	    fieldOutMainBalance
 	);
 	Super = NSObject;
     };
     FirstResponder = {
 	Actions = (
 	    "orderFrontFontPanel:",
+	    "outMainBalanceChanged:",
+	    "outMainLevelChanged:",
 	    "showPrefPanel:"
 	);
 	Super = NSObject;

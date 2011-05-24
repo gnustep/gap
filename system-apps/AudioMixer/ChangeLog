@@ -1,3 +1,10 @@
 2011-05-24 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.h
+	* AppController.m
+	* Resources/AudioMixer.gorm
+	Interface actions and outlets.
+
+2011-05-24 Riccardo Mottola <rm@gnu.org>
+
 	Initial check-in.

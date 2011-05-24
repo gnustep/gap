@@ -31,7 +31,11 @@
 
 @interface AppController : NSObject
 {
-  IBOutlet NSWindow *outMain;
+  IBOutlet NSWindow *outMainWin;
+  IBOutlet NSSlider *sliderOutMainLevel;
+  IBOutlet NSSlider *sliderOutMainBalance;
+  IBOutlet NSTextField *fieldOutMainLevel;
+  IBOutlet NSTextField *fieldOutMainBalance;
 }
 
 + (void)  initialize;
@@ -48,5 +52,8 @@
 	    openFile: (NSString *)fileName;
 
 - (void) showPrefPanel: (id)sender;
+
+- (IBAction) outMainLevelChanged: (id)sender;
+- (IBAction) outMainBalanceChanged: (id)sender;
 
 @end
