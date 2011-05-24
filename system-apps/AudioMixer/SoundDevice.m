@@ -26,10 +26,52 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#include <soundcard.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#import <Foundation/Foundation.h>
 #import <SoundDevice.h>
+
 
 @implementation SoundDevice
 
+- (void)dealloc
+{
+  if (mixerFd > 0)
+    close(mixerFd);
+
+  [super dealloc];
+}
+
+- (id)init
+{
+  if ((self = [super init]))
+    {
+      int tempOutMain;
+
+      mixerFd = -1;
+      tempOutMain = 0;
+
+      if ((mixerFd = open("/dev/mixer", O_RDONLY)) < 0)
+	{
+	  NSLog(@"opening of mixer failed");
+	}
+
+
+      if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_VOLUME), &tempOutMain) == -1)
+	{
+	  NSLog(@"Error reading main output volume");
+	}
+      NSLog(@"output main: %d", tempOutMain);
+
+      outMainLeft = tempOutMain & 0xff;
+      outMainRight = (tempOutMain >> 8) & 0xff;
+      NSLog(@"output main: %d %d", outMainLeft, outMainRight);
+    }
+
+  return self;
+}
 - (int) outMainLeft
 {
   return outMainLeft;
@@ -40,17 +82,17 @@
   return outMainRight;
 }
 
-- (float) outMainLevel
+- (int) outMainLevel
 {
-  float level;
+  int level;
 
-  level = (float)(outMainLeft + outMainRight) / 2;
+  level = (outMainLeft + outMainRight) / 2;
   return level;
 }
 
-- (float) outMainBalance
+- (int) outMainBalance
 {
-  float balance;
+  int balance;
 
   balance = outMainRight - outMainLeft;
 

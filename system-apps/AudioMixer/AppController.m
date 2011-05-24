@@ -56,6 +56,8 @@
 
 - (void) dealloc
 {
+  [soundDev release];
+
   [super dealloc];
 }
 
@@ -65,7 +67,17 @@
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif
 {
+  int level;
+  int balance;
 
+  soundDev = [[SoundDevice alloc] init];
+
+  level = [soundDev outMainLevel];
+  balance = [soundDev outMainBalance];
+  [fieldOutMainLevel setIntValue: level];
+  [sliderOutMainLevel setIntValue: level];
+  [fieldOutMainBalance setIntValue: balance];
+  [sliderOutMainBalance setIntValue: balance];
 }
 
 - (BOOL) applicationShouldTerminate: (id)sender
