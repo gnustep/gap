@@ -30,13 +30,17 @@
 
 @interface SoundDevice : NSObject
 {
+  /* OSS stuff */
+  int mixerFd; /* mixer file descriptor */
+
+  /* **  */
   int outMainLeft;
   int outMainRight;
 }
 
 - (int) outMainLeft;
 - (int) outMainRight;
-- (float) outMainLevel;
-- (float) outMainBalance;
+- (int) outMainLevel;
+- (int) outMainBalance;
 
 @end

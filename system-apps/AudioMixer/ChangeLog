@@ -1,3 +1,12 @@
+2011-05-25 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	* GNUmakefile.preamble
+	* SoundDevice.h
+	* SoundDevice.m
+	Interface with OSS as far as reading the main volume.
+
 2011-05-24 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h

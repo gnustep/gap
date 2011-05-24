@@ -29,6 +29,8 @@
 
 #import <AppKit/AppKit.h>
 
+@class SoundDevice;
+
 @interface AppController : NSObject
 {
   IBOutlet NSWindow *outMainWin;
@@ -36,12 +38,9 @@
   IBOutlet NSSlider *sliderOutMainBalance;
   IBOutlet NSTextField *fieldOutMainLevel;
   IBOutlet NSTextField *fieldOutMainBalance;
+
+  SoundDevice *soundDev;
 }
-
-+ (void)  initialize;
-
-- (id) init;
-- (void) dealloc;
 
 - (void) awakeFromNib;
 
