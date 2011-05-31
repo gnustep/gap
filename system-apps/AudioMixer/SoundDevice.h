@@ -42,5 +42,6 @@
 - (int) outMainRight;
 - (int) outMainLevel;
 - (int) outMainBalance;
+- (void) setMainLevel: (int)lev withBalance: (int)bal;
 
 @end

@@ -102,16 +102,22 @@
 - (IBAction) outMainLevelChanged: (id)sender
 {
   int level;
+  int balance;
 
   level = [sliderOutMainLevel intValue];
+  balance = [sliderOutMainBalance intValue];
+  [soundDev setMainLevel: level withBalance: balance];
   [fieldOutMainLevel setIntValue: level];
 }
 
 - (IBAction) outMainBalanceChanged: (id)sender
 {
+  int level;
   int balance;
 
+  level = [sliderOutMainLevel intValue];
   balance = [sliderOutMainBalance intValue];
+  [soundDev setMainLevel: level withBalance: balance]; 
   [fieldOutMainBalance setIntValue: balance];
 }
 

@@ -99,4 +99,10 @@
   return balance;
 }
 
+- (void) setMainLevel: (int)lev withBalance: (int)bal
+{
+  outMainLeft  = lev - (bal/2);
+  outMainRight = lev + (bal/2);  
+}
+
 @end
