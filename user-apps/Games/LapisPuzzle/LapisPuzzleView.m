@@ -63,12 +63,9 @@ static float _grid_height;
 
 - (void) setAlpha:(float)a
 {
-	if (a < 0)
-	{
-		a = 0;
-		return;
-	}
-	alpha = a;
+  if (a < 0)
+    a = 0;
+  alpha = a;
 }
 
 - (LPUnitColorType) unitColor
