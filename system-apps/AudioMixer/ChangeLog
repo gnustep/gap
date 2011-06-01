@@ -1,3 +1,11 @@
+2011-06-01 Riccardo Mottola <rm@gnu.org>
+
+	* SoundDevice.m
+	Set HW volume.
+
+	* Resources/AudioMixer.gorm
+	Change name of main menu.
+
 2011-05-25 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
