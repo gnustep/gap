@@ -53,13 +53,13 @@
       mixerFd = -1;
       tempOutMain = 0;
 
-      if ((mixerFd = open("/dev/mixer", O_RDONLY)) < 0)
+      if ((mixerFd = open("/dev/mixer", O_RDWR)) < 0)
 	{
 	  NSLog(@"opening of mixer failed");
 	}
 
 
-      if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_VOLUME), &tempOutMain) == -1)
+      if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_VOLUME), &tempOutMain) < 0)
 	{
 	  NSLog(@"Error reading main output volume");
 	}
@@ -101,8 +101,21 @@
 
 - (void) setMainLevel: (int)lev withBalance: (int)bal
 {
+  int tempOutMain;
+
   outMainLeft  = lev - (bal/2);
-  outMainRight = lev + (bal/2);  
+  outMainRight = lev + (bal/2);
+
+  tempOutMain = (outMainLeft & 0xff) | ((outMainRight & 0xff) << 8);
+  NSLog(@"output main to set: %d %d", outMainLeft, outMainRight);
+  if (ioctl(mixerFd, MIXER_WRITE(SOUND_MIXER_VOLUME), &tempOutMain) < 0)
+    {
+      NSLog(@"Error setting output volume");
+    }
+
+  outMainLeft = tempOutMain & 0xff;
+  outMainRight = (tempOutMain >> 8) & 0xff;
+  NSLog(@"output main read back: %d %d", outMainLeft, outMainRight);
 }
 
 @end
