@@ -35,9 +35,9 @@ int main(int argc, const char **argv, char** env)
 {
    NSAutoreleasePool *pool;
    NSApplication *app;
-   NSMenu *mainMenu, *subMenu;
+   NSMenu *mainMenu;
    NSMenu *menu;
-   NSMenuItem *menuItem, *subMenuItem;
+   NSMenuItem *menuItem;
    Controller *controller;
 
    pool = [NSAutoreleasePool new];
@@ -90,8 +90,8 @@ int main(int argc, const char **argv, char** env)
 
    [[NSUserDefaults standardUserDefaults] synchronize];
 
-   // RELEASE (controller);
-   // RELEASE (pool);
+   [controller release];
+   [pool release]; /* actually useless */
    return 0;
 }
 
