@@ -790,46 +790,48 @@ static float _grid_height;
 
 - (BOOL) canMoveInDir:(LPDirType)dir
 {
-	id en;
-	LPUnit* unit;
+  id en;
+  LPUnit* unit;
 
-	int cx,cy;
+  int cx,cy;
 
-	switch(dir)
+  switch(dir)
+    {
+    case LP_MOVE_LEFT:
+      if (_x == 0)
 	{
-		case LP_MOVE_LEFT:
-			if (_x == 0)
-			{
-				return NO;
-			}
-			cx = -1;
-			cy = 0;
-			break;
-		case LP_MOVE_DOWN:
-			if (_y == 0)
-			{
-				return NO;
-			}
-			cx = 0;
-			cy = -1;
-			break;
-		case LP_MOVE_RIGHT:
-			if (_x == 5)
-			{
-				return NO;
-			}
-			cx = 1;
-			cy = 0;
-			break;
-		case LP_MOVE_UP:
-			/* no check for upper border */
-			cx = 0;
-			cy = 1;
-			break;
+	  return NO;
 	}
+      cx = -1;
+      cy = 0;
+      break;
+    case LP_MOVE_DOWN:
+      if (_y == 0)
+	{
+	  return NO;
+	}
+      cx = 0;
+      cy = -1;
+      break;
+    case LP_MOVE_RIGHT:
+      if (_x == 5)
+	{
+	  return NO;
+	}
+      cx = 1;
+      cy = 0;
+      break;
+    case LP_MOVE_UP:
+      /* no check for upper border */
+      cx = 0;
+      cy = 1;
+      break;
+    default:
+      NSAssert(0, @"Unreachable");
+      break;
+    }
 
-	return [self canRMoveX:cx
-						 Y:cy];
+  return [self canRMoveX:cx Y:cy];
 }
 
 - (BOOL) rMoveX:(int)rx
@@ -848,26 +850,30 @@ static float _grid_height;
 
 - (BOOL) moveInDir:(LPDirType)dir
 {
-	if (![self canMoveInDir:dir])
-	{
-		return NO;
-	}
-	switch(dir)
-	{
-		case LP_MOVE_DOWN:
-			_y--;
-			break;
-		case LP_MOVE_LEFT:
-			_x--;
-			break;
-		case LP_MOVE_UP:
-			_y++;
-			break;
-		case LP_MOVE_RIGHT:
-			_x++;
-			break;
-	}
-	return YES;
+  if (![self canMoveInDir:dir])
+    {
+      return NO;
+    }
+  switch(dir)
+    {
+    case LP_MOVE_DOWN:
+      _y--;
+      break;
+    case LP_MOVE_LEFT:
+      _x--;
+      break;
+    case LP_MOVE_UP:
+      _y++;
+      break;
+    case LP_MOVE_RIGHT:
+      _x++;
+      break;
+    default:
+      NSAssert(0, @"Unreachable");
+      break;
+
+    }
+  return YES;
 }
 
 - (BOOL) hasPartAtX:(int)x
@@ -928,103 +934,109 @@ static float _grid_height;
 
 - (void) rotateCCW
 {
-	id move = [_units objectAtIndex:0];
-	id base = [_units objectAtIndex:1];
+  id move = [_units objectAtIndex:0];
+  id base = [_units objectAtIndex:1];
 
-	switch(_laydir)
+  switch(_laydir)
+    {
+    case LP_MOVE_DOWN:
+      if ([move rMoveX:-1
+		     Y:-1])
 	{
-		case LP_MOVE_DOWN:
-			if ([move rMoveX:-1
-						   Y:-1])
-			{
-				_laydir = LP_MOVE_LEFT;
-			}
-			else if ([base canRMoveX:1 Y:0])
-			{
-				[base rMoveX:1 Y:0];
-				[move rMoveX:0 Y:-1];
-				_laydir = LP_MOVE_LEFT;
-			}
-		break;
-		case LP_MOVE_LEFT:
-			if ([move rMoveX:1
-						   Y:-1])
-			{
-				_laydir = LP_MOVE_UP;
-			}
-		break;
-		case LP_MOVE_UP:
-			if ([move rMoveX:1
-						   Y:1])
-			{
-				_laydir = LP_MOVE_RIGHT;
-			}
-			else if ([base canRMoveX:-1 Y:0])
-			{
-				[base rMoveX:-1 Y:0];
-				[move rMoveX:0 Y:1];
-				_laydir = LP_MOVE_RIGHT;
-			}
-		break;
-		case LP_MOVE_RIGHT:
-			if ([move rMoveX:-1
-						   Y:1])
-			{
-				_laydir = LP_MOVE_DOWN;
-			}
-		break;
+	  _laydir = LP_MOVE_LEFT;
 	}
+      else if ([base canRMoveX:1 Y:0])
+	{
+	  [base rMoveX:1 Y:0];
+	  [move rMoveX:0 Y:-1];
+	  _laydir = LP_MOVE_LEFT;
+	}
+      break;
+    case LP_MOVE_LEFT:
+      if ([move rMoveX:1
+		     Y:-1])
+	{
+	  _laydir = LP_MOVE_UP;
+	}
+      break;
+    case LP_MOVE_UP:
+      if ([move rMoveX:1
+		     Y:1])
+	{
+	  _laydir = LP_MOVE_RIGHT;
+	}
+      else if ([base canRMoveX:-1 Y:0])
+	{
+	  [base rMoveX:-1 Y:0];
+	  [move rMoveX:0 Y:1];
+	  _laydir = LP_MOVE_RIGHT;
+	}
+      break;
+    case LP_MOVE_RIGHT:
+      if ([move rMoveX:-1
+		     Y:1])
+	{
+	  _laydir = LP_MOVE_DOWN;
+	}
+      break;
+    default:
+      NSAssert(0, @"Unreachable");
+      break;
+    }
 
 }
 
 - (void) rotateCW
 {
-	id move = [_units objectAtIndex:0];
-	id base = [_units objectAtIndex:1];
+  id move = [_units objectAtIndex:0];
+  id base = [_units objectAtIndex:1];
 
-	switch(_laydir)
+  switch(_laydir)
+    {
+    case LP_MOVE_DOWN:
+      if ([move rMoveX:1 // should physically block rotation?
+		     Y:-1])
 	{
-		case LP_MOVE_DOWN:
-			if ([move rMoveX:1 // should physically block rotation?
-						   Y:-1])
-			{
-				_laydir = LP_MOVE_RIGHT;
-			}
-			else if ([base canRMoveX:-1 Y:0])
-			{
-				[base rMoveX:-1 Y:0];
-				[move rMoveX:0 Y:-1];
-				_laydir = LP_MOVE_RIGHT;
-			}
-		break;
-		case LP_MOVE_RIGHT:
-			if ([move rMoveX:-1
-						   Y:-1])
-			{
-				_laydir = LP_MOVE_UP;
-			}
-		break;
-		case LP_MOVE_UP:
-			if ([move rMoveX:-1
-						   Y:1])
-			{
-				_laydir = LP_MOVE_LEFT;
-			}
-			else if ([base canRMoveX:1 Y:0])
-			{
-				[base rMoveX:1 Y:0];
-				[move rMoveX:0 Y:1];
-				_laydir = LP_MOVE_LEFT;
-			}
-		break;
-		case LP_MOVE_LEFT:
-			if ([move rMoveX:1
-						   Y:1])
-			{
-				_laydir = LP_MOVE_DOWN;
-			}
-		break;
+	  _laydir = LP_MOVE_RIGHT;
 	}
+      else if ([base canRMoveX:-1 Y:0])
+	{
+	  [base rMoveX:-1 Y:0];
+	  [move rMoveX:0 Y:-1];
+	  _laydir = LP_MOVE_RIGHT;
+	}
+      break;
+    case LP_MOVE_RIGHT:
+      if ([move rMoveX:-1
+		     Y:-1])
+	{
+	  _laydir = LP_MOVE_UP;
+	}
+      break;
+    case LP_MOVE_UP:
+      if ([move rMoveX:-1
+		     Y:1])
+	{
+	  _laydir = LP_MOVE_LEFT;
+	}
+      else if ([base canRMoveX:1 Y:0])
+	{
+	  [base rMoveX:1 Y:0];
+	  [move rMoveX:0 Y:1];
+	  _laydir = LP_MOVE_LEFT;
+	}
+      break;
+    case LP_MOVE_LEFT:
+      if ([move rMoveX:1
+		     Y:1])
+	{
+	  _laydir = LP_MOVE_DOWN;
+	}
+      break;
+    default:
+      NSAssert(0, @"Unreachable");
+      break;
+    }
 
 }
 
@@ -2201,7 +2213,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 - (void) addJewelUnit
 {
 	id newUnit = [LPGroupUnit alloc];
-	[newUnit initWithOwner:self
+	newUnit = [newUnit initWithOwner:self
 					 atoms:[NSArray arrayWithObjects:
 						   		_random_unit(newUnit,0,10,YES),
 								_random_unit(newUnit,0,9,NO),nil]];
