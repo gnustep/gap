@@ -1321,6 +1321,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 													   Y:[unit Y]];
 				[_units removeObject:unit];
 				[_units addObject:new];
+				[new release];
 			}
 
 
@@ -1819,7 +1820,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	{
 		int cc,xx,yy;
 		LPUnit* unit;
-		cc=xx=yy=0;
+		cc=0;
 
 		for (yy = 13; yy >= 0 && cc < 8; yy--)
 		for (xx = 5; xx >= 0; xx--)
@@ -1944,7 +1945,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 		int cc,xx,yy;
 		LPUnit* unit;
 		NSMutableSet *set = [NSMutableSet setWithCapacity:70];
-		cc=xx=yy=0;
+		cc=0;
 
 		for (yy = 13; yy >= 0 && cc < 8; yy--)
 		for (xx = 5; xx >= 0; xx--)

@@ -1,6 +1,11 @@
 2011-06-01 Riccardo Mottola <rm@gnu.org>
 
 	* LapisPuzzleView.m:
+	Warning fix and and memory leak.
+
+2011-06-01 Riccardo Mottola <rm@gnu.org>
+
+	* LapisPuzzleView.m:
 	Warning fix and cleanup.
 
 2011-05-05 Riccardo Mottola <rm@gnu.org>
