@@ -1,3 +1,8 @@
+2011-06-02 Riccardo Mottola <rm@gnu.org>
+
+	* main.m
+	removed warnings and memory leaks
+
 2011-05-30 Riccardo Mottola <rm@gnu.org>
 
 	Imported project with permission of the original author.
