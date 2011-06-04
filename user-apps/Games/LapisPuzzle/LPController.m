@@ -105,7 +105,6 @@
 
 - (void) player:(id)pl addStoneToOp:(int)num
 {
-	id op;
 	if (pl == lpview1)
 	{
 		pl = lpview2;
