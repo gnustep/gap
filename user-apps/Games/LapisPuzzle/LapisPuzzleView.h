@@ -74,17 +74,11 @@ typedef enum _LPDirType
 - (void) setAlpha:(float)a;
 - (id) initWithOwner:(id <LPUnitOwner>)owner
 			   color:(LPUnitColorType)color;
-				   /*
-- (BOOL) attachUnit:(LPUnit *)anotherUnit;
-- (BOOL) attachUnit:(LPUnit *)anotherUnit
-		inDirection:(LPDirType)dir;
-		*/
 - (void) setX:(unsigned int)x
 			Y:(unsigned int)y;
 - (void) round;
 - (void) explode; // release self
 - (void) draw;
-//- (void) drawRect:(NSRect)rect;
 - (LPUnitColorType) unitColor;
 - (BOOL) isBlowing;
 - (void) blow;
@@ -99,12 +93,9 @@ typedef enum _LPDirType
 - (void) fallToBottom;
 - (BOOL) moveInDir:(LPDirType)dir;
 - (BOOL) canMoveInDir:(LPDirType)dir;
-- (BOOL) canRMoveX:(int)rx
-				 Y:(int)ry;
-- (BOOL) rMoveX:(int)rx
-			  Y:(int)ry;
-- (BOOL) hasPartAtX:(int)x
-				  Y:(int)y;
+- (BOOL) canRMoveX:(int)rx Y:(int)ry;
+- (BOOL) rMoveX:(int)rx Y:(int)ry;
+- (BOOL) hasPartAtX:(int)x Y:(int)y;
 - (void) softBlow;
 @end
 
@@ -212,7 +203,7 @@ typedef enum _LPResultType
 
 - (BOOL) processDir:(LPDirType)dir;
 - (id) currentUnit;
-- (BOOL) toggleAI;
+- (void) toggleAI;
 - (BOOL) useAI;
 
 

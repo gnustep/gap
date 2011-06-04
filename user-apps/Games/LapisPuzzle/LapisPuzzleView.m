@@ -169,11 +169,12 @@ static float _grid_height;
 
 - (BOOL) moveInDir:(LPDirType)dir
 {
+  return NO;
 }
 
-- (BOOL) rMoveX:(int)rx
-			  Y:(int)ry
+- (BOOL) rMoveX:(int)rx Y:(int)ry
 {
+  return NO;
 }
 
 - (void) changePhase
@@ -182,14 +183,17 @@ static float _grid_height;
 
 - (int) X
 {
+  return 0;
 }
 
 - (int) Y
 {
+  return 0;
 }
 
 - (float) phase
 {
+  return 0.0;
 }
 
 - (void) explode
@@ -204,17 +208,18 @@ static float _grid_height;
 {
 }
 
-- (void) setX:(unsigned int)x
-			Y:(unsigned int)y
+- (void) setX:(unsigned int)x Y:(unsigned int)y
 {
 }
 
 - (BOOL) canMoveInDir:(LPDirType)dir
 {
+  return NO;
 }
-- (BOOL) canRMoveX:(int)rx
-				 Y:(int)ry
+
+- (BOOL) canRMoveX:(int)rx Y:(int)ry
 {
+  return NO;
 }
 
 @end
@@ -790,9 +795,6 @@ static float _grid_height;
 
 - (BOOL) canMoveInDir:(LPDirType)dir
 {
-  id en;
-  LPUnit* unit;
-
   int cx,cy;
 
   switch(dir)
@@ -828,6 +830,7 @@ static float _grid_height;
       break;
     default:
       NSAssert(0, @"Unreachable");
+      return NO;
       break;
     }
 
@@ -1084,6 +1087,7 @@ static float _grid_height;
 
 - (int) Y
 {
+  return 0;
 }
 
 - (void) dealloc
@@ -1170,8 +1174,7 @@ static float _grid_height;
 {
 	id en;
 	LPUnit* unit;
-	BOOL canMove = YES;
-
+ 
 	en = [_units objectEnumerator];
 	while ((unit = [en nextObject]))
 	{
@@ -2083,40 +2086,43 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 
 -(BOOL) processDir:(LPDirType)dir
 {
-	if (_lockControl)
-	{
-		return NO;
-	}
-	if (__currentUnit == nil)
-	{
-		return NO;
-	}
-	switch(dir)
-	{
-		case LP_MOVE_DOWN:
- 			return [__currentUnit moveInDir:LP_MOVE_DOWN];
-			break;
-		case LP_MOVE_LEFT:
-			return [__currentUnit moveInDir:LP_MOVE_LEFT];
-			break;
-		case LP_MOVE_RIGHT:
-			return [__currentUnit moveInDir:LP_MOVE_RIGHT];
-			break;
-		case LP_MOVE_FALL:
-			_lockControl = YES;
-			[__currentUnit fallToBottom];
-			break;
-		case LP_MOVE_CW:
-			[__currentUnit rotateCW];
-			break;
-		case LP_MOVE_CCW:
-			[__currentUnit rotateCCW];
-			break;
+  if (_lockControl)
+    {
+      return NO;
+    }
+  if (__currentUnit == nil)
+    {
+      return NO;
+    }
+  switch(dir)
+    {
+    case LP_MOVE_DOWN:
+      return [__currentUnit moveInDir:LP_MOVE_DOWN];
+      break;
+    case LP_MOVE_LEFT:
+      return [__currentUnit moveInDir:LP_MOVE_LEFT];
+      break;
+    case LP_MOVE_RIGHT:
+      return [__currentUnit moveInDir:LP_MOVE_RIGHT];
+      break;
+    case LP_MOVE_FALL:
+      _lockControl = YES;
+      [__currentUnit fallToBottom];
+      break;
+    case LP_MOVE_CW:
+      [__currentUnit rotateCW];
+      break;
+    case LP_MOVE_CCW:
+      [__currentUnit rotateCCW];
+      break;
+    default:
+      NSAssert(0, @"Unreachable");
+      break;
 
-	}
+    }
 
-	[self setNeedsDisplay:YES];
-	return YES;
+  [self setNeedsDisplay:YES];
+  return YES;
 }
 
 -(void) keyDown: (NSEvent *)event
@@ -2170,7 +2176,7 @@ static LPUnit * _random_unit(id owner, int x, int y, BOOL diamond)
 	[self setNeedsDisplay:YES];
 }
 
-- (BOOL) toggleAI
+- (void) toggleAI
 {
 	_useAI = !_useAI;
 }
