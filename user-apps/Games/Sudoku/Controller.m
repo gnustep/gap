@@ -1,9 +1,10 @@
 
+#include <time.h>
+time_t time(time_t *t);
+
+
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-
-#import <time.h>
-time_t time(time_t *t);
 
 #import "Controller.h"
 #import "Document.h"

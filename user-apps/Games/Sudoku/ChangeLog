@@ -1,4 +1,9 @@
-2011-006-06Riccardo Mottola <rm@gnu.org>
+2011-06-07 Riccardo Mottola <rm@gnu.org>
+
+	* Controller.m
+	include instead of import system header.
+
+2011-06-06 Riccardo Mottola <rm@gnu.org>
 
 	* Resources/Sudoku.tiff
 	Adjusted resolution.
