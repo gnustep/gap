@@ -1,0 +1,100 @@
+{
+    APPLICATIONICON = "Sudoku.tiff";
+    "APP_DOCUMENT_BASED" = YES;
+    "APP_TYPE" = GORM;
+    "BUILDER_TARGETS" = (
+	all,
+	install,
+	uninstall,
+	clean,
+	distclean,
+	dist
+    );
+    "CLASS_FILES" = (
+	"Controller.m",
+	"DigitSource.m",
+	"Document.m",
+	"KnobView.m",
+	"Sudoku.m",
+	"SudokuView.m"
+    );
+    COMPILEROPTIONS = "";
+    CPPOPTIONS = "";
+    "CREATION_DATE" = "2011-06-06 12:33:50 +0200";
+    "DOCU_FILES" = (
+    );
+    FRAMEWORKS = (
+    );
+    "HEADER_FILES" = (
+	"Controller.h",
+	"DigitSource.h",
+	"Document.h",
+	"KnobView.h",
+	"Sudoku.h",
+	"SudokuView.h"
+    );
+    IMAGES = (
+	"Sudoku.tiff"
+    );
+    INSTALLDIR = "$(HOME)/GNUstep";
+    INTERFACES = (
+	"Sudoku.gorm"
+    );
+    LANGUAGE = English;
+    LIBRARIES = (
+	"gnustep-base",
+	"gnustep-gui"
+    );
+    LINKEROPTIONS = "";
+    "LOCALIZED_RESOURCES" = (
+    );
+    MAININTERFACE = "Sudoku.gorm";
+    MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    "OBJC_COMPILEROPTIONS" = "";
+    "OTHER_RESOURCES" = (
+    );
+    "OTHER_SOURCES" = (
+	"main.m"
+    );
+    "PRINCIPAL_CLASS" = NSApplication;
+    "PROJECT_AUTHORS" = (
+	"Marco Riedel <markoriedelde@yahoo.de>"
+    );
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2007-2011 Free Software Foundation, Inc.";
+    "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
+    "PROJECT_CREATOR" = "Riccardo,,,";
+    "PROJECT_DESCRIPTION" = "Sudoku game";
+    "PROJECT_DOCUMENTTYPES" = (
+	{
+	    NSDocumentClass = Document;
+	    NSHumanReadableName = "SUDOKU Document";
+	    NSName = sudoku;
+	    NSRole = Editor;
+	    NSUnixExtensions = (
+		sdk
+	    );
+	}
+    );
+    "PROJECT_GROUP" = "No group avaliable!";
+    "PROJECT_MAINTAINER" = "Riccardo,,,";
+    "PROJECT_NAME" = Sudoku;
+    "PROJECT_RELEASE" = "0.7";
+    "PROJECT_SUMMARY" = "No summary avaliable!";
+    "PROJECT_TYPE" = Application;
+    "PROJECT_URL" = "http://gap.nongnu.org/sudoku/";
+    "SEARCH_HEADER_DIRS" = (
+    );
+    "SEARCH_LIB_DIRS" = (
+    );
+    SUBPROJECTS = (
+    );
+    "SUPPORTING_FILES" = (
+	"GNUmakefile.preamble",
+	GNUmakefile,
+	"GNUmakefile.postamble",
+	"SudokuInfo.plist"
+    );
+    "USER_LANGUAGES" = (
+	English
+    );
+}
