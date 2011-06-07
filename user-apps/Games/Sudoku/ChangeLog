@@ -1,5 +1,24 @@
 2011-06-07 Riccardo Mottola <rm@gnu.org>
 
+	* Controller.h
+	* Controller.m
+	* DigitSource.h
+	* DigitSource.m
+	* Document.h
+	* Document.m
+	* KnobView.h
+	* KnobView.m
+	* Sudoku.h
+	* Sudoku.m
+	* SudokuInfo.plist
+	* SudokuView.h
+	* SudokuView.m
+	* main.m
+	* Sudoku.pcproj/PC.project
+	Put boiler plate on each file.
+
+2011-06-07 Riccardo Mottola <rm@gnu.org>
+
 	* Controller.m
 	include instead of import system header.
 
