@@ -58,10 +58,10 @@
     );
     "PRINCIPAL_CLASS" = NSApplication;
     "PROJECT_AUTHORS" = (
-	"Marco Riedel <markoriedelde@yahoo.de>"
+	"Marko Riedel <markoriedelde@yahoo.de>"
     );
     "PROJECT_COPYRIGHT" = "Copyright (C) 2007-2011 Free Software Foundation, Inc.";
-    "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
+    "PROJECT_COPYRIGHT_DESC" = "Released under GPL v3 or later";
     "PROJECT_CREATOR" = "Riccardo,,,";
     "PROJECT_DESCRIPTION" = "Sudoku game";
     "PROJECT_DOCUMENTTYPES" = (
