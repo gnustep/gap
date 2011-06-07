@@ -21,8 +21,8 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSEvent.h>
+#import <AppKit/NSView.h>
 
 #define DIGIT_TYPE @"Digit"
 

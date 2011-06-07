@@ -22,7 +22,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSView.h>
 
 @interface KnobView : NSView
 {
