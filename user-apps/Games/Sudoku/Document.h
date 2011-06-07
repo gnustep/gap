@@ -22,9 +22,12 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSDocument.h>
+#import <AppKit/NSWindowController.h>
 
-#import "SudokuView.h"
+@class Sudoku;
+@class SudokuView;
+
 #define DOCTYPE  @"sudoku"
 
 @interface Document : NSDocument

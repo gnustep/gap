@@ -21,8 +21,9 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
+#import <AppKit/NSPanel.h>
 
 #import "SudokuView.h"
 

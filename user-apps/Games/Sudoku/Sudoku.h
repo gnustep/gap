@@ -22,7 +22,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+
 
 #define NBCOUNT (8+8+4)
 

@@ -22,7 +22,8 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSView.h>
+#import <AppKit/NSDragging.h>
 
 #import "Sudoku.h"
 
