@@ -519,7 +519,6 @@ static NSPanel *_stopper_panel = nil;
             return [self loadError:msg];
         }
         nameOfImageFile = [line copy];
-        size = [image size];
 
         if((line = [en nextObject])==nil){
             return [self loadError:@"Image dimensions missing"];
