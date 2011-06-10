@@ -59,7 +59,7 @@ static NSString *BTreeMark = @"@endtree";
 {
   self = [super init];
 
-  if (!self)
+  if (self)
     {
       first = nil;
       second = nil;
@@ -80,7 +80,7 @@ static NSString *BTreeMark = @"@endtree";
 {
   self = [super init];
 
-  if (!self)
+  if (self)
     {
       first = fp;
       second = sp;
