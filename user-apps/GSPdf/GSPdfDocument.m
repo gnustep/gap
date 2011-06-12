@@ -2,7 +2,7 @@
  *  GSPdfDocument.m: Implementation of the GSPdfDocument Class 
  *  of the GSPdf application
  *
- *  Copyright (c) 2002-2010 GNUstep Application Project
+ *  Copyright (c) 2002-2011 GNUstep Application Project
  *  
  *  Author: Enrico Sersale
  *  Date: February 2002
@@ -243,7 +243,10 @@
   if ([fm fileExistsAtPath: tiffPath])
     {
       NSImage *image = [[NSImage alloc] initWithContentsOfFile: tiffPath];
-      [[docwin imageView] setFrameSize: [image size]];
+      NSSize scaledSize;
+
+      scaledSize = NSMakeSize([image size].width * (resolution / 72), [image size].height * (resolution / 72));
+      [image setSize: scaledSize];
       [docwin setImage: image];
       RELEASE (image);
       [self setBusy: NO];
@@ -391,11 +394,12 @@
 	  PSDocumentPage *pspage = [[psdoc pages] objectAtIndex: pageindex];
 	  NSString *tiffPath = [pspage tiffPath];
 	  NSImage *image = [[NSImage alloc] initWithContentsOfFile: tiffPath];
-	  NSRect frame = NSZeroRect;
+	  NSSize scaledSize;
 
 	  [image setBackgroundColor: [NSColor windowBackgroundColor]];
 
-	  frame.size = [image size];
+	  scaledSize = NSMakeSize([image size].width * (resolution / 72), [image size].height * (resolution / 72));
+	  [image setSize: scaledSize];
 	  [docwin setImage: image];
 	  RELEASE (image);
 

@@ -2,7 +2,7 @@
  *  GSPdfDocWin.m: Implementation of the GSPdfDocWin Class 
  *  of the GNUstep GWorkspace application
  *
- *  Copyright (c) 2002-2010
+ *  Copyright (c) 2002-2011
  *  Riccardo Mottola
  *  Enrico Sersale <enrico@imago.ro>
  *  
