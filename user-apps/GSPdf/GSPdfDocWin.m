@@ -103,8 +103,8 @@
   NSSize newSize;
 
   oldSize = [imageView frame].size;
-  newSize  = [anImage size];
-  [imageView setImage: anImage];
+  newSize = [anImage size];
+  
   if (oldSize.width != newSize.width || oldSize.height != newSize.height)
     {
       float scale;
@@ -178,6 +178,7 @@
 	}
       [[scroll contentView] scrollToPoint: visible.origin];
     }
+  [imageView setImage: anImage];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
