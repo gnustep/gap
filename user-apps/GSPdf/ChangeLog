@@ -1,3 +1,11 @@
+2011-05-13 Riccardo Mottola <rm@gnu.org>
+
+	* GSPdfDocWin.m
+	Set image after sizing the view.
+
+	* GSPdfDocument.m
+	Size frame with resolution and not image size which is resolution dependent.
+
 2011-05-31 Riccardo Mottola <rm@gnu.org>
 
 	* Resources/left.tiff
