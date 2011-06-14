@@ -38,7 +38,6 @@
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	"Sudoku.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (
@@ -48,7 +47,7 @@
     LINKEROPTIONS = "";
     "LOCALIZED_RESOURCES" = (
     );
-    MAININTERFACE = "Sudoku.gorm";
+    MAININTERFACE = "";
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     "OBJC_COMPILEROPTIONS" = "";
     "OTHER_RESOURCES" = (

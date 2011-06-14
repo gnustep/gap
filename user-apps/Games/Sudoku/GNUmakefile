@@ -23,8 +23,7 @@ Sudoku_APPLICATION_ICON = Sudoku.tiff
 # Resource files
 #
 Sudoku_RESOURCE_FILES = \
-Resources/Sudoku.gorm \
-Resources/Sudoku.tiff 
+Resources/Sudoku.tiff \
 
 
 #
