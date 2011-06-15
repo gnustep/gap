@@ -255,20 +255,24 @@ typedef enum {
 
 - actionEnter:(id)sender
 {
+  BOOL success;
+  NSDocumentController *dc;
+  Document *doc;
+  Sudoku *sdk;
+  Sudoku *user;
+
     [[NSApplication sharedApplication]
         stopModal];
     [enterPanel orderOut:self];
 
     [palette orderFront:self];
 
-    NSApplication *app = [NSApplication sharedApplication];
-
-    NSDocumentController *dc =
-        [NSDocumentController sharedDocumentController];
+    dc = [NSDocumentController sharedDocumentController];
     [dc newDocument:self];
 
-    Document *doc = [dc currentDocument];
-    Sudoku *sdk = [doc sudoku], *user = [sdkview sudoku];
+    doc = [dc currentDocument];
+    sdk = [doc sudoku];
+    user = [sdkview sudoku];
 
     [sdk copyStateFromSource:user];
     [sdk guessToClues];
@@ -280,15 +284,17 @@ typedef enum {
     [pi_panel makeKeyAndOrderFront:self];
 
     NSModalSession solveSession;
-    solveSession = [app beginModalSessionForWindow:pi_panel];
+    solveSession = [[NSApplication sharedApplication] beginModalSessionForWindow:pi_panel];
 
     float percent = 0, dir = 1;
 
-    BOOL success;
     NSDate *end = [NSDate dateWithTimeIntervalSinceNow:MAX_SOLVE_SECS];
 
+    success = NO;
     do {
 	int tick;
+	NSDate *now;
+
 	for(tick=0; tick<TICK_ITER; tick++){
 	    [pi setPercent:percent];
 	    [pi display];
@@ -305,9 +311,9 @@ typedef enum {
 	    dir = +1;
 	}
 
-	[app runModalSession:solveSession];
+	[[NSApplication sharedApplication] runModalSession:solveSession];
 
-	NSDate *now = [NSDate date];
+	now = [NSDate date];
 	if([now laterDate:end]==now){
 	    break;
 	}
@@ -316,7 +322,7 @@ typedef enum {
     } while(success==NO);
 
     [pi_panel orderOut:self];
-    [app endModalSession:solveSession];
+    [[NSApplication sharedApplication] endModalSession:solveSession];
 
     if(success==NO){
 	NSRunAlertPanel(_(@"Solve failed"),
