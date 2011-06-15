@@ -51,52 +51,61 @@
 
 - (void)drawMarkupAtX:(int)x andY:(int)y
 {
-  NSFont *font = [NSFont boldSystemFontOfSize:MARKUP_SIZE];
-  NSColor *col = 
-      [NSColor colorWithDeviceRed:0
-	       green:1.0/3.0
-	       blue:0
-	       alpha:1.0];
-  NSDictionary *attrDict =
-    [NSDictionary dictionaryWithObjectsAndKeys:
-		      font, NSFontAttributeName, 
-		  col, NSForegroundColorAttributeName, 
-		  nil];
-  [font set];
-
+  NSFont *font;
+  NSColor *col = [NSColor colorWithDeviceRed:0
+			  green:1.0/3.0
+			   blue:0
+			  alpha:1.0];
+  NSDictionary *attrDict;
   int present[9], digit;
-  for(digit=0; digit<9; digit++){
-      present[digit] = 0;
-  }
-
   int nb;
-  for(nb=0; nb<NBCOUNT; nb++){
-    int 
-      nx = [sdk fieldX:x Y:y].adj[nb].nx, 
-      ny = [sdk fieldX:x Y:y].adj[nb].ny;
-    present[[sdk retrX:nx Y:ny]]++;
-  }
-
   char str[2] = { '1', 0 };
 
-  for(digit=0; digit<9; digit++){
-      if(!present[digit]){
+  font = [NSFont boldSystemFontOfSize:MARKUP_SIZE];
+  attrDict =[NSDictionary dictionaryWithObjectsAndKeys:
+			    font, NSFontAttributeName, 
+			  col, NSForegroundColorAttributeName, 
+			  nil];
+  [font set];
+
+  
+  for(digit=0; digit<9; digit++)
+    present[digit] = 0;
+
+  
+  for(nb=0; nb<NBCOUNT; nb++)
+    {
+      int nx, ny;
+      nx = [sdk fieldX:x Y:y].adj[nb].nx; 
+      ny = [sdk fieldX:x Y:y].adj[nb].ny;
+      present[[sdk retrX:nx Y:ny]]++;
+    }
+
+  
+
+  for(digit=0; digit<9; digit++)
+    {
+      if(!present[digit])
+	{
+	  NSString *strObj;
+	  NSSize strSize;
+	  int idx, idy;
+	  NSPoint loc;
+
 	  str[0] = '1'+digit;
 	  
-	  NSString *strObj = [NSString stringWithCString:str];
-	  NSSize strSize = [strObj sizeWithAttributes:attrDict];	    
+	  strObj = [NSString stringWithCString:str];
+	  strSize = [strObj sizeWithAttributes:attrDict];	    
 
-	  int idx = digit % 3, idy = digit / 3;
+	  idx = digit % 3;
+	  idy = digit / 3;
 
-	  NSPoint loc = { 
-	      x*FIELD_DIM + idx*FIELD_DIM/3 +
-	      (FIELD_DIM/3-strSize.width)/2,
-	      (8-y)*FIELD_DIM + (2-idy)*FIELD_DIM/3 +
-	      (FIELD_DIM/3-strSize.height)/2 };
+	  loc = NSMakePoint(x*FIELD_DIM + idx*FIELD_DIM/3 + (FIELD_DIM/3-strSize.width)/2,
+			    (8-y)*FIELD_DIM + (2-idy)*FIELD_DIM/3 + (FIELD_DIM/3-strSize.height)/2 );
 
 	  [strObj drawAtPoint:loc withAttributes:attrDict];
-      }
-  }
+	}
+    }
 }
 
 - (void)drawString:(char *)str atX:(int)x andY:(int)y 
@@ -216,26 +225,33 @@
 - (void)mouseDown:(NSEvent *)theEvent
 {
   NSPoint startp = [theEvent locationInWindow];
-  startp = [self convertPoint:startp fromView: nil];
-    
   NSWindow *win = [self window];
   NSEvent *curEvent = theEvent;
-
+  int guess;
+  NSRect box, cachebox;
+  BOOL first;
+  NSDate *tick;
+  NSBezierPath *bpfilled, *bpstroked;
   unsigned int cmask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
+  NSDocumentController *dc;
+  char str[2];
+  int nb;
+  int x, y;
 
+  startp = [self convertPoint:startp fromView: nil];
   startp.x/=(float)FIELD_DIM; startp.y/=(float)FIELD_DIM; 
-  int x = (int)startp.x, y = 8-(int)startp.y;
+  x = (int)startp.x;
+  y = 8-(int)startp.y;
 
   if([sdk fieldX:x Y:y].puzzle != -1){
     NSBeep();
     return;
   }
 
-  int guess = [sdk fieldX:x Y:y].guess;
+  guess = [sdk fieldX:x Y:y].guess;
 
-  NSRect box = 
-    NSMakeRect(x*FIELD_DIM, (8-y)*FIELD_DIM, 
-	       FIELD_DIM,  FIELD_DIM), cachebox = box;
+  box = NSMakeRect(x*FIELD_DIM, (8-y)*FIELD_DIM, FIELD_DIM,  FIELD_DIM);
+  cachebox = box;
   cachebox.origin.x -= 4;
   cachebox.origin.y -= 4;
   cachebox.size.width += 8;
@@ -243,20 +259,21 @@
   
   cachebox = [self convertRect:cachebox toView:nil];
 
-  BOOL first = YES;
+  first = YES;
   
-  NSDate *tick = [NSDate dateWithTimeIntervalSinceNow:TICK];
+  tick = [NSDate dateWithTimeIntervalSinceNow:TICK];
 
-  NSBezierPath 
-    *bpfilled = [NSBezierPath bezierPathWithRect:box],
-    *bpstroked = [NSBezierPath bezierPathWithRect:box];
+  bpfilled = [NSBezierPath bezierPathWithRect:box],
+  bpstroked = [NSBezierPath bezierPathWithRect:box];
 
   [bpstroked setLineWidth:6.0];
 
-  guess = 
-      (guess==-1 ? 0 : (guess==8 ? -1 : guess+1));
+  guess = (guess==-1 ? 0 : (guess==8 ? -1 : guess+1));
 
   do {
+    NSDate *now;
+    char str[2];
+
     if(first==NO){
       [win restoreCachedImage];
     }
@@ -272,16 +289,16 @@
     [[NSColor blueColor] set];
     [bpstroked stroke];
 
-    NSDate *now = [NSDate date];
+    now = [NSDate date];
     if([now laterDate:tick]==now){
       guess = 
 	(guess==-1 ? 0 : (guess==8 ? -1 : guess+1));
       tick = [NSDate dateWithTimeIntervalSinceNow:TICK];
     }
 
-    char str[2] = { 
-      (guess==-1 ? '.' : '1' + guess), 
-      0 };
+    str[0] = (guess==-1 ? '.' : '1' + guess);
+    str[1] = 0;
+ 
     [self drawString:str atX:x andY:y 
      color:[NSColor blackColor]];
 
@@ -304,8 +321,7 @@
     return;
   }
   
-  NSDocumentController *dc =
-      [NSDocumentController sharedDocumentController];
+  dc = [NSDocumentController sharedDocumentController];
 
   if(guess == -1){
     [sdk fieldptrX:x Y:y]->guess = -1;
@@ -319,9 +335,10 @@
     return;
   }
 
-  char str[2] = { '1' + guess, 0 };
+  str[0] = '1' + guess;
+  str[1] = 0 ;
 
-  int nb;
+
   for(nb=0; nb<NBCOUNT; nb++){
     int 
       nx = [sdk fieldX:x Y:y].adj[nb].nx, 
@@ -333,6 +350,7 @@
   }
 
   if(nb<NBCOUNT){
+    NSDate *errpause;
     NSBeep();
     
     [win cacheImageInRect:cachebox];
@@ -352,8 +370,7 @@
 
     [win flushWindow];
 
-    NSDate *errpause =
-      [NSDate dateWithTimeIntervalSinceNow:TICK*5];
+    errpause = [NSDate dateWithTimeIntervalSinceNow:TICK*5];
     [NSThread sleepUntilDate:errpause];
 
     [win restoreCachedImage];
@@ -437,15 +454,19 @@
 {
   NSPasteboard *pb = [sender draggingPasteboard];
   NSString *dstr = [pb stringForType:DIGIT_TYPE];
-  
+  NSDocumentController *dc;
+  NSPoint startp;
   int newDigit;
+  int x, y;
+
   [[NSScanner scannerWithString:dstr] scanInt:&newDigit];
 
-  NSPoint startp = [sender draggingLocation];
+  startp = [sender draggingLocation];
   startp = [self convertPoint:startp fromView: nil];
 
   startp.x/=(float)FIELD_DIM; startp.y/=(float)FIELD_DIM; 
-  int x = (int)startp.x, y = 8-(int)startp.y;
+  x = (int)startp.x;
+  y = 8-(int)startp.y;
 
   [sdk fieldptrX:x Y:y]->guess = 
     (newDigit==10 ? -1 : newDigit-1);
@@ -454,8 +475,7 @@
   [self display];
   [[self window] flushWindow];
 
-  NSDocumentController *dc =
-      [NSDocumentController sharedDocumentController];
+  dc = [NSDocumentController sharedDocumentController];
   [[dc currentDocument] updateChangeCount:NSChangeDone];
 
   if([sdk completed]==YES){
