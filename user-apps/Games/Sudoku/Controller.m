@@ -42,9 +42,11 @@ static NSPanel *_prog_ind_panel = nil;
 
 + (NSPanel *)prog_ind
 {
-    if(_prog_ind_panel==nil){
+    if(_prog_ind_panel==nil)
+      {
 	NSRect pi_frame =
 	    NSMakeRect(0, 0, PROG_IND_WIDTH, PROG_IND_HEIGHT);
+	KnobView *_prog_ind;
 
         _prog_ind_panel = 
             [[NSPanel alloc]
@@ -54,8 +56,7 @@ static NSPanel *_prog_ind_panel = nil;
                 defer:NO];
         [_prog_ind_panel setReleasedWhenClosed:NO];
         
-	KnobView *_prog_ind =
-	    [[KnobView alloc] initWithFrame:pi_frame];
+	_prog_ind = [[KnobView alloc] initWithFrame:pi_frame];
         [_prog_ind_panel setContentView:_prog_ind];
 
 	[_prog_ind_panel setTitle:_(@"Computing Sudoku")];
@@ -80,28 +81,31 @@ typedef enum {
 - newPuzzle:(id)sender; // clues = [sender tag]
 {
     NSApplication *app = [NSApplication sharedApplication];
-
-    NSDocumentController *dc =
-	[NSDocumentController sharedDocumentController];
-    [dc newDocument:self];
-
-    Document *doc = [dc currentDocument];
-    Sudoku *sdk = [doc sudoku];
-
+    NSModalSession findSession;
+    NSDocumentController *dc = [NSDocumentController sharedDocumentController];
+    Document *doc;
+    Sudoku *sdk;
     NSPanel *pi_panel = [Controller prog_ind];
     KnobView *pi = [pi_panel contentView];
-    
-    [pi_panel makeKeyAndOrderFront:self];
-
-    NSModalSession findSession;
-    findSession = [app beginModalSessionForWindow:pi_panel];
-
     float percent = 0, dir = 1;
     STATE st = STATE_FIND;
-
     NSString *checkseq = nil; 
-    Sudoku *other = [[Sudoku alloc] init], *pick = [[Sudoku alloc] init];
-    int tries = 0;
+    Sudoku *other, *pick;
+    int tries;
+
+    doc = [dc currentDocument];
+    sdk = [doc sudoku];
+    [dc newDocument:self];
+    [pi_panel makeKeyAndOrderFront:self];
+
+    
+    findSession = [app beginModalSessionForWindow:pi_panel];
+
+
+    
+    other = [[Sudoku alloc] init];
+    pick = [[Sudoku alloc] init];
+    tries = 0;
 
     do {
 	int tick;
@@ -184,12 +188,14 @@ typedef enum {
 - makeInputPanel
 {
   int m = NSTitledWindowMask;
-
-  NSRect frame = 
-      {{ 0, BUTTON_HEIGHT + DIGIT_FIELD_DIM},  { SDK_DIM, SDK_DIM} };
+  int x;
+  float margin;
+  NSButton *button;
+  NSRect allframe ;
+  NSRect frame = {{ 0, BUTTON_HEIGHT + DIGIT_FIELD_DIM},  { SDK_DIM, SDK_DIM} };
   sdkview  = [[SudokuView alloc] initWithFrame:frame];
 
-  NSRect allframe = frame;
+  allframe = frame;
   allframe.size.height += BUTTON_HEIGHT + DIGIT_FIELD_DIM;
 
   enterPanel = 
@@ -202,10 +208,9 @@ typedef enum {
 
   [[enterPanel contentView] addSubview:sdkview];
 
-  float margin = (SDK_DIM - DIGIT_FIELD_DIM*10)/2;
+  margin = (SDK_DIM - DIGIT_FIELD_DIM*10)/2;
   assert(margin>0);
 
-  int x;
   for(x=1; x<=10; x++){
       DigitSource *dgs =
 	[[DigitSource alloc] 
@@ -216,13 +221,12 @@ typedef enum {
   }
 
 
-  NSButton *button = [NSButton new];
+  button = [NSButton new];
   [button setTitle:_(@"Enter")];
   [button setTarget:self];
   [button setAction:@selector(actionEnter:)];
 
-  [button 
-      setFrame:NSMakeRect(0, 0, SDK_DIM/3, BUTTON_HEIGHT)];
+  [button setFrame:NSMakeRect(0, 0, SDK_DIM/3, BUTTON_HEIGHT)];
   
   [[enterPanel contentView] addSubview:button];
 
@@ -231,8 +235,7 @@ typedef enum {
   [button setTarget:self];
   [button setAction:@selector(actionReset:)];
 
-  [button 
-      setFrame:NSMakeRect(SDK_DIM/3, 0, SDK_DIM/3, BUTTON_HEIGHT)];
+  [button setFrame:NSMakeRect(SDK_DIM/3, 0, SDK_DIM/3, BUTTON_HEIGHT)];
   
   [[enterPanel contentView] addSubview:button];
 
@@ -241,8 +244,7 @@ typedef enum {
   [button setTarget:self];
   [button setAction:@selector(actionCancel:)];
 
-  [button 
-      setFrame:NSMakeRect(2*SDK_DIM/3, 0, SDK_DIM/3, BUTTON_HEIGHT)];
+  [button setFrame:NSMakeRect(2*SDK_DIM/3, 0, SDK_DIM/3, BUTTON_HEIGHT)];
   
   [[enterPanel contentView] addSubview:button];
 
@@ -260,9 +262,13 @@ typedef enum {
   Document *doc;
   Sudoku *sdk;
   Sudoku *user;
+  NSPanel *pi_panel;
+  KnobView *pi;
+  NSModalSession solveSession;
+  float percent, dir;
+  NSDate *end;
 
-    [[NSApplication sharedApplication]
-        stopModal];
+    [[NSApplication sharedApplication] stopModal];
     [enterPanel orderOut:self];
 
     [palette orderFront:self];
@@ -278,17 +284,17 @@ typedef enum {
     [sdk guessToClues];
     // [sdk cluesToPuzzle];
 
-    NSPanel *pi_panel = [Controller prog_ind];
-    KnobView *pi = [pi_panel contentView];
+    pi_panel = [Controller prog_ind];
+    pi = [pi_panel contentView];
     
     [pi_panel makeKeyAndOrderFront:self];
 
-    NSModalSession solveSession;
     solveSession = [[NSApplication sharedApplication] beginModalSessionForWindow:pi_panel];
 
-    float percent = 0, dir = 1;
+    percent = 0;
+    dir = 1;
 
-    NSDate *end = [NSDate dateWithTimeIntervalSinceNow:MAX_SOLVE_SECS];
+    end = [NSDate dateWithTimeIntervalSinceNow:MAX_SOLVE_SECS];
 
     success = NO;
     do {
@@ -407,6 +413,7 @@ typedef enum {
 
 - makeDigitPalette
 {
+  int x, y;
   NSRect pbounds = 
     NSMakeRect(0, 0, 2*DIGIT_FIELD_DIM, 5*DIGIT_FIELD_DIM);
 
@@ -431,7 +438,6 @@ typedef enum {
   [palette setFrameAutosaveName: @"SudokuDigitPalette"];
 
 
-  int x, y;
   for(x=0; x<2; x++){
     for(y=0; y<5; y++){
       DigitSource *dgs =

@@ -2,6 +2,11 @@
 
 	* Document.m
 	Fix warning and reorganize code.
+
+	* Controller.m
+	* DigitSource.m
+	* Document.m
+	C99 fixes and code tidy up.
 	
 2011-06-07 Riccardo Mottola <rm@gnu.org>
 
