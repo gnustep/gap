@@ -57,17 +57,27 @@ static NSImage *dragImages[10] = {
 - makeDragImages
 {
   int dg;
+  NSBezierPath *bnds;
+  NSFont *font;
+  NSDictionary *attrDict;
+
+
 
   for(dg=1; dg<=10; dg++){
-    NSImage *img =
-      [[NSImage alloc] 
-	initWithSize:NSMakeSize(DIGIT_FIELD_DIM, DIGIT_FIELD_DIM)];
+    NSImage *img;
+    char str[2] = { (dg==10 ? '.' : '0' + dg), 0 };
+
+    NSString *strObj;
+    NSSize strSize;
+    NSPoint loc;
+
+
+    img = [[NSImage alloc] initWithSize:NSMakeSize(DIGIT_FIELD_DIM, DIGIT_FIELD_DIM)];
     RETAIN(img);
 
     [img lockFocus];
 
-    NSBezierPath 
-      *bnds = [NSBezierPath bezierPathWithRect:[self bounds]];
+    bnds = [NSBezierPath bezierPathWithRect:[self bounds]];
 
     [[NSColor whiteColor] set];
     [bnds fill];
@@ -76,22 +86,20 @@ static NSImage *dragImages[10] = {
     [bnds setLineWidth:4.0];
     [bnds stroke];
 
-    NSFont *font = [NSFont boldSystemFontOfSize:DIGIT_FONT_SIZE];
-    NSDictionary *attrDict =
-      [NSDictionary dictionaryWithObjectsAndKeys:
-			font, NSFontAttributeName, 
-		    [NSColor blueColor], NSForegroundColorAttributeName,
-		    nil];
+    font = [NSFont boldSystemFontOfSize:DIGIT_FONT_SIZE];
+    attrDict =      [NSDictionary dictionaryWithObjectsAndKeys:
+				    font, NSFontAttributeName, 
+				  [NSColor blueColor], NSForegroundColorAttributeName,
+				  nil];
     [font set];
     
-    char str[2] = { (dg==10 ? '.' : '0' + dg), 0 };
     
-    NSString *strObj = [NSString stringWithCString:str];
-    NSSize strSize = [strObj sizeWithAttributes:attrDict];	    
     
-    NSPoint loc =
-      NSMakePoint((DIGIT_FIELD_DIM-strSize.width)/2,
-		  (DIGIT_FIELD_DIM-strSize.height)/2);
+    strObj = [NSString stringWithCString:str];
+    strSize = [strObj sizeWithAttributes:attrDict];	    
+    
+    loc =       NSMakePoint((DIGIT_FIELD_DIM-strSize.width)/2,
+			    (DIGIT_FIELD_DIM-strSize.height)/2);
     [strObj drawAtPoint:loc withAttributes:attrDict];
     
     [img unlockFocus];

@@ -44,44 +44,48 @@
 
 - (NSData *)dataRepresentationOfType:(NSString *)aType 
 {
-    if([aType isEqualToString:DOCTYPE]){
-        [[sdkview window] saveFrameUsingName:[self fileName]];
+  if([aType isEqualToString:DOCTYPE])
+    {
+      NSString *all;
+      [[sdkview window] saveFrameUsingName:[self fileName]];
 
-        NSString *all =
-	    [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n",
-		      [[sdkview sudoku] stateToString:FIELD_VALUE],
-		      [[sdkview sudoku] stateToString:FIELD_PUZZLE],
-		      [[sdkview sudoku] stateToString:FIELD_GUESS],
-		      [[sdkview sudoku] stateToString:FIELD_SCORE]];
+      all =	    [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n",
+			      [[sdkview sudoku] stateToString:FIELD_VALUE],
+			      [[sdkview sudoku] stateToString:FIELD_PUZZLE],
+			      [[sdkview sudoku] stateToString:FIELD_GUESS],
+			      [[sdkview sudoku] stateToString:FIELD_SCORE]];
 
-        return [all dataUsingEncoding:NSASCIIStringEncoding];
+      return [all dataUsingEncoding:NSASCIIStringEncoding];
     }
-    else{
-        NSString *msg = [NSString stringWithFormat: @"Unknown type: %@", 
-                        [aType uppercaseString]];
-        NSRunAlertPanel(@"Alert", msg, @"Ok", nil, nil);
-        return nil;
+  else
+    {
+      NSString *msg = [NSString stringWithFormat: @"Unknown type: %@", 
+				[aType uppercaseString]];
+      NSRunAlertPanel(@"Alert", msg, @"Ok", nil, nil);
+      return nil;
     }
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType 
 {
-    if([aType isEqualToString:DOCTYPE]){
-        lines = 
-            [[NSString stringWithCString:[data bytes] 
-                       length:[data length]] 
+  if([aType isEqualToString:DOCTYPE])
+    {
+      lines = 
+	[[NSString stringWithCString:[data bytes] 
+			      length:[data length]] 
                 componentsSeparatedByString:@"\n"];
 
-	RETAIN(lines);
+      RETAIN(lines);
     }
-    else{
-        NSString *msg = [NSString stringWithFormat: @"Unknown type: %@", 
-                        [aType uppercaseString]];
-        NSRunAlertPanel(@"Alert", msg, @"Ok", nil, nil);
-        return NO;
+  else
+    {
+      NSString *msg = [NSString stringWithFormat: @"Unknown type: %@", 
+				[aType uppercaseString]];
+      NSRunAlertPanel(@"Alert", msg, @"Ok", nil, nil);
+      return NO;
     }
 
-    return YES;
+  return YES;
 }
 
 - (void) makeWindowControllers
@@ -110,10 +114,11 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController;
 {
+  NSEnumerator *en;
+
   [super windowControllerDidLoadNib:aController];
 
-  NSEnumerator *en = [lines objectEnumerator];
-
+  en = [lines objectEnumerator];
   if(lines != nil){
     [[sdkview sudoku] stateFromLineEnumerator:en what:FIELD_VALUE];
     [[sdkview sudoku] stateFromLineEnumerator:en what:FIELD_PUZZLE];
