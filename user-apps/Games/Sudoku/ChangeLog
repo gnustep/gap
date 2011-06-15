@@ -6,8 +6,9 @@
 	* Controller.m
 	* DigitSource.m
 	* Document.m
+	* SudokuView.m
 	C99 fixes and code tidy up.
-	
+
 2011-06-07 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.h

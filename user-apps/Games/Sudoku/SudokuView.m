@@ -102,31 +102,37 @@
 - (void)drawString:(char *)str atX:(int)x andY:(int)y 
 	     color:(NSColor *)col
 {
+  NSFont *font;
+  NSDictionary *attrDict;
+  NSString *strObj;
+  NSSize strSize;
+  NSPoint loc;
 
-  NSFont *font = [NSFont boldSystemFontOfSize:FONT_SIZE];
-  NSDictionary *attrDict =
-    [NSDictionary dictionaryWithObjectsAndKeys:
+
+  font = [NSFont boldSystemFontOfSize:FONT_SIZE];
+  attrDict = [NSDictionary dictionaryWithObjectsAndKeys:
 		    font, NSFontAttributeName, 
 		  col, NSForegroundColorAttributeName, nil];
   [font set];
 
-  NSString *strObj = [NSString stringWithCString:str];
-  NSSize strSize = [strObj sizeWithAttributes:attrDict];	    
+  strObj = [NSString stringWithCString:str];
+  strSize = [strObj sizeWithAttributes:attrDict];	    
 
-  NSPoint loc =
-    NSMakePoint(x*FIELD_DIM + (FIELD_DIM-strSize.width)/2,
+  loc = NSMakePoint(x*FIELD_DIM + (FIELD_DIM-strSize.width)/2,
 		(8-y)*FIELD_DIM + (FIELD_DIM-strSize.height)/2);
   [strObj drawAtPoint:loc withAttributes:attrDict];
 }
 
 - (void)drawRect:(NSRect)rect
 {
+  int x, y, pos;
+
     [[NSColor whiteColor] set];
     NSRectFill([self bounds]);
 
     // NSRect frect = [font boundingRectForFont];
 
-    int x, y, pos;
+    
 
     PSsetlinewidth(2);
     PSsetrgbcolor(0, 0, 0);
