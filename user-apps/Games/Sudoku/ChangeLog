@@ -3,6 +3,8 @@
 	* Controller.m
 	Fix new game.
 
+	* Controller.m
+	Code cleanup.
 2011-06-15 Riccardo Mottola <rm@gnu.org>
 
 	* Document.m
