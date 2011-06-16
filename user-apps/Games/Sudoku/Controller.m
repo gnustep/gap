@@ -44,8 +44,7 @@ static NSPanel *_prog_ind_panel = nil;
 {
     if(_prog_ind_panel==nil)
       {
-	NSRect pi_frame =
-	    NSMakeRect(0, 0, PROG_IND_WIDTH, PROG_IND_HEIGHT);
+	NSRect pi_frame = NSMakeRect(0, 0, PROG_IND_WIDTH, PROG_IND_HEIGHT);
 	KnobView *_prog_ind;
 
         _prog_ind_panel = 
@@ -80,9 +79,9 @@ typedef enum {
 
 - newPuzzle:(id)sender; // clues = [sender tag]
 {
-    NSApplication *app = [NSApplication sharedApplication];
+    NSApplication *app;
     NSModalSession findSession;
-    NSDocumentController *dc = [NSDocumentController sharedDocumentController];
+    NSDocumentController *dc;
     Document *doc;
     Sudoku *sdk;
     Sudoku *other;
@@ -94,6 +93,8 @@ typedef enum {
     NSString *checkseq;
     int tries;
 
+    app = [NSApplication sharedApplication];
+    dc = [NSDocumentController sharedDocumentController];
     [dc newDocument:self];
 
     doc = [dc currentDocument];
@@ -117,7 +118,8 @@ typedef enum {
 
     do {
 	int tick;
-	for(tick=0; tick<TICK_ITER; tick++){
+	for(tick=0; tick<TICK_ITER; tick++)
+	  {
 	    [pi setPercent:percent];
 	    [pi display];
 
