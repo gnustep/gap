@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2010 GNUstep Application Project
+   Copyright (C) 2006-2011 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -38,6 +38,13 @@
 #  include <stdio.h>
 #endif
 
+#if defined(netbsd) || defined(__NetBSD__)
+#include <paths.h>  /* path for the system devices */
+#include <fcntl.h>  /* open */
+#include <unistd.h>
+#include <sys/envsys.h>
+#include <prop/proplib.h> /* psd property dictionaries */
+#endif
 
 #import <Foundation/NSCharacterSet.h>
 #import <Foundation/NSString.h>
@@ -268,7 +275,96 @@
     chargePercent = currCap/lastCap*100;
     isCharging = NO;
   }
+#elif defined(netbsd) || defined (__NetBSD__)
+  int		sysmonfd; /* fd of /dev/sysmon */
+  int rval;
+  prop_dictionary_t bsd_dict;
+  prop_object_iterator_t iter_dev;
+  prop_object_t obj;
   
+
+  /* Open the device in ro mode */
+  if ((sysmonfd = open(_PATH_SYSMON, O_RDONLY)) == -1)
+    NSLog(@"Error opening device: %s", _PATH_SYSMON);
+
+  rval = prop_dictionary_recv_ioctl(sysmonfd,
+				    ENVSYS_GETDICTIONARY,
+				    &bsd_dict);
+  if (rval)
+    {
+      NSLog(@"Error: %s", strerror(rval));
+      return;
+    }
+  
+  /* iterate and look for batteries */
+  iter_dev = prop_dictionary_iterator(bsd_dict);
+  while ((obj = prop_object_iterator_next(iter_dev)) != NULL)
+    {
+      prop_object_t obj_dev;
+      prop_array_t acpi_array;
+      prop_object_iterator_t dev_iter;
+
+      acpi_array = prop_dictionary_get_keysym(bsd_dict, obj);
+      if (prop_object_type(acpi_array) != PROP_TYPE_ARRAY)
+	{
+	  NSLog(@"not an array");
+	  continue;
+	}
+
+      dev_iter = prop_array_iterator(acpi_array);
+      while ((obj_dev = prop_object_iterator_next(dev_iter)) != NULL)
+	{
+	  prop_object_t obj_devp;
+	  obj_devp = prop_dictionary_get(obj_dev, "device-properties");
+
+	  if (obj_devp != nil)
+	    {
+	      char* dev_class;
+
+	      prop_dictionary_get_cstring(obj_devp, "device-class", &dev_class);
+	      if (dev_class != NULL)
+		{
+		  //		  NSLog(@"class: %s", dev_class);
+		  if (strcmp(dev_class, "battery"))
+		    {
+		      NSLog(@"Battery !");		      
+		    }
+		}
+	      
+	    }
+	  else
+	    {
+	      prop_object_iterator_t iter_props;
+	      prop_string_t p_str;
+	      char str[ENVSYS_DESCLEN];
+
+
+	      p_str = prop_dictionary_get(obj_dev, "description");
+	      if (p_str != NULL)
+		{
+		  strcpy(str, prop_string_cstring_nocopy(p_str));
+		  NSLog(@"description: %s", str);
+		}
+	      p_str = prop_dictionary_get(obj_dev, "type");
+	      if (p_str != NULL)
+		{
+		  strcpy(str, prop_string_cstring_nocopy(p_str));	
+		  NSLog(@"type %s", str);
+		}
+	      p_str = prop_dictionary_get(obj_dev, "state");
+	      if (p_str != NULL)
+		{
+		  strcpy(str, prop_string_cstring_nocopy(p_str));	
+		  NSLog(@"state %s", str);
+		}
+		    
+		      
+	    }
+	}
+      prop_object_iterator_release(dev_iter);
+    }
+  prop_object_iterator_release(iter_dev);
+  (void)close(sysmonfd);
 #elif defined(linux)
 
     FILE *stateFile;
