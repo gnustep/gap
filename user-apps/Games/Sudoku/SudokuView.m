@@ -398,48 +398,51 @@
 - (unsigned int)draggingEntered:(id <NSDraggingInfo>)sender
 {
   NSPasteboard *pb = [sender draggingPasteboard];
-  NSDragOperation
-    sourceDragMask = [sender draggingSourceOperationMask];
+  NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
 
-  if([[pb types] indexOfObject:DIGIT_TYPE]!=NSNotFound){
-    if(sourceDragMask & NSDragOperationCopy){
-      NSString *dstr = [pb stringForType:DIGIT_TYPE];
+  if([[pb types] indexOfObject:DIGIT_TYPE]!=NSNotFound)
+    {
+      if(sourceDragMask & NSDragOperationCopy)
+	{
+	  int newDigit;
+	  NSPoint startp;
+	  NSString *dstr;
+	  int x, y;
+	  int nb;
 
-      int newDigit;
-      [[NSScanner scannerWithString:dstr] scanInt:&newDigit];
+	  dstr = [pb stringForType:DIGIT_TYPE];
+	  [[NSScanner scannerWithString:dstr] scanInt:&newDigit];
 
-      NSPoint startp = [sender draggingLocation];
-      startp = [self convertPoint:startp fromView: nil];
+	  startp = [sender draggingLocation];
+	  startp = [self convertPoint:startp fromView: nil];
 
-      startp.x/=(float)FIELD_DIM; startp.y/=(float)FIELD_DIM; 
-      int x = (int)startp.x, y = 8-(int)startp.y;
+	  startp.x/=(float)FIELD_DIM; startp.y/=(float)FIELD_DIM; 
+	  x = (int)startp.x;
+	  y = 8-(int)startp.y;
 
-      if([sdk fieldX:x Y:y].puzzle != -1){
-	return NSDragOperationNone;
-      }
+	  if([sdk fieldX:x Y:y].puzzle != -1)
+	    return NSDragOperationNone;
 
-      if(newDigit==10){
-	return NSDragOperationCopy;
-      }
+	  if(newDigit==10)
+	    return NSDragOperationCopy;
 
-      newDigit--;
+	  newDigit--;
 
-      int nb;
-      for(nb=0; nb<NBCOUNT; nb++){
-	int 
-	  nx = [sdk fieldX:x Y:y].adj[nb].nx, 
-	  ny = [sdk fieldX:x Y:y].adj[nb].ny;
+	  for(nb=0; nb<NBCOUNT; nb++)
+	    {
+	      int nx, ny;
 
-	if([sdk retrX:nx Y:ny]==newDigit){
-	  break;
+	      nx = [sdk fieldX:x Y:y].adj[nb].nx;
+	      ny = [sdk fieldX:x Y:y].adj[nb].ny;
+
+	      if([sdk retrX:nx Y:ny]==newDigit)
+		break;
+	    }
+
+	  if(nb<NBCOUNT)
+	    return NSDragOperationNone;
 	}
-      }
-
-      if(nb<NBCOUNT){
-	return NSDragOperationNone;
-      }
     }
-  }
  
   return NSDragOperationCopy;
 }

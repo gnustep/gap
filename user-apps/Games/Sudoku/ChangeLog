@@ -1,3 +1,10 @@
+2011-06-20 Riccardo Mottola <rm@gnu.org>
+
+	* SudokuView.m
+	* Sudoku.m
+	* main.m
+	C89 fixes and code cleanup
+
 2011-06-16 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.m
@@ -5,6 +12,7 @@
 
 	* Controller.m
 	Code cleanup.
+
 2011-06-15 Riccardo Mottola <rm@gnu.org>
 
 	* Document.m

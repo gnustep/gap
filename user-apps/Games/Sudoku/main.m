@@ -31,7 +31,11 @@ time_t time(time_t *t);
 int main(int argc, const char **argv, char** env)
 {
   NSAutoreleasePool *pool;
-   NSApplication *app;
+  NSApplication *app;
+  NSMenu *mainMenu, *menu;
+  NSMenuItem *menuItem;
+  NSMenu *file;
+  Controller *controller;
 
    pool = [NSAutoreleasePool new];
    app = [NSApplication sharedApplication];
@@ -40,8 +44,7 @@ int main(int argc, const char **argv, char** env)
    // Create the Menu 
    //
 
-   NSMenu *mainMenu, *menu;
-   NSMenuItem *menuItem;
+
 
    // Main Menu
    mainMenu = AUTORELEASE ([NSMenu new]);
@@ -63,7 +66,7 @@ int main(int argc, const char **argv, char** env)
 	 keyEquivalent: @"?"];
 
   // Create the file submenu
-  NSMenu *file = [NSMenu new];
+  file = [NSMenu new];
 
   menuItem = (NSMenuItem *)[mainMenu addItemWithTitle: @"File" 
 				     action: NULL 
@@ -159,8 +162,6 @@ int main(int argc, const char **argv, char** env)
    [app setMainMenu: mainMenu];
 
    srand48(time(NULL));
- 
-   Controller *controller;
 
    controller = [Controller new];
    [app setDelegate: controller];
@@ -169,8 +170,8 @@ int main(int argc, const char **argv, char** env)
 
    [[NSUserDefaults standardUserDefaults] synchronize];
 
-   // RELEASE (controller);
-   // RELEASE (pool);
+   RELEASE (controller);
+   RELEASE (pool);
    return 0;
 }
 
