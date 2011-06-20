@@ -66,22 +66,24 @@
 
 - init
 {
-    allclues = 0;
+  int x, y, pos;
 
-    int x, y, pos;
-
-    for(x=0; x<9; x++){
-      for(y=0; y<9; y++){
-	data[x][y].value = -1;
-	data[x][y].guess = -1;
-	data[x][y].puzzle = -1;
-      }
+  allclues = 0;
+  for(x=0; x<9; x++)
+    {
+      for(y=0; y<9; y++)
+	{
+	  data[x][y].value = -1;
+	  data[x][y].guess = -1;
+	  data[x][y].puzzle = -1;
+	}
     }
 
     // adjaceny
     for(x=0; x<9; x++){
 	for(y=0; y<9; y++){
 	    int n = 0;
+	    int zx, zy;
 
 	    for(pos=0; pos<9; pos++){
 		if(pos!=y){
@@ -101,7 +103,8 @@
 		}
 	    }
       
-	    int zx = x/3, zy = y/3;
+	    zx = x/3;
+	    zy = y/3;
 	    for(pos=0; pos<9; pos++){
 		int zzx = 3*zx + pos/3, zzy = 3*zy + pos%3; 
 		if(zzx!=x && zzy!=y){
@@ -241,6 +244,7 @@
   int pos, x, y, randpl = 0;
 
   BOOL initial[9][9];
+  int present[9];
 
   for(x=0; x<9; x++){
     for(y=0; y<9; y++){
@@ -318,7 +322,6 @@
     }
   }
 
-  int present[9];
   for(pos=0; pos<9; pos++){
     present[pos] = 0;
   }
@@ -340,11 +343,13 @@
 
 - (BOOL)find
 {
+  int x, y, pos;
+  const char *marker = "ClueMarker";
+  NSAutoreleasePool *pool;
+  NSMutableSet *set;
+
   success = NO;
   placed = allclues;
-
-  int x, y, pos;
-
 
   for(x=0; x<9; x++){
     for(y=0; y<9; y++){
@@ -367,14 +372,15 @@
     seq[pos].checked = 0;
   }
 
-  const char *marker = "ClueMarker";
   for(pos=0; pos<allclues; pos++){
+    int nb, d;
+
     x = clues[pos].x; y = clues[pos].y;
 
     seq[pos].x = x; seq[pos].y = y; 
     seq[pos].checked = 0;
 
-    int nb, d = clues[pos].value;
+    d = clues[pos].value;
     data[x][y].value = d;
     for(nb=0; nb<NBCOUNT; nb++){
       int 
@@ -385,8 +391,8 @@
     }
   }
 
-  NSAutoreleasePool *pool = [NSAutoreleasePool new];
-  NSMutableSet *set = [NSMutableSet setWithCapacity:128];
+  pool = [NSAutoreleasePool new];
+  set = [NSMutableSet setWithCapacity:128];
 
   NS_DURING
 
@@ -429,9 +435,15 @@ int comparefieldptrs(const void *a, const void *b)
 
 - doFind:(NSMutableSet *)seen
 {
-    NSString
-      *dataStr = [self stateToString:FIELD_VALUE];
-    // *scoreStr = [self stateToString:FIELD_SCORE];
+  NSString *dataStr = [self stateToString:FIELD_VALUE];
+  int rest;
+  fieldptr buf[9*9];
+  fieldptr *bPtr;
+  int x, y;
+  int score;
+  int range;
+  int mx;
+  int pos, d;
 
   if(placed==9*9){
     // NSLog(@"--\n%@", dataStr);
@@ -447,10 +459,10 @@ int comparefieldptrs(const void *a, const void *b)
     }
     [seen addObject:dataStr];
 
-  int rest = 9*9-placed;
+  rest = 9*9-placed;
 
-  fieldptr buf[9*9], *bPtr = buf;
-  int x, y;
+  bPtr = buf;
+
 
   for(x=0; x<9; x++){
       for(y=0; y<9; y++){
@@ -466,7 +478,10 @@ int comparefieldptrs(const void *a, const void *b)
   // NSLog(@"--\n%@", dataStr);
   // NSLog(@"--\n%@", scoreStr);
 
-  int score = buf[0]->score, range = 1, mx = 0;
+  score = buf[0]->score;
+  range = 1;
+  mx = 0;
+
   while(range<rest && buf[range]->score==score){
     range++;
   }
@@ -483,13 +498,14 @@ int comparefieldptrs(const void *a, const void *b)
     }
   }
   
-  int pos, d;
   for(pos=0; pos<rest; pos++){
     fieldptr fp = buf[pos];
     int x = fp->x, y = fp->y;
 
     for(d=0; d<9; d++){
 	if(fp->nbdigits[d]==NULL){
+	  int nb;
+
 	  seq[placed].x = x;
 	  seq[placed].y = y;
 	  seq[placed].checked++;
@@ -497,7 +513,6 @@ int comparefieldptrs(const void *a, const void *b)
 	    placed++;
 	    data[x][y].value = d;
 
-	    int nb;
 	    for(nb=0; nb<NBCOUNT; nb++){
 		int nbx = data[x][y].adj[nb].nx,
 		    nby = data[x][y].adj[nb].ny;
@@ -625,14 +640,13 @@ int comparefieldptrs(const void *a, const void *b)
 - copyStateFromSource:(Sudoku *)src
 {
   int x, y;
-  
+  int pos;
+
   for(x=0; x<9; x++){
     for(y=0; y<9; y++){
       data[x][y] = [src fieldX:x Y:y];
     }
   }
-
-  int pos;
   
   for(pos=0; pos<9*9; pos++){
     seq[pos] = [src seq:pos];
