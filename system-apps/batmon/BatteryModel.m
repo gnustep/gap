@@ -46,6 +46,14 @@
 #include <prop/proplib.h> /* psd property dictionaries */
 #endif
 
+#if defined(openbsd) || defined(__OpenBSD__)
+#include <unistd.h>
+#include <fcntl.h>  /* open */
+#include <sys/ioctl.h>
+#include <machine/apmvar.h>
+#define APMDEV "/dev/apm"
+#endif
+
 #import <Foundation/NSCharacterSet.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSArray.h>
@@ -365,6 +373,44 @@
     }
   prop_object_iterator_release(iter_dev);
   (void)close(sysmonfd);
+
+#elif defined(openbsd) || defined(__OpenBSD__)
+  int apmfd;
+  struct apm_power_info apmPwInfo;
+
+  apmfd = open(APMDEV, O_RDONLY);
+  if (apmfd == -1)
+    return;
+
+  if( -1 == ioctl(apmfd, APM_IOC_GETPOWER, &apmPwInfo) )
+    return;
+
+  isCharging = NO;
+  if (APM_BATT_HIGH == apmPwInfo.battery_state)
+    chargeState = @"High";
+  else if (APM_BATT_LOW == apmPwInfo.battery_state)
+    chargeState = @"Low";
+  else if (APM_BATT_CRITICAL == apmPwInfo.battery_state)
+    chargeState = @"Critical";
+  else if (APM_BATT_CHARGING == apmPwInfo.battery_state)
+    {
+      chargeState = @"Charging";
+      isCharging = YES;
+    }
+  else if (APM_BATTERY_ABSENT == apmPwInfo.battery_state)
+    chargeState = @"Not present";
+  else
+    chargeState = @"Unknown";
+
+  if (APM_AC_ON == apmPwInfo.ac_state)
+    isCharging = YES;
+
+  /* we expect time in hours */
+  timeRemaining = (float)apmPwInfo.minutes_left / 60;
+
+  chargePercent = (float)(int)apmPwInfo.battery_life;
+  close(apmfd);
+
 #elif defined(linux)
 
     FILE *stateFile;
@@ -686,7 +732,6 @@
 		else
 		  chargePercent = 0;
 	      }
-	    NSLog(@"percent %f", chargePercent);
 	  }
     
 	fclose(stateFile);
