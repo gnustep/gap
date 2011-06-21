@@ -377,6 +377,7 @@
 #elif defined(openbsd) || defined(__OpenBSD__)
   int apmfd;
   struct apm_power_info apmPwInfo;
+  BOOL validBattery;
 
   apmfd = open(APMDEV, O_RDONLY);
   if (apmfd == -1)
@@ -386,6 +387,7 @@
     return;
 
   isCharging = NO;
+  validBattery = YES;
   if (APM_BATT_HIGH == apmPwInfo.battery_state)
     chargeState = @"High";
   else if (APM_BATT_LOW == apmPwInfo.battery_state)
@@ -398,17 +400,42 @@
       isCharging = YES;
     }
   else if (APM_BATTERY_ABSENT == apmPwInfo.battery_state)
-    chargeState = @"Not present";
+    {
+      chargeState = @"Not present";
+      validBattery = NO;
+    }
   else
-    chargeState = @"Unknown";
+    {
+      chargeState = @"Unknown";
+      validBattery = NO;
+    }
 
   if (APM_AC_ON == apmPwInfo.ac_state)
     isCharging = YES;
 
   /* we expect time in hours */
-  timeRemaining = (float)apmPwInfo.minutes_left / 60;
+  if (validBattery)
+    {
+      timeRemaining = (float)apmPwInfo.minutes_left / 60;
+      chargePercent = (float)(int)apmPwInfo.battery_life;
 
-  chargePercent = (float)(int)apmPwInfo.battery_life;
+      /* sanity checks */
+      if (isCharging && timeRemaining > 100)
+	timeRemaining = 0;
+      if (chargePercent > 100)
+	chargePercent = 100;
+      else if (chargePercent < 0)
+	chargePercent = 0;
+
+      if (timeRemaining < 0)
+	timeRemaining = 0;
+    }
+  else
+    {
+      chargePercent = 0;
+      timeRemaining= 0;
+    }
+
   close(apmfd);
 
 #elif defined(linux)
