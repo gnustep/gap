@@ -287,9 +287,15 @@
   int		sysmonfd; /* fd of /dev/sysmon */
   int rval;
   prop_dictionary_t bsd_dict;
-  prop_object_iterator_t iter_dev;
-  prop_object_t obj;
-  
+  NSString *string;
+  NSDictionary *dict;
+  char *cStr;
+  NSEnumerator *enum1;
+  id obj1;
+  NSDictionary *acpibat0;
+  NSMutableDictionary *batDict;
+  NSString *valueStr;
+  float chargeRate, dischargeRate;
 
   /* Open the device in ro mode */
   if ((sysmonfd = open(_PATH_SYSMON, O_RDONLY)) == -1)
@@ -304,75 +310,101 @@
       return;
     }
   
-  /* iterate and look for batteries */
-  iter_dev = prop_dictionary_iterator(bsd_dict);
-  while ((obj = prop_object_iterator_next(iter_dev)) != NULL)
+  cStr = prop_dictionary_externalize(bsd_dict);
+  string = [NSString stringWithCString: cStr];
+  dict = [string propertyList];
+  if (dict == nil)
     {
-      prop_object_t obj_dev;
-      prop_array_t acpi_array;
-      prop_object_iterator_t dev_iter;
-
-      acpi_array = prop_dictionary_get_keysym(bsd_dict, obj);
-      if (prop_object_type(acpi_array) != PROP_TYPE_ARRAY)
-	{
-	  NSLog(@"not an array");
-	  continue;
-	}
-
-      dev_iter = prop_array_iterator(acpi_array);
-      while ((obj_dev = prop_object_iterator_next(dev_iter)) != NULL)
-	{
-	  prop_object_t obj_devp;
-	  obj_devp = prop_dictionary_get(obj_dev, "device-properties");
-
-	  if (obj_devp != nil)
-	    {
-	      char* dev_class;
-
-	      prop_dictionary_get_cstring(obj_devp, "device-class", &dev_class);
-	      if (dev_class != NULL)
-		{
-		  //		  NSLog(@"class: %s", dev_class);
-		  if (strcmp(dev_class, "battery"))
-		    {
-		      NSLog(@"Battery !");		      
-		    }
-		}
-	      
-	    }
-	  else
-	    {
-	      prop_object_iterator_t iter_props;
-	      prop_string_t p_str;
-	      char str[ENVSYS_DESCLEN];
-
-
-	      p_str = prop_dictionary_get(obj_dev, "description");
-	      if (p_str != NULL)
-		{
-		  strcpy(str, prop_string_cstring_nocopy(p_str));
-		  NSLog(@"description: %s", str);
-		}
-	      p_str = prop_dictionary_get(obj_dev, "type");
-	      if (p_str != NULL)
-		{
-		  strcpy(str, prop_string_cstring_nocopy(p_str));	
-		  NSLog(@"type %s", str);
-		}
-	      p_str = prop_dictionary_get(obj_dev, "state");
-	      if (p_str != NULL)
-		{
-		  strcpy(str, prop_string_cstring_nocopy(p_str));	
-		  NSLog(@"state %s", str);
-		}
-		    
-		      
-	    }
-	}
-      prop_object_iterator_release(dev_iter);
+      NSLog(@"Could not parse dictionary");
+      return;
     }
-  prop_object_iterator_release(iter_dev);
+
+  acpibat0 = [dict objectForKey: @"acpibat0"];
+  NSLog(@"acpibat0: %@", acpibat0);
+  NSLog(@"Class: %@", [acpibat0 class]);
+  batDict = [NSMutableDictionary dictionaryWithCapacity: 3];
+  enum1 = [acpibat0 objectEnumerator];
+  while ((obj1 = [enum1 nextObject]))
+    {
+      NSLog(@"--->%@", obj1);
+      if ([obj1 isKindOfClass: [NSDictionary class]])
+	{
+	  NSString *descriptionKey;
+
+	  descriptionKey = [obj1 objectForKey:@"description"];
+	  NSLog(@"key-----> %@", descriptionKey);
+	  if (descriptionKey)
+	    [batDict setObject: obj1 forKey: descriptionKey];
+	}
+      else
+	NSLog(@"not a dict");
+
+    }
+  NSLog(@"battery dictionary: %@", batDict);
   (void)close(sysmonfd);
+
+  valueStr = [[batDict objectForKey: @"design voltage"] objectForKey: @"cur-value"];
+  NSLog(@"design voltage: %@", valueStr);
+  //  if (valueStr)
+  //    designVoltage = [valueStr floatValue] / 1000;
+
+  valueStr = [[batDict objectForKey: @"voltage"] objectForKey: @"cur-value"];
+  NSLog(@"voltage: %@", valueStr);
+  if (valueStr)
+    volts = [valueStr floatValue] / 1000;
+
+  valueStr = [[batDict objectForKey: @"design cap"] objectForKey: @"cur-value"];
+  NSLog(@"design cap: %@", valueStr);
+  if (valueStr)
+    {
+      if ([[[batDict objectForKey: @"design cap"] objectForKey: @"type"] isEqualToString: @"Ampere hour"])
+	{
+	  useWattHours = NO;
+	}
+      else if ([[[batDict objectForKey: @"design cap"] objectForKey: @"type"] isEqualToString: @"Watt hour"])
+	{
+	  useWattHours = YES;
+	}
+      desCap = [valueStr floatValue] / 1000;
+    }
+
+  valueStr = [[batDict objectForKey: @"last full cap"] objectForKey: @"cur-value"];
+  NSLog(@"last full cap: %@", valueStr);
+  if (valueStr)
+    lastCap = [valueStr floatValue] / 1000;
+
+  valueStr = [[batDict objectForKey: @"charge rate"] objectForKey: @"cur-value"];
+  NSLog(@"charge rate: %@", valueStr);
+  chargeRate = 0;
+  if (valueStr)
+    chargeRate = [valueStr floatValue] / 1000;
+
+  valueStr = [[batDict objectForKey: @"discharge rate"] objectForKey: @"cur-value"];
+  NSLog(@"discharge rate: %@", valueStr);
+  dischargeRate = 0;
+  if (valueStr)
+    dischargeRate = [valueStr floatValue] / 1000;
+
+  valueStr = [[batDict objectForKey: @"charging"] objectForKey: @"cur-value"];
+  NSLog(@"charging: %@", valueStr);
+  if ([valueStr intValue] == 0)
+    {
+      amps = dischargeRate;
+      isCharging = NO;
+    }
+  else
+    {
+      amps = chargeRate;
+      isCharging = YES;
+    }
+
+  valueStr = [[batDict objectForKey: @"charge state"] objectForKey: @"battery-capacity"];
+  NSLog(@"charge state: %@", valueStr);
+  if (valueStr)
+    {
+      [chargeState release];
+      chargeState = [[NSString stringWithString: valueStr] retain];
+    }
 
 #elif defined(openbsd) || defined(__OpenBSD__)
   int apmfd;
