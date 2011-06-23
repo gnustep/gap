@@ -502,7 +502,6 @@
 	NSString *keyStr;
 
 	NSLog(@"reading %@", batterySysAcpiString);
-
 	ueventFileName = [batterySysAcpiString stringByAppendingPathComponent:@"uevent"];
 
         [ueventFileName getCString:batteryStatePath0];
@@ -536,9 +535,13 @@
 	if ([ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] == nil)
 	  watts = volts*amps;
 	else
-	  watts = [[ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] floatValue] / 1000000;
+	  {
+	    watts = [[ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] floatValue] / 1000000;
+	    if (volts > 0)
+	      amps = watts / volts;
+	  }
 
-
+	useWattHours = YES;
 	if ([ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL_DESIGN"] != nil)
 	  {
 	    desCap = [[ueventDict objectForKey:@"POWER_SUPPLY_ENERGY_FULL_DESIGN"] floatValue] / 1000000;
