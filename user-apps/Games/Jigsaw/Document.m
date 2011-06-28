@@ -136,19 +136,24 @@ static NSPanel *_stopper_panel = nil;
 
 - (NSSize)withPadding
 {
-    NSSize plain = [image size];
-    int padding;
+  NSSize plain;
+  int padding;
 
-    padding = ((int)plain.width) % PIECE_WIDTH;
-    if(padding){
-        plain.width += PIECE_WIDTH - padding;
-    }
-    padding = ((int)plain.height) % PIECE_HEIGHT;
-    if(padding){
-        plain.height += PIECE_HEIGHT - padding;
-    }
+  plain = NSMakeSize(0, 0);
 
+  if (image == nil)
     return plain;
+
+  plain = [image size];
+  padding = ((int)plain.width) % PIECE_WIDTH;
+  if(padding)
+    plain.width += PIECE_WIDTH - padding;
+    
+  padding = ((int)plain.height) % PIECE_HEIGHT;
+  if(padding)
+    plain.height += PIECE_HEIGHT - padding;
+    
+  return plain;
 }
 
 - scramble:(id)sender

@@ -1,3 +1,8 @@
+2011-06-28 Riccardo Mottola <rm@gnu.org>
+
+	* Document.m
+	Fixed crash with no image.
+
 2011-06-10 Riccardo Mottola <rm@gnu.org>
 
 	* BTree.m
