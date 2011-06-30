@@ -21,7 +21,15 @@
 
 #include <Foundation/NSObject.h>
 
-@protocol CountingRefDelegate;
+@class CountingRef;
+
+/**
+ * Delegate for CountingRef's.
+ */
+@protocol CountingRefDelegate
+- (void) freePointerForReference: (CountingRef*)aReference;
+@end
+
 
 /**
  * A ref-counting wrapper for pointers. When the
@@ -45,13 +53,4 @@
 - (BOOL) isNULL;
 
 @end
-
-
-/**
- * Delegate for CountingRef's.
- */
-@protocol CountingRefDelegate
-- (void) freePointerForReference: (CountingRef*)aReference;
-@end
-
 #endif

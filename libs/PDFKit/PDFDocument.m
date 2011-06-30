@@ -188,9 +188,10 @@ static NSMutableDictionary *documentInfo = nil;
 
 - (NSString*)metaData
 {
+   const char* data;
    NSAssert(![pdfDocRef isNULL], @"no document");
 
-   const char* data = PDFDoc_getMetaData([pdfDocRef pointer]);
+   data = PDFDoc_getMetaData([pdfDocRef pointer]);
    return (data != NULL ? 
            [[[NSString alloc] initWithCString: data] autorelease]
            : 

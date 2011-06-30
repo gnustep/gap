@@ -1,3 +1,9 @@
+2011-08-30 Sebastian Reitenbach
+
+	* xpdf/bridge/CountingRef.h
+	* PDFDocument.m
+	Patch for gcc 2.95 build
+
 2006-06-09 Enrico Sersale (enrico at fibernet dot ro)
 
 	* version 0.9.
