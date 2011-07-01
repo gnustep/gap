@@ -1,7 +1,8 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
+ *  Copyright (C) 2006-2011 The Free Software Foundation, Inc.
+ *  Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,20 +70,6 @@ extern NSString* RSSArticleChangedNotification;
  * @return the URL of this article's enclosure object
  */
 - (NSURL*) enclosure;
-
-/**
- * Sets the feed's autoclear flag. This flag determines if
- * the feed's articles are removed before fetching new articles.
- */
--(void) setAutoClear: (BOOL) autoClear;
-
-/**
- * Returns the feed's autoclear flag. This flag determines if
- * the feed's articles are removed before fetching new articles.
- *
- * @return the feed's autoclear flag
- */
--(BOOL) autoClear;
 
 
 /**
