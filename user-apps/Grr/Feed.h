@@ -21,7 +21,6 @@
 */
 
 #import <RSSKit/RSSKit.h>
-#import <RSSKit/RSSFeed+Storage.h>
 
 #import "ArticleGroup.h"
 

@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2011  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -19,6 +19,8 @@
    License along with this library; if not, write to the Free
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA. 
 */
+
+#import <RSSKit/RSSFeed+Storage.h>
 
 #import "Feed.h"
 #import "Article.h"
