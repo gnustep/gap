@@ -1,7 +1,8 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
+ *  Copyright (C) 2006-2011 The Free Software Foundation, Inc.
+ *  Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -79,9 +80,6 @@
 
 -(void) dealloc;
 
-// Autoclear flag
--(void) setAutoClear: (BOOL) autoClear;
--(BOOL) autoClear;
 
 // Accessor methods (conformance to RSSArticle protocol)
 -(NSString*)headline;

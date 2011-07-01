@@ -1,3 +1,9 @@
+2011-07-01 Riccardo Mottola <rm@gnu.org>
+
+	* RSSArticle.h
+	* RSSArticleProtocol.h
+	Remove unnecessary declarations.
+
 2011-03-04 Riccardo Mottola <rm@gnu.org>
 
 	* RSSFeed+Fetching.m:
