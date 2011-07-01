@@ -4,6 +4,12 @@
 	* RSSArticleProtocol.h
 	Remove unnecessary declarations.
 
+	* RSSArticle.h
+	* RSSArticleProtocol.h
+	* RSSFeed.h
+	* RSSFeedProtocol.h
+	Clean up protocol definitions.
+
 2011-03-04 Riccardo Mottola <rm@gnu.org>
 
 	* RSSFeed+Fetching.m:
