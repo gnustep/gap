@@ -26,7 +26,11 @@
 
 -(NSString*) prefPaneName
 {
+#ifdef GNUSTEP
     [self subclassResponsibility: _cmd];
+#else
+  [NSException raise: @"subclassResponsibility" format: @"subclass responsibility %@", NSStringFromSelector(_cmd)];
+#endif
     return nil;
 }
 

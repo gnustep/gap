@@ -27,7 +27,7 @@
 
 - (id<Feed>) feedWithURL: (NSURL*) aURL
 {
-    id<Feed> feed = (id<Feed>) [Feed feedWithURL: aURL];
+    Feed *feed = (Feed *)[Feed feedWithURL: aURL];
     [feed setAutoClear: NO];
     
     return feed;

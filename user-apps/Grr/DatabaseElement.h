@@ -51,7 +51,7 @@ extern NSString* const DatabaseElementFocusRequestNotification;
  * overwrite this class name in each subclass when archiving to the
  * plist dictionary!
  */
--(NSDictionary*) plistDictionary;
+-(NSMutableDictionary*) plistDictionary;
 
 /**
  * Unarchives the element from a plist-conformant NSDictionary object.
