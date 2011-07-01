@@ -62,7 +62,6 @@ static int rounds_done = 0;	// how often a sound was played already
 }
 
 - (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)aBool{
-  NSLog(@"NSSound delegate was called rounds_done: %i, rounds: %i", rounds_done, rounds);
   if (rounds_done < rounds - 1) {
 	rounds_done++;
 	[sound play];
@@ -245,6 +244,7 @@ static float volume_append = 1.0;
 		if (useRing)
 		{
 			NSInvocation *inv;
+			float f;
 			inv = [NSInvocation invocationWithMethodSignature:
 							 [self methodSignatureForSelector:@selector(ring)]];
 			[inv setSelector:@selector(ring)];
@@ -253,7 +253,7 @@ static float volume_append = 1.0;
 
 			volume = 1.0;
 
-			float f = [ringSlider floatValue];
+			f = [ringSlider floatValue];
 			if (f < 0.1) extracount = 1;
 			else if (f < 0.25) extracount = 3;
 			else if (f < 0.5) extracount = 5;
@@ -411,14 +411,14 @@ NSTimer *ctimer;
 {
 	if (cstate == -1)
 	{
-		cstate = 20 * rounds;
-		keepSoundPlaying = YES;
 		NSSound *cuckoo = [[NSSound alloc] initWithContentsOfFile: 
 			[[NSBundle mainBundle] pathForResource:@"cuckoo.wav" ofType:nil] byReference: NO];
+		NSInvocation *inv;
+		cstate = 20 * rounds;
+		keepSoundPlaying = YES;
 		[cuckoo setDelegate:self];
 		
 		[cuckoo play];
-		NSInvocation *inv;
 		inv = [NSInvocation invocationWithMethodSignature:
 						 [self methodSignatureForSelector:@selector(cuckoo)]];
 		[inv setSelector:@selector(cuckoo)];

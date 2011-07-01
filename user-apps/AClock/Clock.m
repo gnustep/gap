@@ -44,6 +44,7 @@ static NSArray *dayWeek;
 
 + (void) initialize
 {
+	int i;
 	numArray[0] = [NSArray arrayWithObjects:@"XII",@"I",@"II",@"III",@"IV",@"V",@"VI",@"VII",@"VIII",@"IX",@"X",@"XI",nil];
 	numArray[1] = [NSArray arrayWithObjects:@"12",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",nil];
 	RETAIN(numArray[0]);
@@ -68,7 +69,6 @@ static NSArray *dayWeek;
 	[defaults registerDefaults:[NSDictionary dictionaryWithObject:@"NO" forKey:@"ShowsArc"]];
 	[self setCellClass: [NSActionCell class]];
 
-	int i;
 	for (i = 0; i < 20; i++)
 	{
 		cuckoo[19 - i] = [[NSImage imageNamed:[NSString stringWithFormat:@"cuckoo%d.png",i]] retain];
@@ -295,6 +295,8 @@ static NSArray *dayWeek;
 	double a1,a2;
 	NSPoint p = [self convertPoint: [event locationInWindow] fromView:nil];
 	unsigned int mf = [event modifierFlags];
+	id target;
+	SEL action;
 	p.x -= center.x;
 	p.y -= center.y;
 
@@ -328,8 +330,8 @@ static NSArray *dayWeek;
 		a1 = handsTime + 10;
 
 	[self setAlarmInterval:a1];
-	id target = [_cell target];
-	SEL action = [_cell action];
+	target = [_cell target];
+	action = [_cell action];
 	[self sendAction: action to: target];
 }
 
@@ -494,12 +496,9 @@ static NSArray *dayWeek;
 		ctxt=GSCurrentContext();
 		if (shadow)
 		{
+			NSColor* black = [NSColor colorWithDeviceRed:0.  green:0. blue:0. alpha:0.2];
 			DPSgsave(ctxt);
 			DPStranslate(ctxt, 1.0, -1.0);
-			NSColor* black = [NSColor colorWithDeviceRed:0.
-												   green:0.
-													blue:0.
-												   alpha:0.2];
 			[black set];
 
 			/* print AM PM */
@@ -507,13 +506,14 @@ static NSArray *dayWeek;
 			{
 				NSMutableAttributedString *str = [[NSMutableAttributedString alloc]
 					initWithString:(handsTime - 86400 * floor(handsTime/86400))/3600 >= 12?@"PM":@"AM"];
+				NSSize strSize;
 				[str addAttribute:NSForegroundColorAttributeName
 							value:black
 							range:NSMakeRange(0,[str length])];
 				[str addAttribute:NSFontAttributeName
 							value:font
 							range:NSMakeRange(0,[str length])];
-				NSSize strSize = [str size];
+				strSize = [str size];
 				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2, center.y - radius * 0.8 + strSize.height/2)];
 				RELEASE(str);
 			}
@@ -555,13 +555,14 @@ static NSArray *dayWeek;
 					{
 						NSMutableAttributedString *str = [[NSMutableAttributedString alloc]
 							initWithString:[numArray[1] objectAtIndex:i]];
+						NSSize size;
 						[str addAttribute:NSForegroundColorAttributeName
 									value:black
 									range:NSMakeRange(0,[str length])];
 						[str addAttribute:NSFontAttributeName
 									value:font
 									range:NSMakeRange(0,[str length])];
-						NSSize size = [str size];
+						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.7 - size.width/2, center.y+y*radius*0.7 - size.height/2)];
 						RELEASE(str);
 
@@ -570,13 +571,14 @@ static NSArray *dayWeek;
 					{
 						NSMutableAttributedString *str = [[NSMutableAttributedString alloc]
 							initWithString:[numArray[0] objectAtIndex:i]];
+						NSSize size;
 						[str addAttribute:NSForegroundColorAttributeName
 									value:black
 									range:NSMakeRange(0,[str length])];
 						[str addAttribute:NSFontAttributeName
 									value:font
 									range:NSMakeRange(0,[str length])];
-						NSSize size = [str size];
+						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.80 - size.width/2.5, center.y+y*radius*0.80 - size.height/2)];
 						RELEASE(str);
 					}
@@ -594,13 +596,14 @@ static NSArray *dayWeek;
 			{
 				NSMutableAttributedString *str = [[NSMutableAttributedString alloc]
 					initWithString:(handsTime - 86400 * floor(handsTime/86400))/3600 >= 12?@"PM":@"AM"];
+				NSSize strSize;
 				[str addAttribute:NSForegroundColorAttributeName
 							value:marksColor
 							range:NSMakeRange(0,[str length])];
 				[str addAttribute:NSFontAttributeName
 							value:font
 							range:NSMakeRange(0,[str length])];
-				NSSize strSize = [str size];
+				strSize = [str size];
 				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2, center.y - radius * 0.8 + strSize.height/2)];
 				RELEASE(str);
 			}
@@ -653,13 +656,14 @@ static NSArray *dayWeek;
 					{
 						NSMutableAttributedString *str = [[NSMutableAttributedString alloc]
 							initWithString:[numArray[1] objectAtIndex:i]];
+						NSSize size;
 						[str addAttribute:NSForegroundColorAttributeName
 									value:tmpC
 									range:NSMakeRange(0,[str length])];
 						[str addAttribute:NSFontAttributeName
 									value:font
 									range:NSMakeRange(0,[str length])];
-						NSSize size = [str size];
+						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.7 - size.width/2, center.y+y*radius*0.7 - size.height/2)];
 						RELEASE(str);
 
@@ -668,13 +672,14 @@ static NSArray *dayWeek;
 					{
 						NSMutableAttributedString *str = [[NSMutableAttributedString alloc]
 							initWithString:[numArray[0] objectAtIndex:i]];
+						NSSize size;
 						[str addAttribute:NSForegroundColorAttributeName
 									value:tmpC
 									range:NSMakeRange(0,[str length])];
 						[str addAttribute:NSFontAttributeName
 									value:font
 									range:NSMakeRange(0,[str length])];
-						NSSize size = [str size];
+						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.80 - size.width/2.5, center.y+y*radius*0.80 - size.height/2)];
 						RELEASE(str);
 					}
