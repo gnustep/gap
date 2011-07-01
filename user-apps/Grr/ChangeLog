@@ -8,7 +8,25 @@
 	* PreferencesComponent.m
 
 	Adapt to RSSKit protocol changes.
-	
+
+	* Resources/Icons/AddCategory.tiff
+	* Resources/Icons/AddFeed.tiff
+	* Resources/Icons/ArticleLink.tiff
+	* Resources/Icons/Category.tiff
+	* Resources/Icons/DeleteCategory.tiff
+	* Resources/Icons/DeleteFeed.tiff
+	* Resources/Icons/Feed.tiff
+	* Resources/Icons/FeedFetching.tiff
+	* Resources/Icons/FetchFeed.tiff
+	* Resources/Icons/FetchFeeds.tiff
+	* Resources/Icons/Star.tiff
+	* Resources/Icons/WebProxy.tiff
+	* Resources/UI/blue-badge-left.tiff
+	* Resources/UI/blue-badge-mid.tiff
+	* Resources/UI/blue-badge-right.tiff
+
+	Convert to 72 dpi.
+
 2010-09-28 Riccardo Mottola
 
 	* AppController.m
