@@ -1,7 +1,8 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
+ *  Copyright (C) 2010-2011 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -122,10 +123,12 @@ enum RSSFeedError
 - (enum RSSFeedError) lastError;
 
 /**
- * Returns a NSDictionary object that is property-list compatible and
- * contains all information required to rebuild this article object.
+ * @return YES, if the automatic clearing of the article list is
+ *         enabled for this feed. NO otherwise.
  */
-- (NSMutableDictionary*) plistDictionary;
+- (BOOL) autoClear;
+
+
 @end
 
 @protocol RSSMutableFeed <RSSFeed>
@@ -141,6 +144,17 @@ enum RSSFeedError
  * Sets the feed name
  */
 - (void) setFeedName: (NSString*) aFeedName;
+
+
+/**
+ * Lets you decide if the feed should be cleared before new
+ * articles are downloaded.
+ *
+ * @param autoClear YES, if the feed should clear its article list
+ *                  before fetching new articles. NO otherwise
+ */
+- (void) setAutoClear: (BOOL) autoClear;
+
 
 @end
 

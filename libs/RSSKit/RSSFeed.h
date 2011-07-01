@@ -1,7 +1,8 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
+ *  Copyright (C) 2010-2011 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -190,21 +191,6 @@ enum RSSFeedStatus
 // Accessor and Mutator for the automatic clearing
 // --------------------------------------------------------------------
 
-/**
- * Lets you decide if the feed should be cleared before new
- * articles are downloaded.
- *
- * @param autoClear YES, if the feed should clear its article list
- *                  before fetching new articles. NO otherwise
- */
-- (void) setAutoClear: (BOOL) autoClear;
-
-
-/**
- * @return YES, if the automatic clearing of the article list is
- *         enabled for this feed. NO otherwise.
- */
-- (BOOL) autoClear;
 
 
 /**

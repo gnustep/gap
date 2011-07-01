@@ -1,8 +1,8 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006-2011 The Free Software Foundation, Inc.
- *  Guenther Noack
+ *  Copyright (C) 2010-2011 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -89,12 +89,6 @@ extern NSString* RSSArticleChangedNotification;
  * @return The source feed of this article
  */
 - (id<RSSFeed>) feed;
-
-/**
- * Returns a NSDictionary that represents the article and that can be used
- * to generate the article again. The dictionary must be property list compatible.
- */
-- (NSDictionary*) plistDictionary;
 
 /**
  * Saves the article to the URL that's calculated by the RSSFactory.
