@@ -143,23 +143,6 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		85DEB49610B7577D007D810A /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		85DEB49710B7577D007D810A /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXContainerItemProxy section */
 		850F6514108BCED50035D594 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -297,7 +280,7 @@
 		857AA8B61082AC6800829DD6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Components/ArticleView/English.lproj/ArticleTextViewPlugin.nib; sourceTree = "<group>"; };
 		857AA8BB1082AC8700829DD6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Components/DatabaseTreeView/English.lproj/DatabaseTreeViewController.nib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Grr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Grr.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Grr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -707,12 +690,6 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 14A08F39108D1DD100455799 /* Build configuration list for PBXProject "Grr" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				85DEB49610B7577D007D810A /* Development */,
-				85DEB49710B7577D007D810A /* Deployment */,
-			);
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Grr */;
 			projectDirPath = "";
