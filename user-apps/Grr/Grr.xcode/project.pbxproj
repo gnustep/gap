@@ -130,6 +130,7 @@
 				85792FDE108E75BF001B900E,
 				85793006108E7D6E001B900E,
 				8579300D108E7E0A001B900E,
+				8574BB4213C08C19004DAFF4,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -158,9 +159,9 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA;
 			projectDirPath = "";
 			targets = (
+				8D1107260486CEB800E47090,
 				850F647F108BC0650035D594,
 				850F6426108BB9A80035D594,
-				8D1107260486CEB800E47090,
 				85A5FDCC108D229D00AC6AA4,
 				85792F32108E6CC0001B900E,
 				85792FB0108E712D001B900E,
@@ -169,6 +170,7 @@
 				85792FDD108E75BF001B900E,
 				85793005108E7D6E001B900E,
 				8579300C108E7E0A001B900E,
+				8574BB4113C08C19004DAFF4,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -179,6 +181,7 @@
 				29B97317FDCFA39411CA2CEA,
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
+				8574BB4313C08C19004DAFF4,
 			);
 			isa = PBXGroup;
 			name = Grr;
@@ -383,10 +386,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				850F642B108BBA480035D594,
-				850F64D7108BCD080035D594,
-				850F64D8108BCD0E0035D594,
-				850F64DB108BCD3A0035D594,
-				850F64E4108BCD900035D594,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,7 +393,8 @@
 		850F6425108BB9A80035D594 = {
 			buildActionMask = 2147483647;
 			files = (
-				85792F6E108E6F6D001B900E,
+				8574BB5513C09483004DAFF4,
+				85DB020810D82689009FC7C9,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +428,7 @@
 				WRAPPER_EXTENSION = grrdb;
 			};
 			dependencies = (
+				8574BB5713C09495004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = TreeDatabase;
@@ -490,8 +491,6 @@
 			files = (
 				850F6483108BC0A20035D594,
 				850F6484108BC0A20035D594,
-				850F6512108BCE860035D594,
-				850F652B108BCF470035D594,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +498,8 @@
 		850F647E108BC0650035D594 = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB8613C0973D004DAFF4,
+				8574BB5213C0943A004DAFF4,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +532,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB5413C09472004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = Searching;
@@ -587,30 +589,6 @@
 			settings = {
 			};
 		};
-		850F64D7108BCD080035D594 = {
-			fileRef = 85687D44107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		850F64D8108BCD0E0035D594 = {
-			fileRef = 85687D54107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		850F64DB108BCD3A0035D594 = {
-			fileRef = 85687D3E107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		850F64E4108BCD900035D594 = {
-			fileRef = 85687D42107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		850F64E6108BCDD90035D594 = {
 			fileRef = 850F6427108BB9A80035D594;
 			isa = PBXBuildFile;
@@ -619,12 +597,6 @@
 		};
 		850F64F2108BCDDD0035D594 = {
 			fileRef = 850F6480108BC0650035D594;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		850F6512108BCE860035D594 = {
-			fileRef = 85687D54107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -653,12 +625,6 @@
 			target = 850F647F108BC0650035D594;
 			targetProxy = 850F6516108BCEDB0035D594;
 		};
-		850F652B108BCF470035D594 = {
-			fileRef = 85687D40107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		851B402D109E14920036C28D = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.tiff;
@@ -669,6 +635,19 @@
 		};
 		851B402E109E14920036C28D = {
 			fileRef = 851B402D109E14920036C28D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8526ADBF10B750F100889962 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = "Grr-Icon.icns";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		8526ADC010B750F100889962 = {
+			fileRef = 8526ADBF10B750F100889962;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1001,12 +980,6 @@
 			settings = {
 			};
 		};
-		85687D5F107BF7D000B55A9A = {
-			fileRef = 85687D38107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D60107BF7D000B55A9A = {
 			fileRef = 85687D39107BF7D000B55A9A;
 			isa = PBXBuildFile;
@@ -1037,20 +1010,8 @@
 			settings = {
 			};
 		};
-		85687D65107BF7D000B55A9A = {
-			fileRef = 85687D3E107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D66107BF7D000B55A9A = {
 			fileRef = 85687D3F107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85687D67107BF7D000B55A9A = {
-			fileRef = 85687D40107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1061,32 +1022,14 @@
 			settings = {
 			};
 		};
-		85687D69107BF7D000B55A9A = {
-			fileRef = 85687D42107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D6A107BF7D000B55A9A = {
 			fileRef = 85687D43107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		85687D6B107BF7D000B55A9A = {
-			fileRef = 85687D44107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D6C107BF7D000B55A9A = {
 			fileRef = 85687D45107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85687D6D107BF7D000B55A9A = {
-			fileRef = 85687D46107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1109,20 +1052,8 @@
 			settings = {
 			};
 		};
-		85687D71107BF7D000B55A9A = {
-			fileRef = 85687D4A107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D72107BF7D000B55A9A = {
 			fileRef = 85687D4B107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85687D73107BF7D000B55A9A = {
-			fileRef = 85687D4C107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1157,32 +1088,14 @@
 			settings = {
 			};
 		};
-		85687D79107BF7D000B55A9A = {
-			fileRef = 85687D52107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D7A107BF7D000B55A9A = {
 			fileRef = 85687D53107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		85687D7B107BF7D000B55A9A = {
-			fileRef = 85687D54107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85687D7C107BF7D000B55A9A = {
 			fileRef = 85687D55107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85687D7D107BF7D000B55A9A = {
-			fileRef = 85687D56107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1830,6 +1743,7 @@
 		};
 		85687DF4107BFBEA00B55A9A = {
 			children = (
+				8526ADBF10B750F100889962,
 				85687DF5107BFBEA00B55A9A,
 				85687DF6107BFBEA00B55A9A,
 				85687DF7107BFBEA00B55A9A,
@@ -2324,6 +2238,412 @@
 			settings = {
 			};
 		};
+		8574BB3D13C08C19004DAFF4 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8574BB3E13C08C19004DAFF4 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8574BB3F13C08C19004DAFF4 = {
+			buildActionMask = 2147483647;
+			files = (
+				8574BB4413C08C99004DAFF4,
+				8574BB4513C08D92004DAFF4,
+				8574BB4613C08DA4004DAFF4,
+				8574BB4713C08DAC004DAFF4,
+				8574BB4813C08DBF004DAFF4,
+				8574BB4913C08DC8004DAFF4,
+				8574BB4A13C08DDB004DAFF4,
+				8574BB4B13C08DE8004DAFF4,
+				8574BB4C13C08DF8004DAFF4,
+				8574BB4D13C08E01004DAFF4,
+				8574BB4E13C08E2A004DAFF4,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8574BB4013C08C19004DAFF4 = {
+			buildActionMask = 2147483647;
+			files = (
+				8574BB8513C096B0004DAFF4,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8574BB4113C08C19004DAFF4 = {
+			buildPhases = (
+				8574BB3D13C08C19004DAFF4,
+				8574BB3E13C08C19004DAFF4,
+				8574BB3F13C08C19004DAFF4,
+				8574BB4013C08C19004DAFF4,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_CPU = G3;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GrrFramework-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GrrFramework;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = GrrFramework;
+			productName = GrrFramework;
+			productReference = 8574BB4213C08C19004DAFF4;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>GrrFramework</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.GrrFramework</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>FMWK</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.framework";
+		};
+		8574BB4213C08C19004DAFF4 = {
+			explicitFileType = wrapper.framework;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = GrrFramework.framework;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8574BB4313C08C19004DAFF4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "GrrFramework-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/Grr/GrrFramework-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		8574BB4413C08C99004DAFF4 = {
+			fileRef = 85687D4C107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4513C08D92004DAFF4 = {
+			fileRef = 85687D54107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4613C08DA4004DAFF4 = {
+			fileRef = 85687D44107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4713C08DAC004DAFF4 = {
+			fileRef = 85687D56107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4813C08DBF004DAFF4 = {
+			fileRef = 85687D38107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4913C08DC8004DAFF4 = {
+			fileRef = 85687D4A107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4A13C08DDB004DAFF4 = {
+			fileRef = 85687D46107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4B13C08DE8004DAFF4 = {
+			fileRef = 85687D52107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4C13C08DF8004DAFF4 = {
+			fileRef = 85687D3E107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4D13C08E01004DAFF4 = {
+			fileRef = 85687D42107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB4E13C08E2A004DAFF4 = {
+			fileRef = 85687D40107BF7D000B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB5213C0943A004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB5313C09472004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB5413C09472004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB5313C09472004DAFF4;
+		};
+		8574BB5513C09483004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB5613C09495004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB5713C09495004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB5613C09495004DAFF4;
+		};
+		8574BB5813C094AB004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB5913C094B7004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB5A13C094B7004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB5913C094B7004DAFF4;
+		};
+		8574BB5B13C09507004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB7113C0951B004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB7213C0951B004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB7113C0951B004DAFF4;
+		};
+		8574BB7313C0952F004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB7413C09546004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB7513C09546004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB7413C09546004DAFF4;
+		};
+		8574BB7613C09563004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB7713C09573004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB7813C09573004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB7713C09573004DAFF4;
+		};
+		8574BB7913C0957D004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB7A13C09589004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB7B13C09589004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB7A13C09589004DAFF4;
+		};
+		8574BB7C13C095B2004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB7D13C095CC004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB7E13C095CC004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB7D13C095CC004DAFF4;
+		};
+		8574BB7F13C095D6004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8013C095EC004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB8113C095EC004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB8013C095EC004DAFF4;
+		};
+		8574BB8213C095F7004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8313C0960D004DAFF4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8574BB4113C08C19004DAFF4;
+			remoteInfo = GrrFramework;
+		};
+		8574BB8413C0960D004DAFF4 = {
+			isa = PBXTargetDependency;
+			target = 8574BB4113C08C19004DAFF4;
+			targetProxy = 8574BB8313C0960D004DAFF4;
+		};
+		8574BB8513C096B0004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8613C0973D004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8713C097CB004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8813C09857004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8913C0989B004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8D13C09909004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB8E13C09918004DAFF4 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8574BB9113C09A1A004DAFF4 = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		85792F2F108E6CC0001B900E = {
 			buildActionMask = 2147483647;
 			files = (
@@ -2336,8 +2656,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				85793081108E8594001B900E,
-				8579308C108E85E2001B900E,
-				85793092108E8617001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2345,6 +2663,7 @@
 		85792F31108E6CC0001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB5B13C09507004DAFF4,
 				8579309C108E8686001B900E,
 			);
 			isa = PBXFrameworksBuildPhase;
@@ -2377,6 +2696,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB7213C0951B004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = ArticleTable;
@@ -2433,12 +2753,6 @@
 			target = 85792F32108E6CC0001B900E;
 			targetProxy = 85792F37108E6D07001B900E;
 		};
-		85792F6E108E6F6D001B900E = {
-			fileRef = 85687D1A107BF79C00B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85792FAD108E712D001B900E = {
 			buildActionMask = 2147483647;
 			files = (
@@ -2451,7 +2765,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				85792FD9108E750F001B900E,
-				8579301A108E80AF001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2459,6 +2772,8 @@
 		85792FAF108E712D001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB8813C09857004DAFF4,
+				8574BB7313C0952F004DAFF4,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2489,6 +2804,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB7513C09546004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = SubscriptionPanel;
@@ -2557,8 +2873,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				85792FD8108E74CE001B900E,
-				8579301C108E814B001B900E,
-				8579301D108E81AC001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2566,6 +2880,8 @@
 		85792FB9108E71F3001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB8913C0989B004DAFF4,
+				8574BB7613C09563004DAFF4,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2597,6 +2913,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB7813C09573004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = Proxy;
@@ -2685,8 +3002,6 @@
 			files = (
 				85792FD6108E74BA001B900E,
 				85792FD7108E74BC001B900E,
-				85793020108E823F001B900E,
-				85793021108E8261001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2694,6 +3009,7 @@
 		85792FCF108E7347001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB7913C0957D004DAFF4,
 				85792FE7108E7819001B900E,
 			);
 			isa = PBXFrameworksBuildPhase;
@@ -2726,6 +3042,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB7B13C09589004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = Fonts;
@@ -2824,13 +3141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				85792FE1108E765D001B900E,
-				85792FE2108E776A001B900E,
-				85792FE3108E77EA001B900E,
-				85792FEB108E784B001B900E,
-				85792FF2108E788D001B900E,
-				85792FF3108E790A001B900E,
-				85792FF6108E7A81001B900E,
-				85792FFB108E7CAE001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2838,6 +3148,7 @@
 		85792FDC108E75BF001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB7C13C095B2004DAFF4,
 				85792FF9108E7BFE001B900E,
 			);
 			isa = PBXFrameworksBuildPhase;
@@ -2870,6 +3181,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB7E13C095CC004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = DatabaseTreeView;
@@ -2926,56 +3238,14 @@
 			settings = {
 			};
 		};
-		85792FE2108E776A001B900E = {
-			fileRef = 85687D54107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85792FE3108E77EA001B900E = {
-			fileRef = 85687D40107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85792FE7108E7819001B900E = {
 			fileRef = 85687D1A107BF79C00B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		85792FEB108E784B001B900E = {
-			fileRef = 85687D52107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85792FF2108E788D001B900E = {
-			fileRef = 85687D38107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85792FF3108E790A001B900E = {
-			fileRef = 85687D42107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85792FF6108E7A81001B900E = {
-			fileRef = 85687D44107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85792FF9108E7BFE001B900E = {
 			fileRef = 85687D1A107BF79C00B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85792FFB108E7CAE001B900E = {
-			fileRef = 85687D4C107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -2991,8 +3261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				85793008108E7DE4001B900E,
-				85793023108E8313001B900E,
-				85793024108E8385001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3000,6 +3268,8 @@
 		85793004108E7D6E001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB8D13C09909004DAFF4,
+				8574BB7F13C095D6004DAFF4,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3031,6 +3301,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB8113C095EC004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = DatabaseOperations;
@@ -3092,7 +3363,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8579300F108E7E43001B900E,
-				85793010108E7EE0001B900E,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3100,6 +3370,8 @@
 		8579300B108E7E0A001B900E = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB8E13C09918004DAFF4,
+				8574BB8213C095F7004DAFF4,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3126,6 +3398,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB8413C0960D004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = ArticleOperations;
@@ -3176,12 +3449,6 @@
 			settings = {
 			};
 		};
-		85793010108E7EE0001B900E = {
-			fileRef = 85687D54107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85793014108E7F2B001B900E = {
 			containerPortal = 29B97313FDCFA39411CA2CEA;
 			isa = PBXContainerItemProxy;
@@ -3218,62 +3485,8 @@
 			target = 8579300C108E7E0A001B900E;
 			targetProxy = 85793018108E7F36001B900E;
 		};
-		8579301A108E80AF001B900E = {
-			fileRef = 85687D42107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8579301C108E814B001B900E = {
-			fileRef = 85687D56107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8579301D108E81AC001B900E = {
-			fileRef = 85687D40107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85793020108E823F001B900E = {
-			fileRef = 85687D56107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85793021108E8261001B900E = {
-			fileRef = 85687D40107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85793023108E8313001B900E = {
-			fileRef = 85687D54107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85793024108E8385001B900E = {
-			fileRef = 85687D42107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85793081108E8594001B900E = {
 			fileRef = 85687D8B107BF85200B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8579308C108E85E2001B900E = {
-			fileRef = 85687D40107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85793092108E8617001B900E = {
-			fileRef = 85687D54107BF7D000B55A9A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -3418,9 +3631,6 @@
 			files = (
 				85A5FDD1108D22D100AC6AA4,
 				85A5FDD2108D22D600AC6AA4,
-				85A5FDDD108D23D900AC6AA4,
-				85A5FDE6108D252700AC6AA4,
-				85A5FDF1108D259700AC6AA4,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3428,6 +3638,8 @@
 		85A5FDCB108D229D00AC6AA4 = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB8713C097CB004DAFF4,
+				8574BB5813C094AB004DAFF4,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3459,6 +3671,7 @@
 				WRAPPER_EXTENSION = grrc;
 			};
 			dependencies = (
+				8574BB5A13C094B7004DAFF4,
 			);
 			isa = PBXNativeTarget;
 			name = ArticleView;
@@ -3521,24 +3734,6 @@
 			settings = {
 			};
 		};
-		85A5FDDD108D23D900AC6AA4 = {
-			fileRef = 85687D54107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85A5FDE6108D252700AC6AA4 = {
-			fileRef = 85687D40107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		85A5FDF1108D259700AC6AA4 = {
-			fileRef = 85687D46107BF7D000B55A9A;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		85A5FDF5108D25FD00AC6AA4 = {
 			containerPortal = 29B97313FDCFA39411CA2CEA;
 			isa = PBXContainerItemProxy;
@@ -3571,6 +3766,12 @@
 			settings = {
 			};
 		};
+		85DB020810D82689009FC7C9 = {
+			fileRef = 85687D1A107BF79C00B55A9A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //850
 //851
 //852
@@ -3595,6 +3796,7 @@
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Grr_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
@@ -3710,6 +3912,7 @@
 				850F63ED108A33320035D594,
 				850F63FC108A37E50035D594,
 				85C0D2FD1093BB810095C185,
+				8526ADC010B750F100889962,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3724,22 +3927,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				85687D5D107BF7D000B55A9A,
-				85687D5F107BF7D000B55A9A,
 				85687D61107BF7D000B55A9A,
 				85687D63107BF7D000B55A9A,
-				85687D65107BF7D000B55A9A,
-				85687D67107BF7D000B55A9A,
-				85687D69107BF7D000B55A9A,
-				85687D6B107BF7D000B55A9A,
-				85687D6D107BF7D000B55A9A,
 				85687D6F107BF7D000B55A9A,
-				85687D71107BF7D000B55A9A,
-				85687D73107BF7D000B55A9A,
 				85687D75107BF7D000B55A9A,
 				85687D77107BF7D000B55A9A,
-				85687D79107BF7D000B55A9A,
-				85687D7B107BF7D000B55A9A,
-				85687D7D107BF7D000B55A9A,
 				85687D7F107BF7D000B55A9A,
 				85687D88107BF83C00B55A9A,
 				85687D8D107BF85200B55A9A,
@@ -3762,6 +3954,7 @@
 		8D11072E0486CEB800E47090 = {
 			buildActionMask = 2147483647;
 			files = (
+				8574BB9113C09A1A004DAFF4,
 				8D11072F0486CEB800E47090,
 				85687D1B107BF79C00B55A9A,
 			);
