@@ -1,3 +1,9 @@
+2011-07-03 Fred Kiefer
+
+	* PipeType.h
+	* PipeType.m
+	Simplify allocation.
+
 2011-07-01 Riccardo Mottola <rm@gnu.org>
 
 	* ArticleFactory.m
