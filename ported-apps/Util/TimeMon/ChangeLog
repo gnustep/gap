@@ -1,3 +1,8 @@
+2011-07-03 Riccardo Mottola <rm@gnu.org>
+
+	* English.lproj/TimeMon.gorm:
+	Fixed look of the title and removed editable property from the icon.
+	
 2008-04-13 Riccardo Mottola <rmottola@users.sf.net>
 
 	* loadave.c: added OpenBSD port
@@ -41,6 +46,7 @@
 	that the code is more portable to Mac OS X.
 
 2005-11-15 12:19 Riccardo Mottola <rmottola@users.sf.net>
+	
 	* loadave.c: changed import to include, since it is a pure C file
 
 2005-08-01 06:53 Gregory John Casamento <greg_casamento@yahoo.com>
