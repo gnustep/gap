@@ -30,9 +30,6 @@
     NSString* description;
 }
 
-+ (id) pipeTypeWithDescription: (NSString*) aDescription;
-- (id) initWithDescription: (NSString*) aDescription;
-
 + (id<PipeType>) articleType;
 + (id<PipeType>) feedType;
 + (id<PipeType>) databaseElementType;

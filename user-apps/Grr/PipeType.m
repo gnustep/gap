@@ -29,11 +29,6 @@
 
 @implementation PipeType
 
-+ (id) pipeTypeWithDescription: (NSString*) aDescription
-{
-    return [[[self alloc] initWithDescription: aDescription] autorelease];
-}
-
 - (id) initWithDescription: (NSString*) aDescription
 {
     if ((self = [super init]) != nil) {
@@ -48,7 +43,7 @@
     static id<PipeType> articleType = nil;
     
     if (articleType == nil) {
-        ASSIGN(articleType, [self pipeTypeWithDescription: @"article pipe type"]);
+        articleType = [[self alloc] initWithDescription: @"article pipe type"];
     }
     
     return articleType;
@@ -56,13 +51,13 @@
 
 + (id<PipeType>) feedType
 {
-    static id<PipeType> articleType = nil;
+    static id<PipeType> feedType = nil;
     
-    if (articleType == nil) {
-        ASSIGN(articleType, [self pipeTypeWithDescription: @"feed pipe type"]);
+    if (feedType == nil) {
+        feedType = [[self alloc] initWithDescription: @"feed pipe type"];
     }
     
-    return articleType;
+    return feedType;
 }
 
 + (id<PipeType>) databaseElementType
@@ -70,7 +65,7 @@
     static id<PipeType> databaseElementType = nil;
     
     if (databaseElementType == nil) {
-        ASSIGN(databaseElementType, [self pipeTypeWithDescription: @"database element pipe type"]);
+        databaseElementType = [[self alloc] initWithDescription: @"database element pipe type"];
     }
     
     return databaseElementType;
