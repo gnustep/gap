@@ -1,3 +1,10 @@
+2011-07-03 Riccardo Mottola <rm@gnu.org>
+
+	* English.lproj
+	* Grr.xcode
+	Updated project to build on Panther by using a GrrFramework. Compiling and linking those
+	Objects multiple times confused the Panther linker and runtime with multiple copies.
+
 2011-07-03 Fred Kiefer
 
 	* PipeType.h
