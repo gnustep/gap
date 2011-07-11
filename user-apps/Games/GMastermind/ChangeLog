@@ -1,0 +1,19 @@
+
+2005-02-04 Marko Riedel <mriedel@neuearbeit.de>
+
+	* implemented 3D look
+
+2003-07-05 Chea Laurent <laurent@krystale.net>
+
+	* Added French translation
+
+2003-07-05  Fabien Vallon  <fabien@tuxfamily.org>
+
+	* Switch from #import to #include 
+	* Controller.m : save the Window's & palettes's frame postion
+	* Controller.m, main.m, GNUmakefile : Add localization support
+	* Controller.m :  use tag instead of title in validateMenu
+	* Add Licence in files
+	* New files : ChangeLog, README, gpl.txt
+	
+
