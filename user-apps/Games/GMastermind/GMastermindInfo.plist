@@ -1,0 +1,11 @@
+{
+  ApplicationName = "GMastermind";
+  ApplicationDescription = "GNUstep mastermind game";
+  ApplicationRelease = "Mastermind 0.5";
+  FullVersionID = "0.5, February 2005";
+  Authors = ("Marko Riedel <mriedel@neuearbeit.de>");
+  Copyright = "Copyright (C) 2002 Free Software Foundation, Inc.";
+  CopyrightDescription = "Released under the GNU General Public License 2.0";
+  NSIcon = "GMastermind2.tiff";
+}
+

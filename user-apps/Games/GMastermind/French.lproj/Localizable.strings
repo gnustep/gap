@@ -1,0 +1,72 @@
+/***
+French.lproj/Localizable.strings
+updated by make_strings 2003-07-05 14:17:43 +0000
+add comments above this one
+***/
+
+
+/*** Keys found in multiple places ***/
+
+/* File: Controller.m:298 */
+/* Flag: untranslated */
+/* File: Controller.m:323 */
+/* Flag: untranslated */
+/* File: Controller.m:328 */
+/* Flag: untranslated */
+"OK" = "OK";
+
+
+/*** Unmatched/untranslated keys ***/
+
+/* File: main.m:73 */
+/* Flag: untranslated */
+"Game" = "Jeu";
+
+"Mastermind (with replacement)" = "Mastermind (avec replacement)";
+"Mastermind (without replacement)" = "Mastermind (sans replacement)";
+
+/*** Strings from Controller.m ***/
+/* File: Controller.m:297 */
+"Alert" = "Alerte";
+/* File: Controller.m:297 */
+"All four colors must be set." = "Les 4 couleurs doivent être positionnées.";
+"No double colors, please." = "Les 4 couleurs doivent être differentes.";
+/* File: Controller.m:72 */
+"Answer" = "Réponse";
+/* File: Controller.m:107 */
+"Board" = "Tableau";
+/* File: Controller.m:322 */
+"Congratulations!" = "Félicitations!";
+/* File: Controller.m:327 */
+"Game over." = "Game over.";
+/* File: Controller.m:131 */
+"Mastermind" = "Mastermind";
+/* File: Controller.m:198 */
+"Palette" = "Palette";
+/* File: Controller.m:327 */
+"You lose." = "Vous avez perdu.";
+/* File: Controller.m:322 */
+"You win." = "Vous avez gagné.";
+
+
+/*** Strings from main.m ***/
+/* File: main.m:85 */
+"Commit" = "Essayer";
+/* File: main.m:68 */
+"Help..." = "Aide...";
+/* File: main.m:99 */
+"Hide" = "Masquer";
+/* File: main.m:57 */
+"Info" = "Informations";
+/* File: main.m:62 */
+"Info Panel..." = "Panneau d'informations...";
+/* File: main.m:92 */
+"Move" = "Déplacer";
+/* File: main.m:79 */
+"New game" = "Nouveau jeu";
+"With replacement" = "Avec replacement";
+"Without replacement" = "Sans replacement";
+/* File: main.m:65 */
+"Preferences..." = "Préférences...";
+/* File: main.m:104 */
+"Quit" = "Quitter";
