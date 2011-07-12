@@ -41,9 +41,9 @@
 
 void shadow(float x, float y, float r)
 {
+    int angle;
     PSsetlinewidth(2.0);
 
-    int angle;
     for(angle=132; angle<492; angle+=6){
 	float gray =
 	    (angle < 312 ? 0.9-(float)(angle-132)/180.0*0.8 :
@@ -56,9 +56,9 @@ void shadow(float x, float y, float r)
 
 void shadow2(float x, float y, float r)
 {
+    int angle;
     PSsetlinewidth(2.0);
 
-    int angle;
     for(angle=312; angle<672; angle+=6){
 	float gray =
 	    (angle < 492 ? 0.9-(float)(angle-312)/180.0*0.8 :
@@ -112,9 +112,9 @@ void tile(NSRect rect)
 
 - (void)drawRect:(NSRect)aRect
 {
+    int index;
     tile([self bounds]);
     
-    int index;
     for(index=0; index<4; index++){
         float 
             x = PEGDIMENSION/4+(index%2)*PEGDIMENSION/2,
@@ -165,7 +165,6 @@ void tile(NSRect rect)
 - setColor:(NSColor *)aColor
 {
     float thecomps[4];
-    int val;
 
     if(color!=nil){
         [color release];
@@ -305,13 +304,14 @@ static NSImage *dragImages[8] = {
                 ccomps[3] = 1.0;
             }
             else if(d<rsq1){
+		float gray;
 		float angle = (atan2(dy, -dx)+M_PI)/M_PI*180.0;
 		if(angle<132.0){
 		    angle += 360.0;
 		}
 		angle -= (float)(((int)angle)%6);
 
-		float gray =
+		gray =
 		    (angle < 312.0 ? 0.9-(angle-132.0)/180.0*0.8 :
 		     0.1+(float)(angle-312.0)/180.0*0.8);
 

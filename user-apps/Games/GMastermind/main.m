@@ -36,8 +36,8 @@ int main(int argc, const char **argv, char** env)
    NSAutoreleasePool *pool;
    NSApplication *app;
    NSMenu *mainMenu, *menu, *newGameMenu;
-   NSMenuItem *menuItem, *subMenuItem, 
-       *gameMenuItem, *commitMenuItem, *moveMenuItem;
+   NSMenuItem *menuItem, *gameMenuItem,
+		*commitMenuItem, *moveMenuItem;
    Controller *controller;
 
    pool = [NSAutoreleasePool new];
