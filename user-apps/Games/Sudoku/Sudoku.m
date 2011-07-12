@@ -24,6 +24,11 @@
 #import "Sudoku.h"
 #import "DigitSource.h"
 
+#ifdef __MINGW__
+#define srand48 srand
+#define lrand48 rand
+#endif
+
 @implementation Sudoku
 
 - (int)computescore:(fieldptr)fp
