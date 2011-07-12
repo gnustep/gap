@@ -3,6 +3,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 # The application to be compiled
 APP_NAME = Jigsaw
+PACKAGE_NAME = Jigsaw
+VERSION = 0.8
 
 # The Objective-C source files to be compiled
 
