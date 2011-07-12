@@ -3,6 +3,12 @@
 
 #import "Controller.h"
 
+#ifdef __MINGW__
+#define srand48 srand
+#define lrand48 rand
+#endif
+
+
 @implementation Controller
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification;

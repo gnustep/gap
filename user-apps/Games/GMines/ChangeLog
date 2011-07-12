@@ -1,4 +1,9 @@
-2011-06-02 Riccardo Mottola <rm@gnu.org>
+2011-07-12 Riccardo Mottola <rm@gnu.org>
+
+	* Controller.m
+	Windows compatibility
+
+2011-07-02 Riccardo Mottola <rm@gnu.org>
 
 	* main.m
 	removed warnings and memory leaks
