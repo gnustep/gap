@@ -19,7 +19,9 @@ ADDITIONAL_CPPFLAGS += -Wall
 endif
 
 
+VERSION = 1.0
 APP_NAME = Grr
+PACKAGE_NAME = Grr
 
 Grr_OBJC_FILES = \
 AppController.m \
