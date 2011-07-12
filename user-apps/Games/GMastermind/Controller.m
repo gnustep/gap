@@ -30,6 +30,7 @@
 */
 
 #include <time.h>
+#include <AppKit/NSPanel.h>
 #include "Controller.h"
 
 #ifdef __MINGW__
@@ -60,7 +61,7 @@
     int m = NSTitledWindowMask;
     int row, col;
     NSBox *boardBox, *solBox;
-    NSRect contentRect;
+    NSRect contentRect, rectForTitle;
 
     view  = [[NSView alloc] 
                 initWithFrame:
@@ -116,7 +117,7 @@
     [boardBox setBorderType:NSGrooveBorder];
     [boardBox sizeToFit];
 
-    NSRect rectForTitle = [[boardBox titleFont] boundingRectForFont];
+    rectForTitle = [[boardBox titleFont] boundingRectForFont];
 
     contentRect.origin = NSMakePoint(0, 0);
     contentRect.size =
