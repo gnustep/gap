@@ -4,6 +4,8 @@
 	window controller class
 
 	Copyright (C) 2003 Marko Riedel
+	Copyright (C) 2011 GNUstep Application Team
+                           Riccardo Mottola
 
 	Author: Marko Riedel <mriedel@bogus.example.com>
 	Date:	5 July 2003
@@ -29,6 +31,12 @@
 
 #include <time.h>
 #include "Controller.h"
+
+#ifdef __MINGW__
+#define srand48 srand
+#define lrand48 rand
+#endif
+
 
 
 @implementation Controller

@@ -1,3 +1,7 @@
+2011-07-12 Riccardo Mottola <rm@gnu.org>
+
+	* Controller.m:
+	Windows portability
 
 2005-02-04 Marko Riedel <mriedel@neuearbeit.de>
 

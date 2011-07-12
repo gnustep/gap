@@ -2,7 +2,10 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 # The application to be compiled
+VERSION = 0.6
+PACKAGE_NAME = GMastermind
 APP_NAME = GMastermind
+GMastermind_APPLICATION_ICON = GMastermind.tiff
 
 # The Objective-C source files to be compiled
 
@@ -11,9 +14,9 @@ GMastermind_OBJC_FILES = main.m  \
   Views.m
 
 
-GMastermind2_LOCALIZED_RESOURCE_FILES = Localizable.strings
+GMastermind_LOCALIZED_RESOURCE_FILES = Localizable.strings
 
-GMastermind2_LANGUAGES = French 
+GMastermind_LANGUAGES = French 
 
 
 SHARED_CFLAGS     += -g
