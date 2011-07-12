@@ -2297,7 +2297,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GrrFramework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -3617,6 +3616,22 @@
 			settings = {
 			};
 		};
+		85A3903E13CCF4E90052592A = {
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				85A3903F13CCF5060052592A,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A3903F13CCF5060052592A = {
+			fileRef = 8574BB4213C08C19004DAFF4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		85A5FDC9108D229D00AC6AA4 = {
 			buildActionMask = 2147483647;
 			files = (
@@ -3787,6 +3802,7 @@
 				8D1107290486CEB800E47090,
 				8D11072C0486CEB800E47090,
 				8D11072E0486CEB800E47090,
+				85A3903E13CCF4E90052592A,
 			);
 			buildRules = (
 			);
