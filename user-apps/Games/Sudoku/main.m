@@ -26,6 +26,10 @@
 
 #import "Controller.h"
 
+#ifdef __MINGW__
+#define srand48 srand
+#endif
+
 time_t time(time_t *t);
 
 int main(int argc, const char **argv, char** env)
