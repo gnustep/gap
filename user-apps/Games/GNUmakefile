@@ -18,7 +18,12 @@ PACKAGE_NAME = GAPUSERGAMES
 
 SUBPROJECTS = GShisen \
 Ladder \
-LapisPuzzle
+LapisPuzzle \
+GMastermind \
+GMines \
+Jigsaw \
+Sudoku
+
 
 #
 # Makefiles
