@@ -33,7 +33,7 @@
 - inorderWithPointer:(void *)ptr sel:(SEL)what;
 - inorderWithInt:(int)val sel:(SEL)what;
 
-- substituteLeaves:(NSMutableDictionary *)dict;
+- (void) substituteLeaves:(NSMutableDictionary *)dict;
 
 - (NSString *)toString;
 

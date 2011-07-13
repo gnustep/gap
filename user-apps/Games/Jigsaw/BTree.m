@@ -19,7 +19,6 @@ static NSString *BTreeMark = @"@endtree";
     NSString *line;
     int valtag, valfirst, valsecond, valleaf;
     BTree *current, *desc;
-    NSEnumerator *objEn;
     
     dict = [NSMutableDictionary dictionaryWithCapacity:1];
     current = nil;
@@ -244,7 +243,7 @@ static NSString *BTreeMark = @"@endtree";
 
 
 
-- substituteLeaves:(NSMutableDictionary *)dict
+- (void) substituteLeaves:(NSMutableDictionary *)dict
 {
     id obj;
 

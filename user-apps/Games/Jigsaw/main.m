@@ -45,7 +45,6 @@
   NSMenu *info;
   NSMenu *action;
   NSMenu *file;
-  NSMenu *edit;
   NSMenu *services;
   NSMenu *windows;
 
@@ -175,13 +174,14 @@
 {
   NSDocumentController *dc = 
     [NSDocumentController sharedDocumentController];
-
+  NSFileManager *fm;
+  NSArray *procArgs;
+  int arg;
   // Make the DocumentController the delegate of the application.
   [NSApp setDelegate: dc];
 
-  NSFileManager *fm = [NSFileManager defaultManager];
-  NSArray *procArgs = [[NSProcessInfo processInfo] arguments];
-  int arg;
+  fm = [NSFileManager defaultManager];
+  procArgs = [[NSProcessInfo processInfo] arguments];
 
   for(arg=1; arg<[procArgs count]; arg++){  // skip program name
     NSString *docFile = [procArgs objectAtIndex:arg];

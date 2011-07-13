@@ -25,7 +25,7 @@ static id checkResult[2];
 		dimY:(int)dimy
 {
     NSMutableArray *allLeaves = [theCluster leaves];
-    PieceView *piece, *refpiece;
+    PieceView *piece = nil, *refpiece = nil;
     BOOL fail;
     int curleaf, refx, refy;
     NSPoint reforigin, origin;
@@ -103,8 +103,6 @@ static int count;
     NSSize size;
     NSRect iframe;
     int padding, shift;
-    NSCachedImageRep *rep;
-
 
     self = [super init];
     if (!self)
@@ -319,6 +317,7 @@ static int count;
     NSImage *imgs[2] = { image, complete }; int idx;
 
     for(idx=0; idx<2; idx++){
+	NSBezierPath *lim;
 	[imgs[idx] lockFocus];
 
 	pieceRect.origin.x -= BOUNDARY;
@@ -358,7 +357,7 @@ static int count;
 		       PIECE_BD_WIDTH, padupper);
 	}
 
-	NSBezierPath *lim = (idx==1 ? boundary : clip);
+	lim = (idx==1 ? boundary : clip);
 
 	[[NSColor redColor] set];
 	[lim setLineWidth:4];
@@ -864,22 +863,24 @@ static int count;
 {
     NSArray *all = [[self superview] subviews];
     NSMutableArray *pieces = [NSMutableArray array];
-
+    NSEnumerator *pieceEnum;
+    PieceView *piece;
+    int isJoin;
     [pieces addObjectsFromArray:all];
 
     // the clicked view is first
     [pieces removeObject:self];
     [pieces insertObject:self atIndex:0];
 
-    NSEnumerator *pieceEnum = [pieces objectEnumerator];
-    PieceView *piece;
-    int isJoin = [theEvent modifierFlags] & NSControlKeyMask;
+    pieceEnum = [pieces objectEnumerator];
+    isJoin = [theEvent modifierFlags] & NSControlKeyMask;
 
     while((piece = [pieceEnum nextObject])!=nil){
 	NSPoint startp = [theEvent locationInWindow];
+	PTYPE pos;
 	startp = [piece convertPoint:startp fromView: nil];
 
-        PTYPE pos = [piece classifyPoint:startp];
+        pos = [piece classifyPoint:startp];
             
 	if(!(pos==EXTERIOR ||
 	     (pos==LEFTOUT && left!=OUTER) ||
@@ -914,9 +915,10 @@ static int count;
 - (void)extractFromCluster
 {
     NSMutableArray *allClusters = [doc clusters];
-    BTree *item, *other, *leftcl, *rightcl, *first, *second,
+    BTree *item, *other, *first, *second,
         *parent, *pparent;
     float delta[2];
+    NSRect bbox = {{0, 0}, {0, 0}};
 
     item = [cluster findLeaf:self];
         
@@ -926,7 +928,6 @@ static int count;
         return;
     }
 
-    NSRect bbox = {{0, 0}, {0, 0}};
 
     pparent = [parent parent];
     if(pparent==nil){
@@ -982,6 +983,7 @@ static int count;
     NSMutableArray *allClusters = [doc clusters];
     BTree *leftcl, *rightcl;
     float delta[2];
+    NSRect bbox = {{0, 0}, {0, 0}};
 
     leftcl = [cluster first];
     rightcl = [cluster second];
@@ -991,7 +993,6 @@ static int count;
         return;
     }
 
-    NSRect bbox = {{0, 0}, {0, 0}};
     [cluster
         inorderWithPointer:&bbox
         sel:@selector(bbox:)];
