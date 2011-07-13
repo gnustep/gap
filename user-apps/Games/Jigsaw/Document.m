@@ -50,7 +50,10 @@ static NSPanel *_stopper_panel = nil;
 
 + stopperForDocument:(Document *)doc
 {
+    NSRect wframe;  
+    NSPoint sorigin;
     if(_stopper_panel==nil){
+	NSButton *_stopper;
         _stopper_panel = 
             [[NSPanel alloc]
                 initWithContentRect:
@@ -60,8 +63,6 @@ static NSPanel *_stopper_panel = nil;
                 defer:NO];
         [_stopper_panel setReleasedWhenClosed:NO];
 
-        NSButton *_stopper;
-        
         _stopper = [NSButton new];
         // [_stopper setTransparent:YES];
         [_stopper setTitle:@"Stop"];
@@ -73,13 +74,10 @@ static NSPanel *_stopper_panel = nil;
 
     [[_stopper_panel contentView] setTarget:doc];
 
-    NSRect wframe =
-        [[[[doc windowControllers] objectAtIndex:0]
+    wframe = [[[[doc windowControllers] objectAtIndex:0]
              window] frame];
 
-    NSPoint sorigin =
-        NSMakePoint
-        (wframe.origin.x+wframe.size.width/2 - STOP_WIDTH/2,
+    sorigin = NSMakePoint (wframe.origin.x+wframe.size.width/2 - STOP_WIDTH/2,
          wframe.origin.y+wframe.size.height/2 - STOP_HEIGHT/2);
 
     [_stopper_panel setFrameOrigin:sorigin];
@@ -161,7 +159,7 @@ static NSPanel *_stopper_panel = nil;
   if(solving==YES){
     NSBeep();
     return self;
-  }
+  } else {
 
     NSMutableArray *allLeaves;
     int ind;
@@ -219,6 +217,7 @@ static NSPanel *_stopper_panel = nil;
     [view setNeedsDisplay:YES];
 
     return self;
+  }
 }
 
 #define INVALID_DISPLAY_SECS 1
@@ -228,7 +227,7 @@ static NSPanel *_stopper_panel = nil;
   if(solving==YES){
     NSBeep();
     return self;
-  }
+  } else {
 
     int ind;
     BTree *cluster;
@@ -258,6 +257,7 @@ static NSPanel *_stopper_panel = nil;
     NSRunAlertPanel(@"Verify", @"No conflicting pieces.", 
                     @"Ok", nil, nil);
     return self;
+  }
 }
 
 - stopSolve:(id)sender
@@ -277,14 +277,21 @@ static NSPanel *_stopper_panel = nil;
   NSWindow *win = 
     [[[self windowControllers] objectAtIndex:0]
       window];
+  int ind;
+  PieceView **pieces;
+  BTree *cl1, *all;
+  NSPanel *sp;
+  NSPoint sp_orig;
+  NSModalSession solveSession;
+  NSPoint orig;
+  NSMutableArray *processed;
+  NSView *sv = nil;
+  int pc;
+  BOOL complete;
 
   [view setNeedsDisplay:YES];
   [view display];
 
-
-    int ind;
-    PieceView **pieces;
-    BTree *cl1, *cl2, *all;
 
     for(ind=0; ind<[clusters count]; ind++){
         cl1 = [clusters objectAtIndex:ind];
@@ -314,9 +321,8 @@ static NSPanel *_stopper_panel = nil;
         return self;
     }
 
-  NSPanel *sp = [Document stopperForDocument:self];
-  NSPoint sp_orig = [sp frame].origin;
-  NSModalSession solveSession;
+  sp = [Document stopperForDocument:self];
+  sp_orig = [sp frame].origin;
 
   solving = YES;
   solveSession = [app beginModalSessionForWindow:sp];
@@ -328,21 +334,15 @@ static NSPanel *_stopper_panel = nil;
   [view display];
   [win flushWindow];
 
-    NSRect allBbox = { { 0, 0 }, { 0, 0 } };
-    NSPoint orig;
-
     // for(ind=0; ind<[clusters count]; ind++){
     //    [[clusters objectAtIndex:ind]
     //        inorderWithPointer:&allBbox
     //        sel:@selector(bbox:)];
     // }
 
-    NSMutableArray *processed =
-      [NSMutableArray arrayWithCapacity:[clusters count]];
+    processed = [NSMutableArray arrayWithCapacity:[clusters count]];
 
     [self adjacent];
-
-    NSView *sv = nil;
 
     for(ind=0; ind<[clusters count]; ind++){
         BTree *cluster = [clusters objectAtIndex:ind];
@@ -352,10 +352,12 @@ static NSPanel *_stopper_panel = nil;
         float delta[2];
 
         if(sv==nil){
+	    NSRect cframe;
+	    NSSize padding;
             sv = [pv superview];
 
-            NSRect cframe = [sv frame];
-            NSSize padding = [self withPadding];
+            cframe = [sv frame];
+            padding = [self withPadding];
 
             orig.x = (cframe.size.width-padding.width)/2;
             orig.y = (cframe.size.height-padding.height)/2;
@@ -395,13 +397,12 @@ static NSPanel *_stopper_panel = nil;
     [sp orderOut:self];
     [app endModalSession:solveSession];
 
-    int pc = [processed count];
-    BOOL complete = (ind==[clusters count] ? YES : NO);
+    pc = [processed count];
+    complete = (ind==[clusters count] ? YES : NO);
 
 
     // build a fairly balanced tree
     while([processed count] > 1){
-      unsigned c[2];
       BTree 
           *cl1 = [processed objectAtIndex:0],
           *cl2 = [processed objectAtIndex:1],
@@ -508,7 +509,6 @@ static NSPanel *_stopper_panel = nil;
         int clcount, clind, lind;
         NSMutableDictionary *pdict;
         int x, y, ktag, posx, posy;
-        NSPoint *loc;
         PTYPE left, right, lower, upper;
 
         image = nil;
@@ -610,14 +610,14 @@ static NSPanel *_stopper_panel = nil;
         return YES;
     }
     else if([types containsObject:aType]){
+	int dim_alert;
         if (!(image = [[NSImage alloc] initWithData:data])){
             NSRunAlertPanel(@"Alert", @"Load failed (IMAGE)",
                             @"Ok", nil, nil);
             return NO;
         }
 
-	int dim_alert =
-	    NSRunAlertPanel(@"What size pieces?",
+	dim_alert = NSRunAlertPanel(@"What size pieces?",
 			    @"Choose a size.",
 			    @"Small", @"Medium", @"Large");
 	
@@ -760,10 +760,9 @@ static NSPanel *_stopper_panel = nil;
         *curLeaves;
 
     for(c1=0; c1<ccount-1; c1++){
+        BOOL success = NO;
         cl1 = [clusters objectAtIndex:c1];
         [allLeaves addObjectsFromArray:[cl1 leaves]];
-
-        BOOL success = NO;
 
         for(c2=c1+1; c2<ccount; c2++){
             cl2 = [clusters objectAtIndex:c2];
@@ -881,15 +880,18 @@ static NSPanel *_stopper_panel = nil;
        NSClosableWindowMask | 
            NSMiniaturizableWindowMask);
 
-  int clind, pieceind;
+  int clind;
   BTree *cluster;
   NSScrollView *scroller;
-  NSSize scrollSize, desktop;
-  NSString *fname;
+  NSSize scrollSize, desktop, initialSize;
+  NSString *fname, *ext;
 
   frame.origin.x = 0;
   frame.origin.y = 0;
-  frame.size = [image size];
+  if (image != nil)
+    frame.size = [image size];
+  else
+    frame.size = NSMakeSize(0, 0);
   frame.size.width  += 2*(BOUNDARY+DESKTOPEXTRA);
   frame.size.height += 2*(BOUNDARY+DESKTOPEXTRA);
 
@@ -904,14 +906,12 @@ static NSPanel *_stopper_panel = nil;
   }
   [view setMenu:[Document actionMenu]];
 
-  NSSize initialSize =
-      NSMakeSize((desktop.width<DESKTOPMAX ?
+  initialSize = NSMakeSize((desktop.width<DESKTOPMAX ?
                   desktop.width : DESKTOPMAX),
                  (desktop.height<DESKTOPMAX ?
                   desktop.height : DESKTOPMAX));
 
-  scrollSize = 
-      [NSScrollView frameSizeForContentSize:initialSize
+  scrollSize = [NSScrollView frameSizeForContentSize:initialSize
                     hasHorizontalScroller:YES
                     hasVerticalScroller:YES
                     borderType:NSLineBorder];
@@ -950,7 +950,8 @@ static NSPanel *_stopper_panel = nil;
 
   [self setFileType:DOCTYPE];
   
-  fname = [self fileName]; NSString *ext = [fname pathExtension];
+  fname = [self fileName]; 
+  ext = [fname pathExtension];
   if([types containsObject:ext]){
       NSArray *docs = 
           [[NSDocumentController sharedDocumentController]

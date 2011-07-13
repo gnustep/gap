@@ -1,3 +1,12 @@
+2011-07-13 Sebastian Reitenbach
+
+	* BTree.h
+	* BTree.m
+	* Document.m
+	* PieceView.m
+	* main.m
+	gcc 2.95 and warning fixes
+
 2011-06-28 Riccardo Mottola <rm@gnu.org>
 
 	* Document.m
