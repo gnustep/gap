@@ -332,7 +332,7 @@
 	  NSString *descriptionKey;
 
 	  descriptionKey = [obj1 objectForKey:@"description"];
-	  NSLog(@"key-----> %@", descriptionKey);
+	  //	  NSLog(@"key-----> %@", descriptionKey);
 	  if (descriptionKey)
 	    [batDict setObject: obj1 forKey: descriptionKey];
 	}
@@ -349,12 +349,12 @@
   //    designVoltage = [valueStr floatValue] / 1000;
 
   valueStr = [[batDict objectForKey: @"voltage"] objectForKey: @"cur-value"];
-  NSLog(@"voltage: %@", valueStr);
+  //  NSLog(@"voltage: %@", valueStr);
   if (valueStr)
     volts = [valueStr floatValue] / 1000;
 
   valueStr = [[batDict objectForKey: @"design cap"] objectForKey: @"cur-value"];
-  NSLog(@"design cap: %@", valueStr);
+  //  NSLog(@"design cap: %@", valueStr);
   if (valueStr)
     {
       if ([[[batDict objectForKey: @"design cap"] objectForKey: @"type"] isEqualToString: @"Ampere hour"])
@@ -369,24 +369,24 @@
     }
 
   valueStr = [[batDict objectForKey: @"last full cap"] objectForKey: @"cur-value"];
-  NSLog(@"last full cap: %@", valueStr);
+  //NSLog(@"last full cap: %@", valueStr);
   if (valueStr)
     lastCap = [valueStr floatValue] / 1000;
 
   valueStr = [[batDict objectForKey: @"charge rate"] objectForKey: @"cur-value"];
-  NSLog(@"charge rate: %@", valueStr);
+  //NSLog(@"charge rate: %@", valueStr);
   chargeRate = 0;
   if (valueStr)
     chargeRate = [valueStr floatValue] / 1000;
 
   valueStr = [[batDict objectForKey: @"discharge rate"] objectForKey: @"cur-value"];
-  NSLog(@"discharge rate: %@", valueStr);
+  //NSLog(@"discharge rate: %@", valueStr);
   dischargeRate = 0;
   if (valueStr)
     dischargeRate = [valueStr floatValue] / 1000;
 
   valueStr = [[batDict objectForKey: @"charging"] objectForKey: @"cur-value"];
-  NSLog(@"charging: %@", valueStr);
+  //NSLog(@"charging: %@", valueStr);
   if ([valueStr intValue] == 0)
     {
       amps = dischargeRate;
@@ -399,7 +399,7 @@
     }
 
   valueStr = [[batDict objectForKey: @"charge state"] objectForKey: @"battery-capacity"];
-  NSLog(@"charge state: %@", valueStr);
+  //NSLog(@"charge state: %@", valueStr);
   if (valueStr)
     {
       [chargeState release];
@@ -501,12 +501,16 @@
 	NSString *valueStr;
 	NSString *keyStr;
 
-	NSLog(@"reading %@", batterySysAcpiString);
+	//	NSLog(@"reading %@", batterySysAcpiString);
 	ueventFileName = [batterySysAcpiString stringByAppendingPathComponent:@"uevent"];
 
         [ueventFileName getCString:batteryStatePath0];
         stateFile = fopen(batteryStatePath0, "r");
-        NSAssert(stateFile != NULL, @"ACPI - /sys: state file shall not be NULL");
+	if (stateFile == NULL)
+	  {
+	    NSLog(@"acpi /sys state file is null");
+	    return;
+	  }
 
         ueventDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
 
@@ -527,7 +531,7 @@
 	  }
 
 
-        NSLog(@"%@", ueventDict);
+	//        NSLog(@"%@", ueventDict);
 
 
         amps = [[ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"] floatValue] / 1000000;
@@ -618,7 +622,11 @@
     else if (useACPIproc)
       {
 	stateFile = fopen(batteryStatePath0, "r");
-	NSAssert(stateFile != NULL, @"ACPI - /proc: state file shall not be NULL");
+	if (stateFile == NULL)
+	  {
+	    NSLog(@"acpi /proc state file null");
+	    return;
+	  }
 
 	[self _readLine :stateFile :line];
 	sscanf(line, "present: %s", presentStr);
@@ -721,11 +729,15 @@
 
 	percentIsInvalid = NO;
 	stateFile = fopen(apmPath, "r");
-	NSAssert(stateFile != NULL, @"APM - state file shall not be null");
+	if (stateFile == NULL)
+	  {
+	    NSLog(@"apm state file null");
+	    return;
+	  }
 
 
 	[self _readLine :stateFile :line];
-	NSLog(@"line: %s", line);
+	//	NSLog(@"line: %s", line);
 	sscanf(line, "%s %s %s %s %s %s %s %s %s", drvVersionStr, apmBiosVersionStr, apmBiosFlagsStr, acLineStatusStr, battStatusStr, battFlagsStr, percentStr, timeRemainingStr, timeUnitStr);
 
 	if (percentStr != NULL && strlen(percentStr) > 0)
@@ -742,7 +754,7 @@
 		chargePercent = 0;
 		percentIsInvalid = YES;
 	      }
-	    NSLog(@"percent %f", chargePercent);
+	    //	    NSLog(@"percent %f", chargePercent);
 	  }
 
 	if (battStatusStr != NULL && strlen(battStatusStr) > 0)
