@@ -344,17 +344,16 @@
   (void)close(sysmonfd);
 
   valueStr = [[batDict objectForKey: @"design voltage"] objectForKey: @"cur-value"];
-  NSLog(@"design voltage: %@", valueStr);
+  //  NSLog(@"design voltage: %@", valueStr);
   //  if (valueStr)
-  //    designVoltage = [valueStr floatValue] / 1000;
+  //    designVoltage = [valueStr floatValue] / 1000000;
 
   valueStr = [[batDict objectForKey: @"voltage"] objectForKey: @"cur-value"];
-  //  NSLog(@"voltage: %@", valueStr);
   if (valueStr)
-    volts = [valueStr floatValue] / 1000;
+    volts = [valueStr floatValue] / 1000000;
+  NSLog(@"voltage: %@ %f", valueStr, volts);
 
   valueStr = [[batDict objectForKey: @"design cap"] objectForKey: @"cur-value"];
-  //  NSLog(@"design cap: %@", valueStr);
   if (valueStr)
     {
       if ([[[batDict objectForKey: @"design cap"] objectForKey: @"type"] isEqualToString: @"Ampere hour"])
@@ -365,38 +364,57 @@
 	{
 	  useWattHours = YES;
 	}
-      desCap = [valueStr floatValue] / 1000;
+      desCap = [valueStr floatValue] / 1000000;
     }
+  NSLog(@"design cap: %@ %f", valueStr, desCap);
 
   valueStr = [[batDict objectForKey: @"last full cap"] objectForKey: @"cur-value"];
-  //NSLog(@"last full cap: %@", valueStr);
   if (valueStr)
-    lastCap = [valueStr floatValue] / 1000;
+    lastCap = [valueStr floatValue] / 1000000;
+  NSLog(@"last full cap: %@, %f", valueStr, lastCap);
 
   valueStr = [[batDict objectForKey: @"charge rate"] objectForKey: @"cur-value"];
-  //NSLog(@"charge rate: %@", valueStr);
   chargeRate = 0;
   if (valueStr)
-    chargeRate = [valueStr floatValue] / 1000;
+    chargeRate = [valueStr floatValue] / 1000000;
+  NSLog(@"charge rate: %@ %f", valueStr, chargeRate);
 
   valueStr = [[batDict objectForKey: @"discharge rate"] objectForKey: @"cur-value"];
-  //NSLog(@"discharge rate: %@", valueStr);
   dischargeRate = 0;
   if (valueStr)
-    dischargeRate = [valueStr floatValue] / 1000;
+    dischargeRate = [valueStr floatValue] / 1000000;
+  NSLog(@"discharge rate: %@ %f", valueStr, dischargeRate);
+
+  valueStr = [[batDict objectForKey: @"charge"] objectForKey: @"cur-value"];
+  if (valueStr)
+    currCap = [valueStr floatValue] / 1000000;
+  NSLog(@"charge: %@, %f", valueStr, currCap);
 
   valueStr = [[batDict objectForKey: @"charging"] objectForKey: @"cur-value"];
-  //NSLog(@"charging: %@", valueStr);
+  NSLog(@"charging: %@", valueStr);
+  NSLog(@"currCap %f, lastCap %f, amps %f", currCap, lastCap,amps);
   if ([valueStr intValue] == 0)
     {
       amps = dischargeRate;
       isCharging = NO;
+      if (amps > 0)
+	timeRemaining = currCap / amps;
+      else
+	timeRemaining = -1;
+      chargePercent = currCap/lastCap*100;
+
     }
   else
     {
       amps = chargeRate;
       isCharging = YES;
+      if (amps > 0)
+	timeRemaining = (lastCap-currCap) / amps;
+      else
+	timeRemaining = -1;
+      chargePercent = currCap/lastCap*100;
     }
+  watts = amps * volts;
 
   valueStr = [[batDict objectForKey: @"charge state"] objectForKey: @"battery-capacity"];
   //NSLog(@"charge state: %@", valueStr);
