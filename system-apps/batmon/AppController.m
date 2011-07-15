@@ -208,7 +208,7 @@
     [level setDoubleValue:chargePercentToDraw];
     [percent setStringValue:[NSString stringWithFormat:@"%3.1f%%", [batModel chargePercent]]];
     [amperage setStringValue:[NSString stringWithFormat:@"%3.2f A", [batModel amps]]];
-	[rate setStringValue:[NSString stringWithFormat:@"%3.2f W", [batModel watts]]];
+    [rate setStringValue:[NSString stringWithFormat:@"%3.2f W", [batModel watts]]];
     if (timeRem >= 0)
         [timeLeft setStringValue:[NSString stringWithFormat:@"%dh %d\'", hours, mins]];
     else
