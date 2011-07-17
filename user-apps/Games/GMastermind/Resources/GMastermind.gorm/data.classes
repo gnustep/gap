@@ -1,0 +1,25 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    Controller = {
+	Actions = (
+	    "newGameWithRep:",
+	    "newGameNoRep:",
+	    "commit:",
+	    "move:"
+	);
+	Outlets = (
+	    window,
+	    palette
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "commit:",
+	    "move:",
+	    "newGameNoRep:",
+	    "newGameWithRep:"
+	);
+	Super = NSObject;
+    };
+}
