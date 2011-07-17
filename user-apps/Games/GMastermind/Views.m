@@ -4,8 +4,10 @@
 	Main View class
 
 	Copyright (C) 2003 Marko Riedel
+                      2011 The Free Software Foundation, Inc.
 
 	Author: Marko Riedel <mriedel@bogus.example.com>
+	        Riccardo Mottola <rm@gnu.org>
 	Date:	5 July 2003
 
 	This program is free software; you can redistribute it and/or
@@ -28,44 +30,62 @@
 */
 
 
-#include "Views.h"
+#import "Views.h"
 
-#include <AppKit/PSOperators.h>
-#include <AppKit/NSGraphics.h>
-#include <AppKit/NSBezierPath.h>
-#include <AppKit/NSPasteboard.h>
-#include <AppKit/NSImage.h>
-#include <AppKit/NSEvent.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSGraphics.h>
+#import <AppKit/NSBezierPath.h>
+#import <AppKit/NSPasteboard.h>
+#import <AppKit/NSImage.h>
+#import <AppKit/NSEvent.h>
 
 #include <math.h>
 
 void shadow(float x, float y, float r)
 {
-    int angle;
-    PSsetlinewidth(2.0);
+  int angle;
+  NSBezierPath *path;
 
-    for(angle=132; angle<492; angle+=6){
-	float gray =
-	    (angle < 312 ? 0.9-(float)(angle-132)/180.0*0.8 :
-	     0.1+(float)(angle-312)/180.0*0.8);
-	PSsetgray(gray);
-	PSarc(x, y, r, angle, angle+6);
-	PSstroke();
+  // Todo: see if it can be stroked outisde the loop
+  for(angle=132; angle<492; angle+=6)
+    {
+      float gray;
+      path = [[NSBezierPath alloc] init];
+      [path setLineWidth: 2.0];
+      gray =
+	(angle < 312 ? 0.9-(float)(angle-132)/180.0*0.8 :
+	 0.1+(float)(angle-312)/180.0*0.8);
+      [[NSColor colorWithDeviceWhite:gray alpha:1.0] set];
+      [path appendBezierPathWithArcWithCenter: NSMakePoint(x, y)
+				       radius: r
+				   startAngle: angle
+				     endAngle: angle+6];
+      [path stroke];
+      [path release];
     }
 }
 
 void shadow2(float x, float y, float r)
 {
-    int angle;
-    PSsetlinewidth(2.0);
+  int angle;
+  NSBezierPath *path;
 
-    for(angle=312; angle<672; angle+=6){
-	float gray =
-	    (angle < 492 ? 0.9-(float)(angle-312)/180.0*0.8 :
-	     0.1+(float)(angle-492)/180.0*0.8);
-	PSsetgray(gray);
-	PSarc(x, y, r, angle, angle+6);
-	PSstroke();
+  for(angle=312; angle<672; angle+=6)
+    {
+      float gray;
+      path = [[NSBezierPath alloc] init];
+      [path setLineWidth: 2.0];
+
+      gray =
+	(angle < 492 ? 0.9-(float)(angle-312)/180.0*0.8 :
+	 0.1+(float)(angle-492)/180.0*0.8);
+      [[NSColor colorWithDeviceWhite:gray alpha:1.0] set];
+      [path appendBezierPathWithArcWithCenter: NSMakePoint(x, y)
+				       radius: r
+				   startAngle: angle
+				     endAngle: angle+6];
+      [path stroke];
+      [path release];
     }
 }
 
@@ -112,10 +132,13 @@ void tile(NSRect rect)
 
 - (void)drawRect:(NSRect)aRect
 {
-    int index;
+  int index;
+  NSBezierPath *path;
+
     tile([self bounds]);
     
-    for(index=0; index<4; index++){
+    for(index=0; index<4; index++)
+{
         float 
             x = PEGDIMENSION/4+(index%2)*PEGDIMENSION/2,
             y = PEGDIMENSION/4+(index/2)*PEGDIMENSION/2;
@@ -123,19 +146,30 @@ void tile(NSRect rect)
             (index<white ? 
              [NSColor whiteColor] : [NSColor blackColor]);
 
-        if(index<white+black){
+	path = [[NSBezierPath alloc] init];
+	[path setLineWidth: 1.0];
+        if(index<white+black)
+	  {
             [col set];
-            PSarc(x, y, PEGDIMENSION/5, 0, 360);
-            PSfill();
+	    [path appendBezierPathWithArcWithCenter: NSMakePoint(x, y)
+					     radius: PEGDIMENSION/5
+					 startAngle: 0
+					   endAngle: 360];
+	    [path fill];
 	    shadow(x, y, PEGDIMENSION/5);
-        }
-        else{
-	    PSsetlinewidth(1.0);
+	  }
+        else
+	  {
+	    //	    PSsetlinewidth(1.0);
             [[NSColor blackColor] set];
-            PSarc(x, y, PEGDIMENSION/5, 0, 360);
-            PSstroke();
+	    [path appendBezierPathWithArcWithCenter: NSMakePoint(x, y)
+					     radius: PEGDIMENSION/5
+					 startAngle: 0
+					   endAngle: 360];
+            [path stroke];
 	    shadow2(x, y, PEGDIMENSION/5);
         }
+	[path release];
     }
 }
 
@@ -231,18 +265,25 @@ void tile(NSRect rect)
 #define RAD2 (PEGDIMENSION-2*PEGMARGIN)
 - (void)drawRect:(NSRect)aRect
 {
-    if(color!=nil){
-        [color set];
-        PSarc(PEGDIMENSION/2, PEGDIMENSION/2, 
-              PEGDIMENSION/2-PEGMARGIN, 0, 360);
-        PSfill();
+  if(color!=nil)
+    {
+      NSBezierPath *path;
 
-	shadow(PEGDIMENSION/2, PEGDIMENSION/2, 
-	       PEGDIMENSION/2-PEGMARGIN);
+      path = [[NSBezierPath alloc] init];
+      [color set];
+      [path appendBezierPathWithArcWithCenter: NSMakePoint(PEGDIMENSION/2, PEGDIMENSION/2)
+				       radius: PEGDIMENSION/2 - PEGMARGIN
+				   startAngle: 0
+				     endAngle: 360];
+      [path fill];
+      [path release];
+      shadow(PEGDIMENSION/2, PEGDIMENSION/2, 
+	     PEGDIMENSION/2-PEGMARGIN);
     }
-    else{
-	shadow2(PEGDIMENSION/2, PEGDIMENSION/2, 
-		PEGDIMENSION/2-PEGMARGIN);
+  else
+    {
+      shadow2(PEGDIMENSION/2, PEGDIMENSION/2, 
+	      PEGDIMENSION/2-PEGMARGIN);
     }
 
     tile([self bounds]);
@@ -276,7 +317,7 @@ static NSImage *dragImages[8] = {
     rsq1 = DRAGDIMENSION/2; rsq1 *= rsq1;
 
     rep = [[NSBitmapImageRep alloc]
-              initWithBitmapDataPlanes:NULL
+              initWithBitmapDataPlanes:nil
               pixelsWide:DRAGDIMENSION
               pixelsHigh:DRAGDIMENSION
               bitsPerSample:8

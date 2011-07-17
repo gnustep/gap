@@ -1,3 +1,16 @@
+2011-07-18 Riccardo Mottola <rm@gnu.org>
+
+	* Controller.[m,h]:
+	* View.[m,h]:
+	Rewrote drawing from PS-ops to NSBezierPaths
+
+2011-07-18 Riccardo Mottola <rm@gnu.org>
+
+	* main.m
+	* Resources/GMastermind.gorm
+	* GMastermindInfo.plist
+	Use a gorm film to create menus and instantiate the controller.
+
 2011-07-12 Riccardo Mottola <rm@gnu.org> for Sebastian Reitenbach
 
 	* Controller.m:
@@ -20,11 +33,11 @@
 
 2003-07-05  Fabien Vallon  <fabien@tuxfamily.org>
 
-	* Switch from #import to #include 
+	* Switch from #import to #include
 	* Controller.m : save the Window's & palettes's frame postion
 	* Controller.m, main.m, GNUmakefile : Add localization support
 	* Controller.m :  use tag instead of title in validateMenu
 	* Add Licence in files
 	* New files : ChangeLog, README, gpl.txt
-	
+
 
