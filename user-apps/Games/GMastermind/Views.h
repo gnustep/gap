@@ -27,12 +27,9 @@
 		Boston, MA  02111-1307, USA
 */
 
-#ifndef _MasterMinds_Views_H
-#define _MasterMinds_Views_H
-
-#include <AppKit/NSDragging.h>
-#include <AppKit/NSView.h>
-#include <AppKit/NSColor.h>
+#import <AppKit/NSDragging.h>
+#import <AppKit/NSView.h>
+#import <AppKit/NSColor.h>
 
 
 #define PEGDIMENSION    48 // 40
@@ -102,6 +99,4 @@
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender;
 
 @end
-
-#endif
 

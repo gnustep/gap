@@ -78,7 +78,7 @@
     solBox = [[NSBox alloc] init];
     [solBox setContentView:view];
     [solBox setContentViewMargins:NSMakeSize(PEGMARGIN, PEGMARGIN)];
-    [solBox setTitle:_(@"Answer")];
+    [solBox setTitle:@"Answer"];
     [solBox setBorderType:NSGrooveBorder];
     [solBox sizeToFit];
 
@@ -113,7 +113,7 @@
                 NSMakeRect(0, PEGMARGIN+2*PEGDIMENSION-3*PEGMARGIN/2, 0, 0)];
     [boardBox setContentView:view];
     [boardBox setContentViewMargins:NSMakeSize(PEGMARGIN, PEGMARGIN)];
-    [boardBox setTitle:_(@"Board")];
+    [boardBox setTitle:@"Board"];
     [boardBox setBorderType:NSGrooveBorder];
     [boardBox sizeToFit];
 
@@ -136,12 +136,12 @@
 
      window = [[NSWindow alloc] initWithContentRect:frame 
                                  styleMask:m			       
-                                 backing: NSBackingStoreRetained 
+                                 backing: NSBackingStoreBuffered 
 				defer:NO];
     [window setMinSize:frame.size];
     [window setMaxSize:frame.size];
 
-    [window setTitle:_(@"Mastermind")];
+    [window setTitle:@"Mastermind"];
     [window setDelegate:self];
     [window setContentView:view];
     [window setReleasedWhenClosed:YES];
@@ -204,10 +204,10 @@
 
     palette = [[NSWindow alloc] initWithContentRect:frame 
                                 styleMask:m			       
-                                backing: NSBackingStoreRetained 
+                                backing: NSBackingStoreBuffered 
                                 defer:YES];
     [palette setMinSize:frame.size];
-    [palette setTitle:_(@"Palette")];
+    [palette setTitle:@"Palette"];
     [palette setDelegate:self];
 
     //    [palette setFrame:frame display:YES];
@@ -310,8 +310,8 @@
     [window 
 	setTitle:
 	    (unique==NO ?
-	     _(@"Mastermind (with replacement)") :
-	     _(@"Mastermind (without replacement)"))];
+	     @"Mastermind (with replacement)" :
+	     @"Mastermind (without replacement)")];
 
     return self;
 }
@@ -337,8 +337,8 @@
     for(col=0; col<4; col++){
         NSColor *color = [pegs[currentRow][col] color];
         if(color==nil){
-            NSRunAlertPanel(_(@"Alert"), _(@"All four colors must be set."),
-                            _(@"OK"), nil, nil);
+            NSRunAlertPanel(@"Alert", @"All four colors must be set.",
+                            @"OK", nil, nil);
             return self;
         }
 
@@ -351,8 +351,8 @@
     }
 
     if(unique==YES && DOUBLES(aCombo)){
-	NSRunAlertPanel(_(@"Alert"), _(@"No double colors, please."),
-			_(@"OK"), nil, nil);
+	NSRunAlertPanel(@"Alert", @"No double colors, please.",
+			@"OK", nil, nil);
 	return self;
     }
 
@@ -368,13 +368,13 @@
     currentRow--;
     if(black==4){
         done = YES;
-        NSRunAlertPanel(_(@"Congratulations!"), _(@"You win."),
-                        _(@"OK"), nil, nil);
+        NSRunAlertPanel(@"Congratulations!", @"You win.",
+                        @"OK", nil, nil);
     }
     else if(currentRow<0){
         done = YES;
-        NSRunAlertPanel(_(@"Game over."), _(@"You lose."),
-                        _(@"OK"), nil, nil);
+        NSRunAlertPanel(@"Game over.", @"You lose.",
+                        @"OK", nil, nil);
     }
     else{
         for(col=0; col<4; col++){

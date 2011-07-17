@@ -28,27 +28,24 @@
 */
 
 
-#ifndef _MasterMinds_Controller_H
-#define _MasterMinds_Controller_H
+#import "Views.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/NSNibDeclarations.h>
+#import <AppKit/NSBox.h>
+#import <AppKit/NSFont.h>
+#import <AppKit/NSWindow.h>
+#import <AppKit/NSMenu.h>
 
-#include "Views.h"
-#include <Foundation/Foundation.h>
-#include <AppKit/NSBox.h>
-#include <AppKit/NSFont.h>
-#include <AppKit/NSWindow.h>
-#include <AppKit/NSMenu.h>
 
-typedef enum {
-    MENU_NEW_WITH_REP = 500,
-    MENU_NEW_NO_REP,
-    MENU_COMMIT,
-    MENU_MOVE
-} MENU_TAG;
+#define MENU_NEW_WITH_REP 500
+#define MENU_NEW_NO_REP 501
+#define MENU_COMMIT 502
+#define MENU_MOVE 503
 
 @interface Controller : NSObject
 {
-    NSWindow *window;
-    NSWindow *palette;
+  IBOutlet NSWindow *window;
+  IBOutlet NSWindow *palette;
 
     int currentRow;
 
@@ -79,5 +76,3 @@ typedef enum {
 
 - (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;
 @end
-
-#endif
