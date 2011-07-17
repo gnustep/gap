@@ -152,6 +152,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				85A5768413D3A58A00130011,
 				8D1107310486CEB800E47090,
 				089C165CFE840E0CC02AAC07,
 			);
@@ -347,6 +348,20 @@
 			settings = {
 			};
 		};
+		85A5768413D3A58A00130011 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			name = GMastermind.icns;
+			path = Resources/GMastermind.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A5768513D3A58A00130011 = {
+			fileRef = 85A5768413D3A58A00130011;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //850
 //851
 //852
@@ -392,6 +407,7 @@
 				85628C0F13CB87FF00F60A83,
 				85628C1013CB87FF00F60A83,
 				85197C9813D0FF5100BD0A6F,
+				85A5768513D3A58A00130011,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
