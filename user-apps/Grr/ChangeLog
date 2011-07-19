@@ -1,3 +1,9 @@
+2011-07-19 Riccardo Mottola <rm@gnu.org>
+
+	* Components/ArticleView/NSString+TolerantHTML.m
+	Fixed parser, the handler tables were inited wrongly.
+	Furthermore, set standard link attributes.
+
 2011-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* Resources/Data/HTML-Entities.plist

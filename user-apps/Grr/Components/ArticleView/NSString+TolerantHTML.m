@@ -72,26 +72,26 @@ void init_constants() {
     }
     
     openingTagsHandlers = [[NSDictionary dictionaryWithObjectsAndKeys:
-        @"p", @"openParagraph:",
-        @"b", @"openBold:",
-        @"i", @"openItalic:",
-        @"em", @"openItalic:",
-        @"font", @"openFont:",
-        @"br", @"openParagraph:",
-        @"a", @"openAnchor:",
-        @"pre", @"openPre:",
+        @"openParagraph:", @"p",
+        @"openBold:", @"b", 
+        @"openItalic:",@"i",
+        @"openItalic:",@"em", 
+        @"openFont:",@"font",
+        @"openParagraph:",@"br",
+        @"openAnchor:", @"a",
+        @"openPre:",@"pre",
         nil
     ] retain];
     NSLog(@"opening: %@", openingTagsHandlers);
     
     closingTagsHandlers = [[NSDictionary dictionaryWithObjectsAndKeys:
-        @"p", @"stylePop", // FIXME: Was: closeParagraph
-        @"font", @"stylePop",
-        @"b", @"stylePop",
-        @"i", @"stylePop",
-        @"em", @"stylePop",
-        @"a", @"stylePop",
-        @"pre", @"stylePop",
+        @"stylePop", @"p",// FIXME: Was: closeParagraph
+        @"stylePop", @"font",
+        @"stylePop",@"b",
+        @"stylePop", @"i",
+        @"stylePop",@"em",
+        @"stylePop",@"a",
+        @"stylePop",@"pre",
         nil
     ] retain];
     
@@ -311,19 +311,19 @@ void init_constants() {
                  attributes: (NSDictionary*) attributes
 {
   NSString* str = [openingTagsHandlers objectForKey: name];
-  if (str != nil) {
-    [self performSelector: NSSelectorFromString(str)
-	  withObject: attributes];
-  }
+
+  if (str != nil) 
+    [self performSelector: NSSelectorFromString(str) withObject: attributes];
+
 }
 
 -(void) foundClosingTagName: (NSString*) name
                  attributes: (NSDictionary*) attributes;
 {
   NSString* str = [closingTagsHandlers objectForKey: name];
-  if (str != nil) {
+
+  if (str != nil)
     [self performSelector: NSSelectorFromString(str)];
-  }
 }
 
 // -----------------------------------------------------------
@@ -361,17 +361,16 @@ void init_constants() {
     NSMutableDictionary* attributes = [[self style] mutableCopyWithZone: (NSZone*)nil];
         
     NSURL* hyperlinkTarget = [NSURL URLWithString: [aDictionary objectForKey: @"href"]];
-    
-    if (hyperlinkTarget != nil) {
-        [attributes setObject: [NSColor blueColor]
-                       forKey: NSForegroundColorAttributeName];
-        
+
+    if (hyperlinkTarget != nil)
+      {
         [attributes setObject: hyperlinkTarget
                        forKey: NSLinkAttributeName];
-        
-        [attributes setObject: [NSNumber numberWithInt: NSSingleUnderlineStyle]
-                       forKey: NSUnderlineStyleAttributeName];
-    }
+        [attributes setObject: hyperlinkTarget
+                       forKey: NSToolTipAttributeName];
+        [attributes setObject: [NSCursor pointingHandCursor]
+                       forKey: NSCursorAttributeName];
+      }
     
     [self stylePush: attributes];
 }
@@ -450,7 +449,6 @@ void init_constants() {
     init_constants();
     
     [interpreter startParsing];
-    
     [scanner setCharactersToBeSkipped: [NSCharacterSet new]];
     
     while ([scanner isAtEnd] == NO) {
@@ -523,7 +521,7 @@ void init_constants() {
                     
                     NSAssert1(attrName != nil, @"Attribute name was nil in tag %@", name);
                     NSAssert2(attrValue != nil, @"Value was nil for attribute %@ in tag %@", attrName, name);
-                    
+ 
                     [attrDict setObject: attrValue forKey: attrName];
                     
                     nextChar = [self characterAtIndex: [scanner scanLocation]];
@@ -539,7 +537,7 @@ void init_constants() {
                 
                 // normalise element name
                 name = [name lowercaseString];
-                
+ 
                 if (opening) {
                     [interpreter foundOpeningTagName: name
                                           attributes: attrDict];
