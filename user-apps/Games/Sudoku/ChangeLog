@@ -5,6 +5,9 @@
 	* SudokuView.m:
 	Converted GNUstep memory macros.
 
+	* Document.m:
+	Do not set the autosave name to nil.
+
 2011-07-20 Riccardo Mottola <rm@gnu.org>
 
 	* SudokuView.m
