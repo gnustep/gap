@@ -12,6 +12,11 @@
 	* Controller.m
 	Buffered and not Retained windows.
 
+	* Document.m
+	* Sudoku.m
+	* main.m
+	Removed gnustep specific memory macros
+	
 2011-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.m

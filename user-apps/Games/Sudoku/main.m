@@ -51,13 +51,13 @@ int main(int argc, const char **argv, char** env)
 
 
    // Main Menu
-   mainMenu = AUTORELEASE ([NSMenu new]);
+   mainMenu = [[NSMenu new] autorelease];
 
    // Info SubMenu
    menuItem = (NSMenuItem *)[mainMenu addItemWithTitle: @"Info" 
 			action: NULL 
 			keyEquivalent: @""];
-   menu = AUTORELEASE ([NSMenu new]);
+   menu = [[NSMenu new] autorelease];
    [mainMenu setSubmenu: menu forItem: menuItem];
    [menu addItemWithTitle: @"Info Panel..." 
 	 action: @selector (orderFrontStandardInfoPanel:) 
@@ -101,13 +101,13 @@ int main(int argc, const char **argv, char** env)
 		  action: @selector(close)
 	   keyEquivalent: @""];
 
-  RELEASE(file);
+  [file release];
 
    // create new game menu
    menuItem = (NSMenuItem *)[mainMenu addItemWithTitle: @"New game" 
 			action: NULL 
 			keyEquivalent: @""];
-   menu = AUTORELEASE ([NSMenu new]);
+   menu = [[NSMenu new] autorelease];
    [mainMenu setSubmenu:menu forItem: menuItem];
 
    [[menu addItemWithTitle: _(@"20 clues")
@@ -174,8 +174,8 @@ int main(int argc, const char **argv, char** env)
 
    [[NSUserDefaults standardUserDefaults] synchronize];
 
-   RELEASE (controller);
-   RELEASE (pool);
+   [controller release];
+   [pool release];
    return 0;
 }
 
