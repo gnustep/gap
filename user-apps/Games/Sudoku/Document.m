@@ -76,7 +76,7 @@
 			      length:[data length]] 
                 componentsSeparatedByString:@"\n"];
 
-      RETAIN(lines);
+      [lines retain];
     }
   else
     {

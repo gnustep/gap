@@ -1,3 +1,10 @@
+2011-07-21 Riccardo Mottola <rm@gnu.org>
+
+	* DigitSource.m:
+	* Document.m:
+	* SudokuView.m:
+	Converted GNUstep memory macros.
+
 2011-07-20 Riccardo Mottola <rm@gnu.org>
 
 	* SudokuView.m
