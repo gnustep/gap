@@ -9,6 +9,9 @@
 	* Controller.m
 	Use standard progress indicator.
 
+	* Controller.m
+	Buffered and not Retained windows.
+
 2011-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.m
