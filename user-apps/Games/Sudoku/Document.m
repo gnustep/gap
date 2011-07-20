@@ -173,7 +173,7 @@
   window = 
       [[NSWindow alloc] initWithContentRect:frame 
 			styleMask:m                   
-			backing: NSBackingStoreRetained 
+			backing: NSBackingStoreBuffered
                              defer:YES];
   [window setDelegate:self];
 
