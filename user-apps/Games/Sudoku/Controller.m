@@ -214,7 +214,7 @@ typedef enum {
   enterPanel = 
       [[NSPanel alloc] initWithContentRect:allframe 
 			styleMask:m                   
-			backing: NSBackingStoreRetained 
+			backing: NSBackingStoreBuffered
                              defer:YES];
   [enterPanel setTitle:_(@"Enter Sudoku")];
   [enterPanel setDelegate:self];
@@ -438,7 +438,7 @@ typedef enum {
   palette =
     [[NSPanel alloc] initWithContentRect:pframe 
 		      styleMask:NSTitledWindowMask                   
-		      backing: NSBackingStoreRetained 
+		      backing: NSBackingStoreBuffered
 		      defer:YES];
 
   [palette setMinSize:pframe.size];
