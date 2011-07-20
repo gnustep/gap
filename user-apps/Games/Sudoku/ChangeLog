@@ -1,3 +1,8 @@
+2011-07-20 Riccardo Mottola <rm@gnu.org>
+
+	* SudokuView.m
+	Converted to NBezierPath drawing
+
 2011-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.m

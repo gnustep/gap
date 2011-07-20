@@ -5,6 +5,7 @@
    Copyright (C) 2007-2011 The Free Software Foundation, Inc
 
    Author: Marko Riedel
+           Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -135,35 +136,35 @@
 - (void)drawRect:(NSRect)rect
 {
   int x, y, pos;
+  
 
-    [[NSColor whiteColor] set];
-    NSRectFill([self bounds]);
+  [[NSColor whiteColor] set];
 
-    // NSRect frect = [font boundingRectForFont];
+  NSRectFill([self bounds]);
 
-    
+  [[NSColor blackColor] set];
+  for(pos=0; pos<=9; pos++)
+    {
+      NSBezierPath *path;
+      path = [[NSBezierPath alloc] init];
 
-    PSsetlinewidth(2);
-    PSsetrgbcolor(0, 0, 0);
+      if(!(pos % 9))
+	[path setLineWidth: 10.0];
+      else if(!(pos % 3))
+	[path setLineWidth: 4.0];
+      else
+	[path setLineWidth: 2.0];
 
-    for(pos=0; pos<=9; pos++){
-	if(!(pos % 9)){
-	    PSsetlinewidth(12);
-	}
-	else if(!(pos % 3)){
-	    PSsetlinewidth(6);
-	}
-	else{
-	    PSsetlinewidth(3);
-	}
 
-	PSmoveto(0, pos*FIELD_DIM);
-	PSlineto(9*FIELD_DIM, pos*FIELD_DIM);
-	PSstroke();
-
-	PSmoveto(pos*FIELD_DIM, 0);
-	PSlineto(pos*FIELD_DIM, 9*FIELD_DIM);
-	PSstroke();
+      [path moveToPoint: NSMakePoint(0, pos*FIELD_DIM)];
+      [path lineToPoint: NSMakePoint(9*FIELD_DIM, pos*FIELD_DIM)];
+      [path stroke];
+       
+      [path moveToPoint: NSMakePoint(pos*FIELD_DIM, 0)];
+      [path lineToPoint: NSMakePoint(pos*FIELD_DIM, 9*FIELD_DIM)];
+      [path stroke];
+      
+      [path release];
     }
 
     for(x=0; x<9; x++){
