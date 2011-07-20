@@ -46,13 +46,13 @@ typedef enum {
 
 - makeInputPanel;
 
-- newPuzzle:(id)sender;
+-(IBAction)newPuzzle:(id)sender;
 
-- actionEnter:(id)sender;
-- actionReset:(id)sender;
-- actionCancel:(id)sender;
+-(IBAction)actionEnter:(id)sender;
+-(IBAction)actionReset:(id)sender;
+-(IBAction)actionCancel:(id)sender;
 
-- enterPuzzle:(id)sender;
+-(IBAction)enterPuzzle:(id)sender;
 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification;
 

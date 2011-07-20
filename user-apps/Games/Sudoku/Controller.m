@@ -268,7 +268,7 @@ typedef enum {
 
 #define MAX_SOLVE_SECS 40
 
-- actionEnter:(id)sender
+-(IBAction)actionEnter:(id)sender
 {
   BOOL success;
   NSDocumentController *dc;
@@ -361,13 +361,13 @@ typedef enum {
     return self;
 }
 
-- actionReset:(id)sender
+-(IBAction)actionReset:(id)sender
 {
     [sdkview reset];
     return self;
 }
 
-- actionCancel:(id)sender
+-(IBAction)actionCancel:(id)sender
 {
     [[NSApplication sharedApplication]
         stopModal];
@@ -377,7 +377,7 @@ typedef enum {
     return self;
 }
 
-- enterPuzzle:(id)sender
+-(IBAction)enterPuzzle:(id)sender
 {
     [palette orderOut:self];
 
