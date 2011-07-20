@@ -30,7 +30,6 @@ time_t time(time_t *t);
 
 #import "Controller.h"
 #import "Document.h"
-#import "KnobView.h"
 #import "DigitSource.h"
 
 @implementation Controller
@@ -45,7 +44,7 @@ static NSPanel *_prog_ind_panel = nil;
     if(_prog_ind_panel==nil)
       {
 	NSRect pi_frame = NSMakeRect(0, 0, PROG_IND_WIDTH, PROG_IND_HEIGHT);
-	KnobView *_prog_ind;
+	NSProgressIndicator *_prog_ind;
 
         _prog_ind_panel = 
             [[NSPanel alloc]
@@ -55,7 +54,10 @@ static NSPanel *_prog_ind_panel = nil;
                 defer:NO];
         [_prog_ind_panel setReleasedWhenClosed:NO];
         
-	_prog_ind = [[KnobView alloc] initWithFrame:pi_frame];
+	_prog_ind = [[NSProgressIndicator alloc] initWithFrame:pi_frame];
+	[_prog_ind setMinValue: 0.0];
+	[_prog_ind setMaxValue: 100.0];
+	[_prog_ind setIndeterminate: NO];
         [_prog_ind_panel setContentView:_prog_ind];
 
 	[_prog_ind_panel setTitle:_(@"Computing Sudoku")];
@@ -87,7 +89,7 @@ typedef enum {
     Sudoku *other;
     Sudoku *pick;
     NSPanel *pi_panel;
-    KnobView *pi;
+    NSProgressIndicator *pi;
     float percent, dir;
     STATE st;
     NSString *checkseq;
@@ -120,7 +122,7 @@ typedef enum {
 	int tick;
 	for(tick=0; tick<TICK_ITER; tick++)
 	  {
-	    [pi setPercent:percent];
+	    [pi setDoubleValue:percent];
 	    [pi display];
 
 	    [[pi_panel contentView] setNeedsDisplay:YES];
@@ -273,7 +275,7 @@ typedef enum {
   Sudoku *sdk;
   Sudoku *user;
   NSPanel *pi_panel;
-  KnobView *pi;
+  NSProgressIndicator *pi;
   NSModalSession solveSession;
   float percent, dir;
   NSDate *end;
@@ -312,7 +314,7 @@ typedef enum {
 	NSDate *now;
 
 	for(tick=0; tick<TICK_ITER; tick++){
-	    [pi setPercent:percent];
+	    [pi setDoubleValue:percent];
 	    [pi display];
 
 	    [[pi_panel contentView] setNeedsDisplay:YES];
