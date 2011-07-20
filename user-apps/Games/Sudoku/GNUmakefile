@@ -33,7 +33,6 @@ Sudoku_HEADER_FILES = \
 Controller.h \
 DigitSource.h \
 Document.h \
-KnobView.h \
 Sudoku.h \
 SudokuView.h
 
@@ -44,7 +43,6 @@ Sudoku_OBJC_FILES = \
 Controller.m \
 DigitSource.m \
 Document.m \
-KnobView.m \
 Sudoku.m \
 SudokuView.m
 

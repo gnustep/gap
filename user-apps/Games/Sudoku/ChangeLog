@@ -3,6 +3,12 @@
 	* SudokuView.m
 	Converted to NBezierPath drawing
 
+	* KnobView.h
+	* KnobView.m
+	* GNUmakefile
+	* Controller.m
+	Use standard progress indicator.
+
 2011-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.m
