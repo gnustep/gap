@@ -40,7 +40,7 @@
 
 
     sdk = [[Sudoku alloc] init];
-    RETAIN(sdk);
+    [sdk retain];
 
     return self;
 }

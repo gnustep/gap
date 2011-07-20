@@ -5,6 +5,7 @@
    Copyright (C) 2007-2011 The Free Software Foundation, Inc
 
    Author: Marko Riedel
+           Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -73,7 +74,7 @@ static NSImage *dragImages[10] = {
 
 
     img = [[NSImage alloc] initWithSize:NSMakeSize(DIGIT_FIELD_DIM, DIGIT_FIELD_DIM)];
-    RETAIN(img);
+    [img retain];
 
     [img lockFocus];
 
