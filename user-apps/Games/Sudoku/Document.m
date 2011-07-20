@@ -101,12 +101,8 @@
 
   // We have to do this ourself, as there is currently no nib file
   // [controller setShouldCascadeWindows:NO];
-  [self windowControllerDidLoadNib: controller];
-
-  [win setFrameAutosaveName:[self fileName]];
-  if([win setFrameUsingName:[self fileName]]==NO){
-      [win center];
-  }
+  if([self fileName] == nil)
+    [win center];
 
   [win orderFrontRegardless];
   [win makeKeyWindow];
