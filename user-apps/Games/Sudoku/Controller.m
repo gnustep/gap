@@ -61,7 +61,7 @@ static NSPanel *_prog_ind_panel = nil;
 	[_prog_ind setIndeterminate: NO];
         [_prog_ind_panel setContentView:_prog_ind];
 
-	[_prog_ind_panel setTitle:_(@"Computing Sudoku")];
+	[_prog_ind_panel setTitle:NSLocalizedString(@"Computing Sudoku", @"Title")];
     }
 
     [_prog_ind_panel center];
@@ -216,7 +216,7 @@ typedef enum {
 			styleMask:m                   
 			backing: NSBackingStoreBuffered
                              defer:YES];
-  [enterPanel setTitle:_(@"Enter Sudoku")];
+  [enterPanel setTitle:NSLocalizedString(@"Enter Sudoku", @"act of inserting")];
   [enterPanel setDelegate:self];
 
   [[enterPanel contentView] addSubview:sdkview];
@@ -235,7 +235,7 @@ typedef enum {
 
 
   button = [NSButton new];
-  [button setTitle:_(@"Enter")];
+  [button setTitle:NSLocalizedString(@"Enter", @"inserting")];
   [button setTarget:self];
   [button setAction:@selector(actionEnter:)];
 
@@ -244,7 +244,7 @@ typedef enum {
   [[enterPanel contentView] addSubview:button];
 
   button = [NSButton new];
-  [button setTitle:_(@"Reset")];
+  [button setTitle:NSLocalizedString(@"Reset", @"Button")];
   [button setTarget:self];
   [button setAction:@selector(actionReset:)];
 
@@ -253,7 +253,7 @@ typedef enum {
   [[enterPanel contentView] addSubview:button];
 
   button = [NSButton new];
-  [button setTitle:_(@"Cancel")];
+  [button setTitle:NSLocalizedString(@"Cancel", @"Button")];
   [button setTarget:self];
   [button setAction:@selector(actionCancel:)];
 
@@ -344,9 +344,9 @@ typedef enum {
     [[NSApplication sharedApplication] endModalSession:solveSession];
 
     if(success==NO){
-	NSRunAlertPanel(_(@"Solve failed"),
-			_(@"Could not solve Sudoku after %d sec(s)."),
-			_(@"Ok"), nil, nil, MAX_SOLVE_SECS);
+	NSRunAlertPanel(NSLocalizedString(@"Solve failed", @"Alert"),
+			NSLocalizedString(@"Could not solve Sudoku after %d sec(s).", @"Alert"),
+			NSLocalizedString(@"Ok", @"Button"), nil, nil, MAX_SOLVE_SECS);
 	[doc close];
     }
     else{
@@ -444,7 +444,7 @@ typedef enum {
   [palette setMinSize:pframe.size];
   [palette setMaxSize:pframe.size];
 
-  [palette setTitle:_(@"Digits")];
+  [palette setTitle:NSLocalizedString(@"Digits", @"number components")];
   [palette setDelegate:self];
 
   [palette setFrameUsingName: @"SudokuDigitPalette"];
