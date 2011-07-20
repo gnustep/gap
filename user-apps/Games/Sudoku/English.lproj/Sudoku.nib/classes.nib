@@ -1,0 +1,23 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                actionCancel = id; 
+                actionEnter = id; 
+                actionReset = id; 
+                enterPuzzle = id; 
+                newPuzzle = id; 
+            }; 
+            CLASS = Controller; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {enterPuzzle = id; resetPuzzle = id; solvePuzzle = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
