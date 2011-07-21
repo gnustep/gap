@@ -366,7 +366,7 @@ void init_constants() {
       {
         [attributes setObject: hyperlinkTarget
                        forKey: NSLinkAttributeName];
-        [attributes setObject: hyperlinkTarget
+        [attributes setObject: [hyperlinkTarget absoluteString]
                        forKey: NSToolTipAttributeName];
         [attributes setObject: [NSCursor pointingHandCursor]
                        forKey: NSCursorAttributeName];
