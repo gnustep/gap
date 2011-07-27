@@ -1,5 +1,5 @@
 AC_PREREQ(2.52)
-AC_INIT(PDFKit, 0.9)
+AC_INIT(PDFKit, 0.9.1)
 
 if test -z "$GNUSTEP_SYSTEM_ROOT"; then
   AC_MSG_ERROR([You must run the GNUstep initialization script first!])

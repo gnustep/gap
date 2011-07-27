@@ -1,9 +1,10 @@
 #
 # GNUmakefile
 #
-# Compile the PDFKit Framework (part of ImageKits).
+# Compile the PDFKit Framework.
 #
 # Copyright (C) 2003 Stefan Kleine Stegemann <stefan@wms-network.de>
+#	        2010-2011 Riccardo Mottola
 #
 # This Makefile is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
