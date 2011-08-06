@@ -32,6 +32,7 @@
 
 #if defined (linux)
 #define DEV_SYS_POWERSUPPLY  @"/sys/class/power_supply"
+#define DEV_PROC_PMU  @"/proc/pmu"
 #endif
 
 #if defined(__APPLE__)
@@ -95,15 +96,17 @@
 
   if ((self = [super init]))
     {
-      useACPIproc = NO;
-      useACPIsys  = NO;
-      useAPM      = NO;
       useWattHours= YES;
       
       isCharging = NO;
       batteryManufacturer = nil;
       
 #if defined(linux)
+      useACPIproc = NO;
+      useACPIsys  = NO;
+      useAPM      = NO;
+      usePMU      = NO;
+
       /* look for a battery */
       NSLog(@"looking for ACPI...");
       fm = [NSFileManager defaultManager];
@@ -188,6 +191,16 @@
 		  NSLog(@"found apm");
 		  useAPM = YES;
 		  strcpy(apmPath, "/proc/apm");
+		}
+	      else
+		{
+		  dirNames = [fm directoryContentsAtPath:DEV_PROC_PMU];
+		  if (dirNames != nil)
+		    {
+		      NSLog(@"Found PMU");
+		      usePMU = YES;
+		      useWattHours = NO;
+		    }
 		}
 	    }
 	}
@@ -827,6 +840,58 @@
 	  }
     
 	fclose(stateFile);
+      }
+    else if (usePMU)
+      {
+	NSString *strPmuInfo;
+	NSString *strPmuBat;
+	NSArray *arrayOfLines;
+	NSArray *lineArray;
+	NSString *strValue;
+
+	strPmuInfo = [NSString stringWithContentsOfFile: @"/proc/pmu/info"];
+	arrayOfLines = [strPmuInfo componentsSeparatedByString: @"\n"];
+      	NSLog(@"info %@", arrayOfLines);
+	lineArray = [[arrayOfLines objectAtIndex: 2] componentsSeparatedByString: @":"];
+	strValue = [lineArray objectAtIndex: 1];
+	if ([strValue intValue] == 1)
+	  {
+	    isCharging = YES;
+	    chargeState = @"Charging";
+	  }
+	else
+	  {
+	    isCharging = NO;
+	    chargeState = @"Discharging";
+	  }
+
+	strPmuBat = [NSString stringWithContentsOfFile: @"/proc/pmu/battery_0"];
+	arrayOfLines = [strPmuBat componentsSeparatedByString: @"\n"];
+	NSLog(@"battery0 %@", arrayOfLines);
+
+	lineArray = [[arrayOfLines objectAtIndex: 2] componentsSeparatedByString: @":"];
+	strValue = [lineArray objectAtIndex: 1];
+	currCap = (float)([strValue doubleValue] / 1000);
+
+	lineArray = [[arrayOfLines objectAtIndex: 3] componentsSeparatedByString: @":"];
+	strValue = [lineArray objectAtIndex: 1];
+	lastCap = (float)([strValue doubleValue] / 1000);
+
+	lineArray = [[arrayOfLines objectAtIndex: 4] componentsSeparatedByString: @":"];
+	strValue = [lineArray objectAtIndex: 1];
+	amps = (float)([strValue doubleValue] / 1000);
+
+	lineArray = [[arrayOfLines objectAtIndex: 5] componentsSeparatedByString: @":"];
+	strValue = [lineArray objectAtIndex: 1];
+	volts = (float)([strValue doubleValue] / 1000);
+
+	lineArray = [[arrayOfLines objectAtIndex: 6] componentsSeparatedByString: @":"];
+	strValue = [lineArray objectAtIndex: 1];
+	timeRemaining = (float)[strValue intValue] / 3600;
+
+	desCap = lastCap; /* we can't do better with PMU */
+	chargePercent = currCap/lastCap*100;
+	watts = amps * volts;
       }
 
 #endif /* OS */

@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2010 GNUstep Application Project
+   Copyright (C) 2006-2011 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -33,11 +33,12 @@
     @private char     apmPath[1024];
     @private NSString *batterySysAcpiString;
 
-#endif
-
     @private BOOL     useACPIsys;
     @private BOOL     useACPIproc;
     @private BOOL     useAPM;
+    @private BOOL     usePMU;
+#endif
+
     @private BOOL     useWattHours;
     @private float    volts;
     @private float    amps;
