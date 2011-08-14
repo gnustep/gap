@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.m
 
-   Copyright (C) 2006-2009 Riccardo Mottola
+   Copyright (C) 2006-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -60,6 +60,31 @@
 {
     [fileNames removeObjectAtIndex:index];
     [filePaths removeObjectAtIndex:index];
+}
+
+- (void)scrambleObjects
+{
+  NSMutableArray *newNames;
+  NSMutableArray *newPaths;
+  
+  newNames = [NSMutableArray arrayWithCapacity: [fileNames count]];
+  newPaths = [NSMutableArray arrayWithCapacity: [filePaths count]];
+  while ([fileNames count] > 0)
+    {
+      unsigned i;
+      
+      /* get a rescaled random number */
+      i = (unsigned)lround(((double)random() / ULONG_MAX) * [fileNames count]);
+      [newNames addObject: [fileNames objectAtIndex: i]];
+      [fileNames removeObjectAtIndex: i];
+      [newPaths addObject: [filePaths objectAtIndex: i]];
+      [filePaths removeObjectAtIndex: i];
+    }
+  [fileNames release];
+  [filePaths release];
+  
+  fileNames = [newNames retain];
+  filePaths = [newPaths retain];
 }
 
 

@@ -1,7 +1,14 @@
+2011-08-10 Riccardo Mottola <rm@gnu.org>
+
+	* FileTable.[h,m]
+	* AppController.[h,m]
+	* English.lproj/LaternaMagica.nib
+	Scramble list.
+
 2011-01-27 Riccardo Mottola <rm@gnu.org>
-	*  AppController.h
-    *  AppController.m
-    *  LaternaMagic.nib
+	* AppController.h
+	* AppController.m
+	* English.lproj/LaternaMagica.nib
 	clear list command.
 
 2011-01-22 Riccardo Mottola <rm@gnu.org>

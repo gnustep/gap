@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85B7C71913F302DB005EF60D /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = 85B7C71813F302DB005EF60D /* ChangeLog */; };
 		85DB9A5D10B3D3C100DC1358 /* FileTable.h in Headers */ = {isa = PBXBuildFile; fileRef = F5D00DF9097C409A01A80101 /* FileTable.h */; };
 		85DB9A5E10B3D3C100DC1358 /* AppController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5D00DFD097C40DD01A80101 /* AppController.h */; };
 		85DB9A5F10B3D3C100DC1358 /* LMFlipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DA40910A3B94BE00A80101 /* LMFlipView.h */; };
@@ -34,6 +35,7 @@
 		855F873C0F34FE6400C1D9A8 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
 		855F873D0F34FE6400C1D9A8 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		858E59FA0F365467009E7B11 /* LM_icons_osx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LM_icons_osx.icns; sourceTree = "<group>"; };
+		85B7C71813F302DB005EF60D /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
 		85DA40910A3B94BE00A80101 /* LMFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMFlipView.h; sourceTree = "<group>"; };
 		85DA40920A3B94BE00A80101 /* LMFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMFlipView.m; sourceTree = "<group>"; };
 		85DB9A6D10B3D3C100DC1358 /* Info-LaternaMagica.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-LaternaMagica.plist"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				85DB9A6D10B3D3C100DC1358 /* Info-LaternaMagica.plist */,
+				85B7C71813F302DB005EF60D /* ChangeLog */,
 			);
 			name = LaternaMagica;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				85DB9A6210B3D3C100DC1358 /* LaternaMagica.nib in Resources */,
 				85DB9A6310B3D3C100DC1358 /* InfoPlist.strings in Resources */,
 				85DB9A6410B3D3C100DC1358 /* LM_icons_osx.icns in Resources */,
+				85B7C71913F302DB005EF60D /* ChangeLog in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

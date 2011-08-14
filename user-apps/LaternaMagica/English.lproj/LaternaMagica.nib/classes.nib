@@ -16,6 +16,7 @@
                 rotateImage90 = id; 
                 saveImageAs = id; 
                 savePreferences = id; 
+                scrambleList = id; 
                 setCompressionLevel = id; 
                 setCompressionType = id; 
                 setExportPath = id; 

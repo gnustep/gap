@@ -76,6 +76,7 @@
 - (IBAction)prevImage:(id)sender;
 - (IBAction)nextImage:(id)sender;
 - (IBAction)removeAllImages:(id)sender;
+- (IBAction)scrambleList:(id)sender;
 - (IBAction)removeImage:(id)sender;
 - (IBAction)eraseImage:(id)sender;
 - (IBAction)rotateImage90:(id)sender;
