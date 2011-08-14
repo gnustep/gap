@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.h
 
-   Copyright (C) 2006-2007 Riccardo Mottola
+   Copyright (C) 2006-2011 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -28,13 +28,20 @@
 #import <AppKit/AppKit.h>
 
 
-@interface FileTable : NSObject {
+@interface FileTable : NSObject
+{
     NSMutableArray *fileNames;
     NSMutableArray *filePaths;
 }
 
 - (void)addPath:(NSString *)filename;
 - (NSString *)pathAtIndex :(int)index;
+
+/** removes an element at given index */
 - (void)removeObjectAtIndex:(int)index;
+
+/** shuffles the elements randomly */
+- (void)scrambleObjects;
+
 
 @end

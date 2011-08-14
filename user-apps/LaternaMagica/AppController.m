@@ -343,6 +343,16 @@
   [window setTitle:@"None"];
 }
 
+- (IBAction)scrambleList:(id)sender
+{
+  [fileListData scrambleObjects];
+  [fileListView reloadData];
+  
+  /* we reload the image directly without calling selectRow,
+     the selected row did not actually change and no notification triggers */
+  [self changeImage: [fileListData pathAtIndex: [fileListView selectedRow]]];
+}
+
 - (IBAction)removeImage:(id)sender
 {
     int sr;
