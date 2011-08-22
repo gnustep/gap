@@ -1,0 +1,73 @@
+{
+    "BUILDER_TARGETS" = (
+	all,
+	install,
+	uninstall,
+	clean,
+	distclean,
+	dist
+    );
+    "CLASS_FILES" = (
+	"OKCartesius.m"
+    );
+    COMPILEROPTIONS = "";
+    CPPOPTIONS = "";
+    "CREATION_DATE" = "";
+    "DOCU_FILES" = (
+    );
+    FRAMEWORKS = (
+    );
+    "HEADERS_INSTALL_DIR" = "";
+    "HEADER_FILES" = (
+	"OKCartesius.h"
+    );
+    IMAGES = (
+    );
+    INSTALLDIR = "$(HOME)/GNUstep/Library/Frameworks";
+    INTERFACES = (
+    );
+    LANGUAGE = English;
+    LIBRARIES = (
+	"gnustep-base",
+	"gnustep-gui"
+    );
+    LINKEROPTIONS = "";
+    MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    "OBJC_COMPILEROPTIONS" = "";
+    "OTHER_RESOURCES" = (
+    );
+    "OTHER_SOURCES" = (
+    );
+    "PROJECT_AUTHORS" = (
+	"Riccardo Mottola"
+    );
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2011";
+    "PROJECT_COPYRIGHT_DESC" = "Released under LGPL v3+";
+    "PROJECT_CREATOR" = "";
+    "PROJECT_DESCRIPTION" = "Oresme charting Kit";
+    "PROJECT_GROUP" = "No group avaliable!";
+    "PROJECT_MAINTAINER" = "";
+    "PROJECT_NAME" = OresmeKit;
+    "PROJECT_RELEASE" = "0.1";
+    "PROJECT_SUMMARY" = "No summary avaliable!";
+    "PROJECT_TYPE" = Framework;
+    "PROJECT_URL" = "";
+    "PUBLIC_HEADERS" = (
+	"OresmeKit.h",
+	"OKCarthesius.h"
+    );
+    "SEARCH_HEADER_DIRS" = (
+    );
+    "SEARCH_LIB_DIRS" = (
+    );
+    SUBPROJECTS = (
+    );
+    "SUPPORTING_FILES" = (
+	"GNUmakefile.preamble",
+	GNUmakefile,
+	"GNUmakefile.postamble"
+    );
+    "USER_LANGUAGES" = (
+	English
+    );
+}
