@@ -49,8 +49,25 @@
   NSRect boundsRect;
   NSBezierPath *path;
   int i;
+  NSPoint p;
   
   NSLog(@"Draw");
+
+  [[NSColor whiteColor] set];
+  [NSBezierPath fillRect: [self bounds]];
+
+  if ([arrayX count] == 0)
+    {
+      NSLog(@"nothing to draw");
+      return;
+    }
+
+  if ([arrayX count] != [arrayY count])
+    {
+      NSLog(@"X-Y series array differ insize, incoherency detected.");
+      return;
+    }
+
   origo = NSMakePoint(0, 0);
   boundsRect = [self bounds];
   if (quadrantPositioning == OKQuadrantCentered)
@@ -58,14 +75,31 @@
       origo = NSMakePoint(boundsRect.size.width/2, boundsRect.size.height/2);
     }
     
-  [[NSColor whiteColor] set];
-  [NSBezierPath fillRect: [self bounds]];
+
   
   [[NSColor blackColor] set];
   [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, origo.y)];
   [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, origo.x, boundsRect.size.height)];
 
+  path = [[NSBezierPath alloc] init];
 
+  i = 0;
+  p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] - origo.x,
+		  [[arrayY objectAtIndex: i] floatValue] - origo.y
+		  );
+  [path moveToPoint: p];
+  i++;
+  while (i < [arrayX count])
+    {
+      p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] - origo.x,
+		      [[arrayY objectAtIndex: i] floatValue] - origo.y
+		      );
+      [path lineToPoint: p];
+      i++;
+    }
+  [path stroke];
+
+  [path release];
 }
 
 -(void)dealloc

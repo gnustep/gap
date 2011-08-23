@@ -1,4 +1,3 @@
-ls
 /* 
    Project: Cartesius
 
@@ -50,18 +49,22 @@ ls
   int i;
   float x, y;
 
+  NSLog(@"Change curve");
+  arrayX = [cartesiusView arrayX];
+  arrayY = [cartesiusView arrayY];
   [arrayX removeAllObjects];
   [arrayY removeAllObjects];
 
   x = 0;
-  for (i = 0; i < 10; i++)
+  for (i = 0; i < 12; i++)
     {
       y = pow(x, 2);
       [arrayX addObject: [NSNumber numberWithFloat: x]];
       [arrayY addObject: [NSNumber numberWithFloat: y]];
 
-      x += 0.5;
+      x += 1;
     }
+  [cartesiusView setNeedsDisplay: YES];
 }
 
 - (void) awakeFromNib
