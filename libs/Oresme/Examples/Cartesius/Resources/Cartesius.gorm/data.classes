@@ -2,15 +2,17 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
-	    "showPrefPanel:"
+	    "changeCurve:"
 	);
 	Outlets = (
-	    cartesiusView
+	    cartesiusView,
+	    curve
 	);
 	Super = NSObject;
     };
     FirstResponder = {
 	Actions = (
+	    "changeCurve:",
 	    "orderFrontFontPanel:",
 	    "showPrefPanel:"
 	);
