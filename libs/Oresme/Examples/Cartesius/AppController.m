@@ -1,3 +1,4 @@
+ls
 /* 
    Project: Cartesius
 
@@ -41,6 +42,26 @@
 - (void) dealloc
 {
   [super dealloc];
+}
+
+- (IBAction)changeCurve:(id)sender
+{
+  NSMutableArray *arrayX, *arrayY;
+  int i;
+  float x, y;
+
+  [arrayX removeAllObjects];
+  [arrayY removeAllObjects];
+
+  x = 0;
+  for (i = 0; i < 10; i++)
+    {
+      y = pow(x, 2);
+      [arrayX addObject: [NSNumber numberWithFloat: x]];
+      [arrayY addObject: [NSNumber numberWithFloat: y]];
+
+      x += 0.5;
+    }
 }
 
 - (void) awakeFromNib

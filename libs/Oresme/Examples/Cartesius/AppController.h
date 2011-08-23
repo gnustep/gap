@@ -8,7 +8,7 @@
    Application Controller
 */
  
-
+#import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
 @class OKCartesius;
@@ -16,22 +16,10 @@
 @interface AppController : NSObject
 {
   IBOutlet OKCartesius *cartesiusView;
+  IBOutlet NSPopUpButton *curve;
 }
 
-+ (void)  initialize;
-
-- (id) init;
-- (void) dealloc;
-
-- (void) awakeFromNib;
-
-- (void) applicationDidFinishLaunching: (NSNotification *)aNotif;
-- (BOOL) applicationShouldTerminate: (id)sender;
-- (void) applicationWillTerminate: (NSNotification *)aNotif;
-- (BOOL) application: (NSApplication *)application
-	    openFile: (NSString *)fileName;
-
-- (void) showPrefPanel: (id)sender;
+- (IBAction)changeCurve:(id)sender;
 
 @end
 

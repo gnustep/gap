@@ -25,7 +25,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSView.h>
 
-enum
+typedef enum
   {
     OKQuadrantCentered = 0,
     OKQuadrantI = 1,
@@ -33,13 +33,17 @@ enum
     OKQuadrantIII = 3,
     OKQuadrantIV = 4,
     OKQuadrantAuto = 5
-  };
-typedef int OKQuadrantPositioning;
+  } OKQuadrantPositioning;
 
 @interface OKCartesius : NSView
 {
   OKQuadrantPositioning quadrantPositioning;
+  NSMutableArray *arrayX;
+  NSMutableArray *arrayY;
 }
+
+-(NSMutableArray *)arrayX;
+-(NSMutableArray *)arrayY;
 
 @end
 
