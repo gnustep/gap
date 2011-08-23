@@ -24,6 +24,7 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
 #import "OKCartesius.h"
@@ -36,7 +37,8 @@
   if (self)
     {
       quadrantPositioning = OKQuadrantCentered;
-      NSLog(@"Inited");
+      arrayX = [[NSMutableArray alloc] initWithCapacity: 10];
+      arrayY = [[NSMutableArray alloc] initWithCapacity: 10];
     }
   return self;
 }
@@ -45,6 +47,8 @@
 {
   NSPoint origo;
   NSRect boundsRect;
+  NSBezierPath *path;
+  int i;
   
   NSLog(@"Draw");
   origo = NSMakePoint(0, 0);
@@ -60,6 +64,25 @@
   [[NSColor blackColor] set];
   [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, origo.y)];
   [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, origo.x, boundsRect.size.height)];
+
+
+}
+
+-(void)dealloc
+{
+  [arrayX release];
+  [arrayY release];
+  [super dealloc];
+}
+
+-(NSMutableArray *)arrayX
+{
+  return arrayX;
+}
+
+-(NSMutableArray *)arrayY
+{
+  return arrayY;
 }
 
 @end
