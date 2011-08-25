@@ -3,6 +3,9 @@
 	* AppController.m:
 	Set random seed
 
+	* LMFlipView.m:
+	Recognize space as next
+
 2011-08-10 Riccardo Mottola <rm@gnu.org>
 
 	* FileTable.[h,m]
