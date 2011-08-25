@@ -1,3 +1,8 @@
+2011-08-25 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m:
+	Set random seed
+
 2011-08-10 Riccardo Mottola <rm@gnu.org>
 
 	* FileTable.[h,m]

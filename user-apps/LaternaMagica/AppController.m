@@ -27,6 +27,14 @@
 #define NSInteger int
 #endif
 
+#if defined(__MINGW__)
+#define srandom srand
+#define random rand
+#endif
+
+#include <stdlib.h>
+#include <time.h>
+
 #import "AppController.h"
 #import "PRScale.h"
 
@@ -39,10 +47,13 @@
 {
     if ((self = [super init]))
     {
-        // add an observer for the file table view
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_selectionDidChange:) name:NSTableViewSelectionDidChangeNotification object:fileListView];
-        // add an observer for the window resize
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_windowDidResize:) name:NSWindowDidResizeNotification object:window];
+      /* add an observer for the file table view */
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_selectionDidChange:) name:NSTableViewSelectionDidChangeNotification object:fileListView];
+      /* add an observer for the window resize */
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_windowDidResize:) name:NSWindowDidResizeNotification object:window];
+
+      /* initialize random number generator */
+      srandom(time(NULL));
     }
     return self;
 }
