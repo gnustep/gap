@@ -29,7 +29,8 @@
 /* we define our own constants */
 enum
 {
-  NSEscapeCharacter = 0x001b
+  NSEscapeCharacter = 0x001b,
+  NSSpaceCharacter = 0x0020
 };
 
 @implementation LMFlipView
@@ -76,7 +77,7 @@ enum
         [controller prevImage:theEvent];
         return YES;
       }
-    else if (keyCh == NSRightArrowFunctionKey || keyCh == NSDownArrowFunctionKey)
+    else if (keyCh == NSRightArrowFunctionKey || keyCh == NSDownArrowFunctionKey || keyCh == NSSpaceCharacter)
       {
         [controller nextImage:theEvent];
         return YES;
