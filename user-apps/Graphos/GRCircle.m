@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009-2010 GNUstep Application Project
+ Copyright (C) 2009-2011 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -372,7 +372,7 @@
 
     center = NSMakePoint(NSMidX(bounds), NSMidY(bounds));
     w = NSWidth(bounds);
-    h = NSWidth(bounds);
+    h = NSHeight(bounds);
     if (w > h)
         minLength = h;
     else
