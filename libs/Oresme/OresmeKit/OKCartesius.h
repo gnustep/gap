@@ -40,10 +40,21 @@ typedef enum
   OKQuadrantPositioning quadrantPositioning;
   NSMutableArray *arrayX;
   NSMutableArray *arrayY;
+  NSColor *backgroundColor;
+  NSColor *axisColor;
+  NSColor *curveColor;
+  float visibleXUnits;
+  float visibleYUnits;
 }
 
 -(NSMutableArray *)arrayX;
 -(NSMutableArray *)arrayY;
+-(void)setVisibleXUnits: (float)units;
+-(void)setVisibleYUnits: (float)units;
+-(void)setQuadrantPositioning:(OKQuadrantPositioning)p;
+-(void)setBackgroundColor:(NSColor *)color;
+-(void)setAxisColor:(NSColor *)color;
+-(void)setCurveColor:(NSColor *)color;
 
 @end
 
