@@ -19,7 +19,11 @@
   IBOutlet NSPopUpButton *curve;
 }
 
-- (IBAction)changeCurve:(id)sender;
+- (IBAction) changeCurve:(id)sender;
+- (IBAction) changeQuadrantPositioning: (id)sender;
+- (IBAction) changeBackgroundColor: (id)sender;
+- (IBAction) changeAxisColor: (id)sender;
+- (IBAction) changeCurveColor: (id)sender;
 
 @end
 

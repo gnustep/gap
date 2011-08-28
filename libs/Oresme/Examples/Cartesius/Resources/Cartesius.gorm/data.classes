@@ -2,7 +2,11 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
-	    "changeCurve:"
+	    "changeCurve:",
+	    "changeQuadrantPositioning:",
+	    "changeBackgroundColor:",
+	    "changeAxisColor:",
+	    "changeCurveColor:"
 	);
 	Outlets = (
 	    cartesiusView,
@@ -12,7 +16,11 @@
     };
     FirstResponder = {
 	Actions = (
+	    "changeAxisColor:",
+	    "changeBackgroundColor:",
 	    "changeCurve:",
+	    "changeCurveColor:",
+	    "changeQuadrantPositioning:",
 	    "orderFrontFontPanel:",
 	    "showPrefPanel:"
 	);
