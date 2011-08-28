@@ -48,11 +48,12 @@
     );
     "PRINCIPAL_CLASS" = NSApplication;
     "PROJECT_AUTHORS" = (
+	"Riccardo Mottola"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 200x";
-    "PROJECT_COPYRIGHT_DESC" = "Released under ...";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2011";
+    "PROJECT_COPYRIGHT_DESC" = "Released under GPL v3+";
     "PROJECT_CREATOR" = "Riccardo Mottola";
-    "PROJECT_DESCRIPTION" = "No description avaliable!";
+    "PROJECT_DESCRIPTION" = "Oresme Cartesius Demo";
     "PROJECT_DOCUMENTTYPES" = (
     );
     "PROJECT_GROUP" = "No group avaliable!";

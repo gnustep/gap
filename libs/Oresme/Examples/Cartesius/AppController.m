@@ -49,22 +49,103 @@
   int i;
   float x, y;
 
-  NSLog(@"Change curve");
+  NSLog(@"Change curve %d", [sender tag]);
   arrayX = [cartesiusView arrayX];
   arrayY = [cartesiusView arrayY];
   [arrayX removeAllObjects];
   [arrayY removeAllObjects];
 
-  x = 0;
-  for (i = 0; i < 12; i++)
+  if ([[sender selectedItem] tag] == 0)
     {
-      y = pow(x, 2);
-      [arrayX addObject: [NSNumber numberWithFloat: x]];
-      [arrayY addObject: [NSNumber numberWithFloat: y]];
+      x = 0;
+      for (i = 0; i < 12; i++)
+	{
+	  y = pow(x, 2);
+	  [arrayX addObject: [NSNumber numberWithFloat: x]];
+	  [arrayY addObject: [NSNumber numberWithFloat: y]];
 
-      x += 1;
+	  x += 1;
+	}
+      [cartesiusView setVisibleXUnits: 100];
+      [cartesiusView setVisibleYUnits: 100];
+    }
+  else if ([[sender selectedItem] tag] == 1)
+    {
+      x = -50;
+      for (i = 0; i < 10; i++)
+	{
+	  y = x;
+	  [arrayX addObject: [NSNumber numberWithFloat: x]];
+	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+
+	  x += 10;
+	}
+      [cartesiusView setVisibleXUnits: 60];
+      [cartesiusView setVisibleYUnits: 60];
+    }
+  else if ([[sender selectedItem] tag] == 2)
+    {
+      x = -6;
+      for (i = 0; i < 120; i++)
+	{
+	  y = sin(x);
+	  [arrayX addObject: [NSNumber numberWithFloat: x]];
+	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+
+	  x += .1;
+	}
+      [cartesiusView setVisibleXUnits: 15];
+      [cartesiusView setVisibleYUnits: 2];
+    }
+  else if ([[sender selectedItem] tag] == 3)
+    {
+      x = -25;
+      for (i = 0; i < 100; i++)
+	{
+	  y = sin(x)/x;
+	  [arrayX addObject: [NSNumber numberWithFloat: x]];
+	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+
+	  x += 0.5;
+	}
+      [cartesiusView setVisibleXUnits: 40];
+      [cartesiusView setVisibleYUnits: 2];
     }
   [cartesiusView setNeedsDisplay: YES];
+}
+
+- (IBAction) changeQuadrantPositioning: (id)sender
+{
+  NSLog(@"Change quadrant %d", [sender tag]);
+  if ([[sender selectedItem] tag] == 0)
+    [cartesiusView setQuadrantPositioning: OKQuadrantCentered];
+  else if ([[sender selectedItem] tag] == 1)
+    [cartesiusView setQuadrantPositioning: OKQuadrantI];
+  else if ([[sender selectedItem] tag] == 2)
+    [cartesiusView setQuadrantPositioning: OKQuadrantII];
+  else if ([[sender selectedItem] tag] == 3)
+    [cartesiusView setQuadrantPositioning: OKQuadrantIII];
+  else if ([[sender selectedItem] tag] == 4)
+    [cartesiusView setQuadrantPositioning: OKQuadrantIV];
+  [cartesiusView setNeedsDisplay: YES];
+}
+
+- (IBAction) changeBackgroundColor: (id)sender
+{
+ [cartesiusView setBackgroundColor: [sender color]];
+ [cartesiusView setNeedsDisplay: YES];
+}
+
+- (IBAction) changeAxisColor: (id)sender
+{
+ [cartesiusView setAxisColor: [sender color]];
+ [cartesiusView setNeedsDisplay: YES];
+}
+
+- (IBAction) changeCurveColor: (id)sender
+{
+ [cartesiusView setCurveColor: [sender color]];
+ [cartesiusView setNeedsDisplay: YES];
 }
 
 - (void) awakeFromNib
