@@ -39,6 +39,11 @@
       quadrantPositioning = OKQuadrantCentered;
       arrayX = [[NSMutableArray alloc] initWithCapacity: 10];
       arrayY = [[NSMutableArray alloc] initWithCapacity: 10];
+      backgroundColor = [[NSColor whiteColor] retain];
+      axisColor = [[NSColor blackColor] retain];
+      curveColor = [[NSColor blueColor] retain];
+      visibleXUnits = 10;
+      visibleYUnits = 10;
     }
   return self;
 }
@@ -50,10 +55,11 @@
   NSBezierPath *path;
   int i;
   NSPoint p;
+  float xScale, yScale;
   
   NSLog(@"Draw");
 
-  [[NSColor whiteColor] set];
+  [backgroundColor set];
   [NSBezierPath fillRect: [self bounds]];
 
   if ([arrayX count] == 0)
@@ -68,32 +74,51 @@
       return;
     }
 
-  origo = NSMakePoint(0, 0);
   boundsRect = [self bounds];
+  xScale = boundsRect.size.width / visibleXUnits;
+  yScale = boundsRect.size.height / visibleYUnits;
+
+  origo = NSMakePoint(0, 0);
   if (quadrantPositioning == OKQuadrantCentered)
     {
       origo = NSMakePoint(boundsRect.size.width/2, boundsRect.size.height/2);
     }
-    
-
-  
-  [[NSColor blackColor] set];
+  else if (quadrantPositioning == OKQuadrantI)
+    {
+      origo = NSMakePoint(0,0);
+    }
+  else if (quadrantPositioning == OKQuadrantII)
+    {
+      origo = NSMakePoint(boundsRect.size.width, 0);
+    }
+  else if (quadrantPositioning == OKQuadrantIII)
+    {
+      origo = NSMakePoint(boundsRect.size.width, boundsRect.size.height);
+    }
+  else if (quadrantPositioning == OKQuadrantIV)
+    {
+      origo = NSMakePoint(0, boundsRect.size.height);
+    }
+ 
+  [axisColor set];
   [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, origo.y)];
   [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, origo.x, boundsRect.size.height)];
 
+  [curveColor set];
   path = [[NSBezierPath alloc] init];
 
   i = 0;
-  p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] - origo.x,
-		  [[arrayY objectAtIndex: i] floatValue] - origo.y
+  p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] * xScale + origo.x,
+		  [[arrayY objectAtIndex: i] floatValue] * yScale + origo.y
 		  );
   [path moveToPoint: p];
   i++;
   while (i < [arrayX count])
     {
-      p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] - origo.x,
-		      [[arrayY objectAtIndex: i] floatValue] - origo.y
+      p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] * xScale + origo.x,
+		      [[arrayY objectAtIndex: i] floatValue] * yScale + origo.y
 		      );
+      NSLog(@"%f %f", p.x, p.y);
       [path lineToPoint: p];
       i++;
     }
@@ -106,6 +131,7 @@
 {
   [arrayX release];
   [arrayY release];
+  [backgroundColor release];
   [super dealloc];
 }
 
@@ -117,6 +143,40 @@
 -(NSMutableArray *)arrayY
 {
   return arrayY;
+}
+
+-(void)setVisibleXUnits: (float)units
+{
+  visibleXUnits = units;
+}
+
+-(void)setVisibleYUnits: (float)units
+{
+  visibleYUnits = units;
+}
+
+
+-(void)setQuadrantPositioning:(OKQuadrantPositioning)p
+{
+  quadrantPositioning = p;
+}
+
+-(void)setBackgroundColor:(NSColor *)color
+{
+  [backgroundColor release];
+  backgroundColor = [color retain];
+}
+
+-(void)setAxisColor:(NSColor *)color
+{
+  [axisColor release];
+  axisColor = [color retain];
+}
+
+-(void)setCurveColor:(NSColor *)color
+{
+  [curveColor release];
+  curveColor = [color retain];
 }
 
 @end
