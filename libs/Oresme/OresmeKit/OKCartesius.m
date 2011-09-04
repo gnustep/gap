@@ -56,6 +56,7 @@
   int i;
   NSPoint p;
   float xScale, yScale;
+  float hugeVal;
   
   NSLog(@"Draw");
 
@@ -77,6 +78,7 @@
   boundsRect = [self bounds];
   xScale = boundsRect.size.width / visibleXUnits;
   yScale = boundsRect.size.height / visibleYUnits;
+  hugeVal = boundsRect.size.width * 100;
 
   origo = NSMakePoint(0, 0);
   if (quadrantPositioning == OKQuadrantCentered)
@@ -118,6 +120,20 @@
       p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] * xScale + origo.x,
 		      [[arrayY objectAtIndex: i] floatValue] * yScale + origo.y
 		      );
+      if (isnan(p.x))
+	{
+	  if (p.x > 0)
+	    p.x = hugeVal;
+	  else
+	    p.x = -hugeVal;
+	}
+      if (isnan(p.y))
+	{
+	  if (p.y > 0)
+	    p.y = hugeVal;
+	  else
+	    p.y = -hugeVal;
+	}
       NSLog(@"%f %f", p.x, p.y);
       [path lineToPoint: p];
       i++;
