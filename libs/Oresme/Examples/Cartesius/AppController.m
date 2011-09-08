@@ -55,12 +55,13 @@
   [arrayX removeAllObjects];
   [arrayY removeAllObjects];
 
+  /* parabola */
   if ([[sender selectedItem] tag] == 0)
     {
-      x = 0;
-      for (i = 0; i < 12; i++)
+      x = -10;
+      for (i = 0; i <= 20; i++)
 	{
-	  y = pow(x, 2);
+	  y = 0.5 * pow(x, 2);
 	  [arrayX addObject: [NSNumber numberWithFloat: x]];
 	  [arrayY addObject: [NSNumber numberWithFloat: y]];
 
@@ -69,10 +70,11 @@
       [cartesiusView setVisibleXUnits: 100];
       [cartesiusView setVisibleYUnits: 100];
     }
+  /* line */
   else if ([[sender selectedItem] tag] == 1)
     {
-      x = -50;
-      for (i = 0; i < 10; i++)
+      x = -75;
+      for (i = 0; i < 15; i++)
 	{
 	  y = x;
 	  [arrayX addObject: [NSNumber numberWithFloat: x]];
@@ -83,6 +85,7 @@
       [cartesiusView setVisibleXUnits: 60];
       [cartesiusView setVisibleYUnits: 60];
     }
+  /* sine */
   else if ([[sender selectedItem] tag] == 2)
     {
       x = -6;
@@ -97,12 +100,16 @@
       [cartesiusView setVisibleXUnits: 15];
       [cartesiusView setVisibleYUnits: 2];
     }
+  /* sinc */
   else if ([[sender selectedItem] tag] == 3)
     {
       x = -25;
       for (i = 0; i < 100; i++)
 	{
-	  y = sin(x)/x;
+	  if(x == 0)
+	    y = 1;
+	  else
+	    y = sin(x)/x;
 	  [arrayX addObject: [NSNumber numberWithFloat: x]];
 	  [arrayY addObject: [NSNumber numberWithFloat: y]];
 
