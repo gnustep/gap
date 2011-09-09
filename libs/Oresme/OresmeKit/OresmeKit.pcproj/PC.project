@@ -8,7 +8,10 @@
 	dist
     );
     "CLASS_FILES" = (
-	"OKCartesius.m"
+	"OKCartesius.m",
+	"OKChart.m",
+	"OKSeries.m",
+	"OKLineChart.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -19,7 +22,11 @@
     );
     "HEADERS_INSTALL_DIR" = "";
     "HEADER_FILES" = (
-	"OKCartesius.h"
+	"OKCartesius.h",
+	"OKChart.h",
+	"OKSeries.h",
+	"OKLineChart.h",
+	"OresmeKit.h"
     );
     IMAGES = (
     );
@@ -54,7 +61,11 @@
     "PROJECT_URL" = "";
     "PUBLIC_HEADERS" = (
 	"OresmeKit.h",
-	"OKCarthesius.h"
+	"OKCartesius.h",
+	"OKChart.h",
+	"OKSeries.h",
+	"OKLineChart.h",
+	"OresmeKit.h"
     );
     "SEARCH_HEADER_DIRS" = (
     );

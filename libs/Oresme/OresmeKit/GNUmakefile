@@ -23,13 +23,21 @@ OresmeKit_DEPLOY_WITH_CURRENT_VERSION = yes
 # Public headers (will be installed)
 #
 OresmeKit_HEADER_FILES = \
-OKCartesius.h 
+OresmeKit.h \
+OKCartesius.h \
+OKChart.h \
+OKSeries.h \
+OKLineChart.h \
+OresmeKit.h 
 
 #
 # Class files
 #
 OresmeKit_OBJC_FILES = \
-OKCartesius.m
+OKCartesius.m \
+OKChart.m \
+OKSeries.m \
+OKLineChart.m
 
 #
 # Makefiles
