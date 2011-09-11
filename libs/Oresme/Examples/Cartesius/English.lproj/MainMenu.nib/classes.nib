@@ -1,0 +1,20 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                changeAxisColor = id; 
+                changeBackgroundColor = id; 
+                changeCurve = id; 
+                changeCurveColor = id; 
+                changeQuadrantPositioning = id; 
+            }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {cartesiusView = OKCartesius; curve = NSPopUpButton; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = OKCartesius; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}
