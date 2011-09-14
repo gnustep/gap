@@ -50,4 +50,27 @@
   [super dealloc];
 }
 
+/* --- NSArray bridge methods ---*/
+
+- (id) objectAtIndex: (NSUInteger)index
+{
+  return [seriesArray objectAtIndex: index];
+}
+
+- (NSUInteger) count
+{
+  return [seriesArray count]; 
+}
+- (void) removeAllObjects
+{
+  [seriesArray removeAllObjects];
+}
+
+- (void) removeObjectAtIndex: (NSUInteger)index
+{
+  [seriesArray removeObjectAtIndex: index];
+}
+
+/* --- end of NSArray bridge methods ---*/
+
 @end

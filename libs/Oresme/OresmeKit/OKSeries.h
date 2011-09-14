@@ -36,6 +36,11 @@
   NSMutableArray *seriesArray;
 }
 
+- (id) objectAtIndex: (NSUInteger)index;
+- (NSUInteger) count;
+- (void) removeAllObjects;
+- (void) removeObjectAtIndex: (NSUInteger)index;
+
 @end
 
 
