@@ -45,15 +45,16 @@
 
 - (IBAction)changeCurve:(id)sender
 {
-  NSMutableArray *arrayX, *arrayY;
+  NSMutableArray *curve1, *curve2;
   int i;
   float x, y;
+  NSPoint p;
 
   NSLog(@"Change curve %d", [sender tag]);
-  arrayX = [cartesiusView arrayX];
-  arrayY = [cartesiusView arrayY];
-  [arrayX removeAllObjects];
-  [arrayY removeAllObjects];
+  curve1 = [cartesiusView curve1];
+  curve2 = [cartesiusView curve2];
+  [curve1 removeAllObjects];
+  [curve2 removeAllObjects];
 
   /* parabola */
   if ([[sender selectedItem] tag] == 0)
@@ -62,8 +63,8 @@
       for (i = 0; i <= 20; i++)
 	{
 	  y = 0.5 * pow(x, 2);
-	  [arrayX addObject: [NSNumber numberWithFloat: x]];
-	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+	  p = NSMakePoint(x, y);
+	  [curve1 addObject: [NSValue valueWithPoint: p]];
 
 	  x += 1;
 	}
@@ -77,8 +78,8 @@
       for (i = 0; i < 15; i++)
 	{
 	  y = x;
-	  [arrayX addObject: [NSNumber numberWithFloat: x]];
-	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+	  p = NSMakePoint(x, y);
+	  [curve1 addObject: [NSValue valueWithPoint: p]];
 
 	  x += 10;
 	}
@@ -92,8 +93,8 @@
       for (i = 0; i < 120; i++)
 	{
 	  y = sin(x);
-	  [arrayX addObject: [NSNumber numberWithFloat: x]];
-	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+	  p = NSMakePoint(x, y);
+	  [curve1 addObject: [NSValue valueWithPoint: p]];
 
 	  x += .1;
 	}
@@ -110,8 +111,8 @@
 	    y = 1;
 	  else
 	    y = sin(x)/x;
-	  [arrayX addObject: [NSNumber numberWithFloat: x]];
-	  [arrayY addObject: [NSNumber numberWithFloat: y]];
+	  p = NSMakePoint(x, y);
+	  [curve1 addObject: [NSValue valueWithPoint: p]];
 
 	  x += 0.5;
 	}
@@ -151,7 +152,7 @@
 
 - (IBAction) changeCurveColor: (id)sender
 {
- [cartesiusView setCurveColor: [sender color]];
+ [cartesiusView setCurve1Color: [sender color]];
  [cartesiusView setNeedsDisplay: YES];
 }
 

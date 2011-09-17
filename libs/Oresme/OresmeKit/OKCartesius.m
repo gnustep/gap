@@ -37,11 +37,12 @@
   if (self)
     {
       quadrantPositioning = OKQuadrantCentered;
-      arrayX = [[NSMutableArray alloc] initWithCapacity: 10];
-      arrayY = [[NSMutableArray alloc] initWithCapacity: 10];
+      curve1 = [[NSMutableArray alloc] initWithCapacity: 10];
+      curve2 = [[NSMutableArray alloc] initWithCapacity: 10];
       backgroundColor = [[NSColor whiteColor] retain];
       axisColor = [[NSColor blackColor] retain];
-      curveColor = [[NSColor blueColor] retain];
+      curve1Color = [[NSColor blueColor] retain];
+      curve2Color = [[NSColor redColor] retain];
       visibleXUnits = 10;
       visibleYUnits = 10;
     }
@@ -63,13 +64,13 @@
   [backgroundColor set];
   [NSBezierPath fillRect: [self bounds]];
 
-  if ([arrayX count] == 0)
+  if ([curve1 count] == 0)
     {
       NSLog(@"nothing to draw");
       return;
     }
 
-  if ([arrayX count] != [arrayY count])
+  if ([curve1 count] != [curve1 count])
     {
       NSLog(@"X-Y series array differ insize, incoherency detected.");
       return;
@@ -106,19 +107,19 @@
   [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, origo.y)];
   [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, origo.x, boundsRect.size.height)];
 
-  [curveColor set];
+  [curve1Color set];
   path = [[NSBezierPath alloc] init];
 
   i = 0;
-  p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] * xScale + origo.x,
-		  [[arrayY objectAtIndex: i] floatValue] * yScale + origo.y
+  p = NSMakePoint([[curve1 objectAtIndex: i] pointValue].x * xScale + origo.x,
+		  [[curve1 objectAtIndex: i] pointValue].y * yScale + origo.y
 		  );
   [path moveToPoint: p];
   i++;
-  while (i < [arrayX count])
+  while (i < [curve1 count])
     {
-      p = NSMakePoint([[arrayX objectAtIndex: i] floatValue] * xScale + origo.x,
-		      [[arrayY objectAtIndex: i] floatValue] * yScale + origo.y
+      p = NSMakePoint([[curve1 objectAtIndex: i] pointValue].x * xScale + origo.x,
+		      [[curve1 objectAtIndex: i] pointValue].y * yScale + origo.y
 		      );
       if (isnan(p.x))
 	{
@@ -145,20 +146,24 @@
 
 -(void)dealloc
 {
-  [arrayX release];
-  [arrayY release];
+  [curve1 release];
+  [curve2 release];
   [backgroundColor release];
+  [curve1Color release];
+  [curve2Color release];
   [super dealloc];
 }
 
--(NSMutableArray *)arrayX
+/**  series 1 array of NSPoints */
+-(NSMutableArray *)curve1
 {
-  return arrayX;
+  return curve1;
 }
 
--(NSMutableArray *)arrayY
+/**  series 2 array of NSPoints */
+-(NSMutableArray *)curve2
 {
-  return arrayY;
+  return curve2;
 }
 
 -(void)setVisibleXUnits: (float)units
@@ -189,10 +194,16 @@
   axisColor = [color retain];
 }
 
--(void)setCurveColor:(NSColor *)color
+-(void)setCurve1Color:(NSColor *)color
 {
-  [curveColor release];
-  curveColor = [color retain];
+  [curve1Color release];
+  curve1Color = [color retain];
+}
+
+-(void)setCurve2Color:(NSColor *)color
+{
+  [curve2Color release];
+  curve2Color = [color retain];
 }
 
 @end
