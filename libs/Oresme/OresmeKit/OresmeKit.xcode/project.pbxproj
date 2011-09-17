@@ -139,6 +139,7 @@
 		};
 		08FB77AEFE84172EC02AAC07 = {
 			children = (
+				85777E17142500CE00DABF4A,
 				85085025141CD74600FD33EA,
 				85085026141CD74600FD33EA,
 				85085027141CD74600FD33EA,
@@ -252,6 +253,9 @@
 			fileRef = 85085025141CD74600FD33EA;
 			isa = PBXBuildFile;
 			settings = {
+				ATTRIBUTES = (
+					Public,
+				);
 			};
 		};
 		8508502C141CD74600FD33EA = {
@@ -264,6 +268,9 @@
 			fileRef = 85085027141CD74600FD33EA;
 			isa = PBXBuildFile;
 			settings = {
+				ATTRIBUTES = (
+					Public,
+				);
 			};
 		};
 		8508502E141CD74600FD33EA = {
@@ -276,12 +283,32 @@
 			fileRef = 85085029141CD74600FD33EA;
 			isa = PBXBuildFile;
 			settings = {
+				ATTRIBUTES = (
+					Public,
+				);
 			};
 		};
 		85085030141CD74600FD33EA = {
 			fileRef = 8508502A141CD74600FD33EA;
 			isa = PBXBuildFile;
 			settings = {
+			};
+		};
+		85777E17142500CE00DABF4A = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = OresmeKit.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85777E18142500CE00DABF4A = {
+			fileRef = 85777E17142500CE00DABF4A;
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					Public,
+				);
 			};
 		};
 		8577BEDD1416C4AD0017A4AE = {
@@ -363,6 +390,7 @@
 				8508502B141CD74600FD33EA,
 				8508502D141CD74600FD33EA,
 				8508502F141CD74600FD33EA,
+				85777E18142500CE00DABF4A,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

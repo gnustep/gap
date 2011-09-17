@@ -28,6 +28,10 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSColor.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSUInteger unsigned
+#endif
+
 @interface OKSeries : NSObject
 {
   NSString       *description;
