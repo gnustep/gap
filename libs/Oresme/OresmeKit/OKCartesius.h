@@ -38,23 +38,26 @@ typedef enum
 @interface OKCartesius : NSView
 {
   OKQuadrantPositioning quadrantPositioning;
-  NSMutableArray *arrayX;
-  NSMutableArray *arrayY;
+  NSMutableArray *curve1; /** array of NSPoints in NSValues */
+  NSMutableArray *curve2; /** array of NSPoints in NSValues */
   NSColor *backgroundColor;
   NSColor *axisColor;
-  NSColor *curveColor;
+  NSColor *curve1Color;
+  NSColor *curve2Color;
   float visibleXUnits;
   float visibleYUnits;
 }
 
--(NSMutableArray *)arrayX;
--(NSMutableArray *)arrayY;
+-(NSMutableArray *)curve1;
+-(NSMutableArray *)curve2;
+
 -(void)setVisibleXUnits: (float)units;
 -(void)setVisibleYUnits: (float)units;
 -(void)setQuadrantPositioning:(OKQuadrantPositioning)p;
 -(void)setBackgroundColor:(NSColor *)color;
 -(void)setAxisColor:(NSColor *)color;
--(void)setCurveColor:(NSColor *)color;
+-(void)setCurve1Color:(NSColor *)color;
+-(void)setCurve2Color:(NSColor *)color;
 
 @end
 
