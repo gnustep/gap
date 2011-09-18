@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "OKChart.m"
+#import "OKChart.h"
 
 @interface OKLineChart : OKChart
 {
