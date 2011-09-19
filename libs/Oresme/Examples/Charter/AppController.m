@@ -28,6 +28,22 @@
 
 - (IBAction)changePlot:(id)sender
 {
+  NSMutableArray *series1;
+  unsigned i;
+  float v;
+
+  series1 = [chartView seriesAtIndex: 0];
+  if ([[sender selectedItem] tag] == 0)
+    {
+      for (i = 0; i < 6; i++)
+	{
+	  v = i*i - 4;
+
+	  [series1 addObject: [NSNumber numberWithFloat: v]];
+	}
+    }
+
+  [chartView setNeedsDisplay: YES];
 }
 
 - (IBAction) changeBackgroundColor: (id)sender
