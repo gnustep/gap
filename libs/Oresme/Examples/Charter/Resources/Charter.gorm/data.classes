@@ -1,0 +1,30 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "changePlot:",
+	    "changeBackgroundColor:"
+	);
+	Outlets = (
+	    chartView,
+	    plot
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "changeBackgroundColor:",
+	    "changePlot:",
+	    "orderFrontFontPanel:",
+	    "showPrefPanel:"
+	);
+	Super = NSObject;
+    };
+    OKChart = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSView;
+    };
+}

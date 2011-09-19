@@ -1,0 +1,84 @@
+{
+    APPLICATIONICON = "";
+    "APP_DOCUMENT_BASED" = NO;
+    "APP_TYPE" = GORM;
+    "BUILDER_TARGETS" = (
+	all,
+	install,
+	uninstall,
+	clean,
+	distclean,
+	dist
+    );
+    "CLASS_FILES" = (
+	"AppController.m"
+    );
+    COMPILEROPTIONS = "";
+    CPPOPTIONS = "";
+    "CREATION_DATE" = "2011-09-08 17:49:04 +0200";
+    "DOCU_FILES" = (
+    );
+    FRAMEWORKS = (
+    );
+    "HEADER_FILES" = (
+	"AppController.h"
+    );
+    IMAGES = (
+    );
+    INSTALLDIR = "$(HOME)/GNUstep";
+    INTERFACES = (
+	"Charter.gorm",
+	"Main.gsmarkup",
+	"MainMenu-GNUstep.gsmarkup",
+	"MainMenu-OSX.gsmarkup"
+    );
+    LANGUAGE = English;
+    LIBRARIES = (
+	"gnustep-base",
+	"gnustep-gui"
+    );
+    LINKEROPTIONS = "";
+    "LOCALIZED_RESOURCES" = (
+    );
+    MAININTERFACE = "Charter.gorm";
+    MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    "OBJC_COMPILEROPTIONS" = "";
+    "OTHER_RESOURCES" = (
+    );
+    "OTHER_SOURCES" = (
+	"Charter_main.m"
+    );
+    "PRINCIPAL_CLASS" = NSApplication;
+    "PROJECT_AUTHORS" = (
+	"Riccardo Mottola"
+    );
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2011";
+    "PROJECT_COPYRIGHT_DESC" = "Released under GPL v3+";
+    "PROJECT_CREATOR" = multix;
+    "PROJECT_DESCRIPTION" = "Chart demo";
+    "PROJECT_DOCUMENTTYPES" = (
+    );
+    "PROJECT_GROUP" = "No group avaliable!";
+    "PROJECT_MAINTAINER" = multix;
+    "PROJECT_NAME" = Charter;
+    "PROJECT_RELEASE" = "0.1";
+    "PROJECT_SUMMARY" = "No summary avaliable!";
+    "PROJECT_TYPE" = Application;
+    "PROJECT_URL" = "";
+    "SEARCH_HEADER_DIRS" = (
+    );
+    "SEARCH_LIB_DIRS" = (
+	"/Local/Library/Frameworks/OresmeKit.framework"
+    );
+    SUBPROJECTS = (
+    );
+    "SUPPORTING_FILES" = (
+	"GNUmakefile.preamble",
+	GNUmakefile,
+	"GNUmakefile.postamble",
+	"CharterInfo.plist"
+    );
+    "USER_LANGUAGES" = (
+	English
+    );
+}
