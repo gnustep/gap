@@ -14,21 +14,6 @@
 
 @implementation AppController
 
-+ (void) initialize
-{
-  NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
-
-  /*
-   * Register your app's defaults here by adding objects to the
-   * dictionary, eg
-   *
-   * [defaults setObject:anObject forKey:keyForThatObject];
-   *
-   */
-  
-  [[NSUserDefaults standardUserDefaults] registerDefaults: defaults];
-  [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
 - (id) init
 {
@@ -166,20 +151,6 @@
 //  [NSBundle loadGSMarkupNamed: @"Main" owner: self];
 }
 
-- (BOOL) applicationShouldTerminate: (id)sender
-{
-  return YES;
-}
-
-- (void) applicationWillTerminate: (NSNotification *)aNotif
-{
-}
-
-- (BOOL) application: (NSApplication *)application
-	    openFile: (NSString *)fileName
-{
-  return NO;
-}
 
 - (void) showPrefPanel: (id)sender
 {
