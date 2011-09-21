@@ -31,7 +31,15 @@
 @interface OKChart : NSView
 {
   NSColor *backgroundColor;
+  NSMutableArray *seriesArray;
 }
+
+- (void)setBackgroundColor:(NSColor *)color;
+- (NSUInteger)seriesCount;
+- (NSMutableArray*)seriesAtIndex:(NSUInteger)index;
+- (void)addSeries: (NSMutableArray *)series;
+- (void)removeSeriesAtIndex: (NSUInteger)index;
+- (void)removeAllSeries;
 
 @end
 
