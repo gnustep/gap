@@ -1,13 +1,26 @@
 /* 
    Project: Charter
 
-   Author: multix
+   Author: Riccardo Mottola
 
    Created: 2011-09-08 17:49:04 +0200 by multix
-   
-   Application Controller
+
+   This application is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+
+   This application is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU General Public
+   License along with this library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#import <OresmeKit/OKChart.h>
 #import "AppController.h"
 
 @implementation AppController
@@ -29,20 +42,39 @@
 - (IBAction)changePlot:(id)sender
 {
   NSMutableArray *series1;
-  unsigned i;
-  float v;
+  NSMutableArray *series2;
+  int i;
+  float v1, v2;
 
-  series1 = [chartView seriesAtIndex: 0];
+  [chartView removeAllSeries];
+  NSLog(@"removed series");
+  series1 = [[[NSMutableArray alloc] initWithCapacity: 1] autorelease];
+  [chartView addSeries: series1];
   if ([[sender selectedItem] tag] == 0)
     {
       for (i = 0; i < 6; i++)
 	{
-	  v = i*i - 4;
+	  v1 = i*i - 4;
 
-	  [series1 addObject: [NSNumber numberWithFloat: v]];
+	  [series1 addObject: [NSNumber numberWithFloat: v1]];
 	}
+      NSLog(@"series 1 calculated");
     }
+  else if ([[sender selectedItem] tag] == 1)
+    {
+      series2 = [[[NSMutableArray alloc] initWithCapacity: 1] autorelease];
+      [chartView addSeries: series2];
+      for (i = 0; i < 6; i++)
+	{
+	  v1 = pow(i, 1.5);
+	  v2 = pow(i, 2);
 
+	  [series1 addObject: [NSNumber numberWithFloat: v1]];
+	  [series2 addObject: [NSNumber numberWithFloat: v2]];
+	}
+      NSLog(@"series 1 calculated");
+    }
+  NSLog(@"redisplay");
   [chartView setNeedsDisplay: YES];
 }
 
