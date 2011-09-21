@@ -38,8 +38,16 @@
   if (self)
     {
       backgroundColor = [[NSColor whiteColor] retain];
+      seriesArray = [[NSMutableArray alloc] initWithCapacity: 1];
     }
   return self;
+}
+
+-(void)dealloc
+{
+  [seriesArray release];
+  [backgroundColor release];
+  [super dealloc];
 }
 
 -(void)drawRect: (NSRect)rect
@@ -52,12 +60,43 @@
   [NSBezierPath fillRect: [self bounds]];
   
   boundsRect = [self bounds];
+  NSLog(@"end draw");
 }
 
+/** Sets the graph background color */
 -(void)setBackgroundColor:(NSColor *)color
 {
   [backgroundColor release];
   backgroundColor = [color retain];
+}
+
+/* returns the number of series arrays */
+- (NSUInteger)seriesCount
+{
+  return [seriesArray count];
+}
+
+/** returns the series array identified by index */
+- (NSMutableArray*)seriesAtIndex:(NSUInteger)index
+{
+  return [seriesArray objectAtIndex: index];
+}
+
+- (void)addSeries: (NSMutableArray *)series
+{
+  [seriesArray addObject: series];
+}
+
+/** removes the series identified by index */
+- (void)removeSeriesAtIndex: (NSUInteger)index
+{
+  [seriesArray removeObjectAtIndex: index];
+}
+
+/** removes all current series */
+- (void)removeAllSeries
+{
+  [seriesArray removeAllObjects];
 }
 
 @end

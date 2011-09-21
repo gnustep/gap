@@ -26,4 +26,10 @@
 
 @implementation OKLineChart
 
+-(void)draw
+{
+  unsigned i;
+}
+
+
 @end
