@@ -53,8 +53,32 @@
 -(void)drawRect: (NSRect)rect
 {
   NSRect boundsRect;
-  
+  unsigned i, j;
+
   NSLog(@"OKChart Draw");
+
+  /* search for min and max */
+  /* since we want always to have the X axis, we start with 0, not the first value */
+  graphMinYVal = 0;
+  graphMaxYVal = 0;
+  for (i = 0; i < [seriesArray count]; i++)
+    {
+      NSMutableArray *s;
+
+      s = [seriesArray objectAtIndex: i];
+      for (j = 0; j < [s count]; j++)
+	{
+	  float val;
+
+	  val = [[s objectAtIndex: j] floatValue];
+	  NSLog(@"val: %f", val);
+	  if (val > graphMaxYVal)
+	    graphMaxYVal = val;
+	  if (val < graphMinYVal)
+	    graphMinYVal = val;
+	}
+    }
+  NSLog(@"graph Y limits: %f %f", graphMinYVal, graphMaxYVal);
 
   [backgroundColor set];
   [NSBezierPath fillRect: [self bounds]];
