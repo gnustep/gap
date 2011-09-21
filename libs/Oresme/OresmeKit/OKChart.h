@@ -32,6 +32,9 @@
 {
   NSColor *backgroundColor;
   NSMutableArray *seriesArray;
+
+  float graphMinYVal;
+  float graphMaxYVal;
 }
 
 - (void)setBackgroundColor:(NSColor *)color;
