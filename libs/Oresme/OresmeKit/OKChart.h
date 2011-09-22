@@ -31,6 +31,7 @@
 @interface OKChart : NSView
 {
   NSColor *backgroundColor;
+  NSColor *axisColor;
   NSMutableArray *seriesArray;
 
   float graphMinYVal;
