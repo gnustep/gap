@@ -104,8 +104,8 @@
     }
  
   [axisColor set];
-  [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, origo.y)];
-  [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, origo.x, boundsRect.size.height)];
+  [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, 0)];
+  [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, 0, boundsRect.size.height)];
 
   [curve1Color set];
   path = [[NSBezierPath alloc] init];
