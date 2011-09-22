@@ -22,13 +22,34 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#import <Foundation/Foundation.h>
+#import <AppKit/NSBezierPath.h>
+
 #import "OKLineChart.h"
 
 @implementation OKLineChart
 
--(void)draw
+-(void)drawRect: (NSRect)rect
 {
+  NSRect boundsRect;
   unsigned i;
+  float oneUnit;
+  float availableHeight;
+  float rangeToRepresent;
+  float axisLevel;
+
+  [super drawRect: rect];
+  boundsRect = [self bounds];
+  availableHeight = boundsRect.size.height * 0.9;
+  rangeToRepresent = graphMaxYVal - graphMinYVal;
+  oneUnit = availableHeight / rangeToRepresent;
+
+  axisLevel = 0;
+  if (graphMinYVal < 0)
+    axisLevel = -oneUnit * graphMinYVal;
+  NSLog(@"unit: %f:, axisLevel; %f", oneUnit, axisLevel);
+  [axisColor set];
+  [NSBezierPath strokeRect: NSMakeRect(0, axisLevel, boundsRect.size.width, 0)];
 }
 
 

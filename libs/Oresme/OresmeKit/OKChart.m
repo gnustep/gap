@@ -38,6 +38,7 @@
   if (self)
     {
       backgroundColor = [[NSColor whiteColor] retain];
+      axisColor = [[NSColor blackColor] retain];
       seriesArray = [[NSMutableArray alloc] initWithCapacity: 1];
     }
   return self;
@@ -52,7 +53,6 @@
 
 -(void)drawRect: (NSRect)rect
 {
-  NSRect boundsRect;
   unsigned i, j;
 
   NSLog(@"OKChart Draw");
@@ -83,8 +83,7 @@
   [backgroundColor set];
   [NSBezierPath fillRect: [self bounds]];
   
-  boundsRect = [self bounds];
-  NSLog(@"end draw");
+  NSLog(@"end super draw");
 }
 
 /** Sets the graph background color */
