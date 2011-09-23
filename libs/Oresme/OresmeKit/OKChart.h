@@ -28,6 +28,8 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSView.h>
 
+@class OKSeries;
+
 @interface OKChart : NSView
 {
   NSColor *backgroundColor;
@@ -40,8 +42,8 @@
 
 - (void)setBackgroundColor:(NSColor *)color;
 - (NSUInteger)seriesCount;
-- (NSMutableArray*)seriesAtIndex:(NSUInteger)index;
-- (void)addSeries: (NSMutableArray *)series;
+- (OKSeries *)seriesAtIndex:(NSUInteger)index;
+- (void)addSeries: (OKSeries *)series;
 - (void)removeSeriesAtIndex: (NSUInteger)index;
 - (void)removeAllSeries;
 

@@ -100,12 +100,12 @@
 }
 
 /** returns the series array identified by index */
-- (NSMutableArray*)seriesAtIndex:(NSUInteger)index
+- (OKSeries *)seriesAtIndex:(NSUInteger)index
 {
   return [seriesArray objectAtIndex: index];
 }
 
-- (void)addSeries: (NSMutableArray *)series
+- (void)addSeries: (OKSeries *)series
 {
   [seriesArray addObject: series];
 }

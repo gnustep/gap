@@ -68,6 +68,11 @@
   return [seriesArray objectAtIndex: index];
 }
 
+- (void) addObject: (id)obj
+{
+  [seriesArray addObject: obj];
+}
+
 - (NSUInteger) count
 {
   return [seriesArray count]; 
@@ -81,6 +86,7 @@
 {
   [seriesArray removeObjectAtIndex: index];
 }
+
 
 /* --- end of NSArray bridge methods ---*/
 
