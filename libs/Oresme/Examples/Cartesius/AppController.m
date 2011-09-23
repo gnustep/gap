@@ -145,7 +145,11 @@
 
 - (IBAction) changeCurveColor: (id)sender
 {
- [cartesiusView setCurve1Color: [sender color]];
+  if ([sender tag] == 0)
+    [cartesiusView setCurve1Color: [sender color]];
+  else if ([sender tag] == 1)
+    [cartesiusView setCurve2Color: [sender color]];
+
  [cartesiusView setNeedsDisplay: YES];
 }
 
