@@ -22,8 +22,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSView.h>
-#import <OresmeKit/OKChart.h>
-#import <OresmeKit/OKLineChart.h>
+#import <OresmeKit/OresmeKit.h>
+
 #import "AppController.h"
 
 @implementation AppController
@@ -44,14 +44,14 @@
 
 - (IBAction)changePlot:(id)sender
 {
-  NSMutableArray *series1;
-  NSMutableArray *series2;
+  OKSeries *series1;
+  OKSeries *series2;
   int i;
   float v1, v2;
 
   [chartView removeAllSeries];
   NSLog(@"removed series");
-  series1 = [[[NSMutableArray alloc] initWithCapacity: 1] autorelease];
+  series1 = [[[OKSeries alloc] init] autorelease];
   [chartView addSeries: series1];
   if ([[sender selectedItem] tag] == 0)
     {
@@ -65,7 +65,7 @@
     }
   else if ([[sender selectedItem] tag] == 1)
     {
-      series2 = [[[NSMutableArray alloc] initWithCapacity: 1] autorelease];
+      series2 = [[[OKSeries alloc] init] autorelease];
       [chartView addSeries: series2];
       for (i = 0; i < 6; i++)
 	{
