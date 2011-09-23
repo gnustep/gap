@@ -22,7 +22,7 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#import <OKCartesius.h>
-#import <OKChart.h>
-#import <OKSeries.h>
-#import <OKLineChart.h>
+#import <OresmeKit/OKCartesius.h>
+#import <OresmeKit/OKChart.h>
+#import <OresmeKit/OKSeries.h>
+#import <OresmeKit/OKLineChart.h>
