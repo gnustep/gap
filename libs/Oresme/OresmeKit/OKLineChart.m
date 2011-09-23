@@ -26,13 +26,14 @@
 #import <AppKit/NSBezierPath.h>
 
 #import "OKLineChart.h"
+#import "OKSeries.h"
 
 @implementation OKLineChart
 
 -(void)drawRect: (NSRect)rect
 {
   NSRect boundsRect;
-  unsigned i;
+  unsigned i, j;
   float oneUnit;
   float availableHeight;
   float rangeToRepresent;
@@ -50,6 +51,17 @@
   NSLog(@"unit: %f:, axisLevel; %f", oneUnit, axisLevel);
   [axisColor set];
   [NSBezierPath strokeRect: NSMakeRect(0, axisLevel, boundsRect.size.width, 0)];
+
+  for (i = 0; i < [seriesArray count]; i++)
+    {
+      NSBezierPath *path;
+      OKSeries *series;
+
+      series = [seriesArray objectAtIndex: i];
+      path = [[NSBezierPath alloc] init];
+      [[series color] set];
+      [path release];
+    }
 }
 
 

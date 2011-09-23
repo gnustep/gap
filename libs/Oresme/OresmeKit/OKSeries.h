@@ -44,6 +44,7 @@
 - (void) setColor: (NSColor *)c;
 
 - (id) objectAtIndex: (NSUInteger)index;
+- (void) addObject: (id)obj;
 - (NSUInteger) count;
 - (void) removeAllObjects;
 - (void) removeObjectAtIndex: (NSUInteger)index;
