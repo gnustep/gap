@@ -51,7 +51,7 @@
 	  p = NSMakePoint(x, y);
 	  [curve1 addObject: [NSValue valueWithPoint: p]];
 
-	  y = 0.5 * pow(x, 2);
+	  y = 0.5 * pow(x, 3);
 	  p = NSMakePoint(x, y);
 	  [curve2 addObject: [NSValue valueWithPoint: p]];
 
@@ -70,7 +70,7 @@
 	  p = NSMakePoint(x, y);
 	  [curve1 addObject: [NSValue valueWithPoint: p]];
 
-	  y = 0.5 * x;
+	  y = 0.5 * x + 1;
 	  p = NSMakePoint(x, y);
 	  [curve2 addObject: [NSValue valueWithPoint: p]];
 
