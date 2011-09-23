@@ -50,6 +50,17 @@
   [super dealloc];
 }
 
+-(NSColor*)color
+{
+  return color;
+}
+
+-(void)setColor: (NSColor *)c
+{
+  [color release];
+  c = [c retain];
+}
+
 /* --- NSArray bridge methods ---*/
 
 - (id) objectAtIndex: (NSUInteger)index
