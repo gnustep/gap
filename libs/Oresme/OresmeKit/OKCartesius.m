@@ -54,6 +54,7 @@
   NSPoint origo;
   NSRect boundsRect;
   NSBezierPath *path;
+  NSBezierPath *path2;
   int i;
   NSPoint p;
   float xScale, yScale;
@@ -107,41 +108,83 @@
   [NSBezierPath strokeRect: NSMakeRect(0, origo.y, boundsRect.size.width, 0)];
   [NSBezierPath strokeRect: NSMakeRect(origo.x, 0, 0, boundsRect.size.height)];
 
-  [curve1Color set];
-  path = [[NSBezierPath alloc] init];
-
-  i = 0;
-  p = NSMakePoint([[curve1 objectAtIndex: i] pointValue].x * xScale + origo.x,
-		  [[curve1 objectAtIndex: i] pointValue].y * yScale + origo.y
-		  );
-  [path moveToPoint: p];
-  i++;
-  while (i < [curve1 count])
+  if (curve1 != NULL && [curve1 count] > 0)
     {
+
+      [curve1Color set];
+      path = [[NSBezierPath alloc] init];
+
+      i = 0;
       p = NSMakePoint([[curve1 objectAtIndex: i] pointValue].x * xScale + origo.x,
 		      [[curve1 objectAtIndex: i] pointValue].y * yScale + origo.y
 		      );
-      if (isnan(p.x))
-	{
-	  if (p.x > 0)
-	    p.x = hugeVal;
-	  else
-	    p.x = -hugeVal;
-	}
-      if (isnan(p.y))
-	{
-	  if (p.y > 0)
-	    p.y = hugeVal;
-	  else
-	    p.y = -hugeVal;
-	}
-      NSLog(@"%f %f", p.x, p.y);
-      [path lineToPoint: p];
+      [path moveToPoint: p];
       i++;
+      while (i < [curve1 count])
+	{
+	  p = NSMakePoint([[curve1 objectAtIndex: i] pointValue].x * xScale + origo.x,
+			  [[curve1 objectAtIndex: i] pointValue].y * yScale + origo.y
+			  );
+	  if (isnan(p.x))
+	    {
+	      if (p.x > 0)
+		p.x = hugeVal;
+	      else
+		p.x = -hugeVal;
+	    }
+	  if (isnan(p.y))
+	    {
+	      if (p.y > 0)
+		p.y = hugeVal;
+	      else
+		p.y = -hugeVal;
+	    }
+	  NSLog(@"%f %f", p.x, p.y);
+	  [path lineToPoint: p];
+	  i++;
+	}
+      [path stroke];
+      [path release];
     }
-  [path stroke];
 
-  [path release];
+
+
+  if (curve2 != NULL && [curve2 count] > 0)
+    {
+      [curve2Color set];
+      path2 = [[NSBezierPath alloc] init];
+      i = 0;
+      p = NSMakePoint([[curve2 objectAtIndex: i] pointValue].x * xScale + origo.x,
+		      [[curve2 objectAtIndex: i] pointValue].y * yScale + origo.y
+		      );
+      [path2 moveToPoint: p];
+      i++;
+      while (i < [curve2 count])
+	{
+	  p = NSMakePoint([[curve2 objectAtIndex: i] pointValue].x * xScale + origo.x,
+			  [[curve2 objectAtIndex: i] pointValue].y * yScale + origo.y
+			  );
+	  if (isnan(p.x))
+	    {
+	      if (p.x > 0)
+		p.x = hugeVal;
+	      else
+		p.x = -hugeVal;
+	    }
+	  if (isnan(p.y))
+	    {
+	      if (p.y > 0)
+		p.y = hugeVal;
+	      else
+		p.y = -hugeVal;
+	    }
+	  NSLog(@"%f %f", p.x, p.y);
+	  [path2 lineToPoint: p];
+	  i++;
+	}
+      [path2 stroke];
+      [path2 release];
+    }
 }
 
 -(void)dealloc
