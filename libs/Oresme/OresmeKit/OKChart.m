@@ -63,7 +63,7 @@
   graphMaxYVal = 0;
   for (i = 0; i < [seriesArray count]; i++)
     {
-      NSMutableArray *s;
+      OKSeries *s;
 
       s = [seriesArray objectAtIndex: i];
       for (j = 0; j < [s count]; j++)
