@@ -40,6 +40,9 @@
   NSMutableArray *seriesArray;
 }
 
+- (NSColor*) color;
+- (void) setColor: (NSColor *)c;
+
 - (id) objectAtIndex: (NSUInteger)index;
 - (NSUInteger) count;
 - (void) removeAllObjects;
