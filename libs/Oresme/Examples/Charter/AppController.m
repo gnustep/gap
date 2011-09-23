@@ -20,7 +20,10 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#import <Foundation/Foundation.h>
+#import <AppKit/NSView.h>
 #import <OresmeKit/OKChart.h>
+#import <OresmeKit/OKLineChart.h>
 #import "AppController.h"
 
 @implementation AppController
@@ -90,6 +93,16 @@
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif
 {
+  NSRect rect;
+  OKChart *tempChart;
+  NSView *superView;
+
+  rect = [chartView frame];
+  superView = [chartView superview];
+  [chartView release];
+  chartView = [[OKLineChart alloc] initWithFrame: rect];
+  [superView addSubview: chartView];
+
 }
 
 
