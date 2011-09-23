@@ -44,12 +44,16 @@
   /* parabola */
   if ([[sender selectedItem] tag] == 0)
     {
-      x = -10;
-      for (i = 0; i <= 20; i++)
+      x = -15;
+      for (i = 0; i <= 30; i++)
 	{
-	  y = 0.5 * pow(x, 2);
+	  y = 0.33 * pow(x, 2);
 	  p = NSMakePoint(x, y);
 	  [curve1 addObject: [NSValue valueWithPoint: p]];
+
+	  y = 0.5 * pow(x, 2);
+	  p = NSMakePoint(x, y);
+	  [curve2 addObject: [NSValue valueWithPoint: p]];
 
 	  x += 1;
 	}
@@ -65,6 +69,10 @@
 	  y = x;
 	  p = NSMakePoint(x, y);
 	  [curve1 addObject: [NSValue valueWithPoint: p]];
+
+	  y = 0.5 * x;
+	  p = NSMakePoint(x, y);
+	  [curve2 addObject: [NSValue valueWithPoint: p]];
 
 	  x += 10;
 	}
