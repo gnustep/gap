@@ -32,7 +32,8 @@
     LANGUAGE = English;
     LIBRARIES = (
 	"gnustep-base",
-	"gnustep-gui"
+	"gnustep-gui",
+	OresmeKit
     );
     LINKEROPTIONS = "";
     "LOCALIZED_RESOURCES" = (
@@ -65,6 +66,7 @@
     "SEARCH_HEADER_DIRS" = (
     );
     "SEARCH_LIB_DIRS" = (
+	"/Local/Library/Frameworks/OresmeKit.framework",
 	"/Local/Library/Frameworks/OresmeKit.framework"
     );
     SUBPROJECTS = (
