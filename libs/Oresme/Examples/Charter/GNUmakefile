@@ -20,6 +20,11 @@ Charter_APPLICATION_ICON =
 
 
 #
+# Libraries
+#
+Charter_LIBRARIES_DEPEND_UPON += -lOresmeKit 
+
+#
 # Resource files
 #
 Charter_RESOURCE_FILES = \
