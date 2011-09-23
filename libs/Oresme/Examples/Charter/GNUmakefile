@@ -24,9 +24,6 @@ Charter_APPLICATION_ICON =
 #
 Charter_RESOURCE_FILES = \
 Resources/Charter.gorm \
-Resources/Main.gsmarkup \
-Resources/MainMenu-GNUstep.gsmarkup \
-Resources/MainMenu-OSX.gsmarkup 
 
 
 #
