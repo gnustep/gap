@@ -27,10 +27,7 @@
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	"Charter.gorm",
-	"Main.gsmarkup",
-	"MainMenu-GNUstep.gsmarkup",
-	"MainMenu-OSX.gsmarkup"
+	"Charter.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (
