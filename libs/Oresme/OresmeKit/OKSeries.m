@@ -58,7 +58,7 @@
 -(void)setColor: (NSColor *)c
 {
   [color release];
-  c = [c retain];
+  color = [c retain];
 }
 
 /* --- NSArray bridge methods ---*/
