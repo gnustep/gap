@@ -51,7 +51,7 @@
 
   [chartView removeAllSeries];
   NSLog(@"removed series");
-  series1 = [[[OKSeries alloc] init] autorelease];
+  series1 = [[OKSeries alloc] init];
   [chartView addSeries: series1];
   if ([[sender selectedItem] tag] == 0)
     {
@@ -65,7 +65,7 @@
     }
   else if ([[sender selectedItem] tag] == 1)
     {
-      series2 = [[[OKSeries alloc] init] autorelease];
+      series2 = [[OKSeries alloc] init];
       [chartView addSeries: series2];
       for (i = 0; i < 6; i++)
 	{
@@ -76,7 +76,9 @@
 	  [series2 addObject: [NSNumber numberWithFloat: v2]];
 	}
       NSLog(@"series 1 calculated");
+      //      [series2 release];
     }
+  //   [series1 release]; FIXME: why can't it be released?
   NSLog(@"redisplay");
   [chartView setNeedsDisplay: YES];
 }
