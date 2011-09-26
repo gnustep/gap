@@ -1,0 +1,14 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {changeBackgroundColor = id; changePlot = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {chartView = OKChart; plot = NSPopUpButton; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = OKChart; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}
