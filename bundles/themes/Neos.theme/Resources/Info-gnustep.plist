@@ -6,9 +6,9 @@
     GSThemeDomain = {
 	GSBackHandlesWindowDecorations = YES;
     };
-    GSThemeIcon = Thematic.png;
-    GSThemePreview = neos_preview_128.tif;
+    GSThemeIcon = "Thematic.png";
+    GSThemePreview = "neos_preview_128.tif";
     GSThemeTiles = {
     };
-    GSThemeVersion = 0.2;
+    GSThemeVersion = "0.2";
 }
