@@ -28,6 +28,10 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSView.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSUInteger unsigned
+#endif
+
 @class OKSeries;
 
 @interface OKChart : NSView
