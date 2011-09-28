@@ -60,10 +60,27 @@
     {
       NSBezierPath *path;
       OKSeries *series;
+      float x;
+      float y;
+      NSPoint p;
 
       series = [seriesArray objectAtIndex: i];
       path = [[NSBezierPath alloc] init];
       [[series color] set];
+      x = 0;
+      y = axisLevel + [[series objectAtIndex: 0] floatValue] * oneYUnit;
+      p = NSMakePoint(x, y);
+      [path moveToPoint: p];
+      x += oneXUnit;
+      for (j = 1; j < [series count]; j++)
+	{
+
+	  y = axisLevel + [[series objectAtIndex: j] floatValue] * oneYUnit;
+ 	  p = NSMakePoint(x, y);
+	  [path lineToPoint: p];
+          x += oneXUnit;
+	}
+      [path stroke];
       [path release];
     }
 }
