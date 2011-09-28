@@ -34,21 +34,25 @@
 {
   NSRect boundsRect;
   unsigned i, j;
-  float oneUnit;
+  float oneXUnit;
+  float oneYUnit;
   float availableHeight;
+  float availableWidth;
   float rangeToRepresent;
   float axisLevel;
 
   [super drawRect: rect];
   boundsRect = [self bounds];
   availableHeight = boundsRect.size.height * 0.9;
+  availableWidth = boundsRect.size.width * 0.9;
   rangeToRepresent = graphMaxYVal - graphMinYVal;
-  oneUnit = availableHeight / rangeToRepresent;
+  oneYUnit = availableHeight / rangeToRepresent;
+  oneXUnit = availableWidth / graphMaxXVal;
 
   axisLevel = 0;
   if (graphMinYVal < 0)
-    axisLevel = -oneUnit * graphMinYVal;
-  NSLog(@"unit: %f:, axisLevel; %f", oneUnit, axisLevel);
+    axisLevel = -oneYUnit * graphMinYVal;
+  NSLog(@"x-y unit: %f-%f:, axisLevel; %f", oneXUnit, oneYUnit, axisLevel);
   [axisColor set];
   [NSBezierPath strokeRect: NSMakeRect(0, axisLevel, boundsRect.size.width, 0)];
 

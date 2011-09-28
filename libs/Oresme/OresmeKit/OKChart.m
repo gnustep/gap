@@ -80,6 +80,17 @@
     }
   NSLog(@"graph Y limits: %f %f", graphMinYVal, graphMaxYVal);
 
+  /* we look for the maximum count among all series */
+  graphMaxXVal = 0;
+  for (i = 0; i < [seriesArray count]; i++)
+    {
+      OKSeries *s;
+
+      s = [seriesArray objectAtIndex: i];
+      if ([s count] > graphMaxXVal)
+	graphMaxXVal = [s count];
+     }
+
   [backgroundColor set];
   [NSBezierPath fillRect: [self bounds]];
   

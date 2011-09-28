@@ -42,6 +42,7 @@
 
   float graphMinYVal;
   float graphMaxYVal;
+  float graphMaxXVal;
 }
 
 - (void)setBackgroundColor:(NSColor *)color;
