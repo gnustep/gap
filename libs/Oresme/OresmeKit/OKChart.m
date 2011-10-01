@@ -116,6 +116,7 @@
   return [seriesArray objectAtIndex: index];
 }
 
+/** add the series */
 - (void)addSeries: (OKSeries *)series
 {
   [seriesArray addObject: series];
