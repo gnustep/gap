@@ -959,6 +959,7 @@
 
 - (BOOL)isCritical
 {
+#if defined(linux)
   if(useACPIsys || useACPIproc)
   {
     return  [self remainingCapacity] < [self warningCapacity];
@@ -966,6 +967,7 @@
   {
     return[chargeState isEqualToString:@"Critical"];
   } else
+#endif
     return NO;
 }
 
