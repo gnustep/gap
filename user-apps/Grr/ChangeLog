@@ -1,3 +1,8 @@
+2011-10-13 Riccardo Mottola <rm@gnu.org>
+
+	* Compontents/ArticleView/English.lproj/ArticleTextViewPlugin.gorm
+	Recreated to set new text style defaults.
+
 2011-07-22 Riccardo Mottola <rm@gnu.org>
 
 	* Components/ArticleView/NSString+TolerantHTML.m
