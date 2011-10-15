@@ -1,3 +1,8 @@
+2011-10-15 Riccardo Mottola <rm@gnu.org>
+
+	* Compontents/ArticleView/English.lproj/ArticleTextViewPlugin.gorm
+	Fixed order of the title text field.
+
 2011-10-13 Riccardo Mottola <rm@gnu.org>
 
 	* Compontents/ArticleView/English.lproj/ArticleTextViewPlugin.gorm
