@@ -706,16 +706,6 @@ static double k = 0.025;
     return miterlimit;
 }
 
-- (void)setLineWidth:(float)width
-{
-    linewidth = width;
-}
-
-- (float)lineWidth
-{
-    return linewidth;
-}
-
 
 /* override for editor handling */
 - (void)setLocked:(BOOL)value

@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.h
 
- Copyright (C) 2008-2010 GNUstep Application Project
+ Copyright (C) 2008-2011 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -42,6 +42,9 @@
     float linewidth;
     GRObjectControlPoint *currentPoint;
 }
+
+- (void)setLineWidth:(float)width;
+- (float)lineWidth;
 
 /** sets the current selected control point */
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint;

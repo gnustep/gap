@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.h
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2011 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -69,8 +69,6 @@ typedef struct
 - (int)lineCap;
 - (void)setMiterLimit:(float)limit;
 - (float)miterLimit;
-- (void)setLineWidth:(float)width;
-- (float)lineWidth;
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
