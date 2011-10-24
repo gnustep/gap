@@ -290,16 +290,6 @@
     return miterlimit;
 }
 
-- (void)setLineWidth:(float)width
-{
-    linewidth = width;
-}
-
-- (float)lineWidth
-{
-    return linewidth;
-}
-
 
 - (void)setLocked:(BOOL)value
 {

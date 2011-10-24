@@ -1,3 +1,10 @@
+2011-10-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRPathObject.[h,m]:
+	* GRCircle.m:
+	* GRBezierPath.[h,m]:
+	declare setLineWidth and lineWidth methods in super class
+
 2011-08-25 Riccardo Mottola <rm@gnu.org>
 
 	* GRCircle.m

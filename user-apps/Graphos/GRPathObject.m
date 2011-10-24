@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.m
  
- Copyright (C) 2008-2010 GNUstep Application Project
+ Copyright (C) 2008-2011 GNUstep Application Project
  
  Author: Ing. Riccardo Mottola
  
@@ -55,6 +55,16 @@
 - (GRObjectControlPoint *)currentPoint
 {
     return currentPoint;
+}
+
+- (void)setLineWidth:(float)width
+{
+  linewidth = width;
+}
+
+- (float)lineWidth
+{
+  return linewidth;
 }
 
 - (void)remakePath
