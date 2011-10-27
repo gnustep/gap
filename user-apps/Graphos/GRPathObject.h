@@ -40,11 +40,27 @@
     NSBezierPath *myPath;
 
     float linewidth;
+    float flatness;
+    float miterlimit;
+    int linejoin;
+    int linecap;
     GRObjectControlPoint *currentPoint;
 }
 
 - (void)setLineWidth:(float)width;
 - (float)lineWidth;
+
+- (void)setFlat:(float)flat;
+- (float)flatness;
+
+- (void)setLineJoin:(int)join;
+- (int)lineJoin;
+
+- (void)setLineCap:(int)cap;
+- (int)lineCap;
+
+- (void)setMiterLimit:(float)limit;
+- (float)miterLimit;
 
 /** sets the current selected control point */
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint;

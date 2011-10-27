@@ -37,8 +37,6 @@
     GRObjectControlPoint *startControlPoint;
     GRObjectControlPoint *endControlPoint;
     float rotation;
-    float flatness, miterlimit;
-    int linejoin, linecap;
 }
 
 - (id)initInView:(GRDocView *)aView

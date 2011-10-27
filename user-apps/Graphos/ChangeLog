@@ -1,3 +1,13 @@
+2011-10-28 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.h
+	* GRBezierPath.m
+	* GRCircle.h
+	* GRCircle.m
+	* GRPathObject.h
+	* GRPathObject.m
+	Refactor path properties into super-class
+
 2011-10-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRBox.[h,m]:

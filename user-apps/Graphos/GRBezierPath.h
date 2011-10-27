@@ -37,8 +37,6 @@ typedef struct
 
 @interface GRBezierPath : GRPathObject
 {
-    float flatness, miterlimit;
-    int linejoin, linecap;
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;
 }
@@ -60,15 +58,6 @@ typedef struct
 - (BOOL)isPoint:(GRBezierControlPoint *)cp1 onPoint:(GRBezierControlPoint *)cp2;
 - (GRBezierControlPoint *)pointOnPoint:(GRBezierControlPoint *)aPoint;
 - (void)confirmNewCurve;
-
-- (void)setFlat:(float)flat;
-- (float)flatness;
-- (void)setLineJoin:(int)join;
-- (int)lineJoin;
-- (void)setLineCap:(int)cap;
-- (int)lineCap;
-- (void)setMiterLimit:(float)limit;
-- (float)miterLimit;
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
