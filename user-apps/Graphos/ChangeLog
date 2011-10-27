@@ -1,6 +1,7 @@
 2011-10-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRBox.[h,m]:
+	* GRCircle.[h,m]:
 	Initializer with property dictionary
 
 	* Graphos.[h,m]:
