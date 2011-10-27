@@ -66,6 +66,55 @@
     return self;
 }
 
+/** initializes by using the properties array as defaults */
+- (id)initInView:(GRDocView *)aView
+      zoomFactor:(float)zf
+      withProperties:(NSDictionary *)properties
+{
+  self = [self initInView:aView zoomFactor:zf];
+  if(self)
+    {
+      NSColor *newColor;
+      NSString *val;
+
+      val = [properties objectForKey: @"flatness"];
+      if (val != nil)
+	[self setFlat: [val floatValue]];
+
+      val = [properties objectForKey: @"linejoin"];
+      if (val != nil)
+	[self setLineJoin: [val intValue]];
+
+      val = [properties objectForKey: @"linecap"];
+      if (val != nil)
+	[self setLineCap: [val intValue]];
+
+      val = [properties objectForKey: @"miterlimit"];
+      if (val != nil)
+	[self setMiterLimit: [val floatValue]];
+
+      val = [properties objectForKey: @"linewidth"];
+      if (val != nil)
+      [self setLineWidth: [val floatValue]];
+
+      val = [properties objectForKey: @"stroked"];
+      if (val != nil)
+	[self setStroked: (BOOL)[val intValue]];
+      newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
+      if (newColor != nil)
+	[self setStrokeColor: newColor];
+
+      val = [properties objectForKey: @"filled"];
+      if (val != nil)
+	[self setFilled: (BOOL)[val intValue]];
+      newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
+      if (newColor != nil)
+	[self setFillColor: newColor];
+    }
+
+  return self;
+}
+
 /** initializes all parameters from a description dictionary */
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
