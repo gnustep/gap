@@ -7,6 +7,9 @@
 	* Graphos.[h,m]:
 	Object Inspector accessor.
 
+	* GRDocView.m
+	Init Box and Circle on add shape.
+
 2011-10-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRPathObject.[h,m]:

@@ -249,36 +249,38 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)addBox
 {
-    GRBox *box;
-    
-//    for(i = 0; i < [objects count]; i++)
-//        [[[objects objectAtIndex: i] editor] unselect];
+  GRBox *box;
+  GRPropsEditor *objInspector;
 
-    box = [[GRBox alloc] initInView: self  
-                            zoomFactor: zFactor];
+  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
 
-    [objects addObject: box];
-    [[box editor] select];
-    [box release];
-    [self setNeedsDisplay: YES];
-    edind = [objects count] -1;
+  box = [[GRBox alloc] initInView: self
+		       zoomFactor: zFactor
+		   withProperties: [objInspector properties]];
+
+  [objects addObject: box];
+  [[box editor] select];
+  [box release];
+  [self setNeedsDisplay: YES];
+  edind = [objects count] -1;
 }
 
 - (void)addCircle
 {
-    GRCircle *circle;
+  GRCircle *circle;
+  GRPropsEditor *objInspector;
 
-    //    for(i = 0; i < [objects count]; i++)
-    //        [[[objects objectAtIndex: i] editor] unselect];
+  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
 
-    circle = [[GRCircle alloc] initInView: self
-                         zoomFactor: zFactor];
+  circle = [[GRCircle alloc] initInView: self
+			     zoomFactor: zFactor
+			 withProperties: [objInspector properties]];
 
-    [objects addObject: circle];
-    [[circle editor] select];
-    [circle release];
-    [self setNeedsDisplay: YES];
-    edind = [objects count] -1;
+  [objects addObject: circle];
+  [[circle editor] select];
+  [circle release];
+  [self setNeedsDisplay: YES];
+  edind = [objects count] -1;
 }
 
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p
