@@ -55,10 +55,12 @@ typedef enum
 {
     GRToolsWindow *tools;
     ToolType tooltype;
-	GRPropsEditor *objectInspector;
+    GRPropsEditor *objectInspector;
 }
 
 - (IBAction)showObjectInspector: (id)sender;
+
+- (GRPropsEditor *)objectInspector;
 
 - (void)setToolType:(ToolType)type;
 

@@ -66,6 +66,11 @@
   [objectInspector makeKeyAndOrderFront: sender];
 }
 
+- (GRPropsEditor *)objectInspector
+{
+  return objectInspector;
+}
+
 - (void)setToolType:(ToolType)type
 {
     tooltype = type;
