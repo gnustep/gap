@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.m
 
- Copyright (C) 2007-2010 GNUstep Application Project
+ Copyright (C) 2007-2011 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -38,7 +38,7 @@
 {
     self = [super init];
     if(self)
-    {
+      {
         docView = aView;
         zmFactor = zf;
         myPath = [[NSBezierPath bezierPath] retain];
@@ -62,9 +62,58 @@
         editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
-    }
+      }
 
     return self;
+}
+
+/** initializes by using the properties array as defaults */
+- (id)initInView:(GRDocView *)aView
+      zoomFactor:(float)zf
+      withProperties:(NSDictionary *)properties
+{
+  self = [self initInView:aView zoomFactor:zf];
+  if(self)
+    {
+      NSColor *newColor;
+      NSString *val;
+
+      val = [properties objectForKey: @"flatness"];
+      if (val != nil)
+	[self setFlat: [val floatValue]];
+
+      val = [properties objectForKey: @"linejoin"];
+      if (val != nil)
+	[self setLineJoin: [val intValue]];
+
+      val = [properties objectForKey: @"linecap"];
+      if (val != nil)
+	[self setLineCap: [val intValue]];
+
+      val = [properties objectForKey: @"miterlimit"];
+      if (val != nil)
+	[self setMiterLimit: [val floatValue]];
+
+      val = [properties objectForKey: @"linewidth"];
+      if (val != nil)
+      [self setLineWidth: [val floatValue]];
+
+      val = [properties objectForKey: @"stroked"];
+      if (val != nil)
+	[self setStroked: (BOOL)[val intValue]];
+      newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
+      if (newColor != nil)
+	[self setStrokeColor: newColor];
+
+      val = [properties objectForKey: @"filled"];
+      if (val != nil)
+	[self setFilled: (BOOL)[val intValue]];
+      newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
+      if (newColor != nil)
+	[self setFillColor: newColor];
+    }
+
+  return self;
 }
 
 /** initializes all parameters from a description dictionary */
@@ -288,16 +337,6 @@
 - (float)miterLimit
 {
     return miterlimit;
-}
-
-- (void)setLineWidth:(float)width
-{
-    linewidth = width;
-}
-
-- (float)lineWidth
-{
-    return linewidth;
 }
 
 - (void)setLocked:(BOOL)value

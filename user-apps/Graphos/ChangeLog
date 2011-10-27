@@ -1,3 +1,11 @@
+2011-10-27 Riccardo Mottola <rm@gnu.org>
+
+	* GRBox.[h,m]:
+	Initializer with property dictionary
+
+	* Graphos.[h,m]:
+	Object Inspector accessor.
+
 2011-10-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRPathObject.[h,m]:
