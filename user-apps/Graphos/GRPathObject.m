@@ -67,6 +67,46 @@
   return linewidth;
 }
 
+- (void)setFlat:(float)flat
+{
+  flatness = flat;
+}
+
+- (float)flatness
+{
+  return flatness;
+}
+
+- (void)setLineJoin:(int)join
+{
+  linejoin = join;
+}
+
+- (int)lineJoin
+{
+  return linejoin;
+}
+
+- (void)setLineCap:(int)cap
+{
+  linecap = cap;
+}
+
+- (int)lineCap
+{
+  return linecap;
+}
+
+- (void)setMiterLimit:(float)limit
+{
+  miterlimit = limit;
+}
+
+- (float)miterLimit
+{
+  return miterlimit;
+}
+
 - (void)remakePath
 {
 }
