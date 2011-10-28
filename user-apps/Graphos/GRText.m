@@ -36,40 +36,60 @@
 - (id)initInView:(GRDocView *)aView
          atPoint:(NSPoint)p
       zoomFactor:(float)zf
+  withProperties:(NSDictionary *) properties
       openEditor:(BOOL)openedit
 {
-    int result;
+  int result;
 
-    self = [super init];
-    if(self)
+  self = [super init];
+  if(self)
     {
-        docView = aView;
-        zmFactor = zf;
-        pos = NSMakePoint(p.x / zf, p.y / zf);
-        rotation = 0;
-        scalex = 1;
-        scaley = 1;
-        stroked = YES;
-        filled = NO;
-        visible = YES;
-        locked = NO;
-        strokeColor = [[NSColor blackColor] retain];
-        fillColor = [[NSColor whiteColor] retain];
-        ASSIGN(str, @"");
+      docView = aView;
+      zmFactor = zf;
+      pos = NSMakePoint(p.x / zf, p.y / zf);
+      rotation = 0;
+      scalex = 1;
+      scaley = 1;
+      stroked = YES;
+      filled = NO;
+      visible = YES;
+      locked = NO;
+      strokeColor = [[NSColor blackColor] retain];
+      fillColor = [[NSColor whiteColor] retain];
+      ASSIGN(str, @"");
 
-        editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
-        if(openedit)
-        {
-            [(GRTextEditor *)editor setPoint: pos
-                  withString: nil
-                  attributes: nil];
-            result = [(GRTextEditor *)editor runModal];
-            if(result == NSAlertDefaultReturn)
-                [self setString: [[(GRTextEditor *)editor editorView] textString]
-                     attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
+      if (properties != nil)
+	{
+	  NSColor *newColor;
+	  NSString *val;
+	  
+	  val = [properties objectForKey: @"stroked"];
+	  if (val != nil)
+	    [self setStroked: (BOOL)[val intValue]];
+	  newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
+	  if (newColor != nil)
+	    [self setStrokeColor: newColor];
+	  
+	  val = [properties objectForKey: @"filled"];
+	  if (val != nil)
+	    [self setFilled: (BOOL)[val intValue]];
+	  newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
+	  if (newColor != nil)
+	    [self setFillColor: newColor];
+	}
+      editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
+      if(openedit)
+	{
+	  [(GRTextEditor *)editor setPoint: pos
+				withString: nil
+				attributes: nil];
+	  result = [(GRTextEditor *)editor runModal];
+	  if(result == NSAlertDefaultReturn)
+	    [self setString: [[(GRTextEditor *)editor editorView] textString]
+		 attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
         }
     }
-    return self;
+  return self;
 }
 
 - (id)initFromData:(NSDictionary *)description

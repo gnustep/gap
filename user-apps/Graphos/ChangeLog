@@ -1,3 +1,9 @@
+2011-10-29 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.[h,m]
+	* GRDocView.m
+	Initialize text object with properties.
+
 2011-10-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.h

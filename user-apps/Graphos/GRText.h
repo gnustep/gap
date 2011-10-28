@@ -46,8 +46,9 @@
 
 - (id)initInView:(GRDocView *)aView
          atPoint:(NSPoint)p
-                    zoomFactor:(float)zf
-                    openEditor:(BOOL)openedit;
+      zoomFactor:(float)zf
+  withProperties:(NSDictionary *)properties
+      openEditor:(BOOL)openedit;
 
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
