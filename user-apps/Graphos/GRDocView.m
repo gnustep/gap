@@ -1,4 +1,3 @@
-
 /*
  Project: Graphos
  GRDocView.m
@@ -230,27 +229,33 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)addTextAtPoint:(NSPoint)p
 {
-    GRText *gdtxt;
-    int i;
-    NSUndoManager *uMgr;
-    
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Add Text"];
-    
-    [self saveCurrentObjects];
-    
-    NSLog(@"AddTextAtPoint");
-    for(i = 0; i < [objects count]; i++)
-        [[[objects objectAtIndex: i] editor] unselect];
+  GRText *gdtxt;
+  int i;
+  NSUndoManager *uMgr;
+  GRPropsEditor *objInspector;
 
-    gdtxt = [[GRText alloc] initInView: self atPoint: p
-                            zoomFactor: zFactor openEditor: YES];
-    [objects addObject: gdtxt];
-    [[gdtxt editor] select];
-    [gdtxt release];
-    [self setNeedsDisplay: YES];
+  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
+    
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Add Text"];
+    
+  [self saveCurrentObjects];
+    
+  NSLog(@"AddTextAtPoint");
+  for(i = 0; i < [objects count]; i++)
+    [[[objects objectAtIndex: i] editor] unselect];
+
+  gdtxt = [[GRText alloc] initInView: self
+			     atPoint: p
+			  zoomFactor: zFactor
+		      withProperties: [objInspector properties]
+			  openEditor: YES];
+  [objects addObject: gdtxt];
+  [[gdtxt editor] select];
+  [gdtxt release];
+  [self setNeedsDisplay: YES];
 }
 
 - (void)addBox
