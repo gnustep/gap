@@ -8,6 +8,11 @@
 	* GRPathObject.m
 	Refactor path properties into super-class
 
+	* GRBezierPath.h
+	* GRBezierPath.m
+	* GRDocView.m
+	Initialze Bezier Path with properties.
+
 2011-10-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRBox.[h,m]:
