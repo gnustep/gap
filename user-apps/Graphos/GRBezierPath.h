@@ -42,7 +42,9 @@ typedef struct
 }
 
 - (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;
-
+- (id)initInView:(GRDocView *)aView
+      zoomFactor:(float)zf
+      withProperties:(NSDictionary *)properties;
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
         zoomFactor:(float)zf;

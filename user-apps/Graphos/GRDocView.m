@@ -214,12 +214,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)addPath
 {
-    GRBezierPath *path;
+  GRBezierPath *path;
+  GRPropsEditor *objInspector;
 
-    path = [[GRBezierPath alloc] initInView: self zoomFactor: zFactor];
-    [objects addObject: path];
-    [path release];
-    edind = [objects count] -1;
+  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
+
+  path = [[GRBezierPath alloc] initInView: self
+			       zoomFactor: zFactor
+			   withProperties: [objInspector properties]];
+
+  [objects addObject: path];
+  [path release];
+  edind = [objects count] -1;
 }
 
 - (void)addTextAtPoint:(NSPoint)p
