@@ -225,6 +225,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   [objects addObject: path];
   [path release];
   edind = [objects count] -1;
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 - (void)addTextAtPoint:(NSPoint)p
@@ -256,6 +257,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   [[gdtxt editor] select];
   [gdtxt release];
   [self setNeedsDisplay: YES];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 - (void)addBox
@@ -274,6 +276,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   [box release];
   [self setNeedsDisplay: YES];
   edind = [objects count] -1;
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 - (void)addCircle
@@ -291,6 +294,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   [[circle editor] select];
   [circle release];
   [self setNeedsDisplay: YES];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
   edind = [objects count] -1;
 }
 
@@ -361,7 +365,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     if([deleted count])
     {
         [delObjects addObject: deleted];
-        // ###		[myWin setSaved: NO];
     }
     [self setNeedsDisplay: YES];
 }
