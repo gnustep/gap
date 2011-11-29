@@ -1,3 +1,8 @@
+2011-11-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* GNUmakefile.preamble
+	Do not override ADDITIONAL_GUI_LIBS
+
 2011-10-15 Riccardo Mottola <rm@gnu.org>
 
 	* Compontents/ArticleView/English.lproj/ArticleTextViewPlugin.gorm
