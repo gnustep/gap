@@ -29,6 +29,7 @@
 #import <AppKit/NSBezierPath.h>
 
 #import "OKChart.h"
+#import "OKSeries.h"
 
 @implementation OKChart
 
