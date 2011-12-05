@@ -16,7 +16,9 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.4.0
 PACKAGE_NAME = AClock
 APP_NAME = AClock
-AClock_APPLICATION_ICON = 
+AClock_APPLICATION_ICON = AClock.tiff
+CVS_MODULE_NAME = gap/user-apps/AClock
+CVS_TAG_NAME = AClock
 
 
 #
