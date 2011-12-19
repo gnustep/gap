@@ -325,21 +325,31 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)updatePrintInfo: (NSPrintInfo *)pi;
 {
-    float lm, rm;
+  float lm, rm;
+
+  if (pi == nil)
+    {
+      NSLog(@"invalid printer information");
+      return;
+    }
+  lm = [pi leftMargin];
+  rm = [pi rightMargin];
+  if (lm <= 0 || rm <= 0)
+    {
+      NSLog(@"invalid margin information");
+      return;
+    }
+  pageRect = NSMakeRect(0,0,[pi paperSize].width, [pi paperSize].height);
+  a4Rect = NSMakeRect([pi leftMargin], [pi bottomMargin],
+		      pageRect.size.width-([pi leftMargin]+[pi rightMargin]),
+		      pageRect.size.height-([pi topMargin]+[pi bottomMargin]));
     
-    lm = [pi leftMargin];
-    rm = [pi rightMargin];
-    pageRect = NSMakeRect(0,0,[pi paperSize].width, [pi paperSize].height);
-    a4Rect = NSMakeRect([pi leftMargin], [pi bottomMargin],
-             pageRect.size.width-([pi leftMargin]+[pi rightMargin]),
-             pageRect.size.height-([pi topMargin]+[pi bottomMargin]));
-    
-    zmdRect = a4Rect;
-    zIndex = 2;
-    zFactor = zFactors[zIndex];
+  zmdRect = a4Rect;
+  zIndex = 2;
+  zFactor = zFactors[zIndex];
                                                           
-    [self setFrame: pageRect];
-    [self setNeedsDisplay:YES];
+  [self setFrame: pageRect];
+  [self setNeedsDisplay:YES];
 }
                                                               
 - (void)deleteSelectedObjects
