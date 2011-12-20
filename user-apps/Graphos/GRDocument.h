@@ -27,7 +27,7 @@
 
 @interface GRDocument : NSDocument
 {
-  GRDocView *docView;
+  IBOutlet GRDocView *docView;
 }
 
 /** accessor to the current View of the document */

@@ -30,8 +30,7 @@
 {
   self = [super init];
   if (self)
-    {        
-      //      docView = [[GRDocView alloc] initWithFrame: NSMakeRect(0,0,0,0)];
+    {
     }
   return self;
 }
