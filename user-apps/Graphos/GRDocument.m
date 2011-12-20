@@ -28,12 +28,12 @@
 
 - (id)init
 {
-    [super init];
-    if (self)
+  self = [super init];
+  if (self)
     {        
-        docView = [[GRDocView alloc] initWithFrame: NSMakeRect(0,0,0,0)];
+      //      docView = [[GRDocView alloc] initWithFrame: NSMakeRect(0,0,0,0)];
     }
-    return self;
+  return self;
 }
 
 - (NSString *) windowNibName
