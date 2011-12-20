@@ -1,5 +1,11 @@
 2011-12-20 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocument.[h,m]:
+	* English.lproj/GRDocument.nib
+	Init view only in the interface file.
+
+2011-12-20 Riccardo Mottola <rm@gnu.org>
+
 	* GRDocument.m:
 	Fix init method.
 
