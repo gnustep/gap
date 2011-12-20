@@ -11,10 +11,8 @@
     };
     GRDocView = {
 	Actions = (
-	    "inspectObject:",
 	    "moveSelectedObjectsToFront:",
 	    "moveSelectedObjectsToBack:",
-	    "unselectOtherObjects:",
 	    "cut:",
 	    "copy:",
 	    "paste:"
@@ -27,6 +25,7 @@
 	Actions = (
 	);
 	Outlets = (
+	    docView
 	);
 	Super = NSDocument;
     };
