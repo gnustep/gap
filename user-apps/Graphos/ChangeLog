@@ -1,3 +1,8 @@
+2011-12-22 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocument.[h,m]:
+	Store the file data and load it ater the nib is initialized.
+
 2011-12-20 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocument.[h,m]:
