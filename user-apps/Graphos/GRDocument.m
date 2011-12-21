@@ -55,7 +55,9 @@
       cv = [sv contentView];
       [cv scrollToPoint: NSMakePoint(0, NSMaxY([docView bounds]))];
     }
-    
+
+    if (documentDictionary)
+      [docView createObjectsFromDictionary: documentDictionary];
     
     /* initialize the image view to the default size if possible */
     p = [self printInfo];
@@ -76,19 +78,20 @@
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
-    NSString *tmp = [[[NSString alloc] initWithData: data
+  NSString *tmp = [[[NSString alloc] initWithData: data
                                            encoding: NSASCIIStringEncoding] autorelease];
 
-    if( [aType isEqualToString: @"graphos design"] && tmp != nil )
+  if( [aType isEqualToString: @"graphos design"] && tmp != nil )
     {
-        if( [tmp rangeOfString: @"<?xml"].length > 0 )
+      if( [tmp rangeOfString: @"<?xml"].length > 0 )
         {
-            tmp = [[[NSString alloc] initWithData: data
-                                         encoding: NSUTF8StringEncoding] autorelease];
+	  tmp = [[[NSString alloc] initWithData: data
+				   encoding: NSUTF8StringEncoding] autorelease];
         }
-        return [docView createObjectsFromDictionary: [tmp propertyList]];
+      documentDictionary = [[tmp propertyList] retain];
+      return (documentDictionary != nil);
     }
-    return NO;
+  return NO;
 }
 
 - (GRDocView *)docView
