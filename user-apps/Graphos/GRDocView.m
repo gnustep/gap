@@ -334,12 +334,13 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
   lm = [pi leftMargin];
   rm = [pi rightMargin];
-  if (lm <= 0 || rm <= 0)
+  if (lm <= 0 || rm <= 0 || [pi paperSize].width <= 0 || [pi paperSize].height <= 0)
     {
-      NSLog(@"invalid margin information");
+      NSLog(@"invalid margin / paper size information. %f %f %f %f", lm, rm,[pi paperSize].width, [pi paperSize].height);
       return;
     }
   pageRect = NSMakeRect(0,0,[pi paperSize].width, [pi paperSize].height);
+
   a4Rect = NSMakeRect([pi leftMargin], [pi bottomMargin],
 		      pageRect.size.width-([pi leftMargin]+[pi rightMargin]),
 		      pageRect.size.height-([pi topMargin]+[pi bottomMargin]));
