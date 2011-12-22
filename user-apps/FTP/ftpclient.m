@@ -325,6 +325,7 @@ int getChar(streamStruct* ss)
                 break;
             case END:
                 NSLog(@"EOF reached prematurely");
+		startNumCode = -1;
                 break;
             default:
                 NSLog(@"Duh, a case default in the readReply parser");
@@ -785,7 +786,8 @@ int getChar(streamStruct* ss)
     }
     
     initStream(&ctrlStream, controlSocket);
-    [self readReply :&reply];
+    if([self readReply :&reply] < 0)
+      return ERR_READ_FAIL;
     [reply release];
     return 0;
 }
@@ -806,7 +808,8 @@ int getChar(streamStruct* ss)
     int            replyCode;
 
     sprintf(tempStr, "USER %s\r\n", user);
-    [self writeLine:tempStr];
+    if ([self writeLine:tempStr] < 0)
+      return -2; /* we couldn't write */
     replyCode = [self readReply:&reply];
     if (replyCode == 530)
     {
@@ -818,7 +821,8 @@ int getChar(streamStruct* ss)
     [reply release];
     
     sprintf(tempStr, "PASS %s\r\n", pass);
-    [self writeLine:tempStr byLoggingIt:NO];
+    if ([self writeLine:tempStr byLoggingIt:NO] < 0)
+      return -2; /* we couldn't write */
     replyCode = [self readReply:&reply];
     if (replyCode == 530)
     {
