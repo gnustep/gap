@@ -31,6 +31,7 @@
   self = [super init];
   if (self)
     {
+      documentDictionary = nil;
     }
   return self;
 }
@@ -45,6 +46,7 @@
     NSPrintInfo *p;
 
     [super windowControllerDidLoadNib:aController];
+    NSLog(@"windowControllerDidLoadNib");
     if (aController == [[self windowControllers] objectAtIndex: 0])
     {
       NSScrollView *sv;
@@ -62,10 +64,10 @@
     /* initialize the image view to the default size if possible */
     p = [self printInfo];
     if (p != nil)
-        [docView updatePrintInfo: p];
+      [docView updatePrintInfo: p];
     else
-        NSLog(@"printInfo nil!");
-    
+      NSLog(@"printInfo nil!");
+
     /* set undo levels */
     [[self undoManager] setLevelsOfUndo:1];
 
@@ -118,8 +120,8 @@
  */
 - (void)setPrintInfo:(NSPrintInfo *)printInfo
 {
-    [super setPrintInfo: printInfo];
-    [docView updatePrintInfo: printInfo];
+  [super setPrintInfo: printInfo];
+  [docView updatePrintInfo: printInfo];
 }
 
 /**
