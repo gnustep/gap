@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2007 Riccardo Mottola
+ Copyright (C) 2005-2011 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -54,6 +54,7 @@
 #define ERR_SOCKET_FAIL -2
 #define ERR_CONNECT_FAIL -3
 #define ERR_GESOCKNAME_FAIL -4
+#define ERR_READ_FAIL -5
 
 /** connection types: PASV or PORT */
 typedef enum { defaultMode, portMode, passiveMode } connectionModes;
