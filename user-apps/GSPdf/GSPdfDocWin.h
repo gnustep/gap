@@ -2,8 +2,8 @@
  *  GSPdfDocWin.h: Interface and declarations for the GSPdfDocWin 
  *  Class of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002-2010
- *  Riccardo Mottola
+ *  Copyright (c) 2002-2012
+ *  Riccardo Mottola <rm@gnu.org>
  *  Enrico Sersale <enrico@imago.ro>
  *  
  *  Author: Enrico Sersale
@@ -29,6 +29,7 @@
 #import <AppKit/NSWindowController.h>
 #import <AppKit/NSScrollView.h>
 #import <AppKit/NSTextView.h>
+#import <AppKit/NSTextField.h>
 #import <AppKit/NSStepper.h>
 #import <AppKit/NSButton.h>
 
