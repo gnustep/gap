@@ -1,3 +1,8 @@
+2012-01-08 Riccardo Mottola <rm@gnu.org>
+
+	* GSPdfDocWin.h
+	Import necessary headers.
+
 2011-05-13 Riccardo Mottola <rm@gnu.org>
 
 	* GSPdfDocWin.m
