@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.4
+VERSION = 0.5
 PACKAGE_NAME = GSPdf
 APP_NAME = GSPdf
 GSPdf_APPLICATION_ICON = GSPdf.tiff
