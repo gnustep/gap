@@ -22,7 +22,16 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#import <AppKit/NSEvent.h>
 #import "GSPdfView.h"
+#import "GSPdfDocWin.h"
+
+/* we define our own constants */
+enum
+{
+  NSEscapeCharacter = 0x001b,
+  NSSpaceCharacter = 0x0020
+};
 
 @implementation GSPdfView
 
@@ -30,6 +39,8 @@
 {
   delegate = aDelegate;
 }
+
+/* ---- Mouse event methods ---- */
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
@@ -47,6 +58,48 @@
 {
   [super mouseUp: theEvent];
   [delegate mouseUp: theEvent];
+}
+
+/* ---- Key event methods ---- */
+
+/** respond to key equivalents which are not bound do menu items */
+-(BOOL)performKeyEquivalent: (NSEvent*)theEvent
+{
+  NSString *keyStr;
+  unichar keyCh;
+  unsigned int modifierFlags;
+
+#ifdef __APPLE__
+/* Apple is definitively broken here and on all versions tested it returns for the arrow key
+    also a KeyUp event, which it should not, as the Event is specified to be keyDown */
+    if ([theEvent type] == NSKeyUp)
+        return [super performKeyEquivalent:theEvent];
+#endif
+
+    keyCh = 0x0;
+    keyStr = [theEvent characters];
+    if ([keyStr length] > 0)
+      keyCh = [keyStr characterAtIndex:0];
+    modifierFlags = [theEvent modifierFlags];
+
+    if (keyCh == NSEscapeCharacter)
+      {
+	//        [delegate setFullScreen:theEvent];
+        return YES;
+      }
+    else if (keyCh == NSLeftArrowFunctionKey || keyCh == NSUpArrowFunctionKey)
+      {
+        [delegate previousPage:theEvent];
+        return YES;
+      }
+    else if (keyCh == NSRightArrowFunctionKey || keyCh == NSDownArrowFunctionKey || keyCh == NSSpaceCharacter)
+      {
+        [delegate nextPage:theEvent];
+        return YES;
+      }
+    else
+      NSLog(@"keyCh %x", keyCh);    
+    return [super performKeyEquivalent:theEvent];
 }
 
 @end

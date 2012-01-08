@@ -1,8 +1,11 @@
 2012-01-08 Riccardo Mottola <rm@gnu.org>
 
-	* GSPdfDocWin.h
+	* GSPdfDocWin.h:
 	Import necessary headers.
 
+	* GSPdfView.m:
+	Keyboard shortcuts for navigation.
+	
 2011-05-13 Riccardo Mottola <rm@gnu.org>
 
 	* GSPdfDocWin.m
