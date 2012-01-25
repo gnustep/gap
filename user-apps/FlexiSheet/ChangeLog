@@ -1,5 +1,11 @@
 2012-01-25 Riccardo Mottola <rm@gnu.org>
 
+	* FSCore/FSObject.m
+	* FSCore/FSObject.h
+	Removed unused class
+
+2012-01-25 Riccardo Mottola <rm@gnu.org>
+
 	* Application/UI/FSTableView+Scrolling.m
 	* Application/FSDocument+Quantrix.m
 	* FSCore/FSSelection.m
