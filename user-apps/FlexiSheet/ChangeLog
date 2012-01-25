@@ -3,6 +3,7 @@
 	* Application/UI/FSTableView+Scrolling.m
 	* Application/FSDocument+Quantrix.m
 	* FSCore/FSSelection.m
+	* FSCore/FSKeySet.m
 	Warning fixes.
 
 2012-01-25 Riccardo Mottola <rm@gnu.org>

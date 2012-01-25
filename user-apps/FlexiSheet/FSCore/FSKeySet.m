@@ -1,4 +1,4 @@
-//  $Id: FSKeySet.m,v 1.1 2008/10/14 15:04:21 hns Exp $
+//  $Id: FSKeySet.m,v 1.2 2012/01/25 13:52:13 rmottola Exp $
 //
 //  FSKeySet.m
 //  FlexiSheet
@@ -6,6 +6,7 @@
 //  Created by Stefan Leuker on 30-JAN-2001.
 //
 //  Copyright (c) 2001-2004, Stefan Leuker.        All rights reserved.
+//                2012 Free Software Foundation
 //  
 //  Redistribution and use in source and binary forms,  with or without
 //  modification,  are permitted provided that the following conditions
@@ -49,13 +50,13 @@
 + (FSKeySet*)keySet
     /*" Creates and returns an autoreleased FSKeySet instance. "*/
 {
-    return [[[self allocWithZone:nil] init] autorelease];
+    return [[[self allocWithZone:NULL] init] autorelease];
 }
 
 
 + (FSKeySet*)keySet:(FSkeyset*)keyset
 {
-    FSKeySet *instance = [[self allocWithZone:nil] init];
+    FSKeySet *instance = [[self allocWithZone:NULL] init];
     FSkeysetCopyKeys(&(instance->_data), keyset);
     return [instance autorelease];
 }
@@ -65,7 +66,7 @@
     /*" Creates and returns an autoreleased FSKeySet instance
     containing keys. "*/
 {
-    FSKeySet *instance = [[self allocWithZone:nil] init];
+    FSKeySet *instance = [[self allocWithZone:NULL] init];
     [instance addKeysFromArray:keys];
     return [instance autorelease];
 }
@@ -75,7 +76,7 @@
     /*" Creates and returns an autoreleased FSKeySet instance
     containing key. "*/
 {
-    FSKeySet *instance = [[self allocWithZone:nil] init];
+    FSKeySet *instance = [[self allocWithZone:NULL] init];
     [instance addKey:key];
     return [instance autorelease];
 }
@@ -258,7 +259,7 @@
     FSkeysetCopyKeys(&_data, &(otherSet->_data));
     _cachedTable = otherSet->_cachedTable;
     [_cachedAllKeys release];
-    _cachedAllKeys = [otherSet->_cachedAllKeys copyWithZone:nil];
+    _cachedAllKeys = [otherSet->_cachedAllKeys copyWithZone:NULL];
 }
 
 
