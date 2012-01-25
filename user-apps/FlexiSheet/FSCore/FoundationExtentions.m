@@ -1,4 +1,4 @@
-//  $Id: FoundationExtentions.m,v 1.5 2010/09/22 21:47:28 rmottola Exp $
+//  $Id: FoundationExtentions.m,v 1.6 2012/01/25 09:03:18 rmottola Exp $
 //
 //  FoundationExtentions.m
 //  FSCore Framework
@@ -45,8 +45,9 @@
 #include <assert.h>
 
 #import "FoundationExtentions.h"
-#import <objc/objc-api.h>
+
 #ifdef __APPLE__
+#import <objc/objc-api.h>
 #import <objc/objc-class.h>
 #import <objc/objc-runtime.h>
 

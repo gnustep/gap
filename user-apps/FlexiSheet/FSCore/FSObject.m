@@ -1,4 +1,4 @@
-//  $Id: FSObject.m,v 1.3 2010/09/22 19:44:32 rmottola Exp $
+//  $Id: FSObject.m,v 1.4 2012/01/25 09:03:18 rmottola Exp $
 //
 //  FSObject.m
 //  FlexiSheet
@@ -39,9 +39,9 @@
 //  
 
 #import "FSObject.h"
+#ifdef __APPLE__
 #import <objc/objc.h>
 #import <objc/objc-api.h>
-#ifdef __APPLE__
 #import <objc/objc-class.h>
 #endif
 

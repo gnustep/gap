@@ -1,0 +1,5 @@
+2012-01-25 Riccardo Mottola <rm@gnu.org>
+
+	* FSCore/FSObject.m
+	* FSCore/FoundationExtentions.m
+	Change imports for gcc 4.6 support
