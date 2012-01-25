@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 05-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSVarioMatrix.m,v 1.1 2008/10/28 13:10:32 hns Exp $
+//  $Id: FSVarioMatrix.m,v 1.2 2012/01/25 15:58:26 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -30,10 +30,13 @@
 
 - (void)setDataSource:(id<FSMatrixDataSource>)dataSource
 {
-    if ([dataSource conformsToProtocol:@protocol(FSVarioMatrixDataSource)] == NO) {
-        [FSLog logError:@"FSVarioMatrix dataSource requires an extended protocol!"];
-    } else {
-        [super setDataSource:dataSource];
+  if ([dataSource conformsToProtocol:@protocol(FSVarioMatrixDataSource)] == NO)
+    {
+      [FSLog logError:@"FSVarioMatrix dataSource requires an extended protocol!"];
+    }
+  else
+    {
+      [super setDataSource:dataSource];
     }
 }
 
@@ -123,7 +126,7 @@
     FSCellStyle         *cellStyle;
     NSRange              colspan, rowspan;
     BOOL                 _primary = ([[self window] firstResponder] == self);
-    FSCell               cell;
+    FSCell               cell = {0};
     int                  offset;
     NSColor             *primaryColor = [NSColor selectedControlColor];
     NSColor             *secondaryColor = [NSColor secondarySelectedControlColor];

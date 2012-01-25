@@ -9,6 +9,12 @@
 	* FSCore/FSObject.m
 	Do not dealloc super.
 
+	* Application/UI/FSVarioMatrix.m
+	Initialize FSCell struct.
+
+	* Application/UI/FSHeaderDock.m
+	Check that dropimage is not nil, or its size struct is garbage.
+
 2012-01-25 Riccardo Mottola <rm@gnu.org>
 
 	* FSCore/FSObject.m
