@@ -572,8 +572,6 @@
 		665D7530017228EA00C5E943 /* FSHeaderLayout.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FSHeaderLayout.m; sourceTree = "<group>"; };
 		665EF96D014BFAED009902E8 /* FSTableView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "FSTableView+Layout.m"; sourceTree = "<group>"; };
 		665EF96F014C10B9009902E8 /* FSMatrixDataSource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FSMatrixDataSource.h; sourceTree = "<group>"; };
-		66604CD7023FF4DF00A8010B /* FSObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FSObject.h; sourceTree = "<group>"; };
-		66604CD8023FF4DF00A8010B /* FSObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FSObject.m; sourceTree = "<group>"; };
 		66656DD50166355E0066F0D1 /* FSTableView+Scrolling.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "FSTableView+Scrolling.m"; sourceTree = "<group>"; };
 		666975DC01CCA18500A8010B /* FSViewInspectorPane.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FSViewInspectorPane.h; sourceTree = "<group>"; };
 		666975DD01CCA18500A8010B /* FSViewInspectorPane.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FSViewInspectorPane.m; sourceTree = "<group>"; };
@@ -1476,8 +1474,6 @@
 			isa = PBXGroup;
 			children = (
 				66F7138A0280557900A8010B /* FSTypes.h */,
-				66604CD7023FF4DF00A8010B /* FSObject.h */,
-				66604CD8023FF4DF00A8010B /* FSObject.m */,
 				6648FDFA027F118A00A8010B /* FSHashMap.h */,
 				6648FDFB027F118A00A8010B /* FSHashMap.m */,
 				F6253CE5014DFA93017BFD99 /* FoundationExtentions.h */,
