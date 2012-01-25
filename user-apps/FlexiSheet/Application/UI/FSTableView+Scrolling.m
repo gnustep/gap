@@ -4,8 +4,9 @@
 //
 //  Created by Stefan Leuker on 29-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
+//                2010-2012 FRee Software Foundation
 //
-//  $Id: FSTableView+Scrolling.m,v 1.1 2008/10/28 13:10:31 hns Exp $
+//  $Id: FSTableView+Scrolling.m,v 1.2 2012/01/25 09:35:32 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -47,7 +48,8 @@
     FSKeyRange   *range;
     NSRange       ir;
 
-    if (range = [self selectedColumnItems]) {
+    if ((range = [self selectedColumnItems]))
+      {
         headers = [dataSource topHeadersForTableView:self];
         index = [headers indexOfObject:[range header]];
         ir = [range keyIndexRange];
@@ -75,7 +77,9 @@
         rect.size.width = len;
         [_dataMatrix scrollRectToVisible:rect];
         [self reflectScrolledDataTable];
-    } else if (range = [self selectedRowItems]) {
+      }
+    else if ((range = [self selectedRowItems]))
+      {
         headers = [dataSource sideHeadersForTableView:self];
         index = [headers indexOfObject:[range header]];
         ir = [range keyIndexRange];
