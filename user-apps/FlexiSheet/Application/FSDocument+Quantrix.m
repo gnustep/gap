@@ -4,8 +4,9 @@
 //
 //  Created by Stefan Leuker on 28-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
+//                2012 Free Software Foundation
 //
-//  $Id: FSDocument+Quantrix.m,v 1.2 2008/12/17 18:16:02 rmottola Exp $
+//  $Id: FSDocument+Quantrix.m,v 1.3 2012/01/25 09:58:38 rmottola Exp $
 
 #import "FlexiSheet.h"
 #import "FSArchiving.h"
@@ -44,12 +45,14 @@
         if ([labels count]) {
             temp = [NSMutableArray array];
             setCursor = [result objectEnumerator];
-            while (set = [setCursor nextObject]) {
+            while ((set = [setCursor nextObject]))
+	      {
                 keyCursor = [labels objectEnumerator];
-                while (key = [keyCursor nextObject]) {
+                while ((key = [keyCursor nextObject]))
+		  {
                     [temp addObject:[set setByAddingKey:key]];
-                }
-            }
+		  }
+	      }
             result = temp;
         }
     }
@@ -67,7 +70,8 @@
     NSString     *name;
 
     nc = [kids objectEnumerator];
-    while (no = [nc nextObject]) {
+    while ((no = [nc nextObject]))
+      {
         name = [no objectForKey:@"name"];
         subarray = [no objectForKey:@"children"];
         if ([subarray isKindOfClass:[NSArray class]]) {
@@ -133,7 +137,8 @@
         [_tables addObject:table];
         
         cc = [[to objectForKey:@"categories"] objectEnumerator];
-        while (co = [cc nextObject]) {
+        while ((co = [cc nextObject]))
+	  {
             header = [FSHeader headerNamed:[co objectForKey:@"name"]];
             [table addHeader:header];
 
