@@ -1,4 +1,4 @@
-//  $Id: FSSelection.m,v 1.1 2008/10/14 15:04:22 hns Exp $
+//  $Id: FSSelection.m,v 1.2 2012/01/25 13:35:34 rmottola Exp $
 //
 //  FSSelection.m
 //  FlexiSheet
@@ -6,6 +6,7 @@
 //  Created by Stefan Leuker on 02-OCT-2001.
 //
 //  Copyright (c) 2001-2004, Stefan Leuker.        All rights reserved.
+//                2012 Free Software Foundation
 //  
 //  Redistribution and use in source and binary forms,  with or without
 //  modification,  are permitted provided that the following conditions
@@ -49,20 +50,20 @@ using a (complete) base key set. "*/
 
 + (FSSelection*)selection
 {
-    return [[[self allocWithZone:nil] init] autorelease];
+    return [[[self allocWithZone:NULL] init] autorelease];
 }
 
 
 + (FSSelection*)selectionWithRanges:(NSArray*)ranges
     /*" Will always return a FSRangeSelection"*/
 {
-    return [[[self allocWithZone:nil] initWithRanges:ranges] autorelease];
+    return [[[self allocWithZone:NULL] initWithRanges:ranges] autorelease];
 }
 
 
 + (FSSelection*)selectionWithKeySets:(NSArray*)keySets
 {
-    return [[[self allocWithZone:nil] initWithKeySets:keySets] autorelease];
+    return [[[self allocWithZone:NULL] initWithKeySets:keySets] autorelease];
 }
 
 
@@ -78,11 +79,12 @@ using a (complete) base key set. "*/
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+      {
         // we're open to be a range or keyset based selection
         _keySets = nil;
         _rangeForHeader = nil;
-    }
+      }
     return self;
 }
 
@@ -91,7 +93,7 @@ using a (complete) base key set. "*/
 {
     self = [super init];
     if (self) {
-        _rangeForHeader = [[NSMutableDictionary allocWithZone:nil] init];
+        _rangeForHeader = [[NSMutableDictionary allocWithZone:NULL] init];
         [self extendWithRange:range];
     }
     return self;
