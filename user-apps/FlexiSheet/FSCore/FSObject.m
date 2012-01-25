@@ -1,4 +1,4 @@
-//  $Id: FSObject.m,v 1.4 2012/01/25 09:03:18 rmottola Exp $
+//  $Id: FSObject.m,v 1.5 2012/01/25 14:22:12 rmottola Exp $
 //
 //  FSObject.m
 //  FlexiSheet
@@ -37,6 +37,7 @@
 //  ANY WAY  OUT  OF  THE USE OF THIS SOFTWARE,  EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 //  
+//  ##### FIXME ###### remove this class alltogether, it is just useless optimization
 
 #import "FSObject.h"
 #ifdef __APPLE__
@@ -114,7 +115,9 @@ static NSString  *COMPLAIN_MISSING_IMP = @"Class %@ needs this code:\n\
     //NSLog(@"Adding instance of %@ to pool.", pool->poolClass);
     pool->pool[pool->high] = self;
     pool->high = next;
-    [super dealloc];
+
+    // we don't want to call NSDeallocateObject() but we want to silence the compiler
+    if(0) [super dealloc];
 }
 
 

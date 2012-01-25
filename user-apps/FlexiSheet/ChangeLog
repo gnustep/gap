@@ -6,6 +6,9 @@
 	* FSCore/FSKeySet.m
 	Warning fixes.
 
+	* FSCore/FSObject.m
+	Do not dealloc super.
+
 2012-01-25 Riccardo Mottola <rm@gnu.org>
 
 	* FSCore/FSObject.m
