@@ -4,8 +4,9 @@
 //
 //  Created by Stefan Leuker on 04-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
+//                2012 Free Software Foundation
 //
-//  $Id: FSHeaderDock.m,v 1.2 2008/12/16 14:14:42 rmottola Exp $
+//  $Id: FSHeaderDock.m,v 1.3 2012/01/25 15:58:26 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -279,7 +280,7 @@ static NSString *FSHeaderPboardType = @"FSHeaderPboardType";
             offset += [image size].width;
             _sizeCache[index] = [image size].width;
         }
-        if (_isDropping && (_dropIndex == index) && _isDragging && (_dragIndex <= _dropIndex)) {
+        if (_isDropping && (_dropIndex == index) && _isDragging && (_dragIndex <= _dropIndex) && dropimage != nil) {
             offset += [dropimage size].width;
         }
     }
