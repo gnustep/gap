@@ -6,7 +6,7 @@
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //                2012 Free Software Foundation
 //
-//  $Id: FSHeaderDock.m,v 1.3 2012/01/25 15:58:26 rmottola Exp $
+//  $Id: FSHeaderDock.m,v 1.4 2012/01/26 14:14:39 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -498,8 +498,11 @@ static NSString *FSHeaderPboardType = @"FSHeaderPboardType";
 - (void)insertItem:(id)sender
 /*" Adds a category to the table controlled by this instance. "*/
 {
-    FSTable  *table = [_delegate table];
-    FSHeader *newHeader = [FSHeader headerNamed:[table nextAvailableHeaderName]];
+  FSTable  *table = nil;
+  FSHeader *newHeader;
+  if ([_delegate isKindOfClass:[FSWindowController class]])
+    table = [(FSWindowController *)_delegate table];
+  newHeader = [FSHeader headerNamed:[table nextAvailableHeaderName]];
     [newHeader appendKeyWithLabel:[NSString stringWithFormat:@"%@1", [newHeader label]]];
     [_headers insertObject:newHeader atIndex:++_selection];
     [[NSNotificationCenter defaultCenter] postNotificationName:
@@ -596,7 +599,11 @@ static NSString *FSHeaderPboardType = @"FSHeaderPboardType";
 
 - (FSTable*)table
 {
-    return [_delegate table];
+  FSTable *t = nil;
+
+  if ([_delegate isKindOfClass:[FSWindowController class]])
+    t = [(FSWindowController *)_delegate table];
+  return t;
 }
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
@@ -661,9 +668,12 @@ static NSString *FSHeaderPboardType = @"FSHeaderPboardType";
         return;
     }
     
-    if (_isLinking) {
-        FSTable *table = [_delegate table];
+    if (_isLinking)
+      {
+	FSTable *table = nil;
         FSGlobalHeader *gh;
+	if ([_delegate isKindOfClass:[FSWindowController class]])
+	  table = [(FSWindowController *)_delegate table];
         header = [[sender draggingSource] draggedHeader];
         
         gh = [header globalHeader];
