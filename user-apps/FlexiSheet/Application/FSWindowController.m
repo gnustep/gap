@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSWindowController.m,v 1.2 2008/12/17 18:16:03 rmottola Exp $
+//  $Id: FSWindowController.m,v 1.3 2012/01/26 23:12:16 rmottola Exp $
 
 #import "FlexiSheet.h"
 #import "FSExporter.h"
@@ -338,7 +338,7 @@ static NSArray*    __FSTCPBTYPES = nil;
 /*" Overwritten to combine the view name with the document title.
     "*/
 {
-    return [NSString stringWithFormat:@"%@ ¥ %@, %@", displayName, [_table name], _name];
+    return [NSString stringWithFormat:@"%@ - %@, %@", displayName, [_table name], _name];
 }
 
 
