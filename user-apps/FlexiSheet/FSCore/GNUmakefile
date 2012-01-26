@@ -34,7 +34,6 @@ FSKeyGroup.m \
 FSKeyRange.m \
 FSKeySet.m \
 FSLog.m \
-FSObject.m \
 FSOperator.m \
 FSParserFunctions.m \
 FSSelection.m \
@@ -67,7 +66,6 @@ FSKeyGroup.h \
 FSKeyRange.h \
 FSKeySet.h \
 FSLog.h \
-FSObject.h \
 FSOperator.h \
 FSParserFunctions.h \
 FSSelection.h \
