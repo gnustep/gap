@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2010/03/11 22:39:19 $
+// $Revision: 1.5 $
+// $Date: 2012/01/28 19:13:43 $
 
 #include "ADPersonView.h"
 #include "ADPersonPropertyView.h"
@@ -206,6 +206,7 @@ static NSString *__defaultCountryCode = nil;
   int y;
   NSRect noteRect;
   id label;
+  NSString *note;
 
   properties = [NSArray arrayWithObjects: ADBirthdayProperty,
 			ADHomePageProperty,
@@ -272,7 +273,9 @@ static NSString *__defaultCountryCode = nil;
   [_noteView setVerticallyResizable: YES];
   [_noteView setHorizontallyResizable: YES];
   [_noteView setDelegate: self];
-  [_noteView setString: [_person valueForProperty: ADNoteProperty]];
+  note = [_person valueForProperty: ADNoteProperty];
+  if (note != nil)
+    [_noteView setString: note];
   [_noteView setFont: [NSFont systemFontOfSize: _fontSize]];
   _noteTextChanged = NO;
 

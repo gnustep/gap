@@ -1,3 +1,8 @@
+2012-01-28 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/AddressView/ADPersonView.m:
+	Do not set string if note is nil.
+
 2011-05-18 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Addresses/ADRecord.h
