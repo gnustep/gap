@@ -1,3 +1,22 @@
+2012-01-28: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Frameworks/AddressView/ADPersonView.m
+	  setPerson: return if aPerson == nil
+	  use NSInteger instead of int to compare safely with
+	  NSNotFound
+	* Frameworks/AddressView/ADPersonPropertyView.m
+	  use NSInteger instead of int to compare safely with
+	  NSNotFound
+	* Frameworks/Addresses/ADLocalAddressBook.m
+	  fix format string
+	* AddressManager/Controller.m
+	  use NSApplicationTerminateReply, NSTerminateNow, and
+	  NSTerminateCancel in applicationShouldTerminate:
+	  use NSInteger instead of int to compare safely with
+	  NSNotFound
+	* Frameworks/Addresses/ADMultiValue.{h|m}
+	  Switch return value of -count from unsigned int to
+          NSUInteger
+
 2012-01-28 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/AddressView/ADPersonView.m:

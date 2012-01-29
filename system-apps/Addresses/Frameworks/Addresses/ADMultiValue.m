@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/09/25 20:15:20 $
+// $Revision: 1.3 $
+// $Date: 2012/01/29 16:09:09 $
 
 /* system includes */
 /* (none) */
@@ -72,7 +72,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
   return _arr;
 }
 
-- (unsigned int) count
+- (NSUInteger) count
 {
   return [_arr count];
 }

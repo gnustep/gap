@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2012/01/29 16:09:09 $
 
 #ifndef ADMULTIVALUE_H
 #define ADMULTIVALUE_H
@@ -25,7 +25,7 @@
   NSMutableArray *_arr;
 }
 
-- (unsigned int) count;
+- (NSUInteger) count;
 
 - (id) valueAtIndex: (int) index;
 - (NSString*) labelAtIndex: (int) index;
