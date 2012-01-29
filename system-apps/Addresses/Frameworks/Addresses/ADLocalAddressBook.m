@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/09/25 20:15:20 $
+// $Revision: 1.3 $
+// $Date: 2012/01/29 16:09:09 $
 
 /* system includes */
 /* (none) */
@@ -62,7 +62,7 @@ static ADLocalAddressBook *_localAB = nil;
       while((fname = [e nextObject]))
 	if([[fname pathExtension] isEqualToString: @"mfaddr"])
 	  next = MAX(next, [[fname stringByDeletingPathExtension] intValue]);
-      NSLog(@"New NEXTID is %d\n", next);
+      NSLog(@"New NEXTID is %lu\n", next);
     }
   next++;
 

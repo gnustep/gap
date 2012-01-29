@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.5 $
-// $Date: 2012/01/28 19:13:43 $
+// $Revision: 1.6 $
+// $Date: 2012/01/29 16:09:09 $
 
 #include "ADPersonView.h"
 #include "ADPersonPropertyView.h"
@@ -360,7 +360,8 @@ static NSString *__defaultCountryCode = nil;
 
 - (void) setPerson: (ADPerson*) aPerson
 {
-  if(aPerson == _person) return;
+  if(aPerson == _person || aPerson == nil)
+    return;
   
   [_person release];
   _person = [aPerson retain];
@@ -1216,7 +1217,7 @@ changedHeightFrom: (float) oldH
 + (NSString*) nextLabelAfter: (NSString*) previous
 		 forProperty: (NSString*) property
 {
-  NSArray *arr; int index;
+  NSArray *arr; NSInteger index;
   
   arr = [_labelDict objectForKey: property];
   if(!arr || ![arr count]) arr = [_labelDict objectForKey: @"Default"];

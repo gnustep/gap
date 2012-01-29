@@ -166,7 +166,7 @@
   if([ud objectForKey: @"DefaultISOCountryCode"])
     {
       NSString *def;
-      int index;
+      NSInteger index;
 
       def = [ud objectForKey: @"DefaultISOCountryCode"];
       index = [prefsAddressLayoutPopup indexOfItemWithRepresentedObject: def];
@@ -1204,7 +1204,7 @@ numberOfRowsInColumn: (int) column
   return YES;
 }
 
-- (BOOL) applicationShouldTerminate: (NSApplication*) app
+- (NSApplicationTerminateReply) applicationShouldTerminate: (NSApplication*) app
 {
   NSUserDefaults *def;
   
@@ -1242,17 +1242,17 @@ numberOfRowsInColumn: (int) column
 	      NSRunAlertPanel(_(@"Couldn't save"),
 			      _(@"The database could not be saved!"),
 			      _(@"OK"), nil, nil, nil);
-	      return NO;
+	      return NSTerminateCancel;
 	    }
-	  return YES;
+	  return NSTerminateNow;
 	case 0:
-	  return YES;
+	  return NSTerminateNow;
 	default:
-	  return NO;
+	  return NSTerminateCancel;
 	}
     }
   else
-    return YES;
+    return NSTerminateNow;
 }
 
 - (BOOL) validateMenuItem: (NSMenuItem*) anItem

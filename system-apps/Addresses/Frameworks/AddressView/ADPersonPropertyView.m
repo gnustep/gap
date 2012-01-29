@@ -6,8 +6,8 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2010/03/11 22:39:19 $
+// $Revision: 1.5 $
+// $Date: 2012/01/29 16:09:09 $
 
 /* system includes */
 #include <Foundation/Foundation.h>
@@ -315,7 +315,7 @@ static float _globalFontSize;
 
 - (BOOL) updatePersonWithMultiValueFromCell: (ADPersonPropertyCell*) cell
 {
-  NSString *key, *label, *identifier; id value; int i;
+  NSString *key, *label, *identifier; id value; NSInteger i;
   ADPropertyType type; ADMutableMultiValue *mv;
   NSMutableDictionary *dict;
 
@@ -656,7 +656,7 @@ static float _globalFontSize;
 
 - (NSString*) propertyForDragWithDetails: (id) details
 {
-  NSString *identifier; int index; ADMultiValue *mv;
+  NSString *identifier; NSInteger index; ADMultiValue *mv;
   id value;
 
   if(!details &&
@@ -836,7 +836,7 @@ static float _globalFontSize;
 - (void) textDidEndEditing: (NSNotification*) aNotification
 {
   int textMovement = -1;
-  int cellIndex;
+  NSInteger cellIndex;
   id c;
   NSDictionary *dict = [aNotification userInfo];
   id details;
