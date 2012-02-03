@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 27-AUG-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSMatrix.m,v 1.4 2008/12/15 14:50:38 rmottola Exp $
+//  $Id: FSMatrix.m,v 1.5 2012/02/03 00:28:56 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -351,7 +351,8 @@
         [[self window] invalidateCursorRectsForView:self];
     }
 }
-- (id)dataSource { return _dataSource; }
+
+- (id<FSMatrixDataSource>)dataSource { return _dataSource; }
 
 
 - (void)reloadData
@@ -361,9 +362,11 @@
     _numRows = [_dataSource numberOfRowsInMatrix:self];
     free(_rowHeights);
     _rowHeights = malloc(sizeof(float)*_numRows);
+    memset(_rowHeights, 0, sizeof((float*)_rowHeights));
     _numCols = [_dataSource numberOfColumnsInMatrix:self];
     free(_colWidths);
     _colWidths = malloc(sizeof(float)*_numCols);
+    memset(_rowHeights, 0, sizeof((float*)_colWidths));
     [self _adjustSizeToRowsAndCols];
     [[self window] invalidateCursorRectsForView:self];
 }
