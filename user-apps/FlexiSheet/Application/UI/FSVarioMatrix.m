@@ -4,8 +4,9 @@
 //
 //  Created by Stefan Leuker on 05-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
+//                2012 Free Software Foundation
 //
-//  $Id: FSVarioMatrix.m,v 1.2 2012/01/25 15:58:26 rmottola Exp $
+//  $Id: FSVarioMatrix.m,v 1.3 2012/02/03 00:29:34 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -379,16 +380,19 @@
 {
     id<FSVarioMatrixDataSource> datasrc = (id<FSVarioMatrixDataSource>)_dataSource;
     int       row, col, l;
-    float     x = 0, y = 0, w, h;
-    NSRange   rr, cr;
-    float     ox, oy;
+
     int       flags;
     FSCell    cell;
-    NSRect    visible = [self visibleRect];
-    float     maxX = visible.origin.x + visible.size.width;
-    float     maxY = visible.origin.y + visible.size.height;
 
-    if (_hRezAllowed || _vRezAllowed) {
+    if (_hRezAllowed || _vRezAllowed)
+      {
+	float     x = 0, y = 0, w, h;
+	NSRange   rr, cr;
+	float     ox, oy;
+	NSRect    visible;
+	float     maxX;
+	float     maxY;
+
         //
         // As this is done regularly, we get away with creating
         // rects only for the visible part of the view.
@@ -399,6 +403,10 @@
         NSCursor *vResizeCursor = [[NSCursor alloc]
             initWithImage:[NSImage imageNamed:@"VertResizeCursor"]
             hotSpot:NSMakePoint(8,8)];
+
+	visible = [self visibleRect];
+	maxX = visible.origin.x + visible.size.width;
+	maxY = visible.origin.y + visible.size.height;
 
         for (row = 0; row < _numRows; row++) {
             if ((y >= visible.origin.y) && (y <= maxY)) {
