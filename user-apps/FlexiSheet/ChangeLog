@@ -1,3 +1,8 @@
+2012-02-07 Riccardo Mottola <rm@gnu.org>
+
+	* Application/UI/FSVarioMatrix.m
+	(resetCursorRects) skip if datasrc is nil
+
 2012-01-26 Riccardo Mottola <rm@gnu.org>
 
 	* Application/UI/FSHeaderDock.m
