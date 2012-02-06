@@ -5,8 +5,9 @@
 //  Created by Stefan Leuker on 05-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //                2012 Free Software Foundation
+//  Authors: Stefan Leuker, Riccardo Mottola
 //
-//  $Id: FSVarioMatrix.m,v 1.3 2012/02/03 00:29:34 rmottola Exp $
+//  $Id: FSVarioMatrix.m,v 1.4 2012/02/06 23:40:40 rmottola Exp $
 
 #import "FlexiSheet.h"
 
@@ -383,6 +384,9 @@
 
     int       flags;
     FSCell    cell;
+
+    if (datasrc == nil)
+      return;
 
     if (_hRezAllowed || _vRezAllowed)
       {
