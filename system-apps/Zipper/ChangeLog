@@ -3,6 +3,10 @@
 	* Resources/MainMenu-GNUstep.gsmarkup
 	Fix menu equivalents.
 
+	* PreferencesController.m
+	Remember 7zip executable
+
+
 2012-02-13 Riccardo Mottola <rm@gnu.org>
 
 	Initial GAP check-in
