@@ -1,0 +1,5 @@
+2012-02-13 Riccardo Mottola <rm@gnu.org>
+
+	Initial GAP check-in
+	License changed to GPLv2 in accordance with the original author
+	Packed resources into Resources subdirectory
