@@ -1,6 +1,11 @@
 2012-02-13 Riccardo Mottola <rm@gnu.org>
 
 	* TarArchive.m:
+	Fix date parsing in BSD-tar archives, sanity checks.
+
+2012-02-13 Riccardo Mottola <rm@gnu.org>
+
+	* TarArchive.m:
 	Fix date parsing in gnu-tar archives, sanity checks.
 
 2012-02-13 Riccardo Mottola <rm@gnu.org> for Sebastian Reitenbach
