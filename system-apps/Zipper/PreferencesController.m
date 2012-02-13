@@ -37,6 +37,9 @@
 	// lzx
 	string = [Preferences lzxExecutable];
 	[_lzxTextField setStringValue:string];
+	// 7z
+	string = [Preferences sevenZipExecutable];
+	[_sevenZipTextField setStringValue:string];
 	// bsd tar checkbox
 	tarFlag = [Preferences isBsdTar];
 	[_bsdTarButon setState:tarFlag];
