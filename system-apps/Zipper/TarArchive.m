@@ -104,7 +104,8 @@
 		}
 		
 		info = [self fileInfoFromLine:line];
-		[results addObject:info];
+		if (info)
+		  [results addObject:info];
 	}
 	return results;
 }
@@ -176,12 +177,13 @@
   NSString *dateString = nil;
   NSString *time = nil;
   NSCalendarDate *calendarDate = nil;
-  FileInfo *fileInfo = nil;
   NSArray *components;
+  FileInfo *fileInfo = nil;
 
   if (line == nil || [line length] == 0)
     return nil;
-
+  if ([line hasPrefix:@"tar: "])
+    return nil;
   components = [line componentsSeparatedByString:@" "];
   components = [components arrayByRemovingEmptyStrings];
 
@@ -190,38 +192,42 @@
       NSArray *dateComponents;
 
       // BSD tar
-      length = [[components objectAtIndex:2] intValue];
+      length = [[components objectAtIndex:4] intValue];
 
-      dateComponents = [components subarrayWithRange:NSMakeRange(3, 4)];
+      dateComponents = [components subarrayWithRange:NSMakeRange(5, 3)];
       dateString = [dateComponents componentsJoinedByString:@" "];
-      calendarDate = [NSCalendarDate dateWithString:dateString
-				     calendarFormat:@"%b %d %H:%M %Y"];
+      if ([dateString rangeOfString:@":"].location != NSNotFound)
+	calendarDate = [NSCalendarDate dateWithString:dateString calendarFormat:@"%b %d %H:%M"];
+      else
+	calendarDate = [NSCalendarDate dateWithString:dateString calendarFormat:@"%b %d %Y"];
+      index = [line rangeOfString:[components objectAtIndex:7]].location;
+      index += [[components objectAtIndex:7] length];
     }
   else	
     {
       // linux tar
       NSString *date;
-		
+      
       length = [[components objectAtIndex:2] intValue];
-
+      
       date = [components objectAtIndex:3];
       time = [components objectAtIndex:4];
       dateString = [NSString stringWithFormat:@"%@ %@", date, time];
       calendarDate = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%d %H:%M"];
       if (calendarDate == nil)
 	calendarDate = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%d %H:%M:%S"];
-      NSLog(@"date: %@", calendarDate);
+      index = [line rangeOfString:dateString].location;
+      index += [dateString length];
     }
-	
-  // The path is everything afer the date string. Since it can contain blanks,
+
+  // The path is everything after the date string. Since it can contain blanks,
   // do *not* just grab any objects from components array
-  index = [line rangeOfString:dateString].location;
-  index += [dateString length];
   if (index > 0)
     {
       path = [[line substringFromIndex:index] stringByRemovingWhitespaceFromBeginning];
       fileInfo = [FileInfo newWithPath:path date:calendarDate size:[NSNumber numberWithInt:length]];
     }
+
   return fileInfo;
 }
 
