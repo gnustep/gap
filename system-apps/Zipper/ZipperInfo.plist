@@ -1,0 +1,87 @@
+{
+	ApplicationDescription = "GUI for various compressed file formats";
+	ApplicationName = "Zipper";
+	ApplicationRelease = "1.4";
+	ApplicationURL = "http://xanthippe.dyndns.org/Zipper/";
+	NSIcon = "zipper.tiff";
+	Authors = ("The GAP Team", "Dirk Olmes <dirk@xanthippe.ping.de>");
+	Copyright = "Copyright (C) 2008-2012";
+ 	CopyrightDescription = "Released under GPLv2 or later";
+	NSTypes = (
+		{
+			NSName = "Zip";
+			NSHumanReadableName = "Zip Archive";
+			NSUnixExtensions = ( "zip", "ZIP", "jar", "JAR", "ear", "EAR" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "7Zip";
+			NSHumanReadableName = "7Zip Archive";
+			NSUnixExtensions = ( "7z", "7Z", "7za", "7ZA" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "Tar";
+			NSHumanReadableName = "Tar Archive";
+			NSUnixExtensions = ( "tar", "TAR" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "TarGz";
+			NSHumanReadableName = "Compressed Tar Archive";
+			NSUnixExtensions = ( "gz", "GZ", "tgz", "TGZ" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "TarBz";
+			NSHumanReadableName = "Compressed Tar Archive";
+			NSUnixExtensions = ( "bz2", "BZ2", "tbz2", "TBZ2" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "Rar";
+			NSHumanReadableName = "Rar Archive";
+			NSUnixExtensions = ( "rar", "RAR" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "Lha";
+			NSHumanReadableName = "Lha Archive";
+			NSUnixExtensions = ( "lha", "LHA" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "Lzx";
+			NSHumanReadableName = "Lzx Archive";
+			NSUnixExtensions = ( "lzx", "LZX" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		}
+	);
+	
+	NSServices = (
+		{
+			NSPortName = "Zipper";
+			NSMessage = "createZippedTarArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create archive"; 
+			};
+		}
+	);
+}

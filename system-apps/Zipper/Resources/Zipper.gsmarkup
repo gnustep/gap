@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+  <objects>
+    <window id="window" title="Zipper" resizable="yes" autosaveName="ZipperWindow" closable="yes">
+      <scrollView width="500" height="300">
+     	<tableView dataSource="#NSOwner.tableViewDataSource" delegate="#NSOwner.tableViewDataSource" id="tableView" 
+		  drawsGrid="no" doubleAction="tableViewDoubleAction:" allowsColumnReordering="no"
+		  allowsMultipleSelection="yes">
+          	<tableColumn identifier="name" title="Name" minWidth="200" editable="no"/>
+          	<tableColumn identifier="date" title="Date" minWidth="112" editable="no"/>
+          	<tableColumn identifier="size" title="Size" minWidth="60" editable="no"/>
+          	<tableColumn identifier="path" title="Path" minWidth="80" editable="no"/>
+        </tableView>
+      </scrollView>
+    </window>
+  </objects>
+
+  <connectors>
+    <outlet source="#NSOwner" target="#window" key="window"/>
+    <outlet source="#NSOwner" target="#tableView" key="_tableView"/>
+  </connectors>
+</gsmarkup>

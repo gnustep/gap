@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+  <objects>
+    <panel title="Preferences" delegate="#NSOwner" resizable="no" closable="no" id="panel">
+	  <vbox>
+		<box title="Executables">
+          <vbox>
+            <hbox>
+              <label width="32">tar:</label>
+              <textField id="tarTextField" width="150" tag="1"></textField>
+	          <button title="find..." action="findExecutable:" tag="1"/>
+            </hbox>
+            <hbox>
+              <label width="32">unzip:</label>
+              <textField id="unzipTextField" width="150" tag="2"></textField>
+	          <button title="find..." action="findExecutable:" tag="2"/>
+            </hbox>
+            <hbox>
+              <label width="32">rar:</label>
+              <textField id="rarTextField" width="150" tag="3"></textField>
+	          <button title="find..." action="findExecutable:" tag="3"/>
+            </hbox>
+            <hbox>
+              <label width="32">lha:</label>
+              <textField id="lhaTextField" width="150" tag="4"></textField>
+	          <button title="find..." action="findExecutable:" tag="4"/>
+            </hbox>
+            <hbox>
+              <label width="32">lzx:</label>
+              <textField id="lzxTextField" width="150" tag="5"></textField>
+	          <button title="find..." action="findExecutable:" tag="5"/>
+            </hbox>
+            <hbox>
+              <label width="32">7zip:</label>
+              <textField id="sevenZipTextField" width="150" tag="6"></textField>
+	          <button title="find..." action="findExecutable:" tag="6"/>
+            </hbox>
+          </vbox>
+		</box>
+		<hbox>
+		  <button type="switch" title="BSD tar" halign="wexpand" id="bsdTar"/>
+		</hbox>
+		<box title="Default open app">
+		  <hbox>
+		    <textField id="defaultOpenApp" width="150"></textField>
+		    <button title="find..." action="findDefaultOpenApp:" tag="4"/>
+		  </hbox>
+		</box>
+		<hbox>
+	      <button width="75" title="Cancel" action="cancelPressed:"/>
+    	  <button width="75" title="OK" action="okPressed:"/>
+		</hbox>
+	  </vbox>
+    </panel>
+  </objects>
+  
+  <connectors>
+    <outlet source="#NSOwner" target="#panel" key="_panel"/>
+    <outlet source="#NSOwner" target="#tarTextField" key="_tarTextField"/>
+    <outlet source="#NSOwner" target="#unzipTextField" key="_unzipTextField"/>
+    <outlet source="#NSOwner" target="#rarTextField" key="_rarTextField"/>
+    <outlet source="#NSOwner" target="#lhaTextField" key="_lhaTextField"/>
+    <outlet source="#NSOwner" target="#lzxTextField" key="_lzxTextField"/>
+    <outlet source="#NSOwner" target="#sevenZipTextField" key="_sevenZipTextField"/>
+	<outlet source="#NSOwner" target="#bsdTar" key="_bsdTarButon"/>
+	<outlet source="#NSOwner" target="#defaultOpenApp" key="_defaultOpenApp"/>
+  </connectors>
+</gsmarkup>
