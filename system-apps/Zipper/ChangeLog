@@ -3,6 +3,9 @@
 	* TarArchive.m:
 	Fix date parsing in BSD-tar archives, sanity checks.
 
+	* ZipArchive.m:
+	Fix date parsing and some sanity checks.
+
 2012-02-13 Riccardo Mottola <rm@gnu.org>
 
 	* TarArchive.m:
