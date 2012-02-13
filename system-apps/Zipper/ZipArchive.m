@@ -106,51 +106,50 @@ static NSData *_magicBytes = nil;
 
 - (NSArray *)listUnzipContents:(NSArray *)lines
 {    
-    NSEnumerator *cursor;
-    NSString *line;
-	NSMutableArray *results = [NSMutableArray array];
+  NSEnumerator *cursor;
+  NSString *line;
+  NSMutableArray *results = [NSMutableArray array];
 	    
-    cursor = [lines objectEnumerator];
-    while ((line = [cursor nextObject]) != nil)
+  cursor = [lines objectEnumerator];
+  while ((line = [cursor nextObject]) != nil)
     {
-        int length, index;
-        NSString *path, *date, *time, *ratio, *checksum;
-        NSCalendarDate *calendarDate;
-        FileInfo *info;
-        NSArray *components;
+      int length, index;
+      NSString *path, *date, *time, *ratio, *checksum;
+      NSCalendarDate *calendarDate;
+      FileInfo *info;
+      NSArray *components;
 
-		if ([line length] == 0)
-		{
-			continue;
-		}
+      if (line == nil || [line length] == 0)
+	continue;
+
+      components = [line componentsSeparatedByString:@" "];
+      components = [components arrayByRemovingEmptyStrings];
+
+      length = [[components objectAtIndex:0] intValue];
+      ratio = [components objectAtIndex:3];
+
+      // extract the path. The checksum is the last token before the full path 
+      // (which can contain blanks) 
+      checksum = [components objectAtIndex:6];
+      index = [line rangeOfString:checksum].location;
+      index += [checksum length];
+      path = [[line substringFromIndex:index] stringByRemovingWhitespaceFromBeginning];
 		
-		components = [line componentsSeparatedByString:@" "];
-		components = [components arrayByRemovingEmptyStrings];
+      date = [components objectAtIndex:4];
+      time = [components objectAtIndex:5];		
+      date = [NSString stringWithFormat:@"%@ %@", date, time];
+      calendarDate = [NSCalendarDate dateWithString:date calendarFormat:@"%m-%d-%Y %H:%M"];
 
-		length = [[components objectAtIndex:0] intValue];
-		ratio = [components objectAtIndex:3];
-
-		// extract the path. The checksum is the last token before the full path 
-		// (which can contain blanks) 
-		checksum = [components objectAtIndex:6];
-		index = [line rangeOfString:checksum].location;
-		index += [checksum length];
-		path = [[line substringFromIndex:index] stringByRemovingWhitespaceFromBeginning];
-		
-		date = [components objectAtIndex:4];
-		time = [components objectAtIndex:5];		
-        date = [NSString stringWithFormat:@"%@ %@", date, time];
-        calendarDate = [NSCalendarDate dateWithString:date calendarFormat:@"%m-%d-%y %H:%M"];
-
-		// we skip plain directory entries
-		if ([path hasSuffix:@"/"] == NO)
-		{
-			info = [FileInfo newWithPath:path date:calendarDate 
-				size:[NSNumber numberWithInt:length] ratio:ratio];
-	        [results addObject:info];
-		} 
+      // we skip plain directory entries
+      if ([path hasSuffix:@"/"] == NO)
+	{
+	  info = [FileInfo newWithPath:path date:calendarDate 
+				  size:[NSNumber numberWithInt:length] ratio:ratio];
+	  if (info)
+	    [results addObject:info];
+	} 
     }
-    return results;
+  return results;
 }
 
 //------------------------------------------------------------------------------
