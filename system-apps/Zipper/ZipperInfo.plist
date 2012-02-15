@@ -4,6 +4,8 @@
 	ApplicationRelease = "1.4";
 	ApplicationURL = "http://xanthippe.dyndns.org/Zipper/";
 	NSIcon = "zipper.tiff";
+	NSMainNibFile = MainMenu.gorm;
+	NSPrincipalClass = NSApplication;
 	Authors = ("The GAP Team", "Dirk Olmes <dirk@xanthippe.ping.de>");
 	Copyright = "Copyright (C) 2008-2012";
  	CopyrightDescription = "Released under GPLv2 or later";

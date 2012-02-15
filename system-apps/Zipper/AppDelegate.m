@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import <Renaissance/Renaissance.h>
 #import "AppDelegate.h"
 #import "ZipArchive.h"
 #import "TarArchive.h"

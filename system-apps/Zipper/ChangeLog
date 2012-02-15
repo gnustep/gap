@@ -1,3 +1,15 @@
+2012-02-15 Riccardo Mottola <rm@gnu.org>
+
+	* ZipperDocument.h
+	Explicit IBOutlet.
+
+	* AppDelegate.m
+	* GNUmakefile
+	* ZipperInfo.plist
+	* main.m
+	* Resources/MainMenu.gorm
+	Migrate main menu to Gorm.
+
 2012-02-13 Riccardo Mottola <rm@gnu.org>
 
 	* TarArchive.m:
