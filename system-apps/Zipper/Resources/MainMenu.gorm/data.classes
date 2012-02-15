@@ -1,0 +1,31 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:"
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    AppDelegate = {
+	Actions = (
+	    "showPreferences:"
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "extract:",
+	    "extractFlat:",
+	    "newAction:",
+	    "orderFrontFontPanel:",
+	    "showPrefPanel:",
+	    "showPreferences:",
+	    "view:"
+	);
+	Super = NSObject;
+    };
+}

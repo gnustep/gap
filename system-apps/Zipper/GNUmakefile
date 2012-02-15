@@ -7,14 +7,14 @@ Zipper_APPLICATION_ICON = zipper.tiff
 ADDITIONAL_GUI_LIBS += -lRenaissance 
 
 Zipper_RESOURCE_FILES = \
+	Resources/MainMenu.gorm \
+	Resources/Preferences.gsmarkup \
+	Resources/Zipper.gsmarkup \
 	Resources/FileIcon.tiff \
-	Resources/MainMenu-GNUstep.gsmarkup \
 	Resources/no_order.tiff \
-	Resources/Preferences.gsmarkup\
 	Resources/sort_ascending.tiff \
 	Resources/sort_descending.tiff \
-	Resources/zipper.tiff\
-	Resources/Zipper.gsmarkup
+	Resources/zipper.tiff
 
 Zipper_OBJC_FILES = \
 	AppDelegate.m \
