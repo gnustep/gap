@@ -31,7 +31,7 @@
 /**
  * Tar files inherently have the full path info and can't be uncompressed flat.
  */
-+ (BOOL)canExtractWithoutFullPath;
++ (BOOL)canExtractWithoutFullPath
 {
 	return NO;
 }

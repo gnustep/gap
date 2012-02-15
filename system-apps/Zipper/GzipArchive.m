@@ -32,7 +32,7 @@
  * Gzip files represent a single compressed file in this scope and thus can be decompressed
  * without path.
  */
-+ (BOOL)canExtractWithoutFullPath;
++ (BOOL)canExtractWithoutFullPath
 {
 	return YES;
 }
