@@ -1,0 +1,12 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    ZipperDocument = {
+	Actions = (
+	);
+	Outlets = (
+	    "_tableView",
+	    "_tableViewDataSource"
+	);
+	Super = NSDocument;
+    };
+}

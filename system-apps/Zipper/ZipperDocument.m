@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import <Renaissance/Renaissance.h>
 #import "ZipperDocument.h"
 #import "ZipperCell.h"
 #import "Archive.h"
@@ -23,7 +22,7 @@
 - (BOOL)createUnarchiveDestinationIfNecessary:(NSString *)path;
 @end
 
-@implementation ZipperDocument : GSMarkupDocument
+@implementation ZipperDocument : NSDocument
 
 - (id)init
 {
@@ -45,7 +44,7 @@
 /*" Name of the .gsmarkup file to load */
 - (NSString *)windowNibName
 {
-	return @"Zipper";
+	return @"ZipperDocument";
 }
 
 /*" Override of NSDocument, called when document is about to be opened */
@@ -56,6 +55,8 @@
 	NSCell *cell = [[ZipperCell alloc] init];
 
 	[super windowControllerDidLoadNib: controller];
+	[_tableView setDataSource: [self tableViewDataSource]];
+	[_tableView reloadData];
 	
 	// allow for a little bit more space between the columns
 	size = [_tableView intercellSpacing];
