@@ -9,7 +9,7 @@ ADDITIONAL_GUI_LIBS += -lRenaissance
 Zipper_RESOURCE_FILES = \
 	Resources/MainMenu.gorm \
 	Resources/Preferences.gsmarkup \
-	Resources/Zipper.gsmarkup \
+	Resources/ZipperDocument.gorm \
 	Resources/FileIcon.tiff \
 	Resources/no_order.tiff \
 	Resources/sort_ascending.tiff \

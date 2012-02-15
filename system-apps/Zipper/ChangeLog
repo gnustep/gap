@@ -5,6 +5,13 @@
 
 2012-02-15 Riccardo Mottola <rm@gnu.org>
 
+	* GNUmakefile
+	* Resources/ZipperDocument.gorm
+	* ZipperDocument.[h,m]
+	Migrate to Gorm.
+
+2012-02-15 Riccardo Mottola <rm@gnu.org>
+
 	* ZipperDocument.h
 	Explicit IBOutlet.
 
