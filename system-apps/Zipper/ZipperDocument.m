@@ -210,7 +210,7 @@
 {
 	SEL	action = [anItem action];
 	
-	if (sel_eq(action, @selector(openFile:)) ||	sel_eq(action, @selector(showPreferences:))) 
+	if (sel_isEqual(action, @selector(openFile:)) ||	sel_isEqual(action, @selector(showPreferences:))) 
 	{
 		return YES;
 	}
