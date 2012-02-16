@@ -4,11 +4,11 @@ APP_NAME = Zipper
 VERSION = 1.4
 
 Zipper_APPLICATION_ICON = zipper.tiff
-ADDITIONAL_GUI_LIBS += -lRenaissance 
+ADDITIONAL_GUI_LIBS += 
 
 Zipper_RESOURCE_FILES = \
 	Resources/MainMenu.gorm \
-	Resources/Preferences.gsmarkup \
+	Resources/Preferences.gorm \
 	Resources/ZipperDocument.gorm \
 	Resources/FileIcon.tiff \
 	Resources/no_order.tiff \

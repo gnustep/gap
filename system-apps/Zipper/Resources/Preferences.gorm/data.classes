@@ -1,0 +1,33 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "cancelPressed:",
+	    "findDefaultOpenApp:",
+	    "findExecutable:",
+	    "okPressed:"
+	);
+	Super = NSObject;
+    };
+    PreferencesController = {
+	Actions = (
+	    "cancelPressed:",
+	    "okPressed:",
+	    "findExecutable:",
+	    "findDefaultOpenApp:"
+	);
+	Outlets = (
+	    "_panel",
+	    "_bsdTarButton",
+	    "_defaultOpenApp",
+	    "_tarTextField",
+	    "_unzipTextField",
+	    "_rarTextField",
+	    "_lhaTextField",
+	    "_lzxTextField",
+	    "_sevenZipTextField",
+	    "_archiveClass"
+	);
+	Super = NSObject;
+    };
+}
