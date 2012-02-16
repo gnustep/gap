@@ -158,12 +158,14 @@
   NSString *host;
   NSString *port;
   NSString *pword;
+  NSString *tout;
 
   host = [[NSUserDefaults standardUserDefaults] 
 	   objectForKey: @"mpdHost"];
   port = [[NSUserDefaults standardUserDefaults] 
 	   objectForKey: @"mpdPort"];
-
+  tout = [[NSUserDefaults standardUserDefaults] 
+	   objectForKey: @"mpdTimeout"];
   pword = nil;
 
   if ([[NSUserDefaults standardUserDefaults] 
@@ -173,14 +175,14 @@
 		objectForKey: @"mpdPassword"];
     }
   
-  if ((host == nil) || (port == nil))
+  if ((host == nil) || (port == nil) || (tout == nil))
     {
       [self showPrefPanel: self];
     }
   else 
     {
       didDisconnect = NO;
-      [mpdController connectToServer: host port: port password: pword];
+      [mpdController connectToServer: host port: port password: pword timeout: tout];
     }
 }
 
@@ -271,8 +273,7 @@
 
 - (void) volumeChanged: (id)sender
 {
-  if ((! connected) || ([mpdController getState] == state_NOCONN) 
-      || ([mpdController getVolume] == MPD_STATUS_NO_VOLUME)) 
+  if ((! connected) || ([mpdController getState] == state_NOCONN))
     {
       [volumeSlider setFloatValue: 0.0];
       return;
@@ -490,18 +491,18 @@
   int volume;
   int state;
 
-  if (! connected)
-    {
+  if (! connected) {
       return;
-    }
+  }
 
-  if ([mpdController getState] == state_NOCONN) 
-    {
+  if ([mpdController getState] == state_NOCONN) {
       return;
-    }
+  }
+  if ([mpdController getState] == state_UNKNOWN) {
+      return;
+  }
   
-  if ([mpdController playlistChanged]) 
-    {
+  if ([mpdController playlistChanged]) {
       NSNotification *aNotif;
 
       aNotif = [NSNotification notificationWithName: 
@@ -510,41 +511,26 @@
       
       [[NSNotificationCenter defaultCenter] 
 	postNotification: aNotif];
-    }
+  }
 
-  if ([mpdController isRandom]) 
-    {
-      [shuffleButton highlight: YES];
-    }
-  else 
-    {
-      [shuffleButton highlight: NO];
-    }
+  if ([mpdController isRandom]) {
+      [shuffleButton setState: YES];
+  } else {
+      [shuffleButton setState: NO];
+  }
   
-  if ([mpdController isRepeat])
-    {
-      [repeatButton highlight: YES];
-    }
-  else
-    {
-      [repeatButton highlight: NO];
-    }
+  if ([mpdController isRepeat]) {
+      [repeatButton setState: YES];
+  } else {
+      [repeatButton setState: NO];
+  }
 
   volume = [mpdController getVolume];
-
-  if (volume == MPD_STATUS_NO_VOLUME) 
-    {
-      [volumeSlider setIntValue: 0];
-    }
-  else
-    {
-      [volumeSlider setIntValue: [mpdController getVolume]];
-    }
+  [volumeSlider setIntValue: [mpdController getVolume]];
 
   state = [mpdController getState];
 
-  if((state == state_PLAY) || (state == state_PAUSE))
-    {
+  if((state == state_PLAY) || (state == state_PAUSE)) {
       PlaylistItem *currSong;
       
       int currentSongNr;
@@ -557,27 +543,24 @@
       
       currSong = RETAIN([mpdController getCurrentSong]);
       
-      if (currentSongNr != playedSong) 
-	{
+      if (currentSongNr != playedSong) {
 	  playedSong = currentSongNr;
-	  if ([currSong getTotalTime] != 0) 
-	    {
+	  if ([currSong getTotalTime] != 0) {
 	      [percentSlider setMaxValue: (double) [currSong getTotalTime]];
-	    }
+	  }
 	  
 	  [[NSNotificationCenter defaultCenter] 
 	    postNotification: [NSNotification 
 				notificationWithName: SongChangedNotification 
 				              object: nil]];
-	}
+      }
       
       [playView enableDisplay: YES];
       
       [playView setCurrentSong: currentSongNr];
       [playView setTotalSongs: playlistLength];
       
-      if((state == state_PAUSE) && (prevState != state_PAUSE)) 
-	{
+      if((state == state_PAUSE) && (prevState != state_PAUSE)) {
 	  NSImage *pImage;
 	  
 	  prevState = state_PAUSE;
@@ -586,9 +569,8 @@
 	  
 	  [playButton setImage: pImage];
 	  
-	} 
-      else if ((state == state_PLAY) &&(prevState != state_PLAY)) 
-	{
+      } 
+      else if ((state == state_PLAY) &&(prevState != state_PLAY)) {
 	  NSImage *pImage;
 
 	  prevState = state_PLAY;
@@ -601,19 +583,16 @@
 	    postNotification: [NSNotification 
 				notificationWithName: SongChangedNotification 
 				              object: nil]];
-	}
+      }
       
       [playView setDisplaySong: currSong];
       
-      if ([currSong getTotalTime] != 0) 
-	{
+      if ([currSong getTotalTime] != 0) {
 	  [percentSlider setDoubleValue: (double)[currSong getElapsedTime]];
-	}
+      }
       
       RELEASE(currSong);
-    } 
-  else if (prevState != state_STOP) 
-    {
+  } else if (prevState != state_STOP) {
       NSImage *pImage;
 
       prevState = state_STOP;
@@ -631,9 +610,8 @@
 	postNotification: [NSNotification 
 			    notificationWithName: SongChangedNotification 
 			                  object: nil]];
-    }  
+  }  
   
 }
-
 
 @end

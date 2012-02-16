@@ -33,16 +33,20 @@
 - (NSAttributedString *)attributedStringForObjectValue: (id) anObject 
     withDefaultAttributes: (NSDictionary *) attr
 {
-  NSFont *theFont = [NSFont boldSystemFontOfSize: [NSFont systemFontSize]];
-  NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString: anObject];
-  NSMutableDictionary *attrs = [NSMutableDictionary dictionaryWithDictionary: attr];
+  if (anObject != nil) {
+    NSFont *theFont = [NSFont boldSystemFontOfSize: [NSFont systemFontSize]];
+    NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString: anObject];
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionaryWithDictionary: attr];
   
-  [attrs setObject: theFont forKey: NSFontAttributeName];
-
-  [aString setAttributes: attrs range: NSMakeRange(0, [aString length])];
-  
-  return [aString autorelease];  
-
+    [attrs setObject: theFont forKey: NSFontAttributeName];
+    if ([aString length]) {
+      [aString setAttributes: attrs range: NSMakeRange(0, [aString length])];
+    }
+    return [aString autorelease];
+  } else {
+    NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString: @""];
+    return [aString autorelease];
+  } 
 }
 
 - (BOOL)getObjectValue:(id *)obj forString:(NSString *)string errorDescription:(NSString  **)error
