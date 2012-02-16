@@ -25,7 +25,7 @@
 
 #if defined(freebsd) || defined( __FreeBSD__ )
 #import <float.h>
-#else if defined (linux)
+#elif defined (__linux__)
 #import <values.h>
 #endif
 
