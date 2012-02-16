@@ -1,3 +1,10 @@
+2012-02-16 Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile
+	* PreferencesController.h
+	* PreferencesController.m
+	Migrated preferences GUI to Gorm, fixed typos.
+
 2012-02-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* ZipperDocument.m replace deprecated sel_eq with sel_isEqual

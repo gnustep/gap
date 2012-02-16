@@ -1,12 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import <Renaissance/Renaissance.h>
 #import "PreferencesController.h"
 #import "Preferences.h"
 #import "Archive.h"
 
 #define TAG_TAR		1
-#define TAG_UNZIP		2
+#define TAG_UNZIP	2
 #define TAG_RAR		3
 #define TAG_LHA		4
 #define TAG_LZX		5
@@ -16,36 +15,36 @@
 
 - (id)init
 {
-	NSString *string;
-	BOOL tarFlag;
+  NSString *string;
+  BOOL tarFlag;
 
-    [super init];
-    [NSBundle loadGSMarkupNamed: @"Preferences" owner: self];
+  [super init];
+  [NSBundle loadNibNamed: @"Preferences" owner: self];
     
-	// tar
-	string = [Preferences tarExecutable];
-	[_tarTextField setStringValue:string];
-	// zip
-	string = [Preferences zipExecutable];
-	[_unzipTextField setStringValue:string];
-	// rar
-	string = [Preferences rarExecutable];
-	[_rarTextField setStringValue:string];
-	// lha
-	string = [Preferences lhaExecutable];
-	[_lhaTextField setStringValue:string];
-	// lzx
-	string = [Preferences lzxExecutable];
-	[_lzxTextField setStringValue:string];
-	// 7z
-	string = [Preferences sevenZipExecutable];
-	[_sevenZipTextField setStringValue:string];
-	// bsd tar checkbox
-	tarFlag = [Preferences isBsdTar];
-	[_bsdTarButon setState:tarFlag];
-	// default open app text field
-	string = [[Preferences defaultOpenApp] lastPathComponent];
-	[_defaultOpenApp setStringValue:string];
+  // tar
+  string = [Preferences tarExecutable];
+  [_tarTextField setStringValue:string];
+  // zip
+  string = [Preferences zipExecutable];
+  [_unzipTextField setStringValue:string];
+  // rar
+  string = [Preferences rarExecutable];
+  [_rarTextField setStringValue:string];
+  // lha
+  string = [Preferences lhaExecutable];
+  [_lhaTextField setStringValue:string];
+  // lzx
+  string = [Preferences lzxExecutable];
+  [_lzxTextField setStringValue:string];
+  // 7z
+  string = [Preferences sevenZipExecutable];
+  [_sevenZipTextField setStringValue:string];
+  // bsd tar checkbox
+  tarFlag = [Preferences isBsdTar];
+  [_bsdTarButton setState:tarFlag];
+  // default open app text field
+  string = [[Preferences defaultOpenApp] lastPathComponent];
+  [_defaultOpenApp setStringValue:string];
 
     return self;
 }
@@ -62,7 +61,7 @@
 	[_panel close];
 }
 
-- (void)okPressed:(id)sender
+- (IBAction)okPressed:(id)sender
 {
 	NSString *string;
 
@@ -85,7 +84,7 @@
 		string = [_sevenZipTextField stringValue];
 		[Preferences setSevenZipExecutable:string];
 
-		[Preferences setIsBsdTar:[_bsdTarButon state]];
+		[Preferences setIsBsdTar:[_bsdTarButton state]];
 		[Preferences save];
 
 		[NSApp stopModal];
@@ -94,12 +93,12 @@
 	NS_ENDHANDLER
 }
 
-- (void)cancelPressed:(id)sender
+- (IBAction)cancelPressed:(id)sender
 {
 	[NSApp stopModal];
 }
 
-- (void)findExecutable:(id)sender
+- (IBAction)findExecutable:(id)sender
 {
 	NSOpenPanel *openPanel;
 	int rc;
@@ -157,7 +156,7 @@
 	}
 }
 
-- (void)findDefaultOpenApp:(id)sender
+- (IBAction)findDefaultOpenApp:(id)sender
 {
 	NSOpenPanel *openPanel;
 	NSString *gnustepRoot;
