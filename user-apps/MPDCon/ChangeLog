@@ -1,3 +1,8 @@
+2012-02-16 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	
+	* Update to newer ProjectCenter project
+	* get rid of BSD licensed libmpdclient.[h|m]
+
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 
 	* OwnTableView.m, FindController.m: Code Reformatting
