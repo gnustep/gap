@@ -72,15 +72,17 @@
 {
   NSNotification *aNotif;
 
-  if ([mpdHost stringValue] != nil)
-    {
-      [defaults setObject: [mpdHost stringValue] forKey: @"mpdHost"];
-    }
+  if ([mpdHost stringValue] != nil) {
+    [defaults setObject: [mpdHost stringValue] forKey: @"mpdHost"];
+  }
 
-  if ([mpdPort stringValue] != nil)
-    {
-      [defaults setObject: [mpdPort stringValue] forKey: @"mpdPort"];
-    }
+  if ([mpdPort stringValue] != nil) {
+    [defaults setObject: [mpdPort stringValue] forKey: @"mpdPort"];
+  }
+
+  if ([mpdTimeout stringValue] != nil) {
+    [defaults setObject: [mpdTimeout stringValue] forKey: @"mpdTimeout"];
+  }
 
   if (([password stringValue] != nil) && ([usePassword state] != 0))
     {
@@ -114,17 +116,13 @@
 - (void) revert: (id)sender
 {
   NSData *colorData;
-  
-  [mpdHost setStringValue: [defaults objectForKey: @"mpdHost"]];
 
-  [mpdPort setStringValue: [defaults objectForKey: @"mpdPort"]];
-
+  [mpdHost setStringValue: [defaults objectForKey: @"mpdHost"]?[defaults objectForKey: @"mpdHost"]:@"localhost"];
+  [mpdPort setStringValue: [defaults objectForKey: @"mpdPort"]?[defaults objectForKey: @"mpdPort"]:@"6600"];
+  [mpdTimeout setStringValue: [defaults objectForKey: @"mpdTimeout"]?[defaults objectForKey: @"mpdTimeout"]:@"1500"];
   [password setStringValue: [defaults objectForKey: @"mpdPassword"]];
-
   [scrollSwitch setState: [defaults integerForKey: @"enableScroll"]];
-
   [usePassword setState: [defaults integerForKey: @"usePassword"]];
-  
   colorData = [defaults dataForKey: @"displayColor"];
   
   if (colorData != nil)

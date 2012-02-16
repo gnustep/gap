@@ -34,6 +34,7 @@
 {
   IBOutlet NSTextField *mpdHost;
   IBOutlet NSTextField *mpdPort;
+  IBOutlet NSTextField *mpdTimeout;
   IBOutlet NSSecureTextField *password;
   IBOutlet NSButton *scrollSwitch;
   IBOutlet NSButton *usePassword;

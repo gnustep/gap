@@ -2,6 +2,10 @@
 	
 	* Update to newer ProjectCenter project
 	* get rid of BSD licensed libmpdclient.[h|m]
+	* AppController.m new default mpdTimeout, and cleanups
+	* Bold/MormalFormatter.m code cleanups
+	* PreferencesController.[h|m] new preference mpdTimeout, and add some
+	  sane default values for it, and for mpdHost and mpdPort
 
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 
