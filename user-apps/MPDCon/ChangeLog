@@ -9,6 +9,8 @@
 	* CollectionController.[h|m] fix some warnings and code cleanup
 	* Info-gnustep.plist general bumps from PC
 	* MPDController.[h|m]: update to new libmpdclient API
+	* PlaylistController.[h|m] code cleanups and now show Genre, and allow
+	  filter for Genre
 
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 
