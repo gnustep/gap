@@ -4,11 +4,11 @@
     ApplicationName = MPDCon;
     ApplicationRelease = "1.2";
     Authors = (
-	"Daniel Luederwald <das_flip@gmx.de>",
-	"Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>"
+	"Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>",
+	"Daniel Luederwald <das_flip@gmx.de>"
     );
-    Copyright = "Copyright (C) 2004-06 Daniel Luederwald";
-    CopyrightDescription = "Released under the GNU General Public License 2.0";
+    Copyright = "Copyright (C) 2012 GAP Team, 2004-06 Daniel Luederwald";
+    CopyrightDescription = "Released under the GNU General Public License 2.0 or later";
     FullVersionID = "1.2";
     NSExecutable = MPDCon;
     NSIcon = "MPDCon.tiff";
