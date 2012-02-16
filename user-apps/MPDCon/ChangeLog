@@ -13,6 +13,8 @@
 	  filter for Genre
 	* PlaylistItem.[h|m] code cleanups and now show Genre, and allow
 	  filter for Genre
+	* improvements to the Interfaces, new mpdTimeout in the Preferences,
+	  show Genre in PlaylistViewer and other minor nits
 
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 

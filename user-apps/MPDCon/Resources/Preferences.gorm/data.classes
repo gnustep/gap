@@ -20,7 +20,8 @@
 	    password,
 	    scrollSwitch,
 	    usePassword,
-	    colorWell
+	    colorWell,
+	    mpdTimeout
 	);
 	Super = NSWindowController;
     };
