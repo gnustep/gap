@@ -6,6 +6,8 @@
 	* Bold/MormalFormatter.m code cleanups
 	* PreferencesController.[h|m] new preference mpdTimeout, and add some
 	  sane default values for it, and for mpdHost and mpdPort
+	* CollectionController.[h|m] fix some warnings and code cleanup
+	* Info-gnustep.plist general bumps from PC
 
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 
