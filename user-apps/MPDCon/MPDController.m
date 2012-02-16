@@ -22,6 +22,7 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#include <unistd.h>
 #include "MPDController.h"
 
 /* ---------------------
@@ -32,7 +33,7 @@
 - (BOOL) _doConnect;
 - (BOOL) _checkConnection;
 
-- (PlaylistItem *) _getPlaylistItemForSong: (mpd_Song *)anSong;
+- (PlaylistItem *) _getPlaylistItemForSong: (const struct mpd_song *)anSong;
 
 int _stringSort(id string1, id string2, void *context);
 @end
@@ -57,11 +58,12 @@ int _stringSort(id string1, id string2, void *context);
 
 - (void) dealloc
 {
-  mpd_closeConnection(mpdConnection);
+  mpd_connection_free(mpdConnection);
 
   RELEASE(host);
   RELEASE(port);
   RELEASE(password);
+  RELEASE(timeout);
 
   [super dealloc];
 }
@@ -73,38 +75,33 @@ int _stringSort(id string1, id string2, void *context);
 - (BOOL) connectToServer: (NSString *)hostName 
                     port: (NSString *)portNr 
                 password: (NSString *)pword
+                 timeout: (NSString *)tout
 {
-  if ((hostName) && (portNr)) 
-    {
+  if ((hostName) && (portNr) && (tout)) {
       BOOL didConnect;
 
-      if (host)
-	{
+      if (host) {
 	  RELEASE(host);
-	}
-
-      if (port) 
-	{
+      }
+      if (port) {
 	  RELEASE(port);
-	}
-      
-      if (password)
-	{
+      }
+      if (password) {
 	  RELEASE(password);
-	}
-      
+      }
+      if (port) {
+	  RELEASE(timeout);
+      }
       host = [hostName copy];
       port = [portNr copy];
       password = [pword copy];
+      timeout = [tout copy];
     
       didConnect = [self _doConnect];
-      mpd_closeConnection(mpdConnection);
       return didConnect;
-    } 
-  else 
-    {
+  } else {
       return NO;
-    }
+  }
 }
 
 /* ----------------
@@ -113,192 +110,168 @@ int _stringSort(id string1, id string2, void *context);
 
 - (void) play
 {
-  [self playSong: MPD_PLAY_AT_BEGINNING];
+  [self playSong: -1];
 }
 
 - (void) playSong: (int)theSong
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
 
-  if (![self _doConnect])
-    {
+  if (![self _checkConnection]) {
       return;
+  }
+  if (theSong != -1) {
+    mpd_send_play_pos(mpdConnection, theSong);
+  } else {
+
+    mpdStatus = mpd_run_status(mpdConnection);
+    if (mpdStatus != NULL) {
+      if(mpd_status_get_state(mpdStatus) == MPD_STATE_STOP) {
+        mpd_send_play(mpdConnection);
+      } else {
+        mpd_send_toggle_pause(mpdConnection);
+      }
+      mpd_response_finish(mpdConnection);
+      mpd_status_free(mpdStatus);
     }
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
-  if (theSong != MPD_PLAY_AT_BEGINNING) 
-    {
-      mpd_sendPlayCommand(mpdConnection, theSong);
-    } 
-  else 
-    {
-      if(mpdStatus->state == MPD_STATUS_STATE_STOP) 
-	{
-	  mpd_sendPlayCommand(mpdConnection, 0);
-	} 
-      else 
-	{
-	  mpd_sendPauseCommand(mpdConnection,3-mpdStatus->state);
-	}
-    }
-  
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  }
 }
 
 - (void) stop
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
     }
 
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-
-  if((mpdStatus->state == MPD_STATUS_STATE_PLAY) || 
-     (mpdStatus->state == MPD_STATUS_STATE_PAUSE)) 
-    {
-      mpd_sendStopCommand(mpdConnection);
-      mpd_finishCommand(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    if((mpd_status_get_state(mpdStatus) == MPD_STATE_PLAY) || 
+      (mpd_status_get_state(mpdStatus) == MPD_STATE_PAUSE)) {
+        mpd_send_stop(mpdConnection);
+        mpd_response_finish(mpdConnection);
     }
-  
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 }
 
 - (void) prev
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
   
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
     }
   
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-
-  if((mpdStatus->state == MPD_STATUS_STATE_PLAY) || 
-     (mpdStatus->state == MPD_STATUS_STATE_PAUSE)) 
-    {
-      mpd_sendPrevCommand(mpdConnection);
-      mpd_finishCommand(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    if((mpd_status_get_state(mpdStatus) == MPD_STATE_PLAY) || 
+      (mpd_status_get_state(mpdStatus) == MPD_STATE_PAUSE)) {
+        mpd_send_previous(mpdConnection);
+        mpd_response_finish(mpdConnection);
     }
-  
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 }
 
 - (void) next
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
   
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
     }
 
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-
-  if((mpdStatus->state == MPD_STATUS_STATE_PLAY) || 
-     (mpdStatus->state == MPD_STATUS_STATE_PAUSE)) 
-    {
-      mpd_sendNextCommand(mpdConnection);
-      mpd_finishCommand(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    if((mpd_status_get_state(mpdStatus) == MPD_STATE_PLAY) || 
+      (mpd_status_get_state(mpdStatus) == MPD_STATE_PAUSE)) {
+        mpd_send_next(mpdConnection);
+        mpd_response_finish(mpdConnection);
     }
-  
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 }
 
 - (void) toggleShuffle
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
   
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
   }
     
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
-  mpd_sendRandomCommand(mpdConnection, (mpdStatus->random == 0) ? 1 : 0);
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    mpd_send_random(mpdConnection, (mpd_status_get_random(mpdStatus) == 0) ? 1 : 0);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 }
 
 - (void) toggleRepeat
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
   
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
     }
 
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
-  mpd_sendRepeatCommand(mpdConnection, (mpdStatus->repeat == 0) ? 1 : 0);
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    mpd_send_repeat(mpdConnection, (mpd_status_get_repeat(mpdStatus) == 0) ? 1 : 0);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 }
 
 - (void) seekToTime: (int)time
 {
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
   
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
     }
   
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
-  if ((mpdStatus->state == MPD_STATUS_STATE_PLAY) 
-      || (mpdStatus->state == MPD_STATUS_STATE_PAUSE)) 
-    {
-      mpd_sendSeekCommand(mpdConnection, mpdStatus->song, time);
-      mpd_finishCommand(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) { 
+    if ((mpd_status_get_state(mpdStatus) == MPD_STATE_PLAY) 
+      || (mpd_status_get_state(mpdStatus) == MPD_STATE_PAUSE)) {
+        mpd_send_seek_pos(mpdConnection, mpd_status_get_song_pos(mpdStatus), time);
+        mpd_response_finish(mpdConnection);
     }
-  
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpd_status_free(mpdStatus);
+  }
 }
 
 - (void) setVolume: (int)volume
 {
-  if (! [self _doConnect]) 
+  if (! [self _checkConnection]) 
     {
       return;
     }
   
-  mpd_sendSetvolCommand(mpdConnection, volume);
+  mpd_send_set_volume(mpdConnection, volume);
   
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  mpd_response_finish(mpdConnection);
 }
 
 - (void) setCrossfade: (int)cfTime
 {
-  if (! [self _doConnect])
+  if (! [self _checkConnection])
     {
       return;
     }
 
-  mpd_sendCrossfadeCommand(mpdConnection, cfTime);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection;
+  mpd_send_crossfade(mpdConnection, cfTime);
+  mpd_response_finish(mpdConnection);
 }
 
 /* -----------------------
@@ -308,37 +281,34 @@ int _stringSort(id string1, id string2, void *context);
 - (int) getState
 {
   int state;
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return state_NOCONN;
-    }
-  
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
+  }
+  mpdStatus = mpd_run_status(mpdConnection);
 
-  if (! [self _checkConnection]) 
-    {
-      return state_NOCONN;
+  if (mpdStatus != NULL) {
+    switch (mpd_status_get_state(mpdStatus)) {
+      case MPD_STATE_UNKNOWN:
+        state = state_UNKNOWN;
+        break;
+      case MPD_STATE_STOP:
+        state = state_STOP;
+        break;
+      case MPD_STATE_PLAY:
+        state = state_PLAY;
+        break;
+      case MPD_STATE_PAUSE:
+        state = state_PAUSE;
+        break;
     }
-
-  switch (mpdStatus->state) 
-    {
-    case MPD_STATUS_STATE_STOP:
-      state = state_STOP;
-      break;
-    case MPD_STATUS_STATE_PLAY:
-      state = state_PLAY;
-      break;
-    case MPD_STATUS_STATE_PAUSE:
-      state = state_PAUSE;
-      break;
+    mpd_status_free(mpdStatus);
+  } else {
+    state = state_UNKNOWN;
   }
   
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpd_response_finish(mpdConnection);
 
   return state;
 }
@@ -346,33 +316,21 @@ int _stringSort(id string1, id string2, void *context);
 - (BOOL) isRandom
 {
   BOOL random;
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return NO;
-    }
-  
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-
-  if (! [self _checkConnection]) 
-    {
-      return NO;
-    }
-
-  if ((mpdStatus->random) == 1)
-    {
+  }
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    if ((mpd_status_get_random(mpdStatus)) == 1) {
       random = YES;
-    }
-  else
-    {
+    } else {
       random = NO;
     }
-
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 
   return random;
 }
@@ -380,124 +338,91 @@ int _stringSort(id string1, id string2, void *context);
 - (BOOL) isRepeat
 {
   BOOL repeat;
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return NO;
-    }
-  
-
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-
-  if (! [self _checkConnection]) 
-    {
-      return NO;
-    }
-
-  if ((mpdStatus->repeat) == 1) 
-    {
+  }
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    if (mpdStatus && (mpd_status_get_repeat(mpdStatus)) == 1) {
       repeat = YES;
-    }
-  else
-    {
+    } else {
       repeat = NO;
     }
-
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
   
   return repeat;
 }
 
 - (int) getVolume
 {
-  int volume;
-  mpd_Status *mpdStatus;
+  int volume = 0;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
-      return 0.0;
-    }
-
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-
-  if (! [self _checkConnection]) 
-    {
+  if (! [self _checkConnection]) {
       return 0;
-    }
+  }
 
-  volume = mpdStatus->volume;
-  
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    volume = mpd_status_get_volume(mpdStatus);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
   
   return volume;
 }
 
 - (int) getCrossfade
 {
-  int cfTime;
-  mpd_Status *mpdStatus;
+  int cfTime = 0;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect])
-    {
+  if (! [self _checkConnection]) {
       return 0;
-    }
+  }
 
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
 
-  if (! [self _checkConnection]) 
-    {
-      return 0;
-    }
+  if (mpdStatus != NULL) {
+    cfTime = mpd_status_get_crossfade(mpdStatus);
+    mpd_status_free(mpdStatus);
+  }
 
-  cfTime = mpdStatus->crossfade;
-
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
-  
   return cfTime;
 }
 
 - (StatisticsItem *) getStatistics
 {
-  mpd_Stats *mpdStats;
+  struct mpd_stats *mpdStats;
   StatisticsItem *statItem;
 
-  if (! [self _doConnect])
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
+  }
 
-  mpd_sendStatsCommand(mpdConnection);
-  mpdStats = mpd_getStats(mpdConnection);
+  mpdStats = mpd_run_stats(mpdConnection);
+  if (mpdStats != NULL) {
+    statItem = [[StatisticsItem alloc] init];
 
-  if (! [self _checkConnection]) 
-    {
-      return nil;
-    }
+    [statItem setNumberOfArtists: mpd_stats_get_number_of_artists(mpdStats)];
+    [statItem setNumberOfAlbums: mpd_stats_get_number_of_albums(mpdStats)];
+    [statItem setNumberOfSongs: mpd_stats_get_number_of_songs(mpdStats)];
+    [statItem setUptime: mpd_stats_get_uptime(mpdStats)];
+    [statItem setDbUpdatetime: mpd_stats_get_db_update_time(mpdStats)];
+    [statItem setPlaytime: mpd_stats_get_play_time(mpdStats)];
+    [statItem setDbPlaytime: mpd_stats_get_db_play_time(mpdStats)];
 
-  statItem = [[StatisticsItem alloc] init];
+    mpd_stats_free(mpdStats);
+    mpd_response_finish(mpdConnection);
+    return AUTORELEASE(statItem);
+  } else {
+    return nil;
+  }
 
-  [statItem setNumberOfArtists: mpdStats->numberOfArtists];
-  [statItem setNumberOfAlbums: mpdStats->numberOfAlbums];
-  [statItem setNumberOfSongs: mpdStats->numberOfSongs];
-  [statItem setUptime: mpdStats->uptime];
-  [statItem setDbUpdatetime: mpdStats->dbUpdateTime];
-  [statItem setPlaytime: mpdStats->playTime];
-  [statItem setDbPlaytime: mpdStats->dbPlayTime];
-
-  mpd_freeStats(mpdStats);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
-
-  return AUTORELEASE(statItem);
 }
 
 /* ---------------------
@@ -506,54 +431,45 @@ int _stringSort(id string1, id string2, void *context);
 
 - (PlaylistItem *) getCurrentSong
 {
-  mpd_Status *mpdStatus;
-  mpd_InfoEntity *mpdInfoEntity;
+  struct mpd_status *mpdStatus;
   PlaylistItem *currSong;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
-  
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
+  }
 
-  if (! [self _checkConnection]) 
-    {
+  if (!mpd_command_list_begin(mpdConnection, true) ||
+    !mpd_send_status(mpdConnection) ||
+    !mpd_send_current_song(mpdConnection) ||
+    !mpd_command_list_end(mpdConnection)) {
       return nil;
-    }
+  }
 
-  if(mpdStatus->state == MPD_STATUS_STATE_PLAY ||
-     mpdStatus->state == MPD_STATUS_STATE_PAUSE) 
+  mpdStatus = mpd_recv_status(mpdConnection);
+  if (mpdStatus == NULL) {
+    return nil;
+  }
+
+  if(mpd_status_get_state(mpdStatus) == MPD_STATE_PLAY ||
+     mpd_status_get_state(mpdStatus) == MPD_STATE_PAUSE) 
     {
-      mpd_sendPlaylistInfoCommand(mpdConnection, mpdStatus->song);
-    
-      while((mpdInfoEntity = mpd_getNextInfoEntity(mpdConnection))) 
-	{
-	  mpd_Song *mpdSong;
+	  struct mpd_song *mpdSong;
 
-	  if(mpdInfoEntity->type!=MPD_INFO_ENTITY_TYPE_SONG) 
-	    {
-	      mpd_freeInfoEntity(mpdInfoEntity);
-	      continue;
-	    }
-	  
-	  mpdSong = mpdInfoEntity->info.song;
+	  if (!mpd_response_next(mpdConnection)) {
+	    return nil;
+	  }
+	  mpdSong = mpd_recv_song(mpdConnection);
 	  
 	  currSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
 	  
-	  [currSong setElapsedTime: mpdStatus->elapsedTime];
-	  [currSong setTotalTime: mpdStatus->totalTime];
-	  
-	  mpd_freeInfoEntity(mpdInfoEntity);
-	  break;
-	}
+	  [currSong setElapsedTime: mpd_status_get_elapsed_time(mpdStatus)];
+	  [currSong setTotalTime: mpd_status_get_total_time(mpdStatus)];
+	  mpd_song_free(mpdSong);
       
-      mpd_finishCommand(mpdConnection);
+      mpd_response_finish(mpdConnection);
     } 
   
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpd_status_free(mpdStatus);
 
   if (currSong)
     {
@@ -568,53 +484,39 @@ int _stringSort(id string1, id string2, void *context);
 - (int) getCurrentSongNr
 {
   int songNr;
-  mpd_Status *mpdStatus;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
-      return -1;
-    }
-
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
   if (! [self _checkConnection]) 
     {
       return -1;
     }
   
-  songNr = mpdStatus->song+1;
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    songNr = mpd_status_get_song_pos(mpdStatus)+1;
 
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
 
   return songNr;
 }
 
 - (int) getPlaylistLength
 {
-  int length;
-  mpd_Status *mpdStatus;
+  int length = 0;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return 0;
-    }
-  
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
-  if (! [self _checkConnection]) 
-    {
-      return 0;
-    }
+  }
 
-  length = mpdStatus->playlistLength;
-
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) { 
+    length = mpd_status_get_queue_length(mpdStatus);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  }
   
   return length;
 }
@@ -622,185 +524,131 @@ int _stringSort(id string1, id string2, void *context);
 - (NSArray *) getPlaylist
 {
   NSMutableArray *playlist;
-  mpd_InfoEntity *mpdInfoEntity;
+  struct mpd_status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
-  
-  mpd_sendPlaylistInfoCommand(mpdConnection, -1);
-
-  if (! [self _checkConnection]) 
-    {
-      mpd_finishCommand(mpdConnection);
-      mpd_closeConnection(mpdConnection);
-      return nil;
-    }
-  
+  }
+  if(!mpd_send_list_queue_meta(mpdConnection)) {
+    return nil;
+  }
+  struct mpd_song *mpdSong;
   playlist = [[NSMutableArray alloc] init];
   
-  while((mpdInfoEntity = mpd_getNextInfoEntity(mpdConnection))) 
-    {
-      if(mpdInfoEntity->type=MPD_INFO_ENTITY_TYPE_SONG) 
-	{
-	  mpd_Song *mpdSong;
+  while((mpdSong = mpd_recv_song(mpdConnection)) != NULL) {
 	  PlaylistItem *tmpSong;
 
-	  mpdSong = mpdInfoEntity->info.song;
-
 	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
-
 	  [playlist addObject: tmpSong];
-
 	  RELEASE(tmpSong);	
-	}
-      
-      mpd_freeInfoEntity(mpdInfoEntity);
-    }
+          mpd_song_free(mpdSong);
+  }
   
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
-
+  mpd_response_finish(mpdConnection);
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    currPlaylistVersion = mpd_status_get_queue_version(mpdStatus);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+  } else {
+    currPlaylistVersion = 0;
+  }
   return AUTORELEASE(playlist);
 }
 
 - (BOOL) playlistChanged
 {
-  BOOL changed;
-  mpd_Status *mpdStatus;
 
-  if (! [self _doConnect]) 
-    {
+  BOOL changed = NO;
+  struct mpd_status *mpdStatus;
+
+  if (! [self _checkConnection]) {
       return NO;
-    }
+  }
 
-  changed = NO;
-  mpd_sendStatusCommand(mpdConnection);
-  mpdStatus = mpd_getStatus(mpdConnection);
-  
-  if (! [self _checkConnection]) 
-    {
-      return NO;
-    }
-
-  if (mpdStatus->playlist != currPlaylist) 
-    {
-      currPlaylist = mpdStatus->playlist;
+  mpdStatus = mpd_run_status(mpdConnection);
+  if (mpdStatus != NULL) {
+    unsigned int version = 0;
+    version = mpd_status_get_queue_version(mpdStatus);
+    mpd_response_finish(mpdConnection);
+    mpd_status_free(mpdStatus);
+    if (version != currPlaylistVersion) {
       changed = YES;
+    } else {
+      changed = NO;
     }
-
-  mpd_finishCommand(mpdConnection);
-  mpd_freeStatus(mpdStatus);
-  mpd_closeConnection(mpdConnection);
-  
+  }
   return changed;
 }
 
 - (void) shuffleList
 {
-  if (! [self _doConnect])
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-
-  mpd_sendShuffleCommand(mpdConnection);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_shuffle(mpdConnection);
 }
 
 - (void) clearPlaylist
 {
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-
-  mpd_sendClearCommand(mpdConnection);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_clear(mpdConnection);
 }
 
 - (void) removeSong: (int)song
 {
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-
-  mpd_sendDeleteCommand(mpdConnection, song);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_delete(mpdConnection, song);
 }
 
 - (void) addTrack: (NSString *)file
 {
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-  
-  mpd_sendAddCommand(mpdConnection, [file UTF8String]);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_add(mpdConnection, [file UTF8String]);
 }
 
 - (void) moveSongNr: (int)song1 to: (int)song2
 {
-  if (! [self _doConnect])
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-  
-  mpd_sendMoveCommand(mpdConnection, song1, song2);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_move(mpdConnection, song1, song2);
 }
 
 - (void) moveSongWithID: (int)song1 to: (int)song2
 {
-  if (! [self _doConnect])
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-  
-  mpd_sendMoveIdCommand(mpdConnection, song1, song2);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_move_id(mpdConnection, song1, song2);
 }
 
 - (NSArray *) getAllPlaylists
 {
   NSMutableArray *tmpArray;
-  mpd_InfoEntity *mpdInfoEntity;
+  struct mpd_entity *mpdInfoEntity;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
+  }
+  mpd_send_list_playlists(mpdConnection);
 
-
-  mpd_sendLsInfoCommand(mpdConnection, "");
-
-  if (! [self _checkConnection]) 
-    {
-      return nil;
-    }
-  
   tmpArray = [[NSMutableArray alloc] init];
 
-  while((mpdInfoEntity = mpd_getNextInfoEntity(mpdConnection))) 
-    {
-      if(mpdInfoEntity->type==MPD_INFO_ENTITY_TYPE_PLAYLISTFILE) 
-	{
-	  mpd_PlaylistFile *mpdPlaylistFile = mpdInfoEntity->info.playlistFile;
-	  [tmpArray addObject: [NSString stringWithUTF8String: mpdPlaylistFile->path]];
-	}
-      mpd_freeInfoEntity(mpdInfoEntity);
+  while((mpdInfoEntity = mpd_recv_entity(mpdConnection))) {
+    if(mpd_entity_get_type(mpdInfoEntity) == MPD_ENTITY_TYPE_PLAYLIST) {
+      const struct mpd_playlist *mpdPlaylist = mpd_entity_get_playlist(mpdInfoEntity);
+      [tmpArray addObject: [NSString stringWithUTF8String: mpd_playlist_get_path(mpdPlaylist)]];
     }
-  
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+    mpd_entity_free(mpdInfoEntity);
+  }
+  mpd_response_finish(mpdConnection);
   
   return AUTORELEASE(tmpArray);
   
@@ -808,38 +656,26 @@ int _stringSort(id string1, id string2, void *context);
 
 - (void) loadPlaylist: (NSString *)title
 {
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-
-  mpd_sendLoadCommand(mpdConnection, [title cString]);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_load(mpdConnection, [title cString]);
 }
 
 - (void) savePlaylist: (NSString *)title
 {
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-
-  mpd_sendSaveCommand(mpdConnection, [title cString]);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_save(mpdConnection, [title cString]);
 }
 
 - (void) removePlaylist: (NSString *)title
 {
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
-  
-  mpd_sendRmCommand(mpdConnection, [title cString]);
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  }
+  mpd_run_rm(mpdConnection, [title cString]);
 }
 
 
@@ -850,31 +686,23 @@ int _stringSort(id string1, id string2, void *context);
 - (NSArray *) getAllArtists
 {
   NSMutableArray *allArtists;
-  char *artistName;
+  struct mpd_pair *pair;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
-
-  mpd_sendListCommand(mpdConnection, MPD_TABLE_ARTIST, NULL);
-
-  if (! [self _checkConnection]) 
-    {
-      return nil;
-    }
+  }
+  mpd_search_db_tags(mpdConnection, MPD_TAG_ARTIST);
+  mpd_search_commit(mpdConnection);
 
   allArtists = [[NSMutableArray alloc] init];
 
-  while ((artistName = mpd_getNextArtist(mpdConnection)) != NULL) 
+  while ((pair = mpd_recv_pair_tag(mpdConnection, MPD_TAG_ARTIST)) != NULL) 
     {
-      [allArtists addObject: [NSString stringWithUTF8String: artistName]];
-      free(artistName);
+      [allArtists addObject: pair->value ?[NSString stringWithUTF8String: pair->value]:@""];
+      mpd_return_pair(mpdConnection, pair);
     }
 
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
-  
+  mpd_response_finish(mpdConnection);
   return [AUTORELEASE(allArtists) sortedArrayUsingFunction: _stringSort 
 		                                   context: NULL];
 }
@@ -882,31 +710,22 @@ int _stringSort(id string1, id string2, void *context);
 - (NSArray *) getAllAlbums
 {
   NSMutableArray *allAlbums;
-  char *albumName;
+  struct mpd_pair *pair;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
-  
-  mpd_sendListCommand(mpdConnection, MPD_TABLE_ALBUM,NULL);
-
-  if (! [self _checkConnection]) 
-    {
-      return nil;
-    }
+  }
+  mpd_search_db_tags(mpdConnection, MPD_TAG_ALBUM);
+  mpd_search_commit(mpdConnection);
 
   allAlbums = [[NSMutableArray alloc] init];
 
-  while ((albumName = mpd_getNextAlbum(mpdConnection)) != NULL) 
-    {
-      [allAlbums addObject: [NSString stringWithUTF8String: albumName]];
-      free(albumName);
-    }
+  while ((pair = mpd_recv_pair_tag(mpdConnection, MPD_TAG_ALBUM)) != NULL) {
+      [allAlbums addObject: [NSString stringWithUTF8String: pair->value]];
+      free(pair);
+  }
 
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
-
+  mpd_response_finish(mpdConnection);
   return [AUTORELEASE(allAlbums) sortedArrayUsingFunction: _stringSort 
 		                                  context: NULL];
 }
@@ -914,48 +733,38 @@ int _stringSort(id string1, id string2, void *context);
 - (NSArray *) getAllTracks
 {
   NSMutableArray *allTracks;
-  mpd_InfoEntity *mpdInfoEntity;
+  struct mpd_entity *mpdEntity;
 
-  if (! [self _doConnect]) 
-    {
+  if (! [self _checkConnection]) {
       return nil;
-    }
+  }
 
-  mpd_sendListallInfoCommand(mpdConnection, "");
-
-  if (! [self _checkConnection]) 
-    {
-      return nil;
-    }
-  
   allTracks = [[NSMutableArray alloc] init];
-
-  while((mpdInfoEntity = mpd_getNextInfoEntity(mpdConnection))) 
-    {
-      if(mpdInfoEntity->type == MPD_INFO_ENTITY_TYPE_SONG) 
-	{
-	  mpd_Song *mpdSong;
+  mpd_send_list_all_meta(mpdConnection, NULL);
+  while ((mpdEntity = mpd_recv_entity(mpdConnection)) != NULL) { 
+    if (mpd_entity_get_type(mpdEntity) == MPD_ENTITY_TYPE_SONG) {
+	  const struct mpd_song *mpdSong;
 	  PlaylistItem *tmpSong;
 
-	  mpdSong = mpdInfoEntity->info.song;
+	  mpdSong = mpd_entity_get_song(mpdEntity);
 
 	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
 
 	  [allTracks addObject: tmpSong];
 	  
 	  RELEASE(tmpSong);
-	}
-      mpd_freeInfoEntity(mpdInfoEntity);
     }
-  
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
-  
+  }
+  mpd_response_finish(mpdConnection);
   return AUTORELEASE(allTracks);
+
 }
 
 - (NSArray *) getAlbumsForArtist: (NSString *)artist
 {
+#warning FIXME getAllAlbumsForArtist
+return nil;
+/* 
   NSMutableArray *allAlbums;
   char *albumName;
 
@@ -964,7 +773,8 @@ int _stringSort(id string1, id string2, void *context);
       return nil;
     }
 
-  mpd_sendListCommand(mpdConnection, MPD_TABLE_ALBUM, [artist UTF8String]);
+
+  mpd_sendListCommand(mpdConnection, MPD_TAG_ALBUM, [artist UTF8String]);
 
   if (! [self _checkConnection]) 
     {
@@ -979,24 +789,30 @@ int _stringSort(id string1, id string2, void *context);
       free(albumName);
     }
   
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  mpd_response_finish(mpdConnection);
 
   return [AUTORELEASE(allAlbums) sortedArrayUsingFunction: _stringSort 
 		                                  context:NULL];
+*/
+
 }
 
 - (NSArray *) getAllTracksForArtist: (NSString *)artist
 {
+#warning FIXME getAllTracksForArtist
+
+return nil;
+
+/*
   NSMutableArray *allTracks;
-  mpd_InfoEntity *mpdInfoEntity;
+  struct mpd_entity *mpdInfoEntity;
   
   if (! [self _doConnect]) 
     {
       return nil;
     }
 
-  mpd_sendFindCommand(mpdConnection, MPD_TABLE_ARTIST, [artist UTF8String]);
+  mpd_sendFindCommand(mpdConnection, MPD_TAG_ARTIST, [artist UTF8String]);
 
   if (! [self _checkConnection]) 
     {
@@ -1005,14 +821,14 @@ int _stringSort(id string1, id string2, void *context);
 
   allTracks = [[NSMutableArray alloc] init];
 
-  while((mpdInfoEntity = mpd_getNextInfoEntity(mpdConnection))) 
+  while((mpdInfoEntity = mpd_recv_entity(mpdConnection))) 
     {
-      if(mpdInfoEntity->type == MPD_INFO_ENTITY_TYPE_SONG) 
+      if(mpd_entity_get_type(mpdInfoEntity) == MPD_ENTITY_TYPE_SONG) 
 	{
-	  mpd_Song *mpdSong;
+	  const struct mpd_song *mpdSong;
 	  PlaylistItem *tmpSong;
 	  
-	  mpdSong = mpdInfoEntity->info.song;
+	  mpdSong = mpd_entity_get_song(mpdInfoEntity);
 
 	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
       
@@ -1020,13 +836,14 @@ int _stringSort(id string1, id string2, void *context);
 
 	  RELEASE(tmpSong);
 	}
-      mpd_freeInfoEntity(mpdInfoEntity);
+      mpd_entity_free(mpdInfoEntity);
     }
   
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  mpd_response_finish(mpdConnection);
   
   return AUTORELEASE(allTracks);
+
+*/
 }
 
 - (NSArray *) getAllTracksForArtist: (NSString *)artist 
@@ -1038,37 +855,38 @@ int _stringSort(id string1, id string2, void *context);
 
   tmpArray = RETAIN([self getAllTracksForArtist: artist]);
 
-  if (! tmpArray)
-    {
+  if (! tmpArray) {
       return nil;
-    }
+  }
 
   allTracks = [[NSMutableArray alloc] init];
 
-  for (i = 0; i < [tmpArray count]; i++) 
-    {
-      if ([[[tmpArray objectAtIndex: i] getAlbum] isEqual: album])
-	{
+  for (i = 0; i < [tmpArray count]; i++) {
+      if ([[[tmpArray objectAtIndex: i] getAlbum] isEqual: album]) {
 	  [allTracks addObject: [tmpArray objectAtIndex: i]];
-	}
-    }
+      }
+  }
   
   RELEASE(tmpArray);
-  
   return AUTORELEASE(allTracks);
 }
 
 - (NSArray *) getAllTracksForAlbum: (NSString *)album
 {
+
+#warning FIXME getAllTracksForAlbum
+
+return nil;
+/*
   NSMutableArray *allTracks;
-  mpd_InfoEntity *mpdInfoEntity;
+  struct mpd_entity *mpdInfoEntity;
 
   if (! [self _doConnect])
     {
       return nil;
     }
 
-  mpd_sendFindCommand(mpdConnection, MPD_TABLE_ALBUM, [album UTF8String]);
+  mpd_sendFindCommand(mpdConnection, MPD_TAG_ALBUM, [album UTF8String]);
 
   if (! [self _checkConnection]) 
     {
@@ -1077,14 +895,14 @@ int _stringSort(id string1, id string2, void *context);
 
   allTracks = [[NSMutableArray alloc] init];
 
-  while((mpdInfoEntity = mpd_getNextInfoEntity(mpdConnection))) 
+  while((mpdInfoEntity = mpd_recv_entity(mpdConnection))) 
     {
-      if(mpdInfoEntity->type == MPD_INFO_ENTITY_TYPE_SONG) 
+      if(mpd_entity_get_type(mpdInfoEntity) == MPD_ENTITY_TYPE_SONG) 
 	{
-	  mpd_Song *mpdSong;
+	  const struct mpd_song *mpdSong;
 	  PlaylistItem *tmpSong;
 	  
-	  mpdSong = mpdInfoEntity->info.song;
+	  mpdSong = mpd_entity_get_song(mpdInfoEntity);
 
 	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
 
@@ -1092,25 +910,23 @@ int _stringSort(id string1, id string2, void *context);
 	  
 	  RELEASE(tmpSong);
 	}
-      mpd_freeInfoEntity(mpdInfoEntity);
+      mpd_entity_free(mpdInfoEntity);
     }
   
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  mpd_response_finish(mpdConnection);
 
   return AUTORELEASE(allTracks);;
+*/
 }
 
 - (void) updateCollection
 {
-  if (! [self _doConnect])
-    {
+  if (! [self _checkConnection]) {
       return;
-    }
+  }
 
-  mpd_sendUpdateCommand(mpdConnection, "");
-  mpd_finishCommand(mpdConnection);
-  mpd_closeConnection(mpdConnection);
+  mpd_send_update(mpdConnection, "");
+  mpd_response_finish(mpdConnection);
 }
 @end
 
@@ -1123,104 +939,111 @@ int _stringSort(id string1, id string2, void *context);
 {
   char *mpdHost;
   int mpdPort;
+  unsigned int mpdTimeout;
 
   mpdHost = (char *)[host cString];
   mpdPort = (int) [port floatValue];
+  mpdTimeout = (unsigned int) [timeout intValue];
+  mpdConnection = mpd_connection_new(mpdHost, mpdPort, mpdTimeout);
+  if (mpdConnection == NULL) {
+    NSLog(@"Cannot connect to server: Out of memory");
+    return NO;
+  }
   
-  mpdConnection = mpd_newConnection(mpdHost, mpdPort, 10);
-  
-  if (password) 
-    {
-      mpd_sendPasswordCommand(mpdConnection, (char *)[password cString]);
-      mpd_finishCommand(mpdConnection);
-    }
+  if (password) {
+    mpd_send_password(mpdConnection, (char *)[password cString]);
+    mpd_response_finish(mpdConnection);
+  }
 
-  if (mpdConnection->error != 0) 
-    {
+  if (mpd_connection_get_error(mpdConnection) != MPD_ERROR_SUCCESS) {
     [[NSNotificationCenter defaultCenter] postNotification: 
 	     [NSNotification notificationWithName: DidNotConnectNotification 
 					   object: [NSString stringWithUTF8String: 
-							       mpdConnection->errorStr]]];
-
+					       mpd_connection_get_error_message(mpdConnection)]]];
+    mpd_connection_clear_error(mpdConnection);
     return NO;
-    } 
-  else 
-    {
-      [[NSNotificationCenter defaultCenter] postNotification: 
+  } else {
+    [[NSNotificationCenter defaultCenter] postNotification: 
 	     [NSNotification notificationWithName: DidConnectNotification object: nil]];
-
     return YES;
-    }
+  }
 }
 
 - (BOOL) _checkConnection
 {
-  if (mpdConnection->error != 0) 
-    {
+  if (mpd_connection_get_error(mpdConnection) != MPD_ERROR_SUCCESS) {
+    if (mpd_connection_get_error(mpdConnection) == MPD_ERROR_TIMEOUT) {
+      // we are trying to reconnect here
+      // _doConnect will send the notification if it also fails
+      mpd_response_finish(mpdConnection);
+      mpd_connection_clear_error(mpdConnection);
+      mpd_connection_free(mpdConnection);
+      if ([self _doConnect]) {
+        return YES;
+      }
+    } else {
+      mpd_response_finish(mpdConnection);
       [[NSNotificationCenter defaultCenter] postNotification: 
 	     [NSNotification notificationWithName: DidNotConnectNotification 
 			                   object: [NSString stringWithUTF8String: 
-							       mpdConnection->errorStr]]];
-
-    mpd_finishCommand(mpdConnection);
-    mpd_closeConnection(mpdConnection);
-
-    return NO;
-    } 
-  else
-    {
-      return YES;
+							       mpd_connection_get_error_message(mpdConnection)]]];
+      mpd_connection_clear_error(mpdConnection);
+      mpd_response_finish(mpdConnection);
     }
+    return NO;
+  } else {
+    mpd_response_finish(mpdConnection);
+    return YES;
+  }
 }
 
-- (PlaylistItem *) _getPlaylistItemForSong: (mpd_Song *)anSong
+- (PlaylistItem *) _getPlaylistItemForSong: (const struct mpd_song *)anSong
 {
   PlaylistItem *plItem;
+  const char *songArtist = mpd_song_get_tag(anSong,MPD_TAG_ARTIST,0);
+  const char *songTitle = mpd_song_get_tag(anSong,MPD_TAG_TITLE,0);
+  const char *songAlbum = mpd_song_get_tag(anSong,MPD_TAG_ALBUM,0);
+  const char *songTrackNr = mpd_song_get_tag(anSong,MPD_TAG_TRACK,0);
+  const char *songGenre = mpd_song_get_tag(anSong,MPD_TAG_GENRE,0);
 
   plItem = [[PlaylistItem alloc] init];
 
-  if (anSong->artist == NULL)
-    {
+  if (songArtist == NULL) {
       [plItem setArtist: _(@"Unknown Artist")];
-    }
-  else
-    {
-      [plItem setArtist: [NSString stringWithUTF8String: anSong->artist]];
-    }
+  } else {
+      [plItem setArtist: [NSString stringWithUTF8String: songArtist]];
+  }
 
-  if (anSong->title == NULL) 
-    {
+  if (songTitle == NULL) {
       [plItem setTitle: _(@"Unknown Title")];
-    }
-  else
-    {
-      [plItem setTitle: [NSString stringWithUTF8String: anSong->title]];
-    }
+  } else {
+      [plItem setTitle: [NSString stringWithUTF8String: songTitle]];
+  }
   
-  if (anSong->album == NULL)
-    {
+  if (songAlbum == NULL) {
       [plItem setAlbum: _(@"Unknown Album")];
-    }
-  else
-    {
-      [plItem setAlbum: [NSString stringWithUTF8String: anSong->album]];
-    }
+  } else {
+      [plItem setAlbum: [NSString stringWithUTF8String: songAlbum]];
+  }
+
+  if (songGenre == NULL) {
+      [plItem setGenre: _(@"Unknown Genre")];
+  } else {
+      [plItem setGenre: [NSString stringWithUTF8String: songGenre]];
+  }
   
-  [plItem setPath: [NSString stringWithUTF8String: anSong->file]];
+  [plItem setPath: [NSString stringWithUTF8String: mpd_song_get_uri(anSong)]];
 
-  if (anSong->track == NULL) 
-    {
+  if (songTrackNr == NULL) {
       [plItem setTrackNr: @""];
-    }
-  else
-    {
-      [plItem setTrackNr: [NSString stringWithUTF8String: anSong->track]];
-    }
+  } else {
+      [plItem setTrackNr: [NSString stringWithUTF8String: songTrackNr]];
+  }
 
-  [plItem setTotalTime: anSong->time];
+  [plItem setTotalTime: mpd_song_get_duration(anSong)];
 
-  [plItem setID: anSong->id];
-  [plItem setPos: anSong->pos];
+  [plItem setID: mpd_song_get_id(anSong)];
+  [plItem setPos: mpd_song_get_pos(anSong)];
   return AUTORELEASE(plItem);
 }
 

@@ -28,25 +28,28 @@
 #define _PCAPPPROJ_MPDCONTROLLER_H_
 
 #include <Foundation/Foundation.h>
+#include <mpd/client.h>
 #include "PlaylistItem.h"
 #include "StatisticsItem.h"
 #include "Strings.h"
-#include "libmpdclient.h"
 
 #define state_NOCONN -1
-#define state_STOP 0
-#define state_PLAY 1
-#define state_PAUSE 2
+#define state_UNKNOWN 0
+#define state_STOP 1
+#define state_PLAY 2
+#define state_PAUSE 3
 
 @interface MPDController : NSObject
 {
-  mpd_Connection *mpdConnection;
+  struct mpd_connection *mpdConnection;
   
   NSString *host;
   NSString *port;
   NSString *password;
+  NSString *timeout;
 
   long long currPlaylist;
+  unsigned int currPlaylistVersion;
 }
 
 // Initialization Methods
@@ -55,7 +58,8 @@
 // Connection Methods
 - (BOOL) connectToServer: (NSString *)hostName 
                     port: (NSString *)port 
-                password: (NSString *)pword;
+                password: (NSString *)pword
+		 timeout: (NSString *)tout;
 
 // Play Methods
 - (void) play;

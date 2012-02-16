@@ -8,6 +8,7 @@
 	  sane default values for it, and for mpdHost and mpdPort
 	* CollectionController.[h|m] fix some warnings and code cleanup
 	* Info-gnustep.plist general bumps from PC
+	* MPDController.[h|m]: update to new libmpdclient API
 
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 
