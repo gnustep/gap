@@ -73,8 +73,8 @@
 // Browser delegate Methods
 - (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column;
 - (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell
-          atRow:(int)row
-         column:(int)column;
+          atRow:(NSInteger)row
+         column:(NSInteger)column;
 - (NSString *)browser:(NSBrowser *)sender
         titleOfColumn:(int)column;
 

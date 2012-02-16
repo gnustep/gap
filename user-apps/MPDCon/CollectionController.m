@@ -233,50 +233,43 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
 }
 
 - (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell
-          atRow:(int)row
-         column:(int)column
+          atRow:(NSInteger)row
+         column:(NSInteger)column
 {
-  if (column == 0)
-    {
+#warning FIXME the formatters are not working
+  if (column == 0) {
       [cell setLeaf: NO];
       
-      if (row == 0)
-        {
+      if (row == 0) {
+          //[cell setFormatter: [[[BoldFormatter alloc] init] autorelease]];
           [cell setStringValue: [NSString stringWithFormat: @"All (%d Artists)", [allArtists count]]];
-        }
-      else
-        {
-          [cell setFormatter: [[[NormalFormatter alloc] init] autorelease]];
+      } else {
+          //[cell setFormatter: [[[NormalFormatter alloc] init] autorelease]];
           [cell setStringValue: [allArtists objectAtIndex: row-1]];
-        }
-    }
-  else
-    {
+      }
+  } else {
       [cell setLeaf: YES];
       
-      if (row == 0)
-        {
-          [cell setFormatter: [[[BoldFormatter alloc] init] autorelease]];
+      if (row == 0) {
+          //[cell setFormatter: [[[BoldFormatter alloc] init] autorelease]];
           [cell setStringValue: [NSString stringWithFormat: @"All (%d Albums)", [allAlbums count]]];
-        }
-      else
-        {
+      } else {
+          //[cell setFormatter: [[[NormalFormatter alloc] init] autorelease]];
           [cell setStringValue: [allAlbums objectAtIndex: row-1]];
-        }
-    }
+      }
+  }
 }
 
 - (NSString *)browser:(NSBrowser *)sender
         titleOfColumn:(int)column
 {
-  if (column == 0)
-    {
+  if (column == 0) {
       return @"Artists";
-    }
-  else if (column == 1)
-    {
+  } else if (column == 1) {
       return @"Albums";
-    }
+  } else {
+      return @"";
+  }
 }
   
 
