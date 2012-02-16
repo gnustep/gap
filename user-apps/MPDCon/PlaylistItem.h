@@ -34,6 +34,7 @@
   NSString *artist;
   NSString *title;
   NSString *album;
+  NSString *genre;
   NSString *trackNr;
   NSString *path;
 
@@ -51,6 +52,8 @@
 - (void) setTitle: (NSString *)newTitle;
 - (NSString *) getAlbum;
 - (void) setAlbum: (NSString *)newAlbum;
+- (NSString *) getGenre;
+- (void) setGenre: (NSString *)newGenre;
 - (NSString *) getTrackNr;
 - (void) setTrackNr: (NSString *)newNr;
 - (int) getElapsedTime;

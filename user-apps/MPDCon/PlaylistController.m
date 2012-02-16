@@ -466,7 +466,6 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
   songEnum = [playlistTable selectedRowEnumerator];
 
   i = 0;
-  songNumber;
 
   while (songNumber = [songEnum nextObject]) 
     {
@@ -486,19 +485,16 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
   
   int ids[count];
   
-  for (i = 0; i < count; i++) 
-    {
+  for (i = 0; i < count; i++) {
       ids[i] = [[playlist objectAtIndex: [[rows objectAtIndex: i] intValue]] getID];
-    }
+  }
 
-  for (i = 0; i < count; i++)
-	{
+  for (i = 0; i < count; i++) {
       if ([[rows objectAtIndex: 0] intValue] < row)
     	  [mpdController moveSongWithID: ids[i] to: row-1];
       else
        	  [mpdController moveSongWithID: ids[i] to: row+i];
-
-	}
+  }
  
   [playlistTable reloadData];
 }
@@ -507,11 +503,10 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 {
   int i;
     
-  for (i = 0; i < [songs count]; i++)
-    {
+  for (i = 0; i < [songs count]; i++) {
       [mpdController addTrack: [songs objectAtIndex: i]];
       [mpdController moveSongNr: [mpdController getPlaylistLength]-1 to: (row+i)];
-    }
+  }
 }
 
 - (void) _filterListByString: (NSString *) fString
@@ -521,21 +516,17 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
   
   tmpArray = [[NSMutableArray alloc] init];
   
-  for (i = 0; i < [playlist count]; i++)
-    {
-      if ([[[playlist objectAtIndex: i] getArtist] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  
-        {
+  for (i = 0; i < [playlist count]; i++) {
+      if ([[[playlist objectAtIndex: i] getArtist] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  {
           [tmpArray addObject: [playlist objectAtIndex: i]];
-        }
-      else if ([[[playlist objectAtIndex: i] getTitle] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  
-        {
+      } else if ([[[playlist objectAtIndex: i] getTitle] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  {
           [tmpArray addObject: [playlist objectAtIndex: i]];
-        }
-      else if ([[[playlist objectAtIndex: i] getAlbum] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  
-        {
+      } else if ([[[playlist objectAtIndex: i] getAlbum] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  {
           [tmpArray addObject: [playlist objectAtIndex: i]];
-        }
-    }
+      } else if ([[[playlist objectAtIndex: i] getGenre] rangeOfString: fString options: NSCaseInsensitiveSearch].location != NSNotFound)  {
+          [tmpArray addObject: [playlist objectAtIndex: i]];
+      }
+  }
     
   [playlist release];
   

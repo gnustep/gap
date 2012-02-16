@@ -37,6 +37,7 @@
   RELEASE(artist);
   RELEASE(title);
   RELEASE(album);
+  RELEASE(genre);
   RELEASE(trackNr);
   RELEASE(path);
 
@@ -67,6 +68,17 @@
 {
   AUTORELEASE(album);
   album = [newAlbum copy];
+}
+
+- (NSString *) getGenre
+{
+  return genre;
+}
+
+- (void) setGenre: (NSString *)newGenre
+{
+  AUTORELEASE(genre);
+  genre = [newGenre copy];
 }
 
 - (NSString *) getTitle
