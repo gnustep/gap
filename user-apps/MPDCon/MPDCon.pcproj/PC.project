@@ -103,11 +103,11 @@
     );
     "PRINCIPAL_CLASS" = NSApplication;
     "PROJECT_AUTHORS" = (
-	"Daniel Luederwald <das_flip@gmx.de>",
-	"Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>"
+	"Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>",
+	"Daniel Luederwald <das_flip@gmx.de>"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2004-06 Daniel Luederwald";
-    "PROJECT_COPYRIGHT_DESC" = "Released under the GNU General Public License 2.0";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2012 GAP Team, 2004-06 Daniel Luederwald";
+    "PROJECT_COPYRIGHT_DESC" = "Released under the GNU General Public License 2.0 or later";
     "PROJECT_CREATOR" = "Daniel Luederwald";
     "PROJECT_DESCRIPTION" = "GNUstep Client for MPD";
     "PROJECT_DOCUMENTEXTENSIONS" = (
