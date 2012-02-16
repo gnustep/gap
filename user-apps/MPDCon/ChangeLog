@@ -15,6 +15,7 @@
 	  filter for Genre
 	* improvements to the Interfaces, new mpdTimeout in the Preferences,
 	  show Genre in PlaylistViewer and other minor nits
+	* MPDConInfo.plist new file from PC
 
 2004-06-14  Daniel Luederwald  <flip@Confusion.CabalOfEntropy.local>
 
