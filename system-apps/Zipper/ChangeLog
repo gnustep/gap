@@ -4,6 +4,8 @@
 	  of unar output
 	* SevenZipArchive.m fix the offset of the header and
 	  footer of 7z output
+	* Preferences.m set the default rar executable to unrar
+	* ZipperDocument.gorm make the columns in the table resizable
 
 2012-02-16 Riccardo Mottola <rm@gnu.org>
 
