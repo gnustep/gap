@@ -148,7 +148,7 @@ static NSMutableDictionary *_extensionMapping = nil;
 	NSString *rar = [self stringForKey:PREF_KEY_RAR];
 	if (rar == nil)
 	{
-		rar = [[NSFileManager defaultManager] locateExecutable:@"rar"];
+		rar = [[NSFileManager defaultManager] locateExecutable:@"unrar"];
 	}
 	return rar;
 }
