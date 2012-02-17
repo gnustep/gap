@@ -93,7 +93,7 @@ static NSData *_magicBytes;
     NSArray *lines = [string componentsSeparatedByString:@"\n"];
 
     // take out first 9 lines (header) and last 3 lines (footer)
-    lines = [lines subarrayWithRange:NSMakeRange(9, [lines count] - 9)];
+    lines = [lines subarrayWithRange:NSMakeRange(8, [lines count] - 8)];
     lines = [lines subarrayWithRange:NSMakeRange(0, [lines count] - 4)];
 
 	lineCount = [lines count];
