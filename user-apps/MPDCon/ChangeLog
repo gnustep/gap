@@ -1,3 +1,13 @@
+2012-02-17 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* AppController.m, CollectionController.m, MPDController.h, MPDController.m
+	  After updating the Collection, update the Collection Interface
+	    * track the state of the collection (overall nr of artists/albums)
+	      in the MPDController, and add a method to check whether it changed.
+	    * let the CollectionController listen for a notification, in case 
+	      the AppController detects a change.
+	* PlaylistManagerController.m do not try to remove playlists that
+	  don't exist when saving playlists
+
 2012-02-16 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	
 	* Update to newer ProjectCenter project

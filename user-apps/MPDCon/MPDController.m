@@ -34,6 +34,8 @@
 - (BOOL) _checkConnection;
 
 - (PlaylistItem *) _getPlaylistItemForSong: (const struct mpd_song *)anSong;
+- (unsigned int) _getAllAlbumsCount;
+- (unsigned int) _getAllArtistsCount;
 
 int _stringSort(id string1, id string2, void *context);
 @end
@@ -54,6 +56,14 @@ int _stringSort(id string1, id string2, void *context);
     }
 
   return _sharedMPDController;
+}
+
+- (id) init
+{
+  numArtists = 0;
+  numAlbums = 0;
+
+  return self;
 }
 
 - (void) dealloc
@@ -556,6 +566,22 @@ int _stringSort(id string1, id string2, void *context);
   return AUTORELEASE(playlist);
 }
 
+- (BOOL) collectionChanged
+{
+  BOOL retVal = NO;
+  unsigned int tmpArtistsNum = [self _getAllArtistsCount];
+  unsigned int tmpAlbumsNum = [self _getAllAlbumsCount];
+  if (tmpArtistsNum != numArtists) {
+    numArtists = tmpArtistsNum;
+    retVal = YES;
+  }
+  if (tmpAlbumsNum != numAlbums) {
+    numAlbums = tmpAlbumsNum;
+    retVal = YES;
+  }
+  return retVal;
+}
+
 - (BOOL) playlistChanged
 {
 
@@ -1056,4 +1082,40 @@ int _stringSort(id string1, id string2, void *context)
 
   return [str1 caseInsensitiveCompare: str2];
 }
+
+- (unsigned int) _getAllArtistsCount
+{
+ struct mpd_stats *mpdStats;
+ unsigned int artists = 0;
+ if (! [self _checkConnection]) {
+      return artists;
+  }
+  mpdStats = mpd_run_stats(mpdConnection);
+  if (mpdStats != NULL) {
+    artists = mpd_stats_get_number_of_artists(mpdStats);
+    mpd_stats_free(mpdStats);
+    mpd_response_finish(mpdConnection);
+    return artists;
+  } else {
+    return artists;
+  }
+}
+
+- (unsigned int) _getAllAlbumsCount
+{
+ struct mpd_stats *mpdStats;
+ unsigned int albums = 0;
+ if (! [self _checkConnection]) {
+      return albums;
+  }
+  mpdStats = mpd_run_stats(mpdConnection);
+  if (mpdStats != NULL) {
+    albums = mpd_stats_get_number_of_albums(mpdStats);
+    mpd_stats_free(mpdStats);
+    mpd_response_finish(mpdConnection);
+    return albums;
+  }
+  return albums;
+}
+
 @end

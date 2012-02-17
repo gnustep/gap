@@ -50,6 +50,9 @@
 
   long long currPlaylist;
   unsigned int currPlaylistVersion;
+  // those two are used to check whether the collection changed
+  unsigned int numArtists;
+  unsigned int numAlbums;
 }
 
 // Initialization Methods
@@ -108,6 +111,7 @@
 - (void) removePlaylist: (NSString *)title;
 
 // Collection Commands
+- (BOOL) collectionChanged;
 - (NSArray *) getAllArtists;
 - (NSArray *) getAllAlbums;
 - (NSArray *) getAllTracks;
