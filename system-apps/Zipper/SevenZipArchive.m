@@ -85,7 +85,7 @@
     NSArray *lines = [string componentsSeparatedByString:@"\n"];
     
     // take out first 8 lines (header) and last 2 lines (footer)
-	lines = [lines subarrayWithRange:NSMakeRange(8, [lines count] - 8)];
+	lines = [lines subarrayWithRange:NSMakeRange(17, [lines count] - 17)];
 	lines = [lines subarrayWithRange:NSMakeRange(0, [lines count] - 3)];
     
     return [self listSevenZipContents:lines];

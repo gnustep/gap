@@ -1,7 +1,9 @@
 2012-02-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
-	* RarArchive.h fix the offset of the header and footer
+	* RarArchive.m fix the offset of the header and footer
 	  of unar output
+	* SevenZipArchive.m fix the offset of the header and
+	  footer of 7z output
 
 2012-02-16 Riccardo Mottola <rm@gnu.org>
 
