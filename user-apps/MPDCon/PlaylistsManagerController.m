@@ -37,10 +37,9 @@
 {
   static PlaylistsManagerController *_sharedPLManagerController = nil;
 
-  if (! _sharedPLManagerController) 
-    {
+  if (! _sharedPLManagerController) {
       _sharedPLManagerController = [[PlaylistsManagerController allocWithZone: [self zone]] init];
-    }
+  }
   
   return _sharedPLManagerController;
 }
@@ -49,10 +48,9 @@
 {
   self = [self initWithWindowNibName: @"PlaylistsManager"];
 
-  if (self) 
-    {
+  if (self) {
       [self setWindowFrameAutosaveName: @"PlaylistsManager"];
-    }
+  }
 
   mpdController = [MPDController sharedMPDController];
 
@@ -96,10 +94,9 @@
 
 - (void) loadList: (id)sender
 {
-  if ([listView selectedRow] >= 0) 
-    {
+  if ([listView selectedRow] >= 0) {
       [mpdController loadPlaylist: [playlists objectAtIndex: [listView selectedRow]]];
-    }
+  }
 }
 
 
@@ -109,25 +106,23 @@
 
   name = [saveField stringValue];
   
-  if ([name isEqual: @""]) 
-    {
+  if ([name isEqual: @""]) {
       return;
-    }
+  }
 
-  if ([playlists containsObject: name]) 
-    {
+  if ([playlists containsObject: name]) {
       int answer;
 
       answer = NSRunAlertPanel(_(@"Playlist exists"), _(@"Overwrite it?"), 
 			       _(@"Ok"), _(@"Cancel"), nil);
 
-      if (answer != NSAlertDefaultReturn) 
-	{
+      if (answer != NSAlertDefaultReturn) {
 	  return;
-	}
-    }
+      } else {
+	[mpdController removePlaylist: name];
+      }
+  }
 
-  [mpdController removePlaylist: name];
   [mpdController savePlaylist: name];
 
   [saveField setStringValue: @""];
@@ -138,10 +133,9 @@
 
 - (void) removeList: (id)sender
 {
-  if ([listView selectedRow] >= 0) 
-    {
+  if ([listView selectedRow] >= 0) {
       [mpdController removePlaylist: [playlists objectAtIndex: [listView selectedRow]]];
-    }
+  }
   
   [self updateLists: self];
 }
@@ -167,14 +161,11 @@
 
 - (void) tableViewSelectionDidChange: (NSNotification *)aNotif
 {
-  if ([listView selectedRow] == -1)
-    {
+  if ([listView selectedRow] == -1) {
       [saveField setStringValue: @""];
-    }
-  else
-    {
+  } else {
       [saveField setStringValue: [playlists objectAtIndex: [listView selectedRow]]];
-    }
+  }
 }
 
 - (void) didNotConnect: (NSNotification *)aNotif

@@ -110,17 +110,26 @@ int _aSort(id string1, id string2, void *context);
 
 - (void) awakeFromNib
 {
+  NSNotificationCenter *defCenter;
+
   [trackView setAutosaveName: @"CollectionTrackTable"];
   [trackView setAutosaveTableColumns: YES];
   
   [trackView setTarget: self];
   [trackView setDoubleAction: @selector(doubleClicked:)];
 
-  [[NSNotificationCenter defaultCenter] addObserver: self
-					selector: @selector(didNotConnect:)
-					name: DidNotConnectNotification
-					object: nil];
- 
+  defCenter = [NSNotificationCenter defaultCenter];
+
+  [defCenter addObserver: self
+		selector: @selector(didNotConnect:)
+		name: DidNotConnectNotification
+		object: nil];
+
+  [defCenter addObserver: self
+                selector: @selector(updateCollection:)
+                    name: ShownCollectionChangedNotification
+                  object: nil];
+
  [self _refreshViews];
 }
 
