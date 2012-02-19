@@ -1,3 +1,7 @@
+2012-02-19: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* ZipperDocument.m setDoubleAction to open the double
+	  clicked file with its default viewer
+
 2012-02-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* RarArchive.m fix the offset of the header and footer
