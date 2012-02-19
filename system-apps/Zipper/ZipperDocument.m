@@ -264,7 +264,6 @@
 	{
 		NSString *message;
 		NSString *path = [openPanel directory];
-NSLog(@"path: %@", path);
 
 		// make sure the destination path exists
 		if ([self createUnarchiveDestinationIfNecessary:path] == NO)
@@ -413,41 +412,19 @@ NSLog(@"path: %@", path);
 	// this sux: if the file does not have an extension, NSWorkspace does not know how to 
 	// handle it. Handling of files should be based on file's contents instead of its 
 	// extension, like the unix command 'file' does.
-	if ([extension isEqual:@""])
-	{
-		if (defaultApp == nil)
-		{
+	rc = [[NSWorkspace sharedWorkspace] openFile:file];
+	if (rc == NO) {
+		// NSWorkspace could not open the file, try again with the default app we've been given
+		if (defaultApp != nil) {
+			rc = [[NSWorkspace sharedWorkspace] openFile:file withApplication:defaultApp];
+		} else {
 			NSRunAlertPanel(@"Could not open", @"No default open application set in preferences", 
 				nil, nil, nil);
 			return;
 		}
-		else
-		{
-			rc = [[NSWorkspace sharedWorkspace] openFile:file withApplication:defaultApp];
-		}
-	}
-	else
-	{
-		// we have a valid path extension, try opening with NSWorkspace's default app
-		rc = [[NSWorkspace sharedWorkspace] openFile:file];
-		if (rc == NO)
-		{
-			// NSWorkspace could not open the file, try again with the default app we've been given
-			if (defaultApp != nil)
-			{
-				rc = [[NSWorkspace sharedWorkspace] openFile:file withApplication:defaultApp];
-			}
-			else
-			{
-				NSRunAlertPanel(@"Could not open", @"No default open application set in preferences", 
-					nil, nil, nil);
-				return;
-			}
-		}
 	}
 			
-	if (rc == NO)
-	{
+	if (rc == NO) {
 		NSRunAlertPanel(@"Could not open", @"Don't know how to open file %@", nil, nil, nil, file);
 	}
 }
