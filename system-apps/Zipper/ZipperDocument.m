@@ -57,7 +57,8 @@
 	[super windowControllerDidLoadNib: controller];
 	[_tableView setDataSource: [self tableViewDataSource]];
 	[_tableView reloadData];
-	
+	[_tableView setDoubleAction: @selector(tableViewDoubleAction:)];
+
 	// allow for a little bit more space between the columns
 	size = [_tableView intercellSpacing];
 	size.width += 5.0;
