@@ -159,23 +159,37 @@
 - (IBAction)findDefaultOpenApp:(id)sender
 {
 	NSOpenPanel *openPanel;
-	NSString *gnustepRoot;
+	NSString *gnustepSystemApps;
+	NSTask *task;
+	NSPipe *pipe;
+	NSFileHandle *readHandle;
 	int rc;
 				
+	pipe = [NSPipe pipe];
+	readHandle = [pipe fileHandleForReading];
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:@"gnustep-config"];
+	[task setArguments:[NSArray arrayWithObject:@"--variable=GNUSTEP_SYSTEM_APPS"]];
+	[task setStandardOutput:pipe];
+	[task launch];
+	gnustepSystemApps = [[[NSString alloc] initWithData:[readHandle availableData]
+				encoding:NSASCIIStringEncoding] autorelease];
+	[task waitUntilExit];
+	
 	openPanel = [NSOpenPanel openPanel];
 	[openPanel setTitle:@"Find default open app"];
-	// TODO debug why file apps are still displayed as plain directories
-	[openPanel setTreatsFilePackagesAsDirectories:NO];
+	[openPanel setTreatsFilePackagesAsDirectories:YES];
 	[openPanel setCanChooseFiles:NO];
 	[openPanel setCanChooseDirectories:YES];
-
-	gnustepRoot = [[[NSProcessInfo processInfo] environment] objectForKey:@"GNUSTEP_ROOT"];
-	rc = [openPanel runModalForDirectory:gnustepRoot file:nil types:nil];
+	
+	rc = [openPanel runModalForDirectory:gnustepSystemApps file:nil types:nil];
 	if (rc == NSOKButton)
 	{
 		[_defaultOpenApp setStringValue:[[openPanel filename] lastPathComponent]];
 		[Preferences setDefaultOpenApp:[openPanel filename]];
 	}	
+	[task release];
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification

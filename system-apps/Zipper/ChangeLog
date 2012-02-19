@@ -1,6 +1,9 @@
 2012-02-19: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
-	* ZipperDocument.m setDoubleAction to open the double
-	  clicked file with its default viewer
+	* ZipperDocument.m: setDoubleAction to open the double
+	  clicked file with its default viewer, rework opening a
+	  file with the default openApp
+	* PreferencesController.m: Go to the GNUSTEP_SYSTEM_APPS
+	  directory when looking for a default open application
 
 2012-02-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
