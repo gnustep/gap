@@ -24,7 +24,7 @@
 	    "orderFrontFontPanel:",
 	    "showPrefPanel:",
 	    "showPreferences:",
-	    "view:"
+	    "tableViewDoubleAction:"
 	);
 	Super = NSObject;
     };

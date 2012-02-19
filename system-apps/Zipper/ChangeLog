@@ -5,6 +5,8 @@
 	* PreferencesController.m: Go to the GNUSTEP_SYSTEM_APPS
 	  directory when looking for a default open application,
 	  use an even easier way now.
+	* Connect the Document/View in the Main Menu to the
+	  double Click Action
 
 2012-02-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
