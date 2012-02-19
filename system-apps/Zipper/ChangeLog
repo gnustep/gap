@@ -3,7 +3,8 @@
 	  clicked file with its default viewer, rework opening a
 	  file with the default openApp
 	* PreferencesController.m: Go to the GNUSTEP_SYSTEM_APPS
-	  directory when looking for a default open application
+	  directory when looking for a default open application,
+	  use an even easier way now.
 
 2012-02-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 

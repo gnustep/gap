@@ -160,22 +160,10 @@
 {
 	NSOpenPanel *openPanel;
 	NSString *gnustepSystemApps;
-	NSTask *task;
-	NSPipe *pipe;
-	NSFileHandle *readHandle;
 	int rc;
 				
-	pipe = [NSPipe pipe];
-	readHandle = [pipe fileHandleForReading];
-	
-	task = [[NSTask alloc] init];
-	[task setLaunchPath:@"gnustep-config"];
-	[task setArguments:[NSArray arrayWithObject:@"--variable=GNUSTEP_SYSTEM_APPS"]];
-	[task setStandardOutput:pipe];
-	[task launch];
-	gnustepSystemApps = [[[NSString alloc] initWithData:[readHandle availableData]
-				encoding:NSASCIIStringEncoding] autorelease];
-	[task waitUntilExit];
+	gnustepSystemApps = [NSSearchPathForDirectoriesInDomains(NSApplicationDirectory,
+				NSSystemDomainMask, YES) objectAtIndex:0];
 	
 	openPanel = [NSOpenPanel openPanel];
 	[openPanel setTitle:@"Find default open app"];
@@ -189,7 +177,6 @@
 		[_defaultOpenApp setStringValue:[[openPanel filename] lastPathComponent]];
 		[Preferences setDefaultOpenApp:[openPanel filename]];
 	}	
-	[task release];
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification
