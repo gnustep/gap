@@ -1,3 +1,8 @@
+2012-02-20 Riccardo Mottola <rm@gnu.org>
+
+	* AppDelegate.[h,m]
+	Do not open an untitled document. Add boilerplate.
+	
 2012-02-19: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* ZipperDocument.m: setDoubleAction to open the double
 	  clicked file with its default viewer, rework opening a
