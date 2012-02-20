@@ -1,3 +1,6 @@
+2012-02-20: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GNUmakefiles of the Goodies: Add the ${GNUSTEP_INSTANCE}_INCLUDE_DIRS
+	  where necessary, and fix the ${GNUSTEP_INSTANCE}_LDFLAGS where necessary
 2012-01-28: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Frameworks/AddressView/ADPersonView.m
 	  setPerson: return if aPerson == nil
