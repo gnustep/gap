@@ -1,6 +1,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 APP_NAME = Zipper
+PACKAGE_NAME = Zipper
 VERSION = 1.4
 
 Zipper_APPLICATION_ICON = zipper.tiff
