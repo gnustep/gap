@@ -6,6 +6,7 @@
   Copyright (C) 2012 Free Software Foundation, Inc
 
   Authors: Dirk Olmes <dirk@xanthippe.ping.de>
+           Riccardo Mottola <rm@gnu.org>
 
   This application is free software; you can redistribute it and/or modify it
   under the terms of the GNU General Public License as published by the Free
