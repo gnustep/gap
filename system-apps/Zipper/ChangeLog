@@ -1,3 +1,11 @@
+2012-02-21 Riccardo Mottola <rm@gnu.org>
+
+	* FileInfo.h
+	* FileInfo.m
+	* ZipArchive.h
+	* ZipArchive.m
+	Do not autorelease and fix memory leak.
+
 2012-02-20 Riccardo Mottola <rm@gnu.org>
 
 	* AppDelegate.[h,m]

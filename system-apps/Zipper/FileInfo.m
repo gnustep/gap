@@ -6,6 +6,7 @@
   Copyright (C) 2012 Free Software Foundation, Inc
 
   Authors: Dirk Olmes <dirk@xanthippe.ping.de>
+           Riccardo Mottola <rm@gnu.org>
 
   This application is free software; you can redistribute it and/or modify it
   under the terms of the GNU General Public License as published by the Free
@@ -32,35 +33,35 @@
 
 + (FileInfo *)newWithPath:(NSString *)path date:(NSCalendarDate *)date size:(NSNumber *)size
 {
-	return [[[FileInfo alloc] initWithPath:path date:date size:size ratio:nil] autorelease];
+	return [[FileInfo alloc] initWithPath:path date:date size:size ratio:nil];
 }
 
 + (FileInfo *)newWithPath:(NSString *)path date:(NSCalendarDate *)date size:(NSNumber *)size 
 	ratio:(NSString *)ratio;
 {
-	return [[[FileInfo alloc] initWithPath:path date:date size:size ratio:ratio] autorelease];
+	return [[FileInfo alloc] initWithPath:path date:date size:size ratio:ratio];
 }
 
 - (id)initWithPath:(NSString *)path date:(NSCalendarDate *)date size:(NSNumber *)size
 	ratio:(NSString *)ratio
 {
-    [super init];
-	
-	[self extractFilenameAndPathFromString:path];
-	ASSIGN(_date, date);
-	ASSIGN(_size, size);
-	ASSIGN(_ratio, ratio);
-    return self;
+  [super init];
+  
+  [self extractFilenameAndPathFromString:path];
+  _date = [date retain];
+  _size = [size retain];
+  _ratio = [ratio retain];
+  return self;
 }
 
 - (void)dealloc
 {
-	[_path release];
-	[_filename release];
-	[_date release];
-	[_size release];
-	[_ratio release];
-	[super dealloc];
+  [_path release];
+  [_filename release];
+  [_date release];
+  [_size release];
+  [_ratio release];
+  [super dealloc];
 }
 
 - (void)extractFilenameAndPathFromString:(NSString *)string;
