@@ -140,9 +140,10 @@
 	return result;
 }
 
+/** return NSOrderedDescending if not found or error*/
 - (NSComparisonResult)comparePathAscending:(id)other
 {
-	NSComparisonResult result = NSNotFound;
+	NSComparisonResult result = NSOrderedDescending;
 	
 	if ([other isKindOfClass:[FileInfo class]])
 	{
@@ -169,7 +170,7 @@
 	[NSException raise:@"CannotCompareException" 
 		format:@"cannot compare a FileInfo instance with an instance of %@", [other class]];
 	// this code is never reached, just shut up the compiler
-	return NSNotFound;
+	return NSOrderedDescending;
 }
 
 - (NSComparisonResult)comparePathDescending:(id)other
@@ -187,7 +188,7 @@
 	[NSException raise:@"CannotCompareException" 
 		format:@"cannot compare a FileInfo instance with an instance of %@", [other class]];
 	// this code is never reached, just shut up the compiler
-	return NSNotFound;
+	return NSOrderedDescending;
 }
 
 - (NSComparisonResult)compareSizeDescending:(id)other
@@ -206,7 +207,7 @@
 	[NSException raise:@"CannotCompareException" 
 		format:@"cannot compare a FileInfo instance with an instance of %@", [other class]];
 	// this code is never reached, just shut up the compiler
-	return NSNotFound;	
+	return NSOrderedDescending;	
 }
 
 - (NSComparisonResult)compareFilenameDescending:(id)other
@@ -224,7 +225,7 @@
 	[NSException raise:@"CannotCompareException" 
 		format:@"cannot compare a FileInfo instance with an instance of %@", [other class]];
 	// this code is never reached, just shut up the compiler
-	return NSNotFound;
+	return NSOrderedDescending;
 }
 
 - (NSComparisonResult)compareDateDescending:(id)other
@@ -242,7 +243,7 @@
 	[NSException raise:@"CannotCompareException" 
 		format:@"cannot compare a FileInfo instance with an instance of %@", [other class]];
 	// this code is never reached, just shut up the compiler
-	return NSNotFound;
+	return NSOrderedDescending;
 }
 
 - (NSComparisonResult)compareRatioDescending:(id)other;
