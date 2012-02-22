@@ -116,8 +116,8 @@ static NSMutableDictionary *_fileExtMappings = nil;
     [super init];
     _path = [path retain];
     _elements = nil;
-	_sortOrder = NSOrderedAscending;
-	_sortAttribute = NSNotFound;
+    _sortOrder = NSOrderedAscending;
+    _sortAttribute = NSNotFound;
     return self;
 }
 
