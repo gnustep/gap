@@ -1,3 +1,9 @@
+2012-02-22 Riccardo Mottola <rm@gnu.org>
+
+	* FileInfo.m
+	* ZipperDocument.m
+	Do not use NSNotFound but NSOrderedDescending
+
 2012-02-22 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* ZipperDocument.m prevent starting the default open
