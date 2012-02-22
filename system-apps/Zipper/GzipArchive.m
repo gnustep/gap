@@ -48,10 +48,8 @@
 - (int)expandFiles:(NSArray *)files withPathInfo:(BOOL)usePathInfo toPath:(NSString *)path
 {
 	NSArray *arguments;
-	NSString *filename;
 	NSString *destPath;
 	
-	filename = [[self path] lastPathComponent];
 	destPath = [path stringByAppendingPathComponent:[self path]];
 	
 	// make sure the full path underneath the temp dir exists

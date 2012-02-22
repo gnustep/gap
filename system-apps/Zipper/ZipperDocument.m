@@ -432,10 +432,8 @@
 
 - (void)openFile:(NSString *)file withDefaultApp:(NSString *)defaultApp;
 {
-	NSString *extension;
 	int rc;
 	
-	extension = [file pathExtension];
 	// this sux: if the file does not have an extension, NSWorkspace does not know how to 
 	// handle it. Handling of files should be based on file's contents instead of its 
 	// extension, like the unix command 'file' does.
