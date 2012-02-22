@@ -4,6 +4,9 @@
 	* ZipperDocument.[h,m]
 	Do not leak the preferences controller.
 
+	* Archive.[h,m]
+	Correct types.
+
 2012-02-22 Riccardo Mottola <rm@gnu.org>
 
 	* PreferencesController.m

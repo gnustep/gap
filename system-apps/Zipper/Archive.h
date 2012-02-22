@@ -24,22 +24,22 @@
 
 @class NSString, FileInfo, NSArray;
 
-enum
+typedef enum
 {
 	SortByPath = 1,
 	SortBySize = 2,
 	SortByFilename = 4,
 	SortByDate = 8,
 	SortByRatio = 16
-};
+} SortByOptions;
 
 @interface Archive : NSObject
 {
   @private
     NSArray *_elements;
     NSString *_path;
-    int _sortAttribute;
-    NSComparisonResult _sortOrder;
+    NSComparisonResult _sortAttribute;
+    SortByOptions _sortOrder;
 }
 
 + (Archive *)newWithPath:(NSString *)path;
