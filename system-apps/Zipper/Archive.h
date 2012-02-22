@@ -38,8 +38,8 @@ typedef enum
   @private
     NSArray *_elements;
     NSString *_path;
-    NSComparisonResult _sortAttribute;
-    SortByOptions _sortOrder;
+    SortByOptions _sortAttribute;
+    NSComparisonResult _sortOrder;
 }
 
 + (Archive *)newWithPath:(NSString *)path;
