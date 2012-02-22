@@ -92,7 +92,13 @@
 //------------------------------------------------------------------------------
 - (void)showPreferences:(id)sender
 {
-	[[[PreferencesController alloc] init] showPreferencesPanel];
+  PreferencesController *prefController;
+
+  prefController = [[PreferencesController alloc] init];
+
+  [prefController showPreferencesPanel];
+
+  [prefController release];
 }
 	
 @end
