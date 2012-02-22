@@ -329,6 +329,10 @@
 	NSString *tempDir;
 	FileInfo *info;
 	
+  	if ([_tableView clickedRow] == -1)
+    	{
+      		return;
+    	}
 	// collect all files to extract
 	filesToExtract = [NSMutableArray array];
 	enumerator = [_tableView selectedRowEnumerator];
