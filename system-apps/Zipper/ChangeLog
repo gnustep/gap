@@ -1,6 +1,8 @@
 2012-02-22 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* PreferencesController.m Add -dealloc method
+	* NSFileManager+Custom.m, ZipperDocument.m, GzipArchive.m
+	  get rid of set but unused variables
 
 2012-02-22 Riccardo Mottola <rm@gnu.org>
 

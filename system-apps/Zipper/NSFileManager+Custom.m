@@ -23,9 +23,8 @@
     while (([pathScanner isAtEnd] == NO) && (found == NO))
     {
 		NSString *directory = nil;
-		BOOL isScanned;
       
-		isScanned = [pathScanner scanUpToString:@":" intoString:&directory];
+		[pathScanner scanUpToString:@":" intoString:&directory];
 		[pathScanner scanString:@":" intoString:NULL];
 		fullPath = [directory stringByAppendingPathComponent:aFilename];
 		found = [self fileExistsAtPath:fullPath];
