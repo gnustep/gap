@@ -71,6 +71,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+        [_panel release];
+        [_archiveClass release];
+        [super dealloc];
+}
+
 /**
  * runs the Preferences Panel in a modal event loop
  */
