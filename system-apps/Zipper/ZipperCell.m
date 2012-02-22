@@ -16,9 +16,9 @@
  */
 - (void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {
- 	if (_textfieldcell_draws_background)
+ 	if ([self drawsBackground])
 	{
-		[_background_color set];
+		[[self backgroundColor] set];
 		NSRectFill ([self drawingRectForBounds: cellFrame]);
 	}
 	if (![controlView window])
@@ -30,7 +30,7 @@
 
 	//FIXME: Check if this is also neccessary for images,
 	// Add spacing between border and inside 
-	if (_cell.is_bordered || _cell.is_bezeled)
+	if ([self isBordered] || [self isBezeled])
 	{
 		cellFrame.origin.x += 3;
 		cellFrame.size.width -= 6;
@@ -38,12 +38,12 @@
 		cellFrame.size.height -= 2;
 	}
 
-	if (_cell_image)
+	if ([self image])
 	{
 		NSSize size;
 		NSPoint position;
 
-		size = [_cell_image size];
+		size = [[self image] size];
 		position.x = 0.;
 		position.y = MAX(NSMidY(cellFrame) - (size.height/2.),0.);
 		/*
@@ -53,7 +53,7 @@
 		 */
 		if ([controlView isFlipped])
 			position.y += size.height;
-		[_cell_image compositeToPoint: position operation: NSCompositeSourceOver];
+		[[self image] compositeToPoint: position operation: NSCompositeSourceOver];
 
 		cellFrame.origin.x += size.width+3;
 		cellFrame.size.width -= (size.width+3);
@@ -61,7 +61,7 @@
 
 	[self _drawAttributedText: [self attributedStringValue] inFrame: cellFrame];
 
-	if (_cell.shows_first_responder)
+	if ([self showsFirstResponder])
 	{
 		NSDottedFrameRect(cellFrame);
 	}

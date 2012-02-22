@@ -1,3 +1,8 @@
+2012-02-23 Riccardo Mottola <rm@gnu.org>
+
+	* ZIpperCell.m
+	Remove access to private class variables
+
 2012-02-22 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* PreferencesController.m Add -dealloc method
