@@ -181,8 +181,7 @@
 
 - (void)windowWillClose:(NSNotification *)aNotification
 {
-	// make sure we are released. Sine (usually) nobody holds a reference to us
-	[self release];
+
 }
 
 @end

@@ -1,3 +1,8 @@
+2012-02-22 Riccardo Mottola <rm@gnu.org>
+
+	* PreferencesController.m
+	Do not release on window closure to prevent crash.
+
 2012-02-21 Riccardo Mottola <rm@gnu.org>
 
 	* FileInfo.h
