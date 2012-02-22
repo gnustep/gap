@@ -117,15 +117,15 @@ static NSMutableDictionary *_fileExtMappings = nil;
     _path = [path retain];
     _elements = nil;
     _sortOrder = NSOrderedAscending;
-    _sortAttribute = NSNotFound;
+    _sortAttribute = SortByPath;
     return self;
 }
 
 - (void)dealloc
 {
-    [_path release];
-    [_elements release];
-	[super dealloc];
+  [_path release];
+  [_elements release];
+  [super dealloc];
 }
 
 - (NSString *)path
@@ -306,7 +306,7 @@ static NSMutableDictionary *_fileExtMappings = nil;
 {
 	[self methodIsAbstract:_cmd];
 	// shut up the compiler
-	return NSNotFound;
+	return 0;
 }
 
 - (NSData *)dataByRunningUnachiverWithArguments:(NSArray *)args
