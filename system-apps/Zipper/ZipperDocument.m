@@ -123,6 +123,7 @@
 		// bring up the prefs panel
 		prefsController = [[PreferencesController alloc] init];
 		[prefsController showPreferencesPanel];
+		[prefsController release];
 		
 		// invoke recursively as the unarchiver should have been set in prefs by now
 		if ([archiveClass executableDoesExist])

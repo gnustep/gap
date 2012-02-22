@@ -1,5 +1,11 @@
 2012-02-22 Riccardo Mottola <rm@gnu.org>
 
+	* PreferencesController.[h,m]
+	* ZipperDocument.[h,m]
+	Do not leak the preferences controller.
+
+2012-02-22 Riccardo Mottola <rm@gnu.org>
+
 	* PreferencesController.m
 	Do not release on window closure to prevent crash.
 
