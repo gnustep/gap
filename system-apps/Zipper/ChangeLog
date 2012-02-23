@@ -1,7 +1,10 @@
 2012-02-23 Riccardo Mottola <rm@gnu.org>
 
-	* ZIpperCell.m
+	* ZipperCell.m
 	Remove access to private class variables
+
+	* PreferencesController.m
+	Do not create a modal session and let NSApp manage it.
 
 2012-02-22 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
