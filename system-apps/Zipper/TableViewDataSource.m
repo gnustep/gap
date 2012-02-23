@@ -24,7 +24,6 @@
    forTableColumn: (NSTableColumn *)tableColumn row: (int)row
 {
 	NSImage *image;
-	NSSize size;
 	FileInfo *fileInfo = [_archive elementAtIndex: row];
 	NSString *identifier = [tableColumn identifier];
 
@@ -32,7 +31,6 @@
 	{
 		image = [[NSWorkspace sharedWorkspace] iconForFile: [fileInfo filename]];
 
-		size = [image size];
 		[image setScalesWhenResized: YES];
 		[image setSize: NSMakeSize(16,16)];
 		[aCell setImage: image];
