@@ -1,3 +1,7 @@
+2012-02-23 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* TableViewDataSource.m, get rid of unused variable
+
 2012-02-23 Riccardo Mottola <rm@gnu.org>
 
 	* ZipperCell.m
