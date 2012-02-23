@@ -31,6 +31,8 @@
 #import "NSFileManager+Custom.h"
 #import "FileInfo.h"
 
+#define X_INVALID_COL_ID	@"InvalidColumIdentiferException"
+
 @interface ZipperDocument (PrivateAPI)
 - (BOOL)openArchiveWithPath:(NSString *)path;
 - (void)addRatioColumn;
@@ -478,6 +480,45 @@
 	}
 		
 	return YES;
+}
+
+//------------------------------------------------------------------------------
+// NSTableView delegate methods
+//------------------------------------------------------------------------------
+- (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
+{
+  NSString *identifier = [tableColumn identifier];
+  NSImage *image;
+
+  if ([identifier isEqual:COL_ID_NAME])
+    [_archive sortByFilename];
+  else if ([identifier isEqual:COL_ID_DATE])
+    [_archive sortByDate];
+  else if ([identifier isEqual:COL_ID_SIZE])
+    [_archive sortBySize];
+  else if ([identifier isEqual:COL_ID_PATH])
+    [_archive sortByPath];
+  else if ([identifier isEqual:COL_ID_RATIO])
+    [_archive sortByRatio];
+  else
+    [NSException raise:X_INVALID_COL_ID format:@"invalid column identifier '%@'", identifier];
+  
+  // reflect the current sort ordering in tableColumn's indicator image
+  image = nil;
+  if ([_archive sortOrder] == NSOrderedAscending)
+    {
+      // TODO gnustep-gui does not have an image  preregistered under that name
+      image = [NSImage imageNamed:@"NSAscendingSortIndicator"];
+    }
+  else
+    {
+      // TODO gnustep-gui does not have an image  preregistered under that name
+      image = [NSImage imageNamed:@"NSDescendingSortIndicator"];
+    }
+  // TODO this isn't implemented in gnustep-gui
+  [tableView setIndicatorImage:image inTableColumn:tableColumn];
+  
+  [tableView reloadData];
 }
 
 @end
