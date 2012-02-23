@@ -83,11 +83,10 @@
  */
 - (void)showPreferencesPanel
 {
-	NSModalSession modalSession = [NSApp beginModalSessionForWindow:_panel];
-	[NSApp runModalForWindow:_panel];
-	// control flow returns to the panel ... until 'ok' or 'cancel' is pressed
-	[NSApp endModalSession:modalSession];
-	[_panel close];
+  [NSApp runModalForWindow:_panel];
+  // control flow returns to the panel ... until 'ok' or 'cancel' is pressed
+
+  [_panel close];
 }
 
 - (IBAction)okPressed:(id)sender
@@ -206,11 +205,6 @@
 		[_defaultOpenApp setStringValue:[[openPanel filename] lastPathComponent]];
 		[Preferences setDefaultOpenApp:[openPanel filename]];
 	}	
-}
-
-- (void)windowWillClose:(NSNotification *)aNotification
-{
-
 }
 
 @end
