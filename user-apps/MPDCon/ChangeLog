@@ -1,3 +1,6 @@
+2012-02-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PreferencesController.m: fix handling of the password field
+
 2012-02-17 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* AppController.m, CollectionController.m, MPDController.h, MPDController.m
 	  After updating the Collection, update the Collection Interface
