@@ -469,7 +469,7 @@
 		rc = NSRunAlertPanel(@"Nonexisting destination", 
 			@"The directory '%@' does not exist, do you want to create it?", @"Yes", @"No", nil,
 			path);
-		if (rc == NS_ALERTDEFAULT)
+		if (rc == NSAlertDefaultReturn)
 		{
 			[[NSFileManager defaultManager] createDirectoryPathWithParents:path];
 		}
