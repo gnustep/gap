@@ -1,3 +1,8 @@
+2012-02-23 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* NSObject+Custom.[m|h]
+	  make the return not volatile of method methodIsAbstract:
+
 2012-02-23 Riccardo Mottola <rm@gnu.org>
 
 	* TableViewDataSource.m

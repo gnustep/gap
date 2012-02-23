@@ -3,7 +3,7 @@
 
 @implementation NSObject (Custom)
 
-- (volatile void)methodIsAbstract:(SEL)selector;
+- (void)methodIsAbstract:(SEL)selector;
 {
     [NSException raise:NSInternalInconsistencyException 
 		format:@"*** No concrete implementation for selector '%@' in class %@. Abstract definition must be overriden.", 

@@ -2,6 +2,6 @@
 
 @interface NSObject (Custom)
 
-- (volatile void)methodIsAbstract:(SEL)selector;
+- (void)methodIsAbstract:(SEL)selector;
 
 @end
