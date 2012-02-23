@@ -120,7 +120,12 @@
   [mpdHost setStringValue: [defaults objectForKey: @"mpdHost"]?[defaults objectForKey: @"mpdHost"]:@"localhost"];
   [mpdPort setStringValue: [defaults objectForKey: @"mpdPort"]?[defaults objectForKey: @"mpdPort"]:@"6600"];
   [mpdTimeout setStringValue: [defaults objectForKey: @"mpdTimeout"]?[defaults objectForKey: @"mpdTimeout"]:@"1500"];
-  [password setStringValue: [defaults objectForKey: @"mpdPassword"]];
+  if ([defaults objectForKey: @"mpdPassword"] != nil) 
+  {
+    [password setStringValue: [defaults objectForKey: @"mpdPassword"]];
+  } else {
+    [defaults removeObjectForKey: @"mpdPassword"];
+  }
   [scrollSwitch setState: [defaults integerForKey: @"enableScroll"]];
   [usePassword setState: [defaults integerForKey: @"usePassword"]];
   colorData = [defaults dataForKey: @"displayColor"];
