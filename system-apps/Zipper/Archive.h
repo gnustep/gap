@@ -22,6 +22,10 @@
 
 #import <Foundation/NSObject.h>
 
+#ifdef __MACTYPES__
+#define FileInfo FinderFileInfo
+#endif
+
 @class NSString, FileInfo, NSArray;
 
 typedef enum

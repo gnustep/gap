@@ -1,3 +1,11 @@
+2012-02-25 Riccardo Mottola <rm@gnu.org>
+
+	* Archive.[h,m]
+	* Preferences.[h,m]
+	* TableViewDataSource.[h,m]
+	* ZipperDocument.m
+	Remove ASSIGN macro, add boiler plate
+
 2012-02-23 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* NSObject+Custom.[m|h]

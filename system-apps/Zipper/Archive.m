@@ -147,7 +147,9 @@ static NSMutableDictionary *_fileExtMappings = nil;
 
 - (void)setElements:(NSArray *)elements
 {
-	ASSIGN(_elements, elements);
+  [_elements release];
+  _elements = elements;
+  [_elements retain];
 }
 
 - (int)elementCount
