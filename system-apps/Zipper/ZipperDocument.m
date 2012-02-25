@@ -427,9 +427,12 @@
 
 - (void)setArchive:(Archive *)archive
 {
-	ASSIGN(_archive, archive);
-	// make sure the data source knows the archive as well
-	[_tableViewDataSource setArchive:archive];
+  [_archive release];
+  _archive = archive;
+  [_archive retain];
+
+  // make sure the data source knows the archive as well
+  [_tableViewDataSource setArchive:archive];
 }
 
 - (void)openFile:(NSString *)file withDefaultApp:(NSString *)defaultApp;
