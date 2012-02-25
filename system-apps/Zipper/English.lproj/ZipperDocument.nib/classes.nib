@@ -1,0 +1,12 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = ZipperDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"_tableView" = NSTableView; "_tableViewDataSource" = TableViewDataSource; }; 
+            SUPERCLASS = NSDocument; 
+        }
+    ); 
+    IBVersion = 1; 
+}
