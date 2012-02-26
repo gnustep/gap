@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		853301A114F3063400ED9766 /* GzipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018214F3063400ED9766 /* GzipArchive.m */; };
+		853301A214F3063400ED9766 /* LhaArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018414F3063400ED9766 /* LhaArchive.m */; };
+		853301A314F3063400ED9766 /* LzxArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018614F3063400ED9766 /* LzxArchive.m */; };
+		853301A414F3063400ED9766 /* NSArray+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018814F3063400ED9766 /* NSArray+Custom.m */; };
+		853301A514F3063400ED9766 /* NSFileManager+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018A14F3063400ED9766 /* NSFileManager+Custom.m */; };
+		853301A614F3063400ED9766 /* NSObject+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018C14F3063400ED9766 /* NSObject+Custom.m */; };
+		853301A714F3063400ED9766 /* NSString+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533018E14F3063400ED9766 /* NSString+Custom.m */; };
+		853301A814F3063400ED9766 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019014F3063400ED9766 /* Preferences.m */; };
+		853301A914F3063400ED9766 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019214F3063400ED9766 /* PreferencesController.m */; };
+		853301AA14F3063400ED9766 /* RarArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019414F3063400ED9766 /* RarArchive.m */; };
+		853301AB14F3063400ED9766 /* SevenZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019614F3063400ED9766 /* SevenZipArchive.m */; };
+		853301AC14F3063400ED9766 /* TableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019814F3063400ED9766 /* TableViewDataSource.m */; };
+		853301AD14F3063400ED9766 /* TarArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019A14F3063400ED9766 /* TarArchive.m */; };
+		853301AE14F3063400ED9766 /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019C14F3063400ED9766 /* ZipArchive.m */; };
+		853301AF14F3063400ED9766 /* ZipperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533019E14F3063400ED9766 /* ZipperCell.m */; };
+		853301B014F3063400ED9766 /* ZipperDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 853301A014F3063400ED9766 /* ZipperDocument.m */; };
+		85D2D21D14E9A2D300203A28 /* FileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D21C14E9A2D300203A28 /* FileInfo.m */; };
+		85D2D22414E9A2E000203A28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D21F14E9A2E000203A28 /* AppDelegate.m */; };
+		85D2D22514E9A2E000203A28 /* Archive.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D22114E9A2E000203A28 /* Archive.m */; };
+		85D2D22614E9A2E000203A28 /* ArchiveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D22314E9A2E000203A28 /* ArchiveService.m */; };
+		85F3D4BF14F8E1D20065F37B /* ZipperDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85F3D4BD14F8E1D20065F37B /* ZipperDocument.nib */; };
+		85F3D4C214F8E1E10065F37B /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85F3D4C014F8E1E10065F37B /* Preferences.nib */; };
+		85F3D4D814F8FF7F0065F37B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85F3D4D714F8FF7F0065F37B /* Cocoa.framework */; };
+		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
+		8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */; };
+		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
+		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2A37F4B7FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8533018114F3063400ED9766 /* GzipArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GzipArchive.h; sourceTree = "<group>"; };
+		8533018214F3063400ED9766 /* GzipArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GzipArchive.m; sourceTree = "<group>"; };
+		8533018314F3063400ED9766 /* LhaArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LhaArchive.h; sourceTree = "<group>"; };
+		8533018414F3063400ED9766 /* LhaArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LhaArchive.m; sourceTree = "<group>"; };
+		8533018514F3063400ED9766 /* LzxArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LzxArchive.h; sourceTree = "<group>"; };
+		8533018614F3063400ED9766 /* LzxArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LzxArchive.m; sourceTree = "<group>"; };
+		8533018714F3063400ED9766 /* NSArray+Custom.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NSArray+Custom.h"; sourceTree = "<group>"; };
+		8533018814F3063400ED9766 /* NSArray+Custom.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Custom.m"; sourceTree = "<group>"; };
+		8533018914F3063400ED9766 /* NSFileManager+Custom.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Custom.h"; sourceTree = "<group>"; };
+		8533018A14F3063400ED9766 /* NSFileManager+Custom.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Custom.m"; sourceTree = "<group>"; };
+		8533018B14F3063400ED9766 /* NSObject+Custom.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NSObject+Custom.h"; sourceTree = "<group>"; };
+		8533018C14F3063400ED9766 /* NSObject+Custom.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Custom.m"; sourceTree = "<group>"; };
+		8533018D14F3063400ED9766 /* NSString+Custom.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NSString+Custom.h"; sourceTree = "<group>"; };
+		8533018E14F3063400ED9766 /* NSString+Custom.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSString+Custom.m"; sourceTree = "<group>"; };
+		8533018F14F3063400ED9766 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		8533019014F3063400ED9766 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		8533019114F3063400ED9766 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		8533019214F3063400ED9766 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+		8533019314F3063400ED9766 /* RarArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RarArchive.h; sourceTree = "<group>"; };
+		8533019414F3063400ED9766 /* RarArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = RarArchive.m; sourceTree = "<group>"; };
+		8533019514F3063400ED9766 /* SevenZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SevenZipArchive.h; sourceTree = "<group>"; };
+		8533019614F3063400ED9766 /* SevenZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SevenZipArchive.m; sourceTree = "<group>"; };
+		8533019714F3063400ED9766 /* TableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TableViewDataSource.h; sourceTree = "<group>"; };
+		8533019814F3063400ED9766 /* TableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TableViewDataSource.m; sourceTree = "<group>"; };
+		8533019914F3063400ED9766 /* TarArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TarArchive.h; sourceTree = "<group>"; };
+		8533019A14F3063400ED9766 /* TarArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TarArchive.m; sourceTree = "<group>"; };
+		8533019B14F3063400ED9766 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		8533019C14F3063400ED9766 /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
+		8533019D14F3063400ED9766 /* ZipperCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ZipperCell.h; sourceTree = "<group>"; };
+		8533019E14F3063400ED9766 /* ZipperCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ZipperCell.m; sourceTree = "<group>"; };
+		8533019F14F3063400ED9766 /* ZipperDocument.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ZipperDocument.h; sourceTree = "<group>"; };
+		853301A014F3063400ED9766 /* ZipperDocument.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ZipperDocument.m; sourceTree = "<group>"; };
+		85D2D21B14E9A2D300203A28 /* FileInfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileInfo.h; sourceTree = "<group>"; };
+		85D2D21C14E9A2D300203A28 /* FileInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FileInfo.m; sourceTree = "<group>"; };
+		85D2D21E14E9A2E000203A28 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		85D2D21F14E9A2E000203A28 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		85D2D22014E9A2E000203A28 /* Archive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Archive.h; sourceTree = "<group>"; };
+		85D2D22114E9A2E000203A28 /* Archive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Archive.m; sourceTree = "<group>"; };
+		85D2D22214E9A2E000203A28 /* ArchiveService.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArchiveService.h; sourceTree = "<group>"; };
+		85D2D22314E9A2E000203A28 /* ArchiveService.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArchiveService.m; sourceTree = "<group>"; };
+		85F3D4BE14F8E1D20065F37B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ZipperDocument.nib; sourceTree = "<group>"; };
+		85F3D4C114F8E1E10065F37B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
+		85F3D4D714F8FF7F0065F37B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D15AC370486D014006FF6A4 /* Zipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D15AC330486D014006FF6A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85F3D4D814F8FF7F0065F37B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85F3D4D714F8FF7F0065F37B /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
+				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB0FE9D524F11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D15AC370486D014006FF6A4 /* Zipper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A37F4AAFDCFA73011CA2CEA /* Zipper */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4ABFDCFA73011CA2CEA /* Classes */,
+				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
+				2A37F4B8FDCFA73011CA2CEA /* Resources */,
+				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
+				19C28FB0FE9D524F11CA2CBB /* Products */,
+			);
+			name = Zipper;
+			sourceTree = "<group>";
+		};
+		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8533018114F3063400ED9766 /* GzipArchive.h */,
+				8533018214F3063400ED9766 /* GzipArchive.m */,
+				8533018314F3063400ED9766 /* LhaArchive.h */,
+				8533018414F3063400ED9766 /* LhaArchive.m */,
+				8533018514F3063400ED9766 /* LzxArchive.h */,
+				8533018614F3063400ED9766 /* LzxArchive.m */,
+				8533018714F3063400ED9766 /* NSArray+Custom.h */,
+				8533018814F3063400ED9766 /* NSArray+Custom.m */,
+				8533018914F3063400ED9766 /* NSFileManager+Custom.h */,
+				8533018A14F3063400ED9766 /* NSFileManager+Custom.m */,
+				8533018B14F3063400ED9766 /* NSObject+Custom.h */,
+				8533018C14F3063400ED9766 /* NSObject+Custom.m */,
+				8533018D14F3063400ED9766 /* NSString+Custom.h */,
+				8533018E14F3063400ED9766 /* NSString+Custom.m */,
+				8533018F14F3063400ED9766 /* Preferences.h */,
+				8533019014F3063400ED9766 /* Preferences.m */,
+				8533019114F3063400ED9766 /* PreferencesController.h */,
+				8533019214F3063400ED9766 /* PreferencesController.m */,
+				8533019314F3063400ED9766 /* RarArchive.h */,
+				8533019414F3063400ED9766 /* RarArchive.m */,
+				8533019514F3063400ED9766 /* SevenZipArchive.h */,
+				8533019614F3063400ED9766 /* SevenZipArchive.m */,
+				8533019714F3063400ED9766 /* TableViewDataSource.h */,
+				8533019814F3063400ED9766 /* TableViewDataSource.m */,
+				8533019914F3063400ED9766 /* TarArchive.h */,
+				8533019A14F3063400ED9766 /* TarArchive.m */,
+				8533019B14F3063400ED9766 /* ZipArchive.h */,
+				8533019C14F3063400ED9766 /* ZipArchive.m */,
+				8533019D14F3063400ED9766 /* ZipperCell.h */,
+				8533019E14F3063400ED9766 /* ZipperCell.m */,
+				8533019F14F3063400ED9766 /* ZipperDocument.h */,
+				853301A014F3063400ED9766 /* ZipperDocument.m */,
+				85D2D21E14E9A2E000203A28 /* AppDelegate.h */,
+				85D2D21F14E9A2E000203A28 /* AppDelegate.m */,
+				85D2D22014E9A2E000203A28 /* Archive.h */,
+				85D2D22114E9A2E000203A28 /* Archive.m */,
+				85D2D22214E9A2E000203A28 /* ArchiveService.h */,
+				85D2D22314E9A2E000203A28 /* ArchiveService.m */,
+				85D2D21B14E9A2D300203A28 /* FileInfo.h */,
+				85D2D21C14E9A2D300203A28 /* FileInfo.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4B0FDCFA73011CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85F3D4C014F8E1E10065F37B /* Preferences.nib */,
+				85F3D4BD14F8E1D20065F37B /* ZipperDocument.nib */,
+				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
+				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
+				8D15AC360486D014006FF6A4 /* Info.plist */,
+				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
+				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D15AC270486D014006FF6A4 /* Zipper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Zipper" */;
+			buildPhases = (
+				8D15AC2B0486D014006FF6A4 /* Resources */,
+				8D15AC300486D014006FF6A4 /* Sources */,
+				8D15AC330486D014006FF6A4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zipper;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Zipper;
+			productReference = 8D15AC370486D014006FF6A4 /* Zipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Zipper-T" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Zipper */;
+			projectDirPath = "";
+			targets = (
+				8D15AC270486D014006FF6A4 /* Zipper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D15AC2B0486D014006FF6A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
+				8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */,
+				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+				85F3D4BF14F8E1D20065F37B /* ZipperDocument.nib in Resources */,
+				85F3D4C214F8E1E10065F37B /* Preferences.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D15AC300486D014006FF6A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D15AC320486D014006FF6A4 /* main.m in Sources */,
+				85D2D21D14E9A2D300203A28 /* FileInfo.m in Sources */,
+				85D2D22414E9A2E000203A28 /* AppDelegate.m in Sources */,
+				85D2D22514E9A2E000203A28 /* Archive.m in Sources */,
+				85D2D22614E9A2E000203A28 /* ArchiveService.m in Sources */,
+				853301A114F3063400ED9766 /* GzipArchive.m in Sources */,
+				853301A214F3063400ED9766 /* LhaArchive.m in Sources */,
+				853301A314F3063400ED9766 /* LzxArchive.m in Sources */,
+				853301A414F3063400ED9766 /* NSArray+Custom.m in Sources */,
+				853301A514F3063400ED9766 /* NSFileManager+Custom.m in Sources */,
+				853301A614F3063400ED9766 /* NSObject+Custom.m in Sources */,
+				853301A714F3063400ED9766 /* NSString+Custom.m in Sources */,
+				853301A814F3063400ED9766 /* Preferences.m in Sources */,
+				853301A914F3063400ED9766 /* PreferencesController.m in Sources */,
+				853301AA14F3063400ED9766 /* RarArchive.m in Sources */,
+				853301AB14F3063400ED9766 /* SevenZipArchive.m in Sources */,
+				853301AC14F3063400ED9766 /* TableViewDataSource.m in Sources */,
+				853301AD14F3063400ED9766 /* TarArchive.m in Sources */,
+				853301AE14F3063400ED9766 /* ZipArchive.m in Sources */,
+				853301AF14F3063400ED9766 /* ZipperCell.m in Sources */,
+				853301B014F3063400ED9766 /* ZipperDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1660FE840EACC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A37F4B7FDCFA73011CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A37F4BAFDCFA73011CA2CEA /* English */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		85F3D4BD14F8E1D20065F37B /* ZipperDocument.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85F3D4BE14F8E1D20065F37B /* English */,
+			);
+			name = ZipperDocument.nib;
+			sourceTree = "<group>";
+		};
+		85F3D4C014F8E1E10065F37B /* Preferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85F3D4C114F8E1E10065F37B /* English */,
+			);
+			name = Preferences.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C05733C808A9546B00998B17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Zipper;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		C05733C908A9546B00998B17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Zipper;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C05733CC08A9546B00998B17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		C05733CD08A9546B00998B17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Zipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C05733C808A9546B00998B17 /* Debug */,
+				C05733C908A9546B00998B17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Zipper-T" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C05733CC08A9546B00998B17 /* Debug */,
+				C05733CD08A9546B00998B17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+}
