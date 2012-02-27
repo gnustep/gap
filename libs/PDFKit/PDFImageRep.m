@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *               2010-2012 Free Software Foundation
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,20 +17,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <PDFKit/PDFImageRep.h>
-#include <PDFKit/PDFFontManager.h>
-
-#include <Foundation/NSString.h>
-#include <Foundation/NSException.h>
-#include <AppKit/NSBezierPath.h>
-#include <AppKit/NSColor.h>
-#include <AppKit/NSGraphicsContext.h>
-#include <AppKit/NSFont.h>
-#include <AppKit/NSBitmapImageRep.h>
-#include <AppKit/NSGraphics.h>
-#include <AppKit/DPSOperators.h>
-
 #include <stdlib.h>
+
+#import <Foundation/NSString.h>
+#import <Foundation/NSException.h>
+#import <AppKit/NSBezierPath.h>
+#import <AppKit/NSColor.h>
+#import <AppKit/NSGraphicsContext.h>
+#import <AppKit/NSFont.h>
+#import <AppKit/NSBitmapImageRep.h>
+#import <AppKit/NSGraphics.h>
+#import <AppKit/DPSOperators.h>
+
+#import <PDFKit/PDFImageRep.h>
+#import <PDFKit/PDFFontManager.h>
+
 
 #include "XPDFBridge.h"
 
