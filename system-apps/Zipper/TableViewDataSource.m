@@ -31,7 +31,7 @@
 
 - (void)setArchive:(Archive *)archive;
 {
-  [_archive releas];
+  [_archive release];
   _archive = archive;
   [_archive retain];
 }
