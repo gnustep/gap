@@ -1,3 +1,8 @@
+2012-02-27 Riccardo Mottola <rm@gnu.org
+
+	* PDFImageRep.m:
+	Subclass -draw (suggested by Wric W. to make cario work again)
+
 2011-08-30 Sebastian Reitenbach
 
 	* xpdf/bridge/CountingRef.h
@@ -8,7 +13,7 @@
 
 	* version 0.9.
 	* PDFKit is now based on the xpdf-3.01 sources.
-  
+
 2004-11-06 18:52  stefankst
 
 	* xpdf/xpdf-3.00/xpdf/XRef.cc: applied xpdf patch to fix various
