@@ -1,3 +1,25 @@
+/*
+
+  ZipperCell.m
+  Zipper
+
+  Copyright (C) 2012 Free Software Foundation, Inc
+
+  Authors: Dirk Olmes <dirk@xanthippe.ping.de>
+           Riccardo Mottola <rm@gnu.org>
+
+  This application is free software; you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details
+
+ */
+
 #import <AppKit/AppKit.h>
 #import "ZipperCell.h"
 
@@ -6,7 +28,6 @@
 - (id) init
 {
 	self = [super initTextCell: @""];
-//	[self setAlignment: NSLeftTextAlignment];
 	return self;
 }
 
@@ -16,55 +37,70 @@
  */
 - (void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {
- 	if ([self drawsBackground])
-	{
-		[[self backgroundColor] set];
-		NSRectFill ([self drawingRectForBounds: cellFrame]);
-	}
-	if (![controlView window])
-	{
-		return;
-	}
+  NSAttributedString *attStrVal;
 
-	cellFrame = [self drawingRectForBounds: cellFrame];
+  if ([self drawsBackground])
+    {
+      [[self backgroundColor] set];
+      NSRectFill ([self drawingRectForBounds: cellFrame]);
+    }
+  if (![controlView window])
+    {
+      return;
+    }
 
-	//FIXME: Check if this is also neccessary for images,
-	// Add spacing between border and inside 
-	if ([self isBordered] || [self isBezeled])
-	{
-		cellFrame.origin.x += 3;
-		cellFrame.size.width -= 6;
-		cellFrame.origin.y += 1;
-		cellFrame.size.height -= 2;
-	}
+  cellFrame = [self drawingRectForBounds: cellFrame];
 
-	if ([self image])
-	{
-		NSSize size;
-		NSPoint position;
+  //FIXME: Check if this is also neccessary for images,
+  // Add spacing between border and inside 
+  if ([self isBordered] || [self isBezeled])
+    {
+      cellFrame.origin.x += 3;
+      cellFrame.size.width -= 6;
+      cellFrame.origin.y += 1;
+      cellFrame.size.height -= 2;
+    }
 
-		size = [[self image] size];
-		position.x = 0.;
-		position.y = MAX(NSMidY(cellFrame) - (size.height/2.),0.);
-		/*
-		 * Images are always drawn with their bottom-left corner
-		 * at the origin so we must adjust the position to take
-		 * account of a flipped view.
-		 */
-		if ([controlView isFlipped])
-			position.y += size.height;
-		[[self image] compositeToPoint: position operation: NSCompositeSourceOver];
+  if ([self image])
+    {
+      NSSize size;
+      NSPoint position;
 
-		cellFrame.origin.x += size.width+3;
-		cellFrame.size.width -= (size.width+3);
-	}
+      size = [[self image] size];
+      position.x = 0.;
+      position.y = MAX(NSMidY(cellFrame) - (size.height/2.),0.);
+      /*
+       * Images are always drawn with their bottom-left corner
+       * at the origin so we must adjust the position to take
+       * account of a flipped view.
+       */
+      if ([controlView isFlipped])
+	position.y += size.height;
+      [[self image] compositeToPoint: position operation: NSCompositeSourceOver];
 
-	[self _drawAttributedText: [self attributedStringValue] inFrame: cellFrame];
+      cellFrame.origin.x += size.width+3;
+      cellFrame.size.width -= (size.width+3);
+    }
 
-	if ([self showsFirstResponder])
-	{
-		NSDottedFrameRect(cellFrame);
-	}
+  attStrVal = [self attributedStringValue];
+
+  if (attStrVal)
+    {
+      NSRect aRect;
+      NSSize stringSize;
+
+      stringSize = [attStrVal size];
+      aRect = cellFrame;
+      aRect.origin.y = NSMidY (aRect) - stringSize.height/2; 
+      aRect.size.height = stringSize.height;
+
+      [attStrVal drawInRect: cellFrame];
+    }
+
+  if ([self showsFirstResponder])
+    {
+      NSDottedFrameRect(cellFrame);
+    }
 }
 
 @end
