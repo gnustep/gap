@@ -1,3 +1,8 @@
+2012-02-29 Riccardo Mottola <rm@gnu.org>
+
+	* ZipperCell.[h,m]
+	Do not use private drawAttributedText. Add boilerplate.
+
 2012-02-25 Riccardo Mottola <rm@gnu.org>
 
 	* Archive.[h,m]
@@ -17,7 +22,7 @@
 	* ZipperDocument.m
 	Move table delegate method to ZipperDocument, now the
 	real table delegate.
-	
+
 2012-02-23 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* TableViewDataSource.m, get rid of unused variable
