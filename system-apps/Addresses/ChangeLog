@@ -3,6 +3,9 @@
 	* Goodies/adgnumailconverter/GNUmakefile
 	Use TOOL_LIBS instead of LDFLAGS to link the framework library.
 
+	* Goodies/VCFViewer/GNUmakefile
+	Use TOOL and GUI libs to link frameworks
+
 2012-02-20: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GNUmakefiles of the Goodies: Add the ${GNUSTEP_INSTANCE}_INCLUDE_DIRS
 	  where necessary, and fix the ${GNUSTEP_INSTANCE}_LDFLAGS where necessary
