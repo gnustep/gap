@@ -4,8 +4,8 @@ TOOL_NAME=adtool
 
 adtool_OBJC_FILES=addresstool.m
 adtool_OBJCFLAGS=-I../Frameworks -Wall
-adtool_LDFLAGS += -L../../Frameworks/Addresses/Addresses.framework \
-        -lAddresses
+adtool_LDFLAGS += -L../../Frameworks/Addresses/Addresses.framework
+adtool_TOOL_LIBS += -lAddresses
 adtool_INCLUDE_DIRS = -I../../Frameworks
 
 -include GNUmakefile.preamble

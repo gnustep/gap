@@ -1,6 +1,8 @@
 2012-03-07 Riccardo Mottola <rm@gnu.org>
 
 	* Goodies/adgnumailconverter/GNUmakefile
+	* Goodies/adserver/GNUmakefile
+	* Goodies/adtool/GNUmakefile
 	Use TOOL_LIBS instead of LDFLAGS to link the framework library.
 
 	* Goodies/VCFViewer/GNUmakefile
