@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.m
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2012 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -312,12 +312,18 @@
     }
 
   num = [NSNumber numberWithInt: stroked];
-  [dict setObject: num forKey: @"stroked"];
-  [dict setObject: strokeColor forKey: @"strokecolor"];
+  if (strokeColor != nil)
+    {
+      [dict setObject: num forKey: @"stroked"];
+      [dict setObject: strokeColor forKey: @"strokecolor"];
+    }
 
   num = [NSNumber numberWithInt: filled];
-  [dict setObject: num forKey: @"filled"];
-  [dict setObject: fillColor forKey: @"fillcolor"];
+  if (fillColor != nil)
+    {
+      [dict setObject: num forKey: @"filled"];
+      [dict setObject: fillColor forKey: @"fillcolor"];
+    }
 
   return dict;
 }
