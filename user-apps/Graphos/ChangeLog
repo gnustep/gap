@@ -1,3 +1,8 @@
+2012-03-08 Riccardo Mottola <rm@gnu.org>
+
+	* GRPropsEditor.m:
+	Do not encode nil color.
+
 2011-12-22 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocument.[h,m]:
