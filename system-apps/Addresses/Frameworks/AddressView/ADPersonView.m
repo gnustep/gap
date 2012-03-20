@@ -6,12 +6,12 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.6 $
-// $Date: 2012/01/29 16:09:09 $
+// $Revision: 1.7 $
+// $Date: 2012/03/20 12:03:16 $
 
-#include "ADPersonView.h"
-#include "ADPersonPropertyView.h"
-#include "ADImageView.h"
+#import "ADPersonView.h"
+#import "ADPersonPropertyView.h"
+#import "ADImageView.h"
 
 NSString * const ADPersonNameChangedNotification = @"ADPersonNameChangedNotification";
 
@@ -315,8 +315,10 @@ static NSString *__defaultCountryCode = nil;
   if(_fillsSuperview)
     {
       sizeNeeded = [[self superview] frame].size;
-      sizeNeeded.width -= 10;
-      sizeNeeded.height -= 15;
+      if (sizeNeeded.width > 10)
+	sizeNeeded.width -= 10;
+      if (sizeNeeded.height > 15)
+	sizeNeeded.height -= 15;
     }
   else
     sizeNeeded = NSMakeSize(0, 0);
