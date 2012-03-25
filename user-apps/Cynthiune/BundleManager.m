@@ -101,9 +101,8 @@ static NSNotificationCenter *nc = nil;
   NSBundle *bundle;
 
   files = [[fileManager directoryContentsAtPath: path] objectEnumerator];
-  file = [files nextObject];
 
-  while (file)
+  while ((file = [files nextObject]) != nil)
     {
       bundlePath = [path stringByAppendingPathComponent: file];
       bundle = [NSBundle bundleWithPath: bundlePath];
@@ -115,7 +114,6 @@ static NSNotificationCenter *nc = nil;
               object: bundle];
           [bundle load];
         }
-      file = [files nextObject];
     }
 }
 
@@ -128,11 +126,9 @@ static NSNotificationCenter *nc = nil;
   dictionary = [notification userInfo];
   classNames = [[dictionary objectForKey: NSLoadedClasses] objectEnumerator];
 
-  className = [classNames nextObject];
-  while (className)
+  while ((className = [classNames nextObject]) != nil)
     {
       [self _registerClass: NSClassFromString (className)];
-      className = [classNames nextObject];
     }
 
   [nc removeObserver: self
@@ -146,13 +142,11 @@ static NSNotificationCenter *nc = nil;
   NSString *path;
 
   paths = [NSStandardLibraryPaths () objectEnumerator];
-  path = [paths nextObject];
-  while (path)
+  while ((path = [paths nextObject]) != nil)
     {
       [self loadBundlesForPath:
-              [path stringByAppendingPathComponent: @"Cynthiune"]
+              [path stringByAppendingPathComponent: @"Bundles/Cynthiune"]
             withFileManager: fileManager];
-      path = [paths nextObject];
     }
 }
 
@@ -172,13 +166,11 @@ static NSNotificationCenter *nc = nil;
   allFiles = [fileManager directoryContentsAtPath: extBundlesDir];
   files = [allFiles objectEnumerator];
 
-  file = [files nextObject];
-  while (file)
+  while ((file = [files nextObject]) != nil)
     {
       [self loadBundlesForPath:
               [extBundlesDir stringByAppendingPathComponent: file]
             withFileManager: fileManager];
-      file = [files nextObject];
     }
 }
 

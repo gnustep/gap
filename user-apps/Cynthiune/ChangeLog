@@ -1,3 +1,9 @@
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* BundleManager.m make it find Cynthiunes bundles, and simplify
+	  some while loops
+	* Bundles/*/GNUmakefile install bundles in right location
+	* Bundles/*/GNUmakefile.preamble do not link against mcheck when
+	  debug flag is set
 2012-03-25  Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Initial Import to GAP CVS
 2006-03-31  Wolfgang Sourdeau  <Wolfgang@Contre.COM>

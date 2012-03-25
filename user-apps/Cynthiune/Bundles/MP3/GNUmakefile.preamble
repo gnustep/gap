@@ -47,7 +47,3 @@ endif
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(MAD_CFLAGS) $(ID3Tag_CFLAGS) $(TAGLIB_CFLAGS)
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
-
-ifeq ($(debug), yes)
-ADDITIONAL_LDFLAGS += -lmcheck
-endif
