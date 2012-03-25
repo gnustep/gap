@@ -98,6 +98,10 @@ ifneq (yes,$(disable-oss))
 BUNDLES += OSS
 endif
 
+ifneq (yes,$(disable-sndio))
+BUNDLES += Sndio
+endif
+
 ifneq (yes,$(disable-esound))
 BUNDLES += Esound
 endif

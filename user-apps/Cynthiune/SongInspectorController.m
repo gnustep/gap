@@ -34,7 +34,11 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSThread.h>
 
+#ifdef __OpenBSD__
+#import <musicbrainz3/mb_c.h>
+#else
 #import <musicbrainz/mb_c.h>
+#endif
 
 #import <Cynthiune/Format.h>
 #import <Cynthiune/NSViewExtensions.h>
@@ -322,7 +326,9 @@ FreeQis (char *qis[])
 
 - (char *) _generateTrmId
 {
-  id <Format> stream;
+
+return NULL; 
+/*  id <Format> stream;
   trm_t trmGen;
   int size;
   char sig[17];
@@ -351,6 +357,7 @@ FreeQis (char *qis[])
     trmId = NULL;
 
   return trmId;
+*/
 }
 
 - (void) updateField: (NSTextField *) field
@@ -418,6 +425,7 @@ FreeQis (char *qis[])
                                    selector: @selector (_updateFieldsWithTrackInfos:)];
 }
 
+/* 
 - (NSDictionary *) readMB: (musicbrainz_t) mb
                     track: (int) track
 {
@@ -429,56 +437,60 @@ FreeQis (char *qis[])
   trackInfos = [NSMutableDictionary new];
   [trackInfos autorelease];
 
-  mb_Select1 (mb, MBS_SelectTrack, track);
-  if (mb_GetResultData (mb, MBE_TrackGetTrackName, cString, 100))
-    {
-      string = [NSString stringWithUTF8String: cString];
-      [trackInfos setObject: string forKey: @"title"];
-    }
-
-  if (mb_GetResultData (mb, MBE_TrackGetArtistName, cString, 100))
-    {
-      string = [NSString stringWithUTF8String: cString];
-      [trackInfos setObject: string forKey: @"artist"];
-    }
-
-  if (mb_GetResultData (mb, MBE_TrackGetTrackNum, cString, 100))
-    {
-      string = [NSString stringWithUTF8String: cString];
-      [trackInfos setObject: string forKey: @"trackNumber"];
-    }
-
-  if (mb_Select (mb, MBS_SelectTrackAlbum))
-    {
-      if (mb_GetResultData (mb, MBE_AlbumGetAlbumName, cString, 100))
-        {
-          string = [NSString stringWithUTF8String: cString];
-          [trackInfos setObject: string forKey: @"album"];
-        }
-#ifdef MBE_AlbumGetNumReleaseDates
-      releases = mb_GetResultInt (mb, MBE_AlbumGetNumReleaseDates);
-      if (releases)
-        {
-          mb_Select1 (mb, MBS_SelectReleaseDate, 1);
-          if (mb_GetResultData (mb, MBE_ReleaseGetDate, cString, 100))
-            {
-              *(cString + 4) = 0;
-              string = [NSString stringWithUTF8String: cString];
-              [trackInfos setObject: string forKey: @"year"];
-            }
-          mb_Select (mb, MBS_Back);
-        }
-#endif
-
-      mb_Select (mb, MBS_Back);
-    }
-
-  mb_Select (mb, MBS_Rewind);
-
-  return trackInfos;
+return trackInfos;
 }
+*/
 
-- (void) _parseMB: (musicbrainz_t) mb
+//  mb_Select1 (mb, MBS_SelectTrack, track);
+//  if (mb_GetResultData (mb, MBE_TrackGetTrackName, cString, 100))
+//    {
+//      string = [NSString stringWithUTF8String: cString];
+//      [trackInfos setObject: string forKey: @"title"];
+//    }
+
+//  if (mb_GetResultData (mb, MBE_TrackGetArtistName, cString, 100))
+//    {
+//      string = [NSString stringWithUTF8String: cString];
+//      [trackInfos setObject: string forKey: @"artist"];
+//    }
+
+//  if (mb_GetResultData (mb, MBE_TrackGetTrackNum, cString, 100))
+//    {
+//      string = [NSString stringWithUTF8String: cString];
+//      [trackInfos setObject: string forKey: @"trackNumber"];
+//    }
+
+//  if (mb_Select (mb, MBS_SelectTrackAlbum))
+//    {
+//      if (mb_GetResultData (mb, MBE_AlbumGetAlbumName, cString, 100))
+//        {
+//          string = [NSString stringWithUTF8String: cString];
+//          [trackInfos setObject: string forKey: @"album"];
+//        }
+//#ifdef MBE_AlbumGetNumReleaseDates
+//      releases = mb_GetResultInt (mb, MBE_AlbumGetNumReleaseDates);
+//      if (releases)
+//        {
+//          mb_Select1 (mb, MBS_SelectReleaseDate, 1);
+//          if (mb_GetResultData (mb, MBE_ReleaseGetDate, cString, 100))
+//            {
+//              *(cString + 4) = 0;
+//              string = [NSString stringWithUTF8String: cString];
+//              [trackInfos setObject: string forKey: @"year"];
+//            }
+//          mb_Select (mb, MBS_Back);
+//        }
+//#endif
+
+//      mb_Select (mb, MBS_Back);
+//    }
+
+//  mb_Select (mb, MBS_Rewind);
+
+//  return trackInfos;
+//}
+
+/* - (void) _parseMB: (musicbrainz_t) mb
 {
   int count, results;
   NSMutableArray *allTrackInfos;
@@ -494,9 +506,13 @@ FreeQis (char *qis[])
         withObject: allTrackInfos
         waitUntilDone: YES];
 }
+*/
 
 - (void) lookupThread
 {
+
+return;
+/*
   NSAutoreleasePool *pool;
   char *trmId;
   musicbrainz_t mb;
@@ -542,6 +558,7 @@ FreeQis (char *qis[])
         waitUntilDone: NO];
 
   [pool release];
+*/
 }
 
 - (void) mbLookup: (id)sender

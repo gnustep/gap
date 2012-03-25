@@ -25,13 +25,9 @@ ifeq ($(local-build), yes)
 ADDITIONAL_CPPFLAGS += -DLOCALBUILD=1
 endif
 
-ADDITIONAL_GUI_LIBS += -L/MingW/bin -lmusicbrainz
-
-ifneq (mingw32, $(GNUSTEP_TARGET_OS))
-ifeq ($(debug), yes)
-ADDITIONAL_LDFLAGS += -lmcheck
-endif
-endif
+#ADDITIONAL_GUI_LIBS += -L/MingW/bin -lmusicbrainz3
+#ADDITIONAL_GUI_LIBS += -L/MingW/bin -lmusicbrainz3
+ADDITIONAL_GUI_LIBS += -L/MingW/bin
 
 ifeq ($(enable-goom), yes)
 ADDITIONAL_CPPFLAGS += -DGOOM=1
