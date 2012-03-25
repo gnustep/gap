@@ -31,7 +31,7 @@
 
 @interface FLAC : NSObject <CynthiuneBundle, Format>
 {
-  FLAC__FileDecoder *fileDecoder;
+  FLAC__StreamDecoder *fileDecoder;
 
   unsigned int bitsPerSample;
   unsigned int duration;
