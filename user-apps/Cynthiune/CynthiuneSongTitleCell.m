@@ -51,6 +51,7 @@
 {
   if (songPointer)
     [songPointer release];
+  [super dealloc];
 }
 
 - (void) setShowImage: (BOOL) showImage

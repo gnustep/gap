@@ -1,4 +1,9 @@
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/Esound/EsoundPreference.m include NSDictionary.h
+	* CynthiuneController.m do not include nonexisting header
+	* CynthiuneAnimatedImageView.m, CynthiunePauseButton.m,
+	  CynthiuneSongTitleCell.m add [super dealloc]
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Frameworks/Cynthiune/GNUmakefile.preamble diable mcheck
 	* Frameworks/Cynthiune/NSCellExtensions.m include NSFoundation.h
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>

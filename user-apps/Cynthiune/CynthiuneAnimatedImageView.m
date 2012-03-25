@@ -51,6 +51,7 @@
   if (animationTimer)
     [animationTimer release];
   [frames release];
+  [super dealloc];
 }
 
 - (void) addFramesFromImagenames: (NSString *) firstImagename, ...
