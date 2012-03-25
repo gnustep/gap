@@ -96,7 +96,7 @@ int _aSort(id string1, id string2, void *context);
   
   int i = 0;
   
-  while (songNumber = [songEnum nextObject]) 
+  while ((songNumber = [songEnum nextObject]) != nil) 
     {
       [[MPDController sharedMPDController] 
 	addTrack: [[allSongs objectAtIndex: [songNumber intValue]] getPath]];

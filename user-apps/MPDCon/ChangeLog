@@ -1,3 +1,10 @@
+2012-03-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlaylistController.m fix warning: suggest parentheses 
+	  around assignment used as truth value
+	* MPDController.m: fix warnings about potentially uninitialized
+	  used of variables
+	* CollectionController.m: warning: suggest parentheses
+	  around assignment used as truth value
 2012-02-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PreferencesController.m: fix handling of the password field
 

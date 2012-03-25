@@ -467,7 +467,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 
   i = 0;
 
-  while (songNumber = [songEnum nextObject]) 
+  while ((songNumber = [songEnum nextObject]) != nil) 
     {
       [mpdController removeSong: [[playlist objectAtIndex: [songNumber intValue]-i] getPos]];
       i++;
