@@ -31,5 +31,5 @@ ADDITIONAL_GUI_LIBS += -L/MingW/bin
 
 ifeq ($(enable-goom), yes)
 ADDITIONAL_CPPFLAGS += -DGOOM=1
-ADDITIONAL_GUI_LIBS += /usr/local/lib/libgoom2.a
+ADDITIONAL_GUI_LIBS += $(shell pkg-config --libs libgoom2)
 endif

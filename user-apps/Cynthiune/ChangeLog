@@ -1,4 +1,6 @@
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GNUmakefile.preamble use pkg-config to find the goom libraries
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Add the Sndio Output Bundle, still work in progress
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/Esound/EsoundPreference.m include NSDictionary.h
