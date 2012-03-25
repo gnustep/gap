@@ -484,21 +484,25 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 
   formatTester = [FormatTester formatTester];
   files = [filenames objectEnumerator];
-  filename = [files nextObject];
 
-  while (filename)
+  while ((filename = [files nextObject]) != nil)
     {
       if (fileIsAReadableDirectory (filename))
-        [self _feedPlaylistWithTreeOfFilenames:
+	{
+          [self _feedPlaylistWithTreeOfFilenames:
                 [self _filteredSubtree: filename]];
+        }
       else if (fileIsAcceptable (filename))
         {
           if ([formatTester formatNumberForFile: filename] > -1)
-            [playlist addSong: [Song songWithFilename: filename]];
-          else if ([formatTester fileIsPlaylist: filename])
-            [playlist loadFromFile: filename];
+	    {
+              [playlist addSong: [Song songWithFilename: filename]];
+            }
+	  else if ([formatTester fileIsPlaylist: filename])
+	   {
+             [playlist loadFromFile: filename];
+	  }
         }
-      filename = [files nextObject];
     }
 }
 
@@ -565,6 +569,7 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 {
   NSOpenPanel *oPanel;
   NSString *openDir;
+  int result;
 
   openDir = [[NSUserDefaults standardUserDefaults]
               stringForKey: @"NSDefaultOpenDirectory"];
@@ -577,13 +582,10 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   [oPanel setDirectory: openDir];
 #endif /* GNUSTEP */
   [oPanel setDelegate: self];
-  [oPanel beginSheetForDirectory: openDir
-          file: nil
-          types: nil
-          modalForWindow: [NSApp mainWindow]
-          modalDelegate: self
-          didEndSelector: selector
-          contextInfo: nil];
+  result = [oPanel runModalForDirectory: nil
+                                   file: nil
+                                  types: nil];
+  [self _oPanelDidEnd: oPanel returnCode: result contextInfo: nil];
 }
 
 - (void) addSongs: (id) sender
