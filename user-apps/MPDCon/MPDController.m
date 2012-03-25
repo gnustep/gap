@@ -290,11 +290,11 @@ int _stringSort(id string1, id string2, void *context);
 
 - (int) getState
 {
-  int state;
+  int state = state_NOCONN;
   struct mpd_status *mpdStatus;
 
   if (! [self _checkConnection]) {
-      return state_NOCONN;
+      return state;
   }
   mpdStatus = mpd_run_status(mpdConnection);
 
@@ -325,11 +325,11 @@ int _stringSort(id string1, id string2, void *context);
 
 - (BOOL) isRandom
 {
-  BOOL random;
+  BOOL random = NO;
   struct mpd_status *mpdStatus;
 
   if (! [self _checkConnection]) {
-      return NO;
+      return random;
   }
   mpdStatus = mpd_run_status(mpdConnection);
   if (mpdStatus != NULL) {
@@ -347,11 +347,11 @@ int _stringSort(id string1, id string2, void *context);
 
 - (BOOL) isRepeat
 {
-  BOOL repeat;
+  BOOL repeat = NO;
   struct mpd_status *mpdStatus;
 
   if (! [self _checkConnection]) {
-      return NO;
+      return repeat;
   }
   mpdStatus = mpd_run_status(mpdConnection);
   if (mpdStatus != NULL) {
@@ -442,22 +442,22 @@ int _stringSort(id string1, id string2, void *context);
 - (PlaylistItem *) getCurrentSong
 {
   struct mpd_status *mpdStatus;
-  PlaylistItem *currSong;
+  PlaylistItem *currSong = nil;
 
   if (! [self _checkConnection]) {
-      return nil;
+      return currSong;
   }
 
   if (!mpd_command_list_begin(mpdConnection, true) ||
     !mpd_send_status(mpdConnection) ||
     !mpd_send_current_song(mpdConnection) ||
     !mpd_command_list_end(mpdConnection)) {
-      return nil;
+      return currSong;
   }
 
   mpdStatus = mpd_recv_status(mpdConnection);
   if (mpdStatus == NULL) {
-    return nil;
+    return currSong;
   }
 
   if(mpd_status_get_state(mpdStatus) == MPD_STATE_PLAY ||
@@ -487,18 +487,18 @@ int _stringSort(id string1, id string2, void *context);
     }
   else
     {
-      return nil;
+      return currSong;
     }
 }
 
 - (int) getCurrentSongNr
 {
-  int songNr;
+  int songNr = -1;
   struct mpd_status *mpdStatus;
 
   if (! [self _checkConnection]) 
     {
-      return -1;
+      return songNr;
     }
   
   mpdStatus = mpd_run_status(mpdConnection);
