@@ -28,9 +28,6 @@
 #import <AppKit/NSPasteboard.h>
 #import <AppKit/NSToolbar.h>
 #import <AppKit/NSWindow.h>
-#ifdef GNUSTEP
-#import <AppKit/NSWindow+Toolbar.h>
-#endif
 #import <Foundation/NSArray.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSFileManager.h>

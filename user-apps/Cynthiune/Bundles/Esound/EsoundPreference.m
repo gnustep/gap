@@ -28,6 +28,7 @@
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSUserDefaults.h>
+#import <Foundation/NSDictionary.h>
 
 #import <Cynthiune/Preference.h>
 #import <Cynthiune/utils.h>

@@ -49,6 +49,7 @@
     [primaryImage release];
   if (secondaryImage)
     [primaryImage release];
+  [super dealloc];
 }
 
 - (void) _animate
