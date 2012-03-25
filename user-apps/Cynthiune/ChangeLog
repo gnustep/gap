@@ -1,4 +1,8 @@
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* SongInspectorController.m disable LibMusicBrainz for now
+	* GNUmakefile, GNUmakefile.preamble disable mcheck, and 
+	  libmusicbrainz, and add Sndio bundle if statement
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m fix opening open Panel
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GeneralPreference.m make Sndio backend the default on OpenBSD
