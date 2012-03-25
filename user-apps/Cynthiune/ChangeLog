@@ -1,4 +1,6 @@
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlaylistController.m fix opening open Panel
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GeneralPreference.m make Sndio backend the default on OpenBSD
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/FLAC/FLAC.* update to newer FLAC API
