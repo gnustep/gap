@@ -1,4 +1,7 @@
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Frameworks/Cynthiune/GNUmakefile.preamble diable mcheck
+	* Frameworks/Cynthiune/NSCellExtensions.m include NSFoundation.h
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* SongInspectorController.m disable LibMusicBrainz for now
 	* GNUmakefile, GNUmakefile.preamble disable mcheck, and 
 	  libmusicbrainz, and add Sndio bundle if statement

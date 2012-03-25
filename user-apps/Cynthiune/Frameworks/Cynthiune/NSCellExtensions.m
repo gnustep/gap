@@ -20,6 +20,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#import <AppKit/NSAttributedString.h>
 #import <AppKit/NSStringDrawing.h>
 
 #import "NSCellExtensions.h"
