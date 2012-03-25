@@ -47,10 +47,14 @@
 #ifdef __linux__
 #define defaultOutputBundle @"OSS"
 #else
+#ifdef __OpenBSD__
+#define defaultOutputBundle @"Sndio"
+#else
 #ifdef __WIN32__
 #define defaultOutputBundle @"WaveOut"
 #else
 #define defaultOutputBundle @"Esound"
+#endif
 #endif
 #endif
 #endif

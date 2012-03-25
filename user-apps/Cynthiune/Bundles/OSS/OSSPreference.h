@@ -23,6 +23,7 @@
 #ifndef OSSPREFERENCE_H
 #define OSSPREFERENCE_H
 
+#import <Foundation/Foundation.h>
 #import <Cynthiune/Preference.h>
 
 @class NSBox;

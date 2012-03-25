@@ -32,7 +32,11 @@
 
 #import <errno.h>
 #import <sys/ioctl.h>
+#ifdef __OpenBSD__
+#import <soundcard.h>
+#else
 #import <sys/soundcard.h>
+#endif
 
 #import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/Output.h>
