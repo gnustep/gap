@@ -27,7 +27,3 @@ ADDITIONAL_INCLUDE_DIRS += -I../.. $(GTK_CFLAGS)
 ADDITIONAL_LDFLAGS += $(GTK_LIBS)
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
-
-ifeq ($(debug), yes)
-ADDITIONAL_LDFLAGS += -lmcheck
-endif

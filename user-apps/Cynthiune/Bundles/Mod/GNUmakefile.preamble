@@ -30,7 +30,3 @@ ADDITIONAL_LDFLAGS += -lmodplug -lstdc++
 endif
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
-
-ifeq ($(debug), yes)
-ADDITIONAL_LDFLAGS += -lmcheck
-endif

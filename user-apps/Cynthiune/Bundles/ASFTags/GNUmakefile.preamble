@@ -22,7 +22,3 @@
 ADDITIONAL_INCLUDE_DIRS += -I../..
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
-
-ifeq ($(debug), yes)
-ADDITIONAL_LDFLAGS += -lmcheck
-endif
