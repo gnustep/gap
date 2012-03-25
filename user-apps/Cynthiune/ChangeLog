@@ -1,4 +1,7 @@
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/FLAC/FLAC.* update to newer FLAC API
+	* Bundles/FLAC/FLACTags.m update to newer FLAC API
+2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* BundleManager.m make it find Cynthiunes bundles, and simplify
 	  some while loops
 	* Bundles/*/GNUmakefile install bundles in right location
