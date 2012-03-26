@@ -1,13 +1,11 @@
 // ADMultiValue.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2012/03/26 16:50:28 $
+
 
 #ifndef ADMULTIVALUE_H
 #define ADMULTIVALUE_H
@@ -53,11 +51,11 @@
 	     withLabel: (NSString*) label;
 - (NSString *) insertValue: (id) value
 		 withLabel: (NSString*) label
-		   atIndex: (int) index;
-- (BOOL) removeValueAndLabelAtIndex: (int) index;
-- (BOOL) replaceValueAtIndex: (int) index
+		   atIndex: (NSUInteger) index;
+- (BOOL) removeValueAndLabelAtIndex: (NSUInteger) index;
+- (BOOL) replaceValueAtIndex: (NSUInteger) index
 		   withValue: (id) value;    
-- (BOOL) replaceLabelAtIndex: (int) index
+- (BOOL) replaceLabelAtIndex: (NSUInteger) index
 		   withLabel: (NSString*) label;
 
 - (BOOL)setPrimaryIdentifier:(NSString *)identifier;
