@@ -7,14 +7,11 @@
 // 
 
 
-#ifndef ADMULTIVALUE_H
-#define ADMULTIVALUE_H
-
 /* system includes */
 #import <Foundation/Foundation.h>
 
 /* my includes */
-#include <Addresses/ADTypedefs.h>
+#import <Addresses/ADTypedefs.h>
 
 @interface ADMultiValue : NSObject <NSCopying, NSMutableCopying>
 {
@@ -66,4 +63,4 @@
 	withLabel: (NSString*) label
        identifier: (NSString*) identifier;
 @end
-#endif /* ADMULTIVALUE_H */
+
