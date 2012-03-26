@@ -1,20 +1,17 @@
 // ADPersonPropertyView.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola
 // 
 // Address View Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.5 $
-// $Date: 2012/01/29 16:09:09 $
 
 /* system includes */
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
 /* my includes */
-#include "ADPersonView.h"
-#include "ADPersonPropertyView.h"
+#import "ADPersonView.h"
+#import "ADPersonPropertyView.h"
 
 @interface NSBezierPath (ADPersonPropertyExtensions)
 + (NSBezierPath *) bezierPathWithRoundedRectInRect:(NSRect)rect
@@ -602,7 +599,7 @@ static float _globalFontSize;
 
 - (BOOL) hasEditableCells
 {
-  int i;
+  NSUInteger i;
   for(i=0; i<[_cells count]; i++)
     if([[_cells objectAtIndex: i] isEditable])
       return YES;
@@ -614,7 +611,7 @@ static float _globalFontSize;
   return [_cells count] != 0;
 }
 
-- (void) beginEditingInCellAtIndex: (int) i
+- (void) beginEditingInCellAtIndex: (NSUInteger) i
 		 countingBackwards: (BOOL) backwards
 {
   while(![[_cells objectAtIndex: i] isEditable])
@@ -635,9 +632,9 @@ static float _globalFontSize;
   [self beginEditingInCellAtIndex: [_cells count]-1 countingBackwards: YES];
 }
 
-- (int) indexOfEditableCellWithDetails: (id) details
+- (NSUInteger) indexOfEditableCellWithDetails: (id) details
 {
-  int i;
+  NSUInteger i;
 
   for(i=0; i<[_cells count]; i++)
     {
@@ -656,7 +653,9 @@ static float _globalFontSize;
 
 - (NSString*) propertyForDragWithDetails: (id) details
 {
-  NSString *identifier; NSInteger index; ADMultiValue *mv;
+  NSString *identifier;
+  NSUInteger index;
+  ADMultiValue *mv;
   id value;
 
   if(!details &&

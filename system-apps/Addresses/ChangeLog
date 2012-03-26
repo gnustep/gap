@@ -1,5 +1,14 @@
 2012-03-20 Riccardo Mottola <rm@gnu.org>
 
+	* Frameworks/AddressView/ADPersonPropertyView+Events.m
+	* Frameworks/AddressView/ADPersonPropertyView.h
+	* Frameworks/AddressView/ADPersonPropertyView.m
+	* Frameworks/Addresses/ADMultiValue.h
+	* Frameworks/Addresses/ADMultiValue.m
+	Use NSUInteger as index.
+
+2012-03-20 Riccardo Mottola <rm@gnu.org>
+
 	* Frameworks/AddressView/ADPersonView.m
 	When calculating size, take care not to generate negative sizes.
 

@@ -1,20 +1,15 @@
 // ADPersonPropertyView.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola
 // 
 // Address Book Application for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADPERSONPROPERTYVIEW_H
-#define ADPERSONPROPERTYVIEW_H
 
 /* system includes */
-#include <AppKit/AppKit.h>
-#include <Addresses/Addresses.h>
+#import <AppKit/AppKit.h>
+#import <Addresses/Addresses.h>
 
 /* my includes */
 /* (none) */
@@ -122,7 +117,7 @@ typedef enum {
 - (void) beginEditingInLastCell;
 - (void) endEditing;
 
-- (int) indexOfEditableCellWithDetails: (id) details;
+- (NSUInteger) indexOfEditableCellWithDetails: (id) details;
 
 - (NSString*) propertyForDragWithDetails: (id) details;
 - (NSImage*) imageForDraggedProperty: (NSString*) prop;
@@ -179,10 +174,9 @@ changedHeightFrom: (float) oldH
 @end
 
 @interface ADPersonPropertyView (Events)
-- (void) beginEditingInCellAtIndex: (int) i
+- (void) beginEditingInCellAtIndex: (NSUInteger) i
 		    becauseOfEvent: (NSEvent*) e;
 - (void) beginEditingInCellWithDetails: (id) details
 			becauseOfEvent: (NSEvent*) e;
 @end
 
-#endif /* ADPERSONPROPERTYVIEW_H */
