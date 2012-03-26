@@ -1,20 +1,18 @@
 // ADPersonPropertyView+Events.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola <rm@gnu.org>
 // 
 // Address View Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+
 
 /* system includes */
 /* (none) */
 
 /* my includes */
-#include "ADPersonPropertyView.h"
-#include "ADPersonView.h"
+#import "ADPersonPropertyView.h"
+#import "ADPersonView.h"
 
 @implementation ADPersonPropertyView (Events)
 - (void) mouseDown: (NSEvent*) event
@@ -52,7 +50,8 @@
   
   if([c isKindOfClass: [ADPersonActionCell class]])
     {
-      ADActionType type; NSString *ident, *label; int index;
+      ADActionType type; NSString *ident, *label;
+      NSUInteger index;
 
       type = [c actionType];
       
@@ -320,7 +319,7 @@
   [self setNeedsDisplay: YES];
 }
 
-- (void) beginEditingInCellAtIndex: (int) i
+- (void) beginEditingInCellAtIndex: (NSUInteger) i
 		    becauseOfEvent: (NSEvent*) e
 {
   id cell = [_cells objectAtIndex: i];

@@ -6,14 +6,14 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2012/01/29 16:09:09 $
+// $Revision: 1.3 $
+// $Date: 2012/03/26 16:50:28 $
 
 #ifndef ADMULTIVALUE_H
 #define ADMULTIVALUE_H
 
 /* system includes */
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
 /* my includes */
 #include <Addresses/ADTypedefs.h>
@@ -27,11 +27,11 @@
 
 - (NSUInteger) count;
 
-- (id) valueAtIndex: (int) index;
-- (NSString*) labelAtIndex: (int) index;
-- (NSString*) identifierAtIndex: (int) index;
+- (id) valueAtIndex: (NSUInteger) index;
+- (NSString*) labelAtIndex: (NSUInteger) index;
+- (NSString*) identifierAtIndex: (NSUInteger) index;
     
-- (int) indexForIdentifier: (NSString*) identifier;
+- (NSUInteger) indexForIdentifier: (NSString*) identifier;
 
 - (NSString*) primaryIdentifier;
     

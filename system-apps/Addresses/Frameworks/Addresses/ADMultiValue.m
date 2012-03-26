@@ -6,11 +6,10 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2012/01/29 16:09:09 $
+// $Revision: 1.4 $
+// $Date: 2012/03/26 16:50:28 $
 
-/* system includes */
-/* (none) */
+
 
 /* my includes */
 #include "ADMultiValue.h"
@@ -77,24 +76,24 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
   return [_arr count];
 }
 
-- (id) valueAtIndex: (int) index
+- (id) valueAtIndex: (NSUInteger) index
 {
   return [[_arr objectAtIndex: index] objectForKey: @"Value"];
 }
 
-- (NSString*) labelAtIndex: (int) index
+- (NSString*) labelAtIndex: (NSUInteger) index
 {
   return [[_arr objectAtIndex: index] objectForKey: @"Label"];
 }
 
-- (NSString*) identifierAtIndex: (int) index
+- (NSString*) identifierAtIndex: (NSUInteger) index
 {
   return [[_arr objectAtIndex: index] objectForKey: @"ID"];
 }
 
-- (int) indexForIdentifier: (NSString*) identifier
+- (NSUInteger) indexForIdentifier: (NSString*) identifier
 {
-  int i;
+  NSUInteger i;
 
   for(i=0; i<[_arr count]; i++)
     if([[[_arr objectAtIndex: i] objectForKey: @"ID"]
