@@ -1,18 +1,16 @@
 // ADMultiValue.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola
 // 
 // Address Book API for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2012/03/26 16:50:28 $
+
 
 
 
 /* my includes */
-#include "ADMultiValue.h"
+#import "ADMultiValue.h"
 
 #define IS_A(obj,cls) [obj isKindOfClass: [cls class]]
 
@@ -208,7 +206,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 
 - (NSString *) insertValue: (id) value
 		 withLabel: (NSString*) label
-		   atIndex: (int) index
+		   atIndex: (NSUInteger) index
 {
   NSString* identifier;
   NSMutableDictionary *dict;
@@ -237,20 +235,20 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
   return identifier;
 }
 
-- (BOOL) removeValueAndLabelAtIndex: (int) index
+- (BOOL) removeValueAndLabelAtIndex: (NSUInteger) index
 {
-  if(index < 0 || index >= [_arr count]) return NO;
+  if(index >= [_arr count]) return NO;
   [_arr removeObjectAtIndex: index];
 
   return YES;
 }
 
-- (BOOL) replaceValueAtIndex: (int) index
+- (BOOL) replaceValueAtIndex: (NSUInteger) index
 		   withValue: (id) value
 {
   NSMutableDictionary *dict;
 
-  if(index < 0 || index >= [_arr count]) return NO;
+  if(index >= [_arr count]) return NO;
 
   // make sure nothing mutable gets added
   if(_type == ADMultiArrayProperty &&
@@ -271,12 +269,12 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
   return YES;
 }
 
-- (BOOL) replaceLabelAtIndex: (int) index
+- (BOOL) replaceLabelAtIndex: (NSUInteger) index
 		   withLabel: (NSString*) label
 {
   NSMutableDictionary *dict;
 
-  if(index < 0 || index >= [_arr count]) return NO;
+  if(index >= [_arr count]) return NO;
   dict = [NSMutableDictionary
 	   dictionaryWithDictionary: [_arr objectAtIndex: index]];
   [dict setObject: label forKey: @"Label"];
