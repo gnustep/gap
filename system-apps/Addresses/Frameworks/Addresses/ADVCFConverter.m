@@ -1,24 +1,21 @@
 // ADVCFConverter.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.12 $
-// $Date: 2010/05/06 09:50:10 $
+
 
 /* system includes */
-/* (none) */
+#import <GNUstepBase/GSMime.h>
 
 /* my includes */
-#include "ADVCFConverter.h"
-#include "ADPerson.h"
-#include "ADGlobals.h"
-#include "ADImageLoading.h"
-#include "ADMultiValue.h"
-#include <GNUstepBase/GSMime.h>
+#import "ADVCFConverter.h"
+#import "ADPerson.h"
+#import "ADGlobals.h"
+#import "ADImageLoading.h"
+#import "ADMultiValue.h"
 
 @interface NSString(QuotedPrintable)
 - (unsigned long) hexLongValue;

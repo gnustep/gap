@@ -4,16 +4,11 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADVCFCONVERTER_H
-#define ADVCFCONVERTER_H
+
 
 /* system includes */
-#include <Addresses/ADConverter.h>
+#import <Addresses/ADConverter.h>
 
 /* my includes */
 /* (none) */
@@ -38,4 +33,3 @@
 - (NSString*) string;
 @end
 
-#endif /* ADVCFCONVERTER_H */
