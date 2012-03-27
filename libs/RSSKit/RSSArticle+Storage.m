@@ -2,6 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2010-2012 Free Software Foundation, Inc
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -107,7 +108,7 @@
 {
     if ((self = [super init]) != nil) {
 	NSArray* arr;
-	int i;
+	NSUInteger i;
 
         if (aDictionary == nil) {
             DESTROY(self);
@@ -148,7 +149,7 @@
  */
 -(NSMutableDictionary*) plistDictionary
 {
-    int i;
+    NSUInteger i;
     NSMutableDictionary* dict;
     NSMutableArray* linksArray;
     

@@ -2,6 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2010-2012 Free Software Inc.
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -35,7 +36,7 @@
  */
 -(NSMutableDictionary*) plistDictionary
 {
-    int i;
+    NSUInteger i;
     NSMutableArray* articleIndex;
     NSMutableDictionary* dict = AUTORELEASE([[NSMutableDictionary alloc] init]);
     
@@ -80,7 +81,7 @@
     if ((self = [super init]) != nil) {
         NSArray* articleIndex;
         NSMutableArray* mutArticles;
-        int i;
+        NSUInteger i;
 
         // This is just an alias (my hands hurt)
         NSDictionary* dict = plistDictionary;
