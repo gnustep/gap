@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2012  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -96,7 +96,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
 -(void) setNewArrayWithoutNotification: (NSArray*) newArray
 {
     NSMutableIndexSet* indexSet;
-    int i;
+    NSUInteger i;
 
     if ([newArray isEqual: articles]) {
         return;  // nothing changed
@@ -109,7 +109,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
     for (i=0; i<[articles count]; i++) { // for all row numbers in table
         if ([table isRowSelected: i]) {
             id article = [articles objectAtIndex: i];
-            int newIndex = [newArray indexOfObject: article];
+            NSUInteger newIndex = [newArray indexOfObject: article];
             if (newIndex != NSNotFound) {
                 [indexSet addIndex: newIndex];
             }

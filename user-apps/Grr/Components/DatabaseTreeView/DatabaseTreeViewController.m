@@ -2,7 +2,7 @@
    Grr RSS Reader
    
    Copyright (C) 2006-2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009-2010 GNUstep Application Team
+   Copyright (C) 2009-2012 GNUstep Application Team
                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
@@ -139,7 +139,7 @@ static NSImage* arrowDown = nil;
 
 -(void) databaseChanged: (NSNotification*) notif
 {
-    int index;
+    NSInteger index;
     NSAssert(outlineView != nil, @"No outline view");
     
 #ifdef OUTLINEVIEW_SELECTION_HACK
@@ -169,7 +169,7 @@ static NSImage* arrowDown = nil;
 -(void) databaseElementRequestsFocus: (NSNotification*) notif
 {
     id<DatabaseElement> databaseElement = [notif object];
-    int index;
+    NSInteger index;
     
     // First iterate through all parent elements and expand them all
     id<Category> parent = [databaseElement superElement];
@@ -192,7 +192,7 @@ static NSImage* arrowDown = nil;
  */
 -(void) redrawFeedNotification: (NSNotification*) notif
 {
-    int index;
+    NSInteger index;
     id<Feed> feed = [notif object];
     
     [self redrawFeed: feed];
@@ -217,7 +217,7 @@ static NSImage* arrowDown = nil;
         // This feed is currently shown in our outline view, reload it!
 #ifdef OUTLINEVIEW_SELECTION_HACK
         // FIXME: This strange hack tries to keep the selection. (Needed for -gui 0.11.0)
-        int index = [outlineView selectedRow];
+        NSInteger index = [outlineView selectedRow];
 #endif
         [outlineView reloadItem: feed];
 #ifdef OUTLINEVIEW_SELECTION_HACK
