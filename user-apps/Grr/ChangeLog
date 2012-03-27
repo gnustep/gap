@@ -1,3 +1,11 @@
+2012-03-28 Riccardo Mottola <rm@gnu.org>
+
+	* Components/ArticleTable/ArticleTablePlugin.m
+	* Components/DatabaseOperations/DatabaseOperations.m
+	* Components/DatabaseTreeView/DatabaseTreeViewController.m
+	* Components/SubscriptionPanel/SubscriptionPanel.m
+	Change indexes to NSInteger / NSUInteger
+
 2011-11-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* GNUmakefile.preamble
