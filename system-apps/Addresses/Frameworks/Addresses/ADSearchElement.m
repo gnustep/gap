@@ -4,17 +4,9 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/01/27 23:55:58 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADSearchElement.h"
-#include "ADMultiValue.h"
+#import "ADSearchElement.h"
+#import "ADMultiValue.h"
 
 @interface ADEnvelopeSearchElement: ADSearchElement
 {

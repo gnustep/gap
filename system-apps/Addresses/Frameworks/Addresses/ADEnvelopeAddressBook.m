@@ -1,24 +1,16 @@
 // ADEnvelopeAddressBook.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/09/25 20:15:20 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADLocalAddressBook.h"
-#include "ADEnvelopeAddressBook.h"
-#include "ADPublicAddressBook.h"
-#include "ADRecord.h"
-#include "ADPerson.h"
-#include "ADPlugin.h"
+#import "ADLocalAddressBook.h"
+#import "ADEnvelopeAddressBook.h"
+#import "ADPublicAddressBook.h"
+#import "ADRecord.h"
+#import "ADPerson.h"
+#import "ADPlugin.h"
 
 static ADEnvelopeAddressBook *_envelopeAB = nil;
 

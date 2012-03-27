@@ -4,19 +4,8 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADPLISTCONVERTER_H
-#define ADPLISTCONVERTER_H
-
-/* system includes */
-#include <Addresses/ADConverter.h>
-
-/* my includes */
-/* (none) */
+#import <Addresses/ADConverter.h>
 
 @interface ADPListConverter: NSObject<ADInputConverting>
 {
@@ -28,4 +17,3 @@
 - (ADRecord*) nextRecord;
 @end
 
-#endif /* ADPLISTCONVERTER_H */

@@ -1,4 +1,27 @@
-2012-03-20 Riccardo Mottola <rm@gnu.org>
+2012-03-27 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/Addresses/ADAddressBook.m
+	* Frameworks/Addresses/ADConverter.h
+	* Frameworks/Addresses/ADConverter.m
+	* Frameworks/Addresses/ADEnvelopeAddressBook.h
+	* Frameworks/Addresses/ADEnvelopeAddressBook.m
+	* Frameworks/Addresses/ADGroup.h
+	* Frameworks/Addresses/ADGroup.m
+	* Frameworks/Addresses/ADImageLoading.h
+	* Frameworks/Addresses/ADImageLoading.m
+	* Frameworks/Addresses/ADLocalAddressBook.h
+	* Frameworks/Addresses/ADLocalAddressBook.m
+	* Frameworks/Addresses/ADPListConverter.h
+	* Frameworks/Addresses/ADPListConverter.m
+	* Frameworks/Addresses/ADPerson.h
+	* Frameworks/Addresses/ADPerson.m
+	* Frameworks/Addresses/ADRecord.h
+	* Frameworks/Addresses/ADRecord.m
+	* Frameworks/Addresses/ADSearchElement.h
+	* Frameworks/Addresses/ADSearchElement.m
+	Use import for headers and fix warnings.
+
+2012-03-26 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/AddressView/ADPersonPropertyView+Events.m
 	* Frameworks/AddressView/ADPersonPropertyView.h

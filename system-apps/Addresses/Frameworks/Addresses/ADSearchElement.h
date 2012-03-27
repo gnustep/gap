@@ -3,23 +3,14 @@
 // \author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
-// 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADSEARCHELEMENT_H
-#define ADSEARCHELEMENT_H
+#import <Foundation/Foundation.h>
 
-/* system includes */
-#include <Foundation/Foundation.h>
-#include <Addresses/ADRecord.h>
-#include <Addresses/ADTypedefs.h>
-#include <Addresses/ADGlobals.h>
+#import <Addresses/ADRecord.h>
+#import <Addresses/ADTypedefs.h>
+#import <Addresses/ADGlobals.h>
 
-/* my includes */
-/* (none) */
+
 
 @interface ADSearchElement: NSObject
 + (ADSearchElement*) searchElementForConjunction: (ADSearchConjunction) conj
@@ -43,5 +34,3 @@
 - (BOOL) matchesValue: (id) value;
 - (BOOL) matchesRecord: (ADRecord*) record;
 @end
-
-#endif /* ADSEARCHELEMENT_H */

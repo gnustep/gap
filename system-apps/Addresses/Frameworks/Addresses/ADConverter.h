@@ -4,20 +4,10 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADCONVERTER_H
-#define ADCONVERTER_H
+#import <Foundation/Foundation.h>
 
-/* system includes */
-#include <Foundation/Foundation.h>
-#include <Addresses/ADRecord.h>
-
-/* my includes */
-/* (none) */
+#import <Addresses/ADRecord.h>
 
 @protocol ADInputConverting
 - initForInput;
@@ -57,4 +47,3 @@
 - (NSArray*) outputConvertableFileTypes;
 @end
 
-#endif /* ADCONVERTER_H */

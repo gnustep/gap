@@ -4,19 +4,9 @@
 // 
 // Address Book API for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADIMAGELOADING_H
-#define ADIMAGELOADING_H
+#import <Addresses/Addresses.h>
 
-/* system includes */
-#include <Addresses/Addresses.h>
-
-/* my includes */
-/* (none) */
 
 @protocol CImageClient<NSObject>
 - (void) consumeImageData: (NSData*) data
@@ -33,7 +23,7 @@
 @end
 
 #define NSIMAGEREP_BROKEN
-// NOTE: The following extension WILL DISAPPEAR as soon as GNUstep's
+// FIXME NOTE: The following extension WILL DISAPPEAR as soon as GNUstep's
 // NSImageRep can initWithData: for data formats other than
 // tiff. Right now, it can only initWithContentsOfFile:, so we have to
 // keep a file around.
@@ -46,5 +36,3 @@
 - (BOOL) setImageDataType: (NSString*) type;
 @end
 #endif
-
-#endif /* ADIMAGELOADING_H */
