@@ -4,16 +4,9 @@
 // 
 // Address Book Application for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2010/03/11 22:39:19 $
-
-/* system includes */
-/* (none) */
 
 /* my includes */
-#include "ADPersonPropertyView.h"
+#import "ADPersonPropertyView.h"
 
 @implementation ADPersonPropertyView (Private)
 - (ADPersonPropertyCell*) addCellWithValue: (NSString*) val

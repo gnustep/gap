@@ -4,17 +4,10 @@
 // 
 // Address View Framwork for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2010/05/04 08:14:44 $
-
-/* system includes */
-/* (none) */
 
 /* my includes */
-#include "ADImageView.h"
-#include "ADPersonView.h"
+#import "ADImageView.h"
+#import "ADPersonView.h"
 
 @implementation ADImageView
 - initWithFrame: (NSRect) frame

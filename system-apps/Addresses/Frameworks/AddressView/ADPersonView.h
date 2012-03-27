@@ -3,23 +3,12 @@
    ADPersonView.h   
    \author: Björn Giesler <giesler@ira.uka.de>
    
-   
-   
-   $Author: rmottola $
-   $Locker:  $
-   $Revision: 1.1 $
-   $Date: 2007/03/29 22:36:04 $
  */
 
-#ifndef ADPERSONVIEW_H
-#define ADPERSONVIEW_H
+#import <AppKit/AppKit.h>
+#import <Addresses/Addresses.h>
 
-/* system includes */
-#include <AppKit/AppKit.h>
-#include <Addresses/Addresses.h>
-
-/* my includes */
-#include "ADPersonPropertyView.h"
+#import "ADPersonPropertyView.h"
 
 /**
  * Posted whenever the ADFirstName or ADLastName fields are changed.
@@ -121,4 +110,3 @@ receivedDroppedPersons: (NSArray*) persons;
      willDragPerson: (ADPerson*) aPerson;
 @end
 
-#endif /* ADPERSONVIEW_H */
