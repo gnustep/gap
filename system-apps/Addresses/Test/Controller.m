@@ -1,8 +1,8 @@
 /* All Rights reserved */
 
-#include <AppKit/AppKit.h>
-#include <Addresses/Addresses.h>
-#include <AddressView/ADSinglePropertyView.h>
+#import <AppKit/AppKit.h>
+#import <Addresses/Addresses.h>
+#import <AddressView/ADSinglePropertyView.h>
 #include "Controller.h"
 
 @implementation Controller
@@ -16,7 +16,7 @@
   [propSelector selectItemWithTitle: [propView displayedProperty]];
   [propView setDelegate: self];
 
-  int index = [autoselPopup indexOfItemWithTag: [propView autoselectMode]];
+  NSUInteger index = [autoselPopup indexOfItemWithTag: [propView autoselectMode]];
   if(index != NSNotFound)
     [autoselPopup selectItemAtIndex: index];
   else
