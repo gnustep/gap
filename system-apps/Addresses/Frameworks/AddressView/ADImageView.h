@@ -4,20 +4,10 @@
 // 
 // Address View Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADIMAGEVIEW_H
-#define ADIMAGEVIEW_H
+#import <Addresses/Addresses.h>
+#import <AppKit/AppKit.h>
 
-/* system includes */
-#include <Addresses/Addresses.h>
-#include <AppKit/AppKit.h>
-
-/* my includes */
-/* (none) */
 
 @interface ADImageView: NSImageView
 {
@@ -48,5 +38,3 @@
     willDragPerson: (ADPerson*) aPerson;
 - (NSImage*) draggingImage;
 @end
-
-#endif /* ADIMAGEVIEW_H */
