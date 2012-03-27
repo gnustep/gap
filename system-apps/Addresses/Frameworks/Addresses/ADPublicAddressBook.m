@@ -1,20 +1,12 @@
 // ADPublicAddressBook.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// \Athor: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADPublicAddressBook.h"
-#include "ADRecord.h"
+#import "ADPublicAddressBook.h"
+#import "ADRecord.h"
 
 @implementation ADPublicAddressBook
 - initWithAddressBook: (ADAddressBook*) book

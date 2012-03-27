@@ -1,5 +1,17 @@
 2012-03-27 Riccardo Mottola <rm@gnu.org>
 
+	* Frameworks/Addresses/ADGlobals.h
+	* Frameworks/Addresses/ADGlobals.m
+	* Frameworks/Addresses/ADPlugin.h
+	* Frameworks/Addresses/ADPlugin.m
+	* Frameworks/Addresses/ADPublicAddressBook.h
+	* Frameworks/Addresses/ADPublicAddressBook.m
+	* Frameworks/Addresses/AddressBook.h
+	* Frameworks/Addresses/Addresses.h
+	Change from include to import.
+
+2012-03-27 Riccardo Mottola <rm@gnu.org>
+
 	* Frameworks/Addresses/ADAddressBook.m
 	* Frameworks/Addresses/ADConverter.h
 	* Frameworks/Addresses/ADConverter.m

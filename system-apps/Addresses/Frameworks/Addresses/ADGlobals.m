@@ -1,21 +1,16 @@
 // ADGlobals.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2010/05/06 09:50:10 $
 
-/* system includes */
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
-/* my includes */
-#include "ADGlobals.h"
-#include "ADAddressBook.h"
-#include "ADLocalAddressBook.h"
+
+#import "ADGlobals.h"
+#import "ADAddressBook.h"
+#import "ADLocalAddressBook.h"
 
 NSString* const ADUIDProperty = @"UID";
 NSString* const ADCreationDateProperty = @"CreationDate";

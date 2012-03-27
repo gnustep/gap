@@ -1,22 +1,12 @@
 // AddressBook.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADDRESSBOOK_H
-#define ADDRESSBOOK_H
+#import <Addresses/Addresses.h>
 
-/* system includes */
-#include <Addresses/Addresses.h>
-
-/* my includes */
-/* (none) */
 
 // main classes
 #define ABAddressBook       ADAddressBook
@@ -126,5 +116,3 @@
 #define kABDatabaseChangedExternallyNotification ADDatabaseChangedExternallyNotification
 
 #define ABLocalizedPropertyOrLabel ADLocalizedPropertyOrLabel
-
-#endif /* ADDRESSBOOK_H */
