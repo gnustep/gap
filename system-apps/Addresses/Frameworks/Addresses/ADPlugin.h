@@ -1,19 +1,11 @@
 // ADPlugin.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADAddressBook.h"
+#import "ADAddressBook.h"
 
 /** 
     This class defines the interface for address book class plugins. An

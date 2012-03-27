@@ -4,19 +4,9 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2010/05/06 09:50:10 $
 
-#ifndef CGLOBALS_H
-#define CGLOBALS_H
+#import <Foundation/NSString.h>
 
-/* system includes */
-#include <Foundation/NSString.h>
-
-/* my includes */
-/* (none) */
 
 /*
  * Properties common to all Records
@@ -143,4 +133,3 @@ extern NSString* ADUnimplementedError; // report this to author!
 
 NSArray *ADReadOnlyCopyOfRecordArray(NSArray* arr);
 
-#endif /* CGLOBALS_H */

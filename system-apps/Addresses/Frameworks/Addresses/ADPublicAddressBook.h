@@ -1,22 +1,11 @@
 // ADPublicAddressBook.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// \Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADPUBLICADDRESSBOOK_H
-#define ADPUBLICADDRESSBOOK_H
-
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADAddressBook.h"
+#import "ADAddressBook.h"
 
 @interface ADPublicAddressBook: ADAddressBook
 {
@@ -33,4 +22,3 @@
 - (ADAddressBook*) addressBookForReadWriteAccessWithAuth: (id) auth;
 @end
 
-#endif /* ADPUBLICADDRESSBOOK_H */

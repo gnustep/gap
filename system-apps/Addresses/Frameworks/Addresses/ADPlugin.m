@@ -1,19 +1,11 @@
 // ADPlugin.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/10/05 19:20:50 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADPlugin.h"
+#import "ADPlugin.h"
 
 static ADPluginManager *manager = NULL;
 
