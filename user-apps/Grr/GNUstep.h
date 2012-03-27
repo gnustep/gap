@@ -74,6 +74,13 @@ NSAutoreleasePool *(X) = [NSAutoreleasePool new]
 
 #define NSLocalizedStaticString(X, Y) X
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSInteger int
+#define NSUInteger unsigned
+#endif
+
 #endif /* GNUSTEP */
+
+
 
 #endif /* __GNUSTEP_GNUSTEP_H_INCLUDED_ */
