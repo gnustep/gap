@@ -4,20 +4,12 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2009/09/25 20:15:20 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADPListConverter.h"
-#include "ADPerson.h"
-#include "ADGroup.h"
-#include "ADLocalAddressBook.h"
-#include "ADMultiValue.h"
+#import "ADPListConverter.h"
+#import "ADPerson.h"
+#import "ADGroup.h"
+#import "ADLocalAddressBook.h"
+#import "ADMultiValue.h"
 
 @implementation ADPListConverter
 - initForInput

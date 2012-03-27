@@ -4,16 +4,8 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADImageLoading.h"
+#import "ADImageLoading.h"
 
 @implementation ADPerson (ImageAdditions)
 - (BOOL) setImageData: (NSData*) data

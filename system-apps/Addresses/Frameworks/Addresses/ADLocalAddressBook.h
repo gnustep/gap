@@ -4,20 +4,10 @@
 // 
 // Address Book Framework for GNUstep
 //
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADLOCALADDRESSBOOK_H
-#define ADLOCALADDRESSBOOK_H
+#import <Addresses/ADAddressBook.h>
+#import <Addresses/ADGroup.h>
 
-/* system includes */
-#include <Addresses/ADAddressBook.h>
-#include <Addresses/ADGroup.h>
-
-/* my includes */
-/* (none) */
 
 @interface ADLocalAddressBook: ADAddressBook
 {
@@ -54,4 +44,4 @@
 		      withFile: (NSString*) filename;
 - (NSString*) imageDataFileForPerson: (ADPerson*) person;
 @end
-#endif /* ADLOCALADDRESSBOOK_H */
+

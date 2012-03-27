@@ -4,17 +4,9 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2012/01/29 16:09:09 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADLocalAddressBook.h"
-#include "ADRecord.h"
+#import "ADLocalAddressBook.h"
+#import "ADRecord.h"
 
 static NSString *_localABDefLoc = @"~/GNUstep/Library/Addresses";
 static ADLocalAddressBook *_localAB = nil;

@@ -4,20 +4,12 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2010/05/06 09:50:10 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADAddressBook.h"
-#include "ADPerson.h"
-#include "ADGlobals.h"
-#include "ADTypedefs.h"
-#include "ADMultiValue.h"
+#import "ADAddressBook.h"
+#import "ADPerson.h"
+#import "ADGlobals.h"
+#import "ADTypedefs.h"
+#import "ADMultiValue.h"
 
 static NSMutableDictionary *_propTypes;
 static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;

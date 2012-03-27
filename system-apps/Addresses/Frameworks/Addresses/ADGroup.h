@@ -4,22 +4,12 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADGROUP_H
-#define ADGROUP_H
+#import <Addresses/ADRecord.h>
+#import <Addresses/ADPerson.h>
+#import <Addresses/ADTypedefs.h>
+#import <Addresses/ADSearchElement.h>
 
-/* system includes */
-#include <Addresses/ADRecord.h>
-#include <Addresses/ADPerson.h>
-#include <Addresses/ADTypedefs.h>
-#include <Addresses/ADSearchElement.h>
-
-/* my includes */
-/* (none) */
 
 @interface ADGroup: ADRecord
 - (NSArray*) members;
@@ -48,5 +38,3 @@
 				       value: (id) value
 				  comparison: (ADSearchComparison) comparison;
 @end
-
-#endif /* ADGROUP_H */

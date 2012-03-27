@@ -4,20 +4,12 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADGroup.h"
-#include "ADAddressBook.h"
-#include "ADTypedefs.h"
-#include "ADGlobals.h"
-#include "ADMultiValue.h"
+#import "ADGroup.h"
+#import "ADAddressBook.h"
+#import "ADTypedefs.h"
+#import "ADGlobals.h"
+#import "ADMultiValue.h"
 
 static NSMutableDictionary *_propTypes;
 #define N(x) [NSNumber numberWithInt: x]

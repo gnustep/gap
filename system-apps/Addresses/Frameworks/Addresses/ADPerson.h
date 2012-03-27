@@ -4,23 +4,11 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADPERSON_H
-#define ADPERSON_H
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-/* (none) */
-
-#include <Addresses/ADRecord.h>
-#include <Addresses/ADSearchElement.h>
-#include <Addresses/ADTypedefs.h>
+#import <Addresses/ADRecord.h>
+#import <Addresses/ADSearchElement.h>
+#import <Addresses/ADTypedefs.h>
 
 @class ADSearchElement;
 
@@ -67,5 +55,3 @@
 - (BOOL) shared;
 - (void) setShared: (BOOL) yesno;
 @end
-
-#endif /* ADPERSON_H */

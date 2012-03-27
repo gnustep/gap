@@ -4,19 +4,9 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADENVELOPEADDRESSBOOK_H
-#define ADENVELOPEADDRESSBOOK_H
+#import <Addresses/ADAddressBook.h>
 
-/* system includes */
-#include <Addresses/ADAddressBook.h>
-
-/* my includes */
-/* (none) */
 
 @interface ADEnvelopeAddressBook: ADAddressBook
 {
@@ -39,5 +29,3 @@
 - (void) setMergesAddressBooks: (BOOL) merge;
 - (BOOL) mergesAddressBooks;
 @end
-
-#endif /* ADENVELOPEADDRESSBOOK_H */

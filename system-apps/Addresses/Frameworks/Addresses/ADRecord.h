@@ -1,22 +1,13 @@
 // ADRecord.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Authors: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2011/05/18 10:21:23 $
 
-#ifndef ADRECORD_H
-#define ADRECORD_H
 
-/* system includes */
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
-/* my includes */
-/* (none) */
 
 @class ADAddressBook;
 
@@ -52,7 +43,7 @@
   \note This is a non-Apple extension; Apple's API doesn't need it as
   it knows nothing about multiple address books.
 */
-- (void) setAddressBook: (id) book;
+- (void) setAddressBook: (ADAddressBook *) book;
 @end
 
 @interface ADRecord(Convenience)
@@ -71,4 +62,4 @@
 
 - (NSDictionary*) contentDictionary;
 @end
-#endif /* ADRECORD_H */
+
