@@ -1,5 +1,5 @@
-#include <AppKit/AppKit.h>
-#include "ADSinglePropertyView.h"
+#import <AppKit/AppKit.h>
+#import "ADSinglePropertyView.h"
 
 @interface Controller: NSObject
 @end

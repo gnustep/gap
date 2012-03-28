@@ -1,23 +1,15 @@
 // ADAddressBook.h (this is -*- ObjC -*-)
 // 
-// \author: BjÅˆrn Giesler <bjoern@giesler.de>
+// Author: BjÅˆrn Giesler <bjoern@giesler.de>
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADADDRESSBOOK_H
-#define ADADDRESSBOOK_H
+#import <Foundation/Foundation.h>
 
-/* system includes */
-#include <Foundation/Foundation.h>
 
-/* my includes */
-#include <Addresses/ADTypedefs.h>
-#include <Addresses/ADGlobals.h>
+#import <Addresses/ADTypedefs.h>
+#import <Addresses/ADGlobals.h>
 
 @class ADRecord;
 @class ADPerson;
@@ -60,4 +52,3 @@
 - (NSArray*) groupsContainingRecord: (ADRecord*) record;
 - (NSDictionary*) addressBookDescription;
 @end
-#endif /* ADADDRESSBOOK_H */

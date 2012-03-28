@@ -3,21 +3,10 @@
 // \author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address View Framework for GNUstep
-// 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
 
-#ifndef ADSINGLEPROPERTYVIEW_H
-#define ADSINGLEPROPERTYVIEW_H
+#import <AppKit/AppKit.h>
+#import <Addresses/Addresses.h>
 
-/* system includes */
-#include <AppKit/AppKit.h>
-#include <Addresses/Addresses.h>
-
-/* my includes */
-/* (none) */
 
 @class ADSinglePropertyView;
 
@@ -86,5 +75,3 @@ typedef enum {
 - (ADGroup*) selectedGroup;
 - (NSArray*) selectedPeople;
 @end
-
-#endif /* ADSINGLEPROPERTYVIEW_H */
