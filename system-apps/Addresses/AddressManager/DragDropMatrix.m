@@ -1,18 +1,16 @@
 // NSMatrix+DragDrop.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Aauthor: Björn Giesler <giesler@ira.uka.de>
 // 
 // 
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:37:41 $
 
-#include <AppKit/AppKit.h>
-#include <AddressView/AddressView.h>
-#include "Controller.h"
-#include "DragDropMatrix.h"
+
+#import <AppKit/AppKit.h>
+#import <AddressView/AddressView.h>
+
+#import "Controller.h"
+#import "DragDropMatrix.h"
 
 static NSMutableArray *contactRows;
 

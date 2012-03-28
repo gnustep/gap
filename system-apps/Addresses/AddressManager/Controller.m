@@ -1,7 +1,8 @@
-#include <AppKit/AppKit.h>
-#include "AddressView/ADPersonView.h"
-#include "Controller.h"
-#include "DragDropMatrix.h"
+#import <AppKit/AppKit.h>
+
+#import "AddressView/ADPersonView.h"
+#import "Controller.h"
+#import "DragDropMatrix.h"
 
 @interface ADAddressBook (AddressManagerAdditions)
 - (ADPerson*) personWithFirstName: (NSString*) first
