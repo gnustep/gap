@@ -3,17 +3,8 @@
 // \author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address View Framework for GNUstep
-// 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.6 $
-// $Date: 2010/05/04 15:02:44 $
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-#include "ADSinglePropertyView.h"
+#import "ADSinglePropertyView.h"
 
 // redefine _(@"...") so that it looks into our bundle, not the main bundle
 #undef _

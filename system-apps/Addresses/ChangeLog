@@ -1,3 +1,11 @@
+2012-03-28 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/AddressView/ADSinglePropertyView.h
+	* Frameworks/AddressView/ADSinglePropertyView.m
+	* Frameworks/AddressView/Main.m
+	* Frameworks/Addresses/ADAddressBook.h
+	Change include to import.
+
 2012-03-27 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Addresses/ADGlobals.h
