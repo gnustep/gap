@@ -7,15 +7,14 @@
 // 
 
 
-/* system includes */
+
 #import <GNUstepBase/GSMime.h>
 
-/* my includes */
-#import "ADVCFConverter.h"
 #import "ADPerson.h"
 #import "ADGlobals.h"
 #import "ADImageLoading.h"
 #import "ADMultiValue.h"
+#import "ADVCFConverter.h"
 
 @interface NSString(QuotedPrintable)
 - (unsigned long) hexLongValue;
