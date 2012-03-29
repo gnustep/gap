@@ -192,9 +192,9 @@
   r = frame; r.origin = NSMakePoint(0, 0);
   r.size.width = (frame.size.width*3)/4;
   _ptScrollView = [[[NSScrollView alloc] initWithFrame: r] autorelease];
-  [_ptScrollView setRulersVisible: YES];
+  [_ptScrollView setRulersVisible: NO];
   [_ptScrollView setHasVerticalScroller: YES];
-  [_ptScrollView setHasHorizontalScroller: NO];
+  [_ptScrollView setHasHorizontalScroller: YES];
   [_ptScrollView setBorderType: NSBezelBorder];
   [_ptScrollView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
   [_splitView addSubview: _ptScrollView];

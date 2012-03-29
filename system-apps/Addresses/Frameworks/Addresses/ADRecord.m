@@ -6,10 +6,10 @@
 // 
 
 #import "ADAddressBook.h"
-#import "ADRecord.h"
 #import "ADGlobals.h"
 #import "ADConverter.h"
 #import "ADMultiValue.h"
+#import "ADRecord.h"
 
 @implementation ADRecord
 - init
