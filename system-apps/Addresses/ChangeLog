@@ -1,3 +1,12 @@
+2012-04-02 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/AddressView/ADPersonView.h
+	* Frameworks/Addresses/ADAddressBook.h
+	* Frameworks/Addresses/ADPublicAddressBook.h
+	* Frameworks/Addresses/ADTypedefs.h
+	* Frameworks/Addresses/ADVCFConverter.h
+	Clean up header imports
+
 2012-03-28 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/AddressView/ADSinglePropertyView.h

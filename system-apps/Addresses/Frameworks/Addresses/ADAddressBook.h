@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 #import <Addresses/ADTypedefs.h>
 #import <Addresses/ADGlobals.h>
 
