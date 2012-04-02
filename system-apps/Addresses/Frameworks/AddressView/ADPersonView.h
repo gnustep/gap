@@ -1,14 +1,14 @@
 /* This is -*- ObjC -*-)
 
    ADPersonView.h   
-   \author: Björn Giesler <giesler@ira.uka.de>
+   Author: Björn Giesler <giesler@ira.uka.de>
    
  */
 
 #import <AppKit/AppKit.h>
 #import <Addresses/Addresses.h>
 
-#import "ADPersonPropertyView.h"
+#import <AddressView/ADPersonPropertyView.h>
 
 /**
  * Posted whenever the ADFirstName or ADLastName fields are changed.

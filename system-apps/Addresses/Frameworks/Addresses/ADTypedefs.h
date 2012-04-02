@@ -1,22 +1,15 @@
 // ADTypedefs.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.1 $
-// $Date: 2007/03/29 22:36:04 $
+// $Revision: 1.2 $
+// $Date: 2012/04/02 09:56:59 $
 
-#ifndef CTYPEDEFS_H
-#define CTYPEDEFS_H
 
-/* system includes */
-/* (none) */
-
-/* my includes */
-/* (none) */
 
 #define ADMultiValueMask        0x100
 
@@ -67,5 +60,3 @@ typedef enum {
   ADScreenNameLastNameFirst = 0,
   ADScreenNameFirstNameFirst = 1
 } ADScreenNameFormat; // EXTENSION
-
-#endif /* CTYPEDEFS_H */

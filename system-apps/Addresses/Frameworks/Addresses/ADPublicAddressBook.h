@@ -1,11 +1,11 @@
 // ADPublicAddressBook.h (this is -*- ObjC -*-)
 // 
-// \Author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
 
-#import "ADAddressBook.h"
+#import <Addresses/ADAddressBook.h>
 
 @interface ADPublicAddressBook: ADAddressBook
 {
