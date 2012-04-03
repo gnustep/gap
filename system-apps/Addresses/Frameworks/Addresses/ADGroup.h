@@ -5,6 +5,9 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADGROUP_H
+#define _ADGROUP_H
+
 #import <Addresses/ADRecord.h>
 #import <Addresses/ADPerson.h>
 #import <Addresses/ADTypedefs.h>
@@ -38,3 +41,5 @@
 				       value: (id) value
 				  comparison: (ADSearchComparison) comparison;
 @end
+
+#endif

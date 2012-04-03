@@ -6,13 +6,12 @@
 // Address Book Application for GNUstep
 // 
 
+#ifndef ADPERSONPROPERTYVIEW_H_
+#define ADPERSONPROPERTYVIEW_H_
 
-/* system includes */
 #import <AppKit/AppKit.h>
 #import <Addresses/Addresses.h>
 
-/* my includes */
-/* (none) */
 
 @interface NSString(ADPersonPropertySupport)
 - (NSString*) stringByAbbreviatingToFitWidth: (int) width
@@ -180,3 +179,4 @@ changedHeightFrom: (float) oldH
 			becauseOfEvent: (NSEvent*) e;
 @end
 
+#endif
