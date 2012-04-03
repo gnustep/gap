@@ -5,6 +5,8 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADPERSON_H
+#define _ADPERSION_H
 
 #import <Addresses/ADRecord.h>
 #import <Addresses/ADSearchElement.h>
@@ -55,3 +57,5 @@
 - (BOOL) shared;
 - (void) setShared: (BOOL) yesno;
 @end
+
+#endif

@@ -6,10 +6,11 @@
 // 
 // $Author: rmottola $
 // $Locker:  $
-// $Revision: 1.2 $
-// $Date: 2012/04/02 09:56:59 $
+// $Revision: 1.3 $
+// $Date: 2012/04/03 22:49:26 $
 
-
+#ifndef _ADTYPEDEFS_H_
+#define _ADTYPEDEFS_H_
 
 #define ADMultiValueMask        0x100
 
@@ -60,3 +61,5 @@ typedef enum {
   ADScreenNameLastNameFirst = 0,
   ADScreenNameFirstNameFirst = 1
 } ADScreenNameFormat; // EXTENSION
+
+#endif

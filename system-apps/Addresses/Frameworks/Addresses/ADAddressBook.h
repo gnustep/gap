@@ -5,6 +5,9 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADADDRESSBOOK_H_
+#define _ADADDRESSBOOK_H_
+
 #import <Foundation/Foundation.h>
 
 #import <Addresses/ADTypedefs.h>
@@ -51,3 +54,5 @@
 - (NSArray*) groupsContainingRecord: (ADRecord*) record;
 - (NSDictionary*) addressBookDescription;
 @end
+
+#endif
