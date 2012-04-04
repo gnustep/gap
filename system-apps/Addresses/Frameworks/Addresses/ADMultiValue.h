@@ -6,11 +6,11 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADMULTIVALUE_H_
+#define _ADMULTIVALUE_H_
 
-/* system includes */
 #import <Foundation/Foundation.h>
 
-/* my includes */
 #import <Addresses/ADTypedefs.h>
 
 @interface ADMultiValue : NSObject <NSCopying, NSMutableCopying>
@@ -64,3 +64,4 @@
        identifier: (NSString*) identifier;
 @end
 
+#endif

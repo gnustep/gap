@@ -6,6 +6,9 @@
 // 
 
 
+#ifndef _ADRECORD_H_
+#define _ADRECORD_H_
+
 #import <Foundation/Foundation.h>
 
 
@@ -62,4 +65,6 @@
 
 - (NSDictionary*) contentDictionary;
 @end
+
+#endif
 
