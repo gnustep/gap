@@ -5,6 +5,9 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADCONVERTER_H_
+#define _ADCONVERTER_H_
+
 #import <Foundation/Foundation.h>
 
 #import <Addresses/ADRecord.h>
@@ -47,3 +50,4 @@
 - (NSArray*) outputConvertableFileTypes;
 @end
 
+#endif

@@ -5,6 +5,9 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADGLOBALS_H_
+#define _ADGLOBALS_H_
+
 #import <Foundation/NSString.h>
 
 
@@ -133,3 +136,4 @@ extern NSString* ADUnimplementedError; // report this to author!
 
 NSArray *ADReadOnlyCopyOfRecordArray(NSArray* arr);
 
+#endif

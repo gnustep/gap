@@ -6,7 +6,7 @@
 // 
 
 #ifndef _ADPERSON_H
-#define _ADPERSION_H
+#define _ADPERSON_H
 
 #import <Addresses/ADRecord.h>
 #import <Addresses/ADSearchElement.h>

@@ -5,6 +5,8 @@
 // Address Book Framework for GNUstep
 // 
 
+#ifndef _ADVCFCONVERTER_H_
+#define _ADVCFCONVERTER_H_
 
 
 #import <Addresses/ADConverter.h>
@@ -30,3 +32,4 @@
 - (NSString*) string;
 @end
 
+#endif
