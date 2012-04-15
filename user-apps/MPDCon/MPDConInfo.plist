@@ -4,7 +4,7 @@
     ApplicationName = MPDCon;
     ApplicationRelease = "1.2";
     Authors = (
-	"Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>",
+	"The GAP Team",
 	"Daniel Luederwald <das_flip@gmx.de>"
     );
     Copyright = "Copyright (C) 2012 GAP Team, 2004-06 Daniel Luederwald";

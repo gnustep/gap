@@ -1,3 +1,8 @@
+2012-04-14: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* MPDCon/MPDConInfo.plist
+	* MPDCon/MPDCon.pcproj/PC.project
+	  Make the version 1.2, and update Authors, Copyright...
+
 2012-03-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m fix warning: suggest parentheses 
 	  around assignment used as truth value
@@ -5,6 +10,7 @@
 	  used of variables
 	* CollectionController.m: warning: suggest parentheses
 	  around assignment used as truth value
+
 2012-02-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PreferencesController.m: fix handling of the password field
 
