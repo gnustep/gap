@@ -103,7 +103,7 @@
     );
     "PRINCIPAL_CLASS" = NSApplication;
     "PROJECT_AUTHORS" = (
-	"Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>",
+	"The GAP Team",
 	"Daniel Luederwald <das_flip@gmx.de>"
     );
     "PROJECT_COPYRIGHT" = "Copyright (C) 2012 GAP Team, 2004-06 Daniel Luederwald";
