@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2011 Riccardo Mottola
+   Copyright (C) 2006-2012 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -424,7 +424,7 @@
 	{
 	  NSWorkspace *ws;
 	  NSString *fileOperation;
-	  NSInteger opTag;
+	  int opTag;
 	  NSString *folder;
 	  NSString *file;
 
