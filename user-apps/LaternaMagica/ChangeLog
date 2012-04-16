@@ -1,3 +1,8 @@
+2012-04-17 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Fix wrong type.
+
 2011-08-25 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m:
