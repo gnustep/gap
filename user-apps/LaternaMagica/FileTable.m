@@ -23,7 +23,15 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <math.h>
+
 #import "FileTable.h"
+
+#ifdef __NetBSD__
+#if __NetBSD_Version__ <= 299000000
+#define lround (long)round
+#endif
+#endif
 
 
 @implementation FileTable
