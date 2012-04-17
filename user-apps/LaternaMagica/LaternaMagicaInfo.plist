@@ -7,7 +7,7 @@
     Authors = (
 	"Riccardo Mottola"
     );
-    Copyright = "Copyright (C) 2006-2011";
+    Copyright = "Copyright (C) 2006-2012";
     CopyrightDescription = "Released under GPL";
     FullVersionID = "0.4";
     NSExecutable = LaternaMagica;

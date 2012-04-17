@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.m
 
-   Copyright (C) 2006-2011 Riccardo Mottola
+   Copyright (C) 2006-2012 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -74,7 +74,7 @@
       unsigned i;
       
       /* get a rescaled random number */
-      i = (unsigned)lround(((double)random() / ULONG_MAX) * [fileNames count]);
+      i = (unsigned)lround(((double)(unsigned long)random() / RAND_MAX) * ([fileNames count]-1));
       [newNames addObject: [fileNames objectAtIndex: i]];
       [fileNames removeObjectAtIndex: i];
       [newPaths addObject: [filePaths objectAtIndex: i]];
