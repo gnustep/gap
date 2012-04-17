@@ -1,5 +1,10 @@
 2012-04-17 Riccardo Mottola <rm@gnu.org>
 
+	* FileTable.m
+	Fix random generator to work in the [0, count) range
+
+2012-04-17 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.m
 	Fix wrong type.
 
