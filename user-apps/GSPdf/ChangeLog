@@ -1,3 +1,8 @@
+2012-04-18 Riccardo Mottola <rm@gnu.org>
+
+	* GSPdf.m
+	Return NSApplicationTerminateReply and not BOOL
+
 2012-01-08 Riccardo Mottola <rm@gnu.org>
 
 	* GSPdfDocWin.h:
@@ -5,7 +10,7 @@
 
 	* GSPdfView.m:
 	Keyboard shortcuts for navigation.
-	
+
 2011-05-13 Riccardo Mottola <rm@gnu.org>
 
 	* GSPdfDocWin.m
