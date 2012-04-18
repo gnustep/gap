@@ -2,7 +2,7 @@
  *  GSPdf.m: Principal Class  
  *  of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002-2010 GNUstep Application Project
+ *  Copyright (c) 2002-2012 GNUstep Application Project
  *  
  *  Author: Riccardo Mottola
  *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
@@ -156,9 +156,9 @@ static GSPdf *gspdf = nil;
   return NO;
 }
 
-- (BOOL)applicationShouldTerminate:(NSApplication *)app 
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)app 
 {
-  int i;
+  unsigned i;
 
   for (i = 0; i < [documents count]; i++)
     {
@@ -173,7 +173,7 @@ static GSPdf *gspdf = nil;
       }
     }	
 
-  return YES;
+  return NSTerminateNow;
 }
 
 - (void)documentHasClosed:(GSPdfDocument *)doc
