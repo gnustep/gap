@@ -21,6 +21,8 @@
 				F5D00DFE097C40DD01A80101,
 				85DA40910A3B94BE00A80101,
 				85DA40920A3B94BE00A80101,
+				85D3150C153F68EE00A80101,
+				85D3150D153F68EE00A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -317,11 +319,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.3</string>
+	<string>0.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.3</string>
+	<string>0.4</string>
 	<key>NSMainNibFile</key>
 	<string>LaternaMagica</string>
 	<key>NSPrincipalClass</key>
@@ -337,6 +339,7 @@
 				F5D00DFF097C40DD01A80101,
 				85DA40930A3B94BE00A80101,
 				855F873E0F34FE6400C1D9A8,
+				85D3150E153F68EE00A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +362,7 @@
 				F5D00E00097C40DD01A80101,
 				85DA40940A3B94BE00A80101,
 				855F873F0F34FE6400C1D9A8,
+				85D3150F153F68EE00A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +464,30 @@
 			isa = PBXApplicationReference;
 			path = LaternaMagica.app;
 			refType = 3;
+		};
+		85D3150C153F68EE00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = PRScale.h;
+			refType = 4;
+		};
+		85D3150D153F68EE00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = PRScale.m;
+			refType = 4;
+		};
+		85D3150E153F68EE00A80101 = {
+			fileRef = 85D3150C153F68EE00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85D3150F153F68EE00A80101 = {
+			fileRef = 85D3150D153F68EE00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		85DA40910A3B94BE00A80101 = {
 			fileEncoding = 4;
