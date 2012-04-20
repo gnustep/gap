@@ -4,6 +4,9 @@
 	Swap order of arguments and skip empty arguments which confuse
 	BSD tar.
 
+	* FileInfo.m
+	Fix unreliable parsing of paths (filename contained in folders).
+
 2012-02-29 Riccardo Mottola <rm@gnu.org>
 
 	* ZipperCell.[h,m]
