@@ -27,6 +27,7 @@
 		85D2D22414E9A2E000203A28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D21F14E9A2E000203A28 /* AppDelegate.m */; };
 		85D2D22514E9A2E000203A28 /* Archive.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D22114E9A2E000203A28 /* Archive.m */; };
 		85D2D22614E9A2E000203A28 /* ArchiveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D2D22314E9A2E000203A28 /* ArchiveService.m */; };
+		85D812C01541E8A6004CC1BE /* Zipper.icns in Resources */ = {isa = PBXBuildFile; fileRef = 85D812BF1541E8A6004CC1BE /* Zipper.icns */; };
 		85F3D4BF14F8E1D20065F37B /* ZipperDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85F3D4BD14F8E1D20065F37B /* ZipperDocument.nib */; };
 		85F3D4C214F8E1E10065F37B /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85F3D4C014F8E1E10065F37B /* Preferences.nib */; };
 		85F3D4D814F8FF7F0065F37B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85F3D4D714F8FF7F0065F37B /* Cocoa.framework */; };
@@ -83,6 +84,7 @@
 		85D2D22114E9A2E000203A28 /* Archive.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Archive.m; sourceTree = "<group>"; };
 		85D2D22214E9A2E000203A28 /* ArchiveService.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArchiveService.h; sourceTree = "<group>"; };
 		85D2D22314E9A2E000203A28 /* ArchiveService.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArchiveService.m; sourceTree = "<group>"; };
+		85D812BF1541E8A6004CC1BE /* Zipper.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Zipper.icns; path = Resources/Zipper.icns; sourceTree = "<group>"; };
 		85F3D4BE14F8E1D20065F37B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ZipperDocument.nib; sourceTree = "<group>"; };
 		85F3D4C114F8E1E10065F37B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		85F3D4D714F8FF7F0065F37B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -197,6 +199,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				85D812BF1541E8A6004CC1BE /* Zipper.icns */,
 				85F3D4C014F8E1E10065F37B /* Preferences.nib */,
 				85F3D4BD14F8E1D20065F37B /* ZipperDocument.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
@@ -262,6 +265,7 @@
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				85F3D4BF14F8E1D20065F37B /* ZipperDocument.nib in Resources */,
 				85F3D4C214F8E1E10065F37B /* Preferences.nib in Resources */,
+				85D812C01541E8A6004CC1BE /* Zipper.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
