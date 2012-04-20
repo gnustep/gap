@@ -1,6 +1,6 @@
 /*
 
-  PrefController.m
+  PreferencesController.m
   Zipper
 
   Copyright (C) 2012 Free Software Foundation, Inc
@@ -22,6 +22,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+
 #import "PreferencesController.h"
 #import "Preferences.h"
 #import "Archive.h"
@@ -45,30 +46,51 @@
     
   // tar
   string = [Preferences tarExecutable];
+  if (!string)
+    string = @"";
   [_tarTextField setStringValue:string];
+
   // zip
   string = [Preferences zipExecutable];
+  if (!string)
+    string = @"";
   [_unzipTextField setStringValue:string];
+
   // rar
   string = [Preferences rarExecutable];
+  if (!string)
+    string = @"";
   [_rarTextField setStringValue:string];
+
   // lha
   string = [Preferences lhaExecutable];
+  if (!string)
+    string = @"";
   [_lhaTextField setStringValue:string];
+
   // lzx
   string = [Preferences lzxExecutable];
+  if (!string)
+    string = @"";
   [_lzxTextField setStringValue:string];
+
   // 7z
   string = [Preferences sevenZipExecutable];
+  if (!string)
+    string = @"";
   [_sevenZipTextField setStringValue:string];
+
   // bsd tar checkbox
   tarFlag = [Preferences isBsdTar];
   [_bsdTarButton setState:tarFlag];
+
   // default open app text field
   string = [[Preferences defaultOpenApp] lastPathComponent];
+  if (!string)
+    string = @"";
   [_defaultOpenApp setStringValue:string];
 
-    return self;
+  return self;
 }
 
 - (void)dealloc
