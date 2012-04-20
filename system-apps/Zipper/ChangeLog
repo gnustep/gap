@@ -1,5 +1,10 @@
 2012-04-20 Riccardo Mottola <rm@gnu.org>
 
+	* PreferencesController.[h,m]
+	Set textfields to empty string if the value is nil.
+
+2012-04-20 Riccardo Mottola <rm@gnu.org>
+
 	* TarArchive.m:
 	Swap order of arguments and skip empty arguments which confuse
 	BSD tar.
