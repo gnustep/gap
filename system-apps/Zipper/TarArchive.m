@@ -55,14 +55,20 @@
 
 	args = [NSMutableArray array];
 	[args addObject:@"-x"];
-	// compression method
-	[args addObject:compressionArg];
-	// destination dir
-	[args addObject:@"-C"];
-	[args addObject:path];
+
+	if (compressionArg != nil && [compressionArg length] > 0)
+	  {
+	    // compression method
+	    [args addObject:compressionArg];
+	  }
+
 	// the archive
 	[args addObject:@"-f"];
 	[args addObject:[self path]];
+
+	// destination dir
+	[args addObject:@"-C"];
+	[args addObject:path];
 	
 	if (files != nil)
 	{
