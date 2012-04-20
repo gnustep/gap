@@ -6,6 +6,9 @@
 	ZipperDocument.m
 	Define sel_isEqual replacement for old Mac runtimes.
 
+	FileInfo.m
+	Append file name to path by using the appropriate method.
+
 2012-04-20 Riccardo Mottola <rm@gnu.org>
 
 	* TarArchive.m:
