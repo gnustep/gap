@@ -111,6 +111,11 @@
   [_panel close];
 }
 
+-(void)windowWillClose:(NSNotification *)aNotification
+{
+  [NSApp stopModal];
+}
+
 - (IBAction)okPressed:(id)sender
 {
 	NSString *string;
@@ -137,7 +142,7 @@
 		[Preferences setIsBsdTar:[_bsdTarButton state]];
 		[Preferences save];
 
-		[NSApp stopModal];
+		[_panel performClose:self];
 	NS_HANDLER
 		NSRunAlertPanel(@"Error in Preferences", [localException reason], nil, nil, nil);
 	NS_ENDHANDLER
@@ -145,7 +150,7 @@
 
 - (IBAction)cancelPressed:(id)sender
 {
-  [NSApp stopModal];
+  [_panel performClose:self];
 }
 
 - (IBAction)findExecutable:(id)sender
