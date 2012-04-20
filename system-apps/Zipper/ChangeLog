@@ -1,12 +1,18 @@
+2012-04-21 Riccardo Mottola <rm@gnu.org>
+
+	* PreferencesController.m
+	send perform close and trap close and stop modal
+	(on Macintosh otherwise the close button would not stop modal)
+
 2012-04-20 Riccardo Mottola <rm@gnu.org>
 
 	* PreferencesController.[h,m]
 	Set textfields to empty string if the value is nil.
 
-	ZipperDocument.m
+	* ZipperDocument.m
 	Define sel_isEqual replacement for old Mac runtimes.
 
-	FileInfo.m
+	* FileInfo.m
 	Append file name to path by using the appropriate method.
 
 2012-04-20 Riccardo Mottola <rm@gnu.org>
