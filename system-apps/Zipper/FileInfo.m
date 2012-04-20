@@ -94,11 +94,11 @@
 
 - (NSString *)fullPath
 {
-	if ([self path] != nil)
-	{
-		return [[self path] stringByAppendingString:[self filename]];
-	}
-	return [self filename];
+  if ([self path] != nil)
+    {
+      return [[self path] stringByAppendingPathComponent:[self filename]];
+    }
+  return [self filename];
 }
 
 - (NSCalendarDate *)date
