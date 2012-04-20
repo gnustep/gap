@@ -2,7 +2,7 @@
  Project: Graphos
  Graphos.h
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2012 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -24,8 +24,12 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+
 #import "GRTools.h"
 #import "GRPropsEditor.h"
+
+/* change this if the new file format becomes incompatible */
+#define FILE_FORMAT_VERSION 0.3
 
 /**
  * tool types structure
