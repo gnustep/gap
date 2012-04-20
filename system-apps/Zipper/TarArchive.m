@@ -84,36 +84,41 @@
 
 - (NSArray *)listContents
 {
-    NSString *line;
-
-    NSMutableArray *results = [NSMutableArray array];
-    NSData *data = [self dataByRunningTar];
-    NSString *string = [[[NSString alloc] initWithData:data 
-		encoding:NSASCIIStringEncoding] autorelease];
-    NSArray *lines = [string componentsSeparatedByString:@"\n"];
-    
-    NSEnumerator *cursor = [lines objectEnumerator];
-    while ((line = [cursor nextObject]) != nil)
+  NSString *line;
+  
+  NSMutableArray *results = [NSMutableArray array];
+  NSData *data;
+  NSString *string;
+  NSArray *lines;
+  NSEnumerator *cursor;
+  
+  data = [self dataByRunningTar];
+  string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+  lines = [string componentsSeparatedByString:@"\n"];
+  [string release];
+  
+  cursor = [lines objectEnumerator];
+  while ((line = [cursor nextObject]) != nil)
     {
-		FileInfo *info;
-		
-		// BSD tar seems to add linefeed at the end of the line. strip that
-		if ([line hasSuffix:@"\r"])
-		{
-			line = [line substringToIndex:[line length] - 1];
-		}
+      FileInfo *info;
 
-		// we skip empty lines and plain directory entries
-		if (([line length] == 0) || [line hasSuffix:@"/"])
-		{
-			continue;
-		}
-		
-		info = [self fileInfoFromLine:line];
-		if (info)
-		  [results addObject:info];
+      // BSD tar seems to add linefeed at the end of the line. strip that
+      if ([line hasSuffix:@"\r"])
+	{
+	  line = [line substringToIndex:[line length] - 1];
 	}
-	return results;
+
+      // we skip empty lines and plain directory entries
+      if (([line length] == 0) || [line hasSuffix:@"/"])
+	{
+	  continue;
+	}
+      
+      info = [self fileInfoFromLine:line];
+      if (info)
+	[results addObject:info];
+    }
+  return results;
 }
 
 //------------------------------------------------------------------------------

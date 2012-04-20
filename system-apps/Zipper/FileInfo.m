@@ -66,22 +66,20 @@
 
 - (void)extractFilenameAndPathFromString:(NSString *)string;
 {
-	NSScanner *scanner;
-	NSString *path = string;
+  NSString *path = string;
 	
-	// tar files can contain symlinks that have to be handled special
-	if ([string containsString:@"->"])
-	{
-		NSScanner *scanner = [NSScanner scannerWithString:string];
-		[scanner scanUpToString:@"->" intoString:&path];
-	}
+  // tar files can contain symlinks that have to be handled special
+  if ([string containsString:@"->"])
+    {
+      NSScanner *scanner = [NSScanner scannerWithString:string];
+      [scanner scanUpToString:@"->" intoString:&path];
+    }
 
-	_filename = [[path lastPathComponent] retain];
-	// path is all that's before the filename
-	scanner = [NSScanner scannerWithString:path];
-	[scanner setCharactersToBeSkipped:nil];
-	[scanner scanUpToString:_filename intoString:&_path];
-	[_path retain];
+  _filename = [[path lastPathComponent] retain];
+  // path is all that's before the filename
+  _path = [path stringByDeletingLastPathComponent];
+
+  [_path retain];
 }
 
 - (NSString *)path
