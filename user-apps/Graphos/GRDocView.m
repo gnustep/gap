@@ -129,7 +129,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
       [objsdict setObject: [obj objectDescription] forKey: str];
     }
   [objsdict setValue:[NSNumber numberWithFloat:FILE_FORMAT_VERSION] forKey:@"Version"];
-  [objsdict setValue:objectOrder forKey:@"Ordering"];
+  [objsdict setValue:objectOrder forKey:@"Order"];
   return [NSDictionary dictionaryWithDictionary: objsdict];
 }
 
@@ -188,47 +188,105 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
       version = [versionNumber floatValue];
     NSLog(@"loading file of version: %f", version);
 
-    keys = [dict allKeys];
-    for(i = 0; i < [keys count]; i++)
+    if (version < 0.3)
       {
-        key = [keys objectAtIndex: i];
-        objdict = [dict objectForKey: key];
-        if(!objdict)
-	  return NO;
+	/* loading for files without ordering */
 
-        if([key rangeOfString: @"path"].length)
+	NSLog(@"Loading old file version, < 0.3");
+	keys = [dict allKeys];
+	for(i = 0; i < [keys count]; i++)
 	  {
-            bzPath = [[GRBezierPath alloc] initFromData: objdict
+	    key = [keys objectAtIndex: i];
+	    objdict = [dict objectForKey: key];
+	    if(!objdict)
+	      return NO;
+
+	    if([key rangeOfString: @"path"].length)
+	      {
+		bzPath = [[GRBezierPath alloc] initFromData: objdict
+						     inView: self zoomFactor: zFactor];
+		[objects addObject: bzPath];
+		[bzPath release];
+		edind = [objects count] -1;
+	      }
+	    else if([key rangeOfString: @"text"].length)
+	      {
+		gGRText = [[GRText alloc] initFromData: objdict
+						inView: self zoomFactor: zFactor];
+		[objects addObject: gGRText];
+		[gGRText release];
+	      }
+	    else if([key rangeOfString: @"box"].length)
+	      {
+		box = [[GRBox alloc] initFromData: objdict
 					   inView: self zoomFactor: zFactor];
-            [objects addObject: bzPath];
-            [bzPath release];
-            edind = [objects count] -1;
-	  } else if([key rangeOfString: @"text"].length)
-	  {
-            gGRText = [[GRText alloc] initFromData: objdict
-				      inView: self zoomFactor: zFactor];
-            [objects addObject: gGRText];
-            [gGRText release];
-	  } else if([key rangeOfString: @"box"].length)
-	  {
-            box = [[GRBox alloc] initFromData: objdict
-				 inView: self zoomFactor: zFactor];
-            [objects addObject: box];
-            [box release];
-	  } else if([key rangeOfString: @"circle"].length)
-	  {
-            circle = [[GRCircle alloc] initFromData: objdict
-                                       inView: self zoomFactor: zFactor];
-            [objects addObject: circle];
-            [circle release];
+		[objects addObject: box];
+		[box release];
+	      }
+	    else if([key rangeOfString: @"circle"].length)
+	      {
+		circle = [[GRCircle alloc] initFromData: objdict
+						 inView: self zoomFactor: zFactor];
+		[objects addObject: circle];
+		[circle release];
+	      }
+	    else if ([key isEqualToString:@"Version"])
+	      {
+		/* skip, already parsed */
+	      }
+	    else
+	      {
+		[NSException raise:@"Unsupported object in file." format:@"Key: %@", key]; 
+	      }
 	  }
-	else if ([key isEqualToString:@"Version"])
+      } 
+    else
+      {
+	/* loading of files with encoded ordering */
+	NSArray *order;
+
+	NSLog(@"Loading version 0.3 or later, ordered objects");
+	order = [dict objectForKey:@"Order"];
+	for(i = 0; i < [order count]; i++)
 	  {
-	    /* skip, already parsed */
-	  }
-	else
-	  {
-	    [NSException raise:@"Unsupported object in file." format:@"Key: %@", key]; 
+	    key = [order objectAtIndex: i];
+	    objdict = [dict objectForKey: key];
+	    if(!objdict)
+	      return NO;
+
+	    if([key rangeOfString: @"path"].length)
+	      {
+		bzPath = [[GRBezierPath alloc] initFromData: objdict
+						     inView: self zoomFactor: zFactor];
+		[objects addObject: bzPath];
+		[bzPath release];
+		edind = [objects count] -1;
+	      }
+	    else if([key rangeOfString: @"text"].length)
+	      {
+		gGRText = [[GRText alloc] initFromData: objdict
+						inView: self zoomFactor: zFactor];
+		[objects addObject: gGRText];
+		[gGRText release];
+	      }
+	    else if([key rangeOfString: @"box"].length)
+	      {
+		box = [[GRBox alloc] initFromData: objdict
+					   inView: self zoomFactor: zFactor];
+		[objects addObject: box];
+		[box release];
+	      }
+	    else if([key rangeOfString: @"circle"].length)
+	      {
+		circle = [[GRCircle alloc] initFromData: objdict
+						 inView: self zoomFactor: zFactor];
+		[objects addObject: circle];
+		[circle release];
+	      }
+	    else
+	      {
+		[NSException raise:@"Unsupported object in file." format:@"Key: %@", key]; 
+	      }
 	  }
       }
     return YES;

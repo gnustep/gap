@@ -1,8 +1,13 @@
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
+	Decode ordering in files (only if version >= 0.3)
+
+2012-04-21 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
 	Encode ordering in files.
-	
+
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
