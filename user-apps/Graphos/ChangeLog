@@ -1,6 +1,11 @@
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
+	Encode ordering in files.
+	
+2012-04-21 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
 	Add version encoding to files.
 
 2012-03-08 Riccardo Mottola <rm@gnu.org>
