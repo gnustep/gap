@@ -86,6 +86,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 - (NSDictionary *) objectDictionary
 {
   NSMutableDictionary *objsdict;
+  NSMutableArray *objectOrder;
   NSString *str = nil;
   id obj;
   int i;
@@ -95,6 +96,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
   int b = 0;
   
   objsdict = [NSMutableDictionary dictionaryWithCapacity: 1];
+  objectOrder = [NSMutableArray arrayWithCapacity: [objects count]];
   for(i = 0; i < [objects count]; i++)
     {
       obj = [objects objectAtIndex: i];
@@ -123,9 +125,11 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 	{
 	  [NSException raise:@"Unhandled object type" format:@"%@", [obj class]];
 	}
+      [objectOrder addObject: str];
       [objsdict setObject: [obj objectDescription] forKey: str];
     }
   [objsdict setValue:[NSNumber numberWithFloat:FILE_FORMAT_VERSION] forKey:@"Version"];
+  [objsdict setValue:objectOrder forKey:@"Ordering"];
   return [NSDictionary dictionaryWithDictionary: objsdict];
 }
 

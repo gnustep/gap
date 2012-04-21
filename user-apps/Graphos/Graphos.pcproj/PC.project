@@ -119,7 +119,7 @@
 	"Enrico Sersale",
 	"Rob Burns"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2005-2011";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2005-2012";
     "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
     "PROJECT_CREATOR" = "";
     "PROJECT_DESCRIPTION" = "Vector drawing";
@@ -141,7 +141,7 @@
     "PROJECT_RELEASE" = "0.3";
     "PROJECT_SUMMARY" = "No summary avaliable!";
     "PROJECT_TYPE" = Application;
-    "PROJECT_URL" = "";
+    "PROJECT_URL" = "http://gap.nongnu.org/graphos/";
     "SEARCH_HEADER_DIRS" = (
     );
     "SEARCH_LIB_DIRS" = (

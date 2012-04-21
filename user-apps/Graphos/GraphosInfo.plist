@@ -8,7 +8,7 @@
 	"Enrico Sersale",
 	"Rob Burns"
     );
-    Copyright = "Copyright (C) 2005-2011";
+    Copyright = "Copyright (C) 2005-2012";
     CopyrightDescription = "Released under GPL";
     FullVersionID = "0.3";
     NSExecutable = Graphos;
@@ -28,4 +28,5 @@
 	    );
 	}
     );
+    URL = "http://gap.nongnu.org/graphos/";
 }
