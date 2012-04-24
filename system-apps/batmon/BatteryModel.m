@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2011 GNUstep Application Project
+   Copyright (C) 2006-2012 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -23,6 +23,7 @@
 */
 
 #if defined(freebsd) || defined( __FreeBSD__ )
+#  include <unistd.h>
 #  include <stdint.h>
 #  include <fcntl.h>
 #  include <sys/ioctl.h>
@@ -259,12 +260,12 @@
     if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
       batteryType = @"CRITICAL ";		// could be complementary!
     
-    if( battio.bst.state & ACPI_BATT_STAT_MAX )
-      status = @"Charged";
     if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
       status = @"Charging";
-    if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
+    else if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
       status = @"Discharging";
+    else if (battio.bst.state & ACPI_BATT_STAT_INVALID )
+      status = @"Invalid";
 
     batteryType = [NSString stringWithFormat: @"%@%@", batteryType, status];
   }
