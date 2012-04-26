@@ -1,3 +1,6 @@
+2012-04-26 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/OSS/GNUmakefile.preamble
+	  only link against libossaudio on OpenBSD
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GNUmakefile.preamble use pkg-config to find the goom libraries
 2012-03-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
