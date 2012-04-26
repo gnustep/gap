@@ -20,4 +20,7 @@
 # Boston, MA 02111-1307, USA.
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
+
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 ADDITIONAL_LDFLAGS += -lossaudio
+endif
