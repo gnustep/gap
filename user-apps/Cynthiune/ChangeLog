@@ -1,4 +1,6 @@
 2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GNUmakefile remove old GNUSTEP_INSTALLATION_DIR
+2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	Take patches from Debian, from Yavor Doganov  <yavor@gnu.org>
 	Forwarded from Philippe Roussel, to fixFTBFS and adopt
 	to the slightly changed avifile API.
