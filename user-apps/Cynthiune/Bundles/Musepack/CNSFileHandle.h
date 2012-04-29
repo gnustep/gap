@@ -23,12 +23,17 @@
 #ifndef CNSFILEHANDLE_H
 #define CNSFILEHANDLE_H
 
+#ifdef MUSEPACK_API_126
 #include <mpcdec/config_types.h>
+#else
+#import <mpc/reader.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
+#ifdef MUSEPACK_API_126
 void CNSFileHandleRetain (void *fileHandle);
 void CNSFileHandleRelease (void *fileHandle);
 
@@ -37,6 +42,13 @@ int CNSFileHandleTell (void *fileHandle);
 mpc_bool_t CNSFileHandleCanSeek (void *fileHandle);
 mpc_bool_t CNSFileHandleSeek (void *fileHandle, int offset);
 int CNSFileHandleGetSize (void *fileHandle);
+#else
+int CNSFileHandleRead (mpc_reader *fileHandle, void *ptr, int size);
+int CNSFileHandleTell (mpc_reader *fileHandle);
+mpc_bool_t CNSFileHandleCanSeek (mpc_reader *fileHandle);
+mpc_bool_t CNSFileHandleSeek (mpc_reader *fileHandle, int offset);
+int CNSFileHandleGetSize (mpc_reader *fileHandle);
+#endif
 
 #ifdef __cplusplus
 }

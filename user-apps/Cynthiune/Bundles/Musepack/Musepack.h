@@ -31,7 +31,11 @@
 
   mpc_reader *mpcReader;
   mpc_streaminfo *mpcStreamInfo;
+#ifdef MUSEPACK_API_126
   mpc_decoder *mpcDecoder;
+#else
+  mpc_demux *mpcDecoder;
+#endif
 
   MPC_SAMPLE_FORMAT sampleBuffer[maxSamples];
   unsigned char frameBuffer[maxSamples * 4];

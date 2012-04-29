@@ -1,4 +1,14 @@
 2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* README, point out how to build with old musepack API
+	* Bundles/Musepack/CNSFileHandle.h
+	* Bundles/Musepack/CNSFileHandle.m
+	* Bundles/Musepack/Musepack.h
+	* Bundles/Musepack/Musepack.m 
+	  Build against new Musepack API by default, based on patches from
+	  Debian from Yavor Doganov, forwarded by Philippe Roussel
+	  Build against old API using ADDITIONAL_OBJCFLAGS=-DMUSEPACK_API_126
+	  in the make environment while building Cynthiune
+2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GNUmakefile remove old GNUSTEP_INSTALLATION_DIR
 2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	Take patches from Debian, from Yavor Doganov  <yavor@gnu.org>

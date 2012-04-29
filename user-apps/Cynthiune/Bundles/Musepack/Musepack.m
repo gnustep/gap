@@ -30,7 +30,11 @@
 #import <Cynthiune/Format.h>
 #import <Cynthiune/utils.h>
 
+#ifdef MUSEPACK_API_126
 #import <mpcdec/mpcdec.h>
+#else
+#import <mpc/mpcdec.h>
+#endif
 
 #import "Musepack.h"
 #import "CNSFileHandle.h"
@@ -75,7 +79,11 @@ static void
 MPCReaderDelete (mpc_reader *reader)
 {
   [(NSFileHandle *) reader->data release];
+#ifdef MUSEPACK_API_126
   free (reader);
+#else
+  mpc_reader_exit_stdio (reader);
+#endif
 }
 
 static mpc_streaminfo *
@@ -84,11 +92,14 @@ MPCStreamInfoNew ()
   mpc_streaminfo *streamInfo;
 
   streamInfo = malloc (sizeof (mpc_streaminfo));
+#ifdef MUSEPACK_API_126
   mpc_streaminfo_init (streamInfo);
+#endif
 
   return streamInfo;
 }
 
+#ifdef MUSEPACK_API_126
 static mpc_decoder *
 MPCDecoderNew (mpc_reader *reader, mpc_streaminfo *streamInfo)
 {
@@ -100,6 +111,7 @@ MPCDecoderNew (mpc_reader *reader, mpc_streaminfo *streamInfo)
 
   return decoder;
 }
+#endif
 
 static inline void
 CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
@@ -173,10 +185,21 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
     {
       [fileHandle retain];
       mpcReader = MPCReaderNew (fileHandle);
+#ifndef MUSEPACK_API_126
+      if (!mpcReader)
+	return MPC_FALSE;
+#endif
       mpcStreamInfo = MPCStreamInfoNew ();
+#ifdef MUSEPACK_API_126
       mpc_streaminfo_read (mpcStreamInfo, mpcReader);
 
       mpcDecoder = MPCDecoderNew (mpcReader, mpcStreamInfo);
+#else
+      mpcDecoder = mpc_demux_init (mpcReader);
+      if (!mpcDecoder)
+        return MPC_FALSE;
+      mpc_demux_get_info (mpcDecoder, mpcStreamInfo);
+#endif
 
       result = YES;
     }
@@ -196,6 +219,9 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
   NSFileHandle *testFileHandle;
   mpc_reader *testReader;
   mpc_streaminfo *testStreamInfo;
+#ifndef MUSEPACK_API_126
+  mpc_demux *testDecoder;
+#endif
   BOOL result;
 
   testFileHandle = [NSFileHandle fileHandleForReadingAtPath: fileName];
@@ -203,9 +229,20 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
     {
       testReader = MPCReaderNew (testFileHandle);
       testStreamInfo = MPCStreamInfoNew ();
+#ifdef MUSEPACK_API_126
       result = !mpc_streaminfo_read (testStreamInfo, testReader);
       free (testStreamInfo);
       MPCReaderDelete (testReader);
+#else
+      testDecoder = mpc_demux_init (testReader);
+      if (testDecoder)
+        {
+          result = YES;
+          mpc_demux_exit (testDecoder);
+        }
+      if (testReader)
+        MPCReaderDelete (testReader);
+#endif
     }
   else
     result = NO;
@@ -222,21 +259,50 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
 	     withSize: (unsigned int) bufferSize
 {
   int bytes, status;
+#ifdef MUSEPACK_API_126
   unsigned int vbrAcc, vbrBits;
+#else
+  mpc_frame_info frame;
+  mpc_status err;
+#endif
   unsigned long frames, samples;
 
   status = 1;
+#ifndef MUSEPACK_API_126
+  frame.buffer = sampleBuffer;
+#endif
 
+#ifdef MUSEPACK_API_126
   if (!remaining)
+#else
+  while (!remaining)
+#endif
     {
+#ifdef MUSEPACK_API_126
       samples = mpc_decoder_decode (mpcDecoder, sampleBuffer,
                                     &vbrAcc, &vbrBits);
       if (!samples)
         status = 0;
       else if (samples == (unsigned long) -1)
         status = -1;
+#else
+      err = mpc_demux_decode (mpcDecoder, &frame);
+      if (err != MPC_STATUS_OK)
+        {
+          status = -1;
+          break;
+        }
+      else if (frame.bits == -1)
+        {
+          status = 0;
+          break;
+        }
+#endif
       else
         {
+#ifndef MUSEPACK_API_126
+	  samples = frame.samples;
+#endif
           frames = samples * mpcStreamInfo->channels;
           CopyBuffer (sampleBuffer, frameBuffer, frames);
           remaining = frames * 2;
@@ -277,7 +343,11 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
 
 - (unsigned int) readDuration
 {
+#ifdef MUSEPACK_API_126
   return mpcStreamInfo->pcm_samples / mpcStreamInfo->sample_freq;
+#else
+  return (unsigned int) mpc_streaminfo_get_length (mpcStreamInfo);
+#endif
 }
 
 - (void) streamClose
@@ -287,20 +357,25 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
       [fileHandle closeFile];
       [fileHandle release];
     }
+#ifndef MUSEPACK_API_126
+  if (mpcDecoder)
+    mpc_demux_exit (mpcDecoder);
+#endif
   if (mpcReader)
     MPCReaderDelete (mpcReader);
+#ifdef MUSEPACK_API_126
   if (mpcStreamInfo)
     free (mpcStreamInfo);
   if (mpcDecoder)
     free (mpcDecoder);
-
+#endif
   [self _resetIVars];
 }
 
 // Player Protocol
 + (NSArray *) acceptedFileExtensions
 {
-  return [NSArray arrayWithObjects: @"mpc", @"mp+", nil];
+  return [NSArray arrayWithObjects: @"mpc", @"mp+", @"mpp", nil];
 }
 
 - (BOOL) isSeekable
@@ -310,7 +385,11 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
 
 - (void) seek: (unsigned int) aPos
 {
+#ifdef MUSEPACK_API_126
   mpc_decoder_seek_seconds (mpcDecoder, (double) aPos);
+#else
+  mpc_demux_seek_second (mpcDecoder, (double) aPos);
+#endif
 }
 
 @end

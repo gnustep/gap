@@ -26,6 +26,7 @@
 
 #import "CNSFileHandle.h"
 
+#ifdef MUSEPACK_API_126
 void
 CNSFileHandleRetain (void *fileHandle)
 {
@@ -80,3 +81,49 @@ CNSFileHandleGetSize (void *fileHandle)
 
   return size;
 }
+
+# else
+int
+CNSFileHandleRead (mpc_reader *fileHandle, void *ptr, int size)
+{
+  NSData *data;
+
+  data = [(NSFileHandle *) fileHandle->data readDataOfLength: size];
+  [data getBytes: ptr];
+
+  return [data length];
+}
+
+int
+CNSFileHandleTell (mpc_reader *fileHandle)
+{
+  return [(NSFileHandle *) fileHandle->data offsetInFile];
+}
+
+mpc_bool_t
+CNSFileHandleCanSeek (mpc_reader *fileHandle)
+{
+  return YES;
+}
+
+mpc_bool_t
+CNSFileHandleSeek (mpc_reader *fileHandle, int offset)
+{
+  [(NSFileHandle *) fileHandle->data seekToFileOffset: (long long) offset];
+
+  return YES;
+}
+
+int
+CNSFileHandleGetSize (mpc_reader *fileHandle)
+{
+  int size, where;
+
+  where = [(NSFileHandle *) fileHandle->data offsetInFile];
+  size = [(NSFileHandle *) fileHandle->data seekToEndOfFile];
+  [(NSFileHandle *) fileHandle->data seekToFileOffset: (long long) where];
+
+  return size;
+}
+
+#endif
