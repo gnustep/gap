@@ -26,6 +26,7 @@
 
 #include <fstream>
 #include <avifile.h>
+#include <infotypes.h>
 
 #include "CWMFile.h"
 
@@ -74,7 +75,7 @@ WMFileAudioStreamCount (WMFile *file)
 
   readFile = (avm::IReadFile *) file;
 
-  return readFile->AudioStreamCount ();
+  return (unsigned int) readFile->AudioStreamCount ();
 }
 
 WMStream *
@@ -117,7 +118,7 @@ WMStreamGetFrameSize (WMStream *stream)
 
   readStream = (avm::IReadStream *) stream;
 
-  return readStream->GetFrameSize ();
+  return (unsigned int) readStream->GetFrameSize ();
 }
 
 void
@@ -127,7 +128,7 @@ WMStreamGetInfos (WMStream *stream,
                   unsigned int *duration)
 {
   avm::IReadStream *readStream;
-  StreamInfo *streamInfo;
+  avm::StreamInfo *streamInfo;
 
   readStream = (avm::IReadStream *) stream;
   streamInfo = readStream->GetStreamInfo ();
@@ -145,7 +146,7 @@ WMStreamReadFrames (WMStream *stream,
                     unsigned int samples, unsigned int *samplesRead,
                     unsigned int *bytesRead)
 {
-  unsigned int _samplesRead, _bytesRead;
+  size_t _samplesRead, _bytesRead;
   avm::IReadStream *readStream;
   int result, eof;
 
@@ -157,10 +158,13 @@ WMStreamReadFrames (WMStream *stream,
 
   readStream = (avm::IReadStream *) stream;
   while (!result && !_bytesRead)
-    result = ((readStream->Eof ())
+    {
+      size_t tmp_bufferSize = (size_t) bufferSize;
+      result = ((readStream->Eof ())
               ? -1
-              : readStream->ReadFrames (buffer, bufferSize, bufferSize,
-                                        _samplesRead, _bytesRead));
+	      : readStream->ReadFrames (buffer, tmp_bufferSize, tmp_bufferSize,
+					_samplesRead, _bytesRead));
+    }
 
   *samplesRead = _samplesRead;
   *bytesRead = _bytesRead;

@@ -47,7 +47,7 @@ void WMStreamGetInfos (WMStream *stream,
                        unsigned int *duration);
 int WMStreamReadFrames (WMStream *stream,
                         void *buffer, unsigned int bufferSize,
-                        unsigned int samples, unsigned *samplesRead,
+                        unsigned int samples, unsigned int *samplesRead,
                         unsigned int *bytesRead);
 void WMStreamSeekTime (WMStream *stream, unsigned int position);
 
