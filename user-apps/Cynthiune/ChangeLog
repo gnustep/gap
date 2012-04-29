@@ -1,3 +1,14 @@
+2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	Take patches from Debian, from Yavor Doganov  <yavor@gnu.org>
+	Forwarded from Philippe Roussel, to fixFTBFS and adopt
+	to the slightly changed avifile API.
+        * Bundles/WindowsMedia.CWMFile.h (WMStreamReadFrames): Typo fix.
+        * Bundles/WindowsMedia/CWMFile.cpp: Include <infotypes.h>.
+        (WMFileAudioStreamCount, WMStreamGetFrameSize): Cast the
+        result to unsigned int.
+        (WMStreamReadFrames) <_samplesRead, _bytesRead>: Declare of
+        type size_t.  Amend the call to readStream->ReadFrames
+        accordingly.
 2012-04-26 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/OSS/GNUmakefile.preamble
 	  only link against libossaudio on OpenBSD
