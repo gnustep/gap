@@ -1,3 +1,13 @@
+2012-04-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Fix version in objects
+	* Resources/Collection.gorm/objects.gorm
+	* Resources/Player.gorm/objects.gorm
+	* Resources/PlaylistViewer.gorm/objects.gorm
+	* Resources/Preferences.gorm/objects.gorm
+	* Resources/StatisticsViewer.gorm/objects.gorm
+	* Fix bogus version in Gorm files, due to OpenBSD bogusness
+	  initially created
+
 2012-04-14: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDCon/MPDConInfo.plist
 	* MPDCon/MPDCon.pcproj/PC.project
