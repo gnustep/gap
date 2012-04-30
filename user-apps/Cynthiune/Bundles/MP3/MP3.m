@@ -1,6 +1,7 @@
 /* MP3.m - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2005 Wolfgang Sourdeau
+ *               2012 The GNUstep Application Team
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
  *
@@ -22,9 +23,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <sys/types.h>
-#import <sys/stat.h>
-#import <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <string.h>
 #import <mad.h>
 #import <id3tag.h>
 
@@ -174,7 +175,7 @@ audioLinearDither (MadFixed sample, audioDither *dither)
 }
 
 static inline void
-fillPCMBuffer (CMp3 *self, unsigned char *buffer, int start, int limit)
+fillPCMBuffer (MP3 *self, unsigned char *buffer, int start, int limit)
 {
   int i;
   unsigned char *oBPtr;
@@ -201,7 +202,7 @@ fillPCMBuffer (CMp3 *self, unsigned char *buffer, int start, int limit)
 }
 
 static int
-translateBufferToPCM (CMp3 *self, unsigned char *buffer, int bufferSize)
+translateBufferToPCM (MP3 *self, unsigned char *buffer, int bufferSize)
 {
   int start, limit, mult, delta;
 
@@ -289,7 +290,7 @@ translateBufferToPCM (CMp3 *self, unsigned char *buffer, int bufferSize)
 // }
 
 static inline InputBufferStatus
-decodeInputBuffer (CMp3 *self, int iRBytes)
+decodeInputBuffer (MP3 *self, int iRBytes)
 {
   InputBufferStatus bufferStatus;
   signed long tagSize;
@@ -389,7 +390,7 @@ decodeInputBuffer (CMp3 *self, int iRBytes)
 
       if (iRBytes > 0 && !feof (mf))
         {
-          bufferStatus = decodeInputBuffer ((CMp3 *) self, iRBytes);
+          bufferStatus = decodeInputBuffer ((MP3 *) self, iRBytes);
           if (bufferStatus == BufferHasNoError)
             {
               frameCount++;
@@ -523,7 +524,7 @@ decodeInputBuffer (CMp3 *self, int iRBytes)
   lostSyncs = 0;
 
   if (oRemain)
-    decodedBytes = translateBufferToPCM ((CMp3 *) self, buffer, bufferSize);
+    decodedBytes = translateBufferToPCM ((MP3 *) self, buffer, bufferSize);
   else
     {
       done = NO;
@@ -539,11 +540,11 @@ decodeInputBuffer (CMp3 *self, int iRBytes)
 
           if (iRBytes > 0 && !feof (mf))
             {
-              bufferStatus = decodeInputBuffer ((CMp3 *) self, iRBytes);
+              bufferStatus = decodeInputBuffer ((MP3 *) self, iRBytes);
               if (bufferStatus == BufferHasNoError)
                 {
                   mad_synth_frame (&(self->synth), &(self->frame));
-                  decodedBytes = translateBufferToPCM ((CMp3 *) self,
+                  decodedBytes = translateBufferToPCM ((MP3 *) self,
                                                        buffer, bufferSize);
                   done = YES;
                 }

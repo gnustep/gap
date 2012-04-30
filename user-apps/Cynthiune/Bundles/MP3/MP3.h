@@ -50,35 +50,32 @@ typedef struct mad_bitptr MadBitPtr;
 @interface MP3 : NSObject <CynthiuneBundle, Format>
 {
   BOOL metadataRead;
-
-  unsigned int channels;
+  
   unsigned long rate;
 
   unsigned int duration;
   unsigned int size;
 
-  unsigned int lostSyncs;
-
   FILE *mf;
-
-  MadFrame frame;
-  MadStream stream;
-  MadSynth synth;
-
-  int iRemain, oRemain;
-  unsigned char iBuffer[IBUFFER_SIZE];
-
-  audioDither leftDither, rightDither;
-
+ 
   NSString *openFilename;
 
   BOOL opened;
+
+  /* public ivars accessed as a C struct */
+  @public MadFrame frame;
+  @public MadStream stream;
+  @public MadSynth synth;
+  @public audioDither leftDither;
+  @public audioDither rightDither;
+  @public unsigned int channels;
+  @public int iRemain;
+  @public int oRemain;
+  @public unsigned char iBuffer[IBUFFER_SIZE];
+  @public unsigned int lostSyncs;
 }
 
 @end
 
-typedef struct {
-    @defs (MP3);
-} CMp3;
 
 #endif /* MP3_H */
