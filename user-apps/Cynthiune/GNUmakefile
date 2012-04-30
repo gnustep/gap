@@ -45,23 +45,23 @@ BUNDLES += AudioFile
 endif
 
 ifneq (yes,$(disable-flac))
-BUNDLES += FLAC
+#BUNDLES += FLAC
 endif
 
 ifneq (yes,$(disable-mod))
-BUNDLES += Mod
+#BUNDLES += Mod
 endif
 
 ifneq (yes,$(disable-windowsmedia))
-BUNDLES += WindowsMedia
+#BUNDLES += WindowsMedia
 endif
 
 ifneq (yes,$(disable-musepack))
-BUNDLES += Musepack
+#BUNDLES += Musepack
 endif
 
 ifneq (yes,$(disable-timidity))
-BUNDLES += Timidity
+#BUNDLES += Timidity
 endif
 
 ifneq (yes,$(disable-id3tag))
@@ -77,7 +77,7 @@ BUNDLES += ASFTags
 endif
 
 ifneq (yes,$(disable-flactags))
-BUNDLES += FLACTags
+#BUNDLES += FLACTags
 endif
 
 ifneq (yes,$(disable-vorbistags))
@@ -101,11 +101,11 @@ BUNDLES += Sndio
 endif
 
 ifneq (yes,$(disable-esound))
-BUNDLES += Esound
+#BUNDLES += Esound
 endif
 
 ifneq (yes,$(disable-arts))
-BUNDLES += aRts
+#BUNDLES += aRts
 endif
 
 endif
