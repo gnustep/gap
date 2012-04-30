@@ -1,6 +1,7 @@
 /* SongInspectorController.m - this file is part of Cynthiune
  *
  * Copyright (C) 2005 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
  *
@@ -96,7 +97,8 @@ FreeQis (char *qis[])
 
 - (id) init
 {
-  if ((self == [super init]))
+  self = [super init];
+  if (self)
     {
       song = nil;
 

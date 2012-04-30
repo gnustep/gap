@@ -1,5 +1,10 @@
 2012-04-30 Riccardo Mottola <rm@gnu.org>
 
+	* SongInspectorController.m:
+	Fix warning in initialization.
+
+2012-04-30 Riccardo Mottola <rm@gnu.org>
+
 	* Bundles/MP3/MP3.h
 	* Bundles/MP3/MP3.m
 	Do not use @def() and expose ivars public to enable compiling with non-fragile ABI.
