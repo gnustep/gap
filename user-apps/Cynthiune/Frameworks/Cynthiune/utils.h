@@ -1,8 +1,10 @@
 /* utils.h - this file is part of Cynthiune
  *
  * Copyright (C) 2003 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +36,6 @@
 
 #ifdef __MACOSX__
 
-#define sel_get_name(X) sel_getName(X)
 #define NSStandardLibraryPaths() \
     NSSearchPathForDirectoriesInDomains (NSAllLibrariesDirectory, \
                                          NSAllDomainsMask, YES)
@@ -51,21 +52,21 @@ char *strndup (const char *string, unsigned int len);
     [[NSException exceptionWithName: @"Obsolete method" \
                   reason: ([NSString stringWithFormat: @"'%s'" \
                             @" (%s, %d) is an obsolete method.", \
-                            sel_get_name (_cmd), __FILE__, __LINE__]) \
+                            sel_getName (_cmd), __FILE__, __LINE__]) \
                   userInfo: nil] raise]
 
 #define unimplementedMethod() \
     [[NSException exceptionWithName: @"Unimplemented method" \
                   reason: ([NSString stringWithFormat: @"'%s'" \
                             @" (%s, %d) unimplemented.", \
-                            sel_get_name (_cmd), __FILE__, __LINE__]) \
+                            sel_getName (_cmd), __FILE__, __LINE__]) \
                   userInfo: nil] raise]
 
 #define raiseException(t,r) \
     [[NSException exceptionWithName: (t) \
                   reason: ([NSString stringWithFormat: @"%@ in '%s'" \
                             @" (%s:%d).", \
-                            (r), sel_get_name (_cmd), __FILE__, __LINE__]) \
+                            (r), sel_getName (_cmd), __FILE__, __LINE__]) \
                   userInfo: nil] raise]
 
 #define indexOutOfBoundsException(i,m) \
