@@ -3,6 +3,9 @@
 	* SongInspectorController.m:
 	Fix warning in initialization.
 
+	* Frameworks/Cynthiune/utils.h
+	Use new runtime function name sel_getName()
+
 2012-04-30 Riccardo Mottola <rm@gnu.org>
 
 	* Bundles/MP3/MP3.h
