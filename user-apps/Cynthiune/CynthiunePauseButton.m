@@ -1,8 +1,10 @@
 /* CynthiunePauseButton.m - this file is part of Cynthiune
  *
  * Copyright (C) 2005 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +33,8 @@
 
 - (id) init
 {
-  if ((self == [super init]))
+  self = [super init];
+  if (self)
     {
       animationTimer = nil;
       primaryImage = nil;

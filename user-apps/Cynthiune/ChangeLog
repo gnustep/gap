@@ -1,6 +1,7 @@
 2012-04-30 Riccardo Mottola <rm@gnu.org>
 
 	* SongInspectorController.m:
+	* CynthiunePauseButton.m:
 	Fix warning in initialization.
 
 	* Frameworks/Cynthiune/utils.h
