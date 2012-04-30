@@ -34,12 +34,6 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSThread.h>
 
-#ifdef __OpenBSD__
-#import <musicbrainz3/mb_c.h>
-#else
-#import <musicbrainz/mb_c.h>
-#endif
-
 #import <Cynthiune/Format.h>
 #import <Cynthiune/NSViewExtensions.h>
 #import <Cynthiune/utils.h>

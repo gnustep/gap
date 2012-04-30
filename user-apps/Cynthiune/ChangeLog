@@ -1,3 +1,6 @@
+2012-04-30: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* SongInspectorController.m do not include musicbrainz
+	  header for now. From Philippe Roussel
 2012-04-29 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* README, point out how to build with old musepack API
 	* Bundles/Musepack/CNSFileHandle.h
