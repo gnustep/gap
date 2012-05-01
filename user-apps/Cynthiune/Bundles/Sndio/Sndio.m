@@ -74,6 +74,7 @@
       //par = NULL;
       //sio_initpar(&par);
       stopRequested = NO;
+      isRunning = NO;
     }
 
   return self;
@@ -89,10 +90,20 @@
 {
   BOOL result = NO;
 
-  NSLog(@"prepareDevice got called");
+  NSLog(@"prepareDevice got called, channels: %u sampleRate: %lu", numberOfChannels, sampleRate);
 
-  if (hdl)
+  if (hdl) {
+    NSLog(@"prepareDevice: HDL was set, going to close it!");
+    //if (isRunning)
+    //  [self stopThread];
+    //while (isRunning) {
+    //	sleep(1);
+    //}
     sio_close(hdl);
+    hdl = NULL;
+  } else {
+    NSLog(@"prepareDevice: HDL was NULL, just going to open!");
+  }
   hdl = sio_open(NULL, SIO_PLAY, 0);
   sio_initpar(&par);
   par.pchan = numberOfChannels;
@@ -102,8 +113,12 @@
     {
       NSLog(@"successfully set parameters");
       result = YES;
+    } else {
+      NSLog(@"NOT successfully set parameters");
     }
-  sio_start(hdl);
+  //sio_start(hdl);
+  //if (!isRunning)
+  //  [self startThread];
   return result;
 }
 
@@ -138,25 +153,31 @@ NSLog(@"close device got called!");
 {
   NSAutoreleasePool *pool;
   int bufferSize;
+
+  if (isRunning == YES) {
+    return;
+  }
   
   pool = [NSAutoreleasePool new];
-
+  isRunning = YES;
   while (!stopRequested)
     {
       bufferSize = [parentPlayer readNextChunk: buffer
 				withSize: DEFAULT_BUFFER_SIZE];
-      if (bufferSize > 0)
+      if (bufferSize > 0 && hdl)
         sio_write(hdl, buffer, bufferSize);
 	if ([pool autoreleaseCount] > 50)
 	  [pool emptyPool];
     }
-
+NSLog(@"threadLoop: stopping thread");
   stopRequested = NO;
+  isRunning = NO;
   [pool release];
 }
 
 - (BOOL) startThread
 {
+  NSLog(@"startThread called");
   [NSThread detachNewThreadSelector: @selector (threadLoop)
             toTarget: self
             withObject: nil];
@@ -166,6 +187,7 @@ NSLog(@"close device got called!");
 
 - (void) stopThread
 {
+  NSLog(@"stopThread called");
   stopRequested = YES;
 }
 

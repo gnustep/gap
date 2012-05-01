@@ -1,3 +1,9 @@
+2012-04-30 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* Bundles/Sndio/Sndio.h
+	* Bundles/Sndio/Sndio.m
+	  try make it work more reliable, still not perfect yet
+
 2012-04-30 Riccardo Mottola <rm@gnu.org>
 
 	* SongInspectorController.m:
