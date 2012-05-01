@@ -154,6 +154,7 @@
 				4A9504CCFFE6A4B311CA0CBA,
 				4A9504CDFFE6A4B311CA0CBA,
 			);
+			hasScannedForEncodings = 1;
 			isa = PBXProject;
 			knownRegions = (
 				English,
@@ -211,6 +212,7 @@
 			refType = 4;
 		};
 		29B97316FDCFA39411CA2CEA = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = main.m;
 			refType = 4;
@@ -548,7 +550,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 1;
 		};
 		29B97327FDCFA39411CA2CEA = {
 			buildActionMask = 2147483647;
@@ -766,12 +767,14 @@
 			refType = 4;
 		};
 		EA03BA5409D0F84A036B92BF = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = CNSFileHandle.h;
 			path = Bundles/Musepack/CNSFileHandle.h;
 			refType = 4;
 		};
 		EA03BA5509D0F84A036B92BF = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = CNSFileHandle.m;
 			path = Bundles/Musepack/CNSFileHandle.m;
@@ -790,12 +793,14 @@
 			};
 		};
 		EA03BA5809D0F862036B92BF = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Musepack.h;
 			path = Bundles/Musepack/Musepack.h;
 			refType = 4;
 		};
 		EA03BA5909D0F862036B92BF = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Musepack.m;
 			path = Bundles/Musepack/Musepack.m;
@@ -950,7 +955,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA1D794C06263DD503CFD9F6 = {
 			isa = PBXBundleReference;
@@ -968,11 +972,13 @@
 			refType = 2;
 		};
 		EA1D795606263FB803CFD9F6 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Ogg.m;
 			refType = 4;
 		};
 		EA1D795906263FB803CFD9F6 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Ogg.h;
 			refType = 4;
@@ -1091,12 +1097,14 @@
 			};
 		};
 		EA547B68078A36000358AD96 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSStringExtensions.h;
 			path = Frameworks/Cynthiune/NSStringExtensions.h;
 			refType = 4;
 		};
 		EA547B69078A36000358AD96 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSStringExtensions.m;
 			path = Frameworks/Cynthiune/NSStringExtensions.m;
@@ -1216,6 +1224,7 @@
 			};
 		};
 		EA675446062726D80396FC5D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = MacOSXPlayer.m;
 			path = Bundles/MacOSX/MacOSXPlayer.m;
@@ -1228,6 +1237,7 @@
 			};
 		};
 		EA675448062726F10396FC5D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = MacOSXPlayer.h;
 			path = Bundles/MacOSX/MacOSXPlayer.h;
@@ -1252,43 +1262,51 @@
 			};
 		};
 		EA73D4B4074C81F203F60D55 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlayerController.h;
 			refType = 4;
 		};
 		EA73D4B5074C81F203F60D55 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlayerController.m;
 			refType = 4;
 		};
 		EA73D4B6074C81F203F60D55 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlayerPreference.h;
 			refType = 4;
 		};
 		EA73D4B7074C81F203F60D55 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlayerPreference.m;
 			refType = 4;
 		};
 		EA73D4C0074C823503F60D55 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = MailService.h;
 			path = Frameworks/Cynthiune/MailService.h;
 			refType = 4;
 		};
 		EA73D4C1074C823503F60D55 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = MailService.m;
 			path = Frameworks/Cynthiune/MailService.m;
 			refType = 4;
 		};
 		EA778ACC09B5778A032657EF = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneHeaderCell.h;
 			refType = 4;
 		};
 		EA778ACD09B5778A032657EF = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneHeaderCell.m;
 			refType = 4;
@@ -1324,22 +1342,26 @@
 			};
 		};
 		EA7EE734063AE6B6039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = CynthiuneBundle.h;
 			path = Frameworks/Cynthiune/CynthiuneBundle.h;
 			refType = 4;
 		};
 		EA7EE76B063AE6B6039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistView.h;
 			refType = 4;
 		};
 		EA7EE76C063AE6B6039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistView.m;
 			refType = 4;
 		};
 		EA7EE79F063AEA0B039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = xing.h;
 			path = Bundles/MP3/xing.h;
@@ -1369,6 +1391,7 @@
 			refType = 4;
 		};
 		EA7EE7A3063AEA4F039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = xing.c;
 			path = Bundles/MP3/xing.c;
@@ -1477,6 +1500,7 @@
 			};
 		};
 		EA7EE7DC063B0267039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = French;
 			path = French.lproj/InfoPlist.strings;
@@ -1499,6 +1523,7 @@
 			refType = 4;
 		};
 		EA7EE7DE063B035E039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = English;
 			path = English.lproj/Localizable.strings;
@@ -1511,17 +1536,20 @@
 			};
 		};
 		EA7EE7E0063B036F039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = French;
 			path = French.lproj/Localizable.strings;
 			refType = 4;
 		};
 		EA7EE7E1063B04D0039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = README;
 			refType = 4;
 		};
 		EA7EE7E2063B04D0039F4895 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = TODO;
 			refType = 4;
@@ -1636,7 +1664,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA80096A0629F20C036EED6D = {
 			isa = PBXBundleReference;
@@ -1688,6 +1715,7 @@
 			refType = 4;
 		};
 		EA80097B0629F33B036EED6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Esound.m;
 			path = Bundles/Esound/Esound.m;
@@ -1700,6 +1728,7 @@
 			};
 		};
 		EA80097D0629F354036EED6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Esound.h;
 			path = Bundles/Esound/Esound.h;
@@ -1838,7 +1867,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA85A0EB062774250303B004 = {
 			isa = PBXBundleReference;
@@ -1846,6 +1874,7 @@
 			refType = 3;
 		};
 		EA85A0ED062775460303B004 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = MP3.m;
 			path = Bundles/MP3/MP3.m;
@@ -1858,6 +1887,7 @@
 			};
 		};
 		EA85A0EF0627755D0303B004 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = MP3.h;
 			path = Bundles/MP3/MP3.h;
@@ -1882,40 +1912,47 @@
 			};
 		};
 		EA8795DF06F66AA403809032 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneController.h;
 			refType = 4;
 		};
 		EA8795E006F66AA403809032 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneController.m;
 			refType = 4;
 		};
 		EA8795E306F66AA403809032 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSNumberExtensions.h;
 			path = Frameworks/Cynthiune/NSNumberExtensions.h;
 			refType = 4;
 		};
 		EA8795E406F66AA403809032 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSNumberExtensions.m;
 			path = Frameworks/Cynthiune/NSNumberExtensions.m;
 			refType = 4;
 		};
 		EA8795E506F66AA403809032 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Output.h;
 			path = Frameworks/Cynthiune/Output.h;
 			refType = 4;
 		};
 		EA88F6F10682227603ABED23 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Italian;
 			path = Italian.lproj/Localizable.strings;
 			refType = 4;
 		};
 		EA88F6F2068222A103ABED23 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Italian;
 			path = Italian.lproj/InfoPlist.strings;
@@ -2019,7 +2056,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA88F6F9068234B203ABED23 = {
 			isa = PBXBundleReference;
@@ -2037,11 +2073,13 @@
 			};
 		};
 		EA8A19170688EE2B03C0F62E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneWindow.h;
 			refType = 4;
 		};
 		EA8A19180688EE2B03C0F62E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneWindow.m;
 			refType = 4;
@@ -2169,7 +2207,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA8A20BC0675A4A203A8D3C1 = {
 			isa = PBXBundleReference;
@@ -2177,6 +2214,7 @@
 			refType = 3;
 		};
 		EA8A20BD0675A4D003A8D3C1 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = AudioFile.m;
 			path = Bundles/AudioFile/AudioFile.m;
@@ -2189,9 +2227,10 @@
 			};
 		};
 		EA8A20BF0675A4EB03A8D3C1 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
-			name = AudioFile.h;
-			path = Bundles/AudioFile/AudioFile.h;
+			name = AudioFileBundle.h;
+			path = Bundles/AudioFile/AudioFileBundle.h;
 			refType = 4;
 		};
 		EA8A20C00675A4EB03A8D3C1 = {
@@ -2501,11 +2540,13 @@
 			};
 		};
 		EA8BBBF90682D60703C2B047 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiunePopUpButton.h;
 			refType = 4;
 		};
 		EA8BBBFA0682D60703C2B047 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiunePopUpButton.m;
 			refType = 4;
@@ -2622,7 +2663,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA8D0BFF06268DD403000102 = {
 			isa = PBXBundleReference;
@@ -2630,6 +2670,7 @@
 			refType = 3;
 		};
 		EA8D0C0106268E3003000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = dummy.m;
 			path = Bundles/dummy/dummy.m;
@@ -2642,6 +2683,7 @@
 			};
 		};
 		EA8D0C0306268E4303000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = dummy.h;
 			path = Bundles/dummy/dummy.h;
@@ -2666,48 +2708,56 @@
 			};
 		};
 		EA8E355D09476698032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Slovak;
 			path = Slovak.lproj/InfoPlist.strings;
 			refType = 4;
 		};
 		EA8E355E094766BD032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = TraditionalChinese;
 			path = TraditionalChinese.lproj/InfoPlist.strings;
 			refType = 4;
 		};
 		EA8E3562094766F7032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Hungarian;
 			path = Hungarian.lproj/InfoPlist.strings;
 			refType = 4;
 		};
 		EA8E35630947670D032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Spanish;
 			path = Spanish.lproj/InfoPlist.strings;
 			refType = 4;
 		};
 		EA8E356409476757032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Hungarian;
 			path = Hungarian.lproj/Localizable.strings;
 			refType = 4;
 		};
 		EA8E35650947676F032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Slovak;
 			path = Slovak.lproj/Localizable.strings;
 			refType = 4;
 		};
 		EA8E356909476796032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = TraditionalChinese;
 			path = TraditionalChinese.lproj/Localizable.strings;
 			refType = 4;
 		};
 		EA8E356A09476934032DC65E = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Spanish;
 			path = Spanish.lproj/Localizable.strings;
@@ -2811,7 +2861,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA8E357109476B19032DC65E = {
 			isa = PBXBundleReference;
@@ -2952,7 +3001,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA8F759E06F89A7D03F15592 = {
 			isa = PBXBundleReference;
@@ -2976,12 +3024,14 @@
 			};
 		};
 		EA8F75AD06F89D9103F15592 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = FLAC.h;
 			path = Bundles/FLAC/FLAC.h;
 			refType = 4;
 		};
 		EA8F75AE06F89D9103F15592 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = FLAC.m;
 			path = Bundles/FLAC/FLAC.m;
@@ -3000,6 +3050,7 @@
 			};
 		};
 		EA9316530770FC6503000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = CWMFile.cpp;
 			path = Bundles/WindowsMedia/CWMFile.cpp;
@@ -3012,6 +3063,7 @@
 			};
 		};
 		EA9316560770FCEB03000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = CWMFile.h;
 			path = Bundles/WindowsMedia/CWMFile.h;
@@ -3024,6 +3076,7 @@
 			};
 		};
 		EA9316580770FD0903000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = WindowsMedia.h;
 			path = Bundles/WindowsMedia/WindowsMedia.h;
@@ -3036,6 +3089,7 @@
 			};
 		};
 		EA93165A0770FD3003000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = WindowsMedia.m;
 			path = Bundles/WindowsMedia/WindowsMedia.m;
@@ -3149,7 +3203,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA949F6E062720760348A0D9 = {
 			isa = PBXBundleReference;
@@ -3216,11 +3269,13 @@
 			};
 		};
 		EA95850F078BA57703566F1F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = SongInspectorController.h;
 			refType = 4;
 		};
 		EA958510078BA57703566F1F = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = SongInspectorController.m;
 			refType = 4;
@@ -3344,7 +3399,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA96C1DE0770F81F03166923 = {
 			isa = PBXBundleReference;
@@ -3448,7 +3502,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EA96C1E60770F84803166923 = {
 			isa = PBXBundleReference;
@@ -3529,6 +3582,7 @@
 			refType = 4;
 		};
 		EA9ADB0006823B6103000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Mod.m;
 			path = Bundles/Mod/Mod.m;
@@ -3541,6 +3595,7 @@
 			};
 		};
 		EA9ADB0206823B7A03000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Mod.h;
 			path = Bundles/Mod/Mod.h;
@@ -3766,7 +3821,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EAA6DF9E09A66BFD034E8D88 = {
 			isa = PBXBundleReference;
@@ -3778,6 +3832,7 @@
 			target = EAA6DF9D09A66BFD034E8D88;
 		};
 		EAA6DFA009A66D8D034E8D88 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = VorbisTags.h;
 			path = Bundles/VorbisTags/VorbisTags.h;
@@ -3790,6 +3845,7 @@
 			};
 		};
 		EAA6DFA209A66DA3034E8D88 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = VorbisTags.m;
 			path = Bundles/VorbisTags/VorbisTags.m;
@@ -3909,7 +3965,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		EAA95C3609D0ECF3039F499A = {
 			isa = PBXBundleReference;
@@ -3921,6 +3976,7 @@
 			target = EAA95C3509D0ECF3039F499A;
 		};
 		EAACCAF309C7ACDF03B7D5E1 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = vcedit.c;
 			path = Bundles/VorbisTags/vcedit.c;
@@ -4017,6 +4073,7 @@
 			};
 		};
 		EAAF6D4D092BC55703000102 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneAnimatedImageView.h;
 			refType = 4;
@@ -4028,12 +4085,14 @@
 			};
 		};
 		EAB991A1086E52690334F83B = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = German;
 			path = German.lproj/InfoPlist.strings;
 			refType = 4;
 		};
 		EAB991A2086E52690334F83B = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = German;
 			path = German.lproj/Localizable.strings;
@@ -4136,6 +4195,7 @@
 			};
 		};
 		EAC9033508F2EB2003D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Tags.h;
 			path = Frameworks/Cynthiune/Tags.h;
@@ -4151,11 +4211,13 @@
 			};
 		};
 		EAC9033708F2ED0603D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = DictionaryCoder.h;
 			refType = 4;
 		};
 		EAC9033808F2ED0603D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = DictionaryCoder.m;
 			refType = 4;
@@ -4173,11 +4235,13 @@
 			};
 		};
 		EAC9033B08F2ED3103D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = M3UArchiver.h;
 			refType = 4;
 		};
 		EAC9033C08F2ED3103D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = M3UArchiver.m;
 			refType = 4;
@@ -4195,21 +4259,25 @@
 			};
 		};
 		EAC9033F08F2ED4903D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistArchiver.h;
 			refType = 4;
 		};
 		EAC9034008F2ED4903D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistArchiver.m;
 			refType = 4;
 		};
 		EAC9034108F2ED4903D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PLSArchiver.h;
 			refType = 4;
 		};
 		EAC9034208F2ED4903D0D62A = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PLSArchiver.m;
 			refType = 4;
@@ -4284,12 +4352,14 @@
 			refType = 4;
 		};
 		EADC4D6709476C5903B0DF6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = ID3Tag.h;
 			path = Bundles/ID3Tag/ID3Tag.h;
 			refType = 4;
 		};
 		EADC4D6809476C5903B0DF6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = ID3Tag.m;
 			path = Bundles/ID3Tag/ID3Tag.m;
@@ -4374,12 +4444,14 @@
 			refType = 4;
 		};
 		EAF9B4E109D0EEED037E42D6 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = FLACTags.h;
 			path = Bundles/FLACTags/FLACTags.h;
 			refType = 4;
 		};
 		EAF9B4E209D0EEED037E42D6 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = FLACTags.m;
 			path = Bundles/FLACTags/FLACTags.m;
@@ -4398,46 +4470,55 @@
 			};
 		};
 		EAFFEE4B086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneAnimatedImageView.m;
 			refType = 4;
 		};
 		EAFFEE4C086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneFadingTextField.h;
 			refType = 4;
 		};
 		EAFFEE4D086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneFadingTextField.m;
 			refType = 4;
 		};
 		EAFFEE4F086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiunePauseButton.h;
 			refType = 4;
 		};
 		EAFFEE50086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiunePauseButton.m;
 			refType = 4;
 		};
 		EAFFEE55086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneSongTitleCell.h;
 			refType = 4;
 		};
 		EAFFEE56086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneSongTitleCell.m;
 			refType = 4;
 		};
 		EAFFEE57086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneTextCell.h;
 			refType = 4;
 		};
 		EAFFEE58086E54DA039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = CynthiuneTextCell.m;
 			refType = 4;
@@ -4556,60 +4637,70 @@
 			refType = 4;
 		};
 		EAFFEE6C086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSArrayExtensions.h;
 			path = Frameworks/Cynthiune/NSArrayExtensions.h;
 			refType = 4;
 		};
 		EAFFEE6D086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSArrayExtensions.m;
 			path = Frameworks/Cynthiune/NSArrayExtensions.m;
 			refType = 4;
 		};
 		EAFFEE6E086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSCellExtensions.h;
 			path = Frameworks/Cynthiune/NSCellExtensions.h;
 			refType = 4;
 		};
 		EAFFEE6F086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSCellExtensions.m;
 			path = Frameworks/Cynthiune/NSCellExtensions.m;
 			refType = 4;
 		};
 		EAFFEE70086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSColorExtensions.h;
 			path = Frameworks/Cynthiune/NSColorExtensions.h;
 			refType = 4;
 		};
 		EAFFEE71086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSColorExtensions.m;
 			path = Frameworks/Cynthiune/NSColorExtensions.m;
 			refType = 4;
 		};
 		EAFFEE72086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSTimerExtensions.h;
 			path = Frameworks/Cynthiune/NSTimerExtensions.h;
 			refType = 4;
 		};
 		EAFFEE73086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSTimerExtensions.m;
 			path = Frameworks/Cynthiune/NSTimerExtensions.m;
 			refType = 4;
 		};
 		EAFFEE74086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSViewExtensions.h;
 			path = Frameworks/Cynthiune/NSViewExtensions.h;
 			refType = 4;
 		};
 		EAFFEE75086E5601039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = NSViewExtensions.m;
 			path = Frameworks/Cynthiune/NSViewExtensions.m;
@@ -4697,11 +4788,13 @@
 			};
 		};
 		EAFFEE81086E61A7039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = BundleManager.h;
 			refType = 4;
 		};
 		EAFFEE82086E61A7039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = BundleManager.m;
 			refType = 4;
@@ -4719,11 +4812,13 @@
 			};
 		};
 		EAFFEE85086E61D7039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = MBResultsPanel.h;
 			refType = 4;
 		};
 		EAFFEE86086E61D7039AFE6D = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = MBResultsPanel.m;
 			refType = 4;
@@ -4817,11 +4912,13 @@
 			refType = 4;
 		};
 		F51A012C03BA9CE401000004 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = ChangeLog;
 			refType = 4;
 		};
 		F51A012D03BA9CE401000004 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = COPYING;
 			refType = 4;
@@ -4980,6 +5077,7 @@
 			refType = 4;
 		};
 		F59C8F7903C01A7601C14AF2 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = NEWS;
 			refType = 4;
@@ -5001,114 +5099,136 @@
 //F73
 //F74
 		F7858BEA061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Format.h;
 			path = Frameworks/Cynthiune/Format.h;
 			refType = 4;
 		};
 		F7858BEB061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = FormatTester.h;
 			refType = 4;
 		};
 		F7858BEC061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = FormatTester.m;
 			refType = 4;
 		};
 		F7858BED061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GeneralPreference.h;
 			refType = 4;
 		};
 		F7858BEE061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = GeneralPreference.m;
 			refType = 4;
 		};
 		F7858BEF061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = InfoDisplayController.h;
 			refType = 4;
 		};
 		F7858BF0061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = InfoDisplayController.m;
 			refType = 4;
 		};
 		F7858BF3061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Player.h;
 			refType = 4;
 		};
 		F7858BF4061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Player.m;
 			refType = 4;
 		};
 		F7858BF5061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Playlist.h;
 			refType = 4;
 		};
 		F7858BF6061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Playlist.m;
 			refType = 4;
 		};
 		F7858BF7061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistController.h;
 			refType = 4;
 		};
 		F7858BF8061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistController.m;
 			refType = 4;
 		};
 		F7858BFB061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = Preference.h;
 			path = Frameworks/Cynthiune/Preference.h;
 			refType = 4;
 		};
 		F7858BFC061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PreferencesController.h;
 			refType = 4;
 		};
 		F7858BFD061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PreferencesController.m;
 			refType = 4;
 		};
 		F7858BFE061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Song.h;
 			refType = 4;
 		};
 		F7858BFF061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Song.m;
 			refType = 4;
 		};
 		F7858C00061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistViewController.h;
 			refType = 4;
 		};
 		F7858C01061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PlaylistViewController.m;
 			refType = 4;
 		};
 		F7858C02061FC27301C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = utils.m;
 			path = Frameworks/Cynthiune/utils.m;
 			refType = 4;
 		};
 		F7858C1C061FC2A801C0FE28 = {
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			name = utils.h;
 			path = Frameworks/Cynthiune/utils.h;
@@ -5293,7 +5413,6 @@
 </dict>
 </plist>
 ";
-			shouldUseHeadermap = 0;
 		};
 		F7BED96E0621E945010E156D = {
 			isa = PBXFrameworkReference;
