@@ -45,23 +45,23 @@ BUNDLES += AudioFile
 endif
 
 ifneq (yes,$(disable-flac))
-#BUNDLES += FLAC
+BUNDLES += FLAC
 endif
 
 ifneq (yes,$(disable-mod))
-#BUNDLES += Mod
+BUNDLES += Mod
 endif
 
 ifneq (yes,$(disable-windowsmedia))
-#BUNDLES += WindowsMedia
+BUNDLES += WindowsMedia
 endif
 
 ifneq (yes,$(disable-musepack))
-#BUNDLES += Musepack
+BUNDLES += Musepack
 endif
 
 ifneq (yes,$(disable-timidity))
-#BUNDLES += Timidity
+BUNDLES += Timidity
 endif
 
 ifneq (yes,$(disable-id3tag))
@@ -77,7 +77,7 @@ BUNDLES += ASFTags
 endif
 
 ifneq (yes,$(disable-flactags))
-#BUNDLES += FLACTags
+BUNDLES += FLACTags
 endif
 
 ifneq (yes,$(disable-vorbistags))
@@ -96,16 +96,20 @@ ifneq (yes,$(disable-oss))
 BUNDLES += OSS
 endif
 
+# sndio is OpenBSD only
+ifeq (openbsd,$(GNUSTEP_TARGET_OS))
 ifneq (yes,$(disable-sndio))
 BUNDLES += Sndio
 endif
-
-ifneq (yes,$(disable-esound))
-#BUNDLES += Esound
 endif
 
-ifneq (yes,$(disable-arts))
-#BUNDLES += aRts
+ifneq (yes,$(disable-esound))
+BUNDLES += Esound
+endif
+
+# disable arts by default, rarely used
+ifeq (yes,$(enable-arts))
+BUNDLES += aRts
 endif
 
 endif
