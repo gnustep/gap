@@ -36,6 +36,7 @@
   id parentPlayer;
 
   BOOL stopRequested;
+  BOOL isRunning;
 
   struct sio_hdl *hdl;
   struct sio_par par;
