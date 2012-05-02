@@ -45,7 +45,7 @@
 #define defaultOutputBundle @"MacOSXPlayer"
 #else
 #ifdef __linux__
-#define defaultOutputBundle @"OSS"
+#define defaultOutputBundle @"ALSA"
 #else
 #ifdef __OpenBSD__
 #define defaultOutputBundle @"Sndio"
@@ -53,7 +53,7 @@
 #ifdef __WIN32__
 #define defaultOutputBundle @"WaveOut"
 #else
-#define defaultOutputBundle @"Esound"
+#define defaultOutputBundle @"OSS"
 #endif
 #endif
 #endif

@@ -94,6 +94,16 @@ endif
 
 else
 
+# GNUSTEP_TARGET_OS is defined to `linux-gnueabi' on armel and
+# `linux-gnuspe' on powerpcspe.
+ifneq (,$(findstring linux-gnu,$(GNUSTEP_TARGET_OS)))
+
+ifneq (yes,$(disable-alsa))
+BUNDLES += ALSA
+endif
+
+endif
+
 ifneq (yes,$(disable-oss))
 BUNDLES += OSS
 endif
