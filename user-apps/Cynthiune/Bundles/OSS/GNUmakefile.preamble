@@ -26,4 +26,3 @@ ADDITIONAL_LDFLAGS += -lossaudio
 else ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 BUNDLE_LIBS += -L../../Frameworks/Cynthiune/obj
 endif
-endif
