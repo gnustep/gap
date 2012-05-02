@@ -34,10 +34,20 @@ BUNDLES =
 ifneq (yes,$(disable-bundles))
 ifneq (yes,$(disable-mp3))
 BUNDLES += MP3
+
+ifneq (yes,$(disable-id3tag))
+BUNDLES += ID3Tag
+endif
+
 endif
 
 ifneq (yes,$(disable-ogg))
 BUNDLES += Ogg
+
+ifneq (yes,$(disable-vorbistags))
+BUNDLES += VorbisTags
+endif
+
 endif
 
 ifneq (yes,$(disable-audiofile))
@@ -46,6 +56,11 @@ endif
 
 ifneq (yes,$(disable-flac))
 BUNDLES += FLAC
+
+ifneq (yes,$(disable-flactags))
+BUNDLES += FLACTags
+endif
+
 endif
 
 ifneq (yes,$(disable-mod))
@@ -63,25 +78,12 @@ endif
 ifneq (yes,$(disable-timidity))
 BUNDLES += Timidity
 endif
-
-ifneq (yes,$(disable-id3tag))
-BUNDLES += ID3Tag
-endif
-
 ifneq (yes,$(disable-taglib))
 BUNDLES += Taglib
 endif
 
 ifneq (yes,$(disable-asftags))
 BUNDLES += ASFTags
-endif
-
-ifneq (yes,$(disable-flactags))
-BUNDLES += FLACTags
-endif
-
-ifneq (yes,$(disable-vorbistags))
-BUNDLES += VorbisTags
 endif
 
 ifeq (mingw32,$(GNUSTEP_TARGET_OS))
