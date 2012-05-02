@@ -28,7 +28,7 @@ else
 ID3Tag_CFLAGS := $(shell pkg-config id3tag --cflags)
 ID3Tag_LIBS := $(shell pkg-config id3tag --libs)
 
-ADDITIONAL_LDFLAGS += $(ID3Tag_LIBS)
+BUNDLE_LIBS += $(ID3Tag_LIBS)
 endif
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(ID3Tag_CFLAGS)

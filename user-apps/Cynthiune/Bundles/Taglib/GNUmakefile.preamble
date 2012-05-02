@@ -26,9 +26,9 @@ TAGLIB_LIBS = -ltag_c -ltag -lz -lstdc++
 ADDITIONAL_GUI_LIBS += $(TAGLIB_LIBS)
 else
 TAGLIB_CFLAGS = $(shell taglib-config --cflags)
-TAGLIB_LIBS = $(shell taglib-config --libs) -ltag_c
+TAGLIB_LIBS = $(shell pkg-config taglib_c --libs)
 
-ADDITIONAL_LDFLAGS += $(TAGLIB_LIBS)
+BUNDLE_LIBS += $(TAGLIB_LIBS)
 endif
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(TAGLIB_CFLAGS)

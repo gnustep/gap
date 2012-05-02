@@ -77,7 +77,8 @@ NSTimerExtensions.m \
 NSViewExtensions.m \
 utils.m
 
-Cynthiune_LIBRARIES_DEPEND_UPON += -lgnustep-gui -l$(FOUNDATION_LIBRARY_NAME)
+Cynthiune_LIBRARIES_DEPEND_UPON += $(OBJC_LIBS) $(GUI_LIBS) \
+				     -l$(FOUNDATION_LIBRARY_NAME)
 
 -include GNUmakefile.preamble
 -include GNUmakefile.local

@@ -10,5 +10,5 @@ endif
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 ADDITIONAL_GUI_LIBS += -L$(FRAMEWORKS_DIRS)/../../Cynthiune.app $(_ldflags)
 else
-ADDITIONAL_LDFLAGS += $(_ldflags)
+ADDITIONAL_GUI_LIBS += $(_ldflags)
 endif

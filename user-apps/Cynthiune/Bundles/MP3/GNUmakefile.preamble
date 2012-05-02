@@ -38,10 +38,7 @@ MAD_LIBS := $(shell pkg-config mad --libs)
 ID3Tag_CFLAGS := $(shell pkg-config id3tag --cflags)
 ID3Tag_LIBS := $(shell pkg-config id3tag --libs)
 
-TAGLIB_CFLAGS = $(shell taglib-config --cflags)
-TAGLIB_LIBS = $(shell taglib-config --libs) -ltag_c
-
-ADDITIONAL_LDFLAGS += $(MAD_LIBS) $(ID3Tag_LIBS) $(TAGLIB_LIBS)
+BUNDLE_LIBS += $(MAD_LIBS) $(ID3Tag_LIBS)
 endif
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(MAD_CFLAGS) $(ID3Tag_CFLAGS) $(TAGLIB_CFLAGS)

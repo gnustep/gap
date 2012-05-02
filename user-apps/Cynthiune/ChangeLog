@@ -1,3 +1,41 @@
+2012-05-02  Yavor Doganov  <yavor@gnu.org> (originally 2009-04-09)
+
+	* Frameworks/Cynthiune/GNUmakefile
+	(Cynthiune_LIBRARIES_DEPEND_UPON): Add $(OBJC_LIBS).
+	* Bundles/ID3Tag/GNUmakefile.preamble (ADDITIONAL_LDFLAGS): Rename
+	as...
+	(BUNDLE_LIBS): ...which is the proper variable.
+	* Bundles/AudioFile/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/FLACTags/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/FLAC/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/Musepack/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/Esound/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/aRts/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/WindowsMedia/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	* Bundles/MP3/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	(TAGLIB_CFLAGS, TAGLIB_LIBS): Do not define.
+	* Bundles/Mod/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.  Don't link against libstdc++.
+	* Bundles/VorbisTags/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	(VORBIS_LIBS): Don't link against libvorbisenc.
+	* Bundles/Ogg/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	(VORBIS_LIBS): Likewise.
+	* Bundles/Taglib/GNUmakefile.preamble (ADDITIONAL_LDFLAGS)
+	(BUNDLE_LIBS): Likewise.
+	(TAGLIB_LIBS): Link only against libtaglib_c.
+	* frameworks.make (ADDITIONAL_LDFLAGS): Rename as...
+	(ADDITIONAL_GUI_LIBS): ...this.
+
 2012-04-30 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/Sndio/Sndio.h
