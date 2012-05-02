@@ -19,6 +19,10 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+ifeq (mingw32, $(GNUSTEP_TARGET_OS))
+BUNDLE_LIBS += -L../../Frameworks/Cynthiune/obj
+endif
+
 ADDITIONAL_INCLUDE_DIRS += -I../..
 
-ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
+ADDITIONAL_OBJCFLAGS += -Wall

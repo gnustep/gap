@@ -25,4 +25,8 @@ AVIFILE_LIBS := $(shell avifile-config --libs)
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(AVIFILE_CFLAGS)
 BUNDLE_LIBS += $(AVIFILE_LIBS)
 
+ifeq (mingw32, $(GNUSTEP_TARGET_OS))
+BUNDLE_LIBS += -L../../Frameworks/Cynthiune/obj
+endif
+
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

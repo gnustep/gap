@@ -19,8 +19,11 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
+ADDITIONAL_OBJCFLAGS += -Wall
 
 ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 ADDITIONAL_LDFLAGS += -lossaudio
+else ifeq (mingw32, $(GNUSTEP_TARGET_OS))
+BUNDLE_LIBS += -L../../Frameworks/Cynthiune/obj
+endif
 endif

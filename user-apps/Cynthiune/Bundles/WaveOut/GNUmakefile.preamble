@@ -21,4 +21,6 @@
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
 
-ADDITIONAL_GUI_LIBS += -lwinmm
+BUNDLE_LIBS += -L../../Frameworks/Cynthiune/obj -lwinmm
+
+#ADDITIONAL_GUI_LIBS += -lwinmm

@@ -76,7 +76,7 @@ FRAMEWORKS = Cynthiune
 
 include ../../frameworks.make
 
--include GNUmakefile.preamble
+include GNUmakefile.preamble
 -include GNUmakefile.local
 include $(GNUSTEP_MAKEFILES)/bundle.make
 -include GNUmakefile.postamble

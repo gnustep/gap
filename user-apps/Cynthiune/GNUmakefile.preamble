@@ -25,9 +25,11 @@ ifeq ($(local-build), yes)
 ADDITIONAL_CPPFLAGS += -DLOCALBUILD=1
 endif
 
+ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 #ADDITIONAL_GUI_LIBS += -L/MingW/bin -lmusicbrainz3
 #ADDITIONAL_GUI_LIBS += -L/MingW/bin -lmusicbrainz3
-ADDITIONAL_GUI_LIBS += -L/MingW/bin
+ADDITIONAL_GUI_LIBS += -L/MingW/bin  -L./Frameworks/Cynthiune/obj
+endif
 
 ifeq ($(enable-goom), yes)
 ADDITIONAL_CPPFLAGS += -DGOOM=1
