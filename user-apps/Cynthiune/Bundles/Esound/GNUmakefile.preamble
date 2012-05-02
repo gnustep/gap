@@ -23,6 +23,6 @@ ESD_CFLAGS := $(shell esd-config --cflags)
 ESD_LIBS := $(shell esd-config --libs)
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(ESD_CFLAGS)
-ADDITIONAL_LDFLAGS += -I../.. $(ESD_LIBS)
+BUNDLE_LIBS += -I../.. $(ESD_LIBS)
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

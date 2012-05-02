@@ -23,6 +23,6 @@ AVIFILE_CFLAGS := $(shell avifile-config --cflags)
 AVIFILE_LIBS := $(shell avifile-config --libs)
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(AVIFILE_CFLAGS)
-ADDITIONAL_LDFLAGS += $(AVIFILE_LIBS)
+BUNDLE_LIBS += $(AVIFILE_LIBS)
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

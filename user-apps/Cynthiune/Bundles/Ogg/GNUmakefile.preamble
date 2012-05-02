@@ -19,12 +19,12 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-VORBIS_LIBS := -lvorbisenc -lvorbisfile -lvorbis -logg
+VORBIS_LIBS := -lvorbisfile -lvorbis -logg
 
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 ADDITIONAL_GUI_LIBS += $(VORBIS_LIBS)
 else
-ADDITIONAL_LDFLAGS += $(VORBIS_LIBS)
+BUNDLE_LIBS += $(VORBIS_LIBS)
 endif
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

@@ -26,7 +26,7 @@ ADDITIONAL_INCLUDE_DIRS += -I../.. \
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 ADDITIONAL_GUI_LIBS += -lmodplug -lstdc++
 else
-ADDITIONAL_LDFLAGS += -lmodplug -lstdc++
+BUNDLE_LIBS += -lmodplug
 endif
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

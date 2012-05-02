@@ -20,4 +20,4 @@
 # Boston, MA 02111-1307, USA.
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import $(shell artsc-config --cflags) -DARTSD="\"$(shell artsc-config --arts-prefix)/bin/artsd\""
-ADDITIONAL_LDFLAGS += $(shell artsc-config --libs)
+BUNDLE_LIBS += $(shell artsc-config --libs)
