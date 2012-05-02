@@ -23,7 +23,7 @@ ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 TAGLIB_CFLAGS = -I/MingW/include/taglib
 TAGLIB_LIBS = -ltag_c -ltag -lz -lstdc++
 
-ADDITIONAL_GUI_LIBS += $(TAGLIB_LIBS)
+BUNDLE_LIBS += $(TAGLIB_LIBS) -L../../Frameworks/Cynthiune/obj
 else
 TAGLIB_CFLAGS = $(shell taglib-config --cflags)
 TAGLIB_LIBS = $(shell pkg-config taglib_c --libs)

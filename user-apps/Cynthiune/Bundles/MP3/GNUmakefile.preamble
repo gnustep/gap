@@ -30,7 +30,8 @@ ID3Tag_LIBS := -lid3tag -lz
 TAGLIB_CFLAGS = -I/MingW/include/taglib
 TAGLIB_LIBS = -ltag_c -ltag -lz -lstdc++
 
-ADDITIONAL_GUI_LIBS += $(MAD_LIBS) $(ID3Tag_LIBS) $(TAGLIB_LIBS)
+BUNDLE_LIBS += $(MAD_LIBS) $(ID3Tag_LIBS) $(TAGLIB_LIBS) -L../../Frameworks/Cynthiune/obj
+
 else
 MAD_CFLAGS := $(shell pkg-config mad --cflags)
 MAD_LIBS := $(shell pkg-config mad --libs)

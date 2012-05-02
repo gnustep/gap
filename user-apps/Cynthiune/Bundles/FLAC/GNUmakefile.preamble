@@ -24,9 +24,10 @@ ADDITIONAL_INCLUDE_DIRS += -I../..
 FLAC_LIBS := -lFLAC
 
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
-ADDITIONAL_GUI_LIBS += $(FLAC_LIBS)
-else
-BUNDLE_LIBS += $(FLAC_LIBS)
+BUNDLE_LIBS += $(FLAC_LIBS) -L../../Frameworks/Cynthiune/obj
 endif
+
+BUNDLE_LIBS += $(FLAC_LIBS)
+
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

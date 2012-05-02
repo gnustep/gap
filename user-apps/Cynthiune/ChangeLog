@@ -1,3 +1,28 @@
+2012-05-02 Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.preamble
+	* Bundles/ASFTags/GNUmakefile
+	* Bundles/ASFTags/GNUmakefile.preamble
+	* Bundles/FLAC/GNUmakefile
+	* Bundles/FLAC/GNUmakefile.preamble
+	* Bundles/FLACTags/GNUmakefile
+	* Bundles/FLACTags/GNUmakefile.preamble
+	* Bundles/ID3Tag/GNUmakefile
+	* Bundles/ID3Tag/GNUmakefile.preamble
+	* Bundles/MP3/GNUmakefile.preamble
+	* Bundles/OSS/GNUmakefile
+	* Bundles/OSS/GNUmakefile.preamble
+	* Bundles/Taglib/GNUmakefile
+	* Bundles/Taglib/GNUmakefile.preamble
+	* Bundles/Timidity/GNUmakefile
+	* Bundles/Timidity/GNUmakefile.preamble
+	* Bundles/VorbisTags/GNUmakefile
+	* Bundles/VorbisTags/GNUmakefile.preamble
+	* Bundles/WaveOut/GNUmakefile.preamble
+	* Bundles/WindowsMedia/GNUmakefile
+	* Bundles/WindowsMedia/GNUmakefile.preamble:
+	Fix linking flags for Windows
+
 2012-05-02  Yavor Doganov  <yavor@gnu.org> (originally 2009-04-09)
 
 	* Frameworks/Cynthiune/GNUmakefile

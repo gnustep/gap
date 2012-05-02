@@ -23,7 +23,7 @@ ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 ID3Tag_CFLAGS := -I/MinGW/include
 ID3Tag_LIBS := -lid3tag -lz
 
-ADDITIONAL_GUI_LIBS += $(ID3Tag_LIBS)
+BUNDLE_LIBS += $(ID3Tag_LIBS) -L../../Frameworks/Cynthiune/obj
 else
 ID3Tag_CFLAGS := $(shell pkg-config id3tag --cflags)
 ID3Tag_LIBS := $(shell pkg-config id3tag --libs)

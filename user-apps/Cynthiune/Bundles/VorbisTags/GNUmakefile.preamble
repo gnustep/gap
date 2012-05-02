@@ -22,9 +22,9 @@
 VORBIS_LIBS := -lvorbisfile -lvorbis -logg
 
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
-ADDITIONAL_GUI_LIBS += $(VORBIS_LIBS)
-else
-BUNDLE_LIBS += $(VORBIS_LIBS)
+BUNDLE_LIBS += -L../../Frameworks/Cynthiune/obj
 endif
 
-ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
+BUNDLE_LIBS += $(VORBIS_LIBS)
+
+ADDITIONAL_OBJCFLAGS += -Wall
