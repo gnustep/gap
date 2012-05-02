@@ -1,3 +1,13 @@
+2012-05-03 Riccardo Mottola for Yavor Doganov
+
+	* GNUmakefile
+	* GeneralPreference.m
+	* Bundles/ALSA/ALSA.h
+	* Bundles/ALSA/ALSA.m
+	* Bundles/ALSA/GNUmakefile
+	* Bundles/ALSA/GNUmakefile.preamble
+	ALSA backend fron Yavor with slight modifications
+
 2012-05-02 Riccardo Mottola <rm@gnu.org>
 
 	* GNUmakefile.preamble
