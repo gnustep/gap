@@ -119,6 +119,10 @@ ifneq (yes,$(disable-esound))
 BUNDLES += Esound
 endif
 
+ifneq (yes,$(disable-ao))
+BUNDLES += AO
+endif
+
 # disable arts by default, rarely used
 ifeq (yes,$(enable-arts))
 BUNDLES += aRts
