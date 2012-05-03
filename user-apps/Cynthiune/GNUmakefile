@@ -299,21 +299,3 @@ include $(GNUSTEP_MAKEFILES)/aggregate.make
 include $(GNUSTEP_MAKEFILES)/application.make
 -include GNUmakefile.postamble
 
-# unit tests
-
-test-all::
-	@-( cd Tests; make && make test ) 2> /dev/null
-
-test-app::
-	@-( cd Tests/Cynthiune_app; make && make test ) 2> /dev/null
-
-test-fwk::
-	@-( cd Tests/Cynthiune_framework; make && make test ) 2> /dev/null
-
-after-clean::
-	@-( cd Frameworks/CynthiuneTest && make clean ) 2> /dev/null
-	@-( cd Tests && make clean ) 2> /dev/null
-
-after-distclean::
-	@-( cd Frameworks/CynthiuneTest && make distclean ) 2> /dev/null
-	@-( cd Tests && make distclean ) 2> /dev/null
