@@ -241,7 +241,6 @@ FreeQis (char *qis[])
 //   [lookupButton centerViewHorizontally];
 
   [inspectorPanel setTitle: LOCALIZED (@"Song Inspector")];
-  [inspectorPanel setLevel: NSStatusWindowLevel];
   [inspectorPanel setDelegate: self];
 }
 
