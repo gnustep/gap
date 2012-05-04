@@ -1,8 +1,10 @@
 /* ID3Tag.m - this file is part of Cynthiune
  *
  * Copyright (C) 2005 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation, Inc
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         The GNUstep Application Team
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +23,9 @@
  */
 
 #import <Foundation/Foundation.h>
-
-#import <id3tag.h>
-
 #import <Cynthiune/utils.h>
+
+#include <id3tag.h>
 
 #import "ID3Tag.h"
 
@@ -91,7 +92,7 @@
           string = id3_field_getstrings (field, 0);
           if (string)
             {
-              if (commentTag == ID3_FRAME_GENRE)
+              if (!strcmp(commentTag, ID3_FRAME_GENRE))
                 string = id3_genre_name (string);
               comment = [NSString stringWithUCS4String: string];
             }

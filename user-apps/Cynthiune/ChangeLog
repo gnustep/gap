@@ -1,7 +1,12 @@
+2012-05-04 Riccardo Mottola <rm@gnu.org>
+
+	* Bundles/ID3Tag/ID3Tag.m
+	Compare strings with strcmp and not ==
+
 2012-05-03  Philippe Roussel  <p.o.roussel@free.fr>
 
 	* Bundles/AO/*
-	New output bundle base on libao. 
+	New output bundle base on libao.
 
 	* GNUmakefile
 	Add AO bundle to the build, unless disable-ao=yes if used.
