@@ -1,8 +1,10 @@
 /* GeneralPreference.m - this file is part of Cynthiune
  *
  * Copyright (C) 2003 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation, Inc
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,7 +85,7 @@
 #ifdef __MACOSX__
   NSNumber *windowsAreTextured;
 #endif
-
+  
   if (!initted)
     {
       outputBundle = [preference objectForKey: @"OutputBundle"];
@@ -144,10 +146,14 @@
       if (!windowsInformation)
         {
           windowsInformation = [NSMutableDictionary dictionaryWithCapacity: 1];
-          [preference setObject: windowsInformation
-                      forKey: @"WindowsInformation"];
         }
-
+      else
+	{
+	  /* reading a preference looses the mutable attribute */
+	  windowsInformation = [NSMutableDictionary dictionaryWithDictionary: windowsInformation];
+	}
+      [preference setObject: windowsInformation
+		     forKey: @"WindowsInformation"];
       initted = YES;
     }
 }
