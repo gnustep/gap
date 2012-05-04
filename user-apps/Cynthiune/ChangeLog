@@ -3,6 +3,9 @@
 	* GeneralPreference.m
 	When reading preferences, transform in a mutable dictionary since that is what we expect.
 
+	* SongInspectorController.m
+	Don't set the inspector to status level: it is ugly and doesn't work on Unity and other WMs anyway.
+
 2012-05-04 Riccardo Mottola <rm@gnu.org>
 
 	* Bundles/ID3Tag/ID3Tag.m
