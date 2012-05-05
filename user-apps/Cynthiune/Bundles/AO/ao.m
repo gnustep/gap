@@ -65,9 +65,11 @@
 - (id) init
 {
   if ((self = [super init])) {
-    ao_initialize();
     stopRequested = NO;
+    memset(&format, 0, sizeof(format));
     devlock = [NSLock new];
+    ao_initialize();
+    driver = ao_default_driver_id();
   }
   return self;
 }
@@ -87,24 +89,26 @@
   format.rate = (int)sampleRate;
   /* FIXME : this should somehow come from the input bundle */
   format.bits = 16;
-  format.byte_format = AO_FMT_NATIVE;
+  format.byte_format = AO_FMT_LITTLE;
+  if (dev) {
+    [devlock lock];
+    ao_close(dev);
+    dev = ao_open_live(driver, &format, NULL);
+    [devlock unlock];
+    return ((dev == NULL) ? NO : YES);
+  }
   return YES;
 }
 
 - (BOOL) openDevice
 {
-  [devlock lock];
-  driver = ao_default_driver_id();
   dev = ao_open_live(driver, &format, NULL);
-  [devlock unlock];
   return ((dev == NULL) ? NO : YES);
 }
 
 - (void) closeDevice
 {
-  [devlock lock];
   ao_close(dev);
-  [devlock unlock];
 }
 
 - (void) threadLoop
@@ -112,18 +116,18 @@
   int bufferSize;
   NSAutoreleasePool *pool = [NSAutoreleasePool new];
 
-  [devlock lock];
   while (!stopRequested) {
       bufferSize = [parentPlayer readNextChunk: buffer
 				      withSize: DEFAULT_BUFFER_SIZE];
+      [devlock lock];
       if (bufferSize > 0)
 	ao_play(dev, (char *)buffer, (uint_32)bufferSize);
+      [devlock unlock];
       /* FIXME : copied from ALSA.m, I'm not sure this is needed */
       if ([pool autoreleaseCount] > 50)
 	[pool emptyPool];
   }
   stopRequested = NO;
-  [devlock unlock];
   [pool release];
 }
 

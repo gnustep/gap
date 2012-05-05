@@ -1,3 +1,11 @@
+2012-05-05 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* Bundles/AO/ao.m fix resetting of audio parameters
+	  when automatically jumping to next song with different
+	  bit rate. Further, use AO_FMT_LITTLE, to fix output
+	  on big endian systems, i.e. PowerPC. From Philippe
+	  Roussel, Thanks! 
+
 2012-05-04 Riccardo Mottola <rm@gnu.org>
 
 	* GeneralPreference.m
