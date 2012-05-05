@@ -108,6 +108,7 @@
   sio_initpar(&par);
   par.pchan = numberOfChannels;
   par.rate = sampleRate;
+  par.le = 1;
 
   if (sio_setpar(hdl, &par))
     {

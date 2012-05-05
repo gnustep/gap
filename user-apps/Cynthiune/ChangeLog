@@ -1,4 +1,9 @@
 2012-05-05 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	
+	* Bundles/Sndio/Sndio.m Force to use little endian
+	  format, to make it work on Big Endian architectures
+
+2012-05-05 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/AO/ao.m fix resetting of audio parameters
 	  when automatically jumping to next song with different
