@@ -1,0 +1,51 @@
+/***
+Japanese.lproj/Localizable.strings
+updated by make_strings 2005-06-07 18:08:13 +0700
+add comments above this one
+***/
+
+
+/*** Unmatched/untranslated keys ***/
+
+/* File: ../../Controller.m:167 */
+/* Flag: untranslated */
+"Select All" = "Select All";
+
+
+/*** Strings from ../../Controller.m ***/
+/* File: ../../Controller.m:174 */
+"Arrange In Front" = "前面に表示";
+/* File: ../../Controller.m:176 */
+"Close Window" = "閉じる";
+/* File: ../../Controller.m:165 */
+"Copy" = "コピー";
+/* File: ../../Controller.m:164 */
+"Cut" = "切り取り";
+/* File: ../../Controller.m:188 */
+/* File: ../../Controller.m:162 */
+"Edit" = "編集";
+/* File: ../../Controller.m:79 */
+"Exact Search" = "意味";
+/* File: ../../Controller.m:191 */
+"Hide" = "隠す";
+/* File: ../../Controller.m:187 */
+"Info Panel..." = "表示...";
+/* File: ../../Controller.m:157 */
+/* File: ../../Controller.m:73 */
+"Jishyo" = "辞書";
+/* File: ../../Controller.m:175 */
+"Miniaturize Window" = "最小化";
+/* File: ../../Controller.m:166 */
+"Paste" = "貼り付け";
+/* File: ../../Controller.m:192 */
+"Quit" = "終了";
+/* File: ../../Controller.m:83 */
+"Related Search" = "関連語検索";
+/* File: ../../Controller.m:190 */
+/* File: ../../Controller.m:181 */
+"Services" = "サービス";
+/* File: ../../Controller.m:81 */
+"Similar Search" = "類似語検索";
+/* File: ../../Controller.m:189 */
+/* File: ../../Controller.m:172 */
+"Windows" = "ウィンドウ";

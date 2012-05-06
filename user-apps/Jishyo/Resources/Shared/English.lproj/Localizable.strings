@@ -1,0 +1,46 @@
+/***
+English.lproj/Localizable.strings
+updated by make_strings 2005-06-07 18:08:13 +0700
+add comments above this one
+***/
+
+
+/*** Strings from ../../Controller.m ***/
+/* File: ../../Controller.m:174 */
+"Arrange In Front" = "Arrange In Front";
+/* File: ../../Controller.m:176 */
+"Close Window" = "Close Window";
+/* File: ../../Controller.m:165 */
+"Copy" = "Copy";
+/* File: ../../Controller.m:164 */
+"Cut" = "Cut";
+/* File: ../../Controller.m:188 */
+/* File: ../../Controller.m:162 */
+"Edit" = "Edit";
+/* File: ../../Controller.m:79 */
+"Exact Search" = "Exact Search";
+/* File: ../../Controller.m:191 */
+"Hide" = "Hide";
+/* File: ../../Controller.m:187 */
+"Info Panel..." = "Info Panel...";
+/* File: ../../Controller.m:157 */
+/* File: ../../Controller.m:73 */
+"Jishyo" = "Jishyo";
+/* File: ../../Controller.m:175 */
+"Miniaturize Window" = "Miniaturize Window";
+/* File: ../../Controller.m:166 */
+"Paste" = "Paste";
+/* File: ../../Controller.m:192 */
+"Quit" = "Quit";
+/* File: ../../Controller.m:83 */
+"Related Search" = "Related Search";
+/* File: ../../Controller.m:167 */
+"Select All" = "Select All";
+/* File: ../../Controller.m:190 */
+/* File: ../../Controller.m:181 */
+"Services" = "Services";
+/* File: ../../Controller.m:81 */
+"Similar Search" = "Similar Search";
+/* File: ../../Controller.m:189 */
+/* File: ../../Controller.m:172 */
+"Windows" = "Windows";
