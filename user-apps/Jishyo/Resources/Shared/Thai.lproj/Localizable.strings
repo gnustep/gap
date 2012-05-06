@@ -1,0 +1,53 @@
+/***
+Thai.lproj/Localizable.strings
+updated by make_strings 2005-06-07 18:08:13 +0700
+add comments above this one
+***/
+
+
+/*** Unmatched/untranslated keys ***/
+
+/* File: ../../Controller.m:174 */
+/* Flag: untranslated */
+"Arrange In Front" = "Arrange In Front";
+
+/* File: ../../Controller.m:175 */
+/* Flag: untranslated */
+"Miniaturize Window" = "Miniaturize Window";
+
+
+/*** Strings from ../../Controller.m ***/
+/* File: ../../Controller.m:176 */
+"Close Window" = "ปิดหน้าต่าง";
+/* File: ../../Controller.m:165 */
+"Copy" = "ลอก";
+/* File: ../../Controller.m:164 */
+"Cut" = "ตัด";
+/* File: ../../Controller.m:188 */
+/* File: ../../Controller.m:162 */
+"Edit" = "แก้ไข";
+/* File: ../../Controller.m:79 */
+"Exact Search" = "คำตรง";
+/* File: ../../Controller.m:191 */
+"Hide" = "ซ่อน";
+/* File: ../../Controller.m:187 */
+"Info Panel..." = "ข้อมูล...";
+/* File: ../../Controller.m:157 */
+/* File: ../../Controller.m:73 */
+"Jishyo" = "Jishyo";
+/* File: ../../Controller.m:166 */
+"Paste" = "วาง";
+/* File: ../../Controller.m:192 */
+"Quit" = "ออก";
+/* File: ../../Controller.m:83 */
+"Related Search" = "คำที่เกี่ยวค้องกัน";
+/* File: ../../Controller.m:167 */
+"Select All" = "เลือกทั้งหมด";
+/* File: ../../Controller.m:190 */
+/* File: ../../Controller.m:181 */
+"Services" = "บริการ";
+/* File: ../../Controller.m:81 */
+"Similar Search" = "คำใกล้กัน";
+/* File: ../../Controller.m:189 */
+/* File: ../../Controller.m:172 */
+"Windows" = "หน้าต่าง";
