@@ -21,7 +21,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.     */
 
-// modified by Rob Burns <rburns@softhome.net>
+// modified by Rob Burns <rburns@paiges.net>
 
 #include <stdio.h>
 #include <ctype.h>

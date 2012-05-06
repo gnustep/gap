@@ -3,7 +3,7 @@
   ApplicationDescription = "An English/Japanese Dictionary";
   ApplicationRelease = "0.1";
   FullVersionID = "Version 0.1_2005.06.07";
-  Authors = ("Rob Burns <rburns@softhome.net>");
+  Authors = ("Rob Burns <rburns@paiges.net>");
   Copyright = "Copyright (C) 2005 the authors";
   CopyrightDescription = "Released under the GNU General Public License 2.0";
   NSIcon = "Jishyo.tiff";

@@ -42,6 +42,6 @@ Contributing
 ------------
 
 Patches, complaints, feedback, and suggestions are welcome. Please send to 
-rburns@softhome.net. I'm especially partial to localizations. Localizations for 
+rburns@paiges.net. I'm especially partial to localizations. Localizations for 
 Jishyo can be done entirely from the Localizable.strings file.
 
