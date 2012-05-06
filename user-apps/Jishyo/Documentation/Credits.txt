@@ -1,0 +1,8 @@
+Jim Breen
+
+- The dictionary data, as well as the dictionary searching routines from xjdic.
+
+Banlu Kemiyatorn 
+
+- The magnifying glass icon 
+

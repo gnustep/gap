@@ -1,0 +1,5 @@
+- kana and kanji lookup
+- multi-radical lookup
+- more dictionary data
+- NSCombobox for the search string (and history)
+- nicely formatted results
