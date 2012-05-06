@@ -1,3 +1,3 @@
-Thu Jun 7 09:37:06 UTC 2005 - rburns@softhome.net
+Thu Jun 7 09:37:06 UTC 2005 - rburns@paiges.net
 
 	* Version 0.1 release
