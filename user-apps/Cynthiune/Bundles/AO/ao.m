@@ -85,30 +85,40 @@
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
 {
+  BOOL result = YES;
+
   format.channels = (int)numberOfChannels;
   format.rate = (int)sampleRate;
   /* FIXME : this should somehow come from the input bundle */
   format.bits = 16;
   format.byte_format = AO_FMT_LITTLE;
+  [devlock lock];
   if (dev) {
-    [devlock lock];
     ao_close(dev);
     dev = ao_open_live(driver, &format, NULL);
-    [devlock unlock];
-    return ((dev == NULL) ? NO : YES);
+    result = (dev == NULL) ? NO : YES;
   }
-  return YES;
+  [devlock unlock];
+  return result;
 }
 
 - (BOOL) openDevice
 {
+  BOOL result;
+
+  [devlock lock];
   dev = ao_open_live(driver, &format, NULL);
-  return ((dev == NULL) ? NO : YES);
+  result = (dev == NULL) ? NO : YES;
+  [devlock unlock];
+  return result;
 }
 
 - (void) closeDevice
 {
+  [devlock lock];
   ao_close(dev);
+  dev = NULL;
+  [devlock unlock];
 }
 
 - (void) threadLoop
@@ -120,7 +130,7 @@
       bufferSize = [parentPlayer readNextChunk: buffer
 				      withSize: DEFAULT_BUFFER_SIZE];
       [devlock lock];
-      if (bufferSize > 0)
+      if (dev && bufferSize > 0)
 	ao_play(dev, (char *)buffer, (uint_32)bufferSize);
       [devlock unlock];
       /* FIXME : copied from ALSA.m, I'm not sure this is needed */
