@@ -1,5 +1,10 @@
 2012-05-09 Riccardo Mottola <rm@gnu.org>
 
+	* PlaylistController.m
+	Remove hacks and use runModalForTypes.
+
+2012-05-09 Riccardo Mottola <rm@gnu.org>
+
 	* PlaylistController.h
 	* PlaylistController.m
 	* Cynthiune.gorm
@@ -23,7 +28,7 @@
 	  when automatically jumping to next song with different
 	  bit rate. Further, use AO_FMT_LITTLE, to fix output
 	  on big endian systems, i.e. PowerPC. From Philippe
-	  Roussel, Thanks! 
+	  Roussel, Thanks!
 
 2012-05-04 Riccardo Mottola <rm@gnu.org>
 

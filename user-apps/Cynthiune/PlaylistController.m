@@ -571,23 +571,16 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 - (void) _runOpenPanelWithDidEndSelector: (SEL) selector
 {
   NSOpenPanel *oPanel;
-  NSString *openDir;
   int result;
 
-  openDir = [[NSUserDefaults standardUserDefaults]
-              stringForKey: @"NSDefaultOpenDirectory"];
 
   oPanel = [NSOpenPanel openPanel];
   [oPanel setAllowsMultipleSelection: YES];
   [oPanel setCanChooseDirectories: YES];
   [oPanel setTitle: LOCALIZED (@"Add music files...")];
-#ifdef GNUSTEP
-  [oPanel setDirectory: openDir];
-#endif /* GNUSTEP */ // FIXME RM why not runModalForTypes ???
+
   [oPanel setDelegate: self];
-  result = [oPanel runModalForDirectory: nil
-                                   file: nil
-                                  types: nil];
+  result = [oPanel runModalForTypes: nil];
   [self _oPanelDidEnd: oPanel returnCode: result contextInfo: nil];
 }
 
@@ -595,7 +588,6 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 - (void) _runPlaylistOpenPanelWithDidEndSelector: (SEL) selector
 {
   NSOpenPanel *oPanel;
-  NSString *openDir;
   int result;
   NSArray *types;
 
