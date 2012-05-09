@@ -140,7 +140,7 @@ SUBPROJECTS = Frameworks/Cynthiune $(addprefix Bundles/,$(BUNDLES))
 
 PACKAGE_NAME=Cynthiune
 APP_NAME=Cynthiune
-VERSION=0.9.5
+VERSION=1.0.0
 
 Cynthiune_APPLICATION_ICON=Cynthiune.tiff
 Cynthiune_MAIN_MODEL_FILE=Cynthiune.gorm

@@ -1,15 +1,14 @@
 {
     ApplicationDescription = "A free and romantic music player";
     ApplicationName = Cynthiune;
-    ApplicationRelease = 0.9.5;
-    NSBuildVersion = "2006-03-31";
+    ApplicationRelease = 1.0.0;
     NSIcon = Cynthiune.tiff;
-    URL = "http://WolfgangSourdeau.DynDNS.ORG/cynthiune/";
+    URL = "http://gap.nongnu.org/cynthiune/";
     Authors = ( "Wolfgang Sourdeau <Wolfgang@Contre.COM>",
-                "http://WolfgangSourdeau.DynDNS.ORG/cynthiune/" );
-    Copyright = "Copyright \U00a9 2002-2006 by Wolfgang Sourdeau";
-    CopyrightDescription = "Released under the GNU General Public License 2.0";
-    FullVersionID = "0.9.5 (March 31st, 2006)";
+                "The GNUstep Application Team" );
+    Copyright = "Copyright \U00a9 2002-2006 by Wolfgang Sourdeau\n        2012 The GNUstep Application Project";
+    CopyrightDescription = "Released under the GNU General Public License 2.0 or later";
+    FullVersionID = "1.0.0 (05 2012)";
 
     NSTypes = (
         {
