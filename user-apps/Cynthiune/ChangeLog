@@ -1,11 +1,19 @@
-2012-05-08: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+2012-05-09 Riccardo Mottola <rm@gnu.org>
+
+	* PlaylistController.h
+	* PlaylistController.m
+	* Cynthiune.gorm
+	* English.lproj/Localizable.strings
+	Implement open playlist
+
+2012-05-08 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/AO/ao.m fix crasher when jumping automatically
 	  from one song to the next which have different bit rates
 	  patch from Philippe Roussel
 
 2012-05-05 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
-	
+
 	* Bundles/Sndio/Sndio.m Force to use little endian
 	  format, to make it work on Big Endian architectures
 

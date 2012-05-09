@@ -103,6 +103,8 @@
 /* menu actions */
 - (void) addSongs: (id) sender;
 
+- (void) addPlaylist: (id) sender;
+
 - (void) removeSelectedSongs: (id) sender;
 - (void) removeAllSongs: (id) sender;
 - (void) cleanupPlaylist: (id) sender;

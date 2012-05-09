@@ -39,6 +39,7 @@
     };
     FirstResponder = {
 	Actions = (
+	    "addPlaylist:",
 	    "sendABugReport:",
 	    "toggleSongInspector:"
 	);
@@ -78,7 +79,8 @@
 	    "saveListAs:",
 	    "toggleShuffle:",
 	    "toggleRepeat:",
-	    "toggleSongInspector:"
+	    "toggleSongInspector:",
+	    "addPlaylist:"
 	);
 	Outlets = (
 	    previousButton,

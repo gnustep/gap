@@ -1,8 +1,10 @@
 /* PlaylistController.m - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2006  Wolfgang Sourdeau
+ *               2012 The Free Software Foundation, Inc
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -565,6 +567,7 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
     }
 }
 
+/* load all files */
 - (void) _runOpenPanelWithDidEndSelector: (SEL) selector
 {
   NSOpenPanel *oPanel;
@@ -580,7 +583,7 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   [oPanel setTitle: LOCALIZED (@"Add music files...")];
 #ifdef GNUSTEP
   [oPanel setDirectory: openDir];
-#endif /* GNUSTEP */
+#endif /* GNUSTEP */ // FIXME RM why not runModalForTypes ???
   [oPanel setDelegate: self];
   result = [oPanel runModalForDirectory: nil
                                    file: nil
@@ -588,9 +591,35 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   [self _oPanelDidEnd: oPanel returnCode: result contextInfo: nil];
 }
 
+/* load playlists only */
+- (void) _runPlaylistOpenPanelWithDidEndSelector: (SEL) selector
+{
+  NSOpenPanel *oPanel;
+  NSString *openDir;
+  int result;
+  NSArray *types;
+
+  types = [[NSArray arrayWithObjects: @"m3u", @"pls", nil] retain];
+
+
+  oPanel = [NSOpenPanel openPanel];
+  [oPanel setAllowsMultipleSelection: YES];
+  [oPanel setCanChooseDirectories: NO];
+  [oPanel setTitle: LOCALIZED (@"Open Playlist...")];
+  [oPanel setDelegate: self];
+  result = [oPanel runModalForTypes: types];
+  [self _oPanelDidEnd: oPanel returnCode: result contextInfo: nil];
+  [types release];
+}
+
 - (void) addSongs: (id) sender
 {
   [self _runOpenPanelWithDidEndSelector: @selector(_oPanelDidEnd:returnCode:contextInfo:)];
+}
+
+- (void) addPlaylist: (id) sender
+{
+  [self _runPlaylistOpenPanelWithDidEndSelector: @selector(_oPanelDidEnd:returnCode:contextInfo:)];
 }
 
 - (Song *) _songAfterRemovalOfArray: (NSArray *) array
