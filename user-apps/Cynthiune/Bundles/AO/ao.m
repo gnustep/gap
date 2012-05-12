@@ -4,6 +4,7 @@
  * Copyright (C) 2012 Philippe Roussel
  *
  * Author: Philippe Roussel <p.o.roussel@free.fr>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -84,6 +85,7 @@
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
+		    withEndianness: (Endianness) e
 {
   BOOL result = YES;
 
@@ -91,7 +93,10 @@
   format.rate = (int)sampleRate;
   /* FIXME : this should somehow come from the input bundle */
   format.bits = 16;
-  format.byte_format = AO_FMT_LITTLE;
+  if (e == BigEndian)
+    format.byte_format = AO_FMT_BIG;
+  else
+    format.byte_format = AO_FMT_LITTLE;
   [devlock lock];
   if (dev) {
     ao_close(dev);

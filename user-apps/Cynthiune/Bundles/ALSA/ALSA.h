@@ -23,6 +23,8 @@
 #ifndef ALSA_H
 #define ALSA_H
 
+#import <Cynthiune/Output.h>
+
 @interface ALSA : NSObject <CynthiuneBundle, Output>
 {
   id parentPlayer;
@@ -32,6 +34,7 @@
 
   unsigned int channels;
   unsigned long rate;
+  Endianness endianness;
 
   unsigned char buffer[DEFAULT_BUFFER_SIZE];
 }

@@ -1,8 +1,11 @@
 /* Player.m - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2004  Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
+ *         Riccardo Mottola <rm@gnu.org>
+ *      
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -73,6 +76,7 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
       streamsToClose = [NSMutableArray new];
       rate = 0;
       channels = 0;
+      endianness = LittleEndian;
 #ifdef GOOM
       feedGoom = NO;
       bufferedSize = 0;
@@ -271,17 +275,21 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
 {
   unsigned int newChannels;
   unsigned long newRate;
+  Endianness newEndianness;
 
   newChannels = [newStream readChannels];
   newRate = [newStream readRate];
+  newEndianness = [newStream endianness];
 
   if (rate != newRate
-      || channels != newChannels)
+      || channels != newChannels
+      || endianness != newEndianness)
     {
-      if ([output prepareDeviceWithChannels: newChannels andRate: newRate])
+      if ([output prepareDeviceWithChannels: newChannels andRate: newRate withEndianness: newEndianness])
         {
           rate = newRate;
           channels = newChannels;
+	  endianness = newEndianness;
         }
       else
         NSLog (@"error preparing output for %d channels at a rate of %d",
@@ -348,6 +356,7 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
       output = nil;
       rate = 0;
       channels = 0;
+      endianness = LittleEndian;
       [self _reInitOutputIfNeeded: stream];
     }
 

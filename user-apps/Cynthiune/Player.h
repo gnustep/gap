@@ -1,8 +1,10 @@
 /* Player.h - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2004  Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,10 +27,11 @@
 
 #import <Foundation/NSObject.h>
 
+#import <Cynthiune/Format.h>
+
 @class NSNotification;
 @class NSString;
 
-@protocol Format;
 @protocol Output;
 
 #define GOOM_BUFFER_SIZE 2048
@@ -50,6 +53,7 @@
 
   unsigned int channels;
   unsigned long rate;
+  Endianness endianness;
 
   long totalBytes;
 

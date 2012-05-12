@@ -165,6 +165,11 @@
   return rate;
 }
 
+- (Endianness) endianness
+{
+  return LittleEndian;
+}
+
 - (unsigned int) readDuration
 {
   return duration;

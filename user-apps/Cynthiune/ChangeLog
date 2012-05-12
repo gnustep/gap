@@ -1,3 +1,19 @@
+2012-05-13 Riccardo Mottola <rm@gnu.org>
+
+	* Player.h
+	* Player.m
+	* Bundles/ALSA/ALSA.h
+	* Bundles/ALSA/ALSA.m
+	* Bundles/AO/ao.m
+	* Bundles/AudioFile/AudioFile.m
+	* Bundles/MP3/MP3.m
+	* Bundles/OSS/OSS.h
+	* Bundles/OSS/OSS.m
+	* Bundles/WindowsMedia/WindowsMedia.m
+	* Frameworks/Cynthiune/Format.h
+	* Frameworks/Cynthiune/Output.h
+	Set media-endianness in media and output bundle.
+
 2012-05-09 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* GNUmakefile

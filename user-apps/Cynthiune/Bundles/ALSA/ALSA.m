@@ -1,8 +1,10 @@
 /* ALSA.m - this file is part of Cynthiune
  *
- * Copyright (C) 2010 Free Software Foundation, Inc.
+ * Copyright (C) 2010-2012 Free Software Foundation, Inc.
  *
  * Author: Yavor Doganov <yavor@gnu.org>
+ *         Riccardo Mottola <rm@gnu.org>
+ *         The GNUstep Application Team
  *
  * Cynthiune is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,13 +26,15 @@
 #define _REENTRANT 1
 #endif
 
+#include <alsa/asoundlib.h>
+
 #import <AppKit/AppKit.h>
 
 #import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/Output.h>
 #import <Cynthiune/utils.h>
 
-#include <alsa/asoundlib.h>
+
 
 #import "ALSA.h"
 
@@ -80,13 +84,21 @@ static char *device = "default";
 {
   int err;
   BOOL result = NO;
+  snd_pcm_format_t en;
+
+  if (endianness == BigEndian)
+    en = SND_PCM_FORMAT_S16_BE;
+  else if (endianness == LittleEndian)
+    en = SND_PCM_FORMAT_S16_LE;
+  else
+    en = SND_PCM_FORMAT_S16;
 
   if ((err = snd_pcm_open (&pcm_handle, device, SND_PCM_STREAM_PLAYBACK, 0))
       < 0)
     NSRunAlertPanel (LOCALIZED (@"Error"),
 		     LOCALIZED (@"Failed to open the ALSA device:\n%s"),
 		     LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
-  else if ((err = snd_pcm_set_params (pcm_handle, SND_PCM_FORMAT_S16,
+  else if ((err = snd_pcm_set_params (pcm_handle, en,
 				      SND_PCM_ACCESS_RW_INTERLEAVED,
 				      channels, rate, 1, 100000)) < 0)
     NSRunAlertPanel (LOCALIZED (@"Error"),
@@ -105,9 +117,11 @@ static char *device = "default";
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
+		    withEndianness: (Endianness) e
 {
   channels = numberOfChannels;
   rate = sampleRate;
+  endianness = e;
 
   return YES;
 }
