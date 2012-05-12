@@ -1,8 +1,10 @@
 /* AudioFile.m - this file is part of Cynthiune
  *
  * Copyright (C) 2004 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +23,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <audiofile.h>
+#include <audiofile.h>
 
 #import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/Format.h>
@@ -143,6 +145,11 @@
 - (unsigned long) readRate
 {
   return (unsigned long) afGetRate (file, AF_DEFAULT_TRACK);
+}
+
+- (Endianness) endianness
+{
+  return NativeEndian;
 }
 
 - (unsigned int) readDuration

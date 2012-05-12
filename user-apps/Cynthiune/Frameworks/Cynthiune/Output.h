@@ -1,8 +1,10 @@
 /* Output.h - this file is part of Cynthiune
  *
  * Copyright (C) 2004 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +28,8 @@
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
 
+#import <Cynthiune/Format.h>
+
 #define DEFAULT_BUFFER_SIZE 8192
 
 @class NSData;
@@ -40,7 +44,8 @@
 - (void) closeDevice;
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
-                           andRate: (unsigned long) sampleRate;
+                           andRate: (unsigned long) sampleRate
+		    withEndianness: (Endianness) e;
 
 @end
 

@@ -25,6 +25,13 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
+typedef enum
+{
+  NativeEndian = 0,
+  LittleEndian = 1,
+  BigEndian = 2
+} Endianness;
+
 @class NSString;
 @protocol NSObject;
 
@@ -46,6 +53,7 @@
 
 - (unsigned int) readChannels;
 - (unsigned long) readRate;
+- (Endianness) endianness;
 
 - (unsigned int) readDuration;
 

@@ -4,6 +4,7 @@
  *               2012 The GNUstep Application Team
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,13 +22,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#import <Foundation/Foundation.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
-#import <mad.h>
-#import <id3tag.h>
+#include <mad.h>
+#include <id3tag.h>
+
+#import <Foundation/Foundation.h>
 
 #import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/Format.h>
@@ -344,6 +345,11 @@ decodeInputBuffer (MP3 *self, int iRBytes)
 + (NSArray *) compatibleTagBundles
 {
   return [NSArray arrayWithObjects: @"ID3Tag", @"Taglib", nil];
+}
+
+- (Endianness) endianness
+{
+  return LittleEndian;
 }
 
 - (void) _resetIVars

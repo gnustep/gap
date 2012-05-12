@@ -134,9 +134,11 @@ static NSArray *loopModes;
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
+		    withEndianness: (Endianness) e
 {
   channels = numberOfChannels;
   rate = sampleRate;
+  endianness = e;
 
   return ((dsp) ? [self _setRateAndChannels] : YES);
 }
