@@ -109,7 +109,7 @@ BUNDLES += OSS
 endif
 
 # sndio is OpenBSD only
-ifeq (openbsd,$(GNUSTEP_TARGET_OS))
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 ifneq (yes,$(disable-sndio))
 BUNDLES += Sndio
 endif
