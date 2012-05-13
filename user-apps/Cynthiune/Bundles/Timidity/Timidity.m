@@ -24,13 +24,14 @@
 
 #import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/Format.h>
+#import <Cynthiune/Output.h>
 #import <Cynthiune/utils.h>
 
 #import "Timidity.h"
 
 #define LOCALIZED(X) _b ([Timidity class], X)
 
-#define timidity "/usr/bin/timidity"
+#define timidity "timidity"
 #define rate 22050
 
 @implementation Timidity : NSObject
@@ -175,7 +176,7 @@
   NSData *bytes;
   int size;
 
-  bytes = [in readDataOfLength: 65536];
+  bytes = [in readDataOfLength: DEFAULT_BUFFER_SIZE];
   if (bytes)
     {
       size = [bytes length];
@@ -185,6 +186,11 @@
     size = 0;
 
   return size;
+}
+
+- (Endianness) endianness
+{
+  return NativeEndian;
 }
 
 - (int) lastError
