@@ -1,5 +1,10 @@
 2012-05-13 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
+	* Bundles/Sndio/Sndio.[h|m]
+	handle media-endianness given in the media bundles.
+
+2012-05-13 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
 	* Bundles/Timidity/Timidity.m
 	Default enianness needs to be native, otherwise 
 	macppc play garbage
