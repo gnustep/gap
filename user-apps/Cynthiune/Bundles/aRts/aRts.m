@@ -79,6 +79,7 @@
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
+		    withEndianness: (Endianness) e
 {
   BOOL result;
 
