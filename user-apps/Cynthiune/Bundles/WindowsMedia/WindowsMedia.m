@@ -1,6 +1,7 @@
 /* WindowsMedia.m - this file is part of Cynthiune
  *
  * Copyright (C) 2004, 2005 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
  *
@@ -167,7 +168,7 @@
 
 - (Endianness) endianness
 {
-  return LittleEndian;
+  return NativeEndian;
 }
 
 - (unsigned int) readDuration
