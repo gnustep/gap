@@ -142,6 +142,11 @@
   return FRAME_RATE;
 }
 
+- (Endianness) endianness
+{
+  return NativeEndian;
+}
+
 - (unsigned int) readDuration
 {
   return (ModPlug_GetLength (_mp_file) / 1000);
