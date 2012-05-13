@@ -73,6 +73,15 @@
   return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+  if (object == self)
+    return YES;
+  if ([object class] != [self class])
+    return NO;
+  return [filename isEqualToString:[object filename]];
+}
+
 - (id) initWithFilename: (NSString *) aFilename
 {
   self = [self init];
