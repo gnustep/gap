@@ -188,11 +188,6 @@
   return size;
 }
 
-- (Endianness) endianness
-{
-  return NativeEndian;
-}
-
 - (int) lastError
 {
   return 0;

@@ -26,7 +26,7 @@
 #define OSS_H
 
 #import <Foundation/NSObject.h>
-
+#import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/Output.h>
 
 @class NSFileHandle;

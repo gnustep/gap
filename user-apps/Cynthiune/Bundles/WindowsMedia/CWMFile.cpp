@@ -148,13 +148,12 @@ WMStreamReadFrames (WMStream *stream,
 {
   size_t _samplesRead, _bytesRead;
   avm::IReadStream *readStream;
-  int result, eof;
+  int result;
 
   _samplesRead = 0;
   _bytesRead = 0;
 
   result = 0;
-  eof = 0;
 
   readStream = (avm::IReadStream *) stream;
   while (!result && !_bytesRead)

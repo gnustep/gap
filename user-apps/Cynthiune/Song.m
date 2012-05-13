@@ -360,12 +360,12 @@
   writingClasses = [self _tagsClassesForProtocol: @protocol (TagsWriting)];
   writingClass = [writingClasses nextObject];
   while (writingClass
-         && ![NSClassFromString (writingClass) setTitle: newTitle
-                                artist: newArtist
-                                album: newAlbum
-                                trackNumber: newTrackNumber
-                                genre: newGenre
-                                year: newYear
+         && ![NSClassFromString (writingClass) setTitle: savedTitle
+                                artist: savedArtist
+                                album: savedAlbum
+                                trackNumber: savedTrackNumber
+                                genre: savedGenre
+                                year: savedYear
                                 ofFilename: filename])
     writingClass = [writingClasses nextObject];
 }

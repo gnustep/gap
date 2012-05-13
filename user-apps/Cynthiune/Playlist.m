@@ -396,7 +396,7 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
 
   realList = ((shuffleList) ? shuffleList : list);
 
-  return [self _nextValidSongInEnumerator: [list reverseObjectEnumerator]];
+  return [self _nextValidSongInEnumerator: [realList reverseObjectEnumerator]];
 }
 
 - (Song *) songAfter: (Song *) song

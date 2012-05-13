@@ -1,3 +1,18 @@
+2012-05-13 Philippe Roussel
+
+	* Playlist.m
+	* Song.m
+	* Bundles/Esound/EsoundPreference.m
+	* Bundles/OSS/OSS.h
+	* Bundles/WindowsMedia/CWMFile.cpp
+	Fix
+
+	* Bundles/Esound/Esound.m
+	Conform to new protocol
+
+	* Bundles/Ogg/Ogg.m
+	Endianness to native.
+
 2012-05-13 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/Sndio/Sndio.[h|m]
@@ -6,14 +21,14 @@
 2012-05-13 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/Timidity/Timidity.m
-	Default enianness needs to be native, otherwise
+	Default eniannessd needs to be native, otherwise
 	macppc play garbage
 	Use relative name to find timidity binary
 	Switch buffer size from 65536 to DEFAULT_BUFFER_SIZE
 	defined in Output.h
 
 2012-05-13 Riccardo Mottola <rm@gnu.org>
-	
+
 	* Bundles/FLAC/FLAC.m
 	* Bundles/Mod/Mod.m
 	* Bundles/Musepack/Musepack.m
