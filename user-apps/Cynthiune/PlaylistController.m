@@ -496,14 +496,14 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
         }
       else if (fileIsAcceptable (filename))
         {
-          if ([formatTester formatNumberForFile: filename] > -1)
+	  if ([formatTester fileIsPlaylist: filename])
+	    {
+             [playlist loadFromFile: filename];
+	    }
+          else if ([formatTester formatNumberForFile: filename] > -1)
 	    {
               [playlist addSong: [Song songWithFilename: filename]];
             }
-	  else if ([formatTester fileIsPlaylist: filename])
-	   {
-             [playlist loadFromFile: filename];
-	  }
         }
     }
 }

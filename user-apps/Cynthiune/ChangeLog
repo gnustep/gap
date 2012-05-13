@@ -2,7 +2,10 @@
 
 	* Song.m
 	Proper isEqual compare.
-	
+
+	* PlaylistController.m
+	Fix playlist and bundle loading.
+
 2012-05-13 Philippe Roussel
 
 	* Playlist.m
