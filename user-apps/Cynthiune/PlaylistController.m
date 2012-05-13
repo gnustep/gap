@@ -143,8 +143,10 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 
   [repeatButton setImage: [NSImage imageNamed: @"repeat"]];
   [repeatButton setAlternateImage: [NSImage imageNamed: @"repeat-pushed"]];
+  [repeatButton setToolTip: LOCALIZED (@"Repeat")];
   [shuffleButton setImage: [NSImage imageNamed: @"shuffle"]];
   [shuffleButton setAlternateImage: [NSImage imageNamed: @"shuffle-pushed"]];
+  [shuffleButton setToolTip: LOCALIZED (@"Shuffle")];
 
 //   [playButton setToolTip: @"Wanna dance?"];
 // #define buttonGradient NSGradientConcaveWeak
