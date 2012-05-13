@@ -286,6 +286,11 @@ errorCallback (const FLAC__StreamDecoder *fileDecoder,
   return rate;
 }
 
+- (Endianness) endianness
+{
+  return NativeEndian;
+}
+
 - (unsigned int) readDuration
 {
   return duration;

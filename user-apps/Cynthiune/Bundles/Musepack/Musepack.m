@@ -218,9 +218,10 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
 {
   NSFileHandle *testFileHandle;
   mpc_reader *testReader;
-  mpc_streaminfo *testStreamInfo;
 #ifndef MUSEPACK_API_126
   mpc_demux *testDecoder;
+#else
+  mpc_streaminfo *testStreamInfo;
 #endif
   BOOL result;
 
@@ -228,8 +229,8 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
   if (testFileHandle)
     {
       testReader = MPCReaderNew (testFileHandle);
-      testStreamInfo = MPCStreamInfoNew ();
 #ifdef MUSEPACK_API_126
+      testStreamInfo = MPCStreamInfoNew ();
       result = !mpc_streaminfo_read (testStreamInfo, testReader);
       free (testStreamInfo);
       MPCReaderDelete (testReader);
@@ -339,6 +340,11 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
 - (unsigned long) readRate
 {
   return mpcStreamInfo->sample_freq;
+}
+
+- (Endianness) endianness
+{
+  return NativeEndian;
 }
 
 - (unsigned int) readDuration
