@@ -1,5 +1,10 @@
 2012-05-13 Riccardo Mottola <rm@gnu.org>
 
+	* Bundles/WindowsMedia/WindowsMedia.m
+	Set endianness to native.
+	
+2012-05-13 Riccardo Mottola <rm@gnu.org>
+
 	* Player.h
 	* Player.m
 	* Bundles/ALSA/ALSA.h
