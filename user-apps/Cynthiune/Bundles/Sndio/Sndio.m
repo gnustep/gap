@@ -36,7 +36,6 @@
 #import <sndio.h>
 
 #import <Cynthiune/CynthiuneBundle.h>
-#import <Cynthiune/Output.h>
 
 #import "Sndio.h"
 
@@ -87,6 +86,7 @@
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
+	       	    withEndianness: (Endianness) e;
 {
   BOOL result = NO;
 
@@ -108,7 +108,10 @@
   sio_initpar(&par);
   par.pchan = numberOfChannels;
   par.rate = sampleRate;
-  par.le = 1;
+  if (e == 1)
+    par.le = 1;
+  if (e == 2)
+    par.le = 0;
 
   if (sio_setpar(hdl, &par))
     {

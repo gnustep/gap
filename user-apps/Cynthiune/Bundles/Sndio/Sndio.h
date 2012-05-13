@@ -24,12 +24,12 @@
 #define Sndio_H
 
 #import <Foundation/NSObject.h>
+#import <Cynthiune/Output.h>
 #include <sndio.h>
 
 @class NSFileHandle;
 
 @protocol CynthiuneBundle;
-@protocol Output;
 
 @interface Sndio : NSObject <CynthiuneBundle, Output>
 {
