@@ -1,8 +1,13 @@
 2012-05-13 Riccardo Mottola <rm@gnu.org>
 
+	* Bundles/Timidity/Timidity.m
+	Set default endianness to native.
+
+2012-05-13 Riccardo Mottola <rm@gnu.org>
+
 	* Bundles/WindowsMedia/WindowsMedia.m
 	Set endianness to native.
-	
+
 2012-05-13 Riccardo Mottola <rm@gnu.org>
 
 	* Player.h
