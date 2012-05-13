@@ -259,6 +259,11 @@ static ov_callbacks oggCallbacks = { oggReadFunc, oggSeekFunc,
   return (_ov_file->vi->rate);
 }
 
+- (Endianness) endianness
+{
+  return NativeEndian;
+}
+
 - (unsigned int) readDuration
 {
   return (ov_time_total (_ov_file, -1));

@@ -30,6 +30,8 @@
 #import <Foundation/NSUserDefaults.h>
 #import <Foundation/NSDictionary.h>
 
+#import <Cynthiune/CynthiuneBundle.h>
+#import <Cynthiune/Output.h>
 #import <Cynthiune/Preference.h>
 #import <Cynthiune/utils.h>
 
