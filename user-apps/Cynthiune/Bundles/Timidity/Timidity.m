@@ -135,7 +135,16 @@
   in = [tiPipe fileHandleForReading];
   err = [stderrPipe fileHandleForReading];
 
-  [tiTask launch];
+
+  NS_DURING
+    {
+      [tiTask launch];
+    }
+  NS_HANDLER
+    {
+      NSLog(@"Error while lauching task '%@'", [tiTask launchPath]);
+    }
+  NS_ENDHANDLER
 
   if ([tiTask isRunning])
     {
