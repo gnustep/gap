@@ -103,8 +103,7 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
 - (void) addSong: (Song *) song
 {
   if ([list containsObject: song])
-    raiseException (@"Duplicate song", @"a given song can be added only"
-                    @" once to the same playlist");
+    NSLog(@"Skipping duplicate song: %@", [song filename]);
   else
     {
       [list addObject: song];
@@ -132,9 +131,7 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
           if ([song isKindOfClass: [Song class]])
             {
               if ([list containsObject: song])
-                raiseException (@"Duplicate song",
-                                @"a given song can be added only once to"
-                                @" the same playlist");
+		NSLog(@"Skipping duplicate song: %@", [song filename]);
               else
                 {
                   if (!firstSong)
@@ -160,8 +157,7 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
             atIndex: (unsigned int) index
 {
   if ([list containsObject: song])
-    raiseException (@"Duplicate song", @"a given song can be added only"
-                    @" once to the same playlist");
+    NSLog(@"Skipping duplicate song: %@", [song filename]);
   else
     {
       [list insertObject: song atIndex: index];
