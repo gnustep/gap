@@ -1,3 +1,10 @@
+2012-05-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* Playlist.m
+	  just skip duplicate songs when loading playlists or 
+	  trying to add a song already in the playlist instead
+	  of throwing an exception and aborting
+
 2012-05-14 Philippe Roussel
 
 	* Bundles/Timidity/Timidity.m
