@@ -29,6 +29,7 @@
 
 #import <Cynthiune/Format.h>
 
+@class NSLock;
 @class NSNotification;
 @class NSString;
 
@@ -43,6 +44,7 @@
   NSObject <Output> *output;
   BOOL outputIsThreaded;
 
+  NSLock *streamLock;
   NSObject <Format> *stream;
 
   NSMutableArray *streamsToClose;

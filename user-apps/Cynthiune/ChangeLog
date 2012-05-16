@@ -1,3 +1,11 @@
+2012-05-16  Philippe Roussel  <p.o.roussel@free.fr>
+
+       * Player.m
+       * Player.h
+       Fix crashes when seeking through a file when using a threaded
+       backend. In this case the input stream is accessed from at
+       least two threads and so must be protected by a lock.
+
 2012-05-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Playlist.m
