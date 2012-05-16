@@ -27,6 +27,7 @@
 #import <Foundation/NSData.h>
 #import <Foundation/NSDate.h>
 #import <Foundation/NSEnumerator.h>
+#import <Foundation/NSLock.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSThread.h>
@@ -68,6 +69,7 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
       output = nil;
       outputIsThreaded = NO;
       stream = nil;
+      streamLock = [NSLock new];
       delegate = nil;
       paused = NO;
       playing = NO;
@@ -93,6 +95,7 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
   if (delegate)
     [nc removeObserver: delegate name: nil object: self];
   [streamsToClose release];
+  [streamLock release];
   [super dealloc];
 }
 
@@ -246,7 +249,9 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
 
   if (!closingThread)
     {
+      [streamLock lock];
       inputSize = [stream readNextChunk: buffer withSize: bufferSize];
+      [streamLock unlock];
 
       if (inputSize > 0)
         {
@@ -437,7 +442,9 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
 
 - (void) seek: (unsigned int) seconds
 {
+  [streamLock lock];
   [stream seek: seconds];
+  [streamLock unlock];
   totalBytes = seconds * rate * channels * 2;
 }
 
