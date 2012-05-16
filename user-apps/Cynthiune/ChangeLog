@@ -1,3 +1,8 @@
+2012-05-15 Riccardo Mottola <rm@gnu.org>
+
+	* PlaylistController.m
+	Fix repeat and shuffle menu items.
+
 2012-05-16  Philippe Roussel  <p.o.roussel@free.fr>
 
        * Player.m
