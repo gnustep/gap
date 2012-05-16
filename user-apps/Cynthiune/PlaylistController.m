@@ -374,8 +374,19 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 
 - (void) toggleRepeat: (id) sender
 {
+  BOOL repeatState;
   int widgetState;
 
+  widgetState = [repeatButton state];
+  repeatState = ((widgetState == NSOnState) ? YES : NO);
+  if (sender == repeatMenuItem)
+    {
+      repeatState = !repeatState;
+      if (repeatState)
+	[repeatButton setState:NSOnState];
+      else
+	[repeatButton setState:NSOffState];
+    }
   widgetState = [repeatButton state];
   [repeatMenuItem setState: widgetState];
   repeat = ((widgetState == NSOnState) ? YES : NO);
@@ -388,8 +399,18 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   Song *shuffleSong;
 
   widgetState = [shuffleButton state];
-  [shuffleMenuItem setState: widgetState];
   shuffleState = ((widgetState == NSOnState) ? YES : NO);
+  if (sender == shuffleMenuItem)
+    {
+      shuffleState = !shuffleState;
+      if (shuffleState)
+	[shuffleButton setState:NSOnState];
+      else
+	[shuffleButton setState:NSOffState];
+    }
+  widgetState = [shuffleButton state];
+  [shuffleMenuItem setState: widgetState];
+
   [playlist setShuffle: shuffleState];
   if (currentPlayerSong)
     shuffleSong = currentPlayerSong;
