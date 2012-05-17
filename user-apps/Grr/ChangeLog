@@ -1,3 +1,8 @@
+2012-05-17 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Fix wrong format specifier.
+
 2012-03-28 Riccardo Mottola <rm@gnu.org>
 
 	* Components/ArticleTable/ArticleTablePlugin.m
