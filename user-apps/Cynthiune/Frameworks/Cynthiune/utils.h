@@ -30,11 +30,21 @@
 
 @class NSArray;
 
-#define SET(X,Y) if (X) [X release]; X = Y; if (X) [X retain]
-#define RELEASEIFSET(X) if (X) [X release]
+#define SET(X,Y) ASSIGN(X,Y)
+#define RELEASEIFSET(X) RELEASE(X)
+
 #define RETURNSTRING(X) return ((X) ? [NSString stringWithString: X] : @"")
 
 #ifdef __MACOSX__
+
+#define RELEASE(object)         [(object) release]
+
+#define ASSIGN(object,value)    ({\
+  id __object = object; \
+  object = [(value) retain]; \
+  [__object release]; \
+})
+
 
 #define NSStandardLibraryPaths() \
     NSSearchPathForDirectoriesInDomains (NSAllLibrariesDirectory, \

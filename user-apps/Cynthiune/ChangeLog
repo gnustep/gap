@@ -1,7 +1,10 @@
-2012-05-15 Riccardo Mottola <rm@gnu.org>
+2012-05-17 Riccardo Mottola <rm@gnu.org>
 
 	* PlaylistController.m
 	Fix repeat and shuffle menu items.
+
+	* Frameworks/Cynthiune/utils.h
+	Map macros to GNUstep macros and provide Mac replacements.
 
 2012-05-16  Philippe Roussel  <p.o.roussel@free.fr>
 
