@@ -8,7 +8,7 @@
 	* RSSFactory.h
 	* RSSFactory.m
 	Declare conforming to RSSMutableArticle since RSSArticle really is and setFeed is used on it.
-	
+
 2012-03-27 Riccardo Mottola <rm@gnu.org>
 
 	* RSSArticle+Storage.m

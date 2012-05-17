@@ -74,7 +74,7 @@
 /**
  * Returns the article with the URL anURL from the storage
  */
-+(id<RSSArticle>)articleFromStorageWithURL: (NSString*) anURL
++(id<RSSMutableArticle>)articleFromStorageWithURL: (NSString*) anURL
 {
     return [[RSSFactory sharedFactory] articleFromDictionary:
                 [NSDictionary dictionaryWithContentsOfFile:

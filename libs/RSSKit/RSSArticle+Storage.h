@@ -2,6 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2012 The Free Software Foundation
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -26,7 +27,7 @@
 /**
  * Returns the article with the URL anURL from the storage
  */
-+(id<RSSArticle>)articleFromStorageWithURL: (NSString*) anURL;
++(id<RSSMutableArticle>)articleFromStorageWithURL: (NSString*) anURL;
 
 /**
  * Initialises the article with the URL anURL from the storage.
