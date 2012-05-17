@@ -2,7 +2,7 @@
    Grr RSS Reader
    
    Copyright (C) 2006-2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009-2010 GNUstep Application Team
+   Copyright (C) 2009-2012 GNUstep Application Team
                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
@@ -77,7 +77,7 @@
 -(BOOL) loadToolbarProvidingComponent: (id<ToolbarDelegate>) aComponent
 {
     if ([aComponent conformsToProtocol: @protocol(ToolbarDelegate)] == NO) {
-        NSLog(@"Tried to add component not conforming to the ToolbarDelegate protocol: @%", [aComponent class]);
+        NSLog(@"Tried to add component not conforming to the ToolbarDelegate protocol: %@", [aComponent class]);
         return NO;
     }
     
