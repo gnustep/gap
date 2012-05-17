@@ -110,9 +110,9 @@ NSString* stringToFSString( NSString* aString )
 
 /**
  * The default implementation of this method returns a new article
- * of the RSSArticle class.
+ * of the RSSArticle class.(which implements the RSSMutableArticle protocol)
  */
-- (id<RSSArticle>) articleFromStorageWithURL: (NSString*) aURL
+- (id<RSSMutableArticle>) articleFromStorageWithURL: (NSString*) aURL
 {
     return [self articleFromDictionary:
             [NSDictionary dictionaryWithContentsOfFile:
@@ -123,9 +123,9 @@ NSString* stringToFSString( NSString* aString )
 
 /**
  * The default implementation of this method returns a article
- * of the RSSArticle class.
+ * of the RSSArticle class. (which implements the RSSMutableArticle protocol)
  */
-- (id<RSSArticle>) articleFromDictionary: (NSDictionary*) aDictionary
+- (id<RSSMutableArticle>) articleFromDictionary: (NSDictionary*) aDictionary
 {
     return AUTORELEASE([[RSSArticle alloc] initWithDictionary: aDictionary]);
 }

@@ -46,12 +46,12 @@
  * Restores the article with the given URL from the hard disk article
  * store.
  */
-- (id<RSSArticle>) articleFromStorageWithURL: (NSString*) aURL;
+- (id<RSSMutableArticle>) articleFromStorageWithURL: (NSString*) aURL;
 
 /**
  * Restores the article from that dictionary.
  */
-- (id<RSSArticle>) articleFromDictionary: (NSDictionary*) aDictionary;
+- (id<RSSMutableArticle>) articleFromDictionary: (NSDictionary*) aDictionary;
 
 /**
  * Returns the storage path for a URL.
@@ -88,8 +88,8 @@
                                content: (NSString*) aContent
                                   date: (NSDate*) aDate;
 
-- (id<RSSArticle>) articleFromStorageWithURL: (NSString*) aURL;
+- (id<RSSMutableArticle>) articleFromStorageWithURL: (NSString*) aURL;
 
-- (id<RSSArticle>) articleFromDictionary: (NSDictionary*) aDictionary;
+- (id<RSSMutableArticle>) articleFromDictionary: (NSDictionary*) aDictionary;
 
 @end
