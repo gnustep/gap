@@ -2,6 +2,10 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2012 Free Software Foundation
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -274,7 +278,7 @@ didStartElement: (NSString*)anElementName
 - (void)    parser: (NSXMLParser*)aParser
  parseErrorOccured: (NSError*)parseError
 {
-  NSLog(@"XML-DOM Parser: %@ at line %@, col %@",
+  NSLog(@"XML-DOM Parser: %@ at line %d, col %d",
 	[parseError localizedDescription],
 	[aParser lineNumber], [aParser columnNumber]);
 }
