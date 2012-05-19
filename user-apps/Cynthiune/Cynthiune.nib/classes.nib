@@ -38,6 +38,7 @@
         }, 
         {
             ACTIONS = {
+                addPlaylist = id; 
                 addSongs = id; 
                 addSongsFolders = id; 
                 changeTimeDisplay = id; 
