@@ -506,7 +506,9 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   NSEnumerator *files;
   NSString *filename;
   FormatTester *formatTester;
+  NSMutableArray *songs;
 
+  songs = [NSMutableArray array];
   formatTester = [FormatTester formatTester];
   files = [filenames objectEnumerator];
 
@@ -525,10 +527,12 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 	    }
           else if ([formatTester formatNumberForFile: filename] > -1)
 	    {
-              [playlist addSong: [Song songWithFilename: filename]];
+	      [songs addObject: [Song songWithFilename: filename]];
             }
         }
     }
+  if ([songs count] > 0)
+    [playlist addSongsInArray: songs];
 }
 
 - (void) _oPanelDidEnd: (NSOpenPanel *) oPanel
