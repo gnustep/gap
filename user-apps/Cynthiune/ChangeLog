@@ -1,3 +1,10 @@
+2012-05-17  Philippe Roussel  <p.o.roussel@free.fr>
+
+	* PlaylistController.m
+	Optimize adding multiple songs to the playlist by using
+	[Playlist -addSongsInArray:] : PlaylistChangedNotification
+	is sent only one time, not for every song added
+
 2012-05-17 Riccardo Mottola <rm@gnu.org>
 
 	* PlaylistController.m
