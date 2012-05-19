@@ -20,6 +20,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
+
+#import <Foundation/Foundation.h>
+
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSButton.h>
 #import <AppKit/NSEvent.h>
@@ -28,14 +31,6 @@
 #import <AppKit/NSPasteboard.h>
 #import <AppKit/NSToolbar.h>
 #import <AppKit/NSWindow.h>
-#import <Foundation/NSArray.h>
-#import <Foundation/NSBundle.h>
-#import <Foundation/NSFileManager.h>
-#import <Foundation/NSNotification.h>
-#import <Foundation/NSPathUtilities.h>
-#import <Foundation/NSProcessInfo.h>
-#import <Foundation/NSString.h>
-#import <Foundation/NSUserDefaults.h>
 
 #import <Cynthiune/CynthiuneBundle.h>
 #import <Cynthiune/MailService.h>

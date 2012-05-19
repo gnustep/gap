@@ -1,3 +1,11 @@
+2012-05-19 Riccardo Mottola <rm@rnu.org>
+
+	* Cynthiune.nib
+	Fix problems and add playlist.
+
+	* CynthiuneController.m:
+	Fix header imports.
+
 2012-05-17  Philippe Roussel  <p.o.roussel@free.fr>
 
 	* PlaylistController.m
