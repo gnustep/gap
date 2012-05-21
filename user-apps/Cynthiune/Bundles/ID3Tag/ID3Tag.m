@@ -33,14 +33,14 @@
 
 @interface NSString (ID3TagExtension)
 
-+ (NSString *) stringWithUCS4String: (const Id3UCS4 *) ucs4Value;
-- (Id3UCS4 *) UCS4String;
++ (NSString *) stringWithUCS4String: (const id3_ucs4_t *) ucs4Value;
+- (id3_ucs4_t *) UCS4String;
 
 @end
 
 @implementation NSString (ID3TagExtension)
 
-+ (NSString *) stringWithUCS4String: (const Id3UCS4 *) ucs4Value
++ (NSString *) stringWithUCS4String: (const id3_ucs4_t *) ucs4Value
 {
   NSString *newString;
   id3_utf8_t *UTF8String;
@@ -52,9 +52,9 @@
   return newString;
 }
 
-- (Id3UCS4 *) UCS4String
+- (id3_ucs4_t *) UCS4String
 {
-  return id3_utf8_ucs4duplicate ((Id3UTF8 *) [self UTF8String]);
+  return id3_utf8_ucs4duplicate ((id3_utf8_t *) [self UTF8String]);
 }
 
 @end
@@ -79,7 +79,7 @@
   NSString *comment;
   Id3Frame *id3Frame;
   Id3Field *field;
-  const Id3UCS4 *string;
+  const id3_ucs4_t *string;
 
   comment = nil;
   id3Frame = id3_tag_findframe (id3Tag, commentTag, 0);
@@ -138,9 +138,9 @@
   return YES;
 }
 
-+ (Id3UCS4 *) _genreValue: (NSString *) genre
++ (id3_ucs4_t *) _genreValue: (NSString *) genre
 {
-  Id3UCS4 *genreName;
+  id3_ucs4_t *genreName;
   int genreIndex;
 
   genreName = [genre UCS4String];
@@ -155,7 +155,7 @@
 {
   Id3Frame *frame;
   Id3Field *field;
-  Id3UCS4 *ucs4Value;
+  id3_ucs4_t *ucs4Value;
   unsigned int rc;
 
   rc = 0;
