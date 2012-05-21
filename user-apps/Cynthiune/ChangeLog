@@ -1,3 +1,15 @@
+2012-05-21  Philippe Roussel  <p.o.roussel@free.fr>
+
+	* Bundles/ALSA/ALSA.m
+	* Bundles/ALSA/ALSA.h
+	Device parameters need to be set when they change from one
+	song to another. In that case prepareDeviceWithChannels: is
+	called with an open device so check for pcm_handle and set
+	params if it's not NULL.
+	prepareDeviceWithChannels: is always called before openDevice
+	so we can handle endianness in there.
+	ALSA device is used by 2 threads, protect it with a lock.
+
 2012-05-19 Riccardo Mottola <rm@rnu.org>
 
 	* Cynthiune.nib

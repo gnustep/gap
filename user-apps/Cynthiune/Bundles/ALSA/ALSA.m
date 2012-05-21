@@ -75,6 +75,7 @@ static char *device = "default";
       channels = 0;
       rate = 0;
       stopRequested = NO;
+      devLock = [NSLock new];
     }
 
   return self;
@@ -84,14 +85,6 @@ static char *device = "default";
 {
   int err;
   BOOL result = NO;
-  snd_pcm_format_t en;
-
-  if (endianness == BigEndian)
-    en = SND_PCM_FORMAT_S16_BE;
-  else if (endianness == LittleEndian)
-    en = SND_PCM_FORMAT_S16_LE;
-  else
-    en = SND_PCM_FORMAT_S16;
 
   if ((err = snd_pcm_open (&pcm_handle, device, SND_PCM_STREAM_PLAYBACK, 0))
       < 0)
@@ -119,10 +112,25 @@ static char *device = "default";
                            andRate: (unsigned long) sampleRate
 		    withEndianness: (Endianness) e
 {
+  int err;
+
   channels = numberOfChannels;
   rate = sampleRate;
-  endianness = e;
+  if (e == BigEndian)
+    en = SND_PCM_FORMAT_S16_BE;
+  else if (e == LittleEndian)
+    en = SND_PCM_FORMAT_S16_LE;
+  else
+    en = SND_PCM_FORMAT_S16;
 
+  [devLock lock];
+  if (pcm_handle) {
+   if ((err = snd_pcm_set_params(pcm_handle, en,
+				 SND_PCM_ACCESS_RW_INTERLEAVED,
+				 channels, rate, 1, 100000)) < 0)
+     NSLog(LOCALIZED (@"Failed to set device parameters:%s"), snd_strerror (err));
+  }
+  [devLock unlock];
   return YES;
 }
 
@@ -131,6 +139,7 @@ static char *device = "default";
   while (stopRequested)
     [NSThread sleepUntilDate: [NSDate dateWithTimeIntervalSinceNow: 0.1]];
   snd_pcm_close (pcm_handle);
+  pcm_handle = NULL;
 }
 
 - (void) threadLoop
@@ -145,7 +154,7 @@ static char *device = "default";
 
       bufferSize = [parentPlayer readNextChunk: buffer
 				      withSize: DEFAULT_BUFFER_SIZE];
-
+      [devLock lock];
       if (bufferSize > 0)
 	{
 	  frames = snd_pcm_bytes_to_frames (pcm_handle, bufferSize);
@@ -158,7 +167,7 @@ static char *device = "default";
 	      snd_pcm_recover (pcm_handle, written, 0);
 	    }
 	}
-
+      [devLock unlock];
       if ([pool autoreleaseCount] > 50)
 	[pool emptyPool];
     }
