@@ -1,3 +1,9 @@
+2012-05-22 Riccardo Mottola <rm@gnu.org>
+
+	* Bundles/ID3Tag/ID3Tag.h
+	* Bundles/ID3Tag/ID3Tag.m
+	Do not redefine ID3 types.
+
 2012-05-21  Philippe Roussel  <p.o.roussel@free.fr>
 
 	* Bundles/ALSA/ALSA.m
