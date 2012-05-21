@@ -25,7 +25,7 @@
 
 @protocol Format;
 
-#define IBUFFER_SIZE 5 * 8192
+#define IBUFFER_SIZE 2 * 8192
 
 typedef mad_fixed_t MadFixed;
 
