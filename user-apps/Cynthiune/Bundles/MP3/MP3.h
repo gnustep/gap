@@ -1,6 +1,7 @@
 /* MP3.h - this file is part of Cynthiune
  *
- * Copyright (C) 2002, 2003, 2004 Wolfgang Sourdeau
+ * Copyright (C) 2002-2004 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation 
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
  *
@@ -25,6 +26,11 @@
 
 @protocol Format;
 
+/* original 5x buffer is too big
+   1x is small on most machines
+   2x appears to be a decent compromise.
+   Needs to be infestigated further
+*/
 #define IBUFFER_SIZE 2 * 8192
 
 typedef mad_fixed_t MadFixed;
