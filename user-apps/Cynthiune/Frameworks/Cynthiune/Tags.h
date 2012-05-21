@@ -1,6 +1,7 @@
 /* Tags.h - this file is part of Cynthiune
  *
  * Copyright (C) 2005 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
  *
@@ -22,6 +23,8 @@
 
 #ifndef TAGS_H
 #define TAGS_H
+
+#import <Foundation/NSObject.h>
 
 @protocol TagsReading <NSObject>
 
