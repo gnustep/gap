@@ -29,12 +29,13 @@
 {
   id parentPlayer;
   snd_pcm_t *pcm_handle;
+  snd_pcm_format_t en;
+  NSLock *devLock;
 
   BOOL stopRequested;
 
   unsigned int channels;
   unsigned long rate;
-  Endianness endianness;
 
   unsigned char buffer[DEFAULT_BUFFER_SIZE];
 }
