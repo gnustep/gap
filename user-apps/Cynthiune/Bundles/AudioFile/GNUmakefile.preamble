@@ -30,10 +30,6 @@ AUDIOFILE_LIBS := $(shell pkg-config --libs audiofile)
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(AUDIOFILE_CFLAGS)
 
-ifeq (mingw32, $(GNUSTEP_TARGET_OS))
-ADDITIONAL_GUI_LIBS += $(AUDIOFILE_LIBS)
-else
 BUNDLE_LIBS += $(AUDIOFILE_LIBS)
-endif
 
 ADDITIONAL_OBJCFLAGS += -Wall -Wno-import

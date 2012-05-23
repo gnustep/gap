@@ -1,8 +1,10 @@
 /* WaveOut.m - this file is part of Cynthiune
  *
  * Copyright (C) 2005  Wolfgang Sourdeau
+ *               2012 The Free Software Foundation Inc
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -110,6 +112,7 @@ FreeBlock (LPWAVEHDR waveBlock)
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
                            andRate: (unsigned long) sampleRate
+		    withEndianness: (Endianness) e
 {
   return (numberOfChannels != 0 && sampleRate != 0);
 }
