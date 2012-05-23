@@ -4,6 +4,7 @@
  *
  * Author: Yavor Doganov <yavor@gnu.org>
  *         Riccardo Mottola <rm@gnu.org>
+ *         Philippe Roussel
  *         The GNUstep Application Team
  *
  * Cynthiune is free software: you can redistribute it and/or modify
@@ -86,6 +87,7 @@ static char *device = "default";
   int err;
   BOOL result = NO;
 
+  [devLock lock];
   if ((err = snd_pcm_open (&pcm_handle, device, SND_PCM_STREAM_PLAYBACK, 0))
       < 0)
     NSRunAlertPanel (LOCALIZED (@"Error"),
@@ -104,6 +106,7 @@ static char *device = "default";
 		     LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
   else
     result = YES;
+  [devLock unlock];
 
   return result;
 }
@@ -138,8 +141,10 @@ static char *device = "default";
 {
   while (stopRequested)
     [NSThread sleepUntilDate: [NSDate dateWithTimeIntervalSinceNow: 0.1]];
+  [devLock lock];
   snd_pcm_close (pcm_handle);
   pcm_handle = NULL;
+  [devLock unlock];
 }
 
 - (void) threadLoop

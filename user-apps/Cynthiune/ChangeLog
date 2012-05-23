@@ -1,3 +1,8 @@
+2012-05-21  Philippe Roussel  <p.o.roussel@free.fr>
+
+	* Bundles/ALSA/ALSA.m
+	Protect calls with lock.
+
 2012-05-23 Riccardo Mottola <rm@gnu.org>
 
 	* Bundles/AudioFile/GNUmakefile
@@ -13,7 +18,7 @@
 
 	* Bundles/MacOSX/MacOSXPlayer.m
 	Conform to new endianness parameter.
-	
+
 2012-05-21  Philippe Roussel  <p.o.roussel@free.fr>
 
 	* Bundles/ALSA/ALSA.m
