@@ -45,6 +45,7 @@
   unsigned long rate;
 
   unsigned char buffer[DEFAULT_BUFFER_SIZE];
+  NSLock *devlock;
 }
 
 @end

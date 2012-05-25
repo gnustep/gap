@@ -1,3 +1,10 @@
+2012-05-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* Bundles/Sndio/Sndio.[h|m]
+	Introduce locking comparable to AO output bundle.
+	Makes Sndio now work for me. Still contains lots of
+	debug output, which needs cleanup.
+
 2012-05-21  Philippe Roussel  <p.o.roussel@free.fr>
 
 	* Bundles/ALSA/ALSA.m

@@ -30,6 +30,7 @@
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSRunLoop.h>
 #import <Foundation/NSThread.h>
+#import <Foundation/NSLock.h>
 
 #import <errno.h>
 #import <sys/ioctl.h>
@@ -72,11 +73,19 @@
       hdl = NULL;
       //par = NULL;
       //sio_initpar(&par);
+      devlock = [NSLock new];
       stopRequested = NO;
       isRunning = NO;
     }
 
   return self;
+}
+
+/* FIXME : this is never called */
+- (void)dealloc
+{
+  [devlock release];
+  [super dealloc];
 }
 
 - (void) setParentPlayer: (id) aPlayer;
@@ -92,6 +101,7 @@
 
   NSLog(@"prepareDevice got called, channels: %u sampleRate: %lu", numberOfChannels, sampleRate);
 
+  [devlock lock];
   if (hdl) {
     NSLog(@"prepareDevice: HDL was set, going to close it!");
     //if (isRunning)
@@ -120,7 +130,10 @@
     } else {
       NSLog(@"NOT successfully set parameters");
     }
-  //sio_start(hdl);
+  //sio_stop(hdl);
+NSLog(@"calling sio_start");
+  sio_start(hdl);
+  [devlock unlock];
   //if (!isRunning)
   //  [self startThread];
   return result;
@@ -132,14 +145,20 @@ NSLog(@"OpenDevice got called");
   if (hdl)
     {
 NSLog(@"OpenDevice got called, hdl was set");
-      sio_start(hdl);
+      [devlock lock];
+NSLog(@"NOT calling sio_start");
+      //sio_start(hdl);
+      [devlock unlock];
       return YES;
     }
   else
     {
 NSLog(@"OpenDevice got called, hdl was NULL");
+      [devlock lock];
       hdl = sio_open(NULL, SIO_PLAY, 0);
+NSLog(@"calling sio_start");
       sio_start(hdl);
+      [devlock unlock];
       return YES;
     }
 }
@@ -149,7 +168,9 @@ NSLog(@"OpenDevice got called, hdl was NULL");
   while (stopRequested)
     [NSThread sleepUntilDate: [NSDate dateWithTimeIntervalSinceNow: 0.01]];
 NSLog(@"close device got called!");
+  [devlock lock];
   sio_close(hdl);
+  [devlock unlock];
   hdl = NULL;
 }
 
@@ -168,10 +189,12 @@ NSLog(@"close device got called!");
     {
       bufferSize = [parentPlayer readNextChunk: buffer
 				withSize: DEFAULT_BUFFER_SIZE];
+      [devlock lock];
       if (bufferSize > 0 && hdl)
         sio_write(hdl, buffer, bufferSize);
-	if ([pool autoreleaseCount] > 50)
-	  [pool emptyPool];
+      [devlock unlock];
+      if ([pool autoreleaseCount] > 50)
+	[pool emptyPool];
     }
 NSLog(@"threadLoop: stopping thread");
   stopRequested = NO;
