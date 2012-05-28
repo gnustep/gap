@@ -70,13 +70,9 @@
   if ((self = [super init]))
     {
       parentPlayer = nil;
-      //hdl = sio_open(NULL, SIO_PLAY, 0);
       hdl = NULL;
-      //par = NULL;
-      //sio_initpar(&par);
       devlock = [NSLock new];
       stopRequested = NO;
-      isRunning = NO;
     }
 
   return self;
@@ -108,11 +104,6 @@
   [devlock lock];
   if (hdl) {
     NSLog(@"prepareDevice: HDL was set, going to close it!");
-    //if (isRunning)
-    //  [self stopThread];
-    //while (isRunning) {
-    //	sleep(1);
-    //}
     sio_close(hdl);
     hdl = NULL;
   } else {
@@ -148,41 +139,20 @@
     } else {
       NSLog(@"NOT successfully set parameters");
     }
-  //sio_stop(hdl);
-NSLog(@"calling sio_start");
+NSLog(@"prepareDevice: calling sio_start");
   sio_start(hdl);
   [devlock unlock];
-  //if (!isRunning)
-  //  [self startThread];
   return result;
 }
 
 - (BOOL) openDevice
 {
+  BOOL result = NO;
 NSLog(@"OpenDevice got called");
-  if (hdl)
-    {
-NSLog(@"OpenDevice got called, hdl was set");
-NSLog(@"NOT calling sio_start");
-      //sio_start(hdl);
-      [self prepareDeviceWithChannels: channels
+  result = [self prepareDeviceWithChannels: channels
 		andRate: rate
 		withEndianness: endianness];
-      return YES;
-    }
-  else
-    {
-NSLog(@"OpenDevice got called, hdl was NULL");
-      //[devlock lock];
-      //hdl = sio_open(NULL, SIO_PLAY, 0);
-NSLog(@"calling sio_start");
-      //sio_start(hdl);
-      //[devlock unlock];
-      [self prepareDeviceWithChannels: channels
-		andRate: rate
-		withEndianness: endianness];
-      return YES;
-    }
+   return result;
 }
 
 - (void) closeDevice
@@ -201,12 +171,7 @@ NSLog(@"close device got called!");
   NSAutoreleasePool *pool;
   int bufferSize;
 
-  if (isRunning == YES) {
-    return;
-  }
-  
   pool = [NSAutoreleasePool new];
-  isRunning = YES;
   while (!stopRequested)
     {
       bufferSize = [parentPlayer readNextChunk: buffer
@@ -220,7 +185,6 @@ NSLog(@"close device got called!");
     }
 NSLog(@"threadLoop: stopping thread");
   stopRequested = NO;
-  isRunning = NO;
   [pool release];
 }
 
