@@ -1,8 +1,10 @@
 /* NSViewExtensions.m - this file is part of Cynthiune
  *
  * Copyright (C) 2005 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,10 +66,16 @@
   superView = [self superview];
   if (superView)
     {
+      NSRect tempRect;
+
       superFrame = [superView frame];
       selfFrame = [self frame];
       newOrigin = selfFrame.origin;
       newOrigin.x = (NSWidth (superFrame) - NSWidth (selfFrame)) / 2.0;
+      tempRect = NSMakeRect(newOrigin.x, newOrigin.y, selfFrame.size.width, selfFrame.size.height);
+      tempRect = [superView centerScanRect: tempRect];
+      newOrigin.x = tempRect.origin.x;
+      newOrigin.y = tempRect.origin.y;
       [self setFrameOrigin: newOrigin];
     }
   else
