@@ -26,6 +26,7 @@
 
 #import <AppKit/NSApplication.h>
 
+#import <Foundation/NSByteOrder.h>
 #import <Foundation/NSFileHandle.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSRunLoop.h>
@@ -98,8 +99,11 @@
 	       	    withEndianness: (Endianness) e;
 {
   BOOL result = NO;
+  channels = numberOfChannels;
+  rate = sampleRate;
+  endianness = e;
 
-  NSLog(@"prepareDevice got called, channels: %u sampleRate: %lu", numberOfChannels, sampleRate);
+  NSLog(@"prepareDevice got called, channels: %u sampleRate: %lu, endianness: %i", numberOfChannels, sampleRate, e);
 
   [devlock lock];
   if (hdl) {
@@ -118,6 +122,20 @@
   sio_initpar(&par);
   par.pchan = numberOfChannels;
   par.rate = sampleRate;
+  if (e == 0)
+    {
+      if (NSHostByteOrder() == NS_LittleEndian)
+        { 
+	  NSLog(@"Native Endianness: LittleEndian");
+          par.le = 1;
+	}
+      else
+	{
+	  NSLog(@"Native Endianness: BigEndian");
+	  par.le = 2;
+	}
+    }
+
   if (e == 1)
     par.le = 1;
   if (e == 2)
@@ -145,20 +163,24 @@ NSLog(@"OpenDevice got called");
   if (hdl)
     {
 NSLog(@"OpenDevice got called, hdl was set");
-      [devlock lock];
 NSLog(@"NOT calling sio_start");
       //sio_start(hdl);
-      [devlock unlock];
+      [self prepareDeviceWithChannels: channels
+		andRate: rate
+		withEndianness: endianness];
       return YES;
     }
   else
     {
 NSLog(@"OpenDevice got called, hdl was NULL");
-      [devlock lock];
-      hdl = sio_open(NULL, SIO_PLAY, 0);
+      //[devlock lock];
+      //hdl = sio_open(NULL, SIO_PLAY, 0);
 NSLog(@"calling sio_start");
-      sio_start(hdl);
-      [devlock unlock];
+      //sio_start(hdl);
+      //[devlock unlock];
+      [self prepareDeviceWithChannels: channels
+		andRate: rate
+		withEndianness: endianness];
       return YES;
     }
 }
