@@ -24,6 +24,7 @@
 #define Sndio_H
 
 #import <Foundation/NSObject.h>
+//#import <Cynthiune/Format.h>
 #import <Cynthiune/Output.h>
 #include <sndio.h>
 
@@ -43,6 +44,7 @@
 
   unsigned int channels;
   unsigned long rate;
+  Endianness endianness;
 
   unsigned char buffer[DEFAULT_BUFFER_SIZE];
   NSLock *devlock;

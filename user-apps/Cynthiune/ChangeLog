@@ -1,3 +1,13 @@
+2012-05-28: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* Bundles/Sndio/Sndio.[h|m]
+	Fix how NativeEndianness is handles
+	call prepareDeviceWithChannels:... unconditionally when
+	openDevice is called. This is needed when the playing was 
+	stopped (sio_stop called) and then started again. When
+	the next played song had the same channels/rate/endianness
+	the device would not initialized again correctly.
+
 2012-05-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/Sndio/Sndio.[h|m]
