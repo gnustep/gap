@@ -24,7 +24,6 @@
 #define Sndio_H
 
 #import <Foundation/NSObject.h>
-//#import <Cynthiune/Format.h>
 #import <Cynthiune/Output.h>
 #include <sndio.h>
 
@@ -37,7 +36,6 @@
   id parentPlayer;
 
   BOOL stopRequested;
-  BOOL isRunning;
 
   struct sio_hdl *hdl;
   struct sio_par par;
