@@ -1,8 +1,10 @@
 /* PreferencesController.m - this file is part of Cynthiune
  *
  * Copyright (C) 2003 Wolfgang Sourdeau
+ *               2012 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -179,6 +181,7 @@
       viewFrame.origin.y = (boxViewFrame.size.height
                             - viewFrame.size.height) / 2;
 
+      viewFrame = [contentView centerScanRect: viewFrame];
       [bundlePrefsView setFrame: viewFrame];
       [contentView addSubview: bundlePrefsView];
     }
