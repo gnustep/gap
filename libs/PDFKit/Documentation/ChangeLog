@@ -1,12 +1,12 @@
-2012-02-27 Riccardo Mottola <rm@gnu.org
+2012-02-27 Riccardo Mottola <rm@gnu.org>
 
 	* PDFImageRep.m:
 	Clean up imports.
 
-2012-02-27 Riccardo Mottola <rm@gnu.org
+2012-02-27 Riccardo Mottola <rm@gnu.org>
 
 	* PDFImageRep.m:
-	Subclass -draw (suggested by Wric W. to make cario work again)
+	Subclass -draw (suggested by Eric W. to make cario work again)
 
 2011-08-30 Sebastian Reitenbach
 
