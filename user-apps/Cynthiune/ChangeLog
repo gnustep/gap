@@ -1,3 +1,9 @@
+2012-05-29 Riccardo Mottola <rm@gnu.org>
+
+	* Bundles/ALSA/ALSA.m
+	First try setting the device to the requested rate without resampling,
+	then to 44kHz with resampling.
+
 2012-05-28: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Bundles/Sndio/Sndio.[h|m]

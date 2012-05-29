@@ -77,6 +77,7 @@ static char *device = "default";
       rate = 0;
       stopRequested = NO;
       devLock = [NSLock new];
+      en = SND_PCM_FORMAT_S16;
     }
 
   return self;
@@ -85,30 +86,50 @@ static char *device = "default";
 - (BOOL) openDevice
 {
   int err;
-  BOOL result = NO;
 
   [devLock lock];
   if ((err = snd_pcm_open (&pcm_handle, device, SND_PCM_STREAM_PLAYBACK, 0))
       < 0)
-    NSRunAlertPanel (LOCALIZED (@"Error"),
-		     LOCALIZED (@"Failed to open the ALSA device:\n%s"),
-		     LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
-  else if ((err = snd_pcm_set_params (pcm_handle, en,
-				      SND_PCM_ACCESS_RW_INTERLEAVED,
-				      channels, rate, 1, 100000)) < 0)
-    NSRunAlertPanel (LOCALIZED (@"Error"),
-		     LOCALIZED (@"Failed to set device parameters:\n%s"),
-		     LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
-  else if ((err = snd_pcm_prepare (pcm_handle)) < 0)
-    NSRunAlertPanel (LOCALIZED (@"Error"),
-		     LOCALIZED (@"Failed to prepare the ALSA device for "
-				@"playing:\n%s"),
-		     LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
-  else
-    result = YES;
+    {
+      [devLock unlock];
+      NSRunAlertPanel (LOCALIZED (@"Error"),
+		       LOCALIZED (@"Failed to open the ALSA device:\n%s"),
+		       LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
+      return NO;
+    }
+
+  if ((err = snd_pcm_set_params (pcm_handle, en,
+				 SND_PCM_ACCESS_RW_INTERLEAVED,
+				 channels, rate, 1, 100000)) < 0)
+    {
+      /* we retry with resampling */
+
+      NSLog(@"Retry with fixed 44100 Hz rate and resampling");
+      if ((err = snd_pcm_set_params (pcm_handle, en,
+				     SND_PCM_ACCESS_RW_INTERLEAVED,
+				     channels, 44100, 1, 100000)) < 0)
+	{
+	  [devLock unlock];
+	  NSRunAlertPanel (LOCALIZED (@"Error"),
+			   LOCALIZED (@"Failed to set device parameters:\n%s"),
+			   LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
+	  return NO;
+	}
+    }
+  
+  if ((err = snd_pcm_prepare (pcm_handle)) < 0)
+    {
+      [devLock unlock];
+      NSRunAlertPanel (LOCALIZED (@"Error"),
+		       LOCALIZED (@"Failed to prepare the ALSA device for "
+				  @"playing:\n%s"),
+		       LOCALIZED (@"OK"), NULL, NULL, snd_strerror (err));
+      return NO;
+    }
+
   [devLock unlock];
 
-  return result;
+  return YES;
 }
 
 - (BOOL) prepareDeviceWithChannels: (unsigned int) numberOfChannels
@@ -127,12 +148,18 @@ static char *device = "default";
     en = SND_PCM_FORMAT_S16;
 
   [devLock lock];
-  if (pcm_handle) {
-   if ((err = snd_pcm_set_params(pcm_handle, en,
-				 SND_PCM_ACCESS_RW_INTERLEAVED,
-				 channels, rate, 1, 100000)) < 0)
-     NSLog(LOCALIZED (@"Failed to set device parameters:%s"), snd_strerror (err));
-  }
+  if (pcm_handle)
+    {
+      if ((err = snd_pcm_set_params(pcm_handle, en,
+				    SND_PCM_ACCESS_RW_INTERLEAVED,
+				    channels, rate, 1, 100000)) < 0)
+	{
+	  if ((err = snd_pcm_set_params(pcm_handle, en,
+					SND_PCM_ACCESS_RW_INTERLEAVED,
+					channels, 44100, 1, 100000)) < 0)
+	    NSLog(LOCALIZED (@"Failed to set device parameters:%s"), snd_strerror (err));
+	}
+    }
   [devLock unlock];
   return YES;
 }
