@@ -47,13 +47,13 @@ else
     	lib_freetype_libs=/usr/pkg/lib
       ;;
     *)	
-      lib_freetype_libs=$(sh freetype-config --prefix)/lib
+      lib_freetype_libs=`freetype-config --prefix`/lib
       ;;
   esac
 fi
 
 if test -n "$with_freetype2_add_includes"; then
-  lib_freetype_add_includes=-I$with_freetype2_add_includes
+  lib_freetype_add_includes=$with_freetype2_add_includes
 else  
   case "$target_os" in
     freebsd*)
@@ -62,8 +62,11 @@ else
     netbsd*)
 	lib_freetype_add_includes=/usr/pkg/include
       ;;
+    openbsd*)
+	lib_freetype_add_includes=/usr/X11R6//include
+      ;;
     *)	
-      lib_freetype_add_includes=$(sh freetype-config --cflags)
+      lib_freetype_add_includes=`freetype-config --cflags`
       ;;
   esac
 fi
@@ -78,8 +81,11 @@ else
     netbsd*)
     	lib_freetype_includes=/usr/pkg/include/freetype2
       ;;
+    openbsd*)
+	lib_freetype_add_includes=/usr/X11R6/include/freetype2
+       ;;
     *)	
-      lib_freetype_includes=$(sh freetype-config --prefix)/include/freetype2
+      lib_freetype_includes=`freetype-config --prefix`/include/freetype2
       ;;
   esac
 fi

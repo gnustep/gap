@@ -1,3 +1,14 @@
+2012-05-31 Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.in
+	Pass additional flags.
+
+	* configure.ac
+	Better handling of freetype flags for openbsd
+
+	* configure
+	regenerated
+
 2012-02-27 Riccardo Mottola <rm@gnu.org>
 
 	* PDFImageRep.m:
