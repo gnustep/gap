@@ -23,12 +23,16 @@ include $(GNUSTEP_MAKEFILES)/common.make
 LIB_FREETYPE_LIBS=@lib_freetype_libs@
 LIB_FREETYPE_INCLUDES=@lib_freetype_includes@
 LIB_FREETYPE_ADD_INCLUDES=@lib_freetype_add_includes@
-CPPFLAGS := -fPIC
-CXXFLAGS := -fPIC -Wno-write-strings
+CXXFLAGS := $(CXXFLAGS) -Wno-write-strings
 ifneq ($(LIB_FREETYPE_ADD_INCLUDES),)
   CPPFLAGS := $(CPPFLAGS) -I$(LIB_FREETYPE_ADD_INCLUDES)
   CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_ADD_INCLUDES)
 endif
+
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
+CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_INCLUDES)
+endif
+
   export CPPFLAGS CXXFLAGS
 
 default: all
