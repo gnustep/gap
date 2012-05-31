@@ -2,7 +2,7 @@
    Grr RSS Reader
    
    Copyright (C) 2006-2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009-2010 GNUstep Application Team
+   Copyright (C) 2009-2012 GNUstep Application Team
                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
@@ -287,7 +287,7 @@
            inCategory: (id<Category>)aCategory
              position: (int)index
 {
-    <Feed> feed;
+    id<Feed> feed;
 
     if (aURL == nil) {
         return NO;
