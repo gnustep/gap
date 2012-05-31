@@ -3077,7 +3077,7 @@ else
     	lib_freetype_includes=/usr/pkg/include/freetype2
       ;;
     openbsd*)
-	lib_freetype_add_includes=/usr/X11R6/include/freetype2
+	lib_freetype_includes=/usr/X11R6/include/freetype2
        ;;
     *)
       lib_freetype_includes=`freetype-config --prefix`/include/freetype2
