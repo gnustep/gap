@@ -67,8 +67,8 @@ ADDITIONAL_OBJCFLAGS = -Wall
 ADDITIONAL_LDFLAGS += -L$(LIB_FREETYPE_LIBS)
 ADDITIONAL_LDFLAGS += $(XPDF_OBJ_FILES) -lfreetype -lm
 
-# Use C++ to link library
-CC=@CXX@
+# Use C++ to link library (this won't work if g++ is not the obj-c compiler!)
+#CC=@CXX@
 
 -include GNUmakefile.preamble
 
