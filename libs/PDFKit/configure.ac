@@ -63,10 +63,10 @@ else
 	lib_freetype_add_includes=/usr/pkg/include
       ;;
     openbsd*)
-	lib_freetype_add_includes=/usr/X11R6//include
+	lib_freetype_add_includes=/usr/X11R6/include
       ;;
     *)	
-      lib_freetype_add_includes=`freetype-config --cflags`
+      lib_freetype_add_includes=`freetype-config --prefix`/include
       ;;
   esac
 fi
@@ -98,9 +98,3 @@ AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-
 
 AC_OUTPUT
 
-                  
-# ./configure --with-freetype2-library=/usr/lib 
-# --with-freetype2-includes=/usr/include/freetype2 
-# --without-x
-# --without-t1 
-# --without-libpaper

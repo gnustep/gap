@@ -21,9 +21,6 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../xpdf-src
 
-# use cplusplus compiler
-CC=@CXX@
-
 SUBPROJECT_NAME = xpdf
 
 xpdf_SUBPROJECTS = \
