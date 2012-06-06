@@ -1,6 +1,11 @@
 2012-06-02 Riccardo Mottola <rm@gnu.org>
 
 	* GNUmakefile.in
+	On OpenBSD, embed freetype path with -rpath
+
+2012-06-02 Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.in
 	Use C++ to link.
 
 2012-05-31 Riccardo Mottola <rm@gnu.org>
