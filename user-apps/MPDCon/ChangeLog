@@ -1,3 +1,13 @@
+2012-06-08: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* MPDConInfo.plist
+	* MPDCon.pcproj/PC.project
+	* Add Project URL
+	* remove obsolete Resources/Info-gnustep.plist
+	* GNUmakefile
+	* MPDCon.pcproj/PC.project
+	* remove reference to non-existent Resources/TODO.txt
+	* remove reference to obsolete and removed Resources/Info-gnustep.plist
+
 2012-04-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Fix version in objects
 	* Resources/Collection.gorm/objects.gorm
