@@ -44,9 +44,7 @@ Resources/MPDCon.tiff \
 Resources/MoveSong.tiff \
 Resources/Current.tiff \
 Resources/Install \
-Resources/COPYING \
-Resources/TODO.txt \
-Resources/Info-gnustep.plist 
+Resources/COPYING 
 
 
 #

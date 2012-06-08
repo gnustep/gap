@@ -15,4 +15,5 @@
     NSMainNibFile = "Player.gorm";
     NSPrincipalClass = NSApplication;
     NSRole = Application;
+    URL = "http://gap.nongnu.org/mpdcon";
 }
