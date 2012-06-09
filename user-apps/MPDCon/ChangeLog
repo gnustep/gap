@@ -1,5 +1,7 @@
 2012-06-09: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Documentation/Install update
+	* GNUmakefile.preamble, use pkg-config to figure out
+	  how to link against libmpdclient
 
 2012-06-08: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDConInfo.plist
