@@ -1,8 +1,10 @@
 Installation Instructions:
 
-Make sure you first have MPD installed (See http://www.musicpd.org). Tested with MPD 0.10.3
+Make sure you first have libmpdclient installed (See http://www.musicpd.org).
+Tested with libmpdclient-2.7. 
 
-Second, you need GNUstep installed (See http://www.gnustep.org). Tested with CVS as of 24 May 2004.
+Second, you need GNUstep installed (See http://www.gnustep.org). Tested with 
+gnustep-make-1.6.2, gnustep-base-1.24.0 and gnustep-gui and gnustep-back 1.22.0.
 
 Then, just type
 
