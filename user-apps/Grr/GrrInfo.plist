@@ -9,7 +9,7 @@
 	"G\U00FCnther Noack <guenther@unix-ag.uni-kl.de>",
         "Riccardo Mottola"
     );
-    URL = "http://savannah.nongnu/project/gap/";
+    URL = "http://gap.nongnu.org/grr/";
     Copyright = "Copyright GNUstep Application Project team 2006-2012";
     CopyrightDescription = "Released under the terms of the GNU General Public License";
     NSTypes = (
