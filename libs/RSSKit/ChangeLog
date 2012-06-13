@@ -1,3 +1,8 @@
+2012-06-13 Yavor Doganov  <yavor@gnu.org>
+
+	* GNUmakefile
+	Fix compiling with LDFLAGS=-Wl,--no-undefined
+
 2012-05-15 Riccardo Mottola <rm@gnu.org>
 
 	* DOMParser.m
