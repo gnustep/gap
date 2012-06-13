@@ -74,6 +74,11 @@ endif
 # Use C++ to link library
 LD=@CXX@
 
+ifeq ($(findstring clang, LD), clang)
+ADDITIONAL_LDFLAGS += -lstdc++
+endif
+
+
 -include GNUmakefile.preamble
 
 include $(GNUSTEP_MAKEFILES)/framework.make
