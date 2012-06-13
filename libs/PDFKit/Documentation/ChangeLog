@@ -1,3 +1,8 @@
+2012-06-13 Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.in
+	For clang add -lstdc++ at linking stage.
+
 2012-06-02 Riccardo Mottola <rm@gnu.org>
 
 	* GNUmakefile.in
