@@ -15,7 +15,7 @@ PACKAGE_NAME = RSSKit
 FRAMEWORK_NAME = RSSKit
 
 # Additional libraries
-RSSKit_LIBRARIES_DEPEND_UPON += $(FND_LIBS)
+RSSKit_LIBRARIES_DEPEND_UPON += $(OBJC_LIBS) $(FND_LIBS)
 
 # The Objective-C source files to be compiled
 RSSKit_OBJC_FILES = \
@@ -61,7 +61,6 @@ RSSKit_HEADER_FILES = \
 RSSKit_HEADER_FILES_DIR = .
 
 include $(GNUSTEP_MAKEFILES)/aggregate.make
--include ../../etoile.make
 include $(GNUSTEP_MAKEFILES)/framework.make
 
 -include GNUmakefile.preamble
