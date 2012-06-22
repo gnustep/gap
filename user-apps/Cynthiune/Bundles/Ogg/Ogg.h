@@ -23,6 +23,11 @@
 #ifndef Ogg_H
 #define Ogg_H
 
+#include <vorbis/vorbisfile.h>
+
+@protocol CynthiuneBundle;
+@protocol Format;
+
 @interface Ogg : NSObject <CynthiuneBundle, Format>
 {
   int lastError;
