@@ -1504,8 +1504,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Info-AudioFile.plist";
-				OTHER_CFLAGS = "-no-cpp-precomp -framework Cynthiune";
-				OTHER_LDFLAGS = "-laudiofile  -framework Cynthiune";
+				OTHER_CFLAGS = "-no-cpp-precomp";
+				OTHER_LDFLAGS = "-laudiofile";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AudioFile;
 				SECTORDER_FLAGS = "";
