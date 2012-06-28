@@ -23,7 +23,57 @@
 */
 
 #import "Berkelium.h"
+#include <berkelium/Berkelium.hpp>
+#include <iostream>
 
-@implementation Berkelium
+static BerkeliumKit *_instance = nil;
 
+@implementation BerkeliumKit
+
+/**
+ * Return a shared instance of Berkelium...
+ */
++ (id) sharedBerkelium
+{
+  return [[self alloc] init];
+}
+
+/**
+ * Initialize and return the instance.
+ */
+- (id) init
+{
+  if(_instance != nil)
+    {
+      [self release];
+      return _instance;
+    }
+
+  if((self = [super init]) != nil)
+    {
+      _instance = self;
+      Berkelium::init(Berkelium::FileString::empty());
+    }
+
+  return _instance;
+}
+
+/**
+ * Cleanup after ourselves.
+ */
+- (void) dealloc
+{
+  [_instance release];
+  Berkelium::destroy();
+  [super dealloc];
+}
+
+/**
+ * Periodic update of Berkelium... allow the framework to synchronize with 
+ * events.
+ */
+- (void) update: (NSTimer *)timer
+{
+  Berkelium::update();
+}
 @end
