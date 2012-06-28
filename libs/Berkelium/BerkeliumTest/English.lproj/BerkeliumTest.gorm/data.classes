@@ -1,0 +1,25 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    BerkeliumKit = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSView;
+    };
+    BerkeliumTestController = {
+	Actions = (
+	);
+	Outlets = (
+	    window
+	);
+	Super = NSObject;
+    };
+    NewClass = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+}

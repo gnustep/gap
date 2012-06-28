@@ -26,12 +26,21 @@
 #define _BERKELIUM_H_
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-@interface BerkeliumKit : NSObject
+// Include C++ lib...
+#include <berkelium/Berkelium.hpp>
+#include <berkelium/Window.hpp>
+
+@interface BerkeliumKit : NSView
 {
-
+  NSTimer *_updateTimer;
+  NSString *_url;
+  Berkelium::Window *_bwindow;
 }
 
+- (void) update: (NSTimer *)timer;
+- (void) onPaint: (NSImage *)image;
 @end
 
 #endif // _BERKELIUM_H_
