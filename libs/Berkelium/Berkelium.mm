@@ -23,39 +23,72 @@
 */
 
 #import "Berkelium.h"
-#include <berkelium/Berkelium.hpp>
+
+// C++ includes...
+#include <berkelium/WindowDelegate.hpp>
+#include <berkelium/Context.hpp>
 #include <iostream>
 
-static BerkeliumKit *_instance = nil;
+static BOOL _initialized = NO;
+
+class MyDelegate : public Berkelium::WindowDelegate {
+
+ private:
+  BerkeliumKit *theView;
+  
+ public:
+  MyDelegate(BerkeliumKit *view) {
+    theView = view;
+  }
+  
+  virtual void onPaint(Berkelium::Window* wini,
+		       const unsigned char *bitmap_in, const Berkelium::Rect &bitmap_rect,
+		       size_t num_copy_rects, const Berkelium::Rect* copy_rects,
+		       int dx, int dy, const Berkelium::Rect& scroll_rect) 
+  {
+    NSImage *image = nil;
+
+    // handle paint events...
+    [theView onPaint: image];
+  }
+};
 
 @implementation BerkeliumKit
 
 /**
- * Return a shared instance of Berkelium...
- */
-+ (id) sharedBerkelium
-{
-  return [[self alloc] init];
-}
-
-/**
  * Initialize and return the instance.
  */
-- (id) init
+- (id) initFromFrame: (NSRect)frame
 {
-  if(_instance != nil)
-    {
-      [self release];
-      return _instance;
-    }
-
   if((self = [super init]) != nil)
     {
-      _instance = self;
-      Berkelium::init(Berkelium::FileString::empty());
+      if(_initialized == NO)
+	{
+	  Berkelium::init(Berkelium::FileString::empty());
+	  _initialized = YES;
+	}
+      
+      // Add update timer to periodically update the gui...
+      _updateTimer = [NSTimer scheduledTimerWithTimeInterval: (NSTimeInterval)0.1 
+						      target: self
+						    selector: @selector(update:)
+						    userInfo: nil
+						     repeats: YES];
+
+      Berkelium::Context* context = Berkelium::Context::create();
+      _bwindow = Berkelium::Window::create(context);
+      delete context;
+      
+      int width = (int)frame.size.width;
+      int height = (int)frame.size.height;
+      _bwindow->resize(height, width);
+
+      // Set the delegate...
+      MyDelegate *delegate = new MyDelegate((BerkeliumKit *)self);
+      _bwindow->setDelegate(delegate);
     }
 
-  return _instance;
+  return self; 
 }
 
 /**
@@ -63,7 +96,8 @@ static BerkeliumKit *_instance = nil;
  */
 - (void) dealloc
 {
-  [_instance release];
+  [_updateTimer release];
+  [_url release];
   Berkelium::destroy();
   [super dealloc];
 }
@@ -75,5 +109,28 @@ static BerkeliumKit *_instance = nil;
 - (void) update: (NSTimer *)timer
 {
   Berkelium::update();
+}
+
+/**
+ * Set main frame URL...
+ */
+- (void) setMainFrameURL: (NSString *)theURL
+{
+  ASSIGN(_url, theURL);
+  std::string url = [_url cString];
+  _bwindow->navigateTo(Berkelium::URLString::point_to(url.data(), url.length()));
+}
+
+/**
+ * return the main frame URL...
+ */ 
+- (NSString *)mainFrameURL
+{
+  return _url;
+}
+
+- (void) onPaint: (NSImage *)image
+{
+  NSLog(@"On paint...");
 }
 @end
