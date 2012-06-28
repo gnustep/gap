@@ -27,7 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Berkelium : NSObject
+@interface BerkeliumKit : NSObject
 {
 
 }
