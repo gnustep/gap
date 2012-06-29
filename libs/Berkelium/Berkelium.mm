@@ -105,7 +105,8 @@ class MyDelegate : public Berkelium::WindowDelegate {
       _bwindow->setDelegate(delegate);
 
       // [self setMainFrameURL: @"http://www.google.com"];
-      [self setMainFrameURL: @"http://inkjetprinterhelp.us/Color.html"]; // testing only..
+      // [self setMainFrameURL: @"http://inkjetprinterhelp.us/Color.html"]; // testing only..
+      [self setMainFrameURL: @"http://www.yahoo.com"];
     }
 
   return self; 
