@@ -42,13 +42,30 @@ class MyDelegate : public Berkelium::WindowDelegate {
   }
   
   virtual void onPaint(Berkelium::Window* wini,
-		       const unsigned char *bitmap_in, const Berkelium::Rect &bitmap_rect,
-		       size_t num_copy_rects, const Berkelium::Rect* copy_rects,
-		       int dx, int dy, const Berkelium::Rect& scroll_rect) 
+		       const unsigned char *bitmap_in, 
+		       const Berkelium::Rect &bitmap_rect,
+		       size_t num_copy_rects, 
+		       const Berkelium::Rect* copy_rects,
+		       int dx, 
+		       int dy, 
+		       const Berkelium::Rect& scroll_rect) 
   {
+    // handle paint events...    
     NSImage *image = nil;
-
-    // handle paint events...
+    NSSize size = NSMakeSize(bitmap_rect.width(),bitmap_rect.height());
+    NSBitmapImageRep *bitmap = 
+      [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&bitmap_in
+					      pixelsWide:size.width 
+					      pixelsHigh:size.height
+					   bitsPerSample:8 
+					 samplesPerPixel:4 
+						hasAlpha:NO
+						isPlanar:NO
+					  colorSpaceName:@"NSCalibratedRGBColorSpace"
+					     bytesPerRow:0 
+					    bitsPerPixel:0];
+    image = [[NSImage alloc] initWithSize: size];
+    [image addRepresentation: bitmap];
     [theView onPaint: image];
   }
 };
@@ -58,9 +75,9 @@ class MyDelegate : public Berkelium::WindowDelegate {
 /**
  * Initialize and return the instance.
  */
-- (id) initFromFrame: (NSRect)frame
+- (id) initWithFrame: (NSRect)frame
 {
-  if((self = [super init]) != nil)
+  if((self = [super initWithFrame:frame]) != nil)
     {
       if(_initialized == NO)
 	{
@@ -86,9 +103,20 @@ class MyDelegate : public Berkelium::WindowDelegate {
       // Set the delegate...
       MyDelegate *delegate = new MyDelegate((BerkeliumKit *)self);
       _bwindow->setDelegate(delegate);
+
+      // [self setMainFrameURL: @"http://www.google.com"];
+      [self setMainFrameURL: @"http://inkjetprinterhelp.us/Color.html"]; // testing only..
     }
 
   return self; 
+}
+
+- (void) setFrame: (NSRect)frame
+{
+  [super setFrame: frame];
+  int width = (int)frame.size.width;
+  int height = (int)frame.size.height;
+  _bwindow->resize(height, width);  
 }
 
 /**
@@ -132,5 +160,6 @@ class MyDelegate : public Berkelium::WindowDelegate {
 - (void) onPaint: (NSImage *)image
 {
   NSLog(@"On paint...");
+  [self setImage:image];
 }
 @end

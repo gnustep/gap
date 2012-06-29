@@ -32,7 +32,7 @@
 #include <berkelium/Berkelium.hpp>
 #include <berkelium/Window.hpp>
 
-@interface BerkeliumKit : NSView
+@interface BerkeliumKit : NSImageView
 {
   NSTimer *_updateTimer;
   NSString *_url;
@@ -41,6 +41,7 @@
 
 - (void) update: (NSTimer *)timer;
 - (void) onPaint: (NSImage *)image;
+- (void) setMainFrameURL: (NSString *)theURL;
 @end
 
 #endif // _BERKELIUM_H_
