@@ -26,7 +26,7 @@
 #define _BERKELIUM_H_
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSImageView.h>
 
 // Include C++ lib...
 #include <berkelium/Berkelium.hpp>
