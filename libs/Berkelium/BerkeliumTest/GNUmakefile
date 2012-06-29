@@ -23,13 +23,15 @@ BerkeliumTest_MAIN_MODEL_FILE=BerkeliumTest.gorm
 # Additional libraries
 #
 
-ADDITIONAL_GUI_LIBS += 
+ADDITIONAL_GUI_LIBS += -lBerkelium -llibberkelium
 
 #
 # Resource files
 #
 
-BerkeliumTest_RESOURCE_FILES= 
+BerkeliumTest_RESOURCE_FILES= \
+chrome.pak \
+resources.pak
 
 BerkeliumTest_LOCALIZED_RESOURCE_FILES = \
 BerkeliumTest.gorm 
