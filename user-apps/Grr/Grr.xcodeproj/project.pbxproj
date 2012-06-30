@@ -32,8 +32,6 @@
 		850F6513108BCE870035D594 /* PipeType.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D53107BF7D000B55A9A /* PipeType.h */; };
 		850F652B108BCF470035D594 /* Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D40107BF7D000B55A9A /* Components.m */; };
 		850F652C108BCF490035D594 /* Components.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D3F107BF7D000B55A9A /* Components.h */; };
-		850F652F108BD0050035D594 /* UKNibOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D5B107BF7D000B55A9A /* UKNibOwner.m */; };
-		850F6530108BD0060035D594 /* UKNibOwner.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D5A107BF7D000B55A9A /* UKNibOwner.h */; };
 		85687D5C107BF7D000B55A9A /* AppController.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D35107BF7D000B55A9A /* AppController.h */; };
 		85687D5D107BF7D000B55A9A /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D36107BF7D000B55A9A /* AppController.m */; };
 		85687D5E107BF7D000B55A9A /* Article.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D37107BF7D000B55A9A /* Article.h */; };
@@ -71,8 +69,6 @@
 		85687D7E107BF7D000B55A9A /* PreferencesPanel.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D57107BF7D000B55A9A /* PreferencesPanel.h */; };
 		85687D7F107BF7D000B55A9A /* PreferencesPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D58107BF7D000B55A9A /* PreferencesPanel.m */; };
 		85687D80107BF7D000B55A9A /* ToolbarDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D59107BF7D000B55A9A /* ToolbarDelegate.h */; };
-		85687D81107BF7D000B55A9A /* UKNibOwner.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D5A107BF7D000B55A9A /* UKNibOwner.h */; };
-		85687D82107BF7D000B55A9A /* UKNibOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D5B107BF7D000B55A9A /* UKNibOwner.m */; };
 		85687D87107BF83C00B55A9A /* ArticleOperations.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D85107BF83C00B55A9A /* ArticleOperations.h */; };
 		85687D88107BF83C00B55A9A /* ArticleOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D86107BF83C00B55A9A /* ArticleOperations.m */; };
 		85687D8C107BF85200B55A9A /* ArticleTablePlugin.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D8A107BF85200B55A9A /* ArticleTablePlugin.h */; };
@@ -211,8 +207,6 @@
 		85687D57107BF7D000B55A9A /* PreferencesPanel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PreferencesPanel.h; sourceTree = "<group>"; };
 		85687D58107BF7D000B55A9A /* PreferencesPanel.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PreferencesPanel.m; sourceTree = "<group>"; };
 		85687D59107BF7D000B55A9A /* ToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegate.h; sourceTree = "<group>"; };
-		85687D5A107BF7D000B55A9A /* UKNibOwner.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = UKNibOwner.h; sourceTree = "<group>"; };
-		85687D5B107BF7D000B55A9A /* UKNibOwner.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = UKNibOwner.m; sourceTree = "<group>"; };
 		85687D85107BF83C00B55A9A /* ArticleOperations.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ArticleOperations.h; path = Components/ArticleOperations/ArticleOperations.h; sourceTree = "<group>"; };
 		85687D86107BF83C00B55A9A /* ArticleOperations.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ArticleOperations.m; path = Components/ArticleOperations/ArticleOperations.m; sourceTree = "<group>"; };
 		85687D8A107BF85200B55A9A /* ArticleTablePlugin.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ArticleTablePlugin.h; path = Components/ArticleTable/ArticleTablePlugin.h; sourceTree = "<group>"; };
@@ -280,7 +274,7 @@
 		857AA8B61082AC6800829DD6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Components/ArticleView/English.lproj/ArticleTextViewPlugin.nib; sourceTree = "<group>"; };
 		857AA8BB1082AC8700829DD6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Components/DatabaseTreeView/English.lproj/DatabaseTreeViewController.nib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Grr.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Grr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Grr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,8 +347,6 @@
 				85687D57107BF7D000B55A9A /* PreferencesPanel.h */,
 				85687D58107BF7D000B55A9A /* PreferencesPanel.m */,
 				85687D59107BF7D000B55A9A /* ToolbarDelegate.h */,
-				85687D5A107BF7D000B55A9A /* UKNibOwner.h */,
-				85687D5B107BF7D000B55A9A /* UKNibOwner.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -719,7 +711,6 @@
 			files = (
 				850F6513108BCE870035D594 /* PipeType.h in Resources */,
 				850F652C108BCF490035D594 /* Components.h in Resources */,
-				850F6530108BD0060035D594 /* UKNibOwner.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,7 +740,6 @@
 				85687D7C107BF7D000B55A9A /* PreferencesComponent.h in Resources */,
 				85687D7E107BF7D000B55A9A /* PreferencesPanel.h in Resources */,
 				85687D80107BF7D000B55A9A /* ToolbarDelegate.h in Resources */,
-				85687D81107BF7D000B55A9A /* UKNibOwner.h in Resources */,
 				85687D87107BF83C00B55A9A /* ArticleOperations.h in Resources */,
 				85687D8C107BF85200B55A9A /* ArticleTablePlugin.h in Resources */,
 				85687D97107BF8CB00B55A9A /* ArticleTextViewPlugin.h in Resources */,
@@ -832,7 +822,6 @@
 				850F6484108BC0A20035D594 /* Searching.m in Sources */,
 				850F6512108BCE860035D594 /* PipeType.m in Sources */,
 				850F652B108BCF470035D594 /* Components.m in Sources */,
-				850F652F108BD0050035D594 /* UKNibOwner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,7 +847,6 @@
 				85687D7B107BF7D000B55A9A /* PipeType.m in Sources */,
 				85687D7D107BF7D000B55A9A /* PreferencesComponent.m in Sources */,
 				85687D7F107BF7D000B55A9A /* PreferencesPanel.m in Sources */,
-				85687D82107BF7D000B55A9A /* UKNibOwner.m in Sources */,
 				85687D88107BF83C00B55A9A /* ArticleOperations.m in Sources */,
 				85687D8D107BF85200B55A9A /* ArticleTablePlugin.m in Sources */,
 				85687D91107BF8A900B55A9A /* Grr_main.m in Sources */,
