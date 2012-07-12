@@ -1,3 +1,12 @@
+2012-07-12 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* ZipperDocument.m
+	  Add Action methods to (de)selectAll:
+	* Resources/ZipperDocument.gorm
+	  Allow Empty selection
+	* Resources/MainMenu.gorm
+	  add Edit submenu with entries to (de)select All
+
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 
 	* PreferencesController.m
