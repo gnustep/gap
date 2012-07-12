@@ -327,6 +327,16 @@
 	}
 }
 
+- (void)selectAll:(id)sender
+{
+	[_tableView selectAll: self];
+}
+
+- (void)deselectAll:(id)sender
+{
+	[_tableView deselectAll: self];
+}
+
 - (void)tableViewDoubleAction:(id)sender
 {
 	NSEnumerator *enumerator;
