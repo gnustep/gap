@@ -101,7 +101,7 @@
 
   rect = [chartView frame];
   superView = [chartView superview];
-  [chartView release];
+  //  [chartView release];
   chartView = [[OKLineChart alloc] initWithFrame: rect];
   [superView addSubview: chartView];
 
