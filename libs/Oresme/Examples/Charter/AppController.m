@@ -101,8 +101,10 @@
 
   rect = [chartView frame];
   superView = [chartView superview];
-  //  [chartView release];
-  chartView = [[OKLineChart alloc] initWithFrame: rect];
+  tempChart = [[OKLineChart alloc] initWithFrame: rect];
+  [tempChart setAutoresizingMask:[chartView autoresizingMask]];
+  [chartView removeFromSuperview];
+  chartView = tempChart;
   [superView addSubview: chartView];
 
 }
