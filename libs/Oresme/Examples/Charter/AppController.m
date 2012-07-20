@@ -55,6 +55,7 @@
   [chartView addSeries: series1];
   if ([[sender selectedItem] tag] == 0)
     {
+      [series1 setColor: [NSColor blueColor]];
       for (i = 0; i < 6; i++)
 	{
 	  v1 = i*i - 4;
@@ -65,7 +66,9 @@
     }
   else if ([[sender selectedItem] tag] == 1)
     {
+      [series1 setColor: [NSColor purpleColor]];
       series2 = [[OKSeries alloc] init];
+      [series2 setColor: [NSColor greenColor]];
       [chartView addSeries: series2];
       for (i = 0; i < 6; i++)
 	{
