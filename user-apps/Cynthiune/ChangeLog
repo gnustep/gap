@@ -1,3 +1,9 @@
+2012-07-23 Riccardo Mottola <rm@gnu.org>
+
+	* Player.m
+	* Frameworks/Cynthiune/Output.h
+	Change pointer qualifier to be Panther compatible.
+	
 2012-07-22 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* remove debug NSLog from Sndio backend
 

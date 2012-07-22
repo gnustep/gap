@@ -66,8 +66,8 @@
 
 @interface NSObject (ParentPlayer)
 
-- (int) readNextChunk: (const unsigned char *) buffer
-             withSize: (const unsigned int) bufferSize;
+- (int) readNextChunk: (unsigned char *) buffer
+             withSize: (unsigned int) bufferSize;
 - (void) chunkFinishedPlaying;
 
 @end
