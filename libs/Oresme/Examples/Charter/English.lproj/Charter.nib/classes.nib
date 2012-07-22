@@ -1,7 +1,12 @@
 {
     IBClasses = (
         {
-            ACTIONS = {changeBackgroundColor = id; changePlot = id; }; 
+            ACTIONS = {
+                changeBackgroundColor = id; 
+                changePlot = id; 
+                changeSeries1Color = id; 
+                changeSeries2Color = id; 
+            }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {chartView = OKChart; plot = NSPopUpButton; }; 

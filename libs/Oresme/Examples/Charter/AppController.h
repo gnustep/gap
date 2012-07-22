@@ -34,6 +34,8 @@
 
 - (IBAction)changePlot:(id)sender;
 - (IBAction)changeBackgroundColor: (id)sender;
+- (IBAction)changeSeries1Color: (id)sender;
+- (IBAction)changeSeries2Color: (id)sender;
 
 @end
 

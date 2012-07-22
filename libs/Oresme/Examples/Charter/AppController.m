@@ -92,6 +92,18 @@
  [chartView setNeedsDisplay: YES];
 }
 
+- (IBAction) changeSeries1Color: (id)sender
+{
+  [[chartView seriesAtIndex:0] setColor: [sender color]];
+  [chartView setNeedsDisplay: YES];
+}
+
+- (IBAction) changeSeries2Color: (id)sender
+{
+  [[chartView seriesAtIndex:1] setColor: [sender color]];
+  [chartView setNeedsDisplay: YES];
+}
+
 - (void) awakeFromNib
 {
 }
