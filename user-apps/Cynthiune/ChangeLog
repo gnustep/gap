@@ -1,3 +1,6 @@
+2012-07-22 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* remove debug NSLog from Sndio backend
+
 2012-07-22 Riccardo Mottola <rm@gnu.org>
 
 	* Bundles/MacOSX/MacOSXPlayer.h

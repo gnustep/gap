@@ -99,15 +99,10 @@
   rate = sampleRate;
   endianness = e;
 
-  NSLog(@"prepareDevice got called, channels: %u sampleRate: %lu, endianness: %i", numberOfChannels, sampleRate, e);
-
   [devlock lock];
   if (hdl) {
-    NSLog(@"prepareDevice: HDL was set, going to close it!");
     sio_close(hdl);
     hdl = NULL;
-  } else {
-    NSLog(@"prepareDevice: HDL was NULL, just going to open!");
   }
   hdl = sio_open(NULL, SIO_PLAY, 0);
   sio_initpar(&par);
@@ -117,12 +112,10 @@
     {
       if (NSHostByteOrder() == NS_LittleEndian)
         { 
-	  NSLog(@"Native Endianness: LittleEndian");
           par.le = 1;
 	}
       else
 	{
-	  NSLog(@"Native Endianness: BigEndian");
 	  par.le = 2;
 	}
     }
@@ -134,12 +127,8 @@
 
   if (sio_setpar(hdl, &par))
     {
-      NSLog(@"successfully set parameters");
       result = YES;
-    } else {
-      NSLog(@"NOT successfully set parameters");
     }
-NSLog(@"prepareDevice: calling sio_start");
   sio_start(hdl);
   [devlock unlock];
   return result;
@@ -148,7 +137,7 @@ NSLog(@"prepareDevice: calling sio_start");
 - (BOOL) openDevice
 {
   BOOL result = NO;
-NSLog(@"OpenDevice got called");
+
   result = [self prepareDeviceWithChannels: channels
 		andRate: rate
 		withEndianness: endianness];
@@ -159,7 +148,6 @@ NSLog(@"OpenDevice got called");
 {
   while (stopRequested)
     [NSThread sleepUntilDate: [NSDate dateWithTimeIntervalSinceNow: 0.01]];
-NSLog(@"close device got called!");
   [devlock lock];
   sio_close(hdl);
   [devlock unlock];
@@ -183,14 +171,12 @@ NSLog(@"close device got called!");
       if ([pool autoreleaseCount] > 50)
 	[pool emptyPool];
     }
-NSLog(@"threadLoop: stopping thread");
   stopRequested = NO;
   [pool release];
 }
 
 - (BOOL) startThread
 {
-  NSLog(@"startThread called");
   [NSThread detachNewThreadSelector: @selector (threadLoop)
             toTarget: self
             withObject: nil];
@@ -200,7 +186,6 @@ NSLog(@"threadLoop: stopping thread");
 
 - (void) stopThread
 {
-  NSLog(@"stopThread called");
   stopRequested = YES;
 }
 
