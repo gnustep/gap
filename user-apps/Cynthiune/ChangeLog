@@ -1,3 +1,9 @@
+2012-07-22 Riccardo Mottola <rm@gnu.org>
+
+	* Bundles/MacOSX/MacOSXPlayer.h
+    * Bundles/MacOSX/MacOSXPlayer.m
+    Accept and use the Endianness parameter.
+
 2012-05-29 Riccardo Mottola <rm@gnu.org>
 
 	* Bundles/ALSA/ALSA.m

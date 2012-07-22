@@ -1,8 +1,10 @@
 /* MacOSXPlayer.h - this file is part of Cynthiune
  *
- * Copyright (C) 2002, 2003, 2004  Wolfgang Sourdeau
+ * Copyright (C) 2002-2004  Wolfgang Sourdeau
+ *               2012 he GNUstep Application Team
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
+ *         Riccardo Mottola <rm@gnu.org>
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +40,7 @@
   unsigned char buffer[2][DEFAULT_BUFFER_SIZE];
 
   BOOL isOpen;
+  BOOL isBigEndian;
 
   AudioUnit outputUnit;
   AudioConverterRef converter;
