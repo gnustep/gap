@@ -111,8 +111,6 @@
 				8551FF3C156AC1E6005E1C81,
 				8551FF49156AC1E6005E1C81,
 				8551FF5A156AC1E6005E1C81,
-				8551FF68156AC1E7005E1C81,
-				8551FF73156AC1E7005E1C81,
 				8551FF80156AC1E8005E1C81,
 				8551FF8F156AC1E9005E1C81,
 				8551FF9B156AC1EA005E1C81,
@@ -164,8 +162,6 @@
 				8551FF30156AC1E5005E1C81,
 				8551FF3D156AC1E6005E1C81,
 				8551FF4A156AC1E6005E1C81,
-				8551FF5B156AC1E6005E1C81,
-				8551FF69156AC1E7005E1C81,
 				8551FF74156AC1E8005E1C81,
 				8551FF81156AC1E8005E1C81,
 				8551FF90156AC1E9005E1C81,
@@ -306,7 +302,7 @@
 			);
 			buildSettings = {
 				BUILD_SETTING = "";
-				FRAMEWORK_SEARCH_PATHS = /home/wolfgang/programmes/gnustep/Cynthiune/build;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G3;
 				GCC_OPTIMIZATION_LEVEL = 2;
@@ -315,7 +311,7 @@
 				INFOPLIST_FILE = "Info-Cynthiune.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-Wall";
-				OTHER_LDFLAGS = "-L/usr/local/lib -lmusicbrainz -lexpat -lstdc++";
+				OTHER_LDFLAGS = "-L/usr/local/lib -lstdc++";
 				PREBINDING = NO;
 				PRODUCT_NAME = Cynthiune;
 				SECTORDER_FLAGS = "";
@@ -2161,241 +2157,6 @@
 			refType = 3;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8551FF5B156AC1E6005E1C81 = {
-			buildPhases = (
-				8551FF5C156AC1E6005E1C81,
-				8551FF5E156AC1E6005E1C81,
-				8551FF60156AC1E6005E1C81,
-				8551FF62156AC1E6005E1C81,
-				8551FF66156AC1E6005E1C81,
-			);
-			buildRules = (
-			);
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
-				HEADER_SEARCH_PATHS = .;
-				INFOPLIST_FILE = "Info-Esound.plist";
-				OTHER_CFLAGS = "-no-cpp-precomp";
-				OTHER_LDFLAGS = "-lesd";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = Esound;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
-				WRAPPER_EXTENSION = output;
-			};
-			dependencies = (
-			);
-			isa = PBXNativeTarget;
-			name = Esound;
-			productInstallPath = "$(USER_LIBRARY_DIR)/Bundles";
-			productName = Esound;
-			productReference = 8551FF68156AC1E7005E1C81;
-			productType = "com.apple.product-type.bundle";
-		};
-		8551FF5C156AC1E6005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FF5D156AC1E6005E1C81,
-			);
-			isa = PBXHeadersBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF5D156AC1E6005E1C81 = {
-			fileRef = EA80097D0629F354036EED6D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF5E156AC1E6005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FF5F156AC1E6005E1C81,
-			);
-			isa = PBXResourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF5F156AC1E6005E1C81 = {
-			fileRef = EA2D90580629F93F03D508AF;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF60156AC1E6005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FF61156AC1E6005E1C81,
-			);
-			isa = PBXSourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF61156AC1E6005E1C81 = {
-			fileRef = EA80097B0629F33B036EED6D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF62156AC1E6005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FF63156AC1E6005E1C81,
-				8551FF64156AC1E6005E1C81,
-				8551FFD1156AC1EE005E1C81,
-			);
-			isa = PBXFrameworksBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF63156AC1E6005E1C81 = {
-			fileRef = 29B97325FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF64156AC1E6005E1C81 = {
-			fileRef = 29B97324FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF66156AC1E6005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			isa = PBXRezBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF68156AC1E7005E1C81 = {
-			explicitFileType = wrapper.cfbundle;
-			includeInIndex = 0;
-			isa = PBXFileReference;
-			path = Esound.output;
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8551FF69156AC1E7005E1C81 = {
-			buildPhases = (
-				8551FF6A156AC1E7005E1C81,
-				8551FF6C156AC1E7005E1C81,
-				8551FF6D156AC1E7005E1C81,
-				8551FF6F156AC1E7005E1C81,
-				8551FF72156AC1E7005E1C81,
-			);
-			buildSettings = {
-				DEBUGGING_SYMBOLS = NO;
-				OPTIMIZATION_CFLAGS = "-O2";
-				OTHER_CFLAGS = "-I. -D__MACOSX__ -no-cpp-precomp";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = dummy;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "\U0001-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
-				WRAPPER_EXTENSION = output;
-			};
-			dependencies = (
-			);
-			isa = PBXBundleTarget;
-			name = dummy;
-			productInstallPath = "$(USER_LIBRARY_DIR)/Bundles";
-			productName = dummy;
-			productReference = 8551FF73156AC1E7005E1C81;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>dummy</string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
-	<key>CFBundleIconFile</key>
-	<string></string>
-	<key>CFBundleIdentifier</key>
-	<string></string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string></string>
-	<key>CFBundlePackageType</key>
-	<string>BNDL</string>
-	<key>CFBundleShortVersionString</key>
-	<string></string>
-	<key>CFBundleSignature</key>
-	<string>WOSO</string>
-	<key>CFBundleVersion</key>
-	<string>0.0.1d1</string>
-	<key>NSPrincipalClass</key>
-	<string>dummy</string>
-</dict>
-</plist>
-";
-		};
-		8551FF6A156AC1E7005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FF6B156AC1E7005E1C81,
-			);
-			isa = PBXHeadersBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF6B156AC1E7005E1C81 = {
-			fileRef = EA8D0C0306268E4303000102;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF6C156AC1E7005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			isa = PBXResourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF6D156AC1E7005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FF6E156AC1E7005E1C81,
-			);
-			isa = PBXSourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF6E156AC1E7005E1C81 = {
-			fileRef = EA8D0C0106268E3003000102;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF6F156AC1E7005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-				8551FFD2156AC1EE005E1C81,
-				8551FF71156AC1E7005E1C81,
-			);
-			isa = PBXFrameworksBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF71156AC1E7005E1C81 = {
-			fileRef = 29B97325FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF72156AC1E7005E1C81 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			isa = PBXRezBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8551FF73156AC1E7005E1C81 = {
-			explicitFileType = wrapper.cfbundle;
-			includeInIndex = 0;
-			isa = PBXFileReference;
-			path = dummy.output;
-			refType = 3;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		8551FF74156AC1E8005E1C81 = {
 			buildPhases = (
 				8551FF75156AC1E8005E1C81,
@@ -3053,18 +2814,6 @@
 			settings = {
 			};
 		};
-		8551FFD1156AC1EE005E1C81 = {
-			fileRef = 8551FF06156AC1E5005E1C81;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FFD2156AC1EE005E1C81 = {
-			fileRef = 8551FF06156AC1E5005E1C81;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		8551FFD3156AC1EE005E1C81 = {
 			fileRef = 8551FF06156AC1E5005E1C81;
 			isa = PBXBuildFile;
@@ -3191,16 +2940,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		EA0E08F206268A1F034EFD4C = {
-			children = (
-				EA8D0BF706268D9503000102,
-				EA8D0BF806268D9D03000102,
-			);
-			isa = PBXGroup;
-			name = dummy;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		EA1D795306263FB803CFD9F6 = {
 			children = (
 				EA1D796F0626401C03CFD9F6,
@@ -3238,8 +2977,6 @@
 				EA1D795306263FB803CFD9F6,
 				EA96C1E80770F87303166923,
 				EA949F70062720910348A0D9,
-				EA80096F0629F2D7036EED6D,
-				EA0E08F206268A1F034EFD4C,
 				EAA95C2F09D0ECA7039F499A,
 				EADC4D6409476C1203B0DF6D,
 				EAA6DF9509A66BCC034E8D88,
@@ -3265,23 +3002,6 @@
 			isa = PBXGroup;
 			name = Headers;
 			path = "";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA2D90570629F91B03D508AF = {
-			children = (
-				EA2D90580629F93F03D508AF,
-			);
-			isa = PBXGroup;
-			name = Resources;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA2D90580629F93F03D508AF = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
-			name = EsoundPreferences.nib;
-			path = Bundles/Esound/EsoundPreferences.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3533,53 +3253,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		EA80096F0629F2D7036EED6D = {
-			children = (
-				EA8009790629F312036EED6D,
-				EA80097A0629F318036EED6D,
-				EA2D90570629F91B03D508AF,
-			);
-			isa = PBXGroup;
-			name = Esound;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA8009790629F312036EED6D = {
-			children = (
-				EA80097B0629F33B036EED6D,
-			);
-			isa = PBXGroup;
-			name = Classes;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA80097A0629F318036EED6D = {
-			children = (
-				EA80097D0629F354036EED6D,
-			);
-			isa = PBXGroup;
-			name = Headers;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA80097B0629F33B036EED6D = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			name = Esound.m;
-			path = Bundles/Esound/Esound.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA80097D0629F354036EED6D = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Esound.h;
-			path = Bundles/Esound/Esound.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		EA85A0E2062773E80303B004 = {
 			children = (
 				EA7EE7A1063AEA1A039F4895,
@@ -3812,42 +3485,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
 			path = CynthiunePopUpButton.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA8D0BF706268D9503000102 = {
-			children = (
-				EA8D0C0106268E3003000102,
-			);
-			isa = PBXGroup;
-			name = Classes;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA8D0BF806268D9D03000102 = {
-			children = (
-				EA8D0C0306268E4303000102,
-			);
-			isa = PBXGroup;
-			name = Headers;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA8D0C0106268E3003000102 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = dummy.m;
-			path = Bundles/dummy/dummy.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA8D0C0306268E4303000102 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = dummy.h;
-			path = Bundles/dummy/dummy.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
