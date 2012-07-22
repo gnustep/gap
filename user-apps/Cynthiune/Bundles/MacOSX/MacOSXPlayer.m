@@ -107,6 +107,7 @@ converterRenderer (void* selfRef, AudioUnitRenderActionFlags inActionFlags,
       bufferNumber = 0;
       bytes = 0;
       converter = NULL;
+      isBigEndian = NO;
       inputFormat.mFormatID = kAudioFormatLinearPCM;
       inputFormat.mFormatFlags = (kLinearPCMFormatFlagIsSignedInteger 
                                   | kLinearPCMFormatFlagIsPacked);
@@ -140,6 +141,10 @@ converterRenderer (void* selfRef, AudioUnitRenderActionFlags inActionFlags,
   inputFormat.mBytesPerPacket = channels * 2;
   inputFormat.mBytesPerFrame = channels * 2;
   inputFormat.mChannelsPerFrame = channels;
+  inputFormat.mFormatFlags = (kLinearPCMFormatFlagIsSignedInteger 
+                              | kLinearPCMFormatFlagIsPacked);
+  if (isBigEndian)
+    inputFormat.mFormatFlags |= kAudioFormatFlagIsBigEndian;
 
   return (AudioConverterNew (&inputFormat, &outputFormat, &converter)
           == noErr);
@@ -201,6 +206,21 @@ converterRenderer (void* selfRef, AudioUnitRenderActionFlags inActionFlags,
 
   channels = numberOfChannels;
   rate = sampleRate;
+  
+  isBigEndian = NO;
+  if (e == NativeEndian)
+    {
+#if defined (__ppc__)
+    isBigEndian = YES;
+#elif defined (__i386__)
+    isBigEndian = NO;
+#else
+#warning Unknown architecture
+    isBigEndian = YES;
+#endif
+    }
+  else if (e == BigEndian)
+    isBigEndian = YES;
 
   if (isOpen)
     {
