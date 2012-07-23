@@ -1,3 +1,19 @@
+2012-07-23  Yavor Doganov  <yavor@gnu.org>
+        Enable optional MusicBrainz support, port to libmusicbrainz5/3.
+        * GNUmakefile.preamble (_have_musicbrainz5, _have_musicbrainz3):
+        New helper variables; attempt to detect the installed versions of
+        libmusicbrainz.
+        (ADDITIONAL_CPPFLAGS, ADDITIONAL_GUI_LIBS): Conditionally define
+        based on the tests above.
+        * SongInspectorController.m: Conditionally include
+        <musicbrainz5/mb5_c.h> or <musicbrainz3/mb_c.h>.
+        (_setFieldsEditable:): Disable MB lookup if no version of
+        libmusicbrainz if found.
+        (MakeQis, FreeQis, -_generateTrmId): Remove.
+        (-lookupThread, -_parseMB:, -readMB:track:): Adapt to the new
+        libmusicbrainz API.
+        * NEWS: Update.
+
 2012-07-23 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Cynthiune/MailService.m

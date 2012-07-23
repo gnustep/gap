@@ -1,3 +1,8 @@
+version ?.?.?:
+- MusicBrainz support is now optional, and updated to libmusicbrainz
+  5.x (preferable) or 3.x.  Support for version 2.x has been removed
+  as it is deprecated and unusable with the current server software.
+
 version 0.9.5:
 - some files were separated into a new Cynthiune framework, so that other
   developers can now start writing extension bundles and so that bundles

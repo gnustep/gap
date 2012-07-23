@@ -1,6 +1,8 @@
-# GNUmakefile.preamble - -*-makefile-*- - this file is part of Cynthiune
+# -*-makefile-gmake-*-
+# GNUmakefile.preamble - this file is part of Cynthiune
 #
 # Copyright (C) 2004 Wolfgang Sourdeau
+# Copyright (C) 2012 Free Software Foundation, Inc.
 #
 # Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
 #
@@ -23,6 +25,19 @@ ADDITIONAL_OBJCFLAGS += -Wall -Wno-import
 
 ifeq ($(local-build), yes)
 ADDITIONAL_CPPFLAGS += -DLOCALBUILD=1
+endif
+
+ifneq (yes,$(disable-musicbrainz))
+_have_musicbrainz5 := $(shell pkg-config --exists libmusicbrainz5 && echo yes)
+_have_musicbrainz3 := $(shell pkg-config --exists libmusicbrainz3 && echo yes)
+
+ifeq ($(_have_musicbrainz5), yes)
+ADDITIONAL_CPPFLAGS += -DHAVE_MUSICBRAINZ -DMUSICBRAINZ_5
+ADDITIONAL_GUI_LIBS += -lmusicbrainz5
+else ifeq ($(_have_musicbrainz3), yes)
+ADDITIONAL_CPPFLAGS += -DHAVE_MUSICBRAINZ
+ADDITIONAL_GUI_LIBS += -lmusicbrainz3
+endif
 endif
 
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
