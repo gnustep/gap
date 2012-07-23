@@ -128,7 +128,6 @@
 		85EF88AA15669BDC00DD5F41 /* CynthiuneBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7EE734063AE6B6039F4895 /* CynthiuneBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EF88AB15669BDC00DD5F41 /* NSNumberExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA8795E306F66AA403809032 /* NSNumberExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EF88AC15669BDC00DD5F41 /* NSStringExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA547B68078A36000358AD96 /* NSStringExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		85EF88AD15669BDC00DD5F41 /* MailService.h in Headers */ = {isa = PBXBuildFile; fileRef = EA73D4C0074C823503F60D55 /* MailService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EF88AE15669BDC00DD5F41 /* NSArrayExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFFEE6C086E5601039AFE6D /* NSArrayExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EF88AF15669BDC00DD5F41 /* NSCellExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFFEE6E086E5601039AFE6D /* NSCellExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EF88B015669BDC00DD5F41 /* NSColorExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFFEE70086E5601039AFE6D /* NSColorExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -143,7 +142,6 @@
 		85EF88BB15669BDC00DD5F41 /* NSColorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFFEE71086E5601039AFE6D /* NSColorExtensions.m */; };
 		85EF88BC15669BDC00DD5F41 /* NSTimerExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFFEE73086E5601039AFE6D /* NSTimerExtensions.m */; };
 		85EF88BD15669BDC00DD5F41 /* NSViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFFEE75086E5601039AFE6D /* NSViewExtensions.m */; };
-		85EF88BE15669BDC00DD5F41 /* MailService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA73D4C1074C823503F60D55 /* MailService.m */; };
 		85EF88C015669BDC00DD5F41 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		85EF88CC15669BDC00DD5F41 /* AudioFileBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = EA8A20BF0675A4EB03A8D3C1 /* AudioFileBundle.h */; };
 		85EF88CF15669BDC00DD5F41 /* AudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8A20BD0675A4D003A8D3C1 /* AudioFile.m */; };
@@ -279,7 +277,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85EF890F15669BDC00DD5F41 /* Ogg */;
+			remoteGlobalIDString = 85EF890F15669BDC00DD5F41;
 			remoteInfo = Ogg;
 		};
 		85EF89AD15669BDD00DD5F41 /* PBXContainerItemProxy */ = {
@@ -397,8 +395,6 @@
 		EA73D4B5074C81F203F60D55 /* PlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerController.m; sourceTree = "<group>"; };
 		EA73D4B6074C81F203F60D55 /* PlayerPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerPreference.h; sourceTree = "<group>"; };
 		EA73D4B7074C81F203F60D55 /* PlayerPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerPreference.m; sourceTree = "<group>"; };
-		EA73D4C0074C823503F60D55 /* MailService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailService.h; path = Frameworks/Cynthiune/MailService.h; sourceTree = "<group>"; };
-		EA73D4C1074C823503F60D55 /* MailService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MailService.m; path = Frameworks/Cynthiune/MailService.m; sourceTree = "<group>"; };
 		EA778ACC09B5778A032657EF /* CynthiuneHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CynthiuneHeaderCell.h; sourceTree = "<group>"; };
 		EA778ACD09B5778A032657EF /* CynthiuneHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CynthiuneHeaderCell.m; sourceTree = "<group>"; };
 		EA7EE734063AE6B6039F4895 /* CynthiuneBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CynthiuneBundle.h; path = Frameworks/Cynthiune/CynthiuneBundle.h; sourceTree = "<group>"; };
@@ -1248,7 +1244,6 @@
 		EAFFEE6A086E55AB039AFE6D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EA73D4C1074C823503F60D55 /* MailService.m */,
 				EAFFEE6D086E5601039AFE6D /* NSArrayExtensions.m */,
 				EAFFEE6F086E5601039AFE6D /* NSCellExtensions.m */,
 				EAFFEE71086E5601039AFE6D /* NSColorExtensions.m */,
@@ -1266,7 +1261,6 @@
 			children = (
 				EA7EE734063AE6B6039F4895 /* CynthiuneBundle.h */,
 				F7858BEA061FC27301C0FE28 /* Format.h */,
-				EA73D4C0074C823503F60D55 /* MailService.h */,
 				EAFFEE6C086E5601039AFE6D /* NSArrayExtensions.h */,
 				EAFFEE6E086E5601039AFE6D /* NSCellExtensions.h */,
 				EAFFEE70086E5601039AFE6D /* NSColorExtensions.h */,
@@ -1431,7 +1425,6 @@
 				85EF88AA15669BDC00DD5F41 /* CynthiuneBundle.h in Headers */,
 				85EF88AB15669BDC00DD5F41 /* NSNumberExtensions.h in Headers */,
 				85EF88AC15669BDC00DD5F41 /* NSStringExtensions.h in Headers */,
-				85EF88AD15669BDC00DD5F41 /* MailService.h in Headers */,
 				85EF88AE15669BDC00DD5F41 /* NSArrayExtensions.h in Headers */,
 				85EF88AF15669BDC00DD5F41 /* NSCellExtensions.h in Headers */,
 				85EF88B015669BDC00DD5F41 /* NSColorExtensions.h in Headers */,
@@ -2191,7 +2184,6 @@
 				85EF88BB15669BDC00DD5F41 /* NSColorExtensions.m in Sources */,
 				85EF88BC15669BDC00DD5F41 /* NSTimerExtensions.m in Sources */,
 				85EF88BD15669BDC00DD5F41 /* NSViewExtensions.m in Sources */,
-				85EF88BE15669BDC00DD5F41 /* MailService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
