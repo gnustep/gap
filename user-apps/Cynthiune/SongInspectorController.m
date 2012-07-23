@@ -35,6 +35,14 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSThread.h>
 
+#ifdef HAVE_MUSICBRAINZ
+#ifdef MUSICBRAINZ_5
+#include <musicbrainz5/mb5_c.h>
+#else
+#include <musicbrainz3/mb_c.h>
+#endif
+#endif
+
 #import <Cynthiune/Format.h>
 #import <Cynthiune/NSViewExtensions.h>
 #import <Cynthiune/utils.h>
@@ -53,30 +61,6 @@ static NSNotificationCenter *nc = nil;
 NSString *SongInspectorWasShownNotification = @"SongInspectorWasShownNotification";
 NSString *SongInspectorWasHiddenNotification = @"SongInspectorWasHiddenNotification";
 NSString *SongInspectorDidUpdateSongNotification = @"SongInspectorDidUpdateSongNotification";
-
-static inline char**
-MakeQis (char *trmId, Song *song)
-{
-  const char **qis;
-
-  qis = malloc (7 * sizeof (char *));
-  qis[0] = trmId;
-  qis[1] = [[song artist] UTF8String];
-  qis[2] = [[song album] UTF8String];
-  qis[3] = [[song title] UTF8String];
-  qis[4] = [[song trackNumber] UTF8String];
-  qis[5] = [[[song duration] stringValue] UTF8String];
-  qis[6] = NULL;
-
-  return (char **) qis;
-}
-
-static inline void
-FreeQis (char *qis[])
-{
-  free (qis[0]);
-  free (qis);
-}
 
 @implementation SongInspectorController : NSObject
 
@@ -156,10 +140,16 @@ FreeQis (char *qis[])
     {
       if (!threadRunning)
         {
+#ifdef HAVE_MUSICBRAINZ
           [lookupButton setEnabled: YES];
           [lookupButton setImage: [NSImage imageNamed: @"lookup-mb-on"]];
-          [lookupAnimation setImage: nil];
           [lookupStatusLabel setStringValue: @""];
+#else	  
+          [lookupButton setEnabled: NO];
+          [lookupButton setImage: [NSImage imageNamed: @"lookup-mb-off"]];
+          [lookupStatusLabel setStringValue: LOCALIZED (@"MB lookup disabled")];
+#endif
+          [lookupAnimation setImage: nil];
         }
     }
   else
@@ -319,42 +309,6 @@ FreeQis (char *qis[])
                               forKey: @"song"]];
 }
 
-- (char *) _generateTrmId
-{
-
-return NULL; 
-/*  id <Format> stream;
-  trm_t trmGen;
-  int size;
-  char sig[17];
-  unsigned char buffer[4096];
-  char *trmId;
-
-  stream = [song openStreamForSong];
-  if (stream)
-    {
-      trmGen = trm_New ();
-      trm_SetPCMDataInfo (trmGen,
-                          [stream readRate], [stream readChannels], 16);
-      trm_SetSongLength (trmGen, [stream readDuration]);
-      size = [stream readNextChunk: buffer withSize: 4096];
-      while (!trm_GenerateSignature (trmGen, (char *) buffer, size))
-        size = [stream readNextChunk: buffer withSize: 4096];
-
-      trm_FinalizeSignature (trmGen, sig, NULL);
-
-      trmId = malloc (37);
-      trm_ConvertSigToASCII (trmGen, sig, trmId);
-      trm_Delete (trmGen);
-      [stream streamClose];
-    }
-  else
-    trmId = NULL;
-
-  return trmId;
-*/
-}
-
 - (void) updateField: (NSTextField *) field
           withString: (NSString *) string
 {
@@ -420,141 +374,207 @@ return NULL;
                                    selector: @selector (_updateFieldsWithTrackInfos:)];
 }
 
-/* 
-- (NSDictionary *) readMB: (musicbrainz_t) mb
+#ifdef HAVE_MUSICBRAINZ
+#ifdef MUSICBRAINZ_5
+- (NSDictionary *) readMB: (Mb5RecordingList) mb
+#else
+- (NSDictionary *) readMB: (MbResultList) mb
+#endif
                     track: (int) track
 {
   NSMutableDictionary *trackInfos;
   NSString *string;
-  char cString[100];
-  int releases;
+  char cString[256];
+#ifdef MUSICBRAINZ_5
+  Mb5Recording rec;
+  Mb5ReleaseList albums;
+  Mb5Artist artist;
+  Mb5Release rel;
+  Mb5ArtistCredit credit;
+  Mb5NameCreditList clist;
+  Mb5NameCredit name_credit;
+#else
+  MbTrack rec;
+  MbRelease rel;
+  MbArtist artist;
+#endif
 
   trackInfos = [NSMutableDictionary new];
   [trackInfos autorelease];
 
-return trackInfos;
+#ifdef MUSICBRAINZ_5
+  rec = mb5_recording_list_item (mb, track);
+#else
+  rec = mb_result_list_get_track (mb, track);
+#endif
+
+  if (rec)
+    {
+#ifdef MUSICBRAINZ_5
+      mb5_recording_get_title (rec, cString, sizeof (cString));
+#else
+      mb_track_get_title (rec, cString, sizeof (cString));
+#endif
+      string = [NSString stringWithUTF8String: cString];
+      [trackInfos setObject: string forKey: @"title"];
+
+#ifdef MUSICBRAINZ_5
+      albums = mb5_recording_get_releaselist (rec);
+      rel = mb5_release_list_item (albums, 0);
+      mb5_release_get_title (rel, cString, sizeof (cString));
+#else
+      /* FIXME: It appears that `rel' is not the release/album but the
+	 track; subsequently `mb_release_get_title' returns the song
+	 title and not the release title.  */
+      rel = mb_result_list_get_release (mb, track);
+      mb_release_get_title (rel, cString, sizeof (cString));
+#endif
+      string = [NSString stringWithUTF8String: cString];
+      [trackInfos setObject: string forKey: @"album"];
+
+#ifdef MUSICBRAINZ_5
+      /* FIXME: Figure out how to extract the release date with
+	 libmusicbrainz3.  */
+      mb5_release_get_date (rel, cString, sizeof (cString));
+      *(cString + 4) = 0;
+      string = [NSString stringWithUTF8String: cString];
+      [trackInfos setObject: string forKey: @"year"];
+
+      /* Obtain the artist name.  Slightly convoluted, but it looks
+	 like there's no other way.  */
+      credit = mb5_recording_get_artistcredit (rec);
+      clist = mb5_artistcredit_get_namecreditlist (credit);
+      name_credit = mb5_namecredit_list_item (clist, 0);
+      artist = mb5_namecredit_get_artist (name_credit);
+      mb5_artist_get_name (artist, cString, sizeof (cString));
+#else
+      artist = mb_track_get_artist (rec);
+      mb_artist_get_name (artist, cString, 256);
+#endif
+      string = [NSString stringWithUTF8String: cString];
+      [trackInfos setObject: string forKey: @"artist"];
+    }
+
+  return trackInfos;
 }
-*/
 
-//  mb_Select1 (mb, MBS_SelectTrack, track);
-//  if (mb_GetResultData (mb, MBE_TrackGetTrackName, cString, 100))
-//    {
-//      string = [NSString stringWithUTF8String: cString];
-//      [trackInfos setObject: string forKey: @"title"];
-//    }
-
-//  if (mb_GetResultData (mb, MBE_TrackGetArtistName, cString, 100))
-//    {
-//      string = [NSString stringWithUTF8String: cString];
-//      [trackInfos setObject: string forKey: @"artist"];
-//    }
-
-//  if (mb_GetResultData (mb, MBE_TrackGetTrackNum, cString, 100))
-//    {
-//      string = [NSString stringWithUTF8String: cString];
-//      [trackInfos setObject: string forKey: @"trackNumber"];
-//    }
-
-//  if (mb_Select (mb, MBS_SelectTrackAlbum))
-//    {
-//      if (mb_GetResultData (mb, MBE_AlbumGetAlbumName, cString, 100))
-//        {
-//          string = [NSString stringWithUTF8String: cString];
-//          [trackInfos setObject: string forKey: @"album"];
-//        }
-//#ifdef MBE_AlbumGetNumReleaseDates
-//      releases = mb_GetResultInt (mb, MBE_AlbumGetNumReleaseDates);
-//      if (releases)
-//        {
-//          mb_Select1 (mb, MBS_SelectReleaseDate, 1);
-//          if (mb_GetResultData (mb, MBE_ReleaseGetDate, cString, 100))
-//            {
-//              *(cString + 4) = 0;
-//              string = [NSString stringWithUTF8String: cString];
-//              [trackInfos setObject: string forKey: @"year"];
-//            }
-//          mb_Select (mb, MBS_Back);
-//        }
-//#endif
-
-//      mb_Select (mb, MBS_Back);
-//    }
-
-//  mb_Select (mb, MBS_Rewind);
-
-//  return trackInfos;
-//}
-
-/* - (void) _parseMB: (musicbrainz_t) mb
+#ifdef MUSICBRAINZ_5
+- (void) _parseMB: (Mb5RecordingList) mb
+#else
+- (void) _parseMB: (MbResultList) mb
+#endif
 {
   int count, results;
   NSMutableArray *allTrackInfos;
 
-  results = mb_GetResultInt (mb, MBE_GetNumTracks);
+#ifdef MUSICBRAINZ_5
+  results = mb5_recording_list_size (mb);
+#else
+  results = mb_result_list_get_size (mb);
+#endif
+
   allTrackInfos = [[NSMutableArray alloc] initWithCapacity: results];
   [allTrackInfos autorelease];
 
   for (count = 0; count < results; count++)
-    [allTrackInfos addObject: [self readMB: mb track: count + 1]];
+    [allTrackInfos addObject: [self readMB: mb track: count]];
 
   [self performSelectorOnMainThread: @selector (_updateSongFields:)
         withObject: allTrackInfos
         waitUntilDone: YES];
 }
-*/
 
 - (void) lookupThread
 {
-
-return;
-/*
   NSAutoreleasePool *pool;
-  char *trmId;
-  musicbrainz_t mb;
-  char **qis;
-  char error[80];
+#ifdef MUSICBRAINZ_5
+  Mb5Query query;
+  Mb5Metadata metadata;
+  Mb5RecordingList mb;
+  char **p_names, **p_values;
+  char error[256];
+#else
+  MbQuery query;
+  MbTrackFilter filter;
+  MbResultList mb;
+#endif
 
   pool = [NSAutoreleasePool new];
 
   [self updateField: lookupStatusLabel
-        withString: LOCALIZED(@"Generating TRM...")];
-  trmId = [self _generateTrmId];
-  if (trmId && !threadShouldDie)
+	 withString: LOCALIZED (@"Querying the MusicBrainz server...")];
+
+#ifdef MUSICBRAINZ_5
+  query = mb5_query_new ("Cynthiune", NULL, 0);
+#else
+  query = mb_query_new (NULL, "Cynthiune");
+#endif
+
+  if (query)
     {
-      qis = MakeQis (trmId, song);
+#ifdef MUSICBRAINZ_5
+      p_names = malloc (2 * sizeof (char *));
+      p_values = malloc (2 * sizeof (char *));
+      p_names[0] = malloc (10);
+      p_values[0] = malloc (256);
+      strcpy (p_names[0], "query");
+      strcpy (p_values[0], [[song title] UTF8String]);
 
-      if (strcasecmp (trmId, busyTrmId))
-        {
-          [self updateField: lookupStatusLabel
-                withString: LOCALIZED (@"Querying MusicBrainz server...")];
-          mb = mb_New ();
-          mb_UseUTF8 (mb, YES);
-          if (mb_QueryWithArgs (mb, MBQ_TrackInfoFromTRMId, qis))
-            [self _parseMB: mb];
-          else
-            {
-//            FIXME: there should be an accurate error message here...
-              [self updateField: lookupStatusLabel
-                    withString: @""];
-              mb_GetQueryError (mb, error, 80);
-              NSLog (@"Musicbrainz error: %s (%s)", error, trmId);
-            }
-          mb_Delete (mb);
-        }
+      if (strlen (p_values[0]) > 0)
+	{
+	  metadata = mb5_query_query (query, "recording", "", "", 1,
+				      p_names, p_values);
+	  mb5_query_get_lasterrormessage (query, error, sizeof (error));
+
+	  if (metadata)
+	    {
+	      mb = mb5_metadata_get_recordinglist (metadata);
+	      [self _parseMB: mb];
+
+	      mb5_metadata_delete (metadata);
+	    }
+#else
+      if ([[song title] UTF8String] != NULL)
+	{
+	  filter = mb_track_filter_new ();
+	  mb_track_filter_title (filter, [[song title] UTF8String]);
+	  if ([[song artist] UTF8String] != NULL)
+	    mb_track_filter_artist_name (filter, [[song artist] UTF8String]);
+	  mb = mb_query_get_tracks (query, filter);
+	  [self _parseMB: mb];
+
+	  mb_track_filter_free (filter);
+	}
+#endif
+#ifdef MUSICBRAINZ_5
       else
-        [self updateField: lookupStatusLabel
-              withString: LOCALIZED (@"The MusicBrainz server was too busy")];
+	[self updateField: lookupStatusLabel
+	       withString: [NSString stringWithFormat:
+				       LOCALIZED (@"Error while querying the\n"
+						  @"Musicbrainz server: %s"),
+				     error]];
 
-      FreeQis (qis);
+	}
+      free (p_names[0]);
+      free (p_values[0]);
+      free (p_names);
+      free (p_values);
+#endif
     }
+
+#ifdef MUSICBRAINZ_5
+  mb5_query_delete (query);
+#else
+  mb_query_free (query);
+#endif
 
   [self performSelectorOnMainThread: @selector (lookupThreadEnded)
         withObject: nil
         waitUntilDone: NO];
 
   [pool release];
-*/
 }
+#endif
 
 - (void) mbLookup: (id)sender
 {
