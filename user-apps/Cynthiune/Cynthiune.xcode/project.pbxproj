@@ -1239,7 +1239,6 @@
 				8551FEED156AC1E4005E1C81,
 				8551FEEE156AC1E4005E1C81,
 				8551FEEF156AC1E4005E1C81,
-				8551FEF0156AC1E4005E1C81,
 				8551FEF1156AC1E4005E1C81,
 				8551FEF2156AC1E4005E1C81,
 				8551FEF3156AC1E4005E1C81,
@@ -1306,15 +1305,6 @@
 		};
 		8551FEEF156AC1E4005E1C81 = {
 			fileRef = EA547B68078A36000358AD96;
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					Public,
-				);
-			};
-		};
-		8551FEF0156AC1E4005E1C81 = {
-			fileRef = EA73D4C0074C823503F60D55;
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1394,7 +1384,6 @@
 				8551FEFE156AC1E4005E1C81,
 				8551FEFF156AC1E4005E1C81,
 				8551FF00156AC1E4005E1C81,
-				8551FF01156AC1E4005E1C81,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1443,12 +1432,6 @@
 		};
 		8551FF00156AC1E4005E1C81 = {
 			fileRef = EAFFEE75086E5601039AFE6D;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8551FF01156AC1E4005E1C81 = {
-			fileRef = EA73D4C1074C823503F60D55;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -3097,24 +3080,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		EA73D4C0074C823503F60D55 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = MailService.h;
-			path = Frameworks/Cynthiune/MailService.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		EA73D4C1074C823503F60D55 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			name = MailService.m;
-			path = Frameworks/Cynthiune/MailService.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		EA778ACC09B5778A032657EF = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -4282,7 +4247,6 @@
 		};
 		EAFFEE6A086E55AB039AFE6D = {
 			children = (
-				EA73D4C1074C823503F60D55,
 				EAFFEE6D086E5601039AFE6D,
 				EAFFEE6F086E5601039AFE6D,
 				EAFFEE71086E5601039AFE6D,
@@ -4301,7 +4265,6 @@
 			children = (
 				EA7EE734063AE6B6039F4895,
 				F7858BEA061FC27301C0FE28,
-				EA73D4C0074C823503F60D55,
 				EAFFEE6C086E5601039AFE6D,
 				EAFFEE6E086E5601039AFE6D,
 				EAFFEE70086E5601039AFE6D,
