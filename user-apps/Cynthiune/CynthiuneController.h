@@ -66,8 +66,6 @@
 - (void) togglePlaylistWindow: (id) sender;
 - (void) setPlaylistWindowVisible: (BOOL) isVisible;
 
-- (void) sendABugReport: (id) sender;
-
 - (void) _parseArguments;
 - (void) _initWindowsPosition;
 

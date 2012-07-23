@@ -33,7 +33,6 @@
 #import <AppKit/NSWindow.h>
 
 #import <Cynthiune/CynthiuneBundle.h>
-#import <Cynthiune/MailService.h>
 #import <Cynthiune/Preference.h>
 #ifdef __MACOSX__ /* NSStandardLibraryPaths */
 #import <Cynthiune/utils.h>
@@ -365,11 +364,6 @@ localizeMenu (NSMenu *menu)
 - (void) preferencesWindow: (id) anObject
 {
   [[PreferencesController preferencesController] loadPreferencesWindow];
-}
-
-- (void) sendABugReport: (id) sender
-{
-  [[MailService instance] composeBugReport];
 }
 
 /* as delegate */
