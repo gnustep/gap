@@ -1,5 +1,15 @@
 2012-07-23 Riccardo Mottola <rm@gnu.org>
 
+	* Frameworks/Cynthiune/MailService.m
+	* Frameworks/Cynthiune/MailService.h
+	Deleted
+
+	* Frameworks/Cynthiune/GNUmakefile
+	* Cynthiune.gorm
+	Removed bug sendng option through mail.
+
+2012-07-23 Riccardo Mottola <rm@gnu.org>
+
 	* Player.m
 	* Frameworks/Cynthiune/Output.h
 	Change pointer qualifier to be Panther compatible.

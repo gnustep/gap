@@ -50,7 +50,6 @@ Cynthiune_RESOURCE_FILES=
 Cynthiune_HEADER_FILES= \
 CynthiuneBundle.h \
 Format.h \
-MailService.h \
 NSArrayExtensions.h \
 NSCellExtensions.h \
 NSColorExtensions.h \
@@ -67,7 +66,6 @@ utils.h
 #
 
 Cynthiune_OBJC_FILES= \
-MailService.m \
 NSArrayExtensions.m \
 NSCellExtensions.m \
 NSColorExtensions.m \
