@@ -70,6 +70,9 @@
 	[args addObject:@"-C"];
 	[args addObject:path];
 	
+	// protect against files starting with -
+	[args addObject:@"--"];
+	
 	if (files != nil)
 	{
 		NSEnumerator *cursor = [files objectEnumerator];

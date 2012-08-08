@@ -57,6 +57,10 @@
 
 	args = [NSMutableArray array];
 	[args addObject:argString];
+
+	// protect against archives and files starting with -
+	[args addObject:@"--"];
+
 	[args addObject:[self path]];
 	
 	if (files != nil)
@@ -128,9 +132,8 @@
 - (NSData *)dataByRunningLha
 {
 	NSData *data;
-	NSArray *args = [NSArray arrayWithObjects:@"v", [self path], nil];
+	NSArray *args = [NSArray arrayWithObjects:@"v", @"--", [self path], nil];
 	data = [self dataByRunningUnachiverWithArguments:args];
-	NSLog(@"dataByRunningLha: %@", data);
 	return data;
 }
 

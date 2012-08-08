@@ -56,7 +56,7 @@
 {
 	NSArray *args;
 		
-	args = [NSArray arrayWithObjects:@"-x", [self path], nil];
+	args = [NSArray arrayWithObjects:@"-x", @"--", [self path], nil];
 	return [[self class] runUnarchiverWithArguments:args inDirectory:path];
 }
 
@@ -123,7 +123,7 @@
 {
 	NSData *data;
 	
-	NSArray *args = [NSArray arrayWithObjects:@"-v", [self path], nil];
+	NSArray *args = [NSArray arrayWithObjects:@"-v", @"--", [self path], nil];
 	data = [self dataByRunningUnachiverWithArguments:args];
 	return data;
 }
