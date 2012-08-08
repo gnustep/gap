@@ -1,3 +1,14 @@
+2012-08-08 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GzipArchive.m
+	* LhaArchive.m
+	* LzxArchive.m
+	* RarArchive.m
+	* SevenZipArchive.m
+	* TarArchive.m
+	* ZipArchive.m
+	Protect filenames to be extracted to be counted as 
+	parameters of the unzipping tools
+
 2012-07-12 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* ZipperDocument.m

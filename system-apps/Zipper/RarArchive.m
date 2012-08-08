@@ -65,6 +65,10 @@ static NSData *_magicBytes;
 	{
 		[args addObject:@"e"];
 	}
+
+	// protect against archives and files starting with -
+	[args addObject:@"--"];
+
 	[args addObject:[self path]];
 	
 	if (files != nil)
@@ -144,7 +148,7 @@ static NSData *_magicBytes;
 	// v	view contents of archive
 	// -c-	suppress archive comment
 
-	NSArray *args = [NSArray arrayWithObjects:@"v", @"-c-", [self path], nil];
+	NSArray *args = [NSArray arrayWithObjects:@"v", @"-c-", @"--", [self path], nil];
 	return [self dataByRunningUnachiverWithArguments:args];
 }
 

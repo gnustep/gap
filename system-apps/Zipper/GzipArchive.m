@@ -59,7 +59,7 @@
 	[[NSFileManager defaultManager] copyPath:[self path] toPath:destPath handler:nil];
 	
 	// extract it
-	arguments = [NSArray arrayWithObjects:@"-d", destPath, nil];
+	arguments = [NSArray arrayWithObjects:@"-d", destPath, @"--", nil];
 	
 	return [self runUnarchiverWithArguments:arguments];
 }

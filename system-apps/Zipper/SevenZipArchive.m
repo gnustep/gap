@@ -62,6 +62,9 @@
 	// destination dir, path must not be separated with blank from the 'o' option
 	[args addObject:[@"-o" stringByAppendingString:path]];
 
+	// protect for archives and files starting with -
+	[args addObject:@"--"];	
+
 	// add archive filename	
 	[args addObject:[self path]];	
 
@@ -144,7 +147,7 @@
 - (NSData *)dataByRunningSevenZip
 {
 	// l = list
-	NSArray *args = [NSArray arrayWithObjects:@"l", [self path], nil];
+	NSArray *args = [NSArray arrayWithObjects:@"l", @"--", [self path], nil];
 	return [self dataByRunningUnachiverWithArguments:args];
 }
 

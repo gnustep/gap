@@ -92,6 +92,14 @@ static NSData *_magicBytes = nil;
 		// junk paths
 		[args addObject:@"-j"];
 	}
+
+	// destination dir
+	[args addObject:@"-d"];
+	[args addObject:path];
+	
+	// protect against archives and files starting with -
+	[args addObject:@"--"];
+
 	[args addObject:[self path]];	
 	
 	if (files != nil)
@@ -102,10 +110,6 @@ static NSData *_magicBytes = nil;
 			[args addObject:[fileInfo fullPath]];
 		}
 	}
-	
-	// destination dir
-	[args addObject:@"-d"];
-	[args addObject:path];
 	
 	return [self runUnarchiverWithArguments:args];
 }
@@ -185,7 +189,7 @@ static NSData *_magicBytes = nil;
 	// v = display all zip infos (Ratio etc.)
 	// qq = quiet, this is important for skipping comments in archives and for skipping
 	//      the nice headers for readable output
-	NSArray *args = [NSArray arrayWithObjects:@"-lvqq", [self path], nil];
+	NSArray *args = [NSArray arrayWithObjects:@"-lvqq", @"--", [self path], nil];
 	return [self dataByRunningUnachiverWithArguments:args];
 }
 
