@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.m
 
- Copyright (C) 2007-2011 GNUstep Application Project
+ Copyright (C) 2007-2012 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -76,7 +76,7 @@
   if(self)
     {
       NSColor *newColor;
-      NSString *val;
+      id val;
 
       val = [properties objectForKey: @"flatness"];
       if (val != nil)
@@ -96,18 +96,18 @@
 
       val = [properties objectForKey: @"linewidth"];
       if (val != nil)
-      [self setLineWidth: [val floatValue]];
+        [self setLineWidth: [val floatValue]];
 
       val = [properties objectForKey: @"stroked"];
       if (val != nil)
-	[self setStroked: (BOOL)[val intValue]];
+	[self setStroked: [val boolValue]];
       newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
       if (newColor != nil)
 	[self setStrokeColor: newColor];
 
       val = [properties objectForKey: @"filled"];
       if (val != nil)
-	[self setFilled: (BOOL)[val intValue]];
+	[self setFilled: [val boolValue]];
       newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
       if (newColor != nil)
 	[self setFillColor: newColor];
@@ -131,6 +131,7 @@
 	float fillCol[4];
 	float strokeAlpha;
 	float fillAlpha;
+	id obj;
 
         docView = aView;
         editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
@@ -146,8 +147,10 @@
         linecap = [[description objectForKey: @"linecap"] intValue];
         miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
         linewidth = [[description objectForKey: @"linewidth"] floatValue];
-
-        stroked = (BOOL)[[description objectForKey: @"stroked"] intValue];
+        obj = [description objectForKey: @"stroked"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        stroked = [obj boolValue];
         str = [description objectForKey: @"strokecolor"];
         linearr = [str componentsSeparatedByString: @" "];
 
@@ -163,7 +166,10 @@
 					     alpha: strokeAlpha];
 	strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 
-        filled = (BOOL)[[description objectForKey: @"filled"] intValue];
+	obj = [description objectForKey: @"filled"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];	
+        filled = [obj boolValue];
         str = [description objectForKey: @"fillcolor"];
         linearr = [str componentsSeparatedByString: @" "];
         fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
@@ -178,8 +184,14 @@
 					   alpha: fillAlpha];
 	fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 
-        visible = (BOOL)[[description objectForKey: @"visible"] intValue];
-        locked = (BOOL)[[description objectForKey: @"locked"] intValue];
+	obj = [description objectForKey: @"visible"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];	
+        visible = [obj boolValue];
+	obj = [description objectForKey: @"locked"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        locked = [obj boolValue];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
         [self setZoomFactor: zf];
@@ -254,24 +266,20 @@
     [dict setObject: str forKey: @"miterlimit"];
     str = [NSString stringWithFormat: @"%.3f", linewidth];
     [dict setObject: str forKey: @"linewidth"];
-    str = [NSString stringWithFormat: @"%i", stroked];
-    [dict setObject: str forKey: @"stroked"];
+    [dict setObject:[NSNumber numberWithBool:stroked]  forKey: @"stroked"];
     str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
         strokeCol[0], strokeCol[1], strokeCol[2], strokeCol[3]];
     [dict setObject: str forKey: @"strokecolor"];
     str = [NSString stringWithFormat: @"%.3f", strokeAlpha];
     [dict setObject: str forKey: @"strokealpha"];
-    str = [NSString stringWithFormat: @"%i", filled];
-    [dict setObject: str forKey: @"filled"];
+    [dict setObject:[NSNumber numberWithBool:filled] forKey: @"filled"];
     str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
         fillCol[0], fillCol[1], fillCol[2], fillCol[3]];
     [dict setObject: str forKey: @"fillcolor"];
     str = [NSString stringWithFormat: @"%.3f", fillAlpha];
     [dict setObject: str forKey: @"fillalpha"];
-    str = [NSString stringWithFormat: @"%i", visible];
-    [dict setObject: str forKey: @"visible"];
-    str = [NSString stringWithFormat: @"%i", locked];
-    [dict setObject: str forKey: @"locked"];
+    [dict setObject:[NSNumber numberWithBool:visible] forKey: @"visible"];
+    [dict setObject:[NSNumber numberWithBool:locked] forKey: @"locked"];
 
     return dict;
 }

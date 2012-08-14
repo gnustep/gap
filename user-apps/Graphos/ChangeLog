@@ -1,3 +1,8 @@
+2012-08-14 Riccardo Mottola <rm@gnu.org>
+
+	* GRBox.m
+	More robust handling of BOOLs
+	
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
