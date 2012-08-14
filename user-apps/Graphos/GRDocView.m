@@ -1045,10 +1045,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         {
           selectedObjects++;
         
-          num = [NSNumber numberWithInt: [obj isStroked]];
+          num = [NSNumber numberWithBool: [obj isStroked]];
           [propDict setObject: num forKey: @"stroked"];
           [propDict setObject: [obj strokeColor] forKey: @"strokecolor"];
-          num = [NSNumber numberWithInt: [obj isFilled]];
+          num = [NSNumber numberWithBool: [obj isFilled]];
           [propDict setObject: num forKey: @"filled"];
           [propDict setObject: [obj fillColor] forKey: @"fillcolor"];
 
@@ -1127,10 +1127,10 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
               [obj setMiterLimit: [[properties objectForKey: @"miterlimit"] floatValue]];
               [obj setLineWidth: [[properties objectForKey: @"linewidth"] floatValue]];
             }
-          [obj setStroked: (BOOL)[[properties objectForKey: @"stroked"] intValue]];
+          [obj setStroked: [[properties objectForKey: @"stroked"] boolValue]];
           newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
           [obj setStrokeColor: newColor];
-          [obj setFilled: (BOOL)[[properties objectForKey: @"filled"] intValue]];
+          [obj setFilled: [[properties objectForKey: @"filled"] boolValue]];
           newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
           [obj setFillColor: newColor];
         }
@@ -1340,7 +1340,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
         types = [NSMutableArray arrayWithObjects: @"GRObjectPboardType", nil];
         pboard = [NSPasteboard generalPasteboard];
         [pboard declareTypes: types owner: self];
-        [pboard setString: [objsdesc description] forType: @"GRObjectPboardType"];
+        [pboard setString:[objsdesc description] forType: @"GRObjectPboardType"];
     }
 }
 
@@ -1358,7 +1358,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     types = [NSArray arrayWithObject: @"GRObjectPboardType"];
     if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"])
     {
-        descriptions = (NSArray *)[[pboard stringForType: @"GRObjectPboardType"] propertyList];
+        descriptions = [[pboard stringForType: @"GRObjectPboardType"] propertyList];
 
         for(i = 0; i < [descriptions count]; i++)
         {
