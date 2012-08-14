@@ -2,7 +2,10 @@
 
 	* GRBox.m
 	* GRCircle.m
-	More robust handling of BOOLs
+	More robust handling of BOOLs.
+
+	* GRText.m
+	More robust handling of BOOLs and fill only if filled.
 	
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 

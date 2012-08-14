@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2012 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -61,11 +61,11 @@
       if (properties != nil)
 	{
 	  NSColor *newColor;
-	  NSString *val;
+	  id val;
 	  
 	  val = [properties objectForKey: @"stroked"];
 	  if (val != nil)
-	    [self setStroked: (BOOL)[val intValue]];
+	    [self setStroked:[val boolValue]];
 	  newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
 	  if (newColor != nil)
 	    [self setStrokeColor: newColor];
@@ -108,7 +108,8 @@
         float fillCol[4];
 	float strokeAlpha;
 	float fillAlpha;
-
+	id obj;
+	
         docView = aView;
         zmFactor = zf;
         editor = [[GRTextEditor alloc] initEditor:self];
@@ -133,7 +134,10 @@
         scaley = [[description objectForKey: @"scaley"] floatValue];
         rotation = [[description objectForKey: @"rotation"] floatValue];
 
-        stroked = (BOOL)[[description objectForKey: @"stroked"] intValue];
+	obj = [description objectForKey: @"stroked"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        stroked = [obj boolValue];
         s = [description objectForKey: @"strokecolor"];
         linearr = [s componentsSeparatedByString: @" "];
         strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
@@ -148,7 +152,10 @@
 					     alpha: strokeAlpha];
 	strokeColor = [strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 
-        filled = (BOOL)[[description objectForKey: @"filled"] intValue];
+	obj = [description objectForKey: @"filled"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        filled = [obj boolValue];
         s = [description objectForKey: @"fillcolor"];
         linearr = [s componentsSeparatedByString: @" "];
         fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
@@ -164,8 +171,14 @@
 					   alpha: fillAlpha];
 	fillColor = [fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 
-        visible = (BOOL)[[description objectForKey: @"visible"] intValue];
-        locked = (BOOL)[[description objectForKey: @"locked"] intValue];
+	obj = [description objectForKey: @"visible"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        visible = [obj boolValue];
+	obj = [description objectForKey: @"locked"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        locked = [obj boolValue];
 
         zmFactor = [[description objectForKey: @"zmfactor"] floatValue];
         [self setZoomFactor: zf];
@@ -234,24 +247,20 @@
     [dict setObject: s forKey: @"scaley"];
     s = [NSString stringWithFormat: @"%.3f", rotation];
     [dict setObject: s forKey: @"rotation"];
-    s = [NSString stringWithFormat: @"%i", stroked];
-    [dict setObject: s forKey: @"stroked"];
+    [dict setObject: [NSNumber numberWithBool:stroked] forKey: @"stroked"];
     s = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
         strokeCol[0], strokeCol[1], strokeCol[2], strokeCol[3]];
     [dict setObject: s forKey: @"strokecolor"];
     s = [NSString stringWithFormat: @"%.3f", strokeAlpha];
     [dict setObject: s forKey: @"strokealpha"];
-    s = [NSString stringWithFormat: @"%i", filled];
-    [dict setObject: s forKey: @"filled"];
+    [dict setObject: [NSNumber numberWithBool: filled] forKey: @"filled"];
     s = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
         fillCol[0], fillCol[1], fillCol[2], fillCol[3]];
     [dict setObject: s forKey: @"fillcolor"];
     s = [NSString stringWithFormat: @"%.3f", fillAlpha];
     [dict setObject: s forKey: @"fillalpha"];
-    s = [NSString stringWithFormat: @"%i", visible];
-    [dict setObject: s forKey: @"visible"];
-    s = [NSString stringWithFormat: @"%i", locked];
-    [dict setObject: s forKey: @"locked"];
+    [dict setObject: [NSNumber numberWithBool: visible] forKey: @"visible"];
+    [dict setObject: [NSNumber numberWithBool: locked] forKey: @"locked"];
     s = [NSString stringWithFormat: @"%.3f", zmFactor];
     [dict setObject: s forKey: @"zmfactor"];
 
@@ -419,11 +428,21 @@
     [style setAlignment: align];
     [style setParagraphSpacing: parspace];
     tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
-    strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
-      tempFont, NSFontAttributeName,
-      strokeColor, NSForegroundColorAttributeName,
-      fillColor, NSBackgroundColorAttributeName,
-      style, NSParagraphStyleAttributeName, nil] retain];
+    if (filled)
+      {
+	strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+				   tempFont, NSFontAttributeName,
+				 strokeColor, NSForegroundColorAttributeName,
+				 fillColor, NSBackgroundColorAttributeName,
+				 style, NSParagraphStyleAttributeName, nil] retain];
+      }
+    else
+      {
+	strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+				   tempFont, NSFontAttributeName,
+				 strokeColor, NSForegroundColorAttributeName,
+				 style, NSParagraphStyleAttributeName, nil] retain];
+      }
 
     baselny = pos.y;
     bezp = [NSBezierPath bezierPath];
