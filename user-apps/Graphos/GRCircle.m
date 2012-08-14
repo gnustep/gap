@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009-2011 GNUstep Application Project
+ Copyright (C) 2009-2012 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -130,6 +130,7 @@
 	float fillCol[4];
 	float strokeAlpha;
 	float fillAlpha;
+	id obj;
 
         docView = aView;
         editor = [[GRCircleEditor alloc] initEditor:(GRCircle*)self];
@@ -146,7 +147,10 @@
         miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
         linewidth = [[description objectForKey: @"linewidth"] floatValue];
 
-        stroked = (BOOL)[[description objectForKey: @"stroked"] intValue];
+	obj = [description objectForKey: @"stroked"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        stroked = [obj boolValue];
         str = [description objectForKey: @"strokecolor"];
         linearr = [str componentsSeparatedByString: @" "];
 
@@ -162,7 +166,10 @@
 					     alpha: strokeAlpha];
 	strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 
-        filled = (BOOL)[[description objectForKey: @"filled"] intValue];
+	obj = [description objectForKey: @"filled"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];	
+        filled = [obj boolValue];
         str = [description objectForKey: @"fillcolor"];
         linearr = [str componentsSeparatedByString: @" "];
         fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
@@ -177,9 +184,14 @@
 					   alpha: fillAlpha];
 	fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 
-
-        visible = (BOOL)[[description objectForKey: @"visible"] intValue];
-        locked = (BOOL)[[description objectForKey: @"locked"] intValue];
+        obj = [description objectForKey: @"visible"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];	
+        visible = [obj boolValue];
+	obj = [description objectForKey: @"locked"];
+	if ([obj isKindOfClass:[NSString class]])
+	  obj = [NSNumber numberWithInt:[obj intValue]];
+        locked = [obj boolValue];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
         [self setZoomFactor: zf];
