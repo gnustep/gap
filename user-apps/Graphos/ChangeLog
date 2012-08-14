@@ -2,6 +2,7 @@
 
 	* GRBox.m
 	* GRCircle.m
+	* GRBezierPath.m
 	More robust handling of BOOLs.
 
 	* GRText.m
