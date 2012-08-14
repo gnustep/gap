@@ -79,11 +79,11 @@
   if (props == nil)
     return;
 
-  obj = [props objectForKey: @"filled"];
+  filled = [[props objectForKey: @"filled"] boolValue];
+  obj = [props objectForKey: @"fillcolor"];
   if (obj != nil)
     {
-      filled = (BOOL)[obj intValue];
-      fillColor = (NSColor *)[props objectForKey: @"fillcolor"];
+      fillColor = (NSColor *)obj;
       [fillColor retain];
       [fllButt setEnabled: YES];
       if (filled)
@@ -96,11 +96,11 @@
     fillColor = nil;
   [fillColorWell setColor: fillColor];
 
-  obj = [props objectForKey: @"stroked"];
+  stroked = [[props objectForKey:@"stroked"] boolValue];
+  obj = [props objectForKey: @"strokecolor"];
   if (obj != nil)
     {
-      stroked = (BOOL)[obj intValue];
-      strokeColor = (NSColor *)[props objectForKey: @"strokecolor"];
+      strokeColor = (NSColor *)obj;
       [strokeColor retain];
       [stkButt setEnabled: YES];
       if (stroked)
@@ -311,17 +311,15 @@
       [dict setObject: num forKey: @"linewidth"];
     }
 
-  num = [NSNumber numberWithInt: stroked];
   if (strokeColor != nil)
     {
-      [dict setObject: num forKey: @"stroked"];
+      [dict setObject: [NSNumber numberWithBool:stroked] forKey: @"stroked"];
       [dict setObject: strokeColor forKey: @"strokecolor"];
     }
 
-  num = [NSNumber numberWithInt: filled];
   if (fillColor != nil)
     {
-      [dict setObject: num forKey: @"filled"];
+      [dict setObject: [NSNumber numberWithBool:filled] forKey: @"filled"];
       [dict setObject: fillColor forKey: @"fillcolor"];
     }
 

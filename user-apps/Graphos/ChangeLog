@@ -3,10 +3,14 @@
 	* GRBox.m
 	* GRCircle.m
 	* GRBezierPath.m
+	* GRDocView.m
 	More robust handling of BOOLs.
 
 	* GRText.m
 	More robust handling of BOOLs and fill only if filled.
+
+	* GRPropsEditor.m
+	More robust handling of nil properties.
 	
 2012-04-21 Riccardo Mottola <rm@gnu.org>
 
