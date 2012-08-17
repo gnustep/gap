@@ -1,3 +1,11 @@
+2012-08-17 Riccardo Mottola <rm@gnu.org>
+
+	* GRBox.m
+	* GRCircle.m
+	* GRBezierPath.m
+	* Graphos.h
+	New file format, colors RGB encoded/decoded.
+	
 2012-08-14 Riccardo Mottola <rm@gnu.org>
 
 	* GRBox.m

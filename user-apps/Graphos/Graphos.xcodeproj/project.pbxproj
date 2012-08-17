@@ -41,7 +41,6 @@
 		854931C911143DF600C4D928 /* x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F539B26108A3676D01A8012F /* x.tiff */; };
 		854931CA11143DF600C4D928 /* magnify.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F507216008B5ECA701A8012F /* magnify.tiff */; };
 		854931CB11143DF600C4D928 /* pencil.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F507216208B5ED3E01A8012F /* pencil.tiff */; };
-		854931CC11143DF600C4D928 /* rectangle.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F507216308B5ED3E01A8012F /* rectangle.tiff */; };
 		854931CD11143DF600C4D928 /* reduce.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F507216408B5ED3E01A8012F /* reduce.tiff */; };
 		854931CE11143DF600C4D928 /* reflect.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F507216508B5ED3E01A8012F /* reflect.tiff */; };
 		854931CF11143DF600C4D928 /* rotate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F507216608B5ED3E01A8012F /* rotate.tiff */; };
@@ -132,7 +131,6 @@
 		85DE40070CA0772E00A80101 /* GRObjectControlPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRObjectControlPoint.m; sourceTree = "<group>"; };
 		F507216008B5ECA701A8012F /* magnify.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = magnify.tiff; path = Resources/magnify.tiff; sourceTree = "<group>"; };
 		F507216208B5ED3E01A8012F /* pencil.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = pencil.tiff; path = Resources/pencil.tiff; sourceTree = "<group>"; };
-		F507216308B5ED3E01A8012F /* rectangle.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = rectangle.tiff; path = Resources/rectangle.tiff; sourceTree = "<group>"; };
 		F507216408B5ED3E01A8012F /* reduce.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = reduce.tiff; path = Resources/reduce.tiff; sourceTree = "<group>"; };
 		F507216508B5ED3E01A8012F /* reflect.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = reflect.tiff; path = Resources/reflect.tiff; sourceTree = "<group>"; };
 		F507216608B5ED3E01A8012F /* rotate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = rotate.tiff; path = Resources/rotate.tiff; sourceTree = "<group>"; };
@@ -294,7 +292,6 @@
 				F539B1EB08A2D86901A8012F /* rectangle.tiff */,
 				F507216008B5ECA701A8012F /* magnify.tiff */,
 				F507216208B5ED3E01A8012F /* pencil.tiff */,
-				F507216308B5ED3E01A8012F /* rectangle.tiff */,
 				F507216408B5ED3E01A8012F /* reduce.tiff */,
 				F507216508B5ED3E01A8012F /* reflect.tiff */,
 				F507216608B5ED3E01A8012F /* rotate.tiff */,
@@ -409,7 +406,6 @@
 				854931C911143DF600C4D928 /* x.tiff in Resources */,
 				854931CA11143DF600C4D928 /* magnify.tiff in Resources */,
 				854931CB11143DF600C4D928 /* pencil.tiff in Resources */,
-				854931CC11143DF600C4D928 /* rectangle.tiff in Resources */,
 				854931CD11143DF600C4D928 /* reduce.tiff in Resources */,
 				854931CE11143DF600C4D928 /* reflect.tiff in Resources */,
 				854931CF11143DF600C4D928 /* rotate.tiff in Resources */,

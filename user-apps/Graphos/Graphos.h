@@ -29,7 +29,7 @@
 #import "GRPropsEditor.h"
 
 /* change this if the new file format becomes incompatible */
-#define FILE_FORMAT_VERSION 0.3
+#define FILE_FORMAT_VERSION 0.4
 
 /**
  * tool types structure

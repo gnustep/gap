@@ -151,39 +151,64 @@
 	if ([obj isKindOfClass:[NSString class]])
 	  obj = [NSNumber numberWithInt:[obj intValue]];
         stroked = [obj boolValue];
+	strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
         str = [description objectForKey: @"strokecolor"];
         linearr = [str componentsSeparatedByString: @" "];
-
-        strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-        strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-        strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-        strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
-        strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
-	strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
-					   magenta: strokeCol[1]
-					    yellow: strokeCol[2]
-					     black: strokeCol[3]
-					     alpha: strokeAlpha];
-	strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-
+	if ([linearr count] == 3)
+	  {
+	    strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	    strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	    strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	    strokeColor = [NSColor colorWithCalibratedRed: strokeCol[0]
+				   green: strokeCol[1]
+				   blue: strokeCol[2]
+				   alpha: strokeAlpha];
+	    [strokeColor retain];
+	  }
+	else
+	  {
+	    strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	    strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	    strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	    strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
+	    strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
+				   magenta: strokeCol[1]
+				   yellow: strokeCol[2]
+				   black: strokeCol[3]
+				   alpha: strokeAlpha];
+	    strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+	  }
 	obj = [description objectForKey: @"filled"];
 	if ([obj isKindOfClass:[NSString class]])
 	  obj = [NSNumber numberWithInt:[obj intValue]];	
         filled = [obj boolValue];
+        fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
         str = [description objectForKey: @"fillcolor"];
         linearr = [str componentsSeparatedByString: @" "];
-        fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-        fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-        fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-        fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
-        fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
-	fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
-					 magenta: fillCol[1]
-					  yellow: fillCol[2]
-					   black: fillCol[3]
-					   alpha: fillAlpha];
-	fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-
+	if ([linearr count] == 3)
+	  {
+	    fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	    fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	    fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	    fillColor = [NSColor colorWithCalibratedRed: fillCol[0]
+				 green: fillCol[1]
+				 blue: fillCol[2]
+				 alpha: fillAlpha];
+	    [fillColor retain];
+	  }
+	else
+	  {
+	    fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	    fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	    fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	    fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
+	    fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
+				 magenta: fillCol[1]
+				 yellow: fillCol[2]
+				 black: fillCol[3]
+				 alpha: fillAlpha];
+	    fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+	  }
         obj = [description objectForKey: @"visible"];
 	if ([obj isKindOfClass:[NSString class]])
 	  obj = [NSNumber numberWithInt:[obj intValue]];	
@@ -222,26 +247,20 @@
 {
     NSMutableDictionary *dict;
     NSString *str;
-    NSColor *strokeColorCMYK;
-    NSColor *fillColorCMYK;
-    float strokeCol[4];
-    float fillCol[4];
+    float strokeCol[3];
+    float fillCol[3];
     float strokeAlpha;
     float fillAlpha;
 
-    strokeColorCMYK = [strokeColor colorUsingColorSpaceName: NSDeviceCMYKColorSpace]; 
-    strokeCol[0] = [strokeColorCMYK cyanComponent];
-    strokeCol[1] = [strokeColorCMYK magentaComponent];
-    strokeCol[2] = [strokeColorCMYK yellowComponent];
-    strokeCol[3] = [strokeColorCMYK blackComponent];
-    strokeAlpha = [strokeColorCMYK alphaComponent];
+    strokeCol[0] = [strokeColor redComponent];
+    strokeCol[1] = [strokeColor greenComponent];
+    strokeCol[2] = [strokeColor blueComponent];
+    strokeAlpha = [strokeColor alphaComponent];
 
-    fillColorCMYK = [fillColor colorUsingColorSpaceName: NSDeviceCMYKColorSpace]; 
-    fillCol[0] = [fillColorCMYK cyanComponent];
-    fillCol[1] = [fillColorCMYK magentaComponent];
-    fillCol[2] = [fillColorCMYK yellowComponent];
-    fillCol[3] = [fillColorCMYK blackComponent];
-    fillAlpha = [fillColorCMYK alphaComponent];
+    fillCol[0] = [fillColor redComponent];
+    fillCol[1] = [fillColor greenComponent];
+    fillCol[2] = [fillColor blueComponent];
+    fillAlpha = [fillColor alphaComponent];
 
     dict = [NSMutableDictionary dictionaryWithCapacity: 1];
     [dict setObject: @"circle" forKey: @"type"];
@@ -268,15 +287,15 @@
     [dict setObject: str forKey: @"linewidth"];
     str = [NSString stringWithFormat: @"%i", stroked];
     [dict setObject: str forKey: @"stroked"];
-    str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
-        strokeCol[0], strokeCol[1], strokeCol[2], strokeCol[3]];
+    str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
+        strokeCol[0], strokeCol[1], strokeCol[2]];
     [dict setObject: str forKey: @"strokecolor"];
     str = [NSString stringWithFormat: @"%.3f", strokeAlpha];
     [dict setObject: str forKey: @"strokealpha"];
     str = [NSString stringWithFormat: @"%i", filled];
     [dict setObject: str forKey: @"filled"];
-    str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f",
-        fillCol[0], fillCol[1], fillCol[2], fillCol[3]];
+    str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
+        fillCol[0], fillCol[1], fillCol[2]];
     [dict setObject: str forKey: @"fillcolor"];
     str = [NSString stringWithFormat: @"%.3f", fillAlpha];
     [dict setObject: str forKey: @"fillalpha"];
