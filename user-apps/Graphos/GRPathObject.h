@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.h
 
- Copyright (C) 2008-2011 GNUstep Application Project
+ Copyright (C) 2008-2012 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -46,6 +46,8 @@
     int linecap;
     GRObjectControlPoint *currentPoint;
 }
+
+- (id)initFromData:(NSDictionary *)description inView:(GRDocView *)aView zoomFactor:(float)zf;
 
 - (void)setLineWidth:(float)width;
 - (float)lineWidth;
