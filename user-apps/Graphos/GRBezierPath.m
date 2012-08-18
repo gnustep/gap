@@ -50,8 +50,8 @@ static double k = 0.025;
         filled = NO;
         visible = YES;
         locked = NO;
-        strokeColor = [[NSColor blackColor] retain];
-        fillColor = [[NSColor whiteColor] retain];
+        strokeColor = [[[NSColor blackColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+        fillColor = [[[NSColor whiteColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
         editor = [[GRBezierPathEditor alloc] initEditor:self];
     }
     return self;

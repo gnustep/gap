@@ -1,4 +1,12 @@
-2012-08-17 Riccardo Mottola <rm@gnu.org>
+2012-08-18 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
+	* GRBox.m
+	* GRCircle.m
+	* GRBezierPath.m
+	Initialize colors with RGB color space.
+
+2012-08-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m:
 	New file format, colors RGB encoded

@@ -54,8 +54,8 @@
       filled = NO;
       visible = YES;
       locked = NO;
-      strokeColor = [[NSColor blackColor] retain];
-      fillColor = [[NSColor whiteColor] retain];
+      strokeColor = [[[NSColor blackColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+      fillColor = [[[NSColor whiteColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
       ASSIGN(str, @"");
 
       if (properties != nil)
