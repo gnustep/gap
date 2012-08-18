@@ -1,5 +1,10 @@
 2012-08-17 Riccardo Mottola <rm@gnu.org>
 
+	* GRText.m:
+	New file format, colors RGB encoded
+
+2012-08-17 Riccardo Mottola <rm@gnu.org>
+
 	* GRBox.m
 	* GRCircle.m
 	* GRBezierPath.m
