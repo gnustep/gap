@@ -763,6 +763,20 @@
 			85B360DB15DF634800DC6C21 /* PBXTextBookmark */ = 85B360DB15DF634800DC6C21 /* PBXTextBookmark */;
 			85B360DC15DF634800DC6C21 /* PBXTextBookmark */ = 85B360DC15DF634800DC6C21 /* PBXTextBookmark */;
 			85B360DD15DF634800DC6C21 /* PBXTextBookmark */ = 85B360DD15DF634800DC6C21 /* PBXTextBookmark */;
+			85B360E215DF6EC100DC6C21 /* PBXBookmark */ = 85B360E215DF6EC100DC6C21 /* PBXBookmark */;
+			85B360E815DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360E815DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360E915DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360E915DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360EA15DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360EA15DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360EB15DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360EB15DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360EC15DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360EC15DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360ED15DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360ED15DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360EE15DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360EE15DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360EF15DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360EF15DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360F015DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360F015DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360F115DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360F115DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360F215DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360F215DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360F315DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360F315DF6EEF00DC6C21 /* PBXTextBookmark */;
+			85B360F615DF6EEF00DC6C21 /* PBXTextBookmark */ = 85B360F615DF6EEF00DC6C21 /* PBXTextBookmark */;
 			85B7CA6F13F6FF94005EF60D = 85B7CA6F13F6FF94005EF60D /* PBXTextBookmark */;
 			85B7CA7013F6FF94005EF60D = 85B7CA7013F6FF94005EF60D /* PBXTextBookmark */;
 			85B7CA7113F6FF94005EF60D = 85B7CA7113F6FF94005EF60D /* PBXTextBookmark */;
@@ -1038,8 +1052,8 @@
 	8518AB1910E8A8ED004A2013 /* GRCircle.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {908, 6146}}";
-			sepNavSelRange = "{4283, 73}";
-			sepNavVisRect = "{{0, 1955}, {708, 464}}";
+			sepNavSelRange = "{1871, 0}";
+			sepNavVisRect = "{{0, 650}, {708, 464}}";
 			sepNavWindowFrame = "{{195, 87}, {944, 801}}";
 		};
 	};
@@ -1132,7 +1146,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "NSColor *color;";
 		rLen = 0;
-		rLoc = 11464;
+		rLoc = 11572;
 		rType = 0;
 		vrLen = 827;
 		vrLoc = 10637;
@@ -1370,8 +1384,8 @@
 	85AEB2960CA43E7A00A80101 /* GRBox.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {935, 5824}}";
-			sepNavSelRange = "{6724, 0}";
-			sepNavVisRect = "{{0, 2421}, {935, 716}}";
+			sepNavSelRange = "{1650, 212}";
+			sepNavVisRect = "{{0, 316}, {935, 716}}";
 			sepNavWindowFrame = "{{636, 80}, {974, 845}}";
 		};
 	};
@@ -1385,9 +1399,9 @@
 	};
 	85B1DAAB0D8B2E2400A80103 /* GRPathObject.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {615, 910}}";
+			sepNavIntBoundsRect = "{{0, 0}, {708, 1610}}";
 			sepNavSelRange = "{1111, 0}";
-			sepNavVisRect = "{{0, 0}, {615, 552}}";
+			sepNavVisRect = "{{0, 1140}, {708, 464}}";
 			sepNavWindowFrame = "{{387, 93}, {974, 845}}";
 		};
 	};
@@ -1424,7 +1438,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 250";
 		rLen = 0;
-		rLoc = 8714;
+		rLoc = 8822;
 		rType = 0;
 		vrLen = 1740;
 		vrLoc = 9724;
@@ -1434,7 +1448,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "obj = [description objectForKey: @\"stroked\"];";
 		rLen = 47;
-		rLoc = 4723;
+		rLoc = 4831;
 		rType = 0;
 		vrLen = 1735;
 		vrLoc = 3795;
@@ -1454,7 +1468,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 250";
 		rLen = 0;
-		rLoc = 8714;
+		rLoc = 8822;
 		rType = 0;
 		vrLen = 1740;
 		vrLoc = 9724;
@@ -1464,7 +1478,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 199";
 		rLen = 0;
-		rLoc = 6739;
+		rLoc = 6847;
 		rType = 0;
 		vrLen = 1412;
 		vrLoc = 6008;
@@ -1474,7 +1488,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 184";
 		rLen = 1090;
-		rLoc = 6132;
+		rLoc = 6240;
 		rType = 0;
 		vrLen = 2202;
 		vrLoc = 5657;
@@ -1494,7 +1508,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 199";
 		rLen = 0;
-		rLoc = 6739;
+		rLoc = 6847;
 		rType = 0;
 		vrLen = 1412;
 		vrLoc = 6008;
@@ -1504,7 +1518,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 198";
 		rLen = 0;
-		rLoc = 6724;
+		rLoc = 6832;
 		rType = 0;
 		vrLen = 2202;
 		vrLoc = 5657;
@@ -1514,7 +1528,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 818";
 		rLen = 0;
-		rLoc = 24764;
+		rLoc = 24872;
 		rType = 0;
 		vrLen = 1487;
 		vrLoc = 0;
@@ -1524,7 +1538,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1378;
 		vrLoc = 6009;
@@ -1534,7 +1548,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 818";
 		rLen = 0;
-		rLoc = 24728;
+		rLoc = 24836;
 		rType = 0;
 		vrLen = 1487;
 		vrLoc = 0;
@@ -1544,7 +1558,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1378;
 		vrLoc = 6009;
@@ -1554,7 +1568,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1224;
 		vrLoc = 7119;
@@ -1564,7 +1578,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 818";
 		rLen = 0;
-		rLoc = 24728;
+		rLoc = 24836;
 		rType = 0;
 		vrLen = 1487;
 		vrLoc = 0;
@@ -1574,7 +1588,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1224;
 		vrLoc = 7119;
@@ -1584,7 +1598,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 818";
 		rLen = 0;
-		rLoc = 24728;
+		rLoc = 24836;
 		rType = 0;
 		vrLen = 1487;
 		vrLoc = 0;
@@ -1594,7 +1608,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1224;
 		vrLoc = 7119;
@@ -1604,7 +1618,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 818";
 		rLen = 0;
-		rLoc = 24728;
+		rLoc = 24836;
 		rType = 0;
 		vrLen = 1487;
 		vrLoc = 0;
@@ -1614,7 +1628,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1008;
 		vrLoc = 2438;
@@ -1624,7 +1638,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 439";
 		rLen = 0;
-		rLoc = 13731;
+		rLoc = 13839;
 		rType = 0;
 		vrLen = 1008;
 		vrLoc = 2438;
@@ -1644,7 +1658,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = "GRBezierPath.m: 818";
 		rLen = 0;
-		rLoc = 24733;
+		rLoc = 24841;
 		rType = 0;
 		vrLen = 1487;
 		vrLoc = 0;
@@ -1664,7 +1678,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: initInView:zoomFactor:withProperties:";
 		rLen = 114;
-		rLoc = 3513;
+		rLoc = 3621;
 		rType = 0;
 		vrLen = 1661;
 		vrLoc = 3830;
@@ -1684,7 +1698,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 150";
 		rLen = 138;
-		rLoc = 4724;
+		rLoc = 4832;
 		rType = 0;
 		vrLen = 1661;
 		vrLoc = 3830;
@@ -1694,7 +1708,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 150";
 		rLen = 138;
-		rLoc = 4724;
+		rLoc = 4832;
 		rType = 0;
 		vrLen = 1661;
 		vrLoc = 3830;
@@ -1704,7 +1718,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "rotation = [[description objectForKey: @\"rotation\"] floatValue];";
 		rLen = 73;
-		rLoc = 4283;
+		rLoc = 4391;
 		rType = 0;
 		vrLen = 1661;
 		vrLoc = 3830;
@@ -1714,7 +1728,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "rotation = [[description objectForKey: @\"rotation\"] floatValue];";
 		rLen = 73;
-		rLoc = 4283;
+		rLoc = 4391;
 		rType = 0;
 		vrLen = 1602;
 		vrLoc = 4133;
@@ -1754,7 +1768,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "rotation = [[description objectForKey: @\"rotation\"] floatValue];";
 		rLen = 73;
-		rLoc = 4283;
+		rLoc = 4391;
 		rType = 0;
 		vrLen = 1602;
 		vrLoc = 4133;
@@ -1798,6 +1812,140 @@
 		rType = 0;
 		vrLen = 299;
 		vrLoc = 0;
+	};
+	85B360E215DF6EC100DC6C21 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
+	};
+	85B360E815DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C1660FE840EACC02AAC07 /* English */;
+		name = "English: 5";
+		rLen = 0;
+		rLoc = 167;
+		rType = 0;
+		vrLen = 299;
+		vrLoc = 0;
+	};
+	85B360E915DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85CB5DF30D72C0F000A80101 /* GRDrawableObject.m */;
+		name = "GRDrawableObject.m: 12";
+		rLen = 0;
+		rLoc = 269;
+		rType = 0;
+		vrLen = 535;
+		vrLoc = 2046;
+	};
+	85B360EA15DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85B1DAAB0D8B2E2400A80103 /* GRPathObject.m */;
+		name = "GRPathObject.m: 38";
+		rLen = 0;
+		rLoc = 1111;
+		rType = 0;
+		vrLen = 287;
+		vrLoc = 1648;
+	};
+	85B360EB15DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
+		name = "GRBox.m: 61";
+		rLen = 0;
+		rLoc = 1861;
+		rType = 0;
+		vrLen = 1199;
+		vrLoc = 1650;
+	};
+	85B360EC15DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
+		name = "GRCircle.m: 61";
+		rLen = 0;
+		rLoc = 1871;
+		rType = 0;
+		vrLen = 1157;
+		vrLoc = 1367;
+	};
+	85B360ED15DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
+		name = "GRBezierPath.m: 251";
+		rLen = 0;
+		rLoc = 8822;
+		rType = 0;
+		vrLen = 1754;
+		vrLoc = 9747;
+	};
+	85B360EE15DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C1660FE840EACC02AAC07 /* English */;
+		name = "English: 5";
+		rLen = 0;
+		rLoc = 167;
+		rType = 0;
+		vrLen = 299;
+		vrLoc = 0;
+	};
+	85B360EF15DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85CB5DF30D72C0F000A80101 /* GRDrawableObject.m */;
+		name = "GRDrawableObject.m: 12";
+		rLen = 0;
+		rLoc = 269;
+		rType = 0;
+		vrLen = 535;
+		vrLoc = 2046;
+	};
+	85B360F015DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85B1DAAB0D8B2E2400A80103 /* GRPathObject.m */;
+		name = "GRPathObject.m: 38";
+		rLen = 0;
+		rLoc = 1111;
+		rType = 0;
+		vrLen = 287;
+		vrLoc = 1648;
+	};
+	85B360F115DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
+		name = "GRBox.m: 61";
+		rLen = 0;
+		rLoc = 1861;
+		rType = 0;
+		vrLen = 1199;
+		vrLoc = 1650;
+	};
+	85B360F215DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
+		name = "GRCircle.m: 61";
+		rLen = 0;
+		rLoc = 1871;
+		rType = 0;
+		vrLen = 1157;
+		vrLoc = 1367;
+	};
+	85B360F315DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
+		name = "GRBezierPath.m: 55";
+		rLen = 0;
+		rLoc = 1787;
+		rType = 0;
+		vrLen = 1042;
+		vrLoc = 1112;
+	};
+	85B360F615DF6EEF00DC6C21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
+		name = "GRBox.m: 60";
+		rLen = 212;
+		rLoc = 1650;
+		rType = 0;
+		vrLen = 1600;
+		vrLoc = 758;
 	};
 	85B7CA6F13F6FF94005EF60D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -2070,8 +2218,8 @@
 	85CB5DF30D72C0F000A80101 /* GRDrawableObject.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {708, 2198}}";
-			sepNavSelRange = "{66, 0}";
-			sepNavVisRect = "{{0, 0}, {708, 464}}";
+			sepNavSelRange = "{269, 0}";
+			sepNavVisRect = "{{0, 1339}, {708, 464}}";
 			sepNavWindowFrame = "{{367, 92}, {974, 845}}";
 		};
 	};
@@ -2124,7 +2272,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: draw";
 		rLen = 0;
-		rLoc = 12986;
+		rLoc = 13094;
 		rType = 0;
 		vrLen = 877;
 		vrLoc = 2056;
@@ -2305,7 +2453,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12976;
+		rLoc = 13084;
 		rType = 0;
 		vrLen = 683;
 		vrLoc = 10263;
@@ -2315,7 +2463,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12976;
+		rLoc = 13084;
 		rType = 0;
 		vrLen = 1381;
 		vrLoc = 2056;
@@ -2345,7 +2493,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12976;
+		rLoc = 13084;
 		rType = 0;
 		vrLen = 683;
 		vrLoc = 10263;
@@ -2365,7 +2513,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "[self setLineWidth: [val floatValue]];";
 		rLen = 45;
-		rLoc = 2887;
+		rLoc = 2995;
 		rType = 0;
 		vrLen = 1020;
 		vrLoc = 2414;
@@ -2385,7 +2533,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "[self setLineWidth: [val floatValue]];";
 		rLen = 45;
-		rLoc = 2887;
+		rLoc = 2995;
 		rType = 0;
 		vrLen = 1020;
 		vrLoc = 2414;
@@ -2395,7 +2543,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12976;
+		rLoc = 13084;
 		rType = 0;
 		vrLen = 1381;
 		vrLoc = 2056;
@@ -2405,7 +2553,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12985;
+		rLoc = 13093;
 		rType = 0;
 		vrLen = 1032;
 		vrLoc = 2407;
@@ -2415,7 +2563,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12985;
+		rLoc = 13093;
 		rType = 0;
 		vrLen = 1386;
 		vrLoc = 2056;
@@ -2425,7 +2573,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12985;
+		rLoc = 13093;
 		rType = 0;
 		vrLen = 1032;
 		vrLoc = 2407;
@@ -2435,7 +2583,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12985;
+		rLoc = 13093;
 		rType = 0;
 		vrLen = 1386;
 		vrLoc = 2056;
@@ -2445,7 +2593,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12985;
+		rLoc = 13093;
 		rType = 0;
 		vrLen = 975;
 		vrLoc = 2200;
@@ -2455,7 +2603,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 389";
 		rLen = 0;
-		rLoc = 12985;
+		rLoc = 13093;
 		rType = 0;
 		vrLen = 975;
 		vrLoc = 2200;
@@ -2475,7 +2623,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 385";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1376;
 		vrLoc = 2056;
@@ -2513,7 +2661,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 385";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 8902;
@@ -2523,7 +2671,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 385";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1376;
 		vrLoc = 2056;
@@ -2533,7 +2681,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 385";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 764;
 		vrLoc = 9371;
@@ -2553,7 +2701,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = numberWithBool;
 		rLen = 14;
-		rLoc = 10296;
+		rLoc = 10404;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 8593;
@@ -2563,7 +2711,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = numberWithBool;
 		rLen = 14;
-		rLoc = 10296;
+		rLoc = 10404;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 8593;
@@ -2583,7 +2731,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "NSLog(@\"stroked - class %@- value %@\", [[description objectForKey: @\"stroked\"] class], [description objectForKey: @\"stroked\"]);";
 		rLen = 2;
-		rLoc = 4844;
+		rLoc = 4952;
 		rType = 0;
 		vrLen = 1921;
 		vrLoc = 3760;
@@ -2593,7 +2741,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 385";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1376;
 		vrLoc = 2056;
@@ -2603,7 +2751,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 271";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 1470;
 		vrLoc = 9090;
@@ -2613,7 +2761,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 386";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1376;
 		vrLoc = 2056;
@@ -2623,7 +2771,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 0;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 		vrLen = 1953;
 		vrLoc = 4251;
@@ -2633,7 +2781,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 386";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1376;
 		vrLoc = 2056;
@@ -2650,7 +2798,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 0;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 		vrLen = 1163;
 		vrLoc = 3375;
@@ -2670,7 +2818,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 0;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 		vrLen = 1163;
 		vrLoc = 3375;
@@ -2700,7 +2848,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 386";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1376;
 		vrLoc = 2056;
@@ -2720,7 +2868,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "NSLog(@\"read stroked - class %@- value %@\", [[description objectForKey: @\"stroked\"] class], [description objectForKey: @\"stroked\"]);";
 		rLen = 2;
-		rLoc = 4844;
+		rLoc = 4952;
 		rType = 0;
 		vrLen = 2493;
 		vrLoc = 3432;
@@ -2740,7 +2888,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "NSLog(@\"read stroked - class %@- value %@\", [[description objectForKey: @\"stroked\"] class], [description objectForKey: @\"stroked\"]);";
 		rLen = 2;
-		rLoc = 4844;
+		rLoc = 4952;
 		rType = 0;
 		vrLen = 2493;
 		vrLoc = 3432;
@@ -2760,7 +2908,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "NSLog(@\"read stroked - class %@- value %@\", [[description objectForKey: @\"stroked\"] class], [description objectForKey: @\"stroked\"]);";
 		rLen = 2;
-		rLoc = 4844;
+		rLoc = 4952;
 		rType = 0;
 		vrLen = 2493;
 		vrLoc = 3432;
@@ -2780,7 +2928,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "NSLog(@\"read stroked - class %@- value %@\", [[description objectForKey: @\"stroked\"] class], [description objectForKey: @\"stroked\"]);";
 		rLen = 2;
-		rLoc = 4844;
+		rLoc = 4952;
 		rType = 0;
 		vrLen = 2493;
 		vrLoc = 3432;
@@ -2790,7 +2938,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 386";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 858;
 		vrLoc = 9504;
@@ -2820,7 +2968,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = stroked;
 		rLen = 7;
-		rLoc = 10809;
+		rLoc = 10917;
 		rType = 0;
 		vrLen = 863;
 		vrLoc = 9186;
@@ -2830,7 +2978,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 271";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 629;
 		vrLoc = 9688;
@@ -2887,7 +3035,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = stroked;
 		rLen = 7;
-		rLoc = 10809;
+		rLoc = 10917;
 		rType = 0;
 		vrLen = 863;
 		vrLoc = 9186;
@@ -2897,7 +3045,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 271";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 629;
 		vrLoc = 9688;
@@ -2943,7 +3091,7 @@
 		isa = PBXTextBookmark;
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		rLen = 7;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 	};
 	85CDE79B15D9A3BF007623AE /* PBXTextBookmark */ = {
@@ -2961,7 +3109,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 134";
 		rLen = 0;
-		rLoc = 3786;
+		rLoc = 3894;
 		rType = 0;
 		vrLen = 2246;
 		vrLoc = 3543;
@@ -2991,7 +3139,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 152";
 		rLen = 0;
-		rLoc = 4833;
+		rLoc = 4941;
 		rType = 0;
 		vrLen = 2538;
 		vrLoc = 3679;
@@ -3001,7 +3149,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 398";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 9135;
@@ -3021,7 +3169,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = stroked;
 		rLen = 0;
-		rLoc = 6194;
+		rLoc = 6302;
 		rType = 0;
 		vrLen = 675;
 		vrLoc = 5818;
@@ -3041,7 +3189,7 @@
 		fRef = 85D2B0920D701D4E00A80101 /* GRBezierPath.m */;
 		name = stroked;
 		rLen = 0;
-		rLoc = 6194;
+		rLoc = 6302;
 		rType = 0;
 		vrLen = 675;
 		vrLoc = 5818;
@@ -3051,7 +3199,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = stroked;
 		rLen = 7;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 4260;
@@ -3068,7 +3216,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 398";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 9135;
@@ -3086,7 +3234,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 398";
 		rLen = 0;
-		rLoc = 12848;
+		rLoc = 12956;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 9135;
@@ -3096,7 +3244,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 133";
 		rLen = 0;
-		rLoc = 3803;
+		rLoc = 3911;
 		rType = 0;
 		vrLen = 615;
 		vrLoc = 3598;
@@ -3106,7 +3254,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = stroked;
 		rLen = 7;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 4260;
@@ -3116,7 +3264,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = stroked;
 		rLen = 7;
-		rLoc = 4854;
+		rLoc = 4962;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 4260;
@@ -3146,7 +3294,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 147;
-		rLoc = 4699;
+		rLoc = 4807;
 		rType = 0;
 		vrLen = 1881;
 		vrLoc = 3813;
@@ -3156,7 +3304,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "obj = [description objectForKey: @\"stroked\"];";
 		rLen = 47;
-		rLoc = 4723;
+		rLoc = 4831;
 		rType = 0;
 		vrLen = 1753;
 		vrLoc = 3777;
@@ -3186,7 +3334,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 147;
-		rLoc = 4699;
+		rLoc = 4807;
 		rType = 0;
 		vrLen = 1881;
 		vrLoc = 3813;
@@ -3196,7 +3344,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "obj = [description objectForKey: @\"stroked\"];";
 		rLen = 47;
-		rLoc = 4723;
+		rLoc = 4831;
 		rType = 0;
 		vrLen = 1753;
 		vrLoc = 3777;
@@ -3224,7 +3372,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 194";
 		rLen = 0;
-		rLoc = 7586;
+		rLoc = 7694;
 		rType = 0;
 		vrLen = 769;
 		vrLoc = 6393;
@@ -3304,7 +3452,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 147;
-		rLoc = 4699;
+		rLoc = 4807;
 		rType = 0;
 		vrLen = 1115;
 		vrLoc = 6511;
@@ -3324,7 +3472,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 150";
 		rLen = 147;
-		rLoc = 4699;
+		rLoc = 4807;
 		rType = 0;
 		vrLen = 1115;
 		vrLoc = 6511;
@@ -3344,7 +3492,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 283";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 3348;
@@ -3354,7 +3502,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 283";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 3348;
@@ -3364,7 +3512,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 283";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 3348;
@@ -3404,7 +3552,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 283";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 3348;
@@ -3498,7 +3646,7 @@
 		fRef = 85AEB2960CA43E7A00A80101 /* GRBox.m */;
 		name = "GRBox.m: 283";
 		rLen = 0;
-		rLoc = 10414;
+		rLoc = 10522;
 		rType = 0;
 		vrLen = 2589;
 		vrLoc = 4190;
@@ -3508,7 +3656,7 @@
 		fRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */;
 		name = "GRCircle.m: 194";
 		rLen = 0;
-		rLoc = 7586;
+		rLoc = 7694;
 		rType = 0;
 		vrLen = 769;
 		vrLoc = 6393;
@@ -3732,9 +3880,9 @@
 	};
 	85D2B0920D701D4E00A80101 /* GRBezierPath.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {905, 11452}}";
-			sepNavSelRange = "{24593, 0}";
-			sepNavVisRect = "{{0, 0}, {905, 672}}";
+			sepNavIntBoundsRect = "{{0, 0}, {708, 11494}}";
+			sepNavSelRange = "{1787, 0}";
+			sepNavVisRect = "{{0, 499}, {708, 464}}";
 			sepNavWindowFrame = "{{438, 97}, {944, 801}}";
 		};
 	};

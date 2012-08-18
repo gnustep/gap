@@ -56,8 +56,8 @@
         filled = NO;
         visible = YES;
         locked = NO;
-        strokeColor = [[NSColor blackColor] retain];
-        fillColor = [[NSColor whiteColor] retain];
+        strokeColor = [[[NSColor blackColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+        fillColor = [[[NSColor whiteColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
         editor = [[GRCircleEditor alloc] initEditor:self];
         startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
         endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
