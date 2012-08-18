@@ -46,6 +46,16 @@
     [myPath release];
     [super dealloc];
 }
+/** initializes all parameters from a description dictionary */
+- (id)initFromData:(NSDictionary *)description
+            inView:(GRDocView *)aView
+        zoomFactor:(float)zf
+{
+#ifdef GNUSTEP
+  [self subclassResponsibility: _cmd];
+#endif
+  return nil;
+}
 
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint
 {

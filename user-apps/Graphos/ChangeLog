@@ -1,5 +1,11 @@
 2012-08-18 Riccardo Mottola <rm@gnu.org>
 
+	* GRPathObject.h
+	* GRPathObject.m
+	Fix warning, declare method in superclass.
+
+2012-08-18 Riccardo Mottola <rm@gnu.org>
+
 	* GRText.m
 	* GRBox.m
 	* GRCircle.m
