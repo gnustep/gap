@@ -82,6 +82,7 @@
 		854931F411143DF600C4D928 /* GRCircleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8518AB1B10E8A8ED004A2013 /* GRCircleEditor.m */; };
 		854931F611143DF600C4D928 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85BB08521215F83A00B9699B /* PropertiesEditor.nib */; };
+		85F4CB6615E074FB00160D61 /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = 85F4CB6515E074FB00160D61 /* ChangeLog */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		85DE3FF50CA06C2200A80101 /* GRBoxEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBoxEditor.m; sourceTree = "<group>"; };
 		85DE40060CA0772E00A80101 /* GRObjectControlPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRObjectControlPoint.h; sourceTree = "<group>"; };
 		85DE40070CA0772E00A80101 /* GRObjectControlPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRObjectControlPoint.m; sourceTree = "<group>"; };
+		85F4CB6515E074FB00160D61 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
 		F507216008B5ECA701A8012F /* magnify.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = magnify.tiff; path = Resources/magnify.tiff; sourceTree = "<group>"; };
 		F507216208B5ED3E01A8012F /* pencil.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = pencil.tiff; path = Resources/pencil.tiff; sourceTree = "<group>"; };
 		F507216408B5ED3E01A8012F /* reduce.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = reduce.tiff; path = Resources/reduce.tiff; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				85F4CB6515E074FB00160D61 /* ChangeLog */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				85BB08521215F83A00B9699B /* PropertiesEditor.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
@@ -424,6 +427,7 @@
 				854931DC11143DF600C4D928 /* graphos_icons.icns in Resources */,
 				854931DD11143DF600C4D928 /* graphos_doc_icons.icns in Resources */,
 				85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */,
+				85F4CB6615E074FB00160D61 /* ChangeLog in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

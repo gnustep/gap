@@ -1,3 +1,8 @@
+2012-08-19 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Do not leak objects while performing deep copy.
+
 2012-08-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRPathObject.h
