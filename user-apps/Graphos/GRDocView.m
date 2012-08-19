@@ -1403,7 +1403,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     e = [objArray objectEnumerator];
     while ((o = [e nextObject]))
     {
-        [copyArray addObject:[o copy]];
+        [copyArray addObject:[[o copy] autorelease]];
     }
 
     return copyArray;
