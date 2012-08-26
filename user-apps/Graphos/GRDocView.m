@@ -43,36 +43,35 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (id)initWithFrame:(NSRect)aRect
 {
-    NSLog (@"initing doc view with win");
-    pageRect = NSMakeRect(0, 0, 695, 942);
-    a4Rect = NSMakeRect(50, 50, 595, 842);
-    zmdRect = NSMakeRect(50, 50, 595, 842);
-
-    self = [super initWithFrame: pageRect];
-    if(self)
+  pageRect = NSMakeRect(0, 0, 695, 942);
+  a4Rect = NSMakeRect(50, 50, 595, 842);
+  zmdRect = NSMakeRect(50, 50, 595, 842);
+  
+  self = [super initWithFrame: pageRect];
+  if(self)
     {
-        NSImage *img;
-        NSCursor *cur;
+      NSImage *img;
+      NSCursor *cur;
         
-        img = [NSImage imageNamed: @"blackarrow.tiff"];
-        cur = [[NSCursor alloc] initWithImage: img hotSpot: NSMakePoint(0, 0)];
-        [cur setOnMouseEntered: YES];
-        [cur setOnMouseExited: YES];
-        [self addTrackingRect: [self frame]
-                        owner: cur userData: NULL
-                 assumeInside: YES];
+      img = [NSImage imageNamed: @"blackarrow.tiff"];
+      cur = [[NSCursor alloc] initWithImage: img hotSpot: NSMakePoint(0, 0)];
+      [cur setOnMouseEntered: YES];
+      [cur setOnMouseExited: YES];
+      [self addTrackingRect: [self frame]
+	    owner: cur userData: NULL
+	    assumeInside: YES];
+      [cur release];
 
-
-        objects = [[NSMutableArray alloc] initWithCapacity: 1];
-        delObjects = [[NSMutableArray alloc] initWithCapacity: 1];
-        lastObjects = nil;
-        shiftclick = NO;
-        altclick = NO;
-        ctrlclick = NO;
-        zIndex = 2;
-        zFactor = zFactors[zIndex];
+      objects = [[NSMutableArray alloc] initWithCapacity: 1];
+      delObjects = [[NSMutableArray alloc] initWithCapacity: 1];
+      lastObjects = nil;
+      shiftclick = NO;
+      altclick = NO;
+      ctrlclick = NO;
+      zIndex = 2;
+      zFactor = zFactors[zIndex];
     }
-    return self;
+  return self;
 }
 
 - (void)dealloc
