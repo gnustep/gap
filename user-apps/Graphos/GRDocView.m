@@ -1065,7 +1065,6 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
               [propDict setObject: num forKey: @"miterlimit"];
               num = [NSNumber numberWithFloat: [obj lineWidth]];
               [propDict setObject: num forKey: @"linewidth"];
-              num = [NSNumber numberWithInt: [obj isStroked]];
             }
           else if([obj isKindOfClass: [GRText class]])
             {
