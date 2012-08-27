@@ -129,6 +129,7 @@
         attrs = [NSDictionary dictionaryWithObjectsAndKeys:
             font, NSFontAttributeName,
             style, NSParagraphStyleAttributeName, nil];
+	[style release];
         size = [str sizeWithAttributes: attrs];
         scalex = [[description objectForKey: @"scalex"] floatValue];
         scaley = [[description objectForKey: @"scaley"] floatValue];
@@ -327,6 +328,7 @@
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
         font, NSFontAttributeName,
         style, NSParagraphStyleAttributeName, nil];
+    [style release];
 
     [(GRTextEditor *)editor setPoint: pos
           withString: str
@@ -462,7 +464,7 @@
 				 strokeColor, NSForegroundColorAttributeName,
 				 style, NSParagraphStyleAttributeName, nil] retain];
       }
-
+    [style release];
     baselny = pos.y;
     bezp = [NSBezierPath bezierPath];
     [bezp setLineWidth:0];

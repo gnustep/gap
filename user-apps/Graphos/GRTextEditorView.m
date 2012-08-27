@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditorView.m
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2012 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -251,17 +251,18 @@
 
 - (NSDictionary *)textAttributes
 {
-    NSDictionary *dict;
-    NSMutableParagraphStyle *style;
+  NSDictionary *dict;
+  NSMutableParagraphStyle *style;
 
-    style = [[NSMutableParagraphStyle alloc] init];
-    [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-    [style setAlignment: textAlignment];
-    [style setParagraphSpacing: parSpace];
-    dict = [NSDictionary dictionaryWithObjectsAndKeys:
-        [theText font], NSFontAttributeName,
-        style, NSParagraphStyleAttributeName, nil];
-    return dict;
+  style = [[NSMutableParagraphStyle alloc] init];
+  [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [style setAlignment: textAlignment];
+  [style setParagraphSpacing: parSpace];
+  dict = [NSDictionary dictionaryWithObjectsAndKeys:
+			 [theText font], NSFontAttributeName,
+		       style, NSParagraphStyleAttributeName, nil];
+  [style release];
+  return dict;
 }
 
 - (int)result
