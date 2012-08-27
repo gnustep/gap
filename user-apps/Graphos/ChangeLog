@@ -1,6 +1,11 @@
 2012-08-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
+	Fix drawing of grid lines when zoomed.
+
+2012-08-27 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
 	* GRTextEditorView.m
 	Fix memory leaks.
 

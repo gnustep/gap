@@ -482,10 +482,10 @@
             {
                 [[NSColor blackColor] set];
                 [bezp moveToPoint:NSMakePoint(pos.x, baselny)];
-                [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width, baselny)];
+                [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width*zmFactor, baselny)];
             }
 
-            baselny -= parspace;
+            baselny -= parspace*zmFactor;
         }
 
         if([editor isSelect])
