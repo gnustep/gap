@@ -102,6 +102,18 @@
   [[PreferencesController sharedPreferencesController] showWindow: sender];
 }
 
+- (void) showLyricsInspector: (id)sender
+{
+  if (! connected)
+    {
+      return;
+    }
+
+  [[LyricsInspector sharedLyricsInspector] showWindow: sender];
+
+}
+
+
 - (void) showPlaylist: (id)sender
 {
   if (! connected)

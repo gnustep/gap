@@ -30,6 +30,7 @@ Resources/Collection.gorm \
 Resources/PlaylistsManager.gorm \
 Resources/StatisticsViewer.gorm \
 Resources/CrossfadeView.gorm \
+Resources/LyricsInspector.gorm \
 Resources/Play.tiff \
 Resources/Pause.tiff \
 Resources/Next.tiff \
@@ -66,7 +67,8 @@ OwnTableView.h \
 Strings.h \
 BoldCell.h \
 BoldFormatter.h \
-NormalFormatter.h
+NormalFormatter.h \
+LyricsInspector.h
 
 #
 # Class files
@@ -86,7 +88,8 @@ CrossfadeController.m \
 OwnTableView.m \
 BoldCell.m \
 BoldFormatter.m \
-NormalFormatter.m
+NormalFormatter.m \
+LyricsInspector.m
 
 #
 # Other sources

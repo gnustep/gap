@@ -1,0 +1,21 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "openURL:"
+	);
+	Super = NSObject;
+    };
+    LyricsInspector = {
+	Actions = (
+	    "openURL:"
+	);
+	Outlets = (
+	    artist,
+	    lyricsURL,
+	    lyricsText,
+	    title
+	);
+	Super = NSWindowController;
+    };
+}

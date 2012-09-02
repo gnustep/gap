@@ -27,7 +27,8 @@
 	"OwnTableView.m",
 	"BoldCell.m",
 	"BoldFormatter.m",
-	"NormalFormatter.m"
+	"NormalFormatter.m",
+	"LyricsInspector.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -54,7 +55,8 @@
 	"Strings.h",
 	"BoldCell.h",
 	"BoldFormatter.h",
-	"NormalFormatter.h"
+	"NormalFormatter.h",
+	"LyricsInspector.h"
     );
     IMAGES = (
 	"Play.tiff",
@@ -79,7 +81,8 @@
 	"Collection.gorm",
 	"PlaylistsManager.gorm",
 	"StatisticsViewer.gorm",
-	"CrossfadeView.gorm"
+	"CrossfadeView.gorm",
+	"LyricsInspector.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (

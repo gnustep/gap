@@ -36,6 +36,7 @@
 #include "PlaylistsManagerController.h"
 #include "StatisticsController.h"
 #include "CrossfadeController.h"
+#include "LyricsInspector.h"
 #include "Strings.h"
 
 #define player_MPD 0
@@ -76,6 +77,7 @@
 
 // Gui Methods
 - (void) showPrefPanel:(id)sender;
+- (void) showLyricsInspector:(id)sender;
 - (void) showPlaylist: (id)sender;
 - (void) managePlaylists: (id)sender;
 - (void) browseCollection: (id)sender;

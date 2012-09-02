@@ -1,3 +1,16 @@
+2012-09-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Resources/Player.gorm
+	* Resources/LyricsInspector.gorm
+	* LyricsInspector.[h|m]
+	* AppController.[h|m]
+	* GNUmakefile
+	* Add an Inspector to retrieve lyrics from lyrics.wikia.com,
+	  based on the artist and title of the song. The API only
+	  gives back about 1/7 of the full lyrics if found, due to
+	  fair use and such. Additionally it gives a URL, where
+	  the full Lyrics can be found. Therefore the Inspector
+	  got a button to open the URL using NSWorkSpace openURL.
+
 2012-06-09: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Documentation/Install update
 	* GNUmakefile.preamble, use pkg-config to figure out
