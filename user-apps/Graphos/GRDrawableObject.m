@@ -38,6 +38,46 @@
     [super dealloc];
 }
 
+/** initializes by using the properties array as defaults */
+- (id)initInView:(GRDocView *)aView
+      zoomFactor:(float)zf
+      withProperties:(NSDictionary *)properties
+{
+  self = [super init];
+  if(self)
+    {
+      NSColor *newColor;
+      id val;
+
+      NSLog(@"initInView properties of GRDrawableObject");
+
+      docView = aView;
+      zmFactor = zf;
+      stroked = YES;
+      filled = NO;
+      visible = YES;
+      locked = NO;
+      strokeColor = [[[NSColor blackColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+      fillColor = [[[NSColor whiteColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+      
+      val = [properties objectForKey: @"stroked"];
+      if (val != nil)
+	[self setStroked: [val boolValue]];
+      newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
+      if (newColor != nil)
+	[self setStrokeColor: newColor];
+
+      val = [properties objectForKey: @"filled"];
+      if (val != nil)
+	[self setFilled: [val boolValue]];
+      newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
+      if (newColor != nil)
+	[self setFillColor: newColor];
+    }
+  return self;
+}
+
+
 - (NSDictionary *)objectDescription
 {
 #ifdef GNUSTEP
