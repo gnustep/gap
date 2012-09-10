@@ -46,15 +46,60 @@
     [myPath release];
     [super dealloc];
 }
-/** initializes all parameters from a description dictionary */
+
+- (id)initInView:(GRDocView *)aView
+      zoomFactor:(float)zf
+      withProperties:(NSDictionary *)properties
+{
+  self = [super initInView:aView zoomFactor:zf withProperties:properties];
+  if(self)
+    {
+      id val;
+
+      NSLog(@"initInView properties of GRPathObject");
+
+      myPath = [[NSBezierPath bezierPath] retain];
+      [myPath setCachesBezierPath: NO];
+
+      flatness = 0.0;
+      miterlimit = 2.0;
+      linewidth = 1.5;
+      linejoin = 0;
+      linecap = 0;
+
+      val = [properties objectForKey: @"flatness"];
+      if (val != nil)
+	[self setFlat: [val floatValue]];
+
+      val = [properties objectForKey: @"linejoin"];
+      if (val != nil)
+	[self setLineJoin: [val intValue]];
+
+      val = [properties objectForKey: @"linecap"];
+      if (val != nil)
+	[self setLineCap: [val intValue]];
+
+      val = [properties objectForKey: @"miterlimit"];
+      if (val != nil)
+	[self setMiterLimit: [val floatValue]];
+
+      val = [properties objectForKey: @"linewidth"];
+      if (val != nil)
+        [self setLineWidth: [val floatValue]];
+    }
+  return self;
+}
+
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
         zoomFactor:(float)zf
 {
-#ifdef GNUSTEP
-  [self subclassResponsibility: _cmd];
-#endif
-  return nil;
+  self = [super init];
+  if(self)
+    {
+      NSLog(@"initInView description of GRPathObject");
+    }
+  return self;
 }
 
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint

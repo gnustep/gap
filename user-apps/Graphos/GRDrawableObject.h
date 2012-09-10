@@ -45,6 +45,9 @@
   NSColor *strokeColor;
 }
 
+- (id)initInView:(GRDocView *)aView zoomFactor:(float)zf withProperties:(NSDictionary *)properties;
+- (id)initFromData:(NSDictionary *)description inView:(GRDocView *)aView zoomFactor:(float)zf;
+
 /**
  * Returns a description of the object, used for saving to file.
  * This method must be overridden by each drawable object.

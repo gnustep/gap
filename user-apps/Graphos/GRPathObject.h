@@ -47,8 +47,6 @@
     GRObjectControlPoint *currentPoint;
 }
 
-- (id)initFromData:(NSDictionary *)description inView:(GRDocView *)aView zoomFactor:(float)zf;
-
 - (void)setLineWidth:(float)width;
 - (float)lineWidth;
 
