@@ -12,6 +12,10 @@
 	* GRCircle.h
 	Init with properties of the parent class.
 
+	* GRBezierPath.h
+	* GRBezierPath.m
+	Init with properties of the parent class.
+
 2012-09-10 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m

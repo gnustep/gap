@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.h
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2012 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -40,15 +40,6 @@ typedef struct
     BOOL calculatingHandles;
     NSMutableArray *controlPoints;
 }
-
-- (id)initInView:(GRDocView *)aView zoomFactor:(float)zf;
-- (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf
-      withProperties:(NSDictionary *)properties;
-- (id)initFromData:(NSDictionary *)description
-            inView:(GRDocView *)aView
-        zoomFactor:(float)zf;
-
 
 - (void)addControlAtPoint:(NSPoint)aPoint;
 - (void)addLineToPoint:(NSPoint)aPoint;
