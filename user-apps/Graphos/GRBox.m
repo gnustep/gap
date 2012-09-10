@@ -375,8 +375,6 @@
 {
     [super setZoomFactor:f];
 
-    linewidth = linewidth / zmFactor * f;
-
     [startControlPoint setZoomFactor:f];
     [endControlPoint setZoomFactor:f];
     [self remakePath];
@@ -385,7 +383,10 @@
 /** draws the object and calls the editor to draw itself afterwards */
 - (void)draw
 {
-    NSBezierPath *bzp;
+  NSBezierPath *bzp;
+  float linew;
+
+  linew = linewidth * zmFactor;
 
     bzp = [NSBezierPath bezierPath];
     [bzp appendBezierPathWithRect:bounds];
@@ -401,7 +402,7 @@
       [NSGraphicsContext saveGraphicsState];
       [bzp setLineJoinStyle:linejoin];
       [bzp setLineCapStyle:linecap];
-      [bzp setLineWidth:linewidth];
+      [bzp setLineWidth:linew];
       [strokeColor set];
       [bzp stroke]; 
       [NSGraphicsContext restoreGraphicsState];

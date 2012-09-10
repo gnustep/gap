@@ -1,5 +1,12 @@
 2012-09-10 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierPath.m
+	* GRBox.m
+	* GRCircle.m
+	Take zooming in account for the linewidth only during drawing, without changing the effective linewidth.
+
+2012-09-10 Riccardo Mottola <rm@gnu.org>
+
 	* GRText.m
 	Fix missing retains for foreground and stroke colors.
 
