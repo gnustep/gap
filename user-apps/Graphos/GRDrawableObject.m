@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008-2010 GNUstep Application Project
+ Copyright (C) 2008-2012 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 

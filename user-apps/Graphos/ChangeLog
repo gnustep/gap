@@ -8,6 +8,10 @@
 	* GRPathObject.m
 	Init with properties in each parent class, remove plain init for Box.
 
+	* GRCircle.m
+	* GRCircle.h
+	Init with properties of the parent class.
+
 2012-09-10 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m

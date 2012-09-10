@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.h
 
- Copyright (C) 2009-2011 GNUstep Application Project
+ Copyright (C) 2009-2012 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -39,11 +39,6 @@
     float rotation;
 }
 
-- (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf;
-- (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf
-      withProperties:(NSDictionary *)properties;
 - (BOOL)onControlPoint:(NSPoint)p;
 - (void)setStartAtPoint:(NSPoint)aPoint;
 - (void)setEndAtPoint:(NSPoint)aPoint;
