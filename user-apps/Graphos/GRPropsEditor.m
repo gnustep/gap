@@ -74,7 +74,6 @@
       
   [self setControlsEnabled: NO];
   
-  props = nil;
   props = [docView selectionProperties];
   if (props == nil)
     return;

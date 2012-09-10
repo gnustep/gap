@@ -446,11 +446,17 @@
     if(!visible)
         return;
 
+    NSAssert (font != nil, @"Font object nil during drawing");
     style = [[NSMutableParagraphStyle alloc] init];
     [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     [style setAlignment: align];
     [style setParagraphSpacing: parspace];
     tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
+    if (tempFont == nil)
+      {
+	NSLog(@"temp font obtained from %@ zoomFactor: %f is nil", font, zmFactor);
+	tempFont = font;
+      }
     if (filled)
       {
 	strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
@@ -497,6 +503,7 @@
             NSRectFill(selRect);
         }
     }
+  [strAttr release];
 } 
 
 @end
