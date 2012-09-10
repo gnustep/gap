@@ -1311,50 +1311,80 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
 }
 
+- (void)delete:(id)sender
+{
+  NSUndoManager *uMgr;
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Delete"];
+  
+  [self saveCurrentObjects];
+  
+  [self deleteSelectedObjects];
+}
+
 - (void)cut:(id)sender
 {
-    [self copy: sender];
-    [self deleteSelectedObjects];
+  NSUndoManager *uMgr;
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Cut"];
+  
+  [self saveCurrentObjects];
+  [self copy: sender];
+  [self deleteSelectedObjects];
 }
 
 - (void)copy:(id)sender
 {
-    NSMutableArray *types;
-    NSPasteboard *pboard;
-    id obj;
-    NSMutableArray *objsdesc;
-    int i;
+  NSMutableArray *types;
+  NSPasteboard *pboard;
+  id obj;
+  NSMutableArray *objsdesc;
+  int i;
 
-    objsdesc = [NSMutableArray arrayWithCapacity: 1];
-    for(i = 0; i < [objects count]; i++)
+  objsdesc = [NSMutableArray arrayWithCapacity: 1];
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([[obj editor] isGroupSelected])
-            [objsdesc addObject: [obj objectDescription]];
+      obj = [objects objectAtIndex: i];
+      if([[obj editor] isGroupSelected])
+	[objsdesc addObject: [obj objectDescription]];
     }
-
-    if([objsdesc count])
+  
+  if([objsdesc count])
     {
-        types = [NSMutableArray arrayWithObjects: @"GRObjectPboardType", nil];
-        pboard = [NSPasteboard generalPasteboard];
-        [pboard declareTypes: types owner: self];
-        [pboard setString:[objsdesc description] forType: @"GRObjectPboardType"];
+      types = [NSMutableArray arrayWithObjects: @"GRObjectPboardType", nil];
+      pboard = [NSPasteboard generalPasteboard];
+      [pboard declareTypes: types owner: self];
+      [pboard setString:[objsdesc description] forType: @"GRObjectPboardType"];
     }
 }
 
 - (void)paste:(id)sender
 {
-    NSPasteboard *pboard;
-    NSArray *types;
-    NSArray *descriptions;
-    NSDictionary *objdesc;
-    id obj;
-    NSString *str;
-    int i;
+  NSPasteboard *pboard;
+  NSArray *types;
+  NSArray *descriptions;
+  NSDictionary *objdesc;
+  id obj;
+  NSString *str;
+  int i;
+  NSUndoManager *uMgr;
+  
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Paste"];
+  
+  [self saveCurrentObjects];
 
-    pboard = [NSPasteboard generalPasteboard];
-    types = [NSArray arrayWithObject: @"GRObjectPboardType"];
-    if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"])
+  pboard = [NSPasteboard generalPasteboard];
+  types = [NSArray arrayWithObject: @"GRObjectPboardType"];
+  if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"])
     {
         descriptions = [[pboard stringForType: @"GRObjectPboardType"] propertyList];
 

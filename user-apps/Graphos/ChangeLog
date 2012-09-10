@@ -1,5 +1,10 @@
 2012-09-10 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m
+	Implement delete, implement undo for pasteboard operations.
+  
+2012-09-10 Riccardo Mottola <rm@gnu.org>
+
 	* GRBox.h
 	* GRBox.m
 	* GRDrawableObject.h
