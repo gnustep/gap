@@ -688,8 +688,6 @@ static double k = 0.025;
 {
     int i;
 
-    linewidth = linewidth / zmFactor * f;
-
     zmFactor = f;
     for(i = 0; i < [controlPoints count]; i++)
         [[controlPoints objectAtIndex: i] setZoomFactor: zmFactor];
@@ -773,13 +771,16 @@ static double k = 0.025;
 
 - (void)draw
 {
-    GRBezierControlPoint *cp;
-    NSRect r;
-    int i;
-    NSBezierPath *bzp;
+  GRBezierControlPoint *cp;
+  NSRect r;
+  int i;
+  NSBezierPath *bzp;
+  float linew;
+    
+  if(![controlPoints count] || !visible)
+    return;
 
-    if(![controlPoints count] || !visible)
-        return;
+  linew =  linewidth * zmFactor;
 
     bzp = [NSBezierPath bezierPath];
     if(filled)
@@ -794,7 +795,7 @@ static double k = 0.025;
       [NSGraphicsContext saveGraphicsState];
       [myPath setLineJoinStyle:linejoin];
       [myPath setLineCapStyle:linecap];
-      [myPath setLineWidth:linewidth];
+      [myPath setLineWidth:linew];
       [strokeColor set];
       [myPath stroke];
       [NSGraphicsContext restoreGraphicsState];
