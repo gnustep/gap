@@ -151,6 +151,7 @@
 				   green: strokeCol[1]
 				   blue: strokeCol[2]
 				   alpha: strokeAlpha];
+	    [strokeColor retain];
 	  }
 	else
 	  {
@@ -163,7 +164,7 @@
 				   yellow: strokeCol[2]
 				   black: strokeCol[3]
 				   alpha: strokeAlpha];
-	    strokeColor = [strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	    strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 	  }
 	obj = [description objectForKey: @"filled"];
 	if ([obj isKindOfClass:[NSString class]])
@@ -181,6 +182,7 @@
 				 green: fillCol[1]
 				 blue: fillCol[2]
 				 alpha: fillAlpha];
+	    [fillColor retain];
 	  }
 	else
 	  {
@@ -193,7 +195,7 @@
 				 yellow: fillCol[2]
 				 black: fillCol[3]
 				 alpha: fillAlpha];
-	    fillColor = [fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	    fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 	  }
 	obj = [description objectForKey: @"visible"];
 	if ([obj isKindOfClass:[NSString class]])

@@ -1,3 +1,8 @@
+2012-09-10 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
+	Fix missing retains for foreground and stroke colors.
+
 2012-08-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
