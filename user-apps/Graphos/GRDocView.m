@@ -1279,7 +1279,6 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   pp.x = p.x * ([self frame].origin.x + pageRect.size.width) / [self frame].size.width;
   pp.y = p.y * ([self frame].origin.y + pageRect.size.height) / [self frame].size.height;
   vr = NSMakeRect(pp.x * zFactor - 200, pp.y * zFactor - 200, 400, 400);
-
   [self setFrame: NSMakeRect(0, 0, szx, szy)];
   [self scrollRectToVisible: vr];
 
@@ -1287,6 +1286,55 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
     [[objects objectAtIndex: i] setZoomFactor: zFactor];
 
   [[self window] display];
+}
+
+- (IBAction)zoom50:(id)sender
+{
+  unsigned i;
+  float szx, szy;
+
+  zFactor = 0.5;
+
+  i = ZOOM_FACTORS - 1;
+  while (i > 0 && zFactor < zFactors[i])
+    i--;
+
+  [self zoomOnPoint:[self frame].origin withFactor:i];
+}
+
+- (IBAction)zoom100:(id)sender
+{
+  unsigned  i;
+  float szx, szy;
+
+  zFactor = 1;
+
+  i = ZOOM_FACTORS - 1;
+  while (i > 0 && zFactor < zFactors[i])
+    i--;
+
+  [self zoomOnPoint:[self frame].origin withFactor:i];
+}
+
+- (IBAction)zoom200:(id)sender
+{
+  int i;
+  float szx, szy;
+
+  zFactor = 2;
+
+  i = ZOOM_FACTORS - 1;
+  while (i > 0 && zFactor < zFactors[i])
+    i--;
+
+   [self zoomOnPoint:[self frame].origin withFactor:i];
+}
+
+- (IBAction)zoomFitPage:(id)sender
+{
+}
+- (IBAction)zoomFitWidth:(id)sender
+{
 }
 
 - (void)movePageFromHandPoint:(NSPoint)handpos

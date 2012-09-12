@@ -118,6 +118,11 @@
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout;
 - (void)zoomOnPoint:(NSPoint)p withFactor:(int)index;
 - (void)movePageFromHandPoint:(NSPoint)handpos;
+- (IBAction)zoom50:(id)sender;
+- (IBAction)zoom100:(id)sender;
+- (IBAction)zoom200:(id)sender;
+- (IBAction)zoomFitPage:(id)sender;
+- (IBAction)zoomFitWidth:(id)sender;
 
 - (IBAction)cut:(id)sender;
 - (IBAction)copy:(id)sender;
