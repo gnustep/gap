@@ -1253,18 +1253,18 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
       zIndex++;
     }
 
-  [self zoomOnPoint:p withZoom:zIndex];
+  [self zoomOnPoint:p withFactor:zIndex];
 }
 
 
-- (void)zoomOnPoint:(NSPoint)p withZoom:(int)zoomIndex
+- (void)zoomOnPoint:(NSPoint)p withFactor:(int)index
 {
   float orx, ory, szx, szy;
   NSRect vr;
   NSPoint pp;
   unsigned i;
 
-  zIndex = zoomIndex;
+  zIndex = index;
   zFactor = zFactors[zIndex];
 
   orx = a4Rect.origin.x * zFactor;
