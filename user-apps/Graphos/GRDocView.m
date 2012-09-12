@@ -1239,50 +1239,53 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
 
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout
 {
-    float orx, ory, szx, szy;
-    NSRect vr;
-    NSPoint pp;
-    int i;
-
-    if(isout)
+  if(isout)
     {
-        zIndex--;
-        if(zIndex < 0)
-        {
-            zIndex = 0;
-            return;
-        }
-    } else
+      if (zIndex == 0)
+	return;
+      zIndex--;
+      
+    }
+  else
     {
-        zIndex++;
-        if(zIndex > 8)
-        {
-            zIndex = 8;
-            return;
-        }
+      if (zIndex == 8)
+	return;
+      zIndex++;
     }
 
-    zFactor = zFactors[zIndex];
+  [self zoomOnPoint:p withZoom:zIndex];
+}
 
-    orx = a4Rect.origin.x * zFactor;
-    ory = a4Rect.origin.y * zFactor;
-    szx = a4Rect.size.width * zFactor;
-    szy = a4Rect.size.height * zFactor;
-    zmdRect = NSMakeRect(orx, ory, szx, szy);
-    szx = pageRect.size.width * zFactor;
-    szy = pageRect.size.height * zFactor;
 
-    pp.x = p.x * ([self frame].origin.x + pageRect.size.width) / [self frame].size.width;
-    pp.y = p.y * ([self frame].origin.y + pageRect.size.height) / [self frame].size.height;
-    vr = NSMakeRect(pp.x * zFactor - 200, pp.y * zFactor - 200, 400, 400);
+- (void)zoomOnPoint:(NSPoint)p withZoom:(int)zoomIndex
+{
+  float orx, ory, szx, szy;
+  NSRect vr;
+  NSPoint pp;
+  unsigned i;
 
-    [self setFrame: NSMakeRect(0, 0, szx, szy)];
-    [self scrollRectToVisible: vr];
+  zIndex = zoomIndex;
+  zFactor = zFactors[zIndex];
 
-    for(i = 0; i < [objects count]; i++)
-        [[objects objectAtIndex: i] setZoomFactor: zFactor];
+  orx = a4Rect.origin.x * zFactor;
+  ory = a4Rect.origin.y * zFactor;
+  szx = a4Rect.size.width * zFactor;
+  szy = a4Rect.size.height * zFactor;
+  zmdRect = NSMakeRect(orx, ory, szx, szy);
+  szx = pageRect.size.width * zFactor;
+  szy = pageRect.size.height * zFactor;
 
-    [[self window] display];
+  pp.x = p.x * ([self frame].origin.x + pageRect.size.width) / [self frame].size.width;
+  pp.y = p.y * ([self frame].origin.y + pageRect.size.height) / [self frame].size.height;
+  vr = NSMakeRect(pp.x * zFactor - 200, pp.y * zFactor - 200, 400, 400);
+
+  [self setFrame: NSMakeRect(0, 0, szx, szy)];
+  [self scrollRectToVisible: vr];
+
+  for(i = 0; i < [objects count]; i++)
+    [[objects objectAtIndex: i] setZoomFactor: zFactor];
+
+  [[self window] display];
 }
 
 - (void)movePageFromHandPoint:(NSPoint)handpos
