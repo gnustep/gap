@@ -36,7 +36,8 @@
 
 #define UNDO_ACTION_OBJPROPS @"Change Object Properties"
 
-float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
+#define ZOOM_FACTORS 8
+float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 @implementation GRDocView
 
@@ -1248,7 +1249,7 @@ float zFactors[9] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8};
     }
   else
     {
-      if (zIndex == 8)
+      if (zIndex == ZOOM_FACTORS-1)
 	return;
       zIndex++;
     }
