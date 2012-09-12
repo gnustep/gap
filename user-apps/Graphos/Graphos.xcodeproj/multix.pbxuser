@@ -763,6 +763,7 @@
 			85DA61B915EACEF80021CD73 = 85DA61B915EACEF80021CD73 /* PBXTextBookmark */;
 			85DA61BA15EACEF80021CD73 = 85DA61BA15EACEF80021CD73 /* PBXTextBookmark */;
 			85E04C1D16012331005FD625 /* PBXTextBookmark */ = 85E04C1D16012331005FD625 /* PBXTextBookmark */;
+			85E04C2D160145BE005FD625 /* PBXTextBookmark */ = 85E04C2D160145BE005FD625 /* PBXTextBookmark */;
 			85F1D13412D5CD4C007B5C16 = 85F1D13412D5CD4C007B5C16 /* PBXTextBookmark */;
 			85F1D13C12D5CD4C007B5C16 = 85F1D13C12D5CD4C007B5C16 /* PBXTextBookmark */;
 			85F4CB6D15E07A1F00160D61 = 85F4CB6D15E07A1F00160D61 /* PBXTextBookmark */;
@@ -1725,6 +1726,16 @@
 		vrLen = 797;
 		vrLoc = 0;
 	};
+	85E04C2D160145BE005FD625 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85F4CB6515E074FB00160D61 /* ChangeLog */;
+		name = "ChangeLog: 194";
+		rLen = 0;
+		rLoc = 3851;
+		rType = 0;
+		vrLen = 708;
+		vrLoc = 0;
+	};
 	85E1286C14A2614F00E77BA6 /* GRDocument.m:86 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -1771,8 +1782,8 @@
 	};
 	85F4CB6515E074FB00160D61 /* ChangeLog */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {708, 2632}}";
-			sepNavSelRange = "{160, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {708, 2716}}";
+			sepNavSelRange = "{3851, 0}";
 			sepNavVisRect = "{{0, 0}, {708, 464}}";
 		};
 	};

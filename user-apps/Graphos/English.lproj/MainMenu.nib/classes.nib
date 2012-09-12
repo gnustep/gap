@@ -5,17 +5,17 @@
                 inspectObject = id; 
                 moveSelectedObjectsToBack = id; 
                 moveSelectedObjectsToFront = id; 
+                zoom100 = id; 
+                zoom200 = id; 
+                zoom50 = id; 
+                zoomFitPage = id; 
+                zoomFitWidth = id; 
             }; 
             CLASS = FirstResponder; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
         }, 
-        {
-            ACTIONS = {moveSelectedObjectsToBack = id; moveSelectedObjectsToFront = id; }; 
-            CLASS = GRDocView; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSView; 
-        }, 
+        {CLASS = GRDocView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
             ACTIONS = {showObjectInspector = id; }; 
             CLASS = Graphos; 
