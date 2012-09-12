@@ -116,7 +116,7 @@
 - (IBAction)moveSelectedObjectsToBack:(id)sender;
 - (void)unselectOtherObjects:(GRDrawableObject *)anObject;
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout;
-- (void)zoomOnPoint:(NSPoint)p withZoom:(int)zoomIndex;
+- (void)zoomOnPoint:(NSPoint)p withFactor:(int)index;
 - (void)movePageFromHandPoint:(NSPoint)handpos;
 
 - (IBAction)cut:(id)sender;
