@@ -16,16 +16,24 @@
 	    "saveas:",
 	    "sendToBack:",
 	    "showObjectInspector:",
-	    "unselectOtherObjects:"
+	    "unselectOtherObjects:",
+	    "zoom100:",
+	    "zoom200:",
+	    "zoom50:",
+	    "zoomFitPage:",
+	    "zoomFitWidth:"
 	);
 	Super = NSObject;
     };
     GRDocView = {
 	Actions = (
-	    "inspectObject:",
 	    "moveSelectedObjectsToFront:",
 	    "moveSelectedObjectsToBack:",
-	    "unselectOtherObjects:",
+	    "zoom50:",
+	    "zoom100:",
+	    "zoom200:",
+	    "zoomFitPage:",
+	    "zoomFitWidth:",
 	    "cut:",
 	    "copy:",
 	    "paste:"
