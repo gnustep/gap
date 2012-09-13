@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2011 Riccardo Mottola
+   Copyright (C) 2005-2012 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -444,6 +444,8 @@
         sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
     [infoSize setStringValue:sizeStr];
     [sizeStr release];
+
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
 }
 
 - (void)setTransferEnd:(NSNumber *)bytesTransferred
@@ -576,33 +578,22 @@
     return;
 }
 
-/*
- This routine is called after adding new results to the text view's backing store.
- We now need to scroll the NSScrollView in which the NSTextView sits to the part
- that we just added at the end
- */
-- (void)scrollToVisible:(id)ignore
-{
-    [logTextField scrollRangeToVisible:NSMakeRange([[logTextField string] length], 0)];
-}
-
 - (IBAction)appendTextToLog:(NSString *)textChunk
 {
-    NSAttributedString *attrStr;
+  NSAttributedString *attrStr;
     
-    attrStr = [[NSAttributedString alloc] initWithString: textChunk
-                                              attributes: textAttributes];
+  attrStr = [[NSAttributedString alloc] initWithString: textChunk
+					    attributes: textAttributes];
 
-    /* add the textChunk to the NSTextView's backing store as an attributed string */
-    [[logTextField textStorage] appendAttributedString: attrStr];
+  /* add the textChunk to the NSTextView's backing store as an attributed string */
+  [[logTextField textStorage] appendAttributedString: attrStr];
 
-    /* setup a selector to be called the next time through the event loop to scroll
-       the view to the just pasted text.  We don't want to scroll right now,
-       because of a bug in Mac OS X version 10.1 that causes scrolling in the context
-       of a text storage update to starve the app of events */
-    [self performSelector:@selector(scrollToVisible:) withObject:nil afterDelay:0.0];
 
-    [attrStr autorelease];
+    
+  [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
+  [logTextField scrollRangeToVisible:NSMakeRange([[logTextField string] length], 0)];
+
+  [attrStr autorelease];
 }
 
 /* --- connection panel methods --- */

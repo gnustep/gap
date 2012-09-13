@@ -1,0 +1,4 @@
+2012-09-13 Riccardo Mottola <rm@ŋnu.org>
+
+	* AppController.m
+	Better runloop management during  progress and log updates.
