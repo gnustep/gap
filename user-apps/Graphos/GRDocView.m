@@ -1240,21 +1240,23 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout
 {
+  int i;
+
+  i = zIndex;
   if(isout)
     {
-      if (zIndex == 0)
+      if (i == 0)
 	return;
-      zIndex--;
-      
+      i--; 
     }
   else
     {
-      if (zIndex == ZOOM_FACTORS-1)
+      if (i == ZOOM_FACTORS-1)
 	return;
-      zIndex++;
+      i++;
     }
 
-  [self zoomOnPoint:p withFactor:zIndex];
+  [self zoomOnPoint:p withFactor:i];
 }
 
 
@@ -1291,7 +1293,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 - (IBAction)zoom50:(id)sender
 {
   unsigned i;
-  float szx, szy;
+  NSPoint p;
+  NSRect visibleRect;
 
   zFactor = 0.5;
 
@@ -1299,13 +1302,18 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   while (i > 0 && zFactor < zFactors[i])
     i--;
 
-  [self zoomOnPoint:[self frame].origin withFactor:i];
+  visibleRect = [self visibleRect];
+  p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
+  p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
+
+  [self zoomOnPoint:p withFactor:i];
 }
 
 - (IBAction)zoom100:(id)sender
 {
   unsigned  i;
-  float szx, szy;
+  NSPoint p;
+  NSRect visibleRect;
 
   zFactor = 1;
 
@@ -1313,13 +1321,18 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   while (i > 0 && zFactor < zFactors[i])
     i--;
 
-  [self zoomOnPoint:[self frame].origin withFactor:i];
+  visibleRect = [self visibleRect];
+  p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
+  p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
+
+  [self zoomOnPoint:p withFactor:i];
 }
 
 - (IBAction)zoom200:(id)sender
 {
-  int i;
-  float szx, szy;
+  unsigned i;
+  NSPoint p;
+  NSRect visibleRect;
 
   zFactor = 2;
 
@@ -1327,7 +1340,11 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   while (i > 0 && zFactor < zFactors[i])
     i--;
 
-   [self zoomOnPoint:[self frame].origin withFactor:i];
+  visibleRect = [self visibleRect];
+  p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
+  p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
+
+  [self zoomOnPoint:p withFactor:i];
 }
 
 - (IBAction)zoomFitPage:(id)sender
