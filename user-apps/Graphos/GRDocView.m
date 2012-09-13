@@ -1349,9 +1349,44 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (IBAction)zoomFitPage:(id)sender
 {
+  unsigned i;
+  NSPoint p;
+  NSRect visibleRect;
+  NSRect f;
+
+  f = [self frame];
+  visibleRect = [self visibleRect];
+  i = ZOOM_FACTORS - 1;
+  NSLog(@"visible %f, full %f", visibleRect.size.width, f.size.width);
+  while (i > 0 && ((visibleRect.size.width < f.size.width * zFactors[i]) || (visibleRect.size.height < f.size.height * zFactors[i])))
+    i--;
+  NSLog(@"index: %d", i);
+  visibleRect = [self visibleRect];
+  p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
+  p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
+
+  [self zoomOnPoint:p withFactor:i];
 }
+
 - (IBAction)zoomFitWidth:(id)sender
 {
+  unsigned i;
+  NSPoint p;
+  NSRect visibleRect;
+  NSRect f;
+
+  f = [self frame];
+  visibleRect = [self visibleRect];
+  i = ZOOM_FACTORS - 1;
+  NSLog(@"visible %f, full %f", visibleRect.size.width, f.size.width);
+  while (i > 0 && visibleRect.size.width < f.size.width * zFactors[i])
+    i--;
+  NSLog(@"index: %d", i);
+  visibleRect = [self visibleRect];
+  p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
+  p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
+
+  [self zoomOnPoint:p withFactor:i];
 }
 
 - (void)movePageFromHandPoint:(NSPoint)handpos
