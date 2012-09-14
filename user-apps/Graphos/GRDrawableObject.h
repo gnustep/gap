@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008-2010 GNUstep Application Project
+ Copyright (C) 2008-2012 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -53,6 +53,11 @@
  * This method must be overridden by each drawable object.
  */
 - (NSDictionary *)objectDescription;
+
+/** Returns if the point should select the object.
+    For example, for a Box it checks if the point is within the Rect,
+    for a Bezier path if the point is on its path */
+- (BOOL)objectHitForSelection:(NSPoint)p;
 
 - (GRDocView *)view;
 - (GRObjectEditor *)editor;

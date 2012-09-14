@@ -1,3 +1,15 @@
+2012-09-14 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.m
+	* GRBox.m
+	* GRCircle.m
+	* GRDocView.m
+	* GRDrawableObject.h
+	* GRDrawableObject.m
+	* GRObjectEditor.m
+	* GRText.m
+	Unify selection detection to "objectHitForSelection".
+
 2012-09-12 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m

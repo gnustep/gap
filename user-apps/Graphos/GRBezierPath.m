@@ -636,6 +636,11 @@ static double k = 0.025;
     [self remakePath];
 }
 
+- (BOOL)objectHitForSelection:(NSPoint)p
+{
+  return [self onPathBorder:p];
+}
+
 - (BOOL)onPathBorder:(NSPoint)p
 {
     int i;

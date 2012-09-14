@@ -105,6 +105,13 @@
     return objCopy;
 }
 
+- (BOOL)objectHitForSelection:(NSPoint)p
+{
+#ifdef GNUSTEP
+    [self subclassResponsibility: _cmd];
+#endif
+    return NO;
+}
 
 - (GRDocView *)view
 {

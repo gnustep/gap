@@ -341,7 +341,7 @@
              attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
 }
 
-- (BOOL)pointInBounds:(NSPoint)p
+- (BOOL)objectHitForSelection:(NSPoint)p
 {
     if(pointInRect(bounds, p) || pointInRect(selRect, p))
         return YES;
