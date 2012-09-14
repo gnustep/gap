@@ -75,7 +75,7 @@
         editSelected = NO;
         isvalid = NO;
         
-        [[object view] unselectOtherObjects: (GRDrawableObject *)object];
+	[[object view] unselectOtherObjects: (GRDrawableObject *)object];
     }
 }
 

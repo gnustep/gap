@@ -770,29 +770,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)selectObjectAtPoint:(NSPoint)p
 {
-    id obj;
-    NSMutableArray *objs;
-    int i;
+  id obj;
+  NSMutableArray *objs;
+  int i;
 
-    objs = [NSMutableArray arrayWithCapacity: 1];
+  objs = [NSMutableArray arrayWithCapacity: 1];
 
-    for(i = 0; i < [objects count]; i++)
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPath class]])
-        {
-            if([obj onPathBorder: p])
-                [[obj editor] selectAsGroup];
-            else
-                if(!shiftclick)
-                    [[obj editor] unselect];
-        } else
-        {
-            if([obj pointInBounds: p])
-                [[obj editor] select];
-            else if(!shiftclick)
-                [[obj editor] unselect];
-        }
+      obj = [objects objectAtIndex: i];
+
+      if([obj objectHitForSelection: p])
+	[[obj editor] select];
+      else if(!shiftclick)
+	[[obj editor] unselect];
     }
 
     for(i = 0; i < [objects count]; i++)

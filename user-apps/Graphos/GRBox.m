@@ -280,9 +280,9 @@
         [(GRBoxEditor *)editor selectAsGroup];
 }
 
-- (BOOL)pointInBounds:(NSPoint)p
+- (BOOL)objectHitForSelection:(NSPoint)p
 {
-    return (pointInRect(bounds, p));
+  return (pointInRect(bounds, p));
 }
 
 - (BOOL)onControlPoint:(NSPoint)p
