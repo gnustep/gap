@@ -714,6 +714,9 @@
 			8500EDFA16064A0D002EA439 /* PBXTextBookmark */ = 8500EDFA16064A0D002EA439 /* PBXTextBookmark */;
 			8500EDFB16064A0D002EA439 /* PBXTextBookmark */ = 8500EDFB16064A0D002EA439 /* PBXTextBookmark */;
 			8500EDFC16064A0D002EA439 /* PBXTextBookmark */ = 8500EDFC16064A0D002EA439 /* PBXTextBookmark */;
+			8500EE001606777F002EA439 /* PBXTextBookmark */ = 8500EE001606777F002EA439 /* PBXTextBookmark */;
+			8500EE04160677A8002EA439 /* PBXTextBookmark */ = 8500EE04160677A8002EA439 /* PBXTextBookmark */;
+			8500EE07160677A8002EA439 /* PBXTextBookmark */ = 8500EE07160677A8002EA439 /* PBXTextBookmark */;
 			8509888E11D810DC00473551 = 8509888E11D810DC00473551 /* PBXTextBookmark */;
 			8509889211D810DC00473551 = 8509889211D810DC00473551 /* PBXTextBookmark */;
 			8530414315FE933200F58E52 = 8530414315FE933200F58E52 /* PBXTextBookmark */;
@@ -1018,6 +1021,34 @@
 		rType = 0;
 		vrLen = 748;
 		vrLoc = 1260;
+	};
+	8500EE001606777F002EA439 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "warning: no '-pointInBounds:' method found";
+		fRef = F539B1EE08A2D91C01A8012F /* GRDocView.m */;
+		rLen = 1;
+		rLoc = 872;
+		rType = 1;
+	};
+	8500EE04160677A8002EA439 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F539B20308A3589601A8012F /* GRText.h */;
+		name = "GRText.h: 63";
+		rLen = 0;
+		rLoc = 1658;
+		rType = 0;
+		vrLen = 748;
+		vrLoc = 1260;
+	};
+	8500EE07160677A8002EA439 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F539B1EE08A2D91C01A8012F /* GRDocView.m */;
+		name = "GRDocView.m: 873";
+		rLen = 0;
+		rLoc = 24178;
+		rType = 0;
+		vrLen = 1142;
+		vrLoc = 23538;
 	};
 	8509888E11D810DC00473551 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -2082,9 +2113,9 @@
 	};
 	F539B1EE08A2D91C01A8012F /* GRDocView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {834, 23786}}";
-			sepNavSelRange = "{45468, 0}";
-			sepNavVisRect = "{{0, 23151}, {834, 221}}";
+			sepNavIntBoundsRect = "{{0, 0}, {923, 25536}}";
+			sepNavSelRange = "{24178, 0}";
+			sepNavVisRect = "{{0, 11864}, {923, 702}}";
 			sepNavWindowFrame = "{{110, 89}, {962, 831}}";
 		};
 	};
