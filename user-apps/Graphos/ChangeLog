@@ -1,3 +1,8 @@
+2012-09-16 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m:
+	Fix object duplication during drag operation.
+
 2012-09-14 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m

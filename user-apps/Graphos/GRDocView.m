@@ -381,27 +381,27 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (NSArray *)duplicateObjects:(NSArray *)objs andMoveTo:(NSPoint)p
 {
-    id obj, duplObj;
-    NSMutableArray *duplObjs;
-    int i;
+  id obj, duplObj;
+  NSMutableArray *duplObjs;
+  int i;
 
-    duplObjs = [NSMutableArray arrayWithCapacity: 1];
+  duplObjs = [NSMutableArray arrayWithCapacity: 1];
 
-    for(i = 0; i < [objs count]; i++)
+  for(i = 0; i < [objs count]; i++)
     {
-        obj = [objs objectAtIndex: i];
-        duplObj = [obj copy];
-        [[obj editor] unselect];
-        [duplObj selectAsGroup];
-        [duplObj moveAddingCoordsOfPoint: p];
-        [objects addObject: duplObj];
-        [duplObjs addObject: duplObj];
-	[duplObj release];
+      obj = [objs objectAtIndex: i];
+      duplObj = [obj copy];
+      [[obj editor] unselect];
+      [[duplObj editor] selectAsGroup];
+      [duplObj moveAddingCoordsOfPoint: p];
+      [objects addObject: duplObj];
+      [duplObjs addObject: duplObj];
+      [duplObj release];
     }
-    edind = [objects count] -1;
-    [self setNeedsDisplay: YES];
-
-    return duplObjs;
+  edind = [objects count] -1;
+  [self setNeedsDisplay: YES];
+  
+  return duplObjs;
 }
 
 - (void)updatePrintInfo: (NSPrintInfo *)pi;
