@@ -61,8 +61,6 @@
 
 - (void)edit;
 
-- (BOOL)pointInBounds:(NSPoint)p;
-
 - (void)moveAddingCoordsOfPoint:(NSPoint)p;
 
 - (void)setZoomFactor:(float)f;
