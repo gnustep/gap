@@ -870,7 +870,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
         obj = [objects objectAtIndex: i];
         if([obj isKindOfClass: [GRText class]])
         {
-            if([obj pointInBounds: p])
+            if([obj objectHitForSelection: p])
             {
                 [[obj editor] select];
                 [self setNeedsDisplay: YES];
