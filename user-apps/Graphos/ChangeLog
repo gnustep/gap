@@ -1,3 +1,8 @@
+2012-09-20 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
+	If user action is canceled, do not return an object.
+
 2012-09-16 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m:
