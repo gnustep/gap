@@ -85,8 +85,15 @@
 				attributes: nil];
 	  result = [(GRTextEditor *)editor runModal];
 	  if(result == NSAlertDefaultReturn)
-	    [self setString: [[(GRTextEditor *)editor editorView] textString]
-		 attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
+	    {
+	      [self setString: [[(GRTextEditor *)editor editorView] textString]
+		   attributes: [[(GRTextEditor *)editor editorView] textAttributes]];
+	    }
+	  else
+	    {
+	      [self release];
+	      return nil;
+	    }
         }
     }
   return self;
