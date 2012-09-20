@@ -1,3 +1,9 @@
+2012-09-20 Wolfgang Lux
+
+	* GRDocView.m
+	* GRDocView.h
+	Fix cursor and tracking rect.
+
 2012-09-20 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m

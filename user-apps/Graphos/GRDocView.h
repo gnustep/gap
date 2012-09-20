@@ -58,6 +58,7 @@
     int zIndex;
     float zFactor;
     BOOL isDrawingForPrinting;
+    NSCursor *cur;
 }
 
 - (id)initWithFrame:(NSRect)aRect;
