@@ -333,7 +333,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 			  zoomFactor: zFactor
 		      withProperties: [objInspector properties]
 			  openEditor: YES];
-  [objects addObject: gdtxt];
+  if (gdtxt)
+    [objects addObject: gdtxt];
   [[gdtxt editor] select];
   [gdtxt release];
   [self setNeedsDisplay: YES];
