@@ -73,6 +73,14 @@
       newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
       if (newColor != nil)
 	[self setFillColor: newColor];
+
+      val = [properties objectForKey: @"visible"];
+      if (val)	
+	visible = [val boolValue];
+      
+      val = [properties objectForKey: @"locked"];
+      if (val)
+	locked = [val boolValue];
     }
   return self;
 }
