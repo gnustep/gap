@@ -1,5 +1,10 @@
 2012-09-23 Riccardo Mottola <rm@gnu.org>
 
+	* GRDrawableObject.m
+	Init also with visible and locked properties.
+
+2012-09-23 Riccardo Mottola <rm@gnu.org>
+
 	* GRTextEditor.m
 	* GRTextEditorView.h
 	* GRTextEditorView.m
