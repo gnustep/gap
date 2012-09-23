@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditorView.h
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2012 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -28,8 +28,10 @@
 
 @interface GRTextEditorView : NSView
 {
-    NSView *controlsView;
-    NSScrollView *scrollView;
+  NSView *controlsView;
+  NSScrollView *scrollView;
+  NSTextField *fontField;
+  NSButton *chooseFontButton;
     NSPopUpButton *fontsPopUp;
     NSTextField *sizeField;
     NSText *theText;
@@ -46,13 +48,11 @@
          withString:(NSString *)string
          attributes:(NSDictionary *)attributes;
 
-- (void)makeFontsPopUp:(NSString *)selFontName;
+- (void)setFirstResponder;
 
 - (void)changeTextAlignment:(id)sender;
 
-- (void)changeTextFont:(id)sender;
-
-- (void)sizeFieldDidEndEditing:(NSNotification *)notification;
+- (void) updateFontPreview:(NSTextField *)previewField :(NSFont *)font;
 
 - (void)okCancelPressed:(id)sender;
 

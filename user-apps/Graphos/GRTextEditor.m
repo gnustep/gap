@@ -66,19 +66,20 @@
       withString:(NSString *)string
       attributes:(NSDictionary *)attributes
 {
-        if (myView == nil)
-        {
-            myView = [[GRTextEditorView alloc] initWithFrame: [myWindow frame] withString: string attributes: attributes];
-            [myWindow setContentView: myView];
-        }
-        [myWindow center];
+  if (myView == nil)
+    {
+      myView = [[GRTextEditorView alloc] initWithFrame: [myWindow frame] withString: string attributes: attributes];
+      [myWindow setContentView: myView];
+    }
+  [myWindow center];
 }
 
 - (int) runModal
 {
-    NSApplication *app = [NSApplication sharedApplication];
-    [app runModalForWindow: myWindow];
-    return [myView result];
+  NSApplication *app = [NSApplication sharedApplication];
+  [myView setFirstResponder];
+  [app runModalForWindow: myWindow];
+  return [myView result];
 }
 
 - (void)dealloc
