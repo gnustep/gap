@@ -32,29 +32,29 @@
          withString:(NSString *)string
          attributes:(NSDictionary *)attributes
 {
-    NSString *firstStr;
-    NSFont *f;
-    NSString *fname = nil;
-    NSParagraphStyle *pstyle;
+  NSString *firstStr;
+  NSFont *f;
+  NSString *fname = nil;
+  NSParagraphStyle *pstyle;
+  
 
-
-    self = [super initWithFrame: frameRect];
-    if(self)
+  self = [super initWithFrame: frameRect];
+  if(self)
     {
-        controlsView = [[NSView alloc] initWithFrame: NSMakeRect(0, 260, 500, 40)];
-        [controlsView setAutoresizingMask: ~NSViewMaxYMargin & ~NSViewHeightSizable];
+      controlsView = [[NSView alloc] initWithFrame: NSMakeRect(0, 270, 500, 40)];
+      [controlsView setAutoresizingMask: ~NSViewMaxYMargin & ~NSViewHeightSizable];
 
-        fontsPopUp = [[NSPopUpButton alloc] initWithFrame: NSMakeRect(10, 10, 160, 20) pullsDown: NO];
-        [fontsPopUp setBordered: YES];
-        [fontsPopUp setTarget: self];
-        [fontsPopUp setAction:@selector(changeTextFont:)];
-        [controlsView addSubview: fontsPopUp];
+      fontField = [[NSTextField alloc] initWithFrame: NSMakeRect(10, 10, 190, 26)];
+      [fontField setEditable:NO];
+      [controlsView addSubview: fontField];
 
-        sizeField = [[NSTextField alloc] initWithFrame: NSMakeRect(181, 10, 28, 20)];
-        [sizeField setAlignment: NSRightTextAlignment];
-        [controlsView addSubview: sizeField];
-
-        leftButt = [[NSButton alloc] initWithFrame: NSMakeRect(220, 10, 20, 20)];
+      chooseFontButton = [[NSButton alloc] initWithFrame: NSMakeRect(210, 10, 28, 20)];
+      [chooseFontButton setTitle:@"..."];
+      [chooseFontButton setTarget: self];
+      [chooseFontButton setAction: @selector(chooseFont:)];
+      [controlsView addSubview: chooseFontButton];
+      
+        leftButt = [[NSButton alloc] initWithFrame: NSMakeRect(255, 10, 20, 20)];
         [leftButt setButtonType: NSOnOffButton];
         [leftButt setImage: [NSImage imageNamed:@"txtAlignLeft.tiff"]];
         [leftButt setImagePosition: NSImageOnly];
@@ -62,7 +62,7 @@
         [leftButt setAction: @selector(changeTextAlignment:)];
         [controlsView addSubview: leftButt];
 
-        centerButt = [[NSButton alloc] initWithFrame: NSMakeRect(250, 10, 20, 20)];
+        centerButt = [[NSButton alloc] initWithFrame: NSMakeRect(285, 10, 20, 20)];
         [centerButt setButtonType: NSOnOffButton];
         [centerButt setImage: [NSImage imageNamed:@"txtAlignCenter.tiff"]];
         [centerButt setImagePosition: NSImageOnly];
@@ -70,7 +70,7 @@
         [centerButt setAction: @selector(changeTextAlignment:)];
         [controlsView addSubview: centerButt];
 
-        rightButt = [[NSButton alloc] initWithFrame: NSMakeRect(280, 10, 20, 20)];
+        rightButt = [[NSButton alloc] initWithFrame: NSMakeRect(315, 10, 20, 20)];
         [rightButt setButtonType: NSOnOffButton];
         [rightButt setImage: [NSImage imageNamed:@"txtAlignRight.tiff"]];
         [rightButt setImagePosition: NSImageOnly];
@@ -92,11 +92,13 @@
         [okButt setAction: @selector(okCancelPressed:)];
         [controlsView addSubview: okButt];
 
-        if(attributes) {
+        if(attributes)
+	  {
             firstStr = [NSString stringWithString: string];
             f = [attributes objectForKey: NSFontAttributeName];
             fname = [f fontName];
             fontSize = (int)[f pointSize];
+	    font = f;
             pstyle = [attributes objectForKey: NSParagraphStyleAttributeName];
             parSpace = [pstyle paragraphSpacing];
             textAlignment = [pstyle alignment];
@@ -107,15 +109,16 @@
             if(textAlignment == NSRightTextAlignment)
                 [rightButt setState: NSOnState];
 
-        } else {
+	  }
+	else
+	  {
             firstStr = [NSString stringWithString: @"New Text"];
             textAlignment = NSLeftTextAlignment;
             [leftButt setState: NSOnState];
             fontSize = 12;
+	    font = [NSFont systemFontOfSize:fontSize];
             parSpace = fontSize * 1.2;
         }
-
-        [sizeField setStringValue: [NSString stringWithFormat:@"%i", fontSize]];
 
         [self addSubview: controlsView];
 
@@ -127,16 +130,12 @@
         theText = [[NSText alloc] initWithFrame: NSMakeRect(20, 0, 480, 250)];
         [theText setAlignment: textAlignment];
         [theText setString: firstStr];
-        [self makeFontsPopUp: fname];
-
+	[self updateFontPreview:fontField :font];
         [scrollView setDocumentView: theText];
+	[theText setFont: font];
+	[theText setNeedsDisplay: YES];
 
         [self addSubview: scrollView];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(sizeFieldDidEndEditing:)
-                                                     name:@"NSControlTextDidEndEditingNotification" object:nil];
-
     }
     return self;
 }
@@ -148,37 +147,27 @@
     [rightButt release];
     [cancelButt release];
     [okButt release];
-    [sizeField release];
-    [fontsPopUp release];
+    [chooseFontButton release];
+    [fontField release];
     [controlsView release];
     [theText release];
     [scrollView release];
     [super dealloc];
 }
 
-
-- (void)makeFontsPopUp:(NSString *)selFontName
+/* we accept to be the first responder
+   we want to be the first responder to handle changeFont from the FontPanel
+*/
+- (BOOL)acceptsFirstResponder
 {
-    int i;
-    
-    // these just because we do it programmatically at the moment
-    NSFontManager *fontMgr;
-    NSArray *fontList;
-
-    fontMgr = [NSFontManager sharedFontManager];
-    fontList = [fontMgr availableFonts];
-
-    [fontsPopUp removeAllItems];
-    for(i = 0; i < [fontList count]; i++)
-    	[fontsPopUp addItemWithTitle: [fontList objectAtIndex: i]];
-
-    if(selFontName)
-        [fontsPopUp selectItemWithTitle: selFontName];
-
-    font = [NSFont fontWithName: [fontsPopUp titleOfSelectedItem] size: fontSize];
-    [theText setFont: font];
-    [theText setNeedsDisplay: YES];
+  return YES;
 }
+
+- (void)setFirstResponder
+{
+  [[self window] makeFirstResponder:self];
+}
+
 
 - (void)changeTextAlignment:(id)sender
 {
@@ -204,35 +193,54 @@
     [theText setNeedsDisplay: YES];
 }
 
-- (void)changeTextFont:(id)sender
+- (IBAction) chooseFont:(id)sender
 {
-    NSString *selFontName = [sender titleOfSelectedItem];
-    font = [NSFont fontWithName: selFontName size: fontSize];
-    parSpace = fontSize * 1.2;
-    [theText setFont: font];
-    [theText setNeedsDisplay: YES];
+  NSFontManager *fontMgr;
+
+  fontMgr = [NSFontManager sharedFontManager];
+
+  [fontMgr setSelectedFont: font  isMultiple:NO];
+  [fontMgr setAction:@selector(changeFontAction:)];
+  [fontMgr setDelegate:self];
+  [fontMgr orderFrontFontPanel: self];
 }
 
-- (void)sizeFieldDidEndEditing:(NSNotification *)aNotification
+- (void) changeFontAction:(id)sender
 {
-    int fsz;
-    NSString *selFontName;
+  NSFont *newFont;
 
-    if((NSTextField *)[aNotification object] == sizeField) {
-        fsz = [sizeField intValue];
-        if(fsz && fsz != fontSize) {
-            fontSize = fsz;
-            parSpace = fontSize * 1.2;
-            selFontName = [fontsPopUp titleOfSelectedItem];
-            font = [NSFont fontWithName: selFontName size: fontSize];
-            if (font != nil)
-            {
-              [theText setFont: font];
-              [theText setNeedsDisplay: YES];
-            }
-        }
+  newFont = [sender convertFont: [fontField font]];
+
+  if (newFont != nil)
+    {
+      [self updateFontPreview:fontField :newFont];
+      font = newFont;
+      [font pointSize];
+      parSpace = fontSize * 1.2;
+      [theText setFont: font];
+      [theText setNeedsDisplay: YES];
     }
 }
+
+- (void) updateFontPreview:(NSTextField *)previewField :(NSFont *)aFont
+{
+  NSString *fontName;
+
+  fontName = [aFont displayName];
+  if (fontName)
+    {
+      [fontField setFont:[NSFont fontWithName: fontName size:12.0]];
+      [previewField setStringValue: fontName];
+      font = aFont;
+    }
+  else
+    {
+      [fontField setFont:[NSFont systemFontOfSize: -1]];
+      [fontField setStringValue: @"(unset)"];
+    }
+
+}
+
 
 - (void)okCancelPressed:(id)sender
 {
