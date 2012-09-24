@@ -1,3 +1,9 @@
+2012-09-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRBox.m
+	Generate properties from description and use the
+	properties initializer.
+
 2012-09-23 Riccardo Mottola <rm@gnu.org>
 
 	* GRDrawableObject.m
