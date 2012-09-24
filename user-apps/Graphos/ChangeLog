@@ -1,6 +1,7 @@
 2012-09-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRBox.m
+	* GRCircle.m
 	Generate properties from description and use the
 	properties initializer.
 
