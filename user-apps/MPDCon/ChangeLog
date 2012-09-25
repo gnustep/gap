@@ -1,4 +1,10 @@
 2012-09-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* grant a little bit more space for the title in
+	  the lyrics inspector
+	* Make the buttons in the PlaylistViewer wider to show
+	  all the button text
+
+2012-09-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/Player.gorm
 	* Resources/SongInspector.gorm
 	* SongInspector.[h|m]
