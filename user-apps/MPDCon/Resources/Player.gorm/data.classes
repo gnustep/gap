@@ -18,7 +18,8 @@
 	    "showPlaylist:",
 	    "updateCollection:",
 	    "showCrossfade:",
-	    "showLyricsInspector:"
+	    "showLyricsInspector:",
+	    "showSongInspector:"
 	);
 	Outlets = (
 	    playButton,
@@ -42,8 +43,9 @@
     };
     FirstResponder = {
 	Actions = (
-	    "showLyricsInspector:",
-	    "setText:"
+	    "showSongInspector:",
+	    "setText:",
+	    "showLyricsInspector:"
 	);
 	Super = NSObject;
     };

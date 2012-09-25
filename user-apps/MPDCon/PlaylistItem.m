@@ -40,6 +40,11 @@
   RELEASE(genre);
   RELEASE(trackNr);
   RELEASE(path);
+  RELEASE(comment);
+  RELEASE(composer);
+  RELEASE(date);
+  RELEASE(performer);
+  RELEASE(disc);
 
   [super dealloc];
 }
@@ -101,6 +106,61 @@
 {
   AUTORELEASE(trackNr);
   trackNr = [newNr copy];
+}
+
+- (NSString *) getComment
+{
+  return comment;
+}
+
+- (void) setComment: (NSString *)newComment
+{
+  AUTORELEASE(comment);
+  comment = [newComment copy];
+}
+
+- (NSString *) getComposer
+{
+  return composer;
+}
+
+- (void) setComposer: (NSString *)newComposer
+{
+  AUTORELEASE(composer);
+  composer = [newComposer copy];
+}
+
+- (NSString *) getDate
+{
+  return date;
+}
+
+- (void) setDate: (NSString *)newDate
+{
+  AUTORELEASE(date);
+  date = [newDate copy];
+}
+
+- (NSString *) getPerformer
+{
+  return performer;
+}
+
+- (void) setPerformer: (NSString *)newPerformer
+{
+  AUTORELEASE(performer);
+  performer = [newPerformer copy];
+}
+
+- (NSString *) getDisc
+{
+  return disc;
+}
+
+- (void) setDisc: (NSString *)newDisc
+{
+  AUTORELEASE(disc);
+  disc = [newDisc copy];
 }
 
 - (int) getElapsedTime

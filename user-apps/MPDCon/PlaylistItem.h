@@ -37,6 +37,11 @@
   NSString *genre;
   NSString *trackNr;
   NSString *path;
+  NSString *comment;
+  NSString *date;
+  NSString *composer;
+  NSString *performer;
+  NSString *disc;
 
   int elapsedTime;
   int totalTime;
@@ -54,6 +59,16 @@
 - (void) setAlbum: (NSString *)newAlbum;
 - (NSString *) getGenre;
 - (void) setGenre: (NSString *)newGenre;
+- (NSString *) getComment;
+- (void) setComment: (NSString *)newComment; 
+- (NSString *) getDate;
+- (void) setDate: (NSString *) newDate;
+- (NSString *) getComposer;
+- (void) setComposer: (NSString *) newComposer;
+- (NSString *) getPerformer;
+- (void) setPerformer: (NSString *) newPerformer;
+- (NSString *) getDisc;
+- (void) setDisc: (NSString *) newDisc;
 - (NSString *) getTrackNr;
 - (void) setTrackNr: (NSString *)newNr;
 - (int) getElapsedTime;

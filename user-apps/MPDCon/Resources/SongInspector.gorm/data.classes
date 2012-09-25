@@ -1,0 +1,21 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    SongInspector = {
+	Actions = (
+	);
+	Outlets = (
+	    album,
+	    artist,
+	    composer,
+	    date,
+	    disc,
+	    genre,
+	    filename,
+	    comment,
+	    performer,
+	    title,
+	    track
+	);
+	Super = NSWindowController;
+    };
+}
