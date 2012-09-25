@@ -113,6 +113,17 @@
 
 }
 
+- (void) showSongInspector: (id)sender
+{
+  if (! connected)
+    {
+      return;
+    }
+
+  [[SongInspector sharedSongInspector] showWindow: sender];
+
+}
+
 
 - (void) showPlaylist: (id)sender
 {

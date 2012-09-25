@@ -1,3 +1,16 @@
+2012-09-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Resources/Player.gorm
+	* Resources/SongInspector.gorm
+	* SongInspector.[h|m]
+	* AppController.[h|m]
+	* GNUMakefile
+	* PlaylistItem.[h|m]
+	* MPDController.m
+	* Add an Inspector to see all details about the currently
+	  played song. PlaylistItem had to be enhanced to handle
+	  all available MPD tags. MPDController had to be enhanced
+	  to also set the new parameters of a PlaylistItem.
+
 2012-09-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/Player.gorm
 	* Resources/LyricsInspector.gorm

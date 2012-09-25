@@ -1031,6 +1031,11 @@ return nil;
   const char *songAlbum = mpd_song_get_tag(anSong,MPD_TAG_ALBUM,0);
   const char *songTrackNr = mpd_song_get_tag(anSong,MPD_TAG_TRACK,0);
   const char *songGenre = mpd_song_get_tag(anSong,MPD_TAG_GENRE,0);
+  const char *songDate = mpd_song_get_tag(anSong,MPD_TAG_DATE,0);
+  const char *songComposer = mpd_song_get_tag(anSong,MPD_TAG_COMPOSER,0);
+  const char *songPerformer = mpd_song_get_tag(anSong,MPD_TAG_PERFORMER,0);
+  const char *songDisc = mpd_song_get_tag(anSong,MPD_TAG_DISC,0);
+  const char *songComment = mpd_song_get_tag(anSong,MPD_TAG_COMMENT,0);
 
   plItem = [[PlaylistItem alloc] init];
 
@@ -1058,6 +1063,37 @@ return nil;
       [plItem setGenre: [NSString stringWithUTF8String: songGenre]];
   }
   
+  if (songDate == NULL) {
+      [plItem setDate: _(@"Unknown")];
+  } else {
+      [plItem setDate: [NSString stringWithUTF8String: songDate]];
+  }
+
+  if (songComposer == NULL) {
+      [plItem setComposer: _(@"No composer info available")];
+  } else {
+      [plItem setComposer: [NSString stringWithUTF8String: songComposer]];
+  }
+
+  if (songPerformer == NULL) {
+      [plItem setPerformer: _(@"No performer info available")];
+  } else {
+      [plItem setPerformer: [NSString stringWithUTF8String: songPerformer]];
+  }
+
+  if (songDisc == NULL) {
+      // if we don't know, we just assume its the first disc
+      [plItem setDisc: _(@"1")];
+  } else {
+      [plItem setDisc: [NSString stringWithUTF8String: songDisc]];
+  }
+
+  if (songComment == NULL) {
+      [plItem setComment: _(@"No Comment")];
+  } else {
+      [plItem setComment: [NSString stringWithUTF8String: songComment]];
+  }
+
   [plItem setPath: [NSString stringWithUTF8String: mpd_song_get_uri(anSong)]];
 
   if (songTrackNr == NULL) {
