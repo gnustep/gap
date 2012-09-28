@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2011 Riccardo Mottola
+ Copyright (C) 2005-2012 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -161,7 +161,7 @@
     isLink = NO;
     isDir = NO;
     size = 0;
-    modifDate = nil
+    modifDate = nil;
     
     whiteSet = [NSCharacterSet whitespaceCharacterSet];
     splitLine = [NSMutableArray arrayWithCapacity:5];
