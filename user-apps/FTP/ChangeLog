@@ -1,4 +1,9 @@
-2012-09-13 Riccardo Mottola <rm@ŋnu.org>
+2012-09-28 Riccardo Mottola <rm@gnu.org>
+
+	* fileElement.m:
+	Better parsing of sizes, set size of link always to 0.
+
+2012-09-13 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
 	Better runloop management during  progress and log updates.
