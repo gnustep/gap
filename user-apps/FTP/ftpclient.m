@@ -1146,7 +1146,7 @@ int getChar(streamStruct* ss)
 {
     int                ch;
     char               buff[MAX_DATA_BUFF];
-    int                readBytes;
+    unsigned           readBytes;
     enum               states_m1 { READ, GOTR };
     enum               states_m1 state;
     NSMutableArray     *listArr;
@@ -1154,6 +1154,7 @@ int getChar(streamStruct* ss)
     char               path[4096];
     NSMutableArray     *reply;
     int                replyCode;
+    unsigned long long transferSize;
     
     if (!connected)
         return nil;
@@ -1174,10 +1175,13 @@ int getChar(streamStruct* ss)
     [self initDataConn];
     [self writeLine:"LIST\r\n"];
     [self readReply:&reply];
+    NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
 
     if ([self initDataStream] < 0)
         return nil;
 
+    transferSize = 0;
+    [controller setTransferBegin:@"Listing" :transferSize];
     /* read the directory listing, each line being CR-LF terminated */
     state = READ;
     readBytes = 0;
@@ -1192,10 +1196,12 @@ int getChar(streamStruct* ss)
             fprintf(stderr, "%s\n", buff);
             [self logIt:[NSString stringWithCString:buff]];
             state = READ; /* reset the state for a new line */
+	    transferSize += readBytes;
             readBytes = 0;
             aFile = [[FileElement alloc] initWithLsLine:buff];
             if (aFile)
                 [listArr addObject:aFile];
+	    [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:transferSize]];
         } else
             buff[readBytes++] = ch;
     }
@@ -1207,6 +1213,7 @@ int getChar(streamStruct* ss)
          fprintf(stderr, "feof\n");
     } */
     [self closeDataStream];
+    [controller setTransferEnd:[NSNumber numberWithUnsignedLongLong:transferSize]];
 
     replyCode = [self readReply:&reply];
     
