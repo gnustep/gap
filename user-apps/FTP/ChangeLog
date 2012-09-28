@@ -1,5 +1,10 @@
 2012-09-28 Riccardo Mottola <rm@gnu.org>
 
+	* ftpclient.m
+	Get the final size filesize from the 150 response, if it is unknown.
+	
+2012-09-28 Riccardo Mottola <rm@gnu.org>
+
 	* fileElement.m:
 	Better parsing of sizes, set size of link always to 0.
 
