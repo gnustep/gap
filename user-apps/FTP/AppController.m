@@ -257,7 +257,7 @@
     {
         if (theView == localView)
         {
-            NSLog(@"should upload %@", thePath);
+            NSLog(@"should upload (dbl click) %@", thePath);
             [self performStoreFile];
         } else
         {
@@ -332,7 +332,7 @@
     while ((currEl = [elemEnum nextObject]) != nil)
     {
         fileEl = [localTableData elementAtIndex:[currEl intValue]];
-        NSLog(@"should upload: %@", [fileEl filename]);
+        NSLog(@"should upload (performStore): %@", [fileEl filename]);
         [ftp storeFile:fileEl from:local beingAt:0];
     }
 }

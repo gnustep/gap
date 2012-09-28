@@ -401,16 +401,12 @@ int getChar(streamStruct* ss)
     FILE               *localFileStream;
     int                bytesRead;
     NSMutableArray     *reply;
-    struct sockaddr    from;
-    int                fromLen;
     unsigned int       minimumPercentIncrement;
     unsigned int       progressIncBytes;
     int                replyCode;
     unsigned long long totalBytes;
     NSString           *localPath;
     BOOL               gotFile;
-
-    fromLen = sizeof(from);    
 
     fileName = [file filename];
     fileSize = [file size];
@@ -580,17 +576,12 @@ int getChar(streamStruct* ss)
     FILE               *localFileStream;
     NSMutableArray     *reply;
     int                bytesRead;
-    struct sockaddr    from;
-    int                fromLen;
     unsigned int       minimumPercentIncrement;
     unsigned int       progressIncBytes;
     int                replyCode;
     unsigned long long totalBytes;
     NSString           *localPath;
     BOOL               gotFile;
-
-    
-    fromLen = sizeof(from);
 
     fileName = [file filename];
     fileSize = [file size];
