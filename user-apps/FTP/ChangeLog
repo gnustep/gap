@@ -1,4 +1,9 @@
-2012-09-28 Riccardo Mottola <rm@gnu.org>
+2012-09-29 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Show progress while listing remotely.
+
+2012-09-29 Riccardo Mottola <rm@gnu.org>
 
 	* ftpclient.m
 	Remove useless statement.
@@ -7,7 +12,7 @@
 
 	* ftpclient.m
 	Get the final size filesize from the 150 response, if it is unknown.
-	
+
 2012-09-28 Riccardo Mottola <rm@gnu.org>
 
 	* fileElement.m:
