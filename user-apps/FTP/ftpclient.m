@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2010 Riccardo Mottola
+ Copyright (C) 2005-2012 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -475,11 +475,46 @@ int getChar(streamStruct* ss)
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
 
     if(replyCode != 150)
-    {
+      {
         [controller showAlertDialog:@"Unexpected server error."];
         NSLog(@"Unexpected condition in retrieve");
         return; /* we have an error or some unexpected condition */
-    }
+      }
+    else
+      {
+	NSString *s;
+	NSRange bytesR;
+
+	/* we try to parse the response which may look like this:
+	   150 Opening BINARY mode data connection for core.current.tar.bz2 (10867411 bytes)
+	   and extract the transfer size */
+	s = [reply objectAtIndex:0];
+	bytesR = [s rangeOfString:@" bytes"];
+	if (bytesR.location > 0)
+	  {
+	    NSRange leftParR;
+	    NSString *sizeString;
+	    long long tempLL;
+	    unsigned long long tempSize;
+
+	    NSLog(@"recognized a 150 response, looking for size in: %@", s);
+	    leftParR = [s rangeOfString:@"("];
+	    if (leftParR.location > 0)
+	      {
+		sizeString = [s substringWithRange:NSMakeRange(leftParR.location+1, bytesR.location-leftParR.location)];
+	        [[NSScanner scannerWithString: sizeString] scanLongLong:&tempLL];
+		NSLog(@"parsed response size from %@ is %lld", sizeString, tempLL);
+		if (tempLL > 0)
+		  {
+		    tempSize = (unsigned long long)tempLL;
+		    if (fileSize == 0)
+		      fileSize = tempSize;
+		    else if (fileSize != tempSize)
+		      NSLog(@"Apparently the server is lying! list size is: %llu, transfer size is: %lld", fileSize, tempSize);
+		  }
+	      }
+	  }
+      }
     [reply release];
     
     if ([self initDataStream] < 0)
