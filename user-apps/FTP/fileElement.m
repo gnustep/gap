@@ -144,7 +144,7 @@
     NSRange        tokenRange;
     BOOL           foundStandardMonth;
     BOOL           foundOneBeforeMonth;
-    
+    long long      tempLL;
 
     [super init];
 
@@ -160,6 +160,8 @@
     linkTargetName = nil;
     isLink = NO;
     isDir = NO;
+    size = 0;
+    modifDate = nil
     
     whiteSet = [NSCharacterSet whitespaceCharacterSet];
     splitLine = [NSMutableArray arrayWithCapacity:5];
@@ -282,7 +284,11 @@
             isDir = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
-            [[NSScanner scannerWithString: [splitLine objectAtIndex:4]] scanLongLong:(long long*)&size];
+            [[NSScanner scannerWithString: [splitLine objectAtIndex:4]] scanLongLong:&tempLL];
+	    if (tempLL > 0)
+	      size = (unsigned long long)tempLL;
+	    else
+	      size = 0;
 	    linkArrowRange = [[splitLine objectAtIndex:8] rangeOfString: @" -> "];
 	    if (linkArrowRange.location == NSNotFound)
 	      {
@@ -291,11 +297,13 @@
 	    else
 	      {
                 isLink = YES;
+		size = 0;
 		filename = [[[splitLine objectAtIndex:8] substringToIndex: linkArrowRange.location] retain];
 		linkTargetName = [[[splitLine objectAtIndex:8] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
-		NSLog(@"we have a link %@", linkTargetName);
+		NSLog(@"we have a link (1) %@", linkTargetName);
 	      }
-        } else if (foundOneBeforeMonth && elementsFound == 8)
+        }
+	else if (foundOneBeforeMonth && elementsFound == 8)
         {
 	  NSRange linkArrowRange;
 
@@ -303,7 +311,11 @@
             isDir = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
-            [[NSScanner scannerWithString: [splitLine objectAtIndex:3]] scanLongLong:(long long*)&size];
+            [[NSScanner scannerWithString: [splitLine objectAtIndex:3]] scanLongLong:&tempLL];
+	    if (tempLL > 0)
+	      size = (unsigned long long)tempLL;
+	    else
+	      size = 0;
             linkArrowRange = [[splitLine objectAtIndex:7] rangeOfString: @" -> "];
 	    if (linkArrowRange.location == NSNotFound)
 	      {
@@ -312,9 +324,10 @@
 	    else
 	      {
                 isLink = YES;
+		size = 0;
 		filename = [[[splitLine objectAtIndex:7] substringToIndex: linkArrowRange.location] retain];
 		linkTargetName = [[[splitLine objectAtIndex:7] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
-		NSLog(@"we have a link %@", linkTargetName);
+		NSLog(@"we have a link (2) %@", linkTargetName);
 	      }
         } else
             return nil;
@@ -386,7 +399,11 @@
 
     	// everything is fine and ok, we have a full-blown listing and parsed it well;            
         isDir = NO; /* OS400 is not hierarchical */
-        [[NSScanner scannerWithString: [splitLine objectAtIndex:1]] scanLongLong:(long long*)&size];
+        [[NSScanner scannerWithString: [splitLine objectAtIndex:1]] scanLongLong:&tempLL];
+	if (tempLL > 0)
+	  size = (unsigned long long)tempLL;
+	else
+	  size = 0;
         filename = [[splitLine objectAtIndex:5] retain];
 
     } else
@@ -401,6 +418,11 @@
     else if([filename isEqualToString:@".."])
         return nil;
 
+    if (isLink)
+      {
+	NSLog(@"size: %llu", size);
+	NSLog(@"filename: %@", filename);
+      }
     return self;
 }
 
