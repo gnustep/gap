@@ -3,6 +3,9 @@
 	* fileElement.m:
 	Better parsing of sizes, set size of link always to 0.
 
+	* ftpclient.m
+	If filesize is unknown, set progress bar to indeterminate.
+
 2012-09-13 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
