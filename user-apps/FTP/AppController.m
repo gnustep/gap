@@ -401,6 +401,12 @@
     gettimeofday(&beginTimeVal, NULL);
 #endif
     transferSize = size;
+    NSLog(@"begin transfer size: %llu", transferSize);
+    if (transferSize == 0)
+      {
+	[progBar setIndeterminate:YES];
+	[progBar startAnimation:nil];
+      }
     [mainWin displayIfNeeded];
 }
 
@@ -422,9 +428,13 @@
     gettimeofday(&currTimeVal, NULL);
 #endif
     speed = (float)((double)bytes / (double)(currTimeVal.tv_sec - beginTimeVal.tv_sec));
-    percent = ((double)bytes / (double)transferSize) * 100;
 
-    [progBar setDoubleValue:percent];
+    if (transferSize > 0)
+      {
+	percent = ((double)bytes / (double)transferSize) * 100;
+	[progBar setDoubleValue:percent];
+      }
+
     speedStr = [NSString alloc];
     if (speed < 1024)
         speedStr = [speedStr initWithFormat:@"%3.2fB/s", speed];
@@ -436,7 +446,8 @@
     [speedStr release];
 
     sizeStr = [NSString alloc];
-    if (transferSize < 1024)
+
+    if (transferSize < 1024 && transferSize != 0) /* except 0, which means unknown */
         sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f B", (float)bytes, (float)transferSize];
     else if (transferSize < 1024*1024)
         sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f KB", (double)bytes/1024, (double)transferSize/1024];
@@ -491,6 +502,11 @@
     [infoSize setStringValue:sizeStr];
     [sizeStr release];
     
+    if ([progBar isIndeterminate])
+      {
+	[progBar stopAnimation:nil];
+	[progBar setIndeterminate:NO];
+      }
     [progBar setDoubleValue:percent];
     [mainWin displayIfNeeded];
 }
