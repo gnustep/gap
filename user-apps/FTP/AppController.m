@@ -122,11 +122,11 @@
     [self updatePath :localPath :[local workDirSplit]];
     // #### and a release of this array ?!?
 	
-	// we set up distributed objects
+    // we set up distributed objects
     port1 = [NSPort port];
     port2 = [NSPort port];
     kitConnection = [[NSConnection alloc] initWithReceivePort:port1
-													 sendPort:port2];
+						     sendPort:port2];
     [kitConnection setRootObject:self];
 	
     /* Ports switched here. */
@@ -135,6 +135,8 @@
                              toTarget: [FtpClient class] 
                            withObject: portArray];
 
+    /* show the connection panel */
+    [connectPanel makeKeyAndOrderFront:self];
     return;
 }
 
