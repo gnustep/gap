@@ -197,6 +197,7 @@
     if ((dirList = [theClient dirContents]) == nil)
         return;
     [theTable initData:dirList];
+    [theView deselectAll:self];
     [theView reloadData];
     
     [self updatePath :sender :[theClient workDirSplit]];
@@ -247,16 +248,17 @@
     thePath = [NSString stringWithString:[theClient workingDir]];
     thePath = [thePath stringByAppendingPathComponent: [fileEl filename]];
     if ([fileEl isDir])
-    {
-        NSLog(@"should cd to %@", thePath);
+      {
         [theClient changeWorkingDir:thePath];
         if ((dirList = [theClient dirContents]) == nil)
             return;
         [theTable initData:dirList];
         [theView reloadData];
+	[theView deselectAll:self];
         [self updatePath :thePathMenu :[theClient workDirSplit]];
-    } else
-    {
+      }
+    else
+      {
         if (theView == localView)
         {
             NSLog(@"should upload (dbl click) %@", thePath);
