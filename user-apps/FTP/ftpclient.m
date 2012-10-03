@@ -55,7 +55,7 @@
 #define MAX_CONTROL_BUFF 2048
 #define MAX_DATA_BUFF 2048
 
-#if defined(__linux__)
+#if defined(__linux__) || defined (__FreeBSD__)
 #define socklentype socklen_t
 #else
 #define socklentype int
@@ -1174,8 +1174,7 @@ int getChar(streamStruct* ss)
     
     [self initDataConn];
     [self writeLine:"LIST\r\n"];
-    [self readReply:&reply];
-    NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
+    replyCode = [self readReply:&reply];
 
     if ([self initDataStream] < 0)
         return nil;
