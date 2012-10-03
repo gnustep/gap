@@ -598,7 +598,7 @@
     return;
 }
 
-- (IBAction)appendTextToLog:(NSString *)textChunk
+- (void)appendTextToLog:(NSString *)textChunk
 {
   NSAttributedString *attrStr;
     
