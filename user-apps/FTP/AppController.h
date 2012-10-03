@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2011 Riccardo Mottola
+   Copyright (C) 2005-2012 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -88,7 +88,7 @@
 - (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray;
 
 - (IBAction)changePathFromMenu:(id)sender;
-- (void)listDoubleClick:(id)sender;
+- (IBAction)listDoubleClick:(id)sender;
 - (IBAction)downloadButton:(id)sender;
 - (IBAction)uploadButton:(id)sender;
 - (IBAction)localDelete:(id)sender;

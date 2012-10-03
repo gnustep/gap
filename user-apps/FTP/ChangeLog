@@ -1,5 +1,11 @@
 2012-10-03 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.h
+	* AppController.m
+	Fix warnings.
+
+2012-10-03 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.m:
 	Clear selection on path change.
 
