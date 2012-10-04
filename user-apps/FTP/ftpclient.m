@@ -716,15 +716,11 @@ int getChar(streamStruct* ss)
 - (void)deleteFile:(FileElement *)file beingAt:(int)depth
 {
     NSString           *fileName;
-    NSString           *localPath;
-    NSFileManager      *fm;
     char               command[MAX_CONTROL_BUFF];
     NSMutableArray     *reply;
     int                replyCode;
 
-    fm = [NSFileManager defaultManager];
     fileName = [file filename];
-    localPath = [[self workingDir] stringByAppendingPathComponent:fileName];
 
     if ([file isDir])
     {
