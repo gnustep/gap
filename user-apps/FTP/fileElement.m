@@ -40,18 +40,19 @@
  */
 - (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs
 {
-    [super init];
-
-    size = [attribs fileSize];
-    modifDate = [[attribs objectForKey:NSFileModificationDate] retain];
-    if ([attribs fileType] == NSFileTypeDirectory)
+  self = [super init];
+  if (self)
+    {
+      size = [attribs fileSize];
+      modifDate = [[attribs objectForKey:NSFileModificationDate] retain];
+      if ([attribs fileType] == NSFileTypeDirectory)
         isDir = YES;
-    else
+      else
         isDir = NO;
-    isLink = NO;
-    filename = [fname retain];
-    
-    return self;
+      isLink = NO;
+      filename = [fname retain];
+    }
+  return self;
 }
 
 /* as a parser aid, check if a string is a month */
@@ -133,23 +134,24 @@
  */
 - (id)initWithLsLine :(char *)line
 {
-    NSString       *fullLine;
-    NSMutableArray *splitLine;
-    unichar        ch;
-    unsigned       elementsFound;
-    NSCharacterSet *whiteSet;
-    unsigned       lineLen;
-    NSRange        searchRange;
-    NSRange        tokenEnd;
-    NSRange        tokenRange;
-    BOOL           foundStandardMonth;
-    BOOL           foundOneBeforeMonth;
-    long long      tempLL;
-
-    [super init];
-
-    // typical Unix end of listing
-    if (strstr(line, "total") == line)
+  NSString       *fullLine;
+  NSMutableArray *splitLine;
+  unichar        ch;
+  unsigned       elementsFound;
+  NSCharacterSet *whiteSet;
+  unsigned       lineLen;
+  NSRange        searchRange;
+  NSRange        tokenEnd;
+  NSRange        tokenRange;
+  BOOL           foundStandardMonth;
+  BOOL           foundOneBeforeMonth;
+  long long      tempLL;
+  
+  self = [super init];
+  if (self)
+    {
+      // typical Unix end of listing
+      if (strstr(line, "total") == line)
         return nil;
     
     // typical IBM OS400 end of listing
@@ -423,7 +425,8 @@
 	NSLog(@"size: %llu", size);
 	NSLog(@"filename: %@", filename);
       }
-    return self;
+    }
+  return self;
 }
 
 /* accessors */
