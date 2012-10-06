@@ -258,11 +258,12 @@
 
   [fontMgr setSelectedFont: [fontField font]  isMultiple:NO];
   [fontMgr setDelegate:self];
+  [fontMgr setAction:@selector(changeFontAction:)];
   [prefPanel endEditingFor:nil]; /* Mac needs this */
   [fontMgr orderFrontFontPanel: self];
 }
 
-- (void) changeFont:(id)sender
+- (void) changeFontAction:(id)sender
 {
   NSTextField *fontField;
   NSFont *newFont;
