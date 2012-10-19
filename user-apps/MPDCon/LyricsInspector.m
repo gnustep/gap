@@ -232,12 +232,21 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
   
   url = [NSURL URLWithString:requestURL];
   result = [NSData dataWithContentsOfURL:url];
-  parser = [[[NSXMLParser alloc] initWithData:result] autorelease];
-  [parser setShouldProcessNamespaces:NO];
-  [parser setShouldReportNamespacePrefixes:NO];
-  [parser setShouldResolveExternalEntities:NO];
-  [parser setDelegate:self];
-  [parser parse];
+  if (result)
+    {
+      parser = [[[NSXMLParser alloc] initWithData:result] autorelease];
+      [parser setShouldProcessNamespaces:NO];
+      [parser setShouldReportNamespacePrefixes:NO];
+      [parser setShouldResolveExternalEntities:NO];
+      [parser setDelegate:self];
+      [parser parse];
+    } 
+  else
+    {
+      [lyricsText setStringValue: @"unable to connect to lyrics.wikia.com"];
+      lyricsURL = [@"http://lyrics.wikia.com" copy];
+    }
+
 }
 
 /* NSXMLParser delegate methods */
