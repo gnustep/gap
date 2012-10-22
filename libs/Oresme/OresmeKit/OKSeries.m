@@ -41,7 +41,7 @@
   return self;
 }
 
--(void)release
+-(void)dealloc
 {
   [description release];
   [title release];
