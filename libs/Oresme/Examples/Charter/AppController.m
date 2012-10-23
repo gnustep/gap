@@ -53,6 +53,7 @@
   NSLog(@"removed series");
   series1 = [[OKSeries alloc] init];
   [chartView addSeries: series1];
+  [series1 release];
   if ([[sender selectedItem] tag] == 0)
     {
       [series1 setColor: [NSColor blueColor]];
@@ -70,6 +71,7 @@
       series2 = [[OKSeries alloc] init];
       [series2 setColor: [NSColor greenColor]];
       [chartView addSeries: series2];
+      [series2 release];
       for (i = 0; i < 6; i++)
 	{
 	  v1 = pow(i, 1.5);
@@ -79,9 +81,7 @@
 	  [series2 addObject: [NSNumber numberWithFloat: v2]];
 	}
       NSLog(@"series 1 calculated");
-      //      [series2 release];
     }
-  //   [series1 release]; FIXME: why can't it be released?
   NSLog(@"redisplay");
   [chartView setNeedsDisplay: YES];
 }
