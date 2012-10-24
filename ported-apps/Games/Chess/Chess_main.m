@@ -46,7 +46,7 @@
 
 #import <AppKit/AppKit.h>
 
-void main(int argc, char *argv[]) 
+int main(int argc, char *argv[]) 
 {
     return NSApplicationMain(argc, argv);
 }
