@@ -56,12 +56,16 @@
 #import "Chess.h"	// NSApp
 
 /* UNIX/C functions */
-#import <stdio.h>	// fopen, fclose, fprintf, fscanf
-#import <signal.h>	// signal
-#import <time.h>	// time
-#import <math.h>	// floor
-#import <libc.h>	// getuid, usleep
-#import <pwd.h>		// getpwuid, passwd
+#include <stdio.h>	// fopen, fclose, fprintf, fscanf
+#include <signal.h>	// signal
+#include <time.h>	// time
+#include <math.h>	// floor
+#ifdef __APPLE__
+#include <libc.h>	// getuid, usleep
+#else
+#include <unistd.h>
+#endif
+#include <pwd.h>		// getpwuid, passwd
 
 #ifdef PROFILE
 #import <libc.h>	// times, tms
