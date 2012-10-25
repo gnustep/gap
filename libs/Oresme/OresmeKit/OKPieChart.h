@@ -1,11 +1,11 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2012 Free Software Foundation
 
-   Author: multix
+   Author: Riccardo Mottola
 
-   Created: 2011-09-08 17:16:23 +0200 by multix
+   Created: 2012-10-25 23:01:18 +0200 by multix
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,8 +22,16 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#import <OresmeKit/OKCartesius.h>
-#import <OresmeKit/OKChart.h>
-#import <OresmeKit/OKSeries.h>
-#import <OresmeKit/OKLineChart.h>
-#import <OresmeKit/OKPieChart.h>
+#import <Foundation/Foundation.h>
+
+#import "OKChart.h"
+
+@interface OKPieChart : OKChart
+{
+
+}
+
+@end
+
+
+

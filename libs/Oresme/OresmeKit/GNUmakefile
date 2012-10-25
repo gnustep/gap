@@ -28,7 +28,8 @@ OKCartesius.h \
 OKChart.h \
 OKSeries.h \
 OKLineChart.h \
-OresmeKit.h 
+OresmeKit.h \
+OKPieChart.h 
 
 #
 # Class files
@@ -37,7 +38,8 @@ OresmeKit_OBJC_FILES = \
 OKCartesius.m \
 OKChart.m \
 OKSeries.m \
-OKLineChart.m
+OKLineChart.m \
+OKPieChart.m
 
 #
 # Makefiles
