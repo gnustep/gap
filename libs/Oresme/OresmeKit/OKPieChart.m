@@ -37,6 +37,10 @@
   float availableWidth;
   float radius;
   NSPoint center;
+  NSMutableArray *valuesArray;
+  NSMutableArray *colorsArray;
+  double positiveSum;
+  float currAngle;
 
   /* the super method will have calculated the limits */
   [super drawRect: rect];
@@ -50,15 +54,54 @@
   center = NSMakePoint(boundsRect.size.width / 2, boundsRect.size.height / 2);
 
   NSLog(@"draw Pie chart! radius: %f", radius);
-  [axisColor set];
-  NSBezierPath *path;
-  path = [[NSBezierPath alloc] init];
 
-  [path appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
+  /* we scan all series to construct the an arrays of values by considering only positive values
+     the respective color gets extracted and the total is calculated */
+  positiveSum = 0;
+  valuesArray = [[NSMutableArray alloc] initWithCapacity:[seriesArray count]];
+  colorsArray = [[NSMutableArray alloc] initWithCapacity:[seriesArray count]];
+  for (i = 0; i < [seriesArray count]; i++)
+    {
+      OKSeries *series;
 
-  [path stroke];
+      series = [seriesArray objectAtIndex: i];
+      if ([series count] > 0)
+	{
+	  double v;
 
-  [path release];
+	  v = [[series objectAtIndex:0] doubleValue];
+	  if (v > 0)
+	    {
+	      positiveSum += v;
+	      [colorsArray addObject:[series color]];
+	      [valuesArray addObject:[series objectAtIndex:0]];
+	    }
+
+	}
+    }
+
+  currAngle = 0;
+  for (i = 0; i < [valuesArray count]; i++)
+    {
+      NSBezierPath *path;
+      double v;
+      float angle;
+
+
+      path = [[NSBezierPath alloc] init];
+      v = [[valuesArray objectAtIndex:i] doubleValue];
+
+      /* alpha : 360 = value : total */
+      angle = (v * 360.0) / positiveSum;
+
+      [[colorsArray objectAtIndex:i] set];
+      [path appendBezierPathWithArcWithCenter:center radius:radius startAngle:currAngle endAngle:currAngle+angle];
+      currAngle += angle;
+      
+      [path stroke];
+      
+      [path release];
+    }
 }
 
 @end
