@@ -29,10 +29,12 @@
 {
   IBOutlet OKChart *chartView;
   IBOutlet NSPopUpButton *plot;
+  IBOutlet NSPopUpButton *chartType;
 }
 
 
 - (IBAction)changePlot:(id)sender;
+- (IBAction)changeChartType:(id)sender;
 - (IBAction)changeBackgroundColor: (id)sender;
 - (IBAction)changeSeries1Color: (id)sender;
 - (IBAction)changeSeries2Color: (id)sender;
