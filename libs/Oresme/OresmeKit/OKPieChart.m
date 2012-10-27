@@ -25,6 +25,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSBezierPath.h>
 
+#import "OKSeries.h"
 #import "OKPieChart.h"
 
 @implementation OKPieChart
