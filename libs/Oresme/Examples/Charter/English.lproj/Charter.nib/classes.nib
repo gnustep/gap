@@ -3,13 +3,14 @@
         {
             ACTIONS = {
                 changeBackgroundColor = id; 
+                changeChartType = id; 
                 changePlot = id; 
                 changeSeries1Color = id; 
                 changeSeries2Color = id; 
             }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {chartView = OKChart; plot = NSPopUpButton; }; 
+            OUTLETS = {chartType = NSPopUpButton; chartView = OKChart; plot = NSPopUpButton; }; 
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
