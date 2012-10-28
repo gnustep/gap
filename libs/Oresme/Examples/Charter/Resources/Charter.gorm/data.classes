@@ -2,20 +2,30 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
+	    "setAxisColor:",
+	    "setBackgroundColor:",
 	    "changePlot:",
-	    "changeBackgroundColor:"
+	    "changeChartType:",
+	    "changeSeries1Color:",
+	    "changeSeries2Color:"
 	);
 	Outlets = (
 	    chartView,
-	    plot
+	    plot,
+	    chartType
 	);
 	Super = NSObject;
     };
     FirstResponder = {
 	Actions = (
 	    "changeBackgroundColor:",
+	    "changeChartType:",
 	    "changePlot:",
+	    "changeSeries1Color:",
+	    "changeSeries2Color:",
 	    "orderFrontFontPanel:",
+	    "setAxisColor:",
+	    "setBackgroundColor:",
 	    "showPrefPanel:"
 	);
 	Super = NSObject;
