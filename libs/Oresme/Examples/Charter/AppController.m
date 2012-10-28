@@ -133,10 +133,17 @@
   
 }
 
-- (IBAction) changeBackgroundColor: (id)sender
+- (IBAction)setAxisColor: (id)sender;
 {
- [chartView setBackgroundColor: [sender color]];
- [chartView setNeedsDisplay: YES];
+  [chartView setAxisColor:[sender color]];
+  [chartView setNeedsDisplay:YES];
+}
+
+
+- (IBAction)setBackgroundColor: (id)sender;
+{
+  [chartView setBackgroundColor:[sender color]];
+  [chartView setNeedsDisplay:YES];
 }
 
 - (IBAction) changeSeries1Color: (id)sender
