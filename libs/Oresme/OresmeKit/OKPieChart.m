@@ -96,16 +96,25 @@
       angle = (v * 360.0) / positiveSum;
 
       [[colorsArray objectAtIndex:i] set];
-      [path appendBezierPathWithArcWithCenter:center radius:radius startAngle:currAngle endAngle:currAngle+angle];
-      [path moveToPoint: center];
-      [path lineToPoint: NSMakePoint(center.x + cos(currAngle*6.2831853/360)*radius, center.y + sin(currAngle*6.2831853/360)*radius)];
 
       [path moveToPoint: center];
+      [path lineToPoint: NSMakePoint(center.x + cos(currAngle*6.2831853/360)*radius, center.y + sin(currAngle*6.2831853/360)*radius)];
+      [path appendBezierPathWithArcWithCenter:center radius:radius startAngle:currAngle endAngle:currAngle+angle];
+      [path moveToPoint: center];
       [path lineToPoint: NSMakePoint(center.x + cos((currAngle+angle)*6.2831853/360)*radius, center.y + sin((currAngle+angle)*6.2831853/360)*radius)];
-      currAngle += angle;
-      
+      [path closePath];      
+      [path fill];
+
+      [axisColor set];
+      [path moveToPoint: center];
+      [path lineToPoint: NSMakePoint(center.x + cos(currAngle*6.2831853/360)*radius, center.y + sin(currAngle*6.2831853/360)*radius)];
+      [path appendBezierPathWithArcWithCenter:center radius:radius startAngle:currAngle endAngle:currAngle+angle];
+      [path moveToPoint: center];
+      [path lineToPoint: NSMakePoint(center.x + cos((currAngle+angle)*6.2831853/360)*radius, center.y + sin((currAngle+angle)*6.2831853/360)*radius)];
+      [path closePath];      
       [path stroke];
       
+      currAngle += angle;
       [path release];
     }
 }
