@@ -26,7 +26,10 @@
 
 
 #import <Foundation/Foundation.h>
+#import <AppKit/NSColor.h>
 #import <AppKit/NSView.h>
+#import <AppKit/NSNibDeclarations.h>
+
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
 #define NSUInteger unsigned
@@ -45,7 +48,8 @@
   float graphMaxXVal;
 }
 
-- (void)setBackgroundColor:(NSColor *)color;
+- (IBAction)setAxisColor:(NSColor *)color;
+- (IBAction)setBackgroundColor:(NSColor *)color;
 - (NSUInteger)seriesCount;
 - (OKSeries *)seriesAtIndex:(NSUInteger)index;
 - (void)addSeries: (OKSeries *)series;

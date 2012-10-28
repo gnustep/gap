@@ -25,7 +25,6 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/NSColor.h>
 #import <AppKit/NSBezierPath.h>
 
 #import "OKChart.h"
@@ -98,8 +97,15 @@
   NSLog(@"end super draw");
 }
 
+/** Sets the chart axis and lines color */
+-(IBAction)setAxisColor:(NSColor *)color
+{
+  [axisColor release];
+  axisColor = [color retain];
+}
+
 /** Sets the graph background color */
--(void)setBackgroundColor:(NSColor *)color
+-(IBAction)setBackgroundColor:(NSColor *)color
 {
   [backgroundColor release];
   backgroundColor = [color retain];
