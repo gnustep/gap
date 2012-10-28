@@ -2,11 +2,12 @@
     IBClasses = (
         {
             ACTIONS = {
-                changeBackgroundColor = id; 
                 changeChartType = id; 
                 changePlot = id; 
                 changeSeries1Color = id; 
                 changeSeries2Color = id; 
+                setAxisColor = id; 
+                setBackgroundColor = id; 
             }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
@@ -14,7 +15,12 @@
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = OKChart; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+        {
+            ACTIONS = {setAxisColor = id; setBackgroundColor = id; }; 
+            CLASS = OKChart; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSView; 
+        }
     ); 
     IBVersion = 1; 
 }
