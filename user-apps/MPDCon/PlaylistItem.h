@@ -45,6 +45,7 @@
 
   int elapsedTime;
   int totalTime;
+  NSUInteger rating;
   
   int ID;
   int pos;
@@ -81,6 +82,8 @@
 - (int) getID;
 - (void) setPos: (int) newPos;
 - (int) getPos;
+- (void) setRating: (NSUInteger)newRating;
+- (NSUInteger) getRating;
 @end
 
 #endif

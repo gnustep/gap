@@ -1,3 +1,18 @@
+2012-10-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GNUmakefile
+	* PlaylistController.h
+	* PlaylistController.m
+	* PlaylistItem.h
+	* PlaylistItem.m
+	* SongRatingCell.h
+	* SongRatingCell.m
+	* MPDCon.pcproj/PC.project
+	* Resources/Star.tiff 
+	* Add Rating of songs in the PlaylistViewer, still
+	  with some NSLog output, and still not 100%
+        * while there, some int -> NS(U)Integer conversions
+
+
 2012-10-19: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* LyricsInspector.m When the server is not reachable
 	  tell the user about it in the inspector.

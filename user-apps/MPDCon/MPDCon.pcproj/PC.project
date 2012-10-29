@@ -29,7 +29,8 @@
 	"BoldFormatter.m",
 	"NormalFormatter.m",
 	"LyricsInspector.m",
-	"SongInspector.m"
+	"SongInspector.m",
+	"SongRatingCell.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -58,7 +59,8 @@
 	"BoldFormatter.h",
 	"NormalFormatter.h",
 	"LyricsInspector.h",
-	"SongInspector.h"
+	"SongInspector.h",
+	"SongRatingCell.h"
     );
     IMAGES = (
 	"Play.tiff",
@@ -73,7 +75,8 @@
 	"Crossfade.tiff",
 	"MPDCon.tiff",
 	"MoveSong.tiff",
-	"Current.tiff"
+	"Current.tiff",
+	"Star.tiff"
     );
     INSTALLDIR = "$(HOME)";
     INTERFACES = (

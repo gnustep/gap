@@ -26,6 +26,125 @@
 
 #include "PlaylistItem.h"
 
+@interface PlaylistItem(Private)
+static NSString* SongRatingStorageDirectory = nil;
+-(NSString *)_getSongRatingsFileName;
+-(NSDictionary *)_loadRatings;
+-(NSUInteger)_getRatingForPlaylistItemWithPath:(NSString *)_path;
+-(void)_saveRating: (NSUInteger) _rating forPlaylistItemWithPath:(NSString *)_path;
+@end
+
+@implementation PlaylistItem(Private)
+-(NSString *)_getSongRatingsFileName
+{
+  if (SongRatingStorageDirectory == nil)
+    { 
+      NSFileManager* manager;
+      BOOL isDir, exists;
+      NSString *storagePath;
+
+      storagePath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+      storagePath = [storagePath stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
+      storagePath = [NSString stringWithFormat:@"%@", storagePath]; 
+
+      ASSIGN(SongRatingStorageDirectory, storagePath);
+
+      manager = [NSFileManager defaultManager];
+
+      exists = [manager fileExistsAtPath: SongRatingStorageDirectory isDirectory: &isDir];
+
+      if (exists)
+	{
+	  if (isDir == NO)
+	    {
+              [[NSException exceptionWithName: @"SongRatingsStorageDirectoryIsNotADirectory"	
+	                               reason:@"The storage directory for song ratings is not a directory."
+			             userInfo: nil] raise];
+	    }
+        }
+      else
+        {
+	  if ([manager createDirectoryAtPath: SongRatingStorageDirectory
+	  			  attributes: nil] == NO)
+	    {
+	      [[NSException exceptionWithName: @"SongRatingsStorageDirectoryCreationFailed"
+				       reason: @"Creation of the storage directory for song ratings failed."
+				     userInfo: nil] raise];
+	    }
+
+        }
+    }  
+  return [NSString stringWithFormat:@"%@/SongRatings.plist", SongRatingStorageDirectory];
+}
+
+-(NSDictionary *)_loadRatings
+{
+  NSString *errorDesc = nil;
+  NSString *songRatingsFileName;
+  NSPropertyListFormat format;
+
+  songRatingsFileName = [self _getSongRatingsFileName];
+
+  if (![[NSFileManager defaultManager] fileExistsAtPath:songRatingsFileName])
+    {
+      // there are no ratings saved yet
+NSLog(@"_loadRatings: No ratings in songRatingsFileName: %@ YET, returning 0", songRatingsFileName);
+      return 0;
+
+    }
+
+  NSData *songRatingsXML = [[NSFileManager defaultManager] contentsAtPath:songRatingsFileName];
+  NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
+                        propertyListFromData:songRatingsXML
+                            mutabilityOption:NSPropertyListMutableContainersAndLeaves
+                                      format:&format
+                            errorDescription:&errorDesc];
+  if (!temp)
+    {
+      NSLog(@"Error reading song ratings: %@, format: %d", errorDesc, format);
+    } 
+
+  return temp;
+}
+
+-(NSUInteger)_getRatingForPlaylistItemWithPath:(NSString *)_path
+{
+  NSDictionary *ratings;
+NSLog(@"_getRatingForPlaylistItemWithPath: %@", _path);
+  ratings = [self _loadRatings];
+
+  return [[ratings objectForKey:_path] unsignedIntegerValue];
+}
+
+-(void)_saveRating: (NSUInteger) _rating forPlaylistItemWithPath:(NSString *)_path
+{
+  NSMutableDictionary *ratings;
+  NSString *error;
+  NSString *songRatingsFileName;
+NSLog(@"_saveRating: %i forPlaylistItemWithPath: %@", _rating, _path);
+  ratings = [[NSMutableDictionary alloc] init];
+  [ratings addEntriesFromDictionary:[self _loadRatings]];
+  [ratings setObject: [NSNumber numberWithUnsignedInteger:_rating] forKey: _path];
+
+  songRatingsFileName = [self _getSongRatingsFileName];
+
+  NSData *ratingsData = [NSPropertyListSerialization dataFromPropertyList:ratings
+					format:NSPropertyListXMLFormat_v1_0
+					errorDescription:&error];
+
+  if (ratingsData)
+    {
+       [ratingsData writeToFile:songRatingsFileName atomically:YES];
+    }
+  else
+    {
+      NSLog(@"%@", error);
+      [error release];
+    }
+}
+
+@end
+
 @implementation PlaylistItem
 
 /* --------------------------
@@ -194,6 +313,20 @@
   path = [newPath copy];
 }
 
+- (void) setRating: (NSUInteger)newRating
+{
+NSLog(@"The Rating is set!!!");
+  [self _saveRating: newRating forPlaylistItemWithPath:path];
+  rating = newRating;
+}
+
+- (NSUInteger) getRating
+{
+
+NSLog(@"getRating");
+  return [self _getRatingForPlaylistItemWithPath:path];
+}
+ 
 - (void) setID: (int) newID
 {
   ID = newID;

@@ -45,6 +45,7 @@ Resources/Crossfade.tiff \
 Resources/MPDCon.tiff \
 Resources/MoveSong.tiff \
 Resources/Current.tiff \
+Resources/Star.tiff \
 Resources/Install \
 Resources/COPYING 
 
@@ -70,7 +71,8 @@ BoldCell.h \
 BoldFormatter.h \
 NormalFormatter.h \
 LyricsInspector.h \
-SongInspector.h
+SongInspector.h \
+SongRatingCell.h
 
 #
 # Class files
@@ -92,7 +94,8 @@ BoldCell.m \
 BoldFormatter.m \
 NormalFormatter.m \
 LyricsInspector.m \
-SongInspector.m
+SongInspector.m \
+SongRatingCell.m
 
 #
 # Other sources

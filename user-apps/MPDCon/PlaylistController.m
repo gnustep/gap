@@ -26,6 +26,7 @@
 
 #include <AppKit/AppKit.h>
 #include "PlaylistController.h"
+#include "SongRatingCell.h"
 
 /* ---------------------
    - Private Interface -
@@ -75,6 +76,7 @@
 {
   RELEASE(playlist);
   RELEASE(playlistTimes);
+  RELEASE(ratingCol);
 
   [super dealloc];
 }
@@ -86,6 +88,10 @@
 - (void) awakeFromNib
 {
   NSNotificationCenter *defCenter;
+
+  SongRatingCell *ratingCell;
+
+  ASSIGN(ratingCol, [playlistTable tableColumnWithIdentifier: @"rating"]);
 
   [playlistTable setAutosaveName: @"PlaylistTable"];
   [playlistTable setAutosaveTableColumns: YES];
@@ -115,6 +121,9 @@
 	          object: nil];
 
   currentSong = [mpdController getCurrentSongNr];
+
+  ratingCell = [[SongRatingCell alloc] init];
+  [ratingCol setDataCell:ratingCell];
 
   [self playlistChanged: nil];  
 }
@@ -222,13 +231,13 @@
    - TableView dataSource Methods -
    --------------------------------*/
 
-- (int) numberOfRowsInTableView: (NSTableView *)tableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
     return [playlist count];
 }
 
 -          (id) tableView: (NSTableView *)tableView 
-objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
+objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
 {
   NSString *identifier;
 
@@ -275,7 +284,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 
 - (NSDragOperation) tableView: (NSTableView *)tv
 		 validateDrop: (id <NSDraggingInfo>)info
-		  proposedRow: (int)row
+		  proposedRow: (NSInteger)row
 	proposedDropOperation: (NSTableViewDropOperation)dropOperation
 {
   NSArray *typeArray;
@@ -306,7 +315,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 
 - (BOOL) tableView: (NSTableView *)tv
 	acceptDrop: (id <NSDraggingInfo>)info
-	       row: (int)row
+	       row: (NSInteger)row
      dropOperation: (NSTableViewDropOperation)dropOperation
 {
   NSPasteboard *pboard;
@@ -479,11 +488,11 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 
 - (void) _moveRows: (NSArray *)rows atRow: (int)row
 {
-  int i;
+  NSUInteger i;
 
-  int count = [rows count];
+  NSUInteger count = [rows count];
   
-  int ids[count];
+  NSUInteger ids[count];
   
   for (i = 0; i < count; i++) {
       ids[i] = [[playlist objectAtIndex: [[rows objectAtIndex: i] intValue]] getID];
@@ -501,7 +510,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 
 - (void) _addSongs: (NSArray *)songs atRow: (int)row
 {
-  int i;
+  NSUInteger i;
     
   for (i = 0; i < [songs count]; i++) {
       [mpdController addTrack: [songs objectAtIndex: i]];
@@ -512,7 +521,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
 - (void) _filterListByString: (NSString *) fString
 {
   NSMutableArray *tmpArray;
-  int i;
+  NSUInteger i;
   
   tmpArray = [[NSMutableArray alloc] init];
   
@@ -531,6 +540,26 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(int)row
   [playlist release];
   
   playlist = tmpArray;
+}
+
+-(void) tableView: (NSTableView*) aTableView
+   setObjectValue: (id) anObj
+   forTableColumn: (NSTableColumn*) aTableColumn
+              row: (NSInteger) rowIndex
+{
+    if (aTableColumn == ratingCol) {
+        id playlistItem;
+
+        /* We can't keep that as an assertion now, as it can easily fail when
+         * the broken GNUstep NSTableView lets you edit the string value for the cell.
+         */
+        if ([anObj isKindOfClass: [NSNumber class]] == NO) {
+            NSLog(@"Warning: %@ is not a number value.", anObj);
+        }
+
+        playlistItem = [playlist objectAtIndex: rowIndex];
+        [playlistItem setRating: [anObj integerValue]];
+    }
 }
       
 @end
