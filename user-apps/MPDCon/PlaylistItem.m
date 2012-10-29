@@ -120,7 +120,6 @@ NSString* _playlistItemPathToRatingKey( NSString* aString )
   if (![[NSFileManager defaultManager] fileExistsAtPath:songRatingsFileName])
     {
       // there are no ratings saved yet
-NSLog(@"_loadRatings: No ratings in songRatingsFileName: %@ YET, returning 0", songRatingsFileName);
       return 0;
 
     }
@@ -142,9 +141,7 @@ NSLog(@"_loadRatings: No ratings in songRatingsFileName: %@ YET, returning 0", s
 -(NSUInteger)_getRatingForPlaylistItemWithPath:(NSString *)_path
 {
   NSDictionary *ratings;
-NSLog(@"_getRatingForPlaylistItemWithPath: %@", _path);
   ratings = [self _loadRatings];
-NSLog(@"returning the rating: %i", [[ratings objectForKey:_playlistItemPathToRatingKey(_path)] unsignedIntegerValue]);
   return [[ratings objectForKey:_playlistItemPathToRatingKey(_path)] unsignedIntegerValue];
 }
 
@@ -153,7 +150,6 @@ NSLog(@"returning the rating: %i", [[ratings objectForKey:_playlistItemPathToRat
   NSMutableDictionary *ratings;
   NSString *error;
   NSString *songRatingsFileName;
-NSLog(@"_saveRating: %i forPlaylistItemWithPath: %@ (%@)", _rating, _path, _playlistItemPathToRatingKey(_path));
   ratings = [[NSMutableDictionary alloc] init];
   [ratings addEntriesFromDictionary:[self _loadRatings]];
   if (_rating == 0)
@@ -177,7 +173,7 @@ NSLog(@"_saveRating: %i forPlaylistItemWithPath: %@ (%@)", _rating, _path, _play
     }
   else
     {
-      NSLog(@"%@", error);
+      NSLog(@"Problem serializing song ratings property list: %@", error);
       [error release];
     }
 }
@@ -354,14 +350,12 @@ NSLog(@"_saveRating: %i forPlaylistItemWithPath: %@ (%@)", _rating, _path, _play
 
 - (void) setRating: (NSUInteger)newRating
 {
-NSLog(@"The Rating is set!!!");
   [self _saveRating: newRating forPlaylistItemWithPath:path];
   rating = newRating;
 }
 
 - (NSUInteger) getRating
 {
-NSLog(@"getRating");
   return [self _getRatingForPlaylistItemWithPath:path];
 }
  
