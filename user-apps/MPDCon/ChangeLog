@@ -14,7 +14,8 @@
 	* Add helper method to PlalistItem: _playlistItemPathToRatingKey
 	  stolen from RSSKit, and delete keys from the Ratings database
 	  when Rating gets set to 0
-
+	* Now that it seems to work as expected, remove NSLogs
+	  from SongRatingCell.m PlaylistItem.m
 
 2012-10-19: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* LyricsInspector.m When the server is not reachable
