@@ -47,6 +47,8 @@
 
   NSArray *playlist;
   NSMutableArray *playlistTimes;
+
+  NSTableColumn *ratingCol;
   
   int currentSong;
 }
@@ -67,21 +69,21 @@
 - (void) clearFilter: (id)sender;
 
 // TableView dataSource Methods
-- (int) numberOfRowsInTableView: (NSTableView *)tableView;
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView;
 
 -           (id) tableView: (NSTableView *)tableView 
  objectValueForTableColumn: (NSTableColumn *)tableColumn 
-                       row:(int) row;
+                       row:(NSInteger) row;
 
 // TableView dragging Methods
 - (NSDragOperation) tableView: (NSTableView *)tv 
                  validateDrop: (id <NSDraggingInfo>)info 
-                  proposedRow: (int)row 
+                  proposedRow: (NSInteger)row 
         proposedDropOperation: (NSTableViewDropOperation)dropOperation;
 
 - (BOOL) tableView: (NSTableView *)tv 
         acceptDrop: (id <NSDraggingInfo>)info 
-               row: (int)row 
+               row: (NSInteger)row 
      dropOperation: (NSTableViewDropOperation)dropOperation;
 
 - (BOOL) tableView: (NSTableView *)tv 
