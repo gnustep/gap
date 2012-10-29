@@ -11,6 +11,9 @@
 	* Add Rating of songs in the PlaylistViewer, still
 	  with some NSLog output, and still not 100%
         * while there, some int -> NS(U)Integer conversions
+	* Add helper method to PlalistItem: _playlistItemPathToRatingKey
+	  stolen from RSSKit, and delete keys from the Ratings database
+	  when Rating gets set to 0
 
 
 2012-10-19: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>

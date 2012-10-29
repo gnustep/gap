@@ -35,6 +35,38 @@ static NSString* SongRatingStorageDirectory = nil;
 @end
 
 @implementation PlaylistItem(Private)
+/**
+ * Converts a string to a string that's usable as a file system name. This is done
+ * by removing several forbidden characters, only leaving the allowed ones. (A helper method)
+ * The function is stolen from RSSKit
+ */
+NSString* _playlistItemPathToRatingKey( NSString* aString )
+{
+    NSScanner* scanner = [NSScanner scannerWithString: aString];
+    NSMutableString* string = AUTORELEASE([[NSMutableString alloc] init]);
+    NSCharacterSet* allowedSet = [NSCharacterSet alphanumericCharacterSet];
+
+    do {
+        NSString* nextPart;
+        BOOL success;
+
+        // discard any unknown characters
+        if ([scanner scanUpToCharactersFromSet: allowedSet intoString: NULL] == YES) {
+            [string appendString: @"_"];
+        } 
+        
+        // scan known characters...
+        success = [scanner scanCharactersFromSet: allowedSet intoString: &nextPart];
+
+        // ...and add them to the string
+        if (success == YES) {
+            [string appendString: nextPart];
+        } 
+    } while ([scanner isAtEnd] == NO);
+
+    return [NSString stringWithString: string];
+}
+
 -(NSString *)_getSongRatingsFileName
 {
   if (SongRatingStorageDirectory == nil)
@@ -112,8 +144,8 @@ NSLog(@"_loadRatings: No ratings in songRatingsFileName: %@ YET, returning 0", s
   NSDictionary *ratings;
 NSLog(@"_getRatingForPlaylistItemWithPath: %@", _path);
   ratings = [self _loadRatings];
-
-  return [[ratings objectForKey:_path] unsignedIntegerValue];
+NSLog(@"returning the rating: %i", [[ratings objectForKey:_playlistItemPathToRatingKey(_path)] unsignedIntegerValue]);
+  return [[ratings objectForKey:_playlistItemPathToRatingKey(_path)] unsignedIntegerValue];
 }
 
 -(void)_saveRating: (NSUInteger) _rating forPlaylistItemWithPath:(NSString *)_path
@@ -121,10 +153,17 @@ NSLog(@"_getRatingForPlaylistItemWithPath: %@", _path);
   NSMutableDictionary *ratings;
   NSString *error;
   NSString *songRatingsFileName;
-NSLog(@"_saveRating: %i forPlaylistItemWithPath: %@", _rating, _path);
+NSLog(@"_saveRating: %i forPlaylistItemWithPath: %@ (%@)", _rating, _path, _playlistItemPathToRatingKey(_path));
   ratings = [[NSMutableDictionary alloc] init];
   [ratings addEntriesFromDictionary:[self _loadRatings]];
-  [ratings setObject: [NSNumber numberWithUnsignedInteger:_rating] forKey: _path];
+  if (_rating == 0)
+    {
+      [ratings removeObjectForKey: _playlistItemPathToRatingKey(_path)];
+    }
+  else
+    {
+      [ratings setObject: [NSNumber numberWithUnsignedInteger:_rating] forKey: _playlistItemPathToRatingKey(_path)];
+    }
 
   songRatingsFileName = [self _getSongRatingsFileName];
 
@@ -322,7 +361,6 @@ NSLog(@"The Rating is set!!!");
 
 - (NSUInteger) getRating
 {
-
 NSLog(@"getRating");
   return [self _getRatingForPlaylistItemWithPath:path];
 }
