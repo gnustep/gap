@@ -32,6 +32,7 @@ Resources/StatisticsViewer.gorm \
 Resources/CrossfadeView.gorm \
 Resources/LyricsInspector.gorm \
 Resources/SongInspector.gorm \
+Resources/PlaylistInspector.gorm \
 Resources/Play.tiff \
 Resources/Pause.tiff \
 Resources/Next.tiff \
@@ -72,7 +73,8 @@ BoldFormatter.h \
 NormalFormatter.h \
 LyricsInspector.h \
 SongInspector.h \
-SongRatingCell.h
+SongRatingCell.h \
+PlaylistInspector.h
 
 #
 # Class files
@@ -95,7 +97,8 @@ BoldFormatter.m \
 NormalFormatter.m \
 LyricsInspector.m \
 SongInspector.m \
-SongRatingCell.m
+SongRatingCell.m \
+PlaylistInspector.m
 
 #
 # Other sources

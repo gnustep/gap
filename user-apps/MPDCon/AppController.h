@@ -38,6 +38,7 @@
 #include "CrossfadeController.h"
 #include "LyricsInspector.h"
 #include "SongInspector.h"
+#include "PlaylistInspector.h"
 #include "Strings.h"
 
 #define player_MPD 0
@@ -80,6 +81,7 @@
 - (void) showPrefPanel:(id)sender;
 - (void) showLyricsInspector:(id)sender;
 - (void) showSongInspector:(id)sender;
+- (void) showPlaylistInspector:(id)sender;
 - (void) showPlaylist: (id)sender;
 - (void) managePlaylists: (id)sender;
 - (void) browseCollection: (id)sender;

@@ -5,9 +5,9 @@
 
    Author: Sebastian Reitenbach
 
-   Created: 2012-09-02
+   Created: 2012-10-31
 
-   Lyrics Inspector
+   Playlist Inspector
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -25,19 +25,11 @@
 */
 
 #include <AppKit/AppKit.h>
-#include "MPDController.h"
 
-@interface LyricsInspector : NSWindowController <NSXMLParserDelegate>
+@interface PlaylistInspector : NSWindowController
 {
-  id artist;
-  id lyricsText;
-  id title;
-
-  MPDController *mpdController;
-  NSMutableString *element;
-  NSMutableString *lyricsURL;
 }
-+ (id) sharedLyricsInspector;
++ (id) sharedPlaylistInspector;
 
-- (void) openURL: (id)sender;
+- (void) updatePlaylistInspector;
 @end

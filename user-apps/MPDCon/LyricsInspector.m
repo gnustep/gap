@@ -3,7 +3,7 @@
 
    Copyright (C) 2012
 
-   Author: sebastian Reitenbach
+   Author: Sebastian Reitenbach
 
    Created: 2012-09-02
 
