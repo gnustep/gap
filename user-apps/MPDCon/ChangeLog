@@ -1,5 +1,9 @@
 2012-10-31: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m int -> NSInteger conversions
+	* PlaylistInspector.[h|m], AppController.[h|m],
+	  GNUmakefile, Resources/PlaylistInspector.gorm,
+	  Resources/Player.gorm MPDCon.pcproj/PC.projec
+	* Add PlaylistInspector, empty so far
 
 2012-10-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GNUmakefile

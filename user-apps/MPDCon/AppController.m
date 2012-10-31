@@ -110,7 +110,6 @@
     }
 
   [[LyricsInspector sharedLyricsInspector] showWindow: sender];
-
 }
 
 - (void) showSongInspector: (id)sender
@@ -121,7 +120,15 @@
     }
 
   [[SongInspector sharedSongInspector] showWindow: sender];
+}
 
+- (void) showPlaylistInspector: (id)sender
+{
+  if (! connected)
+    {
+      return;
+    }
+  [[PlaylistInspector sharedPlaylistInspector] showWindow: sender];
 }
 
 
@@ -133,7 +140,6 @@
     }
 
   [[PlaylistController sharedPlaylistController] showWindow: sender];
-
 }
 
 - (void) managePlaylists: (id)sender

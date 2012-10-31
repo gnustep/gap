@@ -30,7 +30,8 @@
 	"NormalFormatter.m",
 	"LyricsInspector.m",
 	"SongInspector.m",
-	"SongRatingCell.m"
+	"SongRatingCell.m",
+	"PlaylistInspector.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -60,7 +61,8 @@
 	"NormalFormatter.h",
 	"LyricsInspector.h",
 	"SongInspector.h",
-	"SongRatingCell.h"
+	"SongRatingCell.h",
+	"PlaylistInspector.h"
     );
     IMAGES = (
 	"Play.tiff",
@@ -88,7 +90,8 @@
 	"StatisticsViewer.gorm",
 	"CrossfadeView.gorm",
 	"LyricsInspector.gorm",
-	"SongInspector.gorm"
+	"SongInspector.gorm",
+	"PlaylistInspector.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (
