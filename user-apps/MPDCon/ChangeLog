@@ -1,3 +1,6 @@
+2012-10-31: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlaylistController.m int -> NSInteger conversions
+
 2012-10-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GNUmakefile
 	* PlaylistController.h

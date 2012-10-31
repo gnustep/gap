@@ -33,8 +33,8 @@
    ---------------------*/
 @interface PlaylistController(Private)
 - (void) _doRemove;
-- (void) _moveRows: (NSArray *)rows atRow: (int)row;
-- (void) _addSongs: (NSArray *)paths atRow: (int)row;
+- (void) _moveRows: (NSArray *)rows atRow: (NSInteger)row;
+- (void) _addSongs: (NSArray *)paths atRow: (NSInteger)row;
 
 - (void) _filterListByString: (NSString *)filterString;
 @end
@@ -486,7 +486,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
 }
 
 
-- (void) _moveRows: (NSArray *)rows atRow: (int)row
+- (void) _moveRows: (NSArray *)rows atRow: (NSInteger)row
 {
   NSUInteger i;
 
@@ -508,7 +508,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
   [playlistTable reloadData];
 }
 
-- (void) _addSongs: (NSArray *)songs atRow: (int)row
+- (void) _addSongs: (NSArray *)songs atRow: (NSInteger)row
 {
   NSUInteger i;
     
