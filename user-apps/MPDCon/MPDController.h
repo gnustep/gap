@@ -100,6 +100,7 @@
 - (void) clearPlaylist;
 
 - (void) removeSong: (int)song;
+- (void) removeSongRange: (NSRange)songRange;
 - (void) addTrack: (NSString *)file;
 - (void) moveSongNr: (int)song1 to: (int)song2;
 - (void) moveSongWithID: (int)song1 to: (int)song2;

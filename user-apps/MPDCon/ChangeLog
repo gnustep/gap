@@ -1,3 +1,8 @@
+2012-11-10: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* MPDController.[h|m]
+	* Add - (void) removeSongRange: (NSRange)songRange;
+	  needed for the PlaylistInspector
+
 2012-10-31: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m int -> NSInteger conversions
 	* PlaylistInspector.[h|m], AppController.[h|m],
