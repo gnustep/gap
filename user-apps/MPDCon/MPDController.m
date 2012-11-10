@@ -631,6 +631,19 @@ int _stringSort(id string1, id string2, void *context);
   mpd_run_delete(mpdConnection, song);
 }
 
+// A range of (0,0) will empty out the whole playlist
+- (void) removeSongRange: (NSRange)songRange 
+{
+  if (! [self _checkConnection]) {
+      return;
+  }
+  if (songRange.location != NSNotFound)
+    {
+      mpd_run_delete_range(mpdConnection, songRange.location, songRange.length);
+    }
+}
+
+
 - (void) addTrack: (NSString *)file
 {
   if (! [self _checkConnection]) {
@@ -773,9 +786,7 @@ int _stringSort(id string1, id string2, void *context);
 	  PlaylistItem *tmpSong;
 
 	  mpdSong = mpd_entity_get_song(mpdEntity);
-
 	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
-
 	  [allTracks addObject: tmpSong];
 	  
 	  RELEASE(tmpSong);
