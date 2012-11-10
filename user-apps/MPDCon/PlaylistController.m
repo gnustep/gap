@@ -35,6 +35,7 @@
 - (void) _doRemove;
 - (void) _moveRows: (NSArray *)rows atRow: (NSInteger)row;
 - (void) _addSongs: (NSArray *)paths atRow: (NSInteger)row;
+- (NSString *) _playlistLength;
 
 - (void) _filterListByString: (NSString *)filterString;
 @end
@@ -68,6 +69,10 @@
     }
 
   mpdController = [MPDController sharedMPDController];
+
+  AUTORELEASE(playlist);
+
+  playlist = RETAIN([mpdController getPlaylist]);
   
   return self;
 }
@@ -225,6 +230,15 @@
   
   [self filterList: sender];
   
+}
+
+/* ----------------------------
+   - some convenience Methods -
+   ---------------------------- */
+
+- (NSString *) playlistLength
+{
+  return [self _playlistLength];
 }
 
 /* --------------------------------
@@ -388,7 +402,6 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
 
 - (void) playlistChanged: (NSNotification *)aNotif
 {
-  int length;
   int j;
 
   AUTORELEASE(playlist);
@@ -400,30 +413,8 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
       [self _filterListByString: [filterField stringValue]];
     }
     
-  length=0;
-
-  if ([playlist count] != 0) 
-    {
-      int i;
-      int tSecs, tMins, tHours;
-      
-      for (i = 0; i < [playlist count]; i++) 
-	{
-	  length += [[playlist objectAtIndex: i] getTotalTime];
-	}
-    
-    tSecs = (length % 60);
-    tMins = (int) (length/60) % 60;
-    tHours = (int) length/3600;
-    
-    [lengthView setStringValue: [NSString stringWithFormat: 
-				 _(@"Playlist Length: %d:%02d:%02d"), 
-				 tHours, tMins, tSecs]];
-    } 
-  else 
-    {
-      [lengthView setStringValue: _(@"Playlist Length: 0:00:00")];
-    }
+  [lengthView setStringValue: [NSString stringWithFormat: 
+	 _(@"Playlist Length: %@"), [self _playlistLength]]];
 
   AUTORELEASE(playlistTimes);
 
@@ -460,6 +451,32 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
    -------------------*/
 
 @implementation PlaylistController(Private)
+- (NSString *)_playlistLength
+{
+  int length = 0;
+  if ([playlist count] != 0)
+    {
+      int i;
+      int tSecs, tMins, tHours;
+
+      for (i = 0; i < [playlist count]; i++)
+        {
+          length += [[playlist objectAtIndex: i] getTotalTime];
+        }
+
+    tSecs = (length % 60);
+    tMins = (int) (length/60) % 60;
+    tHours = (int) length/3600;
+
+    return [NSString stringWithFormat: _(@"%d:%02d:%02d"),
+                    tHours, tMins, tSecs];
+    }
+  else
+    {
+      return @"0:00:00";
+    }
+}
+
 - (void) _doRemove
 {
   NSEnumerator *songEnum;

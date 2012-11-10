@@ -2,6 +2,11 @@
 	* MPDController.[h|m]
 	* Add - (void) removeSongRange: (NSRange)songRange;
 	  needed for the PlaylistInspector
+	* PlaylistController.[h|m]
+	* expose a - (NSString *) playlistLength, which gives back
+	  the length of the playlist as timestamp, needed
+	  by the PlaylistInspector
+	* move the loading of the playlist to the init method
 
 2012-10-31: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m int -> NSInteger conversions

@@ -68,6 +68,9 @@
 - (void) filterList: (id)sender;
 - (void) clearFilter: (id)sender;
 
+// some convenience methods
+- (NSString *) playlistLength;
+
 // TableView dataSource Methods
 - (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView;
 
