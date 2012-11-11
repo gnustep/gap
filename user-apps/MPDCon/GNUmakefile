@@ -74,7 +74,10 @@ NormalFormatter.h \
 LyricsInspector.h \
 SongInspector.h \
 SongRatingCell.h \
-PlaylistInspector.h
+PlaylistInspector.h \
+RatingStarView.h \
+RatingStarViewController.h \
+SQLiteAdaptor.h
 
 #
 # Class files
@@ -98,7 +101,8 @@ NormalFormatter.m \
 LyricsInspector.m \
 SongInspector.m \
 SongRatingCell.m \
-PlaylistInspector.m
+PlaylistInspector.m \
+SQLiteAdaptor.m
 
 #
 # Other sources
