@@ -1,10 +1,39 @@
 {
     "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "nrOfFutureSongsChanged:",
+	    "nrOfOldSongsToKeepChanged:",
+	    "randomPlaylistFeedStateChanged:",
+	    "ratingBasedFeedStateChanged:"
+	);
+	Super = NSObject;
+    };
     PlaylistInspector = {
+	Actions = (
+	    "nrOfFutureSongsChanged:",
+	    "nrOfOldSongsToKeepChanged:",
+	    "randomPlaylistFeedStateChanged:",
+	    "ratingBasedFeedStateChanged:"
+	);
+	Outlets = (
+	    currentSongNr,
+	    maxRatingStars,
+	    minRatingStars,
+	    nrNewSongs,
+	    nrOfSongsInPlaylist,
+	    nrPlayedSongs,
+	    playlistPlayingTime,
+	    randomPlaylistFeed,
+	    ratingBasedFeed
+	);
+	Super = NSWindowController;
+    };
+    RatingStarView = {
 	Actions = (
 	);
 	Outlets = (
 	);
-	Super = NSWindowController;
+	Super = NSControl;
     };
 }
