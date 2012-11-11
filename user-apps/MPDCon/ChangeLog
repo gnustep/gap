@@ -6,7 +6,9 @@
 	  make it kind of work
 	* PlaylistItem.[h|m], get rid of the Private category,
 	  and use SQLiteAdaptor to store the SongRatings
-	  
+	* GNUMakefile, MPDCon.pcproject/PC.project
+	  Add SQLiteAdaptor.[h|m]
+	* CollectionController.[h|m] new method: getAllTracks
 
 2012-11-10: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDController.[h|m]
