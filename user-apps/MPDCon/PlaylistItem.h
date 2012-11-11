@@ -27,7 +27,8 @@
 #ifndef _PCAPPPROJ_PLAYLISTITEM_H_
 #define _PCAPPPROJ_PLAYLISTITEM_H_
 
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
+#import "SQLiteAdaptor.h"
 
 @interface PlaylistItem : NSObject
 {
@@ -46,6 +47,7 @@
   int elapsedTime;
   int totalTime;
   NSUInteger rating;
+  SQLiteAdaptor *ratingsDB;
   
   int ID;
   int pos;
