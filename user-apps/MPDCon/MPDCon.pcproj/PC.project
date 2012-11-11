@@ -62,7 +62,9 @@
 	"LyricsInspector.h",
 	"SongInspector.h",
 	"SongRatingCell.h",
-	"PlaylistInspector.h"
+	"PlaylistInspector.h",
+	"RatingStarView.h",
+	"RatingStarViewController.h"
     );
     IMAGES = (
 	"Play.tiff",
@@ -98,7 +100,7 @@
 	"gnustep-base",
 	"gnustep-gui"
     );
-    LINKEROPTIONS = "-L/usr/local/lib -lmpdclient";
+    LINKEROPTIONS = "-L/usr/local/lib -lmpdclient -lSQLClient";
     "LOCALIZED_RESOURCES" = (
     );
     MAININTERFACE = "Player.gorm";
