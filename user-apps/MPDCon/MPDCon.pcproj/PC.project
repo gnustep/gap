@@ -31,7 +31,8 @@
 	"LyricsInspector.m",
 	"SongInspector.m",
 	"SongRatingCell.m",
-	"PlaylistInspector.m"
+	"PlaylistInspector.m",
+	"SQLiteAdaptor.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -64,7 +65,8 @@
 	"SongRatingCell.h",
 	"PlaylistInspector.h",
 	"RatingStarView.h",
-	"RatingStarViewController.h"
+	"RatingStarViewController.h",
+	"SQLiteAdaptor.h"
     );
     IMAGES = (
 	"Play.tiff",
