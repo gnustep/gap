@@ -108,8 +108,6 @@
 			                 object: nil];
 
   [[NSNotificationCenter defaultCenter] postNotification: aNotif];
-  
-  
 }
 
 
