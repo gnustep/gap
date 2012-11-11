@@ -26,165 +26,17 @@
 
 #include "PlaylistItem.h"
 
-@interface PlaylistItem(Private)
-static NSString* SongRatingStorageDirectory = nil;
--(NSString *)_getSongRatingsFileName;
--(NSDictionary *)_loadRatings;
--(NSUInteger)_getRatingForPlaylistItemWithPath:(NSString *)_path;
--(void)_saveRating: (NSUInteger) _rating forPlaylistItemWithPath:(NSString *)_path;
-@end
-
-@implementation PlaylistItem(Private)
-/**
- * Converts a string to a string that's usable as a file system name. This is done
- * by removing several forbidden characters, only leaving the allowed ones. (A helper method)
- * The function is stolen from RSSKit
- */
-NSString* _playlistItemPathToRatingKey( NSString* aString )
-{
-    NSScanner* scanner = [NSScanner scannerWithString: aString];
-    NSMutableString* string = AUTORELEASE([[NSMutableString alloc] init]);
-    NSCharacterSet* allowedSet = [NSCharacterSet alphanumericCharacterSet];
-
-    do {
-        NSString* nextPart;
-        BOOL success;
-
-        // discard any unknown characters
-        if ([scanner scanUpToCharactersFromSet: allowedSet intoString: NULL] == YES) {
-            [string appendString: @"_"];
-        } 
-        
-        // scan known characters...
-        success = [scanner scanCharactersFromSet: allowedSet intoString: &nextPart];
-
-        // ...and add them to the string
-        if (success == YES) {
-            [string appendString: nextPart];
-        } 
-    } while ([scanner isAtEnd] == NO);
-
-    return [NSString stringWithString: string];
-}
-
--(NSString *)_getSongRatingsFileName
-{
-  if (SongRatingStorageDirectory == nil)
-    { 
-      NSFileManager* manager;
-      BOOL isDir, exists;
-      NSString *storagePath;
-
-      storagePath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-      storagePath = [storagePath stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]];
-      storagePath = [NSString stringWithFormat:@"%@", storagePath]; 
-
-      ASSIGN(SongRatingStorageDirectory, storagePath);
-
-      manager = [NSFileManager defaultManager];
-
-      exists = [manager fileExistsAtPath: SongRatingStorageDirectory isDirectory: &isDir];
-
-      if (exists)
-	{
-	  if (isDir == NO)
-	    {
-              [[NSException exceptionWithName: @"SongRatingsStorageDirectoryIsNotADirectory"	
-	                               reason:@"The storage directory for song ratings is not a directory."
-			             userInfo: nil] raise];
-	    }
-        }
-      else
-        {
-	  if ([manager createDirectoryAtPath: SongRatingStorageDirectory
-	  			  attributes: nil] == NO)
-	    {
-	      [[NSException exceptionWithName: @"SongRatingsStorageDirectoryCreationFailed"
-				       reason: @"Creation of the storage directory for song ratings failed."
-				     userInfo: nil] raise];
-	    }
-
-        }
-    }  
-  return [NSString stringWithFormat:@"%@/SongRatings.plist", SongRatingStorageDirectory];
-}
-
--(NSDictionary *)_loadRatings
-{
-  NSString *errorDesc = nil;
-  NSString *songRatingsFileName;
-  NSPropertyListFormat format;
-
-  songRatingsFileName = [self _getSongRatingsFileName];
-
-  if (![[NSFileManager defaultManager] fileExistsAtPath:songRatingsFileName])
-    {
-      // there are no ratings saved yet
-      return 0;
-
-    }
-
-  NSData *songRatingsXML = [[NSFileManager defaultManager] contentsAtPath:songRatingsFileName];
-  NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
-                        propertyListFromData:songRatingsXML
-                            mutabilityOption:NSPropertyListMutableContainersAndLeaves
-                                      format:&format
-                            errorDescription:&errorDesc];
-  if (!temp)
-    {
-      NSLog(@"Error reading song ratings: %@, format: %d", errorDesc, format);
-    } 
-
-  return temp;
-}
-
--(NSUInteger)_getRatingForPlaylistItemWithPath:(NSString *)_path
-{
-  NSDictionary *ratings;
-  ratings = [self _loadRatings];
-  return [[ratings objectForKey:_playlistItemPathToRatingKey(_path)] unsignedIntegerValue];
-}
-
--(void)_saveRating: (NSUInteger) _rating forPlaylistItemWithPath:(NSString *)_path
-{
-  NSMutableDictionary *ratings;
-  NSString *error;
-  NSString *songRatingsFileName;
-  ratings = [[NSMutableDictionary alloc] init];
-  [ratings addEntriesFromDictionary:[self _loadRatings]];
-  if (_rating == 0)
-    {
-      [ratings removeObjectForKey: _playlistItemPathToRatingKey(_path)];
-    }
-  else
-    {
-      [ratings setObject: [NSNumber numberWithUnsignedInteger:_rating] forKey: _playlistItemPathToRatingKey(_path)];
-    }
-
-  songRatingsFileName = [self _getSongRatingsFileName];
-
-  NSData *ratingsData = [NSPropertyListSerialization dataFromPropertyList:ratings
-					format:NSPropertyListXMLFormat_v1_0
-					errorDescription:&error];
-
-  if (ratingsData)
-    {
-       [ratingsData writeToFile:songRatingsFileName atomically:YES];
-    }
-  else
-    {
-      NSLog(@"Problem serializing song ratings property list: %@", error);
-      [error release];
-    }
-}
-
-@end
-
 @implementation PlaylistItem
 
 /* --------------------------
    - Initialization Methods -
    --------------------------*/
+
+- (id) init
+{
+  ratingsDB = [SQLiteAdaptor sharedSQLiteAdaptor];
+  return self;
+}
 
 - (void) dealloc
 {
@@ -350,13 +202,13 @@ NSString* _playlistItemPathToRatingKey( NSString* aString )
 
 - (void) setRating: (NSUInteger)newRating
 {
-  [self _saveRating: newRating forPlaylistItemWithPath:path];
+  [ratingsDB setRating: newRating forFile: path];
   rating = newRating;
 }
 
 - (NSUInteger) getRating
 {
-  return [self _getRatingForPlaylistItemWithPath:path];
+  return [ratingsDB getRatingForFile:path];
 }
  
 - (void) setID: (int) newID

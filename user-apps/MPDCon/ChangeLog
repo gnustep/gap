@@ -2,6 +2,11 @@
 	* GNUmakefile.preamble, MPDCon.pcproj/PC.project
 	* link against -lSQLClient, the SongRatings will be saved
 	  in a sqlite3 database
+	* PlaylistInspector.[h|m], Resources/PlaylistInspector.gorm
+	  make it kind of work
+	* PlaylistItem.[h|m], get rid of the Private category,
+	  and use SQLiteAdaptor to store the SongRatings
+	  
 
 2012-11-10: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDController.[h|m]
