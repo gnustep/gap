@@ -1,3 +1,8 @@
+2012-11-11: Sebastian Reitenbach <sebastia@l00-buggdead-prods.de>
+	* GNUmakefile.preamble, MPDCon.pcproj/PC.project
+	* link against -lSQLClient, the SongRatings will be saved
+	  in a sqlite3 database
+
 2012-11-10: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDController.[h|m]
 	* Add - (void) removeSongRange: (NSRange)songRange;
