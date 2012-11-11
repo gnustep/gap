@@ -631,7 +631,6 @@ int _stringSort(id string1, id string2, void *context);
   mpd_run_delete(mpdConnection, song);
 }
 
-// A range of (0,0) will empty out the whole playlist
 - (void) removeSongRange: (NSRange)songRange 
 {
   if (! [self _checkConnection]) {
