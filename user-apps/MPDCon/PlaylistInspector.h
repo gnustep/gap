@@ -25,11 +25,43 @@
 */
 
 #include <AppKit/AppKit.h>
+#include "MPDController.h"
+#include "PlaylistController.h"
 
 @interface PlaylistInspector : NSWindowController
 {
+  IBOutlet NSTableView *maxRatingStars;
+  IBOutlet NSTableView *minRatingStars;
+
+  id currentSongNr;
+  id nrOfSongsInPlaylist;
+  id nrNewSongs;
+  id nrPlayedSongs;
+  id playlistPlayingTime;
+  id randomPlaylistFeed;
+  id ratingBasedFeed;
+
+  MPDController *mpdController;
+  PlaylistController *playlistController;
+  NSTableColumn *minRatingCol;
+  NSTableColumn *maxRatingCol;
+  NSUserDefaults *defaults;
+  NSLock *threadlock;
 }
 + (id) sharedPlaylistInspector;
 
+- (void) updateCurrentSongNr;
+- (void) updatePlaylistInfo;
 - (void) updatePlaylistInspector;
+- (void) songChanged:(NSNotification *)aNotif;
+
+// Gui Methods
+- (void) nrOfFutureSongsChanged: (id)sender;
+- (void) nrOfOldSongsToKeepChanged: (id)sender;
+- (void) randomPlaylistFeedStateChanged: (id)sender;
+- (void) ratingBasedFeedStateChanged: (id)sender;
+
+// Thread methods
+- (BOOL) startPlaylistUpdateThread;
+- (void) playlistUpdateThread;
 @end
