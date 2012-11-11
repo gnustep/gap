@@ -343,6 +343,11 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
   [[self window] performClose: self];
 }
 
+- (NSArray *) getAllTracks
+{
+  return filteredTracks;
+}
+
 @end
 
 /* -------------------

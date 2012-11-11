@@ -62,6 +62,8 @@
 - (void) filterCollection: (id)sender;
 - (void) clearFilter: (id)sender;
 
+- (NSArray *) getAllTracks;
+
 // TableView dataSource Methods
 - (int) numberOfRowsInTableView: (NSTableView *)tableView;
 
