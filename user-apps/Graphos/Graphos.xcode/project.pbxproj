@@ -242,6 +242,7 @@
 		};
 		2A37F4B8FDCFA73011CA2CEA = {
 			children = (
+				85A153C01650601200886D84,
 				85155D4C1211E4E0006F7B99,
 				2A37F4B9FDCFA73011CA2CEA,
 				2A37F4B6FDCFA73011CA2CEA,
@@ -421,6 +422,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_MODEL_TUNING = G3;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-Draw.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -631,6 +633,7 @@
 				8572BBAE1114E8D800F6A240,
 				8572BBCE1114E90E00F6A240,
 				85155D4E1211E4E0006F7B99,
+				85A153C41650601200886D84,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1018,6 +1021,30 @@
 		};
 		8572BBCE1114E90E00F6A240 = {
 			fileRef = 8572BBCD1114E90E00F6A240;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A153C01650601200886D84 = {
+			children = (
+				85A153C11650601200886D84,
+			);
+			isa = PBXVariantGroup;
+			name = HTMLHelp;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A153C11650601200886D84 = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder;
+			name = English;
+			path = English.lproj/HTMLHelp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A153C41650601200886D84 = {
+			fileRef = 85A153C01650601200886D84;
 			isa = PBXBuildFile;
 			settings = {
 			};

@@ -23,6 +23,10 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>Graphos</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>HTMLHelp</string>
+	<key>CFBundleHelpBookName</key>
+	<string>Graphos Help</string>
 	<key>CFBundleIconFile</key>
 	<string>graphos_icons</string>
 	<key>CFBundleInfoDictionaryVersion</key>
