@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2011 GNUstep Application Project
+   Copyright (C) 2006-2012 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -33,9 +33,16 @@
     @private char     apmPath[1024];
     @private NSString *batterySysAcpiString;
 
+    /* ACPI on Linux, using files in /sys : modern kernels and laptops*/
     @private BOOL     useACPIsys;
-    @private BOOL     useACPIproc;
+
+    /* ACPI on Linux, using files in /proc, now as fallback */
+    @private BOOL     useACPIproc; 
+
+    /* APM on linux, for old kernels, older laptops, non-x86 machines, netbooks, embedded devices */
     @private BOOL     useAPM;
+
+    /* PMU: Power management Unit, specific for powermac, ibooks Apple laptops*/
     @private BOOL     usePMU;
 #endif
 
