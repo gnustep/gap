@@ -46,8 +46,7 @@
 
   int elapsedTime;
   int totalTime;
-  NSUInteger rating;
-  SQLiteAdaptor *ratingsDB;
+  SQLiteAdaptor *MPDConDB;
   
   int ID;
   int pos;
@@ -80,12 +79,14 @@
 - (void) setTotalTime: (int)newTime;
 - (NSString *) getPath;
 - (void) setPath: (NSString *)newPath;
-- (void) setID: (int) newID;
 - (int) getID;
-- (void) setPos: (int) newPos;
+- (void) setID: (int) newID;
 - (int) getPos;
-- (void) setRating: (NSUInteger)newRating;
+- (void) setPos: (int) newPos;
 - (NSUInteger) getRating;
+- (void) setRating: (NSUInteger)newRating;
+- (NSDictionary *) getLyrics;
+- (void) setLyrics: (NSString *) lyricsText withURL: (NSString *)lyricsURL;
 @end
 
 #endif

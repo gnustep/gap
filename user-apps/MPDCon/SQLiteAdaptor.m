@@ -26,11 +26,11 @@
 
 @interface SQLiteAdaptor(Private)
 static NSString* SongRatingStorageDirectory = nil;
--(NSString *)_getSongRatingsDBName;
+-(NSString *)_getMPDConDBName;
 @end
 
 @implementation SQLiteAdaptor(Private)
--(NSString *)_getSongRatingsDBName
+-(NSString *)_getMPDConDBName
 {
   if (SongRatingStorageDirectory == nil)
     {
@@ -72,7 +72,7 @@ static NSString* SongRatingStorageDirectory = nil;
 	    }
 	}
     }
-  return [NSString stringWithFormat:@"%@/SongRatings.sqlite3", SongRatingStorageDirectory];
+  return [NSString stringWithFormat:@"%@/MPDCon.sqlite3", SongRatingStorageDirectory];
 }
 @end
 
@@ -97,22 +97,26 @@ static NSString* SongRatingStorageDirectory = nil;
     [NSDictionary dictionaryWithObjectsAndKeys:
       [NSDictionary dictionaryWithObjectsAndKeys:
         [NSDictionary dictionaryWithObjectsAndKeys:
-          [self _getSongRatingsDBName], @"Database",
+          [self _getMPDConDBName], @"Database",
           @"", @"User",
           @"", @"Password",
           @"SQLite", @"ServerType",
           nil],
-        @"SongRatings",
+        @"MPDCon",
         nil],
       @"SQLClientReferences",
       nil]
   ];
-  songRatingsDB = RETAIN([SQLClient clientWithConfiguration: nil name: @"SongRatings"]);
-  //[songRatingsDB setDurationLogging: 0];
-  //NSLog(@"init: songRatingsDB: %@", songRatingsDB);
-  [songRatingsDB execute: @"CREATE TABLE IF NOT EXISTS SongRatings ( "
+  MPDConDB = RETAIN([SQLClient clientWithConfiguration: nil name: @"MPDCon"]);
+  //[MPDConDB setDurationLogging: 0];
+  [MPDConDB execute: @"CREATE TABLE IF NOT EXISTS SongRatings ( "
                 @"fileName CHAR(1024) PRIMARY KEY, "
                 @"rating INTEGER)",
+                nil];
+  [MPDConDB execute: @"CREATE TABLE IF NOT EXISTS SongLyrics ( "
+                @"fileName CHAR(1024) PRIMARY KEY, "
+                @"lyricsText CHAR(1024), ",
+                @"lyricsURL CHAR(1024) )",
                 nil];
   
   return self;
@@ -120,41 +124,42 @@ static NSString* SongRatingStorageDirectory = nil;
 
 - (void) dealloc
 {
+  [MPDConDB disconnect];
+  [MPDConDB release];
   [super dealloc];
 }
 
 - (void) setRating: (NSUInteger) rating forFile: (NSString *) fileName
 {
   NSString *quotedFileName, *query;
+
   // the following doesn't seem to work, but the line after it does the trick!
-  //quotedFileName = [songRatingsDB quoteString:fileName];
+  //quotedFileName = [MPDConDB quoteString:fileName];
   quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
   query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO \
 		SongRatings(fileName, rating) values('%@', %u)", quotedFileName, rating];
- [songRatingsDB execute: query, nil];
+  [MPDConDB execute: query, nil];
 }
 - (NSUInteger) getRatingForFile: (NSString *) fileName
 {
   NSString *quotedFileName, *query;
   NSMutableArray *records;
   SQLRecord      *record;
-  NSInteger rating;
+  NSInteger rating = 0;
 
   // the following doesn't work, but the line after it does the trick
-  //quotedFileName = [songRatingsDB quoteString:fileName];
+  //quotedFileName = [MPDConDB quoteString:fileName];
   quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
   query = [NSString stringWithFormat:@"SELECT rating FROM SongRatings WHERE fileName='%@'", quotedFileName];
-  records = [songRatingsDB query: query, nil];
-  if ([records count] == 0)
-    {
-      return 0;
-    }
-  else
+  records = [MPDConDB query: query, nil];
+
+  // we search for the primary key, so we should find exactly one
+  if ([records count] == 1)
     { 
       record = [records objectAtIndex:0]; 
       rating = [[record objectAtIndex:0] unsignedIntegerValue];
-      return rating;
     }
+  return rating;
 }
 - (NSArray *) getFilesForRatingsInRange: (NSRange) range
 {
@@ -163,6 +168,51 @@ static NSString* SongRatingStorageDirectory = nil;
   ratingsArray = [[NSArray alloc] init];
 
   return ratingsArray;
+}
+
+- (void) setLyrics: (NSString *) lyricsText withURL: (NSString *) lyricsURL forFile: (NSString *) fileName
+{
+  NSString *quotedFileName, *quotedText, *quotedURL;
+  NSString *query;
+
+  quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+  quotedText = [lyricsText stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+  quotedURL = [lyricsURL stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+
+  query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO \
+		SongLyrics(fileName, lyricsText, lyricsURL) values('%@', '%@', '%@')",
+		quotedFileName, quotedText, quotedURL];	
+
+  [MPDConDB execute: query, nil];
+}
+- (NSDictionary *) getLyricsForFile: (NSString *) fileName
+{
+  NSString  *quotedFileName, *quotedText, *quotedURL;
+  NSString  *query;
+  NSMutableArray *records;
+  SQLRecord *record;
+  NSString *lyricsText, *lyricsURL;
+  NSDictionary *result = nil;
+  
+  quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+
+  query = [NSString stringWithFormat:@"SELECT lyricsText, lyricsURL FROM SongLyrics \
+					WHERE fileName='%@'", quotedFileName];
+		
+  records = [MPDConDB query: query, nil];
+
+  // we search for the primary key, so we should find exactly one
+  if ([records count] == 1)
+    {
+      record = [records objectAtIndex:0];
+      quotedText = [record objectAtIndex:0];
+      quotedURL = [record objectAtIndex:1];
+      lyricsText = [quotedText stringByReplacingOccurrencesOfString:@"''" withString:@"'"]; 
+      lyricsURL = [quotedURL stringByReplacingOccurrencesOfString:@"''" withString:@"'"]; 
+      result = [NSDictionary dictionaryWithObjectsAndKeys: lyricsText, @"lyricsText", 
+		lyricsURL, @"lyricsURL", nil];
+    }
+  return result;
 }
 
 @end

@@ -218,11 +218,20 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
   NSURL *url;
   NSData *result;
   NSXMLParser *parser;
+  NSDictionary *dbResult;
 
   currentSong = [mpdController getCurrentSong];
   [artist setStringValue:[currentSong getArtist]];
   [title setStringValue:[currentSong getTitle]];
 
+  dbResult = [currentSong getLyrics];
+
+  if (dbResult)
+    {
+      [lyricsText setStringValue: [dbResult objectForKey:@"lyricsText"]];
+      lyricsURL = [[dbResult objectForKey:@"lyricsURL"] copy];
+      return;
+    }
   bindings =
     [[NSDictionary alloc] initWithObjectsAndKeys:
     [[currentSong getArtist] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"ARTIST",
@@ -240,6 +249,11 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
       [parser setShouldResolveExternalEntities:NO];
       [parser setDelegate:self];
       [parser parse];
+      // if we got something from the web, we save it in the DB
+      if (![[lyricsText stringValue] isEqual:@"Not found"])
+	{
+          [currentSong setLyrics: [lyricsText stringValue] withURL: lyricsURL];
+	}
     } 
   else
     {
@@ -262,8 +276,8 @@ didStartElement:(NSString *)elementName
 - (void) parser:(NSXMLParser *)parser
   didEndElement:(NSString *)elementName
    namespaceURI:(NSString *)namespaceURI
-  qualifiedName:(NSString *)qName {
-
+  qualifiedName:(NSString *)qName
+{
   if ([elementName isEqualToString:@"lyrics"])
     {
       [lyricsText setStringValue: element];

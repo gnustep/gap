@@ -34,7 +34,7 @@
 
 - (id) init
 {
-  ratingsDB = [SQLiteAdaptor sharedSQLiteAdaptor];
+  MPDConDB = [SQLiteAdaptor sharedSQLiteAdaptor];
   return self;
 }
 
@@ -200,17 +200,25 @@
   path = [newPath copy];
 }
 
-- (void) setRating: (NSUInteger)newRating
-{
-  [ratingsDB setRating: newRating forFile: path];
-  rating = newRating;
-}
-
 - (NSUInteger) getRating
 {
-  return [ratingsDB getRatingForFile:path];
+  return [MPDConDB getRatingForFile:path];
 }
- 
+
+- (void) setRating: (NSUInteger)newRating
+{
+  [MPDConDB setRating: newRating forFile: path];
+}
+
+- (NSDictionary *) getLyrics
+{
+  return [MPDConDB getLyricsForFile:path];
+}
+- (void) setLyrics: (NSString *) lyricsText withURL: (NSString *)lyricsURL
+{
+  [MPDConDB setLyrics: lyricsText withURL: lyricsURL forFile: path];
+}
+
 - (void) setID: (int) newID
 {
   ID = newID;
