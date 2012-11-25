@@ -1,3 +1,14 @@
+2012-11-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* SQLiteAdaptor.[h|m]
+	  restructuring, to also save retrieved lyrics from the 
+	  web in the SQLite database
+	* PlaylistItem.[h|m]
+	  restructuring, and adding methods to retrieve, save
+	  song lyrics
+	* LyricsInspector.m
+	  try to lookup lyrics in DB before consulting the web
+	  and save found lyrics from web to DB
+
 2012-11-11: Sebastian Reitenbach <sebastia@l00-buggdead-prods.de>
 	* GNUmakefile.preamble, MPDCon.pcproj/PC.project
 	* link against -lSQLClient, the SongRatings will be saved
