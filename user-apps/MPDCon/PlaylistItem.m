@@ -26,7 +26,23 @@
 
 #include "PlaylistItem.h"
 
+/* ----------------------
+   - Private Categories -
+   ----------------------*/
+// inspired/stolen from SOPE
+@interface NSObject(StringBindings)
+- (NSString *)valueForStringBinding:(NSString *)_key;
+@end
+
+@interface NSString(misc)
+- (NSString *)stringByReplacingVariablesWithBindings:(id)_bindings;
+@end
+
 @implementation PlaylistItem
+
+// MPD itself doesn't provide the ability to retrieve lyrics via the server
+// have to use external services to provide that ability
+static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&artist=$ARTIST$&song=$TITLE$&fmt=xml";
 
 /* --------------------------
    - Initialization Methods -
@@ -51,6 +67,8 @@
   RELEASE(date);
   RELEASE(performer);
   RELEASE(disc);
+  RELEASE(lyricsText);
+  RELEASE(lyricsURL);
 
   [super dealloc];
 }
@@ -212,11 +230,56 @@
 
 - (NSDictionary *) getLyrics
 {
-  return [MPDConDB getLyricsForFile:path];
+  NSDictionary *lyricsDict;
+  NSDictionary *bindings;
+  NSString *requestURL;
+  NSData *result;
+  NSURL *url;
+  NSXMLParser *parser;
+
+  lyricsDict = [MPDConDB getLyricsForFile:path];
+  if (lyricsDict)
+    return lyricsDict;
+
+  bindings =
+    [[NSDictionary alloc] initWithObjectsAndKeys:
+    [[self getArtist] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"ARTIST",
+    [[self getTitle] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"TITLE",
+      nil];
+  requestURL = [LyricsAPIURL stringByReplacingVariablesWithBindings:bindings];
+  url = [NSURL URLWithString:requestURL];
+  result = [NSData dataWithContentsOfURL:url];
+  if (result)
+    {
+      parser = [[[NSXMLParser alloc] initWithData:result] autorelease];
+      [parser setShouldProcessNamespaces:NO];
+      [parser setShouldReportNamespacePrefixes:NO];
+      [parser setShouldResolveExternalEntities:NO];
+      [parser setDelegate:self];
+      [parser parse];
+      // if we got something from the web, we save it in the DB
+      if (![lyricsText isEqual:@"Not found"])
+        {
+          [self setLyrics: lyricsText withURL: lyricsURL];
+        }
+    }
+  else
+    {
+      lyricsText = [@"unable to connect to lyrics.wikia.com" copy];
+      lyricsURL = [@"http://lyrics.wikia.com" copy];
+    }
+
+  lyricsDict =
+    [[NSDictionary alloc] initWithObjectsAndKeys:
+      lyricsText, @"lyricsText",
+      lyricsURL, @"lyricsURL",
+      nil];
+  
+  return lyricsDict;
 }
-- (void) setLyrics: (NSString *) lyricsText withURL: (NSString *)lyricsURL
+- (void) setLyrics: (NSString *) _lyricsText withURL: (NSString *) _lyricsURL
 {
-  [MPDConDB setLyrics: lyricsText withURL: lyricsURL forFile: path];
+  [MPDConDB setLyrics: _lyricsText withURL: _lyricsURL forFile: path];
 }
 
 - (void) setID: (int) newID
@@ -238,4 +301,152 @@
 {
   return pos;
 }
+
+/* getLyrics NSXMLParser delegate methods */
+- (void) parser:(NSXMLParser *)parser
+didStartElement:(NSString *)elementName
+   namespaceURI:(NSString *)namespaceURI
+  qualifiedName:(NSString *)qualifiedName
+     attributes:(NSDictionary *)attributeDict
+{
+  element = [NSMutableString string];
+}
+
+- (void) parser:(NSXMLParser *)parser
+  didEndElement:(NSString *)elementName
+   namespaceURI:(NSString *)namespaceURI
+  qualifiedName:(NSString *)qName
+{
+  if ([elementName isEqualToString:@"lyrics"])
+    {
+      lyricsText = [element copy];
+    }
+  else if ([elementName isEqualToString:@"url"])
+    {
+      lyricsURL = [element copy];
+    }
+}
+
+- (void) parser:(NSXMLParser *)parser
+foundCharacters:(NSString *)string
+{
+ if(element == nil)
+  {
+    element = [[NSMutableString alloc] init];
+  }
+
+ [element appendString:string];
+}
 @end
+
+/* ----------------------
+   - Private Categories -
+   ---------------------*/
+
+@implementation NSObject(StringBindings)
+- (NSString *)valueForStringBinding:(NSString *)_key {
+  if (_key == nil) return nil;
+  return [self valueForKeyPath:_key];
+}
+@end
+
+@implementation NSString(misc)
+- (NSString *)stringByReplacingVariablesWithBindings:(id)_bindings
+{
+  NSUInteger      len, pos = 0;
+  unichar         *wbuf    = NULL;
+  NSMutableString *str     = nil;
+
+  str = [self mutableCopy];
+  len = [str length];
+  wbuf   = malloc(sizeof(unichar) * (len + 4));
+  [self getCharacters:wbuf];
+
+  while (pos < len)
+    {
+      if (pos + 1 == len) /* last entry */
+        {
+          if (wbuf[pos] == '$') /* found $ without end-char */
+            {
+              [NSException raise:@"NSStringVariableBindingException"
+                 format:@"did not find end of variable for string %@", self];
+            }
+          break;
+        }
+      if (wbuf[pos] == '$')
+        {
+          if (wbuf[pos + 1] == '$')/* found $$ --> $ */
+            {
+              [str deleteCharactersInRange:NSMakeRange(pos, 1)];
+
+              if (wbuf != NULL)
+                {
+                  free(wbuf); wbuf = NULL;
+                }
+              len  = [str length];
+              wbuf = malloc(sizeof(unichar) * (len + 4));
+              [str getCharacters:wbuf];
+            }
+          else
+            {
+              NSUInteger startPos = pos;
+
+              pos += 2; /* wbuf[pos + 1] != '$' */
+              while (pos < len)
+                {
+                  if (wbuf[pos] != '$')
+                    pos++;
+                  else
+                    break;
+                }
+              if (pos == len) /* end of string was reached */
+                {
+                  [NSException raise:@"NSStringVariableBindingException"
+                     format:@"did not find end of variable for string %@",
+                     self];
+                }
+              else
+                {
+                  NSString *key;
+                  NSString *value;
+
+                  key = [[NSString alloc]
+                          initWithCharacters:(wbuf + startPos + 1)
+                          length:(pos - startPos - 1)];
+
+                  if ((value = [_bindings valueForStringBinding:key]) == nil)
+                    {
+                      value = @"";
+                    }
+                  [key release]; key = nil;
+
+                  [str replaceCharactersInRange:
+                         NSMakeRange(startPos, pos - startPos + 1)
+                       withString:value];
+
+                  if (wbuf != NULL)
+                    {
+                      free(wbuf); wbuf = NULL;
+                    }
+                  len  = [str length];
+                  wbuf = malloc(sizeof(unichar) * (len + 4));
+                  [str getCharacters:wbuf];
+
+                  pos = startPos - 1 + [value length];
+                }
+            }
+        }
+      pos++;
+    }
+  if (wbuf != NULL)
+    {
+      free(wbuf); wbuf = NULL;
+    }
+  {
+    id tmp = str;
+    str = [str copy];
+    [tmp release]; tmp = nil;
+  }
+  return [str autorelease];
+}
+@end /* NSString(misc) */

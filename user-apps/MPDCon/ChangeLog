@@ -1,7 +1,11 @@
 2012-12-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* SongInspector.h
 	  add method to shut up gcc from whining it may not be available
-
+	* PlaylistItem.[h|m], LyricsInspector.[h|m]
+	  Move the lyrics retriveal from web from the LyricsInspector
+	  to the PlaylistItem. There is a better place for it.
+	  While there, shut up gcc from whining, save as for the
+	  SongInspector
 
 2012-11-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* SQLiteAdaptor.[h|m]
