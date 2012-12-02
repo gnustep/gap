@@ -43,13 +43,15 @@
   NSString *composer;
   NSString *performer;
   NSString *disc;
+  NSString *lyricsURL;
+  NSString *lyricsText;
 
   int elapsedTime;
   int totalTime;
-  SQLiteAdaptor *MPDConDB;
-  
   int ID;
   int pos;
+  SQLiteAdaptor *MPDConDB;
+  NSMutableString *element;
 }
 
 // Accessor Methods
@@ -86,7 +88,7 @@
 - (NSUInteger) getRating;
 - (void) setRating: (NSUInteger)newRating;
 - (NSDictionary *) getLyrics;
-- (void) setLyrics: (NSString *) lyricsText withURL: (NSString *)lyricsURL;
+- (void) setLyrics: (NSString *) _lyricsText withURL: (NSString *)_lyricsURL;
 @end
 
 #endif

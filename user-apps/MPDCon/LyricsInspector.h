@@ -34,10 +34,10 @@
   id title;
 
   MPDController *mpdController;
-  NSMutableString *element;
   NSMutableString *lyricsURL;
 }
 + (id) sharedLyricsInspector;
 
+- (void) updateLyrics;
 - (void) openURL: (id)sender;
 @end
