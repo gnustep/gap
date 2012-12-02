@@ -43,5 +43,7 @@
 
   MPDController *mpdController;
 }
+
 + (id) sharedSongInspector;
+- (void) updateSongInfo;
 @end
