@@ -39,6 +39,7 @@
 #include "LyricsInspector.h"
 #include "SongInspector.h"
 #include "PlaylistInspector.h"
+#include "RandomPlaylistFeed.h"
 #include "Strings.h"
 
 #define player_MPD 0
@@ -75,6 +76,7 @@
   BOOL didDisconnect;
 
   MPDController *mpdController;
+  RandomPlaylistFeed *randomPlaylistFeed;
 }
 
 // Gui Methods

@@ -44,8 +44,9 @@
 
 - (void) dealloc
 {
-  RELEASE(mpdController);
-  RELEASE(anTimer);
+  [mpdController release];
+  [anTimer release];
+  [randomPlaylistFeed release];
 
   [super dealloc];
 
@@ -67,10 +68,9 @@
   [window setFrameAutosaveName: @"PlayerWindow"];
 
   mpdController = [MPDController sharedMPDController];
+  randomPlaylistFeed = [[RandomPlaylistFeed alloc] init];
 
   prevState = state_NOCONN;
-
-
 
   [defCenter addObserver: self
 		selector: @selector(didDisconnect:)
