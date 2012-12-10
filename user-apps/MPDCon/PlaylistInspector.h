@@ -60,8 +60,5 @@
 - (void) nrOfOldSongsToKeepChanged: (id)sender;
 - (void) randomPlaylistFeedStateChanged: (id)sender;
 - (void) ratingBasedFeedStateChanged: (id)sender;
-
-// Thread methods
-- (BOOL) startPlaylistUpdateThread;
-- (void) playlistUpdateThread;
+- (void) sendRandomPlaylistFeedDefaultsChangedNotification;
 @end
