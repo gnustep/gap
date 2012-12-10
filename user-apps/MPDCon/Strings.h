@@ -37,5 +37,6 @@ static NSString *PreferencesChangedNotification = @"PreferencesChangedNotificati
 static NSString *GetTracksNotification = @"GetTracksNotification";
 static NSString *TracksSendNotification = @"TracksSendNotification";
 static NSString *KeyEventNotification = @"KeyEventNotification";
+static NSString *RandomPlaylistFeedDefaultsChangedNotification = @"RandomPlaylistFeedDefaultsChangedNotification";
 #endif // _OWNSTRINGS_H_
 
