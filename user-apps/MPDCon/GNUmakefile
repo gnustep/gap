@@ -77,7 +77,8 @@ SongRatingCell.h \
 PlaylistInspector.h \
 RatingStarView.h \
 RatingStarViewController.h \
-SQLiteAdaptor.h
+SQLiteAdaptor.h \
+RandomPlaylistFeed.h
 
 #
 # Class files
@@ -102,7 +103,8 @@ LyricsInspector.m \
 SongInspector.m \
 SongRatingCell.m \
 PlaylistInspector.m \
-SQLiteAdaptor.m
+SQLiteAdaptor.m \
+RandomPlaylistFeed.m
 
 #
 # Other sources
