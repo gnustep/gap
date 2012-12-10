@@ -115,7 +115,7 @@
 - (BOOL) collectionChanged;
 - (NSArray *) getAllArtists;
 - (NSArray *) getAllAlbums;
-- (NSArray *) getAllTracks;
+- (NSArray *) getAllTracksWithMetadata: (BOOL) withMetadata;
 
 - (NSArray *) getAlbumsForArtist: (NSString *)artist;
 

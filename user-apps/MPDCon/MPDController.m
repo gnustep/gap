@@ -432,7 +432,6 @@ int _stringSort(id string1, id string2, void *context);
   } else {
     return nil;
   }
-
 }
 
 /* ---------------------
@@ -768,7 +767,7 @@ int _stringSort(id string1, id string2, void *context);
 		                                  context: NULL];
 }
 
-- (NSArray *) getAllTracks
+- (NSArray *) getAllTracksWithMetadata: (BOOL) withMetadata
 {
   NSMutableArray *allTracks;
   struct mpd_entity *mpdEntity;
@@ -778,22 +777,28 @@ int _stringSort(id string1, id string2, void *context);
   }
 
   allTracks = [[NSMutableArray alloc] init];
-  mpd_send_list_all_meta(mpdConnection, NULL);
-  while ((mpdEntity = mpd_recv_entity(mpdConnection)) != NULL) { 
-    if (mpd_entity_get_type(mpdEntity) == MPD_ENTITY_TYPE_SONG) {
-	  const struct mpd_song *mpdSong;
-	  PlaylistItem *tmpSong;
-
-	  mpdSong = mpd_entity_get_song(mpdEntity);
-	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
-	  [allTracks addObject: tmpSong];
-	  
-	  RELEASE(tmpSong);
+  if (withMetadata)
+    {
+      mpd_send_list_all_meta(mpdConnection, NULL);
     }
+  else
+    {
+      mpd_send_list_all(mpdConnection, NULL);
+    }
+  while ((mpdEntity = mpd_recv_entity(mpdConnection)) != NULL) {
+    if (mpd_entity_get_type(mpdEntity) == MPD_ENTITY_TYPE_SONG) {
+          const struct mpd_song *mpdSong;
+          PlaylistItem *tmpSong;
+
+          mpdSong = mpd_entity_get_song(mpdEntity);
+          tmpSong = [[self _getPlaylistItemForSong: mpdSong] retain];
+          [allTracks addObject: tmpSong];
+	  [tmpSong release];
+    }
+    mpd_entity_free(mpdEntity);
   }
   mpd_response_finish(mpdConnection);
   return AUTORELEASE(allTracks);
-
 }
 
 - (NSArray *) getAlbumsForArtist: (NSString *)artist

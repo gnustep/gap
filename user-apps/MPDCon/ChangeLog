@@ -5,6 +5,8 @@
 	* Implement a random Playlist Feed
 	* PlaylistInspector.[h|m] move out the threading, and
 	  put it in the RandomPlaylistFeed class
+	* MPDController.[h|m] parameterize getAllTracksWithMetadata:
+	* CollectionController.m use the new method
 
 2012-12-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* SongInspector.h
