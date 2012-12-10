@@ -107,8 +107,10 @@
 
   [randomPlaylistFeed setState: [defaults integerForKey: @"RandomPlaylistFeed"]];
   [ratingBasedFeed setState: [defaults integerForKey: @"RatingBasedFeed"]];
-  [nrNewSongs setStringValue:  [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfFutureSongs"]]];
-  [nrPlayedSongs setStringValue: [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfOldSongsToKeep"]]];
+  [nrNewSongs setStringValue:  [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfFutureSongs"]?
+		[defaults integerForKey: @"NrOfFutureSongs"]:20]];
+  [nrPlayedSongs setStringValue: [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfOldSongsToKeep"]?
+		[defaults integerForKey: @"NrOfOldSongsToKeep"]:20]];
 
   if (![randomPlaylistFeed state])
     {
@@ -136,16 +138,19 @@
 {
   [defaults setInteger: [nrNewSongs integerValue] forKey:@"NrOfFutureSongs"];
   [defaults synchronize];
+  [self sendRandomPlaylistFeedDefaultsChangedNotification];
 }
 - (void) nrOfOldSongsToKeepChanged: (id) sender
 {
   [defaults setInteger: [nrPlayedSongs integerValue] forKey:@"NrOfOldSongsToKeep"];
   [defaults synchronize];
+  [self sendRandomPlaylistFeedDefaultsChangedNotification];
 }
 - (void) randomPlaylistFeedStateChanged: (id) sender
 {
   [defaults setInteger: [randomPlaylistFeed state] forKey:@"RandomPlaylistFeed"];
   [defaults synchronize];
+  [self sendRandomPlaylistFeedDefaultsChangedNotification];
   if ([randomPlaylistFeed state])
     {
       [nrNewSongs setEditable: YES];
@@ -171,6 +176,7 @@
 {
   [defaults setInteger: [ratingBasedFeed state] forKey:@"RatingBasedFeed"];
   [defaults synchronize];
+  [self sendRandomPlaylistFeedDefaultsChangedNotification];
   // the disabling is not working, they seem to be always enabled
   if ([ratingBasedFeed state])
     {
@@ -189,13 +195,11 @@
 - (void) songChanged:(NSNotification *)aNotif
 {
   [self updateCurrentSongNr];
-  [self startPlaylistUpdateThread];
 }
 
 - (void) playlistChanged:(NSNotification *)aNotif
 {
   [self updatePlaylistInfo];
-  [self startPlaylistUpdateThread];
 }
 
 - (void) updateCurrentSongNr
@@ -238,7 +242,7 @@ objectValueForTableColumn: (NSTableColumn *) tableColumn
   if ([identifier isEqual:@"minrating"])
     {
       return [NSNumber numberWithInteger: 
-	[defaults integerForKey: @"RandomPlaylistMinRating"]?[defaults integerForKey: @"RandomPlaylistMinRating"]:0];
+	[defaults integerForKey: @"RandomPlaylistMinRating"]];
     }
   else
     {
@@ -253,7 +257,6 @@ objectValueForTableColumn: (NSTableColumn *) tableColumn
 shouldEditTableColumn: (NSTableColumn *)aTableColumn
 	       row:(int)rowIndex
 {
-NSLog(@"shouldEditTableColumn got called!!");
   if ([randomPlaylistFeed state] && [ratingBasedFeed state]) 
     {
       return YES;
@@ -288,80 +291,16 @@ NSLog(@"shouldEditTableColumn got called!!");
 	[defaults setInteger: [anObj intValue] forKey:@"RandomPlaylistMaxRating"];
     }
     [defaults synchronize];
+    [self sendRandomPlaylistFeedDefaultsChangedNotification];
 }
 
-// Thread stuff to update the playlist in the background
-- (void) playlistUpdateThread
+- (void) sendRandomPlaylistFeedDefaultsChangedNotification
 {
-  NSAutoreleasePool *pool;
-  NSArray * allSongs;
-  NSArray * currentPlaylist;
-  NSInteger diffOldSongs, diffFutureSongs;
-
-  if (![threadlock tryLock])
-    {
-      return;
-    }
-
-  pool = [NSAutoreleasePool new];
-  currentPlaylist = [[NSArray alloc] init];
-  allSongs = [[NSArray alloc] init];
-  currentPlaylist = [mpdController getPlaylist];
-  allSongs = [[CollectionController sharedCollectionController] getAllTracks];
-
-  diffFutureSongs = [nrOfSongsInPlaylist integerValue] - 
-				[currentSongNr integerValue];
-  if (diffFutureSongs < [nrNewSongs integerValue])
-    {
-	NSInteger i;
-	for (i=0;i<[nrNewSongs integerValue] - diffFutureSongs;i++)
-	  {
-	    BOOL newAdded = NO;
-	    while (newAdded != YES)
-	      {
-	        NSString *trackFilename;
-		NSEnumerator *playlistEnumerator;
-		PlaylistItem *plItem;
-		BOOL alreadyExists = NO;
-	        NSUInteger random = arc4random() % [allSongs count];
-	        trackFilename = [[allSongs objectAtIndex: random] getPath];
-		// now check if the new song is already in the playlist
-		playlistEnumerator = [currentPlaylist objectEnumerator];
-		while ((plItem = [playlistEnumerator nextObject]))
-		  {
-		    if ([trackFilename isEqual: [plItem getPath]])
-		      {
-			alreadyExists = YES;
-			break;
-		      }
-		  }
-		if (alreadyExists == YES)
-		  {
-		    continue;
-		  }
-		[mpdController addTrack:trackFilename];
-		newAdded = YES;
-	      }
-	  }
-    }
-  
-  diffOldSongs = [currentSongNr integerValue] - [nrPlayedSongs integerValue];
-  if (diffOldSongs > 0)
-    {
-      NSRange songRange = NSMakeRange(0, diffOldSongs - 1);
-      [mpdController removeSongRange:songRange];
-    }
-  [threadlock unlock];
-  [pool release];
+  NSNotification *aNotif;
+  aNotif = [NSNotification notificationWithName:
+			RandomPlaylistFeedDefaultsChangedNotification
+                        object: nil];
+  [[NSNotificationCenter defaultCenter]
+    postNotification: aNotif];
 }
-
-- (BOOL) startPlaylistUpdateThread
-{
-  [NSThread detachNewThreadSelector: @selector (playlistUpdateThread)
-                           toTarget: self
-                         withObject: nil];
-  return YES;
-}
-
-
 @end

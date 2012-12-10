@@ -3,6 +3,8 @@
 	  playlist feed
 	* GNUmakefile, PC.project, add RandomPlaylistFeed.[h|m]
 	* Implement a random Playlist Feed
+	* PlaylistInspector.[h|m] move out the threading, and
+	  put it in the RandomPlaylistFeed class
 
 2012-12-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* SongInspector.h
