@@ -468,11 +468,11 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
   if ([fString compare: @""] == NSOrderedSame)
     {
       allArtists = RETAIN([[MPDController sharedMPDController] getAllArtists]);
-      filteredTracks = RETAIN([[MPDController sharedMPDController] getAllTracks]);
+      filteredTracks = RETAIN([[MPDController sharedMPDController] getAllTracksWithMetadata: YES]);
     }
   else
     {
-      NSArray *allTracks = [[[MPDController sharedMPDController] getAllTracks] retain];
+      NSArray *allTracks = [[[MPDController sharedMPDController] getAllTracksWithMetadata: YES] retain];
       NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
       NSMutableSet *tmpArtists = [[NSMutableSet alloc] init];
       
