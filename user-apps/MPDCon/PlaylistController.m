@@ -70,18 +70,18 @@
 
   mpdController = [MPDController sharedMPDController];
 
-  AUTORELEASE(playlist);
+  [playlist autorelease];
 
-  playlist = RETAIN([mpdController getPlaylist]);
+  playlist = [[mpdController getPlaylist] retain];
   
   return self;
 }
 
 - (void) dealloc
 {
-  RELEASE(playlist);
-  RELEASE(playlistTimes);
-  RELEASE(ratingCol);
+  [playlist release];
+  [playlistTimes release];
+  [ratingCol release];
 
   [super dealloc];
 }
@@ -404,9 +404,9 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
 {
   int j;
 
-  AUTORELEASE(playlist);
+  [playlist release];
 
-  playlist = RETAIN([mpdController getPlaylist]);
+  playlist = [[mpdController getPlaylist] retain];
 
   if ([[filterField stringValue] compare: @""] != NSOrderedSame)
     {
@@ -416,7 +416,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
   [lengthView setStringValue: [NSString stringWithFormat: 
 	 _(@"Playlist Length: %@"), [self _playlistLength]]];
 
-  AUTORELEASE(playlistTimes);
+  [playlistTimes autorelease];
 
   playlistTimes = [[NSMutableArray alloc] init];
 

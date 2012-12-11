@@ -70,10 +70,10 @@ int _stringSort(id string1, id string2, void *context);
 {
   mpd_connection_free(mpdConnection);
 
-  RELEASE(host);
-  RELEASE(port);
-  RELEASE(password);
-  RELEASE(timeout);
+  [host release];
+  [port release];
+  [password release];
+  [timeout release];
 
   [super dealloc];
 }
@@ -91,16 +91,16 @@ int _stringSort(id string1, id string2, void *context);
       BOOL didConnect;
 
       if (host) {
-	  RELEASE(host);
+	  [host release];
       }
       if (port) {
-	  RELEASE(port);
+	  [port release];
       }
       if (password) {
-	  RELEASE(password);
+	  [password release];
       }
       if (port) {
-	  RELEASE(timeout);
+	  [timeout release];
       }
       host = [hostName copy];
       port = [portNr copy];
@@ -428,7 +428,7 @@ int _stringSort(id string1, id string2, void *context);
 
     mpd_stats_free(mpdStats);
     mpd_response_finish(mpdConnection);
-    return AUTORELEASE(statItem);
+    return [statItem autorelease];
   } else {
     return nil;
   }
@@ -469,7 +469,7 @@ int _stringSort(id string1, id string2, void *context);
 	  }
 	  mpdSong = mpd_recv_song(mpdConnection);
 	  
-	  currSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
+	  currSong = [[self _getPlaylistItemForSong: mpdSong] retain];
 	  
 	  [currSong setElapsedTime: mpd_status_get_elapsed_time(mpdStatus)];
 	  [currSong setTotalTime: mpd_status_get_total_time(mpdStatus)];
@@ -482,7 +482,7 @@ int _stringSort(id string1, id string2, void *context);
 
   if (currSong)
     {
-      return AUTORELEASE(currSong);
+      return [currSong autorelease];
     }
   else
     {
@@ -547,9 +547,9 @@ int _stringSort(id string1, id string2, void *context);
   while((mpdSong = mpd_recv_song(mpdConnection)) != NULL) {
 	  PlaylistItem *tmpSong;
 
-	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
+	  tmpSong = [[self _getPlaylistItemForSong: mpdSong] retain];
 	  [playlist addObject: tmpSong];
-	  RELEASE(tmpSong);	
+	  [tmpSong release];
           mpd_song_free(mpdSong);
   }
   
@@ -562,7 +562,7 @@ int _stringSort(id string1, id string2, void *context);
   } else {
     currPlaylistVersion = 0;
   }
-  return AUTORELEASE(playlist);
+  return [playlist autorelease];
 }
 
 - (BOOL) collectionChanged
@@ -687,7 +687,7 @@ int _stringSort(id string1, id string2, void *context);
   }
   mpd_response_finish(mpdConnection);
   
-  return AUTORELEASE(tmpArray);
+  return [tmpArray autorelease];
   
 }
 
@@ -740,8 +740,8 @@ int _stringSort(id string1, id string2, void *context);
     }
 
   mpd_response_finish(mpdConnection);
-  return [AUTORELEASE(allArtists) sortedArrayUsingFunction: _stringSort 
-		                                   context: NULL];
+  return [[allArtists sortedArrayUsingFunction: _stringSort 
+		                       context: NULL] autorelease];
 }
 
 - (NSArray *) getAllAlbums
@@ -763,8 +763,8 @@ int _stringSort(id string1, id string2, void *context);
   }
 
   mpd_response_finish(mpdConnection);
-  return [AUTORELEASE(allAlbums) sortedArrayUsingFunction: _stringSort 
-		                                  context: NULL];
+  return [[allAlbums sortedArrayUsingFunction: _stringSort 
+	                              context: NULL] autorelease];
 }
 
 - (NSArray *) getAllTracksWithMetadata: (BOOL) withMetadata
@@ -798,7 +798,7 @@ int _stringSort(id string1, id string2, void *context);
     mpd_entity_free(mpdEntity);
   }
   mpd_response_finish(mpdConnection);
-  return AUTORELEASE(allTracks);
+  return [allTracks autorelease];
 }
 
 - (NSArray *) getAlbumsForArtist: (NSString *)artist
@@ -832,8 +832,8 @@ return nil;
   
   mpd_response_finish(mpdConnection);
 
-  return [AUTORELEASE(allAlbums) sortedArrayUsingFunction: _stringSort 
-		                                  context:NULL];
+  return [[allAlbums sortedArrayUsingFunction: _stringSort 
+		                      context:NULL] autorelease];
 */
 
 }
@@ -871,18 +871,18 @@ return nil;
 	  
 	  mpdSong = mpd_entity_get_song(mpdInfoEntity);
 
-	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
+	  tmpSong = [[self _getPlaylistItemForSong: mpdSong] retain];
       
 	  [allTracks addObject: tmpSong];
 
-	  RELEASE(tmpSong);
+	  [tmpSong release];
 	}
       mpd_entity_free(mpdInfoEntity);
     }
   
   mpd_response_finish(mpdConnection);
   
-  return AUTORELEASE(allTracks);
+  return [allTracks autorelease];
 
 */
 }
@@ -894,7 +894,7 @@ return nil;
   NSMutableArray *allTracks;
   int i;
 
-  tmpArray = RETAIN([self getAllTracksForArtist: artist]);
+  tmpArray = [[self getAllTracksForArtist: artist] retain];
 
   if (! tmpArray) {
       return nil;
@@ -908,8 +908,8 @@ return nil;
       }
   }
   
-  RELEASE(tmpArray);
-  return AUTORELEASE(allTracks);
+  [tmpArray release];
+  return [allTracks autorelease];
 }
 
 - (NSArray *) getAllTracksForAlbum: (NSString *)album
@@ -945,18 +945,18 @@ return nil;
 	  
 	  mpdSong = mpd_entity_get_song(mpdInfoEntity);
 
-	  tmpSong = RETAIN([self _getPlaylistItemForSong: mpdSong]);
+	  tmpSong = [[self _getPlaylistItemForSong: mpdSong] retain];
 
 	  [allTracks addObject: tmpSong];
 	  
-	  RELEASE(tmpSong);
+	  [tmpSong release];
 	}
       mpd_entity_free(mpdInfoEntity);
     }
   
   mpd_response_finish(mpdConnection);
 
-  return AUTORELEASE(allTracks);;
+  return [allTracks autorelease];
 */
 }
 
@@ -1121,7 +1121,7 @@ return nil;
 
   [plItem setID: mpd_song_get_id(anSong)];
   [plItem setPos: mpd_song_get_pos(anSong)];
-  return AUTORELEASE(plItem);
+  return [plItem autorelease];
 }
 
 int _stringSort(id string1, id string2, void *context)

@@ -59,7 +59,7 @@
 
 - (void) dealloc
 {
-  RELEASE(playlists);
+  [playlists release];
 
   [super dealloc];
 }
@@ -83,9 +83,9 @@
 
 - (void) updateLists: (id)sender
 {
-  RELEASE(playlists);
+  [playlists release];
 
-  playlists = RETAIN([mpdController getAllPlaylists]);
+  playlists = [[mpdController getAllPlaylists] retain];
 
   [listView deselectAll: self];
   [listView reloadData];

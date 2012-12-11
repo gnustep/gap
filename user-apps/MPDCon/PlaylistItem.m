@@ -56,19 +56,19 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) dealloc
 {
-  RELEASE(artist);
-  RELEASE(title);
-  RELEASE(album);
-  RELEASE(genre);
-  RELEASE(trackNr);
-  RELEASE(path);
-  RELEASE(comment);
-  RELEASE(composer);
-  RELEASE(date);
-  RELEASE(performer);
-  RELEASE(disc);
-  RELEASE(lyricsText);
-  RELEASE(lyricsURL);
+  [artist release];
+  [title release];
+  [album release];
+  [genre release];
+  [trackNr release];
+  [path release];
+  [comment release];
+  [composer release];
+  [date release];
+  [performer release];
+  [disc release];
+  [lyricsText release];
+  [lyricsURL release];
 
   [super dealloc];
 }
@@ -84,7 +84,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setArtist: (NSString *)newArtist
 {
-  AUTORELEASE(artist);
+  [artist autorelease];
   artist = [newArtist copy];
 }
 
@@ -95,7 +95,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setAlbum: (NSString *)newAlbum
 {
-  AUTORELEASE(album);
+  [album autorelease];
   album = [newAlbum copy];
 }
 
@@ -106,7 +106,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setGenre: (NSString *)newGenre
 {
-  AUTORELEASE(genre);
+  [genre autorelease];
   genre = [newGenre copy];
 }
 
@@ -117,7 +117,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setTitle: (NSString *)newTitle
 {
-  AUTORELEASE(title);
+  [title autorelease];
   title = [newTitle copy];
 }
 
@@ -128,7 +128,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setTrackNr: (NSString *)newNr
 {
-  AUTORELEASE(trackNr);
+  [trackNr autorelease];
   trackNr = [newNr copy];
 }
 
@@ -139,7 +139,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setComment: (NSString *)newComment
 {
-  AUTORELEASE(comment);
+  [comment autorelease];
   comment = [newComment copy];
 }
 
@@ -150,7 +150,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setComposer: (NSString *)newComposer
 {
-  AUTORELEASE(composer);
+  [composer autorelease];
   composer = [newComposer copy];
 }
 
@@ -161,7 +161,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setDate: (NSString *)newDate
 {
-  AUTORELEASE(date);
+  [date autorelease];
   date = [newDate copy];
 }
 
@@ -172,7 +172,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setPerformer: (NSString *)newPerformer
 {
-  AUTORELEASE(performer);
+  [performer autorelease];
   performer = [newPerformer copy];
 }
 
@@ -183,7 +183,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setDisc: (NSString *)newDisc
 {
-  AUTORELEASE(disc);
+  [disc autorelease];
   disc = [newDisc copy];
 }
 
@@ -214,7 +214,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
 
 - (void) setPath: (NSString *)newPath
 {
-  AUTORELEASE(path);
+  [path autorelease];
   path = [newPath copy];
 }
 

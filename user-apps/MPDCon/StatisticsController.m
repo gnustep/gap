@@ -73,7 +73,7 @@
 
   int secs, mins, hours;
 
-  statItem = RETAIN([[MPDController sharedMPDController] getStatistics]);
+  statItem = [[[MPDController sharedMPDController] getStatistics] retain];
 
   [songs setIntValue: [statItem getNumberOfSongs]];
   [artists setIntValue: [statItem getNumberOfArtists]];
@@ -100,7 +100,7 @@
 
   [dbPlaytime setStringValue: [NSString stringWithFormat: @"%d:%02d:%02d", hours, mins, secs]];
 
-  RELEASE(statItem);
+  [statItem release];
 }
 
 

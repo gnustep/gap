@@ -58,7 +58,7 @@
 
 - (void) dealloc
 {
-  RELEASE(lyricsURL);
+  [lyricsURL release];
 
   [super dealloc];
 }

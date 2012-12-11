@@ -107,7 +107,7 @@ static NSString* SongRatingStorageDirectory = nil;
       @"SQLClientReferences",
       nil]
   ];
-  MPDConDB = RETAIN([SQLClient clientWithConfiguration: nil name: @"MPDCon"]);
+  MPDConDB = [[SQLClient clientWithConfiguration: nil name: @"MPDCon"] retain];
   //[MPDConDB setDurationLogging: 0];
   [MPDConDB execute: @"CREATE TABLE IF NOT EXISTS SongRatings ( "
                 @"fileName CHAR(1024) PRIMARY KEY, "

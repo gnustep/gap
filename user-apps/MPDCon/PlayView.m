@@ -58,7 +58,7 @@
 
 - (void) dealloc
 {
-  RELEASE(dispSong);
+  [dispSong release];
 
   [super dealloc];
 }
@@ -140,9 +140,9 @@
 
 - (void) setDisplaySong: (PlaylistItem *)newSong
 {
-  RELEASE(dispSong);
+  [dispSong release];
 
-  dispSong = RETAIN(newSong);
+  dispSong = [newSong retain];
   [self setNeedsDisplay: YES];
 }
 
