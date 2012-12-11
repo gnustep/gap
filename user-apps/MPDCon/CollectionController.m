@@ -78,10 +78,10 @@ int _aSort(id string1, id string2, void *context);
 
 - (void) dealloc
 {
-  RELEASE(allSongs);
-  RELEASE(allArtists);
-  RELEASE(allAlbums);
-  RELEASE(filteredTracks);
+  [allSongs release];
+  [allArtists release];
+  [allAlbums release];
+  [filteredTracks release];
   [super dealloc];
 }
 
@@ -156,30 +156,30 @@ int _aSort(id string1, id string2, void *context);
 	  
       if ([identifier isEqual: @"artist"]) 
         {
-          NSArray *tmpArray = RETAIN([AUTORELEASE(allSongs) 
+          NSArray *tmpArray = [[[allSongs autorelease] 
 		    	     sortedArrayUsingFunction: _artistSort 
-			         context: NULL]);
+			         context: NULL] retain];
           allSongs = tmpArray;
         } 
       else if ([identifier isEqual: @"album"]) 
         {
-          NSArray *tmpArray = RETAIN([AUTORELEASE(allSongs) 
+          NSArray *tmpArray = [[[allSongs autorelease]
 		    	     sortedArrayUsingFunction: _albumSort 
-			         context: NULL]);
+			         context: NULL] retain];
           allSongs = tmpArray;
         } 
       else if ([identifier isEqual: @"title"]) 
         {
-          NSArray *tmpArray = RETAIN([AUTORELEASE(allSongs)
+          NSArray *tmpArray = [[[allSongs autorelease]
 		    	     sortedArrayUsingFunction: _titleSort 
-			         context: NULL]);
+			         context: NULL] retain];
           allSongs = tmpArray;
         } 
       else if ([identifier isEqual: @"trackNr"]) 
         {
-          NSArray *tmpArray = RETAIN([AUTORELEASE(allSongs) 
+          NSArray *tmpArray = [[[allSongs autorelease]
 		    	     sortedArrayUsingFunction: _trackSort 
-			         context: NULL]);
+			         context: NULL] retain];
           allSongs = tmpArray;
         } 
   
@@ -368,7 +368,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
 
 - (void) _getAllAlbumsForArtistAt: (int)row
 {
-  RELEASE(allAlbums);
+  [allAlbums release];
   
   NSMutableSet *tmpAlbums = [[NSMutableSet alloc] init];
      
@@ -395,7 +395,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
 
 - (void) _getAllTracksForArtistAt: (int)artistRow albumAt: (int)albumRow
 {
-  RELEASE(allSongs);
+  [allSongs release];
   
   if (artistRow < 1)
     {
@@ -461,14 +461,13 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
     
 - (void) _filterCollectionByString: (NSString *) fString
 {  
-  RELEASE(allArtists);
-  
-  RELEASE(filteredTracks);
+  [allArtists release];
+  [filteredTracks release];
 
   if ([fString compare: @""] == NSOrderedSame)
     {
-      allArtists = RETAIN([[MPDController sharedMPDController] getAllArtists]);
-      filteredTracks = RETAIN([[MPDController sharedMPDController] getAllTracksWithMetadata: YES]);
+      allArtists = [[[MPDController sharedMPDController] getAllArtists] retain];
+      filteredTracks = [[[MPDController sharedMPDController] getAllTracksWithMetadata: YES] retain];
     }
   else
     {

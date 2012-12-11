@@ -63,10 +63,10 @@
 
 - (void) dealloc
 {
-  RELEASE(minRatingCol);
-  RELEASE(maxRatingCol);
-  RELEASE(defaults);
-  RELEASE(threadlock);
+  [minRatingCol release];
+  [maxRatingCol release];
+  [defaults release];
+  [threadlock release];
 
   [super dealloc];
 }

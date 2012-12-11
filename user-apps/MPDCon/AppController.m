@@ -580,7 +580,7 @@
       
       playlistLength = [mpdController getPlaylistLength];
       
-      currSong = RETAIN([mpdController getCurrentSong]);
+      currSong = [[mpdController getCurrentSong] retain];
       
       if (currentSongNr != playedSong) {
 	  playedSong = currentSongNr;
@@ -630,7 +630,7 @@
 	  [percentSlider setDoubleValue: (double)[currSong getElapsedTime]];
       }
       
-      RELEASE(currSong);
+      [currSong release];
   } else if (prevState != state_STOP) {
       NSImage *pImage;
 
