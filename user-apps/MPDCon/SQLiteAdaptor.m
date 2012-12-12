@@ -129,35 +129,31 @@ static NSString* SongRatingStorageDirectory = nil;
   [super dealloc];
 }
 
-- (void) setRating: (NSUInteger) rating forFile: (NSString *) fileName
+- (void) setRating: (NSInteger) rating forFile: (NSString *) fileName
 {
-  NSString *quotedFileName, *query;
+  NSString *query;
 
-  // the following doesn't seem to work, but the line after it does the trick!
-  //quotedFileName = [MPDConDB quoteString:fileName];
-  quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
   query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO \
-		SongRatings(fileName, rating) values('%@', %u)", quotedFileName, rating];
+		SongRatings(fileName, rating) values(%@, %i)", 
+		[MPDConDB quoteString:fileName], [MPDConDB quoteInteger: rating]];
   [MPDConDB execute: query, nil];
 }
-- (NSUInteger) getRatingForFile: (NSString *) fileName
+- (NSInteger) getRatingForFile: (NSString *) fileName
 {
-  NSString *quotedFileName, *query;
+  NSString *query;
   NSMutableArray *records;
   SQLRecord      *record;
   NSInteger rating = 0;
 
-  // the following doesn't work, but the line after it does the trick
-  //quotedFileName = [MPDConDB quoteString:fileName];
-  quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-  query = [NSString stringWithFormat:@"SELECT rating FROM SongRatings WHERE fileName='%@'", quotedFileName];
+  query = [NSString stringWithFormat:@"SELECT rating FROM SongRatings WHERE fileName=%@", 
+		[MPDConDB quoteString:fileName]];
   records = [MPDConDB query: query, nil];
 
   // we search for the primary key, so we should find exactly one
   if ([records count] == 1)
     { 
       record = [records objectAtIndex:0]; 
-      rating = [[record objectAtIndex:0] unsignedIntegerValue];
+      rating = [[record objectAtIndex:0] integerValue];
     }
   return rating;
 }
@@ -172,32 +168,26 @@ static NSString* SongRatingStorageDirectory = nil;
 
 - (void) setLyrics: (NSString *) lyricsText withURL: (NSString *) lyricsURL forFile: (NSString *) fileName
 {
-  NSString *quotedFileName, *quotedText, *quotedURL;
   NSString *query;
 
-  quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-  quotedText = [lyricsText stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-  quotedURL = [lyricsURL stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-
   query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO \
-		SongLyrics(fileName, lyricsText, lyricsURL) values('%@', '%@', '%@')",
-		quotedFileName, quotedText, quotedURL];	
+		SongLyrics(fileName, lyricsText, lyricsURL) values(%@, %@, %@)",
+		[MPDConDB quoteString: fileName], 
+		[MPDConDB quoteString: lyricsText],
+		[MPDConDB quoteString: lyricsURL]];
 
   [MPDConDB execute: query, nil];
 }
 - (NSDictionary *) getLyricsForFile: (NSString *) fileName
 {
-  NSString  *quotedFileName, *quotedText, *quotedURL;
   NSString  *query;
   NSMutableArray *records;
   SQLRecord *record;
   NSString *lyricsText, *lyricsURL;
   NSDictionary *result = nil;
   
-  quotedFileName = [fileName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-
   query = [NSString stringWithFormat:@"SELECT lyricsText, lyricsURL FROM SongLyrics \
-					WHERE fileName='%@'", quotedFileName];
+					WHERE fileName=%@", [MPDConDB quoteString: fileName]];
 		
   records = [MPDConDB query: query, nil];
 
@@ -205,14 +195,11 @@ static NSString* SongRatingStorageDirectory = nil;
   if ([records count] == 1)
     {
       record = [records objectAtIndex:0];
-      quotedText = [record objectAtIndex:0];
-      quotedURL = [record objectAtIndex:1];
-      lyricsText = [quotedText stringByReplacingOccurrencesOfString:@"''" withString:@"'"]; 
-      lyricsURL = [quotedURL stringByReplacingOccurrencesOfString:@"''" withString:@"'"]; 
+      lyricsText = [record objectAtIndex:0];
+      lyricsURL = [record objectAtIndex:1];
       result = [NSDictionary dictionaryWithObjectsAndKeys: lyricsText, @"lyricsText", 
 		lyricsURL, @"lyricsURL", nil];
     }
   return result;
 }
-
 @end

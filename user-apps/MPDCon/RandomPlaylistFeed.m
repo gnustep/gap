@@ -147,21 +147,36 @@
                 NSString *trackFilename;
                 NSEnumerator *playlistEnumerator;
                 PlaylistItem *plItem;
-                BOOL alreadyExists = NO;
+                BOOL addThisTrack = YES;
                 NSUInteger random = arc4random() % [allSongs count];
                 trackFilename = [[[allSongs objectAtIndex: random] getPath] copy];
+
                 // now check if the new song is already in the playlist
                 playlistEnumerator = [currentPlaylist objectEnumerator];
                 while ((plItem = [playlistEnumerator nextObject]))
                   {
-                    if ([trackFilename isEqual: [plItem getPath]])
-                      {
-                        alreadyExists = YES;
-                        break;
-                      }
+                     if ([trackFilename isEqual: [plItem getPath]])
+                       {
+                         addThisTrack = NO;
+                         break;
+                       }
+		     if (addThisTrack != NO && ratingBasedFeed == YES)
+		       {
+		          NSInteger rating;
+			  PlaylistItem *newItem;
+			  newItem = [[PlaylistItem alloc] init];
+			  [newItem setPath:trackFilename];
+			  rating = [newItem getRating];
+			  if (rating < minRating || rating > maxRating)
+			    {
+			      addThisTrack = NO;
+			      [newItem release];
+			      break;
+			    }
+			  [newItem release];
+		       }
                   }
-		[plItem release];
-                if (alreadyExists == YES)
+                if (addThisTrack == NO)
                   {
                     continue;
                   }

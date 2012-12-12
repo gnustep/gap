@@ -1,3 +1,10 @@
+2012-12-12: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlaylistItem.[m|h] make the rating an Integer, not
+	  unsigned integer
+	* SQLiteAdaptor.[h|m] same as above, and use the quoteString
+	  from libSQLite correcly
+	* RandomPlaylistFeed, make the feed based on rating work
+
 2012-12-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* nearly any .m file: get rid of GNUstep macros
 

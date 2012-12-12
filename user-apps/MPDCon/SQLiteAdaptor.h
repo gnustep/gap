@@ -35,8 +35,8 @@
 + (id) sharedSQLiteAdaptor;
 
 // Song ratings related methods
-- (void) setRating: (NSUInteger) rating forFile: (NSString *) fileName;
-- (NSUInteger) getRatingForFile: (NSString *) fileName;
+- (void) setRating: (NSInteger) rating forFile: (NSString *) fileName;
+- (NSInteger) getRatingForFile: (NSString *) fileName;
 - (NSArray *) getFilesForRatingsInRange: (NSRange) range;
 
 // Lyrics related methods

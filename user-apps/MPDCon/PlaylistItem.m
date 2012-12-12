@@ -218,12 +218,12 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
   path = [newPath copy];
 }
 
-- (NSUInteger) getRating
+- (NSInteger) getRating
 {
   return [MPDConDB getRatingForFile:path];
 }
 
-- (void) setRating: (NSUInteger)newRating
+- (void) setRating: (NSInteger)newRating
 {
   [MPDConDB setRating: newRating forFile: path];
 }
