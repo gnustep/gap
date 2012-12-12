@@ -85,8 +85,8 @@
 - (void) setID: (int) newID;
 - (int) getPos;
 - (void) setPos: (int) newPos;
-- (NSUInteger) getRating;
-- (void) setRating: (NSUInteger)newRating;
+- (NSInteger) getRating;
+- (void) setRating: (NSInteger)newRating;
 - (NSDictionary *) getLyrics;
 - (void) setLyrics: (NSString *) _lyricsText withURL: (NSString *)_lyricsURL;
 @end
