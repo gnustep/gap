@@ -2,6 +2,7 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
+	    "includeUnratedSongsChanged:",
 	    "nrOfFutureSongsChanged:",
 	    "nrOfOldSongsToKeepChanged:",
 	    "randomPlaylistFeedStateChanged:",
@@ -14,7 +15,8 @@
 	    "nrOfFutureSongsChanged:",
 	    "nrOfOldSongsToKeepChanged:",
 	    "randomPlaylistFeedStateChanged:",
-	    "ratingBasedFeedStateChanged:"
+	    "ratingBasedFeedStateChanged:",
+	    "includeUnratedSongsChanged:"
 	);
 	Outlets = (
 	    currentSongNr,
@@ -25,7 +27,12 @@
 	    nrPlayedSongs,
 	    playlistPlayingTime,
 	    randomPlaylistFeed,
-	    ratingBasedFeed
+	    ratingBasedFeed,
+	    includeUnratedSongs,
+	    maxRatingText,
+	    minRatingText,
+	    nrOfNewSongsText,
+	    nrOfPlayedSongsText
 	);
 	Super = NSWindowController;
     };

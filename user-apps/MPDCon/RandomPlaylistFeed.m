@@ -88,6 +88,7 @@
 {
   randomPlaylistFeed = [defaults boolForKey: @"RandomPlaylistFeed"];  
   ratingBasedFeed = [defaults boolForKey: @"RatingBasedFeed"];
+  includeUnratedSongs = [defaults boolForKey: @"IncludeUnratedSongs"];
   nrNewSongs =  [defaults integerForKey: @"NrOfFutureSongs"] ? 
 		[defaults integerForKey: @"NrOfFutureSongs"]:20;
   nrPlayedSongs = [defaults integerForKey: @"NrOfOldSongsToKeep"] ?
@@ -160,22 +161,27 @@
                          addThisTrack = NO;
                          break;
                        }
-		     if (addThisTrack != NO && ratingBasedFeed == YES)
-		       {
-		          NSInteger rating;
-			  PlaylistItem *newItem;
-			  newItem = [[PlaylistItem alloc] init];
-			  [newItem setPath:trackFilename];
-			  rating = [newItem getRating];
-			  if (rating < minRating || rating > maxRating)
-			    {
-			      addThisTrack = NO;
-			      [newItem release];
-			      break;
-			    }
-			  [newItem release];
-		       }
                   }
+		if (addThisTrack == YES && ratingBasedFeed == YES)
+		  {
+		     NSInteger rating;
+		     PlaylistItem *newItem;
+	             newItem = [[PlaylistItem alloc] init];
+		     [newItem setPath:trackFilename];
+		     rating = [newItem getRating];
+                     if (rating < minRating || rating > maxRating)
+		       {
+		         if (rating == 0 && includeUnratedSongs == YES)
+			   {
+			     addThisTrack = YES;
+			   }
+			 else
+			   {
+			     addThisTrack = NO;
+			   }
+		       }
+		     [newItem release];
+		  }
                 if (addThisTrack == NO)
                   {
                     continue;

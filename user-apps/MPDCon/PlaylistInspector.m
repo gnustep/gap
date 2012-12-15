@@ -107,6 +107,7 @@
 
   [randomPlaylistFeed setState: [defaults integerForKey: @"RandomPlaylistFeed"]];
   [ratingBasedFeed setState: [defaults integerForKey: @"RatingBasedFeed"]];
+  [includeUnratedSongs setState: [defaults integerForKey: @"IncludeUnratedSongs"]];
   [nrNewSongs setStringValue:  [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfFutureSongs"]?
 		[defaults integerForKey: @"NrOfFutureSongs"]:20]];
   [nrPlayedSongs setStringValue: [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfOldSongsToKeep"]?
@@ -116,7 +117,12 @@
     {
       [nrNewSongs setEditable: NO];
       [nrPlayedSongs setEditable: NO];
+      [nrOfNewSongsText setEnabled: NO];
+      [nrOfPlayedSongsText setEnabled: NO];
       [ratingBasedFeed setEnabled:NO];
+      [minRatingText setEnabled: NO];
+      [maxRatingText setEnabled: NO];
+      [includeUnratedSongs setEnabled:NO];
       // the stuff below doesn't work like expected, also setEnabled: NO doesn't seem to work either
       [minRatingCell setEditable: NO];
       [maxRatingCell setEditable: NO];
@@ -126,8 +132,11 @@
       if (![ratingBasedFeed state])
 	{
           // the stuff below doesn't work like expected, also setEnabled: NO doesn't seem to work either
+          [minRatingText setEnabled: NO];
+          [maxRatingText setEnabled: NO];
           [minRatingCell setEditable: NO];
           [maxRatingCell setEditable: NO];
+          [includeUnratedSongs setEnabled:NO];
 	}
     }
 
@@ -155,21 +164,31 @@
     {
       [nrNewSongs setEditable: YES];
       [nrPlayedSongs setEditable: YES];
+      [nrOfNewSongsText setEnabled: YES];
+      [nrOfPlayedSongsText setEnabled: YES];
       [ratingBasedFeed setEnabled:YES];
       if ([ratingBasedFeed state])
         {
-//          [minRatingCell setEditable: YES];
-//          [maxRatingCell setEditable: YES];
+          [minRatingStars setEnabled: YES];
+          [maxRatingStars setEnabled: YES];
+          [minRatingText setEnabled: YES];
+          [maxRatingText setEnabled: YES];
+          [includeUnratedSongs setEnabled:YES];
         }
     }
   else
     {
       [nrNewSongs setEditable: NO];
       [nrPlayedSongs setEditable: NO];
+      [nrOfNewSongsText setEnabled: NO];
+      [nrOfPlayedSongsText setEnabled: NO];
       [ratingBasedFeed setEnabled:NO];
       // the stuff below doesn't work like expected, also setEnabled: NO doesn't seem to work either
-//      [minRatingCell setEditable: NO];
-//      [maxRatingCell setEditable: NO];
+      [maxRatingStars setEnabled: NO];
+      [minRatingStars setEnabled: NO];
+      [minRatingText setEnabled: NO];
+      [maxRatingText setEnabled: NO];
+      [includeUnratedSongs setEnabled:NO];
     }
 }
 - (void) ratingBasedFeedStateChanged: (id) sender
@@ -180,16 +199,28 @@
   // the disabling is not working, they seem to be always enabled
   if ([ratingBasedFeed state])
     {
-//      [minRatingCell setEditable: YES];
-//      [maxRatingCell setEditable: YES];
+      [maxRatingStars setEnabled: YES];
+      [minRatingStars setEnabled: YES];
+      [minRatingText setEnabled: YES];
+      [maxRatingText setEnabled: YES];
+      [includeUnratedSongs setEnabled:YES];
     }
   else
     {
-//      [minRatingCell setEditable: NO];
-//      [maxRatingCell setEditable: NO];
+      [maxRatingStars setEnabled: NO];
+      [minRatingStars setEnabled: NO];
+      [minRatingText setEnabled: NO];
+      [maxRatingText setEnabled: NO];
+      [includeUnratedSongs setEnabled:NO];
     }
 }
 
+- (void) includeUnratedSongsChanged: (id) sender
+{
+  [defaults setInteger: [includeUnratedSongs state] forKey:@"IncludeUnratedSongs"];
+  [defaults synchronize];
+  [self sendRandomPlaylistFeedDefaultsChangedNotification];
+}
 
 /* the delegate methods */
 - (void) songChanged:(NSNotification *)aNotif

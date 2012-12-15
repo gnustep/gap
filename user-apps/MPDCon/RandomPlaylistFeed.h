@@ -33,6 +33,7 @@
   NSUserDefaults *defaults;
   BOOL randomPlaylistFeed;
   BOOL ratingBasedFeed;
+  BOOL includeUnratedSongs;
   NSInteger nrNewSongs;
   NSInteger nrPlayedSongs;
   NSInteger maxRating;

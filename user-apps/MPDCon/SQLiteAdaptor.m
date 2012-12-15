@@ -135,7 +135,7 @@ static NSString* SongRatingStorageDirectory = nil;
 
   query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO \
 		SongRatings(fileName, rating) values(%@, %i)", 
-		[MPDConDB quoteString:fileName], [MPDConDB quoteInteger: rating]];
+		[MPDConDB quoteString:fileName], rating];
   [MPDConDB execute: query, nil];
 }
 - (NSInteger) getRatingForFile: (NSString *) fileName

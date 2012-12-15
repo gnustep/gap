@@ -37,9 +37,14 @@
   id nrOfSongsInPlaylist;
   id nrNewSongs;
   id nrPlayedSongs;
+  id nrOfNewSongsText;
+  id nrOfPlayedSongsText;
   id playlistPlayingTime;
   id randomPlaylistFeed;
   id ratingBasedFeed;
+  id includeUnratedSongs;
+  id maxRatingText;
+  id minRatingText;
 
   MPDController *mpdController;
   PlaylistController *playlistController;
@@ -56,6 +61,7 @@
 - (void) songChanged:(NSNotification *)aNotif;
 
 // Gui Methods
+- (void) includeUnratedSongsChanged: (id)sender;
 - (void) nrOfFutureSongsChanged: (id)sender;
 - (void) nrOfOldSongsToKeepChanged: (id)sender;
 - (void) randomPlaylistFeedStateChanged: (id)sender;
