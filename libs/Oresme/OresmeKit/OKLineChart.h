@@ -29,7 +29,8 @@
 
 @interface OKLineChart : OKChart
 {
-
+  float minXUnitSize;
+  float minYUnitSize;
 }
 
 @end

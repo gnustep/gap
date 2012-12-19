@@ -30,16 +30,33 @@
 
 @implementation OKLineChart
 
+-(id)initWithFrame: (NSRect)frameRect
+{
+  self = [super initWithFrame: frameRect];
+  if (self)
+    {
+      minXUnitSize = 10;
+      minYUnitSize = 10;
+      NSLog (@"minimum sizes inited");
+    }
+  return self;
+}
+
+
+
 -(void)drawRect: (NSRect)rect
 {
   NSRect boundsRect;
   unsigned i, j;
   float oneXUnit;
   float oneYUnit;
+  float xUnitSize;
+  float yUnitSize;
   float availableHeight;
   float availableWidth;
   float rangeToRepresent;
   float axisLevel;
+  unsigned steps;
 
   /* the super method will have calculated the limits */
   [super drawRect: rect];
@@ -47,6 +64,11 @@
   availableHeight = boundsRect.size.height * 0.9;
   availableWidth = boundsRect.size.width * 0.9;
   rangeToRepresent = graphMaxYVal - graphMinYVal;
+  if (rangeToRepresent == 0)
+    {
+      NSLog(@"No Y range to represent");
+      return;
+    }
   oneYUnit = availableHeight / rangeToRepresent;
   oneXUnit = availableWidth / graphMaxXVal;
 
@@ -54,26 +76,50 @@
   axisLevel = 0;
   if (graphMinYVal < 0)
     axisLevel = -oneYUnit * graphMinYVal;
-  NSLog(@"x-y unit: %f-%f:, axisLevel; %f", oneXUnit, oneYUnit, axisLevel);
+  NSLog(@"x-y unit: %f, %f:, axisLevel; %f", oneXUnit, oneYUnit, axisLevel);
+  xUnitSize = oneXUnit;
+  if (xUnitSize < minXUnitSize)
+    {
+      while (xUnitSize < minXUnitSize)
+        xUnitSize += oneXUnit;
+    }
+  else
+    xUnitSize = oneXUnit;
+
+  yUnitSize = oneYUnit;
+  if (yUnitSize < minYUnitSize)
+    {
+      while (yUnitSize < minYUnitSize)
+        yUnitSize += oneYUnit;
+    }
+  else
+    yUnitSize = oneYUnit;
+
+  NSLog(@"unit sizes: %f, %f", xUnitSize, yUnitSize);
   [axisColor set];
   [NSBezierPath strokeRect: NSMakeRect(0, axisLevel, boundsRect.size.width, 0)];
   [NSBezierPath strokeRect: NSMakeRect(0, 0, 0, boundsRect.size.height)];
 
   /* draw units */
-  for (i = 0; i < graphMaxXVal; i++)
+  steps =  availableWidth / xUnitSize;
+  NSLog(@"x steps: %u", steps);
+  for (i = 0; i < steps; i++)
     {
       float x;
 
-      x = i * oneXUnit;
+      x = i * xUnitSize;
       [NSBezierPath strokeRect: NSMakeRect(x, axisLevel-1, 0, 2)];
     }
-  for (i = 0; i < graphMaxYVal; i++)
+  steps = availableHeight / yUnitSize;
+  NSLog(@"y steps: %u", steps);
+  for (i = 0; i < steps; i++)
     {
       float y;
 
-      y = i * oneYUnit;
-      [NSBezierPath strokeRect: NSMakeRect(0, y, 1, 0)];
+      y = i * yUnitSize;
+      [NSBezierPath strokeRect: NSMakeRect(0, y, 2, 0)];
     }
+  NSLog(@"top is: %f", i * (yUnitSize / oneYUnit));
 
   for (i = 0; i < [seriesArray count]; i++)
     {
