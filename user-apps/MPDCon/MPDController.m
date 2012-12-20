@@ -740,8 +740,8 @@ int _stringSort(id string1, id string2, void *context);
     }
 
   mpd_response_finish(mpdConnection);
-  return [[allArtists sortedArrayUsingFunction: _stringSort 
-		                       context: NULL] autorelease];
+  return [[allArtists autorelease] sortedArrayUsingFunction: _stringSort 
+		                       context: NULL];
 }
 
 - (NSArray *) getAllAlbums
@@ -763,8 +763,8 @@ int _stringSort(id string1, id string2, void *context);
   }
 
   mpd_response_finish(mpdConnection);
-  return [[allAlbums sortedArrayUsingFunction: _stringSort 
-	                              context: NULL] autorelease];
+  return [[allAlbums autorelease] sortedArrayUsingFunction: _stringSort 
+	                              context: NULL];
 }
 
 - (NSArray *) getAllTracksWithMetadata: (BOOL) withMetadata
@@ -832,8 +832,8 @@ return nil;
   
   mpd_response_finish(mpdConnection);
 
-  return [[allAlbums sortedArrayUsingFunction: _stringSort 
-		                      context:NULL] autorelease];
+  return [[allAlbums autorelease] sortedArrayUsingFunction: _stringSort 
+		                      context:NULL];
 */
 
 }
