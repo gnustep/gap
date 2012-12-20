@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 1.3
+VERSION = 1.4
 PACKAGE_NAME = MPDCon
 APP_NAME = MPDCon
 MPDCon_APPLICATION_ICON = MPDCon.tiff
