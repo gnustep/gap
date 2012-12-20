@@ -1,6 +1,7 @@
 2012-12-20: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDController.m fix double frees and crashers in 
 	  the collection controller
+	* Update release version to 1.4
 2012-12-15: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* RandomPlaylistFeed.[h|m] honour the IncludeUnratedSongs
 	  default, and optimize algorithm a bit.
