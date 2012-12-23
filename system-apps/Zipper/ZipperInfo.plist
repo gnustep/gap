@@ -82,7 +82,15 @@
 			NSMessage = "createZippedTarArchive";
 			NSSendTypes = (NSFilenamesPboardType);
 			NSMenuItem = { 
-				default = "Zipper/Create archive"; 
+				default = "Zipper/Create tar.gz archive"; 
+			};
+		},
+		{
+			NSPortName = "Zipper";
+			NSMessage = "createBZippedTarArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create tar.bz2 archive"; 
 			};
 		}
 	);

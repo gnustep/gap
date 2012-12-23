@@ -26,7 +26,7 @@
 #import "TarArchive.h"
 
 @interface ArchiveService (PrivateAPI)
-- (void)createArchiveForFiles:(NSArray *)filenames;
+- (void)createTarArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
 @end
 
 @implementation ArchiveService : NSObject
@@ -40,21 +40,43 @@
 	types = [pboard types];
 	if ([types containsObject:NSFilenamesPboardType] == NO)
 	{
-		*error = @"We expect Filenames on the pasteboard!";
+		*error = @"We expect filenames on the pasteboard!";
 		return;
 	}
 	
 	filenames = [pboard propertyListForType:NSFilenamesPboardType];
 	if (filenames == nil)
 	{
-		*error = @"could not read filename off the pasteboard!";
+		*error = @"could not read filenames off the pasteboard!";
 		return;
 	}
 	
-	[self createArchiveForFiles:filenames];
+	[self createTarArchiveForFiles:filenames archiveType:@"TarGZ"];
+}
+- (void)createBZippedTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+{
+	NSArray *types;
+	id filenames;
+	
+	types = [pboard types];
+	if ([types containsObject:NSFilenamesPboardType] == NO)
+	{
+		*error = @"We expect filenames on the pasteboard!";
+		return;
+	}
+	
+	filenames = [pboard propertyListForType:NSFilenamesPboardType];
+	if (filenames == nil)
+	{
+		*error = @"could not read filenames off the pasteboard!";
+		return;
+	}
+	
+	[self createTarArchiveForFiles:filenames archiveType:@"TarBZ2"];
 }
 
-- (void)createArchiveForFiles:(NSArray *)filenames;
+- (void)createTarArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
 {
 	int rc;
 	
@@ -62,11 +84,20 @@
 	[panel setTitle:@"Archive destination"];
 	rc = [panel runModalForDirectory:NSHomeDirectory() file:nil];
 	if (rc == NSOKButton)
-	{
-		NSString *archiveFile = [panel filename];
-		// create the archive
-		[TarArchive createArchive:archiveFile withFiles:filenames];
-	}
+	  {
+	    if ([archiveType isEqual: @"TarGZ"])
+	      {
+		 NSString *archiveFile = [panel filename];
+		 // create the archive
+		 [TarArchive createArchive:archiveFile withFiles:filenames archiveType:@"TarGZ"];
+	      }
+	    else if ([archiveType isEqual: @"TarBZ2"])
+	      {
+		 NSString *archiveFile = [panel filename];
+		 // create the archive
+		 [TarArchive createArchive:archiveFile withFiles:filenames archiveType:@"TarBZ2"];
+	      }
+	  }
 }
 
 @end
