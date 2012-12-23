@@ -79,6 +79,14 @@
 	NSServices = (
 		{
 			NSPortName = "Zipper";
+			NSMessage = "createZipArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create zip archive"; 
+			};
+		},
+		{
+			NSPortName = "Zipper";
 			NSMessage = "createZippedTarArchive";
 			NSSendTypes = (NSFilenamesPboardType);
 			NSMenuItem = { 

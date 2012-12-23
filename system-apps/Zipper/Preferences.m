@@ -130,16 +130,33 @@ static NSMutableDictionary *_extensionMapping = nil;
 	NSString *zip = [self stringForKey:PREF_KEY_ZIP];
 	if (zip == nil)
 	{
-		zip = [[NSFileManager defaultManager] locateExecutable:@"unzip"];
+		zip = [[NSFileManager defaultManager] locateExecutable:@"zip"];
 	}
 	return zip;
 }
-
 + (void)setZipExecutable:(NSString *)newZip
 {
 	if (newZip != nil)
 	{
 		[[NSUserDefaults standardUserDefaults] setObject:newZip forKey:PREF_KEY_ZIP];
+	}
+}
+
++ (NSString *)unzipExecutable;
+{
+	NSString *unzip = [self stringForKey:PREF_KEY_UNZIP];
+	if (unzip == nil)
+	{
+		unzip = [[NSFileManager defaultManager] locateExecutable:@"unzip"];
+	}
+	return unzip;
+}
+
++ (void)setUnzipExecutable:(NSString *)newUnzip
+{
+	if (newUnzip != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newUnzip forKey:PREF_KEY_UNZIP];
 	}
 }
 

@@ -141,7 +141,7 @@
 	
 	    // build arguments for commandline: tar -czf filename <list of files>
 	    arguments = [NSMutableArray array];
-	   [arguments addObject:@"-czf"];
+	    [arguments addObject:@"-czf"];
 	  }
  	else if ([archiveType isEqual:@"TarBZ2"])
 	  {

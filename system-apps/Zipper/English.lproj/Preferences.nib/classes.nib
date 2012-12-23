@@ -1,28 +1,39 @@
 {
     IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {
-            ACTIONS = {
-                cancelPressed = id; 
-                findDefaultOpenApp = id; 
-                findExecutable = id; 
-                okPressed = id; 
-            }; 
-            CLASS = PreferencesController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                "_bsdTarButton" = NSButton; 
-                "_defaultOpenApp" = NSTextField; 
-                "_lhaTextField" = NSTextField; 
-                "_lzxTextField" = NSTextField; 
-                "_panel" = NSPanel; 
-                "_rarTextField" = NSTextField; 
-                "_sevenZipTextField" = NSTextField; 
-                "_tarTextField" = NSTextField; 
-                "_unzipTextField" = NSTextField; 
-            }; 
-            SUPERCLASS = NSObject; 
-        }
-    ); 
-    IBVersion = 1; 
+	{
+	    ACTIONS = {
+		cancelPressed = id;
+		findDefaultOpenApp = id;
+		findExecutable = id;
+		okPressed = id;
+	    };
+	    CLASS = PreferencesController;
+	    LANGUAGE = ObjC;
+	    OUTLETS = {
+		"_bsdTarButton" = id;
+		"_defaultOpenApp" = id;
+		"_lhaTextField" = id;
+		"_lzxTextField" = id;
+		"_panel" = id;
+		"_rarTextField" = id;
+		"_sevenZipTextField" = id;
+		"_tarTextField" = id;
+		"_unzipTextField" = id;
+		"_zipTextField" = id;
+	    };
+	    SUPERCLASS = NSObject;
+	},
+	{
+	    ACTIONS = {
+		cancelPressed = id;
+		findDefaultOpenApp = id;
+		findExecutable = id;
+		okPressed = id;
+	    };
+	    CLASS = FirstResponder;
+	    LANGUAGE = ObjC;
+	    SUPERCLASS = NSObject;
+	}
+    );
+    IBVersion = 1;
 }

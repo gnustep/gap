@@ -1,6 +1,11 @@
 2012-12-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* ArchiveService.[h|m], TarArchive.[h|m]
 	* Allow creating of tar.gz and tar.bz2 archives
+	* English.lproj/Preferences.nib, Resources/Preferences.gorm,
+	  Preferences.[h|m], PreferencesController.[h|m],
+	  ZipperInfo.plist
+	  Also configure zip binary in Preferences in addition
+	  to the unzip binary, and add Service to create zip files
 
 2012-08-08 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GzipArchive.m
