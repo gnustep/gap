@@ -70,9 +70,6 @@
 	[args addObject:@"-C"];
 	[args addObject:path];
 	
-	// protect against files starting with -
-	[args addObject:@"--"];
-	
 	if (files != nil)
 	{
 		NSEnumerator *cursor = [files objectEnumerator];
@@ -127,7 +124,7 @@
 //------------------------------------------------------------------------------
 // creating archives
 //------------------------------------------------------------------------------
-+ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
 {
 	NSEnumerator *filenameCursor;
 	NSString *filename;
@@ -135,14 +132,28 @@
 	NSMutableArray *arguments;
 	
 	// make sure archivePath has the correct suffix
-	if ([archivePath hasSuffix:@".tar.gz"] == NO)
-	{
+	if ([archiveType isEqual:@"TarGZ"])
+	  {
+	    if ([archivePath hasSuffix:@".tar.gz"] == NO)
+	      {
 		archivePath = [archivePath stringByAppendingString:@".tar.gz"];
-	}
+	      }
 	
-	// build arguments for commandline: tar -czf filename <list of files>
-	arguments = [NSMutableArray array];
-	[arguments addObject:@"-czf"];
+	    // build arguments for commandline: tar -czf filename <list of files>
+	    arguments = [NSMutableArray array];
+	   [arguments addObject:@"-czf"];
+	  }
+ 	else if ([archiveType isEqual:@"TarBZ2"])
+	  {
+	    if ([archivePath hasSuffix:@".tar.bz2"] == NO)
+	      {
+		archivePath = [archivePath stringByAppendingString:@".tar.bz2"];
+	      }
+	
+	    // build arguments for commandline: tar -cjf filename <list of files>
+	    arguments = [NSMutableArray array];
+	    [arguments addObject:@"-cjf"];
+	  }
 	[arguments addObject:archivePath];
 		
 	// filenames contains absolute paths, convert them to relative paths. This works
