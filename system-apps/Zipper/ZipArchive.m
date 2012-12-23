@@ -53,10 +53,15 @@ static NSData *_magicBytes = nil;
 	[self registerFileExtension:@"jar" forArchiveClass:self];
 }
 
-+ (NSString *)unarchiveExecutable
++ (NSString *)archiveExecutable
 {
 	return [Preferences zipExecutable];
 }
++ (NSString *)unarchiveExecutable
+{
+	return [Preferences unzipExecutable];
+}
+
 
 + (BOOL)hasRatio;
 {
@@ -178,6 +183,45 @@ static NSData *_magicBytes = nil;
 	} 
     }
   return results;
+}
+
+//------------------------------------------------------------------------------
+// creating archives
+//------------------------------------------------------------------------------
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
+{
+        NSEnumerator *filenameCursor;
+        NSString *filename;
+        NSString *workdir;
+        NSMutableArray *arguments;
+
+        // make sure archivePath has the correct suffix
+        if ([archiveType isEqual:@"ZIP"])
+          {
+            if ([archivePath hasSuffix:@".zip"] == NO)
+              {
+                archivePath = [archivePath stringByAppendingString:@".zip"];
+              }
+
+          }
+        // build arguments for commandline: zip filename <list of files>
+        arguments = [NSMutableArray array];
+	[arguments addObject:@"-r"];
+        [arguments addObject:archivePath];
+
+        // filenames contains absolute paths, convert them to relative paths. This works
+        // because you can select only files/directories below a current directory in
+        // GWorkspace so all the files *have* to have a common filesystem root.
+        filenameCursor = [filenames objectEnumerator];
+        while ((filename = [filenameCursor nextObject]) != nil)
+        {
+                [arguments addObject:[filename lastPathComponent]];
+        }
+
+        // change into this directory when running the task
+        workdir = [[filenames objectAtIndex:0] stringByDeletingLastPathComponent];
+
+        [self runArchiverWithArguments:arguments inDirectory:workdir];
 }
 
 //------------------------------------------------------------------------------

@@ -33,6 +33,7 @@
 #define TAG_LHA		4
 #define TAG_LZX		5
 #define TAG_SEVEN_ZIP	6
+#define TAG_ZIP		7
 
 @implementation PreferencesController : NSObject
 
@@ -50,11 +51,17 @@
     string = @"";
   [_tarTextField setStringValue:string];
 
+  // unzip
+  string = [Preferences unzipExecutable];
+  if (!string)
+    string = @"";
+  [_unzipTextField setStringValue:string];
+
   // zip
   string = [Preferences zipExecutable];
   if (!string)
     string = @"";
-  [_unzipTextField setStringValue:string];
+  [_zipTextField setStringValue:string];
 
   // rar
   string = [Preferences rarExecutable];
@@ -125,6 +132,9 @@
 		[Preferences setTarExecutable:string];
 
 		string = [_unzipTextField stringValue];
+		[Preferences setUnzipExecutable:string];
+
+		string = [_zipTextField stringValue];
 		[Preferences setZipExecutable:string];
 		
 		string = [_rarTextField stringValue];
@@ -178,6 +188,11 @@
 					
 				case TAG_UNZIP:
 					[_unzipTextField setStringValue:path];
+					[Preferences setUnzipExecutable:path];
+					break;
+
+				case TAG_ZIP:
+					[_zipTextField setStringValue:path];
 					[Preferences setZipExecutable:path];
 					break;
 				

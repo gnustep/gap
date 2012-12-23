@@ -24,6 +24,7 @@
 
 #define PREF_KEY_TAR @"TarExecutable"
 #define PREF_KEY_ZIP @"ZipExecutable"
+#define PREF_KEY_UNZIP @"UnzipExecutable"
 #define PREF_KEY_SEVEN_ZIP @"7ZipExecutable"
 #define PREF_KEY_RAR @"RarExecutable"
 #define PREF_KEY_LHA @"LhaExecutable"
@@ -46,6 +47,7 @@
  */
 + (NSString *)tarExecutable;
 + (NSString *)zipExecutable;
++ (NSString *)unzipExecutable;
 + (NSString *)sevenZipExecutable;
 + (NSString *)rarExecutable;
 + (NSString *)lhaExecutable;
@@ -58,6 +60,7 @@
  */
 + (void)setTarExecutable:(NSString *)newTar;
 + (void)setZipExecutable:(NSString *)newZip;
++ (void)setUnzipExecutable:(NSString *)newUnzip;
 + (void)setSevenZipExecutable:(NSString *)new7zip;
 + (void)setRarExecutable:(NSString *)newRar;
 + (void)setLhaExecutable:(NSString *)newLha;

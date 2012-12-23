@@ -32,6 +32,7 @@
 
   IBOutlet NSTextField *_tarTextField;
   IBOutlet NSTextField *_unzipTextField;
+  IBOutlet NSTextField *_zipTextField;
   IBOutlet NSTextField *_rarTextField;
   IBOutlet NSTextField *_lhaTextField;
   IBOutlet NSTextField *_lzxTextField;

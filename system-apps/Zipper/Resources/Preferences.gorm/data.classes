@@ -26,7 +26,8 @@
 	    "_lhaTextField",
 	    "_lzxTextField",
 	    "_sevenZipTextField",
-	    "_archiveClass"
+	    "_archiveClass",
+	    "_zipTextField"
 	);
 	Super = NSObject;
     };
