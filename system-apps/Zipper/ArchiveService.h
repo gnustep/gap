@@ -26,7 +26,11 @@
 {
 }
 
+- (void)createLhaArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
 - (void)createZippedTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+- (void)createZipArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
 
 @end
