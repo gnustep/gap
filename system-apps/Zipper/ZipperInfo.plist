@@ -79,6 +79,14 @@
 	NSServices = (
 		{
 			NSPortName = "Zipper";
+			NSMessage = "create7zArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create 7z archive"; 
+			};
+		},
+		{
+			NSPortName = "Zipper";
 			NSMessage = "createLhaArchive";
 			NSSendTypes = (NSFilenamesPboardType);
 			NSMenuItem = { 
