@@ -264,6 +264,9 @@
 {
     NSImage *image;
 
+    /* trick for GS so that we don't have order problems with GWorkspace */
+    [window makeKeyAndOrderFront: self];
+
     image = [view image];
     
     /* we choose not to respond to key events if not in fullscreen */
