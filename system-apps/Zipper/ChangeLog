@@ -2,6 +2,8 @@
 	* ZipArchive.m remove a bogus check, and fix comment
 	* ArchiveService.[h|m], ZipperInfo.plist, LhaArchive.[h|m]
 	  Add creation of LHA Archives
+	* SevenZipArchive.[h|m], ZipperInfo.plist, ArchiveService.[h|m]
+	  Add creation of 7z Archives
 
 2012-12-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* ArchiveService.[h|m], TarArchive.[h|m]
