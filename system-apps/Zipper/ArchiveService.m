@@ -24,12 +24,62 @@
 #import <AppKit/AppKit.h>
 #import "ArchiveService.h"
 #import "TarArchive.h"
+#import "ZipArchive.h"
+#import "LhaArchive.h"
 
 @interface ArchiveService (PrivateAPI)
+- (void)createLhaArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
 - (void)createTarArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
+- (void)createZipArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
 @end
 
 @implementation ArchiveService : NSObject
+
+- (void)createLhaArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+{
+	NSArray *types;
+	id filenames;
+	
+	types = [pboard types];
+	if ([types containsObject:NSFilenamesPboardType] == NO)
+	{
+		*error = @"We expect filenames on the pasteboard!";
+		return;
+	}
+	
+	filenames = [pboard propertyListForType:NSFilenamesPboardType];
+	if (filenames == nil)
+	{
+		*error = @"could not read filenames off the pasteboard!";
+		return;
+	}
+	
+	[self createLhaArchiveForFiles:filenames archiveType:nil];
+}
+
+- (void)createZipArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+{
+	NSArray *types;
+	id filenames;
+	
+	types = [pboard types];
+	if ([types containsObject:NSFilenamesPboardType] == NO)
+	{
+		*error = @"We expect filenames on the pasteboard!";
+		return;
+	}
+	
+	filenames = [pboard propertyListForType:NSFilenamesPboardType];
+	if (filenames == nil)
+	{
+		*error = @"could not read filenames off the pasteboard!";
+		return;
+	}
+	
+	[self createZipArchiveForFiles:filenames archiveType:nil];
+}
 
 - (void)createZippedTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
@@ -85,19 +135,39 @@
 	rc = [panel runModalForDirectory:NSHomeDirectory() file:nil];
 	if (rc == NSOKButton)
 	  {
-	    if ([archiveType isEqual: @"TarGZ"])
-	      {
-		 NSString *archiveFile = [panel filename];
-		 // create the archive
-		 [TarArchive createArchive:archiveFile withFiles:filenames archiveType:@"TarGZ"];
-	      }
-	    else if ([archiveType isEqual: @"TarBZ2"])
-	      {
-		 NSString *archiveFile = [panel filename];
-		 // create the archive
-		 [TarArchive createArchive:archiveFile withFiles:filenames archiveType:@"TarBZ2"];
-	      }
+	    NSString *archiveFile = [panel filename];
+	    // create the archive
+	    [TarArchive createArchive:archiveFile withFiles:filenames archiveType:archiveType];
 	  }
 }
 
+- (void)createZipArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
+{
+	int rc;
+	
+	NSSavePanel *panel = [NSSavePanel savePanel];
+	[panel setTitle:@"Archive destination"];
+	rc = [panel runModalForDirectory:NSHomeDirectory() file:nil];
+	if (rc == NSOKButton)
+	  {
+	     NSString *archiveFile = [panel filename];
+	     // create the archive
+	     [ZipArchive createArchive:archiveFile withFiles:filenames archiveType:archiveType];
+	  }
+}
+
+- (void)createLhaArchiveForFiles:(NSArray *)filenames archiveType: (NSString *) archiveType;
+{
+	int rc;
+	
+	NSSavePanel *panel = [NSSavePanel savePanel];
+	[panel setTitle:@"Archive destination"];
+	rc = [panel runModalForDirectory:NSHomeDirectory() file:nil];
+	if (rc == NSOKButton)
+	  {
+	     NSString *archiveFile = [panel filename];
+	     // create the archive
+	     [LhaArchive createArchive:archiveFile withFiles:filenames archiveType:archiveType];
+	  }
+}
 @end

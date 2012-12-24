@@ -19,6 +19,10 @@
 	[self registerFileExtension:@"lha" forArchiveClass:self];
 }
 
++ (NSString *)archiveExecutable
+{
+	return [Preferences lhaExecutable];
+}
 + (NSString *)unarchiveExecutable
 {
 	return [Preferences lhaExecutable];
@@ -125,6 +129,42 @@
 
     return results;
 }
+
+//------------------------------------------------------------------------------
+// creating archives
+//------------------------------------------------------------------------------
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
+{
+        NSEnumerator *filenameCursor;
+        NSString *filename;
+        NSString *workdir;
+        NSMutableArray *arguments;
+
+        // make sure archivePath has the correct suffix
+        if ([archivePath hasSuffix:@".lha"] == NO)
+          {
+            archivePath = [archivePath stringByAppendingString:@".lha"];
+          }
+        // build arguments for commandline: lha a filename <list of files>
+        arguments = [NSMutableArray array];
+        [arguments addObject:@"a"];
+        [arguments addObject:archivePath];
+
+        // filenames contains absolute paths, convert them to relative paths. This works
+        // because you can select only files/directories below a current directory in
+        // GWorkspace so all the files *have* to have a common filesystem root.
+        filenameCursor = [filenames objectEnumerator];
+        while ((filename = [filenameCursor nextObject]) != nil)
+        {
+                [arguments addObject:[filename lastPathComponent]];
+        }
+
+        // change into this directory when running the task
+        workdir = [[filenames objectAtIndex:0] stringByDeletingLastPathComponent];
+
+        [self runArchiverWithArguments:arguments inDirectory:workdir];
+}
+
 
 //------------------------------------------------------------------------------
 // private API

@@ -196,15 +196,11 @@ static NSData *_magicBytes = nil;
         NSMutableArray *arguments;
 
         // make sure archivePath has the correct suffix
-        if ([archiveType isEqual:@"ZIP"])
+        if ([archivePath hasSuffix:@".zip"] == NO)
           {
-            if ([archivePath hasSuffix:@".zip"] == NO)
-              {
-                archivePath = [archivePath stringByAppendingString:@".zip"];
-              }
-
+            archivePath = [archivePath stringByAppendingString:@".zip"];
           }
-        // build arguments for commandline: zip filename <list of files>
+        // build arguments for commandline: zip -r filename <list of files>
         arguments = [NSMutableArray array];
 	[arguments addObject:@"-r"];
         [arguments addObject:archivePath];
