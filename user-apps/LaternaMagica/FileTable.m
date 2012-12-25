@@ -33,7 +33,6 @@
 #endif
 #endif
 
-
 @implementation FileTable
 
 - (id)init
@@ -119,7 +118,7 @@
 
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation
 {
-  NSPasteboard *pboard ;
+  NSPasteboard *pboard;
 
   pboard = [info draggingPasteboard];
   if ([[pboard types] containsObject:NSFilenamesPboardType])
