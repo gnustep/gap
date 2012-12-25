@@ -115,4 +115,57 @@
         NSLog(@"unknown table column ident");
     return theElement;
 }
+
+
+- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation
+{
+  NSPasteboard *pboard ;
+
+  pboard = [info draggingPasteboard];
+  if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+      NSArray *paths = [pboard propertyListForType:NSFilenamesPboardType];
+      NSLog(@"dragging Entered: %@", paths);
+      return NSDragOperationEvery;
+    }
+  return NSDragOperationNone;
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
+{
+  BOOL result;
+  NSPasteboard *pboard;
+  NSString *filename;
+  NSFileManager *fmgr;
+  NSEnumerator *e;
+  NSDictionary *attrs;
+  NSArray *paths;
+
+  pboard = [info draggingPasteboard];
+  result = NO;
+  paths = [pboard propertyListForType:NSFilenamesPboardType];
+  e = [paths objectEnumerator];
+  fmgr = [NSFileManager defaultManager];
+  while ((filename = (NSString*)[e nextObject]))
+    {
+      attrs = [fmgr fileAttributesAtPath:filename traverseLink:YES];
+      if (attrs)
+        {
+	  if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
+            {
+	    }
+	  else
+	    {
+	      [self addPath:filename];
+	      result = YES;
+	    }
+	}
+    }
+  if (result)
+    {
+      [aTableView reloadData];
+    }
+  return result;
+}
+
 @end
