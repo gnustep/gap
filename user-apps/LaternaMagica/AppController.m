@@ -84,9 +84,12 @@
     [fullView setController:self];
     
 
-    // avoid replacing the contentview with a NSControl subclass, thus add a subview instead
+    /* avoid replacing the contentview with a NSControl subclass, thus add a subview instead */
     [[fullWindow contentView] addSubview: fullView];
     [fullWindow setInitialFirstResponder:fullView];
+
+    /* register the file view as drag destionation */
+    [fileListView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
 }
 
 - (void)dealloc
