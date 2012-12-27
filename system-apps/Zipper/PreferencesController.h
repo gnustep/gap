@@ -37,6 +37,15 @@
   IBOutlet NSTextField *_lhaTextField;
   IBOutlet NSTextField *_lzxTextField;
   IBOutlet NSTextField *_sevenZipTextField;
+  IBOutlet NSTextField *_gzipTextField;
+  IBOutlet NSTextField *_gunzipTextField;
+  IBOutlet NSTextField *_bzip2TextField;
+  IBOutlet NSTextField *_bunzip2TextField;
+  IBOutlet NSTextField *_unarjTextField;
+  IBOutlet NSTextField *_unaceTextField;
+  IBOutlet NSTextField *_zooTextField;
+  IBOutlet NSTextField *_xzTextField;
+	
 	
   // this holds a reference to an Archive subclass that the user
   // needs to set before he can leave the prefs dialog

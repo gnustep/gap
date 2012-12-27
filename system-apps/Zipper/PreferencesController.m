@@ -34,6 +34,14 @@
 #define TAG_LZX		5
 #define TAG_SEVEN_ZIP	6
 #define TAG_ZIP		7
+#define TAG_GZIP	8
+#define TAG_GUNZIP	9
+#define TAG_BZIP2	10
+#define TAG_BUNZIP2	11
+#define TAG_UNARJ	12
+#define TAG_UNACE	13
+#define TAG_ZOO		14
+#define TAG_XZ		15
 
 @implementation PreferencesController : NSObject
 
@@ -86,6 +94,54 @@
   if (!string)
     string = @"";
   [_sevenZipTextField setStringValue:string];
+
+  // gzip 
+  string = [Preferences gzipExecutable];
+  if (!string)
+    string = @"";
+  [_gzipTextField setStringValue:string];
+
+  // gunzip 
+  string = [Preferences gunzipExecutable];
+  if (!string)
+    string = @"";
+  [_gunzipTextField setStringValue:string];
+
+  // bzip2 
+  string = [Preferences bzip2Executable];
+  if (!string)
+    string = @"";
+  [_bzip2TextField setStringValue:string];
+
+  // bunzip2 
+  string = [Preferences bunzip2Executable];
+  if (!string)
+    string = @"";
+  [_bunzip2TextField setStringValue:string];
+
+  // unarj 
+  string = [Preferences unarjExecutable];
+  if (!string)
+    string = @"";
+  [_unarjTextField setStringValue:string];
+
+  // unace 
+  string = [Preferences unaceExecutable];
+  if (!string)
+    string = @"";
+  [_unaceTextField setStringValue:string];
+
+  // zoo 
+  string = [Preferences zooExecutable];
+  if (!string)
+    string = @"";
+  [_zooTextField setStringValue:string];
+
+  // xz 
+  string = [Preferences xzExecutable];
+  if (!string)
+    string = @"";
+  [_xzTextField setStringValue:string];
 
   // bsd tar checkbox
   tarFlag = [Preferences isBsdTar];
@@ -148,6 +204,30 @@
 
 		string = [_sevenZipTextField stringValue];
 		[Preferences setSevenZipExecutable:string];
+
+		string = [_gzipTextField stringValue];
+		[Preferences setGzipExecutable:string];
+
+		string = [_gunzipTextField stringValue];
+		[Preferences setGunzipExecutable:string];
+
+		string = [_bzip2TextField stringValue];
+		[Preferences setBzip2Executable:string];
+
+		string = [_bunzip2TextField stringValue];
+		[Preferences setBunzip2Executable:string];
+
+		string = [_unarjTextField stringValue];
+		[Preferences setUnarjExecutable:string];
+
+		string = [_unaceTextField stringValue];
+		[Preferences setUnaceExecutable:string];
+
+		string = [_zooTextField stringValue];
+		[Preferences setZooExecutable:string];
+
+		string = [_xzTextField stringValue];
+		[Preferences setXzExecutable:string];
 
 		[Preferences setIsBsdTar:[_bsdTarButton state]];
 		[Preferences save];
@@ -214,6 +294,46 @@
 				case TAG_SEVEN_ZIP:
 					[_sevenZipTextField setStringValue:path];
 					[Preferences setSevenZipExecutable:path];
+					break;
+				
+				case TAG_GZIP:
+					[_gzipTextField setStringValue:path];
+					[Preferences setGzipExecutable:path];
+					break;
+				
+				case TAG_GUNZIP:
+					[_gunzipTextField setStringValue:path];
+					[Preferences setGunzipExecutable:path];
+					break;
+				
+				case TAG_BZIP2:
+					[_bzip2TextField setStringValue:path];
+					[Preferences setBzip2Executable:path];
+					break;
+				
+				case TAG_BUNZIP2:
+					[_bunzip2TextField setStringValue:path];
+					[Preferences setBunzip2Executable:path];
+					break;
+				
+				case TAG_UNARJ:
+					[_unarjTextField setStringValue:path];
+					[Preferences setUnarjExecutable:path];
+					break;
+				
+				case TAG_UNACE:
+					[_unaceTextField setStringValue:path];
+					[Preferences setUnaceExecutable:path];
+					break;
+				
+				case TAG_ZOO:
+					[_zooTextField setStringValue:path];
+					[Preferences setZooExecutable:path];
+					break;
+				
+				case TAG_XZ:
+					[_xzTextField setStringValue:path];
+					[Preferences setXzExecutable:path];
 					break;
 				
 				default:

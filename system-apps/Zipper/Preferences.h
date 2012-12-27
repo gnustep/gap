@@ -30,6 +30,13 @@
 #define PREF_KEY_LHA @"LhaExecutable"
 #define PREF_KEY_LZX @"LzxExecutable"
 #define PREF_KEY_GZIP @"GzipExecutable"
+#define PREF_KEY_GUNZIP @"GunzipExecutable"
+#define PREF_KEY_BZIP2 @"Bzip2Executable"
+#define PREF_KEY_BUNZIP2 @"Bunzip2Executable"
+#define PREF_KEY_UNARJ @"UnarjExecutable"
+#define PREF_KEY_UNACE @"UnaceExecutable"
+#define PREF_KEY_ZOO @"ZooExecutable"
+#define PREF_KEY_XZ @"XzExecutable"
 #define PREF_KEY_BSD_TAR @"BSDTar"
 #define PREF_KEY_OPEN_DIR @"LastOpenDirectory"
 #define PREF_KEY_EXTRACT_DIR @"LastExtractDirectory"
@@ -53,6 +60,13 @@
 + (NSString *)lhaExecutable;
 + (NSString *)lzxExecutable;
 + (NSString *)gzipExecutable;
++ (NSString *)gunzipExecutable;
++ (NSString *)bzip2Executable;
++ (NSString *)bunzip2Executable;
++ (NSString *)unarjExecutable;
++ (NSString *)unaceExecutable;
++ (NSString *)zooExecutable;
++ (NSString *)xzExecutable;
 
 /**
  * Setters for the various executables. All expect a full path to the executable and raise 
@@ -66,6 +80,13 @@
 + (void)setLhaExecutable:(NSString *)newLha;
 + (void)setLzxExecutable:(NSString *)newLzx;
 + (void)setGzipExecutable:(NSString *)newGzip;
++ (void)setGunzipExecutable:(NSString *)newGzip;
++ (void)setBzip2Executable:(NSString *)newGzip;
++ (void)setBunzip2Executable:(NSString *)newGzip;
++ (void)setUnarjExecutable:(NSString *)newGzip;
++ (void)setUnaceExecutable:(NSString *)newGzip;
++ (void)setZooExecutable:(NSString *)newGzip;
++ (void)setXzExecutable:(NSString *)newGzip;
 
 + (BOOL)isBsdTar;
 + (void)setIsBsdTar:(BOOL)flag;
