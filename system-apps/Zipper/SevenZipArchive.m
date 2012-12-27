@@ -35,9 +35,9 @@
 	return NO;
 }
 
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
-	return @"7zip";
+	return SEVENZIP;
 }
 
 //------------------------------------------------------------------------------
@@ -101,7 +101,7 @@
 //------------------------------------------------------------------------------
 // creating archives
 //------------------------------------------------------------------------------
-+ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (ArchiveType) archiveType
 {
         NSEnumerator *filenameCursor;
         NSString *filename;

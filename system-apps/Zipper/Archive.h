@@ -21,6 +21,7 @@
  */
 
 #import <Foundation/NSObject.h>
+#import <common.h>
 
 #ifdef __MACTYPES__
 #define FileInfo FinderFileInfo
@@ -65,16 +66,18 @@ typedef enum
 - (void)setElements:(NSArray *)elements;
 
 + (BOOL)executableDoesExist;
++ (NSString *)archiveExecutable;
 + (NSString *)unarchiveExecutable;
 - (int)expandFiles:(NSArray *)files withPathInfo:(BOOL)usePathInfo toPath:(NSString *)path;
 - (NSData *)dataByRunningUnachiverWithArguments:(NSArray *)args;
 
++ (int)runArchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir;
 + (int)runUnarchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir;
 - (int)runUnarchiverWithArguments:(NSArray *)args;
 
 + (BOOL)hasRatio;
 + (BOOL)canExtractWithoutFullPath;
-+ (NSString *)archiveType;
++ (ArchiveType)archiveType;
 + (NSData *)magicBytes;
 
 + (void)registerFileExtension:(NSString *)extension forArchiveClass:(Class)clazz;

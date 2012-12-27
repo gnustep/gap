@@ -69,9 +69,9 @@ static NSData *_magicBytes = nil;
 	return YES;
 }
 
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
-	return @"Zip";
+	return ZIP;
 }
 
 + (NSData *)magicBytes
@@ -188,7 +188,7 @@ static NSData *_magicBytes = nil;
 //------------------------------------------------------------------------------
 // creating archives
 //------------------------------------------------------------------------------
-+ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (ArchiveType) archiveType
 {
         NSEnumerator *filenameCursor;
         NSString *filename;

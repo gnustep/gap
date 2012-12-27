@@ -36,9 +36,9 @@
 	return YES;
 }
 
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
-	return @"LHA";	
+	return LHA;	
 }
 
 //------------------------------------------------------------------------------
@@ -133,7 +133,7 @@
 //------------------------------------------------------------------------------
 // creating archives
 //------------------------------------------------------------------------------
-+ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (ArchiveType) archiveType
 {
         NSEnumerator *filenameCursor;
         NSString *filename;

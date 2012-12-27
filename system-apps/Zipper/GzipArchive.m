@@ -37,9 +37,9 @@
 	return YES;
 }
 
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
-	return @"gzip";
+	return GZIP;
 }
 
 //------------------------------------------------------------------------------

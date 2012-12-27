@@ -4,6 +4,7 @@
 #import "NSString+Custom.h"
 #import "Preferences.h"
 #import "NSArray+Custom.h"
+#import "common.h"
 
 static NSData *_magicBytes;
 
@@ -38,9 +39,9 @@ static NSData *_magicBytes;
 	return YES;
 }
 
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
-	return @"Rar";
+	return RAR;
 }
 
 + (NSData *)magicBytes
