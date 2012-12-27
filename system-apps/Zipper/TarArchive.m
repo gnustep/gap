@@ -124,7 +124,7 @@
 //------------------------------------------------------------------------------
 // creating archives
 //------------------------------------------------------------------------------
-+ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (NSString *) archiveType
++ (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (ArchiveType) archiveType
 {
 	NSEnumerator *filenameCursor;
 	NSString *filename;
@@ -132,27 +132,33 @@
 	NSMutableArray *arguments;
 	
 	// make sure archivePath has the correct suffix
-	if ([archiveType isEqual:@"TarGZ"])
+	// and build the command line arguments
+	arguments = [NSMutableArray array];
+	switch (archiveType)
 	  {
-	    if ([archivePath hasSuffix:@".tar.gz"] == NO)
-	      {
-		archivePath = [archivePath stringByAppendingString:@".tar.gz"];
-	      }
-	
-	    // build arguments for commandline: tar -czf filename <list of files>
-	    arguments = [NSMutableArray array];
-	    [arguments addObject:@"-czf"];
-	  }
- 	else if ([archiveType isEqual:@"TarBZ2"])
-	  {
-	    if ([archivePath hasSuffix:@".tar.bz2"] == NO)
-	      {
-		archivePath = [archivePath stringByAppendingString:@".tar.bz2"];
-	      }
-	
-	    // build arguments for commandline: tar -cjf filename <list of files>
-	    arguments = [NSMutableArray array];
-	    [arguments addObject:@"-cjf"];
+	    case TAR:
+	      if ([archivePath hasSuffix:@".tar"] == NO)
+		{
+		  archivePath = [archivePath stringByAppendingString:@".tar"];
+		}
+	      [arguments addObject:@"-cf"];
+	      break;
+	    case TARGZ:
+	      if ([archivePath hasSuffix:@".tar.gz"] == NO)
+		{
+		  archivePath = [archivePath stringByAppendingString:@".tar.gz"];
+		}
+	      [arguments addObject:@"-czf"];
+	      break;
+	    case TARBZ2:
+	      if ([archivePath hasSuffix:@".tar.bz2"] == NO)
+	        {
+	          archivePath = [archivePath stringByAppendingString:@".tar.bz2"];
+		}
+	      [arguments addObject:@"-cjf"];
+	      break;
+	    default:
+	      NSLog(@"TAR Archive type: %d not supported for archive creation", archiveType);
 	  }
 	[arguments addObject:archivePath];
 		

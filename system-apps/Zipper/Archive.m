@@ -368,6 +368,28 @@ static NSMutableDictionary *_fileExtMappings = nil;
 	return result;
 }
 
++ (int)runArchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir
+{
+	int result;
+	NSTask *task;
+
+	NSParameterAssert([self executableDoesExist]);
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:[self archiveExecutable]];
+	[task setArguments:args];
+	if (workDir != nil)
+	{
+		[task setCurrentDirectoryPath:workDir];
+	}
+	[task launch];
+	[task waitUntilExit];
+	
+	result = [task terminationStatus];
+	[task release];
+	return result;
+}
+
 - (NSArray *)listContents
 {
 	[self methodIsAbstract:_cmd];
@@ -387,11 +409,21 @@ static NSMutableDictionary *_fileExtMappings = nil;
 	return [[NSFileManager defaultManager] isExecutableFileAtPath:exePath];
 }
 
-/**
+/*
  * Returns the full path to the executable that's used to extract the archive. This method
  * raises an exception indicating that subclasses have to override it.
  */
 + (NSString *)unarchiveExecutable
+{
+	[self methodIsAbstract:_cmd];
+	// shut up the compiler
+	return nil;
+}
+/*
+ * Returns the full path to the executable that's used to create the archive. This method
+ * raises an exception indicating that subclasses have to override it.
+ */
++ (NSString *)archiveExecutable
 {
 	[self methodIsAbstract:_cmd];
 	// shut up the compiler
@@ -402,10 +434,10 @@ static NSMutableDictionary *_fileExtMappings = nil;
  * Returns the user presentable name for this kind of archive. This method raises an exception
  * indicating that subclasses have to override it.
  */
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
 	[self methodIsAbstract:_cmd];
-	return nil;
+	return UNKNOWN;
 }
 
 @end

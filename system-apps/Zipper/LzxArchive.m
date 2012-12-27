@@ -40,9 +40,9 @@
 	return NO;
 }
 
-+ (NSString *)archiveType
++ (ArchiveType)archiveType
 {
-	return @"LZX";	
+	return LZX;	
 }
 
 //------------------------------------------------------------------------------
