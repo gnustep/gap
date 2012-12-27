@@ -4,6 +4,8 @@
 	  ArchiveType for the different archive types.
 	* ZipperInfo.plist, ArchiveService.[h|m], service to create
 	  tar, and .tar.xz archives
+	* TarArchive.m, ArchiveService.m, use a NSRunAlertPanel instead
+	  of NSLog to tell the user about problems.
 
 2012-12-24: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* ZipArchive.m remove a bogus check, and fix comment
