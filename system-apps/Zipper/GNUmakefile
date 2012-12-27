@@ -34,6 +34,7 @@ Zipper_OBJC_FILES = \
 	PreferencesController.m\
 	RarArchive.m\
 	SevenZipArchive.m\
+	ZooArchive.m\
 	TableViewDataSource.m\
 	TarArchive.m\
 	ZipArchive.m\
@@ -57,6 +58,7 @@ Zipper_HEADER_FILES = \
 	PreferencesController.h\
 	RarArchive.h\
 	SevenZipArchive.h\
+	ZooArchive.h\
 	TableViewDataSource.h\
 	TarArchive.h\
 	ZipArchive.h\
