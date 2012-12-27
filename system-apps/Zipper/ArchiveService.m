@@ -104,6 +104,29 @@
 	[self createArchiveForFiles:filenames archiveType:ZIP];
 }
 
+- (void)createTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+{
+	NSArray *types;
+	id filenames;
+	
+	types = [pboard types];
+	if ([types containsObject:NSFilenamesPboardType] == NO)
+	{
+		*error = @"We expect filenames on the pasteboard!";
+		return;
+	}
+	
+	filenames = [pboard propertyListForType:NSFilenamesPboardType];
+	if (filenames == nil)
+	{
+		*error = @"could not read filenames off the pasteboard!";
+		return;
+	}
+	
+	[self createArchiveForFiles:filenames archiveType:TAR];
+}
+
 - (void)createZippedTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
 {
@@ -147,6 +170,29 @@
 	}
 	
 	[self createArchiveForFiles:filenames archiveType:TARBZ2];
+}
+
+- (void)createXzTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+{
+	NSArray *types;
+	id filenames;
+	
+	types = [pboard types];
+	if ([types containsObject:NSFilenamesPboardType] == NO)
+	{
+		*error = @"We expect filenames on the pasteboard!";
+		return;
+	}
+	
+	filenames = [pboard propertyListForType:NSFilenamesPboardType];
+	if (filenames == nil)
+	{
+		*error = @"could not read filenames off the pasteboard!";
+		return;
+	}
+	
+	[self createArchiveForFiles:filenames archiveType:TARXZ];
 }
 @end
 

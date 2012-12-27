@@ -103,6 +103,14 @@
 		},
 		{
 			NSPortName = "Zipper";
+			NSMessage = "createTarArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create tar archive"; 
+			};
+		},
+		{
+			NSPortName = "Zipper";
 			NSMessage = "createZippedTarArchive";
 			NSSendTypes = (NSFilenamesPboardType);
 			NSMenuItem = { 
@@ -115,6 +123,14 @@
 			NSSendTypes = (NSFilenamesPboardType);
 			NSMenuItem = { 
 				default = "Zipper/Create tar.bz2 archive"; 
+			};
+		},
+		{
+			NSPortName = "Zipper";
+			NSMessage = "createXzTarArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create tar.xz archive"; 
 			};
 		}
 	);
