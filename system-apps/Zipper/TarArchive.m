@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #import "TarArchive.h"
 #import "FileInfo.h"
 #import "NSString+Custom.h"
@@ -21,6 +22,7 @@
 	[self registerFileExtension:@"tar.gz" forArchiveClass:self];
 	[self registerFileExtension:@"tgz" forArchiveClass:self];
 	[self registerFileExtension:@"tar.bz2" forArchiveClass:self];
+	[self registerFileExtension:@"tar.xz" forArchiveClass:self];
 }
 
 + (NSString *)unarchiveExecutable
@@ -157,8 +159,24 @@
 		}
 	      [arguments addObject:@"-cjf"];
 	      break;
+	    case TARXZ:
+	      if ([Preferences isBsdTar])
+		{
+		  // this is at least true on OpenBSD
+                  NSRunAlertPanel(@"Error", @"BSD tar doesn't support creation of tar.xz archives",
+                                                @"OK", nil, nil, nil);
+		  return;
+		}
+	      if ([archivePath hasSuffix:@".tar.xz"] == NO)
+	        {
+	          archivePath = [archivePath stringByAppendingString:@".tar.xz"];
+		}
+	      [arguments addObject:@"-cJf"];
+	      break;
 	    default:
-	      NSLog(@"TAR Archive type: %d not supported for archive creation", archiveType);
+              NSRunAlertPanel(@"Error", @"This type of tar archive is not supported for archive creation",
+                                            @"OK", nil, nil, nil);
+	      return;
 	  }
 	[arguments addObject:archivePath];
 		

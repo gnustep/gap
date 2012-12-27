@@ -226,7 +226,8 @@
 	          [SevenZipArchive createArchive:archiveFile withFiles:filenames archiveType:archiveType];
 		  break;
 		default:
-		  NSLog(@"Archive type %d not supported for archive creation", archiveType);
+		  NSRunAlertPanel(@"Error", @"Archive type not supported for archive creation",
+						@"OK", nil, nil, nil);
 	      }
 	  }
 }
