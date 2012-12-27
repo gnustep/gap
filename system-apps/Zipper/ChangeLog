@@ -8,6 +8,8 @@
 	  of NSLog to tell the user about problems.
 	* PreferencesController.[h|m], Preferences.[h|m], 
 	  Resouces/Preferences.gorm, start adding support for more archivers
+	* ZooArchive.[h|m], AppDelegate.m, GNUmakefile initial support for 
+	  ZOO archives
 
 2012-12-24: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* ZipArchive.m remove a bogus check, and fix comment
