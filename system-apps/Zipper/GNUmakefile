@@ -61,7 +61,8 @@ Zipper_HEADER_FILES = \
 	TarArchive.h\
 	ZipArchive.h\
 	ZipperCell.h\
-	ZipperDocument.h
+	ZipperDocument.h\
+	common.h
 
 ADDITIONAL_OBJCFLAGS = -Wall -Wno-import
 
