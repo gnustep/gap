@@ -28,7 +28,13 @@
 
 - (void)createLhaArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
+- (void)createTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
 - (void)createZippedTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+- (void)createBZippedTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+- (void)createXzTarArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
 - (void)createZipArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
