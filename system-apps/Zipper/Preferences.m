@@ -256,6 +256,132 @@ static NSMutableDictionary *_extensionMapping = nil;
 	}
 }
 
++ (NSString *)gunzipExecutable
+{
+	NSString *gunzip = [self stringForKey:PREF_KEY_GUNZIP];
+	if (gunzip == nil)
+	{
+		gunzip = [[NSFileManager defaultManager] locateExecutable:@"gunzip"];
+	}
+	return gunzip;
+}
+
++ (void)setGunzipExecutable:(NSString *)newGunzip
+{
+	if (newGunzip != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newGunzip forKey:PREF_KEY_GUNZIP];
+	}
+}
+
++ (NSString *)bzip2Executable
+{
+	NSString *bzip2 = [self stringForKey:PREF_KEY_BZIP2];
+	if (bzip2 == nil)
+	{
+		bzip2 = [[NSFileManager defaultManager] locateExecutable:@"bzip2"];
+	}
+	return bzip2;
+}
+
++ (void)setBzip2Executable:(NSString *)newBzip2
+{
+	if (newBzip2 != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newBzip2 forKey:PREF_KEY_BZIP2];
+	}
+}
+
++ (NSString *)bunzip2Executable
+{
+	NSString *bunzip2 = [self stringForKey:PREF_KEY_BUNZIP2];
+	if (bunzip2 == nil)
+	{
+		bunzip2 = [[NSFileManager defaultManager] locateExecutable:@"bunzip2"];
+	}
+	return bunzip2;
+}
+
++ (void)setBunzip2Executable:(NSString *)newBunzip2
+{
+	if (newBunzip2 != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newBunzip2 forKey:PREF_KEY_BUNZIP2];
+	}
+}
+
++ (NSString *)unarjExecutable
+{
+	NSString *unarj = [self stringForKey:PREF_KEY_UNARJ];
+	if (unarj == nil)
+	{
+		unarj = [[NSFileManager defaultManager] locateExecutable:@"unarj"];
+	}
+	return unarj;
+}
+
++ (void)setUnarjExecutable:(NSString *)newUnarj
+{
+	if (newUnarj != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newUnarj forKey:PREF_KEY_UNARJ];
+	}
+}
+
++ (NSString *)unaceExecutable
+{
+	NSString *unace = [self stringForKey:PREF_KEY_UNACE];
+	if (unace == nil)
+	{
+		unace = [[NSFileManager defaultManager] locateExecutable:@"unace"];
+	}
+	return unace;
+}
+
++ (void)setUnaceExecutable:(NSString *)newUnace
+{
+	if (newUnace != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newUnace forKey:PREF_KEY_UNACE];
+	}
+}
+
++ (NSString *)zooExecutable
+{
+	NSString *zoo = [self stringForKey:PREF_KEY_ZOO];
+	if (zoo == nil)
+	{
+		zoo = [[NSFileManager defaultManager] locateExecutable:@"zoo"];
+	}
+	return zoo;
+}
+
++ (void)setZooExecutable:(NSString *)newZoo
+{
+	if (newZoo != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newZoo forKey:PREF_KEY_ZOO];
+	}
+}
+
++ (NSString *)xzExecutable
+{
+	NSString *xz = [self stringForKey:PREF_KEY_XZ];
+	if (xz == nil)
+	{
+		xz = [[NSFileManager defaultManager] locateExecutable:@"xz"];
+	}
+	return xz;
+}
+
++ (void)setXzExecutable:(NSString *)newXz
+{
+	if (newXz != nil)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:newXz forKey:PREF_KEY_XZ];
+	}
+}
+
 + (NSString *)lastOpenDirectory
 {
 	return [self stringForKey:PREF_KEY_OPEN_DIR];

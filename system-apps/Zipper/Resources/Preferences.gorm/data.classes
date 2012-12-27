@@ -27,7 +27,15 @@
 	    "_lzxTextField",
 	    "_sevenZipTextField",
 	    "_archiveClass",
-	    "_zipTextField"
+	    "_zipTextField",
+	    "_bunzip2TextField",
+	    "_bzip2TextField",
+	    "_gunzipTextField",
+	    "_gzipTextField",
+	    "_unaceTextField",
+	    "_unarjTextField",
+	    "_zooTextField",
+	    "_xzTextField"
 	);
 	Super = NSObject;
     };
