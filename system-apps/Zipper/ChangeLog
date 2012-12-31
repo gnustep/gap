@@ -5,6 +5,9 @@
 	* FileInfo.m fix description method
 	* ZooArchive.m Make creation of zoo archives work
 	* RarArchive.m NSArray count returns NSUInteger, not int
+	* ArjArchive.[h|m] add them, and make watching contents and
+	  extraction work unsing unarj
+	* ZipperInfo.plist, Archive.m AppDelegate.m add ArjArchive hooks
 
 2012-12-27: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* *Archive.m Archive.[h|m], new common.h, *Archive.[h|m],
