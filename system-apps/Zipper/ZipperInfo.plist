@@ -2,7 +2,7 @@
 	ApplicationDescription = "GUI for various compressed file formats";
 	ApplicationName = "Zipper";
 	ApplicationRelease = "1.4";
-	ApplicationURL = "http://xanthippe.dyndns.org/Zipper/";
+	ApplicationURL = "http://gap.nongnu.org/zipper/";
 	NSIcon = "zipper.tiff";
 	NSMainNibFile = MainMenu.gorm;
 	NSPrincipalClass = NSApplication;
@@ -10,6 +10,14 @@
 	Copyright = "Copyright (C) 2008-2012";
  	CopyrightDescription = "Released under GPLv2 or later";
 	NSTypes = (
+		{
+			NSName = "Zoo";
+			NSHumanReadableName = "Zoo Archive";
+			NSUnixExtensions = ( "zoo", "ZOO" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
 		{
 			NSName = "Zip";
 			NSHumanReadableName = "Zip Archive";
@@ -43,7 +51,7 @@
 			NSRole = "Editor";
 		},
 		{
-			NSName = "TarBz";
+			NSName = "TarBz2";
 			NSHumanReadableName = "Compressed Tar Archive";
 			NSUnixExtensions = ( "bz2", "BZ2", "tbz2", "TBZ2" );
 			NSIcon = "FileIcon.tiff";
@@ -77,6 +85,14 @@
 	);
 	
 	NSServices = (
+		{
+			NSPortName = "Zipper";
+			NSMessage = "createZooArchive";
+			NSSendTypes = (NSFilenamesPboardType);
+			NSMenuItem = { 
+				default = "Zipper/Create zoo archive"; 
+			};
+		},
 		{
 			NSPortName = "Zipper";
 			NSMessage = "create7zArchive";

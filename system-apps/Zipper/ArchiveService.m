@@ -23,10 +23,11 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "ArchiveService.h"
-#import "TarArchive.h"
-#import "ZipArchive.h"
 #import "LhaArchive.h"
 #import "SevenZipArchive.h"
+#import "TarArchive.h"
+#import "ZipArchive.h"
+#import "ZooArchive.h"
 #import "common.h"
 
 @interface ArchiveService (PrivateAPI)
@@ -34,6 +35,28 @@
 @end
 
 @implementation ArchiveService : NSObject
+- (void)createZooArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
+{
+	NSArray *types;
+	id filenames;
+	
+	types = [pboard types];
+	if ([types containsObject:NSFilenamesPboardType] == NO)
+	{
+		*error = @"We expect filenames on the pasteboard!";
+		return;
+	}
+	
+	filenames = [pboard propertyListForType:NSFilenamesPboardType];
+	if (filenames == nil)
+	{
+		*error = @"could not read filenames off the pasteboard!";
+		return;
+	}
+	
+	[self createArchiveForFiles:filenames archiveType:ZOO];
+}
 
 - (void)create7zArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
@@ -224,6 +247,9 @@
 		  break;
 		case SEVENZIP:
 	          [SevenZipArchive createArchive:archiveFile withFiles:filenames archiveType:archiveType];
+		  break;
+		case ZOO:
+	          [ZooArchive createArchive:archiveFile withFiles:filenames archiveType:archiveType];
 		  break;
 		default:
 		  NSRunAlertPanel(@"Error", @"Archive type not supported for archive creation",

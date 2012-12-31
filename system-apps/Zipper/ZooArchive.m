@@ -87,15 +87,13 @@ static NSData *_magicBytes = nil;
 	if (usePathInfo == YES)
 	  {
 	    // overwrite without warning
-	    [args addObject:@"x.OO"];
+	    [args addObject:@"x.OOqqq"];
 	  }
 	else
 	  {
 	    // junk paths
-	    [args addObject:@"x:OO"];
+	    [args addObject:@"x:OOqqq"];
 	  }
-	[args addObject:@"qqq"];
-
 	[args addObject:[self path]];	
 	
 	if (files != nil)
@@ -120,11 +118,10 @@ static NSData *_magicBytes = nil;
     NSString *string = [[[NSString alloc] initWithData:data  
         encoding:NSASCIIStringEncoding] autorelease];	
     NSArray *lines = [string componentsSeparatedByString:@"\n"];
-    
     return [self listZooContents:lines];
 }
 
-- (NSArray *)listUnzipContents:(NSArray *)lines
+- (NSArray *)listZooContents:(NSArray *)lines
 {    
   NSEnumerator *cursor;
   NSString *line;
@@ -134,7 +131,7 @@ static NSData *_magicBytes = nil;
   while ((line = [cursor nextObject]) != nil)
     {
       int length, index;
-      NSString *path, *date, *time, *ratio, *checksum;
+      NSString *path, *date, *ratio, *checksum;
       NSCalendarDate *calendarDate;
       NSArray *components;
 
@@ -145,7 +142,7 @@ static NSData *_magicBytes = nil;
       components = [components arrayByRemovingEmptyStrings];
 
       length = [[components objectAtIndex:0] intValue];
-      ratio = [components objectAtIndex:3];
+      ratio = [components objectAtIndex:1];
 
       // extract the path. The checksum is the last token before the full path 
       // (which can contain blanks) 
@@ -154,11 +151,12 @@ static NSData *_magicBytes = nil;
       index += [checksum length];
       path = [[line substringFromIndex:index] stringByRemovingWhitespaceFromBeginning];
 		
-      date = [components objectAtIndex:4];
-      time = [components objectAtIndex:5];		
-      date = [NSString stringWithFormat:@"%@ %@", date, time];
-      calendarDate = [NSCalendarDate dateWithString:date calendarFormat:@"%m-%d-%Y %H:%M"];
-
+      date = [NSString stringWithFormat:@"%@ %@ %@ %@", 
+		[components objectAtIndex:3], 
+		[components objectAtIndex:4], 
+		[components objectAtIndex:5], 
+		[components objectAtIndex:6]];
+      calendarDate = [NSCalendarDate dateWithString:date calendarFormat:@"%d %b %y %H:%M:%S"];
       // we skip plain directory entries
       if ([path hasSuffix:@"/"] == NO)
 	{
@@ -185,13 +183,14 @@ static NSData *_magicBytes = nil;
         NSMutableArray *arguments;
 
         // make sure archivePath has the correct suffix
-        if ([archivePath hasSuffix:@".zip"] == NO)
+        if ([archivePath hasSuffix:@".zoo"] == NO)
           {
-            archivePath = [archivePath stringByAppendingString:@".zip"];
+            archivePath = [archivePath stringByAppendingString:@".zoo"];
           }
-        // build arguments for commandline: zip -r filename <list of files>
+        // build arguments for commandline: zoo aqqq filename <list of files>
         arguments = [NSMutableArray array];
-	[arguments addObject:@"-r"];
+	//[arguments addObject:@"aqqq"];
+	[arguments addObject:@"a"];
         [arguments addObject:archivePath];
 
         // filenames contains absolute paths, convert them to relative paths. This works
@@ -205,7 +204,7 @@ static NSData *_magicBytes = nil;
 
         // change into this directory when running the task
         workdir = [[filenames objectAtIndex:0] stringByDeletingLastPathComponent];
-
+NSLog(@"here the arguments to the program: %@", arguments);
         [self runArchiverWithArguments:arguments inDirectory:workdir];
 }
 

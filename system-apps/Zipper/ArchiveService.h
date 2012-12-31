@@ -40,5 +40,6 @@
 	error:(NSString **)error;
 - (void)create7zArchive:(NSPasteboard *)pboard userData:(NSString *)userData
 	error:(NSString **)error;
-
+- (void)createZooArchive:(NSPasteboard *)pboard userData:(NSString *)userData
+	error:(NSString **)error;
 @end
