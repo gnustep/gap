@@ -35,6 +35,7 @@ Zipper_OBJC_FILES = \
 	RarArchive.m\
 	SevenZipArchive.m\
 	ZooArchive.m\
+	ArjArchive.m\
 	TableViewDataSource.m\
 	TarArchive.m\
 	ZipArchive.m\
@@ -59,6 +60,7 @@ Zipper_HEADER_FILES = \
 	RarArchive.h\
 	SevenZipArchive.h\
 	ZooArchive.h\
+	ArjArchive.h\
 	TableViewDataSource.h\
 	TarArchive.h\
 	ZipArchive.h\
