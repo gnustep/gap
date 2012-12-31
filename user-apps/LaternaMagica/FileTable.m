@@ -124,7 +124,6 @@
   if ([[pboard types] containsObject:NSFilenamesPboardType])
     {
       NSArray *paths = [pboard propertyListForType:NSFilenamesPboardType];
-      NSLog(@"dragging Entered: %@", paths);
       return NSDragOperationEvery;
     }
   return NSDragOperationNone;
@@ -152,11 +151,52 @@
         {
 	  if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
             {
+              NSArray      *dirContents;
+              NSEnumerator *e2;
+              NSString     *filename2;
+              NSDictionary  *attrs2;
+
+              dirContents = [fmgr subpathsAtPath:filename];
+              e2 = [dirContents objectEnumerator];
+              while ((filename2 = (NSString*)[e2 nextObject]))
+                {
+                  NSString *tempName;
+                  NSString *lastPathComponent;
+
+                  lastPathComponent = [filename2 lastPathComponent];
+                  tempName = [filename stringByAppendingPathComponent:filename2];
+                  attrs2 = [[NSFileManager defaultManager] fileAttributesAtPath:tempName traverseLink:YES];
+                  if (attrs2)
+                    {
+                      if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
+                        {
+                          if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
+                            {
+			      /* hide dot files, eventually a preference could be implemented */
+			      if (![lastPathComponent hasPrefix: @"."])
+                                {
+                                  [self addPath:tempName];
+                                  result = YES;
+                                }
+                            }
+                        }
+                    }
+                }
 	    }
 	  else
 	    {
-	      [self addPath:filename];
-	      result = YES;
+              NSString *lastPathComponent;
+              
+              lastPathComponent = [filename lastPathComponent];
+              if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
+                {
+                  /* hide dot files, eventually a preference could be implemented */
+                  if (![lastPathComponent hasPrefix: @"."])
+                    {
+                      [self addPath:filename];
+                      result = YES;
+                    }
+                }
 	    }
 	}
     }
