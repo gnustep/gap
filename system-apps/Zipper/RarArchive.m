@@ -88,7 +88,7 @@ static NSData *_magicBytes;
 
 - (NSArray *)listContents
 {
-	int lineCount, i;
+	NSUInteger lineCount, i;
 	NSString *path = nil;
     
     NSMutableArray *results = [NSMutableArray array];
