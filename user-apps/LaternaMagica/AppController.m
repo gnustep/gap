@@ -119,58 +119,24 @@
     [openPanel setCanChooseDirectories:YES];
     [openPanel setCanChooseFiles:YES];
     if ([openPanel runModalForTypes:NULL] != NSOKButton)
-    {
-        return;
-    }
-
+      return;
+    
     files = [openPanel filenames];
     e = [files objectEnumerator];
     fmgr = [NSFileManager defaultManager];
     while ((filename = (NSString*)[e nextObject]))
-    {
+      {
         attrs = [fmgr fileAttributesAtPath:filename traverseLink:YES];
         if (attrs)
-        {
-            if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
-            {
-                NSArray      *dirContents;
-                NSEnumerator *e2;
-                NSString     *filename2;
-                NSDictionary  *attrs2;
-
-                dirContents = [fmgr subpathsAtPath:filename];
-                e2 = [dirContents objectEnumerator];
-                while ((filename2 = (NSString*)[e2 nextObject]))
-                {
-                    NSString *tempName;
-                    NSString *lastPathComponent;
-
-                    lastPathComponent = [filename2 lastPathComponent];
-                    tempName = [filename stringByAppendingPathComponent:filename2];
-                    attrs2 = [[NSFileManager defaultManager] fileAttributesAtPath:tempName traverseLink:YES];
-                    if (attrs2)
-                    {
-                        if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
-                        {
-                            if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
-                            {
-			      /* hide dot files, eventually a preference could be implemented */
-			      if (![lastPathComponent hasPrefix: @"."])
-                                [self addFile:tempName];
-                            }
-                        }
-                    }
-                }
-            } else
-            { /* not a directory */
-                [self addFile:filename];
-            }
-        } else
-        {
+          {
+            [self addFile:filename];
+          }
+        else
+          {
             NSLog(@"open panel did not return a valid path");
-        }
-    }
-  [fileListView selectRow: [fileListView numberOfRows]-1 byExtendingSelection: NO];
+          }
+      }
+    [fileListView selectRow: [fileListView numberOfRows]-1 byExtendingSelection: NO];
 }
 
 // scale image according to options
