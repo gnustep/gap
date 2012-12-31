@@ -118,8 +118,8 @@
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"<%@: 0x%d '%@' '%@' %@ \"%@\">", [self class], self, 
-		[self filename], [self path], [self size], [self date]];
+	return [NSString stringWithFormat:@"<%@: 0x%"PRIuPTR" '%@' '%@' %@ \"%@\" \"%@\">", [self class], self, 
+		[self filename], [self path], [self size], [self date], [self ratio]];
 }
 
 //------------------------------------------------------------------------------

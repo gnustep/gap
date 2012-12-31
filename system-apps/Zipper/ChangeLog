@@ -2,6 +2,7 @@
 	* ArchiveService.[h|m], ZipperInfo.plist, ZooArchive.[h|m]
 	* Make Zoo archive extraction work, add service to create
 	  zoo archives
+	* FileInfo.m fix description method
 
 2012-12-27: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* *Archive.m Archive.[h|m], new common.h, *Archive.[h|m],
