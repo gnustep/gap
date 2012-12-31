@@ -4,6 +4,7 @@
 	  zoo archives
 	* FileInfo.m fix description method
 	* ZooArchive.m Make creation of zoo archives work
+	* RarArchive.m NSArray count returns NSUInteger, not int
 
 2012-12-27: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* *Archive.m Archive.[h|m], new common.h, *Archive.[h|m],
