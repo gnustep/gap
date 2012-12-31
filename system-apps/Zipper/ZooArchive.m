@@ -175,12 +175,20 @@ static NSData *_magicBytes = nil;
 //------------------------------------------------------------------------------
 // creating archives
 //------------------------------------------------------------------------------
+// this method should probably be split into separate methods
 + (void)createArchive:(NSString *)archivePath withFiles:(NSArray *)filenames archiveType: (ArchiveType) archiveType
 {
         NSEnumerator *filenameCursor;
         NSString *filename;
         NSString *workdir;
         NSMutableArray *arguments;
+	NSPipe *pipe;
+	NSData *inData;
+	NSFileHandle *readHandle;
+	NSTask *task;
+	NSMutableData *result;
+	NSString *string;
+	NSArray *files;
 
         // make sure archivePath has the correct suffix
         if ([archivePath hasSuffix:@".zoo"] == NO)
@@ -188,23 +196,54 @@ static NSData *_magicBytes = nil;
             archivePath = [archivePath stringByAppendingString:@".zoo"];
           }
         // build arguments for commandline: zoo aqqq filename <list of files>
-        arguments = [NSMutableArray array];
-	//[arguments addObject:@"aqqq"];
-	[arguments addObject:@"a"];
-        [arguments addObject:archivePath];
 
+	// zoo doesn't recursively add directories to the archive, so we have to
+	// create a list of files on our own
+        // change into this directory before searching for the files
+        workdir = [[filenames objectAtIndex:0] stringByDeletingLastPathComponent];
+	chdir([workdir UTF8String]);
+	// We use find to find all files below the potential directories
+	// should work at least on Linux/*BSD/ type of systems
+        arguments = [NSMutableArray array];
         // filenames contains absolute paths, convert them to relative paths. This works
         // because you can select only files/directories below a current directory in
         // GWorkspace so all the files *have* to have a common filesystem root.
         filenameCursor = [filenames objectEnumerator];
         while ((filename = [filenameCursor nextObject]) != nil)
-        {
-                [arguments addObject:[filename lastPathComponent]];
-        }
+          {
+            [arguments addObject:[filename lastPathComponent]];
+          }
+	[arguments addObject:@"-type"];
+	[arguments addObject:@"f"];
+    	pipe = [NSPipe pipe];
+    	readHandle = [pipe fileHandleForReading];
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:@"find"];
+	[task setArguments:arguments];
+	[task setStandardOutput:pipe];
+	[task launch];
 
-        // change into this directory when running the task
-        workdir = [[filenames objectAtIndex:0] stringByDeletingLastPathComponent];
-NSLog(@"here the arguments to the program: %@", arguments);
+	result = [NSMutableData dataWithCapacity:1024];
+	while ((inData = [readHandle availableData]) && [inData length])
+	  {
+	    [result appendData:inData];
+	  }
+        string = [[[NSString alloc] initWithData:result
+                encoding:NSASCIIStringEncoding] autorelease];
+        files = [string componentsSeparatedByString:@"\n"];
+	[task release];
+
+        // build arguments for commandline: zoo aqqq filename <list of files>
+	// do the arguments need to be released before reusing them?
+        arguments = [NSMutableArray array];
+	[arguments addObject:@"aqqq"];
+        [arguments addObject:archivePath];
+	filenameCursor = [files objectEnumerator];
+	while ((filename = [filenameCursor nextObject]) != nil)
+          {
+            [arguments addObject:filename];
+          }
+	
         [self runArchiverWithArguments:arguments inDirectory:workdir];
 }
 
