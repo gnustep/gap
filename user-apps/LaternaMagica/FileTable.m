@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.m
 
-   Copyright (C) 2006-2012 Riccardo Mottola
+   Copyright (C) 2006-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -37,19 +37,25 @@
 
 - (id)init
 {
-    if ((self = [super init]))
+  if ((self = [super init]))
     {
-        fileNames = [[NSMutableArray arrayWithCapacity:5] retain];
-        filePaths = [[NSMutableArray arrayWithCapacity:5] retain];
+      filesToIgnore = [[NSArray arrayWithObjects:
+                                @".DS_Store",
+                                @".gwdir",
+                                @"Thumbs.db",
+                                nil] retain];
+      fileNames = [[NSMutableArray arrayWithCapacity:5] retain];
+      filePaths = [[NSMutableArray arrayWithCapacity:5] retain];
     }
-    return self;
+  return self;
 }
 
 - (void)dealloc
 {
-    [fileNames release];
-    [filePaths release];
-    [super dealloc];
+  [filesToIgnore release];
+  [fileNames release];
+  [filePaths release];
+  [super dealloc];
 }
 
 - (void)addPath :(NSString*)path
@@ -119,13 +125,29 @@
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation
 {
   NSPasteboard *pboard;
+  BOOL result;
 
+  result = NO;
   pboard = [info draggingPasteboard];
   if ([[pboard types] containsObject:NSFilenamesPboardType])
     {
-      NSArray *paths = [pboard propertyListForType:NSFilenamesPboardType];
-      return NSDragOperationEvery;
+      NSEnumerator *e;
+      NSArray *paths;
+      NSString *filename;
+
+      paths = [pboard propertyListForType:NSFilenamesPboardType];
+      if ([paths count] > 0)
+        {
+          e = [paths objectEnumerator];
+          while ((filename = (NSString*)[e nextObject]))
+            {
+              if (![filesToIgnore containsObject:[filename lastPathComponent]])
+                result = YES;
+            }
+        }
     }
+  if (result)
+    return NSDragOperationEvery;
   return NSDragOperationNone;
 }
 
@@ -170,7 +192,7 @@
                     {
                       if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
                         {
-                          if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
+                          if (![filesToIgnore containsObject:lastPathComponent])
                             {
 			      /* hide dot files, eventually a preference could be implemented */
 			      if (![lastPathComponent hasPrefix: @"."])
@@ -188,7 +210,7 @@
               NSString *lastPathComponent;
               
               lastPathComponent = [filename lastPathComponent];
-              if (!([lastPathComponent isEqualToString:@".gwdir"] || [lastPathComponent isEqualToString:@".DS_Store"]))
+              if (![filesToIgnore containsObject:lastPathComponent])
                 {
                   /* hide dot files, eventually a preference could be implemented */
                   if (![lastPathComponent hasPrefix: @"."])
