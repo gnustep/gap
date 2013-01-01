@@ -62,19 +62,19 @@ static NSData *_magicBytes;
 
 	[args addObject:[self path]];
 	
-	if (files != nil)
+	// this doesn't work with unarj, either extract
+	// whole archive, or nothing
+	/* if (files != nil)
 	{
 		NSEnumerator *cursor = [files objectEnumerator];
 		while ((fileInfo = [cursor nextObject]) != nil)
 		{
 			[args addObject:[fileInfo fullPath]];
 		}
-	}
+	} */
 	
-	// have to change to the destination dir
 	// there is no parameter allowing to specify destination dir
-	chdir([path UTF8String]);
-	return [self runUnarchiverWithArguments:args];
+	return [self runUnarchiverWithArguments:args inDirectory:path];
 }
 
 - (NSArray *)listContents

@@ -19,7 +19,6 @@
 
  */
 
-#include <unistd.h>
 #import <Foundation/Foundation.h>
 #import "ZooArchive.h"
 #import "FileInfo.h"
@@ -105,11 +104,8 @@ static NSData *_magicBytes = nil;
 		}
 	}
 
-	// zoo doesn't seem to support a parameter to specify
-	// a directory where it should be extracted, so change working
-	// directory to the destination
-	chdir([path UTF8String]); 
-	return [self runUnarchiverWithArguments:args];
+	// zoo doesn't seem to support a parameter to specify destination directory
+	return [self runUnarchiverWithArguments:args inDirectory:path];
 }
 
 - (NSArray *)listContents
@@ -198,10 +194,9 @@ static NSData *_magicBytes = nil;
         // build arguments for commandline: zoo aqqq filename <list of files>
 
 	// zoo doesn't recursively add directories to the archive, so we have to
-	// create a list of files on our own
-        // change into this directory before searching for the files
+	// create a list of files on our own and
+        // change into this directory before searching for the files later on
         workdir = [[filenames objectAtIndex:0] stringByDeletingLastPathComponent];
-	chdir([workdir UTF8String]);
 	// We use find to find all files below the potential directories
 	// should work at least on Linux/*BSD/ type of systems
         arguments = [NSMutableArray array];
@@ -220,6 +215,7 @@ static NSData *_magicBytes = nil;
 	task = [[NSTask alloc] init];
 	[task setLaunchPath:@"find"];
 	[task setArguments:arguments];
+	[task setCurrentDirectoryPath:workdir];
 	[task setStandardOutput:pipe];
 	[task launch];
 

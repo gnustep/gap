@@ -313,59 +313,69 @@ static NSMutableDictionary *_fileExtMappings = nil;
 
 - (NSData *)dataByRunningUnachiverWithArguments:(NSArray *)args
 {
-    NSData *inData;
-    NSFileHandle *readHandle;
-    NSPipe *pipe;
-    NSTask *task;
-    NSMutableData *result;
+   NSData *inData;
+   NSFileHandle *readHandle;
+   NSPipe *pipe;
+   NSTask *task;
+   NSMutableData *result;
     
-	NSParameterAssert(args != nil);
-	NSParameterAssert([[self class] executableDoesExist]);
+   NSParameterAssert(args != nil);
+   NSParameterAssert([[self class] executableDoesExist]);
 
-    pipe = [NSPipe pipe];
-    readHandle = [pipe fileHandleForReading];
+   pipe = [NSPipe pipe];
+   readHandle = [pipe fileHandleForReading];
 
-    task = [[NSTask alloc] init];
-    [task setLaunchPath:[[self class] unarchiveExecutable]];	
-	[task setArguments:args];
-    [task setStandardOutput:pipe];
-    [task launch];
+   task = [[NSTask alloc] init];
+   [task setLaunchPath:[[self class] unarchiveExecutable]];	
+   [task setArguments:args];
+   [task setStandardOutput:pipe];
+   [task launch];
 
-    result = [NSMutableData dataWithCapacity:1024];
-    while ((inData = [readHandle availableData]) && [inData length])
-    {
+   result = [NSMutableData dataWithCapacity:1024];
+   while ((inData = [readHandle availableData]) && [inData length])
+     {
         [result appendData:inData];
-    }
-    [task release];
+     }
+   [task release];
     
-    return result;
+   return result;
 }
-
-- (int)runUnarchiverWithArguments:(NSArray *)args;
+// for archivers which have parameters to specify a destination directory
+- (int)runUnarchiverWithArguments:(NSArray *)args
 {
-	return [[self class] runUnarchiverWithArguments:args inDirectory:nil];
+  return [[self class] runUnarchiverWithArguments:args inDirectory:nil];
+}
+// for archivers which do not have parameters to specify a destination directory
+- (int)runUnarchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir
+{
+  return [[self class] runUnarchiverWithArguments:args inDirectory:workDir];
 }
 
 + (int)runUnarchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir
 {
-	int result;
-	NSTask *task;
+  int result;
+  NSTask *task;
+  NSFileHandle *readHandle;
+  NSPipe *pipe;
 
-	NSParameterAssert([self executableDoesExist]);
+  NSParameterAssert([self executableDoesExist]);
 	
-	task = [[NSTask alloc] init];
-	[task setLaunchPath:[self unarchiveExecutable]];
-	[task setArguments:args];
-	if (workDir != nil)
-	{
-		[task setCurrentDirectoryPath:workDir];
-	}
-	[task launch];
-	[task waitUntilExit];
+  pipe = [NSPipe pipe];
+  readHandle = [pipe fileHandleForReading];
+  task = [[NSTask alloc] init];
+  [task setLaunchPath:[self unarchiveExecutable]];
+  [task setArguments:args];
+  [task setStandardOutput:pipe];
+  if (workDir != nil)
+    {
+      [task setCurrentDirectoryPath:workDir];
+    }
+  [task launch];
+  [task waitUntilExit];
 	
-	result = [task terminationStatus];
-	[task release];
-	return result;
+  result = [task terminationStatus];
+  [task release];
+  return result;
 }
 
 + (int)runArchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir
