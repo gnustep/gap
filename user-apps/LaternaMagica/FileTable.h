@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.h
 
-   Copyright (C) 2006-2011 Riccardo Mottola
+   Copyright (C) 2006-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -34,8 +34,11 @@
 
 @interface FileTable : NSObject
 {
-    NSMutableArray *fileNames;
-    NSMutableArray *filePaths;
+  /* files that will not be added */
+  NSArray *filesToIgnore;
+
+  NSMutableArray *fileNames;
+  NSMutableArray *filePaths;
 }
 
 - (void)addPath:(NSString *)filename;
