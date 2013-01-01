@@ -21,21 +21,22 @@ Zipper_OBJC_FILES = \
 	AppDelegate.m \
 	Archive.m \
 	ArchiveService.m\
-    FileInfo.m \
-    GzipArchive.m\
+    	FileInfo.m \
+    	GzipArchive.m\
 	LhaArchive.m\
 	LzxArchive.m\
 	main.m \
 	NSArray+Custom.m\
 	NSFileManager+Custom.m\
 	NSObject+Custom.m \
-    NSString+Custom.m \
+    	NSString+Custom.m \
 	Preferences.m\
 	PreferencesController.m\
 	RarArchive.m\
 	SevenZipArchive.m\
 	ZooArchive.m\
 	ArjArchive.m\
+	AceArchive.m\
 	TableViewDataSource.m\
 	TarArchive.m\
 	ZipArchive.m\
@@ -47,20 +48,21 @@ Zipper_HEADER_FILES = \
 	Archive.h \
 	ArchiveService.h\
 	config.h \
-    FileInfo.h \
-    GzipArchive.h\
+    	FileInfo.h \
+    	GzipArchive.h\
 	LhaArchive.h\
 	LzxArchive.h\
 	NSArray+Custom.h\
 	NSFileManager+Custom.h\
 	NSObject+Custom.h \
-    NSString+Custom.h \
+    	NSString+Custom.h \
 	Preferences.h\
 	PreferencesController.h\
 	RarArchive.h\
 	SevenZipArchive.h\
 	ZooArchive.h\
 	ArjArchive.h\
+	AceArchive.h\
 	TableViewDataSource.h\
 	TarArchive.h\
 	ZipArchive.h\
