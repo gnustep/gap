@@ -274,57 +274,66 @@
 
 - (void)extractIncludingPathInfo:(BOOL)includePathInfo
 {
-	NSOpenPanel *openPanel;
-	int rc;
+  NSOpenPanel *openPanel;
+  int rc;
 
-	if (_archive == nil)
-	{
-		return;
-	}
+  if (_archive == nil)
+    {
+      return;
+    }
 
-	openPanel = [NSOpenPanel openPanel];
-//	[openPanel setDelegate:self];
-	[openPanel setTitle:@"Extract to"];
-	[openPanel setCanChooseFiles:NO];
-	[openPanel setCanChooseDirectories:YES];
+  openPanel = [NSOpenPanel openPanel];
+//[openPanel setDelegate:self];
+  [openPanel setTitle:@"Extract to"];
+  [openPanel setCanChooseFiles:NO];
+  [openPanel setCanChooseDirectories:YES];
 	
-	rc = [openPanel runModalForDirectory:[Preferences lastExtractDirectory] file:nil types:nil];
-	if (rc == NSOKButton)
+  rc = [openPanel runModalForDirectory:[Preferences lastExtractDirectory] file:nil types:nil];
+  if (rc == NSOKButton)
+    {
+      NSString *message;
+      int result;
+
+      NSString *path = [openPanel directory];
+
+      // make sure the destination path exists
+      if ([self createUnarchiveDestinationIfNecessary:path] == NO)
 	{
-		NSString *message;
-		NSString *path = [openPanel directory];
-
-		// make sure the destination path exists
-		if ([self createUnarchiveDestinationIfNecessary:path] == NO)
-		{
-			return;
-		}
-
-		if ([_tableView selectedRow] == -1)
-		{
-			// no rows selected ... extract the whole archive
-			[_archive expandFiles:nil withPathInfo:includePathInfo toPath:path];
-		}
-		else
-		{
-			NSNumber *rowIndex;
-
-			// retrieve selected rows && extract them
-			NSMutableArray *extractFiles = [NSMutableArray array];
-			NSEnumerator *rows = [_tableView selectedRowEnumerator];
-			while ((rowIndex = [rows nextObject]) != nil)
-			{
-				[extractFiles addObject:[_archive elementAtIndex:[rowIndex intValue]]]; 
-			}
-			[_archive expandFiles:extractFiles withPathInfo:includePathInfo toPath:path];
-		}
-		
-		// save the selected directory for later
-		[Preferences setLastExtractDirectory:path];
-
-		message = [NSString stringWithFormat:@"Successfully expanded to %@", path];
-		NSRunAlertPanel(@"Expand", message, nil, nil, nil);
+ 	  return;
 	}
+
+      if ([_tableView selectedRow] == -1)
+	{
+	  // no rows selected ... extract the whole archive
+	  result = [_archive expandFiles:nil withPathInfo:includePathInfo toPath:path];
+	}
+      else
+	{
+	  NSNumber *rowIndex;
+
+	  // retrieve selected rows && extract them
+	  NSMutableArray *extractFiles = [NSMutableArray array];
+	  NSEnumerator *rows = [_tableView selectedRowEnumerator];
+	  while ((rowIndex = [rows nextObject]) != nil)
+	    {
+	      [extractFiles addObject:[_archive elementAtIndex:[rowIndex intValue]]]; 
+	    }
+	  result = [_archive expandFiles:extractFiles withPathInfo:includePathInfo toPath:path];
+	}
+		
+      // save the selected directory for later
+      [Preferences setLastExtractDirectory:path];
+
+      if (!result)
+	{
+          message = [NSString stringWithFormat:@"Successfully expanded to %@", path];
+	}
+      else
+	{
+          message = [NSString stringWithFormat:@"A problem occured expanding archive to %@", path];
+	}
+      NSRunAlertPanel(@"Expand", message, nil, nil, nil);
+    }
 }
 
 - (void)selectAll:(id)sender

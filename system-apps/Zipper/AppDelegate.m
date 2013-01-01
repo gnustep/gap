@@ -32,6 +32,7 @@
 #import "SevenZipArchive.h"
 #import "ZooArchive.h"
 #import "ArjArchive.h"
+#import "AceArchive.h"
 #import "PreferencesController.h"
 #import "ArchiveService.h"
 
@@ -51,6 +52,7 @@
 	[SevenZipArchive class];
 	[ZooArchive class];
 	[ArjArchive class];
+	[AceArchive class];
 }
 
 //------------------------------------------------------------------------------

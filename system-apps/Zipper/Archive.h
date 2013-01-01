@@ -74,6 +74,7 @@ typedef enum
 + (int)runArchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir;
 + (int)runUnarchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir;
 - (int)runUnarchiverWithArguments:(NSArray *)args;
+- (int)runUnarchiverWithArguments:(NSArray *)args inDirectory:(NSString *)workDir;
 
 + (BOOL)hasRatio;
 + (BOOL)canExtractWithoutFullPath;

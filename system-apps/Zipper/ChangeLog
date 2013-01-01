@@ -6,6 +6,8 @@
 	* Redirect output from archiver programs to a pipe, unarj
 	  doesn't have a parameter to suppress output when extracting
 	* [Rar|Arj]Archive.[h|m], add license header
+	* GNUmakefile, ZipperInfo.plist, AceArchive.[h|m], add 
+	  ACE archive handling
 
 2012-12-31: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* ArchiveService.[h|m], ZipperInfo.plist, ZooArchive.[h|m]

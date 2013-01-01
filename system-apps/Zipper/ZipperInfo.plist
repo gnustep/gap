@@ -11,6 +11,22 @@
  	CopyrightDescription = "Released under GPLv2 or later";
 	NSTypes = (
 		{
+			NSName = "Ace";
+			NSHumanReadableName = "Ace Archive";
+			NSUnixExtensions = ( "ace", "ACE" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
+			NSName = "Arj";
+			NSHumanReadableName = "Arj Archive";
+			NSUnixExtensions = ( "arj", "ARJ" );
+			NSIcon = "FileIcon.tiff";
+			NSDocumentClass = "ZipperDocument";
+			NSRole = "Editor";
+		},
+		{
 			NSName = "Zoo";
 			NSHumanReadableName = "Zoo Archive";
 			NSUnixExtensions = ( "zoo", "ZOO" );

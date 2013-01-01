@@ -41,8 +41,8 @@ static NSData *_magicBytes;
 + (void)initialize
 {
 	// arj starts with 0xea60
-	char rarBytes[] = { 0xea, 0x60 };
-	_magicBytes = [[NSData dataWithBytes:rarBytes length:2] retain];
+	char arjBytes[] = { 0xea, 0x60 };
+	_magicBytes = [[NSData dataWithBytes:arjBytes length:2] retain];
 	
 	[self registerFileExtension:@"arj" forArchiveClass:self];
 }
@@ -75,7 +75,7 @@ static NSData *_magicBytes;
 //------------------------------------------------------------------------------
 - (int)expandFiles:(NSArray *)files withPathInfo:(BOOL)usePathInfo toPath:(NSString *)path
 {
-	FileInfo *fileInfo;
+	//FileInfo *fileInfo;
 	NSMutableArray *args;
 	
 	args = [NSMutableArray array];
