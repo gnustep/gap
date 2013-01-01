@@ -366,6 +366,7 @@ static NSMutableDictionary *_fileExtMappings = nil;
   [task setLaunchPath:[self unarchiveExecutable]];
   [task setArguments:args];
   [task setStandardOutput:pipe];
+  [task setStandardError:pipe];
   if (workDir != nil)
     {
       [task setCurrentDirectoryPath:workDir];
