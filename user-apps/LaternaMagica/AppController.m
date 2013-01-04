@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2012 Riccardo Mottola
+   Copyright (C) 2006-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -101,7 +101,7 @@
 
 - (void)addFile:(NSString *)filename
 {
-    [fileListData addPath:filename];
+  if([fileListData addPathAndRecurse:filename])
     [fileListView reloadData];
 }
 
