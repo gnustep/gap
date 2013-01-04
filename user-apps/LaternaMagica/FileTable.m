@@ -50,6 +50,70 @@
   return self;
 }
 
+-(BOOL)addPathAndRecurse: (NSString*)path
+{
+  NSDictionary *attrs;
+  BOOL result;
+  NSFileManager *fmgr;
+
+  result = NO;
+  fmgr = [NSFileManager defaultManager];
+  attrs = [fmgr fileAttributesAtPath:path traverseLink:YES];
+  if (attrs)
+    {
+      if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
+        {
+          NSArray      *dirContents;
+          NSEnumerator *e2;
+          NSString     *filename;
+          NSDictionary  *attrs2;
+
+          dirContents = [fmgr subpathsAtPath:path];
+          e2 = [dirContents objectEnumerator];
+          while ((filename = (NSString*)[e2 nextObject]))
+            {
+              NSString *tempName;
+              NSString *lastPathComponent;
+
+              lastPathComponent = [filename lastPathComponent];
+              tempName = [path stringByAppendingPathComponent:filename];
+              attrs2 = [[NSFileManager defaultManager] fileAttributesAtPath:tempName traverseLink:YES];
+              if (attrs2)
+                {
+                  if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
+                    {
+                      if (![filesToIgnore containsObject:lastPathComponent])
+                        {
+                          /* hide dot files, eventually a preference could be implemented */
+                          if (![lastPathComponent hasPrefix: @"."])
+                            {
+                              [self addPath:tempName];
+                              result = YES;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      else
+        {
+          NSString *lastPathComponent;
+              
+          lastPathComponent = [path lastPathComponent];
+          if (![filesToIgnore containsObject:lastPathComponent])
+            {
+              /* hide dot files, eventually a preference could be implemented */
+              if (![lastPathComponent hasPrefix: @"."])
+                {
+                  [self addPath:path];
+                  result = YES;
+                }
+            }
+        }
+    }
+  return result;
+}
+
 - (void)dealloc
 {
   [filesToIgnore release];
@@ -156,71 +220,16 @@
   BOOL result;
   NSPasteboard *pboard;
   NSString *filename;
-  NSFileManager *fmgr;
   NSEnumerator *e;
-  NSDictionary *attrs;
   NSArray *paths;
 
   pboard = [info draggingPasteboard];
   result = NO;
   paths = [pboard propertyListForType:NSFilenamesPboardType];
   e = [paths objectEnumerator];
-  fmgr = [NSFileManager defaultManager];
   while ((filename = (NSString*)[e nextObject]))
     {
-      attrs = [fmgr fileAttributesAtPath:filename traverseLink:YES];
-      if (attrs)
-        {
-	  if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
-            {
-              NSArray      *dirContents;
-              NSEnumerator *e2;
-              NSString     *filename2;
-              NSDictionary  *attrs2;
-
-              dirContents = [fmgr subpathsAtPath:filename];
-              e2 = [dirContents objectEnumerator];
-              while ((filename2 = (NSString*)[e2 nextObject]))
-                {
-                  NSString *tempName;
-                  NSString *lastPathComponent;
-
-                  lastPathComponent = [filename2 lastPathComponent];
-                  tempName = [filename stringByAppendingPathComponent:filename2];
-                  attrs2 = [[NSFileManager defaultManager] fileAttributesAtPath:tempName traverseLink:YES];
-                  if (attrs2)
-                    {
-                      if ([attrs2 objectForKey:NSFileType] != NSFileTypeDirectory)
-                        {
-                          if (![filesToIgnore containsObject:lastPathComponent])
-                            {
-			      /* hide dot files, eventually a preference could be implemented */
-			      if (![lastPathComponent hasPrefix: @"."])
-                                {
-                                  [self addPath:tempName];
-                                  result = YES;
-                                }
-                            }
-                        }
-                    }
-                }
-	    }
-	  else
-	    {
-              NSString *lastPathComponent;
-              
-              lastPathComponent = [filename lastPathComponent];
-              if (![filesToIgnore containsObject:lastPathComponent])
-                {
-                  /* hide dot files, eventually a preference could be implemented */
-                  if (![lastPathComponent hasPrefix: @"."])
-                    {
-                      [self addPath:filename];
-                      result = YES;
-                    }
-                }
-	    }
-	}
+      result = [self addPathAndRecurse:filename];
     }
   if (result)
     {
