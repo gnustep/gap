@@ -1,3 +1,12 @@
+2012-01-04 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Make "Add" work recursively again.
+
+	* FileTable.h
+	* FileTable.m
+	Extract recursive path search into a method.
+
 2013-01-01 Riccardo Mottola <rm@gnu.org>
 
 	* FileTable.m
