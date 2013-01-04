@@ -41,6 +41,7 @@
   NSMutableArray *filePaths;
 }
 
+-(BOOL)addPathAndRecurse: (NSString*)path;
 - (void)addPath:(NSString *)filename;
 - (NSString *)pathAtIndex :(int)index;
 
