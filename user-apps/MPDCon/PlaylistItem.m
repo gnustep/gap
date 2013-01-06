@@ -237,6 +237,18 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
   NSURL *url;
   NSXMLParser *parser;
 
+  if ([[self getArtist] isEqual:@"Unknown Artist"] || [[self getTitle] isEqual:@"Unknown Title"])
+    {
+      lyricsText = [@"No lyrics retrieved for unknown artist or song." copy];
+      lyricsURL = [@"http://lyrics.wikia.com" copy];
+      lyricsDict =
+    	[[NSDictionary alloc] initWithObjectsAndKeys:
+      	  lyricsText, @"lyricsText",
+      	  lyricsURL, @"lyricsURL",
+      	  nil];
+      return [lyricsDict autorelease];
+    }
+
   lyricsDict = [MPDConDB getLyricsForFile:path];
   if (lyricsDict)
     return lyricsDict;
@@ -275,7 +287,7 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
       lyricsURL, @"lyricsURL",
       nil];
   
-  return lyricsDict;
+  return [lyricsDict autorelease];
 }
 - (void) setLyrics: (NSString *) _lyricsText withURL: (NSString *) _lyricsURL
 {
