@@ -33,7 +33,8 @@
 	"SongRatingCell.m",
 	"PlaylistInspector.m",
 	"SQLiteAdaptor.m",
-	"RandomPlaylistFeed.m"
+	"RandomPlaylistFeed.m",
+	"CollectionBrowser.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -68,7 +69,8 @@
 	"RatingStarView.h",
 	"RatingStarViewController.h",
 	"SQLiteAdaptor.h",
-	"RandomPlaylistFeed.h"
+	"RandomPlaylistFeed.h",
+	"CollectionBrowser.h"
     );
     IMAGES = (
 	"Play.tiff",
@@ -97,7 +99,8 @@
 	"CrossfadeView.gorm",
 	"LyricsInspector.gorm",
 	"SongInspector.gorm",
-	"PlaylistInspector.gorm"
+	"PlaylistInspector.gorm",
+	"CollectionBrowser.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (

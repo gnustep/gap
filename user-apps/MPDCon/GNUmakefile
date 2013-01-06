@@ -33,6 +33,7 @@ Resources/CrossfadeView.gorm \
 Resources/LyricsInspector.gorm \
 Resources/SongInspector.gorm \
 Resources/PlaylistInspector.gorm \
+Resources/CollectionBrowser.gorm \
 Resources/Play.tiff \
 Resources/Pause.tiff \
 Resources/Next.tiff \
@@ -78,7 +79,8 @@ PlaylistInspector.h \
 RatingStarView.h \
 RatingStarViewController.h \
 SQLiteAdaptor.h \
-RandomPlaylistFeed.h
+RandomPlaylistFeed.h \
+CollectionBrowser.h
 
 #
 # Class files
@@ -104,7 +106,8 @@ SongInspector.m \
 SongRatingCell.m \
 PlaylistInspector.m \
 SQLiteAdaptor.m \
-RandomPlaylistFeed.m
+RandomPlaylistFeed.m \
+CollectionBrowser.m
 
 #
 # Other sources
