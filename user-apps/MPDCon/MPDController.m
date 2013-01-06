@@ -772,9 +772,10 @@ int _stringSort(id string1, id string2, void *context);
   NSMutableArray *allTracks;
   struct mpd_entity *mpdEntity;
 
-  if (! [self _checkConnection]) {
+  if (! [self _checkConnection])
+    {
       return nil;
-  }
+    }
 
   allTracks = [[NSMutableArray alloc] init];
   if (withMetadata)
@@ -799,6 +800,28 @@ int _stringSort(id string1, id string2, void *context);
   }
   mpd_response_finish(mpdConnection);
   return [allTracks autorelease];
+}
+
+-(NSArray *) getAllFilesInDirectory: (NSString *) directory
+{
+  NSMutableArray *allFiles;
+  NSArray *allTracks;
+  NSEnumerator *trackEnum;
+  PlaylistItem *song;
+  
+  allFiles = [[NSMutableArray alloc] init];
+  allTracks = [self getAllTracksWithMetadata: NO];
+  trackEnum = [allTracks objectEnumerator];
+
+  while((song = [trackEnum nextObject]) != nil)
+    {
+      NSString *songDir = [NSString stringWithFormat:@"%@", [[song getPath] stringByDeletingLastPathComponent]];
+      if ([directory isEqual:songDir])
+	{
+	  [allFiles addObject:[[song getPath] lastPathComponent]];
+	}
+    }
+  return [allFiles autorelease];
 }
 
 - (NSArray *) getAlbumsForArtist: (NSString *)artist
@@ -969,6 +992,32 @@ return nil;
   mpd_send_update(mpdConnection, "");
   mpd_response_finish(mpdConnection);
 }
+
+- (NSArray *) getAllDirectories
+{
+  NSMutableArray *allDirs;
+  struct mpd_directory *dir;
+
+  if (! [self _checkConnection])
+    {
+      return nil;
+    }
+
+  allDirs = [[NSMutableArray alloc] init];
+  mpd_send_list_all(mpdConnection, NULL);
+  while ((dir = mpd_recv_directory(mpdConnection)) != NULL)
+    {
+      const char *tmpdir;
+      tmpdir = mpd_directory_get_path(dir);
+
+      [allDirs addObject:[NSString stringWithUTF8String:tmpdir]];
+      mpd_directory_free(dir);
+    }
+  mpd_response_finish(mpdConnection);
+
+  return [allDirs autorelease];
+}
+
 @end
 
 /* -------------------

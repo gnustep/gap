@@ -118,14 +118,17 @@
 - (NSArray *) getAllTracksWithMetadata: (BOOL) withMetadata;
 
 - (NSArray *) getAlbumsForArtist: (NSString *)artist;
-
 - (NSArray *) getAllTracksForArtist: (NSString *)artist;
 - (NSArray *) getAllTracksForArtist: (NSString *)artist 
                               album: (NSString *)album;
 
 - (NSArray *) getAllTracksForAlbum: (NSString *)album;
+-(NSArray *) getAllFilesInDirectory: (NSString *) directory;
 
 - (void) updateCollection;
+
+- (NSArray *) getAllDirectories;
+
 
 @end
 #endif

@@ -162,6 +162,16 @@
   [[CollectionController sharedCollectionController] showWindow: self];
 }
 
+- (void) browseCollectionByDirectory: (id)sender
+{
+  if (! connected)
+    {
+      return;
+    }
+
+  [[CollectionBrowser sharedCollectionBrowser] showWindow: self];
+}
+
 - (void) serverStatistics: (id)sender
 {
   if (! connected)

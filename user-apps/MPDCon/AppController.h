@@ -36,6 +36,7 @@
 #include "PlaylistsManagerController.h"
 #include "StatisticsController.h"
 #include "CrossfadeController.h"
+#include "CollectionBrowser.h"
 #include "LyricsInspector.h"
 #include "SongInspector.h"
 #include "PlaylistInspector.h"
@@ -87,6 +88,7 @@
 - (void) showPlaylist: (id)sender;
 - (void) managePlaylists: (id)sender;
 - (void) browseCollection: (id)sender;
+- (void) browseCollectionByDirectory: (id)sender;
 - (void) serverStatistics: (id)sender;
 - (void) showCrossfade: (id)sender;
 
