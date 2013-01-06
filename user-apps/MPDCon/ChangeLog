@@ -5,6 +5,8 @@
 	* add a Music Collection filesystem browser
 	* PlaylistItem.m, do not try to retrieve the lyrics
 	  for unknow artists or songs
+	* PlaylistController.m after playlistChanged, update the
+	  highlight the current song
 
 2012-12-20: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDController.m fix double frees and crashers in 

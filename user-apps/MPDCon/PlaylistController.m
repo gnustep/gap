@@ -436,6 +436,8 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
   
   [playlistTable reloadData];
   [playlistTable deselectAll: nil];
+  currentSong = [mpdController getCurrentSongNr];
+  [self showCurrentSong: nil];
 }
 
 
