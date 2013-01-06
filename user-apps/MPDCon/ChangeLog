@@ -3,6 +3,8 @@
 	  Resources/CollectionBrowser.gorm, AppController.m,
 	  Resources/Player.gorm
 	* add a Music Collection filesystem browser
+	* PlaylistItem.m, do not try to retrieve the lyrics
+	  for unknow artists or songs
 
 2012-12-20: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* MPDController.m fix double frees and crashers in 
