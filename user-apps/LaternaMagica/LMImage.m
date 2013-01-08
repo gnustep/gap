@@ -63,6 +63,10 @@
   return name;
 }
 
+- (void) setRotation: (unsigned)r
+{
+  rotation = r;
+}
 - (unsigned) rotation
 {
   return rotation;
