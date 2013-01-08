@@ -15,7 +15,8 @@
 	"FileTable.m",
 	"LMFlipView.m",
 	"LMWindow.m",
-	"PRScale.m"
+	"PRScale.m",
+	"LMImage.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -29,7 +30,8 @@
 	"FileTable.h",
 	"LMFlipView.h",
 	"LMWindow.h",
-	"PRScale.h"
+	"PRScale.h",
+	"LMImage.h"
     );
     IMAGES = (
 	"laternamagica_64.tif",

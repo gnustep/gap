@@ -36,6 +36,7 @@
 #include <time.h>
 
 #import "AppController.h"
+#import "LMImage.h"
 #import "PRScale.h"
 
 #define LM_KEY_DESTROYRECYCLE @"DestroyOrRecycle"
@@ -179,18 +180,18 @@
     [view setNeedsDisplay:YES];
 }
 
-- (void)changeImage:(NSString *) file
+- (void)changeImage:(LMImage *) image
 {
-    NSImage *image;
+  NSImage *nsImage;
 
-    image = [[NSImage alloc] initByReferencingFile:file];
-    [self scaleView:image];
-    [view setImage: image];
-    [view setNeedsDisplay:YES];
-    [[view superview] setNeedsDisplay:YES];
-    [window displayIfNeeded];
-    [image release];
-    [window setTitleWithRepresentedFilename:file];
+  nsImage = [[NSImage alloc] initByReferencingFile:[image path]];
+  [self scaleView:nsImage];
+  [view setImage: nsImage];
+  [view setNeedsDisplay:YES];
+  [[view superview] setNeedsDisplay:YES];
+  [window displayIfNeeded];
+  [nsImage release];
+  [window setTitleWithRepresentedFilename:[image name]];
 }
 
 - (IBAction)setScaleToFit:(id)sender
@@ -218,7 +219,7 @@
     table = [notif object];
     selectedRow = [table selectedRow];
     if (selectedRow >= 0)
-        [self changeImage:[fileListData pathAtIndex:selectedRow]];
+        [self changeImage:[fileListData imageAtIndex:selectedRow]];
 }
 
 /** method called as a notification from the window resize
@@ -359,7 +360,7 @@
                 if (sr >= rows)
                     [fileListView selectRow: rows-1 byExtendingSelection: NO];
                 else
-                    [self changeImage: [fileListData pathAtIndex: sr]];
+                    [self changeImage: [fileListData imageAtIndex: sr]];
             
             } else
             {

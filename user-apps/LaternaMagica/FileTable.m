@@ -26,6 +26,7 @@
 #include <math.h>
 
 #import "FileTable.h"
+#import "LMImage.h"
 
 #ifdef __NetBSD__
 #if __NetBSD_Version__ <= 299000000
@@ -44,8 +45,7 @@
                                 @".gwdir",
                                 @"Thumbs.db",
                                 nil] retain];
-      fileNames = [[NSMutableArray arrayWithCapacity:5] retain];
-      filePaths = [[NSMutableArray arrayWithCapacity:5] retain];
+      images = [[NSMutableArray arrayWithCapacity:5] retain];
     }
   return self;
 }
@@ -117,58 +117,60 @@
 - (void)dealloc
 {
   [filesToIgnore release];
-  [fileNames release];
-  [filePaths release];
+  [images release];
   [super dealloc];
 }
 
 - (void)addPath :(NSString*)path
 {
-    [filePaths addObject:path];
-    [fileNames addObject:[path lastPathComponent]];
+  LMImage *image;
+
+  image = [[LMImage alloc] init];
+  [image setPath: path];
+  [images addObject: image];
+  [image release];
 }
 
-- (NSString *)pathAtIndex :(int)index
+- (LMImage*)imageAtIndex :(NSUInteger)index
 {
-    return [filePaths objectAtIndex:index];
+  return [images objectAtIndex:index];
 }
 
-- (void)removeObjectAtIndex:(int)index
+- (NSString *)pathAtIndex :(NSUInteger)index
 {
-    [fileNames removeObjectAtIndex:index];
-    [filePaths removeObjectAtIndex:index];
+  return [[images objectAtIndex:index] path];
+}
+
+- (void)removeObjectAtIndex:(NSUInteger)index
+{
+  [images removeObjectAtIndex:index];
 }
 
 - (void)scrambleObjects
 {
-  NSMutableArray *newNames;
-  NSMutableArray *newPaths;
+  NSMutableArray *newImages;
   
-  newNames = [NSMutableArray arrayWithCapacity: [fileNames count]];
-  newPaths = [NSMutableArray arrayWithCapacity: [filePaths count]];
-  while ([fileNames count] > 0)
+  newImages = [NSMutableArray arrayWithCapacity: [images count]];
+  while ([images count] > 0)
     {
       unsigned i;
       
       /* get a rescaled random number */
-      i = (unsigned)lround(((double)(unsigned long)random() / RAND_MAX) * ([fileNames count]-1));
-      [newNames addObject: [fileNames objectAtIndex: i]];
-      [fileNames removeObjectAtIndex: i];
-      [newPaths addObject: [filePaths objectAtIndex: i]];
-      [filePaths removeObjectAtIndex: i];
+      i = (unsigned)lround(((double)(unsigned long)random() / RAND_MAX) * ([images count]-1));
+      [newImages addObject: [images objectAtIndex: i]];
+      [images removeObjectAtIndex: i];
+ 
     }
-  [fileNames release];
-  [filePaths release];
+  [images release];
   
-  fileNames = [newNames retain];
-  filePaths = [newPaths retain];
+  images = [newImages retain];
 }
 
 
 /* methods implemented to follow the informal NSTableView protocol */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-    return [fileNames count];
+    return [images count];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
@@ -177,9 +179,9 @@
 
     theElement = nil;
 
-    NSParameterAssert(rowIndex >= 0 && rowIndex < [fileNames count]);
+    NSParameterAssert(rowIndex >= 0 && rowIndex < [images count]);
     if ([[aTableColumn identifier] isEqualToString:@"filename"])
-        theElement = [fileNames objectAtIndex:rowIndex];
+        theElement = [[images objectAtIndex:rowIndex] name];
     else
         NSLog(@"unknown table column ident");
     return theElement;
