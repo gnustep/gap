@@ -1,6 +1,11 @@
 2013-01-08 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
+	Remember image rotation
+
+2013-01-08 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
 	Invoke correct method.
 
 2013-01-08 Riccardo Mottola <rm@gnu.org>
