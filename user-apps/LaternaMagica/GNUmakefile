@@ -36,7 +36,8 @@ AppController.h \
 FileTable.h \
 LMFlipView.h \
 LMWindow.h \
-PRScale.h
+PRScale.h \
+LMImage.h
 
 #
 # Class files
@@ -46,7 +47,8 @@ AppController.m \
 FileTable.m \
 LMFlipView.m \
 LMWindow.m \
-PRScale.m
+PRScale.m \
+LMImage.m
 
 #
 # Other sources
