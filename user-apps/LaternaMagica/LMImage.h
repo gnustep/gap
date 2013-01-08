@@ -34,6 +34,8 @@
 - (void) setPath:(NSString *)aPath;
 - (NSString *)path;
 - (NSString *)name;
+
+- (void) setRotation: (unsigned)rotation;
 - (unsigned) rotation;
 
 @end
