@@ -187,6 +187,15 @@
   nsImage = [[NSImage alloc] initByReferencingFile:[image path]];
   [self scaleView:nsImage];
   [view setImage: nsImage];
+  if ([image rotation] > 0)
+    {
+      if ([image rotation] == 90)
+        [self rotateImage90:self];
+      else if ([image rotation] == 180)
+        [self rotateImage180:self];
+      else if ([image rotation] == 270)
+        [self rotateImage270:self];
+    }
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
   [window displayIfNeeded];
@@ -439,6 +448,10 @@
     unsigned char *srcData;
     unsigned char *destData;
     unsigned char *p1, *p2;
+    LMImage *imageInfo;
+
+    imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
+    [imageInfo setRotation: 90];
 
     srcImage = [view image];
     /* get source image representation and associated information */
@@ -498,6 +511,10 @@
     unsigned char *srcData;
     unsigned char *destData;
     unsigned char *p1, *p2;
+    LMImage *imageInfo;
+
+    imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
+    [imageInfo setRotation: 180];
 
     srcImage = [view image];
     /* get source image representation and associated information */
@@ -557,6 +574,10 @@
     unsigned char *srcData;
     unsigned char *destData;
     unsigned char *p1, *p2;
+    LMImage *imageInfo;
+
+    imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
+    [imageInfo setRotation: 270];
 
     srcImage = [view image];
     /* get source image representation and associated information */
