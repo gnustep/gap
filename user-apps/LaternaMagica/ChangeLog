@@ -1,4 +1,9 @@
-2012-01-08 Riccardo Mottola <rm@gnu.org>
+2013-01-08 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Invoke correct method.
+
+2013-01-08 Riccardo Mottola <rm@gnu.org>
 
 	* LMImage.h
 	* LMImage.m
@@ -10,7 +15,7 @@
 	* GNUMakefile
 	Use the new LMImage class to hold information instead of several arrays.
 
-2012-01-04 Riccardo Mottola <rm@gnu.org>
+2013-01-04 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
 	Make "Add" work recursively again.

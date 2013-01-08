@@ -329,12 +329,15 @@
 
 - (IBAction)scrambleList:(id)sender
 {
+  NSInteger selRow;
   [fileListData scrambleObjects];
   [fileListView reloadData];
   
   /* we reload the image directly without calling selectRow,
      the selected row did not actually change and no notification triggers */
-  [self changeImage: [fileListData pathAtIndex: [fileListView selectedRow]]];
+  selRow = [fileListView selectedRow];
+  if (selRow > 0)
+    [self changeImage: [fileListData imageAtIndex: (NSUInteger)selRow]];
 }
 
 - (IBAction)removeImage:(id)sender
