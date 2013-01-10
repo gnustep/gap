@@ -436,192 +436,147 @@
 
 - (IBAction)rotateImage90:(id)sender
 {
-    NSImage *srcImage;
-    NSBitmapImageRep *srcImageRep;
-    NSImage *destImage;
-    NSBitmapImageRep *destImageRep;
-    int x, y;
-    int w, h;
-    int s;
-    int srcSamplesPerPixel;
-    int destSamplesPerPixel;
-    unsigned char *srcData;
-    unsigned char *destData;
-    unsigned char *p1, *p2;
-    LMImage *imageInfo;
+  NSImage *destImage;
 
-    imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
-    [imageInfo setRotation: 90];
+  LMImage *imageInfo;
 
-    srcImage = [view image];
-    /* get source image representation and associated information */
-    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+  imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
+  [imageInfo setRotation: 90];
 
-    w = [srcImageRep pixelsWide];
-    h = [srcImageRep pixelsHigh];
-    srcSamplesPerPixel = [srcImageRep samplesPerPixel];
-    destSamplesPerPixel = srcSamplesPerPixel;
-    destImage = [[NSImage alloc] initWithSize:NSMakeSize(h, w)]; /* we swap h and w */
-    destImageRep = [[NSBitmapImageRep alloc]
-                initWithBitmapDataPlanes:NULL
-                              pixelsWide:h
-                              pixelsHigh:w
-                           bitsPerSample:[srcImageRep bitsPerSample]
-                         samplesPerPixel:[srcImageRep samplesPerPixel]
-                                hasAlpha:[srcImageRep hasAlpha]
-                                isPlanar:[srcImageRep isPlanar]
-                          colorSpaceName:[srcImageRep colorSpaceName]
-                             bytesPerRow:h*destSamplesPerPixel  // we need to set this because otherwise mac > 10.4 will set a padded value
-                            bitsPerPixel:0];
+  destImage = [self rotate: [view image] byAngle:90];
 
-    srcData = [srcImageRep bitmapData];
-    destData = [destImageRep bitmapData];
-    
-    for (y = 0; y < h; y++)
-        for (x = 0; x < w; x++)
-        {
-            p1 = srcData + srcSamplesPerPixel * (y * w + x);
-            p2 = destData + destSamplesPerPixel * ((w-x-1) * h + y);
-            for (s = 0; s < srcSamplesPerPixel; s++)
-                p2[s] = p1[s];
-        }
 
-    [destImage addRepresentation:destImageRep];
-    [destImageRep release];
-
-    [self scaleView:destImage];
-    [view setImage: destImage];
-    [view setNeedsDisplay:YES];
-    [[view superview] setNeedsDisplay:YES];
-    [window displayIfNeeded];
-    [destImage release];
+  [self scaleView:destImage];
+  [view setImage: destImage];
+  [view setNeedsDisplay:YES];
+  [[view superview] setNeedsDisplay:YES];
+  [window displayIfNeeded];
 }
 
 - (IBAction)rotateImage180:(id)sender
 {
-    NSImage *srcImage;
-    NSBitmapImageRep *srcImageRep;
-    NSImage *destImage;
-    NSBitmapImageRep *destImageRep;
-    int x, y;
-    int w, h;
-    int s;
-    int srcSamplesPerPixel;
-    int destSamplesPerPixel;
-    unsigned char *srcData;
-    unsigned char *destData;
-    unsigned char *p1, *p2;
-    LMImage *imageInfo;
+  NSImage *destImage;
 
-    imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
-    [imageInfo setRotation: 180];
+  LMImage *imageInfo;
 
-    srcImage = [view image];
-    /* get source image representation and associated information */
-    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+  imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
+  [imageInfo setRotation: 180];
 
-    w = [srcImageRep pixelsWide];
-    h = [srcImageRep pixelsHigh];
-    srcSamplesPerPixel = [srcImageRep samplesPerPixel];
-    destSamplesPerPixel = srcSamplesPerPixel;
+  destImage = [self rotate: [view image] byAngle:180];
 
-    destImage = [[NSImage alloc] initWithSize:NSMakeSize(w, h)];
-    destImageRep = [[NSBitmapImageRep alloc]
-                initWithBitmapDataPlanes:NULL
-                              pixelsWide:w
-                              pixelsHigh:h
-                           bitsPerSample:[srcImageRep bitsPerSample]
-                         samplesPerPixel:[srcImageRep samplesPerPixel]
-                                hasAlpha:[srcImageRep hasAlpha]
-                                isPlanar:[srcImageRep isPlanar]
-                          colorSpaceName:[srcImageRep colorSpaceName]
-                             bytesPerRow:w*destSamplesPerPixel
-                            bitsPerPixel:0];
-
-    srcData = [srcImageRep bitmapData];
-    destData = [destImageRep bitmapData];
-
-    for (y = 0; y < h; y++)
-        for (x = 0; x < w; x++)
-        {
-            p1 = srcData + srcSamplesPerPixel * (y * w + x);
-            p2 = destData + srcSamplesPerPixel * ((h-y-1) * w + (w-x-1));
-            for (s = 0; s < srcSamplesPerPixel; s++)
-                p2[s] = p1[s];
-        }
-
-    [destImage addRepresentation:destImageRep];
-    [destImageRep release];
-
-    [self scaleView:destImage];
-    [view setImage: destImage];
-    [window displayIfNeeded];
-    [destImage release];
+  [self scaleView:destImage];
+  [view setImage: destImage];
+  [view setNeedsDisplay:YES];
+  [[view superview] setNeedsDisplay:YES];
+  [window displayIfNeeded];
 }
 
 
 - (IBAction)rotateImage270:(id)sender
 {
-    NSImage *srcImage;
-    NSBitmapImageRep *srcImageRep;
-    NSImage *destImage;
-    NSBitmapImageRep *destImageRep;
-    int x, y;
-    int w, h;
-    int s;
-    int srcSamplesPerPixel;
-    int destSamplesPerPixel;
-    unsigned char *srcData;
-    unsigned char *destData;
-    unsigned char *p1, *p2;
-    LMImage *imageInfo;
+  NSImage *destImage;
+  
+  LMImage *imageInfo;
 
-    imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
-    [imageInfo setRotation: 270];
+  imageInfo = [fileListData imageAtIndex:[fileListView selectedRow]];
+  [imageInfo setRotation: 270];
 
-    srcImage = [view image];
-    /* get source image representation and associated information */
-    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+  destImage = [self rotate: [view image] byAngle: 270];
 
-    w = [srcImageRep pixelsWide];
-    h = [srcImageRep pixelsHigh];
-    srcSamplesPerPixel = [srcImageRep samplesPerPixel];
-    destSamplesPerPixel = srcSamplesPerPixel;
+  [self scaleView:destImage];
+  [view setImage: destImage];
+  [view setNeedsDisplay:YES];
+  [[view superview] setNeedsDisplay:YES];
+  [window displayIfNeeded];
+}
 
-    destImage = [[NSImage alloc] initWithSize:NSMakeSize(h, w)]; /* we swap h and w */
-    destImageRep = [[NSBitmapImageRep alloc]
-                initWithBitmapDataPlanes:NULL
-                              pixelsWide:h
-                              pixelsHigh:w
-                           bitsPerSample:[srcImageRep bitsPerSample]
-                         samplesPerPixel:[srcImageRep samplesPerPixel]
-                                hasAlpha:[srcImageRep hasAlpha]
-                                isPlanar:[srcImageRep isPlanar]
-                          colorSpaceName:[srcImageRep colorSpaceName]
-                             bytesPerRow:h*destSamplesPerPixel
-                            bitsPerPixel:0];
+- (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle
+{
+  NSBitmapImageRep *srcImageRep;
+  NSImage *destImage;
+  NSBitmapImageRep *destImageRep;
+  int x, y;
+  int w, h;
+  int newW, newH;
+  int s;
+  int srcSamplesPerPixel;
+  int destSamplesPerPixel;
+  unsigned char *srcData;
+  unsigned char *destData;
+  unsigned char *p1, *p2;
 
-    srcData = [srcImageRep bitmapData];
-    destData = [destImageRep bitmapData];
+  /* get source image representation and associated information */
 
-    for (y = 0; y < h; y++)
+  srcImageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
+  w = [srcImageRep pixelsWide];
+  h = [srcImageRep pixelsHigh];
+  if (angle == 90 || angle == 270)
+    {
+      newH = w;
+      newW = h;
+    }
+  else
+    {
+      newH = h;
+      newW = w;
+    }
+
+  srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+  destSamplesPerPixel = srcSamplesPerPixel;
+  destImage = [[NSImage alloc] initWithSize:NSMakeSize(newW, newH)];
+  destImageRep = [[NSBitmapImageRep alloc]
+		   initWithBitmapDataPlanes:NULL
+				 pixelsWide:newW
+				 pixelsHigh:newH
+			      bitsPerSample:[srcImageRep bitsPerSample]
+			    samplesPerPixel:[srcImageRep samplesPerPixel]
+				   hasAlpha:[srcImageRep hasAlpha]
+				   isPlanar:[srcImageRep isPlanar]
+			     colorSpaceName:[srcImageRep colorSpaceName]
+				bytesPerRow:newW*destSamplesPerPixel  // we need to set this because otherwise mac > 10.4 will set a padded value
+			       bitsPerPixel:0];
+  
+  srcData = [srcImageRep bitmapData];
+  destData = [destImageRep bitmapData];
+    
+  if (angle == 90)
+    {
+      for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
-        {
+	  {
+            p1 = srcData + srcSamplesPerPixel * (y * w + x);
+            p2 = destData + destSamplesPerPixel * ((w-x-1) * h + y);
+            for (s = 0; s < srcSamplesPerPixel; s++)
+	      p2[s] = p1[s];
+	  }
+    }
+  else if (angle == 180)
+    {
+      for (y = 0; y < h; y++)
+        for (x = 0; x < w; x++)
+	  {
+            p1 = srcData + srcSamplesPerPixel * (y * w + x);
+            p2 = destData + srcSamplesPerPixel * ((h-y-1) * w + (w-x-1));
+            for (s = 0; s < srcSamplesPerPixel; s++)
+	      p2[s] = p1[s];
+	  }
+    }
+  else if (angle == 270)
+    {
+      for (y = 0; y < h; y++)
+        for (x = 0; x < w; x++)
+	  {
             p1 = srcData + srcSamplesPerPixel * (y * w + x);
             p2 = destData + destSamplesPerPixel * (x * h + (h-y-1));
             for (s = 0; s < srcSamplesPerPixel; s++)
-                p2[s] = p1[s];
-        }
+	      p2[s] = p1[s];
+	  }
+    }
+  [destImage addRepresentation:destImageRep];
+  [destImageRep release];
 
-    [destImage addRepresentation:destImageRep];
-    [destImageRep release];
-
-    [self scaleView:destImage];
-    [view setImage: destImage];
-    [view setNeedsDisplay:YES];
-    [[view superview] setNeedsDisplay:YES];
-    [window displayIfNeeded];
-    [destImage release];
+  [destImage autorelease];
+  return destImage;
 }
 
 - (BOOL)validateMenuItem:(id)sender
