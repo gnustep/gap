@@ -1,6 +1,11 @@
 2013-01-09 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
+	Call directly rotate byAngle method, so that redrawing twice is avoided.
+
+2013-01-09 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
 	Separate rotation method from actions.
 
 2013-01-08 Riccardo Mottola <rm@gnu.org>

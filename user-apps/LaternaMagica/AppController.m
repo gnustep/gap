@@ -189,12 +189,12 @@
   [view setImage: nsImage];
   if ([image rotation] > 0)
     {
-      if ([image rotation] == 90)
-        [self rotateImage90:self];
-      else if ([image rotation] == 180)
-        [self rotateImage180:self];
-      else if ([image rotation] == 270)
-        [self rotateImage270:self];
+      NSImage *destImage;
+
+      destImage = [self rotate: [view image] byAngle:[image rotation]];
+
+      [self scaleView:destImage];
+      [view setImage: destImage];
     }
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
