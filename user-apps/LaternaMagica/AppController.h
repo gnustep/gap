@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2011 Riccardo Mottola
+   Copyright (C) 2006-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -82,6 +82,8 @@
 - (IBAction)rotateImage90:(id)sender;
 - (IBAction)rotateImage180:(id)sender;
 - (IBAction)rotateImage270:(id)sender;
+
+- (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle;
 
 - (IBAction)saveImageAs:(id)sender;
 - (IBAction)setCompressionType:(id)sender;
