@@ -241,7 +241,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>Version 0.9.5</string>
+	<string>Version 1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>WOSO</string>
 	<key>CFBundleVersion</key>

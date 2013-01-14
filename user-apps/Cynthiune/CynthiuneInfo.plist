@@ -6,9 +6,9 @@
     URL = "http://gap.nongnu.org/cynthiune/";
     Authors = ( "Wolfgang Sourdeau <Wolfgang@Contre.COM>",
                 "The GNUstep Application Team" );
-    Copyright = "Copyright \U00a9 2002-2006 by Wolfgang Sourdeau\n        2012 The GNUstep Application Project";
+    Copyright = "Copyright \U00a9 2002-2006 by Wolfgang Sourdeau\n        2012-2013 The GNUstep Application Project";
     CopyrightDescription = "Released under the GNU General Public License 2.0 or later";
-    FullVersionID = "1.0.0 (05 2012)";
+    FullVersionID = "1.0.0 (01 2013)";
 
     NSTypes = (
         {
