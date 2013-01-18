@@ -32,6 +32,7 @@
 	    smallView,
 	    scrollView,
 	    fitButton,
+	    fieldImageCount,
 	    fullScreenMenuItem,
 	    fullScreenButton,
 	    saveAsMenuItem,
@@ -57,6 +58,7 @@
 	Actions = (
 	);
 	Outlets = (
+	    appController
 	);
 	Super = NSObject;
     };

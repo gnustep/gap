@@ -26,6 +26,7 @@
 #include <math.h>
 
 #import "FileTable.h"
+#import "AppController.h"
 #import "LMImage.h"
 
 #ifdef __NetBSD__
@@ -129,6 +130,7 @@
   [image setPath: path];
   [images addObject: image];
   [image release];
+  [appController updateImageCount];
 }
 
 - (LMImage*)imageAtIndex :(NSUInteger)index
@@ -144,6 +146,7 @@
 - (void)removeObjectAtIndex:(NSUInteger)index
 {
   [images removeObjectAtIndex:index];
+  [appController updateImageCount];
 }
 
 - (void)scrambleObjects
@@ -166,6 +169,10 @@
   images = [newImages retain];
 }
 
+- (NSUInteger)imageCount
+{
+  return [images count];
+}
 
 /* methods implemented to follow the informal NSTableView protocol */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView

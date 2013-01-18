@@ -590,6 +590,11 @@
     return YES;
 }
 
+- (void)updateImageCount
+{
+  [fieldImageCount setIntValue:(int)[fileListData imageCount]];
+}
+
 - (IBAction)saveImageAs:(id)sender
 {
     NSImage *srcImage;
