@@ -28,6 +28,7 @@
 #import <AppKit/AppKit.h>
 
 @class LMImage;
+@class AppController;
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
 #define NSUInteger unsigned
@@ -40,12 +41,15 @@
   NSArray *filesToIgnore;
 
   NSMutableArray *images;
+
+  IBOutlet AppController *appController;
 }
 
 - (BOOL)addPathAndRecurse: (NSString*)path;
 - (void)addPath:(NSString *)filename;
 - (LMImage *)imageAtIndex :(NSUInteger)index;
 - (NSString *)pathAtIndex :(NSUInteger)index;
+- (NSUInteger)imageCount;
 
 /** removes an element at given index */
 - (void)removeObjectAtIndex:(NSUInteger)index;

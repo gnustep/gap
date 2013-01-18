@@ -1,3 +1,12 @@
+2013-01-18 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	* FileTable.h
+	* FileTable.m
+	* Resources/LaternaMagica.gorm
+	Show image count
+
 2013-01-09 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m

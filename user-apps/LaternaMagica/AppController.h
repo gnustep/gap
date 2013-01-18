@@ -25,6 +25,7 @@
 
 
 #import <AppKit/AppKit.h>
+
 #import <FileTable.h>
 #import <LMFlipView.h>
 #import "LMWindow.h"
@@ -38,10 +39,12 @@
     IBOutlet LMFlipView   *smallView;
     IBOutlet NSScrollView *scrollView;
     IBOutlet NSButton     *fitButton;
+    IBOutlet NSTextField  *fieldImageCount;
     IBOutlet NSMenuItem   *fullScreenMenuItem;
     IBOutlet NSButton     *fullScreenButton;
     IBOutlet NSMenuItem   *saveAsMenuItem;
     
+    /* save As options */
     IBOutlet NSView        *saveOptionsView;
     IBOutlet NSPopUpButton *fileTypePopUp;
     IBOutlet NSTextField   *jpegCompressionField;
@@ -82,6 +85,8 @@
 - (IBAction)rotateImage90:(id)sender;
 - (IBAction)rotateImage180:(id)sender;
 - (IBAction)rotateImage270:(id)sender;
+
+- (void)updateImageCount;
 
 - (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle;
 
