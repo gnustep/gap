@@ -33,6 +33,7 @@
                 exportProgress = NSProgressIndicator; 
                 exporterPanel = NSPanel; 
                 fieldHeight = NSTextField; 
+                fieldImageCount = NSTextField; 
                 fieldOutputPath = NSTextField; 
                 fieldWidth = NSTextField; 
                 fileListData = FileTable; 
@@ -55,7 +56,12 @@
             }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = FileTable; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = FileTable; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {appController = AppController; }; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             CLASS = LMFlipView; 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		853E1EDA16A0E7AB00653750 /* LMImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 853E1ED816A0E7AB00653750 /* LMImage.h */; };
+		853E1EDB16A0E7AB00653750 /* LMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 853E1ED916A0E7AB00653750 /* LMImage.m */; };
 		85B7C71913F302DB005EF60D /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = 85B7C71813F302DB005EF60D /* ChangeLog */; };
 		85DB9A5D10B3D3C100DC1358 /* FileTable.h in Headers */ = {isa = PBXBuildFile; fileRef = F5D00DF9097C409A01A80101 /* FileTable.h */; };
 		85DB9A5E10B3D3C100DC1358 /* AppController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5D00DFD097C40DD01A80101 /* AppController.h */; };
@@ -32,6 +34,8 @@
 		29B97319FDCFA39411CA2CEA /* LaternaMagica.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = LaternaMagica.nib; path = English.lproj/LaternaMagica.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		853E1ED816A0E7AB00653750 /* LMImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LMImage.h; sourceTree = "<group>"; };
+		853E1ED916A0E7AB00653750 /* LMImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LMImage.m; sourceTree = "<group>"; };
 		855F873C0F34FE6400C1D9A8 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
 		855F873D0F34FE6400C1D9A8 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		858E59FA0F365467009E7B11 /* LM_icons_osx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LM_icons_osx.icns; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				853E1ED816A0E7AB00653750 /* LMImage.h */,
+				853E1ED916A0E7AB00653750 /* LMImage.m */,
 				855F873C0F34FE6400C1D9A8 /* LMWindow.h */,
 				855F873D0F34FE6400C1D9A8 /* LMWindow.m */,
 				F5D00DF9097C409A01A80101 /* FileTable.h */,
@@ -155,6 +161,7 @@
 				85DB9A5F10B3D3C100DC1358 /* LMFlipView.h in Headers */,
 				85DB9A6010B3D3C100DC1358 /* LMWindow.h in Headers */,
 				85FE67C711D2CD5E0043B90D /* PRScale.h in Headers */,
+				853E1EDA16A0E7AB00653750 /* LMImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +227,7 @@
 				85DB9A6910B3D3C100DC1358 /* LMFlipView.m in Sources */,
 				85DB9A6A10B3D3C100DC1358 /* LMWindow.m in Sources */,
 				85FE67C811D2CD5E0043B90D /* PRScale.m in Sources */,
+				853E1EDB16A0E7AB00653750 /* LMImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
