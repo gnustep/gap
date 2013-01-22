@@ -1,3 +1,6 @@
+2013-01-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Cynthiune.gorm remove menu entry to send bug report mail
+
 2012-07-23  Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* CynthiuneController.[h|m]
 	remove reference to Mailservice, and the sendABugReport method
