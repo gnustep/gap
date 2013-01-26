@@ -7,7 +7,7 @@
 	NSMainNibFile = MainMenu.gorm;
 	NSPrincipalClass = NSApplication;
 	Authors = ("The GAP Team", "Dirk Olmes <dirk@xanthippe.ping.de>");
-	Copyright = "Copyright (C) 2008-2012";
+	Copyright = "Copyright (C) 2008-2013";
  	CopyrightDescription = "Released under GPLv2 or later";
 	NSTypes = (
 		{
