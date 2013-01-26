@@ -1,5 +1,11 @@
 2012-01-26 Riccardo Mottola <rm@gnu.org>
 
+	* PreferencesController.[h,m]
+	* English.lproj/Preferences.nib
+	Update NIB and put controls inside a Scrollview, which has to be scrolled top the top on load.
+
+2012-01-26 Riccardo Mottola <rm@gnu.org>
+
 	* TarArchive.m (archiveType)
 	Return ArchiveType and not NSString.
 

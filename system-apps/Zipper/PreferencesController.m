@@ -156,6 +156,16 @@
   return self;
 }
 
+- (void)awakeFromNib
+{
+  NSClipView *cView;
+
+  NSLog(@"fix scroll");
+  cView = [scrollView contentView];
+  [cView scrollToPoint: NSMakePoint(0.0, NSMaxY([[scrollView documentView] frame])-NSHeight([cView bounds]))];
+  [scrollView reflectScrolledClipView: cView];
+}
+
 - (void)dealloc
 {
         [_panel release];
@@ -167,7 +177,7 @@
  * runs the Preferences Panel in a modal event loop
  */
 - (void)showPreferencesPanel
-{
+{  
   [NSApp runModalForWindow:_panel];
   // control flow returns to the panel ... until 'ok' or 'cancel' is pressed
 

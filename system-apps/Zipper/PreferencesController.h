@@ -22,11 +22,12 @@
 
 #import <Foundation/NSObject.h>
 
-@class NSPanel, NSForm, NSTextField, Archive;
+@class NSPanel, NSForm, NSTextField, ScrollView, Archive;
 
 @interface PreferencesController : NSObject
 {
   IBOutlet NSPanel *_panel;
+  IBOutlet NSScrollView *scrollView;
   IBOutlet NSButton *_bsdTarButton;
   IBOutlet NSTextField *_defaultOpenApp;
 
