@@ -249,6 +249,7 @@ static ov_callbacks oggCallbacks = { oggReadFunc, oggSeekFunc,
         }
 
       vcedit_clear (state);
+      fclose(in);
     }
 
 
