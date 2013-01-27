@@ -35,7 +35,8 @@
 	    "_unaceTextField",
 	    "_unarjTextField",
 	    "_zooTextField",
-	    "_xzTextField"
+	    "_xzTextField",
+	    scrollView
 	);
 	Super = NSObject;
     };

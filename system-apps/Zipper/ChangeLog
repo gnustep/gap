@@ -1,3 +1,7 @@
+2012-01-27 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Resources/PreferencesController.gorm
+	* put the controls into a Scrollview, similar to the nib
+
 2012-01-26 Riccardo Mottola <rm@gnu.org>
 
 	* PreferencesController.[h,m]
