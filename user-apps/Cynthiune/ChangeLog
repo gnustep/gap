@@ -1,3 +1,6 @@
+2013-01-27: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/VorbisTags/VorbisTags.m do not leak file descriptor
+
 2013-01-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Cynthiune.gorm remove menu entry to send bug report mail
 
