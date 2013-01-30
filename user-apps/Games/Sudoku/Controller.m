@@ -357,14 +357,11 @@ typedef enum {
 
 	[doc updateChangeCount:NSChangeDone];
     }
-
-    return self;
 }
 
 -(IBAction)actionReset:(id)sender
 {
     [sdkview reset];
-    return self;
 }
 
 -(IBAction)actionCancel:(id)sender
@@ -374,7 +371,6 @@ typedef enum {
     [enterPanel orderOut:self];
 
     [palette orderFront:self];
-    return self;
 }
 
 -(IBAction)enterPuzzle:(id)sender
@@ -385,8 +381,6 @@ typedef enum {
     [enterPanel makeKeyAndOrderFront:self];
     [[NSApplication sharedApplication]
 	runModalForWindow:enterPanel];
-    
-    return self;
 }
 
 
