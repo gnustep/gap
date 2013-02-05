@@ -1,11 +1,16 @@
 2013-02-04 Riccardo Mottola <rm@gnu.org>
 
+	* Resources/FTP.gorm
+	Fix broken popup connections.
+
+2013-02-04 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.[h,m]
 	Keep connection as ivar and invalidate on closure.
 
 2012-12-12 Riccardo Mottola <rm@gnu.org>
 
-	* Rresources/FTP.gorm
+	* Resources/FTP.gorm
 	recreated popupbuttons to fix strange problem.
 
 2012-10-03 Riccardo Mottola <rm@gnu.org>
