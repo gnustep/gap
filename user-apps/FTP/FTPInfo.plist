@@ -6,7 +6,7 @@
     Authors = (
 	"Riccardo Mottola <rm@gnu.org>"
     );
-    Copyright = "Copyright (C) 2005-2012";
+    Copyright = "Copyright (C) 2005-2013";
     CopyrightDescription = "Released under GPL";
     FullVersionID = "0.4";
     NSExecutable = FTP;
