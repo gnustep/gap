@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2012 Riccardo Mottola
+   Copyright (C) 2005-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -71,6 +71,9 @@
     @private struct timeval     beginTimeVal;
     @private unsigned long long transferSize;
     @private BOOL               threadRunning;
+
+    @private NSConnection   *doConnection;
+
 }
 
 + (void)initialize;

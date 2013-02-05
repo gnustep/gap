@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2012 Riccardo Mottola
+   Copyright (C) 2005-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -67,8 +67,11 @@
 
 - (void)dealloc
 {
-    [textAttributes release];
-    [super dealloc];
+  [doConnection invalidate];
+
+  [doConnection release];
+  [textAttributes release];
+  [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -83,7 +86,6 @@
     NSPort         *port1;
     NSPort         *port2;
     NSArray        *portArray;
-    NSConnection   *kitConnection;
 	
     /* read the user preferences */
     defaults = [NSUserDefaults standardUserDefaults];
@@ -125,9 +127,9 @@
     // we set up distributed objects
     port1 = [NSPort port];
     port2 = [NSPort port];
-    kitConnection = [[NSConnection alloc] initWithReceivePort:port1
+    doConnection = [[NSConnection alloc] initWithReceivePort:port1
 						     sendPort:port2];
-    [kitConnection setRootObject:self];
+    [doConnection setRootObject:self];
 	
     /* Ports switched here. */
     portArray = [NSArray arrayWithObjects:port2, port1, nil];
