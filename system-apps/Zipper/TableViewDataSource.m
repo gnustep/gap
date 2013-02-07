@@ -39,13 +39,13 @@
 //------------------------------------------------------------------------------
 // Implementation NSTableView DataSource
 //------------------------------------------------------------------------------
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     return [_archive elementCount];
 }
 
 - (void) tableView: (NSTableView *)tableView willDisplayCell: (id)aCell
-   forTableColumn: (NSTableColumn *)tableColumn row: (int)row
+   forTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
 	NSImage *image;
 	FileInfo *fileInfo = [_archive elementAtIndex: row];
@@ -63,7 +63,7 @@
 
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn
-    row:(int)rowIndex
+    row:(NSInteger)rowIndex
 {
 	FileInfo *fileInfo = [_archive elementAtIndex:rowIndex];
 	

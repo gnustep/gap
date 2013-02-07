@@ -1,3 +1,6 @@
+2012-02-07 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* TableViewDataSource.m some NSInteger conversions
+
 2012-01-27 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/PreferencesController.gorm
 	* put the controls into a Scrollview, similar to the nib
