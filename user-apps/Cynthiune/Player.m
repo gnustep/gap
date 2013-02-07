@@ -297,7 +297,7 @@ NSString *PlayerSongEndedNotification = @"PlayerSongEndedNotification";
 	  endianness = newEndianness;
         }
       else
-        NSLog (@"error preparing output for %d channels at a rate of %d",
+        NSLog (@"error preparing output for %d channels at a rate of %lu",
                newChannels, newRate);
     }
 }

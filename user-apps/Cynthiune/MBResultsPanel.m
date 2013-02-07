@@ -332,14 +332,14 @@
 }
 
 /* Datasource protocol */
-- (int) numberOfRowsInTableView: (NSTableView *) tableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *) tableView
 {
   return [trackInfos count];
 }
 
 -            (id) tableView: (NSTableView *) tableView
   objectValueForTableColumn: (NSTableColumn *) tableColumn
-                        row: (int) rowIndex
+                        row: (NSInteger) rowIndex
 {
   NSDictionary *trackInfo;
 
@@ -357,7 +357,7 @@
 - (void) tableView: (NSTableView *) tv
    willDisplayCell: (id) cell
     forTableColumn: (NSTableColumn *) tableColumn
-               row: (int) rowIndex
+               row: (NSInteger) rowIndex
 {
 #ifdef GNUSTEP
   /* GNUSTEP is buggy so we work-around */

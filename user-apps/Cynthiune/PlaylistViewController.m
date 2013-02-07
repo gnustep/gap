@@ -323,7 +323,7 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
 }
 
 /* datasource protocol */
-- (int) numberOfRowsInTableView: (NSTableView *) tableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *) tableView
 {
   return [playlist numberOfSongs];
 }
@@ -333,8 +333,8 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
 {
   NSMutableString *newString;
   NSCell *dataCell;
-  float stringWidth, width;
-  unsigned int length;
+  CGFloat stringWidth, width;
+  NSUInteger length;
 
   newString = [NSMutableString stringWithString: string];
   dataCell = [column dataCell];
@@ -357,7 +357,7 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
 
 -            (id) tableView: (NSTableView *) tableView
   objectValueForTableColumn: (NSTableColumn *) tableColumn
-                        row: (int) rowIndex
+                        row: (NSInteger) rowIndex
 {
   NSString *cellContent, *colId;
   Song *song;
@@ -369,7 +369,7 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
     {
       song = [playlist songAtIndex: rowIndex];
       if (!song)
-        NSLog (@"no song at index %d", rowIndex);
+        NSLog (@"no song at index %" PRIuPTR "", rowIndex);
 
       if ([colId isEqualToString: @"song"])
         cellContent = [self _bestFit: [song playlistRepresentation]
@@ -386,7 +386,7 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
 - (void) tableView: (NSTableView *) tableView
    willDisplayCell: (id) cell
     forTableColumn: (NSTableColumn *) tableColumn
-               row: (int) rowIndex
+               row: (NSInteger) rowIndex
 {
   Song *rowSong;
 
@@ -469,13 +469,13 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
 
 - (NSDragOperation) tableView: (NSTableView *) tableView
 		 validateDrop: (id <NSDraggingInfo>) info
-		  proposedRow: (int) row
+		  proposedRow: (NSInteger) row
 	proposedDropOperation: (NSTableViewDropOperation) dropOperation
 {
   NSString *availableType, *requiredType;
   NSPasteboard *pboard;
   NSDragOperation dragOperation;
-  unsigned int mask;
+  NSUInteger mask;
 
   pboard = [info draggingPasteboard];
   
@@ -538,7 +538,7 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
 
 - (BOOL) tableView: (NSTableView *) tableView
 	acceptDrop: (id <NSDraggingInfo>) info
-	       row: (int) row
+	       row: (NSInteger) row
      dropOperation: (NSTableViewDropOperation) op
 {
   NSPasteboard *pboard;

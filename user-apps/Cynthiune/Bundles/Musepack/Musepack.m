@@ -241,8 +241,14 @@ CopyBuffer (const MPC_SAMPLE_FORMAT *buffer, unsigned char *destBuffer,
           result = YES;
           mpc_demux_exit (testDecoder);
         }
+      else
+	{
+	  result = NO;
+	}
       if (testReader)
-        MPCReaderDelete (testReader);
+	{
+          MPCReaderDelete (testReader);
+	}
 #endif
     }
   else
