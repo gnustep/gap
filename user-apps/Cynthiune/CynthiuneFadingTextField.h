@@ -38,10 +38,10 @@
   unsigned int numberOfIterations;
   unsigned int iteration;
 
-  float red;
-  float green;
-  float blue;
-  float alpha;
+  CGFloat red;
+  CGFloat green;
+  CGFloat blue;
+  CGFloat alpha;
 }
 
 - (void) setStringValue: (NSString *) string;

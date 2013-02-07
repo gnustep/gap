@@ -46,7 +46,16 @@
 @end
 
 typedef struct {
-    @defs (FLAC);
+  FLAC__StreamDecoder *fileDecoder;
+
+  unsigned int bitsPerSample;
+  unsigned int duration;
+  unsigned int channels;
+  unsigned long rate;
+
+  unsigned char *readBuffer;
+  unsigned int position;
+  unsigned int readBufferSize;
 } CFLAC;
 
 #endif /* FLAC_H */

@@ -1,3 +1,19 @@
+2013-02-07: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/FLAC/FLAC.h
+	  make it compile with non-fragile ABI
+	* Bundles/Musepack/Musepack.m
+	  fix potentially uninitialized return value
+	* CynthiuneFadingTextField.h
+	  float -> CGFloat transition
+	* CynthiunePauseButton.m
+	* MBResultsPanel.m
+	* PlaylistViewController.m
+	* Player.m
+	  NS(U)Integer transitions, and fixing some NSLog
+	  format strings
+	  All this together makes the Player fading when start playing
+	  a song work again on amd64
+
 2013-01-27: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/VorbisTags/VorbisTags.m do not leak file descriptor
 

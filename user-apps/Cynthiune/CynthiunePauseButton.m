@@ -99,7 +99,7 @@
   SET (secondaryImage, image);
 }
 
-- (void) setState: (int) state
+- (void) setState: (NSInteger) state
 {
   if ([self isEnabled])
     {
