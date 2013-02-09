@@ -24,8 +24,9 @@
 
 #import "SQLiteAdaptor.h"
 
-@interface SQLiteAdaptor(Private)
 static NSString* SongRatingStorageDirectory = nil;
+
+@interface SQLiteAdaptor(Private)
 -(NSString *)_getMPDConDBName;
 @end
 

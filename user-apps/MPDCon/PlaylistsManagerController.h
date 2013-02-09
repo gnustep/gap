@@ -50,11 +50,11 @@
 - (void) removeList: (id)sender;
 
 // TableView dataSource Methods
-- (int) numberOfRowsInTableView: (NSTableView *)tableView;
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView;
 
 -            (id) tableView: (NSTableView *)tableView 
   objectValueForTableColumn: (NSTableColumn *)tableColumn 
-                        row:(int)row;
+                        row:(NSInteger)row;
 
 // Notification Methods
 - (void) tableViewSelectionDidChange: (NSNotification *)aNotif;

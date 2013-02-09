@@ -65,20 +65,20 @@
 - (NSArray *) getAllTracks;
 
 // TableView dataSource Methods
-- (int) numberOfRowsInTableView: (NSTableView *)tableView;
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView;
 
 -            (id) tableView: (NSTableView *)tableView 
   objectValueForTableColumn: (NSTableColumn *)tableColumn 
-                        row:(int) row;
+                        row:(NSInteger) row;
 
 
 // Browser delegate Methods
-- (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column;
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column;
 - (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell
           atRow:(NSInteger)row
          column:(NSInteger)column;
 - (NSString *)browser:(NSBrowser *)sender
-        titleOfColumn:(int)column;
+        titleOfColumn:(NSInteger)column;
 
 - (void) selectionChanged: (id)sender;
 

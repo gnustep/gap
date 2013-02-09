@@ -34,8 +34,8 @@
 
 - (void) _refreshViews;
 - (void) _filterCollectionByString: (NSString *)filterString;
-- (void) _getAllAlbumsForArtistAt: (int)row;
-- (void) _getAllTracksForArtistAt: (int)artistRow albumAt: (int)albumRow;
+- (void) _getAllAlbumsForArtistAt: (NSInteger)row;
+- (void) _getAllTracksForArtistAt: (NSInteger)artistRow albumAt: (NSInteger)albumRow;
 
 
 int _artistSort(id artist1, id artist2, void *context);
@@ -94,13 +94,10 @@ int _aSort(id string1, id string2, void *context);
   NSEnumerator *songEnum = [trackView selectedRowEnumerator];
   NSNumber *songNumber;
   
-  int i = 0;
-  
   while ((songNumber = [songEnum nextObject]) != nil) 
     {
       [[MPDController sharedMPDController] 
 	addTrack: [[allSongs objectAtIndex: [songNumber intValue]] getPath]];
-      i++;
     }
 }
 
@@ -207,7 +204,7 @@ int _aSort(id string1, id string2, void *context);
    - TableView dataSource Methods -
    --------------------------------*/
 
-- (int) numberOfRowsInTableView: (NSTableView *)tableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
   return [allSongs count];
 
@@ -215,7 +212,7 @@ int _aSort(id string1, id string2, void *context);
 
 - (id) tableView: (NSTableView *)tableView 
 objectValueForTableColumn: (NSTableColumn *)tableColumn 
-	     row:(int) row
+	     row:(NSInteger) row
 {
   NSString *identifier = [tableColumn identifier];
   
@@ -227,7 +224,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
    - Browser delegate Methods -
    ----------------------------*/
    
-- (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
   if (column == 0)
     {
@@ -270,7 +267,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
 }
 
 - (NSString *)browser:(NSBrowser *)sender
-        titleOfColumn:(int)column
+        titleOfColumn:(NSInteger)column
 {
   if (column == 0) {
       return @"Artists";
@@ -308,18 +305,18 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
   NSMutableArray *songArray;
   
   BOOL accept;
-  unsigned int count;
+  NSUInteger count;
   
   count = [rows count];
   
   if (count > 0)
     {
-      int i;
+      NSUInteger i;
       songArray = [[NSMutableArray alloc] init];
       
       for (i = 0; i < count; i++)
         {
-          [songArray addObject: [[allSongs objectAtIndex: [[rows objectAtIndex: i] intValue]] getPath]];
+          [songArray addObject: [[allSongs objectAtIndex: [[rows objectAtIndex: i] integerValue]] getPath]];
         }
       
       accept = YES;
@@ -366,13 +363,13 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
   [self selectionChanged: collectionView];
 }
 
-- (void) _getAllAlbumsForArtistAt: (int)row
+- (void) _getAllAlbumsForArtistAt: (NSInteger)row
 {
   [allAlbums release];
   
   NSMutableSet *tmpAlbums = [[NSMutableSet alloc] init];
      
-  int i;
+  NSUInteger i;
      
   for (i = 0; i < [filteredTracks count]; i++)
     {
@@ -393,7 +390,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
 }
 
 
-- (void) _getAllTracksForArtistAt: (int)artistRow albumAt: (int)albumRow
+- (void) _getAllTracksForArtistAt: (NSInteger)artistRow albumAt: (NSInteger)albumRow
 {
   [allSongs release];
   
@@ -407,7 +404,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
         {
           NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
               
-          int i;
+          NSUInteger i;
               
           for (i = 0; i < [filteredTracks count]; i++)
             {
@@ -426,7 +423,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
         {
          NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
             
-         int i;
+         NSUInteger i;
               
          for (i = 0; i < [filteredTracks count]; i++)
            {
@@ -442,7 +439,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
         {
           NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
               
-          int i;
+          NSUInteger i;
               
           for (i = 0; i < [filteredTracks count]; i++)
             {
@@ -475,7 +472,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
       NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
       NSMutableSet *tmpArtists = [[NSMutableSet alloc] init];
       
-      int i;
+      NSUInteger i;
       
       for (i = 0; i < [allTracks count]; i++)
         {
