@@ -111,7 +111,7 @@
   }
 
   if ([playlists containsObject: name]) {
-      int answer;
+      NSInteger answer;
 
       answer = NSRunAlertPanel(_(@"Playlist exists"), _(@"Overwrite it?"), 
 			       _(@"Ok"), _(@"Cancel"), nil);
@@ -144,13 +144,13 @@
    - TableView dataSource Methods -
    --------------------------------*/
 
-- (int) numberOfRowsInTableView: (NSTableView *)tableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
 {
   return [playlists count];
 }
 
 - (id) tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn 
-	     row:(int)row
+	     row:(NSInteger)row
 {
   return [playlists objectAtIndex: row];
 }
