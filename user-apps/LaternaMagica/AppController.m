@@ -325,11 +325,11 @@
 
 - (IBAction)removeAllImages:(id)sender
 {
-  int rows;
-  int i;
+  NSInteger rows;
+  NSInteger i;
   
   rows = [fileListView numberOfRows];
-  for (i = ([fileListView numberOfRows]  - 1); i >= 0 ; i--)
+  for (i = (rows  - 1); i >= 0 ; i--)
     [fileListData removeObjectAtIndex: i];
   [fileListView reloadData];
   [view setImage: nil];
@@ -341,7 +341,7 @@
   NSInteger selRow;
   [fileListData scrambleObjects];
   [fileListView reloadData];
-  
+
   /* we reload the image directly without calling selectRow,
      the selected row did not actually change and no notification triggers */
   selRow = [fileListView selectedRow];
