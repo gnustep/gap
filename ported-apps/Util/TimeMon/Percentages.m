@@ -330,7 +330,7 @@
     }
 }
 
-- (BOOL)applicationShouldTerminate:(id)sender
+- (NSApplicationTerminateReply)applicationShouldTerminate:(id)sender
 { 
   // If te is installed, remove it.
   if (te) 
@@ -340,7 +340,7 @@
     }
   // [stipple release];
   la_finish();
-  return YES;
+  return NSTerminateNow;
 }
 
 - (void)display

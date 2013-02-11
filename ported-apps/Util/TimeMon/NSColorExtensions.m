@@ -6,7 +6,7 @@
 @implementation NSColor (GetColorsFromString)
 + (NSColor *)colorFromStringRepresentation:(NSString *)colorString
 {
-    float r, g, b, a;
+    CGFloat r, g, b, a;
     NSArray *array = [colorString componentsSeparatedByString:@" "];
 
     if (!array) 
@@ -31,7 +31,7 @@
 
 - (NSString *)stringRepresentation
 {
-    float r, g, b, a;
+    CGFloat r, g, b, a;
 
     [[self colorUsingColorSpaceName:NSCalibratedRGBColorSpace] getRed:&r green:&g blue:&b alpha:&a];
     return [NSString stringWithFormat:@"%f %f %f %f",r,g,b,a];

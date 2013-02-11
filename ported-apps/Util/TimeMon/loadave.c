@@ -1,6 +1,7 @@
 #include "loadave.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int la_init(unsigned long long *times)
 {

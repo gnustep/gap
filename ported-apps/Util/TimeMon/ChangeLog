@@ -1,3 +1,13 @@
+2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* loadave.c
+	* Include missing header
+	* NSColorExtensions.m
+	* TimeMonColors.m
+	  float -> CGFloat conversions, NSInteger conversions
+	* Percentages.h
+	* Percentages.m
+	  use NSApplicationTerminateReply
+
 2011-07-03 Riccardo Mottola <rm@gnu.org>
 
 	* English.lproj/TimeMon.gorm:
