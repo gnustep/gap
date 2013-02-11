@@ -42,7 +42,6 @@
     int m = NSTitledWindowMask;
     int row, col;
     NSBox *boardBox;
-    NSRect contentRect;
 
     view  = [[NSView alloc] 
                 initWithFrame:

@@ -1,3 +1,7 @@
+2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Controller.m
+	  remove unused variable
+
 2011-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* Controller.m
