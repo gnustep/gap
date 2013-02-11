@@ -4,10 +4,10 @@
 // 
 // Dedicated Address Book Server for GNUstep
 // 
-// $Author: rmottola $
+// $Author: buzzdee $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2009/10/03 12:42:45 $
+// $Revision: 1.4 $
+// $Date: 2013/02/11 10:08:40 $
 
 /* system includes */
 #include <Addresses/Addresses.h>
@@ -116,7 +116,7 @@ char *ok = "OK\n";
       else if(bind(sock, (struct sockaddr*)&sockaddr, sizeof(sockaddr)))
 	NSLog(@"Couldn't bind to port %d - %s\n", port, strerror(errno));
       else if(listen(sock, 5) == -1)
-	NSLog(@"Couldn't listen - %s\n", port, strerror(errno));
+	NSLog(@"Couldn't listen on port %d - %s\n", port, strerror(errno));
       else
 	{
 	  _handle = [[NSFileHandle alloc] initWithFileDescriptor: sock
@@ -287,7 +287,7 @@ char *ok = "OK\n";
 
 void DiePrintingMessage(NSString *msg, int exitVal)
 {
-  fprintf(stderr, [msg cString]);
+  fprintf(stderr, "%s", [msg cString]);
   exit(exitVal);
 }
 

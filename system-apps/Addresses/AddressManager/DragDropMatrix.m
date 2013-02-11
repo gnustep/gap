@@ -36,10 +36,10 @@ static NSMutableArray *contactRows;
 
 @implementation DragDropMatrix
 - initWithFrame: (NSRect) frameRect
-	   mode: (int) aMode
+	   mode: (NSMatrixMode) aMode
       prototype: (NSCell*) aCell
-   numberOfRows: (int) numRows
-numberOfColumns: (int) numColumns
+   numberOfRows: (NSInteger) numRows
+numberOfColumns: (NSInteger) numColumns
 
 {
   [super initWithFrame: frameRect
@@ -105,7 +105,7 @@ numberOfColumns: (int) numColumns
 
 - (void) mouseDown: (NSEvent *) event
 {
-  int row = -1, column = -1;
+  NSInteger row = -1, column = -1;
 
   if([self getRow: &row
 	   column: &column
@@ -134,7 +134,7 @@ numberOfColumns: (int) numColumns
 
 - (void) mouseUp: (NSEvent*) event
 {
-  int row, column;
+  NSInteger row, column;
   if(!_didDrag && [event modifierFlags] == 0 &&
      [[self selectedCell] isLeaf])
     {
@@ -156,9 +156,9 @@ numberOfColumns: (int) numColumns
   NSImage *image = nil;
   NSPoint dragPoint = NSZeroPoint;
   NSPoint cellOrigin;
-  int width=0, height=0;
+  CGFloat width=0, height=0;
   NSArray *cells;
-  int i;
+  NSUInteger i;
 
   cells = [self selectedCells];
   for(i=0; i<[cells count]; i++)
@@ -177,9 +177,9 @@ numberOfColumns: (int) numColumns
   contactRows = [[NSMutableArray alloc] initWithCapacity: [cells count]];
   for(i=0; i<[cells count]; i++)
     {
-      int row, column;
+      NSInteger row, column;
       [self getRow: &row column: &column ofCell: [cells objectAtIndex: i]];
-      [contactRows addObject: [NSNumber numberWithInt: row]];
+      [contactRows addObject: [NSNumber numberWithInteger: row]];
     }
 
   cellOrigin = [self cellFrameAtRow: [self selectedRow]
@@ -223,7 +223,7 @@ numberOfColumns: (int) numColumns
 
 - (NSDragOperation) draggingUpdated: (id<NSDraggingInfo>) sender
 {
-  int row, column;
+  NSInteger row, column;
   NSRect frame;
   NSPoint p;
   NSPasteboard *pb;
