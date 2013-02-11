@@ -212,7 +212,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
 -(void) tableView: (NSTableView*) aTableView
     willDisplayCell: (id)aCell
     forTableColumn: (NSTableColumn*) aTableColumn
-    row: (int)rowIndex
+    row: (NSInteger)rowIndex
 {
     NSCell* cell = aCell;
     id<Article> article = [articles objectAtIndex: rowIndex];
@@ -246,7 +246,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
 -(void) tableView: (NSTableView*) aTableView
    setObjectValue: (id) anObj
    forTableColumn: (NSTableColumn*) aTableColumn
-              row: (int) rowIndex
+              row: (NSInteger) rowIndex
 {
     if (aTableColumn == ratingCol) {
 	id article;

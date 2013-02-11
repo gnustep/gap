@@ -1,3 +1,8 @@
+2013-02-11 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Components/Searching/NSSet+ArticleFiltering.m
+	* Components/ArticleTable/ArticleTablePlugin.m
+	  some NSInteger conversions, and clang warning shutup
+
 2012-05-17 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
