@@ -1,3 +1,7 @@
+2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* LPController.m
+	  int -> NSInteger transition
+
 2011-06-04 Riccardo Mottola <rm@gnu.org>
 
 	* LPController.m
