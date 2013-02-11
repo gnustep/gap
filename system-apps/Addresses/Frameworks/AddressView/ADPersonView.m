@@ -4,10 +4,10 @@
 // 
 // Address View Framework for GNUstep
 // 
-// $Author: rmottola $
+// $Author: buzzdee $
 // $Locker:  $
-// $Revision: 1.7 $
-// $Date: 2012/03/20 12:03:16 $
+// $Revision: 1.8 $
+// $Date: 2013/02/11 10:08:40 $
 
 #import "ADPersonView.h"
 #import "ADPersonPropertyView.h"
@@ -579,7 +579,7 @@ static NSString *__defaultCountryCode = nil;
 
   if([[panel filenames] count] != 1)
     {
-      NSLog(@"Argh! %d filenames; 1 expected\n", [[panel filenames] count]);
+      NSLog(@"Argh! %" PRIuPTR " filenames; 1 expected\n", [[panel filenames] count]);
       return;
     }
   if(![_person setImageDataWithFile: [[panel filenames] objectAtIndex: 0]])

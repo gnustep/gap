@@ -911,8 +911,8 @@
  *  Browser delegate methods
  */
 
-- (int) browser: (NSBrowser*) sender
-numberOfRowsInColumn: (int) column
+- (NSInteger) browser: (NSBrowser*) sender
+numberOfRowsInColumn: (NSInteger) column
 {
   NSArray *groupnames = [self groupNames];
 
@@ -986,8 +986,8 @@ numberOfRowsInColumn: (int) column
 
 - (void) browser: (NSBrowser*) sender
  willDisplayCell: (id) cell
-	   atRow: (int) row
-	  column: (int) column
+	   atRow: (NSInteger) row
+	  column: (NSInteger) column
 {
   [cell setFont: [NSFont systemFontOfSize: [NSFont systemFontSize]]];
   if(column == 0)

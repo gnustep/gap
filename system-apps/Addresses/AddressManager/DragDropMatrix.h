@@ -5,10 +5,10 @@
    
    A Matrix that allows drag and drop between its cells
    
-   $Author: rmottola $
+   $Author: buzzdee $
    $Locker:  $
-   $Revision: 1.1 $
-   $Date: 2007/03/29 22:37:41 $
+   $Revision: 1.2 $
+   $Date: 2013/02/11 10:08:40 $
  */
 
 #ifndef DRAGDROPMATRIX_H
@@ -24,7 +24,7 @@
 {
   NSBrowserCell *oldCell, *curCell;
   NSRect oldFrame;
-  int groupRow;
+  NSInteger groupRow;
 
   BOOL _didDrag;
   SEL _shouldSel, _didSel;

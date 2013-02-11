@@ -1,3 +1,14 @@
+2013-02-10 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* AddressManager/Controller.m
+	* AddressManager/DragDropMatrix.h
+	* AddressManager/DragDropMatrix.m
+	* Frameworks/AddressView/ADPersonView.m
+	* Frameworks/AddressView/ADSinglePropertyView.m
+	* Frameworks/Addresses/ADPerson.m
+	* Goodies/adserver/adserver.m
+	  (unsigned) int -> NS(U)Integer and float -> CGFloat
+	  and get rid of some other warnings emitted by clang
+
 2012-04-24 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* Goodies/GNUmakefile

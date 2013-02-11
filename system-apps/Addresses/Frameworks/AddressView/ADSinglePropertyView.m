@@ -413,14 +413,14 @@
  * NSTableDataSource methods
  */
 
-- (int) numberOfRowsInTableView: (NSTableView*) view
+- (NSInteger) numberOfRowsInTableView: (NSTableView*) view
 {
   return [_values count];
 }
 
 - (id) tableView: (NSTableView*) v
 objectValueForTableColumn: (NSTableColumn*) col
-	     row: (int) row
+	     row: (NSInteger) row
 {
   NSString *val;
   
@@ -433,7 +433,7 @@ objectValueForTableColumn: (NSTableColumn*) col
 
 - (BOOL) tableView: (NSTableView*) v
 shouldEditTableColumn: (NSTableColumn*) col
-	       row: (int) row
+	       row: (NSInteger) row
 {
   return NO;
 }
@@ -442,18 +442,18 @@ shouldEditTableColumn: (NSTableColumn*) col
  * NSSplitView delegate methods
  */
 
-- (float) splitView: (NSSplitView*) sender
-constrainMinCoordinate: (float) proposedMin
-	ofSubviewAt: (int) offset
+- (CGFloat) splitView: (NSSplitView*) sender
+constrainMinCoordinate: (CGFloat) proposedMin
+	ofSubviewAt: (NSInteger) offset
 {
   if(offset == 0 && proposedMin < [_groupsBrowser minColumnWidth])
     return [_groupsBrowser minColumnWidth];
   return proposedMin;
 }
 
-- (float) splitView: (NSSplitView*) sender
-constrainMaxCoordinate: (float) proposedMax
-	ofSubviewAt: (int) offset
+- (CGFloat) splitView: (NSSplitView*) sender
+constrainMaxCoordinate: (CGFloat) proposedMax
+	ofSubviewAt: (NSInteger) offset
 {
   NSRect r;
 
@@ -468,23 +468,23 @@ constrainMaxCoordinate: (float) proposedMax
  * NSBrowser delegate methods
  */
 
-- (int) browser: (NSBrowser*) b
-numberOfRowsInColumn: (int) col
+- (NSInteger) browser: (NSBrowser*) b
+numberOfRowsInColumn: (NSInteger) col
 {
   if(!_book) _book = [ADAddressBook sharedAddressBook];
   return [[_book groups] count]+1;
 }
 
 - (NSString*) browser: (NSBrowser*) b
-	titleOfColumn: (int) col
+	titleOfColumn: (NSInteger) col
 {
   return _(@"Groups");
 }
 
 - (void) browser: (NSBrowser*) b
  willDisplayCell: (NSBrowserCell*) cell
-	   atRow: (int) row
-	  column: (int) col
+	   atRow: (NSInteger) row
+	  column: (NSInteger) col
 {
   if(!_book) _book = [ADAddressBook sharedAddressBook];
   if(row)
