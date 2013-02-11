@@ -5,7 +5,7 @@
 
 - adjacent;
 
-- dragCluster:(BTree *)cluster offs:(float *)delta
+- dragCluster:(BTree *)cluster offs:(CGFloat *)delta
     superview:(NSView *)sv;
 
 - (BOOL)loadError:(NSString *)msg;
@@ -113,16 +113,16 @@ static NSPanel *_stopper_panel = nil;
   [super dealloc];
 }
 
-- (int)setDone:(int)flag
+- (NSInteger)setDone:(NSInteger)flag
 {
-    int prev = done;
+    NSInteger prev = done;
 
     if(prev!=flag){
-        int c, ccount = [clusters count];
+        NSUInteger c, ccount = [clusters count];
 
         for(c=0; c<ccount; c++){
             [[clusters objectAtIndex:c]
-                inorderWithInt:flag
+                inorderWithInteger:flag
                 sel:@selector(setDone:)];
         }
 
@@ -135,7 +135,7 @@ static NSPanel *_stopper_panel = nil;
 - (NSSize)withPadding
 {
   NSSize plain;
-  int padding;
+  NSInteger padding;
 
   plain = NSMakeSize(0, 0);
 
@@ -143,11 +143,11 @@ static NSPanel *_stopper_panel = nil;
     return plain;
 
   plain = [image size];
-  padding = ((int)plain.width) % PIECE_WIDTH;
+  padding = ((NSInteger)plain.width) % PIECE_WIDTH;
   if(padding)
     plain.width += PIECE_WIDTH - padding;
     
-  padding = ((int)plain.height) % PIECE_HEIGHT;
+  padding = ((NSInteger)plain.height) % PIECE_HEIGHT;
   if(padding)
     plain.height += PIECE_HEIGHT - padding;
     
@@ -162,14 +162,14 @@ static NSPanel *_stopper_panel = nil;
   } else {
 
     NSMutableArray *allLeaves;
-    int ind;
+    NSInteger ind;
     PieceView *piece;
     BTree *cluster;
 
     NSSize desksize = [image size];
-    int 
-        width  = DESKTOPEXTRA/2+(int)desksize.width, 
-        height = DESKTOPEXTRA/2+(int)desksize.height;
+    NSInteger 
+        width  = DESKTOPEXTRA/2+desksize.width, 
+        height = DESKTOPEXTRA/2+desksize.height;
 
     NSSize padding = [self withPadding];
 
@@ -229,7 +229,7 @@ static NSPanel *_stopper_panel = nil;
     return self;
   } else {
 
-    int ind;
+    NSInteger ind;
     BTree *cluster;
     PieceView **pieces;
 
@@ -277,16 +277,16 @@ static NSPanel *_stopper_panel = nil;
   NSWindow *win = 
     [[[self windowControllers] objectAtIndex:0]
       window];
-  int ind;
+  NSInteger ind;
   PieceView **pieces;
   BTree *cl1, *all;
   NSPanel *sp;
   NSPoint sp_orig;
-  NSModalSession solveSession;
+  NSModalSession solveSession = 0;
   NSPoint orig;
   NSMutableArray *processed;
   NSView *sv = nil;
-  int pc;
+  NSInteger pc;
   BOOL complete;
 
   [view setNeedsDisplay:YES];
@@ -349,7 +349,7 @@ static NSPanel *_stopper_panel = nil;
         NSMutableArray *leaves = [cluster leaves];
         PieceView *pv = [leaves objectAtIndex:0];
         NSRect bbox, frame = [pv frame];
-        float delta[2];
+        CGFloat delta[2];
 
         if(sv==nil){
 	    NSRect cframe;
@@ -451,7 +451,7 @@ static NSPanel *_stopper_panel = nil;
 
     if([aType isEqualToString:DOCTYPE]){
         NSString *trees = @"", *pieces = @"", *all;
-        int clind, pind;
+        NSInteger clind, pind;
         BTree *cluster; PieceView *piece;
         NSMutableArray *leaves;
 
@@ -491,12 +491,12 @@ static NSPanel *_stopper_panel = nil;
 {
     NSString *msg;
     NSSize size;
-    int x, y;
+    NSInteger x, y;
     PieceView *piece;
     BTree *cluster;
 
-    int horizontal[DIM_MAX][DIM_MAX];
-    int vertical[DIM_MAX][DIM_MAX];
+    NSInteger horizontal[DIM_MAX][DIM_MAX];
+    NSInteger vertical[DIM_MAX][DIM_MAX];
 
     if([aType isEqualToString:DOCTYPE]){
         NSArray *lines = 
@@ -506,9 +506,9 @@ static NSPanel *_stopper_panel = nil;
         NSEnumerator *en = [lines objectEnumerator];
         NSString *line;
         NSScanner *scanner;
-        int clcount, clind, lind;
+        NSInteger clcount, clind, lind;
         NSMutableDictionary *pdict;
-        int x, y, ktag, posx, posy;
+        NSInteger x, y, ktag, posx, posy;
         PTYPE left, right, lower, upper;
 
         image = nil;
@@ -529,11 +529,11 @@ static NSPanel *_stopper_panel = nil;
             return [self loadError:@"Image dimensions missing"];
         }
         scanner = [NSScanner scannerWithString:line];
-        if([scanner scanInt:&piece_width]==NO ||
-	   [scanner scanInt:&piece_height]==NO ||
-	   [scanner scanInt:&px]==NO ||
-           [scanner scanInt:&py]==NO ||
-           [scanner scanInt:&clcount]==NO ||
+        if([scanner scanInteger:&piece_width]==NO ||
+	   [scanner scanInteger:&piece_height]==NO ||
+	   [scanner scanInteger:&px]==NO ||
+           [scanner scanInteger:&py]==NO ||
+           [scanner scanInteger:&clcount]==NO ||
            px<DIM_MIN || px>DIM_MAX-1 ||
            py<DIM_MIN || py>DIM_MAX-1 ||
            clcount<1 || clcount>px*py){
@@ -545,7 +545,7 @@ static NSPanel *_stopper_panel = nil;
         for(clind=0; clind<clcount; clind++){
             if((cluster = [BTree fromLines:en])==nil){
                 msg = [NSString stringWithFormat: 
-                                    @"Read failure  (cluster %d/%d)", 
+                                    @"Read failure  (cluster %"PRIiPTR"/%"PRIiPTR")", 
                                 clind, clcount];
                 return [self loadError:msg];
             }
@@ -562,15 +562,15 @@ static NSPanel *_stopper_panel = nil;
             }
 
             scanner = [NSScanner scannerWithString:line];
-            if([scanner scanInt:&ktag]==NO ||
-               [scanner scanInt:&x]==NO ||
-               [scanner scanInt:&y]==NO ||
-               [scanner scanInt:(int *)&left]==NO ||
-               [scanner scanInt:(int *)&right]==NO ||
-               [scanner scanInt:(int *)&upper]==NO ||
-               [scanner scanInt:(int *)&lower]==NO ||
-               [scanner scanInt:&posx]==NO ||
-               [scanner scanInt:&posy]==NO){
+            if([scanner scanInteger:&ktag]==NO ||
+               [scanner scanInteger:&x]==NO ||
+               [scanner scanInteger:&y]==NO ||
+               [scanner scanInteger:&left]==NO ||
+               [scanner scanInteger:&right]==NO ||
+               [scanner scanInteger:&upper]==NO ||
+               [scanner scanInteger:&lower]==NO ||
+               [scanner scanInteger:&posx]==NO ||
+               [scanner scanInteger:&posy]==NO){
                 msg = [NSString stringWithFormat: 
                                     @"missing fields  (piece %d/%d)", 
                                 lind, px*py];
@@ -604,13 +604,13 @@ static NSPanel *_stopper_panel = nil;
         [clusters retain];
 
         done = NO;
-        NSLog(@"%d: read %d cluster(s)", __LINE__, [clusters count]);
+        NSLog(@"%d: read %" PRIuPTR " cluster(s)", __LINE__, [clusters count]);
         [self setDone:([clusters count]==1 ? YES : NO)];
 
         return YES;
     }
     else if([types containsObject:aType]){
-	int dim_alert;
+	NSInteger dim_alert;
         if (!(image = [[NSImage alloc] initWithData:data])){
             NSRunAlertPanel(@"Alert", @"Load failed (IMAGE)",
                             @"Ok", nil, nil);
@@ -636,13 +636,13 @@ static NSPanel *_stopper_panel = nil;
 
         size = [image size];
 
-        px = ((int)size.width)/PIECE_WIDTH;
-        if(((int)size.width)%PIECE_WIDTH){
+        px = (size.width)/PIECE_WIDTH;
+        if(((NSInteger)size.width)%PIECE_WIDTH){
             px++;
         }
 
-        py = ((int)size.height)/PIECE_HEIGHT;
-        if(((int)size.height)%PIECE_HEIGHT){
+        py = (size.height)/PIECE_HEIGHT;
+        if(((NSInteger)size.height)%PIECE_HEIGHT){
             py++;
         }
 
@@ -770,11 +770,11 @@ static NSPanel *_stopper_panel = nil;
 
             for(l1=0; l1<[curLeaves count]; l1++){
                 PieceView *pv1 = [curLeaves objectAtIndex:l1];
-                int x1 = [pv1 x], y1 = [pv1 y];
+                NSInteger x1 = [pv1 x], y1 = [pv1 y];
 
                 for(l2=0; l2<[allLeaves count]; l2++){
                     PieceView *pv2 = [allLeaves objectAtIndex:l2];
-                    int x2 = [pv2 x], y2 = [pv2 y];
+                    NSInteger x2 = [pv2 x], y2 = [pv2 y];
                     
                     if((x1==x2 && (y1==y2+1 || y1==y2-1)) ||
                        (y1==y2 && (x1==x2+1 || x1==x2-1))){
@@ -804,15 +804,15 @@ static NSPanel *_stopper_panel = nil;
 #define TICK 3
 #define DRAGINTERVAL (0.01)
 
-- dragCluster:(BTree *)cluster offs:(float *)delta
+- dragCluster:(BTree *)cluster offs:(CGFloat *)delta
     superview:(NSView *)sv
 {
     NSWindow *win = [sv window];
     NSRect bbox = { {0, 0}, {0, 0} }, wbbox;
     NSPoint orig;
     BOOL first = YES;
-    int step, steps;
-    float dx, dy, cur[2];
+    NSInteger step, steps;
+    CGFloat dx, dy, cur[2];
 
     [cluster inorderWithPointer:&bbox
              sel:@selector(bbox:)];
@@ -828,7 +828,7 @@ static NSPanel *_stopper_panel = nil;
             steps = delta[0];
             dx = 1;
         }
-        dy = delta[1]/(float)steps;
+        dy = delta[1]/(CGFloat)steps;
     }
     else{
         if(delta[1]<0){
@@ -839,7 +839,7 @@ static NSPanel *_stopper_panel = nil;
             steps = delta[1];
             dy = 1;
         }
-        dx = delta[0]/(float)steps;
+        dx = delta[0]/(CGFloat)steps;
     }
 
     [sv lockFocus];
@@ -875,12 +875,12 @@ static NSPanel *_stopper_panel = nil;
 {
   NSWindow *window;
   NSRect frame;
-  int m = (NSTitledWindowMask |  
+  NSInteger m = (NSTitledWindowMask |  
        NSResizableWindowMask |
        NSClosableWindowMask | 
            NSMiniaturizableWindowMask);
 
-  int clind;
+  NSInteger clind;
   BTree *cluster;
   NSScrollView *scroller;
   NSSize scrollSize, desktop, initialSize;
@@ -960,7 +960,7 @@ static NSPanel *_stopper_panel = nil;
           [fname substringToIndex:
                      ([fname length]-[ext length]-1)];
       NSFileManager *manager = [NSFileManager defaultManager];
-      int comp, index = 1;
+      NSInteger comp, index = 1;
 
       while(index){
           result = [fixIt stringByAppendingFormat:@"-%u.%@", 

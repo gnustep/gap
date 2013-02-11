@@ -176,7 +176,7 @@
     [NSDocumentController sharedDocumentController];
   NSFileManager *fm;
   NSArray *procArgs;
-  int arg;
+  NSUInteger arg;
   // Make the DocumentController the delegate of the application.
   [NSApp setDelegate: dc];
 

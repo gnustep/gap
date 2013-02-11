@@ -9,7 +9,7 @@
 
 @implementation BTree
 
-static int count = 0;
+static NSInteger count = 0;
 static NSString *BTreeMark = @"@endtree";
 
 + fromLines:(NSEnumerator *)en
@@ -17,7 +17,7 @@ static NSString *BTreeMark = @"@endtree";
     NSMutableDictionary *dict;
     NSScanner *scanner;
     NSString *line;
-    int valtag, valfirst, valsecond, valleaf;
+    NSInteger valtag, valfirst, valsecond, valleaf;
     BTree *current, *desc;
     
     dict = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -26,26 +26,26 @@ static NSString *BTreeMark = @"@endtree";
     while((line = [en nextObject])!=nil &&
           [line hasPrefix:BTreeMark]==NO){
         scanner = [NSScanner scannerWithString:line];
-        if([scanner scanInt:&valtag]==NO ||
-           [scanner scanInt:&valfirst]==NO ||
-           [scanner scanInt:&valsecond]==NO ||
-           [scanner scanInt:&valleaf]==NO){
+        if([scanner scanInteger:&valtag]==NO ||
+           [scanner scanInteger:&valfirst]==NO ||
+           [scanner scanInteger:&valsecond]==NO ||
+           [scanner scanInteger:&valleaf]==NO){
             return nil;
         }
 
         current = 
             [[BTree alloc] 
                 initWithLeaf:(valleaf==-1 ? 
-                              nil : [NSNumber numberWithInt:valleaf])];
+                              nil : [NSNumber numberWithInteger:valleaf])];
         [dict setObject:current forKey:
-                  [NSNumber numberWithInt:valtag]];
+                  [NSNumber numberWithInteger:valtag]];
 
         if(valfirst!=-1){
-            desc = [dict objectForKey:[NSNumber numberWithInt:valfirst]];
+            desc = [dict objectForKey:[NSNumber numberWithInteger:valfirst]];
             [current setFirst:desc];
         }
         if(valsecond!=-1){
-            desc = [dict objectForKey:[NSNumber numberWithInt:valsecond]];
+            desc = [dict objectForKey:[NSNumber numberWithInteger:valsecond]];
             [current setSecond:desc];
         }
     }
@@ -116,7 +116,7 @@ static NSString *BTreeMark = @"@endtree";
     return second;
 }
 
-- (int)tag
+- (NSInteger)tag
 {
     return tag;
 }
@@ -223,10 +223,10 @@ static NSString *BTreeMark = @"@endtree";
     return self;
 }
 
-- inorderWithInt:(int)val sel:(SEL)what
+- inorderWithInteger:(NSInteger)val sel:(SEL)what
 {
     if(first!=nil){
-        [first inorderWithInt:val sel:what];
+        [first inorderWithInteger:val sel:what];
     }
 
     if(leaf!=nil){
@@ -235,7 +235,7 @@ static NSString *BTreeMark = @"@endtree";
     }
 
     if(second!=nil){
-        [second inorderWithInt:val sel:what];
+        [second inorderWithInteger:val sel:what];
     }
 
     return self;
@@ -287,7 +287,7 @@ static NSString *BTreeMark = @"@endtree";
 {
     NSString *node = @"", *res = @"";
 
-    node = [node stringByAppendingFormat:@"%d ", tag];
+    node = [node stringByAppendingFormat:@"%" PRIiPTR "", tag];
 
     if(first!=nil){
         res = [res stringByAppendingString:
@@ -301,7 +301,7 @@ static NSString *BTreeMark = @"@endtree";
     if(second!=nil){
         res = [res stringByAppendingString:
                        [second toStringData]];
-        node = [node stringByAppendingFormat:@"%d ", 
+        node = [node stringByAppendingFormat:@"%" PRIiPTR "", 
                      [second tag]];
     }
     else{
@@ -309,7 +309,7 @@ static NSString *BTreeMark = @"@endtree";
     }
 
     if(leaf!=nil){
-        node = [node stringByAppendingFormat:@"%d", 
+        node = [node stringByAppendingFormat:@"%" PRIiPTR "", 
                      [leaf tag]];
     }
     else{

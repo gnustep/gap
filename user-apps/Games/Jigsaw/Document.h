@@ -22,12 +22,12 @@ typedef enum {
     NSMutableArray *clusters;
     NSView *view;
     NSString *nameOfImageFile;
-    int px, py;
+    NSInteger px, py;
 
     BOOL solving;
-    int done;
+    NSInteger done;
 
-    int piece_width, piece_height;
+    NSInteger piece_width, piece_height;
 }
 
 + actionMenu;
@@ -35,7 +35,7 @@ typedef enum {
 - init;
 - (void)dealloc;
 
-- (int)setDone:(int)flag;
+- (NSInteger)setDone:(NSInteger)flag;
 
 - (NSSize)withPadding;
 

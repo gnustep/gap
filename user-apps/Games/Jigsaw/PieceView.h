@@ -41,7 +41,7 @@
 (piece_width==PIECE_WIDTH_MEDIUM ? OFFS_MEDIUM : OFFS_LARGE))
 
 
-#define RADSQ        ((float)(BOUNDARY*BOUNDARY/4))
+#define RADSQ        ((CGFloat)(BOUNDARY*BOUNDARY/4))
 
 #define PIECE_BD_WIDTH  (2*BOUNDARY+PIECE_WIDTH)
 #define PIECE_BD_HEIGHT (2*BOUNDARY+PIECE_HEIGHT)
@@ -49,20 +49,22 @@
 #define DIM_MAX      32
 #define DIM_MIN       3
 
-typedef enum {
+enum {
     INNER = -1,
     BORDER,
     OUTER
-} BTYPE;
+};
+typedef NSInteger BTYPE; 
 
-typedef enum {
+enum {
     EXTERIOR,
     LEFTIN, LEFTOUT,
     RIGHTIN, RIGHTOUT,
     LOWERIN, LOWEROUT,
     UPPERIN, UPPEROUT,
     CENTER
-} PTYPE;
+};
+typedef NSInteger PTYPE;
 
 @interface PieceView : NSView
 {
@@ -71,31 +73,31 @@ typedef enum {
     NSImage *image, *complete;
 
     BTree *cluster;
-    int x, y, px, py;
+    NSInteger x, y, px, py;
     BTYPE left, right, upper, lower;
-    int padleft, padright, padupper, padlower;
+    NSInteger padleft, padright, padupper, padlower;
 
     NSBezierPath *clip, *boundary;
 
-    int tag;
-    int done;
+    NSInteger tag;
+    NSInteger done;
 
-    int piece_width, piece_height;
+    NSInteger piece_width, piece_height;
 }
 
 + (id *)checkCluster:(BTree *)theCluster
-		dimX:(int)dimx
-		dimY:(int)dimy;
+		dimX:(NSInteger)dimx
+		dimY:(NSInteger)dimy;
 
 + (BTree *)doJoin:(BTree *)cluster and:(BTree *)ccluster
               all:(NSMutableArray *)allClusters;
 
 - (id)initWithImage:(NSImage *)theImage
-	       dimX:(int)dimx
-	       dimY:(int)dimy
+	       dimX:(NSInteger)dimx
+	       dimY:(NSInteger)dimy
                 loc:(NSPoint)theLoc
-               posX:(int)posx outOf:(int)px
-               posY:(int)posy outOf:(int)py
+               posX:(NSInteger)posx outOf:(NSInteger)px
+               posY:(NSInteger)posy outOf:(NSInteger)py
                left:(BTYPE)bleft
               right:(BTYPE)bright
               upper:(BTYPE)bupper
@@ -107,29 +109,28 @@ typedef enum {
 - setDocument:(Document *)theDocument;
 - (Document *)document;
 
-- (int)setDone:(int)dflag;
+- (NSInteger)setDone:(NSInteger)dflag;
 
 - (void)drawRect:(NSRect)aRect;
-- (void)outline:(float *)delta;
+- (void)outline:(CGFloat *)delta;
 
 - (void)showInvalid;
 
 - (void)bbox:(NSRect *)bbox;
 
-- (void)shiftView:(float *)delta;
+- (void)shiftView:(CGFloat *)delta;
 
 - (BTYPE)left;
 - (BTYPE)right;
 - (BTYPE)upper;
 - (BTYPE)lower;
 
-- (int)tag;
+- (NSInteger)tag;
 
-- (int)x;
-- (int)y;
+- (NSInteger)x;
+- (NSInteger)y;
 
 - (PTYPE)classifyPoint:(NSPoint)pt;
-
 
 - (void)extractFromCluster;
 - (void)splitCluster;
@@ -139,8 +140,5 @@ typedef enum {
 
 - (NSString *)toString;
 
-
 @end
-
-
 
