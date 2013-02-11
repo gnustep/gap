@@ -1,3 +1,8 @@
+2013-02-12 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	Fix warning and transition to NSInteger
+
 2013-02-08: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* FileTable.m
 	  int -> NSInteger transition
