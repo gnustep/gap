@@ -144,7 +144,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
     );
     
     if (articleSelection == nil) {
-        int i;
+        NSUInteger i;
         articleSelection = [[NSMutableSet alloc] init];
         for (i=0; i<[articles count]; i++) {
             if ([table isRowSelected: i]) {
@@ -175,14 +175,14 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
 
 // ---------------- NSTableView data source ----------------------
 
-- (int) numberOfRowsInTableView: (NSTableView *)aTableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)aTableView
 {
     return [articles count];
 }
 
 - (id)           tableView: (NSTableView *)aTableView
  objectValueForTableColumn: (NSTableColumn *)aTableColumn
-                       row: (int)rowIndex;
+                       row: (NSInteger)rowIndex;
 {
     id<Article> article = [articles objectAtIndex: rowIndex];
     

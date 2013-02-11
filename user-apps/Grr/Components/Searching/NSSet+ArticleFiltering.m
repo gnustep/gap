@@ -57,7 +57,7 @@
 	        }
 	    }
 	}
-	NSLog(@"filtered down to %d of %" PRIuPTR " articles.", subsetSize, [articles count]);
+	NSLog(@"filtered down to %" PRIuPTR " of %" PRIuPTR " articles.", subsetSize, [articles count]);
 	resultSet = [NSSet setWithObjects: subsetObjects count: subsetSize];
 
 	free( subsetObjects );
