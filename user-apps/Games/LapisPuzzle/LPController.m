@@ -229,15 +229,15 @@
 												 repeats:YES]);
 }
 
-- (int) browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column
+- (NSInteger) browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
 	return [attackArray count];
 }
 
 - (void) browser: (NSBrowser *)sender
  willDisplayCell: (NSBrowserCell *)cell
-		   atRow: (int)row
-		  column: (int)column
+		   atRow: (NSInteger)row
+		  column: (NSInteger)column
 {
 	[cell setTitle:[attackArray objectAtIndex:row]];
 	[cell setLeaf:YES];
