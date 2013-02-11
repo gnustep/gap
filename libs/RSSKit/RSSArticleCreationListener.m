@@ -143,7 +143,7 @@
 -(void) finished
 {
   #ifdef DEBUG
-  NSLog(@"%@ finished, rc=%d", self, [self retainCount]);
+  NSLog(@"%@ finished, rc=%"PRIuPTR"", self, [self retainCount]);
   #endif
   
   // empty at the moment, may be useful for things like thread locking
@@ -159,7 +159,7 @@
   #ifdef DEBUG
   NSLog(@"start article");
   
-  NSLog(@"retain counts in start article: %d %d %d",
+  NSLog(@"retain counts in start article: %"PRIuPTR" %"PRIuPTR" %"PRIuPTR"",
 	[headline retainCount],
 	[links retainCount],
 	[date retainCount]);
