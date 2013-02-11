@@ -33,9 +33,9 @@
 - (NSSet*) subsetFilteredForString: (NSString*) searchString
 {
 	NSArray* articles;
-	unsigned subsetSize = 0;
+	NSUInteger subsetSize = 0;
 	id<Article>* subsetObjects;
-	int i;
+	NSUInteger i;
 	NSSet* resultSet;
 
 	if (searchString == nil || [searchString length] == 0) {
@@ -57,7 +57,7 @@
 	        }
 	    }
 	}
-	NSLog(@"filtered down to %d of %d articles.", subsetSize, [articles count]);
+	NSLog(@"filtered down to %d of %" PRIuPTR " articles.", subsetSize, [articles count]);
 	resultSet = [NSSet setWithObjects: subsetObjects count: subsetSize];
 
 	free( subsetObjects );
