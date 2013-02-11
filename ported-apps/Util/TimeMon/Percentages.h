@@ -50,7 +50,7 @@ typedef unsigned long long CPUTime[CPUSTATES];
     // Hook into initialization process of app.
 - (void)applicationDidFinishLaunching:(NSNotification *)notification;
     // Pull out timed entries and stuff.
-- (BOOL)applicationShouldTerminate:(id)sender;
+- (NSApplicationTerminateReply)applicationShouldTerminate:(id)sender;
 - (void)display;
 
 @end

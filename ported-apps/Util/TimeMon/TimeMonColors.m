@@ -94,7 +94,7 @@ static const id titles[] = {
 - (void)mouseDown:(NSEvent *)e 
 {
     NSPoint loc = [e locationInWindow];
-    int row, col;
+    NSInteger row, col;
     NSColor * color;
     
     // Find the color of the cell the click is in.
@@ -129,7 +129,7 @@ static const id titles[] = {
       }
 }
 
-- (unsigned int)draggingEntered:(id <NSDraggingInfo>)sender
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
     NSPasteboard *pboard;
 
@@ -141,14 +141,14 @@ static const id titles[] = {
     return NSDragOperationNone;
 }
 
-- (unsigned int)draggingSourceOperationMaskForLocal: (BOOL)isLocal
+- (NSDragOperation)draggingSourceOperationMaskForLocal: (BOOL)isLocal
 {
   return NSDragOperationGeneric;
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-    int row, col;
+    NSInteger row, col;
     NSPoint loc = [sender draggingLocation];
     NSTextFieldCell *tCell;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -186,7 +186,7 @@ static const id titles[] = {
       } 
     else 
       {
-        float gray, alpha;
+        CGFloat gray, alpha;
         NSString *key = [NSString stringWithFormat:@"%@Gray",titles[col]];
         [[color colorUsingColorSpaceName:NSCalibratedWhiteColorSpace] getWhite:&gray alpha:&alpha];
         [defaults setFloat:gray forKey:key];
@@ -207,8 +207,8 @@ static const id titles[] = {
 // so that it's visible against the background.
 - (void)setColor:(NSColor *)color
 {
-    float gray;
-    float r, g, b;
+    CGFloat gray;
+    CGFloat r, g, b;
     
     // Remove any alpha component.
     color = [color colorWithAlphaComponent:1.0];
