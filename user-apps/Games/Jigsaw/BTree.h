@@ -6,7 +6,7 @@
 {
     BTree *first, *second, *parent;
     id leaf;
-    int tag;
+    NSInteger tag;
 }
 
 + fromLines:(NSEnumerator *)en;
@@ -17,7 +17,7 @@
 - leaf;
 - (BTree *)first;
 - (BTree *)second;
-- (int)tag;
+- (NSInteger)tag;
 
 - setFirst:(BTree *)theFirst;
 - setSecond:(BTree *)theSecond;
@@ -31,7 +31,7 @@
 
 - inorderWithTarget:(id)t sel:(SEL)what;
 - inorderWithPointer:(void *)ptr sel:(SEL)what;
-- inorderWithInt:(int)val sel:(SEL)what;
+- inorderWithInteger:(NSInteger)val sel:(SEL)what;
 
 - (void) substituteLeaves:(NSMutableDictionary *)dict;
 

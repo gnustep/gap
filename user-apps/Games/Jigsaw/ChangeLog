@@ -1,3 +1,7 @@
+2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* all .h, .m
+	  float -> CGFloat, int -> NSInteger transitions
+
 2011-07-13 Sebastian Reitenbach
 
 	* BTree.h

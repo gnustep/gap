@@ -12,7 +12,7 @@
 
 @implementation PieceView
 
-#define DIST ((float)2)
+#define DIST ((CGFloat)2)
 #define CLOSE(_v1, _v2) \
         ((_v1) > (_v2) ? \
         ((_v1) - (_v2) < DIST) : ((_v2) - (_v1) < DIST))
@@ -21,13 +21,13 @@
 static id checkResult[2];
 
 + (id *)checkCluster:(BTree *)theCluster
-		dimX:(int)dimx
-		dimY:(int)dimy
+		dimX:(NSInteger)dimx
+		dimY:(NSInteger)dimy
 {
     NSMutableArray *allLeaves = [theCluster leaves];
     PieceView *piece = nil, *refpiece = nil;
     BOOL fail;
-    int curleaf, refx, refy;
+    NSInteger curleaf, refx, refy;
     NSPoint reforigin, origin;
 
     refpiece = [allLeaves objectAtIndex:0];
@@ -78,7 +78,7 @@ static id checkResult[2];
     [allClusters removeObject:cl2];
     [allClusters addObject:newCluster];
 
-    // NSLog(@"clusters: %u\n", [allClusters count]);
+    // NSLog(@"clusters: %"PRIuPTR"\n", [allClusters count]);
 
     [newCluster
         inorderWithPointer:(void *)newCluster
@@ -87,14 +87,14 @@ static id checkResult[2];
     return newCluster;
 }
 
-static int count;
+static NSInteger count;
 
 - (id)initWithImage:(NSImage *)theImage
-	       dimX:(int)dimx
-	       dimY:(int)dimy
+	       dimX:(NSInteger)dimx
+	       dimY:(NSInteger)dimy
                 loc:(NSPoint)theLoc
-               posX:(int)posx outOf:(int)pxval
-               posY:(int)posy outOf:(int)pyval
+               posX:(NSInteger)posx outOf:(NSInteger)pxval
+               posY:(NSInteger)posy outOf:(NSInteger)pyval
                left:(BTYPE)bleft
               right:(BTYPE)bright
               upper:(BTYPE)bupper
@@ -102,7 +102,7 @@ static int count;
 {
     NSSize size;
     NSRect iframe;
-    int padding, shift;
+    NSInteger padding, shift;
 
     self = [super init];
     if (!self)
@@ -116,14 +116,14 @@ static int count;
 
     done = NO;
 
-    padding  = ((int)(size.width))%PIECE_WIDTH;
+    padding  = (((NSInteger)size.width))%PIECE_WIDTH;
     if(padding){
         padding = PIECE_WIDTH-padding;
     }
     padleft  = padding/2;
     padright = padding-padleft;
 
-    padding  = ((int)(size.height))%PIECE_HEIGHT;
+    padding  = (((NSInteger)size.height))%PIECE_HEIGHT;
     if(padding){
         padding = PIECE_HEIGHT-padding;
     }
@@ -285,9 +285,9 @@ static int count;
     return doc;
 }
 
-- (int)setDone:(int)dflag
+- (NSInteger)setDone:(NSInteger)dflag
 {
-    int prev = done;
+    NSInteger prev = done;
 
     if(prev!=dflag){
 	done = dflag;
@@ -314,7 +314,8 @@ static int count;
      { PIECE_WIDTH, PIECE_HEIGHT}};
     NSPoint dest;
 
-    NSImage *imgs[2] = { image, complete }; int idx;
+    NSImage *imgs[2] = { image, complete };
+    NSInteger idx;
 
     for(idx=0; idx<2; idx++){
 	NSBezierPath *lim;
@@ -371,7 +372,7 @@ static int count;
     }
 }
 
-- (void)outline:(float *)delta
+- (void)outline:(CGFloat *)delta
 {
     NSRect frame = [self frame];
 
@@ -445,14 +446,14 @@ static int count;
     return lower;
 }
 
-- (int)tag
+- (NSInteger)tag
 {
     return tag;
 }
 
 
 
-- (void)shiftView:(float *)delta
+- (void)shiftView:(CGFloat *)delta
 {
     NSRect cframe = [self frame];
 
@@ -463,12 +464,12 @@ static int count;
     [self setNeedsDisplay:YES];
 }
 
-- (int)x
+- (NSInteger)x
 {
     return x;
 }
 
-- (int)y
+- (NSInteger)y
 {
     return y;
 }
@@ -650,8 +651,8 @@ static int count;
         ((NSView *)clicked) != sv){
         BOOL fail = NO;
         NSMutableArray *leaves, *cleaves, *allClusters;
-        int curleaf, curcleaf;
-        float delta[2];
+        NSInteger curleaf, curcleaf;
+        CGFloat delta[2];
         NSPoint origin;
         NSRect lframe = [self frame], cframe = [clicked frame];
 
@@ -799,7 +800,7 @@ static int count;
 {
     NSPoint startp, curp;
     NSEvent *curEvent = theEvent;
-    float delta[2];
+    CGFloat delta[2];
     NSRect bbox = {{0, 0}, {0, 0}}, wbbox;
     NSPoint orig;
     BOOL first = YES;
@@ -834,7 +835,7 @@ static int count;
         [win cacheImageInRect:wbbox];
         [sv lockFocus];
  
-        if(delta[0]!=(float)0 || delta[1]!=(float)0){
+        if(delta[0]!=(CGFloat)0 || delta[1]!=(CGFloat)0){
            [cluster inorderWithPointer:delta 
                      sel:@selector(outline:)];
         }
@@ -865,7 +866,7 @@ static int count;
     NSMutableArray *pieces = [NSMutableArray array];
     NSEnumerator *pieceEnum;
     PieceView *piece;
-    int isJoin;
+    NSInteger isJoin;
     [pieces addObjectsFromArray:all];
 
     // the clicked view is first
@@ -917,7 +918,7 @@ static int count;
     NSMutableArray *allClusters = [doc clusters];
     BTree *item, *other, *first, *second,
         *parent, *pparent;
-    float delta[2];
+    CGFloat delta[2];
     NSRect bbox = {{0, 0}, {0, 0}};
 
     item = [cluster findLeaf:self];
@@ -982,7 +983,7 @@ static int count;
 {
     NSMutableArray *allClusters = [doc clusters];
     BTree *leftcl, *rightcl;
-    float delta[2];
+    CGFloat delta[2];
     NSRect bbox = {{0, 0}, {0, 0}};
 
     leftcl = [cluster first];
@@ -1042,9 +1043,9 @@ static int count;
     NSPoint pos = [self frame].origin;
 
     return 
-        [NSString stringWithFormat:@"%d %d %d %d %d %d %d %d %d\n",
+        [NSString stringWithFormat:@"%"PRIiPTR" %"PRIiPTR" %"PRIiPTR" %"PRIiPTR" %"PRIiPTR" %"PRIiPTR" %"PRIiPTR" %"PRIiPTR" %"PRIiPTR"\n",
                   tag, x, y, left, right, upper, lower,
-                  ((int)pos.x), ((int)pos.y)];
+                  (pos.x), (pos.y)];
 }
 
 @end
