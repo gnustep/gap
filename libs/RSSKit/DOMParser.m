@@ -278,7 +278,7 @@ didStartElement: (NSString*)anElementName
 - (void)    parser: (NSXMLParser*)aParser
  parseErrorOccured: (NSError*)parseError
 {
-  NSLog(@"XML-DOM Parser: %@ at line %d, col %d",
+  NSLog(@"XML-DOM Parser: %@ at line %"PRIiPTR", col %"PRIiPTR"",
 	[parseError localizedDescription],
 	[aParser lineNumber], [aParser columnNumber]);
 }
