@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2012 Riccardo Mottola
+ Copyright (C) 2005-2013 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -55,7 +55,7 @@
 #define MAX_CONTROL_BUFF 2048
 #define MAX_DATA_BUFF 2048
 
-#if defined(__linux__) || defined (__FreeBSD__)
+#if defined(__linux__) || defined (__BSD_VISIBLE)
 #define socklentype socklen_t
 #else
 #define socklentype int
