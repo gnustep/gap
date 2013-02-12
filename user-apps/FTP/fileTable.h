@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2011 Riccardo Mottola
+ Copyright (C) 2005-2013 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -30,6 +30,12 @@
 
 #define TAG_FILENAME @"filename"
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSInteger int
+#define NSUInteger unsigned
+#endif
+
+
 enum sortOrderDef
 {
   ascending, descending, undefined
@@ -44,7 +50,7 @@ enum sortOrderDef
 }
 
 - (void)initData:(NSArray *)fnames;
-- (FileElement *)elementAtIndex:(unsigned)index;
+- (FileElement *)elementAtIndex:(NSUInteger)index;
 - (void)sortByIdent:(NSString *)idStr;
 
 @end
