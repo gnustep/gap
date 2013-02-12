@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2011 Riccardo Mottola
+ Copyright (C) 2005-2013 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -54,7 +54,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 
 - (void)initData:(NSArray *)fnames
 {
-  int i;
+  NSUInteger i;
 
   sortByIdent = nil;
   
@@ -88,12 +88,12 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [super dealloc];
 }
 
-/** retunrs the object after resolving sorting */
-- (FileElement *)elementAtIndex:(unsigned)index
+/** returns the object after resolving sorting */
+- (FileElement *)elementAtIndex:(NSUInteger)index
 {
-  int originalRow;
+  NSUInteger originalRow;
 
-  originalRow = [[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
+  originalRow = (NSUInteger)[[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
   return [fileStructs objectAtIndex:originalRow];
 }
 
@@ -118,15 +118,15 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 
 
 /* methods implemented to follow the informal NSTableView protocol */
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     return [sortedArray count];
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     id theElement;
-    int originalRow;
+    NSInteger originalRow;
 
     theElement = NULL;
     NSParameterAssert(rowIndex >= 0 && rowIndex < [sortedArray count]);
@@ -139,3 +139,4 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 }
 
 @end
+
