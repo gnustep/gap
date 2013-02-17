@@ -523,6 +523,9 @@
   [mainWin setTitle:@"FTP"];
   [remotePath removeAllItems];
   [remotePath addItemWithTitle:@"Remote View"];
+  [remoteTableData clear];
+  [remoteView reloadData];
+  [self setThreadRunningState:NO];
 }
 
 - (IBAction)showPrefPanel:(id)sender
