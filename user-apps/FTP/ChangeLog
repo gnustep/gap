@@ -3,6 +3,12 @@
 	* fileTable.[h,m]
 	Add clear method.
 
+	* ftpclient.m (disconnect)
+	Close socket and clear status on disconnect.
+
+	* AppController.m (disconnect)
+	Clear the remote view.
+	
 2013-02-17 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m (disconnect)
