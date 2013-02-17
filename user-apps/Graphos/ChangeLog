@@ -1,5 +1,10 @@
 2013-02-17 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m (rectForPage)
+	Match signature to NSInteger
+
+2013-02-17 Riccardo Mottola <rm@gnu.org>
+
 	* GRBox.m
 	* GRCircle.m
 	* GRDocView.h
