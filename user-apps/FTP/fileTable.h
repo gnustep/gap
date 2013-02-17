@@ -50,6 +50,7 @@ enum sortOrderDef
 }
 
 - (void)initData:(NSArray *)fnames;
+- (void)clear;
 - (FileElement *)elementAtIndex:(NSUInteger)index;
 - (void)sortByIdent:(NSString *)idStr;
 

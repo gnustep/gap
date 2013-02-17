@@ -88,6 +88,13 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [super dealloc];
 }
 
+- (void)clear
+{
+  [fileStructs release];
+  fileStructs = nil;
+  [sortedArray release];
+  sortedArray = nil;
+}
 /** returns the object after resolving sorting */
 - (FileElement *)elementAtIndex:(NSUInteger)index
 {
