@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.h
 
- Copyright (C) 2008-2012 GNUstep Application Project
+ Copyright (C) 2008-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -39,19 +39,19 @@
 {
     NSBezierPath *myPath;
 
-    float linewidth;
-    float flatness;
-    float miterlimit;
+    CGFloat linewidth;
+    CGFloat flatness;
+    CGFloat miterlimit;
     int linejoin;
     int linecap;
     GRObjectControlPoint *currentPoint;
 }
 
-- (void)setLineWidth:(float)width;
-- (float)lineWidth;
+- (void)setLineWidth:(CGFloat)width;
+- (CGFloat)lineWidth;
 
-- (void)setFlat:(float)flat;
-- (float)flatness;
+- (void)setFlat:(CGFloat)flat;
+- (CGFloat)flatness;
 
 - (void)setLineJoin:(int)join;
 - (int)lineJoin;
@@ -59,8 +59,8 @@
 - (void)setLineCap:(int)cap;
 - (int)lineCap;
 
-- (void)setMiterLimit:(float)limit;
-- (float)miterLimit;
+- (void)setMiterLimit:(CGFloat)limit;
+- (CGFloat)miterLimit;
 
 /** sets the current selected control point */
 - (void)setCurrentPoint:(GRObjectControlPoint *)aPoint;

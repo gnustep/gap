@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009-2012 GNUstep Application Project
+ Copyright (C) 2009-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -35,7 +35,7 @@
 
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf
+      zoomFactor:(CGFloat)zf
   withProperties:(NSDictionary *)properties
 {
   self = [super initInView:aView zoomFactor:zf withProperties:properties];
@@ -68,7 +68,7 @@
 /** initializes all parameters from a description dictionary */
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
-        zoomFactor:(float)zf
+        zoomFactor:(CGFloat)zf
 {
   NSMutableDictionary *props;
   NSString *str;
@@ -355,10 +355,10 @@
 {
   NSBezierPath *bzp;
   NSPoint center;
-  float radius;
-  float w,h;
-  float minLength;
-  float linew;
+  CGFloat radius;
+  CGFloat w,h;
+  CGFloat minLength;
+  CGFloat linew;
 
   linew = linewidth * zmFactor;
 

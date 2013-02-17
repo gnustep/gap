@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008-2012 GNUstep Application Project
+ Copyright (C) 2008-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -40,7 +40,7 @@
 
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf
+      zoomFactor:(CGFloat)zf
       withProperties:(NSDictionary *)properties
 {
   self = [super init];
@@ -153,7 +153,7 @@
     locked = value;
 }
 
-- (void)setZoomFactor:(float)f
+- (void)setZoomFactor:(CGFloat)f
 {
     zmFactor = f;
 }
