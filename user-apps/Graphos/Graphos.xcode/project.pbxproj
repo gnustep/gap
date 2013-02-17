@@ -437,7 +437,7 @@
 			dependencies = (
 			);
 			isa = PBXNativeTarget;
-			name = Draw;
+			name = Graphos;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Draw;
 			productReference = 8572BBC91114E8D900F6A240;
