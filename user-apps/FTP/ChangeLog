@@ -1,5 +1,10 @@
 2013-02-17 Riccardo Mottola <rm@gnu.org>
 
+	* fileTable.[h,m]
+	Add clear method.
+
+2013-02-17 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.m (disconnect)
 	Clear path menu.
 
