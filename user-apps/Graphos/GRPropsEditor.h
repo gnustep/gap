@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.h
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -26,10 +26,10 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4) && !defined(CGFloat)
 #define NSInteger int
 #define NSUInteger unsigned
-#define CGFLoat float
+#define CGFloat float
 #endif
 
 @class GRDocView;

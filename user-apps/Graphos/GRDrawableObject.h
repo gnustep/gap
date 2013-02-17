@@ -31,7 +31,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSColor.h>
 
-#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4) && !defined(CGFloat)
 #define NSUInteger unsigned
 #define NSINteger int
 #define CGFloat float

@@ -27,12 +27,6 @@
 
 #import "GRBezierPathEditor.h"
 
-#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
-#define NSUInteger unsigned
-#define NSINteger int
-#define CGFloat float
-#endif
-
 #ifndef ASSIGN
 #define ASSIGN(object,value)     ({\
     id __value = (id)(value); \
