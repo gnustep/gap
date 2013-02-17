@@ -1,3 +1,16 @@
+2013-02-17 Riccardo Mottola <rm@gnu.org>
+
+	* GRBox.m
+	* GRCircle.m
+	* GRDocView.h
+	* GRDocView.m
+	* GRDrawableObject.h
+	* GRDrawableObject.m
+	* GRPathObject.h
+	* GRPathObject.m
+	* GRPropsEditor.h
+	float to CGFloat transition
+
 2012-09-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRBox.m

@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.m
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -1014,7 +1014,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 - (NSDictionary *)selectionProperties
 {
   NSMutableDictionary *propDict;
-  int i;
+  NSUInteger i;
   int selectedObjects;
   int pathObjNum;
   int textObjNum;

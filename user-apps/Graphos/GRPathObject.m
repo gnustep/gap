@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.m
  
- Copyright (C) 2008-2011 GNUstep Application Project
+ Copyright (C) 2008-2031 GNUstep Application Project
  
  Author: Ing. Riccardo Mottola
  
@@ -48,7 +48,7 @@
 }
 
 - (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf
+      zoomFactor:(CGFloat)zf
       withProperties:(NSDictionary *)properties
 {
   self = [super initInView:aView zoomFactor:zf withProperties:properties];
@@ -92,7 +92,7 @@
 
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
-        zoomFactor:(float)zf
+        zoomFactor:(CGFloat)zf
 {
   self = [super init];
   if(self)
@@ -112,22 +112,22 @@
     return currentPoint;
 }
 
-- (void)setLineWidth:(float)width
+- (void)setLineWidth:(CGFloat)width
 {
   linewidth = width;
 }
 
-- (float)lineWidth
+- (CGFloat)lineWidth
 {
   return linewidth;
 }
 
-- (void)setFlat:(float)flat
+- (void)setFlat:(CGFloat)flat
 {
   flatness = flat;
 }
 
-- (float)flatness
+- (CGFloat)flatness
 {
   return flatness;
 }
@@ -152,12 +152,12 @@
   return linecap;
 }
 
-- (void)setMiterLimit:(float)limit
+- (void)setMiterLimit:(CGFloat)limit
 {
   miterlimit = limit;
 }
 
-- (float)miterLimit
+- (CGFloat)miterLimit
 {
   return miterlimit;
 }

@@ -26,6 +26,12 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSInteger int
+#define NSUInteger unsigned
+#define CGFLoat float
+#endif
+
 @class GRDocView;
 
 /**
@@ -51,7 +57,7 @@
   IBOutlet NSColorWell *fillColorWell;
 
   BOOL ispath;
-  float flatness, miterlimit, linewidth;
+  CGFloat flatness, miterlimit, linewidth;
   int linejoin, linecap;
   BOOL stroked;
   NSColor *strokeColor;

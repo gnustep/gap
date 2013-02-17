@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008-2012 GNUstep Application Project
+ Copyright (C) 2008-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -31,6 +31,12 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSColor.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSUInteger unsigned
+#define NSINteger int
+#define CGFloat float
+#endif
+
 @class GRDocView;
 @class GRObjectEditor;
 
@@ -39,14 +45,14 @@
   GRDocView *docView;
   GRObjectEditor *editor;
   BOOL visible, locked;
-  float zmFactor;
+  CGFloat zmFactor;
   BOOL stroked, filled;
   NSColor *fillColor;
   NSColor *strokeColor;
 }
 
-- (id)initInView:(GRDocView *)aView zoomFactor:(float)zf withProperties:(NSDictionary *)properties;
-- (id)initFromData:(NSDictionary *)description inView:(GRDocView *)aView zoomFactor:(float)zf;
+- (id)initInView:(GRDocView *)aView zoomFactor:(CGFloat)zf withProperties:(NSDictionary *)properties;
+- (id)initFromData:(NSDictionary *)description inView:(GRDocView *)aView zoomFactor:(CGFloat)zf;
 
 /**
  * Returns a description of the object, used for saving to file.
@@ -77,7 +83,7 @@
 /** the zoom factor is used to draw an object in the proper size
  * when zooming in our out the view
  */
-- (void)setZoomFactor:(float)f;
+- (void)setZoomFactor:(CGFloat)f;
 
 - (void)setStrokeColor:(NSColor *)c;
 - (NSColor *)strokeColor;

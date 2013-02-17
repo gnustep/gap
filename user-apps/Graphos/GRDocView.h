@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.h
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -27,6 +27,11 @@
 
 #import "GRBezierPathEditor.h"
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSUInteger unsigned
+#define NSINteger int
+#define CGFloat float
+#endif
 
 #ifndef ASSIGN
 #define ASSIGN(object,value)     ({\
@@ -56,7 +61,7 @@
 
     NSRect pageRect, a4Rect, zmdRect;
     int zIndex;
-    float zFactor;
+    CGFloat zFactor;
     BOOL isDrawingForPrinting;
     NSCursor *cur;
 }
