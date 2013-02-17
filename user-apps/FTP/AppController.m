@@ -519,9 +519,10 @@
 
 - (IBAction)disconnect:(id)sender
 {
-    [ftp disconnect];
-    [mainWin setTitle:@"FTP"];
-
+  [ftp disconnect];
+  [mainWin setTitle:@"FTP"];
+  [remotePath removeAllItems];
+  [remotePath addItemWithTitle:@"Remote View"];
 }
 
 - (IBAction)showPrefPanel:(id)sender
