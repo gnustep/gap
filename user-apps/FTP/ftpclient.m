@@ -1181,12 +1181,11 @@ int getChar(streamStruct* ss)
     state = READ;
     readBytes = 0;
     while ((ch = getChar(&dataStream)) != EOF)
-    {
+      {
         if (ch == '\r')
             state = GOTR;
         else if (ch == '\n' && state == GOTR)
-        {
-            
+          { 
             buff[readBytes] = '\0';
             fprintf(stderr, "%s\n", buff);
             [self logIt:[NSString stringWithCString:buff]];
@@ -1195,11 +1194,15 @@ int getChar(streamStruct* ss)
             readBytes = 0;
             aFile = [[FileElement alloc] initWithLsLine:buff];
             if (aFile)
+              {
                 [listArr addObject:aFile];
+                [aFile release];
+              }
 	    [controller setTransferProgress:[NSNumber numberWithUnsignedLongLong:transferSize]];
-        } else
+          }
+        else
             buff[readBytes++] = ch;
-    }
+      }
 /* FIXME ***********    if (ferror(dataStream))
     {
         perror("error in reading data stream: ");
