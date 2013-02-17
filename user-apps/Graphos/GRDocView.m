@@ -1804,7 +1804,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 /**
  * override for a custom pagination scheme
  */
-- (NSRect ) rectForPage: (int) pageNumber
+- (NSRect ) rectForPage: (NSInteger) pageNumber
 {
     NSRect pageRec;
     NSSize pageSize;
