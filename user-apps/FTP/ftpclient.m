@@ -119,9 +119,8 @@ int getChar(streamStruct* ss)
 	
     pool = [[NSAutoreleasePool alloc] init];
 	
-    serverConnection = [NSConnection
-            connectionWithReceivePort:[portArray objectAtIndex:0]
-							 sendPort:[portArray objectAtIndex:1]];
+    serverConnection = [NSConnection connectionWithReceivePort: [portArray objectAtIndex:0]
+                                                      sendPort:[portArray objectAtIndex:1]];
 	
     serverObject = [self alloc];
     [(id)[serverConnection rootProxy] setServer:serverObject];
@@ -816,11 +815,12 @@ int getChar(streamStruct* ss)
 
 - (void)disconnect
 {
-    NSMutableArray *reply;
+  NSMutableArray *reply;
     
-    [self writeLine:"QUIT\r\n"];
-    [self readReply:&reply];
-    connected = NO;
+  [self writeLine:"QUIT\r\n"];
+  [self readReply:&reply];
+  connected = NO;
+  closesocket(controlSocket);
 }
 
 - (int)authenticate:(char *)user :(char *)pass
