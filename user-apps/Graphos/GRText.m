@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -237,8 +237,6 @@
 {
     NSMutableDictionary *dict;
     NSString *s;
-    NSColor *strokeColorCMYK;
-    NSColor *fillColorCMYK;
     float strokeCol[3];
     float fillCol[3];
     float strokeAlpha;
