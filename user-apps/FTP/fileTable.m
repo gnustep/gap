@@ -95,6 +95,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [sortedArray release];
   sortedArray = nil;
 }
+
 /** returns the object after resolving sorting */
 - (FileElement *)elementAtIndex:(NSUInteger)index
 {
