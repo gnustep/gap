@@ -119,6 +119,7 @@
     [localView setDataSource:localTableData];
     
     remoteTableData = [[FileTable alloc] init];
+    [remoteView setDataSource:remoteTableData];
 
     /* we update the path menu */
     [self updatePath :localPath :[local workDirSplit]];
@@ -665,7 +666,7 @@
         if ((dirList = [ftp dirContents]) == nil)
             return;
         [remoteTableData initData:dirList];
-        [remoteView setDataSource:remoteTableData];
+        [remoteView reloadData];
 
         /* update the path menu */
         [self updatePath :remotePath :[ftp workDirSplit]];

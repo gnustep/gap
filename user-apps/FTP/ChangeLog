@@ -1,3 +1,8 @@
+2013-02-21 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m 
+	Fix setting of the datasource and reload data, so that connection works after a disconnection.
+
 2013-02-17 Riccardo Mottola <rm@gnu.org>
 
 	* fileTable.[h,m]
