@@ -2,7 +2,10 @@
 
 	* GRBox.[h,m] (position)
 	Add position accessor
-	
+
+	* GRBoxEditor.m
+	Add square constrainer.
+
 2013-02-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
