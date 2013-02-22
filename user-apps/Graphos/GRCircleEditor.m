@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircleEditor.m
 
- Copyright (C) 2009 GNUstep Application Project
+ Copyright (C) 2009-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -76,15 +76,21 @@
         {
             pp = [event locationInWindow];
             pp = [[object view] convertPoint: pp fromView: nil];
-            //            if([[object view] shiftclick])
-            //                pp = pointApplyingCostrainerToPoint(pp, p);
+            if([[object view] shiftclick])
+              {
+                NSPoint pos;
+                CGFloat w, h;
 
-            /*            pntonpnt = [object pointOnPoint: [object currentPoint]];
-            if(pntonpnt)
-            {
-                if([object currentPoint] == [object firstPoint] || pntonpnt == [object firstPoint])
-                    [pntonpnt moveToPoint: pp];
-            } */
+                pos = [(GRCircle *)object position];
+                w = pos.x-pp.x;
+                h = pos.y-pp.y;
+
+                if (w < h)
+                  pp.y = pos.y+w;
+                else
+                  pp.x = pos.x+h;
+              }
+            
             [[(GRPathObject *)object currentPoint] moveToPoint: pp];
             [(GRPathObject *)object remakePath];
 
