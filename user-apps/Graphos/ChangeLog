@@ -9,6 +9,7 @@
 2013-02-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
+	* GRDrawableObject.m
 	Fix warnings.
 
 2013-02-17 Riccardo Mottola <rm@gnu.org>
