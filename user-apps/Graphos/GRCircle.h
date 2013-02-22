@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.h
 
- Copyright (C) 2009-2012 GNUstep Application Project
+ Copyright (C) 2009-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 

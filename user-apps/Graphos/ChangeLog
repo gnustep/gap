@@ -1,5 +1,13 @@
 2013-02-22 Riccardo Mottola <rm@gnu.org>
 
+	* GRCircle.[h,m]
+	Add position accessor
+
+	* GRCircleEditor.m
+	Add square constrainer
+
+2013-02-22 Riccardo Mottola <rm@gnu.org>
+
 	* GRDocView.m (startBoxAtPoint)
 	Call moveControlPointOfEditor directly instead of duplicating code.
 
