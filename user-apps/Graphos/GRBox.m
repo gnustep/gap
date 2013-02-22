@@ -323,6 +323,10 @@
     return endControlPoint;
 }
 
+- (NSPoint) position
+{
+  return pos;
+}
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p
 {

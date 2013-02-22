@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.h
 
- Copyright (C) 2007-2012 GNUstep Application Project
+ Copyright (C) 2007-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -39,6 +39,7 @@
     float rotation;
 }
 
+- (NSPoint) position;
 - (BOOL)onControlPoint:(NSPoint)p;
 - (void)setStartAtPoint:(NSPoint)aPoint;
 - (void)setEndAtPoint:(NSPoint)aPoint;
