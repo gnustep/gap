@@ -350,6 +350,12 @@
     return bounds;
 }
 
+/** position accessor */
+- (NSPoint) position
+{
+  return pos;
+}
+
 /** draws the object and calls the editor to draw itself afterwards */
 - (void)draw
 {

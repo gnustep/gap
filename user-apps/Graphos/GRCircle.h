@@ -45,5 +45,6 @@
 - (GRObjectControlPoint *) startControlPoint;
 - (GRObjectControlPoint *) endControlPoint;
 - (NSRect)bounds;
+- (NSPoint)position;
 
 @end
