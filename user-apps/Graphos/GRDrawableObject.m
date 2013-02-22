@@ -1,6 +1,6 @@
 /*
  Project: Graphos
- GRDrawableObject.h
+ GRDrawableObject.m
 
  Copyright (C) 2008-2013 GNUstep Application Project
 
@@ -83,6 +83,17 @@
 	locked = [val boolValue];
     }
   return self;
+}
+
+/** initializes all parameters from a description dictionary */
+- (id)initFromData:(NSDictionary *)description
+            inView:(GRDocView *)aView
+        zoomFactor:(CGFloat)zf
+{
+#ifdef GNUSTEP
+  [self subclassResponsibility: _cmd];
+#endif
+  return nil;
 }
 
 
