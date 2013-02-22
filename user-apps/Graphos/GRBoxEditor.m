@@ -2,7 +2,7 @@
  Project: Graphos
  GRBoxEditor.m
 
- Copyright (C) 2007-2009 GNUstep Application Project
+ Copyright (C) 2007-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -62,7 +62,7 @@
         [cp select];
         found =  YES;
     }
-    
+
     if(!found)
         return p;
 
