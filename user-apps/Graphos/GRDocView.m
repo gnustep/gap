@@ -611,6 +611,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
         {
             box = [objects objectAtIndex: edind];
             [[box editor] selectForEditing];
+
 //            if(shiftclick)
 //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
             [box setEndAtPoint: p];
@@ -627,6 +628,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             box = [objects objectAtIndex: edind];
             [[box editor] selectForEditing];
             [box setStartAtPoint: p];
+            [box setEndAtPoint: p];
             [self setNeedsDisplay: YES];
         } else
         {
@@ -639,21 +641,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             [self setNeedsDisplay: YES];
         }
 
-        do
-        {
-            p = [nextEvent locationInWindow];
-            p = [self convertPoint: p fromView: nil];
-//            if(shiftclick)
-//                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
-
-            [box setEndAtPoint: p];
-
-            [self setNeedsDisplay: YES];
-
-            nextEvent = [[self window] nextEventMatchingMask:
-                        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [self verifyModifiersOfEvent: nextEvent];
-        } while([nextEvent type] != NSLeftMouseUp);
+        [self moveControlPointOfEditor: (GRBezierPathEditor *)[box editor] toPoint: p];
         if (isneweditor)
         {
             [[box editor] unselect];
@@ -967,6 +955,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 }
 
 
+/* propagates control point editing down to each editor */
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos
 {
     NSPoint p;

@@ -1,5 +1,10 @@
 2013-02-22 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m (startBoxAtPoint)
+	Call moveControlPointOfEditor directly instead of duplicating code.
+
+2013-02-22 Riccardo Mottola <rm@gnu.org>
+
 	* GRBox.[h,m] (position)
 	Add position accessor
 
