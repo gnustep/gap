@@ -104,42 +104,6 @@
     return pp;
 }
 
-- (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
-{
-    GRObjectControlPoint *cp;
-    BOOL found = NO;
-
-    cp = [(GRCircle *)object startControlPoint];
-    if (pointInRect([cp centerRect], oldp))
-    {
-        [self selectForEditing];
-        [(GRPathObject *)object setCurrentPoint:cp];
-        [cp select];
-        found =  YES;
-    }
-    cp = [(GRCircle *)object endControlPoint];
-    if (pointInRect([cp centerRect], oldp))
-    {
-        [self selectForEditing];
-        [(GRCircle *)object setCurrentPoint:cp];
-        [cp select];
-        found =  YES;
-    }
-
-    if(!found)
-        return;
-    /*
-     pntonpnt = [object pointOnPoint: [object currentPoint]];
-     if(pntonpnt)
-     {
-         if([object currentPoint] == [object firstPoint] || pntonpnt == [object firstPoint])
-             [pntonpnt moveToPoint: newp];
-     }*/
-    [[(GRPathObject *)object currentPoint] moveToPoint: newp];
-    //    [object remakePath];
-    [[object view] setNeedsDisplay: YES];
-}
-
 
 - (void)draw
 {

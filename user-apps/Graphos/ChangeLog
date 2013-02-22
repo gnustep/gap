@@ -1,3 +1,9 @@
+2013-02-23 Riccardo Mottola <rm@gnu.org>
+
+	* GRCircleEditor.m
+	* GRBoxEditor.m
+	Remove unused method moveControlAtPoint :toPoint
+
 2013-02-22 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m (startCircleAtPoint)
