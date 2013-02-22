@@ -720,6 +720,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             circle = [objects objectAtIndex: edind];
             [[circle editor] selectForEditing];
             [circle setStartAtPoint: p];
+            [circle setEndAtPoint: p];
             [self setNeedsDisplay: YES];
         } else
         {
@@ -732,21 +733,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             [self setNeedsDisplay: YES];
         }
 
-        do
-        {
-            p = [nextEvent locationInWindow];
-            p = [self convertPoint: p fromView: nil];
-            //            if(shiftclick)
-            //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+        [self moveControlPointOfEditor: (GRBezierPathEditor *)[circle editor] toPoint: p];
 
-            [circle setEndAtPoint: p];
-
-            [self setNeedsDisplay: YES];
-
-            nextEvent = [[self window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [self verifyModifiersOfEvent: nextEvent];
-        } while([nextEvent type] != NSLeftMouseUp);
         if (isneweditor)
         {
             [[circle editor] unselect];
