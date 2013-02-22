@@ -1,3 +1,8 @@
+2013-02-22 Riccardo Mottola <rm@gnu.org>
+
+	* GRBox.[h,m] (position)
+	Add position accessor
+	
 2013-02-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
