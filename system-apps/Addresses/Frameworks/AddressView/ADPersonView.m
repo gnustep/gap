@@ -6,8 +6,8 @@
 // 
 // $Author: buzzdee $
 // $Locker:  $
-// $Revision: 1.8 $
-// $Date: 2013/02/11 10:08:40 $
+// $Revision: 1.9 $
+// $Date: 2013/02/23 14:25:21 $
 
 #import "ADPersonView.h"
 #import "ADPersonPropertyView.h"
@@ -1209,7 +1209,7 @@ changedHeightFrom: (float) oldH
   return NO;
 }
 
-- (unsigned int) draggingSourceOperationMaskForLocal: (BOOL) isLocal
+- (NSDragOperation) draggingSourceOperationMaskForLocal: (BOOL) isLocal
 {
   return NSDragOperationCopy|NSDragOperationLink;
 }
