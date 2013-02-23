@@ -1,5 +1,10 @@
 2013-02-23 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m (startCircleAtPoint, startBoxAtPoint)
+	Remove code for new/old editor, since it is useless for these shapes.
+
+2013-02-23 Riccardo Mottola <rm@gnu.org>
+
 	* GRCircleEditor.m
 	* GRBoxEditor.m
 	Remove unused method moveControlAtPoint :toPoint

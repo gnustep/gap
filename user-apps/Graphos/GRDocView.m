@@ -560,186 +560,117 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)startBoxAtPoint:(NSPoint)p
 {
-    NSEvent *nextEvent;
-    GRBox *box;
-    id obj;
-    BOOL isneweditor = YES;
-    int i;
-    NSUndoManager *uMgr;
+  NSEvent *nextEvent;
+  GRBox *box;
+  NSUInteger i;
+  NSUndoManager *uMgr;
     
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Create Box"];
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Create Box"];
     
-    [self saveCurrentObjects];
-    
-    for(i = 0; i < [objects count]; i++)
+  [self saveCurrentObjects];
+
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBox class]])
-            if(![[obj editor] isdone])
-                isneweditor = NO;
+      GRObjectEditor *objEdi;
+            
+      objEdi = [[objects objectAtIndex: i] editor];
+      if (![objEdi isSelect])
+        [objEdi unselect];
     }
 
-    if(isneweditor)
-        for(i = 0; i < [objects count]; i++)
-        {
-            GRObjectEditor *objEdi;
-            
-            objEdi = [[objects objectAtIndex: i] editor];
-            if (![objEdi isSelect])
-                [objEdi unselect];
-        }
+  nextEvent = [[self window] nextEventMatchingMask:
+                               NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+  [self verifyModifiersOfEvent: nextEvent];
 
-    nextEvent = [[self window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    [self verifyModifiersOfEvent: nextEvent];
-
-    if([nextEvent type] != NSLeftMouseDragged)
+  if([nextEvent type] != NSLeftMouseDragged)
     {
-       NSLog(@"is not left mouse dragged");
-        if(isneweditor)
-        {
-            [self addBox];
-            box = [objects objectAtIndex: edind];
-            [[box editor] selectForEditing];
-            [box setStartAtPoint: p];
-            [self setNeedsDisplay: YES];
-            return;
-        } else
-        {
-            box = [objects objectAtIndex: edind];
-            [[box editor] selectForEditing];
-
-//            if(shiftclick)
-//                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
-            [box setEndAtPoint: p];
-            [self setNeedsDisplay: YES];
-            return;
-        }
-    } else
+      NSLog(@"is not left mouse dragged");
+ 
+      [self addBox];
+      box = [objects objectAtIndex: edind];
+      [[box editor] selectForEditing];
+      [box setStartAtPoint: p];
+      [self setNeedsDisplay: YES];
+      return;
+    }
+  else
     {
-       NSLog(@"is left mouse dragged");
-        if(isneweditor)
-        {
-       NSLog(@"is new editor");
-            [self addBox];
-            box = [objects objectAtIndex: edind];
-            [[box editor] selectForEditing];
-            [box setStartAtPoint: p];
-            [box setEndAtPoint: p];
-            [self setNeedsDisplay: YES];
-        } else
-        {
-       NSLog(@"is old editor");
-            box = [objects objectAtIndex: edind];
-            [[box editor] selectForEditing];
-//            if(shiftclick)
-//                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
-            [box setEndAtPoint: p];
-            [self setNeedsDisplay: YES];
-        }
+      NSLog(@"is left mouse dragged");
+ 
+      [self addBox];
+      box = [objects objectAtIndex: edind];
+      [[box editor] selectForEditing];
+      [box setStartAtPoint: p];
+      [box setEndAtPoint: p];
+      [self setNeedsDisplay: YES];
 
-        [self moveControlPointOfEditor: (GRBezierPathEditor *)[box editor] toPoint: p];
-        if (isneweditor)
-        {
-            [[box editor] unselect];
-            [[box editor] selectAsGroup];
-        }
+      [self moveControlPointOfEditor: (GRBezierPathEditor *)[box editor] toPoint: p];
+ 
+      [[box editor] unselect];
+      [[box editor] selectAsGroup];
     }
 }
 
 /* this has a lot in common with startBoxAtPoint */
 - (void)startCircleAtPoint:(NSPoint)p
 {
-    NSEvent *nextEvent;
-    GRCircle *circle;
-    id obj;
-    BOOL isneweditor = YES;
-    int i;
-    NSUndoManager *uMgr;
+  NSEvent *nextEvent;
+  GRCircle *circle;
+  NSUInteger i;
+  NSUndoManager *uMgr;
     
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Create Circle"];
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Create Circle"];
     
-    [self saveCurrentObjects];
+  [self saveCurrentObjects];
 
-    for(i = 0; i < [objects count]; i++)
+
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRCircle class]])
-            if(![[obj editor] isdone])
-                isneweditor = NO;
+      GRObjectEditor *objEdi;
+
+      objEdi = [[objects objectAtIndex: i] editor];
+      if (![objEdi isSelect])
+        [objEdi unselect];
     }
 
-    if(isneweditor)
-        for(i = 0; i < [objects count]; i++)
-        {
-            GRObjectEditor *objEdi;
+  nextEvent = [[self window] nextEventMatchingMask:
+                               NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+  [self verifyModifiersOfEvent: nextEvent];
 
-            objEdi = [[objects objectAtIndex: i] editor];
-            if (![objEdi isSelect])
-                [objEdi unselect];
-        }
-
-            nextEvent = [[self window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    [self verifyModifiersOfEvent: nextEvent];
-
-    if([nextEvent type] != NSLeftMouseDragged)
+  if([nextEvent type] != NSLeftMouseDragged)
     {
-        NSLog(@"is not left mouse dragged");
-        if(isneweditor)
-        {
-            [self addBox];
-            circle = [objects objectAtIndex: edind];
-            [[circle editor] selectForEditing];
-            [circle setStartAtPoint: p];
-            [self setNeedsDisplay: YES];
-            return;
-        } else
-        {
-            circle = [objects objectAtIndex: edind];
-            [[circle editor] selectForEditing];
-            //            if(shiftclick)
-            //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
-            [circle setEndAtPoint: p];
-            [self setNeedsDisplay: YES];
-            return;
-        }
-    } else
+      NSLog(@"is not left mouse dragged");
+
+      [self addBox];
+      circle = [objects objectAtIndex: edind];
+      [[circle editor] selectForEditing];
+      [circle setStartAtPoint: p];
+      [self setNeedsDisplay: YES];
+      return;
+    }
+  else
     {
-        NSLog(@"is left mouse dragged");
-        if(isneweditor)
-        {
-            NSLog(@"is new editor");
-            [self addCircle];
-            circle = [objects objectAtIndex: edind];
-            [[circle editor] selectForEditing];
-            [circle setStartAtPoint: p];
-            [circle setEndAtPoint: p];
-            [self setNeedsDisplay: YES];
-        } else
-        {
-            NSLog(@"is old editor");
-            circle = [objects objectAtIndex: edind];
-            [[circle editor] selectForEditing];
-            //            if(shiftclick)
-            //                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
-            [circle setEndAtPoint: p];
-            [self setNeedsDisplay: YES];
-        }
+      NSLog(@"is left mouse dragged");
 
-        [self moveControlPointOfEditor: (GRBezierPathEditor *)[circle editor] toPoint: p];
+      [self addCircle];
+      circle = [objects objectAtIndex: edind];
+      [[circle editor] selectForEditing];
+      [circle setStartAtPoint: p];
+      [circle setEndAtPoint: p];
+      [self setNeedsDisplay: YES];
 
-        if (isneweditor)
-        {
-            [[circle editor] unselect];
-            [[circle editor] selectAsGroup];
-        }
+
+      [self moveControlPointOfEditor: (GRBezierPathEditor *)[circle editor] toPoint: p];
+
+      [[circle editor] unselect];
+      [[circle editor] selectAsGroup];
+
     }
 }
 
