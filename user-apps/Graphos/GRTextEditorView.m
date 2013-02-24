@@ -112,7 +112,7 @@
 	  }
 	else
 	  {
-            firstStr = [NSString stringWithString: @"New Text"];
+            firstStr = @"New Text";
             textAlignment = NSLeftTextAlignment;
             [leftButt setState: NSOnState];
             fontSize = 12;
