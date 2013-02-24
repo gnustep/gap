@@ -1,6 +1,7 @@
 /* PlaylistController.h - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2004  Wolfgang Sourdeau
+ *               2013 The Free Software Foundation
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
  *
@@ -22,6 +23,18 @@
 
 #ifndef PlaylistController_H
 #define PlaylistController_H
+
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#ifndef CGFloat
+#define CGFloat float
+#endif
+#endif
 
 @class NSTimer;
 @class NSToolbar;

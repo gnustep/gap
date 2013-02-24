@@ -25,6 +25,18 @@
 
 #import <AppKit/NSPanel.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#ifndef CGFloat
+#define CGFloat float
+#endif
+#endif
+
 @class NSArray;
 @class NSScrollView;
 @class NSTableView;

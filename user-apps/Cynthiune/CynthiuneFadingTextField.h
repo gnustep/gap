@@ -25,6 +25,13 @@
 
 #import <AppKit/NSTextField.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef CGFloat
+#define CGFloat float
+#endif
+#endif
+
+
 @class NSFont;
 @class NSString;
 @class NSTimer;
