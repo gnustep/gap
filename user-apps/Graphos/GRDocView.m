@@ -88,11 +88,11 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSMutableArray *objectOrder;
   NSString *str = nil;
   id obj;
-  int i;
-  int p = 0;
-  int c = 0;
-  int t = 0;
-  int b = 0;
+  NSUInteger i;
+  NSUInteger p = 0;
+  NSUInteger c = 0;
+  NSUInteger t = 0;
+  NSUInteger b = 0;
   
   objsdict = [NSMutableDictionary dictionaryWithCapacity: 1];
   objectOrder = [NSMutableArray arrayWithCapacity: [objects count]];
@@ -135,14 +135,14 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (NSArray *)usedFonts
 {
-    NSMutableArray *usedfonts;
-    NSString *fname;
-    id obj;
-    int i, j;
-    BOOL exist;
+  NSMutableArray *usedfonts;
+  NSString *fname;
+  id obj;
+  NSUInteger i, j;
+  BOOL exist;
 
-    usedfonts = [NSMutableArray arrayWithCapacity: 1];
-    for(i = 0; i < [objects count]; i++)
+  usedfonts = [NSMutableArray arrayWithCapacity: 1];
+  for(i = 0; i < [objects count]; i++)
     {
         exist = NO;
         obj = [objects objectAtIndex: i];
@@ -679,7 +679,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 {
   id obj;
   NSMutableArray *objs;
-  int i;
+  NSUInteger i;
 
   objs = [NSMutableArray arrayWithCapacity: 1];
 
@@ -710,7 +710,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 - (void)editPathAtPoint:(NSPoint)p
 {
     id obj;
-    int i;
+    NSUInteger i;
     NSUndoManager *uMgr;
     
     uMgr = [self undoManager];
@@ -758,9 +758,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)editTextAtPoint:(NSPoint)p
 {
-    id obj;
-    int i;
-    NSUndoManager *uMgr;
+  id obj;
+  NSUInteger i;
+  NSUndoManager *uMgr;
     
     uMgr = [self undoManager];
     /* save the method on the undo stack */
@@ -792,7 +792,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 - (void)editSelectedText
 {
     id obj;
-    int i;
+    NSUInteger i;
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -807,13 +807,13 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)moveSelectedObjects:(NSArray *)objs startingPoint:(NSPoint)startp
 {
-    NSEvent *nextEvent;
-    NSArray *moveobjs = nil;
-    id obj;
-    NSPoint p, op, diffp;
-    BOOL dupl = NO;
-    int i;
-    NSUndoManager *uMgr;
+  NSEvent *nextEvent;
+  NSArray *moveobjs = nil;
+  id obj;
+  NSPoint p, op, diffp;
+  BOOL dupl = NO;
+  NSUInteger i;
+  NSUndoManager *uMgr;
     
     uMgr = [self undoManager];
     /* save the method on the undo stack */
@@ -901,8 +901,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
 {
-    id obj;
-    int i;
+  id obj;
+  NSUInteger i;
 
     for(i = 0; i < [objects count]; i++)
     {
@@ -923,9 +923,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 {
   NSMutableDictionary *propDict;
   NSUInteger i;
-  int selectedObjects;
-  int pathObjNum;
-  int textObjNum;
+  NSUInteger selectedObjects;
+  NSUInteger pathObjNum;
+  NSUInteger textObjNum;
   NSNumber *num;
   
   if(![objects count])
@@ -999,7 +999,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 {
   NSUndoManager *uMgr;
   id obj;
-  int i;
+  NSUInteger i;
   
   uMgr = [self undoManager];
   /* save the method on the undo stack, but stack actions */
@@ -1038,9 +1038,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)moveSelectedObjectsToFront:(id)sender
 {
-    id obj = nil;
-    int i;
-    NSUndoManager *uMgr;
+  id obj = nil;
+  NSUInteger i;
+  NSUndoManager *uMgr;
 
     uMgr = [self undoManager];
     /* save the method on the undo stack */
@@ -1080,9 +1080,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)moveSelectedObjectsToBack:(id)sender
 {
-    id obj = nil;
-    int i;
-    NSUndoManager *uMgr;
+  id obj = nil;
+  NSUInteger i;
+  NSUndoManager *uMgr;
 
     uMgr = [self undoManager];
     /* save the method on the undo stack */
@@ -1139,7 +1139,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout
 {
-  int i;
+  NSUInteger i;
 
   i = zIndex;
   if(isout)
@@ -1161,10 +1161,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)zoomOnPoint:(NSPoint)p withFactor:(int)index
 {
-  float orx, ory, szx, szy;
+  CGFloat orx, ory, szx, szy;
   NSRect vr;
   NSPoint pp;
-  unsigned i;
+  NSUInteger i;
 
   zIndex = index;
   zFactor = zFactors[zIndex];
@@ -1191,7 +1191,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (IBAction)zoom50:(id)sender
 {
-  unsigned i;
+  NSUInteger i;
   NSPoint p;
   NSRect visibleRect;
 
@@ -1210,7 +1210,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (IBAction)zoom100:(id)sender
 {
-  unsigned  i;
+  NSUInteger  i;
   NSPoint p;
   NSRect visibleRect;
 
@@ -1229,7 +1229,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (IBAction)zoom200:(id)sender
 {
-  unsigned i;
+  NSUInteger i;
   NSPoint p;
   NSRect visibleRect;
 
@@ -1248,7 +1248,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (IBAction)zoomFitPage:(id)sender
 {
-  unsigned i;
+  NSUInteger i;
   NSPoint p;
   NSRect visibleRect;
   NSRect f;
@@ -1269,7 +1269,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (IBAction)zoomFitWidth:(id)sender
 {
-  unsigned i;
+  NSUInteger i;
   NSPoint p;
   NSRect visibleRect;
   NSRect f;
@@ -1348,7 +1348,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSPasteboard *pboard;
   id obj;
   NSMutableArray *objsdesc;
-  int i;
+  NSUInteger i;
 
   objsdesc = [NSMutableArray arrayWithCapacity: 1];
   for(i = 0; i < [objects count]; i++)
@@ -1375,7 +1375,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSDictionary *objdesc;
   id obj;
   NSString *str;
-  int i;
+  NSUInteger i;
   NSUndoManager *uMgr;
   
   uMgr = [self undoManager];
@@ -1424,39 +1424,39 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (NSMutableArray *)deepCopyObjects: (NSMutableArray *)objArray
 {
-    NSMutableArray *copyArray;
-    NSEnumerator *e;
-    NSObject *o;
+  NSMutableArray *copyArray;
+  NSEnumerator *e;
+  NSObject *o;
 
     
-    copyArray = [[NSMutableArray arrayWithCapacity:[objArray count]] retain];
+  copyArray = [[NSMutableArray arrayWithCapacity:[objArray count]] retain];
 
-    e = [objArray objectEnumerator];
-    while ((o = [e nextObject]))
+  e = [objArray objectEnumerator];
+  while ((o = [e nextObject]))
     {
-        [copyArray addObject:[[o copy] autorelease]];
+      [copyArray addObject:[[o copy] autorelease]];
     }
 
-    return copyArray;
+  return copyArray;
 }
 
 - (void)saveCurrentObjects
 {
-    if (objects != nil)
+  if (objects != nil)
     {
-        if (lastObjects != nil)
-            [lastObjects release];
-        lastObjects = [[NSMutableArray arrayWithArray:objects] retain];
+      if (lastObjects != nil)
+        [lastObjects release];
+      lastObjects = [[NSMutableArray arrayWithArray:objects] retain];
     }
 }
 
 - (void)saveCurrentObjectsDeep
 {
-    if (objects != nil)
+  if (objects != nil)
     {
-        if (lastObjects != nil)
-            [lastObjects release];
-        lastObjects = [self deepCopyObjects: objects];
+      if (lastObjects != nil)
+        [lastObjects release];
+      lastObjects = [self deepCopyObjects: objects];
     }
 }
 
@@ -1530,17 +1530,17 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSPoint p;
-    int count = [theEvent clickCount];
+  NSPoint p;
+  NSUInteger count = [theEvent clickCount];
 
-    [self verifyModifiersOfEvent: theEvent];
+  [self verifyModifiersOfEvent: theEvent];
 
-    p = [theEvent locationInWindow];
-    p = [self convertPoint: p fromView: nil];
+  p = [theEvent locationInWindow];
+  p = [self convertPoint: p fromView: nil];
 
-    if(count == 1)
+  if(count == 1)
     {
-        switch([[NSApp delegate] currentToolType])
+      switch([[NSApp delegate] currentToolType])
         {
             case blackarrowtool:
                 [self selectObjectAtPoint: p];
@@ -1622,10 +1622,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    unsigned short keyCode;
-    NSRect vRect, hiddRect;
-    NSPoint vPoint;
-    float hiddRx, hiddRy, hiddRw, hiddRh;
+  unsigned short keyCode;
+  NSRect vRect, hiddRect;
+  NSPoint vPoint;
+  CGFloat hiddRx, hiddRy, hiddRw, hiddRh;
 
     keyCode = [theEvent keyCode];
 
@@ -1667,9 +1667,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)drawRect:(NSRect)rect
 {
-    int          i;
-    NSRect       frameRect;
-    NSBezierPath *bzp;
+  NSUInteger   i;
+  NSRect       frameRect;
+  NSBezierPath *bzp;
 
     frameRect = [self frame];
     
@@ -1702,11 +1702,11 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
  */
 - (BOOL) knowsPageRange: (NSRangePointer) range
 {
-    /* we simply set one page */
-    range->location = 1;
-    range->length = 1;
+  /* we simply set one page */
+  range->location = 1;
+  range->length = 1;
     
-    return YES;
+  return YES;
 }
 
 /**

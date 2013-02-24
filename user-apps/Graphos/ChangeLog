@@ -1,3 +1,8 @@
+2013-02-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	NSUInteger, CGFloat transitions, cleanup
+
 2013-02-24 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GRTextEditorView.m
 	* shutup clang warning
