@@ -130,10 +130,10 @@
  */
 -(BOOL) textView: (NSTextView*) textView
    clickedOnLink: (id) link
-         atIndex: (unsigned) charIndex
+         atIndex: (NSUInteger) charIndex
 {
     BOOL result = NO;
-    NSLog(@"textView:clickedOnLink: %@ atIndex: %d", link, charIndex);
+    NSLog(@"textView:clickedOnLink: %@ atIndex: %"PRIuPTR"", link, charIndex);
     
     if ([link isKindOfClass: [NSURL class]]) {
         result = [[NSWorkspace sharedWorkspace] openURL: (NSURL*)link];

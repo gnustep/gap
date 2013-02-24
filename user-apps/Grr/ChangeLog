@@ -1,3 +1,8 @@
+2013-02-24 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Components/ArticleTable/ArticleTablePlugin.h
+	* Components/ArticleView/ArticleTextViewPlugin.m
+	* NS(U)Integer transitions
+
 2013-02-11 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Components/Searching/NSSet+ArticleFiltering.m
 	* Components/ArticleTable/ArticleTablePlugin.m
