@@ -945,8 +945,8 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 {
   notifiedFirstSong = nil;
   [self _feedPlaylistWithTreeOfFilenames: filenames];
-  if (notifiedFirstSong && ![player playing])
-    [self _updatePlayerSong: notifiedFirstSong];
+//  if (notifiedFirstSong && ![player playing])
+//    [self _updatePlayerSong: notifiedFirstSong];
 }
 
 - (void) songCursorChange: (id) sender

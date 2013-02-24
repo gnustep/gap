@@ -483,7 +483,7 @@ decodeInputBuffer (MP3 *self, int iRBytes)
   char buffer[4];
   BOOL result;
   int offset;
-
+  return YES;
   _f = fopen ([fileName cString], "rb");
 
   if (_f)
