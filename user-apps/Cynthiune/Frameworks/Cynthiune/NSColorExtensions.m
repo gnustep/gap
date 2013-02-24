@@ -49,18 +49,5 @@
 //   return [NSColor alternateSelectedControlColor];
 }
 
-/* work-around a bug in OSX where the table rows get highlighted with this
-   color before our chosen color */
-#if !defined(GNUSTEP)
-+ (NSColor *) alternateSelectedControlColor
-{
-  return [self rowsHighlightColor];
-}
-#endif
-
-+ (NSColor *) alternateSelectedControlTextColor
-{
-  return [self controlTextColor];
-}
 
 @end

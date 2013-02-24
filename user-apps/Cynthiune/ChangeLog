@@ -1,3 +1,8 @@
+2013-02-24 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/Cynthiune/NSColorExtensions.m
+	Remove OSX Hack.
+
 2013-02-07: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/FLAC/FLAC.h
 	  make it compile with non-fragile ABI
