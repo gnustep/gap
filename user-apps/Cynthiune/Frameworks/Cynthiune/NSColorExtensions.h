@@ -31,10 +31,6 @@
 + (NSColor *) oddRowsBackgroundColor;
 + (NSColor *) rowsHighlightColor;
 
-/* work-arounds for OSX */
-+ (NSColor *) alternateSelectedControlColor;
-+ (NSColor *) alternateSelectedControlTextColor;
-
 @end
 
 #endif /* NSCOLOREXTENSIONS_H */
