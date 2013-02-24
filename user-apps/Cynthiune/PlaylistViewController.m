@@ -369,7 +369,7 @@ static NSString *CynthiunePlaylistDragType = @"CynthiunePlaylistDragType";
     {
       song = [playlist songAtIndex: rowIndex];
       if (!song)
-        NSLog (@"no song at index %" PRIuPTR "", rowIndex);
+        NSLog (@"no song at index %lu", rowIndex);
 
       if ([colId isEqualToString: @"song"])
         cellContent = [self _bestFit: [song playlistRepresentation]
