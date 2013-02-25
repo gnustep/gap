@@ -1,22 +1,22 @@
-2012-02-07 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+2013-02-07 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* TableViewDataSource.m some NSInteger conversions
 
-2012-01-27 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+2013-01-27 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/PreferencesController.gorm
 	* put the controls into a Scrollview, similar to the nib
 
-2012-01-26 Riccardo Mottola <rm@gnu.org>
+2013-01-26 Riccardo Mottola <rm@gnu.org>
 
 	* PreferencesController.[h,m]
 	* English.lproj/Preferences.nib
 	Update NIB and put controls inside a Scrollview, which has to be scrolled top the top on load.
 
-2012-01-26 Riccardo Mottola <rm@gnu.org>
+2013-01-26 Riccardo Mottola <rm@gnu.org>
 
 	* TarArchive.m (archiveType)
 	Return ArchiveType and not NSString.
 
-2012-01-26: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+2013-01-26: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* bump copyright to 2013
 2013-01-01: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Archive.[h|m] new method, to allow specify working directory
