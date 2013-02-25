@@ -1,3 +1,7 @@
+2013-02-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* AppController.[m|h]
+	* use NSApplicationTerminateReply
+
 2013-02-21 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m 
