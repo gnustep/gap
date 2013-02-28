@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditorView.m
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -34,7 +34,6 @@
 {
   NSString *firstStr;
   NSFont *f;
-  NSString *fname = nil;
   NSParagraphStyle *pstyle;
   
 
@@ -96,7 +95,6 @@
 	  {
             firstStr = [NSString stringWithString: string];
             f = [attributes objectForKey: NSFontAttributeName];
-            fname = [f fontName];
             fontSize = (int)[f pointSize];
 	    font = f;
             pstyle = [attributes objectForKey: NSParagraphStyleAttributeName];
