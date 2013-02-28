@@ -1,5 +1,10 @@
 2013-02-28 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m (deepCopyObjects)
+	Return an autoreleased array.
+	
+2013-02-28 Riccardo Mottola <rm@gnu.org>
+
 	* GRTextEditorView.m
 	Fix warnings.
 
