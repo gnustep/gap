@@ -1434,7 +1434,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSObject *o;
 
     
-  copyArray = [[NSMutableArray arrayWithCapacity:[objArray count]] retain];
+  copyArray = [NSMutableArray arrayWithCapacity:[objArray count]];
 
   e = [objArray objectEnumerator];
   while ((o = [e nextObject]))
@@ -1461,7 +1461,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
     {
       if (lastObjects != nil)
         [lastObjects release];
-      lastObjects = [self deepCopyObjects: objects];
+      lastObjects = [[self deepCopyObjects: objects] retain];
     }
 }
 
