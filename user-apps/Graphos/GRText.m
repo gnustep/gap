@@ -35,7 +35,7 @@
 
 - (id)initInView:(GRDocView *)aView
          atPoint:(NSPoint)p
-      zoomFactor:(float)zf
+      zoomFactor:(CGFloat)zf
   withProperties:(NSDictionary *) properties
       openEditor:(BOOL)openedit
 {
@@ -101,7 +101,7 @@
 
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
-        zoomFactor:(float)zf
+        zoomFactor:(CGFloat)zf
 {
     NSMutableParagraphStyle *style;
     NSDictionary *attrs;
@@ -361,7 +361,7 @@
     selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
 }
 
-- (void)setZoomFactor:(float)f
+- (void)setZoomFactor:(CGFloat)f
 {
     NSString *fname;
 

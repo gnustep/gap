@@ -1,8 +1,18 @@
+2013-03-01 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.h
+	* GRBezierPath.m
+	* GRObjectControlPoint.h
+	* GRObjectControlPoint.m
+	* GRText.h
+	* GRText.m
+	CGFloat transition
+
 2013-02-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m (deepCopyObjects)
 	Return an autoreleased array.
-	
+
 2013-02-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRTextEditorView.m

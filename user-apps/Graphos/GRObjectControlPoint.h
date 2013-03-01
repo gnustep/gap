@@ -2,7 +2,7 @@
  Project: Graphos
  GRObjectControlPoint.h
 
- Copyright (C) 2007-2008 GNUstep Application Project
+ Copyright (C) 2007-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -35,14 +35,14 @@
     NSPoint center;
     NSRect centerRect;
     NSRect innerRect;
-    float zmFactor;
+    CGFloat zmFactor;
 }
 
-- (id)initAtPoint:(NSPoint)aPoint zoomFactor:(float)zf;
+- (id)initAtPoint:(NSPoint)aPoint zoomFactor:(CGFloat)zf;
 
 - (void)moveToPoint:(NSPoint)p;
 
-- (void)setZoomFactor:(float)f;
+- (void)setZoomFactor:(CGFloat)f;
 
 - (NSPoint)center;
 - (NSRect)centerRect;
