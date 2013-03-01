@@ -73,7 +73,9 @@ static const char * sCD;
 #define SAVEAS @"saveAsGame:"
 #define LIST @"listGame:"
 
+#ifndef GNUSTEP
 void PScompositerect(float x, float y, float w, float h, int op);
+#endif
 
 void CL_MakeMove(const char * move)
 {
