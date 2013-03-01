@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.h
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -46,13 +46,13 @@
 
 - (id)initInView:(GRDocView *)aView
          atPoint:(NSPoint)p
-      zoomFactor:(float)zf
+      zoomFactor:(CGFloat)zf
   withProperties:(NSDictionary *)properties
       openEditor:(BOOL)openedit;
 
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
-        zoomFactor:(float)zf;
+        zoomFactor:(CGFloat)zf;
 
 
 - (NSString *)fontName;
@@ -63,7 +63,7 @@
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p;
 
-- (void)setZoomFactor:(float)f;
+- (void)setZoomFactor:(CGFloat)f;
 
 - (void)setScalex:(float)x scaley:(float)y;
 

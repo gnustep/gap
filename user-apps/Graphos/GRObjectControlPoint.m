@@ -2,7 +2,7 @@
  Project: Graphos
  GRObjectControlPoint.m
 
- Copyright (C) 2007-2010 GNUstep Application Project
+ Copyright (C) 2007-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -28,7 +28,7 @@
 
 @implementation GRObjectControlPoint
 
-- (id)initAtPoint:(NSPoint)aPoint zoomFactor:(float)zf
+- (id)initAtPoint:(NSPoint)aPoint zoomFactor:(CGFloat)zf
 {
     self = [super init];
     if(self)
@@ -59,7 +59,7 @@
     innerRect = NSMakeRect(p.x-2, p.y-2, 4, 4);
 }
 
-- (void)setZoomFactor:(float)f
+- (void)setZoomFactor:(CGFloat)f
 {
     center.x = center.x / zmFactor * f;
     center.y = center.y / zmFactor * f;

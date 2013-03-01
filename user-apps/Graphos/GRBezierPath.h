@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.h
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -59,7 +59,7 @@ typedef struct
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p;
 
-- (void)setZoomFactor:(float)f;
+- (void)setZoomFactor:(CGFloat)f;
 
 - (BOOL)onPathBorder:(NSPoint)p;
 

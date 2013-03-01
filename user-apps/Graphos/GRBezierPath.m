@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -34,7 +34,7 @@ static double k = 0.025;
 
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
-      zoomFactor:(float)zf
+      zoomFactor:(CGFloat)zf
       withProperties:(NSDictionary *)properties
 {
   self = [super initInView:aView zoomFactor:zf withProperties:properties];
@@ -49,7 +49,7 @@ static double k = 0.025;
 
 - (id)initFromData:(NSDictionary *)description
         inView:(GRDocView *)aView
-        zoomFactor:(float)zf
+        zoomFactor:(CGFloat)zf
 {
     NSArray *psops, *linearr;
     NSString *str;
@@ -625,7 +625,7 @@ static double k = 0.025;
     [self remakePath];
 }
 
-- (void)setZoomFactor:(float)f
+- (void)setZoomFactor:(CGFloat)f
 {
     int i;
 
