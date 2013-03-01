@@ -56,7 +56,7 @@ struct Preferences {
     int   time_cntl_minutes;
     int   opponent;
     int   computer;
-	BOOL  useSR;
+    BOOL  useSR;
     BOOL  bothsides;
     BOOL  cheat;
     NSString  *white_name;
@@ -72,6 +72,8 @@ struct Preferences {
 //
 // PS routines without prototypes
 //
+
+#ifndef GNUSTEP
 void PScountframebuffers(int *count);
 void PSmoveto(float x, float y);
 void PSrmoveto(float x, float y);
@@ -106,15 +108,14 @@ void PStranslate(float x, float y);
 void PSrotate(float angle);
 void PSscale(float x, float y);
 void PSconcat(const float m[]);
-#ifndef GNUSTEP
 void PSsethalftonephase(int x, int y);
-#endif
 void PSnewpath(void);
 void PSclosepath(void);
 void PScomposite(float x, float y, float w, float h, int gstateNum, float dx, float dy, int op);
 void PScompositerect(float x, float y, float w, float h, int op);
 void PSshow(const char *s);
 void PSashow(float w, float h, const char *s);
+#endif
 
 // Chess class interfaces
 
