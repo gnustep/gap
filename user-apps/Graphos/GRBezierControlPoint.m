@@ -1,8 +1,8 @@
 /*
  Project: Graphos
- GRBezierControlPoint.h
+ GRBezierControlPoint.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -31,7 +31,7 @@
 
 - (id)initAtPoint:(NSPoint)aPoint
         forPath:(GRBezierPath *)aPath
-       zoomFactor:(float)zf
+       zoomFactor:(CGFloat)zf
 {
     self = [super init];
     if(self)
@@ -136,7 +136,7 @@
     bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
 }
 
-- (void)setZoomFactor:(float)f
+- (void)setZoomFactor:(CGFloat)f
 {
     bzHandle.center.x = bzHandle.center.x / zmFactor * f;
     bzHandle.center.y = bzHandle.center.y / zmFactor * f;
