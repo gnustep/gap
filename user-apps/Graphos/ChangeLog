@@ -1,5 +1,13 @@
 2013-03-01 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierControlPoint.h
+	* GRBezierControlPoint.m
+	* GRBox.m
+	* GRCircle.m
+	Transitions to CGFLoat missed in the previous commit.
+
+2013-03-01 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierPath.h
 	* GRBezierPath.m
 	* GRObjectControlPoint.h

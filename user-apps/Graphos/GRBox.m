@@ -337,7 +337,7 @@
     [endControlPoint moveToPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
 }
 
-- (void)setZoomFactor:(float)f
+- (void)setZoomFactor:(CGFloat)f
 {
     [super setZoomFactor:f];
 
