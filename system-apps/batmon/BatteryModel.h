@@ -22,6 +22,15 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+typedef enum
+  {
+    BMStateUnknown = 0,
+    BMBStateCharging,
+    BMBStateDischarging,
+    BMBStateHigh,
+    BMBStateNormal,
+    BMBStateFull
+  } BMBatteryStates;
 
 @class NSString;
 
@@ -57,6 +66,8 @@
     @private float    chargePercent;
     @private float    timeRemaining;
     @private BOOL     isCharging;
+    @private BOOL     isCritical;
+    @private BMBatteryStates batteryState;
   
     @private NSString *chargeState;
     @private NSString *batteryType;
