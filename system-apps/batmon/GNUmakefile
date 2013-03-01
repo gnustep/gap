@@ -54,7 +54,7 @@ main.m
 #
 # Makefiles
 #
-include GNUmakefile.preamble
+-include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 include $(GNUSTEP_MAKEFILES)/application.make
 -include GNUmakefile.postamble

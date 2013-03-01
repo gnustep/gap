@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2012 GNUstep Application Project
+   Copyright (C) 2006-2013 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -227,12 +227,8 @@
 {
 #if defined(freebsd) || defined( __FreeBSD__ )
   
-  union acpi_battery_ioctl_arg
-    battio;
-  int
-    acpifd;
-  BOOL
-    charged = YES;
+  union acpi_battery_ioctl_arg battio;
+  int acpifd;
   
   battio.unit = 0;
   
@@ -250,53 +246,61 @@
   currCap = (float)battio.bst.cap / 1000;	// remaining capacity
   volts = (float)battio.bst.volt / 1000;	// present voltage
   watts = (float)battio.bst.rate / 1000;	// present rate
-  amps = watts / volts;
+  amps = 0;
+  if (volts)
+    amps = watts / volts;
   
   batteryType = @"";
   if( ACPI_BATT_STAT_NOT_PRESENT != battio.bst.state )
-  {
-    NSString *status = nil;
+    {
+      NSString *status = nil;
+     
+      if( battio.bst.state == 0 )
+        status = @"High";
+      else if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
+        status = @"Critical ";
+      else if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
+        status = @"Charging";
+      else if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
+        status = @"Discharging";
+      else if (battio.bst.state & ACPI_BATT_STAT_INVALID )
+        status = @"Invalid";
+      else
+        status = @"Unknown";
 
-    if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
-      batteryType = @"CRITICAL ";		// could be complementary!
-    
-    if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
-      status = @"Charging";
-    else if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
-      status = @"Discharging";
-    else if (battio.bst.state & ACPI_BATT_STAT_INVALID )
-      status = @"Invalid";
-
-    batteryType = [NSString stringWithFormat: @"%@%@", batteryType, status];
-  }
+      chargeState = status;
+      batteryType = [NSString stringWithFormat: @"%s", battio.bif.type];
+    }
   else
-    batteryType = @"Missing";
+    {
+      chargeState = @"Missing";
+      batteryType = @"Missing";
+    }
 
-  chargeState = [NSString stringWithString: batteryType];
-  batteryType = [NSString stringWithFormat: @"%s", battio.bif.type];
-  
-  // CBV
-  // Note: I cannot really tell whether the calculation is correct because
-  //       my laptop's battery is kinda screwed up...
-  //
   if( [chargeState isEqualToString: @"Charged"] )
-  {
-    chargePercent = 100;
-    timeRemaining = 0;
-    isCharging = YES;
-  }
-  else if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
-  {
-    timeRemaining = (lastCap-currCap) / watts;
-    chargePercent = currCap/lastCap*100;
-    isCharging = YES;
-  }
-  else
-  {
-    timeRemaining = currCap / watts;
-    chargePercent = currCap/lastCap*100;
-    isCharging = NO;
-  }
+    {
+      chargePercent = 100;
+      timeRemaining = 0;
+      isCharging = YES;
+    }
+  else if( [chargeState isEqualToString: @"High"] )
+    {
+      timeRemaining = 0;
+      chargePercent = currCap/lastCap*100;
+      isCharging = YES;
+    }  
+  else if( [chargeState isEqualToString: @"Charging"] )
+    {
+      timeRemaining = (lastCap-currCap) / watts;
+      chargePercent = currCap/lastCap*100;
+      isCharging = YES;
+    }
+  else if( [chargeState isEqualToString: @"Discharging"] )
+    {
+      timeRemaining = currCap / watts;
+      chargePercent = currCap/lastCap*100;
+      isCharging = NO;
+    }
 #elif defined(netbsd) || defined (__NetBSD__)
   int		sysmonfd; /* fd of /dev/sysmon */
   int rval;
@@ -969,7 +973,7 @@
     return[chargeState isEqualToString:@"Critical"];
   } else
 #endif
-    return NO;
+  return[chargeState isEqualToString:@"Critical"];
 }
 
 - (BOOL)isCharging
