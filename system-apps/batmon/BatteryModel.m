@@ -537,12 +537,15 @@
     int  rateVal;
     int  capacityVal;
     int  voltageVal;
+    NSString *chargeStateStr;
 
     char present2Str[16];
     char desCapStr[16];
     char lastCapStr[16];
     char batTypeStr[16];
     char warnCapStr[16];
+
+    chargeState = 0;
 
     if (useACPIsys)
       {
@@ -552,6 +555,7 @@
         NSRange  sepRange;
 	NSString *valueStr;
 	NSString *keyStr;
+
 
 	//	NSLog(@"reading %@", batterySysAcpiString);
 	ueventFileName = [batterySysAcpiString stringByAppendingPathComponent:@"uevent"];
@@ -613,12 +617,12 @@
 	  }
 	warnCap = 0; //fixme
 
-        chargeState = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_STATUS"];
+        chargeStateStr = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_STATUS"];
         batteryType = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_TECHNOLOGY"];
 	batteryManufacturer = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_MANUFACTURER"];
 
         isCharging = NO;
-        if ([chargeState isEqualToString:@"Charging"])
+        if ([chargeStateStr isEqualToString:@"Charging"])
 	  {
 	    if (useWattHours)
 	      {
@@ -636,8 +640,9 @@
 	      }
 	    chargePercent = currCap/lastCap*100;
 	    isCharging = YES;
+	    batteryState = BMBStateCharging;
 	  }
-	else if ([chargeState isEqualToString:@"Discharging"])
+	else if ([chargeStateStr isEqualToString:@"Discharging"])
 	  {
 	    if (useWattHours)
 	      {
@@ -654,14 +659,16 @@
 	          timeRemaining = -1;
 	      }
 	    chargePercent = currCap/lastCap*100;
+	    batteryState = BMBStateDischarging;
 	  }
-	else if ([chargeState isEqualToString:@"Charged"] || [chargeState isEqualToString:@"Full"])
+	else if ([chargeStateStr isEqualToString:@"Charged"] || [chargeStateStr isEqualToString:@"Full"])
 	  {
 	    chargePercent = 100;
 	    timeRemaining = 0;
 	    isCharging = YES;
+	    batteryState = BMBStateFull;
 	  }
-	else if ([chargeState isEqualToString:@"Unknown"])
+	else if ([chargeStateStr isEqualToString:@"Unknown"])
 	  {
        	    timeRemaining = 0;
 	    if (amps == 0)
@@ -669,6 +676,7 @@
 		chargePercent = 100;
 		isCharging = YES;
 	      }
+	    batteryState = BMBStateUnknown;
 	  }
       }
     else if (useACPIproc)
@@ -738,16 +746,14 @@
 	currCap = capacityVal / 1000;
 	warnCap = (float)atoi(warnCapStr)/1000;
 
-	if (chargeState != nil)
-	  [chargeState release];
-	chargeState = [[NSString stringWithCString:chStateStr] retain];
-
 	if (!strcmp(chStateStr, "charged"))
 	  {
 	    chargePercent = 100;
 	    timeRemaining = 0;
 	    isCharging = YES;
-	  } else if (!strcmp(chStateStr, "charging"))
+	    batteryState = BMBStateFull;
+	  }
+	else if (!strcmp(chStateStr, "charging"))
 	  {
 	    if (watts > 0)
 	      timeRemaining = (lastCap-currCap) / watts;
@@ -755,7 +761,9 @@
 	      timeRemaining = -1;
 	    chargePercent = currCap/lastCap*100;
 	    isCharging = YES;
-	  } else
+	    batteryState = BMBStateCharging;
+	  }
+	else
 	  {
 	    if (watts > 0)
 	      timeRemaining = currCap / watts;
@@ -763,6 +771,7 @@
 	      timeRemaining = -1;
 	    chargePercent = currCap/lastCap*100;
 	    isCharging = NO;
+	    batteryState = BMBStateDischarging;
 	  }
       }
     else if (useAPM)
@@ -826,19 +835,23 @@
 
 	    isCharging = NO;
 	    if (battStatusInt == 0)
-	      chargeState = @"High";
+	      batteryState = BMBStateHigh;
 	    else if (battStatusInt == 1)
-	      chargeState = @"Low";
+	      batteryState = BMBStateDischarging; /* Low */
 	    else if (battStatusInt == 2)
-	      chargeState = @"Critical";
+	      {
+		batteryState = BMBStateDischarging;
+		isCritical = YES;
+	      }
 	    else if (battStatusInt == 3)
 	      {
-		chargeState = @"Charging";
+		batteryState = BMBStateCharging;
 		isCharging = YES;
-	      } else if (battStatusInt == 4)
-	      chargeState = @"Not present";
+	      } 
+	    else if (battStatusInt == 4)
+		batteryState = BMBStateMissing;
 	    else
-	      chargeState = @"Unknown";
+	      batteryState = BMBStateUnknown;
 
 
 	    if (percentIsInvalid)
