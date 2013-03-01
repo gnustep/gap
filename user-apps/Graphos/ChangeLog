@@ -1,5 +1,10 @@
 2013-03-01 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m
+	Check loop condition vbetter due to unsigned transition.
+
+2013-03-01 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierControlPoint.h
 	* GRBezierControlPoint.m
 	* GRBox.m
