@@ -1113,7 +1113,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
     for(i = 0; i < [objects count]; i++)
     {
-        if((obj == [objects objectAtIndex: i]) && ((i - 1) >= 0)) 
+        if((obj == [objects objectAtIndex: i]) && (i > 0)) 
         {
             [objects removeObjectAtIndex: i];
             [objects insertObject: obj atIndex: i - 1];
@@ -1264,7 +1264,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSLog(@"visible %f, full %f", visibleRect.size.width, f.size.width);
   while (i > 0 && ((visibleRect.size.width < f.size.width * zFactors[i]) || (visibleRect.size.height < f.size.height * zFactors[i])))
     i--;
-  NSLog(@"index: %d", i);
+
   visibleRect = [self visibleRect];
   p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
   p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
@@ -1285,7 +1285,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSLog(@"visible %f, full %f", visibleRect.size.width, f.size.width);
   while (i > 0 && visibleRect.size.width < f.size.width * zFactors[i])
     i--;
-  NSLog(@"index: %d", i);
+ 
   visibleRect = [self visibleRect];
   p.x = NSMinX(visibleRect) + NSWidth(visibleRect) / 2;
   p.y = NSMinY(visibleRect) + NSHeight(visibleRect) / 2;
