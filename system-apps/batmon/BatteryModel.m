@@ -312,6 +312,7 @@
   id obj1;
   NSDictionary *acpibat0;
   NSMutableDictionary *batDict;
+  NSDictionary *chargeDict;
   NSString *valueStr;
   float chargeRate, dischargeRate;
 
@@ -338,13 +339,12 @@
     }
 
   acpibat0 = [dict objectForKey: @"acpibat0"];
-  NSLog(@"acpibat0: %@", acpibat0);
-  NSLog(@"Class: %@", [acpibat0 class]);
+  //NSLog(@"acpibat0: %@", acpibat0);
   batDict = [NSMutableDictionary dictionaryWithCapacity: 3];
   enum1 = [acpibat0 objectEnumerator];
   while ((obj1 = [enum1 nextObject]))
     {
-      NSLog(@"--->%@", obj1);
+      //      NSLog(@"--->%@", obj1);
       if ([obj1 isKindOfClass: [NSDictionary class]])
 	{
 	  NSString *descriptionKey;
@@ -358,13 +358,8 @@
 	NSLog(@"not a dict");
 
     }
-  NSLog(@"battery dictionary: %@", batDict);
+  //NSLog(@"battery dictionary: %@", batDict);
   (void)close(sysmonfd);
-
-  valueStr = [[batDict objectForKey: @"design voltage"] objectForKey: @"cur-value"];
-  //  NSLog(@"design voltage: %@", valueStr);
-  //  if (valueStr)
-  //    designVoltage = [valueStr floatValue] / 1000000;
 
   valueStr = [[batDict objectForKey: @"voltage"] objectForKey: @"cur-value"];
   if (valueStr)
@@ -386,6 +381,19 @@
     }
   NSLog(@"design cap: %@ %f", valueStr, desCap);
 
+  chargeDict = [batDict objectForKey: @"charge"];
+  valueStr = [chargeDict objectForKey: @"critical-capacity"];
+  if (valueStr)
+    {
+      critCap = [valueStr floatValue] / 1000000;
+    }
+  NSLog(@"crit cap: %@ %f", valueStr, critCap);
+  valueStr = [chargeDict objectForKey: @"warning-capacity"];
+  if (valueStr)
+    {
+      warnCap = [valueStr floatValue] / 1000000;
+    }
+  NSLog(@"warn cap: %@ %f", valueStr, warnCap);
   valueStr = [[batDict objectForKey: @"last full cap"] objectForKey: @"cur-value"];
   if (valueStr)
     lastCap = [valueStr floatValue] / 1000000;
@@ -420,7 +428,7 @@
       else
 	timeRemaining = -1;
       chargePercent = currCap/lastCap*100;
-
+      batteryState = BMBStateDischarging;
     }
   else
     {
@@ -431,16 +439,24 @@
       else
 	timeRemaining = -1;
       chargePercent = currCap/lastCap*100;
+      batteryState = BMBStateCharging;
     }
   watts = amps * volts;
 
-  valueStr = [[batDict objectForKey: @"charge state"] objectForKey: @"battery-capacity"];
-  //NSLog(@"charge state: %@", valueStr);
-  if (valueStr)
+  /* sanitize */
+  if (critCap > warnCap)
+    critCap = warnCap;
+  if (critCap == 0)
     {
-      [chargeState release];
-      chargeState = [[NSString stringWithString: valueStr] retain];
+      if (warnCap > 0)
+        critCap = warnCap;
+      else
+        critCap = desCap / 100;
     }
+      
+  isCritical = NO;
+  if (currCap <= critCap)
+    isCritical = YES;
 
 #elif defined(openbsd) || defined(__OpenBSD__)
   int apmfd;
@@ -862,12 +878,12 @@
 	if ([strValue intValue] == 1)
 	  {
 	    isCharging = YES;
-	    chargeState = @"Charging";
+	    batteryState = BMBStateCharging;
 	  }
 	else
 	  {
 	    isCharging = NO;
-	    chargeState = @"Discharging";
+	    batteryState = BMBStateDischarging;
 	  }
 
 	strPmuBat = [NSString stringWithContentsOfFile: @"/proc/pmu/battery_0"];
@@ -949,7 +965,33 @@
 
 - (NSString *)state
 {
-    return chargeState;
+  NSString *s;
+
+  switch(batteryState)
+    {
+    case BMBStateUnknown:
+      s = @"Unknown";
+      break;
+    case BMBStateCharging:
+      s = @"Charging";
+      break;
+    case BMBStateDischarging:
+      s = @"Discharging";
+      break;
+    case BMBStateHigh:
+      s = @"High";
+      break;
+    case BMBStateFull:
+      s = @"Full";
+      break;
+    case BMBStateMissing:
+      s = @"Missing";
+    default:
+      NSLog(@"Unrecognized battery state");
+      s = @"Unrecognized";
+      break;
+    }
+  return s;
 }
 
 - (NSString *)batteryType

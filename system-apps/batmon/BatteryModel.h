@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2012 GNUstep Application Project
+   Copyright (C) 2006-2013 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -24,12 +24,12 @@
 
 typedef enum
   {
-    BMStateUnknown = 0,
+    BMBStateUnknown = 0,
     BMBStateCharging,
     BMBStateDischarging,
     BMBStateHigh,
-    BMBStateNormal,
-    BMBStateFull
+    BMBStateFull,
+    BMBStateMissing
   } BMBatteryStates;
 
 @class NSString;
@@ -62,6 +62,7 @@ typedef enum
     @private float    desCap;
     @private float    lastCap;
     @private float    currCap;
+    @private float    critCap;
     @private float    warnCap;
     @private float    chargePercent;
     @private float    timeRemaining;
