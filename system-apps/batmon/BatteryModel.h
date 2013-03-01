@@ -28,6 +28,8 @@ typedef enum
     BMBStateCharging,
     BMBStateDischarging,
     BMBStateHigh,
+    BMBStateLow,
+    BMBStateCritical,
     BMBStateFull,
     BMBStateMissing
   } BMBatteryStates;

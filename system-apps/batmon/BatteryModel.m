@@ -253,49 +253,42 @@
   batteryType = @"";
   if( ACPI_BATT_STAT_NOT_PRESENT != battio.bst.state )
     {
-      NSString *status = nil;
-     
-      if( battio.bst.state == 0 )
-        status = @"High";
-      else if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
-        status = @"Critical ";
-      else if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
-        status = @"Charging";
-      else if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
-        status = @"Discharging";
-      else if (battio.bst.state & ACPI_BATT_STAT_INVALID )
-        status = @"Invalid";
-      else
-        status = @"Unknown";
+      isCritical = NO;
+      if( battio.bst.state & ACPI_BATT_STAT_CRITICAL )
+        isCritical = YES;     
 
-      chargeState = status;
+      if( battio.bst.state == 0 )
+        batteryState = BMBStateHigh;
+      else if( battio.bst.state & ACPI_BATT_STAT_CHARGING )
+        batteryState = BMBStateCharging;
+      else if( battio.bst.state & ACPI_BATT_STAT_DISCHARG )
+        batteryState = BMBStateDischarging;
+      else if (battio.bst.state & ACPI_BATT_STAT_INVALID )
+        batteryState = BMBStateUnknown;
+      else
+        batteryState = BMBStateUnknown;
+
       batteryType = [NSString stringWithFormat: @"%s", battio.bif.type];
     }
   else
     {
-      chargeState = @"Missing";
+      batteryState = BMBStateMissing;
       batteryType = @"Missing";
     }
 
-  if( [chargeState isEqualToString: @"Charged"] )
-    {
-      chargePercent = 100;
-      timeRemaining = 0;
-      isCharging = YES;
-    }
-  else if( [chargeState isEqualToString: @"High"] )
+  if( batteryState == BMBStateHigh )
     {
       timeRemaining = 0;
       chargePercent = currCap/lastCap*100;
       isCharging = YES;
     }  
-  else if( [chargeState isEqualToString: @"Charging"] )
+  else if( batteryState == BMBStateCharging )
     {
       timeRemaining = (lastCap-currCap) / watts;
       chargePercent = currCap/lastCap*100;
       isCharging = YES;
     }
-  else if( [chargeState isEqualToString: @"Discharging"] )
+  else if( batteryState == BMBStateDischarging )
     {
       timeRemaining = currCap / watts;
       chargePercent = currCap/lastCap*100;
@@ -473,24 +466,29 @@
   isCharging = NO;
   validBattery = YES;
   if (APM_BATT_HIGH == apmPwInfo.battery_state)
-    chargeState = @"High";
+    batteryState = BMBStateHigh;
   else if (APM_BATT_LOW == apmPwInfo.battery_state)
-    chargeState = @"Low";
+    {
+      batteryState = BMBStateLow;
+    }
   else if (APM_BATT_CRITICAL == apmPwInfo.battery_state)
-    chargeState = @"Critical";
+    {
+      batteryState = BMBStateCritical;
+      isCritical = YES;
+    }
   else if (APM_BATT_CHARGING == apmPwInfo.battery_state)
     {
-      chargeState = @"Charging";
+      batteryState = BMBStateCharging;
       isCharging = YES;
     }
   else if (APM_BATTERY_ABSENT == apmPwInfo.battery_state)
     {
-      chargeState = @"Not present";
+      batteryState = BMBStateMissing;
       validBattery = NO;
     }
   else
     {
-      chargeState = @"Unknown";
+      batteryState = BMBStateUnknown;;
       validBattery = NO;
     }
 
@@ -837,7 +835,7 @@
 	    if (battStatusInt == 0)
 	      batteryState = BMBStateHigh;
 	    else if (battStatusInt == 1)
-	      batteryState = BMBStateDischarging; /* Low */
+	      batteryState = BMBStateLow;
 	    else if (battStatusInt == 2)
 	      {
 		batteryState = BMBStateDischarging;
@@ -994,11 +992,18 @@
     case BMBStateHigh:
       s = @"High";
       break;
+    case BMBStateLow:
+      s = @"Low";
+      break;
+    case BMBStateCritical:
+      s = @"Critical";
+      break;
     case BMBStateFull:
       s = @"Full";
       break;
     case BMBStateMissing:
       s = @"Missing";
+      break;
     default:
       NSLog(@"Unrecognized battery state");
       s = @"Unrecognized";
