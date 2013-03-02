@@ -72,7 +72,6 @@ typedef enum
     @private BOOL     isCritical;
     @private BMBatteryStates batteryState;
   
-    @private NSString *chargeState;
     @private NSString *batteryType;
     @private NSString *batteryManufacturer;
 
