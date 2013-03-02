@@ -214,12 +214,9 @@
 
 - (void)dealloc
 {
-  if (chargeState != nil)
-        [chargeState release];
   if (batteryType != nil)
         [batteryType release];
   [super dealloc];
-
 }
 
 
@@ -1030,10 +1027,10 @@
     return  [self remainingCapacity] < [self warningCapacity];
   } else if (useAPM)
   {
-    return[chargeState isEqualToString:@"Critical"];
+    return isCritical;
   } else
 #endif
-  return[chargeState isEqualToString:@"Critical"];
+  return isCritical;
 }
 
 - (BOOL)isCharging
