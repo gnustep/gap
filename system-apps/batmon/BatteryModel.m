@@ -540,7 +540,7 @@
     char batTypeStr[16];
     char warnCapStr[16];
 
-    chargeState = 0;
+    batteryState = 0;
 
     if (useACPIsys)
       {
@@ -559,6 +559,13 @@
         stateFile = fopen(batteryStatePath0, "r");
 	if (stateFile == NULL)
 	  {
+	    batteryState = BMBStateMissing;
+	    watts = 0;
+	    amps = 0;
+	    volts = 0;
+	    chargePercent = 0;
+	    currCap = 0;
+	    timeRemaining = -1;
 	    NSLog(@"acpi /sys state file is null");
 	    return;
 	  }
@@ -586,12 +593,16 @@
 
 
         amps = [[ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"] floatValue] / 1000000;
+	if (isnan(amps))
+	  amps = 0;
 	volts = [[ueventDict objectForKey:@"POWER_SUPPLY_VOLTAGE_NOW"] floatValue] / 1000000;
 	if ([ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] == nil)
 	  watts = volts*amps;
 	else
 	  {
 	    watts = [[ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] floatValue] / 1000000;
+	    if (isnan(watts))
+	      watts = 0;
 	    if (volts > 0)
 	      amps = watts / volts;
 	  }
@@ -610,7 +621,7 @@
 	    currCap = [[ueventDict objectForKey:@"POWER_SUPPLY_CHARGE_NOW"] floatValue] / 1000000;
 	    useWattHours = NO;
 	  }
-	warnCap = 0; //fixme
+	warnCap = 0; // FIXME
 
         chargeStateStr = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_STATUS"];
         batteryType = (NSString *)[ueventDict objectForKey:@"POWER_SUPPLY_TECHNOLOGY"];
@@ -731,11 +742,13 @@
 
 	// a sanity check, a laptop won't consume 1000W
 	// necessary since sometimes ACPI returns bogus stuff
-
-	if (watts > 1000)
+	if (isnan(watts))
+	  watts = 0;
+	else if (watts > 1000)
 	  watts = 0;
 	volts = (float)voltageVal / 1000;
 	amps = watts / volts;
+
 	desCap = (float)atoi(desCapStr)/1000;
 	lastCap = (float)atoi(lastCapStr)/1000;
 	currCap = capacityVal / 1000;
