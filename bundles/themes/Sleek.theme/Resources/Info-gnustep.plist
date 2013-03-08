@@ -5,9 +5,9 @@
     GSThemeDetails = "A sleek theme with little contast and few shadows\000";
     GSThemeDomain = {
     };
-    GSThemeIcon = Thematic.png;
-    GSThemePreview = sleek_preview_128.tif;
+    GSThemeIcon = "Thematic.png";
+    GSThemePreview = "sleek_preview_128.tif";
     GSThemeTiles = {
     };
-    GSThemeVersion = 0.1;
+    GSThemeVersion = "0.2";
 }
