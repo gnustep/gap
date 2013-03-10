@@ -769,7 +769,6 @@ int getChar(streamStruct* ss)
 - (int)connect:(int)port :(char *)server
 {
     struct hostent      *hostentPtr;
-    char                *tempStr;
     socklentype         addrLen; /* socklen_t on some systems? */
     NSMutableArray      *reply;
 
@@ -783,8 +782,6 @@ int getChar(streamStruct* ss)
     BCOPY((char *)hostentPtr->h_addr, (char *)&remoteSockName.sin_addr, hostentPtr->h_length);
     remoteSockName.sin_family = PF_INET;
     remoteSockName.sin_port = htons(port);
-
-    tempStr = inet_ntoa(remoteSockName.sin_addr);
 
     if ((controlSocket = socket(PF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     {
