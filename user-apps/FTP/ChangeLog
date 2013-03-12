@@ -1,3 +1,8 @@
+2013-03-12 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.[h,m] (retrieveFile, storeFile)
+	Make call synchronous instead of asynchronous, solves problem on Mac where calls to the the ftpClient class would hang after a dozen of calls.
+
 2013-02-25 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* AppController.[m|h]
 	* use NSApplicationTerminateReply

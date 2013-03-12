@@ -390,7 +390,7 @@ int getChar(streamStruct* ss)
     return retVal;
 }
 
-- (oneway void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
     NSString           *fileName;
     unsigned long long fileSize;
@@ -565,7 +565,7 @@ int getChar(streamStruct* ss)
     [controller setThreadRunningState:NO];
 }
 
-- (oneway void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
+- (void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
 {
     NSString           *fileName;
     unsigned long long fileSize;
