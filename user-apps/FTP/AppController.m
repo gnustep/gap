@@ -323,6 +323,8 @@
         NSLog(@"should download: %@", [fileEl filename]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
+    
+    [self setThreadRunningState:NO];
 }
 
 - (void)performStoreFile
@@ -342,6 +344,8 @@
         NSLog(@"should upload (performStore): %@", [fileEl filename]);
         [ftp storeFile:fileEl from:local beingAt:0];
     }
+    
+    [self setThreadRunningState:NO];
 }
 
 - (IBAction)downloadButton:(id)sender

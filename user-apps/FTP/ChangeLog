@@ -1,3 +1,8 @@
+2013-03-18 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+        Make sure the interface gets enabled after a download/uploadm even if nothing ot done.
+
 2013-03-12 Riccardo Mottola <rm@gnu.org>
 
 	* ftpclient.[h,m] (retrieveFile, storeFile)
