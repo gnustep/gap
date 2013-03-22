@@ -1,7 +1,7 @@
 {
 	ApplicationDescription = "GUI for various compressed file formats";
 	ApplicationName = "Zipper";
-	ApplicationRelease = "1.4";
+	ApplicationRelease = "1.5";
 	ApplicationURL = "http://gap.nongnu.org/zipper/";
 	NSIcon = "zipper.tiff";
 	NSMainNibFile = MainMenu.gorm;
