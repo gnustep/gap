@@ -133,17 +133,23 @@
   
 }
 
-- (IBAction)setAxisColor: (id)sender;
+- (IBAction)setAxisColor: (id)sender
 {
   [chartView setAxisColor:[sender color]];
   [chartView setNeedsDisplay:YES];
 }
 
 
-- (IBAction)setBackgroundColor: (id)sender;
+- (IBAction)setBackgroundColor: (id)sender
 {
   [chartView setBackgroundColor:[sender color]];
   [chartView setNeedsDisplay:YES];
+}
+
+- (IBAction)setGridStyle: (id)sender
+{
+  [chartView setGridStyle: [[sender selectedItem] tag]];
+  [chartView setNeedsDisplay: YES];
 }
 
 - (IBAction) changeSeries1Color: (id)sender
