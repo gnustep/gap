@@ -3,7 +3,7 @@
    
    Chart: Generic chart superclass
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2013 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -35,13 +35,24 @@
 #define NSUInteger unsigned
 #endif
 
+typedef enum
+{
+  OKGridNone = 1,
+  OKGridHorizontal,
+  OKGridVertical,
+  OKGridBoth
+} OKGridStyle;
+
 @class OKSeries;
 
 @interface OKChart : NSView
 {
   NSColor *backgroundColor;
   NSColor *axisColor;
+  NSColor *gridColor;
   NSMutableArray *seriesArray;
+  
+  OKGridStyle gridStyle;
 
   float graphMinYVal;
   float graphMaxYVal;
@@ -50,6 +61,8 @@
 
 - (IBAction)setAxisColor:(NSColor *)color;
 - (IBAction)setBackgroundColor:(NSColor *)color;
+- (IBAction)setGridStyle:(OKGridStyle)style;
+- (IBAction)setGridColor:(NSColor *)color;
 - (NSUInteger)seriesCount;
 - (OKSeries *)seriesAtIndex:(NSUInteger)index;
 - (void)addSeries: (OKSeries *)series;

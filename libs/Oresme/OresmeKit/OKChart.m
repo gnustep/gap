@@ -39,6 +39,8 @@
     {
       backgroundColor = [[NSColor whiteColor] retain];
       axisColor = [[NSColor blackColor] retain];
+      gridColor = [[NSColor grayColor] retain];
+      gridStyle = OKGridBoth;
       seriesArray = [[NSMutableArray alloc] initWithCapacity: 1];
     }
   return self;
@@ -109,6 +111,19 @@
 {
   [backgroundColor release];
   backgroundColor = [color retain];
+}
+
+/** grid drawing style according to OKGridStyle */
+- (IBAction)setGridStyle:(OKGridStyle)style
+{
+  gridStyle = style;
+}
+
+/** Set the grid color */
+- (IBAction)setGridColor:(NSColor *)color
+{
+  [gridColor release];
+  gridColor = [color retain];
 }
 
 /* returns the number of series arrays */

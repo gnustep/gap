@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2013 Free Software Foundation
 
    Author: multix
 
@@ -46,6 +46,7 @@
 
 -(void)drawRect: (NSRect)rect
 {
+  NSBezierPath *path;
   NSRect boundsRect;
   unsigned i, j;
   float oneXUnit;
@@ -56,8 +57,14 @@
   float availableWidth;
   float rangeToRepresent;
   float axisLevel;
+  float minXPos;
+  float minYPos;
   unsigned steps;
 
+  /* bottom and left limits of the graph */
+  minXPos = 10;
+  minYPos = 10;
+  
   /* the super method will have calculated the limits */
   [super drawRect: rect];
   boundsRect = [self bounds];
@@ -69,36 +76,76 @@
       NSLog(@"No Y range to represent");
       return;
     }
-  oneYUnit = availableHeight / rangeToRepresent;
-  oneXUnit = availableWidth / graphMaxXVal;
-
-  /* draw axes */
-  axisLevel = 0;
+  oneYUnit = round(availableHeight / rangeToRepresent);
+  oneXUnit = round(availableWidth / graphMaxXVal);
+  axisLevel = minYPos;
   if (graphMinYVal < 0)
-    axisLevel = -oneYUnit * graphMinYVal;
+    axisLevel += -oneYUnit * graphMinYVal;
   NSLog(@"x-y unit: %f, %f:, axisLevel; %f", oneXUnit, oneYUnit, axisLevel);
   xUnitSize = oneXUnit;
   if (xUnitSize < minXUnitSize)
     {
-      while (xUnitSize < minXUnitSize)
-        xUnitSize += oneXUnit;
+    while (xUnitSize < minXUnitSize)
+      xUnitSize += oneXUnit;
     }
   else
     xUnitSize = oneXUnit;
-
+  
   yUnitSize = oneYUnit;
   if (yUnitSize < minYUnitSize)
     {
-      while (yUnitSize < minYUnitSize)
-        yUnitSize += oneYUnit;
+    while (yUnitSize < minYUnitSize)
+      yUnitSize += oneYUnit;
     }
   else
     yUnitSize = oneYUnit;
-
+  
   NSLog(@"unit sizes: %f, %f", xUnitSize, yUnitSize);
+  
+  
+  /* draw grid */
+  if (gridStyle != OKGridNone)
+    {
+      [gridColor set];
+      if (gridStyle == OKGridHorizontal || gridStyle == OKGridBoth)
+        {
+          steps = availableHeight / yUnitSize;
+          NSLog(@"y steps: %u", steps);
+          for (i = 0; i < steps; i++)
+            {
+              float y;
+          
+              y = minYPos + i * yUnitSize;
+              [NSBezierPath strokeRect: NSMakeRect(minXPos, y, boundsRect.size.width, 0)];
+            }
+          }
+      if (gridStyle == OKGridVertical || gridStyle == OKGridBoth)
+        {
+        steps =  availableWidth / xUnitSize;
+        NSLog(@"x steps: %u", steps);
+        for (i = 0; i < steps; i++)
+          {
+            float x;
+        
+            x = minXPos + i * xUnitSize;
+            [NSBezierPath strokeRect: NSMakeRect(x, minYPos, 0, boundsRect.size.height)];
+          }
+        steps = availableHeight / yUnitSize;
+        }
+    }
+  
+  /* draw axes */
   [axisColor set];
-  [NSBezierPath strokeRect: NSMakeRect(0, axisLevel, boundsRect.size.width, 0)];
-  [NSBezierPath strokeRect: NSMakeRect(0, 0, 0, boundsRect.size.height)];
+  path = [[NSBezierPath alloc] init];
+  [path setLineWidth:1.0];
+  [path moveToPoint: NSMakePoint(minXPos, axisLevel)];
+  [path lineToPoint: NSMakePoint(boundsRect.size.width, axisLevel)];
+  [path moveToPoint: NSMakePoint(minXPos, minYPos)];
+  [path lineToPoint: NSMakePoint(minXPos, boundsRect.size.height)];
+  [path stroke];  
+  [path release];
+  //[NSBezierPath strokeRect: NSMakeRect(minXPos, axisLevel, boundsRect.size.width, 0)];
+  //[NSBezierPath strokeRect: NSMakeRect(minXPos, minYPos, 0, boundsRect.size.height)];
 
   /* draw units */
   steps =  availableWidth / xUnitSize;
@@ -107,7 +154,7 @@
     {
       float x;
 
-      x = i * xUnitSize;
+      x = minXPos + i * xUnitSize;
       [NSBezierPath strokeRect: NSMakeRect(x, axisLevel-1, 0, 2)];
     }
   steps = availableHeight / yUnitSize;
@@ -116,14 +163,14 @@
     {
       float y;
 
-      y = i * yUnitSize;
-      [NSBezierPath strokeRect: NSMakeRect(0, y, 2, 0)];
+      y = minYPos + i * yUnitSize;
+      [NSBezierPath strokeRect: NSMakeRect(minXPos, y, 2, 0)];
     }
   NSLog(@"top is: %f", i * (yUnitSize / oneYUnit));
-
+  
+  /* draw graph */
   for (i = 0; i < [seriesArray count]; i++)
     {
-      NSBezierPath *path;
       OKSeries *series;
       float x;
       float y;
@@ -134,7 +181,7 @@
 	{
 	  path = [[NSBezierPath alloc] init];
 	  [[series color] set];
-	  x = 0;
+	  x = minXPos;
 	  y = axisLevel + [[series objectAtIndex: 0] floatValue] * oneYUnit;
 	  p = NSMakePoint(x, y);
 	  [path moveToPoint: p];
