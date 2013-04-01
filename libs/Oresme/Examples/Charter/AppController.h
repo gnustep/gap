@@ -34,6 +34,7 @@
 
 - (IBAction)setAxisColor: (id)sender;
 - (IBAction)setBackgroundColor: (id)sender;
+- (IBAction)setGridStyle: (id)sender;
 - (IBAction)changePlot:(id)sender;
 - (IBAction)changeChartType:(id)sender;
 - (IBAction)changeSeries1Color: (id)sender;

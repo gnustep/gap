@@ -8,6 +8,7 @@
                 changeSeries2Color = id; 
                 setAxisColor = id; 
                 setBackgroundColor = id; 
+                setGridStyle = id; 
             }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
