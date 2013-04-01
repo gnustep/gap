@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2013 Free Software Foundation
 
    Author: multix
 
@@ -26,6 +26,7 @@
 #import <Foundation/Foundation.h>
 
 #import "OKChart.h"
+
 
 @interface OKLineChart : OKChart
 {
