@@ -25,6 +25,12 @@
 
 #import <Foundation/Foundation.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4) && !defined(CGFloat)
+#define NSUInteger unsigned
+#define NSInteger int
+#define CGFloat float
+#endif
+
 @class GRBoxEditor;
 
 
