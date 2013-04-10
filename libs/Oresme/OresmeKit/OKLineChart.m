@@ -115,7 +115,7 @@
             {
               float y;
           
-              y = round(minYPos + i * yUnitSize);
+              y = round(minYPos + i * yUnitSize)+0.5;
               [NSBezierPath strokeRect: NSMakeRect(minXPos, y, boundsRect.size.width, 0)];
             }
           }
@@ -127,7 +127,7 @@
           {
             float x;
         
-            x = round(minXPos + i * xUnitSize);
+            x = round(minXPos + i * xUnitSize)+0.5;
             [NSBezierPath strokeRect: NSMakeRect(x, minYPos, 0, boundsRect.size.height)];
           }
         steps = availableHeight / yUnitSize;
@@ -138,14 +138,11 @@
   [axisColor set];
   path = [[NSBezierPath alloc] init];
   [path setLineWidth:1.0];
-  [path moveToPoint: NSMakePoint(minXPos, axisLevel)];
-  [path lineToPoint: NSMakePoint(boundsRect.size.width, axisLevel)];
-  [path moveToPoint: NSMakePoint(minXPos, minYPos)];
-  [path lineToPoint: NSMakePoint(minXPos, boundsRect.size.height)];
+  [path moveToPoint: NSMakePoint(minXPos, axisLevel+0.5)];
+  [path lineToPoint: NSMakePoint(boundsRect.size.width, axisLevel+0.5)];
+  [path moveToPoint: NSMakePoint(minXPos+0.5, minYPos)];
+  [path lineToPoint: NSMakePoint(minXPos+0.5, boundsRect.size.height)];
   [path stroke];  
-  [path release];
-  //[NSBezierPath strokeRect: NSMakeRect(minXPos, axisLevel, boundsRect.size.width, 0)];
-  //[NSBezierPath strokeRect: NSMakeRect(minXPos, minYPos, 0, boundsRect.size.height)];
 
   /* draw units */
   steps =  availableWidth / xUnitSize;
@@ -154,7 +151,7 @@
     {
       float x;
 
-      x = minXPos + i * xUnitSize;
+      x = round(minXPos + i * xUnitSize)+0.5;
       [NSBezierPath strokeRect: NSMakeRect(x, axisLevel-1, 0, 2)];
     }
   steps = availableHeight / yUnitSize;
@@ -163,7 +160,7 @@
     {
       float y;
 
-      y = minYPos + i * yUnitSize;
+      y = round(minYPos + i * yUnitSize)+0.5;
       [NSBezierPath strokeRect: NSMakeRect(minXPos, y, 2, 0)];
     }
   NSLog(@"top is: %f", i * (yUnitSize / oneYUnit));
