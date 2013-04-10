@@ -76,12 +76,12 @@
       NSLog(@"No Y range to represent");
       return;
     }
-  oneYUnit = round(availableHeight / rangeToRepresent);
-  oneXUnit = round(availableWidth / graphMaxXVal);
+  oneYUnit = availableHeight / rangeToRepresent;
+  oneXUnit = availableWidth / graphMaxXVal;
   axisLevel = minYPos;
   if (graphMinYVal < 0)
-    axisLevel += -oneYUnit * graphMinYVal;
-  NSLog(@"x-y unit: %f, %f:, axisLevel; %f", oneXUnit, oneYUnit, axisLevel);
+    axisLevel += round(-oneYUnit * graphMinYVal);
+  NSLog(@"x-y unit: %f, %f:, axisLevel: %f", oneXUnit, oneYUnit, axisLevel);
   xUnitSize = oneXUnit;
   if (xUnitSize < minXUnitSize)
     {
@@ -115,7 +115,7 @@
             {
               float y;
           
-              y = minYPos + i * yUnitSize;
+              y = round(minYPos + i * yUnitSize);
               [NSBezierPath strokeRect: NSMakeRect(minXPos, y, boundsRect.size.width, 0)];
             }
           }
@@ -127,7 +127,7 @@
           {
             float x;
         
-            x = minXPos + i * xUnitSize;
+            x = round(minXPos + i * xUnitSize);
             [NSBezierPath strokeRect: NSMakeRect(x, minYPos, 0, boundsRect.size.height)];
           }
         steps = availableHeight / yUnitSize;
