@@ -4,6 +4,7 @@
 	Actions = (
 	    "setAxisColor:",
 	    "setBackgroundColor:",
+	    "setGridStyle:",
 	    "changePlot:",
 	    "changeChartType:",
 	    "changeSeries1Color:",
@@ -26,6 +27,7 @@
 	    "orderFrontFontPanel:",
 	    "setAxisColor:",
 	    "setBackgroundColor:",
+	    "setGridStyle:",
 	    "showPrefPanel:"
 	);
 	Super = NSObject;
