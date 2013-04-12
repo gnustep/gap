@@ -54,6 +54,11 @@ typedef enum
   
   OKGridStyle gridStyle;
 
+  float marginRight;
+  float marginLeft;
+  float marginTop;
+  float marginBottom;
+
   float graphMinYVal;
   float graphMaxYVal;
   float graphMaxXVal;
