@@ -3,7 +3,7 @@
    
    Chart: Generic chart superclass
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2013 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -39,9 +39,13 @@
     {
       backgroundColor = [[NSColor whiteColor] retain];
       axisColor = [[NSColor blackColor] retain];
-      gridColor = [[NSColor grayColor] retain];
+      gridColor = [[NSColor lightGrayColor] retain];
       gridStyle = OKGridBoth;
       seriesArray = [[NSMutableArray alloc] initWithCapacity: 1];
+      marginRight = 5;
+      marginLeft = 5;
+      marginTop = 5;
+      marginBottom = 5;
     }
   return self;
 }
