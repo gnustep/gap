@@ -1,0 +1,4 @@
+2013-04-12 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel.m (update)
+	Fix leak of file descriptor on linux.

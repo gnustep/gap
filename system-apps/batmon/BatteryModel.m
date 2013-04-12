@@ -684,6 +684,7 @@
 	      }
 	    batteryState = BMBStateUnknown;
 	  }
+	fclose(stateFile);
       }
     else if (useACPIproc)
       {
@@ -781,6 +782,7 @@
 	    isCharging = NO;
 	    batteryState = BMBStateDischarging;
 	  }
+	fclose(stateFile);
       }
     else if (useAPM)
       {
