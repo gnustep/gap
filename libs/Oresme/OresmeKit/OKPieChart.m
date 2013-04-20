@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2012 Free Software Foundation
+   Copyright (C) 2012-2013 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -33,7 +33,7 @@
 -(void)drawRect: (NSRect)rect
 {
   NSRect boundsRect;
-  unsigned i, j;
+  unsigned i;
   float availableHeight;
   float availableWidth;
   float radius;
@@ -46,13 +46,14 @@
   /* the super method will have calculated the limits */
   [super drawRect: rect];
   boundsRect = [self bounds];
-  availableHeight = boundsRect.size.height * 0.9;
-  availableWidth = boundsRect.size.width * 0.9;
+  availableHeight = boundsRect.size.height - (marginTop + marginBottom);
+  availableWidth = boundsRect.size.width - (marginLeft + marginRight);
+
   radius = availableWidth / 2;
   if (availableHeight < availableWidth)
     radius = availableHeight / 2;
 
-  center = NSMakePoint(boundsRect.size.width / 2, boundsRect.size.height / 2);
+  center = NSMakePoint(marginLeft + availableWidth / 2, marginBottom + availableHeight / 2);
 
   NSLog(@"draw Pie chart! radius: %f", radius);
 
