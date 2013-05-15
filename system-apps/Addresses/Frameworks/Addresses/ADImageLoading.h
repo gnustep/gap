@@ -4,6 +4,8 @@
 // 
 // Address Book API for GNUstep
 // 
+#ifndef ADIMAGELOADING_H
+#define ADIMAGELOADING_H
 
 #import <Addresses/Addresses.h>
 
@@ -36,3 +38,5 @@
 - (BOOL) setImageDataType: (NSString*) type;
 @end
 #endif
+
+#endif //ADIMAGELOADING_H

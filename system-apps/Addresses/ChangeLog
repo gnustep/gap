@@ -1,3 +1,7 @@
+2013-05-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Frameworks/Addresses/ADImageLoading.h
+	  add safeguard to prevent double inclusion
+
 2013-02-23 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Frameworks/AddressView/ADImageView.m
 	* Frameworks/AddressView/ADPersonPropertyView+Events.m
