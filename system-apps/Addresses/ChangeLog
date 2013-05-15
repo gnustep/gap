@@ -1,8 +1,8 @@
 2013-05-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Frameworks/Addresses/ADImageLoading.h
 	  add safeguard to prevent double inclusion
-	* GNUmakefile 
-	  VERSION=0.4.9
+	* GNUmakefile, AddressManager/AddressManagerInfo.plist 
+	  VERSION 0.4.9
 
 2013-02-23 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Frameworks/AddressView/ADImageView.m

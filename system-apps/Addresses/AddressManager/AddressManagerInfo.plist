@@ -1,7 +1,7 @@
 {
 ApplicationDescription = "An Address Book.";
 ApplicationName = "AddressManager";
-ApplicationRelease = "0.4.8";
+ApplicationRelease = "0.4.9";
 ApplicationURL = "http://gap.nongnu.org/addresses/";
 NSIcon = "AddressManager.tiff";
 Authors = ("The Team of the GNUstep Application Project", "Riccardo Mottola", "Philippe Roussel", "Bj\u00f6rn Giesler <bjoern@giesler.de>");
