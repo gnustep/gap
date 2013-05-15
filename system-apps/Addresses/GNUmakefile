@@ -2,7 +2,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = Addresses
 CVS_MODULE_NAME = Addresses
-VERSION = 0.4.8
+VERSION = 0.4.9
 
 SUBPROJECTS =     \
    Frameworks     \
