@@ -73,9 +73,9 @@
 
 @interface SourcePeg : Peg
 
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)flag;
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag;
 
-- makeDragImageForColor:(int)val withComponents:(float *)thecomps;
+- makeDragImageForColor:(int)val withComponents:(CGFloat *)thecomps;
 
 - (void)mouseDown:(NSEvent *)theEvent;
 

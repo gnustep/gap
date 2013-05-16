@@ -41,20 +41,20 @@
 
 #include <math.h>
 
-void shadow(float x, float y, float r)
+void shadow(CGFloat x, CGFloat y, CGFloat r)
 {
-  int angle;
+  CGFloat angle;
   NSBezierPath *path;
 
   // Todo: see if it can be stroked outisde the loop
   for(angle=132; angle<492; angle+=6)
     {
-      float gray;
+      CGFloat gray;
       path = [[NSBezierPath alloc] init];
       [path setLineWidth: 2.0];
       gray =
-	(angle < 312 ? 0.9-(float)(angle-132)/180.0*0.8 :
-	 0.1+(float)(angle-312)/180.0*0.8);
+	(angle < 312 ? 0.9-(CGFloat)(angle-132)/180.0*0.8 :
+	 0.1+(CGFloat)(angle-312)/180.0*0.8);
       [[NSColor colorWithDeviceWhite:gray alpha:1.0] set];
       [path appendBezierPathWithArcWithCenter: NSMakePoint(x, y)
 				       radius: r
@@ -65,20 +65,20 @@ void shadow(float x, float y, float r)
     }
 }
 
-void shadow2(float x, float y, float r)
+void shadow2(CGFloat x, CGFloat y, CGFloat r)
 {
-  int angle;
+  CGFloat angle;
   NSBezierPath *path;
 
   for(angle=312; angle<672; angle+=6)
     {
-      float gray;
+      CGFloat gray;
       path = [[NSBezierPath alloc] init];
       [path setLineWidth: 2.0];
 
       gray =
-	(angle < 492 ? 0.9-(float)(angle-312)/180.0*0.8 :
-	 0.1+(float)(angle-492)/180.0*0.8);
+	(angle < 492 ? 0.9-(CGFloat)(angle-312)/180.0*0.8 :
+	 0.1+(CGFloat)(angle-492)/180.0*0.8);
       [[NSColor colorWithDeviceWhite:gray alpha:1.0] set];
       [path appendBezierPathWithArcWithCenter: NSMakePoint(x, y)
 				       radius: r
@@ -94,7 +94,7 @@ void tile(NSRect rect)
     NSRectEdge sides[] = {
 	NSMinXEdge, NSMaxXEdge, NSMinYEdge, NSMaxYEdge,
 	NSMinXEdge, NSMaxXEdge, NSMinYEdge, NSMaxYEdge};
-    float grays[] = {
+    CGFloat grays[] = {
 	NSWhite, NSBlack, NSBlack, NSWhite,
 	NSWhite, NSBlack, NSBlack, NSWhite};
     NSDrawTiledRects(rect, rect, sides, grays, 8);
@@ -139,7 +139,7 @@ void tile(NSRect rect)
     
     for(index=0; index<4; index++)
 {
-        float 
+        CGFloat 
             x = PEGDIMENSION/4+(index%2)*PEGDIMENSION/2,
             y = PEGDIMENSION/4+(index/2)*PEGDIMENSION/2;
         NSColor *col = 
@@ -198,7 +198,7 @@ void tile(NSRect rect)
 
 - setColor:(NSColor *)aColor
 {
-    float thecomps[4];
+    CGFloat thecomps[4];
 
     if(color!=nil){
         [color release];
@@ -233,7 +233,7 @@ void tile(NSRect rect)
 
 - setCValue:(int)cval
 {
-    float thecomps[3];
+    CGFloat thecomps[3];
 
     if(color!=nil){
         [color release];
@@ -293,7 +293,7 @@ void tile(NSRect rect)
 
 @implementation SourcePeg
 
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)flag
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag
 {
     return NSDragOperationCopy;
 }
@@ -303,7 +303,7 @@ static NSImage *dragImages[8] = {
     nil, nil, nil, nil
 };
 
-- makeDragImageForColor:(int)val withComponents:(float *)thecomps
+- makeDragImageForColor:(int)val withComponents:(CGFloat *)thecomps
 {
     NSImage *dragImage = 
       [[NSImage alloc] 
@@ -311,13 +311,13 @@ static NSImage *dragImages[8] = {
     NSBitmapImageRep *rep;
     unsigned char *base, *data;
     int x, y;
-    float rsq, rsq1, d, dx, dy;
+    CGFloat rsq, rsq1, d, dx, dy;
 
     rsq = DRAGDIMENSION/2-2; rsq *= rsq;
     rsq1 = DRAGDIMENSION/2; rsq1 *= rsq1;
 
     rep = [[NSBitmapImageRep alloc]
-              initWithBitmapDataPlanes:nil
+              initWithBitmapDataPlanes:NULL
               pixelsWide:DRAGDIMENSION
               pixelsHigh:DRAGDIMENSION
               bitsPerSample:8
@@ -331,7 +331,7 @@ static NSImage *dragImages[8] = {
 
     for(x=0; x<DRAGDIMENSION; x++){
         for(y=0; y<DRAGDIMENSION; y++){
-            float ccomps[4];
+            CGFloat ccomps[4];
 
             dx = x-DRAGDIMENSION/2;
             dy = y-DRAGDIMENSION/2;
@@ -345,16 +345,16 @@ static NSImage *dragImages[8] = {
                 ccomps[3] = 1.0;
             }
             else if(d<rsq1){
-		float gray;
-		float angle = (atan2(dy, -dx)+M_PI)/M_PI*180.0;
+		CGFloat gray;
+		CGFloat angle = (atan2(dy, -dx)+M_PI)/M_PI*180.0;
 		if(angle<132.0){
 		    angle += 360.0;
 		}
-		angle -= (float)(((int)angle)%6);
+		angle -= (CGFloat)(((int)angle)%6);
 
 		gray =
 		    (angle < 312.0 ? 0.9-(angle-132.0)/180.0*0.8 :
-		     0.1+(float)(angle-312.0)/180.0*0.8);
+		     0.1+(CGFloat)(angle-312.0)/180.0*0.8);
 
                 ccomps[0] = gray;
                 ccomps[1] = gray;
@@ -387,7 +387,7 @@ static NSImage *dragImages[8] = {
 {
     NSEventType theType = [theEvent type];
     NSPoint startp;
-    float dx, dy, rsq, thecomps[4];
+    CGFloat dx, dy, rsq, thecomps[4];
 
     if(color==nil){
         return;
@@ -485,7 +485,7 @@ static NSImage *dragImages[8] = {
     if([[pb types] indexOfObject:NSColorPboardType]!=NSNotFound){
         if(sourceDragMask & NSDragOperationCopy){
             NSColor *col = [NSColor colorFromPasteboard:pb], *rgb;
-            float ccomps[4];
+            CGFloat ccomps[4];
 
             rgb = [col colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 
@@ -496,7 +496,7 @@ static NSImage *dragImages[8] = {
                (ccomps[1]==0.0 || ccomps[1]==1.0) &&
                (ccomps[2]==0.0 || ccomps[2]==1.0) &&
                ccomps[3]==1.0){
-                float s = ccomps[0]+ccomps[1]+ccomps[2];
+                CGFloat s = ccomps[0]+ccomps[1]+ccomps[2];
                 if(s==1.0 || s==2.0){
                     return NSDragOperationCopy;
                 }
