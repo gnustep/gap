@@ -1,7 +1,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = LapisPuzzle
-VERSION = 1.2
+VERSION = 1.3
 APP_NAME = LapisPuzzle
 
 LapisPuzzle_MAIN_MODEL_FILE = LapisPuzzle.gorm
