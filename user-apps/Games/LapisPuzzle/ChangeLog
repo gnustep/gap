@@ -4,7 +4,8 @@
 	* GNUMakefile, LapisPuzzleInfo.plist, Info.plist
 	  version bump to 1.3 
 	* LapisPuzzle.gorm, update to newer version, move
-	  the Info submenu to top
+	  the Info submenu to top, add key combination for
+	  new game
 
 2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* LPController.m
