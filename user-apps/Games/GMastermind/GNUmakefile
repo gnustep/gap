@@ -2,7 +2,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 # The application to be compiled
-VERSION = 0.6
+VERSION = 0.7
 PACKAGE_NAME = GMastermind
 APP_NAME = GMastermind
 GMastermind_APPLICATION_ICON = GMastermind.tiff

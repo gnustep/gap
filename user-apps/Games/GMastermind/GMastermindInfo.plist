@@ -1,10 +1,10 @@
 {
   ApplicationName = "GMastermind";
   ApplicationDescription = "GNUstep mastermind game";
-  ApplicationRelease = "0.6";
-  FullVersionID = "0.6";
-  Authors = ("Marko Riedel <mriedel@neuearbeit.de>");
-  Copyright = "Copyright (C) 2002-2011 Free Software Foundation, Inc.";
+  ApplicationRelease = "0.7";
+  FullVersionID = "0.7";
+  Authors = ("GAP Team","Marko Riedel <mriedel@neuearbeit.de>");
+  Copyright = "Copyright (C) 2002-2013 Free Software Foundation, Inc.";
   CopyrightDescription = "Released under the GNU General Public License 2.0";
   NSIcon = "GMastermind.tiff";
   NSMainNibFile = GMastermind.gorm;
