@@ -186,9 +186,9 @@
                     SourcePeg *speg = 
                         [[SourcePeg alloc] initAtPoint:spoint];
                     NSColor *col =
-                        [NSColor colorWithDeviceRed:(float)rcol
-                                 green:(float)gcol
-                                 blue:(float)bcol
+                        [NSColor colorWithDeviceRed:(CGFloat)rcol
+                                 green:(CGFloat)gcol
+                                 blue:(CGFloat)bcol
                                  alpha:1.0];
                     [speg setColor:col];
                     [view addSubview:speg];
@@ -331,7 +331,7 @@
 {
     int col;
     int aCombo[4];
-    float thecomps[4];
+    CGFloat thecomps[4];
     int white, black;
 
     for(col=0; col<4; col++){
@@ -386,9 +386,9 @@
         for(col=0; col<4; col++){
             int c = combo[col];
             NSColor *color = 
-                [NSColor colorWithDeviceRed:(float)(c & 4 ? 1 : 0)
-                         green:(float)(c & 2 ? 1 : 0)
-                         blue:(float)(c & 1 ? 1 : 0)
+                [NSColor colorWithDeviceRed:(CGFloat)(c & 4 ? 1 : 0)
+                         green:(CGFloat)(c & 2 ? 1 : 0)
+                         blue:(CGFloat)(c & 1 ? 1 : 0)
                          alpha:1.0];
             [sol[col] setColor:color];
         }
