@@ -1,10 +1,10 @@
 {
   ApplicationName = "Jigsaw";
   ApplicationDescription = "A GNUstep Jigsaw Puzzle Program";
-  ApplicationRelease = "0.8";
-  FullVersionID = "0.8";
-  Authors = ("Marko Riedel <markoriedelde@yahoo.de>");
-  Copyright = "Copyright (C) 2007-2011 Free Software Foundation, Inc.";
+  ApplicationRelease = "0.9";
+  FullVersionID = "0.9";
+  Authors = ("GAP Team","Marko Riedel <markoriedelde@yahoo.de>");
+  Copyright = "Copyright (C) 2007-2013 Free Software Foundation, Inc.";
   CopyrightDescription = "Released under the GNU General Public License 2.0";
   NSIcon = "GPuzzle2.tiff";
   NSTypes = (

@@ -1,3 +1,7 @@
+2013-05-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* JigsawInfo.plist, GNUmakefile
+	  update version, bump copyright year, ...
+
 2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* all .h, .m
 	  float -> CGFloat, int -> NSInteger transitions
