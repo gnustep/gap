@@ -8,7 +8,7 @@ ADDITIONAL_OBJC_LIBS += -lgcov
 endif
 
 srcdir = .
-VERSION = 0.4
+VERSION = 0.5
 PACKAGE_NAME = RSSKit
 
 # The library to be compiled
