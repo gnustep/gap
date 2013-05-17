@@ -69,7 +69,7 @@
  * the specified index for the given item.
  */
 - (id)outlineView: (NSOutlineView *)outlineView
-            child: (int)index
+            child: (NSInteger)index
            ofItem: (id)item;
 
 /**
@@ -83,7 +83,7 @@
  * This is a required method.  Returns the number of children of
  * the given item.
  */
-- (int)outlineView: (NSOutlineView *)outlineView
+- (NSInteger)outlineView: (NSOutlineView *)outlineView
 numberOfChildrenOfItem: (id)item;
 
 /**

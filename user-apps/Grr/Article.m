@@ -62,15 +62,15 @@ NSString* const ArticleReadFlagChangedNotification = @"ArticleReadFlagChangedNot
 /**
  * Designated initializer
  */
--(id)initWithHeadline: (NSString*) headline
-                  url: (NSString*) url
-          description: (NSString*) description
-                 date: (NSDate*) date
+-(id)initWithHeadline: (NSString*) _headline
+                  url: (NSString*) _url
+          description: (NSString*) _description
+                 date: (NSDate*) _date
 {
-    if((self = [super initWithHeadline: headline
-                                   url: url
-                           description: description
-                                  date: date]) != nil) {
+    if((self = [super initWithHeadline: _headline
+                                   url: _url
+                           description: _description
+                                  date: _date]) != nil) {
         _read = NO;
     }
     

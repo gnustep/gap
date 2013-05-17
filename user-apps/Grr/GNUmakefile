@@ -19,7 +19,7 @@ ADDITIONAL_CPPFLAGS += -Wall
 endif
 
 
-VERSION = 1.0
+VERSION = 1.1
 APP_NAME = Grr
 PACKAGE_NAME = Grr
 

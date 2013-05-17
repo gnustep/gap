@@ -54,10 +54,10 @@ extern NSString* const ArticleReadFlagChangedNotification;
 /**
  * Designated initializer
  */
--(id)initWithHeadline: (NSString*) headline
-                  url: (NSString*) url
-          description: (NSString*) description
-                 date: (NSDate*) date;
+-(id)initWithHeadline: (NSString*) _headline
+                  url: (NSString*) _url
+          description: (NSString*) _description
+                 date: (NSDate*) _date;
 
 // Getter and setter for read variable
 -(void)setRead: (BOOL)isRead;
