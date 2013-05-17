@@ -79,7 +79,7 @@
     pClass = [bundle principalClass];
     
     if ([pClass respondsToSelector: @selector(shared)]) {
-        return [pClass shared];
+        return [pClass performSelector:@selector(shared)];
     } else {
         return [pClass new];
     }

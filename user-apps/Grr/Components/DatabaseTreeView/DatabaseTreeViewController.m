@@ -238,7 +238,7 @@ static NSImage* arrowDown = nil;
  * the specified index for the given item.
  */
 - (id)outlineView: (NSOutlineView *)outlineView
-            child: (int)index
+            child: (NSInteger)index
            ofItem: (id)item
 {
     if (item == nil) {
@@ -277,7 +277,7 @@ static NSImage* arrowDown = nil;
  * This is a required method.  Returns the number of children of
  * the given item.
  */
-- (int)outlineView: (NSOutlineView *)outlineView
+- (NSInteger)outlineView: (NSOutlineView *)outlineView
 numberOfChildrenOfItem: (id)item
 {
     if (item == nil) {
@@ -436,7 +436,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 - (NSDragOperation)outlineView: (NSOutlineView*)outlineView
                   validateDrop: (id <NSDraggingInfo>)info
                   proposedItem: (id)item
-            proposedChildIndex: (int)index
+            proposedChildIndex: (NSInteger)index
 {
     NSPasteboard* pboard = [info draggingPasteboard];
     
@@ -453,7 +453,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 - (BOOL)outlineView: (NSOutlineView *)theOutlineView
          acceptDrop: (id <NSDraggingInfo>)info
                item: (id)item
-         childIndex: (int)index
+         childIndex: (NSInteger)index
 {
     NSPasteboard* pboard = [info draggingPasteboard];
     if ([[pboard types] containsObject: DatabaseElementRefPboardType]) {

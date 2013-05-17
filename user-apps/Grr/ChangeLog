@@ -1,3 +1,10 @@
+2013-05-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Components/DatabaseTreeView/DatabaseTreeViewController.[h|m]
+	* NSBundle+Extensions.m
+	* Article.[h|m]
+	  NS(U)Integer transitions
+	* GNUMakefile, *plist, bump to 1.1
+
 2013-02-24 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Components/ArticleTable/ArticleTablePlugin.h
 	* Components/ArticleView/ArticleTextViewPlugin.m

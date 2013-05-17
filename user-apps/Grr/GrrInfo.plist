@@ -1,7 +1,7 @@
 {
     ApplicationDescription = "G\U00FCnthers reliable RSS Reader";
     ApplicationName = Grr;
-    ApplicationRelease = 1.0;
+    ApplicationRelease = 1.1;
     ApplicationIcon = Grr-Icon;
     NSIcon = Grr-Icon;
     Authors = (
@@ -10,7 +10,7 @@
         "Riccardo Mottola"
     );
     URL = "http://gap.nongnu.org/grr/";
-    Copyright = "Copyright GNUstep Application Project team 2006-2012";
+    Copyright = "Copyright GNUstep Application Project team 2006-2013";
     CopyrightDescription = "Released under the terms of the GNU General Public License";
     NSTypes = (
 	{
