@@ -26,6 +26,7 @@
 
 #import "fileTable.h"
 #import "fileElement.h"
+#import "AppController.h"
 
 /* we sort the already existing sorted array which contains only the keys to sort on */
 NSComparisonResult compareDictElements(id e1, id e2, void *context)
@@ -145,6 +146,49 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
         NSLog(@"unknown table column ident");
     return theElement;
 }
+
+/* --- drag and drop ---  */
+- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation
+{
+  NSPasteboard *pboard;
+
+
+  pboard = [info draggingPasteboard];
+  if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+      NSArray *paths;
+
+      paths = [pboard propertyListForType:NSFilenamesPboardType];
+      if ([paths count] > 0)
+        {
+          if ([[aTableView target] dropValidate:self paths:paths])
+            return NSDragOperationEvery;
+        }
+    }
+
+  return NSDragOperationNone;
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
+{
+  NSPasteboard *pboard;
+
+
+  pboard = [info draggingPasteboard];
+  if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+      NSArray *paths;
+
+      paths = [pboard propertyListForType:NSFilenamesPboardType];
+      if ([paths count] > 0)
+        {
+          [[aTableView target] dropAction:self paths:paths];
+        }
+    }
+  
+  return NO;
+}
+
 
 @end
 

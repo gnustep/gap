@@ -1,4 +1,5 @@
-/* 
+/* -*- mode: objc -*-
+
    Project: FTP
 
    Copyright (C) 2005-2013 Riccardo Mottola
@@ -92,6 +93,8 @@
 
 - (IBAction)changePathFromMenu:(id)sender;
 - (IBAction)listDoubleClick:(id)sender;
+- (BOOL)dropValidate:(id)sender paths:(NSArray *)paths;
+- (void)dropAction:(id)sender paths:(NSArray *)paths;
 - (IBAction)downloadButton:(id)sender;
 - (IBAction)uploadButton:(id)sender;
 - (IBAction)localDelete:(id)sender;
