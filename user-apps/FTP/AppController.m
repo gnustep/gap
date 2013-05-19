@@ -107,6 +107,10 @@
     [remoteView setTarget:self];
     [remoteView setDoubleAction:@selector(listDoubleClick:)];
     
+    /* initialize drag-n-drop code */
+    [localView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+    [remoteView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+
     /* startup code */
     local = [[LocalClient alloc] init];
     [local setWorkingDir:[local homeDir]];
@@ -227,7 +231,6 @@
     }
     
     theView = sender;
-    NSLog(@"%@", [theView class]);
     if (theView == localView)
     {
         theClient = local;
@@ -274,17 +277,47 @@
     }
 }
 
+- (BOOL)dropValidate:(id)sender paths:(NSArray *)paths
+{
+  NSLog(@"%@ AppController dropValidate %@", [sender className], paths);
+
+  if (threadRunning)
+    {
+      NSLog(@"thread was still running");
+      return NO;
+    }
+
+  if (sender == localTableData)
+    {
+      NSLog(@"sender is local %u", [paths count]);
+      /* the local view opens the file or the directory, it can be just one */
+      if ([paths count] != 1)
+        return NO;
+    }
+
+  return YES;
+}
+
+- (void)dropAction:(id)sender paths:(NSArray *)paths
+{
+  NSLog(@"AppController dropAction: %@", paths);
+  if (sender == localTableData)
+    {
+    }
+  else if (sender == remoteTableData)
+    {
+    }
+}
+
 - (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
   if (tableView == localView)
     {
-      NSLog(@"local");
       [localTableData sortByIdent: [tableColumn identifier]];
       [localView reloadData];
     }
   else
     {
-      NSLog(@"remote");
       [remoteTableData sortByIdent: [tableColumn identifier]];
       [remoteView reloadData];
     }
@@ -626,6 +659,7 @@
 
   [attrStr autorelease];
 }
+
 
 /* --- connection panel methods --- */
 - (IBAction)showConnPanel:(id)sender

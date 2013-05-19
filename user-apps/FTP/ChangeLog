@@ -1,3 +1,10 @@
+2013-05-19 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	* fileTable.m
+	Enable and detect drag-n-drop, do not do anything yet.
+
 2013-03-18 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
