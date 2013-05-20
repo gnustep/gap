@@ -75,7 +75,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
       fe = [fileStructs objectAtIndex: i];
       n = [NSNumber numberWithInt: i];
       dict = [NSMutableDictionary dictionary];
-      [dict setObject: [fe filename] forKey: @"name"];
+      [dict setObject: [fe name] forKey: @"name"];
       [dict setObject: n forKey: @"row"];
       [sortedArray addObject: dict];
     }
@@ -141,7 +141,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
     NSParameterAssert(rowIndex >= 0 && rowIndex < [sortedArray count]);
     originalRow = [[[sortedArray objectAtIndex: rowIndex] objectForKey: @"row"] intValue];
     if ([[aTableColumn identifier] isEqualToString:TAG_FILENAME])
-        theElement = [[fileStructs objectAtIndex:originalRow] filename];
+        theElement = [[fileStructs objectAtIndex:originalRow] name];
     else
         NSLog(@"unknown table column ident");
     return theElement;

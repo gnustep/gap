@@ -1,3 +1,13 @@
+2013-05-21 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	* fileElement.h
+	* fileElement.m
+	* fileTable.m
+	* ftpclient.m
+	* localclient.m
+	Give path and name accessors to FileElement, initialize it with full path when local.
+
 2013-05-19 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h

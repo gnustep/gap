@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2012 Riccardo Mottola
+ Copyright (C) 2005-2013 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -31,14 +31,15 @@
 
 - (void)dealloc
 {
-    [filename release];
-    [super dealloc];
+  [fileName release];
+  [filePath release];
+  [super dealloc];
 }
 
 /*
  initialize a file element using attrbutes of NSFileManager
  */
-- (id)initWithFileAttributes :(NSString *)fname :(NSDictionary *)attribs
+- (id)initWithPath:(NSString *)path andAttributes:(NSDictionary *)attribs
 {
   self = [super init];
   if (self)
@@ -50,7 +51,8 @@
       else
         isDir = NO;
       isLink = NO;
-      filename = [fname retain];
+      filePath = [path retain];
+      fileName = [[filePath lastPathComponent] retain];
     }
   return self;
 }
@@ -158,7 +160,8 @@
     if (strstr(line, "feof") == line)
         return nil;
 
-    filename = nil;
+    fileName = nil;
+    filePath = nil;
     linkTargetName = nil;
     isLink = NO;
     isDir = NO;
@@ -294,13 +297,13 @@
 	    linkArrowRange = [[splitLine objectAtIndex:8] rangeOfString: @" -> "];
 	    if (linkArrowRange.location == NSNotFound)
 	      {
-		filename = [[splitLine objectAtIndex:8] retain];
+		fileName = [[splitLine objectAtIndex:8] retain];
 	      }
 	    else
 	      {
                 isLink = YES;
 		size = 0;
-		filename = [[[splitLine objectAtIndex:8] substringToIndex: linkArrowRange.location] retain];
+		fileName = [[[splitLine objectAtIndex:8] substringToIndex: linkArrowRange.location] retain];
 		linkTargetName = [[[splitLine objectAtIndex:8] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
 		NSLog(@"we have a link (1) %@", linkTargetName);
 	      }
@@ -321,13 +324,13 @@
             linkArrowRange = [[splitLine objectAtIndex:7] rangeOfString: @" -> "];
 	    if (linkArrowRange.location == NSNotFound)
 	      {
-		filename = [[splitLine objectAtIndex:7] retain];
+		fileName = [[splitLine objectAtIndex:7] retain];
 	      }
 	    else
 	      {
                 isLink = YES;
 		size = 0;
-		filename = [[[splitLine objectAtIndex:7] substringToIndex: linkArrowRange.location] retain];
+		fileName = [[[splitLine objectAtIndex:7] substringToIndex: linkArrowRange.location] retain];
 		linkTargetName = [[[splitLine objectAtIndex:7] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
 		NSLog(@"we have a link (2) %@", linkTargetName);
 	      }
@@ -406,7 +409,7 @@
 	  size = (unsigned long long)tempLL;
 	else
 	  size = 0;
-        filename = [[splitLine objectAtIndex:5] retain];
+        fileName = [[splitLine objectAtIndex:5] retain];
 
     } else
     {
@@ -415,24 +418,30 @@
     }
     
     /* let's ignore the current and the parent directory some servers send over... */
-    if([filename isEqualToString:@"."])
+    if([fileName isEqualToString:@"."])
         return nil;
-    else if([filename isEqualToString:@".."])
+    else if([fileName isEqualToString:@".."])
         return nil;
 
     if (isLink)
       {
 	NSLog(@"size: %llu", size);
-	NSLog(@"filename: %@", filename);
+	NSLog(@"filename: %@", fileName);
       }
     }
   return self;
 }
 
 /* accessors */
-- (NSString *)filename
+- (NSString *)name
 {
-  return self->filename;
+  return self->fileName;
+}
+
+- (NSString *)path
+{
+  
+  return self->filePath;
 }
 
 - (NSString *)linkTargetName

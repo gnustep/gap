@@ -250,9 +250,9 @@
         return;
     }
     fileEl = [theTable elementAtIndex:elementIndex];
-    NSLog(@"element: %@ %d", [fileEl filename], [fileEl isDir]);
+    NSLog(@"element: %@ %d", [fileEl name], [fileEl isDir]);
     thePath = [NSString stringWithString:[theClient workingDir]];
-    thePath = [thePath stringByAppendingPathComponent: [fileEl filename]];
+    thePath = [thePath stringByAppendingPathComponent: [fileEl name]];
     if ([fileEl isDir])
       {
         [theClient changeWorkingDir:thePath];
@@ -353,7 +353,7 @@
     while ((currEl = [elemEnum nextObject]) != nil)
     {
         fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
-        NSLog(@"should download: %@", [fileEl filename]);
+        NSLog(@"should download: %@", [fileEl name]);
         [ftp retrieveFile:fileEl to:local beingAt:0];
     }
     
@@ -374,7 +374,7 @@
     while ((currEl = [elemEnum nextObject]) != nil)
     {
         fileEl = [localTableData elementAtIndex:[currEl intValue]];
-        NSLog(@"should upload (performStore): %@", [fileEl filename]);
+        NSLog(@"should upload (performStore): %@", [fileEl name]);
         [ftp storeFile:fileEl from:local beingAt:0];
     }
     
