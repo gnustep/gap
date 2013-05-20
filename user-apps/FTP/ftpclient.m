@@ -407,7 +407,7 @@ int getChar(streamStruct* ss)
     NSString           *localPath;
     BOOL               gotFile;
 
-    fileName = [file filename];
+    fileName = [file name];
     fileSize = [file size];
     minimumPercentIncrement = fileSize / 100; // we should guard against maxint
 
@@ -442,7 +442,7 @@ int getChar(streamStruct* ss)
             en = [dirList objectEnumerator];
             while ((fEl = [en nextObject]))
             {
-                NSLog(@"recurse, download : %@", [fEl filename]);
+                NSLog(@"recurse, download : %@", [fEl name]);
                 [self retrieveFile:fEl to:localClient beingAt:depth+1];
             }
         }
@@ -582,11 +582,11 @@ int getChar(streamStruct* ss)
     NSString           *localPath;
     BOOL               gotFile;
 
-    fileName = [file filename];
+    fileName = [file name];
     fileSize = [file size];
     minimumPercentIncrement = fileSize / 100; // we should guard against maxint
 
-    localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
+    localPath = [file path];
 
     if ([file isDir])
     {
@@ -620,7 +620,7 @@ int getChar(streamStruct* ss)
             en = [dirList objectEnumerator];
             while ((fEl = [en nextObject]))
             {
-                NSLog(@"recurse, upload : %@", [fEl filename]);
+                NSLog(@"recurse, upload : %@", [fEl name]);
                 [self storeFile:fEl from:localClient beingAt:(depth+1)];
             }
         }
@@ -719,7 +719,7 @@ int getChar(streamStruct* ss)
     NSMutableArray     *reply;
     int                replyCode;
 
-    fileName = [file filename];
+    fileName = [file name];
 
     if ([file isDir])
     {
@@ -747,7 +747,7 @@ int getChar(streamStruct* ss)
         en = [dirList objectEnumerator];
         while ((fEl = [en nextObject]))
         {
-            NSLog(@"recurse, delete : %@", [fEl filename]);
+            NSLog(@"recurse, delete : %@", [fEl name]);
             [self deleteFile:fEl beingAt:(depth+1)];
         }
 

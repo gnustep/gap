@@ -92,7 +92,7 @@
 
         p = [workingDir stringByAppendingPathComponent:fileName];
         attr = [fm fileAttributesAtPath :p traverseLink:YES];
-        aFile = [[FileElement alloc] initWithFileAttributes:fileName :attr];
+        aFile = [[FileElement alloc] initWithPath:p andAttributes:attr];
         [listArr addObject:aFile];
     }
     return [NSArray arrayWithArray:listArr];
@@ -105,7 +105,7 @@
     NSFileManager      *fm;
 
     fm = [NSFileManager defaultManager];
-    fileName = [file filename];
+    fileName = [file name];
     localPath = [[self workingDir] stringByAppendingPathComponent:fileName];
 
     if ([fm removeFileAtPath:(NSString *)localPath handler:nil] == NO)
