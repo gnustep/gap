@@ -132,6 +132,7 @@
 /* internal methods */
 - (void)performRetrieveFile;
 - (void)performStoreFile;
+- (void)storeFiles:(NSArray *)files;
 
 @end
 

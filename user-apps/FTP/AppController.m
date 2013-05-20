@@ -279,8 +279,6 @@
 
 - (BOOL)dropValidate:(id)sender paths:(NSArray *)paths
 {
-  NSLog(@"%@ AppController dropValidate %@", [sender className], paths);
-
   if (threadRunning)
     {
       NSLog(@"thread was still running");
@@ -300,13 +298,35 @@
 
 - (void)dropAction:(id)sender paths:(NSArray *)paths
 {
+  NSUInteger i;
+  NSFileManager *fm;
+  NSMutableArray *arr;
+
+  arr = [[NSMutableArray alloc] initWithCapacity:[paths count]];
+  fm = [NSFileManager defaultManager];
+  for (i = 0; i < [paths count]; i++)
+    {
+      NSDictionary *attr;
+      NSString *path;
+      FileElement *fEl;
+
+      path = [paths objectAtIndex:i];
+      attr = [fm fileAttributesAtPath:path traverseLink:YES];
+      fEl = [[FileElement alloc] initWithPath:path andAttributes:attr];
+      [arr addObject:fEl];
+      [fEl release];
+    }
+
   NSLog(@"AppController dropAction: %@", paths);
   if (sender == localTableData)
     {
     }
   else if (sender == remoteTableData)
     {
+      NSLog(@"will upload: %@", arr);
+      [self storeFiles:arr];
     }
+  [arr release];
 }
 
 - (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
@@ -379,6 +399,22 @@
     }
     
     [self setThreadRunningState:NO];
+}
+
+- (void)storeFiles:(NSArray *)files
+{
+  NSUInteger i;
+
+  [self setThreadRunningState:YES];
+  for (i = 0; i < [files count]; i++)
+    {
+      FileElement *fEl;
+
+      fEl = [files objectAtIndex:i];
+      NSLog(@"should upload (performStore): %@", [fEl name]);
+      [ftp storeFile:fEl from:local beingAt:0];
+    }
+  [self setThreadRunningState:NO];
 }
 
 - (IBAction)downloadButton:(id)sender
