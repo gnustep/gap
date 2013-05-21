@@ -382,23 +382,22 @@
 
 - (void)performStoreFile
 {
-    NSEnumerator  *elemEnum;
-    FileElement   *fileEl;
-    id            currEl;
-
-    [self setThreadRunningState:YES];
-
-    // We should actually do a copy of the selection
-    elemEnum = [localView selectedRowEnumerator];
-
-    while ((currEl = [elemEnum nextObject]) != nil)
-    {
-        fileEl = [localTableData elementAtIndex:[currEl intValue]];
-        NSLog(@"should upload (performStore): %@", [fileEl name]);
-        [ftp storeFile:fileEl from:local beingAt:0];
-    }
+  NSMutableArray *selArray;
+  NSEnumerator  *elemEnum;
+  FileElement   *fileEl;
+  id            currEl;
+  
+  /* make a copy of the selection */
+  selArray = [[NSMutableArray alloc] init];
+  elemEnum = [localView selectedRowEnumerator];
     
-    [self setThreadRunningState:NO];
+  while ((currEl = [elemEnum nextObject]) != nil)
+    {
+      fileEl = [localTableData elementAtIndex:[currEl intValue]];
+      [selArray addObject:fileEl];
+    }
+  [self storeFiles:selArray];
+  [selArray release];
 }
 
 - (void)storeFiles:(NSArray *)files
@@ -419,53 +418,53 @@
 
 - (IBAction)downloadButton:(id)sender
 {
-    if (threadRunning)
+  if (threadRunning)
     {
-        NSLog(@"thread was still running");
-        return;
+      NSLog(@"thread was still running");
+      return;
     }
-
-	[self performRetrieveFile];
+  
+  [self performRetrieveFile];
 }
 
 - (IBAction)uploadButton:(id)sender
 {
-    if (threadRunning)
+  if (threadRunning)
     {
-        NSLog(@"thread was still running");
-        return;
+      NSLog(@"thread was still running");
+      return;
     }
-
-	[self performStoreFile];
+  
+  [self performStoreFile];
 }
 
 - (IBAction)localDelete:(id)sender
 {
-    NSEnumerator  *elemEnum;
-    FileElement   *fileEl;
-    id            currEl;
-
-    elemEnum = [localView selectedRowEnumerator];
-    
-    while ((currEl = [elemEnum nextObject]) != nil)
+  NSEnumerator  *elemEnum;
+  FileElement   *fileEl;
+  id            currEl;
+  
+  elemEnum = [localView selectedRowEnumerator];
+  
+  while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [localTableData elementAtIndex:[currEl intValue]];
-        [local deleteFile:fileEl beingAt:0];
+      fileEl = [localTableData elementAtIndex:[currEl intValue]];
+      [local deleteFile:fileEl beingAt:0];
     }
 }
 
 - (IBAction)remoteDelete:(id)sender
 {
-    NSEnumerator  *elemEnum;
-    FileElement   *fileEl;
-    id            currEl;    
-
-    elemEnum = [remoteView selectedRowEnumerator];
-
-    while ((currEl = [elemEnum nextObject]) != nil)
+  NSEnumerator  *elemEnum;
+  FileElement   *fileEl;
+  id            currEl;    
+  
+  elemEnum = [remoteView selectedRowEnumerator];
+  
+  while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
-        [ftp deleteFile:fileEl beingAt:0];
+      fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
+      [ftp deleteFile:fileEl beingAt:0];
     }
 }
 
@@ -672,10 +671,7 @@
  */
 - (void)setServer:(id)anObject
 {
-	ftp = (FtpClient*)[anObject retain];
-	
-	NSLog(@"FTP server object set");
-    return;
+  ftp = (FtpClient*)[anObject retain];
 }
 
 - (void)appendTextToLog:(NSString *)textChunk
