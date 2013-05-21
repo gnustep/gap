@@ -1,5 +1,10 @@
 2013-05-22 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.m (performStoreFile)
+	Also for button upload action, extract an array from the selectionand upload it.
+
+2013-05-21 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.h
 	* AppController.m
 	Upload dragged files.
