@@ -102,4 +102,27 @@ enum
     return [super performKeyEquivalent:theEvent];
 }
 
+- (void)updatePrintInfo: (NSPrintInfo *)pi;
+{
+  float lm, rm;
+  NSRect pageRect;
+
+  if (pi == nil)
+    {
+      NSLog(@"invalid printer information");
+      return;
+    }
+  lm = [pi leftMargin];
+  rm = [pi rightMargin];
+  if (lm <= 0 || rm <= 0 || [pi paperSize].width <= 0 || [pi paperSize].height <= 0)
+    {
+      NSLog(@"invalid margin / paper size information. %f %f %f %f", lm, rm,[pi paperSize].width, [pi paperSize].height);
+      return;
+    }
+  pageRect = NSMakeRect(0,0,[pi paperSize].width, [pi paperSize].height);
+
+  [self setFrame: pageRect];
+  [self setNeedsDisplay:YES];
+}
+
 @end

@@ -485,7 +485,7 @@ NSLog(@"here in printShowingPrintPanel: info: %@", [[self printInfo] dictionary]
 - (void)setPrintInfo:(NSPrintInfo *)printInfo
 {
   [super setPrintInfo: printInfo];
-  //[[docwin imageView] updatePrintInfo: printInfo];
+  [[docwin imageView] updatePrintInfo: printInfo];
 }
 
 /**
