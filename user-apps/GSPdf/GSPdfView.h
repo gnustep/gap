@@ -23,7 +23,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/NSImageView.h>
+#import <AppKit/AppKit.h>
  
 @interface GSPdfView : NSImageView
 {
@@ -31,6 +31,11 @@
 }
 
 - (void)setDelegate: (id)aDelegate;
+
+/**
+ * update the view orientation and size according to the new print info object
+ */
+- (void) updatePrintInfo: (NSPrintInfo *)pi;
 
 @end
 
