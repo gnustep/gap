@@ -464,5 +464,38 @@
   [self addWindowController: docwin];
 }
 
+// Printing
+- (void)printShowingPrintPanel:(BOOL)flag
+{
+    NSPrintOperation *op;
+
+    op = [NSPrintOperation printOperationWithView:[docwin imageView]
+                                        printInfo:[self printInfo]];
+    [op setShowPanels:flag];
+NSLog(@"here in printShowingPrintPanel: info: %@", [[self printInfo] dictionary]);
+    [op runOperationModalForWindow:[[[self windowControllers] objectAtIndex: 0] window]
+                          delegate:nil
+                    didRunSelector:NULL
+                       contextInfo:nil];
+}
+
+/**
+ * after the page layout is changed, update the view
+ */
+- (void)setPrintInfo:(NSPrintInfo *)printInfo
+{
+  [super setPrintInfo: printInfo];
+  //[[docwin imageView] updatePrintInfo: printInfo];
+}
+
+/**
+ * overridden so to allow changing the page layout
+ */
+- (BOOL)shouldChangePrintInfo:(NSPrintInfo *)newPrintInfo
+{
+    return YES;
+}
+
+
 @end
 
