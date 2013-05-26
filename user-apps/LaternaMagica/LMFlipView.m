@@ -47,7 +47,7 @@ enum
 
 /* ---- Key event methods ---- */
 
-/** respond to key equivalents which are not bound do menu items */
+/** respond to key equivalents which are not bound to menu items */
 -(BOOL)performKeyEquivalent: (NSEvent*)theEvent
 {
   NSString *keyStr;
@@ -88,7 +88,22 @@ enum
 	  [controller removeImage:theEvent];
 	else
 	  [controller eraseImage:theEvent];
-        return YES;
+	return YES;
+      }
+    else if (keyCh == 0x72)
+      {
+	[controller rotateImage90:nil];
+	return YES;
+      }
+    else if (keyCh == 0x66)
+      {
+	[controller rotateImage180:nil];
+	return YES;
+      }
+    else if (keyCh == 0x6c)
+      {
+	[controller rotateImage270:nil];
+	return YES;
       }
     else
       NSLog(@"keyCh %x", keyCh);    

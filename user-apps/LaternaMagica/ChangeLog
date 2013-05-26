@@ -1,3 +1,11 @@
+2013-05-26: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* AppController.m
+	  make rotation clockwise
+	* LMFlipView.m
+	  add r, f, l keys to performKeyEquivalent:, to call
+	  rotateImage90, 180, 270 to be able to rotate with
+	  keyboard in full screen mode
+
 2013-02-12 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
