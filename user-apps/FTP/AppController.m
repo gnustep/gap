@@ -287,7 +287,6 @@
 
   if (sender == localTableData)
     {
-      NSLog(@"sender is local %u", [paths count]);
       /* the local view opens the file or the directory, it can be just one */
       if ([paths count] != 1)
         return NO;
@@ -318,8 +317,36 @@
     }
 
   NSLog(@"AppController dropAction: %@", paths);
+  /* locally, we accept only a directory and change to it
+     remotely, we store everything */
   if (sender == localTableData)
     {
+      NSString      *fileOrPath;
+      NSString      *thePath;
+      NSFileManager *fm;
+      BOOL          isDir;
+      NSArray       *dirList;
+
+      fileOrPath = [paths objectAtIndex:0];
+      fm = [NSFileManager defaultManager];
+
+      if ([fm fileExistsAtPath:fileOrPath isDirectory:&isDir] == NO)
+        return;
+
+      if (!isDir)
+        thePath = [fileOrPath stringByDeletingLastPathComponent];
+      else
+        thePath = fileOrPath;
+      NSLog(@"trimmed path to: %@", thePath);
+      [local changeWorkingDir:thePath];
+      dirList = [local dirContents];
+      if (dirList)
+        {
+          [localTableData initData:dirList];
+          [localView deselectAll:self];
+          [localView reloadData];
+          [self updatePath :localPath :[local workDirSplit]];
+        }
     }
   else if (sender == remoteTableData)
     {

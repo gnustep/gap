@@ -106,7 +106,7 @@
 - (void)setTransferProgress:(NSNumber *)bytesTransferred;
 - (void)setTransferEnd:(NSNumber *)bytesTransferred;
 
-/** closes the open connections and quits teh session with the remote server */
+/** closes the open connections and quits the session with the remote server */
 - (IBAction)disconnect:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;
