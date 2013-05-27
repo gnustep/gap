@@ -77,13 +77,6 @@
 
 }
 
-+ (void)initialize;
-
-- (id)init;
-- (void)dealloc;
-
-- (void)awakeFromNib;
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(id)sender;
 - (void)applicationWillTerminate:(NSNotification *)aNotif;

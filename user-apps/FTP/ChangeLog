@@ -1,5 +1,10 @@
 2013-05-27 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.[h,m]
+	Remove initialize.
+
+2013-05-27 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.m (dropAction: paths:)
 	Handle local file drop.
 
