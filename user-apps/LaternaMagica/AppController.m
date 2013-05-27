@@ -539,7 +539,7 @@
   srcData = [srcImageRep bitmapData];
   destData = [destImageRep bitmapData];
     
-  if (angle == 270)
+  if (angle == 90)
     {
       for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
@@ -561,7 +561,7 @@
 	      p2[s] = p1[s];
 	  }
     }
-  else if (angle == 90)
+  else if (angle == 270)
     {
       for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
