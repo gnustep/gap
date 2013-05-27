@@ -92,17 +92,14 @@ enum
       }
     else if (keyCh == 0x72)
       {
-	[controller rotateImage90:nil];
-	return YES;
-      }
-    else if (keyCh == 0x66)
-      {
-	[controller rotateImage180:nil];
+	// "r" to rotate clockwise
+	[controller rotateImage270:nil];
 	return YES;
       }
     else if (keyCh == 0x6c)
       {
-	[controller rotateImage270:nil];
+	// "l" to rotate counterclockwise
+	[controller rotateImage90:nil];
 	return YES;
       }
     else
