@@ -118,6 +118,8 @@
       currAngle += angle;
       [path release];
     }
+  [valuesArray release];
+  [colorsArray release];
 }
 
 @end
