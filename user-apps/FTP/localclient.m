@@ -1,7 +1,7 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005-2011 Riccardo Mottola
+   Copyright (C) 2005-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -94,6 +94,7 @@
         attr = [fm fileAttributesAtPath :p traverseLink:YES];
         aFile = [[FileElement alloc] initWithPath:p andAttributes:attr];
         [listArr addObject:aFile];
+        [aFile release];
     }
     return [NSArray arrayWithArray:listArr];
 }

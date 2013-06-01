@@ -317,7 +317,10 @@
       fm = [NSFileManager defaultManager];
 
       if ([fm fileExistsAtPath:fileOrPath isDirectory:&isDir] == NO)
-        return;
+        {
+          [arr release];
+          return;
+        }
 
       if (!isDir)
         thePath = [fileOrPath stringByDeletingLastPathComponent];
