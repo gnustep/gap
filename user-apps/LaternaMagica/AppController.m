@@ -77,6 +77,7 @@
 
     [smallView setFrame:[scrollView documentVisibleRect]];
     [smallView setImageAlignment:NSImageAlignTopLeft];
+    [smallWindow setDelegate:smallView];
 
     fullView = [[LMFlipView alloc] initWithFrame:[fullWindow frame]];
     [fullView setImageScaling: NSScaleNone];
@@ -88,6 +89,7 @@
     /* avoid replacing the contentview with a NSControl subclass, thus add a subview instead */
     [[fullWindow contentView] addSubview: fullView];
     [fullWindow setInitialFirstResponder:fullView];
+    [fullWindow setDelegate:fullView];
 
     /* register the file view as drag destionation */
     [fileListView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
@@ -887,6 +889,12 @@
 - (IBAction)cancelPreferences:(id)sender
 {
   [prefPanel performClose:self];
+}
+
+/* printing */
+- (void)print:(id)sender
+{
+  [view print:sender];
 }
 
 @end

@@ -53,7 +53,7 @@
     BOOL                  scaleToFit;
     NSWindow              *window;
     LMWindow              *fullWindow;
-    NSImageView           *view;
+    LMFlipView            *view;
     LMFlipView            *fullView;
     NSSavePanel           *savePanel;
     
@@ -103,5 +103,7 @@
 - (IBAction)showPreferences:(id)sender;
 - (IBAction)savePreferences:(id)sender;
 - (IBAction)cancelPreferences:(id)sender;
+
+- (void)print:(id)sender;
 
 @end

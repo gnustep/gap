@@ -9,6 +9,7 @@
                 exportImages = id; 
                 nextImage = id; 
                 prevImage = id; 
+                print = id; 
                 removeAllImages = id; 
                 removeImage = id; 
                 rotateImage180 = id; 
