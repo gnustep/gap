@@ -22,7 +22,8 @@
 	    "execExportImages:",
 	    "showPreferences:",
 	    "savePreferences:",
-	    "cancelPreferences:"
+	    "cancelPreferences:",
+	    "print:"
 	);
 	Outlets = (
 	    fileListData,
