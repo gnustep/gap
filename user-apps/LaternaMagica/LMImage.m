@@ -65,7 +65,8 @@
 
 - (void) setRotation: (unsigned)r
 {
-  rotation = r;
+  rotation += r;
+  rotation = rotation % 360;
 }
 - (unsigned) rotation
 {

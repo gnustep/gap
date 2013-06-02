@@ -1,3 +1,8 @@
+2013-06-02 Riccardo Mottola <rm@gnu.org>
+
+	* LMImage.m
+        Correctly add successive rotations.
+
 2013-05-27: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* AppController.m, LMFlipView.m
 	  revert stuff from yesterday, and only leave the 
