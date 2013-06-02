@@ -2,7 +2,7 @@
    Project: LaternaMagica
    LMFlipView.m
 
-   Copyright (C) 2006-2011 Riccardo Mottola
+   Copyright (C) 2006-2013 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -105,6 +105,12 @@ enum
     else
       NSLog(@"keyCh %x", keyCh);    
     return [super performKeyEquivalent:theEvent];
+}
+
+/* printing */
+- (void)print:(id)sender
+{
+  [[NSPrintOperation printOperationWithView:self] runOperation];
 }
 
 @end

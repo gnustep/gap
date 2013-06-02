@@ -1,5 +1,13 @@
 2013-06-02 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.h
+	* AppController.m
+	* LMFlipView.m
+	* English.lproj/LaternaMagica.nib
+	Route printing to the FlipView and sart print operation from there.
+
+2013-06-02 Riccardo Mottola <rm@gnu.org>
+
 	* LMImage.m
         Correctly add successive rotations.
 
