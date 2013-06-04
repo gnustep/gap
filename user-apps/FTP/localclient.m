@@ -55,7 +55,8 @@
     {
         NSLog(@"%@ is an absolute path", dir);
         localPath = dir;
-    } else
+    }
+    else
     {
         NSLog(@"%@ is a relative path", dir);
         localPath = [[self workingDir] stringByAppendingPathComponent:dir];
@@ -111,6 +112,30 @@
 
     if ([fm removeFileAtPath:(NSString *)localPath handler:nil] == NO)
         NSLog(@"an error occoured during local delete");
+}
+
+
+- (BOOL)renameFile:(FileElement *)file to:(NSString *)name
+{
+  NSFileManager  *fm;
+  NSString       *newFullPath;
+
+  if (file == nil)
+    return NO;
+
+  if (name == nil)
+    return NO;
+
+  fm = [NSFileManager defaultManager];
+
+  newFullPath = [[[file path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:name];
+
+  if ([fm movePath:[file path] toPath:newFullPath handler:nil] == NO)
+    {
+      NSLog(@"Error during local file rnaming");
+      return NO;
+    }
+  return YES;
 }
 
 @end
