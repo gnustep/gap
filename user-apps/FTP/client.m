@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2007 Free Software Foundation
+ Copyright (C) 2005-2013 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -32,20 +32,20 @@
 /* we set possibly unused stuff to NULL */
 - (id)init
 {
-    if (!(self =[super init]))
-        return nil;
-    controller = nil;
-
-    return self;
+  if (!(self = [super init]))
+    return nil;
+  controller = nil;
+  
+  return self;
 }
 
 - (id)initWithController:(id)cont
 {
-    if (!(self =[super init]))
-        return nil;
-    controller = cont;
-
-    return self;
+  if (!(self = [super init]))
+    return nil;
+  controller = cont;
+  
+  return self;
 }
 
 - (void)dealloc
@@ -83,42 +83,47 @@
 
 - (void)changeWorkingDir:(NSString *)dir
 {
-    [self setWorkingDir:dir];
+  [self setWorkingDir:dir];
 }
 
 - (NSArray *)workDirSplit
 {
-    NSMutableArray *reversedList;
-    NSArray        *list;
-    NSEnumerator   *en;
-    NSString       *currElement;
-
-    list = [workingDir pathComponents];
-
-
-    reversedList = [NSMutableArray arrayWithCapacity:[list count]];
-    en = [list reverseObjectEnumerator];
-    while ((currElement = [en nextObject]))
-            [reversedList addObject:currElement];
-    return [reversedList retain];
+  NSMutableArray *reversedList;
+  NSArray        *list;
+  NSEnumerator   *en;
+  NSString       *currElement;
+  
+  list = [workingDir pathComponents];
+  
+  
+  reversedList = [NSMutableArray arrayWithCapacity:[list count]];
+  en = [list reverseObjectEnumerator];
+  while ((currElement = [en nextObject]))
+    [reversedList addObject:currElement];
+  return [reversedList retain];
 }
 
 - (NSArray *)dirContents
 {
-    NSLog(@"override me! dirContents superclass method");
-    return nil;
+  NSLog(@"override me! dirContents superclass method");
+  return nil;
 }
 
 - (BOOL)createNewDir:(NSString *)dir
 {
-    NSLog(@"override me! createNewDir superclass method");
-    return NO;
+  NSLog(@"override me! createNewDir superclass method");
+  return NO;
 }
 
 - (void)deleteFile:(FileElement *)file beingAt:(int)depth
 {
-    NSLog(@"override me! deleteFile superclass method");
+  NSLog(@"override me! deleteFile superclass method");
 }
 
-
+- (BOOL)renameFile:(FileElement *)file to:(NSString *)name
+{
+  NSLog(@"override me! renameFile superclass method");
+  return NO;
+}
+ 
 @end

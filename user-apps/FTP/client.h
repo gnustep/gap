@@ -1,7 +1,8 @@
-/*
+/* -*- mode: objc -*-
+
  Project: FTP
 
- Copyright (C) 2005 Free Software Foundation
+ Copyright (C) 2005-2013 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -29,7 +30,7 @@
 #import "fileElement.h"
 
 /**
- * Clas that represents an object to access files, be them remote or local.
+ * Class that represents an object to access files, be them remote or local.
  * It must be subclassed to be useful. This object holds porperties genrealy
  * valid for both local and remote instances as the working directory and the
  * home directory of the user. It also defines common methods for creating,
@@ -37,9 +38,9 @@
  */
 @interface Client : NSObject
 {
-    id       controller;
-    NSString *workingDir;
-    NSString *homeDir;
+  id       controller;
+  NSString *workingDir;
+  NSString *homeDir;
 }
 
 - (id)init;
@@ -53,6 +54,7 @@
 - (void)changeWorkingDir:(NSString *)dir;
 - (BOOL)createNewDir:(NSString *)dir;
 - (void)deleteFile:(FileElement *)file beingAt:(int)depth;
+- (BOOL)renameFile:(FileElement *)file to:(NSString *)name;
 
 - (NSArray *)workDirSplit;
 
@@ -61,6 +63,7 @@
 
 /** returns the current home directory */
 - (NSString *)homeDir;
+
 @end
 
 
