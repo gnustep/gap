@@ -24,6 +24,7 @@ FTP_APPLICATION_ICON = FTP_icon_gs.tif
 #
 FTP_RESOURCE_FILES = \
 Resources/FTP.gorm \
+Resources/GetName.gorm \
 Resources/arrow_left.tiff \
 Resources/arrow_right.tiff \
 Resources/FTP_icon_gs.tif 
@@ -34,6 +35,7 @@ Resources/FTP_icon_gs.tif
 #
 FTP_HEADER_FILES = \
 AppController.h \
+GetNameController.h \
 ftpclient.h \
 localclient.h \
 fileTable.h \
@@ -45,6 +47,7 @@ client.h
 #
 FTP_OBJC_FILES = \
 AppController.m \
+GetNameController.m \
 ftpclient.m \
 localclient.m \
 fileTable.m \

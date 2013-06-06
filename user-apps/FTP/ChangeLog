@@ -1,4 +1,15 @@
-2013-06-04 Riccardo MOttola <rm@gnu.org>
+2013-06-07 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	* GetNameController.h
+	* GetNameController.m
+	* GNUmakefile
+	* Resources/GetName.gorm
+	* Resources/FTP.gorm
+	Local rename function.
+
+2013-06-04 Riccardo Mottola <rm@gnu.org>
 
 	* localclient.m
 	Local rename function.

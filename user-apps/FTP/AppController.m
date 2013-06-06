@@ -26,6 +26,7 @@
 
 #import "AppController.h"
 #import "fileElement.h"
+#import "GetNameController.h"
 
 @implementation fileTransmitParms
 @end
@@ -482,6 +483,41 @@
       fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
       [ftp deleteFile:fileEl beingAt:0];
     }
+}
+
+- (IBAction)localRename:(id)sender
+{
+  GetNameController *nameGetter;
+  NSInteger         alertReturn;
+  NSEnumerator  *elemEnum;
+  FileElement   *fileEl;
+  id            currEl; 
+
+  elemEnum = [localView selectedRowEnumerator];
+
+  while ((currEl = [elemEnum nextObject]) != nil)
+    {
+      fileEl = [localTableData elementAtIndex:[currEl intValue]];
+
+      nameGetter = [[GetNameController alloc] init];
+      [nameGetter setName:[fileEl name]];
+
+      alertReturn = [nameGetter runAsModal];
+      NSLog(@"returning... %@", [nameGetter name]);
+      if (alertReturn == NSAlertDefaultReturn)
+        {
+          NSString *name;
+          
+          name = [nameGetter name];
+          
+          NSLog(@"New name: %@", name);
+        }
+      RELEASE(nameGetter);
+    }
+}
+
+- (IBAction)localNewFolder:(id)sender
+{
 }
 
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size
