@@ -27,6 +27,15 @@
 
 #import <Foundation/Foundation.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#ifndef NSUInteger
+#define NSUInteger unsigned
+#endif
+#endif
+
 @class NSPanel, NSTextField;
 
 @interface GetNameController : NSObject
