@@ -1,5 +1,10 @@
 2013-06-07 Riccardo Mottola <rm@gnu.org>
 
+	* GetNameController.m
+	Load interface in init, not runAsModal
+
+2013-06-07 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.h
 	* AppController.m
 	* GetNameController.h

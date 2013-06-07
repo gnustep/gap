@@ -32,18 +32,18 @@
 
 @implementation GetNameController : NSObject
 
+- (id)init
+{
+  if ((self = [super init]))
+    {
+      [NSBundle loadNibNamed: @"GetName" owner: self];
+    }
+  return self;
+}
 
 -(NSInteger)runAsModal
 {
   NSInteger result;
-  
-  if (!panel)
-    {
-      if (![NSBundle loadNibNamed: @"GetName" owner: self])
-        {
-          return NSAlertAlternateReturn;
-        }
-    }
   
   [panel makeKeyAndOrderFront: nil];
   [panel makeFirstResponder: textField];
@@ -60,18 +60,17 @@
 
 -(void)setDescription:(NSString *)desc
 {
+  NSLog(@"setting description to: %@", desc);
   [description setStringValue:desc];
 }
 
 -(void)setName:(NSString  *)name
 {
-  NSLog(@"setting name to: %@", name);
   [textField setStringValue:name];
 }
 
 -(NSString *)name;
 {
-  NSLog(@"returning; %@", [textField stringValue]);
   return [textField stringValue];
 }
 
