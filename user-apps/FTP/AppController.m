@@ -501,6 +501,8 @@
 
       nameGetter = [[GetNameController alloc] init];
       [nameGetter setName:[fileEl name]];
+      [nameGetter setTitle:@"Rename"];
+      [nameGetter setDescription:@"Rename"];
 
       alertReturn = [nameGetter runAsModal];
       NSLog(@"returning... %@", [nameGetter name]);
@@ -509,8 +511,8 @@
           NSString *name;
           
           name = [nameGetter name];
-          
           NSLog(@"New name: %@", name);
+          [local renameFile:fileEl to:name];
         }
       RELEASE(nameGetter);
     }
@@ -518,6 +520,26 @@
 
 - (IBAction)localNewFolder:(id)sender
 {
+  GetNameController *nameGetter;
+  NSInteger         alertReturn;
+  
+  nameGetter = [[GetNameController alloc] init];
+  [nameGetter setName:@"New Folder"];
+  [nameGetter setTitle:@"New Folder"];
+  [nameGetter setDescription:@"New Folder"];
+  
+  alertReturn = [nameGetter runAsModal];
+  NSLog(@"returning... %@", [nameGetter name]);
+  if (alertReturn == NSAlertDefaultReturn)
+    {
+      NSString *name;
+      NSString *fullPath;
+      
+      name = [nameGetter name];
+      fullPath = [[local workingDir] stringByAppendingPathComponent:name];
+      NSLog(@"New folder: %@", fullPath);
+    }
+  RELEASE(nameGetter);
 }
 
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size
