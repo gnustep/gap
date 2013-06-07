@@ -102,16 +102,12 @@
 
 - (void)deleteFile:(FileElement *)file beingAt:(int)depth
 {
-    NSString           *fileName;
-    NSString           *localPath;
-    NSFileManager      *fm;
+  NSFileManager      *fm;
 
-    fm = [NSFileManager defaultManager];
-    fileName = [file name];
-    localPath = [[self workingDir] stringByAppendingPathComponent:fileName];
-
-    if ([fm removeFileAtPath:(NSString *)localPath handler:nil] == NO)
-        NSLog(@"an error occoured during local delete");
+  fm = [NSFileManager defaultManager];
+  
+  if ([fm removeFileAtPath:[file path] handler:nil] == NO)
+    NSLog(@"an error occoured during local delete");
 }
 
 
