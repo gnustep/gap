@@ -3,6 +3,9 @@
 	* GetNameController.m
 	Load interface in init, not runAsModal
 
+	* AppController.m
+	Actually delete the file!
+
 2013-06-07 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
