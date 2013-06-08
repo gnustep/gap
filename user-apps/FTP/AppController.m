@@ -514,7 +514,7 @@
           NSLog(@"New name: %@", name);
           [local renameFile:fileEl to:name];
         }
-      RELEASE(nameGetter);
+      [nameGetter release];
     }
 }
 
@@ -539,7 +539,7 @@
       fullPath = [[local workingDir] stringByAppendingPathComponent:name];
       NSLog(@"New folder: %@", fullPath);
     }
-  RELEASE(nameGetter);
+  [nameGetter release];
 }
 
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size
