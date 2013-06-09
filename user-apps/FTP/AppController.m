@@ -502,7 +502,7 @@
       nameGetter = [[GetNameController alloc] init];
       [nameGetter setName:[fileEl name]];
       [nameGetter setTitle:@"Rename"];
-      [nameGetter setDescription:@"Rename"];
+      [nameGetter setMessage:@"Rename"];
 
       alertReturn = [nameGetter runAsModal];
       NSLog(@"returning... %@", [nameGetter name]);
@@ -526,7 +526,7 @@
   nameGetter = [[GetNameController alloc] init];
   [nameGetter setName:@"New Folder"];
   [nameGetter setTitle:@"New Folder"];
-  [nameGetter setDescription:@"New Folder"];
+  [nameGetter setMessage:@"New Folder"];
   
   alertReturn = [nameGetter runAsModal];
   NSLog(@"returning... %@", [nameGetter name]);

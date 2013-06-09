@@ -42,12 +42,12 @@
 {
   IBOutlet NSPanel *panel;
   IBOutlet NSTextField *textField;
-  IBOutlet NSTextField *description;
+  IBOutlet NSTextField *messageField;
 }
 
 -(NSInteger)runAsModal;
 -(void)setTitle:(NSString *)title;
--(void)setDescription:(NSString *)desc;
+-(void)setMessage:(NSString *)desc;
 
 -(void)setName:(NSString  *)name;
 -(NSString *)name;

@@ -58,10 +58,9 @@
   [panel setTitle:title];
 }
 
--(void)setDescription:(NSString *)desc
+-(void)setMessage:(NSString *)desc
 {
-  NSLog(@"setting description to: %@", desc);
-  [description setStringValue:desc];
+  [messageField setStringValue:desc];
 }
 
 -(void)setName:(NSString  *)name
