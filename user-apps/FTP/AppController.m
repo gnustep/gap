@@ -151,8 +151,8 @@
 /* update the pop-up menu with a new path */
 - (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray
 {
-    [path removeAllItems];
-    [path addItemsWithTitles:pathArray];
+  [path removeAllItems];
+  [path addItemsWithTitles:pathArray];
 }
 
 /* performs the action of the path pull-down menu
@@ -160,41 +160,42 @@
    and works for both the local and remote path */
 - (IBAction)changePathFromMenu:(id)sender
 {
-    Client      *theClient;
-    NSTableView *theView;
-    FileTable   *theTable;
-    NSString    *thePath;
-    NSArray     *items;
-    int         selectedIndex;
-    int         i;
-    NSArray    *dirList;
+  Client      *theClient;
+  NSTableView *theView;
+  FileTable   *theTable;
+  NSString    *thePath;
+  NSArray     *items;
+  int         selectedIndex;
+  int         i;
+  NSArray    *dirList;
 
-    NSLog(@"%@", [sender class]);
-    if (sender == localPath)
+  NSLog(@"%@", [sender class]);
+  if (sender == localPath)
     {
-        theClient = local;
-        theView = localView;
-        theTable = localTableData;
-    } else
-    {
-        theClient = ftp;
-        theView = remoteView;
-        theTable = remoteTableData;
+      theClient = local;
+      theView = localView;
+      theTable = localTableData;
     }
-    thePath = [NSString string];
-    selectedIndex = [sender indexOfItem:[sender selectedItem]];
-    items = [sender itemTitles];
-    for (i = [items count] - 1; i >= selectedIndex; i--)
-        thePath = [thePath stringByAppendingPathComponent: [items objectAtIndex:i]];
-    NSLog(@"selected path: %@", thePath);
-    [theClient changeWorkingDir:thePath];
-    if ((dirList = [theClient dirContents]) == nil)
-        return;
-    [theTable initData:dirList];
-    [theView deselectAll:self];
-    [theView reloadData];
+  else
+    {
+      theClient = ftp;
+      theView = remoteView;
+      theTable = remoteTableData;
+    }
+  thePath = [NSString string];
+  selectedIndex = [sender indexOfItem:[sender selectedItem]];
+  items = [sender itemTitles];
+  for (i = [items count] - 1; i >= selectedIndex; i--)
+    thePath = [thePath stringByAppendingPathComponent: [items objectAtIndex:i]];
+  NSLog(@"selected path: %@", thePath);
+  [theClient changeWorkingDir:thePath];
+  if ((dirList = [theClient dirContents]) == nil)
+    return;
+  [theTable initData:dirList];
+  [theView deselectAll:self];
+  [theView reloadData];
     
-    [self updatePath :sender :[theClient workDirSplit]];
+  [self updatePath :sender :[theClient workDirSplit]];
 }
 
 /* perform the action of a double click in a table element
@@ -489,9 +490,9 @@
 {
   GetNameController *nameGetter;
   NSInteger         alertReturn;
-  NSEnumerator  *elemEnum;
-  FileElement   *fileEl;
-  id            currEl; 
+  NSEnumerator      *elemEnum;
+  FileElement       *fileEl;
+  id                currEl; 
 
   elemEnum = [localView selectedRowEnumerator];
 
@@ -505,7 +506,6 @@
       [nameGetter setMessage:@"Rename"];
 
       alertReturn = [nameGetter runAsModal];
-      NSLog(@"returning... %@", [nameGetter name]);
       if (alertReturn == NSAlertDefaultReturn)
         {
           NSString *name;
@@ -514,6 +514,38 @@
           NSLog(@"New name: %@", name);
           [local renameFile:fileEl to:name];
         }
+      [nameGetter release];
+    }
+}
+
+- (IBAction)remoteRename:(id)sender
+{
+  GetNameController *nameGetter;
+  NSInteger         alertReturn;
+  NSEnumerator      *elemEnum;
+  FileElement       *fileEl;
+  id                currEl; 
+  
+  elemEnum = [remoteView selectedRowEnumerator];
+  
+  while ((currEl = [elemEnum nextObject]) != nil)
+    {
+      fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
+    
+      nameGetter = [[GetNameController alloc] init];
+      [nameGetter setName:[fileEl name]];
+      [nameGetter setTitle:@"Rename"];
+      [nameGetter setMessage:@"Rename"];
+    
+      alertReturn = [nameGetter runAsModal];
+      if (alertReturn == NSAlertDefaultReturn)
+	{
+	  NSString *name;
+      
+	  name = [nameGetter name];
+	  NSLog(@"New name: %@", name);
+	  [ftp renameFile:fileEl to:name];
+	}
       [nameGetter release];
     }
 }
@@ -537,6 +569,30 @@
       
       name = [nameGetter name];
       fullPath = [[local workingDir] stringByAppendingPathComponent:name];
+      NSLog(@"New folder: %@", fullPath);
+    }
+  [nameGetter release];
+}
+
+- (IBAction)remoteNewFolder:(id)sender
+{
+  GetNameController *nameGetter;
+  NSInteger         alertReturn;
+  
+  nameGetter = [[GetNameController alloc] init];
+  [nameGetter setName:@"New Folder"];
+  [nameGetter setTitle:@"New Folder"];
+  [nameGetter setMessage:@"New Folder"];
+  
+  alertReturn = [nameGetter runAsModal];
+  NSLog(@"returning... %@", [nameGetter name]);
+  if (alertReturn == NSAlertDefaultReturn)
+    {
+      NSString *name;
+      NSString *fullPath;
+      
+      name = [nameGetter name];
+      fullPath = [[ftp workingDir] stringByAppendingPathComponent:name];
       NSLog(@"New folder: %@", fullPath);
     }
   [nameGetter release];
