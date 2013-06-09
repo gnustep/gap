@@ -93,7 +93,9 @@
 - (IBAction)localDelete:(id)sender;
 - (IBAction)remoteDelete:(id)sender;
 - (IBAction)localRename:(id)sender;
+- (IBAction)remoteRename:(id)sender;
 - (IBAction)localNewFolder:(id)sender;
+- (IBAction)remoteNewFolder:(id)sender;
 
 - (void)setThreadRunningState:(BOOL)flag;
 
