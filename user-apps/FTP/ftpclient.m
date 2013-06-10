@@ -1229,7 +1229,7 @@ int getChar(streamStruct* ss)
   replyCode = [self readReply:&reply];
   if (replyCode != 350)
     {
-      NSLog(@"Error during Rename from> %d," replyCode);
+      NSLog(@"Error during Rename from %d", replyCode);
       return NO;
     }
 
