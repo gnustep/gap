@@ -1,3 +1,8 @@
+2013-06-10 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Implement FTP rename RNFR RNTO
+
 2013-06-09 Riccardo Mottola <rm@gnu.org>
 
 	* GetNameController.h

@@ -252,7 +252,7 @@ int getChar(streamStruct* ss)
     while (!(state == END))
     {
         ch = getChar(&ctrlStream);
-//	NSLog(@"read char: %c", ch);
+	//NSLog(@"read char: %c", ch);
         if (ch == EOF)
             state = END;
 
@@ -1213,6 +1213,35 @@ int getChar(streamStruct* ss)
     replyCode = [self readReply:&reply];
     
     return [NSArray arrayWithArray:listArr];
+}
+
+- (BOOL)renameFile:(FileElement *)file to:(NSString *)name
+{
+  NSString       *remotePath;
+  NSString       *commandStr;
+  char           command[MAX_CONTROL_BUFF];
+  NSMutableArray *reply;
+  int            replyCode;
+
+  commandStr = [NSString stringWithFormat:@"RNFR %@\r\n", [file name]];
+  [commandStr getCString:command];
+  [self writeLine:command];
+  replyCode = [self readReply:&reply];
+  if (replyCode != 350)
+    {
+      NSLog(@"Error during Rename from> %d," replyCode);
+      return NO;
+    }
+
+  commandStr = [NSString stringWithFormat:@"RNTO %@\r\n", name];
+  [commandStr getCString:command];
+  [self writeLine:command];
+  replyCode = [self readReply:&reply];
+
+  if (replyCode == 250)
+    return YES;
+
+  return NO;
 }
 
 @end
