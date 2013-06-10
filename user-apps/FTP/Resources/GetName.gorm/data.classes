@@ -15,7 +15,7 @@
 	Outlets = (
 	    panel,
 	    textField,
-	    description
+	    messageField
 	);
 	Super = NSObject;
     };
