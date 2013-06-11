@@ -188,20 +188,19 @@ int getChar(streamStruct* ss)
  */
 - (void)changeWorkingDir:(NSString *)dir
 {
-    char            tempStr[MAX_CONTROL_BUFF];
-    char            tempStr2[MAX_CONTROL_BUFF];
-    NSMutableArray *reply;
+  NSString       *tempStr;
+  NSMutableArray *reply;
 
-    if (!connected)
-        return;
-	
-    [dir getCString:tempStr2];
-    sprintf(tempStr, "CWD %s\r\n", tempStr2);
-    [self writeLine:tempStr];
-    if ([self readReply:&reply] == 250)
-        [super changeWorkingDir:dir];
-    else
-        NSLog(@"cwd failed");
+  if (!connected)
+    return;
+
+  NSLog(@"dir |%@|", dir);	
+  tempStr = [@"CWD " stringByAppendingString:dir];
+  [self writeLine:tempStr];
+  if ([self readReply:&reply] == 250)
+    [super changeWorkingDir:dir];
+  else
+    NSLog(@"cwd failed");
 }
 
 /* if we have a valid controller, we suppose it respons to appendTextToLog */
@@ -337,83 +336,87 @@ int getChar(streamStruct* ss)
 /*
  writes a single line to the control connection, logging it always
  */
-- (int)writeLine:(char *)line
+- (int)writeLine:(NSString *)line
 {
-    return [self writeLine:line byLoggingIt:YES];
+  return [self writeLine:line byLoggingIt:YES];
 }
 
 /*
  writes a single line to the control connection
  */
-- (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog
+- (int)writeLine:(NSString *)line byLoggingIt:(BOOL)doLog
 {
-    int sentBytes;
-    int bytesToSend;
+  int  sentBytes;
+  int  bytesToSend;
+  char command[MAX_CONTROL_BUFF];
+  NSString *commandStr;
 
-    bytesToSend = strlen(line);
-    if (doLog)
-        [self logIt:[NSString stringWithCString:line length:(bytesToSend - 2)]];
-    if ((sentBytes = send(controlSocket, line, strlen(line), 0)) < bytesToSend)
-        NSLog(@"sent %d out of %d", sentBytes, bytesToSend);
-    return sentBytes;
+  commandStr = [line stringByAppendingString:@"\r\n"];
+  [commandStr getCString:command];
+  bytesToSend = strlen(command);
+  NSLog(@"sending: %s", command);
+  if (doLog)
+    [self logIt:line];
+  if ((sentBytes = send(controlSocket, command, bytesToSend, 0)) < bytesToSend)
+    NSLog(@"sent %d out of %d", sentBytes, bytesToSend);
+  return sentBytes;
 }
 
 
 - (int)setTypeToI
 {
-    NSMutableArray *reply;
-    int            retVal;
-    
-    retVal = [self writeLine:"TYPE I\r\n"];
-    if ( retVal > 0)
+  NSMutableArray *reply;
+  int            retVal;
+  
+  retVal = [self writeLine:@"TYPE I"];
+  if (retVal > 0)
     {
-        [self readReply:&reply];
-        [reply release];
+      [self readReply:&reply];
+      [reply release];
     }
-       
-    return retVal;
+  
+  return retVal;
 }
 
 - (int)setTypeToA
 {
-    NSMutableArray *reply;
-    int            retVal;
-
-    retVal = [self writeLine:"TYPE A\r\n"];
-    NSLog(@"retval: %d", retVal);
-    if ( retVal > 0)
+  NSMutableArray *reply;
+  int            retVal;
+  
+  retVal = [self writeLine:@"TYPE A"];
+  NSLog(@"retval: %d", retVal);
+  if (retVal > 0)
     {
-        [self readReply:&reply];
-        [reply release];
+      [self readReply:&reply];
+      [reply release];
     }
-    
-    return retVal;
+  
+  return retVal;
 }
 
 - (void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
-    NSString           *fileName;
-    unsigned long long fileSize;
-    char               fNameCStr[MAX_CONTROL_BUFF];
-    char               command[MAX_CONTROL_BUFF];
-    char               buff[MAX_DATA_BUFF];
-    FILE               *localFileStream;
-    int                bytesRead;
-    NSMutableArray     *reply;
-    unsigned int       minimumPercentIncrement;
-    unsigned int       progressIncBytes;
-    int                replyCode;
-    unsigned long long totalBytes;
-    NSString           *localPath;
-    BOOL               gotFile;
+  NSString           *fileName;
+  unsigned long long fileSize;
+  NSString           *command;
+  char               buff[MAX_DATA_BUFF];
+  FILE               *localFileStream;
+  int                bytesRead;
+  NSMutableArray     *reply;
+  unsigned int       minimumPercentIncrement;
+  unsigned int       progressIncBytes;
+  int                replyCode;
+  unsigned long long totalBytes;
+  NSString           *localPath;
+  BOOL               gotFile;
 
-    fileName = [file name];
-    fileSize = [file size];
-    minimumPercentIncrement = fileSize / 100; // we should guard against maxint
+  fileName = [file name];
+  fileSize = [file size];
+  minimumPercentIncrement = fileSize / 100; // we should guard against maxint
 
-    localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
+  localPath = [[localClient workingDir] stringByAppendingPathComponent:fileName];
 
-    if ([file isDir])
+  if ([file isDir])
     {
         NSString     *pristineLocalPath;  /* original path */
         NSString     *pristineRemotePath; /* original path */
@@ -462,9 +465,8 @@ int getChar(streamStruct* ss)
         NSLog(@"error initiating data connection, retrieveFile");
         return;
     }
-    
-    [fileName getCString:fNameCStr];
-    sprintf(command, "RETR %s\r\n", fNameCStr);
+
+    command = [@"RETR " stringByAppendingString:fileName];
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
@@ -567,28 +569,27 @@ int getChar(streamStruct* ss)
 
 - (void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
 {
-    NSString           *fileName;
-    unsigned long long fileSize;
-    char               fNameCStr[MAX_CONTROL_BUFF];
-    char               command[MAX_CONTROL_BUFF];
-    char               buff[MAX_DATA_BUFF];
-    FILE               *localFileStream;
-    NSMutableArray     *reply;
-    int                bytesRead;
-    unsigned int       minimumPercentIncrement;
-    unsigned int       progressIncBytes;
-    int                replyCode;
-    unsigned long long totalBytes;
-    NSString           *localPath;
-    BOOL               gotFile;
+  NSString           *fileName;
+  unsigned long long fileSize;
+  NSString           *command;
+  char               buff[MAX_DATA_BUFF];
+  FILE               *localFileStream;
+  NSMutableArray     *reply;
+  int                bytesRead;
+  unsigned int       minimumPercentIncrement;
+  unsigned int       progressIncBytes;
+  int                replyCode;
+  unsigned long long totalBytes;
+  NSString           *localPath;
+  BOOL               gotFile;
 
-    fileName = [file name];
-    fileSize = [file size];
-    minimumPercentIncrement = fileSize / 100; // we should guard against maxint
+  fileName = [file name];
+  fileSize = [file size];
+  minimumPercentIncrement = fileSize / 100; // we should guard against maxint
 
-    localPath = [file path];
+  localPath = [file path];
 
-    if ([file isDir])
+  if ([file isDir])
     {
         NSString     *pristineLocalPath;  /* original path */
         NSString     *pristineRemotePath; /* original path */
@@ -642,8 +643,7 @@ int getChar(streamStruct* ss)
         return;
     }
 
-    [fileName getCString:fNameCStr];
-    sprintf(command, "STOR %s\r\n", fNameCStr);
+    command = [@"STOR " stringByAppendingString:fileName];
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
@@ -714,20 +714,20 @@ int getChar(streamStruct* ss)
 
 - (void)deleteFile:(FileElement *)file beingAt:(int)depth
 {
-    NSString           *fileName;
-    char               command[MAX_CONTROL_BUFF];
-    NSMutableArray     *reply;
-    int                replyCode;
-
-    fileName = [file name];
-
-    if ([file isDir])
+  NSString           *fileName;
+  NSString           *command;
+  NSMutableArray     *reply;
+  int                replyCode;
+  
+  fileName = [file name];
+  
+  if ([file isDir])
     {
-        NSString     *pristineRemotePath; /* original path */
-        NSArray      *dirList;
-        NSString     *remotePath;
-        NSEnumerator *en;
-        FileElement  *fEl;
+      NSString     *pristineRemotePath; /* original path */
+      NSArray      *dirList;
+      NSString     *remotePath;
+      NSEnumerator *en;
+      FileElement  *fEl;
 
         if (depth > 3)
         {
@@ -756,7 +756,7 @@ int getChar(streamStruct* ss)
         [pristineRemotePath release];
     }
 
-    sprintf(command, "DELE %s\r\n", [fileName cString]);
+    command = [@"DELE " stringByAppendingString:fileName];
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
@@ -814,19 +814,20 @@ int getChar(streamStruct* ss)
 {
   NSMutableArray *reply;
     
-  [self writeLine:"QUIT\r\n"];
+  [self writeLine:@"QUIT"];
   [self readReply:&reply];
   connected = NO;
   closesocket(controlSocket);
 }
 
-- (int)authenticate:(char *)user :(char *)pass
+- (int)authenticate:(NSString *)user :(NSString *)pass
 {
-    char           tempStr[MAX_CONTROL_BUFF];
+    NSString       *tempStr;
     NSMutableArray *reply;
     int            replyCode;
 
-    sprintf(tempStr, "USER %s\r\n", user);
+
+    tempStr = [@"USER " stringByAppendingString: user];
     if ([self writeLine:tempStr] < 0)
       return -2; /* we couldn't write */
     replyCode = [self readReply:&reply];
@@ -839,7 +840,7 @@ int getChar(streamStruct* ss)
     }
     [reply release];
     
-    sprintf(tempStr, "PASS %s\r\n", pass);
+    tempStr = [@"PASS " stringByAppendingString: pass];
     if ([self writeLine:tempStr byLoggingIt:NO] < 0)
       return -2; /* we couldn't write */
     replyCode = [self readReply:&reply];
@@ -855,7 +856,7 @@ int getChar(streamStruct* ss)
     connected = YES;
 
     /* get home directory as dir we first connected to */
-    [self writeLine:"PWD\r\n"];
+    [self writeLine:@"PWD"];
     [self readReply:&reply];
     if ([reply count] >= 1)
     {
@@ -910,7 +911,7 @@ int getChar(streamStruct* ss)
             return -1;
         }
 
-        [self writeLine:"PASV\r\n"];
+        [self writeLine:@"PASV"];
         replyCode = [self readReply:&reply];
         if (replyCode != 227)
         {
@@ -1025,12 +1026,13 @@ int getChar(streamStruct* ss)
 
     if (usesPorts == YES)
     {
-        union addrAccess { /* we use this union to extract the 8 bytes of an address */
+        union addrAccess /* we use this union to extract the 8 bytes of an address */
+        {
             struct in_addr   sinAddr;
             unsigned char    ipv4[4];
         } addr;
         NSMutableArray *reply;
-        char           tempStr[256];
+        NSString       *tempStr;
         unsigned char  p1, p2;
         int            returnCode;
         unsigned int   port;
@@ -1040,9 +1042,9 @@ int getChar(streamStruct* ss)
         port = ntohs(dataSockName.sin_port);
         p1 = (port & 0xFF00) >> 8;
         p2 = port & 0x00FF;
-        sprintf(tempStr, "PORT %u,%u,%u,%u,%u,%u\r\n", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2);
+        tempStr = [NSString stringWithFormat:@"PORT %u,%u,%u,%u,%u,%u", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2];
         [self writeLine:tempStr];
-        NSLog(@"port str: %s", tempStr);
+        NSLog(@"port str: %@", tempStr);
         if ((returnCode = [self readReply:&reply]) != 200)
         {
             NSLog(@"error occoured in port command: %@", [reply objectAtIndex:0]);
@@ -1105,7 +1107,7 @@ int getChar(streamStruct* ss)
 - (BOOL)createNewDir:(NSString *)dir
 {
     NSString       *remotePath;
-    char           command[MAX_CONTROL_BUFF];
+    NSString       *command;
     char           pathCStr[MAX_CONTROL_BUFF];
     NSMutableArray *reply;
     int            replyCode;
@@ -1121,7 +1123,7 @@ int getChar(streamStruct* ss)
     }
 
     [remotePath getCString:pathCStr];
-    sprintf(command, "MKD %s\r\n", pathCStr);
+    command =[@"MKD " stringByAppendingString:remotePath];
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     if (replyCode == 257)
@@ -1166,7 +1168,7 @@ int getChar(streamStruct* ss)
     listArr = [NSMutableArray arrayWithCapacity:5];
     
     [self initDataConn];
-    [self writeLine:"LIST\r\n"];
+    [self writeLine:@"LIST"];
     replyCode = [self readReply:&reply];
 
     if ([self initDataStream] < 0)
@@ -1217,15 +1219,12 @@ int getChar(streamStruct* ss)
 
 - (BOOL)renameFile:(FileElement *)file to:(NSString *)name
 {
-  NSString       *remotePath;
   NSString       *commandStr;
-  char           command[MAX_CONTROL_BUFF];
   NSMutableArray *reply;
   int            replyCode;
 
   commandStr = [NSString stringWithFormat:@"RNFR %@\r\n", [file name]];
-  [commandStr getCString:command];
-  [self writeLine:command];
+  [self writeLine:commandStr];
   replyCode = [self readReply:&reply];
   if (replyCode != 350)
     {
@@ -1234,8 +1233,7 @@ int getChar(streamStruct* ss)
     }
 
   commandStr = [NSString stringWithFormat:@"RNTO %@\r\n", name];
-  [commandStr getCString:command];
-  [self writeLine:command];
+  [self writeLine:commandStr];
   replyCode = [self readReply:&reply];
 
   if (replyCode == 250)

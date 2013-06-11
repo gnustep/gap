@@ -2,13 +2,13 @@
     ApplicationDescription = "FTP client";
     ApplicationIcon = "FTP_icon_gs.tif";
     ApplicationName = FTP;
-    ApplicationRelease = "0.4";
+    ApplicationRelease = "0.5";
     Authors = (
 	"Riccardo Mottola <rm@gnu.org>"
     );
     Copyright = "Copyright (C) 2005-2013";
     CopyrightDescription = "Released under GPL";
-    FullVersionID = "0.4";
+    FullVersionID = "0.5";
     NSExecutable = FTP;
     NSIcon = "FTP_icon_gs.tif";
     NSMainNibFile = "FTP.gorm";
