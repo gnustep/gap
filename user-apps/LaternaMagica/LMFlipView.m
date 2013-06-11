@@ -107,10 +107,4 @@ enum
     return [super performKeyEquivalent:theEvent];
 }
 
-/* printing */
-- (void)print:(id)sender
-{
-  [[NSPrintOperation printOperationWithView:self] runOperation];
-}
-
 @end
