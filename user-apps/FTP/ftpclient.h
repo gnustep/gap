@@ -95,14 +95,14 @@ typedef struct
 /** reads a reply from the control socket */
 - (int)readReply :(NSMutableArray **)result;
 
-- (int)writeLine:(char *)line;
-- (int)writeLine:(char *)line byLoggingIt:(BOOL)doLog;
+- (int)writeLine:(NSString *)line;
+- (int)writeLine:(NSString *)line byLoggingIt:(BOOL)doLog;
 - (void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 - (void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
-- (int)authenticate:(char *)user :(char *)pass;
+- (int)authenticate:(NSString *)user :(NSString *)pass;
 - (int)initDataConn;
 - (int)initDataStream;
 - (int)closeDataConn;

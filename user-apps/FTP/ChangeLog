@@ -1,3 +1,11 @@
+2013-06-11 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	* ftpclient.h
+	* AppController.m
+	* AppController.h
+	Change most method parameters from char* to NSString*.
+
 2013-06-10 Riccardo Mottola <rm@gnu.org>
 
 	* ftpclient.m

@@ -831,9 +831,10 @@
 
 - (IBAction)connectConn:(id)sender
 {
-    NSArray *dirList;
-    char    tempStr[1024];
-    char    tempStr2[1024];
+  NSArray *dirList;
+  char tempStr[1024];
+  NSString *u;
+  NSString *p;
     
     [connectPanel performClose:nil];
     [mainWin makeKeyAndOrderFront:self];
@@ -848,14 +849,14 @@
     }
     if ([connAnon state] == NSOnState)
     {
-        strcpy(tempStr, "anonymous");
-        strcpy(tempStr2, "user@myhost.com");
+        u = @"anonymous";
+        p = @"user@myhost.com";
     } else
     {
-        [[connUser stringValue] getCString:tempStr];
-        [[connPass stringValue] getCString:tempStr2];
+        u = [connUser stringValue];
+        p = [connPass stringValue];
     }
-    if ([ftp authenticate:tempStr :tempStr2] < 0)
+    if ([ftp authenticate:u :p] < 0)
     {
         NSRunAlertPanel(@"Error", @"Authentication failed.\nCheck that your username and password are correct.", @"Ok", nil, nil);
         NSLog(@"authentication failed.");
