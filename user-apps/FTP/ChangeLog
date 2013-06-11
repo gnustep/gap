@@ -1,5 +1,10 @@
 2013-06-11 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.m
+	Actually create a new folder, local and remote.
+
+2013-06-11 Riccardo Mottola <rm@gnu.org>
+
 	* ftpclient.m
 	* ftpclient.h
 	* AppController.m
