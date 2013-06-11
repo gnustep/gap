@@ -63,50 +63,55 @@
 
 void initStream(streamStruct *ss, int socket)
 {
-    ss->socket = socket;
-    ss->position = 0;
-    ss->len = 0;
-    ss->buffer[0] = '\0';
+  ss->socket = socket;
+  ss->position = 0;
+  ss->len = 0;
+  ss->buffer[0] = '\0';
 }
 
 int getChar(streamStruct* ss)
 {
-    int result;
-    BOOL gotEof;
+  int result;
+  BOOL gotEof;
 
-    gotEof = NO;
-    if (ss->position == ss->len)
+  gotEof = NO;
+  if (ss->position == ss->len)
     {
-        int read;
+      int read;
 
-        read = recv(ss->socket, ss->buffer, MAX_SOCK_BUFF, 0);
-        if (read > 0)
+      read = recv(ss->socket, ss->buffer, MAX_SOCK_BUFF, 0);
+      if (read > 0)
         {
-            ss->len = read;
-            ss->position = 0;
-        } else if (read == 0)
+          ss->len = read;
+          ss->position = 0;
+        }
+      else if (read == 0)
         {
-            ss->len = 0;
-            ss->position = 0;
-            ss->buffer[0] = '\0';
-            gotEof = YES;
-        } else
+          ss->len = 0;
+          ss->position = 0;
+          ss->buffer[0] = '\0';
+          gotEof = YES;
+        } 
+      else
         {
-            ss->len = 0;
-            ss->position = 0;
-            NSLog(@"error sock read");
-            perror("getChar:read");
-            ss->buffer[0] = '\0';
-            gotEof = YES;
+          ss->len = 0;
+          ss->position = 0;
+          NSLog(@"error sock read");
+          perror("getChar:read");
+          ss->buffer[0] = '\0';
+          gotEof = YES;
         }
     }
-    if (gotEof)
-        result = EOF;
-    else {    
-        result = ss->buffer[ss->position];
-        ss->position++;
+  if (gotEof)
+    {
+      result = EOF;
     }
-    return result;
+  else
+    {    
+      result = ss->buffer[ss->position];
+      ss->position++;
+    }
+  return result;
 }
 
 @implementation FtpClient
@@ -194,7 +199,6 @@ int getChar(streamStruct* ss)
   if (!connected)
     return;
 
-  NSLog(@"dir |%@|", dir);	
   tempStr = [@"CWD " stringByAppendingString:dir];
   [self writeLine:tempStr];
   if ([self readReply:&reply] == 250)
@@ -354,7 +358,6 @@ int getChar(streamStruct* ss)
   commandStr = [line stringByAppendingString:@"\r\n"];
   [commandStr getCString:command];
   bytesToSend = strlen(command);
-  NSLog(@"sending: %s", command);
   if (doLog)
     [self logIt:line];
   if ((sentBytes = send(controlSocket, command, bytesToSend, 0)) < bytesToSend)
@@ -384,7 +387,6 @@ int getChar(streamStruct* ss)
   int            retVal;
   
   retVal = [self writeLine:@"TYPE A"];
-  NSLog(@"retval: %d", retVal);
   if (retVal > 0)
     {
       [self readReply:&reply];
@@ -418,19 +420,19 @@ int getChar(streamStruct* ss)
 
   if ([file isDir])
     {
-        NSString     *pristineLocalPath;  /* original path */
-        NSString     *pristineRemotePath; /* original path */
-        NSArray      *dirList;
-        NSString     *remoteDir;
-        NSEnumerator *en;
-        FileElement  *fEl;
+      NSString     *pristineLocalPath;  /* original path */
+      NSString     *pristineRemotePath; /* original path */
+      NSArray      *dirList;
+      NSString     *remoteDir;
+      NSEnumerator *en;
+      FileElement  *fEl;
 
-        if (depth > MAX_DIR_RECURSION)
+      if (depth > MAX_DIR_RECURSION)
         {
-            NSLog(@"Max depth reached: %d", depth);
-            return;
+          NSLog(@"Max depth reached: %d", depth);
+          return;
         }
-
+      
         pristineLocalPath = [[localClient workingDir] retain];
         pristineRemotePath = [[self workingDir] retain];
         
@@ -438,17 +440,17 @@ int getChar(streamStruct* ss)
         [self changeWorkingDir:remoteDir];
 
         if ([localClient createNewDir:localPath] == YES)
-        {
+          {
             [localClient changeWorkingDir:localPath];
     
             dirList = [self dirContents];
             en = [dirList objectEnumerator];
             while ((fEl = [en nextObject]))
-            {
+              {
                 NSLog(@"recurse, download : %@", [fEl name]);
                 [self retrieveFile:fEl to:localClient beingAt:depth+1];
-            }
-        }
+              }
+          }
         /* we get back were we started */
         [self changeWorkingDir:pristineRemotePath];
         [localClient changeWorkingDir:pristineLocalPath];
@@ -591,28 +593,27 @@ int getChar(streamStruct* ss)
 
   if ([file isDir])
     {
-        NSString     *pristineLocalPath;  /* original path */
-        NSString     *pristineRemotePath; /* original path */
-        NSArray      *dirList;
-        NSString     *remotePath;
-        NSEnumerator *en;
-        FileElement  *fEl;
+      NSString     *pristineLocalPath;  /* original path */
+      NSString     *pristineRemotePath; /* original path */
+      NSArray      *dirList;
+      NSString     *remotePath;
+      NSEnumerator *en;
+      FileElement  *fEl;
 
-        if (depth > MAX_DIR_RECURSION)
+      if (depth > MAX_DIR_RECURSION)
         {
-            NSLog(@"Max depth reached: %d", depth);
-            return;
+          NSLog(@"Max depth reached: %d", depth);
+          return;
         }
 
-        pristineLocalPath = [[localClient workingDir] retain];
-        pristineRemotePath = [[self workingDir] retain];
-
-        NSLog(@"it is a dir: %@", fileName);
-        remotePath = [pristineRemotePath stringByAppendingPathComponent:fileName];
-        [localClient changeWorkingDir:localPath];
-        NSLog(@"local dir changed: %@", [localClient workingDir]);
-
-        if ([self createNewDir:remotePath] == YES)
+      pristineLocalPath = [[localClient workingDir] retain];
+      pristineRemotePath = [[self workingDir] retain];
+      
+      remotePath = [pristineRemotePath stringByAppendingPathComponent:fileName];
+      [localClient changeWorkingDir:localPath];
+      NSLog(@"local dir changed: %@", [localClient workingDir]);
+      
+      if ([self createNewDir:remotePath] == YES)
         {
             NSLog(@"remote dir created successfully");
             [self changeWorkingDir:remotePath];
@@ -737,7 +738,6 @@ int getChar(streamStruct* ss)
 
         pristineRemotePath = [[self workingDir] retain];
 
-        NSLog(@"it is a dir: %@", fileName);
         remotePath = [pristineRemotePath stringByAppendingPathComponent:fileName];
 
         NSLog(@"remote dir created successfully");
@@ -867,7 +867,7 @@ int getChar(streamStruct* ss)
         unsigned int i;
         
         line = [reply objectAtIndex:0];
-        NSLog(@"pwd reply is: %@", line);
+
         length = [line length];
         i = 0;
         while (i < length && ([line characterAtIndex:i] != '\"'))
@@ -1106,32 +1106,30 @@ int getChar(streamStruct* ss)
  */
 - (BOOL)createNewDir:(NSString *)dir
 {
-    NSString       *remotePath;
-    NSString       *command;
-    char           pathCStr[MAX_CONTROL_BUFF];
-    NSMutableArray *reply;
-    int            replyCode;
+  NSString       *remotePath;
+  NSString       *command;
+  NSMutableArray *reply;
+  int            replyCode;
 
-    if ([dir hasPrefix:@"/"])
+  if ([dir hasPrefix:@"/"])
     {
-        NSLog(@"%@ is an absolute path", dir);
-        remotePath = dir;
+      NSLog(@"%@ is an absolute path", dir);
+      remotePath = dir;
     } else
     {
-        NSLog(@"%@ is a relative path", dir);
-        remotePath = [[self workingDir] stringByAppendingPathComponent:dir];
+      NSLog(@"%@ is a relative path", dir);
+      remotePath = [[self workingDir] stringByAppendingPathComponent:dir];
     }
 
-    [remotePath getCString:pathCStr];
-    command =[@"MKD " stringByAppendingString:remotePath];
-    [self writeLine:command];
-    replyCode = [self readReply:&reply];
-    if (replyCode == 257)
-        return YES;
-    else
+  command =[@"MKD " stringByAppendingString:remotePath];
+  [self writeLine:command];
+  replyCode = [self readReply:&reply];
+  if (replyCode == 257)
+    return YES;
+  else
     {
-        NSLog(@"remote mkdir code: %d %@", replyCode, [reply objectAtIndex:0]);
-        return NO;
+      NSLog(@"remote mkdir code: %d %@", replyCode, [reply objectAtIndex:0]);
+      return NO;
     }
 }
 
