@@ -166,10 +166,9 @@
   NSString    *thePath;
   NSArray     *items;
   int         selectedIndex;
-  int         i;
+  unsigned    i;
   NSArray    *dirList;
 
-  NSLog(@"%@", [sender class]);
   if (sender == localPath)
     {
       theClient = local;
@@ -569,7 +568,7 @@
       
       name = [nameGetter name];
       fullPath = [[local workingDir] stringByAppendingPathComponent:name];
-      NSLog(@"New folder: %@", fullPath);
+      [local createNewDir:fullPath];
     }
   [nameGetter release];
 }
@@ -593,7 +592,7 @@
       
       name = [nameGetter name];
       fullPath = [[ftp workingDir] stringByAppendingPathComponent:name];
-      NSLog(@"New folder: %@", fullPath);
+      [ftp createNewDir:fullPath];
     }
   [nameGetter release];
 }
@@ -788,12 +787,12 @@
 
 - (IBAction)prefCancel:(id)sender
 {
-    [prefPanel performClose:nil];
+  [prefPanel performClose:nil];
 }
 
 - (IBAction)showFtpLog:(id)sender
 {
-    [logWin makeKeyAndOrderFront:self];
+  [logWin makeKeyAndOrderFront:self];
 }
 
 /**
@@ -836,76 +835,79 @@
   NSString *u;
   NSString *p;
     
-    [connectPanel performClose:nil];
-    [mainWin makeKeyAndOrderFront:self];
+  [connectPanel performClose:nil];
+  [mainWin makeKeyAndOrderFront:self];
 
-    ftp = [ftp initWithController:self :connMode];
-    [[connAddress stringValue] getCString:tempStr];
-    if ([ftp connect:[connPort intValue] :tempStr] < 0)
+  ftp = [ftp initWithController:self :connMode];
+  [[connAddress stringValue] getCString:tempStr];
+  if ([ftp connect:[connPort intValue] :tempStr] < 0)
     {
-        NSRunAlertPanel(@"Error", @"Connection failed.\nCheck that you typed the host name correctly.", @"Ok", nil, nil);
-        NSLog(@"connection failed in connectConn");
-        return;
+      NSRunAlertPanel(@"Error", @"Connection failed.\nCheck that you typed the host name correctly.", @"Ok", nil, nil);
+      NSLog(@"connection failed in connectConn");
+      return;
     }
-    if ([connAnon state] == NSOnState)
+  if ([connAnon state] == NSOnState)
     {
-        u = @"anonymous";
-        p = @"user@myhost.com";
-    } else
-    {
-        u = [connUser stringValue];
-        p = [connPass stringValue];
+      u = @"anonymous";
+      p = @"user@myhost.com";
     }
-    if ([ftp authenticate:u :p] < 0)
+  else
     {
-        NSRunAlertPanel(@"Error", @"Authentication failed.\nCheck that your username and password are correct.", @"Ok", nil, nil);
-        NSLog(@"authentication failed.");
+      u = [connUser stringValue];
+      p = [connPass stringValue];
+    }
+  if ([ftp authenticate:u :p] < 0)
+    {
+      NSRunAlertPanel(@"Error", @"Authentication failed.\nCheck that your username and password are correct.", @"Ok", nil, nil);
+      NSLog(@"authentication failed.");
+      return;
+    }
+  else
+    {
+      [ftp setWorkingDir:[ftp homeDir]];
+      if ((dirList = [ftp dirContents]) == nil)
         return;
-    } else
-    {
-        [ftp setWorkingDir:[ftp homeDir]];
-        if ((dirList = [ftp dirContents]) == nil)
-            return;
-        [remoteTableData initData:dirList];
-        [remoteView reloadData];
-
-        /* update the path menu */
-        [self updatePath :remotePath :[ftp workDirSplit]];
-        
-        /* set the window title */
-        [mainWin setTitle:[connAddress stringValue]];
+      [remoteTableData initData:dirList];
+      [remoteView reloadData];
+      
+      /* update the path menu */
+      [self updatePath :remotePath :[ftp workDirSplit]];
+      
+      /* set the window title */
+      [mainWin setTitle:[connAddress stringValue]];
     }
 }
 
 - (IBAction)cancelConn:(id)sender
 {
-    [connectPanel performClose:nil];
+  [connectPanel performClose:nil];
 }
 
 - (IBAction)anonymousConn:(id)sender
 {
-    if ([connAnon state] == NSOnState)
+  if ([connAnon state] == NSOnState)
     {
-        [connUser setEnabled:NO];
-        [connPass setEnabled:NO];
-    } else
+      [connUser setEnabled:NO];
+      [connPass setEnabled:NO];
+    }
+  else
     {
-        [connUser setEnabled:YES];
-        [connPass setEnabled:YES];
+      [connUser setEnabled:YES];
+      [connPass setEnabled:YES];
     }
 }
 
 
 - (void)showAlertDialog:(NSString *)message
 {
-    [message retain];
-    NSRunAlertPanel(@"Attention", message, @"Ok", nil, nil);
-    [message release];
+  [message retain];
+  NSRunAlertPanel(@"Attention", message, @"Ok", nil, nil);
+  [message release];
 }
 
 - (connectionModes)connectionMode
 {
-    return connMode;
+  return connMode;
 }
 
 @end
