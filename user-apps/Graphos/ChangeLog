@@ -5,6 +5,9 @@
 	* GRBezierPathEditor.m
 	Simplify and refactor drawing inside the BezierControlPoint.
 
+	* GRText.m
+	Fix zoomed drawing.
+
 2013-06-13 Riccardo Mottola <rm@gnu.org>
 
 	* GRBoxEditor.m

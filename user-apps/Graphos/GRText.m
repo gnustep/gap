@@ -367,8 +367,6 @@
 
     pos.x = pos.x / zmFactor * f;
     pos.y = pos.y / zmFactor * f;
-    fsize = fsize / zmFactor * f;
-    parspace = parspace / zmFactor * f;
     size = NSMakeSize(size.width / zmFactor * f, size.height / zmFactor * f);
     bounds = NSMakeRect(pos.x, pos.y, size.width, size.height /2);
     selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
@@ -440,7 +438,6 @@
 - (void)draw
 {
     NSArray *lines;
-    NSString *line;
     float baselny;
     int i;
     NSBezierPath *bezp;
@@ -455,7 +452,7 @@
     style = [[NSMutableParagraphStyle alloc] init];
     [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
     [style setAlignment: align];
-    [style setParagraphSpacing: parspace];
+    [style setParagraphSpacing: parspace*zmFactor];
     tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
     if (tempFont == nil)
       {
@@ -486,6 +483,7 @@
         lines = [str componentsSeparatedByString: @"\n"];
         for(i = 0; i < [lines count]; i++)
         {
+          NSString *line;
             line = [lines objectAtIndex: i];
 	    
             [line drawAtPoint: NSMakePoint(pos.x, baselny) withAttributes:strAttr];
