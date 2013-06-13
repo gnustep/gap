@@ -53,6 +53,7 @@ typedef struct
 - (void)moveBezierHandleToPosition:(NSPoint)newp oldPosition:(NSPoint)oldp;
 
 - (GRBezierHandle)bzHandle;
+- (void)drawHandle;
 
 - (void)select;
 - (void)unselect;

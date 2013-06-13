@@ -285,78 +285,27 @@
 
 - (void)draw
 {
-    GRBezierControlPoint *cp, *ponpoint = nil;
-    NSRect r;
-    GRBezierHandle bzhandle;
-    int i;
-    NSBezierPath *bzp;
-
-    if(![[(GRBezierPath *)object controlPoints] count] || ![object visible])
-        return;
-
-    bzp = [NSBezierPath bezierPath];
-
-    [bzp setLineWidth:1];
-    if(groupSelected)
+  GRBezierControlPoint *cp;
+  NSInteger i;
+  
+  if(![[(GRBezierPath *)object controlPoints] count] || ![object visible])
+    return;
+  
+  if(groupSelected)
     {
-        for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+      for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
         {
-            cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-            r = [cp centerRect];
-            [[NSColor blackColor] set];
-            NSRectFill(r);
+          cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+          [cp drawControlAsSelected:NO];
         }
     }
-
-    if(editSelected)
+  
+  if(editSelected)
     {
-        for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+      for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
         {
-            cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-            r = [cp centerRect];
-            if([cp isSelect]) {
-                [[NSColor blackColor] set];
-                NSRectFill(r);
-                if([cp isActiveHandle]) {
-                    bzhandle = [cp bzHandle];
-                    [[NSColor blackColor] set];
-                    NSRectFill(bzhandle.firstHandleRect);
-                    [bzp moveToPoint:NSMakePoint(bzhandle.firstHandle.x, bzhandle.firstHandle.y)];
-                    [bzp lineToPoint:NSMakePoint(bzhandle.center.x, bzhandle.center.y)];
-                    [bzp lineToPoint:NSMakePoint(bzhandle.secondHandle.x, bzhandle.secondHandle.y)];
-                    [bzp stroke];
-                    NSRectFill(bzhandle.secondHandleRect);
-                }
-            } else
-            {
-                [[NSColor whiteColor] set];
-                NSRectFill(r);
-
-                ponpoint = [(GRBezierPath *)object pointOnPoint: cp];
-                if(ponpoint)
-                {
-                    if([ponpoint isSelect])
-                    {
-                        r = [ponpoint centerRect];
-                        [[NSColor blackColor] set];
-                        NSRectFill(r);
-                        if([ponpoint isActiveHandle])
-                        {
-                            bzhandle = [ponpoint bzHandle];
-                            [[NSColor blackColor] set];
-                            NSRectFill(bzhandle.firstHandleRect);
-                            [bzp moveToPoint:NSMakePoint(bzhandle.firstHandle.x, bzhandle.firstHandle.y)];
-                            [bzp lineToPoint:NSMakePoint(bzhandle.center.x, bzhandle.center.y)];
-                            [bzp lineToPoint:NSMakePoint(bzhandle.secondHandle.x, bzhandle.secondHandle.y)];
-                            [bzp stroke];
-                            NSRectFill(bzhandle.secondHandleRect);
-                        }
-                    }
-                }
-
-            }
-            [[NSColor blackColor] set];
-            NSFrameRect(r);
+          cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+          [cp drawControl];
         }
     }
 }

@@ -1,3 +1,10 @@
+2013-06-14 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierControlPoint.h
+	* GRBezierControlPoint.m
+	* GRBezierPathEditor.m
+	Simplify and refactor drawing inside the BezierControlPoint.
+
 2013-06-13 Riccardo Mottola <rm@gnu.org>
 
 	* GRBoxEditor.m

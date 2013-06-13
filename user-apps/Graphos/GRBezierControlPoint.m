@@ -136,6 +136,55 @@
     bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
 }
 
+- (void)drawControlAsSelected: (BOOL)sel
+{
+  NSPoint centerZ;
+  NSRect centerRectZ;
+  NSRect innerRectZ;
+
+  centerZ.x = bzHandle.center.x * zmFactor;
+  centerZ.y = bzHandle.center.y * zmFactor;
+  centerRectZ = NSMakeRect(bzHandle.center.x-3, bzHandle.center.y-3, 6, 6);
+  innerRectZ = NSMakeRect(bzHandle.center.x-2, bzHandle.center.y-2, 4, 4);
+ 
+  if (sel)
+    {
+      [[NSColor blackColor] set];
+      NSRectFill(centerRectZ);
+    }
+  else
+    {
+      [[NSColor whiteColor] set];
+      NSRectFill(centerRectZ);
+    }
+  [[NSColor blackColor] set];
+  NSFrameRect(centerRectZ);
+}
+
+- (void)drawHandle;
+{
+  NSBezierPath *bzp;
+
+  bzp = [NSBezierPath bezierPath];
+  
+  [bzp setLineWidth:1];
+  
+  [[NSColor blackColor] set];
+  NSRectFill(bzHandle.firstHandleRect);
+  [bzp moveToPoint:NSMakePoint(bzHandle.firstHandle.x, bzHandle.firstHandle.y)];
+  [bzp lineToPoint:NSMakePoint(bzHandle.center.x, bzHandle.center.y)];
+  [bzp lineToPoint:NSMakePoint(bzHandle.secondHandle.x, bzHandle.secondHandle.y)];
+  [bzp stroke];
+  NSRectFill(bzHandle.secondHandleRect);
+}
+
+- (void)drawControl
+{
+  [self drawControlAsSelected:isSelect];
+  if (isSelect && isActiveHandle)
+    [self drawHandle];
+}
+
 - (void)setZoomFactor:(CGFloat)f
 {
     bzHandle.center.x = bzHandle.center.x / zmFactor * f;
