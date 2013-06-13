@@ -8,6 +8,9 @@
 	* GRText.m
 	Fix zoomed drawing.
 
+	* GRCircle.m
+	Cleanup drawing, make guides slightly stronger.
+
 2013-06-13 Riccardo Mottola <rm@gnu.org>
 
 	* GRBoxEditor.m

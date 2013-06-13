@@ -107,12 +107,8 @@
 
 - (void)draw
 {
-  NSBezierPath *bzp;
-  
   if(![object visible])
     return;
-  
-  bzp = [NSBezierPath bezierPath];
   
   if([self isGroupSelected])
     {
@@ -122,9 +118,12 @@
   
   if([self isEditSelected])
     { 
+      NSBezierPath *bzp;
+
+      bzp = [NSBezierPath bezierPath];
       [bzp appendBezierPathWithRect:[(GRCircle *)object bounds]];
-      [bzp setLineWidth:0.2];
-      [[NSColor lightGrayColor] set];
+      [bzp setLineWidth:0.5];
+      [[NSColor grayColor] set];
       [bzp stroke];
       
       [[(GRCircle *)object startControlPoint] drawControl];
