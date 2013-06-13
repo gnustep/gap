@@ -107,57 +107,28 @@
 
 - (void)draw
 {
-    NSBezierPath *bzp;
-
-    if(![object visible])
-        return;
-
-    bzp = [NSBezierPath bezierPath];
-    
-    if([self isGroupSelected])
+  NSBezierPath *bzp;
+  
+  if(![object visible])
+    return;
+  
+  bzp = [NSBezierPath bezierPath];
+  
+  if([self isGroupSelected])
     {
-        NSRect r;
-
-        [bzp setLineWidth:1];
-
-        r = [[(GRCircle *)object startControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        r = [[(GRCircle *)object endControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
+      [[(GRCircle *)object startControlPoint] drawControlAsSelected:NO];
+      [[(GRCircle *)object endControlPoint] drawControlAsSelected:NO];
     }
-
-    if([self isEditSelected])
-    {
-        NSRect r;
-
-        [bzp appendBezierPathWithRect:[(GRCircle *)object bounds]];
-        [bzp setLineWidth:0.2];
-        [[NSColor lightGrayColor] set];
-        [bzp stroke];
-
-        [bzp setLineWidth:1];
-        
-        r = [[(GRCircle *)object startControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        r = [[(GRCircle *)object endControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-
-        if([[(GRCircle *)object startControlPoint] isSelect])
-        {
-            r = [[(GRCircle *)object startControlPoint] innerRect];
-            [[NSColor whiteColor] set];
-            NSRectFill(r);
-        }
-        if([[(GRCircle *)object endControlPoint] isSelect])
-        {
-            r = [[(GRCircle *)object endControlPoint] innerRect];
-            [[NSColor whiteColor] set];
-            NSRectFill(r);
-        }
+  
+  if([self isEditSelected])
+    { 
+      [bzp appendBezierPathWithRect:[(GRCircle *)object bounds]];
+      [bzp setLineWidth:0.2];
+      [[NSColor lightGrayColor] set];
+      [bzp stroke];
+      
+      [[(GRCircle *)object startControlPoint] drawControl];
+      [[(GRCircle *)object endControlPoint] drawControl];
     }
 }
 

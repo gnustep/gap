@@ -36,12 +36,11 @@
 
 @interface GRObjectControlPoint : NSObject
 {
-    BOOL isActiveHandle;
-    BOOL isSelect;
-    NSPoint center;
-    NSRect centerRect;
-    NSRect innerRect;
-    CGFloat zmFactor;
+  BOOL isActiveHandle;
+  BOOL isSelect;
+  NSPoint center;
+  NSRect centerRect;
+  CGFloat zmFactor;
 }
 
 - (id)initAtPoint:(NSPoint)aPoint zoomFactor:(CGFloat)zf;
@@ -52,7 +51,9 @@
 
 - (NSPoint)center;
 - (NSRect)centerRect;
-- (NSRect)innerRect;
+
+- (void)drawControlAsSelected: (BOOL)sel;
+- (void)drawControl;
 
 
 - (void)select;
