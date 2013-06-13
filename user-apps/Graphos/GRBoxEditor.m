@@ -106,50 +106,19 @@
 
 - (void)draw
 {
-    NSBezierPath *bzp;
-
-    if(![object visible])
-        return;
-
-    bzp = [NSBezierPath bezierPath];
-    
-    [bzp setLineWidth:1];
-
-    if([self isGroupSelected])
+  if(![object visible])
+    return;
+  
+  if([self isGroupSelected])
     {
-        NSRect r;
-
-        r = [[(GRBox *)object startControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        r = [[(GRBox *)object endControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
+      [[(GRBox *)object startControlPoint] drawControlAsSelected:NO];
+      [[(GRBox *)object endControlPoint] drawControlAsSelected:NO];
     }
-
-    if([self isEditSelected])
+  
+  if([self isEditSelected])
     {
-        NSRect r;
-
-        r = [[(GRBox *)object startControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-        r = [[(GRBox *)object endControlPoint] centerRect];
-        [[NSColor blackColor] set];
-        NSRectFill(r);
-
-        if([[(GRBox *)object startControlPoint] isSelect])
-        {
-            r = [[(GRBox *)object startControlPoint] innerRect];
-            [[NSColor whiteColor] set];
-            NSRectFill(r);
-        }
-        if([[(GRBox *)object endControlPoint] isSelect])
-        {
-            r = [[(GRBox *)object endControlPoint] innerRect];
-            [[NSColor whiteColor] set];
-            NSRectFill(r);
-        }
+      [[(GRBox *)object startControlPoint] drawControl];
+      [[(GRBox *)object endControlPoint] drawControl];
     }    
 }
 

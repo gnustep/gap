@@ -23,6 +23,8 @@
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#import <AppKit/NSColor.h>
+
 #import "GRObjectControlPoint.h"
 
 
@@ -53,19 +55,43 @@
 
 - (void)moveToPoint:(NSPoint)p
 {
-    center.x = p.x;
-    center.y = p.y;
-    centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
-    innerRect = NSMakeRect(p.x-2, p.y-2, 4, 4);
+  center.x = p.x;
+  center.y = p.y;
+  centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
+}
+
+- (void)drawControlAsSelected: (BOOL)sel
+{
+  NSPoint centerZ;
+  NSRect centerRectZ;
+  NSRect innerRectZ;
+
+  centerZ.x = center.x * zmFactor;
+  centerZ.y = center.y * zmFactor;
+  centerRectZ = NSMakeRect(center.x-3, center.y-3, 6, 6);
+  innerRectZ = NSMakeRect(center.x-2, center.y-2, 4, 4);
+
+  [[NSColor blackColor] set];
+  NSRectFill(centerRectZ);
+
+  if (sel)
+    {
+      [[NSColor whiteColor] set];
+      NSRectFill(innerRectZ);
+    }
+}
+
+- (void)drawControl
+{
+  [self drawControlAsSelected:isSelect];
 }
 
 - (void)setZoomFactor:(CGFloat)f
 {
-    center.x = center.x / zmFactor * f;
-    center.y = center.y / zmFactor * f;
-    centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
-    innerRect = NSMakeRect(center.x-2, center.y-2, 4, 4);
-    zmFactor = f;
+  center.x = center.x / zmFactor * f;
+  center.y = center.y / zmFactor * f;
+  centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
+  zmFactor = f;
 }
 
 - (NSPoint)center
@@ -73,14 +99,9 @@
     return center;
 }
 
-- (NSRect)centerRect;
+- (NSRect)centerRect
 {
-    return centerRect;
-}
-
-- (NSRect)innerRect;
-{
-    return innerRect;
+  return centerRect;
 }
 
 - (void)select

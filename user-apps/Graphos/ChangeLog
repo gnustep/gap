@@ -1,7 +1,15 @@
+2013-06-13 Riccardo Mottola <rm@gnu.org>
+
+	* GRBoxEditor.m
+	* GRCircleEditor.m
+	* GRObjectControlPoint.h
+	* GRObjectControlPoint.m
+	Refactor drawing into the Object Control Point
+
 2013-03-01 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
-	Check loop condition vbetter due to unsigned transition.
+	Check loop condition better due to unsigned transition.
 
 2013-03-01 Riccardo Mottola <rm@gnu.org>
 
