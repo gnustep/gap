@@ -156,9 +156,9 @@
     {
       [[NSColor whiteColor] set];
       NSRectFill(centerRectZ);
+      [[NSColor blackColor] set];
+      NSFrameRect(centerRectZ);
     }
-  [[NSColor blackColor] set];
-  NSFrameRect(centerRectZ);
 }
 
 - (void)drawHandle;
