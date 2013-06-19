@@ -32,6 +32,21 @@
 
 @implementation OKChart
 
++ (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt
+{
+  NSString *strRes;
+  
+  strRes = nil;
+  
+  if (fmt == OKNumFmtPlain)
+    {
+      strRes = [number stringValue];
+    }
+  
+  
+  return strRes;
+}
+
 -(id)initWithFrame: (NSRect)frameRect
 {
   self = [super initWithFrame: frameRect];

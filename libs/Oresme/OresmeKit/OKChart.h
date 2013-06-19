@@ -43,6 +43,12 @@ typedef enum
   OKGridBoth
 } OKGridStyle;
 
+typedef enum
+  {
+    OKNumFmtPlain = 0,
+    OKNumFmtKiloMega
+  } OKNumberFormatting;
+
 @class OKSeries;
 
 @interface OKChart : NSView
@@ -63,6 +69,8 @@ typedef enum
   float graphMaxYVal;
   float graphMaxXVal;
 }
+
++ (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt;
 
 - (IBAction)setAxisColor:(NSColor *)color;
 - (IBAction)setBackgroundColor:(NSColor *)color;

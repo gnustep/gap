@@ -23,7 +23,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/NSBezierPath.h>
+#import <AppKit/AppKit.h>
 
 #import "OKLineChart.h"
 #import "OKSeries.h"
@@ -192,6 +192,41 @@
 	  [path stroke];
 	  [path release];
 	}
+    }
+
+  /* draw values */
+  if (1)
+    {
+      NSMutableParagraphStyle *style;
+      NSDictionary *strAttr;
+      NSFont *tempFont;
+      NSPoint labelP;
+      NSString *label;
+      NSSize labelSize;
+
+      style = [[NSMutableParagraphStyle alloc] init];
+      [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+      tempFont = [NSFont systemFontOfSize:6];
+
+      strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+                                 tempFont, NSFontAttributeName,
+                               [NSColor blackColor], NSForegroundColorAttributeName,
+                               style, NSParagraphStyleAttributeName, nil] retain];
+      [style release];
+
+      
+      label = [OKChart format:[NSNumber numberWithFloat:(ySteps - 1)* (yUnitSize / oneYUnit)] withFormat:OKNumFmtPlain];
+      labelSize = [label sizeWithAttributes:strAttr];
+      labelP = NSMakePoint(2, (minYPos + (ySteps-1) * yUnitSize) - labelSize.height / 2);
+      [label drawAtPoint:labelP  withAttributes:strAttr];
+      
+      label = [OKChart format:[NSNumber numberWithInt:0] withFormat:OKNumFmtPlain];
+      labelSize = [label sizeWithAttributes:strAttr];
+      labelP = NSMakePoint(2, axisLevel - labelSize.height / 2 );
+      [label drawAtPoint:labelP  withAttributes:strAttr];
+
+      [strAttr release];
+ 
     }
 }
 

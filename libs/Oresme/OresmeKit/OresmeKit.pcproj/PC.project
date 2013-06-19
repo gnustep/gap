@@ -68,7 +68,8 @@
 	"OKSeries.h",
 	"OKLineChart.h",
 	"OresmeKit.h",
-	"OKPieChart.h"
+	"OKPieChart.h",
+	"OKFunctions.h"
     );
     "SEARCH_HEADER_DIRS" = (
     );
