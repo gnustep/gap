@@ -29,8 +29,7 @@ OKChart.h \
 OKSeries.h \
 OKLineChart.h \
 OresmeKit.h \
-OKPieChart.h \
-OKFunctions.h 
+OKPieChart.h
 
 #
 # Class files
