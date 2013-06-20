@@ -35,6 +35,11 @@
 #endif
 #endif
 
+#if defined(__MINGW32__)
+#define srandom srand
+#define random rand
+#endif
+
 @implementation FileTable
 
 - (id)init
