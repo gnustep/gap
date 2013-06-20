@@ -27,7 +27,7 @@
 #define NSInteger int
 #endif
 
-#if defined(__MINGW__)
+#if defined(__MINGW32__)
 #define srandom srand
 #define random rand
 #endif
