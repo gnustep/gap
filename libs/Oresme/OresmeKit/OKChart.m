@@ -118,6 +118,42 @@
   NSLog(@"end super draw");
 }
 
+/** set left margin */
+- (void)setMarginLeft:(float)margin
+{
+  marginLeft = margin;
+}
+
+/** set right margin */
+- (void)setMarginRight:(float)margin
+{
+  marginRight = margin;
+}
+
+/** set bottom margin */
+- (void)setMarginBottom:(float)margin
+{
+  marginBottom = margin;
+}
+
+/** set Top margin */
+- (void)setMarginTop:(float)margin
+{
+  marginTop = margin;
+}
+
+/** sets if and how axis labels are drawn */
+- (void)setxAxisLabelStyle:(OKLabelStyle)style
+{
+  xAxisLabelStyle = style;
+}
+
+/** sets if and how axis labels are drawn */
+- (void)setyAxisLabelStyle:(OKLabelStyle)style
+{
+  yAxisLabelStyle = style;
+}
+
 /** Sets the chart axis and lines color */
 -(IBAction)setAxisColor:(NSColor *)color
 {

@@ -1,4 +1,5 @@
-/*
+/* -*- mode: objc -*-
+
    Project: OresmeKit
    
    Chart: Generic chart superclass
@@ -44,10 +45,18 @@ typedef enum
 } OKGridStyle;
 
 typedef enum
-  {
-    OKNumFmtPlain = 0,
-    OKNumFmtKiloMega
-  } OKNumberFormatting;
+ {
+   OKNumFmtPlain = 0,
+   OKNumFmtKiloMega
+ } OKNumberFormatting;
+
+typedef enum
+{
+  OKNoLabels = 0,
+  OKMinMaxLabels,
+  OKAllLabels
+} OKLabelStyle;
+
 
 @class OKSeries;
 
@@ -59,6 +68,8 @@ typedef enum
   NSMutableArray *seriesArray;
   
   OKGridStyle gridStyle;
+  OKLabelStyle xAxisLabelStyle;
+  OKLabelStyle yAxisLabelStyle;
 
   float marginRight;
   float marginLeft;
@@ -72,6 +83,12 @@ typedef enum
 
 + (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt;
 
+- (void)setMarginLeft:(float)margin;
+- (void)setMarginRight:(float)margin;
+- (void)setMarginBottom:(float)margin;
+- (void)setMarginTop:(float)margin;
+- (void)setxAxisLabelStyle:(OKLabelStyle)style;
+- (void)setyAxisLabelStyle:(OKLabelStyle)style;
 - (IBAction)setAxisColor:(NSColor *)color;
 - (IBAction)setBackgroundColor:(NSColor *)color;
 - (IBAction)setGridStyle:(OKGridStyle)style;

@@ -194,8 +194,8 @@
 	}
     }
 
-  /* draw values */
-  if (1)
+  /* draw axis labels */
+  if (yAxisLabelStyle  == OKMinMaxLabels || yAxisLabelStyle == OKAllLabels )
     {
       NSMutableParagraphStyle *style;
       NSDictionary *strAttr;
@@ -214,17 +214,26 @@
                                style, NSParagraphStyleAttributeName, nil] retain];
       [style release];
 
-      
-      label = [OKChart format:[NSNumber numberWithFloat:(ySteps - 1)* (yUnitSize / oneYUnit)] withFormat:OKNumFmtPlain];
-      labelSize = [label sizeWithAttributes:strAttr];
-      labelP = NSMakePoint(2, (minYPos + (ySteps-1) * yUnitSize) - labelSize.height / 2);
-      [label drawAtPoint:labelP  withAttributes:strAttr];
-      
-      label = [OKChart format:[NSNumber numberWithInt:0] withFormat:OKNumFmtPlain];
-      labelSize = [label sizeWithAttributes:strAttr];
-      labelP = NSMakePoint(2, axisLevel - labelSize.height / 2 );
-      [label drawAtPoint:labelP  withAttributes:strAttr];
 
+      i = 0;
+      while (i < ySteps)
+        {
+          float y;
+        
+          y = around(minYPos + i * yUnitSize)+0.5;
+          [NSBezierPath strokeRect: NSMakeRect(minXPos, y, 2, 0)];
+
+          label = [OKChart format:[NSNumber numberWithFloat: i * (yUnitSize / oneYUnit) + graphMinYVal] withFormat:OKNumFmtPlain];
+          labelSize = [label sizeWithAttributes:strAttr];
+          labelP = NSMakePoint(2, (minYPos + i * yUnitSize) - labelSize.height / 2);
+          [label drawAtPoint:labelP  withAttributes:strAttr];
+
+          if (i == 0 && yAxisLabelStyle == OKMinMaxLabels)
+            i = ySteps -1;
+          else
+            i++;
+      }
+      
       [strAttr release];
  
     }
