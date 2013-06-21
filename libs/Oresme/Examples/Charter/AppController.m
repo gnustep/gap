@@ -130,7 +130,7 @@
   [chartView removeFromSuperview];
   chartView = tempChart;
   [superView addSubview: chartView];
-  
+  [self changePlot:plot];
 }
 
 - (IBAction)setAxisColor: (id)sender
