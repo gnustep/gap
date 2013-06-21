@@ -115,10 +115,12 @@
   if ([[sender selectedItem] tag] == 0)
     {
       tempChart = [[OKLineChart alloc] initWithFrame: rect];
+      [tempChart setyAxisLabelStyle: OKMinMaxLabels];
     }
   else if ([[sender selectedItem] tag] == 1)
     {
       tempChart = [[OKPieChart alloc] initWithFrame: rect];
+      [tempChart setyAxisLabelStyle: OKAllLabels];
     }
   else
     {
