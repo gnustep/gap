@@ -23,7 +23,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <AppKit/NSBezierPath.h>
+#import <AppKit/AppKit.h>
 
 #import "OKSeries.h"
 #import "OKPieChart.h"
@@ -114,6 +114,34 @@
       [path lineToPoint: NSMakePoint(center.x + cos((currAngle+angle)*6.2831853/360)*radius, center.y + sin((currAngle+angle)*6.2831853/360)*radius)];
       [path closePath];      
       [path stroke];
+
+      if (1)
+        {
+          NSMutableParagraphStyle *style;
+          NSDictionary *strAttr;
+          NSFont *tempFont;
+          NSPoint labelP;
+          NSString *label;
+          NSSize labelSize;
+
+          style = [[NSMutableParagraphStyle alloc] init];
+          [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+          tempFont = [NSFont systemFontOfSize:8];
+
+          strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+                                     tempFont, NSFontAttributeName,
+                                   [NSColor blackColor], NSForegroundColorAttributeName,
+                                   style, NSParagraphStyleAttributeName, nil] retain];
+          [style release];
+
+      
+          label = [OKChart format:[valuesArray objectAtIndex:i] withFormat:OKNumFmtPlain];
+          labelSize = [label sizeWithAttributes:strAttr];
+          labelP =  NSMakePoint(center.x + cos((currAngle + angle/2)*6.2831853/360)*radius/2, center.y + sin((currAngle + angle/2)*6.2831853/360)*radius/2);
+          [label drawAtPoint:labelP  withAttributes:strAttr];
+
+          [strAttr release];
+        }
       
       currAngle += angle;
       [path release];
