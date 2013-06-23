@@ -16,7 +16,7 @@
 	* GRFunctions.m
 	* GRObjectControlPoint.m
 	* GRText.m
-	Keep the zoom factor as a separate prperty and keep the original size and position, independently of zoom
+	Keep the zoom factor as a separate property and keep the original size and position, independently of zoom
 
 2013-06-16 Riccardo Mottola <rm@gnu.org>
 

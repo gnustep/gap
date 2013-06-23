@@ -144,8 +144,8 @@
 
   centerZ.x = bzHandle.center.x * zmFactor;
   centerZ.y = bzHandle.center.y * zmFactor;
-  centerRectZ = NSMakeRect(bzHandle.center.x-3, bzHandle.center.y-3, 6, 6);
-  innerRectZ = NSMakeRect(bzHandle.center.x-2, bzHandle.center.y-2, 4, 4);
+  centerRectZ = NSMakeRect(centerZ.x-3, centerZ.y-3, 6, 6);
+  innerRectZ = NSMakeRect(centerZ.x-2, centerZ.y-2, 4, 4);
  
   if (sel)
     {
@@ -163,19 +163,31 @@
 
 - (void)drawHandle;
 {
+  NSPoint firstHandleP;
+  NSRect firstHandleR;
+  NSPoint secondHandleP;
+  NSRect secondHandleR;
+  NSPoint centerP;
   NSBezierPath *bzp;
 
+  /* we calculate the zoomed coordinates */
+  firstHandleP = NSMakePoint(bzHandle.firstHandle.x * zmFactor, bzHandle.firstHandle.y * zmFactor);
+  secondHandleP = NSMakePoint(bzHandle.secondHandle.x * zmFactor, bzHandle.secondHandle.y * zmFactor);
+  centerP = NSMakePoint(bzHandle.center.x * zmFactor, bzHandle.center.y * zmFactor);
+
+  firstHandleR = NSMakeRect(firstHandleP.x-2, firstHandleP.y-2, 4, 4);
+  secondHandleR = NSMakeRect(secondHandleP.x-2, secondHandleP.y-2, 4, 4);
   bzp = [NSBezierPath bezierPath];
   
   [bzp setLineWidth:1];
   
   [[NSColor blackColor] set];
-  NSRectFill(bzHandle.firstHandleRect);
-  [bzp moveToPoint:NSMakePoint(bzHandle.firstHandle.x, bzHandle.firstHandle.y)];
-  [bzp lineToPoint:NSMakePoint(bzHandle.center.x, bzHandle.center.y)];
-  [bzp lineToPoint:NSMakePoint(bzHandle.secondHandle.x, bzHandle.secondHandle.y)];
+  NSRectFill(firstHandleR);
+  [bzp moveToPoint:firstHandleP];
+  [bzp lineToPoint:centerP];
+  [bzp lineToPoint:secondHandleP];
   [bzp stroke];
-  NSRectFill(bzHandle.secondHandleRect);
+  NSRectFill(secondHandleR);
 }
 
 - (void)drawControl
@@ -187,16 +199,11 @@
 
 - (void)setZoomFactor:(CGFloat)f
 {
+  /*
     bzHandle.center.x = bzHandle.center.x / zmFactor * f;
     bzHandle.center.y = bzHandle.center.y / zmFactor * f;
     bzHandle.centerRect = NSMakeRect(bzHandle.center.x-3, bzHandle.center.y-3, 6, 6);
-    bzHandle.firstHandle.x = bzHandle.firstHandle.x / zmFactor * f;
-    bzHandle.firstHandle.y = bzHandle.firstHandle.y / zmFactor * f;
-    bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
-    bzHandle.secondHandle.x = bzHandle.secondHandle.x / zmFactor * f;
-    bzHandle.secondHandle.y = bzHandle.secondHandle.y / zmFactor * f;
-    bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
-
+  */
     zmFactor = f;
 }
 

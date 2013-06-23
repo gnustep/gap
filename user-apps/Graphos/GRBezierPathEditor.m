@@ -39,29 +39,30 @@
 
 
 
-
-
 - (NSPoint)moveControlAtPoint:(NSPoint)p
 {
-    GRBezierControlPoint *cp, *pntonpnt;
-    NSEvent *event;
-    NSPoint pp;
-    BOOL found = NO;
-    int i;
+  GRBezierControlPoint *cp, *pntonpnt;
+  NSEvent *event;
+  CGFloat zFactor;
+  NSPoint pp;
+  BOOL found = NO;
+  NSInteger i;
 
-    for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {
-        cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-        if(pointInRect([cp centerRect], p))
+      cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+      if(pointInRect([cp centerRect], p))
         {
-            [self selectForEditing];
-            [(GRBezierPath *)object setCurrentPoint:cp];
-            [cp select];
-            found = YES;
+	  [self selectForEditing];
+	  [(GRBezierPath *)object setCurrentPoint:cp];
+	  [cp select];
+	  found = YES;
         }
     }
-    if(!found)
-        return p;
+  if(!found)
+    return p;
+  
+  zFactor = [object zoomFactor];
 
     event = [[[object view] window] nextEventMatchingMask:
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
@@ -71,6 +72,7 @@
         do {
             pp = [event locationInWindow];
             pp = [[object view] convertPoint: pp fromView: nil];
+	    pp = GRpointDeZoom(pp, zFactor);
             if([[object view] shiftclick])
                 pp = pointApplyingCostrainerToPoint(pp, p);
 
@@ -97,7 +99,7 @@
 {
     GRBezierControlPoint *cp, *pntonpnt;
     BOOL found = NO;
-    int i;
+    NSUInteger i;
 
     for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {

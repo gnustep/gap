@@ -68,8 +68,8 @@
 
   centerZ.x = center.x * zmFactor;
   centerZ.y = center.y * zmFactor;
-  centerRectZ = NSMakeRect(center.x-3, center.y-3, 6, 6);
-  innerRectZ = NSMakeRect(center.x-2, center.y-2, 4, 4);
+  centerRectZ = NSMakeRect(centerZ.x-3, centerZ.y-3, 6, 6);
+  innerRectZ = NSMakeRect(centerZ.x-2, centerZ.y-2, 4, 4);
 
   [[NSColor blackColor] set];
   NSRectFill(centerRectZ);
@@ -88,9 +88,9 @@
 
 - (void)setZoomFactor:(CGFloat)f
 {
-  center.x = center.x / zmFactor * f;
-  center.y = center.y / zmFactor * f;
-  centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
+  //  center.x = center.x / zmFactor * f;
+  //  center.y = center.y / zmFactor * f;
+  //  centerRect = NSMakeRect(center.x-3, center.y-3, 6, 6);
   zmFactor = f;
 }
 

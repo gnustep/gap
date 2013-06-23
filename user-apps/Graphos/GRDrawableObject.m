@@ -164,6 +164,11 @@
     locked = value;
 }
 
+- (CGFloat)zoomFactor
+{
+  return zmFactor;
+}
+
 - (void)setZoomFactor:(CGFloat)f
 {
     zmFactor = f;

@@ -42,41 +42,44 @@
 
 - (NSPoint)moveControlAtPoint:(NSPoint)p
 {
-    GRObjectControlPoint *cp;
-    NSEvent *event;
-    NSPoint pp;
-    BOOL found = NO;
+  GRObjectControlPoint *cp;
+  NSEvent *event;
+  NSPoint pp;
+  CGFloat zFactor;
+  BOOL found = NO;
 
-    cp = [(GRCircle *)object startControlPoint];
-    if (pointInRect([cp centerRect], p))
+  zFactor = [object zoomFactor];
+  cp = [(GRCircle *)object startControlPoint];
+  if (pointInRect([cp centerRect], p))
     {
-        [self selectForEditing];
-        [(GRPathObject *)object setCurrentPoint:cp];
-        [cp select];
-        found =  YES;
+      [self selectForEditing];
+      [(GRPathObject *)object setCurrentPoint:cp];
+      [cp select];
+      found =  YES;
     }
-    cp = [(GRCircle *)object endControlPoint];
-    if (pointInRect([cp centerRect], p))
+  cp = [(GRCircle *)object endControlPoint];
+  if (pointInRect([cp centerRect], p))
     {
-        [self selectForEditing];
-        [(GRPathObject *)object setCurrentPoint:cp];
-        [cp select];
-        found =  YES;
+      [self selectForEditing];
+      [(GRPathObject *)object setCurrentPoint:cp];
+      [cp select];
+      found =  YES;
     }
 
-    if(!found)
-        return p;
+  if(!found)
+    return p;
 
-    event = [[[object view] window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([event type] == NSLeftMouseDragged)
+  event = [[[object view] window] nextEventMatchingMask:
+				    NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+  if([event type] == NSLeftMouseDragged)
     {
-        [[object view] verifyModifiersOfEvent: event];
-        do
+      [[object view] verifyModifiersOfEvent: event];
+      do
         {
-            pp = [event locationInWindow];
-            pp = [[object view] convertPoint: pp fromView: nil];
-            if([[object view] shiftclick])
+	  pp = [event locationInWindow];
+	  pp = [[object view] convertPoint: pp fromView: nil];
+	  pp = GRpointDeZoom(pp, zFactor);
+	  if([[object view] shiftclick])
               {
                 NSPoint pos;
                 CGFloat w, h;
