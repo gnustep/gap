@@ -183,7 +183,7 @@
     {
 	NSLog(@"initInView description of GRbox");
     }
-    return self;
+  return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -274,18 +274,21 @@
 
 - (void)setEndAtPoint:(NSPoint)aPoint
 {
-    size.width = aPoint.x - pos.x;
-    size.height = aPoint.y- pos.y;
-    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
-    [endControlPoint moveToPoint: aPoint];
-    [endControlPoint select];
+  size.width = aPoint.x - pos.x;
+  size.height = aPoint.y- pos.y;
+  bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+
+  [endControlPoint moveToPoint: aPoint];
+  [endControlPoint select];
+
+  boundsZ = GRMakeBounds(pos.x * zmFactor, pos.y * zmFactor, size.width * zmFactor, size.height * zmFactor);
 }
 
 - (void)remakePath
 {
-    [self setStartAtPoint:[startControlPoint center]];
-    [self setEndAtPoint:[endControlPoint center]];
-    [(GRBoxEditor *)editor setIsDone:YES];
+  [self setStartAtPoint:[startControlPoint center]];
+  [self setEndAtPoint:[endControlPoint center]];
+  [(GRBoxEditor *)editor setIsDone:YES];
 }
 
 
@@ -330,20 +333,22 @@
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p
 {
-    pos.x += p.x;
-    pos.y += p.y;
-    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
-    [startControlPoint moveToPoint: pos];
-    [endControlPoint moveToPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+  pos.x += p.x;
+  pos.y += p.y;
+  bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+  [startControlPoint moveToPoint: pos];
+  [endControlPoint moveToPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+  
+  boundsZ = GRMakeBounds(pos.x * zmFactor, pos.y * zmFactor, size.width * zmFactor, size.height * zmFactor);
 }
 
 - (void)setZoomFactor:(CGFloat)f
 {
-    [super setZoomFactor:f];
-
-    [startControlPoint setZoomFactor:f];
-    [endControlPoint setZoomFactor:f];
-    [self remakePath];
+  [super setZoomFactor:f];
+  
+  [startControlPoint setZoomFactor:f];
+  [endControlPoint setZoomFactor:f];
+  [self remakePath];
 }
 
 /** draws the object and calls the editor to draw itself afterwards */
@@ -354,16 +359,16 @@
 
   linew = linewidth * zmFactor;
 
-    bzp = [NSBezierPath bezierPath];
-    [bzp appendBezierPathWithRect:bounds];
-    if(filled)
+  bzp = [NSBezierPath bezierPath];
+  [bzp appendBezierPathWithRect:boundsZ];
+  if(filled)
     {
-        [NSGraphicsContext saveGraphicsState];
-        [fillColor set];
-        [bzp fill];
-        [NSGraphicsContext restoreGraphicsState];
+      [NSGraphicsContext saveGraphicsState];
+      [fillColor set];
+      [bzp fill];
+      [NSGraphicsContext restoreGraphicsState];
     }
-    if(stroked)
+  if(stroked)
     {
       [NSGraphicsContext saveGraphicsState];
       [bzp setLineJoinStyle:linejoin];
@@ -374,8 +379,8 @@
       [NSGraphicsContext restoreGraphicsState];
     }
     
-    if ([[NSGraphicsContext currentContext] isDrawingToScreen])
-        [editor draw];
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    [editor draw];
 }
 
 

@@ -31,12 +31,16 @@
 
 @interface GRBox : GRPathObject
 {
-    NSPoint pos;
-    NSSize size;
-    NSRect bounds;
-    GRObjectControlPoint *startControlPoint;
-    GRObjectControlPoint *endControlPoint;
-    float rotation;
+  NSPoint    pos;
+  NSSize     size;
+  NSRect     bounds;
+
+  NSRect     boundsZ;
+
+  GRObjectControlPoint *startControlPoint;
+  GRObjectControlPoint *endControlPoint;
+
+  CGFloat rotation;
 }
 
 - (NSPoint) position;

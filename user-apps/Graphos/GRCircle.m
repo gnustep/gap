@@ -277,11 +277,13 @@
 
 - (void)setEndAtPoint:(NSPoint)aPoint
 {
-    size.width = aPoint.x - pos.x;
-    size.height = aPoint.y- pos.y;
-    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
-    [endControlPoint moveToPoint: aPoint];
-    [endControlPoint select];
+  size.width = aPoint.x - pos.x;
+  size.height = aPoint.y- pos.y;
+  bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+  [endControlPoint moveToPoint: aPoint];
+  [endControlPoint select];
+  
+  boundsZ = GRMakeBounds(pos.x * zmFactor, pos.y * zmFactor, size.width * zmFactor, size.height * zmFactor);
 }
 
 - (void)remakePath
@@ -328,11 +330,13 @@
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p
 {
-    pos.x += p.x;
-    pos.y += p.y;
-    bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
-    [startControlPoint moveToPoint: pos];
-    [endControlPoint moveToPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+  pos.x += p.x;
+  pos.y += p.y;
+  bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
+  [startControlPoint moveToPoint: pos];
+  [endControlPoint moveToPoint: NSMakePoint(pos.x + size.width, pos.y + size.height)];
+  
+  boundsZ = GRMakeBounds(pos.x * zmFactor, pos.y * zmFactor, size.width * zmFactor, size.height * zmFactor);
 }
 
 - (void)setZoomFactor:(CGFloat)f
@@ -368,26 +372,26 @@
 
   linew = linewidth * zmFactor;
 
-    center = NSMakePoint(NSMidX(bounds), NSMidY(bounds));
-    w = NSWidth(bounds);
-    h = NSHeight(bounds);
-    if (w > h)
-        minLength = h;
-    else
-        minLength = w;
-    radius = minLength / 2;
+  center = NSMakePoint(NSMidX(boundsZ), NSMidY(boundsZ));
+  w = NSWidth(boundsZ);
+  h = NSHeight(boundsZ);
+  if (w > h)
+    minLength = h;
+  else
+    minLength = w;
+  radius = minLength / 2;
 
-    bzp = [NSBezierPath bezierPath];
-    [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
+  bzp = [NSBezierPath bezierPath];
+  [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
     
-    if(filled)
+  if(filled)
     {
-        [NSGraphicsContext saveGraphicsState];
-        [fillColor set];
-        [bzp fill];
-        [NSGraphicsContext restoreGraphicsState];
+      [NSGraphicsContext saveGraphicsState];
+      [fillColor set];
+      [bzp fill];
+      [NSGraphicsContext restoreGraphicsState];
     }
-    if(stroked)
+  if(stroked)
     {
       [NSGraphicsContext saveGraphicsState];
       [bzp setLineJoinStyle:linejoin];
@@ -397,9 +401,9 @@
       [bzp stroke]; 
       [NSGraphicsContext restoreGraphicsState];
     }
-    
-    if ([[NSGraphicsContext currentContext] isDrawingToScreen])
-        [editor draw];
+  
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    [editor draw];
 }
 
 

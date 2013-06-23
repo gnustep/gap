@@ -33,10 +33,14 @@
 {
     NSPoint      pos;
     NSSize       size;
-    NSRect bounds;
+    NSRect       bounds;
+
+    NSRect       boundsZ;
+
     GRObjectControlPoint *startControlPoint;
     GRObjectControlPoint *endControlPoint;
-    float rotation;
+
+    CGFloat rotation;
 }
 
 - (BOOL)onControlPoint:(NSPoint)p;

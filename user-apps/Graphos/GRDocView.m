@@ -541,6 +541,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
         {
             p = [nextEvent locationInWindow];
             p = [self convertPoint: p fromView: nil];
+	    p = GRpointDeZoom(p, zFactor);
+
             if(shiftclick)
                 p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
 
@@ -828,54 +830,59 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
     [self saveCurrentObjectsDeep];
 
     nextEvent = [[self window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+				 NSLeftMouseUpMask | NSLeftMouseDraggedMask];
     if([nextEvent type] == NSLeftMouseDragged)
-    {
+      {
         [self verifyModifiersOfEvent: nextEvent];
         op.x = startp.x;
         op.y = startp.y;
-
+	
         do
-        {
-            p = [nextEvent locationInWindow];
-            p = [self convertPoint: p fromView: nil];
-            if(shiftclick)
-                p = pointApplyingCostrainerToPoint(p, startp);
-
-            if(altclick && !dupl)
-            {
-                moveobjs = [self duplicateObjects: objs andMoveTo: NSMakePoint(0, 0)];
-                dupl = YES;
-            } else if(!moveobjs)
-            {
-                moveobjs = [NSArray arrayWithArray: objs];
-            }
-
-            diffp.x = p.x - op.x;
-            diffp.y = p.y - op.y;
-            for(i = 0; i < [moveobjs count]; i++)
-            {
-                obj = [moveobjs objectAtIndex: i];
-                [obj moveAddingCoordsOfPoint: diffp];
-            }
-            op.x = p.x;
-            op.y = p.y;
-            [self setNeedsDisplay: YES];
-            nextEvent = [[self window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [self verifyModifiersOfEvent: nextEvent];
-        } while([nextEvent type] != NSLeftMouseUp);
-
+	  {
+	    p = [nextEvent locationInWindow];
+	    p = [self convertPoint: p fromView: nil];
+	    p = GRpointDeZoom(p, zFactor);
+	    
+	    if(shiftclick)
+	      p = pointApplyingCostrainerToPoint(p, startp);
+	    
+	    if(altclick && !dupl)
+	      {
+		moveobjs = [self duplicateObjects: objs andMoveTo: NSMakePoint(0, 0)];
+		dupl = YES;
+	      }
+	    else if(!moveobjs)
+	      {
+		moveobjs = [NSArray arrayWithArray: objs];
+	      }
+	    
+	    diffp.x = p.x - op.x;
+	    diffp.y = p.y - op.y;
+	    for(i = 0; i < [moveobjs count]; i++)
+	      {
+		obj = [moveobjs objectAtIndex: i];
+		[obj moveAddingCoordsOfPoint: diffp];
+	      }
+	    op.x = p.x;
+	    op.y = p.y;
+	    [self setNeedsDisplay: YES];
+	    nextEvent = [[self window] nextEventMatchingMask:
+					 NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+	    [self verifyModifiersOfEvent: nextEvent];
+	  }
+	while([nextEvent type] != NSLeftMouseUp);
+	
         if(dupl)
-        {
+	  {
             diffp.x = p.x - startp.x;
             diffp.y = p.y - startp.y;
-        } else
-        {
+	  }
+	else
+	  {
             diffp.x = startp.x - p.x;
             diffp.y = startp.y - p.y;
-        }
-    }
+	  }
+      }
 }
 
 
@@ -1306,6 +1313,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
         do {
             p = [nextEvent locationInWindow];
             p = [self convertPoint: p fromView: nil];
+	    p = GRpointDeZoom(p, zFactor);
+
             diffp.x = p.x - handpos.x;
             diffp.y = p.y - handpos.y;
             r = [self visibleRect];
@@ -1542,6 +1551,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
   p = [theEvent locationInWindow];
   p = [self convertPoint: p fromView: nil];
+  p = GRpointDeZoom(p, zFactor);
 
   if(count == 1)
     {
@@ -1598,10 +1608,11 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             default:
                 break;
         }
-    } else
+    }
+  else
     {
-        if([[NSApp delegate] currentToolType] == blackarrowtool)
-            [self editTextAtPoint: p];
+      if([[NSApp delegate] currentToolType] == blackarrowtool)
+	[self editTextAtPoint: p];
     }
 }
 

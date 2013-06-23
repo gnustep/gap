@@ -29,8 +29,6 @@
 #import "Graphos.h"
 #import "GRTextEditor.h"
 
-// FIXME should zmfactor really be saved?
-
 @implementation GRText
 
 - (id)initInView:(GRDocView *)aView
@@ -46,7 +44,8 @@
     {
       docView = aView;
       zmFactor = zf;
-      pos = NSMakePoint(p.x / zf, p.y / zf);
+      pos = p;
+      selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
       rotation = 0;
       scalex = 1;
       scaley = 1;
@@ -123,6 +122,7 @@
         ASSIGN(str, [description objectForKey: @"string"]);
         pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);
+	selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
         fontname = [description objectForKey: @"fontname"];
         fsize = [[description objectForKey: @"fontsize"] floatValue];
         ASSIGN(font, [NSFont fontWithName: fontname size: fsize]);
@@ -213,7 +213,6 @@
 	  obj = [NSNumber numberWithInt:[obj intValue]];
         locked = [obj boolValue];
 
-        zmFactor = [[description objectForKey: @"zmfactor"] floatValue];
         [self setZoomFactor: zf];
     }
     return self;
@@ -288,8 +287,6 @@
     [dict setObject: s forKey: @"fillalpha"];
     [dict setObject: [NSNumber numberWithBool: visible] forKey: @"visible"];
     [dict setObject: [NSNumber numberWithBool: locked] forKey: @"locked"];
-    s = [NSString stringWithFormat: @"%.3f", zmFactor];
-    [dict setObject: s forKey: @"zmfactor"];
 
     return dict;
 }
@@ -357,21 +354,12 @@
 {
     pos.x += p.x;
     pos.y += p.y;
-    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height /2);
+    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
     selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
 }
 
 - (void)setZoomFactor:(CGFloat)f
 {
-    NSString *fname;
-
-    pos.x = pos.x / zmFactor * f;
-    pos.y = pos.y / zmFactor * f;
-    size = NSMakeSize(size.width / zmFactor * f, size.height / zmFactor * f);
-    bounds = NSMakeRect(pos.x, pos.y, size.width, size.height /2);
-    selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
-    fname = [font fontName];
-    ASSIGN(font, [NSFont fontWithName: fname size: fsize]);
     zmFactor = f;
 }
 
@@ -437,73 +425,78 @@
 
 - (void)draw
 {
-    NSArray *lines;
-    float baselny;
-    int i;
-    NSBezierPath *bezp;
-    NSMutableParagraphStyle *style;
-    NSDictionary *strAttr;
-    NSFont *tempFont;
+  NSArray *lines;
+  float baselny;
+  NSInteger i;
+  NSBezierPath *bezp;
+  NSMutableParagraphStyle *style;
+  NSDictionary *strAttr;
+  NSFont *tempFont;
+  NSPoint posZ;
+  NSRect selRectZ;
+  
+  if(!visible)
+    return;
 
-    if(!visible)
-        return;
-
-    NSAssert (font != nil, @"Font object nil during drawing");
-    style = [[NSMutableParagraphStyle alloc] init];
-    [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-    [style setAlignment: align];
-    [style setParagraphSpacing: parspace*zmFactor];
-    tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
-    if (tempFont == nil)
-      {
-	NSLog(@"temp font obtained from %@ zoomFactor: %f is nil", font, zmFactor);
-	tempFont = font;
-      }
-    if (filled)
-      {
-	strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
-				   tempFont, NSFontAttributeName,
-				 strokeColor, NSForegroundColorAttributeName,
-				 fillColor, NSBackgroundColorAttributeName,
-				 style, NSParagraphStyleAttributeName, nil] retain];
-      }
-    else
-      {
-	strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
-				   tempFont, NSFontAttributeName,
-				 strokeColor, NSForegroundColorAttributeName,
-				 style, NSParagraphStyleAttributeName, nil] retain];
-      }
-    [style release];
-    baselny = pos.y;
-    bezp = [NSBezierPath bezierPath];
-    [bezp setLineWidth:0];
-    if([str length] > 0)
+  posZ = GRpointZoom(pos, zmFactor);
+  selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
+  NSAssert (font != nil, @"Font object nil during drawing");
+  style = [[NSMutableParagraphStyle alloc] init];
+  [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [style setAlignment: align];
+  [style setParagraphSpacing: parspace*zmFactor];
+  tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
+  if (tempFont == nil)
     {
-        lines = [str componentsSeparatedByString: @"\n"];
-        for(i = 0; i < [lines count]; i++)
+      NSLog(@"temp font obtained from %@ zoomFactor: %f is nil", font, zmFactor);
+      tempFont = font;
+    }
+  if (filled)
+    {
+      strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+				 tempFont, NSFontAttributeName,
+			       strokeColor, NSForegroundColorAttributeName,
+			       fillColor, NSBackgroundColorAttributeName,
+			       style, NSParagraphStyleAttributeName, nil] retain];
+    }
+  else
+    {
+      strAttr = [[NSDictionary dictionaryWithObjectsAndKeys:
+				 tempFont, NSFontAttributeName,
+			       strokeColor, NSForegroundColorAttributeName,
+			       style, NSParagraphStyleAttributeName, nil] retain];
+    }
+  [style release];
+  baselny = posZ.y;
+  bezp = [NSBezierPath bezierPath];
+  [bezp setLineWidth:0];
+  if([str length] > 0)
+    {
+      lines = [str componentsSeparatedByString: @"\n"];
+      for(i = 0; i < [lines count]; i++)
         {
           NSString *line;
-            line = [lines objectAtIndex: i];
-	    
-            [line drawAtPoint: NSMakePoint(pos.x, baselny) withAttributes:strAttr];
-
-
-            if([editor isSelect])
+	  line = [lines objectAtIndex: i];
+	  
+	  [line drawAtPoint: NSMakePoint(posZ.x, baselny) withAttributes:strAttr];
+	  
+	  
+	  if([editor isSelect])
             {
-                [[NSColor blackColor] set];
-                [bezp moveToPoint:NSMakePoint(pos.x, baselny)];
-                [bezp lineToPoint:NSMakePoint(pos.x + bounds.size.width*zmFactor, baselny)];
+	      [[NSColor blackColor] set];
+	      [bezp moveToPoint:NSMakePoint(posZ.x, baselny)];
+	      [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
             }
-
-            baselny -= parspace*zmFactor;
+	  
+	  baselny -= parspace*zmFactor;
         }
-
-        if([editor isSelect])
+      
+      if([editor isSelect])
         {
-            [bezp stroke];
-            [[NSColor blackColor] set];
-            NSRectFill(selRect);
+	  NSLog(@"editor is selected!, %f %f %f %f", selRectZ.origin.x, selRectZ.origin.y, selRect.origin.x, selRect.origin.y);
+	  [bezp stroke];
+	  [[NSColor blackColor] set];
+            NSRectFill(selRectZ);
         }
     }
   [strAttr release];

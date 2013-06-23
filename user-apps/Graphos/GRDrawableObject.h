@@ -80,6 +80,9 @@
 /** locks an object */
 - (void)setLocked:(BOOL)value;
 
+/** current zoom factor */
+- (CGFloat)zoomFactor;
+
 /** the zoom factor is used to draw an object in the proper size
  * when zooming in our out the view
  */
