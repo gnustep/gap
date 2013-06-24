@@ -70,6 +70,7 @@ typedef enum
   OKGridStyle gridStyle;
   OKLabelStyle xAxisLabelStyle;
   OKLabelStyle yAxisLabelStyle;
+  OKNumberFormatting yLabelNumberFmt;
 
   float marginRight;
   float marginLeft;
@@ -89,6 +90,7 @@ typedef enum
 - (void)setMarginTop:(float)margin;
 - (void)setxAxisLabelStyle:(OKLabelStyle)style;
 - (void)setyAxisLabelStyle:(OKLabelStyle)style;
+- (void)setYLabelNumberFormatting:(OKNumberFormatting)fmt;
 - (IBAction)setAxisColor:(NSColor *)color;
 - (IBAction)setBackgroundColor:(NSColor *)color;
 - (IBAction)setGridStyle:(OKGridStyle)style;
