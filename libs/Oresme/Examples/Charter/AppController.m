@@ -50,8 +50,9 @@
   int i;
   float v1, v2;
 
+  [chartView setYLabelNumberFormatting:OKNumFmtPlain];
   [chartView removeAllSeries];
-  NSLog(@"removed series");
+
   series1 = [[OKSeries alloc] init];
   [chartView addSeries: series1];
   [series1 release];
@@ -98,6 +99,75 @@
       [series1 addObject: [NSNumber numberWithFloat: 20]];
       [series2 addObject: [NSNumber numberWithFloat: 80]];
       [series3 addObject: [NSNumber numberWithFloat: 100]];
+    }
+  else if ([[sender selectedItem] tag] == 3)
+    {
+      [series1 setColor: [NSColor purpleColor]];
+      series2 = [[OKSeries alloc] init];
+      [series2 setColor: [NSColor greenColor]];
+      [chartView addSeries: series2];
+      [series2 release];
+      [chartView setYLabelNumberFormatting:OKNumFmtKiloMega];
+      for (i = 0; i < 36; i++)
+	{
+	  v1 = sin((i * 10) * 6.28 / 180) * 1000;
+	  v2 = cos((i * 10) * 6.28 / 180) * 1000;
+
+	  [series1 addObject: [NSNumber numberWithFloat: v1]];
+	  [series2 addObject: [NSNumber numberWithFloat: v2]];
+	}
+      NSLog(@"series 3 calculated");
+    }
+  else if ([[sender selectedItem] tag] == 4)
+    {
+      [series1 setColor: [NSColor purpleColor]];
+      series2 = [[OKSeries alloc] init];
+      [series2 setColor: [NSColor greenColor]];
+      [chartView addSeries: series2];
+      [series2 release];
+      [chartView setYLabelNumberFormatting:OKNumFmtKiloMega];
+      for (i = 0; i < 36; i++)
+	{
+	  v1 = sin((i * 10) * 6.28 / 180) * 1e6;
+	  v2 = cos((i * 10) * 6.28 / 180) * 1e6;
+
+	  [series1 addObject: [NSNumber numberWithFloat: v1]];
+	  [series2 addObject: [NSNumber numberWithFloat: v2]];
+	}
+      NSLog(@"series 4 calculated");
+    }
+  else if ([[sender selectedItem] tag] == 5)
+    {
+      [series1 setColor: [NSColor purpleColor]];
+      series2 = [[OKSeries alloc] init];
+      [series2 setColor: [NSColor greenColor]];
+      [chartView addSeries: series2];
+      [series2 release];
+      for (i = 0; i < 36; i++)
+	{
+	  v1 = sin((i * 10) * 6.28 / 180);
+	  v2 = cos((i * 10) * 6.28 / 180);
+          
+	  [series1 addObject: [NSNumber numberWithFloat: v1]];
+	  [series2 addObject: [NSNumber numberWithFloat: v2]];
+	}
+    }
+  else if ([[sender selectedItem] tag] == 6)
+    {
+      [series1 setColor: [NSColor purpleColor]];
+      series2 = [[OKSeries alloc] init];
+      [series2 setColor: [NSColor greenColor]];
+      [chartView addSeries: series2];
+      [series2 release];
+      for (i = 0; i < 36; i++)
+        {
+              v1 = sin((i * 10) * 6.28 / 180) / 1000;
+              v2 = cos((i * 10) * 6.28 / 180) / 1000;
+              
+              [series1 addObject: [NSNumber numberWithFloat: v1]];
+              [series2 addObject: [NSNumber numberWithFloat: v2]];
+        }
+      NSLog(@"series 3 calculated");
     }
   NSLog(@"redisplay");
   [chartView setNeedsDisplay: YES];
