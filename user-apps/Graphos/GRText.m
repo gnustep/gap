@@ -434,17 +434,19 @@
   NSFont *tempFont;
   NSPoint posZ;
   NSRect selRectZ;
+  NSRect boundsZ;
+  NSSize sizeZ;
   
   if(!visible)
     return;
-
+  
   posZ = GRpointZoom(pos, zmFactor);
   selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
   NSAssert (font != nil, @"Font object nil during drawing");
   style = [[NSMutableParagraphStyle alloc] init];
   [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [style setAlignment: align];
-  [style setParagraphSpacing: parspace*zmFactor];
+//  [style setParagraphSpacing: parspace*zmFactor];
   tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
   if (tempFont == nil)
     {
@@ -468,6 +470,12 @@
     }
   [style release];
   baselny = posZ.y;
+  
+  sizeZ  = [str sizeWithAttributes: strAttr];
+  boundsZ = NSMakeRect(posZ.x, posZ.y, sizeZ.width, sizeZ.height);
+  
+  [str drawInRect:boundsZ withAttributes:strAttr];
+
   bezp = [NSBezierPath bezierPath];
   [bezp setLineWidth:0];
   if([str length] > 0)
@@ -476,10 +484,10 @@
       for(i = 0; i < [lines count]; i++)
         {
           NSString *line;
+          NSSize lineSize;
+        
 	  line = [lines objectAtIndex: i];
-	  
-	  [line drawAtPoint: NSMakePoint(posZ.x, baselny) withAttributes:strAttr];
-	  
+          lineSize = [line sizeWithAttributes:strAttr]; 
 	  
 	  if([editor isSelect])
             {
@@ -488,15 +496,14 @@
 	      [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
             }
 	  
-	  baselny -= parspace*zmFactor;
+	  baselny += lineSize.height;
         }
       
       if([editor isSelect])
         {
-	  NSLog(@"editor is selected!, %f %f %f %f", selRectZ.origin.x, selRectZ.origin.y, selRect.origin.x, selRect.origin.y);
 	  [bezp stroke];
 	  [[NSColor blackColor] set];
-            NSRectFill(selRectZ);
+          NSRectFill(selRectZ);
         }
     }
   [strAttr release];

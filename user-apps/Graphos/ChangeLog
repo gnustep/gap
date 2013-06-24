@@ -1,3 +1,8 @@
+2013-06-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
+        Rewrite string drawing, use drawInRect and disregard paragraph space.
+
 2013-06-23 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierControlPoint.m
