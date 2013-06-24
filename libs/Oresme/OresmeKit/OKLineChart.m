@@ -223,7 +223,7 @@
           y = around(minYPos + i * yUnitSize)+0.5;
           [NSBezierPath strokeRect: NSMakeRect(minXPos, y, 2, 0)];
 
-          label = [OKChart format:[NSNumber numberWithFloat: i * (yUnitSize / oneYUnit) + graphMinYVal] withFormat:OKNumFmtPlain];
+          label = [OKChart format:[NSNumber numberWithFloat: i * (yUnitSize / oneYUnit) + graphMinYVal] withFormat:yLabelNumberFmt];
           labelSize = [label sizeWithAttributes:strAttr];
           labelP = NSMakePoint(2, (minYPos + i * yUnitSize) - labelSize.height / 2);
           [label drawAtPoint:labelP  withAttributes:strAttr];

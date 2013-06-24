@@ -42,7 +42,50 @@
     {
       strRes = [number stringValue];
     }
-  
+  else if (fmt == OKNumFmtKiloMega)
+    {
+      double d;
+      int c;
+      NSString *s;
+
+      d = [number doubleValue];
+      c = 0;
+      if (abs(d) > 1)
+        {
+          while (abs(d) > 1000)
+            {
+              d /= 1000;
+              c++;
+            }
+        }
+      else
+        {
+          while (abs(d) < 1)
+            {
+              d *= 1000;
+              c--;
+            }
+        }
+      s = [[NSNumber numberWithDouble:d] stringValue];
+      if (c == -3)
+        s = [s stringByAppendingString:@"p"];
+      else if (c  == -2)
+        s = [s stringByAppendingString:@"u"];
+      else if (c == -1)
+        s = [s stringByAppendingString:@"m"];
+      else if (c == 1)
+        s = [s stringByAppendingString:@"K"];
+      else if (c == 2)
+        s = [s stringByAppendingString:@"M"];
+      else if (c == 3)
+        s = [s stringByAppendingString:@"G"];
+      else if (c == 3)
+        s = [s stringByAppendingString:@"T"];
+      else if (c != 0)
+        NSLog(@"Number %@ too big or too small", number);
+
+      return s;
+    }
   
   return strRes;
 }
@@ -56,6 +99,7 @@
       axisColor = [[NSColor blackColor] retain];
       gridColor = [[NSColor lightGrayColor] retain];
       gridStyle = OKGridBoth;
+      yLabelNumberFmt = OKNumFmtPlain;
       seriesArray = [[NSMutableArray alloc] initWithCapacity: 1];
       marginRight = 5;
       marginLeft = 5;
@@ -152,6 +196,12 @@
 - (void)setyAxisLabelStyle:(OKLabelStyle)style
 {
   yAxisLabelStyle = style;
+}
+
+/** set label number formatting */
+- (void)setYLabelNumberFormatting:(OKNumberFormatting)fmt
+{
+  yLabelNumberFmt = fmt;
 }
 
 /** Sets the chart axis and lines color */
