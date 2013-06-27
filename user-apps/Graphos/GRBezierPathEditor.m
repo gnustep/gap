@@ -64,105 +64,106 @@
   
   zFactor = [object zoomFactor];
 
-    event = [[[object view] window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([event type] == NSLeftMouseDragged)
+  event = [[[object view] window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+
+  if([event type] == NSLeftMouseDragged)
     {
-        [[object view] verifyModifiersOfEvent: event];
-        do {
-            pp = [event locationInWindow];
-            pp = [[object view] convertPoint: pp fromView: nil];
-	    pp = GRpointDeZoom(pp, zFactor);
-            if([[object view] shiftclick])
-                pp = pointApplyingCostrainerToPoint(pp, p);
-
-            pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
-            if(pntonpnt)
+      [[object view] verifyModifiersOfEvent: event];
+      do
+        {
+          pp = [event locationInWindow];
+          pp = [[object view] convertPoint: pp fromView: nil];
+          pp = GRpointDeZoom(pp, zFactor);
+          if([[object view] shiftclick])
+            pp = pointApplyingCostrainerToPoint(pp, p);
+          
+          pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
+          if(pntonpnt)
             {
-                if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
-                    [pntonpnt moveToPoint: pp];
+              if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
+                [pntonpnt moveToPoint: pp];
             }
-            [[(GRBezierPath *)object currentPoint] moveToPoint: pp];
-            [(GRPathObject *)object remakePath];
-
-            [[object view] setNeedsDisplay: YES];
-            event = [[[object view] window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [[object view] verifyModifiersOfEvent: event];
-        } while([event type] != NSLeftMouseUp);
+          [[(GRBezierPath *)object currentPoint] moveToPoint: pp];
+          [(GRPathObject *)object remakePath];
+          
+          [[object view] setNeedsDisplay: YES];
+          event = [[[object view] window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+          [[object view] verifyModifiersOfEvent: event];
+        }
+      while([event type] != NSLeftMouseUp);
     }
-
-    return pp;
+  
+  return pp;
 }
 
 - (void)moveControlAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
 {
-    GRBezierControlPoint *cp, *pntonpnt;
-    BOOL found = NO;
-    NSUInteger i;
-
-    for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+  GRBezierControlPoint *cp, *pntonpnt;
+  BOOL found = NO;
+  NSUInteger i;
+  
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {
-        cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-        if(pointInRect([cp centerRect], oldp))
+      cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+      if(pointInRect([cp centerRect], oldp))
         {
-            [self selectForEditing];
-            [(GRBezierPath *)object setCurrentPoint:cp];
-            [cp select];
-            found = YES;
+          [self selectForEditing];
+          [(GRBezierPath *)object setCurrentPoint:cp];
+          [cp select];
+          found = YES;
         }
     }
-    if(!found)
-        return;
-
-    pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
-    if(pntonpnt)
+  if(!found)
+    return;
+  
+  pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
+  if(pntonpnt)
     {
-        if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
-            [pntonpnt moveToPoint: newp];
+      if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
+        [pntonpnt moveToPoint: newp];
     }
-    [[(GRBezierPath *)object currentPoint] moveToPoint: newp];
-    [(GRPathObject *)object remakePath];
-    [[object view] setNeedsDisplay: YES];
+  [[(GRBezierPath *)object currentPoint] moveToPoint: newp];
+  [(GRPathObject *)object remakePath];
+  [[object view] setNeedsDisplay: YES];
 }
 
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p
 {
-    GRBezierControlPoint *cp, *pntonpnt;
-    GRBezierHandle handle;
-    BOOL found = NO;
-    NSEvent *event;
-    NSPoint op, pp, c;
-    int i;
-
-    if(!editSelected)
-        return p;
-
-    for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+  GRBezierControlPoint *cp, *pntonpnt;
+  GRBezierHandle handle;
+  BOOL found = NO;
+  NSEvent *event;
+  NSPoint op, pp, c;
+  NSUInteger i;
+  
+  if(!editSelected)
+    return p;
+  
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {
-        cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-        if([cp isActiveHandle])
+      cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+      if([cp isActiveHandle])
         {
-            handle = [cp bzHandle];
-            if(pointInRect(handle.firstHandleRect, p)
-               || pointInRect(handle.secondHandleRect, p))
+          handle = [cp bzHandle];
+          if(pointInRect(handle.firstHandleRect, p) || pointInRect(handle.secondHandleRect, p))
             {
-                [cp select];
-                [(GRBezierPath *)object setCurrentPoint:cp];
-                found = YES;
+              [cp select];
+              [(GRBezierPath *)object setCurrentPoint:cp];
+              found = YES;
             }
         }
     }
-    if(!found)
-        return p;
-
-    event = [[[object view] window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([event type] == NSLeftMouseDragged) {
-        [[object view] verifyModifiersOfEvent: event];
-        op.x = p.x;
-        op.y = p.y;
-        do
+  if(!found)
+    return p;
+  
+  event = [[[object view] window] nextEventMatchingMask:
+                                    NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+  if([event type] == NSLeftMouseDragged)
+    {
+      [[object view] verifyModifiersOfEvent: event];
+      op.x = p.x;
+      op.y = p.y;
+      do
         {
             pp = [event locationInWindow];
             pp = [[object view] convertPoint: pp fromView: nil];

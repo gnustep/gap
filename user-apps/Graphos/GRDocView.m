@@ -716,51 +716,51 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)editPathAtPoint:(NSPoint)p
 {
-    id obj;
-    NSUInteger i;
-    NSUndoManager *uMgr;
-    
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Edit Path"];
-    
-    [self saveCurrentObjectsDeep];
+  id obj;
+  NSUInteger i;
+  NSUndoManager *uMgr;
+  
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Edit Path"];
+  
+  [self saveCurrentObjectsDeep];
 
-    for(i = 0; i < [objects count]; i++)
+  /* we look for a path that is selected and process editing
+     we no longer auto-select the object for editing though, nor automatically unselect the editing of the object */
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPath class]])
+      obj = [objects objectAtIndex: i];
+      if([obj isKindOfClass: [GRBezierPath class]] && [[obj editor] isSelect])
         {
-            if([obj onPathBorder: p])
+          if([obj onPathBorder: p])
             {
-                [[obj editor] selectForEditing];
-                [self moveControlPointOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p];
-                return;
-            } else
-            {
-                if([self moveBezierHandleOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p])
-                    return;
-                else
-                    [[obj editor] unselect];
+              [[obj editor] selectForEditing];
+              [self moveControlPointOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p];
+              return;
             }
-        } else if ([obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
-        {
-            if([obj onControlPoint: p])
+          else
             {
-                [[obj editor] selectForEditing];
-                [self moveControlPointOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p];
+              if([self moveBezierHandleOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p])
                 return;
-            } else
-            {
-                [[obj editor] unselect];
             }
-        } else
+        }
+      else if ([[obj editor] isSelect] && ([obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]]))
         {
-            [[obj editor] unselect];
+          if([obj onControlPoint: p])
+            {
+              [[obj editor] selectForEditing];
+              [self moveControlPointOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p];
+              return;
+            }
+        }
+      else if([obj isKindOfClass: [GRText class]] && [[obj editor] isSelect])
+        {
+          /* we have no actions for GRText */
         }
     }
-    [self setNeedsDisplay: YES];
+  [self setNeedsDisplay: YES];
 }
 
 - (void)editTextAtPoint:(NSPoint)p
