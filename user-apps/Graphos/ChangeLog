@@ -1,5 +1,10 @@
 2013-06-27 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierPath.m
+        Draw the control point through its method, properly zoomed.
+
+2013-06-27 Riccardo Mottola <rm@gnu.org>
+
 	* GRDocView.m
 	Permit path editing only on selected objects, do not unselect when clicking out of controls.
 
