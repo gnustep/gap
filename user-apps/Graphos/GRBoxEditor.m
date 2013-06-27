@@ -31,11 +31,11 @@
 
 - (id)initEditor:(GRDrawableObject *)anObject
 {
-    self = [super initEditor:anObject];
-    if(self != nil)
+  self = [super initEditor:anObject];
+  if(self != nil)
     {
     }
-    return self;
+  return self;
 }
 
 
@@ -63,7 +63,7 @@
       [cp select];
       found =  YES;
     }
-  
+
   if(!found)
     return p;
 

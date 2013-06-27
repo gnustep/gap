@@ -1,3 +1,8 @@
+2013-06-27 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Permit path editing only on selected objects, do not unselect when clicking out of controls.
+
 2013-06-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
