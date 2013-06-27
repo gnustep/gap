@@ -757,9 +757,7 @@ static double k = 0.025;
       for(i = 0; i < [controlPoints count]; i++)
         {
 	  cp = [controlPoints objectAtIndex: i];
-	  r = [cp centerRect];
-	  [[NSColor blackColor] set];
-	  NSRectFill(r);
+          [cp drawControlAsSelected:YES];
         }
     }
   
