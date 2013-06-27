@@ -463,54 +463,55 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)startDrawingAtPoint:(NSPoint)p
 {
-    NSEvent *nextEvent;
-    GRBezierPath *bzpath;
-    id obj;
-    BOOL isneweditor = YES;
-    int i;
-    NSUndoManager *uMgr;
-    
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Create Path"];
-    
-    [self saveCurrentObjects];
-
-    for(i = 0; i < [objects count]; i++)
+  NSEvent *nextEvent;
+  GRBezierPath *bzpath;
+  id obj;
+  BOOL isneweditor = YES;
+  NSUInteger i;
+  NSUndoManager *uMgr;
+  
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Create Path"];
+  
+  [self saveCurrentObjects];
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPath class]])
-            if(![[obj editor] isdone])
-                isneweditor = NO;
+      obj = [objects objectAtIndex: i];
+      if([obj isKindOfClass: [GRBezierPath class]])
+        if(![[obj editor] isdone])
+          isneweditor = NO;
     }
-
-    if(isneweditor)
-        for(i = 0; i < [objects count]; i++)
-        {
-            GRObjectEditor *objEdi;
-            
-            objEdi = [[objects objectAtIndex: i] editor];
-            if (![objEdi isSelect])
-                [objEdi unselect];
-        }
-
+  
+  if(isneweditor)
+    for(i = 0; i < [objects count]; i++)
+      {
+        GRObjectEditor *objEdi;
+        
+        objEdi = [[objects objectAtIndex: i] editor];
+        if (![objEdi isSelect])
+          [objEdi unselect];
+      }
+  
     nextEvent = [[self window] nextEventMatchingMask:
         NSLeftMouseUpMask | NSLeftMouseDraggedMask];
     [self verifyModifiersOfEvent: nextEvent];
 
     if([nextEvent type] != NSLeftMouseDragged)
-    {
+      {
         if(isneweditor)
-        {
+          {
             [self addPath];
             bzpath = [objects objectAtIndex: edind];
             [[bzpath editor] selectForEditing];
             [bzpath addControlAtPoint: p];
             [self setNeedsDisplay: YES];
             return;
-        } else
-        {
+          }
+        else
+          {
             bzpath = [objects objectAtIndex: edind];
             [[bzpath editor] selectForEditing];
             if(shiftclick)
@@ -518,33 +519,35 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             [bzpath addLineToPoint: p];
             [self setNeedsDisplay: YES];
             return;
-        }
-    } else
-    {
+          }
+      }
+    else
+      {
         if(isneweditor)
-        {
+          {
             [self addPath];
             bzpath = [objects objectAtIndex: edind];
             [[bzpath editor] selectForEditing];
             [bzpath addControlAtPoint: p];
-        } else
-        {
+          }
+        else
+          {
             bzpath = [objects objectAtIndex: edind];
             [[bzpath editor] selectForEditing];
             if(shiftclick)
                 p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
             [bzpath addControlAtPoint: p];
-        }
+          }
         [self setNeedsDisplay: YES];
-
+        
         do
-        {
+          {
             p = [nextEvent locationInWindow];
             p = [self convertPoint: p fromView: nil];
 	    p = GRpointDeZoom(p, zFactor);
 
             if(shiftclick)
-                p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
+              p = pointApplyingCostrainerToPoint(p, [[bzpath lastPoint] center]);
 
             [bzpath addCurveWithBezierHandlePosition: p];
 
@@ -553,11 +556,12 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             nextEvent = [[self window] nextEventMatchingMask:
                 NSLeftMouseUpMask | NSLeftMouseDraggedMask];
             [self verifyModifiersOfEvent: nextEvent];
-        } while([nextEvent type] != NSLeftMouseUp);
-
+          }
+        while([nextEvent type] != NSLeftMouseUp);
+        
         [bzpath confirmNewCurve];
         [self setNeedsDisplay: YES];
-    }
+      }
 }
 
 - (void)startBoxAtPoint:(NSPoint)p
@@ -889,26 +893,26 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 /* propagates control point editing down to each editor */
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos
 {
-    NSPoint p;
-
-    p = [editor moveControlAtPoint: pos];
-    if(p.x == pos.x && p.y == pos.y)
-        return NO;
-
-    [self setNeedsDisplay: YES];
-    return YES;
+  NSPoint p;
+  
+  p = [editor moveControlAtPoint: pos];
+  if(p.x == pos.x && p.y == pos.y)
+    return NO;
+  
+  [self setNeedsDisplay: YES];
+  return YES;
 }
 
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos
 {
-    NSPoint p;
-
-    p = [editor moveBezierHandleAtPoint: pos];
-    if(p.x == pos.x && p.y == pos.y)
-        return NO;
-
-    [self setNeedsDisplay: YES];
-    return YES;
+  NSPoint p;
+  
+  p = [editor moveBezierHandleAtPoint: pos];
+  if(p.x == pos.x && p.y == pos.y)
+    return NO;
+  
+  [self setNeedsDisplay: YES];
+  return YES;
 }
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
@@ -1054,40 +1058,39 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSUInteger i;
   NSUndoManager *uMgr;
 
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Move to front"];
-
-    [self saveCurrentObjectsDeep];
-
-
-    for(i = 0; i < [objects count]; i++)
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Move to front"];
+  
+  [self saveCurrentObjectsDeep];
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        if([[[objects objectAtIndex: i] editor] isGroupSelected])
+      if([[[objects objectAtIndex: i] editor] isGroupSelected])
         {
-            obj = [[objects objectAtIndex: i] retain];
-            break;
+          obj = [[objects objectAtIndex: i] retain];
+          break;
         }
     }
-    if(!obj)
-        return;
+  if(!obj)
+    return;
 
-    for(i = 0; i < [objects count]; i++)
-        if([objects objectAtIndex: i] != obj)
-            [[[objects objectAtIndex: i] editor] unselect];
-
-    for(i = 0; i < [objects count]; i++)
+  for(i = 0; i < [objects count]; i++)
+    if([objects objectAtIndex: i] != obj)
+      [[[objects objectAtIndex: i] editor] unselect];
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        if((obj == [objects objectAtIndex: i]) && (i + 1 < [objects count]))
+      if((obj == [objects objectAtIndex: i]) && (i + 1 < [objects count]))
         {
-            [objects removeObjectAtIndex: i];
-            [objects insertObject: obj atIndex: i + 1];
-            break;
+          [objects removeObjectAtIndex: i];
+          [objects insertObject: obj atIndex: i + 1];
+          break;
         }
     }
-    [obj release];
-    [self setNeedsDisplay: YES];
+  [obj release];
+  [self setNeedsDisplay: YES];
 }
 
 - (void)moveSelectedObjectsToBack:(id)sender
@@ -1096,57 +1099,57 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSUInteger i;
   NSUndoManager *uMgr;
 
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Move to back"];
-
-    [self saveCurrentObjects];
-    
-    for(i = 0; i < [objects count]; i++)
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Move to back"];
+  
+  [self saveCurrentObjects];
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        if([[[objects objectAtIndex: i] editor] isGroupSelected])
+      if([[[objects objectAtIndex: i] editor] isGroupSelected])
         {
-            obj = [[objects objectAtIndex: i] retain];
-            break;
+          obj = [[objects objectAtIndex: i] retain];
+          break;
         }
     }
-    if(!obj)
-        return;
-
-    for(i = 0; i < [objects count]; i++)
-        if([objects objectAtIndex: i] != obj)
-            [[[objects objectAtIndex: i] editor] unselect];
-
-    for(i = 0; i < [objects count]; i++)
+  if(!obj)
+    return;
+  
+  for(i = 0; i < [objects count]; i++)
+    if([objects objectAtIndex: i] != obj)
+      [[[objects objectAtIndex: i] editor] unselect];
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        if((obj == [objects objectAtIndex: i]) && (i > 0)) 
+      if((obj == [objects objectAtIndex: i]) && (i > 0)) 
         {
-            [objects removeObjectAtIndex: i];
-            [objects insertObject: obj atIndex: i - 1];
-            break;
+          [objects removeObjectAtIndex: i];
+          [objects insertObject: obj atIndex: i - 1];
+          break;
         }
     }
-    [obj release];
-    [self setNeedsDisplay: YES];
+  [obj release];
+  [self setNeedsDisplay: YES];
 }
 
 - (void)unselectOtherObjects:(GRDrawableObject *)anObject
 {
-    id obj;
-    int i;
+  id obj;
+  NSUInteger i;
 
-    if(shiftclick)
-        return;
-
-    for(i = 0; i < [objects count]; i++)
+  if(shiftclick)
+    return;
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if(obj != anObject)
-            [[obj editor] unselect];
+      obj = [objects objectAtIndex: i];
+      if(obj != anObject)
+        [[obj editor] unselect];
     }
-
-    [self setNeedsDisplay: YES];
+  
+  [self setNeedsDisplay: YES];
 }
 
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout
@@ -1302,29 +1305,31 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
 - (void)movePageFromHandPoint:(NSPoint)handpos
 {
-    NSEvent *nextEvent;
-    NSPoint p, diffp;
-    NSRect r;
-
-    nextEvent = [[self window] nextEventMatchingMask:
-        NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-    if([nextEvent type] == NSLeftMouseDragged)
+  NSEvent *nextEvent;
+  NSPoint p, diffp;
+  NSRect r;
+  
+  nextEvent = [[self window] nextEventMatchingMask:
+                               NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+  if([nextEvent type] == NSLeftMouseDragged)
     {
-        do {
-            p = [nextEvent locationInWindow];
-            p = [self convertPoint: p fromView: nil];
-	    p = GRpointDeZoom(p, zFactor);
-
-            diffp.x = p.x - handpos.x;
-            diffp.y = p.y - handpos.y;
-            r = [self visibleRect];
-            r = NSMakeRect(r.origin.x - diffp.x, r.origin.y - diffp.y,
-                           r.size.width, r.size.height);
-            [self scrollRectToVisible: r];
-            nextEvent = [[self window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-        } while([nextEvent type] != NSLeftMouseUp);
-        [[self window] display];
+      do
+        {
+          p = [nextEvent locationInWindow];
+          p = [self convertPoint: p fromView: nil];
+          p = GRpointDeZoom(p, zFactor);
+          
+          diffp.x = p.x - handpos.x;
+          diffp.y = p.y - handpos.y;
+          r = [self visibleRect];
+          r = NSMakeRect(r.origin.x - diffp.x, r.origin.y - diffp.y,
+                         r.size.width, r.size.height);
+          [self scrollRectToVisible: r];
+          nextEvent = [[self window] nextEventMatchingMask:
+                                       NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+        }
+      while([nextEvent type] != NSLeftMouseUp);
+      [[self window] display];
     }
 }
 
