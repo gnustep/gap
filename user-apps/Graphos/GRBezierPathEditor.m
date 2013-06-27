@@ -30,11 +30,11 @@
 
 - (id)initEditor:(GRDrawableObject *)anObject
 {
-    self = [super initEditor:anObject];
-    if(self != nil)
+  self = [super initEditor:anObject];
+  if(self != nil)
     {  
     }
-    return self;
+  return self;
 }
 
 
@@ -46,7 +46,7 @@
   CGFloat zFactor;
   NSPoint pp;
   BOOL found = NO;
-  NSInteger i;
+  NSUInteger i;
 
   for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {
@@ -135,6 +135,7 @@
   NSEvent *event;
   NSPoint op, pp, c;
   NSUInteger i;
+  CGFloat zFactor;
   
   if(!editSelected)
     return p;
@@ -155,7 +156,8 @@
     }
   if(!found)
     return p;
-  
+
+  zFactor = [object zoomFactor];  
   event = [[[object view] window] nextEventMatchingMask:
                                     NSLeftMouseUpMask | NSLeftMouseDraggedMask];
   if([event type] == NSLeftMouseDragged)
@@ -165,67 +167,70 @@
       op.y = p.y;
       do
         {
-            pp = [event locationInWindow];
-            pp = [[object view] convertPoint: pp fromView: nil];
-            if([[object view] shiftclick])
+          pp = [event locationInWindow];
+          pp = [[object view] convertPoint: pp fromView: nil];
+          pp = GRpointDeZoom(pp, zFactor);
+          if([[object view] shiftclick])
             {
-                c = [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] center];
-                pp = pointApplyingCostrainerToPoint(pp, c);
+              c = [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] center];
+              pp = pointApplyingCostrainerToPoint(pp, c);
             }
-
-            pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
-            if(pntonpnt) {
-                if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
-                    [pntonpnt moveBezierHandleToPosition: pp oldPosition: op];
+          
+          pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
+          if(pntonpnt)
+            {
+              if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
+                [pntonpnt moveBezierHandleToPosition: pp oldPosition: op];
             }
-            [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] moveBezierHandleToPosition: pp oldPosition: op];
-            [(GRPathObject *)object remakePath];
+          [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] moveBezierHandleToPosition: pp oldPosition: op];
+          [(GRPathObject *)object remakePath];
 
-            op.x = pp.x;
-            op.y = pp.y;
-            [[object view] setNeedsDisplay: YES];
-            event = [[[object view] window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [[object view] verifyModifiersOfEvent: event];
-        } while([event type] != NSLeftMouseUp);
+          op.x = pp.x;
+          op.y = pp.y;
+          [[object view] setNeedsDisplay: YES];
+          event = [[[object view] window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+          [[object view] verifyModifiersOfEvent: event];
+        }
+      while([event type] != NSLeftMouseUp);
     }
-
-    return pp;
+  
+  return pp;
 }
 
 - (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp
 {
-    GRBezierControlPoint *cp, *pntonpnt;
-    GRBezierHandle handle;
-    BOOL found = NO;
-    int i;
+  GRBezierControlPoint *cp, *pntonpnt;
+  GRBezierHandle handle;
+  BOOL found = NO;
+  NSUInteger i;
 
-    for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {
-        cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-        if([cp isActiveHandle])
+      cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+      if([cp isActiveHandle])
         {
-            handle = [cp bzHandle];
-            if(pointInRect(handle.firstHandleRect, oldp)
-               || pointInRect(handle.secondHandleRect, oldp))
+          handle = [cp bzHandle];
+          if(pointInRect(handle.firstHandleRect, oldp)
+             || pointInRect(handle.secondHandleRect, oldp))
             {
-                [cp select];
-                [(GRBezierPath *)object setCurrentPoint:cp];
-                found = YES;
+              [cp select];
+              [(GRBezierPath *)object setCurrentPoint:cp];
+              found = YES;
             }
         }
     }
-    if(!found)
-        return;
+  if(!found)
+    return;
 
-    pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
-    if(pntonpnt)
+  pntonpnt = [(GRBezierPath *)object pointOnPoint: (GRBezierControlPoint *)[(GRBezierPath *)object currentPoint]];
+  if(pntonpnt)
     {
-        if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
-            [pntonpnt moveBezierHandleToPosition: newp oldPosition: oldp];
+      if([(GRBezierPath *)object currentPoint] == [(GRBezierPath *)object firstPoint] || pntonpnt == [(GRBezierPath *)object firstPoint])
+        [pntonpnt moveBezierHandleToPosition: newp oldPosition: oldp];
     }
-    [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] moveBezierHandleToPosition: newp oldPosition: oldp];
-    [(GRPathObject *)object remakePath];
-    [[object view] setNeedsDisplay: YES];
+  [(GRBezierControlPoint *)[(GRBezierPath *)object currentPoint] moveBezierHandleToPosition: newp oldPosition: oldp];
+  [(GRPathObject *)object remakePath];
+  [[object view] setNeedsDisplay: YES];
 }
 
 
@@ -255,41 +260,42 @@
 
 - (void)unselect
 {
-    int i;
+  NSUInteger i;
 
-    [super unselect];
-    for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
-        [[[(GRBezierPath *)object controlPoints] objectAtIndex: i] unselect];
+  [super unselect];
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+    [[[(GRBezierPath *)object controlPoints] objectAtIndex: i] unselect];
 }
 
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp
 {
-    GRBezierControlPoint *ctrlp;
-    int i;
+  GRBezierControlPoint *ctrlp;
+  NSUInteger i;
 
-    [(GRBezierPath *)object setCurrentPoint:cp];
-    for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++) {
-        ctrlp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
-        if(ctrlp != cp)
-            [ctrlp unselect];
+  [(GRBezierPath *)object setCurrentPoint:cp];
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+    {
+      ctrlp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+      if(ctrlp != cp)
+        [ctrlp unselect];
     }
 }
 
 - (void)setIsValid:(BOOL)value
 {
-    isvalid = value;
+  isvalid = value;
 }
 
 - (BOOL)isValid
 {
-    return isvalid;
+  return isvalid;
 }
 
 - (void)draw
 {
   GRBezierControlPoint *cp;
-  NSInteger i;
+  NSUInteger i;
   
   if(![[(GRBezierPath *)object controlPoints] count] || ![object visible])
     return;
