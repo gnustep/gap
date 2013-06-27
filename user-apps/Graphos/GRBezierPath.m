@@ -324,31 +324,32 @@ static double k = 0.025;
 
 - (void)addLineToPoint:(NSPoint)aPoint
 {
-    GRBezierControlPoint *mtopoint, *prevpoint;
-    GRBezierHandle handle;
+  GRBezierControlPoint *mtopoint, *prevpoint;
+  GRBezierHandle handle;
+  
+  [self addControlAtPoint: aPoint];
+  mtopoint = [controlPoints objectAtIndex: 0];
+  prevpoint = [controlPoints objectAtIndex: [controlPoints count] -2];
 
-    [self addControlAtPoint: aPoint];
-    mtopoint = [controlPoints objectAtIndex: 0];
-    prevpoint = [controlPoints objectAtIndex: [controlPoints count] -2];
-
-    if([prevpoint isActiveHandle])
+  if([prevpoint isActiveHandle])
     {
-        handle = [prevpoint bzHandle];
-        [myPath curveToPoint: GRpointZoom([(GRBezierControlPoint *)currentPoint center], zmFactor)
-		controlPoint1: GRpointZoom(handle.firstHandle, zmFactor)
-		controlPoint2: GRpointZoom([(GRBezierControlPoint *)currentPoint center], zmFactor)];
-        [self confirmNewCurve];
-        return;
+      handle = [prevpoint bzHandle];
+      [myPath curveToPoint: [(GRBezierControlPoint *)currentPoint center]
+              controlPoint1: handle.firstHandle
+              controlPoint2: [(GRBezierControlPoint *)currentPoint center]];
+      [self confirmNewCurve];
+      return;
     }
-
-    if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: mtopoint])
+  
+  if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: mtopoint])
     {
-        [currentPoint moveToPoint: [mtopoint center]];
-        [myPath lineToPoint: [mtopoint center]];
-        [(GRBezierPathEditor *)editor setIsDone:YES];
-    } else
+      [currentPoint moveToPoint: [mtopoint center]];
+      [myPath lineToPoint: GRpointZoom([mtopoint center], zmFactor)];
+      [(GRBezierPathEditor *)editor setIsDone:YES];
+    }
+  else
     {
-        [myPath lineToPoint: aPoint];
+      [myPath lineToPoint: GRpointZoom(aPoint, zmFactor)];
     }
 }
 
@@ -356,33 +357,34 @@ static double k = 0.025;
 {
   GRBezierControlPoint *mtopoint;
   GRBezierHandle handle1, handle2;
-    NSBezierPathElement type;
-    NSPoint pts[3];
-    
-    mtopoint = [controlPoints objectAtIndex: 0];
-    if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: mtopoint] && [controlPoints count] != 1)
-      {
-        if(!calculatingHandles)
-	  {
-            [currentPoint moveToPoint: GRpointZoom([mtopoint center], zmFactor)];
-	  }
-	else
-	  {
-            [mtopoint calculateBezierHandles: handlePos];
-            type = [myPath elementAtIndex: 1];
-            if(type == NSCurveToBezierPathElement)
-	      {
-                [myPath elementAtIndex: 1 associatedPoints: pts];
-                pts[0].x = [mtopoint bzHandle].firstHandle.x * zmFactor;
-                pts[0].y = [mtopoint bzHandle].firstHandle.y * zmFactor;
-                [myPath setAssociatedPoints: pts atIndex: 1];
+  NSBezierPathElement type;
+  NSPoint pts[3];
 
-            } else  {
-                [self remakePath];
+  mtopoint = [controlPoints objectAtIndex: 0];
+  if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: mtopoint] && [controlPoints count] != 1)
+    {
+      if(!calculatingHandles)
+        {
+          [currentPoint moveToPoint:[mtopoint center]];
+        }
+      else
+        {
+          [mtopoint calculateBezierHandles: handlePos];
+          type = [myPath elementAtIndex: 1];
+          if(type == NSCurveToBezierPathElement)
+            {
+              [myPath elementAtIndex: 1 associatedPoints: pts];
+              pts[0] = GRpointZoom([mtopoint bzHandle].firstHandle, zmFactor);
+              
+              [myPath setAssociatedPoints: pts atIndex: 1];           
+            }
+          else 
+            {
+              [self remakePath];
             }
         }
     }
-    
+  
     [(GRBezierControlPoint *)currentPoint calculateBezierHandles: handlePos];
     if([controlPoints count] == 1)
       return;
@@ -392,12 +394,9 @@ static double k = 0.025;
 
     if(calculatingHandles)
       {
-        pts[0].x = handle1.firstHandle.x * zmFactor;
-        pts[0].y = handle1.firstHandle.y * zmFactor;
-        pts[1].x = handle2.secondHandle.x * zmFactor;
-        pts[1].y = handle2.secondHandle.y * zmFactor ;
-        pts[2].x = [(GRBezierControlPoint *)currentPoint center].x * zmFactor;
-        pts[2].y = [(GRBezierControlPoint *)currentPoint center].y * zmFactor;
+        pts[0] = GRpointZoom(handle1.firstHandle, zmFactor);
+        pts[1] = GRpointZoom(handle2.secondHandle, zmFactor);
+        pts[2] = GRpointZoom([(GRBezierControlPoint *)currentPoint center], zmFactor);
         [myPath setAssociatedPoints: pts atIndex: [controlPoints count] -1];
       }
     else
@@ -503,20 +502,20 @@ static double k = 0.025;
 
 - (GRBezierControlPoint *)pointOnPoint:(GRBezierControlPoint *)aPoint
 {
-    GRBezierControlPoint *cp, *ponpoint = nil;
-    int i;
+  GRBezierControlPoint *cp, *ponpoint = nil;
+  NSUInteger i;
 
-    for(i = 0; i < [controlPoints count]; i++)
+  for(i = 0; i < [controlPoints count]; i++)
     {
-        cp = [controlPoints objectAtIndex: i];
-        if([self isPoint: aPoint onPoint: cp] && (aPoint != cp))
+      cp = [controlPoints objectAtIndex: i];
+      if([self isPoint: aPoint onPoint: cp] && (aPoint != cp))
         {
-            ponpoint = cp;
-            break;
+          ponpoint = cp;
+          break;
         }
     }
-
-    return ponpoint;
+  
+  return ponpoint;
 }
 
 - (void)confirmNewCurve
