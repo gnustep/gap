@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8531288D1767CADA00F56C92 /* GetNameController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8531288B1767CADA00F56C92 /* GetNameController.h */; };
+		8531288E1767CADB00F56C92 /* GetNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531288C1767CADA00F56C92 /* GetNameController.m */; };
+		853128941767CC2600F56C92 /* GetName.nib in Resources */ = {isa = PBXBuildFile; fileRef = 853128921767CC2600F56C92 /* GetName.nib */; };
 		85E8F2AD16EFCF6C00E03CA9 /* AppController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F5F93707FD8CAD01A80101 /* AppController.h */; };
 		85E8F2AE16EFCF6C00E03CA9 /* ftpclient.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F5F93907FD8CAD01A80101 /* ftpclient.h */; };
 		85E8F2AF16EFCF6C00E03CA9 /* localclient.h in Headers */ = {isa = PBXBuildFile; fileRef = F56A03FD080AC71101A80101 /* localclient.h */; };
@@ -37,6 +40,9 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8531288B1767CADA00F56C92 /* GetNameController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GetNameController.h; sourceTree = "<group>"; };
+		8531288C1767CADA00F56C92 /* GetNameController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GetNameController.m; sourceTree = "<group>"; };
+		853128931767CC2600F56C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GetName.nib; sourceTree = "<group>"; };
 		853FB7F814A3F52200DE7B18 /* README */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		85E8F2C916EFCF6C00E03CA9 /* FTP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E8F32416EFD9D000E03CA9 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
@@ -72,6 +78,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8531288B1767CADA00F56C92 /* GetNameController.h */,
+				8531288C1767CADA00F56C92 /* GetNameController.m */,
 				F5F5F93707FD8CAD01A80101 /* AppController.h */,
 				F5F5F93807FD8CAD01A80101 /* AppController.m */,
 				F5F5F93907FD8CAD01A80101 /* ftpclient.h */,
@@ -136,6 +144,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				853128921767CC2600F56C92 /* GetName.nib */,
 				85E8F32416EFD9D000E03CA9 /* ChangeLog */,
 				853FB7F814A3F52200DE7B18 /* README */,
 				85FC29710DD7B28300A80101 /* FTP_icon_osx.icns */,
@@ -169,6 +178,7 @@
 				85E8F2B016EFCF6C00E03CA9 /* fileTable.h in Headers */,
 				85E8F2B116EFCF6C00E03CA9 /* fileElement.h in Headers */,
 				85E8F2B216EFCF6C00E03CA9 /* client.h in Headers */,
+				8531288D1767CADA00F56C92 /* GetNameController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +231,7 @@
 				85E8F2B816EFCF6C00E03CA9 /* FTP_icon_osx.icns in Resources */,
 				85E8F2B916EFCF6C00E03CA9 /* README in Resources */,
 				85E8F32516EFD9D000E03CA9 /* ChangeLog in Resources */,
+				853128941767CC2600F56C92 /* GetName.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +249,7 @@
 				85E8F2BF16EFCF6C00E03CA9 /* fileTable.m in Sources */,
 				85E8F2C016EFCF6C00E03CA9 /* fileElement.m in Sources */,
 				85E8F2C116EFCF6C00E03CA9 /* client.m in Sources */,
+				8531288E1767CADB00F56C92 /* GetNameController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +270,14 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		853128921767CC2600F56C92 /* GetName.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				853128931767CC2600F56C92 /* English */,
+			);
+			name = GetName.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
