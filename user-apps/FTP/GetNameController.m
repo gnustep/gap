@@ -37,20 +37,19 @@
   if ((self = [super init]))
     {
       [NSBundle loadNibNamed: @"GetName" owner: self];
+      [panel setDelegate: self];
     }
   return self;
 }
 
 -(NSInteger)runAsModal
 {
-  NSInteger result;
-  
-  [panel makeKeyAndOrderFront: nil];
   [panel makeFirstResponder: textField];
-  
-  result = [NSApp runModalForWindow: panel];
 
-  return result;
+  returnCode = NSAlertErrorReturn;
+  [NSApp runModalForWindow: panel];
+
+  return returnCode;
 }
 
 -(void)setTitle:(NSString *)title
@@ -75,14 +74,19 @@
 
 -(IBAction)okPressed:(id)sender
 {
-  [panel close];
-  [NSApp stopModalWithCode: NSAlertDefaultReturn];
+  returnCode = NSAlertDefaultReturn;
+  [panel performClose:self];
 }
 
 -(IBAction)cancelPressed:(id)sender
 {
-  [panel close];
-  [NSApp stopModalWithCode: NSAlertAlternateReturn];
+  returnCode = NSAlertAlternateReturn;
+  [panel performClose:self];
+}
+
+- (void)windowWillClose:(NSNotification *)aNotification
+{
+  [NSApp stopModalWithCode: returnCode];
 }
 
 @end 

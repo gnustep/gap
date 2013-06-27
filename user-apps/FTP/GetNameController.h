@@ -43,6 +43,8 @@
   IBOutlet NSPanel *panel;
   IBOutlet NSTextField *textField;
   IBOutlet NSTextField *messageField;
+  
+  NSInteger returnCode;
 }
 
 -(NSInteger)runAsModal;

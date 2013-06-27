@@ -1,3 +1,9 @@
+2013-06-27 Riccardo Mottola <rm@gnu.org>
+
+	* GetNameController.h
+	* GetNameController.m
+        Handle return also in case of window closure through window button.
+
 2013-06-11 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
