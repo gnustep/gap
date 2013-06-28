@@ -414,7 +414,7 @@ static double k = 0.025;
     GRBezierHandle handle1, handle2;
     hitData hitdata;
     NSPoint pp[81], newpp[7];
-    int i, pcount, index;
+    NSUInteger i, pcount, index;
     double y, s, ax, ay;
 
     return;
@@ -442,6 +442,8 @@ static double k = 0.025;
         return;
 
     index = [self indexOfPoint: cp];
+    if (index == NSNotFound)
+      return;
 
     ncp = [[GRBezierControlPoint alloc] initAtPoint: hitdata.p
                                           forPath: self zoomFactor: zmFactor];
@@ -674,16 +676,27 @@ static double k = 0.025;
     return (GRBezierControlPoint *)[controlPoints objectAtIndex: [controlPoints count] -1];
 }
 
-// TODO ## FIXME ## rewrite with NSNotFound
-- (int)indexOfPoint:(GRBezierControlPoint *)aPoint
+- (NSUInteger)indexOfPoint:(GRBezierControlPoint *)aPoint
 {
-    int i = -1;
+  NSUInteger i;
+  NSUInteger r;
+  BOOL found;
 
-    for(i = 0; i < [controlPoints count]; i++)
-        if([controlPoints objectAtIndex: i] == aPoint)
-            break;
+  r = NSNotFound;
+  found = NO;
 
-    return i;
+  i = 0;
+  while (i < [controlPoints count] || !found)
+    {
+      if([controlPoints objectAtIndex: i] == aPoint)
+        found = YES;
+      i++;
+    }
+
+  if(found)
+    r = i;
+  
+  return r;
 }
 
 
@@ -705,14 +718,15 @@ static double k = 0.025;
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp
 {
-    GRBezierControlPoint *ctrlp;
-    int i;
+  GRBezierControlPoint *ctrlp;
+  NSUInteger i;
 
-    currentPoint = cp;
-    for(i = 0; i < [controlPoints count]; i++) {
-        ctrlp = [controlPoints objectAtIndex: i];
-        if(ctrlp != cp)
-            [ctrlp unselect];
+  currentPoint = cp;
+  for(i = 0; i < [controlPoints count]; i++)
+    {
+      ctrlp = [controlPoints objectAtIndex: i];
+      if(ctrlp != cp)
+        [ctrlp unselect];
     }
 }
 
@@ -720,7 +734,6 @@ static double k = 0.025;
 - (void)draw
 {
   GRBezierControlPoint *cp;
-  NSRect r;
   NSUInteger i;
   NSBezierPath *bzp;
   CGFloat linew;
