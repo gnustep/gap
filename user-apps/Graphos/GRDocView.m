@@ -738,7 +738,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
       obj = [objects objectAtIndex: i];
       if([obj isKindOfClass: [GRBezierPath class]] && [[obj editor] isSelect])
         {
-          if([obj onPathBorder: p])
+          if([obj onControlPoint: p])
             {
               [[obj editor] selectForEditing];
               [self moveControlPointOfEditor: (GRBezierPathEditor *)[obj editor] toPoint: p];
@@ -894,7 +894,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos
 {
   NSPoint p;
-  
+
   p = [editor moveControlAtPoint: pos];
   if(p.x == pos.x && p.y == pos.y)
     return NO;
@@ -906,7 +906,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos
 {
   NSPoint p;
-  
+
   p = [editor moveBezierHandleAtPoint: pos];
   if(p.x == pos.x && p.y == pos.y)
     return NO;
