@@ -61,6 +61,7 @@ typedef struct
 
 - (void)setZoomFactor:(CGFloat)f;
 
+- (BOOL)onControlPoint:(NSPoint)p;
 - (BOOL)onPathBorder:(NSPoint)p;
 
 - (GRBezierControlPoint *)firstPoint;

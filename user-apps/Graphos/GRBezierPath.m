@@ -671,7 +671,8 @@ static double k = 0.025;
   if ([self onControlPoint:p])
     return YES;
 
-  if([myPath containsPoint: p])
+  /* mypath represents the Path in the current zoom, so it needs to be converted */
+  if([myPath containsPoint: GRpointZoom(p, zmFactor)])
     return YES;
   
   return NO;
