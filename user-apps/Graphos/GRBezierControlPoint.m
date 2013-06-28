@@ -199,12 +199,8 @@
 
 - (void)setZoomFactor:(CGFloat)f
 {
-  /*
-    bzHandle.center.x = bzHandle.center.x / zmFactor * f;
-    bzHandle.center.y = bzHandle.center.y / zmFactor * f;
-    bzHandle.centerRect = NSMakeRect(bzHandle.center.x-3, bzHandle.center.y-3, 6, 6);
-  */
-    zmFactor = f;
+
+  zmFactor = f;
 }
 
 - (GRBezierHandle)bzHandle

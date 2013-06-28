@@ -66,7 +66,7 @@ typedef struct
 - (GRBezierControlPoint *)firstPoint;
 - (GRBezierControlPoint *)lastPoint;
 
-- (int)indexOfPoint:(GRBezierControlPoint *)aPoint;
+- (NSUInteger)indexOfPoint:(GRBezierControlPoint *)aPoint;
 
 
 @end
