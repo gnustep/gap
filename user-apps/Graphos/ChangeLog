@@ -1,5 +1,10 @@
 2013-06-28 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m
+	Correctly select paths in zommed mode, select bezier handles also if they lie inside a closed shape.
+
+2013-06-28 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierPath.m (onPathBorder)
 	Implement onPathBorder ontop of onControlPoint, expose onControlPoint separately.
 
