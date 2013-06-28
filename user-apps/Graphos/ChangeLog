@@ -1,3 +1,8 @@
+2013-06-28 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.m (onPathBorder)
+	Implement onPathBorder ontop of onControlPoint, expose onControlPoint separately.
+
 2013-06-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPathEditor.m

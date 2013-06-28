@@ -644,7 +644,8 @@ static double k = 0.025;
   return [self onPathBorder:p];
 }
 
-- (BOOL)onPathBorder:(NSPoint)p
+/** Returns yes if the Point lies on a control point */
+- (BOOL)onControlPoint:(NSPoint)p
 {
   NSInteger i;
   GRBezierControlPoint *cp;
@@ -657,7 +658,19 @@ static double k = 0.025;
       if(pointInRect(handle.centerRect, p))
 	return YES;
     }
-  
+
+  return NO;
+}
+
+/** checks if a given point is a control point or a point on the path border
+
+  ATTENTION: for closed path it retuns also YES if the point is inside the area
+*/
+- (BOOL)onPathBorder:(NSPoint)p
+{
+  if ([self onControlPoint:p])
+    return YES;
+
   if([myPath containsPoint: p])
     return YES;
   
