@@ -108,10 +108,10 @@
       [chartView addSeries: series2];
       [series2 release];
       [chartView setYLabelNumberFormatting:OKNumFmtKiloMega];
-      for (i = 0; i < 36; i++)
+      for (i = 0; i < 64; i++)
 	{
-	  v1 = sin((i * 10) * 6.28 / 180) * 1000;
-	  v2 = cos((i * 10) * 6.28 / 180) * 1000;
+	  v1 = sin((i * 10) * 6.2831853 / 180) * 1000;
+	  v2 = cos((i * 10) * 6.2831853 / 180) * 1000;
 
 	  [series1 addObject: [NSNumber numberWithFloat: v1]];
 	  [series2 addObject: [NSNumber numberWithFloat: v2]];
@@ -126,10 +126,10 @@
       [chartView addSeries: series2];
       [series2 release];
       [chartView setYLabelNumberFormatting:OKNumFmtKiloMega];
-      for (i = 0; i < 36; i++)
+      for (i = 0; i < 64; i++)
 	{
-	  v1 = sin((i * 10) * 6.28 / 180) * 1e6;
-	  v2 = cos((i * 10) * 6.28 / 180) * 1e6;
+	  v1 = sin((i * 10) * 6.2831853 / 180) * 1e6;
+	  v2 = cos((i * 10) * 6.2831853 / 180) * 1e6;
 
 	  [series1 addObject: [NSNumber numberWithFloat: v1]];
 	  [series2 addObject: [NSNumber numberWithFloat: v2]];
@@ -143,10 +143,10 @@
       [series2 setColor: [NSColor greenColor]];
       [chartView addSeries: series2];
       [series2 release];
-      for (i = 0; i < 36; i++)
+      for (i = 0; i < 64; i++)
 	{
-	  v1 = sin((i * 10) * 6.28 / 180);
-	  v2 = cos((i * 10) * 6.28 / 180);
+	  v1 = sin((i * 10) * 6.2831853 / 180);
+	  v2 = cos((i * 10) * 6.2831853 / 180);
           
 	  [series1 addObject: [NSNumber numberWithFloat: v1]];
 	  [series2 addObject: [NSNumber numberWithFloat: v2]];
@@ -159,10 +159,10 @@
       [series2 setColor: [NSColor greenColor]];
       [chartView addSeries: series2];
       [series2 release];
-      for (i = 0; i < 36; i++)
+      for (i = 0; i < 64; i++)
         {
-              v1 = sin((i * 10) * 6.28 / 180) / 1000;
-              v2 = cos((i * 10) * 6.28 / 180) / 1000;
+              v1 = sin((i * 10) * 6.2831853 / 180) / 1000;
+              v2 = cos((i * 10) * 6.2831853 / 180) / 1000;
               
               [series1 addObject: [NSNumber numberWithFloat: v1]];
               [series2 addObject: [NSNumber numberWithFloat: v2]];
