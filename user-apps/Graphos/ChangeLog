@@ -9,6 +9,9 @@
 	* GRBezierPathEditor.m (selectForEditing)
 	Just use superclass implementation.
 
+	* GRObjectControlPoint.m
+	Include proper header.
+
 2013-06-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
