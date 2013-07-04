@@ -250,12 +250,7 @@
 
 - (void)selectForEditing
 {
-    if([object locked])
-        return;
-    editSelected = YES;
-    groupSelected = NO;
-    isvalid = NO;
-    [[object view] unselectOtherObjects: object];
+  [super selectForEditing];
 }
 
 - (void)unselect
