@@ -6,6 +6,9 @@
 	* GRDocView.m
 	Actually use the object found.
 
+	* GRBezierPathEditor.m (selectForEditing)
+	Just use superclass implementation.
+
 2013-06-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
