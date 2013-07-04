@@ -1,3 +1,8 @@
+2013-07-05 Riccardo Mottola <rm@gnu.org>
+
+	* GRObjectEditor.m
+	When selecting for editing, mark the object as not done.
+
 2013-06-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
