@@ -2,7 +2,7 @@
  Project: Graphos
  GRObjectEditor.m
 
- Copyright (C) 2008-2010 GNUstep Application Project
+ Copyright (C) 2008-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -86,6 +86,7 @@
     editSelected = YES;
     groupSelected = NO;
     isvalid = NO;
+    isdone = NO;
     [[object view] unselectOtherObjects: (GRDrawableObject *)object];
 }
 
