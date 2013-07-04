@@ -3,6 +3,9 @@
 	* GRObjectEditor.m
 	When selecting for editing, mark the object as not done.
 
+	* GRDocView.m
+	Actually use the object found.
+
 2013-06-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
