@@ -133,38 +133,6 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 }
 
 
-- (NSArray *)usedFonts
-{
-  NSMutableArray *usedfonts;
-  NSString *fname;
-  id obj;
-  NSUInteger i, j;
-  BOOL exist;
-
-  usedfonts = [NSMutableArray arrayWithCapacity: 1];
-  for(i = 0; i < [objects count]; i++)
-    {
-        exist = NO;
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRText class]])
-        {
-            fname = [obj fontName];
-            for(j = 0; j < [usedfonts count]; j++)
-            {
-                if([[usedfonts objectAtIndex: j] isEqualToString: fname])
-                {
-                    exist = YES;
-                    break;
-                }
-            }
-            if(!exist)
-                [usedfonts addObject: fname];
-        }
-    }
-
-    return usedfonts;
-}
-
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict
 {
     NSArray *keys;
