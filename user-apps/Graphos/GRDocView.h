@@ -62,7 +62,6 @@
 
 - (id)initWithFrame:(NSRect)aRect;
 - (NSDictionary *) objectDictionary;
-- (NSArray *)usedFonts;
 - (BOOL)createObjectsFromDictionary:(NSDictionary *)dict;
 
 /**

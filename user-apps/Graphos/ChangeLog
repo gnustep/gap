@@ -1,5 +1,11 @@
 2013-07-05 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m (usedFonts)
+	* GRDocView.h (usedFonts)
+	Remove unused method.
+
+2013-07-05 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierControlPoint.m
 	* GRBezierPathEditor.h
 	* GRBezierPathEditor.m
