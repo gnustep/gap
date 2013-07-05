@@ -37,8 +37,8 @@
         object = anObject;
         groupSelected = NO;
         editSelected = NO;
-        isdone = NO;
-        isvalid = NO;
+        isDone = NO;
+        isValid = NO;
     }
     return self;
 }
@@ -73,7 +73,7 @@
     {
         groupSelected = YES;
         editSelected = NO;
-        isvalid = NO;
+        isValid = NO;
         
 	[[object view] unselectOtherObjects: (GRDrawableObject *)object];
     }
@@ -85,8 +85,8 @@
         return;
     editSelected = YES;
     groupSelected = NO;
-    isvalid = NO;
-    isdone = NO;
+    isValid = NO;
+    isDone = NO;
     [[object view] unselectOtherObjects: (GRDrawableObject *)object];
 }
 
@@ -95,11 +95,11 @@
 {
     groupSelected = NO;
     editSelected = NO;
-    isvalid = YES;
-    isdone = YES;
+    isValid = YES;
+    isDone = YES;
 }
 
-- (BOOL)isSelect
+- (BOOL)isSelected
 {
     if(editSelected || groupSelected)
         return YES;
@@ -116,14 +116,25 @@
     return editSelected;
 }
 
-- (BOOL)isdone
+- (BOOL)isDone
 {
-    return isdone;
+  return isDone;
 }
 
 - (void)setIsDone:(BOOL)status
 {
-    isdone = status;
+  isDone = status;
+}
+
+
+- (void)setIsValid:(BOOL)value
+{
+  isValid = value;
+}
+
+- (BOOL)isValid
+{
+  return isValid;
 }
 
 - (void)draw

@@ -489,7 +489,7 @@
 	  line = [lines objectAtIndex: i];
           lineSize = [line sizeWithAttributes:strAttr]; 
 	  
-	  if([editor isSelect])
+	  if([editor isSelected])
             {
 	      [[NSColor blackColor] set];
 	      [bezp moveToPoint:NSMakePoint(posZ.x, baselny)];
@@ -499,7 +499,7 @@
 	  baselny += lineSize.height;
         }
       
-      if([editor isSelect])
+      if([editor isSelected])
         {
 	  [bezp stroke];
 	  [[NSColor blackColor] set];

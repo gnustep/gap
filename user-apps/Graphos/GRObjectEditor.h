@@ -2,7 +2,7 @@
  Project: Graphos
  GRObjectEditor.h
 
- Copyright (C) 2008-2009 GNUstep Application Project
+ Copyright (C) 2008-2013 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -33,11 +33,11 @@
  */
 @interface GRObjectEditor : NSObject <NSCopying>
 {
-    GRDrawableObject *object;
-    BOOL groupSelected;
-    BOOL editSelected;
-    BOOL isvalid;
-    BOOL isdone;
+  GRDrawableObject *object;
+  BOOL groupSelected;
+  BOOL editSelected;
+  BOOL isValid;
+  BOOL isDone;
 }
 
 - (id)initEditor:(GRDrawableObject *)anObject;
@@ -45,12 +45,14 @@
 - (void)select;
 - (void)selectAsGroup;
 - (void)selectForEditing;
-- (BOOL)isSelect;
+- (BOOL)isSelected;
 - (BOOL)isGroupSelected;
 - (void)unselect;
 - (BOOL)isEditSelected;
-- (BOOL)isdone;
+- (BOOL)isDone;
 - (void)setIsDone:(BOOL)status;
+- (void)setIsValid:(BOOL)value;
+- (BOOL)isValid;
 - (void)draw;
 
 @end

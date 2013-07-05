@@ -237,15 +237,7 @@
 
 - (void)selectAsGroup
 {
-    if([object locked])
-        return;
-    if(!groupSelected)
-    {
-        groupSelected = YES;
-        editSelected = NO;
-        isvalid = NO;
-        [[object view] unselectOtherObjects: object];
-    }
+  [super selectAsGroup];
 }
 
 - (void)selectForEditing
@@ -277,15 +269,6 @@
     }
 }
 
-- (void)setIsValid:(BOOL)value
-{
-  isvalid = value;
-}
-
-- (BOOL)isValid
-{
-  return isvalid;
-}
 
 - (void)draw
 {

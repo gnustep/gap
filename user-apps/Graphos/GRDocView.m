@@ -466,7 +466,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   NSEvent *nextEvent;
   GRBezierPath *bzpath;
   id obj;
-  BOOL isneweditor = YES;
+  BOOL isNewEditor = YES;
   NSUInteger i;
   NSUndoManager *uMgr;
   
@@ -481,20 +481,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
     {
       obj = [objects objectAtIndex: i];
       if([obj isKindOfClass: [GRBezierPath class]])
-        if(![[obj editor] isdone])
+        if(![[obj editor] isDone])
           {
-            isneweditor = NO;
+            isNewEditor = NO;
             edind = i;
           }
     }
 
-  if(isneweditor)
+  if(isNewEditor)
     for(i = 0; i < [objects count]; i++)
       {
         GRObjectEditor *objEdi;
         
         objEdi = [[objects objectAtIndex: i] editor];
-        if (![objEdi isSelect])
+        if (![objEdi isSelected])
           [objEdi unselect];
       }
   
@@ -504,7 +504,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
     if([nextEvent type] != NSLeftMouseDragged)
       {
-        if(isneweditor)
+        if(isNewEditor)
           {
             [self addPath];
             bzpath = [objects objectAtIndex: edind];
@@ -526,7 +526,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
       }
     else
       {
-        if(isneweditor)
+        if(isNewEditor)
           {
             [self addPath];
             bzpath = [objects objectAtIndex: edind];
@@ -586,7 +586,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
       GRObjectEditor *objEdi;
             
       objEdi = [[objects objectAtIndex: i] editor];
-      if (![objEdi isSelect])
+      if (![objEdi isSelected])
         [objEdi unselect];
     }
 
@@ -644,7 +644,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
       GRObjectEditor *objEdi;
 
       objEdi = [[objects objectAtIndex: i] editor];
-      if (![objEdi isSelect])
+      if (![objEdi isSelected])
         [objEdi unselect];
     }
 
@@ -698,7 +698,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 
       if([obj objectHitForSelection: p])
         {
-          if (shiftclick && [[obj editor] isSelect])
+          if (shiftclick && [[obj editor] isSelected])
             [[obj editor] unselect];
           else
             [[obj editor] select];
@@ -739,7 +739,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   for(i = 0; i < [objects count]; i++)
     {
       obj = [objects objectAtIndex: i];
-      if([obj isKindOfClass: [GRBezierPath class]] && [[obj editor] isSelect])
+      if([obj isKindOfClass: [GRBezierPath class]] && [[obj editor] isSelected])
         {
           if([obj onControlPoint: p])
             {
@@ -753,7 +753,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
                 return;
             }
         }
-      else if ([[obj editor] isSelect] && ([obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]]))
+      else if ([[obj editor] isSelected] && ([obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]]))
         {
           if([obj onControlPoint: p])
             {
@@ -762,7 +762,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
               return;
             }
         }
-      else if([obj isKindOfClass: [GRText class]] && [[obj editor] isSelect])
+      else if([obj isKindOfClass: [GRText class]] && [[obj editor] isSelected])
         {
           /* we have no actions for GRText */
         }
@@ -959,7 +959,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
       id obj;
       obj = [objects objectAtIndex: i];
       
-      if([[obj editor] isSelect])
+      if([[obj editor] isSelected])
         {
           selectedObjects++;
         
@@ -1032,7 +1032,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   for(i = 0; i < [objects count]; i++)
     {
       obj = [objects objectAtIndex: i];
-      if([[obj editor] isSelect])
+      if([[obj editor] isSelected])
         {
           NSColor *newColor;
       

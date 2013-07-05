@@ -1,5 +1,18 @@
 2013-07-05 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierControlPoint.m
+	* GRBezierPathEditor.h
+	* GRBezierPathEditor.m
+	* GRDocView.m
+	* GRObjectEditor.h
+	* GRObjectEditor.m
+	* GRText.m
+	* GRTextEditor.h
+	* GRTextEditor.m
+	Refactor and clean up case of isValid, isSelected, isDone
+
+2013-07-05 Riccardo Mottola <rm@gnu.org>
+
 	* GRObjectEditor.m
 	When selecting for editing, mark the object as not done.
 
