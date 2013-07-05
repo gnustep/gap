@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditor.m
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -93,10 +93,6 @@
     return myView;
 }
 
-- (void)select
-{
-    [self selectAsGroup];
-}
 
 - (void)selectAsGroup
 {
@@ -110,7 +106,7 @@
     isSelect = NO;
 }
 
-- (BOOL)isSelect
+- (BOOL)isSelected
 {
     return isSelect;
 }
@@ -120,14 +116,5 @@
     return isSelect;
 }
 
-- (void)setIsValid:(BOOL)value
-{
-    isvalid = value;
-}
-
-- (BOOL)isValid
-{
-    return isvalid;
-}
 
 @end

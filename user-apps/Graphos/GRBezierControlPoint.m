@@ -100,7 +100,7 @@
 
     mtopoint = [path firstPoint];
     ponpoint = [path pointOnPoint: self];
-    if(ponpoint && [(GRPathEditor *)[path editor] isdone] && (self == mtopoint))
+    if(ponpoint && [(GRPathEditor *)[path editor] isDone] && (self == mtopoint))
         [ponpoint moveBezierHandleToPosition: newp oldPosition: oldp];
 
     if(pointInRect(bzHandle.firstHandleRect, oldp)) {

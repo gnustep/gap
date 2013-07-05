@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditor.h
 
- Copyright (C) 2000-2010 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -44,17 +44,5 @@
 
 /** runs the editor window in a modal loop and gets the return value like an Alert Panel */
 - (int)runModal;
-
-- (void)select;
-
-- (void)selectAsGroup;
-
-- (BOOL)isSelect;
-
-- (BOOL)isGroupSelected;
-
-- (void)setIsValid:(BOOL)value;
-
-- (BOOL)isValid;
 
 @end

@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPathEditor.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2013 GNUstep Application Project
 
  Author: Enrico Sersale (original GDRaw implementation)
  Author: Ing. Riccardo Mottola
@@ -32,14 +32,10 @@
 
 @interface GRBezierPathEditor : GRPathEditor
 {
-    float zmFactor;
+  float zmFactor;
 }
 
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
-
-- (void)setIsValid:(BOOL)value;
-- (BOOL)isValid;
-
 
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p;
 - (void)moveBezierHandleAtPoint:(NSPoint)oldp toPoint:(NSPoint)newp;
