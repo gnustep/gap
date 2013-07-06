@@ -23,10 +23,6 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
-#define NSInteger int
-#endif
-
 #if defined(__MINGW32__)
 #define srandom srand
 #define random rand
@@ -38,6 +34,11 @@
 #import "AppController.h"
 #import "LMImage.h"
 #import "PRScale.h"
+
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#define NSInteger int
+#endif
+
 
 #define LM_KEY_DESTROYRECYCLE @"DestroyOrRecycle"
 #define LM_KEY_ASKDELETING @"AskBeforeDeleting"
