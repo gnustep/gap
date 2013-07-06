@@ -1,3 +1,8 @@
+2013-07-07 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m (verifyModifiersOfEvent)
+        Change alternate property to check for alternate and not command
+  
 2013-07-05 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m (usedFonts)

@@ -700,7 +700,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
   [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
   [uMgr setActionName:@"Edit Path"];
   
-  [self saveCurrentObjectsDeep];
+  [self saveCurrentObjects];
 
   /* we look for a path that is selected and process editing
      we no longer auto-select the object for editing though, nor automatically unselect the editing of the object */
@@ -1482,7 +1482,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             shiftclick = YES;
         else
             shiftclick = NO;
-        if([theEvent modifierFlags] & NSCommandKeyMask)
+        if([theEvent modifierFlags] & NSAlternateKeyMask)
             altclick = YES;
         else
             altclick = NO;
@@ -1492,11 +1492,11 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
             ctrlclick = NO;
     }
 
-    if([theEvent type] == NSLeftMouseUp)
+    else if([theEvent type] == NSLeftMouseUp)
     {
         if(!([theEvent modifierFlags] & NSShiftKeyMask))
             shiftclick = NO;
-        if(!([theEvent modifierFlags] & NSCommandKeyMask))
+        if(!([theEvent modifierFlags] & NSAlternateKeyMask))
             altclick = NO;
         if(!([theEvent modifierFlags] & NSControlKeyMask))
             ctrlclick = NO;
