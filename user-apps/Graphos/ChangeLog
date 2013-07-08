@@ -1,3 +1,8 @@
+2013-07-09 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Fix zoom to Width and to Page.
+
 2013-07-08 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
@@ -7,7 +12,7 @@
 
 	* GRDocView.m (verifyModifiersOfEvent)
         Change alternate property to check for alternate and not command
-  
+
 2013-07-05 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m (usedFonts)

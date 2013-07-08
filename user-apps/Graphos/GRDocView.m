@@ -1238,13 +1238,15 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUInteger i;
   NSPoint p;
   NSRect visibleRect;
-  NSRect f;
+  NSRect docVRect;
+  CGFloat fWidth;
+  CGFloat fHeight;
 
-  f = [self frame];
-  visibleRect = [self visibleRect];
+  fWidth = [self frame].size.width / zFactor;
+  fHeight = [self frame].size.height / zFactor;
+  docVRect = [(NSClipView*)[self superview] documentVisibleRect];
   i = ZOOM_FACTORS - 1;
-  NSLog(@"visible %f, full %f", visibleRect.size.width, f.size.width);
-  while (i > 0 && ((visibleRect.size.width < f.size.width * zFactors[i]) || (visibleRect.size.height < f.size.height * zFactors[i])))
+  while (i > 0 && ((docVRect.size.width < fWidth * zFactors[i]) || (docVRect.size.height < fHeight * zFactors[i])))
     i--;
 
   visibleRect = [self visibleRect];
@@ -1259,13 +1261,13 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUInteger i;
   NSPoint p;
   NSRect visibleRect;
-  NSRect f;
+  NSRect docVRect;
+  CGFloat fWidth;
 
-  f = [self frame];
-  visibleRect = [self visibleRect];
+  fWidth = [self frame].size.width / zFactor;
+  docVRect = [(NSClipView*)[self superview] documentVisibleRect];
   i = ZOOM_FACTORS - 1;
-  NSLog(@"visible %f, full %f", visibleRect.size.width, f.size.width);
-  while (i > 0 && visibleRect.size.width < f.size.width * zFactors[i])
+  while (i > 0 && docVRect.size.width < fWidth * zFactors[i])
     i--;
  
   visibleRect = [self visibleRect];
