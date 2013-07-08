@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.4
+VERSION = 0.5
 PACKAGE_NAME = Graphos
 APP_NAME = Graphos
 Graphos_APPLICATION_ICON = graphos_appicon_48.tif

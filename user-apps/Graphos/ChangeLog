@@ -1,3 +1,8 @@
+2013-07-08 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Increase density of Zoom steps.
+
 2013-07-07 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m (verifyModifiersOfEvent)
