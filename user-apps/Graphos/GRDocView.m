@@ -36,8 +36,9 @@
 
 #define UNDO_ACTION_OBJPROPS @"Change Object Properties"
 
-#define ZOOM_FACTORS 8
-float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
+#define ZOOM_FACTORS 13
+#define STD_ZOOM_INDEX 5
+float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 6};
 
 @implementation GRDocView
 
@@ -67,7 +68,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
       shiftclick = NO;
       altclick = NO;
       ctrlclick = NO;
-      zIndex = 2;
+      zIndex = STD_ZOOM_INDEX;
       zFactor = zFactors[zIndex];
     }
   return self;
@@ -395,7 +396,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.5, 1, 1.5, 2, 3, 4, 6};
 		      pageRect.size.height-([pi topMargin]+[pi bottomMargin]));
     
   zmdRect = a4Rect;
-  zIndex = 2;
+  zIndex = STD_ZOOM_INDEX;
   zFactor = zFactors[zIndex];
                                                           
   [self setFrame: pageRect];
