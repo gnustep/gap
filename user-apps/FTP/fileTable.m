@@ -64,7 +64,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
       [fileStructs release];
       [sortedArray release];
     }
-  fileStructs = [[NSArray arrayWithArray:fnames] retain];
+  fileStructs = [[NSMutableArray arrayWithArray:fnames] retain];
   sortedArray = [[NSMutableArray arrayWithCapacity: [fileStructs count]] retain];
   for (i = 0; i < [fileStructs count]; i++)
     {
@@ -95,6 +95,61 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   fileStructs = nil;
   [sortedArray release];
   sortedArray = nil;
+}
+
+- (void)addObject:(FileElement *)object
+{
+  NSNumber *n;
+  NSMutableDictionary *dict;
+
+  /* add the file element to the storage */
+  [fileStructs addObject:object];
+
+  /* keep the sorting map array in sync */
+  n = [NSNumber numberWithInt: [fileStructs count]];
+  dict = [NSMutableDictionary dictionary];
+  [dict setObject: [object name] forKey: @"name"];
+  [dict setObject: n forKey: @"row"];
+  [sortedArray addObject: dict];
+}
+
+- (void)removeObjectAtIndex:(NSUInteger)index
+{
+  NSUInteger originalRow;
+
+  originalRow = (NSUInteger)[[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
+
+  [fileStructs removeObjectAtIndex:originalRow];
+  [sortedArray removeObjectAtIndex:index];
+}
+- (void)removeObject:(FileElement *)object
+{
+  NSUInteger index;
+  NSNumber *n;
+  NSUInteger i;
+
+  index = [fileStructs indexOfObject:object];
+  if (index == NSNotFound)
+    {
+      NSLog(@"Object not found, internal error");
+      return;
+    }
+
+  n = [NSNumber numberWithInt: index];
+
+  /* remove object from storage */
+  [fileStructs removeObject:object];
+
+  /* remove the object from the sorting map array */
+  i = 0;
+  while (i < [sortedArray count] && ![[[sortedArray objectAtIndex:i] objectForKey:@"row"] isEqual:n])
+    i++;
+  if (i == [sortedArray count])
+    {
+      NSLog(@"Object not found in sorted array, internal error");
+      return;
+    }
+  [sortedArray removeObjectAtIndex:i];
 }
 
 /** returns the object after resolving sorting */
