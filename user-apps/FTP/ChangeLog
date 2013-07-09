@@ -1,3 +1,8 @@
+2013-07-09 Riccardo Mottola <rm@gnu.org>
+
+	* fileTable.[h,m]
+	Object add and remove methods.
+
 2013-06-27 Riccardo Mottola <rm@gnu.org>
 
 	* GetNameController.h

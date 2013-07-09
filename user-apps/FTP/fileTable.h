@@ -47,7 +47,7 @@ enum sortOrderDef
 
 @interface FileTable : NSObject
 {
-  NSArray        *fileStructs;
+  NSMutableArray *fileStructs;
   NSMutableArray *sortedArray;
   NSString       *sortByIdent;
   enum sortOrderDef   sortOrder;
@@ -56,6 +56,9 @@ enum sortOrderDef
 - (void)initData:(NSArray *)fnames;
 - (void)clear;
 - (FileElement *)elementAtIndex:(NSUInteger)index;
+- (void)addObject:(FileElement *)object;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)removeObject:(FileElement *)object;
 - (void)sortByIdent:(NSString *)idStr;
 
 @end
