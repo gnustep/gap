@@ -56,6 +56,7 @@ enum sortOrderDef
 - (void)initData:(NSArray *)fnames;
 - (void)clear;
 - (FileElement *)elementAtIndex:(NSUInteger)index;
+- (void)generateSortedArray;
 - (void)addObject:(FileElement *)object;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeObject:(FileElement *)object;

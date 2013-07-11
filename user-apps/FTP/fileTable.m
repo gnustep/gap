@@ -55,8 +55,6 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 
 - (void)initData:(NSArray *)fnames
 {
-  NSUInteger i;
-
   sortByIdent = nil;
   
   if (fileStructs)
@@ -66,19 +64,8 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
     }
   fileStructs = [[NSMutableArray arrayWithArray:fnames] retain];
   sortedArray = [[NSMutableArray arrayWithCapacity: [fileStructs count]] retain];
-  for (i = 0; i < [fileStructs count]; i++)
-    {
-      NSNumber *n;
-      NSMutableDictionary *dict;
-      FileElement *fe;
+  [self generateSortedArray];
 
-      fe = [fileStructs objectAtIndex: i];
-      n = [NSNumber numberWithInt: i];
-      dict = [NSMutableDictionary dictionary];
-      [dict setObject: [fe name] forKey: @"name"];
-      [dict setObject: n forKey: @"row"];
-      [sortedArray addObject: dict];
-    }
   sortOrder = undefined;
 }
 
@@ -95,6 +82,26 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   fileStructs = nil;
   [sortedArray release];
   sortedArray = nil;
+}
+
+- (void)generateSortedArray
+{
+  NSUInteger i;
+
+  [sortedArray removeAllObjects];
+  for (i = 0; i < [fileStructs count]; i++)
+    {
+      NSNumber *n;
+      NSMutableDictionary *dict;
+      FileElement *fe;
+
+      fe = [fileStructs objectAtIndex: i];
+      n = [NSNumber numberWithInt: i];
+      dict = [NSMutableDictionary dictionary];
+      [dict setObject: [fe name] forKey: @"name"];
+      [dict setObject: n forKey: @"row"];
+      [sortedArray addObject: dict];
+    }
 }
 
 - (void)addObject:(FileElement *)object
@@ -120,13 +127,17 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   originalRow = (NSUInteger)[[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
 
   [fileStructs removeObjectAtIndex:originalRow];
-  [sortedArray removeObjectAtIndex:index];
+  [self generateSortedArray];
+  if (sortOrder != undefined)
+    {
+      [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
+    }
 }
+
 - (void)removeObject:(FileElement *)object
 {
   NSUInteger index;
   NSNumber *n;
-  NSUInteger i;
 
   index = [fileStructs indexOfObject:object];
   if (index == NSNotFound)
@@ -135,21 +146,14 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
       return;
     }
 
-  n = [NSNumber numberWithInt: index];
-
   /* remove object from storage */
   [fileStructs removeObject:object];
 
-  /* remove the object from the sorting map array */
-  i = 0;
-  while (i < [sortedArray count] && ![[[sortedArray objectAtIndex:i] objectForKey:@"row"] isEqual:n])
-    i++;
-  if (i == [sortedArray count])
+  [self generateSortedArray];
+  if (sortOrder != undefined)
     {
-      NSLog(@"Object not found in sorted array, internal error");
-      return;
+      [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
     }
-  [sortedArray removeObjectAtIndex:i];
 }
 
 /** returns the object after resolving sorting */
@@ -158,6 +162,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   NSUInteger originalRow;
 
   originalRow = (NSUInteger)[[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
+
   return [fileStructs objectAtIndex:originalRow];
 }
 
