@@ -82,6 +82,7 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotif;
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName;
 
+- (void)readDirWith:(Client *)client toTable:(FileTable *)t andView:(NSTableView*)tv;
 - (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray;
 
 - (IBAction)changePathFromMenu:(id)sender;

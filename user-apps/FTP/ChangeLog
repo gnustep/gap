@@ -1,8 +1,14 @@
+2013-07-12 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h (readDirWith)
+	* AppController.m
+	Factor out code for reading directory contents into table and view.
+
 2013-07-11 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m (localDelete, remoteDelete)
 	Make a copy of selection before performing deletion.
-	
+
 2013-07-11 Riccardo Mottola <rm@gnu.org>
 
 	* fileTable.[h,m]

@@ -148,14 +148,26 @@
     return NO;
 }
 
-/* update the pop-up menu with a new path */
+/** update the pop-up menu with a new path */
 - (void)updatePath :(NSPopUpButton *)path :(NSArray *)pathArray
 {
   [path removeAllItems];
   [path addItemsWithTitles:pathArray];
 }
 
-/* performs the action of the path pull-down menu
+/** reads directory contents and reads refreshes the table */
+- (void)readDirWith:(Client *)client toTable:(FileTable *)t andView:(NSTableView*)tv
+{
+  NSArray    *dirList;
+
+  if ((dirList = [client dirContents]) == nil)
+    return;
+  [t initData:dirList];
+  [tv deselectAll:self];
+  [tv reloadData];
+}
+
+/** performs the action of the path pull-down menu
    it navigates upwards the tree
    and works for both the local and remote path */
 - (IBAction)changePathFromMenu:(id)sender
@@ -167,7 +179,6 @@
   NSArray     *items;
   int         selectedIndex;
   unsigned    i;
-  NSArray    *dirList;
 
   if (sender == localPath)
     {
@@ -186,13 +197,9 @@
   items = [sender itemTitles];
   for (i = [items count] - 1; i >= selectedIndex; i--)
     thePath = [thePath stringByAppendingPathComponent: [items objectAtIndex:i]];
-  NSLog(@"selected path: %@", thePath);
+
   [theClient changeWorkingDir:thePath];
-  if ((dirList = [theClient dirContents]) == nil)
-    return;
-  [theTable initData:dirList];
-  [theView deselectAll:self];
-  [theView reloadData];
+  [self readDirWith:theClient toTable:theTable andView:theView];
     
   [self updatePath :sender :[theClient workDirSplit]];
 }
@@ -243,24 +250,19 @@
     if ([fileEl isDir])
       {
         [theClient changeWorkingDir:thePath];
-        if ((dirList = [theClient dirContents]) == nil)
-            return;
-        [theTable initData:dirList];
-        [theView reloadData];
-	[theView deselectAll:self];
+        [self readDirWith:theClient toTable:theTable andView:theView];
         [self updatePath :thePathMenu :[theClient workDirSplit]];
       }
     else
       {
         if (theView == localView)
-        {
-            NSLog(@"should upload (dbl click) %@", thePath);
+          {
             [self performStoreFile];
-        } else
-        {
-            NSLog(@"should download %@", thePath);
+          }
+        else
+          {
             [self performRetrieveFile];
-        }
+          }
     }
 }
 
@@ -329,14 +331,9 @@
         thePath = fileOrPath;
       NSLog(@"trimmed path to: %@", thePath);
       [local changeWorkingDir:thePath];
-      dirList = [local dirContents];
-      if (dirList)
-        {
-          [localTableData initData:dirList];
-          [localView deselectAll:self];
-          [localView reloadData];
-          [self updatePath :localPath :[local workDirSplit]];
-        }
+      [self readDirWith:local toTable:localTableData andView:localView];
+ 
+      [self updatePath :localPath :[local workDirSplit]];
     }
   else if (sender == remoteTableData)
     {
