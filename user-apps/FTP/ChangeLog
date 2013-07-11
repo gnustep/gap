@@ -1,5 +1,10 @@
 2013-07-11 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.m (localDelete, remoteDelete)
+	Make a copy of selection before performing deletion.
+	
+2013-07-11 Riccardo Mottola <rm@gnu.org>
+
 	* fileTable.[h,m]
 	Improve object remove methods regarding sorting array sync, factor sortedArray generation out.
 

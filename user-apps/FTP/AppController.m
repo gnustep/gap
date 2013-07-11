@@ -457,17 +457,30 @@
 
 - (IBAction)localDelete:(id)sender
 {
-  NSEnumerator  *elemEnum;
-  FileElement   *fileEl;
-  id            currEl;
+  NSEnumerator   *elemEnum;
+  FileElement    *fileEl;
+  id             currEl;
+  NSMutableArray *selArray;
+  NSUInteger     i;
   
+  /* make a copy of the selection */
+  selArray = [[NSMutableArray alloc] init];
   elemEnum = [localView selectedRowEnumerator];
-  
   while ((currEl = [elemEnum nextObject]) != nil)
     {
       fileEl = [localTableData elementAtIndex:[currEl intValue]];
-      [local deleteFile:fileEl beingAt:0];
+      [selArray addObject:fileEl];
     }
+  
+  /* perform deletes */
+  for (i = 0; i < [selArray count]; i++)
+    {
+      fileEl = [selArray objectAtIndex:i];
+      [local deleteFile:fileEl beingAt:0];
+      [localTableData removeObject:fileEl];
+    }
+  [localView reloadData];
+  [selArray release];
 }
 
 - (IBAction)remoteDelete:(id)sender
@@ -475,14 +488,27 @@
   NSEnumerator  *elemEnum;
   FileElement   *fileEl;
   id            currEl;    
+  NSMutableArray *selArray;
+  NSUInteger     i;
   
+  /* make a copy of the selection */
+  selArray = [[NSMutableArray alloc] init];
   elemEnum = [remoteView selectedRowEnumerator];
-  
   while ((currEl = [elemEnum nextObject]) != nil)
     {
       fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
-      [ftp deleteFile:fileEl beingAt:0];
+      [selArray addObject:fileEl];
     }
+
+  /* perform deletes */
+  for (i = 0; i < [selArray count]; i++)
+    {
+      fileEl = [selArray objectAtIndex:i];
+      [ftp deleteFile:fileEl beingAt:0];
+      [remoteTableData removeObject:fileEl];
+    }
+  [remoteView reloadData];
+  [selArray release]; 
 }
 
 - (IBAction)localRename:(id)sender
