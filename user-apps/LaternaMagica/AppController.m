@@ -749,20 +749,29 @@
   [exporterPanel displayIfNeeded];
   for (i = 0; i < [fileListView numberOfRows]; i++)
     {
-      NSString *fullOrigPath;
       int newW, newH;
       double aspectRatio;
       NSBitmapImageRep *scaledImageRep;
       NSAutoreleasePool *pool;
+      LMImage *lmImage;
+
+      lmImage = [fileListData imageAtIndex:i];
 
       /* create a local pool to avoid the autorelease to grow too much */
       pool = [[NSAutoreleasePool alloc] init];
-      fullOrigPath = [fileListData pathAtIndex:i];
-      origFileName = [fullOrigPath lastPathComponent];
-      filenameNoExtension = [origFileName stringByDeletingPathExtension];
-      
+      origFileName = [lmImage name];
+      filenameNoExtension = [origFileName stringByDeletingPathExtension];   
 
-      srcImage = [[NSImage alloc] initByReferencingFile:fullOrigPath];
+      srcImage = [[NSImage alloc] initByReferencingFile:[lmImage path]];
+      if ([lmImage rotation] > 0)
+        {
+          NSImage *rotImage;
+
+          rotImage = [self rotate:srcImage byAngle:[lmImage rotation]];
+          [rotImage retain];
+          [srcImage release];
+          srcImage = rotImage;
+        }
       srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
 
       newW = [srcImageRep size].width;
