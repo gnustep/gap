@@ -97,6 +97,8 @@
 - (IBAction)remoteRename:(id)sender;
 - (IBAction)localNewFolder:(id)sender;
 - (IBAction)remoteNewFolder:(id)sender;
+- (IBAction)localRefresh:(id)sender;
+- (IBAction)remoteRefresh:(id)sender;
 
 - (void)setThreadRunningState:(BOOL)flag;
 

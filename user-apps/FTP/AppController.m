@@ -620,6 +620,16 @@
   [nameGetter release];
 }
 
+- (IBAction)localRefresh:(id)sender
+{
+  [self readDirWith:local toTable:localTableData andView:localView];
+}
+
+- (IBAction)remoteRefresh:(id)sender
+{
+  [self readDirWith:ftp toTable:remoteTableData andView:remoteView];
+}
+
 - (void)setTransferBegin:(NSString *)name :(unsigned long long)size
 {
     [infoMessage setStringValue:name];
