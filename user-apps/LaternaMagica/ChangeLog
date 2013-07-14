@@ -1,3 +1,8 @@
+2013-07-14 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m (execExportImages)
+	Rotate image before exporting it, if it had a rotation set.
+
 2013-06-02 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
