@@ -1,3 +1,10 @@
+2013-07-14 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	* Resources/FTP.gorm
+	Remote/Local refresh
+
 2013-07-12 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h (readDirWith)
