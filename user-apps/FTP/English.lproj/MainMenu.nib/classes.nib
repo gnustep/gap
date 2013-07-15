@@ -11,11 +11,13 @@
                 listDoubleClick = id; 
                 localDelete = id; 
                 localNewFolder = id; 
+                localRefresh = id; 
                 localRename = id; 
                 prefCancel = id; 
                 prefSave = id; 
                 remoteDelete = id; 
                 remoteNewFolder = id; 
+                remoteRefresh = id; 
                 remoteRename = id; 
                 showConnPanel = id; 
                 showFtpLog = id; 
