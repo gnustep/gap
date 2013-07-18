@@ -1,6 +1,11 @@
 2013-07-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
+	Fix bounds initialization (fixes drawing of editor after editing).
+
+2013-07-18 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
 	Do not print editor during printing context.
 
 2013-07-09 Riccardo Mottola <rm@gnu.org>
