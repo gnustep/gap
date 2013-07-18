@@ -476,35 +476,38 @@
   
   [str drawInRect:boundsZ withAttributes:strAttr];
 
-  bezp = [NSBezierPath bezierPath];
-  [bezp setLineWidth:0];
-  if([str length] > 0)
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
     {
-      lines = [str componentsSeparatedByString: @"\n"];
-      for(i = 0; i < [lines count]; i++)
-        {
-          NSString *line;
-          NSSize lineSize;
-        
-	  line = [lines objectAtIndex: i];
-          lineSize = [line sizeWithAttributes:strAttr]; 
+      bezp = [NSBezierPath bezierPath];
+      [bezp setLineWidth:0];
+      if([str length] > 0)
+	{
+	  lines = [str componentsSeparatedByString: @"\n"];
+	  for(i = 0; i < [lines count]; i++)
+	    {
+	      NSString *line;
+	      NSSize lineSize;
+	      
+	      line = [lines objectAtIndex: i];
+	      lineSize = [line sizeWithAttributes:strAttr]; 
+	  
+	      if([editor isSelected])
+		{
+		  [[NSColor blackColor] set];
+		  [bezp moveToPoint:NSMakePoint(posZ.x, baselny)];
+		  [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
+		}
+	      
+	      baselny += lineSize.height;
+	    }
 	  
 	  if([editor isSelected])
-            {
+	    {
+	      [bezp stroke];
 	      [[NSColor blackColor] set];
-	      [bezp moveToPoint:NSMakePoint(posZ.x, baselny)];
-	      [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
-            }
-	  
-	  baselny += lineSize.height;
-        }
-      
-      if([editor isSelected])
-        {
-	  [bezp stroke];
-	  [[NSColor blackColor] set];
-          NSRectFill(selRectZ);
-        }
+	      NSRectFill(selRectZ);
+	    }
+	}
     }
   [strAttr release];
 } 
