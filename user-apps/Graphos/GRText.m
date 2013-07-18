@@ -293,28 +293,28 @@
 
 - (NSString *)fontName
 {
-    return [font fontName];
+  return [font fontName];
 }
 
 - (void)dealloc
 {
-    [str release];
-    [font release];
-    [super dealloc];
+  [str release];
+  [font release];
+  [super dealloc];
 }
 
 - (void)setString:(NSString *)aString attributes:(NSDictionary *)attrs
 {
-    NSParagraphStyle *pstyle;
+  NSParagraphStyle *pstyle;
 
-    ASSIGN(str, aString);
-    ASSIGN(font, [attrs objectForKey: NSFontAttributeName]);
-    fsize = [font pointSize];
-    pstyle = [attrs objectForKey: NSParagraphStyleAttributeName];
-    parspace = [pstyle paragraphSpacing];
-    align = [pstyle alignment];
-    size = [str sizeWithAttributes: attrs];
-    [self setZoomFactor: zmFactor];
+  ASSIGN(str, aString);
+  ASSIGN(font, [attrs objectForKey: NSFontAttributeName]);
+  fsize = [font pointSize];
+  pstyle = [attrs objectForKey: NSParagraphStyleAttributeName];
+  parspace = [pstyle paragraphSpacing];
+  align = [pstyle alignment];
+  size = [str sizeWithAttributes: attrs];
+  bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
 }
 
 // maybe should be moved into the editor
