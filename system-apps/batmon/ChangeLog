@@ -1,3 +1,10 @@
+2013-07-24 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel.h
+	* BatteryModel.m
+	* BatteryModel-Linux.m
+	Separate update method into linux Platform Specific file.
+
 2013-04-12 Riccardo Mottola <rm@gnu.org>
 
 	* BatteryModel.m (update)

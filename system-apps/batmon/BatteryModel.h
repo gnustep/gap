@@ -100,3 +100,6 @@ typedef enum
 @end
 
 
+@interface BatteryModel (PlatformSpecific)
+- (void)updatePlatformSpecific;
+@end
