@@ -1,5 +1,11 @@
 2013-07-24 Riccardo Mottola <rm@gnu.org>
 
+	* BatteryModel.m
+	* BatteryModel-Linux.m
+	Separate update method into OpenBSD Platform Specific file.
+
+2013-07-24 Riccardo Mottola <rm@gnu.org>
+
 	* BatteryModel.h
 	* BatteryModel.m
 	* BatteryModel-Linux.m
