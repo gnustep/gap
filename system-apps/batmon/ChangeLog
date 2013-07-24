@@ -1,5 +1,12 @@
 2013-07-24 Riccardo Mottola <rm@gnu.org>
 
+	* BatteryModel-NetBSD.m
+	* BatteryModel-FreeBSD.m
+	* BatteryModel.m
+	FreeBSD and NetBSD refactor.
+
+2013-07-24 Riccardo Mottola <rm@gnu.org>
+
 	* BatteryModel-Linux.m
 	* BatteryModel-OpenBSD.m
 	* BatteryModel.h
