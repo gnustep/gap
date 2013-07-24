@@ -48,13 +48,6 @@
 #include <prop/proplib.h> /* psd property dictionaries */
 #endif
 
-#if defined(openbsd) || defined(__OpenBSD__)
-#include <unistd.h>
-#include <fcntl.h>  /* open */
-#include <sys/ioctl.h>
-#include <machine/apmvar.h>
-#define APMDEV "/dev/apm"
-#endif
 
 #import <Foundation/NSCharacterSet.h>
 #import <Foundation/NSString.h>
@@ -69,32 +62,21 @@
 
 - (void)_readLine :(FILE *)f :(char *)l
 {
-    int ch;
+  int ch;
     
-    ch = fgetc(f);
-    while (ch != EOF && ch != '\n')
+  ch = fgetc(f);
+  while (ch != EOF && ch != '\n')
     {
-        *l = ch;
-        l++;
-        ch = fgetc(f);
+      *l = ch;
+      l++;
+      ch = fgetc(f);
     }
-    *l = '\0';
+  *l = '\0';
 }
 
 
 - (id)init
 {
-#if defined(linux)
-  NSFileManager       *fm;
-  NSArray             *dirNames;
-  NSEnumerator        *en;
-  NSString            *dirName;
-  BOOL                done;
-  FILE                *stateFile;
-  char                presentStr[16];
-  char                line[128];
-#endif /* linux */
-
   if ((self = [super init]))
     {
       useWattHours= YES;
@@ -102,112 +84,7 @@
       isCharging = NO;
       batteryManufacturer = nil;
       
-#if defined(linux)
-      useACPIproc = NO;
-      useACPIsys  = NO;
-      useAPM      = NO;
-      usePMU      = NO;
-
-      /* look for a battery */
-      NSLog(@"looking for ACPI...");
-      fm = [NSFileManager defaultManager];
-      dirNames = [fm directoryContentsAtPath:DEV_SYS_POWERSUPPLY];
-      if (dirNames != nil)
-        {
-	  done = NO;
-	  en = [dirNames objectEnumerator];
-	  while (done == NO)
-	    {
-	      dirName = [en nextObject];
-	      if (dirName != nil)
-		{
-		  NSString *presentFileName;
-		  FILE *presentFile;
-
-		  /* scan for the first present battery */
-		  presentFileName = [dirName stringByAppendingPathComponent:@"present"];
-
-		  [[DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:presentFileName] getCString:batteryStatePath0];
-		  NSLog(@"/sys checking: %s", batteryStatePath0);
-		      presentFile = fopen(batteryStatePath0, "r");
-		      if (presentFile != NULL)
-			{
-			  [self _readLine :presentFile :line];
-			  if (!strcmp(line, "1"))
-			    {
-			      done = YES;
-			      NSLog(@"/sys: found it!: %@", [DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:dirName]);
-                              batterySysAcpiString = [[DEV_SYS_POWERSUPPLY stringByAppendingPathComponent:dirName] retain];
-			    }
-			  fclose(presentFile);
-			  useACPIsys = YES;
-			}           
-		} else
-		{
-		  done = YES;
-		}
-	    }
-	} else
-	{
-	  dirNames = [fm directoryContentsAtPath:@"/proc/acpi/battery"];
-	  if (dirNames != nil)
-	    {
-	      done = NO;
-	      en = [dirNames objectEnumerator];
-	      while (done == NO)
-		{
-		  dirName = [en nextObject];
-		  if (dirName != nil)
-		    {
-		      /* scan for the first present battery */
-		      dirName = [[NSString stringWithString:@"/proc/acpi/battery"] stringByAppendingPathComponent:dirName];
-		      [dirName getCString:batteryStatePath0];
-		      strcat(batteryStatePath0, "/state");
-		      NSLog(@"checking: %s", batteryStatePath0);
-		      stateFile = fopen(batteryStatePath0, "r");
-		      if (stateFile != NULL)
-			{
-			  [self _readLine :stateFile :line];
-			  sscanf(line, "present: %s", presentStr);
-			  if (!strcmp(presentStr, "yes"))
-			    {
-			      done = YES;
-			      NSLog(@"/proc found it!: %@", dirName);
-			      [dirName getCString:batteryInfoPath0];
-			      strcat(batteryInfoPath0, "/info");
-			    }
-			  fclose(stateFile);
-			  useACPIproc = YES;
-			}           
-		    } else
-		    {
-		      done = YES;
-		    }
-		}
-	    } else
-	    {
-	      /* no acpi, but maybe apm */
-	      if([fm fileExistsAtPath:@"/proc/apm"] == YES)
-		{
-		  NSLog(@"found apm");
-		  useAPM = YES;
-		  strcpy(apmPath, "/proc/apm");
-		}
-	      else
-		{
-		  dirNames = [fm directoryContentsAtPath:DEV_PROC_PMU];
-		  if (dirNames != nil)
-		    {
-		      NSLog(@"Found PMU");
-		      usePMU = YES;
-		      useWattHours = NO;
-		    }
-		}
-	    }
-	}
-      
-#endif
- 
+      [self initPlatformSpecific];
     }
   return self;
 
@@ -216,7 +93,7 @@
 - (void)dealloc
 {
   if (batteryType != nil)
-        [batteryType release];
+    [batteryType release];
   [super dealloc];
 }
 

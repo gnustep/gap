@@ -22,9 +22,22 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#if defined(openbsd) || defined(__OpenBSD__)
+#include <unistd.h>
+#include <fcntl.h>  /* open */
+#include <sys/ioctl.h>
+#include <machine/apmvar.h>
+#define APMDEV "/dev/apm"
+#endif
+
+
 #import "BatteryModel.h"
 
 @implementation BatteryModel (PlatformSpecific)
+
+- (void)initPlatformSpecific
+{
+}
 
 - (void)updatePlatformSpecific
 {

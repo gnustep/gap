@@ -1,5 +1,13 @@
 2013-07-24 Riccardo Mottola <rm@gnu.org>
 
+	* BatteryModel-Linux.m
+	* BatteryModel-OpenBSD.m
+	* BatteryModel.h
+	* BatteryModel.m
+	Provide initPlatformSpecific initialization code (used only for linux)
+
+2013-07-24 Riccardo Mottola <rm@gnu.org>
+
 	* BatteryModel.m
 	* BatteryModel-Linux.m
 	Separate update method into OpenBSD Platform Specific file.
