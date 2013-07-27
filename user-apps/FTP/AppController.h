@@ -74,7 +74,6 @@
     @private BOOL               threadRunning;
 
     @private NSConnection   *doConnection;
-
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif;
@@ -132,6 +131,8 @@
 /* internal methods */
 - (void)performRetrieveFile;
 - (void)performStoreFile;
+
+- (void)retrieveFiles:(NSArray *)files;
 - (void)storeFiles:(NSArray *)files;
 
 @end
