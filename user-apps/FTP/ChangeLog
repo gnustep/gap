@@ -1,3 +1,10 @@
+2013-07-27 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	* fileTable.m
+        Make copy of selection before file transfer. Update table after store and retrieve.
+
 2013-07-14 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h

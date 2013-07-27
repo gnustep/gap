@@ -113,11 +113,11 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [fileStructs addObject:object];
 
   /* keep the sorting map array in sync */
-  n = [NSNumber numberWithInt: [fileStructs count]];
-  dict = [NSMutableDictionary dictionary];
-  [dict setObject: [object name] forKey: @"name"];
-  [dict setObject: n forKey: @"row"];
-  [sortedArray addObject: dict];
+  [self generateSortedArray];
+  if (sortOrder != undefined)
+    {
+      [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
+    }
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index

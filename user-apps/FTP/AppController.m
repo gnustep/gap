@@ -215,7 +215,6 @@
     int           elementIndex;
     FileElement   *fileEl;
     NSString      *thePath;
-    NSArray       *dirList;
     NSPopUpButton *thePathMenu;
 
     if (threadRunning)
@@ -305,7 +304,6 @@
       [fEl release];
     }
 
-  NSLog(@"AppController dropAction: %@", paths);
   /* locally, we accept only a directory and change to it
      remotely, we store everything */
   if (sender == localTableData)
@@ -314,7 +312,6 @@
       NSString      *thePath;
       NSFileManager *fm;
       BOOL          isDir;
-      NSArray       *dirList;
 
       fileOrPath = [paths objectAtIndex:0];
       fm = [NSFileManager defaultManager];
@@ -373,33 +370,35 @@
     [self setInterfaceEnabled:!flag];
 }
 
+/** retrieves using selection, by constructing an array and calling retrieveFiles */
 - (void)performRetrieveFile
 {
-    NSEnumerator  *elemEnum;
-    FileElement   *fileEl;
-    id            currEl;
+  NSMutableArray *selArray;
+  NSEnumerator   *elemEnum;
+  FileElement    *fileEl;
+  id             currEl;
 
-    [self setThreadRunningState:YES];
-	
-    // We should actually do a copy of the selection
-    elemEnum = [remoteView selectedRowEnumerator];
+  /* make a copy of the selection */
+  selArray = [[NSMutableArray alloc] init];
+  elemEnum = [remoteView selectedRowEnumerator];
 
-    while ((currEl = [elemEnum nextObject]) != nil)
+  while ((currEl = [elemEnum nextObject]) != nil)
     {
-        fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
-        NSLog(@"should download: %@", [fileEl name]);
-        [ftp retrieveFile:fileEl to:local beingAt:0];
+      fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
+      [selArray addObject:fileEl];
     }
     
-    [self setThreadRunningState:NO];
+  [self retrieveFiles:selArray];
+  [selArray release];
 }
 
+/** stores using selection, by constructing an array and calling storeFiles */
 - (void)performStoreFile
 {
   NSMutableArray *selArray;
-  NSEnumerator  *elemEnum;
-  FileElement   *fileEl;
-  id            currEl;
+  NSEnumerator   *elemEnum;
+  FileElement    *fileEl;
+  id             currEl;
   
   /* make a copy of the selection */
   selArray = [[NSMutableArray alloc] init];
@@ -414,6 +413,27 @@
   [selArray release];
 }
 
+/** Retrieves Array of FileElements */
+- (void)retrieveFiles:(NSArray *)files
+{
+  NSUInteger i;
+
+  [self setThreadRunningState:YES];
+  for (i = 0; i < [files count]; i++)
+    {
+      FileElement *fEl;
+
+      fEl = [files objectAtIndex:i];
+      NSLog(@"should download (performStore): %@", [fEl name]);
+      [ftp retrieveFile:fEl to:local beingAt:0];
+      [localTableData addObject:fEl];
+    }
+  [localView deselectAll:self];
+  [localView reloadData];
+  [self setThreadRunningState:NO];
+}
+
+/** Stores Array of FileElements */
 - (void)storeFiles:(NSArray *)files
 {
   NSUInteger i;
@@ -426,7 +446,10 @@
       fEl = [files objectAtIndex:i];
       NSLog(@"should upload (performStore): %@", [fEl name]);
       [ftp storeFile:fEl from:local beingAt:0];
+      [remoteTableData addObject:fEl];
     }
+  [remoteView deselectAll:self];
+  [remoteView reloadData];
   [self setThreadRunningState:NO];
 }
 
@@ -476,6 +499,7 @@
       [local deleteFile:fileEl beingAt:0];
       [localTableData removeObject:fileEl];
     }
+  [localView deselectAll:self];
   [localView reloadData];
   [selArray release];
 }
@@ -504,6 +528,7 @@
       [ftp deleteFile:fileEl beingAt:0];
       [remoteTableData removeObject:fileEl];
     }
+  [remoteView deselectAll:self];
   [remoteView reloadData];
   [selArray release]; 
 }
@@ -538,6 +563,7 @@
         }
       [nameGetter release];
     }
+  [localView reloadData];
 }
 
 - (IBAction)remoteRename:(id)sender
@@ -570,6 +596,7 @@
 	}
       [nameGetter release];
     }
+  [remoteView reloadData];
 }
 
 - (IBAction)localNewFolder:(id)sender
@@ -588,10 +615,19 @@
     {
       NSString *name;
       NSString *fullPath;
+      FileElement *fileEl;
+      NSDictionary *attrs;
       
       name = [nameGetter name];
       fullPath = [[local workingDir] stringByAppendingPathComponent:name];
       [local createNewDir:fullPath];
+      attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                              NSFileTypeDirectory, NSFileType,
+                            NULL];
+      fileEl = [[FileElement alloc] initWithPath:fullPath andAttributes:attrs];
+      [localTableData addObject:fileEl];
+      [fileEl release];
+      [localView reloadData];
     }
   [nameGetter release];
 }
@@ -845,7 +881,6 @@
 
   /* add the textChunk to the NSTextView's backing store as an attributed string */
   [[logTextField textStorage] appendAttributedString: attrStr];
-
 
     
   [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
