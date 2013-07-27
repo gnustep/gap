@@ -106,9 +106,6 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 
 - (void)addObject:(FileElement *)object
 {
-  NSNumber *n;
-  NSMutableDictionary *dict;
-
   /* add the file element to the storage */
   [fileStructs addObject:object];
 
@@ -137,7 +134,6 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 - (void)removeObject:(FileElement *)object
 {
   NSUInteger index;
-  NSNumber *n;
 
   index = [fileStructs indexOfObject:object];
   if (index == NSNotFound)
