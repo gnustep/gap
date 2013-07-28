@@ -1,3 +1,9 @@
+2013-07-28 Riccardo Mottola <rm@gnu.org>
+
+	* fileTable.h
+	* fileTable.m
+	File path setter.
+
 2013-07-27 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
