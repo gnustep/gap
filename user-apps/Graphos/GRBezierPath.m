@@ -61,10 +61,10 @@ static double k = 0.025;
   self = [super init];
   if(self != nil)
     {
-      float strokeCol[4];
-      float fillCol[4];
-      float strokeAlpha;
-      float fillAlpha;
+      CGFloat strokeCol[4];
+      CGFloat fillCol[4];
+      CGFloat strokeAlpha;
+      CGFloat fillAlpha;
       id obj;
       
       editor = [[GRBezierPathEditor alloc] initEditor:self];
@@ -212,11 +212,11 @@ static double k = 0.025;
   NSString *str;
   NSBezierPathElement type;
   NSPoint p[3];
-  int i;
-  float strokeCol[3];
-  float fillCol[3];
-  float strokeAlpha;
-  float fillAlpha;
+  NSUInteger i;
+  CGFloat strokeCol[3];
+  CGFloat fillCol[3];
+  CGFloat strokeAlpha;
+  CGFloat fillAlpha;
 
   strokeCol[0] = [strokeColor redComponent];
   strokeCol[1] = [strokeColor greenComponent];
@@ -231,27 +231,27 @@ static double k = 0.025;
   dict = [NSMutableDictionary dictionaryWithCapacity: 1];
   [dict setObject: @"path" forKey: @"type"];
 
-  str = [NSString stringWithFormat: @"%.3f", flatness];
+  str = [NSString stringWithFormat: @"%.3f", (float)flatness];
   [dict setObject: str forKey: @"flatness"];
   str = [NSString stringWithFormat: @"%i", linejoin];
   [dict setObject: str forKey: @"linejoin"];
   str = [NSString stringWithFormat: @"%i", linecap];
   [dict setObject: str forKey: @"linecap"];
-  str = [NSString stringWithFormat: @"%.3f", miterlimit];
+  str = [NSString stringWithFormat: @"%.3f", (float)miterlimit];
   [dict setObject: str forKey: @"miterlimit"];
-  str = [NSString stringWithFormat: @"%.3f", linewidth];
+  str = [NSString stringWithFormat: @"%.3f", (float)linewidth];
   [dict setObject: str forKey: @"linewidth"];
   [dict setObject: [NSNumber numberWithBool:stroked] forKey: @"stroked"];
   str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
-		  strokeCol[0], strokeCol[1], strokeCol[2]];
+		  (float)strokeCol[0], (float)strokeCol[1], (float)strokeCol[2]];
   [dict setObject: str forKey: @"strokecolor"];
-  str = [NSString stringWithFormat: @"%.3f", strokeAlpha];
+  str = [NSString stringWithFormat: @"%.3f", (float)strokeAlpha];
   [dict setObject: str forKey: @"strokealpha"];
   [dict setObject:[NSNumber numberWithBool:filled] forKey: @"filled"];
   str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
-		  fillCol[0], fillCol[1], fillCol[2]];
+		  (float)fillCol[0], (float)fillCol[1], (float)fillCol[2]];
   [dict setObject: str forKey: @"fillcolor"];
-  str = [NSString stringWithFormat: @"%.3f", fillAlpha];
+  str = [NSString stringWithFormat: @"%.3f", (float)fillAlpha];
   [dict setObject: str forKey: @"fillalpha"];
   [dict setObject:[NSNumber numberWithBool:visible] forKey: @"visible"];
   [dict setObject:[NSNumber numberWithBool:locked] forKey: @"locked"];
