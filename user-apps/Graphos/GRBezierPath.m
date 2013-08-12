@@ -51,260 +51,260 @@ static double k = 0.025;
         inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
 {
-    NSArray *psops, *linearr;
-    NSString *str;
-    NSPoint p, pp[3];
-    GRBezierControlPoint *prevcp;
-    double distx, disty;
-    int i, count;
+  NSArray *psops, *linearr;
+  NSString *str;
+  NSPoint p, pp[3];
+  GRBezierControlPoint *prevcp;
+  double distx, disty;
+  NSUInteger i, count;
 
-    self = [super init];
-    if(self != nil)
-      {
-	float strokeCol[4];
-	float fillCol[4];
-	float strokeAlpha;
-	float fillAlpha;
-	id obj;
-
-        editor = [[GRBezierPathEditor alloc] initEditor:self];
-        docView = aView;
-        zmFactor = zf;
-        myPath = [[NSBezierPath bezierPath] retain];
-        [myPath setCachesBezierPath: NO];
-        controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
-        psops = [description objectForKey: @"psdata"];
-        for(i = 0; i < [psops count]; i++)
+  self = [super init];
+  if(self != nil)
+    {
+      float strokeCol[4];
+      float fillCol[4];
+      float strokeAlpha;
+      float fillAlpha;
+      id obj;
+      
+      editor = [[GRBezierPathEditor alloc] initEditor:self];
+      docView = aView;
+      zmFactor = zf;
+      myPath = [[NSBezierPath bezierPath] retain];
+      [myPath setCachesBezierPath: NO];
+      controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
+      psops = [description objectForKey: @"psdata"];
+      for(i = 0; i < [psops count]; i++)
         {
-            linearr = [[psops objectAtIndex: i] componentsSeparatedByString: @" "];
-            count = [linearr count];
-            str = [linearr objectAtIndex: count -1];
-
-            if([str isEqualToString: @"moveto"])
+	  linearr = [[psops objectAtIndex: i] componentsSeparatedByString: @" "];
+	  count = [linearr count];
+	  str = [linearr objectAtIndex: count -1];
+	  
+	  if([str isEqualToString: @"moveto"])
             {
-                pp[0].x = [[linearr objectAtIndex: 0] floatValue];
-                pp[0].y = [[linearr objectAtIndex: 1] floatValue];
-                [self addControlAtPoint: pp[0]];
+	      pp[0].x = [[linearr objectAtIndex: 0] floatValue];
+	      pp[0].y = [[linearr objectAtIndex: 1] floatValue];
+	      [self addControlAtPoint: pp[0]];
             }
-
-            if([str isEqualToString: @"lineto"])
+	  
+	  if([str isEqualToString: @"lineto"])
             {
-                pp[0].x = [[linearr objectAtIndex: 0] floatValue];
-                pp[0].y = [[linearr objectAtIndex: 1] floatValue];
-                [self addLineToPoint: pp[0]];
+	      pp[0].x = [[linearr objectAtIndex: 0] floatValue];
+	      pp[0].y = [[linearr objectAtIndex: 1] floatValue];
+	      [self addLineToPoint: pp[0]];
             }
-
-            if([str isEqualToString: @"curveto"])
+	  
+	  if([str isEqualToString: @"curveto"])
             {
-                pp[0].x = [[linearr objectAtIndex: 0] floatValue];
-                pp[0].y = [[linearr objectAtIndex: 1] floatValue];
-                pp[1].x = [[linearr objectAtIndex: 2] floatValue];
-                pp[1].y = [[linearr objectAtIndex: 3] floatValue];
-                pp[2].x = [[linearr objectAtIndex: 4] floatValue];
-                pp[2].y = [[linearr objectAtIndex: 5] floatValue];
-
-                [self addControlAtPoint: pp[2]];
-                prevcp = [controlPoints objectAtIndex: [controlPoints count] -2];
-                [prevcp calculateBezierHandles: pp[0]];
-
-                distx = grmax(pp[1].x, pp[2].x) - grmin(pp[1].x, pp[2].x);
-                if(pp[1].x > pp[2].x)
-                    p.x = pp[2].x - distx;
-                else
-                    p.x = pp[2].x + distx;
-
-                disty = grmax(pp[1].y, pp[2].y) - grmin(pp[1].y, pp[2].y);
-                if(pp[1].y > pp[2].y)
-                    p.y = pp[2].y - disty;
-                else
-                    p.y = pp[2].y + disty;
-
-                [self addCurveWithBezierHandlePosition: p];
-                [self confirmNewCurve];
+	      pp[0].x = [[linearr objectAtIndex: 0] floatValue];
+	      pp[0].y = [[linearr objectAtIndex: 1] floatValue];
+	      pp[1].x = [[linearr objectAtIndex: 2] floatValue];
+	      pp[1].y = [[linearr objectAtIndex: 3] floatValue];
+	      pp[2].x = [[linearr objectAtIndex: 4] floatValue];
+	      pp[2].y = [[linearr objectAtIndex: 5] floatValue];
+	      
+	      [self addControlAtPoint: pp[2]];
+	      prevcp = [controlPoints objectAtIndex: [controlPoints count] -2];
+	      [prevcp calculateBezierHandles: pp[0]];
+	      
+	      distx = grmax(pp[1].x, pp[2].x) - grmin(pp[1].x, pp[2].x);
+	      if(pp[1].x > pp[2].x)
+		p.x = pp[2].x - distx;
+	      else
+		p.x = pp[2].x + distx;
+	      
+	      disty = grmax(pp[1].y, pp[2].y) - grmin(pp[1].y, pp[2].y);
+	      if(pp[1].y > pp[2].y)
+		p.y = pp[2].y - disty;
+	      else
+		p.y = pp[2].y + disty;
+	      
+	      [self addCurveWithBezierHandlePosition: p];
+	      [self confirmNewCurve];
             }
         }
-
-        flatness = [[description objectForKey: @"flatness"] floatValue];
-        linejoin = [[description objectForKey: @"linejoin"] intValue];
-        linecap = [[description objectForKey: @"linecap"] intValue];
-        miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
-        linewidth = [[description objectForKey: @"linewidth"] floatValue];
-	obj = [description objectForKey: @"stroked"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        stroked = [obj boolValue];
-	strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
-        str = [description objectForKey: @"strokecolor"];
-        linearr = [str componentsSeparatedByString: @" "];
-	if ([linearr count] == 3)
-	  {
-	    strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    strokeColor = [NSColor colorWithCalibratedRed: strokeCol[0]
-				   green: strokeCol[1]
-				   blue: strokeCol[2]
-				   alpha: strokeAlpha];
-	    [strokeColor retain];
+      
+      flatness = [[description objectForKey: @"flatness"] floatValue];
+      linejoin = [[description objectForKey: @"linejoin"] intValue];
+      linecap = [[description objectForKey: @"linecap"] intValue];
+      miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
+      linewidth = [[description objectForKey: @"linewidth"] floatValue];
+      obj = [description objectForKey: @"stroked"];
+      if ([obj isKindOfClass:[NSString class]])
+	obj = [NSNumber numberWithInt:[obj intValue]];
+      stroked = [obj boolValue];
+      strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
+      str = [description objectForKey: @"strokecolor"];
+      linearr = [str componentsSeparatedByString: @" "];
+      if ([linearr count] == 3)
+	{
+	  strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	  strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	  strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	  strokeColor = [NSColor colorWithCalibratedRed: strokeCol[0]
+						  green: strokeCol[1]
+						   blue: strokeCol[2]
+						  alpha: strokeAlpha];
+	  [strokeColor retain];
+	}
+      else
+	{
+	  strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	  strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	  strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	  strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
+	  strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
+					     magenta: strokeCol[1]
+					      yellow: strokeCol[2]
+					       black: strokeCol[3]
+					       alpha: strokeAlpha];
+	  strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
 	  }
-	else
-	  {
-	    strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
-	    strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
-				   magenta: strokeCol[1]
-				   yellow: strokeCol[2]
-				   black: strokeCol[3]
-				   alpha: strokeAlpha];
-	    strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-	  }
-        obj = [description objectForKey: @"filled"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        filled = [obj boolValue];
-        fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
-        str = [description objectForKey: @"fillcolor"];
-        linearr = [str componentsSeparatedByString: @" "];
-	if ([linearr count] == 3)
-	  {
-	    fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    fillColor = [NSColor colorWithCalibratedRed: fillCol[0]
-				 green: fillCol[1]
-				 blue: fillCol[2]
-				 alpha: fillAlpha];
-	    [fillColor retain];
-	  }
-	else
-	  {
-	    fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
-	    fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
-				 magenta: fillCol[1]
-				 yellow: fillCol[2]
-				 black: fillCol[3]
-				 alpha: fillAlpha];
-	    fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-	  }
-        obj = [description objectForKey: @"visible"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        visible = [obj boolValue];
-        obj = [description objectForKey: @"locked"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        locked = [obj boolValue];
+      obj = [description objectForKey: @"filled"];
+      if ([obj isKindOfClass:[NSString class]])
+	obj = [NSNumber numberWithInt:[obj intValue]];
+      filled = [obj boolValue];
+      fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
+      str = [description objectForKey: @"fillcolor"];
+      linearr = [str componentsSeparatedByString: @" "];
+      if ([linearr count] == 3)
+	{
+	  fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	  fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	  fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	  fillColor = [NSColor colorWithCalibratedRed: fillCol[0]
+						green: fillCol[1]
+						 blue: fillCol[2]
+						alpha: fillAlpha];
+	  [fillColor retain];
+	}
+      else
+	{
+	  fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+	  fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+	  fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+	  fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
+	  fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
+					   magenta: fillCol[1]
+					    yellow: fillCol[2]
+					     black: fillCol[3]
+					     alpha: fillAlpha];
+	  fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+	}
+      obj = [description objectForKey: @"visible"];
+      if ([obj isKindOfClass:[NSString class]])
+	obj = [NSNumber numberWithInt:[obj intValue]];
+      visible = [obj boolValue];
+      obj = [description objectForKey: @"locked"];
+      if ([obj isKindOfClass:[NSString class]])
+	obj = [NSNumber numberWithInt:[obj intValue]];
+      locked = [obj boolValue];
     }
 
-    return self;
+  return self;
 }
 
 
 - (NSDictionary *)objectDescription
 {
-    NSMutableDictionary *dict;
-    NSMutableArray *psops;
-    NSString *str;
-    NSBezierPathElement type;
-    NSPoint p[3];
-    int i;
-    float strokeCol[3];
-    float fillCol[3];
-    float strokeAlpha;
-    float fillAlpha;
+  NSMutableDictionary *dict;
+  NSMutableArray *psops;
+  NSString *str;
+  NSBezierPathElement type;
+  NSPoint p[3];
+  int i;
+  float strokeCol[3];
+  float fillCol[3];
+  float strokeAlpha;
+  float fillAlpha;
 
-    strokeCol[0] = [strokeColor redComponent];
-    strokeCol[1] = [strokeColor greenComponent];
-    strokeCol[2] = [strokeColor blueComponent];
-    strokeAlpha = [strokeColor alphaComponent];
+  strokeCol[0] = [strokeColor redComponent];
+  strokeCol[1] = [strokeColor greenComponent];
+  strokeCol[2] = [strokeColor blueComponent];
+  strokeAlpha = [strokeColor alphaComponent];
  
-    fillCol[0] = [fillColor redComponent];
-    fillCol[1] = [fillColor greenComponent];
-    fillCol[2] = [fillColor blueComponent];
-    fillAlpha = [fillColor alphaComponent];
+  fillCol[0] = [fillColor redComponent];
+  fillCol[1] = [fillColor greenComponent];
+  fillCol[2] = [fillColor blueComponent];
+  fillAlpha = [fillColor alphaComponent];
 
-    dict = [NSMutableDictionary dictionaryWithCapacity: 1];
-    [dict setObject: @"path" forKey: @"type"];
+  dict = [NSMutableDictionary dictionaryWithCapacity: 1];
+  [dict setObject: @"path" forKey: @"type"];
 
-    str = [NSString stringWithFormat: @"%.3f", flatness];
-    [dict setObject: str forKey: @"flatness"];
-    str = [NSString stringWithFormat: @"%i", linejoin];
-    [dict setObject: str forKey: @"linejoin"];
-    str = [NSString stringWithFormat: @"%i", linecap];
-    [dict setObject: str forKey: @"linecap"];
-    str = [NSString stringWithFormat: @"%.3f", miterlimit];
-    [dict setObject: str forKey: @"miterlimit"];
-    str = [NSString stringWithFormat: @"%.3f", linewidth];
-    [dict setObject: str forKey: @"linewidth"];
-    [dict setObject: [NSNumber numberWithBool:stroked] forKey: @"stroked"];
-    str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
-        strokeCol[0], strokeCol[1], strokeCol[2]];
-    [dict setObject: str forKey: @"strokecolor"];
-    str = [NSString stringWithFormat: @"%.3f", strokeAlpha];
-    [dict setObject: str forKey: @"strokealpha"];
-    [dict setObject:[NSNumber numberWithBool:filled] forKey: @"filled"];
-    str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
-        fillCol[0], fillCol[1], fillCol[2]];
-    [dict setObject: str forKey: @"fillcolor"];
-    str = [NSString stringWithFormat: @"%.3f", fillAlpha];
-    [dict setObject: str forKey: @"fillalpha"];
-    [dict setObject:[NSNumber numberWithBool:visible] forKey: @"visible"];
-    [dict setObject:[NSNumber numberWithBool:locked] forKey: @"locked"];
+  str = [NSString stringWithFormat: @"%.3f", flatness];
+  [dict setObject: str forKey: @"flatness"];
+  str = [NSString stringWithFormat: @"%i", linejoin];
+  [dict setObject: str forKey: @"linejoin"];
+  str = [NSString stringWithFormat: @"%i", linecap];
+  [dict setObject: str forKey: @"linecap"];
+  str = [NSString stringWithFormat: @"%.3f", miterlimit];
+  [dict setObject: str forKey: @"miterlimit"];
+  str = [NSString stringWithFormat: @"%.3f", linewidth];
+  [dict setObject: str forKey: @"linewidth"];
+  [dict setObject: [NSNumber numberWithBool:stroked] forKey: @"stroked"];
+  str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
+		  strokeCol[0], strokeCol[1], strokeCol[2]];
+  [dict setObject: str forKey: @"strokecolor"];
+  str = [NSString stringWithFormat: @"%.3f", strokeAlpha];
+  [dict setObject: str forKey: @"strokealpha"];
+  [dict setObject:[NSNumber numberWithBool:filled] forKey: @"filled"];
+  str = [NSString stringWithFormat: @"%.3f %.3f %.3f",
+		  fillCol[0], fillCol[1], fillCol[2]];
+  [dict setObject: str forKey: @"fillcolor"];
+  str = [NSString stringWithFormat: @"%.3f", fillAlpha];
+  [dict setObject: str forKey: @"fillalpha"];
+  [dict setObject:[NSNumber numberWithBool:visible] forKey: @"visible"];
+  [dict setObject:[NSNumber numberWithBool:locked] forKey: @"locked"];
 
-    psops = [NSMutableArray arrayWithCapacity: 1];
-    // FIXME/TODO in a new file release, this list should be generated from the control-points instead */
-    for(i = 0; i < [myPath elementCount]; i++)
+  psops = [NSMutableArray arrayWithCapacity: 1];
+  // FIXME/TODO in a new file release, this list should be generated from the control-points instead */
+  for(i = 0; i < [myPath elementCount]; i++)
     {
-        type = [myPath elementAtIndex: i associatedPoints: p];
-        if(type == NSMoveToBezierPathElement)
-            str = [NSString stringWithFormat: @"%.3f %.3f moveto", p[0].x / zmFactor, p[0].y / zmFactor];
-        else if(type == NSLineToBezierPathElement)
-            str = [NSString stringWithFormat: @"%.3f %.3f lineto", p[0].x / zmFactor, p[0].y / zmFactor];
-        else if(type == NSCurveToBezierPathElement)
-            str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f %.3f %.3f curveto",
-                p[0].x / zmFactor, p[0].y / zmFactor, p[1].x / zmFactor, p[1].y / zmFactor, p[2].x / zmFactor, p[2].y / zmFactor];
+      type = [myPath elementAtIndex: i associatedPoints: p];
+      if(type == NSMoveToBezierPathElement)
+	str = [NSString stringWithFormat: @"%.3f %.3f moveto", p[0].x / zmFactor, p[0].y / zmFactor];
+      else if(type == NSLineToBezierPathElement)
+	str = [NSString stringWithFormat: @"%.3f %.3f lineto", p[0].x / zmFactor, p[0].y / zmFactor];
+      else if(type == NSCurveToBezierPathElement)
+	str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f %.3f %.3f curveto",
+			p[0].x / zmFactor, p[0].y / zmFactor, p[1].x / zmFactor, p[1].y / zmFactor, p[2].x / zmFactor, p[2].y / zmFactor];
         [psops addObject: str];
     }
-    [dict setObject: psops forKey: @"psdata"];
-
-    return dict;
+  [dict setObject: psops forKey: @"psdata"];
+  
+  return dict;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    GRBezierPath *objCopy;
-    NSMutableArray *cpsCopy;
-    NSEnumerator *e;
-    GRBezierControlPoint *cp;
-
-    objCopy = [super copyWithZone:zone];
-
-    cpsCopy = [[NSMutableArray alloc] initWithCapacity: [controlPoints count]];
-    e = [controlPoints objectEnumerator];
-    while ((cp = [e nextObject]))
+  GRBezierPath *objCopy;
+  NSMutableArray *cpsCopy;
+  NSEnumerator *e;
+  GRBezierControlPoint *cp;
+  
+  objCopy = [super copyWithZone:zone];
+  
+  cpsCopy = [[NSMutableArray alloc] initWithCapacity: [controlPoints count]];
+  e = [controlPoints objectEnumerator];
+  while ((cp = [e nextObject]))
     {
-        [cpsCopy addObject:[cp copy]];
+      [cpsCopy addObject:[cp copy]];
     }
-    
-    objCopy->controlPoints = cpsCopy;
-
-    return objCopy;
+  
+  objCopy->controlPoints = cpsCopy;
+  
+  return objCopy;
 }
 
 - (void)dealloc
 {
-    [controlPoints release];
-    [super dealloc];
+  [controlPoints release];
+  [super dealloc];
 }
 
 - (NSMutableArray *)controlPoints
 {
-    return controlPoints;
+  return controlPoints;
 }
 
 
