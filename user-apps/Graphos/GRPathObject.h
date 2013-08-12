@@ -37,14 +37,14 @@
 
 @interface GRPathObject : GRDrawableObject
 {
-    NSBezierPath *myPath;
-
-    CGFloat linewidth;
-    CGFloat flatness;
-    CGFloat miterlimit;
-    int linejoin;
-    int linecap;
-    GRObjectControlPoint *currentPoint;
+  NSBezierPath *myPath;
+  
+  CGFloat linewidth;
+  CGFloat flatness;
+  CGFloat miterlimit;
+  NSLineJoinStyle linejoin;
+  NSLineCapStyle linecap;
+  GRObjectControlPoint *currentPoint;
 }
 
 - (void)setLineWidth:(CGFloat)width;
@@ -53,11 +53,11 @@
 - (void)setFlat:(CGFloat)flat;
 - (CGFloat)flatness;
 
-- (void)setLineJoin:(int)join;
-- (int)lineJoin;
+- (void)setLineJoin:(NSLineJoinStyle)join;
+- (NSLineJoinStyle)lineJoin;
 
-- (void)setLineCap:(int)cap;
-- (int)lineCap;
+- (void)setLineCap:(NSLineCapStyle)cap;
+- (NSLineCapStyle)lineCap;
 
 - (void)setMiterLimit:(CGFloat)limit;
 - (CGFloat)miterLimit;

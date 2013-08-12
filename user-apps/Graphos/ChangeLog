@@ -1,5 +1,11 @@
 2013-08-12 Riccardo Mottola <rm@gnu.org>
 
+	* GRPathObject.h
+	* GRPathObject.m
+	Migrate from int to proper NS enumerated  types.
+
+2013-08-12 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierPath.m
 	Scale back zoom factor from path data
 

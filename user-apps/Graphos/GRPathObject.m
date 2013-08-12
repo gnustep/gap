@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.m
  
- Copyright (C) 2008-2031 GNUstep Application Project
+ Copyright (C) 2008-2013 GNUstep Application Project
  
  Author: Ing. Riccardo Mottola
  
@@ -132,22 +132,22 @@
   return flatness;
 }
 
-- (void)setLineJoin:(int)join
+- (void)setLineJoin:(NSLineJoinStyle)join
 {
   linejoin = join;
 }
 
-- (int)lineJoin
+- (NSLineJoinStyle)lineJoin
 {
   return linejoin;
 }
 
-- (void)setLineCap:(int)cap
+- (void)setLineCap:(NSLineCapStyle)cap
 {
   linecap = cap;
 }
 
-- (int)lineCap
+- (NSLineCapStyle)lineCap
 {
   return linecap;
 }
