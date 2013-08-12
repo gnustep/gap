@@ -257,16 +257,17 @@ static double k = 0.025;
     [dict setObject:[NSNumber numberWithBool:locked] forKey: @"locked"];
 
     psops = [NSMutableArray arrayWithCapacity: 1];
+    // FIXME/TODO in a new file release, this list should be generated from the control-points instead */
     for(i = 0; i < [myPath elementCount]; i++)
     {
         type = [myPath elementAtIndex: i associatedPoints: p];
         if(type == NSMoveToBezierPathElement)
-            str = [NSString stringWithFormat: @"%.3f %.3f moveto", p[0].x, p[0].y];
+            str = [NSString stringWithFormat: @"%.3f %.3f moveto", p[0].x / zmFactor, p[0].y / zmFactor];
         else if(type == NSLineToBezierPathElement)
-            str = [NSString stringWithFormat: @"%.3f %.3f lineto", p[0].x, p[0].y];
+            str = [NSString stringWithFormat: @"%.3f %.3f lineto", p[0].x / zmFactor, p[0].y / zmFactor];
         else if(type == NSCurveToBezierPathElement)
             str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f %.3f %.3f curveto",
-                p[0].x, p[0].y, p[1].x, p[1].y, p[2].x, p[2].y];
+                p[0].x / zmFactor, p[0].y / zmFactor, p[1].x / zmFactor, p[1].y / zmFactor, p[2].x / zmFactor, p[2].y / zmFactor];
         [psops addObject: str];
     }
     [dict setObject: psops forKey: @"psdata"];
