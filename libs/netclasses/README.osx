@@ -1,0 +1,44 @@
+netclasses is a small framework of asynchronous Objective-C networking classes
+===============================================================================
+Copyright (C) 2005 Andrew Ruder
+
+  netclasses is free software; you can redistribute it and/or modify it under
+  the terms of the GNU Lesser General Public License as published by the Free
+  Software Foundation; either version 2.1 of the License, or (at your option)
+  any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public License
+  along with this program; if not, write to the 
+  
+  Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330
+  Boston, MA  02111-1307  
+  USA
+
+Comments are welcome.
+===============================================================================
+
+Step 1:
+    xcodebuild
+
+Step 2:
+    Your result is in build/Release
+
+Step 3:
+    Profit
+
+Note:
+    The default installation directory is set to @executable_path/../Frameworks
+    which should be ideal for applications but perhaps not for tools.  If this
+    is a problem, open up Xcode and change the 'installation directory' in
+    the target's settings.
+
+===============================================================================
+Copyright (C) 2006 by Andy Ruder
+andy@aeruder.net
+http://netclasses.aeruder.net
