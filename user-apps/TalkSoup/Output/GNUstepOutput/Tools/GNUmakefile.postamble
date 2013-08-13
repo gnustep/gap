@@ -1,2 +1,0 @@
-after-clean::
-	rm -fr Tools

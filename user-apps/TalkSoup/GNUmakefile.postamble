@@ -1,5 +1,0 @@
-after-clean::
-	$(MAKE) -C Testing clean
-
-after-distclean::
-	$(MAKE) -C Testing distclean
