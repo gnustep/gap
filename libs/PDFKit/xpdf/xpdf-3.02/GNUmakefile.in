@@ -33,7 +33,11 @@ ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_INCLUDES)
 endif
 
-  export CPPFLAGS CXXFLAGS
+ifeq ($(findstring freebsd, $(GNUSTEP_TARGET_OS)), freebsd)
+CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_INCLUDES)
+endif
+
+export CPPFLAGS CXXFLAGS
 
 default: all
 
