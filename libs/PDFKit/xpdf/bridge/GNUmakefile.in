@@ -21,6 +21,9 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../../xpdf-src
 
+CC=@CC@
+CXX=@CXX@
+
 SUBPROJECT_NAME=xpdfbridge
 
 xpdfbridge_CFLAGS = \
@@ -31,6 +34,12 @@ xpdfbridge_CFLAGS = \
 	-I../$(XPDF_SRC)/goo \
 	-I../$(XPDF_SRC)/fofi \
 	-g
+
+xpdfbridge_CXXFLAGS = -Wno-write-strings
+
+ifeq ($(findstring clang, CXX),clang)
+  xpdfbridge_CXXFLAGS +=?) -Wno-deprecated-writable-strings -Wno-unknown-pragmas
+endif
 
 xpdfbridge_OBJC_FILES = \
 	Locking.m 	\

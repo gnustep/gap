@@ -37,6 +37,12 @@ ifeq ($(findstring freebsd, $(GNUSTEP_TARGET_OS)), freebsd)
 CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_INCLUDES)
 endif
 
+# -Wno-deprecated-writable-strings gets rid of profuse warning messages
+# from clang++, but is an invalid argument to g++
+ifeq ($(CXX),clang++)
+  CXXFLAGS := $(CXXFLAGS) -Wno-deprecated-writable-strings
+endif
+
 export CPPFLAGS CXXFLAGS
 
 default: all
