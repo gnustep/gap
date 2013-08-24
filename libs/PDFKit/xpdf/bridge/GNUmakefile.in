@@ -35,10 +35,10 @@ xpdfbridge_CFLAGS = \
 	-I../$(XPDF_SRC)/fofi \
 	-g
 
-xpdfbridge_CXXFLAGS = -Wno-write-strings
+xpdfbridge_CCFLAGS = -Wno-write-strings
 
 ifeq ($(findstring clang, CXX),clang)
-  xpdfbridge_CXXFLAGS +=?) -Wno-deprecated-writable-strings -Wno-unknown-pragmas
+  xpdfbridge_CCFLAGS +=?) -Wno-deprecated-writable-strings -Wno-unknown-pragmas
 endif
 
 xpdfbridge_OBJC_FILES = \
