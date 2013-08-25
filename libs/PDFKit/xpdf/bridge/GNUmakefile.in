@@ -37,8 +37,8 @@ xpdfbridge_CFLAGS = \
 
 xpdfbridge_CCFLAGS = -Wno-write-strings
 
-ifeq ($(findstring clang, CXX),clang)
-  xpdfbridge_CCFLAGS +=?) -Wno-deprecated-writable-strings -Wno-unknown-pragmas
+ifeq ($(findstring clang++, CXX),clang++)
+  xpdfbridge_CCFLAGS += -Wno-deprecated-writable-strings -Wno-unknown-pragmas
 endif
 
 xpdfbridge_OBJC_FILES = \
