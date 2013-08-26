@@ -23,6 +23,10 @@ include $(GNUSTEP_MAKEFILES)/common.make
 LIB_FREETYPE_LIBS=@lib_freetype_libs@
 LIB_FREETYPE_INCLUDES=@lib_freetype_includes@
 LIB_FREETYPE_ADD_INCLUDES=@lib_freetype_add_includes@
+
+CFLAGS := $(CFLAGS) -fPIC
+CXXFLAGS := $(CXXFLAGS) -fPIC
+
 CXXFLAGS := $(CXXFLAGS) -Wno-write-strings
 ifneq ($(LIB_FREETYPE_ADD_INCLUDES),)
   CPPFLAGS := $(CPPFLAGS) -I$(LIB_FREETYPE_ADD_INCLUDES)
