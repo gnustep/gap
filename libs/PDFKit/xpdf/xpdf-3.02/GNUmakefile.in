@@ -72,4 +72,6 @@ clean: configure
 
 install:
 
+uninstall:
+
 -include GNUmakefile.postamble
