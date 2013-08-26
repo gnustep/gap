@@ -74,7 +74,7 @@ endif
 # Use C++ to link library
 LD=@CXX@
 
-ifeq ($(findstring clang, LD), clang)
+ifeq ($(findstring clang, $(LD)), clang)
 ADDITIONAL_LDFLAGS += -lstdc++
 endif
 
