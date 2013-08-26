@@ -57,7 +57,7 @@ Makefile:
 	    --with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
 
 compile: configure
-	$(MAKE) -f Makefile all-no-x
+	$(MAKE) -f Makefile pdfkit
 
 distclean: configure
 	$(MAKE) -f Makefile distclean
