@@ -47,7 +47,7 @@ ifeq ($(CXX),clang++)
   CXXFLAGS := $(CXXFLAGS) -Wno-deprecated-writable-strings
 endif
 
-export CPPFLAGS CXXFLAGS
+export CFLAGS CXXFLAGS
 
 default: all
 
