@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *               2012-2013 GNUstep Aplication Project
+ *
+ * Authors: Stefan Kleine Stegemann
+ *          Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -436,67 +440,11 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
    XPDF_ReleaseLock();
 }
 
-char *valueInDictionary(Dict *dict, char *key, UnicodeMap *uMap)
-{
-  char value[1024];
-  Object obj;
-  
-  memset(value, 0, 1024);
-  
-  if (dict->lookup(key, &obj)->isString()) {
-    GString *str = obj.getString();
-    int len = str->getLength();
-    char buf[8];
-    char *ptr;
-    GBool isUnicode;
-    Unicode u;
-    int i, n, p;
-
-    if ((str->getChar(0) & 0xff) == 0xfe 
-                          && (str->getChar(1) & 0xff) == 0xff) {
-      isUnicode = gTrue;
-      i = 2;
-    } else {
-      isUnicode = gFalse;
-      i = 0;
-    }
-    
-    ptr = value;
-    
-    while (i < len) {
-      if (isUnicode) {
-	      u = ((str->getChar(i) & 0xff) << 8) | (str->getChar(i+1) & 0xff);
-	      i += 2;
-      } else {
-	      u = str->getChar(i) & 0xff;
-	      ++i;
-      }
-      
-      n = uMap->mapUnicode(u, buf, sizeof(buf));
-      
-      for (p = 0; p < n; p++) {
-        *ptr++ = buf[p];
-      }
-    }
-    
-    *ptr = '\0';
-  }
-  
-  obj.free();
-  
-  return (strlen(value) ? value : NULL);
-}
-
 int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc)
 {
   UnicodeMap *uMap;
   PDFDoc *doc;
   Object info;
-
-#define GET_VALUE(k) \
-do { \
-  (*dictfunc)(k, valueInDictionary(infoDict, k, uMap)); \
-} while (0)
 
   XPDF_AcquireLock();
 
@@ -508,16 +456,28 @@ do { \
   doc = TO_PDFDoc(pdfDoc);
   doc->getDocInfo(&info);
 
-  if (info.isDict()) {
-    Dict *infoDict = info.getDict();
-    
-    GET_VALUE ("Title");
-    GET_VALUE ("Subject");
-    GET_VALUE ("Keywords");
-    GET_VALUE ("Author");
-    GET_VALUE ("Creator");
-    GET_VALUE ("Producer");
-  }
+  if (info.isDict())
+    {
+      int i;
+      Dict *infoDict = info.getDict();
+      int numOfKeys = infoDict->getLength();
+
+      for (i = 0; i < numOfKeys; i++)
+        {
+          char *key;
+          Object obj;
+ 
+          key = infoDict->getKey(i);
+          if (infoDict->lookup(key, &obj)->isString())
+            {
+              GString *str = obj.getString();
+              char *cStr = str->getCString();
+
+              (*dictfunc)(key, cStr);
+            }
+          obj.free();
+        }
+    }
   
   info.free();
 
