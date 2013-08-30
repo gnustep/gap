@@ -164,10 +164,10 @@ const double PDFBaseResolution = 72.0;
 
 
 /* overriding -draw is mandatory */
-- (void) draw
+- (BOOL) draw
 {
   NSSize size = [self size];
-  [self drawInRect: NSMakeRect(0, 0, size.width, size.height)];
+  return [self drawInRect: NSMakeRect(0, 0, size.width, size.height)];
 }
 
 - (BOOL) drawInRect: (NSRect)rect
