@@ -1,5 +1,10 @@
 2013-08-30 Riccardo Mottola <rm@gnu.org>
 
+	* Frameworks/Addresses/ADRecord.m
+	Fix warning.
+
+2013-08-30 Riccardo Mottola <rm@gnu.org>
+
 	* Frameworks/Addresses/ADLocalAddressBook.m
 	Fix format string to unsigned long.
 
