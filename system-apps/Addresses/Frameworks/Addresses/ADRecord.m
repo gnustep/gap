@@ -10,6 +10,7 @@
 #import "ADConverter.h"
 #import "ADMultiValue.h"
 #import "ADRecord.h"
+#import "ADGroup.h"
 
 @implementation ADRecord
 - init
