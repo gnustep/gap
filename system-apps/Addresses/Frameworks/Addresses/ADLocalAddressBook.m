@@ -58,12 +58,12 @@ static ADLocalAddressBook *_localAB = nil;
     }
   next++;
 
-  if(![[NSString stringWithFormat: @"%d", next]
+  if(![[NSString stringWithFormat: @"%lu", next]
 	writeToFile: idFile atomically: NO])
     [NSException raise: ADAddressBookInternalError
 		 format: @"Couldn't save %@", idFile];
   
-  return [NSString stringWithFormat: @"%d", next];
+  return [NSString stringWithFormat: @"%lu", next];
 }
 
 - (void) _handleRecordChanged: (NSNotification*) note
