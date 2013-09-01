@@ -30,13 +30,15 @@
 @implementation NSObject (Introspection)
 + (NSArray *)methodsDefinedForClass
 {
-	struct objc_method_list *list;
 #ifdef __APPLE__
+	struct objc_method_list *list;
 	void *iterator;
+#else
+	Method *methods;
 #endif
 	Class class;
-	int z;
-	int y;
+	unsigned int z;
+	unsigned int numMethods;
 	SEL sel;
 	NSMutableArray *array = AUTORELEASE([NSMutableArray new]);
 	
@@ -46,22 +48,27 @@
 	iterator = 0;
 	while ((list = class_nextMethodList(class, &iterator)))
 	{
+	        numMethods = list->method_count;
 #else
-	for (list = class->methods; list != NULL; list=list->method_next)
+	methods = class_copyMethodList(class, &numMethods);
 	{
 #endif
-		y = list->method_count;
-		for (z = 0; z < y; z++)
+
+		for (z = 0; z < numMethods; z++)
 		{
-			sel = list->method_list[z].method_name;
 #ifdef __APPLE__
+			sel = list->method_list[z].method_name;
 			[array addObject: AUTORELEASE([[NSString alloc] initWithUTF8String:
 			  (char *)sel])];
 #else
+			sel = method_getName(methods[z]);
 			[array addObject: NSStringFromSelector(sel)];
 #endif
 		}
 	}
+#ifndef __APPLE__
+	free(methods);
+#endif
 
 	return [NSArray arrayWithArray: array];
 }

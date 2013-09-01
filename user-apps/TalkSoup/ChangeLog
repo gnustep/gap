@@ -1,3 +1,8 @@
+2013-10-01 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Misc/NSObjectAdditions.m
+	Import GNUstep runtime patches, but keep old Mac code.
+
 2005-09-06 Andy Ruder <aeruder at ksu dot edu>
  * TalkSoup 1.0alpha 
 
