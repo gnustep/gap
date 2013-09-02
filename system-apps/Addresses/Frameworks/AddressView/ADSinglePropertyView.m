@@ -39,9 +39,18 @@
 
   if(_selectedGroup)
     {
+      ADRecord *record;
       NSString *uid = [_selectedGroup uniqueId];
-      [_selectedGroup autorelease];
-      _selectedGroup = [[_book recordForUniqueId: uid] retain];
+      record = [[_book recordForUniqueId: uid] retain];
+      if ([record isKindOfClass:[ADGroup class]])
+        {
+         [_selectedGroup autorelease];
+          _selectedGroup = (ADGroup *)record;
+        }
+      else
+        {
+          NSLog(@"Internal Error: recordForUniqueId should return an ADGroup");
+        }
     }
   
   if(!_selectedGroup)
