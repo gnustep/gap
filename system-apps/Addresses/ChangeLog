@@ -1,3 +1,8 @@
+2013-09-01 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/Addresses/AddressView/ADSinglePropertyView.m
+	Check for class and then cast. By spec, the Record should be a Group.
+
 2013-08-30 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Addresses/ADRecord.m
