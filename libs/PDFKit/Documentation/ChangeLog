@@ -1,5 +1,10 @@
 2013-09-03 Riccardo Mottola <rm@gnu.org>
-	
+
+	* xpdf/xpdf-3.02/xpdf/SplashOutputDev.cc
+	Import OpenBSD patch to fix heap overflow.
+
+2013-09-03 Riccardo Mottola <rm@gnu.org>
+
 	* xpdf/xpdf-3.02/splash/SplashXPath.cc
 	* xpdf/xpdf-3.02/xpdf/Stream.cc
 	Import patches from openbsd, undescribed.
