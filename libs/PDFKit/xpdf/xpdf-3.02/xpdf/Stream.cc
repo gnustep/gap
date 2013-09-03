@@ -4512,7 +4512,7 @@ void ASCII85Encoder::reset() {
 }
 
 GBool ASCII85Encoder::fillBuf() {
-  Gulong t;
+  Guint t;
   char buf1[5];
   int c0, c1, c2, c3;
   int n, i;
