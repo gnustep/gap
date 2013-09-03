@@ -124,7 +124,7 @@
 
 - (id) copyWithZone: (NSZone*) z
 {
-  ADRecord* obj = NSCopyObject(self, 0, z);
+  ADRecord* obj = (ADRecord *)NSCopyObject(self, 0, z);
   obj->_readOnly = _readOnly;
 
   // delete UID if it has one

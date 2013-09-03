@@ -1,3 +1,8 @@
+2013-09-03 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/Addresses/ADRecord.m
+	Cast the result of copy which is itself to avoid warning.
+
 2013-09-01 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Addresses/AddressView/ADSinglePropertyView.m
