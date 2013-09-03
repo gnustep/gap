@@ -1,3 +1,9 @@
+2013-09-03 Riccardo Mottola <rm@gnu.org>
+
+	* xpdf/xpdf-3.02/splash/SplashXPathScanner.cc
+	Import patch from OpenBSD
+	http://www.mail-archive.com/ports@openbsd.org/msg23488.html
+
 2013-08-16 Riccardo Mottola <rm@gnu.org>
 
 	* xpdf/bridge/GNUmakefile.in
