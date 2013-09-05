@@ -1,3 +1,8 @@
+2013-09-05 Riccardo Mottola <rm@gnu.org>
+
+	* xpdf/xpdf-3.02/GNUmakefile.in
+	Patch by Richard S.: explicitely pass c/C++ compiler and merge CXX/CC flags.
+
 2013-09-03 Riccardo Mottola <rm@gnu.org>
 
 	* xpdf/xpdf-3.02/xpdf/SplashOutputDev.cc
