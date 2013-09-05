@@ -20,9 +20,15 @@
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
+CC=@CC@
+CXX=@CXX@
+
 LIB_FREETYPE_LIBS=@lib_freetype_libs@
 LIB_FREETYPE_INCLUDES=@lib_freetype_includes@
 LIB_FREETYPE_ADD_INCLUDES=@lib_freetype_add_includes@
+
+# Pick up C++ flags set by gnustep-make in CCFLAGS
+CXXFLAGS := $(CCFLAGS) $(CXXFLAGS)
 
 CFLAGS := $(CFLAGS) -fPIC
 CXXFLAGS := $(CXXFLAGS) -fPIC
@@ -56,7 +62,7 @@ all: compile
 configure: Makefile
 
 Makefile:
-	CC=@CC@ CXX=@CXX@ CPPFLAGS='$(CPPFLAGS)' LDFLAGS='@LDFLAGS@' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper \
+	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='@LDFLAGS@' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper \
 	    --with-freetype2-library=$(LIB_FREETYPE_LIBS) \
 	    --with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
 
