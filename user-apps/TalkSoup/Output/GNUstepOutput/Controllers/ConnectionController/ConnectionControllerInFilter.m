@@ -3,6 +3,7 @@
                           -------------------
     begin                : Tue May 20 18:38:20 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                           (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -97,6 +98,7 @@
 		id col, name, prior;
 		id curlabel, attribs;
 		id selected, master, controller;
+                id labelName;
 
 		name = [aObject objectForKey: @"TabName"];
 		col = [aObject objectForKey: @"TabColor"];
@@ -107,8 +109,10 @@
 		selected = [master selectedViewController];
 		controller = [content viewControllerForName: name];
 
-		curlabel = AUTORELEASE([[NSMutableAttributedString alloc] 
-		  initWithAttributedString: [content labelForName: name]]);
+                curlabel = nil;
+                labelName = [content labelForName: name];
+                if (labelName)
+                  curlabel = AUTORELEASE([[NSMutableAttributedString alloc] initWithAttributedString: labelName]);
 		if (!name || !col || !curlabel || ![curlabel length] ||
 		  !controller || (controller == selected)) 
 			return self;
