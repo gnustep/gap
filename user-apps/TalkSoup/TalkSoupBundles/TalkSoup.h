@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Jan 17 11:04:36 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                           (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -39,8 +40,7 @@ extern NSString *IRCDefaultsPassword;
 	#undef S2AS
 #endif
 
-#define S2AS(_x) AUTORELEASE([[NSAttributedString alloc] initWithString: \
-                   (_x)])
+#define S2AS(_x) ( (_x) ? [[[NSAttributedString alloc] initWithString: (_x)] autorelease] : nil )
 
 // Key
 extern NSString *IRCColor;

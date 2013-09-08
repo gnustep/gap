@@ -1,4 +1,10 @@
-2013-10-01 Riccardo Mottola <rm@gnu.org>
+2013-09-08 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* TalkSoupBundles/TalkSoup.h
+	Do not initialize attributed strings with NIL.
+
+2013-09-01 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Misc/NSObjectAdditions.m
 	Import GNUstep runtime patches, but keep old Mac code.
