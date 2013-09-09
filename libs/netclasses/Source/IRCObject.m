@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu May 30 22:06:25 UTC 2002
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -777,7 +778,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	connected = NO;
 	[super connectionLost];
 }
-- setLowercasingSelector: (SEL)aSelector
+- (id)setLowercasingSelector: (SEL)aSelector
 {
 	NSEnumerator *iter;
 	NSString *object;
@@ -817,7 +818,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	return ([(NSString *)[aString1 performSelector: lowercasingSelector] compare: 
 	     [aString2 performSelector: lowercasingSelector]]);
 }
-- setNick: (NSString *)aNickname
+- (id)setNick: (NSString *)aNickname
 {
 	if (aNickname == nick) return self;
 	
@@ -837,7 +838,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 {
 	return nick;
 }
-- setUserName: (NSString *)aUser
+- (id)setUserName: (NSString *)aUser
 {
 	if ([aUser length] == 0)
 	{
@@ -862,7 +863,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 {
 	return userName;
 }
-- setRealName: (NSString *)aRealName
+- (id)setRealName: (NSString *)aRealName
 {
 	if ([aRealName length] == 0)
 	{
@@ -878,7 +879,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 {
 	return realName;
 }
-- setPassword: (NSString *)aPass
+- (id)setPassword: (NSString *)aPass
 {
 	if ([aPass length])
 	{
@@ -906,7 +907,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 {
 	return errorString;
 }
-- connectionEstablished: (id <NetTransport>)aTransport
+- (id)connectionEstablished: (id <NetTransport>)aTransport
 {
 	[super connectionEstablished: aTransport];
 	
@@ -927,12 +928,12 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 {
 	return connected;
 }
-- setEncoding: (NSStringEncoding)aEncoding
+- (id)setEncoding: (NSStringEncoding)aEncoding
 {
 	defaultEncoding = aEncoding;
 	return self;
 }
-- setEncoding: (NSStringEncoding)aEncoding forTarget: (NSString *)aTarget
+- (id)setEncoding: (NSStringEncoding)aEncoding forTarget: (NSString *)aTarget
 {
 	NSString *lower = [aTarget performSelector: lowercasingSelector];
 
@@ -968,7 +969,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 {
 	return NSAllMapTableKeys(targetToEncoding);
 }
-- changeNick: (NSString *)aNick
+- (id)changeNick: (NSString *)aNick
 {
 	if ([aNick length] > 0)
 	{
@@ -987,7 +988,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	}
 	return self;
 }
-- quitWithMessage: (NSString *)aMessage
+- (id)quitWithMessage: (NSString *)aMessage
 {
 	if ([aMessage length] > 0)
 	{
@@ -999,7 +1000,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	}
 	return self;
 }
-- partChannel: (NSString *)aChannel withMessage: (NSString *)aMessage
+- (id)partChannel: (NSString *)aChannel withMessage: (NSString *)aMessage
 {
 	if ([aChannel length] == 0)
 	{
@@ -1024,7 +1025,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- joinChannel: (NSString *)aChannel withPassword: (NSString *)aPassword
+- (id)joinChannel: (NSString *)aChannel withPassword: (NSString *)aPassword
 {
 	if ([aChannel length] == 0)
 	{
@@ -1055,7 +1056,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 
 	return self;
 }
-- sendCTCPReply: (NSString *)aCTCP withArgument: (NSString *)args
+- (id)sendCTCPReply: (NSString *)aCTCP withArgument: (NSString *)args
    to: (NSString *)aPerson
 {
 	if ([aPerson length] == 0)
@@ -1083,7 +1084,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 		
 	return self;
 }
-- sendCTCPRequest: (NSString *)aCTCP withArgument: (NSString *)args
+- (id)sendCTCPRequest: (NSString *)aCTCP withArgument: (NSString *)args
    to: (NSString *)aPerson
 {
 	if ([aPerson length] == 0)
@@ -1111,7 +1112,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 		
 	return self;
 }
-- sendMessage: (NSString *)aMessage to: (NSString *)aReceiver
+- (id)sendMessage: (NSString *)aMessage to: (NSString *)aReceiver
 {
 	if ([aMessage length] == 0)
 	{
@@ -1132,7 +1133,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- sendNotice: (NSString *)aNotice to: (NSString *)aReceiver
+- (id)sendNotice: (NSString *)aNotice to: (NSString *)aReceiver
 {
 	if ([aNotice length] == 0)
 	{
@@ -1153,7 +1154,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- sendAction: (NSString *)anAction to: (NSString *)aReceiver
+- (id)sendAction: (NSString *)anAction to: (NSString *)aReceiver
 {
 	if ([anAction length] == 0)
 	{
@@ -1174,7 +1175,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- becomeOperatorWithName: (NSString *)aName withPassword: (NSString *)aPassword
+- (id)becomeOperatorWithName: (NSString *)aName withPassword: (NSString *)aPassword
 {
 	if (([aName length] == 0) || ([aPassword length] == 0))
 	{
@@ -1197,7 +1198,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- requestNamesOnChannel: (NSString *)aChannel
+- (id)requestNamesOnChannel: (NSString *)aChannel
 {
 	if ([aChannel length] == 0)
 	{
@@ -1217,7 +1218,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 
 	return self;
 }
-- requestMOTDOnServer: (NSString *)aServer
+- (id)requestMOTDOnServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1234,7 +1235,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"MOTD %@", aServer];
 	return self;
 }
-- requestSizeInformationFromServer: (NSString *)aServer 
+- (id)requestSizeInformationFromServer: (NSString *)aServer 
     andForwardTo: (NSString *)anotherServer
 {
 	if ([aServer length] == 0)
@@ -1263,7 +1264,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"LUSERS %@ %@", aServer, anotherServer];
 	return self;
 }	
-- requestVersionOfServer: (NSString *)aServer
+- (id)requestVersionOfServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1280,7 +1281,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"VERSION %@", aServer];
 	return self;
 }
-- requestServerStats: (NSString *)aServer for: (NSString *)query
+- (id)requestServerStats: (NSString *)aServer for: (NSString *)query
 {
 	if ([query length] == 0)
 	{
@@ -1308,7 +1309,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"STATS %@ %@", query, aServer];
 	return self;
 }
-- requestServerLink: (NSString *)aLink from: (NSString *)aServer
+- (id)requestServerLink: (NSString *)aLink from: (NSString *)aServer
 {
 	if ([aLink length] == 0)
 	{
@@ -1336,7 +1337,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"LINKS %@ %@", aServer, aLink];
 	return self;
 }
-- requestTimeOnServer: (NSString *)aServer
+- (id)requestTimeOnServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1353,7 +1354,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"TIME %@", aServer];
 	return self;
 }
-- requestServerToConnect: (NSString *)aServer to: (NSString *)connectServer
+- (id)requestServerToConnect: (NSString *)aServer to: (NSString *)connectServer
                   onPort: (NSString *)aPort
 {
 	if ([connectServer length] == 0)
@@ -1391,7 +1392,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"CONNECT %@ %@ %@", connectServer, aPort, aServer];
 	return self;
 }
-- requestTraceOnServer: (NSString *)aServer
+- (id)requestTraceOnServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1408,7 +1409,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"TRACE %@", aServer];
 	return self;
 }
-- requestAdministratorOnServer: (NSString *)aServer
+- (id)requestAdministratorOnServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1425,7 +1426,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"ADMIN %@", aServer];
 	return self;
 }
-- requestInfoOnServer: (NSString *)aServer
+- (id)requestInfoOnServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1442,22 +1443,22 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"INFO %@", aServer];
 	return self;
 }
-- requestServerRehash
+- (id)requestServerRehash
 {
 	[self writeString: @"REHASH"];
 	return self;
 }
-- requestServerShutdown
+- (id)requestServerShutdown
 {
 	[self writeString: @"DIE"];
 	return self;
 }
-- requestServerRestart
+- (id)requestServerRestart
 {
 	[self writeString: @"RESTART"];
 	return self;
 }
-- requestUserInfoOnServer: (NSString *)aServer
+- (id)requestUserInfoOnServer: (NSString *)aServer
 {
 	if ([aServer length] == 0)
 	{
@@ -1474,7 +1475,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"USERS %@", aServer];
 	return self;
 }
-- areUsersOn: (NSString *)userList
+- (id)areUsersOn: (NSString *)userList
 {
 	if ([userList length] == 0)
 	{
@@ -1484,7 +1485,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"ISON %@", userList];
 	return self;
 }
-- sendWallops: (NSString *)aMessage
+- (id)sendWallops: (NSString *)aMessage
 {
 	if ([aMessage length] == 0)
 	{
@@ -1494,7 +1495,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"WALLOPS :%@", aMessage];
 	return self;
 }
-- listWho: (NSString *)aMask onlyOperators: (BOOL)operators
+- (id)listWho: (NSString *)aMask onlyOperators: (BOOL)operators
 {
 	if ([aMask length] == 0)
 	{
@@ -1519,7 +1520,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- whois: (NSString *)aPerson onServer: (NSString *)aServer
+- (id)whois: (NSString *)aPerson onServer: (NSString *)aServer
 {
 	if ([aPerson length] == 0)
 	{
@@ -1546,7 +1547,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"WHOIS %@ %@", aServer, aPerson];
 	return self;
 }
-- whowas: (NSString *)aPerson onServer: (NSString *)aServer
+- (id)whowas: (NSString *)aPerson onServer: (NSString *)aServer
       withNumberEntries: (NSString *)aNumber
 {
 	if ([aPerson length] == 0)
@@ -1585,7 +1586,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"WHOWAS %@ %@ %@", aPerson, aNumber, aServer];
 	return self;
 }
-- kill: (NSString *)aPerson withComment: (NSString *)aComment
+- (id)kill: (NSString *)aPerson withComment: (NSString *)aComment
 {
 	if ([aPerson length] == 0)
 	{
@@ -1605,7 +1606,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"KILL %@ :%@", aPerson, aComment];
 	return self;
 }
-- setTopicForChannel: (NSString *)aChannel to: (NSString *)aTopic
+- (id)setTopicForChannel: (NSString *)aChannel to: (NSString *)aTopic
 {
 	if ([aChannel length] == 0)
 	{
@@ -1629,7 +1630,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 
 	return self;
 }
-- setMode: (NSString *)aMode on: (NSString *)anObject 
+- (id)setMode: (NSString *)aMode on: (NSString *)anObject 
                      withParams: (NSArray *)aList
 {
 	NSMutableString *aString;
@@ -1678,7 +1679,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 
 	return self;
 }
-- listChannel: (NSString *)aChannel onServer: (NSString *)aServer
+- (id)listChannel: (NSString *)aChannel onServer: (NSString *)aServer
 {
 	if ([aChannel length] == 0)
 	{
@@ -1706,7 +1707,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"LIST %@ %@", aChannel, aServer];
 	return self;
 }
-- invite: (NSString *)aPerson to: (NSString *)aChannel
+- (id)invite: (NSString *)aPerson to: (NSString *)aChannel
 {
 	if ([aPerson length] == 0)
 	{
@@ -1732,7 +1733,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"INVITE %@ %@", aPerson, aChannel];
 	return self;
 }
-- kick: (NSString *)aPerson offOf: (NSString *)aChannel for: (NSString *)aReason
+- (id)kick: (NSString *)aPerson offOf: (NSString *)aChannel for: (NSString *)aReason
 {
 	if ([aPerson length] == 0)
 	{
@@ -1763,7 +1764,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"KICK %@ %@ :%@", aChannel, aPerson, aReason];
 	return self;
 }
-- setAwayWithMessage: (NSString *)aMessage
+- (id)setAwayWithMessage: (NSString *)aMessage
 {
 	if ([aMessage length] == 0)
 	{
@@ -1774,7 +1775,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	[self writeString: @"AWAY :%@", aMessage];
 	return self;
 }
-- sendPingWithArgument: (NSString *)aString
+- (id)sendPingWithArgument: (NSString *)aString
 {
 	if (!aString)
 	{
@@ -1785,7 +1786,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- sendPongWithArgument: (NSString *)aString
+- (id)sendPongWithArgument: (NSString *)aString
 {
 	if (!aString)
 	{
@@ -1799,99 +1800,99 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 @end
 
 @implementation IRCObject (Callbacks)
-- registeredWithServer
+- (id)registeredWithServer
 {
 	return self;
 }
-- couldNotRegister: (NSString *)aReason
+- (id)couldNotRegister: (NSString *)aReason
 {
 	return self;
 }	
-- CTCPRequestReceived: (NSString *)aCTCP
+- (id)CTCPRequestReceived: (NSString *)aCTCP
    withArgument: (NSString *)anArgument to: (NSString *)aReceiver
    from: (NSString *)aPerson
 {
 	return self;
 }
-- CTCPReplyReceived: (NSString *)aCTCP
+- (id)CTCPReplyReceived: (NSString *)aCTCP
    withArgument: (NSString *)anArgument to: (NSString *)aReceiver
    from: (NSString *)aPerson
 {
 	return self;
 }
-- errorReceived: (NSString *)anError
+- (id)errorReceived: (NSString *)anError
 {
 	return self;
 }
-- wallopsReceived: (NSString *)aMessage from: (NSString *)aSender
+- (id)wallopsReceived: (NSString *)aMessage from: (NSString *)aSender
 {
 	return self;
 }
-- userKicked: (NSString *)aPerson outOf: (NSString *)aChannel 
+- (id)userKicked: (NSString *)aPerson outOf: (NSString *)aChannel 
          for: (NSString *)aReason from: (NSString *)aKicker
 {
 	return self;
 }
-- invitedTo: (NSString *)aChannel from: (NSString *)anInviter
+- (id)invitedTo: (NSString *)aChannel from: (NSString *)anInviter
 {
 	return self;
 }
-- modeChanged: (NSString *)aMode on: (NSString *)anObject 
+- (id)modeChanged: (NSString *)aMode on: (NSString *)anObject 
     withParams: (NSArray *)paramList from: (NSString *)aPerson
 {
 	return self;
 }
-- numericCommandReceived: (NSString *)aCommand withParams: (NSArray *)paramList 
+- (id)numericCommandReceived: (NSString *)aCommand withParams: (NSArray *)paramList 
     from: (NSString *)aSender
 {
 	return self;
 }
-- nickChangedTo: (NSString *)newName from: (NSString *)aPerson
+- (id)nickChangedTo: (NSString *)newName from: (NSString *)aPerson
 {
 	return self;
 }
-- channelJoined: (NSString *)aChannel from: (NSString *)aJoiner
+- (id)channelJoined: (NSString *)aChannel from: (NSString *)aJoiner
 {
 	return self;
 }
-- channelParted: (NSString *)aChannel withMessage: (NSString *)aMessage
+- (id)channelParted: (NSString *)aChannel withMessage: (NSString *)aMessage
              from: (NSString *)aParter
 {
 	return self;
 }
-- quitIRCWithMessage: (NSString *)aMessage from: (NSString *)aQuitter
+- (id)quitIRCWithMessage: (NSString *)aMessage from: (NSString *)aQuitter
 {
 	return self;
 }
-- topicChangedTo: (NSString *)aTopic in: (NSString *)aChannel
+- (id)topicChangedTo: (NSString *)aTopic in: (NSString *)aChannel
               from: (NSString *)aPerson
 {
 	return self;
 }
-- messageReceived: (NSString *)aMessage to: (NSString *)aReceiver
+- (id)messageReceived: (NSString *)aMessage to: (NSString *)aReceiver
                from: (NSString *)aSender
 {
 	return self;
 }
-- noticeReceived: (NSString *)aNotice to: (NSString *)aReceiver
+- (id)noticeReceived: (NSString *)aNotice to: (NSString *)aReceiver
               from: (NSString *)aSender
 {
 	return self;
 }
-- actionReceived: (NSString *)anAction to: (NSString *)aReceiver
+- (id)actionReceived: (NSString *)anAction to: (NSString *)aReceiver
               from: (NSString *)aSender
 {
 	return self;
 }
-- pingReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender
+- (id)pingReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender
 {
 	return self;
 }
-- pongReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender
+- (id)pongReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender
 {
 	return self;
 }
-- newNickNeededWhileRegistering
+- (id)newNickNeededWhileRegistering
 {
 	[self changeNick: [NSString stringWithFormat: @"%@_", nick]];
 	
@@ -1900,7 +1901,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 @end
 
 @implementation IRCObject (LowLevel)
-- lineReceived: (NSData *)aLine
+- (id)lineReceived: (NSData *)aLine
 {
 	NSString *prefix = nil;
 	NSString *command = nil;
@@ -2000,7 +2001,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	
 	return self;
 }
-- writeString: (NSString *)format, ...
+- (id)writeString: (NSString *)format, ...
 {
 	NSString *temp;
 	va_list ap;

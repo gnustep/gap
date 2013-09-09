@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu May 30 22:06:25 UTC 2002
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -267,7 +268,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * or the object is not yet registered/connected.  Please see RFC 1459 for
  * more information on the NICK command.
  */
-- changeNick: (NSString *)aNick;
+- (id)changeNick: (NSString *)aNick;
 
 /** 
  * Quits IRC with an optional message.  <var>aMessage</var> can have 
@@ -275,7 +276,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * will often provide its own message.  Please see RFC 1459 for more
  * information on the QUIT command.
  */
-- quitWithMessage: (NSString *)aMessage;
+- (id)quitWithMessage: (NSString *)aMessage;
 
 /**
  * Leaves the channel <var>aChannel</var> with the optional message
@@ -284,7 +285,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * comma separated list of channels.  Please see RFC 1459 for more 
  * information on the PART command.
  */
-- partChannel: (NSString *)aChannel withMessage: (NSString *)aMessage;
+- (id)partChannel: (NSString *)aChannel withMessage: (NSString *)aMessage;
 
 /**
  * Joins the channel <var>aChannel</var> with an optional password of
@@ -294,7 +295,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * by <var>aChannel</var>.  Please see RFC 1459 for more information on
  * the JOIN command.
  */
-- joinChannel: (NSString *)aChannel withPassword: (NSString *)aPassword;
+- (id)joinChannel: (NSString *)aChannel withPassword: (NSString *)aPassword;
 
 /**
  * Sends a CTCP <var>aCTCP</var> reply to <var>aPerson</var> with the 
@@ -303,7 +304,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * respond to a CTCP message sent by another client. See
  * -sendCTCPRequest:withArgument:to:
  */
-- sendCTCPReply: (NSString *)aCTCP withArgument: (NSString *)args
+- (id)sendCTCPReply: (NSString *)aCTCP withArgument: (NSString *)args
    to: (NSString *)aPerson;
 
 /**
@@ -313,7 +314,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * from another client and never for responding.  See 
  * -sendCTCPReply:withArgument:to:
  */
-- sendCTCPRequest: (NSString *)aCTCP withArgument: (NSString *)args
+- (id)sendCTCPRequest: (NSString *)aCTCP withArgument: (NSString *)args
    to: (NSString *)aPerson;
 
 /**
@@ -323,7 +324,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * out the basic communication over IRC.  Please see RFC 1459 for more
  * information on the PRIVMSG message.
  */
-- sendMessage: (NSString *)aMessage to: (NSString *)aReceiver;
+- (id)sendMessage: (NSString *)aMessage to: (NSString *)aReceiver;
 
 /**
  * Sends a notice <var>aNotice</var> to <var>aReceiver</var>.  
@@ -332,7 +333,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * a regular client.  Please see RFC 1459 for more information on the
  * NOTICE command.
  */
-- sendNotice: (NSString *)aNotice to: (NSString *)aReceiver;
+- (id)sendNotice: (NSString *)aNotice to: (NSString *)aReceiver;
 
 /**
  * Sends an action <var>anAction</var> to the receiver <var>aReceiver</var>.
@@ -341,7 +342,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * that you are <em>doing</em> rather than saying.  <var>anAction</var>
  * may contain spaces.
  */
-- sendAction: (NSString *)anAction to: (NSString *)aReceiver;
+- (id)sendAction: (NSString *)anAction to: (NSString *)aReceiver;
 
 /**
  * This method attempts to become an IRC operator with name <var>aName</var>
@@ -350,7 +351,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * operators of the server as a whole.  Please see RFC 1459 for more information
  * on the OPER command.
  */
-- becomeOperatorWithName: (NSString *)aName withPassword: (NSString *)aPassword;
+- (id)becomeOperatorWithName: (NSString *)aName withPassword: (NSString *)aPassword;
 
 /**
  * Requests the names on a channel <var>aChannel</var>.  If <var>aChannel</var>
@@ -358,28 +359,28 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * will be returned via a <var>RPL_NAMREPLY</var> numeric message.  See the
  * RFC 1459 for more information on the NAMES command.
  */
-- requestNamesOnChannel: (NSString *)aChannel;
+- (id)requestNamesOnChannel: (NSString *)aChannel;
 
 /**
  * Requests the Message-Of-The-Day from server <var>aServer</var>.  <var>aServer</var>
  * is optional and may not contain spaces if present.  The message of the day
  * is returned through the <var>RPL_MOTD</var> numeric command.
  */
-- requestMOTDOnServer: (NSString *)aServer;
+- (id)requestMOTDOnServer: (NSString *)aServer;
 
 /**
  * Requests size information from an optional <var>aServer</var> and
  * optionally forwards it to <var>anotherServer</var>.  See RFC 1459 for
  * more information on the LUSERS command
  */
-- requestSizeInformationFromServer: (NSString *)aServer
+- (id)requestSizeInformationFromServer: (NSString *)aServer
                       andForwardTo: (NSString *)anotherServer;
 
 /**
  * Queries the version of optional <var>aServer</var>.  Please see 
  * RFC 1459 for more information on the VERSION command.
  */
-- requestVersionOfServer: (NSString *)aServer;
+- (id)requestVersionOfServer: (NSString *)aServer;
 
 /**
  * Returns a series of statistics from <var>aServer</var>.  Specific 
@@ -387,21 +388,21 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * Neither may contain spaces and both are optional.  See RFC 1459 for
  * more information on the STATS message
  */
-- requestServerStats: (NSString *)aServer for: (NSString *)query;
+- (id)requestServerStats: (NSString *)aServer for: (NSString *)query;
 
 /** 
  * Used to list servers connected to optional <var>aServer</var> with
  * an optional mask <var>aLink</var>.  Neither may contain spaces.
  * See the RFC 1459 for more information on the LINKS command.
  */
-- requestServerLink: (NSString *)aLink from: (NSString *)aServer;
+- (id)requestServerLink: (NSString *)aLink from: (NSString *)aServer;
 
 /**
  * Requests the local time from the optional server <var>aServer</var>.  
  * <var>aServer</var> may not contain spaces.  See RFC 1459 for more 
  * information on the TIME command.
  */
-- requestTimeOnServer: (NSString *)aServer;
+- (id)requestTimeOnServer: (NSString *)aServer;
 
 /**
  * Requests that <var>aServer</var> connects to <var>connectServer</var> on
@@ -409,7 +410,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * and none may contain spaces.  See RFC 1459 for more information on the 
  * CONNECT command.
  */
-- requestServerToConnect: (NSString *)aServer to: (NSString *)connectServer
+- (id)requestServerToConnect: (NSString *)aServer to: (NSString *)connectServer
                   onPort: (NSString *)aPort;
 
 /**
@@ -417,46 +418,46 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * <var>aServer</var> is optional and may not contain spaces; please see
  * RFC 1459 for more information on the TRACE command.
  */
-- requestTraceOnServer: (NSString *)aServer;
+- (id)requestTraceOnServer: (NSString *)aServer;
 
 /**
  * Request the name of the administrator on the optional server
  * <var>aServer</var>.  <var>aServer</var> may not contain spaces.  Please
  * see RFC 1459 for more information on the ADMIN command.
  */
-- requestAdministratorOnServer: (NSString *)aServer;
+- (id)requestAdministratorOnServer: (NSString *)aServer;
 
 /**
  * Requests information on a server <var>aServer</var>.  <var>aServer</var>
  * is optional and may not contain spaces.  Please see RFC 1459 for more 
  * information on the INFO command.
  */
-- requestInfoOnServer: (NSString *)aServer;
+- (id)requestInfoOnServer: (NSString *)aServer;
 
 /**
  * Used to request that the current server reread its configuration files.
  * Please see RFC 1459 for more information on the REHASH command.
  */
-- requestServerRehash;
+- (id)requestServerRehash;
 
 /**
  * Used to request a shutdown of a server.  Please see RFC 1459 for additional
  * information on the DIE command.
  */
-- requestServerShutdown;
+- (id)requestServerShutdown;
 
 /**
  * Requests a restart of a server.  Please see RFC 1459 for additional 
  * information on the RESTART command.
  */
-- requestServerRestart;
+- (id)requestServerRestart;
 
 /** 
  * Requests a list of users logged into <var>aServer</var>.  
  * <var>aServer</var> is optional and may contain spaces.  Please see 
  * RFC 1459 for additional information on the USERS message.
  */
-- requestUserInfoOnServer: (NSString *)aServer;
+- (id)requestUserInfoOnServer: (NSString *)aServer;
 
 /**
  * Requests information on the precense of certain nicknames listed in 
@@ -465,7 +466,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * be added to the reply through the numeric message <var>RPL_ISON</var>.
  * See RFC 1459 for more information on the ISON message.
  */
-- areUsersOn: (NSString *)userList;
+- (id)areUsersOn: (NSString *)userList;
 
 /**
  * Sends a message to all operators currently online.  The actual implementation
@@ -473,7 +474,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * <var>aMessage</var> is the message to be sent and may contain spaces. 
  * Please see RFC 1459 for more information regarding the WALLOPS command.
  */
-- sendWallops: (NSString *)aMessage;
+- (id)sendWallops: (NSString *)aMessage;
 
 /**
  * Requests a list of users with a matching mask <var>aMask</var> against 
@@ -482,7 +483,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * contain spaces.  Please see RFC 1459 for more information regarding the
  * WHO message.
  */
-- listWho: (NSString *)aMask onlyOperators: (BOOL)operators;
+- (id)listWho: (NSString *)aMask onlyOperators: (BOOL)operators;
 
 /**
  * Requests information on a user <var>aPerson</var>.  <var>aPerson</var>
@@ -490,7 +491,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * is optional and neither argument may contain spaces.  Refer to RFC 1459 for
  * additional information on the WHOIS command.
  */
-- whois: (NSString *)aPerson onServer: (NSString *)aServer;
+- (id)whois: (NSString *)aPerson onServer: (NSString *)aServer;
 
 /** 
  * Requests information on a user <var>aPerson</var> that is no longer 
@@ -499,7 +500,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * contain spaces and <var>aServer</var> and <var>aNumber</var> are optional.
  * Please refer to RFC 1459 for more information regarding the WHOWAS message.
  */
-- whowas: (NSString *)aPerson onServer: (NSString *)aServer
+- (id)whowas: (NSString *)aPerson onServer: (NSString *)aServer
                      withNumberEntries: (NSString *)aNumber;
 
 /**
@@ -509,7 +510,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * is optional and <var>aPerson</var> may not contain spaces.  Please see 
  * RFC 1459 for additional information on the KILL command.
  */
-- kill: (NSString *)aPerson withComment: (NSString *)aComment;
+- (id)kill: (NSString *)aPerson withComment: (NSString *)aComment;
 
 /**
  * Sets the topic for channel <var>aChannel</var> to <var>aTopic</var>.
@@ -518,7 +519,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * <var>aChannel</var> may not contain spaces.  Please refer to the 
  * TOPIC command in RFC 1459 for more information.
  */
-- setTopicForChannel: (NSString *)aChannel to: (NSString *)aTopic;
+- (id)setTopicForChannel: (NSString *)aChannel to: (NSString *)aTopic;
 
 /** 
  * Used to query or set the mode on <var>anObject</var> to the mode specified
@@ -536,7 +537,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * modes available to users.  None of the arguments may contain spaces.  Please
  * refer to RFC 1459 for additional information on the MODE message.
  */
-- setMode: (NSString *)aMode on: (NSString *)anObject 
+- (id)setMode: (NSString *)aMode on: (NSString *)anObject 
                      withParams: (NSArray *)aList;
 					 
 /**
@@ -546,7 +547,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * is omitted, then all channels on the server will be listed.  Please refer
  * to RFC 1459 for additional information on the LIST command.
  */
-- listChannel: (NSString *)aChannel onServer: (NSString *)aServer;
+- (id)listChannel: (NSString *)aChannel onServer: (NSString *)aServer;
 
 /**
  * This message will invite <var>aPerson</var> to the channel specified by
@@ -554,7 +555,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * Please refer to RFC 1459 concerning the INVITE command for additional 
  * information.
  */
-- invite: (NSString *)aPerson to: (NSString *)aChannel;
+- (id)invite: (NSString *)aPerson to: (NSString *)aChannel;
 
 /**
  * Kicks the user <var>aPerson</var> off of the channel <var>aChannel</var>
@@ -564,7 +565,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * are required and may not contain spaces.  Please see the KICK command for
  * additional information in RFC 1459.
  */
-- kick: (NSString *)aPerson offOf: (NSString *)aChannel for: (NSString *)aReason;
+- (id)kick: (NSString *)aPerson offOf: (NSString *)aChannel for: (NSString *)aReason;
 
 /**
  * Sets status to away with the message <var>aMessage</var>.  While away, if
@@ -573,7 +574,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * omitted, the user is marked as being present.  Please refer to the AWAY 
  * command in RFC 1459 for additional information.
  */
-- setAwayWithMessage: (NSString *)aMessage;
+- (id)setAwayWithMessage: (NSString *)aMessage;
 
 /**
  * Requests a PONG message from the server.  The argument <var>aString</var>
@@ -582,7 +583,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * by a client, but is sent out often by servers to ensure connectivity of 
  * clients.  Please see RFC 1459 for more information on the PING command.
  */
-- sendPingWithArgument: (NSString *)aString;
+- (id)sendPingWithArgument: (NSString *)aString;
 
 /**
  * Used to respond to a PING message.  The argument sent with the PING message
@@ -590,7 +591,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * is required and may contain spaces.  See RFC 1459 for more informtion
  * regarding the PONG command.
  */
-- sendPongWithArgument: (NSString *)aString;
+- (id)sendPongWithArgument: (NSString *)aString;
 @end
 
 /**
@@ -609,7 +610,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * the server.  At this point it is safe to start joining channels and carrying
  * out other typical IRC functions. 
  */
-- registeredWithServer;
+- (id)registeredWithServer;
 
 /**
  * This method will be called if a connection cannot register for whatever reason.
@@ -617,7 +618,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * the reason is to watch the numeric commands being received in the 
  * -numericCommandReceived:withParams:from: method.
  */
-- couldNotRegister: (NSString *)aReason;
+- (id)couldNotRegister: (NSString *)aReason;
 
 /**
  * Called when a CTCP request has been received.  The CTCP request type is
@@ -626,7 +627,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * that the CTCP request is sent is stored in <var>aReceiver</var> and the 
  * person who sent it is stored in <var>aPerson</var>.
  */
-- CTCPRequestReceived: (NSString *)aCTCP 
+- (id)CTCPRequestReceived: (NSString *)aCTCP 
    withArgument: (NSString *)anArgument to: (NSString *)aReceiver
    from: (NSString *)aPerson;
 
@@ -636,7 +637,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * The actual location that the CTCP reply was sent is stored in <var>aReceiver</var>
  * and the person who sent it is stored in <var>aPerson</var>.
  */
-- CTCPReplyReceived: (NSString *)aCTCP
+- (id)CTCPReplyReceived: (NSString *)aCTCP
    withArgument: (NSString *)anArgument to: (NSString *)aReceiver
    from: (NSString *)aPerson;
 
@@ -645,14 +646,14 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * and its argument is stored in <var>anError</var>.  Typically you will be 
  * disconnected after receiving one of these.
  */
-- errorReceived: (NSString *)anError;
+- (id)errorReceived: (NSString *)anError;
 
 /**
  * Called when a Wallops has been received.  The message is stored in 
  * <var>aMessage</var> and the person who sent it is stored in 
  * <var>aSender</var>.
  */
-- wallopsReceived: (NSString *)aMessage from: (NSString *)aSender;
+- (id)wallopsReceived: (NSString *)aMessage from: (NSString *)aSender;
 
 /**
  * Called when a user has been kicked out of a channel.  The person's nickname
@@ -662,14 +663,14 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * not be accompanied by a -channelParted:withMessage:from: message, so it is safe
  * to assume they are no longer part of the channel after receiving this method.
  */
-- userKicked: (NSString *)aPerson outOf: (NSString *)aChannel 
+- (id)userKicked: (NSString *)aPerson outOf: (NSString *)aChannel 
          for: (NSString *)aReason from: (NSString *)aKicker;
 		 
 /**
  * Called when the client has been invited to another channel <var>aChannel</var>
  * by <var>anInviter</var>.
  */
-- invitedTo: (NSString *)aChannel from: (NSString *)anInviter;
+- (id)invitedTo: (NSString *)aChannel from: (NSString *)anInviter;
 
 /**
  * Called when the mode has been changed on <var>anObject</var>.  The actual
@@ -677,7 +678,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * <var>paramList</var>.  The person who changed the mode is stored in 
  * <var>aPerson</var>.  Consult RFC 1459 for further information.
  */
-- modeChanged: (NSString *)aMode on: (NSString *)anObject 
+- (id)modeChanged: (NSString *)aMode on: (NSString *)anObject 
    withParams: (NSArray *)paramList from: (NSString *)aPerson;
    
 /**
@@ -687,27 +688,27 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * in <var>aSender</var>.  These are often used for replies to requests such
  * as user lists and channel lists and other times they are used for errors.
  */
-- numericCommandReceived: (NSString *)aCommand withParams: (NSArray *)paramList 
+- (id)numericCommandReceived: (NSString *)aCommand withParams: (NSArray *)paramList 
                       from: (NSString *)aSender;
 
 /**
  * Called when someone changes his/her nickname.  The new nickname is stored in
  * <var>newName</var> and the old name will be stored in <var>aPerson</var>.
  */
-- nickChangedTo: (NSString *)newName from: (NSString *)aPerson;
+- (id)nickChangedTo: (NSString *)newName from: (NSString *)aPerson;
 
 /**
  * Called when someone joins a channel.  The channel is stored in <var>aChannel</var>
  * and the person who joined is stored in <var>aJoiner</var>.
  */
-- channelJoined: (NSString *)aChannel from: (NSString *)aJoiner;
+- (id)channelJoined: (NSString *)aChannel from: (NSString *)aJoiner;
 
 /**
  * Called when someone leaves a channel.  The channel is stored in <var>aChannel</var>
  * and the person who left is stored in <var>aParter</var>.  The parting message will
  * be stored in <var>aMessage</var>.
  */
-- channelParted: (NSString *)aChannel withMessage: (NSString *)aMessage
+- (id)channelParted: (NSString *)aChannel withMessage: (NSString *)aMessage
              from: (NSString *)aParter;
 
 /**
@@ -715,27 +716,27 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * <var>aMessage</var> and the person who quit will be stored in 
  * <var>aQuitter</var>.
  */
-- quitIRCWithMessage: (NSString *)aMessage from: (NSString *)aQuitter;
+- (id)quitIRCWithMessage: (NSString *)aMessage from: (NSString *)aQuitter;
 
 /**
  * Called when the topic is changed in a channel <var>aChannel</var> to
  * <var>aTopic</var> by <var>aPerson</var>.
  */
-- topicChangedTo: (NSString *)aTopic in: (NSString *)aChannel
+- (id)topicChangedTo: (NSString *)aTopic in: (NSString *)aChannel
               from: (NSString *)aPerson;
 
 /**
  * Called when a message <var>aMessage</var> is received from <var>aSender</var>.
  * The person or channel that the message is addressed to is stored in <var>aReceiver</var>.
  */
-- messageReceived: (NSString *)aMessage to: (NSString *)aReceiver
+- (id)messageReceived: (NSString *)aMessage to: (NSString *)aReceiver
                from: (NSString *)aSender;
 
 /**
  * Called when a notice <var>aNotice</var> is received from <var>aSender</var>.
  * The person or channel that the notice is addressed to is stored in <var>aReceiver</var>.
  */
-- noticeReceived: (NSString *)aNotice to: (NSString *)aReceiver
+- (id)noticeReceived: (NSString *)aNotice to: (NSString *)aReceiver
               from: (NSString *)aSender;
 
 /**
@@ -743,7 +744,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * and the sender is stored in <var>aSender</var>.  The person or channel that
  * the action is addressed to is stored in <var>aReceiver</var>.
  */
-- actionReceived: (NSString *)anAction to: (NSString *)aReceiver
+- (id)actionReceived: (NSString *)anAction to: (NSString *)aReceiver
               from: (NSString *)aSender;
 
 /** 
@@ -752,7 +753,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * with -sendPongWithArgument: using <var>anArgument</var> as the argument.
  * The server that sent the ping is stored in <var>aSender</var>.
  */
-- pingReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender;
+- (id)pingReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender;
 
 /**
  * Called when a pong is received.  These are generally in answer to a 
@@ -760,7 +761,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * is generally the same as the argument sent with the ping.  <var>aSender</var>
  * is the server that sent out the pong.
  */
-- pongReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender;
+- (id)pongReceivedWithArgument: (NSString *)anArgument from: (NSString *)aSender;
 
 /**
  * Called when a new nickname was needed while registering because the other
@@ -769,7 +770,7 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * This method can be overridden to do other nickname-changing schemes.  The
  * new nickname should be directly set with -changeNick:
  */
-- newNickNeededWhileRegistering;
+- (id)newNickNeededWhileRegistering;
 @end
 
 /**
@@ -785,12 +786,12 @@ NSArray *SeparateIRCNickAndHost(NSString *prefix);
  * calling any needed callbacks.
  * See [LineObject-lineReceived:] for more information.
  */
-- lineReceived: (NSData *)aLine;
+- (id)lineReceived: (NSData *)aLine;
 /**
  * Writes a formatted string to the connection.  This string
  * will not pass through any of the callbacks.
  */
-- writeString: (NSString *)format, ...;
+- (id)writeString: (NSString *)format, ...;
 @end
 
 /* Below is all the numeric commands that you can receive as listed
