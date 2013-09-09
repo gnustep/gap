@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Jan 17 11:04:36 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -357,7 +358,7 @@ static void add_old_entries(NSMutableDictionary *new, NSMutableDictionary *names
 	SEL sel;
 	id selString;
 	int args;
-	int index = NSNotFound;
+	NSUInteger index = NSNotFound;
 	id sender;
 	id next;
 	CREATE_AUTORELEASE_POOL(apr);

@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Apr 30 14:31:01 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -55,12 +56,12 @@ extern NSString *ServerListInfoAutoConnect;
 + (BOOL)saveServerListPreferences: (NSArray *)aPrefs;
 + (NSMutableArray *)serverListPreferences;
 + (BOOL)startAutoconnectServers;
-+ (void)setServer: (NSDictionary *)x inGroup: (int)group row: (int)row;
-+ (NSDictionary *)serverInGroup: (int)group row: (int)row;
++ (void)setServer: (NSDictionary *)x inGroup: (NSInteger)group row: (NSInteger)row;
++ (NSDictionary *)serverInGroup: (NSInteger)group row: (NSInteger)row;
 
 - (BOOL)saveServerListPreferences: (NSArray *)aPrefs;
 - (NSMutableArray *)serverListPreferences;
-- (BOOL)serverFound: (NSDictionary *)x inGroup: (int *)group row: (int *)row;
+- (BOOL)serverFound: (NSDictionary *)x inGroup: (NSInteger *)group row: (NSInteger *)row;
 
 - (void)editHit: (NSButton *)sender;
 - (void)addEntryHit: (NSButton *)sender;
