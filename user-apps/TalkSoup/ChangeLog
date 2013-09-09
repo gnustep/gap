@@ -1,3 +1,11 @@
+2013-09-09 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/ServerListController.h
+	* Output/GNUstepOutput/Controllers/ServerListController.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/ContentController.h
+	* TalkSoupBundles/TalkSoup.m
+	NSInteger/NSUInteger fixes.
+
 2013-09-08 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m

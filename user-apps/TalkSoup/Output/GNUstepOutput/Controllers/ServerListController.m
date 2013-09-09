@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Apr 30 14:30:59 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Applicaiton Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -132,7 +133,7 @@ static id mutable_object(id object)
 	return object;
 }
 
-static int sort_server_dictionary(id first, id second, void *x)
+static NSComparisonResult sort_server_dictionary(id first, id second, void *x)
 {
 	if ([[first objectForKey: ServerListInfoName] 
 	  isEqualToString: _l(ServerListFavorites)])
@@ -149,14 +150,14 @@ static int sort_server_dictionary(id first, id second, void *x)
 /* Giant hack alert!  This reloads a column then attempts
  * to pretty much restore it's position.
  */
-static void reload_column(NSBrowser *browse, int col)
+static void reload_column(NSBrowser *browse, NSInteger col)
 {
 	id matrix;
 	NSPoint myPos;
 	NSRect visRect;
-	int row1, row2;
-	int col1, col2;
-	int row3, rows;
+	NSInteger row1, row2;
+	NSInteger col1, col2;
+	NSInteger row3, rows;
 
 	if (!browse) return;
 
@@ -335,32 +336,32 @@ static void reload_column(NSBrowser *browse, int col)
 
 	return hadOne;
 }
-+ (void)setServer: (NSDictionary *)x inGroup: (int)group row: (int)row
++ (void)setServer: (NSDictionary *)x inGroup: (NSInteger)group row: (NSInteger)row
 {
 	id tmp = [ServerListController serverListPreferences]; 
 	id array;
 	
-	if (group >= (int)[tmp count] || group < 0) return;
+	if (group >= (NSInteger)[tmp count] || group < 0) return;
 	
 	array = [[tmp objectAtIndex: group]
 	  objectForKey: ServerListInfoEntries];
 	  
-	if (row >= (int)[tmp count] || row < 0) return;
+	if (row >= (NSInteger)[tmp count] || row < 0) return;
 	
 	[array replaceObjectAtIndex: row withObject: x];
 
 	[ServerListController saveServerListPreferences: tmp];
 }
-+ (NSDictionary *)serverInGroup: (int)group row: (int)row
++ (NSDictionary *)serverInGroup: (NSInteger)group row: (NSInteger)row
 {
 	id tmp = [self serverListPreferences];
 	
-	if (group >= (int)[tmp count] || group < 0) return nil;
+	if (group >= (NSInteger)[tmp count] || group < 0) return nil;
 	
 	tmp = [[tmp objectAtIndex: group] 
 	  objectForKey: ServerListInfoEntries];
 	
-	if (row >= (int)[tmp count] || row < 0) return nil;
+	if (row >= (NSInteger)[tmp count] || row < 0) return nil;
 	
 	return [tmp objectAtIndex: row];
 }
@@ -381,13 +382,13 @@ static void reload_column(NSBrowser *browse, int col)
 
 	return cached;
 }
-- (BOOL)serverFound: (NSDictionary *)x inGroup: (int *)group row: (int *)row
+- (BOOL)serverFound: (NSDictionary *)x inGroup: (NSInteger *)group row: (NSInteger *)row
 {
 	id tmp = [self serverListPreferences];
 	NSEnumerator *iter;
 	NSEnumerator *iter2;
 	id o1, o2;
-	int g = 0, r;
+	NSInteger g = 0, r;
 	
 	iter = [tmp objectEnumerator];
 	while ((o1 = [iter nextObject]))
@@ -625,14 +626,14 @@ static void reload_column(NSBrowser *browse, int col)
 - (void)editHit: (NSButton *)sender
 {
 	id tmp = [self serverListPreferences]; 
-	int row;
+	NSInteger row;
 	id o;
 
 	if ([browser selectedColumn] == 0)
 	{
 		row = [browser selectedRowInColumn: 0];
 		
-		if (row >= (int)[tmp count] || row < 0) return;
+		if (row >= (NSInteger)[tmp count] || row < 0) return;
 		
 		[self addGroupHit: nil];
 		
@@ -643,14 +644,14 @@ static void reload_column(NSBrowser *browse, int col)
 	}
 	else
 	{
-		int first = [browser selectedRowInColumn: 0];
+		NSInteger first = [browser selectedRowInColumn: 0];
 		row = [browser selectedRowInColumn: 1];
 		
-		if (first >= (int)[tmp count] || first < 0) return;
+		if (first >= (NSInteger)[tmp count] || first < 0) return;
 		
 		o = [[tmp objectAtIndex: first] objectForKey: ServerListInfoEntries];
 		
-		if (row >= (int)[o count] || row < 0) return;
+		if (row >= (NSInteger)[o count] || row < 0) return;
 		
 		[self addEntryHit: nil];
 
@@ -679,13 +680,13 @@ static void reload_column(NSBrowser *browse, int col)
 - (void)removeHit: (NSButton *)sender
 {
 	id prefs = [self serverListPreferences];
-	int row;
+	NSInteger row;
 	
 	if ([browser selectedColumn] == 0)
 	{
 		row = [browser selectedRowInColumn: 0];
 		
-		if (row >= (int)[prefs count]) return;
+		if (row >= (NSInteger)[prefs count]) return;
 		
 		[prefs removeObjectAtIndex: row];
 		
@@ -696,14 +697,14 @@ static void reload_column(NSBrowser *browse, int col)
 	else
 	{
 		id x;
-		int first = [browser selectedRowInColumn: 0];
+		NSInteger first = [browser selectedRowInColumn: 0];
 		row = [browser selectedRowInColumn: 1];
 		
-		if (first >= (int)[prefs count]) return;
+		if (first >= (NSInteger)[prefs count]) return;
 		
 		x = [[prefs objectAtIndex: first] objectForKey: ServerListInfoEntries];
 		
-		if (row >= (int)[x count]) return;
+		if (row >= (NSInteger)[x count]) return;
 		
 		[x removeObjectAtIndex: row];
 		
@@ -718,17 +719,17 @@ static void reload_column(NSBrowser *browse, int col)
 	id aContent = nil;
 	id aConnect;
 	
-	int first, row;
+	NSInteger first, row;
 	if ([browser selectedColumn] != 1) return;
 	
 	first = [browser selectedRowInColumn: 0];
 	row = [browser selectedRowInColumn: 1];
 	
-	if (first >= (int)[tmp count]) return;
+	if (first >= (NSInteger)[tmp count]) return;
 	
 	tmp = [[tmp objectAtIndex: first] objectForKey: ServerListInfoEntries];
 	
-	if (row >= (int)[tmp count]) return;
+	if (row >= (NSInteger)[tmp count]) return;
 
 	if ([forceButton state] == NSOffState)
 	{
@@ -796,7 +797,7 @@ static void reload_column(NSBrowser *browse, int col)
 @end
 
 @implementation ServerListController (BrowserDelegate)
-- (int)browser: (NSBrowser *)sender numberOfRowsInColumn: (int)column
+- (int)browser: (NSBrowser *)sender numberOfRowsInColumn: (NSInteger)column
 {
 	id serverList = [self serverListPreferences]; 
 	
@@ -811,10 +812,10 @@ static void reload_column(NSBrowser *browse, int col)
 	}
 	if (column == 1)
 	{
-		int col = [sender selectedRowInColumn: 0];
+		NSInteger col = [sender selectedRowInColumn: 0];
 		id group;
 		
-		if (col >= (int)[serverList count])
+		if (col >= (NSInteger)[serverList count])
 		{
 			return 0;
 		}
@@ -828,7 +829,7 @@ static void reload_column(NSBrowser *browse, int col)
 		
 	return 0;	
 }
-- (NSString *)browser: (NSBrowser *)sender titleOfColumn: (int)column
+- (NSString *)browser: (NSBrowser *)sender titleOfColumn: (NSInteger)column
 {
 	if (column == 0)
 	{
@@ -842,7 +843,7 @@ static void reload_column(NSBrowser *browse, int col)
 	return @"";
 }
 - (void)browser: (NSBrowser *)sender willDisplayCell: (id)cell
-  atRow: (int)row column: (int)column
+  atRow: (NSInteger)row column: (NSInteger)column
 {
 	id serverList = [self serverListPreferences]; 
 
@@ -852,7 +853,7 @@ static void reload_column(NSBrowser *browse, int col)
 	{
 		id tmp;
 		
-		if (row >= (int)[serverList count]) return;
+		if (row >= (NSInteger)[serverList count]) return;
 		
 		tmp = [serverList objectAtIndex: row];
 		[cell setStringValue: [tmp objectForKey: ServerListInfoName]];
@@ -861,7 +862,7 @@ static void reload_column(NSBrowser *browse, int col)
 	else if (column == 1)
 	{
 		id tmp;
-		int first;
+		NSInteger first;
 		
 		first = [sender selectedRowInColumn: 0];
 		
@@ -870,7 +871,7 @@ static void reload_column(NSBrowser *browse, int col)
 		tmp = [serverList objectAtIndex: first];
 		tmp = [tmp objectForKey: ServerListInfoEntries];
 		
-		if (row >= (int)[tmp count]) return;
+		if (row >= (NSInteger)[tmp count]) return;
 		
 		tmp = [tmp objectAtIndex: row];
 		

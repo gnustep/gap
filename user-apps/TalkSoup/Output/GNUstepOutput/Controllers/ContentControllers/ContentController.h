@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Jan 19 12:09:57 CST 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -55,23 +56,23 @@ extern NSString *ContentConsoleName;
    forContentController: (id <ContentController>)aContentController;
 - (void)addViewController: (id <ContentControllerQueryController>)aController
    withLabel: (NSAttributedString *)aLabel
-   atIndex: (unsigned)aIndex 
+atIndex: (NSUInteger)aIndex 
    forContentController: (id <ContentController>)aContentController;
 
 - (void)selectViewController: (id <ContentControllerQueryController>)aController;
-- (void)selectViewControllerAtIndex: (unsigned)aIndex;
+- (void)selectViewControllerAtIndex: (NSUInteger)aIndex;
 - (id <ContentControllerQueryController>)selectedViewController;
 
 - (void)removeViewController: (id <ContentControllerQueryController>)aController;
-- (void)removeViewControllerAtIndex: (unsigned)aIndex;
+- (void)removeViewControllerAtIndex: (NSUInteger)aIndex;
 
 - (void)moveViewController: (id <ContentControllerQueryController>)aController
-   toIndex: (unsigned)aIndex;
-- (void)moveViewControllerAtIndex: (unsigned)aIndex 
-   toIndex: (unsigned)aNewIndex;
+   toIndex: (NSUInteger)aIndex;
+- (void)moveViewControllerAtIndex: (NSUInteger)aIndex 
+   toIndex: (NSUInteger)aNewIndex;
 
-- (unsigned)indexForViewController: (id <ContentControllerQueryController>)aController;
-- (unsigned)count;
+- (NSUInteger)indexForViewController: (id <ContentControllerQueryController>)aController;
+- (NSUInteger)count;
 
 - (NSAttributedString *)labelForViewController: (id <ContentControllerQueryController>)aController;
 - (void)setLabel: (NSAttributedString *)aLabel 
