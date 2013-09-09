@@ -1,5 +1,10 @@
 2013-09-09 Riccardo Mottola <rm@gnu.org>
 
+	* Input/NetclassesInput/main.m
+	Rewrite string macros.
+
+2013-09-09 Riccardo Mottola <rm@gnu.org>
+
 	* Output/GNUstepOutput/Controllers/ServerListController.h
 	* Output/GNUstepOutput/Controllers/ServerListController.m
 	* Output/GNUstepOutput/Controllers/ContentControllers/ContentController.h
