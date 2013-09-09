@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Feb 21 00:51:41 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNustep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -34,13 +35,13 @@
 	#undef S2AS
 #endif
 
-#define S2AS(_x) NetClasses_AttributedStringFromString((_x))
+#define S2AS(_x) ( (_x) ? [[[NSAttributedString alloc] initWithString: (_x)] autorelease] : nil )
 
 #ifdef AS2S
 	#undef AS2S
 #endif
 
-#define AS2S(_x) NetClasses_StringFromAttributedString((_x))
+#define AS2S(_x) ( (_x) ? [(_x) string] : nil )
 
 @interface NetclassesInput (PrivateNetclassesInput)
 - removeConnection: aConnection;
