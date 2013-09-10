@@ -144,7 +144,7 @@ static NSData *IRC_new_line = nil;
 	
 #define NEXT_NON_SPACE(__y, __z, __string)\
 {\
-	int __len = [(__string) length];\
+	NSUInteger __len = [(__string) length];\
 	id set = [NSCharacterSet whitespaceCharacterSet];\
 	__z = (__y);\
 	while (__z < __len && \
@@ -153,9 +153,9 @@ static NSData *IRC_new_line = nil;
 
 static inline NSString *get_IRC_prefix(NSString *line, NSString **prefix)
 {
-	int beg;
-	int end;
-	int len = [line length];
+	NSUInteger beg;
+	NSUInteger end;
+	NSUInteger len = [line length];
 	
 	if (len == 0)
 	{
@@ -206,9 +206,9 @@ static inline NSString *get_IRC_prefix(NSString *line, NSString **prefix)
 	
 static inline NSString *get_next_IRC_word(NSString *line, NSString **prefix)
 {
-	int beg;
-	int end;
-	int len = [line length];
+	NSUInteger beg;
+	NSUInteger end;
+	NSUInteger len = [line length];
 	
 	if (len == 0)
 	{
@@ -441,7 +441,7 @@ static void rec_join(IRCObject *client, NSString *command,
 static void rec_part(IRCObject *client, NSString *command,
                      NSString *prefix, NSArray *paramList)
 {
-	int x;
+	NSUInteger x;
 	
 	if (!prefix)
 	{	
@@ -566,7 +566,7 @@ static void rec_mode(IRCObject *client, NSString *command, NSString *prefix,
                      NSArray *paramList)
 {
 	NSArray *newParams;
-	int x;
+	NSUInteger x;
 	
 	if (!prefix)
 	{
