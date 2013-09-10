@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Aug 14 19:19:31 CDT 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -50,22 +51,22 @@ static NSString *big_description = nil;
 - (void)activateList;
 - (void)refreshList;
 - (void)setupList;
-- (NSAttributedString *)descriptionForSelected: (int)row;
+- (NSAttributedString *)descriptionForSelected: (NSInteger)row;
 
-- (BOOL)tableView: (NSTableView *)aTableView shouldSelectRow: (int)aRow;
-- (int)numberOfRowsInTableView: (NSTableView *)aTableView;
+- (BOOL)tableView: (NSTableView *)aTableView shouldSelectRow: (NSInteger)aRow;
+- (NSInteger)numberOfRowsInTableView: (NSTableView *)aTableView;
 - (id)tableView: (NSTableView *)aTableView
   objectValueForTableColumn: (NSTableColumn *)aTableColumn
-  row: (int)rowIndex;
+  row: (NSInteger)rowIndex;
 - (BOOL)tableView: (NSTableView *)tableView writeRows: (NSArray *)rows
   toPasteboard: (NSPasteboard *)pboard;
 - (NSDragOperation) tableView: (NSTableView *)aTableView
   validateDrop: (id <NSDraggingInfo>) info
-  proposedRow: (int)row 
+  proposedRow: (NSInteger)row 
   proposedDropOperation: (NSTableViewDropOperation)operation;
 - (BOOL)tableView: (NSTableView *)aTableView 
   acceptDrop: (id <NSDraggingInfo>)info
-  row: (int)row dropOperation: (NSTableViewDropOperation)operation;
+  row: (NSInteger)row dropOperation: (NSTableViewDropOperation)operation;
 
 - (void)prefsWindowResized: (NSNotification *)aNotification;
 @end
@@ -198,7 +199,7 @@ static NSString *big_description = nil;
 }
 - (void)showingSelected: (id)sender
 {
-	int index = [sender indexOfSelectedItem];
+	NSInteger index = [sender indexOfSelectedItem];
 
 	if (index < 0) index = 0;
 	if (index > 1) index = 1;
@@ -257,7 +258,7 @@ static NSString *big_description = nil;
 	  S2AS(big_description)];
 	[descriptionText scrollPoint: NSMakePoint(0, 0)];
 }
-- (NSAttributedString *)descriptionForSelected: (int)row
+- (NSAttributedString *)descriptionForSelected: (NSInteger)row
 {
 	id object = nil;
 	SEL aSel;
@@ -278,7 +279,7 @@ static NSString *big_description = nil;
 
 	return S2AS(_l(@"No description available."));
 }
-- (BOOL)tableView: (NSTableView *)aTableView shouldSelectRow: (int)aRow
+- (BOOL)tableView: (NSTableView *)aTableView shouldSelectRow: (NSInteger)aRow
 {
 	if (aTableView == availableTable)
 	{
@@ -305,7 +306,7 @@ static NSString *big_description = nil;
 
 	return YES;
 }
-- (int)numberOfRowsInTableView: (NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView: (NSTableView *)aTableView
 {
 	id data;
 
@@ -316,7 +317,7 @@ static NSString *big_description = nil;
 }
 - (id)tableView: (NSTableView *)aTableView
   objectValueForTableColumn: (NSTableColumn *)aTableColumn
-  row: (int)rowIndex
+  row: (NSInteger)rowIndex
 {
 	id data;
 
@@ -351,7 +352,7 @@ static NSString *big_description = nil;
 }
 - (NSDragOperation) tableView: (NSTableView *)aTableView
   validateDrop: (id <NSDraggingInfo>) info
-  proposedRow: (int)row 
+  proposedRow: (NSInteger)row 
   proposedDropOperation: (NSTableViewDropOperation)operation
 {
 	if ([info draggingSourceOperationMask] & 
@@ -364,12 +365,12 @@ static NSString *big_description = nil;
 }
 - (BOOL)tableView: (NSTableView *)aTableView 
   acceptDrop: (id <NSDraggingInfo>)info
-  row: (int)row dropOperation: (NSTableViewDropOperation)operation
+  row: (NSInteger)row dropOperation: (NSTableViewDropOperation)operation
 {
 	id origData;
 	id data;
 	id object;
-	int where;
+	NSInteger where;
 
 	data = (aTableView == availableTable) ? availData : loadData;
 
