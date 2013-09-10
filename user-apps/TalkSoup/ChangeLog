@@ -1,6 +1,7 @@
 2013-09-10 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Models/Channel.m
+	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
 	Fix NSInteger/NSUInteger
 
 2013-09-09 Riccardo Mottola <rm@gnu.org>
