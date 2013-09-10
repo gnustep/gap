@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jul  2 15:23:24 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -62,8 +63,9 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 	inet_aton([[address address] cString], &inp);
 	
 	return [NSString stringWithFormat: @"SEND %@ %lu %hu %lu",
-	  file, ntohl(inp.s_addr), [port unsignedShortValue],
-	  [size unsignedLongValue]];
+                         file, (unsigned long)ntohl(inp.s_addr),
+                         [port unsignedShortValue],
+                         [size unsignedLongValue]];
 }
 
 @implementation DCCObject

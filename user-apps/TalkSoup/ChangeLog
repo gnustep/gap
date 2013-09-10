@@ -1,3 +1,8 @@
+2013-09-11 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/DCCObject.m
+	Cast to long.
+
 2013-09-10 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Models/Channel.m
