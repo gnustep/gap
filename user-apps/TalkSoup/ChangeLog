@@ -1,5 +1,14 @@
 2013-09-11 Riccardo Mottola <rm@gnu.org>
 
+	* Input/NetclassesInput/main.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.m
+	* Source/commands.m
+	* TalkSoupBundles/TalkSoup.h
+	Tweaks to avoid warnings, simplified (original version) of the S2AS macro without nil check to use with constant strings.
+
+2013-09-11 Riccardo Mottola <rm@gnu.org>
+
 	* InFilters/DCCSupport/DCCObject.m
 	Cast to long.
 

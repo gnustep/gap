@@ -35,13 +35,13 @@
 	#undef S2AS
 #endif
 
-#define S2AS(_x) ( (_x) ? [[[NSAttributedString alloc] initWithString: (_x)] autorelease] : nil )
+#define S2AS(_x) ( (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
 
 #ifdef AS2S
 	#undef AS2S
 #endif
 
-#define AS2S(_x) ( (_x) ? [(_x) string] : nil )
+#define AS2S(_x) ( (_x) ? (NSString *)[(_x) string] : (NSString *)nil )
 
 @interface NetclassesInput (PrivateNetclassesInput)
 - removeConnection: aConnection;
