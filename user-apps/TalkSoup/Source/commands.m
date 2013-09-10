@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Dec 22 07:34:32 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -28,7 +29,7 @@
 #import <Foundation/NSMapTable.h>
 
 #define MARK [NSNull null]
-#define NO_CONNECT S2AS(_(@"Connect to a server before using this command"))
+#define NO_CONNECT S2AS_s(_(@"Connect to a server before using this command"))
 
 @implementation TalkSoup (Commands)
 - (NSAttributedString *)commandSaveLoaded: (NSString *)args 
@@ -36,7 +37,7 @@
 {
 	[self savePluginList];
 
-	return S2AS(_(@"The loaded bundles will now load automagically on TalkSoup startup."));
+	return S2AS_s(_(@"The loaded bundles will now load automagically on TalkSoup startup."));
 }
 - (NSAttributedString *)commandLoaded: (NSString *)args connection: (id)connection
 {
@@ -60,7 +61,7 @@
 	
 	if ([x count] < 1)
 	{
-		return S2AS(_(@"Usage: /load <in/out>"));
+		return S2AS_s(_(@"Usage: /load <in/out>"));
 	}
 	
 	first = [x objectAtIndex: 0];
@@ -76,7 +77,7 @@
 	}
 	else
 	{
-		return S2AS(_(@"Usage: /load <in/out>"));
+		return S2AS_s(_(@"Usage: /load <in/out>"));
 	}
 	
 	second = ([x count] > 1) ? [x objectAtIndex: 1] : nil;
@@ -125,7 +126,7 @@
 	
 	if ([x count] < 1)
 	{
-		return S2AS(_(@"Usage: /unload <in/out>"));
+		return S2AS_s(_(@"Usage: /unload <in/out>"));
 	}
 	
 	first = [x objectAtIndex: 0];
@@ -141,7 +142,7 @@
 	}
 	else
 	{
-		return S2AS(_(@"Usage: /unload <in/out>"));
+		return S2AS_s(_(@"Usage: /unload <in/out>"));
 	}
 
 	second = ([x count] > 1) ? [x objectAtIndex: 1] : nil;
@@ -189,7 +190,7 @@
 	
 	if ([x count] == 0)
 	{
-		return S2AS(_(@"Usage: /join <channel1[,channel2...]> [password1[,password2...]]"));
+		return S2AS_s(_(@"Usage: /join <channel1[,channel2...]> [password1[,password2...]]"));
 	}
 	
 	pass = ([x count] == 2) ? [x objectAtIndex: 1] : nil;
@@ -209,7 +210,7 @@
 	
 	if ([x count] < 2)
 	{
-		return S2AS(_(@"Usage: /msg <person> <message>"));
+          return S2AS_s(_(@"Usage: /msg <person> <message>"));
 	}
 	
 	[_TS_ sendMessage: S2AS([x objectAtIndex: 1]) to: 
@@ -365,7 +366,7 @@
 
 	who = [array objectAtIndex: 0];
 	
-	[_TS_ sendCTCPRequest: S2AS(@"VERSION") withArgument: nil
+	[_TS_ sendCTCPRequest: S2AS_s(@"VERSION") withArgument: nil
 	  to: S2AS(who) onConnection: connection 
 	  withNickname: S2AS([connection nick])
 	  sender: output];
@@ -383,12 +384,12 @@
 
 	if ([array count] == 0)
 	{
-		return S2AS(_(@"Usage: /clientinfo <nick>"));
+		return S2AS_s(_(@"Usage: /clientinfo <nick>"));
 	}
 
 	who = [array objectAtIndex: 0];
 	
-	[_TS_ sendCTCPRequest: S2AS(@"CLIENTINFO") withArgument: nil
+	[_TS_ sendCTCPRequest: S2AS_s(@"CLIENTINFO") withArgument: nil
 	  to: S2AS(who) onConnection: connection 
 	  withNickname: S2AS([connection nick])
 	  sender: output];
@@ -411,7 +412,7 @@
 
 	who = [array objectAtIndex: 0];
 	
-	[_TS_ sendCTCPRequest: S2AS(@"USERINFO") withArgument: nil
+	[_TS_ sendCTCPRequest: S2AS_s(@"USERINFO") withArgument: nil
 	  to: S2AS(who) onConnection: connection 
 	  withNickname: S2AS([connection nick])
 	  sender: output];
@@ -436,7 +437,7 @@
 	who = [array objectAtIndex: 0];
 	arg = [array objectAtIndex: 1];
 	
-	[_TS_ sendCTCPRequest: S2AS(@"PING") withArgument: S2AS(arg)
+	[_TS_ sendCTCPRequest: S2AS_s(@"PING") withArgument: S2AS(arg)
 	  to: S2AS(who) onConnection: connection withNickname: S2AS([connection nick])
 	  sender: output];
 	
@@ -454,7 +455,7 @@
 
 	if ([array count] < 1)
 	{
-		return S2AS(_(@"Usage: /topic <channel> [topic]"));
+		return S2AS_s(_(@"Usage: /topic <channel> [topic]"));
 	}
 
 	who = [array objectAtIndex: 0];
@@ -537,7 +538,7 @@
 	
 	if (max <= 1)
 	{
-		return S2AS(_(@"Usage: /mode <object> <mode(s)> [arguments]"));
+		return S2AS_s(_(@"Usage: /mode <object> <mode(s)> [arguments]"));
 	}
 
 	mode = [array objectAtIndex: 1];
@@ -582,7 +583,7 @@
 		{
 			NSAttributedString *thisone;
 			if ([string length] > 0) 
-				[string appendAttributedString: S2AS(@", ")];
+				[string appendAttributedString: S2AS_s(@", ")];
 			thisone = 
 			  BuildAttributedString(@"(", MARK, IRCBold, IRCBoldValue,
 			  [_TS_ identifierForEncoding: *iter], @")", 
@@ -599,7 +600,7 @@
 	
 	[connection setEncoding: enc];
 	
-	return S2AS(_(@"Ok."));
+	return S2AS_s(_(@"Ok."));
 }
 - (void)setupCommandList
 {

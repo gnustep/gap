@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Mar 13 13:18:48 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -822,7 +823,7 @@ static void send_message(id command, id name, id connection)
 	
 	connection = [controller connection];
 	
-	[_TS_ sendCTCPRequest: S2AS(@"PING")
+	[_TS_ sendCTCPRequest: S2AS_s(@"PING")
 	  withArgument: S2AS(arg) to: S2AS(who) 
 	  onConnection: connection
 	  withNickname: S2AS([connection nick])
@@ -836,7 +837,7 @@ static void send_message(id command, id name, id connection)
 	if ([aString length] == 0)
 	{
 		[controller showMessage:
-		  S2AS(_l(@"Usage: /say <text>" @"\n"
+		  S2AS_s(_l(@"Usage: /say <text>" @"\n"
 		  @"Sends text to the current channel."))
 		  onConnection: nil];
 		return self;
@@ -1060,7 +1061,7 @@ static void send_message(id command, id name, id connection)
 	if ([controller dataForChannelWithName: name])
 	{
 		[controller leaveChannel: name];
-		[_TS_ partChannel: S2AS(name) withMessage: S2AS(@"")
+		[_TS_ partChannel: S2AS(name) withMessage: S2AS_s(@"")
 		  onConnection: connection 
 		  withNickname: S2AS([connection nick])
 		  sender: _GS_];

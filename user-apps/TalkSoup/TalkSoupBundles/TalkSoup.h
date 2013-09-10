@@ -37,10 +37,13 @@ extern NSString *IRCDefaultsPassword;
 // Attributed string stuff
 
 #ifdef S2AS
-	#undef S2AS
+#undef S2AS
+#undef S2AS_s
 #endif
 
-#define S2AS(_x) ( (_x) ? [[[NSAttributedString alloc] initWithString: (_x)] autorelease] : nil )
+/* string to attributed string macros for generic and for static strings (known not to be nil */
+#define S2AS(_x) ( (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
+#define S2AS_s(_x) ( [[[NSAttributedString alloc] initWithString: (_x)] autorelease] )
 
 // Key
 extern NSString *IRCColor;

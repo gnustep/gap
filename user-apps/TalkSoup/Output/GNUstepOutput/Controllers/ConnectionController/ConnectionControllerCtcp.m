@@ -3,6 +3,7 @@
                           -------------------
     begin                : Tue May 20 18:38:20 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -114,7 +115,7 @@
 }
 - CTCPRequestPING: (NSAttributedString *)argument from: (NSAttributedString *)aPerson
 {
-	[_TS_ sendCTCPReply: S2AS(@"PING") withArgument: argument to: 
+	[_TS_ sendCTCPReply: S2AS_s(@"PING") withArgument: argument to: 
 	  [IRCUserComponents(aPerson) objectAtIndex: 0] onConnection: connection
 	  withNickname: S2AS([connection nick])
 	  sender: _GS_]; 
@@ -127,7 +128,7 @@
 }
 - CTCPRequestVERSION: (NSAttributedString *)query from: (NSAttributedString *)aPerson
 {
-	[_TS_ sendCTCPReply: S2AS(@"VERSION") withArgument:
+	[_TS_ sendCTCPReply: S2AS_s(@"VERSION") withArgument:
 	  BuildAttributedFormat(@"TalkSoup.app %@ - http://talksoup.aeruder.net", 
 	    [[[NSBundle mainBundle] infoDictionary] objectForKey: @"ApplicationRelease"])
 	  to: [IRCUserComponents(aPerson) objectAtIndex: 0] 
@@ -139,7 +140,7 @@
 }
 - CTCPRequestCLIENTINFO: (NSAttributedString *)query from: (NSAttributedString *)aPerson
 {
-	[_TS_ sendCTCPReply: S2AS(@"CLIENTINFO") withArgument:
+	[_TS_ sendCTCPReply: S2AS_s(@"CLIENTINFO") withArgument:
 	  BuildAttributedString(_l(@"TalkSoup can be obtained from: "),
 	    @"http://talksoup.aeruder.net", nil)
 	  to: [IRCUserComponents(aPerson) objectAtIndex: 0]
@@ -151,8 +152,8 @@
 }
 - CTCPRequestXYZZY: (NSAttributedString *)query from: (NSAttributedString *)aPerson
 {
-	[_TS_ sendCTCPReply: S2AS(@"XYZZY") withArgument:
-	  S2AS(@"Nothing happened.") 
+	[_TS_ sendCTCPReply: S2AS_s(@"XYZZY") withArgument:
+	  S2AS_s(@"Nothing happened.") 
 	  to: [IRCUserComponents(aPerson) objectAtIndex: 0]
 	  onConnection: connection 
 	  withNickname: S2AS([connection nick])
@@ -162,7 +163,7 @@
 }
 - CTCPRequestRFM: (NSAttributedString *)query from: (NSAttributedString *)aPerson
 {
-	[_TS_ sendCTCPReply: S2AS(@"RFM") withArgument: S2AS(@"Problems? Blame RFM")
+	[_TS_ sendCTCPReply: S2AS_s(@"RFM") withArgument: S2AS_s(@"Problems? Blame RFM")
 	  to: [IRCUserComponents(aPerson) objectAtIndex: 0]
 	  onConnection: connection 
 	  withNickname: S2AS([connection nick])
