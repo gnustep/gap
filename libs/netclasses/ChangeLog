@@ -1,5 +1,10 @@
 2013-09-09 Riccardo Mottola <rm@gnu.org>
 
+	* Source/IRCObject.m
+	NSUInteger fixes.
+
+2013-09-09 Riccardo Mottola <rm@gnu.org>
+
 	* Source/IRCObject.h
 	* Source/IRCObject.m
 	Explicit return type (id) in signatures.
