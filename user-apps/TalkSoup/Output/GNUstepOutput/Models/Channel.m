@@ -3,6 +3,7 @@
                           -------------------
     begin                : Tue Apr  8 17:15:55 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2013 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -260,7 +261,7 @@
 }
 - removeUser: (NSString *)aString
 {
-	int x = [lowercaseList indexOfObject: GNUstepOutputLowercase(aString, connection)];
+	NSUInteger x = [lowercaseList indexOfObject: GNUstepOutputLowercase(aString, connection)];
 	if (x != NSNotFound)
 	{
 		[userList removeObjectAtIndex: x];
@@ -272,7 +273,7 @@
 {
 	BOOL hasVoice;
 	BOOL hasOps;
-	int index;
+	NSUInteger index;
 
 	index = [lowercaseList indexOfObject: GNUstepOutputLowercase(oldName, connection)];
 	if (index == NSNotFound) return self;
@@ -293,7 +294,7 @@
 }
 - (ChannelUser *)userWithName: (NSString *)name
 {
-	int index;
+	NSUInteger index;
 
 	index = [lowercaseList indexOfObject: GNUstepOutputLowercase(name, connection)];
 
@@ -335,13 +336,13 @@
 @end
 
 @implementation Channel (TableViewDataSource)
-- (int)numberOfRowsInTableView: (NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView: (NSTableView *)aTableView
 {
-	return [userList count];
+  return (NSInteger)[userList count];
 }
 - (id)tableView: (NSTableView *)aTableView 
      objectValueForTableColumn: (NSTableColumn *)aTableColumn
-	 row: (int)rowIndex
+	 row: (NSInteger)rowIndex
 {
 	return [userList objectAtIndex: rowIndex];
 }
