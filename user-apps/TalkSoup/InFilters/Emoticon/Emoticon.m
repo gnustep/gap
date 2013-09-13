@@ -155,7 +155,7 @@ NSAttributedString *emoticonify(NSAttributedString *message)
 		  BuildAttributedString([NSNull null], IRCColor, IRCColorRed, @" --- ", 
 		   nil)];
 		[aString appendAttributedString: tmp];
-		[aString appendAttributedString: S2AS(@"\n")];
+		[aString appendAttributedString: S2AS_s(@"\n")];
 	}
 
 	[aString appendAttributedString:	 

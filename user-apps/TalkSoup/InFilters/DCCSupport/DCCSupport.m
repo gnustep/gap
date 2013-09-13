@@ -610,17 +610,17 @@ static NSString *unique_path(NSString *path)
 			  [NSString stringWithFormat: @"%d", [object cps]])];
 			}
 		}
-		[attr appendAttributedString: S2AS(@"\n")];
+		[attr appendAttributedString: S2AS_s(@"\n")];
 	}
 	
 	if ([attr length] == 0)
 	{
 		[attr appendAttributedString: 
-		  S2AS(_l(@"End of list (See /dcc help for more information)."))];
+		  S2AS_s(_l(@"End of list (See /dcc help for more information)."))];
 	}
 	else
 	{
-		[attr appendAttributedString: S2AS(_l(@"End of list."))];
+		[attr appendAttributedString: S2AS_s(_l(@"End of list."))];
 	}
 
 	return attr;

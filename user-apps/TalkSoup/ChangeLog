@@ -1,3 +1,11 @@
+2013-09-13 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/DCCSupport.m
+	* InFilters/Emoticon/Emoticon.m
+	* InFilters/KeepAlive/KeepAlive.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	Various warning fixes.
+
 2013-09-11 Riccardo Mottola <rm@gnu.org>
 
 	* Input/NetclassesInput/main.m

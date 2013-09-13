@@ -341,7 +341,7 @@
 	
 	while ((object = [iter nextObject]))
 	{
-		[params appendAttributedString: S2AS(@" ")];
+		[params appendAttributedString: S2AS_s(@" ")];
 		[params appendAttributedString: object];
 	}
 		
@@ -433,7 +433,7 @@
 	while ((object = [iter nextObject]))
 	{
 		[a appendAttributedString: object];
-		[a appendAttributedString: S2AS(@" ")];
+		[a appendAttributedString: S2AS_s(@" ")];
 	}
 	
 	where = ContentConsoleName;

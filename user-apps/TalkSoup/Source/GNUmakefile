@@ -1,6 +1,9 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 APP_NAME = TalkSoup
+PACKAGE_NAME = TalkSoup
+VERSION = 1.1
+TalkSoup_APPLICATION_ICON = TalkSoup.tiff
 
 TalkSoup_OBJC_FILES = main.m commands.m
 
