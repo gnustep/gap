@@ -34,7 +34,7 @@
 
 	while ((object = [iter nextObject]))
 	{
-		[_TS_ sendPingWithArgument: S2AS(@"KeepAlive") onConnection:
+		[_TS_ sendPingWithArgument: S2AS_s(@"KeepAlive") onConnection:
 		  object withNickname: S2AS([object nick]) 
 		  sender: [_TS_ pluginForOutput]];
 	}
