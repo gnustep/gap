@@ -12,6 +12,7 @@ Themes_INSTALL_DIR = $(GNUSTEP_LIBRARY)/Themes
 Themes_RESOURCE_FILES = Neos.theme \
 ThinkDark.theme \
 Sleek.theme \
+Tango.theme \
 WinClassic.theme
 
 include $(GNUSTEP_MAKEFILES)/resource-set.make
