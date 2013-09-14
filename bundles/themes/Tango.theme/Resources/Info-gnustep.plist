@@ -2,12 +2,12 @@
     GSThemeAuthors = (
 	"Riccardo Mottola"
     );
-    GSThemeDetails = "Freedesktop Tango icon based them\000";
+    GSThemeDetails = "Freedesktop Tango icon based theme";
     GSThemeDomain = {
     };
     GSThemeIcon = "Thematic.png";
-    GSThemeLicense = "GPL v2\000";
+    GSThemeLicense = "GPL v2+";
     GSThemeTiles = {
     };
-    GSThemeVersion = "1.0";
+    GSThemeVersion = "0.1";
 }
