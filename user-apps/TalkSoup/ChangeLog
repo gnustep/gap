@@ -1,3 +1,10 @@
+2013-09-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GNUmakefile
+	* Source/TalkSoupInfo.plist
+	* Output/GNUstepOutput/AllLanguages/Defaults.plist
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.m
+	GAP branding
+
 2013-09-13 Riccardo Mottola <rm@gnu.org>
 
 	* InFilters/DCCSupport/DCCSupport.m

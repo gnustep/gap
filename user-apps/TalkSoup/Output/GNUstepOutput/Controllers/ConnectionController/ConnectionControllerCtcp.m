@@ -129,7 +129,7 @@
 - CTCPRequestVERSION: (NSAttributedString *)query from: (NSAttributedString *)aPerson
 {
 	[_TS_ sendCTCPReply: S2AS_s(@"VERSION") withArgument:
-	  BuildAttributedFormat(@"TalkSoup.app %@ - http://talksoup.aeruder.net", 
+	  BuildAttributedFormat(@"TalkSoup.app %@ - http://gap.nongnu.org/talksoup/", 
 	    [[[NSBundle mainBundle] infoDictionary] objectForKey: @"ApplicationRelease"])
 	  to: [IRCUserComponents(aPerson) objectAtIndex: 0] 
 	  onConnection: connection 
@@ -142,7 +142,7 @@
 {
 	[_TS_ sendCTCPReply: S2AS_s(@"CLIENTINFO") withArgument:
 	  BuildAttributedString(_l(@"TalkSoup can be obtained from: "),
-	    @"http://talksoup.aeruder.net", nil)
+	    @"http://gap.nongnu.org/talksoup/", nil)
 	  to: [IRCUserComponents(aPerson) objectAtIndex: 0]
 	  onConnection: connection 
 	  withNickname: S2AS([connection nick])
