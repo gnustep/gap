@@ -1,3 +1,8 @@
+2013-09-17 Riccardo Mottola <rm@gnu.org>
+
+	* PDFDocument.m
+	Move interface declaration up instead of using forward declaration.
+
 2013-09-05 Riccardo Mottola <rm@gnu.org>
 
 	* xpdf/xpdf-3.02/GNUmakefile.in
