@@ -1,3 +1,8 @@
+2013-09-17 Riccardo Mottola <rm@gnu.org>
+
+	* RSSLinks.m
+	Change [isa class] to [self class]
+
 2013-05-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Info.plist, GNUmakefile
 	  bump version 0.5

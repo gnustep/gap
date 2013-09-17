@@ -2,6 +2,10 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2013 The GNUstep Application Project
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -63,7 +67,7 @@
     [NSException
       raise: @"Abstract Class Instantiation"
       format: @"Abstract class %@ cannot be instantiated directly!",
-      [isa class]];
+      [self class]];
   }
   
   if ((self = [super initWithString: aURLString]) != nil) {
