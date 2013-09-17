@@ -1925,7 +1925,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	if ([line length] == 0)
 	{
 		[NSException raise: IRCException
-		 format: @"[IRCObject lineReceived: '@'] Line ended prematurely.",
+		 format: @"[IRCObject lineReceived: '%@'] Line ended prematurely.",
 		 orig];
 	}
 
@@ -1933,7 +1933,7 @@ static void rec_error(IRCObject *client, NSString *command, NSString *prefix,
 	if (command == nil)
 	{
 		[NSException raise: IRCException
-		 format: @"[IRCObject lineReceived: '@'] Line ended prematurely.",
+		 format: @"[IRCObject lineReceived: '%@'] Line ended prematurely.",
 		 orig];
 	}
 

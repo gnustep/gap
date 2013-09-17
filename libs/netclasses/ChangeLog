@@ -1,3 +1,8 @@
+2013-09-17 Riccardo Mottola <rm@gnu.org>
+
+	* Source/IRCObject.m
+	Fix broken log format.
+
 2013-09-09 Riccardo Mottola <rm@gnu.org>
 
 	* Source/IRCObject.m
