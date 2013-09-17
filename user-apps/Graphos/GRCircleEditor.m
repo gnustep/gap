@@ -48,6 +48,7 @@
   CGFloat zFactor;
   BOOL found = NO;
 
+  pp = NSZeroPoint;
   zFactor = [object zoomFactor];
   cp = [(GRCircle *)object startControlPoint];
   if (pointInRect([cp centerRect], p))

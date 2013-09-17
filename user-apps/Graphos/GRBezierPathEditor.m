@@ -140,6 +140,7 @@
   if(!editSelected)
     return p;
   
+  pp = NSZeroPoint;
   for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
     {
       cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
