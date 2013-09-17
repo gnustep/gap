@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *           (C) 2013  The GNUstep Application Team
+ *
+ * Authors: Stefan Kleine Stegemann
+ *          Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,11 +20,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "PDFDocument.h"
-#include "PDFImageRep.h"
-#include "XPDFBridge.h"
-#include "CountingRef.h"
-#include "PDFOutline.h"
+#import "PDFDocument.h"
+#import "PDFImageRep.h"
+#import "XPDFBridge.h"
+#import "CountingRef.h"
+#import "PDFOutline.h"
 
 #define CONTENT_SIZE 262144
 
@@ -28,7 +32,11 @@ static NSMutableString *textContents = nil;
 static NSMutableDictionary *documentInfo = nil;
 
 
-@class PDFDocRefDelegate;
+@interface PDFDocRefDelegate : NSObject <CountingRefDelegate>
+{
+}
+@end
+
 
 /*
  * Non-Public methods of PDFDocument.
@@ -476,10 +484,7 @@ static void getDictPair(char *key, char *value)
 /*  Class PDFDocRefDelegate                              */
 /* ----------------------------------------------------- */
 
-@interface PDFDocRefDelegate : NSObject <CountingRefDelegate>
-{
-}
-@end
+
 
 
 @implementation PDFDocRefDelegate
