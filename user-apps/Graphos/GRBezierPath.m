@@ -569,9 +569,11 @@ static double k = 0.025;
     NSPoint p, bp;
     NSRect r;
     double t;
-    int i;
+    NSUInteger i;
 
     hitdata.cp = nil;
+    hitdata.p = NSZeroPoint;
+
     r = NSMakeRect((int)pt.x -4, (int)pt.y -4, 8, 8);
 
     for(i = 0; i < [controlPoints count]; i++)

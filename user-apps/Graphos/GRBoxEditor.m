@@ -46,7 +46,8 @@
   BOOL found = NO;
   CGFloat zFactor;
   NSPoint pp;
-    
+  
+  pp = NSZeroPoint;
   cp = [(GRBox *)object startControlPoint];
   if (pointInRect([cp centerRect], p))
     {
