@@ -1,3 +1,9 @@
+2013-10-10 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m (selectObjectAtPoint)
+	Vastly improve multiple object selection. Add/remove with shift.
+	If Object is re-selected, don't deselect all to allow group move.
+
 2013-09-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m
