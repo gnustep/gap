@@ -658,36 +658,66 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   id obj;
   NSMutableArray *objs;
   NSUInteger i;
+  GRDrawableObject *hitObj;
 
   objs = [NSMutableArray arrayWithCapacity: 1];
 
+  hitObj = nil;
   for(i = 0; i < [objects count]; i++)
     {
       obj = [objects objectAtIndex: i];
 
-      if([obj objectHitForSelection: p])
-        {
-          if (shiftclick && [[obj editor] isSelected])
-            [[obj editor] unselect];
-          else
-            [[obj editor] select];
-        }
-      else if(!shiftclick)
-	[[obj editor] unselect];
+      if ([obj objectHitForSelection: p])
+        hitObj = obj;
+      else if ([[obj editor] isSelected])
+        [objs addObject: obj];
     }
 
-  for(i = 0; i < [objects count]; i++)
+  /* with shift we add or remove the hit object from the list*/
+  if (shiftclick && hitObj)
     {
-        obj = [objects objectAtIndex: i];
-        if([[obj editor] isGroupSelected])
-            [objs addObject: obj];
+      if ([[hitObj editor] isSelected])
+        {
+          [[hitObj editor] unselect];
+        }
+      else
+        {
+          [[hitObj editor] select];
+          [objs addObject:hitObj];
+        }
     }
-
-    [self setNeedsDisplay: YES];
-
-    if([objs count])
-        [self moveSelectedObjects: objs startingPoint: p];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
+  else
+    {
+      /* if not shift, if the object is already selected
+         we essentially don't change the selection.
+         else, we select it and deselect the rest */
+      if ([[hitObj editor] isSelected])
+        {
+          [objs addObject:hitObj];
+        }
+      else
+        {
+          NSEnumerator *e;
+          GRDrawableObject *o;
+          
+          e = [objs objectEnumerator];
+          while ((o = [e nextObject]))
+            {
+              [[o editor] unselect];
+            }
+          [objs removeAllObjects];
+          if (hitObj)
+            {
+              [[hitObj editor] select];
+              [objs addObject: hitObj];
+            }
+        }
+    }
+  [self setNeedsDisplay: YES];
+  
+  if([objs count])
+    [self moveSelectedObjects: objs startingPoint: p];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"ObjectSelectionChanged" object:self];
 }
 
 - (void)editPathAtPoint:(NSPoint)p
