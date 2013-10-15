@@ -1,10 +1,9 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2010 GNUstep Application Project
+   Copyright (C) 2005-2013 GNUstep Application Project
 
    Author: Riccardo Mottola
-   FreeBSD support by Chris B. Vetter
 
    Created: 2005-06-25 21:06:19 +0200 by multix
    
@@ -224,7 +223,7 @@
     /* info window */
     lifeVal = [batModel lastCapacity]/[batModel designCapacity];
     [lifeGauge setDoubleValue:lifeVal*100];
-    [lifeGaugePercent setStringValue:[NSString stringWithFormat:@"%3.1f%", lifeVal*100]];
+    [lifeGaugePercent setStringValue:[NSString stringWithFormat:@"%3.1f%%", lifeVal*100]];
 
     [battType setStringValue:[batModel batteryType]];
     [manufacturer setStringValue:[batModel manufacturer]];

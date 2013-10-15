@@ -1,3 +1,8 @@
+2013-10-15 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Fix formatting string.
+
 2013-07-24 Riccardo Mottola <rm@gnu.org>
 
 	* BatteryModel-NetBSD.m
