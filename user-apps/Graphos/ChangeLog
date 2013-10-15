@@ -1,3 +1,8 @@
+2013-10-15 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.m
+        Silence warning through initialization.
+
 2013-10-10 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m (selectObjectAtPoint)
