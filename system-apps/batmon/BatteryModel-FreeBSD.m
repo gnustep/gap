@@ -4,6 +4,7 @@
    Copyright (C) 2006-2013 GNUstep Application Project
 
    Author: Riccardo Mottola 
+   FreeBSD support by Chris B. Vetter (initial version)
 
    Created: 2013-07-23 Riccardo Mottola
 
