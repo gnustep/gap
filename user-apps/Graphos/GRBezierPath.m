@@ -572,6 +572,7 @@ static double k = 0.025;
     NSUInteger i;
 
     hitdata.cp = nil;
+    hitdata.t = 0;
     hitdata.p = NSZeroPoint;
 
     r = NSMakeRect((int)pt.x -4, (int)pt.y -4, 8, 8);
