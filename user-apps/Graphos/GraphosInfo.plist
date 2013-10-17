@@ -9,7 +9,7 @@
 	"Rob Burns"
     );
     Copyright = "Copyright (C) 2005-2013";
-    CopyrightDescription = "Released under GPL";
+    CopyrightDescription = "Released under GPL v2+";
     FullVersionID = "0.5";
     NSExecutable = Graphos;
     NSIcon = "graphos_appicon_48.tif";

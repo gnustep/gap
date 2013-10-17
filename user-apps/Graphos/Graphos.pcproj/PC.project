@@ -120,7 +120,7 @@
 	"Rob Burns"
     );
     "PROJECT_COPYRIGHT" = "Copyright (C) 2005-2013";
-    "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
+    "PROJECT_COPYRIGHT_DESC" = "Released under GPL v2+";
     "PROJECT_CREATOR" = "";
     "PROJECT_DESCRIPTION" = "Vector drawing";
     "PROJECT_DOCUMENTTYPES" = (
