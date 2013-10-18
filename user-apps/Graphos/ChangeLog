@@ -1,3 +1,11 @@
+2013-10-18 Riccardo Mottola  <rm@gnu.org>
+
+	* GRCircle.h
+	* GRCircle.m
+	* GRDocView.m
+	* Graphos.h
+	Allow to draw ovals, bump file version, treat old files as circles.
+
 2013-10-15 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m

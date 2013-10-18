@@ -40,6 +40,8 @@
     GRObjectControlPoint *startControlPoint;
     GRObjectControlPoint *endControlPoint;
 
+    BOOL isCircle;
+
     CGFloat rotation;
 }
 
@@ -50,5 +52,7 @@
 - (GRObjectControlPoint *) endControlPoint;
 - (NSRect)bounds;
 - (NSPoint)position;
+- (BOOL)circle;
+- (void)setCircle:(BOOL)flag;
 
 @end

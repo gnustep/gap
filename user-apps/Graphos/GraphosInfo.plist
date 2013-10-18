@@ -2,7 +2,7 @@
     ApplicationDescription = "Vector drawing";
     ApplicationIcon = "graphos_appicon_48.tif";
     ApplicationName = Graphos;
-    ApplicationRelease = "0.5";
+    ApplicationRelease = "0.6";
     Authors = (
 	"Riccardo Mottola",
 	"Enrico Sersale",
@@ -10,7 +10,7 @@
     );
     Copyright = "Copyright (C) 2005-2013";
     CopyrightDescription = "Released under GPL v2+";
-    FullVersionID = "0.5";
+    FullVersionID = "0.6";
     NSExecutable = Graphos;
     NSIcon = "graphos_appicon_48.tif";
     NSMainNibFile = "MainMenu.gorm";

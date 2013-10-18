@@ -51,6 +51,11 @@
 			[[properties objectForKey: @"height"]  floatValue]);
       bounds = GRMakeBounds(pos.x, pos.y, size.width, size.height);
 
+      isCircle = NO;
+      obj = [properties objectForKey: @"circle"];
+      if (obj)      
+	rotation = [obj boolValue];
+
       rotation = 0;
       obj = [properties objectForKey: @"rotation"];
       if (obj)      
@@ -146,6 +151,15 @@
     }
   if (color)
     [props setObject:color forKey:@"fillcolor"];
+
+  /* only add the circle property if we really have it */
+  obj = [description objectForKey: @"circle"];
+  if ([obj isKindOfClass:[NSString class]])
+    {
+      obj = [NSNumber numberWithInt:[obj intValue]];
+      [props setObject:obj forKey:@"circle"];
+    }
+
   
   obj = [description objectForKey: @"stroked"];
   if ([obj isKindOfClass:[NSString class]])
@@ -226,6 +240,9 @@
     dict = [NSMutableDictionary dictionaryWithCapacity: 1];
     [dict setObject: @"circle" forKey: @"type"];
 
+    str = [NSString stringWithFormat: @"%i", isCircle];
+    [dict setObject: str forKey: @"circle"];
+
     str = [NSString stringWithFormat: @"%.3f", pos.x];
     [dict setObject: str forKey: @"posx"];
     str = [NSString stringWithFormat: @"%.3f", pos.y];
@@ -266,6 +283,16 @@
     [dict setObject: str forKey: @"locked"];
 
     return dict;
+}
+
+- (BOOL)circle
+{
+  return isCircle;
+}
+
+- (void)setCircle:(BOOL)flag
+{
+  isCircle = flag;
 }
 
 - (void)setStartAtPoint:(NSPoint)aPoint
@@ -382,7 +409,10 @@
   radius = minLength / 2;
 
   bzp = [NSBezierPath bezierPath];
-  [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
+  if (isCircle)
+    [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
+  else
+    [bzp appendBezierPathWithOvalInRect: bounds];
     
   if(filled)
     {

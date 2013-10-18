@@ -138,7 +138,7 @@
     "PROJECT_GROUP" = "No group avaliable!";
     "PROJECT_MAINTAINER" = "";
     "PROJECT_NAME" = Graphos;
-    "PROJECT_RELEASE" = "0.5";
+    "PROJECT_RELEASE" = "0.6";
     "PROJECT_SUMMARY" = "No summary avaliable!";
     "PROJECT_TYPE" = Application;
     "PROJECT_URL" = "http://gap.nongnu.org/graphos/";
