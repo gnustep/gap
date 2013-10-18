@@ -195,6 +195,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 	      {
 		circle = [[GRCircle alloc] initFromData: objdict
 						 inView: self zoomFactor: zFactor];
+                [circle setCircle:YES];
 		[objects addObject: circle];
 		[circle release];
 	      }
@@ -248,6 +249,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 	      {
 		circle = [[GRCircle alloc] initFromData: objdict
 						 inView: self zoomFactor: zFactor];
+                /* 0.5 and prior only had circles, not ovals */
+                if (version < 0.6)
+                  [circle setCircle:YES];
 		[objects addObject: circle];
 		[circle release];
 	      }
