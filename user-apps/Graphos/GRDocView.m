@@ -40,6 +40,7 @@
 #define STD_ZOOM_INDEX 5
 float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 6};
 
+
 @implementation GRDocView
 
 
@@ -946,6 +947,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSMutableDictionary *propDict;
   NSUInteger i;
   NSUInteger selectedObjects;
+  NSUInteger circleObjNum;
+  NSUInteger boxObjNum;
+  NSUInteger bezObjNum;
   NSUInteger pathObjNum;
   NSUInteger textObjNum;
   NSNumber *num;
@@ -954,6 +958,9 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     return nil;
 
   selectedObjects = 0;
+  circleObjNum = 0;
+  boxObjNum = 0;
+  bezObjNum = 0;
   pathObjNum = 0;
   textObjNum = 0;
   propDict = [NSMutableDictionary dictionaryWithCapacity: 1];
@@ -986,6 +993,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
               [propDict setObject: num forKey: @"miterlimit"];
               num = [NSNumber numberWithFloat: [obj lineWidth]];
               [propDict setObject: num forKey: @"linewidth"];
+              if([obj isKindOfClass: [GRCircle class]])
+                {
+                  circleObjNum++;
+                  num = [NSNumber numberWithBool: [obj circle]];
+                  [propDict setObject: num forKey: @"circle"];
+                }
+              else if([obj isKindOfClass: [GRBox class]])
+                {
+                  boxObjNum++;
+                }
+              else if([obj isKindOfClass: [GRBezierPath class]])
+                {
+                  bezObjNum++;
+                }
             }
           else if([obj isKindOfClass: [GRText class]])
             {
@@ -1634,55 +1655,83 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     [self verifyModifiersOfEvent: theEvent];
 }
 
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
+
+/** respond to key equivalents which are not bound to menu items */
+-(BOOL)performKeyEquivalent: (NSEvent*)theEvent
 {
-    NSString *commchar = [theEvent charactersIgnoringModifiers];
-
-    if([commchar isEqualToString: @"t"]) {
-        [self editSelectedText];
-        return YES;
-    }
-    if([commchar isEqualToString: @"d"]) {
-        return YES;
-    }
-
-    return NO;
-}
-
-- (void)keyDown:(NSEvent *)theEvent
-{
-  unsigned short keyCode;
+  NSString *keyStr;
+  unichar keyCh;
+  unsigned int modifierFlags;
   NSRect vRect, hiddRect;
   NSPoint vPoint;
-  CGFloat hiddRx, hiddRy, hiddRw, hiddRh;
+  CGFloat hiddRx, hiddRy, hiddRw, hiddRh;  
+  
+#ifdef __APPLE__
+  /* Apple is definitively broken here and on all versions tested it returns for the arrow key
+     also a KeyUp event, which it should not, as the Event is specified to be keyDown */
+  if ([theEvent type] == NSKeyUp)
+    return [super performKeyEquivalent:theEvent];
+#endif
 
-    keyCode = [theEvent keyCode];
+  keyCh = 0x0;
+  keyStr = [theEvent characters];
+  if ([keyStr length] > 0)
+    keyCh = [keyStr characterAtIndex:0];
+  modifierFlags = [theEvent modifierFlags];
 
-    if(keyCode == NSDeleteFunctionKey)
+  if (keyCh == NSDeleteFunctionKey || keyCh == NSDeleteCharacter)
     {
-        [self deleteSelectedObjects];
-    } else if(keyCode == NSPageUpFunctionKey)
-    {
-        vRect = [self visibleRect];
-        vPoint = vRect.origin;
-        hiddRx = vPoint.x;
-        hiddRy = vPoint.y + vRect.size.height;
-        hiddRw = vRect.size.width;
-        hiddRh = vRect.size.height;
-        hiddRect = NSMakeRect(hiddRx, hiddRy, hiddRw, hiddRh);
-        [self scrollRectToVisible: hiddRect];
-    } else if(keyCode == NSPageDownFunctionKey)
-    {
-        vRect = [self visibleRect];
-        vPoint = vRect.origin;
-        hiddRx = vPoint.x;
-        hiddRy = vPoint.y - vRect.size.height;
-        hiddRw = vRect.size.width;
-        hiddRh = vRect.size.height;
-        hiddRect = NSMakeRect(hiddRx, hiddRy, hiddRw, hiddRh);
-        [self scrollRectToVisible: hiddRect];
+      [self delete:self];
+      return YES;
     }
+  else if(keyCh == NSPageUpFunctionKey)
+    {
+      vRect = [self visibleRect];
+      vPoint = vRect.origin;
+      hiddRx = vPoint.x;
+      hiddRy = vPoint.y + vRect.size.height;
+      hiddRw = vRect.size.width;
+      hiddRh = vRect.size.height;
+      hiddRect = NSMakeRect(hiddRx, hiddRy, hiddRw, hiddRh);
+      [self scrollRectToVisible: hiddRect];
+      return YES;
+    }
+  else if(keyCh == NSPageDownFunctionKey)
+    {
+      vPoint = vRect.origin;
+      hiddRx = vPoint.x;
+      hiddRy = vPoint.y - vRect.size.height;
+      hiddRw = vRect.size.width;
+      hiddRh = vRect.size.height;
+      hiddRect = NSMakeRect(hiddRx, hiddRy, hiddRw, hiddRh);
+      [self scrollRectToVisible: hiddRect];
+      return YES;
+    }    
+  else if (keyCh == NSLeftArrowFunctionKey)
+    {
+      NSLog(@"arrow left");
+      return YES;
+    }
+  else if (keyCh == NSUpArrowFunctionKey)
+    {
+      NSLog(@"arrow up");
+      return YES;
+    }
+  else if (keyCh == NSRightArrowFunctionKey)
+    {
+      NSLog(@"right left");
+      return YES;
+    }
+  else if (keyCh == NSDownArrowFunctionKey)
+    {
+      NSLog(@"down left");
+      return YES;
+    }
+  else
+    NSLog(@"keyCh %x", keyCh);
+  return [super performKeyEquivalent:theEvent];
 }
+
 
 - (BOOL)acceptsFirstResponder
 {

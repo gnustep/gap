@@ -1,3 +1,8 @@
+2013-10-20 Riccardo Mottola  <rm@gnu.org>
+
+	* GRDocView.m
+	Make page Up/Down keys work again, delete key action registers undo.
+
 2013-10-18 Riccardo Mottola  <rm@gnu.org>
 
 	* GRCircle.h
