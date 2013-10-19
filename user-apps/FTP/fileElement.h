@@ -43,7 +43,9 @@
 - (id)initWithPath:(NSString *)path andAttributes:(NSDictionary *)attribs;
 - (id)initWithLsLine :(char *)line;
 - (NSString *)name;
+- (void)setName: (NSString *)n;
 - (NSString *)path;
+- (void)setPath: (NSString *)p;
 - (NSString *)linkTargetName;
 - (BOOL)isDir;
 - (BOOL)isLink;

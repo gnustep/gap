@@ -1,3 +1,9 @@
+2013-10-19 Riccardo Mottola <rm@gnu.org>
+
+	* fileElement.h
+	* fileElement.m
+	Path and name setters.
+
 2013-07-28 Riccardo Mottola <rm@gnu.org>
 
 	* fileTable.h
