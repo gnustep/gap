@@ -409,7 +409,7 @@ static NSArray *dayWeek;
 													   alpha:0.7];
 
 				str = [[NSMutableAttributedString alloc]
-					initWithString:[NSString stringWithFormat:@"%d",[_date dayOfMonth]]];
+					initWithString:[NSString stringWithFormat:@"%"PRIiPTR,[_date dayOfMonth]]];
 				[str addAttribute:NSForegroundColorAttributeName
 							value:white
 							range:NSMakeRange(0,[str length])];
