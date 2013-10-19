@@ -6,8 +6,8 @@
 // 
 // $Author: buzzdee $
 // $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2013/02/11 10:08:40 $
+// $Revision: 1.5 $
+// $Date: 2013/10/19 15:25:22 $
 
 /* system includes */
 #include <Addresses/Addresses.h>
@@ -425,7 +425,7 @@ int main(int argc, char **argv)
   if(!lbook)
     DiePrintingMessage([NSString stringWithFormat:
 				   @"Error: %@ isn't a valid "
-				 @"AddressBookLocation\n"], -1);
+				 @"AddressBookLocation\n", lbook], -1);
 
   srv = [[AddressBookServer alloc] initWithAddressBook: lbook
 				   readOnlyPassword: roPassword
