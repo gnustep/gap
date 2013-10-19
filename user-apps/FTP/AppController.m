@@ -610,7 +610,6 @@
   [nameGetter setMessage:@"New Folder"];
   
   alertReturn = [nameGetter runAsModal];
-  NSLog(@"returning... %@", [nameGetter name]);
   if (alertReturn == NSAlertDefaultReturn)
     {
       NSString *name;
@@ -643,7 +642,6 @@
   [nameGetter setMessage:@"New Folder"];
   
   alertReturn = [nameGetter runAsModal];
-  NSLog(@"returning... %@", [nameGetter name]);
   if (alertReturn == NSAlertDefaultReturn)
     {
       NSString *name;
@@ -824,7 +822,7 @@
 
     defaults = [NSUserDefaults standardUserDefaults];
     
-    NSLog(@"tag... %d", [[portType selectedCell] tag]);
+
     switch ([[portType selectedCell] tag])
     {
         case 0:
