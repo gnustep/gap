@@ -435,18 +435,37 @@
 /* accessors */
 - (NSString *)name
 {
-  return self->fileName;
+  return fileName;
+}
+
+/* sets the file name and updates the full path */
+- (void)setName: (NSString *)n
+{
+  NSString *basePath;
+
+  [fileName release];
+  fileName = [n retain];
+  basePath = [filePath stringByDeletingLastPathComponent];
+  filePath = [[basePath stringByAppendingPathComponent: fileName] retain];
 }
 
 - (NSString *)path
 {
-  
-  return self->filePath;
+  return filePath;
+}
+
+/* sets the full path and updates the name */
+- (void)setPath: (NSString *)p
+{
+  [filePath release];
+  [fileName release];
+  filePath = [p retain];
+  fileName = [[filePath lastPathComponent] retain];
 }
 
 - (NSString *)linkTargetName
 {
-  return self->linkTargetName;
+  return linkTargetName;
 }
 
 - (BOOL)isDir
