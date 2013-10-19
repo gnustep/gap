@@ -614,19 +614,22 @@
     {
       NSString *name;
       NSString *fullPath;
-      FileElement *fileEl;
-      NSDictionary *attrs;
       
       name = [nameGetter name];
       fullPath = [[local workingDir] stringByAppendingPathComponent:name];
-      [local createNewDir:fullPath];
-      attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                              NSFileTypeDirectory, NSFileType,
-                            NULL];
-      fileEl = [[FileElement alloc] initWithPath:fullPath andAttributes:attrs];
-      [localTableData addObject:fileEl];
-      [fileEl release];
-      [localView reloadData];
+      if ([local createNewDir:fullPath])
+        {
+          FileElement *fileEl;
+          NSDictionary *attrs;
+
+          attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  NSFileTypeDirectory, NSFileType,
+                                NULL];
+          fileEl = [[FileElement alloc] initWithPath:fullPath andAttributes:attrs];
+          [localTableData addObject:fileEl];
+          [fileEl release];
+          [localView reloadData];
+        }
     }
   [nameGetter release];
 }
@@ -649,7 +652,19 @@
       
       name = [nameGetter name];
       fullPath = [[ftp workingDir] stringByAppendingPathComponent:name];
-      [ftp createNewDir:fullPath];
+      if ([ftp createNewDir:fullPath])
+        {
+          FileElement *fileEl;
+          NSDictionary *attrs;
+
+          attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  NSFileTypeDirectory, NSFileType,
+                                NULL];
+          fileEl = [[FileElement alloc] initWithPath:fullPath andAttributes:attrs];
+          [remoteTableData addObject:fileEl];
+          [fileEl release];
+          [remoteView reloadData];
+        }
     }
   [nameGetter release];
 }
