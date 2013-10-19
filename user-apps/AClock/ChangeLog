@@ -1,4 +1,10 @@
-2011-07-01 Sebastian Reitenbach
+2012-10-19 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+	* AppController.m
+	* Clock.m
+	fix format strings for NSInteger
+
+2011-07-01 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* AppController.m
 	* Clock.m

@@ -134,7 +134,8 @@ static int rounds_done = 0;	// how often a sound was played already
 {
 	[_clock setNumberType:[sender indexOfSelectedItem]];
 	[bigClock setNumberType:[sender indexOfSelectedItem]];
-	[defaults setObject:[NSString stringWithFormat:@"%d",[sender indexOfSelectedItem]] forKey:@"NumberType"];
+	[defaults setObject:[NSString stringWithFormat:@"%"PRIiPTR,
+		[sender indexOfSelectedItem]] forKey:@"NumberType"];
 	[defaults synchronize];
 }
 
