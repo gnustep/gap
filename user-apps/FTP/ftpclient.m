@@ -1184,7 +1184,6 @@ int getChar(streamStruct* ss)
         else if (ch == '\n' && state == GOTR)
           { 
             buff[readBytes] = '\0';
-            fprintf(stderr, "%s\n", buff);
             [self logIt:[NSString stringWithCString:buff]];
             state = READ; /* reset the state for a new line */
 	    transferSize += readBytes;

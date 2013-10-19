@@ -1,5 +1,10 @@
 2013-10-19 Riccardo Mottola <rm@gnu.org>
 
+	* ftpclient.m
+	Cleanup debug logs.
+
+2013-10-19 Riccardo Mottola <rm@gnu.org>
+
 	* fileElement.h
 	* fileElement.m
 	Path and name setters.
