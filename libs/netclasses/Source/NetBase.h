@@ -28,6 +28,29 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#ifndef GNUSTEP
+#define CREATE_AUTORELEASE_POOL(X) \
+NSAutoreleasePool *(X) = [NSAutoreleasePool new]
+
+#define AUTORELEASE(object)      [object autorelease]
+#define RELEASE(object)          [object release]
+#define RETAIN(object)           [object retain]
+#define DESTROY(object)          ({ \
+  if (object) \
+    { \
+      id __o = object; \
+        object = nil; \
+          [__o release]; \
+    } \
+})
+
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4) && !defined(NSUInteger)
+#define NSUInteger unsigned
+#define NSInteger int
+#endif
+
+#endif
+
 @class NSData, NSNumber, NSMutableDictionary, NSDictionary, NSArray;
 @class NSMutableArray, NSString;
 
