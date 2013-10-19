@@ -4,10 +4,10 @@
 // 
 // VCF Content Viewer for GWorkspace
 // 
-// $Author: rmottola $
+// $Author: buzzdee $
 // $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2009/09/29 21:20:24 $
+// $Revision: 1.4 $
+// $Date: 2013/10/19 15:25:22 $
 
 #import "VCFViewer.h"
 
@@ -179,7 +179,7 @@
 	[ifb setEnabled: YES];
 	[dfb setEnabled: YES];
 	[lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
-				       currentPerson+1, [people count]]];
+				       currentPerson+1, (int)[people count]]];
       }
     else
       {
@@ -187,7 +187,7 @@
 	[ifb setEnabled: NO];
 	[dfb setEnabled: NO];
 	[lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
-				       currentPerson+1, [people count]]];
+				       currentPerson+1, (int)[people count]]];
       }
 
     if([people count] > 1)
@@ -228,7 +228,7 @@
   else
     [pv setPerson: nil];
   [lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
-				 currentPerson+1, [people count]]];
+				 currentPerson+1, (int)[people count]]];
 }
 
 - (void) previousPerson: (id) sender
@@ -243,7 +243,7 @@
     [pv setPerson: nil];
   
   [lbl setStringValue: [NSString stringWithFormat: @"%d/%d",
-				 currentPerson+1, [people count]]];
+				 currentPerson+1, (int)[people count]]];
 }
 
 - (void) increaseFontSize: (id) sender

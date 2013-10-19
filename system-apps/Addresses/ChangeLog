@@ -1,3 +1,10 @@
+2013-10-19 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	
+	* Goodies/VCFViewer/VCFViewer.m
+	Cast count to ints to please the format string
+	* Goodies/adserver/adserver.m
+	add missing parameter to format string
+
 2013-09-03 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Addresses/ADRecord.m
