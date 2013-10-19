@@ -128,9 +128,10 @@
 
   if ([fm movePath:[file path] toPath:newFullPath handler:nil] == NO)
     {
-      NSLog(@"Error during local file rnaming");
+      NSLog(@"Error during local file renaming");
       return NO;
     }
+  [file setPath:newFullPath];
   return YES;
 }
 

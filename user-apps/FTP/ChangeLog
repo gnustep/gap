@@ -1,5 +1,14 @@
 2013-10-19 Riccardo Mottola <rm@gnu.org>
 
+	* localclient.m
+	* ftpclient.m
+	Update file after renaming.
+
+	* AppController.m
+	Add created folder to remote directory listing.
+
+2013-10-19 Riccardo Mottola <rm@gnu.org>
+
 	* ftpclient.m
 	Cleanup debug logs.
 
