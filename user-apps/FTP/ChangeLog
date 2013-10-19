@@ -197,6 +197,10 @@
 
 	* fileTable.h
 	Fix memory leak.
+2013-02-12 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Fix RNFR and RNTO not to append CRLF twice.
 
 2013-02-12 Riccardo Mottola <rm@gnu.org>
 

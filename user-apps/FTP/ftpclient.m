@@ -1220,7 +1220,7 @@ int getChar(streamStruct* ss)
   NSMutableArray *reply;
   int            replyCode;
 
-  commandStr = [NSString stringWithFormat:@"RNFR %@\r\n", [file name]];
+  commandStr = [NSString stringWithFormat:@"RNFR %@", [file name]];
   [self writeLine:commandStr];
   replyCode = [self readReply:&reply];
   if (replyCode != 350)
@@ -1229,7 +1229,7 @@ int getChar(streamStruct* ss)
       return NO;
     }
 
-  commandStr = [NSString stringWithFormat:@"RNTO %@\r\n", name];
+  commandStr = [NSString stringWithFormat:@"RNTO %@", name];
   [self writeLine:commandStr];
   replyCode = [self readReply:&reply];
 
