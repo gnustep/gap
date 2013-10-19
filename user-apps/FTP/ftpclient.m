@@ -1234,7 +1234,10 @@ int getChar(streamStruct* ss)
   replyCode = [self readReply:&reply];
 
   if (replyCode == 250)
-    return YES;
+    {
+      [file setName:name];
+      return YES;
+    }
 
   return NO;
 }
