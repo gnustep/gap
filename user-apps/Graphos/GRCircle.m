@@ -412,7 +412,7 @@
   if (isCircle)
     [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
   else
-    [bzp appendBezierPathWithOvalInRect: bounds];
+    [bzp appendBezierPathWithOvalInRect: boundsZ];
     
   if(filled)
     {
