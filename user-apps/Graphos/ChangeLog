@@ -1,3 +1,8 @@
+2013-10-31 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Set only properties which are really present.
+
 2013-10-24 Riccardo Mottola  <rm@gnu.org>
 
 	* GRDocView.m

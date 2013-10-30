@@ -1055,6 +1055,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   for(i = 0; i < [objects count]; i++)
     {
+      NSNumber *num;
+
       obj = [objects objectAtIndex: i];
       if([[obj editor] isSelected])
         {
@@ -1062,18 +1064,41 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
       
           if([obj isKindOfClass: [GRBezierPath class]] || [obj isKindOfClass: [GRBox class]] || [obj isKindOfClass: [GRCircle class]])
             {
-              [obj setFlat: [[properties objectForKey: @"flatness"] floatValue]];
-              [obj setLineJoin: [[properties objectForKey: @"linejoin"] intValue]];
-              [obj setLineCap: [[properties objectForKey: @"linecap"] intValue]];
-              [obj setMiterLimit: [[properties objectForKey: @"miterlimit"] floatValue]];
-              [obj setLineWidth: [[properties objectForKey: @"linewidth"] floatValue]];
+              num = [properties objectForKey: @"flatness"];
+              if (num)
+                [obj setFlat: [num floatValue]];
+
+              num = [properties objectForKey: @"linejoin"];
+              if (num)
+                [obj setLineJoin: [num intValue]];
+
+              num = [properties objectForKey: @"linecap"];
+              if (num)
+                [obj setLineCap: [num intValue]];
+
+              num = [properties objectForKey: @"miterlimit"];
+              if (num)
+                [obj setMiterLimit: [num floatValue]];
+
+              num = [properties objectForKey: @"linewidth"];
+              if (num)
+                [obj setLineWidth: [num floatValue]];
             }
-          [obj setStroked: [[properties objectForKey: @"stroked"] boolValue]];
+          num = [properties objectForKey: @"stroked"];
+          if (num)
+            [obj setStroked: [num boolValue]];
+
           newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
-          [obj setStrokeColor: newColor];
-          [obj setFilled: [[properties objectForKey: @"filled"] boolValue]];
+          if (newColor)
+            [obj setStrokeColor: newColor];
+
+          num = [properties objectForKey: @"filled"];
+          if (num)
+            [obj setFilled: [num boolValue]];
+
           newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
-          [obj setFillColor: newColor];
+          if (newColor)
+            [obj setFillColor: newColor];
         }
     }
   [self setNeedsDisplay: YES];
