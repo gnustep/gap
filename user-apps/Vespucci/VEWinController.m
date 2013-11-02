@@ -189,7 +189,12 @@
 
 - (NSString *)loadedUrl
 {
-    return [urlField stringValue];
+  NSString *s;
+  
+  s = [urlField stringValue];
+  if (!s || [s length] == 0)
+    s = nil;
+  return s;
 }
 
 - (NSString *)loadedPageTitle
