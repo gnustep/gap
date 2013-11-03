@@ -45,7 +45,14 @@
             }; 
             CLASS = CalcController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {displayField = id; }; 
+            OUTLETS = {
+                buttBksp = NSButton; 
+                buttExp = NSButton; 
+                buttExp10 = NSButton; 
+                buttSqr = NSButton; 
+                buttSqrt = NSButton; 
+                displayField = NSTextField; 
+            }; 
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
