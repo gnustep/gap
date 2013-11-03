@@ -3,7 +3,7 @@
  file part of Stepulator
  a RPN calculator for *step
 
- Riccardo Mottola, 2003-2004 <rmottola@users.sf.net>
+ Riccardo Mottola, 2003-2013 <rm@gnu.org>
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -39,6 +39,11 @@
 
 - (void)awakeFromNib
 {
+    [buttSqrt setImage:[NSImage imageNamed:@"sqrt"]];
+    [buttSqr setImage:[NSImage imageNamed:@"sqr"]];
+    [buttBksp setImage:[NSImage imageNamed:@"back_arrow"]];
+    [buttExp setImage:[NSImage imageNamed:@"ex"]];
+    [buttExp10 setImage:[NSImage imageNamed:@"10x"]];
     [displayField setStringValue:@"0"];
 }
 

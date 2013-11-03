@@ -3,7 +3,7 @@
  file part of Stepulator
  a RPN calculator for *step
 
- Riccardo Mottola, 2003-2004 <rmottola@users.sf.net>
+ Riccardo Mottola, 2003-2013 <rmottola@users.sf.net>
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -28,14 +28,20 @@
 
 @interface CalcController : NSObject
 {
-    IBOutlet NSTextField *displayField;
-    CalcModel *model;
-    BOOL hasDot;
-    BOOL hasE;
-    BOOL isNew;
-    BOOL isEditing;
-    BOOL fromEnter;
-    NSMutableString *displayString;
+  IBOutlet NSTextField *displayField;
+  IBOutlet NSButton *buttSqrt;
+  IBOutlet NSButton *buttSqr;
+  IBOutlet NSButton *buttExp;
+  IBOutlet NSButton *buttExp10;
+  IBOutlet NSButton *buttBksp;
+
+  CalcModel *model;
+  BOOL hasDot;
+  BOOL hasE;
+  BOOL isNew;
+  BOOL isEditing;
+  BOOL fromEnter;
+  NSMutableString *displayString;
 }
 - (void)initInput;
 - (void)doFButton;
