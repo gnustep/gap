@@ -3,10 +3,9 @@ STEPULATOR
 An RPN Calculator
 
 currently for MacOS X and GNUstep!
-(a port for Motif and C++ is under way, called "moxrpn")
 
 By Riccardo Mottola
-Email: rmottola@users.sourceforge.net
+Email: rm@gnu.org
 
 
 TODO & KNOWN BUGS
