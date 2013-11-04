@@ -1,5 +1,10 @@
 2013-11-04 Riccardo Mottola <rm@gnu.org>
 
+	* GRDocView.m
+	Use deep copy to save undo for Path editing.
+
+2013-11-04 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierControlPoint.h
 	* GRBezierControlPoint.m
 	Initial support for supporting non-symmetrical handles. Disabled.
