@@ -33,15 +33,16 @@
         forPath:(GRBezierPath *)aPath
        zoomFactor:(CGFloat)zf
 {
-    self = [super init];
-    if(self)
+  self = [super init];
+  if(self)
     {
-        path = aPath;
-        zmFactor = zf;
-        bzHandle.center = aPoint;
-        bzHandle.centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
-        [self calculateBezierHandles: aPoint];
-        isSelect = NO;
+      path = aPath;
+      zmFactor = zf;
+      bzHandle.center = aPoint;
+      bzHandle.centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
+      [self calculateBezierHandles: aPoint];
+      isSelect = NO;
+      symmetricalHandles = YES;
     }
     return self;
 }
@@ -95,45 +96,51 @@
 
 - (void)moveBezierHandleToPosition:(NSPoint)newp oldPosition:(NSPoint)oldp
 {
-    GRBezierControlPoint *mtopoint, *ponpoint = nil;
-    double distx, disty;
+  GRBezierControlPoint *mtopoint, *ponpoint = nil;
+  double distx, disty;
 
-    mtopoint = [path firstPoint];
-    ponpoint = [path pointOnPoint: self];
-    if(ponpoint && [(GRPathEditor *)[path editor] isDone] && (self == mtopoint))
-        [ponpoint moveBezierHandleToPosition: newp oldPosition: oldp];
+  mtopoint = [path firstPoint];
+  ponpoint = [path pointOnPoint: self];
+  if(ponpoint && [(GRPathEditor *)[path editor] isDone] && (self == mtopoint))
+    [ponpoint moveBezierHandleToPosition: newp oldPosition: oldp];
 
-    if(pointInRect(bzHandle.firstHandleRect, oldp)) {
-        bzHandle.firstHandle = newp;
-        distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
-        disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
-        if(bzHandle.firstHandle.x > bzHandle.center.x)
-            bzHandle.secondHandle.x = bzHandle.center.x - distx;
-        else
-            bzHandle.secondHandle.x = bzHandle.center.x + distx;
-        if(bzHandle.firstHandle.y > bzHandle.center.y)
-            bzHandle.secondHandle.y = bzHandle.center.y - disty;
-        else
-            bzHandle.secondHandle.y = bzHandle.center.y + disty;
-    }
-
-    if(pointInRect(bzHandle.secondHandleRect, oldp))
+  if(pointInRect(bzHandle.firstHandleRect, oldp))
     {
-        bzHandle.secondHandle = newp;
-        distx = grmax(bzHandle.secondHandle.x, bzHandle.center.x) - grmin(bzHandle.secondHandle.x, bzHandle.center.x);
-        disty = grmax(bzHandle.secondHandle.y, bzHandle.center.y) - grmin(bzHandle.secondHandle.y, bzHandle.center.y);
-        if(bzHandle.secondHandle.x > bzHandle.center.x)
-            bzHandle.firstHandle.x = bzHandle.center.x - distx;
-        else
-            bzHandle.firstHandle.x = bzHandle.center.x + distx;
-        if(bzHandle.secondHandle.y > bzHandle.center.y)
-            bzHandle.firstHandle.y = bzHandle.center.y - disty;
-        else
-            bzHandle.firstHandle.y = bzHandle.center.y + disty;
+      bzHandle.firstHandle = newp;
+      if (symmetricalHandles)
+	{
+	  distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
+	  disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
+	  if(bzHandle.firstHandle.x > bzHandle.center.x)
+	    bzHandle.secondHandle.x = bzHandle.center.x - distx;
+	  else
+	    bzHandle.secondHandle.x = bzHandle.center.x + distx;
+	  if(bzHandle.firstHandle.y > bzHandle.center.y)
+	    bzHandle.secondHandle.y = bzHandle.center.y - disty;
+	  else
+	    bzHandle.secondHandle.y = bzHandle.center.y + disty;
+	}
+    }
+  else if(pointInRect(bzHandle.secondHandleRect, oldp))
+    {
+      bzHandle.secondHandle = newp;
+      if (symmetricalHandles)
+	{
+	  distx = grmax(bzHandle.secondHandle.x, bzHandle.center.x) - grmin(bzHandle.secondHandle.x, bzHandle.center.x);
+	  disty = grmax(bzHandle.secondHandle.y, bzHandle.center.y) - grmin(bzHandle.secondHandle.y, bzHandle.center.y);
+	  if(bzHandle.secondHandle.x > bzHandle.center.x)
+	    bzHandle.firstHandle.x = bzHandle.center.x - distx;
+	  else
+	    bzHandle.firstHandle.x = bzHandle.center.x + distx;
+	  if(bzHandle.secondHandle.y > bzHandle.center.y)
+	    bzHandle.firstHandle.y = bzHandle.center.y - disty;
+	  else
+	    bzHandle.firstHandle.y = bzHandle.center.y + disty;
+	}
     }
 
-    bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
-    bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
+  bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
+  bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
 }
 
 - (void)drawControlAsSelected: (BOOL)sel
