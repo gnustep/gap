@@ -736,7 +736,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
   [uMgr setActionName:@"Edit Path"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
 
   /* we look for a path that is selected and process editing
      we no longer auto-select the object for editing though, nor automatically unselect the editing of the object */
@@ -780,15 +780,15 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUInteger i;
   NSUndoManager *uMgr;
     
-    uMgr = [self undoManager];
-    /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-    [uMgr setActionName:@"Edit Text"];
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Edit Text"];
     
-    [self saveCurrentObjectsDeep];
+  [self saveCurrentObjectsDeep];
 
-    for(i = 0; i < [objects count]; i++)
-        [[[objects objectAtIndex: i] editor] unselect];
+  for(i = 0; i < [objects count]; i++)
+    [[[objects objectAtIndex: i] editor] unselect];
 
     for(i = 0; i < [objects count]; i++)
     {
