@@ -40,8 +40,9 @@ typedef struct
 
 @interface GRBezierControlPoint : GRObjectControlPoint
 {
-    GRBezierPath *path;
-    GRBezierHandle bzHandle;
+  GRBezierPath *path;
+  GRBezierHandle bzHandle;
+  BOOL symmetricalHandles;
 }
 
 - (id)initAtPoint:(NSPoint)aPoint
