@@ -52,9 +52,6 @@ typedef struct
 - (GRBezierControlPoint *)pointOnPoint:(GRBezierControlPoint *)aPoint;
 - (void)confirmNewCurve;
 
-- (void)unselectOtherControls:(GRBezierControlPoint *)cp;
-
-
 - (hitData)hitDataOfPathSegmentOwningPoint:(NSPoint)pt;
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p;
