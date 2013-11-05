@@ -732,23 +732,6 @@ static double k = 0.025;
 }
 
 
-
-
-- (void)unselectOtherControls:(GRBezierControlPoint *)cp
-{
-  GRBezierControlPoint *ctrlp;
-  NSUInteger i;
-
-  currentPoint = cp;
-  for(i = 0; i < [controlPoints count]; i++)
-    {
-      ctrlp = [controlPoints objectAtIndex: i];
-      if(ctrlp != cp)
-        [ctrlp unselect];
-    }
-}
-
-
 - (void)draw
 {
   GRBezierControlPoint *cp;
