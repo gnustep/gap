@@ -246,6 +246,24 @@
   [super selectForEditing];
 }
 
+
+- (NSArray *)selectedControlPoints
+{
+  NSUInteger i;
+  NSMutableArray *points;
+
+  points = [[NSMutableArray alloc] initWithCapacity:1];
+  for(i = 0; i < [[(GRBezierPath *)object controlPoints] count]; i++)
+    {
+      GRBezierControlPoint *cp;
+      cp = [[(GRBezierPath *)object controlPoints] objectAtIndex: i];
+
+      if ([cp isSelect])
+        [points addObject:cp];
+    }
+  return [points autorelease];
+}
+
 - (void)unselect
 {
   NSUInteger i;

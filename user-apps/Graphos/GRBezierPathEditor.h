@@ -35,6 +35,8 @@
   float zmFactor;
 }
 
+- (NSArray *)selectedControlPoints;
+
 - (void)unselectOtherControls:(GRBezierControlPoint *)cp;
 
 - (NSPoint)moveBezierHandleAtPoint:(NSPoint)p;
