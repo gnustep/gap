@@ -106,6 +106,9 @@
 
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos;
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
+- (void)changePointsOfCurrentPathToSymmetric:(id)sender;
+- (void)changePointsOfCurrentPathToCusp:(id)sender;
+
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 
 - (NSDictionary *)selectionProperties;

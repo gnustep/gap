@@ -24,6 +24,7 @@
 
 #import "GRDocView.h"
 #import "Graphos.h"
+#import "GRDrawableObject.h"
 #import "GRFunctions.h"
 #import "GRBezierPath.h"
 #import "GRBox.h"
@@ -35,6 +36,8 @@
 #import "GRPropsEditor.h"
 
 #define UNDO_ACTION_OBJPROPS @"Change Object Properties"
+#define UNDO_ACTION_CP_SYMMETRIC @"Change Point to Symmetric"
+#define UNDO_ACTION_CP_CUSP @"Change Point to Cusp"
 
 #define ZOOM_FACTORS 13
 #define STD_ZOOM_INDEX 5
@@ -922,6 +925,88 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   return YES;
 }
 
+- (void)changePointsOfCurrentPathToSymmetric:(id)sender
+{
+  NSUndoManager *uMgr;
+  NSUInteger i;
+  NSArray *points;
+  GRBezierPath *path;
+
+  path = nil;
+  for(i = 0; i < [objects count]; i++)
+    {
+      GRDrawableObject *obj;
+      obj = [objects objectAtIndex: i];
+      
+      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+        {
+          path = (GRBezierPath *)obj;
+        }
+    }
+  
+  if (!path)
+    return;
+
+  points = [(GRBezierPathEditor *)[path editor] selectedControlPoints];
+  if (!points || [points count] == 0)
+    return;
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_SYMMETRIC] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [uMgr setActionName: UNDO_ACTION_CP_SYMMETRIC];
+    }
+
+  for (i = 0; i < [points count]; i++)
+    {
+      [(GRBezierControlPoint *)[points objectAtIndex: i] setSymmetricalHandles:YES];
+    }
+}
+
+- (void)changePointsOfCurrentPathToCusp:(id)sender
+{
+  NSUndoManager *uMgr;
+  NSUInteger i;
+  NSArray *points;
+  GRBezierPath *path;
+
+  path = nil;
+  for(i = 0; i < [objects count]; i++)
+    {
+      GRDrawableObject *obj;
+      obj = [objects objectAtIndex: i];
+      
+      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+        {
+          path = (GRBezierPath *)obj;
+        }
+    }
+  
+  if (!path)
+    return;
+
+  points = [(GRBezierPathEditor *)[path editor] selectedControlPoints];
+  if (!points || [points count] == 0)
+    return;
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_CUSP] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [uMgr setActionName: UNDO_ACTION_CP_CUSP];
+    }
+
+  for (i = 0; i < [points count]; i++)
+    {
+      [(GRBezierControlPoint *)[points objectAtIndex: i] setSymmetricalHandles:NO];
+    }
+}
+
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
 {
   id obj;
@@ -1756,6 +1841,62 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   else
     NSLog(@"keyCh %x", keyCh);
   return [super performKeyEquivalent:theEvent];
+}
+
+/* override the menu for special context menus
+
+   While editing a path, display the handle options
+ */
+- (NSMenu *) menuForEvent: (NSEvent*)theEvent
+{
+  if ([[NSApp delegate] currentToolType] == whitearrowtool)
+    {
+      NSUInteger i;
+      NSUInteger selectedPaths;
+      GRBezierPath *path;
+      
+      selectedPaths = 0;
+      path = nil;
+      for(i = 0; i < [objects count]; i++)
+        {
+          GRDrawableObject *obj;
+          obj = [objects objectAtIndex: i];
+          
+          if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+            {
+              selectedPaths++;
+              path = (GRBezierPath *)obj;
+            }
+        }
+
+      if (selectedPaths == 1)
+        {
+          NSMenu *menu;
+          NSMenuItem *menuItem;
+          
+          
+          menu = [[NSMenu alloc] initWithTitle: NSLocalizedString(@"Handles", @"")];
+          
+          menuItem = [[NSMenuItem alloc] init];
+          [menuItem setTitle: NSLocalizedString(@"Symmetric", @"")];
+          [menuItem setTarget: self];      
+          [menuItem setAction: @selector(changePointsOfCurrentPathToSymmetric:)];     
+          [menu addItem: menuItem];
+          [menuItem release];
+          
+          menuItem = [[NSMenuItem alloc] init];
+          [menuItem setTitle: NSLocalizedString(@"Cusp", @"")];
+          [menu addItem: menuItem];
+          [menuItem setTarget: self];      
+          [menuItem setAction: @selector(changePointsOfCurrentPathToCusp:)];     
+          [menuItem release];
+          
+          [menu autorelease];
+          return menu;
+        }
+    }
+
+  return [super menuForEvent: theEvent]; 
 }
 
 
