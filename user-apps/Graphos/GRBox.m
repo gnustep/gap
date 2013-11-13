@@ -194,7 +194,12 @@
 
     objCopy->startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zmFactor];
     objCopy->endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zmFactor];
-    
+    objCopy->pos = NSMakePoint(pos.x, pos.y);
+    objCopy->size = NSMakeSize(size.width, size.height);
+    objCopy->bounds = NSMakeRect(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height);
+    objCopy->boundsZ = NSMakeRect(boundsZ.origin.x, boundsZ.origin.y, boundsZ.size.width, boundsZ.size.height);
+    objCopy->rotation = rotation;
+
     return objCopy;
 }
 

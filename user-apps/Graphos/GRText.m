@@ -226,6 +226,17 @@
   
   objCopy->str = [str copy];
   objCopy->font = [font copy];
+
+  objCopy->pos = NSMakePoint(pos.x, pos.y);
+  objCopy->size = NSMakeSize(size.width, size.height);
+  objCopy->bounds = NSMakeRect(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height);
+  objCopy->rotation = rotation;
+  objCopy->fsize = fsize;
+  objCopy->align = align;
+  objCopy->parspace = parspace;
+  objCopy->scalex = scalex;
+  objCopy->scaley = scaley;
+  objCopy->selRect = NSMakeRect(selRect.origin.x, selRect.origin.y, selRect.size.width, selRect.size.height);
   
   return objCopy;
 }

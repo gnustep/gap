@@ -48,7 +48,12 @@
 {
     GRObjectControlPoint *objCopy;
 
-    objCopy = (GRObjectControlPoint *)NSCopyObject(self, 0, zone);
+    objCopy = [[[self class] allocWithZone:zone] init];
+    objCopy->isActiveHandle = isActiveHandle;
+    objCopy->isSelect = isSelect;
+    objCopy->center = NSMakePoint (center.x, center.y);
+    objCopy->centerRect = NSMakeRect (centerRect.origin.x, centerRect.origin.y, centerRect.size.width, centerRect.size.height);
+    objCopy->zmFactor = zmFactor;
 
     return objCopy;
 }

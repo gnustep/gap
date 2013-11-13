@@ -108,20 +108,27 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    GRDrawableObject *objCopy;
-    GRObjectEditor *editorCopy;
+  GRDrawableObject *objCopy;
+  GRObjectEditor *editorCopy;
 
-    objCopy = (GRDrawableObject *)NSCopyObject(self, 0, zone);
-    editorCopy = [[self editor] copy];
-    [editorCopy setObject: objCopy];
-    
-    objCopy->docView = [self view];
-    objCopy->editor = editorCopy;
+  objCopy = [[[self class] allocWithZone:zone] init];
 
-    objCopy->strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-    objCopy->fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+  objCopy->visible = visible;
+  objCopy->locked = locked;
+  objCopy->zmFactor = zmFactor;
+  objCopy->stroked = stroked;
+  objCopy->filled = filled;
     
-    return objCopy;
+  editorCopy = [[self editor] copy];
+  [editorCopy setObject: objCopy];
+    
+  objCopy->docView = [self view];
+  objCopy->editor = editorCopy;
+
+  objCopy->strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+  objCopy->fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+    
+  return objCopy;
 }
 
 - (BOOL)objectHitForSelection:(NSPoint)p

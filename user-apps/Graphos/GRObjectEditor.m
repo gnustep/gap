@@ -47,7 +47,12 @@
 {
     GRObjectEditor *objCopy;
 
-    objCopy = (GRObjectEditor *)NSCopyObject(self, 0, zone);
+    objCopy = [[[self class] allocWithZone:zone] init];
+    objCopy->groupSelected = groupSelected;
+    objCopy->editSelected = editSelected;
+    objCopy->isDone = isDone;
+    objCopy->isValid = isValid;
+
     objCopy->object = nil;
     
     return objCopy;
