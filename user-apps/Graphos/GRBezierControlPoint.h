@@ -60,6 +60,8 @@ typedef struct
 - (void)unselect;
 - (BOOL)isSelect;
 - (BOOL)isActiveHandle;
+- (BOOL)symmetricalHandles;
+- (void)setSymmetricalHandles:(BOOL)flag;
 
 @end
 
