@@ -57,6 +57,7 @@
   
   objCopy->myWindow = [myWindow retain];
   objCopy->myView = nil;
+  objCopy->isSelect = isSelect;
   
   return objCopy;
 }

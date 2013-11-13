@@ -52,6 +52,18 @@
     [super dealloc];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  GRBezierControlPoint *objCopy;
+
+  objCopy = [super copyWithZone: zone];
+  objCopy->symmetricalHandles = symmetricalHandles;
+  objCopy->path = path;
+  objCopy->bzHandle = bzHandle;
+
+  return objCopy;
+}
+
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePos
 {
     double distx, disty;
@@ -60,17 +72,19 @@
     bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
 
     distx = grmax(bzHandle.firstHandle.x, bzHandle.center.x) - grmin(bzHandle.firstHandle.x, bzHandle.center.x);
-    if(bzHandle.firstHandle.x > bzHandle.center.x)
-        bzHandle.secondHandle.x = bzHandle.center.x - distx;
-    else
-        bzHandle.secondHandle.x = bzHandle.center.x + distx;
-
     disty = grmax(bzHandle.firstHandle.y, bzHandle.center.y) - grmin(bzHandle.firstHandle.y, bzHandle.center.y);
-    if(bzHandle.firstHandle.y > bzHandle.center.y)
-        bzHandle.secondHandle.y = bzHandle.center.y - disty;
-    else
-        bzHandle.secondHandle.y = bzHandle.center.y + disty;
-
+    if (symmetricalHandles)
+      {
+        if(bzHandle.firstHandle.x > bzHandle.center.x)
+          bzHandle.secondHandle.x = bzHandle.center.x - distx;
+        else
+          bzHandle.secondHandle.x = bzHandle.center.x + distx;
+        
+        if(bzHandle.firstHandle.y > bzHandle.center.y)
+          bzHandle.secondHandle.y = bzHandle.center.y - disty;
+        else
+          bzHandle.secondHandle.y = bzHandle.center.y + disty;
+      }
     bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
 
     if(distx || disty)

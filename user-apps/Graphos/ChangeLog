@@ -1,5 +1,19 @@
 2013-11-13 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierControlPoint.m
+	* GRBezierPath.m
+	* GRBox.m
+	* GRCircle.m
+	* GRDrawableObject.m
+	* GRObjectControlPoint.h
+	* GRObjectControlPoint.m
+	* GRObjectEditor.m
+	* GRText.m
+	* GRTextEditor.m
+	Reimplement copy without NSCopyObject.
+
+2013-11-13 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierPathEditor.h
 	* GRBezierPathEditor.m
 	selected control points accessor.

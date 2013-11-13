@@ -292,7 +292,7 @@ static double k = 0.025;
     }
   
   objCopy->controlPoints = cpsCopy;
-  
+  objCopy->calculatingHandles = calculatingHandles;
   return objCopy;
 }
 

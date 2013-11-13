@@ -34,7 +34,7 @@
 @class GRBoxEditor;
 
 
-@interface GRObjectControlPoint : NSObject
+@interface GRObjectControlPoint : NSObject <NSCopying>
 {
   BOOL isActiveHandle;
   BOOL isSelect;
