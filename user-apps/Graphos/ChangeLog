@@ -8,6 +8,10 @@
 	* GRBezierControlPoint.m
 	Symmetrical setter.
 
+	* GRDocView.h
+	* GRDocView.m
+	Context-menu for changing control point types.
+
 2013-11-05 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.h (unselectOtherControls)
