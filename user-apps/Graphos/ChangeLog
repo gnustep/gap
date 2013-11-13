@@ -1,3 +1,13 @@
+2013-11-13 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPathEditor.h
+	* GRBezierPathEditor.m
+	selected control points accessor.
+
+	* GRBezierControlPoint.h
+	* GRBezierControlPoint.m
+	Symmetrical setter.
+
 2013-11-05 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.h (unselectOtherControls)

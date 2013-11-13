@@ -239,17 +239,27 @@
 
 - (void)unselect
 {
-    isSelect = NO;
+  isSelect = NO;
 }
 
 - (BOOL)isSelect
 {
-    return isSelect;
+  return isSelect;
 }
 
 - (BOOL)isActiveHandle
 {
-    return isActiveHandle;
+  return isActiveHandle;
+}
+
+- (BOOL)symmetricalHandles
+{
+  return symmetricalHandles;
+}
+
+- (void)setSymmetricalHandles:(BOOL)flag
+{
+  symmetricalHandles = flag;
 }
 
 @end
