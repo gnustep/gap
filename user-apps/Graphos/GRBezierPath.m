@@ -51,16 +51,15 @@ static double k = 0.025;
         inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
 {
-  NSArray *psops, *linearr;
-  NSString *str;
-  NSPoint p, pp[3];
-  GRBezierControlPoint *prevcp;
-  double distx, disty;
-  NSUInteger i, count;
-
   self = [super init];
   if(self != nil)
     {
+      NSArray *psops, *linearr;
+      NSString *str;
+      NSPoint p, pp[3];
+      GRBezierControlPoint *prevcp;
+      double distx, disty;
+      NSUInteger i, count;
       CGFloat strokeCol[4];
       CGFloat fillCol[4];
       CGFloat strokeAlpha;
