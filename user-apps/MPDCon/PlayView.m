@@ -231,9 +231,6 @@
   tSecs = (totalTime % 60);
   tMin = (int)totalTime/60;
   
-  eSecs = 0;
-  eMin = 0;
-
   if (! reversedTime) 
     {
       eSecs = (elapsedTime % 60);

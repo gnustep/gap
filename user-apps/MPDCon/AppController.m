@@ -392,7 +392,7 @@
   
   playlist = [mpdController getPlaylist];
 
-  length = [[NSString stringWithFormat: @"%d", [playlist count]] length];
+  length = [[NSString stringWithFormat: @"%"PRIuPTR, [playlist count]] length];
 
   formString = [NSString stringWithFormat: @"Track %s%d%s - ", 
 		 "%", length, "d/%d"];
@@ -436,7 +436,7 @@
 	         owner: nil];
   
   [pboard setString: allSongsString forType: NSStringPboardType];
-
+  RELEASE(allSongsString);
   return;
 }
 
@@ -480,6 +480,7 @@
 	         owner: nil];
   
   [pboard setString: allAlbumsString forType: NSStringPboardType];
+  RELEASE(allAlbumsString);
   return;
 }
 
@@ -527,7 +528,6 @@
  
 - (void) _updateView: (id)sender
 {
-  int volume;
   int state;
 
   if (! connected) {
@@ -574,7 +574,6 @@
       [repeatButton setState: NO];
   }
 
-  volume = [mpdController getVolume];
   [volumeSlider setIntValue: [mpdController getVolume]];
 
   state = [mpdController getState];

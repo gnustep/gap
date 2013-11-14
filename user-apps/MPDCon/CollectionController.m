@@ -248,7 +248,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
       
       if (row == 0) {
           //[cell setFormatter: [[[BoldFormatter alloc] init] autorelease]];
-          [cell setStringValue: [NSString stringWithFormat: @"All (%d Artists)", [allArtists count]]];
+          [cell setStringValue: [NSString stringWithFormat: @"All (%"PRIuPTR" Artists)", [allArtists count]]];
       } else {
           //[cell setFormatter: [[[NormalFormatter alloc] init] autorelease]];
           [cell setStringValue: [allArtists objectAtIndex: row-1]];
@@ -258,7 +258,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
       
       if (row == 0) {
           //[cell setFormatter: [[[BoldFormatter alloc] init] autorelease]];
-          [cell setStringValue: [NSString stringWithFormat: @"All (%d Albums)", [allAlbums count]]];
+          [cell setStringValue: [NSString stringWithFormat: @"All (%"PRIuPTR" Albums)", [allAlbums count]]];
       } else {
           //[cell setFormatter: [[[NormalFormatter alloc] init] autorelease]];
           [cell setStringValue: [allAlbums objectAtIndex: row-1]];

@@ -259,6 +259,8 @@ static NSString *LyricsAPIURL=@"http://lyrics.wikia.com/api.php?func=getSong&art
     [[self getTitle] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"TITLE",
       nil];
   requestURL = [LyricsAPIURL stringByReplacingVariablesWithBindings:bindings];
+  RELEASE(bindings);
+
   url = [NSURL URLWithString:requestURL];
   result = [NSData dataWithContentsOfURL:url];
   if (result)

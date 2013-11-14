@@ -46,18 +46,14 @@
 
 - (id) init
 {
-  self = [self initWithWindowNibName: @"PlaylistInspector"];
-
-  if (self)
+  if ((self = [self initWithWindowNibName: @"PlaylistInspector"]) != nil)
     {
       [self setWindowFrameAutosaveName: @"PlaylistInspector"];
       defaults = [NSUserDefaults standardUserDefaults];
+      mpdController = [MPDController sharedMPDController];
+      playlistController = [PlaylistController sharedPlaylistController];
+      threadlock = [NSLock new];
     }
-
-  mpdController = [MPDController sharedMPDController];
-  playlistController = [PlaylistController sharedPlaylistController];
-  threadlock = [NSLock new];
-
   return self;
 }
 
@@ -108,9 +104,9 @@
   [randomPlaylistFeed setState: [defaults integerForKey: @"RandomPlaylistFeed"]];
   [ratingBasedFeed setState: [defaults integerForKey: @"RatingBasedFeed"]];
   [includeUnratedSongs setState: [defaults integerForKey: @"IncludeUnratedSongs"]];
-  [nrNewSongs setStringValue:  [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfFutureSongs"]?
+  [nrNewSongs setStringValue:  [NSString stringWithFormat:@"%"PRIiPTR, [defaults integerForKey: @"NrOfFutureSongs"]?
 		[defaults integerForKey: @"NrOfFutureSongs"]:20]];
-  [nrPlayedSongs setStringValue: [NSString stringWithFormat:@"%i", [defaults integerForKey: @"NrOfOldSongsToKeep"]?
+  [nrPlayedSongs setStringValue: [NSString stringWithFormat:@"%"PRIiPTR, [defaults integerForKey: @"NrOfOldSongsToKeep"]?
 		[defaults integerForKey: @"NrOfOldSongsToKeep"]:20]];
 
   if (![randomPlaylistFeed state])
@@ -131,7 +127,8 @@
     {
       if (![ratingBasedFeed state])
 	{
-          // the stuff below doesn't work like expected, also setEnabled: NO doesn't seem to work either
+          // the stuff below doesn't work like expected
+	  // also setEnabled: NO doesn't seem to work either
           [minRatingText setEnabled: NO];
           [maxRatingText setEnabled: NO];
           [minRatingCell setEditable: NO];
@@ -139,8 +136,9 @@
           [includeUnratedSongs setEnabled:NO];
 	}
     }
-
   [self updatePlaylistInspector];
+  RELEASE(minRatingCell);
+  RELEASE(maxRatingCell);
 }
 
 - (void) nrOfFutureSongsChanged: (id) sender
@@ -284,9 +282,9 @@ objectValueForTableColumn: (NSTableColumn *) tableColumn
 
 // method below doesn't get called, its actually intended
 // to disable the editing of the rating stars...
-- (BOOL) tableView: (NSTableView *)
+- (BOOL) tableView: (NSTableView *) tableView
 shouldEditTableColumn: (NSTableColumn *)aTableColumn
-	       row:(int)rowIndex
+	       row:(NSInteger)rowIndex
 {
   if ([randomPlaylistFeed state] && [ratingBasedFeed state]) 
     {

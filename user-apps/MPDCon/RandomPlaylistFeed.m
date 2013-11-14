@@ -33,41 +33,42 @@
 {
   NSNotificationCenter *defCenter;
 
-  self = [super init];
-  if (self)
+  if ((self = [super init]) != nil)
     {
       defaults = [NSUserDefaults standardUserDefaults];
       defCenter = [NSNotificationCenter defaultCenter];
-        [defCenter addObserver: self
+      [defCenter addObserver: self
                 selector: @selector(songChanged:)
                     name: SongChangedNotification
                   object: nil];
-        [defCenter addObserver: self
+      [defCenter addObserver: self
                 selector: @selector(updateDefaults:)
                     name: RandomPlaylistFeedDefaultsChangedNotification
                   object: nil];
-    }
-  threadLock = [NSLock new];
-  [self updateDefaults: nil];
-  // setup the connection to MPD for the thread
-  threadMPDController = [[MPDController alloc] init];
+      threadLock = [NSLock new];
+      [self updateDefaults: nil];
+      // setup the connection to MPD for the thread
+      threadMPDController = [[MPDController alloc] init];
 
-  host = [[NSUserDefaults standardUserDefaults]
+      host = [[NSUserDefaults standardUserDefaults]
            objectForKey: @"mpdHost"];
-  port = [[NSUserDefaults standardUserDefaults]
+      port = [[NSUserDefaults standardUserDefaults]
            objectForKey: @"mpdPort"];
-  tout = [[NSUserDefaults standardUserDefaults]
+      tout = [[NSUserDefaults standardUserDefaults]
            objectForKey: @"mpdTimeout"];
-  pword = nil;
-  if ([[NSUserDefaults standardUserDefaults]
-        integerForKey: @"usePassword"] != 0)
-    {
-      pword = [[NSUserDefaults standardUserDefaults]
+      pword = nil;
+      if ([[NSUserDefaults standardUserDefaults]
+                integerForKey: @"usePassword"] != 0)
+        {
+          pword = [[NSUserDefaults standardUserDefaults]
                 objectForKey: @"mpdPassword"];
+        }
+      [threadMPDController connectToServer:host
+	  			      port:port
+			          password:pword
+			           timeout:tout];
+      [self songChanged:nil];
     }
-  [threadMPDController connectToServer: host port: port password: pword timeout: tout];
-
-  [self songChanged:nil];
   return self;
 }
 
@@ -159,6 +160,7 @@
                      if ([trackFilename isEqual: [plItem getPath]])
                        {
                          addThisTrack = NO;
+			 RELEASE(trackFilename);
                          break;
                        }
                   }
@@ -187,7 +189,7 @@
                     continue;
                   }
                 [threadMPDController addTrack:trackFilename];
-	        [trackFilename release];
+	        RELEASE(trackFilename);
                 newAdded = YES;
               }
           }
