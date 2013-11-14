@@ -543,18 +543,13 @@ static double k = 0.025;
     {
       cp = [controlPoints objectAtIndex: i];
       prevcp = [controlPoints objectAtIndex: i -1];
-      if([prevcp isActiveHandle] || [cp isActiveHandle])
-	{
-	  handle1 = [prevcp bzHandle];
-	  handle2 = [cp bzHandle];
-	  [myPath curveToPoint: GRpointZoom([cp center], zmFactor)
-		  controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
-		  controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
-	}
-      else
-	{
-	  [myPath lineToPoint: GRpointZoom([cp center], zmFactor)];
-	}
+
+      handle1 = [prevcp bzHandle];
+      handle2 = [cp bzHandle];
+      [myPath curveToPoint: GRpointZoom([cp center], zmFactor)
+             controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
+             controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
+
       if([self isPoint: cp onPoint: mtopoint])
 	[(GRBezierPathEditor *)editor setIsDone:YES];
     }
