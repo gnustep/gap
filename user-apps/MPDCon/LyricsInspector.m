@@ -46,13 +46,11 @@
 
 - (id) init
 {
-  self = [self initWithWindowNibName: @"LyricsInspector"];
-
-  if (self) {
+  if ((self = [self initWithWindowNibName: @"LyricsInspector"]) != nil)
+    {
       [self setWindowFrameAutosaveName: @"LyricsInspector"];
-  }
-  mpdController = [MPDController sharedMPDController];
-
+      mpdController = [MPDController sharedMPDController];
+    }
   return self;
 }
 

@@ -46,14 +46,11 @@
 
 - (id) init
 {
-  self = [self initWithWindowNibName: @"PlaylistsManager"];
-
-  if (self) {
+  if ((self = [self initWithWindowNibName: @"PlaylistsManager"]) != nil)
+    {
       [self setWindowFrameAutosaveName: @"PlaylistsManager"];
-  }
-
-  mpdController = [MPDController sharedMPDController];
-
+      mpdController = [MPDController sharedMPDController];
+    }
   return self;
 }
 

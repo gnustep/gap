@@ -135,7 +135,7 @@ static NSString* SongRatingStorageDirectory = nil;
   NSString *query;
 
   query = [NSString stringWithFormat:@"INSERT OR REPLACE INTO \
-		SongRatings(fileName, rating) values(%@, %i)", 
+		SongRatings(fileName, rating) values(%@, %"PRIiPTR")", 
 		[MPDConDB quoteString:fileName], rating];
   [MPDConDB execute: query, nil];
 }
@@ -164,7 +164,7 @@ static NSString* SongRatingStorageDirectory = nil;
 
   ratingsArray = [[NSArray alloc] init];
 
-  return ratingsArray;
+  return AUTORELEASE(ratingsArray);
 }
 
 - (void) setLyrics: (NSString *) lyricsText withURL: (NSString *) lyricsURL forFile: (NSString *) fileName

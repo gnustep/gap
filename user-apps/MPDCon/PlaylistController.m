@@ -61,19 +61,14 @@
 
 - (id) init
 {
-  self = [self initWithWindowNibName: @"PlaylistViewer"];
   
-  if (self) 
+  if ((self = [self initWithWindowNibName: @"PlaylistViewer"]) != nil)
     {
       [self setWindowFrameAutosaveName: @"PlaylistViewer"];
+      mpdController = [MPDController sharedMPDController];
+      [playlist autorelease];
+      playlist = [[mpdController getPlaylist] retain];
     }
-
-  mpdController = [MPDController sharedMPDController];
-
-  [playlist autorelease];
-
-  playlist = [[mpdController getPlaylist] retain];
-  
   return self;
 }
 
@@ -131,6 +126,7 @@
   [ratingCol setDataCell:ratingCell];
 
   [self playlistChanged: nil];  
+  RELEASE(ratingCell);
 }
 
 - (void) removeSongs: (id)sender

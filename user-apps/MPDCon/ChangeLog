@@ -1,3 +1,20 @@
+2013-11-14: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* AppController.m
+	* CollectionBrowser.m
+	* CollectionController.m
+	* LyricsInspector.m
+	* PlayView.m
+	* PlaylistController.m
+	* PlaylistInspector.m
+	* PlaylistItem.m
+	* PlaylistsManagerController.m
+	* RandomPlaylistFeed.m
+	* SQLiteAdaptor.m
+	* SongInspector.m
+	* fix a couple of format strings, potential memory leaks,
+	  uses of uninitialized pointers, and others found by
+	  clang static analyzer
+
 2013-02-09: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* SQLiteAdaptor.m
 	  fix compilation with clang

@@ -42,13 +42,11 @@
 
 - (id) init
 {
-  self = [self initWithWindowNibName: @"SongInspector"];
-
-  if (self) {
+  if ((self = [self initWithWindowNibName: @"SongInspector"]) != nil)
+    {
       [self setWindowFrameAutosaveName: @"SongInspector"];
-  }
-  mpdController = [MPDController sharedMPDController];
-
+      mpdController = [MPDController sharedMPDController];
+    }
   return self;
 }
 

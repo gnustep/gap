@@ -20,17 +20,14 @@
 
 - (id) init
 {
-  self = [self initWithWindowNibName: @"CollectionBrowser"];
-
-  if (self)
+  if ((self = [self initWithWindowNibName: @"CollectionBrowser"]) != nil)
     {
       [self setWindowFrameAutosaveName: @"CollectionBrowser"];
+      mpdController = [MPDController sharedMPDController];
+      directories = [[mpdController getAllDirectories] retain];
+      dirhierarchy = [[NSMutableDictionary alloc] init];
+      dirmetadata = [[NSMutableDictionary alloc] init];
     }
-  mpdController = [MPDController sharedMPDController];
-  directories = [[mpdController getAllDirectories] retain];
-  dirhierarchy = [[NSMutableDictionary alloc] init];
-  dirmetadata = [[NSMutableDictionary alloc] init];
-
   return self;
 }
 
