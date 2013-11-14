@@ -1,5 +1,10 @@
 2013-11-14 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierPath.m
+	Clean up variable scope.
+
+2013-11-14 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierPath.m (remakePath)
 	Simplify to remake path independently of selected control points.
 
