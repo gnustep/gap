@@ -39,6 +39,7 @@
       path = aPath;
       zmFactor = zf;
       bzHandle.center = aPoint;
+      center = aPoint;
       bzHandle.centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
       [self calculateBezierHandles: aPoint];
       isSelect = NO;
@@ -226,7 +227,16 @@
 
 - (GRBezierHandle)bzHandle
 {
-    return bzHandle;
+  return bzHandle;
+}
+
+- (void)setBezierHandle:(GRBezierHandle)handle
+{
+  bzHandle = handle;
+  center = bzHandle.center;
+  bzHandle.centerRect = NSMakeRect(bzHandle.center.x-3, bzHandle.center.y-3, 6, 6);
+  bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
+  bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);  
 }
 
 - (NSPoint)center
