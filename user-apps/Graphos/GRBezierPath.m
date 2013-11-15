@@ -60,18 +60,47 @@ static double k = 0.025;
       GRBezierControlPoint *prevcp;
       double distx, disty;
       NSUInteger i, count;
+      NSArray *points;
       CGFloat strokeCol[4];
       CGFloat fillCol[4];
       CGFloat strokeAlpha;
       CGFloat fillAlpha;
       id obj;
+      BOOL symm;
       
+      psops = nil;
+      linearr = nil;
       editor = [[GRBezierPathEditor alloc] initEditor:self];
       docView = aView;
       zmFactor = zf;
       myPath = [[NSBezierPath bezierPath] retain];
       [myPath setCachesBezierPath: NO];
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
+      points = [description objectForKey: @"points"];
+      NSLog(@"points: %@", points);
+      for (i = 0; i < [points count]; i++)
+        {
+          GRBezierHandle h;
+          GRBezierControlPoint *cp;
+
+          linearr = [[points objectAtIndex: i] componentsSeparatedByString: @" "];
+          NSLog(@"line aarray: %@", linearr);
+          h.firstHandle.x = [[linearr objectAtIndex: 0] floatValue];
+          h.firstHandle.y = [[linearr objectAtIndex: 1] floatValue];
+          h.center.x = [[linearr objectAtIndex: 2] floatValue];
+          h.center.y = [[linearr objectAtIndex: 3] floatValue];
+          h.secondHandle.x = [[linearr objectAtIndex: 4] floatValue];
+          h.secondHandle.y = [[linearr objectAtIndex: 5] floatValue];
+          symm = (BOOL)[[linearr objectAtIndex: 6] intValue];
+
+          cp = [[GRBezierControlPoint alloc] initAtPoint:h.center forPath:self zoomFactor:zmFactor];
+          [cp setBezierHandle:h];
+          [cp setSymmetricalHandles:symm];
+          [controlPoints addObject:cp];
+          [cp release];
+        }
+      [self confirmNewCurve];
+      [self remakePath];
       psops = [description objectForKey: @"psdata"];
       for(i = 0; i < [psops count]; i++)
         {
@@ -208,6 +237,7 @@ static double k = 0.025;
 {
   NSMutableDictionary *dict;
   NSMutableArray *psops;
+  NSMutableArray *points;
   NSString *str;
   NSBezierPathElement type;
   NSPoint p[3];
@@ -255,6 +285,23 @@ static double k = 0.025;
   [dict setObject:[NSNumber numberWithBool:visible] forKey: @"visible"];
   [dict setObject:[NSNumber numberWithBool:locked] forKey: @"locked"];
 
+  points = [NSMutableArray arrayWithCapacity: 1];
+  for (i = 0; i < [controlPoints count]; i++)
+    {
+      GRBezierControlPoint *cp;
+      GRBezierHandle handle;
+
+      cp = [controlPoints objectAtIndex:i];
+      handle = [cp bzHandle];
+      str = [NSString stringWithFormat: @"%f %f %f %f %f %f %d",
+                      handle.firstHandle.x, handle.firstHandle.y,
+                      handle.center.x, handle.center.y,
+                      handle.secondHandle.x, handle.secondHandle.y,
+                      [cp symmetricalHandles]];
+      [points addObject:str];
+    }
+  [dict setObject: points forKey:@ "points"];
+#if 0
   psops = [NSMutableArray arrayWithCapacity: 1];
   // FIXME/TODO in a new file release, this list should be generated from the control-points instead */
   for(i = 0; i < [myPath elementCount]; i++)
@@ -270,6 +317,7 @@ static double k = 0.025;
         [psops addObject: str];
     }
   [dict setObject: psops forKey: @"psdata"];
+#endif
   
   return dict;
 }
@@ -522,11 +570,13 @@ static double k = 0.025;
 
 - (void)confirmNewCurve
 {
-    calculatingHandles = NO;
-    if([controlPoints count] == 1)
-        return;
-    if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
-        [(GRBezierPathEditor *)editor setIsDone:YES];
+  if (!controlPoints || [controlPoints count] == 0)
+    return;
+  calculatingHandles = NO;
+  if([controlPoints count] == 1)
+    return;
+  if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
+    [(GRBezierPathEditor *)editor setIsDone:YES];
 }
 
 - (void)remakePath
@@ -536,19 +586,22 @@ static double k = 0.025;
   NSInteger i;
 
   [myPath removeAllPoints];
+  if (!controlPoints || [controlPoints count] == 0)
+    return;
+
   mtopoint = [controlPoints objectAtIndex: 0];
   [myPath moveToPoint: GRpointZoom([mtopoint center], zmFactor)];
   for(i = 1; i < [controlPoints count]; i++)
     {
       cp = [controlPoints objectAtIndex: i];
       prevcp = [controlPoints objectAtIndex: i -1];
-
+      
       handle1 = [prevcp bzHandle];
       handle2 = [cp bzHandle];
       [myPath curveToPoint: GRpointZoom([cp center], zmFactor)
-             controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
-             controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
-
+              controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
+              controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
+      
       if([self isPoint: cp onPoint: mtopoint])
 	[(GRBezierPathEditor *)editor setIsDone:YES];
     }
