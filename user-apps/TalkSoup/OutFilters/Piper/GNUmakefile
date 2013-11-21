@@ -1,9 +1,8 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 BUNDLE_NAME = Piper
 
-BUNDLE_EXTENSION =
-
-BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/OutFilters
+#BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/OutFilters
+$(BUNDLE_NAME)_COPY_INTO_DIR = ../../Source/TalkSoup.app/Resources/OutFilters
 
 Piper_LANGUAGES = English
 Piper_LOCALIZED_RESOURCE_FILES = Localizable.strings

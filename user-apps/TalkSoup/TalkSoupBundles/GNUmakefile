@@ -2,6 +2,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 FRAMEWORK_NAME = TalkSoupBundles
 
+#$(FRAMEWORK_NAME)_COPY_INTO_DIR = ../Source/TalkSoup.app/Resources/
+
 TalkSoupBundles_LANGUAGES = English
 
 TalkSoupBundles_LOCALIZED_RESOURCE_FILES = Localizable.strings

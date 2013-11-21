@@ -4,16 +4,16 @@
 	Plugins = 
 	{
 	    InFilters = (
-		Highlighting,
-		KeepAlive,
-		DCCSupport,
-		MessageInTab
+		Highlighting.bundle,
+		KeepAlive.bundle,
+		DCCSupport.bundle,
+		MessageInTab.bundle
 	    );
-	    Input = NetclassesInput;
+	    Input = NetclassesInput.bundle;
 	    OutFilters = (
-		Colorizer
+		Colorizer.bundle
 	    );
-	    Output = GNUstepOutput;
+	    Output = GNUstepOutput.bundle;
 	};
 	RealName = "";
 	UserName = "";

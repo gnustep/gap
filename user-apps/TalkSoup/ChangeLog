@@ -1,3 +1,28 @@
+2013-11-21 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/GNUmakefile
+	* InFilters/Debold/GNUmakefile
+	* InFilters/Decolorizer/GNUmakefile
+	* InFilters/Dereverse/GNUmakefile
+	* InFilters/Deunderline/GNUmakefile
+	* InFilters/Emoticon/GNUmakefile
+	* InFilters/Highlighting/GNUmakefile
+	* InFilters/KeepAlive/GNUmakefile
+	* InFilters/Logging/GNUmakefile
+	* InFilters/MessageInTab/GNUmakefile
+	* InFilters/MessageOutTab/GNUmakefile
+	* InFilters/PrivateBeep/GNUmakefile
+	* InFilters/Skeleton/GNUmakefile
+	* Input/NetclassesInput/GNUmakefile
+	* OutFilters/Colorizer/GNUmakefile
+	* OutFilters/Piper/GNUmakefile
+	* OutFilters/Skeleton/GNUmakefile
+	* Output/GNUstepOutput/GNUmakefile
+	* Source/Defaults.plist
+	* TalkSoupBundles/GNUmakefile
+	Install bundles inside App resources, name bundles with .bundle extensions and update defaults accordingly.
+	(Remember to delete your defaults)
+
 2013-09-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GNUmakefile
 	* Source/TalkSoupInfo.plist

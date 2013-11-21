@@ -1,9 +1,8 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 BUNDLE_NAME = Colorizer
 
-BUNDLE_EXTENSION =
-
-BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/OutFilters
+#BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/OutFilters
+$(BUNDLE_NAME)_COPY_INTO_DIR = ../../Source/TalkSoup.app/Resources/OutFilters
 
 Colorizer_LANGUAGES = English
 Colorizer_LOCALIZED_RESOURCE_FILES = Localizable.strings
