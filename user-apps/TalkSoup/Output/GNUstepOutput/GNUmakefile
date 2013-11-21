@@ -2,9 +2,9 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 BUNDLE_NAME = GNUstepOutput
 
-BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/Output
+#BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/Output
 
-BUNDLE_EXTENSION =
+$(BUNDLE_NAME)_COPY_INTO_DIR = ../../Source/TalkSoup.app/Resources/Output
 
 Pref_Nibs = Preferences.nib \
 FontPreferences.nib \
@@ -57,7 +57,7 @@ endif
 
 GNUstepOutput_RESOURCE_FILES += $(Extra_Resources)
 GNUstepOutput_RESOURCE_FILES += Tools/Tools
-	
+
 GNUstepOutput_LANGUAGES = English
 
 GNUstepOutput_PRINCIPAL_CLASS = GNUstepOutput

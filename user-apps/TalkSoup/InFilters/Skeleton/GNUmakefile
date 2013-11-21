@@ -1,9 +1,8 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 BUNDLE_NAME = Skeleton
 
-BUNDLE_EXTENSION =
-
-BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/InFilters
+#BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/InFilters
+$(BUNDLE_NAME)_COPY_INTO_DIR = ../../Source/TalkSoup.app/Resources/InFilters
 
 Skeleton_LANGUAGES = English
 Skeleton_LOCALIZED_RESOURCE_FILES = Localizable.strings
