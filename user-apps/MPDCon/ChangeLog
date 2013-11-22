@@ -1,3 +1,7 @@
+2013-11-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Resources/CollectionBrowser.gorm
+	* add an update and add button
+
 2013-11-14: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* AppController.m
 	* CollectionBrowser.m
