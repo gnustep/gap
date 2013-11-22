@@ -2,10 +2,19 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     CollectionBrowser = {
 	Actions = (
+	    "addSelected:",
+	    "updateCollection:"
 	);
 	Outlets = (
 	    browser
 	);
 	Super = NSWindowController;
+    };
+    FirstResponder = {
+	Actions = (
+	    "addSelected:",
+	    "updateCollection:"
+	);
+	Super = NSObject;
     };
 }
