@@ -50,13 +50,19 @@
   NSEnumerator *songEnum = [[browser selectedCells] objectEnumerator];
   NSIndexPath *indexPath = [browser selectionIndexPath];
   NSCell *selectedSong;
+  NSString *path = [browser pathToColumn:[browser selectedColumn]];
 NSLog(@"the selected cells: %@", [browser selectedCells]); 
-NSLog(@"the index path: %@", indexPath);
+NSLog(@"the index path: %@, the path: %@", indexPath, path);
   while ((selectedSong = [songEnum nextObject]) != nil)
     {
-      // [[MPDController sharedMPDController]
-      //  addTrack: [[allSongs objectAtIndex: [songNumber intValue]] getPath]];
-NSLog(@"the selected song: %@", [selectedSong objectValue]);
+NSLog(@"the selected song: %@",
+	[NSString pathWithComponents:
+		[NSArray arrayWithObjects: path, [selectedSong objectValue], nil]]);
+	
+      [[MPDController sharedMPDController]
+	  addTrack: [[NSString pathWithComponents:
+	    [NSArray arrayWithObjects: path, [selectedSong objectValue], nil]]
+		substringFromIndex:1]];
     }
 }
 
@@ -84,9 +90,7 @@ NSLog(@"the selected song: %@", [selectedSong objectValue]);
 
 - (void) updateCollection: (id)sender
 {
-  //[[MPDController sharedMPDController] updateCollection];
-
-  //[self _refreshViews];
+  [[MPDController sharedMPDController] updateCollection];
 }
 
 /* -----------------------

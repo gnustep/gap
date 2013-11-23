@@ -132,7 +132,6 @@ int _aSort(id string1, id string2, void *context);
 
 - (void) updateCollection: (id)sender
 {
-NSLog(@"called updateCollection in CollectionController");
   [[MPDController sharedMPDController] updateCollection];
 }
 
