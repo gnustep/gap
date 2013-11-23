@@ -4,6 +4,10 @@
 #include "CollectionBrowser.h"
 #include "Strings.h"
 
+@interface CollectionBrowser(Private)
+- (void) _refreshView:(id) sender;
+@end
+
 @implementation CollectionBrowser
 + (id) sharedCollectionBrowser
 {
@@ -77,15 +81,13 @@ NSLog(@"the selected song: %@",
   defCenter = [NSNotificationCenter defaultCenter];
 
   [defCenter addObserver: self
-                selector: @selector(updateCollection:)
+                selector: @selector(_refreshView:)
                     name: ShownCollectionChangedNotification
                   object: nil];
 
   [browser setPath:@"/"];
   [browser setDelegate: self];
   [browser setDoubleAction: @selector(browserDoubleClick:)];
-
- //[self _refreshViews];
 }
 
 - (void) updateCollection: (id)sender
@@ -203,5 +205,17 @@ NSLog(@"got this double clicked: %@", [browser selectionIndexPath]);
   printf("windowWillResize: %s\n", [NSStringFromSize(proposedFrameSize) cString]);
   return proposedFrameSize;
 }
+@end
 
+@implementation CollectionBrowser(Private)
+- (void) _refreshView:(id) sender
+{
+  NSInteger idx;
+  NSInteger last = [browser lastColumn];
+  directories = [[mpdController getAllDirectories] retain];  
+  for (idx = 0;idx < last;idx++)
+    {
+      [browser reloadColumn:idx];
+    }
+}
 @end
