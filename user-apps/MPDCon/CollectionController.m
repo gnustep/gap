@@ -32,7 +32,7 @@
    ---------------------*/
 @interface CollectionController(Private)
 
-- (void) _refreshViews;
+- (void) _refreshViews: (id)sender;
 - (void) _filterCollectionByString: (NSString *)filterString;
 - (void) _getAllAlbumsForArtistAt: (NSInteger)row;
 - (void) _getAllTracksForArtistAt: (NSInteger)artistRow albumAt: (NSInteger)albumRow;
@@ -123,18 +123,17 @@ int _aSort(id string1, id string2, void *context);
 		object: nil];
 
   [defCenter addObserver: self
-                selector: @selector(updateCollection:)
+                selector: @selector(_refreshViews:)
                     name: ShownCollectionChangedNotification
                   object: nil];
 
- [self _refreshViews];
+ [self _refreshViews:nil];
 }
 
 - (void) updateCollection: (id)sender
 {
+NSLog(@"called updateCollection in CollectionController");
   [[MPDController sharedMPDController] updateCollection];
-
-  [self _refreshViews];
 }
 
 - (void) doubleClicked: (id)sender
@@ -186,7 +185,7 @@ int _aSort(id string1, id string2, void *context);
 
 - (void) filterCollection: (id) sender
 {
-  [self _refreshViews];
+  [self _refreshViews:nil];
 }
 
 - (void) clearFilter: (id)sender
@@ -197,7 +196,7 @@ int _aSort(id string1, id string2, void *context);
     }
     
   [filterField setStringValue: @""];
-  [self _refreshViews];
+  [self _refreshViews:nil];
 }
 
 /* --------------------------------
@@ -352,7 +351,7 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn
    -------------------*/
 @implementation CollectionController(Private)
 
-- (void) _refreshViews
+- (void) _refreshViews:(id) sender
 {
   [self _filterCollectionByString: [filterField stringValue]];
   

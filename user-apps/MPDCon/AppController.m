@@ -227,6 +227,7 @@
 
 - (void) updateCollection: (id) sender
 {
+NSLog(@"AppController updateCollection");
   [mpdController updateCollection];
 }
 
@@ -550,16 +551,6 @@
       
       [[NSNotificationCenter defaultCenter] 
 	postNotification: aNotif];
-  }
-
-  if ([mpdController collectionChanged]) {
-    NSNotification *aNotif;
-
-    aNotif = [NSNotification notificationWithName:
-		ShownCollectionChangedNotification
-		object: nil];
-    [[NSNotificationCenter defaultCenter]	
-		postNotification: aNotif];
   }
 
   if ([mpdController isRandom]) {

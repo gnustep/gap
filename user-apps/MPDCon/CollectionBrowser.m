@@ -41,6 +41,25 @@
   [super dealloc];
 }
 
+/* --------------------
+   - Playlist Methods -
+   --------------------*/
+
+- (void) addSelected: (id)sender
+{
+  NSEnumerator *songEnum = [[browser selectedCells] objectEnumerator];
+  NSIndexPath *indexPath = [browser selectionIndexPath];
+  NSCell *selectedSong;
+NSLog(@"the selected cells: %@", [browser selectedCells]); 
+NSLog(@"the index path: %@", indexPath);
+  while ((selectedSong = [songEnum nextObject]) != nil)
+    {
+      // [[MPDController sharedMPDController]
+      //  addTrack: [[allSongs objectAtIndex: [songNumber intValue]] getPath]];
+NSLog(@"the selected song: %@", [selectedSong objectValue]);
+    }
+}
+
 /* ---------------
    - Gui Methods -
    ---------------*/
@@ -59,9 +78,6 @@
   [browser setPath:@"/"];
   [browser setDelegate: self];
   [browser setDoubleAction: @selector(browserDoubleClick:)];
-NSLog(@"the delegate: %@", [browser delegate]);
-NSLog(@"the the action: %s", [browser doubleAction]);
-
 
  //[self _refreshViews];
 }
