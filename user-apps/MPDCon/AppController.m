@@ -227,7 +227,6 @@
 
 - (void) updateCollection: (id) sender
 {
-NSLog(@"AppController updateCollection");
   [mpdController updateCollection];
 }
 

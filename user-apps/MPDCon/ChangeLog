@@ -9,6 +9,8 @@
 	* CollectionBrowser.m
 	* make the update and add buttons work as expected
 	* CollectionController.m
+	* AppController.m
+	* MPDController.m
 	* remove some NSLog
 
 2013-11-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
