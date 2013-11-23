@@ -4,6 +4,8 @@
 	* CollectionController.m
 	* MPDController.m
 	* restructuring about notifications sent on collection updates
+	* Resources/CollectionBrowser.gorm
+	* re-add missing connection from NSOwner to -browser
 
 2013-11-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/CollectionBrowser.gorm
