@@ -578,7 +578,6 @@ int _stringSort(id string1, id string2, void *context);
     numAlbums = tmpAlbumsNum;
     retVal = YES;
   }
-NSLog(@"collectionChanged: %i", retVal);
   return retVal;
 }
 
@@ -986,7 +985,6 @@ return nil;
 
 - (void) updateCollection
 {
-NSLog(@"MPDController updateCollection");
   if (! [self _checkConnection]) {
       return;
   }
@@ -1001,7 +999,6 @@ NSLog(@"MPDController updateCollection");
                 object: nil];
       [[NSNotificationCenter defaultCenter]
                 postNotification: aNotif];
-NSLog(@"sent ShownCollectionChangedNotification");
     }
 }
 
