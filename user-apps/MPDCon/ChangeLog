@@ -6,6 +6,10 @@
 	* restructuring about notifications sent on collection updates
 	* Resources/CollectionBrowser.gorm
 	* re-add missing connection from NSOwner to -browser
+	* CollectionBrowser.m
+	* make the update and add buttons work as expected
+	* CollectionController.m
+	* remove some NSLog
 
 2013-11-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/CollectionBrowser.gorm
