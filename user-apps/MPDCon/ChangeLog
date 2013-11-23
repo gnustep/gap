@@ -12,6 +12,9 @@
 	* AppController.m
 	* MPDController.m
 	* remove some NSLog
+	* CollectionBrowser.m
+	* reload browser columns when collection change notification
+	  are received
 
 2013-11-22: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Resources/CollectionBrowser.gorm
