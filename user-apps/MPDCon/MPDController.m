@@ -578,6 +578,7 @@ int _stringSort(id string1, id string2, void *context);
     numAlbums = tmpAlbumsNum;
     retVal = YES;
   }
+NSLog(@"collectionChanged: %i", retVal);
   return retVal;
 }
 
@@ -985,12 +986,23 @@ return nil;
 
 - (void) updateCollection
 {
+NSLog(@"MPDController updateCollection");
   if (! [self _checkConnection]) {
       return;
   }
 
   mpd_send_update(mpdConnection, "");
   mpd_response_finish(mpdConnection);
+  if ([self collectionChanged])
+    {
+      NSNotification *aNotif;
+      aNotif = [NSNotification notificationWithName:
+                ShownCollectionChangedNotification
+                object: nil];
+      [[NSNotificationCenter defaultCenter]
+                postNotification: aNotif];
+NSLog(@"sent ShownCollectionChangedNotification");
+    }
 }
 
 - (NSArray *) getAllDirectories
