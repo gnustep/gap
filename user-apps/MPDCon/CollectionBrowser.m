@@ -52,15 +52,11 @@
 - (void) addSelected: (id)sender
 {
   NSEnumerator *songEnum = [[browser selectedCells] objectEnumerator];
-  NSIndexPath *indexPath = [browser selectionIndexPath];
   NSCell *selectedSong;
   NSString *path = [browser pathToColumn:[browser selectedColumn]];
-NSLog(@"the selected cells: %@", [browser selectedCells]); 
-NSLog(@"the index path: %@, the path: %@", indexPath, path);
   while ((selectedSong = [songEnum nextObject]) != nil)
     {
-NSLog(@"the selected song: %@",
-	[NSString pathWithComponents:
+      [NSString pathWithComponents:
 		[NSArray arrayWithObjects: path, [selectedSong objectValue], nil]]);
 	
       [[MPDController sharedMPDController]
