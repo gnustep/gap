@@ -1,4 +1,7 @@
 2013-11-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* CollectionBrowser.m
+	* remove some NSLog entries
+2013-11-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* AppController.m
 	* CollectionBrowser.m
 	* CollectionController.m
