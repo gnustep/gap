@@ -11,3 +11,15 @@ I just need to release it today.
 BUILD NOTES:
 
 On Windows, do add -liberty to ADDITIONAL_GUI_LIBS so that random and srandom implementations get linked.
+
+---
+
+LapisPuzzle licensing...
+OÖM Keeler <object@gmail.com>	 Fri, Nov 15, 2013 at 3:54 AM
+To: Gregory Casamento <greg.casamento@gmail.com>
+
+WTFPL, so you can add warranty as you wish.
+Cheers,
+
+Banlu Kemiyatorn
+
