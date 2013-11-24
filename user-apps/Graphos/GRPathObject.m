@@ -29,22 +29,27 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    GRPathObject *objCopy;
-    NSBezierPath *bzpCopy;
-
-    bzpCopy = [myPath copy];
-    
-    objCopy = [super copyWithZone:zone];
-    objCopy->myPath = bzpCopy;
-    [objCopy setCurrentPoint:[self currentPoint]];
-    
-    return objCopy;
+  GRPathObject *objCopy;
+  NSBezierPath *bzpCopy;
+  
+  bzpCopy = [myPath copy];
+  
+  objCopy = [super copyWithZone:zone];
+  objCopy->myPath = bzpCopy;
+  objCopy->linewidth = linewidth;
+  objCopy->flatness = flatness;
+  objCopy->miterlimit = miterlimit;
+  objCopy->linejoin = linejoin;
+  objCopy->linecap = linecap;
+  [objCopy setCurrentPoint:[self currentPoint]];
+  
+  return objCopy;
 }
 
 - (void)dealloc
 {
-    [myPath release];
-    [super dealloc];
+  [myPath release];
+  [super dealloc];
 }
 
 - (id)initInView:(GRDocView *)aView
