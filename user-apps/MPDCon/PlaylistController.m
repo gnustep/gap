@@ -133,11 +133,11 @@
 {
   switch ([removeSelector indexOfSelectedItem]) 
     {
-    case 0:
-      [self _doRemove];
-      break;
     case 1:
       [mpdController clearPlaylist];
+      break;
+    case 2:
+      [self _doRemove];
       break;
     }
 }
@@ -477,26 +477,19 @@ objectValueForTableColumn: (NSTableColumn *)tableColumn row:(NSInteger)row
 
 - (void) _doRemove
 {
-  NSEnumerator *songEnum;
-  NSNumber *songNumber;
-  int i;
+  NSIndexSet *selectedRows;
+  NSInteger i;
 
   if ([playlistTable numberOfSelectedRows] == [mpdController getPlaylistLength])
     {
       [mpdController clearPlaylist];
       return;
     }
-    
-  songEnum = [playlistTable selectedRowEnumerator];
-
-  i = 0;
-
-  while ((songNumber = [songEnum nextObject]) != nil) 
+  selectedRows = [playlistTable selectedRowIndexes];
+  for (i=[selectedRows lastIndex];i != NSNotFound;i = [selectedRows indexLessThanIndex: i])
     {
-      [mpdController removeSong: [[playlist objectAtIndex: [songNumber intValue]-i] getPos]];
-      i++;
+      [mpdController removeSong: [[playlist objectAtIndex: i] getPos]];
     }
-  
   [playlistTable deselectAll: self];
 }
 

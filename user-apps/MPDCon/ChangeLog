@@ -5,6 +5,8 @@
 	  remove extraneous )
 	* MPDConInfo.plist, GNUMakefile, MPDCon.pcproj
 	  update version to 1.5
+	* PlaylistController.m
+	  make the removal of selected songs from playlist work
 
 2013-11-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* CollectionBrowser.m
