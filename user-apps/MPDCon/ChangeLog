@@ -2,6 +2,7 @@
 	* CollectionBrowser.m
 	  get rid of -windowDidResize: method to fix weirdo resizing issues
 	  get rid of DoubleClick action thingies
+	  remove extraneous )
 	* MPDConInfo.plist, GNUMakefile, MPDCon.pcproj
 	  update version to 1.5
 
