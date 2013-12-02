@@ -172,19 +172,6 @@ NSLog(@"got this double clicked: %@", [browser selectionIndexPath]);
 
 } // browserDoubleClick
 
-- (void)windowDidResize:(NSNotification *)aNotification
-{
-  NSRect rect = [[self window] frame];
-
-  rect.origin.x = rect.origin.y = 10;
-  rect.size.width -= 20;
-  rect.size.height -= 150;
-
-  [browser setFrame: rect];
-  [browser sizeToFit];
-  [[[self window] contentView] setNeedsDisplay: YES];
-}
-
 - (BOOL)browser:(NSBrowser *)browser canDragRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event
 {
   return YES;
