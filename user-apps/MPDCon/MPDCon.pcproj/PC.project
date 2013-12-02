@@ -125,7 +125,7 @@
 	"The GAP Team",
 	"Daniel Luederwald <das_flip@gmx.de>"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2012 GAP Team, 2004-06 Daniel Luederwald";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2013 GAP Team, 2004-06 Daniel Luederwald";
     "PROJECT_COPYRIGHT_DESC" = "Released under the GNU General Public License 2.0 or later";
     "PROJECT_CREATOR" = "Daniel Luederwald";
     "PROJECT_DESCRIPTION" = "GNUstep Client for MPD";
@@ -136,7 +136,7 @@
     "PROJECT_GROUP" = "No group avaliable!";
     "PROJECT_MAINTAINER" = "Daniel Luederwald";
     "PROJECT_NAME" = MPDCon;
-    "PROJECT_RELEASE" = "1.4";
+    "PROJECT_RELEASE" = "1.5";
     "PROJECT_SOURCE" = "%{gs_name}-%{gs_version}.tar.gz";
     "PROJECT_SUMMARY" = "No summary avaliable!";
     "PROJECT_TYPE" = Application;
