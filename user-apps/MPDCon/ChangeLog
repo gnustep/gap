@@ -1,6 +1,7 @@
 2013-12-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* CollectionBrowser.m
 	  get rid of -windowDidResize: method to fix weirdo resizing issues
+	  get rid of DoubleClick action thingies
 
 2013-11-23: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* CollectionBrowser.m

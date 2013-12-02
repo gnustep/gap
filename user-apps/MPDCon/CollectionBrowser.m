@@ -83,7 +83,6 @@
 
   [browser setPath:@"/"];
   [browser setDelegate: self];
-  [browser setDoubleAction: @selector(browserDoubleClick:)];
 }
 
 - (void) updateCollection: (id)sender
@@ -160,26 +159,9 @@
   [cell setLoaded: YES];
 }
 
-- (IBAction) browserDoubleClick: (id) sender
-{
-  NSInteger column = [browser selectedColumn];
-  NSInteger row = [browser selectedRowInColumn: column];
-    
-  //[mpdController getAllFilesInDirectory];
-NSLog(@"got this double clicked: %@", [browser selectionIndexPath]);
-
-    // then dig into your data structure with the row and column
-
-} // browserDoubleClick
-
 - (BOOL)browser:(NSBrowser *)browser canDragRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event
 {
   return YES;
-}
-
-- (void)doDoubleClick:(id)sender
-{
-  NSLog(@"do double click");
 }
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)proposedFrameSize
