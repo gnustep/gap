@@ -57,7 +57,8 @@
   while ((selectedSong = [songEnum nextObject]) != nil)
     {
       [NSString pathWithComponents:
-		[NSArray arrayWithObjects: path, [selectedSong objectValue], nil]]);
+		[NSArray arrayWithObjects:
+			path, [selectedSong objectValue], nil]];
 	
       [[MPDController sharedMPDController]
 	  addTrack: [[NSString pathWithComponents:
