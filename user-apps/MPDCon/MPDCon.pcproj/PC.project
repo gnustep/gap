@@ -136,7 +136,7 @@
     "PROJECT_GROUP" = "No group avaliable!";
     "PROJECT_MAINTAINER" = "Daniel Luederwald";
     "PROJECT_NAME" = MPDCon;
-    "PROJECT_RELEASE" = "1.5";
+    "PROJECT_RELEASE" = "1.5.1";
     "PROJECT_SOURCE" = "%{gs_name}-%{gs_version}.tar.gz";
     "PROJECT_SUMMARY" = "No summary avaliable!";
     "PROJECT_TYPE" = Application;

@@ -1,3 +1,11 @@
+2013-12-10: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* RandomPlaylistFeed.m
+	* GNUmakefile.preamble
+	* GNUmakefile
+	* Documentation/Install
+	  bump version to 1.5.1
+	  add built fix for systems that don't have arc4random in libc
+
 2013-12-02: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* CollectionBrowser.m
 	  get rid of -windowDidResize: method to fix weirdo resizing issues

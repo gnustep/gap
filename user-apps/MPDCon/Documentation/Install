@@ -6,12 +6,13 @@ Tested with libmpdclient-2.7.
 Second, you need GNUstep installed (See http://www.gnustep.org). Tested with 
 gnustep-make-1.6.2, gnustep-base-1.24.0 and gnustep-gui and gnustep-back 1.22.0.
 
-On Linux, you likely need to have libbsd, and the corresponding -dev package
-installed.
-
 Then, just type
 
 make
 sudo -E make install
 
+On Linux, you likely need to have libbsd, and the corresponding -dev package
+installed. On Linux run:
 
+make need-libbsd=yes
+sudo -E make install
