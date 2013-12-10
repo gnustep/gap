@@ -28,6 +28,10 @@
 #import "MPDController.h"
 #import "Strings.h"
 
+#if defined(NEED_BSD_H)
+#include <bsd/bsd.h>
+#endif
+
 @implementation RandomPlaylistFeed
 - (id) init
 {
