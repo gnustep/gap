@@ -335,7 +335,11 @@ static double k = 0.025;
   e = [controlPoints objectEnumerator];
   while ((cp = [e nextObject]))
     {
-      [cpsCopy addObject:[cp copy]];
+      GRBezierControlPoint *cpCopy;
+
+      cpCopy = [cp copy];
+      [cpsCopy addObject: cpCopy];
+      [cpCopy release];
     }
   
   objCopy->controlPoints = cpsCopy;
