@@ -1,3 +1,8 @@
+2013-12-12 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.m (copyWithZone)
+	release copied control point!
+
 2013-11-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRPathObject.m (copyWithZone)
