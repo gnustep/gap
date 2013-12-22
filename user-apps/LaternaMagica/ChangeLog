@@ -1,3 +1,8 @@
+2013-12-22 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Add notification observers in awake from nib, not init.
+
 2013-07-14 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m (execExportImages)
@@ -9,7 +14,7 @@
 	* AppController.m
 	* LMFlipView.m
 	* English.lproj/LaternaMagica.nib
-	Route printing to the FlipView and sart print operation from there.
+	Route printing to the FlipView and start print operation from there.
 
 2013-06-02 Riccardo Mottola <rm@gnu.org>
 
