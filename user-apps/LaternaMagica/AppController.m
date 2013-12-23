@@ -202,7 +202,6 @@
     }
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
-  [window displayIfNeeded];
   [nsImage release];
   [window setTitleWithRepresentedFilename:[image name]];
 }
@@ -284,7 +283,6 @@
     [view setImage: image];
     [view setNeedsDisplay:YES];
     [[view superview] setNeedsDisplay:YES];
-    [window displayIfNeeded];
     [window makeKeyAndOrderFront: self];
 }
 
@@ -454,7 +452,6 @@
   [view setImage: destImage];
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
-  [window displayIfNeeded];
 }
 
 - (IBAction)rotateImage180:(id)sender
@@ -472,7 +469,6 @@
   [view setImage: destImage];
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
-  [window displayIfNeeded];
 }
 
 
@@ -489,9 +485,7 @@
 
   [self scaleView:destImage];
   [view setImage: destImage];
-  [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
-  [window displayIfNeeded];
 }
 
 - (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle
