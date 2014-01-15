@@ -1,3 +1,9 @@
+2014-01-19 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel.h
+	* BatteryModel.m
+	Fix ACPI/APM/PMU detection fallback on Linux.
+
 2013-10-15 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m

@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2013 GNUstep Application Project
+   Copyright (C) 2006-2014 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -21,6 +21,13 @@
    License along with this library; if not, write to the Free
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
+
+#if defined (linux)
+#define DEV_SYS_POWERSUPPLY  @"/sys/class/power_supply"
+#define DEV_PROC_PMU  @"/proc/pmu"
+#endif
+
+
 
 typedef enum
   {
