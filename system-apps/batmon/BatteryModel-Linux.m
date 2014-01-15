@@ -43,10 +43,9 @@
   usePMU      = NO;
 
   /* look for a battery */
-  NSLog(@"looking for ACPI...");
   fm = [NSFileManager defaultManager];
   dirNames = [fm directoryContentsAtPath:DEV_SYS_POWERSUPPLY];
-  if (dirNames != nil)
+  if (dirNames != nil && [dirNames count] > 0)
     {
       done = NO;
       en = [dirNames objectEnumerator];
@@ -85,8 +84,9 @@
     }
   else
     {
+      NSLog(@"No /sys, trying /proc/acpi");
       dirNames = [fm directoryContentsAtPath:@"/proc/acpi/battery"];
-      if (dirNames != nil)
+      if (dirNames != nil && [dirNames count] > 0)
         {
           done = NO;
           en = [dirNames objectEnumerator];
@@ -115,7 +115,8 @@
                       fclose(stateFile);
                       useACPIproc = YES;
                     }           
-                } else
+                }
+	      else
                 {
                   done = YES;
                 }
@@ -133,7 +134,7 @@
           else
             {
               dirNames = [fm directoryContentsAtPath:DEV_PROC_PMU];
-              if (dirNames != nil)
+              if (dirNames != nil && [dirNames count] > 0)
                 {
                   NSLog(@"Found PMU");
                   usePMU = YES;
