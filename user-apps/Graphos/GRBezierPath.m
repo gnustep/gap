@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2014 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -236,7 +236,6 @@ static double k = 0.025;
 - (NSDictionary *)objectDescription
 {
   NSMutableDictionary *dict;
-  NSMutableArray *psops;
   NSMutableArray *points;
   NSString *str;
   NSBezierPathElement type;
@@ -301,23 +300,6 @@ static double k = 0.025;
       [points addObject:str];
     }
   [dict setObject: points forKey:@ "points"];
-#if 0
-  psops = [NSMutableArray arrayWithCapacity: 1];
-  // FIXME/TODO in a new file release, this list should be generated from the control-points instead */
-  for(i = 0; i < [myPath elementCount]; i++)
-    {
-      type = [myPath elementAtIndex: i associatedPoints: p];
-      if(type == NSMoveToBezierPathElement)
-	str = [NSString stringWithFormat: @"%.3f %.3f moveto", p[0].x / zmFactor, p[0].y / zmFactor];
-      else if(type == NSLineToBezierPathElement)
-	str = [NSString stringWithFormat: @"%.3f %.3f lineto", p[0].x / zmFactor, p[0].y / zmFactor];
-      else if(type == NSCurveToBezierPathElement)
-	str = [NSString stringWithFormat: @"%.3f %.3f %.3f %.3f %.3f %.3f curveto",
-			p[0].x / zmFactor, p[0].y / zmFactor, p[1].x / zmFactor, p[1].y / zmFactor, p[2].x / zmFactor, p[2].y / zmFactor];
-        [psops addObject: str];
-    }
-  [dict setObject: psops forKey: @"psdata"];
-#endif
   
   return dict;
 }
