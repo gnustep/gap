@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierControlPoint.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2014 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -38,8 +38,10 @@
     {
       path = aPath;
       zmFactor = zf;
-      bzHandle.center = aPoint;
       center = aPoint;
+      bzHandle.center = aPoint;
+      bzHandle.firstHandle = aPoint;
+      bzHandle.secondHandle = aPoint;
       bzHandle.centerRect = NSMakeRect(aPoint.x-3, aPoint.y-3, 6, 6);
       [self calculateBezierHandles: aPoint];
       isSelect = NO;
