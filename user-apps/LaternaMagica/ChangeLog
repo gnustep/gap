@@ -1,3 +1,8 @@
+2014-01-19 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h (changeImage)
+	Optimize display in case of rotaded images.
+
 2013-12-24 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
