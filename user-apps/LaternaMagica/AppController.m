@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2013 Riccardo Mottola
+   Copyright (C) 2006-2014 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -187,22 +187,23 @@
 - (void)changeImage:(LMImage *) image
 {
   NSImage *nsImage;
+  NSImage *img;
 
   nsImage = [[NSImage alloc] initByReferencingFile:[image path]];
-  [self scaleView:nsImage];
-  [view setImage: nsImage];
+  [nsImage autorelease];
+  img = nsImage;
   if ([image rotation] > 0)
     {
       NSImage *destImage;
 
-      destImage = [self rotate: [view image] byAngle:[image rotation]];
-
-      [self scaleView:destImage];
-      [view setImage: destImage];
+      destImage = [self rotate: nsImage byAngle:[image rotation]];
+      img = destImage;
     }
+  [self scaleView: img];
+  [view setImage: img];
+
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
-  [nsImage release];
   [window setTitleWithRepresentedFilename:[image name]];
 }
 
