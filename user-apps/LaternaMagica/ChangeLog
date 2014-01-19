@@ -1,6 +1,12 @@
 2014-01-19 Riccardo Mottola <rm@gnu.org>
 
-	* AppController.h (changeImage)
+	* AppController.m (setFullScreen)
+	Release the image from the view being switched out, to save memory.
+	Smaller optimization in the image setting calls.
+
+2014-01-19 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m (changeImage)
 	Optimize display in case of rotaded images.
 
 2013-12-24 Riccardo Mottola <rm@gnu.org>
