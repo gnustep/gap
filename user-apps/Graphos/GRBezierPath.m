@@ -84,7 +84,7 @@ static double k = 0.025;
           GRBezierControlPoint *cp;
 
           linearr = [[points objectAtIndex: i] componentsSeparatedByString: @" "];
-          NSLog(@"line aarray: %@", linearr);
+          NSLog(@"line array: %@", linearr);
           h.firstHandle.x = [[linearr objectAtIndex: 0] floatValue];
           h.firstHandle.y = [[linearr objectAtIndex: 1] floatValue];
           h.center.x = [[linearr objectAtIndex: 2] floatValue];
@@ -568,7 +568,7 @@ static double k = 0.025;
 - (void)remakePath
 {
   GRBezierControlPoint *cp, *prevcp, *mtopoint;
-  GRBezierHandle handle1, handle2;
+
   NSInteger i;
 
   [myPath removeAllPoints];
@@ -579,15 +579,31 @@ static double k = 0.025;
   [myPath moveToPoint: GRpointZoom([mtopoint center], zmFactor)];
   for(i = 1; i < [controlPoints count]; i++)
     {
+      GRBezierHandle handle1, handle2;
+      BOOL isLine;
+
       cp = [controlPoints objectAtIndex: i];
       prevcp = [controlPoints objectAtIndex: i -1];
-      
       handle1 = [prevcp bzHandle];
       handle2 = [cp bzHandle];
-      [myPath curveToPoint: GRpointZoom([cp center], zmFactor)
-              controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
-              controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
+
+      /* we have a line if the start and end control points have respectively
+         right and left center-coincident handles */
+      isLine = NO;
+      if (NSEqualPoints(handle1.center, handle1.secondHandle) && NSEqualPoints(handle2.center, handle2.firstHandle))
+        isLine = YES;
       
+      if (isLine)
+        {
+          [myPath lineToPoint: GRpointZoom([cp center], zmFactor)];
+        }
+      else
+        {
+          [myPath curveToPoint: GRpointZoom([cp center], zmFactor)
+                 controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
+                 controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
+        }
+
       if([self isPoint: cp onPoint: mtopoint])
 	[(GRBezierPathEditor *)editor setIsDone:YES];
     }
