@@ -251,6 +251,7 @@
     [window makeKeyAndOrderFront: self];
 
     image = [view image];
+    [image retain];
     
     /* we choose not to respond to key events if not in fullscreen */
     if ([sender isKindOfClass:[NSEvent class]] && [fullScreenMenuItem state] == NSOffState)
@@ -270,18 +271,20 @@
 
     if ([fullScreenButton state] == NSOnState)
     {
+      [smallView setImage: nil];
         [fullWindow setLevel: NSScreenSaverWindowLevel];
         window = fullWindow;
         view = fullView;
     } else
     {
+      [fullView setImage: nil];
         [fullWindow orderOut:self];
         window = smallWindow;
         view = smallView;
     }
-    [self setScaleToFit: self];
-    [self scaleView: image];
     [view setImage: image];
+    [image release];
+    [self setScaleToFit: self];
     [view setNeedsDisplay:YES];
     [[view superview] setNeedsDisplay:YES];
     [window makeKeyAndOrderFront: self];
