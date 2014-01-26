@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSWindowController.h,v 1.1 2008/10/14 15:03:48 hns Exp $
+//  $Id: FSWindowController.h,v 1.2 2014/01/26 23:18:02 rmottola Exp $
 
 #import <AppKit/AppKit.h>
 
@@ -77,7 +77,7 @@
 @interface FSWindowController (FSFirstResponder)
 
 - (void)insertItem:(id)sender;
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem;
+- (BOOL)validateUserInterfaceItem:(id <NSObject, NSValidatedUserInterfaceItem>)anItem;
 
 @end
 
