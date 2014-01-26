@@ -1,4 +1,4 @@
-//  $Id: FSExpression.h,v 1.1 2008/10/14 15:04:16 hns Exp $
+//  $Id: FSExpression.h,v 1.2 2014/01/26 22:32:43 rmottola Exp $
 //
 //  FSExpression.h
 //  FlexiSheet
@@ -6,6 +6,8 @@
 //  Created by Stefan Leuker on 17-MAY-2001.
 //
 //  Copyright (c) 2001-2004, Stefan Leuker.        All rights reserved.
+//                2014, GNUstep Application Team
+//  Authors: Stefan Leuker, Riccardo Mottola
 //  
 //  Redistribution and use in source and binary forms,  with or without
 //  modification,  are permitted provided that the following conditions
@@ -39,6 +41,18 @@
 //  
 
 #import <Foundation/Foundation.h>
+
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#if !defined(NSUInteger)
+#define NSUInteger unsigned
+#endif
+#if !defined(NSInteger)
+#define NSInteger int
+#endif
+#if !defined(CGFloat)
+#define CGFloat float
+#endif
+#endif
 
 @class FSFormulaSpace, FSTable, FSSelection, FSKeySet;
 
