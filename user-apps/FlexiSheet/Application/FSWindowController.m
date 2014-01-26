@@ -4,8 +4,11 @@
 //
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
+//                2014 Riccardo Mottola
 //
-//  $Id: FSWindowController.m,v 1.4 2014/01/26 22:59:10 rmottola Exp $
+//  $Id: FSWindowController.m,v 1.5 2014/01/26 23:08:04 rmottola Exp $
+
+#import <Foundation/NSObject.h>
 
 #import "FlexiSheet.h"
 #import "FSExporter.h"
@@ -558,7 +561,7 @@ static NSArray*    __FSTCPBTYPES = nil;
 }
 
 
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem
+- (BOOL)validateUserInterfaceItem:(id <NSObject, NSValidatedUserInterfaceItem>)anItem
 {
     if ([anItem action] == @selector(clear:)) {
         return ([tableView hasDataSelection]);
