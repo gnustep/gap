@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 17-OCT-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSFunctionHelp.m,v 1.1 2008/10/14 15:03:45 hns Exp $
+//  $Id: FSFunctionHelp.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FSFunctionHelp.h"
 #import "FSFunction.h"
@@ -68,7 +68,7 @@
     }
 }
 
-- (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
     if (sender == groups) {
         return [[FSFunction allGroupNames] count]+1;
@@ -79,7 +79,7 @@
     return 0;
 }
 
-- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(int)row column:(int)column
+- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column
 {
     [cell setLeaf:YES];
     if (sender == groups) {

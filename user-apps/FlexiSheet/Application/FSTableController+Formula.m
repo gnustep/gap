@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 05-OCT-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSTableController+Formula.m,v 1.1 2008/10/14 15:03:47 hns Exp $
+//  $Id: FSTableController+Formula.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FlexiSheet.h"
 
@@ -19,7 +19,7 @@
 - (void)addFormula:(id)sender
 /*" Adds a formula to the table controlled by this instance. "*/
 {
-    int row = [formulaTable numberOfRows];
+    NSInteger row = [formulaTable numberOfRows];
     [_table addFormula:@""];
     [formulaTable selectRow:row byExtendingSelection:NO];
     [formulaTable editColumn:1 row:row withEvent:nil select:YES];
@@ -33,11 +33,11 @@
     [formulaTable editColumn:1 row:row+1 withEvent:nil select:YES];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)tv
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tv
 {
     NSArray *formulae = [_table formulae];
-    int      index = [formulae count];
-    int      count = 0;
+    NSInteger   index = [formulae count];
+    NSInteger   count = 0;
 
     while (index-- > 0) 
         count += [[formulae objectAtIndex:index] isOK]?1:2;
@@ -45,13 +45,13 @@
     return count;
 }
 
-- (FSFormula*)_formulaInRow:(int)row nextLine:(BOOL*)displayError
+- (FSFormula*)_formulaInRow:(NSInteger)row nextLine:(BOOL*)displayError
 {
-    NSArray *formulae = [_table formulae];
-    id       object;
-    int      index = 0;
-    int      count = 0;
-    BOOL     error = NO;
+    NSArray   *formulae = [_table formulae];
+    id        object;
+    NSInteger index = 0;
+    NSInteger count = 0;
+    BOOL      error = NO;
 
     if ([formulae count] == 0) return nil;
     object = [formulae objectAtIndex:index];
@@ -75,7 +75,7 @@
 
 - (void)deleteFormula:(id)sender
 {
-    int row = [formulaTable selectedRow];
+    NSInteger row = [formulaTable selectedRow];
     if (row != -1) {
         BOOL       error;
         FSFormula *formula = [self _formulaInRow:row nextLine:&error];
@@ -86,7 +86,7 @@
     return;
 }
 
-- (id)tableView:(NSTableView *)tv objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (id)tableView:(NSTableView *)tv objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     BOOL       error;
     FSFormula *formula = [self _formulaInRow:row nextLine:&error];
@@ -101,7 +101,7 @@
     }
 }
 
-- (void)tableView:(NSTableView *)tv setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (void)tableView:(NSTableView *)tv setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if (tableColumn != _numberColumn) {
         BOOL       error;
@@ -114,7 +114,7 @@
     }
 }
 
-- (BOOL)tableView:(NSTableView *)tv shouldSelectRow:(int)row
+- (BOOL)tableView:(NSTableView *)tv shouldSelectRow:(NSInteger)row
 {
     BOOL       error;
     [self _formulaInRow:row nextLine:&error];
@@ -123,14 +123,14 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    int row = [[notification object] selectedRow];
+    NSInteger row = [[notification object] selectedRow];
     FSFormula *formula = [self _formulaInRow:row nextLine:NULL];
     if ([formula isOK]) {
         [tableView setSelection:[formula touchedSelection]];
     }
 }
 
-- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     BOOL       error;
     FSFormula *formula = [self _formulaInRow:row nextLine:&error];
@@ -150,7 +150,7 @@
     }
 }
 
-- (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if (tableColumn == _numberColumn) {
         return NO;
@@ -188,7 +188,7 @@ static int _XXX_dragIndex;
 
 
 - (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info
-    proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op
+    proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op
 {
     if (row == -1) row = [formulaTable numberOfRows];
     if ([info draggingSource] != formulaTable) return NSDragOperationNone;
@@ -202,7 +202,7 @@ static int _XXX_dragIndex;
 
 
 - (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info
-    row:(int)row dropOperation:(NSTableViewDropOperation)op;
+    row:(NSInteger)row dropOperation:(NSTableViewDropOperation)op;
 {
     FSFormula *formula = nil;
     

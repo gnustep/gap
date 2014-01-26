@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 30-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSInspection.m,v 1.1 2008/10/28 13:10:28 hns Exp $
+//  $Id: FSInspection.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FlexiSheet.h"
 #import "FSInspection.h"
@@ -82,12 +82,12 @@
 
 @implementation FSController (HeaderInspection)
 
-- (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
     return 0; //[[[self currentDocument] headers] count];
 }
 
-- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(int)row column:(int)column
+- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column
 {
     [cell setLoaded:YES];
     [cell setLeaf:YES];

@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 16-MAY-2002.
 //  Copyright (c) 2002-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSTableView+Keyboard.m,v 1.1 2008/10/28 13:10:31 hns Exp $
+//  $Id: FSTableView+Keyboard.m,v 1.2 2014/01/26 09:23:53 buzzdee Exp $
 
 #import "FlexiSheet.h"
 
@@ -81,7 +81,7 @@
                                       inGroup:[sel group]]];
             [self scrollItemSelectionToVisible];
         }
-        if (sel = [self selectedColumnItems]) {
+        if ((sel = [self selectedColumnItems])) {
             // must be a top selection.  move to data cell
             NSRange  r = [sel indexRange];
             FSCell   c1 = FSMakeCell(0, r.location);
@@ -145,7 +145,7 @@
                                       inGroup:[sel group]]];
             [self scrollItemSelectionToVisible];
         }
-        if (sel = [self selectedRowItems]) {
+        if ((sel = [self selectedRowItems])) {
             // must be a side selection.  move to data cell
             NSRange  r = [sel indexRange];
             FSCell   c1 = FSMakeCell(r.location, 0);

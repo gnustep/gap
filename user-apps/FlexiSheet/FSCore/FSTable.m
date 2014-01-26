@@ -1,4 +1,4 @@
-//  $Id: FSTable.m,v 1.1 2008/10/14 15:04:23 hns Exp $
+//  $Id: FSTable.m,v 1.2 2014/01/26 09:23:53 buzzdee Exp $
 //
 //  FSTable.m
 //  FlexiSheet
@@ -102,7 +102,7 @@ NSString* FSEditRevertedNotification     = @"FSEditReverted";
 }
 
 
-- (void)release
+- (oneway void)release
 {
     TEST_DBG [FSLog logDebug:@"FSTable %X released (now at %i).", self, [self retainCount]-1];
     [super release];

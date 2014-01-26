@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSTableController.m,v 1.2 2008/12/17 18:16:03 rmottola Exp $
+//  $Id: FSTableController.m,v 1.3 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FlexiSheet.h"
 
@@ -165,8 +165,9 @@ static NSArray*    __FSFTPBTYPES = nil;
     return (subview == [[sender subviews] objectAtIndex:0]);
 }
 
-
-- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedCoord ofSubviewAt:(int)offset
+- (CGFloat)splitView:(NSSplitView *)sender
+	constrainMinCoordinate:(CGFloat)proposedCoord
+		   ofSubviewAt:(NSInteger)offset
 {
     if (offset == 0) {
         return MAX(proposedCoord, 50);
@@ -175,7 +176,9 @@ static NSArray*    __FSFTPBTYPES = nil;
 }
 
 
-- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedCoord ofSubviewAt:(int)offset
+- (CGFloat)splitView:(NSSplitView *)sender
+	constrainMaxCoordinate:(CGFloat)proposedCoord
+		   ofSubviewAt:(NSInteger)offset
 {
     if (offset == 0) {
         return MIN(proposedCoord, [sender frame].size.height-150);

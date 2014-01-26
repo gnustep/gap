@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 27-AUG-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSMatrix.m,v 1.5 2012/02/03 00:28:56 rmottola Exp $
+//  $Id: FSMatrix.m,v 1.6 2014/01/26 09:23:53 buzzdee Exp $
 
 #import "FlexiSheet.h"
 
@@ -140,19 +140,19 @@
 
 
 - (void)drawRect:(NSRect)rect {
-    int                  row, col, max;
+    NSInteger            row, col, max;
     NSRect               frame = {{0,0},{0,0}};
     FSCellStyle         *style;
     NSString            *strg;
     NSDictionary        *attributes;
     FSCell               cell;
     FSLineStyle          linestyle;
-    float                dash[2] = {5,5};
-    float                maxX = rect.origin.x + rect.size.width;
-    float                maxY = rect.origin.y + rect.size.height;
+    CGFloat              dash[2] = {5,5};
+    CGFloat              maxX = rect.origin.x + rect.size.width;
+    CGFloat              maxY = rect.origin.y + rect.size.height;
     BOOL                 _primary = ([[self window] firstResponder] == self);
-    NSGraphicsContext   *ctx = [NSGraphicsContext currentContext];
-    void                *port = [ctx graphicsPort];
+    // NSGraphicsContext   *ctx = [NSGraphicsContext currentContext]; // unused variable
+    // void                *port = [ctx graphicsPort]; // unused variable
     NSColor             *primaryColor = [NSColor selectedControlColor];
     NSColor             *secondaryColor = [NSColor secondarySelectedControlColor];
     
@@ -591,7 +591,7 @@
     FSCell   l = [self cellAtPoint:click origin:NULL];
     FSCell   cLoc, oldLoc = {-1,-1};
     NSRect   rc1, rc2, oldRect;
-    BOOL     extendSelection = ([event modifierFlags] && NSShiftKeyMask);
+    BOOL     extendSelection = ([event modifierFlags] & NSShiftKeyMask);
 
     if ([_dataSource matrixShouldBecomeFirstResponder:self])
         [self _endEditing];

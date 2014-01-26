@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 11-FEB-2002.
 //  Copyright (c) 2002-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSFormulaTable.m,v 1.1 2008/10/28 13:10:30 hns Exp $
+//  $Id: FSFormulaTable.m,v 1.2 2014/01/26 09:23:53 buzzdee Exp $
 
 #import "FlexiSheet.h"
 
@@ -70,7 +70,10 @@
 }
 
 
-- (void)editColumn:(int)columnIndex row:(int)rowIndex withEvent:(NSEvent *)theEvent select:(BOOL)flag
+- (void)editColumn:(NSInteger)columnIndex
+	       row:(NSInteger)rowIndex
+	 withEvent:(NSEvent *)theEvent
+	    select:(BOOL)flag
 {
     [super editColumn:columnIndex row:rowIndex withEvent:theEvent select:flag];
     _isEditing = YES;

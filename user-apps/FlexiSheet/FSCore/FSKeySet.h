@@ -1,4 +1,4 @@
-//  $Id: FSKeySet.h,v 1.1 2008/10/14 15:04:21 hns Exp $
+//  $Id: FSKeySet.h,v 1.2 2014/01/26 09:23:53 buzzdee Exp $
 //
 //  FSKeySet.h
 //  FlexiSheet
@@ -75,7 +75,7 @@
 - (BOOL)isValid;
 - (BOOL)isComplete;
 - (FSHashKey)hashcode;
-- (unsigned)count;
+- (NSUInteger)count;
 - (NSEnumerator*)objectEnumerator;
 
 // Convenience methods
