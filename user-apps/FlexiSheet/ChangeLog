@@ -1,3 +1,27 @@
+2014-01-26: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Application/FSController.m
+	* Application/FSDocument.m
+	* Application/FSFunctionHelp.m
+	* Application/FSTableController+Formula.m
+	* Application/FSTableController.m
+	* Application/Inspection/FSCellInspectorPane.m
+	* Application/Inspection/FSDocumentInspectorPane.m
+	* Application/Inspection/FSInspection.m
+	* Application/Inspection/FSTableInspectorPane.m
+	* Application/Inspection/FSViewInspectorPane.m
+	* Application/UI/FSFormulaTable.m
+	* Application/UI/FSMatrix.m
+	* Application/UI/FSTableView+Keyboard.m
+	* Application/UI/FSTableView+Layout.m
+	* Application/UI/ImageAndTextCell.m
+	* FSCore/FSKeyGroup.m
+	* FSCore/FSKeySet.h
+	* FSCore/FSKeySet.m
+	* FSCore/FSTable.m
+	* FSCore/FSVariable.m
+	Some NS(U)Integer and float -> CGFloat transitions and
+	other minor fixes
+
 2012-02-07 Riccardo Mottola <rm@gnu.org>
 
 	* Application/UI/FSVarioMatrix.m

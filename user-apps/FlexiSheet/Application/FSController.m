@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 29-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSController.m,v 1.1 2008/10/14 15:03:44 hns Exp $
+//  $Id: FSController.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FlexiSheet.h"
 #import "FSImporter.h"
@@ -20,7 +20,7 @@ static SLSplashScreen *_splashScreen;
 //
 // Version String
 //
-NSString *FSVersionString = @"$Author: hns $  $Revision: 1.1 $";
+NSString *FSVersionString = @"$Author: buzzdee $  $Revision: 1.2 $";
 
 //
 // Preference Strings
@@ -176,7 +176,7 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
 
 - (void)openViewFromTableBrowser:(id)sender
 {
-    int sel = [docOutline selectedRow];
+    NSInteger sel = [docOutline selectedRow];
     if (sel != NSNotFound) {
         FSWorksheet *ws = [docOutline itemAtRow:sel];
         if ([ws isKindOfClass:[FSWorksheet class]]) {
@@ -188,7 +188,7 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
 
 - (void)removeTableFromTableBrowser:(id)sender
 {
-    int sel = [docOutline selectedRow];
+    NSInteger sel = [docOutline selectedRow];
     if (sel != NSNotFound) {
         FSTable *table = [docOutline itemAtRow:sel];
         if ([table isKindOfClass:[FSTable class]]) {
@@ -205,7 +205,7 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
 - (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem
 {
     if ([anItem action] == @selector(openViewFromTableBrowser:)) {
-        int sel = [docOutline selectedRow];
+        NSInteger sel = [docOutline selectedRow];
         if (sel != NSNotFound) {
             id obj = [docOutline itemAtRow:sel];
             return ([obj isKindOfClass:[FSWorksheet class]]);
@@ -213,7 +213,7 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
         return NO;
     }
     if ([anItem action] == @selector(removeTableFromTableBrowser:)) {
-        int sel = [docOutline selectedRow];
+        NSInteger sel = [docOutline selectedRow];
         if (sel != NSNotFound) {
             id obj = [docOutline itemAtRow:sel];
             return ([obj isKindOfClass:[FSTable class]]);
@@ -295,7 +295,7 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
 
 @implementation FSController (DocumentOverview)
 
-- (id)outlineView:(NSOutlineView*)ov child:(int)index ofItem:(id)item
+- (id)outlineView:(NSOutlineView*)ov child:(NSInteger)index ofItem:(id)item
 {
     if (item == nil) {
         // root object
@@ -317,7 +317,7 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
     return NO;
 }
 
-- (int)outlineView:(NSOutlineView*)ov numberOfChildrenOfItem:(id)item
+- (NSInteger)outlineView:(NSOutlineView*)ov numberOfChildrenOfItem:(id)item
 {
     if (item == nil) {
         return [[self documents] count];

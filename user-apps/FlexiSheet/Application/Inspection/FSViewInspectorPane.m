@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 16-DEC-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSViewInspectorPane.m,v 1.1 2008/10/28 13:10:29 hns Exp $
+//  $Id: FSViewInspectorPane.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FSViewInspectorPane.h"
 
@@ -51,7 +51,8 @@
             [documentField setStringValue:@""];
         }
         [comments setString:@""];
-        [comments replaceCharactersInRange:NSMakeRange(0,0) withRTF:[view comment]];
+        [comments replaceCharactersInRange:NSMakeRange(0,0)
+				   withRTF:[[view comment] dataUsingEncoding:NSUTF8StringEncoding]];
         [comments setEditable:YES];
     } else {
         [nameField setStringValue:@"Invalid object"];

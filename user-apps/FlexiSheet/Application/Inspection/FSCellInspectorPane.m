@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 29-DEC-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSCellInspectorPane.m,v 1.1 2008/10/28 13:10:24 hns Exp $
+//  $Id: FSCellInspectorPane.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FlexiSheet.h"
 #import "FSCellInspectorPane.h"
@@ -172,13 +172,13 @@
 }
 
 
-- (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
     return 0;
 }
 
 
-- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(int)row column:(int)column
+- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column
 {
     [cell setLeaf:YES];
     [cell setLoaded:YES];

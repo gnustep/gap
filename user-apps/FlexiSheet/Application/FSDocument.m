@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 29-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSDocument.m,v 1.1 2008/10/14 15:03:44 hns Exp $
+//  $Id: FSDocument.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FlexiSheet.h"
 #import "FSArchiving.h"
@@ -154,7 +154,7 @@
 }
 
 
-- (void)release
+- (oneway void)release
 {
     [FSLog logDebug:@"FSDocument %X released (now at %i).", self, [self retainCount]-1];
     [super release];
@@ -449,7 +449,7 @@
 
 - (NSData *)dataRepresentationOfType:(NSString*)aType
 {
-    NSData       *output;
+    // NSData       *output; // unused variable
     NSDictionary *dataDict = [self dictionaryForArchiving];
     // dataDict now only contains the core data.
     // Add the worksheets:
@@ -489,7 +489,7 @@
 - (BOOL)loadDataRepresentation:(NSData*)data ofType:(NSString*)aType
 {
     NSDictionary      *dataDict = nil;
-    char               twobytes[2];
+    // char               twobytes[2]; // unused variable
     NSTimeInterval     start = [NSDate timeIntervalSinceReferenceDate];
     NSTimeInterval     end;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

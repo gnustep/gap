@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 09-SEP-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSTableView+Layout.m,v 1.1 2008/10/28 13:10:31 hns Exp $
+//  $Id: FSTableView+Layout.m,v 1.2 2014/01/26 09:23:53 buzzdee Exp $
 
 #import "FSTableView.h"
 #import "FSHeaderLayout.h"
@@ -165,14 +165,14 @@ NSString  *FSLayoutStylesKey   = @"Styles";
     [self _releaseCellAreaInformation];
     
     _uniqueCols = [[[tH lastObject] keys] count];
-    if (idx = _nHTop = [tH count]) {
+    if ((idx = _nHTop = [tH count])) {
         while (idx-- > 0) {
             top += [[self _hloTop:idx] globalHeight];
         }
     } else top = 10;
 
     _uniqueRows = [[[sH lastObject] keys] count];
-    if (idx = _nHSide = [sH count]) {
+    if ((idx = _nHSide = [sH count])) {
         while (idx-- > 0) {
             side += [[self _hloSide:idx] globalWidth];
         }
@@ -241,7 +241,7 @@ NSString  *FSLayoutStylesKey   = @"Styles";
 {
     FSHeader       *header = [[dataSource topHeadersForTableView:self] lastObject];
     FSHeaderLayout *hlo = [_hlObjects objectForKey:[header label]];
-    int             index;
+    NSUInteger      index;
 
     index = [header count];
     while (index-- > 0) {
@@ -371,7 +371,7 @@ NSString  *FSLayoutStylesKey   = @"Styles";
 - (void)renameLayoutHintsForHeader:(FSHeader*)header newName:(NSString*)newName
 {
     id value;
-    if (value = [_hlObjects objectForKey:[header label]]) {
+    if ((value = [_hlObjects objectForKey:[header label]])) {
         [_hlObjects setObject:value forKey:newName];
         [_hlObjects removeObjectForKey:[header label]];
     }

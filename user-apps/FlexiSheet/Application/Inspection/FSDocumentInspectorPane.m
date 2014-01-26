@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 15-DEC-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSDocumentInspectorPane.m,v 1.1 2008/10/28 13:10:28 hns Exp $
+//  $Id: FSDocumentInspectorPane.m,v 1.2 2014/01/26 09:23:52 buzzdee Exp $
 
 #import "FSDocumentInspectorPane.h"
 #import "SLCornerMenu.h"
@@ -207,7 +207,7 @@
 // TableDataSource
 //
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     if (aTableView == tables) {
         return [[document tables] count];
@@ -218,7 +218,9 @@
 }
 
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)column row:(int)row
+- (id)tableView:(NSTableView *)aTableView
+	objectValueForTableColumn:(NSTableColumn *)column
+			      row:(NSInteger)row
 {
     if (column == tableColumn) {
         return [[[document tables] objectAtIndex:row] name];

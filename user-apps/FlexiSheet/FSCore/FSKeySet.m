@@ -1,4 +1,4 @@
-//  $Id: FSKeySet.m,v 1.2 2012/01/25 13:52:13 rmottola Exp $
+//  $Id: FSKeySet.m,v 1.3 2014/01/26 09:23:53 buzzdee Exp $
 //
 //  FSKeySet.m
 //  FlexiSheet
@@ -192,7 +192,7 @@
 }
 
 
-- (unsigned)count
+- (NSUInteger)count
 {
     return [[self _allKeys] count];
 }
@@ -405,8 +405,8 @@
 - (FSKey*)keyForHeader:(FSHeader*)header
     /*" Returns the key for dimension header or nil if such a key is not part of the set."*/
 {
-    FSTable *table = [self table];
-    int      index = [table indexOfHeader:header];
+    FSTable  *table = [self table];
+    NSInteger index = [table indexOfHeader:header];
 
     if (index == NSNotFound) return nil;
     if (!_data.count || !_data.keys) return nil;

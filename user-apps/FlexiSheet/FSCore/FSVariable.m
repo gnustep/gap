@@ -1,4 +1,4 @@
-//  $Id: FSVariable.m,v 1.1 2008/10/14 15:04:24 hns Exp $
+//  $Id: FSVariable.m,v 1.2 2014/01/26 09:23:53 buzzdee Exp $
 //
 //  FSVariable.m
 //  FlexiSheet
@@ -215,9 +215,9 @@ NSString *FS_RCFN[5] = {@"FIRST", @"PREV", @"THIS", @"NEXT", @"LAST"};
     }
 
     if (_rGroup) {
-        NSArray *keys = [_rGroup keys];
-        FSKey   *key = [set keyForGroup:_rGroup];
-        int      idx = [keys indexOfObject:key];
+        NSArray  *keys = [_rGroup keys];
+        FSKey     *key = [set keyForGroup:_rGroup];
+        NSUInteger idx = [keys indexOfObject:key];
         switch (_recSpc) {
             case FS_THIS:
                 break;
@@ -231,7 +231,7 @@ NSString *FS_RCFN[5] = {@"FIRST", @"PREV", @"THIS", @"NEXT", @"LAST"};
             case FS_NEXT:
                 if (idx != NSNotFound) {
                     idx += _recSpc;
-                    if ((idx >= 0) && (idx < [keys count])) {
+                    if (idx < [keys count]) {
                         [set addKey:[keys objectAtIndex:idx]];
                     } else {
                         [NSException raise:@"FSFormulaException" format:@"Index of of bounds in recursive calculation."];

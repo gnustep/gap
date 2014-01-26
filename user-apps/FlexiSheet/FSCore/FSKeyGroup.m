@@ -1,4 +1,4 @@
-//  $Id: FSKeyGroup.m,v 1.2 2010/09/22 21:47:28 rmottola Exp $
+//  $Id: FSKeyGroup.m,v 1.3 2014/01/26 09:23:53 buzzdee Exp $
 //
 //  FSKeyGroup.m
 //  FlexiSheet
@@ -590,7 +590,7 @@ NSArray* FSExpandItemsToGroups(NSArray *items)
 
 - (void)ungroupItemsInGroup:(FSKeyGroup*)group
 {
-    unsigned index = [_items indexOfObject:group];
+    NSUInteger index = [_items indexOfObject:group];
     if (index != NSNotFound) [self ungroupAtIndex:index];
 }
 
