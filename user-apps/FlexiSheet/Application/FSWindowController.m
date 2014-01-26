@@ -5,7 +5,7 @@
 //  Created by Stefan Leuker on 31-JAN-2001.
 //  Copyright (c) 2001-2003 Stefan Leuker. All rights reserved.
 //
-//  $Id: FSWindowController.m,v 1.3 2012/01/26 23:12:16 rmottola Exp $
+//  $Id: FSWindowController.m,v 1.4 2014/01/26 22:59:10 rmottola Exp $
 
 #import "FlexiSheet.h"
 #import "FSExporter.h"
@@ -146,13 +146,13 @@ static NSArray*    __FSTCPBTYPES = nil;
 }
 
 
-- (void)tableWillChange:notification
+- (void)tableWillChange:(NSNotification*)notification
 {
     [self _storeLayout];
 }
 
 
-- (void)tableDidChange:notification
+- (void)tableDidChange:(NSNotification*)notification
 {
     [self synchronizeWindowTitleWithDocumentName];
     [self syncWithDocument];
@@ -558,7 +558,7 @@ static NSArray*    __FSTCPBTYPES = nil;
 }
 
 
-- (BOOL)validateUserInterfaceItem:(id)anItem
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem
 {
     if ([anItem action] == @selector(clear:)) {
         return ([tableView hasDataSelection]);

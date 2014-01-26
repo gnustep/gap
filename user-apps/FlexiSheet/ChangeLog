@@ -1,3 +1,8 @@
+2014-01-26 Riccardo Mottola <rm@gnu.org>
+
+	* Application/FSWindowController.m
+        Fix signatures to fix warnings.
+
 2014-01-26: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Application/FSController.m
 	* Application/FSDocument.m
