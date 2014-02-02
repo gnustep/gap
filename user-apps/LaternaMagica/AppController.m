@@ -37,6 +37,9 @@
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
 #define NSInteger int
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3
+#define NSImageGamma @"NSImageGamma"
+#endif
 #endif
 
 
@@ -144,7 +147,7 @@
     [fileListView selectRow: [fileListView numberOfRows]-1 byExtendingSelection: NO];
 }
 
-// scale image according to options
+// scale image view according to options
 - (void)scaleView:(NSImage *) image
 {
     NSPoint rectOrigin;
@@ -181,7 +184,6 @@
     }
     rectOrigin = NSMakePoint((rectSize.width - [view frame].size.width)/2, (rectSize.height - [view frame].size.height)/2);
     [view setFrameOrigin:rectOrigin];
-    [view setNeedsDisplay:YES];
 }
 
 - (void)changeImage:(LMImage *) image
@@ -190,8 +192,10 @@
   NSImage *img;
 
   nsImage = [[NSImage alloc] initByReferencingFile:[image path]];
+  
   [nsImage autorelease];
   img = nsImage;
+
   if ([image rotation] > 0)
     {
       NSImage *destImage;
@@ -221,6 +225,7 @@
     [scrollView setHasVerticalScroller:!scaleToFit];
     [scrollView setHasHorizontalScroller:!scaleToFit];
     [self scaleView:[view image]];
+    [view setNeedsDisplay:YES];
 }
 
 /** method called as a notification from the selection change */
@@ -497,6 +502,7 @@
   NSBitmapImageRep *srcImageRep;
   NSImage *destImage;
   NSBitmapImageRep *destImageRep;
+  NSMutableDictionary *imgProps;
   int x, y;
   int w, h;
   int newW, newH;
@@ -506,26 +512,42 @@
   unsigned char *srcData;
   unsigned char *destData;
   unsigned char *p1, *p2;
+  NSSize oldRepSize, newRepSize;
+  NSSize oldImgSize, newImgSize;
 
   /* get source image representation and associated information */
-
+  oldImgSize = [image size];
   srcImageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
+  oldRepSize = [srcImageRep size];
   w = [srcImageRep pixelsWide];
   h = [srcImageRep pixelsHigh];
   if (angle == 90 || angle == 270)
     {
       newH = w;
       newW = h;
+      newImgSize = NSMakeSize(oldImgSize.height, oldImgSize.width);
+      newRepSize = NSMakeSize(oldRepSize.height, oldRepSize.width);
     }
   else
     {
       newH = h;
       newW = w;
+      newImgSize = oldImgSize;
+      newRepSize = oldRepSize;
     }
 
   srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+
+  imgProps = [[NSMutableDictionary alloc] init];
+  [imgProps setValue:[srcImageRep valueForProperty:NSImageCompressionMethod] forKey:NSImageCompressionMethod];
+  [imgProps setValue:[srcImageRep valueForProperty:NSImageCompressionFactor] forKey:NSImageCompressionFactor];
+  [imgProps setValue:[srcImageRep valueForProperty:NSImageEXIFData] forKey:NSImageEXIFData];
+  [imgProps setValue:[srcImageRep valueForProperty:NSImageGamma] forKey:NSImageGamma];
+  [imgProps setValue:[srcImageRep valueForProperty:NSImageColorSyncProfileData] forKey:NSImageColorSyncProfileData];
+  NSLog(@"Properties: %@", imgProps);
+  
   destSamplesPerPixel = srcSamplesPerPixel;
-  destImage = [[NSImage alloc] initWithSize:NSMakeSize(newW, newH)];
+  destImage = [[NSImage alloc] initWithSize:newImgSize];
   destImageRep = [[NSBitmapImageRep alloc]
 		   initWithBitmapDataPlanes:NULL
 				 pixelsWide:newW
@@ -537,7 +559,12 @@
 			     colorSpaceName:[srcImageRep colorSpaceName]
 				bytesPerRow:newW*destSamplesPerPixel  // we need to set this because otherwise mac > 10.4 will set a padded value
 			       bitsPerPixel:0];
-  
+  [destImageRep setSize:newRepSize];
+  [destImageRep setProperty:NSImageEXIFData withValue:[imgProps valueForKey:NSImageEXIFData]];
+  [destImageRep setProperty:NSImageColorSyncProfileData withValue:[imgProps valueForKey:NSImageColorSyncProfileData]];
+  [destImageRep setProperty:NSImageGamma withValue:[imgProps valueForKey:NSImageGamma]];
+  [imgProps release];
+
   srcData = [srcImageRep bitmapData];
   destData = [destImageRep bitmapData];
     
