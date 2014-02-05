@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.m
 
-   Copyright (C) 2006-2013 Riccardo Mottola
+   Copyright (C) 2006-2014 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -67,6 +67,9 @@
   attrs = [fmgr fileAttributesAtPath:path traverseLink:YES];
   if (attrs)
     {
+      NSAutoreleasePool *pool;
+
+      pool = [[NSAutoreleasePool alloc] init];
       if ([attrs objectForKey:NSFileType] == NSFileTypeDirectory)
         {
           NSArray      *dirContents;
@@ -116,6 +119,7 @@
                 }
             }
         }
+      [pool release];
     }
   return result;
 }
