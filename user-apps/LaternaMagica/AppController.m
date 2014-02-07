@@ -39,6 +39,7 @@
 #define NSInteger int
 #if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3
 #define NSImageGamma @"NSImageGamma"
+#define NSImageEXIFData @"NSImageEXIFData"
 #endif
 #endif
 
