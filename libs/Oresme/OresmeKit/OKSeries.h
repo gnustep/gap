@@ -3,7 +3,7 @@
    
    Numeric Series representation
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -42,6 +42,10 @@
 
 - (NSColor*) color;
 - (void) setColor: (NSColor *)c;
+- (NSString*) title;
+- (void) setTitle:(NSString*)aTitle;
+- (NSString*) description;
+- (void) setDescription:(NSString*)aDescription;
 
 - (id) objectAtIndex: (NSUInteger)index;
 - (void) addObject: (id)obj;
