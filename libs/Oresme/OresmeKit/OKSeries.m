@@ -3,7 +3,7 @@
    
    Numeric Series representation
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -50,15 +50,46 @@
   [super dealloc];
 }
 
--(NSColor*)color
+- (NSColor*)color
 {
   return color;
 }
 
 -(void)setColor: (NSColor *)c
 {
-  [color release];
-  color = [c retain];
+  if (color != c)
+    {
+      [color release];
+      color = [c retain];
+    }
+}
+
+- (NSString*)title
+{
+  return title;
+}
+
+- (void)setTitle: (NSString*)aTitle
+{
+  if (title != aTitle)
+    {
+      [title release];
+      title = [aTitle retain];
+    }
+}
+
+- (NSString*)description
+{
+  return description;
+}
+
+- (void)setDescription: (NSString*)aDescription
+{
+  if (description != aDescription)
+    {
+      [description release];
+      description = [aDescription retain];
+    }
 }
 
 /* --- NSArray bridge methods ---*/
