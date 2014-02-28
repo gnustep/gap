@@ -139,10 +139,10 @@
     }
 }
 
-- (unsigned int) moveObjectsAtIndexes: (NSArray *) indexes
-                              toIndex: (unsigned int) index
+- (NSUInteger) moveObjectsAtIndexes: (NSArray *) indexes
+                              toIndex: (NSUInteger) index
 {
-  unsigned int newIndex;
+  NSUInteger newIndex;
   NSArray *objects;
 
   newIndex = 0;

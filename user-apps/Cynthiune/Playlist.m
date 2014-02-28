@@ -301,7 +301,7 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
     raiseException (@"'nil' array", @"nil 'array' parameter");
 }
 
-- (Song *) songAtIndex: (unsigned int) index
+- (Song *) songAtIndex: (NSUInteger) index
 {
   Song *song;
 
@@ -314,9 +314,9 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
   return song;
 }
 
-- (unsigned int) indexOfSong: (Song *) song
+- (NSUInteger) indexOfSong: (Song *) song
 {
-  unsigned int index;
+  NSUInteger index;
 
   index = 0;
   if (song)
@@ -333,10 +333,10 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
   return index;
 }
 
-- (unsigned int) moveSongsAtIndexes: (NSArray *) indexes
-                            toIndex: (unsigned int) index
+- (NSUInteger) moveSongsAtIndexes: (NSArray *) indexes
+                          toIndex: (NSUInteger) index
 {
-  unsigned int firstIndex;
+  NSUInteger firstIndex;
   NSArray *listCopy;
 
   listCopy = [list copy];
@@ -471,7 +471,7 @@ static NSString *PlaylistChangedNotification = @"PlaylistChangedNotification";
   return currentSong;
 }
 
-- (unsigned int) numberOfSongs
+- (NSUInteger) numberOfSongs
 {
   return [list count];
 }

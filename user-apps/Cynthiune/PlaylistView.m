@@ -71,16 +71,16 @@
   return dragImage;
 }
 
-- (unsigned int) draggingSourceOperationMaskForLocal: (BOOL) isLocal
+- (NSDragOperation) draggingSourceOperationMaskForLocal: (BOOL) isLocal
 {
   return ((isLocal)
           ? (NSDragOperationMove | NSDragOperationGeneric)
           : NSDragOperationCopy);
 }
 
-- (int) _findFirstSelected
+- (NSInteger) _findFirstSelected
 {
-  int row, count;
+  NSInteger row, count;
 
   row = -1;
 
@@ -94,9 +94,9 @@
   return row;
 }
 
-- (int) _findLastSelected
+- (NSInteger) _findLastSelected
 {
-  int row, count;
+  NSInteger row, count;
 
   row = -1;
 
@@ -112,7 +112,7 @@
 
 - (void) _selectionUpByExtendingIt: (BOOL) keep
 {
-  int max, row;
+  NSInteger max, row;
   BOOL selectSingleRow;
 
   max = [self numberOfRows];
@@ -148,7 +148,7 @@
 
 - (void) _selectionDownByExtendingIt: (BOOL) keep
 {
-  int max, row;
+  NSInteger max, row;
   BOOL selectSingleRow;
 
   max = [self numberOfRows];
@@ -184,7 +184,7 @@
 
 - (void) _selectionTopByExtendingIt: (BOOL) keep
 {
-  int row, count, max;
+  NSInteger row, count, max;
 
   max = [self numberOfRows];
   if (max > 0)
@@ -210,7 +210,7 @@
 
 - (void) _selectionBottomByExtendingIt: (BOOL) keep
 {
-  int row, count, max;
+  NSInteger row, count, max;
 
   max = [self numberOfRows];
   if (max > 0)
