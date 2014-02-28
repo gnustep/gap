@@ -52,11 +52,11 @@
 
 - (void) replaceSongsWithArray: (NSArray *) array;
 
-- (Song *) songAtIndex: (unsigned int) index;
-- (unsigned int) indexOfSong: (Song *) song;
+- (Song *) songAtIndex: (NSUInteger) index;
+- (NSUInteger) indexOfSong: (Song *) song;
 
-- (unsigned int) moveSongsAtIndexes: (NSArray *) indexes
-                            toIndex: (unsigned int) index;
+- (NSUInteger) moveSongsAtIndexes: (NSArray *) indexes
+                            toIndex: (NSUInteger) index;
 
 - (Song *) firstSong;
 - (Song *) lastSong;
@@ -68,7 +68,7 @@
 - (Song *) validSongAfter: (Song *) song;
 - (Song *) validSongBefore: (Song *) song;
 
-- (unsigned int) numberOfSongs;
+- (NSUInteger) numberOfSongs;
 
 - (NSNumber *) duration;
 

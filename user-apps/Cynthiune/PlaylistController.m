@@ -233,7 +233,7 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   NSArray *selection;
 
   infos = [NSMutableString stringWithFormat:
-                             LOCALIZED (@"%d songs - total time: %@"),
+                             LOCALIZED (@"%"PRIuPTR" songs - total time: %@"),
                            [playlist numberOfSongs],
                            [[playlist duration] timeStringValue]];
 
@@ -249,7 +249,7 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
 {
   NSUserDefaults *defaults;
   BOOL boolValue;
-  int intValue;
+  NSInteger integerValue;
 
   defaults = [NSUserDefaults standardUserDefaults];
   boolValue = [defaults boolForKey: @"RepeatMode"];
@@ -264,10 +264,10 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
       [shuffleButton setState: NSOnState];
       [self toggleShuffle: self];
     }
-  intValue = [defaults integerForKey: @"CurrentSongNumber"];
-  if (intValue < [playlist numberOfSongs])
+  integerValue = [defaults integerForKey: @"CurrentSongNumber"];
+  if (integerValue < [playlist numberOfSongs])
     {
-      currentPlayerSong = [playlist songAtIndex: intValue];
+      currentPlayerSong = [playlist songAtIndex: integerValue];
       [playlistViewController setCurrentPlayerSong: currentPlayerSong];
     }
 }

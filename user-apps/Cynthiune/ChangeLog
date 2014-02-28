@@ -1,3 +1,17 @@
+2014-02-28 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlaylistView.m
+	  use NSDragOperation, and some int -> NSInteger transitions
+	* Playlist.[h|m]
+	  return NSUInteger for numberOfSongs instead of unsigned int
+	  use NSUInteger with songAtIndex:
+	  return NSUInteger for indexOfSong, and use NSUInteger for
+	  moveSongsAtIndexes:toIndex:
+	* PlaylistController.m
+	  fix format string after numberOfSongs, and minor int -> NSInteger
+	  transitions
+	* Frameworks/Cynthiune/utils.h
+	  fix format string
+
 2013-02-24 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Cynthiune/NSColorExtensions.m

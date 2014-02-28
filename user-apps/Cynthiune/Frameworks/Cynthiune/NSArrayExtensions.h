@@ -42,8 +42,8 @@
 
 - (void) addObjectsFromArray: (NSArray*) otherArray
                      atIndex: (unsigned int) index;
-- (unsigned int) moveObjectsAtIndexes: (NSArray *) indexes
-                              toIndex: (unsigned int) index;
+- (NSUInteger) moveObjectsAtIndexes: (NSArray *) indexes
+                              toIndex: (NSUInteger) index;
 - (void) addObjectRandomly: (id) object;
 
 - (void) rotateUpToObject: (id) object;

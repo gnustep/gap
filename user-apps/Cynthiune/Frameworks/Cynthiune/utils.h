@@ -82,7 +82,8 @@ char *strndup (const char *string, unsigned int len);
 #define indexOutOfBoundsException(i,m) \
     raiseException (@"Index out of bounds", \
                     ([NSString stringWithFormat: \
-                     @"index '%u' too high (max = %d)", i, m]))
+                     @"index '%lu' too high (max = %lu)", \
+			(unsigned long)i, (unsigned long)m]))
 
 BOOL fileIsAReadableDirectory (NSString *fileName);
 BOOL fileIsAcceptable (NSString *fileName);
