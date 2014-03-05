@@ -1,3 +1,7 @@
+i2014-03-05: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlayView.m
+	center the GNUstep icon in the player, fix bug #39961
+
 2014-02-13: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* test commit
 
