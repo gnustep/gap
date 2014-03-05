@@ -122,7 +122,7 @@
   else 
     {
       NSImage *gnustepImage;
-      int bWidth, bHeight, iWidth, iHeight;
+      CGFloat bWidth, bHeight, iWidth, iHeight;
       
       bWidth = myBounds.size.width;
       bHeight = myBounds.size.height;
@@ -132,8 +132,8 @@
       iWidth = [gnustepImage size].width;
       iHeight = [gnustepImage size].height;
 
-      [gnustepImage compositeToPoint: NSMakePoint((bWidth/2.0) - (iWidth/2.0), (bHeight/2.0) - (iHeight/2.0)) 
-		            fromRect: myBounds 
+      [gnustepImage compositeToPoint: NSMakePoint((bWidth/2.0) - (bHeight/2.0), 3) 
+		            fromRect: NSMakeRect(0, 0, bHeight - 3, bHeight - 3)
 		           operation: NSCompositeSourceOver];
   }
 }
