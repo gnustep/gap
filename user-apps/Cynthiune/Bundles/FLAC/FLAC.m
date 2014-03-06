@@ -42,25 +42,24 @@ static FLAC__StreamDecoderWriteStatus
 writeCallback (const FLAC__StreamDecoder *fileDecoder, const FLAC__Frame *frame,
                const FLAC__int32 * const buffer[], void *clientData)
 {
-  CFLAC *cStream;
   unsigned int sample, channel;
   unsigned char *bufferPtr;
 
-  cStream = clientData;
-  if (cStream->readBuffer)
-    free (cStream->readBuffer);
-  cStream->readBufferSize = (frame->header.blocksize * cStream->channels
-                             * cStream->bitsPerSample / 8);
-  cStream->readBuffer = malloc (cStream->readBufferSize);
+  if ([(FLAC *)clientData readBuffer])
+    free ([(FLAC *)clientData readBuffer]);
+  [(FLAC *)clientData setReadBufferSize:
+		(frame->header.blocksize * [(FLAC *)clientData channels]
+               		* [(FLAC *)clientData bitsPerSample] / 8)];
+  [(FLAC *)clientData setReadBuffer: malloc ([(FLAC *)clientData readBufferSize])];
 
-  bufferPtr = cStream->readBuffer;
-  if (cStream->bitsPerSample == 8)
+  bufferPtr = [(FLAC *)clientData readBuffer];
+  if ([(FLAC *)clientData bitsPerSample] == 8)
     for (sample = 0; sample < frame->header.blocksize; sample++)
-      for (channel = 0; channel < cStream->channels; channel++)
+      for (channel = 0; channel < [(FLAC *)clientData channels]; channel++)
         *bufferPtr++ = buffer[channel][sample];
-  else if (cStream->bitsPerSample == 16)
+  else if ([(FLAC *)clientData bitsPerSample] == 16)
     for (sample = 0; sample < frame->header.blocksize; sample++)
-      for (channel = 0; channel < cStream->channels; channel++)
+      for (channel = 0; channel < [(FLAC *)clientData channels]; channel++)
         {
           *bufferPtr++ = buffer[channel][sample] & 0x00FF;
           *bufferPtr++ = (buffer[channel][sample] & 0xff00) >> 8;
@@ -74,16 +73,13 @@ metadataCallback (const FLAC__StreamDecoder *fileDecoder,
                   const FLAC__StreamMetadata *metadata,
                   void *clientData)
 {
-  CFLAC *cStream;
-
   if (metadata->type == FLAC__METADATA_TYPE_STREAMINFO)
     {
-      cStream = clientData;
-      cStream->channels = metadata->data.stream_info.channels;
-      cStream->rate = metadata->data.stream_info.sample_rate;
-      cStream->bitsPerSample = metadata->data.stream_info.bits_per_sample;
-      cStream->duration = (metadata->data.stream_info.total_samples
-                           / metadata->data.stream_info.sample_rate);
+      [(FLAC *)clientData setChannels:metadata->data.stream_info.channels];
+      [(FLAC *)clientData setRate:metadata->data.stream_info.sample_rate];
+      [(FLAC *)clientData setBitsPerSample:metadata->data.stream_info.bits_per_sample];
+      [(FLAC *)clientData setDuration:(metadata->data.stream_info.total_samples
+                           / metadata->data.stream_info.sample_rate)];
     }
 }
 
@@ -157,6 +153,49 @@ errorCallback (const FLAC__StreamDecoder *fileDecoder,
     }
 
   return self;
+}
+
+-(unsigned int) channels
+{
+  return channels;
+}
+-(unsigned int) bitsPerSample
+{
+  return bitsPerSample;
+}
+-(unsigned char *) readBuffer
+{
+  return readBuffer;
+}
+-(unsigned int) readBufferSize
+{
+  return readBufferSize;
+}
+
+-(void) setBitsPerSample: (unsigned int) _bits
+{
+  bitsPerSample = _bits;
+}
+
+-(void) setDuration: (unsigned int) _duration
+{
+  duration = _duration;
+}
+-(void) setChannels: (unsigned int) _channels
+{
+  channels = _channels;
+}
+-(void) setRate: (unsigned long) _rate
+{
+  rate = _rate;
+}
+-(void) setReadBuffer: (unsigned char *) _readBuffer
+{
+  readBuffer = _readBuffer;
+}
+-(void) setReadBufferSize: (unsigned int) _readBufferSize
+{
+  readBufferSize = _readBufferSize;
 }
 
 - (BOOL) _initializeFileDecoderWithFilename: (NSString *) fileName
