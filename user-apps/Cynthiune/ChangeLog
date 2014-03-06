@@ -1,3 +1,7 @@
+2014-03-06 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/FLAC/FLAC.[h|m]
+	fix loading and playing of FLAC files with non-fragile-ABI
+
 2014-02-28 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistView.m
 	  use NSDragOperation, and some int -> NSInteger transitions

@@ -43,19 +43,18 @@
   unsigned int readBufferSize;
 }
 
+-(unsigned int) channels;
+-(unsigned int) bitsPerSample;
+-(unsigned char *) readBuffer;
+-(unsigned int) readBufferSize;
+
+-(void) setBitsPerSample: (unsigned int) _bits;
+-(void) setDuration: (unsigned int) _duration;
+-(void) setChannels: (unsigned int) _channels;
+-(void) setRate: (unsigned long) _rate;
+-(void) setReadBuffer: (unsigned char *) _readBuffer;
+-(void) setReadBufferSize: (unsigned int) _readBufferSize;
+
 @end
-
-typedef struct {
-  FLAC__StreamDecoder *fileDecoder;
-
-  unsigned int bitsPerSample;
-  unsigned int duration;
-  unsigned int channels;
-  unsigned long rate;
-
-  unsigned char *readBuffer;
-  unsigned int position;
-  unsigned int readBufferSize;
-} CFLAC;
 
 #endif /* FLAC_H */
