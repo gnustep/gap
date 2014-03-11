@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011-2013 Free Software Foundation
+   Copyright (C) 2011-2014 Free Software Foundation
 
    Author: multix
 
@@ -116,6 +116,25 @@
   ySteps = ceil(availableHeight / yUnitSize);
   NSLog(@"x-y steps: %u-%u", xSteps, ySteps);
 
+  /* calculate grid values */
+  [xAxisGridValues removeAllObjects];
+  for (i = 0; i < xSteps; i++)
+    {
+      float x;
+      
+      x = around(minXPos + i * xUnitSize)+0.5;
+      [xAxisGridValues addObject:[NSNumber numberWithFloat:x]];
+    }
+  [yAxisGridValues removeAllObjects];
+  for (i = 0; i < ySteps; i++)
+    {
+      float y;
+      
+      y = around(minYPos + i * yUnitSize)+0.5;
+      [yAxisGridValues addObject:[NSNumber numberWithFloat:y]];
+    }
+
+
   /* draw grid */
   if (gridStyle != OKGridNone)
     {
@@ -124,20 +143,14 @@
         {
           for (i = 0; i < ySteps; i++)
             {
-              float y;
-          
-              y = around(minYPos + i * yUnitSize)+0.5;
-              [NSBezierPath strokeRect: NSMakeRect(minXPos, y, availableWidth, 0)];
+              [NSBezierPath strokeRect: NSMakeRect(minXPos, [[yAxisGridValues objectAtIndex:i] floatValue], availableWidth, 0)];
             }
           }
       if (gridStyle == OKGridVertical || gridStyle == OKGridBoth)
         {
 	  for (i = 0; i < xSteps; i++)
 	    {
-	      float x;
-	      
-	      x = around(minXPos + i * xUnitSize)+0.5;
-	      [NSBezierPath strokeRect: NSMakeRect(x, minYPos, 0, availableHeight)];
+	      [NSBezierPath strokeRect: NSMakeRect([[xAxisGridValues objectAtIndex:i] floatValue], minYPos, 0, availableHeight)];
 	    }
         }
     }
@@ -150,17 +163,11 @@
   /* draw units */
   for (i = 0; i < xSteps; i++)
     {
-      float x;
-
-      x = around(minXPos + i * xUnitSize)+0.5;
-      [NSBezierPath strokeRect: NSMakeRect(x, axisLevel-1, 0, 2)];
+      [NSBezierPath strokeRect: NSMakeRect([[xAxisGridValues objectAtIndex:i] floatValue], axisLevel-1, 0, 2)];
     }
   for (i = 0; i < ySteps; i++)
     {
-      float y;
-
-      y = around(minYPos + i * yUnitSize)+0.5;
-      [NSBezierPath strokeRect: NSMakeRect(minXPos, y, 2, 0)];
+      [NSBezierPath strokeRect: NSMakeRect(minXPos, [[yAxisGridValues objectAtIndex:i] floatValue], 2, 0)];
     }
   NSLog(@"top is: %f", i * (yUnitSize / oneYUnit));
   

@@ -4,7 +4,7 @@
    
    Chart: Generic chart superclass
 
-   Copyright (C) 2011-2013 Free Software Foundation
+   Copyright (C) 2011-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -45,14 +45,20 @@ typedef enum
 } OKGridStyle;
 
 typedef enum
+{
+  OKGridConstantSize = 1,
+  OKGridKiloMega
+} OKGridSizing;
+
+typedef enum
  {
-   OKNumFmtPlain = 0,
+   OKNumFmtPlain = 1,
    OKNumFmtKiloMega
  } OKNumberFormatting;
 
 typedef enum
 {
-  OKNoLabels = 0,
+  OKNoLabels = 1,
   OKMinMaxLabels,
   OKAllLabels
 } OKLabelStyle;
@@ -70,6 +76,8 @@ typedef enum
   OKGridStyle gridStyle;
   OKLabelStyle xAxisLabelStyle;
   OKLabelStyle yAxisLabelStyle;
+  OKGridSizing xAxisGridSizing;
+  OKGridSizing yAxisGridSizing;
   OKNumberFormatting yLabelNumberFmt;
 
   float marginRight;
@@ -80,6 +88,9 @@ typedef enum
   float graphMinYVal;
   float graphMaxYVal;
   float graphMaxXVal;
+
+  NSMutableArray *xAxisGridValues;
+  NSMutableArray *yAxisGridValues;
 }
 
 + (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt;
