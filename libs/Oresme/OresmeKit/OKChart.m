@@ -214,6 +214,18 @@
   yLabelNumberFmt = fmt;
 }
 
+/** set gid sizing */
+- (void)setXAxisGridSizing:(OKGridSizing)sizing
+{
+  xAxisGridSizing = sizing;
+}
+
+/** set gid sizing */
+- (void)setYAxisGridSizing:(OKGridSizing)sizing
+{
+  yAxisGridSizing = sizing;
+}
+
 /** Sets the chart axis and lines color */
 -(IBAction)setAxisColor:(NSColor *)color
 {

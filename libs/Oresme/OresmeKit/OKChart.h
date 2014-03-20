@@ -102,6 +102,8 @@ typedef enum
 - (void)setxAxisLabelStyle:(OKLabelStyle)style;
 - (void)setyAxisLabelStyle:(OKLabelStyle)style;
 - (void)setYLabelNumberFormatting:(OKNumberFormatting)fmt;
+- (void)setXAxisGridSizing:(OKGridSizing)sizing;
+- (void)setYAxisGridSizing:(OKGridSizing)sizing;
 - (IBAction)setAxisColor:(NSColor *)color;
 - (IBAction)setBackgroundColor:(NSColor *)color;
 - (IBAction)setGridStyle:(OKGridStyle)style;
