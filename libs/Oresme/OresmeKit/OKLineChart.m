@@ -113,8 +113,7 @@
   
   NSLog(@"unit sizes: %f, %f", xUnitSize, yUnitSize);
   xSteps = ceil(availableWidth / xUnitSize);
-  ySteps = ceil(availableHeight / yUnitSize);
-  NSLog(@"x-y steps: %u-%u", xSteps, ySteps);
+
 
   /* calculate grid values */
   [xAxisGridValues removeAllObjects];
@@ -125,15 +124,64 @@
       x = around(minXPos + i * xUnitSize)+0.5;
       [xAxisGridValues addObject:[NSNumber numberWithFloat:x]];
     }
-  [yAxisGridValues removeAllObjects];
-  for (i = 0; i < ySteps; i++)
-    {
-      float y;
-      
-      y = around(minYPos + i * yUnitSize)+0.5;
-      [yAxisGridValues addObject:[NSNumber numberWithFloat:y]];
-    }
 
+  [yAxisGridValues removeAllObjects];
+  if (yAxisGridSizing == OKGridConstantSize)
+    {
+      ySteps = ceil(availableHeight / yUnitSize);
+      for (i = 0; i < ySteps; i++)
+        {
+          float y;
+          
+          y = around(minYPos + i * yUnitSize)+0.5;
+          [yAxisGridValues addObject:[NSNumber numberWithFloat:y]];
+        }
+    }
+  else if (yAxisGridSizing == OKGridKiloMega)
+    {
+      int yAxisScaleExp;
+      float scaledRange;
+
+      yAxisScaleExp = 0;
+      scaledRange = rangeToRepresent;
+      if (rangeToRepresent > 1)
+        {
+          while (scaledRange > 1000)
+            {
+              scaledRange /= 1000;
+              yAxisScaleExp += 3;
+            }
+        }
+      else if (rangeToRepresent > 0)
+        {
+          while (scaledRange < 0.001)
+            {
+              scaledRange *= 1000;
+              yAxisScaleExp += -3;
+            }
+        }
+      else
+        {
+          NSLog(@"Consistency error: negative Y range: %lf", rangeToRepresent);
+        }
+      NSLog(@"scaled range: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
+      /* now we make sure we have at least one unit above the maximum
+         and then rescale all ranges and the unit size */
+      ySteps = around(scaledRange)+1;
+      yUnitSize = floor(availableHeight / ySteps);
+      rangeToRepresent = ySteps * yUnitSize;
+      oneYUnit = yUnitSize *  pow(10, yAxisScaleExp);
+      scaledRange = rangeToRepresent / pow(10, yAxisScaleExp);
+      NSLog(@"scaled range 2: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
+      for (i = 0; i < ySteps; i++)
+        {
+          float y;
+          
+          y = around(minYPos + i * yUnitSize)+0.5;
+          [yAxisGridValues addObject:[NSNumber numberWithFloat:y]];
+        }
+    }
+  NSLog(@"x-y steps: %u-%u", xSteps, ySteps);
 
   /* draw grid */
   if (gridStyle != OKGridNone)
