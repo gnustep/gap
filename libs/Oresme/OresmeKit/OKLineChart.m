@@ -108,6 +108,8 @@
     while (yUnitSize < minYUnitSize)
       yUnitSize += oneYUnit;
     }
+  else if (yUnitSize >= availableHeight)
+    yUnitSize = minYUnitSize;
   else
     yUnitSize = oneYUnit;
   
@@ -126,6 +128,7 @@
     }
 
   [yAxisGridValues removeAllObjects];
+  ySteps = 0;
   if (yAxisGridSizing == OKGridConstantSize)
     {
       ySteps = ceil(availableHeight / yUnitSize);
