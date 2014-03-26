@@ -99,21 +99,11 @@
     while (xUnitSize < minXUnitSize)
       xUnitSize += oneXUnit;
     }
-  else
-    xUnitSize = oneXUnit;
-  
-  yUnitSize = oneYUnit;
-  if (yUnitSize < minYUnitSize)
+  else if (xUnitSize >= availableWidth)
     {
-    while (yUnitSize < minYUnitSize)
-      yUnitSize += oneYUnit;
+      xUnitSize = minXUnitSize;
     }
-  else if (yUnitSize >= availableHeight)
-    yUnitSize = minYUnitSize;
-  else
-    yUnitSize = oneYUnit;
-  
-  NSLog(@"unit sizes: %f, %f", xUnitSize, yUnitSize);
+
   xSteps = ceil(availableWidth / xUnitSize);
 
 
@@ -129,8 +119,18 @@
 
   [yAxisGridValues removeAllObjects];
   ySteps = 0;
+  yUnitSize = oneYUnit;
   if (yAxisGridSizing == OKGridConstantSize)
     {
+      if (yUnitSize < minYUnitSize)
+        {
+          while (yUnitSize < minYUnitSize)
+            yUnitSize += oneYUnit;
+        }
+      else if (yUnitSize >= availableHeight)
+        {
+          yUnitSize = minYUnitSize;
+        }
       ySteps = ceil(availableHeight / yUnitSize);
       for (i = 0; i < ySteps; i++)
         {
@@ -184,6 +184,7 @@
           [yAxisGridValues addObject:[NSNumber numberWithFloat:y]];
         }
     }
+  NSLog(@"unit sizes: %f, %f", xUnitSize, yUnitSize);
   NSLog(@"x-y steps: %u-%u", xSteps, ySteps);
 
   /* draw grid */
