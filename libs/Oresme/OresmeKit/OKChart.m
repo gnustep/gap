@@ -146,7 +146,7 @@
 	  float val;
 
 	  val = [[s objectAtIndex: j] floatValue];
-	  NSLog(@"val: %f", val);
+          //	  NSLog(@"val: %f", val);
 	  if (val > graphMaxYVal)
 	    graphMaxYVal = val;
 	  if (val < graphMinYVal)
