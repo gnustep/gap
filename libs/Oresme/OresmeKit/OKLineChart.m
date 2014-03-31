@@ -50,13 +50,13 @@
 {
   NSBezierPath *path;
   unsigned i, j;
-  float oneXUnit;
-  float oneYUnit;
-  float xUnitSize;
-  float yUnitSize;
+  double oneXUnit;
+  double oneYUnit;
+  double xUnitSize;
+  double yUnitSize;
   float availableHeight;
   float availableWidth;
-  float rangeToRepresent;
+  double rangeToRepresent;
   float axisLevel;
   float minXPos;
   float minYPos;
@@ -143,7 +143,7 @@
   else if (yAxisGridSizing == OKGridKiloMega)
     {
       int yAxisScaleExp;
-      float scaledRange;
+      double scaledRange;
 
       yAxisScaleExp = 0;
       scaledRange = rangeToRepresent;
