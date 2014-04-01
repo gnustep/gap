@@ -32,6 +32,49 @@
 
 @implementation OKChart
 
+
+/** considering the input string as a floating point number, remove the trailing zeroes
+    if is a non-integer number.
+    This method should never be called with a number containing thousands separators but no decimal separator */
++ (NSString *)purgeTrailingZeroes:(NSString *)s
+{
+  NSString *str;
+  NSRange rangeOfLastDot;
+  NSRange rangeOfLastComma;
+  NSUInteger decimalLocation;
+
+  rangeOfLastDot = [s rangeOfString:@"." options:NSBackwardsSearch];
+  rangeOfLastComma = [s rangeOfString:@"," options:NSBackwardsSearch];
+  decimalLocation = NSNotFound;
+ 
+  /* we have nothing to do */
+  if (rangeOfLastDot.length == 0 && rangeOfLastComma.length == 0)
+    return s;
+
+  /* we suppose a dot as decimalSeparator */
+  if (rangeOfLastDot.location != NSNotFound  && (rangeOfLastDot.location > rangeOfLastComma.location || rangeOfLastComma.location == NSNotFound))
+    {
+      decimalLocation = rangeOfLastDot.location;
+    }
+  /* we suppose a comma as decimalSeparator */
+  else if (rangeOfLastComma.location != NSNotFound && (rangeOfLastComma.location > rangeOfLastDot.location || rangeOfLastDot.location ==NSNotFound))
+    {
+      decimalLocation = rangeOfLastComma.location;
+    }
+
+  str = s;
+  if (decimalLocation != NSNotFound)
+    {
+      while ([str characterAtIndex:([str length]-1)] == '0')
+        str = [str substringWithRange:NSMakeRange(0, [str length]-1)];
+      NSLog(@"zeroes removed %@", str);
+      /* we removed all trailing zeroes up to the decimal separator */
+      if([str length]-1 == decimalLocation)
+        str = [str substringWithRange:NSMakeRange(0, [str length]-1)];
+    }
+  return str;
+}
+
 + (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt
 {
   NSString *strRes;
@@ -40,7 +83,8 @@
   
   if (fmt == OKNumFmtPlain)
     {
-      strRes = [number stringValue];
+      strRes = [NSString localizedStringWithFormat:@"%.3lf", (double)[number doubleValue]];
+      strRes = [OKChart purgeTrailingZeroes:strRes];
     }
   else if (fmt == OKNumFmtKiloMega)
     {
@@ -50,7 +94,7 @@
 
       d = [number doubleValue];
       c = 0;
-      if (abs(d) > 1)
+      if (abs(d) > 1000)
         {
           while (abs(d) > 1000)
             {
@@ -58,15 +102,17 @@
               c++;
             }
         }
-      else
+      else if ((abs(d) > 0) && (abs(d) < 1))
         {
-          while (abs(d) < 1)
+          while (abs(d) < 0.001)
             {
               d *= 1000;
               c--;
             }
         }
-      s = [[NSNumber numberWithDouble:d] stringValue];
+      NSLog(@"residual: %lf, %d", d, c);
+      s = [NSString stringWithFormat:@"%.3lf", (double)[number doubleValue]];
+      s = [OKChart purgeTrailingZeroes:s];
       if (c == -3)
         s = [s stringByAppendingString:@"p"];
       else if (c  == -2)
