@@ -67,7 +67,7 @@
     {
       while ([str characterAtIndex:([str length]-1)] == '0')
         str = [str substringWithRange:NSMakeRange(0, [str length]-1)];
-      NSLog(@"zeroes removed %@", str);
+
       /* we removed all trailing zeroes up to the decimal separator */
       if([str length]-1 == decimalLocation)
         str = [str substringWithRange:NSMakeRange(0, [str length]-1)];
