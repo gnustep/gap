@@ -243,13 +243,13 @@
 }
 
 /** sets if and how axis labels are drawn */
-- (void)setxAxisLabelStyle:(OKLabelStyle)style
+- (void)setXAxisLabelStyle:(OKLabelStyle)style
 {
   xAxisLabelStyle = style;
 }
 
 /** sets if and how axis labels are drawn */
-- (void)setyAxisLabelStyle:(OKLabelStyle)style
+- (void)setYAxisLabelStyle:(OKLabelStyle)style
 {
   yAxisLabelStyle = style;
 }

@@ -99,8 +99,8 @@ typedef enum
 - (void)setMarginRight:(float)margin;
 - (void)setMarginBottom:(float)margin;
 - (void)setMarginTop:(float)margin;
-- (void)setxAxisLabelStyle:(OKLabelStyle)style;
-- (void)setyAxisLabelStyle:(OKLabelStyle)style;
+- (void)setXAxisLabelStyle:(OKLabelStyle)style;
+- (void)setYAxisLabelStyle:(OKLabelStyle)style;
 - (void)setYLabelNumberFormatting:(OKNumberFormatting)fmt;
 - (void)setXAxisGridSizing:(OKGridSizing)sizing;
 - (void)setYAxisGridSizing:(OKGridSizing)sizing;
