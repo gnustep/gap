@@ -39,7 +39,6 @@
     {
       minXUnitSize = 10;
       minYUnitSize = 10;
-      NSLog (@"minimum sizes inited");
     }
   return self;
 }
@@ -167,7 +166,7 @@
         {
           NSLog(@"Consistency error: negative Y range: %lf", rangeToRepresent);
         }
-      NSLog(@"scaled range: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
+      //NSLog(@"scaled range: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
       /* we get the steps from the scaled range */
       scaledRange = around(scaledRange);
       rangeToRepresent = scaledRange * pow(10, yAxisScaleExp);
@@ -179,7 +178,7 @@
       scaledRange = scaledRange + 1;
       rangeToRepresent = ySteps * yUnitSize;
       yUnitSize = availableHeight / ySteps;
-      NSLog(@"new range: %f", rangeToRepresent);
+      //NSLog(@"new range: %f", rangeToRepresent);
       oneYUnit = availableHeight / rangeToRepresent;
       NSLog(@"scaled range 2: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
       for (i = 0; i < ySteps; i++)
