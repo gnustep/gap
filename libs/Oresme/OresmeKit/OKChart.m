@@ -94,9 +94,9 @@
 
       d = [number doubleValue];
       c = 0;
-      if (abs(d) > 1000)
+      if (abs(d) >= 1000)
         {
-          while (abs(d) > 1000)
+          while (abs(d) >= 1000)
             {
               d /= 1000;
               c++;
@@ -111,7 +111,7 @@
             }
         }
       NSLog(@"residual: %lf, %d", d, c);
-      s = [NSString stringWithFormat:@"%.3lf", (double)[number doubleValue]];
+      s = [NSString stringWithFormat:@"%.3lf", d];
       s = [OKChart purgeTrailingZeroes:s];
       if (c == -3)
         s = [s stringByAppendingString:@"p"];
