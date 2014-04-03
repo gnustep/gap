@@ -3,7 +3,7 @@
   NSMainNibFile = "Chess";
   GSMainMarkupFile = "";
   NSPrincipalClass = "Chess";
-  NSIcon = "chess.icns";
+  NSIcon = "ChessApp.tiff";
 
   CFBundleDocumentTypes = (
 	{
