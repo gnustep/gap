@@ -3,7 +3,7 @@
    
    Carthesius: Abscissa/Ordinata Charts
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -139,7 +139,7 @@
 	      else
 		p.y = -hugeVal;
 	    }
-	  NSLog(@"%f %f", p.x, p.y);
+          //	  NSLog(@"%f %f", p.x, p.y);
 	  [path lineToPoint: p];
 	  i++;
 	}
@@ -178,7 +178,7 @@
 	      else
 		p.y = -hugeVal;
 	    }
-	  NSLog(@"%f %f", p.x, p.y);
+          //	  NSLog(@"%f %f", p.x, p.y);
 	  [path2 lineToPoint: p];
 	  i++;
 	}
