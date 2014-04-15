@@ -145,8 +145,8 @@
       axisColor = [[NSColor blackColor] retain];
       gridColor = [[NSColor lightGrayColor] retain];
       gridStyle = OKGridBoth;
-      xAxisLabelStyle = OKGridNone;
-      yAxisLabelStyle = OKGridNone;
+      xAxisLabelStyle = OKNoLabels;
+      yAxisLabelStyle = OKNoLabels;
       xAxisGridSizing = OKGridConstantSize;
       yAxisGridSizing = OKGridConstantSize;
       yLabelNumberFmt = OKNumFmtPlain;
