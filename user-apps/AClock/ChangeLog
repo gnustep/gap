@@ -1,5 +1,10 @@
 2014-04-16 Riccardo Mottola <rm@gnu.org>
 
+	* Clock.m
+	Do not use GS macros.
+
+2014-04-16 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.h
 	* AppController.m
 	minor refinements, use IBAction instead of void

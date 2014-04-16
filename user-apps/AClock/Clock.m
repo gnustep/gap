@@ -27,7 +27,6 @@
 #include <math.h>
 
 #import <AppKit/AppKit.h>
-#import <AppKit/DPSOperators.h>
 #import "Clock.h"
 
 #ifndef PI
@@ -47,11 +46,11 @@ static NSArray *dayWeek;
 	int i;
 	numArray[0] = [NSArray arrayWithObjects:@"XII",@"I",@"II",@"III",@"IV",@"V",@"VI",@"VII",@"VIII",@"IX",@"X",@"XI",nil];
 	numArray[1] = [NSArray arrayWithObjects:@"12",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",nil];
-	RETAIN(numArray[0]);
-	RETAIN(numArray[1]);
+	[numArray[0] retain];
+	[numArray[1] retain];
 
 	dayWeek = [NSArray arrayWithObjects:@"su",@"mo",@"tu",@"we",@"th",@"fr",@"sa"];
-	RETAIN(dayWeek);
+	[dayWeek retain];
 
 	defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObject:@"1.0 0 0" forKey:@"SecondHandColor"]];
@@ -102,8 +101,8 @@ static NSArray *dayWeek;
 
 	ASSIGN(font, [NSFont boldSystemFontOfSize:radius/5]);
 
-	DESTROY(_cacheFrame);
-	DESTROY(_cacheMark);
+	[_cacheFrame release];
+	[_cacheMark release];
 }
 
 
