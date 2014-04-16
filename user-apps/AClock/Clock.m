@@ -804,27 +804,6 @@ static NSArray *dayWeek;
 			x=sin(a);
 			y=cos(a);
 
-/*
-			{
-				int x2,y2;
-				float f;
-				f=0.06;
-				DPSmoveto(ctxt,center.x,center.y);
-				x2=sin(a+PI/2)*radius*f+center.x+x/2*radius*0.5;
-				y2=cos(a+PI/2)*radius*f+center.y+y/2*radius*0.5;
-				DPScurveto(ctxt,
-						x2,y2,x2,y2,
-						center.x+x*radius*0.5,center.y+y*radius*0.5);
-				x2=-sin(a+PI/2)*radius*f+center.x+x/2*radius*0.5;
-				y2=-cos(a+PI/2)*radius*f+center.y+y/2*radius*0.5;
-				DPScurveto(ctxt,
-						x2,y2,x2,y2,
-						center.x,center.y);
-				DPSfill(ctxt);
-
-			}
-			*/
-
 			DPSsetlinewidth(ctxt,base_width*1.5);
 			DPSsetlinecap(ctxt,1);
 			DPSmoveto(ctxt,center.x,center.y);
@@ -856,26 +835,7 @@ static NSArray *dayWeek;
 		x=sin(a);
 		y=cos(a);
 
-/*
-		{
-			int x2,y2;
-			float f;
-			f=0.06;
-			DPSmoveto(ctxt,center.x,center.y);
-			x2=sin(a+PI/2)*radius*f+center.x+x/2*radius*0.5;
-			y2=cos(a+PI/2)*radius*f+center.y+y/2*radius*0.5;
-			DPScurveto(ctxt,
-					x2,y2,x2,y2,
-					center.x+x*radius*0.5,center.y+y*radius*0.5);
-			x2=-sin(a+PI/2)*radius*f+center.x+x/2*radius*0.5;
-			y2=-cos(a+PI/2)*radius*f+center.y+y/2*radius*0.5;
-			DPScurveto(ctxt,
-					x2,y2,x2,y2,
-					center.x,center.y);
-			DPSfill(ctxt);
-			
-		}
-		*/
+
 		DPSsetlinewidth(ctxt,base_width*1.5);
 		DPSsetlinecap(ctxt,1);
 		DPSmoveto(ctxt,center.x,center.y);
