@@ -1,3 +1,9 @@
+2014-04-16 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	minor refinements, use IBAction instead of void
+
 2012-10-19 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 
 	* AppController.m

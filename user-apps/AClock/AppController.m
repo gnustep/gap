@@ -95,7 +95,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	[defaults synchronize];
 }
 
-- (void) stopRing: (id)sender
+- (IBAction) stopRing: (id)sender
 {
 	[alarmWindow close];
 }
@@ -218,7 +218,7 @@ static float volume_append = 1.0;
 
 }
 
-- (void) clockUpdate: (id)sender
+- (IBAction) clockUpdate: (id)sender
 {
 	double st,et;
 	id src,des;
@@ -528,6 +528,7 @@ NSTimer *ctimer;
 @implementation NSApplication (AClock)
 - (void) orderFrontStandardInfoPanelWithOptions: (NSDictionary *) dict;
 {
+#if GNUSTEP
 	if (_infoPanel == nil)
 	{
 		_infoPanel = [[GSInfoPanel alloc] initWithDictionary: dict];
@@ -563,6 +564,7 @@ NSTimer *ctimer;
 			@"Title of the Info Panel")];
 
 	[_infoPanel orderFront: self];
+#endif
 }
 
 @end

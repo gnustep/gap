@@ -29,6 +29,12 @@
 #import "Clock.h"
 #import <math.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4) && !defined(CGFloat)
+#define NSUInteger unsigned
+#define NSInteger int
+#define CGFloat float
+#endif
+
 @interface AppController : NSObject
 {
   id faceColorW;
@@ -53,22 +59,25 @@
   id ringText;
 
 
-  Clock *_clock;
-  Clock *bigClock;
+  IBOutlet Clock *_clock;
+  IBOutlet Clock *bigClock;
   NSTimer *timer;
   BOOL doFloor;
 }
-- (void) openPreferences: (id)sender;
-- (void) setFrameColor: (id)sender;
-- (void) setFaceColor: (id)sender;
-- (void) setFaceTransparency: (id)sender;
-- (void) setShowsAMPM: (id)sender;
-- (void) setShadow:(id)sender;
-- (void) setSecondHandColor: (id)sender;
-- (void) setHandColor: (id)sender;
-- (void) setMarkColor: (id)sender;
-- (void) setFrequency: (id)sender;
-- (void) setSecond: (id)sender;
-- (void) setNumberType: (id)sender;
-- (void) playCuckoo;
+- (IBAction) openPreferences: (id)sender;
+- (IBAction) setFrameColor: (id)sender;
+- (IBAction) setFaceColor: (id)sender;
+- (IBAction) setFaceTransparency: (id)sender;
+- (IBAction) setShowsAMPM: (id)sender;
+- (IBAction) setShadow:(id)sender;
+- (IBAction) setSecondHandColor: (id)sender;
+- (IBAction) setHandColor: (id)sender;
+- (IBAction) setMarkColor: (id)sender;
+- (IBAction) setFrequency: (id)sender;
+- (IBAction) setSecond: (id)sender;
+- (IBAction) setNumberType: (id)sender;
+- (IBAction) playCuckoo;
+- (IBAction) stopRing: (id)sender;
+- (IBAction) clockUpdate: (id)sender;
+
 @end
