@@ -727,18 +727,12 @@ static NSArray *dayWeek;
 
 		DPSarc(ctxt,center.x,center.y,r1,a2,a1);
 		DPSstroke(ctxt);
-		DPSsetalpha(ctxt, 10/(370 - fabs(a2 - a1)));
-		DPSarc(ctxt,center.x,center.y,r1 * 5/(370 - fabs(a2 - a1)),0,360);
-		DPSfill(ctxt);
-
 	}
 
 	[_cacheMark compositeToPoint:NSZeroPoint
 		operation:NSCompositeSourceAtop];
 
 	DPSsetlinewidth(ctxt,base_width);
-
-
 
 
 

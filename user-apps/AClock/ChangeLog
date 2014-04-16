@@ -1,6 +1,11 @@
 2014-04-16 Riccardo Mottola <rm@gnu.org>
 
 	* Clock.m
+	Do not draw inner circle anymore, even if intentional it is confusing.
+
+2014-04-16 Riccardo Mottola <rm@gnu.org>
+
+	* Clock.m
 	Do not use GS macros.
 
 2014-04-16 Riccardo Mottola <rm@gnu.org>
