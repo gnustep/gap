@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2013 GNUstep Application Project
+   Copyright (C) 2006-2014 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -470,6 +470,7 @@
 	    battStatusInt = -1;
 
 	  isCharging = NO;
+          isCritical = NO;
 	  if (battStatusInt == 0)
 	    batteryState = BMBStateHigh;
 	  else if (battStatusInt == 1)

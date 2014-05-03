@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.7
+VERSION = 0.6
 PACKAGE_NAME = batmon
 APP_NAME = batmon
 batmon_APPLICATION_ICON = BatMon_icon.tif

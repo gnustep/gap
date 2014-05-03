@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2013 GNUstep Application Project
+   Copyright (C) 2006-2014 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -53,6 +53,7 @@
     return;
 
   isCharging = NO;
+  isCritical = NO;
   validBattery = YES;
   if (APM_BATT_HIGH == apmPwInfo.battery_state)
     batteryState = BMBStateHigh;
