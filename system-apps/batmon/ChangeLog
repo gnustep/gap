@@ -1,3 +1,9 @@
+2014-05-04 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel-Linux.m
+	* BatteryModel-OpenBSD.m
+	Init isCritical, so that once condition reverts it returns to NO.
+
 2014-01-19 Riccardo Mottola <rm@gnu.org>
 
 	* BatteryModel.h
