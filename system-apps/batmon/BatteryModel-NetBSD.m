@@ -165,7 +165,8 @@
 	timeRemaining = currCap / amps;
       else
 	timeRemaining = -1;
-      chargePercent = currCap/lastCap*100;
+      if (lastCap)
+        chargePercent = currCap/lastCap*100;
       batteryState = BMBStateDischarging;
     }
   else
@@ -176,7 +177,9 @@
 	timeRemaining = (lastCap-currCap) / amps;
       else
 	timeRemaining = -1;
-      chargePercent = currCap/lastCap*100;
+      chargePercent = 0;
+      if (lastCap)
+        chargePercent = currCap/lastCap*100;
       batteryState = BMBStateCharging;
     }
   watts = amps * volts;
