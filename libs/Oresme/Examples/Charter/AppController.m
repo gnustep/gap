@@ -50,6 +50,7 @@
   int i;
   float v1, v2;
 
+  [chartView setyAxisLabelStyle:OKAllLabels];
   [chartView setYLabelNumberFormatting:OKNumFmtPlain];
   [chartView removeAllSeries];
 
@@ -175,6 +176,7 @@
       [series2 setColor: [NSColor greenColor]];
       [chartView addSeries: series2];
       [series2 release];
+      [chartView setYLabelNumberFormatting:OKNumFmtKiloMega];
       for (i = 0; i < 64; i++)
         {
               v1 = sin((i * 10) * 6.2831853 / 180) / 1000;
