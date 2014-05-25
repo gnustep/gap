@@ -53,9 +53,17 @@
 {
   if ((self = [super init]))
     {
-      useWattHours= YES;
+      useWattHours = YES;
       
+      isCritical = NO;
       isCharging = NO;
+      lastCap = 0;
+      currCap = 0;
+      critCap = 0;
+      chargePercent = 5;
+      warnPercent = 10;
+
+      batteryType = nil;
       batteryManufacturer = nil;
       
       [self initPlatformSpecific];
@@ -183,10 +191,20 @@
       batteryState == BMBStateHigh ||
       batteryState == BMBStateLow)
     {
-      if (currCap < critCap)
-	return YES;
+      if (critCap > 0)
+        {
+          if (currCap < critCap)
+            return YES;
+          else
+            return NO;
+        }
       else
-	return NO;
+        {
+          if (chargePercent < critPercent)
+            return YES;
+          else
+            return NO;
+        }
     }
 
   return NO;

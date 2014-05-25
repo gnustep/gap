@@ -77,6 +77,8 @@ typedef enum
     @private float    timeRemaining;
     @private BOOL     isCharging;
     @private BOOL     isCritical;
+    @private float    critPercent;
+    @private float    warnPercent;
     @private BMBatteryStates batteryState;
   
     @private NSString *batteryType;
