@@ -98,6 +98,7 @@ typedef enum
 - (float)chargePercent;
 
 - (BOOL)isCritical;
+- (BOOL)isWarning;
 - (BOOL)isCharging;
 
 - (BOOL)isUsingWattHours;
