@@ -60,8 +60,9 @@
       lastCap = 0;
       currCap = 0;
       critCap = 0;
-      chargePercent = 5;
-      warnPercent = 10;
+      chargePercent = 0;
+      critPercent = 8;
+      warnPercent = 16;
 
       batteryType = nil;
       batteryManufacturer = nil;
