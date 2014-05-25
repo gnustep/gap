@@ -172,16 +172,24 @@
 
 - (BOOL)isCritical
 {
-#if defined(linux)
-  if(useACPIsys || useACPIproc)
-  {
-    return  [self remainingCapacity] < [self warningCapacity];
-  } else if (useAPM)
-  {
-    return isCritical;
-  } else
-#endif
-  return isCritical;
+  if (isCritical)
+    return YES;
+
+  if (batteryState == BMBStateCritical)
+    return YES;
+
+  if (batteryState == BMBStateCharging ||
+      batteryState == BMBStateDischarging ||
+      batteryState == BMBStateHigh ||
+      batteryState == BMBStateLow)
+    {
+      if (currCap < critCap)
+	return YES;
+      else
+	return NO;
+    }
+
+  return NO;
 }
 
 - (BOOL)isCharging
