@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2013 GNUstep Application Project
+   Copyright (C) 2005-2014 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -46,8 +46,6 @@
   
   [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
   [[NSUserDefaults standardUserDefaults] synchronize];
-
-
 }
 
 - (id)init
@@ -163,6 +161,8 @@
     /* draw the charge status */
     if ([batModel isCritical] == YES)
        [[NSColor redColor] set];
+    else if ([batModel isCritical] == YES)
+       [[NSColor orangeColor] set];
     else
        [[NSColor greenColor] set];
     [NSBezierPath fillRect: NSMakeRect(0+1, 1, WIDTH-1, (chargePercentToDraw/100) * HEIGHT -2)];

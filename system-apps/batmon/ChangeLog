@@ -1,5 +1,12 @@
 2014-05-25 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.m
+	* BatteryModel.h
+	* BatteryModel.m
+	Calculate warning capacity and draw orange bar in case.
+
+2014-05-25 Riccardo Mottola <rm@gnu.org>
+
 	* BatteryModel.m
 	Calculate critical status on capacity if !isCritical.
 

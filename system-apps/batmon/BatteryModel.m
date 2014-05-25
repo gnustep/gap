@@ -189,7 +189,7 @@
   if (batteryState == BMBStateCharging ||
       batteryState == BMBStateDischarging ||
       batteryState == BMBStateHigh ||
-      batteryState == BMBStateLow)
+      batteryState == BMBStateLow )
     {
       if (critCap > 0)
         {
@@ -201,6 +201,32 @@
       else
         {
           if (chargePercent < critPercent)
+            return YES;
+          else
+            return NO;
+        }
+    }
+
+  return NO;
+}
+
+- (BOOL)isWarning
+{
+  if (batteryState == BMBStateCharging ||
+      batteryState == BMBStateDischarging ||
+      batteryState == BMBStateHigh ||
+      batteryState == BMBStateLow)
+    {
+      if (warnCap > 0)
+        {
+          if (currCap < warnCap)
+            return YES;
+          else
+            return NO;
+        }
+      else
+        {
+          if (chargePercent < warnPercent)
             return YES;
           else
             return NO;
