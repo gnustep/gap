@@ -159,10 +159,10 @@
     [NSBezierPath fillRect: NSMakeRect((WIDTH/2)-2, HEIGHT+1+1, 4, 2)];
     
     /* draw the charge status */
-    if ([batModel isCritical] == YES)
-       [[NSColor redColor] set];
-    else if ([batModel isCritical] == YES)
+    if ([batModel isWarning] == YES)
        [[NSColor orangeColor] set];
+    else if ([batModel isCritical] == YES)
+       [[NSColor redColor] set];
     else
        [[NSColor greenColor] set];
     [NSBezierPath fillRect: NSMakeRect(0+1, 1, WIDTH-1, (chargePercentToDraw/100) * HEIGHT -2)];
