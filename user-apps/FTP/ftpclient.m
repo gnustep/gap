@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Riccardo Mottola
+ Copyright (C) 2005-2014 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -488,7 +488,7 @@ int getChar(streamStruct* ss)
 	   150 Opening BINARY mode data connection for core.current.tar.bz2 (10867411 bytes)
 	   and extract the transfer size */
 	s = [reply objectAtIndex:0];
-	bytesR = [s rangeOfString:@" bytes"];
+	bytesR = [s rangeOfString:@")" options:NSBackwardsSearch];
 	if (bytesR.location > 0)
 	  {
 	    NSRange leftParR;
@@ -497,7 +497,7 @@ int getChar(streamStruct* ss)
 	    unsigned long long tempSize;
 
 	    NSLog(@"recognized a 150 response, looking for size in: %@", s);
-	    leftParR = [s rangeOfString:@"("];
+	    leftParR = [s rangeOfString:@"(" options:NSBackwardsSearch];
 	    if (leftParR.location > 0)
 	      {
 		sizeString = [s substringWithRange:NSMakeRange(leftParR.location+1, bytesR.location-leftParR.location)];

@@ -1,3 +1,8 @@
+2014-05-27 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Make file size parsing more robust, checking for () with NSBackwardSearch.
+
 2013-10-19 Riccardo Mottola <rm@gnu.org>
 
 	* localclient.m
