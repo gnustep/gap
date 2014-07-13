@@ -2,7 +2,7 @@
  Project: Vespucci
  VEDocument.m
 
- Copyright (C) 2007-2010
+ Copyright (C) 2007-2014
 
  Author: Ing. Riccardo Mottola
 
@@ -132,6 +132,41 @@ static NSString *homePage = @"";
 }
 
 
+/* printing */
+
+- (void)setPrintInfo:(NSPrintInfo *)anObject
+{
+  if (printInfo != anObject)
+    {
+      [printInfo autorelease];
+      printInfo = [anObject copyWithZone:[self zone]];
+    }
+}
+
+- (NSPrintInfo *)printInfo
+{
+  if (printInfo == nil)
+    {
+      [self setPrintInfo:[NSPrintInfo sharedPrintInfo]];
+      [printInfo setHorizontallyCentered:YES];
+      [printInfo setVerticallyCentered:YES];
+      [printInfo setLeftMargin:5.0];
+      [printInfo setRightMargin:5.0];
+      [printInfo setTopMargin:5.0];
+      [printInfo setBottomMargin:5.0];
+    }
+  return printInfo;
+}
+
+
+- (void)printShowingPrintPanel:(BOOL)showPanels
+{
+  NSPrintOperation *op = [NSPrintOperation printOperationWithView:[windowController webView] printInfo:[self printInfo]];
+  [op setShowPanels:showPanels];
+  [op runOperationModalForWindow:[windowController window] delegate:nil didRunSelector:NULL contextInfo:NULL];
+}
+
+
 /* implementation of older methods for compatibility */
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3)
@@ -151,5 +186,7 @@ static NSString *homePage = @"";
 }
 
 #endif
+
+
 
 @end
