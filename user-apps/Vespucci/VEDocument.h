@@ -2,7 +2,7 @@
  Project: Vespucci
  VEDocument.h
 
- Copyright (C) 2007-2010
+ Copyright (C) 2007-2014
 
  Author: Ing. Riccardo Mottola
 
@@ -34,7 +34,8 @@
 
 @interface VEDocument : NSDocument
 {
-    VEWinController *windowController;
+  VEWinController *windowController;
+  NSPrintInfo        *printInfo;
   
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3)
   @protected NSURL *_docURL;
