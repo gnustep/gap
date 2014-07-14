@@ -128,12 +128,12 @@
 	    "takeStringURLFrom:"
 	);
 	Outlets = (
-	    _downloadDelegate,
-	    _editingDelegate,
-	    _frameLoadDelegate,
-	    _policyDelegate,
-	    _resourceLoadDelegate,
-	    _uiDelegate
+	    "_downloadDelegate",
+	    "_editingDelegate",
+	    "_frameLoadDelegate",
+	    "_policyDelegate",
+	    "_resourceLoadDelegate",
+	    "_uiDelegate"
 	);
 	Super = NSView;
     };
