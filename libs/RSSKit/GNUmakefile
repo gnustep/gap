@@ -10,6 +10,7 @@ endif
 srcdir = .
 VERSION = 0.5
 PACKAGE_NAME = RSSKit
+INTERFACE_VERSION = 0
 
 # The library to be compiled
 FRAMEWORK_NAME = RSSKit
