@@ -1,10 +1,10 @@
 GMasterMind is the classic mastermind 
-It require GNUstep core ( http://www.gnustep.org ) 
+It requires GNUstep core ( http://www.gnustep.org ) 
 
-GMastermind is relased under GNU Gneneral Public Licence 2.0 (see gpl.txt)
+GMastermind is relased under the GNU General Public Licence 2.0 or later (see COPYING)
 
 
 INSTALL : 
 make 
-make install (su if need) 
+make install (su if needed) 
 
