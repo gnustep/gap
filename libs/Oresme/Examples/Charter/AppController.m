@@ -50,7 +50,7 @@
   int i;
   float v1, v2;
 
-  [chartView setyAxisLabelStyle:OKAllLabels];
+  [chartView setYAxisLabelStyle:OKAllLabels];
   [chartView setYLabelNumberFormatting:OKNumFmtPlain];
   [chartView removeAllSeries];
 
