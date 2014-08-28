@@ -166,21 +166,27 @@
         {
           NSLog(@"Consistency error: negative Y range: %lf", rangeToRepresent);
         }
-      //NSLog(@"scaled range: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
+      NSLog(@"1 - scaled range: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
       /* we get the steps from the scaled range */
-      scaledRange = around(scaledRange);
+      scaledRange = ceil(scaledRange)+1;
       rangeToRepresent = scaledRange * pow(10, yAxisScaleExp);
-      ySteps = scaledRange;
-      yUnitSize = rangeToRepresent / ySteps;
+      NSLog(@"new range: %f", rangeToRepresent);
+      ySteps = (unsigned)scaledRange;
+      NSLog(@"original steps: %u", ySteps);
+
+      /* now we check is the single unit is too small */
+      while ((availableHeight/ySteps) < minYUnitSize)
+        {
+          if (ySteps % 2)
+            ySteps++;
+          ySteps = (unsigned)ceil((double)ySteps / 2.0);
+        }
+
       /* now we add one unit on top, to be sure to fit in smoothly
        and recalculate the range */
-      ySteps = ySteps + 1;
-      scaledRange = scaledRange + 1;
-      rangeToRepresent = ySteps * yUnitSize;
       yUnitSize = availableHeight / ySteps;
-      //NSLog(@"new range: %f", rangeToRepresent);
       oneYUnit = availableHeight / rangeToRepresent;
-      NSLog(@"scaled range 2: %f, scaleExp: %d", scaledRange, yAxisScaleExp);
+
       for (i = 0; i < ySteps; i++)
         {
           float y;
