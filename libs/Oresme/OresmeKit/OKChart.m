@@ -176,7 +176,7 @@
 {
   unsigned i, j;
 
-  NSLog(@"OKChart Draw");
+  NSLog(@"OKChart Draw, %lu series", (unsigned long)[seriesArray count]);
 
   /* search for min and max */
   /* since we want always to have the X axis, we start with 0, not the first value */
