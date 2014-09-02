@@ -2,7 +2,7 @@
  Project: AClock
  Clock.m
 
- Copyright (C) 2003-2011 GNUstep Application Project
+ Copyright (C) 2003-2014 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -49,7 +49,7 @@ static NSArray *dayWeek;
 	[numArray[0] retain];
 	[numArray[1] retain];
 
-	dayWeek = [NSArray arrayWithObjects:@"su",@"mo",@"tu",@"we",@"th",@"fr",@"sa"];
+	dayWeek = [NSArray arrayWithObjects:@"su",@"mo",@"tu",@"we",@"th",@"fr",@"sa", nil];
 	[dayWeek retain];
 
 	defaults = [NSUserDefaults standardUserDefaults];
