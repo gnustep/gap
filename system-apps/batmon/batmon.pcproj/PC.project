@@ -65,7 +65,7 @@
     "PROJECT_GROUP" = "No group avaliable!";
     "PROJECT_MAINTAINER" = "";
     "PROJECT_NAME" = batmon;
-    "PROJECT_RELEASE" = "0.6";
+    "PROJECT_RELEASE" = "0.8";
     "PROJECT_SUMMARY" = "No summary avaliable!";
     "PROJECT_TYPE" = Application;
     "PROJECT_URL" = "http://gap.nongnu.org/batmon/";
