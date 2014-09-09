@@ -403,9 +403,9 @@ static NSArray *dayWeek;
 				NSMutableAttributedString *str;
 				NSSize strSize;
 				NSColor* white = [NSColor colorWithDeviceRed:1.
-													   green:1.
-														blue:1.
-													   alpha:0.7];
+                                                                       green:1.
+                                                                        blue:1.
+                                                                       alpha:0.7];
 
 				str = [[NSMutableAttributedString alloc]
 					initWithString:[NSString stringWithFormat:@"%lu",(unsigned long)[_date dayOfMonth]]];
