@@ -1,3 +1,9 @@
+2014-09-10 Riccardo Mottola <rm@gmu.org>
+
+	* NSColorExtensions.h
+	* NSColorExtensions.m
+	Add class extension to hande color encoding.
+
 2014-09-02 Riccardo Mottola <rm@gnu.org>
 
 	* Clock.m
