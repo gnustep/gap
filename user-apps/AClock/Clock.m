@@ -100,7 +100,8 @@ static NSArray *dayWeek;
 
 	radius = radius-base_width;
 
-	ASSIGN(font, [NSFont boldSystemFontOfSize:radius/5]);
+   [font release];
+	font = [[NSFont boldSystemFontOfSize:radius/5] retain];
 
 	[_cacheFrame release];
 	[_cacheMark release];
@@ -119,17 +120,17 @@ static NSArray *dayWeek;
 
 	if (!(self=[super initWithFrame: frame])) return nil;
 
-	ASSIGN(faceColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FaceColor"]]);
-	ASSIGN(frameColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FrameColor"]]);
-	ASSIGN(marksColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"MarksColor"]]);
-	ASSIGN(handsColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"HandsColor"]]);
-	ASSIGN(secHandColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"SecondHandColor"]]);
+	faceColor = [[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FaceColor"]] retain];
+	frameColor =[[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FrameColor"]] retain];
+	marksColor = [[NSColor colorFromStringRepresentation:[defaults objectForKey: @"MarksColor"]] retain];
+	handsColor =[[NSColor colorFromStringRepresentation:[defaults objectForKey: @"HandsColor"]] retain];
+	secHandColor =[[NSColor colorFromStringRepresentation:[defaults objectForKey: @"SecondHandColor"]] retain];
 
-	ASSIGN(arcColor,
-		[NSColor colorWithCalibratedRed: 1.0
+	arcColor =
+		[[NSColor colorWithCalibratedRed: 1.0
 			green: 0.4
 			blue: 0.4
-			alpha: 1.0]);
+			alpha: 1.0] retain];
 	
 	showsAMPM=[defaults boolForKey:@"ShowsAMPM"];
 	numberType=[defaults integerForKey:@"NumberType"];
@@ -138,7 +139,7 @@ static NSArray *dayWeek;
 /*	easter=[defaults boolForKey:@"EvenIStopTheClockItTellsTheRightTimeTwiceADay"];*/
 	faceTrans = [defaults floatForKey:@"FaceTransparency"];
 
-	ASSIGN(_timeZone,[NSTimeZone systemTimeZone]);
+	_timeZone = [[NSTimeZone systemTimeZone] retain];
 	_tzv = [_timeZone secondsFromGMT];
 
 	handsTime=0;
@@ -920,7 +921,11 @@ static NSArray *dayWeek;
 
 - (void) setTimeZone:(NSTimeZone *)tz
 {
-	ASSIGN(_timeZone,tz);
+  if (_timeZone != tz)
+    {
+      [_timeZone release];
+	   _timeZone = [tz retain];
+    }
 	_tzv = [tz secondsFromGMT];
 	[self setNeedsDisplay: YES];
 }
@@ -932,10 +937,15 @@ static NSArray *dayWeek;
 
 - (void) setDate:(NSDate *)date
 {
-	ASSIGN(_date, date);
+  if (_date != date)
+    {
+      [_date release];
+      _date = [date retain];
+    } 
+
 	handsTime = [date timeIntervalSinceReferenceDate] + _tzv;
-	DESTROY(_cacheFrame);
-	DESTROY(_cacheMark);
+	[_cacheFrame release];
+	[_cacheMark release];
 
 	/*
 	if (easter)
