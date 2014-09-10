@@ -100,7 +100,7 @@ static NSArray *dayWeek;
 
 	radius = radius-base_width;
 
-   [font release];
+        [font release];
 	font = [[NSFont boldSystemFontOfSize:radius/5] retain];
 
 	[_cacheFrame release];
@@ -153,12 +153,12 @@ static NSArray *dayWeek;
 
 -(void) dealloc
 {
-	DESTROY(faceColor);
-	DESTROY(frameColor);
-	DESTROY(marksColor);
-	DESTROY(handsColor);
-	DESTROY(arcColor);
-	[super dealloc];
+  [faceColor release];
+  [frameColor release];
+  [marksColor release];
+  [handsColor release];
+  [arcColor release];
+  [super dealloc];
 }
 
 -(void) setFrame: (NSRect)f
@@ -169,9 +169,14 @@ static NSArray *dayWeek;
 
 -(void) setFaceColor: (NSColor *)c
 {
-	ASSIGN(faceColor, c);
-	DESTROY(_cacheFrame);
-	[self setNeedsDisplay:YES];
+  if (faceColor != c)
+    {
+      [faceColor release];
+      faceColor = [c retain];
+      [_cacheFrame release];
+      _cacheFrame = nil;
+      [self setNeedsDisplay:YES];
+    }
 }
 
 -(int) numberType
@@ -180,65 +185,93 @@ static NSArray *dayWeek;
 }
 -(void) setNumberType: (int)i
 {
-	numberType = i;
-	DESTROY(_cacheMark);
-	[self setNeedsDisplay:YES];
+  numberType = i;
+  [_cacheMark release];
+  _cacheMark = nil;
+  [self setNeedsDisplay:YES];
 }
 
 -(void) setMarksColor: (NSColor *)c
 {
-	ASSIGN(marksColor, c);
-	DESTROY(_cacheMark);
-	[self setNeedsDisplay:YES];
+  if (marksColor != c)
+    {
+      [marksColor release];
+      marksColor = [c retain];
+      [_cacheMark release];
+      _cacheMark = nil;
+      [self setNeedsDisplay:YES];
+    }
 }
 -(NSColor *) marksColor
 {
-	return marksColor;
+  return marksColor;
 }
 
 
 -(void) setFaceTransparency:(float)v
 {
-	faceTrans = v;
-	DESTROY(_cacheFrame);
-	[self setNeedsDisplay:YES];
+  faceTrans = v;
+  [_cacheFrame release];
+  _cacheFrame = nil;
+  [self setNeedsDisplay:YES];
 }
 
 -(void) setFrameColor: (NSColor *)c
 {
-	ASSIGN(frameColor, c);
-	DESTROY(_cacheFrame);
-	[self setNeedsDisplay:YES];
+  if (frameColor != c)
+    {
+      [frameColor release];
+      frameColor = [c retain];
+      [_cacheFrame release];
+      _cacheFrame = nil;
+      [self setNeedsDisplay:YES];
+    }
 }
 
 -(void) setHandsColor: (NSColor *)c
 {
-	ASSIGN(handsColor, c);
-	[self setNeedsDisplay:YES];
+  if (handsColor != c)
+    {
+      [handsColor release];
+      handsColor = [c retain];
+      [_cacheFrame release];
+      _cacheFrame = nil;
+      [self setNeedsDisplay:YES];
+    }
 }
 -(void) setSecondHandColor:(NSColor *)c
 {
-	ASSIGN(secHandColor, c);
-	DESTROY(_cacheMark);
-	[self setNeedsDisplay:YES];
+  if (secHandColor != c)
+    {
+      [secHandColor release];
+      secHandColor = [c retain];
+      [_cacheFrame release];
+      _cacheFrame = nil;
+      [self setNeedsDisplay:YES];
+    }
 }
 -(void) setShowsAMPM:(BOOL)ampm
 {
-	showsAMPM = ampm;
-	DESTROY(_cacheMark);
-	[self setNeedsDisplay:YES];
+  showsAMPM = ampm;
+  [_cacheMark release];
+  _cacheMark = nil;
+  [self setNeedsDisplay:YES];
 }
 -(void) setShadow:(BOOL)sh
 {
-	shadow = sh;
-	DESTROY(_cacheFrame);
-	DESTROY(_cacheMark);
-	[self setNeedsDisplay:YES];
+  shadow = sh;
+  [_cacheFrame release];
+  _cacheFrame = nil;
+  [_cacheMark release];
+  _cacheMark = nil;
+  [self setNeedsDisplay:YES];
 }
+
 - (BOOL) shadow
 {
 	return shadow;
 }
+
 -(void) setSecond:(BOOL)sh
 {
 	second = sh;
@@ -281,9 +314,14 @@ static NSArray *dayWeek;
 }
 -(void) setFont:(NSFont *)newfont
 {
-	ASSIGN(font,newfont);
-	DESTROY(_cacheMark);
-	[self setNeedsDisplay:YES];
+  if (font != newfont)
+    {
+      [font release];
+      font = [newfont retain];
+      [_cacheMark release];
+      _cacheMark = nil;
+      [self setNeedsDisplay:YES];
+    }
 }
 
 -(BOOL) isOpaque
