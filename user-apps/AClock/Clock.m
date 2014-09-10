@@ -28,6 +28,7 @@
 
 #import <AppKit/AppKit.h>
 #import "Clock.h"
+#import "NSColorExtensions.h"
 
 #ifndef PI
 #define PI 3.1415926535897932384626434
@@ -118,11 +119,11 @@ static NSArray *dayWeek;
 
 	if (!(self=[super initWithFrame: frame])) return nil;
 
-	ASSIGN(faceColor,[NSColor colorFromString:[defaults objectForKey: @"FaceColor"]]);
-	ASSIGN(frameColor,[NSColor colorFromString:[defaults objectForKey: @"FrameColor"]]);
-	ASSIGN(marksColor,[NSColor colorFromString:[defaults objectForKey: @"MarksColor"]]);
-	ASSIGN(handsColor,[NSColor colorFromString:[defaults objectForKey: @"HandsColor"]]);
-	ASSIGN(secHandColor,[NSColor colorFromString:[defaults objectForKey: @"SecondHandColor"]]);
+	ASSIGN(faceColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FaceColor"]]);
+	ASSIGN(frameColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FrameColor"]]);
+	ASSIGN(marksColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"MarksColor"]]);
+	ASSIGN(handsColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"HandsColor"]]);
+	ASSIGN(secHandColor,[NSColor colorFromStringRepresentation:[defaults objectForKey: @"SecondHandColor"]]);
 
 	ASSIGN(arcColor,
 		[NSColor colorWithCalibratedRed: 1.0

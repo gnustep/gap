@@ -16,9 +16,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.4.0
 PACKAGE_NAME = AClock
 APP_NAME = AClock
-AClock_APPLICATION_ICON = AClock.tiff
-CVS_MODULE_NAME = gap/user-apps/AClock
-CVS_TAG_NAME = AClock
+AClock_APPLICATION_ICON = 
 
 
 #
@@ -57,14 +55,16 @@ Resources/ring.wav
 #
 AClock_HEADER_FILES = \
 AppController.h \
-Clock.h
+Clock.h \
+NSColorExtensions.h
 
 #
 # Class files
 #
 AClock_OBJC_FILES = \
 AppController.m \
-Clock.m
+Clock.m \
+NSColorExtensions.m
 
 #
 # Other sources
