@@ -12,7 +12,8 @@
     );
     "CLASS_FILES" = (
 	"AppController.m",
-	"Clock.m"
+	"Clock.m",
+	"NSColorExtensions.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -23,7 +24,8 @@
     );
     "HEADER_FILES" = (
 	"AppController.h",
-	"Clock.h"
+	"Clock.h",
+	"NSColorExtensions.h"
     );
     IMAGES = (
 	"AClock.tiff",

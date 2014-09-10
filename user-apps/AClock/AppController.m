@@ -2,7 +2,7 @@
  Project: AClock
  AppController.m
 
- Copyright (C) 2003-2011 GNUstep Application Project
+ Copyright (C) 2003-2014 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -26,6 +26,7 @@
 
 #import <AppKit/AppKit.h>
 #import "AppController.h"
+#import "NSColorExtensions.h"
 
 @implementation AppController
 static NSUserDefaults *defaults;
@@ -48,7 +49,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	NSColor *col = [sender color];
 	[_clock setSecondHandColor:col];
 	[bigClock setSecondHandColor:col];
-	[defaults setObject:[col description] forKey:@"SecondHandColor"];
+	[defaults setObject:[col stringRepresentation] forKey:@"SecondHandColor"];
 	[defaults synchronize];
 }
 
@@ -57,7 +58,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	NSColor *col = [sender color];
 	[_clock setHandsColor:col];
 	[bigClock setHandsColor:col];
-	[defaults setObject:[col description] forKey:@"HandsColor"];
+	[defaults setObject:[col stringRepresentation] forKey:@"HandsColor"];
 	[defaults synchronize];
 }
 
@@ -169,7 +170,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	NSColor *col = [sender color];
 	[_clock setFaceColor:col];
 	[bigClock setFaceColor:col];
-	[defaults setObject:[col description] forKey:@"FaceColor"];
+	[defaults setObject:[col stringRepresentation] forKey:@"FaceColor"];
 	[defaults synchronize];
 }
 
@@ -178,7 +179,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	NSColor *col = [sender color];
 	[_clock setMarksColor:col];
 	[bigClock setMarksColor:col];
-	[defaults setObject:[col description] forKey:@"MarksColor"];
+	[defaults setObject:[col stringRepresentation] forKey:@"MarksColor"];
 	[defaults synchronize];
 }
 
@@ -188,7 +189,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	NSColor *col = [sender color];
 	[_clock setFrameColor:col];
 	[bigClock setFrameColor:col];
-	[defaults setObject:[col description] forKey:@"FrameColor"];
+	[defaults setObject:[col stringRepresentation] forKey:@"FrameColor"];
 	[defaults synchronize];
 }
 

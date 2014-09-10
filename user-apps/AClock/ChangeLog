@@ -4,6 +4,10 @@
 	* NSColorExtensions.m
 	Add class extension to hande color encoding.
 
+	* AppController.m
+	* Clock.m
+	Switch to color extension instead of relying on gnustep internal colorFromString.
+
 2014-09-02 Riccardo Mottola <rm@gnu.org>
 
 	* Clock.m
