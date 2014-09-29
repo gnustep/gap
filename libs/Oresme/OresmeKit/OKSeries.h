@@ -32,11 +32,19 @@
 #define NSUInteger unsigned
 #endif
 
+/**
+   <p>OKseries provides the series data storage used by charts.</p>
+   <p>A series contains an array of scalar data (NSNumbers) and additional information like color, description and title</p>
+ */
 @interface OKSeries : NSObject
 {
   NSString       *description;
   NSString       *title;
+
+  /** Series color, used when drawing the chart. E.g. the line color or the pie sector */
   NSColor        *color;
+
+  /** Array containing series data */
   NSMutableArray *seriesArray;
 }
 

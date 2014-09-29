@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2012 Free Software Foundation
+   Copyright (C) 2012-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -26,6 +26,14 @@
 
 #import "OKChart.h"
 
+/**
+   <p>This subclass of OKChart draws classic pie-charts.
+   </p>
+   <p>
+   The data is comprised of N series, of each the first value is used.
+   This way, each pie sector can have its own color and description.
+   </p>
+ */
 @interface OKPieChart : OKChart
 {
 

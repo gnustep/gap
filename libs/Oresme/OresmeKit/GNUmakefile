@@ -41,10 +41,26 @@ OKSeries.m \
 OKLineChart.m \
 OKPieChart.m
 
+DOCUMENT_NAME = OresmeKit
+
+OresmeKit_AGSDOC_FILES = OresmeKit.gsdoc \
+	$(OresmeKit_HEADER_FILES) \
+	$(OresmeKit_OBJC_FILES)
+
+#OresmeKit_AGSDOC_FLAGS += -DocumentationDirectory ReferenceDoc
+OresmeKit_AGSDOC_FLAGS += -MakeFrames YES
+
 #
 # Makefiles
 #
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 include $(GNUSTEP_MAKEFILES)/framework.make
+
+# Only build the doc if doc=yes was passed on the command line
+ifeq ($(doc),yes)
+include $(GNUSTEP_MAKEFILES)/documentation.make
+endif
+#
+
 -include GNUmakefile.postamble

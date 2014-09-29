@@ -66,6 +66,29 @@ typedef enum
 
 @class OKSeries;
 
+/**
+   <p>OKChart provides the superclass for different chart types. It comprises generic properties and methods for a chart class.<br>
+   A chart is a plotting of one or more series of values in manners similar to a spreadsheet graph.
+   Values are generally not thought to be dependent upn each other, that is, not a function-plotting although it can be used for that.
+   </p>
+   <p>OresmeKit provides several instances like the Line chart or Pie chart. You may of course sublass it and implement your own custom chart type.
+   </p>
+   <h3>Data Series</h3>
+   <p>OKCharts draw data represented in OKSeries. Depending on the chart style, one or more series are supported or needed.
+   </p>
+   <p>Series may be managed by</p>
+   <ol>
+   <li>addSeries</li>
+   <li>removeSeriesAtIndex</li>
+   <li>removeAllSeries</li>
+   <li>seriesAtIndex</li>
+   <li>seriesCount</li>
+   </ol>
+   <h3>Drawing</h3>
+   <p>An OKChart is a subclass of NSView, thus the final drawing happens in the drawRect.
+   
+ */
+
 @interface OKChart : NSView
 {
   NSColor *backgroundColor;

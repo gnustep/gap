@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011 Free Software Foundation
+   Copyright (C) 2011-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -25,16 +25,37 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSView.h>
 
+/** Defines the quadrants plotted. */
 typedef enum
   {
+    /** All quadrants visible, origin is placed in the middle */
     OKQuadrantCentered = 0,
+
+    /** Quadrant I */
     OKQuadrantI = 1,
+
+    /** Quadrant II */
     OKQuadrantII = 2,
+
+    /** Quadrant III */
     OKQuadrantIII = 3,
+
+    /** Quadrant IV */
     OKQuadrantIV = 4,
+
+    /** Automatic placement. E.g. Quadrant 3 and 4 are not visible, only y-positive values are displayed */
     OKQuadrantAuto = 5
   } OKQuadrantPositioning;
 
+
+/**
+   <p>The OKCartesius class is meant to plot x-y data, e.g. like a y=f(x) function on a Carthesian plane.
+   </p>
+   <p>Data is represented as an array of NSPoints.
+   </p>
+   <p>The engine can plot one or two curves in different colors on the same plane with the same scale.
+   </p>
+ */
 @interface OKCartesius : NSView
 {
   OKQuadrantPositioning quadrantPositioning;
