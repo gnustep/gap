@@ -143,7 +143,7 @@
     chargePercentToDraw = [batModel chargePercent];
     if (chargePercentToDraw > 100)
         chargePercentToDraw = 100;
-    else if (chargePercentToDraw < 0 || chargePercentToDraw == NAN)
+    else if (chargePercentToDraw < 0 || isnan(chargePercentToDraw))
       chargePercentToDraw = 0;
 
     [[NSColor darkGrayColor] set];
