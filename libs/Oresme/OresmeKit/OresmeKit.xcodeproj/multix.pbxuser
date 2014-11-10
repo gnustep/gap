@@ -1,0 +1,106 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Development;
+		activeTarget = 8DC2EF4F0486A6940098B216 /* OresmeKit */;
+		codeSenseManager = 853F1D7A19980DF200E3A338 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					243,
+					20,
+					48.1626,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 437352850;
+			PBXWorkspaceStateSaveDate = 437352850;
+		};
+		perUserProjectItems = {
+			853F207D19A08D8800E3A338 = 853F207D19A08D8800E3A338 /* PBXTextBookmark */;
+			853F207E19A08D8800E3A338 = 853F207E19A08D8800E3A338 /* PBXBookmark */;
+			853F207F19A08D8800E3A338 = 853F207F19A08D8800E3A338 /* PBXTextBookmark */;
+			853F208019A08D8800E3A338 = 853F208019A08D8800E3A338 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 853F1D7919980DF200E3A338 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	85085025141CD74600FD33EA /* OKChart.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {512, 1680}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 1316}, {441, 319}}";
+		};
+	};
+	85085027141CD74600FD33EA /* OKLineChart.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {494, 546}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 227}, {441, 319}}";
+		};
+	};
+	853F1D7919980DF200E3A338 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+		scmType = "";
+	};
+	853F1D7A19980DF200E3A338 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	853F207D19A08D8800E3A338 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85085027141CD74600FD33EA /* OKLineChart.h */;
+		name = "OKLineChart.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 475;
+		vrLoc = 541;
+	};
+	853F207E19A08D8800E3A338 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 85085025141CD74600FD33EA /* OKChart.h */;
+	};
+	853F207F19A08D8800E3A338 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85085027141CD74600FD33EA /* OKLineChart.h */;
+		name = "OKLineChart.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 475;
+		vrLoc = 541;
+	};
+	853F208019A08D8800E3A338 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85085025141CD74600FD33EA /* OKChart.h */;
+		name = "OKChart.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 855;
+		vrLoc = 2093;
+	};
+	8DC2EF4F0486A6940098B216 /* OresmeKit */ = {
+		activeExec = 0;
+	};
+}
