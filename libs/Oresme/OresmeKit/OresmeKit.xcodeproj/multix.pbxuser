@@ -10,9 +10,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					243,
+					378,
 					20,
-					48.1626,
+					48,
 					43,
 					43,
 					20,
@@ -27,14 +27,41 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 437352850;
-			PBXWorkspaceStateSaveDate = 437352850;
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					338,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 439145027;
+			PBXWorkspaceStateSaveDate = 439145027;
 		};
 		perUserProjectItems = {
 			853F207D19A08D8800E3A338 = 853F207D19A08D8800E3A338 /* PBXTextBookmark */;
 			853F207E19A08D8800E3A338 = 853F207E19A08D8800E3A338 /* PBXBookmark */;
 			853F207F19A08D8800E3A338 = 853F207F19A08D8800E3A338 /* PBXTextBookmark */;
 			853F208019A08D8800E3A338 = 853F208019A08D8800E3A338 /* PBXTextBookmark */;
+			858B2EE61A2CD377002C1066 /* XCBuildMessageTextBookmark */ = 858B2EE61A2CD377002C1066 /* XCBuildMessageTextBookmark */;
+			858B2EE71A2CD377002C1066 /* PBXTextBookmark */ = 858B2EE71A2CD377002C1066 /* PBXTextBookmark */;
+			858B2EEA1A2CD378002C1066 /* PBXTextBookmark */ = 858B2EEA1A2CD378002C1066 /* PBXTextBookmark */;
+			858B2EEB1A2CD378002C1066 /* XCBuildMessageTextBookmark */ = 858B2EEB1A2CD378002C1066 /* XCBuildMessageTextBookmark */;
+			858B2EEC1A2CD378002C1066 /* PBXTextBookmark */ = 858B2EEC1A2CD378002C1066 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 853F1D7919980DF200E3A338 /* Source Control */;
 		userBuildSettings = {
@@ -42,8 +69,9 @@
 	};
 	85085025141CD74600FD33EA /* OKChart.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {512, 1680}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1041, 1989}}";
 			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{2078, 561}";
 			sepNavVisRect = "{{0, 1316}, {441, 319}}";
 		};
 	};
@@ -59,6 +87,9 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};
@@ -99,6 +130,61 @@
 		rType = 0;
 		vrLen = 855;
 		vrLoc = 2093;
+	};
+	858B2EE61A2CD377002C1066 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Value stored to 'labelSize' is never read";
+		fRef = 8593C909167D47AB0088310C /* OKPieChart.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 138;
+		rType = 1;
+	};
+	858B2EE71A2CD377002C1066 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8593C909167D47AB0088310C /* OKPieChart.m */;
+		name = "OKPieChart.m: 139";
+		rLen = 0;
+		rLoc = 4762;
+		rType = 0;
+		vrLen = 616;
+		vrLoc = 4539;
+	};
+	858B2EEA1A2CD378002C1066 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 85085025141CD74600FD33EA /* OKChart.h */;
+		name = "OKChart.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 561;
+		vrLoc = 2078;
+	};
+	858B2EEB1A2CD378002C1066 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Value stored to 'labelSize' is never read";
+		fRef = 8593C909167D47AB0088310C /* OKPieChart.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 138;
+		rType = 1;
+	};
+	858B2EEC1A2CD378002C1066 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8593C909167D47AB0088310C /* OKPieChart.m */;
+		name = "OKPieChart.m: 139";
+		rLen = 0;
+		rLoc = 4762;
+		rType = 0;
+		vrLen = 801;
+		vrLoc = 4382;
+	};
+	8593C909167D47AB0088310C /* OKPieChart.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1104, 1781}}";
+			sepNavSelRange = "{4762, 0}";
+			sepNavVisRange = "{4382, 801}";
+		};
 	};
 	8DC2EF4F0486A6940098B216 /* OresmeKit */ = {
 		activeExec = 0;
