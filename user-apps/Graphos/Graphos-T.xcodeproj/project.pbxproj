@@ -105,7 +105,7 @@
 		8518AB7910E90329004A2013 /* graphos_doc_icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = graphos_doc_icons.icns; sourceTree = "<group>"; };
 		853877F40DA0375200A80103 /* GRPathEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPathEditor.h; sourceTree = "<group>"; };
 		853877F50DA0375200A80103 /* GRPathEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPathEditor.m; sourceTree = "<group>"; };
-		854931FB11143DF600C4D928 /* Info-Draw.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Draw.plist"; sourceTree = "<group>"; };
+		854931FB11143DF600C4D928 /* Info-Draw.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-Draw.plist"; sourceTree = "<group>"; };
 		854931FC11143DF600C4D928 /* Graphos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85AEB2950CA43E7A00A80101 /* GRBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBox.h; sourceTree = "<group>"; };
 		85AEB2960CA43E7A00A80101 /* GRBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBox.m; sourceTree = "<group>"; };
@@ -385,18 +385,9 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 14C7E0B40EC663E0004E8823 /* Build configuration list for PBXProject "Graphos" */;
-			compatibilityVersion = "Xcode 2.4";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
-			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
-			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Draw */;
 			projectDirPath = "";
-			projectRoot = "";
 			targets = (
 				854931A711143DF600C4D928 /* Draw */,
 			);
@@ -603,7 +594,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_VERSION = 4.0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-Draw__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -611,7 +601,6 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Graphos;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
