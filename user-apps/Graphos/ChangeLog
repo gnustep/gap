@@ -1,3 +1,9 @@
+2014-10-12 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierControlPoint.h
+    * GRBezierControlPoint.m
+    Define Start, Middle, End position and draw handles accordingly
+  
 2014-01-19 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m (remakePath)

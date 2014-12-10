@@ -46,6 +46,7 @@
       [self calculateBezierHandles: aPoint];
       isSelect = NO;
       symmetricalHandles = YES;
+      pointPosition = GRPointMiddle;
     }
     return self;
 }
@@ -61,6 +62,7 @@
 
   objCopy = [super copyWithZone: zone];
   objCopy->symmetricalHandles = symmetricalHandles;
+  objCopy->pointPosition = pointPosition;
   objCopy->path = path;
   objCopy->bzHandle = bzHandle;
 
@@ -201,17 +203,29 @@
 
   firstHandleR = NSMakeRect(firstHandleP.x-2, firstHandleP.y-2, 4, 4);
   secondHandleR = NSMakeRect(secondHandleP.x-2, secondHandleP.y-2, 4, 4);
+  
   bzp = [NSBezierPath bezierPath];
-  
   [bzp setLineWidth:1];
-  
   [[NSColor blackColor] set];
-  NSRectFill(firstHandleR);
-  [bzp moveToPoint:firstHandleP];
-  [bzp lineToPoint:centerP];
-  [bzp lineToPoint:secondHandleP];
+  
+  if (pointPosition == GRPointMiddle || pointPosition == GRPointStart)
+    {
+      NSRectFill(firstHandleR);
+      [bzp moveToPoint:firstHandleP];
+      [bzp lineToPoint:centerP];
+    }
+  else
+    {
+      [bzp moveToPoint:centerP];
+    }
+  
+  if (pointPosition == GRPointMiddle || pointPosition == GRPointEnd)
+    {
+      [bzp lineToPoint:secondHandleP];
+      NSRectFill(secondHandleR);
+    }
   [bzp stroke];
-  NSRectFill(secondHandleR);
+
 }
 
 - (void)drawControl
@@ -286,6 +300,11 @@
 - (void)setSymmetricalHandles:(BOOL)flag
 {
   symmetricalHandles = flag;
+}
+
+- (void)setPointPosition:(GRPointPosition)pPos
+{
+  pointPosition = pPos;
 }
 
 @end
