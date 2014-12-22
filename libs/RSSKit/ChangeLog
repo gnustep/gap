@@ -1,4 +1,10 @@
 2014-12-22 Riccardo Mottola <rm@gnu.org>
+
+	* RSSArticleProtocol.h
+	Remove store from protocol, it is in RSSArticle+Storage.h
+
+2014-12-22 Riccardo Mottola <rm@gnu.org>
+
 	* DOMParser.m
 	do not use PRIuPTR, does't work on Mac
 
