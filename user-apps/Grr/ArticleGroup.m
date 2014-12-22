@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2104  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -62,7 +62,7 @@ NSString* ArticleGroupChangedNotification = @"ArticleGroupChangedNotification";
  * article set is a set of objects conforming to the
  * Article protocol.
  */
--(BOOL) allowsArticleSetDrop: (NSSet*) articleSet
+-(BOOL) allowsArticleSetDrop: (NSSet*) anArticleSet
 {
     return YES;
 }
@@ -71,9 +71,9 @@ NSString* ArticleGroupChangedNotification = @"ArticleGroupChangedNotification";
  * Drops the article set into the article group. If the
  * operation fails, NO is returned.
  */
--(BOOL) dropArticleSet: (NSSet*) articleSet
+-(BOOL) dropArticleSet: (NSSet*) anArticleSet
 {
-    [self->articleSet unionSet: articleSet];
+    [self->articleSet unionSet: anArticleSet];
     [self sendChangedNotification];
 }
 
@@ -81,7 +81,7 @@ NSString* ArticleGroupChangedNotification = @"ArticleGroupChangedNotification";
  * Returns YES if and only if this article set can be manually
  * removed from the article group.
  */
--(BOOL) allowsArticleSetRemoval: (NSSet*) articleSet
+-(BOOL) allowsArticleSetRemoval: (NSSet*) anArticleSet
 {
     return NO;
 }
@@ -90,7 +90,7 @@ NSString* ArticleGroupChangedNotification = @"ArticleGroupChangedNotification";
  * Removes the given article set from the article group and
  * returns YES on success.
  */
--(BOOL) removeArticleSet: (NSSet*) articleSet
+-(BOOL) removeArticleSet: (NSSet*) anArticleSet
 {
     // TODO: Implement this (don't forget to change the allows~ method, too)
     return NO;
