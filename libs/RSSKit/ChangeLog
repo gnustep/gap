@@ -3,6 +3,9 @@
 	* RSSArticleProtocol.h
 	Remove store from protocol, it is in RSSArticle+Storage.h
 
+	* RSSFeedProtocol.h
+	Remove methods which are in RSSFeed+Fetching.h
+
 2014-12-22 Riccardo Mottola <rm@gnu.org>
 
 	* DOMParser.m

@@ -1,7 +1,7 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2010-2011 The Free Software Foundation, Inc.
+ *  Copyright (C) 2010-2014 The Free Software Foundation, Inc.
  *                2006      Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
@@ -99,28 +99,6 @@ enum RSSFeedError
  */
 - (NSURL*) feedURL;
 
-/**
- * Fetches the feed from the web.
- *
- * @return An error number (of type enum RSSFeedError)
- * @see NSURL
- * @see RSSFeedError
- */
-- (enum RSSFeedError) fetch;
-
-/**
- * Fetches the feed from the web. Feed fetching is done
- * in the background. When the feed is fetched, the feed
- * will post a RSSFeedFetchedNotification.
- *
- * @see RSSFeedFetchedNotification
- **/
-- (void) fetchInBackground;
-
-/**
- * Returns the last fetching error.
- */
-- (enum RSSFeedError) lastError;
 
 /**
  * @return YES, if the automatic clearing of the article list is
