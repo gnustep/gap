@@ -65,6 +65,8 @@ extern NSString* ArticleGroupChangedNotification;
     NSMutableSet* articleSet;
 }
 
+-(void) sendChangedNotification;
+
 @end
 
 
