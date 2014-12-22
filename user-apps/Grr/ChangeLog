@@ -1,3 +1,9 @@
+2014-12-22 Riccardo Mottola <rm@gnu.org>
+
+	* Components/ArticleView/ArticleTextViewPlugin.m
+	* Components/Searching/NSSet+ArticleFiltering.m
+	do not use PRIuPTR, doesn't work on Mac
+
 2013-05-17: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Components/DatabaseTreeView/DatabaseTreeViewController.[h|m]
 	* NSBundle+Extensions.m

@@ -133,7 +133,7 @@
          atIndex: (NSUInteger) charIndex
 {
     BOOL result = NO;
-    NSLog(@"textView:clickedOnLink: %@ atIndex: %"PRIuPTR"", link, charIndex);
+    NSLog(@"textView:clickedOnLink: %@ atIndex: %lu", link, (unsigned long)charIndex);
     
     if ([link isKindOfClass: [NSURL class]]) {
         result = [[NSWorkspace sharedWorkspace] openURL: (NSURL*)link];

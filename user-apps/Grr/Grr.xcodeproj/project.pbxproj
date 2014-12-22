@@ -1160,7 +1160,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 85E5415510ACBF5C00BCF79D /* Build configuration list for PBXProject "GrrTiger" */;
+			buildConfigurationList = 85E5415510ACBF5C00BCF79D /* Build configuration list for PBXProject "Grr" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -2990,7 +2990,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
 		};
-		85E5415510ACBF5C00BCF79D /* Build configuration list for PBXProject "GrrTiger" */ = {
+		85E5415510ACBF5C00BCF79D /* Build configuration list for PBXProject "Grr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				85E5415610ACBF5C00BCF79D /* Development */,
