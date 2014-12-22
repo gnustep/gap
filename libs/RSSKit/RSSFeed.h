@@ -123,18 +123,6 @@ enum RSSFeedStatus
 // ----------------------------------------------------------------------
 
 /**
- * Accessor for the status of the feed.
- * This can be used by a multithreaded GUI to indicate if a feed
- * is currently fetching...
- * 
- * @deprecated in favor of -isFetching
- * @see isFetching
- * 
- * @return either RSSFeedIsFetching or RSSFeedIsIdle
- */
-- (enum RSSFeedStatus) status;
-
-/**
  * Returns YES if and only if this feed is currently being fetched.
  */
 - (BOOL)isFetching;
