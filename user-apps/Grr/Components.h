@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2014  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -27,6 +27,7 @@
 #import <AppKit/AppKit.h>
 
 #import "PipeType.h"
+#import "GNUstep.h"
 
 extern NSString* ComponentDidUpdateNotification;
 
