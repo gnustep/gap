@@ -111,7 +111,7 @@
     NSMutableSet* newDirtyArticleSet = [NSMutableSet new];
     
     NSEnumerator* enumerator = [dirtyArticles objectEnumerator];
-    id<Article> article;
+    Article *article;
     
     while ((article = [enumerator nextObject]) != nil) {
         if ([article store] == NO) {
