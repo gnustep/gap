@@ -302,7 +302,7 @@
   symmetricalHandles = flag;
 }
 
-- (void)setPointPosition:(GRPointPosition)pPos
+- (void)setPointPosition:(GRPointTangentStyle)pPos
 {
   pointPosition = pPos;
 }
