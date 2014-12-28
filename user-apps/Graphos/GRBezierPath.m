@@ -563,12 +563,13 @@ static double k = 0.025;
     return;
   if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
     [(GRBezierPathEditor *)editor setIsDone:YES];
+  
+  [self remakePath];
 }
 
 - (void)remakePath
 {
   GRBezierControlPoint *cp, *prevcp, *mtopoint;
-
   NSInteger i;
 
   [myPath removeAllPoints];
@@ -602,10 +603,18 @@ static double k = 0.025;
           [myPath curveToPoint: GRpointZoom([cp center], zmFactor)
                  controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
                  controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
+          [cp setPointPosition:GRPointMiddle];
         }
 
       if([self isPoint: cp onPoint: mtopoint])
 	[(GRBezierPathEditor *)editor setIsDone:YES];
+    }
+
+  /* if the path is open, set the Start ad End points controls */
+  if (!NSEqualPoints([(GRBezierControlPoint *)[controlPoints objectAtIndex:0] center], [(GRBezierControlPoint *)[controlPoints objectAtIndex:[controlPoints count]-1] center]))
+    {
+      [[controlPoints objectAtIndex:0] setPointPosition:GRPointStart];
+      [[controlPoints objectAtIndex:[controlPoints count]-1] setPointPosition:GRPointEnd];
     }
 }
 
