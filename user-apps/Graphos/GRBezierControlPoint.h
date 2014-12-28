@@ -31,7 +31,7 @@ enum
   GRPointMiddle = 0,
   GRPointStart = 1,
   GRPointEnd = 2
-}; typedef NSUInteger GRPointPosition;
+}; typedef NSUInteger GRPointTangentStyle;
 
 typedef struct
 {
@@ -50,7 +50,7 @@ typedef struct
   GRBezierPath *path;
   GRBezierHandle bzHandle;
   BOOL symmetricalHandles;
-  GRPointPosition pointPosition;
+  GRPointTangentStyle pointPosition;
 }
 
 - (id)initAtPoint:(NSPoint)aPoint
@@ -71,7 +71,7 @@ typedef struct
 - (BOOL)isActiveHandle;
 - (BOOL)symmetricalHandles;
 - (void)setSymmetricalHandles:(BOOL)flag;
-- (void)setPointPosition:(GRPointPosition)pPos;
+- (void)setPointPosition:(GRPointTangentStyle)pPos;
 
 @end
 
