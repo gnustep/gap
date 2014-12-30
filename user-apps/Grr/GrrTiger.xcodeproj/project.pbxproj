@@ -16,47 +16,14 @@
 		851B402E109E14920036C28D /* Fonts.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 851B402D109E14920036C28D /* Fonts.tiff */; };
 		8540B03F10B69963008281E2 /* Grr-Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8540B03E10B69963008281E2 /* Grr-Icon.icns */; };
 		85687D1B107BF79C00B55A9A /* RSSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85687D1A107BF79C00B55A9A /* RSSKit.framework */; };
-		85687D5C107BF7D000B55A9A /* AppController.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D35107BF7D000B55A9A /* AppController.h */; };
 		85687D5D107BF7D000B55A9A /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D36107BF7D000B55A9A /* AppController.m */; };
-		85687D5E107BF7D000B55A9A /* Article.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D37107BF7D000B55A9A /* Article.h */; };
-		85687D60107BF7D000B55A9A /* ArticleFactory.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D39107BF7D000B55A9A /* ArticleFactory.h */; };
 		85687D61107BF7D000B55A9A /* ArticleFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D3A107BF7D000B55A9A /* ArticleFactory.m */; };
-		85687D62107BF7D000B55A9A /* ArticleGroup.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D3B107BF7D000B55A9A /* ArticleGroup.h */; };
 		85687D63107BF7D000B55A9A /* ArticleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D3C107BF7D000B55A9A /* ArticleGroup.m */; };
-		85687D64107BF7D000B55A9A /* Category.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D3D107BF7D000B55A9A /* Category.h */; };
-		85687D66107BF7D000B55A9A /* Components.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D3F107BF7D000B55A9A /* Components.h */; };
-		85687D68107BF7D000B55A9A /* Database.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D41107BF7D000B55A9A /* Database.h */; };
-		85687D6A107BF7D000B55A9A /* DatabaseElement.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D43107BF7D000B55A9A /* DatabaseElement.h */; };
-		85687D6C107BF7D000B55A9A /* ExtendedWindow.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D45107BF7D000B55A9A /* ExtendedWindow.h */; };
-		85687D6E107BF7D000B55A9A /* Feed.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D47107BF7D000B55A9A /* Feed.h */; };
 		85687D6F107BF7D000B55A9A /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D48107BF7D000B55A9A /* Feed.m */; };
-		85687D70107BF7D000B55A9A /* GNRatingCell.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D49107BF7D000B55A9A /* GNRatingCell.h */; };
-		85687D72107BF7D000B55A9A /* ImageTextCell.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D4B107BF7D000B55A9A /* ImageTextCell.h */; };
-		85687D74107BF7D000B55A9A /* NSBundle+Extensions.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D4D107BF7D000B55A9A /* NSBundle+Extensions.h */; };
 		85687D75107BF7D000B55A9A /* NSBundle+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D4E107BF7D000B55A9A /* NSBundle+Extensions.m */; };
-		85687D76107BF7D000B55A9A /* NSURL+Proxy.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D4F107BF7D000B55A9A /* NSURL+Proxy.h */; };
 		85687D77107BF7D000B55A9A /* NSURL+Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D50107BF7D000B55A9A /* NSURL+Proxy.m */; };
-		85687D78107BF7D000B55A9A /* NumberedImageTextCell.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D51107BF7D000B55A9A /* NumberedImageTextCell.h */; };
-		85687D7A107BF7D000B55A9A /* PipeType.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D53107BF7D000B55A9A /* PipeType.h */; };
-		85687D7C107BF7D000B55A9A /* PreferencesComponent.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D55107BF7D000B55A9A /* PreferencesComponent.h */; };
-		85687D7E107BF7D000B55A9A /* PreferencesPanel.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D57107BF7D000B55A9A /* PreferencesPanel.h */; };
 		85687D7F107BF7D000B55A9A /* PreferencesPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D58107BF7D000B55A9A /* PreferencesPanel.m */; };
-		85687D80107BF7D000B55A9A /* ToolbarDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D59107BF7D000B55A9A /* ToolbarDelegate.h */; };
-		85687D87107BF83C00B55A9A /* ArticleOperations.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D85107BF83C00B55A9A /* ArticleOperations.h */; };
-		85687D8C107BF85200B55A9A /* ArticleTablePlugin.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D8A107BF85200B55A9A /* ArticleTablePlugin.h */; };
 		85687D91107BF8A900B55A9A /* Grr_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85687D90107BF8A900B55A9A /* Grr_main.m */; };
-		85687D97107BF8CB00B55A9A /* ArticleTextViewPlugin.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D93107BF8CB00B55A9A /* ArticleTextViewPlugin.h */; };
-		85687D99107BF8CB00B55A9A /* NSString+TolerantHTML.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D95107BF8CB00B55A9A /* NSString+TolerantHTML.h */; };
-		85687D9F107BF8EA00B55A9A /* DatabaseOperations.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D9C107BF8EA00B55A9A /* DatabaseOperations.h */; };
-		85687DA1107BF8EA00B55A9A /* SubscriptionPanelProtocol.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687D9E107BF8EA00B55A9A /* SubscriptionPanelProtocol.h */; };
-		85687DA5107BF90A00B55A9A /* DatabaseTreeViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DA3107BF90A00B55A9A /* DatabaseTreeViewController.h */; };
-		85687DB2107BF94E00B55A9A /* FontBox.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DAE107BF94E00B55A9A /* FontBox.h */; };
-		85687DB4107BF94E00B55A9A /* FontsComponent.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DB0107BF94E00B55A9A /* FontsComponent.h */; };
-		85687DBC107BF98200B55A9A /* ProxyComponent.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DBA107BF98200B55A9A /* ProxyComponent.h */; };
-		85687DC4107BF99B00B55A9A /* NSSet+ArticleFiltering.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DC0107BF99B00B55A9A /* NSSet+ArticleFiltering.h */; };
-		85687DC6107BF99B00B55A9A /* Searching.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DC2107BF99B00B55A9A /* Searching.h */; };
-		85687DCD107BF9B800B55A9A /* SubscriptionPanel.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DCB107BF9B800B55A9A /* SubscriptionPanel.h */; };
-		85687DD5107BFA2600B55A9A /* TreeDatabaseComponent.h in Resources */ = {isa = PBXBuildFile; fileRef = 85687DD3107BFA2600B55A9A /* TreeDatabaseComponent.h */; };
 		85687E14107BFBEA00B55A9A /* HTML-Entities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85687DF0107BFBEA00B55A9A /* HTML-Entities.plist */; };
 		85687E15107BFBEA00B55A9A /* AddCategory.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85687DF2107BFBEA00B55A9A /* AddCategory.tiff */; };
 		85687E16107BFBEA00B55A9A /* AddFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85687DF3107BFBEA00B55A9A /* AddFeed.tiff */; };
@@ -1282,39 +1249,6 @@
 				85D641FA13BFF3410099F868 /* DatabaseOperations.grrc in Resources */,
 				85D641FB13BFF3410099F868 /* ArticleOperations.grrc in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				85687D5C107BF7D000B55A9A /* AppController.h in Resources */,
-				85687D5E107BF7D000B55A9A /* Article.h in Resources */,
-				85687D60107BF7D000B55A9A /* ArticleFactory.h in Resources */,
-				85687D62107BF7D000B55A9A /* ArticleGroup.h in Resources */,
-				85687D64107BF7D000B55A9A /* Category.h in Resources */,
-				85687D66107BF7D000B55A9A /* Components.h in Resources */,
-				85687D68107BF7D000B55A9A /* Database.h in Resources */,
-				85687D6A107BF7D000B55A9A /* DatabaseElement.h in Resources */,
-				85687D6C107BF7D000B55A9A /* ExtendedWindow.h in Resources */,
-				85687D6E107BF7D000B55A9A /* Feed.h in Resources */,
-				85687D70107BF7D000B55A9A /* GNRatingCell.h in Resources */,
-				85687D72107BF7D000B55A9A /* ImageTextCell.h in Resources */,
-				85687D74107BF7D000B55A9A /* NSBundle+Extensions.h in Resources */,
-				85687D76107BF7D000B55A9A /* NSURL+Proxy.h in Resources */,
-				85687D78107BF7D000B55A9A /* NumberedImageTextCell.h in Resources */,
-				85687D7A107BF7D000B55A9A /* PipeType.h in Resources */,
-				85687D7C107BF7D000B55A9A /* PreferencesComponent.h in Resources */,
-				85687D7E107BF7D000B55A9A /* PreferencesPanel.h in Resources */,
-				85687D80107BF7D000B55A9A /* ToolbarDelegate.h in Resources */,
-				85687D87107BF83C00B55A9A /* ArticleOperations.h in Resources */,
-				85687D8C107BF85200B55A9A /* ArticleTablePlugin.h in Resources */,
-				85687D97107BF8CB00B55A9A /* ArticleTextViewPlugin.h in Resources */,
-				85687D99107BF8CB00B55A9A /* NSString+TolerantHTML.h in Resources */,
-				85687D9F107BF8EA00B55A9A /* DatabaseOperations.h in Resources */,
-				85687DA1107BF8EA00B55A9A /* SubscriptionPanelProtocol.h in Resources */,
-				85687DA5107BF90A00B55A9A /* DatabaseTreeViewController.h in Resources */,
-				85687DB2107BF94E00B55A9A /* FontBox.h in Resources */,
-				85687DB4107BF94E00B55A9A /* FontsComponent.h in Resources */,
-				85687DBC107BF98200B55A9A /* ProxyComponent.h in Resources */,
-				85687DC4107BF99B00B55A9A /* NSSet+ArticleFiltering.h in Resources */,
-				85687DC6107BF99B00B55A9A /* Searching.h in Resources */,
-				85687DCD107BF9B800B55A9A /* SubscriptionPanel.h in Resources */,
-				85687DD5107BFA2600B55A9A /* TreeDatabaseComponent.h in Resources */,
 				85687E14107BFBEA00B55A9A /* HTML-Entities.plist in Resources */,
 				85687E15107BFBEA00B55A9A /* AddCategory.tiff in Resources */,
 				85687E16107BFBEA00B55A9A /* AddFeed.tiff in Resources */,
