@@ -326,7 +326,9 @@
   pstyle = [attrs objectForKey: NSParagraphStyleAttributeName];
   parspace = [pstyle paragraphSpacing];
   align = [pstyle alignment];
-  size = [str sizeWithAttributes: attrs];
+  size = NSMakeSize(0, 0);
+  if (str)
+    size = [str sizeWithAttributes: attrs];
   bounds = NSMakeRect(pos.x, pos.y, size.width, size.height);
 }
 
