@@ -37,11 +37,11 @@
   withProperties:(NSDictionary *) properties
       openEditor:(BOOL)openedit
 {
-  int result;
-
   self = [super init];
   if(self)
     {
+      int result;
+        
       docView = aView;
       zmFactor = zf;
       pos = p;
@@ -102,120 +102,122 @@
             inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
 {
-    NSMutableParagraphStyle *style;
-    NSDictionary *attrs;
-    NSString *fontname, *s;
-    NSArray *linearr;
-
-    self = [super init];
-    if(self)
-      {
-        float strokeCol[4];
-        float fillCol[4];
-	float strokeAlpha;
-	float fillAlpha;
-	id obj;
+  self = [super init];
+  if(self)
+    {
+      NSMutableParagraphStyle *style;
+      NSDictionary *attrs;
+      NSString *fontname, *s;
+      NSArray *linearr;
+      float strokeCol[4];
+      float fillCol[4];
+      float strokeAlpha;
+      float fillAlpha;
+      id obj;
 	
-        docView = aView;
-        zmFactor = zf;
-        editor = [[GRTextEditor alloc] initEditor:self];
-        ASSIGN(str, [description objectForKey: @"string"]);
-        pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
+      docView = aView;
+      zmFactor = zf;
+      editor = [[GRTextEditor alloc] initEditor:self];
+      s = [description objectForKey: @"string"];
+      if (s)
+        {
+          ASSIGN(str, s);
+          pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);
-	selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
-        fontname = [description objectForKey: @"fontname"];
-        fsize = [[description objectForKey: @"fontsize"] floatValue];
-        ASSIGN(font, [NSFont fontWithName: fontname size: fsize]);
-
-        align = [[description objectForKey: @"txtalign"] intValue];
-        parspace = [[description objectForKey: @"parspace"] floatValue];
-        style = [[NSMutableParagraphStyle alloc] init];
-        [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-        [style setAlignment: align];
-        [style setParagraphSpacing: parspace];
-        attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-            font, NSFontAttributeName,
-            style, NSParagraphStyleAttributeName, nil];
-	[style release];
-        size = [str sizeWithAttributes: attrs];
-        scalex = [[description objectForKey: @"scalex"] floatValue];
-        scaley = [[description objectForKey: @"scaley"] floatValue];
-        rotation = [[description objectForKey: @"rotation"] floatValue];
-
-	obj = [description objectForKey: @"stroked"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        stroked = [obj boolValue];
-        strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
-        s = [description objectForKey: @"strokecolor"];
-        linearr = [s componentsSeparatedByString: @" "];
-	if ([linearr count] == 3)
-	  {
-	    strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    strokeColor = [NSColor colorWithCalibratedRed: strokeCol[0]
-				   green: strokeCol[1]
-				   blue: strokeCol[2]
-				   alpha: strokeAlpha];
-	    [strokeColor retain];
-	  }
-	else
-	  {
-	    strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
-	    strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
-				   magenta: strokeCol[1]
-				   yellow: strokeCol[2]
-				   black: strokeCol[3]
-				   alpha: strokeAlpha];
-	    strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-	  }
-	obj = [description objectForKey: @"filled"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        filled = [obj boolValue];
-	fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
-        s = [description objectForKey: @"fillcolor"];
-        linearr = [s componentsSeparatedByString: @" "];
-	if ([linearr count] == 3)
-	  {
-	    fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    fillColor = [NSColor colorWithCalibratedRed: fillCol[0]
-				 green: fillCol[1]
-				 blue: fillCol[2]
-				 alpha: fillAlpha];
-	    [fillColor retain];
-	  }
-	else
-	  {
-	    fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	    fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	    fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	    fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
-	    fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
-				 magenta: fillCol[1]
-				 yellow: fillCol[2]
-				 black: fillCol[3]
-				 alpha: fillAlpha];
-	    fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-	  }
-	obj = [description objectForKey: @"visible"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        visible = [obj boolValue];
-	obj = [description objectForKey: @"locked"];
-	if ([obj isKindOfClass:[NSString class]])
-	  obj = [NSNumber numberWithInt:[obj intValue]];
-        locked = [obj boolValue];
-
-        [self setZoomFactor: zf];
+          selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
+          fontname = [description objectForKey: @"fontname"];
+          fsize = [[description objectForKey: @"fontsize"] floatValue];
+          ASSIGN(font, [NSFont fontWithName: fontname size: fsize]);
+          align = [[description objectForKey: @"txtalign"] intValue];
+          parspace = [[description objectForKey: @"parspace"] floatValue];
+          style = [[NSMutableParagraphStyle alloc] init];
+          [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+          [style setAlignment: align];
+          [style setParagraphSpacing: parspace];
+          attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  font, NSFontAttributeName,
+                                style, NSParagraphStyleAttributeName, nil];
+          [style release];
+          size = [str sizeWithAttributes: attrs];
+        }
+      scalex = [[description objectForKey: @"scalex"] floatValue];
+      scaley = [[description objectForKey: @"scaley"] floatValue];
+      rotation = [[description objectForKey: @"rotation"] floatValue];
+      
+      obj = [description objectForKey: @"stroked"];
+      if ([obj isKindOfClass:[NSString class]])
+        obj = [NSNumber numberWithInt:[obj intValue]];
+      stroked = [obj boolValue];
+      strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
+      s = [description objectForKey: @"strokecolor"];
+      linearr = [s componentsSeparatedByString: @" "];
+      if ([linearr count] == 3)
+        {
+          strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+          strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+          strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+          strokeColor = [NSColor colorWithCalibratedRed: strokeCol[0]
+                                                  green: strokeCol[1]
+                                                   blue: strokeCol[2]
+                                                  alpha: strokeAlpha];
+          [strokeColor retain];
+        }
+      else
+        {
+          strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
+          strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
+          strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
+          strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
+          strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
+                                             magenta: strokeCol[1]
+                                              yellow: strokeCol[2]
+                                               black: strokeCol[3]
+                                               alpha: strokeAlpha];
+          strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+        }
+      obj = [description objectForKey: @"filled"];
+      if ([obj isKindOfClass:[NSString class]])
+        obj = [NSNumber numberWithInt:[obj intValue]];
+      filled = [obj boolValue];
+      fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
+      s = [description objectForKey: @"fillcolor"];
+      linearr = [s componentsSeparatedByString: @" "];
+      if ([linearr count] == 3)
+        {
+          fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+          fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+          fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+          fillColor = [NSColor colorWithCalibratedRed: fillCol[0]
+                                                green: fillCol[1]
+                                                 blue: fillCol[2]
+                                                alpha: fillAlpha];
+          [fillColor retain];
+        }
+      else
+        {
+          fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
+          fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
+          fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
+          fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
+          fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
+                                           magenta: fillCol[1]
+                                            yellow: fillCol[2]
+                                             black: fillCol[3]
+                                             alpha: fillAlpha];
+          fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
+        }
+      obj = [description objectForKey: @"visible"];
+      if ([obj isKindOfClass:[NSString class]])
+        obj = [NSNumber numberWithInt:[obj intValue]];
+      visible = [obj boolValue];
+      obj = [description objectForKey: @"locked"];
+      if ([obj isKindOfClass:[NSString class]])
+        obj = [NSNumber numberWithInt:[obj intValue]];
+      locked = [obj boolValue];
+      
+      [self setZoomFactor: zf];
     }
-    return self;
+  return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone
