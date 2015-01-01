@@ -29,6 +29,8 @@
 	<string>Graphos Help</string>
 	<key>CFBundleIconFile</key>
 	<string>graphos_icons</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.gnustep.Graphos</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
