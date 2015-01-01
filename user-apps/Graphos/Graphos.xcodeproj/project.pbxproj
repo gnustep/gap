@@ -542,12 +542,6 @@
 			};
 			name = Deployment;
 		};
-		14C7E0B00EC663DF004E8823 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
-		};
 		854931F811143DF600C4D928 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -558,12 +552,14 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = "";
+				IBC_STRIP_NIBS = NO;
 				INFOPLIST_FILE = "Info-Draw.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Graphos;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -578,16 +574,20 @@
 		854931F911143DF600C4D928 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				HEADER_SEARCH_PATHS = "";
+				IBC_STRIP_NIBS = NO;
 				INFOPLIST_FILE = "Info-Draw.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Graphos;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -599,29 +599,6 @@
 			};
 			name = Deployment;
 		};
-		854931FA11143DF600C4D928 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_VERSION = 4.0;
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Draw__Upgraded_.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Graphos;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = Default;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -630,20 +607,18 @@
 			buildConfigurations = (
 				14C7E0AE0EC663DF004E8823 /* Development */,
 				14C7E0AF0EC663DF004E8823 /* Deployment */,
-				14C7E0B00EC663DF004E8823 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 		854931F711143DF600C4D928 /* Build configuration list for PBXNativeTarget "Draw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				854931F811143DF600C4D928 /* Development */,
 				854931F911143DF600C4D928 /* Deployment */,
-				854931FA11143DF600C4D928 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};
