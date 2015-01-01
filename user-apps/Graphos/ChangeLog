@@ -2,6 +2,9 @@
 
 	* GRDocView.m
     Remove unused variable.
+    
+    * GRText.m
+    init string properties only if string not nil
 
 2014-12-28 Riccardo Mottola <rm@gnu.org>
 
