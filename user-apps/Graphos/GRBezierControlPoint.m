@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierControlPoint.m
 
- Copyright (C) 2000-2014 GNUstep Application Project
+ Copyright (C) 2000-2015 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -166,12 +166,10 @@
 {
   NSPoint centerZ;
   NSRect centerRectZ;
-  NSRect innerRectZ;
 
   centerZ.x = bzHandle.center.x * zmFactor;
   centerZ.y = bzHandle.center.y * zmFactor;
   centerRectZ = NSMakeRect(centerZ.x-3, centerZ.y-3, 6, 6);
-  innerRectZ = NSMakeRect(centerZ.x-2, centerZ.y-2, 4, 4);
  
   if (sel)
     {
