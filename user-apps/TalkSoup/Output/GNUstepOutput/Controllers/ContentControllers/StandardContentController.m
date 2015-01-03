@@ -3,6 +3,7 @@
                           -------------------
     begin                : Tue Jan 20 22:08:40 CST 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : 2015 The GAP Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -201,7 +202,10 @@
  */
 - (id <MasterController>)masterControllerForName: (NSString *)aName
 {
-	return [nameToMasterController objectForKey: GNUstepOutputLowercase(aName, connectionController)];
+  if (aName == nil)
+    return nil;
+
+  return [nameToMasterController objectForKey: GNUstepOutputLowercase(aName, connectionController)];
 }
 /* Returns the chat view for the name <var>aName</var>
  */
@@ -209,6 +213,7 @@
 {
 	return [[nameToBoth objectForKey: GNUstepOutputLowercase(aName, connectionController)] chatView];
 }
+
 /* Returns the controller for the name <var>aName</var>
  * This will conform to [(ContentControllerQueryView)] in the case of
  * a query or [(ContentControllerQueryView)] and [(ContentControllerChannelName)]
@@ -216,7 +221,10 @@
  */
 - (id <ContentControllerQueryController>)viewControllerForName: (NSString *)aName;
 {
-	return [nameToBoth objectForKey: GNUstepOutputLowercase(aName, connectionController)];
+  if (aName == nil)
+    return nil;
+
+  return [nameToBoth objectForKey: GNUstepOutputLowercase(aName, connectionController)];
 }
 /* Returns the type of view for the name <var>aName</var>.  The types is either
  * <var>ContentControllerChannelType</var> or <var>ContentControllerQueryType</var>.
