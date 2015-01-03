@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Jan 17 11:38:55 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : 2015 The GNUstep Application Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -34,17 +35,6 @@
 #include <signal.h>
 #include <time.h>
 
-@interface NSException (blah)
-@end
-
-@implementation NSException (blah)
-#if 0
-- (void)raise
-{
-	abort();
-}
-#endif
-@end
 
 id GetSetting(NSString *key)
 {
