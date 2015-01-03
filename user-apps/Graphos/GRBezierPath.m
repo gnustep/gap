@@ -241,8 +241,6 @@ static double k = 0.025;
   NSMutableDictionary *dict;
   NSMutableArray *points;
   NSString *str;
-  NSBezierPathElement type;
-  NSPoint p[3];
   NSUInteger i;
   CGFloat strokeCol[3];
   CGFloat fillCol[3];
