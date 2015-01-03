@@ -1,22 +1,27 @@
+2015-01-03 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPath.m (initFromData)
+	Initialize not only handle points, but also associated rects
+
 2015-01-01 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
-    Remove unused variable.
-    
-    * GRText.m
-    init string properties only if string not nil
+	Remove unused variable.
+
+	* GRText.m
+	init string properties only if string not nil
 
 2014-12-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m
-    During remakePath recalculate Start/Middle/End
+	During remakePath recalculate Start/Middle/End
 
 2014-10-12 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierControlPoint.h
-    * GRBezierControlPoint.m
-    Define Start, Middle, End position and draw handles accordingly
-  
+	* GRBezierControlPoint.m
+	Define Start, Middle, End position and draw handles accordingly
+
 2014-01-19 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m (remakePath)

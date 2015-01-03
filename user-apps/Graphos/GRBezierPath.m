@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2014 GNUstep Application Project
+ Copyright (C) 2000-2015 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -87,10 +87,13 @@ static double k = 0.025;
           NSLog(@"line array: %@", linearr);
           h.firstHandle.x = [[linearr objectAtIndex: 0] floatValue];
           h.firstHandle.y = [[linearr objectAtIndex: 1] floatValue];
+          h.firstHandleRect = NSMakeRect(h.firstHandle.x-2, h.firstHandle.y-2, 4, 4);
           h.center.x = [[linearr objectAtIndex: 2] floatValue];
           h.center.y = [[linearr objectAtIndex: 3] floatValue];
+          h.centerRect = NSMakeRect(h.center.x-3, h.center.y-3, 6, 6);
           h.secondHandle.x = [[linearr objectAtIndex: 4] floatValue];
           h.secondHandle.y = [[linearr objectAtIndex: 5] floatValue];
+          h.secondHandleRect = NSMakeRect(h.secondHandle.x-2, h.secondHandle.y-2, 4, 4);
           symm = (BOOL)[[linearr objectAtIndex: 6] intValue];
 
           cp = [[GRBezierControlPoint alloc] initAtPoint:h.center forPath:self zoomFactor:zmFactor];
