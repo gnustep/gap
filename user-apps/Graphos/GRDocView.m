@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2015 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -273,7 +273,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   GRBezierPath *path;
   GRPropsEditor *objInspector;
 
-  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
+  objInspector = [(Graphos *)[[NSApplication sharedApplication] delegate] objectInspector];
 
   path = [[GRBezierPath alloc] initInView: self
 			       zoomFactor: zFactor
@@ -292,7 +292,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUndoManager *uMgr;
   GRPropsEditor *objInspector;
 
-  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
+  objInspector = [(Graphos *)[[NSApplication sharedApplication] delegate] objectInspector];
     
   uMgr = [self undoManager];
   /* save the method on the undo stack */
@@ -323,7 +323,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   GRBox *box;
   GRPropsEditor *objInspector;
 
-  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
+  objInspector = [(Graphos *)[[NSApplication sharedApplication] delegate] objectInspector];
 
   box = [[GRBox alloc] initInView: self
 		       zoomFactor: zFactor
@@ -342,7 +342,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   GRCircle *circle;
   GRPropsEditor *objInspector;
 
-  objInspector = [[[NSApplication sharedApplication] delegate] objectInspector];
+  objInspector = [(Graphos *)[[NSApplication sharedApplication] delegate] objectInspector];
 
   circle = [[GRCircle alloc] initInView: self
 			     zoomFactor: zFactor
