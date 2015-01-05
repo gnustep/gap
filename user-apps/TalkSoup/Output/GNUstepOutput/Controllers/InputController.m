@@ -3,7 +3,7 @@
                           -------------------
     begin                : Thu Mar 13 13:18:48 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Application Project
+                         : (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -138,7 +138,7 @@ static void send_message(id command, id name, id connection)
 	  object: content];
 
 	aIdentifier = [NSString stringWithFormat: @"%p%@%ld",
-	  self, self, rand()];
+                                self, self, (long)rand()];
 	helper = [[HelperExecutor alloc] initWithHelperName: exec_helper 
 	  identifier: aIdentifier];
 

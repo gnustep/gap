@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sun Mar 30 21:53:38 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -128,7 +129,7 @@ static NSString *dns_helper = @"dns_helper";
 	[content bringNameToFront: ContentConsoleName];
 
 	aIdentifier = [NSString stringWithFormat: @"%p%@%ld",
-	  self, self, rand()];
+                                self, self, (long)rand()];
 	helper = [[HelperExecutor alloc] initWithHelperName: dns_helper 
 	  identifier: aIdentifier];
 
