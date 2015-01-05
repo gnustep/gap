@@ -82,7 +82,7 @@ NSAutoreleasePool *(X) = [NSAutoreleasePool new]
  * [NetApplication] will call -writeData: with a nil argument when it is 
  * safe to write
  */
-- writeData: (NSData *)data;
+- (id <NetTransport>)writeData: (NSData *)data;
 /**
  * Return YES if no more data is waiting to be written, and NO otherwise.
  * Used by [NetApplication] to determine when it can stop checking 
