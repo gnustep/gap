@@ -136,7 +136,7 @@
 - (BOOL)getObjectValue: (id *)obj forString: (NSString *)string
    errorDescription: (NSString **)error
 {
-	*obj = AUTORELEASE([[Channel alloc] initWithModifiedName: string
+	*obj = AUTORELEASE([[ChannelUser alloc] initWithModifiedName: string
 	  withConnectionController: nil]);
 	return YES;
 }
@@ -146,12 +146,12 @@
 @end
 
 @implementation Channel
-- init
+- (id)init
 {
 	return [self initWithIdentifier: nil withConnectionController: nil];
 }
-- initWithIdentifier: (NSString *)aName
-   withConnectionController: aConnection;
+- (id)initWithIdentifier: (NSString *)aName
+   withConnectionController: aConnection
 {
 	if (!(self = [super init])) return nil;
 	
