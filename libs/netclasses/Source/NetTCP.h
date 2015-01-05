@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Nov  2 01:19:16 UTC 2001
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GAP Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -175,7 +176,7 @@ extern NSString *NetclassesErrorAborted;
  * This shouldn't happen while a class is connecting, but included to 
  * conform to the [(NetObject)] protocol.
  */
-- dataReceived: (NSData *)data;
+- (id <NetObject>)dataReceived: (NSData *)data;
 /**
  * Returns the transport used by this object.  Will not be the same transport
  * given to the net object when the connection is made.
@@ -257,7 +258,7 @@ extern NSString *NetclassesErrorAborted;
  * <var>theAddress</var> is the host that the flie descriptor is connected
  * to.
  */
-- initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress;
+- (id)initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress;
 /**
  * Handles the actual reading of data from the connection.
  * Throws an exception if an error occurs while reading data.
@@ -278,7 +279,7 @@ extern NSString *NetclassesErrorAborted;
  * to the connected end.  Otherwise this will put the data in the buffer of 
  * data that needs to be written to the connection when next possible.
  */
-- writeData: (NSData *)aData;
+- (id <NetTransport>)writeData: (NSData *)aData;
 /**
  * Returns a NSHost of the local side of a connection.
  */

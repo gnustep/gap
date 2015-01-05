@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Nov  2 01:19:16 UTC 2001
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GAP Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -85,14 +86,14 @@ static TCPSystem *default_system = nil;
 	}
 - (NSMutableData *)writeBuffer;
 
-- initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress
+- (id)initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress
      withOwner: (TCPConnecting *)anObject;
 	 
 - (void)close;
 
 - (NSData *)readData: (int)maxDataSize;
 - (BOOL)isDoneWriting;
-- writeData: (NSData *)data;
+- (id <NetTransport>)writeData: (NSData *)data;
 
 - (NSHost *)remoteHost;
 - (NSHost *)localHost;
@@ -104,7 +105,7 @@ static TCPSystem *default_system = nil;
 {
 	return writeBuffer;
 }
-- initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress 
+- (id)initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress 
      withOwner: (TCPConnecting *)anObject
 {
 	struct sockaddr_in x;
@@ -152,7 +153,7 @@ static TCPSystem *default_system = nil;
 {
 	return YES;
 }
-- writeData: (NSData *)data
+- (id <NetTransport>)writeData: (NSData *)data
 {
 	char buffer[1];
 	if (data)
@@ -225,21 +226,27 @@ static TCPSystem *default_system = nil;
 }
 - connectingSucceeded
 {
-	id newTrans = AUTORELEASE([[TCPTransport alloc] initWithDesc:
-	    dup([transport desc])
-	  withRemoteHost: [transport remoteHost]]);
-	id buffer = RETAIN([(TCPConnectingTransport *)transport writeBuffer]);
-	
-	[timeout invalidate];
-	
-	[[NetApplication sharedInstance] disconnectObject: self];
-	[netObject connectionEstablished: newTrans];
-
-	[newTrans writeData: buffer];
-	RELEASE(buffer);
-
-	return self;
+  TCPTransport *newTrans;
+  NSMutableData *buffer;
+  
+  newTrans = [[TCPTransport alloc] initWithDesc:
+                                     dup([transport desc])
+                                 withRemoteHost: [transport remoteHost]];
+  [newTrans autorelease];
+  
+  buffer = [(TCPConnectingTransport *)transport writeBuffer];
+  [buffer retain];
+  [timeout invalidate];
+  
+  [[NetApplication sharedInstance] disconnectObject: self];
+  [netObject connectionEstablished: newTrans];
+  
+  [newTrans writeData: buffer];
+  RELEASE(buffer);
+  
+  return self;
 }
+
 - timeoutReceived: (NSTimer *)aTimer
 {	
 	if (aTimer != timeout)
@@ -283,7 +290,7 @@ static TCPSystem *default_system = nil;
 	}
 	return self;
 }
-- dataReceived: (NSData *)data
+- (id <NetObject>)dataReceived: (NSData *)data
 {
 	return self;
 }
@@ -739,7 +746,7 @@ static NetApplication *net_app = nil;
 {
 	net_app = RETAIN([NetApplication sharedInstance]);
 }
-- initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress
+- (id)initWithDesc: (int)aDesc withRemoteHost: (NSHost *)theAddress
 {
 	struct sockaddr_in x;
 	socklen_t address_length = sizeof(x);
@@ -886,7 +893,7 @@ static NetApplication *net_app = nil;
 	}
 	return ([writeBuffer length]) ? NO : YES;
 }
-- writeData: (NSData *)aData
+- (id <NetTransport>)writeData: (NSData *)aData
 {
 	int writeReturn;
 	char *bytes;
