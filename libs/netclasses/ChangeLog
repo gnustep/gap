@@ -1,5 +1,12 @@
 2015-01-05 Riccardo Mottola <rm@gnu.org>
 
+	* configure.ac
+	* GNUmakefile.in
+	* Source/GNUmakefile.in
+	Define VERSION and INTERFACE_VERSION, bump release to 1.1.0
+
+2015-01-05 Riccardo Mottola <rm@gnu.org>
+
 	* Source/NetTCP.h
 	* Source/NetTCP.m
 	Explicit types.
