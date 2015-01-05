@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Mar 13 13:18:48 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -39,7 +40,7 @@ extern NSString *TaskExecutionOutputNotification;
 		NSMutableArray *history;
 		NSMutableArray *modHistory;
 		KeyTextView *fieldEditor;
-		NSMutableArray *tabCompletion;
+		NSArray *tabCompletion;
 		unsigned tabCompletionIndex;
 		HelperExecutor *helper;
 		NSRange savedRange;
