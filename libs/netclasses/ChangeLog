@@ -1,5 +1,12 @@
 2015-01-05 Riccardo Mottola <rm@gnu.org>
 
+	* Source/NetBase.h
+	* Source/NetTCP.h
+	* Source/NetTCP.m
+	Explicit newConnection return type and protocol.
+
+2015-01-05 Riccardo Mottola <rm@gnu.org>
+
 	* configure.ac
 	* GNUmakefile.in
 	* Source/GNUmakefile.in

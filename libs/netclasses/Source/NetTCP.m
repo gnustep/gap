@@ -691,10 +691,12 @@ static TCPSystem *default_system = nil;
 	close(desc);
 	connected = NO;
 }
+
 - (void)connectionLost
 {
 }
-- newConnection
+
+- (id <NetPort>)newConnection
 {
 	int newDesc;
 	struct sockaddr_in sin;
