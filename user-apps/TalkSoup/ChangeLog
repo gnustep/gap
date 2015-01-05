@@ -1,5 +1,10 @@
 2015-01-05 Riccardo Mottola <rm@gnu.org>
 
+	* Output/GNUstepOutput/Models/Channel.m
+	Alloc ChannelUser, not Channel
+
+2015-01-05 Riccardo Mottola <rm@gnu.org>
+
 	* Output/GNUstepOutput/Controllers/InputController.h
 	Make tabCompletion just an NSArray
 

@@ -69,7 +69,7 @@ extern const int ChannelUserVoice;
 		NSString *topicAuthor;
 		id connection;
 	}
-- initWithIdentifier: (NSString *)aName
+- (id)initWithIdentifier: (NSString *)aName
    withConnectionController: aConnection;
 
 - setTopic: (NSString *)aTopic;
