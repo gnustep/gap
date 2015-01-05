@@ -3,6 +3,10 @@
 	* Output/GNUstepOutput/Controllers/InputController.h
 	Make tabCompletion just an NSArray
 
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	Fix warning.
+
 2013-11-21 Riccardo Mottola <rm@gnu.org>
 
 	* InFilters/DCCSupport/GNUmakefile
