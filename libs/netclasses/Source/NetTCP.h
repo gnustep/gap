@@ -237,7 +237,7 @@ extern NSString *NetclassesErrorAborted;
  * Called when a new connection occurs.  Will initialize a new object
  * of the class set with -setNetObject: with the new connection.
  */
-- newConnection;
+- (id <NetPort>)newConnection;
 @end
 
 /**

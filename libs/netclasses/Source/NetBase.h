@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Nov  2 01:19:16 UTC 2001
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GAP Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -126,7 +127,7 @@ NSAutoreleasePool *(X) = [NSAutoreleasePool new]
  * The port should should use this new connection to instantiate a object
  * of the class set by -setNetObject:.
  */
-- newConnection;
+- (id <NetPort>)newConnection;
 /**
  * Returns the low-level file descriptor.
  */
