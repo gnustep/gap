@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2013 Riccardo Mottola
+   Copyright (C) 2006-2015 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -29,6 +29,8 @@
 #import <FileTable.h>
 #import <LMFlipView.h>
 #import "LMWindow.h"
+#import "PRImage.h"
+
 
 @interface AppController : NSObject
 {
@@ -88,7 +90,7 @@
 
 - (void)updateImageCount;
 
-- (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle;
+- (PRImage *)rotate: (PRImage *)image byAngle:(unsigned)angle;
 
 - (IBAction)saveImageAs:(id)sender;
 - (IBAction)setCompressionType:(id)sender;
