@@ -9,19 +9,28 @@
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 #import <AppKit/AppKit.h>
+#import "PRImage.h"
+
+@interface PRCProgress : NSObject
+{
+  IBOutlet NSWindow            *progressPanel;
+  IBOutlet NSProgressIndicator *progressBar;
+  IBOutlet NSTextField         *activityDescription;
+}
+
+- (IBAction)showProgress:(id)sender;
+
+@end
+
 
 #define NEAREST_NEIGHBOUR 1
 #define BILINEAR 2
 
-@class PRCProgress;
 
 @interface PRScale : NSObject
 {
-  int progressSteps;
-  int totalProgressSteps;
-  id progPanel;
 }
 
-- (NSImage *)scaleImage :(NSImage *)srcImage :(int)sizeX :(int)sizeY :(int)method :(id)prPanel;
+- (PRImage *)scaleImage :(PRImage *)srcImage :(int)sizeX :(int)sizeY :(int)method :(PRCProgress *)prPanel;
 
 @end

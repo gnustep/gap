@@ -28,7 +28,7 @@
 
 @class AppController;
 
-@interface LMFlipView : NSImageView
+@interface LMFlipView : NSImageView <NSWindowDelegate>
 {
     IBOutlet AppController *controller;
 }

@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2014 Riccardo Mottola
+   Copyright (C) 2006-2015 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -149,7 +149,7 @@
 }
 
 // scale image view according to options
-- (void)scaleView:(NSImage *) image
+- (void)scaleView:(PRImage *) image
 {
     NSPoint rectOrigin;
     NSSize rectSize;
@@ -189,17 +189,17 @@
 
 - (void)changeImage:(LMImage *) image
 {
-  NSImage *nsImage;
-  NSImage *img;
+  PRImage *nsImage;
+  PRImage *img;
 
-  nsImage = [[NSImage alloc] initByReferencingFile:[image path]];
+  nsImage = [[PRImage alloc] initByReferencingFile:[image path]];
   
   [nsImage autorelease];
   img = nsImage;
 
   if ([image rotation] > 0)
     {
-      NSImage *destImage;
+      PRImage *destImage;
 
       destImage = [self rotate: nsImage byAngle:[image rotation]];
       img = destImage;
@@ -251,7 +251,7 @@
 
 - (IBAction)setFullScreen: (id)sender
 {
-    NSImage *image;
+    PRImage *image;
 
     /* trick for GS so that we don't have order problems with GWorkspace */
     [window makeKeyAndOrderFront: self];
@@ -448,7 +448,7 @@
 
 - (IBAction)rotateImage90:(id)sender
 {
-  NSImage *destImage;
+  PRImage *destImage;
 
   LMImage *imageInfo;
 
@@ -466,7 +466,7 @@
 
 - (IBAction)rotateImage180:(id)sender
 {
-  NSImage *destImage;
+  PRImage *destImage;
 
   LMImage *imageInfo;
 
@@ -484,7 +484,7 @@
 
 - (IBAction)rotateImage270:(id)sender
 {
-  NSImage *destImage;
+  PRImage *destImage;
   
   LMImage *imageInfo;
 
@@ -498,24 +498,27 @@
   [[view superview] setNeedsDisplay:YES];
 }
 
-- (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle
+- (PRImage *)rotate: (PRImage *)image byAngle:(unsigned)angle
 {
   NSBitmapImageRep *srcImageRep;
-  NSImage *destImage;
+  PRImage *destImage;
   NSBitmapImageRep *destImageRep;
   NSMutableDictionary *imgProps;
-  int x, y;
-  int w, h;
-  int newW, newH;
-  int s;
-  int srcSamplesPerPixel;
-  int destSamplesPerPixel;
+  NSInteger x, y;
+  NSInteger w, h;
+  NSInteger newW, newH;
+  NSInteger srcSamplesPerPixel;
+  NSInteger destSamplesPerPixel;
   unsigned char *srcData;
   unsigned char *destData;
   unsigned char *p1, *p2;
   NSSize oldRepSize, newRepSize;
   NSSize oldImgSize, newImgSize;
-
+  register NSInteger srcBytesPerPixel;
+  register NSInteger destBytesPerPixel;
+  register NSInteger srcBytesPerRow;
+  register NSInteger destBytesPerRow;
+  
   /* get source image representation and associated information */
   oldImgSize = [image size];
   srcImageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
@@ -538,6 +541,9 @@
     }
 
   srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+  destSamplesPerPixel = srcSamplesPerPixel;
+  srcBytesPerRow = [srcImageRep bytesPerRow];
+  srcBytesPerPixel = [srcImageRep bitsPerPixel] / 8;  srcSamplesPerPixel = [srcImageRep samplesPerPixel];
 
   imgProps = [[NSMutableDictionary alloc] init];
   [imgProps setValue:[srcImageRep valueForProperty:NSImageCompressionMethod] forKey:NSImageCompressionMethod];
@@ -548,7 +554,7 @@
   NSLog(@"Properties: %@", imgProps);
   
   destSamplesPerPixel = srcSamplesPerPixel;
-  destImage = [[NSImage alloc] initWithSize:newImgSize];
+  destImage = [[PRImage alloc] initWithSize:newImgSize];
   destImageRep = [[NSBitmapImageRep alloc]
 		   initWithBitmapDataPlanes:NULL
 				 pixelsWide:newW
@@ -558,7 +564,7 @@
 				   hasAlpha:[srcImageRep hasAlpha]
 				   isPlanar:[srcImageRep isPlanar]
 			     colorSpaceName:[srcImageRep colorSpaceName]
-				bytesPerRow:newW*destSamplesPerPixel  // we need to set this because otherwise mac > 10.4 will set a padded value
+				bytesPerRow:0
 			       bitsPerPixel:0];
   [destImageRep setSize:newRepSize];
   [destImageRep setProperty:NSImageEXIFData withValue:[imgProps valueForKey:NSImageEXIFData]];
@@ -568,14 +574,18 @@
 
   srcData = [srcImageRep bitmapData];
   destData = [destImageRep bitmapData];
+  destBytesPerRow = [destImageRep bytesPerRow];
+  destBytesPerPixel = [destImageRep bitsPerPixel] / 8;
     
   if (angle == 90)
     {
       for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
 	  {
-            p1 = srcData + srcSamplesPerPixel * (y * w + x);
-            p2 = destData + destSamplesPerPixel * ((w-x-1) * h + y);
+            unsigned s;
+            
+            p1 = srcData + srcBytesPerRow * y  + srcBytesPerPixel * x;
+            p2 = destData + destBytesPerRow * (w-x-1) + destBytesPerPixel * y;
             for (s = 0; s < srcSamplesPerPixel; s++)
 	      p2[s] = p1[s];
 	  }
@@ -585,8 +595,10 @@
       for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
 	  {
-            p1 = srcData + srcSamplesPerPixel * (y * w + x);
-            p2 = destData + srcSamplesPerPixel * ((h-y-1) * w + (w-x-1));
+            unsigned s;
+            
+            p1 = srcData + srcBytesPerRow * y  + srcBytesPerPixel * x;
+            p2 = destData + destBytesPerRow * (h-y-1) + destBytesPerPixel * (w-x-1);
             for (s = 0; s < srcSamplesPerPixel; s++)
 	      p2[s] = p1[s];
 	  }
@@ -596,13 +608,15 @@
       for (y = 0; y < h; y++)
         for (x = 0; x < w; x++)
 	  {
-            p1 = srcData + srcSamplesPerPixel * (y * w + x);
-            p2 = destData + destSamplesPerPixel * (x * h + (h-y-1));
+            unsigned s;
+            
+            p1 = srcData + srcBytesPerRow * y  + srcBytesPerPixel * x;
+            p2 = destData + destBytesPerRow * x + destBytesPerPixel * (h-y-1);
             for (s = 0; s < srcSamplesPerPixel; s++)
 	      p2[s] = p1[s];
 	  }
     }
-  [destImage addRepresentation:destImageRep];
+  [destImage setBitmapRep:destImageRep];
   [destImageRep release];
 
   [destImage autorelease];
@@ -627,7 +641,7 @@
 
 - (IBAction)saveImageAs:(id)sender
 {
-    NSImage *srcImage;
+    PRImage *srcImage;
     NSBitmapImageRep *srcImageRep;
     NSData *dataOfRep = nil;
     NSDictionary *repProperties;
@@ -754,7 +768,7 @@
   NSDictionary *repProperties;
   NSString *origFileName;
   NSString *filenameNoExtension;
-  NSImage *srcImage;
+  PRImage *srcImage;
   NSBitmapImageRep *srcImageRep;
   NSData *dataOfRep;
   NSString *destFileName;
@@ -789,10 +803,10 @@
       origFileName = [lmImage name];
       filenameNoExtension = [origFileName stringByDeletingPathExtension];   
 
-      srcImage = [[NSImage alloc] initByReferencingFile:[lmImage path]];
+      srcImage = [[PRImage alloc] initByReferencingFile:[lmImage path]];
       if ([lmImage rotation] > 0)
         {
-          NSImage *rotImage;
+          PRImage *rotImage;
 
           rotImage = [self rotate:srcImage byAngle:[lmImage rotation]];
           [rotImage retain];
@@ -849,7 +863,7 @@
 	}
       else
 	{
-	  NSImage *scaledImage;
+	  PRImage *scaledImage;
 	  PRScale *scaleFilter;
 	  
 	  scaleFilter = [[PRScale alloc] init];

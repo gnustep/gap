@@ -2,10 +2,8 @@
 //  PRScale.m
 //  PRICE
 //
-//  Modified for LaternaMagica which does not have PRImage and the progress panel
-//
 //  Created by Riccardo Mottola on Wed Jan 19 2005.
-//  Copyright (c) 2005-2010 Carduus. All rights reserved.
+//  Copyright (c) 2005-2014 Carduus. All rights reserved.
 //
 // This application is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -16,7 +14,7 @@
 
 @implementation PRScale
 
-- (NSImage *)filterImage:(NSImage *)image with:(NSArray *)parameters progressPanel:(id)progressPanel
+- (PRImage *)filterImage:(PRImage *)image with:(NSArray *)parameters progressPanel:(PRCProgress *)progressPanel
 {
     int pixelsX;
     int pixelsY;
@@ -35,29 +33,29 @@
     return @"Scale";
 }
 
-- (NSImage *)scaleImage :(NSImage *)srcImage :(int)sizeX :(int)sizeY :(int)method :(id)prPanel
+- (PRImage *)scaleImage :(PRImage *)srcImage :(int)sizeX :(int)sizeY :(int)method :(PRCProgress *)prPanel
 {
-    NSBitmapImageRep *srcImageRep;
-    NSImage *destImage;
-    NSBitmapImageRep *destImageRep;
-    int origW, origH;
-    int x, y;
-    int i;
-    unsigned char *srcData;
-    unsigned char *destData;
-    int srcSamplesPerPixel;
-    int destSamplesPerPixel;
-    int srcBytesPerRow;
-    float xRatio, yRatio;
+  NSBitmapImageRep *srcImageRep;
+  PRImage *destImage;
+  NSBitmapImageRep *destImageRep;
+  NSInteger origW, origH;
+  NSInteger x, y;
+  NSInteger i;
+  unsigned char *srcData;
+  unsigned char *destData;
+  NSInteger srcSamplesPerPixel;
+  NSInteger destSamplesPerPixel;
+  register NSInteger srcBytesPerPixel;
+  register NSInteger destBytesPerPixel;
+  register NSInteger srcBytesPerRow;
+  register NSInteger destBytesPerRow;
+  float xRatio, yRatio;
     
-    progressSteps = 0;
-    totalProgressSteps = 2;
-    progPanel = prPanel;
-
     /* get source image representation and associated information */
-    srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+    srcImageRep = [srcImage bitmapRep];
     srcBytesPerRow = [srcImageRep bytesPerRow];
     srcSamplesPerPixel = [srcImageRep samplesPerPixel];
+    srcBytesPerPixel = [srcImageRep bitsPerPixel] / 8;
     
     origW = [srcImageRep pixelsWide];
     origH = [srcImageRep pixelsHigh];
@@ -66,58 +64,32 @@
     xRatio = (float)origW / (float)sizeX;
     yRatio = (float)origH / (float)sizeY;
     
-    /* check bith depth and color/greyscale image */
-    if ([srcImageRep hasAlpha])
-    {
-        NSLog(@"image scaling not supported for images with alpha channel.");
-        if ([srcImageRep samplesPerPixel] == 2)
-            return srcImage;
-        else
-            return srcImage;
-    }
-    else
-    {
-        destImage = [[NSImage alloc] initWithSize:NSMakeSize(sizeX, sizeY)];
-        if ([srcImageRep samplesPerPixel] == 1)
-        {
-            destSamplesPerPixel = 1;
-            destImageRep = [[NSBitmapImageRep alloc]
-                    initWithBitmapDataPlanes:NULL
-                                  pixelsWide:sizeX
-                                  pixelsHigh:sizeY
-                               bitsPerSample:8
-                             samplesPerPixel:destSamplesPerPixel
-                                    hasAlpha:NO
-                                    isPlanar:NO
-                              colorSpaceName:NSCalibratedWhiteColorSpace
-                                 bytesPerRow:destSamplesPerPixel*sizeX
-                                bitsPerPixel:0];
-        } else
-        {
-            destSamplesPerPixel = 3;
-            destImageRep = [[NSBitmapImageRep alloc]
-                    initWithBitmapDataPlanes:NULL
-                                  pixelsWide:sizeX
-                                  pixelsHigh:sizeY
-                               bitsPerSample:8
-                             samplesPerPixel:destSamplesPerPixel
-                                    hasAlpha:NO
-                                    isPlanar:NO
-                              colorSpaceName:NSCalibratedRGBColorSpace
-                                 bytesPerRow:destSamplesPerPixel*sizeX
-                                bitsPerPixel:0];
-        }
-    }
+
+    destImage = [[PRImage alloc] initWithSize:NSMakeSize(sizeX, sizeY)];
+    destSamplesPerPixel = [srcImageRep samplesPerPixel];
+    destImageRep = [[NSBitmapImageRep alloc]
+                     initWithBitmapDataPlanes:NULL
+                     pixelsWide:sizeX
+                     pixelsHigh:sizeY
+                     bitsPerSample:8
+                     samplesPerPixel:destSamplesPerPixel
+                     hasAlpha:[srcImageRep hasAlpha]
+                     isPlanar:NO
+                     colorSpaceName:[srcImageRep colorSpaceName]
+                     bytesPerRow:destSamplesPerPixel*sizeX
+                     bitsPerPixel:0];
     
     srcData = [srcImageRep bitmapData];
     destData = [destImageRep bitmapData];
-    
+    destBytesPerRow = [destImageRep bytesPerRow];
+    destBytesPerPixel = [destImageRep bitsPerPixel] / 8;
+
     if (method == NEAREST_NEIGHBOUR)
     {
         for (y = 0; y < sizeY; y++)
             for (x = 0; x < sizeX; x++)
                 for (i = 0; i < srcSamplesPerPixel; i++)
-                    destData[destSamplesPerPixel * (y * sizeX + x) + i] = srcData[srcBytesPerRow * (int)(y * yRatio)  +srcSamplesPerPixel * (int)(x * xRatio) + i];
+                    destData[destBytesPerRow * y + destBytesPerPixel * (sizeX + x) + i] = srcData[srcBytesPerRow * (int)(y * yRatio)  + srcBytesPerPixel * (int)(x * xRatio) + i];
     } 
     else if (method == BILINEAR)
       {
@@ -145,12 +117,12 @@
 	      yDiff = (yFloat - y0);
 	      for (i = 0; i < srcSamplesPerPixel; i++)
 		{
-		  v1 = srcData[srcBytesPerRow * y0 + srcSamplesPerPixel * x0 + i];
-		  v2 = srcData[srcBytesPerRow * y0 + srcSamplesPerPixel * (x0+1) + i];
-		  v3 = srcData[srcBytesPerRow * (y0+1) + srcSamplesPerPixel * x0 + i];
-		  v4 = srcData[srcBytesPerRow * (y0+1) + srcSamplesPerPixel * (x0+1) + i];
+		  v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
+		  v2 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * (x0+1) + i];
+		  v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
+		  v4 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * (x0+1) + i];
 
-		  destData[destSamplesPerPixel * (y * sizeX + x) + i] = \
+		  destData[destBytesPerPixel * (y * sizeX + x) + i] = \
 		    (int)(v1*(1-xDiff)*(1-yDiff) + \
 			  v2*xDiff*(1-yDiff) + \
 			  v3*yDiff*(1-xDiff) + \
@@ -173,8 +145,8 @@
 
 	    for (i = 0; i < srcSamplesPerPixel; i++)
 	      {
-		v1 = srcData[srcBytesPerRow * y0 + srcSamplesPerPixel * x0 + i];
-		v2 = srcData[srcBytesPerRow * y0 + srcSamplesPerPixel * (x0+1) + i];
+		v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
+		v2 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * (x0+1) + i];
 
 		destData[destSamplesPerPixel * (y * sizeX + x) + i] = \
 		  (int)(v1*(1-xDiff)*(1-yDiff) + \
@@ -196,10 +168,10 @@
 	    yDiff = (yFloat - y0);
 	    for (i = 0; i < srcSamplesPerPixel; i++)
 	      { 
-		v1 = srcData[srcBytesPerRow * y0 + srcSamplesPerPixel * x0 + i];
-		v3 = srcData[srcBytesPerRow * (y0+1) + srcSamplesPerPixel * x0 + i];
+		v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
+		v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
 
-		destData[destSamplesPerPixel * (y * sizeX + x) + i] = \
+		destData[destBytesPerPixel * (y * sizeX + x) + i] = \
 		  (int)(v1*(1-xDiff)*(1-yDiff) + \
 			v3*yDiff*(1-xDiff));
 	      }
@@ -215,18 +187,18 @@
 	  y0 = (int)(yFloat);
 	  xDiff = (xFloat - x0);
 	  yDiff = (yFloat - y0);
-	  for (i = 0; i < srcSamplesPerPixel; i++)
+	  for (i = 0; i < srcBytesPerPixel; i++)
 	    {
-	      v1 = srcData[srcBytesPerRow * y0 + srcSamplesPerPixel * x0 + i];
+	      v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
 
-	      destData[destSamplesPerPixel * (y * sizeX + x) + i] = \
+	      destData[destBytesPerPixel * (y * sizeX + x) + i] = \
 		(int)(v1*(1-xDiff)*(1-yDiff));
 	    }
 	}
       } else
       NSLog(@"Unknown scaling method");
 
-    [destImage addRepresentation:destImageRep];
+    [destImage setBitmapRep:destImageRep];
     [destImageRep release];
     [destImage autorelease];
     return destImage;
