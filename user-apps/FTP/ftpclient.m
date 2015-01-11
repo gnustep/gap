@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2014 Riccardo Mottola
+ Copyright (C) 2005-2015 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -1047,8 +1047,13 @@ int getChar(streamStruct* ss)
         NSLog(@"port str: %@", tempStr);
         if ((returnCode = [self readReply:&reply]) != 200)
         {
-            NSLog(@"error occoured in port command: %@", [reply objectAtIndex:0]);
-            return -1;
+          if(reply && [reply count] > 0)
+            {
+              NSLog(@"error occoured in port command: %@", [reply objectAtIndex:0]);
+              return -1;
+            }
+          NSLog(@"error in port command, no code");
+          return -2;
         }
     }
     return 0;
