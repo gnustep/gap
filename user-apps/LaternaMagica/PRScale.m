@@ -11,10 +11,15 @@
 #include <math.h>
 #import "PRScale.h"
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#endif
 
 @implementation PRScale
 
-- (PRImage *)filterImage:(PRImage *)image with:(NSArray *)parameters progressPanel:(PRCProgress *)progressPanel
+- (NSImage *)filterImage:(NSImage *)image with:(NSArray *)parameters progressPanel:(PRCProgress *)progressPanel
 {
     int pixelsX;
     int pixelsY;
@@ -33,10 +38,10 @@
     return @"Scale";
 }
 
-- (PRImage *)scaleImage :(PRImage *)srcImage :(int)sizeX :(int)sizeY :(int)method :(PRCProgress *)prPanel
+- (NSImage *)scaleImage :(NSImage *)srcImage :(int)sizeX :(int)sizeY :(int)method :(PRCProgress *)prPanel
 {
   NSBitmapImageRep *srcImageRep;
-  PRImage *destImage;
+  NSImage *destImage;
   NSBitmapImageRep *destImageRep;
   NSInteger origW, origH;
   NSInteger x, y;
@@ -52,7 +57,7 @@
   float xRatio, yRatio;
     
     /* get source image representation and associated information */
-    srcImageRep = [srcImage bitmapRep];
+    srcImageRep = [[srcImage representations] objectAtIndex:0];
     srcBytesPerRow = [srcImageRep bytesPerRow];
     srcSamplesPerPixel = [srcImageRep samplesPerPixel];
     srcBytesPerPixel = [srcImageRep bitsPerPixel] / 8;
@@ -65,7 +70,7 @@
     yRatio = (float)origH / (float)sizeY;
     
 
-    destImage = [[PRImage alloc] initWithSize:NSMakeSize(sizeX, sizeY)];
+    destImage = [[NSImage alloc] initWithSize:NSMakeSize(sizeX, sizeY)];
     destSamplesPerPixel = [srcImageRep samplesPerPixel];
     destImageRep = [[NSBitmapImageRep alloc]
                      initWithBitmapDataPlanes:NULL
@@ -198,7 +203,7 @@
       } else
       NSLog(@"Unknown scaling method");
 
-    [destImage setBitmapRep:destImageRep];
+    [destImage addRepresentation:destImageRep];
     [destImageRep release];
     [destImage autorelease];
     return destImage;

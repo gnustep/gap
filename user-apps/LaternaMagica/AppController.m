@@ -149,7 +149,7 @@
 }
 
 // scale image view according to options
-- (void)scaleView:(PRImage *) image
+- (void)scaleView:(NSImage *) image
 {
     NSPoint rectOrigin;
     NSSize rectSize;
@@ -189,17 +189,17 @@
 
 - (void)changeImage:(LMImage *) image
 {
-  PRImage *nsImage;
-  PRImage *img;
+  NSImage *nsImage;
+  NSImage *img;
 
-  nsImage = [[PRImage alloc] initByReferencingFile:[image path]];
+  nsImage = [[NSImage alloc] initByReferencingFile:[image path]];
   
   [nsImage autorelease];
   img = nsImage;
 
   if ([image rotation] > 0)
     {
-      PRImage *destImage;
+      NSImage *destImage;
 
       destImage = [self rotate: nsImage byAngle:[image rotation]];
       img = destImage;
@@ -251,7 +251,7 @@
 
 - (IBAction)setFullScreen: (id)sender
 {
-    PRImage *image;
+    NSImage *image;
 
     /* trick for GS so that we don't have order problems with GWorkspace */
     [window makeKeyAndOrderFront: self];
@@ -448,7 +448,7 @@
 
 - (IBAction)rotateImage90:(id)sender
 {
-  PRImage *destImage;
+  NSImage *destImage;
 
   LMImage *imageInfo;
 
@@ -466,7 +466,7 @@
 
 - (IBAction)rotateImage180:(id)sender
 {
-  PRImage *destImage;
+  NSImage *destImage;
 
   LMImage *imageInfo;
 
@@ -484,7 +484,7 @@
 
 - (IBAction)rotateImage270:(id)sender
 {
-  PRImage *destImage;
+  NSImage *destImage;
   
   LMImage *imageInfo;
 
@@ -498,10 +498,10 @@
   [[view superview] setNeedsDisplay:YES];
 }
 
-- (PRImage *)rotate: (PRImage *)image byAngle:(unsigned)angle
+- (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle
 {
   NSBitmapImageRep *srcImageRep;
-  PRImage *destImage;
+  NSImage *destImage;
   NSBitmapImageRep *destImageRep;
   NSMutableDictionary *imgProps;
   NSInteger x, y;
@@ -554,7 +554,7 @@
   NSLog(@"Properties: %@", imgProps);
   
   destSamplesPerPixel = srcSamplesPerPixel;
-  destImage = [[PRImage alloc] initWithSize:newImgSize];
+  destImage = [[NSImage alloc] initWithSize:newImgSize];
   destImageRep = [[NSBitmapImageRep alloc]
 		   initWithBitmapDataPlanes:NULL
 				 pixelsWide:newW
@@ -616,7 +616,7 @@
 	      p2[s] = p1[s];
 	  }
     }
-  [destImage setBitmapRep:destImageRep];
+  [destImage addRepresentation:destImageRep];
   [destImageRep release];
 
   [destImage autorelease];
@@ -641,7 +641,7 @@
 
 - (IBAction)saveImageAs:(id)sender
 {
-    PRImage *srcImage;
+    NSImage *srcImage;
     NSBitmapImageRep *srcImageRep;
     NSData *dataOfRep = nil;
     NSDictionary *repProperties;
@@ -768,7 +768,7 @@
   NSDictionary *repProperties;
   NSString *origFileName;
   NSString *filenameNoExtension;
-  PRImage *srcImage;
+  NSImage *srcImage;
   NSBitmapImageRep *srcImageRep;
   NSData *dataOfRep;
   NSString *destFileName;
@@ -803,10 +803,10 @@
       origFileName = [lmImage name];
       filenameNoExtension = [origFileName stringByDeletingPathExtension];   
 
-      srcImage = [[PRImage alloc] initByReferencingFile:[lmImage path]];
+      srcImage = [[NSImage alloc] initByReferencingFile:[lmImage path]];
       if ([lmImage rotation] > 0)
         {
-          PRImage *rotImage;
+          NSImage *rotImage;
 
           rotImage = [self rotate:srcImage byAngle:[lmImage rotation]];
           [rotImage retain];
@@ -863,7 +863,7 @@
 	}
       else
 	{
-	  PRImage *scaledImage;
+	  NSImage *scaledImage;
 	  PRScale *scaleFilter;
 	  
 	  scaleFilter = [[PRScale alloc] init];
