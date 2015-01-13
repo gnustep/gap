@@ -29,8 +29,6 @@
 #import <FileTable.h>
 #import <LMFlipView.h>
 #import "LMWindow.h"
-#import "PRImage.h"
-
 
 @interface AppController : NSObject
 {
@@ -90,7 +88,7 @@
 
 - (void)updateImageCount;
 
-- (PRImage *)rotate: (PRImage *)image byAngle:(unsigned)angle;
+- (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle;
 
 - (IBAction)saveImageAs:(id)sender;
 - (IBAction)setCompressionType:(id)sender;
