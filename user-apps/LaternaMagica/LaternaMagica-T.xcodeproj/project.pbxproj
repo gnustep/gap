@@ -192,7 +192,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 85FC0F9310B6A96900BB2C1C /* Build configuration list for PBXProject "LaternaMagica" */;
+			buildConfigurationList = 85FC0F9310B6A96900BB2C1C /* Build configuration list for PBXProject "LaternaMagica-T" */;
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* LaternaMagica */;
 			projectDirPath = "";
@@ -370,7 +370,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
 		};
-		85FC0F9310B6A96900BB2C1C /* Build configuration list for PBXProject "LaternaMagica" */ = {
+		85FC0F9310B6A96900BB2C1C /* Build configuration list for PBXProject "LaternaMagica-T" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				85FC0F9410B6A96900BB2C1C /* Development */,
