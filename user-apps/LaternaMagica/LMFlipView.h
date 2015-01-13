@@ -26,6 +26,10 @@
 
 #import <AppKit/AppKit.h>
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+@protocol NSWindowDelegate;
+#endif
+
 @class AppController;
 
 @interface LMFlipView : NSImageView <NSWindowDelegate>
