@@ -43,7 +43,11 @@ BatteryModel.h
 #
 batmon_OBJC_FILES = \
 AppController.m \
-BatteryModel.m
+BatteryModel.m \
+BatteryModel-FreeBSD.m \
+BatteryModel-Linux.m \
+BatteryModel-NetBSD.m \
+BatteryModel-OpenBSD.m
 
 #
 # Other sources
