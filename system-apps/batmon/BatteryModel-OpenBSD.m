@@ -28,7 +28,6 @@
 #include <sys/ioctl.h>
 #include <machine/apmvar.h>
 #define APMDEV "/dev/apm"
-#endif
 
 
 #import "BatteryModel.h"
@@ -112,3 +111,5 @@
 }
 
 @end
+
+#endif
