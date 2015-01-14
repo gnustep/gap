@@ -22,6 +22,8 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
+#import <Foundation/NSObject.h>
+
 #if defined (linux)
 #define DEV_SYS_POWERSUPPLY  @"/sys/class/power_supply"
 #define DEV_PROC_PMU  @"/proc/pmu"
