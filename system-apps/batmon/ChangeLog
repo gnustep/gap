@@ -3,6 +3,14 @@
 	* BatteryModel.h
 	Import NSObject.h
 
+	* BatteryModel-Linux.m
+	* BatteryModel-NetBSD.m
+	* BatteryModel-FreeBSD.m
+	Guard appropriately for OS.
+
+	* BatteryModel-OpenBSD.m
+	Implement ACPI sensor parsing
+
 2014-10-09 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
