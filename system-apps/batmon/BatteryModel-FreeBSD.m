@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2013 GNUstep Application Project
+   Copyright (C) 2006-2015 GNUstep Application Project
 
    Author: Riccardo Mottola 
    FreeBSD support by Chris B. Vetter (initial version)
@@ -22,6 +22,8 @@
    License along with this library; if not, write to the Free
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
+
+#if defined(freebsd) || defined( __FreeBSD__ )
 
 #include <unistd.h>
 #include <stdint.h>
@@ -111,3 +113,5 @@
 }
 
 @end
+
+#endif
