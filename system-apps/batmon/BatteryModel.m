@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2014 GNUstep Application Project
+   Copyright (C) 2006-2015 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -250,13 +250,9 @@
 @end
 
 #if defined(linux)
-#include "BatteryModel-Linux.m"
 #elif defined(openbsd) || defined(__OpenBSD__)
-#include "BatteryModel-OpenBSD.m"
 #elif defined(netbsd) || defined (__NetBSD__)
-#include "BatteryModel-NetBSD.m"
 #elif defined(freebsd) || defined( __FreeBSD__ )
-#include "BatteryModel-FreeBSD.m"
 #else
 #warning "Unsupported Platform, no specific battery model"
 #endif
