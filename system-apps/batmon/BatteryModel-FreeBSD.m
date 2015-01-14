@@ -32,6 +32,9 @@
 #include <dev/acpica/acpiio.h>
 #define ACPIDEV	"/dev/acpi"
 
+#import <Foundation/NSObject.h>
+#import <Foundation/NSString.h>
+
 #import "BatteryModel.h"
 
 @implementation BatteryModel (PlatformSpecific)
