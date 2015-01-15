@@ -30,7 +30,7 @@
 #include <sys/envsys.h>
 #include <prop/proplib.h> /* psd property dictionaries */
 
-
+#import <Foundation/Foundation.h>
 #import "BatteryModel.h"
 
 @implementation BatteryModel (PlatformSpecific)
