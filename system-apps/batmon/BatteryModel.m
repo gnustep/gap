@@ -34,21 +34,6 @@
 
 @implementation BatteryModel
 
-- (void)_readLine :(FILE *)f :(char *)l
-{
-  int ch;
-    
-  ch = fgetc(f);
-  while (ch != EOF && ch != '\n')
-    {
-      *l = ch;
-      l++;
-      ch = fgetc(f);
-    }
-  *l = '\0';
-}
-
-
 - (id)init
 {
   if ((self = [super init]))

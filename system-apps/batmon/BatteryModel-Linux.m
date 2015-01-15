@@ -24,9 +24,24 @@
 
 #if defined(linux)
 
+#import <Foundation/Foundation.h>
 #import "BatteryModel.h"
 
 @implementation BatteryModel (PlatformSpecific)
+
+- (void)_readLine :(FILE *)f :(char *)l
+{
+  int ch;
+    
+  ch = fgetc(f);
+  while (ch != EOF && ch != '\n')
+    {
+      *l = ch;
+      l++;
+      ch = fgetc(f);
+    }
+  *l = '\0';
+}
 
 - (void)initPlatformSpecific
 {
