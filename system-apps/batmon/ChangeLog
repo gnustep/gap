@@ -1,3 +1,8 @@
+2015-01-15 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel-OpenBSD.m
+	Support AmperHour and not only WattHour, support full and idle states better.
+
 2015-01-14 Riccardo Mottola <rm@gnu.org>
 
 	* BatteryModel.h
