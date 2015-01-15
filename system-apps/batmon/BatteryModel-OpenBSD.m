@@ -309,17 +309,34 @@ NSDictionary *parseSensor(struct sensor *s)
       isCharging = NO;
       isCritical = NO;
 
-      if([sensors objectForKey:@"acpibat0.watthour3"])
+      if([sensors objectForKey:@"acpibat0.watthour3"] || [sensors objectForKey:@"acpibat0.amphour3"])
          {
-           lastCap = [[[sensors objectForKey:@"acpibat0.watthour0"] objectForKey:SensorValueKey] floatValue];
-           warnCap = [[[sensors objectForKey:@"acpibat0.watthour1"] objectForKey:SensorValueKey] floatValue];
-           critCap = [[[sensors objectForKey:@"acpibat0.watthour2"] objectForKey:SensorValueKey] floatValue];
-           currCap = [[[sensors objectForKey:@"acpibat0.watthour3"] objectForKey:SensorValueKey] floatValue];
-           desCap  = [[[sensors objectForKey:@"acpibat0.watthour4"] objectForKey:SensorValueKey] floatValue];
+           if([sensors objectForKey:@"acpibat0.watthour3"])
+             {
+               useWattHours = YES;
+               lastCap = [[[sensors objectForKey:@"acpibat0.watthour0"] objectForKey:SensorValueKey] floatValue];
+               warnCap = [[[sensors objectForKey:@"acpibat0.watthour1"] objectForKey:SensorValueKey] floatValue];
+               critCap = [[[sensors objectForKey:@"acpibat0.watthour2"] objectForKey:SensorValueKey] floatValue];
+               currCap = [[[sensors objectForKey:@"acpibat0.watthour3"] objectForKey:SensorValueKey] floatValue];
+               desCap  = [[[sensors objectForKey:@"acpibat0.watthour4"] objectForKey:SensorValueKey] floatValue];
 
-           volts = [[[sensors objectForKey:@"acpibat0.volt1"] objectForKey:SensorValueKey] floatValue];
-           watts = [[[sensors objectForKey:@"acpibat0.power0"] objectForKey:SensorValueKey] floatValue];
-           amps = watts/volts;
+               volts = [[[sensors objectForKey:@"acpibat0.volt1"] objectForKey:SensorValueKey] floatValue];
+               watts = [[[sensors objectForKey:@"acpibat0.power0"] objectForKey:SensorValueKey] floatValue];
+               amps = watts/volts;
+             }
+           else if ([sensors objectForKey:@"acpibat0.amphour3"])
+             {
+               useWattHours = NO;
+               lastCap = [[[sensors objectForKey:@"acpibat0.amphour0"] objectForKey:SensorValueKey] floatValue];
+               warnCap = [[[sensors objectForKey:@"acpibat0.amphour1"] objectForKey:SensorValueKey] floatValue];
+               critCap = [[[sensors objectForKey:@"acpibat0.amphour2"] objectForKey:SensorValueKey] floatValue];
+               currCap = [[[sensors objectForKey:@"acpibat0.amphour3"] objectForKey:SensorValueKey] floatValue];
+               desCap  = [[[sensors objectForKey:@"acpibat0.amphour4"] objectForKey:SensorValueKey] floatValue];
+
+               volts = [[[sensors objectForKey:@"acpibat0.volt1"] objectForKey:SensorValueKey] floatValue];
+               amps = [[[sensors objectForKey:@"acpibat0.current0"] objectForKey:SensorValueKey] floatValue];
+               watts = amps*volts;
+             }
 
            /* fiddling with raw is tricky but found no other way to know if it is charging*/
            if([sensors objectForKey:@"acpibat0.raw0"])
@@ -331,8 +348,6 @@ NSDictionary *parseSensor(struct sensor *s)
                rawDescription = [[sensors objectForKey:@"acpibat0.raw0"] objectForKey:SensorDescriptionKey];
                NSLog(@"raw desc %@", rawDescription);
                NSLog(@"raw status %@", rawStatus);
-
-
 
                if ([rawStatus isEqualToString:@"Critical"])
                  {
@@ -349,6 +364,18 @@ NSDictionary *parseSensor(struct sensor *s)
                    isCharging = YES;
                    batteryState = BMBStateCharging;
                  }
+               else if ([rawDescription isEqualToString:@"battery full"])
+                 {
+                   isCharging = YES;
+                   batteryState = BMBStateFull;
+                   chargePercent = 100;
+                 }
+               else if ([rawDescription isEqualToString:@"battery idle"])
+                 {
+                   isCharging = YES;
+                   batteryState = BMBStateFull;
+                   chargePercent = 100;
+                 }
                else if ([rawDescription isEqualToString:@"battery discharging"])
                  {
                    isCharging = YES;
@@ -361,12 +388,18 @@ NSDictionary *parseSensor(struct sensor *s)
 
                if( batteryState == BMBStateCharging )
                  {
-                   timeRemaining = (lastCap-currCap) / watts;
+                   if (useWattHours)
+                     timeRemaining = (lastCap-currCap) / watts;
+                   else
+                     timeRemaining = (lastCap-currCap) / amps;
                    chargePercent = currCap/lastCap*100;
                  }
                else if( batteryState == BMBStateDischarging )
                  {
-                   timeRemaining = currCap / watts;
+                   if (useWattHours)
+                     timeRemaining = currCap / watts;
+                   else
+                     timeRemaining = currCap / amps;
                    chargePercent = currCap/lastCap*100;
                  }
              }
