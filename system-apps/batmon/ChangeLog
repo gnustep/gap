@@ -1,3 +1,11 @@
+2015-01-18  Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	Add some label outlets.
+
+	* Resources/batmon.gorm
+	Captialize some terms, connect outlets.
+
 2015-01-16 Riccardo Mottola <rm@gnu.org>
 
 	* BatteryModel.m

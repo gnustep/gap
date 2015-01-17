@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2010 GNUstep Application Project
+   Copyright (C) 2005-2015 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -30,22 +30,26 @@
 
 @interface AppController : NSObject
 {
+    IBOutlet NSWindow            *monitorWin;
     IBOutlet NSTextField         *voltage;
     IBOutlet NSTextField         *amperage;
     IBOutlet NSTextField         *presentCap;
     IBOutlet NSTextField         *rate;
+    IBOutlet NSTextField         *rateLabel;
     IBOutlet NSTextField         *percent;
     IBOutlet NSTextField         *timeLeft;
     IBOutlet NSTextField         *chState;
     IBOutlet NSProgressIndicator *level;
+    IBOutlet NSButton            *cellInfoButton;
 
-    IBOutlet NSWindow            *monitorWin;
     IBOutlet NSWindow            *infoWin;
     IBOutlet NSProgressIndicator *lifeGauge;
     IBOutlet NSTextField         *lifeGaugePercent;
     IBOutlet NSTextField         *designCap;
     IBOutlet NSTextField         *battType;
+    IBOutlet NSTextField         *battTypeLabel;
     IBOutlet NSTextField         *manufacturer;
+    IBOutlet NSTextField         *manufacturerLabel;
     IBOutlet NSTextField         *lastFullCharge;
 
     NSDictionary *stateStrAttributes;

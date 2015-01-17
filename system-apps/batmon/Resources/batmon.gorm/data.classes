@@ -8,21 +8,25 @@
 	    "showBattInfo:"
 	);
 	Outlets = (
+	    monitorWin,
 	    voltage,
 	    amperage,
 	    presentCap,
 	    rate,
+	    rateLabel,
 	    percent,
 	    timeLeft,
 	    chState,
 	    level,
-	    monitorWin,
+	    cellInfoButton,
 	    infoWin,
 	    lifeGauge,
 	    lifeGaugePercent,
 	    designCap,
 	    battType,
+	    battTypeLabel,
 	    manufacturer,
+	    manufacturerLabel,
 	    lastFullCharge
 	);
 	Super = NSObject;
