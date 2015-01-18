@@ -34,6 +34,7 @@
 #import "GRCircle.h"
 #import "GRCircleEditor.h"
 #import "GRPropsEditor.h"
+#import "GRImage.h"
 
 #define UNDO_ACTION_OBJPROPS @"Change Object Properties"
 #define UNDO_ACTION_CP_SYMMETRIC @"Change Point to Symmetric"
@@ -1528,7 +1529,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 - (void)paste:(id)sender
 {
   NSPasteboard *pboard;
-  NSArray *types;
+  NSArray *grTypes;
+  NSString *imgType;
   NSArray *descriptions;
   NSDictionary *objdesc;
   id obj;
@@ -1536,6 +1538,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUInteger i;
   NSUndoManager *uMgr;
   
+  // FIXME we should push the undo stack only if copy is certain to succeed
   uMgr = [self undoManager];
   /* save the method on the undo stack */
   [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
@@ -1544,37 +1547,71 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [self saveCurrentObjects];
 
   pboard = [NSPasteboard generalPasteboard];
-  types = [NSArray arrayWithObject: @"GRObjectPboardType"];
-  if([[pboard availableTypeFromArray: types] isEqualToString: @"GRObjectPboardType"])
+  grTypes = [NSArray arrayWithObject: @"GRObjectPboardType"];
+  imgType = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, nil]];
+  NSLog(@"%@", [pboard types]);
+  if([[pboard availableTypeFromArray: grTypes] isEqualToString: @"GRObjectPboardType"])
     {
-        descriptions = [[pboard stringForType: @"GRObjectPboardType"] propertyList];
+      descriptions = [[pboard stringForType: @"GRObjectPboardType"] propertyList];
 
-        for(i = 0; i < [descriptions count]; i++)
+      for(i = 0; i < [descriptions count]; i++)
         {
-            objdesc = [descriptions objectAtIndex: i];
-            str = [objdesc objectForKey: @"type"];
+          objdesc = [descriptions objectAtIndex: i];
+          str = [objdesc objectForKey: @"type"];
 
-            obj = nil;
-            if([str isEqualToString: @"path"])
-                obj = [GRBezierPath alloc];
-            else if([str isEqualToString: @"text"])
-                obj = [GRText alloc];
-            else if([str isEqualToString: @"box"])
-                obj = [GRBox alloc];
-            else if([str isEqualToString: @"circle"])
-                obj = [GRCircle alloc];
-            else
-                NSLog(@"Unknown object to paste");
-            if (obj != nil)
+          obj = nil;
+          if([str isEqualToString: @"path"])
+            obj = [GRBezierPath alloc];
+          else if([str isEqualToString: @"text"])
+            obj = [GRText alloc];
+          else if([str isEqualToString: @"box"])
+            obj = [GRBox alloc];
+          else if([str isEqualToString: @"circle"])
+            obj = [GRCircle alloc];
+          else
+            NSLog(@"Unknown object to paste");
+          if (obj != nil)
             {
-                obj = [obj initFromData: objdesc
-                                 inView: self zoomFactor: zFactor];
-                [objects addObject: obj];
-                [[obj editor] selectAsGroup];
-                [obj release];
-                [self setNeedsDisplay: YES];
+              obj = [obj initFromData: objdesc
+                               inView: self zoomFactor: zFactor];
+              [objects addObject: obj];
+              [[obj editor] selectAsGroup];
+              [obj release];
+              [self setNeedsDisplay: YES];
             }
         }
+    }
+  else if ([imgType isEqualToString:NSTIFFPboardType])
+    {
+      NSImage *tmpNSImage;
+      GRImage *tmpGRImage;
+      NSMutableDictionary *properties;
+      NSString *str;
+      NSPoint pos;
+      NSSize size;
+    
+      tmpNSImage = [[NSImage alloc] initWithData:[pboard dataForType:NSTIFFPboardType]];
+    
+      size = [tmpNSImage size];
+      pos = NSMakePoint(50, 50);
+      properties = [[NSMutableDictionary alloc] init];
+      [properties autorelease];
+      str = [NSString stringWithFormat: @"%.3f", pos.x];
+      [properties setObject: str forKey: @"posx"];
+      str = [NSString stringWithFormat: @"%.3f", pos.y];
+      [properties setObject: str forKey: @"posy"];
+    
+      str = [NSString stringWithFormat: @"%.3f", size.width];
+      [properties setObject: str forKey: @"width"];
+      str = [NSString stringWithFormat: @"%.3f", size.height];
+      [properties setObject: str forKey: @"height"];
+    
+      tmpGRImage = [[GRImage alloc] initInView: self zoomFactor:zFactor withProperties:properties];
+      [tmpGRImage setImage:tmpNSImage];
+      [objects addObject:tmpGRImage];
+      [tmpGRImage release];
+      [tmpNSImage release];
+      [self setNeedsDisplay: YES];
     }
 }
 
