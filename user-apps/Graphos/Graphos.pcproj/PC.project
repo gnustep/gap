@@ -31,7 +31,8 @@
 	"GRPathObject.m",
 	"GRPathEditor.m",
 	"GRCircle.m",
-	"GRCircleEditor.m"
+	"GRCircleEditor.m",
+	"GRImage.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -61,7 +62,8 @@
 	"GRPathObject.h",
 	"GRPathEditor.h",
 	"GRCircle.h",
-	"GRCircleEditor.h"
+	"GRCircleEditor.h",
+	"GRImage.h"
     );
     IMAGES = (
 	"bezier.tiff",
