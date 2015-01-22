@@ -78,10 +78,11 @@ GRObjectControlPoint.h \
 GRPathObject.h \
 GRPathEditor.h \
 GRCircle.h \
-GRCircleEditor.h
+GRCircleEditor.h \
+GRImage.h
 
 #
-# Class files
+# Objective-C Class files
 #
 Graphos_OBJC_FILES = \
 Graphos.m \
@@ -104,7 +105,8 @@ GRObjectControlPoint.m \
 GRPathObject.m \
 GRPathEditor.m \
 GRCircle.m \
-GRCircleEditor.m
+GRCircleEditor.m \
+GRImage.m
 
 #
 # Other sources
