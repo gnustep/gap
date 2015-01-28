@@ -1,3 +1,8 @@
+2015-01-29 Riccardo Mottola <rm@gnu.org>
+
+	* tile.m
+	Draw tiles with SourceOver to have transparency on deck.
+
 2009-06-05 Riccardo Mottola
 	* GShisen.gorm: created
 	
