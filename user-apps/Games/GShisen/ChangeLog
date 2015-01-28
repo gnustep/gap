@@ -3,6 +3,9 @@
 	* tile.m
 	Draw tiles with SourceOver to have transparency on deck.
 
+	* board.m
+	Cleanup arrays from preferences, fix leak
+
 2009-06-05 Riccardo Mottola
 	* GShisen.gorm: created
 	

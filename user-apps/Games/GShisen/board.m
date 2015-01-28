@@ -1,7 +1,7 @@
 /* 
  Project: GShisen
  
- Copyright (C) 2003-2009 The GNUstep Application Project
+ Copyright (C) 2003-2015 The GNUstep Application Project
  
  Author: Enrico Sersale, Riccardo Mottola
  
@@ -65,7 +65,8 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 {
     NSArray *tempArray;
     self = [super initWithFrame:frameRect];
-    if(self) {
+    if(self)
+      {
         seconds = 0;
         minutes = 0;
         tiles = nil;
@@ -84,17 +85,14 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 				if (numScoresToKeep == 0) {
 					numScoresToKeep = 20;
 				}
-        tempArray = (NSMutableArray *)[[defaults arrayForKey:@"scores"] retain];
-        if(!tempArray) {
-            scores = [[NSMutableArray arrayWithCapacity:1] retain];
-            [defaults setObject:scores forKey:@"scores"];
-        }
-        else {
-            scores = [[NSMutableArray arrayWithCapacity:1] retain];
-            [scores setArray:tempArray];
-            [defaults setObject:scores forKey:@"scores"];
-        }
+        tempArray = [[defaults arrayForKey:@"scores"] retain];
+        scores = [[NSMutableArray arrayWithCapacity:1] retain];
+        if(tempArray)
+          [scores setArray:tempArray];
+
+        [defaults setObject:scores forKey:@"scores"];
         [defaults synchronize];
+        [tempArray release];
                 
         hadEndOfGame = NO;
         undoArray = nil;
