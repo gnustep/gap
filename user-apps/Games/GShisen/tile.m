@@ -1,7 +1,7 @@
 /* 
  Project: GShisen
  
- Copyright (C) 2003-2009 The GNUstep Application Project
+ Copyright (C) 2003-2015 The GNUstep Application Project
  
  Author: Enrico Sersale, Riccardo Mottola
  
@@ -170,7 +170,7 @@
         //[[NSColor colorWithCalibratedRed: 0.1 green: 0.47 blue: 0 alpha: 1] set];
         //NSRectFill(rect);
     } else {
-        [icon compositeToPoint: NSZeroPoint operation: NSCompositeCopy];
+        [icon compositeToPoint: NSZeroPoint operation: NSCompositeSourceOver];
     }
 }
 

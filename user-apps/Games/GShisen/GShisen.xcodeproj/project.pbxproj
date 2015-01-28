@@ -99,7 +99,7 @@
 
 /* Begin PBXFileReference section */
 		8591C2900FE02801000E1566 /* GShisen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GShisen.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8591C2930FE02802000E1566 /* GShisen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GShisen-Info.plist"; path = "/Users/multix/Documents/code/gap/user-apps/Games/GShisen/GShisen-Info.plist"; sourceTree = "<absolute>"; };
+		8591C2930FE02802000E1566 /* GShisen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GShisen-Info.plist"; path = "/Users/multix/Documents/code/gap/user-apps/Games/GShisen/GShisen-Info.plist"; sourceTree = "<absolute>"; };
 		8591C2980FE02882000E1566 /* board.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = board.h; sourceTree = "<group>"; };
 		8591C2990FE02882000E1566 /* board.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = board.m; sourceTree = "<group>"; };
 		8591C29C0FE02882000E1566 /* gshisen.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = gshisen.h; sourceTree = "<group>"; };
@@ -365,10 +365,19 @@
 		8591C2880FE027E3000E1566 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 85D5FB0C1A7850EA00C29F74 /* Build configuration list for PBXProject "GShisen" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 8591C2840FE027E3000E1566;
 			productRefGroup = 8591C2910FE02801000E1566 /* Products */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8591C28F0FE02801000E1566 /* GShisen */,
 			);
@@ -493,6 +502,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GShisen-Info.plist";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -500,8 +510,9 @@
 					"-framework",
 					AppKit,
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GShisen;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = "";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -514,6 +525,8 @@
 		85D5FB0A1A7850EA00C29F74 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -531,6 +544,7 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GShisen;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
