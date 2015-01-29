@@ -1,7 +1,7 @@
 /* 
  Project: GShisen
  
- Copyright (C) 2003-2009 The GNUstep Application Project
+ Copyright (C) 2003-2015 The GNUstep Application Project
  
  Author: Enrico Sersale, Riccardo Mottola
  
@@ -57,6 +57,7 @@
 - (BOOL)canMakeLineFromX1:(int)x1 y1:(int)y1 toX2:(int)x2 y2:(int)y2;
 - (void)unSetCurrentTiles;
 - (void)pause;
+- (BOOL)getHintMove :(GSTile **)tileStart :(GSTile **)tileEnd;
 - (void)getHint;
 - (void)verifyEndOfGame;
 - (void)endOfGame;

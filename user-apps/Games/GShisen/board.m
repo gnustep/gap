@@ -410,15 +410,17 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     }
 }
 
-- (void)getHint
+- (BOOL)getHintMove :(GSTile **)tileStart :(GSTile **)tileEnd
 {
   GSTile *tile1;
   GSTile *tile2;
-  unsigned i, j, result;
-  BOOL found = NO;
+  BOOL found;
+  unsigned i;
+  unsigned j;
 
   tile1 = nil;
   tile2 = nil;
+  found = NO;
   for(i = 0; i < [tiles count]; i++)
     {
       GSTile *tile;
@@ -445,6 +447,8 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
                         if([self findPathBetweenTiles :tile1 :tile2])
                           {
                             found = YES;
+                            *tileStart = tile1;
+                            *tileEnd = tile2;
                             break;
                           }
                       }
@@ -452,7 +456,20 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
               }
           }
       }
+    return found;
+}
 
+- (void)getHint
+{
+  GSTile *tile1;
+  GSTile *tile2;
+  int  result;
+  BOOL found = NO;
+
+  tile1 = nil;
+  tile2 = nil;
+  found = [self getHintMove :&tile1 :&tile2];
+  
     if(found)
       {
         [tile1 hightlight];
