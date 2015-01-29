@@ -411,49 +411,66 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 
 - (void)getHint
 {
-    GSTile *tile;
-    int i, j, result;
-    BOOL found = NO;
+  GSTile *tile1;
+  GSTile *tile2;
+  unsigned i, j, result;
+  BOOL found = NO;
 
-    for(i = 0; i < [tiles count]; i++) {
-        tile = [tiles objectAtIndex: i];
-        if([tile isActive] && [tile isSelect])
-            [tile unselect];
+  tile1 = nil;
+  tile2 = nil;
+  for(i = 0; i < [tiles count]; i++)
+    {
+      GSTile *tile;
+
+      tile = [tiles objectAtIndex: i];
+      if([tile isActive] && [tile isSelect])
+        [tile unselect];
     }
 	
-    for(i = 0; i < [tiles count]; i++) {
+    for(i = 0; i < [tiles count]; i++)
+      {
         if(found)
-            break;
-        for(j = 0; j < [tiles count]; j++) {
-            if(i != j) {
-                firstTile = [tiles objectAtIndex: i];
-                secondTile = [tiles objectAtIndex: j];
-                if([firstTile isActive] && [secondTile isActive]) {
-                    if([firstTile group] == [secondTile group]) {
-                        if([self findPathBetweenTiles]) {
+          break;
+        for(j = 0; j < [tiles count]; j++)
+          {
+            if(i != j)
+              {
+                tile1 = [tiles objectAtIndex: i];
+                tile2 = [tiles objectAtIndex: j];
+                if([tile1 isActive] && [tile2 isActive])
+                  {
+                    if([tile1 group] == [tile2 group])
+                      {
+                        firstTile = tile1;
+                        secondTile = tile2;
+                        if([self findPathBetweenTiles])
+                          {
                             found = YES;
                             break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if(found) {
-        [firstTile hightlight];
-        [secondTile hightlight];
+                          }
+                      }
+                  }
+              }
+          }
+      }
+
+    if(found)
+      {
+        [tile1 hightlight];
+        [tile2 hightlight];
         [[NSRunLoop currentRunLoop] runUntilDate: 
-                                        [NSDate dateWithTimeIntervalSinceNow: 2]];
-        tile = secondTile;
-        [firstTile unselect];
-        [tile unselect];									
-    } else {
+                                      [NSDate dateWithTimeIntervalSinceNow: 2]];
+        [tile1 unselect];
+        [tile2 unselect];									
+      }
+    else
+      {
         result = NSRunAlertPanel(nil, @"No more moves possible!", @"New Game", @"Quit", @"Continue");
         if(result == NSAlertDefaultReturn)
-            [self newGame];
+          [self newGame];
         else if (result == NSAlertAlternateReturn)
-            [NSApp terminate:self];
-     }
+          [NSApp terminate:self];
+      }
 }
 
 - (void)pause
