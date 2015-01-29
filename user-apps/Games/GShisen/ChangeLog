@@ -1,5 +1,11 @@
 2015-01-29 Riccardo Mottola <rm@gnu.org>
 
+	* board.m
+	* board.h
+	Separate hint search from getHint, so that it is reusable.
+
+2015-01-29 Riccardo Mottola <rm@gnu.org>
+
 	* board.m (findPathBetweenTiles)
 	Change to use stsart and end tile as parameters, not board tiles.
 
