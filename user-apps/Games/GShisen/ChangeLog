@@ -1,5 +1,10 @@
 2015-01-29 Riccardo Mottola <rm@gnu.org>
 
+	* board.m (findPathBetweenTiles)
+	Change to use stsart and end tile as parameters, not board tiles.
+
+2015-01-29 Riccardo Mottola <rm@gnu.org>
+
 	* board.m (getHint)
 	Use local instead of class ivars
 

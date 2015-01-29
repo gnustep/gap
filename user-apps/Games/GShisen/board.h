@@ -52,7 +52,7 @@
 - (void)timestep:(NSTimer *)t;
 - (int)prepareTilesToRemove:(GSTile *)clickedTile;
 - (void)removeCurrentTiles;
-- (BOOL)findPathBetweenTiles;
+- (BOOL)findPathBetweenTiles: (GSTile *)tile1 :(GSTile *)tile2;
 - (BOOL)findSimplePathFromX1:(int)x1 y1:(int)y1 toX2:(int)x2 y2:(int)y2;
 - (BOOL)canMakeLineFromX1:(int)x1 y1:(int)y1 toX2:(int)x2 y2:(int)y2;
 - (void)unSetCurrentTiles;

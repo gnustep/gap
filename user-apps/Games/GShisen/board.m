@@ -259,7 +259,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 	
     if([firstTile group] == [secondTile group])
     {
-        if([self findPathBetweenTiles])	
+      if([self findPathBetweenTiles :firstTile :secondTile])	
             return 2;
         else
         {
@@ -280,15 +280,16 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     return 0;
 }
 
-- (BOOL)findPathBetweenTiles
+- (BOOL)findPathBetweenTiles: (GSTile *)tile1 :(GSTile *)tile2
 {
-    int x1 = [firstTile px];
-    int y1 = [firstTile py];
-    int x2 = [secondTile px];
-    int y2 = [secondTile py];
-    int dx[4] = {1, 0, -1, 0};
-    int dy[4] = {0, 1, 0, -1};
-    int newx, newy, i;
+  int x1 = [tile1 px];
+  int y1 = [tile1 py];
+  int x2 = [tile2 px];
+  int y2 = [tile2 py];
+  int dx[4] = {1, 0, -1, 0};
+  int dy[4] = {0, 1, 0, -1};
+  int newx, newy;
+  unsigned i;
 
     if([self findSimplePathFromX1:x1 y1:y1 toX2:x2 y2:y2])
         return YES;
@@ -391,8 +392,8 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 
 - (void)verifyEndOfGame
 {
-    int i;
-    BOOL found = NO;
+  unsigned i;
+  BOOL found = NO;
 
     for(i = 0; i < [tiles count]; i++) {
         firstTile = [tiles objectAtIndex: i];
@@ -441,9 +442,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
                   {
                     if([tile1 group] == [tile2 group])
                       {
-                        firstTile = tile1;
-                        secondTile = tile2;
-                        if([self findPathBetweenTiles])
+                        if([self findPathBetweenTiles :tile1 :tile2])
                           {
                             found = YES;
                             break;
