@@ -342,9 +342,9 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 
 - (BOOL)canMakeLineFromX1:(int)x1 y1:(int)y1 toX2:(int)x2 y2:(int)y2
 {
-    NSArray *lineOfTiles;
-    GSTile *tile;
-    int i;
+  NSArray *lineOfTiles;
+  GSTile *tile;
+  unsigned i;
 	
     if(x1 == x2) {
         lineOfTiles = [self tilesAtXPosition: x1];
@@ -371,17 +371,18 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 
 - (void)removeCurrentTiles
 {
-    GSTilePair *removedPair;
+  GSTilePair *removedPair;
+  
+  [firstTile deactivate];
+  [secondTile deactivate];
+  
+  removedPair = [[GSTilePair alloc] initWithTile:firstTile andTile:secondTile];
+  
+  [undoArray addObject:removedPair];
+  [removedPair release];
     
-    [firstTile deactivate];
-    [secondTile deactivate];
-
-    removedPair = [[GSTilePair alloc] initWithTile:firstTile andTile:secondTile];
-    
-    [undoArray addObject:removedPair];
-    
-    [self verifyEndOfGame];
-    [self unSetCurrentTiles];
+  [self verifyEndOfGame];
+  [self unSetCurrentTiles];
 }
 
 - (void)unSetCurrentTiles
@@ -490,7 +491,6 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 {
   GSTile *tile1;
   GSTile *tile2;
-  int  result;
   BOOL found = NO;
 
   tile1 = nil;
