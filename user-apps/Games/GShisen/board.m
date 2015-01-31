@@ -392,21 +392,48 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
 
 - (void)verifyEndOfGame
 {
+  GSTile *tile;
   unsigned i;
-  BOOL found = NO;
-
-    for(i = 0; i < [tiles count]; i++) {
-        firstTile = [tiles objectAtIndex: i];
-        if([firstTile isActive]) {
-            found = YES;
-            firstTile = nil;
-            break;
+  BOOL hasMoreTiles = NO;
+  BOOL hasMoreMoves = NO;
+  
+  i = 0;
+  while (i < [tiles count] && !hasMoreTiles)
+    {
+      tile = [tiles objectAtIndex: i];
+      if([tile isActive])
+        {
+          hasMoreTiles = YES;
         }
+      i++;
+    }
+  
+  if (hasMoreTiles)
+    {
+      GSTile *tile1;
+      GSTile *tile2;
+
+      tile1 = nil;
+      tile2 = nil;
+      hasMoreMoves = [self getHintMove :&tile1 :&tile2];
     }
 
-    if(!found) {
-        [self endOfGame];
-        return;
+  if(!hasMoreTiles)
+    {
+      [self endOfGame];
+      return;
+    }
+
+  // FIXME, this should go perhaps into ghsien class
+  if (!hasMoreMoves)
+    {
+      int result;
+      
+      result = NSRunAlertPanel(nil, @"No more moves possible!", @"New Game", @"Quit", @"Continue");
+      if(result == NSAlertDefaultReturn)
+        [self newGame];
+      else if (result == NSAlertAlternateReturn)
+        [NSApp terminate:self];
     }
 }
 
@@ -470,23 +497,16 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
   tile2 = nil;
   found = [self getHintMove :&tile1 :&tile2];
   
-    if(found)
-      {
-        [tile1 hightlight];
-        [tile2 hightlight];
-        [[NSRunLoop currentRunLoop] runUntilDate: 
-                                      [NSDate dateWithTimeIntervalSinceNow: 2]];
-        [tile1 unselect];
-        [tile2 unselect];									
-      }
-    else
-      {
-        result = NSRunAlertPanel(nil, @"No more moves possible!", @"New Game", @"Quit", @"Continue");
-        if(result == NSAlertDefaultReturn)
-          [self newGame];
-        else if (result == NSAlertAlternateReturn)
-          [NSApp terminate:self];
-      }
+  if(found)
+    {
+      [tile1 hightlight];
+      [tile2 hightlight];
+      [[NSRunLoop currentRunLoop] runUntilDate: 
+                                    [NSDate dateWithTimeIntervalSinceNow: 2]];
+      [tile1 unselect];
+      [tile2 unselect];									
+    }
+
 }
 
 - (void)pause

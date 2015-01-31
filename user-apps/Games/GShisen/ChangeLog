@@ -1,3 +1,8 @@
+2015-01-31 Riccardo Mottola <rm@gnu.org>
+
+	* board.m
+	Check for a remaining move after each move, not just when a hint is requested, detect thus game end automatically.
+
 2015-01-29 Riccardo Mottola <rm@gnu.org>
 
 	* board.m
