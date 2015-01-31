@@ -1,7 +1,7 @@
 /* 
  Project: GShisen
  
- Copyright (C) 2003-2009 The GNUstep Application Project
+ Copyright (C) 2003-2015 The GNUstep Application Project
  
  Author: Enrico Sersale, Riccardo Mottola
  
@@ -110,7 +110,7 @@ static GShisen *sharedshisen = nil;
   NSMutableArray *scores;
   NSDictionary *scoresEntry;
   NSString *userName, *minutes, *seconds, *totTime;
-  int i;
+  unsigned i;
   NSButtonCell *buttonCell;
   NSScrollView *scoresScroll;
   
@@ -129,6 +129,7 @@ static GShisen *sharedshisen = nil;
   [scoresScroll setHasVerticalScroller: YES];
   [scoresScroll setHasHorizontalScroller: NO];
   [hallOfFamePanel setContentView: scoresScroll];
+  [scoresScroll release];
 
   scoresMatrix = [[NSMatrix alloc] initWithFrame: NSMakeRect(0, 0, [[hallOfFamePanel contentView] frame].size.width, [scores count] * 18) mode:NSListModeMatrix
                                        prototype: buttonCell 
@@ -139,6 +140,7 @@ static GShisen *sharedshisen = nil;
   [scoresMatrix setAutosizesCells: YES];
   
   [scoresScroll setDocumentView: scoresMatrix];
+  [scoresMatrix release];
 		
   for(i = 0; i < [scores count]; i++)
   {
@@ -167,9 +169,6 @@ static GShisen *sharedshisen = nil;
     [[scoresMatrix cellAtRow:i column:1] setTitle: userName];
     [[scoresMatrix cellAtRow:i column:2] setTitle: totTime];
   }
-		
-//  [scoresScroll setDocumentView: scoresMatrix];
-//  [myView addSubview: scoresScroll];
 	
   [hallOfFamePanel makeKeyAndOrderFront:self];
 }
