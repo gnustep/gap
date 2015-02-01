@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 1.4.1
+VERSION = 1.4.0
 PACKAGE_NAME = GShisen
 APP_NAME = GShisen
 GShisen_APPLICATION_ICON = GShisen.tiff
