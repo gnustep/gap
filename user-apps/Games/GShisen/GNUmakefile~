@@ -13,7 +13,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 1.4.0
+VERSION = 1.4.1
 PACKAGE_NAME = GShisen
 APP_NAME = GShisen
 GShisen_APPLICATION_ICON = GShisen.tiff
@@ -111,7 +111,7 @@ tile.h \
 tilepair.h
 
 #
-# Class files
+# Objective-C Class files
 #
 GShisen_OBJC_FILES = \
 board.m \
