@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Riccardo Mottola
+ Copyright (C) 2005-2015 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -61,5 +61,7 @@ enum sortOrderDef
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeObject:(FileElement *)object;
 - (void)sortByIdent:(NSString *)idStr;
+- (BOOL)containsFileName:(NSString *)name;
+
 
 @end

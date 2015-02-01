@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Riccardo Mottola
+ Copyright (C) 2005-2015 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -243,6 +243,24 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
     }
   
   return NO;
+}
+
+- (BOOL)containsFileName:(NSString *)name
+{
+  BOOL found;
+  unsigned i;
+  
+  found = NO;
+  i = 0;
+  while (!found && i < [fileStructs count])
+    {
+      FileElement *fe;
+  
+      fe = [fileStructs objectAtIndex:i];
+      found = [[fe name] isEqualToString:name];
+      i++;
+    }
+  return found;
 }
 
 
