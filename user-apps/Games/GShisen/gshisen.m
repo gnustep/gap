@@ -93,6 +93,11 @@ static GShisen *sharedshisen = nil;
 {
   NSString *username;
 
+  username = [nameField stringValue];
+  if (!username || [username length] == 0)
+    [nameField setStringValue:NSUserName()];
+  
+  [nameField selectText:self];
   [[NSApplication sharedApplication] runModalForWindow:askNamePanel];
   username = [nameField stringValue];
   
