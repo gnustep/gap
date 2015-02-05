@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2013 Riccardo Mottola
+   Copyright (C) 2005-2015 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -426,7 +426,8 @@
       fEl = [files objectAtIndex:i];
       NSLog(@"should download (performStore): %@", [fEl name]);
       [ftp retrieveFile:fEl to:local beingAt:0];
-      [localTableData addObject:fEl];
+      if (![localTableData containsFileName:[fEl name]])
+        [localTableData addObject:fEl];
     }
   [localView deselectAll:self];
   [localView reloadData];
@@ -446,7 +447,8 @@
       fEl = [files objectAtIndex:i];
       NSLog(@"should upload (performStore): %@", [fEl name]);
       [ftp storeFile:fEl from:local beingAt:0];
-      [remoteTableData addObject:fEl];
+      if (![remoteTableData containsFileName:[fEl name]])
+        [remoteTableData addObject:fEl];
     }
   [remoteView deselectAll:self];
   [remoteView reloadData];

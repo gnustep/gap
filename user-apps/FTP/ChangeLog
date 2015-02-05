@@ -1,3 +1,8 @@
+2015-02-05 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Do not add element to the table if it is already there.
+
 2015-02-02 Riccardo Mottola <rm@gnu.org>
 
 	* fileTable.m (containsFileName)
