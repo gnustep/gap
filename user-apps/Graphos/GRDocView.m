@@ -94,22 +94,29 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSMutableArray *objectOrder;
   NSString *str = nil;
   id obj;
-  NSUInteger i;
+  NSUInteger counter;
   NSUInteger p = 0;
   NSUInteger c = 0;
   NSUInteger t = 0;
   NSUInteger b = 0;
+  NSUInteger i = 0;
   
   objsdict = [NSMutableDictionary dictionaryWithCapacity: 1];
   objectOrder = [NSMutableArray arrayWithCapacity: [objects count]];
-  for(i = 0; i < [objects count]; i++)
+  for(counter = 0; counter < [objects count]; counter++)
     {
-      obj = [objects objectAtIndex: i];
+      obj = [objects objectAtIndex: counter];
       NSLog(@"class: %@", [obj className]);
       if([obj isKindOfClass: [GRBezierPath class]])
         {
 	  str = [NSString stringWithFormat: @"path%i", p];
 	  p++;
+        }
+      else if([obj isKindOfClass: [GRImage class]])
+        {
+	  // FIXME str = [NSString stringWithFormat: @"box%i", b];
+          str = nil;
+	  i++;
         }
       else if([obj isKindOfClass: [GRBox class]])
         {
@@ -130,8 +137,11 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 	{
 	  [NSException raise:@"Unhandled object type" format:@"%@", [obj class]];
 	}
-      [objectOrder addObject: str];
-      [objsdict setObject: [obj objectDescription] forKey: str];
+      if (str)
+        {
+          [objectOrder addObject: str];
+          [objsdict setObject: [obj objectDescription] forKey: str];
+        }
     }
   [objsdict setValue:[NSNumber numberWithFloat:FILE_FORMAT_VERSION] forKey:@"Version"];
   [objsdict setValue:objectOrder forKey:@"Order"];
