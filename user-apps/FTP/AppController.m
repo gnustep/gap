@@ -425,9 +425,11 @@
 
       fEl = [files objectAtIndex:i];
       NSLog(@"should download (performStore): %@", [fEl name]);
-      [ftp retrieveFile:fEl to:local beingAt:0];
-      if (![localTableData containsFileName:[fEl name]])
-        [localTableData addObject:fEl];
+      if ([ftp retrieveFile:fEl to:local beingAt:0])
+        {
+          if (![localTableData containsFileName:[fEl name]])
+            [localTableData addObject:fEl];
+        }
     }
   [localView deselectAll:self];
   [localView reloadData];

@@ -3,7 +3,14 @@
 	* AppController.m
 	* ftpclient.m
 	* ftpclient.h
-	Return success/failure in storeFile, add to the table only if it succeeed.
+	Return success/failure in retrieveFile, add to the table only if it succeeds.
+
+2015-02-11 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	* ftpclient.m
+	* ftpclient.h
+	Return success/failure in storeFile, add to the table only if it succeeds.
 
 2015-02-05 Riccardo Mottola <rm@gnu.org>
 
