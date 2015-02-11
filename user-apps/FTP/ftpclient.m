@@ -162,7 +162,6 @@ int getChar(streamStruct* ss)
     wVersionRequested = MAKEWORD( 1, 1 );
 
     WSAStartup(wVersionRequested, &wsaData);
-    NSLog(@"inited WinSock");
 #endif
     connected = NO;
     return self;
@@ -396,7 +395,7 @@ int getChar(streamStruct* ss)
   return retVal;
 }
 
-- (void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (BOOL)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
   NSString           *fileName;
   unsigned long long fileSize;
@@ -430,7 +429,7 @@ int getChar(streamStruct* ss)
       if (depth > MAX_DIR_RECURSION)
         {
           NSLog(@"Max depth reached: %d", depth);
-          return;
+          return NO;
         }
       
         pristineLocalPath = [[localClient workingDir] retain];
@@ -456,7 +455,7 @@ int getChar(streamStruct* ss)
         [localClient changeWorkingDir:pristineLocalPath];
         [pristineLocalPath release];
         [pristineRemotePath release];
-        return;
+        return YES;
     }
 
     /* lets settle to a plain binary standard type */
@@ -465,7 +464,7 @@ int getChar(streamStruct* ss)
     if ([self initDataConn] < 0)
     {
         NSLog(@"error initiating data connection, retrieveFile");
-        return;
+        return NO;
     }
 
     command = [@"RETR " stringByAppendingString:fileName];
@@ -477,7 +476,7 @@ int getChar(streamStruct* ss)
       {
         [controller showAlertDialog:@"Unexpected server error."];
         NSLog(@"Unexpected condition in retrieve");
-        return; /* we have an error or some unexpected condition */
+        return NO; /* we have an error or some unexpected condition */
       }
     else
       {
@@ -519,7 +518,7 @@ int getChar(streamStruct* ss)
     if ([self initDataStream] < 0)
     {
         [controller showAlertDialog:@"Unexpected connection error."];
-        return;
+        return NO;
     }
     
     localFileStream = fopen([localPath cString], "w");
@@ -527,7 +526,7 @@ int getChar(streamStruct* ss)
     {
         [controller showAlertDialog:@"Opening of local file failed.\nCheck permissions and free space."];
         perror("local fopen failed");
-        return;
+        return NO;
     }
     
     totalBytes = 0;
@@ -567,6 +566,7 @@ int getChar(streamStruct* ss)
     [self readReply:&reply];
     [reply release];
     [controller setThreadRunningState:NO];
+  return gotFile;
 }
 
 - (BOOL)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
