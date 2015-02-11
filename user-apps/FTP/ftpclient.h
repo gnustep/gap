@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Riccardo Mottola
+ Copyright (C) 2005-2015 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -98,7 +98,7 @@ typedef struct
 - (int)writeLine:(NSString *)line;
 - (int)writeLine:(NSString *)line byLoggingIt:(BOOL)doLog;
 - (void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
-- (void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
+- (BOOL)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
 - (void)disconnect;
