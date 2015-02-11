@@ -569,7 +569,7 @@ int getChar(streamStruct* ss)
     [controller setThreadRunningState:NO];
 }
 
-- (void)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
+- (BOOL)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
 {
   NSString           *fileName;
   unsigned long long fileSize;
@@ -603,7 +603,7 @@ int getChar(streamStruct* ss)
       if (depth > MAX_DIR_RECURSION)
         {
           NSLog(@"Max depth reached: %d", depth);
-          return;
+          return NO;
         }
 
       pristineLocalPath = [[localClient workingDir] retain];
@@ -631,7 +631,7 @@ int getChar(streamStruct* ss)
         [localClient changeWorkingDir:pristineLocalPath];
         [pristineLocalPath release];
         [pristineRemotePath release];
-        return;
+        return YES;
     }
     
     /* lets settle to a plain binary standard type */
@@ -654,7 +654,7 @@ int getChar(streamStruct* ss)
         [controller showAlertDialog:[reply objectAtIndex:0]];
         [self logIt: [reply objectAtIndex:0]];
         [reply release];
-        return;
+        return NO;
     }
     [reply release];
 
@@ -662,7 +662,7 @@ int getChar(streamStruct* ss)
     if ([self initDataStream] < 0)
     {
         [controller showAlertDialog:@"Unexpected connection error."];
-        return;
+        return NO;
     }
 
 
@@ -671,7 +671,7 @@ int getChar(streamStruct* ss)
     {
         [controller showAlertDialog:@"Opening of local file failed.\n Check permissions."];
         perror("local fopen failed");
-        return;
+        return NO;
     }
 
     totalBytes = 0;
@@ -711,6 +711,7 @@ int getChar(streamStruct* ss)
     [self readReply:&reply];
     [reply release];
     [controller setThreadRunningState:NO];
+  return gotFile;
 }
 
 - (void)deleteFile:(FileElement *)file beingAt:(int)depth

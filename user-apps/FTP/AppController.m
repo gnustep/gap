@@ -446,9 +446,11 @@
 
       fEl = [files objectAtIndex:i];
       NSLog(@"should upload (performStore): %@", [fEl name]);
-      [ftp storeFile:fEl from:local beingAt:0];
-      if (![remoteTableData containsFileName:[fEl name]])
-        [remoteTableData addObject:fEl];
+      if ([ftp storeFile:fEl from:local beingAt:0])
+        {
+          if (![remoteTableData containsFileName:[fEl name]])
+            [remoteTableData addObject:fEl];
+        }
     }
   [remoteView deselectAll:self];
   [remoteView reloadData];
