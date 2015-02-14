@@ -3,7 +3,7 @@
                           -------------------
     begin                : Fri Jan 17 11:04:36 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
-                           (C) 2013 The GNUstep Application Project
+                           (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -81,8 +81,8 @@ extern NSString *IRCReverseValue;
 #import <Foundation/NSObject.h>
 #import <Foundation/NSMapTable.h>
 
-#import <TalkSoupBundles/TalkSoupProtocols.h>
-#import <TalkSoupBundles/TalkSoupMisc.h>
+#import "TalkSoupProtocols.h"
+#import "TalkSoupMisc.h"
 
 @class NSInvocation, NSString, NSMutableDictionary, NSMutableArray;
 
@@ -144,6 +144,6 @@ extern id _TSDummy_;
 - (id)pluginForInput;
 @end
   
-#import <TalkSoupBundles/Encodings.h>
+#import "Encodings.h"
 
 #endif

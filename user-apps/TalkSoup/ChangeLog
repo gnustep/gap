@@ -1,3 +1,8 @@
+2015-01-14 Riccardo Mottola <rm@gnu.org>
+
+	* TalkSoupBundles/TalkSoup.h
+	Import files of framework locally.
+
 2015-01-05 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Models/Channel.m
