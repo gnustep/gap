@@ -33,6 +33,7 @@
 	* Output/GNUstepOutput/Controllers/ContentControllers/StandardChannelController.m
 	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
 	* Output/GNUstepOutput/Controllers/ContentControllers/StandardQueryController.m
+	* Output/GNUstepOutput/Misc/LookedUpHost.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>

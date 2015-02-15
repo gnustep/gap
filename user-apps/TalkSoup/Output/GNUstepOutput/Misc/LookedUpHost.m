@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Jun  9 19:12:10 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -30,11 +31,22 @@
 @implementation LookedUpHost (PrivateMethods)
 - (void)setName: (NSString *)aName
 {
-	ASSIGN(hostName, aName);
+  if (hostName != aName)
+    {
+      [hostName release];
+      hostName = aName;
+      [hostName retain];
+    }
 }
+
 - (void)setAddress: (NSString *)aAddress
 {
-	ASSIGN(address, aAddress);
+  if (address != aAddress)
+    {
+      [address release];
+      address = aAddress;
+      [aAddress release];
+    }
 }
 @end
 
@@ -54,7 +66,7 @@
 	}
 
 	host = [LookedUpHost new];
-	AUTORELEASE(host);
+	[host autorelease];
 	[host setName: aName];
 	[host setAddress: aAddress];
 
@@ -102,8 +114,8 @@
 	objDealloc = 
 	  (void (*)(id, SEL))[NSObject instanceMethodForSelector: _cmd];
 
-	RELEASE(address);
-	RELEASE(hostName);
+	[address release];
+	[hostName release];
 
 	objDealloc(self, _cmd);
 
