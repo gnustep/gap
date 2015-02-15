@@ -3,7 +3,7 @@
                           -------------------
     begin                : Wed Apr 30 14:30:59 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Applicaiton Project
+                         : (C) 2013-2015 The GNUstep Applicaiton Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -85,9 +85,9 @@ static NSMutableArray *add_favorites(NSMutableArray *anArray)
 		}
 	}
 
-	object = AUTORELEASE([NSMutableDictionary new]);
+	object = [[NSMutableDictionary new] autorelease];
 	[object setObject: _l(ServerListFavorites) forKey: ServerListInfoName];
-	[object setObject: AUTORELEASE([NSMutableArray new]) forKey: ServerListInfoEntries];
+	[object setObject: [[NSMutableArray new] autorelease] forKey: ServerListInfoEntries];
 	[anArray addObject: object];
 
 	return anArray;
@@ -223,7 +223,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 			NSArray *level;
 			id object2;
 			NSEnumerator *iter;
-			NSMutableString *sofar = AUTORELEASE([NSMutableString new]); 
+			NSMutableString *sofar = [[NSMutableString new] autorelease]; 
 			NSString *test;
 
 			level = [subdir pathComponents];
@@ -246,7 +246,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 			
 		if ([fm fileExistsAtPath: fullPath isDirectory: &isDir] && isDir)
 		{
-			id dict = AUTORELEASE([NSMutableDictionary new]);
+			id dict = [[NSMutableDictionary new] autorelease];
 			object = [fullPath stringByAppendingString: @"/ServerList.plist"];
 
 			[dict setObject: aPrefs forKey: @"Servers"];
@@ -271,7 +271,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 
 	fm = [NSFileManager defaultManager];
 
-	subdirs = AUTORELEASE([NSMutableArray new]);
+	subdirs = [[NSMutableArray new] autorelease];
 
 	x = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
 	  NSAllDomainsMask, YES);
@@ -303,7 +303,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		}
 	}
 
-	return add_favorites(AUTORELEASE([NSMutableArray new]));
+	return add_favorites([[NSMutableArray new] autorelease]);
 }
 + (BOOL)startAutoconnectServers
 {
@@ -324,9 +324,9 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 			if ([[o2 objectForKey: ServerListInfoAutoConnect]
 			  isEqualToString: @"YES"])
 			{
-				AUTORELEASE([[ServerListConnectionController alloc]
+				[[[ServerListConnectionController alloc]
 				 initWithServerListDictionary: o2 inGroup: g atRow: r
-				 withContentController: nil]);
+				 withContentController: nil] autorelease];
 				hadOne = YES;
 			}	
 			r++;
@@ -367,7 +367,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 }
 - (BOOL)saveServerListPreferences: (NSArray *)aPrefs
 {
-	AUTORELEASE(cached);
+	[cached autorelease];
 	cached = nil;
 
 	return [ServerListController saveServerListPreferences: aPrefs];
@@ -376,7 +376,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 {
 	if (!cached) 
 	{
-		cached = RETAIN([ServerListController serverListPreferences]);
+		cached = [[ServerListController serverListPreferences] retain];
 		[cached sortUsingFunction: sort_server_dictionary context: 0]; 
 	}
 
@@ -430,12 +430,12 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 	[browser reloadColumn: 0];
 	[window makeFirstResponder: browser];
 	
-	RETAIN(self);
+	[self retain];
 	wasEditing = -1;
 }
 - (void)dealloc
 {
-	RELEASE(window);
+	[window retain];
 	[[editor window] close];
 	
 	[super dealloc];
@@ -446,7 +446,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 	
 	if (!editor) return;
 	
-	string = AUTORELEASE(RETAIN([[editor entryField] stringValue]));
+	string = [[[[editor entryField] stringValue] retain] autorelease];
 	
 	if ([string length] == 0)
 	{
@@ -473,7 +473,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		{
 			newOne = [NSDictionary dictionaryWithObjectsAndKeys:
 			  string, ServerListInfoName,
-			  AUTORELEASE([NSArray new]), ServerListInfoEntries,
+			  [[NSArray new] autorelease], ServerListInfoEntries,
 			  nil];
 
 			[x addObject: newOne]; 
@@ -589,7 +589,8 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 	editor = [[ServerEditorController alloc] init];
 	if (![NSBundle loadNibNamed: @"ServerEditor" owner: editor])
 	{
-		DESTROY(editor);
+		[editor release];
+		editor = nil;
 		return;
 	}
 	
@@ -738,16 +739,17 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		if ([tmpArray count])
 		{
 			aConnect = [tmpArray objectAtIndex: 0];
-			aContent = RETAIN([aConnect contentController]);
-			AUTORELEASE(aContent);
+			aContent = [[aConnect contentController] retain];
+			[aContent autorelease];
 			[aContent setConnectionController: nil];
 			[aConnect setContentController: nil];
 		}
 	}	
 
-	AUTORELEASE(aConnect = [[ServerListConnectionController alloc]
+	aConnect = [[ServerListConnectionController alloc]
 	  initWithServerListDictionary: [tmp objectAtIndex: row]
-	  inGroup: first atRow: row withContentController: aContent]);
+	  inGroup: first atRow: row withContentController: aContent];
+	[aConnect autorelease];
 
 	aContent = [aConnect contentController];
 	
@@ -780,13 +782,13 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		[window setDelegate: nil];
 		[browser setDelegate: nil];
 		[browser setTarget: nil];
-		AUTORELEASE(self);
+		[self autorelease];
 	}
 	else if ([aNotification object] == [editor window])
 	{
 		[[editor window] setDelegate: nil];
 		[[editor okButton] setTarget: nil];
-		AUTORELEASE(editor);
+		[editor autorelease];
 		editor = nil;
 		wasEditing = -1;
 	}
