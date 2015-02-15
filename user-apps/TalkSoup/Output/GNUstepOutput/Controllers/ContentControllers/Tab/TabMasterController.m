@@ -136,14 +136,14 @@
 {
 	[window setDelegate: nil];
 	[window close];
-	DESTROY(window);
+	[window release];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
 	NSFreeMapTable(viewControllerToTab);
 	NSFreeMapTable(viewControllerToContent);
 	NSFreeMapTable(tabToViewController);
-	DESTROY(contentControllers);
-	DESTROY(indexToViewController);
+	[contentControllers release];
+	[indexToViewController release];
 	
 	[typeView setKeyTarget: nil];
 	[typeView setDelegate: nil];
