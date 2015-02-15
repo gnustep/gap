@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed May  7 03:31:51 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project 
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -75,7 +76,7 @@
 	if (!(self = [super initWithIRCInfoDictionary: tmp 
 	 withContentController: aContent])) return nil;
 	
-	oldInfo = RETAIN(aInfo);
+	oldInfo = [aInfo retain];
 	newInfo = [[NSMutableDictionary alloc] initWithDictionary: aInfo];
 	
 	serverRow = row;
@@ -134,8 +135,8 @@
 }
 - (void)dealloc
 {	
-	RELEASE(newInfo);
-	RELEASE(oldInfo);
+	[newInfo release];
+	[oldInfo release];
 
 	[super dealloc];
 }
