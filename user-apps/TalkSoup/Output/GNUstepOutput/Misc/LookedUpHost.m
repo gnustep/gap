@@ -45,7 +45,7 @@
     {
       [address release];
       address = aAddress;
-      [aAddress release];
+      [address retain];
     }
 }
 @end
