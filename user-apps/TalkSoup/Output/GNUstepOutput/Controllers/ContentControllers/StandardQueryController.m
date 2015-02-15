@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Jan 18 01:38:06 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -94,9 +95,9 @@
 	[chatView setFrame: [[[chatView enclosingScrollView] contentView] bounds]];
 	[chatView setNeedsDisplay: YES];
 		  
-	x = RETAIN([(NSWindow *)window contentView]);
+	x = [[(NSWindow *)window contentView] retain];
 	[window close];
-	AUTORELEASE(window);
+	[window autorelease];
 	window = x;
 	[window setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
 
@@ -147,7 +148,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	DESTROY(window);
+	[window release];
 	[super dealloc];
 }
 - (NSTextView *)chatView
