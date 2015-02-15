@@ -11,6 +11,7 @@
 	* TalkSoupBundles/TalkSoup.h
 	* TalkSoupBundles/TalkSoup.m
 	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	* Output/GNUstepOutput/Controllers/InputController.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>

@@ -120,8 +120,8 @@ static void send_message(id command, id name, id connection)
 	NSString *aIdentifier;
 	if (!(self = [super init])) return nil;
 
-	content = RETAIN(aContentController);
-	view = RETAIN(aController);
+	content = [aContentController retain];
+	view = [aController retain];
 	controller = [content connectionController];
 	
 	history = [NSMutableArray new];
@@ -159,12 +159,12 @@ static void send_message(id command, id name, id connection)
 	[fieldEditor setKeyTarget: nil];
 	[fieldEditor setDelegate: nil];
 	[(KeyTextView *)[view chatView] setKeyTarget: nil];
-	RELEASE(helper);
-	RELEASE(fieldEditor);
-	RELEASE(modHistory);
-	RELEASE(history);
-	RELEASE(content);
-	RELEASE(view);
+	[helper release];
+	[fieldEditor release];
+	[modHistory release];
+	[history release];
+	[content release];
+	[view release];
 	[super dealloc];
 }
 - (void)setConnectionController: (ConnectionController *)aController
@@ -187,7 +187,8 @@ static void send_message(id command, id name, id connection)
 
 	[fieldEditor setKeyTarget: nil];
 
-	DESTROY(fieldEditor);
+	[fieldEditor release];
+	fieldEditor = nil;
 }
 - (void)handleTextField: (KeyTextView *)aField
    forMasterController: (id <MasterController>)aMaster;
@@ -202,7 +203,13 @@ static void send_message(id command, id name, id connection)
 
 	string = [modHistory objectAtIndex: modIndex];
 
-	ASSIGN(fieldEditor, aField);
+	if (fieldEditor != aField)
+	  {
+	    [fieldEditor release];
+	    fieldEditor = aField;
+	    [fieldEditor retain];
+	  }
+
 	[fieldEditor setStringValue: string];
 
 	[fieldEditor setKeyTarget: self];
@@ -250,8 +257,7 @@ static void send_message(id command, id name, id connection)
 	id connection;
 	id name;
 	
-	connection = AUTORELEASE(RETAIN(
-	  [_GS_ connectionToConnectionController: controller]));
+	connection = [[[_GS_ connectionToConnectionController: controller] retain] autorelease];
 	
 	if ([aCommand length] == 0)
 	{
@@ -492,12 +498,12 @@ static void send_message(id command, id name, id connection)
 	
 	if ([controller connection] && [dest length])
 	{
-		send_message(AUTORELEASE([message copy]), 
-		 AUTORELEASE([dest copy]), [controller connection]);
+		send_message([[message copy] autorelease], 
+		 [[dest copy] autorelease], [controller connection]);
 	} 
 	else
 	{
-		[controller showMessage: S2AS(AUTORELEASE([message copy])) 
+		[controller showMessage: S2AS([[message copy] autorelease]) 
 		  onConnection: nil];
 	}
 }
@@ -508,7 +514,8 @@ static void send_message(id command, id name, id connection)
 {
 	if (tabCompletion)
 	{
-		DESTROY(tabCompletion);
+		[tabCompletion release];
+		tabCompletion = nil;
 	}
 }
 - (void)tabPressed: (id)sender
@@ -617,7 +624,7 @@ static void send_message(id command, id name, id connection)
 		  [typed substringToIndex: start], largest]];
 		NSBeep();
 		tabCompletionIndex = -1;
-		tabCompletion = RETAIN(possibleCompletions);
+		tabCompletion = [possibleCompletions retain];
 	}
 }
 - (NSArray *)completionsInArray: (NSArray *)x
@@ -628,7 +635,7 @@ static void send_message(id command, id name, id connection)
 	id object;
 	NSString *lar = nil;
 	id lowObject;
-	NSMutableArray *out = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *out = [[NSMutableArray new] autorelease];
 	
 	pre = GNUstepOutputLowercase(pre, controller);
 	
@@ -683,8 +690,8 @@ static void send_message(id command, id name, id connection)
 		[aSet addObject: [@"/" stringByAppendingString: [x uppercaseString]]];
 	}
 	
-	x = AUTORELEASE(RETAIN([aSet allObjects]));
-	RELEASE(aSet);
+	x = [[[aSet allObjects] retain] autorelease];
+	[aSet release];
 	
 	return [self completionsInArray: x startingWith: pre
 	  largestValue: large];
@@ -692,7 +699,7 @@ static void send_message(id command, id name, id connection)
 - (NSArray *)channelStartingWith: (NSString *)pre 
   largestValue: (NSString **)large
 {
-	NSMutableArray *x = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *x = [[NSMutableArray new] autorelease];
 	NSEnumerator *iter;
 	id object;
 	
@@ -708,7 +715,7 @@ static void send_message(id command, id name, id connection)
 - (NSArray *)nameStartingWith: (NSString *)pre 
   largestValue: (NSString **)large
 {
-	NSMutableArray *x = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *x = [[NSMutableArray new] autorelease];
 	NSEnumerator *iter;
 	id object;
 	id <ContentControllerChannelController> channel;
@@ -719,7 +726,7 @@ static void send_message(id command, id name, id connection)
 	}
 	else
 	{
-		return AUTORELEASE([NSArray new]);
+		return [[NSArray new] autorelease];
 	}
 
 	iter = [[[channel channelSource]
@@ -736,8 +743,8 @@ static void send_message(id command, id name, id connection)
 - (NSArray *)historyStartingWith: (NSString *)pre 
   largestValue: (NSString **)large
 {
-	NSMutableArray *x = AUTORELEASE([NSMutableArray new]);
-	NSMutableArray *y = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *x = [[NSMutableArray new] autorelease];
+	NSMutableArray *y = [[NSMutableArray new] autorelease];
 	NSString *historyString;
 	unsigned count;
 	unsigned len;
@@ -1056,7 +1063,7 @@ static void send_message(id command, id name, id connection)
 	
 	/* Closing a tab could very well kill us...
 	 */
-	AUTORELEASE(RETAIN(self));
+	[[self retain] autorelease];
 
 	if ([controller dataForChannelWithName: name])
 	{
