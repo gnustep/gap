@@ -18,23 +18,25 @@
 #import "HighlightingPreferencesController.h"
 #import "Highlighting.h"
 
-#import <AppKit/NSTableView.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSUserDefaults.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSString.h>
+#import <Foundation/NSDebug.h>
+
+
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSButton.h>
 #import <AppKit/NSNibLoading.h>
 #import <AppKit/NSColorWell.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSColor.h>
-
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSUserDefaults.h>
-#import <Foundation/NSArray.h>
-#import <Foundation/NSString.h>
-#import <Foundation/NSDebug.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSFont.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSTableColumn.h>
+#import <AppKit/NSTableView.h>
 
 #define get_pref(__x) [Highlighting defaultsObjectForKey: (__x)]
 #define set_pref(__x,__y) [Highlighting setDefaultsObject: (__y) forKey: (__x)]

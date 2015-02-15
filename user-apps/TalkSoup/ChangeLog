@@ -1,3 +1,9 @@
+2015-02-16 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/Highlighting/HighlightingPreferencesController.h
+	* InFilters/Highlighting/HighlightingPreferencesController.m
+	Import and follow NSTableViewDelegate protocol
+
 2015-02-15 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Controllers/NamePromptController.m
