@@ -3,7 +3,7 @@
                           -------------------
     begin                : Sat Aug 14 19:19:31 CDT 2004
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Application Project
+                         : (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -77,9 +77,9 @@ static NSString *big_description = nil;
 	if (big_description) return;
 
 	big_description = 
-	 RETAIN([NSString stringWithContentsOfFile: [[NSBundle bundleForClass:
+	 [[NSString stringWithContentsOfFile: [[NSBundle bundleForClass:
 	  [GNUstepOutput class]]
-	  pathForResource: @"BundlePreferences" ofType: @"txt"]]);
+	  pathForResource: @"BundlePreferences" ofType: @"txt"]] retain];
 }
 - init
 {
@@ -125,7 +125,7 @@ static NSString *big_description = nil;
 	id aFont;
 
 	aFont = [NSFont userFontOfSize: 0.0];
-	x = AUTORELEASE([[NSCell alloc] initTextCell: @""]);
+	x = [[[NSCell alloc] initTextCell: @""] autorelease];
 	[x setFont: aFont];
 
 	[availableTable setDelegate: self];
@@ -160,8 +160,8 @@ static NSString *big_description = nil;
 	[descriptionText setNeedsDisplay: YES];
 
 	tempWindow = (NSWindow *)preferencesView;
-	preferencesView = RETAIN([tempWindow contentView]);
-	RELEASE(tempWindow);
+	preferencesView = [[tempWindow contentView] retain];
+	[tempWindow release];
 	[preferencesView setAutoresizingMask:
 	  NSViewWidthSizable | NSViewHeightSizable];
 }
@@ -170,10 +170,10 @@ static NSString *big_description = nil;
 	[availableTable setDataSource: nil];
 	[loadedTable setDataSource: nil];
 	
-	RELEASE(availData);
-	RELEASE(loadData);
-	RELEASE(preferencesView);
-	RELEASE(preferencesIcon);
+	[availData release];
+	[loadData release];
+	[preferencesView release];
+	[preferencesIcon release];
 	[super dealloc];
 }
 - (NSString *)preferencesName
@@ -229,13 +229,13 @@ static NSString *big_description = nil;
 	aSel2 = (!currentShowing) ? @selector(allInFilters) : 
 	  @selector(allOutFilters);
 
-	RELEASE(loadData);
-	loadData = RETAIN([NSMutableArray arrayWithArray: 
-	  [_TS_ performSelector: aSel1]]);
+	[loadData release];
+	loadData = [[NSMutableArray arrayWithArray: 
+	  [_TS_ performSelector: aSel1]] retain];
 	
-	RELEASE(availData);
-	availData = RETAIN([NSMutableArray arrayWithArray: 
-	  [[_TS_ performSelector: aSel2] allKeys]]);
+	[availData release];
+	availData = [[NSMutableArray arrayWithArray: 
+	  [[_TS_ performSelector: aSel2] allKeys]] retain];
 	[availData removeObjectsInArray: loadData];
 
 	[availableTable reloadData];
@@ -339,14 +339,14 @@ static NSString *big_description = nil;
 
 	theData = [[NSMutableArray alloc] initWithCapacity: 1];
 
-	[theData addObject: AUTORELEASE([[data objectAtIndex: 
-	  [[rows objectAtIndex: 0] intValue]] copy])];
+	[theData addObject: [[[data objectAtIndex: 
+	  [[rows objectAtIndex: 0] intValue]] copy] autorelease]];
 
 	[pboard declareTypes: [NSArray arrayWithObject: bundlePboardType]
 	  owner: nil];
 	[pboard setPropertyList: theData forType: bundlePboardType];
 
-	RELEASE(theData);
+	[theData release];
 
 	return YES;
 }
@@ -374,8 +374,8 @@ static NSString *big_description = nil;
 
 	data = (aTableView == availableTable) ? availData : loadData;
 
-	object = AUTORELEASE(RETAIN([[[info draggingPasteboard] 
-	  propertyListForType: bundlePboardType] objectAtIndex: 0]));
+	object = [[[[[info draggingPasteboard] 
+	  propertyListForType: bundlePboardType] objectAtIndex: 0] retain] autorelease];
 
 	origData = ([availData containsObject: object]) ? availData : loadData;
 	

@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Apr  3 08:09:15 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
 	                       w/ much of the code borrowed from Preferences.app
 						   by Jeff Teunissen
     email                : aeruder@ksu.edu
@@ -94,9 +95,9 @@ NSString *GNUstepOutputServerList = @"GNUstepOutputServerList";
 	 * from preferences.app.  Why redo what works
 	 * so nicely? 
 	 */
-	prefsList = AUTORELEASE([[NSMatrix alloc] initWithFrame: 
+	prefsList = [[[NSMatrix alloc] initWithFrame: 
 	  NSMakeRect(0, 0, 64*30, 64) mode: NSRadioModeMatrix cellClass: [NSButtonCell class]
-	  numberOfRows: 1 numberOfColumns: 0]);
+	  numberOfRows: 1 numberOfColumns: 0] autorelease];
 	[prefsList setCellSize: NSMakeSize(64, 64)];
 	[prefsList setIntercellSpacing: NSZeroSize];
 
@@ -124,7 +125,7 @@ NSString *GNUstepOutputServerList = @"GNUstepOutputServerList";
 {
 	if ([aKey hasPrefix: @"GNUstepOutput"])
 	{
-		NSMutableDictionary *aDict = AUTORELEASE([NSMutableDictionary new]);
+		NSMutableDictionary *aDict = [[NSMutableDictionary new] autorelease];
 		id newKey = [aKey substringFromIndex: 13];
 		id y;
 		
@@ -271,7 +272,7 @@ NSString *GNUstepOutputServerList = @"GNUstepOutputServerList";
 	if (!(name = [aPreferencesModule preferencesName]))
 		return;
 
-	bCell = AUTORELEASE([NSButtonCell new]);
+	bCell = [[NSButtonCell new] autorelease];
 	if (!(bCell))
 		return;
 
