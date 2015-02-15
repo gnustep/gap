@@ -73,7 +73,7 @@ id GetSetting(NSString *key)
 int main(void)
 {
 	NSDictionary *defaultPlugins;
-	CREATE_AUTORELEASE_POOL(apr);
+	NSAutoreleasePool *apr = [NSAutoreleasePool new];
 
 	signal(SIGPIPE, SIG_IGN);
 #ifdef GNUSTEP 
@@ -94,6 +94,6 @@ int main(void)
 	[_TS_ setupCommandList];
 	[[_TS_ pluginForOutput] run];
 	
-	DESTROY(apr);
+	[apr release];
 	return EXIT_SUCCESS;
 }

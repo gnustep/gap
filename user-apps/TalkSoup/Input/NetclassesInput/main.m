@@ -3,7 +3,7 @@
                           -------------------
     begin                : Fri Feb 21 00:51:41 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNustep Application Project
+                         : (C) 2013-2015 The GNustep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -76,7 +76,7 @@
 }
 - (void)dealloc
 {
-	RELEASE(connections);
+	[connections release];
 	[super dealloc];
 }
 - initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
@@ -98,7 +98,7 @@
 }
 - (void)closeConnection: (id)connection
 {
-	AUTORELEASE(RETAIN(connection));
+	[[connection retain] autorelease];
 	if ([connections containsObject: connection])
 	{
 		[_TS_ lostConnection: connection 
@@ -134,7 +134,7 @@
 	if (!(self = [super initWithNickname: aNick withUserName: user
 	  withRealName: real withPassword: aPass])) return nil;
 
-	identification = RETAIN(ident);
+	identification = [ident retain];
 
 	port = aPort;
 
@@ -144,15 +144,15 @@
 }
 - (void)dealloc
 {
-	RELEASE(identification);
-	RELEASE(errorMessage);
+	[identification release];
+	[errorMessage release];
 
 	[super dealloc];
 }
 - connectingFailed: (NSString *)error
 {
 	[control removeConnection: self];
-	errorMessage = RETAIN(error);
+	errorMessage = [error retain];
 	[_TS_ lostConnection: self
 	 withNickname: S2AS(nick)
 	 sender: control];
@@ -191,8 +191,8 @@
 - connectionEstablished: (id <NetTransport>)aTransport;
 {
 	id x;
-	aTransport = AUTORELEASE([[NetclassesInputSendThenDieTransport 
-	  alloc] initWithTransport: aTransport]);
+	aTransport = [[[NetclassesInputSendThenDieTransport 
+	  alloc] initWithTransport: aTransport] autorelease];
 	x = [super connectionEstablished: aTransport];
 	[_TS_ newConnection: self 
 	  withNickname: S2AS(nick)
@@ -270,7 +270,7 @@
 	NSEnumerator *iter;
 	id object;
 	
-	y = AUTORELEASE([[NSMutableArray alloc] init]);
+	y = [[[NSMutableArray alloc] init] autorelease];
 	
 	iter = [paramList objectEnumerator];
 
@@ -292,7 +292,7 @@
 	NSEnumerator *iter;
 	id object;
 	
-	y = AUTORELEASE([[NSMutableArray alloc] init]);
+	y = [[[NSMutableArray alloc] init] autorelease];
 	
 	iter = [paramList objectEnumerator];
 
@@ -789,7 +789,7 @@
 	  onConnection: self 
 	  withNickname: aNick
 	  sender: control];
-	a = AUTORELEASE([NSMutableArray new]);
+	a = [[NSMutableArray new] autorelease];
 	iter = [list objectEnumerator];
 	while ((object = [iter nextObject]))
 	{
