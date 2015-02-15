@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Jul 14 02:37:49 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -27,7 +28,7 @@ NSString *object_description(NSView *object)
 
 NSString *object_description_resizing(NSView *object)
 {
-	NSMutableString *margins = AUTORELEASE([NSMutableString new]);
+	NSMutableString *margins = [[NSMutableString new] autorelease];
 	unsigned *mask;
 	NSString *str[] = { @"<", @">", @"v", @"^", @"=", @"|", nil };
 	unsigned masks[] = { NSViewMinXMargin, NSViewMaxXMargin,
@@ -72,7 +73,7 @@ NSString *build_hierarchy(NSString *(*desc)(NSView *object),id object, int level
 	}
 
 	o1 = [NSString stringWithString: mystring];
-	RELEASE(mystring);
+	[mystring release];
 
 	return o1;
 }
@@ -88,7 +89,7 @@ NSString *build_hierarchy(NSString *(*desc)(NSView *object),id object, int level
 }
 - (NSString *)viewHierarchyWithFunction: (NSString *(*)(NSView *obj))descFunction
 {
-	NSMutableString *hierarchy = AUTORELEASE([NSMutableString new]);
+	NSMutableString *hierarchy = [[NSMutableString new] autorelease];
 	id temparray;
 	NSEnumerator *iter;
 	id object;
