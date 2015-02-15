@@ -641,7 +641,7 @@ int getChar(streamStruct* ss)
     {
         [controller showAlertDialog:@"Error initiating the Data Connection."];
         NSLog(@"error initiating data connection, storeFile");
-        return;
+        return NO;
     }
 
     command = [@"STOR " stringByAppendingString:fileName];
