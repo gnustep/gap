@@ -616,7 +616,8 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 	editor = [[GroupEditorController alloc] init];
 	if (![NSBundle loadNibNamed: @"GroupEditor" owner: editor])
 	{
-		DESTROY(editor);
+		[editor release];
+		editor = nil;
 		return;
 	}
 	
