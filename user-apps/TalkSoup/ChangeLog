@@ -30,6 +30,7 @@
 	* Output/GNUstepOutput/Controllers/Preferences/FontPreferencesController.m
 	* Output/GNUstepOutput/Controllers/Preferences/GeneralPreferencesController.m
 	* Output/GNUstepOutput/Controllers/Preferences/PreferencesController.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardChannelController.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>
