@@ -13,7 +13,7 @@
     	CopyrightDescription = "Released under the GNU GPLv2 or later.";
     	FullVersionID = "1.1";
 	CFBundleExecutable = "TalkSoup";
-	CFBundleGetInfoString = "1.1, Copyright \u00a9 2005 Andrew Ruder, 2013 GNUstep Application Project";
+	CFBundleGetInfoString = "1.1, Copyright \u00a9 2005 Andrew Ruder, 2013-2015 GNUstep Application Project";
 	CFBundleIconFile = "TalkSoup.tiff";
 	CFBundleIdentifier = "net.aeruder.talksoup";
 	CFBundleInfoDictionaryVersion = "6.0";
