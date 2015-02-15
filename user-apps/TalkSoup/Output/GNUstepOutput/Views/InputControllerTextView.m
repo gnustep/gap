@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jul 13 01:02:02 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -39,9 +40,9 @@ static NSEvent *newline_event = nil;
 		NSCarriageReturnCharacter
 	};
 
-	newline_set = RETAIN([NSCharacterSet characterSetWithCharactersInString: 
-	  [NSString stringWithCharacters: enters length: 3]]);
-	newline_event = RETAIN([NSEvent keyEventWithType: NSKeyDown
+	newline_set = [[NSCharacterSet characterSetWithCharactersInString: 
+	  [NSString stringWithCharacters: enters length: 3]] retain];
+	newline_event = [[NSEvent keyEventWithType: NSKeyDown
 	  location: NSMakePoint(0, 0)
 	  modifierFlags: 0
 	  timestamp: 1
@@ -50,7 +51,7 @@ static NSEvent *newline_event = nil;
 	  characters: [NSString stringWithCharacters: enters length: 1]
 	  charactersIgnoringModifiers: [NSString stringWithCharacters: enters length: 1]
 	  isARepeat: NO
-	  keyCode: 0xBEEF]);
+	  keyCode: 0xBEEF] retain];
 }
 - (void)insertText: (NSString *)someText
 {

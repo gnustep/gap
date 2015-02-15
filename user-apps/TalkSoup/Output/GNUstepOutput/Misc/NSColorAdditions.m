@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Apr  7 20:52:48 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -36,7 +37,7 @@ static inline NSColor *map_color(NSString *aName)
 	
 	if (!colors)
 	{
-	colors = RETAIN(([NSDictionary dictionaryWithObjectsAndKeys:
+	colors = [[NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSColor colorWithCalibratedRed: 1.0
 	                green: 1.0 blue: 1.0 alpha: 1.0], IRCColorWhite, 
 	  [NSColor colorWithCalibratedRed: 0.0
@@ -69,7 +70,7 @@ static inline NSColor *map_color(NSString *aName)
 	                green: 0.5 blue: 0.5 alpha: 1.0], IRCColorGrey,
 	  [NSColor colorWithCalibratedRed: 0.8
 	                green: 0.8 blue: 0.8 alpha: 1.0], IRCColorLightGrey,
-	  nil]));
+	  nil] retain];
 	}
 	  
 	if ([aName hasPrefix: IRCColorCustom])
@@ -100,8 +101,8 @@ static inline NSColor *map_color(NSString *aName)
 {
 	if (!common_color)
 	{
-		common_color = RETAIN([NSColor colorWithCalibratedRed: 1.0 green: 1.0 
-		  blue: 1.0 alpha: 1.0]);
+		common_color = [[NSColor colorWithCalibratedRed: 1.0 green: 1.0 
+		  blue: 1.0 alpha: 1.0] retain];
 	}
 	
 	return [common_color colorSpaceName];
