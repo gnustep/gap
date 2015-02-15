@@ -15,12 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#import <Foundation/NSObject.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/NSTableView.h>
+
 
 @class NSButton, NSTableView, NSWindow, NSColorWell;
 @class NSMutableArray, NSView, NSImage;
 
-@interface HighlightingPreferencesController : NSObject
+@interface HighlightingPreferencesController : NSObject <NSTableViewDelegate>
 	{
 		NSButton *highlightButton;
 		NSButton *removeButton;
