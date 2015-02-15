@@ -79,7 +79,7 @@
 	  NSObjectMapValueCallBacks, 10);
 	  
 	if (!aMaster) 
-		aMaster = AUTORELEASE([[[self class] masterClass] new]); 
+		aMaster = [[[[self class] masterClass] new] autorelease]; 
 	if (!aMaster)
 	{
 		[self dealloc];
@@ -154,17 +154,17 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
 
-	RELEASE(masterControllers);
-	RELEASE(nameToChannel);
-	RELEASE(nameToQuery);
-	RELEASE(nameToBoth);
-	RELEASE(nameToPresentation);
-	RELEASE(nameToLabel);
-	RELEASE(nameToMasterController);
-	RELEASE(nameToTyping);
-	RELEASE(nameToTitle);
+	[masterControllers release];
+	[nameToChannel release];
+	[nameToQuery release];
+	[nameToBoth release];
+	[nameToPresentation release];
+	[nameToLabel release];
+	[nameToMasterController release];
+	[nameToTyping release];
+	[nameToTitle release];
 	NSFreeMapTable(bothToName);
-	RELEASE(nickname);
+	[nickname release];
 	connectionController = nil;
 	lastSelected = nil;
 
@@ -264,7 +264,7 @@
 		}
 	}
 	
-	return AUTORELEASE(anArray);
+	return [anArray autorelease];
 }
 /* Returns an array of all controllers.
  */
@@ -298,7 +298,7 @@
 	}
 	else
 	{
-		return AUTORELEASE(anArray);
+		return [anArray autorelease];
 	}
 	
 	iter = [targetArray objectEnumerator];
@@ -310,7 +310,7 @@
 		}
 	}
 	
-	return AUTORELEASE(anArray);
+	return [anArray autorelease];
 }
 /* Returns an array of all controllers of a certain type <var>aType</var> which can either
  * be <var>ContentControllerChannelType</var> or <var>ContentControllerQueryType</var>
@@ -326,7 +326,7 @@
 		return [nameToQuery allValues];
 	}
 	
-	return AUTORELEASE([NSArray new]);
+	return [[NSArray new] autorelease];
 }
 /* Returns array of all the names of a certain type <var>aType</var> which can
  * be either <var>ContentControllerChannelType</var> or <var>ContentControllerQueryType</var>
@@ -342,7 +342,7 @@
 		return [nameToQuery allKeys];
 	}
 	
-	return AUTORELEASE([NSArray new]);
+	return [[NSArray new] autorelease];
 }
 /* Calls putMessage:in:withEndLine: as [self putMessage: aMessage: in: aName 
  * withEndLine: YES];
@@ -483,13 +483,13 @@
 	}
 	if (isQuery)
 	{
-		controller = AUTORELEASE([queryClass new]);
+		controller = [[queryClass new] autorelease];
 		
 		[nameToQuery setObject: controller forKey: name];
 	}
 	else if (isChannel)
 	{
-		controller = AUTORELEASE([channelClass new]);
+		controller = [[channelClass new] autorelease];
 		
 		[nameToChannel setObject: controller forKey: name];
 	}
@@ -507,9 +507,9 @@
 	[nameToMasterController setObject: aMaster forKey: name];
 	
 	[nameToTyping setObject: 
-	 AUTORELEASE([[InputController alloc] 
+	 [[[InputController alloc] 
 	  initWithViewController: controller
-	  contentController: self]) forKey: name];
+	  contentController: self] autorelease] forKey: name];
 	
 	return controller;
 }
@@ -546,14 +546,14 @@
 	[nameToTitle removeObjectForKey: lo];
 	NSMapRemove(bothToName, cont);
 
-	AUTORELEASE(masterControllers);
+	[masterControllers autorelease];
 	masterControllers = [[NSMutableArray alloc] 
 	  initWithArray: 
 	  [nameToMasterController allValues]];
 
 	if (![masterControllers count]) 
 	{
-		AUTORELEASE(RETAIN(self)); /* Do not want to die yet... */
+		[[self retain] autorelease]; /* Do not want to die yet... */
 		[connectionController setContentController: nil];
 		connectionController = nil;
 	}
@@ -613,7 +613,7 @@
 	
 	lo = GNUstepOutputLowercase(aName, connectionController);
 	
-	if (!(label = RETAIN([nameToLabel objectForKey: lo])))
+	if (!(label = [[nameToLabel objectForKey: lo] retain]))
 	{
 		return;
 	}
@@ -628,7 +628,7 @@
 		return;
 	}
 	
-	AUTORELEASE(label);
+	[label autorelease];
 
 	if (label == aLabel) return;
 	
@@ -664,8 +664,8 @@
 {
 	if (aNickname == nickname) return;
 	
-	RELEASE(nickname);
-	nickname = RETAIN(aNickname);
+	[nickname release];
+	nickname = [aNickname retain];
 
 	[[NSNotificationCenter defaultCenter]
 	 postNotificationName: ContentControllerChangedNicknameNotification
@@ -761,8 +761,8 @@
 	name = NSMapGet(bothToName, lastSelected);
 	if (!name) return;
 
-	label = AUTORELEASE([[NSMutableAttributedString alloc] 
-	  initWithString: [[nameToLabel objectForKey: name] string]]);
+	label = [[[NSMutableAttributedString alloc] 
+	  initWithString: [[nameToLabel objectForKey: name] string]] autorelease];
 	[self setLabel: label forName: name];
 }
 - (void)userOpened: (NSNotification *)aNotification
