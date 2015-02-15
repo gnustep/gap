@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Jan 18 01:31:16 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -138,23 +139,23 @@ PreferencesController *_PREFS_ = nil;
 	if (!fontName) fontName = @"Helvetica";
 	if ([fontSize intValue] < 0 || !fontSize) fontSize = @"12";	
 	
-	RELEASE(_GS_);
-	_GS_ = RETAIN(self);
+	[_GS_ release];
+	_GS_ = [self retain];
 
 	_PREFS_ = [PreferencesController new];
-	AUTORELEASE([GeneralPreferencesController new]);
-	AUTORELEASE([ColorPreferencesController new]);
-	AUTORELEASE([FontPreferencesController new]);
-	AUTORELEASE([BundlePreferencesController new]);
+	[[GeneralPreferencesController new] autorelease];
+	[[ColorPreferencesController new] autorelease];
+	[[FontPreferencesController new] autorelease];
+	[[BundlePreferencesController new] autorelease];
 	
 	return self;
 }
 - (void)dealloc
 {
 	[[topic topicText] setKeyTarget: nil];
-	RELEASE(topic);
-	RELEASE(connectionControllers);
-	RELEASE(pendingIdentToConnectionController);
+	[topic release];
+	[connectionControllers release];
+	[pendingIdentToConnectionController release];
 	NSFreeMapTable(connectionToConnectionController);
 	
 	[super dealloc];
@@ -194,7 +195,7 @@ PreferencesController *_PREFS_ = nil;
 	id object;
 	NSMutableArray *arr;
 
-	arr = AUTORELEASE([NSMutableArray new]);
+	arr = [[NSMutableArray new] autorelease];
 
 	iter = [connectionControllers objectEnumerator];
 
@@ -219,8 +220,8 @@ PreferencesController *_PREFS_ = nil;
 	id controller;
 	id ident = [connection identification];
 	
-	controller = AUTORELEASE(RETAIN([pendingIdentToConnectionController 
-	  objectForKey: ident]));
+	controller = [[[pendingIdentToConnectionController 
+	  objectForKey: ident] retain] autorelease];
 	
 	if (!(controller))
 	{
@@ -437,7 +438,7 @@ PreferencesController *_PREFS_ = nil;
 
 	if (![ServerListController startAutoconnectServers])
 	{
-		AUTORELEASE([ConnectionController new]);
+          [[ConnectionController new] autorelease];
 	}
 }
 - (void)applicationWillTerminate: (NSNotification *)aNotification
@@ -485,17 +486,17 @@ PreferencesController *_PREFS_ = nil;
 }
 - (void)openEmptyWindow: (NSNotification *)aNotification
 {
-	AUTORELEASE([ConnectionController new]);
+	[[ConnectionController new] autorelease];
 }
 - (void)openServerList: (NSNotification *)aNotification
 {
 	[NSBundle loadNibNamed: _l(@"ServerList") owner: 
-	  AUTORELEASE([ServerListController new])];
+	  [[ServerListController new] autorelease]];
 }
 - (void)openNamePrompt: (NSNotification *)aNotification
 {
 	[NSBundle loadNibNamed: _l(@"NamePrompt") owner:
-	  AUTORELEASE([NamePromptController new])];
+	  [[NamePromptController new] autorelease]];
 }
 - (void)openTopicInspector: (NSNotification *)aNotification
 {

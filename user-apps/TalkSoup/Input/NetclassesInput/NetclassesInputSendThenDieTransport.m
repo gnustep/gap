@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jul 13 02:25:28 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -22,19 +23,27 @@
 @implementation NetclassesInputSendThenDieTransport
 - initWithTransport: (id <NetTransport>)aTransport;
 {
-	if (!(self = [super init])) return self;
-
-	ASSIGN(realTransport, aTransport);
-
-	return self;
+  if (!(self = [super init])) return self;
+  if (realTransport != aTransport)
+    {
+      [realTransport release];
+      realTransport = aTransport;
+      [realTransport retain];
+    }
+  return self;
 }
 - (void)writeThenCloseForObject: (id <NetObject>)aObject
 {
-	ASSIGN(dieObject, aObject);
+  if (dieObject != aObject)
+    {
+      [dieObject release];
+      dieObject = aObject;
+      [dieObject retain];
+    }
 }
 - (void)dealloc
 {
-	RELEASE(realTransport);
+	[realTransport release];
 
 	[super dealloc];
 }
@@ -53,7 +62,8 @@
 	if (dieObject && !data)
 	{
 		[[NetApplication sharedInstance] disconnectObject: dieObject];
-		DESTROY(dieObject);
+		[dieObject release];
+                dieObject = nil;
 	}
 	return val;
 }

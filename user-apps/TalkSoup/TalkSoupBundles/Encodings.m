@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Sep  3 15:18:19 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -57,7 +58,7 @@ static inline NSStringEncoding encodingForIdentifier(NSString *ident)
 - (NSArray *)allEncodingNames
 {
 	const NSStringEncoding *iter = [NSString availableStringEncodings];
-	NSMutableArray *array = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *array = [[NSMutableArray new] autorelease];
 
 	for (; *iter; iter++)
 	{
@@ -69,7 +70,7 @@ static inline NSStringEncoding encodingForIdentifier(NSString *ident)
 - (NSArray *)allEncodingIdentifiers
 {
 	const NSStringEncoding *iter = [NSString availableStringEncodings];
-	NSMutableArray *array = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *array = [[NSMutableArray new] autorelease];
 
 	for (; *iter; iter++)
 	{

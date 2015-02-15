@@ -3,7 +3,7 @@
                           -------------------
     begin                : Tue May 20 18:38:20 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                           (C) 2013 The GNUstep Application Project
+                           (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -52,7 +52,7 @@
 	{
 		[[_TS_ pluginForInput] closeConnection: connection];
 	}
-	connection = RETAIN(aConnection);
+	connection = [aConnection retain];
 	
 	return self;
 }
@@ -76,10 +76,11 @@
 	[content setTitle: _l(@"Unconnected")
 	  forViewController: [content viewControllerForName: ContentConsoleName]];
 	
-	RELEASE(preNick);
-	preNick = RETAIN([aConnection nick]);
+	[preNick release];
+	preNick = [[aConnection nick] retain];
 	
-	DESTROY(connection);	
+	[connection release];
+	connection = nil;
 	return self;
 }
 - controlObject: (id)aObject onConnection: aConnection 
@@ -112,7 +113,7 @@
                 curlabel = nil;
                 labelName = [content labelForName: name];
                 if (labelName)
-                  curlabel = AUTORELEASE([[NSMutableAttributedString alloc] initWithAttributedString: labelName]);
+                  curlabel = [[[NSMutableAttributedString alloc] initWithAttributedString: labelName] autorelease];
 		if (!name || !col || !curlabel || ![curlabel length] ||
 		  !controller || (controller == selected)) 
 			return self;
@@ -414,14 +415,21 @@
 	SEL sel = NSSelectorFromString([NSString stringWithFormat: 
 	  @"numericHandler%@:", [command string]]);
 	NSMutableAttributedString *a = 
-	  AUTORELEASE([[NSMutableAttributedString alloc] initWithString: @""]);
+	  [[[NSMutableAttributedString alloc] initWithString: @""] autorelease];
 	NSEnumerator *iter;
 	id object;
 	id where;
 	
 	if ([connection connected] && !registered)
 	{
-		ASSIGN(server, [[IRCUserComponents(sender) objectAtIndex: 0] string]);
+	  NSString *newServer;
+	  newServer = [[IRCUserComponents(sender) objectAtIndex: 0] string];
+	  if (server != newServer)
+	    {
+	      [server release];
+	      server = newServer;
+	      [server retain];
+	    }
 		[content setLabel: S2AS(server) 
 		 forName: ContentConsoleName];
 		[content setTitle: server 

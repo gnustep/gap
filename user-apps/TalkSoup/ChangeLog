@@ -1,4 +1,18 @@
-2015-01-14 Riccardo Mottola <rm@gnu.org>
+2015-02-15 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/Functions.m
+	* Input/NetclassesInput/NetclassesInputSendThenDieTransport.m
+	*Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Controllers/GroupEditorController.m
+	* Output/GNUstepOutput/GNUstepOutput.m
+	* TalkSoupBundles/Encodings.m
+	* TalkSoupBundles/Functions.m
+	* TalkSoupBundles/TalkSoup.h
+	* TalkSoupBundles/TalkSoup.m
+	Replace GS memory macros
+
+2015-02-14 Riccardo Mottola <rm@gnu.org>
 
 	* TalkSoupBundles/TalkSoup.h
 	Import files of framework locally.

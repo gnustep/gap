@@ -90,10 +90,10 @@ static NSString *dns_helper = @"dns_helper";
 	    nil];
 	}
 		
-	preNick = RETAIN([aDict objectForKey: IRCDefaultsNick]);
-	userName = RETAIN([aDict objectForKey: IRCDefaultsUserName]);
-	realName = RETAIN([aDict objectForKey: IRCDefaultsRealName]);
-	password = RETAIN([aDict objectForKey: IRCDefaultsPassword]);
+	preNick = [[aDict objectForKey: IRCDefaultsNick] retain];
+	userName = [[aDict objectForKey: IRCDefaultsUserName] retain];
+	realName = [[aDict objectForKey: IRCDefaultsRealName] retain];
+	password = [[aDict objectForKey: IRCDefaultsPassword] retain];
 	
 	if (!aContent)
 	{
@@ -106,13 +106,13 @@ static NSString *dns_helper = @"dns_helper";
 	}
 	else
 	{
-		// Does this even make sense???
-		content = RETAIN(aContent);
+		// FIXME Does this even make sense???
+		content = [aContent retain];
 	}
 	[content setConnectionController: self];
 	[content addViewControllerOfType: ContentControllerQueryType 
 	  withName: ContentConsoleName 
-	  withLabel: AUTORELEASE([NSAttributedString new])
+	  withLabel: [[NSAttributedString new] autorelease]
 	  inMasterController: nil];
 
 	[content setNickname: preNick];
@@ -188,8 +188,8 @@ static NSString *dns_helper = @"dns_helper";
 {
 	if (preNick != aString)
 	{
-		RELEASE(preNick);
-		preNick = RETAIN(aString);
+		[preNick release];
+		preNick = [aString retain];
 	}
 	
 	return self;
@@ -202,8 +202,8 @@ static NSString *dns_helper = @"dns_helper";
 {
 	if (realName != aString)
 	{
-		RELEASE(realName);
-		realName = RETAIN(aString);
+		[realName release];
+		realName = [aString retain];
 	}
 	
 	return self;
@@ -216,8 +216,8 @@ static NSString *dns_helper = @"dns_helper";
 {
 	if (userName != aString)
 	{
-		RELEASE(userName);
-		userName = RETAIN(aString);
+		[userName release];
+		userName = [aString retain];
 	}
 	
 	return self;
@@ -230,8 +230,8 @@ static NSString *dns_helper = @"dns_helper";
 {
 	if (aString != password)
 	{
-		RELEASE(password);
-		password = RETAIN(aString);
+		[password release];
+		password = [aString retain];
 	}
 	
 	return self;
@@ -254,11 +254,16 @@ static NSString *dns_helper = @"dns_helper";
 }
 - (void)setContentController: (id <ContentController>)aController
 {
-	ASSIGN(content, aController);
+  if (content != aController)
+    {
+      [content release];
+      content = aController;
+      [content retain];
+    }
 	if (!content)
 	{
 		[helper cleanup];
-		AUTORELEASE(RETAIN(self));
+		[[self retain] autorelease];
 		[_GS_ removeConnectionController: self];
 		if (connection) {
 			id msg = 
@@ -274,7 +279,7 @@ static NSString *dns_helper = @"dns_helper";
 {
 	NSEnumerator *iter;
 	id object;
-	NSMutableArray *a = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *a = [[NSMutableArray new] autorelease];
 	
 	iter = [[nameToChannelData allValues] objectEnumerator];
 	while ((object = [iter nextObject]))
@@ -315,12 +320,12 @@ static NSString *dns_helper = @"dns_helper";
 	if (!aHost || ![aHost isEqualToString: typedHost])
 		return;
 
-	aReverse = AUTORELEASE([aReverse copy]);
+	aReverse = [[aReverse copy] autorelease];
 	if (!aReverse) aReverse = typedHost;
 
 	if (aAddress && aReverse)
 		realHost = [NSHost hostWithName: aReverse 
-		  address: AUTORELEASE([aAddress copy])];
+		  address: [[aAddress copy] autorelease]];
 
 	if (!realHost)
 	{

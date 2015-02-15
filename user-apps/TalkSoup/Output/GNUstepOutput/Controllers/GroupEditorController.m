@@ -3,6 +3,7 @@
                           -------------------
     begin                : Tue May  6 14:34:46 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Group
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -31,7 +32,7 @@
 - (void)dealloc
 {
 	[entryField setDelegate: nil];
-	DESTROY(window);
+	[window release];
 	
 	[super dealloc];
 }

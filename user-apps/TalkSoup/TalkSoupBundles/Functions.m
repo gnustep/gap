@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Apr  5 22:21:33 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -36,8 +37,8 @@ static NSDictionary *mappings = nil;
 
 static void build_mappings(void)
 {
-	RELEASE(mappings);
-	mappings = RETAIN(([NSDictionary dictionaryWithObjectsAndKeys:
+	[mappings release];
+	mappings = [[NSDictionary dictionaryWithObjectsAndKeys:
 	  IRCColorWhite, _l(@"white"),
 	  IRCColorBlack, _l(@"black"),
 	  IRCColorBlue, _l(@"blue"),
@@ -53,7 +54,7 @@ static void build_mappings(void)
 	  IRCColorLightBlue, _l(@"light blue"),
 	  IRCColorLightMagenta, _l(@"light magenta"),
 	  IRCColorLightGrey, _l(@"light grey"),
-	  IRCColorGrey, _l(@"grey"), nil]));
+	  IRCColorGrey, _l(@"grey"), nil] retain];
 }
 
 NSString *IRCColorFromUserColor(NSString *string)
@@ -126,7 +127,7 @@ static NSArray *get_first_word(NSString *arg)
 @implementation NSString (Separation)
 - separateIntoNumberOfArguments: (int)num
 {
-	NSMutableArray *array = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *array = [[NSMutableArray new] autorelease];
 	id object;
 	int temp;
 	id string = self;
@@ -370,12 +371,12 @@ NSMutableAttributedString *BuildAttributedString(id aObject, ...)
 	int y;
 	
 	if (aObject == nil) return 
-	  AUTORELEASE([[NSMutableAttributedString alloc] initWithString: @""]);
+	  [[[NSMutableAttributedString alloc] initWithString: @""] autorelease];
 	
 	objects = [NSMutableArray new];
 	keys = [NSMutableArray new];
 	
-	str = AUTORELEASE([[NSMutableAttributedString alloc] initWithString: @""]);
+	str = [[[NSMutableAttributedString alloc] initWithString: @""] autorelease];
 	va_start(ap, aObject);
 	
 	do
@@ -424,15 +425,15 @@ NSMutableAttributedString *BuildAttributedString(id aObject, ...)
 					[objects removeAllObjects];
 					[keys removeAllObjects];
 					[str appendAttributedString: newstr];
-					DESTROY(newstr);
+					[newstr release];
 				}
 			}
 		}
 	} while ((aObject = va_arg(ap, id)));
 
 	va_end(ap);
-	RELEASE(objects);
-	RELEASE(keys);
+	[objects release];
+	[keys release];
 	
 	return str;
 }
@@ -447,14 +448,14 @@ NSMutableAttributedString *BuildAttributedFormat(id aObject, ...)
 	int len;
 	id tmp = nil;
 	
-	str = AUTORELEASE([[NSMutableAttributedString alloc] initWithString: @""]);
+	str = [[[NSMutableAttributedString alloc] initWithString: @""] autorelease];
 
 	if (aObject == nil) return str;
 
 	if ([aObject isKindOfClass: [NSString class]])
 	{
-		aObject = AUTORELEASE([[NSAttributedString alloc] 
-		  initWithString: aObject]);
+		aObject = [[[NSAttributedString alloc]
+		  initWithString: aObject] autorelease];
 	}
 	else if (![aObject isKindOfClass: [NSAttributedString class]])
 	{
@@ -490,13 +491,13 @@ NSMutableAttributedString *BuildAttributedFormat(id aObject, ...)
 			tmp = va_arg(ap, id);
 			if ([tmp isKindOfClass: [NSString class]])
 			{
-				tmp = AUTORELEASE([[NSAttributedString alloc] initWithString:
-				  tmp]);
+				tmp = [[[NSAttributedString alloc] initWithString:
+				  tmp] autorelease];
 			}
 			else if (![tmp isKindOfClass: [NSAttributedString class]])
 			{
-				tmp = AUTORELEASE([[NSAttributedString alloc] initWithString:
-				  [tmp description]]);
+				tmp = [[[NSAttributedString alloc] initWithString:
+				  [tmp description]] autorelease];
 			}
 			
 			[str appendAttributedString: tmp];
@@ -524,12 +525,12 @@ NSArray *IRCUserComponents(NSAttributedString *from)
 	}
 	else
 	{
-		string1 = AUTORELEASE([[NSAttributedString alloc] initWithString: @""]);
+		string1 = [[[NSAttributedString alloc] initWithString: @""] autorelease];
 	}
 	
 	if (((int)[from length] - (int)aRange.location) <= 0)
 	{
-		string2 = AUTORELEASE([[NSAttributedString alloc] initWithString: @""]);
+		string2 = [[[NSAttributedString alloc] initWithString: @""] autorelease];
 	}
 	else
 	{
