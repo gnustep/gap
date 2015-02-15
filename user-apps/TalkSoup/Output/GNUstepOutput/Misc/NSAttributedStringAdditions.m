@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Apr 28 06:48:06 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Group
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -46,7 +47,7 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 - (NSMutableAttributedString *)substituteColorCodesIntoAttributedStringWithFont: 
   (NSFont *)chatFont withBoldFont: (NSFont *)aBoldFont
 {
-	NSMutableAttributedString *a = AUTORELEASE([NSMutableAttributedString new]);
+	NSMutableAttributedString *a = [[NSMutableAttributedString new] autorelease];
 	NSRange all =  { 0 };
 	NSRange work =  { 0 };
 	int len = [self length];
@@ -112,8 +113,8 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 			  forKey: NSFontAttributeName];
 		}
 	
-		[a appendAttributedString: AUTORELEASE([[NSAttributedString alloc]
-		  initWithString: [[self string] substringWithRange: work] attributes: dict])];
+		[a appendAttributedString: [[[NSAttributedString alloc]
+		  initWithString: [[self string] substringWithRange: work] attributes: dict] autorelease]];
 		all.location = work.location + work.length;
 		all.length = len - all.location;
 	}
@@ -135,10 +136,8 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 	float wIndentF;
 	id object1, object2;
 
-	chatFont = RETAIN([FontPreferencesController
-	  getFontFromPreferences: GNUstepOutputChatFont]);
-	boldFont = RETAIN([FontPreferencesController
-	  getFontFromPreferences: GNUstepOutputBoldChatFont]);
+	chatFont = [[FontPreferencesController getFontFromPreferences: GNUstepOutputChatFont] retain];
+	boldFont = [[FontPreferencesController getFontFromPreferences: GNUstepOutputBoldChatFont] retain];
 
 	if ([aString isKindOfClass: [NSAttributedString class]])
 	{
@@ -163,7 +162,7 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 		[aResult setAttribute: InverseTypeForeground toValue: @""
 		  inRangesWithAttributes: object2
 		  matchingValues: object1 withRange: aRange];
-		RELEASE(object2);
+		[object2 release];
 
 		[aResult setAttribute: NSForegroundColorAttributeName toValue:
 		  COLOR_FOR_KEY(GNUstepOutputBackgroundColor)
@@ -178,8 +177,8 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 		[aResult setAttribute: InverseTypeBackground toValue: @""
 		  inRangesWithAttributes: object2
 		  matchingValues: object1 withRange: aRange];
-		RELEASE(object1);
-		RELEASE(object2);
+		[object1 release];
+		[object2 release];
 
 		[aResult setAttribute: NSBackgroundColorAttributeName toValue:
 		  COLOR_FOR_KEY(GNUstepOutputTextColor)
@@ -195,8 +194,8 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 		  inRangesWithAttributes: object1
 		  matchingValues: object2
 		  withRange: aRange];
-		RELEASE(object1);
-		RELEASE(object2);
+		[object1 release];
+		[object2 release];
 		// and then set the actual color to the foreground color
 		[aResult setAttribute: NSForegroundColorAttributeName
 		  toValue: COLOR_FOR_KEY(GNUstepOutputTextColor)
@@ -222,13 +221,13 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 	{
 		// just make it all the foreground color if they just passed in a regular string
 		aRange = NSMakeRange(0, [[aString description] length]);
-		aResult = AUTORELEASE(([[NSMutableAttributedString alloc] 
+		aResult = [[[NSMutableAttributedString alloc] 
 		  initWithString: [aString description]
 		  attributes: [NSDictionary dictionaryWithObjectsAndKeys:
 			 chatFont, NSFontAttributeName,
 			 TypeOfColor, GNUstepOutputTextColor,
 			 COLOR_FOR_KEY(GNUstepOutputTextColor), NSForegroundColorAttributeName,
-		     nil]]));
+		     nil]] autorelease];
 	}
 
 	wIndentF = [[_PREFS_ preferenceForKey: GNUstepOutputWrapIndent]
@@ -238,8 +237,8 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 	[aResult addAttribute: NSParagraphStyleAttributeName 
 	  value: paraStyle range: aRange];
 
-	RELEASE(chatFont);
-	RELEASE(boldFont);
+	[chatFont release];
+	[boldFont release];
 	return aResult;
 }
 - (void)updateAttributedStringForGNUstepOutputPreferences: (NSString *)aKey

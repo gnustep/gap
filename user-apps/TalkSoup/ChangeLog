@@ -16,6 +16,10 @@
 	* Output/GNUstepOutput/Controllers/ServerListConnectionController.m
 	* Output/GNUstepOutput/Controllers/ServerListController.m
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Misc/HelperExecutor.m
+	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
+	* Output/GNUstepOutput/Misc/NSColorAdditions.m
+	* Output/GNUstepOutput/Views/InputControllerTextView.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>

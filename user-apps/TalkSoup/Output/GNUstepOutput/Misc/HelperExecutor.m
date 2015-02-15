@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Jun  9 19:12:10 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -53,9 +54,9 @@
 		return nil;
 	}
 
-	RETAIN(helper);
+	[helper retain];
 	executingTasks = [NSMutableArray new];
-	notificationName = RETAIN(aIdentifier);
+	notificationName = [aIdentifier retain];
 
 	[[NSNotificationCenter defaultCenter] addObserver: self
 	  selector: @selector(taskEnded:)
@@ -67,9 +68,9 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	RELEASE(executingTasks);
-	RELEASE(notificationName);
-	RELEASE(helper);
+	[executingTasks release];
+	[notificationName release];
+	[helper release];
 
 	[super dealloc];
 }
@@ -79,13 +80,13 @@
 	NSTask *aTask;
 
 	if (!aArgs)
-		aArgs = AUTORELEASE([NSArray new]);
+		aArgs = [[NSArray new] autorelease];
 
 	args = [NSMutableArray new];
 	[args addObject: notificationName];
 	[args addObjectsFromArray: aArgs];
 
-	aTask = AUTORELEASE([NSTask new]);
+	aTask = [[NSTask new] autorelease];
 	[aTask setLaunchPath: helper];
 	[aTask setArguments: args];
 	[executingTasks addObject: aTask];
