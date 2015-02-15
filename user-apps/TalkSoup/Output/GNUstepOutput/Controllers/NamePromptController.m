@@ -47,7 +47,6 @@
 {
 	id components;
 	id x;
-	id content;
 	
 	components = [[typeView stringValue] separateIntoNumberOfArguments: 2];
 	
@@ -62,8 +61,6 @@
 	
 	[[self retain] autorelease];
 	[window close]; // This object is officially destroyed at this point...
-	
-	content = [x contentController];
 	
 	[[[[x contentController] primaryMasterController] window] 
 	  makeKeyAndOrderFront: nil];
