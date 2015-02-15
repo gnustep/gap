@@ -2,7 +2,7 @@
 
 	* Input/NetclassesInput/Functions.m
 	* Input/NetclassesInput/NetclassesInputSendThenDieTransport.m
-	*Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
 	* Output/GNUstepOutput/Controllers/GroupEditorController.m
 	* Output/GNUstepOutput/GNUstepOutput.m
@@ -10,6 +10,7 @@
 	* TalkSoupBundles/Functions.m
 	* TalkSoupBundles/TalkSoup.h
 	* TalkSoupBundles/TalkSoup.m
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>

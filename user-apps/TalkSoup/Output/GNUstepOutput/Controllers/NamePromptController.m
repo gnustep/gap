@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu May  1 11:45:04 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -33,12 +34,12 @@
 	[window makeKeyAndOrderFront: nil];
 	[window makeFirstResponder: window];
 	[window makeFirstResponder: typeView];
-	RETAIN(self);
+	[self retain];
 }
 - (void)dealloc
 {
 	[window setDelegate: nil];
-	DESTROY(window);
+	[window release];
 	
 	[super dealloc];
 }
@@ -59,7 +60,7 @@
 	x = [ConnectionController new];
 	[x connectToServer: [components objectAtIndex: 0] onPort: 6667];
 	
-	AUTORELEASE(RETAIN(self));
+	[[self retain] autorelease];
 	[window close]; // This object is officially destroyed at this point...
 	
 	content = [x contentController];
@@ -84,6 +85,6 @@
 - (void)windowWillClose: (NSNotification *)aNotification
 {
 	[window setDelegate: nil];
-	AUTORELEASE(self);
+	[self autorelease];
 }
 @end
