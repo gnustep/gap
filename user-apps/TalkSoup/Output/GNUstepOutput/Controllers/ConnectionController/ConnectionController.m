@@ -146,16 +146,16 @@ static NSString *dns_helper = @"dns_helper";
 {
 	[(NSDistributedNotificationCenter *)[NSDistributedNotificationCenter defaultCenter]
 	  removeObserver: self];
-	RELEASE(helper);
-	RELEASE(typedHost);
-	RELEASE(preNick);
-	RELEASE(userName);
-	RELEASE(password);
-	RELEASE(realName);
-	RELEASE(connection);
-	RELEASE(content);
-	RELEASE(tabCompletion);
-	RELEASE(nameToChannelData);
+	[helper release];
+	[typedHost release];
+	[preNick release];
+	[userName release];
+	[password release];
+	[realName release];
+	[connection release];
+	[content release];
+	[tabCompletion release];
+	[nameToChannelData release];
 	
 	[super dealloc];
 }
@@ -172,7 +172,12 @@ static NSString *dns_helper = @"dns_helper";
 	[self systemMessage: BuildAttributedFormat(_l(@"Looking up %@"),
 	  aName) onConnection: nil];
 	
-	ASSIGN(typedHost, aName);
+	if (typedHost != aName)
+	  {
+	    [typedHost release];
+	    typedHost = aName;
+	    [aName release];
+	  }
 	typedPort = aPort;
 
 	[helper runWithArguments: [NSArray arrayWithObjects: 
