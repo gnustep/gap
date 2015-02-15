@@ -20,6 +20,9 @@
 	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
 	* Output/GNUstepOutput/Misc/NSColorAdditions.m
 	* Output/GNUstepOutput/Views/InputControllerTextView.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Models/Channel.m
+	* Output/GNUstepOutput/Views/AttributedTabViewItem.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>
