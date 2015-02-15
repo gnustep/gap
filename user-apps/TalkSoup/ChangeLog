@@ -1,5 +1,10 @@
 2015-02-15 Riccardo Mottola <rm@gnu.org>
 
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	Remove unused variable and assignment.
+
+2015-02-15 Riccardo Mottola <rm@gnu.org>
+
 	* Input/NetclassesInput/Functions.m
 	* Input/NetclassesInput/NetclassesInputSendThenDieTransport.m
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
