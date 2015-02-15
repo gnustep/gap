@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Aug 14 19:19:31 CDT 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -121,8 +122,8 @@ NSString *GNUstepOutputBackgroundColor = @"GNUstepOutputBackgroundColor";
 	NSWindow *tempWindow;
 
 	tempWindow = (NSWindow *)preferencesView;
-	preferencesView = RETAIN([tempWindow contentView]);
-	RELEASE(tempWindow);
+	preferencesView = [[tempWindow contentView] retain];
+	[tempWindow release];
 	[preferencesView setAutoresizingMask:
 	  NSViewWidthSizable | NSViewHeightSizable];
 
@@ -183,8 +184,8 @@ NSString *GNUstepOutputBackgroundColor = @"GNUstepOutputBackgroundColor";
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	RELEASE(preferencesView);
-	RELEASE(preferencesIcon);
+	[preferencesView release];
+	[preferencesIcon release];
 	[super dealloc];
 }
 - (void)setDefaultColors: (NSButton *)aButton

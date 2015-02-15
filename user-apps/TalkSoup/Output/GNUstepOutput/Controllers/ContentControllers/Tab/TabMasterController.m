@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Jan 19 11:59:32 CST 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -168,7 +169,7 @@
 	AttributedTabViewItem *tabItem;
 	int selected;
 	
-	tabItem = AUTORELEASE([AttributedTabViewItem new]);
+	tabItem = [[AttributedTabViewItem new] autorelease];
 	
 	NSMapInsert(viewControllerToTab, aController, tabItem);
 	NSMapInsert(viewControllerToContent, aController, aContentController);
@@ -239,9 +240,9 @@
 	  self, @"Master",
 	  nil]];
 
-	RELEASE(typingController);
-	typingController = RETAIN([content 
-	     typingControllerForViewController: aController]);
+	[typingController release];
+	typingController = [[content 
+	     typingControllerForViewController: aController] retain];
 
 	[self setNickname: [content nickname]];
 	[window setTitle: [content titleForViewController: aController]];
@@ -295,7 +296,7 @@
 	[tabView setNeedsDisplay: YES];
 	
 	content = NSMapGet(viewControllerToContent, aController);
-	AUTORELEASE(RETAIN(content));
+	[[content retain] autorelease];
 
 	userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
 	  self, @"Master",
@@ -418,7 +419,7 @@
 	AttributedTabViewItem *tab;
 
 	if (!aLabel) {
-		aLabel = AUTORELEASE([NSAttributedString new]);
+		aLabel = [[NSAttributedString new] autorelease];
 	}
 
 	if (!aController) return;
@@ -444,7 +445,7 @@
 	
 	iter = [vArray objectEnumerator];
 	
-	results = AUTORELEASE([NSMutableArray new]);
+	results = [[NSMutableArray new] autorelease];
 	
 	while ((object = [iter nextObject]))
 	{

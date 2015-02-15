@@ -3,6 +3,7 @@
                           -------------------
     begin                : Tue May 20 19:00:06 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -78,8 +79,8 @@
 	date = [[NSDate dateWithTimeIntervalSince1970: [[date string] doubleValue]] 
 	   descriptionWithCalendarFormat: @"%a %b %e %H:%M:%S"
 	   timeZone: nil locale: nil];
-	date = AUTORELEASE([[NSAttributedString alloc] initWithString: date
-	  attributes: attrib]);
+	date = [[[NSAttributedString alloc] initWithString: date
+	  attributes: attrib] autorelease];
 	
 	[content putMessage: 
 	  BuildAttributedFormat(_l(@"Topic for %@ set by %@ at %@"),
