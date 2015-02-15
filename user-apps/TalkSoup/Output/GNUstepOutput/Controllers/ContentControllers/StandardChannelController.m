@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Jan 18 01:38:06 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -117,18 +118,18 @@
 
 	[chatView setNeedsDisplay: YES];
 
-	userColumn = AUTORELEASE([[NSTableColumn alloc] 
-	  initWithIdentifier: @"User List"]);
+	userColumn = [[[NSTableColumn alloc] 
+	  initWithIdentifier: @"User List"] autorelease];
 	
 	[userColumn setEditable: NO];
 	
 	frame = [tableView frame];
-	AUTORELEASE(RETAIN(tableView));
+	[[tableView retain] autorelease];
 	[tableView removeFromSuperview];
 	
-	userScroll = AUTORELEASE([[NSScrollView alloc] initWithFrame: frame]); 
-	tableView = AUTORELEASE([[NSTableView alloc] initWithFrame: 
-	  NSMakeRect(0, 0, frame.size.width, frame.size.height)]);
+	userScroll = [[[NSScrollView alloc] initWithFrame: frame] autorelease];
+	tableView = [[[NSTableView alloc] initWithFrame: 
+	  NSMakeRect(0, 0, frame.size.width, frame.size.height)] autorelease];
 
 	[tableView setCornerView: nil];
 	[tableView setHeaderView: nil];
@@ -143,8 +144,8 @@
 	[userScroll setHasVerticalScroller: YES];
 	[userScroll setBorderType: NSBezelBorder];
 	
-	x = AUTORELEASE([[NSCell alloc] initTextCell: @""]);
-	[x setFormatter: AUTORELEASE([ChannelFormatter new])];
+	x = [[[NSCell alloc] initTextCell: @""] autorelease];
+	[x setFormatter: [[ChannelFormatter new] autorelease]];
 	
 	font = [FontPreferencesController getFontFromPreferences:
 	  GNUstepOutputUserListFont];
@@ -163,9 +164,9 @@
 	[self splitView: splitView resizeSubviewsWithOldSize:
 	  [splitView frame].size];
 
-	x = RETAIN([(NSWindow *)window contentView]);
+	x = [[(NSWindow *)window contentView] retain];
 	[window close];
-	AUTORELEASE(window);
+	[window autorelease];
 	window = x;
 	[window setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
 
@@ -224,8 +225,9 @@
 	[tableView setTarget: nil];
 	[splitView setDelegate: nil];
 	[tableView setDoubleAction: NULL];
-	DESTROY(channelSource);
-	RELEASE(window);
+	[channelSource release];
+	channelSource = nil;
+	[window release];
 	[super dealloc];
 }
 - (Channel *)channelSource
@@ -234,14 +236,20 @@
 }
 - (void)attachChannelSource: (Channel *)aChannel
 {
-	[tableView setDataSource: nil];
-	ASSIGN(channelSource, aChannel);
-	[tableView setDataSource: channelSource];
+  if (channelSource == aChannel)
+    return;
+
+  [tableView setDataSource: nil];
+  [channelSource release];
+  channelSource = aChannel;
+  [channelSource retain];
+  [tableView setDataSource: channelSource];
 }
 - (void)detachChannelSource
 {
 	[tableView setDataSource: nil];
-	DESTROY(channelSource);
+	[channelSource release];
+	channelSource = nil;
 }
 - (void)refreshFromChannelSource
 {
