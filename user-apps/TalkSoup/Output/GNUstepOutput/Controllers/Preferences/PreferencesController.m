@@ -116,9 +116,9 @@ NSString *GNUstepOutputServerList = @"GNUstepOutputServerList";
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	DESTROY(window);
-	DESTROY(prefsModules);
-
+	[window release];
+	[prefsModules release];
+	prefsModules = nil;
 	[super dealloc];
 }
 - setPreference: (id)aPreference forKey: (NSString *)aKey
