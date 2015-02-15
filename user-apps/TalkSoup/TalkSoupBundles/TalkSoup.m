@@ -3,7 +3,7 @@
                           -------------------
     begin                : Fri Jan 17 11:04:36 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Application Project
+                         : (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -99,7 +99,7 @@ static inline id activate_bundle(NSDictionary *a, NSString *name)
 		return nil;
 	}
 	
-	return AUTORELEASE([[[bundle principalClass] alloc] init]);
+	return [[[[bundle principalClass] alloc] init] autorelease];
 }
 static inline void carefully_add_bundles(NSMutableDictionary *a, NSArray *arr)
 {
@@ -153,7 +153,7 @@ static inline NSArray *get_directories_with_talksoup()
 	[y addObject: [[NSBundle mainBundle] resourcePath]];
 
 	x = [NSArray arrayWithArray: y];
-	RELEASE(y);
+	[y release];
 
 	return x;
 }
@@ -172,7 +172,7 @@ static inline NSArray *get_bundles_in_directory(NSString *dir)
 
 	if (!x)
 	{
-		return AUTORELEASE([NSArray new]);
+		return [[NSArray new] autorelease];
 	}
 	
 	y = [NSMutableArray new];
@@ -189,7 +189,7 @@ static inline NSArray *get_bundles_in_directory(NSString *dir)
 	}
 
 	x = [NSArray arrayWithArray: y];
-	RELEASE(y);
+	[y release];
 
 	return x;
 }
@@ -215,7 +215,7 @@ static void add_old_entries(NSMutableDictionary *new, NSMutableDictionary *names
 {
 	if (!_TS_)
 	{
-		AUTORELEASE([TalkSoup new]);
+		[[TalkSoup new] autorelease];
 		if (!_TS_)
 		{
 			NSLog(@"Couldn't initialize the TalkSoup object");
@@ -240,7 +240,7 @@ static void add_old_entries(NSMutableDictionary *new, NSMutableDictionary *names
 	activatedOutFilters = [NSMutableArray new];
 	outObjects = [NSMutableDictionary new];
 	
-	_TS_ = RETAIN(self);
+	_TS_ = [self retain];
 	
 	return self;
 }
@@ -295,10 +295,10 @@ static void add_old_entries(NSMutableDictionary *new, NSMutableDictionary *names
 	add_old_entries(inNames2, inNames, inObjects);
 	add_old_entries(outNames2, outNames, outObjects);
 	
-	RELEASE(inputNames);
-	RELEASE(outputNames);
-	RELEASE(inNames);
-	RELEASE(outNames);
+	[inputNames release];
+	[outputNames release];
+	[inNames release];
+	[outNames release];
 
 	inputNames = inputNames2;
 	outputNames = outputNames2;
@@ -361,7 +361,7 @@ static void add_old_entries(NSMutableDictionary *new, NSMutableDictionary *names
 	NSUInteger index = NSNotFound;
 	id sender;
 	id next;
-	CREATE_AUTORELEASE_POOL(apr);
+	NSAutoreleasePool *apr = [NSAutoreleasePool new];
 
 	sel = [aInvocation selector];
 	selString = NSStringFromSelector(sel);
@@ -447,10 +447,10 @@ static void add_old_entries(NSMutableDictionary *new, NSMutableDictionary *names
 		}
 	}
 out2:
-	RELEASE(in);
-	RELEASE(out);
+	[in release];
+	[out release];
 out1:
-	RELEASE(apr);
+	[apr release];
 }
 - (NSString *)input
 {
@@ -472,11 +472,11 @@ out1:
 {
 	if (activatedInput) return self;
 	
-	input = RETAIN(activate_bundle(inputNames, aInput));
+	input = [activate_bundle(inputNames, aInput) retain];
 	
 	if (input)
 	{
-		activatedInput = RETAIN(aInput);
+		activatedInput = [aInput retain];
 	}
 	
 	if ([input respondsToSelector: @selector(pluginActivated)])
@@ -490,11 +490,11 @@ out1:
 {
 	if (activatedOutput) return self;
 	
-	output = RETAIN(activate_bundle(outputNames, aOutput));
+	output = [activate_bundle(outputNames, aOutput) retain];
 	
 	if (output)
 	{
-		activatedOutput = RETAIN(aOutput);
+		activatedOutput = [aOutput retain];
 	}
 
 	if ([output respondsToSelector: @selector(pluginActivated)])
@@ -508,7 +508,7 @@ out1:
 {
 	NSEnumerator *iter;
 	id object;
-	NSMutableArray *x = AUTORELEASE([[NSMutableArray alloc] init]);
+	NSMutableArray *x = [[[NSMutableArray alloc] init] autorelease];
 	
 	iter = [activatedInFilters objectEnumerator];
 	
@@ -523,7 +523,7 @@ out1:
 {
 	NSEnumerator *iter;
 	id object;
-	NSMutableArray *x = AUTORELEASE([[NSMutableArray alloc] init]);
+	NSMutableArray *x = [[[NSMutableArray alloc] init] autorelease];
 	
 	iter = [activatedOutFilters objectEnumerator];
 	

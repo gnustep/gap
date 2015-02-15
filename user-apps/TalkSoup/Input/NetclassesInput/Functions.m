@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Apr 28 02:10:41 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -95,41 +96,41 @@ static NSString *colors[16] = { 0 };
 	
 static void initialize_stuff(void)
 {
-	CREATE_AUTORELEASE_POOL(apr);
+	NSAutoreleasePool *apr = [NSAutoreleasePool new];
 	
-	comma = RETAIN([NSCharacterSet characterSetWithCharactersInString: @","]);
+	comma = [[NSCharacterSet characterSetWithCharactersInString: @","] retain];
 	color_control = 
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"\003"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"\003"] retain];
 	bold_control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"\002"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"\002"] retain];
 	underline_control = 
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"\037"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"\037"] retain];
 	clear_control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"\017"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"\017"] retain];
 	reverse_control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"\026"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"\026"] retain];
 	control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: 
-	   @"\003\002\037\017\026"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: 
+	   @"\003\002\037\017\026"] retain];
 	
-	colors[0] = RETAIN(IRCColorWhite);
-	colors[1] = RETAIN(IRCColorBlack);
-	colors[2] = RETAIN(IRCColorBlue);
-	colors[3] = RETAIN(IRCColorGreen);
-	colors[4] = RETAIN(IRCColorRed);
-	colors[5] = RETAIN(IRCColorMaroon);
-	colors[6] = RETAIN(IRCColorMagenta);
-	colors[7] = RETAIN(IRCColorOrange);
-	colors[8] = RETAIN(IRCColorYellow);
-	colors[9] = RETAIN(IRCColorLightGreen);
-	colors[10] = RETAIN(IRCColorTeal);
-	colors[11] = RETAIN(IRCColorLightCyan);
-	colors[12] = RETAIN(IRCColorLightBlue);
-	colors[13] = RETAIN(IRCColorLightMagenta);
-	colors[14] = RETAIN(IRCColorGrey);
-	colors[15] = RETAIN(IRCColorLightGrey);
+	colors[0] = [IRCColorWhite retain];
+	colors[1] = [IRCColorBlack retain];
+	colors[2] = [IRCColorBlue retain];
+	colors[3] = [IRCColorGreen retain];
+	colors[4] = [IRCColorRed retain];
+	colors[5] = [IRCColorMaroon retain];
+	colors[6] = [IRCColorMagenta retain];
+	colors[7] = [IRCColorOrange retain];
+	colors[8] = [IRCColorYellow retain];
+	colors[9] = [IRCColorLightGreen retain];
+	colors[10] = [IRCColorTeal retain];
+	colors[11] = [IRCColorLightCyan retain];
+	colors[12] = [IRCColorLightBlue retain];
+	colors[13] = [IRCColorLightMagenta retain];
+	colors[14] = [IRCColorGrey retain];
+	colors[15] = [IRCColorLightGrey retain];
 	
-	RELEASE(apr);
+	[apr release];
 }
 
 inline NSAttributedString *NetClasses_AttributedStringFromString(NSString *str)
@@ -138,8 +139,8 @@ inline NSAttributedString *NetClasses_AttributedStringFromString(NSString *str)
 	NSString *aString;
 	int x;
 	NSMutableAttributedString *string = 
-	  AUTORELEASE([NSMutableAttributedString new]);
-	NSMutableDictionary *dict = AUTORELEASE([NSMutableDictionary new]);
+	  [[NSMutableAttributedString new] autorelease];
+	NSMutableDictionary *dict = [[NSMutableDictionary new] autorelease];
 	
 	if (!str)
 	{
@@ -160,8 +161,8 @@ inline NSAttributedString *NetClasses_AttributedStringFromString(NSString *str)
 		if ([scan scanUpToCharactersFromSet: control intoString: &aString])
 		{
 			[string appendAttributedString: 
-			  AUTORELEASE([[NSAttributedString alloc] initWithString: aString
-			  attributes: [NSDictionary dictionaryWithDictionary: dict]])];
+			  [[[NSAttributedString alloc] initWithString: aString
+			  attributes: [NSDictionary dictionaryWithDictionary: dict]] autorelease]];
 		}
 		
 		if ([scan isAtEnd] == YES) break;
@@ -265,7 +266,7 @@ inline NSString *NetClasses_StringFromAttributedString(NSAttributedString *atr)
 	NSRange cur = {0, 0};
 	NSRange work;
 	NSDictionary *b;
-	NSDictionary *so = AUTORELEASE([NSDictionary new]);
+	NSDictionary *so = [[NSDictionary new] autorelease];
 	id begF;
 	id begB;
 	id nowF = @"";
@@ -354,6 +355,6 @@ inline NSString *NetClasses_StringFromAttributedString(NSAttributedString *atr)
 		so = b;
 	}
 	
-	return AUTORELEASE(aString);
+	return [aString autorelease];
 }
 
