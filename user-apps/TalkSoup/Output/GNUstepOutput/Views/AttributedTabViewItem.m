@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu Dec  5 00:25:40 CST 2002
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -28,20 +29,20 @@
 @implementation AttributedTabViewItem
 - (void)dealloc
 {
-	DESTROY(attributedLabel);
+	[attributedLabel release];
 	[super dealloc];
 }
 - (void)drawLabel: (BOOL)shouldTruncateLabel inRect: (NSRect)tabRect
 {
 	id string;
 	
-	string = RETAIN([self label]);
+	string = [[self label] retain];
 
 	[self setLabel: @""];
 	[super drawLabel: shouldTruncateLabel inRect: tabRect];
 	[self setLabel: string]; 	
 
-	RELEASE(string);
+	[string release];
 	
 	[attributedLabel drawInRect: tabRect];	
 }
@@ -66,7 +67,7 @@
 {
 	if (!aString) return self;
 	
-	RELEASE(attributedLabel);
+	[attributedLabel release];
 	attributedLabel = [[NSMutableAttributedString alloc] initWithAttributedString:
 	  aString];
 
@@ -82,8 +83,8 @@
 }
 - (NSAttributedString *)attributedLabel
 {
-	return AUTORELEASE([[NSAttributedString alloc] initWithAttributedString: 
-	  attributedLabel]);
+	return [[[NSAttributedString alloc] initWithAttributedString: 
+	  attributedLabel] autorelease];
 }
 @end
 

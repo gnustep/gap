@@ -3,7 +3,7 @@
                           -------------------
     begin                : Tue Apr  8 17:15:55 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Application Project
+                         : (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -58,7 +58,7 @@
 }
 - (void)dealloc
 {
-	DESTROY(userName);
+	[userName release];
 
 	[super dealloc];
 }
@@ -96,10 +96,10 @@
 		aName = [aName substringFromIndex: 1];
 	}
 	
-	RELEASE(userName);
-	userName = RETAIN(aName);
-	RELEASE(lowerName);
-	lowerName = RETAIN(GNUstepOutputLowercase(userName, connection));
+	[userName release];
+	userName = [aName retain];
+	[lowerName release];
+	lowerName = [GNUstepOutputLowercase(userName, connection) retain];
 
 	return self;
 }
@@ -136,8 +136,8 @@
 - (BOOL)getObjectValue: (id *)obj forString: (NSString *)string
    errorDescription: (NSString **)error
 {
-	*obj = AUTORELEASE([[ChannelUser alloc] initWithModifiedName: string
-	  withConnectionController: nil]);
+	*obj = [[[ChannelUser alloc] initWithModifiedName: string
+	  withConnectionController: nil] autorelease];
 	return YES;
 }
 @end
@@ -167,13 +167,13 @@
 }
 - (void)dealloc
 {
-	DESTROY(identifier);
-	DESTROY(tempList);
-	DESTROY(userList);
-	DESTROY(lowercaseList);
-	DESTROY(topic);
-	DESTROY(topicAuthor);
-	DESTROY(topicDate);
+	[identifier release];
+	[tempList release];
+	[userList release];
+	[lowercaseList release];
+	[topic release];
+	[topicAuthor release];
+	[topicDate release];
 	
 	[super dealloc];
 }
@@ -181,8 +181,8 @@
 {
 	if (topic == aTopic) return self;
 	
-	RELEASE(topic);
-	topic = RETAIN(aTopic);
+	[topic release];
+	topic = [aTopic retain];
 	
 	return self;
 }
@@ -193,8 +193,8 @@
 - setTopicAuthor: (NSString *)aTopicAuthor
 {
 	if (topicAuthor == aTopicAuthor) return self;
-	RELEASE(topicAuthor);
-	topicAuthor = RETAIN(aTopicAuthor);
+	[topicAuthor release];
+	topicAuthor = [aTopicAuthor retain];
 	return self;
 }
 - (NSString *)topicAuthor
@@ -205,8 +205,8 @@
 {
 	if (topicDate == aTopicDate) return self;
 	
-	RELEASE(topicDate);
-	topicDate = RETAIN(aTopicDate);
+	[topicDate release];
+	topicDate = [aTopicDate retain];
 	return self;
 }		
 - (NSString *)topicDate
@@ -217,8 +217,8 @@
 {
 	if (aIdentifier == identifier) return self;
 
-	RELEASE(identifier);
-	identifier = RETAIN(aIdentifier);
+	[identifier release];
+	identifier = [aIdentifier retain];
 	
 	return self;
 }
@@ -246,8 +246,8 @@
 {
 	id user;
 
-	user = AUTORELEASE([[ChannelUser alloc] initWithModifiedName: aString 
-	  withConnectionController: connection]);
+	user = [[[ChannelUser alloc] initWithModifiedName: aString 
+	  withConnectionController: connection] autorelease];
 	
 	[userList addObject: user];
 	
@@ -313,8 +313,8 @@
 	while ((object = [iter nextObject]))
 	{
 		if ([object length] == 0) break;
-		user = AUTORELEASE([[ChannelUser alloc] initWithModifiedName: object 
-		  withConnectionController: connection]);
+		user = [[[ChannelUser alloc] initWithModifiedName: object 
+		  withConnectionController: connection] autorelease];
 		[tempList addObject: user];
 	}
 	

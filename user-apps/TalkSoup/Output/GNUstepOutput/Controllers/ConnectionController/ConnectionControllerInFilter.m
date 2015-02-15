@@ -338,7 +338,7 @@
 	id object = nil;
 	
 	iter = [paramList objectEnumerator];
-	params = AUTORELEASE([NSMutableAttributedString new]);
+	params = [[NSMutableAttributedString new] autorelease];
 	
 	while ((object = [iter nextObject]))
 	{
@@ -515,8 +515,8 @@
 
 		[content addViewControllerOfType: ContentControllerChannelType withName: name
 		  withLabel: channel inMasterController: [content primaryMasterController]];
-		[nameToChannelData setObject: x = AUTORELEASE([[Channel alloc] 
-		  initWithIdentifier: lowName withConnectionController: self]) 
+		[nameToChannelData setObject: x = [[[Channel alloc] 
+		  initWithIdentifier: lowName withConnectionController: self] autorelease] 
 		  forKey: lowName];
 				
 		[(id <ContentControllerChannelController>)
