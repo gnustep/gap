@@ -15,6 +15,7 @@
 	* Output/GNUstepOutput/Controllers/ServerEditorController.m
 	* Output/GNUstepOutput/Controllers/ServerListConnectionController.m
 	* Output/GNUstepOutput/Controllers/ServerListController.m
+	* Output/GNUstepOutput/Controllers/ServerListController.m
 	Replace GS memory macros
 
 2015-02-14 Riccardo Mottola <rm@gnu.org>

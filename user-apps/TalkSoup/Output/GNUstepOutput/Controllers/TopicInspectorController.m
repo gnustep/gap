@@ -3,6 +3,7 @@
                           -------------------
     begin                : Thu May  8 22:40:13 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -47,9 +48,9 @@
 - (void)awakeFromNib
 {
 	id temp = nothingView;
-	nothingView = RETAIN([(NSWindow *)temp contentView]);
-	AUTORELEASE(temp);
-	contentView = RETAIN([(NSWindow *)window contentView]);
+	nothingView = [[(NSWindow *)temp contentView] retain];
+	[temp autorelease];
+	contentView = [[(NSWindow *)window contentView] retain];
 
 	[window setContentView: nothingView];
 	
@@ -84,10 +85,10 @@
 {
 	[window setDelegate: nil];
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	RELEASE(nothingView);
-	RELEASE(contentView);
-	RELEASE(window);
-	RELEASE(connection);
+	[nothingView release];
+	[contentView release];
+	[window release];
+	[connection release];
 
 	[super dealloc];
 }	
