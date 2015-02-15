@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Apr 11 15:10:32 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -40,7 +41,7 @@
 	unsigned int z;
 	unsigned int numMethods;
 	SEL sel;
-	NSMutableArray *array = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray *array = [[NSMutableArray new] autorelease];
 	
 	class = [self class];
 
@@ -58,8 +59,8 @@
 		{
 #ifdef __APPLE__
 			sel = list->method_list[z].method_name;
-			[array addObject: AUTORELEASE([[NSString alloc] initWithUTF8String:
-			  (char *)sel])];
+			[array addObject: [[[NSString alloc] initWithUTF8String:
+			  (char *)sel] autorelease]];
 #else
 			sel = method_getName(methods[z]);
 			[array addObject: NSStringFromSelector(sel)];
