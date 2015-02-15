@@ -176,7 +176,7 @@ static NSString *dns_helper = @"dns_helper";
 	  {
 	    [typedHost release];
 	    typedHost = aName;
-	    [aName release];
+	    [typedHost retain];
 	  }
 	typedPort = aPort;
 
