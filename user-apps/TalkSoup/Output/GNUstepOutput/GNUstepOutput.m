@@ -301,10 +301,7 @@ PreferencesController *_PREFS_ = nil;
 }
 - controlObject: (NSDictionary *)aControl onConnection: aConnection
   withNickname: aNick sender: aSender
-{
-	id process;
-	process = [aControl objectForKey: @"Process"];
-	
+{	
 	if (aConnection)
 	{
 		ConnectionController *object;
