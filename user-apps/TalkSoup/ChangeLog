@@ -10,6 +10,9 @@
 	* TalkSoupBundles/Functions.m
 	Import headers, use explicit types instead of id to avoid wrong signatures.
 
+	* Output/GNUstepOutput/GNUstepOutput.m
+	Remove variable set but not used.
+
 2015-02-16 Riccardo Mottola <rm@gnu.org>
 
 	* InFilters/Highlighting/HighlightingPreferencesController.h
