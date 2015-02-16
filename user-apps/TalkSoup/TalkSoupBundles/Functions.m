@@ -366,7 +366,7 @@ NSMutableAttributedString *BuildAttributedString(id aObject, ...)
 	id objects;
 	id keys;
 	int state = 0;
-	id newstr = nil;
+	NSMutableAttributedString *newstr = nil;
 	int x;
 	int y;
 	
@@ -517,7 +517,7 @@ NSArray *IRCUserComponents(NSAttributedString *from)
 	if (from)
 	{	
 		aRange.location = 0;
-		aRange.length = [[components objectAtIndex: 0] length];
+		aRange.length = [(NSString *)[components objectAtIndex: 0] length];
 	
 		string1 = [from attributedSubstringFromRange: aRange];
 	

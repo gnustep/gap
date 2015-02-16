@@ -31,6 +31,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSInvocation.h>
+#import <Foundation/NSString.h>
 #import <Foundation/NSAttributedString.h>
 
 #import <AppKit/NSWindow.h>
@@ -44,28 +45,28 @@
 	id tmppref;
 	
 	tmp = [NSMutableDictionary dictionaryWithDictionary: aInfo];
-	if ([[tmp objectForKey: IRCDefaultsNick] length] == 0)
+	if ([(NSString *)[tmp objectForKey: IRCDefaultsNick] length] == 0)
 	{
 		tmppref = [_PREFS_ preferenceForKey: IRCDefaultsNick];
 		if (tmppref)
 			[tmp setObject: [_PREFS_ preferenceForKey: IRCDefaultsNick]
 			  forKey: IRCDefaultsNick];
 	}
-	if ([[tmp objectForKey: IRCDefaultsUserName] length] == 0)
+	if ([(NSString *)[tmp objectForKey: IRCDefaultsUserName] length] == 0)
 	{
 		tmppref = [_PREFS_ preferenceForKey: IRCDefaultsUserName];
 		if (tmppref)
 			[tmp setObject: [_PREFS_ preferenceForKey: IRCDefaultsUserName]
 			  forKey: IRCDefaultsUserName];
 	}
-	if ([[tmp objectForKey: IRCDefaultsRealName] length] == 0)
+	if ([(NSString *)[tmp objectForKey: IRCDefaultsRealName] length] == 0)
 	{
 		tmppref = [_PREFS_ preferenceForKey: IRCDefaultsRealName];
 		if (tmppref)
 			[tmp setObject: [_PREFS_ preferenceForKey: IRCDefaultsRealName]
 			  forKey: IRCDefaultsRealName];
 	}
-	if ([[tmp objectForKey: IRCDefaultsPassword] length] == 0)
+	if ([(NSString *)[tmp objectForKey: IRCDefaultsPassword] length] == 0)
 	{
 		tmppref = [_PREFS_ preferenceForKey: IRCDefaultsPassword];
 		if (tmppref)
@@ -144,7 +145,7 @@
    withNickname: (NSAttributedString *)aNick
 	sender: aPlugin
 {
-	id tmp;
+	NSString *tmp;
 	
 	if ([tmp = [newInfo objectForKey: ServerListInfoCommands] length] > 0)
 	{

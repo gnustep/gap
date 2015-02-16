@@ -442,7 +442,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 }
 - (void)editorDone: (id)sender
 {
-	id string;
+	NSString  *string;
 	
 	if (!editor) return;
 	
@@ -488,17 +488,17 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 	}
 	else if ([editor isKindOfClass: [ServerEditorController class]])
 	{
-		id server = [[editor serverField] stringValue];
-		id commands = [[editor commandsText] string];
-		id nick = [[editor nickField] stringValue];
-		id user = [[editor userField] stringValue];
-		id real = [[editor realField] stringValue];
-		id password = [[editor passwordField] stringValue];
-		id port = [[editor portField] stringValue];
+		NSString *server = [[editor serverField] stringValue];
+		NSString *commands = [[editor commandsText] string];
+		NSString *nick = [[editor nickField] stringValue];
+		NSString *user = [[editor userField] stringValue];
+		NSString *real = [[editor realField] stringValue];
+		NSString *password = [[editor passwordField] stringValue];
+		NSString *port = [[editor portField] stringValue];
 		int first = [browser selectedRowInColumn: 0];
 		id autoconnect;
 		
-		id array;
+		NSMutableArray *array;
 		id newOne;
 		id prefs = [self serverListPreferences];
 		
