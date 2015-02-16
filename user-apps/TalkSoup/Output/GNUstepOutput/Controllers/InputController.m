@@ -60,20 +60,21 @@
 NSString *TaskExecutionOutputNotification = @"TaskExecutionOutputNotification";
 static NSString *exec_helper = @"exec_helper";
 
-static void send_message(id command, id name, id connection)
+static void send_message(NSString *command, NSString *name, id connection)
 {
 	NSRange aRange = NSMakeRange(0, [command length]);
-	id substring;
-	id nick = S2AS([connection nick]);
+	NSString *substring;
+	NSAttributedString *nick = S2AS([connection nick]);
+        NSAttributedString *nameAS;
 	
-	name = S2AS(name);
+	nameAS = S2AS(name);
 	
 	while (aRange.length >= 450)
 	{
 		substring = [command substringWithRange: NSMakeRange(aRange.location, 450)];
 		aRange.location += 450;
 		aRange.length -= 450;
-		[_TS_ sendMessage: S2AS(substring) to: name onConnection: connection
+		[_TS_ sendMessage: S2AS(substring) to: nameAS onConnection: connection
 		  withNickname: nick sender: _GS_];
 	}
 	
@@ -81,7 +82,7 @@ static void send_message(id command, id name, id connection)
 	{
 		[_TS_ sendMessage: 
 		  S2AS([command substringWithRange: aRange])
-		  to: name onConnection: connection withNickname: nick sender: _GS_];
+		  to: nameAS onConnection: connection withNickname: nick sender: _GS_];
 	}
 }	
 
@@ -194,7 +195,7 @@ static void send_message(id command, id name, id connection)
    forMasterController: (id <MasterController>)aMaster;
 {
 	int modIndex;
-	id string;
+	NSString *string;
 	unsigned length;
 
 	modIndex = [history count] - historyIndex;
@@ -493,8 +494,8 @@ static void send_message(id command, id name, id connection)
 - (void)taskExecutionOutput: (NSNotification *)aNotification
 {
 	id userInfo = [aNotification userInfo];
-	id message = [userInfo objectForKey: @"Output"];
-	id dest = [userInfo objectForKey: @"Destination"];
+	NSString *message = [userInfo objectForKey: @"Output"];
+	NSString *dest = [userInfo objectForKey: @"Destination"];
 	
 	if ([controller connection] && [dest length])
 	{
@@ -666,7 +667,8 @@ static void send_message(id command, id name, id connection)
   largestValue: (NSString **)large
 {
 	NSMutableSet *aSet = [NSMutableSet new];
-	id x;
+        NSString *x;
+        NSArray *arr;
 	NSEnumerator *iter;
 	
 	iter = [[InputController methodsDefinedForClass] objectEnumerator];
@@ -690,12 +692,13 @@ static void send_message(id command, id name, id connection)
 		[aSet addObject: [@"/" stringByAppendingString: [x uppercaseString]]];
 	}
 	
-	x = [[[aSet allObjects] retain] autorelease];
+	arr = [[[aSet allObjects] retain] autorelease];
 	[aSet release];
 	
-	return [self completionsInArray: x startingWith: pre
+	return [self completionsInArray: arr startingWith: pre
 	  largestValue: large];
 }
+
 - (NSArray *)channelStartingWith: (NSString *)pre 
   largestValue: (NSString **)large
 {
@@ -894,7 +897,7 @@ static void send_message(id command, id name, id connection)
 	if ([x count] >= 1)
 	{
 		NSMutableArray *y;
-		id tmp = [x objectAtIndex: 0];
+		NSString *tmp = [x objectAtIndex: 0];
 		int z;
 		int count;
 		

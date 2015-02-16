@@ -33,7 +33,7 @@
 static inline BOOL scan_two_char_int(NSScanner *beg, int *aInt)
 {
 	int y;
-	id string;
+	NSString *string;
 	id two;
 	NSRange sub;
 	id scan;
@@ -267,12 +267,12 @@ inline NSString *NetClasses_StringFromAttributedString(NSAttributedString *atr)
 	NSRange work;
 	NSDictionary *b;
 	NSDictionary *so = [[NSDictionary new] autorelease];
-	id begF;
-	id begB;
-	id nowF = @"";
-	id nowB = @"";
+	NSString *begF;
+	NSString *begB;
+	NSString *nowF = @"";
+	NSString *nowB = @"";
 	NSMutableString *aString = [NSMutableString new];
-	int len = [atr length];
+	unsigned int len = [atr length];
 	
 	cur.length = len;
 	

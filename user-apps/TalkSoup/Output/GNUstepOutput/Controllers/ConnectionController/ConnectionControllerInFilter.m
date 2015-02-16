@@ -97,7 +97,8 @@
 	if ([process isEqualToString: @"HighlightTab"])
 	{
 		id col, name, prior;
-		id curlabel, attribs;
+		NSMutableAttributedString *curlabel;
+		id attribs;
 		id selected, master, controller;
                 id labelName;
 

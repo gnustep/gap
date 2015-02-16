@@ -1,5 +1,17 @@
 2015-02-16 Riccardo Mottola <rm@gnu.org>
 
+	* Input/NetclassesInput/Functions.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/ContentController.h
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Output/GNUstepOutput/Controllers/ServerListConnectionController.m
+	* Output/GNUstepOutput/Controllers/ServerListController.h
+	* Output/GNUstepOutput/Controllers/ServerListController.m
+	* TalkSoupBundles/Functions.m
+	Import headers, use explicit types instead of id to avoid wrong signatures.
+
+2015-02-16 Riccardo Mottola <rm@gnu.org>
+
 	* InFilters/Highlighting/HighlightingPreferencesController.h
 	* InFilters/Highlighting/HighlightingPreferencesController.m
 	Import and follow NSTableViewDelegate protocol
