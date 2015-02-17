@@ -328,10 +328,10 @@
 	unichar m;
 	BOOL add = YES;
 	int argindex = 0;
-	id mode = [aMode string];
+	NSString *mode = [aMode string];
 	int modeindex;
-	int modelen = [mode length];
-	int argcnt = [paramList count];
+	unsigned int modelen = [mode length];
+	unsigned int argcnt = [paramList count];
 	id who = [IRCUserComponents(aPerson) objectAtIndex: 0];
 	
 	id params;
