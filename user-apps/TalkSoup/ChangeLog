@@ -1,3 +1,13 @@
+2015-02-17 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Models/Channel.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
+	* Output/GNUstepOutput/Controllers/Preferences/PreferencesController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
+	* Output/GNUstepOutput/Misc/LookedUpHost.m
+	Explicit types and protocols.
+
 2015-02-16 Riccardo Mottola <rm@gnu.org>
 
 	* Input/NetclassesInput/Functions.m

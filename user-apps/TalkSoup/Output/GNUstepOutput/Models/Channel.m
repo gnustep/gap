@@ -287,8 +287,8 @@
 	index = [lowercaseList indexOfObject: GNUstepOutputLowercase(newName, connection)];
 	if (index == NSNotFound) return self;
 
-	[[userList objectAtIndex: index] setVoice: hasVoice];
-	[[userList objectAtIndex: index] setVoice: hasOps];
+	[(ChannelUser *)[userList objectAtIndex: index] setVoice: hasVoice];
+	[(ChannelUser *)[userList objectAtIndex: index] setVoice: hasOps];
 
 	return self;
 }
@@ -306,8 +306,8 @@
 {
 	NSEnumerator *iter;
 	NSArray *array = [aString componentsSeparatedByString: @" "];
-	id object;
-	id user;
+	NSString *object;
+	ChannelUser *user;
 	
 	iter = [array objectEnumerator];
 	while ((object = [iter nextObject]))

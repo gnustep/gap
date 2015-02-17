@@ -218,7 +218,7 @@ NSString *GNUstepOutputServerList = @"GNUstepOutputServerList";
 {
 	id array = [prefsList cells];
 	int index;
-	id module;
+	id<GNUstepOutputPrefsModule> module;
 	id object;
 	NSView *view;
 	NSEnumerator *iter;

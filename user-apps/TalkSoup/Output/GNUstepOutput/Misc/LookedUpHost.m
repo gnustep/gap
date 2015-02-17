@@ -53,7 +53,7 @@
 @implementation NSHost (LookedUpHostAdditions)
 + (NSHost *)hostWithName: (NSString *)aName address: (NSString *)aAddress
 {
-	id host;
+	LookedUpHost *host;
 
 	if (!aName && !aAddress) return nil;
 	if (!aName)

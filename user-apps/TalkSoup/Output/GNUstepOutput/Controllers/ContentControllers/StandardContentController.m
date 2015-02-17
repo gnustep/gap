@@ -681,7 +681,7 @@
 {
 	id name;
 	id title;
-	id server;
+	NSString *server;
 
 	name = NSMapGet(bothToName, aController);
 	if (name && (title = [nameToTitle objectForKey: name]))
