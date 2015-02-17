@@ -127,7 +127,7 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
   [NSColor colorFromEncodedData: [_PREFS_ preferenceForKey: (_aKey)]]
 
 @implementation NSMutableAttributedString (OutputAdditions2)
-+ (NSMutableAttributedString *)attributedStringWithGNUstepOutputPreferences: (id)aString
++ (NSMutableAttributedString *)attributedStringWithGNUstepOutputPreferences: (NSString *)aString
 {
 	NSMutableAttributedString *aResult;
 	NSFont *chatFont, *boldFont;

@@ -385,7 +385,7 @@
 				case 'v':
 					if (argindex < argcnt)
 					{
-						id user;
+						ChannelUser *user;
 						user = [chan userWithName: 
 						  [[paramList objectAtIndex: argindex] string]];
 						[user setVoice: add];
