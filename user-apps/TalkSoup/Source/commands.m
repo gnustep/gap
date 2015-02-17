@@ -28,6 +28,10 @@
 #import <Foundation/NSEnumerator.h>
 #import <Foundation/NSMapTable.h>
 
+#ifndef GNUSTEP
+#define _(X) NSLocalizedString (X, nil)
+#endif
+
 #define MARK [NSNull null]
 #define NO_CONNECT S2AS_s(_(@"Connect to a server before using this command"))
 
@@ -524,9 +528,9 @@
 }
 - (NSAttributedString *)commandMode: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id mode;
-	id arg = AUTORELEASE([NSMutableArray new]);
+	NSMutableArray* arg = [[NSMutableArray new] autorelease];
 	id obj;
 	int ind, max;
 	
@@ -577,7 +581,7 @@
 	{
 		NSMutableAttributedString *string;
 		const NSStringEncoding *iter;
-		string = AUTORELEASE([NSMutableAttributedString new]);
+		string = [[NSMutableAttributedString new] autorelease];
 
 		for (iter = [_TS_ allEncodings]; *iter; iter++)
 		{
