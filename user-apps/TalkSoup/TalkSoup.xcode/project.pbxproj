@@ -164,29 +164,10 @@
 			children = (
 				8D1107310486CEB800E47090,
 				089C165CFE840E0CC02AAC07,
-				29B97318FDCFA39411CA2CEA,
 			);
 			isa = PBXGroup;
 			name = Resources;
 			path = "";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		29B97318FDCFA39411CA2CEA = {
-			children = (
-				29B97319FDCFA39411CA2CEA,
-			);
-			isa = PBXVariantGroup;
-			name = MainMenu.nib;
-			path = "";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		29B97319FDCFA39411CA2CEA = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
-			name = English;
-			path = English.lproj/MainMenu.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -449,7 +430,7 @@
 				FRAMEWORK_SEARCH_PATHS = /Users/multix/Documents/code/gap/libs/netclasses/build;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "NetclassesInput-Info.plist";
+				INFOPLIST_FILE = "Input/NetclassesInput/NetclassesInput-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "";
@@ -501,7 +482,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = text.xml;
 			name = "NetclassesInput-Info.plist";
-			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/NetclassesInput-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/Input/NetclassesInput/NetclassesInput-Info.plist";
 			refType = 0;
 			sourceTree = "<absolute>";
 		};
@@ -663,7 +644,7 @@
 				GCC_MODEL_TUNING = G3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "TalkSoupBundles-Info.plist";
+				INFOPLIST_FILE = "TalkSoupBundles/TalkSoupBundles-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_CFLAGS = "";
@@ -715,7 +696,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = text.xml;
 			name = "TalkSoupBundles-Info.plist";
-			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/TalkSoupBundles-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/TalkSoupBundles/TalkSoupBundles-Info.plist";
 			refType = 0;
 			sourceTree = "<absolute>";
 		};
@@ -1040,7 +1021,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				HEADER_SEARCH_PATHS = "${SRCROOT}/Output/GNUstepOutput/";
-				INFOPLIST_FILE = "GNUstepOutput-Info.plist";
+				INFOPLIST_FILE = "Output/GNUstepOutput/GNUstepOutput-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "";
@@ -1092,7 +1073,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = text.xml;
 			name = "GNUstepOutput-Info.plist";
-			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/GNUstepOutput-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/Output/GNUstepOutput/GNUstepOutput-Info.plist";
 			refType = 0;
 			sourceTree = "<absolute>";
 		};
@@ -2898,19 +2879,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8530F3EA1A93C9B00017F8C5,
-				8D11072A0486CEB800E47090,
 				8D11072B0486CEB800E47090,
 				857EECD41A8FCED600EEC00A,
 				8530F3E51A93C90B0017F8C5,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8D11072A0486CEB800E47090 = {
-			fileRef = 29B97318FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		8D11072B0486CEB800E47090 = {
 			fileRef = 089C165CFE840E0CC02AAC07;
