@@ -74,11 +74,13 @@
 
 	return self;
 }
+
 - (void)dealloc
 {
 	[connections release];
 	[super dealloc];
 }
+
 - initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
    withTimeout: (int)seconds withNickname: (NSString *)nickname 
    withUserName: (NSString *)user withRealName: (NSString *)realName 
@@ -93,6 +95,7 @@
 	  toHost: aHost onPort: aPort withTimeout: seconds];
 	
 	[connections addObject: connection];
+	[connection release];
 
 	return self;
 }
