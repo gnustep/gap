@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jun  8 20:55:48 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         . (C) 2015 The GNUstep Application Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
