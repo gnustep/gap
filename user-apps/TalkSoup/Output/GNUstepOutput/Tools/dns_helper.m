@@ -19,8 +19,6 @@
  * without having to lock up the main application.
  */
 
-#import <TalkSoupBundles/TalkSoup.h>
-
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSRunLoop.h>
 #import <Foundation/NSHost.h>
@@ -33,7 +31,7 @@
 
 int main(int argc, char **argv, char **env)
 {
-	CREATE_AUTORELEASE_POOL(apr);
+	NSAutoreleasePool *apr = [NSAutoreleasePool new];
 	NSString *notname, *regname, *address, *reverse, *hostname;
 	NSHost *aHost, *aHost2;
 
@@ -66,6 +64,6 @@ int main(int argc, char **argv, char **env)
 	    nil]
 	  deliverImmediately: YES];
 
-	RELEASE(apr);
+	[apr release];
 	return 0;
 }
