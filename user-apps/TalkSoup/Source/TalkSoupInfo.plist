@@ -9,7 +9,7 @@
                 "Andrew Ruder <aeruder@ksu.edu>",
                 "The GNUstep Application Team"
         );
-    	Copyright = "Copyright \u00a9 2005 Andrew Ruder\n 2013 GNUstep Application Project ";
+    	Copyright = "Copyright \u00a9 2005 Andrew Ruder\n 2013-2015 GNUstep Application Project ";
     	CopyrightDescription = "Released under the GNU GPLv2 or later.";
     	FullVersionID = "1.1";
 	CFBundleExecutable = "TalkSoup";
