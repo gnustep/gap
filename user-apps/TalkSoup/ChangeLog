@@ -1,5 +1,13 @@
 2015-02-19 Riccardo Mottola <rm@gnu.org>
 
+	* Output/GNUstepOutput/Tools/dns_helper.m
+	Remove unused header, remove GS memory macros.
+
+	* Output/GNUstepOutput/Misc/HelperExecutor.m
+	Handle executable placement on Mac.
+
+2015-02-19 Riccardo Mottola <rm@gnu.org>
+
 	* Input/NetclassesInput/main.m
 	Fix memory leak.
 
