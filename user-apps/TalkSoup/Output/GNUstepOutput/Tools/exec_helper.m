@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jun  8 20:55:48 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -20,7 +21,6 @@
  * cpu, running forever, etc...
  */
 
-#import <TalkSoupBundles/TalkSoup.h>
 
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSRunLoop.h>
@@ -105,7 +105,7 @@ static void run_it(NSString *command)
 	NSString *str;
 	NSMutableString *sofar;
 	
-	task = AUTORELEASE([NSTask new]);
+	task = [[NSTask new] autorelease];
 	pipein = [NSPipe pipe];
 	pipeout = [NSPipe pipe];
 		
@@ -128,8 +128,8 @@ static void run_it(NSString *command)
 		newData = [fdout availableData];
 		if ([newData length] == 0) 
 		   break;	
-		str = AUTORELEASE([[NSMutableString alloc] initWithData: newData 
-		  encoding: NSUTF8StringEncoding]);
+		str = [[[NSMutableString alloc] initWithData: newData 
+		  encoding: NSUTF8StringEncoding] autorelease];
 		if (!str)
 		   break;
 
@@ -143,7 +143,7 @@ static void run_it(NSString *command)
 
 int main(int argc, char **argv, char **env)
 {
-	CREATE_AUTORELEASE_POOL(apr);
+	NSAutoreleasePool *apr = [NSAutoreleasePool new];
 	NSString *command;
 
 	signal(SIGPIPE, SIG_IGN);
@@ -158,6 +158,6 @@ int main(int argc, char **argv, char **env)
 
 	run_it(command);
 
-	RELEASE(apr);
+	[apr release];
 	return 0;
 }

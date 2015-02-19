@@ -91,6 +91,7 @@
 	id userScroll;
 	id contain;
 	id font;
+	NSCell *cell;
 	NSRect frame;
 	
 	frame = [[[chatView enclosingScrollView] contentView] bounds];
@@ -144,15 +145,15 @@
 	[userScroll setHasVerticalScroller: YES];
 	[userScroll setBorderType: NSBezelBorder];
 	
-	x = [[[NSCell alloc] initTextCell: @""] autorelease];
-	[x setFormatter: [[ChannelFormatter new] autorelease]];
+	cell = [userColumn dataCell];
+	[cell setFormatter: [[ChannelFormatter new] autorelease]];
 	
 	font = [FontPreferencesController getFontFromPreferences:
 	  GNUstepOutputUserListFont];
-	[x setFont: font];
+	[cell setFont: font];
 	[tableView setRowHeight: [font pointSize] * 1.5];
 	
-	[userColumn setDataCell: x];
+	[userColumn setDataCell: cell];
 	 
 	[splitView addSubview: userScroll];
 	[splitView setDelegate: self];
