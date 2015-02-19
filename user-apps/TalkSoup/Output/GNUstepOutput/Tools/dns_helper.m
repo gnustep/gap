@@ -3,7 +3,7 @@
                           -------------------
     begin                : Wed Jun  8 20:55:48 CDT 2005
     copyright            : (C) 2005 by Andrew Ruder
-                         . (C) 2015 The GNUstep Application Team
+                         . (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -27,6 +27,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSDebug.h>
 #import <Foundation/NSDistributedNotificationCenter.h>
+#import <Foundation/NSDictionary.h>
 
 #include <signal.h>
 
