@@ -162,6 +162,8 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				8530F3E31A93C90B0017F8C5,
+				8530F3E41A93C90B0017F8C5,
 				8D1107310486CEB800E47090,
 				089C165CFE840E0CC02AAC07,
 			);
@@ -239,6 +241,48 @@
 //852
 //853
 //854
+		8503F59B1A9687F100007EE7 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			path = BigServerList.plist;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		8503F59C1A9687F100007EE7 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			path = Defaults.plist;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		8503F59D1A9687F100007EE7 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			path = ServerList.plist;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		8503F59E1A9687F100007EE7 = {
+			fileRef = 8503F59B1A9687F100007EE7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8503F59F1A9687F100007EE7 = {
+			fileRef = 8503F59C1A9687F100007EE7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8503F5A01A9687F100007EE7 = {
+			fileRef = 8503F59D1A9687F100007EE7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		8530F2681A91317F0017F8C5 = {
 			fileRef = 857EED021A8FD35800EEC00A;
 			isa = PBXBuildFile;
@@ -325,21 +369,6 @@
 		};
 		8530F3E51A93C90B0017F8C5 = {
 			fileRef = 8530F3E31A93C90B0017F8C5;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8530F3E91A93C9B00017F8C5 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist;
-			name = Defaults.plist;
-			path = Source/Defaults.plist;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		8530F3EA1A93C9B00017F8C5 = {
-			fileRef = 8530F3E91A93C9B00017F8C5;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -952,6 +981,9 @@
 				85F94E591A900A3400B00DCB,
 				85F94E5B1A900A3400B00DCB,
 				85F94E5D1A900A3400B00DCB,
+				8503F59E1A9687F100007EE7,
+				8503F59F1A9687F100007EE7,
+				8503F5A01A9687F100007EE7,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2029,9 +2061,9 @@
 		};
 		85F94DE41A90087500B00DCB = {
 			children = (
-				8530F3E91A93C9B00017F8C5,
-				8530F3E31A93C90B0017F8C5,
-				8530F3E41A93C90B0017F8C5,
+				8503F59B1A9687F100007EE7,
+				8503F59C1A9687F100007EE7,
+				8503F59D1A9687F100007EE7,
 				85F94E0F1A90097500B00DCB,
 				85F94E101A90097500B00DCB,
 				85F94E111A90097500B00DCB,
@@ -2878,7 +2910,6 @@
 		8D1107290486CEB800E47090 = {
 			buildActionMask = 2147483647;
 			files = (
-				8530F3EA1A93C9B00017F8C5,
 				8D11072B0486CEB800E47090,
 				857EECD41A8FCED600EEC00A,
 				8530F3E51A93C90B0017F8C5,
