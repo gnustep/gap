@@ -43,8 +43,13 @@
 	if (!(self = [super init])) return nil;
 
 	aBundle = [NSBundle bundleForClass: [_GS_ class]];
+#ifndef GNUSTEP
+    helper = [aBundle executablePath];
+    helper = [helper stringByDeletingLastPathComponent];
+#else
 	helper = [[aBundle resourcePath] stringByAppendingPathComponent: @"Tools"];
-	helper = [helper stringByAppendingPathComponent: aName];
+#endif
+    helper = [helper stringByAppendingPathComponent: aName];
 
 	aManager = [NSFileManager defaultManager];
 	if (!helper || ![aManager isExecutableFileAtPath: helper])
@@ -91,6 +96,7 @@
 	[aTask setArguments: args];
 	[executingTasks addObject: aTask];
 	[aTask launch];
+    [args release];
 }
 - (void)cleanup
 {
