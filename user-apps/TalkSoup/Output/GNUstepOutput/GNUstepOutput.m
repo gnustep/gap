@@ -104,8 +104,6 @@ PreferencesController *_PREFS_ = nil;
 - init
 {
 	id x;
-	id fontName = nil;
-	id fontSize = nil;
 	
 	if (!(self = [super init])) return nil;
 	
@@ -127,17 +125,6 @@ PreferencesController *_PREFS_ = nil;
 	serverLists = [NSMutableArray new];
 
 	pendingIdentToConnectionController = [NSMutableDictionary new];
-	
-	x = [NSFont userFontOfSize: 0.0];
-	
-	if (x)
-	{
-		fontName = [x fontName];
-		fontSize = [NSString stringWithFormat: @"%d", (int)[x pointSize]];
-	}
-	
-	if (!fontName) fontName = @"Helvetica";
-	if ([fontSize intValue] < 0 || !fontSize) fontSize = @"12";	
 	
 	[_GS_ release];
 	_GS_ = [self retain];

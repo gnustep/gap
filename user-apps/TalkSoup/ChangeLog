@@ -1,3 +1,11 @@
+2015-02-19 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/main.m
+	Fix memory leak.
+
+	* Output/GNUstepOutput/GNUstepOutput.m
+	Remove unused variables and code setting them.
+
 2015-02-17 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Models/Channel.m
