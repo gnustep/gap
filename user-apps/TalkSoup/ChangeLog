@@ -1,3 +1,9 @@
+2015-02-20 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/main.m
+	* Input/NetclassesInput/main.h
+	Explicit return types
+
 2015-02-19 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Tools/dns_helper.m

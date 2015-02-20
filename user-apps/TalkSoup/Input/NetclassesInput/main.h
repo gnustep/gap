@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri Feb 21 00:52:16 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -25,7 +26,7 @@
 		NSMutableArray *connections;
 	}
 
-- initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
+- (NetclassesInput *)initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
    withTimeout: (int)seconds withNickname: (NSString *)nickname 
    withUserName: (NSString *)user withRealName: (NSString *)realName 
    withPassword: (NSString *)password withIdentification: (NSString *)ident;
@@ -40,14 +41,15 @@
 		int port;
 		id control;
 	}
-- initWithNickname: (NSString *)aNick withUserName: (NSString *)user
+
+- (NetclassesConnection *)initWithNickname: (NSString *)aNick withUserName: (NSString *)user
    withRealName: (NSString *)real withPassword: (NSString *)aPass
    withIdentification: (NSString *)ident onPort: (int)aPort
    withControl: plugin;
 
-- connectingFailed: (NSString *)error;
+- (NetclassesConnection *)connectingFailed: (NSString *)error;
 
-- connectingStarted: (TCPConnecting *)aConnection;
+- (NetclassesConnection *)connectingStarted: (TCPConnecting *)aConnection;
 
 - (NSString *)errorMessage;
 

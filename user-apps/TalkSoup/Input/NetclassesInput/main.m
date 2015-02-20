@@ -48,7 +48,7 @@
 @end
 
 @implementation NetclassesInput (PrivateNetclassesInput)
-- removeConnection: aConnection
+- (NetclassesInput *)removeConnection: aConnection
 {
 	[connections removeObject: aConnection];
 	
@@ -57,7 +57,7 @@
 @end
 
 @implementation NetclassesInput
-- init
+- (id)init
 {
 	if (!(self = [super init])) return nil;
 
@@ -81,7 +81,7 @@
 	[super dealloc];
 }
 
-- initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
+- (NetclassesInput *)initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
    withTimeout: (int)seconds withNickname: (NSString *)nickname 
    withUserName: (NSString *)user withRealName: (NSString *)realName 
    withPassword: (NSString *)password withIdentification: (NSString *)ident
@@ -99,6 +99,7 @@
 
 	return self;
 }
+
 - (void)closeConnection: (id)connection
 {
 	[[connection retain] autorelease];
@@ -129,7 +130,7 @@
 @end
 		 
 @implementation NetclassesConnection
-- initWithNickname: (NSString *)aNick withUserName: (NSString *)user
+- (NetclassesConnection *)initWithNickname: (NSString *)aNick withUserName: (NSString *)user
    withRealName: (NSString *)real withPassword: (NSString *)aPass
    withIdentification: (NSString *)ident onPort: (int)aPort
    withControl: plugin;
@@ -145,6 +146,7 @@
 	
 	return self;
 }
+
 - (void)dealloc
 {
 	[identification release];
@@ -152,7 +154,8 @@
 
 	[super dealloc];
 }
-- connectingFailed: (NSString *)error
+
+- (NetclassesConnection *)connectingFailed: (NSString *)error
 {
 	[control removeConnection: self];
 	errorMessage = [error retain];
@@ -161,39 +164,47 @@
 	 sender: control];
 	return self;
 }
-- connectingStarted: (TCPConnecting *)aConnection
+
+- (NetclassesConnection *)connectingStarted: (TCPConnecting *)aConnection
 {
 	return self;
 }	
+
 - (NSString *)identification
 {
 	return identification;
 }
+
 - (NSString *)errorMessage
 {
 	return errorMessage;
 }
+
 - (int)port
 {
 	return port;
 }
+
 - (NSHost *)remoteHost
 {
 	return [transport remoteHost];
 }
+
 - (NSHost *)localHost
 {
 	return [transport localHost];
 }
+
 - (void)connectionLost
 {
 	[transport close];
 	[super connectionLost];
 	[control closeConnection: self];
 }
-- connectionEstablished: (id <NetTransport>)aTransport;
+
+- (IRCObject <TCPConnecting> *) connectionEstablished: (id <NetTransport>)aTransport;
 {
-	id x;
+	IRCObject <TCPConnecting> *x;
 	aTransport = [[[NetclassesInputSendThenDieTransport 
 	  alloc] initWithTransport: aTransport] autorelease];
 	x = [super connectionEstablished: aTransport];
@@ -202,21 +213,24 @@
 	  sender: control];
 	return x;
 }
-- registeredWithServer
+
+- (NetclassesConnection *)registeredWithServer
 {
 	[_TS_ registeredWithServerOnConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
 	return self;
 }
-- couldNotRegister: (NSString *)reason
+
+- (NetclassesConnection *)couldNotRegister: (NSString *)reason
 {
 	[_TS_ couldNotRegister: S2AS(reason) onConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
 	return self;
 }
-- CTCPRequestReceived: (NSString *)aCTCP
+
+- (NetclassesConnection *)CTCPRequestReceived: (NSString *)aCTCP
    withArgument: (NSString *)argument 
    to: (NSString *)receiver from: (NSString *)aPerson;
 {
@@ -226,7 +240,7 @@
 	  sender: control];
 	return self;
 }
-- CTCPReplyReceived: (NSString *)aCTCP
+- (NetclassesConnection *)CTCPReplyReceived: (NSString *)aCTCP
    withArgument: (NSString *)argument to: (NSString *)receiver
    from: (NSString *)aPerson
 {
@@ -236,21 +250,21 @@
 	  sender: control];
 	return self;
 }
-- errorReceived: (NSString *)anError
+- (NetclassesConnection *)errorReceived: (NSString *)anError
 {
 	[_TS_ errorReceived: S2AS(anError) onConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
 	return self;
 }
-- wallopsReceived: (NSString *)message from: (NSString *)sender
+- (NetclassesConnection *)wallopsReceived: (NSString *)message from: (NSString *)sender
 {
 	[_TS_ wallopsReceived: S2AS(message) from: S2AS(sender) onConnection: self
 	  withNickname: S2AS(nick)
 	  sender: control];
 	return self;
 }
-- userKicked: (NSString *)aPerson outOf: (NSString *)aChannel
+- (NetclassesConnection *)userKicked: (NSString *)aPerson outOf: (NSString *)aChannel
          for: (NSString *)reason from: (NSString *)kicker
 {
 	[_TS_ userKicked: S2AS(aPerson) outOf: S2AS(aChannel) for: S2AS(reason)
@@ -259,14 +273,15 @@
 	  sender: control];
 	return self;
 }
-- invitedTo: (NSString *)aChannel from: (NSString *)inviter
+- (NetclassesConnection *)invitedTo: (NSString *)aChannel from: (NSString *)inviter
 {
 	[_TS_ invitedTo: S2AS(aChannel) from: S2AS(inviter) onConnection: self
 	  withNickname: S2AS(nick)
 	  sender: control];
 	return self;
 }
-- modeChanged: (NSString *)mode on: (NSString *)anObject
+
+- (NetclassesConnection *)modeChanged: (NSString *)mode on: (NSString *)anObject
    withParams: (NSArray *)paramList from: (NSString *)aPerson
 {
 	NSMutableArray *y;
@@ -288,7 +303,8 @@
 	  sender: control];
 	return self;
 }
-- numericCommandReceived: (NSString *)command withParams: (NSArray *)paramList
+
+- (NetclassesConnection *)numericCommandReceived: (NSString *)command withParams: (NSArray *)paramList
                       from: (NSString *)sender
 {
 	NSMutableArray *y;
@@ -311,7 +327,8 @@
 
 	return self;
 }
-- nickChangedTo: (NSString *)newName from: (NSString *)aPerson
+
+- (NetclassesConnection *)nickChangedTo: (NSString *)newName from: (NSString *)aPerson
 {	
 	[_TS_ nickChangedTo: S2AS(newName) from: S2AS(aPerson) onConnection: self
 	  withNickname: S2AS(nick)
@@ -319,7 +336,8 @@
 
 	return self;
 }
-- channelJoined: (NSString *)channel from: (NSString *)joiner
+
+- (NetclassesConnection *)channelJoined: (NSString *)channel from: (NSString *)joiner
 {
 	[_TS_ channelJoined: S2AS(channel) from: S2AS(joiner) onConnection: self
 	  withNickname: S2AS(nick)
@@ -327,7 +345,8 @@
 	
 	return self;
 }
-- channelParted: (NSString *)channel withMessage: (NSString *)aMessage
+
+- (NetclassesConnection *)channelParted: (NSString *)channel withMessage: (NSString *)aMessage
              from: (NSString *)parter
 {
 	[_TS_ channelParted: S2AS(channel) withMessage: S2AS(aMessage)
@@ -337,7 +356,8 @@
 
 	return self;
 }
-- quitIRCWithMessage: (NSString *)aMessage from: (NSString *)quitter
+
+- (NetclassesConnection *)quitIRCWithMessage: (NSString *)aMessage from: (NSString *)quitter
 {
 	[_TS_ quitIRCWithMessage: S2AS(aMessage) from: S2AS(quitter) 
 	  onConnection: self 
@@ -346,7 +366,8 @@
 	
 	return self;
 }
-- topicChangedTo: (NSString *)aTopic in: (NSString *)channel
+
+- (NetclassesConnection *)topicChangedTo: (NSString *)aTopic in: (NSString *)channel
               from: (NSString *)aPerson
 {
 	[_TS_ topicChangedTo: S2AS(aTopic) in: S2AS(channel)
@@ -356,7 +377,8 @@
 
 	return self;
 }
-- messageReceived: (NSString *)aMessage to: (NSString *)to
+
+- (NetclassesConnection *)messageReceived: (NSString *)aMessage to: (NSString *)to
                from: (NSString *)sender
 {
 	[_TS_ messageReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
@@ -366,7 +388,8 @@
 	
 	return self;
 }
-- noticeReceived: (NSString *)aMessage to: (NSString *)to
+
+- (NetclassesConnection *)noticeReceived: (NSString *)aMessage to: (NSString *)to
               from: (NSString *)sender
 {
 	[_TS_ noticeReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
@@ -376,7 +399,8 @@
 	
 	return self;
 }
-- actionReceived: (NSString *)anAction to: (NSString *)to
+
+- (NetclassesConnection *)actionReceived: (NSString *)anAction to: (NSString *)to
               from: (NSString *)sender
 {
 	[_TS_ actionReceived: S2AS(anAction) to: S2AS(to) from: S2AS(sender)
@@ -386,7 +410,8 @@
 	
 	return self;
 }
-- pingReceivedWithArgument: (NSString *)arg from: (NSString *)sender
+
+- (NetclassesConnection *)pingReceivedWithArgument: (NSString *)arg from: (NSString *)sender
 {
 	[_TS_ pingReceivedWithArgument: S2AS(arg) from: S2AS(sender) 
 	  onConnection: self 
@@ -395,7 +420,8 @@
 	
 	return self;
 }
-- pongReceivedWithArgument: (NSString *)arg from: (NSString *)sender
+
+- (NetclassesConnection *)pongReceivedWithArgument: (NSString *)arg from: (NSString *)sender
 {
 	[_TS_ pongReceivedWithArgument: S2AS(arg) from: S2AS(sender)
 	  onConnection: self 
@@ -404,7 +430,8 @@
 	
 	return self;
 }
-- newNickNeededWhileRegistering
+
+- (NetclassesConnection *)newNickNeededWhileRegistering
 {
 	[_TS_ newNickNeededWhileRegisteringOnConnection: self 
 	  withNickname: S2AS(nick)
@@ -412,7 +439,8 @@
 	
 	return self;
 }
-- changeNick: (NSAttributedString *)newNick onConnection: aConnection 
+
+- (NetclassesConnection *)changeNick: (NSAttributedString *)newNick onConnection: aConnection 
    withNickname: (NSAttributedString *)theNick sender: aPlugin
 {
 	[_TS_ changeNick: newNick onConnection: self 
@@ -420,8 +448,9 @@
 	  sender: control];
 	[super changeNick: AS2S(newNick)];
 	return self;
-}	
-- quitWithMessage: (NSAttributedString *)aMessage onConnection: aConnection
+}
+
+- (NetclassesConnection *)quitWithMessage: (NSAttributedString *)aMessage onConnection: aConnection
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -431,7 +460,8 @@
 	[super quitWithMessage: AS2S(aMessage)];
 	return self;
 }
-- partChannel: (NSAttributedString *)channel 
+
+- (NetclassesConnection *)partChannel: (NSAttributedString *)channel 
    withMessage: (NSAttributedString *)aMessage 
    onConnection: aConnection withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -443,7 +473,8 @@
 	[super partChannel: AS2S(channel) withMessage: AS2S(aMessage)];
 	return self;
 }
-- joinChannel: (NSAttributedString *)channel 
+
+- (NetclassesConnection *)joinChannel: (NSAttributedString *)channel 
    withPassword: (NSAttributedString *)aPassword 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -455,7 +486,8 @@
 	[super joinChannel: AS2S(channel) withPassword: AS2S(aPassword)];
 	return self;
 }
-- sendCTCPReply: (NSAttributedString *)aCTCP 
+
+- (NetclassesConnection *)sendCTCPReply: (NSAttributedString *)aCTCP 
    withArgument: (NSAttributedString *)args
    to: (NSAttributedString *)aPerson onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -469,7 +501,8 @@
 	  to: AS2S(aPerson)];
 	return self;
 }
-- sendCTCPRequest: (NSAttributedString *)aCTCP 
+
+- (NetclassesConnection *)sendCTCPRequest: (NSAttributedString *)aCTCP 
    withArgument: (NSAttributedString *)args
    to: (NSAttributedString *)aPerson onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -482,8 +515,9 @@
 	[super sendCTCPRequest: AS2S(aCTCP) withArgument: AS2S(args)
 	  to: AS2S(aPerson)];
 	return self;
-} 
-- sendMessage: (NSAttributedString *)message to: (NSAttributedString *)receiver 
+}
+
+- (NetclassesConnection *)sendMessage: (NSAttributedString *)message to: (NSAttributedString *)receiver 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -494,7 +528,8 @@
 	[super sendMessage: AS2S(message) to: AS2S(receiver)];
 	return self;
 }
-- sendNotice: (NSAttributedString *)message to: (NSAttributedString *)receiver 
+
+- (NetclassesConnection *)sendNotice: (NSAttributedString *)message to: (NSAttributedString *)receiver 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -505,7 +540,8 @@
 	[super sendNotice: AS2S(message) to: AS2S(receiver)];
 	return self;
 }
-- sendAction: (NSAttributedString *)anAction to: (NSAttributedString *)receiver 
+
+- (NetclassesConnection *)sendAction: (NSAttributedString *)anAction to: (NSAttributedString *)receiver 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -517,7 +553,8 @@
 	[super sendAction: AS2S(anAction) to: AS2S(receiver)];
 	return self;
 }
-- becomeOperatorWithName: (NSAttributedString *)aName 
+
+- (NetclassesConnection *)becomeOperatorWithName: (NSAttributedString *)aName 
    withPassword: (NSAttributedString *)pass 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -530,7 +567,8 @@
 	[super becomeOperatorWithName: AS2S(aName) withPassword: AS2S(pass)];
 	return self;
 }
-- requestNamesOnChannel: (NSAttributedString *)aChannel 
+
+- (NetclassesConnection *)requestNamesOnChannel: (NSAttributedString *)aChannel 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -542,7 +580,8 @@
 	[super requestNamesOnChannel: AS2S(aChannel)];
 	return self;
 }
-- requestMOTDOnServer: (NSAttributedString *)aServer onConnection: aConnection 
+
+- (NetclassesConnection *)requestMOTDOnServer: (NSAttributedString *)aServer onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -552,7 +591,8 @@
 	[super requestMOTDOnServer: AS2S(aServer)];
 	return self;
 }
-- requestSizeInformationFromServer: (NSAttributedString *)aServer
+
+- (NetclassesConnection *)requestSizeInformationFromServer: (NSAttributedString *)aServer
    andForwardTo: (NSAttributedString *)anotherServer onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -565,7 +605,8 @@
 	  andForwardTo: AS2S(anotherServer)];
 	return self;
 }
-- requestVersionOfServer: (NSAttributedString *)aServer 
+
+- (NetclassesConnection *)requestVersionOfServer: (NSAttributedString *)aServer 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -577,7 +618,8 @@
 	[super requestVersionOfServer: AS2S(aServer)];
 	return self;
 }
-- requestServerStats: (NSAttributedString *)aServer 
+
+- (NetclassesConnection *)requestServerStats: (NSAttributedString *)aServer 
    for: (NSAttributedString *)query 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -590,7 +632,8 @@
 	[super requestServerStats: AS2S(aServer) for: AS2S(query)];
 	return self;
 }
-- requestServerLink: (NSAttributedString *)aLink 
+
+- (NetclassesConnection *)requestServerLink: (NSAttributedString *)aLink 
    from: (NSAttributedString *)aServer 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -603,7 +646,8 @@
 	[super requestServerLink: AS2S(aLink) from: AS2S(aServer)];
 	return self;
 }
-- requestTimeOnServer: (NSAttributedString *)aServer onConnection: aConnection 
+
+- (NetclassesConnection *)requestTimeOnServer: (NSAttributedString *)aServer onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -613,7 +657,8 @@
 	[super requestTimeOnServer: AS2S(aServer)];
 	return self;
 }
-- requestServerToConnect: (NSAttributedString *)aServer 
+
+- (NetclassesConnection *)requestServerToConnect: (NSAttributedString *)aServer 
    to: (NSAttributedString *)connectServer
    onPort: (NSAttributedString *)aPort onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -627,7 +672,8 @@
 	  onPort: AS2S(aPort)];	
 	return self;
 }
-- requestTraceOnServer: (NSAttributedString *)aServer onConnection: aConnection 
+
+- (NetclassesConnection *)requestTraceOnServer: (NSAttributedString *)aServer onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -637,7 +683,8 @@
 	[super requestTraceOnServer: AS2S(aServer)];
 	return self;
 }
-- requestAdministratorOnServer: (NSAttributedString *)aServer 
+
+- (NetclassesConnection *)requestAdministratorOnServer: (NSAttributedString *)aServer 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -648,7 +695,8 @@
 	[super requestAdministratorOnServer: AS2S(aServer)];
 	return self;
 }
-- requestInfoOnServer: (NSAttributedString *)aServer onConnection: aConnection
+
+- (NetclassesConnection *)requestInfoOnServer: (NSAttributedString *)aServer onConnection: aConnection
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -658,7 +706,8 @@
 	[super requestInfoOnServer: AS2S(aServer)];
 	return self;
 }
-- requestServerRehashOnConnection: aConnection 
+
+- (NetclassesConnection *)requestServerRehashOnConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -668,7 +717,8 @@
 	[super requestServerRehash];
 	return self;
 }
-- requestServerShutdownOnConnection: aConnection 
+
+- (NetclassesConnection *)requestServerShutdownOnConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -678,7 +728,8 @@
 	[super requestServerShutdown];
 	return self;
 }
-- requestServerRestartOnConnection: aConnection 
+
+- (NetclassesConnection *)requestServerRestartOnConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -688,7 +739,8 @@
 	[super requestServerRestart];
 	return self;
 }
-- requestUserInfoOnServer: (NSAttributedString *)aServer 
+
+- (NetclassesConnection *)requestUserInfoOnServer: (NSAttributedString *)aServer 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -699,7 +751,8 @@
 	[super requestUserInfoOnServer: AS2S(aServer)];
 	return self;
 }
-- areUsersOn: (NSAttributedString *)userList onConnection: aConnection
+
+- (NetclassesConnection *)areUsersOn: (NSAttributedString *)userList onConnection: aConnection
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -709,7 +762,8 @@
 	[super areUsersOn: AS2S(userList)];
 	return self;
 }
-- sendWallops: (NSAttributedString *)message onConnection: aConnection 
+
+- (NetclassesConnection *)sendWallops: (NSAttributedString *)message onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -719,7 +773,8 @@
 	[super sendWallops: AS2S(message)];
 	return self;
 }
-- listWho: (NSAttributedString *)aMask onlyOperators: (BOOL)operators 
+
+- (NetclassesConnection *)listWho: (NSAttributedString *)aMask onlyOperators: (BOOL)operators 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -730,7 +785,8 @@
 	[super listWho: AS2S(aMask) onlyOperators: operators];
 	return self;
 }
-- whois: (NSAttributedString *)aPerson onServer: (NSAttributedString *)aServer 
+
+- (NetclassesConnection *)whois: (NSAttributedString *)aPerson onServer: (NSAttributedString *)aServer 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -741,7 +797,8 @@
 	[super whois: AS2S(aPerson) onServer: AS2S(aServer)];
 	return self;
 }
-- whowas: (NSAttributedString *)aPerson onServer: (NSAttributedString *)aServer
+
+- (NetclassesConnection *)whowas: (NSAttributedString *)aPerson onServer: (NSAttributedString *)aServer
    withNumberEntries: (NSAttributedString *)aNumber onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -754,7 +811,8 @@
 	  withNumberEntries: AS2S(aNumber)];
 	return self;
 }
-- kill: (NSAttributedString *)aPerson 
+
+- (NetclassesConnection *)kill: (NSAttributedString *)aPerson 
    withComment: (NSAttributedString *)aComment 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -766,7 +824,8 @@
 	[super kill: AS2S(aPerson) withComment: AS2S(aComment)];
 	return self;
 }
-- setTopicForChannel: (NSAttributedString *)aChannel 
+
+- (NetclassesConnection *)setTopicForChannel: (NSAttributedString *)aChannel 
    to: (NSAttributedString *)aTopic 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -779,14 +838,15 @@
 	[super setTopicForChannel: AS2S(aChannel) to: AS2S(aTopic)];
 	return self;
 }
-- setMode: (NSAttributedString *)aMode on: (NSAttributedString *)anObject 
+
+- (NetclassesConnection *)setMode: (NSAttributedString *)aMode on: (NSAttributedString *)anObject 
    withParams: (NSArray *)list onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
 	NSMutableArray *a;
 	NSEnumerator *iter;
-	id object;
+	NSAttributedString *object;
 	
 	[_TS_ setMode: aMode on: anObject withParams: list
 	  onConnection: self 
@@ -803,8 +863,9 @@
 	 a];
 	
 	return self;
-}					 
-- listChannel: (NSAttributedString *)aChannel 
+}
+
+- (NetclassesConnection *)listChannel: (NSAttributedString *)aChannel 
    onServer: (NSAttributedString *)aServer 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -817,7 +878,8 @@
 	[super listChannel: AS2S(aChannel) onServer: AS2S(aServer)];
 	return self;
 }
-- invite: (NSAttributedString *)aPerson to: (NSAttributedString *)aChannel 
+
+- (NetclassesConnection *)invite: (NSAttributedString *)aPerson to: (NSAttributedString *)aChannel 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
@@ -828,7 +890,8 @@
 	[super invite: AS2S(aPerson) to: AS2S(aChannel)];
 	return self;
 }
-- kick: (NSAttributedString *)aPerson offOf: (NSAttributedString *)aChannel 
+
+- (NetclassesConnection *)kick: (NSAttributedString *)aPerson offOf: (NSAttributedString *)aChannel 
    for: (NSAttributedString *)reason 
    onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
@@ -840,7 +903,8 @@
 	[super kick: AS2S(aPerson) offOf: AS2S(aChannel) for: AS2S(reason)];
 	return self;
 }
-- setAwayWithMessage: (NSAttributedString *)message onConnection: aConnection 
+
+- (NetclassesConnection *)setAwayWithMessage: (NSAttributedString *)message onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -850,7 +914,8 @@
 	[super setAwayWithMessage: AS2S(message)];
 	return self;
 }
-- sendPingWithArgument: (NSAttributedString *)aString onConnection: aConnection 
+
+- (NetclassesConnection *)sendPingWithArgument: (NSAttributedString *)aString onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -860,7 +925,8 @@
 	[super sendPingWithArgument: AS2S(aString)];
 	return self;
 }
-- sendPongWithArgument: (NSAttributedString *)aString onConnection: aConnection 
+
+- (NetclassesConnection *)sendPongWithArgument: (NSAttributedString *)aString onConnection: aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
@@ -870,7 +936,8 @@
 	[super sendPongWithArgument: AS2S(aString)];
 	return self;
 }
-- writeRawString: (NSAttributedString *)aString onConnection: aConnection
+
+- (NetclassesConnection *)writeRawString: (NSAttributedString *)aString onConnection: aConnection
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
