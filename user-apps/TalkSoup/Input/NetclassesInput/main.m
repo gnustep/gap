@@ -211,7 +211,6 @@
 	[_TS_ newConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
-        [x autorelease];
 	return x;
 }
 
