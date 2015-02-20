@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Apr 28 06:48:06 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -32,7 +33,7 @@ extern NSString *InverseTypeBackground;
 @end
 
 @interface NSMutableAttributedString (OutputAdditions2)	  
-+ (NSMutableAttributedString *)attributedStringWithGNUstepOutputPreferences: (id)aString;
++ (NSMutableAttributedString *)attributedStringWithGNUstepOutputPreferences: (NSMutableAttributedString *)aString;
 - (void)updateAttributedStringForGNUstepOutputPreferences: (NSString *)aKey;
 - (void)chopNumberOfLines: (int)numLines;
 @end
