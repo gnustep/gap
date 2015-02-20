@@ -33,13 +33,15 @@
 
 int main(int argc, char **argv, char **env)
 {
-	NSAutoreleasePool *apr = [NSAutoreleasePool new];
+	NSAutoreleasePool *apr;
 	NSString *notname, *regname, *address, *reverse, *hostname;
 	NSHost *aHost, *aHost2;
 
 	signal(SIGPIPE, SIG_IGN);
 	if (argc < 4) 
 		return 1;
+
+    apr = [NSAutoreleasePool new];
 
 	regname = [NSString stringWithCString: argv[1]];
 	notname = [NSString stringWithCString: argv[2]];
