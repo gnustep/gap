@@ -125,6 +125,12 @@
 {
 	return [lowerName compare: [aUser lowerName]];
 }
+
+- (NSString *)description
+{
+  NSLog(@"Description of channel");
+  return [super description];
+}
 @end
 
 @implementation ChannelFormatter

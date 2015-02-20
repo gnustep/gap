@@ -7,6 +7,10 @@
 	* Input/NetclassesInput/main.m
 	Fix memory leak
 
+	* Output/GNUstepOutput/Models/Channel.m
+	Allocate mutable string directly for line terminator.
+
+
 2015-02-19 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Tools/dns_helper.m
