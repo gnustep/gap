@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jan  7 21:13:07 CST 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -116,13 +117,14 @@
 - (void)dealloc
 {
 	[cpsTimer invalidate];
-	DESTROY(cpsTimer);
-	RELEASE(sender);
-	RELEASE(path);
-	RELEASE(file);
-	RELEASE(connection);
-	RELEASE(status);
-	RELEASE(receiver);
+	[cpsTimer release];
+	cpsTimer = nil;
+	[sender release];
+	[path release];
+	[file release];
+	[connection release];
+	[status release];
+	[receiver release];
 	
 	[super dealloc];
 }
@@ -143,15 +145,15 @@
 	if ([aStatus isEqualToString: DCCStatusTransferring])
 	{
 		[cpsTimer invalidate];
-		RELEASE(cpsTimer);
+		[cpsTimer release];
 		oldTransferredBytes = 0;
-		cpsTimer = RETAIN([NSTimer scheduledTimerWithTimeInterval: 5.0 target: self
-		  selector: @selector(cpsTimer:) userInfo: nil repeats: YES]);
+		cpsTimer = [[NSTimer scheduledTimerWithTimeInterval: 5.0 target: self
+		  selector: @selector(cpsTimer:) userInfo: nil repeats: YES] retain];
 		[delegate startedSend: self onConnection: connection];
 	}		
 		
-	RELEASE(status);
-	status = RETAIN(aStatus);
+	[status release];
+	status = [aStatus retain];
 	
 	return self;
 }
