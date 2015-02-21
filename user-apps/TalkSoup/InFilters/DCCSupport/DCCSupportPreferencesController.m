@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jan  7 20:54:25 CST 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -83,8 +84,8 @@
 	NSWindow *tempWindow;
 
 	tempWindow = (NSWindow *)window;
-	window = RETAIN([tempWindow contentView]);
-	RELEASE(tempWindow);
+	window = [[tempWindow contentView] retain];
+	[tempWindow release];
 	[window setAutoresizingMask:
 	  NSViewWidthSizable | NSViewHeightSizable];
 
@@ -112,8 +113,9 @@
 }
 - (void)dealloc
 {
-	RELEASE(preferencesIcon);
-	DESTROY(window);
+	[preferencesIcon release];
+	[window release];
+	window = nil;
 	[super dealloc];
 }
 - (NSView *)preferencesView

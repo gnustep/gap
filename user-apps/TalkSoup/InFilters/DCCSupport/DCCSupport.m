@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jul 2 18:58:30 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -131,7 +132,7 @@ static NSString *unique_path(NSString *path)
 		
 		if (!tmp)
 		{
-			y = AUTORELEASE([NSMutableDictionary new]);
+			y = [[NSMutableDictionary new] autorelease];
 		}
 		else
 		{
@@ -300,7 +301,7 @@ static NSString *unique_path(NSString *path)
 	
 	if (table) return table;
 	
-	NSMapInsert(connectionMap, aConnection, table = AUTORELEASE([NSMutableArray new]));
+	NSMapInsert(connectionMap, aConnection, table = [[NSMutableArray new] autorelease]);
 	
 	return table;
 }
@@ -312,8 +313,8 @@ static NSString *unique_path(NSString *path)
 {
 	if (invoc) return;
 
-	invoc = RETAIN([NSInvocation invocationWithMethodSignature: 
-	  [self instanceMethodSignatureForSelector: @selector(commandDCC:connection:)]]);
+	invoc = [[NSInvocation invocationWithMethodSignature: 
+	  [self instanceMethodSignatureForSelector: @selector(commandDCC:connection:)]] retain];
 	[invoc retainArguments];
 	[invoc setSelector: @selector(commandDCC:connection:)];
 
@@ -535,8 +536,8 @@ static NSString *unique_path(NSString *path)
 	
 	connections = [self getConnectionTable: connection];
 	
-	sender = AUTORELEASE([[DCCSender alloc] initWithFilename: path
-	  withConnection: connection to: user withDelegate: self]);
+	sender = [[[DCCSender alloc] initWithFilename: path
+	  withConnection: connection to: user withDelegate: self] autorelease];
 	
 	if (sender)
 	{
@@ -555,7 +556,7 @@ static NSString *unique_path(NSString *path)
 	
 	connections = [self getConnectionTable: connection];
 	
-	attr = AUTORELEASE([NSMutableAttributedString new]);
+	attr = [[NSMutableAttributedString new] autorelease];
 	
 	max = [connections count];
 	for (index = 0; index < max; index++)
@@ -683,8 +684,8 @@ static NSString *unique_path(NSString *path)
 		return S2AS(_l(@"Could not find a unique file name."));
 	}
 	
-	getter = AUTORELEASE([[DCCGetter alloc] initWithInfo: dict withFileName: path
-	  withConnection: connection withDelegate: self]);
+	getter = [[[DCCGetter alloc] initWithInfo: dict withFileName: path
+	  withConnection: connection withDelegate: self] autorelease];
 	
 	[connections replaceObjectAtIndex: number withObject: getter]; 
 	

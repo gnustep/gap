@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jan  7 21:08:21 CST 2004
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -50,23 +51,23 @@
 	
 	if (![dfm fileExistsAtPath: aPath isDirectory: &isDir])
 	{
-		if (![dfm createFileAtPath: aPath contents: AUTORELEASE([NSData new]) attributes: nil])
+		if (![dfm createFileAtPath: aPath contents: [[NSData new] autorelease] attributes: nil])
 		{
-			RELEASE(self);
+			[self release];
 			return nil;
 		}
 	}
 	else if (isDir)
 	{
-		RELEASE(self);
+		[self release];
 		return nil;
 	}
 	
-	connection = RETAIN(aConnection);
+	connection = [aConnection retain];
 	
-	file = RETAIN([NSFileHandle fileHandleForWritingAtPath: aPath]);
+	file = [[NSFileHandle fileHandleForWritingAtPath: aPath] retain];
 	
-	path = RETAIN(aPath);
+	path = [aPath retain];
 	getter = [[DCCReceiveObject alloc] initWithReceiveOfFile: aDict 
 	  withDelegate: self withTimeout: GET_DEFAULT_INT(DCCGetTimeout) 
 	  withUserInfo: nil];
@@ -78,12 +79,13 @@
 - (void)dealloc
 {
 	[cpsTimer invalidate];
-	DESTROY(cpsTimer);
-	RELEASE(getter);
-	RELEASE(path);
-	RELEASE(file);
-	RELEASE(connection);
-	RELEASE(status);
+	[cpsTimer release];
+	cpsTimer = nil;
+	[getter release];
+	[path release];
+	[file release];
+	[connection release];
+	[status release];
 	
 	[super dealloc];
 }
@@ -104,15 +106,15 @@
 	if ([aStatus isEqualToString: DCCStatusTransferring])
 	{
 		[cpsTimer invalidate];
-		RELEASE(cpsTimer);
+		[cpsTimer release];
 		oldTransferredBytes = 0;
-		cpsTimer = RETAIN([NSTimer scheduledTimerWithTimeInterval: 5.0 target: self
-		  selector: @selector(cpsTimer:) userInfo: nil repeats: YES]);
+		cpsTimer = [[NSTimer scheduledTimerWithTimeInterval: 5.0 target: self
+		  selector: @selector(cpsTimer:) userInfo: nil repeats: YES] retain];
 		[delegate startedReceive: self onConnection: connection];
 	}
 		
-	RELEASE(status);
-	status = RETAIN(aStatus);
+	[status release];
+	status = [aStatus retain];
 	
 	return self;
 }
@@ -125,7 +127,8 @@
 - DCCDone: aConnection
 {
 	[cpsTimer invalidate];
-	DESTROY(cpsTimer);
+	[cpsTimer release];
+	cpsTimer = nil;
 	
 	[delegate finishedReceive: self onConnection: connection];
 	

@@ -3,7 +3,7 @@
                           -------------------
     begin                : Wed Jul  2 15:23:24 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Application Project
+                         : (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -75,21 +75,21 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 	if (!(self = [super init])) return nil;
 	
 	delegate = aDelegate;
-	info = RETAIN(aInfo);
-	userInfo = RETAIN(aUserInfo);
+	info = [aInfo retain];
+	userInfo = [aUserInfo retain];
 
 	[delegate DCCInitiated: self];
 	
-	status = RETAIN(DCCStatusConnecting);
+	status = [DCCStatusConnecting retain];
 	[delegate DCCStatusChanged: status forObject: self];
 
 	return self;
 }
 - (void)dealloc
 {
-	DESTROY(status);
-	DESTROY(info);
-	DESTROY(userInfo);
+	[status release];
+	[info release];
+	[userInfo release];
 	delegate = nil;
 	[super dealloc];
 }
@@ -99,8 +99,8 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 }
 - (void)abortConnection
 {	
-	RELEASE(status);
-	status = RETAIN(DCCStatusAborted);
+	[status release];
+	status = [DCCStatusAborted retain];
 	[delegate DCCStatusChanged: status forObject: self];
 
 	if (transport)
@@ -110,11 +110,11 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 }
 - connectionEstablished: (id <NetTransport>)aTransport
 {
-	transport = RETAIN(aTransport);
+	transport = [aTransport retain];
 	[[NetApplication sharedInstance] connectObject: self];
 	
-	RELEASE(status);
-	status = RETAIN(DCCStatusTransferring);
+	[status release];
+	status = [DCCStatusTransferring retain];
 	[delegate DCCStatusChanged: status forObject: self];
 	
 	return self;
@@ -122,7 +122,7 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 - (void)connectionLost
 {
 	[transport close];
-	DESTROY(transport);
+	[transport release];
 	[delegate DCCDone: self];
 }
 - dataReceived: (NSData *)data
@@ -156,11 +156,11 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 	if (!(self = [super initWithDelegate: aDelegate 
 	  withInfo: aInfo withUserInfo: aUserInfo])) return nil;
 	
-	connection = RETAIN([[TCPSystem sharedInstance] 
+	connection = [[[TCPSystem sharedInstance] 
 	  connectNetObjectInBackground: self
 	  toHost: [aInfo objectForKey: DCCInfoHost]
 	  onPort: [[aInfo objectForKey: DCCInfoPort] unsignedShortValue]
-	  withTimeout: seconds]);
+	  withTimeout: seconds] retain];
 	
 	return self;
 }
@@ -169,7 +169,8 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 	[super abortConnection];
 	if (connection)
 	{
-		DESTROY(connection);
+		[connection release];
+		connection = nil;
 		[self connectionLost];
 	}
 }	
@@ -200,13 +201,13 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 	{
 		if ((int)transferredBytes < [[info objectForKey: DCCInfoFileSize] intValue])
 		{
-			RELEASE(status);
-			status = RETAIN(DCCStatusError);
+			[status release];
+			status = [DCCStatusError retain];
 		}
 		else
 		{
-			RELEASE(status);
-			status = RETAIN(DCCStatusDone);
+			[status release];
+			status = [DCCStatusDone retain];
 		}
 		[delegate DCCStatusChanged: status forObject: self];
 	}
@@ -217,18 +218,19 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 {
 	if ([anError isEqualToString: NetclassesErrorTimeout])
 	{
-		RELEASE(status);
-		status = RETAIN(DCCStatusTimeout);
+		[status release];
+		status = [DCCStatusTimeout retain];
 	}
 	else
 	{
-		RELEASE(status);
-		status = RETAIN(DCCStatusError);
+		[status release];
+		status = [DCCStatusError retain];
 	}
 	
 	[delegate DCCStatusChanged: status forObject: self];
 	
-	DESTROY(connection);
+	[connection release];
+	connection = nil;
 	[self connectionLost];
 	
 	return self;
@@ -254,7 +256,7 @@ static id connection_holder = nil;
 }
 - connectionEstablished: (id <NetTransport>)aTransport
 {
-	connection_holder = RETAIN(aTransport);
+	connection_holder = [aTransport retain];
 	return self;
 }
 - dataReceived: (NSData *)data
@@ -307,10 +309,12 @@ static id connection_holder = nil;
 	{
 		[[NetApplication sharedInstance] disconnectObject: port];
 		[timeout invalidate];
-		DESTROY(timeout);
-		DESTROY(port);
-		RELEASE(status);
-		status = RETAIN(DCCStatusTimeout);
+		[timeout release];
+		timeout = nil;
+		[port release];
+		port = nil;
+		[status release];
+		status = [DCCStatusTimeout retain];
 		[delegate DCCStatusChanged: status forObject: self];
 		[self connectionLost];
 	}
@@ -374,7 +378,7 @@ static id connection_holder = nil;
 	id portNum;
 
 	if (!(self = [super initWithDelegate: aDelegate
-	  withInfo: AUTORELEASE([NSDictionary new]) 
+	  withInfo: [[NSDictionary new] autorelease] 
 	  withUserInfo: aUserInfo])) return nil;
 	
 	if (seconds < 0)
@@ -443,10 +447,10 @@ static id connection_holder = nil;
 	
 	if (seconds > 0)
 	{
-		timeout = RETAIN([NSTimer scheduledTimerWithTimeInterval:
+		timeout = [[NSTimer scheduledTimerWithTimeInterval:
 		 (NSTimeInterval)seconds target: port 
 		 selector: @selector(timeoutReceived:)
-		 userInfo: nil repeats: NO]);
+		 userInfo: nil repeats: NO] retain];
 	}
 	
 	blockSize = numBytes;
@@ -459,7 +463,7 @@ static id connection_holder = nil;
 	
 	portNum = [NSNumber numberWithUnsignedShort: [port port]];
 	
-	RELEASE(info);
+	[info release];
 	info = [[NSDictionary alloc] initWithObjectsAndKeys: 
 	  name, DCCInfoFileName,
 	  size, DCCInfoFileSize,
@@ -563,13 +567,13 @@ static id connection_holder = nil;
 	{
 		if ((int)confirmedBytes != [[info objectForKey: DCCInfoFileSize] intValue])
 		{
-			RELEASE(status);
-			status = RETAIN(DCCStatusError);
+			[status release];
+			status = [DCCStatusError retain];
 		}
 		else
 		{
-			RELEASE(status);
-			status = RETAIN(DCCStatusDone);
+			[status release];
+			status = [DCCStatusDone retain];
 		}
 		[delegate DCCStatusChanged: status forObject: self];
 	}
