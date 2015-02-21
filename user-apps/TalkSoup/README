@@ -2,6 +2,7 @@ TalkSoup is a fully-featured IRC client written with the GNUstep framework
 
 ===============================================================================
 Copyright (C) 2003 Andy Ruder
+          (C) 2013-2015 The GNUstep Application Project
 
   TalkSoup is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -268,7 +269,10 @@ that TalkSoup users have.
 =======
 Authors
 =======
-  Main author: Andrew Ruder <aeruder at ksu dot edu>
+  Original author: Andrew Ruder <aeruder at ksu dot edu>
+
+  Riccardo Mottola (rm at gnu dot org)
+       Import into GAP, extensive code cleanup and modernization. New native MacOS port
 
 ==============
 Special Thanks
@@ -308,6 +312,6 @@ Special Thanks
     
 ===============================================================================
 Copyright (C) 2003 by Andy Ruder
-aeruder@ksu.edu
-http://talksoup.aeruder.net
+
+http://gap.nongnu.org/talksoup
 	

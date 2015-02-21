@@ -3,6 +3,7 @@
                           -------------------
     begin                : Fri May  2 16:48:50 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep APplication Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -121,7 +122,7 @@ void handle_notifications(id cont, NSAttributedString *msg, NSString *type,
 	NSAttributedString *typeattr;
 
 	from = [IRCUserComponents(sender) objectAtIndex: 0];
-	typeattr = AUTORELEASE([[NSAttributedString alloc] initWithString: type]);
+	typeattr = [[[NSAttributedString alloc] initWithString: type] autorelease];
 	
 	if (highlit) 
 	{
@@ -195,8 +196,8 @@ NSAttributedString *do_highlighting(id cont, NSString *msg,
 		
 		if (userColor)
 		{
-			object = AUTORELEASE([[NSMutableAttributedString alloc]
-			  initWithAttributedString: from]);
+			object = [[[NSMutableAttributedString alloc]
+			  initWithAttributedString: from] autorelease];
 			[object addAttribute: IRCColor value: userColor range: 
 			  NSMakeRange(0, [object length])];
 			return object;
@@ -227,8 +228,8 @@ static NSInvocation *invoc = nil;
 {
 	if (invoc) return;
 
-	invoc = RETAIN([NSInvocation invocationWithMethodSignature: 
-	  [self methodSignatureForSelector: @selector(commandHighlighting:connection:)]]);
+	invoc = [[NSInvocation invocationWithMethodSignature: 
+	  [self methodSignatureForSelector: @selector(commandHighlighting:connection:)]] retain];
 	[invoc retainArguments];
 	[invoc setTarget: self];
 	[invoc setSelector: @selector(commandHighlighting:connection:)];
@@ -254,7 +255,7 @@ static NSInvocation *invoc = nil;
 		
 		if (!tmp)
 		{
-			y = AUTORELEASE([NSMutableDictionary new]);
+			y = [[NSMutableDictionary new] autorelease];
 		}
 		else
 		{

@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Dec 29 12:11:34 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -115,8 +116,8 @@ NSString *nothingThereYetMessage = nil;
 	NSWindow *tempWindow;
 
 	tempWindow = (NSWindow *)window;
-	window = RETAIN([tempWindow contentView]);
-	RELEASE(tempWindow);
+	window = [[tempWindow contentView] retain];
+	[tempWindow autorelease];
 	[window setAutoresizingMask:
 	  NSViewWidthSizable | NSViewHeightSizable];
 
@@ -135,10 +136,10 @@ NSString *nothingThereYetMessage = nil;
 
 	aClass = [NSColor class];
 
-	RELEASE(extraNames);
+	[extraNames release];
 	extraNames = (!(temp = get_pref(HighlightingExtraWords))) ? 
 	  [NSMutableArray new] : 
-	  RETAIN([NSMutableArray arrayWithArray: temp]);
+	  [[NSMutableArray arrayWithArray: temp] retain];
 	[extraTable reloadData];
 
 	temp = get_pref(HighlightingShouldDoNick);
@@ -157,9 +158,9 @@ NSString *nothingThereYetMessage = nil;
 }
 - (void)dealloc
 {
-	RELEASE(preferencesIcon);
-	DESTROY(extraNames);
-	DESTROY(window);
+	[preferencesIcon release];
+	[extraNames release];
+	[window release];
 	[super dealloc];
 }
 - (void)highlightingHit: (id)sender
@@ -249,7 +250,7 @@ NSString *nothingThereYetMessage = nil;
 		[extraNames removeObjectAtIndex: rowIndex + 1];
 	}
 	
-	set_pref(HighlightingExtraWords, AUTORELEASE([extraNames copy]));
+	set_pref(HighlightingExtraWords, [[extraNames copy] autorelease]);
 	[aTableView reloadData];
 }
 @end
