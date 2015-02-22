@@ -44,7 +44,7 @@
 #define AS2S(_x) ( (_x) ? (NSString *)[(_x) string] : (NSString *)nil )
 
 @interface NetclassesInput (PrivateNetclassesInput)
-- removeConnection: aConnection;
+- (NetclassesInput *)removeConnection: aConnection;
 @end
 
 @implementation NetclassesInput (PrivateNetclassesInput)
