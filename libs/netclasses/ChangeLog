@@ -1,3 +1,8 @@
+2015-02-22 Riccardo Mottola <rm@gnu.org>
+
+	* Source/IRCObject.m (contains_a_space)
+	Remove unusd function contains_a_space.
+
 2015-01-05 Riccardo Mottola <rm@gnu.org>
 
 	* Source/NetBase.h

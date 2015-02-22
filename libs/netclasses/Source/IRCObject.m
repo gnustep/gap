@@ -3,7 +3,7 @@
                           -------------------
     begin                : Thu May 30 22:06:25 UTC 2002
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013 The GNUstep Application Project
+                         : (C) 2013-2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -276,13 +276,6 @@ static inline BOOL is_numeric_command(NSString *aString)
 	}
 	
 	return NO;
-}
-
-static inline BOOL contains_a_space(NSString *aString)
-{
-	return ([aString rangeOfCharacterFromSet: 
-	  [NSCharacterSet whitespaceCharacterSet]].location == NSNotFound) ?
-	  NO : YES;
 }	
 
 static inline NSString *string_to_string(NSString *aString, NSString *delim)
