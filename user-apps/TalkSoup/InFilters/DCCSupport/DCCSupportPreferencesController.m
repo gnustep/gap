@@ -48,7 +48,7 @@
 	id bundle, path;
 
 	if (!(self = [super init])) return nil;
-
+  NSLog(@"bundle pref init");
 	bundle = [NSBundle bundleForClass: [DCCSupport class]];
 
 	if (![bundle loadNibFile: @"DCCSupportPreferences"
