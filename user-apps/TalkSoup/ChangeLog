@@ -3,6 +3,13 @@
 	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
 	Do not set description if nil.
 
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
+	Create AttStr directly.
+
+	* InFilters/DCCSupport/DCCSupport.m
+	* InFilters/DCCSupport/DCCSupport.h
+	Explicit parameter type.
+
 2015-02-22 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/English.lproj/GeneralPreferences.gorm

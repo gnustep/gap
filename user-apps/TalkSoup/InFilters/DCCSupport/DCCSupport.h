@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jul 2 18:58:30 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -16,6 +17,7 @@
  ***************************************************************************/
 
 @class DCCSupport;
+@class DCCSender;
 
 @class NSBundle, NSString;
 
@@ -63,10 +65,10 @@ extern NSString *DCCDefault;
 + (id)defaultDefaultsForKey: aKey;
 + (void)setDefaultsObject: aObject forKey: aKey;
 
-- (void)startedReceive: dcc onConnection: aConnection;
-- (void)finishedReceive: dcc onConnection: aConnection;
-- (void)startedSend: dcc onConnection: aConnection;
-- (void)finishedSend: dcc onConnection: aConnection;
+- (void)startedReceive: (DCCSender *)dcc onConnection: aConnection;
+- (void)finishedReceive: (DCCSender *)dcc onConnection: aConnection;
+- (void)startedSend: (DCCSender *)dcc onConnection: aConnection;
+- (void)finishedSend: (DCCSender *)dcc onConnection: aConnection;
 - (NSMutableArray *)getConnectionTable: aConnection;
 @end
 
