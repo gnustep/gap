@@ -254,10 +254,13 @@ static NSString *big_description = nil;
 	[availableTable setNeedsDisplay: YES];
 	[loadedTable setNeedsDisplay: YES];
 
-	[[descriptionText textStorage] setAttributedString: 
-	  S2AS(big_description)];
-	[descriptionText scrollPoint: NSMakePoint(0, 0)];
+        if(big_description)
+          {
+            [[descriptionText textStorage] setAttributedString: S2AS(big_description)];
+            [descriptionText scrollPoint: NSMakePoint(0, 0)];
+          }
 }
+        
 - (NSAttributedString *)descriptionForSelected: (NSInteger)row
 {
 	id object = nil;

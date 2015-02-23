@@ -1,6 +1,6 @@
 2015-02-23 Riccardo Mottola <rm@gnu.org>
 
-	* InFilters/DCCSupport/DCCSupportPreferencesController.m
+	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
 	Do not set description if nil.
 
 2015-02-22 Riccardo Mottola <rm@gnu.org>
