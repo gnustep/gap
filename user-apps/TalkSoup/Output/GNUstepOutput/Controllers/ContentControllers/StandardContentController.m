@@ -404,8 +404,7 @@
 	
 	if (hasEnd)
 	{
-		[controller appendAttributedString: [NSMutableAttributedString
-		  attributedStringWithGNUstepOutputPreferences: @"\n"]];
+		[controller appendAttributedString: [[[NSMutableAttributedString alloc] initWithString: @"\n"] autorelease]];
 	}
 }
 - (void)putMessageInAll: aMessage
