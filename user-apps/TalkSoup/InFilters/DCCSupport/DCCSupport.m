@@ -175,7 +175,7 @@ static NSString *unique_path(NSString *path)
 {
 	return [default_dict objectForKey: aKey];
 }
-- (void)startedSend: (id)dcc onConnection: aConnection
+- (void)startedSend: (DCCSender *)dcc onConnection: aConnection
 {
 	id path = [dcc path];
 	id nick = [dcc receiver];
@@ -184,7 +184,7 @@ static NSString *unique_path(NSString *path)
 	  BuildAttributedFormat(_l(@"Transfer of %@ to %@ initiated."), path, nick)
 	  onConnection: aConnection];
 }	
-- (void)finishedSend: (id)dcc onConnection: aConnection
+- (void)finishedSend: (DCCSender *)dcc onConnection: aConnection
 {
 	id status = [dcc status];
 	id cps = [NSString stringWithFormat: @"%d", [dcc cps]];
@@ -219,7 +219,7 @@ static NSString *unique_path(NSString *path)
 
 	[connections removeObjectIdenticalTo: dcc];
 }
-- (void)startedReceive: (id)dcc onConnection: aConnection
+- (void)startedReceive: (DCCSender *)dcc onConnection: aConnection
 {
 	NSDictionary *info = [dcc info];
 	id nick = [info objectForKey: DCCInfoNick];
@@ -229,7 +229,7 @@ static NSString *unique_path(NSString *path)
 	  BuildAttributedFormat(_l(@"Transfer of %@ from %@ initiated."),
 	  filename, nick) onConnection: aConnection];
 }
-- (void)finishedReceive: (id)dcc onConnection: aConnection
+- (void)finishedReceive: (DCCSender *)dcc onConnection: aConnection
 {
 	id status = [dcc status];
 	NSDictionary *info = [dcc info];
