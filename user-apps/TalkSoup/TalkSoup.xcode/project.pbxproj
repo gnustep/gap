@@ -250,7 +250,8 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = text.plist;
-			path = BigServerList.plist;
+			name = BigServerList.plist;
+			path = Output/GNUstepOutput/AllLanguages/BigServerList.plist;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -267,7 +268,8 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = text.plist;
-			path = ServerList.plist;
+			name = ServerList.plist;
+			path = Output/GNUstepOutput/AllLanguages/ServerList.plist;
 			refType = 4;
 			sourceTree = "<group>";
 		};
