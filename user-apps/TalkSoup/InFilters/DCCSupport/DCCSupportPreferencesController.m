@@ -43,12 +43,12 @@
 #define SET_DEFAULT_INT(_x, _y) set_default(_x, ([NSString stringWithFormat: @"%d", _y]))
 
 @implementation DCCSupportPreferencesController
-- init
+- (id)init
 {
 	id bundle, path;
 
 	if (!(self = [super init])) return nil;
-  NSLog(@"bundle pref init");
+
 	bundle = [NSBundle bundleForClass: [DCCSupport class]];
 
 	if (![bundle loadNibFile: @"DCCSupportPreferences"
@@ -79,6 +79,7 @@
 
 	return self;
 }
+
 - (void)awakeFromNib
 {
 	NSWindow *tempWindow;
@@ -91,6 +92,7 @@
 
 	[self reloadData];
 }
+
 - (void)reloadData
 {
 	id path1 = get_default(DCCCompletedDirectory);
@@ -166,6 +168,7 @@
 		[self reloadData];
 	}
 }
+
 - (void)changeDownloadHit: (NSButton *)sender
 {
 	id openPanel;
