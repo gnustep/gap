@@ -1937,7 +1937,8 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
-			path = exec_helper.m;
+			name = exec_helper.m;
+			path = Output/GNUstepOutput/Tools/exec_helper.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
