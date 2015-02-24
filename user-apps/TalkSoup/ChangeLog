@@ -1,5 +1,10 @@
 2015-02-24 Riccardo Mottola <rm@gnu.org>
 
+	* Output/GNUstepOutput/Tools/dns_helper.m
+	Look for all addresses for the first IPv4 looking one
+
+2015-02-24 Riccardo Mottola <rm@gnu.org>
+
 	* TalkSoupBundles/Functions.m
 	* TalkSoupBundles/TalkSoupMisc.h
 	* InFilters/DCCSupport/DCCSupport.m

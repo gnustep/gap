@@ -36,21 +36,36 @@ int main(int argc, char **argv, char **env)
 	NSAutoreleasePool *apr;
 	NSString *notname, *regname, *address, *reverse, *hostname;
 	NSHost *aHost, *aHost2;
+        NSArray *addresses;
+        unsigned i;
 
 	signal(SIGPIPE, SIG_IGN);
 	if (argc < 4) 
 		return 1;
 
-    apr = [NSAutoreleasePool new];
-
+        apr = [NSAutoreleasePool new];
 	regname = [NSString stringWithCString: argv[1]];
 	notname = [NSString stringWithCString: argv[2]];
 	hostname = [NSString stringWithCString: argv[3]];
 
-	NSLog(@"Performing DNS lookup for %@", hostname);
 	aHost = [NSHost hostWithName: hostname];
-	address = [aHost address];
+	addresses = [aHost addresses];
 	reverse = nil;
+        address = nil;
+        i = 0;
+        // we scan for the first address looking as IPv4
+        while (i < [addresses count])
+          {
+            NSString *a;
+
+            a = [addresses objectAtIndex:i];
+            if ([a rangeOfString:@"."].location != NSNotFound)
+              {
+                address = a;
+                break;
+              }
+            i++;
+          }
 	if (address)
 	{
 		aHost2 = [NSHost hostWithAddress: address];
