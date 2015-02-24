@@ -258,7 +258,8 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = text.plist;
-			path = Defaults.plist;
+			name = Defaults.plist;
+			path = Output/GNUstepOutput/AllLanguages/Defaults.plist;
 			refType = 4;
 			sourceTree = "<group>";
 		};
