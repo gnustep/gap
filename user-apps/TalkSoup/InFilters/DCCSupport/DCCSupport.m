@@ -324,16 +324,18 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCABORT: (NSString *)command connection: (id)connection
 {
-	id x, connections;
+  NSArray *arr;
+  id x;
+  id connections;
 	int val = -1;
 	
 	connections = [self getConnectionTable: connection];
 	
-	x = [command separateIntoNumberOfArguments: 2];
+	arr = [command separateIntoNumberOfArguments: 2];
 	
-	if ([x count])
+	if ([arr count])
 	{
-		val = [[x objectAtIndex: 0] intValue];
+		val = [[arr objectAtIndex: 0] intValue];
 		if (val < 0) val = 0 - val;
 	}
 	
@@ -364,10 +366,11 @@ static NSString *unique_path(NSString *path)
 }		  
 - (NSAttributedString *)commandDCCPORTRANGE: (NSString *)command connection: (id)connection
 {
-	id x;
+  NSArray *arr;
+  NSMutableArray *mArr;
 
-	x = [command separateIntoNumberOfArguments: 1];
-	if ([x count] == 0)
+	arr = [command separateIntoNumberOfArguments: 1];
+	if ([arr count] == 0)
 	{
 		return BuildAttributedString(_l(@"Usage: /dcc portrange <low>-<high>" @"\n"
 		  @"Sets the range of allowable ports for sending files.  If <low> and "
@@ -377,20 +380,20 @@ static NSString *unique_path(NSString *path)
 		  @"Current portrange: "), get_default(DCCPortRange));
 	}
 	
-	x = [NSMutableArray arrayWithArray: 
-	  [[x objectAtIndex: 0] componentsSeparatedByString: @"-"]];
-	[x removeObject: @""];
+	mArr = [NSMutableArray arrayWithArray: 
+	  [[arr objectAtIndex: 0] componentsSeparatedByString: @"-"]];
+	[mArr removeObject: @""];
 
-	if ([x count] == 0)
+	if ([mArr count] == 0)
 	{
 		set_default(DCCPortRange, @"");
 	}
-	else if ([x count] == 1)
+	else if ([mArr count] == 1)
 	{
 		int x1;
 		id tmp;
 		
-		x1 = [[x objectAtIndex: 0] intValue];
+		x1 = [[mArr objectAtIndex: 0] intValue];
 		if (x1 < 0)
 		{
 			set_default(DCCPortRange, @"");
@@ -404,13 +407,13 @@ static NSString *unique_path(NSString *path)
 			set_default(DCCPortRange, tmp);
 		}
 	}
-	else if ([x count] >= 2)
+	else if ([mArr count] >= 2)
 	{
 		int x1, x2;
 		id tmp;
 
-		x1 = [[x objectAtIndex: 0] intValue];
-		x2 = [[x objectAtIndex: 1] intValue];
+		x1 = [[mArr objectAtIndex: 0] intValue];
+		x2 = [[mArr objectAtIndex: 1] intValue];
 
 		if (x1 < 0 || x2 < 0)
 		{
@@ -439,7 +442,7 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCBLOCKSIZE: (NSString *)command connection: (id)connection
 {
-	id x;
+	NSArray *x;
 	int val;
 	
 	x = [command separateIntoNumberOfArguments: 2];
@@ -462,7 +465,7 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCGETTIMEOUT: (NSString *)command connection: (id)connection
 {
-	id x;
+	NSArray *x;
 	int val;
 	
 	x = [command separateIntoNumberOfArguments: 2];
@@ -484,7 +487,7 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCSENDTIMEOUT: (NSString *)command connection: (id)connection
 {
-	id x;
+	NSArray *x;
 	int val;
 	
 	x = [command separateIntoNumberOfArguments: 2];
@@ -506,7 +509,7 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCSEND: (NSString *)command connection: (id)connection
 {
-	id x;
+	NSArray *x;
 	id user;
 	id path;
 	id dfm;
@@ -628,7 +631,7 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCGET: (NSString *)command connection: (id)connection
 {
-	id x;
+	NSArray *x;
 	id path;
 	NSDictionary *dict;
 	int number;
@@ -667,6 +670,7 @@ static NSString *unique_path(NSString *path)
 	dfm = [NSFileManager defaultManager];
 	if ([path length] == 0)
 	{
+      NSString *x;
 		path = [dict objectForKey: DCCInfoFileName];
 		x = get_default(DCCDownloadDirectory);
 		if (![dfm fileExistsAtPath: x isDirectory: &isDir] || !isDir)
@@ -693,7 +697,7 @@ static NSString *unique_path(NSString *path)
 }
 - (NSAttributedString *)commandDCCSETDIR: (NSString *)command connection: (id)connection
 {
-	id x;
+	NSArray *x;
 	id dir;
 	BOOL force = NO;
 	NSEnumerator *iter;
@@ -805,7 +809,7 @@ static NSString *unique_path(NSString *path)
 }	
 - (NSAttributedString *)commandDCC: (NSString *)command connection: (id)connection
 {
-	id x = [command separateIntoNumberOfArguments: 2];
+	NSArray *x = [command separateIntoNumberOfArguments: 2];
 	id arg = @"";
 	int count;
 	SEL sel;

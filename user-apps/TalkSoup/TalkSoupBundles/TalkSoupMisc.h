@@ -3,6 +3,7 @@
                           -------------------
     begin                : Mon Apr  7 21:45:49 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -25,7 +26,7 @@ NSArray *PossibleUserColors(void);
 NSString *IRCColorFromUserColor(NSString *string);
 
 @interface NSString (Separation)
-- separateIntoNumberOfArguments: (int)num;
+- (NSArray *)separateIntoNumberOfArguments: (int)num;
 @end
 
 @interface NSMutableAttributedString (AttributesAppend)

@@ -125,12 +125,11 @@ static NSArray *get_first_word(NSString *arg)
 }
 
 @implementation NSString (Separation)
-- separateIntoNumberOfArguments: (int)num
+- (NSArray *)separateIntoNumberOfArguments: (int)num
 {
 	NSMutableArray *array = [[NSMutableArray new] autorelease];
 	id object;
-	int temp;
-	id string = self;
+	NSString *string = self;
 	
 	if (num == 0)
 	{
@@ -149,6 +148,7 @@ static NSArray *get_first_word(NSString *arg)
 	
 	while (num != 1)
 	{
+        unsigned temp;
 		object = get_first_word(string);
 		temp = [object count];
 		switch(temp)

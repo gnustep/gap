@@ -1,3 +1,13 @@
+2015-02-24 Riccardo Mottola <rm@gnu.org>
+
+	* TalkSoupBundles/Functions.m
+	* TalkSoupBundles/TalkSoupMisc.h
+	* InFilters/DCCSupport/DCCSupport.m
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Source/commands.m
+	Explicit return types to NSArray.
+
 2015-02-23 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
