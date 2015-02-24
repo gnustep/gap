@@ -251,7 +251,7 @@
 		857EECD21A8FCED600EEC00A /* commands.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = commands.m; path = Source/commands.m; sourceTree = "<group>"; };
 		857EECD31A8FCED600EEC00A /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
 		857EECE71A8FD28400EEC00A /* NetclassesInput.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetclassesInput.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		857EECE81A8FD28400EEC00A /* NetclassesInput-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NetclassesInput-Info.plist"; path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/Input/NetclassesInput/NetclassesInput-Info.plist"; sourceTree = "<absolute>"; };
+		857EECE81A8FD28400EEC00A /* NetclassesInput-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NetclassesInput-Info.plist"; path = "Input/NetclassesInput/NetclassesInput-Info.plist"; sourceTree = "<group>"; };
 		857EECEF1A8FD30A00EEC00A /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Functions.h; path = Input/NetclassesInput/Functions.h; sourceTree = "<group>"; };
 		857EECF01A8FD30A00EEC00A /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Functions.m; path = Input/NetclassesInput/Functions.m; sourceTree = "<group>"; };
 		857EECF11A8FD30A00EEC00A /* main.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = main.h; path = Input/NetclassesInput/main.h; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 		857EECF31A8FD30A00EEC00A /* NetclassesInputSendThenDieTransport.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NetclassesInputSendThenDieTransport.h; path = Input/NetclassesInput/NetclassesInputSendThenDieTransport.h; sourceTree = "<group>"; };
 		857EECF41A8FD30A00EEC00A /* NetclassesInputSendThenDieTransport.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = NetclassesInputSendThenDieTransport.m; path = Input/NetclassesInput/NetclassesInputSendThenDieTransport.m; sourceTree = "<group>"; };
 		857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TalkSoupBundles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		857EED031A8FD35800EEC00A /* TalkSoupBundles-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TalkSoupBundles-Info.plist"; path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/TalkSoupBundles/TalkSoupBundles-Info.plist"; sourceTree = "<absolute>"; };
+		857EED031A8FD35800EEC00A /* TalkSoupBundles-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TalkSoupBundles-Info.plist"; path = "TalkSoupBundles/TalkSoupBundles-Info.plist"; sourceTree = "<group>"; };
 		857EED081A8FD3ED00EEC00A /* Dummy.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Dummy.h; path = TalkSoupBundles/Dummy.h; sourceTree = "<group>"; };
 		857EED091A8FD3ED00EEC00A /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Dummy.m; path = TalkSoupBundles/Dummy.m; sourceTree = "<group>"; };
 		857EED0A1A8FD3ED00EEC00A /* Encodings.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Encodings.h; path = TalkSoupBundles/Encodings.h; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 		857EED111A8FD3ED00EEC00A /* TalkSoupProtocols.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TalkSoupProtocols.h; path = TalkSoupBundles/TalkSoupProtocols.h; sourceTree = "<group>"; };
 		857EED201A8FD44600EEC00A /* netclasses.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = netclasses.framework; path = /Users/multix/Documents/code/gap/libs/netclasses/build/Development/netclasses.framework; sourceTree = "<absolute>"; };
 		857EED3A1A8FE01B00EEC00A /* GNUstepOutput.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GNUstepOutput.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		857EED3B1A8FE01B00EEC00A /* GNUstepOutput-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GNUstepOutput-Info.plist"; path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/Output/GNUstepOutput/GNUstepOutput-Info.plist"; sourceTree = "<absolute>"; };
+		857EED3B1A8FE01B00EEC00A /* GNUstepOutput-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GNUstepOutput-Info.plist"; path = "Output/GNUstepOutput/GNUstepOutput-Info.plist"; sourceTree = "<group>"; };
 		857EED4D1A8FE0D700EEC00A /* GNUstepOutput.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = GNUstepOutput.h; path = Output/GNUstepOutput/GNUstepOutput.h; sourceTree = "<group>"; };
 		857EED4E1A8FE0D700EEC00A /* GNUstepOutput.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = GNUstepOutput.m; path = Output/GNUstepOutput/GNUstepOutput.m; sourceTree = "<group>"; };
 		857EED551A8FE18800EEC00A /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionController.h; path = Output/GNUstepOutput/Controllers/ConnectionController.h; sourceTree = "<group>"; };
@@ -430,6 +430,7 @@
 		080E96DDFE201D6D7F000001 /* TalkSoupBundles */ = {
 			isa = PBXGroup;
 			children = (
+				857EED031A8FD35800EEC00A /* TalkSoupBundles-Info.plist */,
 				857EED081A8FD3ED00EEC00A /* Dummy.h */,
 				857EED091A8FD3ED00EEC00A /* Dummy.m */,
 				857EED0A1A8FD3ED00EEC00A /* Encodings.h */,
@@ -486,9 +487,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				857EECE81A8FD28400EEC00A /* NetclassesInput-Info.plist */,
-				857EED031A8FD35800EEC00A /* TalkSoupBundles-Info.plist */,
-				857EED3B1A8FE01B00EEC00A /* GNUstepOutput-Info.plist */,
 			);
 			name = TalkSoup;
 			sourceTree = "<group>";
@@ -564,6 +562,7 @@
 		857EECEA1A8FD29800EEC00A /* NetclassesInput */ = {
 			isa = PBXGroup;
 			children = (
+				857EECE81A8FD28400EEC00A /* NetclassesInput-Info.plist */,
 				857EECEF1A8FD30A00EEC00A /* Functions.h */,
 				857EECF01A8FD30A00EEC00A /* Functions.m */,
 				857EECF11A8FD30A00EEC00A /* main.h */,
@@ -577,6 +576,7 @@
 		857EED311A8FDE7800EEC00A /* GNUstepOutput */ = {
 			isa = PBXGroup;
 			children = (
+				857EED3B1A8FE01B00EEC00A /* GNUstepOutput-Info.plist */,
 				8523604B1A968AE700836C2E /* Tools */,
 				85F94DE41A90087500B00DCB /* Resources */,
 				857EED521A8FE15200EEC00A /* Controllers */,

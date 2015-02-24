@@ -31,7 +31,7 @@
 - (void)awakeFromNib
 {
 	[window setDelegate: self];
-	[window makeKeyAndOrderFront: nil];
+	[window makeKeyAndOrderFront: self];
 	[window makeFirstResponder: window];
 	[window makeFirstResponder: typeView];
 	[self retain];
@@ -45,7 +45,7 @@
 }
 - (void)returnHit: (NSTextField *)sender
 {
-	id components;
+	NSArray *components;
 	id x;
 	
 	components = [[typeView stringValue] separateIntoNumberOfArguments: 2];

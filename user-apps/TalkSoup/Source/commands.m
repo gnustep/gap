@@ -55,7 +55,7 @@
 }
 - (NSAttributedString *)commandLoad: (NSString *)args connection: (id)connection
 {
-	id x = [args separateIntoNumberOfArguments: 3];
+	NSArray *x = [args separateIntoNumberOfArguments: 3];
 	id first, second;
 	id key;
 	id array = nil;
@@ -122,10 +122,10 @@
 }
 - (NSAttributedString *)commandUnload: (NSString *)args connection: (id)connection
 {
-	id x = [args separateIntoNumberOfArguments: 3];
+	NSArray *x = [args separateIntoNumberOfArguments: 3];
 	id first, second;
 	id key;
-	id array = nil;
+	NSArray *array = nil;
 	BOOL isIn = NO;
 	
 	if ([x count] < 1)
@@ -227,8 +227,8 @@
 }
 - (NSAttributedString *)commandPart: (NSString *)args connection: connection
 {
-	id x = [args separateIntoNumberOfArguments: 2];
-	id name, msg;
+	NSArray *x = [args separateIntoNumberOfArguments: 2];
+	NSString *name, *msg;
 	
 	if (!connection) return NO_CONNECT;
 	
@@ -329,7 +329,7 @@
 }  		  
 - (NSAttributedString *)commandCtcp: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id ctcp;
 	id args;
 	id who;
@@ -356,7 +356,7 @@
 }	
 - (NSAttributedString *)commandVersion: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id who;
 	
 	array = [command separateIntoNumberOfArguments: 2];
@@ -379,7 +379,7 @@
 }
 - (NSAttributedString *)commandClientinfo: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id who;
 	
 	if (!connection) return NO_CONNECT;
@@ -402,7 +402,7 @@
 }
 - (NSAttributedString *)commandUserinfo: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id who;
 	
 	if (!connection) return NO_CONNECT;
@@ -425,7 +425,7 @@
 }
 - (NSAttributedString *)commandPing: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id who;
 	id arg = nil;
 	
@@ -449,7 +449,7 @@
 }
 - (NSAttributedString *)commandTopic: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id who;
 	id arg = nil;
 	
@@ -477,7 +477,7 @@
 }
 - (NSAttributedString *)commandKick: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id who;
 	id arg = nil;
 	id chan;
@@ -506,7 +506,7 @@
 }
 - (NSAttributedString *)commandRaw: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id arg = nil;
 	
 	if (!connection) return NO_CONNECT;
@@ -561,7 +561,7 @@
 }
 - (NSAttributedString *)commandEncoding: (NSString *)command connection: connection
 {
-	id array;
+	NSArray *array;
 	id arg = nil;
 	NSStringEncoding enc = 0;
 	

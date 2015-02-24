@@ -268,8 +268,8 @@ static void send_message(NSString *command, NSString *name, id connection)
 	/* First check for aliases */
 	if ([aCommand hasPrefix: @"/"] && ![aCommand hasPrefix: @"//"])
 	{
-		id tempCommand;
-		id array;
+		NSString *tempCommand;
+		NSArray *array;
 
 		tempCommand = [aCommand substringFromIndex: 1];
 		array = [tempCommand separateIntoNumberOfArguments: 2];
@@ -305,7 +305,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 		id substring;
 		id arguments;
 		SEL commandSelector;
-		id array;
+		NSArray *array;
 		id invoc;
 
 		aCommand = [aCommand substringFromIndex: 1];
@@ -1083,7 +1083,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 }
 - ircCommandQuit: (NSString *)args
 {
-	id x = [args separateIntoNumberOfArguments: 1];
+	NSArray *x = [args separateIntoNumberOfArguments: 1];
 	id connection = [controller connection];
 	id msg;
 
@@ -1097,7 +1097,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 }
 - ircCommandPart: (NSString *)args
 {
-	id x = [args separateIntoNumberOfArguments: 2];
+	NSArray *x = [args separateIntoNumberOfArguments: 2];
 	id name, msg;
 	id connection = [controller connection];
 	
@@ -1142,7 +1142,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 }	
 - ircCommandScrollback: (NSString *)command
 {
-	id x = [command separateIntoNumberOfArguments: 2];
+	NSArray *x = [command separateIntoNumberOfArguments: 2];
 	int length;
 	
 	if ([x count] == 0)
@@ -1165,7 +1165,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 }
 - ircCommandAlias: (NSString *)command
 {
-	id x = [command separateIntoNumberOfArguments: 2];
+	NSArray *x = [command separateIntoNumberOfArguments: 2];
 	id aliases = [_PREFS_ preferenceForKey: GNUstepOutputAliases];
 	id alias, to;
 
@@ -1234,7 +1234,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 }
 - ircCommandUnalias: (NSString *)command
 {
-	id x = [command separateIntoNumberOfArguments: 2];
+	NSArray *x = [command separateIntoNumberOfArguments: 2];
 	id aliases = [_PREFS_ preferenceForKey: GNUstepOutputAliases];
 	id alias;
 
@@ -1290,7 +1290,7 @@ static void send_message(NSString *command, NSString *name, id connection)
 }
 - ircCommandExec: (NSString *)command
 {
-	id x = [command separateIntoNumberOfArguments: 1];
+	NSArray *x = [command separateIntoNumberOfArguments: 1];
 	id newcommand = nil;
 	id destination = nil;
 
