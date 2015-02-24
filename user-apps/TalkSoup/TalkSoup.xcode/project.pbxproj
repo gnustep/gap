@@ -377,7 +377,8 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
-			path = dns_helper.m;
+			name = dns_helper.m;
+			path = Output/GNUstepOutput/Tools/dns_helper.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
