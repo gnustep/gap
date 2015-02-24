@@ -98,6 +98,7 @@
 				857EED3A1A8FE01B00EEC00A,
 				8503F5AC1A9694AF00007EE7,
 				857E36441A9C655C0036D65C,
+				8590829B1A9D229400C99985,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -132,6 +133,7 @@
 				857EED391A8FE01B00EEC00A,
 				8503F5AB1A9694AF00007EE7,
 				857E36431A9C655C0036D65C,
+				8590829A1A9D229400C99985,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -341,6 +343,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				8590830E1A9D232900C99985,
 				8503F5B91A969E9C00007EE7,
 			);
 			isa = PBXCopyFilesBuildPhase;
@@ -348,6 +351,7 @@
 		};
 		8503F5AF1A96951200007EE7 = {
 			children = (
+				8590829F1A9D22C500C99985,
 				8503F5C71A96A3BA00007EE7,
 			);
 			isa = PBXGroup;
@@ -1876,6 +1880,81 @@
 		};
 		859081E81A9D04C800C99985 = {
 			fileRef = 859081E51A9D04C800C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859082981A9D229400C99985 = {
+			buildActionMask = 2147483647;
+			files = (
+				859082A01A9D22C500C99985,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		859082991A9D229400C99985 = {
+			buildActionMask = 2147483647;
+			files = (
+				859082A11A9D22E900C99985,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8590829A1A9D229400C99985 = {
+			buildPhases = (
+				859082981A9D229400C99985,
+				859082991A9D229400C99985,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				INSTALL_PATH = /usr/local/bin;
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = exec_helper;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = exec_helper;
+			productName = exec_helper;
+			productReference = 8590829B1A9D229400C99985;
+			productType = "com.apple.product-type.tool";
+		};
+		8590829B1A9D229400C99985 = {
+			explicitFileType = "compiled.mach-o.executable";
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = exec_helper;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8590829F1A9D22C500C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = exec_helper.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859082A01A9D22C500C99985 = {
+			fileRef = 8590829F1A9D22C500C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859082A11A9D22E900C99985 = {
+			fileRef = 29B97325FDCFA39411CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8590830E1A9D232900C99985 = {
+			fileRef = 8590829B1A9D229400C99985;
 			isa = PBXBuildFile;
 			settings = {
 			};
