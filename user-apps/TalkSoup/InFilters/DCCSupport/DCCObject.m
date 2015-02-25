@@ -69,7 +69,7 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 }
 
 @implementation DCCObject
-- initWithDelegate: aDelegate withInfo: (NSDictionary *)aInfo
+- (DCCObject *)initWithDelegate: aDelegate withInfo: (NSDictionary *)aInfo
     withUserInfo: (NSDictionary *)aUserInfo
 {
 	if (!(self = [super init])) return nil;
@@ -153,7 +153,7 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 		   withTimeout: (int)seconds
 		   withUserInfo: (NSDictionary *)aUserInfo
 {
-	if (!(self = [super initWithDelegate: aDelegate 
+	if (!(self = (DCCReceiveObject *)[super initWithDelegate: aDelegate 
 	  withInfo: aInfo withUserInfo: aUserInfo])) return nil;
 	
 	connection = [[[TCPSystem sharedInstance] 
@@ -188,13 +188,15 @@ NSString *BuildDCCSendRequest(NSDictionary *info)
 
 	return self;
 }
+
 - connectionEstablished: (id <NetTransport>)aTransport
 {
-	DESTROY(connection);
+	[connection release];
 	[super connectionEstablished: aTransport];
 	
 	return self;
 }
+
 - (void)connectionLost
 {
 	if ([status isEqualToString: DCCStatusTransferring])
@@ -292,7 +294,7 @@ static id connection_holder = nil;
 {
 	[super newConnection];
 	[delegate connectionEstablished: connection_holder];
-	DESTROY(connection_holder);
+	[connection_holder release];
 	return self;
 }
 - timeoutReceived: (NSTimer *)aTimer
@@ -377,7 +379,7 @@ static id connection_holder = nil;
 	id address;
 	id portNum;
 
-	if (!(self = [super initWithDelegate: aDelegate
+	if (!(self = (DCCSendObject *)[super initWithDelegate: aDelegate
 	  withInfo: [[NSDictionary new] autorelease] 
 	  withUserInfo: aUserInfo])) return nil;
 	

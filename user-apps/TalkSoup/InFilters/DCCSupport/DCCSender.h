@@ -21,40 +21,27 @@
 #define DCC_SENDER_H
 
 #import <Foundation/NSObject.h>
-#include <stdint.h>
+#import "DCCTransfer.h"
 
 @class DCCSendObject, NSFileHandle, NSString, NSString;
 @class NSTimer, NSDictionary, NSHost;
 
-@interface DCCSender : NSObject
-	{
-		NSFileHandle *file;
-		NSString *path;
-		DCCSendObject *sender;
-		NSString *status;
-		NSString *receiver;
-		id connection;
-		id delegate;
-		NSTimer *cpsTimer;
-		int cps;
-		uint32_t oldTransferredBytes;
-	}
-- initWithFilename: (NSString *)path 
+@interface DCCSender : DCCTransfer
+{
+  DCCSendObject *sender;
+  NSString *receiver;
+}
+
+- (DCCSender *)initWithFilename: (NSString *)path 
     withConnection: aConnection to: (NSString *)receiver withDelegate: aDel;
 
-- (NSString *)status;
 
 - (NSDictionary *)info;
 
-- (id)localHost;
-- (id)remoteHost;
-
 - (NSString *)percentDone;
 
-- (int)cps;
 - cpsTimer: (NSTimer *)aTimer;
 
-- (NSString *)path;
 - (NSString *)receiver;
 
 - (void)abortConnection;

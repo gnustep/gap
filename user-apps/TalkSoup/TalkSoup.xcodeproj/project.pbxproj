@@ -119,6 +119,7 @@
 		85FF57881A9DE44C00DE8F46 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		85FF57A11A9DE45D00DE8F46 /* netclasses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED201A8FD44600EEC00A /* netclasses.framework */; };
 		85FF57A91A9DE68300DE8F46 /* Highlighting-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85FF57A81A9DE68300DE8F46 /* Highlighting-Info.plist */; };
+		85FF57AE1A9DEB5A00DE8F46 /* DCCTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF57AD1A9DEB5A00DE8F46 /* DCCTransfer.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -409,6 +410,8 @@
 		85FF57421A9DE1BF00DE8F46 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Defaults.plist; path = InFilters/Highlighting/AllLanguages/Defaults.plist; sourceTree = "<group>"; };
 		85FF57431A9DE1BF00DE8F46 /* highlighting_prefs.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = highlighting_prefs.tiff; path = InFilters/Highlighting/AllLanguages/highlighting_prefs.tiff; sourceTree = "<group>"; };
 		85FF57A81A9DE68300DE8F46 /* Highlighting-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Highlighting-Info.plist"; path = "InFilters/Highlighting/Highlighting-Info.plist"; sourceTree = "<group>"; };
+		85FF57AC1A9DEB5A00DE8F46 /* DCCTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCCTransfer.h; path = InFilters/DCCSupport/DCCTransfer.h; sourceTree = "<group>"; };
+		85FF57AD1A9DEB5A00DE8F46 /* DCCTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCCTransfer.m; path = InFilters/DCCSupport/DCCTransfer.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TalkSoup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkSoup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -605,6 +608,8 @@
 				855BF49E1A98842C004C7617 /* Defaults.plist */,
 				855BF49A1A988416004C7617 /* Localizable.strings */,
 				855BF4971A98840A004C7617 /* DCCSupportPreferences.nib */,
+				85FF57AC1A9DEB5A00DE8F46 /* DCCTransfer.h */,
+				85FF57AD1A9DEB5A00DE8F46 /* DCCTransfer.m */,
 				855BF4881A9883C3004C7617 /* DCCGetter.h */,
 				855BF4891A9883C3004C7617 /* DCCGetter.m */,
 				855BF48A1A9883C3004C7617 /* DCCObject.h */,
@@ -1126,6 +1131,7 @@
 				855BF4941A9883C3004C7617 /* DCCSender.m in Sources */,
 				855BF4951A9883C3004C7617 /* DCCSupport.m in Sources */,
 				855BF4961A9883C3004C7617 /* DCCSupportPreferencesController.m in Sources */,
+				85FF57AE1A9DEB5A00DE8F46 /* DCCTransfer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

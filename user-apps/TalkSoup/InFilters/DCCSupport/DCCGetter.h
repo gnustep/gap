@@ -21,39 +21,24 @@
 #define DCC_GETTER_H
 
 #import <Foundation/NSObject.h>
-#include <stdint.h>
+#import "DCCTransfer.h"
 
 @class DCCObject, NSFileHandle, NSString, NSTimer;
 @class NSDictionary, NSHost;
 
-@interface DCCGetter : NSObject
+@interface DCCGetter : DCCTransfer
 	{
-		NSFileHandle *file;
-		NSString *path;
 		DCCObject *getter;
-		NSString *status;
-		id connection;
-		id delegate;
-		NSTimer *cpsTimer;
-		int cps;
-		uint32_t oldTransferredBytes;
 	}
-- initWithInfo: (NSDictionary *)aDict withFileName: (NSString *)aPath 
-    withConnection: aConnection withDelegate: aDel;
 
-- (NSString *)status;
+- (DCCGetter *)initWithInfo: (NSDictionary *)aDict withFileName: (NSString *)aPath 
+    withConnection: aConnection withDelegate: aDel;
 
 - (NSDictionary *)info;
 
-- (id)localHost;
-- (id)remoteHost;
-
 - (NSString *)percentDone;
 
-- (int)cps;
 - cpsTimer: (NSTimer *)aTimer;
-
-- (NSString *)path;
 
 - (void)abortConnection;
 @end
