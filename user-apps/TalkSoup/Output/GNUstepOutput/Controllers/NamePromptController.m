@@ -31,10 +31,10 @@
 - (void)awakeFromNib
 {
 	[window setDelegate: self];
-	[window makeKeyAndOrderFront: self];
 	[window makeFirstResponder: window];
 	[window makeFirstResponder: typeView];
 	[self retain];
+    [window makeKeyAndOrderFront: self];
 }
 - (void)dealloc
 {
@@ -45,16 +45,19 @@
 }
 - (void)returnHit: (NSTextField *)sender
 {
-	NSArray *components;
-	id x;
-	
-	components = [[typeView stringValue] separateIntoNumberOfArguments: 2];
-	
-	if ([components count] == 0)
-	{
-		[window close];
-		return;
-	}
+  NSArray *components;
+  ConnectionController *x;
+  NSString *str;
+
+  str = [typeView stringValue];
+  
+  if (!str)
+    return;
+  
+  components = [str separateIntoNumberOfArguments: 2];
+
+  if ([components count] == 0)
+    return;
 	
 	x = [ConnectionController new];
 	[x connectToServer: [components objectAtIndex: 0] onPort: 6667];
@@ -64,6 +67,8 @@
 	
 	[[[[x contentController] primaryMasterController] window] 
 	  makeKeyAndOrderFront: nil];
+  
+  [x release];
 }
 - (NSWindow *)window
 {

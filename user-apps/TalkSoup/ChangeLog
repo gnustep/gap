@@ -1,5 +1,10 @@
 2015-02-25 Riccardo Mottola <rm@gnu.org>
 
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	I no name is entered, do not do anyything instead of closing the panel.
+
+2015-02-25 Riccardo Mottola <rm@gnu.org>
+
 	* InFilters/DCCSupport/DCCTransfer.h
 	* InFilters/DCCSupport/DCCTransfer.m
 	* InFilters/DCCSupport/DCCSender.h
