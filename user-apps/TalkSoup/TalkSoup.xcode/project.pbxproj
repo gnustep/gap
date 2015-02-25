@@ -506,6 +506,36 @@
 			target = 8590829A1A9D229400C99985;
 			targetProxy = 853869021A9DC041006603E9;
 		};
+		8538695F1A9E443C006603E9 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DCCTransfer.h;
+			path = InFilters/DCCSupport/DCCTransfer.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		853869601A9E443C006603E9 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = DCCTransfer.m;
+			path = InFilters/DCCSupport/DCCTransfer.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		853869611A9E443C006603E9 = {
+			fileRef = 8538695F1A9E443C006603E9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		853869621A9E443C006603E9 = {
+			fileRef = 853869601A9E443C006603E9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		857E36381A9C64E20036D65C = {
 			children = (
 				859083491A9DB3C700C99985,
@@ -523,6 +553,8 @@
 				857E367C1A9C69130036D65C,
 				857E366C1A9C663D0036D65C,
 				859081E01A9D04B300C99985,
+				8538695F1A9E443C006603E9,
+				853869601A9E443C006603E9,
 				857E36481A9C65980036D65C,
 				857E36491A9C65980036D65C,
 				857E364A1A9C65980036D65C,
@@ -547,6 +579,7 @@
 				859081E11A9D04B300C99985,
 				859081E71A9D04C800C99985,
 				859081E81A9D04C800C99985,
+				853869611A9E443C006603E9,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +592,7 @@
 				857E36571A9C65980036D65C,
 				857E36591A9C65980036D65C,
 				857E365B1A9C65980036D65C,
+				853869621A9E443C006603E9,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -861,12 +895,6 @@
 			path = Source/main.m;
 			refType = 4;
 			sourceTree = "<group>";
-		};
-		857EECD41A8FCED600EEC00A = {
-			fileRef = 857EECD11A8FCED600EEC00A;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		857EECD51A8FCED600EEC00A = {
 			fileRef = 857EECD21A8FCED600EEC00A;
@@ -3497,7 +3525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090,
-				857EECD41A8FCED600EEC00A,
 				8530F3E51A93C90B0017F8C5,
 			);
 			isa = PBXResourcesBuildPhase;
