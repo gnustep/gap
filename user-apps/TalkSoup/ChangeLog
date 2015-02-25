@@ -1,3 +1,11 @@
+2015-02-25 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/Highlighting/Highlighting.m
+	Local variable with explicit type, substitute GS macro
+
+	* InFilters/Highlighting/HighlightingPreferencesController.h
+	Declare local protocol for < 10.6
+
 2015-02-24 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Tools/dns_helper.m

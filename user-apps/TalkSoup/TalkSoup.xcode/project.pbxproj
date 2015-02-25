@@ -99,9 +99,11 @@
 				8503F5AC1A9694AF00007EE7,
 				857E36441A9C655C0036D65C,
 				8590829B1A9D229400C99985,
+				8590834E1A9DB3EB00C99985,
 			);
 			isa = PBXGroup;
 			name = Products;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -132,8 +134,9 @@
 				857EED011A8FD35800EEC00A,
 				857EED391A8FE01B00EEC00A,
 				8503F5AB1A9694AF00007EE7,
-				857E36431A9C655C0036D65C,
 				8590829A1A9D229400C99985,
+				857E36431A9C655C0036D65C,
+				8590834D1A9DB3EB00C99985,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -491,8 +494,21 @@
 			settings = {
 			};
 		};
+		853869021A9DC041006603E9 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8590829A1A9D229400C99985;
+			remoteInfo = exec_helper;
+		};
+		853869031A9DC041006603E9 = {
+			isa = PBXTargetDependency;
+			target = 8590829A1A9D229400C99985;
+			targetProxy = 853869021A9DC041006603E9;
+		};
 		857E36381A9C64E20036D65C = {
 			children = (
+				859083491A9DB3C700C99985,
 				857E363D1A9C651B0036D65C,
 			);
 			isa = PBXGroup;
@@ -771,6 +787,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				859083DF1A9DB6D500C99985,
 				857E367F1A9C699E0036D65C,
 			);
 			isa = PBXCopyFilesBuildPhase;
@@ -793,18 +810,6 @@
 			isa = PBXTargetDependency;
 			target = 857EED011A8FD35800EEC00A;
 			targetProxy = 857E36851A9C69CE0036D65C;
-		};
-		857E36871A9C69CE0036D65C = {
-			containerPortal = 29B97313FDCFA39411CA2CEA;
-			isa = PBXContainerItemProxy;
-			proxyType = 1;
-			remoteGlobalIDString = 8503F5AB1A9694AF00007EE7;
-			remoteInfo = dns_helper;
-		};
-		857E36881A9C69CE0036D65C = {
-			isa = PBXTargetDependency;
-			target = 8503F5AB1A9694AF00007EE7;
-			targetProxy = 857E36871A9C69CE0036D65C;
 		};
 		857E36891A9C69CE0036D65C = {
 			containerPortal = 29B97313FDCFA39411CA2CEA;
@@ -1467,6 +1472,7 @@
 			dependencies = (
 				857EED3E1A8FE04A00EEC00A,
 				8503F5B81A96953900007EE7,
+				853869031A9DC041006603E9,
 			);
 			isa = PBXNativeTarget;
 			name = GNUstepOutput;
@@ -1912,7 +1918,6 @@
 			);
 			buildSettings = {
 				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -1962,6 +1967,276 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		859083491A9DB3C700C99985 = {
+			children = (
+				859083D71A9DB64100C99985,
+				859083D81A9DB64100C99985,
+				859083D91A9DB64100C99985,
+				859083DA1A9DB64100C99985,
+				859083D21A9DB5F400C99985,
+				859083CD1A9DB5A500C99985,
+				859083C71A9DB53500C99985,
+				859083C81A9DB53500C99985,
+				8590834F1A9DB3EB00C99985,
+			);
+			isa = PBXGroup;
+			name = Highlighter;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		8590834A1A9DB3EB00C99985 = {
+			buildActionMask = 2147483647;
+			files = (
+				859083C91A9DB53500C99985,
+				859083CA1A9DB53500C99985,
+				859083CF1A9DB5A500C99985,
+				859083D41A9DB5F400C99985,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8590834B1A9DB3EB00C99985 = {
+			buildActionMask = 2147483647;
+			files = (
+				859083DC1A9DB64100C99985,
+				859083DE1A9DB64100C99985,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8590834C1A9DB3EB00C99985 = {
+			buildActionMask = 2147483647;
+			files = (
+				859083C41A9DB50700C99985,
+				859083B91A9DB4F400C99985,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8590834D1A9DB3EB00C99985 = {
+			buildPhases = (
+				8590834A1A9DB3EB00C99985,
+				8590834B1A9DB3EB00C99985,
+				8590834C1A9DB3EB00C99985,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Users/multix/Documents/code/gap/libs/netclasses/build;
+				GCC_MODEL_TUNING = G3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_APPKIT;
+				INFOPLIST_FILE = "InFilters/Highlighting/Highlighting-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Highlighting;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = Highlighting;
+			productName = Highlighter;
+			productReference = 8590834E1A9DB3EB00C99985;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Highlighter</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.Highlighter</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		8590834E1A9DB3EB00C99985 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = Highlighting.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8590834F1A9DB3EB00C99985 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "Highlighting-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/InFilters/Highlighting/Highlighting-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		859083B91A9DB4F400C99985 = {
+			fileRef = 857EED021A8FD35800EEC00A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083C41A9DB50700C99985 = {
+			fileRef = 857EED201A8FD44600EEC00A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083C71A9DB53500C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			name = Defaults.plist;
+			path = InFilters/Highlighting/AllLanguages/Defaults.plist;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083C81A9DB53500C99985 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = highlighting_prefs.tiff;
+			path = InFilters/Highlighting/AllLanguages/highlighting_prefs.tiff;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083C91A9DB53500C99985 = {
+			fileRef = 859083C71A9DB53500C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083CA1A9DB53500C99985 = {
+			fileRef = 859083C81A9DB53500C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083CD1A9DB5A500C99985 = {
+			children = (
+				859083CE1A9DB5A500C99985,
+			);
+			isa = PBXVariantGroup;
+			name = HighlightingPreferences.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083CE1A9DB5A500C99985 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = HighlightingPreferences.nib;
+			path = InFilters/Highlighting/English.lproj/HighlightingPreferences.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083CF1A9DB5A500C99985 = {
+			fileRef = 859083CD1A9DB5A500C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083D21A9DB5F400C99985 = {
+			children = (
+				859083D31A9DB5F400C99985,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083D31A9DB5F400C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = Localizable.strings;
+			path = InFilters/Highlighting/English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083D41A9DB5F400C99985 = {
+			fileRef = 859083D21A9DB5F400C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083D71A9DB64100C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Highlighting.h;
+			path = InFilters/Highlighting/Highlighting.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083D81A9DB64100C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = Highlighting.m;
+			path = InFilters/Highlighting/Highlighting.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083D91A9DB64100C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = HighlightingPreferencesController.h;
+			path = InFilters/Highlighting/HighlightingPreferencesController.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083DA1A9DB64100C99985 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = HighlightingPreferencesController.m;
+			path = InFilters/Highlighting/HighlightingPreferencesController.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		859083DC1A9DB64100C99985 = {
+			fileRef = 859083D81A9DB64100C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083DE1A9DB64100C99985 = {
+			fileRef = 859083DA1A9DB64100C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083DF1A9DB6D500C99985 = {
+			fileRef = 8590834E1A9DB3EB00C99985;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		859083EB1A9DB74A00C99985 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8590834D1A9DB3EB00C99985;
+			remoteInfo = Highlighting;
+		};
+		859083EC1A9DB74A00C99985 = {
+			isa = PBXTargetDependency;
+			target = 8590834D1A9DB3EB00C99985;
+			targetProxy = 859083EB1A9DB74A00C99985;
 		};
 		85F94D801A90068500B00DCB = {
 			children = (
@@ -3208,8 +3483,8 @@
 				857EED7B1A8FE19E00EEC00A,
 				857EED7D1A8FE19E00EEC00A,
 				857E36861A9C69CE0036D65C,
-				857E36881A9C69CE0036D65C,
 				857E368A1A9C69CE0036D65C,
+				859083EC1A9DB74A00C99985,
 			);
 			isa = PBXNativeTarget;
 			name = TalkSoup;
