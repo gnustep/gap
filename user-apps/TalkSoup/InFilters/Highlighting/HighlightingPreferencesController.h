@@ -18,6 +18,9 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSTableView.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+@protocol NSTableViewDelegate;
+#endif
 
 @class NSButton, NSTableView, NSWindow, NSColorWell;
 @class NSMutableArray, NSView, NSImage;
