@@ -9,7 +9,7 @@ endif
 #BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/InFilters
 $(BUNDLE_NAME)_COPY_INTO_DIR = ../../Source/TalkSoup.app/Resources/InFilters
 
-DCCSupport_OBJC_FILES = DCCSupport.m DCCObject.m DCCSender.m DCCGetter.m
+DCCSupport_OBJC_FILES = DCCTransfer.m DCCSupport.m DCCObject.m DCCSender.m DCCGetter.m
 
 ifeq ($(USE_APPKIT), yes)
 DCCSupport_OBJC_FILES += DCCSupportPreferencesController.m
