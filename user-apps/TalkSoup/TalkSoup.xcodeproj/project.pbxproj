@@ -33,7 +33,6 @@
 		855BF4A51A9885A5004C7617 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		855BF4B81A988606004C7617 /* netclasses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED201A8FD44600EEC00A /* netclasses.framework */; };
 		855BF5151A9A00F8004C7617 /* DCCSupport.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 855BF4771A9882BC004C7617 /* DCCSupport.bundle */; };
-		857EECD41A8FCED600EEC00A /* commands.h in Resources */ = {isa = PBXBuildFile; fileRef = 857EECD11A8FCED600EEC00A /* commands.h */; };
 		857EECD51A8FCED600EEC00A /* commands.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EECD21A8FCED600EEC00A /* commands.m */; };
 		857EECD61A8FCED600EEC00A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EECD31A8FCED600EEC00A /* main.m */; };
 		857EECF61A8FD30A00EEC00A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EECF01A8FD30A00EEC00A /* Functions.m */; };
@@ -1106,7 +1105,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				857EECD41A8FCED600EEC00A /* commands.h in Resources */,
 				8530F3E51A93C90B0017F8C5 /* TalkSoup.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
