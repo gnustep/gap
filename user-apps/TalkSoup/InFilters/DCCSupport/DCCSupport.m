@@ -219,7 +219,7 @@ static NSString *unique_path(NSString *path)
 
 	[connections removeObjectIdenticalTo: dcc];
 }
-- (void)startedReceive: (DCCSender *)dcc onConnection: aConnection
+- (void)startedReceive: (DCCGetter *)dcc onConnection: aConnection
 {
 	NSDictionary *info = [dcc info];
 	id nick = [info objectForKey: DCCInfoNick];
@@ -229,7 +229,7 @@ static NSString *unique_path(NSString *path)
 	  BuildAttributedFormat(_l(@"Transfer of %@ from %@ initiated."),
 	  filename, nick) onConnection: aConnection];
 }
-- (void)finishedReceive: (DCCSender *)dcc onConnection: aConnection
+- (void)finishedReceive: (DCCGetter *)dcc onConnection: aConnection
 {
 	id status = [dcc status];
 	NSDictionary *info = [dcc info];
@@ -591,7 +591,7 @@ static NSString *unique_path(NSString *path)
 		}
 		if ([object isKindOfClass: [DCCSender class]])
 		{
-			if ([[object status] isEqualToString: DCCStatusConnecting])
+			if ([[(DCCSender *)object status] isEqualToString: DCCStatusConnecting])
 			{
 			[attr appendAttributedString: 
 			  BuildAttributedFormat(_l(@"%@. %@ You have offered to send %@ to %@"),

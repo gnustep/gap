@@ -18,6 +18,7 @@
 
 @class DCCSupport;
 @class DCCSender;
+@class DCCGetter;
 
 @class NSBundle, NSString;
 
@@ -65,8 +66,8 @@ extern NSString *DCCDefault;
 + (id)defaultDefaultsForKey: aKey;
 + (void)setDefaultsObject: aObject forKey: aKey;
 
-- (void)startedReceive: (DCCSender *)dcc onConnection: aConnection;
-- (void)finishedReceive: (DCCSender *)dcc onConnection: aConnection;
+- (void)startedReceive: (DCCGetter *)dcc onConnection: aConnection;
+- (void)finishedReceive: (DCCGetter *)dcc onConnection: aConnection;
 - (void)startedSend: (DCCSender *)dcc onConnection: aConnection;
 - (void)finishedSend: (DCCSender *)dcc onConnection: aConnection;
 - (NSMutableArray *)getConnectionTable: aConnection;
