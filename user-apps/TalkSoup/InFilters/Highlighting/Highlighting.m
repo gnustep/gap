@@ -196,11 +196,12 @@ NSAttributedString *do_highlighting(id cont, NSString *msg,
 		
 		if (userColor)
 		{
-			object = [[[NSMutableAttributedString alloc]
+                  NSMutableAttributedString *astr;
+			astr = [[[NSMutableAttributedString alloc]
 			  initWithAttributedString: from] autorelease];
-			[object addAttribute: IRCColor value: userColor range: 
-			  NSMakeRange(0, [object length])];
-			return object;
+			[astr addAttribute: IRCColor value: userColor range: 
+			  NSMakeRange(0, [astr length])];
+			return astr;
 		}
 	}
 	else
@@ -470,7 +471,8 @@ static NSInvocation *invoc = nil;
 		 object: controller];
 	}
 	main_controller = nil;
-	DESTROY(controller);
+	[controller release];
+        controller = nil;
 #endif
 
 	[_TS_ removeCommand: @"highlighting"];
