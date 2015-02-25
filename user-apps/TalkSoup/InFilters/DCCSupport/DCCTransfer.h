@@ -17,6 +17,8 @@
  ***************************************************************************/
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSFileHandle.h>
+#import <Foundation/NSTimer.h>
 #include <stdint.h>
 
 @class DCCObject;
