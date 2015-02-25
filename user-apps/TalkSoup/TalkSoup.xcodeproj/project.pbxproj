@@ -109,6 +109,16 @@
 		85F94E5E1A900A3400B00DCB /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94E541A900A3400B00DCB /* ScrollingTextView.m */; };
 		85FF57041A9DBB1000DE8F46 /* exec_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF57031A9DBB1000DE8F46 /* exec_helper.m */; };
 		85FF57071A9DBB2800DE8F46 /* exec_helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85FF56FB1A9DBAA000DE8F46 /* exec_helper */; };
+		85FF573A1A9DDD1600DE8F46 /* Highlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF57371A9DDD1600DE8F46 /* Highlighting.m */; };
+		85FF573B1A9DDD1600DE8F46 /* HighlightingPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF57391A9DDD1600DE8F46 /* HighlightingPreferencesController.m */; };
+		85FF57401A9DE1B200DE8F46 /* HighlightingPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85FF573C1A9DE1B200DE8F46 /* HighlightingPreferences.nib */; };
+		85FF57411A9DE1B200DE8F46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85FF573E1A9DE1B200DE8F46 /* Localizable.strings */; };
+		85FF57441A9DE1BF00DE8F46 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85FF57421A9DE1BF00DE8F46 /* Defaults.plist */; };
+		85FF57451A9DE1BF00DE8F46 /* highlighting_prefs.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85FF57431A9DE1BF00DE8F46 /* highlighting_prefs.tiff */; };
+		85FF57491A9DE1E400DE8F46 /* Highlighting.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */; };
+		85FF57881A9DE44C00DE8F46 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		85FF57A11A9DE45D00DE8F46 /* netclasses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED201A8FD44600EEC00A /* netclasses.framework */; };
+		85FF57A91A9DE68300DE8F46 /* Highlighting-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85FF57A81A9DE68300DE8F46 /* Highlighting-Info.plist */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -170,6 +180,13 @@
 			remoteGlobalIDString = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
 			remoteInfo = exec_helper;
 		};
+		85FF576E1A9DE32A00DE8F46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85FF572C1A9DDCBC00DE8F46 /* Highlighting */;
+			remoteInfo = Highlighting;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -223,6 +240,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				85FF57491A9DE1E400DE8F46 /* Highlighting.bundle in CopyFiles */,
 				855BF5151A9A00F8004C7617 /* DCCSupport.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +399,16 @@
 		85F94E541A900A3400B00DCB /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ScrollingTextView.m; path = Output/GNUstepOutput/Views/ScrollingTextView.m; sourceTree = "<group>"; };
 		85FF56FB1A9DBAA000DE8F46 /* exec_helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = exec_helper; sourceTree = BUILT_PRODUCTS_DIR; };
 		85FF57031A9DBB1000DE8F46 /* exec_helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = exec_helper.m; path = Output/GNUstepOutput/Tools/exec_helper.m; sourceTree = "<group>"; };
+		85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Highlighting.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		85FF57361A9DDD1600DE8F46 /* Highlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Highlighting.h; path = InFilters/Highlighting/Highlighting.h; sourceTree = "<group>"; };
+		85FF57371A9DDD1600DE8F46 /* Highlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Highlighting.m; path = InFilters/Highlighting/Highlighting.m; sourceTree = "<group>"; };
+		85FF57381A9DDD1600DE8F46 /* HighlightingPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighlightingPreferencesController.h; path = InFilters/Highlighting/HighlightingPreferencesController.h; sourceTree = "<group>"; };
+		85FF57391A9DDD1600DE8F46 /* HighlightingPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HighlightingPreferencesController.m; path = InFilters/Highlighting/HighlightingPreferencesController.m; sourceTree = "<group>"; };
+		85FF573D1A9DE1B200DE8F46 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = InFilters/Highlighting/English.lproj/HighlightingPreferences.nib; sourceTree = "<group>"; };
+		85FF573F1A9DE1B200DE8F46 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/Highlighting/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85FF57421A9DE1BF00DE8F46 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Defaults.plist; path = InFilters/Highlighting/AllLanguages/Defaults.plist; sourceTree = "<group>"; };
+		85FF57431A9DE1BF00DE8F46 /* highlighting_prefs.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = highlighting_prefs.tiff; path = InFilters/Highlighting/AllLanguages/highlighting_prefs.tiff; sourceTree = "<group>"; };
+		85FF57A81A9DE68300DE8F46 /* Highlighting-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Highlighting-Info.plist"; path = "InFilters/Highlighting/Highlighting-Info.plist"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TalkSoup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkSoup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -430,6 +458,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85FF572B1A9DDCBC00DE8F46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85FF57A11A9DE45D00DE8F46 /* netclasses.framework in Frameworks */,
+				85FF57881A9DE44C00DE8F46 /* TalkSoupBundles.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +529,7 @@
 				852360461A968ACD00836C2E /* dns_helper */,
 				855BF4771A9882BC004C7617 /* DCCSupport.bundle */,
 				85FF56FB1A9DBAA000DE8F46 /* exec_helper */,
+				85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -553,6 +591,7 @@
 		852361A51A97C02E00836C2E /* InFilters */ = {
 			isa = PBXGroup;
 			children = (
+				85FF57261A9DDCA400DE8F46 /* Highlighting */,
 				855BF4841A98833F004C7617 /* DCCSupport */,
 				855BF4781A9882BC004C7617 /* DCCSupport-Info.plist */,
 			);
@@ -774,6 +813,22 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		85FF57261A9DDCA400DE8F46 /* Highlighting */ = {
+			isa = PBXGroup;
+			children = (
+				85FF57A81A9DE68300DE8F46 /* Highlighting-Info.plist */,
+				85FF57421A9DE1BF00DE8F46 /* Defaults.plist */,
+				85FF57431A9DE1BF00DE8F46 /* highlighting_prefs.tiff */,
+				85FF573C1A9DE1B200DE8F46 /* HighlightingPreferences.nib */,
+				85FF573E1A9DE1B200DE8F46 /* Localizable.strings */,
+				85FF57361A9DDD1600DE8F46 /* Highlighting.h */,
+				85FF57371A9DDD1600DE8F46 /* Highlighting.m */,
+				85FF57381A9DDD1600DE8F46 /* HighlightingPreferencesController.h */,
+				85FF57391A9DDD1600DE8F46 /* HighlightingPreferencesController.m */,
+			);
+			name = Highlighting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -900,6 +955,23 @@
 			productReference = 85FF56FB1A9DBAA000DE8F46 /* exec_helper */;
 			productType = "com.apple.product-type.tool";
 		};
+		85FF572C1A9DDCBC00DE8F46 /* Highlighting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85FF57321A9DDCBD00DE8F46 /* Build configuration list for PBXNativeTarget "Highlighting" */;
+			buildPhases = (
+				85FF57291A9DDCBC00DE8F46 /* Resources */,
+				85FF572A1A9DDCBC00DE8F46 /* Sources */,
+				85FF572B1A9DDCBC00DE8F46 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Highlighting;
+			productName = Highlighting;
+			productReference = 85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D1107260486CEB800E47090 /* TalkSoup */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85235EF21A9613F600836C2E /* Build configuration list for PBXNativeTarget "TalkSoup" */;
@@ -918,6 +990,7 @@
 				857EED7B1A8FE19E00EEC00A /* PBXTargetDependency */,
 				857EED7D1A8FE19E00EEC00A /* PBXTargetDependency */,
 				855BF4EE1A9A00AD004C7617 /* PBXTargetDependency */,
+				85FF576F1A9DE32A00DE8F46 /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -951,6 +1024,7 @@
 				852360451A968ACD00836C2E /* dns_helper */,
 				85FF56FA1A9DBAA000DE8F46 /* exec_helper */,
 				855BF4761A9882BC004C7617 /* DCCSupport */,
+				85FF572C1A9DDCBC00DE8F46 /* Highlighting */,
 			);
 		};
 /* End PBXProject section */
@@ -1007,6 +1081,18 @@
 				852360381A96872900836C2E /* BigServerList.plist in Resources */,
 				852360391A96872900836C2E /* Defaults.plist in Resources */,
 				8523603A1A96872900836C2E /* ServerList.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85FF57291A9DDCBC00DE8F46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85FF57401A9DE1B200DE8F46 /* HighlightingPreferences.nib in Resources */,
+				85FF57411A9DE1B200DE8F46 /* Localizable.strings in Resources */,
+				85FF57441A9DE1BF00DE8F46 /* Defaults.plist in Resources */,
+				85FF57451A9DE1BF00DE8F46 /* highlighting_prefs.tiff in Resources */,
+				85FF57A91A9DE68300DE8F46 /* Highlighting-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,6 +1203,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85FF572A1A9DDCBC00DE8F46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85FF573A1A9DDD1600DE8F46 /* Highlighting.m in Sources */,
+				85FF573B1A9DDD1600DE8F46 /* HighlightingPreferencesController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1168,6 +1263,11 @@
 			isa = PBXTargetDependency;
 			target = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
 			targetProxy = 85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */;
+		};
+		85FF576F1A9DE32A00DE8F46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85FF572C1A9DDCBC00DE8F46 /* Highlighting */;
+			targetProxy = 85FF576E1A9DE32A00DE8F46 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1274,6 +1374,22 @@
 				85F94DF81A9008BA00B00DCB /* English */,
 			);
 			name = TopicInspector.nib;
+			sourceTree = "<group>";
+		};
+		85FF573C1A9DE1B200DE8F46 /* HighlightingPreferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85FF573D1A9DE1B200DE8F46 /* English */,
+			);
+			name = HighlightingPreferences.nib;
+			sourceTree = "<group>";
+		};
+		85FF573E1A9DE1B200DE8F46 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85FF573F1A9DE1B200DE8F46 /* English */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1888,6 +2004,96 @@
 			};
 			name = Default;
 		};
+		85FF572F1A9DDCBC00DE8F46 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libs/netclasses/build/Development\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_APPKIT;
+				INFOPLIST_FILE = "InFilters/Highlighting/Highlighting-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Highlighting;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		85FF57301A9DDCBC00DE8F46 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libs/netclasses/build/Development\"";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_APPKIT;
+				INFOPLIST_FILE = "InFilters/Highlighting/Highlighting-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Highlighting;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85FF57311A9DDCBC00DE8F46 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libs/netclasses/build/Development\"";
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_APPKIT;
+				INFOPLIST_FILE = "InFilters/Highlighting/Highlighting-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Highlighting;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1967,6 +2173,16 @@
 				85FF56FD1A9DBAA100DE8F46 /* Development */,
 				85FF56FE1A9DBAA100DE8F46 /* Deployment */,
 				85FF56FF1A9DBAA100DE8F46 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85FF57321A9DDCBD00DE8F46 /* Build configuration list for PBXNativeTarget "Highlighting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85FF572F1A9DDCBC00DE8F46 /* Development */,
+				85FF57301A9DDCBC00DE8F46 /* Deployment */,
+				85FF57311A9DDCBC00DE8F46 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
