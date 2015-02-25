@@ -1,5 +1,17 @@
 2015-02-25 Riccardo Mottola <rm@gnu.org>
 
+	* InFilters/DCCSupport/DCCTransfer.h
+	* InFilters/DCCSupport/DCCTransfer.m
+	* InFilters/DCCSupport/DCCSender.h
+	* InFilters/DCCSupport/DCCSender.m
+	* InFilters/DCCSupport/DCCGetter.h
+	* InFilters/DCCSupport/DCCGetter.m
+	* InFilters/DCCSupport/DCCObject.h
+	* InFilters/DCCSupport/DCCObject.m
+	new DCCTransfer superclass for DCCSender and DCCGetter, further cleanup
+
+2015-02-25 Riccardo Mottola <rm@gnu.org>
+
 	* InFilters/Highlighting/Highlighting.m
 	Local variable with explicit type, substitute GS macro
 

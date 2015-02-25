@@ -39,7 +39,7 @@
 #define SET_DEFAULT_INT(_x, _y) set_default(_x, ([NSString stringWithFormat: @"%d", _y]))
 
 @implementation DCCGetter
-- initWithInfo: (NSDictionary *)aDict withFileName: (NSString *)aPath
+- (DCCGetter *)initWithInfo: (NSDictionary *)aDict withFileName: (NSString *)aPath
    withConnection: aConnection withDelegate: aDel
 {
 	id dfm;
@@ -76,19 +76,14 @@
 	
 	return self;
 }
+
 - (void)dealloc
 {
-	[cpsTimer invalidate];
-	[cpsTimer release];
-	cpsTimer = nil;
 	[getter release];
-	[path release];
-	[file release];
-	[connection release];
-	[status release];
 	
 	[super dealloc];
 }
+
 - cpsTimer: (NSTimer *)aTimer
 {
 	cps = ([getter transferredBytes] - oldTransferredBytes) / 5;
@@ -134,22 +129,12 @@
 	
 	return self;
 }
-- (NSString *)status
-{
-	return status;
-}
+
 - (NSDictionary *)info
 {
 	return [getter info];
 }
-- (id)localHost
-{
-	return [connection localHost];
-}
-- (id)remoteHost
-{
-	return [connection remoteHost];
-}
+
 - (NSString *)percentDone
 {
 	id dict = [getter info];
@@ -165,14 +150,7 @@
 	return [NSString stringWithFormat: @"%d%%", 
 	  ([getter transferredBytes] * 100) / length];
 }
-- (int)cps
-{
-	return cps;
-}
-- (NSString *)path
-{
-	return path;
-}
+
 - (void)abortConnection
 {
 	[getter abortConnection];

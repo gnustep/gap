@@ -42,7 +42,7 @@
 #define SET_DEFAULT_INT(_x, _y) set_default(_x, ([NSString stringWithFormat: @"%d", _y]))
 
 @implementation DCCSender
-- initWithFilename: (NSString *)aPath 
+- (DCCSender *)initWithFilename: (NSString *)aPath 
     withConnection: aConnection to: (NSString *)aReceiver withDelegate: aDel;
 {
 	id dfm;
@@ -114,26 +114,21 @@
 	
 	return self;
 }
+
 - (void)dealloc
 {
-	[cpsTimer invalidate];
-	[cpsTimer release];
-	cpsTimer = nil;
 	[sender release];
-	[path release];
-	[file release];
-	[connection release];
-	[status release];
-	[receiver release];
 	
 	[super dealloc];
 }
+
 - cpsTimer: (NSTimer *)aTimer
 {
 	cps = ([sender transferredBytes] - oldTransferredBytes) / 5;
 	oldTransferredBytes = [sender transferredBytes];
 	return self;
 }
+
 - DCCInitiated: aConnection
 {
 	return self;
@@ -176,22 +171,12 @@
 	
 	return self;
 }
-- (NSString *)status
-{
-	return status;
-}
+
 - (NSDictionary *)info
 {
 	return [sender info];
 }
-- (id)localHost
-{
-	return [connection localHost];
-}
-- (id)remoteHost
-{
-	return [connection remoteHost];
-}
+
 - (NSString *)percentDone
 {
 	id dict = [sender info];
@@ -207,18 +192,12 @@
 	return [NSString stringWithFormat: @"%d%%", 
 	  ([sender transferredBytes] * 100) / length];
 }
-- (int)cps
-{
-	return cps;
-}
-- (NSString *)path
-{
-	return path;
-}
+
 - (NSString *)receiver
 {
 	return receiver;
 }
+
 - (void)abortConnection
 {
 	[sender abortConnection];

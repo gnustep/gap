@@ -61,7 +61,8 @@ extern NSString *DCCInfoNick;     //NSString
 		NSDictionary *userInfo;
 		id transport;
 	}
-- initWithDelegate: aDelegate withInfo: (NSDictionary *)info
+
+- (DCCObject *)initWithDelegate: aDelegate withInfo: (NSDictionary *)info
    withUserInfo: (NSDictionary *)userInfo;
 
 - (uint32_t)transferredBytes;
