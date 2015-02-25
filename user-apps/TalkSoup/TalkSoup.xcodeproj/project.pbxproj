@@ -107,6 +107,8 @@
 		85F94E5A1A900A3400B00DCB /* InputControllerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94E501A900A3400B00DCB /* InputControllerTextView.m */; };
 		85F94E5C1A900A3400B00DCB /* KeyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94E521A900A3400B00DCB /* KeyTextView.m */; };
 		85F94E5E1A900A3400B00DCB /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94E541A900A3400B00DCB /* ScrollingTextView.m */; };
+		85FF57041A9DBB1000DE8F46 /* exec_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF57031A9DBB1000DE8F46 /* exec_helper.m */; };
+		85FF57071A9DBB2800DE8F46 /* exec_helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85FF56FB1A9DBAA000DE8F46 /* exec_helper */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -161,6 +163,13 @@
 			remoteGlobalIDString = 857EED391A8FE01B00EEC00A;
 			remoteInfo = GNUstepOutput;
 		};
+		85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
+			remoteInfo = exec_helper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -171,6 +180,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				8523605D1A96923D00836C2E /* dns_helper in CopyFiles */,
+				85FF57071A9DBB2800DE8F46 /* exec_helper in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +379,8 @@
 		85F94E521A900A3400B00DCB /* KeyTextView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = KeyTextView.m; path = Output/GNUstepOutput/Views/KeyTextView.m; sourceTree = "<group>"; };
 		85F94E531A900A3400B00DCB /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ScrollingTextView.h; path = Output/GNUstepOutput/Views/ScrollingTextView.h; sourceTree = "<group>"; };
 		85F94E541A900A3400B00DCB /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ScrollingTextView.m; path = Output/GNUstepOutput/Views/ScrollingTextView.m; sourceTree = "<group>"; };
+		85FF56FB1A9DBAA000DE8F46 /* exec_helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = exec_helper; sourceTree = BUILT_PRODUCTS_DIR; };
+		85FF57031A9DBB1000DE8F46 /* exec_helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = exec_helper.m; path = Output/GNUstepOutput/Tools/exec_helper.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TalkSoup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkSoup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -411,6 +423,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8530F2681A91317F0017F8C5 /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85FF56F91A9DBAA000DE8F46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +491,7 @@
 				857EED3A1A8FE01B00EEC00A /* GNUstepOutput.bundle */,
 				852360461A968ACD00836C2E /* dns_helper */,
 				855BF4771A9882BC004C7617 /* DCCSupport.bundle */,
+				85FF56FB1A9DBAA000DE8F46 /* exec_helper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,6 +544,7 @@
 		8523604B1A968AE700836C2E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				85FF57031A9DBB1000DE8F46 /* exec_helper.m */,
 				852360501A968AF900836C2E /* dns_helper.m */,
 			);
 			name = Tools;
@@ -856,11 +877,28 @@
 			dependencies = (
 				857EED3E1A8FE04A00EEC00A /* PBXTargetDependency */,
 				852360611A96925400836C2E /* PBXTargetDependency */,
+				85FF57191A9DBF1F00DE8F46 /* PBXTargetDependency */,
 			);
 			name = GNUstepOutput;
 			productName = GNUstepOutput;
 			productReference = 857EED3A1A8FE01B00EEC00A /* GNUstepOutput.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		85FF56FA1A9DBAA000DE8F46 /* exec_helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85FF57001A9DBAD500DE8F46 /* Build configuration list for PBXNativeTarget "exec_helper" */;
+			buildPhases = (
+				85FF56F81A9DBAA000DE8F46 /* Sources */,
+				85FF56F91A9DBAA000DE8F46 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = exec_helper;
+			productName = exec_helpr;
+			productReference = 85FF56FB1A9DBAA000DE8F46 /* exec_helper */;
+			productType = "com.apple.product-type.tool";
 		};
 		8D1107260486CEB800E47090 /* TalkSoup */ = {
 			isa = PBXNativeTarget;
@@ -911,6 +949,7 @@
 				857EED011A8FD35800EEC00A /* TalkSoupBundles */,
 				857EED391A8FE01B00EEC00A /* GNUstepOutput */,
 				852360451A968ACD00836C2E /* dns_helper */,
+				85FF56FA1A9DBAA000DE8F46 /* exec_helper */,
 				855BF4761A9882BC004C7617 /* DCCSupport */,
 			);
 		};
@@ -1070,6 +1109,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85FF56F81A9DBAA000DE8F46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85FF57041A9DBB1000DE8F46 /* exec_helper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1116,6 +1163,11 @@
 			isa = PBXTargetDependency;
 			target = 857EED391A8FE01B00EEC00A /* GNUstepOutput */;
 			targetProxy = 857EED7C1A8FE19E00EEC00A /* PBXContainerItemProxy */;
+		};
+		85FF57191A9DBF1F00DE8F46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
+			targetProxy = 85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1770,6 +1822,72 @@
 			};
 			name = Default;
 		};
+		85FF56FD1A9DBAA100DE8F46 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = exec_helper;
+			};
+			name = Development;
+		};
+		85FF56FE1A9DBAA100DE8F46 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = exec_helper;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85FF56FF1A9DBAA100DE8F46 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = exec_helper;
+			};
+			name = Default;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1839,6 +1957,16 @@
 				855BF4791A9882BD004C7617 /* Development */,
 				855BF47A1A9882BD004C7617 /* Deployment */,
 				855BF47B1A9882BD004C7617 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85FF57001A9DBAD500DE8F46 /* Build configuration list for PBXNativeTarget "exec_helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85FF56FD1A9DBAA100DE8F46 /* Development */,
+				85FF56FE1A9DBAA100DE8F46 /* Deployment */,
+				85FF56FF1A9DBAA100DE8F46 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
