@@ -1,11 +1,16 @@
+2015-02-27 Riccardo Mottola <rm@gnu.org>
+
+	* GRImage.m
+	Encode (and decode) image representation data in description
+
 2015-01-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRImage.h
-    * GRImage.m
-    Add primtive GRImage implementation
+	* GRImage.m
+	Add primtive GRImage implementation
     
-    * GRDocView.m
-    Support for pasting images and generating GRImages
+	* GRDocView.m
+	Support for pasting images and generating GRImages
   
 2015-01-03 Riccardo Mottola <rm@gnu.org>
 
