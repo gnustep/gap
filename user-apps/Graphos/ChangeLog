@@ -4,6 +4,9 @@
 	* GRImage.m
 	Image accessor.
 
+	* GRDocView.m
+	If only a single Image is selected, copy it to the clipboard also as NSTIFFPboardType.
+
 2015-02-27 Riccardo Mottola <rm@gnu.org>
 
 	* GRImage.m

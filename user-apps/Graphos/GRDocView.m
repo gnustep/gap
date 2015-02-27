@@ -1515,16 +1515,16 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 {
   NSMutableArray *types;
   NSPasteboard *pboard;
-  id obj;
+  GRDrawableObject *dObj;
   NSMutableArray *objsdesc;
   NSUInteger i;
 
   objsdesc = [NSMutableArray arrayWithCapacity: 1];
   for(i = 0; i < [objects count]; i++)
     {
-      obj = [objects objectAtIndex: i];
-      if([[obj editor] isGroupSelected])
-	[objsdesc addObject: [obj objectDescription]];
+      dObj = [objects objectAtIndex: i];
+      if([[dObj editor] isGroupSelected])
+	[objsdesc addObject: [dObj objectDescription]];
     }
   
   if([objsdesc count])
@@ -1533,6 +1533,16 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
       pboard = [NSPasteboard generalPasteboard];
       [pboard declareTypes: types owner: self];
       [pboard setString:[objsdesc description] forType: @"GRObjectPboardType"];
+
+      /* if we have just a single image selected, also add a standard TIFF image */
+      if ([objsdesc count] == 1 && [dObj isKindOfClass:[GRImage class]])
+        {
+          GRImage *grImg;
+
+          [types addObject:NSTIFFPboardType];
+          grImg = (GRImage *)dObj;
+          [pboard setData:[[grImg image] TIFFRepresentation] forType:NSTIFFPboardType];
+        }
     }
 }
 
