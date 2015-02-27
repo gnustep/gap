@@ -3,6 +3,9 @@
 	* GRImage.m
 	Encode (and decode) image representation data in description
 
+	* GRDocView.m
+	Recognize images in paste ops.
+
 2015-01-18 Riccardo Mottola <rm@gnu.org>
 
 	* GRImage.h

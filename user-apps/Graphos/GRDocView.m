@@ -1578,6 +1578,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
             obj = [GRBox alloc];
           else if([str isEqualToString: @"circle"])
             obj = [GRCircle alloc];
+          else if([str isEqualToString: @"image"])
+            obj = [GRImage alloc];
           else
             NSLog(@"Unknown object to paste");
           if (obj != nil)
