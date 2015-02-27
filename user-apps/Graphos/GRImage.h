@@ -35,4 +35,7 @@
   NSImage *image;
 }
 
+- (NSImage *)image;
+- (void)setImage:(NSImage *)img;
+
 @end

@@ -254,6 +254,11 @@
     [editor draw];
 }
 
+- (NSImage *)image
+{
+  return image;
+}
+
 - (void)setImage:(NSImage *)img
 {
   if (img != image)
