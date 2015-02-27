@@ -1,5 +1,11 @@
 2015-02-27 Riccardo Mottola <rm@gnu.org>
 
+	* GRImage.h
+	* GRImage.m
+	Image accessor.
+
+2015-02-27 Riccardo Mottola <rm@gnu.org>
+
 	* GRImage.m
 	Encode (and decode) image representation data in description
 
