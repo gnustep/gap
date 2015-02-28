@@ -46,8 +46,8 @@ static NSInvocation *invoc = nil;
 	if (invoc) return;
 
 	files = NSCreateMapTable(NSObjectMapKeyCallBacks, NSObjectMapValueCallBacks, 5);
-	invoc = RETAIN([NSInvocation invocationWithMethodSignature: 
-	  [self methodSignatureForSelector: @selector(commandLogging:connection:)]]);
+	invoc = [[NSInvocation invocationWithMethodSignature: 
+	  [self methodSignatureForSelector: @selector(commandLogging:connection:)]] retain];
 	[invoc retainArguments];
 	[invoc setTarget: self];
 	[invoc setSelector: @selector(commandLogging:connection:)];
@@ -90,7 +90,7 @@ static NSInvocation *invoc = nil;
 	
 	if (![dfm fileExistsAtPath: path isDirectory: &isDir])
 	{
-		isDir = ![dfm createFileAtPath: path contents: AUTORELEASE([NSData new])
+		isDir = ![dfm createFileAtPath: path contents: [[NSData new] autorelease]
 		  attributes: nil];
 	}
 	
@@ -464,7 +464,7 @@ static NSInvocation *invoc = nil;
 	}
 	
 	iter = [paramList objectEnumerator];
-	str = AUTORELEASE([NSMutableString new]);
+	str = [[NSMutableString new] autorelease];
 	object = [iter nextObject];
 	
 	while (object)
@@ -504,7 +504,7 @@ static NSInvocation *invoc = nil;
 	}
 
 	iter = [paramList objectEnumerator];
-	str = AUTORELEASE([NSMutableString new]);
+	str = [[NSMutableString new] autorelease];
 	object = [iter nextObject];
 	
 	while (object)
