@@ -38,6 +38,7 @@
 
 #include <string.h>
 #include <config.h>
+#include <unistd.h> /* for intptr_t */
 
 NSString *NetException = @"NetException";
 NSString *FatalNetException = @"FatalNetException";
@@ -367,15 +368,15 @@ static void handle_cf_events(CFSocketRef s, CFSocketCallBackType callbackType,
 	
 	if ([anObject conformsToProtocol: @protocol(NetPort)])
 	{ 
-		desc = (void *)[anObject desc];
+	  desc = (void *)(intptr_t)[anObject desc];
 		
-		[portArray addObject: anObject];
+	  [portArray addObject: anObject];
 	}
 	else if ([anObject conformsToProtocol: @protocol(NetObject)])
 	{
-		desc = (void *)[[anObject transport] desc];
+	  desc = (void *)(intptr_t)[[anObject transport] desc];
 		
-		[netObjectArray addObject: anObject];
+	  [netObjectArray addObject: anObject];
 	}
 	else
 	{		
@@ -394,6 +395,7 @@ static void handle_cf_events(CFSocketRef s, CFSocketCallBackType callbackType,
 	
 	return self;
 }
+
 - disconnectObject: anObject
 {
 	id whichOne = nil;
@@ -404,13 +406,13 @@ static void handle_cf_events(CFSocketRef s, CFSocketCallBackType callbackType,
 	{
 		whichOne = portArray;
 		
-		desc = (void *)[anObject desc];
+		desc = (void *)(intptr_t)[anObject desc];
 	}
 	else if ([netObjectArray containsObject: anObject])
 	{
 		whichOne = netObjectArray;
 		
-		desc = (void *)[[anObject transport] desc];
+		desc = (void *)(intptr_t)[[anObject transport] desc];
 		
 		[[NSRunLoop currentRunLoop] removeEvent: desc
 		 type: ET_WDESC forMode: NSDefaultRunLoopMode all: YES];
@@ -427,9 +429,9 @@ static void handle_cf_events(CFSocketRef s, CFSocketCallBackType callbackType,
 	
 	NSMapRemove(descTable, desc);
 
-	RETAIN(anObject);
+	[anObject retain];
 	[whichOne removeObject: anObject];
-	AUTORELEASE(anObject);
+	[anObject autorelease];
 		
 	[anObject connectionLost];
 	
@@ -456,7 +458,7 @@ static void handle_cf_events(CFSocketRef s, CFSocketCallBackType callbackType,
 {
 	int desc = [aTransport desc];
 
-	if ((id)NSMapGet(descTable, (void *)desc))
+	if ((id)NSMapGet(descTable, (void *)(intptr_t)desc))
 	{
 		[[NSRunLoop currentRunLoop] addEvent: 
 		 (void *)desc type: ET_WDESC watcher: self 
