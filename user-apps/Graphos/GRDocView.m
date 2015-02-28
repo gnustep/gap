@@ -1615,7 +1615,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
       tmpNSImage = [[NSImage alloc] initWithData:[pboard dataForType:NSTIFFPboardType]];
     
       size = [tmpNSImage size];
-      pos = NSMakePoint(50, 50);
+      pos = NSMakePoint(50, pageRect.size.height-50);
       properties = [[NSMutableDictionary alloc] init];
       [properties autorelease];
       str = [NSString stringWithFormat: @"%.3f", pos.x];
@@ -1625,7 +1625,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
       str = [NSString stringWithFormat: @"%.3f", size.width];
       [properties setObject: str forKey: @"width"];
-      str = [NSString stringWithFormat: @"%.3f", size.height];
+      str = [NSString stringWithFormat: @"%.3f", -size.height];
       [properties setObject: str forKey: @"height"];
     
       tmpGRImage = [[GRImage alloc] initInView: self zoomFactor:zFactor withProperties:properties];
