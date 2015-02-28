@@ -58,6 +58,10 @@
 		857EED761A8FE18800EEC00A /* TopicInspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EED651A8FE18800EEC00A /* TopicInspectorController.m */; };
 		857EEE3A1A8FF62600EEC00A /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		857EEE651A8FF95C00EEC00A /* TalkSoup.h in Headers */ = {isa = PBXBuildFile; fileRef = 857EEE641A8FF95C00EEC00A /* TalkSoup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85C8CEE81AA24BE300E79B07 /* Colorizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C8CEE71AA24BE300E79B07 /* Colorizer.m */; };
+		85C8CEEB1AA24ECE00E79B07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CEE91AA24ECE00E79B07 /* Localizable.strings */; };
+		85C8CF341AA24F0000E79B07 /* Colorizer.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */; };
+		85C8CF421AA252EC00E79B07 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		85F94D931A9006CC00B00DCB /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D871A9006CC00B00DCB /* ConnectionController.m */; };
 		85F94D951A9006CC00B00DCB /* ConnectionControllerCtcp.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D891A9006CC00B00DCB /* ConnectionControllerCtcp.m */; };
 		85F94D971A9006CC00B00DCB /* ConnectionControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D8B1A9006CC00B00DCB /* ConnectionControllerDelegate.m */; };
@@ -173,18 +177,25 @@
 			remoteGlobalIDString = 857EED391A8FE01B00EEC00A;
 			remoteInfo = GNUstepOutput;
 		};
+		85C8CEF61AA24ED700E79B07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85C8CED91AA241E100E79B07 /* Colorizer */;
+			remoteInfo = Colorizer;
+		};
 		85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
+			remoteGlobalIDString = 85FF56FA1A9DBAA000DE8F46;
 			remoteInfo = exec_helper;
 		};
 		85FF576E1A9DE32A00DE8F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85FF572C1A9DDCBC00DE8F46 /* Highlighting */;
+			remoteGlobalIDString = 85FF572C1A9DDCBC00DE8F46;
 			remoteInfo = Highlighting;
 		};
 /* End PBXContainerItemProxy section */
@@ -242,6 +253,16 @@
 			files = (
 				85FF57491A9DE1E400DE8F46 /* Highlighting.bundle in CopyFiles */,
 				855BF5151A9A00F8004C7617 /* DCCSupport.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C8CF371AA24F1E00E79B07 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = OutFilters;
+			dstSubfolderSpec = 7;
+			files = (
+				85C8CF341AA24F0000E79B07 /* Colorizer.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +341,11 @@
 		857EED641A8FE18800EEC00A /* TopicInspectorController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TopicInspectorController.h; path = Output/GNUstepOutput/Controllers/TopicInspectorController.h; sourceTree = "<group>"; };
 		857EED651A8FE18800EEC00A /* TopicInspectorController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = TopicInspectorController.m; path = Output/GNUstepOutput/Controllers/TopicInspectorController.m; sourceTree = "<group>"; };
 		857EEE641A8FF95C00EEC00A /* TalkSoup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TalkSoup.h; path = TalkSoupBundles/TalkSoup.h; sourceTree = "<group>"; };
+		85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Colorizer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C8CEDB1AA241E100E79B07 /* Colorizer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Colorizer-Info.plist"; path = "OutFilters/Colorizer/Colorizer-Info.plist"; sourceTree = "<group>"; };
+		85C8CEE61AA24BE300E79B07 /* Colorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colorizer.h; path = OutFilters/Colorizer/Colorizer.h; sourceTree = "<group>"; };
+		85C8CEE71AA24BE300E79B07 /* Colorizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colorizer.m; path = OutFilters/Colorizer/Colorizer.m; sourceTree = "<group>"; };
+		85C8CEEA1AA24ECE00E79B07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OutFilters/Colorizer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		85F94D861A9006CC00B00DCB /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionController.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.h; sourceTree = "<group>"; };
 		85F94D871A9006CC00B00DCB /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ConnectionController.m; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m; sourceTree = "<group>"; };
 		85F94D881A9006CC00B00DCB /* ConnectionControllerCtcp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionControllerCtcp.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.h; sourceTree = "<group>"; };
@@ -456,6 +482,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C8CED81AA241E100E79B07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C8CF421AA252EC00E79B07 /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F91A9DBAA000DE8F46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -532,6 +566,7 @@
 				855BF4771A9882BC004C7617 /* DCCSupport.bundle */,
 				85FF56FB1A9DBAA000DE8F46 /* exec_helper */,
 				85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */,
+				85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,6 +578,7 @@
 				857EECEA1A8FD29800EEC00A /* NetclassesInput */,
 				080E96DDFE201D6D7F000001 /* TalkSoupBundles */,
 				852361A51A97C02E00836C2E /* InFilters */,
+				85C8CEC11AA241A900E79B07 /* OutFilters */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -678,6 +714,25 @@
 				857EED651A8FE18800EEC00A /* TopicInspectorController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		85C8CEC11AA241A900E79B07 /* OutFilters */ = {
+			isa = PBXGroup;
+			children = (
+				85C8CEC71AA241CA00E79B07 /* Colorizer */,
+			);
+			name = OutFilters;
+			sourceTree = "<group>";
+		};
+		85C8CEC71AA241CA00E79B07 /* Colorizer */ = {
+			isa = PBXGroup;
+			children = (
+				85C8CEE91AA24ECE00E79B07 /* Localizable.strings */,
+				85C8CEE61AA24BE300E79B07 /* Colorizer.h */,
+				85C8CEE71AA24BE300E79B07 /* Colorizer.m */,
+				85C8CEDB1AA241E100E79B07 /* Colorizer-Info.plist */,
+			);
+			name = Colorizer;
 			sourceTree = "<group>";
 		};
 		85F94D801A90068500B00DCB /* ConnectionController */ = {
@@ -943,6 +998,23 @@
 			productReference = 857EED3A1A8FE01B00EEC00A /* GNUstepOutput.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		85C8CED91AA241E100E79B07 /* Colorizer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C8CEDF1AA241E300E79B07 /* Build configuration list for PBXNativeTarget "Colorizer" */;
+			buildPhases = (
+				85C8CED61AA241E100E79B07 /* Resources */,
+				85C8CED71AA241E100E79B07 /* Sources */,
+				85C8CED81AA241E100E79B07 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Colorizer;
+			productName = Colorizer;
+			productReference = 85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		85FF56FA1A9DBAA000DE8F46 /* exec_helper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85FF57001A9DBAD500DE8F46 /* Build configuration list for PBXNativeTarget "exec_helper" */;
@@ -987,6 +1059,7 @@
 				8530F2AB1A91684D0017F8C5 /* CopyFiles */,
 				8530F2F51A91688A0017F8C5 /* CopyFiles */,
 				855BF50C1A9A00DA004C7617 /* CopyFiles */,
+				85C8CF371AA24F1E00E79B07 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -995,6 +1068,7 @@
 				857EED7D1A8FE19E00EEC00A /* PBXTargetDependency */,
 				855BF4EE1A9A00AD004C7617 /* PBXTargetDependency */,
 				85FF576F1A9DE32A00DE8F46 /* PBXTargetDependency */,
+				85C8CEF71AA24ED700E79B07 /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -1029,6 +1103,7 @@
 				85FF56FA1A9DBAA000DE8F46 /* exec_helper */,
 				855BF4761A9882BC004C7617 /* DCCSupport */,
 				85FF572C1A9DDCBC00DE8F46 /* Highlighting */,
+				85C8CED91AA241E100E79B07 /* Colorizer */,
 			);
 		};
 /* End PBXProject section */
@@ -1085,6 +1160,14 @@
 				852360381A96872900836C2E /* BigServerList.plist in Resources */,
 				852360391A96872900836C2E /* Defaults.plist in Resources */,
 				8523603A1A96872900836C2E /* ServerList.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C8CED61AA241E100E79B07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C8CEEB1AA24ECE00E79B07 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1199,6 +1282,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C8CED71AA241E100E79B07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C8CEE81AA24BE300E79B07 /* Colorizer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F81A9DBAA000DE8F46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1263,6 +1354,11 @@
 			target = 857EED391A8FE01B00EEC00A /* GNUstepOutput */;
 			targetProxy = 857EED7C1A8FE19E00EEC00A /* PBXContainerItemProxy */;
 		};
+		85C8CEF71AA24ED700E79B07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85C8CED91AA241E100E79B07 /* Colorizer */;
+			targetProxy = 85C8CEF61AA24ED700E79B07 /* PBXContainerItemProxy */;
+		};
 		85FF57191A9DBF1F00DE8F46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
@@ -1296,6 +1392,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				855BF49B1A988416004C7617 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		85C8CEE91AA24ECE00E79B07 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85C8CEEA1AA24ECE00E79B07 /* English */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1942,6 +2046,78 @@
 			};
 			name = Default;
 		};
+		85C8CEDC1AA241E200E79B07 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OutFilters/Colorizer/Colorizer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Colorizer;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		85C8CEDD1AA241E200E79B07 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OutFilters/Colorizer/Colorizer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Colorizer;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85C8CEDE1AA241E200E79B07 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OutFilters/Colorizer/Colorizer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Colorizer;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 		85FF56FD1A9DBAA100DE8F46 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2167,6 +2343,16 @@
 				855BF4791A9882BD004C7617 /* Development */,
 				855BF47A1A9882BD004C7617 /* Deployment */,
 				855BF47B1A9882BD004C7617 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85C8CEDF1AA241E300E79B07 /* Build configuration list for PBXNativeTarget "Colorizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85C8CEDC1AA241E200E79B07 /* Development */,
+				85C8CEDD1AA241E200E79B07 /* Deployment */,
+				85C8CEDE1AA241E200E79B07 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
