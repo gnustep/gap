@@ -4,6 +4,7 @@
     begin                : Mon Jan 12 21:08:33 CST 2004
     copyright            : original(GNUMail)-Ludovic Marcotte Copyright 2003
                            TalkSoup adaptation-Andrew Ruder Copyright 2003
+                           (C) 2015 THe GNUstep Application Project
     email                : Andrew Ruder: aeruder@ksu.edu
                            Ludovic Marcotte: ludovic@Sophos.ca
  ***************************************************************************/
@@ -108,13 +109,13 @@ NSAttributedString *emoticonify(NSAttributedString *message)
 				  [NSAttributedString attributedStringWithAttachment: 
 				   aTextAttachment]];
 	      
-				RELEASE(aTextAttachment);
-				RELEASE(aFileWrapper);
+				[aTextAttachment release];
+				[aFileWrapper release];
 			}
 		} while (aRange.location != NSNotFound);
 	}
 	
-	return AUTORELEASE(mas);
+	return [mas autorelease];
 }
 
 @implementation Emoticon
@@ -127,7 +128,7 @@ NSAttributedString *emoticonify(NSAttributedString *message)
 	bundle = [NSBundle bundleForClass: [Emoticon class]];
 
 	resource_path = [bundle resourcePath];
-	RETAIN(resource_path);
+	[resource_path retain];
 }
 - (NSAttributedString *)pluginDescription
 {
