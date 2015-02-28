@@ -6,7 +6,7 @@
 //  Created by Stefan Leuker on 11-SEP-2001.
 //
 //  Copyright (c) 2001-2004, Stefan Leuker.        All rights reserved.
-//  2008-2010 Riccardo Mottola
+//  2008-2015 Riccardo Mottola
 //            GNUstep Application Project
 //  
 //  Redistribution and use in source and binary forms,  with or without
@@ -78,8 +78,8 @@ BOOL FXClassIsSuperclassOfClass(Class aClass, Class subClass)
 
 NSArray *FXSubclassesOfClass(Class aClass)
 { // get all subclasses (nested) of given class
+  NSLog(@"subclasses");
     NSMutableArray *subclasses = [NSMutableArray array];
-#if defined( __APPLE__) || defined(__GNUSTEP_RUNTIME__)
     Class          *classes;
     int            numClasses = 0, newNumClasses, i;
 	// Apple objc runtime
@@ -98,17 +98,6 @@ NSArray *FXSubclassesOfClass(Class aClass)
             [subclasses addObject:classes[i]];
         }
     free(classes);
-#else
-	if(aClass->subclass_list)
-		{ // traverse GNU objc runtime subclasses
-			Class next;
-			for(next = aClass->subclass_list; next; next = next->sibling_class)
-				{
-					[subclasses addObject:next];
-					[subclasses addObjectsFromArray:FXSubclassesOfClass(next)];	// and subclasses of this subclass
-				}
-		}
-#endif
 #if 1
 	NSLog(@"subclasses of %@: %@", NSStringFromClass(aClass), subclasses);
 #endif

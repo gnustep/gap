@@ -1,3 +1,8 @@
+2014-02-28 Riccardo Mottola <rm@gnu.org>
+
+	* FSCore/FoundationExtentions.m
+	Remove old GS runtime code which do not longer compiles
+
 2014-01-26 Riccardo Mottola <rm@gnu.org>
 
 	* Application/FSWindowController.m
