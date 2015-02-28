@@ -101,6 +101,7 @@
 				8590829B1A9D229400C99985,
 				8590834E1A9DB3EB00C99985,
 				850DECCE1AA26695003BA7F4,
+				850DED0E1AA2773B003BA7F4,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -139,6 +140,7 @@
 				857E36431A9C655C0036D65C,
 				8590834D1A9DB3EB00C99985,
 				850DECCD1AA26695003BA7F4,
+				850DED0D1AA2773B003BA7F4,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -152,7 +154,6 @@
 				29B97317FDCFA39411CA2CEA,
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
-				850DECCF1AA26695003BA7F4,
 			);
 			isa = PBXGroup;
 			name = TalkSoup;
@@ -490,14 +491,6 @@
 			refType = 3;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		850DECCF1AA26695003BA7F4 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.xml;
-			name = "Colorizer-Info.plist";
-			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/Colorizer-Info.plist";
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
 		850DECD31AA266C2003BA7F4 = {
 			children = (
 				850DECD41AA266D5003BA7F4,
@@ -610,6 +603,406 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		850DED0A1AA2773B003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DED301AA277D3003BA7F4,
+				850DED311AA277D3003BA7F4,
+				850DED321AA277D3003BA7F4,
+				850DED331AA277D3003BA7F4,
+				850DED341AA277D3003BA7F4,
+				850DED351AA277D3003BA7F4,
+				850DED361AA277D3003BA7F4,
+				850DED371AA277D3003BA7F4,
+				850DED381AA277D3003BA7F4,
+				850DED391AA277D3003BA7F4,
+				850DED3A1AA277D3003BA7F4,
+				850DED3B1AA277D3003BA7F4,
+				850DED3C1AA277D3003BA7F4,
+				850DED3D1AA277D3003BA7F4,
+				850DED4E1AA277F8003BA7F4,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DED0B1AA2773B003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DED581AA27802003BA7F4,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DED0C1AA2773B003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DED111AA27759003BA7F4,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DED0D1AA2773B003BA7F4 = {
+			buildPhases = (
+				850DED0A1AA2773B003BA7F4,
+				850DED0B1AA2773B003BA7F4,
+				850DED0C1AA2773B003BA7F4,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Emoticon/Emoticon-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Emoticon;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = Emoticon;
+			productName = Emoticons;
+			productReference = 850DED0E1AA2773B003BA7F4;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Emoticons</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.Emoticons</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		850DED0E1AA2773B003BA7F4 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = Emoticon.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		850DED111AA27759003BA7F4 = {
+			fileRef = 857EED021A8FD35800EEC00A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED1B1AA27794003BA7F4 = {
+			fileRef = 850DED0E1AA2773B003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED1C1AA277A9003BA7F4 = {
+			children = (
+				850DED551AA27802003BA7F4,
+				850DED561AA27802003BA7F4,
+				850DED4C1AA277F8003BA7F4,
+				850DED441AA277DE003BA7F4,
+				850DED221AA277D2003BA7F4,
+				850DED231AA277D2003BA7F4,
+				850DED241AA277D2003BA7F4,
+				850DED251AA277D2003BA7F4,
+				850DED261AA277D2003BA7F4,
+				850DED271AA277D2003BA7F4,
+				850DED281AA277D2003BA7F4,
+				850DED291AA277D2003BA7F4,
+				850DED2A1AA277D3003BA7F4,
+				850DED2B1AA277D3003BA7F4,
+				850DED2C1AA277D3003BA7F4,
+				850DED2D1AA277D3003BA7F4,
+				850DED2E1AA277D3003BA7F4,
+				850DED2F1AA277D3003BA7F4,
+			);
+			isa = PBXGroup;
+			name = Emoticons;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED221AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face1.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face1.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED231AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face2.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face2.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED241AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face3.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face3.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED251AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face4.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face4.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED261AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face5.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face5.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED271AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face6.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face6.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED281AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face8.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face8.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED291AA277D2003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face9.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face9.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED2A1AA277D3003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face10.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face10.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED2B1AA277D3003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face11.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face11.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED2C1AA277D3003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face13.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face13.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED2D1AA277D3003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face14.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face14.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED2E1AA277D3003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face15.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face15.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED2F1AA277D3003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			name = "emoticon-face19.tiff";
+			path = "InFilters/Emoticon/AllLanguages/emoticon-face19.tiff";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED301AA277D3003BA7F4 = {
+			fileRef = 850DED221AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED311AA277D3003BA7F4 = {
+			fileRef = 850DED231AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED321AA277D3003BA7F4 = {
+			fileRef = 850DED241AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED331AA277D3003BA7F4 = {
+			fileRef = 850DED251AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED341AA277D3003BA7F4 = {
+			fileRef = 850DED261AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED351AA277D3003BA7F4 = {
+			fileRef = 850DED271AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED361AA277D3003BA7F4 = {
+			fileRef = 850DED281AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED371AA277D3003BA7F4 = {
+			fileRef = 850DED291AA277D2003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED381AA277D3003BA7F4 = {
+			fileRef = 850DED2A1AA277D3003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED391AA277D3003BA7F4 = {
+			fileRef = 850DED2B1AA277D3003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED3A1AA277D3003BA7F4 = {
+			fileRef = 850DED2C1AA277D3003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED3B1AA277D3003BA7F4 = {
+			fileRef = 850DED2D1AA277D3003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED3C1AA277D3003BA7F4 = {
+			fileRef = 850DED2E1AA277D3003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED3D1AA277D3003BA7F4 = {
+			fileRef = 850DED2F1AA277D3003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED441AA277DE003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "Emoticon-Info.plist";
+			path = "InFilters/Emoticon/Emoticon-Info.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED4C1AA277F8003BA7F4 = {
+			children = (
+				850DED4D1AA277F8003BA7F4,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED4D1AA277F8003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = InFilters/Emoticon/English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED4E1AA277F8003BA7F4 = {
+			fileRef = 850DED4C1AA277F8003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED551AA27802003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Emoticon.h;
+			path = InFilters/Emoticon/Emoticon.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED561AA27802003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = Emoticon.m;
+			path = InFilters/Emoticon/Emoticon.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DED581AA27802003BA7F4 = {
+			fileRef = 850DED561AA27802003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DED591AA2781E003BA7F4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 850DED0D1AA2773B003BA7F4;
+			remoteInfo = Emoticons;
+		};
+		850DED5A1AA2781E003BA7F4 = {
+			isa = PBXTargetDependency;
+			target = 850DED0D1AA2773B003BA7F4;
+			targetProxy = 850DED591AA2781E003BA7F4;
 		};
 		8530F2681A91317F0017F8C5 = {
 			fileRef = 857EED021A8FD35800EEC00A;
@@ -745,6 +1138,7 @@
 		};
 		857E36381A9C64E20036D65C = {
 			children = (
+				850DED1C1AA277A9003BA7F4,
 				859083491A9DB3C700C99985,
 				857E363D1A9C651B0036D65C,
 			);
@@ -1028,6 +1422,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				850DED1B1AA27794003BA7F4,
 				859083DF1A9DB6D500C99985,
 				857E367F1A9C699E0036D65C,
 			);
@@ -3722,6 +4117,7 @@
 				857E368A1A9C69CE0036D65C,
 				859083EC1A9DB74A00C99985,
 				850DECF61AA267AE003BA7F4,
+				850DED5A1AA2781E003BA7F4,
 			);
 			isa = PBXNativeTarget;
 			name = TalkSoup;
