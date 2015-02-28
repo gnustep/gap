@@ -237,7 +237,7 @@
       [NSGraphicsContext restoreGraphicsState];
     }
   
-  [image drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+  [image drawInRect:boundsZ fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
   
   if(stroked)
     {
