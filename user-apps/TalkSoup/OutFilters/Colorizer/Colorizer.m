@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat May 10 18:58:30 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -76,41 +77,41 @@ static NSString *colors[16] = { 0 };
 	
 static void initialize_stuff(void)
 {
-	CREATE_AUTORELEASE_POOL(apr);
+	NSAutoreleasePool *arp = [NSAutoreleasePool new];
 	
-	comma = RETAIN([NSCharacterSet characterSetWithCharactersInString: @","]);
+	comma = [[NSCharacterSet characterSetWithCharactersInString: @","] retain];
 	color_control = 
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"C"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"C"] retain];
 	bold_control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"B"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"B"] retain];
 	underline_control = 
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"U"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"U"] retain];
 	clear_control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"O"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: @"O"] retain];
 	reverse_control = 
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: @"R"]);	
+	  [[NSCharacterSet characterSetWithCharactersInString: @"R"] retain];	
 	control =
-	  RETAIN([NSCharacterSet characterSetWithCharactersInString: 
-	   @"%"]);
+	  [[NSCharacterSet characterSetWithCharactersInString: 
+	   @"%"] retain];
 	
-	colors[0] = RETAIN(IRCColorWhite);
-	colors[1] = RETAIN(IRCColorBlack);
-	colors[2] = RETAIN(IRCColorBlue);
-	colors[3] = RETAIN(IRCColorGreen);
-	colors[4] = RETAIN(IRCColorRed);
-	colors[5] = RETAIN(IRCColorMaroon);
-	colors[6] = RETAIN(IRCColorMagenta);
-	colors[7] = RETAIN(IRCColorOrange);
-	colors[8] = RETAIN(IRCColorYellow);
-	colors[9] = RETAIN(IRCColorLightGreen);
-	colors[10] = RETAIN(IRCColorTeal);
-	colors[11] = RETAIN(IRCColorLightCyan);
-	colors[12] = RETAIN(IRCColorLightBlue);
-	colors[13] = RETAIN(IRCColorLightMagenta);
-	colors[14] = RETAIN(IRCColorGrey);
-	colors[15] = RETAIN(IRCColorLightGrey);
+	colors[0] = [IRCColorWhite retain];
+	colors[1] = [IRCColorBlack retain];
+	colors[2] = [IRCColorBlue retain];
+	colors[3] = [IRCColorGreen retain];
+	colors[4] = [IRCColorRed retain];
+	colors[5] = [IRCColorMaroon retain];
+	colors[6] = [IRCColorMagenta retain];
+	colors[7] = [IRCColorOrange retain];
+	colors[8] = [IRCColorYellow retain];
+	colors[9] = [IRCColorLightGreen retain];
+	colors[10] = [IRCColorTeal retain];
+	colors[11] = [IRCColorLightCyan retain];
+	colors[12] = [IRCColorLightBlue retain];
+	colors[13] = [IRCColorLightMagenta retain];
+	colors[14] = [IRCColorGrey retain];
+	colors[15] = [IRCColorLightGrey retain];
 	
-	RELEASE(apr);
+	[arp release];
 }
 
 static inline BOOL scan_one_char_from_set(NSScanner *beg, NSCharacterSet *aSet, NSString **y)
@@ -139,8 +140,8 @@ static inline NSAttributedString *as2cas(NSAttributedString *astr)
 	id aString;
 	int x;
 	NSMutableAttributedString *string = 
-	  AUTORELEASE([NSMutableAttributedString new]);
-	NSMutableDictionary *dict = AUTORELEASE([NSMutableDictionary new]);
+	  [[NSMutableAttributedString new] autorelease];
+	NSMutableDictionary *dict = [[NSMutableDictionary new] autorelease];
 	id str = [astr string];
 	int location;
 
@@ -179,8 +180,8 @@ static inline NSAttributedString *as2cas(NSAttributedString *astr)
 		if ([scan isAtEnd] == YES)
 		{
 			[string appendAttributedString:
-			  AUTORELEASE([[NSAttributedString alloc] initWithString: @"%"
-			  attributes: [NSDictionary dictionaryWithDictionary: dict]])];
+			  [[[NSAttributedString alloc] initWithString: @"%"
+			  attributes: [NSDictionary dictionaryWithDictionary: dict]] autorelease]];
 
 			break;
 		}
@@ -188,8 +189,8 @@ static inline NSAttributedString *as2cas(NSAttributedString *astr)
 		if (scan_one_char_from_set(scan, control, 0))
 		{
 			[string appendAttributedString: 
-			  AUTORELEASE([[NSAttributedString alloc] initWithString: @"%"
-			  attributes: [NSDictionary dictionaryWithDictionary: dict]])];
+			  [[[NSAttributedString alloc] initWithString: @"%"
+			  attributes: [NSDictionary dictionaryWithDictionary: dict]] autorelease]];
 		}
 		else if (scan_one_char_from_set(scan, bold_control, 0))
 		{
@@ -267,8 +268,8 @@ static inline NSAttributedString *as2cas(NSAttributedString *astr)
 		else
 		{
 			[string appendAttributedString:
-			  AUTORELEASE([[NSAttributedString alloc] initWithString: @"%"
-			  attributes: [NSDictionary dictionaryWithDictionary: dict]])];
+			  [[[NSAttributedString alloc] initWithString: @"%"
+			  attributes: [NSDictionary dictionaryWithDictionary: dict]] autorelease]];
 		}
 	}
 	
