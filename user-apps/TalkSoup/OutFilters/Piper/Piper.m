@@ -59,7 +59,7 @@ static NSAttributedString *pipeit(NSAttributedString *a)
 			
 		if ([object count] == 0) continue;
 		
-		task = AUTORELEASE([NSTask new]);
+		task = [[NSTask new] autorelease];
 		pipein = [NSPipe pipe];
 		pipeout = [NSPipe pipe];
 		
@@ -81,8 +81,8 @@ static NSAttributedString *pipeit(NSAttributedString *a)
 		[fdin closeFile];
 		newData = [fdout readDataToEndOfFile];
 		
-		str = AUTORELEASE([[NSMutableString alloc] initWithData: newData 
-		  encoding: NSUTF8StringEncoding]);
+		str = [[[NSMutableString alloc] initWithData: newData 
+		  encoding: NSUTF8StringEncoding] autorelease];
 		
 		[task terminate];
 		
@@ -98,7 +98,7 @@ static NSAttributedString *pipeit(NSAttributedString *a)
 	
 	if ([[a string] isEqualToString: str]) return a;
 	
-	return AUTORELEASE([[NSAttributedString alloc] initWithString: str]);
+	return [[[NSAttributedString alloc] initWithString: str] autorelease];
 }
 
 NSInvocation *invoc = nil;
@@ -108,8 +108,8 @@ NSInvocation *invoc = nil;
 {
 	if (invoc) return;
 
-	invoc = RETAIN([NSInvocation invocationWithMethodSignature: 
-	  [self methodSignatureForSelector: @selector(commandPiper:connection:)]]);
+	invoc = [[NSInvocation invocationWithMethodSignature: 
+	  [self methodSignatureForSelector: @selector(commandPiper:connection:)]] retain];
 	[invoc retainArguments];
 	[invoc setTarget: self];
 	[invoc setSelector: @selector(commandPiper:connection:)];
