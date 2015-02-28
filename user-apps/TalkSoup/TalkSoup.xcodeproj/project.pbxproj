@@ -62,6 +62,24 @@
 		85C8CEEB1AA24ECE00E79B07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CEE91AA24ECE00E79B07 /* Localizable.strings */; };
 		85C8CF341AA24F0000E79B07 /* Colorizer.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */; };
 		85C8CF421AA252EC00E79B07 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		85C8CF9D1AA26ADA00E79B07 /* emoticon-face1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF8F1AA26ADA00E79B07 /* emoticon-face1.tiff */; };
+		85C8CF9E1AA26ADA00E79B07 /* emoticon-face2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF901AA26ADA00E79B07 /* emoticon-face2.tiff */; };
+		85C8CF9F1AA26ADA00E79B07 /* emoticon-face3.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF911AA26ADA00E79B07 /* emoticon-face3.tiff */; };
+		85C8CFA01AA26ADA00E79B07 /* emoticon-face4.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF921AA26ADA00E79B07 /* emoticon-face4.tiff */; };
+		85C8CFA11AA26ADA00E79B07 /* emoticon-face5.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF931AA26ADA00E79B07 /* emoticon-face5.tiff */; };
+		85C8CFA21AA26ADA00E79B07 /* emoticon-face6.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF941AA26ADA00E79B07 /* emoticon-face6.tiff */; };
+		85C8CFA31AA26ADA00E79B07 /* emoticon-face8.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF951AA26ADA00E79B07 /* emoticon-face8.tiff */; };
+		85C8CFA41AA26ADA00E79B07 /* emoticon-face9.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF961AA26ADA00E79B07 /* emoticon-face9.tiff */; };
+		85C8CFA51AA26ADA00E79B07 /* emoticon-face10.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF971AA26ADA00E79B07 /* emoticon-face10.tiff */; };
+		85C8CFA61AA26ADA00E79B07 /* emoticon-face11.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF981AA26ADA00E79B07 /* emoticon-face11.tiff */; };
+		85C8CFA71AA26ADA00E79B07 /* emoticon-face13.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF991AA26ADA00E79B07 /* emoticon-face13.tiff */; };
+		85C8CFA81AA26ADA00E79B07 /* emoticon-face14.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF9A1AA26ADA00E79B07 /* emoticon-face14.tiff */; };
+		85C8CFA91AA26ADA00E79B07 /* emoticon-face15.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF9B1AA26ADA00E79B07 /* emoticon-face15.tiff */; };
+		85C8CFAA1AA26ADA00E79B07 /* emoticon-face19.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CF9C1AA26ADA00E79B07 /* emoticon-face19.tiff */; };
+		85C8CFAD1AA26AE700E79B07 /* Emoticon.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C8CFAC1AA26AE700E79B07 /* Emoticon.m */; };
+		85C8CFB01AA26AF500E79B07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CFAE1AA26AF500E79B07 /* Localizable.strings */; };
+		85C8CFB31AA26B0600E79B07 /* Emoticon.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */; };
+		85C8CFC21AA26B2500E79B07 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		85F94D931A9006CC00B00DCB /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D871A9006CC00B00DCB /* ConnectionController.m */; };
 		85F94D951A9006CC00B00DCB /* ConnectionControllerCtcp.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D891A9006CC00B00DCB /* ConnectionControllerCtcp.m */; };
 		85F94D971A9006CC00B00DCB /* ConnectionControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D8B1A9006CC00B00DCB /* ConnectionControllerDelegate.m */; };
@@ -183,6 +201,13 @@
 			remoteGlobalIDString = 85C8CED91AA241E100E79B07 /* Colorizer */;
 			remoteInfo = Colorizer;
 		};
+		85C8CFCB1AA26B9B00E79B07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85C8CF6A1AA26A4200E79B07 /* Emoticon */;
+			remoteInfo = Emoticon;
+		};
 		85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -250,6 +275,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				85C8CFB31AA26B0600E79B07 /* Emoticon.bundle in CopyFiles */,
 				85FF57491A9DE1E400DE8F46 /* Highlighting.bundle in CopyFiles */,
 				855BF5151A9A00F8004C7617 /* DCCSupport.bundle in CopyFiles */,
 			);
@@ -345,6 +371,25 @@
 		85C8CEE61AA24BE300E79B07 /* Colorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colorizer.h; path = OutFilters/Colorizer/Colorizer.h; sourceTree = "<group>"; };
 		85C8CEE71AA24BE300E79B07 /* Colorizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colorizer.m; path = OutFilters/Colorizer/Colorizer.m; sourceTree = "<group>"; };
 		85C8CEEA1AA24ECE00E79B07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OutFilters/Colorizer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Emoticon.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C8CF6C1AA26A4200E79B07 /* Emoticon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Emoticon-Info.plist"; path = "InFilters/Emoticon/Emoticon-Info.plist"; sourceTree = "<group>"; };
+		85C8CF8F1AA26ADA00E79B07 /* emoticon-face1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face1.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face1.tiff"; sourceTree = "<group>"; };
+		85C8CF901AA26ADA00E79B07 /* emoticon-face2.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face2.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face2.tiff"; sourceTree = "<group>"; };
+		85C8CF911AA26ADA00E79B07 /* emoticon-face3.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face3.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face3.tiff"; sourceTree = "<group>"; };
+		85C8CF921AA26ADA00E79B07 /* emoticon-face4.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face4.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face4.tiff"; sourceTree = "<group>"; };
+		85C8CF931AA26ADA00E79B07 /* emoticon-face5.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face5.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face5.tiff"; sourceTree = "<group>"; };
+		85C8CF941AA26ADA00E79B07 /* emoticon-face6.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face6.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face6.tiff"; sourceTree = "<group>"; };
+		85C8CF951AA26ADA00E79B07 /* emoticon-face8.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face8.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face8.tiff"; sourceTree = "<group>"; };
+		85C8CF961AA26ADA00E79B07 /* emoticon-face9.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face9.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face9.tiff"; sourceTree = "<group>"; };
+		85C8CF971AA26ADA00E79B07 /* emoticon-face10.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face10.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face10.tiff"; sourceTree = "<group>"; };
+		85C8CF981AA26ADA00E79B07 /* emoticon-face11.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face11.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face11.tiff"; sourceTree = "<group>"; };
+		85C8CF991AA26ADA00E79B07 /* emoticon-face13.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face13.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face13.tiff"; sourceTree = "<group>"; };
+		85C8CF9A1AA26ADA00E79B07 /* emoticon-face14.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face14.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face14.tiff"; sourceTree = "<group>"; };
+		85C8CF9B1AA26ADA00E79B07 /* emoticon-face15.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face15.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face15.tiff"; sourceTree = "<group>"; };
+		85C8CF9C1AA26ADA00E79B07 /* emoticon-face19.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "emoticon-face19.tiff"; path = "InFilters/Emoticon/AllLanguages/emoticon-face19.tiff"; sourceTree = "<group>"; };
+		85C8CFAB1AA26AE700E79B07 /* Emoticon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Emoticon.h; path = InFilters/Emoticon/Emoticon.h; sourceTree = "<group>"; };
+		85C8CFAC1AA26AE700E79B07 /* Emoticon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Emoticon.m; path = InFilters/Emoticon/Emoticon.m; sourceTree = "<group>"; };
+		85C8CFAF1AA26AF500E79B07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/Emoticon/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		85F94D861A9006CC00B00DCB /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionController.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.h; sourceTree = "<group>"; };
 		85F94D871A9006CC00B00DCB /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ConnectionController.m; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m; sourceTree = "<group>"; };
 		85F94D881A9006CC00B00DCB /* ConnectionControllerCtcp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionControllerCtcp.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.h; sourceTree = "<group>"; };
@@ -489,6 +534,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C8CF691AA26A4200E79B07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C8CFC21AA26B2500E79B07 /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F91A9DBAA000DE8F46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -566,6 +619,7 @@
 				85FF56FB1A9DBAA000DE8F46 /* exec_helper */,
 				85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */,
 				85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */,
+				85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -628,9 +682,9 @@
 		852361A51A97C02E00836C2E /* InFilters */ = {
 			isa = PBXGroup;
 			children = (
+				85C8CF8D1AA26AAE00E79B07 /* Emoticon */,
 				85FF57261A9DDCA400DE8F46 /* Highlighting */,
 				855BF4841A98833F004C7617 /* DCCSupport */,
-				855BF4781A9882BC004C7617 /* DCCSupport-Info.plist */,
 			);
 			name = InFilters;
 			sourceTree = "<group>";
@@ -638,6 +692,7 @@
 		855BF4841A98833F004C7617 /* DCCSupport */ = {
 			isa = PBXGroup;
 			children = (
+				855BF4781A9882BC004C7617 /* DCCSupport-Info.plist */,
 				855BF49D1A98842C004C7617 /* dccsupport_prefs.tiff */,
 				855BF49E1A98842C004C7617 /* Defaults.plist */,
 				855BF49A1A988416004C7617 /* Localizable.strings */,
@@ -732,6 +787,31 @@
 				85C8CEDB1AA241E100E79B07 /* Colorizer-Info.plist */,
 			);
 			name = Colorizer;
+			sourceTree = "<group>";
+		};
+		85C8CF8D1AA26AAE00E79B07 /* Emoticon */ = {
+			isa = PBXGroup;
+			children = (
+				85C8CFAE1AA26AF500E79B07 /* Localizable.strings */,
+				85C8CFAB1AA26AE700E79B07 /* Emoticon.h */,
+				85C8CFAC1AA26AE700E79B07 /* Emoticon.m */,
+				85C8CF8F1AA26ADA00E79B07 /* emoticon-face1.tiff */,
+				85C8CF901AA26ADA00E79B07 /* emoticon-face2.tiff */,
+				85C8CF911AA26ADA00E79B07 /* emoticon-face3.tiff */,
+				85C8CF921AA26ADA00E79B07 /* emoticon-face4.tiff */,
+				85C8CF931AA26ADA00E79B07 /* emoticon-face5.tiff */,
+				85C8CF941AA26ADA00E79B07 /* emoticon-face6.tiff */,
+				85C8CF951AA26ADA00E79B07 /* emoticon-face8.tiff */,
+				85C8CF961AA26ADA00E79B07 /* emoticon-face9.tiff */,
+				85C8CF971AA26ADA00E79B07 /* emoticon-face10.tiff */,
+				85C8CF981AA26ADA00E79B07 /* emoticon-face11.tiff */,
+				85C8CF991AA26ADA00E79B07 /* emoticon-face13.tiff */,
+				85C8CF9A1AA26ADA00E79B07 /* emoticon-face14.tiff */,
+				85C8CF9B1AA26ADA00E79B07 /* emoticon-face15.tiff */,
+				85C8CF9C1AA26ADA00E79B07 /* emoticon-face19.tiff */,
+				85C8CF6C1AA26A4200E79B07 /* Emoticon-Info.plist */,
+			);
+			name = Emoticon;
 			sourceTree = "<group>";
 		};
 		85F94D801A90068500B00DCB /* ConnectionController */ = {
@@ -1014,6 +1094,23 @@
 			productReference = 85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		85C8CF6A1AA26A4200E79B07 /* Emoticon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C8CF701AA26A4300E79B07 /* Build configuration list for PBXNativeTarget "Emoticon" */;
+			buildPhases = (
+				85C8CF671AA26A4200E79B07 /* Resources */,
+				85C8CF681AA26A4200E79B07 /* Sources */,
+				85C8CF691AA26A4200E79B07 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Emoticon;
+			productName = Emoticon;
+			productReference = 85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		85FF56FA1A9DBAA000DE8F46 /* exec_helper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85FF57001A9DBAD500DE8F46 /* Build configuration list for PBXNativeTarget "exec_helper" */;
@@ -1068,6 +1165,7 @@
 				855BF4EE1A9A00AD004C7617 /* PBXTargetDependency */,
 				85FF576F1A9DE32A00DE8F46 /* PBXTargetDependency */,
 				85C8CEF71AA24ED700E79B07 /* PBXTargetDependency */,
+				85C8CFCC1AA26B9B00E79B07 /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -1103,6 +1201,7 @@
 				855BF4761A9882BC004C7617 /* DCCSupport */,
 				85FF572C1A9DDCBC00DE8F46 /* Highlighting */,
 				85C8CED91AA241E100E79B07 /* Colorizer */,
+				85C8CF6A1AA26A4200E79B07 /* Emoticon */,
 			);
 		};
 /* End PBXProject section */
@@ -1167,6 +1266,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				85C8CEEB1AA24ECE00E79B07 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C8CF671AA26A4200E79B07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C8CF9D1AA26ADA00E79B07 /* emoticon-face1.tiff in Resources */,
+				85C8CF9E1AA26ADA00E79B07 /* emoticon-face2.tiff in Resources */,
+				85C8CF9F1AA26ADA00E79B07 /* emoticon-face3.tiff in Resources */,
+				85C8CFA01AA26ADA00E79B07 /* emoticon-face4.tiff in Resources */,
+				85C8CFA11AA26ADA00E79B07 /* emoticon-face5.tiff in Resources */,
+				85C8CFA21AA26ADA00E79B07 /* emoticon-face6.tiff in Resources */,
+				85C8CFA31AA26ADA00E79B07 /* emoticon-face8.tiff in Resources */,
+				85C8CFA41AA26ADA00E79B07 /* emoticon-face9.tiff in Resources */,
+				85C8CFA51AA26ADA00E79B07 /* emoticon-face10.tiff in Resources */,
+				85C8CFA61AA26ADA00E79B07 /* emoticon-face11.tiff in Resources */,
+				85C8CFA71AA26ADA00E79B07 /* emoticon-face13.tiff in Resources */,
+				85C8CFA81AA26ADA00E79B07 /* emoticon-face14.tiff in Resources */,
+				85C8CFA91AA26ADA00E79B07 /* emoticon-face15.tiff in Resources */,
+				85C8CFAA1AA26ADA00E79B07 /* emoticon-face19.tiff in Resources */,
+				85C8CFB01AA26AF500E79B07 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1288,6 +1409,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C8CF681AA26A4200E79B07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C8CFAD1AA26AE700E79B07 /* Emoticon.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F81A9DBAA000DE8F46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1357,6 +1486,11 @@
 			target = 85C8CED91AA241E100E79B07 /* Colorizer */;
 			targetProxy = 85C8CEF61AA24ED700E79B07 /* PBXContainerItemProxy */;
 		};
+		85C8CFCC1AA26B9B00E79B07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85C8CF6A1AA26A4200E79B07 /* Emoticon */;
+			targetProxy = 85C8CFCB1AA26B9B00E79B07 /* PBXContainerItemProxy */;
+		};
 		85FF57191A9DBF1F00DE8F46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
@@ -1398,6 +1532,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				85C8CEEA1AA24ECE00E79B07 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		85C8CFAE1AA26AF500E79B07 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85C8CFAF1AA26AF500E79B07 /* English */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2116,6 +2258,78 @@
 			};
 			name = Default;
 		};
+		85C8CF6D1AA26A4300E79B07 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Emoticon/Emoticon-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Emoticon;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		85C8CF6E1AA26A4300E79B07 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Emoticon/Emoticon-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Emoticon;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85C8CF6F1AA26A4300E79B07 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Emoticon/Emoticon-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Emoticon;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 		85FF56FD1A9DBAA100DE8F46 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2351,6 +2565,16 @@
 				85C8CEDC1AA241E200E79B07 /* Development */,
 				85C8CEDD1AA241E200E79B07 /* Deployment */,
 				85C8CEDE1AA241E200E79B07 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85C8CF701AA26A4300E79B07 /* Build configuration list for PBXNativeTarget "Emoticon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85C8CF6D1AA26A4300E79B07 /* Development */,
+				85C8CF6E1AA26A4300E79B07 /* Deployment */,
+				85C8CF6F1AA26A4300E79B07 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
