@@ -100,6 +100,7 @@
 				857E36441A9C655C0036D65C,
 				8590829B1A9D229400C99985,
 				8590834E1A9DB3EB00C99985,
+				850DECCE1AA26695003BA7F4,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -137,10 +138,12 @@
 				8590829A1A9D229400C99985,
 				857E36431A9C655C0036D65C,
 				8590834D1A9DB3EB00C99985,
+				850DECCD1AA26695003BA7F4,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
 			children = (
+				850DECD31AA266C2003BA7F4,
 				857E36381A9C64E20036D65C,
 				857EED311A8FDE7800EEC00A,
 				857EECEA1A8FD29800EEC00A,
@@ -149,6 +152,7 @@
 				29B97317FDCFA39411CA2CEA,
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
+				850DECCF1AA26695003BA7F4,
 			);
 			isa = PBXGroup;
 			name = TalkSoup;
@@ -400,6 +404,209 @@
 		};
 		8503F6431A96A51600007EE7 = {
 			fileRef = 29B97325FDCFA39411CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DECCA1AA26695003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DECE81AA26756003BA7F4,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DECCB1AA26695003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DECF21AA26772003BA7F4,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DECCC1AA26695003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DECFB1AA26836003BA7F4,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DECCD1AA26695003BA7F4 = {
+			buildPhases = (
+				850DECCA1AA26695003BA7F4,
+				850DECCB1AA26695003BA7F4,
+				850DECCC1AA26695003BA7F4,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OutFilters/Colorizer/Colorizer-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Colorizer;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = Colorizer;
+			productName = Colorizer;
+			productReference = 850DECCE1AA26695003BA7F4;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Colorizer</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.Colorizer</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		850DECCE1AA26695003BA7F4 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = Colorizer.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		850DECCF1AA26695003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "Colorizer-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/Colorizer-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		850DECD31AA266C2003BA7F4 = {
+			children = (
+				850DECD41AA266D5003BA7F4,
+			);
+			isa = PBXGroup;
+			name = OutFilters;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECD41AA266D5003BA7F4 = {
+			children = (
+				850DECEF1AA26772003BA7F4,
+				850DECF01AA26772003BA7F4,
+				850DECE61AA26756003BA7F4,
+				850DECDE1AA26740003BA7F4,
+			);
+			isa = PBXGroup;
+			name = Colorizer;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECDE1AA26740003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "Colorizer-Info.plist";
+			path = "OutFilters/Colorizer/Colorizer-Info.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECE61AA26756003BA7F4 = {
+			children = (
+				850DECE71AA26756003BA7F4,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECE71AA26756003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = OutFilters/Colorizer/English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECE81AA26756003BA7F4 = {
+			fileRef = 850DECE61AA26756003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DECEF1AA26772003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Colorizer.h;
+			path = OutFilters/Colorizer/Colorizer.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECF01AA26772003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = Colorizer.m;
+			path = OutFilters/Colorizer/Colorizer.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DECF21AA26772003BA7F4 = {
+			fileRef = 850DECF01AA26772003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DECF31AA2678E003BA7F4 = {
+			buildActionMask = 2147483647;
+			dstPath = OutFilters;
+			dstSubfolderSpec = 7;
+			files = (
+				850DECF41AA267A2003BA7F4,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DECF41AA267A2003BA7F4 = {
+			fileRef = 850DECCE1AA26695003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DECF51AA267AE003BA7F4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 850DECCD1AA26695003BA7F4;
+			remoteInfo = Colorizer;
+		};
+		850DECF61AA267AE003BA7F4 = {
+			isa = PBXTargetDependency;
+			target = 850DECCD1AA26695003BA7F4;
+			targetProxy = 850DECF51AA267AE003BA7F4;
+		};
+		850DECFB1AA26836003BA7F4 = {
+			fileRef = 857EED021A8FD35800EEC00A;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -3493,6 +3700,7 @@
 				8530F2AB1A91684D0017F8C5,
 				8530F2F51A91688A0017F8C5,
 				857E367E1A9C698C0036D65C,
+				850DECF31AA2678E003BA7F4,
 			);
 			buildRules = (
 			);
@@ -3513,6 +3721,7 @@
 				857E36861A9C69CE0036D65C,
 				857E368A1A9C69CE0036D65C,
 				859083EC1A9DB74A00C99985,
+				850DECF61AA267AE003BA7F4,
 			);
 			isa = PBXNativeTarget;
 			name = TalkSoup;
