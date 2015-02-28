@@ -143,13 +143,15 @@ static void run_it(NSString *command)
 
 int main(int argc, char **argv, char **env)
 {
-	NSAutoreleasePool *apr = [NSAutoreleasePool new];
+	NSAutoreleasePool *apr;
 	NSString *command;
 
 	signal(SIGPIPE, SIG_IGN);
 	if (argc < 4) 
 		return 1;
 
+    apr = [NSAutoreleasePool new];
+  
 	my_regname = [NSString stringWithCString: argv[1]];
 	my_notname = [NSString stringWithCString: argv[2]];
 	command = [NSString stringWithCString: argv[3]];
