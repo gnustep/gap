@@ -489,7 +489,11 @@ NSMutableAttributedString *BuildAttributedFormat(id aObject, ...)
 			
 			[str appendAttributedString: [aObject attributedSubstringFromRange: tmpr]];
 			tmp = va_arg(ap, id);
-			if ([tmp isKindOfClass: [NSString class]])
+			if (tmp == nil)
+			  {
+			    tmp = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+			  }
+			else if ([tmp isKindOfClass: [NSString class]])
 			{
 				tmp = [[[NSAttributedString alloc] initWithString:
 				  tmp] autorelease];
