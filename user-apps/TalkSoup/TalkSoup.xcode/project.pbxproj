@@ -1188,6 +1188,30 @@
 			target = 850DED761AA3259E003BA7F4;
 			targetProxy = 850DED9B1AA32639003BA7F4;
 		};
+		850DEDE81AA375E9003BA7F4 = {
+			children = (
+				850DEDE91AA375E9003BA7F4,
+			);
+			isa = PBXVariantGroup;
+			name = FontPreferences.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEDE91AA375E9003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = Output/GNUstepOutput/English.lproj/FontPreferences.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEE021AA37AFA003BA7F4 = {
+			fileRef = 850DEDE81AA375E9003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		8530F2681A91317F0017F8C5 = {
 			fileRef = 857EED021A8FD35800EEC00A;
 			isa = PBXBuildFile;
@@ -2183,6 +2207,7 @@
 		857EED361A8FE01B00EEC00A = {
 			buildActionMask = 2147483647;
 			files = (
+				850DEE021AA37AFA003BA7F4,
 				85F94DF91A9008BA00B00DCB,
 				85F94DFA1A9008BA00B00DCB,
 				85F94DFB1A9008BA00B00DCB,
@@ -3545,6 +3570,7 @@
 				85F94E081A90093C00B00DCB,
 				85F94DE51A9008BA00B00DCB,
 				85F94DE71A9008BA00B00DCB,
+				850DEDE81AA375E9003BA7F4,
 				85F94DE91A9008BA00B00DCB,
 				85F94DEB1A9008BA00B00DCB,
 				85F94DED1A9008BA00B00DCB,
