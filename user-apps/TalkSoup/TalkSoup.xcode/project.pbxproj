@@ -103,6 +103,7 @@
 				850DECCE1AA26695003BA7F4,
 				850DED0E1AA2773B003BA7F4,
 				850DED771AA3259E003BA7F4,
+				850DEE401AA37DE6003BA7F4,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -143,6 +144,7 @@
 				850DECCD1AA26695003BA7F4,
 				850DED0D1AA2773B003BA7F4,
 				850DED761AA3259E003BA7F4,
+				850DEE3F1AA37DE6003BA7F4,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -1212,6 +1214,187 @@
 			settings = {
 			};
 		};
+		850DEE3B1AA37DBB003BA7F4 = {
+			children = (
+				850DEE8C1AA37FCD003BA7F4,
+				850DEE8D1AA37FCD003BA7F4,
+				850DEE851AA37FBF003BA7F4,
+				850DEE411AA37DE6003BA7F4,
+			);
+			isa = PBXGroup;
+			name = MessageInTab;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEE3C1AA37DE6003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DEE871AA37FBF003BA7F4,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DEE3D1AA37DE6003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DEE8F1AA37FCD003BA7F4,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DEE3E1AA37DE6003BA7F4 = {
+			buildActionMask = 2147483647;
+			files = (
+				850DEE761AA37F0F003BA7F4,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850DEE3F1AA37DE6003BA7F4 = {
+			buildPhases = (
+				850DEE3C1AA37DE6003BA7F4,
+				850DEE3D1AA37DE6003BA7F4,
+				850DEE3E1AA37DE6003BA7F4,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageInTab/MessageInTab-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = MessageInTab;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = MessageInTab;
+			productName = MessageInTab;
+			productReference = 850DEE401AA37DE6003BA7F4;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>MessageInTab</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.MessageInTab</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		850DEE401AA37DE6003BA7F4 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = MessageInTab.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		850DEE411AA37DE6003BA7F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "MessageInTab-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/InFilters/MessageInTab/MessageInTab-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		850DEE431AA37E66003BA7F4 = {
+			fileRef = 850DEE401AA37DE6003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DEE441AA37E76003BA7F4 = {
+			fileRef = 850DEE401AA37DE6003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DEE451AA37E7B003BA7F4 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 850DEE3F1AA37DE6003BA7F4;
+			remoteInfo = MessageInTab;
+		};
+		850DEE461AA37E7B003BA7F4 = {
+			isa = PBXTargetDependency;
+			target = 850DEE3F1AA37DE6003BA7F4;
+			targetProxy = 850DEE451AA37E7B003BA7F4;
+		};
+		850DEE761AA37F0F003BA7F4 = {
+			fileRef = 857EED021A8FD35800EEC00A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DEE851AA37FBF003BA7F4 = {
+			children = (
+				850DEE861AA37FBF003BA7F4,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEE861AA37FBF003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = InFilters/MessageInTab/English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEE871AA37FBF003BA7F4 = {
+			fileRef = 850DEE851AA37FBF003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		850DEE8C1AA37FCD003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = MessageInTab.h;
+			path = InFilters/MessageInTab/MessageInTab.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEE8D1AA37FCD003BA7F4 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = MessageInTab.m;
+			path = InFilters/MessageInTab/MessageInTab.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		850DEE8F1AA37FCD003BA7F4 = {
+			fileRef = 850DEE8D1AA37FCD003BA7F4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		8530F2681A91317F0017F8C5 = {
 			fileRef = 857EED021A8FD35800EEC00A;
 			isa = PBXBuildFile;
@@ -1346,6 +1529,7 @@
 		};
 		857E36381A9C64E20036D65C = {
 			children = (
+				850DEE3B1AA37DBB003BA7F4,
 				850DED701AA3257D003BA7F4,
 				850DED1C1AA277A9003BA7F4,
 				859083491A9DB3C700C99985,
@@ -1631,6 +1815,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				850DEE431AA37E66003BA7F4,
 				850DED9A1AA3262D003BA7F4,
 				850DED1B1AA27794003BA7F4,
 				859083DF1A9DB6D500C99985,
@@ -4331,6 +4516,7 @@
 				850DECF61AA267AE003BA7F4,
 				850DED5A1AA2781E003BA7F4,
 				850DED9C1AA32639003BA7F4,
+				850DEE461AA37E7B003BA7F4,
 			);
 			isa = PBXNativeTarget;
 			name = TalkSoup;
@@ -4344,6 +4530,7 @@
 			files = (
 				8D11072B0486CEB800E47090,
 				8530F3E51A93C90B0017F8C5,
+				850DEE441AA37E76003BA7F4,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
