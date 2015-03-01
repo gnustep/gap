@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat May 10 18:58:30 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                         : (C) 2015 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -55,15 +56,16 @@
 }
 - pluginActivated
 {
-	timer = RETAIN([NSTimer scheduledTimerWithTimeInterval: 180.0
+	timer = [[NSTimer scheduledTimerWithTimeInterval: 180.0
 	  target: self selector: @selector(fireTimer:) userInfo: nil
-	  repeats: YES]);
+	  repeats: YES] retain];
 	return self;
 }
 - pluginDeactivated
 {
 	[timer invalidate];
-	DESTROY(timer);
+	[timer release];
+	timer = nil;
 	return self;
 }
 @end
