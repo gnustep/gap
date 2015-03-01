@@ -81,9 +81,12 @@
 		85C8CFB31AA26B0600E79B07 /* Emoticon.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */; };
 		85C8CFC21AA26B2500E79B07 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		85C9094D1AA30C17001F7AC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C9094B1AA30C17001F7AC5 /* Localizable.strings */; };
-		85C909511AA30C80001F7AC5 /* KeepAlive-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85C9094E1AA30C80001F7AC5 /* KeepAlive-Info.plist */; };
 		85C909521AA30C80001F7AC5 /* KeepAlive.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C909501AA30C80001F7AC5 /* KeepAlive.m */; };
 		85C909631AA30CA9001F7AC5 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		85C909C81AA3224A001F7AC5 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		85C909C91AA3225B001F7AC5 /* MessageInTab.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */; };
+		85C909E41AA3232B001F7AC5 /* MessageInTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C909E31AA3232B001F7AC5 /* MessageInTab.m */; };
+		85C90A2B1AA32A48001F7AC5 /* KeepAlive.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C909431AA30925001F7AC5 /* KeepAlive.bundle */; };
 		85F94D931A9006CC00B00DCB /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D871A9006CC00B00DCB /* ConnectionController.m */; };
 		85F94D951A9006CC00B00DCB /* ConnectionControllerCtcp.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D891A9006CC00B00DCB /* ConnectionControllerCtcp.m */; };
 		85F94D971A9006CC00B00DCB /* ConnectionControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D8B1A9006CC00B00DCB /* ConnectionControllerDelegate.m */; };
@@ -219,6 +222,13 @@
 			remoteGlobalIDString = 85C909421AA30925001F7AC5 /* KeepAlive */;
 			remoteInfo = KeepAlive;
 		};
+		85C90A031AA323A5001F7AC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85C909AA1AA31512001F7AC5 /* MessageInTab */;
+			remoteInfo = MessageInTab;
+		};
 		85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -286,6 +296,8 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				85C90A2B1AA32A48001F7AC5 /* KeepAlive.bundle in CopyFiles */,
+				85C909C91AA3225B001F7AC5 /* MessageInTab.bundle in CopyFiles */,
 				85C8CFB31AA26B0600E79B07 /* Emoticon.bundle in CopyFiles */,
 				85FF57491A9DE1E400DE8F46 /* Highlighting.bundle in CopyFiles */,
 				855BF5151A9A00F8004C7617 /* DCCSupport.bundle in CopyFiles */,
@@ -404,9 +416,12 @@
 		85C909431AA30925001F7AC5 /* KeepAlive.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeepAlive.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C909441AA30925001F7AC5 /* KeepAlive-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "KeepAlive-Info.plist"; path = "InFilters/KeepAlive/KeepAlive-Info.plist"; sourceTree = "<group>"; };
 		85C9094C1AA30C17001F7AC5 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/KeepAlive/English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		85C9094E1AA30C80001F7AC5 /* KeepAlive-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KeepAlive-Info.plist"; path = "InFilters/KeepAlive/KeepAlive-Info.plist"; sourceTree = "<group>"; };
 		85C9094F1AA30C80001F7AC5 /* KeepAlive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeepAlive.h; path = InFilters/KeepAlive/KeepAlive.h; sourceTree = "<group>"; };
 		85C909501AA30C80001F7AC5 /* KeepAlive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeepAlive.m; path = InFilters/KeepAlive/KeepAlive.m; sourceTree = "<group>"; };
+		85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessageInTab.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C909AC1AA31512001F7AC5 /* MessageInTab-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageInTab-Info.plist"; path = "InFilters/MessageInTab/MessageInTab-Info.plist"; sourceTree = "<group>"; };
+		85C909E21AA3232B001F7AC5 /* MessageInTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageInTab.h; path = InFilters/MessageInTab/MessageInTab.h; sourceTree = "<group>"; };
+		85C909E31AA3232B001F7AC5 /* MessageInTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageInTab.m; path = InFilters/MessageInTab/MessageInTab.m; sourceTree = "<group>"; };
 		85F94D861A9006CC00B00DCB /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionController.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.h; sourceTree = "<group>"; };
 		85F94D871A9006CC00B00DCB /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ConnectionController.m; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m; sourceTree = "<group>"; };
 		85F94D881A9006CC00B00DCB /* ConnectionControllerCtcp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionControllerCtcp.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.h; sourceTree = "<group>"; };
@@ -567,6 +582,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C909A91AA31512001F7AC5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C909C81AA3224A001F7AC5 /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F91A9DBAA000DE8F46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -646,6 +669,7 @@
 				85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */,
 				85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */,
 				85C909431AA30925001F7AC5 /* KeepAlive.bundle */,
+				85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -662,7 +686,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				85C909441AA30925001F7AC5 /* KeepAlive-Info.plist */,
 			);
 			name = TalkSoup;
 			sourceTree = "<group>";
@@ -709,6 +732,7 @@
 		852361A51A97C02E00836C2E /* InFilters */ = {
 			isa = PBXGroup;
 			children = (
+				85C9098A1AA314E6001F7AC5 /* MessageInTab */,
 				85C909281AA30903001F7AC5 /* KeepAlive */,
 				85C8CF8D1AA26AAE00E79B07 /* Emoticon */,
 				85FF57261A9DDCA400DE8F46 /* Highlighting */,
@@ -845,12 +869,22 @@
 		85C909281AA30903001F7AC5 /* KeepAlive */ = {
 			isa = PBXGroup;
 			children = (
-				85C9094E1AA30C80001F7AC5 /* KeepAlive-Info.plist */,
+				85C909441AA30925001F7AC5 /* KeepAlive-Info.plist */,
 				85C9094F1AA30C80001F7AC5 /* KeepAlive.h */,
 				85C909501AA30C80001F7AC5 /* KeepAlive.m */,
 				85C9094B1AA30C17001F7AC5 /* Localizable.strings */,
 			);
 			name = KeepAlive;
+			sourceTree = "<group>";
+		};
+		85C9098A1AA314E6001F7AC5 /* MessageInTab */ = {
+			isa = PBXGroup;
+			children = (
+				85C909AC1AA31512001F7AC5 /* MessageInTab-Info.plist */,
+				85C909E21AA3232B001F7AC5 /* MessageInTab.h */,
+				85C909E31AA3232B001F7AC5 /* MessageInTab.m */,
+			);
+			name = MessageInTab;
 			sourceTree = "<group>";
 		};
 		85F94D801A90068500B00DCB /* ConnectionController */ = {
@@ -1167,6 +1201,23 @@
 			productReference = 85C909431AA30925001F7AC5 /* KeepAlive.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		85C909AA1AA31512001F7AC5 /* MessageInTab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C909B01AA31513001F7AC5 /* Build configuration list for PBXNativeTarget "MessageInTab" */;
+			buildPhases = (
+				85C909A71AA31512001F7AC5 /* Resources */,
+				85C909A81AA31512001F7AC5 /* Sources */,
+				85C909A91AA31512001F7AC5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageInTab;
+			productName = MessageInTab;
+			productReference = 85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		85FF56FA1A9DBAA000DE8F46 /* exec_helper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85FF57001A9DBAD500DE8F46 /* Build configuration list for PBXNativeTarget "exec_helper" */;
@@ -1223,6 +1274,7 @@
 				85C8CEF71AA24ED700E79B07 /* PBXTargetDependency */,
 				85C8CFCC1AA26B9B00E79B07 /* PBXTargetDependency */,
 				85C9096B1AA30CBA001F7AC5 /* PBXTargetDependency */,
+				85C90A041AA323A5001F7AC5 /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -1260,6 +1312,7 @@
 				85C8CED91AA241E100E79B07 /* Colorizer */,
 				85C8CF6A1AA26A4200E79B07 /* Emoticon */,
 				85C909421AA30925001F7AC5 /* KeepAlive */,
+				85C909AA1AA31512001F7AC5 /* MessageInTab */,
 			);
 		};
 /* End PBXProject section */
@@ -1354,7 +1407,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				85C9094D1AA30C17001F7AC5 /* Localizable.strings in Resources */,
-				85C909511AA30C80001F7AC5 /* KeepAlive-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C909A71AA31512001F7AC5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,6 +1551,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C909A81AA31512001F7AC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C909E41AA3232B001F7AC5 /* MessageInTab.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F81A9DBAA000DE8F46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1570,6 +1637,11 @@
 			isa = PBXTargetDependency;
 			target = 85C909421AA30925001F7AC5 /* KeepAlive */;
 			targetProxy = 85C9096A1AA30CBA001F7AC5 /* PBXContainerItemProxy */;
+		};
+		85C90A041AA323A5001F7AC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85C909AA1AA31512001F7AC5 /* MessageInTab */;
+			targetProxy = 85C90A031AA323A5001F7AC5 /* PBXContainerItemProxy */;
 		};
 		85FF57191A9DBF1F00DE8F46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2490,6 +2562,78 @@
 			};
 			name = Default;
 		};
+		85C909AD1AA31513001F7AC5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageInTab/MessageInTab-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MessageInTab;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		85C909AE1AA31513001F7AC5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageInTab/MessageInTab-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MessageInTab;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85C909AF1AA31513001F7AC5 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageInTab/MessageInTab-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MessageInTab;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 		85FF56FD1A9DBAA100DE8F46 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2745,6 +2889,16 @@
 				85C909451AA30926001F7AC5 /* Development */,
 				85C909461AA30926001F7AC5 /* Deployment */,
 				85C909471AA30926001F7AC5 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85C909B01AA31513001F7AC5 /* Build configuration list for PBXNativeTarget "MessageInTab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85C909AD1AA31513001F7AC5 /* Development */,
+				85C909AE1AA31513001F7AC5 /* Deployment */,
+				85C909AF1AA31513001F7AC5 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;

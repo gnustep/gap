@@ -1,3 +1,11 @@
+2015-03-01 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	If aMessage is empty, do not print it at all (fixes crash)
+
+	* TalkSoupBundles/Functions.m
+	If one of the arguments is nil, do not crash but insert an empty string.
+
 2015-02-25 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Controllers/NamePromptController.m
