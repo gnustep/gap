@@ -539,58 +539,65 @@
 	return self;
 }
 - channelParted: (NSAttributedString *)channel 
-   withMessage: (NSAttributedString *)aMessage
-   from: (NSAttributedString *)parter onConnection: (id)aConnection 
+    withMessage: (NSAttributedString *)aMessage
+           from: (NSAttributedString *)parter onConnection: (id)aConnection 
    withNickname: (NSAttributedString *)aNick 
-   sender: aPlugin
+         sender: aPlugin
 {
-	id name = [IRCUserComponents(parter) objectAtIndex: 0];
-	id lowChan = GNUstepOutputLowercase([channel string], connection);
-	id view = [content viewControllerForName: lowChan];
+  NSAttributedString *name;
+  id lowChan = GNUstepOutputLowercase([channel string], connection);
+  id view = [content viewControllerForName: lowChan];
 
-	if (GNUstepOutputCompare([name string], [connection nick], connection))
-	{
-		[self leaveChannel: lowChan];
-	}
-	else
-	{
-		[[nameToChannelData objectForKey: lowChan] removeUser: [name string]];
-		[view refreshFromChannelSource];
-	}
+  name = [IRCUserComponents(parter) objectAtIndex: 0];
+
+  if (GNUstepOutputCompare([name string], [connection nick], connection))
+    {
+      [self leaveChannel: lowChan];
+    }
+  else
+    {
+      [[nameToChannelData objectForKey: lowChan] removeUser: [name string]];
+      [view refreshFromChannelSource];
+    }
 	
-	if (view)
-	{
-		[content putMessage: BuildAttributedFormat(_l(@"%@ has left %@ (%@)"), 
-		  name, channel, aMessage) in: lowChan];
-	}
+  if (view)
+    {
+      if (aMessage)
+        [content putMessage: BuildAttributedFormat(_l(@"%@ has left %@ (%@)"), name, channel, aMessage) in: lowChan];
+      else
+        [content putMessage: BuildAttributedFormat(_l(@"%@ has left %@"), name, channel) in: lowChan];
+    }
 	
-	return self;
+  return self;
 }
 - quitIRCWithMessage: (NSAttributedString *)aMessage 
    from: (NSAttributedString *)quitter onConnection: (id)aConnection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	id name = [IRCUserComponents(quitter) objectAtIndex: 0];
-	id array = [self channelsWithUser: [name string]];
-	NSEnumerator *iter;
-	id object;
-	
-	iter = [array objectEnumerator];
-	while ((object = [iter nextObject]))
-	{
-		id low = GNUstepOutputLowercase(object, connection);
-		[[nameToChannelData objectForKey: low] 
+  NSAttributedString *name;
+  id array;
+  NSEnumerator *iter;
+  id object;
+
+  name = [IRCUserComponents(quitter) objectAtIndex: 0];
+  array = [self channelsWithUser: [name string]];
+  iter = [array objectEnumerator];
+  while ((object = [iter nextObject]))
+    {
+      id low = GNUstepOutputLowercase(object, connection);
+      [[nameToChannelData objectForKey: low] 
 		  removeUser: [name string]];
-		[(id <ContentControllerChannelController>)
-		  [content viewControllerForName: low] refreshFromChannelSource];
-	}
-	
-	[content putMessage:
-	  BuildAttributedFormat(_l(@"%@ has quit IRC (%@)"), name, aMessage)
-	  in: array];
-		
-	return self;
+      [(id <ContentControllerChannelController>)
+          [content viewControllerForName: low] refreshFromChannelSource];
+    }
+
+  if (aMessage)
+    [content putMessage: BuildAttributedFormat(_l(@"%@ has quit IRC (%@)"), name, aMessage) in: array];
+  else
+    [content putMessage: BuildAttributedFormat(_l(@"%@ has quit IRC"), name) in: array];
+  
+  return self;
 }
 - topicChangedTo: (NSAttributedString *)aTopic in: (NSAttributedString *)channel
    from: (NSAttributedString *)aPerson onConnection: (id)aConnection 
