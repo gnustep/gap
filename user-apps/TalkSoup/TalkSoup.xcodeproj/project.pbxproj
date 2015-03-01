@@ -87,6 +87,7 @@
 		85C909C91AA3225B001F7AC5 /* MessageInTab.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */; };
 		85C909E41AA3232B001F7AC5 /* MessageInTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C909E31AA3232B001F7AC5 /* MessageInTab.m */; };
 		85C90A2B1AA32A48001F7AC5 /* KeepAlive.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C909431AA30925001F7AC5 /* KeepAlive.bundle */; };
+		85C90AF81AA37A6C001F7AC5 /* FontPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85C90AF61AA37A6C001F7AC5 /* FontPreferences.nib */; };
 		85F94D931A9006CC00B00DCB /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D871A9006CC00B00DCB /* ConnectionController.m */; };
 		85F94D951A9006CC00B00DCB /* ConnectionControllerCtcp.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D891A9006CC00B00DCB /* ConnectionControllerCtcp.m */; };
 		85F94D971A9006CC00B00DCB /* ConnectionControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D8B1A9006CC00B00DCB /* ConnectionControllerDelegate.m */; };
@@ -422,6 +423,7 @@
 		85C909AC1AA31512001F7AC5 /* MessageInTab-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageInTab-Info.plist"; path = "InFilters/MessageInTab/MessageInTab-Info.plist"; sourceTree = "<group>"; };
 		85C909E21AA3232B001F7AC5 /* MessageInTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageInTab.h; path = InFilters/MessageInTab/MessageInTab.h; sourceTree = "<group>"; };
 		85C909E31AA3232B001F7AC5 /* MessageInTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageInTab.m; path = InFilters/MessageInTab/MessageInTab.m; sourceTree = "<group>"; };
+		85C90AF71AA37A6C001F7AC5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Output/GNUstepOutput/English.lproj/FontPreferences.nib; sourceTree = "<group>"; };
 		85F94D861A9006CC00B00DCB /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionController.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.h; sourceTree = "<group>"; };
 		85F94D871A9006CC00B00DCB /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ConnectionController.m; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m; sourceTree = "<group>"; };
 		85F94D881A9006CC00B00DCB /* ConnectionControllerCtcp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionControllerCtcp.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.h; sourceTree = "<group>"; };
@@ -968,6 +970,7 @@
 				85F94DE51A9008BA00B00DCB /* BundlePreferences.nib */,
 				85F94DE71A9008BA00B00DCB /* ColorPreferences.nib */,
 				85F94DE91A9008BA00B00DCB /* GeneralPreferences.nib */,
+				85C90AF61AA37A6C001F7AC5 /* FontPreferences.nib */,
 				85F94DEB1A9008BA00B00DCB /* GNUstepOutput.nib */,
 				85F94DED1A9008BA00B00DCB /* GroupEditor.nib */,
 				85F94DEF1A9008BA00B00DCB /* NamePrompt.nib */,
@@ -1369,6 +1372,7 @@
 				852360381A96872900836C2E /* BigServerList.plist in Resources */,
 				852360391A96872900836C2E /* Defaults.plist in Resources */,
 				8523603A1A96872900836C2E /* ServerList.plist in Resources */,
+				85C90AF81AA37A6C001F7AC5 /* FontPreferences.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,6 +1706,14 @@
 				85C9094C1AA30C17001F7AC5 /* English */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		85C90AF61AA37A6C001F7AC5 /* FontPreferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85C90AF71AA37A6C001F7AC5 /* English */,
+			);
+			name = FontPreferences.nib;
 			sourceTree = "<group>";
 		};
 		85F94DE51A9008BA00B00DCB /* BundlePreferences.nib */ = {
