@@ -80,6 +80,10 @@
 		85C8CFB01AA26AF500E79B07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CFAE1AA26AF500E79B07 /* Localizable.strings */; };
 		85C8CFB31AA26B0600E79B07 /* Emoticon.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */; };
 		85C8CFC21AA26B2500E79B07 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		85C9094D1AA30C17001F7AC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C9094B1AA30C17001F7AC5 /* Localizable.strings */; };
+		85C909511AA30C80001F7AC5 /* KeepAlive-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85C9094E1AA30C80001F7AC5 /* KeepAlive-Info.plist */; };
+		85C909521AA30C80001F7AC5 /* KeepAlive.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C909501AA30C80001F7AC5 /* KeepAlive.m */; };
+		85C909631AA30CA9001F7AC5 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		85F94D931A9006CC00B00DCB /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D871A9006CC00B00DCB /* ConnectionController.m */; };
 		85F94D951A9006CC00B00DCB /* ConnectionControllerCtcp.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D891A9006CC00B00DCB /* ConnectionControllerCtcp.m */; };
 		85F94D971A9006CC00B00DCB /* ConnectionControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F94D8B1A9006CC00B00DCB /* ConnectionControllerDelegate.m */; };
@@ -198,15 +202,22 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85C8CED91AA241E100E79B07 /* Colorizer */;
+			remoteGlobalIDString = 85C8CED91AA241E100E79B07;
 			remoteInfo = Colorizer;
 		};
 		85C8CFCB1AA26B9B00E79B07 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85C8CF6A1AA26A4200E79B07 /* Emoticon */;
+			remoteGlobalIDString = 85C8CF6A1AA26A4200E79B07;
 			remoteInfo = Emoticon;
+		};
+		85C9096A1AA30CBA001F7AC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85C909421AA30925001F7AC5 /* KeepAlive */;
+			remoteInfo = KeepAlive;
 		};
 		85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -390,6 +401,12 @@
 		85C8CFAB1AA26AE700E79B07 /* Emoticon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Emoticon.h; path = InFilters/Emoticon/Emoticon.h; sourceTree = "<group>"; };
 		85C8CFAC1AA26AE700E79B07 /* Emoticon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Emoticon.m; path = InFilters/Emoticon/Emoticon.m; sourceTree = "<group>"; };
 		85C8CFAF1AA26AF500E79B07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/Emoticon/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85C909431AA30925001F7AC5 /* KeepAlive.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeepAlive.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C909441AA30925001F7AC5 /* KeepAlive-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "KeepAlive-Info.plist"; path = "InFilters/KeepAlive/KeepAlive-Info.plist"; sourceTree = "<group>"; };
+		85C9094C1AA30C17001F7AC5 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/KeepAlive/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85C9094E1AA30C80001F7AC5 /* KeepAlive-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KeepAlive-Info.plist"; path = "InFilters/KeepAlive/KeepAlive-Info.plist"; sourceTree = "<group>"; };
+		85C9094F1AA30C80001F7AC5 /* KeepAlive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeepAlive.h; path = InFilters/KeepAlive/KeepAlive.h; sourceTree = "<group>"; };
+		85C909501AA30C80001F7AC5 /* KeepAlive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeepAlive.m; path = InFilters/KeepAlive/KeepAlive.m; sourceTree = "<group>"; };
 		85F94D861A9006CC00B00DCB /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionController.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.h; sourceTree = "<group>"; };
 		85F94D871A9006CC00B00DCB /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = ConnectionController.m; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m; sourceTree = "<group>"; };
 		85F94D881A9006CC00B00DCB /* ConnectionControllerCtcp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ConnectionControllerCtcp.h; path = Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.h; sourceTree = "<group>"; };
@@ -542,6 +559,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C909411AA30925001F7AC5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C909631AA30CA9001F7AC5 /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F91A9DBAA000DE8F46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -620,6 +645,7 @@
 				85FF572D1A9DDCBC00DE8F46 /* Highlighting.bundle */,
 				85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */,
 				85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */,
+				85C909431AA30925001F7AC5 /* KeepAlive.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -636,6 +662,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				85C909441AA30925001F7AC5 /* KeepAlive-Info.plist */,
 			);
 			name = TalkSoup;
 			sourceTree = "<group>";
@@ -682,6 +709,7 @@
 		852361A51A97C02E00836C2E /* InFilters */ = {
 			isa = PBXGroup;
 			children = (
+				85C909281AA30903001F7AC5 /* KeepAlive */,
 				85C8CF8D1AA26AAE00E79B07 /* Emoticon */,
 				85FF57261A9DDCA400DE8F46 /* Highlighting */,
 				855BF4841A98833F004C7617 /* DCCSupport */,
@@ -812,6 +840,17 @@
 				85C8CF6C1AA26A4200E79B07 /* Emoticon-Info.plist */,
 			);
 			name = Emoticon;
+			sourceTree = "<group>";
+		};
+		85C909281AA30903001F7AC5 /* KeepAlive */ = {
+			isa = PBXGroup;
+			children = (
+				85C9094E1AA30C80001F7AC5 /* KeepAlive-Info.plist */,
+				85C9094F1AA30C80001F7AC5 /* KeepAlive.h */,
+				85C909501AA30C80001F7AC5 /* KeepAlive.m */,
+				85C9094B1AA30C17001F7AC5 /* Localizable.strings */,
+			);
+			name = KeepAlive;
 			sourceTree = "<group>";
 		};
 		85F94D801A90068500B00DCB /* ConnectionController */ = {
@@ -1111,6 +1150,23 @@
 			productReference = 85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		85C909421AA30925001F7AC5 /* KeepAlive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C909481AA30927001F7AC5 /* Build configuration list for PBXNativeTarget "KeepAlive" */;
+			buildPhases = (
+				85C9093F1AA30925001F7AC5 /* Resources */,
+				85C909401AA30925001F7AC5 /* Sources */,
+				85C909411AA30925001F7AC5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeepAlive;
+			productName = KeepAlive;
+			productReference = 85C909431AA30925001F7AC5 /* KeepAlive.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		85FF56FA1A9DBAA000DE8F46 /* exec_helper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85FF57001A9DBAD500DE8F46 /* Build configuration list for PBXNativeTarget "exec_helper" */;
@@ -1166,6 +1222,7 @@
 				85FF576F1A9DE32A00DE8F46 /* PBXTargetDependency */,
 				85C8CEF71AA24ED700E79B07 /* PBXTargetDependency */,
 				85C8CFCC1AA26B9B00E79B07 /* PBXTargetDependency */,
+				85C9096B1AA30CBA001F7AC5 /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -1202,6 +1259,7 @@
 				85FF572C1A9DDCBC00DE8F46 /* Highlighting */,
 				85C8CED91AA241E100E79B07 /* Colorizer */,
 				85C8CF6A1AA26A4200E79B07 /* Emoticon */,
+				85C909421AA30925001F7AC5 /* KeepAlive */,
 			);
 		};
 /* End PBXProject section */
@@ -1288,6 +1346,15 @@
 				85C8CFA91AA26ADA00E79B07 /* emoticon-face15.tiff in Resources */,
 				85C8CFAA1AA26ADA00E79B07 /* emoticon-face19.tiff in Resources */,
 				85C8CFB01AA26AF500E79B07 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C9093F1AA30925001F7AC5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C9094D1AA30C17001F7AC5 /* Localizable.strings in Resources */,
+				85C909511AA30C80001F7AC5 /* KeepAlive-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1417,6 +1484,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C909401AA30925001F7AC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C909521AA30C80001F7AC5 /* KeepAlive.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85FF56F81A9DBAA000DE8F46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1491,6 +1566,11 @@
 			target = 85C8CF6A1AA26A4200E79B07 /* Emoticon */;
 			targetProxy = 85C8CFCB1AA26B9B00E79B07 /* PBXContainerItemProxy */;
 		};
+		85C9096B1AA30CBA001F7AC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85C909421AA30925001F7AC5 /* KeepAlive */;
+			targetProxy = 85C9096A1AA30CBA001F7AC5 /* PBXContainerItemProxy */;
+		};
 		85FF57191A9DBF1F00DE8F46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 85FF56FA1A9DBAA000DE8F46 /* exec_helper */;
@@ -1540,6 +1620,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				85C8CFAF1AA26AF500E79B07 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		85C9094B1AA30C17001F7AC5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85C9094C1AA30C17001F7AC5 /* English */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2330,6 +2418,78 @@
 			};
 			name = Default;
 		};
+		85C909451AA30926001F7AC5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/KeepAlive/KeepAlive-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = KeepAlive;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		85C909461AA30926001F7AC5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/KeepAlive/KeepAlive-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = KeepAlive;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85C909471AA30926001F7AC5 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/KeepAlive/KeepAlive-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = KeepAlive;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 		85FF56FD1A9DBAA100DE8F46 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2575,6 +2735,16 @@
 				85C8CF6D1AA26A4300E79B07 /* Development */,
 				85C8CF6E1AA26A4300E79B07 /* Deployment */,
 				85C8CF6F1AA26A4300E79B07 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85C909481AA30927001F7AC5 /* Build configuration list for PBXNativeTarget "KeepAlive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85C909451AA30926001F7AC5 /* Development */,
+				85C909461AA30926001F7AC5 /* Deployment */,
+				85C909471AA30926001F7AC5 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
