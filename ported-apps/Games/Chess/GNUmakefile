@@ -30,7 +30,6 @@ Chess_RESOURCE_FILES=\
 	ApplicationNameImage.tiff\
 	ChessApp.tiff\
 	ChessDoc.tiff\
-	Info-gnustep.plist\
 	chess.icns\
 	chess.tiff\
 	gnuchess.subproj/COPYING\
