@@ -33,6 +33,10 @@
 		855BF4A51A9885A5004C7617 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		855BF4B81A988606004C7617 /* netclasses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED201A8FD44600EEC00A /* netclasses.framework */; };
 		855BF5151A9A00F8004C7617 /* DCCSupport.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 855BF4771A9882BC004C7617 /* DCCSupport.bundle */; };
+		8572F54A1AAB725100A45FDF /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		8572F5751AAB72AB00A45FDF /* MessateOutTab.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8572F5441AAB724500A45FDF /* MessateOutTab.bundle */; };
+		8572F5881AAB72DE00A45FDF /* MessageOutTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 8572F5871AAB72DE00A45FDF /* MessageOutTab.m */; };
+		8572F5951AAB739000A45FDF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8572F5931AAB739000A45FDF /* Localizable.strings */; };
 		857EECD51A8FCED600EEC00A /* commands.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EECD21A8FCED600EEC00A /* commands.m */; };
 		857EECD61A8FCED600EEC00A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EECD31A8FCED600EEC00A /* main.m */; };
 		857EECF61A8FD30A00EEC00A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EECF01A8FD30A00EEC00A /* Functions.m */; };
@@ -174,6 +178,13 @@
 			remoteGlobalIDString = 855BF4761A9882BC004C7617;
 			remoteInfo = DCCSupport;
 		};
+		8572F56C1AAB729B00A45FDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8572F5431AAB724500A45FDF /* MessateOutTab */;
+			remoteInfo = MessateOutTab;
+		};
 		857EED271A8FDD5500EEC00A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -220,14 +231,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85C909421AA30925001F7AC5 /* KeepAlive */;
+			remoteGlobalIDString = 85C909421AA30925001F7AC5;
 			remoteInfo = KeepAlive;
 		};
 		85C90A031AA323A5001F7AC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85C909AA1AA31512001F7AC5 /* MessageInTab */;
+			remoteGlobalIDString = 85C909AA1AA31512001F7AC5;
 			remoteInfo = MessageInTab;
 		};
 		85FF57181A9DBF1F00DE8F46 /* PBXContainerItemProxy */ = {
@@ -297,6 +308,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				8572F5751AAB72AB00A45FDF /* MessateOutTab.bundle in CopyFiles */,
 				85C90A2B1AA32A48001F7AC5 /* KeepAlive.bundle in CopyFiles */,
 				85C909C91AA3225B001F7AC5 /* MessageInTab.bundle in CopyFiles */,
 				85C8CFB31AA26B0600E79B07 /* Emoticon.bundle in CopyFiles */,
@@ -345,6 +357,11 @@
 		855BF49B1A988416004C7617 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/DCCSupport/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		855BF49D1A98842C004C7617 /* dccsupport_prefs.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = dccsupport_prefs.tiff; path = InFilters/DCCSupport/AllLanguages/dccsupport_prefs.tiff; sourceTree = "<group>"; };
 		855BF49E1A98842C004C7617 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Defaults.plist; path = InFilters/DCCSupport/AllLanguages/Defaults.plist; sourceTree = "<group>"; };
+		8572F5441AAB724500A45FDF /* MessateOutTab.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessateOutTab.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8572F5451AAB724500A45FDF /* MessageOutTab-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageOutTab-Info.plist"; path = "InFilters/MessageOutTab/MessageOutTab-Info.plist"; sourceTree = "<group>"; };
+		8572F5861AAB72D400A45FDF /* MessageOutTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageOutTab.h; path = InFilters/MessageOutTab/MessageOutTab.h; sourceTree = "<group>"; };
+		8572F5871AAB72DE00A45FDF /* MessageOutTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageOutTab.m; path = InFilters/MessageOutTab/MessageOutTab.m; sourceTree = "<group>"; };
+		8572F5941AAB739000A45FDF /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InFilters/MessageOutTab/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		857EECD11A8FCED600EEC00A /* commands.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = commands.h; path = Source/commands.h; sourceTree = "<group>"; };
 		857EECD21A8FCED600EEC00A /* commands.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = commands.m; path = Source/commands.m; sourceTree = "<group>"; };
 		857EECD31A8FCED600EEC00A /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
@@ -536,6 +553,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8572F5421AAB724500A45FDF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8572F54A1AAB725100A45FDF /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		857EECE51A8FD28400EEC00A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -672,6 +697,7 @@
 				85C8CF6B1AA26A4200E79B07 /* Emoticon.bundle */,
 				85C909431AA30925001F7AC5 /* KeepAlive.bundle */,
 				85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */,
+				8572F5441AAB724500A45FDF /* MessateOutTab.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -734,6 +760,7 @@
 		852361A51A97C02E00836C2E /* InFilters */ = {
 			isa = PBXGroup;
 			children = (
+				8572F5291AAB71FF00A45FDF /* MessageOutTab */,
 				85C9098A1AA314E6001F7AC5 /* MessageInTab */,
 				85C909281AA30903001F7AC5 /* KeepAlive */,
 				85C8CF8D1AA26AAE00E79B07 /* Emoticon */,
@@ -765,6 +792,17 @@
 				855BF4911A9883C3004C7617 /* DCCSupportPreferencesController.m */,
 			);
 			name = DCCSupport;
+			sourceTree = "<group>";
+		};
+		8572F5291AAB71FF00A45FDF /* MessageOutTab */ = {
+			isa = PBXGroup;
+			children = (
+				8572F5931AAB739000A45FDF /* Localizable.strings */,
+				8572F5871AAB72DE00A45FDF /* MessageOutTab.m */,
+				8572F5861AAB72D400A45FDF /* MessageOutTab.h */,
+				8572F5451AAB724500A45FDF /* MessageOutTab-Info.plist */,
+			);
+			name = MessageOutTab;
 			sourceTree = "<group>";
 		};
 		857EECEA1A8FD29800EEC00A /* NetclassesInput */ = {
@@ -1096,6 +1134,23 @@
 			productReference = 855BF4771A9882BC004C7617 /* DCCSupport.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		8572F5431AAB724500A45FDF /* MessateOutTab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8572F5491AAB724700A45FDF /* Build configuration list for PBXNativeTarget "MessateOutTab" */;
+			buildPhases = (
+				8572F5401AAB724500A45FDF /* Resources */,
+				8572F5411AAB724500A45FDF /* Sources */,
+				8572F5421AAB724500A45FDF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessateOutTab;
+			productName = MessateOutTab;
+			productReference = 8572F5441AAB724500A45FDF /* MessateOutTab.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		857EECE61A8FD28400EEC00A /* NetclassesInput */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85235EF01A9613F600836C2E /* Build configuration list for PBXNativeTarget "NetclassesInput" */;
@@ -1278,6 +1333,7 @@
 				85C8CFCC1AA26B9B00E79B07 /* PBXTargetDependency */,
 				85C9096B1AA30CBA001F7AC5 /* PBXTargetDependency */,
 				85C90A041AA323A5001F7AC5 /* PBXTargetDependency */,
+				8572F56D1AAB729B00A45FDF /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -1316,6 +1372,7 @@
 				85C8CF6A1AA26A4200E79B07 /* Emoticon */,
 				85C909421AA30925001F7AC5 /* KeepAlive */,
 				85C909AA1AA31512001F7AC5 /* MessageInTab */,
+				8572F5431AAB724500A45FDF /* MessateOutTab */,
 			);
 		};
 /* End PBXProject section */
@@ -1329,6 +1386,14 @@
 				855BF49C1A988416004C7617 /* Localizable.strings in Resources */,
 				855BF49F1A98842C004C7617 /* dccsupport_prefs.tiff in Resources */,
 				855BF4A01A98842C004C7617 /* Defaults.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8572F5401AAB724500A45FDF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8572F5951AAB739000A45FDF /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,6 +1527,14 @@
 				855BF4951A9883C3004C7617 /* DCCSupport.m in Sources */,
 				855BF4961A9883C3004C7617 /* DCCSupportPreferencesController.m in Sources */,
 				85FF57AE1A9DEB5A00DE8F46 /* DCCTransfer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8572F5411AAB724500A45FDF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8572F5881AAB72DE00A45FDF /* MessageOutTab.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1607,6 +1680,11 @@
 			target = 855BF4761A9882BC004C7617 /* DCCSupport */;
 			targetProxy = 855BF4ED1A9A00AD004C7617 /* PBXContainerItemProxy */;
 		};
+		8572F56D1AAB729B00A45FDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8572F5431AAB724500A45FDF /* MessateOutTab */;
+			targetProxy = 8572F56C1AAB729B00A45FDF /* PBXContainerItemProxy */;
+		};
 		857EED281A8FDD5500EEC00A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 857EED011A8FD35800EEC00A /* TalkSoupBundles */;
@@ -1680,6 +1758,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				855BF49B1A988416004C7617 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		8572F5931AAB739000A45FDF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8572F5941AAB739000A45FDF /* English */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2358,6 +2444,78 @@
 			};
 			name = Default;
 		};
+		8572F5461AAB724600A45FDF /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageOutTab/MessageOutTab-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MessateOutTab;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		8572F5471AAB724600A45FDF /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageOutTab/MessageOutTab-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MessateOutTab;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		8572F5481AAB724600A45FDF /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageOutTab/MessageOutTab-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MessateOutTab;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 		85C8CEDC1AA241E200E79B07 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2871,6 +3029,16 @@
 				855BF4791A9882BD004C7617 /* Development */,
 				855BF47A1A9882BD004C7617 /* Deployment */,
 				855BF47B1A9882BD004C7617 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		8572F5491AAB724700A45FDF /* Build configuration list for PBXNativeTarget "MessateOutTab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8572F5461AAB724600A45FDF /* Development */,
+				8572F5471AAB724600A45FDF /* Deployment */,
+				8572F5481AAB724600A45FDF /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
