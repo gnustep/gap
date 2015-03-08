@@ -29,6 +29,10 @@ NSString *IRCColorFromUserColor(NSString *string);
 - (NSArray *)separateIntoNumberOfArguments: (int)num;
 @end
 
+@interface NSString (IRCWildcards)
+- (BOOL)matchesIRCWildcard: (NSString *)wildcard;
+@end
+
 @interface NSMutableAttributedString (AttributesAppend)
 - (void)addAttributeIfNotPresent: (NSString *)name value: (id)aVal
    withRange: (NSRange)aRange;
