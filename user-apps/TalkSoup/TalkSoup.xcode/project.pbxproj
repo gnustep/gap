@@ -104,6 +104,8 @@
 				850DED0E1AA2773B003BA7F4,
 				850DED771AA3259E003BA7F4,
 				850DEE401AA37DE6003BA7F4,
+				85A88C071AAC8E5E0042BF59,
+				85A88C2F1AACE2880042BF59,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -145,6 +147,8 @@
 				850DED0D1AA2773B003BA7F4,
 				850DED761AA3259E003BA7F4,
 				850DEE3F1AA37DE6003BA7F4,
+				85A88C061AAC8E5E0042BF59,
+				85A88C2E1AACE2880042BF59,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -450,7 +454,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OutFilters/Colorizer/Colorizer-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -659,7 +662,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "InFilters/Emoticon/Emoticon-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -1058,7 +1060,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "InFilters/KeepAlive/KeepAlive-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -1263,7 +1264,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "InFilters/MessageInTab/MessageInTab-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -1529,6 +1529,8 @@
 		};
 		857E36381A9C64E20036D65C = {
 			children = (
+				85A88C2A1AACD57B0042BF59,
+				85A88BEA1AAC8E3F0042BF59,
 				850DEE3B1AA37DBB003BA7F4,
 				850DED701AA3257D003BA7F4,
 				850DED1C1AA277A9003BA7F4,
@@ -1815,6 +1817,8 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				85A88C321AACE2C30042BF59,
+				85A88C291AACD54B0042BF59,
 				850DEE431AA37E66003BA7F4,
 				850DED9A1AA3262D003BA7F4,
 				850DED1B1AA27794003BA7F4,
@@ -3264,6 +3268,343 @@
 			target = 8590834D1A9DB3EB00C99985;
 			targetProxy = 859083EB1A9DB74A00C99985;
 		};
+		85A88BEA1AAC8E3F0042BF59 = {
+			children = (
+				85A88C201AACD4DC0042BF59,
+				85A88C181AACD4C60042BF59,
+				85A88C191AACD4C60042BF59,
+				85A88C081AAC8E5E0042BF59,
+			);
+			isa = PBXGroup;
+			name = MessageOutTab;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C031AAC8E5E0042BF59 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A88C1A1AACD4C60042BF59,
+				85A88C221AACD4DC0042BF59,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A88C041AAC8E5E0042BF59 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A88C1B1AACD4C60042BF59,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A88C051AAC8E5E0042BF59 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A88C591AACE5F00042BF59,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A88C061AAC8E5E0042BF59 = {
+			buildPhases = (
+				85A88C031AAC8E5E0042BF59,
+				85A88C041AAC8E5E0042BF59,
+				85A88C051AAC8E5E0042BF59,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/MessageOutTab/MessageOutTab-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = MessageOutTab;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = MessageOutTab;
+			productName = MessageOutTab;
+			productReference = 85A88C071AAC8E5E0042BF59;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>MessageOutTab</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.MessageOutTab</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		85A88C071AAC8E5E0042BF59 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = MessageOutTab.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		85A88C081AAC8E5E0042BF59 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "MessageOutTab-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/InFilters/MessageOutTab/MessageOutTab-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		85A88C181AACD4C60042BF59 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = MessageOutTab.h;
+			path = InFilters/MessageOutTab/MessageOutTab.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C191AACD4C60042BF59 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = MessageOutTab.m;
+			path = InFilters/MessageOutTab/MessageOutTab.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C1A1AACD4C60042BF59 = {
+			fileRef = 85A88C181AACD4C60042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C1B1AACD4C60042BF59 = {
+			fileRef = 85A88C191AACD4C60042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C201AACD4DC0042BF59 = {
+			children = (
+				85A88C211AACD4DC0042BF59,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C211AACD4DC0042BF59 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = InFilters/MessageOutTab/English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C221AACD4DC0042BF59 = {
+			fileRef = 85A88C201AACD4DC0042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C271AACD4F40042BF59 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 85A88C061AAC8E5E0042BF59;
+			remoteInfo = MessageOutTab;
+		};
+		85A88C281AACD4F40042BF59 = {
+			isa = PBXTargetDependency;
+			target = 85A88C061AAC8E5E0042BF59;
+			targetProxy = 85A88C271AACD4F40042BF59;
+		};
+		85A88C291AACD54B0042BF59 = {
+			fileRef = 85A88C071AAC8E5E0042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C2A1AACD57B0042BF59 = {
+			children = (
+				85A88C501AACE3320042BF59,
+				85A88C511AACE3320042BF59,
+				85A88C301AACE2880042BF59,
+			);
+			isa = PBXGroup;
+			name = Ignore;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C2B1AACE2880042BF59 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A88C521AACE3320042BF59,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A88C2C1AACE2880042BF59 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A88C531AACE3320042BF59,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A88C2D1AACE2880042BF59 = {
+			buildActionMask = 2147483647;
+			files = (
+				85A88C5F1AACE6580042BF59,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85A88C2E1AACE2880042BF59 = {
+			buildPhases = (
+				85A88C2B1AACE2880042BF59,
+				85A88C2C1AACE2880042BF59,
+				85A88C2D1AACE2880042BF59,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Ignore/Ignore-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Ignore;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = Ignore;
+			productName = Ignore;
+			productReference = 85A88C2F1AACE2880042BF59;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Ignore</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.Ignore</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		85A88C2F1AACE2880042BF59 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = Ignore.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		85A88C301AACE2880042BF59 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "Ignore-Info.plist";
+			path = "/Users/multix/Documents/code/gap/user-apps/TalkSoup/InFilters/Ignore/Ignore-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		85A88C321AACE2C30042BF59 = {
+			fileRef = 85A88C2F1AACE2880042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C331AACE2CE0042BF59 = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 85A88C2E1AACE2880042BF59;
+			remoteInfo = Ignore;
+		};
+		85A88C341AACE2CE0042BF59 = {
+			isa = PBXTargetDependency;
+			target = 85A88C2E1AACE2880042BF59;
+			targetProxy = 85A88C331AACE2CE0042BF59;
+		};
+		85A88C501AACE3320042BF59 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Ignore.h;
+			path = InFilters/Ignore/Ignore.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C511AACE3320042BF59 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = Ignore.m;
+			path = InFilters/Ignore/Ignore.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85A88C521AACE3320042BF59 = {
+			fileRef = 85A88C501AACE3320042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C531AACE3320042BF59 = {
+			fileRef = 85A88C511AACE3320042BF59;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C591AACE5F00042BF59 = {
+			fileRef = 857EED021A8FD35800EEC00A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85A88C5F1AACE6580042BF59 = {
+			fileRef = 857EED021A8FD35800EEC00A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		85F94D801A90068500B00DCB = {
 			children = (
 				85F94D861A9006CC00B00DCB,
@@ -4517,6 +4858,8 @@
 				850DED5A1AA2781E003BA7F4,
 				850DED9C1AA32639003BA7F4,
 				850DEE461AA37E7B003BA7F4,
+				85A88C281AACD4F40042BF59,
+				85A88C341AACE2CE0042BF59,
 			);
 			isa = PBXNativeTarget;
 			name = TalkSoup;
