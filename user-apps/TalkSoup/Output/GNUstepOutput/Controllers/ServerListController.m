@@ -426,7 +426,6 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 	[window setDelegate: self];
 	[window makeKeyAndOrderFront: nil];
 	
-	tmp = [self serverListPreferences];
 	[browser reloadColumn: 0];
 	[window makeFirstResponder: browser];
 	
