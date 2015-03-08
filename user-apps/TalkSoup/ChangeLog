@@ -4,6 +4,13 @@
 	* TalkSoupBundles/TalkSoupMisc.h
 	Wildcard matching additions.
 
+	* InFilters/Ignore/GNUmakefile
+	* InFilters/Ignore/GNUmakefile.preamble
+	* InFilters/Ignore/Ignore-Info.plist
+	* InFilters/Ignore/Ignore.h
+	* InFilters/Ignore/Ignore.m
+	Imported (from old git repo) and adapted IGNORE plugin
+
 2015-03-01 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m

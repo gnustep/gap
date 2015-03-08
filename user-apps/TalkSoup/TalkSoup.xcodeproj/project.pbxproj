@@ -21,6 +21,9 @@
 		8530F2F81A9168A50017F8C5 /* NetclassesInput.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 857EECE71A8FD28400EEC00A /* NetclassesInput.bundle */; };
 		8530F3C01A93C67C0017F8C5 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		8530F3E51A93C90B0017F8C5 /* TalkSoup.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8530F3E31A93C90B0017F8C5 /* TalkSoup.icns */; };
+		8536A1321AAC51F900EE5DA9 /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
+		8536A14C1AAC525D00EE5DA9 /* Ignore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8536A14B1AAC525D00EE5DA9 /* Ignore.m */; };
+		8536A14E1AAC529B00EE5DA9 /* Ignore.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8536A12A1AAC51D300EE5DA9 /* Ignore.bundle */; };
 		855BF4921A9883C3004C7617 /* DCCGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 855BF4891A9883C3004C7617 /* DCCGetter.m */; };
 		855BF4931A9883C3004C7617 /* DCCObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 855BF48B1A9883C3004C7617 /* DCCObject.m */; };
 		855BF4941A9883C3004C7617 /* DCCSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 855BF48D1A9883C3004C7617 /* DCCSender.m */; };
@@ -164,6 +167,20 @@
 			remoteGlobalIDString = 852360451A968ACD00836C2E;
 			remoteInfo = dns_helper;
 		};
+		8536A1301AAC51EB00EE5DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 857EED011A8FD35800EEC00A /* TalkSoupBundles */;
+			remoteInfo = TalkSoupBundles;
+		};
+		8536A1701AAC542800EE5DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8536A1291AAC51D200EE5DA9 /* Ignore */;
+			remoteInfo = Ignore;
+		};
 		855BF4A11A98858E004C7617 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -182,7 +199,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8572F5431AAB724500A45FDF /* MessateOutTab */;
+			remoteGlobalIDString = 8572F5431AAB724500A45FDF;
 			remoteInfo = MessateOutTab;
 		};
 		857EED271A8FDD5500EEC00A /* PBXContainerItemProxy */ = {
@@ -308,6 +325,7 @@
 			dstPath = InFilters;
 			dstSubfolderSpec = 7;
 			files = (
+				8536A14E1AAC529B00EE5DA9 /* Ignore.bundle in CopyFiles */,
 				8572F5751AAB72AB00A45FDF /* MessateOutTab.bundle in CopyFiles */,
 				85C90A2B1AA32A48001F7AC5 /* KeepAlive.bundle in CopyFiles */,
 				85C909C91AA3225B001F7AC5 /* MessageInTab.bundle in CopyFiles */,
@@ -341,6 +359,10 @@
 		852360501A968AF900836C2E /* dns_helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dns_helper.m; path = Output/GNUstepOutput/Tools/dns_helper.m; sourceTree = "<group>"; };
 		8530F3E31A93C90B0017F8C5 /* TalkSoup.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = TalkSoup.icns; path = Source/Images/TalkSoup.icns; sourceTree = "<group>"; };
 		8530F3E41A93C90B0017F8C5 /* TalkSoup.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = TalkSoup.tiff; path = Source/Images/TalkSoup.tiff; sourceTree = "<group>"; };
+		8536A12A1AAC51D300EE5DA9 /* Ignore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ignore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8536A12B1AAC51D300EE5DA9 /* Ignore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Ignore-Info.plist"; path = "InFilters/Ignore/Ignore-Info.plist"; sourceTree = "<group>"; };
+		8536A14A1AAC525D00EE5DA9 /* Ignore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ignore.h; path = InFilters/Ignore/Ignore.h; sourceTree = "<group>"; };
+		8536A14B1AAC525D00EE5DA9 /* Ignore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Ignore.m; path = InFilters/Ignore/Ignore.m; sourceTree = "<group>"; };
 		855BF4771A9882BC004C7617 /* DCCSupport.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCCSupport.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		855BF4781A9882BC004C7617 /* DCCSupport-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DCCSupport-Info.plist"; path = "InFilters/DCCSupport/DCCSupport-Info.plist"; sourceTree = "<group>"; };
 		855BF4881A9883C3004C7617 /* DCCGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCCGetter.h; path = InFilters/DCCSupport/DCCGetter.h; sourceTree = "<group>"; };
@@ -544,6 +566,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8536A1281AAC51D200EE5DA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8536A1321AAC51F900EE5DA9 /* TalkSoupBundles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		855BF4751A9882BC004C7617 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -698,6 +728,7 @@
 				85C909431AA30925001F7AC5 /* KeepAlive.bundle */,
 				85C909AB1AA31512001F7AC5 /* MessageInTab.bundle */,
 				8572F5441AAB724500A45FDF /* MessateOutTab.bundle */,
+				8536A12A1AAC51D300EE5DA9 /* Ignore.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -760,6 +791,7 @@
 		852361A51A97C02E00836C2E /* InFilters */ = {
 			isa = PBXGroup;
 			children = (
+				8536A13B1AAC521900EE5DA9 /* Ignore */,
 				8572F5291AAB71FF00A45FDF /* MessageOutTab */,
 				85C9098A1AA314E6001F7AC5 /* MessageInTab */,
 				85C909281AA30903001F7AC5 /* KeepAlive */,
@@ -768,6 +800,16 @@
 				855BF4841A98833F004C7617 /* DCCSupport */,
 			);
 			name = InFilters;
+			sourceTree = "<group>";
+		};
+		8536A13B1AAC521900EE5DA9 /* Ignore */ = {
+			isa = PBXGroup;
+			children = (
+				8536A14A1AAC525D00EE5DA9 /* Ignore.h */,
+				8536A14B1AAC525D00EE5DA9 /* Ignore.m */,
+				8536A12B1AAC51D300EE5DA9 /* Ignore-Info.plist */,
+			);
+			name = Ignore;
 			sourceTree = "<group>";
 		};
 		855BF4841A98833F004C7617 /* DCCSupport */ = {
@@ -1116,6 +1158,24 @@
 			productReference = 852360461A968ACD00836C2E /* dns_helper */;
 			productType = "com.apple.product-type.tool";
 		};
+		8536A1291AAC51D200EE5DA9 /* Ignore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8536A12F1AAC51D400EE5DA9 /* Build configuration list for PBXNativeTarget "Ignore" */;
+			buildPhases = (
+				8536A1261AAC51D200EE5DA9 /* Resources */,
+				8536A1271AAC51D200EE5DA9 /* Sources */,
+				8536A1281AAC51D200EE5DA9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8536A1311AAC51EB00EE5DA9 /* PBXTargetDependency */,
+			);
+			name = Ignore;
+			productName = Ignore;
+			productReference = 8536A12A1AAC51D300EE5DA9 /* Ignore.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		855BF4761A9882BC004C7617 /* DCCSupport */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 855BF47C1A9882BD004C7617 /* Build configuration list for PBXNativeTarget "DCCSupport" */;
@@ -1334,6 +1394,7 @@
 				85C9096B1AA30CBA001F7AC5 /* PBXTargetDependency */,
 				85C90A041AA323A5001F7AC5 /* PBXTargetDependency */,
 				8572F56D1AAB729B00A45FDF /* PBXTargetDependency */,
+				8536A1711AAC542800EE5DA9 /* PBXTargetDependency */,
 			);
 			name = TalkSoup;
 			productInstallPath = "$(HOME)/Applications";
@@ -1373,11 +1434,19 @@
 				85C909421AA30925001F7AC5 /* KeepAlive */,
 				85C909AA1AA31512001F7AC5 /* MessageInTab */,
 				8572F5431AAB724500A45FDF /* MessateOutTab */,
+				8536A1291AAC51D200EE5DA9 /* Ignore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8536A1261AAC51D200EE5DA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		855BF4731A9882BC004C7617 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1514,6 +1583,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				852360511A968AF900836C2E /* dns_helper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8536A1271AAC51D200EE5DA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8536A14C1AAC525D00EE5DA9 /* Ignore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1669,6 +1746,16 @@
 			isa = PBXTargetDependency;
 			target = 852360451A968ACD00836C2E /* dns_helper */;
 			targetProxy = 852360601A96925400836C2E /* PBXContainerItemProxy */;
+		};
+		8536A1311AAC51EB00EE5DA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 857EED011A8FD35800EEC00A /* TalkSoupBundles */;
+			targetProxy = 8536A1301AAC51EB00EE5DA9 /* PBXContainerItemProxy */;
+		};
+		8536A1711AAC542800EE5DA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8536A1291AAC51D200EE5DA9 /* Ignore */;
+			targetProxy = 8536A1701AAC542800EE5DA9 /* PBXContainerItemProxy */;
 		};
 		855BF4A21A98858E004C7617 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2354,6 +2441,78 @@
 			};
 			name = Default;
 		};
+		8536A12C1AAC51D400EE5DA9 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Ignore/Ignore-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Ignore;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		8536A12D1AAC51D400EE5DA9 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Ignore/Ignore-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Ignore;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		8536A12E1AAC51D400EE5DA9 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "InFilters/Ignore/Ignore-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Ignore;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Default;
+		};
 		855BF4791A9882BD004C7617 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3019,6 +3178,16 @@
 				852360481A968ACF00836C2E /* Development */,
 				852360491A968ACF00836C2E /* Deployment */,
 				8523604A1A968ACF00836C2E /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		8536A12F1AAC51D400EE5DA9 /* Build configuration list for PBXNativeTarget "Ignore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8536A12C1AAC51D400EE5DA9 /* Development */,
+				8536A12D1AAC51D400EE5DA9 /* Deployment */,
+				8536A12E1AAC51D400EE5DA9 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
