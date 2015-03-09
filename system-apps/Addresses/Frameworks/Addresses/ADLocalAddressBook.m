@@ -803,7 +803,7 @@ static ADLocalAddressBook *_localAB = nil;
   if(!guid || [group addressBook] != self)
     {
       NSLog(@"Group being removed from is not part of this address book\n");
-      return NO;
+      return nil;
     }
 
   arr = [NSMutableArray array];
@@ -890,7 +890,8 @@ static ADLocalAddressBook *_localAB = nil;
   path = [path stringByAppendingPathExtension: type];
 
   ok = [fm fileExistsAtPath: path isDirectory: &dir];
-  if(!ok) return NO;
+  if(!ok)
+    path = nil;
   if(ok && dir)
     [NSException raise: ADAddressBookInternalError
 		 format: @"%@ exists, but is a directory!", path];
