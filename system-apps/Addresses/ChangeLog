@@ -1,5 +1,10 @@
+2014-03-09 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/Addresses/ADLocalAddressBook.m
+	Return nil, not NO
+
 2013-10-19 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
-	
+
 	* Goodies/VCFViewer/VCFViewer.m
 	Cast count to ints to please the format string
 	* Goodies/adserver/adserver.m
