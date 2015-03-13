@@ -1,13 +1,12 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 BUNDLE_NAME = Ignore
 
-BUNDLE_EXTENSION =
-
 ifeq ($(USE_APPKIT),)
 USE_APPKIT = yes
 endif
 
 BUNDLE_INSTALL_DIR = $(GNUSTEP_APPLICATION_SUPPORT)/TalkSoup/InFilters
+$(BUNDLE_NAME)_COPY_INTO_DIR = ../../Source/TalkSoup.app/Resources/InFilters
 
 Ignore_OBJC_FILES = Ignore.m 
 
