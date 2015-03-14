@@ -59,7 +59,7 @@ extern NSString *DCCInfoNick;     //NSString
 		NSString *status;
 		NSDictionary *info;
 		NSDictionary *userInfo;
-		id transport;
+		id<NetTransport> transport;
 	}
 
 - (DCCObject *)initWithDelegate: aDelegate withInfo: (NSDictionary *)info
