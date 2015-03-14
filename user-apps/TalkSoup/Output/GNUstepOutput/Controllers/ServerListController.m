@@ -412,8 +412,6 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 }
 - (void)awakeFromNib
 {
-	id tmp;
-	
 	[browser setMaxVisibleColumns: 2];
 	[browser setHasHorizontalScroller: NO];
 	[browser setAllowsMultipleSelection: NO];
