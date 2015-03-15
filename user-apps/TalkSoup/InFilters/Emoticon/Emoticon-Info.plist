@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
+	<string>Emoticon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.gnustep.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>org.gnustep.talksoup.Emoticon</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
