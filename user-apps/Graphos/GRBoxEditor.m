@@ -2,7 +2,7 @@
  Project: Graphos
  GRBoxEditor.m
 
- Copyright (C) 2007-2013 GNUstep Application Project
+ Copyright (C) 2007-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -38,6 +38,24 @@
   return self;
 }
 
+- (NSPoint)constrainControlPoint:(NSPoint)p
+{
+  NSPoint pos;
+  CGFloat w, h;
+  NSPoint retP;
+  
+  retP = p;
+  pos = [(GRBox *)object position];
+  w = pos.x-p.x;
+  h = pos.y-p.y;
+  
+  if (w < h)
+    retP.y = pos.y+w;
+  else
+    retP.x = pos.x+h;
+  
+  return retP;
+}
 
 - (NSPoint)moveControlAtPoint:(NSPoint)p
 {
@@ -81,19 +99,7 @@
 	  pp = [[object view] convertPoint: pp fromView: nil];
 	  pp = GRpointDeZoom(pp, zFactor);
 	  if([[object view] shiftclick])
-	    {
-	      NSPoint pos;
-	      CGFloat w, h;
-	      
-	      pos = [(GRBox *)object position];
-	      w = pos.x-pp.x;
-	      h = pos.y-pp.y;
-	      
-	      if (w < h)
-		pp.y = pos.y+w;
-	      else
-		pp.x = pos.x+h;
-	    }
+	    pp = [self constrainControlPoint:pp];
 	  
 	  [[(GRPathObject *)object currentPoint] moveToPoint: pp];
 	  [(GRPathObject *)object remakePath];

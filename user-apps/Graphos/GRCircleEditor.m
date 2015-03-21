@@ -39,6 +39,24 @@
     return self;
 }
 
+- (NSPoint)constrainControlPoint:(NSPoint)p
+{
+  NSPoint pos;
+  CGFloat w, h;
+  NSPoint retP;
+  
+  retP = p;
+  pos = [(GRCircle *)object position];
+  w = pos.x-p.x;
+  h = pos.y-p.y;
+  
+  if (w < h)
+    retP.y = pos.y+w;
+  else
+    retP.x = pos.x+h;
+
+  return retP;
+}
 
 - (NSPoint)moveControlAtPoint:(NSPoint)p
 {
@@ -81,27 +99,15 @@
 	  pp = [[object view] convertPoint: pp fromView: nil];
 	  pp = GRpointDeZoom(pp, zFactor);
 	  if([[object view] shiftclick])
-              {
-                NSPoint pos;
-                CGFloat w, h;
+            pp = [self constrainControlPoint:pp];
+          
+          [[(GRPathObject *)object currentPoint] moveToPoint: pp];
+          [(GRPathObject *)object remakePath];
 
-                pos = [(GRCircle *)object position];
-                w = pos.x-pp.x;
-                h = pos.y-pp.y;
-
-                if (w < h)
-                  pp.y = pos.y+w;
-                else
-                  pp.x = pos.x+h;
-              }
-            
-            [[(GRPathObject *)object currentPoint] moveToPoint: pp];
-            [(GRPathObject *)object remakePath];
-
-            [[object view] setNeedsDisplay: YES];
-            event = [[[object view] window] nextEventMatchingMask:
-                NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-            [[object view] verifyModifiersOfEvent: event];
+          [[object view] setNeedsDisplay: YES];
+          event = [[[object view] window] nextEventMatchingMask:
+              NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+          [[object view] verifyModifiersOfEvent: event];
         } while([event type] != NSLeftMouseUp);
     }
 

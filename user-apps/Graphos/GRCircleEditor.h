@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircleEditor.h
 
- Copyright (C) 2009 GNUstep Application Project
+ Copyright (C) 2009-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -32,6 +32,8 @@
 {
 
 }
+
+- (NSPoint)constrainControlPoint:(NSPoint)p;
 
 - (void)draw;
 

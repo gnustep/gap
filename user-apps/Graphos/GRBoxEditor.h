@@ -2,7 +2,7 @@
  Project: Graphos
  GRBoxEditor.h
 
- Copyright (C) 2007-2009 GNUstep Application Project
+ Copyright (C) 2007-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -31,6 +31,8 @@
 @interface GRBoxEditor : GRPathEditor
 {
 }
+
+- (NSPoint)constrainControlPoint:(NSPoint)p;
 
 - (void)draw;
 
