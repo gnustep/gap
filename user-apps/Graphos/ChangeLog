@@ -1,3 +1,11 @@
+2015-03-21 Riccardo Mottola <rm@gnu.org>
+
+	* GRBoxEditor.h
+	* GRBoxEditor.m
+	* GRCircleEditor.h
+	* GRCircleEditor.m
+	Factor out control point constraints in a separate method.
+
 2015-02-28 Riccardo Mottola <rm@gnu.org>
 
 	* GRImage.m
