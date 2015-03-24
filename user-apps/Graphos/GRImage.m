@@ -24,7 +24,7 @@
  */
 
 #import "GRImage.h"
-#import "GRBoxEditor.h"
+#import "GRImageEditor.h"
 
 
 #import <AppKit/AppKit.h>
@@ -43,6 +43,8 @@
 
       NSLog(@"initInView properties of GRImage");
 
+      [editor release];
+      editor = [[GRImageEditor alloc] initEditor:(GRImage*)self];
       imgRepData = [properties objectForKey:@"imgrepdata"];
       if (imgRepData)
         {
@@ -267,7 +269,14 @@
       [image release];
       image = img;
       [image retain];
+      originalSize = [image size];
+      originalRatio = originalSize.width / originalSize.height;
     }
+}
+
+- (float)originalRatio
+{
+  return originalRatio;
 }
 
 @end

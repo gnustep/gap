@@ -79,7 +79,8 @@ GRPathObject.h \
 GRPathEditor.h \
 GRCircle.h \
 GRCircleEditor.h \
-GRImage.h
+GRImage.h \
+GRImageEditor.h
 
 #
 # Objective-C Class files
@@ -106,7 +107,8 @@ GRPathObject.m \
 GRPathEditor.m \
 GRCircle.m \
 GRCircleEditor.m \
-GRImage.m
+GRImage.m \
+GRImageEditor.m
 
 #
 # Other sources
