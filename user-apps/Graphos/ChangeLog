@@ -1,3 +1,9 @@
+2015-03-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRImageEditor.h
+	* GRImageEditor.m
+	Dedicated Image Editor.
+
 2015-03-21 Riccardo Mottola <rm@gnu.org>
 
 	* GRBoxEditor.h
