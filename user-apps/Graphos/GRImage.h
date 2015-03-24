@@ -33,9 +33,12 @@
 {
   NSString *name;
   NSImage *image;
+  NSSize originalSize;
+  float originalRatio;
 }
 
 - (NSImage *)image;
 - (void)setImage:(NSImage *)img;
+- (float)originalRatio;
 
 @end

@@ -4,6 +4,10 @@
 	* GRImageEditor.m
 	Dedicated Image Editor.
 
+	* GRImage.h
+	* GRImage.m
+	Remember original size and aspect ratio, initialilye dedicated editor.
+
 2015-03-21 Riccardo Mottola <rm@gnu.org>
 
 	* GRBoxEditor.h
