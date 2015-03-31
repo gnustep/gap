@@ -81,6 +81,8 @@
 		854931F311143DF600C4D928 /* GRCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8518AB1910E8A8ED004A2013 /* GRCircle.m */; };
 		854931F411143DF600C4D928 /* GRCircleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8518AB1B10E8A8ED004A2013 /* GRCircleEditor.m */; };
 		854931F611143DF600C4D928 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		8583C8321AC3015C002DC0FD /* GRImageEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583C8301AC3015C002DC0FD /* GRImageEditor.h */; };
+		8583C8331AC3015C002DC0FD /* GRImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8583C8311AC3015C002DC0FD /* GRImageEditor.m */; };
 		85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85BB08521215F83A00B9699B /* PropertiesEditor.nib */; };
 		85DA3CD11A69B9BC00FB9DCC /* GRImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DA3CCF1A69B9BC00FB9DCC /* GRImage.h */; };
 		85DA3CD21A69B9BC00FB9DCC /* GRImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DA3CD01A69B9BC00FB9DCC /* GRImage.m */; };
@@ -109,6 +111,8 @@
 		853877F50DA0375200A80103 /* GRPathEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPathEditor.m; sourceTree = "<group>"; };
 		854931FB11143DF600C4D928 /* Info-Draw.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Draw.plist"; sourceTree = "<group>"; };
 		854931FC11143DF600C4D928 /* Graphos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8583C8301AC3015C002DC0FD /* GRImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRImageEditor.h; sourceTree = "<group>"; };
+		8583C8311AC3015C002DC0FD /* GRImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRImageEditor.m; sourceTree = "<group>"; };
 		85AEB2950CA43E7A00A80101 /* GRBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBox.h; sourceTree = "<group>"; };
 		85AEB2960CA43E7A00A80101 /* GRBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBox.m; sourceTree = "<group>"; };
 		85B1DAAA0D8B2E2400A80103 /* GRPathObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPathObject.h; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 				F539B20808A3595201A8012F /* GRPropsEditor.m */,
 				85DA3CCF1A69B9BC00FB9DCC /* GRImage.h */,
 				85DA3CD01A69B9BC00FB9DCC /* GRImage.m */,
+				8583C8301AC3015C002DC0FD /* GRImageEditor.h */,
+				8583C8311AC3015C002DC0FD /* GRImageEditor.m */,
 				F539B20308A3589601A8012F /* GRText.h */,
 				F539B20408A3589601A8012F /* GRText.m */,
 				F539B20B08A359DC01A8012F /* GRTextEditor.h */,
@@ -361,6 +367,7 @@
 				854931BC11143DF600C4D928 /* GRCircle.h in Headers */,
 				854931BD11143DF600C4D928 /* GRCircleEditor.h in Headers */,
 				85DA3CD11A69B9BC00FB9DCC /* GRImage.h in Headers */,
+				8583C8321AC3015C002DC0FD /* GRImageEditor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +488,7 @@
 				854931F311143DF600C4D928 /* GRCircle.m in Sources */,
 				854931F411143DF600C4D928 /* GRCircleEditor.m in Sources */,
 				85DA3CD21A69B9BC00FB9DCC /* GRImage.m in Sources */,
+				8583C8331AC3015C002DC0FD /* GRImageEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

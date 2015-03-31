@@ -114,8 +114,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         }
       else if([obj isKindOfClass: [GRImage class]])
         {
-	  // FIXME str = [NSString stringWithFormat: @"box%i", b];
-          str = nil;
+	  str = [NSString stringWithFormat: @"image%i", i];
 	  i++;
         }
       else if([obj isKindOfClass: [GRBox class]])
@@ -158,7 +157,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     GRText *gGRText;
     GRBox *box;
     GRCircle *circle;
-    int i;
+    GRImage *image;
+    unsigned i;
     float version;
     NSNumber *versionNumber;
 
@@ -259,6 +259,13 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 					   inView: self zoomFactor: zFactor];
 		[objects addObject: box];
 		[box release];
+	      }
+	    else if([key rangeOfString: @"image"].length)
+	      {
+		image = [[GRImage alloc] initFromData: objdict
+					   inView: self zoomFactor: zFactor];
+		[objects addObject: image];
+		[image release];
 	      }
 	    else if([key rangeOfString: @"circle"].length)
 	      {
