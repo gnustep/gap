@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2015 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -42,46 +42,18 @@
   withProperties:(NSDictionary *) properties
       openEditor:(BOOL)openedit
 {
-  self = [super init];
+  self = [super initInView:aView zoomFactor:zf withProperties:properties];
   if(self)
     {
       int result;
         
-      docView = aView;
-      zmFactor = zf;
       pos = p;
       selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
       rotation = 0;
       scalex = 1;
       scaley = 1;
-      stroked = YES;
-      filled = NO;
-      visible = YES;
-      locked = NO;
-      strokeColor = [[[NSColor blackColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-      fillColor = [[[NSColor whiteColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
       ASSIGN(str, @"");
 
-      if (properties != nil)
-	{
-	  NSColor *newColor;
-	  id val;
-	  
-	  val = [properties objectForKey: @"stroked"];
-	  if (val != nil)
-	    [self setStroked:[val boolValue]];
-	  newColor = (NSColor *)[properties objectForKey: @"strokecolor"];
-	  if (newColor != nil)
-	    [self setStrokeColor: newColor];
-	  
-	  val = [properties objectForKey: @"filled"];
-	  if (val != nil)
-	    [self setFilled: (BOOL)[val intValue]];
-	  newColor = (NSColor *)[properties objectForKey: @"fillcolor"];
-	  if (newColor != nil)
-	    [self setFillColor: newColor];
-	}
-      editor = [self allocEditor];
       if(openedit)
 	{
 	  [(GRTextEditor *)editor setPoint: pos
