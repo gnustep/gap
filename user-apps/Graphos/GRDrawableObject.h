@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.h
 
- Copyright (C) 2008-2013 GNUstep Application Project
+ Copyright (C) 2008-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -50,6 +50,9 @@
   NSColor *fillColor;
   NSColor *strokeColor;
 }
+
+/** return a fresh allocated editor corresponding to the current object */
+- (GRObjectEditor *)allocEditor;
 
 - (id)initInView:(GRDocView *)aView zoomFactor:(CGFloat)zf withProperties:(NSDictionary *)properties;
 - (id)initFromData:(NSDictionary *)description inView:(GRDocView *)aView zoomFactor:(CGFloat)zf;

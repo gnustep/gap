@@ -31,6 +31,11 @@
 
 @implementation GRImage
 
+- (GRObjectEditor *)allocEditor
+{
+  return [[GRImageEditor alloc] initEditor:self];
+}
+
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
       zoomFactor:(CGFloat)zf
@@ -43,8 +48,6 @@
 
       NSLog(@"initInView properties of GRImage");
 
-      [editor release];
-      editor = [[GRImageEditor alloc] initEditor:(GRImage*)self];
       imgRepData = [properties objectForKey:@"imgrepdata"];
       if (imgRepData)
         {

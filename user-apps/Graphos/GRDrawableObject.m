@@ -2,7 +2,7 @@
  Project: Graphos
  GRDrawableObject.m
 
- Copyright (C) 2008-2013 GNUstep Application Project
+ Copyright (C) 2008-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -36,6 +36,11 @@
     [strokeColor release];
     [fillColor release];
     [super dealloc];
+}
+
+- (GRObjectEditor *)allocEditor
+{
+  return [[GRObjectEditor alloc] initEditor:self];
 }
 
 /** initializes by using the properties array as defaults */
@@ -81,6 +86,8 @@
       val = [properties objectForKey: @"locked"];
       if (val)
 	locked = [val boolValue];
+
+      editor = [self allocEditor];
     }
   return self;
 }
