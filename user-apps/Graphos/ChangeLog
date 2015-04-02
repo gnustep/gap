@@ -11,6 +11,9 @@
 	* GRCircle.m
 	Use the editor inited in super.
 
+	* GRText.m
+	init through super class.
+
 2015-03-31 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
