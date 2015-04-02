@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009-2013 GNUstep Application Project
+ Copyright (C) 2009-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -32,6 +32,10 @@
 
 @implementation GRCircle
 
+- (GRObjectEditor *)allocEditor
+{
+  return [[GRCircleEditor alloc] initEditor:self];
+}
 
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
@@ -61,7 +65,6 @@
       if (obj)      
 	rotation = [obj floatValue];
 
-      editor = [[GRCircleEditor alloc] initEditor:self];
       startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
       endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
       [self setZoomFactor: zf];

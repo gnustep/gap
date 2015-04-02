@@ -31,6 +31,11 @@
 
 @implementation GRText
 
+- (GRObjectEditor *)allocEditor
+{
+  return [[GRTextEditor alloc] initEditor:self];
+}
+
 - (id)initInView:(GRDocView *)aView
          atPoint:(NSPoint)p
       zoomFactor:(CGFloat)zf
@@ -76,7 +81,7 @@
 	  if (newColor != nil)
 	    [self setFillColor: newColor];
 	}
-      editor = [[GRTextEditor alloc] initEditor:(GRText*)self];
+      editor = [self allocEditor];
       if(openedit)
 	{
 	  [(GRTextEditor *)editor setPoint: pos

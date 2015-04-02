@@ -31,6 +31,10 @@ static double k = 0.025;
 
 @implementation GRBezierPath
 
+- (GRObjectEditor *)allocEditor
+{
+  return [[GRBezierPathEditor alloc] initEditor:self];
+}
 
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
@@ -70,7 +74,6 @@ static double k = 0.025;
       
       psops = nil;
       linearr = nil;
-      editor = [[GRBezierPathEditor alloc] initEditor:self];
       docView = aView;
       zmFactor = zf;
       myPath = [[NSBezierPath bezierPath] retain];
