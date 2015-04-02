@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.m
 
- Copyright (C) 2007-2013 GNUstep Application Project
+ Copyright (C) 2007-2015 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -33,6 +33,11 @@
 
 @implementation GRBox
 
+- (GRObjectEditor *)allocEditor
+{
+  return [[GRBoxEditor alloc] initEditor:self];
+}
+
 
 /** initializes by using the properties array as defaults */
 - (id)initInView:(GRDocView *)aView
@@ -57,7 +62,7 @@
       if (obj)      
 	rotation = [obj floatValue];
       
-      editor = [[GRBoxEditor alloc] initEditor:(GRBox*)self];
+      editor = [self allocEditor];
       startControlPoint = [[GRObjectControlPoint alloc] initAtPoint: pos zoomFactor:zf];
       endControlPoint = [[GRObjectControlPoint alloc] initAtPoint: NSMakePoint(pos.x + size.width, pos.y + size.height) zoomFactor:zf];
       [self setZoomFactor: zf];
