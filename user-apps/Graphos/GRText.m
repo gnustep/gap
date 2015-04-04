@@ -96,7 +96,17 @@
             inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
 {
-  self = [super init];
+  NSMutableDictionary *props;
+  NSPoint p;
+  NSString *s;
+
+  props = [NSMutableDictionary dictionaryWithCapacity:2];
+  [props setObject:[description objectForKey: @"string"] forKey:@"string"];
+
+  p = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
+                  [[description objectForKey: @"posy"]  floatValue]);
+  
+  self = [self initInView:aView atPoint:p zoomFactor:zf withProperties:props openEditor:NO];
   if(self)
     {
       NSMutableParagraphStyle *style;
@@ -108,23 +118,15 @@
       float strokeAlpha;
       float fillAlpha;
       id obj;
-	
-      docView = aView;
-      zmFactor = zf;
-      editor = [self allocEditor];
+      
       s = [description objectForKey: @"string"];
-      if (s)
         {
-          NSDictionary *props;
           NSFont *fontObj;
           float parspace;
           float fsize;
-          NSTextAlignment align;
+          NSTextAlignment align;          
+
           
-          props = [NSMutableDictionary dictionaryWithCapacity:2];
-          
-          pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
-                          [[description objectForKey: @"posy"]  floatValue]);
           selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
           fontname = [description objectForKey: @"fontname"];
           fsize = [[description objectForKey: @"fontsize"] floatValue];
