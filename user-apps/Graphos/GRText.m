@@ -60,8 +60,8 @@
       s = [properties objectForKey:@"string"];
       if (nil == s)
         s = @"";
-      font = [properties objectForKey:@"font"];
-      if (nil == font)
+      f = [properties objectForKey:@"font"];
+      if (nil == f)
         f = [NSFont systemFontOfSize:12];
       parStyle = [properties objectForKey:@"paragraphstyle"];
       if (nil == parStyle)
