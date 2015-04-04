@@ -117,6 +117,9 @@
         {
           NSDictionary *props;
           NSFont *fontObj;
+          float parspace;
+          float fsize;
+          NSTextAlignment align;
           
           props = [NSMutableDictionary dictionaryWithCapacity:2];
           
@@ -225,15 +228,12 @@
   objCopy = [super copyWithZone:zone];
   
   objCopy->str = [str copy];
-  objCopy->font = [font copy];
+  objCopy->parAttributes = [parAttributes copy];
 
   objCopy->pos = NSMakePoint(pos.x, pos.y);
   objCopy->size = NSMakeSize(size.width, size.height);
   objCopy->bounds = NSMakeRect(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height);
   objCopy->rotation = rotation;
-  objCopy->fsize = fsize;
-  objCopy->align = align;
-  objCopy->parspace = parspace;
   objCopy->scalex = scalex;
   objCopy->scaley = scaley;
   objCopy->selRect = NSMakeRect(selRect.origin.x, selRect.origin.y, selRect.size.width, selRect.size.height);
@@ -251,6 +251,18 @@
     float fillCol[3];
     float strokeAlpha;
     float fillAlpha;
+    float parspace;
+    NSTextAlignment align;
+    NSFont *font;
+    float fsize;
+    NSParagraphStyle *pstyle;
+    
+    font = [parAttributes objectForKey: NSFontAttributeName];
+    fsize = [font pointSize];
+    pstyle = [parAttributes objectForKey: NSParagraphStyleAttributeName];
+    parspace = [pstyle paragraphSpacing];
+    align = [pstyle alignment];
+
 
     strokeCol[0] = [strokeColor redComponent];
     strokeCol[1] = [strokeColor greenComponent];
@@ -302,28 +314,19 @@
     return dict;
 }
 
-- (NSString *)fontName
-{
-  return [font fontName];
-}
 
 - (void)dealloc
 {
   [str release];
-  [font release];
+  [parAttributes release];
   [super dealloc];
 }
 
 - (void)setString:(NSString *)aString attributes:(NSDictionary *)attrs
 {
-  NSParagraphStyle *pstyle;
-
   ASSIGN(str, aString);
-  ASSIGN(font, [attrs objectForKey: NSFontAttributeName]);
-  fsize = [font pointSize];
-  pstyle = [attrs objectForKey: NSParagraphStyleAttributeName];
-  parspace = [pstyle paragraphSpacing];
-  align = [pstyle alignment];
+  ASSIGN(parAttributes, attrs);
+  
   size = NSMakeSize(0, 0);
   if (str)
     size = [str sizeWithAttributes: attrs];
@@ -333,23 +336,11 @@
 // maybe should be moved into the editor
 - (void)edit
 {
-    NSDictionary *attrs;
-    NSMutableParagraphStyle *style;
     int result;
-
-    style = [[NSMutableParagraphStyle alloc] init];
-    [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-    [style setAlignment: align];
-    [style setParagraphSpacing: parspace];
-
-    attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-        font, NSFontAttributeName,
-        style, NSParagraphStyleAttributeName, nil];
-    [style release];
 
     [(GRTextEditor *)editor setPoint: pos
           withString: str
-          attributes: attrs];
+          attributes: parAttributes];
     result = [(GRTextEditor *)editor runModal];
     if(result == NSAlertDefaultReturn)
         [self setString: [[(GRTextEditor *)editor editorView] textString]
@@ -428,7 +419,7 @@
 
     [path moveToPoint: aPoint];
     [path appendBezierPathWithGlyphs: glyphs
-                               count: range.length  inFont: font];
+                               count: range.length  inFont: aFont];
 
     free (glyphs);
     [textview release];
@@ -444,6 +435,7 @@
   NSBezierPath *bezp;
   NSMutableParagraphStyle *style;
   NSDictionary *strAttr;
+  NSFont *font;
   NSFont *tempFont;
   NSPoint posZ;
   NSRect selRectZ;
@@ -453,14 +445,13 @@
   if(!visible)
     return;
   
+  font = [parAttributes objectForKey: NSFontAttributeName];
   posZ = GRpointZoom(pos, zmFactor);
   selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
   NSAssert (font != nil, @"Font object nil during drawing");
-  style = [[NSMutableParagraphStyle alloc] init];
-  [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [style setAlignment: align];
+  style = [parAttributes objectForKey: NSParagraphStyleAttributeName];
 //  [style setParagraphSpacing: parspace*zmFactor];
-  tempFont = [NSFont fontWithName:[font fontName] size:fsize*zmFactor];
+  tempFont = [NSFont fontWithName:[font fontName] size:[font pointSize]*zmFactor];
   if (tempFont == nil)
     {
       NSLog(@"temp font obtained from %@ zoomFactor: %f is nil", font, zmFactor);
@@ -481,7 +472,6 @@
 			       strokeColor, NSForegroundColorAttributeName,
 			       style, NSParagraphStyleAttributeName, nil] retain];
     }
-  [style release];
   baselny = posZ.y;
   
   sizeZ  = [str sizeWithAttributes: strAttr];
