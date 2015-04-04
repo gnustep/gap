@@ -1,5 +1,11 @@
 2015-04-04 Riccardo Mottola <rm@gnu.org>
 
+	* GRText.h
+	* GRText.m
+	Use as only ivar the paragraph attributes, remove derived information.
+
+2015-04-04 Riccardo Mottola <rm@gnu.org>
+
 	* GRBezierPath.m
 	Use the editor inited in super.
 

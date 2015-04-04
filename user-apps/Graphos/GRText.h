@@ -32,11 +32,8 @@
 @interface GRText : GRDrawableObject
 {
     NSString *str;
-    NSFont *font;
+    NSDictionary *parAttributes;
     NSPoint pos;
-    float fsize;
-    NSTextAlignment align;
-    float parspace;
     NSSize size;
     NSRect bounds;
     float scalex, scaley;
@@ -54,8 +51,6 @@
             inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf;
 
-
-- (NSString *)fontName;
 
 - (void)setString:(NSString *)aString attributes:(NSDictionary *)attrs;
 
