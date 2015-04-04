@@ -46,13 +46,30 @@
   if(self)
     {
       int result;
-        
+      NSString *s;
+      NSFont *f;
+      NSParagraphStyle *parStyle;
+      NSDictionary *parAttr;
+      
       pos = p;
       selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
       rotation = 0;
       scalex = 1;
       scaley = 1;
-      ASSIGN(str, @"");
+
+      s = [properties objectForKey:@"string"];
+      if (nil == s)
+        s = @"";
+      font = [properties objectForKey:@"font"];
+      if (nil == font)
+        f = [NSFont systemFontOfSize:12];
+      parStyle = [properties objectForKey:@"paragraphstyle"];
+      if (nil == parStyle)
+        parStyle = [NSParagraphStyle defaultParagraphStyle];
+      parAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                f, NSFontAttributeName,
+                              parStyle, NSParagraphStyleAttributeName, nil];
+      [self setString:s attributes:parAttr];
 
       if(openedit)
 	{
@@ -94,17 +111,21 @@
 	
       docView = aView;
       zmFactor = zf;
-      editor = [[GRTextEditor alloc] initEditor:self];
+      editor = [self allocEditor];
       s = [description objectForKey: @"string"];
       if (s)
         {
-          ASSIGN(str, s);
+          NSDictionary *props;
+          NSFont *fontObj;
+          
+          props = [NSMutableDictionary dictionaryWithCapacity:2];
+          
           pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
                           [[description objectForKey: @"posy"]  floatValue]);
           selRect = NSMakeRect(pos.x - 3, pos.y - 3, 6, 6);
           fontname = [description objectForKey: @"fontname"];
           fsize = [[description objectForKey: @"fontsize"] floatValue];
-          ASSIGN(font, [NSFont fontWithName: fontname size: fsize]);
+          fontObj = [NSFont fontWithName: fontname size: fsize];
           align = [[description objectForKey: @"txtalign"] intValue];
           parspace = [[description objectForKey: @"parspace"] floatValue];
           style = [[NSMutableParagraphStyle alloc] init];
@@ -112,10 +133,10 @@
           [style setAlignment: align];
           [style setParagraphSpacing: parspace];
           attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  font, NSFontAttributeName,
+                                  fontObj, NSFontAttributeName,
                                 style, NSParagraphStyleAttributeName, nil];
           [style release];
-          size = [str sizeWithAttributes: attrs];
+          [self setString:s attributes:attrs];
         }
       scalex = [[description objectForKey: @"scalex"] floatValue];
       scaley = [[description objectForKey: @"scaley"] floatValue];
