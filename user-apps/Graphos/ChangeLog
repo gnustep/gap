@@ -1,5 +1,10 @@
 2015-04-04 Riccardo Mottola <rm@gnu.org>
 
+	* GRText.m
+	Put most attributes in the roperty list when initializing from Data.
+
+2015-04-04 Riccardo Mottola <rm@gnu.org>
+
 	* GRText.h
 	* GRText.m
 	Use as only ivar the paragraph attributes, remove derived information.
