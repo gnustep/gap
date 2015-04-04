@@ -86,7 +86,6 @@
 - (void)dealloc
 {
   [myView release];
-  [myWindow release];
   [super dealloc];
 }
 
