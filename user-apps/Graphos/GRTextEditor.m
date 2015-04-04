@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditor.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2015 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -85,8 +85,9 @@
 
 - (void)dealloc
 {
-    [myView release];
-    [super dealloc];
+  [myView release];
+  [myWindow release];
+  [super dealloc];
 }
 
 - (GRTextEditorView *)editorView
