@@ -1,5 +1,10 @@
 2015-04-04 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierPath.m
+	Use the editor inited in super.
+
+2015-04-04 Riccardo Mottola <rm@gnu.org>
+
 	* GRImage.m
 	Correctly initialize position in init, set string and font through setString.
 
@@ -12,7 +17,6 @@
 
 	* GRBox.m
 	* GRImage.m
-	* GRBezierPath.m
 	* GRCircle.m
 	Use the editor inited in super.
 

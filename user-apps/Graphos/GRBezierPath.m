@@ -45,7 +45,6 @@ static double k = 0.025;
   if(self)
     {
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
-      editor = [[GRBezierPathEditor alloc] initEditor:self];
     }
 
   return self;
@@ -76,6 +75,7 @@ static double k = 0.025;
       linearr = nil;
       docView = aView;
       zmFactor = zf;
+      editor = [self allocEditor];
       myPath = [[NSBezierPath bezierPath] retain];
       [myPath setCachesBezierPath: NO];
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
