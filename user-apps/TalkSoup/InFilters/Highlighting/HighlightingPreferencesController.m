@@ -200,7 +200,7 @@ NSString *nothingThereYetMessage = nil;
 	
 	set_pref(HighlightingTabAnythingColor, [temp encodeToData]);
 }
-- (BOOL)tableView: (NSTableView *)aTableView shouldSelectRow: (int)aRow
+- (BOOL)tableView: (NSTableView *)aTableView shouldSelectRow: (NSInteger)aRow
 {
 	currentlySelected = aRow;
 	if (currentlySelected >= [extraNames count])
@@ -213,13 +213,13 @@ NSString *nothingThereYetMessage = nil;
 	}
 	return YES;
 }
-- (int)numberOfRowsInTableView: (NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView: (NSTableView *)aTableView
 {
 	return [extraNames count] + 1;
 }
 - (id)tableView: (NSTableView *)aTableView
  objectValueForTableColumn: (NSTableColumn *)aTableColumn
- row: (int)rowIndex
+ row: (NSInteger)rowIndex
 {
 	if (rowIndex >= [extraNames count])
 	{
@@ -228,13 +228,13 @@ NSString *nothingThereYetMessage = nil;
 	return [extraNames objectAtIndex: rowIndex];
 }
 - (BOOL)tableView: (NSTableView *)aTableView
- shouldEditTableColumn: (NSTableColumn *)aTableColumn row: (int)rowIndex
+ shouldEditTableColumn: (NSTableColumn *)aTableColumn row: (NSInteger)rowIndex
 {
 	if (rowIndex <= [extraNames count]) return YES;
 	return NO;
 }
 - (void)tableView: (NSTableView *)aTableView setObjectValue: (id)anObject
- forTableColumn: (NSTableColumn *)aTableColumn row: (int)rowIndex
+ forTableColumn: (NSTableColumn *)aTableColumn row: (NSInteger)rowIndex
 {
 	if ([anObject isEqualToString: nothingThereYetMessage])
 	{
