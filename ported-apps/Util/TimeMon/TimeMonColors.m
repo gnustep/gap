@@ -66,7 +66,7 @@ static const id titles[] = {
 	else 
 	  {
             NSString *key = [NSString stringWithFormat:@"%@Gray",titles[i]];
-            float color = [defaults floatForKey:key];
+            CGFloat color = [defaults floatForKey:key];
             [tCell setColor:[NSColor colorWithCalibratedWhite:color alpha:1.0]];
 	  }
         [tCell setBezeled:YES];
