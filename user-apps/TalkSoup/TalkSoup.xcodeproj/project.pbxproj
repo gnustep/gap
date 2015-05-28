@@ -65,6 +65,7 @@
 		857EED761A8FE18800EEC00A /* TopicInspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 857EED651A8FE18800EEC00A /* TopicInspectorController.m */; };
 		857EEE3A1A8FF62600EEC00A /* TalkSoupBundles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857EED021A8FD35800EEC00A /* TalkSoupBundles.framework */; };
 		857EEE651A8FF95C00EEC00A /* TalkSoup.h in Headers */ = {isa = PBXBuildFile; fileRef = 857EEE641A8FF95C00EEC00A /* TalkSoup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85B3E7351B16940A008C39A2 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85B3E7341B16940A008C39A2 /* Defaults.plist */; };
 		85C8CEE81AA24BE300E79B07 /* Colorizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C8CEE71AA24BE300E79B07 /* Colorizer.m */; };
 		85C8CEEB1AA24ECE00E79B07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C8CEE91AA24ECE00E79B07 /* Localizable.strings */; };
 		85C8CF341AA24F0000E79B07 /* Colorizer.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */; };
@@ -429,6 +430,7 @@
 		857EED641A8FE18800EEC00A /* TopicInspectorController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TopicInspectorController.h; path = Output/GNUstepOutput/Controllers/TopicInspectorController.h; sourceTree = "<group>"; };
 		857EED651A8FE18800EEC00A /* TopicInspectorController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = TopicInspectorController.m; path = Output/GNUstepOutput/Controllers/TopicInspectorController.m; sourceTree = "<group>"; };
 		857EEE641A8FF95C00EEC00A /* TalkSoup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TalkSoup.h; path = TalkSoupBundles/TalkSoup.h; sourceTree = "<group>"; };
+		85B3E7341B16940A008C39A2 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Defaults.plist; path = Source/Defaults.plist; sourceTree = "<group>"; };
 		85C8CEDA1AA241E100E79B07 /* Colorizer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Colorizer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C8CEDB1AA241E100E79B07 /* Colorizer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Colorizer-Info.plist"; path = "OutFilters/Colorizer/Colorizer-Info.plist"; sourceTree = "<group>"; };
 		85C8CEE61AA24BE300E79B07 /* Colorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colorizer.h; path = OutFilters/Colorizer/Colorizer.h; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				85B3E7341B16940A008C39A2 /* Defaults.plist */,
 				8530F3E31A93C90B0017F8C5 /* TalkSoup.icns */,
 				8530F3E41A93C90B0017F8C5 /* TalkSoup.tiff */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -1572,6 +1575,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				8530F3E51A93C90B0017F8C5 /* TalkSoup.icns in Resources */,
+				85B3E7351B16940A008C39A2 /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
