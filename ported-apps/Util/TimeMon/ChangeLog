@@ -1,3 +1,9 @@
+2015-05-28: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* TimeMonColors.m
+	  float -> CGFloat
+	* Percentages.m
+          Add alpha to the default colors to actually show something
+
 2013-02-11: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* loadave.c
 	* Include missing header

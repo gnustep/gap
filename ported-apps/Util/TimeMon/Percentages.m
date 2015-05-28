@@ -266,11 +266,11 @@
 	@"YES",			@"HideOnAutolaunch",
 	@"NO",			@"NXAutoLaunch",
 	// For color systems.
-	@"1.000 1.000 1.000",	@"IdleColor",	// White
-	@"0.333 0.667 0.867",	@"NiceColor",	// A light blue-green
-	@"0.200 0.467 0.800",	@"UserColor",	// A darker blue-green
-	@"0.000 0.000 1.000",	@"SystemColor",	// Blue
-	@"1.000 0.800 0.900",	@"IOWaitColor",	// Light purple
+	@"1.000 1.000 1.000 1.000",	@"IdleColor",	// White
+	@"0.333 0.667 0.867 1.000",	@"NiceColor",	// A light blue-green
+	@"0.200 0.467 0.800 1.000",	@"UserColor",	// A darker blue-green
+	@"0.000 0.000 1.000 1.000",	@"SystemColor",	// Blue
+	@"1.000 0.800 0.900 1.000",	@"IOWaitColor",	// Light purple
 	// For monochrome systems.
 	@"1.000",		@"IdleGray",	// White
 	@"0.667",		@"NiceGray",	// Light gray
