@@ -52,7 +52,7 @@ static const id titles[] = {
 
     for(i = 0; i < 4; i++) {
         NSTextFieldCell *tCell = [self cellAtRow:0 column:i];
-        [tCell setStringValue:titles[ i]];
+        [tCell setStringValue: titles[i]];
 	// If self is in a color window, then load color
 	// information.
         if (shouldDrawColor) 
@@ -104,7 +104,7 @@ static const id titles[] = {
     
     // If it's a double-click, load the color into the color
     // panel and bring that panel up.
-    if ([e clickCount] > 1 && ![NSColorPanel sharedColorPanelExists]) 
+    if ([e clickCount] > 1) 
       {
         id newVar = [NSColorPanel sharedColorPanel];
         [newVar setColor:color];

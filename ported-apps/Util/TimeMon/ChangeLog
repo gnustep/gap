@@ -1,3 +1,8 @@
+2015-05-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* TimeMonColors.m
+	  fix spacing, and allow the GSColorSelection panel to show
+	  up multiple times 
+
 2015-05-28: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* TimeMonColors.m
 	  float -> CGFloat
