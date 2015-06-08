@@ -1,3 +1,12 @@
+2015-06-08 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Bundles/ASFTags/ASFTags.m
+          some format string fixes
+	* CynthiuneSliderCell.m
+	  float -> CGFloat
+	* Bundles/MP3/MP3.m
+	  memcpy -> memmove, prevents segfault on playing MP3
+          on OpenBSD
+
 2014-03-06 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/FLAC/FLAC.[h|m]
 	fix loading and playing of FLAC files with non-fragile-ABI
