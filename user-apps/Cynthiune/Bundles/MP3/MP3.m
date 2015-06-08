@@ -118,7 +118,7 @@ calcInputRemain (MadStream *stream, unsigned char *iBuffer)
           inputRemain = 0;
         }
       else
-        memcpy (iBuffer, stream->next_frame, inputRemain);
+        memmove (iBuffer, stream->next_frame, inputRemain);
     }
   else
     inputRemain = 0;

@@ -187,15 +187,15 @@ extractValueFromDescriptor (ContentDescriptor *descriptor)
                          ? "YES" : "NO")];
       break;
     case tWORD:
-      value = [NSString stringWithFormat: @"%d",
+      value = [NSString stringWithFormat: @"%lu",
                         *((unsigned long *) descriptor->value)];
       break;
     case tDWORD:
-      value = [NSString stringWithFormat: @"%d",
+      value = [NSString stringWithFormat: @"%lu",
                         *((unsigned long *) descriptor->value)];
       break;
     case tQWORD:
-      value = [NSString stringWithFormat: @"%l",
+      value = [NSString stringWithFormat: @"%llu",
                         *((unsigned long long *) descriptor->value)];
       break;
     default:
