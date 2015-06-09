@@ -32,7 +32,7 @@ TimeMon_APPLICATION_ICON = TimeMon.tiff
 include $(GNUSTEP_MAKEFILES)/common.make
 
 # The application to be compiled
-VERSION = 4.1
+VERSION = 4.2
 PACKAGE_NAME = TimeMon
 APP_NAME = TimeMon
 
