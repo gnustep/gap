@@ -679,7 +679,10 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
               [playlistViewController setCurrentPlayerSong: nil];
               [self resetProgressSlider];
             }
-          [player stop];
+          if ([player playing])
+            {
+              [player stop];
+            }
         }
     }
   if ([array count])
