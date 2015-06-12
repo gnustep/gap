@@ -1,3 +1,7 @@
+2015-06-12 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* PlaylistController.m
+	  fix hang on removing songs from the playlist
+
 2015-06-08 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Bundles/ASFTags/ASFTags.m
           some format string fixes
