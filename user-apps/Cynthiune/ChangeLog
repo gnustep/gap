@@ -1,3 +1,10 @@
+2015-06-13 Riccardo Mottola <rm@gnu.org>
+
+	* PlaylistController.m
+	* PlaylistView.h
+	* Playlist.h
+	Minor gcc and Mac 10.4 compatibilities
+      
 2015-06-12 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m
 	  fix hang on removing songs from the playlist

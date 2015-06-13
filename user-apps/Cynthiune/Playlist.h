@@ -23,6 +23,12 @@
 #ifndef Playlist_H
 #define Playlist_H
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned
+#endif
+#endif
+
 @class NSNumber;
 @class NSMutableArray;
 @class Song;
