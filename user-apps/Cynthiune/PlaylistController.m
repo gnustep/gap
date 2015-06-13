@@ -233,8 +233,8 @@ static NSString *SongInspectorItemIdentifier = @"songInspectorButton";
   NSArray *selection;
 
   infos = [NSMutableString stringWithFormat:
-                             LOCALIZED (@"%"PRIuPTR" songs - total time: %@"),
-                           [playlist numberOfSongs],
+                             LOCALIZED (@"%lu songs - total time: %@"),
+                           (unsigned long)[playlist numberOfSongs],
                            [[playlist duration] timeStringValue]];
 
   selection = [playlistViewController getSelectedSongs];

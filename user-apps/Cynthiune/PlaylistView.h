@@ -25,6 +25,15 @@
 
 #import <AppKit/NSTableView.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#endif
+
 #define CynthiuneEnterKey 0x000d
 
 @interface PlaylistView : NSTableView

@@ -25,6 +25,12 @@
 
 #import <Foundation/NSArray.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned
+#endif
+#endif
+
 @class NSString;
 
 @interface NSArray (CynthiuneExtension)
