@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011-2013 Free Software Foundation
+   Copyright (C) 2011-2015 Free Software Foundation
 
    Author: multix
 
@@ -32,6 +32,8 @@
 {
   float minXUnitSize;
   float minYUnitSize;
+
+  float lineWidth;
 }
 
 @end
