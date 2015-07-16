@@ -39,6 +39,7 @@
     {
       minXUnitSize = 10;
       minYUnitSize = 10;
+      lineWidth = 0.75;
     }
   return self;
 }
@@ -247,6 +248,10 @@
 	{
 	  path = [[NSBezierPath alloc] init];
 	  [[series color] set];
+          if ([series highlighted])
+            [path setLineWidth: lineWidth*2.5];
+          else
+            [path setLineWidth: lineWidth];
 	  x = minXPos;
 	  y = axisLevel + [[series objectAtIndex: 0] floatValue] * oneYUnit;
 	  p = NSMakePoint(x, y);
