@@ -72,6 +72,7 @@
       [series1 setColor: [NSColor purpleColor]];
       series2 = [[OKSeries alloc] init];
       [series2 setColor: [NSColor greenColor]];
+      [series2 setHighlighted:YES];
       [chartView addSeries: series2];
       [series2 release];
       for (i = 0; i < 6; i++)
@@ -249,6 +250,23 @@
 - (IBAction) changeSeries2Color: (id)sender
 {
   [[chartView seriesAtIndex:1] setColor: [sender color]];
+  [chartView setNeedsDisplay: YES];
+}
+
+- (IBAction) highlightSeries: (id)sender
+{
+  NSInteger i;
+  NSInteger selected;
+
+  selected = [highlightSeries indexOfSelectedItem];
+  NSLog(@"highlight %d", selected);
+  for (i = 0; i < [chartView seriesCount]; i++)
+    {
+      if (i == selected)
+        [[chartView seriesAtIndex:i] setHighlighted:YES];
+      else
+        [[chartView seriesAtIndex:i] setHighlighted:NO];
+    }
   [chartView setNeedsDisplay: YES];
 }
 

@@ -30,6 +30,7 @@
   IBOutlet OKChart *chartView;
   IBOutlet NSPopUpButton *plot;
   IBOutlet NSPopUpButton *chartType;
+  IBOutlet NSPopUpButton *highlightSeries;
 }
 
 - (IBAction)setAxisColor: (id)sender;
@@ -39,6 +40,7 @@
 - (IBAction)changeChartType:(id)sender;
 - (IBAction)changeSeries1Color: (id)sender;
 - (IBAction)changeSeries2Color: (id)sender;
+- (IBAction)highlightSeries: (id)sender;
 
 @end
 

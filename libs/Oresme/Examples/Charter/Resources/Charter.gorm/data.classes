@@ -8,12 +8,14 @@
 	    "changePlot:",
 	    "changeChartType:",
 	    "changeSeries1Color:",
-	    "changeSeries2Color:"
+	    "changeSeries2Color:",
+	    "highlightSeries:"
 	);
 	Outlets = (
 	    chartView,
 	    plot,
-	    chartType
+	    chartType,
+	    highlightSeries
 	);
 	Super = NSObject;
     };
@@ -24,6 +26,7 @@
 	    "changePlot:",
 	    "changeSeries1Color:",
 	    "changeSeries2Color:",
+	    "highlightSeries:",
 	    "orderFrontFontPanel:",
 	    "setAxisColor:",
 	    "setBackgroundColor:",
