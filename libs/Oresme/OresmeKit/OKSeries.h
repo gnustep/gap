@@ -3,7 +3,7 @@
    
    Numeric Series representation
 
-   Copyright (C) 2011-2014 Free Software Foundation
+   Copyright (C) 2011-2015 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -44,12 +44,17 @@
   /** Series color, used when drawing the chart. E.g. the line color or the pie sector */
   NSColor        *color;
 
+  /** if the series should be highlighted compared to others, e.g. drawin in bold or brighter colour */
+  BOOL highlighted;
+
   /** Array containing series data */
   NSMutableArray *seriesArray;
 }
 
 - (NSColor*) color;
 - (void) setColor: (NSColor *)c;
+- (BOOL)highlighted;
+- (void)setHighlighted: (BOOL)status;
 - (NSString*) title;
 - (void) setTitle:(NSString*)aTitle;
 - (NSString*) description;

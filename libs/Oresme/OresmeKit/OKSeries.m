@@ -36,6 +36,7 @@
       description = @"No description";
       title = @"Untitled";
       color = [[NSColor blueColor] retain];
+      highlighted = NO;
       seriesArray = [[NSMutableArray alloc] initWithCapacity: 1];
     }
   return self;
@@ -63,6 +64,17 @@
       color = [c retain];
     }
 }
+
+- (BOOL)highlighted
+{
+  return highlighted;
+}
+
+- (void)setHighlighted: (BOOL)status
+{
+  highlighted = status;
+}
+
 
 - (NSString*)title
 {
