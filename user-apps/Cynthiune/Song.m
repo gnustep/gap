@@ -73,6 +73,11 @@
   return self;
 }
 
+- (NSString *)description
+{
+  return filename;
+}
+
 - (BOOL)isEqual:(id)object
 {
   if (object == self)
