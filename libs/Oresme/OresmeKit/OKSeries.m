@@ -104,6 +104,45 @@
     }
 }
 
+- (void)calculateMinMax;
+{
+  NSUInteger count;
+  NSUInteger i;
+
+  count = [seriesArray count];
+  if (!count)
+    {
+      minValue = nil;
+      maxValue = nil;
+      return;
+    }
+
+  minValue = maxValue = [seriesArray objectAtIndex: 0];
+  i = 1;
+  while (i < count)
+    {
+      NSNumber *v;
+
+      v = [seriesArray objectAtIndex:i];
+      if ([maxValue compare: v] == NSOrderedAscending)
+        maxValue = v;
+      if ([minValue compare: v] == NSOrderedDescending)
+        minValue = v;
+      i++;
+    }
+}
+
+- (NSNumber *)minValue
+{
+  return minValue;
+}
+
+- (NSNumber *)maxValue
+{
+  return maxValue;
+}
+
+
 /* --- NSArray bridge methods ---*/
 
 - (id) objectAtIndex: (NSUInteger)index
@@ -114,6 +153,18 @@
 - (void) addObject: (id)obj
 {
   [seriesArray addObject: obj];
+  if ([seriesArray count] == 1)
+    {
+      maxValue = obj;
+      minValue = obj;
+    }
+  else
+    {
+      if ([maxValue compare: obj] == NSOrderedAscending)
+        maxValue = obj;
+      if ([minValue compare: obj] == NSOrderedDescending)
+        minValue = obj;
+    }
 }
 
 - (NSUInteger) count
@@ -123,11 +174,13 @@
 - (void) removeAllObjects
 {
   [seriesArray removeAllObjects];
+  [self calculateMinMax];
 }
 
 - (void) removeObjectAtIndex: (NSUInteger)index
 {
   [seriesArray removeObjectAtIndex: index];
+  [self calculateMinMax];
 }
 
 
