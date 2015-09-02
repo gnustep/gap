@@ -49,6 +49,11 @@
 
   /** Array containing series data */
   NSMutableArray *seriesArray;
+
+  /** minimum value, kept updated while adding/removing */
+  NSNumber *minValue;
+  /** maximum value, kept updated while adding/removing */
+  NSNumber *maxValue;
 }
 
 - (NSColor*) color;
@@ -59,6 +64,9 @@
 - (void) setTitle:(NSString*)aTitle;
 - (NSString*) description;
 - (void) setDescription:(NSString*)aDescription;
+
+- (NSNumber *)minValue;
+- (NSNumber *)maxValue;
 
 - (id) objectAtIndex: (NSUInteger)index;
 - (void) addObject: (id)obj;
