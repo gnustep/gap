@@ -55,7 +55,7 @@
 #define MAX_CONTROL_BUFF 2048
 #define MAX_DATA_BUFF 2048
 
-#if defined(__linux__) || defined (__BSD_VISIBLE)
+#if defined(__linux__) || defined (__BSD_VISIBLE) || defined (NetBSD)
 #define socklentype socklen_t
 #else
 #define socklentype int
