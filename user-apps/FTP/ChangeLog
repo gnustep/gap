@@ -1,3 +1,8 @@
+2015-09-04 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Fix socktype for NetBSD.
+
 2015-02-11 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
