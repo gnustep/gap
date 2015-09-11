@@ -84,13 +84,11 @@
   enum1 = [acpibat0 objectEnumerator];
   while ((obj1 = [enum1 nextObject]))
     {
-      //      NSLog(@"--->%@", obj1);
       if ([obj1 isKindOfClass: [NSDictionary class]])
 	{
 	  NSString *descriptionKey;
 
 	  descriptionKey = [obj1 objectForKey:@"description"];
-	  //	  NSLog(@"key-----> %@", descriptionKey);
 	  if (descriptionKey)
 	    [batDict setObject: obj1 forKey: descriptionKey];
 	}
@@ -133,20 +131,18 @@
     {
       warnCap = [valueStr floatValue] / 1000000;
     }
-  NSLog(@"warn cap: %@ %f", valueStr, warnCap);
+  //NSLog(@"warn cap: %@ %f", valueStr, warnCap);
   valueStr = [[batDict objectForKey: @"last full cap"] objectForKey: @"cur-value"];
   if (valueStr)
     lastCap = [valueStr floatValue] / 1000000;
-  NSLog(@"last full cap: %@, %f", valueStr, lastCap);
+  //NSLog(@"last full cap: %@, %f", valueStr, lastCap);
 
   valueStr = [[batDict objectForKey: @"charge rate"] objectForKey: @"cur-value"];
   chargeRate = 0;
   if (valueStr)
     chargeRate = [valueStr floatValue] / 1000000;
-  NSLog(@"charge rate: %@ %f", valueStr, chargeRate);
 
   valueStr = [[batDict objectForKey: @"discharge rate"] objectForKey: @"cur-value"];
-  NSLog(@"discharge object: %@", [batDict objectForKey: @"discharge rate"]);
   dischargeRate = 0;
   if (valueStr)
     dischargeRate = [valueStr floatValue] / 1000000;
@@ -159,7 +155,6 @@
 
   valueStr = [[batDict objectForKey: @"charging"] objectForKey: @"cur-value"];
   NSLog(@"charging: %@", valueStr);
-  NSLog(@"currCap %f, lastCap %f, amps %f", currCap, lastCap,amps);
   if ([valueStr intValue] == 0)
     {
       if (useWattHours)
