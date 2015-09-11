@@ -119,7 +119,7 @@
 	}
       desCap = [valueStr floatValue] / 1000000;
     }
-  NSLog(@"design cap: %@ %f", valueStr, desCap);
+  NSLog(@"design cap: %@ %f, type: %@", valueStr, desCap, [[batDict objectForKey: @"design cap"] objectForKey: @"type"]);
 
   chargeDict = [batDict objectForKey: @"charge"];
   valueStr = [chargeDict objectForKey: @"critical-capacity"];
@@ -146,6 +146,7 @@
   NSLog(@"charge rate: %@ %f", valueStr, chargeRate);
 
   valueStr = [[batDict objectForKey: @"discharge rate"] objectForKey: @"cur-value"];
+  NSLog(@"discharge object: %@", [batDict objectForKey: @"discharge rate"]);
   dischargeRate = 0;
   if (valueStr)
     dischargeRate = [valueStr floatValue] / 1000000;
@@ -161,7 +162,11 @@
   NSLog(@"currCap %f, lastCap %f, amps %f", currCap, lastCap,amps);
   if ([valueStr intValue] == 0)
     {
-      amps = dischargeRate;
+      if (useWattHours)
+        amps = dischargeRate / volts;
+      else
+        amps = dischargeRate;
+      
       isCharging = NO;
       if (amps > 0)
 	timeRemaining = currCap / amps;
@@ -173,7 +178,11 @@
     }
   else
     {
-      amps = chargeRate;
+      if (useWattHours)
+        amps = chargeRate / volts;
+      else
+        amps = chargeRate;
+
       isCharging = YES;
       if (amps > 0)
 	timeRemaining = (lastCap-currCap) / amps;
