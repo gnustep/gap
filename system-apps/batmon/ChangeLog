@@ -1,3 +1,8 @@
+2015-09-11 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel-NetBSD.m
+	Fix Amps if charge is expressed in Watts
+
 2015-01-18  Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
