@@ -113,7 +113,7 @@
               if (dirName != nil)
                 {
                   /* scan for the first present battery */
-                  dirName = [[NSString stringWithString:@"/proc/acpi/battery"] stringByAppendingPathComponent:dirName];
+                  dirName = [@"/proc/acpi/battery" stringByAppendingPathComponent:dirName];
                   [dirName getCString:batteryStatePath0];
                   strcat(batteryStatePath0, "/state");
                   NSLog(@"checking: %s", batteryStatePath0);
@@ -445,7 +445,7 @@
       stateFile = fopen(apmPath, "r");
       if (stateFile == NULL)
 	{
-	  NSLog(@"apm state file null");
+	  NSLog(@"apm state file nil");
 	  return;
 	}
 
@@ -454,7 +454,7 @@
       //	NSLog(@"line: %s", line);
       sscanf(line, "%s %s %s %s %s %s %s %s %s", drvVersionStr, apmBiosVersionStr, apmBiosFlagsStr, acLineStatusStr, battStatusStr, battFlagsStr, percentStr, timeRemainingStr, timeUnitStr);
 
-      if (percentStr != NULL && strlen(percentStr) > 0)
+      if (strlen(percentStr) > 0)
 	{
 	  if (percentStr[strlen(percentStr)-1] == '%')
 	    percentStr[strlen(percentStr)-1] = '\0';
@@ -471,7 +471,7 @@
 	  //	    NSLog(@"percent %f", chargePercent);
 	}
 
-      if (battStatusStr != NULL && strlen(battStatusStr) > 0)
+      if (strlen(battStatusStr) > 0)
 	{
 	  if (battStatusStr[3] == '0')
 	    battStatusInt = 0;
