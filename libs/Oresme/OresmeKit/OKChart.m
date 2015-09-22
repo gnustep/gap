@@ -94,17 +94,17 @@
 
       d = [number doubleValue];
       c = 0;
-      if (abs(d) >= 1000)
+      if (fabs(d) >= 1000)
         {
-          while (abs(d) >= 1000)
+          while (fabs(d) >= 1000)
             {
               d /= 1000;
               c++;
             }
         }
-      else if ((abs(d) > 0) && (abs(d) < 1))
+      else if ((fabs(d) > 0) && (fabs(d) < 1))
         {
-          while (abs(d) < 0.001)
+          while (fabs(d) < 0.001)
             {
               d *= 1000;
               c--;
