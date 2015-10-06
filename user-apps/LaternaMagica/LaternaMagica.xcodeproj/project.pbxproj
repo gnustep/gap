@@ -42,8 +42,8 @@
 		85B7C71813F302DB005EF60D /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
 		85DA40910A3B94BE00A80101 /* LMFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMFlipView.h; sourceTree = "<group>"; };
 		85DA40920A3B94BE00A80101 /* LMFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMFlipView.m; sourceTree = "<group>"; };
-		85DB9A6D10B3D3C100DC1358 /* Info-LaternaMagica.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-LaternaMagica.plist"; sourceTree = "<group>"; };
-		85DB9A6E10B3D3C100DC1358 /* LaternaMagica.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LaternaMagica.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85DB9A6D10B3D3C100DC1358 /* Info-LaternaMagica.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-LaternaMagica.plist"; sourceTree = "<group>"; };
+		85DB9A6E10B3D3C100DC1358 /* LaternaMagica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaternaMagica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85FE67C511D2CD5E0043B90D /* PRScale.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PRScale.h; sourceTree = "<group>"; };
 		85FE67C611D2CD5E0043B90D /* PRScale.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PRScale.m; sourceTree = "<group>"; };
 		F5D00DF9097C409A01A80101 /* FileTable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileTable.h; sourceTree = "<group>"; };

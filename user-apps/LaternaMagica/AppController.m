@@ -815,8 +815,8 @@
         }
       srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
 
-      newW = [srcImageRep size].width;
-      newH = [srcImageRep size].height;
+      newW = [srcImageRep pixelsWide];
+      newH = [srcImageRep pixelsHigh];
       aspectRatio = (double)newW / newH;
       NSLog(@"aspect ratio: %f", aspectRatio);
       switch([popupConstraints indexOfSelectedItem])
@@ -841,7 +841,7 @@
             }
 	  break;
 	case 4: /* largest side */
-	  if ([srcImageRep size].height > [srcImageRep size].width)
+	  if ([srcImageRep pixelsHigh] > [srcImageRep pixelsWide])
 	    {
 	      newH = givenWidth;
 	      newW = givenWidth * aspectRatio;
@@ -856,7 +856,7 @@
 	  NSLog(@"Unexpected constraint selection value.");
 	}
       NSLog(@"%d %d", newW, newH);
-      if (newW == [srcImageRep size].width)
+      if (newW == [srcImageRep pixelsWide])
 	{
 	  NSLog(@"nothing");
 	  scaledImageRep = srcImageRep;
