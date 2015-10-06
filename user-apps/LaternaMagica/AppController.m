@@ -813,7 +813,101 @@
           [srcImage release];
           srcImage = rotImage;
         }
-      srcImageRep = [NSBitmapImageRep imageRepWithData:[srcImage TIFFRepresentation]];
+      srcImageRep = [[srcImage representations] objectAtIndex:0];;
+
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_3)
+      /* since 10.4 we have different Alpha format position, let's convert it */
+      NSMutableDictionary *imgProps;
+
+      if ([srcImageRep bitmapFormat] != 0)
+        {
+          NSInteger x, y;
+          NSInteger w, h;
+          BOOL alphaFirst;
+          NSImage *destImage;
+          NSBitmapImageRep *destImageRep;
+          NSInteger           srcBytesPerRow;
+          NSInteger           destBytesPerRow;
+          NSInteger           srcBytesPerPixel;
+          NSInteger           destBytesPerPixel;
+          
+          NSLog(@"We have a non-standard format, let's try to convert it");
+          alphaFirst = [srcImageRep bitmapFormat] & NSAlphaFirstBitmapFormat;
+
+          if ([srcImageRep bitsPerSample] == 8)
+            {
+              unsigned char    *srcData;
+              unsigned char    *destData;
+              unsigned char    *p1;
+              unsigned char    *p2;
+
+              /* swap Alpha is hopefully only for chunky images */
+              if (alphaFirst)
+                {
+                  imgProps = [[NSMutableDictionary alloc] init];
+                  [imgProps setValue:[srcImageRep valueForProperty:NSImageCompressionMethod] forKey:NSImageCompressionMethod];
+                  [imgProps setValue:[srcImageRep valueForProperty:NSImageCompressionFactor] forKey:NSImageCompressionFactor];
+                  [imgProps setValue:[srcImageRep valueForProperty:NSImageEXIFData] forKey:NSImageEXIFData];
+                  
+                  w = [srcImageRep pixelsWide];
+                  h = [srcImageRep pixelsHigh];
+
+                  srcBytesPerRow = [srcImageRep bytesPerRow];
+                  srcBytesPerPixel = [srcImageRep bitsPerPixel] / 8;
+                  destImage = [[NSImage alloc] initWithSize:NSMakeSize(w, h)];
+                  destImageRep = [[NSBitmapImageRep alloc]
+                                  initWithBitmapDataPlanes:NULL
+                                                pixelsWide:w
+                                                pixelsHigh:h
+                                             bitsPerSample:8
+                                           samplesPerPixel:[srcImageRep samplesPerPixel]
+                                                  hasAlpha:[srcImageRep hasAlpha]
+                                                  isPlanar:NO
+                                            colorSpaceName:[srcImageRep colorSpaceName]
+                                               bytesPerRow:0
+                                              bitsPerPixel:0];
+                  
+                  destBytesPerRow = [destImageRep bytesPerRow];
+                  destBytesPerPixel = [destImageRep bitsPerPixel] / 8;
+                  srcData = [srcImageRep bitmapData];
+                  destData = [destImageRep bitmapData];
+                  if ([srcImageRep samplesPerPixel] == 2)
+                    {
+                      for (y = 0; y < h; y++)
+                        for (x = 0; x < w; x++)
+                          {
+                            p1 = srcData + srcBytesPerRow * y + srcBytesPerPixel * x;
+                            p2 = destData + destBytesPerRow * y + destBytesPerPixel * x;
+                            p2[0] = p1[1];
+                            p2[1] = p1[0];
+                          }
+                    }
+                  else
+                    {
+                      for (y = 0; y < h; y++)
+                        for (x = 0; x < w; x++)
+                          {
+                            p1 = srcData + srcBytesPerRow * y + srcBytesPerPixel * x;
+                            p2 = destData + destBytesPerRow * y + destBytesPerPixel * x;
+                            p2[0] = p1[1];
+                            p2[1] = p1[2];
+                            p2[2] = p1[3];
+                            p2[3] = p1[0];
+                          }
+                    }
+                  [destImageRep setProperty:NSImageEXIFData withValue:[imgProps objectForKey:NSImageEXIFData]];
+                  [destImage addRepresentation:destImageRep];
+                  [destImageRep release];
+                  [srcImage release];
+                  srcImage = destImage;
+                  [imgProps release];
+                }
+            }
+          else /* for 16 bit */
+            {
+            }
+        }
+#endif
 
       newW = [srcImageRep pixelsWide];
       newH = [srcImageRep pixelsHigh];
