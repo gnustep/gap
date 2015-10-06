@@ -1,6 +1,11 @@
 2015-10-06 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
+	Convert representation type if it is alphafirst on export, or scale filter chokes.
+
+2015-10-06 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
 	Use ImageRep pixelWide and pixelHigh instead of size.
 
 2014-02-05 Riccardo Mottola <rm@gnu.org>
