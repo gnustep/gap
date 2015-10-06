@@ -3,7 +3,7 @@
 //  PRICE
 //
 //  Created by Riccardo Mottola on Wed Jan 19 2005.
-//  Copyright (c) 2005-2014 Carduus. All rights reserved.
+//  Copyright (c) 2005-2015 Riccardo Mottola. All rights reserved.
 //
 // This application is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -29,7 +29,7 @@
     pixelsX = [[parameters objectAtIndex:0] intValue];
     pixelsY = [[parameters objectAtIndex:1] intValue];
     method = [[parameters objectAtIndex:2] intValue];
-
+	
     return [self scaleImage:image :pixelsX :pixelsY :method :progressPanel];
 }
 
@@ -81,7 +81,7 @@
                      hasAlpha:[srcImageRep hasAlpha]
                      isPlanar:NO
                      colorSpaceName:[srcImageRep colorSpaceName]
-                     bytesPerRow:destSamplesPerPixel*sizeX
+                     bytesPerRow:0
                      bitsPerPixel:0];
     
     srcData = [srcImageRep bitmapData];
@@ -94,7 +94,7 @@
         for (y = 0; y < sizeY; y++)
             for (x = 0; x < sizeX; x++)
                 for (i = 0; i < srcSamplesPerPixel; i++)
-                    destData[destBytesPerRow * y + destBytesPerPixel * (sizeX + x) + i] = srcData[srcBytesPerRow * (int)(y * yRatio)  + srcBytesPerPixel * (int)(x * xRatio) + i];
+                    destData[destBytesPerRow * y + destBytesPerPixel * x + i] = srcData[srcBytesPerRow * (int)(y * yRatio)  + srcBytesPerPixel * (int)(x * xRatio) + i];
     } 
     else if (method == BILINEAR)
       {
