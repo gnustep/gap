@@ -90,19 +90,19 @@
     destBytesPerPixel = [destImageRep bitsPerPixel] / 8;
 
     if (method == NEAREST_NEIGHBOUR)
-    {
+      {
         for (y = 0; y < sizeY; y++)
             for (x = 0; x < sizeX; x++)
                 for (i = 0; i < srcSamplesPerPixel; i++)
                     destData[destBytesPerRow * y + destBytesPerPixel * x + i] = srcData[srcBytesPerRow * (int)(y * yRatio)  + srcBytesPerPixel * (int)(x * xRatio) + i];
-    } 
+      } 
     else if (method == BILINEAR)
       {
 	/*
 	  w,h : original width and height
 	  v1, v2, v3, 4: four original corner values
 	  v' : new computed value
-
+          
 	  v' = v1(1-w)(1-h) + v2(w)(1-h) + v3(h)(1-w) + v3(w)(h)
 	*/
         int v1, v2, v3, v4;
@@ -113,7 +113,7 @@
 	    {
 	      register float xDiff, yDiff;
 	      float xFloat, yFloat;
-                    
+              
 	      xFloat = (float)x * xRatio;
 	      yFloat = (float)y * yRatio;
 	      x0 = (int)(xFloat);
@@ -127,7 +127,7 @@
 		  v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
 		  v4 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * (x0+1) + i];
 
-		  destData[destBytesPerPixel * (y * sizeX + x) + i] = \
+		  destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
 		    (int)(v1*(1-xDiff)*(1-yDiff) + \
 			  v2*xDiff*(1-yDiff) + \
 			  v3*yDiff*(1-xDiff) + \
@@ -153,7 +153,7 @@
 		v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
 		v2 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * (x0+1) + i];
 
-		destData[destSamplesPerPixel * (y * sizeX + x) + i] = \
+		destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
 		  (int)(v1*(1-xDiff)*(1-yDiff) + \
 			v2*xDiff*(1-yDiff));
 	      }
@@ -176,7 +176,7 @@
 		v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
 		v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
 
-		destData[destBytesPerPixel * (y * sizeX + x) + i] = \
+		destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
 		  (int)(v1*(1-xDiff)*(1-yDiff) + \
 			v3*yDiff*(1-xDiff));
 	      }
@@ -196,11 +196,12 @@
 	    {
 	      v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
 
-	      destData[destBytesPerPixel * (y * sizeX + x) + i] = \
+	      destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
 		(int)(v1*(1-xDiff)*(1-yDiff));
 	    }
 	}
-      } else
+      }
+    else
       NSLog(@"Unknown scaling method");
 
     [destImage addRepresentation:destImageRep];
