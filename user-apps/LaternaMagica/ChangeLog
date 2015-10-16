@@ -1,3 +1,8 @@
+2015-10-16 Riccardo Mottola <rm@gnu.org>
+
+	* PRScale.m
+	Import from PRICE optimized code with cleaner corner cases handling.
+
 2015-10-07 Riccardo Mottola <rm@gnu.org>
 
 	* PRScale.m

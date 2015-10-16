@@ -108,8 +108,8 @@
         int v1, v2, v3, v4;
         register int x0, y0;
         
-        for (y = 0; y < sizeY-1; y++)
-	  for (x = 0; x < sizeX-1; x++)
+        for (y = 0; y < sizeY; y++)
+	  for (x = 0; x < sizeX; x++)
 	    {
 	      register float xDiff, yDiff;
 	      float xFloat, yFloat;
@@ -122,10 +122,17 @@
 	      yDiff = (yFloat - y0);
 	      for (i = 0; i < srcSamplesPerPixel; i++)
 		{
+                  v1 = 0;
+                  v2 = 0;
+                  v3 = 0;
+                  v4 = 0;
 		  v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
-		  v2 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * (x0+1) + i];
-		  v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
-		  v4 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * (x0+1) + i];
+                  if (x < sizeX-1 )
+                    v2 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * (x0+1) + i];
+                  if (y < sizeY-1 )
+                    v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
+                  if ((x < sizeX-1) && (y < sizeY-1))
+                    v4 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * (x0+1) + i];
 
 		  destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
 		    (int)(v1*(1-xDiff)*(1-yDiff) + \
@@ -134,72 +141,6 @@
 			  v4*xDiff*yDiff);
 		}
 	    }
-	/* we left out one pixel at the right and bottom border */
-	y = sizeY-1;
-	for (x = 0; x < sizeX-1; x++)
-	  {
-	    register float xDiff, yDiff;
-	    float xFloat, yFloat;
-                    
-	    xFloat = (float)x * xRatio;
-	    yFloat = (float)y * yRatio;
-	    x0 = (int)(xFloat);
-	    y0 = (int)(yFloat);
-	    xDiff = (xFloat - x0);
-	    yDiff = (yFloat - y0);
-
-	    for (i = 0; i < srcSamplesPerPixel; i++)
-	      {
-		v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
-		v2 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * (x0+1) + i];
-
-		destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
-		  (int)(v1*(1-xDiff)*(1-yDiff) + \
-			v2*xDiff*(1-yDiff));
-	      }
-	  }
-
-	x = sizeX-1;
-	for (y = 0; y < sizeY-1; y++)
-	  {
-	    register float xDiff, yDiff;
-	    float xFloat, yFloat;
-                    
-	    xFloat = (float)x * xRatio;
-	    yFloat = (float)y * yRatio;
-	    x0 = (int)(xFloat);
-	    y0 = (int)(yFloat);
-	    xDiff = (xFloat - x0);
-	    yDiff = (yFloat - y0);
-	    for (i = 0; i < srcSamplesPerPixel; i++)
-	      { 
-		v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
-		v3 = srcData[srcBytesPerRow * (y0+1) + srcBytesPerPixel * x0 + i];
-
-		destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
-		  (int)(v1*(1-xDiff)*(1-yDiff) + \
-			v3*yDiff*(1-xDiff));
-	      }
-	  }
-	/* the bottom right corner */
-	{
-	  register float xDiff, yDiff;
-	  float xFloat, yFloat;
-                    
-	  xFloat = (float)x * xRatio;
-	  yFloat = (float)y * yRatio;
-	  x0 = (int)(xFloat);
-	  y0 = (int)(yFloat);
-	  xDiff = (xFloat - x0);
-	  yDiff = (yFloat - y0);
-	  for (i = 0; i < srcBytesPerPixel; i++)
-	    {
-	      v1 = srcData[srcBytesPerRow * y0 + srcBytesPerPixel * x0 + i];
-
-	      destData[destBytesPerRow * y + destBytesPerPixel * x + i] = \
-		(int)(v1*(1-xDiff)*(1-yDiff));
-	    }
-	}
       }
     else
       NSLog(@"Unknown scaling method");
