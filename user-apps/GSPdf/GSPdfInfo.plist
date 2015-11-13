@@ -15,6 +15,7 @@
     NSIcon = GSPdf.tiff;
     NSMainNibFile = GSPdf.gorm;
     NSPrincipalClass = NSApplication;
+    CFBundleIdentifier = "org.gap.GSPdf";
     NSRole = Application;
     NSTypes = (
 	{
