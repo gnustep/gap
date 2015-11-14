@@ -1,3 +1,9 @@
+2015-11-14 Riccardo Mottola <rm@gnu.org>
+
+	* Functions.h
+	* Functions.m
+	Use NSMenuItem protocol, not class.
+
 2013-05-25: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* GSPdfDocument.m
 	  add methods for printing the current document

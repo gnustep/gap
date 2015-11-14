@@ -2,9 +2,9 @@
 #define FUNCTIONS_H
 
 @class NSString;
-@class NSMenuItem;
+@protocol NSMenuItem;
 
-NSMenuItem *addItemToMenu(NSMenu *menu, NSString *str, 
+id <NSMenuItem> addItemToMenu(NSMenu *menu, NSString *str, 
 														NSString *comm, NSString *sel, NSString *key);
 
 #endif
