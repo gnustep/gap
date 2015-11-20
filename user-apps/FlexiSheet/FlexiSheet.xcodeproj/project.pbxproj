@@ -601,12 +601,9 @@
 		73745C410422330100A8010F /* LinkedCategoriesTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedCategoriesTest.h; sourceTree = "<group>"; };
 		73745C420422330100A8010F /* LinkedCategoriesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedCategoriesTest.m; sourceTree = "<group>"; };
 		73E2BC0A0506742300A8010F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		EE6C69480E34C975007443AB /* libobjc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = libobjc; path = "Xtoolchain/i386-apple-darwin/gcc-2.95.3-glibc-2.2.2/arm-quantumstep-linux-gnu/sys-include/libobjc"; sourceTree = SYSTEM_DEVELOPER_DIR; };
-		EE6C69800E34C9BA007443AB /* objc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = objc; path = "Xtoolchain/i386-apple-darwin/gcc-2.95.3-glibc-2.2.2/lib/gcc-lib/arm-quantumstep-linux-gnu/2.95.3/include/objc"; sourceTree = SYSTEM_DEVELOPER_DIR; };
 		EEB462190E2DC31D000DEA28 /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		EEB4621C0E2DC35C000DEA28 /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GNUmakefile; path = Functions/GNUmakefile; sourceTree = "<group>"; };
 		EEB4621D0E2DC376000DEA28 /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
-		EEFA5F5A0E28F47A00B86693 /* mySTEP.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mySTEP.make; path = ../../../../Frameworks/mySTEP.make; sourceTree = SOURCE_ROOT; };
 		EEFA5FA50E28F58500B86693 /* Info-FSCore_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-FSCore_.plist"; sourceTree = "<group>"; };
 		EEFA5FA60E28F58500B86693 /* FSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEFA5FE90E28F58500B86693 /* Info-FSFunctions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-FSFunctions.plist"; sourceTree = "<group>"; };
@@ -854,9 +851,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* FlexiSheet */ = {
 			isa = PBXGroup;
 			children = (
-				EEFA5F5A0E28F47A00B86693 /* mySTEP.make */,
-				EE6C69800E34C9BA007443AB /* objc */,
-				EE6C69480E34C975007443AB /* libobjc */,
 				01484B250027781F7F000001 /* FSCore */,
 				F62B76AB01685D8001A89AF4 /* FSFunctions */,
 				F648352C013B8D5001A80099 /* Math */,
@@ -1482,7 +1476,6 @@
 				EEFA5F800E28F58500B86693 /* Sources */,
 				EEFA5F9D0E28F58500B86693 /* Resources */,
 				EEFA5F9E0E28F58500B86693 /* Frameworks */,
-				EEFA5FA00E28F58500B86693 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1502,7 +1495,6 @@
 				EEFA5FC50E28F58500B86693 /* Resources */,
 				EEFA5FC60E28F58500B86693 /* Sources */,
 				EEFA5FE10E28F58500B86693 /* Frameworks */,
-				EEFA60E70E28F6E200B86693 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1546,7 +1538,6 @@
 				EEFA608C0E28F58500B86693 /* Sources */,
 				EEFA60BD0E28F58500B86693 /* Frameworks */,
 				EEFA60C40E28F58500B86693 /* Copy Frameworks */,
-				EEFA77430E2951B900B86693 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1690,19 +1681,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# shell script goes here\n\ncd ..\ntar cvzf FlexiSheet-src.tgz --exclude .svn --exclude build ObjCUnit.framework 'Read Me.rtf' 'Sample Files' Sources\n";
 		};
-		EEFA5FA00E28F58500B86693 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export SOURCES=\"FSCore/*.m\"                # all source codes\nexport CFLAGS=\"-IFSCore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport LIBS=\t\t\t\t\t   # add any additional\nexport FRAMEWORKS=\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L)\nexport INSTALL_PATH=/Library/Frameworks   # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install on build host to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=false\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
-		};
 		EEFA60240E28F58500B86693 /* Build Autodoc */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -1722,32 +1700,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# ./build/FSUnitTest\n";
-		};
-		EEFA60E70E28F6E200B86693 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export SOURCES=\"Functions/*.m Operators/*.m\"                # all source codes\nexport LIBS=\t\t\t\t\t   # add any additional\nexport CFLAGS=\"-IFSCore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport FRAMEWORKS=\t\t\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L searching in standard locations)\nexport INSTALL_PATH=/Library/Frameworks   # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install locally to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=false\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
-		};
-		EEFA77430E2951B900B86693 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export SOURCES=\"Application/*.m Application/ChartView/*.m Application/Inspection/*.m Application/UI/*.m\"                # all source codes\nexport LIBS=\t\t\t\t\t   # add any additional\nexport CFLAGS=\"-IFSCore -IFunctions -IOperators -IApplication -IApplication/ChartView -IApplication/Inspection -IApplication/UI\"\nexport FRAMEWORKS=\"FSCore FSFunctions WebKit\"\t\t# add any additional Frameworks (e.g. AddressBook) etc. (adds -I and -L)\nexport INSTALL_PATH=/Applications  # override INSTALL_PATH for MacOS X for the Zaurus\n\n#export STRIP_Framework=false       # set to true if you want to strip headers etc.\n#export STRIP_MacOS=true            # set to true if you want a Linux-ARM only bundle\nexport INSTALL=true                # true (or empty) will install locally to $ROOT/$INSTALL_PATH\nexport SEND2ZAURUS=true\t\t\t# true (or empty) will try to install on the Zaurus at /$INSTALL_PATH (using ssh)\n#export RUN=true                    # true (or empty) will finally try to run on the Zaurus (using X11 on host)\nexport ROOT=$HOME/Documents/Projects/QuantumSTEP\t# project root\n/usr/bin/make -f $ROOT/System/Sources/Frameworks/mySTEP.make $ACTION\n ";
 		};
 /* End PBXShellScriptBuildPhase section */
 
