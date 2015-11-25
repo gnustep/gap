@@ -3,7 +3,7 @@
   Archive.m
   Zipper
 
-  Copyright (C) 2012 Free Software Foundation, Inc
+  Copyright (C) 2012-2015 Free Software Foundation, Inc
 
   Authors: Dirk Olmes <dirk@xanthippe.ping.de>
            Riccardo Mottola <rm@gnu.org>
@@ -355,13 +355,11 @@ static NSMutableDictionary *_fileExtMappings = nil;
 {
   int result;
   NSTask *task;
-  NSFileHandle *readHandle;
   NSPipe *pipe;
 
   NSParameterAssert([self executableDoesExist]);
 	
   pipe = [NSPipe pipe];
-  readHandle = [pipe fileHandleForReading];
   task = [[NSTask alloc] init];
   [task setLaunchPath:[self unarchiveExecutable]];
   [task setArguments:args];
