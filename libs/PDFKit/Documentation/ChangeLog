@@ -1,3 +1,9 @@
+2015-11-25 Riccardo Mottola <rm@gnu.org>
+
+	* configure
+	* configure.ac
+	Pick up compilers specified during gnustep configure, if available and not manually overridden.
+
 2013-09-17 Riccardo Mottola <rm@gnu.org>
 
 	* PDFDocument.m
