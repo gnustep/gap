@@ -31,6 +31,8 @@ Themes_RESOURCE_FILES = Neos.theme \
 ThinkDark.theme \
 Sleek.theme \
 Tango.theme \
-WinClassic.theme
+WinClassic.theme \
+Heritage.theme \
+
 
 include $(GNUSTEP_MAKEFILES)/resource-set.make
