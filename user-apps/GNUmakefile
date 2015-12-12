@@ -25,7 +25,6 @@ RemoteDesk \
 GSPdf \
 PictureFrame \
 Stepulator-osx \
-Grr \
 AClock
 #
 # Makefiles
