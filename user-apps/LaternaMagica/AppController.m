@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2015 Riccardo Mottola
+   Copyright (C) 2006-2016 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -209,7 +209,9 @@
 
   [view setNeedsDisplay:YES];
   [[view superview] setNeedsDisplay:YES];
-  [window setTitleWithRepresentedFilename:[image name]];
+  
+  /* we don't need to update the full-screen window title */
+  [smallWindow setTitleWithRepresentedFilename:[image name]];
 }
 
 - (IBAction)setScaleToFit:(id)sender
