@@ -423,7 +423,7 @@
 	{
 	  NSWorkspace *ws;
 	  NSString *fileOperation;
-	  int opTag;
+	  NSInteger opTag;
 	  NSString *folder;
 	  NSString *file;
 

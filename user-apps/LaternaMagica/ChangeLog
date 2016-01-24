@@ -1,3 +1,8 @@
+2016-01-24 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+        Always set the title of the window with decorations, even in full-screen mode.
+
 2015-10-16 Riccardo Mottola <rm@gnu.org>
 
 	* PRScale.m
