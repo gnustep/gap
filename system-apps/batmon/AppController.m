@@ -1,7 +1,7 @@
 /* 
    Project: batmon
 
-   Copyright (C) 2005-2014 GNUstep Application Project
+   Copyright (C) 2005-2016 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -85,7 +85,6 @@
   
     if (YES)
     {
-        NSLog(@"app initialized, setting timer");
         timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
         [timer fire];
     }
