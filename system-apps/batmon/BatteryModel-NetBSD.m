@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2015 GNUstep Application Project
+   Copyright (C) 2006-2016 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -161,10 +161,12 @@
         amps = dischargeRate / volts;
       else
         amps = dischargeRate;
+
+      NSLog(@"useWattHours %d amps %f", useWattHours, amps);
       
       isCharging = NO;
       if (amps > 0)
-	timeRemaining = currCap / amps;
+	timeRemaining = currCap / (volts*amps);
       else
 	timeRemaining = -1;
       if (lastCap)
@@ -178,9 +180,11 @@
       else
         amps = chargeRate;
 
+      NSLog(@"useWattHours %d amps %f", useWattHours, amps);
+
       isCharging = YES;
       if (amps > 0)
-	timeRemaining = (lastCap-currCap) / amps;
+	timeRemaining = (lastCap-currCap) / (amps*volts);
       else
 	timeRemaining = -1;
       chargePercent = 0;
