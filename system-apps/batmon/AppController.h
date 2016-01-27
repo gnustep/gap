@@ -41,6 +41,8 @@
     IBOutlet NSTextField         *chState;
     IBOutlet NSProgressIndicator *level;
     IBOutlet NSButton            *cellInfoButton;
+    IBOutlet NSBox               *lifeBox;
+    IBOutlet NSBox               *cellDataBox;
 
     IBOutlet NSWindow            *infoWin;
     IBOutlet NSProgressIndicator *lifeGauge;
@@ -51,6 +53,7 @@
     IBOutlet NSTextField         *manufacturer;
     IBOutlet NSTextField         *manufacturerLabel;
     IBOutlet NSTextField         *lastFullCharge;
+    IBOutlet NSBox               *cellHealthBox;
 
     NSDictionary *stateStrAttributes;
     

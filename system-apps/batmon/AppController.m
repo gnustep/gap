@@ -51,7 +51,7 @@
 - (id)init
 {
     if ((self = [super init]))
-    {
+      {
         NSMutableParagraphStyle *style;
 	NSFont *font;
 
@@ -66,7 +66,10 @@
         style, NSParagraphStyleAttributeName, nil] retain];
         iconPlug = [[NSImage imageNamed:@"small_plug.tif"] retain];
         iconBattery = [[NSImage imageNamed:@"small_battery.tif"] retain];
-    }
+        
+        /* localization */
+        [rateLabel setStringValue:_(@"Discharge Rate")];
+      }
     return self;
 }
 
@@ -191,7 +194,7 @@
 {
     float lifeVal;
     float timeRem;
-    float chargePercentToDraw; /* we need this beause chargePercent can go beyond 100% */
+    float chargePercentToDraw; /* we need this because chargePercent can go beyond 100% */
 
     [batModel update];
 
@@ -219,7 +222,11 @@
       [presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Wh", [batModel remainingCapacity]]];
     else 
       [presentCap setStringValue:[NSString stringWithFormat:@"%3.2f Ah", [batModel remainingCapacity]]];
-
+    
+    if ([batModel isCharging])
+      [rateLabel setStringValue:_(@"Charge Rate")];
+    else
+      [rateLabel setStringValue:_(@"Discharge Rate")];
 
     /* info window */
     lifeVal = [batModel lastCapacity]/[batModel designCapacity];

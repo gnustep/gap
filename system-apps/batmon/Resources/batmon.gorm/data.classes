@@ -19,6 +19,8 @@
 	    chState,
 	    level,
 	    cellInfoButton,
+	    lifeBox,
+	    cellDataBox,
 	    infoWin,
 	    lifeGauge,
 	    lifeGaugePercent,
@@ -27,7 +29,8 @@
 	    battTypeLabel,
 	    manufacturer,
 	    manufacturerLabel,
-	    lastFullCharge
+	    lastFullCharge,
+	    cellHealthBox
 	);
 	Super = NSObject;
     };

@@ -1,5 +1,12 @@
 2016-01-27 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.h
+	* AppController.m
+	* Resources/batmon.gorm
+	Change label to Discharge and Charge according to state, connect Boxes IBOutlets to be able to set title.
+
+2016-01-27 Riccardo Mottola <rm@gnu.org>
+
 	* BatteryModel-NetBSD.m
 	Fix time if charge is expressed in Watts, improved attempt.
 
