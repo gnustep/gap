@@ -1,7 +1,7 @@
 /* MP3.h - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2004 Wolfgang Sourdeau
- *               2012 The Free Software Foundation 
+ *               2012-2016 The Free Software Foundation 
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
  *
@@ -69,16 +69,16 @@ typedef struct mad_bitptr MadBitPtr;
   BOOL opened;
 
   /* public ivars accessed as a C struct */
-  @public MadFrame frame;
-  @public MadStream stream;
-  @public MadSynth synth;
-  @public audioDither leftDither;
-  @public audioDither rightDither;
-  @public unsigned int channels;
-  @public int iRemain;
-  @public int oRemain;
-  @public unsigned char iBuffer[IBUFFER_SIZE];
-  @public unsigned int lostSyncs;
+  MadFrame frame;
+  MadStream stream;
+  MadSynth synth;
+  audioDither leftDither;
+  audioDither rightDither;
+  unsigned int channels;
+  int iRemain;
+  int oRemain;
+  unsigned char iBuffer[IBUFFER_SIZE];
+  unsigned int lostSyncs;
 }
 
 @end

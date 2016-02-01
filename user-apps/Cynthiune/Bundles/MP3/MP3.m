@@ -1,7 +1,7 @@
 /* MP3.m - this file is part of Cynthiune
  *
  * Copyright (C) 2002-2005 Wolfgang Sourdeau
- *               2012 The GNUstep Application Team
+ *               2012-2016 The GNUstep Application Team
  *
  * Author: Wolfgang Sourdeau <wolfgang@contre.com>
  *         Riccardo Mottola <rm@gnu.org>
@@ -41,6 +41,7 @@
 
 #define MAD_AVERAGE_FRAMES 10
 #define MAX_LOSTSYNCS IBUFFER_SIZE * 5
+
 
 /* header testing */
 static inline int
@@ -175,8 +176,16 @@ audioLinearDither (MadFixed sample, audioDither *dither)
   return output >> scalebits;
 }
 
-static inline void
-fillPCMBuffer (MP3 *self, unsigned char *buffer, int start, int limit)
+
+@interface MP3 (Private)
+- (void) fillPCMBuffer: (unsigned char *)buffer start: (int) start limit: (int) limit;
+- (int) translateBufferToPCM: (unsigned char *)buffer size: (int) bufferSize;
+- (InputBufferStatus) decodeInputBuffer: (int) iRBytes;
+@end
+
+@implementation MP3 (Private)
+
+- (void) fillPCMBuffer: (unsigned char *)buffer start: (int) start limit: (int) limit
 {
   int i;
   unsigned char *oBPtr;
@@ -187,14 +196,14 @@ fillPCMBuffer (MP3 *self, unsigned char *buffer, int start, int limit)
   i = start;
   while (i < limit)
     {
-      sample = audioLinearDither (self->synth.pcm.samples[0][i],
-                                  &(self->leftDither));
+      sample = audioLinearDither (synth.pcm.samples[0][i],
+                                  &(leftDither));
       *oBPtr++ = sample >> 0;
       *oBPtr++ = sample >> 8;
-      if (self->channels == 2)
+      if (channels == 2)
         {
-          sample = audioLinearDither (self->synth.pcm.samples[1][i],
-                                      &(self->rightDither));
+          sample = audioLinearDither (synth.pcm.samples[1][i],
+                                      &(rightDither));
           *oBPtr++ = sample >> 0;
           *oBPtr++ = sample >> 8;
         }
@@ -202,32 +211,31 @@ fillPCMBuffer (MP3 *self, unsigned char *buffer, int start, int limit)
     }
 }
 
-static int
-translateBufferToPCM (MP3 *self, unsigned char *buffer, int bufferSize)
+- (int) translateBufferToPCM: (unsigned char *)buffer size: (int) bufferSize
 {
   int start, limit, mult, delta;
 
-  mult = 2 * self->channels;
-  if (self->oRemain)
+  mult = 2 * channels;
+  if (oRemain)
     {
-      start = self->synth.pcm.length - self->oRemain;
-      limit = self->synth.pcm.length;
+      start = synth.pcm.length - oRemain;
+      limit = synth.pcm.length;
     }
   else
     {
       start = 0;
       limit = (bufferSize / mult);
-      if (self->synth.pcm.length < limit)
-        limit = self->synth.pcm.length;
+      if (synth.pcm.length < limit)
+        limit = synth.pcm.length;
     }
 
   delta = (limit - start) * mult - bufferSize;
   if (delta > 0)
     limit -= delta / mult;
 
-  fillPCMBuffer (self, buffer, start, limit);
+  [self fillPCMBuffer: buffer start: start limit: limit];
 
-  self->oRemain = self->synth.pcm.length - limit;
+  oRemain = synth.pcm.length - limit;
 
   return ((limit - start) * mult);
 }
@@ -290,35 +298,34 @@ translateBufferToPCM (MP3 *self, unsigned char *buffer, int bufferSize)
 // 	}
 // }
 
-static inline InputBufferStatus
-decodeInputBuffer (MP3 *self, int iRBytes)
+- (InputBufferStatus) decodeInputBuffer: (int) iRBytes
 {
   InputBufferStatus bufferStatus;
   signed long tagSize;
 
-  mad_stream_buffer (&(self->stream), self->iBuffer,
-                     iRBytes + self->iRemain);
-  if (mad_frame_decode (&(self->frame), &(self->stream)))
+  mad_stream_buffer (&(stream), iBuffer,
+                     iRBytes + iRemain);
+  if (mad_frame_decode (&(frame), &(stream)))
     {
-      if ((self->stream.error & 0x100))
+      if ((stream.error & 0x100))
         {
-          self->lostSyncs++;
-          tagSize = id3_tag_query (self->stream.this_frame,
-                                   self->stream.bufend
-                                   - self->stream.this_frame);
+          lostSyncs++;
+          tagSize = id3_tag_query (stream.this_frame,
+                                   stream.bufend
+                                   - stream.this_frame);
           if (tagSize > 0)
-            mad_stream_skip (&self->stream, tagSize);
-          bufferStatus = ((self->lostSyncs == MAX_LOSTSYNCS)
+            mad_stream_skip (&stream, tagSize);
+          bufferStatus = ((lostSyncs == MAX_LOSTSYNCS)
                           ? BufferHasUnrecoverableError
                           : BufferHasRecoverableError);
         }
-      else if (MAD_RECOVERABLE (self->stream.error)
-               || self->stream.error == MAD_ERROR_BUFLEN)
+      else if (MAD_RECOVERABLE (stream.error)
+               || stream.error == MAD_ERROR_BUFLEN)
         bufferStatus = BufferHasRecoverableError;
       else
         {
           NSLog (@"%s: unrecoverable frame level error (%s)",
-                 __FILE__, mad_stream_errorstr (&(self->stream)));
+                 __FILE__, mad_stream_errorstr (&(stream)));
           bufferStatus = BufferHasUnrecoverableError;
         }
     }
@@ -327,6 +334,9 @@ decodeInputBuffer (MP3 *self, int iRBytes)
 
   return bufferStatus;
 }
+
+@end
+
 
 @implementation MP3 : NSObject
 
@@ -396,7 +406,7 @@ decodeInputBuffer (MP3 *self, int iRBytes)
 
       if (iRBytes > 0 && !feof (mf))
         {
-          bufferStatus = decodeInputBuffer ((MP3 *) self, iRBytes);
+          bufferStatus = [self decodeInputBuffer: iRBytes];
           if (bufferStatus == BufferHasNoError)
             {
               frameCount++;
@@ -530,7 +540,7 @@ decodeInputBuffer (MP3 *self, int iRBytes)
   lostSyncs = 0;
 
   if (oRemain)
-    decodedBytes = translateBufferToPCM ((MP3 *) self, buffer, bufferSize);
+    decodedBytes = [self translateBufferToPCM: buffer size: bufferSize];
   else
     {
       done = NO;
@@ -546,12 +556,11 @@ decodeInputBuffer (MP3 *self, int iRBytes)
 
           if (iRBytes > 0 && !feof (mf))
             {
-              bufferStatus = decodeInputBuffer ((MP3 *) self, iRBytes);
+              bufferStatus = [self decodeInputBuffer: iRBytes];
               if (bufferStatus == BufferHasNoError)
                 {
-                  mad_synth_frame (&(self->synth), &(self->frame));
-                  decodedBytes = translateBufferToPCM ((MP3 *) self,
-                                                       buffer, bufferSize);
+                  mad_synth_frame (&(synth), &(frame));
+                  decodedBytes = [self translateBufferToPCM: buffer size: bufferSize];
                   done = YES;
                 }
               else if (bufferStatus == BufferHasUnrecoverableError)

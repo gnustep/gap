@@ -1,10 +1,16 @@
+2016-02-01 Andreas Schik
+
+	* Bundles/MP3/MP3.h
+	* Bundles/MP3/MP3.m
+	Transform functions to methods and do not access IVARs through a struct.
+
 2015-06-13 Riccardo Mottola <rm@gnu.org>
 
 	* PlaylistController.m
 	* PlaylistView.h
 	* Playlist.h
 	Minor gcc and Mac 10.4 compatibilities
-      
+
 2015-06-12 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* PlaylistController.m
 	  fix hang on removing songs from the playlist
