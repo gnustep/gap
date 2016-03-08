@@ -10,6 +10,7 @@
 	distclean,
 	dist
     );
+    "BUNDLE_IDENTIFIER" = "org.gap.Graphos";
     "CLASS_FILES" = (
 	"Graphos.m",
 	"GRBezierControlPoint.m",
