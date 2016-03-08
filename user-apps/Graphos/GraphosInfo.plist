@@ -8,6 +8,7 @@
 	"Enrico Sersale",
 	"Rob Burns"
     );
+    CFBundleIdentifier = "org.gap.Graphos";
     Copyright = "Copyright (C) 2005-2015";
     CopyrightDescription = "Released under GPL v2+";
     FullVersionID = "0.6";
