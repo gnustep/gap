@@ -7,7 +7,8 @@
     Authors = (
 	"Riccardo Mottola"
     );
-    Copyright = "Copyright (C) 2006-2013";
+    CFBundleIdentifier = "org.gap.LaternaMagica";
+    Copyright = "Copyright (C) 2006-2016";
     CopyrightDescription = "Released under GPL";
     FullVersionID = "0.4";
     NSExecutable = LaternaMagica;
@@ -24,7 +25,7 @@
 	    NSRole = "";
 	    NSUnixExtensions = (
 		jpg,
-		" jpeg"
+		jpeg
 	    );
 	},
 	{
@@ -35,7 +36,7 @@
 	    NSRole = "";
 	    NSUnixExtensions = (
 		tif,
-		" tiff"
+		tiff
 	    );
 	},
 	{
