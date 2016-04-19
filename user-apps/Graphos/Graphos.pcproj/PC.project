@@ -93,7 +93,8 @@
 	"whitearrow.tiff",
 	"x.tiff",
 	"graphos_appicon_48.tif",
-	"circle.tiff"
+	"circle.tiff",
+	"graphos_doc_icon_48.tif"
     );
     INSTALLDIR = "$(GNUSTEP_LOCAL_ROOT)/";
     INTERFACES = (

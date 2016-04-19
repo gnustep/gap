@@ -60,6 +60,7 @@ Resources/whitearrow.tiff \
 Resources/x.tiff \
 Resources/graphos_appicon_48.tif \
 Resources/circle.tiff \
+Resources/graphos_doc_icon_48.tif \
 Resources/GraphosInfo.plist 
 
 
