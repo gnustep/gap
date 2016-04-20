@@ -1,6 +1,6 @@
 {
     APPLICATIONICON = "graphos_appicon_48.tif";
-    "APP_DOCUMENT_BASED" = NO;
+    "APP_DOCUMENT_BASED" = YES;
     "APP_TYPE" = GORM;
     "BUILDER_TARGETS" = (
 	all,
