@@ -893,9 +893,7 @@ int getChar(streamStruct* ss)
 - (int)initDataConn
 {
     socklentype addrLen; /* socklen_t on some systems ? */
-    int         socketReuse;
-    
-    socketReuse = YES;
+    const int         socketReuse = 1;
 
     /* passive mode */
     if (usesPassive)
@@ -993,11 +991,11 @@ int getChar(streamStruct* ss)
     /* linux is happier if we set both ends that way */
     if (usesPorts == NO)
     {
-        if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+        if (setsockopt(dataSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, (socklentype) sizeof (socketReuse)) < 0)
         {
             perror("ftpclient: setsockopt (reuse address) on data");
         }
-        if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, sizeof (socketReuse)) < 0)
+        if (setsockopt(controlSocket, SOL_SOCKET, SO_REUSEADDR, &socketReuse, (socklentype) sizeof (socketReuse)) < 0)
         {
             perror("ftpclient: setsockopt (reuse address) on control");
         }
