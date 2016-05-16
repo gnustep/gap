@@ -1073,16 +1073,11 @@ int getChar(streamStruct* ss)
         if ((localSocket = accept(dataSocket, &from, &fromLen)) < 0)
         {
             perror("accepting socket, initDataStream: ");
+            return -1;
         }
         initStream(&dataStream, localSocket);
     }
-/*
-    if (dataStream == NULL)
-    {
-        perror("data stream opening failed");
-        return -1;
-    } */
-    NSLog(@"data stream open");
+
     return 0;
 }
 
