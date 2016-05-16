@@ -691,7 +691,7 @@ int getChar(streamStruct* ss)
                 NSLog(@"feof");
         } else
         {
-            if (write(localSocket, buff, bytesRead) < bytesRead)
+            if (send(localSocket, buff, bytesRead, 0) < bytesRead)
             {
                 NSLog(@"socket write error, store file");
             }
