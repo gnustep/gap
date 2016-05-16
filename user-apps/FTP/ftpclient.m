@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2015 Riccardo Mottola
+ Copyright (C) 2005-2016 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -666,10 +666,10 @@ int getChar(streamStruct* ss)
     }
 
 
-    localFileStream = fopen([localPath cString], "r");
+    localFileStream = fopen([localPath cString], "rb");
     if (localFileStream == NULL)
     {
-        [controller showAlertDialog:@"Opening of local file failed.\n Check permissions."];
+        [controller showAlertDialog:@"Opening of local file failed.\nCheck permissions."];
         perror("local fopen failed");
         return NO;
     }
@@ -691,7 +691,9 @@ int getChar(streamStruct* ss)
                 NSLog(@"feof");
         } else
         {
-            if (send(localSocket, buff, bytesRead, 0) < bytesRead)
+          int sentBytes;
+          
+          if ((sentBytes = send(localSocket, buff, bytesRead, 0)) < bytesRead)
             {
                 NSLog(@"socket write error, store file");
             }
