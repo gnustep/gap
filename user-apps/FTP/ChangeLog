@@ -1,3 +1,8 @@
+2016-05-16 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Open files in binary mode (fixes on Windows), check more carefully for sent bytes.
+
 2015-09-04 Riccardo Mottola <rm@gnu.org>
 
 	* ftpclient.m
