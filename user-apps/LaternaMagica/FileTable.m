@@ -2,7 +2,7 @@
    Project: LaternaMagica
    FileTable.m
 
-   Copyright (C) 2006-2014 Riccardo Mottola
+   Copyright (C) 2006-2016 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -33,6 +33,10 @@
 #if __NetBSD_Version__ <= 299000000
 #define lround (long)round
 #endif
+#endif
+
+#ifdef __sun__
+#define lround(x) (long)ceil(x)
 #endif
 
 #if defined(__MINGW32__)
