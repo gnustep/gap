@@ -26,7 +26,7 @@
 
 - (void)dumpRegs
 {
-    printf ("%f\n %f\n %f\n %f\n\n", regX, regY, regZ, regT);
+    NSLog (@"%f\n %f\n %f\n %f\n\n", regX, regY, regZ, regT);
 }
 
 - (double)getRegX
@@ -334,6 +334,7 @@
     } else
     {
         // we could put in here some code to handle fractional x!
+      result = 0;
     }
     [self pushRegister];
     [self setRegX:result];
