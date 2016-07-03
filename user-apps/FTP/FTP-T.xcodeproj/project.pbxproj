@@ -210,9 +210,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 85A6DBE310D43D010048FE0B /* Build configuration list for PBXProject "FTP-T" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* FTP */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				85E8F2AB16EFCF6C00E03CA9 /* FTP */,
 			);
