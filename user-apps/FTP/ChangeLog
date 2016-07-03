@@ -1,5 +1,11 @@
 2016-07-03 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.h
+        * AppController.m
+        Mark progress methods as oneway.
+
+2016-07-03 Riccardo Mottola <rm@gnu.org>
+
 	* ftpclient.m
 	Open local file in binary mode (needed on Windows)
 

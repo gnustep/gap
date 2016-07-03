@@ -2,7 +2,7 @@
 
    Project: FTP
 
-   Copyright (C) 2005-2013 Riccardo Mottola
+   Copyright (C) 2005-2016 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -101,9 +101,9 @@
 
 - (void)setThreadRunningState:(BOOL)flag;
 
-- (void)setTransferBegin:(NSString *)name :(unsigned long long)size;
-- (void)setTransferProgress:(NSNumber *)bytesTransferred;
-- (void)setTransferEnd:(NSNumber *)bytesTransferred;
+- (oneway void)setTransferBegin:(NSString *)name :(unsigned long long)size;
+- (oneway void)setTransferProgress:(NSNumber *)bytesTransferred;
+- (oneway void)setTransferEnd:(NSNumber *)bytesTransferred;
 
 /** closes the open connections and quits the session with the remote server */
 - (IBAction)disconnect:(id)sender;

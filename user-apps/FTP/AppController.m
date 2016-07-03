@@ -1,7 +1,7 @@
 /* 
    Project: FTP
 
-   Copyright (C) 2005-2015 Riccardo Mottola
+   Copyright (C) 2005-2016 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -685,7 +685,7 @@
   [self readDirWith:ftp toTable:remoteTableData andView:remoteView];
 }
 
-- (void)setTransferBegin:(NSString *)name :(unsigned long long)size
+- (oneway void)setTransferBegin:(NSString *)name :(unsigned long long)size
 {
     [infoMessage setStringValue:name];
     [progBar setDoubleValue:0];
@@ -706,7 +706,7 @@
     [mainWin displayIfNeeded];
 }
 
-- (void)setTransferProgress:(NSNumber *)bytesTransferred
+- (oneway void)setTransferProgress:(NSNumber *)bytesTransferred
 {
   struct timeval currTimeVal;
   float    speed;
@@ -755,7 +755,7 @@
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
 }
 
-- (void)setTransferEnd:(NSNumber *)bytesTransferred
+- (oneway void)setTransferEnd:(NSNumber *)bytesTransferred
 {
   struct timeval currTimeVal;
   double         deltaT;
