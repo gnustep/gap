@@ -1,3 +1,8 @@
+2016-07-03 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Open local file in binary mode (needed on Windows)
+
 2016-05-16 Riccardo Mottola <rm@gnu.org>
 
 	* ftpclient.m

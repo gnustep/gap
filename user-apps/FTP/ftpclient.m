@@ -521,7 +521,7 @@ int getChar(streamStruct* ss)
         return NO;
     }
     
-    localFileStream = fopen([localPath cString], "w");
+    localFileStream = fopen([localPath cString], "wb");
     if (localFileStream == NULL)
     {
         [controller showAlertDialog:@"Opening of local file failed.\nCheck permissions and free space."];
