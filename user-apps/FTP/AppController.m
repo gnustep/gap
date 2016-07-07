@@ -78,12 +78,12 @@
     defaults = [NSUserDefaults standardUserDefaults];
     readValue = [defaults stringForKey:connectionModeKey];
 
-    /* if no value was set for the key we set port as mode */
+    /* if no value was set for the key we set passive as mode */
     if ([readValue isEqualToString:@"default"])
         connMode = defaultMode;
-    else if ([readValue isEqualToString:@"port"]  || readValue == nil)
+    else if ([readValue isEqualToString:@"port"] )
         connMode = portMode;
-    else if ([readValue isEqualToString:@"passive"])
+    else if ([readValue isEqualToString:@"passive"] || readValue == nil)
         connMode = passiveMode;
     else
         NSLog(@"Unrecognized value in user preferences for %@: %@", connectionModeKey, readValue);
