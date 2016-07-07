@@ -1,3 +1,8 @@
+2016-07-07 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Use passive as default.
+
 2016-07-03 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
