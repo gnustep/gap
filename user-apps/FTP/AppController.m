@@ -502,8 +502,8 @@
   for (i = 0; i < [selArray count]; i++)
     {
       fileEl = [selArray objectAtIndex:i];
-      [local deleteFile:fileEl beingAt:0];
-      [localTableData removeObject:fileEl];
+      if([local deleteFile:fileEl beingAt:0])
+	[localTableData removeObject:fileEl];
     }
   [localView deselectAll:self];
   [localView reloadData];
@@ -531,8 +531,8 @@
   for (i = 0; i < [selArray count]; i++)
     {
       fileEl = [selArray objectAtIndex:i];
-      [ftp deleteFile:fileEl beingAt:0];
-      [remoteTableData removeObject:fileEl];
+      if ([ftp deleteFile:fileEl beingAt:0])
+	[remoteTableData removeObject:fileEl];
     }
   [remoteView deselectAll:self];
   [remoteView reloadData];

@@ -115,9 +115,10 @@
   return NO;
 }
 
-- (void)deleteFile:(FileElement *)file beingAt:(int)depth
+- (BOOL)deleteFile:(FileElement *)file beingAt:(int)depth
 {
   NSLog(@"override me! deleteFile superclass method");
+  return NO;
 }
 
 - (BOOL)renameFile:(FileElement *)file to:(NSString *)name
