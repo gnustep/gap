@@ -2,7 +2,7 @@
 
  Project: FTP
 
- Copyright (C) 2005-2013 Free Software Foundation
+ Copyright (C) 2005-2016 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -53,7 +53,7 @@
 - (void)setWorkingDir:(NSString *)dir;
 - (void)changeWorkingDir:(NSString *)dir;
 - (BOOL)createNewDir:(NSString *)dir;
-- (void)deleteFile:(FileElement *)file beingAt:(int)depth;
+- (BOOL)deleteFile:(FileElement *)file beingAt:(int)depth;
 - (BOOL)renameFile:(FileElement *)file to:(NSString *)name;
 
 - (NSArray *)workDirSplit;

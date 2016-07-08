@@ -474,8 +474,16 @@ int getChar(streamStruct* ss)
 
     if(replyCode != 150)
       {
-        [controller showAlertDialog:@"Unexpected server error."];
-        NSLog(@"Unexpected condition in retrieve");
+	if (replyCode >= 400)
+	  {
+	    [controller showAlertDialog:[reply objectAtIndex:0]];
+	    [self logIt: [reply objectAtIndex:0]];
+	  }
+	else
+	  {
+	    [controller showAlertDialog:@"Unexpected server error."];
+	    NSLog(@"Unexpected condition in retrieve");
+	  }
         return NO; /* we have an error or some unexpected condition */
       }
     else
@@ -649,7 +657,7 @@ int getChar(streamStruct* ss)
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
 
-    if (replyCode >= 550 && replyCode <= 559)
+    if (replyCode >= 400 && replyCode <= 559)
     {
         [controller showAlertDialog:[reply objectAtIndex:0]];
         [self logIt: [reply objectAtIndex:0]];
@@ -716,7 +724,7 @@ int getChar(streamStruct* ss)
   return gotFile;
 }
 
-- (void)deleteFile:(FileElement *)file beingAt:(int)depth
+- (BOOL)deleteFile:(FileElement *)file beingAt:(int)depth
 {
   NSString           *fileName;
   NSString           *command;
@@ -736,7 +744,7 @@ int getChar(streamStruct* ss)
         if (depth > 3)
         {
             NSLog(@"Max depth reached: %d", depth);
-            return;
+            return NO;
         }
 
         pristineRemotePath = [[self workingDir] retain];
@@ -763,8 +771,16 @@ int getChar(streamStruct* ss)
     [self writeLine:command];
     replyCode = [self readReply:&reply];
     NSLog(@"%d reply is %@: ", replyCode, [reply objectAtIndex:0]);
-    [reply release];
     
+    if(replyCode >= 400)
+      {
+	[controller showAlertDialog:[reply objectAtIndex:0]];
+        [self logIt: [reply objectAtIndex:0]];
+	[reply release];
+        return NO; /* we have an error or some unexpected condition */
+      }
+    [reply release];
+    return YES;
 }
 
 /* initialize a connection */

@@ -1,7 +1,7 @@
 /*
    Project: FTP
 
-   Copyright (C) 2005-2013 Riccardo Mottola
+   Copyright (C) 2005-2016 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -100,14 +100,18 @@
     return [NSArray arrayWithArray:listArr];
 }
 
-- (void)deleteFile:(FileElement *)file beingAt:(int)depth
+- (BOOL)deleteFile:(FileElement *)file beingAt:(int)depth
 {
   NSFileManager      *fm;
 
   fm = [NSFileManager defaultManager];
   
   if ([fm removeFileAtPath:[file path] handler:nil] == NO)
-    NSLog(@"an error occoured during local delete");
+    {
+      NSLog(@"an error occoured during local delete");
+      return NO;
+    }
+  return YES;
 }
 
 
