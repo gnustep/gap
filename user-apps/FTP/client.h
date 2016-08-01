@@ -59,7 +59,7 @@
 - (NSArray *)workDirSplit;
 
 /** returns an array with the directory listing */
-- (NSArray *)dirContents;
+- (bycopy NSArray *)dirContents;
 
 /** returns the current home directory */
 - (NSString *)homeDir;
