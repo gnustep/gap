@@ -1,3 +1,9 @@
+2016-08-01 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+        * AppController.m
+        Use NSTimeInterval for speed calculations.
+
 2016-07-08 Riccardo Mottola <rm@gnu.org>
 
 	* client.h
