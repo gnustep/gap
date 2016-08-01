@@ -101,9 +101,9 @@
 
 - (void)setThreadRunningState:(BOOL)flag;
 
-- (oneway void)setTransferBegin:(NSString *)name :(unsigned long long)size;
-- (oneway void)setTransferProgress:(NSNumber *)bytesTransferred;
-- (oneway void)setTransferEnd:(NSNumber *)bytesTransferred;
+- (oneway void)setTransferBegin:(in bycopy NSString *)name :(unsigned long long)size;
+- (oneway void)setTransferProgress:(in bycopy NSNumber *)bytesTransferred;
+- (oneway void)setTransferEnd:(in bycopy NSNumber *)bytesTransferred;
 
 /** closes the open connections and quits the session with the remote server */
 - (IBAction)disconnect:(id)sender;

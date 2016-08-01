@@ -685,7 +685,7 @@
   [self readDirWith:ftp toTable:remoteTableData andView:remoteView];
 }
 
-- (oneway void)setTransferBegin:(NSString *)name :(unsigned long long)size
+- (oneway void)setTransferBegin:(in bycopy NSString *)name :(unsigned long long)size
 {
     [infoMessage setStringValue:name];
     [progBar setDoubleValue:0];
@@ -700,7 +700,7 @@
     [mainWin displayIfNeeded];
 }
 
-- (oneway void)setTransferProgress:(NSNumber *)bytesTransferred
+- (oneway void)setTransferProgress:(in bycopy NSNumber *)bytesTransferred
 {
   NSTimeInterval currTimeVal;
   float    speed;
@@ -743,7 +743,7 @@
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
 }
 
-- (oneway void)setTransferEnd:(NSNumber *)bytesTransferred
+- (oneway void)setTransferEnd:(in bycopy NSNumber *)bytesTransferred
 {
   NSTimeInterval currTimeVal;
   NSTimeInterval deltaT;
