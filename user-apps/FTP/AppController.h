@@ -69,7 +69,7 @@
     LocalClient *local;
 
     @private connectionModes    connMode;
-    @private struct timeval     beginTimeVal;
+    @private NSTimeInterval     beginTimeVal;
     @private unsigned long long transferSize;
     @private BOOL               threadRunning;
 

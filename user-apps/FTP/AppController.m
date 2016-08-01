@@ -689,13 +689,7 @@
 {
     [infoMessage setStringValue:name];
     [progBar setDoubleValue:0];
-#ifdef WIN32
-    DWORD msecs = timeGetTime();
-    beginTimeVal.tv_sec=msecs/1000;
-    beginTimeVal.tv_usec=(msecs - beginTimeVal.tv_sec*1000) * 1000; 
-#else
-    gettimeofday(&beginTimeVal, NULL);
-#endif
+    beginTimeVal = [NSDate timeIntervalSinceReferenceDate];
     transferSize = size;
     NSLog(@"begin transfer size: %llu", transferSize);
     if (transferSize == 0)
@@ -708,7 +702,7 @@
 
 - (oneway void)setTransferProgress:(NSNumber *)bytesTransferred
 {
-  struct timeval currTimeVal;
+  NSTimeInterval currTimeVal;
   float    speed;
   NSString *speedStr;
   NSString *sizeStr;
@@ -716,14 +710,8 @@
   unsigned long long bytes;
 
   bytes = [bytesTransferred unsignedLongLongValue];
-#ifdef WIN32
-    DWORD msecs = timeGetTime();
-    currTimeVal.tv_sec=msecs/1000;
-    currTimeVal.tv_usec=(msecs - currTimeVal.tv_sec*1000) * 1000; 
-#else
-    gettimeofday(&currTimeVal, NULL);
-#endif
-    speed = (float)((double)bytes / (double)(currTimeVal.tv_sec - beginTimeVal.tv_sec));
+  currTimeVal = [NSDate timeIntervalSinceReferenceDate];
+  speed = (float)((double)bytes / (double)(currTimeVal - beginTimeVal));
 
     if (transferSize > 0)
       {
@@ -757,8 +745,8 @@
 
 - (oneway void)setTransferEnd:(NSNumber *)bytesTransferred
 {
-  struct timeval currTimeVal;
-  double         deltaT;
+  NSTimeInterval currTimeVal;
+  NSTimeInterval deltaT;
   float          speed;
   NSString       *speedStr;
   NSString       *sizeStr;
@@ -766,15 +754,8 @@
   unsigned long long bytes;
 	
   bytes = [bytesTransferred unsignedLongLongValue];
-
-#ifdef WIN32
-    DWORD msecs = timeGetTime();
-    currTimeVal.tv_sec=msecs/1000;
-    currTimeVal.tv_usec=(msecs - currTimeVal.tv_sec*1000) * 1000; 
-#else
-    gettimeofday(&currTimeVal, NULL);
-#endif
-    deltaT = (currTimeVal.tv_sec - beginTimeVal.tv_sec)+((double)(currTimeVal.tv_usec - beginTimeVal.tv_usec)/1000000);
+  currTimeVal = [NSDate timeIntervalSinceReferenceDate];
+  deltaT = (currTimeVal - beginTimeVal);
     speed = (float)((double)bytes / deltaT);
     NSLog(@"Elapsed time: %f", (float)deltaT);
     percent = ((double)bytes / (double)transferSize) * 100;
