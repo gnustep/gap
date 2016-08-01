@@ -33,6 +33,8 @@
 {
   [fileName release];
   [filePath release];
+  [linkTargetName release];
+  [modifDate release];
   [super dealloc];
 }
 
