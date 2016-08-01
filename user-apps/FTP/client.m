@@ -103,7 +103,7 @@
   return [reversedList retain];
 }
 
-- (NSArray *)dirContents
+- (bycopy NSArray *)dirContents
 {
   NSLog(@"override me! dirContents superclass method");
   return nil;

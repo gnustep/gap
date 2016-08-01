@@ -1152,7 +1152,7 @@ int getChar(streamStruct* ss)
 
 
 /* RM again: a better path limit is needed */
-- (NSArray *)dirContents
+- (bycopy NSArray *)dirContents
 {
     int                ch;
     char               buff[MAX_DATA_BUFF];

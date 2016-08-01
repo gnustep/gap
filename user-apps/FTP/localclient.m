@@ -69,7 +69,7 @@
         return YES;
 }
 
-- (NSArray *)dirContents
+- (bycopy NSArray *)dirContents
 {
     NSFileManager   *fm;
     NSArray         *fileNames;
