@@ -1,5 +1,10 @@
 2016-08-02 Riccardo Mottola <rm@gnu.org>
 
+	* fileElement.m
+	Implement coder methods for bycopy.
+
+2016-08-02 Riccardo Mottola <rm@gnu.org>
+
 	* AppController.m
         When Retrieving, set file-element path since it can be different than source.
 
