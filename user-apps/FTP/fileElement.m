@@ -59,6 +59,23 @@
   return self;
 }
 
+- (NSDictionary *)attributes
+{
+  NSMutableDictionary *attr;
+  
+  attr = [[NSMutableDictionary alloc] init];
+  [attr setObject:[NSNumber numberWithLongLong:size] forKey:NSFileSize];
+  if (modifDate)
+    [attr setObject:modifDate forKey:NSFileModificationDate];
+  if (isDir)
+    [attr setObject:NSFileTypeDirectory forKey:NSFileType];
+  else
+    [attr setObject:NSFileTypeRegular forKey:NSFileType];
+  
+  [attr autorelease];
+  return [NSDictionary dictionaryWithDictionary:attr];
+}
+
 /* as a parser aid, check if a string is a month */
 - (int)checkMonth: (NSString *)token
 {
@@ -478,6 +495,11 @@
 - (BOOL)isLink
 {
   return isLink;
+}
+
+- (void)setIsLink:(BOOL)flag
+{
+  isLink = flag;
 }
 
 - (unsigned long long)size

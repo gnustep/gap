@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Riccardo Mottola
+ Copyright (C) 2005-2016 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -42,6 +42,7 @@
 
 - (id)initWithPath:(NSString *)path andAttributes:(NSDictionary *)attribs;
 - (id)initWithLsLine :(char *)line;
+- (NSDictionary *)attributes;
 - (NSString *)name;
 - (void)setName: (NSString *)n;
 - (NSString *)path;
@@ -49,6 +50,7 @@
 - (NSString *)linkTargetName;
 - (BOOL)isDir;
 - (BOOL)isLink;
+- (void)setIsLink:(BOOL)flag;
 - (unsigned long long)size;
 
 @end
