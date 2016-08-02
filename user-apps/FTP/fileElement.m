@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Riccardo Mottola
+ Copyright (C) 2005-2016 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -36,6 +36,41 @@
   [linkTargetName release];
   [modifDate release];
   [super dealloc];
+}
+
+/* -- coder methods for copying -- */
+- (Class) classForCoder
+{
+  return [FileElement class];
+}
+
+- (id) replacementObjectForPortCoder: (NSPortCoder*)aCoder
+{
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder*)aCoder
+{
+  [aCoder encodeObject: fileName];
+  [aCoder encodeObject: filePath];
+  [aCoder encodeObject: linkTargetName];
+  [aCoder encodeValueOfObjCType: @encode(BOOL) at: &isDir];
+  [aCoder encodeValueOfObjCType: @encode(BOOL) at: &isLink];
+  [aCoder encodeValueOfObjCType: @encode(unsigned long long) at: &size];
+  [aCoder encodeObject: modifDate];
+}
+
+- (id) initWithCoder: (NSCoder*)aCoder
+{
+  self = [super init];
+  fileName = [[aCoder decodeObject] retain];
+  filePath = [[aCoder decodeObject] retain];
+  linkTargetName = [[aCoder decodeObject] retain];
+  [aCoder decodeValueOfObjCType: @encode(BOOL) at: &isDir];
+  [aCoder decodeValueOfObjCType: @encode(BOOL) at: &isLink];
+  [aCoder decodeValueOfObjCType: @encode(unsigned long long) at: &size];
+  modifDate = [[aCoder decodeObject] retain];
+  return self;
 }
 
 /*
