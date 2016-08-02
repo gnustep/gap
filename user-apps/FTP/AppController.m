@@ -428,7 +428,13 @@
       if ([ftp retrieveFile:fEl to:local beingAt:0])
         {
           if (![localTableData containsFileName:[fEl name]])
-            [localTableData addObject:fEl];
+            {
+              FileElement *fEl2;
+              
+              fEl2 = [[FileElement alloc] initWithPath:[[local workingDir] stringByAppendingPathComponent:[fEl name]] andAttributes:[fEl attributes]];
+              [localTableData addObject:fEl2];
+              [fEl2 release];
+            }
         }
     }
   [localView deselectAll:self];
@@ -451,7 +457,13 @@
       if ([ftp storeFile:fEl from:local beingAt:0])
         {
           if (![remoteTableData containsFileName:[fEl name]])
-            [remoteTableData addObject:fEl];
+            {
+              FileElement *fEl2;
+            
+              fEl2 = [[FileElement alloc] initWithPath:[[ftp workingDir] stringByAppendingPathComponent:[fEl name]] andAttributes:[fEl attributes]];
+              [remoteTableData addObject:fEl2];
+              [fEl2 release];
+            }
         }
     }
   [remoteView deselectAll:self];
