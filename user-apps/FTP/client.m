@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2013 Free Software Foundation
+ Copyright (C) 2005-2016 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -86,7 +86,7 @@
   [self setWorkingDir:dir];
 }
 
-- (NSArray *)workDirSplit
+- (bycopy NSArray *)workDirSplit
 {
   NSMutableArray *reversedList;
   NSArray        *list;

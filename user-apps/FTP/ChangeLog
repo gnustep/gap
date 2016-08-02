@@ -1,5 +1,11 @@
 2016-08-02 Riccardo Mottola <rm@gnu.org>
 
+	* client.h
+        * client.m
+        make also workDirSplit return result bycopy
+
+2016-08-02 Riccardo Mottola <rm@gnu.org>
+
 	* fileElement.m
 	Implement coder methods for bycopy.
 
