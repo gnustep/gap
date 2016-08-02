@@ -56,7 +56,7 @@
 - (BOOL)deleteFile:(FileElement *)file beingAt:(int)depth;
 - (BOOL)renameFile:(FileElement *)file to:(NSString *)name;
 
-- (NSArray *)workDirSplit;
+- (bycopy NSArray *)workDirSplit;
 
 /** returns an array with the directory listing */
 - (bycopy NSArray *)dirContents;
