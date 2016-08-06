@@ -1,3 +1,12 @@
+2016-08-06 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+        * ftpclient.h
+        * ftpclient.m
+        make store/retrieve client methods return immediately oneway void and then
+        use call-back method fileStored/fileRetrieved to complete action
+
 2016-08-02 Riccardo Mottola <rm@gnu.org>
 
 	* client.h

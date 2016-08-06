@@ -395,6 +395,15 @@ int getChar(streamStruct* ss)
   return retVal;
 }
 
+- (oneway void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient
+{
+  BOOL gotFile;
+  
+  gotFile = [self retrieveFile:file to:localClient beingAt:0];
+  
+  [controller fileRetrieved:gotFile];
+}
+
 - (BOOL)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
 {
   NSString           *fileName;
@@ -540,7 +549,6 @@ int getChar(streamStruct* ss)
     totalBytes = 0;
     progressIncBytes = 0;
     gotFile = NO;
-    [controller setThreadRunningState:YES];
     [controller setTransferBegin:fileName :fileSize];
     while (!gotFile)
     {
@@ -573,8 +581,17 @@ int getChar(streamStruct* ss)
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
-    [controller setThreadRunningState:NO];
-  return gotFile;
+
+    return gotFile;
+}
+
+- (oneway void)storeFile:(FileElement *)file from:(LocalClient *)localClient
+{
+  BOOL gotFile;
+  
+  gotFile = [self storeFile:file from:localClient beingAt:0];
+  
+  [controller fileStored:gotFile];
 }
 
 - (BOOL)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth
@@ -685,7 +702,6 @@ int getChar(streamStruct* ss)
     totalBytes = 0;
     progressIncBytes = 0;
     gotFile = NO;
-    [controller setThreadRunningState:YES];
     [controller setTransferBegin:fileName :fileSize];
     while (!gotFile)
     {
@@ -720,7 +736,6 @@ int getChar(streamStruct* ss)
     [self closeDataStream];
     [self readReply:&reply];
     [reply release];
-    [controller setThreadRunningState:NO];
   return gotFile;
 }
 

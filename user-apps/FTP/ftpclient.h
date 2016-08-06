@@ -97,7 +97,9 @@ typedef struct
 
 - (int)writeLine:(NSString *)line;
 - (int)writeLine:(NSString *)line byLoggingIt:(BOOL)doLog;
+- (oneway void)retrieveFile:(FileElement *)file to:(LocalClient *)localClient;
 - (BOOL)retrieveFile:(FileElement *)file to:(LocalClient *)localClient beingAt:(int)depth;
+- (oneway void)storeFile:(FileElement *)file from:(LocalClient *)localClient;
 - (BOOL)storeFile:(FileElement *)file from:(LocalClient *)localClient beingAt:(int)depth;
 
 - (int)connect:(int)port :(char *)server;
