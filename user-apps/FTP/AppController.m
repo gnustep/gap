@@ -335,7 +335,7 @@
   else if (sender == remoteTableData)
     {
       NSLog(@"will upload: %@", arr);
-      [self storeFiles:arr];
+      [self storeFiles];
     }
   [arr release];
 }
@@ -373,103 +373,136 @@
 /** retrieves using selection, by constructing an array and calling retrieveFiles */
 - (void)performRetrieveFile
 {
-  NSMutableArray *selArray;
   NSEnumerator   *elemEnum;
   FileElement    *fileEl;
   id             currEl;
 
   /* make a copy of the selection */
-  selArray = [[NSMutableArray alloc] init];
+  [filesInProcess release];
+  filesInProcess = [[NSMutableArray alloc] init];
   elemEnum = [remoteView selectedRowEnumerator];
 
   while ((currEl = [elemEnum nextObject]) != nil)
     {
       fileEl = [remoteTableData elementAtIndex:[currEl intValue]];
-      [selArray addObject:fileEl];
+      [filesInProcess addObject:fileEl];
     }
     
-  [self retrieveFiles:selArray];
-  [selArray release];
+  [self retrieveFiles];
 }
 
 /** stores using selection, by constructing an array and calling storeFiles */
 - (void)performStoreFile
 {
-  NSMutableArray *selArray;
   NSEnumerator   *elemEnum;
   FileElement    *fileEl;
   id             currEl;
   
   /* make a copy of the selection */
-  selArray = [[NSMutableArray alloc] init];
+  [filesInProcess release];
+  filesInProcess = [[NSMutableArray alloc] init];
   elemEnum = [localView selectedRowEnumerator];
     
   while ((currEl = [elemEnum nextObject]) != nil)
     {
       fileEl = [localTableData elementAtIndex:[currEl intValue]];
-      [selArray addObject:fileEl];
+      [filesInProcess addObject:fileEl];
     }
-  [self storeFiles:selArray];
-  [selArray release];
+  [self storeFiles];
 }
 
 /** Retrieves Array of FileElements */
-- (void)retrieveFiles:(NSArray *)files
+- (void)retrieveFiles
 {
-  NSUInteger i;
-
-  [self setThreadRunningState:YES];
-  for (i = 0; i < [files count]; i++)
+  if([filesInProcess count] > 0)
     {
       FileElement *fEl;
 
-      fEl = [files objectAtIndex:i];
-      NSLog(@"should download (performStore): %@", [fEl name]);
-      if ([ftp retrieveFile:fEl to:local beingAt:0])
+      [self setThreadRunningState:YES];
+      fEl = [filesInProcess objectAtIndex:0];
+      NSLog(@"should download (performRETRIEVE): %@", [fEl name]);
+      [ftp retrieveFile:fEl to:local];
+    }
+}
+
+/* called by the worker thread when the element got processed */
+- (oneway void)fileRetrieved:(BOOL)success
+{
+  FileElement *fEl;
+
+  fEl = [filesInProcess objectAtIndex:0];
+  if (success)
+    {
+      if (![localTableData containsFileName:[fEl name]])
         {
-          if (![localTableData containsFileName:[fEl name]])
-            {
-              FileElement *fEl2;
+          FileElement *fEl2;
               
-              fEl2 = [[FileElement alloc] initWithPath:[[local workingDir] stringByAppendingPathComponent:[fEl name]] andAttributes:[fEl attributes]];
-              [localTableData addObject:fEl2];
-              [fEl2 release];
-            }
+          fEl2 = [[FileElement alloc] initWithPath:[[local workingDir] stringByAppendingPathComponent:[fEl name]] andAttributes:[fEl attributes]];
+          [localTableData addObject:fEl2];
+          [fEl2 release];
         }
     }
-  [localView deselectAll:self];
-  [localView reloadData];
-  [self setThreadRunningState:NO];
+  [filesInProcess removeObjectAtIndex:0];
+  if ([filesInProcess count] > 0)
+    {
+      [self retrieveFiles];
+    }
+  else
+    {
+      [localView deselectAll:self];
+      [localView reloadData];
+      [self setThreadRunningState:NO];
+      [filesInProcess release];
+      filesInProcess = nil;
+    }
 }
 
 /** Stores Array of FileElements */
-- (void)storeFiles:(NSArray *)files
+- (void)storeFiles
 {
-  NSUInteger i;
-
-  [self setThreadRunningState:YES];
-  for (i = 0; i < [files count]; i++)
+  if([filesInProcess count] > 0)
     {
       FileElement *fEl;
 
-      fEl = [files objectAtIndex:i];
-      NSLog(@"should upload (performStore): %@", [fEl name]);
-      if ([ftp storeFile:fEl from:local beingAt:0])
+      [self setThreadRunningState:YES];
+      fEl = [filesInProcess objectAtIndex:0];
+      NSLog(@"should download (performStore): %@", [fEl name]);
+      [ftp storeFile:fEl from:local];
+    }
+}
+
+/* called by the worker thread when the element got processed */
+- (oneway void)fileStored:(BOOL)success
+{
+  FileElement *fEl;
+
+  fEl = [filesInProcess objectAtIndex:0];
+  if (success)
+    {
+      if (![remoteTableData containsFileName:[fEl name]])
         {
-          if (![remoteTableData containsFileName:[fEl name]])
-            {
-              FileElement *fEl2;
-            
-              fEl2 = [[FileElement alloc] initWithPath:[[ftp workingDir] stringByAppendingPathComponent:[fEl name]] andAttributes:[fEl attributes]];
-              [remoteTableData addObject:fEl2];
-              [fEl2 release];
-            }
+          FileElement *fEl2;
+              
+          fEl2 = [[FileElement alloc] initWithPath:[[ftp workingDir] stringByAppendingPathComponent:[fEl name]] andAttributes:[fEl attributes]];
+          [remoteTableData addObject:fEl2];
+          [fEl2 release];
         }
     }
-  [remoteView deselectAll:self];
-  [remoteView reloadData];
-  [self setThreadRunningState:NO];
+  [filesInProcess removeObjectAtIndex:0];
+  if ([filesInProcess count] > 0)
+    {
+      [self storeFiles];
+    }
+  else
+    {
+      [remoteView deselectAll:self];
+      [remoteView reloadData];
+      [self setThreadRunningState:NO];
+      [filesInProcess release];
+      filesInProcess = nil;
+    }
 }
+
 
 - (IBAction)downloadButton:(id)sender
 {

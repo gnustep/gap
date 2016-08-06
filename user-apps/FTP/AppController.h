@@ -68,6 +68,7 @@
     FtpClient   *ftp;
     LocalClient *local;
 
+    NSMutableArray *filesInProcess;
     @private connectionModes    connMode;
     @private NSTimeInterval     beginTimeVal;
     @private unsigned long long transferSize;
@@ -132,8 +133,10 @@
 - (void)performRetrieveFile;
 - (void)performStoreFile;
 
-- (void)retrieveFiles:(NSArray *)files;
-- (void)storeFiles:(NSArray *)files;
+- (void)retrieveFiles;
+- (oneway void)fileRetrieved:(BOOL)success;
+- (void)storeFiles;
+- (oneway void)fileStored:(BOOL)success;
 
 @end
 
