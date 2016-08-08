@@ -47,7 +47,7 @@
 - (id)initWithController:(id)cont;
 
 /** returns the current working directory */
-- (NSString *)workingDir;
+- (bycopy NSString *)workingDir;
 
 - (void)setWorkingDirWithCString:(char *)dir;
 - (void)setWorkingDir:(NSString *)dir;
@@ -62,7 +62,7 @@
 - (bycopy NSArray *)dirContents;
 
 /** returns the current home directory */
-- (NSString *)homeDir;
+- (bycopy NSString *)homeDir;
 
 @end
 
