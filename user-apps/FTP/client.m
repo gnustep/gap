@@ -59,12 +59,12 @@
     [super dealloc];
 }
 
-- (NSString *)workingDir
+- (bycopy NSString *)workingDir
 {
     return workingDir;
 }
 
-- (NSString *)homeDir
+- (bycopy NSString *)homeDir
 {
     return homeDir;
 }
