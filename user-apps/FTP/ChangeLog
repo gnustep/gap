@@ -1,3 +1,8 @@
+2016-08-08 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Do not run runloop, no longer needed.
+
 2016-08-06 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h

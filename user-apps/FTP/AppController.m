@@ -784,8 +784,6 @@
         sizeStr = [sizeStr initWithFormat:@"%3.2f : %3.2f MB", (double)bytes/(1024*1024), (double)transferSize/(1024*1024)];
     [infoSize setStringValue:sizeStr];
     [sizeStr release];
-
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
 }
 
 - (oneway void)setTransferEnd:(in bycopy NSNumber *)bytesTransferred
