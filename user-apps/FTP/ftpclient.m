@@ -719,7 +719,7 @@ int getChar(streamStruct* ss)
           
           if ((sentBytes = send(localSocket, buff, bytesRead, 0)) < bytesRead)
             {
-                NSLog(@"socket write error, store file");
+                NSLog(@"socket write error, store file. Wrote %d of %d", sentBytes, bytesRead);
             }
             totalBytes += bytesRead;
             progressIncBytes += bytesRead;

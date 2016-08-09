@@ -100,7 +100,7 @@
   en = [list reverseObjectEnumerator];
   while ((currElement = [en nextObject]))
     [reversedList addObject:currElement];
-  return [reversedList retain];
+  return reversedList;
 }
 
 - (bycopy NSArray *)dirContents
