@@ -915,7 +915,7 @@
   ftp = (FtpClient*)[anObject retain];
 }
 
-- (void)appendTextToLog:(NSString *)textChunk
+- (oneway void)appendTextToLog:(NSString *)textChunk
 {
   NSAttributedString *attrStr;
     

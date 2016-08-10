@@ -117,7 +117,7 @@
 
 /** Called by the server object to register itself */
 - (void)setServer:(id)anObject;
-- (void)appendTextToLog:(NSString *)textChunk;
+- (oneway void)appendTextToLog:(NSString *)textChunk;
 
 - (IBAction)showConnPanel:(id)sender;
 - (IBAction)connectConn:(id)sender;
