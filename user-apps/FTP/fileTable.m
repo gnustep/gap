@@ -140,8 +140,6 @@ NSComparisonResult compareFileStructs(id e1, id e2, void *context)
 /** returns the object after resolving sorting */
 - (FileElement *)elementAtIndex:(NSUInteger)index
 {
-  // useless now?
-
   return [sortedArray objectAtIndex:index];
 }
 
