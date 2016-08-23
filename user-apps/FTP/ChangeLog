@@ -1,6 +1,11 @@
 2016-08-23 Riccardo Mottola <rm@gnu.org>
 
 	* fileTable.m
+	cleanup and simplify housekeeping of the sorted array.
+
+2016-08-23 Riccardo Mottola <rm@gnu.org>
+
+	* fileTable.m
 	Do not keep in the sortedArray just name and index, but really just the sorted object pointers.
 
 2016-08-08 Riccardo Mottola <rm@gnu.org>

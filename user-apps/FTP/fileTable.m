@@ -92,7 +92,6 @@ NSComparisonResult compareFileStructs(id e1, id e2, void *context)
   [sortedArray removeAllObjects];
   for (i = 0; i < [fileStructs count]; i++)
     {
-      NSNumber *n;
       FileElement *fe;
 
       fe = [fileStructs objectAtIndex: i];
@@ -100,27 +99,31 @@ NSComparisonResult compareFileStructs(id e1, id e2, void *context)
     }
 }
 
+
 - (void)addObject:(FileElement *)object
 {
   /* add the file element to the storage */
   [fileStructs addObject:object];
 
   /* keep the sorting map array in sync */
-  [self generateSortedArray];
+  [sortedArray addObject:object];
   if (sortOrder != undefined)
     {
       [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
     }
 }
 
+/* remove object, index being on the sorted array */
 - (void)removeObjectAtIndex:(NSUInteger)index
 {
   NSUInteger originalRow;
+  id obj;
 
-  originalRow = (NSUInteger)[[sortedArray objectAtIndex: index] intValue];
+  obj = [sortedArray objectAtIndex:index];
+  originalRow = [fileStructs indexOfObject:obj];
 
   [fileStructs removeObjectAtIndex:originalRow];
-  [self generateSortedArray];
+  [sortedArray removeObjectAtIndex:index];
   if (sortOrder != undefined)
     {
       [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
@@ -140,8 +143,10 @@ NSComparisonResult compareFileStructs(id e1, id e2, void *context)
 
   /* remove object from storage */
   [fileStructs removeObject:object];
+  index = [sortedArray indexOfObject:object];
+  if (index != NSNotFound)
+    [sortedArray removeObjectAtIndex:index];
 
-  [self generateSortedArray];
   if (sortOrder != undefined)
     {
       [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
@@ -185,7 +190,6 @@ NSComparisonResult compareFileStructs(id e1, id e2, void *context)
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     id theElement;
-    NSInteger originalRow;
 
     theElement = NULL;
     NSParameterAssert(rowIndex >= 0 && rowIndex < [sortedArray count]);
