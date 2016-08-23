@@ -113,22 +113,6 @@ NSComparisonResult compareFileStructs(id e1, id e2, void *context)
     }
 }
 
-/* remove object, index being on the sorted array */
-- (void)removeObjectAtIndex:(NSUInteger)index
-{
-  NSUInteger originalRow;
-  id obj;
-
-  obj = [sortedArray objectAtIndex:index];
-  originalRow = [fileStructs indexOfObject:obj];
-
-  [fileStructs removeObjectAtIndex:originalRow];
-  [sortedArray removeObjectAtIndex:index];
-  if (sortOrder != undefined)
-    {
-      [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
-    }
-}
 
 - (void)removeObject:(FileElement *)object
 {
