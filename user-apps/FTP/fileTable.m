@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2015 Riccardo Mottola
+ Copyright (C) 2005-2016 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -28,16 +28,17 @@
 #import "fileElement.h"
 #import "AppController.h"
 
-/* we sort the already existing sorted array which contains only the keys to sort on */
-NSComparisonResult compareDictElements(id e1, id e2, void *context)
+/* The sortedArray is just an array of pointers to the original unsorted file elements */
+NSComparisonResult compareFileStructs(id e1, id e2, void *context)
 {
+
   NSString *s1;
   NSString *s2;
   NSComparisonResult r;
   enum sortOrderDef sortOrder;
 
-  s1 = [(NSDictionary *)e1 objectForKey: @"name"];
-  s2 = [(NSDictionary *)e2 objectForKey: @"name"];
+  s1 = [(FileElement *)e1 name];
+  s2 = [(FileElement *)e2 name];
   sortOrder = *(enum sortOrderDef *)context;
 
   r = [s1 compare: s2];
@@ -92,15 +93,10 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   for (i = 0; i < [fileStructs count]; i++)
     {
       NSNumber *n;
-      NSMutableDictionary *dict;
       FileElement *fe;
 
       fe = [fileStructs objectAtIndex: i];
-      n = [NSNumber numberWithInt: i];
-      dict = [NSMutableDictionary dictionary];
-      [dict setObject: [fe name] forKey: @"name"];
-      [dict setObject: n forKey: @"row"];
-      [sortedArray addObject: dict];
+      [sortedArray addObject: fe];
     }
 }
 
@@ -113,7 +109,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [self generateSortedArray];
   if (sortOrder != undefined)
     {
-      [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
+      [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
     }
 }
 
@@ -121,13 +117,13 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 {
   NSUInteger originalRow;
 
-  originalRow = (NSUInteger)[[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
+  originalRow = (NSUInteger)[[sortedArray objectAtIndex: index] intValue];
 
   [fileStructs removeObjectAtIndex:originalRow];
   [self generateSortedArray];
   if (sortOrder != undefined)
     {
-      [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
+      [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
     }
 }
 
@@ -148,18 +144,16 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
   [self generateSortedArray];
   if (sortOrder != undefined)
     {
-      [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
+      [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
     }
 }
 
 /** returns the object after resolving sorting */
 - (FileElement *)elementAtIndex:(NSUInteger)index
 {
-  NSUInteger originalRow;
+  // useless now?
 
-  originalRow = (NSUInteger)[[[sortedArray objectAtIndex: index] objectForKey: @"row"] intValue];
-
-  return [fileStructs objectAtIndex:originalRow];
+  return [sortedArray objectAtIndex:index];
 }
 
 - (void)sortByIdent:(NSString *)idStr
@@ -177,7 +171,7 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
       sortOrder = ascending;
     }
   sortByIdent = idStr;
-  [sortedArray sortUsingFunction:compareDictElements context:&sortOrder];
+  [sortedArray sortUsingFunction:compareFileStructs context:&sortOrder];
 }
 
 
@@ -195,9 +189,8 @@ NSComparisonResult compareDictElements(id e1, id e2, void *context)
 
     theElement = NULL;
     NSParameterAssert(rowIndex >= 0 && rowIndex < [sortedArray count]);
-    originalRow = [[[sortedArray objectAtIndex: rowIndex] objectForKey: @"row"] intValue];
     if ([[aTableColumn identifier] isEqualToString:TAG_FILENAME])
-        theElement = [[fileStructs objectAtIndex:originalRow] name];
+        theElement = [[sortedArray objectAtIndex:rowIndex] name];
     else
         NSLog(@"unknown table column ident");
     return theElement;
