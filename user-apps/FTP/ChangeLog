@@ -1,3 +1,8 @@
+2016-09-16 Riccardo Mottola <rm@gnu.org>
+
+	* localclient.m
+	use isAbsolutePath!
+
 2016-08-23 Riccardo Mottola <rm@gnu.org>
 
 	* fileTable.m
