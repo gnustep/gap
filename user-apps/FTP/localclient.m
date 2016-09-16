@@ -41,8 +41,7 @@
 
 /*
  creates a new directory
- tries to guess if the given dir is relative (no starting /) or absolute
- Is this portable to non-unix OS's?
+ If the path is absolute, use it directly, else append to wokding directory
  */
 - (BOOL)createNewDir:(NSString *)dir
 {
@@ -51,7 +50,7 @@
     BOOL          isDir;
 
     fm = [NSFileManager defaultManager];
-    if ([dir hasPrefix:@"/"])
+    if ([dir isAbsolutePath])
     {
         NSLog(@"%@ is an absolute path", dir);
         localPath = dir;
