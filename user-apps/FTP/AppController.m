@@ -63,6 +63,12 @@
 
 - (void)awakeFromNib
 {
+  /* connection panel */
+  [connectPanel setTitle:NSLocalizedString(@"Connect", "Connect")];
+  [connAnon setTitle:NSLocalizedString(@"Anonymous", "Anonymous connection")];
+  
+  /* log */
+  [logWin setTitle:NSLocalizedString(@"Connection Log", "Connection Log")];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif

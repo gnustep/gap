@@ -1,3 +1,10 @@
+2016-09-27 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	* Resources/GetName.nib
+	* Resources/MainMenu.nib
+	Localization work: make nib generic
+
 2016-09-16 Riccardo Mottola <rm@gnu.org>
 
 	* localclient.m

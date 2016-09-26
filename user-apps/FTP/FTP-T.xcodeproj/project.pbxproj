@@ -9,15 +9,16 @@
 /* Begin PBXBuildFile section */
 		8531288D1767CADA00F56C92 /* GetNameController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8531288B1767CADA00F56C92 /* GetNameController.h */; };
 		8531288E1767CADB00F56C92 /* GetNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531288C1767CADA00F56C92 /* GetNameController.m */; };
-		853128941767CC2600F56C92 /* GetName.nib in Resources */ = {isa = PBXBuildFile; fileRef = 853128921767CC2600F56C92 /* GetName.nib */; };
+		85D3CFE11D99296E00679061 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97319FDCFA39411CA2CEA /* MainMenu.nib */; };
+		85D3CFEB1D992A2200679061 /* GetName.nib in Resources */ = {isa = PBXBuildFile; fileRef = 853128931767CC2600F56C92 /* GetName.nib */; };
+		85D3CFEE1D992B2C00679061 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85D3CFEC1D992B2C00679061 /* Localizable.strings */; };
+		85D3CFF81D992BB100679061 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165DFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		85E8F2AD16EFCF6C00E03CA9 /* AppController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F5F93707FD8CAD01A80101 /* AppController.h */; };
 		85E8F2AE16EFCF6C00E03CA9 /* ftpclient.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F5F93907FD8CAD01A80101 /* ftpclient.h */; };
 		85E8F2AF16EFCF6C00E03CA9 /* localclient.h in Headers */ = {isa = PBXBuildFile; fileRef = F56A03FD080AC71101A80101 /* localclient.h */; };
 		85E8F2B016EFCF6C00E03CA9 /* fileTable.h in Headers */ = {isa = PBXBuildFile; fileRef = F5BE3AF6080C6A3601A80101 /* fileTable.h */; };
 		85E8F2B116EFCF6C00E03CA9 /* fileElement.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C84D6008142DF201A80101 /* fileElement.h */; };
 		85E8F2B216EFCF6C00E03CA9 /* client.h in Headers */ = {isa = PBXBuildFile; fileRef = F5EFB6470818FE6E01A80101 /* client.h */; };
-		85E8F2B416EFCF6C00E03CA9 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
-		85E8F2B516EFCF6C00E03CA9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		85E8F2B616EFCF6C00E03CA9 /* arrow_right.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F5C0879F08A0C47B01A8012F /* arrow_right.tiff */; };
 		85E8F2B716EFCF6C00E03CA9 /* arrow_left.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F5C087A108A0C4AF01A8012F /* arrow_left.tiff */; };
 		85E8F2B816EFCF6C00E03CA9 /* FTP_icon_osx.icns in Resources */ = {isa = PBXBuildFile; fileRef = 85FC29710DD7B28300A80101 /* FTP_icon_osx.icns */; };
@@ -34,16 +35,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = Resources/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = MainMenu.nib; path = Resources/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8531288B1767CADA00F56C92 /* GetNameController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GetNameController.h; sourceTree = "<group>"; };
 		8531288C1767CADA00F56C92 /* GetNameController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GetNameController.m; sourceTree = "<group>"; };
-		853128931767CC2600F56C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GetName.nib; sourceTree = "<group>"; };
+		853128931767CC2600F56C92 /* GetName.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = GetName.nib; path = Resources/GetName.nib; sourceTree = "<group>"; };
 		853FB7F814A3F52200DE7B18 /* README */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		85D3CFED1D992B2C00679061 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85D3CFEF1D992B3A00679061 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = Resources/German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85D3CFF01D992B4000679061 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Resources/Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		85E8F2C916EFCF6C00E03CA9 /* FTP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E8F32416EFD9D000E03CA9 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
 		85FC29710DD7B28300A80101 /* FTP_icon_osx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FTP_icon_osx.icns; sourceTree = "<group>"; };
@@ -144,12 +148,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				853128921767CC2600F56C92 /* GetName.nib */,
+				85D3CFEC1D992B2C00679061 /* Localizable.strings */,
+				853128931767CC2600F56C92 /* GetName.nib */,
 				85E8F32416EFD9D000E03CA9 /* ChangeLog */,
 				853FB7F814A3F52200DE7B18 /* README */,
 				85FC29710DD7B28300A80101 /* FTP_icon_osx.icns */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				29B97319FDCFA39411CA2CEA /* MainMenu.nib */,
+				089C165DFE840E0CC02AAC07 /* InfoPlist.strings */,
 				F5C0879F08A0C47B01A8012F /* arrow_right.tiff */,
 				F5C087A108A0C4AF01A8012F /* arrow_left.tiff */,
 			);
@@ -212,6 +217,13 @@
 			buildConfigurationList = 85A6DBE310D43D010048FE0B /* Build configuration list for PBXProject "FTP-T" */;
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Italian,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* FTP */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -226,14 +238,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85E8F2B416EFCF6C00E03CA9 /* MainMenu.nib in Resources */,
-				85E8F2B516EFCF6C00E03CA9 /* InfoPlist.strings in Resources */,
+				85D3CFE11D99296E00679061 /* MainMenu.nib in Resources */,
+				85D3CFF81D992BB100679061 /* InfoPlist.strings in Resources */,
 				85E8F2B616EFCF6C00E03CA9 /* arrow_right.tiff in Resources */,
 				85E8F2B716EFCF6C00E03CA9 /* arrow_left.tiff in Resources */,
 				85E8F2B816EFCF6C00E03CA9 /* FTP_icon_osx.icns in Resources */,
 				85E8F2B916EFCF6C00E03CA9 /* README in Resources */,
 				85E8F32516EFD9D000E03CA9 /* ChangeLog in Resources */,
-				853128941767CC2600F56C92 /* GetName.nib in Resources */,
+				85D3CFEB1D992A2200679061 /* GetName.nib in Resources */,
+				85D3CFEE1D992B2C00679061 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,28 +271,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+		85D3CFEC1D992B2C00679061 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
+				85D3CFED1D992B2C00679061 /* English */,
+				85D3CFEF1D992B3A00679061 /* German */,
+				85D3CFF01D992B4000679061 /* Italian */,
 			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
-			);
-			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		853128921767CC2600F56C92 /* GetName.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				853128931767CC2600F56C92 /* English */,
-			);
-			name = GetName.nib;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
