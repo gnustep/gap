@@ -3,7 +3,7 @@
  file part of Stepulator
  a RPN calculator for *step
 
- Riccardo Mottola, 2003-2013 <rm@gnu.org>
+ Riccardo Mottola, 2003-2016 <rm@gnu.org>
 
  This application is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public
@@ -26,7 +26,8 @@
 
 - init
 {
-    if (self = [super init])
+  self = [super init];
+  if (self)
     {
         model = [CalcModel alloc];
         if (!model)
