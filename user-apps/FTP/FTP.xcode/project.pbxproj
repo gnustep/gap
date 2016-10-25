@@ -27,24 +27,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		089C165CFE840E0CC02AAC07 = {
-			children = (
-				089C165DFE840E0CC02AAC07,
-			);
-			isa = PBXVariantGroup;
-			name = InfoPlist.strings;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		089C165DFE840E0CC02AAC07 = {
-			fileEncoding = 10;
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
-			name = English;
-			path = English.lproj/InfoPlist.strings;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 //080
 //081
 //082
@@ -120,6 +102,13 @@
 			);
 			hasScannedForEncodings = 1;
 			isa = PBXProject;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Italian,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA;
 			projectDirPath = "";
 			targets = (
@@ -161,35 +150,18 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				85848F181DBFE1F70050DC12,
+				85848F121DBFE1A70050DC12,
+				85848F131DBFE1A70050DC12,
+				85848F141DBFE1A70050DC12,
 				85D69CD717651E24000AC90B,
 				85FC29710DD7B28300A80101,
-				29B97318FDCFA39411CA2CEA,
-				089C165CFE840E0CC02AAC07,
 				F5C0879F08A0C47B01A8012F,
 				F5C087A108A0C4AF01A8012F,
-				85D69C741762961D000AC90B,
 			);
 			isa = PBXGroup;
 			name = Resources;
 			path = "";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		29B97318FDCFA39411CA2CEA = {
-			children = (
-				29B97319FDCFA39411CA2CEA,
-			);
-			isa = PBXVariantGroup;
-			name = MainMenu.nib;
-			path = "";
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		29B97319FDCFA39411CA2CEA = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
-			name = English;
-			path = English.lproj/MainMenu.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -350,28 +322,17 @@
 		8576CCEA152E1559008F8C62 = {
 			buildActionMask = 2147483647;
 			files = (
-				8576CCEB152E1559008F8C62,
-				8576CCEC152E1559008F8C62,
 				8576CCED152E1559008F8C62,
 				8576CCEE152E1559008F8C62,
 				8576CCEF152E1559008F8C62,
-				85D69C761762961D000AC90B,
 				85D69CD817651E24000AC90B,
+				85848F151DBFE1A70050DC12,
+				85848F161DBFE1A70050DC12,
+				85848F171DBFE1A70050DC12,
+				85848F1A1DBFE1F70050DC12,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8576CCEB152E1559008F8C62 = {
-			fileRef = 29B97318FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8576CCEC152E1559008F8C62 = {
-			fileRef = 089C165CFE840E0CC02AAC07;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		8576CCED152E1559008F8C62 = {
 			fileRef = F5C0879F08A0C47B01A8012F;
@@ -479,29 +440,91 @@
 			refType = 3;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		85D69C741762961D000AC90B = {
+		85848F121DBFE1A70050DC12 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = GetName.nib;
+			path = Resources/GetName.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85848F131DBFE1A70050DC12 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = InfoPlist.strings;
+			path = Resources/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85848F141DBFE1A70050DC12 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = MainMenu.nib;
+			path = Resources/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85848F151DBFE1A70050DC12 = {
+			fileRef = 85848F121DBFE1A70050DC12;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85848F161DBFE1A70050DC12 = {
+			fileRef = 85848F131DBFE1A70050DC12;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85848F171DBFE1A70050DC12 = {
+			fileRef = 85848F141DBFE1A70050DC12;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85848F181DBFE1F70050DC12 = {
 			children = (
-				85D69C751762961D000AC90B,
+				85848F191DBFE1F70050DC12,
+				85848F1B1DBFE2040050DC12,
+				85848F1C1DBFE20A0050DC12,
 			);
 			isa = PBXVariantGroup;
-			name = GetName.nib;
+			name = Localizable.strings;
 			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		85D69C751762961D000AC90B = {
+		85848F191DBFE1F70050DC12 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
+			lastKnownFileType = text.plist.strings;
 			name = English;
-			path = English.lproj/GetName.nib;
+			path = Resources/English.lproj/Localizable.strings;
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		85D69C761762961D000AC90B = {
-			fileRef = 85D69C741762961D000AC90B;
+		85848F1A1DBFE1F70050DC12 = {
+			fileRef = 85848F181DBFE1F70050DC12;
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		85848F1B1DBFE2040050DC12 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = German;
+			path = Resources/German.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		85848F1C1DBFE20A0050DC12 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = Italian;
+			path = Resources/Italian.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
 		};
 		85D69C7917629757000AC90B = {
 			fileEncoding = 30;
