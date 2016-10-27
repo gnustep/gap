@@ -104,7 +104,8 @@
     }
 }
 
-- (void)calculateMinMax;
+/** calculate minimum and maximum value of the series */
+- (void)calculateMinMax
 {
   NSUInteger count;
   NSUInteger i;
@@ -132,11 +133,13 @@
     }
 }
 
+/** smallest value in series */
 - (NSNumber *)minValue
 {
   return minValue;
 }
 
+/** largest value in series */
 - (NSNumber *)maxValue
 {
   return maxValue;
@@ -145,11 +148,14 @@
 
 /* --- NSArray bridge methods ---*/
 
+/** returns object at the specified index */
 - (id) objectAtIndex: (NSUInteger)index
 {
   return [seriesArray objectAtIndex: index];
 }
 
+
+/** adds object and updates of minimum and maximum value */
 - (void) addObject: (id)obj
 {
   [seriesArray addObject: obj];
@@ -167,16 +173,20 @@
     }
 }
 
+/** number of elemens in Array */
 - (NSUInteger) count
 {
   return [seriesArray count]; 
 }
+
+/** removes all elements, leaving an empty series */
 - (void) removeAllObjects
 {
   [seriesArray removeAllObjects];
   [self calculateMinMax];
 }
 
+/** removes the element in series given by index */
 - (void) removeObjectAtIndex: (NSUInteger)index
 {
   [seriesArray removeObjectAtIndex: index];
