@@ -3,7 +3,7 @@
    
    Carthesius: Abscissa/Ordinata Charts
 
-   Copyright (C) 2011-2014 Free Software Foundation
+   Copyright (C) 2011-2016 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -209,40 +209,47 @@
   return curve2;
 }
 
+/** sets visible part of X in units */
 -(void)setVisibleXUnits: (float)units
 {
   visibleXUnits = units;
 }
 
+/** sets visible part of Y in units */
 -(void)setVisibleYUnits: (float)units
 {
   visibleYUnits = units;
 }
 
 
+/** sets which quadrants are visible */
 -(void)setQuadrantPositioning:(OKQuadrantPositioning)p
 {
   quadrantPositioning = p;
 }
 
+/** sets graph background color */
 -(void)setBackgroundColor:(NSColor *)color
 {
   [backgroundColor release];
   backgroundColor = [color retain];
 }
 
+/** graph background color */
 -(void)setAxisColor:(NSColor *)color
 {
   [axisColor release];
   axisColor = [color retain];
 }
 
+/** sets color of curve 1 */
 -(void)setCurve1Color:(NSColor *)color
 {
   [curve1Color release];
   curve1Color = [color retain];
 }
 
+/** sets color of curve 2 */
 -(void)setCurve2Color:(NSColor *)color
 {
   [curve2Color release];
