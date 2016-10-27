@@ -51,11 +51,13 @@
   [super dealloc];
 }
 
+/** color with which the series is drawn */
 - (NSColor*)color
 {
   return color;
 }
 
+/** sets the color with which the series is drawn */
 -(void)setColor: (NSColor *)c
 {
   if (color != c)
@@ -65,22 +67,25 @@
     }
 }
 
+/** if the series is drawn highlighted in a multi-series plot */
 - (BOOL)highlighted
 {
   return highlighted;
 }
 
+/** set if the series is drawn highlighted in a multi-series plot */
 - (void)setHighlighted: (BOOL)status
 {
   highlighted = status;
 }
 
-
+/** caption of the series */
 - (NSString*)title
 {
   return title;
 }
 
+/** sets the caption of the series */
 - (void)setTitle: (NSString*)aTitle
 {
   if (title != aTitle)
@@ -90,11 +95,14 @@
     }
 }
 
+/** a more verbose description of the series */
 - (NSString*)description
 {
   return description;
 }
 
+
+/** sets a more verbose description of the series */
 - (void)setDescription: (NSString*)aDescription
 {
   if (description != aDescription)
