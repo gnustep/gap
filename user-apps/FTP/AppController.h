@@ -36,45 +36,53 @@
 
 @interface AppController : NSObject
 {
-    IBOutlet NSWindow            *mainWin;
-    IBOutlet NSTableView         *localView;
-    IBOutlet NSTableView         *remoteView;
-    IBOutlet NSPopUpButton       *localPath;
-    IBOutlet NSPopUpButton       *remotePath;
-    IBOutlet NSButton            *buttDownload;
-    IBOutlet NSButton            *buttUpload;
-    IBOutlet NSTextField         *infoMessage;
-    IBOutlet NSTextField         *infoSpeed;
-    IBOutlet NSTextField         *infoSize;
-    IBOutlet NSProgressIndicator *progBar;
-    
-    IBOutlet NSWindow     *logWin;
-    IBOutlet NSTextView   *logTextField;
-    
-    IBOutlet NSPanel      *connectPanel;
-    IBOutlet NSTextField  *connAddress;
-    IBOutlet NSTextField  *connPort;
-    IBOutlet NSTextField  *connUser;
-    IBOutlet NSTextField  *connPass;
-    IBOutlet NSButton     *connAnon;
+  IBOutlet NSMenu *mainMenu;
 
-    IBOutlet NSPanel     *prefPanel;
-    IBOutlet NSMatrix    *portType;
+  IBOutlet NSWindow            *mainWin;
+  IBOutlet NSTableView         *localView;
+  IBOutlet NSTableView         *remoteView;
+  IBOutlet NSPopUpButton       *localPath;
+  IBOutlet NSPopUpButton       *remotePath;
+  IBOutlet NSButton            *buttDownload;
+  IBOutlet NSButton            *buttUpload;
+  IBOutlet NSTextField         *infoMessage;
+  IBOutlet NSTextField         *infoSpeed;
+  IBOutlet NSTextField         *infoSize;
+  IBOutlet NSProgressIndicator *progBar;
     
-    NSMutableDictionary  *textAttributes;
+  IBOutlet NSWindow     *logWin;
+  IBOutlet NSTextView   *logTextField;
     
-    FileTable   *localTableData;
-    FileTable   *remoteTableData;
-    FtpClient   *ftp;
-    LocalClient *local;
+  IBOutlet NSPanel      *connectPanel;
+  IBOutlet NSBox        *connServerBox;
+  IBOutlet NSBox        *connAccountBox;
+  IBOutlet NSTextField  *connAddress;
+  IBOutlet NSTextField  *connPort;
+  IBOutlet NSTextField  *connUser;
+  IBOutlet NSTextField  *connPass;
+  IBOutlet NSButton     *connAnon;
+  IBOutlet NSButton     *connCancelButt;
+  IBOutlet NSButton     *connConnectButt;
 
-    NSMutableArray *filesInProcess;
-    @private connectionModes    connMode;
-    @private NSTimeInterval     beginTimeVal;
-    @private unsigned long long transferSize;
-    @private BOOL               threadRunning;
+  IBOutlet NSPanel     *prefPanel;
+  IBOutlet NSMatrix    *portType;
+  IBOutlet NSButton    *prefCancelButt;
+  IBOutlet NSButton    *prefSaveButt;
+    
+  NSMutableDictionary  *textAttributes;
+    
+  FileTable   *localTableData;
+  FileTable   *remoteTableData;
+  FtpClient   *ftp;
+  LocalClient *local;
 
-    @private NSConnection   *doConnection;
+  NSMutableArray *filesInProcess;
+  @private connectionModes    connMode;
+  @private NSTimeInterval     beginTimeVal;
+  @private unsigned long long transferSize;
+  @private BOOL               threadRunning;
+
+  @private NSConnection   *doConnection;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif;

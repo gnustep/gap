@@ -4,3 +4,8 @@
 
 /* Log */
 "Connection Log" = "Verbindungslog";
+
+/* Get Name */
+"Name:" = "Name:";
+"Cancel" = "Abbrechen";
+"Ok" = "Ok";
