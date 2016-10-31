@@ -77,8 +77,11 @@
         [rightButt setAction: @selector(changeTextAlignment:)];
         [controlsView addSubview: rightButt];
 
-        cancelButt = [[NSButton alloc] initWithFrame: NSMakeRect(360, 5, 60, 30)];
+        cancelButt = [[NSButton alloc] initWithFrame: NSMakeRect(350, 5, 80, 30)];
         [cancelButt setButtonType: NSMomentaryLight];
+#if defined(__APPLE__)
+        [cancelButt setBezelStyle:NSRoundedBezelStyle];
+#endif
         [cancelButt setTitle: @"Cancel"];
         [cancelButt setTarget: self];
         [cancelButt setAction: @selector(okCancelPressed:)];
@@ -86,6 +89,9 @@
 
         okButt = [[NSButton alloc] initWithFrame: NSMakeRect(430, 5, 60, 30)];
         [okButt setButtonType: NSMomentaryLight];
+#if defined(__APPLE__)
+        [okButt setBezelStyle:NSRoundedBezelStyle];
+#endif
         [okButt setTitle: @"Ok"];
         [okButt setTarget: self];
         [okButt setAction: @selector(okCancelPressed:)];

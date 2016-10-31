@@ -400,7 +400,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 14C7E0B40EC663E0004E8823 /* Build configuration list for PBXProject "Graphos" */;
 			compatibilityVersion = "Xcode 2.4";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
