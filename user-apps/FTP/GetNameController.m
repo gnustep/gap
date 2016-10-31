@@ -2,7 +2,7 @@
 
  Project: FTP
 
- Copyright (C) 2013 Free Software Foundation
+ Copyright (C) 2013-2016 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -38,6 +38,10 @@
     {
       [NSBundle loadNibNamed: @"GetName" owner: self];
       [panel setDelegate: self];
+
+      [labelField setStringValue:NSLocalizedString(@"Name:", @"Name:")];
+      [cancelButton setTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+      [okButton setTitle:NSLocalizedString(@"Ok", @"Ok")];
     }
   return self;
 }

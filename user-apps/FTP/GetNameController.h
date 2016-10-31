@@ -2,7 +2,7 @@
 
  Project: FTP
 
- Copyright (C) 2013 Free Software Foundation
+ Copyright (C) 2013-2016 Free Software Foundation
 
  Author: Riccardo Mottola
 
@@ -43,6 +43,9 @@
   IBOutlet NSPanel *panel;
   IBOutlet NSTextField *textField;
   IBOutlet NSTextField *messageField;
+  IBOutlet NSTextField *labelField;
+  IBOutlet NSButton *cancelButton;
+  IBOutlet NSButton *okButton;
   
   NSInteger returnCode;
 }
