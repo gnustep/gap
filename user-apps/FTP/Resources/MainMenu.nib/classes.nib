@@ -29,10 +29,14 @@
             OUTLETS = {
                 buttDownload = NSButton; 
                 buttUpload = NSButton; 
+                connAccountBox = NSBox; 
                 connAddress = NSTextField; 
                 connAnon = NSButton; 
+                connCancelButt = NSButton; 
+                connConnectButt = NSButton; 
                 connPass = NSTextField; 
                 connPort = NSTextField; 
+                connServerBox = NSBox; 
                 connUser = NSTextField; 
                 connectPanel = NSPanel; 
                 infoMessage = NSTextField; 
@@ -42,9 +46,12 @@
                 localView = NSTableView; 
                 logTextField = NSTextView; 
                 logWin = NSWindow; 
+                mainMenu = NSMenu; 
                 mainWin = NSWindow; 
                 portType = NSMatrix; 
+                prefCancelButt = NSButton; 
                 prefPanel = NSPanel; 
+                prefSaveButt = NSButton; 
                 progBar = NSProgressIndicator; 
                 remotePath = NSPopUpButton; 
                 remoteView = NSTableView; 
