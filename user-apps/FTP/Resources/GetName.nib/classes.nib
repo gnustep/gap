@@ -5,7 +5,14 @@
             ACTIONS = {cancelPressed = id; okPressed = id; }; 
             CLASS = GetNameController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {messageField = NSTextField; panel = NSPanel; textField = NSTextField; }; 
+            OUTLETS = {
+                cancelButton = NSButton; 
+                labelField = NSTextField; 
+                messageField = NSTextField; 
+                okButton = NSButton; 
+                panel = NSPanel; 
+                textField = NSTextField; 
+            }; 
             SUPERCLASS = NSObject; 
         }
     ); 
