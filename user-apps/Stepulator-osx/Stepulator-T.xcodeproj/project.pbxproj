@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		85051A061826EED900B55879 /* back_arrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A021826EED900B55879 /* back_arrow.tiff */; };
+		85051A071826EED900B55879 /* sqr.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A031826EED900B55879 /* sqr.tiff */; };
+		85051A081826EED900B55879 /* sqrt.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A041826EED900B55879 /* sqrt.tiff */; };
+		85051A091826EED900B55879 /* Stepulator.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A051826EED900B55879 /* Stepulator.tiff */; };
+		85051A131826F49400B55879 /* ex.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A101826F49400B55879 /* ex.tiff */; };
+		85051A141826F49400B55879 /* xpowy.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A111826F49400B55879 /* xpowy.tiff */; };
+		85051A151826F49400B55879 /* xrooty.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A121826F49400B55879 /* xrooty.tiff */; };
+		85051A1A1826F5BD00B55879 /* 10x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 85051A191826F5BD00B55879 /* 10x.tiff */; };
+		859552B6136F5E4A00EE4C62 /* CalcController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5150B6C0476303701A80203 /* CalcController.h */; };
+		859552B7136F5E4A00EE4C62 /* CalcModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F5150B74047631C601A80203 /* CalcModel.h */; };
+		859552B9136F5E4A00EE4C62 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		859552BA136F5E4A00EE4C62 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		859552BB136F5E4A00EE4C62 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F572858008FC7CB601A80197 /* LICENSE */; };
+		859552BC136F5E4A00EE4C62 /* README in Resources */ = {isa = PBXBuildFile; fileRef = F572858108FC7CB601A80197 /* README */; };
+		859552BE136F5E4A00EE4C62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		859552BF136F5E4A00EE4C62 /* CalcController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5150B6D0476303701A80203 /* CalcController.m */; };
+		859552C0136F5E4A00EE4C62 /* CalcModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F5150B75047631C601A80203 /* CalcModel.m */; };
+		859552C2136F5E4A00EE4C62 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		85051A021826EED900B55879 /* back_arrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = back_arrow.tiff; path = Resources/back_arrow.tiff; sourceTree = "<group>"; };
+		85051A031826EED900B55879 /* sqr.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sqr.tiff; path = Resources/sqr.tiff; sourceTree = "<group>"; };
+		85051A041826EED900B55879 /* sqrt.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sqrt.tiff; path = Resources/sqrt.tiff; sourceTree = "<group>"; };
+		85051A051826EED900B55879 /* Stepulator.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Stepulator.tiff; path = Resources/Stepulator.tiff; sourceTree = "<group>"; };
+		85051A101826F49400B55879 /* ex.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ex.tiff; path = Resources/ex.tiff; sourceTree = "<group>"; };
+		85051A111826F49400B55879 /* xpowy.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = xpowy.tiff; path = Resources/xpowy.tiff; sourceTree = "<group>"; };
+		85051A121826F49400B55879 /* xrooty.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = xrooty.tiff; path = Resources/xrooty.tiff; sourceTree = "<group>"; };
+		85051A191826F5BD00B55879 /* 10x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = 10x.tiff; path = Resources/10x.tiff; sourceTree = "<group>"; };
+		859552C3136F5E4B00EE4C62 /* Info-Stepulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-Stepulator.plist"; sourceTree = "<group>"; };
+		859552C4136F5E4C00EE4C62 /* Stepulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5150B6C0476303701A80203 /* CalcController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CalcController.h; sourceTree = "<group>"; };
+		F5150B6D0476303701A80203 /* CalcController.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CalcController.m; sourceTree = "<group>"; tabWidth = 8; usesTabs = 0; };
+		F5150B74047631C601A80203 /* CalcModel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CalcModel.h; sourceTree = "<group>"; };
+		F5150B75047631C601A80203 /* CalcModel.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CalcModel.m; sourceTree = "<group>"; tabWidth = 8; usesTabs = 0; };
+		F572858008FC7CB601A80197 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = LICENSE; path = Resources/LICENSE; sourceTree = "<group>"; };
+		F572858108FC7CB601A80197 /* README */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = README; path = Resources/README; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		859552C1136F5E4A00EE4C62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				859552C2136F5E4A00EE4C62 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F5150B6C0476303701A80203 /* CalcController.h */,
+				F5150B6D0476303701A80203 /* CalcController.m */,
+				F5150B74047631C601A80203 /* CalcModel.h */,
+				F5150B75047631C601A80203 /* CalcModel.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				859552C4136F5E4C00EE4C62 /* Stepulator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* RPNCalc */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				859552C3136F5E4B00EE4C62 /* Info-Stepulator.plist */,
+			);
+			name = RPNCalc;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85051A191826F5BD00B55879 /* 10x.tiff */,
+				85051A101826F49400B55879 /* ex.tiff */,
+				85051A111826F49400B55879 /* xpowy.tiff */,
+				85051A121826F49400B55879 /* xrooty.tiff */,
+				85051A021826EED900B55879 /* back_arrow.tiff */,
+				85051A031826EED900B55879 /* sqr.tiff */,
+				85051A041826EED900B55879 /* sqrt.tiff */,
+				85051A051826EED900B55879 /* Stepulator.tiff */,
+				F572858008FC7CB601A80197 /* LICENSE */,
+				F572858108FC7CB601A80197 /* README */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		859552B5136F5E4A00EE4C62 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				859552B6136F5E4A00EE4C62 /* CalcController.h in Headers */,
+				859552B7136F5E4A00EE4C62 /* CalcModel.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		859552B4136F5E4A00EE4C62 /* Stepulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85D610D01DCA579F00A3AEE3 /* Build configuration list for PBXNativeTarget "Stepulator" */;
+			buildPhases = (
+				859552B5136F5E4A00EE4C62 /* Headers */,
+				859552B8136F5E4A00EE4C62 /* Resources */,
+				859552BD136F5E4A00EE4C62 /* Sources */,
+				859552C1136F5E4A00EE4C62 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stepulator;
+			productInstallPath = "$(HOME)/Applications";
+			productName = RPNCalc;
+			productReference = 859552C4136F5E4C00EE4C62 /* Stepulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 85D610D41DCA579F00A3AEE3 /* Build configuration list for PBXProject "Stepulator" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* RPNCalc */;
+			projectDirPath = "";
+			targets = (
+				859552B4136F5E4A00EE4C62 /* Stepulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		859552B8136F5E4A00EE4C62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				859552B9136F5E4A00EE4C62 /* MainMenu.nib in Resources */,
+				859552BA136F5E4A00EE4C62 /* InfoPlist.strings in Resources */,
+				859552BB136F5E4A00EE4C62 /* LICENSE in Resources */,
+				859552BC136F5E4A00EE4C62 /* README in Resources */,
+				85051A061826EED900B55879 /* back_arrow.tiff in Resources */,
+				85051A071826EED900B55879 /* sqr.tiff in Resources */,
+				85051A081826EED900B55879 /* sqrt.tiff in Resources */,
+				85051A091826EED900B55879 /* Stepulator.tiff in Resources */,
+				85051A131826F49400B55879 /* ex.tiff in Resources */,
+				85051A141826F49400B55879 /* xpowy.tiff in Resources */,
+				85051A151826F49400B55879 /* xrooty.tiff in Resources */,
+				85051A1A1826F5BD00B55879 /* 10x.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		859552BD136F5E4A00EE4C62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				859552BE136F5E4A00EE4C62 /* main.m in Sources */,
+				859552BF136F5E4A00EE4C62 /* CalcController.m in Sources */,
+				859552C0136F5E4A00EE4C62 /* CalcModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		85D610D11DCA579F00A3AEE3 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Stepulator.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Stepulator;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		85D610D21DCA579F00A3AEE3 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Stepulator.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Stepulator;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		85D610D31DCA579F00A3AEE3 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Stepulator.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Stepulator;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		85D610D51DCA579F00A3AEE3 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		85D610D61DCA579F00A3AEE3 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		85D610D71DCA579F00A3AEE3 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85D610D01DCA579F00A3AEE3 /* Build configuration list for PBXNativeTarget "Stepulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85D610D11DCA579F00A3AEE3 /* Development */,
+				85D610D21DCA579F00A3AEE3 /* Deployment */,
+				85D610D31DCA579F00A3AEE3 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		85D610D41DCA579F00A3AEE3 /* Build configuration list for PBXProject "Stepulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85D610D51DCA579F00A3AEE3 /* Development */,
+				85D610D61DCA579F00A3AEE3 /* Deployment */,
+				85D610D71DCA579F00A3AEE3 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
