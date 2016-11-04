@@ -1,27 +1,27 @@
 {
     ApplicationDescription = "PDF-PS viewer";
-    ApplicationIcon = GSPdf.tiff;
+    ApplicationIcon = "GSPdf.tiff";
     ApplicationName = GSPdf;
-    ApplicationRelease = 0.5;
+    ApplicationRelease = "0.5";
     Authors = (
 	"GAP Team",
 	"Riccardo Mottola",
 	"Enrico Sersale (Original Author)"
     );
-    Copyright = "Copyright (C) 2002-2012";
-    CopyrightDescription = "Released under the GNU General Public License v2.0";
-    FullVersionID = 0.5;
-    NSExecutable = GSPdf;
-    NSIcon = GSPdf.tiff;
-    NSMainNibFile = GSPdf.gorm;
-    NSPrincipalClass = NSApplication;
     CFBundleIdentifier = "org.gap.GSPdf";
+    Copyright = "Copyright (C) 2002-2016";
+    CopyrightDescription = "Released under the GNU General Public License v2.0";
+    FullVersionID = "0.5";
+    NSExecutable = GSPdf;
+    NSIcon = "GSPdf.tiff";
+    NSMainNibFile = "GSPdf.gorm";
+    NSPrincipalClass = NSApplication;
     NSRole = Application;
     NSTypes = (
 	{
 	    NSDocumentClass = GSPdfDocument;
 	    NSHumanReadableName = NSPostScriptPboardType;
-	    NSIcon = FilePS.tiff;
+	    NSIcon = "FilePS.tiff";
 	    NSName = PS;
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
@@ -32,7 +32,7 @@
 	{
 	    NSDocumentClass = GSPdfDocument;
 	    NSHumanReadableName = NSPostScriptPboardType;
-	    NSIcon = FileEPS.tiff;
+	    NSIcon = "FileEPS.tiff";
 	    NSName = EPS;
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
@@ -43,7 +43,7 @@
 	{
 	    NSDocumentClass = GSPdfDocument;
 	    NSHumanReadableName = NSPDFPboardType;
-	    NSIcon = FilePDF.tiff;
+	    NSIcon = "FilePDF.tiff";
 	    NSName = PDF;
 	    NSRole = Viewer;
 	    NSUnixExtensions = (
