@@ -1,3 +1,8 @@
+2016-11-04 Riccardo Mottola <rm@gnu.org>
+
+	* Resources/GSPdfDocument.gorm
+	Connect zoom field.
+
 2015-11-14 Riccardo Mottola <rm@gnu.org>
 
 	* Functions.h
