@@ -42,7 +42,7 @@
 		85051A111826F49400B55879 /* xpowy.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = xpowy.tiff; path = Resources/xpowy.tiff; sourceTree = "<group>"; };
 		85051A121826F49400B55879 /* xrooty.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = xrooty.tiff; path = Resources/xrooty.tiff; sourceTree = "<group>"; };
 		85051A191826F5BD00B55879 /* 10x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = 10x.tiff; path = Resources/10x.tiff; sourceTree = "<group>"; };
-		859552C3136F5E4B00EE4C62 /* Info-Stepulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-Stepulator.plist"; sourceTree = "<group>"; };
+		859552C3136F5E4B00EE4C62 /* Info-Stepulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Stepulator.plist"; sourceTree = "<group>"; };
 		859552C4136F5E4C00EE4C62 /* Stepulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5150B6C0476303701A80203 /* CalcController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CalcController.h; sourceTree = "<group>"; };
 		F5150B6D0476303701A80203 /* CalcController.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CalcController.m; sourceTree = "<group>"; tabWidth = 8; usesTabs = 0; };
@@ -189,9 +189,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 85D610D41DCA579F00A3AEE3 /* Build configuration list for PBXProject "Stepulator" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* RPNCalc */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				859552B4136F5E4A00EE4C62 /* Stepulator */,
 			);
@@ -269,7 +271,6 @@
 				INFOPLIST_FILE = "Info-Stepulator.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Stepulator;
