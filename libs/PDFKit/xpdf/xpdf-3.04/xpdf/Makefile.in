@@ -669,14 +669,48 @@ pdfimages$(EXE): $(PDFIMAGES_OBJS) $(GOOLIBDIR)/$(LIBPREFIX)Goo.a
 
 #------------------------------------------------------------------------
 
-PDFKIT_OBJS = Annot.o Array.o BuiltinFont.o BuiltinFontTables.o \
-	Catalog.o CharCodeToUnicode.o CMap.o Decrypt.o Dict.o Error.o \
-	FontEncodingTables.o Function.o Gfx.o GfxFont.o GfxState.o \
-	GlobalParams.o JArithmeticDecoder.o JBIG2Stream.o JPXStream.o \
-	Lexer.o Link.o NameToCharCode.o Object.o Outline.o OutputDev.o \
-	Page.o Parser.o PDFDoc.o PDFDocEncoding.o PreScanOutputDev.o \
-        PSOutputDev.o PSTokenizer.o SplashOutputDev.o SecurityHandler.o \
-        Stream.o TextOutputDev.o UnicodeMap.o UnicodeTypeTable.o XRef.o
+PDFKIT_OBJS = \
+	Annot.o \
+	Array.o \
+	BuiltinFont.o \
+	BuiltinFontTables.o \
+	Catalog.o \
+	CharCodeToUnicode.o \
+	CMap.o \
+	Decrypt.o \
+	Dict.o \
+	Error.o \
+	FontEncodingTables.o \
+	Function.o \
+	Gfx.o \
+	GfxFont.o \
+	GfxState.o \
+	GlobalParams.o \
+	JArithmeticDecoder.o \
+	JBIG2Stream.o \
+	JPXStream.o \
+	Lexer.o \
+	Link.o \
+	NameToCharCode.o \
+	Object.o \
+	OptionalContent.o \
+	Outline.o \
+	OutputDev.o \
+	Page.o \
+	Parser.o \
+	PDFDoc.o \
+	PDFDocEncoding.o \
+	PreScanOutputDev.o \
+	PSOutputDev.o \
+	PSTokenizer.o \
+	SplashOutputDev.o \
+	SecurityHandler.o \
+	Stream.o \
+	TextOutputDev.o \
+	TextString.o \
+	UnicodeMap.o \
+	UnicodeTypeTable.o \
+	XRef.o
 
 compile_for_pdfkit: $(PDFKIT_OBJS)
 
