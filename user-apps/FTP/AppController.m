@@ -64,11 +64,17 @@
 - (void)awakeFromNib
 {
   /* connection panel */
-  [connectPanel setTitle:NSLocalizedString(@"Connect", "Connect")];
-  [connAnon setTitle:NSLocalizedString(@"Anonymous", "Anonymous connection")];
+  [connectPanel setTitle:NSLocalizedString(@"Connect", @"Connect")];
+  [connAnon setTitle:NSLocalizedString(@"Anonymous", @"Anonymous connection")];
+  
+  /* main window */
+  [[localPath itemAtIndex:0] setTitle:NSLocalizedString(@"local view", @"local view")];
+  [[remotePath itemAtIndex:0] setTitle:NSLocalizedString(@"remote view", @"remote view")];
+  [[[localView tableColumnWithIdentifier:@"filename"] headerCell] setStringValue:NSLocalizedString(@"Name", @"filename table")];
+  [[[remoteView tableColumnWithIdentifier:@"filename"] headerCell] setStringValue:NSLocalizedString(@"Name", @"filename table")];
   
   /* log */
-  [logWin setTitle:NSLocalizedString(@"Connection Log", "Connection Log")];
+  [logWin setTitle:NSLocalizedString(@"Connection Log", @"Connection Log")];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
