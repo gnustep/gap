@@ -1,6 +1,14 @@
 /* Connection panel */
+"Server Address and Port" = "Indirizzo server e porta";
+"Account" = "Credenziali";
 "Connect" = "Connessione";
 "Anonymous" = "Anonimo";
+"Connect (action)" = "Connetti";
+
+/* main window */
+"local view" = "Vista Locale";
+"remote view" = "Vista Remota";
+"Name" = "Nome";
 
 /* Log */
 "Connection Log" = "Log Connessione";

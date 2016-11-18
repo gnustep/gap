@@ -1,6 +1,9 @@
 /* Connection panel */
+"Server Address and Port" = "Server Address and Port";
+"Account" = "Account";
 "Connect" = "Connect";
 "Anonymous" = "Anonymous";
+"Connect (action)" = "Connect";
 
 /* main window */
 "local view" = "Local View";
