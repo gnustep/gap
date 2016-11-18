@@ -64,8 +64,12 @@
 - (void)awakeFromNib
 {
   /* connection panel */
+  [connServerBox setTitle:NSLocalizedString(@"Server Address and Port", @"Server Address and Port")];
+  [connAccountBox setTitle:NSLocalizedString(@"Account", @"Account")];
   [connectPanel setTitle:NSLocalizedString(@"Connect", @"Connect")];
   [connAnon setTitle:NSLocalizedString(@"Anonymous", @"Anonymous connection")];
+  [connCancelButt setTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+  [connConnectButt setTitle:NSLocalizedString(@"Connect (action)", @"Connect (action)")];
   
   /* main window */
   [[localPath itemAtIndex:0] setTitle:NSLocalizedString(@"local view", @"local view")];
