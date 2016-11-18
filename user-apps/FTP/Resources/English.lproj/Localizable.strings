@@ -2,6 +2,11 @@
 "Connect" = "Connect";
 "Anonymous" = "Anonymous";
 
+/* main window */
+"local view" = "Local View";
+"remote view" = "Remote View";
+"Name" = "Name";
+
 /* Log */
 "Connection Log" = "Connection Log";
 
