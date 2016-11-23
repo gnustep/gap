@@ -1,3 +1,11 @@
+/* menu */
+"Local" = "Local";
+"Remote" = "Remote";
+"Rename..." = "Rename...";
+"New Folder..." = "New Folder...";
+"Delete" = "Delete";
+"Refresh" = "Refresh";
+
 /* Connection panel */
 "Server Address and Port" = "Server Address and Port";
 "Account" = "Account";
