@@ -63,6 +63,9 @@
 
 - (void)awakeFromNib
 {
+  NSMenu *menu;
+  NSMenuItem *mi;
+  
   /* connection panel */
   [connServerBox setTitle:NSLocalizedString(@"Server Address and Port", @"Server Address and Port")];
   [connAccountBox setTitle:NSLocalizedString(@"Account", @"Account")];
@@ -77,6 +80,31 @@
   [[[localView tableColumnWithIdentifier:@"filename"] headerCell] setStringValue:NSLocalizedString(@"Name", @"filename table")];
   [[[remoteView tableColumnWithIdentifier:@"filename"] headerCell] setStringValue:NSLocalizedString(@"Name", @"filename table")];
   
+  /* menus */
+  mi = [mainMenu itemWithTitle:@"Local"];
+  menu = [mi submenu];
+  [menu setTitle:NSLocalizedString(@"Local", @"Local")];
+  mi = [menu itemWithTag:1];
+  [mi setTitle:NSLocalizedString(@"Rename...", @"Rename...")];
+  mi = [menu itemWithTag:2];
+  [mi setTitle:NSLocalizedString(@"New Folder...", @"New Folder....")];
+  mi = [menu itemWithTag:3];
+  [mi setTitle:NSLocalizedString(@"Delete", @"Delete")];
+  mi = [menu itemWithTag:4];
+  [mi setTitle:NSLocalizedString(@"Refresh", @"Refresh")];
+
+  mi = [mainMenu itemWithTitle:@"Remote"];
+  menu = [mi submenu];
+  [menu setTitle:NSLocalizedString(@"Remote", @"Remote")];
+  mi = [menu itemWithTag:1];
+  [mi setTitle:NSLocalizedString(@"Rename...", @"Rename...")];
+  mi = [menu itemWithTag:2];
+  [mi setTitle:NSLocalizedString(@"New Folder...", @"New Folder....")];
+  mi = [menu itemWithTag:3];
+  [mi setTitle:NSLocalizedString(@"Delete", @"Delete")];
+  mi = [menu itemWithTag:4];
+  [mi setTitle:NSLocalizedString(@"Refresh", @"Refresh")];
+
   /* log */
   [logWin setTitle:NSLocalizedString(@"Connection Log", @"Connection Log")];
 }
