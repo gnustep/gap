@@ -3,6 +3,15 @@
 #
 ifeq ($(GNUSTEP_MAKEFILES),)
  GNUSTEP_MAKEFILES := $(shell gnustep-config --variable=GNUSTEP_MAKEFILES 2>/dev/null)
+  ifeq ($(GNUSTEP_MAKEFILES),)
+    $(warning )
+    $(warning Unable to obtain GNUSTEP_MAKEFILES setting from gnustep-config!)
+    $(warning Perhaps gnustep-make is not properly installed,)
+    $(warning so gnustep-config is not in your PATH.)
+    $(warning )
+    $(warning Your PATH is currently $(PATH))
+    $(warning )
+  endif
 endif
 ifeq ($(GNUSTEP_MAKEFILES),)
  $(error You need to set GNUSTEP_MAKEFILES before compiling!)
@@ -13,7 +22,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.5
+VERSION = 0.6
 PACKAGE_NAME = FTP
 APP_NAME = FTP
 FTP_APPLICATION_ICON = FTP_icon_gs.tif
@@ -25,9 +34,9 @@ FTP_APPLICATION_ICON = FTP_icon_gs.tif
 FTP_RESOURCE_FILES = \
 Resources/FTP.gorm \
 Resources/GetName.gorm \
+Resources/FTP_icon_gs.tif \
 Resources/arrow_left.tiff \
-Resources/arrow_right.tiff \
-Resources/FTP_icon_gs.tif 
+Resources/arrow_right.tiff 
 
 
 #
@@ -35,24 +44,24 @@ Resources/FTP_icon_gs.tif
 #
 FTP_HEADER_FILES = \
 AppController.h \
-GetNameController.h \
-ftpclient.h \
-localclient.h \
-fileTable.h \
+client.h \
 fileElement.h \
-client.h
+fileTable.h \
+ftpclient.h \
+GetNameController.h \
+localclient.h
 
 #
-# Class files
+# Objective-C Class files
 #
 FTP_OBJC_FILES = \
 AppController.m \
-GetNameController.m \
-ftpclient.m \
-localclient.m \
-fileTable.m \
+client.m \
 fileElement.m \
-client.m
+fileTable.m \
+ftpclient.m \
+GetNameController.m \
+localclient.m
 
 #
 # Other sources
