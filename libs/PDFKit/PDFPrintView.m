@@ -16,11 +16,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <Foundation/NSException.h>
-#include <AppKit/NSGraphicsContext.h>
-#include <AppKit/DPSOperators.h>
-#include "PDFPrintView.h"
-#include "XPDFBridge.h"
+#import <Foundation/NSException.h>
+#import <AppKit/NSGraphicsContext.h>
+#import <AppKit/DPSOperators.h>
+#import "PDFPrintView.h"
+#import "XPDFBridge.h"
 
 /*
  * Non-Public methods.

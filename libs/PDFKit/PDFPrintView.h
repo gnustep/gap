@@ -19,8 +19,8 @@
 #ifndef _H_PDFPRINTVIEW
 #define _H_PDFPRINTVIEW
 
-#include <AppKit/NSView.h>
-#include <PDFKit/PDFDocument.h>
+#import <AppKit/NSView.h>
+#import <PDFKit/PDFDocument.h>
 
 /**
  * A view that could be used for printing PDF documents.

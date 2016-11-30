@@ -19,7 +19,7 @@
 #ifndef _H_PDF_DOCUMENT
 #define _H_PDF_DOCUMENT
 
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
 @class PDFSearchContext;
 @class PDFOutline;
