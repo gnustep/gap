@@ -1,4 +1,10 @@
-2015-11-30  Riccardo Mottola <rm@gnu.org>
+2016-11-30  Riccardo Mottola <rm@gnu.org>
+
+	* PDFFontManager.h
+	* PDFFontManager.m
+	Remove FontType from methods, since it is no longer needed.
+
+2016-11-30  Riccardo Mottola <rm@gnu.org>
 
 	* PDFFontManager.h
 	* PDFFontManager.m
@@ -6,13 +12,13 @@
 	* xpdf/bridge/XPDFBridge.h
 	Remove old DisplayFont calls since no longer in xpdf, adapt Bridge and DFontManager.
 
-2015-11-30  Riccardo Mottola <rm@gnu.org>
+2016-11-30  Riccardo Mottola <rm@gnu.org>
 
 	* configure
 	* configure.ac
 	Bump major release number, since we are getting API incompatible.
 
-2015-11-30  Riccardo Mottola <rm@gnu.org>
+2016-11-30  Riccardo Mottola <rm@gnu.org>
 
 	* configure
 	* configure.ac

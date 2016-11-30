@@ -34,24 +34,23 @@ static struct
 {
    NSString* name;
    NSString* fileName;
-   FontType  type;
 } FontTab[] =
 {
-   {@"Courier",               @"n022003l.pfb", Type1Font},
-   {@"Courier-Bold",          @"n022004l.pfb", Type1Font},
-   {@"Courier-BoldOblique",   @"n022024l.pfb", Type1Font},
-   {@"Courier-Oblique",       @"n022023l.pfb", Type1Font},
-   {@"Helvetica",             @"n019003l.pfb", Type1Font},
-   {@"Helvetica-Bold",        @"n019004l.pfb", Type1Font},
-   {@"Helvetica-BoldOblique", @"n019024l.pfb", Type1Font},
-   {@"Helvetica-Oblique",     @"n019023l.pfb", Type1Font},
-   {@"Symbol",                @"s050000l.pfb", Type1Font},
-   {@"Times-Bold",            @"n021004l.pfb", Type1Font},
-   {@"Times-BoldItalic",      @"n021024l.pfb", Type1Font},
-   {@"Times-Italic",          @"n021023l.pfb", Type1Font},
-   {@"Times-Roman",           @"n021003l.pfb", Type1Font},
-   {@"ZapfDingbats",          @"d050000l.pfb", Type1Font},
-   {nil, nil, UnknownFontType}
+   {@"Courier",               @"n022003l.pfb"},
+   {@"Courier-Bold",          @"n022004l.pfb"},
+   {@"Courier-BoldOblique",   @"n022024l.pfb"},
+   {@"Courier-Oblique",       @"n022023l.pfb"},
+   {@"Helvetica",             @"n019003l.pfb"},
+   {@"Helvetica-Bold",        @"n019004l.pfb"},
+   {@"Helvetica-BoldOblique", @"n019024l.pfb"},
+   {@"Helvetica-Oblique",     @"n019023l.pfb"},
+   {@"Symbol",                @"s050000l.pfb"},
+   {@"Times-Bold",            @"n021004l.pfb"},
+   {@"Times-BoldItalic",      @"n021024l.pfb"},
+   {@"Times-Italic",          @"n021023l.pfb"},
+   {@"Times-Roman",           @"n021003l.pfb"},
+   {@"ZapfDingbats",          @"d050000l.pfb"},
+   {nil, nil}
 };
 
 
@@ -86,7 +85,6 @@ static PDFFontManager* sharedPDFFontManager = nil;
          if (fontFile)
          {
             [self setFontFile: fontFile
-                       ofType: FontTab[i].type
                       forFont: FontTab[i].name];
          }
          else
@@ -157,7 +155,6 @@ static PDFFontManager* sharedPDFFontManager = nil;
 
 
 - (void) setFontFile: (NSString*)file 
-              ofType: (FontType)type
              forFont: (NSString*)fontName
 {
    NSUInteger i;

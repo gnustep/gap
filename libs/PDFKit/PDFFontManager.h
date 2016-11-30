@@ -28,14 +28,6 @@
 #import <Foundation/NSDictionary.h>
 
 
-/* Types of supported fonts.  */
-typedef enum
-{
-   TrueTypeFont,
-   Type1Font,
-   UnknownFontType
-} FontType;
-
 
 /* The font manager is mainly used to manage font substitutions
  * for the defaults fonts that are used during PDF rendering.
@@ -78,7 +70,6 @@ typedef enum
 
 /* Set a subsitute font for a particular font.  */
 - (void) setFontFile: (NSString*)file 
-              ofType: (FontType)type
              forFont: (NSString*)fontName;
 
 @end
