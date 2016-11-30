@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
- *               2012-2013 GNUstep Aplication Project
+ *               2012-2016 GNUstep Application Project
  *
  * Authors: Stefan Kleine Stegemann
  *          Riccardo Mottola
@@ -162,6 +162,7 @@ const char* PDFDoc_getMetaData(XPDFObject pdfDoc)
 
 SearchContext* PDFSearch_CreateSearchContext(XPDFObject pdfDoc)
 {
+  TextOutputControl *toControl;
    SearchContext* theContext = (SearchContext*)calloc(1, sizeof(SearchContext));
    if (!theContext)
    {
@@ -170,9 +171,11 @@ SearchContext* PDFSearch_CreateSearchContext(XPDFObject pdfDoc)
       return NULL;
    }
 
+   toControl = new TextOutputControl();
+   toControl->mode = textOutPhysLayout;
    theContext->pdfDoc = pdfDoc;
    theContext->currentPage = -1;
-   theContext->textOutputDevice = new TextOutputDev(NULL, gTrue, gFalse, gFalse);
+   theContext->textOutputDevice = new TextOutputDev(NULL, toControl, gFalse);
 
    if (!static_cast<TextOutputDev*>(theContext->textOutputDevice)->isOk())
    {
@@ -181,7 +184,7 @@ SearchContext* PDFSearch_CreateSearchContext(XPDFObject pdfDoc)
       PDFSearch_DestroySearchContext(theContext);
       return NULL;
    }
-
+   delete toControl;
    return theContext;
 }
 
@@ -206,6 +209,7 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
                        const char* text,
                        int* pageA,
                        int toPage,
+                       short wholeWord,
                        double *xMin,
                        double* yMin,
                        double* xMax,
@@ -226,6 +230,11 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
    int found = 0;
    int startPage = *pageA;
    GBool top;
+   GBool wholeWordBool;
+
+   wholeWordBool = gFalse;
+   if (wholeWord)
+     wholeWordBool = gTrue;
 
    TextOutputDev* textOut = static_cast<TextOutputDev*>(aSearchContext->textOutputDevice);
    if (!textOut->isOk())
@@ -271,12 +280,12 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
       if (page == startPage)
       {
          found =
-            textOut->findText(u, len, top, gTrue, gFalse, gFalse, gFalse, gFalse, xMin, yMin, xMax, yMax);
+           textOut->findText(u, len, top, gTrue, gFalse, gFalse, gFalse, gFalse, wholeWordBool, xMin, yMin, xMax, yMax);
       }
       else
       {
          found =
-            textOut->findText(u, len, gTrue, gTrue, gFalse, gFalse, gFalse, gFalse, xMin, yMin, xMax, yMax);
+           textOut->findText(u, len, gTrue, gTrue, gFalse, gFalse, gFalse, gFalse, wholeWordBool, xMin, yMin, xMax, yMax);
       }
 
       if (found)
@@ -301,12 +310,12 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
          if (page == startPage)
          {
             found =
-               textOut->findText(u, len, gTrue, gTrue, gFalse, gFalse, gFalse, gFalse, xMin, yMin, xMax, yMax);
+              textOut->findText(u, len, gTrue, gTrue, gFalse, gFalse, gFalse, gFalse, wholeWordBool, xMin, yMin, xMax, yMax);
          }
          else
          {
             found =
-               textOut->findText(u, len, gTrue, gFalse, gFalse, gFalse, gFalse, gFalse, xMin, yMin, xMax, yMax);
+              textOut->findText(u, len, gTrue, gFalse, gFalse, gFalse, gFalse, gFalse, wholeWordBool, xMin, yMin, xMax, yMax);
          }
 
          if (found)
@@ -377,11 +386,15 @@ int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func)
 {
   PDFDoc *doc = TO_PDFDoc(pdfDoc);
   TextOutputDev *textOut;
+  TextOutputControl *toControl;
   int got = 1;
+
+  toControl = new TextOutputControl();
+  toControl->mode = textOutPhysLayout;
   
   XPDF_AcquireLock();
 
-  textOut = new TextOutputDev((TextOutputFunc)func, (void *)1, gFalse, gFalse);
+  textOut = new TextOutputDev((TextOutputFunc)func, (void *)1, toControl);
 
   if (textOut->isOk()) {
     doc->displayPages(textOut, 1, doc->getNumPages(), 72, 72, 0,
@@ -390,7 +403,8 @@ int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func)
     got = 0;
   }
   
-  delete textOut; 
+  delete textOut;
+  delete toControl;
   XPDF_ReleaseLock();
   
   return got;  
@@ -405,11 +419,14 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
                      char** textA,
                      int* length)
 {
+   TextOutputControl *toControl;
    XPDF_AcquireLock();
 
    PDFDoc* doc = TO_PDFDoc(pdfDoc);
+   toControl = new TextOutputControl();
+   toControl->mode = textOutPhysLayout;
 
-   TextOutputDev* textOut = new TextOutputDev(NULL, gTrue, gFalse, gFalse);
+   TextOutputDev* textOut = new TextOutputDev(NULL, toControl, gFalse);
    if (!textOut->isOk())
    {
       delete textOut;
@@ -436,6 +453,7 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
    }
 
    delete textOut;
+   delete toControl;
 
    XPDF_ReleaseLock();
 }
@@ -612,65 +630,46 @@ int PDFOutline_GetTargetPage(XPDFObject outlineItem, XPDFObject pdfDoc)
  * Font Management.
  */
 
+/* deprecated */
 void PDFFont_AddDisplayFont(const char* fontName,
                             const char* fontFile,
                             DisplayFontType type)
 {
-   DisplayFontParam* dfp;
-
-   dfp = new DisplayFontParam(new GString(fontName),
-                              (type == T1DisplayFont ? displayFontT1 : displayFontTT));
-   switch (type)
-   {
-      case T1DisplayFont:
-      {
-         dfp->t1.fileName = new GString(fontFile);
-         break;
-      }
-      case TTDisplayFont:
-      {
-         dfp->tt.fileName = new GString(fontFile);
-         break;
-      }
-      default:
-      {
-         delete dfp;
-         fprintf(stderr, "invalid font type for %s\n", fontName); fflush(stderr);
-         return;
-      }
-   }
-
-   globalParams->addDisplayFont(dfp);
+  PDFFont_AddFontFile(fontName, fontFile);
 }
 
 
+void PDFFont_AddFontFile(const char* fontName,
+                         const char* fontFile)
+{
+  //   DisplayFontParam* dfp;
+  GString *gsFontName;
+  GString *gsFontFile;
+
+   gsFontName = new GString(fontName);
+   gsFontFile = new GString(fontFile);
+
+   globalParams->addFontFile(gsFontName, gsFontFile);
+}
+
+
+/* deprecated */
 void PDFFont_GetDisplayFont(const char* fontName,
                             const char** fontFile,
                             DisplayFontType* type)
 {
-   DisplayFontParam* dfp;
+  PDFFont_FindFontFile(fontName, fontFile);
+}
 
-   *fontFile = NULL;
-
-   dfp = globalParams->getDisplayFont(new GString(fontName));
-   if  (dfp)
-   {
-      switch (dfp->kind)
-      {
-         case displayFontT1:
-         {
-            *type = T1DisplayFont;
-            *fontFile = dfp->t1.fileName->getCString();
-            break;
-         }
-         case displayFontTT:
-         {
-            *type = TTDisplayFont;
-            *fontFile = dfp->tt.fileName->getCString();
-            break;
-         }
-      }
-   }
+void PDFFont_FindFontFile(const char* fontName,
+                          const char** fontFile)
+{
+  GString *gFontFile;
+  
+  *fontFile = NULL;
+  gFontFile = globalParams->findFontFile(new GString(fontName));
+  if (gFontFile)
+    *fontFile = gFontFile->getCString();
 }
 
 
@@ -775,7 +774,7 @@ void PDFRender_GetRGB(XPDFObject bitmap, unsigned char** buffer)
 #define TO_PSOutputDev(object) (static_cast<PSOutputDev*>(object))
 
 
-void OutputPS(void* stream, char* data, int len)
+void OutputPS(void* stream, const char* data, int len)
 {
    char* buffer = (char*)malloc((len + 1) * sizeof(char));
    memcpy(buffer, data, len);
@@ -791,8 +790,7 @@ XPDFObject PDFPS_CreateOutputDevice(XPDFObject pdfDoc, int firstPage, int lastPa
 {
    PSOutputDev* psDev = new PSOutputDev(OutputPS,
                                         NULL,
-                                        TO_PDFDoc(pdfDoc)->getXRef(),
-                                        TO_PDFDoc(pdfDoc)->getCatalog(),
+                                        TO_PDFDoc(pdfDoc),
                                         firstPage,
                                         lastPage,
                                         psModePS);

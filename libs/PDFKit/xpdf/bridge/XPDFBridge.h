@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *               2016 GNUstep Application Project
+ *
+ * Authors: Stefan Kleine Stegemann
+ *          Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,6 +132,7 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
                        const char* text,
                        int* pageA,
                        int toPage,
+                       short wholeWord,
                        double *xMin,
                        double* yMin,
                        double* xMax,
@@ -172,9 +177,13 @@ int PDFOutline_GetTargetPage(XPDFObject outlineItem, XPDFObject pdfDoc);
 void PDFFont_AddDisplayFont(const char* fontName,
                             const char* fontFile,
                             DisplayFontType type);
+void PDFFont_AddFontFile(const char* fontName,
+                         const char* fontFile);
 void PDFFont_GetDisplayFont(const char* fontName,
                             const char** fontFile,
                             DisplayFontType* type);
+void PDFFont_FindFontFile(const char* fontName,
+                          const char** fontFile);
 
 /*
  * Rendering

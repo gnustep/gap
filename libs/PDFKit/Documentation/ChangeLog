@@ -1,3 +1,12 @@
+2015-11-30  Riccardo Mottola <rm@gnu.org>
+
+	* configure
+	* configure.ac
+	* xpdf/bridge/XPDFBridge.cc
+	* xpdf/bridge/XPDFBridge.h
+	* xpdf-src
+	Upgrade to use xpdf 3.04 sources. New interfaces used, old DisplayFont parameters adapted (fallback provided).
+
 2015-11-25 Riccardo Mottola <rm@gnu.org>
 
 	* configure

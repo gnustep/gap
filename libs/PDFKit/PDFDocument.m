@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
- *           (C) 2013  The GNUstep Application Team
+ *           (C) 2013-2016  The GNUstep Application Team
  *
  * Authors: Stefan Kleine Stegemann
  *          Riccardo Mottola
@@ -287,6 +287,7 @@ usingSearchContext: (PDFSearchContext*)aSearchContext
                            [aText cString],
                            pageNum,
                            maxPage,
+                           0,
                            &xMin,
                            &yMin,
                            &xMax,
