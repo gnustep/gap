@@ -19,10 +19,10 @@
 #ifndef _H_PDFOUTLINE
 #define _H_PDFOUTLINE
 
-#include <Foundation/NSObject.h>
-#include <Foundation/NSString.h>
-#include <Foundation/NSArray.h>
-#include <Foundation/NSDictionary.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSString.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 
 /* Outline of a PDFDocument.  */

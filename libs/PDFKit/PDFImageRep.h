@@ -19,13 +19,13 @@
 #ifndef _H_PDF_IMAGE_REP
 #define _H_PDF_IMAGE_REP
 
-#include <Foundation/NSData.h>
-#include <Foundation/NSArray.h>
-#include <AppKit/NSImageRep.h>
-#include <AppKit/NSPasteboard.h>
-#include <AppKit/NSBitmapImageRep.h>
+#import <Foundation/NSData.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSImageRep.h>
+#import <AppKit/NSPasteboard.h>
+#import <AppKit/NSBitmapImageRep.h>
 
-#include <PDFKit/PDFDocument.h>
+#import <PDFKit/PDFDocument.h>
 
 
 /* The standard resolution (in dpi) that is used when a
