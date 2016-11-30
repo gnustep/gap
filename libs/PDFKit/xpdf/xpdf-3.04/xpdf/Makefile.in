@@ -670,6 +670,7 @@ pdfimages$(EXE): $(PDFIMAGES_OBJS) $(GOOLIBDIR)/$(LIBPREFIX)Goo.a
 #------------------------------------------------------------------------
 
 PDFKIT_OBJS = \
+	AcroForm.o \
 	Annot.o \
 	Array.o \
 	BuiltinFont.o \
@@ -681,6 +682,7 @@ PDFKIT_OBJS = \
 	Dict.o \
 	Error.o \
 	FontEncodingTables.o \
+	Form.o \
 	Function.o \
 	Gfx.o \
 	GfxFont.o \
@@ -710,7 +712,9 @@ PDFKIT_OBJS = \
 	TextString.o \
 	UnicodeMap.o \
 	UnicodeTypeTable.o \
-	XRef.o
+	XFAForm.o \
+	XRef.o \
+	Zoox.o
 
 compile_for_pdfkit: $(PDFKIT_OBJS)
 
