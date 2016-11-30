@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *               2016 GNUstep Application Project
+ *
+ * Authors: Stefan Kleine Stegemann
+ *          Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,9 +64,8 @@ static PDFFontManager* sharedPDFFontManager = nil;
  */
 @interface PDFFontManager(Private)
 - (NSString*) _findFontFile: (NSString*)fileName;
-- (BOOL) _displayFontForFont: (NSString*)fontName
-                    fileName: (NSString**)fileName
-                        type: (FontType*)type;
+- (BOOL) _findFileName: (NSString**)fileName
+               forFont: (NSString*)fontName;
 @end
 
 
@@ -141,11 +144,9 @@ static PDFFontManager* sharedPDFFontManager = nil;
 - (NSString*) fontFileFor: (NSString*)fontName
 {
    NSString* fileName;
-   FontType  type;
 
-   if ([self _displayFontForFont: fontName
-                        fileName: &fileName
-                            type: &type])
+   if ([self _findFileName: &fileName
+                   forFont: fontName])
    {
       return fileName;
    }
@@ -154,34 +155,18 @@ static PDFFontManager* sharedPDFFontManager = nil;
 }
 
 
-- (FontType) fontTypeFor: (NSString*)fontName
-{
-   NSString* fileName;
-   FontType  type;
-
-   if ([self _displayFontForFont: fontName
-                        fileName: &fileName
-                            type: &type])
-   {
-      return type;
-   }
-
-   return UnknownFontType;   
-}
-
 
 - (void) setFontFile: (NSString*)file 
               ofType: (FontType)type
              forFont: (NSString*)fontName
 {
-   int i;
+   NSUInteger i;
 
    NSAssert([[NSFileManager defaultManager] fileExistsAtPath: file],
             @"font file does no exist");
 
-   PDFFont_AddDisplayFont([fontName cString],
-                          [file cString],
-                          (type == Type1Font ? T1DisplayFont : TTDisplayFont));
+   PDFFont_AddFontFile([fontName cString],
+                       [file cString]);
 
    // ensure that the fontname is in the list of fonts
    for (i = 0; i < [fontNames count]; i++)
@@ -226,16 +211,13 @@ static PDFFontManager* sharedPDFFontManager = nil;
 }
 
 
-- (BOOL) _displayFontForFont: (NSString*)fontName
-                    fileName: (NSString**)fileName
-                        type: (FontType*)type
+- (BOOL) _findFileName: (NSString**)fileName
+               forFont: (NSString*)fontName
 {
    const char*      _fileName;
-   DisplayFontType  _type;
    
-   PDFFont_GetDisplayFont([fontName cString],
-                          &_fileName,
-                          &_type);
+   PDFFont_FindFontFile([fontName cString],
+                          &_fileName);
 
    if (_fileName == NULL)
    {
@@ -243,7 +225,6 @@ static PDFFontManager* sharedPDFFontManager = nil;
    }
 
    *fileName = [NSString stringWithCString: _fileName];
-   *type = (_type == T1DisplayFont ? Type1Font : TrueTypeFont);
 
    return YES;
 }

@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *               2016 GNUstep Application Project
+ *
+ * Authors: Stefan Kleine Stegemann
+ *          Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,10 +75,6 @@ typedef enum
  * with the given name.  Returns nil if no substitute font has
  * been defined.  */
 - (NSString*) fontFileFor: (NSString*)fontName;
-
-/* Get the type of the substitute font for the font with the
- * given name.  */
-- (FontType) fontTypeFor: (NSString*)fontName;
 
 /* Set a subsitute font for a particular font.  */
 - (void) setFontFile: (NSString*)file 

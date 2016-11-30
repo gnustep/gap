@@ -1,5 +1,13 @@
 2015-11-30  Riccardo Mottola <rm@gnu.org>
 
+	* PDFFontManager.h
+	* PDFFontManager.m
+	* xpdf/bridge/XPDFBridge.cc
+	* xpdf/bridge/XPDFBridge.h
+	Remove old DisplayFont calls since no longer in xpdf, adapt Bridge and DFontManager.
+
+2015-11-30  Riccardo Mottola <rm@gnu.org>
+
 	* configure
 	* configure.ac
 	Bump major release number, since we are getting API incompatible.
