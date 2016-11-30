@@ -2,6 +2,12 @@
 
 	* configure
 	* configure.ac
+	Bump major release number, since we are getting API incompatible.
+
+2015-11-30  Riccardo Mottola <rm@gnu.org>
+
+	* configure
+	* configure.ac
 	* xpdf/bridge/XPDFBridge.cc
 	* xpdf/bridge/XPDFBridge.h
 	* xpdf-src
