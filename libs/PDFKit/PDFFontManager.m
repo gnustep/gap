@@ -20,11 +20,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <PDFKit/PDFFontManager.h>
+#import <PDFKit/PDFFontManager.h>
 
-#include <Foundation/NSBundle.h>
-#include <Foundation/NSException.h>
-#include <Foundation/NSFileManager.h>
+#import <Foundation/NSBundle.h>
+#import <Foundation/NSException.h>
+#import <Foundation/NSFileManager.h>
 
 #include "XPDFBridge.h"
 

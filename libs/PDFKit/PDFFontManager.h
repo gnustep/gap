@@ -23,9 +23,9 @@
 #ifndef _H_PDF_FONT_MANAGER
 #define _H_PDF_FONT_MANAGER
 
-#include <Foundation/NSObject.h>
-#include <Foundation/NSArray.h>
-#include <Foundation/NSDictionary.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 
 /* Types of supported fonts.  */
