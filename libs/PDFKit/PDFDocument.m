@@ -168,7 +168,7 @@ static NSMutableDictionary *documentInfo = nil;
    {
       if (([self pageRotate: pageNum] == 90) || ([self pageRotate: pageNum] == 180))
       {
-         float height = size.height;
+         CGFloat height = size.height;
          size.height = size.width;
          size.width  = height;
       }
