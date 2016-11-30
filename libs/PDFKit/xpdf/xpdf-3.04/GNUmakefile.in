@@ -62,7 +62,7 @@ all: compile
 configure: Makefile
 
 Makefile:
-	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='@LDFLAGS@' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper \
+	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='@LDFLAGS@' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper-library \
 	    --with-freetype2-library=$(LIB_FREETYPE_LIBS) \
 	    --with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
 
