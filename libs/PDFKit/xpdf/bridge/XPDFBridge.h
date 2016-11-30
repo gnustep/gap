@@ -174,14 +174,8 @@ int PDFOutline_GetTargetPage(XPDFObject outlineItem, XPDFObject pdfDoc);
 /*
  * Font Management
  */
-void PDFFont_AddDisplayFont(const char* fontName,
-                            const char* fontFile,
-                            DisplayFontType type);
 void PDFFont_AddFontFile(const char* fontName,
                          const char* fontFile);
-void PDFFont_GetDisplayFont(const char* fontName,
-                            const char** fontFile,
-                            DisplayFontType* type);
 void PDFFont_FindFontFile(const char* fontName,
                           const char** fontFile);
 

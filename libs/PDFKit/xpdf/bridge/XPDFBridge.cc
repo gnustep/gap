@@ -630,14 +630,6 @@ int PDFOutline_GetTargetPage(XPDFObject outlineItem, XPDFObject pdfDoc)
  * Font Management.
  */
 
-/* deprecated */
-void PDFFont_AddDisplayFont(const char* fontName,
-                            const char* fontFile,
-                            DisplayFontType type)
-{
-  PDFFont_AddFontFile(fontName, fontFile);
-}
-
 
 void PDFFont_AddFontFile(const char* fontName,
                          const char* fontFile)
@@ -652,14 +644,6 @@ void PDFFont_AddFontFile(const char* fontName,
    globalParams->addFontFile(gsFontName, gsFontFile);
 }
 
-
-/* deprecated */
-void PDFFont_GetDisplayFont(const char* fontName,
-                            const char** fontFile,
-                            DisplayFontType* type)
-{
-  PDFFont_FindFontFile(fontName, fontFile);
-}
 
 void PDFFont_FindFontFile(const char* fontName,
                           const char** fontFile)
