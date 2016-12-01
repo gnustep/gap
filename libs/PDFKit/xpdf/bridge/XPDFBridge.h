@@ -71,7 +71,7 @@ typedef struct SearchContext
    int        currentPage;
 } SearchContext;
 
-typedef void (*infoDictFunc)(char *key, char *value);
+typedef void (*infoDictFunc)(char *key, char *value, void *infoDict);
 
 
 /*
@@ -143,7 +143,7 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
 /*
  * Access content
  */
-  int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func, void *ms);
+int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func, void *ms);
 
 void PDFUtil_GetText(XPDFObject pdfDoc,
                      int page,
@@ -154,7 +154,7 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
                      char** textA,
                      int* length);
 
-int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc);
+int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *infoDict);
 
 /*
  * Outline

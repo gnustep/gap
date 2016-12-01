@@ -458,7 +458,7 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
    XPDF_ReleaseLock();
 }
 
-int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc)
+int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *infoDict)
 {
   UnicodeMap *uMap;
   PDFDoc *doc;
@@ -491,7 +491,7 @@ int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc)
               GString *str = obj.getString();
               char *cStr = str->getCString();
 
-              (*dictfunc)(key, cStr);
+              (*dictfunc)(key, cStr, infoDict);
             }
           obj.free();
         }

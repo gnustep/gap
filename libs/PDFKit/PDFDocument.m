@@ -28,8 +28,6 @@
 
 #define CONTENT_SIZE 262144
 
-static NSMutableDictionary *documentInfo = nil;
-
 
 @interface PDFDocRefDelegate : NSObject <CountingRefDelegate>
 {
@@ -353,12 +351,13 @@ static void outputToString(void *stream, char *text, int len)
   return textContents;
 }
 
-static void getDictPair(char *key, char *value) 
+static void getDictPair(char *key, char *value, void *iD) 
 {
   if (key != NULL && strlen(key) && value != NULL && strlen(value)) {
     NSString *keystr = nil;
     NSString *valuestr = nil;
     BOOL pairok = YES;
+    NSMutableDictionary *documentInfo = (NSMutableDictionary *)iD;    
     
     NS_DURING
 	    {
@@ -384,7 +383,7 @@ static void getDictPair(char *key, char *value)
 
   [documentInfo removeAllObjects];
 
-  if (PDFUtil_GetInfo([pdfDocRef pointer], getDictPair) == 0) {
+  if (PDFUtil_GetInfo([pdfDocRef pointer], getDictPair, documentInfo) == 0) {
     DESTROY (documentInfo);
   } 
 
