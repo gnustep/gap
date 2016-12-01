@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
+ *           (C) 2016  The GNUstep Application Team
+ *
+ * Authors: Stefan Kleine Stegemann
+ *          Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +37,7 @@
 {
    id          pdfDocRef;
    PDFOutline* outline;
+   NSMutableString *textContents;
 }
 
 - (id) init;

@@ -382,7 +382,7 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
  * Accessing the pdf content.
  */
 
-int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func)
+int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func, void *ms)
 {
   PDFDoc *doc = TO_PDFDoc(pdfDoc);
   TextOutputDev *textOut;
@@ -394,7 +394,7 @@ int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func)
   
   XPDF_AcquireLock();
 
-  textOut = new TextOutputDev((TextOutputFunc)func, (void *)1, toControl);
+  textOut = new TextOutputDev((TextOutputFunc)func, (void *)ms, toControl);
 
   if (textOut->isOk()) {
     doc->displayPages(textOut, 1, doc->getNumPages(), 72, 72, 0,
