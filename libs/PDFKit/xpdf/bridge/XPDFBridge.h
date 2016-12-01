@@ -143,7 +143,7 @@ int PDFSearch_FindText(SearchContext* aSearchContext,
 /*
  * Access content
  */
-int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func);
+  int PDFUtil_GetAllText(XPDFObject pdfDoc, void *func, void *ms);
 
 void PDFUtil_GetText(XPDFObject pdfDoc,
                      int page,

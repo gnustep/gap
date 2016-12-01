@@ -28,7 +28,6 @@
 
 #define CONTENT_SIZE 262144
 
-static NSMutableString *textContents = nil;
 static NSMutableDictionary *documentInfo = nil;
 
 
@@ -333,7 +332,10 @@ usingSearchContext: (PDFSearchContext*)aSearchContext
 
 static void outputToString(void *stream, char *text, int len) 
 {
-  [textContents appendString: [NSString stringWithUTF8String: text]];
+  NSMutableString *ms;
+
+  ms = (NSMutableString *)stream;
+  [ms appendString: [NSString stringWithUTF8String: text]];
 }
 
 - (NSString *)getAllText
@@ -342,7 +344,7 @@ static void outputToString(void *stream, char *text, int len)
   
   [textContents setString: @""];
   
-  if (PDFUtil_GetAllText([pdfDocRef pointer], outputToString) == 0) {
+  if (PDFUtil_GetAllText([pdfDocRef pointer], outputToString, textContents) == 0) {
     DESTROY (textContents);
   } 
 
