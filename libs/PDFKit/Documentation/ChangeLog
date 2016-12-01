@@ -4,6 +4,14 @@
 	* PDFDocument.m
 	* xpdf/bridge/XPDFBridge.cc
 	* xpdf/bridge/XPDFBridge.h
+	Transform static variable documentInfo in an IVAR and add extra argument passing to the bridge functions.
+
+2016-12-01  Riccardo Mottola <rm@gnu.org>
+
+	* PDFDocument.h
+	* PDFDocument.m
+	* xpdf/bridge/XPDFBridge.cc
+	* xpdf/bridge/XPDFBridge.h
 	Transform static variable textContents in an IVAR and add extra argument passing to the bridge functions.
 
 2016-11-30  Riccardo Mottola <rm@gnu.org>

@@ -38,6 +38,7 @@
    id          pdfDocRef;
    PDFOutline* outline;
    NSMutableString *textContents;
+   NSMutableDictionary *documentInfo;
 }
 
 - (id) init;
