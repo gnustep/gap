@@ -4,7 +4,7 @@
 # Compile the PDFKit Framework.
 #
 # Copyright (C) 2003 Stefan Kleine Stegemann <stefan@wms-network.de>
-#	        2010-2011 Riccardo Mottola
+#	        2010-2016 Riccardo Mottola
 #
 # This Makefile is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 #
 
 include $(GNUSTEP_MAKEFILES)/common.make
-include Version
 include xpdf-src
 
 LIB_FREETYPE_LIBS=@lib_freetype_libs@
