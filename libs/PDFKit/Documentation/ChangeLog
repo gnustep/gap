@@ -1,3 +1,9 @@
+2016-12-02  Riccardo Mottola <rm@gnu.org>
+
+	* PDFDocument.h
+	* PDFDocument.m
+	Provide pageCount and wrap countPages around it for compatibility.
+
 2016-12-01  Riccardo Mottola <rm@gnu.org>
 
 	* PDFDocument.h

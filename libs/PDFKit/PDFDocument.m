@@ -185,11 +185,15 @@
 
 - (int) countPages
 {
-   NSAssert(![pdfDocRef isNULL], @"no document");
-   
-   return PDFDoc_getNumPages([pdfDocRef pointer]);
+   return (int) [self pageCount];
 }
 
+- (NSUInteger) pageCount
+{
+   NSAssert(![pdfDocRef isNULL], @"no document");
+   
+   return (NSUInteger) PDFDoc_getNumPages([pdfDocRef pointer]);  
+}
 
 - (NSString*)metaData
 {
