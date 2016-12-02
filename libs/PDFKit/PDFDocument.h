@@ -64,7 +64,9 @@
 - (NSSize) pageSize: (int)pageNum considerRotation: (BOOL)rotation;
 - (int) pageRotate: (int)pageNum;
 
+/** deprecated since different from Apple */
 - (int) countPages;
+- (NSUInteger) pageCount;
 
 /** Returns nil if no MetaData is available
  *  otherwise an autoreleases string object.  */
