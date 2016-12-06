@@ -57,6 +57,7 @@ void XPDF_Initialize(double _dpi)
    globalParams = new GlobalParams(cfgFileName);
    dpi          = _dpi;
 
+   globalParams->setTextEncoding("UTF-8");
    initialized = 1;
 }
 
