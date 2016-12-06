@@ -337,7 +337,9 @@ static void outputToString(void *stream, char *text, int len)
   NSMutableString *ms;
 
   ms = (NSMutableString *)stream;
-  [ms appendString: [NSString stringWithUTF8String: text]];
+  [ms appendString: [[[NSString alloc] initWithBytes:text
+					      length:(NSUInteger)len
+					    encoding:NSUTF8StringEncoding] autorelease]];
 }
 
 - (NSString *)getAllText

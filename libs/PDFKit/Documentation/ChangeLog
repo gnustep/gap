@@ -3,6 +3,10 @@
 	* xpdf/bridge/XPDFBridge.cc
 	Set string encoding to UTF-8
 
+	* PDFDocument.m
+	Allocate text string using length and not null term.
+
+
 2016-12-02  Riccardo Mottola <rm@gnu.org>
 
 	* PDFDocument.h
