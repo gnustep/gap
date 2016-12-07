@@ -56,9 +56,6 @@ else
     freebsd*)
     	lib_freetype_libs=/usr/local/lib
       ;;
-    netbsd*)
-    	lib_freetype_libs=/usr/pkg/lib
-      ;;
     *)	
       lib_freetype_libs=`freetype-config --prefix`/lib
       ;;
@@ -71,9 +68,6 @@ else
   case "$target_os" in
     freebsd*)
     	lib_freetype_add_includes=/usr/local/include
-      ;;
-    netbsd*)
-	lib_freetype_add_includes=/usr/pkg/include
       ;;
     openbsd*)
 	lib_freetype_add_includes=/usr/X11R6/include
@@ -90,9 +84,6 @@ else
   case "$target_os" in
     freebsd*)
     	lib_freetype_includes=/usr/local/include/freetype2
-      ;;
-    netbsd*)
-    	lib_freetype_includes=/usr/pkg/include/freetype2
       ;;
     openbsd*)
 	lib_freetype_includes=/usr/X11R6/include/freetype2
