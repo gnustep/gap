@@ -21,9 +21,6 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 include xpdf-src
 
-LIB_FREETYPE_LIBS=@lib_freetype_libs@
-LIB_FREETYPE_INCLUDES=@lib_freetype_includes@
-
 PACKAGE_NEEDS_CONFIGURE = YES
 
 FRAMEWORK_NAME=PDFKit
@@ -61,14 +58,16 @@ PDFKit_HAS_RESOURCE_BUNDLE = yes
 PDFKit_RESOURCE_FILES = \
 	Fonts/*
 
+LIB_FREETYPE_LDFLAGS := $(shell freetype-config --libs)
+LIB_FREETYPE_CFLAGS := $(shell freetype-config --cflags)
+
+export LIB_FREETYPE_LDFLAGS
+export LIB_FREETYPE_CFLAGS
+
 ADDITIONAL_INCLUDE_DIRS = -Ixpdf/bridge
 ADDITIONAL_OBJCFLAGS = -Wall
-ADDITIONAL_LDFLAGS += -L$(LIB_FREETYPE_LIBS)
-ADDITIONAL_LDFLAGS += $(XPDF_OBJ_FILES) -lfreetype -lm
-
-ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
-ADDITIONAL_LDFLAGS += -Wl,-rpath=$(LIB_FREETYPE_LIBS)
-endif
+ADDITIONAL_LDFLAGS += $(LIB_FREETYPE_LDFLAGS)
+ADDITIONAL_LDFLAGS += $(XPDF_OBJ_FILES)  -lm
 
 # Use C++ to link library
 LD=@CXX@

@@ -23,21 +23,16 @@ include $(GNUSTEP_MAKEFILES)/common.make
 CC=@CC@
 CXX=@CXX@
 
-LIB_FREETYPE_LIBS=@lib_freetype_libs@
-LIB_FREETYPE_INCLUDES=@lib_freetype_includes@
-LIB_FREETYPE_ADD_INCLUDES=@lib_freetype_add_includes@
+LDFLAGS := $(LIB_FREETYPE_LDFLAGS)
+export LDFLAGS
 
 # Pick up C++ flags set by gnustep-make in CCFLAGS
-CXXFLAGS := $(CCFLAGS) $(CXXFLAGS)
+CXXFLAGS := $(CCFLAGS) $(CXXFLAGS) 
 
-CFLAGS := $(CFLAGS) -fPIC
-CXXFLAGS := $(CXXFLAGS) -fPIC
+CFLAGS := $(CFLAGS) -fPIC $(LIB_FREETYPE_CFLAGS)
+CXXFLAGS := $(CXXFLAGS) -fPIC $(LIB_FREETYPE_CFLAGS)
 
 CXXFLAGS := $(CXXFLAGS) -Wno-write-strings
-ifneq ($(LIB_FREETYPE_ADD_INCLUDES),)
-  CPPFLAGS := $(CPPFLAGS) -I$(LIB_FREETYPE_ADD_INCLUDES)
-  CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_ADD_INCLUDES)
-endif
 
 ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 CXXFLAGS := $(CXXFLAGS) -I$(LIB_FREETYPE_INCLUDES)
@@ -55,16 +50,14 @@ endif
 
 export CFLAGS CXXFLAGS
 
-default: all
+defaut: all
 
 all: compile
 
 configure: Makefile
 
 Makefile:
-	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='@LDFLAGS@' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper-library \
-	    --with-freetype2-library=$(LIB_FREETYPE_LIBS) \
-	    --with-freetype2-includes=$(LIB_FREETYPE_INCLUDES) 
+	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper-library 
 
 compile: configure
 	$(MAKE) -f Makefile pdfkit
