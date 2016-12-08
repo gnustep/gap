@@ -1,5 +1,11 @@
 2016-12-08  Riccardo Mottola <rm@gnu.org>
 
+	* configure
+	* configure.ac
+	Remove freetype options, makefiles now use freetype-config
+
+2016-12-08  Riccardo Mottola <rm@gnu.org>
+
 	* GNUmakefile.in
 	* xpdf/xpdf-3.04/GNUmakefile.in
 	Rely on freetype-config CFLAGS and LDFLAGS instead of manually building directories, fixes NetBSD
