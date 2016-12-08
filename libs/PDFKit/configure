@@ -583,9 +583,6 @@ PACKAGE_URL=''
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
-lib_freetype_add_includes
-lib_freetype_includes
-lib_freetype_libs
 ac_ct_CXX
 CXXFLAGS
 CXX
@@ -649,9 +646,6 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
-with_freetype2_library
-with_freetype2_includes
-with_freetype2_add_includes
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1273,16 +1267,6 @@ if test -n "$ac_init_help"; then
      short | recursive ) echo "Configuration of PDFKit 1.0.0:";;
    esac
   cat <<\_ACEOF
-
-Optional Packages:
-  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
-  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-freetype2-library=DIR
-                      use freetype2 library (FreeType2 font rasterizer - version 2.0.5+)
-  --with-freetype2-includes=DIR
-                      set directory for freetype2 headers
-  --with-freetype2-add-includes=DIR
-                      set directory for freetype2 additional headers
 
 Some influential environment variables:
   CC          C compiler command
@@ -3012,84 +2996,6 @@ ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
-
-
-#--------------------------------------------------------------------
-# freetype2
-#--------------------------------------------------------------------
-
-# Check whether --with-freetype2_library was given.
-if test "${with_freetype2_library+set}" = set; then :
-  withval=$with_freetype2_library;
-else
-  with_freetype2_library=
-fi
-
-
-
-# Check whether --with-freetype2_includes was given.
-if test "${with_freetype2_includes+set}" = set; then :
-  withval=$with_freetype2_includes;
-else
-  with_freetype2_includes=
-fi
-
-
-
-# Check whether --with-freetype2_add_includes was given.
-if test "${with_freetype2_add_includes+set}" = set; then :
-  withval=$with_freetype2_add_includes;
-else
-  with_freetype2_add_includes=
-fi
-
-
-if test -n "$with_freetype2_library"; then
-  lib_freetype_libs=$with_freetype2_library
-else
-  case "$target_os" in
-    freebsd*)
-    	lib_freetype_libs=/usr/local/lib
-      ;;
-    *)
-      lib_freetype_libs=`freetype-config --prefix`/lib
-      ;;
-  esac
-fi
-
-if test -n "$with_freetype2_add_includes"; then
-  lib_freetype_add_includes=$with_freetype2_add_includes
-else
-  case "$target_os" in
-    freebsd*)
-    	lib_freetype_add_includes=/usr/local/include
-      ;;
-    openbsd*)
-	lib_freetype_add_includes=/usr/X11R6/include
-      ;;
-    *)
-      lib_freetype_add_includes=`freetype-config --prefix`/include
-      ;;
-  esac
-fi
-
-if test -n "$with_freetype2_includes"; then
-  lib_freetype_includes=$with_freetype2_includes
-else
-  case "$target_os" in
-    freebsd*)
-    	lib_freetype_includes=/usr/local/include/freetype2
-      ;;
-    openbsd*)
-	lib_freetype_includes=/usr/X11R6/include/freetype2
-       ;;
-    *)
-      lib_freetype_includes=`freetype-config --prefix`/include/freetype2
-      ;;
-  esac
-fi
-
-
 
 
 
