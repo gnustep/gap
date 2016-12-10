@@ -3,7 +3,7 @@
                           -------------------
     begin                : Sat Jan 18 01:31:16 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2015 The GNUstep Application Project
+                         : (C) 2015-2016 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -103,8 +103,8 @@ PreferencesController *_PREFS_ = nil;
 @implementation GNUstepOutput
 - init
 {
-	if (!(self = [super init])) return nil;
-	
+  if (self = [super init])
+    {
 	[NSApplication sharedApplication]; // Make sure NSApp is allocated..
 	
 	if (![NSBundle loadNibNamed: @"GNUstepOutput" owner: self])
@@ -132,8 +132,8 @@ PreferencesController *_PREFS_ = nil;
 	[[ColorPreferencesController new] autorelease];
 	[[FontPreferencesController new] autorelease];
 	[[BundlePreferencesController new] autorelease];
-	
-	return self;
+    }
+  return self;
 }
 - (void)dealloc
 {
