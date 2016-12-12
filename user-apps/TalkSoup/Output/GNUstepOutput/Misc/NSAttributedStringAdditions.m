@@ -3,7 +3,7 @@
                           -------------------
     begin                : Mon Apr 28 06:48:06 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2015 The GNUstep Application Group
+                         : (C) 2015-2016 The GNUstep Application Group
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -239,6 +239,7 @@ NSString *InverseTypeBackground = @"InverseTypeBackground";
 
 	[chatFont release];
 	[boldFont release];
+	[paraStyle release];
 	return aResult;
 }
 - (void)updateAttributedStringForGNUstepOutputPreferences: (NSString *)aKey

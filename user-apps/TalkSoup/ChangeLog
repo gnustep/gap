@@ -1,6 +1,7 @@
 2016-12-12 Riccardo Mottola <rm@gnu.org>
 
 	* Output/GNUstepOutput/Views/InputControllerTextView.m
+	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
 	Fix memory leak.
 
 2016-12-12 Riccardo Mottola <rm@gnu.org>
