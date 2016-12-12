@@ -24,7 +24,7 @@
 @class NSAttributedString;
 
 @interface ConnectionController (InFilter)
-- newConnection: (id)aConnection withNickname: (NSAttributedString *)aNick
+- setupNewConnection: (id)aConnection withNickname: (NSAttributedString *)aNick
    sender: aPlugin;
 
 - lostConnection: (id)aConnection withNickname: (NSAttributedString *)aNick 

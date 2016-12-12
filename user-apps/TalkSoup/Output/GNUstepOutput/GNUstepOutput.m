@@ -199,7 +199,7 @@ PreferencesController *_PREFS_ = nil;
 {
 	return [NSArray arrayWithArray: connectionControllers];
 }
-- newConnection: (id)connection withNickname: (NSAttributedString *)aNick
+- setupNewConnection: (id)connection withNickname: (NSAttributedString *)aNick
    sender: aPlugin
 {
 	id controller;
@@ -222,7 +222,7 @@ PreferencesController *_PREFS_ = nil;
 	NSMapInsert(connectionToConnectionController, connection, controller);
 	NSMapInsert(connectionToConnectionController, controller, connection);
 
-	[controller newConnection: connection withNickname: aNick
+	[controller setupNewConnection: connection withNickname: aNick
 	  sender: aPlugin];
 	
 	return self;

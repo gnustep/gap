@@ -208,7 +208,7 @@
 	aTransport = [[[NetclassesInputSendThenDieTransport 
 	  alloc] initWithTransport: aTransport] autorelease];
 	x = [super connectionEstablished: aTransport];
-	[_TS_ newConnection: self 
+	[_TS_ setupNewConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
 	return x;
