@@ -2,6 +2,7 @@
 
 	* Output/GNUstepOutput/Views/InputControllerTextView.m
 	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
 	Fix memory leak.
 
 2016-12-12 Riccardo Mottola <rm@gnu.org>

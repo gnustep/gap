@@ -618,14 +618,16 @@
 	}
 	
 	if (!(cont = [nameToBoth objectForKey: lo]))
-	{
-		return;
-	}
+          {
+            [label release];
+            return;
+          }
 	
 	if (!(mast = [nameToMasterController objectForKey: lo]))
-	{
-		return;
-	}
+          {
+            [label release];
+            return;
+          }
 	
 	[label autorelease];
 
