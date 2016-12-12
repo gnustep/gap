@@ -325,7 +325,7 @@ static void handle_cf_events(CFSocketRef s, CFSocketCallBackType callbackType,
 				}
 				else
 				{
-					[object newConnection];
+					[object setupNewConnection];
 				}
 				break;
 			case ET_WDESC:
