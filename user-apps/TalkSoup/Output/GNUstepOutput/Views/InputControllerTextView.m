@@ -101,5 +101,7 @@ static NSEvent *newline_event = nil;
 
 	if (aRange.length)
 		[super insertText: [someText substringWithRange: aRange]];
+  
+  [components release];
 }
 @end
