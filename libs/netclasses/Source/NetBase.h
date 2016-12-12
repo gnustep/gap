@@ -3,7 +3,7 @@
                           -------------------
     begin                : Fri Nov  2 01:19:16 UTC 2001
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2015 The GAP Team
+                         : (C) 2015-2016 The GAP Team
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -118,16 +118,19 @@ NSAutoreleasePool *(X) = [NSAutoreleasePool new]
  * class should implement the [(NetObject)] protocol.
  */
 - setNetObject: (Class)aClass;
+
 /**
  * Called when the object has [NetApplication-disconnectObject:] called on it.
  */
 - (void)connectionLost;
+
 /**
  * Called when a new connection has been detected by [NetApplication].
  * The port should should use this new connection to instantiate a object
  * of the class set by -setNetObject:.
  */
-- (id <NetPort>)newConnection;
+- (id <NetPort>)setupNewConnection;
+
 /**
  * Returns the low-level file descriptor.
  */
