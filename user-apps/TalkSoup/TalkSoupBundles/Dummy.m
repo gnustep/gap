@@ -3,6 +3,7 @@
                           -------------------
     begin                : Sat Apr  5 22:03:18 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
+                           (C) 2016 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -359,7 +360,7 @@
    withNickname: (NSAttributedString *)aNick
    sender: aPlugin { return nil; }
 
-- newNickNeededWhileRegisteringOnConnection: (id)connection 
+- needNewNickWhileRegisteringOnConnection: (id)connection 
    withNickname: (NSAttributedString *)aNick
    sender: aPlugin 
    { return nil; }

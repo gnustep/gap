@@ -3,7 +3,7 @@
                           -------------------
     begin                : Fri Feb 21 00:51:41 CST 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013-2015 The GNustep Application Project
+                         : (C) 2013-2016 The GNustep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -431,9 +431,9 @@
 	return self;
 }
 
-- (NetclassesConnection *)newNickNeededWhileRegistering
+- (NetclassesConnection *)needNewNickWhileRegistering
 {
-	[_TS_ newNickNeededWhileRegisteringOnConnection: self 
+	[_TS_ needNewNickWhileRegisteringOnConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
 	
