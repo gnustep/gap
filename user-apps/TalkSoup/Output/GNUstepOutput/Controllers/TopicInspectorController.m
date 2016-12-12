@@ -3,7 +3,7 @@
                           -------------------
     begin                : Thu May  8 22:40:13 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2015 The GNUstep Application Project
+                         : (C) 2015-2016 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -144,7 +144,6 @@
 	  @protocol(ContentControllerChannelController)]) 
 	{
 		content = [aNotification object];
-		userInfo = [aNotification userInfo];
 		view = tempView;
 		connection = [content connectionController];
 		name = [content presentationalNameForName: 
