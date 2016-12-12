@@ -242,7 +242,7 @@
 
 - (NSString *)identification { return nil; }
 
-- newConnection: (id)connection 
+- setupNewConnection: (id)connection 
    withNickname: (NSAttributedString *)aNick
    sender: aPlugin { return nil; }
 

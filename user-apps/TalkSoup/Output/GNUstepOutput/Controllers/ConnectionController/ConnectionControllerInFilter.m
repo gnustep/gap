@@ -45,7 +45,7 @@
 #define MARK [NSNull null]
 
 @implementation ConnectionController (InFilter)
-- newConnection: (id)aConnection withNickname: (NSAttributedString *)aNick
+- setupNewConnection: (id)aConnection withNickname: (NSAttributedString *)aNick
    sender: aPlugin
 {
 	if (connection)

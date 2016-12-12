@@ -298,7 +298,7 @@
 @end
 
 @protocol TalkSoupInFilterProtocol < TalkSoupPluginProtocol >
-- newConnection: (id)connection 
+- setupNewConnection: (id)connection 
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin;
 

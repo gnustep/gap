@@ -100,7 +100,7 @@
 	
 	return self;
 }	
-- newConnection: (id)aConnection withNickname: (NSAttributedString *)aNick
+- setupNewConnection: (id)aConnection withNickname: (NSAttributedString *)aNick
    sender: aPlugin
 {
 	id tmp, invoc;
@@ -116,7 +116,7 @@
 		[invoc setArgument: &tmp atIndex: 3];
 	}		
 	
-	[super newConnection: aConnection withNickname: aNick sender: aPlugin];
+	[super setupNewConnection: aConnection withNickname: aNick sender: aPlugin];
 	
 	return self;
 }

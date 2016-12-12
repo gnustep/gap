@@ -3,6 +3,17 @@
 	* TalkSoupBundles/Dummy.m
 	* TalkSoupBundles/TalkSoupProtocols.h
 	* Input/NetclassesInput/main.m
+	* Output/GNUstepOutput/GNUstepOutput.m
+	* Output/GNUstepOutput/Controllers/ServerListConnectionController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.h
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	rename newConnection to setupNewConnection to aid static analyzer
+
+2016-12-12 Riccardo Mottola <rm@gnu.org>
+
+	* TalkSoupBundles/Dummy.m
+	* TalkSoupBundles/TalkSoupProtocols.h
+	* Input/NetclassesInput/main.m
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.h
 	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
 	Rename newNickNeededWhileRegisteringOnConnection into needNewNickWhileRegisteringOnConnection to help static analyzer, since it is not a new object.
