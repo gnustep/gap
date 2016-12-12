@@ -1,5 +1,10 @@
 2016-12-12 Riccardo Mottola <rm@gnu.org>
 
+	* Output/GNUstepOutput/Views/InputControllerTextView.m
+	Fix memory leak.
+
+2016-12-12 Riccardo Mottola <rm@gnu.org>
+
 	* TalkSoupBundles/Dummy.m
 	* TalkSoupBundles/TalkSoupProtocols.h
 	* Input/NetclassesInput/main.m
