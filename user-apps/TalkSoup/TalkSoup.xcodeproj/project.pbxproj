@@ -1412,7 +1412,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 85235EEE1A9613F600836C2E /* Build configuration list for PBXProject "TalkSoup" */;
 			compatibilityVersion = "Xcode 2.4";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
