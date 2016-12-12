@@ -290,9 +290,9 @@ static id connection_holder = nil;
 	delegate = aDelegate;
 	return self;
 }
-- setupConnection
+- setupNewConnection
 {
-	[super setupConnection];
+	[super setupNewConnection];
 	[delegate connectionEstablished: connection_holder];
 	[connection_holder release];
 	return self;
