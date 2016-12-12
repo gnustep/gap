@@ -3,6 +3,7 @@
                           -------------------
     begin                : Wed Jul  2 15:23:24 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
+                        : (C) 2016 The GNustep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 

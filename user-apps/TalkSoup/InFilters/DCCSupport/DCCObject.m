@@ -3,7 +3,7 @@
                           -------------------
     begin                : Wed Jul  2 15:23:24 CDT 2003
     copyright            : (C) 2005 by Andrew Ruder
-                         : (C) 2013-2015 The GNUstep Application Project
+                         : (C) 2013-2016 The GNUstep Application Project
     email                : aeruder@ksu.edu
  ***************************************************************************/
 
@@ -290,9 +290,9 @@ static id connection_holder = nil;
 	delegate = aDelegate;
 	return self;
 }
-- newConnection
+- setupConnection
 {
-	[super newConnection];
+	[super setupConnection];
 	[delegate connectionEstablished: connection_holder];
 	[connection_holder release];
 	return self;
