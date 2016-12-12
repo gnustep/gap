@@ -106,7 +106,7 @@
 	iter = [[NSArray arrayWithArray: executingTasks] objectEnumerator];
 	while ((object = [iter nextObject])) 
 	{
-		[object terminate];
+		[(NSTask *)object terminate];
 	}
 }
 @end
