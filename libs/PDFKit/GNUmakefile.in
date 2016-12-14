@@ -61,6 +61,11 @@ PDFKit_RESOURCE_FILES = \
 LIB_FREETYPE_LDFLAGS := $(shell freetype-config --libs)
 LIB_FREETYPE_CFLAGS := $(shell freetype-config --cflags)
 
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
+LIB_FREETYPE_LDFLAGS  += -Wl,-rpath=/usr/X11R6/lib
+endif
+
+
 export LIB_FREETYPE_LDFLAGS
 export LIB_FREETYPE_CFLAGS
 
