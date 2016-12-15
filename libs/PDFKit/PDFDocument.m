@@ -71,7 +71,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"dealloc PDFDocument, retain count is %d", [self retainCount]);
+  NSLog(@"dealloc PDFDocument, retain count is %lu", (unsigned long)[self retainCount]);
   RELEASE (outline);
   RELEASE (pdfDocRef);
   RELEASE (textContents);
@@ -170,7 +170,7 @@
          size.width  = height;
       }
    }
-
+   NSLog(@"PDFDocument pageSize: %f %f", size.width, size.height);
    return size;
 }
 
