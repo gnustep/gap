@@ -1,3 +1,10 @@
+2016-12-21  Riccardo Mottola <rm@gnu.org>
+
+	* xpdf/bridge/XPDFBridge.h
+	* xpdf/bridge/XPDFBridge.cc
+	* PDFDocument.m
+	Differentiate betweem Media and Crop sizes and use the latter for sizing the document.
+
 2016-12-14  Riccardo Mottola <rm@gnu.org>
 
 	* GNUmakefile.in

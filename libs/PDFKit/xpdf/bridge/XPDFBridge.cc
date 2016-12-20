@@ -124,16 +124,26 @@ int PDFDoc_getErrorCode(XPDFObject pdfDoc)
    return TO_PDFDoc(pdfDoc)->getErrorCode();
 }
 
-
-double PDFDoc_getPageWidth(XPDFObject pdfDoc, int pageNum)
+double PDFDoc_getPageMediaWidth(XPDFObject pdfDoc, int pageNum)
 {
    return TO_PDFDoc(pdfDoc)->getPageMediaWidth(pageNum);
 }
 
 
-double PDFDoc_getPageHeight(XPDFObject pdfDoc, int pageNum)
+double PDFDoc_getPageMediaHeight(XPDFObject pdfDoc, int pageNum)
 {
-   return TO_PDFDoc(pdfDoc)->getPageMediaHeight(pageNum);
+  return TO_PDFDoc(pdfDoc)->getPageMediaHeight(pageNum);
+}
+
+double PDFDoc_getPageCropWidth(XPDFObject pdfDoc, int pageNum)
+{
+   return TO_PDFDoc(pdfDoc)->getPageCropWidth(pageNum);
+}
+
+
+double PDFDoc_getPageCropHeight(XPDFObject pdfDoc, int pageNum)
+{
+   return TO_PDFDoc(pdfDoc)->getPageCropHeight(pageNum);
 }
 
 

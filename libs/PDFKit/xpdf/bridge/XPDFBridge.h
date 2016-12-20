@@ -104,8 +104,10 @@ void PDFDoc_delete(XPDFObject pdfDoc);
 int PDFDoc_isOk(XPDFObject pdfDoc);
 int PDFDoc_getErrorCode(XPDFObject pdfDoc);
 
-double PDFDoc_getPageWidth(XPDFObject pdfDoc, int pageNum);
-double PDFDoc_getPageHeight(XPDFObject pdfDoc, int pageNum);
+double PDFDoc_getPageMediaWidth(XPDFObject pdfDoc, int pageNum);
+double PDFDoc_getPageMediaHeight(XPDFObject pdfDoc, int pageNum);
+double PDFDoc_getPageCropWidth(XPDFObject pdfDoc, int pageNum);
+double PDFDoc_getPageCropHeight(XPDFObject pdfDoc, int pageNum);
 int    PDFDoc_getPageRotate(XPDFObject pdfDoc, int pageNum);
 
 int PDFDoc_getNumPages(XPDFObject pdfDoc);
