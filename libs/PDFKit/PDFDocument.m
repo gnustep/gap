@@ -144,7 +144,7 @@
 {
    NSAssert(![pdfDocRef isNULL], @"no document");
    
-   return PDFDoc_getPageWidth([pdfDocRef pointer], pageNum);
+   return PDFDoc_getPageCropWidth([pdfDocRef pointer], pageNum);
 }
 
 
@@ -152,7 +152,7 @@
 {
    NSAssert(![pdfDocRef isNULL], @"no document");
    
-   return PDFDoc_getPageHeight([pdfDocRef pointer], pageNum);
+   return PDFDoc_getPageCropHeight([pdfDocRef pointer], pageNum);
 }
 
 
