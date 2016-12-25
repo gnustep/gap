@@ -15,7 +15,7 @@
 		85D0BE861A594C6D0079D85D /* NetBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D0BE7E1A594C6D0079D85D /* NetBase.m */; };
 		85D0BE871A594C6D0079D85D /* NetTCP.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D0BE7F1A594C6D0079D85D /* NetTCP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D0BE881A594C6D0079D85D /* NetTCP.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D0BE801A594C6D0079D85D /* NetTCP.m */; };
-		85D0BE8C1A594CF10079D85D /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D0BE8B1A594CF10079D85D /* config.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85D0BE8C1A594CF10079D85D /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D0BE8B1A594CF10079D85D /* config.h */; settings = {ATTRIBUTES = (); }; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -231,13 +231,14 @@
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_MODEL_TUNING = G4;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = netclasses_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = netclasses;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = YES;
 			};
@@ -254,12 +255,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_MODEL_TUNING = G4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = netclasses_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = netclasses;
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -269,6 +272,7 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
