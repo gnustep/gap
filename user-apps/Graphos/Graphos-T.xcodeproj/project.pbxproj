@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8530E82D1B2E1B6B004099E7 /* GRImageEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8530E82B1B2E1B6B004099E7 /* GRImageEditor.h */; };
+		8530E82E1B2E1B6B004099E7 /* GRImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8530E82C1B2E1B6B004099E7 /* GRImageEditor.m */; };
 		854931A911143DF600C4D928 /* GRDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A37F4AEFDCFA73011CA2CEA /* GRDocument.h */; };
 		854931AA11143DF600C4D928 /* GRDocView.h in Headers */ = {isa = PBXBuildFile; fileRef = F539B1ED08A2D91C01A8012F /* GRDocView.h */; };
 		854931AB11143DF600C4D928 /* GRBezierPathEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = F539B1F708A3570901A8012F /* GRBezierPathEditor.h */; };
@@ -105,6 +107,8 @@
 		8518AB1B10E8A8ED004A2013 /* GRCircleEditor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GRCircleEditor.m; sourceTree = "<group>"; };
 		8518AB7710E8FC11004A2013 /* graphos_icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = graphos_icons.icns; sourceTree = "<group>"; };
 		8518AB7910E90329004A2013 /* graphos_doc_icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = graphos_doc_icons.icns; sourceTree = "<group>"; };
+		8530E82B1B2E1B6B004099E7 /* GRImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GRImageEditor.h; sourceTree = "<group>"; };
+		8530E82C1B2E1B6B004099E7 /* GRImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GRImageEditor.m; sourceTree = "<group>"; };
 		853877F40DA0375200A80103 /* GRPathEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPathEditor.h; sourceTree = "<group>"; };
 		853877F50DA0375200A80103 /* GRPathEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPathEditor.m; sourceTree = "<group>"; };
 		854931FB11143DF600C4D928 /* Info-Draw.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-Draw.plist"; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8530E82B1B2E1B6B004099E7 /* GRImageEditor.h */,
+				8530E82C1B2E1B6B004099E7 /* GRImageEditor.m */,
 				85EE1E891A6CFFBB00F06505 /* GRImage.h */,
 				85EE1E8A1A6CFFBB00F06505 /* GRImage.m */,
 				F539B25708A35E7001A8012F /* Graphos.h */,
@@ -361,6 +367,7 @@
 				854931BC11143DF600C4D928 /* GRCircle.h in Headers */,
 				854931BD11143DF600C4D928 /* GRCircleEditor.h in Headers */,
 				85EE1E8B1A6CFFBB00F06505 /* GRImage.h in Headers */,
+				8530E82D1B2E1B6B004099E7 /* GRImageEditor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +479,7 @@
 				854931F311143DF600C4D928 /* GRCircle.m in Sources */,
 				854931F411143DF600C4D928 /* GRCircleEditor.m in Sources */,
 				85EE1E8C1A6CFFBB00F06505 /* GRImage.m in Sources */,
+				8530E82E1B2E1B6B004099E7 /* GRImageEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
