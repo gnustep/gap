@@ -28,6 +28,7 @@
 
 
 #import <AppKit/AppKit.h>
+#import "GRObjectEditor.h"
 
 @implementation GRImage
 

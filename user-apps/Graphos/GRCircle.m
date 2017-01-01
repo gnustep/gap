@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009-2015 GNUstep Application Project
+ Copyright (C) 2009-2017 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -58,7 +58,7 @@
       isCircle = NO;
       obj = [properties objectForKey: @"circle"];
       if (obj)      
-	rotation = [obj boolValue];
+	isCircle = [obj boolValue];
 
       rotation = 0;
       obj = [properties objectForKey: @"rotation"];
