@@ -441,6 +441,7 @@
   NSInteger i;
   NSBezierPath *bezp;
   NSMutableParagraphStyle *style;
+  CGFloat parSpacing;
   NSDictionary *strAttr;
   NSFont *font;
   NSFont *tempFont;
@@ -457,7 +458,11 @@
   selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
   NSAssert (font != nil, @"Font object nil during drawing");
   style = [parAttributes objectForKey: NSParagraphStyleAttributeName];
-//  [style setParagraphSpacing: parspace*zmFactor];
+  /* we need to set this to 0.0 from mac 10.4 on, or it would have excess spacing */
+  [style setParagraphSpacing: 0.0];
+  parSpacing = [style paragraphSpacing];
+  // NSLog(@"Paragraph Spacing: %f", parSpacing);
+
   tempFont = [NSFont fontWithName:[font fontName] size:[font pointSize]*zmFactor];
   if (tempFont == nil)
     {
@@ -508,7 +513,7 @@
 		  [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
 		}
 	      
-	      baselny += lineSize.height;
+	      baselny += lineSize.height + parSpacing;
 	    }
 	  
 	  if([editor isSelected])
