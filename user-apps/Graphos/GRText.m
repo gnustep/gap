@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2015 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -458,11 +458,8 @@
   selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
   NSAssert (font != nil, @"Font object nil during drawing");
   style = [parAttributes objectForKey: NSParagraphStyleAttributeName];
-  /* we need to set this to 0.0 from mac 10.4 on, or it would have excess spacing */
-  [style setParagraphSpacing: 0.0];
   parSpacing = [style paragraphSpacing];
-  // NSLog(@"Paragraph Spacing: %f", parSpacing);
-
+  
   tempFont = [NSFont fontWithName:[font fontName] size:[font pointSize]*zmFactor];
   if (tempFont == nil)
     {
