@@ -2,7 +2,7 @@
  Project: Graphos
  GRTextEditorView.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -32,14 +32,13 @@
          withString:(NSString *)string
          attributes:(NSDictionary *)attributes
 {
-  NSString *firstStr;
-  NSFont *f;
-  NSParagraphStyle *pstyle;
-  
-
   self = [super initWithFrame: frameRect];
   if(self)
     {
+      NSString *firstStr;
+      NSFont *f;
+      NSParagraphStyle *pstyle;
+    
       controlsView = [[NSView alloc] initWithFrame: NSMakeRect(0, 270, 500, 40)];
       [controlsView setAutoresizingMask: ~NSViewMaxYMargin & ~NSViewHeightSizable];
 
@@ -121,9 +120,9 @@
             [leftButt setState: NSOnState];
             fontSize = 12;
 	    font = [NSFont systemFontOfSize:fontSize];
-            parSpace = fontSize * 1.2;
+            pstyle = [NSMutableParagraphStyle defaultParagraphStyle];
+            parSpace = [pstyle paragraphSpacing];
         }
-
         [self addSubview: controlsView];
 
         scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 500, 260)];
@@ -220,7 +219,6 @@
       [self updateFontPreview:fontField :newFont];
       font = newFont;
       [font pointSize];
-      parSpace = fontSize * 1.2;
       [theText setFont: font];
       [theText setNeedsDisplay: YES];
     }

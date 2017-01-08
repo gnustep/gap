@@ -1,3 +1,9 @@
+2017-01-08 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
+        * GRTextEditorView.m
+        Remove hack and fix editor initialization instead.
+
 2017-01-07 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
