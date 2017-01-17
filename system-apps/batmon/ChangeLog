@@ -1,3 +1,8 @@
+2017-01-17 Riccardo Mottola <rm@gnu.org>
+
+	* BatteryModel-NetBSD.m
+	Fix remaining time in case of A rates instead of W.
+
 2016-01-27 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h
