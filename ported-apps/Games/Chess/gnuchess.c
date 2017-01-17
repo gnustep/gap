@@ -229,7 +229,7 @@ static void  BlendBoard(short a[64], short b[64], short c[64]);
 
 
 
-char mvstr1[5],mvstr2[5];
+char mvstr1[5],mvstr2[6];
 struct leaf Tree[2000],*root;
 short TrPnt[maxdepth],board[64],color[64];
 short row[64],column[64],locn[8][8],Pindex[64],svalue[64];
@@ -1746,7 +1746,8 @@ short d,c,j,j1,j2,piece,i,m0,sq,*PL;
             while (!(m & 0x88))
               {
                 u = unmap[m];
-                a[u] = ++a[u] | c;
+                ++a[u];
+                a[u] = a[u] | c;
                 if (color[u] == neutral) m += d;
                 else break;
               }
@@ -1756,7 +1757,8 @@ short d,c,j,j1,j2,piece,i,m0,sq,*PL;
           if (!((m = m0+Dir[j]) & 0x88))
             {
               u = unmap[m];
-              a[u] = ++a[u] | c;
+              ++a[u];
+              a[u] = a[u] | c;
             }
     }
 }
