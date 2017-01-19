@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.m
 
- Copyright (C) 2000-2015 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -158,7 +158,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     GRBox *box;
     GRCircle *circle;
     GRImage *image;
-    unsigned i;
+    NSUInteger i;
     float version;
     NSNumber *versionNumber;
 
@@ -306,7 +306,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 - (void)addTextAtPoint:(NSPoint)p
 {
   GRText *gdtxt;
-  int i;
+  NSInteger i;
   NSUndoManager *uMgr;
   GRPropsEditor *objInspector;
 
@@ -378,7 +378,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 {
   id obj, duplObj;
   NSMutableArray *duplObjs;
-  int i;
+  NSUInteger i;
 
   duplObjs = [NSMutableArray arrayWithCapacity: 1];
 
@@ -1526,6 +1526,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSMutableArray *objsdesc;
   NSUInteger i;
 
+  dObj = nil;
   objsdesc = [NSMutableArray arrayWithCapacity: 1];
   for(i = 0; i < [objects count]; i++)
     {
