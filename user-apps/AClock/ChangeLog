@@ -1,3 +1,7 @@
+2017-01-24 Riccardo Mottola <rm@gmu.org>
+	* Clock.m
+	Switch hand and face drawing to Bezier Paths
+
 2014-09-10 Riccardo Mottola <rm@gmu.org>
 
 	* NSColorExtensions.h
