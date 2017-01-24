@@ -10,6 +10,7 @@
 	distclean,
 	dist
     );
+    "BUNDLE_IDENTIFIER" = "org.gap.AClock";
     "CLASS_FILES" = (
 	"AppController.m",
 	"Clock.m",
@@ -75,8 +76,12 @@
     );
     "PRINCIPAL_CLASS" = NSApplication;
     "PROJECT_AUTHORS" = (
+	"Banlu Kemiyatorn",
+	"Alexander Malmberg",
+	"G\U00FCrkan Seng\U00FCn",
+	"Riccardo Mottola"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2003-2011";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2003-2017";
     "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
     "PROJECT_CREATOR" = multix;
     "PROJECT_DESCRIPTION" = "Analog Clock";

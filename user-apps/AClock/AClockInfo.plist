@@ -2,7 +2,14 @@
     ApplicationDescription = "Analog Clock";
     ApplicationName = AClock;
     ApplicationRelease = "0.4.0";
-    Copyright = "Copyright (C) 2003-2011";
+    Authors = (
+	"Banlu Kemiyatorn",
+	"Alexander Malmberg",
+	"G\U00FCrkan Seng\U00FCn",
+	"Riccardo Mottola"
+    );
+    CFBundleIdentifier = "org.gap.AClock";
+    Copyright = "Copyright (C) 2003-2017";
     CopyrightDescription = "Released under GPL";
     FullVersionID = "0.4.0";
     NSExecutable = AClock;
