@@ -417,7 +417,6 @@ static NSArray *dayWeek;
 
 -(void) drawRect: (NSRect)r
 {
-	NSGraphicsContext *ctxt=GSCurrentContext();
 	/*
 	BOOL smoothSeconds = [defaults boolForKey: @"SmoothSeconds"];
 	*/
@@ -518,7 +517,6 @@ static NSArray *dayWeek;
 
 		}
 		[_cacheFrame unlockFocus];
-		ctxt=GSCurrentContext();
 
 	}
 
@@ -529,7 +527,6 @@ static NSArray *dayWeek;
 		/* print numbers and draw mark */
 
 		[_cacheMark lockFocus];
-		ctxt=GSCurrentContext();
 		if (shadow)
 		{
 			NSColor* black = [NSColor colorWithDeviceRed:0.  green:0. blue:0. alpha:0.2];
@@ -733,7 +730,6 @@ static NSArray *dayWeek;
 
 		}
 		[_cacheMark unlockFocus];
-		ctxt=GSCurrentContext();
 	}
 
 	[_cacheFrame compositeToPoint:NSZeroPoint
@@ -751,34 +747,32 @@ static NSArray *dayWeek;
 	{
 		double a1,a2;
 		double r1;
+                NSBezierPath *abzp;
 
 		a1 = 90 - (handsTime - 43200 * floor(handsTime/43200))/43200 * 360;
 		a2 = 90 - (alarmInterval - 43200 * floor(alarmInterval/43200))/43200 * 360;
 		r1=radius * 0.8;
 
-		DPSnewpath(ctxt);
+		abzp = [NSBezierPath bezierPath];
 
 		if (a2 < a1)
 		{
 			a2 += 360;
 		}
 
-		DPSsetlinewidth(ctxt,radius*0.4* (0.1 + (a2-a1)/400));
+		[abzp setLineWidth:radius*0.4* (0.1 + (a2-a1)/400)];
 
 		[[NSColor colorWithDeviceHue: 0.5 - (a2 - a1)/720
 			saturation:0.1 + (a2 - a1)/400
 			brightness:0.8
 			alpha:faceTrans + 0.7] set];
 
-		DPSarc(ctxt,center.x,center.y,r1,a2,a1);
-		DPSstroke(ctxt);
+		[abzp appendBezierPathWithArcWithCenter:center radius:r1 startAngle:a2 endAngle:a1];
+		[abzp stroke];
 	}
 
 	[_cacheMark compositeToPoint:NSZeroPoint
 		operation:NSCompositeSourceAtop];
-
-	DPSsetlinewidth(ctxt,base_width);
-
 
 
 	{
@@ -824,12 +818,14 @@ static NSArray *dayWeek;
                                 [sbzp stroke];
                                 
                                 sbzp = [NSBezierPath bezierPath];
+                                [sbzp setLineWidth:base_width];
                                 [sbzp appendBezierPathWithArcWithCenter:NSMakePoint(center.x +base_width*1.0, center.y -1.5*base_width) radius:1.5*base_width startAngle:0 endAngle:360];
                                 [sbzp fill];
 			}
 			else
 			{
                                 sbzp = [NSBezierPath bezierPath];
+                                [sbzp setLineWidth:base_width];
                                 [sbzp appendBezierPathWithArcWithCenter:NSMakePoint(center.x +base_width*1.0, center.y -1.5*base_width) radius:1.5*base_width startAngle:0 endAngle:360];
                                 [sbzp fill];
 			}
@@ -897,6 +893,7 @@ static NSArray *dayWeek;
 			NSBezierPath *shbzp;
 
 			shbzp = [NSBezierPath bezierPath];
+                        [shbzp setLineWidth:base_width];
 			[secHandColor set];
 			seconds=handsTime-60*floor(handsTime/60);
 			/*
@@ -926,6 +923,7 @@ static NSArray *dayWeek;
 			[shbzp stroke];
 			
 			shbzp = [NSBezierPath bezierPath];
+                        [shbzp setLineWidth:base_width];
 			[shbzp appendBezierPathWithArcWithCenter:center radius:1.5*base_width startAngle:0 endAngle:360];
 			[shbzp fill];
 		}
@@ -934,6 +932,7 @@ static NSArray *dayWeek;
 			NSBezierPath *shbzp;
                         
                         shbzp = [NSBezierPath bezierPath];
+                        [shbzp setLineWidth:base_width];
 			[shbzp appendBezierPathWithArcWithCenter:center radius:1.5*base_width startAngle:0 endAngle:360];
 			[shbzp fill];
 		}
