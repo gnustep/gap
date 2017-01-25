@@ -1,3 +1,8 @@
+2017-01-26 Riccardo Mottola <rm@gmu.org>
+
+	* Clock.m
+	Further DPS removal and removal of GSCurrentContext()
+
 2017-01-25 Riccardo Mottola <rm@gmu.org>
 
 	* Clock.m
