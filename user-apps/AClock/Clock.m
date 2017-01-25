@@ -939,8 +939,11 @@ static NSArray *dayWeek;
 		}
 		else
 		{
-			DPSarc(ctxt,center.x,center.y,1.5*base_width,0,360);
-			DPSfill(ctxt);
+			NSBezierPath *shbzp;
+                        
+                        shbzp = [NSBezierPath bezierPath];
+			[shbzp appendBezierPathWithArcWithCenter:center radius:1.5*base_width startAngle:0 endAngle:360];
+			[shbzp fill];
 		}
 
 	}
