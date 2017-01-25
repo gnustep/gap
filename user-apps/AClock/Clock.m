@@ -792,8 +792,6 @@ static NSArray *dayWeek;
 		{
                         NSBezierPath *sbzp;
                         
-                  	
-			//DPStranslate(ctxt, base_width*1.0, -1.5*base_width);
 			[[[NSColor blackColor] colorWithAlphaComponent: 0.3] set];
 
 			if (second)
@@ -811,8 +809,6 @@ static NSArray *dayWeek;
                                 sbzp = [NSBezierPath bezierPath];
                                 [sbzp setLineWidth: base_width*0.8];
                                 [sbzp moveToPoint:NSMakePoint(center.x+x*radius*0.89 +base_width*1.0,center.y+y*radius*0.89 -1.5*base_width)];
-				//DPSsetlinewidth(ctxt,base_width*0.8);
-				//DPSmoveto(ctxt,center.x+x*radius*0.89,center.y+y*radius*0.89);
 
 				seconds=handsTime-60*floor(handsTime/60)+30;
 				/*
@@ -826,14 +822,10 @@ static NSArray *dayWeek;
 
                                 [sbzp lineToPoint:NSMakePoint(center.x+x*radius*0.30 +base_width*1.0,center.y+y*radius*0.30 -1.5*base_width)];
                                 [sbzp stroke];
-                                //                                DPSlineto(ctxt,center.x+x*radius*0.30,center.y+y*radius*0.30);
-				//DPSstroke(ctxt);
                                 
                                 sbzp = [NSBezierPath bezierPath];
                                 [sbzp appendBezierPathWithArcWithCenter:NSMakePoint(center.x +base_width*1.0, center.y -1.5*base_width) radius:1.5*base_width startAngle:0 endAngle:360];
                                 [sbzp fill];
-				//DPSarc(ctxt,center.x,center.y,1.5*base_width,0,360);
-				//DPSfill(ctxt);
 			}
 			else
 			{
