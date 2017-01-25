@@ -1,4 +1,10 @@
+2017-01-25 Riccardo Mottola <rm@gmu.org>
+
+	* Clock.m
+	Switch shadow  drawing to Bezier Paths
+
 2017-01-24 Riccardo Mottola <rm@gmu.org>
+
 	* Clock.m
 	Switch hand and face drawing to Bezier Paths
 
