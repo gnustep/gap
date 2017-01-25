@@ -417,10 +417,6 @@ static NSArray *dayWeek;
 
 -(void) drawRect: (NSRect)r
 {
-	/*
-	BOOL smoothSeconds = [defaults boolForKey: @"SmoothSeconds"];
-	*/
-
 	if (radius<5)
 		return;
 
@@ -791,10 +787,6 @@ static NSArray *dayWeek;
 			if (second)
 			{
 				seconds=handsTime-60*floor(handsTime/60);
-				/*
-				if (smoothSeconds == NO)
-					seconds = floor(seconds);
-					*/
 				seconds/=60;
 				a=seconds*2*PI;
 				x=sin(a);
@@ -805,10 +797,6 @@ static NSArray *dayWeek;
                                 [sbzp moveToPoint:NSMakePoint(center.x+x*radius*0.89 +base_width*1.0,center.y+y*radius*0.89 -1.5*base_width)];
 
 				seconds=handsTime-60*floor(handsTime/60)+30;
-				/*
-				if (smoothSeconds == NO)
-					seconds = floor(seconds);
-					*/
 				seconds/=60;
 				a=seconds*2*PI;
 				x=sin(a);
@@ -896,10 +884,6 @@ static NSArray *dayWeek;
                         [shbzp setLineWidth:base_width];
 			[secHandColor set];
 			seconds=handsTime-60*floor(handsTime/60);
-			/*
-			if (smoothSeconds == NO)
-				seconds = floor(seconds);
-				*/
 			seconds/=60;
 			a=seconds*2*PI;
 			x=sin(a);
@@ -909,10 +893,6 @@ static NSArray *dayWeek;
 			[shbzp moveToPoint:NSMakePoint(center.x+x*radius*0.89,center.y+y*radius*0.89)];
 
 			seconds=handsTime-60*floor(handsTime/60)+30;
-			/*
-			if (smoothSeconds == NO)
-				seconds = floor(seconds);
-				*/
 			seconds/=60;
 			a=seconds*2*PI;
 			x=sin(a);
