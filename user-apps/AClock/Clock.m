@@ -455,7 +455,7 @@ static NSArray *dayWeek;
 							value:[NSColor blackColor]
 							range:NSMakeRange(0,[str length])];
 				[str drawAtPoint:NSMakePoint(2, 1)];
-				RELEASE(str);
+				[str release];
 
 				str = [[NSMutableAttributedString alloc]
 					initWithString:[dayWeek objectAtIndex:[_date dayOfWeek]]];
@@ -542,7 +542,7 @@ static NSArray *dayWeek;
 							range:NSMakeRange(0,[str length])];
 				strSize = [str size];
 				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2 +1, center.y - radius * 0.8 + strSize.height/2 -1)];
-				RELEASE(str);
+				[str release];
 			}
 
 
@@ -597,7 +597,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.7 - size.width/2 +1, center.y+y*radius*0.7 - size.height/2 -1)];
-						RELEASE(str);
+						[str release];
 
 					}
 					else if (numberType == 0)
@@ -613,7 +613,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.80 - size.width/2.5 +1, center.y+y*radius*0.80 - size.height/2 -1)];
-						RELEASE(str);
+						[str release];
 					}
 
 				}
@@ -636,7 +636,7 @@ static NSArray *dayWeek;
 							range:NSMakeRange(0,[str length])];
 				strSize = [str size];
 				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2, center.y - radius * 0.8 + strSize.height/2)];
-				RELEASE(str);
+				[str release];
 			}
 
 
@@ -702,7 +702,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.7 - size.width/2, center.y+y*radius*0.7 - size.height/2)];
-						RELEASE(str);
+						[str release];
 
 					}
 					else if (numberType == 0)
@@ -718,7 +718,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.80 - size.width/2.5, center.y+y*radius*0.80 - size.height/2)];
-						RELEASE(str);
+						[str release];
 					}
 
 				}
