@@ -2,7 +2,7 @@
  Project: AClock
  AppController.m
 
- Copyright (C) 2003-2014 GNUstep Application Project
+ Copyright (C) 2003-2017 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -74,7 +74,7 @@ static int rounds_done = 0;	// how often a sound was played already
   }
 }
 
-- (void) setCuckoo: (id) sender
+- (IBAction) setCuckoo: (id) sender
 {
 	useCuckoo = [sender intValue]?YES:NO;
 	[defaults setObject:useCuckoo?@"YES":@"NO" forKey:@"Cuckoo"];
@@ -82,7 +82,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	lastHourOfDay = -1;
 }
 
-- (void) setRing: (id) sender
+- (IBAction) setRing: (id) sender
 {
 	useRing = [sender intValue]?YES:NO;
 	if (useRing) {
@@ -101,7 +101,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	[alarmWindow close];
 }
 
-- (void) setRingLoop: (id) sender
+- (IBAction) setRingLoop: (id) sender
 {
 	float f = [sender floatValue];
 	NSString *str;
@@ -117,7 +117,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	[defaults synchronize];
 }
 
-- (void) setShowsAMPM: (id)sender
+- (IBAction) setShowsAMPM: (id)sender
 {
 	[_clock setShowsAMPM:[sender intValue]?YES:NO];
 	[bigClock setShowsAMPM:[sender intValue]?YES:NO];
@@ -125,13 +125,13 @@ static int rounds_done = 0;	// how often a sound was played already
 	[defaults synchronize];
 }
 
-- (void) setIncreasesVolume: (id)sender
+- (IBAction) setIncreasesVolume: (id)sender
 {
 	[defaults setObject:[sender intValue]?@"YES":@"NO" forKey:@"IncreasesVolume"];
 	[defaults synchronize];
 }
 
-- (void) setNumberType: (id)sender
+- (IBAction) setNumberType: (id)sender
 {
 	[_clock setNumberType:[sender indexOfSelectedItem]];
 	[bigClock setNumberType:[sender indexOfSelectedItem]];
@@ -139,7 +139,7 @@ static int rounds_done = 0;	// how often a sound was played already
 	[defaults synchronize];
 }
 
-- (void) setSecond: (id)sender
+- (IBAction) setSecond: (id)sender
 {
 	[_clock setSecond:[sender intValue]?YES:NO];
 	[bigClock setSecond:[sender intValue]?YES:NO];
