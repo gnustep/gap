@@ -1,5 +1,11 @@
 2017-01-26 Riccardo Mottola <rm@gmu.org>
 
+	* AppController.h
+	* AppController.m
+	Cleanup IBActions.
+
+2017-01-26 Riccardo Mottola <rm@gmu.org>
+
 	* Clock.m
 	Further DPS removal and removal of GSCurrentContext()
 

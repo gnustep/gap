@@ -2,7 +2,7 @@
  Project: AClock
  AppController.h
 
- Copyright (C) 2003-2011 GNUstep Application Project
+ Copyright (C) 2003-2017 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -77,7 +77,12 @@
 - (IBAction) setSecond: (id)sender;
 - (IBAction) setNumberType: (id)sender;
 - (IBAction) playCuckoo;
+- (IBAction) setCuckoo: (id) sender;
+- (IBAction) setRing: (id) sender;
 - (IBAction) stopRing: (id)sender;
+- (IBAction) setRingLoop: (id) sender;
+- (IBAction) setShowsAMPM: (id)sender;
+- (IBAction) setIncreasesVolume: (id)sender;
 - (IBAction) clockUpdate: (id)sender;
 
 @end
