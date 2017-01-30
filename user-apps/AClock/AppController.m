@@ -348,11 +348,6 @@ static float volume_append = 1.0;
 
 	[[NSUserDefaults standardUserDefaults]
 	    registerDefaults:[NSDictionary dictionaryWithObject:@"0.5" forKey:@"RefreshRate"]];
-	    
-		/*
-	[[NSUserDefaults standardUserDefaults]
-	    registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys: @"YES", @"SmoothSeconds", nil]];
-		*/
 }
 
 - (void) tick
