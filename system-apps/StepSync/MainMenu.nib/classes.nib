@@ -1,0 +1,26 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {analyzeAction = id; setSourcePath = id; setTargetPath = id; syncAction = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                analyzeButton = NSButton; 
+                logView = NSTextView; 
+                progressBar = NSProgressIndicator; 
+                sourceDirNumberField = NSTextField; 
+                sourceFileNumberField = NSTextField; 
+                sourcePathField = NSTextField; 
+                sourceSizeField = NSTextField; 
+                syncButton = NSButton; 
+                targetDirNumberField = NSTextField; 
+                targetFileNumberField = NSTextField; 
+                targetPathField = NSTextField; 
+                targetSizeField = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
