@@ -1,0 +1,35 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "syncAction:",
+	    "setSourcePath:",
+	    "setTargetPath:",
+	    "analyzeAction:"
+	);
+	Outlets = (
+	    analyzeButton,
+	    sourceFileNumberField,
+	    targetPathField,
+	    progressBar,
+	    sourceDirNumberField,
+	    targetFileNumberField,
+	    targetSizeField,
+	    syncButton,
+	    logView,
+	    sourcePathField,
+	    targetDirNumberField,
+	    sourceSizeField
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "analyzeAction:",
+	    "setSourcePath:",
+	    "setTargetPath:",
+	    "syncAction:"
+	);
+	Super = NSObject;
+    };
+}
