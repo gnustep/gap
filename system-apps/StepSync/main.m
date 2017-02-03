@@ -1,12 +1,32 @@
-//
-//  main.m
-//  StepSync
-//
-//  Created by Riccardo Mottola on 2/2/17.
-//  Copyright __MyCompanyName__ 2017. All rights reserved.
-//
+/* 
+ Project: StepSync
+ main.m
+ 
+ Copyright (C) 2017 Riccardo Mottola
+ 
+ Author: Riccardo Mottola
+ 
+ Created: 2017-02-02
+ 
+ This application is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+ 
+ This application is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public
+ License along with this library; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 
-#import <Cocoa/Cocoa.h>
+
+
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 int main(int argc, char *argv[])
 {
