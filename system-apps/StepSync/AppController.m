@@ -24,7 +24,7 @@
 */
 
 #import "AppController.h"
-
+#import "FileMap.h"
 
 @implementation AppController
 
@@ -62,6 +62,26 @@
 
 - (IBAction)analyzeAction:(id)sender
 {
+  NSString *sourceRoot;
+  NSString *targetRoot;
+  
+  sourceRoot = [sourcePathField stringValue];
+  targetRoot = [targetPathField stringValue];
+  
+  [sourceMap release];
+  sourceMap = [[FileMap alloc] init];
+  [sourceMap setRootPath:sourceRoot];
+  [sourceMap analyze];
+  [sourceDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[sourceMap directories] count]] description]];
+  [sourceFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[sourceMap files] count]] description]];
+  
+  [targetMap release];
+  targetMap = [[FileMap alloc] init];
+  [targetMap setRootPath:targetRoot];
+  [targetMap analyze];
+  [targetDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[targetMap directories] count]] description]];
+  [targetFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[targetMap files] count]] description]];
+
 }
 
 - (IBAction)syncAction:(id)sender

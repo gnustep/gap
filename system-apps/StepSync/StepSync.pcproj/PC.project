@@ -12,7 +12,9 @@
     );
     "BUNDLE_IDENTIFIER" = "org.gap.StepSync";
     "CLASS_FILES" = (
-	"AppController.m"
+	"AppController.m",
+	"FileMap.m",
+	"FileObject.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -22,7 +24,9 @@
     FRAMEWORKS = (
     );
     "HEADER_FILES" = (
-	"AppController.h"
+	"AppController.h",
+	"FileMap.h",
+	"FileObject.h"
     );
     IMAGES = (
     );
