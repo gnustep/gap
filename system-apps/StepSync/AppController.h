@@ -28,6 +28,8 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+@class FileMap;
+
 @interface AppController : NSObject
 {
   IBOutlet NSTextField *sourcePathField;
@@ -47,6 +49,8 @@
   
   BOOL analyzeRunning;
   BOOL syncRunning;
+  FileMap *sourceMap;
+  FileMap *targetMap;
 }
 
 - (IBAction)setSourcePath:(id)sender;
