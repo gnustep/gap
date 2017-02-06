@@ -503,12 +503,9 @@
 	      line = [lines objectAtIndex: i];
 	      lineSize = [line sizeWithAttributes:strAttr]; 
 	  
-	      if([editor isSelected])
-		{
-		  [[NSColor blackColor] set];
-		  [bezp moveToPoint:NSMakePoint(posZ.x, baselny)];
-		  [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
-		}
+	      [[NSColor blackColor] set];
+	      [bezp moveToPoint:NSMakePoint(posZ.x, baselny)];
+	      [bezp lineToPoint:NSMakePoint(posZ.x + bounds.size.width*zmFactor, baselny)];
 	      
 	      baselny += lineSize.height + parSpacing;
 	    }
