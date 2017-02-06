@@ -488,7 +488,7 @@
   
   [str drawInRect:boundsZ withAttributes:strAttr];
 
-  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen] && [editor isSelected])
     {
       bezp = [NSBezierPath bezierPath];
       [bezp setLineWidth:0];
@@ -513,12 +513,9 @@
 	      baselny += lineSize.height + parSpacing;
 	    }
 	  
-	  if([editor isSelected])
-	    {
-	      [bezp stroke];
-	      [[NSColor blackColor] set];
-	      NSRectFill(selRectZ);
-	    }
+	  [bezp stroke];
+	  [[NSColor blackColor] set];
+	  NSRectFill(selRectZ);
 	}
     }
   [strAttr release];
