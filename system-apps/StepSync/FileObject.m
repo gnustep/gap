@@ -34,6 +34,11 @@
   modifiedDate = [attr fileModificationDate];
 }
 
+- (NSString *)absolutePath
+{
+  return absolutePath;
+}
+
 - (void)setAbsolutePath:(NSString *)path
 {
   if (absolutePath != path)
@@ -44,6 +49,12 @@
     }
 }
 
+
+- (NSString *)relativePath
+{
+  return relativePath;
+}
+
 - (void)setRelativePath:(NSString *)path
 {
   if (relativePath != path)
@@ -52,6 +63,21 @@
       relativePath = path;
       [relativePath retain];
     }
+}
+
+- (unsigned long long)size
+{
+  return size;
+}
+
+- (NSDate *)createdDate
+{
+  return createdDate;
+}
+
+- (NSDate *)modifiedDate
+{
+  return modifiedDate;
 }
 
 @end
