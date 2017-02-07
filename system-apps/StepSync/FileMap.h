@@ -31,7 +31,7 @@
 {
   NSString *rootPath;
   
-  NSMutableArray *files;
+  NSMutableDictionary *files;
   NSMutableArray *directories;
   NSFileManager *fm;
 }
@@ -39,7 +39,7 @@
 - (void)setRootPath:(NSString *)path;
 - (void)analyze;
 - (NSMutableArray *)directories;
-- (NSMutableArray *)files;
+- (NSMutableDictionary *)files;
 
 @end
 

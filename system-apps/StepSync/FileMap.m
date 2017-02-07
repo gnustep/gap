@@ -34,7 +34,7 @@
     {
       rootPath = nil;
       directories = [NSMutableArray new];
-      files = [NSMutableArray new];
+      files = [NSMutableDictionary new];
       fm = [NSFileManager defaultManager];
     }
   return self;
@@ -63,7 +63,7 @@
   return directories;
 }
 
-- (NSMutableArray *)files
+- (NSMutableDictionary *)files
 {
   return files;
 }
@@ -108,7 +108,7 @@
           [fo setAbsolutePath:fullPath];
           [fo setRelativePath:relPath];
           [fo setFileAttributes:attr];
-          [files addObject: fo];
+          [files setObject:fo forKey:relPath];
           [fo release];
         }
       else if (fileType == NSFileTypeSymbolicLink)
