@@ -40,7 +40,7 @@
 - (void)setAbsolutePath:(NSString *)path;
 - (NSString *)relativePath;
 - (void)setRelativePath:(NSString *)path;
-- (unsigned long)size;
+- (unsigned long long)size;
 - (void)setSize:(unsigned long)size;
 - (NSDate *)createdDate;
 - (void)setCreatedDate:(NSDate *)date;
