@@ -48,6 +48,11 @@
   [super dealloc];
 }
 
+- (NSString *)rootPath
+{
+  return rootPath;
+}
+
 - (void)setRootPath:(NSString *)path
 {
   if (rootPath != path)

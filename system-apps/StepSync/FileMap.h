@@ -36,6 +36,7 @@
   NSFileManager *fm;
 }
 
+- (NSString *)rootPath;
 - (void)setRootPath:(NSString *)path;
 - (void)analyze;
 - (NSMutableArray *)directories;
