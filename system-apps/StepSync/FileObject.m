@@ -80,4 +80,12 @@
   return modifiedDate;
 }
 
+- (NSString *)description
+{
+  NSString *d;
+
+  d = [NSString stringWithFormat:@"%@", relativePath];
+  return d;
+}
+
 @end
