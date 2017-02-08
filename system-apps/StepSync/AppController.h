@@ -46,7 +46,8 @@
   IBOutlet NSButton *syncButton;
   IBOutlet NSProgressIndicator *progressBar;
   IBOutlet NSTextView *logView;
-  
+
+  BOOL analyzed;
   BOOL analyzeRunning;
   BOOL syncRunning;
   FileMap *sourceMap;
