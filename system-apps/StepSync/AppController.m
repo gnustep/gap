@@ -75,12 +75,16 @@
   NSString *targetRoot;
   NSMutableDictionary *sourceFileDict;
   NSMutableDictionary *targetFileDict;
-  NSMutableArray *targetMissingFiles;
-  NSMutableArray *sourceMissingFiles;
-  NSMutableArray *sourceModFiles;
-  NSMutableArray *targetModFiles;
   NSEnumerator *en;
   FileObject *fileObj;
+
+  [progressBar setIndeterminate:YES];
+  [progressBar startAnimation:nil];
+
+  [targetMissingFiles release];
+  [sourceMissingFiles release];
+  [targetModFiles release];
+  [sourceModFiles release];
   
   sourceRoot = [sourcePathField stringValue];
   targetRoot = [targetPathField stringValue];
@@ -151,21 +155,76 @@
   NSLog(@"source missing: %@", sourceMissingFiles);
   NSLog(@"target modified: %@", targetModFiles);
   NSLog(@"source modified: %@", sourceModFiles);
-  [targetMissingFiles release];
-  [sourceMissingFiles release];
-  [targetModFiles release];
-  [sourceModFiles release];
+
+  /* TODO handle directories */
 
   analyzeRunning = NO;
   analyzed = YES;
+  [progressBar stopAnimation:nil];
 }
 
 - (IBAction)syncAction:(id)sender
 {
+  NSUInteger i;
+  NSUInteger totalItems;
+  NSFileManager *fm;
+
+  fm = [NSFileManager defaultManager];
   if (!analyzed)
     [self analyzeAction:sender];
 
   syncRunning = YES;
+  [progressBar setIndeterminate:NO];
+  /* TODO handle directories */
+
+  /* we don't offer target->source sync yet */
+  if (YES)
+    {
+      [sourceMissingFiles release];
+      sourceMissingFiles = 0;
+      [targetModFiles release];
+      targetModFiles = 0;
+    }
+      
+  totalItems = [targetMissingFiles count] + [sourceMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
+  [progressBar setMinValue:0.0];
+  [progressBar setMaxValue:(double)totalItems];
+
+  for (i = 0; i < [targetMissingFiles count]; i++)
+    {
+      FileObject *fileObj;
+      NSString *newAbsolutePath;
+      NSDictionary *fAttr;
+
+      fileObj = [targetMissingFiles objectAtIndex:i];
+      [progressBar incrementBy:1.0];
+
+      /* TODO should recheck ? */
+      newAbsolutePath = [[targetMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
+      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
+      fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
+      [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+    }
+
+    for (i = 0; i < [sourceModFiles count]; i++)
+    {
+      FileObject *fileObj;
+      NSString *newAbsolutePath;
+      NSDictionary *fAttr;
+
+      fileObj = [sourceModFiles objectAtIndex:i];
+      [progressBar incrementBy:1.0];
+
+      /* TODO should recheck ? */
+      newAbsolutePath = [[targetMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
+      if([fm removeFileAtPath:newAbsolutePath handler:nil])
+	{
+	  [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
+	  fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
+	  [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+	}
+    }
+  
   syncRunning = NO;
 }
 

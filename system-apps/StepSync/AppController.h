@@ -52,6 +52,10 @@
   BOOL syncRunning;
   FileMap *sourceMap;
   FileMap *targetMap;
+  NSMutableArray *targetMissingFiles;
+  NSMutableArray *sourceMissingFiles;
+  NSMutableArray *sourceModFiles;
+  NSMutableArray *targetModFiles;
 }
 
 - (IBAction)setSourcePath:(id)sender;
