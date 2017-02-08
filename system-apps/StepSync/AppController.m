@@ -29,6 +29,14 @@
 
 @implementation AppController
 
+- (void)awakeFromNib
+{
+  /*
+  [analyzeButton setEnabled:NO];
+  [syncButton setEnabled:NO];
+  */
+}
+
 - (IBAction)setSourcePath:(id)sender
 {
   NSOpenPanel *openPanel;
@@ -124,14 +132,41 @@
 	}
     }
 
+  /* look for source missing files */
+  en = [targetFileDict objectEnumerator];
+  while ((fileObj = [en nextObject]))
+    {
+            NSString *relPath;
+      FileObject *fileObj2;
+
+      relPath = [fileObj relativePath];
+      fileObj2 = [sourceFileDict objectForKey:relPath];
+      if (!fileObj2)
+	{
+	  [sourceMissingFiles addObject:fileObj];
+	}
+    }
+
+  NSLog(@"target missing: %@", targetMissingFiles);
+  NSLog(@"source missing: %@", sourceMissingFiles);
+  NSLog(@"target modified: %@", targetModFiles);
+  NSLog(@"source modified: %@", sourceModFiles);
   [targetMissingFiles release];
   [sourceMissingFiles release];
   [targetModFiles release];
   [sourceModFiles release];
+
+  analyzeRunning = NO;
+  analyzed = YES;
 }
 
 - (IBAction)syncAction:(id)sender
 {
+  if (!analyzed)
+    [self analyzeAction:sender];
+
+  syncRunning = YES;
+  syncRunning = NO;
 }
 
 
