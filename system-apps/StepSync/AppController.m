@@ -29,6 +29,49 @@
 
 @implementation AppController
 
+- (NSString *)formatSize:(unsigned long long)size
+{
+  NSString *result;
+  double dSize;
+
+  result = nil;
+  if (size < 1024)
+    {
+      result = [NSString stringWithFormat:@"%lu B", size];
+    }
+  else
+    {
+      dSize = (double)size / 1024;
+      if (dSize < 1024)
+	{
+	  result = [NSString stringWithFormat:@"%.1lf KB", dSize];
+	}
+      else
+	{
+	  dSize = dSize / 1024;
+	  if (dSize < 1024)
+	    {
+	      result = [NSString stringWithFormat:@"%.1lf MB", dSize];
+	    }
+	  else
+	    {
+	      dSize = dSize / 1024;
+	      if (dSize < 1024)
+		{
+		  result = [NSString stringWithFormat:@"%.1lf GB", dSize];
+		}
+	      else
+		{
+		  dSize = dSize / 1024;
+		  result = [NSString stringWithFormat:@"%.1lf TB", dSize];
+		}
+	    }
+	}
+    }
+  
+  return result;
+}
+
 - (void)awakeFromNib
 {
   /*
@@ -77,7 +120,9 @@
   NSMutableDictionary *targetFileDict;
   NSEnumerator *en;
   FileObject *fileObj;
-
+  unsigned long long sourceSize;
+  unsigned long long targetSize;
+  
   [progressBar setIndeterminate:YES];
   [progressBar startAnimation:nil];
 
@@ -113,11 +158,13 @@
   /* compare source against target
      find source modified and missing files */
   en = [sourceFileDict objectEnumerator];
+  sourceSize = 0;
   while ((fileObj = [en nextObject]))
     {
       NSString *relPath;
       FileObject *fileObj2;
 
+      sourceSize += [fileObj size];
       relPath = [fileObj relativePath];
       fileObj2 = [targetFileDict objectForKey:relPath];
       if (fileObj2)
@@ -135,22 +182,26 @@
 	  [targetMissingFiles addObject:fileObj];
 	}
     }
+  [sourceSizeField setStringValue:[self formatSize:sourceSize]];
 
   /* look for source missing files */
   en = [targetFileDict objectEnumerator];
+  targetSize = 0;
   while ((fileObj = [en nextObject]))
     {
-            NSString *relPath;
+      NSString *relPath;
       FileObject *fileObj2;
 
       relPath = [fileObj relativePath];
+      targetSize += [fileObj size];
       fileObj2 = [sourceFileDict objectForKey:relPath];
       if (!fileObj2)
 	{
 	  [sourceMissingFiles addObject:fileObj];
 	}
     }
-
+  [targetSizeField setStringValue:[self formatSize:targetSize]];
+  
   NSLog(@"target missing: %@", targetMissingFiles);
   NSLog(@"source missing: %@", sourceMissingFiles);
   NSLog(@"target modified: %@", targetModFiles);
