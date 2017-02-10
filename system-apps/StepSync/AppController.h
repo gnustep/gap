@@ -42,6 +42,11 @@
   IBOutlet NSTextField *targetFileNumberField;
   IBOutlet NSTextField *targetSizeField;
 
+  IBOutlet NSButton *handleDirectoriesCheck;
+  IBOutlet NSButton *updateSourceCheck;
+  IBOutlet NSButton *insertItemsCheck;
+  IBOutlet NSButton *updateItemsCheck;
+  IBOutlet NSButton *deleteItemsCheck;
   IBOutlet NSButton *analyzeButton;
   IBOutlet NSButton *syncButton;
   IBOutlet NSProgressIndicator *progressBar;
