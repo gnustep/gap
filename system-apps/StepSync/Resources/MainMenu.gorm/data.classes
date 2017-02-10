@@ -2,24 +2,29 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
-	    "syncAction:",
 	    "setSourcePath:",
 	    "setTargetPath:",
-	    "analyzeAction:"
+	    "analyzeAction:",
+	    "syncAction:"
 	);
 	Outlets = (
-	    analyzeButton,
-	    sourceFileNumberField,
-	    targetPathField,
-	    progressBar,
+	    sourcePathField,
 	    sourceDirNumberField,
+	    sourceFileNumberField,
+	    sourceSizeField,
+	    targetPathField,
+	    targetDirNumberField,
 	    targetFileNumberField,
 	    targetSizeField,
+	    handleDirectoriesCheck,
+	    updateSourceCheck,
+	    insertItemsCheck,
+	    updateItemsCheck,
+	    deleteItemsCheck,
+	    analyzeButton,
 	    syncButton,
-	    logView,
-	    sourcePathField,
-	    targetDirNumberField,
-	    sourceSizeField
+	    progressBar,
+	    logView
 	);
 	Super = NSObject;
     };
