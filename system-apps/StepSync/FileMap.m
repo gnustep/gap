@@ -84,16 +84,12 @@
     {
       NSString *element;
       NSString *fullPath;
-      BOOL isDir;
-      NSDictionary *attr;
       NSString *fileType;
       
       element = [dirContents objectAtIndex:i];
       fullPath = [path stringByAppendingPathComponent:element];
-      //NSLog(@"element: %@", element);
       attr = [fm fileAttributesAtPath:fullPath traverseLink:NO];
       fileType = [attr fileType];
-      NSLog(@"fileType: %@", fileType);
       if (fileType == NSFileTypeDirectory)
         {
           [directories addObject:element];
@@ -108,7 +104,6 @@
           NSString *relPath;
           
           relPath = [fullPath substringFromIndex:[rootPath length]+1];
-          NSLog(@"relPath: %@", relPath);
           fo = [[FileObject alloc] init];
           [fo setAbsolutePath:fullPath];
           [fo setRelativePath:relPath];
