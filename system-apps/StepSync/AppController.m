@@ -37,7 +37,7 @@
   result = nil;
   if (size < 1024)
     {
-      result = [NSString stringWithFormat:@"%lu B", size];
+      result = [NSString stringWithFormat:@"%llu B", size];
     }
   else
     {
