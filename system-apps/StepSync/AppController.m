@@ -74,6 +74,14 @@
 
 - (void)dealloc
 {
+  [sourceMap release];
+  [targetMap release];
+  [targetMissingDirs release];
+  [sourceMissingDirs release];
+  [targetMissingFiles release];
+  [sourceModFiles release];
+  [targetModFiles release];
+  
   [super dealloc];
 }
 
