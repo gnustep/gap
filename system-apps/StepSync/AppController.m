@@ -305,18 +305,6 @@
 	{
 	  NSUInteger i;
 
-	  /* delete source excess directories */
-	  for (i = 0; i < [targetMissingDirs count]; i++)
-	    {
-	      NSString *fullPath;
-
-	      fullPath = [sourceRoot stringByAppendingPathComponent:[targetMissingDirs objectAtIndex:i]];
-	      if (![fm removeFileAtPath:fullPath handler:nil])
-		{
-		  NSLog(@"error removing: %@", fullPath);
-		}
-	    }
-
 	  /* create source missing directories */
 	  for (i = 0; i < [sourceMissingDirs count]; i++)
 	    {
