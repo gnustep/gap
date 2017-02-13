@@ -252,6 +252,8 @@
 
 - (IBAction)syncAction:(id)sender
 {
+  NSString *sourceRoot;
+  NSString *targetRoot;
   NSUInteger i;
   NSUInteger totalItems;
   NSFileManager *fm;
@@ -260,6 +262,9 @@
   BOOL insertItems;
   BOOL updateItems;
   BOOL deleteItems;
+
+  sourceRoot = [sourcePathField stringValue];
+  targetRoot = [targetPathField stringValue]; 
 
   fm = [NSFileManager defaultManager];
   if (!analyzed)
@@ -290,10 +295,88 @@
 	totalItems += [sourceMissingDirs count];
     }
       
-  totalItems = [targetMissingFiles count] + [sourceMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
+  totalItems += [targetMissingFiles count] + [sourceMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
   [progressBar setMinValue:0.0];
   [progressBar setMaxValue:(double)totalItems];
 
+  if (handleDirectories)
+    {
+      if (updateSource)
+	{
+	  NSUInteger i;
+
+	  /* delete source excess directories */
+	  for (i = 0; i < [targetMissingDirs count]; i++)
+	    {
+	      NSString *fullPath;
+
+	      fullPath = [sourceRoot stringByAppendingPathComponent:[targetMissingDirs objectAtIndex:i]];
+	      if (![fm removeFileAtPath:fullPath handler:nil])
+		{
+		  NSLog(@"error removing: %@", fullPath);
+		}
+	    }
+
+	  /* create source missing directories */
+	  for (i = 0; i < [sourceMissingDirs count]; i++)
+	    {
+	      NSString *fullPath;
+
+	      fullPath = [sourceRoot stringByAppendingPathComponent:[sourceMissingDirs objectAtIndex:i]];
+	      if (![fm createDirectoryAtPath:fullPath attributes:nil])
+		{
+		  NSLog(@"error creating: %@", fullPath);
+		}
+	    }
+
+	  if (deleteItems)
+	    {
+	      /* delete source excess directories */
+	      for (i = 0; i < [targetMissingDirs count]; i++)
+		{
+		  NSString *fullPath;
+		  
+		  fullPath = [sourceRoot stringByAppendingPathComponent:[targetMissingDirs objectAtIndex:i]];
+		  if (![fm removeFileAtPath:fullPath handler:nil])
+		    {
+		      NSLog(@"error removing: %@", fullPath);
+		    }
+		}
+	    }
+	}
+      else
+	{
+	  NSUInteger i;
+
+	  /* create target missing directories */
+	  for (i = 0; i < [targetMissingDirs count]; i++)
+	    {
+	      NSString *fullPath;
+
+	      fullPath = [targetRoot stringByAppendingPathComponent:[targetMissingDirs objectAtIndex:i]];
+	      if (![fm createDirectoryAtPath:fullPath attributes:nil])
+		{
+		  NSLog(@"error creating: %@", fullPath);
+		}
+	    }
+
+	  if (deleteItems)
+	    {
+	      /* delete target excess directories */
+	      for (i = 0; i < [sourceMissingDirs count]; i++)
+		{
+		  NSString *fullPath;
+		  
+		  fullPath = [targetRoot stringByAppendingPathComponent:[sourceMissingDirs objectAtIndex:i]];
+		  if (![fm removeFileAtPath:fullPath handler:nil])
+		    {
+		      NSLog(@"error removing: %@", fullPath);
+		    }
+		}
+	    }
+	}
+    }
+  
   if (insertItems)
     {
       for (i = 0; i < [targetMissingFiles count]; i++)
@@ -346,6 +429,7 @@
 
 	  if([fm removeFileAtPath:[fileObj absolutePath] handler:nil])
 	    {
+	      NSLog(@"Error removing file: %@", [fileObj absolutePath]);
 	    }
 	}
     }
