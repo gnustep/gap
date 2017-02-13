@@ -57,6 +57,8 @@
   BOOL syncRunning;
   FileMap *sourceMap;
   FileMap *targetMap;
+  NSMutableArray *targetMissingDirs;
+  NSMutableArray *sourceMissingDirs;
   NSMutableArray *targetMissingFiles;
   NSMutableArray *sourceMissingFiles;
   NSMutableArray *sourceModFiles;
