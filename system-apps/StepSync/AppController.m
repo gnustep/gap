@@ -72,6 +72,11 @@
   return result;
 }
 
+- (void)dealloc
+{
+  [super dealloc];
+}
+
 - (void)awakeFromNib
 {
   /*
@@ -116,6 +121,9 @@
 {
   NSString *sourceRoot;
   NSString *targetRoot;
+  NSArray *sourceDirArray;
+  NSArray *targetDirArray;
+  NSString *dirStr;
   NSMutableDictionary *sourceFileDict;
   NSMutableDictionary *targetFileDict;
   NSEnumerator *en;
@@ -141,6 +149,7 @@
   [sourceDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[sourceMap directories] count]] description]];
   [sourceFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[sourceMap files] count]] description]];
   sourceFileDict = [sourceMap files];
+  sourceDirArray = [sourceMap directories];
   
   [targetMap release];
   targetMap = [[FileMap alloc] init];
@@ -149,11 +158,32 @@
   [targetDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[targetMap directories] count]] description]];
   [targetFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[targetMap files] count]] description]];
   targetFileDict = [targetMap files];
+  targetDirArray = [targetMap directories];
 
+  targetMissingDirs = [NSMutableArray new];
+  sourceMissingDirs = [NSMutableArray new];
   targetMissingFiles = [NSMutableArray new];
   sourceMissingFiles = [NSMutableArray new];
   targetModFiles = [NSMutableArray new];
   sourceModFiles = [NSMutableArray new];
+
+  /* compare source against target directories */
+  en = [sourceDirArray objectEnumerator];
+  while ((dirStr = [en nextObject]))
+    {
+      if ([targetDirArray indexOfObject:dirStr] == NSNotFound)
+	[targetMissingDirs addObject:dirStr];
+    }
+  NSLog(@"target missing dirs: %@", targetMissingDirs);
+
+  /* look for source missing directories */
+  en = [targetDirArray objectEnumerator];
+  while ((dirStr = [en nextObject]))
+    {
+      if ([sourceDirArray indexOfObject:dirStr] == NSNotFound)
+	[sourceMissingDirs addObject:dirStr];
+    }
+  NSLog(@"source missing dirs: %@", sourceMissingDirs);
 
   /* compare source against target
      find source modified and missing files */
@@ -207,8 +237,6 @@
   NSLog(@"target modified: %@", targetModFiles);
   NSLog(@"source modified: %@", sourceModFiles);
 
-  /* TODO handle directories */
-
   analyzeRunning = NO;
   analyzed = YES;
   [progressBar stopAnimation:nil];
@@ -238,19 +266,20 @@
   updateItems = [updateItemsCheck state] == NSOnState;
   deleteItems = [deleteItemsCheck state] == NSOnState;
 
-
+  totalItems = 0;
   if (!updateSource)
     {
       [sourceMissingFiles release];
       sourceMissingFiles = 0;
       [targetModFiles release];
       targetModFiles = 0;
-      /* TODO handle directories */
     }
     
   if (handleDirectories)
     {
-        /* TODO handle directories */
+      totalItems += [targetMissingDirs count];
+      if (updateSource)
+	totalItems += [sourceMissingDirs count];
     }
       
   totalItems = [targetMissingFiles count] + [sourceMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
