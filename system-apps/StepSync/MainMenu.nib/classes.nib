@@ -6,6 +6,9 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 analyzeButton = NSButton; 
+                deleteItemsCheck = NSButton; 
+                handleDirectoriesCheck = NSButton; 
+                insertItemsCheck = NSButton; 
                 logView = NSTextView; 
                 progressBar = NSProgressIndicator; 
                 sourceDirNumberField = NSTextField; 
@@ -17,6 +20,8 @@
                 targetFileNumberField = NSTextField; 
                 targetPathField = NSTextField; 
                 targetSizeField = NSTextField; 
+                updateItemsCheck = NSButton; 
+                updateSourceCheck = NSButton; 
             }; 
             SUPERCLASS = NSObject; 
         }, 
