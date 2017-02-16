@@ -280,12 +280,15 @@
   deleteItems = [deleteItemsCheck state] == NSOnState;
 
   totalItems = 0;
-  if (!updateSource)
+  if (updateSource || deleteItems)
+    totalItems += [sourceMissingFiles count];
+  
+  if (!updateSource && !deleteItems)
     {
       [sourceMissingFiles release];
-      sourceMissingFiles = 0;
+      sourceMissingFiles = nil;
       [targetModFiles release];
-      targetModFiles = 0;
+      targetModFiles = nil;
     }
     
   if (handleDirectories)
@@ -295,9 +298,9 @@
 	totalItems += [sourceMissingDirs count];
     }
       
-  totalItems += [targetMissingFiles count] + [sourceMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
+  totalItems += [targetMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
   [progressBar setMinValue:0.0];
-  [progressBar setMaxValue:(double)totalItems];
+  [progressBar setMaxValue:(double)(totalItems-1)];
 
   if (handleDirectories)
     {
@@ -315,6 +318,7 @@
 		{
 		  NSLog(@"error creating: %@", fullPath);
 		}
+              [progressBar incrementBy:1.0];
 	    }
 
 	  if (deleteItems)
@@ -329,6 +333,7 @@
 		    {
 		      NSLog(@"error removing: %@", fullPath);
 		    }
+                  [progressBar incrementBy:1.0];
 		}
 	    }
 	}
@@ -346,6 +351,7 @@
 		{
 		  NSLog(@"error creating: %@", fullPath);
 		}
+              [progressBar incrementBy:1.0];
 	    }
 
 	  if (deleteItems)
@@ -360,6 +366,7 @@
 		    {
 		      NSLog(@"error removing: %@", fullPath);
 		    }
+                  [progressBar incrementBy:1.0];
 		}
 	    }
 	}
@@ -405,8 +412,9 @@
 	    }
 	}
     }
- 
-  if (deleteItems)
+
+  /* source is missing some files */
+  if (deleteItems && !updateSource)
     {
       for (i = 0; i < [sourceMissingFiles count]; i++)
 	{
@@ -419,6 +427,25 @@
 	    {
 	      NSLog(@"Error removing file: %@", [fileObj absolutePath]);
 	    }
+	}
+    }
+  /* copy the files to source */
+  else if (updateSource)
+    {
+      for (i = 0; i < [sourceMissingFiles count]; i++)
+	{
+	  FileObject *fileObj;
+          NSString *newAbsolutePath;
+	  NSDictionary *fAttr;
+
+          fileObj = [sourceMissingFiles objectAtIndex:i];
+	  [progressBar incrementBy:1.0];
+
+	  /* TODO should recheck ? */
+	  newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
+	  [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
+	  fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
+	  [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
 	}
     }
   
