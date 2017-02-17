@@ -432,20 +432,41 @@
   /* copy the files to source */
   else if (updateSource)
     {
-      for (i = 0; i < [sourceMissingFiles count]; i++)
+      if (insertItems)
+        {
+          for (i = 0; i < [sourceMissingFiles count]; i++)
+            {
+              FileObject *fileObj;
+              NSString *newAbsolutePath;
+              NSDictionary *fAttr;
+
+              fileObj = [sourceMissingFiles objectAtIndex:i];
+              [progressBar incrementBy:1.0];
+
+              /* TODO should recheck ? */
+              newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
+              [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
+              fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
+              [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+            }
+        }
+      for (i = 0; i < [targetModFiles count]; i++)
 	{
 	  FileObject *fileObj;
-          NSString *newAbsolutePath;
+	  NSString *newAbsolutePath;
 	  NSDictionary *fAttr;
 
-          fileObj = [sourceMissingFiles objectAtIndex:i];
+	  fileObj = [targetModFiles objectAtIndex:i];
 	  [progressBar incrementBy:1.0];
 
 	  /* TODO should recheck ? */
 	  newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
-	  [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-	  fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
-	  [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+	  if([fm removeFileAtPath:newAbsolutePath handler:nil])
+	    {
+	      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
+	      fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
+	      [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+	    }
 	}
     }
   
