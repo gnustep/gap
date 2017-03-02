@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2016 Riccardo Mottola
+ Copyright (C) 2005-2017 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -243,7 +243,7 @@
         while ([fullLine characterAtIndex:cursor] == ' ' && cursor <= lineLen)
             cursor++;
         
-        // typically links - user - group - size
+        // typically links - (user) - group - size
         
         searchRange = NSMakeRange(cursor, lineLen-cursor);
         tokenEnd = [fullLine rangeOfCharacterFromSet:whiteSet options:0 range:searchRange];
@@ -333,63 +333,57 @@
         }
         
         elementsFound = [splitLine count];
-        
         // copy back the found data
-        if (foundStandardMonth && elementsFound == 9)
-        {
-	  NSRange linkArrowRange;
+        if ((foundStandardMonth && elementsFound == 9) || (foundOneBeforeMonth && elementsFound == 8))
+          {
+            NSRange linkArrowRange;
+            NSString *tmpFileName;
+            NSString *tmpSizeString;
 
             // everything is fine and ok, we have a full-blown listing and parsed it well;            
             isDir = NO;
+            isLink = NO;
             if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
                 isDir = YES;
-            [[NSScanner scannerWithString: [splitLine objectAtIndex:4]] scanLongLong:&tempLL];
+            else if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'l')
+                isLink = YES;
+            
+            size = 0;
+            if (foundStandardMonth)
+              tmpSizeString = [splitLine objectAtIndex:4];
+            else
+              tmpSizeString = [splitLine objectAtIndex:3];
+            [[NSScanner scannerWithString: tmpSizeString] scanLongLong:&tempLL];
 	    if (tempLL > 0)
 	      size = (unsigned long long)tempLL;
-	    else
-	      size = 0;
-	    linkArrowRange = [[splitLine objectAtIndex:8] rangeOfString: @" -> "];
-	    if (linkArrowRange.location == NSNotFound)
-	      {
-		fileName = [[splitLine objectAtIndex:8] retain];
-	      }
-	    else
-	      {
-                isLink = YES;
-		size = 0;
-		fileName = [[[splitLine objectAtIndex:8] substringToIndex: linkArrowRange.location] retain];
-		linkTargetName = [[[splitLine objectAtIndex:8] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
-		NSLog(@"we have a link (1) %@", linkTargetName);
-	      }
-        }
-	else if (foundOneBeforeMonth && elementsFound == 8)
-        {
-	  NSRange linkArrowRange;
 
-            // we miss the link count or user probably
-            isDir = NO;
-            if ([[splitLine objectAtIndex:0] characterAtIndex:0] == 'd')
-                isDir = YES;
-            [[NSScanner scannerWithString: [splitLine objectAtIndex:3]] scanLongLong:&tempLL];
-	    if (tempLL > 0)
-	      size = (unsigned long long)tempLL;
-	    else
-	      size = 0;
-            linkArrowRange = [[splitLine objectAtIndex:7] rangeOfString: @" -> "];
-	    if (linkArrowRange.location == NSNotFound)
-	      {
-		fileName = [[splitLine objectAtIndex:7] retain];
-	      }
-	    else
-	      {
-                isLink = YES;
-		size = 0;
-		fileName = [[[splitLine objectAtIndex:7] substringToIndex: linkArrowRange.location] retain];
-		linkTargetName = [[[splitLine objectAtIndex:7] substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
-		NSLog(@"we have a link (2) %@", linkTargetName);
-	      }
-        } else
-            return nil;
+            tmpFileName = [splitLine objectAtIndex:elementsFound -1];
+            NSLog(@"fileName to parse: %@", tmpFileName);
+	    linkArrowRange = [tmpFileName rangeOfString: @" -> "];
+            if (isLink)
+              {
+                if (linkArrowRange.location == NSNotFound)
+                  {
+                    NSLog(@"we have a link, but no target to parse: %@", tmpFileName);
+                  }
+                else
+                  {
+                    /* we suppose links  with small sizes are directories, better ideas */
+                    if (size < 100)
+                      isDir = YES;
+                    fileName = [[tmpFileName substringToIndex: linkArrowRange.location] retain];
+                    linkTargetName = [[tmpFileName substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
+                    NSLog(@"we have a link, target: %@", linkTargetName);
+                  }
+              }
+            else
+              {
+                fileName = [tmpFileName retain];
+
+              }
+          }
+        else
+          return nil;
         
     } else if ((fullLine != NULL) && ([fullLine rangeOfString: @"*FILE"].location != NSNotFound))
     {
@@ -476,12 +470,6 @@
         return nil;
     else if([fileName isEqualToString:@".."])
         return nil;
-
-    if (isLink)
-      {
-	NSLog(@"size: %llu", size);
-	NSLog(@"filename: %@", fileName);
-      }
     }
   return self;
 }

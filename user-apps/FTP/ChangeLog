@@ -1,3 +1,8 @@
+2017-03-02 Riccardo Mottola <rm@gnu.org>
+
+	* fileTable.m
+	Razionalize parsing with 8 or 9 elements, improve link handling by extracting link information from the dir block.
+
 2016-11-24 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
