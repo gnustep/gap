@@ -333,8 +333,17 @@
         }
         
         elementsFound = [splitLine count];
-        // copy back the found data
-        if ((foundStandardMonth && elementsFound == 9) || (foundOneBeforeMonth && elementsFound == 8))
+        // If the listing had only 8 elements out of 9
+        // Missing user is supposed and a blank is inserted
+        if (elementsFound == 8)
+          {
+            [splitLine insertObject: @"" atIndex:2];
+            foundStandardMonth = foundOneBeforeMonth;
+            elementsFound = [splitLine count];
+          }
+        
+        // Parse split data
+        if (foundStandardMonth && elementsFound == 9)
           {
             NSRange linkArrowRange;
             NSString *tmpFileName;
@@ -349,31 +358,32 @@
                 isLink = YES;
             
             size = 0;
-            if (foundStandardMonth)
-              tmpSizeString = [splitLine objectAtIndex:4];
-            else
-              tmpSizeString = [splitLine objectAtIndex:3];
+            tmpSizeString = [splitLine objectAtIndex:4];
             [[NSScanner scannerWithString: tmpSizeString] scanLongLong:&tempLL];
 	    if (tempLL > 0)
 	      size = (unsigned long long)tempLL;
 
             tmpFileName = [splitLine objectAtIndex:elementsFound -1];
-            NSLog(@"fileName to parse: %@", tmpFileName);
 	    linkArrowRange = [tmpFileName rangeOfString: @" -> "];
             if (isLink)
               {
                 if (linkArrowRange.location == NSNotFound)
                   {
                     NSLog(@"we have a link, but no target to parse: %@", tmpFileName);
+                    fileName = [tmpFileName retain];
                   }
                 else
                   {
-                    /* we suppose links  with small sizes are directories, better ideas */
-                    if (size < 100)
-                      isDir = YES;
                     fileName = [[tmpFileName substringToIndex: linkArrowRange.location] retain];
                     linkTargetName = [[tmpFileName substringFromIndex: linkArrowRange.location+linkArrowRange.length] retain];
                     NSLog(@"we have a link, target: %@", linkTargetName);
+                  }
+                // we suppose that files have extensions, dirs not
+                // links have no further information
+                if ([[fileName pathExtension] isEqualToString:@""])
+                  {
+                    NSLog(@"we suppose %@ is a dir", fileName);
+                    isDir = YES;
                   }
               }
             else
