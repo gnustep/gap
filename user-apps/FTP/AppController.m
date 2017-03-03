@@ -107,6 +107,9 @@
 
   /* log */
   [logWin setTitle:NSLocalizedString(@"Connection Log", @"Connection Log")];
+
+  [logTextField setSelectable:YES];
+  [logTextField setEditable:NO];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
