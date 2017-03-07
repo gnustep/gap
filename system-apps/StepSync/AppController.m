@@ -248,6 +248,54 @@
   analyzeRunning = NO;
   analyzed = YES;
   [progressBar stopAnimation:nil];
+  [self reportAnalysis];
+}
+
+- (void)reportAnalysis
+{
+  NSMutableString *tempStr;
+  NSAttributedString *attrStr;
+  NSMutableDictionary *textAttributes;
+  NSUInteger i;
+  
+  textAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
+
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Directories present in Source but not Target:\n"];
+  for (i = 0; i < [targetMissingDirs count]; i++)
+    {
+      [tempStr appendString:[[targetMissingDirs objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+  [tempStr appendString:@"\n"];
+  [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStr waitUntilDone:YES];
+  
+  [attrStr release];
+  [tempStr release];
+  
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Files present in Source but not Target:\n"];
+  for (i = 0; i < [targetMissingFiles count]; i++)
+    {
+      [tempStr appendString:[[targetMissingFiles objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+  [tempStr appendString:@"\n"];
+  [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStr waitUntilDone:YES];
+  
+  [attrStr release];
+  [tempStr release];
+  
+  NSLog(@"target missing: %@", targetMissingFiles);
+  NSLog(@"source missing: %@", sourceMissingFiles);
+  NSLog(@"target modified: %@", targetModFiles);
+  NSLog(@"source modified: %@", sourceModFiles);
 }
 
 - (IBAction)syncAction:(id)sender
@@ -473,5 +521,17 @@
   syncRunning = NO;
 }
 
+- (void)_appendStringToViewAndScroll:(NSAttributedString *)str
+{
+  [str retain];
+  
+  [[logView textStorage] appendAttributedString: str];
+
+  /* we scroll in the next run of the event loop */
+  [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantPast]];
+  [logView scrollRangeToVisible:NSMakeRange([[logView string] length], 0)];
+
+  [str release];
+}
 
 @end
