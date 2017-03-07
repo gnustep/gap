@@ -69,6 +69,7 @@
 - (IBAction)setTargetPath:(id)sender;
 
 - (IBAction)analyzeAction:(id)sender;
+- (void)reportAnalysis;
 - (IBAction)syncAction:(id)sender;
 
 @end
