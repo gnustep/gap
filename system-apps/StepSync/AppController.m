@@ -254,12 +254,19 @@
 - (void)reportAnalysis
 {
   NSMutableString *tempStr;
+  NSMutableAttributedString *attrStrMut;
   NSAttributedString *attrStr;
+  NSMutableDictionary *titleAttributes;
   NSMutableDictionary *textAttributes;
   NSUInteger i;
+
+  titleAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
+  [titleAttributes  setObject:[NSColor redColor] forKey:NSForegroundColorAttributeName];
   
   textAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
 
+  attrStrMut = [NSMutableAttributedString new];
+  
   tempStr = [NSMutableString new];
   [tempStr appendString:@"Directories present in Source but not Target:\n"];
   for (i = 0; i < [targetMissingDirs count]; i++)
@@ -271,8 +278,8 @@
   [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
-  [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStr waitUntilDone:YES];
-  
+
+  [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   [tempStr release];
   
@@ -287,8 +294,12 @@
   [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
-  [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStr waitUntilDone:YES];
+
+  [attrStrMut appendAttributedString:attrStr];
   
+  [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
+
+  [attrStrMut release];
   [attrStr release];
   [tempStr release];
   
