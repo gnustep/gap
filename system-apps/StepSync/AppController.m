@@ -264,7 +264,7 @@
   [tempStr appendString:@"Directories present in Source but not Target:\n"];
   for (i = 0; i < [targetMissingDirs count]; i++)
     {
-      [tempStr appendString:[[targetMissingDirs objectAtIndex:i] relativePath]];
+      [tempStr appendString:[targetMissingDirs objectAtIndex:i]];
       [tempStr appendString:@"\n"];
     }
   [tempStr appendString:@"\n"];
