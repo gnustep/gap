@@ -253,55 +253,89 @@
 
 - (void)reportAnalysis
 {
+  NSString *sepStr;
+  NSAttributedString *sepAttrStr;
   NSMutableString *tempStr;
   NSMutableAttributedString *attrStrMut;
   NSAttributedString *attrStr;
   NSMutableDictionary *titleAttributes;
+  NSMutableDictionary *separatorAttributes;
   NSMutableDictionary *textAttributes;
   NSUInteger i;
 
   titleAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
   [titleAttributes  setObject:[NSColor redColor] forKey:NSForegroundColorAttributeName];
+
+  separatorAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
+  [separatorAttributes  setObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
   
   textAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
+  [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+
+  sepStr = @"----------------------------------------------------------\n";
+  sepAttrStr = [[NSAttributedString alloc] initWithString: sepStr
+                                            attributes: separatorAttributes];
 
   attrStrMut = [NSMutableAttributedString new];
+    
+  [attrStrMut appendAttributedString:sepAttrStr];
   
   tempStr = [NSMutableString new];
   [tempStr appendString:@"Directories present in Source but not Target:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
   for (i = 0; i < [targetMissingDirs count]; i++)
     {
       [tempStr appendString:[targetMissingDirs objectAtIndex:i]];
       [tempStr appendString:@"\n"];
     }
   [tempStr appendString:@"\n"];
-  [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
 
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   [tempStr release];
+
+  [attrStrMut appendAttributedString:sepAttrStr];
   
   tempStr = [NSMutableString new];
   [tempStr appendString:@"Files present in Source but not Target:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
   for (i = 0; i < [targetMissingFiles count]; i++)
     {
       [tempStr appendString:[[targetMissingFiles objectAtIndex:i] relativePath]];
       [tempStr appendString:@"\n"];
     }
   [tempStr appendString:@"\n"];
-  [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
 
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
   
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
   [attrStrMut release];
-  [attrStr release];
-  [tempStr release];
+  [sepAttrStr release];
   
   NSLog(@"target missing: %@", targetMissingFiles);
   NSLog(@"source missing: %@", sourceMissingFiles);
