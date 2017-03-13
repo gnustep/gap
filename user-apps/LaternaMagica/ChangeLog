@@ -1,3 +1,8 @@
+2017-03-13 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+        Retrieve image from view only after cecking the event.
+        
 2016-01-24 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m

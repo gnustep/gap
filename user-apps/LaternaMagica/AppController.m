@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2016 Riccardo Mottola
+   Copyright (C) 2006-2017 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -257,13 +257,13 @@
 
     /* trick for GS so that we don't have order problems with GWorkspace */
     [window makeKeyAndOrderFront: self];
-
-    image = [view image];
-    [image retain];
     
     /* we choose not to respond to key events if not in fullscreen */
     if ([sender isKindOfClass:[NSEvent class]] && [fullScreenMenuItem state] == NSOffState)
         return;
+
+    image = [view image];
+    [image retain];
 
     /* check the sender and set the other item accordingly */    
     if (sender == fullScreenButton)
