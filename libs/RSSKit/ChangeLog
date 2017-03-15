@@ -1,3 +1,10 @@
+2017-03-15 Riccardo Mottola <rm@gnu.org>
+
+	* RSSFeed.h
+	* RSSFeed.m
+	* RSSFeed+Fetching.m
+	Make rssVersion a class IVAR.
+
 2014-12-22 Riccardo Mottola <rm@gnu.org>
 
 	* RSSArticleProtocol.h

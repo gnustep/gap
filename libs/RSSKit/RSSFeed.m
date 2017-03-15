@@ -2,7 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
- *                2010-2012 Free Software Foundation, Inc
+ *                2010-2017 Free Software Foundation, Inc
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -66,7 +66,7 @@
   lastError = RSSFeedErrorNoError;
   feedName = nil;
   articleClass = [RSSArticle class];
-  
+  rssVersion = nil;
   status = RSSFeedIsIdle;
   
   return self;
