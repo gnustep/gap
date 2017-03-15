@@ -1,7 +1,7 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2010-2011 The Free Software Foundation, Inc.
+ *  Copyright (C) 2010-2017 The Free Software Foundation, Inc.
  *                2006      Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
@@ -92,6 +92,7 @@ enum RSSFeedStatus
   NSString*         feedName;
   NSURL*            feedURL;
   Class             articleClass;
+  NSString*         rssVersion;
   
   enum RSSFeedStatus status;
 

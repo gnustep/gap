@@ -2,6 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2017 Free Software Foundation, Inc
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -180,8 +181,6 @@ NSString *const RSSFeedFetchFailedNotification = @"RSSFeedFetchFailedNotificatio
  */
 -(enum RSSFeedError) fetchWithData: (NSData*)data
 { 
-  NSString* rssVersion;
-  
   NSXMLParser* parser;
   XMLNode* root;
   XMLNode* document;
