@@ -1,3 +1,8 @@
+2017-03-20  Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.in
+	Correct order of LDFLAGS.
+
 2016-12-21  Riccardo Mottola <rm@gnu.org>
 
 	* xpdf/bridge/XPDFBridge.h
