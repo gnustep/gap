@@ -99,7 +99,7 @@
   NSMutableDictionary *props;
   NSPoint p;
   NSString *fontname;
-  float fsize;
+  CGFloat fsize;
   NSFont *fontObj;
   float parspace;
   NSTextAlignment align;          
@@ -121,7 +121,17 @@
 
   fontname = [description objectForKey: @"fontname"];
   fsize = [[description objectForKey: @"fontsize"] floatValue];
+  if (fsize == 0)
+    {
+      NSLog(@"font size invalid");
+      fsize = 12.0;
+    }
   fontObj = [NSFont fontWithName: fontname size: fsize];
+  if (nil == fontObj)
+    {
+      NSLog(@"font %@ of size %f not found using system", fontname, fsize);
+      fontObj = [NSFont systemFontOfSize:fsize];
+    }
   [props setObject:fontObj forKey:@"font"];
 
   align = [[description objectForKey: @"txtalign"] intValue];

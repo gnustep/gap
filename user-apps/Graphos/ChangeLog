@@ -1,3 +1,8 @@
+2017-03-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRText.m
+	Do not choke when Font is not found, but replace with system one.
+
 2017-02-07 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
@@ -16,9 +21,9 @@
 
 2017-01-01 Riccardo Mottola <rm@gnu.org>
 
-	* GRCircle.m 
+	* GRCircle.m
         decode circleness properly
-        
+
 2015-04-04 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
