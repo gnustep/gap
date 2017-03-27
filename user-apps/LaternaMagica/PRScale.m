@@ -3,7 +3,7 @@
 //  PRICE
 //
 //  Created by Riccardo Mottola on Wed Jan 19 2005.
-//  Copyright (c) 2005-2015 Riccardo Mottola. All rights reserved.
+//  Copyright (c) 2005-2017 Riccardo Mottola. All rights reserved.
 //
 // This application is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -46,6 +46,7 @@
   NSInteger origW, origH;
   NSInteger x, y;
   NSInteger i;
+  NSSize newSize;
   unsigned char *srcData;
   unsigned char *destData;
   NSInteger srcSamplesPerPixel;
@@ -88,6 +89,9 @@
     destData = [destImageRep bitmapData];
     destBytesPerRow = [destImageRep bytesPerRow];
     destBytesPerPixel = [destImageRep bitsPerPixel] / 8;
+    newSize = NSMakeSize([srcImageRep size].width / xRatio, [srcImageRep size].height / yRatio);
+    [destImageRep setSize:newSize];
+    NSLog(@" original width %f new width: %f", [srcImageRep size].width, newSize.width);
 
     if (method == NEAREST_NEIGHBOUR)
       {
