@@ -776,7 +776,7 @@
   NSString *destFileName;
   NSString *destFileExtension;
   NSString *destFolder;
-  int i;
+  NSInteger i;
   
   givenHeight = [fieldHeight intValue];
   givenWidth = [fieldWidth intValue];
@@ -792,7 +792,7 @@
   [exporterPanel displayIfNeeded];
   for (i = 0; i < [fileListView numberOfRows]; i++)
     {
-      int newW, newH;
+      NSInteger newW, newH;
       double aspectRatio;
       NSBitmapImageRep *scaledImageRep;
       NSAutoreleasePool *pool;
