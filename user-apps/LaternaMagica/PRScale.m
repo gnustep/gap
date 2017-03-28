@@ -91,7 +91,6 @@
     destBytesPerPixel = [destImageRep bitsPerPixel] / 8;
     newSize = NSMakeSize([srcImageRep size].width / xRatio, [srcImageRep size].height / yRatio);
     [destImageRep setSize:newSize];
-    NSLog(@" original width %f new width: %f", [srcImageRep size].width, newSize.width);
 
     if (method == NEAREST_NEIGHBOUR)
       {
