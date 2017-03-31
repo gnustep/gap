@@ -2,7 +2,7 @@
  Project: AClock
  Clock.h
 
- Copyright (C) 2003-2011 GNUstep Application Project
+ Copyright (C) 2003-2017 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -69,8 +69,8 @@ TODO?
 
 - (void) setTimeZone:(NSTimeZone *)tz;
 - (NSTimeZone *) timeZone;
-- (void) setDate:(NSDate *)date;
-- (NSDate *) date;
+- (void) setDate:(NSCalendarDate *)date;
+- (NSCalendarDate *) date;
 
 /* move a clock to CSClockView and put these theming method into subclass */
 

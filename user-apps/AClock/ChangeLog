@@ -1,3 +1,9 @@
+2017-03-31 Riccardo Mottola <rm@gmu.org>
+
+	* AppController.h
+	* AppController.m
+	Correct signature to NSCalendarDate
+
 2017-01-26 Riccardo Mottola <rm@gmu.org>
 
 	* AppController.h

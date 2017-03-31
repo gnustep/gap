@@ -969,7 +969,7 @@ static NSArray *dayWeek;
 	return _timeZone;
 }
 
-- (void) setDate:(NSDate *)date
+- (void) setDate:(NSCalendarDate *)date
 {
   if (_date != date)
     {
@@ -993,7 +993,7 @@ static NSArray *dayWeek;
 	[self setNeedsDisplay: YES];
 }
 
-- (NSDate *) date
+- (NSCalendarDate *) date
 {
 	return _date;
 }
