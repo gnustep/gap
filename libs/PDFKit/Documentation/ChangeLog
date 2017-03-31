@@ -1,3 +1,9 @@
+2017-03-31  Riccardo Mottola <rm@gnu.org>
+
+	* xpdf/bridge/XPDFBridge.h
+	* xpdf/bridge/XPDFBridge.cc
+	Rename variable to avoid aliasing and fix bug introduced when static var was removed.
+
 2017-03-20  Riccardo Mottola <rm@gnu.org>
 
 	* GNUmakefile.in

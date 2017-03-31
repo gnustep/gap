@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
- *               2016 GNUstep Application Project
+ *               2016-2017 GNUstep Application Project
  *
  * Authors: Stefan Kleine Stegemann
  *          Riccardo Mottola
@@ -156,7 +156,7 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
                      char** textA,
                      int* length);
 
-int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *infoDict);
+int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *docInfoDict);
 
 /*
  * Outline
