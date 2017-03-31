@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003  Stefan Kleine Stegemann
- *               2012-2016 GNUstep Application Project
+ *               2012-2017 GNUstep Application Project
  *
  * Authors: Stefan Kleine Stegemann
  *          Riccardo Mottola
@@ -469,7 +469,7 @@ void PDFUtil_GetText(XPDFObject pdfDoc,
    XPDF_ReleaseLock();
 }
 
-int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *infoDict)
+int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *docInfoDict)
 {
   UnicodeMap *uMap;
   PDFDoc *doc;
@@ -502,7 +502,7 @@ int PDFUtil_GetInfo(XPDFObject pdfDoc, infoDictFunc dictfunc, void *infoDict)
               GString *str = obj.getString();
               char *cStr = str->getCString();
 
-              (*dictfunc)(key, cStr, infoDict);
+              (*dictfunc)(key, cStr, docInfoDict);
             }
           obj.free();
         }
