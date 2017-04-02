@@ -1981,25 +1981,27 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSRect       frameRect;
   NSBezierPath *bzp;
 
-    frameRect = [self frame];
+  frameRect = [self frame];
     
-    [[NSColor whiteColor] set];
-    NSRectFill(rect);
+  [[NSColor whiteColor] set];
+  NSRectFill(rect);
 
-    [[NSColor lightGrayColor] set];
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    {
+      [[NSColor lightGrayColor] set];
 
-    bzp = [NSBezierPath bezierPath];
-    [bzp moveToPoint:NSMakePoint(0, zmdRect.origin.y)];
-    [bzp lineToPoint:NSMakePoint(frameRect.size.width, zmdRect.origin.y)];
-    [bzp lineToPoint:NSMakePoint(rect.size.width, zmdRect.origin.y)];
-    [bzp moveToPoint:NSMakePoint(0, zmdRect.origin.y + zmdRect.size.height)];
-    [bzp lineToPoint:NSMakePoint(frameRect.size.width, zmdRect.origin.y + zmdRect.size.height)];
-    [bzp moveToPoint:NSMakePoint(zmdRect.origin.x, 0)];
-    [bzp lineToPoint:NSMakePoint(zmdRect.origin.x, frameRect.size.height)];
-    [bzp moveToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, 0)];
-    [bzp lineToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, frameRect.size.height)];
-    [bzp stroke];
-
+      bzp = [NSBezierPath bezierPath];
+      [bzp moveToPoint:NSMakePoint(0, zmdRect.origin.y)];
+      [bzp lineToPoint:NSMakePoint(frameRect.size.width, zmdRect.origin.y)];
+      [bzp lineToPoint:NSMakePoint(rect.size.width, zmdRect.origin.y)];
+      [bzp moveToPoint:NSMakePoint(0, zmdRect.origin.y + zmdRect.size.height)];
+      [bzp lineToPoint:NSMakePoint(frameRect.size.width, zmdRect.origin.y + zmdRect.size.height)];
+      [bzp moveToPoint:NSMakePoint(zmdRect.origin.x, 0)];
+      [bzp lineToPoint:NSMakePoint(zmdRect.origin.x, frameRect.size.height)];
+      [bzp moveToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, 0)];
+      [bzp lineToPoint:NSMakePoint(zmdRect.origin.x + zmdRect.size.width, frameRect.size.height)];
+      [bzp stroke];
+    }
 
     for(i = 0; i < [objects count]; i++)
         [(GRDrawableObject *)[objects objectAtIndex: i] draw];
