@@ -109,27 +109,27 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
       NSLog(@"class: %@", [obj className]);
       if([obj isKindOfClass: [GRBezierPath class]])
         {
-	  str = [NSString stringWithFormat: @"path%i", p];
+	  str = [NSString stringWithFormat: @"path%lu", (unsigned long)p];
 	  p++;
         }
       else if([obj isKindOfClass: [GRImage class]])
         {
-	  str = [NSString stringWithFormat: @"image%i", i];
+	  str = [NSString stringWithFormat: @"image%lu", (unsigned long)i];
 	  i++;
         }
       else if([obj isKindOfClass: [GRBox class]])
         {
-	  str = [NSString stringWithFormat: @"box%i", b];
+	  str = [NSString stringWithFormat: @"box%lu", (unsigned long)b];
 	  b++;
         }
       else if([obj isKindOfClass: [GRCircle class]])
         {
-	  str = [NSString stringWithFormat: @"circle%i", c];
+	  str = [NSString stringWithFormat: @"circle%lu", (unsigned long)c];
 	  c++;
         }
       else if([obj isKindOfClass: [GRText class]])
         {
-	  str = [NSString stringWithFormat: @"text%i", t];
+	  str = [NSString stringWithFormat: @"text%lu", (unsigned long)t];
 	  t++;
         }
       else
