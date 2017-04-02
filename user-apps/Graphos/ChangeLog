@@ -1,3 +1,8 @@
+2017-04-02 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Use proper format type and cast.
+
 2017-03-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRText.m
