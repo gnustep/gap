@@ -321,7 +321,6 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
   [self saveCurrentObjects];
     
-  NSLog(@"AddTextAtPoint");
   for(i = 0; i < [objects count]; i++)
     [[[objects objectAtIndex: i] editor] unselect];
 
@@ -435,7 +434,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 {
     id obj;
     NSMutableArray *deleted;
-    int i, count;
+    NSUInteger i, count;
 
     deleted = [NSMutableArray arrayWithCapacity: 1];
 
