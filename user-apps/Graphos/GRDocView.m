@@ -165,6 +165,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     if(!dict)
       return NO;
 
+    [objects removeAllObjects];
     version = 0.0;
     versionNumber = [dict objectForKey:@"Version"];
     if (versionNumber)
