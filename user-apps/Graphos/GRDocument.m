@@ -73,6 +73,19 @@
 
 }
 
+- (BOOL)revertToSavedFromFile:(NSString *)fileName ofType:(NSString *)type
+{
+  BOOL r;
+  
+  r = [super revertToSavedFromFile:fileName ofType:type];
+  if (r)
+    {
+      [docView createObjectsFromDictionary: documentDictionary];
+    }
+  
+  return r;
+}
+
 - (NSData *)dataRepresentationOfType:(NSString *)aType
 {
     return [[[docView objectDictionary] description] dataUsingEncoding: NSASCIIStringEncoding];
