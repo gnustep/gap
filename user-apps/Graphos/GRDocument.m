@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocument.m
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -46,7 +46,6 @@
     NSPrintInfo *p;
 
     [super windowControllerDidLoadNib:aController];
-    NSLog(@"windowControllerDidLoadNib");
     if (aController == [[self windowControllers] objectAtIndex: 0])
     {
       NSScrollView *sv;

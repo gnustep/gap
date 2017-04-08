@@ -47,8 +47,6 @@
     {
       NSData *imgRepData;
 
-      NSLog(@"initInView properties of GRImage");
-
       imgRepData = [properties objectForKey:@"imgrepdata"];
       if (imgRepData)
         {
