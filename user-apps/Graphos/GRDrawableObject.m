@@ -54,8 +54,6 @@
       NSColor *newColor;
       id val;
 
-      NSLog(@"initInView properties of GRDrawableObject");
-
       docView = aView;
       zmFactor = zf;
       stroked = YES;

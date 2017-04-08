@@ -48,7 +48,6 @@
 
 - (id)initWithFrame:(NSRect)rect
 {
-    NSLog(@"initing GRToolsView");
     self = [super initWithFrame: rect];
     if(self)
     {
@@ -260,7 +259,6 @@
 {
     unsigned int style = NSTitledWindowMask;
 
-    NSLog(@"initing GRToolsWindow");
     self = [super initWithContentRect: NSMakeRect(10, 400, 50, 140)
                             styleMask: style
                               backing: NSBackingStoreBuffered

@@ -80,14 +80,12 @@ static double k = 0.025;
       [myPath setCachesBezierPath: NO];
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
       points = [description objectForKey: @"points"];
-      NSLog(@"points: %@", points);
       for (i = 0; i < [points count]; i++)
         {
           GRBezierHandle h;
           GRBezierControlPoint *cp;
 
           linearr = [[points objectAtIndex: i] componentsSeparatedByString: @" "];
-          NSLog(@"line array: %@", linearr);
           h.firstHandle.x = [[linearr objectAtIndex: 0] floatValue];
           h.firstHandle.y = [[linearr objectAtIndex: 1] floatValue];
           h.firstHandleRect = NSMakeRect(h.firstHandle.x-2, h.firstHandle.y-2, 4, 4);

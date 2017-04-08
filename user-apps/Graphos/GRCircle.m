@@ -47,8 +47,6 @@
     {
       id obj;
 
-      NSLog(@"initInView properties of GRCircle");
-
       pos = NSMakePoint([[properties objectForKey: @"posx"]  floatValue],
 			[[properties objectForKey: @"posy"]  floatValue]);
       size = NSMakeSize([[properties objectForKey: @"width"]  floatValue],
@@ -197,7 +195,6 @@
   self = [self initInView:aView zoomFactor:zf withProperties:props];
   if(self)
     {
-	NSLog(@"initInView description of GRCircle");
     }
     return self;
 }

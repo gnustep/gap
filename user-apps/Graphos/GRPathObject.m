@@ -61,8 +61,6 @@
     {
       id val;
 
-      NSLog(@"initInView properties of GRPathObject");
-
       myPath = [[NSBezierPath bezierPath] retain];
       [myPath setCachesBezierPath: NO];
 
