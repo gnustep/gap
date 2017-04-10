@@ -898,7 +898,7 @@
                           }
                     }
                   [destImageRep setProperty:NSImageEXIFData withValue:[imgProps objectForKey:NSImageEXIFData]];
-		  [destImageRep setSize:[srcImageRep size];
+		  [destImageRep setSize:[srcImageRep size]];
                   [destImage addRepresentation:destImageRep];
                   [destImageRep release];
                   [srcImage release];
