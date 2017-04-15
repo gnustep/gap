@@ -181,6 +181,10 @@
 				85F2216C11503BEF00A80101,
 				85F2216D11503BEF00A80101,
 				85F2216E11503BEF00A80101,
+				85BA5023C5B03AAD00A80101,
+				85BA5024C5B03AAD00A80101,
+				85BA5025C5B03AAD00A80101,
+				85BA5026C5B03AAD00A80101,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -418,6 +422,8 @@
 				853877F60DA0375200A80103,
 				85F2216F11503BEF00A80101,
 				85F2217111503BEF00A80101,
+				85BA5027C5B03AAD00A80101,
+				85BA5029C5B03AAD00A80101,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +498,8 @@
 				853877F70DA0375200A80103,
 				85F2217011503BEF00A80101,
 				85F2217211503BEF00A80101,
+				85BA5028C5B03AAD00A80101,
+				85BA502AC5B03AAD00A80101,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +638,54 @@
 		};
 		85B1DAAD0D8B2E2400A80103 = {
 			fileRef = 85B1DAAB0D8B2E2400A80103;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BA5023C5B03AAD00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRImage.h;
+			refType = 4;
+		};
+		85BA5024C5B03AAD00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRImage.m;
+			refType = 4;
+		};
+		85BA5025C5B03AAD00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRImageEditor.h;
+			refType = 4;
+		};
+		85BA5026C5B03AAD00A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GRImageEditor.m;
+			refType = 4;
+		};
+		85BA5027C5B03AAD00A80101 = {
+			fileRef = 85BA5023C5B03AAD00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BA5028C5B03AAD00A80101 = {
+			fileRef = 85BA5024C5B03AAD00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BA5029C5B03AAD00A80101 = {
+			fileRef = 85BA5025C5B03AAD00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BA502AC5B03AAD00A80101 = {
+			fileRef = 85BA5026C5B03AAD00A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};
