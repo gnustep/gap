@@ -142,8 +142,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
           [objsdict setObject: [obj objectDescription] forKey: str];
         }
     }
-  [objsdict setValue:[NSNumber numberWithFloat:FILE_FORMAT_VERSION] forKey:@"Version"];
-  [objsdict setValue:objectOrder forKey:@"Order"];
+  [objsdict setObject:[NSNumber numberWithFloat:FILE_FORMAT_VERSION] forKey:@"Version"];
+  [objsdict setObject:objectOrder forKey:@"Order"];
   return [NSDictionary dictionaryWithDictionary: objsdict];
 }
 
