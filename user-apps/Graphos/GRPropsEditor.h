@@ -26,6 +26,10 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+#ifndef MAC_OS_X_VERSION_10_4
+#define MAC_OS_X_VERSION_10_4 1040
+#endif
+
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4) && !defined(CGFloat)
 #define NSInteger int
 #define NSUInteger unsigned
