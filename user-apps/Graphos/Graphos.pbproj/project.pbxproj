@@ -282,6 +282,7 @@
 				85DC41580CAC6A3C00A80101,
 				85F2217311503E1F00A80101,
 				85F2217411503E1F00A80101,
+				85BA502CC5B03F4800A80101,
 			);
 			isa = PBXGroup;
 			name = Resources;
@@ -469,6 +470,7 @@
 				85F2217511503E1F00A80101,
 				85F2217611503E1F00A80101,
 				85BD17CA122859C700A80101,
+				85BA502DC5B03F4800A80101,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -686,6 +688,18 @@
 		};
 		85BA502AC5B03AAD00A80101 = {
 			fileRef = 85BA5026C5B03AAD00A80101;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		85BA502CC5B03F4800A80101 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = ChangeLog;
+			refType = 4;
+		};
+		85BA502DC5B03F4800A80101 = {
+			fileRef = 85BA502CC5B03F4800A80101;
 			isa = PBXBuildFile;
 			settings = {
 			};
