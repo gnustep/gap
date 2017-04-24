@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPathEditor.m
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original GDRaw implementation)
  Author: Ing. Riccardo Mottola
@@ -62,6 +62,7 @@
   if(!found)
     return p;
   
+  pp = p;
   zFactor = [object zoomFactor];
 
   event = [[[object view] window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
