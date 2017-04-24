@@ -1,7 +1,12 @@
+2017-04-24 Riccardo Mottola <rm@gnu.org>
+
+	* GRBezierPathEditor.m
+        Fix uninitialized pp point var.
+
 2017-04-15 Riccardo Mottola <rm@gnu.org>
 
-	* CRDocView
-    Use setObject and not setValue
+	* GRDocView.m
+	Use setObject and not setValue
 
 2017-04-08 Riccardo Mottola <rm@gnu.org>
 
