@@ -16,16 +16,21 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.1
 PACKAGE_NAME = GAPUSER
 
-SUBPROJECTS = FTP \
-Graphos \
-InnerSpace \
+SUBPROJECTS = \
+AClock \
+DataBasin \
+FTP \
 Games \
-LaternaMagica \
-RemoteDesk \
+Graphos \
+Grr  \
 GSPdf \
+InnerSpace \
+LaternaMagica \
 PictureFrame \
+RemoteDesk \
 Stepulator-osx \
-AClock
+TalkSoup \
+Vespucci
 #
 # Makefiles
 #
