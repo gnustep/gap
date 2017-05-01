@@ -117,6 +117,8 @@ ifneq (,$(findstring linux-gnu,$(GNUSTEP_TARGET_OS)))
 
 ifneq (yes,$(disable-alsa))
 BUNDLES += ALSA
+disable-esound=yes
+disable-ao=yes
 endif
 
 endif
