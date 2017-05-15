@@ -1,5 +1,10 @@
 2017-05-15 Riccardo Mottola <rm@gnu.org>
 
+	* FileInfo.m
+	Print pointer with %p
+
+2017-05-15 Riccardo Mottola <rm@gnu.org>
+
 	* NSObject+Custom.h
 	* NSObject+Custom.m
 	Make containsString conditional, since it is present in GNUstep and since MacOS 10.10

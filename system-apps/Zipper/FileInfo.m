@@ -118,7 +118,7 @@
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"<%@: 0x%ld '%@' '%@' %@ \"%@\" \"%@\">", [self class], self, 
+	return [NSString stringWithFormat:@"<%@: %p '%@' '%@' %@ \"%@\" \"%@\">", [self class], self, 
 		[self filename], [self path], [self size], [self date], [self ratio]];
 }
 
