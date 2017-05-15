@@ -1,3 +1,9 @@
+2017-05-15 Riccardo Mottola <rm@gnu.org>
+
+	* NSObject+Custom.h
+	* NSObject+Custom.m
+	Make containsString conditional, since it is present in GNUstep and since MacOS 10.10
+
 2013-05-20 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Version 1.5
 
