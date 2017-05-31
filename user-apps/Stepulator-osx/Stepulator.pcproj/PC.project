@@ -13,6 +13,7 @@
 	dist
     );
     BUILDTOOL = "/usr/bin/make";
+    "BUNDLE_IDENTIFIER" = "org.gnustep.Stepulator";
     "CLASS_FILES" = (
 	"main.m",
 	"CalcController.m",
