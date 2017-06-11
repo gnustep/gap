@@ -23,6 +23,10 @@
 #import <Foundation/Foundation.h>
 #import "NSString+Custom.h"
 
+#ifndef MAC_OS_X_VERSION_10_9
+#define MAC_OS_X_VERSION_10_9 1090
+#endif
+
 @implementation NSString (Convenience)
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_9)
