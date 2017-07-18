@@ -389,6 +389,34 @@
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   [tempStr release];
+
+  /* -- Files different in Source and Target -- */
+  [attrStrMut appendAttributedString:sepAttrStr];
+  
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Files which differ between Source and Target:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
+  for (i = 0; i < [sourceModFiles count]; i++)
+    {
+      [tempStr appendString:[[sourceModFiles objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+  [tempStr appendString:@"\n"];
+
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
   
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
