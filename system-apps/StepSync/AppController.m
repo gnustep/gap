@@ -277,7 +277,8 @@
                                             attributes: separatorAttributes];
 
   attrStrMut = [NSMutableAttributedString new];
-    
+
+  /* -- Directories present in Source but not in Target -- */
   [attrStrMut appendAttributedString:sepAttrStr];
   
   tempStr = [NSMutableString new];
@@ -305,6 +306,7 @@
   [attrStr release];
   [tempStr release];
 
+  /* Files present in Source bot not Target */
   [attrStrMut appendAttributedString:sepAttrStr];
   
   tempStr = [NSMutableString new];
@@ -331,12 +333,68 @@
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   [tempStr release];
+
+  /* -- Directories present in Target but not in Source */
+  [attrStrMut appendAttributedString:sepAttrStr];
+  
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Directories present in Target but not Source:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
+  for (i = 0; i < [sourceMissingDirs count]; i++)
+    {
+      [tempStr appendString:[sourceMissingDirs objectAtIndex:i]];
+      [tempStr appendString:@"\n"];
+    }
+  [tempStr appendString:@"\n"];
+
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+
+  /* -- Files present in Target but not in Source -- */
+  [attrStrMut appendAttributedString:sepAttrStr];
+  
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Files present in Target but not Source:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
+  for (i = 0; i < [sourceMissingFiles count]; i++)
+    {
+      [tempStr appendString:[[sourceMissingFiles objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+  [tempStr appendString:@"\n"];
+
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
   
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
-  [attrStrMut release];
+  [attrStrMut autorelease]; // used on another thread
   [sepAttrStr release];
-  
+
   NSLog(@"target missing: %@", targetMissingFiles);
   NSLog(@"source missing: %@", sourceMissingFiles);
   NSLog(@"target modified: %@", targetModFiles);
