@@ -3,7 +3,7 @@
   TableViewDataSource.m
   Zipper
 
-  Copyright (C) 2012 Free Software Foundation, Inc
+  Copyright (C) 2012-2017 Free Software Foundation, Inc
 
   Authors: Dirk Olmes <dirk@xanthippe.ping.de>
            Riccardo Mottola <rm@gnu.org>
@@ -74,7 +74,7 @@
 	}
 	else if ([identifier isEqual:COL_ID_DATE])
 	{
-		return [[fileInfo date] descriptionWithCalendarFormat:@"%y-%m-%d %H:%M:%S"];
+		return [[fileInfo date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S"];
 	}
 	else if ([identifier isEqual:COL_ID_SIZE])
 	{
