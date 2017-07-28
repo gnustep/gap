@@ -1,7 +1,7 @@
 /*
  Project: FTP
 
- Copyright (C) 2005-2016 Riccardo Mottola
+ Copyright (C) 2005-2017 Riccardo Mottola
 
  Author: Riccardo Mottola
 
@@ -1077,8 +1077,10 @@ int getChar(streamStruct* ss)
         tempStr = [NSString stringWithFormat:@"PORT %u,%u,%u,%u,%u,%u", addr.ipv4[0], addr.ipv4[1], addr.ipv4[2], addr.ipv4[3], p1, p2];
         [self writeLine:tempStr];
         NSLog(@"port str: %@", tempStr);
-        if ((returnCode = [self readReply:&reply]) != 200)
+        returnCode = [self readReply:&reply];
+        if (returnCode != 200)
         {
+          NSLog(@"Error return code of PORT: %d", returnCode);
           if(reply && [reply count] > 0)
             {
               NSLog(@"error occoured in port command: %@", [reply objectAtIndex:0]);
