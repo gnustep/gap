@@ -1,3 +1,8 @@
+2017-08-10 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/AddressView/ADPersonPropertyView.m
+	Allocate NSMutableDictionary as other instances are.
+
 2014-03-09 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/Addresses/ADLocalAddressBook.m

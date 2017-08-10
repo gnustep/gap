@@ -385,7 +385,7 @@ static float _globalFontSize;
 	  identifier = [mv addValue: value withLabel: label];
 	  return [_person setValue: mv forProperty: _property];
 	case ADMultiDictionaryProperty:
-	  dict = [NSDictionary dictionaryWithObjectsAndKeys: value,
+	  dict = [NSMutableDictionary dictionaryWithObjectsAndKeys: value,
 			       key, nil];
 	  identifier = [mv addValue: dict withLabel: label];
 	  return [_person setValue: mv forProperty: _property];
