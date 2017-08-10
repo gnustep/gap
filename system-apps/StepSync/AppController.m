@@ -272,6 +272,8 @@
   textAttributes = [NSMutableDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize: 0] forKey:NSFontAttributeName];
   [textAttributes  setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 
+  [self performSelectorOnMainThread:@selector(_cleanLogView:) withObject:nil waitUntilDone:NO];
+
   sepStr = @"----------------------------------------------------------\n";
   sepAttrStr = [[NSAttributedString alloc] initWithString: sepStr
                                             attributes: separatorAttributes];
@@ -650,6 +652,14 @@
     }
   
   syncRunning = NO;
+}
+
+- (void)_cleanLogView:(id)p
+{
+  NSTextStorage *ts;
+  
+  ts = [logView textStorage];
+  [ts deleteCharactersInRange:NSMakeRange(0, [[ts mutableString] length])];
 }
 
 - (void)_appendStringToViewAndScroll:(NSAttributedString *)str
