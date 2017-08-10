@@ -952,7 +952,7 @@
 	default:
 	  NSLog(@"Unexpected constraint selection value.");
 	}
-      NSLog(@"%d %d", newW, newH);
+
       if (newW == [srcImageRep pixelsWide])
 	{
 	  NSLog(@"nothing");
