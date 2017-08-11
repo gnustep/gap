@@ -2,7 +2,7 @@
  Project: Vespucci
  VEAppController.m
 
- Copyright (C) 2007-2010
+ Copyright (C) 2007-2017 Riccardo Mottola
 
  Author: Ing. Riccardo Mottola
 
@@ -171,6 +171,7 @@
     NSFont *font;
     NSString *fontName;
     NSUserDefaults *defaults;
+    NSString *str;
 
     defaults = [NSUserDefaults standardUserDefaults];
 
@@ -197,7 +198,9 @@
     [self updateFontPreview:fontMonoField :font];
     monospacedFont = font;
 
-    [homePageField setStringValue: [defaults objectForKey:@"Homepage"]];
+    str = [defaults objectForKey:@"Homepage"];
+    if (str)
+      [homePageField setStringValue: str];
 
     [prefPanel makeKeyAndOrderFront:self];
     [webPrefs release];
