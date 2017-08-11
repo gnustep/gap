@@ -482,7 +482,6 @@
 				LIBRARY_SEARCH_PATHS = "$(value)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Vespucci;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
