@@ -4,7 +4,7 @@
 
  Utility Functions
 
- Copyright (C) 2008
+ Copyright (C) 2008-2017
 
  Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
 
@@ -52,5 +52,7 @@ NSString *canonicizeUrl (NSString *urlStr)
             canonicizedUrl = [@"http://" stringByAppendingString:urlStr];
         }
     }
+    
+    canonicizedUrl = [canonicizedUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return canonicizedUrl;
 }
