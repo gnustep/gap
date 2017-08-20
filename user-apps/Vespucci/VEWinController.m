@@ -2,7 +2,7 @@
  Project: Vespucci
  VEWinController.m
 
- Copyright (C) 2007-2010
+ Copyright (C) 2007-2017
 
  Author: Ing. Riccardo Mottola, Dr. H. Nikolaus Schaller
 
@@ -125,6 +125,7 @@
 
       url = [[[frame provisionalDataSource] request] URL];
       urlStr = [url absoluteString];
+      urlStr = [urlStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
       [urlField setStringValue: urlStr];
       [self showStatus:[loadingTag stringByAppendingString:urlStr]];
     }
