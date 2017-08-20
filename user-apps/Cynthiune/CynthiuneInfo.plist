@@ -3,6 +3,7 @@
     ApplicationName = Cynthiune;
     ApplicationRelease = 1.0.0;
     NSIcon = Cynthiune.tiff;
+    CFBundleIdentifier = "org.gap.Cynthiune";
     URL = "http://gap.nongnu.org/cynthiune/";
     Authors = ( "Wolfgang Sourdeau <Wolfgang@Contre.COM>",
                 "The GNUstep Application Team" );
