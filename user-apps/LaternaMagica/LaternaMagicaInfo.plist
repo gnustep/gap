@@ -3,14 +3,14 @@
     ApplicationDescription = "Image Viewer Tool";
     ApplicationIcon = "laternamagica_48.tif";
     ApplicationName = LaternaMagica;
-    ApplicationRelease = "0.4";
+    ApplicationRelease = "0.5";
     Authors = (
 	"Riccardo Mottola"
     );
     CFBundleIdentifier = "org.gap.LaternaMagica";
-    Copyright = "Copyright (C) 2006-2016";
-    CopyrightDescription = "Released under GPL";
-    FullVersionID = "0.4";
+    Copyright = "Copyright (C) 2006-2017";
+    CopyrightDescription = "Released under GPL v2+";
+    FullVersionID = "0.5";
     NSExecutable = LaternaMagica;
     NSIcon = "laternamagica_48.tif";
     NSMainNibFile = "LaternaMagica.gorm";

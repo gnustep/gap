@@ -22,7 +22,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.4
+VERSION = 0.5
 PACKAGE_NAME = LaternaMagica
 APP_NAME = LaternaMagica
 LaternaMagica_APPLICATION_ICON = laternamagica_48.tif
