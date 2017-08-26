@@ -7,7 +7,9 @@
 	<key>CFBundleExecutable</key>
 	<string>FTP</string>
 	<key>CFBundleIconFile</key>
-	<string>FTP_icon_osx.icns</string>
+	<string>FTP_icon_osx</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.gap.FTP</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
