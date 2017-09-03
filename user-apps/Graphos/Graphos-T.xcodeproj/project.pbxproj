@@ -84,6 +84,7 @@
 		854931F411143DF600C4D928 /* GRCircleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8518AB1B10E8A8ED004A2013 /* GRCircleEditor.m */; };
 		854931F611143DF600C4D928 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85BB08521215F83A00B9699B /* PropertiesEditor.nib */; };
+		85EA6B321EAE53C900A4246C /* TextEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = 85EA6B301EAE53C900A4246C /* TextEditor.nib */; };
 		85EBE38316505FC700A8EDF9 /* HTMLHelp in Resources */ = {isa = PBXBuildFile; fileRef = 85EBE37F16505FC700A8EDF9 /* HTMLHelp */; };
 		85EE1E8B1A6CFFBB00F06505 /* GRImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EE1E891A6CFFBB00F06505 /* GRImage.h */; };
 		85EE1E8C1A6CFFBB00F06505 /* GRImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EE1E8A1A6CFFBB00F06505 /* GRImage.m */; };
@@ -137,6 +138,7 @@
 		85DE3FF50CA06C2200A80101 /* GRBoxEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBoxEditor.m; sourceTree = "<group>"; };
 		85DE40060CA0772E00A80101 /* GRObjectControlPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRObjectControlPoint.h; sourceTree = "<group>"; };
 		85DE40070CA0772E00A80101 /* GRObjectControlPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRObjectControlPoint.m; sourceTree = "<group>"; };
+		85EA6B311EAE53C900A4246C /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/TextEditor.nib; sourceTree = "<group>"; };
 		85EBE38016505FC700A8EDF9 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/HTMLHelp; sourceTree = "<group>"; };
 		85EE1E891A6CFFBB00F06505 /* GRImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GRImage.h; sourceTree = "<group>"; };
 		85EE1E8A1A6CFFBB00F06505 /* GRImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GRImage.m; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				85DC41560CAC6A3C00A80101 /* LineJoin1.tiff */,
 				85DC41570CAC6A3C00A80101 /* LineJoin2.tiff */,
 				85DC41580CAC6A3C00A80101 /* LineJoin3.tiff */,
+				85EA6B301EAE53C900A4246C /* TextEditor.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				85BB08541215F83A00B9699B /* PropertiesEditor.nib in Resources */,
 				85F4CB6615E074FB00160D61 /* ChangeLog in Resources */,
 				85EBE38316505FC700A8EDF9 /* HTMLHelp in Resources */,
+				85EA6B321EAE53C900A4246C /* TextEditor.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +528,14 @@
 				85BB08531215F83A00B9699B /* English */,
 			);
 			name = PropertiesEditor.nib;
+			sourceTree = "<group>";
+		};
+		85EA6B301EAE53C900A4246C /* TextEditor.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85EA6B311EAE53C900A4246C /* English */,
+			);
+			name = TextEditor.nib;
 			sourceTree = "<group>";
 		};
 		85EBE37F16505FC700A8EDF9 /* HTMLHelp */ = {

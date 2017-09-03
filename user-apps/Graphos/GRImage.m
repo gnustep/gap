@@ -267,7 +267,6 @@
 {
   if (img != image)
     {
-      [img retain];
       [image release];
       image = img;
       [image retain];

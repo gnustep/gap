@@ -1,3 +1,8 @@
+2017-09-03 Riccardo Mottola <rm@gnu.org>
+
+	* GRImage.m
+        Fix memory leak
+        
 2017-04-24 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPathEditor.m
