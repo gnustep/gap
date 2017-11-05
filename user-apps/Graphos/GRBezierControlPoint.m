@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierControlPoint.m
 
- Copyright (C) 2000-2015 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -160,6 +160,26 @@
 
   bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
   bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
+}
+
+- (void)overlapHandles
+{
+  bzHandle.firstHandle = bzHandle.center;
+  bzHandle.secondHandle = bzHandle.center;
+  bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
+  bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);
+}
+
+- (void)extractHandles
+{
+  CGFloat dx, dy;
+
+  dx = 10;
+  dy = 0;
+  bzHandle.firstHandle = NSMakePoint(bzHandle.center.x + dx, bzHandle.center.y + dy);
+  bzHandle.secondHandle = NSMakePoint(bzHandle.center.x - dx, bzHandle.center.y - dy);
+  bzHandle.firstHandleRect = NSMakeRect(bzHandle.firstHandle.x-2, bzHandle.firstHandle.y-2, 4, 4);
+  bzHandle.secondHandleRect = NSMakeRect(bzHandle.secondHandle.x-2, bzHandle.secondHandle.y-2, 4, 4);  
 }
 
 - (void)drawControlAsSelected: (BOOL)sel

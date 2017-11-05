@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierControlPoint.h
 
- Copyright (C) 2000-2014 GNUstep Application Project
+ Copyright (C) 2000-2017 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -60,6 +60,8 @@ typedef struct
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePosition;
 - (void)moveToPoint:(NSPoint)p;
 - (void)moveBezierHandleToPosition:(NSPoint)newp oldPosition:(NSPoint)oldp;
+- (void)overlapHandles;
+- (void)extractHandles;
 
 - (GRBezierHandle)bzHandle;
 - (void)setBezierHandle:(GRBezierHandle)handle;

@@ -39,6 +39,8 @@
 #define UNDO_ACTION_OBJPROPS @"Change Object Properties"
 #define UNDO_ACTION_CP_SYMMETRIC @"Change Point to Symmetric"
 #define UNDO_ACTION_CP_CUSP @"Change Point to Cusp"
+#define UNDO_ACTION_CP_EXTRACT @"Change Point by Extracting"
+#define UNDO_ACTION_CP_OVERLAP @"Change Point by Overlapping"
 
 #define ZOOM_FACTORS 13
 #define STD_ZOOM_INDEX 5
@@ -983,6 +985,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     {
       [(GRBezierControlPoint *)[points objectAtIndex: i] setSymmetricalHandles:YES];
     }
+  [path remakePath];
+  [self setNeedsDisplay: YES];
 }
 
 - (void)changePointsOfCurrentPathToCusp:(id)sender
@@ -1024,7 +1028,96 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     {
       [(GRBezierControlPoint *)[points objectAtIndex: i] setSymmetricalHandles:NO];
     }
+  [path remakePath];
+  [self setNeedsDisplayYES];
 }
+
+- (void)changePointsOfCurrentPathByOverlap:(id)sender
+{
+  NSUndoManager *uMgr;
+  NSUInteger i;
+  NSArray *points;
+  GRBezierPath *path;
+
+  path = nil;
+  for(i = 0; i < [objects count]; i++)
+    {
+      GRDrawableObject *obj;
+      obj = [objects objectAtIndex: i];
+      
+      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+        {
+          path = (GRBezierPath *)obj;
+        }
+    }
+  
+  if (!path)
+    return;
+
+  points = [(GRBezierPathEditor *)[path editor] selectedControlPoints];
+  if (!points || [points count] == 0)
+    return;
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_OVERLAP] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [uMgr setActionName: UNDO_ACTION_CP_OVERLAP];
+    }
+
+  for (i = 0; i < [points count]; i++)
+    {
+      [(GRBezierControlPoint *)[points objectAtIndex: i] overlapHandles];
+    }
+  [path remakePath];
+  [self setNeedsDisplay: YES];
+}
+
+- (void)changePointsOfCurrentPathByExtract:(id)sender
+{
+  NSUndoManager *uMgr;
+  NSUInteger i;
+  NSArray *points;
+  GRBezierPath *path;
+
+  path = nil;
+  for(i = 0; i < [objects count]; i++)
+    {
+      GRDrawableObject *obj;
+      obj = [objects objectAtIndex: i];
+      
+      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+        {
+          path = (GRBezierPath *)obj;
+        }
+    }
+  
+  if (!path)
+    return;
+
+  points = [(GRBezierPathEditor *)[path editor] selectedControlPoints];
+  if (!points || [points count] == 0)
+    return;
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_EXTRACT] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [uMgr setActionName: UNDO_ACTION_CP_EXTRACT];
+    }
+
+  for (i = 0; i < [points count]; i++)
+    {
+      [(GRBezierControlPoint *)[points objectAtIndex: i] extractHandles];
+    }
+  [path remakePath];
+  [self setNeedsDisplay: YES];
+}
+
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
 {
@@ -1955,6 +2048,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
           [menu addItem: menuItem];
           [menuItem setTarget: self];      
           [menuItem setAction: @selector(changePointsOfCurrentPathToCusp:)];     
+          [menuItem release];
+
+          menuItem = [[NSMenuItem alloc] init];
+          [menuItem setTitle: NSLocalizedString(@"Overlap to Segment", @"")];
+          [menu addItem: menuItem];
+          [menuItem setTarget: self];      
+          [menuItem setAction: @selector(changePointsOfCurrentPathByOverlap:)];     
+          [menuItem release];
+
+          menuItem = [[NSMenuItem alloc] init];
+          [menuItem setTitle: NSLocalizedString(@"Extract to Round", @"")];
+          [menu addItem: menuItem];
+          [menuItem setTarget: self];      
+          [menuItem setAction: @selector(changePointsOfCurrentPathByExtract:)];     
           [menuItem release];
           
           [menu autorelease];

@@ -1,3 +1,11 @@
+2017-11-05 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.h
+        * GRDocView.m
+        * GRBezierControlPoint.h
+        * GRBezierControlPoint.m
+        Make Bezier control points segment (overlap handles) or split them to round point.
+
 2017-09-03 Riccardo Mottola <rm@gnu.org>
 
 	* GRImage.m
