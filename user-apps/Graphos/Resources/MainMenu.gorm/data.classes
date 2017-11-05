@@ -3,6 +3,10 @@
     FirstResponder = {
 	Actions = (
 	    "bringToFront:",
+	    "changePointsOfCurrentPathByExtract:",
+	    "changePointsOfCurrentPathByOverlap:",
+	    "changePointsOfCurrentPathToCusp:",
+	    "changePointsOfCurrentPathToSymmetric:",
 	    "doRedo:",
 	    "doUndo:",
 	    "editObjectsProperties:",
@@ -27,6 +31,10 @@
     };
     GRDocView = {
 	Actions = (
+	    "changePointsOfCurrentPathToSymmetric:",
+	    "changePointsOfCurrentPathToCusp:",
+	    "changePointsOfCurrentPathByOverlap:",
+	    "changePointsOfCurrentPathByExtract:",
 	    "moveSelectedObjectsToFront:",
 	    "moveSelectedObjectsToBack:",
 	    "zoom50:",
