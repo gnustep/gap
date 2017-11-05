@@ -106,10 +106,10 @@
 
 - (BOOL)moveControlPointOfEditor:(GRPathEditor *)editor toPoint:(NSPoint)pos;
 - (BOOL)moveBezierHandleOfEditor:(GRBezierPathEditor *)editor toPoint:(NSPoint)pos;
-- (void)changePointsOfCurrentPathToSymmetric:(id)sender;
-- (void)changePointsOfCurrentPathToCusp:(id)sender;
-- (void)changePointsOfCurrentPathByOverlap:(id)sender;
-- (void)changePointsOfCurrentPathByExtract:(id)sender;
+- (IBAction)changePointsOfCurrentPathToSymmetric:(id)sender;
+- (IBAction)changePointsOfCurrentPathToCusp:(id)sender;
+- (IBAction)changePointsOfCurrentPathByOverlap:(id)sender;
+- (IBAction)changePointsOfCurrentPathByExtract:(id)sender;
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 

@@ -431,7 +431,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [self setFrame: pageRect];
   [self setNeedsDisplay:YES];
 }
-                                                              
+
 - (void)deleteSelectedObjects
 {
     id obj;
@@ -2000,6 +2000,66 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   else
     NSLog(@"keyCh %x", keyCh);
   return [super performKeyEquivalent:theEvent];
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)mi
+{
+  NSUInteger i;
+  NSUInteger selectedPaths;
+  GRBezierPath *path;
+  
+  selectedPaths = 0;
+  path = nil;
+  for(i = 0; i < [objects count]; i++)
+    {
+      GRDrawableObject *obj;
+      obj = [objects objectAtIndex: i];
+    
+      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+        {
+          selectedPaths++;
+          path = (GRBezierPath *)obj;
+        }
+    }
+
+  
+  if ([mi action] == @selector(changePointsOfCurrentPathToSymmetric:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
+  else if ([mi action] == @selector(changePointsOfCurrentPathToCusp:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
+  else if ([mi action] == @selector(changePointsOfCurrentPathByOverlap:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+        return YES;
+        }
+      else
+        return NO;
+    }
+  else if ([mi action] == @selector(changePointsOfCurrentPathByExtract:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
+  return NO;
 }
 
 /* override the menu for special context menus

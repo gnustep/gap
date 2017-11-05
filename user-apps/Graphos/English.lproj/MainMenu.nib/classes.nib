@@ -2,6 +2,10 @@
     IBClasses = (
         {
             ACTIONS = {
+                changePointsOfCurrentPathByExtract = id; 
+                changePointsOfCurrentPathByOverlap = id; 
+                changePointsOfCurrentPathToCusp = id; 
+                changePointsOfCurrentPathToSymmetric = id; 
                 inspectObject = id; 
                 moveSelectedObjectsToBack = id; 
                 moveSelectedObjectsToFront = id; 
@@ -16,6 +20,12 @@
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = GRDocView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = GRDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {docView = GRDocView; }; 
+            SUPERCLASS = NSDocument; 
+        }, 
         {
             ACTIONS = {showObjectInspector = id; }; 
             CLASS = Graphos; 

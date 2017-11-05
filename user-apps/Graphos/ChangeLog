@@ -1,5 +1,12 @@
 2017-11-05 Riccardo Mottola <rm@gnu.org>
 
+	* English.lproj/MainMenu.nib
+	* GRDocView.h
+        * GRDocView.m
+        Add menu for point editing; add validateMenuItem for point operations.
+
+2017-11-05 Riccardo Mottola <rm@gnu.org>
+
 	* GRDocView.h
         * GRDocView.m
         * GRBezierControlPoint.h
