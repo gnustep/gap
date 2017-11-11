@@ -1,3 +1,8 @@
+2017-11-11 Riccardo Mottola <rm@gnu.org>
+
+        * GRDocView.m
+        Implement mising validates for menus.
+
 2017-11-05 Riccardo Mottola <rm@gnu.org>
 
 	* English.lproj/MainMenu.nib

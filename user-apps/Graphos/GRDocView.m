@@ -2006,56 +2006,84 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 {
   NSUInteger i;
   NSUInteger selectedPaths;
-  GRBezierPath *path;
+  NSUInteger selectedObjs;
+  SEL action;
   
   selectedPaths = 0;
-  path = nil;
+  selectedObjs = 0;
+
+  if ([[[mi menu] title] isEqualToString:@"Zoom"])
+    return YES;
+  
   for(i = 0; i < [objects count]; i++)
     {
       GRDrawableObject *obj;
       obj = [objects objectAtIndex: i];
     
-      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+      if([[obj editor] isSelected])
         {
-          selectedPaths++;
-          path = (GRBezierPath *)obj;
+          selectedObjs++;
+          if ([obj isKindOfClass:[GRBezierPath class]])
+            selectedPaths++;
         }
     }
 
-  
-  if ([mi action] == @selector(changePointsOfCurrentPathToSymmetric:))
+  action = [mi action];
+  if (action == @selector(paste:))
+    return YES;
+      
+  if (action == @selector(copy:) || action == @selector(cut:) || action == @selector(delete:))
     {
-      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
-        {
-          return YES;
-        }
-      else
-        return NO;
-    }
-  else if ([mi action] == @selector(changePointsOfCurrentPathToCusp:))
-    {
-      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
-        {
-          return YES;
-        }
-      else
-        return NO;
-    }
-  else if ([mi action] == @selector(changePointsOfCurrentPathByOverlap:))
-    {
-      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
-        {
+      if (selectedObjs)
         return YES;
-        }
       else
         return NO;
     }
-  else if ([mi action] == @selector(changePointsOfCurrentPathByExtract:))
+
+  if (action == @selector(changePointsOfCurrentPathToSymmetric:))
     {
       if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
         {
           return YES;
         }
+      else
+        return NO;
+    }
+  
+  if (action == @selector(changePointsOfCurrentPathToCusp:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
+  
+  if (action == @selector(changePointsOfCurrentPathByOverlap:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
+  
+  if (action == @selector(changePointsOfCurrentPathByExtract:))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
+
+    if (action == @selector(moveSelectedObjectsToFront:) || action == @selector(moveSelectedObjectsToBack:))
+    {
+      if (selectedObjs)
+        return YES;
       else
         return NO;
     }
