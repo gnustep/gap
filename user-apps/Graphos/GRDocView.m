@@ -2029,10 +2029,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     }
 
   action = [mi action];
-  if (action == @selector(paste:))
+  if (sel_isEqual(action, @selector(paste:)))
     return YES;
       
-  if (action == @selector(copy:) || action == @selector(cut:) || action == @selector(delete:))
+  if (sel_isEqual(action, @selector(copy:)) || sel_isEqual(action, @selector(cut:)) || sel_isEqual(action, @selector(delete:)))
     {
       if (selectedObjs)
         return YES;
@@ -2040,7 +2040,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         return NO;
     }
 
-  if (action == @selector(changePointsOfCurrentPathToSymmetric:))
+  if (sel_isEqual(action, @selector(changePointsOfCurrentPathToSymmetric:)))
     {
       if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
         {
@@ -2050,7 +2050,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         return NO;
     }
   
-  if (action == @selector(changePointsOfCurrentPathToCusp:))
+  if (sel_isEqual(action, @selector(changePointsOfCurrentPathToCusp:)))
     {
       if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
         {
@@ -2060,7 +2060,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         return NO;
     }
   
-  if (action == @selector(changePointsOfCurrentPathByOverlap:))
+  if (sel_isEqual(action, @selector(changePointsOfCurrentPathByOverlap:)))
     {
       if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
         {
@@ -2070,7 +2070,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         return NO;
     }
   
-  if (action == @selector(changePointsOfCurrentPathByExtract:))
+  if (sel_isEqual(action, @selector(changePointsOfCurrentPathByExtract:)))
     {
       if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
         {
@@ -2080,7 +2080,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         return NO;
     }
 
-    if (action == @selector(moveSelectedObjectsToFront:) || action == @selector(moveSelectedObjectsToBack:))
+  if (sel_isEqual(action, @selector(moveSelectedObjectsToFront:)) || sel_isEqual(action, @selector(moveSelectedObjectsToBack:)))
     {
       if (selectedObjs)
         return YES;
