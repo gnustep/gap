@@ -2101,10 +2101,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     {
       NSUInteger i;
       NSUInteger selectedPaths;
-      GRBezierPath *path;
       
       selectedPaths = 0;
-      path = nil;
       for(i = 0; i < [objects count]; i++)
         {
           GRDrawableObject *obj;
@@ -2113,7 +2111,6 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
           if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
             {
               selectedPaths++;
-              path = (GRBezierPath *)obj;
             }
         }
 
