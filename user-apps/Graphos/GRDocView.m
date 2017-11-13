@@ -1124,16 +1124,17 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   id obj;
   NSUInteger i;
 
-    for(i = 0; i < [objects count]; i++)
+  
+  for(i = 0; i < [objects count]; i++)
     {
-        obj = [objects objectAtIndex: i];
-        if([obj isKindOfClass: [GRBezierPathEditor class]])
+      obj = [objects objectAtIndex: i];
+      if([obj isKindOfClass: [GRBezierPath class]])
         {
-            if([obj onPathBorder: p])
+	  if([obj onPathBorder: p])
             {
-                [obj selectForEditing];
-                [obj subdividePathAtPoint: p splitIt: split];
-                break;
+	      [obj selectForEditing];
+	      [obj subdividePathAtPoint: p splitIt: split];
+	      break;
             }
         }
     }
