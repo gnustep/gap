@@ -3,7 +3,7 @@
    
    Chart: Generic chart superclass
 
-   Copyright (C) 2011-2014 Free Software Foundation
+   Copyright (C) 2011-2017 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -75,6 +75,9 @@
   return str;
 }
 
+/** Utility method to format <i>number</i> with the passed format
+    <pre>OKNumberFormatting</pre>
+*/
 + (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt
 {
   NSString *strRes;

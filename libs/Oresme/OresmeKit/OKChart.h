@@ -4,7 +4,7 @@
    
    Chart: Generic chart superclass
 
-   Copyright (C) 2011-2014 Free Software Foundation
+   Copyright (C) 2011-2017 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -38,15 +38,26 @@
 
 typedef enum
 {
+  /** No grids */
   OKGridNone = 1,
+  
+  /** Grid only on Horizontal axis */
   OKGridHorizontal,
+
+  /** Grid only on Vertical axis */
   OKGridVertical,
+
+  /** Grid on both axes */
   OKGridBoth
 } OKGridStyle;
 
+
 typedef enum
 {
+  /** Grid of fixed size on screen */
   OKGridConstantSize = 1,
+
+  /** Size of Kilo and Mega */
   OKGridKiloMega
 } OKGridSizing;
 
@@ -58,8 +69,13 @@ typedef enum
 
 typedef enum
 {
+  /** No Labels on axes */
   OKNoLabels = 1,
+
+  /** Only minimum and maximum values */
   OKMinMaxLabels,
+
+  /** Labels on all grid values */
   OKAllLabels
 } OKLabelStyle;
 
@@ -116,6 +132,7 @@ typedef enum
   NSMutableArray *yAxisGridValues;
 }
 
++ (NSString *)purgeTrailingZeroes:(NSString *)s;
 + (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt;
 
 - (void)setMarginLeft:(float)margin;
