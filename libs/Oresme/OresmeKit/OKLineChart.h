@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2011-2015 Free Software Foundation
+   Copyright (C) 2011-2017 Free Software Foundation
 
    Author: multix
 
@@ -28,6 +28,13 @@
 #import "OKChart.h"
 
 
+/** <p>OKLineChart is a sublcass of [OKChart] which provides drawing
+    of Line Charts. Multiple series are supported at the same time.</p>
+    <p>Lines are drawn in standard with set of <em>lineWidth</em>.</p>
+    <p>Highlighted lines are drawn thicker.<br/>
+    The <em>highlighted</em> property of each [OKSeries] is used to
+    deterine that.</p>
+*/
 @interface OKLineChart : OKChart
 {
   float minXUnitSize;
@@ -35,6 +42,9 @@
 
   float lineWidth;
 }
+
+- (float)lineWidth;
+- (void)setLineWidth:(float)f;
 
 @end
 

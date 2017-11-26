@@ -32,6 +32,9 @@
 
 @implementation OKLineChart
 
+/**
+   <init />
+ */
 -(id)initWithFrame: (NSRect)frameRect
 {
   self = [super initWithFrame: frameRect];
@@ -312,6 +315,17 @@
       [strAttr release];
  
     }
+}
+
+/** returns standard line width */
+- (float)lineWidth
+{
+  return lineWidth;
+}
+
+- (void)setLineWidth:(float)f
+{
+  lineWidth = f;
 }
 
 

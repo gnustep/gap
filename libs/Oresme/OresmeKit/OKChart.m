@@ -75,8 +75,8 @@
   return str;
 }
 
-/** Utility method to format <i>number</i> with the passed format
-    <pre>OKNumberFormatting</pre>
+/** Utility method to format <em>number</em> with the passed format
+    <code>OKNumberFormatting</code>
 */
 + (NSString *) format:(NSNumber *)number withFormat:(OKNumberFormatting) fmt
 {
@@ -139,6 +139,9 @@
   return strRes;
 }
 
+/**
+<init />
+ */
 -(id)initWithFrame: (NSRect)frameRect
 {
   self = [super initWithFrame: frameRect];
