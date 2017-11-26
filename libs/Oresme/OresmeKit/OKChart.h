@@ -1,4 +1,4 @@
-/* -*- mode: objc -*-
+/** -*- mode: objc -*-
 
    Project: OresmeKit
    

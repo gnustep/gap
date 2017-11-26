@@ -1,11 +1,11 @@
-/*
+/** -*- mode: objc -*-
    Project: OresmeKit
 
    Copyright (C) 2012-2014 Free Software Foundation
 
    Author: Riccardo Mottola
 
-   Created: 2012-10-25 23:01:18 +0200 by multix
+   Created: 2012-10-25 23:01:18 +0200 by Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public

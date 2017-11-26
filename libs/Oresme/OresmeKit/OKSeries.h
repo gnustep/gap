@@ -1,4 +1,4 @@
-/*
+/** -*- mode: objc -*-
    Project: OresmeKit
    
    Numeric Series representation
@@ -7,7 +7,7 @@
 
    Author: Riccardo Mottola
 
-   Created: 2011-09-08 12:16:05 +0200 by multix
+   Created: 2011-09-08 12:16:05 +0200 by Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
