@@ -1199,7 +1199,9 @@ int getChar(streamStruct* ss)
     /* create an array with a reasonable starting size */
     listArr = [NSMutableArray arrayWithCapacity:5];
     
-    [self initDataConn];
+    if ([self initDataConn] < 0)
+		return nil;
+	
     [self writeLine:@"LIST"];
     replyCode = [self readReply:&reply];
 

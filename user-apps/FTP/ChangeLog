@@ -1,4 +1,9 @@
-2017-27-28 Riccardo Mottola <rm@gnu.org>
+2017-12-04 Riccardo Mottola <rm@gnu.org>
+
+	* ftpclient.m
+	Handle case where command is refused.
+
+2017-07-28 Riccardo Mottola <rm@gnu.org>
 
 	* ftpclient.m
         Track and NSLog() non-200 port response.
