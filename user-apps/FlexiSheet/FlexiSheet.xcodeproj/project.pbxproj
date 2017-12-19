@@ -604,7 +604,7 @@
 		EEB462190E2DC31D000DEA28 /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		EEB4621C0E2DC35C000DEA28 /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GNUmakefile; path = Functions/GNUmakefile; sourceTree = "<group>"; };
 		EEB4621D0E2DC376000DEA28 /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
-		EEFA5FA50E28F58500B86693 /* Info-FSCore_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-FSCore_.plist"; sourceTree = "<group>"; };
+		EEFA5FA50E28F58500B86693 /* Info-FSCore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-FSCore.plist"; sourceTree = "<group>"; };
 		EEFA5FA60E28F58500B86693 /* FSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEFA5FE90E28F58500B86693 /* Info-FSFunctions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-FSFunctions.plist"; sourceTree = "<group>"; };
 		EEFA5FEA0E28F58500B86693 /* FSFunctions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSFunctions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -861,7 +861,7 @@
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				661D72A30147436900EBCC50 /* TODO */,
 				731982FC0500CF4000A8010F /* CHANGELOG */,
-				EEFA5FA50E28F58500B86693 /* Info-FSCore_.plist */,
+				EEFA5FA50E28F58500B86693 /* Info-FSCore.plist */,
 				EEFA5FE90E28F58500B86693 /* Info-FSFunctions.plist */,
 				EEFA60CB0E28F58500B86693 /* Info-FlexiSheet.plist */,
 			);
@@ -2098,9 +2098,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = bjC;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "Info-FSCore_.plist";
+				INFOPLIST_FILE = "Info-FSCore.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -2130,9 +2130,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = bjC;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "Info-FSCore_.plist";
+				INFOPLIST_FILE = "Info-FSCore.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
