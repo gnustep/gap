@@ -30,8 +30,8 @@
 - (NSString*) distributionIdentifierForProperty: (NSString*) property
 					 person: (ADPerson*) person;
 
-+ (int) addPropertiesAndTypes: (NSDictionary*) properties;
-+ (int) removeProperties: (NSArray*) properties;
++ (NSInteger) addPropertiesAndTypes: (NSDictionary*) properties;
++ (NSInteger) removeProperties: (NSArray*) properties;
 + (NSArray*) properties;
 + (ADPropertyType) typeOfProperty: (NSString*) property;
 

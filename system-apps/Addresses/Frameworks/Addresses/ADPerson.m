@@ -13,7 +13,7 @@
 
 static NSMutableDictionary *_propTypes;
 static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
-#define N(x) [NSNumber numberWithInt: x]
+#define N(x) [NSNumber numberWithInteger: x]
 
 @implementation ADPerson
 + (void) initialize
@@ -94,9 +94,9 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 					 forName: @"Addresses"];
 }
 
-+ (int) addPropertiesAndTypes: (NSDictionary*) properties
++ (NSInteger) addPropertiesAndTypes: (NSDictionary*) properties
 {
-  int retval = 0;
+  NSInteger retval = 0;
   NSEnumerator *e;
   NSString *key;
 
@@ -111,9 +111,9 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
   return retval;
 }
 
-+ (int) removeProperties: (NSArray*) properties
++ (NSInteger) removeProperties: (NSArray*) properties
 {
-  int retval = 0;
+  NSInteger retval = 0;
   NSEnumerator *e;
   NSString* key;
 
@@ -137,7 +137,7 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
   id val;
 
   val = [_propTypes objectForKey: property];
-  if(val) return (ADPropertyType)[val intValue];
+  if(val) return (ADPropertyType)[val integerValue];
   return ADErrorInProperty;
 }
 

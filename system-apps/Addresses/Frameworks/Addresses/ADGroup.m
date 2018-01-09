@@ -12,7 +12,7 @@
 #import "ADMultiValue.h"
 
 static NSMutableDictionary *_propTypes;
-#define N(x) [NSNumber numberWithInt: x]
+#define N(x) [NSNumber numberWithInteger: x]
 
 @implementation ADGroup
 + (void) initialize
@@ -105,9 +105,9 @@ static NSMutableDictionary *_propTypes;
   return nil;
 }
 
-+ (int) addPropertiesAndTypes: (NSDictionary*) properties
++ (NSInteger) addPropertiesAndTypes: (NSDictionary*) properties
 {
-  int retval = 0;
+  NSInteger retval = 0;
   NSEnumerator *e;
   NSString *key;
 
@@ -122,9 +122,9 @@ static NSMutableDictionary *_propTypes;
   return retval;
 }
 
-+ (int) removeProperties: (NSArray*) properties
++ (NSInteger) removeProperties: (NSArray*) properties
 {
-  int retval = 0;
+  NSInteger retval = 0;
   NSEnumerator *e;
   NSString* key;
 

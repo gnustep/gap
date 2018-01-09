@@ -1,9 +1,17 @@
+2017-01-09 Riccardo Mottola
+
+	* ADGroup.h
+	* ADGroup.m
+	* ADPerson.h
+	* ADPerson.m
+	Update int types to Apple spec.
+
 2010-03-16 Philippe Roussel
 
 	* Addresses/ADVCFConverter.m: accept Evolution type "b" for
 	images encoding
-	
-2009-10-07  Nicola Pero  <nicola.pero@meta-innovation.com>	
+
+2009-10-07  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* GNUmakefile (after-Addresses-install): Rewritten in a cleaner,
 	more portable way avoiding symlinks.  Do not install

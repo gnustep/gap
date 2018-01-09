@@ -23,14 +23,14 @@
   not be added, nor will its type be changed. Returns the number of
   properties successfully added.
 */
-+ (int) addPropertiesAndTypes: (NSDictionary*) properties;
++ (NSInteger) addPropertiesAndTypes: (NSDictionary*) properties;
 
 /*!
   \brief Remove properties from all people records
 
   Returns the number of properties successfully removed
 */
-+ (int) removeProperties: (NSArray*) properties;
++ (NSInteger) removeProperties: (NSArray*) properties;
 
 + (NSArray*) properties;
 + (ADPropertyType) typeOfProperty: (NSString*) property;
