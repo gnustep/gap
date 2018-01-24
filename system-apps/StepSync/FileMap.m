@@ -2,7 +2,7 @@
    Project: StepSync
    FileMap.m
 
-   Copyright (C) 2017 Free Software Foundation
+   Copyright (C) 2017-2018 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -85,14 +85,16 @@
       NSString *element;
       NSString *fullPath;
       NSString *fileType;
+      NSString *relPath;
       
       element = [dirContents objectAtIndex:i];
       fullPath = [path stringByAppendingPathComponent:element];
+      relPath = [fullPath substringFromIndex:[rootPath length]+1];
       attr = [fm fileAttributesAtPath:fullPath traverseLink:NO];
       fileType = [attr fileType];
       if (fileType == NSFileTypeDirectory)
         {
-          [directories addObject:element];
+          [directories addObject:relPath];
           if (depth > 0)
             [self analyzeRecursePath:fullPath currentDepth:depth-1];
           else
@@ -101,9 +103,7 @@
       else if (fileType == NSFileTypeRegular)
         {
           FileObject *fo;
-          NSString *relPath;
           
-          relPath = [fullPath substringFromIndex:[rootPath length]+1];
           fo = [[FileObject alloc] init];
           [fo setAbsolutePath:fullPath];
           [fo setRelativePath:relPath];

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -151,10 +151,19 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 85D825F91E5A2C5F007C9BA2 /* Build configuration list for PBXProject "StepSync-T" */;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 85D825F91E5A2C5F007C9BA2 /* Build configuration list for PBXProject "StepSync" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* StepSync */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* StepSync */,
 			);
@@ -207,7 +216,6 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G3;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -216,6 +224,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = StepSync;
+				SYMROOT = "$(PROJECT_DIR)/build";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -225,7 +234,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -233,6 +241,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = StepSync;
+				SYMROOT = "$(PROJECT_DIR)/build";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -248,6 +257,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = StepSync;
+				SYMROOT = "$(PROJECT_DIR)/build";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Default;
@@ -255,18 +265,21 @@
 		85D825FA1E5A2C5F007C9BA2 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SYMROOT = "$(PROJECT_DIR)/build";
 			};
 			name = Development;
 		};
 		85D825FB1E5A2C5F007C9BA2 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SYMROOT = "$(PROJECT_DIR)/build";
 			};
 			name = Deployment;
 		};
 		85D825FC1E5A2C5F007C9BA2 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SYMROOT = "$(PROJECT_DIR)/build";
 			};
 			name = Default;
 		};
@@ -283,7 +296,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
 		};
-		85D825F91E5A2C5F007C9BA2 /* Build configuration list for PBXProject "StepSync-T" */ = {
+		85D825F91E5A2C5F007C9BA2 /* Build configuration list for PBXProject "StepSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				85D825FA1E5A2C5F007C9BA2 /* Development */,
