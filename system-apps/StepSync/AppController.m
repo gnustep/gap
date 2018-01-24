@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.m
  
- Copyright (C) 2017 Riccardo Mottola
+ Copyright (C) 2017-2018 Free Software Foundation
  
  Author: Riccardo Mottola
  
@@ -87,6 +87,7 @@
 
 - (void)awakeFromNib
 {
+  [logView setAutomaticSpellingCorrectionEnabled:NO];
   /*
   [analyzeButton setEnabled:NO];
   [syncButton setEnabled:NO];
@@ -96,10 +97,14 @@
 - (IBAction)setSourcePath:(id)sender
 {
   NSOpenPanel *openPanel;
+  NSString *currPath;
   
+  currPath = [sourcePathField stringValue];
   openPanel = [NSOpenPanel openPanel];
   [openPanel setCanChooseDirectories:YES];
   [openPanel setCanChooseFiles:NO];
+  if (currPath != nil && [currPath length])
+    [openPanel setDirectory:currPath];
   if ([openPanel runModal] == NSOKButton)
     {
       NSString *fileName;
@@ -112,10 +117,14 @@
 - (IBAction)setTargetPath:(id)sender
 {
   NSOpenPanel *openPanel;
-  
+  NSString *currPath;
+    
+  currPath = [targetPathField stringValue];
   openPanel = [NSOpenPanel openPanel];
   [openPanel setCanChooseDirectories:YES];
   [openPanel setCanChooseFiles:NO];
+  if (currPath != nil && [currPath length])
+    [openPanel setDirectory:currPath];
   if ([openPanel runModal] == NSOKButton)
     {
       NSString *fileName;
