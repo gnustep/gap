@@ -9,7 +9,7 @@
 	"Enrico Sersale (Original Author)"
     );
     CFBundleIdentifier = "org.gap.GSPdf";
-    Copyright = "Copyright (C) 2002-2016";
+    Copyright = "Copyright (C) 2002-2018";
     CopyrightDescription = "Released under the GNU General Public License v2.0";
     FullVersionID = "0.5";
     NSExecutable = GSPdf;

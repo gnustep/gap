@@ -1,3 +1,10 @@
+2018-02-05 Riccardo Mottola <rm@gnu.org>
+
+	* GSPdf.h
+	* GSPdf.m
+	* Resources/GSPdf.gorm
+	Fix show console action from menu.
+
 2016-11-04 Riccardo Mottola <rm@gnu.org>
 
 	* Resources/GSPdfDocument.gorm

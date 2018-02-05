@@ -2,13 +2,13 @@
  *  GSPdf.m: Principal Class  
  *  of the GNUstep GSPdf application
  *
- *  Copyright (c) 2002-2012 GNUstep Application Project
- *  
- *  Author: Riccardo Mottola
+ *  Copyright (c) 2002-2018 GNUstep Application Project
  *  Copyright (c) 2002 Enrico Sersale <enrico@imago.ro>
  *  
- *  Author: Enrico Sersale
- *  Date: August 2001
+ *  Authors: Riccardo Mottola
+ *           Enrico Sersale
+ * 
+ *  Creation: Date: August 2001
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -211,7 +211,7 @@ static GSPdf *gspdf = nil;
   return gsConsole;
 }
 
-- (void)showConsole:(id)sender
+- (IBAction)showConsole:(id)sender
 {
   [[gsConsole window] orderFrontRegardless];
 }

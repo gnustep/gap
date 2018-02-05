@@ -47,12 +47,8 @@
 
 + (GSPdf *)gspdf;
 
-//- (BOOL)openDocumentForPath:(NSString *)path;
-
 /** return the current GhostScript executable path */
 - (NSString *)gsPath;
-
-//- (void)openFile:(id)sender;
 
 - (void)documentHasClosed:(GSPdfDocument *)doc;
 
@@ -63,7 +59,7 @@
 - (GSConsole *)console;
 
 /** shows the GSPdf console */
-- (void)showConsole:(id)sender;
+- (IBAction)showConsole:(id)sender;
 
 - (IBAction)showPrefPanel:(id)sender;
 - (IBAction)prefSave:(id)sender;
