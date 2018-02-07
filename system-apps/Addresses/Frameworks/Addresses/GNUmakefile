@@ -42,6 +42,8 @@ Addresses_RESOURCE_FILES=ScriptingInfo.plist
 Addresses_LOCALIZED_RESOURCE_FILES=PropertiesAndLabels.strings
 Addresses_LANGUAGES=Dutch English French German Spanish
 
+LIBRARIES_DEPEND_UPON = $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS) $(SYSTEM_LIBS)
+
 -include GNUmakefile.preamble
 -include GNUmakefile.local
 include $(GNUSTEP_MAKEFILES)/framework.make

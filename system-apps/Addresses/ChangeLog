@@ -1,3 +1,9 @@
+2018-02-07 Riccardo Mottola <rm@gnu.org>
+
+	* Frameworks/AddressView/GNUmakefile
+	* Frameworks/Addresses/GNUmakefile
+	Specify LIBRARIES_DEPEND_UPON for the frameworks.
+
 2017-08-10 Riccardo Mottola <rm@gnu.org>
 
 	* Frameworks/AddressView/ADPersonPropertyView.m

@@ -36,4 +36,4 @@ include $(GNUSTEP_MAKEFILES)/framework.make
 -include GNUmakefile.postamble
 
 ADDITIONAL_LIB_DIRS += -L../Addresses/Addresses.framework 
-ADDITIONAL_GUI_LIBS = -lAddresses
+LIBRARIES_DEPEND_UPON = -lAddresses $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS) $(SYSTEM_LIBS)
