@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.m
  
- Copyright (C) 2008-2013 GNUstep Application Project
+ Copyright (C) 2008-2018 GNUstep Application Project
  
  Author: Ing. Riccardo Mottola
  
@@ -64,8 +64,8 @@
       myPath = [[NSBezierPath bezierPath] retain];
       [myPath setCachesBezierPath: NO];
 
-      flatness = 0.0;
-      miterlimit = 2.0;
+      flatness = 0.6;
+      miterlimit = 10.0;
       linewidth = 1.5;
       linejoin = 0;
       linecap = 0;
