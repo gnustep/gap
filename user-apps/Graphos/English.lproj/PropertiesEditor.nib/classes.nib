@@ -7,6 +7,7 @@
                 makeKeyAndOrderFront = id; 
                 setLnCap = id; 
                 setLnJoin = id; 
+                stepperAction = id; 
                 stkButtPressed = id; 
                 valuesChanged = id; 
             }; 
@@ -15,11 +16,14 @@
             OUTLETS = {
                 fillColorWell = NSColorWell; 
                 flatnessField = NSTextField; 
+                flatnessStepper = NSStepper; 
                 fllButt = NSButton; 
                 lineCapMatrix = NSMatrix; 
                 lineJoinMatrix = NSMatrix; 
                 linewidthField = NSTextField; 
+                linewidthStepper = NSStepper; 
                 miterlimitField = NSTextField; 
+                miterlimitStepper = NSStepper; 
                 propsPanel = NSPanel; 
                 stkButt = NSButton; 
                 strokeColorWell = NSColorWell; 

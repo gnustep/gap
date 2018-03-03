@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.m
 
- Copyright (C) 2000-2012 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -40,6 +40,12 @@
 					    selector:@selector(selectionChanged:)
 					    name:@"ObjectSelectionChanged" object:nil];
 
+      [flatnessStepper setIncrement: 0.1];
+      [miterlimitStepper setIncrement: 0.1];
+      [linewidthStepper setIncrement: 0.1];
+      [flatnessStepper setMaxValue:100];
+      [miterlimitStepper setMaxValue:180];
+      [linewidthStepper setMaxValue:1000];
     }
   return self;
 }
@@ -56,6 +62,9 @@
   [flatnessField setEnabled: state];
   [miterlimitField setEnabled: state];
   [linewidthField setEnabled: state];
+  [flatnessStepper setEnabled: state];
+  [miterlimitStepper setEnabled: state];
+  [linewidthStepper setEnabled: state];
 
   [lineCapMatrix setEnabled: state];
   [lineJoinMatrix setEnabled: state];
@@ -117,30 +126,36 @@
     {
       flatness = [obj floatValue];
       [flatnessField setEnabled: YES];
+      [flatnessStepper setEnabled: YES];
     }
   else
     flatness = 0;
   [flatnessField setStringValue: [NSString stringWithFormat:@"%.2f", flatness]];
+  [flatnessStepper setFloatValue: flatness];
 
   obj = [props objectForKey: @"miterlimit"];
   if (obj != nil)
     {
       miterlimit = [obj floatValue];
       [miterlimitField setEnabled: YES];
+      [miterlimitStepper setEnabled: YES];
     }
   else
     miterlimit = 0;
   [miterlimitField setStringValue: [NSString stringWithFormat:@"%.2f", miterlimit]];
+  [miterlimitStepper setFloatValue: miterlimit];
 
   obj = [props objectForKey: @"linewidth"];
   if (obj != nil)
     {
       linewidth = [obj floatValue];
       [linewidthField setEnabled: YES];
+      [linewidthStepper setEnabled: YES];
     }
   else
     linewidth = 0.0;
   [linewidthField setStringValue: [NSString stringWithFormat:@"%.2f", linewidth]];
+  [linewidthStepper setFloatValue:linewidth];
 
   obj = [props objectForKey:@"linecap"];
   if (obj != nil)
@@ -200,16 +215,45 @@
 /* as delegate */
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
-    NSTextField *field = (NSTextField *)[aNotification object];
+  NSTextField *field = (NSTextField *)[aNotification object];
 
-    if(field == flatnessField)
-        flatness = [flatnessField floatValue];
-    else if(field == miterlimitField)
-        miterlimit = [miterlimitField floatValue];
-    else if(field == linewidthField)
-        linewidth = [linewidthField floatValue];
+  if(field == flatnessField)
+    {
+      flatness = [flatnessField floatValue];
+      [flatnessStepper setFloatValue:flatness];
+    }
+  else if(field == miterlimitField)
+    {
+      miterlimit = [miterlimitField floatValue];
+      [miterlimitStepper setFloatValue:miterlimit];
+    }
+  else if(field == linewidthField)
+    {
+      linewidth = [linewidthField floatValue];
+      [linewidthStepper setFloatValue:linewidth];
+    }
 
   [self valuesChanged: field];
+}
+
+- (IBAction)stepperAction:(id)sender
+{
+  if (sender == linewidthStepper)
+    {
+      linewidth = [sender floatValue];
+      [linewidthField setFloatValue:linewidth];
+    }
+  else if (sender == flatnessStepper)
+    {
+      flatness = [sender floatValue];
+      [flatnessField setFloatValue:flatness];
+    }
+  else if (sender == miterlimitStepper)
+    {
+      miterlimit = [sender floatValue];
+      [miterlimitField setFloatValue:miterlimit];
+    }
+  [self valuesChanged: sender];
 }
 
 - (IBAction)setLnCap:(id)sender

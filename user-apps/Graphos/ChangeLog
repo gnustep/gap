@@ -1,7 +1,17 @@
+2018-03-03 Riccardo Mottola <rm@gnu.org>
+
+        * GRPropsEditor.h
+	* GRPropsEditor.m
+	* English.lproj/PropertiesEditor.nib
+	Add steppers for line width, flatness and miter values
+
+	* GRPathObject.m
+	Set path default values as NSBezierPath's ones.
+
 2017-11-11 Riccardo Mottola <rm@gnu.org>
 
         * GRDocView.m
-        Implement mising validates for menus.
+        Implement missing validates for menus.
 
 2017-11-05 Riccardo Mottola <rm@gnu.org>
 

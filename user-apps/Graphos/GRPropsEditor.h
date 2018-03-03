@@ -2,7 +2,7 @@
  Project: Graphos
  GRPropsEditor.h
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -53,9 +53,12 @@
   IBOutlet NSMatrix *lineCapMatrix;
   IBOutlet NSMatrix *lineJoinMatrix;
 
+  IBOutlet NSTextField *linewidthField;
   IBOutlet NSTextField *flatnessField;
   IBOutlet NSTextField *miterlimitField;
-  IBOutlet NSTextField *linewidthField;
+  IBOutlet NSStepper *linewidthStepper;
+  IBOutlet NSStepper *flatnessStepper;
+  IBOutlet NSStepper *miterlimitStepper;
 
   IBOutlet NSColorWell *strokeColorWell;
   IBOutlet NSColorWell *fillColorWell;
@@ -86,6 +89,8 @@
 - (void)selectionChanged: (NSNotification *)notif;
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;
+
+- (IBAction)stepperAction:(id)sender;
 
 - (IBAction)setLnCap:(id)sender;
 
