@@ -8,6 +8,7 @@
 	    "okPressed:",
 	    "setLnCap:",
 	    "setLnJoin:",
+	    "stepperAction:",
 	    "stkButtPressed:",
 	    "valuesChanged:"
 	);
@@ -16,6 +17,7 @@
     GRPropsEditor = {
 	Actions = (
 	    "makeKeyAndOrderFront:",
+	    "stepperAction:",
 	    "setLnCap:",
 	    "setLnJoin:",
 	    "fllButtPressed:",
@@ -28,9 +30,12 @@
 	    fllButt,
 	    lineCapMatrix,
 	    lineJoinMatrix,
+	    linewidthField,
 	    flatnessField,
 	    miterlimitField,
-	    linewidthField,
+	    linewidthStepper,
+	    flatnessStepper,
+	    miterlimitStepper,
 	    strokeColorWell,
 	    fillColorWell
 	);
