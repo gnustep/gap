@@ -2,7 +2,7 @@
  Project: Graphos
  GRBox.m
 
- Copyright (C) 2007-2015 GNUstep Application Project
+ Copyright (C) 2007-2018 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -362,11 +362,18 @@
 {
   NSBezierPath *bzp;
   CGFloat linew;
+  NSRect drawBounds;
 
-  linew = linewidth * zmFactor;
-
+  drawBounds = bounds;
+  linew = linewidth;
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    {
+      drawBounds = boundsZ;
+      linew = linewidth * zmFactor;
+    }
+  
   bzp = [NSBezierPath bezierPath];
-  [bzp appendBezierPathWithRect:boundsZ];
+  [bzp appendBezierPathWithRect:drawBounds];
   if(filled)
     {
       [NSGraphicsContext saveGraphicsState];

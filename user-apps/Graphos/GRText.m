@@ -2,7 +2,7 @@
  Project: Graphos
  GRText.m
 
- Copyright (C) 2000-2017 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -455,22 +455,28 @@
   NSDictionary *strAttr;
   NSFont *font;
   NSFont *tempFont;
+  CGFloat fontSize;
   NSPoint posZ;
-  NSRect selRectZ;
   NSRect boundsZ;
   NSSize sizeZ;
   
   if(!visible)
     return;
-  
+
+  posZ = pos;
   font = [parAttributes objectForKey: NSFontAttributeName];
-  posZ = GRpointZoom(pos, zmFactor);
-  selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
+  fontSize = [font pointSize];
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    {
+      posZ = GRpointZoom(pos, zmFactor);
+      fontSize = fontSize * zmFactor;
+    }
+  
   NSAssert (font != nil, @"Font object nil during drawing");
   style = [parAttributes objectForKey: NSParagraphStyleAttributeName];
   parSpacing = [style paragraphSpacing];
   
-  tempFont = [NSFont fontWithName:[font fontName] size:[font pointSize]*zmFactor];
+  tempFont = [NSFont fontWithName:[font fontName] size:fontSize];
   if (tempFont == nil)
     {
       NSLog(@"temp font obtained from %@ zoomFactor: %f is nil", font, zmFactor);
@@ -500,6 +506,10 @@
 
   if ([[NSGraphicsContext currentContext] isDrawingToScreen] && [editor isSelected])
     {
+      NSRect selRectZ;
+        
+      selRectZ = NSMakeRect(selRect.origin.x * zmFactor, selRect.origin.y * zmFactor, selRect.size.width, selRect.size.height);
+      
       bezp = [NSBezierPath bezierPath];
       [bezp setLineWidth:0];
       if([str length] > 0)

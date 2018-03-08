@@ -2,7 +2,7 @@
  Project: Graphos
  GRCircle.m
 
- Copyright (C) 2009-2017 GNUstep Application Project
+ Copyright (C) 2009-2018 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -196,7 +196,7 @@
   if(self)
     {
     }
-    return self;
+  return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -404,12 +404,19 @@
   CGFloat w,h;
   CGFloat minLength;
   CGFloat linew;
+  NSRect drawBounds;
 
-  linew = linewidth * zmFactor;
+  drawBounds = bounds;
+  linew = linewidth;
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    {
+      drawBounds = boundsZ;
+      linew = linewidth * zmFactor;
+    }
 
-  center = NSMakePoint(NSMidX(boundsZ), NSMidY(boundsZ));
-  w = NSWidth(boundsZ);
-  h = NSHeight(boundsZ);
+  center = NSMakePoint(NSMidX(drawBounds), NSMidY(drawBounds));
+  w = NSWidth(drawBounds);
+  h = NSHeight(drawBounds);
   if (w > h)
     minLength = h;
   else
@@ -420,7 +427,7 @@
   if (isCircle)
     [bzp appendBezierPathWithArcWithCenter:center radius:radius startAngle:0 endAngle:360];
   else
-    [bzp appendBezierPathWithOvalInRect: boundsZ];
+    [bzp appendBezierPathWithOvalInRect: drawBounds];
     
   if(filled)
     {
