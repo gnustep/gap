@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2015 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -572,7 +572,7 @@ static double k = 0.025;
 - (void)remakePath
 {
   GRBezierControlPoint *cp, *prevcp, *mtopoint;
-  NSInteger i;
+  NSUInteger i;
 
   [myPath removeAllPoints];
   if (!controlPoints || [controlPoints count] == 0)
@@ -682,7 +682,7 @@ static double k = 0.025;
 
 - (void)moveAddingCoordsOfPoint:(NSPoint)p
 {
-    int i;
+  NSUInteger i;
 
     for(i = 0; i < [controlPoints count]; i++)
     {
@@ -694,7 +694,7 @@ static double k = 0.025;
 
 - (void)setZoomFactor:(CGFloat)f
 {
-    int i;
+  NSUInteger i;
 
     zmFactor = f;
     for(i = 0; i < [controlPoints count]; i++)
@@ -802,8 +802,12 @@ static double k = 0.025;
   if(![controlPoints count] || !visible)
     return;
 
-  linew =  linewidth * zmFactor;
-
+  linew =  linewidth;
+  if ([[NSGraphicsContext currentContext] isDrawingToScreen])
+    {
+      linew = linewidth * zmFactor;
+    }
+    
   bzp = [NSBezierPath bezierPath];
   if(filled)
     {
