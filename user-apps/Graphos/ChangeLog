@@ -1,4 +1,9 @@
-2018-03-05 Riccardo Mottola <rm@gnu.org>
+2018-03-09 Riccardo Mottola <rm@gnu.org>
+
+        * GRImage.m
+	drawRect: fix printing while in zoomed view
+
+2018-03-08 Riccardo Mottola <rm@gnu.org>
 
         * GRBox.m
 	* GRCircle.m
