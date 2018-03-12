@@ -1,3 +1,14 @@
+2018-03-12 Riccardo Mottola <rm@gnu.org>
+
+        * GRBezierPath.m
+	* GRBox.m
+	* GRCircle.m
+	* GRDrawableObject.m
+	* GRImage.m
+	* GRPathObject.m
+	* GRText.m
+	Unifiy initWithData by initing up the hierarchy.
+
 2018-03-09 Riccardo Mottola <rm@gnu.org>
 
         * GRImage.m

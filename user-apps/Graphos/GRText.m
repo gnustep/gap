@@ -95,142 +95,55 @@
 - (id)initFromData:(NSDictionary *)description
             inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
-{
-  NSMutableDictionary *props;
-  NSPoint p;
-  NSString *fontname;
-  CGFloat fsize;
-  NSFont *fontObj;
-  float parspace;
-  NSTextAlignment align;          
-  NSMutableParagraphStyle *style;
-  NSColor *color;
-  NSString *strVal;
-  NSArray *linearr;
-  float strokeCol[4];
-  float fillCol[4];
-  float strokeAlpha;
-  float fillAlpha;
-  id obj;
-          
-  props = [NSMutableDictionary dictionaryWithCapacity:2];
-  [props setObject:[description objectForKey: @"string"] forKey:@"string"];
-
-  p = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
-                  [[description objectForKey: @"posy"]  floatValue]);
-
-  fontname = [description objectForKey: @"fontname"];
-  fsize = [[description objectForKey: @"fontsize"] floatValue];
-  if (fsize == 0)
-    {
-      NSLog(@"font size invalid");
-      fsize = 12.0;
-    }
-  fontObj = [NSFont fontWithName: fontname size: fsize];
-  if (nil == fontObj)
-    {
-      NSLog(@"font %@ of size %f not found using system", fontname, fsize);
-      fontObj = [NSFont systemFontOfSize:fsize];
-    }
-  [props setObject:fontObj forKey:@"font"];
-
-  align = [[description objectForKey: @"txtalign"] intValue];
-  parspace = [[description objectForKey: @"parspace"] floatValue];
-  style = [[NSMutableParagraphStyle alloc] init];
-  [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [style setAlignment: align];
-  [style setParagraphSpacing: parspace];
-  [props setObject:style forKey:@"paragraphstyle"];
-  [style release];
-
-  strVal = [description objectForKey: @"strokecolor"];
-  linearr = [strVal componentsSeparatedByString: @" "];
-  strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
-  color = nil;
-  if ([linearr count] == 3)
-    {
-      strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-      strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-      strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-      color = [NSColor colorWithCalibratedRed: strokeCol[0]
-					green: strokeCol[1]
-					 blue: strokeCol[2]
-					alpha: strokeAlpha];
-    }
-  else
-    {
-      strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-      strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-      strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-      strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
-      color = [NSColor colorWithDeviceCyan: strokeCol[0]
-				   magenta: strokeCol[1]
-				    yellow: strokeCol[2]
-				     black: strokeCol[3]
-				     alpha: strokeAlpha];
-      color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-    }
-  if (color)
-    [props setObject:color forKey:@"strokecolor"];
-  
-  strVal = [description objectForKey: @"fillcolor"];
-  linearr = [strVal componentsSeparatedByString: @" "];
-  fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
-  color = nil;
-  if ([linearr count] == 3)
-    {
-      fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-      fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-      fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-      color = [NSColor colorWithCalibratedRed: fillCol[0]
-					    green: fillCol[1]
-					     blue: fillCol[2]
-					    alpha: fillAlpha];
-    }
-  else
-    {
-      fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-      fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-      fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-      fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
-      color = [NSColor colorWithDeviceCyan: fillCol[0]
-				   magenta: fillCol[1]
-				    yellow: fillCol[2]
-				     black: fillCol[3]
-				     alpha: fillAlpha];
-      color = [color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-    }
-  if (color)
-    [props setObject:color forKey:@"fillcolor"];
-  
-  obj = [description objectForKey: @"stroked"];
-  if ([obj isKindOfClass:[NSString class]])
-    obj = [NSNumber numberWithInt:[obj intValue]];
-  [props setObject:obj forKey:@"stroked"];
-
-  obj = [description objectForKey: @"filled"];
-  if ([obj isKindOfClass:[NSString class]])
-    obj = [NSNumber numberWithInt:[obj intValue]];	
-  [props setObject:obj forKey:@"filled"];
-
-  obj = [description objectForKey: @"visible"];
-  if ([obj isKindOfClass:[NSString class]])
-    obj = [NSNumber numberWithInt:[obj intValue]];	
-  [props setObject:obj forKey:@"visibile"];
-  
-  obj = [description objectForKey: @"locked"];
-  if ([obj isKindOfClass:[NSString class]])
-    obj = [NSNumber numberWithInt:[obj intValue]];
-  [props setObject:obj forKey:@"locked"];
-
-  obj = [description objectForKey: @"rotation"];
-  if (obj)
-    [props setObject:obj forKey: @"rotation"];
-  
-  self = [self initInView:aView atPoint:p zoomFactor:zf withProperties:props openEditor:NO];
+{  
+  self = [super initFromData:description inView:aView zoomFactor:zf];
   if(self)
     {
+      NSString *s;
+      NSString *fontname;
+      CGFloat fsize;
+      NSFont *fontObj;
+      float parspace;
+      NSTextAlignment align;          
+      NSMutableParagraphStyle *style;
+      NSDictionary *parAttr;
+      id obj;
+          
+      s = [description objectForKey: @"string"];
 
+      pos = NSMakePoint([[description objectForKey: @"posx"]  floatValue],
+			[[description objectForKey: @"posy"]  floatValue]);
+
+      fontname = [description objectForKey: @"fontname"];
+      fsize = [[description objectForKey: @"fontsize"] floatValue];
+      if (fsize == 0)
+	{
+	  NSLog(@"font size invalid");
+	  fsize = 12.0;
+	}
+      fontObj = [NSFont fontWithName: fontname size: fsize];
+      if (nil == fontObj)
+	{
+	  NSLog(@"font %@ of size %f not found using system", fontname, fsize);
+	  fontObj = [NSFont systemFontOfSize:fsize];
+	}
+
+      align = [[description objectForKey: @"txtalign"] intValue];
+      parspace = [[description objectForKey: @"parspace"] floatValue];
+      style = [[NSMutableParagraphStyle alloc] init];
+      [style setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+      [style setAlignment: align];
+      [style setParagraphSpacing: parspace];
+      parAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                fontObj, NSFontAttributeName,
+                              style, NSParagraphStyleAttributeName, nil];
+      [self setString:s attributes:parAttr];
+      [style release];
+  
+
+      obj = [description objectForKey: @"rotation"];
+      if (obj)
+	rotation = [obj floatValue];
       
       scalex = [[description objectForKey: @"scalex"] floatValue];
       scaley = [[description objectForKey: @"scaley"] floatValue];
