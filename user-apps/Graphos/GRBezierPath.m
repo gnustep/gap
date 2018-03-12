@@ -54,7 +54,7 @@ static double k = 0.025;
         inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
 {
-  self = [super init];
+  self = [super initFromData:description inView:aView zoomFactor:zf];
   if(self != nil)
     {
       NSArray *psops, *linearr;
@@ -64,18 +64,11 @@ static double k = 0.025;
       double distx, disty;
       NSUInteger i, count;
       NSArray *points;
-      CGFloat strokeCol[4];
-      CGFloat fillCol[4];
-      CGFloat strokeAlpha;
-      CGFloat fillAlpha;
-      id obj;
       BOOL symm;
       
       psops = nil;
       linearr = nil;
-      docView = aView;
-      zmFactor = zf;
-      editor = [self allocEditor];
+
       displayPath = [[NSBezierPath bezierPath] retain];
       [displayPath setCachesBezierPath: NO];
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
@@ -156,81 +149,7 @@ static double k = 0.025;
             }
         }
       
-      flatness = [[description objectForKey: @"flatness"] floatValue];
-      linejoin = [[description objectForKey: @"linejoin"] intValue];
-      linecap = [[description objectForKey: @"linecap"] intValue];
-      miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
-      linewidth = [[description objectForKey: @"linewidth"] floatValue];
-      obj = [description objectForKey: @"stroked"];
-      if ([obj isKindOfClass:[NSString class]])
-	obj = [NSNumber numberWithInt:[obj intValue]];
-      stroked = [obj boolValue];
-      strokeAlpha = [[description objectForKey: @"strokealpha"] floatValue];
-      str = [description objectForKey: @"strokecolor"];
-      linearr = [str componentsSeparatedByString: @" "];
-      if ([linearr count] == 3)
-	{
-	  strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	  strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	  strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	  strokeColor = [NSColor colorWithCalibratedRed: strokeCol[0]
-						  green: strokeCol[1]
-						   blue: strokeCol[2]
-						  alpha: strokeAlpha];
-	  [strokeColor retain];
-	}
-      else
-	{
-	  strokeCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	  strokeCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	  strokeCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	  strokeCol[3] = [[linearr objectAtIndex: 3] floatValue];
-	  strokeColor = [NSColor colorWithDeviceCyan: strokeCol[0]
-					     magenta: strokeCol[1]
-					      yellow: strokeCol[2]
-					       black: strokeCol[3]
-					       alpha: strokeAlpha];
-	  strokeColor = [[strokeColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-	  }
-      obj = [description objectForKey: @"filled"];
-      if ([obj isKindOfClass:[NSString class]])
-	obj = [NSNumber numberWithInt:[obj intValue]];
-      filled = [obj boolValue];
-      fillAlpha = [[description objectForKey: @"fillalpha"] floatValue];
-      str = [description objectForKey: @"fillcolor"];
-      linearr = [str componentsSeparatedByString: @" "];
-      if ([linearr count] == 3)
-	{
-	  fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	  fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	  fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	  fillColor = [NSColor colorWithCalibratedRed: fillCol[0]
-						green: fillCol[1]
-						 blue: fillCol[2]
-						alpha: fillAlpha];
-	  [fillColor retain];
-	}
-      else
-	{
-	  fillCol[0] = [[linearr objectAtIndex: 0] floatValue];
-	  fillCol[1] = [[linearr objectAtIndex: 1] floatValue];
-	  fillCol[2] = [[linearr objectAtIndex: 2] floatValue];
-	  fillCol[3] = [[linearr objectAtIndex: 3] floatValue];
-	  fillColor = [NSColor colorWithDeviceCyan: fillCol[0]
-					   magenta: fillCol[1]
-					    yellow: fillCol[2]
-					     black: fillCol[3]
-					     alpha: fillAlpha];
-	  fillColor = [[fillColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace] retain];
-	}
-      obj = [description objectForKey: @"visible"];
-      if ([obj isKindOfClass:[NSString class]])
-	obj = [NSNumber numberWithInt:[obj intValue]];
-      visible = [obj boolValue];
-      obj = [description objectForKey: @"locked"];
-      if ([obj isKindOfClass:[NSString class]])
-	obj = [NSNumber numberWithInt:[obj intValue]];
-      locked = [obj boolValue];
+
     }
 
   return self;

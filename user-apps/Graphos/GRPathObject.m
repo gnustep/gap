@@ -22,6 +22,7 @@
  License along with this library; if not, write to the Free
  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
 #import "GRPathObject.h"
 
 
@@ -97,10 +98,14 @@
             inView:(GRDocView *)aView
         zoomFactor:(CGFloat)zf
 {
-  self = [super init];
+  self = [super initFromData:description inView:aView zoomFactor:zf];
   if(self)
     {
-      NSLog(@"initInView description of GRPathObject");
+      flatness = [[description objectForKey: @"flatness"] floatValue];
+      linejoin = [[description objectForKey: @"linejoin"] intValue];
+      linecap = [[description objectForKey: @"linecap"] intValue];
+      miterlimit = [[description objectForKey: @"miterlimit"] floatValue];
+      linewidth = [[description objectForKey: @"linewidth"] floatValue];
     }
   return self;
 }
