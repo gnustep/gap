@@ -218,7 +218,7 @@
     [dict setObject: s forKey: @"fontsize"];
     s = [NSString stringWithFormat: @"%.3f", parspace];
     [dict setObject: s forKey: @"parspace"];
-    s = [NSString stringWithFormat: @"%i", align];
+    s = [NSString stringWithFormat: @"%i", (int)align];
     [dict setObject: s forKey: @"txtalign"];
     s = [NSString stringWithFormat: @"%.3f", scalex];
     [dict setObject: s forKey: @"scalex"];
