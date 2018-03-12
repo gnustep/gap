@@ -32,10 +32,10 @@
   GRPathObject *objCopy;
   NSBezierPath *bzpCopy;
   
-  bzpCopy = [myPath copy];
+  bzpCopy = [displayPath copy];
   
   objCopy = [super copyWithZone:zone];
-  objCopy->myPath = bzpCopy;
+  objCopy->displayPath = bzpCopy;
   objCopy->linewidth = linewidth;
   objCopy->flatness = flatness;
   objCopy->miterlimit = miterlimit;
@@ -48,7 +48,7 @@
 
 - (void)dealloc
 {
-  [myPath release];
+  [displayPath release];
   [super dealloc];
 }
 
@@ -61,8 +61,8 @@
     {
       id val;
 
-      myPath = [[NSBezierPath bezierPath] retain];
-      [myPath setCachesBezierPath: NO];
+      displayPath = [[NSBezierPath bezierPath] retain];
+      [displayPath setCachesBezierPath: NO];
 
       flatness = 0.6;
       miterlimit = 10.0;

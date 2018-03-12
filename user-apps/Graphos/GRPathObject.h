@@ -2,7 +2,7 @@
  Project: Graphos
  GRPathObject.h
 
- Copyright (C) 2008-2013 GNUstep Application Project
+ Copyright (C) 2008-2018 GNUstep Application Project
 
  Author: Ing. Riccardo Mottola
 
@@ -37,7 +37,7 @@
 
 @interface GRPathObject : GRDrawableObject
 {
-  NSBezierPath *myPath;
+  NSBezierPath *displayPath;
   
   CGFloat linewidth;
   CGFloat flatness;
