@@ -1,3 +1,10 @@
+2018-03-13 Riccardo Mottola <rm@gnu.org>
+
+        * GRPathObject.h
+	* GRPathObject.m
+	* GRBezierPath.m
+	Hold a non-zoomed bezier path in path as well as displayPath and remake both during remakePath. Use the non-zoomed path for printing.
+
 2018-03-12 Riccardo Mottola <rm@gnu.org>
 
         * GRBezierPath.m

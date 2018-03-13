@@ -37,6 +37,10 @@
 
 @interface GRPathObject : GRDrawableObject
 {
+  // object bezier path
+  NSBezierPath *path;
+
+  // already zoomed bezier path for faster drawing
   NSBezierPath *displayPath;
   
   CGFloat linewidth;

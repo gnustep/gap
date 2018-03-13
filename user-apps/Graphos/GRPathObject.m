@@ -49,6 +49,7 @@
 
 - (void)dealloc
 {
+  [path release];
   [displayPath release];
   [super dealloc];
 }
@@ -62,6 +63,8 @@
     {
       id val;
 
+      path = [[NSBezierPath bezierPath] retain];
+      [path setCachesBezierPath: NO];
       displayPath = [[NSBezierPath bezierPath] retain];
       [displayPath setCachesBezierPath: NO];
 

@@ -69,6 +69,8 @@ static double k = 0.025;
       psops = nil;
       linearr = nil;
 
+      path = [[NSBezierPath bezierPath] retain];
+      [path setCachesBezierPath: NO];
       displayPath = [[NSBezierPath bezierPath] retain];
       [displayPath setCachesBezierPath: NO];
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
@@ -498,6 +500,7 @@ static double k = 0.025;
     return;
 
   mtopoint = [controlPoints objectAtIndex: 0];
+  [path moveToPoint: [mtopoint center]];
   [displayPath moveToPoint: GRpointZoom([mtopoint center], zmFactor)];
   for(i = 1; i < [controlPoints count]; i++)
     {
@@ -517,10 +520,14 @@ static double k = 0.025;
       
       if (isLine)
         {
+          [path lineToPoint: [cp center]];
           [displayPath lineToPoint: GRpointZoom([cp center], zmFactor)];
         }
       else
         {
+          [path curveToPoint: [cp center]
+                 controlPoint1: handle1.firstHandle
+                 controlPoint2: handle2.secondHandle];
           [displayPath curveToPoint: GRpointZoom([cp center], zmFactor)
                  controlPoint1: GRpointZoom(handle1.firstHandle, zmFactor)
                  controlPoint2: GRpointZoom(handle2.secondHandle, zmFactor)];
@@ -717,14 +724,17 @@ static double k = 0.025;
   NSUInteger i;
   NSBezierPath *bzp;
   CGFloat linew;
-    
+  NSBezierPath *pathToDraw;
+  
   if(![controlPoints count] || !visible)
     return;
 
   linew =  linewidth;
+  pathToDraw = path;
   if ([[NSGraphicsContext currentContext] isDrawingToScreen])
     {
       linew = linewidth * zmFactor;
+      pathToDraw = displayPath;
     }
     
   bzp = [NSBezierPath bezierPath];
@@ -732,17 +742,17 @@ static double k = 0.025;
     {
       [NSGraphicsContext saveGraphicsState];
       [fillColor set];
-      [displayPath fill];
+      [pathToDraw fill];
       [NSGraphicsContext restoreGraphicsState];
     }
   if(stroked)
     {
       [NSGraphicsContext saveGraphicsState];
-      [displayPath setLineJoinStyle:linejoin];
-      [displayPath setLineCapStyle:linecap];
-      [displayPath setLineWidth:linew];
+      [pathToDraw setLineJoinStyle:linejoin];
+      [pathToDraw setLineCapStyle:linecap];
+      [pathToDraw setLineWidth:linew];
       [strokeColor set];
-      [displayPath stroke];
+      [pathToDraw stroke];
       [NSGraphicsContext restoreGraphicsState];
     }
     
