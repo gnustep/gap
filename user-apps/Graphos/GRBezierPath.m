@@ -491,6 +491,7 @@ static double k = 0.025;
   GRBezierControlPoint *cp, *prevcp, *mtopoint;
   NSUInteger i;
 
+  [path removeAllPoints];
   [displayPath removeAllPoints];
   if (!controlPoints || [controlPoints count] == 0)
     return;
