@@ -69,10 +69,6 @@ static double k = 0.025;
       psops = nil;
       linearr = nil;
 
-      path = [[NSBezierPath bezierPath] retain];
-      [path setCachesBezierPath: NO];
-      displayPath = [[NSBezierPath bezierPath] retain];
-      [displayPath setCachesBezierPath: NO];
       controlPoints = [[NSMutableArray alloc] initWithCapacity: 1];
       points = [description objectForKey: @"points"];
       for (i = 0; i < [points count]; i++)
@@ -99,7 +95,7 @@ static double k = 0.025;
           [cp release];
         }
       [self confirmNewCurve];
-      [self remakePath];
+ 
       psops = [description objectForKey: @"psdata"];
       for(i = 0; i < [psops count]; i++)
         {

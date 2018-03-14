@@ -31,12 +31,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
   GRPathObject *objCopy;
-  NSBezierPath *bzpCopy;
-  
-  bzpCopy = [displayPath copy];
   
   objCopy = [super copyWithZone:zone];
-  objCopy->displayPath = bzpCopy;
+  objCopy->displayPath = [displayPath copy];
+  objCopy->path = [path copy];
   objCopy->linewidth = linewidth;
   objCopy->flatness = flatness;
   objCopy->miterlimit = miterlimit;
@@ -104,6 +102,11 @@
   self = [super initFromData:description inView:aView zoomFactor:zf];
   if(self)
     {
+      path = [[NSBezierPath bezierPath] retain];
+      [path setCachesBezierPath: NO];
+      displayPath = [[NSBezierPath bezierPath] retain];
+      [displayPath setCachesBezierPath: NO];
+      
       flatness = [[description objectForKey: @"flatness"] floatValue];
       linejoin = [[description objectForKey: @"linejoin"] intValue];
       linecap = [[description objectForKey: @"linecap"] intValue];
