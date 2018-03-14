@@ -367,11 +367,10 @@ static double k = 0.025;
     GRBezierHandle handle1, handle2;
     hitData hitdata;
     NSPoint pp[81], newpp[7];
-    NSUInteger i, pcount, index;
+    int i;
+    NSUInteger pcount, index;
     double y, s, ax, ay;
 
-    return;
-    // #### FIXME what the crap is this? we always return... the rest of the method is useless!!!
     pcount = 0;
     y = (int)p.y -4;
     while(pcount < 81) {
@@ -397,7 +396,9 @@ static double k = 0.025;
     index = [self indexOfPoint: cp];
     if (index == NSNotFound)
       return;
-
+    if (index > 0)
+      index--;
+    
     ncp = [[GRBezierControlPoint alloc] initAtPoint: hitdata.p
                                           forPath: self zoomFactor: zmFactor];
     [controlPoints insertObject: ncp atIndex: index];
@@ -439,7 +440,7 @@ static double k = 0.025;
     newpp[3].y = s * newpp[2].y + hitdata.t * newpp[4].y;
 
 
-    printf("%i %i - %i %i\n", (int)[(GRBezierControlPoint *)currentPoint center].x,
+    NSLog(@"%i %i - %i %i", (int)[(GRBezierControlPoint *)currentPoint center].x,
            (int)[(GRBezierControlPoint *)currentPoint center].y, (int)newpp[3].x, (int)newpp[3].y);
 
 
@@ -687,7 +688,7 @@ static double k = 0.025;
   found = NO;
 
   i = 0;
-  while (i < [controlPoints count] || !found)
+  while (i < [controlPoints count] && !found)
     {
       if([controlPoints objectAtIndex: i] == aPoint)
         found = YES;

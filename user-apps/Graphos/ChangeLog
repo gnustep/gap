@@ -1,5 +1,10 @@
 2018-03-14 Riccardo Mottola <rm@gnu.org>
 
+	* GRBezierPath.m
+	Fix indexOfPoint and improve subdividePathAtPoint
+
+2018-03-14 Riccardo Mottola <rm@gnu.org>
+
 	* GRPathObject.m
 	* GRBezierPath.m
 	Correct initFromData initialization hierarchy.
