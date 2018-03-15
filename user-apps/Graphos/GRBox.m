@@ -155,9 +155,9 @@
 
     str = [NSString stringWithFormat: @"%.3f", flatness];
     [dict setObject: str forKey: @"flatness"];
-    str = [NSString stringWithFormat: @"%i", linejoin];
+    str = [NSString stringWithFormat: @"%u", (unsigned)linejoin];
     [dict setObject: str forKey: @"linejoin"];
-    str = [NSString stringWithFormat: @"%i", linecap];
+    str = [NSString stringWithFormat: @"%u", (unsigned)linecap];
     [dict setObject: str forKey: @"linecap"];
     str = [NSString stringWithFormat: @"%.3f", miterlimit];
     [dict setObject: str forKey: @"miterlimit"];
