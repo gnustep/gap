@@ -1,3 +1,8 @@
+2018-03-26 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Update view after subdiving the path.
+
 2018-03-14 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m
