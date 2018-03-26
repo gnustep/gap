@@ -102,6 +102,12 @@
 	  tmp = [[[NSString alloc] initWithData: data
 				   encoding: NSUTF8StringEncoding] autorelease];
         }
+
+      if (documentDictionary != nil)
+	{
+	  [documentDictionary release];
+	  documentDictionary = nil;
+	}
       documentDictionary = [[tmp propertyList] retain];
       return (documentDictionary != nil);
     }
