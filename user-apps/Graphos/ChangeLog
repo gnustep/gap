@@ -3,6 +3,9 @@
 	* GRDocView.m
 	Update view after subdiving the path.
 
+	* GRBezierPath.m (confirmNewCurve:)
+	Fix if called without a currentPoint.
+
 2018-03-14 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.m

@@ -481,7 +481,9 @@ static double k = 0.025;
   calculatingHandles = NO;
   if([controlPoints count] == 1)
     return;
-  if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
+  if (currentPoint == nil)
+    [(GRBezierPathEditor *)editor setIsDone:YES];
+  else if([self isPoint: (GRBezierControlPoint *)currentPoint onPoint: [controlPoints objectAtIndex: 0]])
     [(GRBezierPathEditor *)editor setIsDone:YES];
   
   [self remakePath];
