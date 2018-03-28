@@ -69,6 +69,12 @@
   return objCopy;
 }
 
+- (void)setPath:(GRBezierPath *)thePath
+{
+  path = thePath;
+}
+
+
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePos
 {
     double distx, disty;

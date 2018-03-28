@@ -57,6 +57,7 @@ typedef struct
           forPath:(GRBezierPath *)aPath
        zoomFactor:(CGFloat)zf;
 
+- (void)setPath:(GRBezierPath *)thePath;
 - (void)calculateBezierHandles:(NSPoint)draggedHandlePosition;
 - (void)moveToPoint:(NSPoint)p;
 - (void)moveBezierHandleToPosition:(NSPoint)newp oldPosition:(NSPoint)oldp;
