@@ -46,6 +46,7 @@ typedef struct
 - (void)addCurveWithBezierHandlePosition:(NSPoint)handlePos;
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
+- (void)deletePoint:(GRBezierControlPoint *)p;
 
 - (NSMutableArray *)controlPoints;
 - (BOOL)isPoint:(GRBezierControlPoint *)cp1 onPoint:(GRBezierControlPoint *)cp2;

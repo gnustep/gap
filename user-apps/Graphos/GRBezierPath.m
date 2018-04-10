@@ -239,6 +239,7 @@ static double k = 0.025;
       GRBezierControlPoint *cpCopy;
 
       cpCopy = [cp copy];
+      [cpCopy setPath:objCopy];
       [cpsCopy addObject: cpCopy];
       [cpCopy release];
     }
@@ -451,9 +452,34 @@ static double k = 0.025;
     [self remakePath];
 }
 
+- (void)deletePoint:(GRBezierControlPoint *)p
+{
+  NSUInteger i;
+  GRBezierControlPoint *cpToDelete;
+
+  if ([controlPoints count] < 2)
+    return;
+
+  i = 0;
+  cpToDelete = NULL;
+  while (i < [controlPoints count] && cpToDelete == NULL)
+    {
+      GRBezierControlPoint *cp;
+      
+      cp = [controlPoints objectAtIndex:i];
+      if (cp == p)
+        cpToDelete = cp;
+      else
+        i++;
+    }
+
+  [controlPoints removeObjectAtIndex:i];
+  [self remakePath];
+}
+
 - (BOOL)isPoint:(GRBezierControlPoint *)cp1 onPoint:(GRBezierControlPoint *)cp2
 {
-    return pointInRect([cp2 centerRect], [cp1 center]);
+  return pointInRect([cp2 centerRect], [cp1 center]);
 }
 
 - (GRBezierControlPoint *)pointOnPoint:(GRBezierControlPoint *)aPoint

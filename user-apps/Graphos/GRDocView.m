@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.m
 
- Copyright (C) 2000-2017 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -41,6 +41,7 @@
 #define UNDO_ACTION_CP_CUSP @"Change Point to Cusp"
 #define UNDO_ACTION_CP_EXTRACT @"Change Point by Extracting"
 #define UNDO_ACTION_CP_OVERLAP @"Change Point by Overlapping"
+#define UNDO_ACTION_CP_DELETE @"Delete Point"
 
 #define ZOOM_FACTORS 13
 #define STD_ZOOM_INDEX 5
@@ -1118,6 +1119,49 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [self setNeedsDisplay: YES];
 }
 
+- (void)deletePointsOfCurrentPath:(id)sender
+{
+  NSUndoManager *uMgr;
+  NSUInteger i;
+  NSArray *points;
+  GRBezierPath *path;
+    
+  path = nil;
+  for(i = 0; i < [objects count]; i++)
+    {
+      GRDrawableObject *obj;
+      obj = [objects objectAtIndex: i];
+        
+      if([[obj editor] isSelected] && [obj isKindOfClass:[GRBezierPath class]])
+	{
+	  path = (GRBezierPath *)obj;
+	}
+    }
+    
+  if (!path)
+    return;
+    
+  points = [(GRBezierPathEditor *)[path editor] selectedControlPoints];
+  if (!points || [points count] == 0)
+    return;
+    
+  uMgr = [self undoManager];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_DELETE] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [uMgr setActionName: UNDO_ACTION_CP_DELETE];
+    }
+    
+  for (i = 0; i < [points count]; i++)
+    {
+      [path deletePoint: [points objectAtIndex: i]];
+    }
+  [path remakePath];
+  [self setNeedsDisplay: YES];
+}
+
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
 {
@@ -2081,6 +2125,15 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         return NO;
     }
 
+  if (sel_isEqual(action, @selector(deletePointsOfCurrentPath:)))
+    {
+      if ([[NSApp delegate] currentToolType] == whitearrowtool && (selectedPaths == 1))
+        {
+          return YES;
+        }
+      else
+        return NO;
+    }
   if (sel_isEqual(action, @selector(moveSelectedObjectsToFront:)) || sel_isEqual(action, @selector(moveSelectedObjectsToBack:)))
     {
       if (selectedObjs)
@@ -2121,7 +2174,14 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
           
           
           menu = [[NSMenu alloc] initWithTitle: NSLocalizedString(@"Handles", @"")];
-          
+
+	  menuItem = [[NSMenuItem alloc] init];
+          [menuItem setTitle: NSLocalizedString(@"Delete", @"")];
+          [menuItem setTarget: self];      
+          [menuItem setAction: @selector(deletePointsOfCurrentPath:)];     
+          [menu addItem: menuItem];
+          [menuItem release];
+	  
           menuItem = [[NSMenuItem alloc] init];
           [menuItem setTitle: NSLocalizedString(@"Symmetric", @"")];
           [menuItem setTarget: self];      
