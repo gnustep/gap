@@ -6,6 +6,7 @@
                 changePointsOfCurrentPathByOverlap = id; 
                 changePointsOfCurrentPathToCusp = id; 
                 changePointsOfCurrentPathToSymmetric = id; 
+                deletePointsOfCurrentPath = id; 
                 inspectObject = id; 
                 moveSelectedObjectsToBack = id; 
                 moveSelectedObjectsToFront = id; 

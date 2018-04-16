@@ -110,7 +110,7 @@
 - (IBAction)changePointsOfCurrentPathToCusp:(id)sender;
 - (IBAction)changePointsOfCurrentPathByOverlap:(id)sender;
 - (IBAction)changePointsOfCurrentPathByExtract:(id)sender;
-
+- (IBAction)deletePointsOfCurrentPath:(id)sender;
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split;
 
 - (NSDictionary *)selectionProperties;

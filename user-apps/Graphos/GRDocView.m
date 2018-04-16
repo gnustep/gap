@@ -1119,7 +1119,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [self setNeedsDisplay: YES];
 }
 
-- (void)deletePointsOfCurrentPath:(id)sender
+- (IBAction)deletePointsOfCurrentPath:(id)sender
 {
   NSUndoManager *uMgr;
   NSUInteger i;
