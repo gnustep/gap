@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsdoc PUBLIC "-//GNUstep//DTD gsdoc 1.0.3//EN" "http://www.gnustep.org/gsdoc-1_0_3.xml">      
+<gsdoc base="OresmeKit">
+  <head>        
+    <title>The Oresme Project</title>
+  </head>
+  <body>
+    <chapter>
+      <heading>OresmeKit documentation</heading>
+      <section>
+        <heading>What are OresmeKit classes?</heading>
+        <p>Oresme kit contains a collection of classes useful for displaying graphs</p>
+        <p>Different classes, which subclass NSView and are thus embeddable as GUI components, provide different chart types.</p>
+      </section>
+    </chapter>
+    <back>
+      <chapter>
+        <heading>API Documentation</heading>
+        <p>The index below lists the major components of the OresmeKit
+        documentation.</p>
+        <index type="title" scope="project" target="mainFrame" />
+      </chapter>
+    </back>
+  </body>
+</gsdoc>

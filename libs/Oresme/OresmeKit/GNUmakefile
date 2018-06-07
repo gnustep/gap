@@ -15,6 +15,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 VERSION = 0.1
 FRAMEWORK_NAME = OresmeKit
+DOCUMENT_NAME = $(FRAMEWORK_NAME)
 OresmeKit_CURRENT_VERSION_NAME = 0.1
 OresmeKit_DEPLOY_WITH_CURRENT_VERSION = yes
 
@@ -45,10 +46,12 @@ DOCUMENT_NAME = OresmeKit
 
 OresmeKit_AGSDOC_FILES = OresmeKit.gsdoc \
 	$(OresmeKit_HEADER_FILES) \
-	$(OresmeKit_OBJC_FILES)
+	$(OresmeKit_OBJC_FILES) \
+
 
 #OresmeKit_AGSDOC_FLAGS += -DocumentationDirectory ReferenceDoc
-OresmeKit_AGSDOC_FLAGS += -MakeFrames YES
+OresmeKit_AGSDOC_FLAGS = \
+	-MakeFrames YES \
 
 #
 # Makefiles
