@@ -10,6 +10,8 @@ endif
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
+PACKAGE_NAME = OresmeKit
+
 #
 # Framework
 #
