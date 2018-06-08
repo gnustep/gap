@@ -72,12 +72,12 @@ enum
         [controller setFullScreen:theEvent];
         return YES;
       }
-    else if (keyCh == NSLeftArrowFunctionKey || keyCh == NSUpArrowFunctionKey)
+    else if (keyCh == NSLeftArrowFunctionKey || keyCh == NSUpArrowFunctionKey ||  keyCh == NSPageUpFunctionKey)
       {
         [controller prevImage:theEvent];
         return YES;
       }
-    else if (keyCh == NSRightArrowFunctionKey || keyCh == NSDownArrowFunctionKey || keyCh == NSSpaceCharacter)
+    else if (keyCh == NSRightArrowFunctionKey || keyCh == NSDownArrowFunctionKey ||  keyCh == NSPageDownFunctionKey || keyCh == NSSpaceCharacter)
       {
         [controller nextImage:theEvent];
         return YES;
