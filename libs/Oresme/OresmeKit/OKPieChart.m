@@ -1,7 +1,7 @@
 /*
    Project: OresmeKit
 
-   Copyright (C) 2012-2013 Free Software Foundation
+   Copyright (C) 2012-2018 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -96,7 +96,7 @@
       /* alpha : 360 = value : total */
       angle = (v * 360.0) / positiveSum;
 
-      [[colorsArray objectAtIndex:i] set];
+      [(NSColor *)[colorsArray objectAtIndex:i] set];
 
       [path moveToPoint: center];
       [path lineToPoint: NSMakePoint(center.x + cos(currAngle*6.2831853/360)*radius, center.y + sin(currAngle*6.2831853/360)*radius)];
