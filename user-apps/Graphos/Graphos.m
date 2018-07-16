@@ -2,7 +2,7 @@
  Project: Graphos
  Graphos.m
 
- Copyright (C) 2000-2011 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -106,3 +106,22 @@
 
 
 @end
+
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+
+@implementation NSString (TigerExtensions)
+- (BOOL) boolValue
+{
+  if (self != nil && [self length] > 0)
+    {
+      if([self characterAtIndex:0] == 'Y' || [self characterAtIndex:0] == 'y')
+        return YES;
+      if([self characterAtIndex:0] == 'T' || [self characterAtIndex:0] == 't')
+        return YES;
+    }
+    
+  return NO;
+}
+@end
+
+#endif

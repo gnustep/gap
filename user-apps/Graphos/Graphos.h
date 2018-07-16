@@ -2,7 +2,7 @@
  Project: Graphos
  Graphos.h
 
- Copyright (C) 2000-2017 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -28,10 +28,11 @@
 #import "GRTools.h"
 #import "GRPropsEditor.h"
 
-#include <objc/runtime.h>
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
 #define sel_isEqual(selector1, selector2) (selector1 ==  selector2)
+#else
+#include <objc/runtime.h>
 #endif
 
 /* change this if the new file format becomes incompatible */
@@ -81,3 +82,11 @@ typedef enum
 
 @end
 
+#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+
+@interface NSString (TigerExtensions)
+- (BOOL) boolValue;
+@end
+
+
+#endif
