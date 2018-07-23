@@ -1,3 +1,8 @@
+2017-07-27 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+        Remove alpha before saving JPEGs, may cause problems
+
 2017-03-27 Riccardo Mottola <rm@gnu.org>
 
 	* PRScale.m

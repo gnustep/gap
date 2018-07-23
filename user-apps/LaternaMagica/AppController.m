@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2017 Riccardo Mottola
+   Copyright (C) 2006-2018 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -977,6 +977,59 @@
       else
         {
           float quality;
+	  
+	  // We remove the Alpha channel, it causes invalid JPEGs es. on Apple
+	  if ([scaledImageRep hasAlpha])
+	    {
+	      NSInteger x, y;
+	      NSInteger w, h;
+	      NSInteger        srcBytesPerRow;
+	      NSInteger        destBytesPerRow;
+	      NSInteger        srcBytesPerPixel;
+	      NSInteger        destBytesPerPixel;
+	      NSBitmapImageRep *destImageRep;
+	      unsigned char    *srcData;
+	      unsigned char    *destData;
+	      
+	      NSLog(@"JPEG can't have alpha! Converting....");
+	      w = [scaledImageRep pixelsWide];
+	      h = [scaledImageRep pixelsHigh];
+
+	      srcBytesPerRow = [scaledImageRep bytesPerRow];
+	      srcBytesPerPixel = [scaledImageRep bitsPerPixel] / 8;
+	      destBytesPerPixel = srcBytesPerPixel-1; // We remove Alpha
+
+	      destImageRep = [[NSBitmapImageRep alloc]
+                                  initWithBitmapDataPlanes:NULL
+                                                pixelsWide:w
+                                                pixelsHigh:h
+                                             bitsPerSample:8
+                                           samplesPerPixel:destBytesPerPixel
+                                                  hasAlpha:NO
+                                                  isPlanar:NO
+                                            colorSpaceName:[scaledImageRep colorSpaceName]
+                                               bytesPerRow:0
+                                              bitsPerPixel:0];
+	      
+	      destBytesPerRow = [destImageRep bytesPerRow];
+	      srcData = [scaledImageRep bitmapData];
+	      destData = [destImageRep bitmapData];
+
+	      for (y = 0; y < h; y++)
+		for (x = 0; x < w; x++)
+		  {
+		    unsigned       i;
+		    unsigned char  *p1;
+		    unsigned char  *p2;
+		    
+		    p1 = srcData + srcBytesPerRow * y + srcBytesPerPixel * x;
+		    p2 = destData + destBytesPerRow * y + destBytesPerPixel * x;
+		    for (i = 0; i < destBytesPerPixel; i++)
+		      p2[i] = p1[i];
+		  }
+	      [destImageRep autorelease];
+	      scaledImageRep = destImageRep;
+	    } // end of Alpha removal
 	  
 	  switch ([popupFileQuality indexOfSelectedItem])
 	    {
