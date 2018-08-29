@@ -87,7 +87,7 @@
 
 - (void)awakeFromNib
 {
-#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6)
+#if defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6)
   [logView setAutomaticSpellingCorrectionEnabled:NO];
 #endif
   /*
