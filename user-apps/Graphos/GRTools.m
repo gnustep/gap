@@ -190,7 +190,6 @@
         [self addSubview: scissorsButt];
         [buttons addObject: scissorsButt];
         [scissorsButt release];
-        //[scissorsButt setEnabled:NO];
 
         handButt = [[GRToolButton alloc] initWithFrame: NSMakeRect(0, 0, 25, 20)
                                               toolType: handtool];
