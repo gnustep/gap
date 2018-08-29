@@ -2,7 +2,7 @@
  Project: Graphos
  GRTools.m
 
- Copyright (C) 2000-2008 GNUstep Application Project
+ Copyright (C) 2000-2018 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -265,11 +265,11 @@
     if(self)
     {
         [self setTitle: @" "];
+        [self setFloatingPanel:YES];
         toolsView = [[GRToolsView alloc] initWithFrame: NSMakeRect(0, 0, 50, 140)];
         [[self contentView] addSubview: toolsView];
         [self setFrameAutosaveName:@"Draw_Tools"];
     }
-    NSLog(@"inited GRToolsWindow");
     return self;
 }
 

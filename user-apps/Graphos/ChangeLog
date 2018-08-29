@@ -1,4 +1,9 @@
-2018-04-10 Riccardo Mottola <rmggnu.org~
+2018-08-30 Riccardo Mottola <rm@gnu.org>
+
+	* GRTools.m
+        Set Tool panel as floating
+
+2018-04-10 Riccardo Mottola <rm@gnu.org>
 
 	* GRBezierPath.h
 	* GRBezierPath.m
