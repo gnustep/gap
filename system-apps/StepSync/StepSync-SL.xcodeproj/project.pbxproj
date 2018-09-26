@@ -232,6 +232,7 @@
 		85D825F71E5A2C5F007C9BA2 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G3;
@@ -240,6 +241,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = StepSync;
+				SDKROOT = macosx10.5;
 				SYMROOT = "$(PROJECT_DIR)/build";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
