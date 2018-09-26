@@ -22,7 +22,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.1
+VERSION = 1.0
 PACKAGE_NAME = StepSync
 APP_NAME = StepSync
 StepSync_APPLICATION_ICON = 
