@@ -2,7 +2,7 @@
    Project: StepSync
    FileObject.m
 
-   Copyright (C) 2017 Free Software Foundation
+   Copyright (C) 2017-2018 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -75,9 +75,30 @@
   return createdDate;
 }
 
+- (void)setCreatedDate:(NSDate *)date
+{
+  if (createdDate != date)
+    {
+      [createdDate release];
+      createdDate = date;
+      [createdDate retain];
+    }
+}
+
+
 - (NSDate *)modifiedDate
 {
   return modifiedDate;
+}
+
+- (void)setModifiedDate:(NSDate *)date
+{
+  if (modifiedDate != date)
+    {
+      [modifiedDate release];
+      modifiedDate = date;
+      [modifiedDate retain];
+    }
 }
 
 - (NSString *)description
