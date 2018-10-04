@@ -405,7 +405,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
 - (void)updatePrintInfo: (NSPrintInfo *)pi;
 {
-  float lm, rm;
+  CGFloat lm, rm, tm, bm;
 
   if (pi == nil)
     {
@@ -414,16 +414,23 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     }
   lm = [pi leftMargin];
   rm = [pi rightMargin];
-  if (lm <= 0 || rm <= 0 || [pi paperSize].width <= 0 || [pi paperSize].height <= 0)
+  tm = [pi topMargin];
+  bm = [pi bottomMargin];
+  if ([pi paperSize].width < 0 || [pi paperSize].height < 0)
     {
-      NSLog(@"invalid margin / paper size information. %f %f %f %f", lm, rm,[pi paperSize].width, [pi paperSize].height);
+      NSLog(@"invalid paper size information. %f %f", [pi paperSize].width, [pi paperSize].height);
       return;
+    }
+  if (lm < 0 || rm < 0 || bm < 0 || rm < 0)
+    {
+      NSLog(@"invalid margin information. %f %f %f %f", lm, rm, tm, bm);
+      lm = rm = bm = tm = 30;
     }
   pageRect = NSMakeRect(0,0,[pi paperSize].width, [pi paperSize].height);
 
-  a4Rect = NSMakeRect([pi leftMargin], [pi bottomMargin],
-		      pageRect.size.width-([pi leftMargin]+[pi rightMargin]),
-		      pageRect.size.height-([pi topMargin]+[pi bottomMargin]));
+  a4Rect = NSMakeRect(lm, bm,
+		      pageRect.size.width-(lm+rm),
+		      pageRect.size.height-(tm+bm));
     
   zmdRect = a4Rect;
   zIndex = STD_ZOOM_INDEX;
