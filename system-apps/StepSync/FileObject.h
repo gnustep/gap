@@ -44,7 +44,7 @@ typedef unsigned NSUInteger;
 - (NSString *)relativePath;
 - (void)setRelativePath:(NSString *)path;
 - (unsigned long long)size;
-- (void)setSize:(unsigned long)size;
+- (void)setSize:(unsigned long)aSize;
 - (NSDate *)createdDate;
 - (void)setCreatedDate:(NSDate *)date;
 - (NSDate *)modifiedDate;

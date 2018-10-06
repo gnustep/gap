@@ -70,6 +70,12 @@
   return size;
 }
 
+- (void)setSize:(unsigned long)aSize
+{
+  size = aSize;
+}
+
+
 - (NSDate *)createdDate
 {
   return createdDate;
