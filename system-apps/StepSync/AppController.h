@@ -55,6 +55,7 @@
   BOOL analyzed;
   BOOL analyzeRunning;
   BOOL syncRunning;
+  BOOL stopTask;
   FileMap *sourceMap;
   FileMap *targetMap;
   NSMutableArray *targetMissingDirs;
@@ -71,5 +72,6 @@
 - (IBAction)analyzeAction:(id)sender;
 - (void)reportAnalysis;
 - (IBAction)syncAction:(id)sender;
+- (IBAction)stopTask:(id)sender;
 
 @end

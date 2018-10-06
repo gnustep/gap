@@ -149,7 +149,9 @@
   FileObject *fileObj;
   unsigned long long sourceSize;
   unsigned long long targetSize;
-  
+
+  analyzeRunning = YES;
+  stopTask = NO;
   [progressBar setIndeterminate:YES];
   [progressBar startAnimation:nil];
 
@@ -188,7 +190,7 @@
 
   /* compare source against target directories */
   en = [sourceDirArray objectEnumerator];
-  while ((dirStr = [en nextObject]))
+  while ((dirStr = [en nextObject]) && !stopTask)
     {
       if ([targetDirArray indexOfObject:dirStr] == NSNotFound)
 	[targetMissingDirs addObject:dirStr];
@@ -197,7 +199,7 @@
 
   /* look for source missing directories */
   en = [targetDirArray objectEnumerator];
-  while ((dirStr = [en nextObject]))
+  while ((dirStr = [en nextObject]) && !stopTask)
     {
       if ([sourceDirArray indexOfObject:dirStr] == NSNotFound)
 	[sourceMissingDirs addObject:dirStr];
@@ -208,7 +210,7 @@
      find source modified and missing files */
   en = [sourceFileDict objectEnumerator];
   sourceSize = 0;
-  while ((fileObj = [en nextObject]))
+  while ((fileObj = [en nextObject]) && !stopTask)
     {
       NSString *relPath;
       FileObject *fileObj2;
@@ -236,7 +238,7 @@
   /* look for source missing files */
   en = [targetFileDict objectEnumerator];
   targetSize = 0;
-  while ((fileObj = [en nextObject]))
+  while ((fileObj = [en nextObject]) && !stopTask)
     {
       NSString *relPath;
       FileObject *fileObj2;
@@ -260,6 +262,11 @@
   analyzed = YES;
   [progressBar stopAnimation:nil];
   [self reportAnalysis];
+}
+
+- (IBAction)stopTask:(id)sender
+{
+  stopTask = YES;
 }
 
 - (void)reportAnalysis
@@ -463,6 +470,7 @@
     [self analyzeAction:sender];
 
   syncRunning = YES;
+  stopTask = NO;
   [progressBar setIndeterminate:NO];
   
   handleDirectories = [handleDirectoriesCheck state] == NSOnState;
@@ -501,7 +509,7 @@
 	  NSUInteger i;
 
 	  /* create source missing directories */
-	  for (i = 0; i < [sourceMissingDirs count]; i++)
+	  for (i = 0; i < [sourceMissingDirs count] && !stopTask; i++)
 	    {
 	      NSString *fullPath;
 
@@ -516,7 +524,7 @@
 	  if (deleteItems)
 	    {
 	      /* delete source excess directories */
-	      for (i = 0; i < [targetMissingDirs count]; i++)
+	      for (i = 0; i < [targetMissingDirs count] && !stopTask; i++)
 		{
 		  NSString *fullPath;
 		  
@@ -534,7 +542,7 @@
 	  NSUInteger i;
 
 	  /* create target missing directories */
-	  for (i = 0; i < [targetMissingDirs count]; i++)
+	  for (i = 0; i < [targetMissingDirs count] && !stopTask; i++)
 	    {
 	      NSString *fullPath;
 
@@ -549,7 +557,7 @@
 	  if (deleteItems)
 	    {
 	      /* delete target excess directories */
-	      for (i = 0; i < [sourceMissingDirs count]; i++)
+	      for (i = 0; i < [sourceMissingDirs count] && !stopTask; i++)
 		{
 		  NSString *fullPath;
 		  
@@ -566,7 +574,7 @@
   
   if (insertItems)
     {
-      for (i = 0; i < [targetMissingFiles count]; i++)
+      for (i = 0; i < [targetMissingFiles count] && !stopTask; i++)
 	{
 	  FileObject *fileObj;
 	  NSString *newAbsolutePath;
@@ -585,7 +593,7 @@
   
   if (updateItems)
     {
-      for (i = 0; i < [sourceModFiles count]; i++)
+      for (i = 0; i < [sourceModFiles count] && !stopTask; i++)
 	{
 	  FileObject *fileObj;
 	  NSString *newAbsolutePath;
@@ -608,7 +616,7 @@
   /* source is missing some files */
   if (deleteItems && !updateSource)
     {
-      for (i = 0; i < [sourceMissingFiles count]; i++)
+      for (i = 0; i < [sourceMissingFiles count] && !stopTask; i++)
 	{
 	  FileObject *fileObj;
 
@@ -626,7 +634,7 @@
     {
       if (insertItems)
         {
-          for (i = 0; i < [sourceMissingFiles count]; i++)
+          for (i = 0; i < [sourceMissingFiles count] && !stopTask; i++)
             {
               FileObject *fileObj;
               NSString *newAbsolutePath;
@@ -642,7 +650,7 @@
               [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
             }
         }
-      for (i = 0; i < [targetModFiles count]; i++)
+      for (i = 0; i < [targetModFiles count] && !stopTask; i++)
 	{
 	  FileObject *fileObj;
 	  NSString *newAbsolutePath;
