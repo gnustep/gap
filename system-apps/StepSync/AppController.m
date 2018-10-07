@@ -136,7 +136,7 @@
     }  
 }
 
-- (IBAction)analyzeAction:(id)sender
+- (void)performAnalyze:(id)sender
 {
   NSString *sourceRoot;
   NSString *targetRoot;
@@ -149,7 +149,9 @@
   FileObject *fileObj;
   unsigned long long sourceSize;
   unsigned long long targetSize;
+  NSAutoreleasePool *arp;
 
+  arp = [NSAutoreleasePool new];
   analyzeRunning = YES;
   stopTask = NO;
   [progressBar setIndeterminate:YES];
@@ -266,6 +268,13 @@
   [stopButton setEnabled:NO];
   [analyzeButton setEnabled:YES];
   [self reportAnalysis];
+  
+  [arp release];
+}
+
+- (IBAction)analyzeAction:(id)sender
+{
+  [NSThread detachNewThreadSelector:@selector(performAnalyze:) toTarget:self withObject:nil];
 }
 
 - (IBAction)stopTask:(id)sender
@@ -453,7 +462,7 @@
   NSLog(@"source modified: %@", sourceModFiles);
 }
 
-- (IBAction)syncAction:(id)sender
+- (void)performSync:(id)sender
 {
   NSString *sourceRoot;
   NSString *targetRoot;
@@ -465,7 +474,10 @@
   BOOL insertItems;
   BOOL updateItems;
   BOOL deleteItems;
+  NSAutoreleasePool *arp;
 
+  arp = [NSAutoreleasePool new];
+  
   sourceRoot = [sourcePathField stringValue];
   targetRoot = [targetPathField stringValue];
 
@@ -680,6 +692,13 @@
   syncRunning = NO;
   [syncButton setEnabled:YES];
   [stopButton setEnabled:NO];
+
+  [arp release];
+}
+
+- (IBAction)syncAction:(id)sender
+{
+  [NSThread detachNewThreadSelector:@selector(performSync:) toTarget:self withObject:nil];
 }
 
 - (void)_cleanLogView:(id)p
