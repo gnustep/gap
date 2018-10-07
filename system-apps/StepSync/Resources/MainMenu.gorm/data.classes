@@ -5,7 +5,8 @@
 	    "setSourcePath:",
 	    "setTargetPath:",
 	    "analyzeAction:",
-	    "syncAction:"
+	    "syncAction:",
+	    "stopTask:"
 	);
 	Outlets = (
 	    sourcePathField,
@@ -23,6 +24,7 @@
 	    deleteItemsCheck,
 	    analyzeButton,
 	    syncButton,
+	    stopButton,
 	    progressBar,
 	    logView
 	);
@@ -33,6 +35,7 @@
 	    "analyzeAction:",
 	    "setSourcePath:",
 	    "setTargetPath:",
+	    "stopTask:",
 	    "syncAction:"
 	);
 	Super = NSObject;

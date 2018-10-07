@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.h
  
- Copyright (C) 2017 Riccardo Mottola
+ Copyright (C) 2017-2018 Riccardo Mottola
  
  Author: Riccardo Mottola
  
@@ -49,6 +49,7 @@
   IBOutlet NSButton *deleteItemsCheck;
   IBOutlet NSButton *analyzeButton;
   IBOutlet NSButton *syncButton;
+  IBOutlet NSButton *stopButton;
   IBOutlet NSProgressIndicator *progressBar;
   IBOutlet NSTextView *logView;
 

@@ -90,10 +90,10 @@
 #if defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6)
   [logView setAutomaticSpellingCorrectionEnabled:NO];
 #endif
-  /*
-  [analyzeButton setEnabled:NO];
-  [syncButton setEnabled:NO];
-  */
+  
+  [analyzeButton setEnabled:YES];
+  [syncButton setEnabled:YES];
+  [stopButton setEnabled:NO];
 }
 
 - (IBAction)setSourcePath:(id)sender
@@ -154,6 +154,8 @@
   stopTask = NO;
   [progressBar setIndeterminate:YES];
   [progressBar startAnimation:nil];
+  [stopButton setEnabled:YES];
+  [analyzeButton setEnabled:NO];
 
   [targetMissingFiles release];
   [sourceMissingFiles release];
@@ -261,6 +263,8 @@
   analyzeRunning = NO;
   analyzed = YES;
   [progressBar stopAnimation:nil];
+  [stopButton setEnabled:NO];
+  [analyzeButton setEnabled:YES];
   [self reportAnalysis];
 }
 
@@ -463,7 +467,10 @@
   BOOL deleteItems;
 
   sourceRoot = [sourcePathField stringValue];
-  targetRoot = [targetPathField stringValue]; 
+  targetRoot = [targetPathField stringValue];
+
+  [syncButton setEnabled:NO];
+  [stopButton setEnabled:YES];
 
   fm = [NSFileManager defaultManager];
   if (!analyzed)
@@ -671,6 +678,8 @@
     }
   
   syncRunning = NO;
+  [syncButton setEnabled:YES];
+  [stopButton setEnabled:NO];
 }
 
 - (void)_cleanLogView:(id)p
