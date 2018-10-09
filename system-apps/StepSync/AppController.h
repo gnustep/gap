@@ -53,6 +53,12 @@
   IBOutlet NSProgressIndicator *progressBar;
   IBOutlet NSTextView *logView;
 
+  /* Preferences */
+  IBOutlet NSPanel *prefPanel;
+  IBOutlet NSButton *skipHiddenFoldersCheck;
+  IBOutlet NSButton *skipHiddenFilesCheck;
+  IBOutlet NSButton *skipThumbFilesCheck;
+  
   BOOL analyzed;
   BOOL analyzeRunning;
   BOOL syncRunning;
@@ -66,6 +72,9 @@
   NSMutableArray *sourceModFiles;
   NSMutableArray *targetModFiles;
 }
+
+- (IBAction)showPreferences:(id)sender;
+- (IBAction)applyPreferences:(id)sender;
 
 - (IBAction)setSourcePath:(id)sender;
 - (IBAction)setTargetPath:(id)sender;

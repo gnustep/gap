@@ -3,8 +3,10 @@
         {
             ACTIONS = {
                 analyzeAction = id; 
+                applyPreferences = id; 
                 setSourcePath = id; 
                 setTargetPath = id; 
+                showPreferences = id; 
                 stopTask = id; 
                 syncAction = id; 
             }; 
@@ -16,7 +18,11 @@
                 handleDirectoriesCheck = NSButton; 
                 insertItemsCheck = NSButton; 
                 logView = NSTextView; 
+                prefPanel = NSPanel; 
                 progressBar = NSProgressIndicator; 
+                skipHiddenFilesCheck = NSButton; 
+                skipHiddenFoldersCheck = NSButton; 
+                skipThumbFilesCheck = NSButton; 
                 sourceDirNumberField = NSTextField; 
                 sourceFileNumberField = NSTextField; 
                 sourcePathField = NSTextField; 

@@ -96,6 +96,16 @@
   [stopButton setEnabled:NO];
 }
 
+- (IBAction)showPreferences:(id)sender
+{
+  [prefPanel makeKeyAndOrderFront:sender];
+}
+
+- (IBAction)applyPreferences:(id)sender
+{
+  [prefPanel hide];
+}
+
 - (IBAction)setSourcePath:(id)sender
 {
   NSOpenPanel *openPanel;
