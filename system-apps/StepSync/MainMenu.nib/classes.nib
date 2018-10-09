@@ -1,7 +1,13 @@
 {
     IBClasses = (
         {
-            ACTIONS = {analyzeAction = id; setSourcePath = id; setTargetPath = id; syncAction = id; }; 
+            ACTIONS = {
+                analyzeAction = id; 
+                setSourcePath = id; 
+                setTargetPath = id; 
+                stopTask = id; 
+                syncAction = id; 
+            }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -15,6 +21,7 @@
                 sourceFileNumberField = NSTextField; 
                 sourcePathField = NSTextField; 
                 sourceSizeField = NSTextField; 
+                stopButton = NSButton; 
                 syncButton = NSButton; 
                 targetDirNumberField = NSTextField; 
                 targetFileNumberField = NSTextField; 
