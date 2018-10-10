@@ -103,7 +103,7 @@
 
 - (IBAction)applyPreferences:(id)sender
 {
-  [prefPanel hide];
+  [prefPanel close];
 }
 
 - (IBAction)setSourcePath:(id)sender
