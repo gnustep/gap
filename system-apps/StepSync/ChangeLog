@@ -1,0 +1,5 @@
+2018-10-11 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.h
+	* AppController.m
+	Add skip preference properties

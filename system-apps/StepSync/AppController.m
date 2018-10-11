@@ -72,6 +72,11 @@
   return result;
 }
 
+/* pass last component of path: directory or file name */
+- (BOOL)checkIfToSkip:(NSString *)item isDir:(BOOL)dir
+{
+}
+
 - (void)dealloc
 {
   [sourceMap release];
@@ -83,6 +88,20 @@
   [targetModFiles release];
   
   [super dealloc];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+  NSUserDefaults *defaults;
+
+  defaults = [NSUserDefaults standardUserDefaults];
+
+  NSLog(@"app finish launching, %@", defaults);
+
+
+  skipHiddenFolders = [defaults boolForKey:@"SKIP_HIDDEN_FOLDERS"];
+  skipHiddenFiles = [defaults boolForKey:@"SKIP_HIDDEN_FILES"];
+  skipThumbFiles = [defaults boolForKey:@"SKIP_THUBMNAIL_FILES"];
 }
 
 - (void)awakeFromNib
@@ -98,11 +117,39 @@
 
 - (IBAction)showPreferences:(id)sender
 {
+  if (skipHiddenFolders)
+    [skipHiddenFoldersCheck setState:NSOnState];
+  else
+    [skipHiddenFoldersCheck setState:NSOffState];
+
+  if (skipHiddenFiles)
+    [skipHiddenFilesCheck setState:NSOnState];
+  else
+    [skipHiddenFilesCheck setState:NSOffState];
+
+  if (skipThumbFiles)
+    [skipThumbFilesCheck setState:NSOnState];
+  else
+    [skipThumbFilesCheck setState:NSOffState];
+  
   [prefPanel makeKeyAndOrderFront:sender];
 }
 
 - (IBAction)applyPreferences:(id)sender
 {
+  NSUserDefaults *defaults;
+
+  defaults = [NSUserDefaults standardUserDefaults];
+
+  skipHiddenFolders = [skipHiddenFoldersCheck state];
+  [defaults setBool:skipHiddenFolders forKey:@"SKIP_HIDDEN_FOLDERS"];
+
+  skipHiddenFiles = [skipHiddenFilesCheck state];
+  [defaults setBool:skipHiddenFiles forKey:@"SKIP_HIDDEN_FILES"];
+
+  skipThumbFiles = [skipThumbFilesCheck state];
+  [defaults setBool:skipThumbFiles forKey:@"SKIP_THUBMNAIL_FILES"];
+  
   [prefPanel close];
 }
 

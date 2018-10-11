@@ -58,6 +58,9 @@
   IBOutlet NSButton *skipHiddenFoldersCheck;
   IBOutlet NSButton *skipHiddenFilesCheck;
   IBOutlet NSButton *skipThumbFilesCheck;
+  BOOL skipHiddenFolders;
+  BOOL skipHiddenFiles;
+  BOOL skipThumbFiles;
   
   BOOL analyzed;
   BOOL analyzeRunning;
