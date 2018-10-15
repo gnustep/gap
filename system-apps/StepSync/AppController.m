@@ -72,11 +72,6 @@
   return result;
 }
 
-/* pass last component of path: directory or file name */
-- (BOOL)checkIfToSkip:(NSString *)item isDir:(BOOL)dir
-{
-}
-
 - (void)dealloc
 {
   [sourceMap release];
@@ -227,7 +222,13 @@
   [sourceMap release];
   sourceMap = [[FileMap alloc] init];
   [sourceMap setRootPath:sourceRoot];
+  [sourceMap setSkipHiddenFolders:skipHiddenFolders];
+  [sourceMap setSkipHiddenFiles:skipHiddenFiles];
+  [sourceMap setSkipThumbFiles:skipThumbFiles];
+
+  
   [sourceMap analyze];
+  
   [sourceDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[sourceMap directories] count]] description]];
   [sourceFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[sourceMap files] count]] description]];
   sourceFileDict = [sourceMap files];
@@ -236,7 +237,12 @@
   [targetMap release];
   targetMap = [[FileMap alloc] init];
   [targetMap setRootPath:targetRoot];
+  [targetMap setSkipHiddenFolders:skipHiddenFolders];
+  [targetMap setSkipHiddenFiles:skipHiddenFiles];
+  [targetMap setSkipThumbFiles:skipThumbFiles];
+  
   [targetMap analyze];
+
   [targetDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[targetMap directories] count]] description]];
   [targetFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[targetMap files] count]] description]];
   targetFileDict = [targetMap files];

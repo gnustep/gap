@@ -34,7 +34,16 @@
   NSMutableDictionary *files;
   NSMutableArray *directories;
   NSFileManager *fm;
+
+  BOOL skipHiddenFolders;
+  BOOL skipHiddenFiles;
+  BOOL skipThumbFiles;
+  NSArray *thumbFilesArray;
 }
+
+- (void)setSkipHiddenFolders:(BOOL)flag;
+- (void)setSkipHiddenFiles:(BOOL)flag;
+- (void)setSkipThumbFiles:(BOOL)flag;
 
 - (NSString *)rootPath;
 - (void)setRootPath:(NSString *)path;

@@ -36,6 +36,19 @@
       directories = [NSMutableArray new];
       files = [NSMutableDictionary new];
       fm = [NSFileManager defaultManager];
+
+      thumbFilesArray = [NSArray arrayWithObjects:
+				   @"Thumbs.db",
+				 @"ehthumbs.db",
+				 @"index.sqlite",
+				 @"thumbnails.data",
+				 nil
+			 ];
+      [thumbFilesArray retain];
+
+      skipHiddenFolders = NO;
+      skipHiddenFiles = NO;
+      skipThumbFiles = NO;
     }
   return self;
 }
@@ -45,7 +58,43 @@
   [rootPath release];
   [directories release];
   [files release];
+  [thumbFilesArray release];
   [super dealloc];
+}
+
+- (void)setSkipHiddenFolders:(BOOL)flag
+{
+  skipHiddenFolders = flag;
+}
+
+- (void)setSkipHiddenFiles:(BOOL)flag
+{
+  skipHiddenFiles = flag;
+}
+
+- (void)setSkipThumbFiles:(BOOL)flag
+{
+  skipThumbFiles = flag;
+}
+
+/* pass last component of path: directory or file name */
+- (BOOL)checkIfToSkip:(NSString *)item isDir:(BOOL)dir
+{
+  BOOL isHidden;
+
+  // we assume standard Unix convention that hidden Files/Dirs start with .
+  isHidden = [item hasPrefix:@"."];
+
+  if (dir && skipHiddenFolders && isHidden)
+    return YES;
+
+  if (!dir && skipHiddenFiles && isHidden)
+    return YES;
+
+  if (skipThumbFiles && [thumbFilesArray containsObject:item])
+    return YES;
+
+  return NO;
 }
 
 - (NSString *)rootPath
@@ -94,22 +143,28 @@
       fileType = [attr fileType];
       if (fileType == NSFileTypeDirectory)
         {
-          [directories addObject:relPath];
-          if (depth > 0)
-            [self analyzeRecursePath:fullPath currentDepth:depth-1];
-          else
-            NSLog(@"Max recurse depth reached in %@", path);
+	  if (![self checkIfToSkip:element isDir:YES])
+	    {
+	      [directories addObject:relPath];
+	      if (depth > 0)
+		[self analyzeRecursePath:fullPath currentDepth:depth-1];
+	      else
+		NSLog(@"Max recurse depth reached in %@", path);
+	    }
         }
       else if (fileType == NSFileTypeRegular)
         {
-          FileObject *fo;
+	  if (![self checkIfToSkip:element isDir:NO])
+	    {
+	      FileObject *fo;
           
-          fo = [[FileObject alloc] init];
-          [fo setAbsolutePath:fullPath];
-          [fo setRelativePath:relPath];
-          [fo setFileAttributes:attr];
-          [files setObject:fo forKey:relPath];
-          [fo release];
+	      fo = [[FileObject alloc] init];
+	      [fo setAbsolutePath:fullPath];
+	      [fo setRelativePath:relPath];
+	      [fo setFileAttributes:attr];
+	      [files setObject:fo forKey:relPath];
+	      [fo release];
+	    }
         }
       else if (fileType == NSFileTypeSymbolicLink)
         {
