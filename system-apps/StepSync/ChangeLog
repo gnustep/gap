@@ -1,5 +1,13 @@
 2018-10-20 Riccardo Mottola <rm@gnu.org>
 
+	* Engine.h
+        * Engine.m
+        * AppController.h
+        * AppController.m
+        Move analysis and synchronization into separate Engine class.
+  
+2018-10-20 Riccardo Mottola <rm@gnu.org>
+
 	* FileMap.h
         * FileMap.m
         Make Ssize calculation directly in map, and an accessor.

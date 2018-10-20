@@ -29,6 +29,7 @@
 #import <AppKit/AppKit.h>
 
 @class FileMap;
+@class Engine;
 
 @interface AppController : NSObject
 {
@@ -58,22 +59,9 @@
   IBOutlet NSButton *skipHiddenFoldersCheck;
   IBOutlet NSButton *skipHiddenFilesCheck;
   IBOutlet NSButton *skipThumbFilesCheck;
-  BOOL skipHiddenFolders;
-  BOOL skipHiddenFiles;
-  BOOL skipThumbFiles;
   
-  BOOL analyzed;
-  BOOL analyzeRunning;
-  BOOL syncRunning;
-  BOOL stopTask;
-  FileMap *sourceMap;
-  FileMap *targetMap;
-  NSMutableArray *targetMissingDirs;
-  NSMutableArray *sourceMissingDirs;
-  NSMutableArray *targetMissingFiles;
-  NSMutableArray *sourceMissingFiles;
-  NSMutableArray *sourceModFiles;
-  NSMutableArray *targetModFiles;
+  Engine *engine;
+  
 }
 
 - (IBAction)showPreferences:(id)sender;
