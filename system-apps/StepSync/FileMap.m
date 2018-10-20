@@ -49,6 +49,7 @@
       skipHiddenFolders = NO;
       skipHiddenFiles = NO;
       skipThumbFiles = NO;
+      size = 0;
     }
   return self;
 }
@@ -122,6 +123,11 @@
   return files;
 }
 
+- (unsigned long long)size
+{
+  return size;
+}
+
 - (void)analyzeRecursePath:(NSString *)path currentDepth:(unsigned)depth
 {
   NSArray *dirContents;
@@ -163,6 +169,7 @@
 	      [fo setRelativePath:relPath];
 	      [fo setFileAttributes:attr];
 	      [files setObject:fo forKey:relPath];
+              size += [fo size];
 	      [fo release];
 	    }
         }

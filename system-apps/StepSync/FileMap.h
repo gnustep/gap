@@ -31,6 +31,7 @@
 {
   NSString *rootPath;
   
+  unsigned long long size;
   NSMutableDictionary *files;
   NSMutableArray *directories;
   NSFileManager *fm;
@@ -50,6 +51,7 @@
 - (void)analyze;
 - (NSMutableArray *)directories;
 - (NSMutableDictionary *)files;
+- (unsigned long long)size;
 
 @end
 
