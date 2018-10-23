@@ -14,7 +14,8 @@
     "CLASS_FILES" = (
 	"AppController.m",
 	"FileMap.m",
-	"FileObject.m"
+	"FileObject.m",
+	"Engine.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -26,7 +27,8 @@
     "HEADER_FILES" = (
 	"AppController.h",
 	"FileMap.h",
-	"FileObject.h"
+	"FileObject.h",
+	"Engine.h"
     );
     IMAGES = (
     );

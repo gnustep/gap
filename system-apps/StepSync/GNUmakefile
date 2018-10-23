@@ -41,7 +41,8 @@ Resources/MainMenu.gorm \
 StepSync_HEADER_FILES = \
 AppController.h \
 FileMap.h \
-FileObject.h
+FileObject.h \
+Engine.h
 
 #
 # Objective-C Class files
@@ -49,7 +50,8 @@ FileObject.h
 StepSync_OBJC_FILES = \
 AppController.m \
 FileMap.m \
-FileObject.m
+FileObject.m \
+Engine.m
 
 #
 # Other sources
