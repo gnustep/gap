@@ -16,8 +16,6 @@
   NSProgressIndicator *progressIndicator;
   
   BOOL analyzed;
-  BOOL analyzeRunning;
-  BOOL syncRunning;
   BOOL stopTask;
   FileMap *sourceMap;
   FileMap *targetMap;

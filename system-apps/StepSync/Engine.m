@@ -169,7 +169,6 @@
   NSAutoreleasePool *arp;
 
   arp = [NSAutoreleasePool new];
-  analyzeRunning = YES;
   stopTask = NO;
   [progressIndicator setIndeterminate:YES];
   [progressIndicator startAnimation:nil];
@@ -276,7 +275,6 @@
   NSLog(@"target modified: %@", targetModFiles);
   NSLog(@"source modified: %@", sourceModFiles);
 
-  analyzeRunning = NO;
   analyzed = YES;
   [progressIndicator stopAnimation:nil];
   
@@ -295,7 +293,6 @@
 
   fm = [NSFileManager defaultManager];
 
-  syncRunning = YES;
   stopTask = NO;
   [progressIndicator setIndeterminate:NO];
   
@@ -489,8 +486,6 @@
 	    }
 	}
     }
-  
-  syncRunning = NO;
 
 
   [arp release];
