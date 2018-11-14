@@ -1,3 +1,8 @@
+2018-11-14 Riccardo Mottola <rm@gnu.org>
+
+        * AppController.m
+        Additional local NSAutoReleasePools for Threading
+
 2018-10-20 Riccardo Mottola <rm@gnu.org>
 
 	* Engine.h

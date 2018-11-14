@@ -188,6 +188,10 @@
 
 - (void)performAnalyze:(id)sender
 {
+  NSAutoreleasePool *arp;
+  
+  arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
+
   [stopButton setEnabled:YES];
   [analyzeButton setEnabled:NO];
   
@@ -206,7 +210,9 @@
   
   [stopButton setEnabled:NO];
   [analyzeButton setEnabled:YES];
-  [self reportAnalysis];  
+  [self reportAnalysis];
+  
+  [arp release];
 }
 
 - (IBAction)analyzeAction:(id)sender
@@ -396,6 +402,10 @@
 
 - (void)performSync:(id)sender
 {
+  NSAutoreleasePool *arp;
+  
+  arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
+  
   if ([engine analyzed])
     [self performAnalyze:sender];
 
@@ -416,6 +426,7 @@
   
   [syncButton setEnabled:YES];
   [stopButton setEnabled:NO];
+  [arp release];
 }
 
 - (IBAction)syncAction:(id)sender
