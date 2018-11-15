@@ -266,7 +266,7 @@
   [tempStr release];
   
   [attrStrMut appendAttributedString:sepAttrStr];
-
+  
   tempStr = [NSMutableString new];
   for (i = 0; i < [[engine targetMissingDirs] count]; i++)
     {
@@ -301,7 +301,6 @@
       [tempStr appendString:[[[engine targetMissingFiles] objectAtIndex:i] relativePath]];
       [tempStr appendString:@"\n"];
     }
-  [tempStr appendString:@"\n"];
 
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
@@ -310,6 +309,14 @@
   [attrStr release];
   [tempStr release];
 
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine targetMissingFiles] count]];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  
+  
   /* -- Directories present in Target but not in Source */
   [attrStrMut appendAttributedString:sepAttrStr];
   
@@ -357,7 +364,6 @@
       [tempStr appendString:[[[engine sourceMissingFiles] objectAtIndex:i] relativePath]];
       [tempStr appendString:@"\n"];
     }
-  [tempStr appendString:@"\n"];
 
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
@@ -365,6 +371,14 @@
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   [tempStr release];
+  
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine sourceMissingFiles] count]];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  
 
   /* -- Files different in Source and Target -- */
   [attrStrMut appendAttributedString:sepAttrStr];
@@ -385,7 +399,6 @@
       [tempStr appendString:[[[engine sourceModFiles] objectAtIndex:i] relativePath]];
       [tempStr appendString:@"\n"];
     }
-  [tempStr appendString:@"\n"];
 
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
@@ -393,6 +406,14 @@
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   [tempStr release];
+  
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine sourceModFiles]  count]];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+
   
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
