@@ -427,7 +427,7 @@
   
   arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
   
-  if ([engine analyzed])
+  if (![engine analyzed])
     [self performAnalyze:sender];
 
   [engine setSourceRoot: [sourcePathField stringValue]];
