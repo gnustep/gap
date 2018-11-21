@@ -19,6 +19,12 @@
 {
   if ((self = [super init]))
     {
+      sourceMap = nil;
+      targetMap = nil;
+      sourceMissingDirs = nil;
+      targetMissingDirs = nil;
+      sourceModFiles = nil;
+      targetModFiles = nil;
     }
   return self;
 }
@@ -318,6 +324,7 @@
   totalItems += [targetMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
   [progressIndicator setMinValue:0.0];
   [progressIndicator setMaxValue:(double)(totalItems-1)];
+  [progressIndicator setDoubleValue:0];
 
   if (handleDirectories)
     {
