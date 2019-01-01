@@ -1,7 +1,7 @@
 {
     ApplicationDescription = "Analog Clock";
     ApplicationName = AClock;
-    ApplicationRelease = "0.4.0";
+    ApplicationRelease = "0.5.0";
     Authors = (
 	"Banlu Kemiyatorn",
 	"Alexander Malmberg",
@@ -9,9 +9,9 @@
 	"Riccardo Mottola"
     );
     CFBundleIdentifier = "org.gap.AClock";
-    Copyright = "Copyright (C) 2003-2017";
+    Copyright = "Copyright (C) 2003-2019";
     CopyrightDescription = "Released under GPL";
-    FullVersionID = "0.4.0";
+    FullVersionID = "0.5.0";
     NSExecutable = AClock;
     NSMainNibFile = "AClock.gorm";
     NSPrincipalClass = NSApplication;

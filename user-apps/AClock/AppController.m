@@ -2,7 +2,7 @@
  Project: AClock
  AppController.m
 
- Copyright (C) 2003-2017 GNUstep Application Project
+ Copyright (C) 2003-2018 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -27,6 +27,10 @@
 #import <AppKit/AppKit.h>
 #import "AppController.h"
 #import "NSColorExtensions.h"
+
+#ifdef GNUSTEP
+#import <GNUstepGUI/GSInfoPanel.h>
+#endif
 
 @implementation AppController
 static NSUserDefaults *defaults;
