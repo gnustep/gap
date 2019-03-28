@@ -1,3 +1,10 @@
+2019-03-28 Riccardo Mottola <rm@gnu.org>
+
+        * AppController.m
+	* Engine.h
+        * Engine.m
+	Report files which have the same date but differ in size.
+
 2018-11-21 Riccardo Mottola <rm@gnu.org>
 
         * AppController.m

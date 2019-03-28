@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.m
  
- Copyright (C) 2017-2018 Free Software Foundation
+ Copyright (C) 2017-2019 Free Software Foundation
  
  Author: Riccardo Mottola
  
@@ -413,8 +413,43 @@
   
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
+   
 
+  /* -- Files different in size between Source and Target -- */
+  [attrStrMut appendAttributedString:sepAttrStr];
   
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Files which differ in size between Source and Target but have same modification date:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
+  for (i = 0; i < [[engine sizeDiffFiles] count]; i++)
+    {
+      [tempStr appendString:[[[engine sizeDiffFiles] objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine sizeDiffFiles]  count]];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+
+   
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
   [attrStrMut autorelease]; // used on another thread

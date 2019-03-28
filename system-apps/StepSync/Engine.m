@@ -3,7 +3,7 @@
 //  StepSync-SL
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018 GNUstep. All rights reserved.
+//  Copyright 2018-2019 GNUstep. All rights reserved.
 //
 
 #import "Engine.h"
@@ -25,6 +25,7 @@
       targetMissingDirs = nil;
       sourceModFiles = nil;
       targetModFiles = nil;
+      sizeDiffFiles = nil;
     }
   return self;
 }
@@ -38,6 +39,7 @@
   [targetMissingFiles release];
   [sourceModFiles release];
   [targetModFiles release];
+  [sizeDiffFiles release];
   [super dealloc];
 }
 
@@ -153,6 +155,12 @@
   return targetModFiles;
 }
 
+- (NSMutableArray *)sizeDiffFiles
+{
+  return sizeDiffFiles;
+}
+
+
 - (FileMap *)sourceMap
 {
   return sourceMap;
@@ -183,7 +191,7 @@
   [sourceMissingFiles release];
   [targetModFiles release];
   [sourceModFiles release];
-  
+  [sizeDiffFiles release];
   
   [sourceMap release];
   sourceMap = [[FileMap alloc] init];
@@ -216,6 +224,7 @@
   sourceMissingFiles = [NSMutableArray new];
   targetModFiles = [NSMutableArray new];
   sourceModFiles = [NSMutableArray new];
+  sizeDiffFiles = [NSMutableArray new];
 
   /* compare source against target directories */
   en = [sourceDirArray objectEnumerator];
@@ -254,6 +263,8 @@
 	    [sourceModFiles addObject:fileObj];
 	  else if (cr == NSOrderedAscending)
 	    [targetModFiles addObject:fileObj];
+	  else if ([fileObj size] != [fileObj2 size])
+	    [sizeDiffFiles addObject:fileObj];
 	}
       else
 	{
@@ -280,6 +291,7 @@
   NSLog(@"source missing: %@", sourceMissingFiles);
   NSLog(@"target modified: %@", targetModFiles);
   NSLog(@"source modified: %@", sourceModFiles);
+  NSLog(@"size differing files with same date: %@", sizeDiffFiles);
 
   analyzed = YES;
   [progressIndicator stopAnimation:nil];

@@ -3,7 +3,7 @@
 //  StepSync-SL
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018 GNUstep. All rights reserved.
+//  Copyright 2018-2019 GNUstep. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -25,6 +25,7 @@
   NSMutableArray *sourceMissingFiles;
   NSMutableArray *sourceModFiles;
   NSMutableArray *targetModFiles;
+  NSMutableArray *sizeDiffFiles;
 
   BOOL handleDirectories;
   BOOL updateSource;
@@ -68,6 +69,7 @@
 - (NSMutableArray *)sourceMissingFiles;
 - (NSMutableArray *)sourceModFiles;
 - (NSMutableArray *)targetModFiles;
+- (NSMutableArray *)sizeDiffFiles;
 
 - (void)analyze;
 - (void)synchronize;
