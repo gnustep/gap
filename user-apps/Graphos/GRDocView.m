@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.m
 
- Copyright (C) 2000-2018 GNUstep Application Project
+ Copyright (C) 2000-2019 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -1353,18 +1353,18 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [self setNeedsDisplay: YES];
 }
 
-- (void)moveSelectedObjectsToFront:(id)sender
+- (void)moveSelectedObjectsForward:(id)sender
 {
   id obj = nil;
   NSUInteger i;
   NSUndoManager *uMgr;
-
+  
   uMgr = [self undoManager];
   /* save the method on the undo stack */
   [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-  [uMgr setActionName:@"Move to front"];
+  [uMgr setActionName:@"Move forward"];
   
-  [self saveCurrentObjectsDeep];
+  [self saveCurrentObjects];
   
   for(i = 0; i < [objects count]; i++)
     {
@@ -1376,7 +1376,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     }
   if(!obj)
     return;
-
+  
   for(i = 0; i < [objects count]; i++)
     if([objects objectAtIndex: i] != obj)
       [[[objects objectAtIndex: i] editor] unselect];
@@ -1394,7 +1394,44 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [self setNeedsDisplay: YES];
 }
 
-- (void)moveSelectedObjectsToBack:(id)sender
+
+- (void)moveSelectedObjectsToFront:(id)sender
+{
+  NSUInteger i;
+  NSUndoManager *uMgr;
+  NSMutableArray *toMoveObjs;
+  
+  toMoveObjs = [NSMutableArray new];
+  for (i = 0; i < [objects count]; i++)
+    if ([[[objects objectAtIndex: i] editor] isGroupSelected])
+      [toMoveObjs addObject: [objects objectAtIndex: i]];
+
+  if ([toMoveObjs count] == 0)
+    {
+      [toMoveObjs release];
+      return;
+    }
+
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Move to front"];
+    
+  [self saveCurrentObjects];
+  
+  // we bring the selected object to top starting from the bottom
+  for (i = 0; i < [toMoveObjs count]; i++)
+    {
+      id obj = [toMoveObjs objectAtIndex: i];
+      [objects removeObject:obj];
+      [objects addObject: obj];
+    }
+  
+  [toMoveObjs release];
+  [self setNeedsDisplay: YES];
+}
+
+- (void)moveSelectedObjectsBackward:(id)sender
 {
   id obj = nil;
   NSUInteger i;
@@ -1403,7 +1440,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   uMgr = [self undoManager];
   /* save the method on the undo stack */
   [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
-  [uMgr setActionName:@"Move to back"];
+  [uMgr setActionName:@"Move backward"];
   
   [self saveCurrentObjects];
   
@@ -1432,6 +1469,42 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
         }
     }
   [obj release];
+  [self setNeedsDisplay: YES];
+}
+
+- (void)moveSelectedObjectsToBack:(id)sender
+{
+  NSUInteger i;
+  NSUndoManager *uMgr;
+  NSMutableArray *toMoveObjs;
+
+  toMoveObjs = [NSMutableArray new];
+  for (i = 0; i < [objects count]; i++)
+    if ([[[objects objectAtIndex: i] editor] isGroupSelected])
+      [toMoveObjs addObject: [objects objectAtIndex: i]];
+  
+  if ([toMoveObjs count] == 0)
+    {
+      [toMoveObjs release];
+      return;
+    }
+  
+  uMgr = [self undoManager];
+  /* save the method on the undo stack */
+  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [uMgr setActionName:@"Move to back"];
+  
+  [self saveCurrentObjects];
+  
+  // we bring the selected object to top starting from top
+  for (i = [toMoveObjs count]; i > 0;  i--)
+    {
+      id obj = [toMoveObjs objectAtIndex: i-1];
+      [objects removeObject: obj];
+      [objects insertObject: obj atIndex: 0];
+    }
+
+  [toMoveObjs release];
   [self setNeedsDisplay: YES];
 }
 
@@ -2141,13 +2214,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
       else
         return NO;
     }
-  if (sel_isEqual(action, @selector(moveSelectedObjectsToFront:)) || sel_isEqual(action, @selector(moveSelectedObjectsToBack:)))
+  if (sel_isEqual(action, @selector(moveSelectedObjectsForward:)) || sel_isEqual(action, @selector(moveSelectedObjectsBackward:)))
     {
       if (selectedObjs)
         return YES;
       else
         return NO;
     }
+  if (sel_isEqual(action, @selector(moveSelectedObjectsToFront:)) || sel_isEqual(action, @selector(moveSelectedObjectsToBack:)))
+    {
+      if (selectedObjs)
+        return YES;
+      else
+        return NO;
+    }  
   return NO;
 }
 

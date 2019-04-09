@@ -1,3 +1,11 @@
+2019-05-10 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.h
+	* GRDocView.m
+	make kove front/back methods use saveCurrentObjects instead of the deep version.
+	Implement move to absolute back/front and rename existing methods to
+	moveSelectedObjectsBackward and moveSelectedObjectsForward
+
 2018-10-04 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m

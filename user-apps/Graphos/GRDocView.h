@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocView.h
 
- Copyright (C) 2000-2013 GNUstep Application Project
+ Copyright (C) 2000-2019 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -116,7 +116,9 @@
 - (NSDictionary *)selectionProperties;
 - (void)setSelectionProperties: (NSDictionary *)properties;
 
+- (IBAction)moveSelectedObjectsForward:(id)sender;
 - (IBAction)moveSelectedObjectsToFront:(id)sender;
+- (IBAction)moveSelectedObjectsBackward:(id)sender;
 - (IBAction)moveSelectedObjectsToBack:(id)sender;
 - (void)unselectOtherObjects:(GRDrawableObject *)anObject;
 - (void)zoomOnPoint:(NSPoint)p zoomOut:(BOOL)isout;
