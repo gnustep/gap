@@ -1355,9 +1355,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
 - (void)moveSelectedObjectsForward:(id)sender
 {
-  id obj = nil;
   NSUInteger i;
   NSUndoManager *uMgr;
+  NSMutableArray *toMoveObjs;
+  
+  toMoveObjs = [NSMutableArray new];
+  for (i = 0; i < [objects count]; i++)
+    if ([[[objects objectAtIndex: i] editor] isGroupSelected])
+      [toMoveObjs addObject: [objects objectAtIndex: i]];
+  
+  if ([toMoveObjs count] == 0)
+    {
+      [toMoveObjs release];
+      return;
+    }
   
   uMgr = [self undoManager];
   /* save the method on the undo stack */
@@ -1366,31 +1377,28 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   [self saveCurrentObjects];
   
-  for(i = 0; i < [objects count]; i++)
+  // we slide the selected objects up one starting from the bottom
+  for (i = 0; i < [toMoveObjs count]; i++)
     {
-      if([[[objects objectAtIndex: i] editor] isGroupSelected])
-        {
-          obj = [[objects objectAtIndex: i] retain];
-          break;
-        }
+      id obj;
+      NSUInteger originalIndex, newIndex;
+    
+      obj = [toMoveObjs objectAtIndex: i];
+      originalIndex = [objects indexOfObject:obj];
+      newIndex = originalIndex + i;
+      // if we reach the top and have a multple selection we squeeze it
+      if (newIndex < [objects count] - 1)
+         newIndex++;
+      else
+        newIndex = [objects count] - 1 ;
+
+      [obj retain];
+      [objects removeObject:obj];
+      [objects insertObject:obj atIndex:newIndex];
+      [obj release];
     }
-  if(!obj)
-    return;
   
-  for(i = 0; i < [objects count]; i++)
-    if([objects objectAtIndex: i] != obj)
-      [[[objects objectAtIndex: i] editor] unselect];
-  
-  for(i = 0; i < [objects count]; i++)
-    {
-      if((obj == [objects objectAtIndex: i]) && (i + 1 < [objects count]))
-        {
-          [objects removeObjectAtIndex: i];
-          [objects insertObject: obj atIndex: i + 1];
-          break;
-        }
-    }
-  [obj release];
+  [toMoveObjs release];
   [self setNeedsDisplay: YES];
 }
 
@@ -1433,9 +1441,20 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
 - (void)moveSelectedObjectsBackward:(id)sender
 {
-  id obj = nil;
   NSUInteger i;
   NSUndoManager *uMgr;
+  NSMutableArray *toMoveObjs;
+  
+  toMoveObjs = [NSMutableArray new];
+  for (i = 0; i < [objects count]; i++)
+    if ([[[objects objectAtIndex: i] editor] isGroupSelected])
+      [toMoveObjs addObject: [objects objectAtIndex: i]];
+  
+  if ([toMoveObjs count] == 0)
+    {
+      [toMoveObjs release];
+      return;
+    }
 
   uMgr = [self undoManager];
   /* save the method on the undo stack */
@@ -1444,31 +1463,28 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   [self saveCurrentObjects];
   
-  for(i = 0; i < [objects count]; i++)
+  for (i = 0; i < [toMoveObjs count]; i++)
     {
-      if([[[objects objectAtIndex: i] editor] isGroupSelected])
-        {
-          obj = [[objects objectAtIndex: i] retain];
-          break;
-        }
+      id obj;
+      NSUInteger originalIndex;
+      NSInteger newIndex;
+    
+      obj = [toMoveObjs objectAtIndex: [toMoveObjs count] - i - 1];
+      originalIndex = [objects indexOfObject:obj];
+      newIndex = originalIndex - i;
+      // if we reach the bottom and have a multple selection we squeeze it
+      if (newIndex > 0)
+        newIndex--;
+      else
+        newIndex = 0;
+    
+      [obj retain];
+      [objects removeObject:obj];
+      [objects insertObject:obj atIndex:newIndex];
+      [obj release];
     }
-  if(!obj)
-    return;
-  
-  for(i = 0; i < [objects count]; i++)
-    if([objects objectAtIndex: i] != obj)
-      [[[objects objectAtIndex: i] editor] unselect];
-  
-  for(i = 0; i < [objects count]; i++)
-    {
-      if((obj == [objects objectAtIndex: i]) && (i > 0)) 
-        {
-          [objects removeObjectAtIndex: i];
-          [objects insertObject: obj atIndex: i - 1];
-          break;
-        }
-    }
-  [obj release];
+
+  [toMoveObjs release];
   [self setNeedsDisplay: YES];
 }
 
