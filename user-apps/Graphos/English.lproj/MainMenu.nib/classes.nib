@@ -8,6 +8,8 @@
                 changePointsOfCurrentPathToSymmetric = id; 
                 deletePointsOfCurrentPath = id; 
                 inspectObject = id; 
+                moveSelectedObjectsBackward = id; 
+                moveSelectedObjectsForward = id; 
                 moveSelectedObjectsToBack = id; 
                 moveSelectedObjectsToFront = id; 
                 zoom100 = id; 
