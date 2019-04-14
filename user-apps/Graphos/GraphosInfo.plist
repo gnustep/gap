@@ -9,7 +9,7 @@
 	"Rob Burns"
     );
     CFBundleIdentifier = "org.gap.Graphos";
-    Copyright = "Copyright (C) 2005-2018";
+    Copyright = "Copyright (C) 2005-2019";
     CopyrightDescription = "Released under GPL v2+";
     FullVersionID = "0.7";
     NSExecutable = Graphos;
