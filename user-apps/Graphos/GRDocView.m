@@ -1358,13 +1358,19 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUInteger i;
   NSUndoManager *uMgr;
   NSMutableArray *toMoveObjs;
+  id topUnselectedObj = nil;
   
   toMoveObjs = [NSMutableArray new];
   for (i = 0; i < [objects count]; i++)
-    if ([[[objects objectAtIndex: i] editor] isGroupSelected])
-      [toMoveObjs addObject: [objects objectAtIndex: i]];
+    {
+      id obj = [objects objectAtIndex: i];
+      if ([[obj editor] isGroupSelected])
+        [toMoveObjs addObject: obj];
+      else
+        topUnselectedObj = obj;
+    }
   
-  if ([toMoveObjs count] == 0)
+  if (topUnselectedObj == nil || [toMoveObjs count] == 0)
     {
       [toMoveObjs release];
       return;
@@ -1376,26 +1382,30 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   [uMgr setActionName:@"Move forward"];
   
   [self saveCurrentObjects];
-  
+
   // we slide the selected objects up one starting from the bottom
-  for (i = 0; i < [toMoveObjs count]; i++)
+  for (i = [toMoveObjs count]; i > 0; i--)
     {
       id obj;
-      NSUInteger originalIndex, newIndex;
+      NSUInteger originalIndex, newIndex, topIndex;
     
-      obj = [toMoveObjs objectAtIndex: i];
+      obj = [toMoveObjs objectAtIndex: i-1];
       originalIndex = [objects indexOfObject:obj];
-      newIndex = originalIndex + i;
+      topIndex = [objects indexOfObject:topUnselectedObj];
+      newIndex = originalIndex;
       // if we reach the top and have a multple selection we squeeze it
-      if (newIndex < [objects count] - 1)
+      if (newIndex < topIndex)
          newIndex++;
       else
-        newIndex = [objects count] - 1 ;
-
-      [obj retain];
-      [objects removeObject:obj];
-      [objects insertObject:obj atIndex:newIndex];
-      [obj release];
+        newIndex = topIndex+1;
+   
+      if (newIndex != originalIndex)
+        {
+          [obj retain];
+          [objects removeObject:obj];
+          [objects insertObject:obj atIndex:newIndex];
+          [obj release];
+        }
     }
   
   [toMoveObjs release];
@@ -1444,13 +1454,19 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   NSUInteger i;
   NSUndoManager *uMgr;
   NSMutableArray *toMoveObjs;
+  id bottomUnselectedObj = nil;
   
   toMoveObjs = [NSMutableArray new];
-  for (i = 0; i < [objects count]; i++)
-    if ([[[objects objectAtIndex: i] editor] isGroupSelected])
-      [toMoveObjs addObject: [objects objectAtIndex: i]];
+  for (i = [objects count]; i >  0; i--)
+    {
+      id obj = [objects objectAtIndex: i-1];
+      if ([[obj editor] isGroupSelected])
+          [toMoveObjs addObject: obj];
+      else
+          bottomUnselectedObj = obj;
+    }
   
-  if ([toMoveObjs count] == 0)
+  if (bottomUnselectedObj == nil || [toMoveObjs count] == 0)
     {
       [toMoveObjs release];
       return;
@@ -1463,25 +1479,31 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   [self saveCurrentObjects];
   
-  for (i = 0; i < [toMoveObjs count]; i++)
+  for (i = [toMoveObjs count]; i > 0; i--)
     {
       id obj;
-      NSUInteger originalIndex;
-      NSInteger newIndex;
+      NSUInteger originalIndex, newIndex, bottomIndex;
     
-      obj = [toMoveObjs objectAtIndex: [toMoveObjs count] - i - 1];
+      obj = [toMoveObjs objectAtIndex: i-1];
       originalIndex = [objects indexOfObject:obj];
-      newIndex = originalIndex - i;
+      bottomIndex = [objects indexOfObject:bottomUnselectedObj];
+      newIndex = originalIndex;
       // if we reach the bottom and have a multple selection we squeeze it
       if (newIndex > 0)
-        newIndex--;
-      else
-        newIndex = 0;
-    
-      [obj retain];
-      [objects removeObject:obj];
-      [objects insertObject:obj atIndex:newIndex];
-      [obj release];
+        {
+          if (newIndex > bottomIndex)
+            newIndex--;
+          else
+            newIndex = bottomIndex-1;
+        }
+
+      if (newIndex != originalIndex)
+        {
+          [obj retain];
+          [objects removeObject:obj];
+          [objects insertObject:obj atIndex:newIndex];
+          [obj release];
+        }
     }
 
   [toMoveObjs release];
