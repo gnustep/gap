@@ -26,6 +26,14 @@
       sourceModFiles = nil;
       targetModFiles = nil;
       sizeDiffFiles = nil;
+      handleDirectories = NO;
+      updateSource = NO;
+      insertItems = NO;
+      updateItems = NO;
+      deleteItems = NO;
+      skipHiddenFolders = YES;
+      skipHiddenFiles = YES;
+      skipThumbFiles = YES;
     }
   return self;
 }
@@ -335,8 +343,8 @@
       
   totalItems += [targetMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
   [progressIndicator setMinValue:0.0];
-  [progressIndicator setMaxValue:(double)(totalItems-1)];
-  [progressIndicator setDoubleValue:0];
+  [progressIndicator setMaxValue:(double)totalItems];
+  [progressIndicator setDoubleValue:0.0];
 
   if (handleDirectories)
     {
@@ -417,13 +425,13 @@
 	  NSDictionary *fAttr;
 
 	  fileObj = [targetMissingFiles objectAtIndex:i];
-	  [progressIndicator incrementBy:1.0];
 
 	  /* TODO should recheck ? */
 	  newAbsolutePath = [[targetMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
 	  [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
 	  fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
 	  [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+          [progressIndicator incrementBy:1.0];
 	}
     }
   
@@ -436,7 +444,6 @@
 	  NSDictionary *fAttr;
 
 	  fileObj = [sourceModFiles objectAtIndex:i];
-	  [progressIndicator incrementBy:1.0];
 
 	  /* TODO should recheck ? */
 	  newAbsolutePath = [[targetMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
@@ -446,10 +453,11 @@
 	      fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
 	      [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
 	    }
+          [progressIndicator incrementBy:1.0];
 	}
     }
 
-  /* source is missing some files */
+  /* target has extra files compared to source */
   if (deleteItems && !updateSource)
     {
       for (i = 0; i < [sourceMissingFiles count] && !stopTask; i++)
@@ -457,12 +465,12 @@
 	  FileObject *fileObj;
 
 	  fileObj = [sourceMissingFiles objectAtIndex:i];
-	  [progressIndicator incrementBy:1.0];
 
 	  if([fm removeFileAtPath:[fileObj absolutePath] handler:nil])
 	    {
 	      NSLog(@"Error removing file: %@", [fileObj absolutePath]);
 	    }
+	  [progressIndicator incrementBy:1.0];
 	}
     }
   /* copy the files to source */
@@ -477,13 +485,13 @@
               NSDictionary *fAttr;
 
               fileObj = [sourceMissingFiles objectAtIndex:i];
-              [progressIndicator incrementBy:1.0];
 
               /* TODO should recheck ? */
               newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
               [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
               fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
               [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
+              [progressIndicator incrementBy:1.0];
             }
         }
       for (i = 0; i < [targetModFiles count] && !stopTask; i++)
@@ -493,7 +501,6 @@
 	  NSDictionary *fAttr;
 
 	  fileObj = [targetModFiles objectAtIndex:i];
-	  [progressIndicator incrementBy:1.0];
 
 	  /* TODO should recheck ? */
 	  newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
@@ -503,6 +510,7 @@
 	      fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
 	      [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
 	    }
+	  [progressIndicator incrementBy:1.0];
 	}
     }
 
