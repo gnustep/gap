@@ -2,11 +2,11 @@
  *  GSPdfDocument.m: Implementation of the GSPdfDocument Class 
  *  of the GSPdf application
  *
- *  Copyright (c) 2002-2011 GNUstep Application Project
+ *  Copyright (c) 2002-2019 GNUstep Application Project
  *  
- *  Author: Enrico Sersale
  *  Date: February 2002
- *  Author: Riccardo Mottola
+ *  Authors: Enrico Sersale
+ *           Riccardo Mottola
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -63,14 +63,13 @@
   nc = [NSNotificationCenter defaultCenter];
   fm = [NSFileManager defaultManager];		
   ASSIGN (myPath, fileName);
-  isPdf = [docType isEqual: @"PDF"];	
   gsComm = [[gspdf gsPath] retain];
   pageindex = 0;
   resolution = 72;
   pagew = 595;
   pageh = 842;
 
-  if (isPdf)
+  if ([docType isEqualToString: @"com.adobe.pdf"] || [docType isEqualToString: @"PDF"])
     {
       NSDictionary *pageIdent = [gspdf uniquePageIdentifier];
       NSString *dscPath = [pageIdent objectForKey: @"dscpath"];

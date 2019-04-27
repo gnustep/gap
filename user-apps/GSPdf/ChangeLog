@@ -1,3 +1,8 @@
+2019-04-27 Riccardo Mottola <rm@gnu.org>
+
+	* GSPdfDocument.m
+	Allow as Document types both OS Types and UTI
+
 2018-02-05 Riccardo Mottola <rm@gnu.org>
 
 	* GSPdf.h
