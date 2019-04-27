@@ -26,6 +26,10 @@
 #import "GSPdfView.h"
 #import "GSPdfDocWin.h"
 
+#ifndef GNUSTEP
+#import "GNUstep.h"
+#endif
+
 /* we define our own constants */
 enum
 {

@@ -34,6 +34,10 @@
 #import "GSConsole.h"
 #import "Functions.h"
 
+#ifndef GNUSTEP
+#import "GNUstep.h"
+#endif
+
 #define MAXPAGES 9999
 #define GHOSTSCRIPT_PATH_KEY @"GhostScriptPath"
 

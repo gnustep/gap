@@ -29,6 +29,10 @@
 #import "GSPdfDocWin.h"
 #import "GSPdfDocument.h"
 
+#ifndef GNUSTEP
+#import "GNUstep.h"
+#endif
+
 @implementation GSPdfDocWin
 
 - (void)dealloc
