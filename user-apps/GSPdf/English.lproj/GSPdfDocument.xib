@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -143,12 +143,12 @@
 							<reference key="NSSuperview" ref="182478169"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSStepperCell" key="NSCell" id="415642860">
-								<int key="NSCellFlags">917024</int>
+								<int key="NSCellFlags">130560</int>
 								<int key="NSCellFlags2">0</int>
 								<reference key="NSControlView" ref="144628134"/>
-								<double key="NSMaxValue">1.000000e+02</double>
-								<double key="NSIncrement">1.000000e+00</double>
-								<bool key="NSAutorepeat">YES</bool>
+								<double key="NSValue">1.000000e+02</double>
+								<double key="NSMaxValue">4.000000e+02</double>
+								<double key="NSIncrement">1.000000e+01</double>
 							</object>
 						</object>
 						<object class="NSButton" id="393452838">
