@@ -2,7 +2,7 @@
  Project: Graphos
  GRDocument.m
 
- Copyright (C) 2000-2017 GNUstep Application Project
+ Copyright (C) 2000-2019 GNUstep Application Project
 
  Author: Enrico Sersale (original implementation)
  Author: Ing. Riccardo Mottola
@@ -66,10 +66,6 @@
       [docView updatePrintInfo: p];
     else
       NSLog(@"printInfo nil!");
-
-    /* set undo levels */
-    [[self undoManager] setLevelsOfUndo:1];
-
 }
 
 - (BOOL)revertToSavedFromFile:(NSString *)fileName ofType:(NSString *)type

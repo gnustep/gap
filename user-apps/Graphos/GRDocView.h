@@ -49,7 +49,8 @@
 @interface GRDocView : NSView
 {
     NSMutableArray *objects, *delObjects;
-    NSMutableArray *lastObjects;
+    NSMutableArray *objectHistory;
+    NSUInteger historyPointer;
     int edind;
     BOOL shiftclick, altclick, ctrlclick;
 
@@ -136,7 +137,8 @@
 
 - (void)saveCurrentObjects;
 - (void)saveCurrentObjectsDeep;
-- (void)restoreLastObjects;
+- (void)backObjectHistory;
+- (void)forwardObjectHistory;
 
 - (void)verifyModifiersOfEvent:(NSEvent *)theEvent;
 

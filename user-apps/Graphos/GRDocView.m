@@ -72,7 +72,8 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
       objects = [[NSMutableArray alloc] initWithCapacity: 1];
       delObjects = [[NSMutableArray alloc] initWithCapacity: 1];
-      lastObjects = nil;
+      objectHistory = [[NSMutableArray alloc] initWithCapacity: 1];
+      historyPointer = 0;
       shiftclick = NO;
       altclick = NO;
       ctrlclick = NO;
@@ -87,7 +88,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     [cur release];
     [objects release];
     [delObjects release];
-    [lastObjects release];
+    [objectHistory release];
     [super dealloc];
 }
 
@@ -319,7 +320,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Add Text"];
     
   [self saveCurrentObjects];
@@ -478,10 +479,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Create Path"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
   
   for(i = 0; i < [objects count]; i++)
     {
@@ -582,10 +583,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Create Box"];
     
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
 
   for(i = 0; i < [objects count]; i++)
     {
@@ -639,10 +640,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Create Circle"];
     
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
 
 
   for(i = 0; i < [objects count]; i++)
@@ -765,7 +766,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Edit Path"];
   
   [self saveCurrentObjectsDeep];
@@ -814,7 +815,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Edit Text"];
     
   [self saveCurrentObjectsDeep];
@@ -867,7 +868,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     
     uMgr = [self undoManager];
     /* save the method on the undo stack */
-    [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+    [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
     [uMgr setActionName:@"Move Object"];
 
     [self saveCurrentObjectsDeep];
@@ -985,7 +986,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_SYMMETRIC] == NO)
     {
       [self saveCurrentObjectsDeep];
-      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
       [uMgr setActionName: UNDO_ACTION_CP_SYMMETRIC];
     }
 
@@ -1028,7 +1029,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_CUSP] == NO)
     {
       [self saveCurrentObjectsDeep];
-      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
       [uMgr setActionName: UNDO_ACTION_CP_CUSP];
     }
 
@@ -1071,7 +1072,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_OVERLAP] == NO)
     {
       [self saveCurrentObjectsDeep];
-      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
       [uMgr setActionName: UNDO_ACTION_CP_OVERLAP];
     }
 
@@ -1114,7 +1115,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_EXTRACT] == NO)
     {
       [self saveCurrentObjectsDeep];
-      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
       [uMgr setActionName: UNDO_ACTION_CP_EXTRACT];
     }
 
@@ -1157,7 +1158,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_CP_DELETE] == NO)
     {
       [self saveCurrentObjectsDeep];
-      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
       [uMgr setActionName: UNDO_ACTION_CP_DELETE];
     }
     
@@ -1298,7 +1299,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_OBJPROPS] == NO)
     {
       [self saveCurrentObjectsDeep];
-      [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
       [uMgr setActionName: UNDO_ACTION_OBJPROPS];
     }
   
@@ -1378,10 +1379,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Move forward"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
 
   // we slide the selected objects up one starting from the bottom
   for (i = [toMoveObjs count]; i > 0; i--)
@@ -1432,10 +1433,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Move to front"];
     
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
   
   // we bring the selected object to top starting from the bottom
   for (i = 0; i < [toMoveObjs count]; i++)
@@ -1474,10 +1475,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Move backward"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
   
   for (i = [toMoveObjs count]; i > 0; i--)
     {
@@ -1529,10 +1530,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Move to back"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
   
   // we bring the selected object to top starting from top
   for (i = [toMoveObjs count]; i > 0;  i--)
@@ -1753,10 +1754,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Delete"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
   
   [self deleteSelectedObjects];
 }
@@ -1767,10 +1768,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Cut"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
   [self copy: sender];
   [self deleteSelectedObjects];
 }
@@ -1826,10 +1827,10 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
   // FIXME we should push the undo stack only if copy is certain to succeed
   uMgr = [self undoManager];
   /* save the method on the undo stack */
-  [[uMgr prepareWithInvocationTarget: self] restoreLastObjects];
+  [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
   [uMgr setActionName:@"Paste"];
   
-  [self saveCurrentObjects];
+  [self saveCurrentObjectsDeep];
 
   pboard = [NSPasteboard generalPasteboard];
   grTypes = [NSArray arrayWithObject: @"GRObjectPboardType"];
@@ -1924,43 +1925,79 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
 - (void)saveCurrentObjects
 {
-  if (objects != nil)
+  NSUndoManager *uMgr = [self undoManager];
+  
+  /* remove the tail if we are not at the top */
+  while ([objectHistory count] > historyPointer)
     {
-      if (lastObjects != nil)
-        [lastObjects release];
-      lastObjects = [[NSMutableArray arrayWithArray:objects] retain];
+      NSLog(@"Save not requested at top, removing last");
+      [objectHistory removeLastObject];
     }
+
+  if ([uMgr levelsOfUndo] > 0)
+    if ([objectHistory count] == [uMgr levelsOfUndo])
+      [objectHistory removeObjectAtIndex:0];
+  [objectHistory addObject:[NSMutableArray arrayWithArray:objects]];
+  historyPointer++;
 }
 
 - (void)saveCurrentObjectsDeep
 {
-  if (objects != nil)
+  NSUndoManager *uMgr = [self undoManager];
+
+  /* remove the tail if we are not at the top */
+  while ([objectHistory count] > historyPointer)
     {
-      if (lastObjects != nil)
-        [lastObjects release];
-      lastObjects = [[self deepCopyObjects: objects] retain];
+      NSLog(@"SaveDeep not requested at top, removing last");
+      [objectHistory removeLastObject];
     }
+
+  if ([uMgr levelsOfUndo] > 0)
+    if ([objectHistory count] == [uMgr levelsOfUndo])
+      [objectHistory removeObjectAtIndex:0];
+  [objectHistory addObject:[self deepCopyObjects: objects]];
+  historyPointer++;
 }
 
 
-- (void)restoreLastObjects
+- (void)backObjectHistory
 {
-    NSMutableArray *tempObjects;
-
-    /* backup the current status */
-    tempObjects = [NSMutableArray arrayWithArray:objects];
-    [objects release];
+  /* backup the current status if we are at the top */
+  if (historyPointer == [objectHistory count])
+    {
+      NSMutableArray *tempObjects;
+      
+      NSLog(@"undo requested at top, saving current state");
+      tempObjects = [NSMutableArray arrayWithArray:objects];
+      [objectHistory addObject:tempObjects];
+    }
     
-    /* re-register for redo */
-    [[[self undoManager] prepareWithInvocationTarget: self] restoreLastObjects];
+  /* re-register for redo */
+  [[[self undoManager] prepareWithInvocationTarget: self] forwardObjectHistory];
 
-    /* get the last status */
-    objects = [lastObjects retain];
-    [lastObjects release];
-    
-    /* set the last status to the backup */
-    lastObjects = [tempObjects retain];
-    [self setNeedsDisplay: YES];
+  /* get the last status */
+  historyPointer--;
+  objects = [[objectHistory objectAtIndex:historyPointer] retain];
+
+  [self setNeedsDisplay: YES];
+
+  NSLog(@"back pointer %u out of %u", historyPointer, [objectHistory count]);
+}
+
+- (void)forwardObjectHistory
+{
+  NSLog(@"forward pointer %u out of %u", historyPointer, [objectHistory count]);
+  
+  /* re-register for redo */
+  [[[self undoManager] prepareWithInvocationTarget: self] backObjectHistory];
+
+  /* get the last status */
+  historyPointer++;
+  objects = [[objectHistory objectAtIndex:historyPointer] retain];
+
+
+  /* set the last status to the backup */
+  [self setNeedsDisplay: YES];
 }
 
 /* ----- Mouse Methods ----- */

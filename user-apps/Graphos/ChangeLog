@@ -1,3 +1,10 @@
+2019-08-16 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.h
+	* GRDocView.m
+	* GRDocument.m
+	Implement infinite undo levels, adjust save/restore methods
+
 2019-05-14 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
