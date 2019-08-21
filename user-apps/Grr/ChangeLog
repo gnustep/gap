@@ -1,3 +1,8 @@
+2019-08-21 Riccardo mottola <rm@gnu.org>
+
+	* Components/TreeDatabase/TreeDatabaseComponent.m
+	Remove exception for old GNUstep version.
+
 2014-12-22 Riccardo Mottola <rm@gnu.org>
 
 	* Components/ArticleView/ArticleTextViewPlugin.m

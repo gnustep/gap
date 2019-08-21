@@ -298,30 +298,7 @@
         // Don't allow to subscribe to the same feed twice.
         return NO;
     }
-    
-#ifdef GNUSTEP
-    // If GNUstep base is below or equal 1.13.0, give a warning before loading a remote feed
-#if (GNUSTEP_BASE_MAJOR_VERSION < 1 || \
-       (GNUSTEP_BASE_MAJOR_VERSION == 1 && GNUSTEP_BASE_MINOR_VERSION <= 13) || \
-       ( GNUSTEP_BASE_MAJOR_VERSION == 1 && \
-         GNUSTEP_BASE_MINOR_VERSION == 13 && \
-         GNUSTEP_BASE_SUBMINOR_VERSION == 0 ))
-    int result = NSRunAlertPanel(
-        @"Security problem",
-        [NSString stringWithFormat:
-            @"Your GNUstep FoundationKit version (below or equal 1.13.0) is vulnerable to a\n"
-            @"security problem which can be exploited through RSS and Atom feeds.\n\n"
-            @"Do you trust the source of this feed ?\n\n%@", aURL],
-        @"No, I don't trust this feed.", @"Yes, I trust this feed.", nil
-    );
-    
-    if (result == 1) {
-        // User didn't trust the source.
-        return NO;
-    }
-#endif // VERSION
-#endif // GNUSTEP
-    
+        
     feed = (id<Feed>)[[RSSFactory sharedFactory] feedWithURL: aURL];
     
     if (feed == nil) {
