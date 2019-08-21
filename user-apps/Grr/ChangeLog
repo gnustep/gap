@@ -1,5 +1,10 @@
 2019-08-21 Riccardo mottola <rm@gnu.org>
 
+	* Components/ArticleOperations/ArticleOperations.m
+	Use urlStr to access an URL under NSString format
+
+2019-08-21 Riccardo mottola <rm@gnu.org>
+
 	* Components/TreeDatabase/TreeDatabaseComponent.m
 	Remove exception for old GNUstep version.
 

@@ -131,7 +131,7 @@ willBeInsertedIntoToolbar: (BOOL)flag
     id<RSSArticle> article;
     
     while ((article = [enumerator nextObject]) != nil) {
-        [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:[article url]]];
+        [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:[article urlStr]]];
     }
 }
 
