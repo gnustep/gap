@@ -1,3 +1,14 @@
+2019-08-21 Riccardo Mottola <rm@gnu.org>
+
+	* RSSArticleProtocol.h
+	* RSSFeed+Storage.m
+	* RSSArticleCreationListener.h
+	* RSSArticleCreationListener.m
+	* RSSArticle.h
+	* RSSArticle+Storage.m
+	* RSSArticle.m
+	Use urlStr to access an URL under NSString format
+
 2017-03-15 Riccardo Mottola <rm@gnu.org>
 
 	* RSSFeed.h

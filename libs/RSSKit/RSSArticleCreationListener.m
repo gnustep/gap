@@ -2,6 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
+ *                2019 The Free Software Foundation
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -42,7 +43,7 @@
 -(void) dealloc
 {
   DESTROY(headline);
-  DESTROY(url);
+  DESTROY(urlStr);
   DESTROY(summary);
   DESTROY(content);
   DESTROY(date);
@@ -102,16 +103,16 @@
     }
  
   // url
-  if (url == nil) {
+  if (urlStr == nil) {
       NSAssert1([links count] > 0, @"Article %@ has no links!", headline);
       
       // better use a bad (="random") link as article URL than none
-      ASSIGN(url, [[links objectAtIndex: 0] description]);
+      ASSIGN(urlStr, [[links objectAtIndex: 0] description]);
   } 
   
   // create
   article = [[RSSFactory sharedFactory] articleWithHeadline: headline
-	                                                  URL: url
+	                                                  URL: urlStr
 	                                              content: desc
 	                                                 date: articleDate];
   // FIXME: This article creation was retained before, but it seems okay like that?
@@ -167,7 +168,7 @@
   
   // Free all old stuff
   DESTROY(headline);
-  DESTROY(url);
+  DESTROY(urlStr);
   DESTROY(summary);
   DESTROY(content);
   DESTROY(date);
@@ -248,8 +249,8 @@
 			     andRel: aRelation
 			     andType: aType];
   /* Keep the default URL */
-  if (url == nil && [aRelation isEqualToString: @"alternate"]) {
-      ASSIGN(url, anURL);
+  if (urlStr == nil && [aRelation isEqualToString: @"alternate"]) {
+      ASSIGN(urlStr, anURL);
   }
   
   if (link) {

@@ -116,7 +116,7 @@
         }
         
         ASSIGN( headline,     [aDictionary objectForKey: @"headline"] );
-        ASSIGN( url,          [aDictionary objectForKey: @"article URL"] );
+        ASSIGN( urlStr,       [aDictionary objectForKey: @"article URL"] );
         ASSIGN( description,  [aDictionary objectForKey: @"article content"] );
         ASSIGN( date,         [aDictionary objectForKey: @"date"] );
 	
@@ -133,7 +133,7 @@
 
 -(NSString*) storagePath
 {
-    return [[RSSFactory sharedFactory] storagePathForURL: url];
+    return [[RSSFactory sharedFactory] storagePathForURL: urlStr];
 }
 
 /**
@@ -165,7 +165,7 @@
     dict = [NSMutableDictionary dictionaryWithCapacity:  10];
     
     if (headline != nil   ) [dict setObject: headline     forKey: @"headline"];
-    if (url != nil        ) [dict setObject: url          forKey: @"article URL"];
+    if (urlStr != nil     ) [dict setObject: urlStr       forKey: @"article URL"];
     if (description != nil) [dict setObject: description  forKey: @"article content"];
     if (date != nil       ) [dict setObject: date         forKey: @"date"];
     

@@ -58,7 +58,7 @@
         id<RSSArticle> article = [articles objectAtIndex: i];
         
         [articleDict setValue: [article headline] forKey: @"headline"];
-        [articleDict setValue: [[article url] description] forKey: @"URL"];
+        [articleDict setValue: [[article urlStr] description] forKey: @"URL"];
         [articleDict setValue: [article date] forKey: @"date"];
         
         [articleIndex addObject: articleDict];

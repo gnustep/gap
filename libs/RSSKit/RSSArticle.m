@@ -51,7 +51,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
   [super init];
   
   ASSIGN(headline, myHeadline);
-  ASSIGN(url, myUrl);
+  ASSIGN(urlStr, myUrl);
   ASSIGN(description, myDescription);
   ASSIGN(date, myDate);
   ASSIGN(links, AUTORELEASE([[NSMutableArray alloc] init]));
@@ -63,7 +63,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 - (void) dealloc
 {
   RELEASE(headline);
-  RELEASE(url);
+  RELEASE(urlStr);
   RELEASE(description);
   RELEASE(date);
   RELEASE(links);
@@ -76,9 +76,9 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
   return headline;
 }
 
-- (NSString *) url
+- (NSString *) urlStr
 {
-  return url;
+  return urlStr;
 }
 
 - (NSString *) description
@@ -189,7 +189,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 // Equality and hash codes
 - (NSUInteger) hash
 {
-  return [headline hash] ^ [url hash];
+  return [headline hash] ^ [urlStr hash];
 }
 
 /**
@@ -200,7 +200,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 - (BOOL) isEqual: (id)anObject
 {
   if ( ( [headline isEqualToString: [anObject headline]] == YES ) &&
-       ( [url      isEqualToString: [anObject url]]      == YES ) )
+       ( [urlStr   isEqualToString: [anObject urlStr]]   == YES ) )
     {
       return YES;
     }

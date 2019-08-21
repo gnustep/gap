@@ -1,7 +1,7 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2010-2014 The Free Software Foundation, Inc.
+ *  Copyright (C) 2010-2019 The Free Software Foundation, Inc.
  *                2006      Guenther Noack
  *
  *  This library is free software; you can redistribute it and/or
@@ -39,7 +39,7 @@ extern NSString* RSSArticleChangedNotification;
 - (NSString*) headline;
 
 /// @return The URL of the full version of the article (as NSString*)
-- (NSString*) url;
+- (NSString*) urlStr;
 
 /// @return The full text, an excerpt or a summary from the article
 - (NSString*) content;

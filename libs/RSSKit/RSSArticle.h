@@ -37,7 +37,7 @@
 {
   @protected
   NSString*  headline;
-  NSString*  url;
+  NSString*  urlStr;
   NSString*  description;
   NSDate*    date;
 
@@ -83,7 +83,7 @@
 
 // Accessor methods (conformance to RSSArticle protocol)
 -(NSString*)headline;
--(NSString*)url;
+-(NSString*)urlStr;
 -(NSString*)content;
 -(NSString*)description;
 -(NSArray*) links;
