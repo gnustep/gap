@@ -1,9 +1,11 @@
 /*
    Grr RSS Reader
    
-   Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2019 The Free Software Foundation, Inc.
+                 2006-2007 Guenther Noack
+ 
+   Authors: Guenther Noack
+            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -63,7 +65,7 @@ NSString* const ArticleReadFlagChangedNotification = @"ArticleReadFlagChangedNot
  * Designated initializer
  */
 -(id)initWithHeadline: (NSString*) _headline
-                  url: (NSString*) _url
+                  url: (NSURL*) _url
           description: (NSString*) _description
                  date: (NSDate*) _date
 {

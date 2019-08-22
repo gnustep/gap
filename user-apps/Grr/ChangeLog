@@ -1,3 +1,10 @@
+2019-08-22 Riccardo mottola <rm@gnu.org>
+
+	* Article.h
+	* Article.m
+	* Components/ArticleOperations/ArticleOperations.m:
+	Adapt to RSSKit change that uses NSURL instead of NSString to keep the Article URL.
+
 2019-08-21 Riccardo mottola <rm@gnu.org>
 
 	* Components/ArticleOperations/ArticleOperations.m
