@@ -2,7 +2,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
+ *  Copyright (C) 2010-2019 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -37,21 +41,21 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 - (id) init
 {
   return [self initWithHeadline: @"no headline"
-	       url: @"no URL"
+	       url: nil
 	       description: @"no description"
 	       date: AUTORELEASE([NSDate new]) ];
 }
 
 
 - (id) initWithHeadline: (NSString*) myHeadline
-	      url: (NSString*) myUrl
+	      url: (NSURL*)    myUrl
       description: (NSString*) myDescription
 	     date: (NSDate*)   myDate
 {
   [super init];
   
   ASSIGN(headline, myHeadline);
-  ASSIGN(urlStr, myUrl);
+  ASSIGN(url, myUrl);
   ASSIGN(description, myDescription);
   ASSIGN(date, myDate);
   ASSIGN(links, AUTORELEASE([[NSMutableArray alloc] init]));
@@ -63,7 +67,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 - (void) dealloc
 {
   RELEASE(headline);
-  RELEASE(urlStr);
+  RELEASE(url);
   RELEASE(description);
   RELEASE(date);
   RELEASE(links);
@@ -76,9 +80,9 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
   return headline;
 }
 
-- (NSString *) urlStr
+- (NSURL *) url
 {
-  return urlStr;
+  return url;
 }
 
 - (NSString *) description
@@ -189,7 +193,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 // Equality and hash codes
 - (NSUInteger) hash
 {
-  return [headline hash] ^ [urlStr hash];
+  return [headline hash] ^ [url hash];
 }
 
 /**
@@ -200,7 +204,7 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
 - (BOOL) isEqual: (id)anObject
 {
   if ( ( [headline isEqualToString: [anObject headline]] == YES ) &&
-       ( [urlStr   isEqualToString: [anObject urlStr]]   == YES ) )
+       ( [url      isEqualTo:       [anObject url]]      == YES ) )
     {
       return YES;
     }

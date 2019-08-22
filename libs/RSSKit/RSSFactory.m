@@ -1,7 +1,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
+ *  Copyright (C) 2010-2019 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -97,7 +101,7 @@ NSString* stringToFSString( NSString* aString )
  * of the RSSArticle class.
  */
 - (id<RSSArticle>) articleWithHeadline: (NSString*) aHeadline
-                                   URL: (NSString*) aURL
+                                   URL: (NSURL*) aURL
                                content: (NSString*) aContent
                                   date: (NSDate*) aDate
 {
@@ -112,7 +116,7 @@ NSString* stringToFSString( NSString* aString )
  * The default implementation of this method returns a new article
  * of the RSSArticle class.(which implements the RSSMutableArticle protocol)
  */
-- (id<RSSMutableArticle>) articleFromStorageWithURL: (NSString*) aURL
+- (id<RSSMutableArticle>) articleFromStorageWithURL: (NSURL*) aURL
 {
     return [self articleFromDictionary:
             [NSDictionary dictionaryWithContentsOfFile:
@@ -133,7 +137,7 @@ NSString* stringToFSString( NSString* aString )
 /**
  * Returns the file path where an article with the anURL URL would be stored to.
  */
--(NSString*) storagePathForURL: (NSString*) anURL
+-(NSString*) storagePathForURL: (NSURL*) anURL
 {
     if (RSSArticleStorageDirectory == nil) {
         NSFileManager* manager;
@@ -167,7 +171,7 @@ NSString* stringToFSString( NSString* aString )
         }
     }
     
-    return [NSString stringWithFormat: @"%@/%@.rssarticle", RSSArticleStorageDirectory, stringToFSString(anURL)];
+    return [NSString stringWithFormat: @"%@/%@.rssarticle", RSSArticleStorageDirectory, stringToFSString([anURL absoluteString])];
 }
 
 @end

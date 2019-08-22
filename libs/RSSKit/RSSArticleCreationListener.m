@@ -1,8 +1,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
- *                2019 The Free Software Foundation
+ *  Copyright (C) 2019      The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -43,7 +46,7 @@
 -(void) dealloc
 {
   DESTROY(headline);
-  DESTROY(urlStr);
+  DESTROY(url);
   DESTROY(summary);
   DESTROY(content);
   DESTROY(date);
@@ -103,16 +106,16 @@
     }
  
   // url
-  if (urlStr == nil) {
+  if (url == nil) {
       NSAssert1([links count] > 0, @"Article %@ has no links!", headline);
       
       // better use a bad (="random") link as article URL than none
-      ASSIGN(urlStr, [[links objectAtIndex: 0] description]);
+      ASSIGN(url, [links objectAtIndex: 0]);
   } 
   
   // create
   article = [[RSSFactory sharedFactory] articleWithHeadline: headline
-	                                                  URL: urlStr
+	                                                  URL: url
 	                                              content: desc
 	                                                 date: articleDate];
   // FIXME: This article creation was retained before, but it seems okay like that?
@@ -168,7 +171,7 @@
   
   // Free all old stuff
   DESTROY(headline);
-  DESTROY(urlStr);
+  DESTROY(url);
   DESTROY(summary);
   DESTROY(content);
   DESTROY(date);
@@ -249,8 +252,8 @@
 			     andRel: aRelation
 			     andType: aType];
   /* Keep the default URL */
-  if (urlStr == nil && [aRelation isEqualToString: @"alternate"]) {
-      ASSIGN(urlStr, anURL);
+  if (url == nil && [aRelation isEqualToString: @"alternate"]) {
+    ASSIGN(url, [NSURL URLWithString:anURL]);
   }
   
   if (link) {

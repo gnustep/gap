@@ -1,8 +1,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2010-2011 The Free Software Foundation, Inc.
+ *  Copyright (C) 2010-2019 The Free Software Foundation, Inc.
  *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -37,7 +40,7 @@
 {
   @protected
   NSString*  headline;
-  NSString*  urlStr;
+  NSURL*     url;
   NSString*  description;
   NSDate*    date;
 
@@ -72,7 +75,7 @@
  * @see RSSFeed
  */
 -initWithHeadline: (NSString*) myHeadline
-	      url: (NSString*) myUrl
+	      url: (NSURL*)    myUrl
       description: (NSString*) myDescription
 	     date: (NSDate*)   myDate;
 
@@ -83,7 +86,7 @@
 
 // Accessor methods (conformance to RSSArticle protocol)
 -(NSString*)headline;
--(NSString*)urlStr;
+-(NSURL*)url;
 -(NSString*)content;
 -(NSString*)description;
 -(NSArray*) links;

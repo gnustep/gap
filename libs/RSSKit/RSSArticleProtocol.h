@@ -38,8 +38,8 @@ extern NSString* RSSArticleChangedNotification;
 /// @return The headline of the article
 - (NSString*) headline;
 
-/// @return The URL of the full version of the article (as NSString*)
-- (NSString*) urlStr;
+/// @return The URL of the full version of the article
+- (NSURL*) url;
 
 /// @return The full text, an excerpt or a summary from the article
 - (NSString*) content;

@@ -1,8 +1,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
- *                2010-2012 Free Software Foundation, Inc
+ *  Copyright (C) 2010-2019 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -74,7 +77,7 @@
 /**
  * Returns the article with the URL anURL from the storage
  */
-+(id<RSSMutableArticle>)articleFromStorageWithURL: (NSString*) anURL
++(id<RSSMutableArticle>)articleFromStorageWithURL: (NSURL*) anURL
 {
     return [[RSSFactory sharedFactory] articleFromDictionary:
                 [NSDictionary dictionaryWithContentsOfFile:
@@ -91,7 +94,7 @@
  * article is going to be created. Better use one of the
  * RSSFactory methods for article unarchiving.
  */
--(id) initFromStorageWithURL: (NSString*) anURL
+-(id) initFromStorageWithURL: (NSURL*) anURL
 {
 #ifdef GNUSTEP
     NSDebugLog(@"Calling -initFromStorageWithURL on a concrete RSSArticle class instance");
@@ -116,7 +119,7 @@
         }
         
         ASSIGN( headline,     [aDictionary objectForKey: @"headline"] );
-        ASSIGN( urlStr,       [aDictionary objectForKey: @"article URL"] );
+        ASSIGN( url,          [NSURL URLWithString:[aDictionary objectForKey: @"article URL"]]);
         ASSIGN( description,  [aDictionary objectForKey: @"article content"] );
         ASSIGN( date,         [aDictionary objectForKey: @"date"] );
 	
@@ -133,7 +136,7 @@
 
 -(NSString*) storagePath
 {
-    return [[RSSFactory sharedFactory] storagePathForURL: urlStr];
+    return [[RSSFactory sharedFactory] storagePathForURL: url];
 }
 
 /**
@@ -152,6 +155,7 @@
     NSUInteger i;
     NSMutableDictionary* dict;
     NSMutableArray* linksArray;
+    NSString *urlStr;
     
     // Create a (Plist-compatible) array of Dictionaries from
     // the article's link list (an array of NSURL instances)
@@ -163,6 +167,7 @@
     
     // Create a dictionary from it all.3
     dict = [NSMutableDictionary dictionaryWithCapacity:  10];
+    urlStr = [url absoluteString];
     
     if (headline != nil   ) [dict setObject: headline     forKey: @"headline"];
     if (urlStr != nil     ) [dict setObject: urlStr       forKey: @"article URL"];

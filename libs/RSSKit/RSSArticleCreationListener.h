@@ -1,8 +1,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
- *                2019 Riccardo Mottola
+ *  Copyright (C) 2019      The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -34,7 +37,7 @@
   id delegate;
   
   NSString* headline;
-  NSString* urlStr;
+  NSURL* url;
   NSString* summary;
   NSString* content;
   NSDate* date;

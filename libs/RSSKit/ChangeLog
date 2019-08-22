@@ -1,3 +1,17 @@
+2019-08-22 Riccardo Mottola <rm@gnu.org>
+
+	* RSSArticleProtocol.h
+	* RSSFeed+Storage.m
+	* RSSArticleCreationListener.h
+	* RSSArticle+Storage.h
+	* RSSArticleCreationListener.m
+	* RSSArticle.h
+	* RSSArticle.m
+	* RSSArticle+Storage.m
+	* RSSFactory.h
+	* RSSFactory.m:
+	Use NSURL instead of NSString to keep the Article URL.
+
 2019-08-21 Riccardo Mottola <rm@gnu.org>
 
 	* RSSArticleProtocol.h

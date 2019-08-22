@@ -58,7 +58,7 @@
         id<RSSArticle> article = [articles objectAtIndex: i];
         
         [articleDict setValue: [article headline] forKey: @"headline"];
-        [articleDict setValue: [[article urlStr] description] forKey: @"URL"];
+        [articleDict setValue: [[article url] absoluteString] forKey: @"URL"];
         [articleDict setValue: [article date] forKey: @"date"];
         
         [articleIndex addObject: articleDict];
@@ -98,7 +98,7 @@
         articleIndex = [dict objectForKey: @"articleIndex"];
         mutArticles = AUTORELEASE([[NSMutableArray alloc] init]);
         for (i=0; i<[articleIndex count]; i++) {
-            NSString* articleURL = [(NSDictionary*)[articleIndex objectAtIndex: i] objectForKey: @"URL"];
+            NSURL* articleURL = [NSURL URLWithString:[(NSDictionary*)[articleIndex objectAtIndex: i] objectForKey: @"URL"]];
             id<RSSMutableArticle> article = [articleClass articleFromStorageWithURL: articleURL];
             [article setFeed: self]; // non-retained
             [mutArticles addObject: article];

@@ -1,8 +1,11 @@
 /*  -*-objc-*-
  *
  *  GNUstep RSS Kit
- *  Copyright (C) 2006 Guenther Noack
- *                2012 The Free Software Foundation
+ *  Copyright (C) 2012-2019 The Free Software Foundation, Inc.
+ *                2006      Guenther Noack
+ *
+ *  Authors: Guenther Noack
+ *           Riccardo Mottola
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -27,12 +30,12 @@
 /**
  * Returns the article with the URL anURL from the storage
  */
-+(id<RSSMutableArticle>)articleFromStorageWithURL: (NSString*) anURL;
++(id<RSSMutableArticle>)articleFromStorageWithURL: (NSURL*) anURL;
 
 /**
  * Initialises the article with the URL anURL from the storage.
  */
--(id)initFromStorageWithURL: (NSString*) anURL;
+-(id)initFromStorageWithURL: (NSURL*) anURL;
 
 /**
  * Initialises the article instance with the contents of the aDictionary variable.
