@@ -89,6 +89,7 @@ static NSMutableDictionary* titleToFontSizeDict = nil;
 
     [sizeSelector removeAllItems];
     [sizeSelector addItemsWithTitles: sizeOptionsTitles];
+    [sizeOptionsTitles release];
 }
 
 

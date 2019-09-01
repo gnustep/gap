@@ -267,6 +267,7 @@ void init_constants() {
     plainText = [[[NSAttributedString alloc] initWithString: string attributes: [self style]] retain];
     
     [resultDocument appendAttributedString: plainText];
+    [plainText release];
 }
 
 -(void) foundEscape: (NSString*) escape

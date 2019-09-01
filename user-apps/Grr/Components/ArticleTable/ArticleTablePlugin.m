@@ -79,6 +79,7 @@ int compareArticleRatings( id articleA, id articleB, void* context) {
   
   ratingCell = [[GNRatingCell alloc] init]; 
   [ratingCol setDataCell:ratingCell];
+  [ratingCell release];
   
   // Register for change notifications
   [[NSNotificationCenter defaultCenter] addObserver: self

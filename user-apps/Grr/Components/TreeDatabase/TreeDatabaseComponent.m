@@ -70,6 +70,7 @@
     }
     
     [dict setObject: mutArr forKey: @"topLevelElements"];
+    [mutArr release];
     
     return dict;
 }

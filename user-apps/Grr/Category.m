@@ -121,7 +121,8 @@
     [dict setObject: arr forKey: @"elements"];
     [dict setObject: name forKey: @"name"];
     [dict setObject: [[self class] description] forKey: @"isa"];
-    
+    [arr release];
+
     return dict;
 }
 

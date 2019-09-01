@@ -121,7 +121,7 @@
         }
     }
     
-    return [NSArray arrayWithArray: mutArray];
+    return [NSArray arrayWithArray: [mutArray autorelease]];
 }
 
 
