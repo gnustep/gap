@@ -1,3 +1,21 @@
+2019-10-15 Riccardo mottola <rm@gnu.org>
+
+	* DOMPareser.h
+	* DOMParser.m:
+	Declare following NSXMLParserDelegate and fix some compiler warnings with it
+
+	* RSSFeed.m
+	* RSSArticle.m
+	* RSSLinks.m:
+	Fix memory allocation errors.
+
+2019-08-22 Riccardo mottola <rm@gnu.org>
+
+	* Article.h
+	* Article.m
+	* Components/ArticleOperations/ArticleOperations.m:
+	Adapt to RSSKit change that uses NSURL instead of NSString to keep the Article URL.
+
 2019-08-22 Riccardo Mottola <rm@gnu.org>
 
 	* RSSArticleProtocol.h
