@@ -47,7 +47,7 @@
 @end
 
 
-@interface XMLNode : NSObject <XMLTextOrNode>
+@interface XMLNode : NSObject <XMLTextOrNode, NSXMLParserDelegate>
 {
   NSString* _name;
   NSString* _namespace;

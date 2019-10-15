@@ -227,7 +227,7 @@
   }
   
   if ([[aThing class] isSubclassOfClass: [XMLNode class]]) {
-    [aParser setDelegate: aThing];
+    [aParser setDelegate: (XMLNode *)aThing];
   }
 }
 
