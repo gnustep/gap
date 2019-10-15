@@ -63,7 +63,7 @@
 	     andType: (NSString*) aType
 {
   if ([self isMemberOfClass: [RSSLink class]]) {
-    [self release];
+    [self autorelease];
     [NSException
       raise: @"Abstract Class Instantiation"
       format: @"Abstract class %@ cannot be instantiated directly!",

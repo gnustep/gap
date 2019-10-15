@@ -2,7 +2,7 @@
  *
  *  GNUstep RSS Kit
  *  Copyright (C) 2006 Guenther Noack
- *                2010-2017 Free Software Foundation, Inc
+ *                2010-2019 Free Software Foundation, Inc
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -53,22 +53,23 @@
  */
 - (id) initWithURL: (NSURL*) aURL
 {
-  [super init];
-  
+  self = [super init];
+  if (self)
+    {
 #ifdef DEBUG
-  NSLog(@"(newFeed) initWithURL: %@", aURL);
+      NSLog(@"(newFeed) initWithURL: %@", aURL);
 #endif
   
-  ASSIGN(feedURL, aURL);
-  ASSIGN(articles, AUTORELEASE([NSMutableArray new]));
-  ASSIGN(lastRetrieval, [NSDate dateWithTimeIntervalSince1970: 0.0]);
-  clearFeedBeforeFetching = YES;
-  lastError = RSSFeedErrorNoError;
-  feedName = nil;
-  articleClass = [RSSArticle class];
-  rssVersion = nil;
-  status = RSSFeedIsIdle;
-  
+      ASSIGN(feedURL, aURL);
+      ASSIGN(articles, AUTORELEASE([NSMutableArray new]));
+      ASSIGN(lastRetrieval, [NSDate dateWithTimeIntervalSince1970: 0.0]);
+      clearFeedBeforeFetching = YES;
+      lastError = RSSFeedErrorNoError;
+      feedName = nil;
+      articleClass = [RSSArticle class];
+      rssVersion = nil;
+      status = RSSFeedIsIdle;
+    }
   return self;
 }
 

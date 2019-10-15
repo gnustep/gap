@@ -52,14 +52,15 @@ NSString* RSSArticleChangedNotification = @"RSSArticleChangedNotification";
       description: (NSString*) myDescription
 	     date: (NSDate*)   myDate
 {
-  [super init];
-  
-  ASSIGN(headline, myHeadline);
-  ASSIGN(url, myUrl);
-  ASSIGN(description, myDescription);
-  ASSIGN(date, myDate);
-  ASSIGN(links, AUTORELEASE([[NSMutableArray alloc] init]));
-  
+  self = [super init];
+  if (self)
+    {
+      ASSIGN(headline, myHeadline);
+      ASSIGN(url, myUrl);
+      ASSIGN(description, myDescription);
+      ASSIGN(date, myDate);
+      ASSIGN(links, AUTORELEASE([[NSMutableArray alloc] init]));
+    }
   return self;
 }
 
