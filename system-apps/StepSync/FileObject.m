@@ -27,6 +27,49 @@
 
 @implementation FileObject
 
++ (NSString *)formatSize:(unsigned long long)size
+{
+  NSString *result;
+  double dSize;
+
+  result = nil;
+  if (size < 1024)
+    {
+      result = [NSString stringWithFormat:@"%llu B", size];
+    }
+  else
+    {
+      dSize = (double)size / 1024;
+      if (dSize < 1024)
+	{
+	  result = [NSString stringWithFormat:@"%.1lf KB", dSize];
+	}
+      else
+	{
+	  dSize = dSize / 1024;
+	  if (dSize < 1024)
+	    {
+	      result = [NSString stringWithFormat:@"%.1lf MB", dSize];
+	    }
+	  else
+	    {
+	      dSize = dSize / 1024;
+	      if (dSize < 1024)
+		{
+		  result = [NSString stringWithFormat:@"%.1lf GB", dSize];
+		}
+	      else
+		{
+		  dSize = dSize / 1024;
+		  result = [NSString stringWithFormat:@"%.1lf TB", dSize];
+		}
+	    }
+	}
+    }
+  
+  return result;
+}
+
 - (void)setFileAttributes:(NSDictionary *)attr
 {
   size = [attr fileSize];

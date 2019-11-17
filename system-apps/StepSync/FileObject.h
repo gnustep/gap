@@ -38,6 +38,8 @@ typedef unsigned NSUInteger;
   NSDate *modifiedDate;
 }
 
++ (NSString *)formatSize:(unsigned long long)size;
+
 - (void)setFileAttributes:(NSDictionary *)attr;
 - (NSString *)absolutePath;
 - (void)setAbsolutePath:(NSString *)path;

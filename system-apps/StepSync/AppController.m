@@ -31,49 +31,6 @@
 
 @implementation AppController
 
-- (NSString *)formatSize:(unsigned long long)size
-{
-  NSString *result;
-  double dSize;
-
-  result = nil;
-  if (size < 1024)
-    {
-      result = [NSString stringWithFormat:@"%llu B", size];
-    }
-  else
-    {
-      dSize = (double)size / 1024;
-      if (dSize < 1024)
-	{
-	  result = [NSString stringWithFormat:@"%.1lf KB", dSize];
-	}
-      else
-	{
-	  dSize = dSize / 1024;
-	  if (dSize < 1024)
-	    {
-	      result = [NSString stringWithFormat:@"%.1lf MB", dSize];
-	    }
-	  else
-	    {
-	      dSize = dSize / 1024;
-	      if (dSize < 1024)
-		{
-		  result = [NSString stringWithFormat:@"%.1lf GB", dSize];
-		}
-	      else
-		{
-		  dSize = dSize / 1024;
-		  result = [NSString stringWithFormat:@"%.1lf TB", dSize];
-		}
-	    }
-	}
-    }
-  
-  return result;
-}
-
 - (void)dealloc
 {
   [engine dealloc];
@@ -206,8 +163,8 @@
   [targetDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine targetMap] directories] count]] description]];
   [targetFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine targetMap] files] count]] description]];
   
-  [sourceSizeField setStringValue:[self formatSize:[[engine sourceMap] size]]];
-  [targetSizeField setStringValue:[self formatSize:[[engine targetMap] size]]];
+  [sourceSizeField setStringValue:[FileObject formatSize:[[engine sourceMap] size]]];
+  [targetSizeField setStringValue:[FileObject formatSize:[[engine targetMap] size]]];
   
   [stopButton setEnabled:NO];
   [analyzeButton setEnabled:YES];

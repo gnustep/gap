@@ -2,7 +2,7 @@
    Project: StepSync
    FileArray.h
 
-   Copyright (C) 2017-2018 Free Software Foundation
+   Copyright (C) 2019 Free Software Foundation
 
    Author: Riccardo Mottola
 

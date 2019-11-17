@@ -2,6 +2,15 @@
 
 	* FileArray.h
 	* FileArray.m
+	* FileObject.h
+	* FileObject.m
+	* AppController.m
+	Centralize formatSize: as class method of FileObject
+
+2019-11-17 Riccardo Mottola <rm@gnu.org>
+
+	* FileArray.h
+	* FileArray.m
 	* Engine.h
 	* Engine.m
 	* AppController.m

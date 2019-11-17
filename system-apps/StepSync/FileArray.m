@@ -2,7 +2,7 @@
    Project: StepSync
    FileArray.m
 
-   Copyright (C) 2017-2018 Free Software Foundation
+   Copyright (C) 2019 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -24,6 +24,7 @@
 */
 
 #import "FileArray.h"
+#import "FileObject.h"
 
 @implementation FileArray
 
@@ -101,31 +102,7 @@
 
 - (NSString *)sizeStr
 {
-  unsigned long long size;
-  
-  size = [self size];
-  
-  if (size < 1024)
-    return [NSString stringWithFormat:@"%lu Bytes", size];
-  
-  size /= 1024;
-  
-  if (size < 1024)
-    return [NSString stringWithFormat:@"%lu KiB", size];
-
-  size /= 1024;
-  
-  if (size < 1024)
-    return [NSString stringWithFormat:@"%lu MiB", size];
-
-  size /= 1024;
-  
-  if (size < 1024)
-    return [NSString stringWithFormat:@"%lu GiB", size];
-
-  size /= 1024;
-  
-  return [NSString stringWithFormat:@"%lu TiB", size];
+  return [FileObject formatSize:[self size]];
 }
 
 @end
