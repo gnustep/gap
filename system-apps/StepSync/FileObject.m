@@ -2,7 +2,7 @@
    Project: StepSync
    FileObject.m
 
-   Copyright (C) 2017-2018 Free Software Foundation
+   Copyright (C) 2017-2019 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -29,45 +29,25 @@
 
 + (NSString *)formatSize:(unsigned long long)size
 {
-  NSString *result;
   double dSize;
 
-  result = nil;
   if (size < 1024)
-    {
-      result = [NSString stringWithFormat:@"%llu B", size];
-    }
-  else
-    {
-      dSize = (double)size / 1024;
-      if (dSize < 1024)
-	{
-	  result = [NSString stringWithFormat:@"%.1lf KB", dSize];
-	}
-      else
-	{
-	  dSize = dSize / 1024;
-	  if (dSize < 1024)
-	    {
-	      result = [NSString stringWithFormat:@"%.1lf MB", dSize];
-	    }
-	  else
-	    {
-	      dSize = dSize / 1024;
-	      if (dSize < 1024)
-		{
-		  result = [NSString stringWithFormat:@"%.1lf GB", dSize];
-		}
-	      else
-		{
-		  dSize = dSize / 1024;
-		  result = [NSString stringWithFormat:@"%.1lf TB", dSize];
-		}
-	    }
-	}
-    }
+    return [NSString stringWithFormat:@"%llu Bytes", size];
   
-  return result;
+  dSize = (double)size / 1024;
+  if (dSize < 1024)
+    return [NSString stringWithFormat:@"%.1lf KiB", dSize];
+
+  dSize = dSize / 1024;
+  if (dSize < 1024)
+    return [NSString stringWithFormat:@"%.1lf MiB", dSize];
+
+  dSize = dSize / 1024;
+  if (dSize < 1024)
+    return [NSString stringWithFormat:@"%.1lf GiB", dSize];
+
+  dSize = dSize / 1024;
+  return [NSString stringWithFormat:@"%.1lf TiB", dSize];
 }
 
 - (void)setFileAttributes:(NSDictionary *)attr

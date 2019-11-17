@@ -1,5 +1,10 @@
 2019-11-17 Riccardo Mottola <rm@gnu.org>
 
+	* FileArray.m
+	Clean-up formatSize and use Binary size multipliers (Ki, Mi, Gi)
+
+2019-11-17 Riccardo Mottola <rm@gnu.org>
+
 	* FileArray.h
 	* FileArray.m
 	* FileObject.h
