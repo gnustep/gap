@@ -10,6 +10,7 @@
 
 @class NSProgressIndicator;
 @class FileMap;
+@class FileArray;
 
 @interface Engine : NSObject
 {
@@ -21,11 +22,11 @@
   FileMap *targetMap;
   NSMutableArray *targetMissingDirs;
   NSMutableArray *sourceMissingDirs;
-  NSMutableArray *targetMissingFiles;
-  NSMutableArray *sourceMissingFiles;
-  NSMutableArray *sourceModFiles;
-  NSMutableArray *targetModFiles;
-  NSMutableArray *sizeDiffFiles;
+  FileArray *targetMissingFiles;
+  FileArray *sourceMissingFiles;
+  FileArray *sourceModFiles;
+  FileArray *targetModFiles;
+  FileArray *sizeDiffFiles;
 
   BOOL handleDirectories;
   BOOL updateSource;
@@ -65,11 +66,11 @@
 
 - (NSMutableArray *)targetMissingDirs;
 - (NSMutableArray *)sourceMissingDirs;
-- (NSMutableArray *)targetMissingFiles;
-- (NSMutableArray *)sourceMissingFiles;
-- (NSMutableArray *)sourceModFiles;
-- (NSMutableArray *)targetModFiles;
-- (NSMutableArray *)sizeDiffFiles;
+- (FileArray *)targetMissingFiles;
+- (FileArray *)sourceMissingFiles;
+- (FileArray *)sourceModFiles;
+- (FileArray *)targetModFiles;
+- (FileArray *)sizeDiffFiles;
 
 - (void)analyze;
 - (void)synchronize;

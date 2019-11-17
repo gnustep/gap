@@ -9,6 +9,7 @@
 #import "Engine.h"
 #import "FileObject.h"
 #import "FileMap.h"
+#import "FileArray.h"
 
 #import <AppKit/NSProgressIndicator.h>
 
@@ -143,27 +144,27 @@
   return sourceMissingDirs;
 }
 
-- (NSMutableArray *)targetMissingFiles
+- (FileArray *)targetMissingFiles
 {
   return targetMissingFiles;
 }
 
-- (NSMutableArray *)sourceMissingFiles
+- (FileArray *)sourceMissingFiles
 {
   return sourceMissingFiles;
 }
 
-- (NSMutableArray *)sourceModFiles
+- (FileArray *)sourceModFiles
 {
   return sourceModFiles;
 }
 
-- (NSMutableArray *)targetModFiles
+- (FileArray *)targetModFiles
 {
   return targetModFiles;
 }
 
-- (NSMutableArray *)sizeDiffFiles
+- (FileArray *)sizeDiffFiles
 {
   return sizeDiffFiles;
 }
@@ -228,11 +229,11 @@
 
   targetMissingDirs = [NSMutableArray new];
   sourceMissingDirs = [NSMutableArray new];
-  targetMissingFiles = [NSMutableArray new];
-  sourceMissingFiles = [NSMutableArray new];
-  targetModFiles = [NSMutableArray new];
-  sourceModFiles = [NSMutableArray new];
-  sizeDiffFiles = [NSMutableArray new];
+  targetMissingFiles = [FileArray new];
+  sourceMissingFiles = [FileArray new];
+  targetModFiles = [FileArray new];
+  sourceModFiles = [FileArray new];
+  sizeDiffFiles = [FileArray new];
 
   /* compare source against target directories */
   en = [sourceDirArray objectEnumerator];

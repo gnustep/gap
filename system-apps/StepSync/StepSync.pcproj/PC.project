@@ -15,7 +15,8 @@
 	"AppController.m",
 	"FileMap.m",
 	"FileObject.m",
-	"Engine.m"
+	"Engine.m",
+	"FileArray.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -28,7 +29,8 @@
 	"AppController.h",
 	"FileMap.h",
 	"FileObject.h",
-	"Engine.h"
+	"Engine.h",
+	"FileArray.h"
     );
     IMAGES = (
     );

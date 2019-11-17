@@ -42,7 +42,8 @@ StepSync_HEADER_FILES = \
 AppController.h \
 FileMap.h \
 FileObject.h \
-Engine.h
+Engine.h \
+FileArray.h
 
 #
 # Objective-C Class files
@@ -51,7 +52,8 @@ StepSync_OBJC_FILES = \
 AppController.m \
 FileMap.m \
 FileObject.m \
-Engine.m
+Engine.m \
+FileArray.m
 
 #
 # Other sources

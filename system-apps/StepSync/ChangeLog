@@ -1,3 +1,12 @@
+2019-11-17 Riccardo Mottola <rm@gnu.org>
+
+	* FileArray.h
+	* FileArray.m
+	* Engine.h
+	* Engine.m
+	* AppController.m
+	Create a custom array for files and use it to calculate and report total storage size of Arrays containing files.
+
 2019-03-28 Riccardo Mottola <rm@gnu.org>
 
         * AppController.m

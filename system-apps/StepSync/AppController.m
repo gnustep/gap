@@ -26,6 +26,7 @@
 #import "AppController.h"
 #import "FileMap.h"
 #import "FileObject.h"
+#import "FileArray.h"
 #import "Engine.h"
 
 @implementation AppController
@@ -309,10 +310,21 @@
   [attrStr release];
   [tempStr release];
 
-  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine targetMissingFiles] count]];
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine targetMissingFiles] count]];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
+  [attrStrMut appendAttributedString:attrStr];
   
+  if (nil != [engine targetMissingFiles])
+    {
+      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine targetMissingFiles] sizeStr]];
+      attrStr = [[NSAttributedString alloc] initWithString: tempStr
+						attributes: textAttributes];
+      [attrStrMut appendAttributedString:attrStr];
+    }
+
+  attrStr = [[NSAttributedString alloc] initWithString: @"\n"
+                                            attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   
@@ -372,10 +384,20 @@
   [attrStr release];
   [tempStr release];
   
-  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine sourceMissingFiles] count]];
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine sourceMissingFiles] count]];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
-  
+  [attrStrMut appendAttributedString:attrStr];
+
+  if (nil != [engine sourceModFiles])
+    {
+      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine sourceMissingFiles] sizeStr]];
+      attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+      [attrStrMut appendAttributedString:attrStr];
+    }
+  attrStr = [[NSAttributedString alloc] initWithString: @"\n"
+                                            attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
   
@@ -407,10 +429,21 @@
   [attrStr release];
   [tempStr release];
   
-  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine sourceModFiles]  count]];
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine sourceModFiles]  count]];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
-  
+  [attrStrMut appendAttributedString:attrStr];
+
+  if (nil != [engine sourceModFiles])
+    {
+      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine sourceModFiles] sizeStr]];
+      attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+      [attrStrMut appendAttributedString:attrStr];
+    }
+  attrStr = [[NSAttributedString alloc] initWithString: @"\n"
+                                            attributes: textAttributes];
+
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
    
@@ -442,10 +475,22 @@
   [attrStr release];
   [tempStr release];
   
-  tempStr = [NSString stringWithFormat:@"Count: %lu\n\n", (unsigned long)[[engine sizeDiffFiles]  count]];
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine sizeDiffFiles]  count]];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+
+  if (nil != [engine sizeDiffFiles])
+    {
+      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine sizeDiffFiles] sizeStr]];
+      attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+      [attrStrMut appendAttributedString:attrStr];
+    }
   
+  attrStr = [[NSAttributedString alloc] initWithString: @"\n"
+					    attributes: textAttributes];
+
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
 
