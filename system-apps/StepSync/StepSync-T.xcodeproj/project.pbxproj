@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		852AA23E2383484A001AF639 /* FileArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 852AA23D2383484A001AF639 /* FileArray.m */; };
 		85698F751E43B8770016BB7B /* AppController.h in Resources */ = {isa = PBXBuildFile; fileRef = 85698F731E43B8770016BB7B /* AppController.h */; };
 		85698F761E43B8770016BB7B /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85698F741E43B8770016BB7B /* AppController.m */; };
 		85698FA71E43F35A0016BB7B /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97319FDCFA39411CA2CEA /* MainMenu.nib */; };
@@ -27,6 +28,8 @@
 		29B97319FDCFA39411CA2CEA /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		852AA23C2383484A001AF639 /* FileArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileArray.h; sourceTree = "<group>"; };
+		852AA23D2383484A001AF639 /* FileArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileArray.m; sourceTree = "<group>"; };
 		85698F731E43B8770016BB7B /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		85698F741E43B8770016BB7B /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		8581A7B71E5269090093B241 /* FileMap.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileMap.h; sourceTree = "<group>"; };
@@ -60,6 +63,8 @@
 				8581A7B81E5269090093B241 /* FileMap.m */,
 				8581A7B91E5269090093B241 /* FileObject.h */,
 				8581A7BA1E5269090093B241 /* FileObject.m */,
+				852AA23C2383484A001AF639 /* FileArray.h */,
+				852AA23D2383484A001AF639 /* FileArray.m */,
 				85698F731E43B8770016BB7B /* AppController.h */,
 				85698F741E43B8770016BB7B /* AppController.m */,
 			);
@@ -193,6 +198,7 @@
 				8581A7BC1E5269090093B241 /* FileMap.m in Sources */,
 				8581A7BE1E5269090093B241 /* FileObject.m in Sources */,
 				85D110E42190D25D003E6307 /* Engine.m in Sources */,
+				852AA23E2383484A001AF639 /* FileArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
