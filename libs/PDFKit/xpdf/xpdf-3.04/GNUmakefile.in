@@ -50,7 +50,7 @@ endif
 
 export CFLAGS CXXFLAGS
 
-defaut: all
+default: all
 
 all: compile
 
