@@ -1,5 +1,5 @@
 AC_PREREQ(2.52)
-AC_INIT(PDFKit, 1.0.1)
+AC_INIT(PDFKit, 1.2.0)
 
 if test -z "$GNUSTEP_MAKEFILES"; then
   AC_MSG_ERROR([You must run the GNUstep initialization script first!])
@@ -32,7 +32,7 @@ AC_PROG_CC
 AC_PROG_CXX
 
 
-AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-3.04/GNUmakefile])
+AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.01.01/GNUmakefile])
 
 AC_OUTPUT
 
