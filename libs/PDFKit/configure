@@ -2999,7 +2999,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-ac_config_files="$ac_config_files GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-3.04/GNUmakefile"
+ac_config_files="$ac_config_files GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.01.01/GNUmakefile"
 
 
 cat >confcache <<\_ACEOF

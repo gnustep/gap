@@ -1,3 +1,20 @@
+2019-12-07  Riccardo Mottola <rm@gnu.org>
+
+	* configure
+	* xpdf-src
+	* xpdf/xpdf-4.01.01
+	Import and switch to xpdf-4 sources
+
+2019-11-20  Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.in
+	add -lobjc for clang, requested by Johannes
+
+2019-11-03  Riccardo Mottola <rm@gnu.org>
+
+	* GNUmakefile.in
+	update freetype search to use pkg-config
+
 2017-04-09  Riccardo Mottola <rm@gnu.org>
 
 	* configure
