@@ -15,6 +15,7 @@
 		8581A7BC1E5269090093B241 /* FileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8581A7B81E5269090093B241 /* FileMap.m */; };
 		8581A7BD1E5269090093B241 /* FileObject.h in Resources */ = {isa = PBXBuildFile; fileRef = 8581A7B91E5269090093B241 /* FileObject.h */; };
 		8581A7BE1E5269090093B241 /* FileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8581A7BA1E5269090093B241 /* FileObject.m */; };
+		85F44EFC239D8F6400315A56 /* FileArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F44EFB239D8F6400315A56 /* FileArray.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -35,6 +36,8 @@
 		8581A7B81E5269090093B241 /* FileMap.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FileMap.m; sourceTree = "<group>"; };
 		8581A7B91E5269090093B241 /* FileObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileObject.h; sourceTree = "<group>"; };
 		8581A7BA1E5269090093B241 /* FileObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FileObject.m; sourceTree = "<group>"; };
+		85F44EFA239D8F6400315A56 /* FileArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileArray.h; sourceTree = "<group>"; };
+		85F44EFB239D8F6400315A56 /* FileArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileArray.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* StepSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,6 +59,8 @@
 			children = (
 				8520CE61218A6E9800E298C2 /* Engine.h */,
 				8520CE62218A6E9800E298C2 /* Engine.m */,
+				85F44EFA239D8F6400315A56 /* FileArray.h */,
+				85F44EFB239D8F6400315A56 /* FileArray.m */,
 				8581A7B71E5269090093B241 /* FileMap.h */,
 				8581A7B81E5269090093B241 /* FileMap.m */,
 				8581A7B91E5269090093B241 /* FileObject.h */,
@@ -200,6 +205,7 @@
 				8581A7BC1E5269090093B241 /* FileMap.m in Sources */,
 				8581A7BE1E5269090093B241 /* FileObject.m in Sources */,
 				8520CE63218A6E9800E298C2 /* Engine.m in Sources */,
+				85F44EFC239D8F6400315A56 /* FileArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

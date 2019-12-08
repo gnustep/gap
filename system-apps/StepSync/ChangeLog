@@ -1,3 +1,10 @@
+2019-12-08 Riccardo Mottola <rm@gnu.org>
+
+	* Engine.h
+	* Engine.m
+	* AppController.m
+	Check for files which do no have same size but different modification dates. Do not Sync them yet.
+
 2019-11-17 Riccardo Mottola <rm@gnu.org>
 
 	* FileArray.m

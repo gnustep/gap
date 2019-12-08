@@ -1,6 +1,6 @@
 //
 //  Engine.h
-//  StepSync-SL
+//  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
 //  Copyright 2018-2019 GNUstep. All rights reserved.
@@ -26,7 +26,8 @@
   FileArray *sourceMissingFiles;
   FileArray *sourceModFiles;
   FileArray *targetModFiles;
-  FileArray *sizeDiffFiles;
+  FileArray *dateDiffFiles; // files with same size but different mod date
+  FileArray *sizeDiffFiles; // files with same mod date but different size
 
   BOOL handleDirectories;
   BOOL updateSource;
@@ -71,6 +72,7 @@
 - (FileArray *)sourceModFiles;
 - (FileArray *)targetModFiles;
 - (FileArray *)sizeDiffFiles;
+- (FileArray *)dateDiffFiles;
 
 - (void)analyze;
 - (void)synchronize;

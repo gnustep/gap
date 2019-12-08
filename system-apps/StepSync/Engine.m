@@ -1,6 +1,6 @@
 //
 //  Engine.m
-//  StepSync-SL
+//  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
 //  Copyright 2018-2019 GNUstep. All rights reserved.
@@ -27,6 +27,7 @@
       sourceModFiles = nil;
       targetModFiles = nil;
       sizeDiffFiles = nil;
+      dateDiffFiles = nil;
       handleDirectories = NO;
       updateSource = NO;
       insertItems = NO;
@@ -49,6 +50,7 @@
   [sourceModFiles release];
   [targetModFiles release];
   [sizeDiffFiles release];
+  [dateDiffFiles release];
   [super dealloc];
 }
 
@@ -169,6 +171,10 @@
   return sizeDiffFiles;
 }
 
+- (FileArray *)dateDiffFiles
+{
+  return dateDiffFiles;
+}
 
 - (FileMap *)sourceMap
 {
@@ -234,6 +240,7 @@
   targetModFiles = [FileArray new];
   sourceModFiles = [FileArray new];
   sizeDiffFiles = [FileArray new];
+  dateDiffFiles = [FileArray new];
 
   /* compare source against target directories */
   en = [sourceDirArray objectEnumerator];
@@ -268,12 +275,21 @@
 	  NSComparisonResult cr;
 
 	  cr = [[fileObj modifiedDate] compare:[fileObj2 modifiedDate]];
-	  if (cr == NSOrderedDescending)
-	    [sourceModFiles addObject:fileObj];
-	  else if (cr == NSOrderedAscending)
-	    [targetModFiles addObject:fileObj];
-	  else if ([fileObj size] != [fileObj2 size])
-	    [sizeDiffFiles addObject:fileObj];
+          if ([fileObj size] != [fileObj2 size])
+            {
+    	      if (cr == NSOrderedDescending)
+                [sourceModFiles addObject:fileObj];
+              else if (cr == NSOrderedAscending)
+                [targetModFiles addObject:fileObj];
+              else
+                [sizeDiffFiles addObject:fileObj];
+            }
+	  else // same size
+            {
+              if (cr == NSOrderedSame)
+                [dateDiffFiles addObject:fileObj];
+              // else we suppose the file are really identical (or we check MD5 or such)
+            }
 	}
       else
 	{
@@ -301,6 +317,7 @@
   NSLog(@"target modified: %@", targetModFiles);
   NSLog(@"source modified: %@", sourceModFiles);
   NSLog(@"size differing files with same date: %@", sizeDiffFiles);
+  NSLog(@"date differing files with same size: %@", dateDiffFiles);
 
   analyzed = YES;
   [progressIndicator stopAnimation:nil];

@@ -451,6 +451,52 @@
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
 
+  /* -- Files different in date between Source and Target -- */
+  [attrStrMut appendAttributedString:sepAttrStr];
+  
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Files which differ in modification date between Source and Target but have size:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
+  for (i = 0; i < [[engine dateDiffFiles] count]; i++)
+    {
+      [tempStr appendString:[[[engine dateDiffFiles] objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine dateDiffFiles]  count]];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+
+  if (nil != [engine sizeDiffFiles])
+    {
+      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine dateDiffFiles] sizeStr]];
+      attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+      [attrStrMut appendAttributedString:attrStr];
+    }
+  
+  attrStr = [[NSAttributedString alloc] initWithString: @"\n"
+					    attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+
    
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
