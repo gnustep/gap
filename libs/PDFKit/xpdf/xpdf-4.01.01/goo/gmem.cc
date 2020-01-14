@@ -6,12 +6,13 @@
  * Copyright 1996-2003 Glyph & Cog, LLC
  */
 
+// older compilers won't define SIZE_MAX in stdint.h without this
+#define __STDC_LIMIT_MACROS
+
 #include <aconf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
-// older compilers won't define SIZE_MAX in stdint.h without this
-#define __STDC_LIMIT_MACROS 1
 #include <stdint.h>
 #include <string.h>
 #include <limits.h>
