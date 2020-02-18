@@ -18,19 +18,15 @@ PACKAGE_NAME = GAPUSER
 
 SUBPROJECTS = \
 AClock \
-DataBasin \
 FTP \
 Games \
 Graphos \
-Grr  \
-GSPdf \
 InnerSpace \
 LaternaMagica \
 PictureFrame \
 RemoteDesk \
-Stepulator-osx \
-TalkSoup \
-Vespucci
+Stepulator-osx 
+
 #
 # Makefiles
 #

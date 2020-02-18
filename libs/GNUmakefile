@@ -17,10 +17,8 @@ VERSION = 0.1
 PACKAGE_NAME = GAPLIBS
 
 SUBPROJECTS = \
-PDFKit \
-RSSKit \
-DataBasinKit \
-netclasses \
+#  PDFKit \
+#  netclasses \
 timeui
 
 #
