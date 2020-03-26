@@ -2,7 +2,7 @@
  Project: Vespucci
  VEAppController.m
 
- Copyright (C) 2007-2017 Riccardo Mottola
+ Copyright (C) 2007-2020 Riccardo Mottola
 
  Author: Ing. Riccardo Mottola
 
@@ -200,7 +200,8 @@
 
     str = [defaults objectForKey:@"Homepage"];
     if (str)
-      [homePageField setStringValue: str];
+	  str = @"";
+    [homePageField setStringValue: str];
 
     [prefPanel makeKeyAndOrderFront:self];
     [webPrefs release];
@@ -261,12 +262,11 @@
 
   [fontMgr setSelectedFont: [fontField font]  isMultiple:NO];
   [fontMgr setDelegate:self];
-  [fontMgr setAction:@selector(changeFontAction:)];
   [prefPanel endEditingFor:nil]; /* Mac needs this */
   [fontMgr orderFrontFontPanel: self];
 }
 
-- (void) changeFontAction:(id)sender
+- (void) changeFont:(id)sender
 {
   NSTextField *fontField;
   NSFont *newFont;
