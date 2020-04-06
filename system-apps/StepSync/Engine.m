@@ -3,7 +3,7 @@
 //  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018-2019 GNUstep. All rights reserved.
+//  Copyright 2018-2020 GNUstep. All rights reserved.
 //
 
 #import "Engine.h"
@@ -286,7 +286,7 @@
             }
 	  else // same size
             {
-              if (cr == NSOrderedSame)
+              if (cr != NSOrderedSame)
                 [dateDiffFiles addObject:fileObj];
               // else we suppose the file are really identical (or we check MD5 or such)
             }
