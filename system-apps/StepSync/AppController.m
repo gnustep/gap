@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.m
  
- Copyright (C) 2017-2019 Free Software Foundation
+ Copyright (C) 2017-2020 Free Software Foundation
  
  Author: Riccardo Mottola
  
@@ -44,11 +44,10 @@
 
   defaults = [NSUserDefaults standardUserDefaults];
 
-  NSLog(@"app finish launching, %@", defaults);
-
   [engine setSkipHiddenFolders:[defaults boolForKey:@"SKIP_HIDDEN_FOLDERS"]];
   [engine setSkipHiddenFiles: [defaults boolForKey:@"SKIP_HIDDEN_FILES"]];
   [engine setSkipThumbFiles: [defaults boolForKey:@"SKIP_THUBMNAIL_FILES"]];
+  [engine setForceUpdateIfOnlyDateDiffers: [defaults boolForKey:@"FORCE_UPDATE_SAMESIZE_DIFFDATES"]];
 }
 
 - (void)awakeFromNib
@@ -82,7 +81,12 @@
     [skipThumbFilesCheck setState:NSOnState];
   else
     [skipThumbFilesCheck setState:NSOffState];
-  
+
+  if ([engine forceUpdateIfOnlyDateDiffers])
+    [forceUpdateIfOnlyDateDiffersCheck setState:NSOnState];
+  else
+    [forceUpdateIfOnlyDateDiffersCheck setState:NSOffState];
+
   [prefPanel makeKeyAndOrderFront:sender];
 }
 
@@ -100,7 +104,10 @@
 
   [engine setSkipThumbFiles: [skipThumbFilesCheck state]];
   [defaults setBool:[engine skipThumbFiles] forKey:@"SKIP_THUBMNAIL_FILES"];
-  
+
+  [engine setForceUpdateIfOnlyDateDiffers: [forceUpdateIfOnlyDateDiffersCheck state]];
+  [defaults setBool:[engine forceUpdateIfOnlyDateDiffers] forKey:@"FORCE_UPDATE_SAMESIZE_DIFFDATES"];
+
   [prefPanel close];
 }
 

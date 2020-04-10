@@ -36,6 +36,7 @@
       skipHiddenFolders = YES;
       skipHiddenFiles = YES;
       skipThumbFiles = YES;
+      forceUpdateIfOnlyDateDiffers = NO;
     }
   return self;
 }
@@ -118,6 +119,16 @@
 - (void)setSkipThumbFiles:(BOOL)flag
 {
   skipThumbFiles = flag;
+}
+
+- (BOOL)forceUpdateIfOnlyDateDiffers
+{
+  return forceUpdateIfOnlyDateDiffers;
+}
+
+- (void)setForceUpdateIfOnlyDateDiffers:(BOOL)flag
+{
+  forceUpdateIfOnlyDateDiffers = flag;
 }
 
 - (void)setSourceRoot: (NSString *)path
@@ -339,6 +350,9 @@
 
   stopTask = NO;
   [progressIndicator setIndeterminate:NO];
+    
+  if (forceUpdateIfOnlyDateDiffers)
+    [sourceModFiles addObjectsFromArray:dateDiffFiles];
   
   totalItems = 0;
   if (updateSource || deleteItems)

@@ -3,7 +3,7 @@
 //  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018-2019 GNUstep. All rights reserved.
+//  Copyright 2018-2020 GNUstep. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -37,6 +37,7 @@
   BOOL skipHiddenFolders;
   BOOL skipHiddenFiles;
   BOOL skipThumbFiles;
+  BOOL forceUpdateIfOnlyDateDiffers;
   NSString *sourceRoot;
   NSString *targetRoot;
 }
@@ -55,6 +56,8 @@
 - (void)setSkipHiddenFiles:(BOOL)flag;
 - (BOOL)skipThumbFiles;
 - (void)setSkipThumbFiles:(BOOL)flag;
+- (BOOL)forceUpdateIfOnlyDateDiffers;
+- (void)setForceUpdateIfOnlyDateDiffers:(BOOL)flag;
 
 - (void)setSourceRoot: (NSString *)path;
 - (void)setTargetRoot: (NSString *)path;
