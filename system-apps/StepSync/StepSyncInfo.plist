@@ -1,14 +1,14 @@
 {
     ApplicationDescription = "File Synchronizer";
     ApplicationName = StepSync;
-    ApplicationRelease = "1.0";
+    ApplicationRelease = "1.1";
     Authors = (
 	"Riccardo Mottola"
     );
     CFBundleIdentifier = "org.gap.StepSync";
-    Copyright = "Copyright (C) 2017-2018";
+    Copyright = "Copyright (C) 2017-2020";
     CopyrightDescription = "Released under GPL v2+";
-    FullVersionID = "1.0";
+    FullVersionID = "1.1";
     NSExecutable = StepSync;
     NSMainNibFile = "MainMenu.gorm";
     NSPrincipalClass = NSApplication;

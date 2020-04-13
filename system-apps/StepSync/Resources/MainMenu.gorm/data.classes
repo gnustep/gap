@@ -32,7 +32,8 @@
 	    prefPanel,
 	    skipHiddenFoldersCheck,
 	    skipHiddenFilesCheck,
-	    skipThumbFilesCheck
+	    skipThumbFilesCheck,
+	    forceUpdateIfOnlyDateDiffersCheck
 	);
 	Super = NSObject;
     };
