@@ -1,3 +1,8 @@
+2020-04-14 Riccardo Mottola <rm@gnu.org>
+
+	* AppController.m
+	Remember last analyzed  directories, fix enabling/disabling of buttons fter opreations.
+
 2020-04-11 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.h

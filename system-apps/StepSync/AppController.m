@@ -41,6 +41,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
   NSUserDefaults *defaults;
+  NSString *str;
 
   defaults = [NSUserDefaults standardUserDefaults];
 
@@ -48,6 +49,13 @@
   [engine setSkipHiddenFiles: [defaults boolForKey:@"SKIP_HIDDEN_FILES"]];
   [engine setSkipThumbFiles: [defaults boolForKey:@"SKIP_THUBMNAIL_FILES"]];
   [engine setForceUpdateIfOnlyDateDiffers: [defaults boolForKey:@"FORCE_UPDATE_SAMESIZE_DIFFDATES"]];
+  
+  str = [defaults stringForKey:@"LAST_ANALYZED_SOURCE_PATH"];
+  if (str)
+    [sourcePathField setStringValue: str];
+  str = [defaults stringForKey:@"LAST_ANALYZED_TARGET_PATH"];
+  if (str)
+    [targetPathField setStringValue: str];
 }
 
 - (void)awakeFromNib
@@ -154,14 +162,20 @@
 - (void)performAnalyze:(id)sender
 {
   NSAutoreleasePool *arp;
+  NSUserDefaults *defaults;
+  
+  defaults = [NSUserDefaults standardUserDefaults];
   
   arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
 
   [stopButton setEnabled:YES];
   [analyzeButton setEnabled:NO];
-  
+  [syncButton setEnabled:NO];
+
   [engine setSourceRoot: [sourcePathField stringValue]];
   [engine setTargetRoot: [targetPathField stringValue]];
+  [defaults setObject: [sourcePathField stringValue] forKey: @"LAST_ANALYZED_SOURCE_PATH"];
+  [defaults setObject: [targetPathField stringValue] forKey: @"LAST_ANALYZED_TARGET_PATH"];
   [engine analyze];
   
   [sourceDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine sourceMap] directories] count]] description]];
@@ -175,6 +189,7 @@
   
   [stopButton setEnabled:NO];
   [analyzeButton setEnabled:YES];
+  [syncButton setEnabled:YES];
   [self reportAnalysis];
   
   [arp release];
@@ -529,13 +544,14 @@
   [engine setUpdateItems: [updateItemsCheck state] == NSOnState];
   [engine setDeleteItems: [deleteItemsCheck state] == NSOnState];
   
-  
+  [analyzeButton setEnabled:NO];
   [syncButton setEnabled:NO];
   [stopButton setEnabled:YES];
   
   [engine synchronize];
   
-  [syncButton setEnabled:YES];
+  [syncButton setEnabled:NO];
+  [analyzeButton setEnabled:YES];
   [stopButton setEnabled:NO];
   [arp release];
 }
