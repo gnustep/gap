@@ -13,6 +13,9 @@
 
 #import <AppKit/NSProgressIndicator.h>
 
+// seconds under which two dates expressed in seconds are considered equals
+// file systems have different granularity, so this is necessary
+#define TIME_EPSILON 1.9
 
 @implementation Engine
 
@@ -283,22 +286,25 @@
       fileObj2 = [targetFileDict objectForKey:relPath];
       if (fileObj2)
 	{
-	  NSComparisonResult cr;
+          NSTimeInterval tDiff;
 
-	  cr = [[fileObj modifiedDate] compare:[fileObj2 modifiedDate]];
+	  tDiff = [[fileObj modifiedDate] timeIntervalSinceDate:[fileObj2 modifiedDate]];
           if ([fileObj size] != [fileObj2 size])
             {
-    	      if (cr == NSOrderedDescending)
+    	      if (tDiff > TIME_EPSILON)
                 [sourceModFiles addObject:fileObj];
-              else if (cr == NSOrderedAscending)
+              else if (tDiff < TIME_EPSILON)
                 [targetModFiles addObject:fileObj];
               else
                 [sizeDiffFiles addObject:fileObj];
             }
 	  else // same size
             {
-              if (cr != NSOrderedSame)
-                [dateDiffFiles addObject:fileObj];
+              if (fabs(tDiff) > TIME_EPSILON)
+                {
+                  [dateDiffFiles addObject:fileObj];
+                  NSLog(@"%@: %@ %@", [fileObj relativePath], [fileObj modifiedDate], [fileObj2 modifiedDate]);
+                }
               // else we suppose the file are really identical (or we check MD5 or such)
             }
 	}

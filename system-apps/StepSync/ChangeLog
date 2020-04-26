@@ -1,3 +1,8 @@
+2020-04-26 Riccardo Mottola <rm@gnu.org>
+
+	* Engine.m
+	Compare dates using a time interval and allow a minimum epsilon for equality, to allow for different filesystem date precision.
+
 2020-04-14 Riccardo Mottola <rm@gnu.org>
 
 	* AppController.m
