@@ -460,15 +460,12 @@
 	{
 	  FileObject *fileObj;
 	  NSString *newAbsolutePath;
-	  NSDictionary *fAttr;
 
 	  fileObj = [targetMissingFiles objectAtIndex:i];
 
 	  /* TODO should recheck ? */
 	  newAbsolutePath = [[targetMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
 	  [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-	  fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
-	  [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
           [progressIndicator incrementBy:1.0];
 	}
     }
@@ -479,7 +476,6 @@
 	{
 	  FileObject *fileObj;
 	  NSString *newAbsolutePath;
-	  NSDictionary *fAttr;
 
 	  fileObj = [sourceModFiles objectAtIndex:i];
 
@@ -488,8 +484,6 @@
 	  if([fm removeFileAtPath:newAbsolutePath handler:nil])
 	    {
 	      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-	      fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
-	      [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
 	    }
           [progressIndicator incrementBy:1.0];
 	}
@@ -520,15 +514,12 @@
             {
               FileObject *fileObj;
               NSString *newAbsolutePath;
-              NSDictionary *fAttr;
 
               fileObj = [sourceMissingFiles objectAtIndex:i];
 
               /* TODO should recheck ? */
               newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
               [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-              fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
-              [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
               [progressIndicator incrementBy:1.0];
             }
         }
@@ -536,7 +527,6 @@
 	{
 	  FileObject *fileObj;
 	  NSString *newAbsolutePath;
-	  NSDictionary *fAttr;
 
 	  fileObj = [targetModFiles objectAtIndex:i];
 
@@ -545,8 +535,6 @@
 	  if([fm removeFileAtPath:newAbsolutePath handler:nil])
 	    {
 	      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-	      fAttr = [fm fileAttributesAtPath:[fileObj absolutePath] traverseLink:NO];
-	      [fm changeFileAttributes:fAttr atPath:newAbsolutePath];
 	    }
 	  [progressIndicator incrementBy:1.0];
 	}
