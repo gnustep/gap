@@ -30,6 +30,7 @@ Themes_INSTALL_DIR = $(GNUSTEP_LIBRARY)/Themes
 Themes_RESOURCE_FILES = Neos.theme \
 ThinkDark.theme \
 Sleek.theme \
+Sonne.theme \
 Tango.theme \
 WinClassic.theme \
 Heritage.theme \
