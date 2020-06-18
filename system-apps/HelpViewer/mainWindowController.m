@@ -17,6 +17,12 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#ifdef GNUSTEP
+#import <GNUstepBase/GNUstep.h>
+#else
+#include "GNUstep.h"
+#endif
+
 #include "mainWindowController.h"
 
 @implementation MainWindowController

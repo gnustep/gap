@@ -1,3 +1,10 @@
+2020-06-18 Riccardo Mottola <rm@gnu.org>
+
+	* HandlerStructureXLP.h
+	* TextFormatterXLP.h
+	* mainWindowController.m
+	Update/Fix import of headers.
+
 * 05/04/2003 : release 0.3
 	- major redesign of the code (it's now possible to add quite simply others
     	  parser)
