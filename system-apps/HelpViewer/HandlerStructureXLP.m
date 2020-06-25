@@ -108,7 +108,6 @@
 		id str = [[NSMutableAttributedString alloc] initWithString: tag];
 
 		[tag release];
-		int i;
 		
 		NSEnumerator *enumerator = [elementAttributes keyEnumerator];
 		id key;

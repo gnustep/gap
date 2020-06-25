@@ -107,7 +107,6 @@
 
 - (BOOL) loadFile: (NSString*) fileName 
 {
-    NSAttributedString* string;
     BOOL ret = NO;
 
     ASSIGN (handler, [HandlerStructureXLP new]);

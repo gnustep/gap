@@ -40,12 +40,6 @@
 }
 
 - (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes {
-    NSString* name = nil;
-    if ([elementAttributes objectForKey: @"name"] != nil)
-    {
-	name = [NSString stringWithString: [elementAttributes objectForKey: @"name"]];
-    }
-
     if (_pre)
     {
     	// verbatim mode
@@ -53,7 +47,6 @@
 	id str = [[NSMutableAttributedString alloc] initWithString: tag];
 
 	[tag release];
-	int i;
 	
 	NSEnumerator *enumerator = [elementAttributes keyEnumerator];
 	id key;
@@ -326,7 +319,6 @@
 - (void) characters: (NSString*) name {
     NSMutableDictionary* attr = [NSMutableDictionary dictionaryWithCapacity: 2];
     NSFont* font = nil;
-    NSMutableString* value;
     NSFontTraitMask FontMask = 0;
     int FontSize = 12;
 

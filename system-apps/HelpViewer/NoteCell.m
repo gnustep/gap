@@ -120,11 +120,8 @@
 
 	NSPoint p1 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + radius);
 	NSPoint p2 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + cellFrame.size.height - radius);
-	NSPoint p3 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y + cellFrame.size.height);
 	NSPoint p4 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + cellFrame.size.height);
-	NSPoint p5 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width, cellFrame.origin.y + cellFrame.size.height - radius);
 	NSPoint p6 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width, cellFrame.origin.y + radius);
-	NSPoint p7 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y);
 	NSPoint p8 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y);
 
 	NSPoint pr1 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y + cellFrame.size.height - radius);
@@ -134,17 +131,11 @@
 
 	[path moveToPoint: p1];
 	[path lineToPoint: p2];
-	//[path appendBezierPathWithArcFromPoint: p2 toPoint: p3 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr1 radius: radius startAngle: 180 endAngle: 90 clockwise: YES];
-	//[path moveToPoint: p3];
 	[path lineToPoint: p4];
-	//[path appendBezierPathWithArcFromPoint: p4 toPoint: p5 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr2 radius: radius startAngle: 90 endAngle: 0 clockwise: YES];
-	//[path moveToPoint: p5];
 	[path lineToPoint: p6];
-	//[path appendBezierPathWithArcFromPoint: p6 toPoint: p7 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr3 radius: radius startAngle: 0 endAngle: 270 clockwise: YES];
-	//[path moveToPoint: p7];
 	[path lineToPoint: p8];
 	//[path appendBezierPathWithArcFromPoint: p8 toPoint: p1 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
@@ -153,19 +144,15 @@
 
 	if (_note)
 	{
-		  
-	      int i;
-	      CGFloat interspace = 20.0;
 	      CGFloat imageWidth = [_image size].width;
 	      CGFloat imageHeight = [_image size].height;   
-	      CGFloat spaceMargin = 20.0;
 	      CGFloat border = 12.0;
 	      //NSLog (@"cellFrame.size.width : %.2f", cellFrame.size.width);
-	      CGFloat Margin = (cellFrame.size.width - imageWidth- border);
+	      CGFloat margin = (cellFrame.size.width - imageWidth- border);
 	
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
-	      [paragraph setTailIndent: Margin];
+	      [paragraph setTailIndent: margin];
 	      
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];

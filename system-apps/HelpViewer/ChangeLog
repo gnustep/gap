@@ -1,3 +1,11 @@
+2020-06-25 Riccardo Mottola <rm@gnu.org>
+	* FigureCell.m
+	* HandlerStructureXLP.m
+	* NoteCell.m
+	* TextFormatterXLP.m
+	* mainWindowController.m
+	Remove unused variables and code.
+
 2020-06-25 Riccardo Mottola <rm@gnu.org> adapted from Yavor Doganov.
 	* NoteCell.m
 	Be careful accessing ivars after proper initialization and fix crasher.

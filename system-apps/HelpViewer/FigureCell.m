@@ -62,7 +62,6 @@
     if (_legends)
     {
 	      int i;
-	      CGFloat interspace = 20;
 	      CGFloat spaceMargin = 20;
 	      CGFloat border = 12;
 	      CGFloat Margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
@@ -169,11 +168,8 @@
 
 	NSPoint p1 = NSMakePoint (r.origin.x, r.origin.y + radius);
 	NSPoint p2 = NSMakePoint (r.origin.x, r.origin.y + r.size.height - radius);
-	NSPoint p3 = NSMakePoint (r.origin.x + radius, r.origin.y + r.size.height);
 	NSPoint p4 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + r.size.height);
-	NSPoint p5 = NSMakePoint (r.origin.x + r.size.width, r.origin.y + r.size.height - radius);
 	NSPoint p6 = NSMakePoint (r.origin.x + r.size.width, r.origin.y + radius);
-	NSPoint p7 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y);
 	NSPoint p8 = NSMakePoint (r.origin.x + radius, r.origin.y);
 
 	NSPoint pr1 = NSMakePoint (r.origin.x + radius, r.origin.y + r.size.height - radius);
@@ -183,17 +179,11 @@
 
 	[path moveToPoint: p1];
 	[path lineToPoint: p2];
-	//[path appendBezierPathWithArcFromPoint: p2 toPoint: p3 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr1 radius: radius startAngle: 180 endAngle: 90 clockwise: YES];
-	//[path moveToPoint: p3];
 	[path lineToPoint: p4];
-	//[path appendBezierPathWithArcFromPoint: p4 toPoint: p5 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr2 radius: radius startAngle: 90 endAngle: 0 clockwise: YES];
-	//[path moveToPoint: p5];
 	[path lineToPoint: p6];
-	//[path appendBezierPathWithArcFromPoint: p6 toPoint: p7 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr3 radius: radius startAngle: 0 endAngle: 270 clockwise: YES];
-	//[path moveToPoint: p7];
 	[path lineToPoint: p8];
 	//[path appendBezierPathWithArcFromPoint: p8 toPoint: p1 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
