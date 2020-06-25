@@ -61,25 +61,32 @@
 
 - (void) resizeWithTextView: (NSTextView*) textView
 {
-    CGFloat height = [_image size].height;
-
-    CGFloat heighttext;
-    CGFloat imageWidth = [_image size].width;
-    CGFloat imageHeight = [_image size].height;   
+    CGFloat height = 0.0;
+    CGFloat heighttext = 0.0;
+    CGFloat imageWidth = 0.0;
     CGFloat border = 12.0;
-    CGFloat Margin = ([textView bounds].size.width - 16 - imageWidth- border);
+    CGFloat margin = 0.0;
+
+    if (_image)
+      {
+	imageWidth = [_image size].width;
+	height = [_image size].height;
+      }
+    margin = [textView bounds].size.width - 16 - imageWidth- border;
 
       NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
       [paragraph setAlignment: NSLeftTextAlignment];
-      [paragraph setTailIndent: Margin];
+      [paragraph setTailIndent: margin];
       
       NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 	    forKey: NSParagraphStyleAttributeName];
       [paragraph release];
 
-      [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
-
-      heighttext = [_note size].height;
+      if (_note)
+	{
+	  [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
+	  heighttext = [_note size].height;
+	}
 
     NSLog (@"heightext : %.2f height : %.2f", heighttext, height);
     if (heighttext > height) height = heighttext;
