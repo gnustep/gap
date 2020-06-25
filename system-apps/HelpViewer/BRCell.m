@@ -47,7 +47,7 @@ static BRCell *brCell;
 -(NSRect) cellFrameForTextContainer: (NSTextContainer *)c
     proposedLineFragment: (NSRect)lf
     glyphPosition: (NSPoint)p
-    characterIndex: (unsigned int)ci
+    characterIndex: (NSUInteger)ci
 {
     NSNumber *width,*height;
     CGFloat w,h;
