@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,16 +35,19 @@ static NSBundle* Bundle = nil;
 	[TextFormatter setBundle: Bundle];
 }
 
-- (id) initWithHeader: (NSString*) pheader {
-    self = [super init];
-    ASSIGN (header, pheader);
-    text = [[NSMutableAttributedString alloc] init];
-    subs = [[NSMutableArray alloc] init];
-    parent = nil;
-    rendered = NO;
-    loaded = NO;
-    path = nil;
-    return self;
+- (id) initWithHeader: (NSString*) pheader
+{
+  if ((self = [super init]))
+    {
+      ASSIGN (header, pheader);
+      text = [[NSMutableAttributedString alloc] init];
+      subs = [[NSMutableArray alloc] init];
+      parent = nil;
+      rendered = NO;
+      loaded = NO;
+      path = nil;
+    }
+  return self;
 }
 
 - (void) dealloc {

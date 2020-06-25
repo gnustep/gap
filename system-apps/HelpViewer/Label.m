@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,14 +22,16 @@
 
 @implementation Label
 
-- (id) init {
-    self = [super init];
-
-    range.location = 0;
-    range.length = 0;
-    part = nil; 
-    _ID = nil;
-    return self;
+- (id) init
+{
+  if ((self = [super init]))
+    {
+      range.location = 0;
+      range.length = 0;
+      part = nil; 
+      _ID = nil;
+    }
+  return self;
 }
 
 - (void) dealloc {

@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,8 +29,8 @@
 @implementation MainWindowController
 
 - (id) initWithTextView: (NSTextView*) _text andBrowserView:(NSBrowser*) browser {
-
-	self = [super init];
+  if ((self = [super init]))
+    {
 
 /*
 	theWindow = [[MainWindow alloc] initWithContentRect: NSMakeRect (100,100,600,600)
@@ -95,7 +96,9 @@
 	[TextFormatter release];
 
 	prevRow = 0;
-	return self;
+
+    }
+  return self;
 }
 
 - (void) print: (id) sender {

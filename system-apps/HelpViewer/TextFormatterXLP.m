@@ -24,16 +24,19 @@
 
 @implementation TextFormatterXLP
 
-- (id) init {
-	self = [super init];
-	_firstSection = [[Section alloc] initWithHeader: @"document"];
-	_listCounter = [[NSMutableArray alloc] init];
-	legends = nil;
-	_currentSection = _firstSection;
-	_document = NO;
-	Bundle = nil;
-	content = nil;
-	return self;
+- (id) init
+{
+  if ((self = [super init]))
+    {
+      _firstSection = [[Section alloc] initWithHeader: @"document"];
+      _listCounter = [[NSMutableArray alloc] init];
+      legends = nil;
+      _currentSection = _firstSection;
+      _document = NO;
+      Bundle = nil;
+      content = nil;
+    }
+  return self;
 }
 
 - (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes {

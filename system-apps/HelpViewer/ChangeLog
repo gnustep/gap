@@ -1,4 +1,18 @@
 2020-06-25 Riccardo Mottola <rm@gnu.org>
+       * FigureCell.m
+       * HandlerStructureXLP.m
+       * Label.m
+       * Legend.m
+       * NoteCell.m
+       * Page.m
+       * Section.m
+       * TextFormatterXLP.m
+       * ViewCell.m
+	* mainWindowController.m
+	Fix init methods to properly call super, check and assign self.
+
+
+2020-06-25 Riccardo Mottola <rm@gnu.org>
 
 	* BRCell.m
 	* FigureCell.m

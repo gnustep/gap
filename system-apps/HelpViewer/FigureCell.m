@@ -3,7 +3,6 @@
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
                   2020 Riccardo Mottola <rm@gnu.org>
 
-
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -25,11 +24,13 @@
 
 - (id) initWithSize: (NSSize) size 
 {
-    [super init];
-    _size = size;
-    _image = nil;
-    _legends = nil;
-    return self;    
+  if ((self = [super init]))
+    {
+      _size = size;
+      _image = nil;
+      _legends = nil;
+    }
+  return self;    
 }
 
 - (void) setLegends: (NSArray*) legends

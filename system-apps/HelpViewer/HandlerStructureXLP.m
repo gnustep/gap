@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,23 +24,29 @@
 
 @implementation HandlerStructureXLP
 
-- (id) init {
-	self = [super init];
-	_firstSection = [[Section alloc] initWithHeader: @"document"];
-	_currentSection = _firstSection;
-	_document = NO;
-	content = nil;
-	return self;
+- (id) init
+{
+  if ((self = [super init]))
+    {
+      _firstSection = [[Section alloc] initWithHeader: @"document"];
+      _currentSection = _firstSection;
+      _document = NO;
+      content = nil;
+    }
+  return self;
 }
 
-- (id) initWithSection: (Section*) section {
-	self = [super init];
-	ASSIGN (_firstSection, section);
-	_currentSection = _firstSection;
-	_currentContent = [section text];
-	_document = YES;
-	content = nil;
-	return self;
+- (id) initWithSection: (Section*) section
+{
+  if ((self = [super init]))
+    {
+      ASSIGN (_firstSection, section);
+      _currentSection = _firstSection;
+      _currentContent = [section text];
+      _document = YES;
+      content = nil;
+    }
+  return self;
 }
 
 - (void) dealloc {

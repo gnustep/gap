@@ -24,12 +24,14 @@
 
 - (id) initWithTextView: (NSTextView*) textview 
 {
-    [super init];
-    _image = nil;
-    _note = nil;
-    _color = nil;
-    [self resizeWithTextView: textview];
-    return self;    
+  if ((self = [super init]))
+    {
+      _image = nil;
+      _note = nil;
+      _color = nil;
+      [self resizeWithTextView: textview];
+    }
+  return self;    
 }
 
 - (void) setText: (NSMutableAttributedString*) text

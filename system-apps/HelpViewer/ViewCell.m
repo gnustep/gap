@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,10 +24,12 @@
 
 - (id) initWithSize: (NSSize) size 
 {
-    [super init];
-    _size = size;
-    _view = nil;
-    return self;    
+  if ((self = [super init]))
+    {
+      _size = size;
+      _view = nil;
+    }
+  return self;    
 }
 
 - (NSSize) cellSize 

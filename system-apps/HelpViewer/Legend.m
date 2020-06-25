@@ -30,13 +30,13 @@
 
 - (id) initWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p
 {
-    [super init];
-
-    ASSIGN (legend, str);
-    point = p;
-    rightPos = NO;
-
-    return self;
+  if ((self = [super init]))
+    {
+      ASSIGN (legend, str);
+      point = p;
+      rightPos = NO;
+    }
+  return self;
 }
 
 - (void) dealloc 
