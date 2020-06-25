@@ -17,9 +17,9 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include <Foundation/NSObject.h>
+#include <AppKit/AppKit.h>
 
 int main (int argc, const char **argv)
 {
-	return NSApplicationMain (argc, argv);
+  return NSApplicationMain (argc, argv);
 }

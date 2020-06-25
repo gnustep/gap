@@ -96,15 +96,7 @@
 	[ret appendAttributedString: current];
     }
 
-    /*
-    NSMutableAttributedString* ret = [[NSMutableAttributedString alloc] initWithString: @"Ceci est un test"];
-    AUTORELEASE (ret);
-    NSFont* font = [NSFont boldSystemFontOfSize: 80];
-    NSDictionary* att = [NSDictionary dictionaryWithObject: font forKey: @"NSFontAttributeName"];
-    [ret addAttributes: att range: NSMakeRange (0,10)];
-    */
-
-    NSLog (@"Page retournée : %@", ret);
+    NSLog (@"Page returned : %@", ret);
     
     return ret;	
 }

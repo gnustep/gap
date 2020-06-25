@@ -111,8 +111,6 @@
 
     ASSIGN (handler, [HandlerStructureXLP new]);
 
-    NSLog (@"filename : %@", fileName);
-    //[handler setPath: [fileName stringByDeletingLastPathComponent]];
     NSBundle* Bundle = [NSBundle bundleWithPath: fileName];
     [Section setBundle: Bundle];
     [handler setPath: [Bundle pathForResource: @"main" ofType: @"xlp"]];
@@ -441,7 +439,8 @@
 	//NSLog (@"fin de browser:willDisplayCell:atRow:%dcolumn:%d",row,column);
 }
 
-- (void) browserClick: (id) sender {
+- (void) browserClick: (id) sender
+{
 	Section* sub = [[sender selectedCell] section];
 	if (sub != nil)
 	{
@@ -478,12 +477,7 @@
 - (void) dealloc
 {
     NSLog (@"=== dealloc mainWindowController ===");
-    NSLog (@"dealloc handler");
     RELEASE ((NSObject*)handler);
-/*
-    NSLog (@"dealloc theWindow");
-    RELEASE (theWindow);
-*/
     RELEASE (resultTextView);
     RELEASE (resultOutlineView);
     [super dealloc];

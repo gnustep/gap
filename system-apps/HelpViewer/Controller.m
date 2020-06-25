@@ -30,7 +30,6 @@
 
 - (void) awakeFromNib
 {
-    NSLog (@"Controller réveillé !");
     windowController = [[MainWindowController alloc] initWithTextView: textview
 			    andBrowserView: tocview];
    
@@ -46,7 +45,6 @@
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *) not {
-    NSLog (@"Controller : applicationDidFinishLaunching !");
     NSArray *args = [[NSProcessInfo processInfo] arguments];
 
     if ([args count] > 1)
@@ -58,20 +56,18 @@
     }
 }
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
-    NSLog (@"Controller : application:openFile: !");
     return [windowController loadFile: filename];
 }
 
 - (void) dealloc 
 {
   RELEASE (windowController);
-  [super release];
+  [super dealloc];
 }
 
 - (void) openFile: (id) sender
 {
     NSInteger ret;
-    NSLog (@"openFile ...");
     NSOpenPanel* panel = [NSOpenPanel openPanel];
     [panel setAllowsMultipleSelection: NO];
     ret = [panel runModalForTypes: [NSArray arrayWithObject: @"help"]];

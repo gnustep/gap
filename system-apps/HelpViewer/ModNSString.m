@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,22 +21,22 @@
 #include "ModNSString.h"
 
 @implementation NSDecimalNumber (String)
-    - (NSString*) stringValue {
-	//NSLog (@"NSDecimalNumber stringValue");
-	//NSLog (@"==>%@", [NSString stringWithFormat: @"%d", (int) [self doubleValue]]);
-	return [NSString stringWithFormat: @"%d", (int)[self doubleValue]];
-    }
+- (NSString*) stringValue
+{
+  return [NSString stringWithFormat: @"%d", (int)[self doubleValue]];
+}
 @end
 
 @implementation NSString (Trim)
-+ (NSString*) trimString: (NSString*) str {
++ (NSString*) trimString: (NSString*) str
+{
     NSMutableString* ret = [[NSMutableString alloc] initWithString: @""];
     NSString* spaceChar = [NSString stringWithString: @" "];
     NSString* EOLChar = [NSString stringWithString: @"\n"];
     NSString* TabChar = [NSString stringWithString: @"\t"];
 
     BOOL space = YES;
-    int i;
+    NSUInteger i;
 
     for (i = 0; i < [str length]; i++)
     {
@@ -66,32 +67,5 @@
 
     //NSLog (@"trimmed string : <%@> ", ret);
     return AUTORELEASE(ret);
-
-    /*
-    NSArray* Items;
-    int i;
-
-    Items = [str componentsSeparatedByString: @"\n"];
-    for (i = 0; i < [Items count]; i++)
-    {
-	if ([[Items objectAtIndex: i] length] > 0)
-	{
-	    [ret1 appendString: [Items objectAtIndex: i]];
-	    if (i < [Items count] - 1) [ret1 appendString: @" "];
-	}
-    }
-    Items = [ret1 componentsSeparatedByString: @" "];
-    for (i = 0; i < [Items count]; i++)
-    {
-	if ([[Items objectAtIndex: i] length] > 0)
-	{
-	    [ret2 appendString: [Items objectAtIndex: i]];
-	    if (i < [Items count] - 1) [ret2 appendString: @" "];
-	}
-    }
-
-    return ret2;
-    //return str;
-    */
 }
 @end
