@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,13 +59,13 @@
 
 - (void) resizeWithTextView: (NSTextView*) textView
 {
-    float height = [_image size].height;
+    CGFloat height = [_image size].height;
 
-    float heighttext;
-      float imageWidth = [_image size].width;
-      float imageHeight = [_image size].height;   
-      float border = 12;
-      float Margin = ([textView bounds].size.width - 16 - imageWidth- border);
+    CGFloat heighttext;
+    CGFloat imageWidth = [_image size].width;
+    CGFloat imageHeight = [_image size].height;   
+    CGFloat border = 12.0;
+    CGFloat Margin = ([textView bounds].size.width - 16 - imageWidth- border);
 
       NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
       [paragraph setAlignment: NSLeftTextAlignment];
@@ -105,7 +106,7 @@
 
 	NSBezierPath* path = [[NSBezierPath alloc] init];
 
-	float radius = 8;
+	CGFloat radius = 8;
 
 	NSPoint p1 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + radius);
 	NSPoint p2 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + cellFrame.size.height - radius);
@@ -143,13 +144,13 @@
 	{
 		  
 	      int i;
-	      float interspace = 20;
-	      float imageWidth = [_image size].width;
-	      float imageHeight = [_image size].height;   
-	      float spaceMargin = 20;
-	      float border = 12;
+	      CGFloat interspace = 20.0;
+	      CGFloat imageWidth = [_image size].width;
+	      CGFloat imageHeight = [_image size].height;   
+	      CGFloat spaceMargin = 20.0;
+	      CGFloat border = 12.0;
 	      //NSLog (@"cellFrame.size.width : %.2f", cellFrame.size.width);
-	      float Margin = (cellFrame.size.width - imageWidth- border);
+	      CGFloat Margin = (cellFrame.size.width - imageWidth- border);
 	
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
@@ -161,7 +162,7 @@
 	      [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
 	      NSSize sizenote = [_note size];
 
-	      float posy = 0;
+	      CGFloat posy = 0;
 	      if (sizenote.height < cellFrame.size.height)
 	      {
 	      	posy = (cellFrame.size.height - sizenote.height) / 2;

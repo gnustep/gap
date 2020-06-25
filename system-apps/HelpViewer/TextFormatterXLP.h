@@ -71,7 +71,7 @@
 - (void) addImage: (NSImage*) img onString: (NSMutableAttributedString*) as;
 - (void) addLegendFig: (NSString*) imgpath withLegends: (NSArray*) plegends;
 - (void) addNote: (NSMutableAttributedString*) string withImage: (NSImage*) img withColor: (NSColor*) color;
-- (void) addRuleTo: (NSMutableAttributedString*) string withHeight: (int) height;
+- (void) addRuleTo: (NSMutableAttributedString*) string withHeight: (CGFloat) height;
 @end
 
 #endif

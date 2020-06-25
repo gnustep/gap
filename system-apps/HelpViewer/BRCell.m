@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,7 +50,7 @@ static BRCell *brCell;
     characterIndex: (unsigned int)ci
 {
     NSNumber *width,*height;
-    int w,h;
+    CGFloat w,h;
     
     width=[[[c layoutManager] textStorage] attribute: @"BRCellWidth"
 	atIndex: ci
@@ -59,13 +60,13 @@ static BRCell *brCell;
 	effectiveRange: NULL];
 
     if (width)
-        w=[width intValue];
+        w=[width floatValue];
     else
 	w=lf.size.width;
     if (height)
-        h=[height intValue];
+        h=[height floatValue];
     else
-	h=1;
+	h=1.0;
     return NSMakeRect(0,0,w,h);
 }
 

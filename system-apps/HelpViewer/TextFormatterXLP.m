@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -365,33 +366,33 @@
 
     [paragraphStyle setAlignment: NSLeftTextAlignment];
 
-    int FontSize = 12;
+    CGFloat fontSize = 12.0;
     int ruleHeight = 0;
 
     switch (level)
     {
 	case 0: 
-		FontSize = 24; 
+		fontSize = 24; 
 		FontMask = NSBoldFontMask | FontMask;
 		ruleHeight = 3;
 		break;
 	case 1: 
-		FontSize = 20; 
+		fontSize = 20; 
 		FontMask = NSBoldFontMask | FontMask;
 		ruleHeight = 1;
 		break;
 	case 2: 
-		FontSize = 16; 
+		fontSize = 16; 
 		FontMask = NSBoldFontMask | FontMask;
 		ruleHeight = 1;
 		break;
 	default:
-		FontSize = 12;
+		fontSize = 12;
 		FontMask = NSBoldFontMask | FontMask;
     }
 
     font = [[NSFontManager sharedFontManager]
-                convertFont: [NSFont userFontOfSize: FontSize]
+                convertFont: [NSFont userFontOfSize: fontSize]
                 toHaveTrait: FontMask];
 
     //[attr setObject: paragraphStyle forKey: NSParagraphStyleAttributeName];
@@ -417,7 +418,7 @@
     return AUTORELEASE(ret);
 }
 
-- (void) addRuleTo: (NSMutableAttributedString*) string withHeight: (int) height {
+- (void) addRuleTo: (NSMutableAttributedString*) string withHeight: (CGFloat) height {
     if (height> 0)
     {
 	    NSTextAttachment* BR = [[NSTextAttachment alloc] init];
@@ -433,7 +434,7 @@
 
 	
     	    //[AS addAttribute: NSFontAttributeName value: font range: NSMakeRange (0, [AS length])];
-	    [paragraphStyle setMaximumLineHeight: (float) height];
+	    [paragraphStyle setMaximumLineHeight: (CGFloat) height];
     	    [AS addAttribute: NSParagraphStyleAttributeName value: paragraphStyle range: NSMakeRange (0, [AS length])];
     	    //[AS addAttribute: NSBackgroundColorAttributeName value: [NSColor redColor] range: NSMakeRange (0, [AS length])];
 	    [AS addAttribute: @"BRCellHeight" value: [NSNumber numberWithInt: height] range: NSMakeRange (0,[AS length])];

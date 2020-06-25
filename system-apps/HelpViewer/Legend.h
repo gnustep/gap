@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,15 +28,15 @@
 {
     NSMutableAttributedString* legend;
     NSPoint point;
-    float height;
+    CGFloat height;
     BOOL rightPos;
 }
 + (id) legendWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p;
 - (id) initWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p;
 - (NSMutableAttributedString*) legend;
 - (NSPoint) point;
-- (float) height;
-- (void) setHeight: (float) h;
+- (CGFloat) height;
+- (void) setHeight: (CGFloat) h;
 - (void) setRightPos;
 - (void) setPoint: (NSPoint) p;
 - (BOOL) isRightPos;

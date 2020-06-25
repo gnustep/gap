@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -62,8 +63,8 @@
 - (NSMutableAttributedString*) legend { return legend; }
 - (NSPoint) point { return point; }
 - (void) setPoint: (NSPoint) p { point = p; }
-- (float) height { return height; }
-- (void) setHeight: (float) h { height = h; }
+- (CGFloat) height { return height; }
+- (void) setHeight: (CGFloat) h { height = h; }
 - (void) setRightPos { rightPos = YES; }
 - (BOOL) isRightPos { return rightPos; }
 @end

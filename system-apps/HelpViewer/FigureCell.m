@@ -1,6 +1,8 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
+
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,17 +54,17 @@
 
 - (void) resizeWithTextView: (NSTextView*) textView
 {
-    float minimalHeight;
-    float imageWidth = [_image size].width;
-    float imageHeight = [_image size].height;   
+    CGFloat minimalHeight;
+    CGFloat imageWidth = [_image size].width;
+    CGFloat imageHeight = [_image size].height;   
 
     if (_legends)
     {
 	      int i;
-	      float interspace = 20;
-	      float spaceMargin = 20;
-	      float border = 12;
-	      float Margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
+	      CGFloat interspace = 20;
+	      CGFloat spaceMargin = 20;
+	      CGFloat border = 12;
+	      CGFloat Margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
 
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
@@ -98,8 +100,8 @@
 	      NSArray* LeftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
 	      NSArray* RightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
 
-	      float LeftLegendsHeight = 0;
-	      float RightLegendsHeight = 0;
+	      CGFloat LeftLegendsHeight = 0;
+	      CGFloat RightLegendsHeight = 0;
 	      
 	      for (i=0; i < [LeftLegends count]; i++)
 	      {
@@ -122,11 +124,11 @@
 }
 
 - (void) drawLegends: (NSArray*) legends onRight: (BOOL) right 
-    withInterspace: (float) interspace withAttributes: (NSDictionary*) attributes
-    withFrame: (NSRect) cellFrame withBorder: (float) border withMargin: (float) Margin 
-    withSpaceMargin: (float) spaceMargin withImageWidth: (float) imageWidth withPosImage: (float) posImage
+    withInterspace: (CGFloat) interspace withAttributes: (NSDictionary*) attributes
+    withFrame: (NSRect) cellFrame withBorder: (CGFloat) border withMargin: (CGFloat) Margin 
+    withSpaceMargin: (CGFloat) spaceMargin withImageWidth: (CGFloat) imageWidth withPosImage: (CGFloat) posImage
 {
-      float posY = interspace;
+      CGFloat posY = interspace;
       int i;
       for (i=0; i < [legends count]; i++)
       {
@@ -161,7 +163,7 @@
 	[[NSColor colorWithCalibratedRed: 0.81 green: 0.84 blue: 0.88 alpha:1.0] set];
 	NSBezierPath* path = [[NSBezierPath alloc] init];
 
-	float radius = 8;
+	CGFloat radius = 8;
 
 	NSPoint p1 = NSMakePoint (r.origin.x, r.origin.y + radius);
 	NSPoint p2 = NSMakePoint (r.origin.x, r.origin.y + r.size.height - radius);
@@ -226,14 +228,14 @@
 	{
 		  
 	      int i;
-	      float interspace = 20;
-	      float imageWidth = [_image size].width;
-	      float imageHeight = [_image size].height;   
-	      float spaceMargin = 20;
-	      float border = 12;
-	      float Margin = (cellFrame.size.width - imageWidth - 2*spaceMargin - 2*border)/2;
+	      CGFloat interspace = 20.0;
+	      CGFloat imageWidth = [_image size].width;
+	      CGFloat imageHeight = [_image size].height;   
+	      CGFloat spaceMargin = 20.0;
+	      CGFloat border = 12.0;
+	      CGFloat Margin = (cellFrame.size.width - imageWidth - 2*spaceMargin - 2*border)/2;
 
-	      float posImage = 0;
+	      CGFloat posImage = 0.0;
 	      if (imageHeight < cellFrame.size.height)
 	      {
 	      	posImage = (cellFrame.size.height - imageHeight)/2;
@@ -279,8 +281,8 @@
 	      //NSLog (@"preLL : %d LL : %d", [preLeftLegends count], [LeftLegends count]);
 	      //NSLog (@"preRL : %d RL : %d", [preRightLegends count], [RightLegends count]);
 
-	      float LeftLegendsHeight = 0;
-	      float RightLegendsHeight = 0;
+	      CGFloat LeftLegendsHeight = 0.0;
+	      CGFloat RightLegendsHeight = 0.0;
 	      
 	      for (i=0; i < [LeftLegends count]; i++)
 	      {
