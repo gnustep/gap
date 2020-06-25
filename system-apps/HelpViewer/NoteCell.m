@@ -144,12 +144,18 @@
 
 	if (_note)
 	{
-	      CGFloat imageWidth = [_image size].width;
-	      CGFloat imageHeight = [_image size].height;   
+	      CGFloat imageWidth = 0.0;
+	      CGFloat imageHeight = 0.0;   
 	      CGFloat border = 12.0;
-	      //NSLog (@"cellFrame.size.width : %.2f", cellFrame.size.width);
-	      CGFloat margin = (cellFrame.size.width - imageWidth- border);
-	
+	      CGFloat margin = 0.0;
+
+	      if (_image)
+		{
+		  imageWidth = [_image size].width;
+		  imageHeight = [_image size].height;
+		}
+	      margin = (cellFrame.size.width - imageWidth- border);
+	      
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
 	      [paragraph setTailIndent: margin];
