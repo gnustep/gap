@@ -1,4 +1,13 @@
 2020-06-25 Riccardo Mottola <rm@gnu.org>
+
+	* Controller.m
+	* FigureCell.m
+	* Page.m
+	* Section.m
+	* mainWindowController.m
+	Some int to NSInteger/NSUInteger conversions.
+
+2020-06-25 Riccardo Mottola <rm@gnu.org>
 	* FigureCell.m
 	* HandlerStructureXLP.m
 	* NoteCell.m

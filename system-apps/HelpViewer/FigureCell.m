@@ -61,7 +61,7 @@
 
     if (_legends)
     {
-	      int i;
+	      NSUInteger i;
 	      CGFloat spaceMargin = 20;
 	      CGFloat border = 12;
 	      CGFloat Margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
@@ -130,7 +130,7 @@
     withSpaceMargin: (CGFloat) spaceMargin withImageWidth: (CGFloat) imageWidth withPosImage: (CGFloat) posImage
 {
       CGFloat posY = interspace;
-      int i;
+      NSUInteger i;
       for (i=0; i < [legends count]; i++)
       {
 	  NSRect r;
@@ -221,7 +221,7 @@
 	if (_legends)
 	{
 		  
-	      int i;
+	      NSUInteger i;
 	      CGFloat interspace = 20.0;
 	      CGFloat imageWidth = [_image size].width;
 	      CGFloat imageHeight = [_image size].height;   

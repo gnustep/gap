@@ -359,9 +359,10 @@
 }
 */
 
-- (int)browser:(NSBrowser *)sender numberOfRowsInColumn:(int)column {
+- (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
+{
 	//NSLog (@"delegate browser ");
-	int ret = 0;
+	NSInteger ret = 0;
 
 	//NSLog (@"browser:numberOfRowsInColumn:%d", column);
 
@@ -380,7 +381,8 @@
 	return ret;
 }
 
-- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(int)row column:(int)column {
+- (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column
+{
 	Section* sub = nil;
 	[cell setLeaf: YES];
 

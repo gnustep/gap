@@ -64,7 +64,7 @@
 }
 
 - (void) addSubviewsToView: (NSView*) view {
-    int i;
+    NSUInteger i;
     
     for (i=0; i < [subviews count]; i++) 
     {
@@ -73,7 +73,7 @@
 }
 
 - (void) removeSubviews {
-    int i;
+    NSUInteger i;
 
     for (i=0; i < [subviews count]; i++)
     {
@@ -82,7 +82,7 @@
 }
 
 - (NSAttributedString*) getPage {
-    int i;
+    NSUInteger i;
     NSMutableAttributedString* ret = [[NSMutableAttributedString alloc] initWithAttributedString: text];
     AUTORELEASE (ret);
 

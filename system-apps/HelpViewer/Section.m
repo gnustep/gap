@@ -87,7 +87,7 @@ static NSBundle* Bundle = nil;
 }
 
 - (NSMutableAttributedString*) contentWithLevel: (int) level {
-	int i;
+	NSUInteger i;
 	id ret = nil;
 
 	//NSLog (@"Section contentWithLevel: %d (%@)", level, [self header]);
@@ -172,7 +172,7 @@ static NSBundle* Bundle = nil;
 - (Section*) parent { return parent; }
 
 - (void) print {
-	int i;
+	NSUInteger i;
 	NSLog (@"(nom : %@) {", header);
 	for (i=0; i < [subs count]; i++)
 	{

@@ -70,7 +70,7 @@
 
 - (void) openFile: (id) sender
 {
-    int ret;
+    NSInteger ret;
     NSLog (@"openFile ...");
     NSOpenPanel* panel = [NSOpenPanel openPanel];
     [panel setAllowsMultipleSelection: NO];
