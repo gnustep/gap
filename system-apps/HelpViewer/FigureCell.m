@@ -75,6 +75,7 @@
 
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
+	      [paragraph release];
 
 	      NSMutableArray* preLeftLegends = [NSMutableArray array];
 	      NSMutableArray* preRightLegends = [NSMutableArray array];
@@ -197,6 +198,8 @@
 	//[path appendBezierPathWithArcFromPoint: p8 toPoint: p1 radius: radius];
 	[path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
 	[path fill];
+	[path release];
+
 //          [[current legend] drawAtPoint: t withAttributes: attributes];            
           [[current legend] drawAtPoint: t];
 	  NSBezierPath* path2 = [NSBezierPath bezierPath];
@@ -253,6 +256,7 @@
 	      
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
+	      [paragraph release];
 
 	      NSMutableArray* preLeftLegends = [NSMutableArray array];
 	      NSMutableArray* preRightLegends = [NSMutableArray array];

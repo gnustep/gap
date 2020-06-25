@@ -81,6 +81,7 @@ static NSBundle* Bundle = nil;
 		id <HandlerStructure> handler = [[HandlerStructureXLP alloc] initWithSection: self];
 		[handler setPath: path];
 		[handler parse];
+		[handler release];
 		loaded = YES;
 	}
 }

@@ -164,6 +164,7 @@
             [AS addAttribute: NSParagraphStyleAttributeName
                 value: paragraphStyle
                 range: NSMakeRange(0,[AS length])];
+	    [paragraphStyle release];
 	    [_currentContent appendAttributedString: AS];
             RELEASE (AS);
         }
@@ -411,6 +412,7 @@
     }
     NSMutableAttributedString* ahead = [[NSMutableAttributedString alloc] initWithString: header attributes: attr];
     [ret appendAttributedString: ahead];
+    [ahead release];
     if (ruleHeight) 
     {	
 	[self addRuleTo: ret withHeight: ruleHeight];
@@ -439,6 +441,7 @@
     	    //[AS addAttribute: NSFontAttributeName value: font range: NSMakeRange (0, [AS length])];
 	    [paragraphStyle setMaximumLineHeight: (CGFloat) height];
     	    [AS addAttribute: NSParagraphStyleAttributeName value: paragraphStyle range: NSMakeRange (0, [AS length])];
+	    [paragraphStyle release];
     	    //[AS addAttribute: NSBackgroundColorAttributeName value: [NSColor redColor] range: NSMakeRange (0, [AS length])];
 	    [AS addAttribute: @"BRCellHeight" value: [NSNumber numberWithInt: height] range: NSMakeRange (0,[AS length])];
     	    NSMutableAttributedString* astring = [[NSMutableAttributedString alloc] initWithString: @"\n"];
@@ -477,7 +480,6 @@
         //[t setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [t length])];
 
     	[astring appendAttributedString: t];
-        RELEASE (img);
         RELEASE (attachCell);
         RELEASE (Attachment);
 }
@@ -549,6 +551,7 @@
     NSMutableAttributedString* astring = [[NSMutableAttributedString alloc] initWithString: @"\n"];
 
     [_currentContent appendAttributedString: astring];
+    [astring release];
 
     [_currentContent appendAttributedString: AS];
     RELEASE (BR);

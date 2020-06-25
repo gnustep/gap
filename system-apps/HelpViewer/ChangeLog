@@ -1,4 +1,12 @@
 2020-06-25 Riccardo Mottola <rm@gnu.org>
+	* FigureCell.m
+	* NoteCell.m
+	* Section.m
+	* TextFormatterXLP.m
+	* mainWindowController.m
+	Fix memory leaks and errors.
+
+2020-06-25 Riccardo Mottola <rm@gnu.org>
 	* Controller.m
 	* HandlerStructureXLP.m
 	* Label.m

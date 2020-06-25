@@ -462,6 +462,7 @@
 			// NSLog (@"on a recu : %@ et on va le mettre dans le textview", str);
 			[str retain];
 			[[resultTextView textStorage] setAttributedString: str];
+			[str release];
 		}
 		else if ([sub type] == SECTION_TYPE_NORMAL)
 		{
