@@ -32,10 +32,9 @@
     Part* part;
     NSString* _ID;
 }
-- (void) setBegin: (int) locationBegin;
-- (void) setEnd: (int) locationEnd;
 - (void) setPage: (Part*) part;
 - (void) setID: (NSString*) _ID;
+- (void) setRange: (NSRange)r;
 - (NSRange) range;
 - (Part*) page;
 - (NSString*) ID;

@@ -40,13 +40,6 @@
   [super dealloc];
 }
 
-- (void) setBegin: (int) locationBegin {
-    range.location = locationBegin;
-}
-
-- (void) setEnd: (int) locationEnd {
-    range.length = locationEnd - range.location;
-}
 
 - (void) setPage: (Part*) _part {
     part = _part;
@@ -54,6 +47,11 @@
 
 - (void) setID: (NSString*) __ID {
     ASSIGN (_ID, [__ID lowercaseString]);
+}
+
+- (void) setRange: (NSRange)r
+{
+  range = r;
 }
 
 - (NSRange) range {

@@ -1,5 +1,11 @@
 2020-06-25 Riccardo Mottola <rm@gnu.org>
 
+	* Label.h
+	* Label.m
+	Rationalize range accessors.
+
+2020-06-25 Riccardo Mottola <rm@gnu.org>
+
 	* Controller.m
 	* FigureCell.m
 	* Page.m
