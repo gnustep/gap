@@ -41,7 +41,8 @@
 
 - (void) dealloc 
 {
-    RELEASE (legend);
+  RELEASE (legend);
+  [super dealloc];
 }
 
 - (NSComparisonResult) compareLegends: (id) sender

@@ -34,8 +34,10 @@
   return self;
 }
 
-- (void) dealloc {
-    RELEASE (_ID);
+- (void) dealloc
+{
+  RELEASE (_ID);
+  [super dealloc];
 }
 
 - (void) setBegin: (int) locationBegin {

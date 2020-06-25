@@ -473,7 +473,8 @@
 	//NSLog (@"FIN browserClick");
 }
 		   
-- (void) dealloc {
+- (void) dealloc
+{
     NSLog (@"=== dealloc mainWindowController ===");
     NSLog (@"dealloc handler");
     RELEASE ((NSObject*)handler);
@@ -483,6 +484,7 @@
 */
     RELEASE (resultTextView);
     RELEASE (resultOutlineView);
+    [super dealloc];
 }
 
 @end

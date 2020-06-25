@@ -34,11 +34,13 @@
   return self;
 }
 
-- (void) dealloc {
-    RELEASE (sections);
-    RELEASE (subviews);
-    RELEASE (title);
-    RELEASE (text);
+- (void) dealloc
+{
+  RELEASE (sections);
+  RELEASE (subviews);
+  RELEASE (title);
+  RELEASE (text);
+  [super dealloc];
 }
 
 - (NSString*) title {

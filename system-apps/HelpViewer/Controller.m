@@ -64,7 +64,8 @@
 
 - (void) dealloc 
 {
-    RELEASE (windowController);
+  RELEASE (windowController);
+  [super release];
 }
 
 - (void) openFile: (id) sender

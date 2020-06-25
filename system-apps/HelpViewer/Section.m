@@ -50,11 +50,13 @@ static NSBundle* Bundle = nil;
   return self;
 }
 
-- (void) dealloc {
-    RELEASE (subs);
-    RELEASE (text);
-    RELEASE (header);
-    RELEASE (path);
+- (void) dealloc
+{
+  RELEASE (subs);
+  RELEASE (text);
+  RELEASE (header);
+  RELEASE (path);
+  [super dealloc];
 }
 
 - (NSMutableAttributedString*) text {

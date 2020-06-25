@@ -49,8 +49,10 @@
   return self;
 }
 
-- (void) dealloc {
-	RELEASE (_firstSection);
+- (void) dealloc
+{
+  RELEASE (_firstSection);
+  [super dealloc];
 }
 
 - (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes {

@@ -1,16 +1,25 @@
 2020-06-25 Riccardo Mottola <rm@gnu.org>
-       * FigureCell.m
-       * HandlerStructureXLP.m
-       * Label.m
-       * Legend.m
-       * NoteCell.m
-       * Page.m
-       * Section.m
-       * TextFormatterXLP.m
-       * ViewCell.m
+	* Controller.m
+	* HandlerStructureXLP.m
+	* Label.m
+	* Legend.m
+	* Page.m
+	* Section.m
+	* mainWindowController.m
+	Properly call [super dealloc] in dealloc
+
+2020-06-25 Riccardo Mottola <rm@gnu.org>
+	* FigureCell.m
+	* HandlerStructureXLP.m
+	* Label.m
+	* Legend.m
+	* NoteCell.m
+	* Page.m
+	* Section.m
+	* TextFormatterXLP.m
+	* ViewCell.m
 	* mainWindowController.m
 	Fix init methods to properly call super, check and assign self.
-
 
 2020-06-25 Riccardo Mottola <rm@gnu.org>
 
