@@ -2060,7 +2060,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
   if(count == 1)
     {
-      switch([[NSApp delegate] currentToolType])
+      switch([(Graphos *) [NSApp delegate] currentToolType])
         {
             case blackarrowtool:
                 [self selectObjectAtPoint: p];
@@ -2116,7 +2116,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
     }
   else
     {
-      if([[NSApp delegate] currentToolType] == blackarrowtool)
+      if([(Graphos *) [NSApp delegate] currentToolType] == blackarrowtool)
 	[self editTextAtPoint: p];
     }
 }
@@ -2312,7 +2312,7 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
  */
 - (NSMenu *) menuForEvent: (NSEvent*)theEvent
 {
-  if ([[NSApp delegate] currentToolType] == whitearrowtool)
+  if ([(Graphos *) [NSApp delegate] currentToolType] == whitearrowtool)
     {
       NSUInteger i;
       NSUInteger selectedPaths;
