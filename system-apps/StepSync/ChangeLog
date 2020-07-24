@@ -1,3 +1,8 @@
+2020-07-24 Riccardo Mottola <rm@gnu.org>
+
+	* FileMap.m
+	Normalize root path, or if source/target are differently normalized, paths do not match.
+
 2020-05-04 Riccardo Mottola <rm@gnu.org>
 
 	* Engine.m

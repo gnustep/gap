@@ -2,7 +2,7 @@
    Project: StepSync
    FileMap.m
 
-   Copyright (C) 2017-2018 Free Software Foundation
+   Copyright (C) 2017-2020 Free Software Foundation
 
    Author: Riccardo Mottola
 
@@ -108,7 +108,7 @@
   if (rootPath != path)
     {
       [rootPath release];
-      rootPath = path;
+      rootPath = [path stringByStandardizingPath];
       [rootPath retain];
     }
 }
