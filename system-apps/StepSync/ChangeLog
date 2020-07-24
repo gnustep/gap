@@ -1,5 +1,10 @@
 2020-07-24 Riccardo Mottola <rm@gnu.org>
 
+	* AppController.m
+	Show analysis on differing files in size and/or date
+
+2020-07-24 Riccardo Mottola <rm@gnu.org>
+
 	* FileMap.m
 	Normalize root path, or if source/target are differently normalized, paths do not match.
 

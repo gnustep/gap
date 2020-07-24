@@ -381,11 +381,11 @@
   [attrStr release];
   
 
-  /* -- Files different in Source and Target -- */
+  /* -- Files are modified more recently in Source than Target -- */
   [attrStrMut appendAttributedString:sepAttrStr];
   
   tempStr = [NSMutableString new];
-  [tempStr appendString:@"Files which differ between Source and Target:\n"];
+  [tempStr appendString:@"Files which are modified more recently Source than Target:\n"];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: titleAttributes];
   [attrStrMut appendAttributedString:attrStr];
@@ -416,6 +416,51 @@
   if (nil != [engine sourceModFiles])
     {
       tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine sourceModFiles] sizeStr]];
+      attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+      [attrStrMut appendAttributedString:attrStr];
+    }
+  attrStr = [[NSAttributedString alloc] initWithString: @"\n"
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+
+  /* -- Files are modified more recently in Target than Source -- */
+  [attrStrMut appendAttributedString:sepAttrStr];
+  
+  tempStr = [NSMutableString new];
+  [tempStr appendString:@"Files which are modified more recently Target than Source:\n"];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: titleAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  [attrStrMut appendAttributedString:sepAttrStr];
+
+  tempStr = [NSMutableString new];
+  for (i = 0; i < [[engine targetModFiles] count]; i++)
+    {
+      [tempStr appendString:[[[engine targetModFiles] objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+
+  [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
+  [tempStr release];
+  
+  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine targetModFiles]  count]];
+  attrStr = [[NSAttributedString alloc] initWithString: tempStr
+                                            attributes: textAttributes];
+  [attrStrMut appendAttributedString:attrStr];
+
+  if (nil != [engine targetModFiles])
+    {
+      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine targetModFiles] sizeStr]];
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
@@ -477,7 +522,7 @@
   [attrStrMut appendAttributedString:sepAttrStr];
   
   tempStr = [NSMutableString new];
-  [tempStr appendString:@"Files which differ in modification date between Source and Target but have size:\n"];
+  [tempStr appendString:@"Files which differ in modification date between Source and Target but have same size:\n"];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: titleAttributes];
   [attrStrMut appendAttributedString:attrStr];
