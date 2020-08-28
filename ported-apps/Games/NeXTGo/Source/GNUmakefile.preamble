@@ -51,7 +51,10 @@ ADDITIONAL_CFLAGS +=
 ADDITIONAL_INCLUDE_DIRS +=
 
 # Additional LDFLAGS to pass to the linker
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+else
 ADDITIONAL_LDFLAGS += -lcrypt
+endif
 
 # Additional library directories the linker should search
 ADDITIONAL_LIB_DIRS += 

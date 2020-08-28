@@ -41,10 +41,11 @@
 #include <ctype.h>
 
 
-#ifdef MSDOS
+#ifdef __MINGW32__
 #include <stdlib.h>
 #include <time.h>
-#include <alloc.h>
+#include <sys/param.h>
+#define huge
 #define ttblsz 4096
 #else
 #include <sys/param.h>
@@ -309,6 +310,7 @@ unsigned short hashkey;
 unsigned long hashbd;
 struct hashval hashcode[2][7][64];
 struct hashentry huge *ttable,*ptbl;
+struct hashentry *ttable,*ptbl;
 unsigned char history[8192];
 
 short Mwpawn[64],Mbpawn[64],Mknight[2][64],Mbishop[2][64];

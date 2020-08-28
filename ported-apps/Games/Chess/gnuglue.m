@@ -65,7 +65,9 @@
 #else
 #include <unistd.h>
 #endif
+#ifndef __MINGW32__
 #include <pwd.h>		// getpwuid, passwd
+#endif
 
 #ifdef PROFILE
 #import <libc.h>	// times, tms

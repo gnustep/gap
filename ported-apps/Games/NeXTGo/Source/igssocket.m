@@ -72,21 +72,29 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 /*   This file was converted from the igs client written by Adrienne Mariano.  */
 #include <sys/types.h>
 #include <sys/time.h>
+#ifndef __MINGW32__
 #include <sys/socket.h>
 #include <netdb.h>
+#endif
 
+#ifndef __MINGW32__
 #ifndef WINS			/* Usually want this... */
 #include <netinet/in.h>
 #else				/* ... but need these for WINS. */
 #include <sys/in.h>
 #include <sys/inet.h>
 #endif
+#endif
 
 #include <fcntl.h>
+#ifndef __MINGW32__
 #include <sys/errno.h>
+#endif
 #include <stdio.h>
 #ifndef FD_ZERO
+#ifndef __MINGW32__
 #include <sys/select.h>
+#endif
 #endif
 #include "igs.h"
 
@@ -94,13 +102,17 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 #import "GoApp.h"
 
 #include <unistd.h>
+#ifndef __MINGW32__
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#endif
 
 /* For some odd systems, which don't put this in errno.h. */
 
+#ifndef __MINGW32__
 extern int errno;
+#endif
 
 char servename[80];		/* = "129.24.14.70"; *//* "lacerta.unm.edu"; */
 int serveport;			/* = 6969; */
@@ -129,6 +141,7 @@ int writetosock;
 
 int open_connection()
 {
+#ifndef __MINGW32__
   struct sockaddr_in server;
   struct hostent *hp;
   int ipn;
@@ -190,13 +203,18 @@ int open_connection()
   signal(SIGIO, incomingserver);  */
   writetosock = 0;
   return 0;
+#else
+  return -1;
+#endif
 }
 
 void sendstr(char *buf) {
+#ifndef __MINGW32__
     write(sock, buf, strlen(buf));
 #ifdef DEBUG
     fprintf(blah, ">%s<\n", buf);
     fflush(blah);
+#endif
 #endif
 }
 

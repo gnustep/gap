@@ -1193,7 +1193,7 @@ beginning a new game.", @"OK", nil, nil);
 }
 
 - open:sender {
-
+#ifndef __MINGW32__
     id fileTypes;
 
     NSString *fileType1 = @"nextgo",
@@ -1216,6 +1216,7 @@ beginning a new game.", @"OK", nil, nil);
 		}
 		return self;
 	}
+#endif
 	return self;
 }
 
