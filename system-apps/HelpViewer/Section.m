@@ -78,7 +78,7 @@ static NSBundle* Bundle = nil;
 - (void) load {
 	if ([[NSFileManager defaultManager] fileExistsAtPath: path])
 	{
-		id <HandlerStructure> handler = [[HandlerStructureXLP alloc] initWithSection: self];
+		id <HandlerStructure, NSObject> handler = [[HandlerStructureXLP alloc] initWithSection: self];
 		[handler setPath: path];
 		[handler parse];
 		[handler release];
