@@ -1,3 +1,8 @@
+2020-09-22 Riccardo Mottola <rm@gnu.org>
+
+	* TextFormatterXLP.m
+	Fix attributed string allocation.
+
 2020-06-25 Riccardo Mottola <rm@gnu.org>
 
 	* Label.h

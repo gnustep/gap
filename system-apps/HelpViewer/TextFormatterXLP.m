@@ -423,23 +423,26 @@
 
 	    BRCell* attachCell = [BRCell sharedBRCell];
 	    [BR setAttachmentCell: attachCell];
-	    NSMutableAttributedString* AS = [NSMutableAttributedString attributedStringWithAttachment: BR];
+
+	    NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
+	    [attStr appendAttributedString: [NSAttributedString attributedStringWithAttachment: BR]];
     	    
 	    NSFont* font = [[NSFontManager sharedFontManager]
                 convertFont: [NSFont userFontOfSize: 1]
                 toHaveTrait: 0];
 
 	
-    	    //[AS addAttribute: NSFontAttributeName value: font range: NSMakeRange (0, [AS length])];
+    	    //[attStr addAttribute: NSFontAttributeName value: font range: NSMakeRange (0, [attSStr length])];
 	    [paragraphStyle setMaximumLineHeight: (CGFloat) height];
-    	    [AS addAttribute: NSParagraphStyleAttributeName value: paragraphStyle range: NSMakeRange (0, [AS length])];
+    	    [attStr addAttribute: NSParagraphStyleAttributeName value: paragraphStyle range: NSMakeRange (0, [attStr length])];
 	    [paragraphStyle release];
-    	    //[AS addAttribute: NSBackgroundColorAttributeName value: [NSColor redColor] range: NSMakeRange (0, [AS length])];
-	    [AS addAttribute: @"BRCellHeight" value: [NSNumber numberWithInt: height] range: NSMakeRange (0,[AS length])];
+    	    //[attStr addAttribute: NSBackgroundColorAttributeName value: [NSColor redColor] range: NSMakeRange (0, [attStr length])];
+	    [attStr addAttribute: @"BRCellHeight" value: [NSNumber numberWithInt: height] range: NSMakeRange (0,[attStr length])];
     	    NSMutableAttributedString* astring = [[NSMutableAttributedString alloc] initWithString: @"\n"];
 
 	    [string appendAttributedString: astring];
-	    [string appendAttributedString: AS];
+	    [string appendAttributedString: attStr];
+	    [attStr release];
 	    //[string appendAttributedString: astring];
     	    [astring release];
 	    RELEASE (BR);
@@ -465,22 +468,24 @@
 - (void) addImage: (NSImage*) img onString: (NSMutableAttributedString*) astring {
         NSTextAttachmentCell* attachCell = [[NSTextAttachmentCell alloc] initImageCell: img];
 
-        NSTextAttachment* Attachment = [[NSTextAttachment alloc] init];
-        [Attachment setAttachmentCell: attachCell];
+        NSTextAttachment* tAttachment = [[NSTextAttachment alloc] init];
+        [tAttachment setAttachmentCell: attachCell];
 
-        NSMutableAttributedString* t = [NSMutableAttributedString attributedStringWithAttachment: Attachment];
+        NSMutableAttributedString* t = [[NSMutableAttributedString alloc] init];
+	[t appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: tAttachment]];
         //[t setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [t length])];
 
     	[astring appendAttributedString: t];
+	[t release];
         RELEASE (attachCell);
-        RELEASE (Attachment);
+        RELEASE (tAttachment);
 }
 
 
 - (void) addImage: (NSString*) pathname {
 
     NSString* file;
-    NSTextAttachment* Attachment;
+    NSTextAttachment* textAttachment;
 
     NSLog (@"addImage : %@", pathname);
 
@@ -499,17 +504,19 @@
 
         [wrapper setIcon: [NSImage imageNamed: @"Search.tiff"]];
 
-        Attachment = [[NSTextAttachment alloc] initWithFileWrapper: wrapper];
-        [Attachment setAttachmentCell: attachCell];
+        textAttachment = [[NSTextAttachment alloc] initWithFileWrapper: wrapper];
+        [textAttachment setAttachmentCell: attachCell];
 
-        NSMutableAttributedString* t = [NSMutableAttributedString attributedStringWithAttachment: Attachment];
+        NSMutableAttributedString* t = [[NSMutableAttributedString alloc] init];
+	[t appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: textAttachment]];
         //[t setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [t length])];
 
     	[_currentContent appendAttributedString: t];
+	[t release];
         RELEASE (img);
         RELEASE (wrapper);
         RELEASE (attachCell);
-        RELEASE (Attachment);
+        RELEASE (textAttachment);
     }
     else
     {
@@ -538,14 +545,16 @@
     [attachCell resizeWithTextView: textView];
 
     [BR setAttachmentCell: attachCell];
-    NSMutableAttributedString* AS = [NSMutableAttributedString attributedStringWithAttachment: BR];
-    //[AS setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [AS length])];
+    NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
+    [attStr appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: BR]];
+    //[attStr setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [attStr length])];
     NSMutableAttributedString* astring = [[NSMutableAttributedString alloc] initWithString: @"\n"];
 
     [_currentContent appendAttributedString: astring];
     [astring release];
 
-    [_currentContent appendAttributedString: AS];
+    [_currentContent appendAttributedString: attStr];
+    [attStr release];
     RELEASE (BR);
     RELEASE (attachCell);
 }
@@ -585,10 +594,12 @@
     [attachCell setLegends: plegends];
     [attachCell resizeWithTextView: textView];
     [BR setAttachmentCell: attachCell];
-    NSMutableAttributedString* AS = [NSMutableAttributedString attributedStringWithAttachment: BR];
-    [AS setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [AS length])];
+    NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
+    [attStr appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: BR]];
+    [attStr setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [attStr length])];
 
-    [_currentContent appendAttributedString: AS];
+    [_currentContent appendAttributedString: attStr];
+    [attStr release];
     RELEASE (BR);
     RELEASE (attachCell);
     RELEASE (img);
