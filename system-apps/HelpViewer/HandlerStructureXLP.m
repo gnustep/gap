@@ -185,9 +185,12 @@
     	//NSLog (@"characters : %@", name);
 	NSString* str;
 
-	if ([name isEqualToString: @"<"]) str = [NSString stringWithString: @"&lt;"];
-	else if ([name isEqualToString: @">"]) str = [NSString stringWithString: @"&gt;"];
-	else str = [NSString trimString: name];
+	if ([name isEqualToString: @"<"])
+	  str = @"&lt;";
+	else if ([name isEqualToString: @">"])
+          str = @"&gt;";
+	else
+	  str = [NSString trimString: name];
 	
     	NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString: str];
 	[_currentContent appendAttributedString: astr];

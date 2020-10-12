@@ -31,9 +31,9 @@
 + (NSString*) trimString: (NSString*) str
 {
     NSMutableString* ret = [[NSMutableString alloc] initWithString: @""];
-    NSString* spaceChar = [NSString stringWithString: @" "];
-    NSString* EOLChar = [NSString stringWithString: @"\n"];
-    NSString* TabChar = [NSString stringWithString: @"\t"];
+    NSString* spaceChar = @" ";
+    NSString* EOLChar = @"\n";
+    NSString* TabChar = @"\t";
 
     BOOL space = YES;
     NSUInteger i;
