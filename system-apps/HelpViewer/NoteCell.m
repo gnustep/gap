@@ -72,21 +72,22 @@
 	imageWidth = [_image size].width;
 	height = [_image size].height;
       }
-    margin = [textView bounds].size.width - 16 - imageWidth- border;
+    
+    margin = [textView bounds].size.width - 16 - imageWidth - border;
 
-      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
-      [paragraph setAlignment: NSLeftTextAlignment];
-      [paragraph setTailIndent: margin];
+    if (_note)
+      {
+	NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
+	[paragraph setAlignment: NSLeftTextAlignment];
+	[paragraph setTailIndent: margin];
       
-      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
-	    forKey: NSParagraphStyleAttributeName];
-      [paragraph release];
-
-      if (_note)
-	{
-	  [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
-	  heighttext = [_note size].height;
-	}
+	NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
+							       forKey: NSParagraphStyleAttributeName];
+	[paragraph release];
+	  
+	[_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
+	heighttext = [_note size].height;
+      }
 
     NSLog (@"heightext : %.2f height : %.2f", heighttext, height);
     if (heighttext > height) height = heighttext;
