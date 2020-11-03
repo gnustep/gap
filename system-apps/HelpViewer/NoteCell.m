@@ -162,6 +162,7 @@
 	      
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
+	      [paragraph release];
 
 	      [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
 	      NSSize sizenote = [_note size];
