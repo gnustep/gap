@@ -524,15 +524,10 @@
     }
 }
 
-- (void) addNote: (NSMutableAttributedString*) string withImage: (NSImage*) img withColor: (NSColor*) color {
-
-    //NSImage* img = [NSImage imageNamed: @"note.png"];
-
-    NSTextAttachment* BR = [[NSTextAttachment alloc] init];
+- (void) addNote: (NSMutableAttributedString*) string withImage: (NSImage*) img withColor: (NSColor*) color
+{
+    NSTextAttachment* textAttach = [[NSTextAttachment alloc] init];
     NoteCell* attachCell = [[NoteCell alloc] initWithTextView: textView];
-    
-    //    NSMakeSize ([textView bounds].size.width - 16, [img size].height)];
-        //NSMakeSize ([textView bounds].size.width, [img size].height)];
 
     [[NSNotificationCenter defaultCenter] addObserver: attachCell
         selector: @selector (resize:)
@@ -544,9 +539,9 @@
     [attachCell setText: string];
     [attachCell resizeWithTextView: textView];
 
-    [BR setAttachmentCell: attachCell];
+    [textAttach setAttachmentCell: attachCell];
     NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
-    [attStr appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: BR]];
+    [attStr appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: textAttach]];
     //[attStr setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [attStr length])];
     NSMutableAttributedString* astring = [[NSMutableAttributedString alloc] initWithString: @"\n"];
 
@@ -555,33 +550,19 @@
 
     [_currentContent appendAttributedString: attStr];
     [attStr release];
-    RELEASE (BR);
+    RELEASE (textAttach);
     RELEASE (attachCell);
 }
 
-- (void) addLegendFig: (NSString*) imgpath withLegends: (NSArray*) plegends {
-
-    //NSImage* img = nil;
+- (void) addLegendFig: (NSString*) imgpath withLegends: (NSArray*) plegends
+{
     NSImage* img = [[NSImage alloc] initWithContentsOfFile: 
     	[Bundle pathForResource: [imgpath stringByDeletingPathExtension] 
 	ofType: [imgpath pathExtension]]];
 
     //NSLog (@"addLegendFig: %@ legends : %@", imgpath, plegends);
 
-/*
-    if ([[NSFileManager defaultManager] fileExistsAtPath: imgpath])
-    {
-        img = [[NSImage alloc] initWithContentsOfFile: imgpath];
-        //NSLog (@"addLegendFig (%@)", imgpath);
-    }
-    else
-    {
-        NSString* mpath = [NSString stringWithFormat: @"%@/%@", path, imgpath];
-        img = [[NSImage alloc] initWithContentsOfFile: mpath];
-        //NSLog (@"addLegendFig (%@)", mpath);
-    }
-*/
-    NSTextAttachment* BR = [[NSTextAttachment alloc] init];
+    NSTextAttachment* textAttach = [[NSTextAttachment alloc] init];
     FigureCell* attachCell = [[FigureCell alloc] initWithSize:
         NSMakeSize ([textView bounds].size.width, [img size].height)];
 
@@ -593,14 +574,15 @@
     [attachCell setImage: img];
     [attachCell setLegends: plegends];
     [attachCell resizeWithTextView: textView];
-    [BR setAttachmentCell: attachCell];
+    [textAttach setAttachmentCell: attachCell];
+
     NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
-    [attStr appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: BR]];
+    [attStr appendAttributedString: [NSMutableAttributedString attributedStringWithAttachment: textAttach]];
     [attStr setAlignment: NSCenterTextAlignment range: NSMakeRange (0, [attStr length])];
 
     [_currentContent appendAttributedString: attStr];
     [attStr release];
-    RELEASE (BR);
+    RELEASE (textAttach);
     RELEASE (attachCell);
     RELEASE (img);
 }
