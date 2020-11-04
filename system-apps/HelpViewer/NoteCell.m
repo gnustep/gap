@@ -104,8 +104,6 @@
       if (![controlView window])
 	            return;
 
-        [controlView lockFocus];
-
 	//[[NSColor colorWithCalibratedRed: 0.62 green: 0.71 blue: 0.84 alpha:1.0] set];
 	//[[NSColor colorWithCalibratedRed: 0.81 green: 0.84 blue: 0.88 alpha:1.0] set];
 	//[[NSColor colorWithCalibratedRed: 0.88 green: 0.78 blue: 0.78 alpha:1.0] set];
@@ -187,7 +185,6 @@
 
 	      [_note drawAtPoint: NSMakePoint (cellFrame.origin.x + imageWidth + border, posy)];
 	}
-      [controlView unlockFocus];
 }
 
 @end
