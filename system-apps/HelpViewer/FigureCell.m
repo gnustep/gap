@@ -206,9 +206,8 @@
 - (void) drawWithFrame: (NSRect) cellFrame
     inView: (NSView*) controlView
 {
-      if (![controlView window]) return;
-
-      [controlView lockFocus];
+  if (![controlView window])
+    return;
 
 	[[NSColor whiteColor] set];
 	NSRectFill (cellFrame);
@@ -303,7 +302,6 @@
 		    withPosImage: posImage];
 
 	}
-      [controlView unlockFocus];
 }
 
 @end

@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,11 +59,11 @@
 - (void) drawWithFrame: (NSRect) theFrame
                 inView: (NSView *) theView
 {
-  if (![theView window]) return;
+  if (![theView window])
+    return;
+  
   if ( image )
     {
-      [theView lockFocus];
-
       NSRect aFrame;
       NSSize aSize;
 
@@ -93,7 +94,6 @@
 
       [image compositeToPoint: aFrame.origin
              operation: NSCompositeSourceOver];
-      [theView unlockFocus];
     }
 
   [super drawWithFrame: theFrame
