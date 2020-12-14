@@ -9,5 +9,5 @@
     GSThemeIcon = "Thematic.png";
     GSThemePreview = heritage_preview_256.tif;
     GSThemeLicense = "GPL v2+";
-    GSThemeVersion = "0.0";
+    GSThemeVersion = "1.0";
 }
