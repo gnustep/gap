@@ -18,7 +18,7 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include "FigureCell.h"
+#import "FigureCell.h"
 
 @implementation FigureCell
 
@@ -64,11 +64,11 @@
 	      NSUInteger i;
 	      CGFloat spaceMargin = 20;
 	      CGFloat border = 12;
-	      CGFloat Margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
+	      CGFloat margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
 
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
-	      [paragraph setTailIndent: Margin];
+	      [paragraph setTailIndent: margin];
 	      [paragraph setHeadIndent: 0.0];
 	      [paragraph setFirstLineHeadIndent: 0.0];
 
@@ -98,27 +98,28 @@
 		  }        
 	      }
 		    
-	      NSArray* LeftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
-	      NSArray* RightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
+	      NSArray* leftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
+	      NSArray* rightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
 
-	      CGFloat LeftLegendsHeight = 0;
-	      CGFloat RightLegendsHeight = 0;
+	      CGFloat leftLegendsHeight = 0;
+	      CGFloat rightLegendsHeight = 0;
 	      
-	      for (i=0; i < [LeftLegends count]; i++)
-	      {
-		    LeftLegendsHeight += [[LeftLegends objectAtIndex: i] height];
-	      }
+	      for (i=0; i < [leftLegends count]; i++)
+		{
+		  leftLegendsHeight += [[leftLegends objectAtIndex: i] height];
+		}
 
-	      for (i=0; i < [RightLegends count]; i++)
-	      {
-		    RightLegendsHeight += [[RightLegends objectAtIndex: i] height];
-	      }
+	      for (i=0; i < [rightLegends count]; i++)
+		{
+		  rightLegendsHeight += [[rightLegends objectAtIndex: i] height];
+		}
 	      
-	      float minimalInterspace = 8;
+	      CGFloat minimalInterspace = 8;
 
-	      minimalHeight = LeftLegendsHeight+([LeftLegends count]+1)*minimalInterspace;
+	      minimalHeight = leftLegendsHeight+([leftLegends count]+1)*minimalInterspace;
 
-	      if (imageHeight < minimalHeight) imageHeight = minimalHeight;
+	      if (imageHeight < minimalHeight)
+		imageHeight = minimalHeight;
     }
 
     _size = NSMakeSize ([textView bounds].size.width, imageHeight);
@@ -226,20 +227,20 @@
 	      CGFloat imageHeight = [_image size].height;   
 	      CGFloat spaceMargin = 20.0;
 	      CGFloat border = 12.0;
-	      CGFloat Margin = (cellFrame.size.width - imageWidth - 2*spaceMargin - 2*border)/2;
+	      CGFloat margin = (cellFrame.size.width - imageWidth - 2*spaceMargin - 2*border)/2;
 
 	      CGFloat posImage = 0.0;
 	      if (imageHeight < cellFrame.size.height)
 	      {
 	      	posImage = (cellFrame.size.height - imageHeight)/2;
 	      }
-	      NSPoint imageOrigin = NSMakePoint (cellFrame.origin.x + border + Margin + spaceMargin,
+	      NSPoint imageOrigin = NSMakePoint (cellFrame.origin.x + border + margin + spaceMargin,
 		      cellFrame.origin.y + imageHeight + posImage);
 	      [_image compositeToPoint: imageOrigin operation: NSCompositeSourceAtop];
 	      
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
-	      [paragraph setTailIndent: Margin];
+	      [paragraph setTailIndent: margin];
 	      [paragraph setHeadIndent: 0.0];
 	      [paragraph setFirstLineHeadIndent: 0.0];
 	      
@@ -269,36 +270,33 @@
 		  }        
 	      }
 		    
-	      NSArray* LeftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
-	      NSArray* RightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
+	      NSArray* leftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
+	      NSArray* rightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
 
-	      //NSLog (@"preLL : %d LL : %d", [preLeftLegends count], [LeftLegends count]);
-	      //NSLog (@"preRL : %d RL : %d", [preRightLegends count], [RightLegends count]);
-
-	      CGFloat LeftLegendsHeight = 0.0;
-	      CGFloat RightLegendsHeight = 0.0;
+	      CGFloat leftLegendsHeight = 0.0;
+	      CGFloat rightLegendsHeight = 0.0;
 	      
-	      for (i=0; i < [LeftLegends count]; i++)
-	      {
-		    LeftLegendsHeight += [[LeftLegends objectAtIndex: i] height];
-	      }
+	      for (i=0; i < [leftLegends count]; i++)
+		{
+		  leftLegendsHeight += [[leftLegends objectAtIndex: i] height];
+		}
 
-	      for (i=0; i < [RightLegends count]; i++)
-	      {
-		    RightLegendsHeight += [[RightLegends objectAtIndex: i] height];
-	      }
+	      for (i=0; i < [rightLegends count]; i++)
+		{
+		  rightLegendsHeight += [[rightLegends objectAtIndex: i] height];
+		}
 	      
-	      interspace = (cellFrame.size.height - LeftLegendsHeight)/ ([LeftLegends count]+1);      
+	      interspace = (cellFrame.size.height - leftLegendsHeight)/ ([leftLegends count]+1);      
 
-	      [self drawLegends: LeftLegends onRight: NO withInterspace: interspace
+	      [self drawLegends: leftLegends onRight: NO withInterspace: interspace
 		    withAttributes: attributes withFrame: cellFrame withBorder: border
-		    withMargin: Margin withSpaceMargin: spaceMargin withImageWidth: imageWidth
+		    withMargin: margin withSpaceMargin: spaceMargin withImageWidth: imageWidth
 		    withPosImage: posImage];
 
-	      interspace = (cellFrame.size.height - RightLegendsHeight)/ ([RightLegends count]+1);      
-	      [self drawLegends: RightLegends onRight: YES withInterspace: interspace
+	      interspace = (cellFrame.size.height - rightLegendsHeight)/ ([rightLegends count]+1);      
+	      [self drawLegends: rightLegends onRight: YES withInterspace: interspace
 		    withAttributes: attributes withFrame: cellFrame withBorder: border
-		    withMargin: Margin withSpaceMargin: spaceMargin withImageWidth: imageWidth
+		    withMargin: margin withSpaceMargin: spaceMargin withImageWidth: imageWidth
 		    withPosImage: posImage];
 
 	}
