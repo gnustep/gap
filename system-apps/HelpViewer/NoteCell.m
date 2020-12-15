@@ -62,6 +62,7 @@
 - (void) resizeWithTextView: (NSTextView*) textView
 {
     CGFloat height = 0.0;
+    CGFloat width = 0.0;
     CGFloat heighttext = 0.0;
     CGFloat imageWidth = 0.0;
     CGFloat border = 12.0;
@@ -72,8 +73,13 @@
 	imageWidth = [_image size].width;
 	height = [_image size].height;
       }
+
+    width = [textView bounds].size.width - 2*border;
+    if (width <= 0)
+      width = 375;
+    NSLog(@"NoteCell: Width: %.2f", width);
     
-    margin = [textView bounds].size.width - 16 - imageWidth - border;
+    margin = width - imageWidth;
 
     if (_note)
       {
@@ -89,11 +95,9 @@
 	heighttext = [_note size].height;
       }
 
-    NSLog (@"heightext : %.2f height : %.2f", heighttext, height);
-    if (heighttext > height) height = heighttext;
-
-    float width = [textView bounds].size.width - 16;
-    if (width <= 0) width = 375;
+    NSLog (@"NoteCell: heightext : %.2f height : %.2f", heighttext, height);
+    if (heighttext > height)
+      height = heighttext;
 
     _size = NSMakeSize (width, height);
 }
@@ -153,7 +157,7 @@
 		  imageWidth = [_image size].width;
 		  imageHeight = [_image size].height;
 		}
-	      margin = (cellFrame.size.width - imageWidth- border);
+	      margin = cellFrame.size.width - imageWidth - 2*border;
 	      
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
