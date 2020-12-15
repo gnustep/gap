@@ -29,6 +29,7 @@
       _image = nil;
       _note = nil;
       _color = nil;
+      border = 12.0;
       [self resizeWithTextView: textview];
     }
   return self;    
@@ -65,7 +66,6 @@
     CGFloat width = 0.0;
     CGFloat heighttext = 0.0;
     CGFloat imageWidth = 0.0;
-    CGFloat border = 12.0;
     CGFloat margin = 0.0;
 
     if (_image)
@@ -149,7 +149,6 @@
 	{
 	      CGFloat imageWidth = 0.0;
 	      CGFloat imageHeight = 0.0;   
-	      CGFloat border = 12.0;
 	      CGFloat margin = 0.0;
 
 	      if (_image)
