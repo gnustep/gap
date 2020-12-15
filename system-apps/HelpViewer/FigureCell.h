@@ -32,6 +32,7 @@
     NSArray* _legends;
     NSSize _size;
     CGFloat border;
+    CGFloat spaceMargin;
 }
 - (id) initWithSize: (NSSize) size; 
 - (NSSize) cellSize;
