@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2020 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@
     NSImage* _image;
     NSArray* _legends;
     NSSize _size;
+    CGFloat border;
 }
 - (id) initWithSize: (NSSize) size; 
 - (NSSize) cellSize;

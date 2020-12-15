@@ -29,6 +29,7 @@
       _size = size;
       _image = nil;
       _legends = nil;
+      border = 12.0;
     }
   return self;    
 }
@@ -63,7 +64,6 @@
     {
 	      NSUInteger i;
 	      CGFloat spaceMargin = 20;
-	      CGFloat border = 12;
 	      CGFloat margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
 
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
@@ -226,7 +226,6 @@
 	      CGFloat imageWidth = [_image size].width;
 	      CGFloat imageHeight = [_image size].height;   
 	      CGFloat spaceMargin = 20.0;
-	      CGFloat border = 12.0;
 	      CGFloat margin = (cellFrame.size.width - imageWidth - 2*spaceMargin - 2*border)/2;
 
 	      CGFloat posImage = 0.0;
