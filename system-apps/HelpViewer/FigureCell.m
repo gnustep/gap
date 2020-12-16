@@ -57,14 +57,16 @@
 
 - (void) resizeWithTextView: (NSTextView*) textView
 {
-    CGFloat minimalHeight;
-    CGFloat imageWidth = [_image size].width;
-    CGFloat imageHeight = [_image size].height;   
+  CGFloat width = 0.0;
+  CGFloat minimalHeight;
+  CGFloat imageWidth = [_image size].width;
+  CGFloat imageHeight = [_image size].height;   
 
+  width = [textView bounds].size.width - -2*spaceMargin - 2*border;
     if (_legends)
     {
 	      NSUInteger i;
-	      CGFloat margin = ([textView bounds].size.width - imageWidth - 2*spaceMargin - 2*border)/2;
+	      CGFloat margin = (width - imageWidth)/2;
 
 	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
 	      [paragraph setAlignment: NSLeftTextAlignment];
@@ -122,7 +124,7 @@
 		imageHeight = minimalHeight;
     }
 
-    _size = NSMakeSize ([textView bounds].size.width, imageHeight);
+    _size = NSMakeSize (width, imageHeight);
 }
 
 - (void) drawLegends: (NSArray*) legends onRight: (BOOL) right 
