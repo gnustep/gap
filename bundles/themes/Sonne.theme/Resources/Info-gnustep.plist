@@ -2,13 +2,13 @@
     GSThemeAuthors = (
 	"Riccardo Mottola"
     );
-    GSThemeDetails = "Evoking Sun Solaris CD\000";
+    GSThemeDetails = "Evoking Sun Solaris CDE";
     GSThemeDomain = {
 	GSBackHandlesWindowDecorations = YES;
 	NSMenuInterfaceStyle = NSNextStepInterfaceStyle;
     };
     GSThemeIcon = "Thematic.png";
-    GSThemeLicense = "GPL v2\000";
+    GSThemeLicense = "GPL v2+";
     GSThemeTiles = {
     };
     GSThemeVersion = "1.0";
