@@ -21,41 +21,18 @@
 #ifdef GNUSTEP
 #import <GNUstepBase/GNUstep.h>
 #else
-#include "GNUstep.h"
+#import "GNUstep.h"
 #endif
 
-#include "mainWindowController.h"
+#import "mainWindowController.h"
 
 @implementation MainWindowController
 
 - (id) initWithTextView: (NSTextView*) _text andBrowserView:(NSBrowser*) browser {
   if ((self = [super init]))
     {
-
-/*
-	theWindow = [[MainWindow alloc] initWithContentRect: NSMakeRect (100,100,600,600)
-				styleMask: (NSTitledWindowMask | NSClosableWindowMask 
-					| NSMiniaturizableWindowMask | NSResizableWindowMask)
-				backing: NSBackingStoreBuffered
-				defer: YES];
-	//AUTORELEASE (theWindow);
-
-	[super initWithWindow: theWindow];
-	[theWindow setMinSize: NSMakeSize (400,400)];
-	[theWindow layoutWindow];
-	[theWindow setDelegate: self];
-*/
-
 	resultTextView = [_text retain];
 	resultOutlineView = [browser retain];
-
-/*
-	[[theWindow resultTextView] setDelegate: self];
-	[[theWindow resultOutlineView] setDelegate: self];
-	[[theWindow resultOutlineView] setDataSource: self];
-	[[theWindow resultOutlineView] setDrawsGrid: NO];
-	[[self window] setTitle: @"HelpViewer"];
-*/
 
 	[resultTextView setDelegate: self];
 	[resultTextView setTextContainerInset: NSMakeSize (8,8)];
@@ -67,27 +44,10 @@
 	[resultOutlineView setTarget: self];
 	//[resultOutlineView setDataSource: self];
 
-	/*
-	   FIXME: Gorm problem. 
-	   As the current Gorm don't allow to properly edit tableviews,
-	   and set 2 columns by defaults, I removed one ...
-	*/
 
-/*
-	NSArray* columns = [resultOutlineView tableColumns];
-	if ([columns count] > 1) 
-	{
-	    [resultOutlineView removeTableColumn: [columns lastObject]];
-	}
-
-	[resultOutlineView setAutoresizesAllColumnsToFit: YES];
-	[resultOutlineView sizeToFit];
-*/
 	//handler = RETAIN ([XMLHandler new]);
 	handler = [HandlerStructureXLP new];
-/*	
-	[handler setTextView: [theWindow resultTextView]];
-*/	
+	
 	[handler setTextView: resultTextView];
 
 	id TextFormatter = [[TextFormatterXLP alloc] init];
@@ -96,7 +56,6 @@
 	[TextFormatter release];
 
 	prevRow = 0;
-
     }
   return self;
 }
