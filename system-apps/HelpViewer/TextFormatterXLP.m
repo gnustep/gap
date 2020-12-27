@@ -529,15 +529,15 @@
     NSTextAttachment* textAttach = [[NSTextAttachment alloc] init];
     NoteCell* attachCell = [[NoteCell alloc] initWithTextView: textView];
 
-    [[NSNotificationCenter defaultCenter] addObserver: attachCell
-        selector: @selector (resize:)
-        name: @"NSViewFrameDidChangeNotification"
-        object: textView];
-
     [attachCell setImage: img];
     [attachCell setColor: color];
     [attachCell setText: string];
     [attachCell resizeWithTextView: textView];
+
+    [[NSNotificationCenter defaultCenter] addObserver: attachCell
+					     selector: @selector (resize:)
+						 name: @"NSViewFrameDidChangeNotification"
+					       object: textView];
 
     [textAttach setAttachmentCell: attachCell];
     NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
