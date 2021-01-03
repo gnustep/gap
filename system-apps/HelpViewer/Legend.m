@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2021 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,20 +45,27 @@
   [super dealloc];
 }
 
-- (NSComparisonResult) compareLegends: (id) sender
+- (NSComparisonResult) compareWith: (id)sender
 {
-    NSComparisonResult ret = NSOrderedAscending;
-    
-    if ((int)point.y == (int)[sender point].y)
+  NSComparisonResult ret = NSOrderedAscending;
+  NSPoint otherPoint;
+  
+  if (![sender isKindOfClass:[Legend class]])
+    return NSOrderedSame; // in case we cannot tell
+
+  otherPoint = [(Legend*)sender point];
+  
+  if (point.y == otherPoint.y)
     {
-        if (rightPos)
-        {
-            if (point.x < [sender point].x) ret = NSOrderedDescending;
-        }    
-        else if (point.x > [sender point].x) ret = NSOrderedDescending;
+      if ((rightPos && (point.x < otherPoint.x)) ||  
+	  (point.x > otherPoint.x))
+	{
+	    ret = NSOrderedDescending;
+	}  
     }
-    else if (point.y > [sender point].y) ret = NSOrderedDescending;
-    return ret;
+  else if (point.y > otherPoint.y)
+    ret = NSOrderedDescending;
+  return ret;
 }
 
 - (NSMutableAttributedString*) legend { return legend; }

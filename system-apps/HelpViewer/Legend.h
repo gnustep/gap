@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2021 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #ifndef __LEGEND_H__
 #define __LEGEND_H__
 
-#include <Foundation/Foundation.h>
-#include "GNUstep.h"
+#import <Foundation/Foundation.h>
+#import "GNUstep.h"
 
 @interface Legend : NSObject 
 {
@@ -40,7 +40,7 @@
 - (void) setRightPos;
 - (void) setPoint: (NSPoint) p;
 - (BOOL) isRightPos;
-- (NSComparisonResult) compareLegends: (id) sender;
+- (NSComparisonResult) compareWith: (id)sender;
 @end
 
 #endif

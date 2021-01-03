@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2021 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -100,8 +100,8 @@
 		  }        
 	      }
 		    
-	      NSArray* leftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
-	      NSArray* rightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
+	      NSArray* leftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareWith:)];
+	      NSArray* rightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareWith:)];
 
 	      CGFloat leftLegendsHeight = 0;
 	      CGFloat rightLegendsHeight = 0;
@@ -270,8 +270,8 @@
 		  }        
 	      }
 		    
-	      NSArray* leftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareLegends:)];
-	      NSArray* rightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareLegends:)];
+	      NSArray* leftLegends = [preLeftLegends sortedArrayUsingSelector: @selector (compareWith:)];
+	      NSArray* rightLegends = [preRightLegends sortedArrayUsingSelector: @selector (compareWith:)];
 
 	      CGFloat leftLegendsHeight = 0.0;
 	      CGFloat rightLegendsHeight = 0.0;

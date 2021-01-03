@@ -1,3 +1,13 @@
+2021-01-03 Riccardo Mottola <rm@gnu.org>
+
+	* Legend.h
+	* Legend.m
+	Make an explicit comparison method compareWith: and clean up
+	its code.
+
+	* FigureCell.m
+	Use the new comparator.
+
 2020-09-22 Riccardo Mottola <rm@gnu.org>
 
 	* TextFormatterXLP.m
