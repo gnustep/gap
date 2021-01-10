@@ -33,7 +33,8 @@
 	    skipHiddenFoldersCheck,
 	    skipHiddenFilesCheck,
 	    skipThumbFilesCheck,
-	    forceUpdateIfOnlyDateDiffersCheck
+	    forceUpdateIfOnlyDateDiffersCheck,
+	    timeToleranceField
 	);
 	Super = NSObject;
     };

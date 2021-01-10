@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.m
  
- Copyright (C) 2017-2020 Free Software Foundation
+ Copyright (C) 2017-2021 Free Software Foundation
  
  Author: Riccardo Mottola
  
@@ -49,7 +49,9 @@
   [engine setSkipHiddenFiles: [defaults boolForKey:@"SKIP_HIDDEN_FILES"]];
   [engine setSkipThumbFiles: [defaults boolForKey:@"SKIP_THUBMNAIL_FILES"]];
   [engine setForceUpdateIfOnlyDateDiffers: [defaults boolForKey:@"FORCE_UPDATE_SAMESIZE_DIFFDATES"]];
-  
+  [engine setDateTimeTolerance: [defaults integerForKey:@"DATETIME_TOLERANCE"]];
+
+
   str = [defaults stringForKey:@"LAST_ANALYZED_SOURCE_PATH"];
   if (str)
     [sourcePathField setStringValue: str];
@@ -94,6 +96,8 @@
     [forceUpdateIfOnlyDateDiffersCheck setState:NSOnState];
   else
     [forceUpdateIfOnlyDateDiffersCheck setState:NSOffState];
+  
+  [timeToleranceField setIntValue:[engine dateTimeTolerance]];
 
   [prefPanel makeKeyAndOrderFront:sender];
 }
@@ -101,6 +105,7 @@
 - (IBAction)applyPreferences:(id)sender
 {
   NSUserDefaults *defaults;
+  NSInteger intVal;
 
   defaults = [NSUserDefaults standardUserDefaults];
 
@@ -115,6 +120,9 @@
 
   [engine setForceUpdateIfOnlyDateDiffers: [forceUpdateIfOnlyDateDiffersCheck state]];
   [defaults setBool:[engine forceUpdateIfOnlyDateDiffers] forKey:@"FORCE_UPDATE_SAMESIZE_DIFFDATES"];
+  
+  intVal = [timeToleranceField intValue];
+  [defaults setInteger:intVal forKey:@"DATETIME_TOLERANCE"];
 
   [prefPanel close];
 }

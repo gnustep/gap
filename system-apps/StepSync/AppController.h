@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.h
  
- Copyright (C) 2017-2020 Riccardo Mottola
+ Copyright (C) 2017-2021 Riccardo Mottola
  
  Author: Riccardo Mottola
  
@@ -60,9 +60,9 @@
   IBOutlet NSButton *skipHiddenFilesCheck;
   IBOutlet NSButton *skipThumbFilesCheck;
   IBOutlet NSButton *forceUpdateIfOnlyDateDiffersCheck;
+  IBOutlet NSTextField *timeToleranceField;
   
   Engine *engine;
-  
 }
 
 - (IBAction)showPreferences:(id)sender;

@@ -3,7 +3,7 @@
 //  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018-2020 GNUstep. All rights reserved.
+//  Copyright 2018-2021 GNUstep. All rights reserved.
 //
 
 #import "Engine.h"
@@ -40,6 +40,7 @@
       skipHiddenFiles = YES;
       skipThumbFiles = YES;
       forceUpdateIfOnlyDateDiffers = NO;
+      dateTimeTolerance = 0;
     }
   return self;
 }
@@ -144,6 +145,15 @@
   targetRoot = path;
 }
 
+- (unsigned)dateTimeTolerance
+{
+  return dateTimeTolerance;
+}
+
+- (void)setDateTimeTolerance: (unsigned)delta
+{
+  dateTimeTolerance = delta;
+}
 
 - (void)stopTask
 {
@@ -285,33 +295,33 @@
       relPath = [fileObj relativePath];
       fileObj2 = [targetFileDict objectForKey:relPath];
       if (fileObj2)
-	{
+        {
           NSTimeInterval tDiff;
 
-	  tDiff = [[fileObj modifiedDate] timeIntervalSinceDate:[fileObj2 modifiedDate]];
+          tDiff = [[fileObj modifiedDate] timeIntervalSinceDate:[fileObj2 modifiedDate]];
           if ([fileObj size] != [fileObj2 size])
             {
-    	      if (tDiff > TIME_EPSILON)
-                [sourceModFiles addObject:fileObj];
-              else if (tDiff < TIME_EPSILON)
-                [targetModFiles addObject:fileObj];
-              else
+              if (fabs(tDiff) < TIME_EPSILON + dateTimeTolerance*60.0)
                 [sizeDiffFiles addObject:fileObj];
+              else if (tDiff > TIME_EPSILON)
+                [sourceModFiles addObject:fileObj];
+              if (tDiff < TIME_EPSILON)
+                [targetModFiles addObject:fileObj];
             }
-	  else // same size
+          else // same size
             {
-              if (fabs(tDiff) > TIME_EPSILON)
+              if (fabs(tDiff) > TIME_EPSILON + dateTimeTolerance*60.0)
                 {
                   [dateDiffFiles addObject:fileObj];
                   NSLog(@"%@: %@ %@", [fileObj relativePath], [fileObj modifiedDate], [fileObj2 modifiedDate]);
                 }
               // else we suppose the file are really identical (or we check MD5 or such)
             }
-	}
+        }
       else
-	{
-	  [targetMissingFiles addObject:fileObj];
-	}
+        {
+          [targetMissingFiles addObject:fileObj];
+        }
     }
 
   /* look for source missing files */
