@@ -27,6 +27,7 @@
 
 #if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
 typedef unsigned NSUInteger;
+typedef int NSInteger;
 #endif
 
 @interface FileObject : NSObject
