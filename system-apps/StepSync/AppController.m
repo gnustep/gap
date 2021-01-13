@@ -122,6 +122,7 @@
   [defaults setBool:[engine forceUpdateIfOnlyDateDiffers] forKey:@"FORCE_UPDATE_SAMESIZE_DIFFDATES"];
   
   intVal = [timeToleranceField intValue];
+  [engine setDateTimeTolerance: intVal];
   [defaults setInteger:intVal forKey:@"DATETIME_TOLERANCE"];
 
   [prefPanel close];
