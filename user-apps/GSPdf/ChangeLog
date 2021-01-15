@@ -1,3 +1,9 @@
+2021-01-14 Riccardo Mottola <rm@gnu.org>
+
+	* ps.c
+	No need to use strncpy when using the string's len! strcpy is more
+	efficient.
+
 2019-04-27 Riccardo Mottola <rm@gnu.org>
 
 	* GSPdfDocument.m

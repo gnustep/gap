@@ -1109,16 +1109,17 @@ static char *gettextline(char *line)
 	if (*line == '(') {
 		return gettext(line, NULL);
 	} else {
-		if (strlen(line) == 0) {
+		size_t len = strlen(line+1);
+ 
+		if (len == 0) {
 			return NULL;
 		}
-		cp = (char *) malloc(strlen(line));
+		cp = (char *) malloc(len);
 		if (cp == NULL) {
-	    fprintf(stderr, "Fatal Error: Dynamic memory exhausted.\n");
-	    exit(-1);
+			fprintf(stderr, "Fatal Error: Dynamic memory exhausted.\n");
+			exit(-1);
 		}
-		strncpy(cp, line, strlen(line)-1);
-		cp[strlen(line)-1] = '\0';
+		strcpy(cp, line); 
 		return cp;
 	}
 }
