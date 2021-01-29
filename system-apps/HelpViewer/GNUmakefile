@@ -12,8 +12,8 @@ HelpViewer_RESOURCE_FILES = Icons/Index.tiff Icons/Back.tiff Icons/Search.tiff I
 			Icons/part.tiff Icons/chapter.tiff Icons/notloaded.tiff Icons/errorloading.tiff \
 			Icons/note.png Icons/caution.png Icons/listing.png Icons/information.png \
 			Icons/Point.tiff Icons/Point2.tiff Icons/Icon-hlpd.tiff\
-			Gorm/Main.gorm HelpViewer.help
-HelpViewer_MAIN_MODEL_FILE = Main.gorm
+			Gorm/MainMenu.gorm HelpViewer.help
+HelpViewer_MAIN_MODEL_FILE = MainMenu.gorm
 #HelpViewer_PRINCIPAL_CLASS = NSApplication
 
 HelpViewer_LANGUAGES = English # French
