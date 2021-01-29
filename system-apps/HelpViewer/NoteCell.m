@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2021 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,9 @@
       _image = nil;
       _note = nil;
       _color = nil;
-      border = 12.0;
+      imageBorder = 4.0;
+      leadingMargin = 8.0;
+      trailingMargin = 4.0;
       [self resizeWithTextView: textview];
     }
   return self;    
@@ -38,6 +40,18 @@
 - (void) setText: (NSMutableAttributedString*) text
 {
     ASSIGN (_note, text);
+
+    NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
+    [paragraph setAlignment: NSLeftTextAlignment];
+    [paragraph setHeadIndent: leadingMargin];
+    [paragraph setFirstLineHeadIndent: leadingMargin];
+    [paragraph setTailIndent: -trailingMargin];
+      
+    NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
+							   forKey: NSParagraphStyleAttributeName];
+    [paragraph release];
+	  
+    [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
 }
 
 - (void) setImage:  (NSImage*) img
@@ -64,40 +78,35 @@
 {
     CGFloat height = 0.0;
     CGFloat width = 0.0;
-    CGFloat heighttext = 0.0;
+    CGFloat textHeight = 0.0;
     CGFloat imageWidth = 0.0;
-    CGFloat margin = 0.0;
 
     if (_image)
       {
 	imageWidth = [_image size].width;
 	height = [_image size].height;
+	width = imageWidth;
       }
-
-    width = [textView bounds].size.width - 2*border;
-    if (width <= 0)
-      width = 375;
-    NSLog(@"NoteCell: Width: %.2f", width);
     
-    margin = width - imageWidth;
-
     if (_note)
       {
-	NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
-	[paragraph setAlignment: NSLeftTextAlignment];
-	[paragraph setTailIndent: margin];
-      
-	NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
-							       forKey: NSParagraphStyleAttributeName];
-	[paragraph release];
-	  
-	[_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
-	heighttext = [_note size].height;
-      }
+	NSSize size;
 
-    NSLog (@"NoteCell: heightext : %.2f height : %.2f", heighttext, height);
-    if (heighttext > height)
-      height = heighttext;
+	size.width = [textView bounds].size.width - width;
+	size.width -= leadingMargin; // Take in account of the text margins inside the view
+	size.width -= leadingMargin*2;
+	size.height = 9999.0;
+	if (size.width <= 0)
+	  size.width = [textView bounds].size.width;
+        noteSize = [_note boundingRectWithSize:size options:0].size;
+	NSLog(@"input %@ output %@", NSStringFromSize(size), NSStringFromSize(noteSize));
+	textHeight = noteSize.height;
+	if (textHeight > height)
+	  height = textHeight;
+	width += size.width;
+      }
+   
+    NSLog (@"NoteCell: width : %.2f height : %.2f", width, height);
 
     _size = NSMakeSize (width, height);
 }
@@ -105,89 +114,70 @@
 - (void) drawWithFrame: (NSRect) cellFrame
     inView: (NSView*) controlView
 {
-      if (![controlView window])
-	            return;
+  [super drawWithFrame: cellFrame inView: controlView];
+}
 
-	//[[NSColor colorWithCalibratedRed: 0.62 green: 0.71 blue: 0.84 alpha:1.0] set];
-	//[[NSColor colorWithCalibratedRed: 0.81 green: 0.84 blue: 0.88 alpha:1.0] set];
-	//[[NSColor colorWithCalibratedRed: 0.88 green: 0.78 blue: 0.78 alpha:1.0] set];
-	[_color set];
+- (void) drawInteriorWithFrame: (NSRect) cellFrame
+    inView: (NSView*) controlView
+{
+  if (![controlView window])
+    return;
+  NSLog(@"draw width: %f", cellFrame.size.width);
+  [_color set];
 
-	//NSRectFill (cellFrame);
+  NSBezierPath* path = [[NSBezierPath alloc] init];
 
-	//[[NSColor blackColor] set];
+  CGFloat radius = 8;
 
-	NSBezierPath* path = [[NSBezierPath alloc] init];
+  NSPoint p1 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + radius);
+  NSPoint p2 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + cellFrame.size.height - radius);
+  NSPoint p4 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + cellFrame.size.height);
+  NSPoint p6 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width, cellFrame.origin.y + radius);
+  NSPoint p8 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y);
 
-	CGFloat radius = 8;
+  NSPoint pr1 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y + cellFrame.size.height - radius);
+  NSPoint pr2 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + cellFrame.size.height - radius);
+  NSPoint pr3 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + radius);
+  NSPoint pr4 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y + radius);
 
-	NSPoint p1 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + radius);
-	NSPoint p2 = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + cellFrame.size.height - radius);
-	NSPoint p4 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + cellFrame.size.height);
-	NSPoint p6 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width, cellFrame.origin.y + radius);
-	NSPoint p8 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y);
+  [path moveToPoint: p1];
+  [path lineToPoint: p2];
+  [path appendBezierPathWithArcWithCenter: pr1 radius: radius startAngle: 180 endAngle: 90 clockwise: YES];
+  [path lineToPoint: p4];
+  [path appendBezierPathWithArcWithCenter: pr2 radius: radius startAngle: 90 endAngle: 0 clockwise: YES];
+  [path lineToPoint: p6];
+  [path appendBezierPathWithArcWithCenter: pr3 radius: radius startAngle: 0 endAngle: 270 clockwise: YES];
+  [path lineToPoint: p8];
+  [path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
+  [path fill];
+  [path release];
 
-	NSPoint pr1 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y + cellFrame.size.height - radius);
-	NSPoint pr2 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + cellFrame.size.height - radius);
-	NSPoint pr3 = NSMakePoint (cellFrame.origin.x + cellFrame.size.width - radius, cellFrame.origin.y + radius);
-	NSPoint pr4 = NSMakePoint (cellFrame.origin.x + radius, cellFrame.origin.y + radius);
+  if (_note)
+    {
+      CGFloat imageWidth = 0.0;
+      CGFloat imageHeight = 0.0;
+      NSPoint imageOrigin = NSZeroPoint;
+      NSPoint noteOrigin = NSZeroPoint;
+      NSRect noteRect;
 
-	[path moveToPoint: p1];
-	[path lineToPoint: p2];
-	[path appendBezierPathWithArcWithCenter: pr1 radius: radius startAngle: 180 endAngle: 90 clockwise: YES];
-	[path lineToPoint: p4];
-	[path appendBezierPathWithArcWithCenter: pr2 radius: radius startAngle: 90 endAngle: 0 clockwise: YES];
-	[path lineToPoint: p6];
-	[path appendBezierPathWithArcWithCenter: pr3 radius: radius startAngle: 0 endAngle: 270 clockwise: YES];
-	[path lineToPoint: p8];
-	//[path appendBezierPathWithArcFromPoint: p8 toPoint: p1 radius: radius];
-	[path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
-	[path fill];
-	[path release];
-
-	if (_note)
+      if (_image)
 	{
-	      CGFloat imageWidth = 0.0;
-	      CGFloat imageHeight = 0.0;   
-	      CGFloat margin = 0.0;
+	  imageWidth = [_image size].width;
+	  imageHeight = [_image size].height;
 
-	      if (_image)
-		{
-		  imageWidth = [_image size].width;
-		  imageHeight = [_image size].height;
-		}
-	      margin = cellFrame.size.width - imageWidth - 2*border;
-	      
-	      NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
-	      [paragraph setAlignment: NSLeftTextAlignment];
-	      [paragraph setTailIndent: margin];
-	      
-	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
-		    forKey: NSParagraphStyleAttributeName];
-	      [paragraph release];
-
-	      [_note addAttributes: attributes range: NSMakeRange (0, [_note length])];
-	      NSSize sizenote = [_note size];
-
-	      CGFloat posy = 0;
-	      if (sizenote.height < cellFrame.size.height)
-	      {
-	      	posy = (cellFrame.size.height - sizenote.height) / 2;
-	      }
-	      posy += cellFrame.origin.y;
-	      
-	      NSPoint imageOrigin = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + cellFrame.size.height);
-	      if (cellFrame.size.height > imageHeight)
-	      {
-	      	imageOrigin = NSMakePoint (cellFrame.origin.x, cellFrame.origin.y + 
-			cellFrame.size.height - (cellFrame.size.height - imageHeight)/2);
-	      }
-	      
-	      [_image compositeToPoint: imageOrigin operation: NSCompositeSourceAtop];
-	      
-
-	      [_note drawAtPoint: NSMakePoint (cellFrame.origin.x + imageWidth + border, posy)];
+	  imageOrigin.x = cellFrame.origin.x;
+	  imageOrigin.y = cellFrame.origin.y + cellFrame.size.height - (cellFrame.size.height - imageHeight)/2;
+	  [_image compositeToPoint: imageOrigin operation: NSCompositeSourceAtop];
 	}
+
+      noteOrigin.x = cellFrame.origin.x + imageWidth;
+      noteOrigin.y = cellFrame.origin.y + (cellFrame.size.height - noteSize.height)/2;
+
+      noteRect.origin = noteOrigin;
+      noteRect.size = noteSize;
+
+      [_note drawInRect: noteRect];
+    }
 }
 
 @end

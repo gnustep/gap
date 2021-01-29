@@ -29,9 +29,12 @@
 {
     NSImage* _image;
     NSMutableAttributedString* _note;
+    NSSize noteSize;
     NSSize _size;
     NSColor* _color;
-    CGFloat border;
+    CGFloat imageBorder;
+    CGFloat leadingMargin;
+    CGFloat trailingMargin;
 }
 - (id) initWithTextView: (NSTextView*) textview;
 - (NSSize) cellSize;
