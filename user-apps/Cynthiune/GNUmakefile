@@ -39,6 +39,9 @@ endif
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
+#optional file to include your setup
+-include bundle_config.make
+
 FRAMEWORKS_DIRS = Frameworks/Cynthiune
 FRAMEWORKS = Cynthiune
 
