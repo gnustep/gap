@@ -10,6 +10,7 @@
 	distclean,
 	dist
     );
+    "BUNDLE_IDENTIFIER" = "org.gap.GMines";
     "CLASS_FILES" = (
 	"Controller.m",
 	"Views.m"

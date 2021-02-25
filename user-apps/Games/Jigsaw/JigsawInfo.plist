@@ -6,6 +6,7 @@
   Authors = ("GAP Team","Marko Riedel <markoriedelde@yahoo.de>");
   Copyright = "Copyright (C) 2007-2013 Free Software Foundation, Inc.";
   CopyrightDescription = "Released under the GNU General Public License 2.0";
+  CFBundleIdentifier = "org.gap.Jigsaw";
   NSIcon = "GPuzzle2.tiff";
   NSTypes = (
         {

@@ -12,6 +12,7 @@
 	distclean,
 	dist
     );
+    "BUNDLE_IDENTIFIER" = "org.gap.GShisen";
     "CLASS_FILES" = (
 	"board.m",
 	"gshisen.m",

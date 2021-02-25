@@ -7,6 +7,7 @@
 	Copyright = "Copyright (c) 2003 Nicolas Roard";
 	CopyrightDescription = "This program is released under the GNU GPL";
 	GSHelpType = "help";
+	CFBundleIdentifier = org.gnustep.HelpViewer;
 	NSIcon = "HelpViewer.tiff";
 	NSRole = "Viewer";
 	NSTypes = (

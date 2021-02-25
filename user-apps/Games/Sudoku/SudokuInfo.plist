@@ -8,6 +8,7 @@
     );
     Copyright = "Copyright (C) 2007-2011 Free Software Foundation, Inc.";
     CopyrightDescription = "Released under GPL v3 or later";
+    CFBundleIdentifier = org.gap.Sudoku;
     FullVersionID = "0.7";
     NSExecutable = Sudoku;
     NSIcon = "Sudoku.tiff";
