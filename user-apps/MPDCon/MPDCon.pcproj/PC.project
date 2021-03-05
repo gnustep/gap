@@ -12,6 +12,7 @@
     );
     "BUILDER_VERBOSE" = YES;
     BUILDTOOL = "/usr/local/bin/gmake";
+    "BUNDLE_IDENTIFIER" = "org.gap.MPDCon";
     "CLASS_FILES" = (
 	"AppController.m",
 	"PreferencesController.m",
