@@ -9,6 +9,7 @@
 	"G\U00FCnther Noack <guenther@unix-ag.uni-kl.de>",
         "Riccardo Mottola"
     );
+    CFBundleIdentifier = "org.gap.Grr";
     URL = "http://gap.nongnu.org/grr/";
     Copyright = "Copyright GNUstep Application Project team 2006-2013";
     CopyrightDescription = "Released under the terms of the GNU General Public License";
