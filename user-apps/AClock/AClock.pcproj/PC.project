@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = "";
+    APPLICATIONICON = "AClock.tiff";
     "APP_DOCUMENT_BASED" = NO;
     "APP_TYPE" = GORM;
     "BUILDER_TARGETS" = (
@@ -81,7 +81,7 @@
 	"G\U00FCrkan Seng\U00FCn",
 	"Riccardo Mottola"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2003-2017";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2003-2019";
     "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
     "PROJECT_CREATOR" = multix;
     "PROJECT_DESCRIPTION" = "Analog Clock";
@@ -90,7 +90,7 @@
     "PROJECT_GROUP" = "No group avaliable!";
     "PROJECT_MAINTAINER" = multix;
     "PROJECT_NAME" = AClock;
-    "PROJECT_RELEASE" = "0.4.0";
+    "PROJECT_RELEASE" = "0.5.0";
     "PROJECT_SUMMARY" = "No summary avaliable!";
     "PROJECT_TYPE" = Application;
     "PROJECT_URL" = "http://gap.nongnu.org/aclock/";

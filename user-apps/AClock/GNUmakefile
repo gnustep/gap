@@ -22,10 +22,10 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #
 # Application
 #
-VERSION = 0.4.0
+VERSION = 0.5.0
 PACKAGE_NAME = AClock
 APP_NAME = AClock
-AClock_APPLICATION_ICON = 
+AClock_APPLICATION_ICON = AClock.tiff
 
 
 #
