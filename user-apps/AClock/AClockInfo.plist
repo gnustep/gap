@@ -10,8 +10,8 @@
 	"Riccardo Mottola"
     );
     CFBundleIdentifier = "org.gap.AClock";
-    Copyright = "Copyright (C) 2003-2019";
-    CopyrightDescription = "Released under GPL";
+    Copyright = "Copyright (C) 2003-2021";
+    CopyrightDescription = "Released under GPL v2+";
     FullVersionID = "0.5.0";
     NSExecutable = AClock;
     NSIcon = "AClock.tiff";

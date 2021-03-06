@@ -55,6 +55,7 @@ Resources/cuckoo6.png \
 Resources/cuckoo7.png \
 Resources/cuckoo8.png \
 Resources/cuckoo9.png \
+Resources/GSFaceBackground.tiff \
 Resources/cuckoo.wav \
 Resources/ring.wav 
 

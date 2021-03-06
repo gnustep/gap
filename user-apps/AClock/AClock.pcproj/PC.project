@@ -50,7 +50,8 @@
 	"cuckoo6.png",
 	"cuckoo7.png",
 	"cuckoo8.png",
-	"cuckoo9.png"
+	"cuckoo9.png",
+	"GSFaceBackground.tiff"
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
@@ -81,8 +82,8 @@
 	"G\U00FCrkan Seng\U00FCn",
 	"Riccardo Mottola"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2003-2019";
-    "PROJECT_COPYRIGHT_DESC" = "Released under GPL";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2003-2021";
+    "PROJECT_COPYRIGHT_DESC" = "Released under GPL v2+";
     "PROJECT_CREATOR" = multix;
     "PROJECT_DESCRIPTION" = "Analog Clock";
     "PROJECT_DOCUMENTTYPES" = (

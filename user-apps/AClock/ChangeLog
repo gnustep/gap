@@ -1,3 +1,9 @@
+2021-03-06 Riccardo Mottola <rm@gmu.org>
+
+	* AppController.m:
+	* Resources/GSFaceBackground.tiff
+	Set on startup a different icon so it us used for the background.
+
 2017-03-31 Riccardo Mottola <rm@gmu.org>
 
 	* AppController.h

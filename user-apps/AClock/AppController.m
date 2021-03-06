@@ -2,7 +2,7 @@
  Project: AClock
  AppController.m
 
- Copyright (C) 2003-2018 GNUstep Application Project
+ Copyright (C) 2003-2021 GNUstep Application Project
 
  Author: Alexander Malmberg
          Banlu Kemiyatorn 
@@ -301,8 +301,14 @@ static float volume_append = 1.0;
 	NSMenu *menu, *m;
 	NSWindow *win;
 	unsigned int width, height;
+	NSString *faceImagePath;
+
 	menu = [NSMenu new];
 	m = [NSMenu new];
+
+	faceImagePath = [NSBundle pathForResource:@"GSFaceBackground" ofType:@"tiff" inDirectory:@"AClock.app"];
+	NSLog(@"Face icon: %@", faceImagePath);
+	[NSApp setApplicationIconImage:[NSImage imageNamed:@"GSFaceBackground"]];
 
 	/* Info */
 	[m addItemWithTitle: _(@"Info...")
