@@ -438,31 +438,26 @@ NSTimer *ctimer;
 - (void) setFrequency: (id)sender
 {
 	NSInvocation *inv;
-	float fr, fx, fy;
+	int pulseExp;
+	float pulse, f;
 	inv = [NSInvocation invocationWithMethodSignature:
 		[self methodSignatureForSelector:@selector(tick)]];
 	[inv setSelector:@selector(tick)];
 	[inv setTarget:self];
 
-	fr = [sender floatValue];
-	fx = 1.0;
-	fy = 1.0;
+	pulseExp = [sender intValue];
+	pulse = exp2(pulseExp);
+	f = 1/pulse;
 
-	while (fx > fr)
-	{
-		fx -= 0.25;
-		fy /= 2;
-	}
-
-	if (fx > 0.8) doFloor = YES;
+	if (f > 0.8) doFloor = YES;
 	else doFloor = NO;
 
 	[timer invalidate];
-	timer=[NSTimer scheduledTimerWithTimeInterval:fy invocation:inv repeats:YES];
+	timer=[NSTimer scheduledTimerWithTimeInterval:f invocation:inv repeats:YES];
 
-	[freqText setStringValue:[NSString stringWithFormat:@"%0.0f/sec", 1.0/fy]];
+	[freqText setStringValue:[NSString stringWithFormat:@"%0.0f/sec", pulse]];
 
-	[defaults setObject:[sender stringValue] forKey:@"RefreshRate"];
+	[defaults setObject:[NSNumber numberWithFloat:pulseExp] forKey:@"RefreshRate"];
 	[defaults synchronize];
 }
 
@@ -491,7 +486,7 @@ NSTimer *ctimer;
 	[secondSwitch setIntValue:[_clock second]];
 	[numberPopUp selectItemAtIndex:[_clock numberType]];
 
-	[freqSlider setFloatValue:[defaults floatForKey: @"RefreshRate"]];
+	[freqSlider setIntValue:[defaults integerForKey: @"RefreshRate"]];
 	[self setFrequency:freqSlider];
 	[ringSlider setFloatValue:[defaults floatForKey: @"RingLoop"]];
 	[self setRingLoop:ringSlider];
@@ -503,7 +498,11 @@ NSTimer *ctimer;
 
 	if ([defaults boolForKey: @"ShowsDate"])
 			 [_clock setDate:[NSCalendarDate date]];
-	timer=[NSTimer scheduledTimerWithTimeInterval:[defaults floatForKey: @"RefreshRate"] invocation:inv repeats:YES];
+	int pulseExp;
+	float f;
+	pulseExp = [defaults integerForKey: @"RefreshRate"];
+	f = 1/exp2(pulseExp);
+	timer=[NSTimer scheduledTimerWithTimeInterval:f invocation:inv repeats:YES];
 
 
 	if ([defaults boolForKey: @"autolaunch"]) {

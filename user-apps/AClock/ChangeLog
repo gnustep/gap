@@ -1,3 +1,10 @@
+2021-03-08 Riccardo Mottola <rm@gmu.org>
+
+	* AppController.m:
+	* Resources/AClock.gorm
+	For the update frequency, actually use pulse, expressed as 2^exp.
+	(0 = 1, 1 = 1/2, 2 = 1/4....) this makes it much easier to store.
+
 2021-03-06 Riccardo Mottola <rm@gmu.org>
 
 	* AppController.m:
