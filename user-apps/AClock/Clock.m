@@ -345,8 +345,6 @@ static NSArray *dayWeek;
 	a1 = 450 - fmod(handsTime, 43200.)/120.;
 	a2 = atan(p.y/p.x)/(2 * M_PI) * 360;
 
-
-
 	if (p.x < 0)
 	{
 		a2 += 180;
@@ -544,7 +542,7 @@ static NSArray *dayWeek;
 							value:font
 							range:NSMakeRange(0,[str length])];
 				strSize = [str size];
-				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2 +1, center.y - radius * 0.8 + strSize.height/2 -1)];
+				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2 +1, center.y - radius * 0.71 + strSize.height/2 -1)];
 				[str release];
 			}
 
@@ -638,7 +636,7 @@ static NSArray *dayWeek;
 							value:font
 							range:NSMakeRange(0,[str length])];
 				strSize = [str size];
-				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2, center.y - radius * 0.8 + strSize.height/2)];
+				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2, center.y - radius * 0.71 + strSize.height/2)];
 				[str release];
 			}
 
