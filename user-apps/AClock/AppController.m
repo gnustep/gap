@@ -162,10 +162,13 @@ static int rounds_done = 0;	// how often a sound was played already
 
 - (void) setFaceTransparency: (id)sender
 {
-	[_clock setFaceTransparency:[sender floatValue]];
-	[bigClock setFaceTransparency:[sender floatValue]];
-	[defaults setObject:[sender stringValue] forKey:@"FaceTransparency"];
-	[defaults synchronize];
+  float t;
+
+  t = [sender floatValue];
+  [_clock setFaceTransparency:t];
+  [bigClock setFaceTransparency:t];
+  [defaults setObject:[NSNumber numberWithFloat:t] forKey:@"FaceTransparency"];
+  [defaults synchronize];
 }
 
 
