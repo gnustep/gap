@@ -1,3 +1,8 @@
+2021-03-10 Riccardo Mottola <rm@gmu.org>
+
+	* Clock.m:
+	Destroy, not just release _cacheFrame, avoid crash.
+
 2021-03-08 Riccardo Mottola <rm@gmu.org>
 
 	* AppController.m:

@@ -104,7 +104,9 @@ static NSArray *dayWeek;
 	font = [[NSFont boldSystemFontOfSize:radius/5] retain];
 
 	[_cacheFrame release];
+	_cacheFrame = nil;
 	[_cacheMark release];
+	_cacheMark = nil;
 }
 
 
@@ -257,6 +259,7 @@ static NSArray *dayWeek;
   _cacheMark = nil;
   [self setNeedsDisplay:YES];
 }
+
 -(void) setShadow:(BOOL)sh
 {
   shadow = sh;
