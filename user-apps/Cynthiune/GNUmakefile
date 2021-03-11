@@ -84,7 +84,7 @@ endif
 endif
 
 ifneq (yes,$(disable-mod))
-BUNDLES += Mod
+BUNDLES += Mod ModTags
 endif
 
 ifneq (yes,$(disable-windowsmedia))

@@ -76,7 +76,7 @@
 
 + (NSArray *) compatibleTagBundles
 {
-  return nil;
+  return [NSArray arrayWithObject: @"ModTags"];
 }
 
 - (BOOL) streamOpen: (NSString *) fileName;
@@ -150,36 +150,6 @@
 - (unsigned int) readDuration
 {
   return (ModPlug_GetLength (_mp_file) / 1000);
-}
-
-- (NSString *) readTitle
-{
-  return [NSString stringWithCString: ModPlug_GetName (_mp_file)];
-}
-
-- (NSString *) readGenre
-{
-  return @"";
-}
-
-- (NSString *) readArtist
-{
-  return @"";
-}
-
-- (NSString *) readAlbum
-{
-  return @"";
-}
-
-- (NSString *) readYear
-{
-  return @"";
-}
-
-- (NSString *) readTrackNumber
-{
-  return @"";
 }
 
 - (void) streamClose
