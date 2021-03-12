@@ -304,14 +304,11 @@ static float volume_append = 1.0;
 	NSMenu *menu, *m;
 	NSWindow *win;
 	unsigned int width, height;
-	NSString *faceImagePath;
+	NSImage *faceImage;
+	NSImageView *faceImageView;
 
 	menu = [NSMenu new];
 	m = [NSMenu new];
-
-	faceImagePath = [NSBundle pathForResource:@"GSFaceBackground" ofType:@"tiff" inDirectory:@"AClock.app"];
-	NSLog(@"Face icon: %@", faceImagePath);
-	[NSApp setApplicationIconImage:[NSImage imageNamed:@"GSFaceBackground"]];
 
 	/* Info */
 	[m addItemWithTitle: _(@"Info...")
@@ -344,7 +341,13 @@ static float volume_append = 1.0;
 	width = [[win contentView] bounds].size.width;
 	height = [[win contentView] bounds].size.height;
 
-	_clock = [[Clock alloc] initWithFrame: NSMakeRect(1, 1, width - 2, height - 2)];
+	faceImage = [NSImage imageNamed:@"GSFaceBackground"];
+	faceImageView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, width, height)];
+	[faceImageView setImage: faceImage];
+	[[win contentView] addSubview:faceImageView];
+	[faceImageView release];
+
+	_clock = [[Clock alloc] initWithFrame: NSMakeRect(0, 0, width, height)];
 	[[win contentView] addSubview:_clock];
 
 	[_clock setTarget:self];

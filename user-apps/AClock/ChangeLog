@@ -1,3 +1,9 @@
+2021-03-12 Riccardo Mottola <rm@gmu.org>
+
+	* AppController.m:
+	Use a subview to draw the background so that the application icon is
+	not changed. Minor pixel size tweaks.
+
 2021-03-11 Riccardo Mottola <rm@gmu.org>
 
 	* AppController.m:
