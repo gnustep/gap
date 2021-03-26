@@ -1109,7 +1109,7 @@ static char *gettextline(char *line)
 	if (*line == '(') {
 		return gettext(line, NULL);
 	} else {
-		size_t len = strlen(line+1);
+		size_t len = strlen(line)+1;
  
 		if (len == 0) {
 			return NULL;
