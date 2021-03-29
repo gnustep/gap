@@ -2,7 +2,7 @@
  *  GSPdfDocument.m: Implementation of the GSPdfDocument Class 
  *  of the GSPdf application
  *
- *  Copyright (c) 2002-2019 GNUstep Application Project
+ *  Copyright (c) 2002-2021 GNUstep Application Project
  *  
  *  Date: February 2002
  *  Authors: Enrico Sersale
@@ -87,8 +87,16 @@
 
       ASSIGN (task, [NSTask new]);
       [task setLaunchPath: gsComm];
-      [task setArguments: args];		
-      [task launch];
+      [task setArguments: args];
+      NS_DURING
+        [task launch];
+      NS_HANDLER
+	{
+	  if ([localException name] == NSInvalidArgumentException)
+	    NSLog(@"Invalid Argument Exception");
+	  return NO;
+	}
+      NS_ENDHANDLER
       [task waitUntilExit];
 
       if ([task terminationStatus] == 0)

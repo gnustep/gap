@@ -1,3 +1,8 @@
+2021-03-29 Riccardo Mottola <rm@gnu.org>
+
+	* GSPdfDocument.m
+	Handle task run exception better.
+
 2021-01-14 Riccardo Mottola <rm@gnu.org>
 
 	* ps.c
