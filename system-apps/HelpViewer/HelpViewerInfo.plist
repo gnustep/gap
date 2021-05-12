@@ -9,12 +9,12 @@
 	GSHelpType = "help";
 	CFBundleIdentifier = org.gnustep.HelpViewer;
 	NSIcon = "HelpViewer.tiff";
-	NSRole = "Viewer";
 	NSTypes = (
 	    {
 		NSHumanReadableName = "GNUstep Help Document";
 		NSUnixExtensions = ("help");
 		NSIcon = "Icon-hlpd.tiff";
+	        NSRole = "Viewer";
 	    }
 	);
 }
