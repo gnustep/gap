@@ -1,11 +1,11 @@
 {
 	ApplicationName = "HelpViewer";
 	ApplicationDescription = "GNUstep Help Viewer";
-	ApplicationRelease = "0.3";
+	ApplicationRelease = "0.4";
 	ApplicationURL = "http://www.roard.com/helpviewer";
-	Authors = ("Nicolas Roard <nicolas@roard.com>");
-	Copyright = "Copyright (c) 2003 Nicolas Roard";
-	CopyrightDescription = "This program is released under the GNU GPL";
+	Authors = ("Nicolas Roard <nicolas@roard.com>","Riccardo Mottola <rm@gnu.org>");
+	Copyright = "Copyright (c)\n2003 Nicolas Roard\n2021 Riccardo Mottola";
+	CopyrightDescription = "This program is released under the GNU GPL 2 or later";
 	GSHelpType = "help";
 	CFBundleIdentifier = org.gnustep.HelpViewer;
 	NSIcon = "HelpViewer.tiff";

@@ -1,6 +1,6 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
-VERSION = 0.3
+VERSION = 0.4
 PACKAGE_NAME = HelpViewer
 APP_NAME = HelpViewer
 
