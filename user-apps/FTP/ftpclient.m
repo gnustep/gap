@@ -1083,7 +1083,7 @@ int getChar(streamStruct* ss)
           NSLog(@"Error return code of PORT: %d", returnCode);
           if(reply && [reply count] > 0)
             {
-              NSLog(@"error occoured in port command: %@", [reply objectAtIndex:0]);
+              NSLog(@"error occurred in port command: %@", [reply objectAtIndex:0]);
               return -1;
             }
           NSLog(@"error in port command, no code");

@@ -107,7 +107,7 @@
   
   if ([fm removeFileAtPath:[file path] handler:nil] == NO)
     {
-      NSLog(@"an error occoured during local delete");
+      NSLog(@"an error occurred during local delete");
       return NO;
     }
   return YES;
