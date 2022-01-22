@@ -85,6 +85,7 @@
 - (IBAction)rotateImage90:(id)sender;
 - (IBAction)rotateImage180:(id)sender;
 - (IBAction)rotateImage270:(id)sender;
+- (IBAction)doubleClicked:(id)sender;
 
 - (void)updateImageCount;
 
