@@ -360,9 +360,15 @@ void init_constants() {
 -(void) openAnchor: (NSDictionary*) aDictionary
 {
     NSMutableDictionary* attributes = [[self style] mutableCopyWithZone: (NSZone*)nil];
-        
-    NSURL* hyperlinkTarget = [NSURL URLWithString: [aDictionary objectForKey: @"href"]];
+    NSString *urlString = nil;
+    NSURL* hyperlinkTarget = nil;
+    id val = nil;
 
+    val = [aDictionary objectForKey: @"href"];
+    if (val == [NSNull null])
+      val = nil;
+    urlString = (NSString *)val;
+    hyperlinkTarget = [NSURL URLWithString: urlString];
     if (hyperlinkTarget != nil)
       {
         [attributes setObject: hyperlinkTarget
@@ -500,8 +506,8 @@ void init_constants() {
                 nextChar = [self characterAtIndex: [scanner scanLocation]];
                 while (nextChar != '>' && nextChar != '/') {
                     // ASSERT: At the beginning of a new attribute
-                    NSString* attrName;
-                    NSString* attrValue;
+                    NSString* attrName = nil;
+                    NSString* attrValue = nil;
                     
                     [scanner scanUpToString: @"=" intoString: &attrName];
                     [scanner scanString: @"=" intoString: (NSString**)nil];
@@ -519,11 +525,17 @@ void init_constants() {
                                                 intoString: &attrValue];
                     }
                     [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
-                    
-                    NSAssert1(attrName != nil, @"Attribute name was nil in tag %@", name);
-                    NSAssert2(attrValue != nil, @"Value was nil for attribute %@ in tag %@", attrName, name);
- 
-                    [attrDict setObject: attrValue forKey: attrName];
+
+		    if (attrName) {
+		      if (attrValue == nil) {
+			NSLog(@"Value was nil for attribute %@ in tag %@", attrName, name);
+			[attrDict setObject: [NSNull null] forKey: attrName];
+		      } else {
+			[attrDict setObject: attrValue forKey: attrName];
+		      }
+		    } else {
+		      NSLog(@"Attribute name was nil in tag %@", name);
+		    }
                     
                     nextChar = [self characterAtIndex: [scanner scanLocation]];
                 }
