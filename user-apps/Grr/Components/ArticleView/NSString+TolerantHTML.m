@@ -81,6 +81,8 @@ void init_constants() {
         @"openParagraph:",@"br",
         @"openAnchor:", @"a",
         @"openPre:",@"pre",
+	@"openCode:",@"code",
+	@"openImage:",@"img",
         nil
     ] retain];
     NSLog(@"opening: %@", openingTagsHandlers);
@@ -93,6 +95,8 @@ void init_constants() {
         @"stylePop",@"em",
         @"stylePop",@"a",
         @"stylePop",@"pre",
+	@"stylePop",@"code",
+	@"stylePop",@"img",
         nil
     ] retain];
     
@@ -385,7 +389,37 @@ void init_constants() {
     [self stylePush: attributes];
 }
 
+-(void) openImage: (NSDictionary*) aDictionary
+{
+  NSString *urlString = nil;
+  NSString *altString = nil;
+  NSURL *srcURL;
+  id val = nil;
+
+  val = [aDictionary objectForKey: @"src"];
+  if (val == [NSNull null])
+    val = nil;
+  urlString = (NSString *)val;
+  srcURL = [NSURL URLWithString:urlString];
+
+  val = [aDictionary objectForKey: @"alt"];
+  if (val == [NSNull null])
+    val = nil;
+  altString = (NSString *)val;
+
+  NSLog(@"Image (%@) - src URL: %@", altString, srcURL);
+}
+
 -(void) openPre: (NSDictionary*) aDictionary
+{
+    NSMutableDictionary* attributes = [[self style] mutableCopyWithZone: (NSZone*)nil];
+    
+    [attributes setObject: [HTMLInterpreter fixedPitchFont]
+                   forKey: NSFontAttributeName];
+    [self stylePush: attributes];
+}
+
+-(void) openCode: (NSDictionary*) aDictionary
 {
     NSMutableDictionary* attributes = [[self style] mutableCopyWithZone: (NSZone*)nil];
     
@@ -503,17 +537,18 @@ void init_constants() {
                 // default values, change dependent on if it's <xxx>, <xxx/> or </xxx>
                 
                 [scanner scanString: @"<" intoString: (NSString**)nil];
-                
+
                 if ([self characterAtIndex: [scanner scanLocation]] == '/') {
                     [scanner scanString: @"/" intoString: (NSString**)nil];
                     closing = YES;
                     opening = NO;
                 }
-                
+
                 [scanner scanUpToCharactersFromSet: whitespacesAndTagClosing intoString: &name];
                 [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
-                
+
                 nextChar = [self characterAtIndex: [scanner scanLocation]];
+
                 while (nextChar != '>' && nextChar != '/') {
                     // ASSERT: At the beginning of a new attribute
                     NSString* attrName = nil;
@@ -521,7 +556,7 @@ void init_constants() {
                     
                     [scanner scanUpToString: @"=" intoString: &attrName];
                     [scanner scanString: @"=" intoString: (NSString**)nil];
-                    
+
                     if ([scanner scanString: @"\"" intoString: (NSString**)nil] == YES) {
                         // double quotation marks
                         [scanner scanUpToString: @"\"" intoString: &attrValue];
@@ -535,7 +570,6 @@ void init_constants() {
                                                 intoString: &attrValue];
                     }
                     [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
-
 		    if (attrName) {
 		      if (attrValue == nil) {
 			NSLog(@"Value was nil for attribute %@ in tag %@", attrName, name);
@@ -557,10 +591,10 @@ void init_constants() {
                 }
                 
                 [scanner scanString: @">" intoString: (NSString**)nil];
-                
+
                 // normalise element name
                 name = [name lowercaseString];
- 
+
                 if (opening) {
                     [interpreter foundOpeningTagName: name
                                           attributes: attrDict];

@@ -1,5 +1,9 @@
 2022-01-25 Riccardo mottola <rm@gnu.org>
 	* Components/ArticleView/NSString+TolerantHTML.m:
+	Support CODE tag, add preliminary IMG parsing.
+
+2022-01-25 Riccardo mottola <rm@gnu.org>
+	* Components/ArticleView/NSString+TolerantHTML.m:
 	Handle incorrectly terminated entities better.
 
 2022-01-25 Riccardo mottola <rm@gnu.org>
