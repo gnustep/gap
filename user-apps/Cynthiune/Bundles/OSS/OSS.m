@@ -46,7 +46,7 @@
 
 #define LOCALIZED(X) _b ([OSS class], X)
 #define DspError(X) \
-        NSLog (@"An error occured when sending '%s' ioctl to DSP:%s", \
+        NSLog (@"An error occurred when sending '%s' ioctl to DSP:%s", \
                X, strerror(errno))
 
 static NSNotificationCenter *nc;

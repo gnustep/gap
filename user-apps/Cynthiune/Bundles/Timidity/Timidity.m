@@ -142,7 +142,7 @@
     }
   NS_HANDLER
     {
-      NSLog(@"Error while lauching task '%@'", [tiTask launchPath]);
+      NSLog(@"Error while launching task '%@'", [tiTask launchPath]);
     }
   NS_ENDHANDLER
 
