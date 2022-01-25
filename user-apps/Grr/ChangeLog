@@ -1,5 +1,9 @@
 2022-01-25 Riccardo mottola <rm@gnu.org>
 	* Components/ArticleView/NSString+TolerantHTML.m:
+	Handle incorrectly terminated entities better.
+
+2022-01-25 Riccardo mottola <rm@gnu.org>
+	* Components/ArticleView/NSString+TolerantHTML.m:
 	Handle null attributes for elements (anchors)
 
 2019-08-22 Riccardo mottola <rm@gnu.org>

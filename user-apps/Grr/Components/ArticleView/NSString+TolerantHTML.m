@@ -2,8 +2,8 @@
    Grr RSS Reader
    
    Copyright (C) 2006, 2007 Guenther Noack <guenther@unix-ag.uni-kl.de>
-   Copyright (C) 2009  GNUstep Application Team
-                       Riccardo Mottola
+   Copyright (C) 2009-2022  GNUstep Application Team
+                            Riccardo Mottola
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -49,6 +49,7 @@ static NSDictionary* closingTagsHandlers = nil;
  * Character sets for the HTML parser
  */
 static NSCharacterSet* outOfTagStopSet = nil;
+static NSCharacterSet* entityEndSet = nil;
 static NSCharacterSet* whitespaces = nil;
 static NSCharacterSet* whitespacesAndTagClosing = nil;
 static NSCharacterSet* whitespacesAndRightTagBrackets = nil;
@@ -96,6 +97,7 @@ void init_constants() {
     ] retain];
     
     outOfTagStopSet = [[NSCharacterSet characterSetWithCharactersInString: @"&<"] retain];
+    entityEndSet = [[NSCharacterSet characterSetWithCharactersInString: @";&<"] retain];
     whitespaces = [[NSCharacterSet whitespaceAndNewlineCharacterSet] retain];
     
     wsAndTagClosing = [NSMutableCharacterSet new];
@@ -292,7 +294,8 @@ void init_constants() {
         value = [[entityDictionary objectForKey: escape] intValue];
     }
     
-    NSAssert1(value != 0, @"Entity &%@; not understood!", escape);
+    if (value == 0)
+      NSLog(@"Entity &%@; not understood!", escape);
     
     [self foundPlaintext: [NSString stringWithCharacters: &value length: 1]];
 }
@@ -452,9 +455,8 @@ void init_constants() {
     NSString* str = nil;
     HTMLInterpreter* interpreter = [HTMLInterpreter sharedInterpreter];
     NSAttributedString* result;
-    
-    init_constants();
-    
+
+    init_constants();    
     [interpreter startParsing];
     [scanner setCharactersToBeSkipped: [NSCharacterSet new]];
     
@@ -463,15 +465,23 @@ void init_constants() {
         if ([scanner scanUpToCharactersFromSet: outOfTagStopSet intoString: &str] == YES) {
             [interpreter foundPlaintext: str];
         }
-        
-        
+
         if ([scanner isAtEnd] == NO) {
-            unichar ch = [self characterAtIndex: [scanner scanLocation]];
+	    unichar ch = [self characterAtIndex: [scanner scanLocation]];
             if (ch == '&') {
+	        NSUInteger start = [scanner scanLocation]; // store & location in case of misparse
                 [scanner scanString: @"&" intoString: (NSString**)nil];
-                [scanner scanUpToString: @";" intoString: &str];
-                [interpreter foundEscape: str];
-                [scanner scanString: @";" intoString: (NSString**)nil];
+		[scanner scanUpToCharactersFromSet: entityEndSet intoString: &str];
+		if ([self characterAtIndex: [scanner scanLocation]] == ';')
+		  {
+		    [interpreter foundEscape: str];
+		    [scanner scanString: @";" intoString: (NSString**)nil];
+		  }
+		else // we ended entity without proper ; termination
+		  {
+		    [interpreter foundPlaintext: @"&"];
+		    [scanner setScanLocation: start + 1];
+		  }
             } else if (ch == '\n') {
                 BOOL res;
 
