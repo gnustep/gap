@@ -1,3 +1,8 @@
+2022-01-29 Sergei Golovin
+	* AppController.h
+	* AppController.m
+	Bring window to front with double-click.
+
 2022-01-29 Riccardo Mottola <rm@gnu.org>
 	* AppController.h
 	* AppController.m

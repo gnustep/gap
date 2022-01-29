@@ -96,6 +96,8 @@
 
     /* register the file view as drag destionation */
     [fileListView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+    [fileListView setDoubleAction:@selector(doubleClicked:)];
+    [fileListView setTarget: self];
 
     /* add an observer for the file table view */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_selectionDidChange:) name:NSTableViewSelectionDidChangeNotification object:fileListView];
@@ -528,6 +530,11 @@
   [self scaleView:destImage];
   [view setImage: destImage];
   [[view superview] setNeedsDisplay:YES];
+}
+
+- (IBAction)doubleClicked:(id)sender
+{
+  [smallWindow makeKeyAndOrderFront: self];
 }
 
 - (NSImage *)rotate: (NSImage *)image byAngle:(unsigned)angle
