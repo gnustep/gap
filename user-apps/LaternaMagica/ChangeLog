@@ -1,3 +1,8 @@
+2022-01-29 Riccardo Mottola <rm@gnu.org>
+	* AppController.h
+	* AppController.m
+	Remember scaleToFit preferences, separate sizeToFit action in a separate internal method.
+
 2020-01-15 Riccardo Mottola <rm@gnu.org>
 
 	* PRScale.m

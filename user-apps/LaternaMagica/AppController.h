@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.h
 
-   Copyright (C) 2006-2015 Riccardo Mottola
+   Copyright (C) 2006-2022 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -72,6 +72,8 @@
     IBOutlet NSPopUpButton       *popupFileType;
     IBOutlet NSPopUpButton       *popupFileQuality;
 }
+
+- (void)_setScaleToFit:(BOOL)flag;
 
 - (IBAction)addFiles:(id)sender;
 - (IBAction)setScaleToFit:(id)sender;

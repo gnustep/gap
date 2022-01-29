@@ -2,7 +2,7 @@
    Project: LaternaMagica
    AppController.m
 
-   Copyright (C) 2006-2018 Riccardo Mottola
+   Copyright (C) 2006-2022 Riccardo Mottola
 
    Author: Riccardo Mottola
 
@@ -46,6 +46,7 @@
 
 #define LM_KEY_DESTROYRECYCLE @"DestroyOrRecycle"
 #define LM_KEY_ASKDELETING @"AskBeforeDeleting"
+#define LM_KEY_SCALETOFIT @"ScaleToFit"
 
 @implementation AppController
 
@@ -62,7 +63,9 @@
 - (void)awakeFromNib
 {
     NSRect frame;
-    
+    NSUserDefaults *defaults;
+
+    defaults = [NSUserDefaults standardUserDefaults];    
     window = smallWindow;
     view = smallView;
 
@@ -99,6 +102,21 @@
 
     /* add an observer for the window resize */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_windowDidResize:) name:NSWindowDidResizeNotification object:window];
+
+    /* use preferences for size to fit, YES as default */
+    if ([defaults objectForKey:LM_KEY_SCALETOFIT])
+      {
+	[self _setScaleToFit:[defaults boolForKey:LM_KEY_SCALETOFIT]];
+      }
+    else
+      {
+	[self _setScaleToFit:YES];
+      }
+  
+    if (scaleToFit)
+      [fitButton setState:NSOnState];
+    else
+      [fitButton setState:NSOffState];
 }
 
 - (void)dealloc
@@ -214,21 +232,33 @@
   [smallWindow setTitleWithRepresentedFilename:[image name]];
 }
 
+- (void)_setScaleToFit:(BOOL)flag
+{
+  NSUserDefaults *defaults;
+  
+  defaults = [NSUserDefaults standardUserDefaults];
+
+  if (flag)
+    {
+      scaleToFit = YES;
+      [view setImageScaling:NSScaleToFit];
+    }
+  else
+    {
+      scaleToFit = NO;
+      [view setImageScaling:NSScaleNone];
+    }
+  [scrollView setHasVerticalScroller:!scaleToFit];
+  [scrollView setHasHorizontalScroller:!scaleToFit];
+  [self scaleView:[view image]];
+  [view setNeedsDisplay:YES];
+  
+  [defaults setBool:scaleToFit forKey:LM_KEY_SCALETOFIT];
+}
+
 - (IBAction)setScaleToFit:(id)sender
 {
-    if ([fitButton state] == NSOnState)
-    {
-        scaleToFit = YES;
-        [view setImageScaling:NSScaleToFit];
-    } else
-    {
-        scaleToFit = NO;
-        [view setImageScaling:NSScaleNone];
-    }
-    [scrollView setHasVerticalScroller:!scaleToFit];
-    [scrollView setHasHorizontalScroller:!scaleToFit];
-    [self scaleView:[view image]];
-    [view setNeedsDisplay:YES];
+  [self _setScaleToFit:([fitButton state] == NSOnState)];
 }
 
 /** method called as a notification from the selection change */
