@@ -51,6 +51,7 @@ static NSDictionary* closingTagsHandlers = nil;
 static NSCharacterSet* outOfTagStopSet = nil;
 static NSCharacterSet* entityEndSet = nil;
 static NSCharacterSet* whitespaces = nil;
+static NSCharacterSet* tagClosing = nil;
 static NSCharacterSet* whitespacesAndTagClosing = nil;
 static NSCharacterSet* whitespacesAndRightTagBrackets = nil;
 
@@ -104,8 +105,8 @@ void init_constants() {
     entityEndSet = [[NSCharacterSet characterSetWithCharactersInString: @";&<"] retain];
     whitespaces = [[NSCharacterSet whitespaceAndNewlineCharacterSet] retain];
     
-    wsAndTagClosing = [NSMutableCharacterSet new];
-    [wsAndTagClosing addCharactersInString: @"/>"];
+    tagClosing = [[NSCharacterSet characterSetWithCharactersInString: @"/>"] retain];
+    wsAndTagClosing = [NSMutableCharacterSet characterSetWithCharactersInString: @"/>"];
     [wsAndTagClosing formUnionWithCharacterSet: whitespaces];
     whitespacesAndTagClosing = [wsAndTagClosing retain];
     
@@ -147,9 +148,9 @@ void init_constants() {
 -(void) foundPlaintext: (NSString*) string;
 -(void) foundEscape: (NSString*) escape;
 -(void) foundNewline;
--(void) foundOpeningTagName: (NSString*) name
+-(BOOL) foundOpeningTagName: (NSString*) name
                  attributes: (NSDictionary*) attributes;
--(void) foundClosingTagName: (NSString*) name
+-(BOOL) foundClosingTagName: (NSString*) name
                  attributes: (NSDictionary*) attributes;
 
 +(NSFont*) fixedPitchFont;
@@ -270,7 +271,7 @@ void init_constants() {
 -(void) foundPlaintext: (NSString*) string
 {
     NSAttributedString* plainText;
-    plainText = [[[NSAttributedString alloc] initWithString: string attributes: [self style]] retain];
+    plainText = [[NSAttributedString alloc] initWithString: string attributes: [self style]];
     
     [resultDocument appendAttributedString: plainText];
     [plainText release];
@@ -315,23 +316,34 @@ void init_constants() {
 //    the methods that dispatch tags to their specific methods
 // -----------------------------------------------------------
 
--(void) foundOpeningTagName: (NSString*) name
+/* YES - found interpretable, NO - unknown tag */
+-(BOOL) foundOpeningTagName: (NSString*) name
                  attributes: (NSDictionary*) attributes
 {
   NSString* str = [openingTagsHandlers objectForKey: name];
 
-  if (str != nil) 
-    [self performSelector: NSSelectorFromString(str) withObject: attributes];
+  if (str != nil)
+    {
+      [self performSelector: NSSelectorFromString(str) withObject: attributes];
+      return YES;
+    }
 
+  return NO;
 }
 
--(void) foundClosingTagName: (NSString*) name
+/* YES - found interpretable, NO - unknown tag */
+-(BOOL) foundClosingTagName: (NSString*) name
                  attributes: (NSDictionary*) attributes;
 {
   NSString* str = [closingTagsHandlers objectForKey: name];
 
   if (str != nil)
-    [self performSelector: NSSelectorFromString(str)];
+    {
+      [self performSelector: NSSelectorFromString(str)];
+      return YES;
+    }
+
+  return NO;
 }
 
 // -----------------------------------------------------------
@@ -489,6 +501,10 @@ void init_constants() {
     NSString* str = nil;
     HTMLInterpreter* interpreter = [HTMLInterpreter sharedInterpreter];
     NSAttributedString* result;
+    BOOL pre = NO;     // the flag of being inside <pre>...</pre>
+    NSUInteger start;  // the start position of any tag '<'
+    NSUInteger end;    // the position following of the end of any tag '>'
+    BOOL res;          // to store boolean returns of functions
 
     init_constants();    
     [interpreter startParsing];
@@ -503,7 +519,7 @@ void init_constants() {
         if ([scanner isAtEnd] == NO) {
 	    unichar ch = [self characterAtIndex: [scanner scanLocation]];
             if (ch == '&') {
-	        NSUInteger start = [scanner scanLocation]; // store & location in case of misparse
+	        NSUInteger ret = [scanner scanLocation]; // store & location in case of misparse
                 [scanner scanString: @"&" intoString: (NSString**)nil];
 		[scanner scanUpToCharactersFromSet: entityEndSet intoString: &str];
 		if ([self characterAtIndex: [scanner scanLocation]] == ';')
@@ -514,15 +530,22 @@ void init_constants() {
 		else // we ended entity without proper ; termination
 		  {
 		    [interpreter foundPlaintext: @"&"];
-		    [scanner setScanLocation: start + 1];
+		    [scanner setScanLocation: ret + 1];
 		  }
             } else if (ch == '\n') {
-                BOOL res;
-
-                NSLog(@"parse newline");
-                res = [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
-                NSAssert(res == YES, @"Couldn't parse newline!");
-                [interpreter foundNewline];
+	      if (!pre)
+		{
+		  NSLog(@"parse newline");
+		  res = [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
+		  NSAssert(res == YES, @"Couldn't parse newline!");
+		  [interpreter foundNewline];
+	        }
+	      else
+		{
+		  // if <pre> keep it as is
+		  [scanner scanString: @"\n" intoString: (NSString**)nil];
+		  [interpreter foundPlaintext: @"\n"];
+		}
             } else {
                 NSString* name = nil;
                 BOOL opening = YES;
@@ -535,14 +558,29 @@ void init_constants() {
                 attrDict = [NSMutableDictionary new];
                 
                 // default values, change dependent on if it's <xxx>, <xxx/> or </xxx>
-                
+                start = [scanner scanLocation]; // store the start of tag
                 [scanner scanString: @"<" intoString: (NSString**)nil];
 
-                if ([self characterAtIndex: [scanner scanLocation]] == '/') {
-                    [scanner scanString: @"/" intoString: (NSString**)nil];
+		nextChar = [self characterAtIndex: [scanner scanLocation]];
+                if (nextChar == '/') {
+		    [scanner scanString: @"/" intoString: (NSString**)nil];
                     closing = YES;
                     opening = NO;
-                }
+                } else if (nextChar == '?') {
+		  // <?xml.....?>
+		  [scanner setScanLocation: start]; // return to <
+		  [scanner scanUpToString: @"?>" intoString: &str];
+		  NSAssert(str != nil, @"Malformed '<?'");
+		  [scanner scanString: @"?>" intoString: (NSString**)nil];
+		  continue;
+		} else if (nextChar == '!') {
+		  // <!-- -->
+		  [scanner setScanLocation: start]; // return to <
+		  [scanner scanUpToString: @"-->" intoString: &str];
+		  NSAssert(str != nil, @"Malformed '<!--'");
+		  [scanner scanString: @"-->" intoString: (NSString**)nil];
+		  continue;
+		}
 
                 [scanner scanUpToCharactersFromSet: whitespacesAndTagClosing intoString: &name];
                 [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
@@ -550,72 +588,111 @@ void init_constants() {
                 nextChar = [self characterAtIndex: [scanner scanLocation]];
 
                 while (nextChar != '>' && nextChar != '/') {
-                    // ASSERT: At the beginning of a new attribute
-                    NSString* attrName = nil;
-                    NSString* attrValue = nil;
+		  if (!pre)
+		    {
+		      // ASSERT: At the beginning of a new attribute
+		      NSString* attrName = nil;
+		      NSString* attrValue = nil;
                     
-                    [scanner scanUpToString: @"=" intoString: &attrName];
-                    [scanner scanString: @"=" intoString: (NSString**)nil];
+		      [scanner scanUpToString: @"=" intoString: &attrName];
+		      [scanner scanString: @"=" intoString: (NSString**)nil];
 
-                    if ([scanner scanString: @"\"" intoString: (NSString**)nil] == YES) {
-                        // double quotation marks
-                        [scanner scanUpToString: @"\"" intoString: &attrValue];
-                        [scanner scanString: @"\"" intoString: (NSString**)nil];
-                    } else if ([scanner scanString: @"\'" intoString: (NSString**)nil] == YES) {
-                        // single quotation marks
-                        [scanner scanUpToString: @"\'" intoString: &attrValue];
-                        [scanner scanString: @"\'" intoString: (NSString**)nil];
-                    } else {
-                        [scanner scanUpToCharactersFromSet: whitespacesAndRightTagBrackets
-                                                intoString: &attrValue];
-                    }
-                    [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
-		    if (attrName) {
-		      if (attrValue == nil) {
-			NSLog(@"Value was nil for attribute %@ in tag %@", attrName, name);
-			[attrDict setObject: [NSNull null] forKey: attrName];
-		      } else {
-			[attrDict setObject: attrValue forKey: attrName];
-		      }
-		    } else {
-		      NSLog(@"Attribute name was nil in tag %@", name);
+		      if ([scanner scanString: @"\"" intoString: (NSString**)nil] == YES)
+			{
+			  // double quotation marks
+			  [scanner scanUpToString: @"\"" intoString: &attrValue];
+			  [scanner scanString: @"\"" intoString: (NSString**)nil];
+			}
+		      else if ([scanner scanString: @"\'" intoString: (NSString**)nil] == YES)
+			{
+			  // single quotation marks
+			  [scanner scanUpToString: @"\'" intoString: &attrValue];
+			  [scanner scanString: @"\'" intoString: (NSString**)nil];
+			}
+		      else
+			{
+			  [scanner scanUpToCharactersFromSet: whitespacesAndRightTagBrackets
+						  intoString: &attrValue];
+			}
+		      [scanner scanCharactersFromSet: whitespaces intoString: (NSString**)nil];
+		      if (attrName)
+			{
+			  if (attrValue == nil)
+			    {
+			      NSLog(@"Value was nil for attribute %@ in tag %@", attrName, name);
+			      [attrDict setObject: [NSNull null] forKey: attrName];
+			    }
+			  else
+			    {
+			      [attrDict setObject: attrValue forKey: attrName];
+			    }
+			}
+		      else
+			{
+			  NSLog(@"Attribute name was nil in tag %@", name);
+			}
+		    }
+		  else
+		    {
+		      [scanner scanUpToCharactersFromSet: tagClosing intoString: (NSString**)nil];
 		    }
                     
                     nextChar = [self characterAtIndex: [scanner scanLocation]];
                 }
                 
                 if (nextChar == '/') {
-                    [scanner scanString: @"/" intoString: (NSString**)nil];
+		    [scanner scanString: @"/" intoString: (NSString**)nil];
                     closing = YES;
                     opening = YES;
                 }
                 
                 [scanner scanString: @">" intoString: (NSString**)nil];
+		end = [scanner scanLocation]; // store the after end of tag
 
                 // normalise element name
                 name = [name lowercaseString];
 
                 if (opening) {
-                    [interpreter foundOpeningTagName: name
-                                          attributes: attrDict];
-                    
-                    // exceptional case: When it's a <pre>-Tag, everything until
-                    // the closing </pre> is semantically ignored and just put into
-                    // the string. (It's still the interpreter's responsibility to
-                    // choose an appropriate font, though.)
-                    // TODO: People use <br/> inside <pre>, parse that!
-                    if ([name isEqualToString: @"pre"]) {
-                        NSString* preformattedText;
-                        [scanner scanUpToString: @"</pre" intoString: &preformattedText];
-                        
-                        NSAssert(preformattedText != nil, @"No matching closing </pre> tag");
-                        [interpreter foundPlaintext: preformattedText];
-                    }
+		  res = [interpreter foundOpeningTagName: name
+					      attributes: attrDict];
+
+		  if (pre && !res)
+		    {
+		      // do not eat unknown tags inside <pre>
+		      [interpreter foundPlaintext:
+				     [self substringWithRange: NSMakeRange(start, end - start)]];
+		    }
+
+		  // TODO: People use <br/> inside <pre>, parse that!
+		  if ([name isEqualToString: @"pre"])
+		    {
+		      NSString* preformattedText;
+
+		      NSAssert(!pre, @"nested <pre>");
+
+		      NSUInteger ret = [scanner scanLocation]; // store the location of <pre>' body start
+		      [scanner scanUpToString: @"</pre" intoString: &preformattedText];
+
+		      NSAssert(preformattedText != nil, @"No matching closing </pre> tag");
+
+		      [scanner setScanLocation: ret];
+		      pre = YES;
+		    }
                 }
                 
                 if (closing) {
-                    [interpreter foundClosingTagName: name
-                                          attributes: attrDict];
+		  res = [interpreter foundClosingTagName: name
+					      attributes: attrDict];
+		  if (pre && !res)
+		    {
+		      // do not eat unknown tags inside <pre>
+		      [interpreter foundPlaintext:
+				     [self substringWithRange: NSMakeRange(start, end - start)]];
+		    }
+
+		    if ([name isEqualToString: @"pre"]) {
+		      pre = NO;
+		    }
                 }
             }
         }
