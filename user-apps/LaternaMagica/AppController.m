@@ -48,6 +48,9 @@
 #define LM_KEY_ASKDELETING @"AskBeforeDeleting"
 #define LM_KEY_SCALETOFIT @"ScaleToFit"
 
+#define LM_AS_KEY_IMAGEWINDOW @"ImageWindow"
+#define LM_AS_KEY_MAINWINDOW @"MainWindow"
+
 @implementation AppController
 
 - (id) init
@@ -81,6 +84,7 @@
     [smallView setFrame:[scrollView documentVisibleRect]];
     [smallView setImageAlignment:NSImageAlignTopLeft];
     [smallWindow setDelegate:smallView];
+    [smallWindow setFrameAutosaveName: LM_AS_KEY_IMAGEWINDOW];
 
     fullView = [[LMFlipView alloc] initWithFrame:[fullWindow frame]];
     [fullView setImageScaling: NSScaleNone];
@@ -94,6 +98,7 @@
     [fullWindow setInitialFirstResponder:fullView];
     [fullWindow setDelegate:fullView];
 
+    [controlWin setFrameAutosaveName: LM_AS_KEY_MAINWINDOW];
     /* register the file view as drag destionation */
     [fileListView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
     [fileListView setDoubleAction:@selector(doubleClicked:)];
