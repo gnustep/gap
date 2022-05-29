@@ -50,12 +50,10 @@
     int       row = [sender selectedRowInColumn:0];
     NSString *name = (row >= 0)?[fNames objectAtIndex:row]:@"<no selection>";
     Class     class = [FSFunction functionClassForName:name];
-    NSURL    *base = [FSFunction helpBaseURL];
 
     if (class == nil)
     {
         class = [FSOperator operatorClassForSymbol:name];
-        base = [FSOperator helpBaseURL];
     }
     
     if (class == nil)
