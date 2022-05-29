@@ -60,6 +60,7 @@ typedef enum _FSOperatorTier {
 + (Class)operatorClassForSymbol:(NSString*)symbol;
 + (FSOperatorTier)operatorTier;
 + (NSString*)htmlHelpData;
++ (NSURL*)helpBaseURL;
 
 // Implemented by subclasses; don't call in FSOperator
 + (NSString*)operatorSymbol;

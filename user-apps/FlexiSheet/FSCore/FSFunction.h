@@ -52,7 +52,7 @@
 + (NSArray*)allGroupNames;
 + (Class)functionClassForName:(NSString*)name;
 + (NSString*)htmlHelpData;
-//+ (NSString*)htmlHelpURL;
++ (NSURL*)helpBaseURL;
 
 // Implemented by subclasses; don't call in FSFunction
 + (NSString*)functionName;
