@@ -127,7 +127,7 @@
     //[FSLog log:(@"Quantrix version: %@", [model objectForKey:@"Quantrix Version"]);
     
     tc = [[model objectForKey:@"tables"] objectEnumerator];
-    while (to = [tc nextObject]) {
+    while ((to = [tc nextObject])) {
         NSArray *values = [to objectForKey:@"dataspace"];
         NSArray *formulae = [[to objectForKey:@"formulaspace"] objectForKey:@"formulae"];
         id       kids;
@@ -154,7 +154,7 @@
             }
             
             nc = [[co objectForKey:@"nodes"] objectEnumerator];
-            while (no = [nc nextObject]) {
+            while ((no = [nc nextObject])) {
                 kids = [no objectForKey:@"children"];
                 if ([kids isKindOfClass:[NSArray class]]) {
                     [self _alsoImportGroup:kids intoGroup:header
@@ -196,7 +196,7 @@
     [[globalCategories allValues] iteratePerformSelector:@selector(addToGlobalCategories:) target:self];
 
     tc = [[[interface objectForKey:@"document"] objectForKey:@"dataDepictions"] objectEnumerator];
-    while (to = [tc nextObject]) {
+    while ((to = [tc nextObject])) {
         strg = [to objectForKey:@"name"];
         if (strg == nil) {
             TEST_DBG [FSLog logDebug:@"Using default table (no name given)."];
@@ -221,7 +221,7 @@
                 }
             }
             cc = [[to objectForKey:@"depictions"] objectEnumerator];
-            while (co = [cc nextObject]) {
+            while ((co = [cc nextObject])) {
                 strg = [co objectForKey:@"class"];
             
                 // A Quantrix formulaDepiction is what we call TableView.
@@ -240,21 +240,21 @@
                     // Top
                     headers = [NSMutableArray array];
                     nc = [[dict objectForKey:@"xCategories"] objectEnumerator];
-                    while (no = [nc nextObject]) {
+                    while ((no = [nc nextObject])) {
                         [headers addObject:[[table headers] objectAtIndex:[no intValue]]];
                     }
                     if ([headers count] > 0) [controller setTopHeaders:headers];
                     // Side
                     headers = [NSMutableArray array];
                     nc = [[dict objectForKey:@"yCategories"] objectEnumerator];
-                    while (no = [nc nextObject]) {
+                    while ((no = [nc nextObject])) {
                         [headers addObject:[[table headers] objectAtIndex:[no intValue]]];
                     }
                     if ([headers count] > 0) [controller setSideHeaders:headers];
                     // Page
                     headers = [NSMutableArray array];
                     nc = [[dict objectForKey:@"zCategories"] objectEnumerator];
-                    while (no = [nc nextObject]) {
+                    while ((no = [nc nextObject])) {
                         [headers addObject:[[table headers] objectAtIndex:[no intValue]]];
                     }
                     if ([headers count] > 0) [controller setPageHeaders:headers];
@@ -288,14 +288,14 @@
                     // Top
                     headers = [NSMutableArray array];
                     nc = [[dict objectForKey:@"xCategories"] objectEnumerator];
-                    while (no = [nc nextObject]) {
+                    while ((no = [nc nextObject])) {
                         [headers addObject:[[table headers] objectAtIndex:[no intValue]]];
                     }
                     if ([headers count] > 0) [controller setTopHeaders:headers];
                     // Side
                     headers = [NSMutableArray array];
                     nc = [[dict objectForKey:@"yCategories"] objectEnumerator];
-                    while (no = [nc nextObject]) {
+                    while ((no = [nc nextObject])) {
                         [headers addObject:[[table headers] objectAtIndex:[no intValue]]];
                     }
                     if ([headers count] > 0) [controller setSideHeaders:headers];
