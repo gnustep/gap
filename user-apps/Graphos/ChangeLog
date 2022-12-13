@@ -1,3 +1,8 @@
+2021-12-13 Riccardo Mottola <rm@gnu.org>
+
+	* GRDocView.m
+	Fix undo for path subdivide.
+
 2019-08-16 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.h
@@ -8,12 +13,12 @@
 2019-05-14 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
-        Actually fix moving forward/backward
+	Actually fix moving forward/backward
 
 2019-05-12 Riccardo Mottola <rm@gnu.org>
 
 	* GRDocView.m
-        Make move forward/backward methods handle group of objects.
+	Make move forward/backward methods handle group of objects.
 
 2019-05-10 Riccardo Mottola <rm@gnu.org>
 

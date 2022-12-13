@@ -42,6 +42,7 @@
 #define UNDO_ACTION_CP_EXTRACT @"Change Point by Extracting"
 #define UNDO_ACTION_CP_OVERLAP @"Change Point by Overlapping"
 #define UNDO_ACTION_CP_DELETE @"Delete Point"
+#define UNDO_ACTION_SUBDIVIDE @"Subdivide Path"
 
 #define ZOOM_FACTORS 13
 #define STD_ZOOM_INDEX 5
@@ -1173,22 +1174,39 @@ float zFactors[ZOOM_FACTORS] = {0.25, 0.33, 0.5, 0.66, 0.75, 1, 1.25, 1.5, 2, 2.
 
 - (void)subdividePathAtPoint:(NSPoint)p splitIt:(BOOL)split
 {
+  NSUndoManager *uMgr;
   id obj;
   NSUInteger i;
+  GRBezierPath *path;
 
-  
+  path = nil;
   for(i = 0; i < [objects count]; i++)
     {
       obj = [objects objectAtIndex: i];
       if([obj isKindOfClass: [GRBezierPath class]] && [[obj editor] isSelected])
         {
-	  if([obj onPathBorder: p])
+          if([obj onPathBorder: p])
             {
-	      [obj subdividePathAtPoint: p splitIt: split];
+              path = obj;
 	      break;
             }
         }
     }
+  
+  if (!path)
+    return;
+    
+  uMgr = [self undoManager];
+  /* save the method on the undo stack, but stack actions */
+  if ([[uMgr undoActionName] isEqualToString: UNDO_ACTION_SUBDIVIDE] == NO)
+    {
+      [self saveCurrentObjectsDeep];
+      [[uMgr prepareWithInvocationTarget: self] backObjectHistory];
+      [uMgr setActionName: UNDO_ACTION_SUBDIVIDE];
+    }
+    
+  [path subdividePathAtPoint: p splitIt: split];
+
   [self setNeedsDisplay:YES];
 }
 
