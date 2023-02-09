@@ -41,7 +41,10 @@
 
 - (id) initWithCapacity: (NSUInteger)capacity
 {
-  storageArray = [[NSMutableArray alloc] initWithCapacity: capacity];
+  if ((self = [super init]))
+    {
+      storageArray = [[NSMutableArray alloc] initWithCapacity: capacity];
+    }
   return self;
 }
 
