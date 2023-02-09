@@ -302,6 +302,7 @@
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
   
   if (nil != [engine targetMissingFiles])
     {
@@ -309,6 +310,7 @@
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
 						attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
+      [attrStr release];
     }
 
   attrStr = [[NSAttributedString alloc] initWithString: @"\n"
@@ -376,6 +378,7 @@
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
 
   if (nil != [engine sourceModFiles])
     {
@@ -383,6 +386,7 @@
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
+      [attrStr release];
     }
   attrStr = [[NSAttributedString alloc] initWithString: @"\n"
                                             attributes: textAttributes];
@@ -421,6 +425,7 @@
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
 
   if (nil != [engine sourceModFiles])
     {
@@ -428,6 +433,7 @@
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
+      [attrStr release];
     }
   attrStr = [[NSAttributedString alloc] initWithString: @"\n"
                                             attributes: textAttributes];
@@ -466,6 +472,7 @@
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
 
   if (nil != [engine targetModFiles])
     {
@@ -473,6 +480,7 @@
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
+      [attrStr release];
     }
   attrStr = [[NSAttributedString alloc] initWithString: @"\n"
                                             attributes: textAttributes];
@@ -512,6 +520,7 @@
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
 
   if (nil != [engine sizeDiffFiles])
     {
@@ -519,6 +528,7 @@
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
+      [attrStr release];
     }
   
   attrStr = [[NSAttributedString alloc] initWithString: @"\n"
@@ -558,6 +568,7 @@
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
+  [attrStr release];
 
   if (nil != [engine sizeDiffFiles])
     {
@@ -565,6 +576,7 @@
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];
+      [attrStr release];
     }
   
   attrStr = [[NSAttributedString alloc] initWithString: @"\n"
