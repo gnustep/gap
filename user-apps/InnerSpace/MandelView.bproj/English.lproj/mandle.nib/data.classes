@@ -1,0 +1,28 @@
+MySubclass = {
+    SUPERCLASS = Object;
+};
+FirstResponder = {
+    ACTIONS = {
+    };
+    SUPERCLASS = Object;
+};
+MandelView = {
+    ACTIONS = {
+	setUseColor:;
+	giveColorPanel:;
+	setColors:;
+	inspector:;
+    };
+    OUTLETS = {
+	backWell;
+	Well3;
+	spermWidthSlider;
+	inspectorPanel;
+	Well1;
+	Well4;
+	colorButton;
+	spermCountSlider;
+	Well2;
+    };
+    SUPERCLASS = View;
+};

@@ -1,0 +1,52 @@
+MandelView.BackModule - a mandelbrot bundle for BackSpace.app
+
+This is the first release of this wonderfull backspace module.
+Hopefully it wont crash your computer, but - it will most probably
+cause you and/or your computer to become quite inactive while the
+program is running. It took hours to debug, because once it ran, I
+couldn't bring myself to stop it.  This program uses a quite funky
+(don't know what this means) algorithm for drawing and zooming in, so
+that it is even fun to watch while the picture is being drawn. It is
+good so, because it is also slow, and pictures take quite a long time
+to draw.  I tried to do my best to make the program be fast - but alas
+! That's all I could do. For this I took some of the core code from
+the mandelspawn program for X-windows - for calculating in fixed point
+precision. As the program zooms in fixed point arithmetic becomes not
+accurate enough, and it switches back to floating point. At that stage
+I left a small bug (feature), so that at one level of zoom you can see
+the graininess of the fixed-point arithmetic.
+
+To install put the file MandelView.BackModule somewhere where
+BackSpace will look for it, as in /LocalLibrary/BackSpaceViews, or in
+~/Library/BackSpaceViews, or in /Library/BackSpaceViews
+
+Recompiling using the project builder should be no problem, just make
+sure that the directory 'output' doesn't exist before you build for
+install. Then  MandelView.BackModule will be created in the directory
+output.
+
+Things left to do:
+- Make it faster !
+- Make the zooming smarter, and let it find nicer places.
+- Enable saving of the completed picture.
+- Make control over the color scheme better.
+- Make it even faster !
+- Make it find unused supercomputing resources arround the net and use
+them.
+
+If the code looks as if it was written by someone who doesn't quite
+know objective-c, then it has a good reason - I don't know objective
+C. Please don't send me comments on how dirty this code is !
+
+Please send comments, suggestions or letter saying how much you like
+this program to:
+Michael Lachmann-Tarkhanov
+e-mail: dirk@charles.stanford.edu 
+
+The files ms_real.c ms_real.h, and the routine mandelbrot in the file
+MandelView.m were taken from mandelspawn 0.7 by Andreas Gustafsson,
+gson@niksula.hut.fi. As mandelspawn is uder the GPL, I included his
+Copying file.
+
+
+		Michael Lachmann-Tarkhanov

@@ -1,0 +1,19 @@
+LOCALIZABLE_FILES = {
+    mandle.nib;
+};
+DOCEXTENSIONS = ();
+LANGUAGE = English;
+PROJECTVERSION = 1.1;
+INSTALLDIR = output;
+PROJECTTYPE = Bundle;
+PROJECTNAME = MandelView;
+GENERATEMAIN = YES;
+DOCICONFILES = ();
+BUNDLE_EXTENSION = bundle;
+FILESTABLE = {
+    OTHER_SOURCES = (Makefile.preamble, Makefile, Makefile.postamble);
+    IMAGES = ();
+    INTERFACES = (mandle.nib);
+    H_FILES = (BackView.h, MandelView.h, ms_real.c, ms_real.h, Thinker.h);
+    CLASSES = (MandelView.m);
+};

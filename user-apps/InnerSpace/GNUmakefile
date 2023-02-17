@@ -56,7 +56,8 @@ Polyhedra.bproj/Polyhedra.InnerSpace \
 Space2View.bproj/Space2View.InnerSpace \
 SporView.bproj/SporView.InnerSpace \
 Qix.bproj/Qix.InnerSpace \
-ItJustStopped.bproj/ItJustStopped.InnerSpace
+ItJustStopped.bproj/ItJustStopped.InnerSpace \
+MandelView.bproj/MandelView.InnerSpace \
 
 
 InnerSpace_LOCALIZED_RESOURCE_FILES = \
@@ -95,7 +96,8 @@ InnerSpace_C_FILES= UtilFunctions.c
 SUBPROJECTS = Black.bproj Boxes.bproj \
         NickSpace.bproj Polyhedra.bproj \
 	Space2View.bproj SporView.bproj \
-	Qix.bproj ItJustStopped.bproj
+	Qix.bproj ItJustStopped.bproj \
+	MandelView.bproj \
 
 -include GNUmakefile.preamble
 -include GNUmakefile.local

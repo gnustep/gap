@@ -1,0 +1,25 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "giveColorPanel:",
+	    "setColors:"
+	);
+	Super = NSObject;
+    };
+    MandelView = {
+	Actions = (
+	    "giveColorPanel:",
+	    "setColors:"
+	);
+	Outlets = (
+	    Well1,
+	    Well2,
+	    Well3,
+	    backWell,
+	    inspectorPanel,
+	    Well4
+	);
+	Super = NSView;
+    };
+}
