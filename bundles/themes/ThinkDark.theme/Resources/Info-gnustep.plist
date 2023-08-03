@@ -2,13 +2,13 @@
     GSThemeAuthors = (
 	"Riccardo Mottola"
     );
-    GSThemeDetails = "Think dark. A dark theme, blue details with a red accent and. Does it remember you classic ThinkPads?";
+    GSThemeDetails = "A sleek theme with little contrast and few shadows\000.";
     GSThemeDomain = {
     };
     GSThemeIcon = "Thematic.png";
-    GSThemeLicense = "GPL v2+";
+    GSThemeLicense = "GPL v3\000";
     GSThemePreview = "thinkdark_preview_128.tif";
     GSThemeTiles = {
     };
-    GSThemeVersion = "0.0";
+    GSThemeVersion = "1.0";
 }

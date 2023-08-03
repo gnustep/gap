@@ -2,13 +2,14 @@
     GSThemeAuthors = (
 	"Riccardo Mottola"
     );
-    GSThemeDetails = "Neos. The next step in theming, but with a strong root in NeXT.";
+    GSThemeDetails = "Evoking Sun Solaris CDE";
     GSThemeDomain = {
-	GSBackHandlesWindowDecorations = YES;
+	GSBackHandlesWindowDecorations = NO;
     };
     GSThemeIcon = "Thematic.png";
+    GSThemeLicense = "GPL v2+";
     GSThemePreview = "neos_preview_128.tif";
     GSThemeTiles = {
     };
-    GSThemeVersion = "0.2";
+    GSThemeVersion = "0.3";
 }

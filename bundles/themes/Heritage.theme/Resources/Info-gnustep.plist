@@ -3,11 +3,11 @@
 	"Ga\U00EBl El\U00E9go\U00EBt",
 	"Riccardo Mottola"
     );
-    GSThemeDetails = "True tribute to the NeXT heritage\000";
+    GSThemeDetails = "True tribute to the NeXT heritage\000!";
     GSThemeDomain = {
     };
     GSThemeIcon = "Thematic.png";
-    GSThemePreview = heritage_preview_256.tif;
     GSThemeLicense = "GPL v2+";
+    GSThemePreview = "heritage_preview_256.tif";
     GSThemeVersion = "1.0";
 }

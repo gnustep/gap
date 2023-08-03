@@ -2,7 +2,7 @@
     GSThemeAuthors = (
 	"Riccardo Mottola"
     );
-    GSThemeDetails = "A sleek theme with little contrast and few shadows\000";
+    GSThemeDetails = "A sleek theme with little contrast and few shadows\000.";
     GSThemeDomain = {
     };
     GSThemeIcon = "Thematic.png";
