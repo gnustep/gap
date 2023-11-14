@@ -26,6 +26,7 @@
           <b>at: </b>
           <code>(NSString*) </code><i>location </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -36,6 +37,7 @@
 <label id="method**GSXMLParser**+parser" />+ <code>(GSXMLParser*) </code>
           <b>parser </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -47,6 +49,7 @@
           <b>parserWithContentsOfFile: </b>
           <code>(NSString*) </code><i>path </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -58,6 +61,7 @@
           <b>parserWithContentsOfURL: </b>
           <code>(NSURL*) </code><i>url </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -69,6 +73,7 @@
           <b>parserWithData: </b>
           <code>(NSData*) </code><i>data </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -80,6 +85,7 @@
           <b>parserWithSAXHandler: </b>
           <code>(GSSAXHandler*) </code><i>handler </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -93,6 +99,7 @@
           <b>withContentsOfFile: </b>
           <code>(NSString*) </code><i>path </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -106,6 +113,7 @@
           <b>withContentsOfURL: </b>
           <code>(NSURL*) </code><i>url </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -119,6 +127,7 @@
           <b>withData: </b>
           <code>(NSData*) </code><i>data </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -131,6 +140,7 @@
           <code>(NSStringEncoding) </code><i>encoding </i>
           <br><em>Description forthcoming.</em>
 
+</section>
 
         
 
@@ -141,6 +151,7 @@
           <b>doValidityChecking: </b>
           <code>(BOOL) </code><i>yesno </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -151,6 +162,7 @@
 <label id="method**GSXMLParser**-document" />- <code>(GSXMLDocument*) </code>
           <b>document </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -161,6 +173,7 @@
 <label id="method**GSXMLParser**-errNo" />- <code>(int) </code>
           <b>errNo </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -172,6 +185,7 @@
           <b>getWarnings: </b>
           <code>(BOOL) </code><i>yesno </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -183,6 +197,7 @@
           <b>initWithSAXHandler: </b>
           <code>(GSSAXHandler*) </code><i>handler </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -196,6 +211,7 @@
           <b>withContentsOfFile: </b>
           <code>(NSString*) </code><i>path </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -209,6 +225,7 @@
           <b>withContentsOfURL: </b>
           <code>(NSURL*) </code><i>url </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -222,6 +239,7 @@
           <b>withData: </b>
           <code>(NSData*) </code><i>data </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -233,6 +251,7 @@
           <b>keepBlanks: </b>
           <code>(BOOL) </code><i>yesno </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -243,6 +262,7 @@
 <label id="method**GSXMLParser**-parse" />- <code>(BOOL) </code>
           <b>parse </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -254,6 +274,7 @@
           <b>parse: </b>
           <code>(NSData*) </code><i>data </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -265,35 +286,6 @@
           <b>substituteEntities: </b>
           <code>(BOOL) </code><i>yesno </i>
           <br><em>Description forthcoming.</em>
-
-
-        
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
       
 </section>
 
@@ -321,6 +313,7 @@
 <label id="method**NSPortMessage**-components" />- <code>(NSArray*) </code>
           <b>components </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -332,6 +325,7 @@
           <b>initWithMachMessage: </b>
           <code>(void*) </code><i>buffer </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -347,6 +341,7 @@
           <b>components: </b>
           <code>(NSArray*) </code><i>items </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -561,7 +556,7 @@
 <br>
  Returns the created
             instance.
-
+</section>
 
         
 
@@ -600,6 +595,7 @@
               various debugging counts and monitors of
               allocated objects, which you can access using
               the <code>GSDebugAllocation...</code> functions.
+</section>
 
 
         
@@ -610,6 +606,7 @@
 <label id="method**NSObject**+class" />+ <code>(Class) </code>
           <b>class </b>
           <br>Returns the receiver.
+</section>
 
 
         
@@ -626,6 +623,7 @@
               NSStringFromClass()
             </ref>
             .
+</section>
 
 
         
@@ -636,6 +634,7 @@
 <label id="method**NSObject**+initialize" />+ <code>(void) </code>
           <b>initialize </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -653,6 +652,7 @@
 <br>
  Raises NSInvalidArgumentException if
             given a null selector.
+</section>
 
 
         
@@ -671,6 +671,7 @@
  Raises
             NSInvalidArgumentException if
             given a null selector.
+</section>
 
 
         
@@ -693,6 +694,7 @@
 <br>
  Raises NSInvalidArgumentException if given a
             null selector.
+</section>
 
 
         
@@ -705,6 +707,7 @@
           <code>(Class) </code><i>aClass </i>
           <br>Returns <code>YES</code> if the receiver is
             <i>aClass</i> or a subclass of <i>aClass</i>.
+</section>
 
 
         
@@ -752,6 +755,7 @@
               as follows:
             <code>+ (id) newWithName: (NSString *)aName {return [[self
                 alloc] initWithName: aName];}</code>
+</section>
 
 
         
@@ -765,6 +769,7 @@
           <br>Sets up the ObjC runtime so that the receiver is used
             wherever code calls for <i>aClassObject</i> to
             be used.
+</section>
 
 
         
@@ -775,6 +780,7 @@
 <label id="method**NSObject**+requiresTypedMemory" />+ <code>(BOOL) </code>
           <b>requiresTypedMemory </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -786,6 +792,7 @@
           <b>setVersion: </b>
           <code>(int) </code><i>aVersion </i>
           <br>Sets the version number of the receiving class.
+</section>
 
 
         
@@ -797,6 +804,7 @@
           <b>superclass </b>
           <br>Returns the super class from which the recevier was
             derived.
+</section>
 
 
         
@@ -807,6 +815,7 @@
 <label id="method**NSObject**+version" />+ <code>(int) </code>
           <b>version </b>
           <br>Returns the version number of the receiving class.
+</section>
 
 
         
@@ -829,6 +838,7 @@
  In GNUstep, the
             <ref id="method**NSObject**+enableDoubleReleaseCheck:">[NSObject% unknown entity: nbsp
 +enableDoubleReleaseCheck:]</ref> method may be used to turn on checking for ratain/release errors in this method.
+</section>
 
 
         
@@ -843,6 +853,7 @@
             decoding some sort of archive. Returns self.
             Subclasses may override this to perform some
             special initialisation upon being decoded.
+</section>
 
 
         
@@ -863,6 +874,7 @@
  NB. When
             NSZombie is enabled (see NSDebug.h) this pointer
             is changed upon object deallocation.
+</section>
 
 
         
@@ -873,6 +885,7 @@
 <label id="method**NSObject**-classForArchiver" />- <code>(Class) </code>
           <b>classForArchiver </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -883,6 +896,7 @@
 <label id="method**NSObject**-classForCoder" />- <code>(Class) </code>
           <b>classForCoder </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -893,6 +907,7 @@
 <label id="method**NSObject**-classForPortCoder" />- <code>(Class) </code>
           <b>classForPortCoder </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -911,6 +926,7 @@
 <br>
  This is a MacOS-X addition for
             apple scripting, which is also generally useful.
+</section>
 
 
         
@@ -923,6 +939,7 @@
           <code>(Protocol*) </code><i>aProtocol </i>
           <br>Returns a flag to say whether the class of the
             receiver conforms to <i>aProtocol</i>.
+</section>
 
 
         
@@ -941,6 +958,7 @@
             <ref id="function**NSObject**NSDefaultMallocZone">
               NSDefaultMallocZone()
             </ref>
+</section>
 
 
         
@@ -1026,6 +1044,7 @@
               to prevent itsself from being deallocated, it can do
               this simply be refraining from calling the
               superclass implementation.
+</section>
 
 
         
@@ -1038,6 +1057,7 @@
           <br>Returns a string describing the receiver. The
             default implementation gives the class and memory
             location of the receiver.
+</section>
 
 
         
@@ -1051,6 +1071,7 @@
           <br>Raises an invalid argument exception providing
             infomration about the receivers inability to
             handle <i>aSelector</i>.
+</section>
 
 
         
@@ -1070,6 +1091,7 @@
             <ref id="method**NSObject**-doesNotRecognizeSelector:">
               -doesNotRecognizeSelector:
             </ref>
+</section>
 
 
         
@@ -1095,6 +1117,7 @@
 <br>
  The default implementation returns the
             address of the instance.
+</section>
 
 
         
@@ -1106,6 +1129,7 @@
           <b>init </b>
           <br>Initialises the receiver... the NSObject
             implementation simply returns self.
+</section>
 
 
         
@@ -1129,6 +1153,7 @@
             </ref>
             method so that if two objects are equal they both
             have the same hash.
+</section>
 
 
         
@@ -1142,6 +1167,7 @@
           <br>Returns <code>YES</code> if the class of the
             receiver is either the same as <i>aClass</i>
             or is derived from (a subclass of) <i>aClass</i>.
+</section>
 
 
         
@@ -1154,6 +1180,7 @@
           <code>(Class) </code><i>aClass </i>
           <br>Returns <code>YES</code> if the class of the
             receiver is <i>aClass</i>
+</section>
 
 
         
@@ -1170,6 +1197,7 @@
 <br>
  The default implementation
             returns <code>NO</code>.
+</section>
 
 
         
@@ -1187,6 +1215,7 @@
  Raises
             NSInvalidArgumentException if
             given a null selector.
+</section>
 
 
         
@@ -1205,6 +1234,7 @@
             NSInvalidArgumentException if
             given a null selector.
 
+</section>
 
         
 
@@ -1222,6 +1252,7 @@
             <ref id="function**NSObject**NSDefaultMallocZone">
               NSDefaultMallocZone()
             </ref>
+</section>
             .
 
 
@@ -1244,6 +1275,7 @@
  Raises
             NSInvalidArgumentException if
             given a null selector.
+</section>
 
 
         
@@ -1267,6 +1299,7 @@
  Raises
             NSInvalidArgumentException if
             given a null selector.
+</section>
 
 
         
@@ -1292,6 +1325,7 @@
  Raises
             NSInvalidArgumentException if
             given a null selector.
+</section>
 
 
         
@@ -1319,6 +1353,7 @@
             GNUstep, the
             <ref id="method**NSObject**+enableDoubleReleaseCheck:">[NSObject% unknown entity: nbsp
 +enableDoubleReleaseCheck:]</ref> method may be used to turn on checking for ratain/release errors in this method.
+</section>
 
 
         
@@ -1330,6 +1365,7 @@
           <b>replacementObjectForArchiver: </b>
           <code>(NSArchiver*) </code><i>anArchiver </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1341,6 +1377,7 @@
           <b>replacementObjectForCoder: </b>
           <code>(NSCoder*) </code><i>anEncoder </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1362,6 +1399,7 @@
  Subclasses may override this
             method to change this behavior, eg. to ensure that
             they are always copied.
+</section>
 
 
         
@@ -1384,6 +1422,7 @@
 <br>
  Raises NSInvalidArgumentException if given a
             null selector.
+</section>
 
 
         
@@ -1401,6 +1440,7 @@
             <ref id="function**NSObject**NSIncrementExtraRefCount">
               NSIncrementExtraRefCount()
             </ref>
+</section>
 
 
         
@@ -1422,6 +1462,7 @@
  By convention,
             objects which should (or can) never be deallocated
             return the maximum unsigned integer value.
+</section>
 
 
         
@@ -1432,6 +1473,7 @@
 <label id="method**NSObject**-self" />- <code>(id) </code>
           <b>self </b>
           <br>Returns the reciever.
+</section>
 
 
         
@@ -1443,6 +1485,7 @@
           <b>superclass </b>
           <br>Returns the super class from which the receviers
             class was derived.
+</section>
 
 
         
@@ -1525,6 +1568,7 @@
           <b>withDefaultAttributes: </b>
           <code>(NSDictionary*) </code><i>attr </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1536,6 +1580,7 @@
           <b>editingStringForObjectValue: </b>
           <code>(id) </code><i>anObject </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1551,6 +1596,7 @@
           <b>errorDescription: </b>
           <code>(NSString**) </code><i>error </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1566,6 +1612,7 @@
           <b>errorDescription: </b>
           <code>(NSString**) </code><i>error </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1585,6 +1632,7 @@
           <b>errorDescription: </b>
           <code>(NSString**) </code><i>error </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -1639,6 +1687,7 @@
             contents of this dictionary are as produced by
             <ref id="method**NSFileManager**-fileAttributesAtPath:traverseLink:">[NSFileManager% unknown entity: nbsp
 -fileAttributesAtPath:traverseLink:]</ref>
+</section>
 
 
         
@@ -1655,6 +1704,7 @@
             contents of this dictionary are as produced by
             <ref id="method**NSFileManager**-fileAttributesAtPath:traverseLink:">[NSFileManager% unknown entity: nbsp
 -fileAttributesAtPath:traverseLink:]</ref>
+</section>
 
 
         
@@ -1672,7 +1722,7 @@
           <b>justContents: </b>
           <code>(BOOL) </code><i>justContents </i>
           <br><em>Description forthcoming.</em>
-
+</section>
 
         
 
@@ -1726,6 +1776,7 @@
           <b>pipe </b>
           <br>Returns a newly allocated and initialized NSPipe
             object that has been sent an autorelease message.
+</section>
 
 
         
@@ -25022,6 +25073,7 @@
  Handles locking to ensure thread safety and
             ensures that the returned object will not be
             destroyed by other threads.
+</section>
 
 
         
@@ -25036,6 +25088,7 @@
             begin to refil the cache. You need this only if you
             suspect that a class description should have
             changed.
+</section>
 
 
         
@@ -25051,6 +25104,7 @@
           <br>Registers <i>aDescription</i> for
             <i>aClass</i>... placing it in the cache and
             replacing any previous version.
+</section>
 
 
         
@@ -25062,6 +25116,7 @@
           <b>attributeKeys </b>
           <br>Returns the attribute keys - default implementation
             returns <code>nil</code>.
+</section>
 
 
         
@@ -25074,6 +25129,7 @@
           <code>(NSString*) </code><i>aKey </i>
           <br>Returns the inverse relationship keys - default
             implementation returns <code>nil</code>.
+</section>
 
 
         
@@ -25086,6 +25142,7 @@
           <br>Returns the to many relationship keys - default
             implementation returns <code>nil</code>.
 
+</section>
 
         
 
@@ -25138,6 +25195,7 @@
           <b>dictionaryWithCapacity: </b>
           <code>(unsigned) </code><i>numItems </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -25153,6 +25211,7 @@
             dictionaries, the value from
             <i>otherDictionary</i> replaces that which was
             originally in the reciever.
+</section>
 
 
         
@@ -25164,6 +25223,7 @@
           <b>initWithCapacity: </b>
           <code>(unsigned) </code><i>numItems </i>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
@@ -25174,6 +25234,7 @@
 <label id="method**NSMutableDictionary**-removeAllObjects" />- <code>(void) </code>
           <b>removeAllObjects </b>
           <br><em>Description forthcoming.</em>
+</section>
 
 
         
