@@ -130,80 +130,81 @@
 
 - (void) drawLegends: (NSArray*) legends onRight: (BOOL) right 
     withInterspace: (CGFloat) interspace withAttributes: (NSDictionary*) attributes
-    withFrame: (NSRect) cellFrame withBorder: (CGFloat) border withMargin: (CGFloat) Margin 
-    withSpaceMargin: (CGFloat) spaceMargin withImageWidth: (CGFloat) imageWidth withPosImage: (CGFloat) posImage
+    withFrame: (NSRect) cellFrame withBorder: (CGFloat) aBorder withMargin: (CGFloat) Margin 
+    withSpaceMargin: (CGFloat) aSpaceMargin withImageWidth: (CGFloat) imageWidth withPosImage: (CGFloat) posImage
 {
-      CGFloat posY = interspace;
-      NSUInteger i;
-      for (i=0; i < [legends count]; i++)
-      {
-	  NSRect r;
-          NSPoint t, tp, p;
-          Legend* current = [legends objectAtIndex: i];
-          [[current legend] addAttributes: attributes 
-                range: NSMakeRange (0, [[current legend] length])];
-          NSSize s = [[current legend] size];
-//	  NSSize s = [[current legend] sizeWithAttributes: attributes];
+  CGFloat posY = interspace;
+  NSUInteger i;
+  for (i = 0; i < [legends count]; i++)
+    {
+      NSRect r;
+      NSPoint t, tp, p;
+      Legend* current = [legends objectAtIndex: i];
+      [[current legend] addAttributes: attributes 
+				range: NSMakeRange (0, [[current legend] length])];
+      NSSize s = [[current legend] size];
+      //      NSSize s = [[current legend] sizeWithAttributes: attributes];
 
-          if (!right)
-          {
-            r  = NSMakeRect (cellFrame.origin.x + border + (Margin-s.width) - 2, cellFrame.origin.y + posY - 2, s.width + 4, s.height + 4);
-            t  = NSMakePoint (cellFrame.origin.x + border + (Margin-s.width), cellFrame.origin.y + posY);
-            tp = NSMakePoint (cellFrame.origin.x + border + Margin + 2, cellFrame.origin.y + posY + s.height/2);
-          }
-          else
-          {
-            r  = NSMakeRect (cellFrame.origin.x + border + Margin + (2*spaceMargin) + imageWidth - 2, 
-                    cellFrame.origin.y + posY - 2, s.width + 4, s.height + 4);
-            t  = NSMakePoint (cellFrame.origin.x + border + Margin + (2*spaceMargin) + imageWidth,
-                    cellFrame.origin.y + posY);
-            tp = NSMakePoint (cellFrame.origin.x + border + Margin + (2*spaceMargin) + imageWidth - 2, 
-                    cellFrame.origin.y + posY + s.height/2);
-          }
+      if (!right)
+	{
+	  r  = NSMakeRect (cellFrame.origin.x + aBorder + (Margin-s.width) - 2, cellFrame.origin.y + posY - 2, s.width + 4, s.height + 4);
+	  t  = NSMakePoint (cellFrame.origin.x + aBorder + (Margin-s.width), cellFrame.origin.y + posY);
+	  tp = NSMakePoint (cellFrame.origin.x + aBorder + Margin + 2, cellFrame.origin.y + posY + s.height/2);
+	}
+      else
+	{
+	  r  = NSMakeRect (cellFrame.origin.x + aBorder + Margin + (2*aSpaceMargin) + imageWidth - 2, 
+			   cellFrame.origin.y + posY - 2, s.width + 4, s.height + 4);
+	  t  = NSMakePoint (cellFrame.origin.x + aBorder + Margin + (2*aSpaceMargin) + imageWidth,
+			    cellFrame.origin.y + posY);
+	  tp = NSMakePoint (cellFrame.origin.x + aBorder + Margin + (2*aSpaceMargin) + imageWidth - 2, 
+			    cellFrame.origin.y + posY + s.height/2);
+	}
           
-          p  = NSMakePoint (cellFrame.origin.x + border + Margin + spaceMargin + [current point].x,
-		  cellFrame.origin.y + [current point].y + posImage);
+      p  = NSMakePoint (cellFrame.origin.x + aBorder + Margin + aSpaceMargin + [current point].x,
+			cellFrame.origin.y + [current point].y + posImage);
           
-         // [[NSBezierPath bezierPathWithRect: r] stroke];
-	[[NSColor colorWithCalibratedRed: 0.81 green: 0.84 blue: 0.88 alpha:1.0] set];
-	NSBezierPath* path = [[NSBezierPath alloc] init];
+      // [[NSBezierPath bezierPathWithRect: r] stroke];
+      [[NSColor colorWithCalibratedRed: 0.81 green: 0.84 blue: 0.88 alpha:1.0] set];
+      NSBezierPath* path = [[NSBezierPath alloc] init];
 
-	CGFloat radius = 8;
+      CGFloat radius = 8;
 
-	NSPoint p1 = NSMakePoint (r.origin.x, r.origin.y + radius);
-	NSPoint p2 = NSMakePoint (r.origin.x, r.origin.y + r.size.height - radius);
-	NSPoint p4 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + r.size.height);
-	NSPoint p6 = NSMakePoint (r.origin.x + r.size.width, r.origin.y + radius);
-	NSPoint p8 = NSMakePoint (r.origin.x + radius, r.origin.y);
+      NSPoint p1 = NSMakePoint (r.origin.x, r.origin.y + radius);
+      NSPoint p2 = NSMakePoint (r.origin.x, r.origin.y + r.size.height - radius);
+      NSPoint p4 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + r.size.height);
+      NSPoint p6 = NSMakePoint (r.origin.x + r.size.width, r.origin.y + radius);
+      NSPoint p8 = NSMakePoint (r.origin.x + radius, r.origin.y);
 
-	NSPoint pr1 = NSMakePoint (r.origin.x + radius, r.origin.y + r.size.height - radius);
-	NSPoint pr2 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + r.size.height - radius);
-	NSPoint pr3 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + radius);
-	NSPoint pr4 = NSMakePoint (r.origin.x + radius, r.origin.y + radius);
+      NSPoint pr1 = NSMakePoint (r.origin.x + radius, r.origin.y + r.size.height - radius);
+      NSPoint pr2 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + r.size.height - radius);
+      NSPoint pr3 = NSMakePoint (r.origin.x + r.size.width - radius, r.origin.y + radius);
+      NSPoint pr4 = NSMakePoint (r.origin.x + radius, r.origin.y + radius);
 
-	[path moveToPoint: p1];
-	[path lineToPoint: p2];
-	[path appendBezierPathWithArcWithCenter: pr1 radius: radius startAngle: 180 endAngle: 90 clockwise: YES];
-	[path lineToPoint: p4];
-	[path appendBezierPathWithArcWithCenter: pr2 radius: radius startAngle: 90 endAngle: 0 clockwise: YES];
-	[path lineToPoint: p6];
-	[path appendBezierPathWithArcWithCenter: pr3 radius: radius startAngle: 0 endAngle: 270 clockwise: YES];
-	[path lineToPoint: p8];
-	//[path appendBezierPathWithArcFromPoint: p8 toPoint: p1 radius: radius];
-	[path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
-	[path fill];
-	[path release];
+      [path moveToPoint: p1];
+      [path lineToPoint: p2];
+      [path appendBezierPathWithArcWithCenter: pr1 radius: radius startAngle: 180 endAngle: 90 clockwise: YES];
+      [path lineToPoint: p4];
+      [path appendBezierPathWithArcWithCenter: pr2 radius: radius startAngle: 90 endAngle: 0 clockwise: YES];
+      [path lineToPoint: p6];
+      [path appendBezierPathWithArcWithCenter: pr3 radius: radius startAngle: 0 endAngle: 270 clockwise: YES];
+      [path lineToPoint: p8];
+      //[path appendBezierPathWithArcFromPoint: p8 toPoint: p1 radius: radius];
+      [path appendBezierPathWithArcWithCenter: pr4 radius: radius startAngle: 270 endAngle: 180 clockwise: YES];
+      [path fill];
+      [path release];
 
-//          [[current legend] drawAtPoint: t withAttributes: attributes];            
-          [[current legend] drawAtPoint: t];
-	  NSBezierPath* path2 = [NSBezierPath bezierPath];
+//    [[current legend] drawAtPoint: t withAttributes: attributes];            
+      [[current legend] drawAtPoint: t];
+
+      NSBezierPath* path2 = [NSBezierPath bezierPath];
           
-          [path2 moveToPoint: tp];                        
-	  [path2 lineToPoint: p];
-	  [path2 stroke];          
+      [path2 moveToPoint: tp];                        
+      [path2 lineToPoint: p];
+      [path2 stroke];          
           
-          posY += s.height + interspace;          
-      }
+      posY += s.height + interspace;          
+    }
 }
 
 
