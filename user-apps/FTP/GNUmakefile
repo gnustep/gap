@@ -34,9 +34,10 @@ FTP_APPLICATION_ICON = FTP_icon_gs.tif
 FTP_RESOURCE_FILES = \
 Resources/FTP.gorm \
 Resources/GetName.gorm \
-Resources/FTP_icon_gs.tif \
 Resources/arrow_left.tiff \
-Resources/arrow_right.tiff 
+Resources/arrow_right.tiff \
+Resources/FTP_icon_gs.tif \
+Resources/README 
 
 
 #
