@@ -428,7 +428,6 @@
 	  isCharging = NO;
 	  batteryState = BMBStateDischarging;
 	}
-      fclose(stateFile);
     }
   else if (useAPM)
     {
