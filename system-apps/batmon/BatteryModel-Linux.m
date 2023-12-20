@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2015 GNUstep Application Project
+   Copyright (C) 2006-2023 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -196,8 +196,6 @@
       NSString *valueStr;
       NSString *keyStr;
 
-
-      //	NSLog(@"reading %@", batterySysAcpiString);
       ueventFileName = [batterySysAcpiString stringByAppendingPathComponent:@"uevent"];
 
       [ueventFileName getCString:batteryStatePath0];
@@ -316,6 +314,11 @@
 	  timeRemaining = 0;
 	  isCharging = YES;
 	  batteryState = BMBStateFull;
+	}
+      else if ([chargeStateStr isEqualToString:@"Not charging"])
+	{
+	  isCharging = YES;
+	  batteryState = BMBStateNotCharging;
 	}
       else if ([chargeStateStr isEqualToString:@"Unknown"])
 	{

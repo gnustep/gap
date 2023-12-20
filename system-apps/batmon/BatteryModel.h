@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2014 GNUstep Application Project
+   Copyright (C) 2006-2023 GNUstep Application Project
 
    Author: Riccardo Mottola
 
@@ -39,6 +39,7 @@ typedef enum
     BMBStateHigh,
     BMBStateLow,
     BMBStateCritical,
+    BMBStateNotCharging,
     BMBStateFull,
     BMBStateMissing
   } BMBatteryStates;

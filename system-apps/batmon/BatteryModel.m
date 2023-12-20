@@ -1,7 +1,7 @@
 /*
    Project: batmon
 
-   Copyright (C) 2006-2015 GNUstep Application Project
+   Copyright (C) 2006-2023 GNUstep Application Project
 
    Author: Riccardo Mottola 
 
@@ -142,6 +142,9 @@
       break;
     case BMBStateFull:
       s = @"Full";
+      break;
+    case BMBStateNotCharging:
+      s = @"Not charging";
       break;
     case BMBStateMissing:
       s = @"Missing";
