@@ -232,20 +232,33 @@
 	}
 
 //        NSLog(@"%@", ueventDict);
-      
-      amps = [[ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"] floatValue] / 1000000;
-      if (isnan(amps))
-	amps = 0;
-      volts = [[ueventDict objectForKey:@"POWER_SUPPLY_VOLTAGE_NOW"] floatValue] / 1000000;
-      if ([ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] == nil)
-	watts = volts*amps;
-      else
+
+      valueStr = [ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"];
+      if (valueStr)
 	{
-	  watts = [[ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"] floatValue] / 1000000;
+	  amps = [valueStr floatValue] / 1000000;
+	  if (isnan(amps))
+	    amps = 0;
+	}
+
+      valueStr = [ueventDict objectForKey:@"POWER_SUPPLY_VOLTAGE_NOW"];
+      if (valueStr)
+	{
+	  volts = [valueStr floatValue] / 1000000;
+	}
+
+      valueStr = [ueventDict objectForKey:@"POWER_SUPPLY_POWER_NOW"];
+      if (valueStr)
+	{
+	  watts = [valueStr floatValue] / 1000000;
 	  if (isnan(watts))
 	    watts = 0;
 	  if (volts > 0)
 	    amps = watts / volts;
+	}
+      else
+	{
+	  watts = volts*amps;
 	}
 
       useWattHours = YES;
@@ -317,6 +330,7 @@
 	}
       else if ([chargeStateStr isEqualToString:@"Not charging"])
 	{
+	  chargePercent = currCap/lastCap*100;
 	  isCharging = YES;
 	  batteryState = BMBStateNotCharging;
 	}
