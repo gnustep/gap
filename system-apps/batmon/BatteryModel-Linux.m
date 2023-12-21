@@ -551,7 +551,6 @@
 
       strPmuInfo = [NSString stringWithContentsOfFile: @"/proc/pmu/info"];
       arrayOfLines = [strPmuInfo componentsSeparatedByString: @"\n"];
-      NSLog(@"info %@", arrayOfLines);
       lineArray = [[arrayOfLines objectAtIndex: 2] componentsSeparatedByString: @":"];
       strValue = [lineArray objectAtIndex: 1];
       if ([strValue intValue] == 1)
@@ -567,24 +566,37 @@
 
       strPmuBat = [NSString stringWithContentsOfFile: @"/proc/pmu/battery_0"];
       arrayOfLines = [strPmuBat componentsSeparatedByString: @"\n"];
-      NSLog(@"battery0 %@", arrayOfLines);
 
+      // flags: Seem totally unreliable!
+      // 0 - present
+      // 1 - charging
+      // 2 - battery exists
+      // 3 & 4 - ?
+      // 5 - fully charged
+      // 6 - pcharge exists
+      // 7 - battery exists
+
+      // charge
       lineArray = [[arrayOfLines objectAtIndex: 2] componentsSeparatedByString: @":"];
       strValue = [lineArray objectAtIndex: 1];
       currCap = (float)([strValue doubleValue] / 1000);
 
+      // max_charge
       lineArray = [[arrayOfLines objectAtIndex: 3] componentsSeparatedByString: @":"];
       strValue = [lineArray objectAtIndex: 1];
       lastCap = (float)([strValue doubleValue] / 1000);
 
+      // current
       lineArray = [[arrayOfLines objectAtIndex: 4] componentsSeparatedByString: @":"];
       strValue = [lineArray objectAtIndex: 1];
       amps = (float)([strValue doubleValue] / 1000);
 
+      // voltage
       lineArray = [[arrayOfLines objectAtIndex: 5] componentsSeparatedByString: @":"];
       strValue = [lineArray objectAtIndex: 1];
       volts = (float)([strValue doubleValue] / 1000);
 
+      // time rem
       lineArray = [[arrayOfLines objectAtIndex: 6] componentsSeparatedByString: @":"];
       strValue = [lineArray objectAtIndex: 1];
       timeRemaining = (float)[strValue intValue] / 3600;
