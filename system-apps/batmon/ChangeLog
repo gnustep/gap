@@ -1,3 +1,15 @@
+2023-12-21 Riccardo Mottola <rn@gnu.org>
+	* BatteryModel-Linux.m
+	For ACPI /sys, do not use fopen()= and read char, but use Foundation
+	methods to slurp the file into aa string and split it to an array.
+
+2023-12-20 Riccardo Mottola <rn@gnu.org>
+
+	* BatteryModel-Linux.m
+	* BatteryModel.h
+	* BatteryModel.m:
+	handle Not charging state
+
 2017-01-17 Riccardo Mottola <rm@gnu.org>
 
 	* BatteryModel-NetBSD.m

@@ -191,16 +191,19 @@
     {
       NSString *ueventFileName;
       NSMutableDictionary *ueventDict;
+      NSString *fileStr;
+      NSArray *fileStrArray;
       NSString *lineStr;
       NSRange  sepRange;
       NSString *valueStr;
       NSString *keyStr;
+      NSEnumerator *e;
 
       ueventFileName = [batterySysAcpiString stringByAppendingPathComponent:@"uevent"];
 
-      [ueventFileName getCString:batteryStatePath0];
-      stateFile = fopen(batteryStatePath0, "r");
-      if (stateFile == NULL)
+      fileStr = [NSString stringWithContentsOfFile: ueventFileName];
+
+      if (fileStr == nil)
 	{
 	  batteryState = BMBStateMissing;
 	  watts = 0;
@@ -213,13 +216,11 @@
 	  return;
 	}
 
+      fileStrArray = [fileStr componentsSeparatedByString:@"\n"];
       ueventDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
-
-      [self _readLine :stateFile :line];
-      lineStr = [NSString stringWithCString: line];
-      while ([lineStr length] > 0)
+      e = [fileStrArray objectEnumerator];
+      while ((lineStr = [e nextObject]))
 	{
-	    
 	  sepRange = [lineStr rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString:@"="]];
 	  if (sepRange.location != NSNotFound)
 	    {
@@ -227,11 +228,7 @@
 	      valueStr = [lineStr substringFromIndex: sepRange.location+1];
 	      [ueventDict setObject: valueStr forKey: keyStr];
 	    }
-	  [self _readLine :stateFile :line];
-	  lineStr = [NSString stringWithCString: line];
 	}
-
-//        NSLog(@"%@", ueventDict);
 
       valueStr = [ueventDict objectForKey:@"POWER_SUPPLY_CURRENT_NOW"];
       if (valueStr)
@@ -344,7 +341,6 @@
 	    }
 	  batteryState = BMBStateUnknown;
 	}
-      fclose(stateFile);
     }
   else if (useACPIproc)
     {
