@@ -164,8 +164,6 @@
 
 - (void)updatePlatformSpecific
 {
-  FILE *stateFile;
-  FILE *infoFile;
   char line[128];
     
   char presentStr[16];
@@ -344,6 +342,8 @@
     }
   else if (useACPIproc)
     {
+      FILE *stateFile;
+      FILE *infoFile;
       stateFile = fopen(batteryStatePath0, "r");
       if (stateFile == NULL)
 	{
@@ -441,6 +441,7 @@
     }
   else if (useAPM)
     {
+      FILE *stateFile;
       char drvVersionStr[16];
       char apmBiosVersionStr[16];
       char apmBiosFlagsStr[16];
