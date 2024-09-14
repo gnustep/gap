@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
-                  2020-2021 Riccardo Mottola <rm@gnu.org>
+                  2020-2024 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +25,10 @@
 #import "GNUstep.h"
 #endif
 
+#import <AppKit/NSCell.h> 
+
 #import "mainWindowController.h"
+#import "Section.h"
 
 @implementation MainWindowController
 
@@ -319,24 +322,20 @@
 
 - (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
-	//NSLog (@"delegate browser ");
-	NSInteger ret = 0;
+  NSInteger ret = 0;
 
-	//NSLog (@"browser:numberOfRowsInColumn:%d", column);
+  if (column == 0) // First column
+    {
+      Section* section = [handler sections];
+      ret = (NSInteger)[[section subs] count];
+    }	
+  else
+    {
+      id cell = [sender selectedCellInColumn: column -1];
+      ret = (NSInteger)[[(Section*)[cell section] subs] count];
+    }
 
-
-	if (column == 0) // First column
-	{
-		Section* section = [handler sections];
-		ret = [[section subs] count];
-	}	
-	else
-	{
-		id cell = [sender selectedCellInColumn: column -1];
-		ret = [[[cell section] subs] count];
-	}
-	//NSLog (@"fin de browser:numberOfRowsInColumn:%d", column);
-	return ret;
+  return ret;
 }
 
 - (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column
@@ -353,8 +352,8 @@
 	}
 	else
 	{
-		id cell = [sender selectedCellInColumn: column -1];
-		sub = [[[cell section] subs] objectAtIndex: row];
+		BrowserCell *cell = [sender selectedCellInColumn: column -1];
+		sub = [[(Section *)[cell section] subs] objectAtIndex: row];
 	}
 
 	if (sub != nil)
@@ -401,7 +400,8 @@
 
 - (void) browserClick: (id) sender
 {
-	Section* sub = [[sender selectedCell] section];
+  Section* sub = [(BrowserCell *)[sender selectedCell] section];
+
 	if (sub != nil)
 	{
 		//NSLog (@"browserClick");
