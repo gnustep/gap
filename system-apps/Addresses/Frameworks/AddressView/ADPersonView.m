@@ -32,7 +32,8 @@ static NSString *__defaultCountryCode = nil;
 @implementation ADPersonView
 + (void) loadRessources
 {
-  NSBundle *b; NSString *filename;
+  NSBundle *b;
+  NSString *filename;
 
   b = [NSBundle bundleForClass: self];
   
@@ -65,10 +66,13 @@ static NSString *__defaultCountryCode = nil;
 
 - initWithFrame: (NSRect) frameRect
 {
-  NSBundle *b; NSString *filename;
+  NSBundle *b;
+  NSString *filename;
+
   [super initWithFrame: frameRect];
 
-  if(!_labelDict) [[self class] loadRessources];
+  if(!_labelDict)
+    [[self class] loadRessources];
   
   _person = nil;
   _delegate = nil;
@@ -312,7 +316,7 @@ static NSString *__defaultCountryCode = nil;
   NSSize sizeNeeded;
   NSSize nvSize, nvMaxSize, nvMinSize;
 
-  if(_fillsSuperview)
+  if(_fillsSuperview && [self superview])
     {
       sizeNeeded = [[self superview] frame].size;
       if (sizeNeeded.width > 10)
@@ -321,14 +325,16 @@ static NSString *__defaultCountryCode = nil;
 	sizeNeeded.height -= 15;
     }
   else
-    sizeNeeded = NSMakeSize(0, 0);
+    {
+      sizeNeeded = NSMakeSize(0, 0);
+    }
+
   e = [[self subviews] objectEnumerator];
   while((view = [e nextObject]))
     {
       NSRect r;
 
       r = [view frame];
-
       sizeNeeded.height = r.origin.y + r.size.height;
       if(view != _noteView)
 	sizeNeeded.width = MAX(sizeNeeded.width,
@@ -340,6 +346,7 @@ static NSString *__defaultCountryCode = nil;
   if(_fillsSuperview && [self superview])
     {
       NSSize superSize = [[self superview] frame].size;
+
       if(sizeNeeded.height < superSize.height)
 	sizeNeeded.height = superSize.height;
       if(sizeNeeded.width < superSize.width)
@@ -563,9 +570,10 @@ static NSString *__defaultCountryCode = nil;
 {
   NSOpenPanel *panel;
   NSArray *types;
-  int retval;
+  NSInteger retval;
 
-  if(!_editable) return;
+  if(!_editable)
+    return;
 
   panel = [NSOpenPanel openPanel];
   types = [NSArray arrayWithObjects: @"jpg", @"JPG", @"jpeg", @"JPEG",
@@ -575,7 +583,8 @@ static NSString *__defaultCountryCode = nil;
   [panel setAllowsMultipleSelection: NO];
   retval = [panel runModalForTypes: types];
 
-  if(retval == NSCancelButton) return;
+  if(retval == NSCancelButton)
+    return;
 
   if([[panel filenames] count] != 1)
     {
@@ -661,7 +670,8 @@ static NSString *__defaultCountryCode = nil;
 
 - (void) cleanupEmptyProperties
 {
-  NSEnumerator *e; NSString *prop;
+  NSEnumerator *e;
+  NSString *prop;
 
   e = [[ADPerson properties] objectEnumerator];
   while((prop = [e nextObject]))
@@ -745,7 +755,7 @@ static NSString *__defaultCountryCode = nil;
 
 - (void) viewWillBeginEditing: (id) view
 {
-  int i;
+  NSUInteger i;
 
   for(i=0; i<[[self subviews] count]; i++)
     {
@@ -765,14 +775,17 @@ changedWidthFrom: (float) w1
   NSEnumerator *e;
   ADPersonPropertyView *v;
 
-  if(!view) return;
+  if (!view)
+    return;
   
   o = [view frame].origin;
   e = [[self subviews] objectEnumerator];
   while((v = [e nextObject]))
     {
       NSPoint p;
-      if(v == view) continue;
+
+      if(v == view)
+        continue;
       p = [v frame].origin;
       if(p.y == o.y && p.x > o.x)
 	{
@@ -791,7 +804,8 @@ changedHeightFrom: (float) oldH
   NSEnumerator *e;
   ADPersonPropertyView *v;
 
-  if(!view) return;
+  if(!view)
+    return;
 
   o = [view frame].origin;
   e = [[self subviews] objectEnumerator];
@@ -1087,7 +1101,9 @@ changedHeightFrom: (float) oldH
 
 - (BOOL) prepareForDragOperation: (id<NSDraggingInfo>) sender
 {
-  BOOL ok; NSPasteboard *pb; NSArray *types;
+  BOOL ok;
+  NSPasteboard *pb;
+  NSArray *types;
 
   if([sender draggingSource] == self ||
      ([[sender draggingSource] isKindOfClass: [NSView class]] &&
@@ -1115,7 +1131,9 @@ changedHeightFrom: (float) oldH
 
 - (BOOL) performDragOperation: (id<NSDraggingInfo>) sender
 {
-  BOOL ok; NSPasteboard *pb; NSArray *types;
+  BOOL ok;
+  NSPasteboard *pb;
+  NSArray *types;
 
   ok = NO;
   pb = [sender draggingPasteboard];
@@ -1219,15 +1237,21 @@ changedHeightFrom: (float) oldH
 + (NSString*) nextLabelAfter: (NSString*) previous
 		 forProperty: (NSString*) property
 {
-  NSArray *arr; NSInteger index;
+  NSArray *arr;
+  NSInteger index;
   
   arr = [_labelDict objectForKey: property];
-  if(!arr || ![arr count]) arr = [_labelDict objectForKey: @"Default"];
-  if(!arr || ![arr count]) return @"!!UNKNOWN!!";
+  if(!arr || ![arr count])
+    arr = [_labelDict objectForKey: @"Default"];
+  if(!arr || ![arr count])
+    return @"!!UNKNOWN!!";
 
   index = [arr indexOfObject: previous];
-  if(index == NSNotFound) return [arr objectAtIndex: 0];
-  index++; if(index >= [arr count]) index = 0;
+  if(index == NSNotFound)
+    return [arr objectAtIndex: 0];
+  index++;
+  if(index >= [arr count])
+    index = 0;
   return [arr objectAtIndex: index];
 }
 
@@ -1236,8 +1260,10 @@ changedHeightFrom: (float) oldH
   NSArray *arr;
 
   arr = [_labelDict objectForKey: property];
-  if(!arr || ![arr count]) arr = [_labelDict objectForKey: @"Default"];
-  if(!arr || ![arr count]) return @"!!UNKNOWN!!";
+  if(!arr || ![arr count])
+    arr = [_labelDict objectForKey: @"Default"];
+  if(!arr || ![arr count])
+    return @"!!UNKNOWN!!";
   return [arr objectAtIndex: 0];
 }
 
@@ -1309,7 +1335,8 @@ changedHeightFrom: (float) oldH
   NSString *lang; NSRange range;
 
   lang = [[[NSProcessInfo processInfo] environment] objectForKey: @"LANG"];
-  if(!lang) return @"us"; // hard-coded default!!
+  if(!lang)
+    return @"us"; // hard-coded default!!
 
   range = [lang rangeOfString: @"_"];
   if(range.location != NSNotFound)
