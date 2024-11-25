@@ -235,7 +235,8 @@ static ADLocalAddressBook *_localAB = nil;
   NSString *guid;
   NSString *muid;
   NSMutableArray *memberIds;
-  int i; BOOL doneAnything;
+  NSUInteger i;
+  BOOL doneAnything;
 
   guid = [group uniqueId];
   if(!guid || [group addressBook] != self)
@@ -253,7 +254,7 @@ static ADLocalAddressBook *_localAB = nil;
   memberIds = [NSMutableArray
 		arrayWithArray: [group valueForProperty: ADMemberIDsProperty]];
   
-  for(i=0; i<[memberIds count]; i++)
+  for(i = 0; i < [memberIds count]; i++)
     {
       NSString *ruid;
 
@@ -284,6 +285,7 @@ static ADLocalAddressBook *_localAB = nil;
 @end
   
 @implementation ADLocalAddressBook
+
 + (NSString*) defaultLocation
 {
   return _localABDefLoc;
@@ -307,7 +309,7 @@ static ADLocalAddressBook *_localAB = nil;
 
 + (BOOL) makeLocalAddressBookAtLocation: (NSString*) location
 {
-  int i;
+  NSUInteger i;
   NSString *currentPath;
   NSFileManager *fm;
   NSArray *arr;
@@ -317,7 +319,7 @@ static ADLocalAddressBook *_localAB = nil;
   arr = [location pathComponents];
   currentPath = [arr objectAtIndex: 0];
 
-  for(i=1; i<[arr count]; i++)
+  for(i = 1; i < [arr count]; i++)
     {
       BOOL dir, result;
       
@@ -338,39 +340,42 @@ static ADLocalAddressBook *_localAB = nil;
   return YES;
 }
 
-- initWithLocation: (NSString*) location
+- (id)initWithLocation: (NSString*) location
 {
-  BOOL dir;
-  NSString *loc;
-  NSAssert(location, @"Location cannot be nil");
+  self = [super init];
+  if (self)
+    {
+      BOOL dir;
+      NSString *loc;
 
-  _cache = [[NSMutableDictionary alloc] init];
+      NSAssert(location, @"Location cannot be nil");
 
-  loc = [location stringByExpandingTildeInPath];
-  if(![[NSFileManager defaultManager] fileExistsAtPath: loc
-				      isDirectory: &dir] ||
-     !dir)
-    if(![[self class] makeLocalAddressBookAtLocation: location])
-      [NSException raise: ADAddressBookInternalError
-		   format: @"Couldn't create local address book at %@",
-		   location];
-  
-  [super init];
+      _cache = [[NSMutableDictionary alloc] init];
 
-  _loc = [loc retain];
-  _unsaved = [[NSMutableDictionary alloc] initWithCapacity: 10];
-  _deleted = [[NSMutableDictionary alloc] initWithCapacity: 10];
+      loc = [location stringByExpandingTildeInPath];
+      if(![[NSFileManager defaultManager] fileExistsAtPath: loc
+					       isDirectory: &dir] ||
+	 !dir)
+	if(![[self class] makeLocalAddressBookAtLocation: location])
+	  [NSException raise: ADAddressBookInternalError
+		      format: @"Couldn't create local address book at %@",
+		       location];
 
-  [[NSNotificationCenter defaultCenter]
-    addObserver: self
-    selector: @selector(_handleRecordChanged:)
-    name: ADRecordChangedNotification
-    object: nil];
-  [[NSDistributedNotificationCenter defaultCenter]
-    addObserver: self
-    selector: @selector(_handleDBChangedExternally:)
-    name: ADDatabaseChangedExternallyNotification
-    object: nil];
+      _loc = [loc retain];
+      _unsaved = [[NSMutableDictionary alloc] initWithCapacity: 10];
+      _deleted = [[NSMutableDictionary alloc] initWithCapacity: 10];
+
+      [[NSNotificationCenter defaultCenter]
+	addObserver: self
+	   selector: @selector(_handleRecordChanged:)
+	       name: ADRecordChangedNotification
+	     object: nil];
+      [[NSDistributedNotificationCenter defaultCenter]
+	addObserver: self
+	   selector: @selector(_handleDBChangedExternally:)
+	       name: ADDatabaseChangedExternallyNotification
+	     object: nil];
+    }
   
   return self;
 }
@@ -391,7 +396,9 @@ static ADLocalAddressBook *_localAB = nil;
 
 - (BOOL) save
 {
-  NSEnumerator *e; ADRecord *r; NSString *path;
+  NSEnumerator *e;
+  ADRecord *r;
+  NSString *path;
   NSFileManager *fm;
   NSString *pidStr;
 
@@ -607,7 +614,8 @@ static ADLocalAddressBook *_localAB = nil;
 - (BOOL) removeRecord: (ADRecord*) record
 {
   NSString *uid;
-  NSEnumerator *e; ADGroup *g;
+  NSEnumerator *e;
+  ADGroup *g;
 
   uid = [record uniqueId];
   if(!uid)
@@ -664,7 +672,7 @@ static ADLocalAddressBook *_localAB = nil;
   NSMutableArray *members;
   NSMutableArray *memberIds;
   NSString *guid;
-  int i;
+  NSUInteger i;
 
   guid = [group uniqueId];
   if(!guid || [group addressBook] != self)
@@ -675,7 +683,7 @@ static ADLocalAddressBook *_localAB = nil;
 
   members = [NSMutableArray array];
   memberIds = [group valueForProperty: ADMemberIDsProperty];
-  for(i=0; i<[memberIds count]; i++)
+  for(i = 0; i < [memberIds count]; i++)
     {
       ADRecord *r = [self recordForUniqueId: [memberIds objectAtIndex: i]];
       if(!r)
@@ -775,7 +783,7 @@ static ADLocalAddressBook *_localAB = nil;
 - (BOOL) removeSubgroup: (ADGroup*) g1 forGroup: (ADGroup*) g2
 {
   NSArray *arr;
-  int i;
+  NSUInteger i;
 
   arr = [self subgroupsForGroup: g1];
   for(i=0; i<[arr count]; i++)

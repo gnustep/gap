@@ -1,6 +1,6 @@
 // ADLocalAddressBook.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 //
@@ -24,7 +24,7 @@
 
 + (BOOL) makeLocalAddressBookAtLocation: (NSString*) location;
 
-- initWithLocation: (NSString*) location;
+- (id)initWithLocation: (NSString*) location;
 - (NSString*) location;
 @end
 
