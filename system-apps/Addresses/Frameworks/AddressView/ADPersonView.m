@@ -1,13 +1,11 @@
 // ADPersonView.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
+//         Riccardo Mottola <rm@gnu.org>
 // 
 // Address View Framework for GNUstep
 // 
-// $Author: buzzdee $
-// $Locker:  $
-// $Revision: 1.9 $
-// $Date: 2013/02/23 14:25:21 $
+
 
 #import "ADPersonView.h"
 #import "ADPersonPropertyView.h"
@@ -69,39 +67,41 @@ static NSString *__defaultCountryCode = nil;
   NSBundle *b;
   NSString *filename;
 
-  [super initWithFrame: frameRect];
+  self = [super initWithFrame: frameRect];
+  if (self)
+    {
+      if(!_labelDict)
+	[[self class] loadRessources];
 
-  if(!_labelDict)
-    [[self class] loadRessources];
-  
-  _person = nil;
-  _delegate = nil;
-  _editable = NO;
-  _acceptsDrop = NO;
-  _fontSize = [NSFont systemFontSize];
-  _displaysImage = YES;
-  _forceImage = NO;
+      _person = nil;
+      _delegate = nil;
+      _editable = NO;
+      _acceptsDrop = NO;
+      _fontSize = [NSFont systemFontSize];
+      _displaysImage = YES;
+      _forceImage = NO;
 
-  // load images
-  b = [NSBundle bundleForClass: [self class]];
-  filename = [b pathForImageResource: @"Lock.tiff"];
-  _lockImg = [[NSImage alloc] initWithContentsOfFile: filename];
-  NSAssert(_lockImg, @"Image \"Lock.tiff\" could not be loaded!\n");
-  filename = [b pathForImageResource: @"Share.tiff"];
-  _shareImg = [[NSImage alloc] initWithContentsOfFile: filename];
-  NSAssert(_lockImg, @"Image \"Share.tiff\" could not be loaded!\n");
+      // load images
+      b = [NSBundle bundleForClass: [self class]];
+      filename = [b pathForImageResource: @"Lock.tiff"];
+      _lockImg = [[NSImage alloc] initWithContentsOfFile: filename];
+      NSAssert(_lockImg, @"Image \"Lock.tiff\" could not be loaded!\n");
+      filename = [b pathForImageResource: @"Share.tiff"];
+      _shareImg = [[NSImage alloc] initWithContentsOfFile: filename];
+      NSAssert(_lockImg, @"Image \"Share.tiff\" could not be loaded!\n");
 
-  [[NSNotificationCenter defaultCenter]
-    addObserver: self
-    selector: @selector(superviewFrameChanged:)
-    name: NSViewFrameDidChangeNotification
-    object: nil];
+      [[NSNotificationCenter defaultCenter]
+	addObserver: self
+	   selector: @selector(superviewFrameChanged:)
+	       name: NSViewFrameDidChangeNotification
+	     object: nil];
 
-  [self registerForDraggedTypes: [NSArray arrayWithObjects:
-					    @"NSVCardPboardType",
-					  NSTIFFPboardType,
-					  NSFilenamesPboardType,
-					  nil]];
+      [self registerForDraggedTypes: [NSArray arrayWithObjects:
+						@"NSVCardPboardType",
+					      NSTIFFPboardType,
+					      NSFilenamesPboardType,
+					      nil]];
+    }
   return self;
 }
 
@@ -573,7 +573,7 @@ static NSString *__defaultCountryCode = nil;
   NSInteger retval;
 
   if(!_editable)
-    return;
+     return;
 
   panel = [NSOpenPanel openPanel];
   types = [NSArray arrayWithObjects: @"jpg", @"JPG", @"jpeg", @"JPEG",
@@ -584,17 +584,17 @@ static NSString *__defaultCountryCode = nil;
   retval = [panel runModalForTypes: types];
 
   if(retval == NSCancelButton)
-    return;
+     return;
 
   if([[panel filenames] count] != 1)
     {
-      NSLog(@"Argh! %" PRIuPTR " filenames; 1 expected\n", [[panel filenames] count]);
+      NSLog(@"Argh! %lu filenames; 1 expected\n", (unsigned long)[[panel filenames] count]);
       return;
     }
   if(![_person setImageDataWithFile: [[panel filenames] objectAtIndex: 0]])
     NSRunAlertPanel(_(@"Error Loading Image"),
 		    [NSString stringWithFormat: _(@"The image file %@ could "
-						  @"not be loaded.")],
+						  @"not be loaded."),[[panel filenames] objectAtIndex: 0]],
 		    _(@"OK"), nil, nil, nil);
   else
     [self layout];
@@ -616,7 +616,9 @@ static NSString *__defaultCountryCode = nil;
     }
   else if(type == ADMultiStringProperty)
     {
-      ADMutableMultiValue *mv; int i; BOOL didSomeWork, didSomethingAtAll;
+      ADMutableMultiValue *mv;
+      NSUInteger i;
+      BOOL didSomeWork, didSomethingAtAll;
       
       mv = [_person valueForProperty: property];
       if(![mv count]) return;
@@ -625,7 +627,7 @@ static NSString *__defaultCountryCode = nil;
       while(didSomeWork)
 	{
 	  didSomeWork = NO;
-	  for(i=0; i<[mv count]; i++)
+	  for(i = 0; i < [mv count]; i++)
 	    if([[mv valueAtIndex: i]
 		 isEqualToString: [[self class]
 				    emptyValueForProperty: property]])
@@ -642,12 +644,15 @@ static NSString *__defaultCountryCode = nil;
     }      
   else if(type == ADMultiDictionaryProperty)
     {
-      ADMutableMultiValue *mv; int i; BOOL didSomeWork, didSomethingAtAll;
+      ADMutableMultiValue *mv;
+      NSUInteger i;
+      BOOL didSomeWork, didSomethingAtAll;
 
       mv = [[[ADMutableMultiValue alloc]
 	      initWithMultiValue: [_person valueForProperty: property]]
 	     autorelease];
-      if(![mv count]) return;
+      if(![mv count])
+	return;
       
       didSomeWork = YES; didSomethingAtAll = NO;
       while(didSomeWork)
@@ -702,6 +707,7 @@ static NSString *__defaultCountryCode = nil;
 {
   if(_fontSize == fontSize)
     return;
+
   _fontSize = fontSize;
   [self layout];
 }
@@ -760,6 +766,7 @@ static NSString *__defaultCountryCode = nil;
   for(i=0; i<[[self subviews] count]; i++)
     {
       id v = [[self subviews] objectAtIndex: i];
+
       if(v == view)
 	_editingViewIndex = i;
       else if([v isKindOfClass: [ADPersonPropertyView class]])
@@ -775,8 +782,8 @@ changedWidthFrom: (float) w1
   NSEnumerator *e;
   ADPersonPropertyView *v;
 
-  if (!view)
-    return;
+  if(!view)
+     return;
   
   o = [view frame].origin;
   e = [[self subviews] objectEnumerator];
@@ -785,7 +792,8 @@ changedWidthFrom: (float) w1
       NSPoint p;
 
       if(v == view)
-        continue;
+	 continue;
+
       p = [v frame].origin;
       if(p.y == o.y && p.x > o.x)
 	{
@@ -812,7 +820,10 @@ changedHeightFrom: (float) oldH
   while((v = [e nextObject]))
     {
       NSPoint p;
-      if(v == view) continue;
+
+      if(v == view)
+	 continue;
+
       p = [v frame].origin;
       if(p.y > o.y)
 	{
@@ -1101,18 +1112,10 @@ changedHeightFrom: (float) oldH
 
 - (BOOL) prepareForDragOperation: (id<NSDraggingInfo>) sender
 {
-  BOOL ok;
-  NSPasteboard *pb;
-  NSArray *types;
-
   if([sender draggingSource] == self ||
      ([[sender draggingSource] isKindOfClass: [NSView class]] &&
       [[sender draggingSource] isDescendantOf: self]))
     return NO;
-
-  ok = NO;
-  pb = [sender draggingPasteboard];
-  types = [pb types];
 
   if(_delegate &&
      [_delegate respondsToSelector: @selector(personView:shouldAcceptDrop:)])
@@ -1131,17 +1134,16 @@ changedHeightFrom: (float) oldH
 
 - (BOOL) performDragOperation: (id<NSDraggingInfo>) sender
 {
-  BOOL ok;
   NSPasteboard *pb;
   NSArray *types;
 
-  ok = NO;
   pb = [sender draggingPasteboard];
   types = [pb types];
 
   if([types containsObject: NSFilenamesPboardType])
     {
-      NSArray *arr; NSString *fname, *ext;
+      NSArray *arr;
+      NSString *fname, *ext;
 
       arr = [pb propertyListForType: NSFilenamesPboardType];
 
@@ -1156,7 +1158,8 @@ changedHeightFrom: (float) oldH
       if([ext isEqualToString: @"vcf"])
 	{
 	  NSMutableArray *ppl;
-	  id conv; ADRecord *r;
+	  id conv;
+	  ADRecord *r;
 
 	  conv = [[ADConverterManager sharedManager] 
 		   inputConverterWithFile: fname];
@@ -1184,8 +1187,11 @@ changedHeightFrom: (float) oldH
       else if([[NSArray arrayWithObjects: @"jpg", @"jpeg", @"tif", @"tiff",
 			nil] containsObject: ext])
 	{
-	  if(!_person) return NO;
-	  if(![_person setImageDataWithFile: fname]) return NO;
+	  if(!_person)
+	    return NO;
+	  if(![_person setImageDataWithFile: fname])
+	    return NO;
+
 	  [self layout];
 	  return YES;
 	}
@@ -1270,6 +1276,7 @@ changedHeightFrom: (float) oldH
 + (id) emptyValueForProperty: (NSString*) property
 {
   ADPropertyType type = [ADPerson typeOfProperty: property];
+
   switch(type)
     {
     case ADDateProperty:
@@ -1313,7 +1320,8 @@ changedHeightFrom: (float) oldH
 
 + (NSString*) isoCountryCodeForCountryName: (NSString*) name
 {
-  NSEnumerator *e; NSString *key;
+  NSEnumerator *e;
+  NSString *key;
 
   e = [[_isoCodeDict allKeys] objectEnumerator];
   while((key = [e nextObject]))
@@ -1332,7 +1340,8 @@ changedHeightFrom: (float) oldH
 
 + (NSString*) isoCountryCodeForCurrentLocale
 {
-  NSString *lang; NSRange range;
+  NSString *lang;
+  NSRange range;
 
   lang = [[[NSProcessInfo processInfo] environment] objectForKey: @"LANG"];
   if(!lang)
