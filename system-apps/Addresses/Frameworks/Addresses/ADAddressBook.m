@@ -40,7 +40,9 @@
 - (NSArray*) recordsMatchingSearchElement: (ADSearchElement*) search
 {
   NSMutableArray *arr;
-  NSEnumerator *e; ADPerson *p; ADGroup *g;
+  NSEnumerator *e;
+  ADPerson *p;
+  ADGroup *g;
 
   arr = [NSMutableArray array];
   e = [[self people] objectEnumerator];
@@ -61,11 +63,13 @@
 
 - (BOOL) save
 { [self subclassResponsibility: _cmd]; return NO; }
+
 - (BOOL) hasUnsavedChanges
 { [self subclassResponsibility: _cmd]; return NO; }
 
 - (ADPerson*) me
 { [self subclassResponsibility: _cmd]; return nil; }
+
 - (void) setMe: (ADPerson*) me
 { [self subclassResponsibility: _cmd]; }
 
@@ -79,12 +83,14 @@
 
 - (NSArray*) people
 { [self subclassResponsibility: _cmd]; return nil; }
+
 - (NSArray*) groups
 { [self subclassResponsibility: _cmd]; return nil; }
 
 @end
 
 @implementation ADAddressBook(GroupAccess)
+
 - (NSArray*) membersForGroup: (ADGroup*) group
 { [self subclassResponsibility: _cmd]; return nil; }
 - (BOOL) addMember: (ADPerson*) person forGroup: (ADGroup*) group
@@ -100,6 +106,7 @@
 { [self subclassResponsibility: _cmd]; return NO; }
 - (NSArray*) parentGroupsForGroup: (ADGroup*) group;
 { [self subclassResponsibility: _cmd]; return nil; }
+
 @end
 
 @implementation ADAddressBook(AddressesExtensions)
@@ -108,7 +115,7 @@
 {
   NSMutableArray *retval;
   NSArray *s;
-  int i;
+  NSUInteger i;
 
   retval = [NSMutableArray array];
   s = [g subgroups];
@@ -116,7 +123,7 @@
   // is it a group?
   if([record isKindOfClass: [ADGroup class]])
     {
-      for(i=0; i<[s count]; i++)
+      for(i = 0; i < [s count]; i++)
 	if([[[s objectAtIndex: i] uniqueId]
 	     isEqualToString: [record uniqueId]])
 	  {
@@ -139,7 +146,7 @@
 	  }
     }
   
-  for(i=0; i<[s count]; i++)
+  for(i = 0; i < [s count]; i++)
     {
       NSArray *a;
 
