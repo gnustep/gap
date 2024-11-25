@@ -1,7 +1,7 @@
 // ADVCFConverter.m (this is -*- ObjC -*-)
 // 
 // Authors: Björn Giesler <giesler@ira.uka.de>
-//          Riccardo Mottola
+//          Riccardo Mottola <rm@gnu.org>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -28,7 +28,7 @@
   unsigned long val;
   NSString *str;
   NSString *hexchars;
-  int i;
+  NSUInteger i;
 
   val = 0;
   str = [[self stringByTrimmingCharactersInSet:
@@ -36,7 +36,7 @@
 	  lowercaseString];
   hexchars = @"0123456789abcdef";
 
-  for(i=0; i<[str length]; i++)
+  for(i = 0; i < [str length]; i++)
     {
       NSRange r;
       NSString *substr;
@@ -46,7 +46,7 @@
       r = [hexchars rangeOfString: substr];
       if(r.location == NSNotFound)
 	[NSException raise: NSGenericException
-		     format: @"\"%@\"[%d] not a hex char", str, i];
+		    format: @"\"%@\"[%u] not a hex char", str, (unsigned)i];
       val <<= 4;
       val |= r.location;
     }
@@ -56,7 +56,7 @@
 
 - (NSString*) stringByQuotedPrintableDecoding
 {
-  int i;
+  NSUInteger i;
   NSMutableString *str;
   NSMutableString *str2;
   
@@ -75,7 +75,7 @@
 
 
   str2 = [NSMutableString stringWithCapacity: [str length]];
-  for(i=0; i<[str length]; i++)
+  for(i = 0; i < [str length]; i++)
     {
       NSRange r;
       NSString *s;
@@ -139,7 +139,7 @@
 
 - (NSString*) stringByQuotedPrintableEncoding
 {
-  int i;
+  NSUInteger i;
   size_t len;
   const unsigned char *cstr;
   NSMutableString *str;
@@ -196,9 +196,9 @@ NSString *base64Encode(NSData* data)
   
       
 @interface ADVCFConverter(Private)
-- (BOOL) parseLine: (int) line
+- (BOOL) parseLine: (NSUInteger) line
 	 fromArray: (NSArray*) arr
-	  upToLine: (int*) retLine
+	  upToLine: (NSUInteger*) retLine
       intoKeyBlock: (NSArray**) k
 	valueBlock: (NSArray**) v;
 - (void) integrateKeyBlock: (NSArray*) k
@@ -251,7 +251,7 @@ static NSArray *knownItems;
 
 - (ADRecord*) nextRecord
 {
-  int i = 0;
+  NSUInteger i;
   NSString *str;
   NSArray *lines;
   ADPerson *person;
@@ -263,12 +263,13 @@ static NSArray *knownItems;
   str = [_str substringFromIndex: _idx];
 
   lines = [str componentsSeparatedByString: @"\n"];
-  
+
+  i = 0;
   while(i < [lines count])
     {
       NSArray *keyblock, *valueblock;
       BOOL retval;
-      int oldIndex, newIndex;
+      NSUInteger oldIndex, newIndex;
 
       oldIndex = i;
       retval = [self parseLine: i
@@ -300,10 +301,13 @@ static NSArray *knownItems;
 /* COutputConverting */
 - initForOutput
 {
-  _str = nil;
-  _input = NO;
-  _idx = 0;
-  _out = [[NSMutableString alloc] init];
+  if (self = [super init])
+    {
+      _str = nil;
+      _input = NO;
+      _idx = 0;
+      _out = [[NSMutableString alloc] init];
+    }
   return self;
 }
 
@@ -360,9 +364,9 @@ static NSArray *knownItems;
 @end
 
 @implementation ADVCFConverter (Private)
-- (BOOL) parseLine: (int) line
+- (BOOL) parseLine: (NSUInteger) line
 	 fromArray: (NSArray*) arr
-	  upToLine: (int*) retLine
+	  upToLine: (NSUInteger*) retLine
       intoKeyBlock: (NSArray**) k
 	valueBlock: (NSArray**) v
 {
@@ -425,7 +429,7 @@ static NSArray *knownItems;
   r = [str rangeOfString: @":"];
   if(r.location == NSNotFound)
     {
-      NSLog(@"Syntax error in line %d!\n", line);
+      NSLog(@"Syntax error in line %lu!\n", (unsigned long)line);
       return NO;
     }
   

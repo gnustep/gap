@@ -17,16 +17,16 @@
   NSString *_str;
   NSMutableString *_out;
   BOOL _input;
-  int _idx;
+  NSUInteger _idx;
 }
 
 /* ADInputConverting */
-- initForInput;
+- (id)initForInput;
 - (BOOL) useString: (NSString*) str;
 - (ADRecord*) nextRecord;
 
 /* ADOutputConverting */
-- initForOutput;
+- (id)initForOutput;
 - (BOOL) canStoreMultipleRecords;
 - (void) storeRecord: (ADRecord*) record;
 - (NSString*) string;
