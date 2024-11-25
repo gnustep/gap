@@ -1,6 +1,7 @@
 // ADEnvelopeAddressBook.m (this is -*- ObjC -*-)
 // 
 // Authors: Björn Giesler <giesler@ira.uka.de>
+//          Riccardo Mottola <rm@gnu.org>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -17,10 +18,15 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 @implementation ADEnvelopeAddressBook
 + (ADAddressBook*) sharedAddressBook
 {
-  NSDictionary *domain; NSArray *config; NSDictionary *entry; 
-  NSEnumerator *e; NSMutableArray *books;
-  int primary = 0; BOOL havePrimary = NO; int i;
-  
+  NSDictionary *domain;
+  NSArray *config;
+  NSDictionary *entry; 
+  NSEnumerator *e;
+  NSMutableArray *books;
+  NSUInteger primary = 0;
+  BOOL havePrimary = NO;
+  NSUInteger i;
+
   if(_envelopeAB)
     return _envelopeAB;
 
@@ -72,7 +78,6 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 	  else
 	    NSLog(@"Got book.\n");
 	}
-
       else if([className isEqualToString: @"Local"])
 	{
 	  NSString *location;
@@ -84,15 +89,16 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 	      book = [[[ADLocalAddressBook alloc] initWithLocation: location]
 			 autorelease];
 	}
-
       else
+	{
 	  book = [[ADPluginManager sharedPluginManager] 
 		     newAddressBookWithSpecification: entry];
+	}
 
-
-      if(!book) continue;
+      if (!book)
+	continue;
       
-      if([[entry objectForKey: @"Primary"] boolValue])
+      if ([[entry objectForKey: @"Primary"] boolValue])
       {
 	  if(havePrimary)
 	      NSLog(@"Duplicate Primary entry\n");
@@ -105,20 +111,25 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 
   _envelopeAB = [[ADEnvelopeAddressBook alloc]
 		    initWithPrimaryAddressBook: [books objectAtIndex: primary]];
-  for(i=0; i<[books count]; i++)
-  {
-      if(i==primary) continue;
+  for (i = 0; i < [books count]; i++)
+    {
+      if (i == primary)
+	continue;
       [_envelopeAB addAddressBook: [books objectAtIndex: i]];
-  }
+    }
 
   return _envelopeAB;
 }
 
 - initWithPrimaryAddressBook: (ADAddressBook*) book
 {
-  _merge = YES;
-  _books = [[NSMutableArray alloc] initWithCapacity: 1];
-  [self setPrimaryAddressBook: book];
+  self = [super init];
+  if (self)
+    {
+      _merge = YES;
+      _books = [[NSMutableArray alloc] initWithCapacity: 1];
+      [self setPrimaryAddressBook: book];
+    }
   return self;
 }
 
@@ -206,10 +217,15 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
   NSEnumerator *e;
   ADAddressBook *book;
 
-  if(!_merge || [_primary me])  return [_primary me];
+  if (!_merge || [_primary me])
+    return [_primary me];
+
   e = [_books objectEnumerator];
   while((book = [e nextObject]))
-    if([book me]) return [book me];
+    {
+      if ([book me])
+	return [book me];
+    }
   return nil;
 }
   
@@ -221,7 +237,8 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 - (ADRecord*) recordForUniqueId: (NSString*) uniqueId
 {
   NSEnumerator *e;
-  ADAddressBook *book; ADRecord *retval;
+  ADAddressBook *book;
+  ADRecord *retval;
 
   e = [_books objectEnumerator];
   while((book = [e nextObject]))
@@ -327,5 +344,6 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
 	       NSStringFromSelector(_cmd)];
   return nil;
 }
+
 @end
 

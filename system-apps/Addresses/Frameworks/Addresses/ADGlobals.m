@@ -83,8 +83,8 @@ NSString* const ADSuffixProperty = @"Suffix";
 NSString* const ADNicknameProperty = @"Nickname";
 NSString* const ADMaidenNameProperty = @"MaidenName";
 
-NSString * const ADImageProperty = @"Image";
-NSString * const ADImageTypeProperty = @"ImageType";
+NSString* const ADImageProperty = @"Image";
+NSString* const ADImageTypeProperty = @"ImageType";
 
 NSString* const ADGroupNameProperty = @"GroupName";
 NSString* const ADMemberIDsProperty = @"Members";
@@ -95,11 +95,11 @@ NSString* const ADOtherLabel = @"Other";
 
 NSString* const ADDatabaseChangedNotification=@"ADDatabaseChangedNotification";
 NSString* const ADDatabaseChangedExternallyNotification=@"ADDatabaseChangedExternallyNotification";
-NSString * const ADRecordChangedNotification=@"ADRecordChangedNotification";
-NSString * const ADUniqueIDOfChangedRecordKey=@"ADUniqueIDOfChangedRecordKey";
-NSString * const ADChangedPropertyKey=@"ADChangedPropertyKey";
-NSString * const ADChangedValueKey=@"ADChangedValueKey";
-NSString * const ADAddressBookContainingChangedRecordKey=@"ADAddressBookContainingChangedRecordKey";
+NSString* const ADRecordChangedNotification=@"ADRecordChangedNotification";
+NSString* const ADUniqueIDOfChangedRecordKey=@"ADUniqueIDOfChangedRecordKey";
+NSString* const ADChangedPropertyKey=@"ADChangedPropertyKey";
+NSString* const ADChangedValueKey=@"ADChangedValueKey";
+NSString* const ADAddressBookContainingChangedRecordKey=@"ADAddressBookContainingChangedRecordKey";
 
 NSString* ADAddressBookInaccessibleError = @"ADAddressBookInaccessibleError";
 NSString* ADAddressBookConsistencyError = @"ADAddressBookConsistencyError";
@@ -110,13 +110,15 @@ static NSBundle *myBundle = nil;
 NSString* ADLocalizedPropertyOrLabel(NSString* propertyOrLabel)
 {
   NSString *str;
+
   if(!myBundle)
     myBundle = [NSBundle bundleForClass: [ADAddressBook class]];
   str = [myBundle localizedStringForKey: propertyOrLabel
 			    value: propertyOrLabel
 			    table: @"PropertiesAndLabels"];
-  
-  if(str) return str;
+
+  if(str)
+    return str;
   return propertyOrLabel;
 }
 
@@ -219,7 +221,9 @@ NSString* ADLocalizedPropertyOrLabel(NSString* propertyOrLabel)
 NSArray*
 ADReadOnlyCopyOfRecordArray(NSArray* arr)
 {
-  NSMutableArray *retval; NSEnumerator *e; ADRecord *r;
+  NSMutableArray *retval;
+  NSEnumerator *e;
+  ADRecord *r;
 
   retval = [NSMutableArray arrayWithCapacity: [arr count]];
   e = [arr objectEnumerator];
