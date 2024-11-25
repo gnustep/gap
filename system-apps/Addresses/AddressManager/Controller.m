@@ -519,9 +519,9 @@
       else
 	{
 	  msg = [NSString stringWithFormat: _(@"Do you really want to delete "
-					      @"the %d selected persons "
+					      @"the %lu selected persons "
 					      @"from \"All\" and all groups?"),
-			  [a count]];
+			  (unsigned long)[a count]];
 	  cpt = _(@"Delete Persons?");
 	}
       if(!NSRunAlertPanel(cpt, msg,
@@ -630,8 +630,8 @@
   [panel setRequiredFileType: @"vcf"];
   if([a count] > 1)
     [panel
-      setTitle: [NSString stringWithFormat: _(@"Export %d records to..."),
-			  [a count]]];
+      setTitle: [NSString stringWithFormat: _(@"Export %lu records to..."),
+			  (unsigned long)[a count]]];
   else
     [panel
       setTitle: [NSString stringWithFormat: _(@"Export '%@' to..."),
