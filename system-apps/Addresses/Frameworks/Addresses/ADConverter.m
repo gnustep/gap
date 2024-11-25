@@ -1,7 +1,7 @@
 // ADConverter.m (this is -*- ObjC -*-)
 // 
-// author: Björn Giesler <giesler@ira.uka.de>
-// Riccardo Mottola
+// Author: Björn Giesler <giesler@ira.uka.de>
+//         Riccardo Mottola <rm@gnu.org>
 
 // Address Book Framework for GNUstep
 // 
@@ -21,22 +21,26 @@ ADConverterManager *_manager = nil;
   return _manager;
 }
 
-- init
+- (id)init
 {
-  _icClasses = [[NSMutableDictionary alloc] initWithCapacity: 1];
-  _ocClasses = [[NSMutableDictionary alloc] initWithCapacity: 1];
+  self = [super init];
+  if (self)
+    {
+      _icClasses = [[NSMutableDictionary alloc] initWithCapacity: 1];
+      _ocClasses = [[NSMutableDictionary alloc] initWithCapacity: 1];
 
-  // couple of standard converters
+      // couple of standard converters
   
-  [self registerInputConverterClass: [ADPListConverter class]
-	forType: @"mfaddr"];
+      [self registerInputConverterClass: [ADPListConverter class]
+				forType: @"mfaddr"];
   
-  [self registerInputConverterClass: [ADVCFConverter class]
-	forType: @"vcf"];
-  [self registerOutputConverterClass: [ADVCFConverter class]
-	forType: @"vcf"];
+      [self registerInputConverterClass: [ADVCFConverter class]
+				forType: @"vcf"];
+      [self registerOutputConverterClass: [ADVCFConverter class]
+				 forType: @"vcf"];
+    }
 
-  return [super init];
+  return self;
 }
 
 - (BOOL) registerInputConverterClass: (Class) c

@@ -1,6 +1,6 @@
 // ADConverter.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -13,13 +13,13 @@
 #import <Addresses/ADRecord.h>
 
 @protocol ADInputConverting
-- initForInput;
+- (id)initForInput;
 - (BOOL) useString: (NSString*) string;
 - (ADRecord*) nextRecord;
 @end
 
 @protocol ADOutputConverting
-- initForOutput;
+- (id)initForOutput;
 - (BOOL) canStoreMultipleRecords;
 - (void) storeRecord: (ADRecord*) record;
 - (NSString*) string;
