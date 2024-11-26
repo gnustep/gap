@@ -1,6 +1,6 @@
 // ADGroup.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -31,11 +31,12 @@ static NSMutableDictionary *_propTypes;
 - (NSArray*) members
 {
   NSArray *arr;
-  
+
   NSAssert([self addressBook], @"Address book must be set!");
   arr = [[self addressBook] membersForGroup: self];
-  
-  if([self readOnly]) return ADReadOnlyCopyOfRecordArray(arr);
+
+  if([self readOnly])
+    return ADReadOnlyCopyOfRecordArray(arr);
   return arr;
 }
 
@@ -43,7 +44,8 @@ static NSMutableDictionary *_propTypes;
 {
   NSAssert([self addressBook], @"Address book must be set!");
 
-  if([self readOnly]) return NO;
+  if([self readOnly])
+    return NO;
   return [[self addressBook] addMember: person forGroup: self];
 }
 
@@ -62,7 +64,8 @@ static NSMutableDictionary *_propTypes;
   NSAssert([self addressBook], @"Address book must be set!");
   arr = [[self addressBook] subgroupsForGroup: self];
 
-  if([self readOnly]) return ADReadOnlyCopyOfRecordArray(arr);
+  if([self readOnly])
+    return ADReadOnlyCopyOfRecordArray(arr);
   return arr;
 }
 
@@ -70,7 +73,8 @@ static NSMutableDictionary *_propTypes;
 {
   NSAssert([self addressBook], @"Address book must be set!");
 
-  if([self readOnly]) return NO;
+  if([self readOnly])
+    return NO;
   return [[self addressBook] addSubgroup: group forGroup: self];
 }
 
@@ -78,7 +82,8 @@ static NSMutableDictionary *_propTypes;
 {
   NSAssert([self addressBook], @"Address book must be set!");
 
-  if([self readOnly]) return NO;
+  if([self readOnly])
+    return NO;
   return [[self addressBook] removeSubgroup: group forGroup: self];
 }
 

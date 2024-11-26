@@ -8,10 +8,13 @@
 #import "ADImageLoading.h"
 
 @implementation ADPerson (ImageAdditions)
+
 - (BOOL) setImageData: (NSData*) data
 {
-  if(!data) return [self removeValueForProperty: ADImageProperty];
-  else return [self setValue: data forProperty: ADImageProperty];
+  if(!data)
+    return [self removeValueForProperty: ADImageProperty];
+  else
+    return [self setValue: data forProperty: ADImageProperty];
 }
 
 - (NSData*) imageData
@@ -40,7 +43,8 @@
   NSData *data;
 
   data = [NSData dataWithContentsOfFile: filename];
-  if(!data) return NO;
+  if(!data)
+    return NO;
   [self setImageData: data];
   
   if([self addressBook] &&
