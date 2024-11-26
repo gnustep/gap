@@ -42,19 +42,24 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 @implementation ADMultiValue
 - (id)initWithMultiValue: (ADMultiValue*) mv
 {
-  [super init];
-  _arr = [[[mv array] mutableCopy] retain];
-  _primaryId = [[mv primaryIdentifier] copy];
-  _type = [mv type];
+  if (self = [super init])
+    {
+      _arr = [[[mv array] mutableCopy] retain];
+      _primaryId = [[mv primaryIdentifier] copy];
+      _type = [mv type];
+    }
   return self;
 }
 
 - (id) initWithType: (ADPropertyType) type
 {
-  _arr = [[NSMutableArray alloc] initWithCapacity: 5];
-  _primaryId = nil;
-  _type = type;
-  return [super init];
+  if (self = [super init])
+    {
+      _arr = [[NSMutableArray alloc] initWithCapacity: 5];
+      _primaryId = nil;
+      _type = type;
+    }
+  return self;
 }
 
 - (void) dealloc
@@ -155,10 +160,13 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 #define POSTCHANGE [[NSNotificationCenter defaultCenter] postNotificationName: @"_MVChg" object: self];
 
 @implementation ADMutableMultiValue
-- initWithType: (ADPropertyType) type
+- (id)initWithType: (ADPropertyType) type
 {
-  _nextId = 0;
-  return [super initWithType: type];
+  if (self = [super initWithType: type])
+    {
+      _nextId = 0;
+    }
+  return self;
 }
 
 - (NSString*) _nextValidID
@@ -237,7 +245,8 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 
 - (BOOL) removeValueAndLabelAtIndex: (NSUInteger) index
 {
-  if(index >= [_arr count]) return NO;
+  if(index >= [_arr count])
+    return NO;
   [_arr removeObjectAtIndex: index];
 
   return YES;
@@ -248,7 +257,8 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 {
   NSMutableDictionary *dict;
 
-  if(index >= [_arr count]) return NO;
+  if(index >= [_arr count])
+    return NO;
 
   // make sure nothing mutable gets added
   if(_type == ADMultiArrayProperty &&
@@ -274,7 +284,8 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 {
   NSMutableDictionary *dict;
 
-  if(index >= [_arr count]) return NO;
+  if(index >= [_arr count])
+    return NO;
   dict = [NSMutableDictionary
 	   dictionaryWithDictionary: [_arr objectAtIndex: index]];
   [dict setObject: label forKey: @"Label"];
