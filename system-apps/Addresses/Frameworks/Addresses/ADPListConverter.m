@@ -1,6 +1,6 @@
 // ADPListConverter.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -12,10 +12,14 @@
 #import "ADMultiValue.h"
 
 @implementation ADPListConverter
-- initForInput
+- (id)initForInput
 {
-  _done = NO; _plist = nil;
-  return [super init];
+  if (self = [super init])
+    {
+      _done = NO;
+      _plist = nil;
+    }
+  return self;
 }
 
 - (BOOL) useString: (NSString*) str
@@ -63,7 +67,7 @@
       if(t & ADMultiValueMask)
 	{
 	  ADMutableMultiValue *mv;
-	  int i;
+	  NSUInteger i;
 
 	  if([val isKindOfClass: [NSString class]])
 	    {
@@ -72,7 +76,7 @@
 	      val = [val propertyList];
 	    }
 	  mv = [[[ADMutableMultiValue alloc] initWithType: t] autorelease];
-	  for(i=0; i<[val count]; i++)
+	  for(i = 0; i < [val count]; i++)
 	    {
 	      NSDictionary *d;
 
@@ -101,8 +105,7 @@
 		NSLog(@"Unknown date class %@\n", [val className]);
 	      break;
 	    default:
-	      [r setValue: val
-		 forProperty: key];
+	      [r setValue: val forProperty: key];
 	    }
 	}
     }
