@@ -242,8 +242,8 @@
 		{
 		  if([self matchesValue: v])
 		    return YES;
-		  return NO;
 		}
+	      return NO;
 	    }
 	  else
 	    {
