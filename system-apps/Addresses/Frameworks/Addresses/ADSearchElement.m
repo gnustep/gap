@@ -212,7 +212,7 @@
     {
       id val2;
       
-      for(i = 0; i < [val count]; i++)
+      for (i = 0; i < [val count]; i++)
 	{
 	  if(_label)
 	    {
@@ -223,26 +223,32 @@
 		val2 = nil;
 	    }
 	  else
-	    val2 = [val valueAtIndex: i];
+	    {
+	      val2 = [val valueAtIndex: i];
+	    }
 
-	  if(!val2) continue;
+	  if(!val2)
+	    continue;
 	  
 	  if([val2 isKindOfClass: [NSDictionary class]])
 	    {
+	      NSEnumerator *e;
+	      id v;
 	      if(_key)
 		return [self matchesValue: [val2 objectForKey: _key]];
-	      else
+
+	      e = [val2 objectEnumerator];
+	      while((v = [e nextObject]))
 		{
-		  NSEnumerator *e = [val2 objectEnumerator];
-		  id v;
-		  while((v = [e nextObject]))
-		    if([self matchesValue: v])
-		      return YES;
+		  if([self matchesValue: v])
+		    return YES;
 		  return NO;
 		}
 	    }
 	  else
-	    return [self matchesValue: val2];
+	    {
+	      return [self matchesValue: val2];
+	    }
 	}
     }
   else
