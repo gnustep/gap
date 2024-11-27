@@ -233,12 +233,15 @@ static NSArray *knownItems;
   [super dealloc];
 }
 
-- initForInput
+- (id) initForInput
 {
-  _input = YES;
-  _str = nil;
-  _out = nil;
-  return [super init];
+  if (self = [super init])
+    {
+      _input = YES;
+      _str = nil;
+      _out = nil;
+    }
+  return self;
 }
 
 - (BOOL) useString: (NSString*) str
@@ -299,7 +302,7 @@ static NSArray *knownItems;
 }
 
 /* COutputConverting */
-- initForOutput
+- (id)initForOutput
 {
   if (self = [super init])
     {
@@ -381,7 +384,8 @@ static NSArray *knownItems;
   str = [[arr objectAtIndex: (*retLine)++]
 	    stringByTrimmingCharactersInSet: wsp];
 
-  if(![str length]) return NO;
+  if (![str length])
+    return NO;
   
   /*
    * Unfolding multi-line value fields conforming to RFC 2425
@@ -390,7 +394,7 @@ static NSArray *knownItems;
   
   // While "there is a next line that begins with a space character"...
   lastLineWasReadable = YES;
-  while(*retLine < [arr count] && lastLineWasReadable)
+  while (*retLine < [arr count] && lastLineWasReadable)
     {
       NSString* str2 = [arr objectAtIndex: *retLine];
       
