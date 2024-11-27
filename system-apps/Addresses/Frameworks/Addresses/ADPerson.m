@@ -1,6 +1,6 @@
 // ADPerson.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -228,7 +228,8 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 
 - (NSData *) vCardRepresentation
 {
-  NSString *str; const char *utf8str;
+  NSString *str;
+  const char *utf8str;
 
   str = [self representationWithType: @"vcf"];
   utf8str = [str UTF8String];
@@ -245,9 +246,12 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 
 + (void) setScreenNameFormat: (ADScreenNameFormat) aFormat
 {
-  NSDictionary *oldDom; NSMutableDictionary *newDom;
+  NSDictionary *oldDom;
+  NSMutableDictionary *newDom;
 
-  if(aFormat == _scrNameFormat) return;
+  if(aFormat == _scrNameFormat)
+    return;
+
   _scrNameFormat = aFormat;
 
   oldDom = [[NSUserDefaults standardUserDefaults]
@@ -275,17 +279,18 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 
   last = [self valueForProperty: ADLastNameProperty];
   first = [self valueForProperty: ADFirstNameProperty];
-  if (!last && !first) {
-    fn = [self valueForProperty: ADFormattedNameProperty];
-    if (fn)
-      return fn;
-    return @"New Person";
-  }
+  if (!last && !first)
+    {
+      fn = [self valueForProperty: ADFormattedNameProperty];
+      if (fn)
+	return fn;
+      return @"New Person";
+    }
   if (!first)
     return last;
   if (!last)
     return first;
-  if(aFormat == ADScreenNameFirstNameFirst)
+  if (aFormat == ADScreenNameFirstNameFirst)
     return [NSString stringWithFormat: @"%@ %@", first, last];
   return [NSString stringWithFormat: @"%@, %@", last, first];
 }
@@ -298,7 +303,7 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
   myName = [self screenName];
   hisName = [theOtherGuy screenName];
   
-  if([myName isEqualToString: @"New Person"])
+  if ([myName isEqualToString: @"New Person"])
     return NSOrderedAscending;
   else if([hisName isEqualToString: @"New Person"])
     return NSOrderedDescending;
@@ -308,17 +313,20 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 
 - (BOOL) shared
 {
-  if(![self valueForProperty: ADSharedProperty])
+  if (![self valueForProperty: ADSharedProperty])
     return NO;
   return [[self valueForProperty: ADSharedProperty] boolValue];
 }
 
 - (void) setShared: (BOOL) yesno
 {
-  if([self shared] == yesno) return;
+  if ([self shared] == yesno)
+    return;
 
-  if(yesno) [self setValue: @"YES" forProperty: ADSharedProperty];
-  else [self setValue: @"NO" forProperty: ADSharedProperty];
+  if (yesno)
+    [self setValue: @"YES" forProperty: ADSharedProperty];
+  else
+    [self setValue: @"NO" forProperty: ADSharedProperty];
 }
 @end
 
