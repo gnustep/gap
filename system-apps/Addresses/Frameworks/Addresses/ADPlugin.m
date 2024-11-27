@@ -10,152 +10,156 @@
 static ADPluginManager *manager = NULL;
 
 @implementation ADPluginManager
-- init
+- (id)init
 {
-    abClassPlugins = [[NSMutableArray alloc] init];
-    return self;
+  if (self = [super init])
+    {
+      abClassPlugins = [[NSMutableArray alloc] init];
+    }
+  return self;
 }
 
 - (void) dealloc
 {
-    [abClassPlugins release];
-    [super dealloc];
+  [abClassPlugins release];
+  [super dealloc];
 }
 
 + (ADPluginManager*) sharedPluginManager
 {
-    if(!manager)
+  if(!manager)
     {
-	manager = [[ADPluginManager alloc] init];
-	[manager checkForNewPlugins];
+      manager = [[ADPluginManager alloc] init];
+      [manager checkForNewPlugins];
     }
-    return manager;
+  return manager;
 }
 
 - (NSBundle*) pluginForClassNamed: (NSString*) className
 {
-    NSEnumerator *e;
-    NSBundle *b;
+  NSEnumerator *e;
+  NSBundle *b;
 
-    e = [abClassPlugins objectEnumerator];
-    while((b = [e nextObject]))
-	if([[[b principalClass] className] 
+  e = [abClassPlugins objectEnumerator];
+  while((b = [e nextObject]))
+    if([[[b principalClass] className] 
 	       isEqualToString: className])
-	    return b;
-    return nil;
+      return b;
+  return nil;
 }
 
 - (NSBundle*) pluginLoadedFromPath: (NSString*) aPath
 {
-    NSEnumerator *e;
-    NSBundle *b;
+  NSEnumerator *e;
+  NSBundle *b;
 
-    e = [abClassPlugins objectEnumerator];
-    while((b = [e nextObject]))
-	if([[b bundlePath] isEqualToString: aPath])
-	    return b;
-    return nil;
+  e = [abClassPlugins objectEnumerator];
+  while((b = [e nextObject]))
+    if([[b bundlePath] isEqualToString: aPath])
+      return b;
+  return nil;
 }
 
 - (BOOL) checkForNewPlugins
 {
-    NSArray *paths;
-    NSEnumerator* pathEnum;
-    NSString *curPath;
-    NSFileManager *fm;
+  NSArray *paths;
+  NSEnumerator* pathEnum;
+  NSString *curPath;
+  NSFileManager *fm;
 
-    BOOL allOk;
+  BOOL allOk;
 
-    allOk = YES;
+  allOk = YES;
 
-    paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
-						NSAllDomainsMask, YES);
+  paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
+					      NSAllDomainsMask, YES);
     
-    fm = [NSFileManager defaultManager];
-    pathEnum = [paths objectEnumerator];
-    while((curPath = [pathEnum nextObject]))
+  fm = [NSFileManager defaultManager];
+  pathEnum = [paths objectEnumerator];
+  while((curPath = [pathEnum nextObject]))
     {
-	NSArray *contents;
-	NSString *curFile;
-	NSEnumerator *fileEnum;
+      NSArray *contents;
+      NSString *curFile;
+      NSEnumerator *fileEnum;
 
-	curPath = [curPath stringByAppendingPathComponent: @"Addresses"];
+      curPath = [curPath stringByAppendingPathComponent: @"Addresses"];
 
-	contents = [fm directoryContentsAtPath: curPath];
-	if(!contents) continue;
+      contents = [fm directoryContentsAtPath: curPath];
+      if(!contents)
+	continue;
 	
-	fileEnum = [contents objectEnumerator];
-	while((curFile = [fileEnum nextObject]))
+      fileEnum = [contents objectEnumerator];
+      while((curFile = [fileEnum nextObject]))
 	{
-	    if([[curFile pathExtension] isEqualToString: @"abclass"])
+	  if([[curFile pathExtension] isEqualToString: @"abclass"])
 	    {
-		NSString *fqfn;
-		NSBundle *bundle;
+	      NSString *fqfn;
+	      NSBundle *bundle;
 
-		fqfn = [curPath stringByAppendingPathComponent: curFile];
-		if([self pluginLoadedFromPath: fqfn])
-		    continue;
+	      fqfn = [curPath stringByAppendingPathComponent: curFile];
+	      if([self pluginLoadedFromPath: fqfn])
+		continue;
 
-		bundle = [NSBundle bundleWithPath: fqfn];
+	      bundle = [NSBundle bundleWithPath: fqfn];
 
-		if(!bundle)
+	      if(!bundle)
 		{
-		    NSLog(@"Couldn't load bundle %@\n", fqfn);
-		    allOk = NO;
-		    continue;
+		  NSLog(@"Couldn't load bundle %@\n", fqfn);
+		  allOk = NO;
+		  continue;
 		}
-		if(![[bundle principalClass] 
+	      if(![[bundle principalClass] 
 			isSubclassOfClass: [ADAddressBook class]])
 		{
-		    NSLog(@"Principal class %@ of %@ is not an "
-			  @"ADPluggedInAddressBook!\n",
-			  [[bundle principalClass] className], fqfn);
-		    allOk = NO;
-		    continue;
+		  NSLog(@"Principal class %@ of %@ is not an "
+			@"ADPluggedInAddressBook!\n",
+			[[bundle principalClass] className], fqfn);
+		  allOk = NO;
+		  continue;
 		}
-		if(![[bundle principalClass] 
+	      if(![[bundle principalClass] 
 			conformsToProtocol: @protocol(ADPluggedInAddressBook)])
 		{
-		    NSLog(@"Principal class %@ of %@ doesn't conform to "
-			  @"ADPluggedInAddressBook!\n",
-			  [[bundle principalClass] className], fqfn);
-		    allOk = NO;
-		    continue;
+		  NSLog(@"Principal class %@ of %@ doesn't conform to "
+			@"ADPluggedInAddressBook!\n",
+			[[bundle principalClass] className], fqfn);
+		  allOk = NO;
+		  continue;
 		}
 
-		if([self pluginForClassNamed: [[bundle principalClass]
-						  className]])
+	      if([self pluginForClassNamed: [[bundle principalClass]
+					      className]])
 		{
-		    NSLog(@"Already have plugin for class %@\n",
-			  [[bundle principalClass] className]);
-		    continue;
+		  NSLog(@"Already have plugin for class %@\n",
+			[[bundle principalClass] className]);
+		  continue;
 		}
 
-		[abClassPlugins addObject: bundle];
+	      [abClassPlugins addObject: bundle];
 	    }
 	}
     }
 
-    return allOk;
+  return allOk;
 }
 
 - (ADAddressBook*) newAddressBookWithSpecification: (NSDictionary*) aSpec
 {
-    NSString *className;
-    NSBundle *plugin;
+  NSString *className;
+  NSBundle *plugin;
 
-    className = [aSpec objectForKey: @"Class"];
-    if(!className)
+  className = [aSpec objectForKey: @"Class"];
+  if(!className)
     {
-	NSLog(@"Dictionary %@ doesn't contain an entry for ClassName!\n",
-	      [aSpec description]);
-	return nil;
+      NSLog(@"Dictionary %@ doesn't contain an entry for ClassName!\n",
+	    [aSpec description]);
+      return nil;
     }
 
-    plugin = [self pluginForClassNamed: className];
-    if(plugin) 
-	return [[[plugin principalClass] alloc] initWithSpecification: aSpec];
-    return nil;
+  plugin = [self pluginForClassNamed: className];
+  if(plugin) 
+    return [[[plugin principalClass] alloc] initWithSpecification: aSpec];
+  return nil;
 }
 
 @end
