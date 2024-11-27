@@ -4,10 +4,6 @@
 // 
 // Address Book Framework for GNUstep
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.3 $
-// $Date: 2012/04/03 22:49:26 $
 
 #ifndef _ADTYPEDEFS_H_
 #define _ADTYPEDEFS_H_
