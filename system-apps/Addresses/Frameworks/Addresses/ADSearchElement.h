@@ -1,6 +1,6 @@
 // ADSearchElement.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 
@@ -25,11 +25,11 @@
   ADSearchComparison _comp;
 }
 
-- initWithProperty: (NSString*) property
-	     label: (NSString*) label
-	       key: (NSString*) key
-	     value: (id) value
-	comparison: (ADSearchComparison) comparison;
+- (id)initWithProperty: (NSString*) property
+		 label: (NSString*) label
+		   key: (NSString*) key
+		 value: (id) value
+	    comparison: (ADSearchComparison) comparison;
 - (void) dealloc;
 - (BOOL) matchesValue: (id) value;
 - (BOOL) matchesRecord: (ADRecord*) record;

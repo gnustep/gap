@@ -1,6 +1,6 @@
 // ADRecord.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -13,18 +13,21 @@
 #import "ADGroup.h"
 
 @implementation ADRecord
-- init
+- (id)init
 {
-  _dict = nil;
-  _book = nil;
-  _readOnly = NO;
+  if (self = [super init])
+    {
+      _dict = nil;
+      _book = nil;
+      _readOnly = NO;
 
-  if([self isKindOfClass: [ADPerson class]])
-    [self setValue: @"Person" forProperty: @"Type"];
-  else if([self isKindOfClass: [ADGroup class]])
-    [self setValue: @"Group" forProperty: @"Type"];
+      if([self isKindOfClass: [ADPerson class]])
+	[self setValue: @"Person" forProperty: @"Type"];
+      else if([self isKindOfClass: [ADGroup class]])
+	[self setValue: @"Group" forProperty: @"Type"];
+    }
 
-  return [super init];
+  return self;
 }
 
 - (void) dealloc
@@ -53,7 +56,7 @@
 
   newDict = [NSMutableDictionary dictionaryWithDictionary: _dict];
   
-  if(!value || [value isEqual: @""])
+  if (!value || [value isEqual: @""])
     [newDict removeObjectForKey: property];
   else
     [newDict setObject: value forKey: property];
@@ -61,12 +64,12 @@
   [_dict release];
   _dict = [[NSDictionary alloc] initWithDictionary: newDict];
 
-  if([property isEqualToString: ADModificationDateProperty])
+  if ([property isEqualToString: ADModificationDateProperty])
     return NO;
 
   [self setValue: [NSDate date] forProperty: ADModificationDateProperty];
 
-  if(![property isEqualToString: ADUIDProperty])
+  if (![property isEqualToString: ADUIDProperty])
     [[NSNotificationCenter defaultCenter]
       postNotificationName: ADRecordChangedNotification
       object: self
@@ -94,13 +97,13 @@
   [_dict release];
   _dict = [[NSDictionary alloc] initWithDictionary: newDict];
 
-  if(![property isEqualToString: ADUIDProperty])
+  if (![property isEqualToString: ADUIDProperty])
     [[NSNotificationCenter defaultCenter]
       postNotificationName: ADRecordChangedNotification
-      object: self
-      userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-				property, ADChangedPropertyKey,
-			      nil]];
+		    object: self
+		  userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+					    property, ADChangedPropertyKey,
+					  nil]];
   return YES;
 }
 
@@ -174,13 +177,15 @@
 
   converter = [[ADConverterManager sharedManager]
 		inputConverterForType: type];
-  if(!converter) return nil;
+  if(!converter)
+    return nil;
 
   if(![converter useString: str])
     return nil;
 
   obj = [converter nextRecord];
-  if(!obj) return nil;
+  if(!obj)
+    return nil;
 
   if(![[obj class] isSubclassOfClass: c])
     {
@@ -214,7 +219,7 @@
   while((key = [e nextObject]))
     {
       NSObject *obj = [_dict objectForKey: key];
-      if([obj isKindOfClass: [ADMultiValue class]])
+      if ([obj isKindOfClass: [ADMultiValue class]])
 	[dict setObject: [(ADMultiValue*)obj contentArray] forKey: key];
       else if([obj isKindOfClass: [NSString class]] ||
 	      [obj isKindOfClass: [NSData class]] ||

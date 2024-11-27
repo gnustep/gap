@@ -16,7 +16,7 @@
 
 + (ADSearchElement*) searchElementForConjunction: (ADSearchConjunction) conj
 					children: (NSArray*) children;
-- initWithConjunction: (ADSearchConjunction) conj
+- (id)initWithConjunction: (ADSearchConjunction) conj
 	     children: (NSArray*) children;
 - (void) dealloc;
 - (BOOL) matchesRecord: (ADRecord*) record;
@@ -29,13 +29,14 @@
   return [[self alloc] initWithConjunction: conj children: children];
 }
 
-- initWithConjunction: (ADSearchConjunction) conj
+- (id) initWithConjunction: (ADSearchConjunction) conj
 	     children: (NSArray*) children
 {
-  [super init];
-
-  _conj = conj;
-  _children = [[NSArray alloc] initWithArray: children];
+  if (self = [super init])
+    {
+      _conj = conj;
+      _children = [[NSArray alloc] initWithArray: children];
+    }
 
   return self;
 }
@@ -68,33 +69,44 @@
 @end
 
 @implementation ADRecordSearchElement
-- initWithProperty: (NSString*) property
-	     label: (NSString*) label
-	       key: (NSString*) key
-	     value: (id) value
-	comparison: (ADSearchComparison) comparison
+- (id) initWithProperty: (NSString*) property
+		  label: (NSString*) label
+		    key: (NSString*) key
+		  value: (id) value
+	     comparison: (ADSearchComparison) comparison
 {
-  [super init];
-  
-  if(!property || !value)
+  if (self = [super init])
     {
-      NSLog(@"%@ initialized with nil property or value!\n",
-	    [self className]);
-      return nil;
+      if(!property || !value)
+	{
+	  NSLog(@"%@ initialized with nil property or value!\n",
+		[self className]);
+	  return nil;
+	}
+
+      _property = [property copy];
+      if(label)
+	_label = [label copy];
+      else
+	_label = nil;
+      if(key)
+	_key = [key copy];
+      else
+	_key = nil;
+
+      _val = [value retain]; 
+      _comp = comparison;
     }
-
-  _property = [property copy];
-  if(label) _label = [label copy]; else _label = nil;
-  if(key) _key = [key copy]; else _key = nil;
-  _val = [value retain]; 
-  _comp = comparison;
-
+  
   return self;
 }
 
 - (void) dealloc
 {
-  [_property release]; [_label release]; [_key release]; [_val release];
+  [_property release];
+  [_label release];
+  [_key release];
+  [_val release];
   [super dealloc];
 }
 
@@ -189,16 +201,18 @@
 
 - (BOOL) matchesRecord: (ADRecord*) record
 {
-  int i; id val;
+  NSUInteger i;
+  id val;
   
   val = [record valueForProperty: _property];
-  if(!val) return NO;
+  if(!val)
+    return NO;
 
   if([val isKindOfClass: [ADMultiValue class]])
     {
       id val2;
       
-      for(i=0; i<[val count]; i++)
+      for(i = 0; i < [val count]; i++)
 	{
 	  if(_label)
 	    {
