@@ -13,8 +13,8 @@
   ADAddressBook *_book;
 }
 
-- initWithAddressBook: (ADAddressBook*) book
-	     readOnly: (BOOL) ro;
+- (id)initWithAddressBook: (ADAddressBook*) book
+		 readOnly: (BOOL) ro;
 @end
 
 @protocol ADSimpleAddressBookServing

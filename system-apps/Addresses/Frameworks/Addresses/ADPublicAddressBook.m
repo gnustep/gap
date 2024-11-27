@@ -1,6 +1,6 @@
 // ADPublicAddressBook.m (this is -*- ObjC -*-)
 // 
-// \Athor: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -9,15 +9,16 @@
 #import "ADRecord.h"
 
 @implementation ADPublicAddressBook
-- initWithAddressBook: (ADAddressBook*) book
-	     readOnly: (BOOL) ro
+- (id)initWithAddressBook: (ADAddressBook*) book
+		 readOnly: (BOOL) ro
 {
-  if(![super init]) return nil;
-  
-  NSAssert(book, @"Address Book may not be nil!");
+  if (self = [super init])
+    {
+      NSAssert(book, @"Address Book may not be nil!");
 
-  _book = [book retain];
-  _readOnly = ro;
+      _book = [book retain];
+      _readOnly = ro;
+    }
   return self;
 }
 
@@ -26,20 +27,23 @@
   NSArray *arr;
 
   arr = [_book recordsMatchingSearchElement: search];
-  if(_readOnly) arr = ADReadOnlyCopyOfRecordArray(arr);
+  if(_readOnly)
+    arr = ADReadOnlyCopyOfRecordArray(arr);
 
   return arr;
 } 
 
 - (BOOL) save
 {
-  if(_readOnly) return NO;
+  if(_readOnly)
+    return NO;
   return [_book save];
 }
   
 - (BOOL) hasUnsavedChanges
 {
-  if(_readOnly) return NO;
+  if(_readOnly)
+    return NO;
   return [_book hasUnsavedChanges];
 }
 
@@ -50,7 +54,8 @@
       ADRecord *r;
 
       r = (ADRecord*)[_book me];
-      if(!r) return nil;
+      if(!r)
+	return nil;
       r = [r copy];
       [r setReadOnly];
 
@@ -62,16 +67,18 @@
 
 - (void) setMe: (ADPerson*) me
 {
-  if(_readOnly) return;
+  if (_readOnly)
+    return;
   [_book setMe: me];
 }
 
 - (ADRecord*) recordForUniqueId: (NSString*) uniqueId
 {
   ADRecord *r = [_book recordForUniqueId: uniqueId];
-  if(!r) return nil;
+  if (!r)
+    return nil;
 
-  if(_readOnly)
+  if (_readOnly)
     {
       r = [r copy];
       [r setReadOnly];
@@ -81,14 +88,16 @@
 
 - (BOOL) addRecord: (ADRecord*) record
 {
-  if(_readOnly) return NO;
+  if (_readOnly)
+    return NO;
 
   return [_book addRecord: record];
 }
 
 - (BOOL) removeRecord: (ADRecord*) record
 {
-  if(_readOnly) return NO;
+  if (_readOnly)
+    return NO;
 
   return [_book removeRecord: record];
 }
@@ -96,14 +105,18 @@
 - (NSArray*) people
 {
   NSArray *arr = [_book people];
-  if(_readOnly) return ADReadOnlyCopyOfRecordArray(arr);
+
+  if (_readOnly)
+    return ADReadOnlyCopyOfRecordArray(arr);
   return arr;
 }
 
 - (NSArray*) groups
 {
   NSArray *arr = [_book groups];
-  if(_readOnly) return ADReadOnlyCopyOfRecordArray(arr);
+
+  if (_readOnly)
+    return ADReadOnlyCopyOfRecordArray(arr);
   return arr;
 }
 @end
