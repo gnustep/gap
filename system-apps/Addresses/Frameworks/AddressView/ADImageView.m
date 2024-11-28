@@ -10,18 +10,19 @@
 #import "ADPersonView.h"
 
 @implementation ADImageView
-- initWithFrame: (NSRect) frame
+- (id) initWithFrame: (NSRect) frame
 {
-  [super initWithFrame: frame];
-  [self registerForDraggedTypes: [NSArray arrayWithObjects:
-					    @"NSVCardPboardType",
-					  NSTIFFPboardType,
-					  NSFilenamesPboardType,
-					  nil]];
-  _delegate = nil;
-  _person = nil;
-  _mouseDownOnSelf = NO;
-  
+  if (self = [super initWithFrame: frame])
+    {
+      [self registerForDraggedTypes: [NSArray arrayWithObjects:
+						@"NSVCardPboardType",
+					      NSTIFFPboardType,
+					      NSFilenamesPboardType,
+					      nil]];
+      _delegate = nil;
+      _person = nil;
+      _mouseDownOnSelf = NO;
+    }
   return self;
 }
 
