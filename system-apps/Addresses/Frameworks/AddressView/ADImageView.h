@@ -1,6 +1,6 @@
 // ADImageView.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address View Framework for GNUstep
 // 
@@ -17,7 +17,7 @@
   ADPerson *_person;
   BOOL _mouseDownOnSelf, _mouseDragged;
 }
-- initWithFrame: (NSRect) frame;
+- (id) initWithFrame: (NSRect) frame;
 - (void) setTarget: (id) target;
 - (void) setAction: (SEL) sel;
 - (void) mouseDown: (NSEvent*) event;

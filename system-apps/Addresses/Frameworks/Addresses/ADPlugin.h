@@ -25,7 +25,7 @@
 @protocol ADPluggedInAddressBook
 /** Return a new address book according to the dictionary contained in the
     specification. */
-- initWithSpecification: (NSDictionary*) aSpec;
+- (id) initWithSpecification: (NSDictionary*) aSpec;
 @end
 
 @interface ADPluginManager: NSObject

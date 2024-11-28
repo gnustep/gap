@@ -13,6 +13,7 @@
 
 static NSMutableDictionary *_propTypes;
 static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
+
 #define N(x) [NSNumber numberWithInteger: x]
 
 @implementation ADPerson
@@ -137,7 +138,8 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
   id val;
 
   val = [_propTypes objectForKey: property];
-  if(val) return (ADPropertyType)[val integerValue];
+  if(val)
+    return (ADPropertyType)[val integerValue];
   return ADErrorInProperty;
 }
 
@@ -188,6 +190,7 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
 {
   if([self readOnly])
     return NO;
+
   if(([[self class] typeOfProperty: property] & ADMultiValueMask) &&
      ([property isKindOfClass: [ADMutableMultiValue class]]))
     {
