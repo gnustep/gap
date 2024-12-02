@@ -184,18 +184,13 @@
 
 - (void) createCache
 {
-  SEL sortingSelector;
-    
-  sortingSelector =
-    GSSelectorFromNameAndTypes("compareByScreenName:", "i12@0:4@8");
-
   [_peopleCache release];
   if(_currentGroup)
     _peopleCache = [_currentGroup members];
   else
     _peopleCache = [_book people];
   _peopleCache =
-    [[_peopleCache sortedArrayUsingSelector: sortingSelector]
+    [[_peopleCache sortedArrayUsingSelector: @selector(compareByScreenName:)]
       retain];
 }
 
@@ -295,13 +290,8 @@
   if(i==[_peopleCache count]) // Not found? Select "all" and try again
     {
       NSArray *all;
-      SEL sortingSelector;
-    
-      sortingSelector =
-	GSSelectorFromNameAndTypes("compareByScreenName:", "i12@0:4@8");
 
-
-      all = [[_book people] sortedArrayUsingSelector: sortingSelector];
+      all = [[_book people] sortedArrayUsingSelector: @selector(compareByScreemName:)];
       for(i=0; i<[all count]; i++)
 	{
 	  if([[[all objectAtIndex: i] uniqueId]
