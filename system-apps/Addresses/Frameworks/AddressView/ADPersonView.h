@@ -44,7 +44,7 @@ extern NSString * const ADPeoplePboardType;
   BOOL _mouseDownOnSelf;
 }
 
-- initWithFrame: (NSRect) aRect;
+- (id) initWithFrame: (NSRect) aRect;
 
 - (void) layout;
 - (BOOL) fillsSuperview;

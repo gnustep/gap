@@ -153,7 +153,6 @@
   NSArray *layout, *row;
   NSString *field;
   NSEnumerator *rowEnumerator, *fieldEnumerator;
-  ADPersonPropertyCell *labelCell;
   NSSize rowSize; NSRect rowRect; float labelX;
   BOOL firstRow;
   NSMutableArray *cells;
@@ -161,7 +160,7 @@
   layout = [self layoutRuleForValue: dict];
   cells = [NSMutableArray array];
 
-  labelCell = [self addLabelCellForLabel: label inRect: rect];
+  [self addLabelCellForLabel: label inRect: rect];
   rect->origin.x += rect->size.width + 5; labelX = rect->origin.x;
   rect->size.width += 5;
   
@@ -230,7 +229,6 @@
   NSArray *layout, *row;
   NSString *field;
   NSEnumerator *rowEnumerator, *fieldEnumerator;
-  ADPersonPropertyCell *labelCell;
   NSSize rowSize; NSRect rowRect; float labelX;
   BOOL firstRow, showsDefault;
   NSMutableArray *cells;
@@ -238,7 +236,7 @@
   layout = [self layoutRuleForValue: dict];
   cells = [NSMutableArray array];
 
-  labelCell = [self addLabelCellForLabel: label inRect: rect];
+  [self addLabelCellForLabel: label inRect: rect];
   rect->origin.x += rect->size.width + 5;
   rect->size.width += 5;
   
@@ -619,7 +617,7 @@
     {
       for(i=0; i<[val count]; i++)
 	{
-	  ADPersonPropertyCell *labelCell, *valueCell;
+	  ADPersonPropertyCell *valueCell;
 	  NSString *label, *value, *identifier;
 	  NSSize rowSize;
 	  NSDictionary *details;
@@ -634,8 +632,7 @@
 			  label, @"Label",
 			  nil];
 
-	  labelCell = [self addLabelCellForLabel: label
-			    inRect: &r];
+	  [self addLabelCellForLabel: label inRect: &r];
 	  r.origin.x += r.size.width + 5; 
 	  rowSize.width = r.size.width + 5;
 	  rowSize.height = r.size.height;
