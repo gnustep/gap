@@ -22,7 +22,8 @@
 + (NSBezierPath *) bezierPathWithRoundedRectInRect:(NSRect)rect
 					    radius:(float) radius;
 {
-  NSRect innerRect; NSPoint p1, p2, p3, p4, p11, p12, p13, p14;
+  NSRect innerRect;
+  NSPoint p1, p2, p3, p4, p11, p12, p13, p14;
   NSBezierPath *path;
 
   innerRect = NSInsetRect(rect, radius, radius);
@@ -80,9 +81,11 @@
 - (NSString*) stringByAbbreviatingToFitWidth: (int) width
 				      inFont: (NSFont*) font
 {
-  int index;
+  NSInteger index;
+
   width--;
-  if([font widthOfString: self] <= width) return self;
+  if([font widthOfString: self] <= width)
+    return self;
   NSAssert([self length]>3, @"String too short");
 
   index = [self length]-3;
@@ -90,7 +93,8 @@
     {
       NSString *str = [[self substringToIndex: index]
 			stringByAppendingString: @"..."];
-      if([font widthOfString: str] <= width) return str;
+      if([font widthOfString: str] <= width)
+	return str;
       index--;
     }
   return nil;
@@ -105,7 +109,9 @@
 - (BOOL) isEmptyString
 {
   NSString *str = [self stringByTrimmingWhitespace];
-  if([str isEqualToString: @""]) return YES;
+
+  if([str isEqualToString: @""])
+    return YES;
   return NO;
 }
 @end
@@ -163,7 +169,8 @@
 - (NSRect) rect
 {
   NSRect r = NSMakeRect(_origin.x, _origin.y, 0, 0);
-  if([self image]) r.size = [[self image] size];
+  if([self image])
+    r.size = [[self image] size];
   return r;
 }
 - (void) setDetails: (id) details
@@ -231,42 +238,47 @@ static float _globalFontSize;
   _globalFontSize = size;
 }
 
-- initWithFrame: (NSRect) frame
+- (id)initWithFrame: (NSRect) frame
 {
-  NSBundle *b; NSString *filename;
-  
-  _maxLabelWidth = 110;
-  _fontSize = 12;
-  _font = [[NSFont systemFontOfSize: _fontSize] retain];
-  _fontSetExternally = NO;
-  _editable = NO;
-  _editingCellIndex = -1;
+  NSBundle *b;
+  NSString *filename;
 
-  // load images
-  b = [NSBundle bundleForClass: [self class]];
-  filename = [b pathForImageResource: @"Add.tiff"];
-  _addImg = [[NSImage alloc] initWithContentsOfFile: filename];
-  NSAssert(_addImg, @"Image \"Add.tiff\" could not be loaded!\n");
-  filename = [b pathForImageResource: @"Remove.tiff"];
-  _rmvImg = [[NSImage alloc] initWithContentsOfFile: filename];
-  NSAssert(_rmvImg, @"Image \"Remove.tiff\" could not be loaded!\n");
-  filename = [b pathForImageResource: @"Change.tiff"];
-  _chgImg = [[NSImage alloc] initWithContentsOfFile: filename];
-  NSAssert(_chgImg, @"Image \"Change.tiff\" could not be loaded!\n");
+  if ((self = [super initWithFrame: frame]))
+    {
+      _maxLabelWidth = 110;
+      _fontSize = 12;
+      _font = [[NSFont systemFontOfSize: _fontSize] retain];
+      _fontSetExternally = NO;
+      _editable = NO;
+      _editingCellIndex = -1;
 
-  _clickSel = @selector(clickedOnProperty:withValue:inView:);
-  _changeSel = @selector(valueForProperty:changedToValue:inView:);
-  _canPerformSel = @selector(canPerformClickForProperty:);
-  _widthSel = @selector(view:changedWidthFrom:to:);
-  _editInNextSel = @selector(beginEditingInNextViewWithTextMovement:);
+      // load images
+      b = [NSBundle bundleForClass: [self class]];
+      filename = [b pathForImageResource: @"Add.tiff"];
+      _addImg = [[NSImage alloc] initWithContentsOfFile: filename];
+      NSAssert(_addImg, @"Image \"Add.tiff\" could not be loaded!\n");
+      filename = [b pathForImageResource: @"Remove.tiff"];
+      _rmvImg = [[NSImage alloc] initWithContentsOfFile: filename];
+      NSAssert(_rmvImg, @"Image \"Remove.tiff\" could not be loaded!\n");
+      filename = [b pathForImageResource: @"Change.tiff"];
+      _chgImg = [[NSImage alloc] initWithContentsOfFile: filename];
+      NSAssert(_chgImg, @"Image \"Change.tiff\" could not be loaded!\n");
 
-  return [super initWithFrame: frame];
+      _clickSel = @selector(clickedOnProperty:withValue:inView:);
+      _changeSel = @selector(valueForProperty:changedToValue:inView:);
+      _canPerformSel = @selector(canPerformClickForProperty:);
+      _widthSel = @selector(view:changedWidthFrom:to:);
+      _editInNextSel = @selector(beginEditingInNextViewWithTextMovement:);
+    }
+
+  return self;
 }
 
 - (void) dealloc
 {
   if(_editingCellIndex || _textObject)
     [self endEditing];
+
   [_cells release];
   [_person release];
   [_font release];
@@ -291,7 +303,8 @@ static float _globalFontSize;
 {
   [_person release];
   _person = [person retain];
-  if(_property) [self layout];
+  if(_property)
+    [self layout];
 }
 
 - (ADPerson*) person
@@ -302,7 +315,8 @@ static float _globalFontSize;
 - (void) setProperty: (NSString*) property
 {
   _property = [property copy];
-  if(_person) [self layout];
+  if(_person)
+    [self layout];
 }
 
 - (NSString*) property
@@ -312,8 +326,11 @@ static float _globalFontSize;
 
 - (BOOL) updatePersonWithMultiValueFromCell: (ADPersonPropertyCell*) cell
 {
-  NSString *key, *label, *identifier; id value; NSInteger i;
-  ADPropertyType type; ADMutableMultiValue *mv;
+  NSString *key, *label, *identifier;
+  id value;
+  NSInteger i;
+  ADPropertyType type;
+  ADMutableMultiValue *mv;
   NSMutableDictionary *dict;
 
   identifier = [[cell details] objectForKey: @"Identifier"];
@@ -375,9 +392,11 @@ static float _globalFontSize;
     }
   else // no identifier given; make up our own
     {
-      if([value isEmptyString]) return NO; // nothing to do
-      
-      if(!label) label = [self defaultLabel];
+      if([value isEmptyString])
+	return NO; // nothing to do
+
+      if(!label)
+	label = [self defaultLabel];
 
       switch(type)
 	{
@@ -400,6 +419,7 @@ static float _globalFontSize;
 {
   id value;
   ADPropertyType type = [ADPerson typeOfProperty: _property];
+
   if(type & ADMultiValueMask)
     return [self updatePersonWithMultiValueFromCell: cell];
 
@@ -440,9 +460,11 @@ static float _globalFontSize;
 
 - (void) setDisplaysLabel: (BOOL) yesno
 {
-  if(_displaysLabel == yesno) return;
+  if(_displaysLabel == yesno)
+    return;
   _displaysLabel = yesno;
-  if([_cells count]) [self layout];
+  if([_cells count])
+    [self layout];
 }
   
 - (BOOL) displaysLabel
@@ -600,6 +622,7 @@ static float _globalFontSize;
 - (BOOL) hasEditableCells
 {
   NSUInteger i;
+
   for(i=0; i<[_cells count]; i++)
     if([[_cells objectAtIndex: i] isEditable])
       return YES;
@@ -614,6 +637,8 @@ static float _globalFontSize;
 - (void) beginEditingInCellAtIndex: (NSUInteger) i
 		 countingBackwards: (BOOL) backwards
 {
+  NSAssert(!(backwards && i > 0), @"index 0 cannot go backwards");
+
   while(![[_cells objectAtIndex: i] isEditable])
     if(backwards)
       i--;
@@ -710,11 +735,13 @@ static float _globalFontSize;
     {
       NSArray *layout;
       NSEnumerator *rowEnum, *fieldEnum;
-      NSArray *row; NSString *field;
+      NSArray *row;
+      NSString *field;
       NSMutableString *retval;
 
       layout = [self layoutRuleForValue: value];
-      if(!layout) return nil;
+      if(!layout)
+	return nil;
 
       retval = [NSMutableString stringWithString: @""];
 
@@ -731,7 +758,8 @@ static float _globalFontSize;
 	    if(![field hasPrefix: @"$"] && [value objectForKey: field])
 	      break;
 
-	  if(!field) continue;
+	  if(!field)
+	    continue;
 	  
 	  fieldEnum = [row objectEnumerator];
 	  while((field = [fieldEnum nextObject]))
