@@ -141,11 +141,11 @@ typedef enum {
 	   changedToValue: (id) value
 		   inView: (id) sender;
 - (void) view: (id) view
-changedWidthFrom: (float) oldW
-	   to: (float) newW;
+changedWidthFrom: (CGFloat) oldW
+	   to: (CGFloat) newW;
 - (void) view: (id) view
-changedHeightFrom: (float) oldH
-	   to: (float) newH;
+changedHeightFrom: (CGFloat) oldH
+	   to: (CGFloat) newH;
 - (void) beginEditingInNextViewWithTextMovement: (int) textMovement;
 
 - (BOOL) personPropertyView: (ADPersonPropertyView*) view

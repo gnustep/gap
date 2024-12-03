@@ -775,8 +775,8 @@ static NSString *__defaultCountryCode = nil;
 }
 
 - (void) view: (id) view
-changedWidthFrom: (float) w1
-	   to: (float) w2
+changedWidthFrom: (CGFloat) w1
+	   to: (CGFloat) w2
 {
   NSPoint o;
   NSEnumerator *e;
@@ -805,8 +805,8 @@ changedWidthFrom: (float) w1
 }
 
 - (void) view: (id) view
-changedHeightFrom: (float) oldH
-	   to: (float) newH
+changedHeightFrom: (CGFloat) oldH
+	   to: (CGFloat) newH
 {
   NSPoint o;
   NSEnumerator *e;
