@@ -14,7 +14,7 @@
 
 
 @interface NSString(ADPersonPropertySupport)
-- (NSString*) stringByAbbreviatingToFitWidth: (int) width
+- (NSString*) stringByAbbreviatingToFitWidth: (NSInteger) width
 				      inFont: (NSFont*) font;
 - (NSString*) stringByTrimmingWhitespace;
 - (BOOL) isEmptyString;
@@ -60,7 +60,7 @@ typedef enum {
   NSString *_property;
   NSMutableArray *_cells; 
   BOOL _displaysLabel;
-  int _maxLabelWidth, _neededLabelWidth;
+  NSInteger _maxLabelWidth, _neededLabelWidth;
   CGFloat _fontSize;
   NSFont *_font;
   BOOL _fontSetExternally;
@@ -99,9 +99,9 @@ typedef enum {
 - (void) setDisplaysLabel: (BOOL) yesno;
 - (BOOL) displaysLabel;
 
-- (void) setMaxLabelWidth: (int) width;
-- (int) maxLabelWidth;
-- (int) neededLabelWidth;
+- (void) setMaxLabelWidth: (NSInteger) width;
+- (NSInteger) maxLabelWidth;
+- (NSInteger) neededLabelWidth;
 
 - (NSFont*) font;
 - (void) setFont: (NSFont*) font;

@@ -78,10 +78,13 @@
 @end
 
 @implementation NSString (ADPersonPropertySupport)
-- (NSString*) stringByAbbreviatingToFitWidth: (int) width
+- (NSString*) stringByAbbreviatingToFitWidth: (NSInteger) width
 				      inFont: (NSFont*) font
 {
   NSInteger index;
+
+  if (width == 0)
+    return self;
 
   width--;
   if([font widthOfString: self] <= width)
@@ -472,19 +475,19 @@ static CGFloat _globalFontSize;
   return _displaysLabel;
 }
 
-- (void) setMaxLabelWidth: (int) width
+- (void) setMaxLabelWidth: (NSInteger) width
 {
   _maxLabelWidth = width;
   if([_cells count])
     [self layout];
 }
 
-- (int) maxLabelWidth
+- (NSInteger) maxLabelWidth
 {
   return _maxLabelWidth;
 }
 
-- (int) neededLabelWidth
+- (NSInteger) neededLabelWidth
 {
   return _neededLabelWidth;
 }
