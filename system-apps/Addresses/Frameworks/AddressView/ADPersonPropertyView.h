@@ -61,11 +61,13 @@ typedef enum {
   NSMutableArray *_cells; 
   BOOL _displaysLabel;
   int _maxLabelWidth, _neededLabelWidth;
-  float _fontSize;
-  NSFont *_font; BOOL _fontSetExternally;
+  CGFloat _fontSize;
+  NSFont *_font;
+  BOOL _fontSetExternally;
 
   BOOL _editable;
-  int _editingCellIndex; id _textObject;
+  int _editingCellIndex;
+  id _textObject;
   id _delegate;
 
   SEL _clickSel, _changeSel, _canPerformSel, _widthSel, _editInNextSel;
@@ -82,8 +84,8 @@ typedef enum {
 
 + (NSFont*) font;
 + (NSFont*) boldFont;
-+ (float) fontSize;
-+ (void) setFontSize: (float) size;
++ (CGFloat) fontSize;
++ (void) setFontSize: (CGFloat) size;
 
 - (void) setDelegate: (id) delegate;
 - (id) delegate;
@@ -104,8 +106,8 @@ typedef enum {
 - (NSFont*) font;
 - (void) setFont: (NSFont*) font;
 - (NSFont*) boldFont;
-- (float) fontSize;
-- (void) setFontSize: (float) size;
+- (CGFloat) fontSize;
+- (void) setFontSize: (CGFloat) size;
 
 - (void) setEditable: (BOOL) editable;
 - (BOOL) isEditable;

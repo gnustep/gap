@@ -15,12 +15,12 @@
 
 @interface NSBezierPath (ADPersonPropertyExtensions)
 + (NSBezierPath *) bezierPathWithRoundedRectInRect:(NSRect)rect
-					    radius:(float) radius;
+					    radius:(CGFloat) radius;
 @end
 
 @implementation NSBezierPath (ADPersonPropertyExtensions)
 + (NSBezierPath *) bezierPathWithRoundedRectInRect:(NSRect)rect
-					    radius:(float) radius;
+					    radius:(CGFloat) radius;
 {
   NSRect innerRect;
   NSPoint p1, p2, p3, p4, p11, p12, p13, p14;
@@ -215,7 +215,7 @@
 }
 @end
 
-static float _globalFontSize;
+static CGFloat _globalFontSize;
 
 @implementation ADPersonPropertyView
 + (NSFont*) font
@@ -228,12 +228,12 @@ static float _globalFontSize;
   return [NSFont boldSystemFontOfSize: [self fontSize]];
 }
 
-+ (float) fontSize
++ (CGFloat) fontSize
 {
   return _globalFontSize;
 }
 
-+ (void) setFontSize: (float) size
++ (void) setFontSize: (CGFloat) size
 {
   _globalFontSize = size;
 }
@@ -475,7 +475,8 @@ static float _globalFontSize;
 - (void) setMaxLabelWidth: (int) width
 {
   _maxLabelWidth = width;
-  if([_cells count]) [self layout];
+  if([_cells count])
+    [self layout];
 }
 
 - (int) maxLabelWidth
@@ -525,14 +526,14 @@ static float _globalFontSize;
   return [NSFont boldSystemFontOfSize: [self fontSize]];
 }
 
-- (float) fontSize
+- (CGFloat) fontSize
 {
   if(!_fontSetExternally)
     return [[self class] fontSize];
   return _fontSize;
 }
 
-- (void) setFontSize: (float) size
+- (void) setFontSize: (CGFloat) size
 {
   _fontSize = size;
   if(!_fontSetExternally)
