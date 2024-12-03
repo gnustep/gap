@@ -92,9 +92,11 @@ ADConverterManager *_manager = nil;
 
   c = [_icClasses objectForKey: [[filename pathExtension]
 				  lowercaseString]];
-  if(!c) return nil;
+  if(!c)
+    return nil;
 
   obj = [[[c alloc] initForInput] autorelease];
+
   data = [NSData dataWithContentsOfFile: filename];
   if (!data)
     {
@@ -102,6 +104,7 @@ ADConverterManager *_manager = nil;
       return nil;
     }
 
+  /* UTF-8 is standard, so it is our first attempt */
   string = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
   if (!string)
     {
