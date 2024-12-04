@@ -34,7 +34,7 @@ typedef enum {
   id _delegate;
 }
 
-- initWithFrame: (NSRect) frame;
+- (id) initWithFrame: (NSRect) frame;
 
 - (void) setDelegate: (id) delegate;
 - (id) delegate;

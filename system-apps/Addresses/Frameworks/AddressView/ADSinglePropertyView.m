@@ -166,81 +166,82 @@
 @end
 
 @implementation ADSinglePropertyView
-- initWithFrame: (NSRect) frame
+- (id) initWithFrame: (NSRect) frame
 {
   NSRect r;
 
-  if(![super initWithFrame: frame]) return nil;
-
-  [self setDisplayedProperty: ADEmailProperty];
-  _selectedGroup = nil;
+  if ((self = [super initWithFrame: frame]))
+    {
+      [self setDisplayedProperty: ADEmailProperty];
+      _selectedGroup = nil;
   
-  [self setAutoresizesSubviews: YES];
+      [self setAutoresizesSubviews: YES];
 
-  r = frame; r.origin = NSMakePoint(0, 0);
-  _splitView = [[[NSSplitView alloc] initWithFrame: r] autorelease];
-  [_splitView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
-  [_splitView setVertical: YES];
-  [_splitView setDelegate: self];
-  [self addSubview: _splitView];
+      r = frame; r.origin = NSMakePoint(0, 0);
+      _splitView = [[[NSSplitView alloc] initWithFrame: r] autorelease];
+      [_splitView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
+      [_splitView setVertical: YES];
+      [_splitView setDelegate: self];
+      [self addSubview: _splitView];
 
-  r = frame; r.origin = NSMakePoint(0, 0);
-  r.size.width = frame.size.width/4;
-  _groupsBrowser = [[[NSBrowser alloc] initWithFrame: r] autorelease];
-  [_groupsBrowser setMaxVisibleColumns: 1];
-  [_groupsBrowser setAllowsEmptySelection: NO];
-  [_groupsBrowser setAllowsMultipleSelection: NO];
-  [_groupsBrowser setDelegate: self];
-  [_groupsBrowser setTarget: self];
-  [_groupsBrowser setAction: @selector(_selectGroupInBrowser:)];
-  [_groupsBrowser setDoubleAction: @selector(_doubleOnBrowser:)];
-  [_groupsBrowser loadColumnZero];
-  [_groupsBrowser selectRow: 0 inColumn: 0];
-  [_splitView addSubview: _groupsBrowser];
-  
-  r = frame; r.origin = NSMakePoint(0, 0);
-  r.size.width = (frame.size.width*3)/4;
-  _ptScrollView = [[[NSScrollView alloc] initWithFrame: r] autorelease];
-  [_ptScrollView setRulersVisible: NO];
-  [_ptScrollView setHasVerticalScroller: YES];
-  [_ptScrollView setHasHorizontalScroller: YES];
-  [_ptScrollView setBorderType: NSBezelBorder];
-  [_ptScrollView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
-  [_splitView addSubview: _ptScrollView];
+      r = frame; r.origin = NSMakePoint(0, 0);
+      r.size.width = frame.size.width/4;
+      _groupsBrowser = [[[NSBrowser alloc] initWithFrame: r] autorelease];
+      [_groupsBrowser setMaxVisibleColumns: 1];
+      [_groupsBrowser setAllowsEmptySelection: NO];
+      [_groupsBrowser setAllowsMultipleSelection: NO];
+      [_groupsBrowser setDelegate: self];
+      [_groupsBrowser setTarget: self];
+      [_groupsBrowser setAction: @selector(_selectGroupInBrowser:)];
+      [_groupsBrowser setDoubleAction: @selector(_doubleOnBrowser:)];
+      [_groupsBrowser loadColumnZero];
+      [_groupsBrowser selectRow: 0 inColumn: 0];
+      [_splitView addSubview: _groupsBrowser];
 
-  _peopleTable = [[[NSTableView alloc] initWithFrame: frame] autorelease];
-  [_peopleTable setDataSource: self];
-  [_peopleTable setTarget: self];
-  [_peopleTable setDelegate: self];
-  [_peopleTable setDoubleAction: @selector(_handleDoubleclickOnTable:)];
+      r = frame; r.origin = NSMakePoint(0, 0);
+      r.size.width = (frame.size.width*3)/4;
+      _ptScrollView = [[[NSScrollView alloc] initWithFrame: r] autorelease];
+      [_ptScrollView setRulersVisible: NO];
+      [_ptScrollView setHasVerticalScroller: YES];
+      [_ptScrollView setHasHorizontalScroller: YES];
+      [_ptScrollView setBorderType: NSBezelBorder];
+      [_ptScrollView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
+      [_splitView addSubview: _ptScrollView];
 
-  _nameColumn = [[[NSTableColumn alloc] initWithIdentifier: @"Name"]
-		  autorelease];
-  [[_nameColumn headerCell] setStringValue: _(@"Person Name")];
-  
-  _propertyColumn = [[[NSTableColumn alloc] initWithIdentifier: @"Property"]
+      _peopleTable = [[[NSTableView alloc] initWithFrame: frame] autorelease];
+      [_peopleTable setDataSource: self];
+      [_peopleTable setTarget: self];
+      [_peopleTable setDelegate: self];
+      [_peopleTable setDoubleAction: @selector(_handleDoubleclickOnTable:)];
+
+      _nameColumn = [[[NSTableColumn alloc] initWithIdentifier: @"Name"]
 		      autorelease];
-  [[_propertyColumn headerCell]
-    setStringValue: ADLocalizedPropertyOrLabel(_property)];
+      [[_nameColumn headerCell] setStringValue: _(@"Person Name")];
   
-  [_peopleTable addTableColumn: _nameColumn];
-  [_peopleTable addTableColumn: _propertyColumn];
-  [_peopleTable setAutoresizesAllColumnsToFit: YES];
-  [_peopleTable setAllowsMultipleSelection: YES];
-  [_peopleTable sizeToFit];
+      _propertyColumn = [[[NSTableColumn alloc] initWithIdentifier: @"Property"]
+			  autorelease];
+      [[_propertyColumn headerCell]
+	setStringValue: ADLocalizedPropertyOrLabel(_property)];
 
-  [_ptScrollView setDocumentView: _peopleTable];
+      [_peopleTable addTableColumn: _nameColumn];
+      [_peopleTable addTableColumn: _propertyColumn];
+      [_peopleTable setAutoresizesAllColumnsToFit: YES];
+      [_peopleTable setAllowsMultipleSelection: YES];
+      [_peopleTable sizeToFit];
 
-  _delegate = nil;
-  _prefLabel = nil;
-  _autosel = ADAutoselectFirstValue;
+      [_ptScrollView setDocumentView: _peopleTable];
 
-  [[NSNotificationCenter defaultCenter]
-    addObserver: self
-    selector: @selector(_handleDatabaseChanged:)
-    name: ADDatabaseChangedExternallyNotification
-    object: nil];
-  
+      _delegate = nil;
+      _prefLabel = nil;
+      _autosel = ADAutoselectFirstValue;
+
+      [[NSNotificationCenter defaultCenter]
+	addObserver: self
+	   selector: @selector(_handleDatabaseChanged:)
+	       name: ADDatabaseChangedExternallyNotification
+	     object: nil];
+    }
+
   return self;
 }
 
