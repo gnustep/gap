@@ -64,11 +64,13 @@
     {
       if(type & ADMultiValueMask)
 	{
-	  int i, index; BOOL hasPreferred;
+	  NSUInteger i, index;
+	  BOOL hasPreferred;
 	  id val;
 
 	  val = [p valueForProperty: _property];
-	  if(![val count]) continue;
+	  if (![val count])
+	    continue;
 
 	  hasPreferred = NO; // does it have values matching the
 			     // preferred label? 
@@ -103,7 +105,8 @@
 	}
       else
 	{
-	  if(![p valueForProperty: _property]) continue;
+	  if (![p valueForProperty: _property])
+	    continue;
 	  [_names addObject: [p screenName]];
 	  [_namesUnthinned addObject: [p screenName]];
 	  [_values addObject: [[p valueForProperty: _property] description]];
@@ -115,7 +118,7 @@
 
 - (void) _handleDatabaseChanged: (NSNotification*) note
 {
-  int row;
+  NSInteger row;
   
   [self _buildArrays];
 
@@ -128,10 +131,11 @@
 {
   NSString *name;
   NSString *value;
-  int row;
+  NSInteger row;
 
   row = [sender selectedRow];
-  if(row == -1 || !_delegate) return;
+  if(row == -1 || !_delegate)
+    return;
   name = [_namesUnthinned objectAtIndex: row];
   value = [_values objectAtIndex: row];
   
@@ -142,14 +146,17 @@
 
 - (void) _selectGroupInBrowser: (id) sender
 {
-  int row;
+  NSInteger row;
   ADGroup *newGroup = nil;
 
-  if(!_book) _book = [ADAddressBook sharedAddressBook];
+  if(!_book)
+    _book = [ADAddressBook sharedAddressBook];
   row = [sender selectedRowInColumn: 0];
-  if(row) newGroup = [[_book groups] objectAtIndex: row-1];
+  if(row)
+    newGroup = [[_book groups] objectAtIndex: row-1];
 
-  if(newGroup == _selectedGroup) return;
+  if(newGroup == _selectedGroup)
+    return;
 
   [_selectedGroup release];
   _selectedGroup = [newGroup retain];
@@ -265,7 +272,8 @@
 {
   ADPropertyType type;
 
-  if([_property isEqualToString: property]) return;
+  if([_property isEqualToString: property])
+    return;
   if(!_book)
     _book = [ADAddressBook sharedAddressBook];
   
@@ -321,7 +329,7 @@
 
 - (void) autoselectAccordingToMode: (ADAutoselectMode) mode
 {
-  int i;
+  NSUInteger i;
   ADPerson *p;
 
   [_peopleTable reloadData];
@@ -359,7 +367,7 @@
   e = [_peopleTable selectedRowEnumerator];
   while((r = [e nextObject]))
     {
-      int i = [r intValue];
+      NSUInteger i = [r intValue];
       [retval addObject: [NSArray arrayWithObjects:
 				    [_namesUnthinned objectAtIndex: i],
 				  [_values objectAtIndex: i], nil]];
@@ -377,7 +385,7 @@
   e = [_peopleTable selectedRowEnumerator];
   while((r = [e nextObject]))
     {
-      int i = [r intValue];
+      NSUInteger i = [r intValue];
       [retval addObject: [NSArray arrayWithObjects:
 				    [_people objectAtIndex: i],
 				  [_values objectAtIndex: i],
@@ -468,8 +476,7 @@ constrainMaxCoordinate: (CGFloat) proposedMax
   NSRect r;
 
   r = [self frame];
-  if(offset == 0 &&
-     proposedMax > r.size.width - [_groupsBrowser minColumnWidth])
+  if(offset == 0 && proposedMax > r.size.width - [_groupsBrowser minColumnWidth])
     return r.size.width - [_groupsBrowser minColumnWidth];
   return proposedMax;
 }
@@ -496,7 +503,8 @@ numberOfRowsInColumn: (NSInteger) col
 	   atRow: (NSInteger) row
 	  column: (NSInteger) col
 {
-  if(!_book) _book = [ADAddressBook sharedAddressBook];
+  if(!_book)
+    _book = [ADAddressBook sharedAddressBook];
   if(row)
     [cell setStringValue: [[[_book groups] objectAtIndex: row-1]
 			    valueForProperty: ADGroupNameProperty]];
