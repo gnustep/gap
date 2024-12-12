@@ -173,12 +173,12 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 {
   NSEnumerator *e;
   NSDictionary *dict;
-  int max;
+  NSInteger max;
 
   e = [_arr objectEnumerator];
   max = 0;
   while((dict = [e nextObject]))
-    max = MAX(max, [[dict objectForKey: @"ID"] intValue]);
+    max = MAX(max, [[dict objectForKey: @"ID"] integerValue]);
   
   return [NSString stringWithFormat: @"%d", max+1];
 }

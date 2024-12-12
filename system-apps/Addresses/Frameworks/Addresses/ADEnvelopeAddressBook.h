@@ -17,7 +17,7 @@
   
 + (ADAddressBook*) sharedAddressBook;
 
-- initWithPrimaryAddressBook: (ADAddressBook*) book;
+- i(id) initWithPrimaryAddressBook: (ADAddressBook*) book;
 
 - (BOOL) addAddressBook: (ADAddressBook*) book;
 - (BOOL) removeAddressBook: (ADAddressBook*) book;
