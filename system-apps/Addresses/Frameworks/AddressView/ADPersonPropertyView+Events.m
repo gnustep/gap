@@ -17,7 +17,10 @@
 @implementation ADPersonPropertyView (Events)
 - (void) mouseDown: (NSEvent*) event
 {
-  int i; id c = nil; id details; ADMutableMultiValue *mv;
+  NSUInteger i;
+  id c = nil;
+  id details;
+  ADMutableMultiValue *mv;
   NSPoint p;
 
   _mouseDownOnSelf = YES;
@@ -26,7 +29,7 @@
   p = [self convertPoint: [event locationInWindow]
 		    fromView: nil];
 
-  for(i=0; i<[_cells count]; i++)
+  for(i = 0; i < [_cells count]; i++)
     {
       c = [_cells objectAtIndex: i];
       if(NSPointInRect(p, [c rect]))
@@ -35,13 +38,16 @@
 	  break;
 	}
     }
-  if(i == [_cells count]) return;
+  if(i == [_cells count])
+    return;
 
   details = [c details]; 
 
   if([c isEditable] && ![self isEditable])
-    _propertyForDrag = [[self propertyForDragWithDetails: [c details]]
-			 retain];
+    {
+      _propertyForDrag = [[self propertyForDragWithDetails: [c details]]
+			   retain];
+    }
   else
     {
       [_propertyForDrag release];
@@ -50,7 +56,8 @@
   
   if([c isKindOfClass: [ADPersonActionCell class]])
     {
-      ADActionType type; NSString *ident, *label;
+      ADActionType type;
+      NSString *ident, *label;
       NSUInteger index;
 
       type = [c actionType];
@@ -250,7 +257,7 @@
   ADPersonPropertyCell *c;
   NSRect r;
   NSText *t;
-  int i;
+  NSUInteger i;
 
   [[details retain] autorelease];
   [self endEditing];
@@ -259,7 +266,8 @@
   
   c =  [_cells objectAtIndex: i];
   
-  if(![c isEditable]) return;
+  if(![c isEditable])
+    return;
   _editingCellIndex = i;
   r = [c rect];
       
@@ -279,11 +287,13 @@
   r.size.width += 4; // make the cursor fit too
 
   if(e)
-    [c editWithFrame: r
-       inView: self
-       editor: _textObject
-       delegate: self
-       event: e];
+    {
+      [c editWithFrame: r
+		inView: self
+		editor: _textObject
+	      delegate: self
+		 event: e];
+    }
   else
     {
       // HACK: We must create our own event here, since we can't
