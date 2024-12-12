@@ -487,11 +487,6 @@ static CGFloat _globalFontSize;
   return _maxLabelWidth;
 }
 
-- (NSInteger) neededLabelWidth
-{
-  return _neededLabelWidth;
-}
-
 - (void) drawRect: (NSRect) rect
 {
   ADPersonPropertyCell *c;

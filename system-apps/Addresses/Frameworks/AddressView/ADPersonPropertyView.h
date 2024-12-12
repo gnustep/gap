@@ -60,7 +60,7 @@ typedef enum {
   NSString *_property;
   NSMutableArray *_cells; 
   BOOL _displaysLabel;
-  NSInteger _maxLabelWidth, _neededLabelWidth;
+  NSInteger _maxLabelWidth;
   CGFloat _fontSize;
   NSFont *_font;
   BOOL _fontSetExternally;
@@ -101,7 +101,6 @@ typedef enum {
 
 - (void) setMaxLabelWidth: (NSInteger) width;
 - (NSInteger) maxLabelWidth;
-- (NSInteger) neededLabelWidth;
 
 - (NSFont*) font;
 - (void) setFont: (NSFont*) font;

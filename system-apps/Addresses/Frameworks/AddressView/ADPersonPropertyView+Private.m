@@ -81,7 +81,6 @@
   font = [self boldFont];
   w = [font widthOfString: str];
   
-  _neededLabelWidth = MAX(_neededLabelWidth, w);
   str = [str stringByAbbreviatingToFitWidth: _maxLabelWidth
 	     inFont: font];
   
@@ -695,8 +694,6 @@
 - (void) layout
 {
   CGFloat heightBefore, heightAfter;
-
-  _neededLabelWidth = 0;
 
   // clear everything
   [_cells release]; _cells = [[NSMutableArray alloc] init];
