@@ -75,7 +75,7 @@
 {
   NSString *str;
   NSFont *font;
-  int w;
+  CGFloat w;
 
   str = ADLocalizedPropertyOrLabel(label);
   font = [self boldFont];
@@ -114,7 +114,8 @@
 				      details: (id) details
 {
   id cell;
-  NSSize cellSize; NSPoint cellOrigin;
+  NSSize cellSize;
+  NSPoint cellOrigin;
 
   cell = [[[ADPersonActionCell alloc] init] autorelease];
   switch(t)
@@ -693,7 +694,7 @@
 
 - (void) layout
 {
-  float heightBefore, heightAfter;
+  CGFloat heightBefore, heightAfter;
 
   _neededLabelWidth = 0;
 
