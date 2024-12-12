@@ -413,8 +413,11 @@ static NSString *__defaultCountryCode = nil;
 
 - (void) drawRect: (NSRect) rect
 {
-  NSBezierPath *p; ADPersonPropertyView *v; NSEnumerator *e;
-  NSRect r; float x;
+  NSBezierPath *p;
+  ADPersonPropertyView *v;
+  NSEnumerator *e;
+  NSRect r;
+  CGFloat x;
 
   [self calcSize];
   
@@ -466,7 +469,7 @@ static NSString *__defaultCountryCode = nil;
     {
       NSFont *meFont;
       NSMutableAttributedString *str;
-      float y;
+      CGFloat y;
       
       meFont = [NSFont boldSystemFontOfSize: 8];
       str = [[[NSMutableAttributedString alloc] initWithString: _(@"Me")]
@@ -548,7 +551,8 @@ static NSString *__defaultCountryCode = nil;
 {
   NSArray *subs;
   
-  if(!_editable) [self setEditable: YES];
+  if(!_editable)
+    [self setEditable: YES];
   
   subs = [self subviews];
   _editingViewIndex = 0;
@@ -703,7 +707,7 @@ static NSString *__defaultCountryCode = nil;
   return _acceptsDrop;
 }
 
-- (void) setFontSize: (float) fontSize
+- (void) setFontSize: (CGFloat) fontSize
 {
   if(_fontSize == fontSize)
     return;
@@ -712,7 +716,7 @@ static NSString *__defaultCountryCode = nil;
   [self layout];
 }
 
-- (float) fontSize
+- (CGFloat) fontSize
 {
   return _fontSize;
 }
@@ -949,7 +953,8 @@ changedHeightFrom: (CGFloat) oldH
 
 - (void) textDidEndEditing: (NSNotification*) aNotification
 {
-  id view; NSString *note;
+  id view;
+  NSString *note;
 
   view = [aNotification object];
   if(view != _noteView)

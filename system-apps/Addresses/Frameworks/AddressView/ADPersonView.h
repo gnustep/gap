@@ -39,7 +39,7 @@ extern NSString * const ADPeoplePboardType;
   BOOL _acceptsDrop;
   BOOL _noteTextChanged;
 
-  float _fontSize;
+  CGFloat _fontSize;
 
   BOOL _mouseDownOnSelf;
 }
@@ -79,8 +79,8 @@ extern NSString * const ADPeoplePboardType;
 - (void) setAcceptsDrop: (BOOL) yesno;
 - (BOOL) acceptsDrop;
 
-- (void) setFontSize: (float) fontSize;
-- (float) fontSize;
+- (void) setFontSize: (CGFloat) fontSize;
+- (CGFloat) fontSize;
 @end
 
 @interface ADPersonView (PropertyMangling)
