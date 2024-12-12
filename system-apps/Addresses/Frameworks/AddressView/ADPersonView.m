@@ -62,7 +62,7 @@ static NSString *__defaultCountryCode = nil;
 	   @"VCFImage.tiff could not be loaded!\n");
 }
 
-- initWithFrame: (NSRect) frameRect
+- (id) initWithFrame: (NSRect) frameRect
 {
   NSBundle *b;
   NSString *filename;
@@ -122,8 +122,8 @@ static NSString *__defaultCountryCode = nil;
 {
   ADPersonPropertyView *v;
   NSSize sizeNeeded;
-  float IMGWIDTH = _fontSize*5;
-  float IMGHEIGHT = IMGWIDTH*(3.0/4.0);
+  CGFloat IMGWIDTH = _fontSize*5;
+  CGFloat IMGHEIGHT = IMGWIDTH*(3.0/4.0);
 
   int x = 5;
   int y = 5;
