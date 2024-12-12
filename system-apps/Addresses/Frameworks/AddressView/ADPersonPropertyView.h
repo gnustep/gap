@@ -99,8 +99,8 @@ typedef enum {
 - (void) setDisplaysLabel: (BOOL) yesno;
 - (BOOL) displaysLabel;
 
-- (void) setMaxLabelWidth: (NSInteger) width;
-- (NSInteger) maxLabelWidth;
+- (void) setMaxLabelWidth: (CGFloat) width;
+- (CGFloat) maxLabelWidth;
 
 - (NSFont*) font;
 - (void) setFont: (NSFont*) font;

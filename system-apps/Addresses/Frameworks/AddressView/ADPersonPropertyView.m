@@ -248,8 +248,8 @@ static CGFloat _globalFontSize;
 
   if ((self = [super initWithFrame: frame]))
     {
-      _maxLabelWidth = 110;
-      _fontSize = 12;
+      _maxLabelWidth = 110.0;
+      _fontSize = 12.0;
       _font = [[NSFont systemFontOfSize: _fontSize] retain];
       _fontSetExternally = NO;
       _editable = NO;
@@ -475,14 +475,14 @@ static CGFloat _globalFontSize;
   return _displaysLabel;
 }
 
-- (void) setMaxLabelWidth: (NSInteger) width
+- (void) setMaxLabelWidth: (CGFloat) width
 {
   _maxLabelWidth = width;
   if([_cells count])
     [self layout];
 }
 
-- (NSInteger) maxLabelWidth
+- (CGFloat) maxLabelWidth
 {
   return _maxLabelWidth;
 }
