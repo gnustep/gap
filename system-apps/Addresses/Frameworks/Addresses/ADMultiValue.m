@@ -180,7 +180,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
   while((dict = [e nextObject]))
     max = MAX(max, [[dict objectForKey: @"ID"] integerValue]);
   
-  return [NSString stringWithFormat: @"%d", max+1];
+  return [NSString stringWithFormat: @"%ld", (long int)(max+1)];
 }
 
 - (NSString*) addValue: (id) value
