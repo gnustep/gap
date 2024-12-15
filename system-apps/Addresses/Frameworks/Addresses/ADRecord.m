@@ -15,7 +15,7 @@
 @implementation ADRecord
 - (id)init
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _dict = nil;
       _book = nil;

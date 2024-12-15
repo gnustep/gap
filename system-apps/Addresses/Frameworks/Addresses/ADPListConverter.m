@@ -14,7 +14,7 @@
 @implementation ADPListConverter
 - (id)initForInput
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _done = NO;
       _plist = nil;

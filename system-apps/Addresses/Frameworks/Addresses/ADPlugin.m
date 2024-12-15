@@ -12,7 +12,7 @@ static ADPluginManager *manager = NULL;
 @implementation ADPluginManager
 - (id)init
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       abClassPlugins = [[NSMutableArray alloc] init];
     }

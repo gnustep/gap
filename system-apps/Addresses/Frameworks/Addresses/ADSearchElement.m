@@ -32,7 +32,7 @@
 - (id) initWithConjunction: (ADSearchConjunction) conj
 	     children: (NSArray*) children
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _conj = conj;
       _children = [[NSArray alloc] initWithArray: children];
@@ -75,7 +75,7 @@
 		  value: (id) value
 	     comparison: (ADSearchComparison) comparison
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       if(!property || !value)
 	{

@@ -235,7 +235,7 @@ static NSArray *knownItems;
 
 - (id) initForInput
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _input = YES;
       _str = nil;
@@ -304,7 +304,7 @@ static NSArray *knownItems;
 /* COutputConverting */
 - (id)initForOutput
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _str = nil;
       _input = NO;

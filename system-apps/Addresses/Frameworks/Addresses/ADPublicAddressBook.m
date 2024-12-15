@@ -12,7 +12,7 @@
 - (id)initWithAddressBook: (ADAddressBook*) book
 		 readOnly: (BOOL) ro
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       NSAssert(book, @"Address Book may not be nil!");
 

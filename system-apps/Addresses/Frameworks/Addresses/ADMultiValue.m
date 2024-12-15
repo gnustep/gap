@@ -42,7 +42,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 @implementation ADMultiValue
 - (id)initWithMultiValue: (ADMultiValue*) mv
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _arr = [[[mv array] mutableCopy] retain];
       _primaryId = [[mv primaryIdentifier] copy];
@@ -53,7 +53,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 
 - (id) initWithType: (ADPropertyType) type
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
       _arr = [[NSMutableArray alloc] initWithCapacity: 5];
       _primaryId = nil;
@@ -162,7 +162,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 @implementation ADMutableMultiValue
 - (id)initWithType: (ADPropertyType) type
 {
-  if (self = [super initWithType: type])
+  if ((self = [super initWithType: type]))
     {
       _nextId = 0;
     }
