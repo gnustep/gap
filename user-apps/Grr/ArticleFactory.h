@@ -27,7 +27,7 @@
 @interface ArticleFactory : RSSFactory
 
 - (id<RSSArticle>) articleWithHeadline: (NSString*) aHeadline
-                                   URL: (NSString*) aURL
+                                   URL: (NSURL*) aURL
                                content: (NSString*) aContent
                                   date: (NSDate*) aDate;
 

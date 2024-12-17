@@ -34,7 +34,7 @@
 }
 
 - (id<Article>) articleWithHeadline: (NSString*) aHeadline
-                                URL: (NSString*) aURL
+                                URL: (NSURL*) aURL
                             content: (NSString*) aContent
                                date: (NSDate*) aDate
 {
