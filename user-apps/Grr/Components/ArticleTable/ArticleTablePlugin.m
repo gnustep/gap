@@ -29,21 +29,21 @@
 #import "GNUstep.h"
 #endif
 
-int compareArticleHeadlines( id articleA, id articleB, void* context ) {
+NSComparisonResult compareArticleHeadlines( id articleA, id articleB, void* context ) {
     id<Article> a = (id<Article>) articleA;
     id<Article> b = (id<Article>) articleB;
     
     return [[a headline] caseInsensitiveCompare: [b headline]];
 }
 
-int compareArticleDates( id articleA, id articleB, void* context ) {
+NSComparisonResult compareArticleDates( id articleA, id articleB, void* context ) {
     id<Article> a = (id<Article>) articleA;
     id<Article> b = (id<Article>) articleB;
     
     return [[a date] compare: [b date]];
 }
 
-int compareArticleRatings( id articleA, id articleB, void* context) {
+NSComparisonResult compareArticleRatings( id articleA, id articleB, void* context) {
     id<Article> a = (id<Article>) articleA;
     id<Article> b = (id<Article>) articleB;
     
