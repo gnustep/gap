@@ -26,7 +26,7 @@
 #import "ArticleGroup.h"
 
 
-@protocol Feed <RSSFeed,ArticleGroup>
+@protocol Feed <RSSFeedFetching,ArticleGroup>
 -(int) unreadArticleCount;
 @end
 
