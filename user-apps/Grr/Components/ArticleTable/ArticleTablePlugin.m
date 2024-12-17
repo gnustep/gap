@@ -205,7 +205,7 @@ NSComparisonResult compareArticleRatings( id articleA, id articleB, void* contex
 - (void) tableViewSelectionDidChange: (NSNotification*) notif
 {
     // clear article selection set
-    ASSIGN(articleSelection, nil);
+    DESTROY(articleSelection);
     
     [self notifyChanges];
 }
