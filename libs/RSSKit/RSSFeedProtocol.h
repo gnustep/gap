@@ -83,10 +83,6 @@ enum RSSFeedError
  */
 - (int) articleCount;
 
-/**
- * Returns YES if and only if this feed is currently being fetched.
- */
-- (BOOL)isFetching;
 
 /**
  * @return The name of the feed
@@ -132,6 +128,34 @@ enum RSSFeedError
  *                  before fetching new articles. NO otherwise
  */
 - (void) setAutoClear: (BOOL) autoClear;
+
+
+@end
+
+@protocol RSSFeedFetching <RSSFeed>
+
+/**
+ * Returns YES if and only if this feed is currently being fetched.
+ */
+- (BOOL)isFetching;
+
+/**
+ * Fetches the feed from the web.
+ *
+ * @return An error number (of type enum RSSFeedError)
+ * @see NSURL
+ * @see RSSFeedError
+ */
+- (enum RSSFeedError) fetch;
+
+/**
+ * Fetches the feed from the web. Feed fetching is done
+ * in the background. When the feed is fetched, the feed
+ * will post a RSSFeedFetchedNotification.
+ *
+ * @see RSSFeedFetchedNotification
+ **/
+- (void) fetchInBackground;
 
 
 @end
