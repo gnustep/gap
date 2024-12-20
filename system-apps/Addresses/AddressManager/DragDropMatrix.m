@@ -155,8 +155,6 @@ numberOfColumns: (NSInteger) numColumns
   NSPasteboard *pboard;
   NSImage *image = nil;
   NSPoint dragPoint = NSZeroPoint;
-  NSPoint cellOrigin;
-  CGFloat width=0, height=0;
   NSArray *cells;
   NSUInteger i;
 
@@ -182,12 +180,7 @@ numberOfColumns: (NSInteger) numColumns
       [contactRows addObject: [NSNumber numberWithInteger: row]];
     }
 
-  cellOrigin = [self cellFrameAtRow: [self selectedRow]
-		     column: [self selectedColumn]].origin;
-
   image = [self draggingImage];
-  width = [image size].width;
-  height = [image size].height;
 
   [self dragImage: image
 	at: dragPoint
