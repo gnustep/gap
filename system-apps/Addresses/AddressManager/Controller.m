@@ -138,7 +138,8 @@
 - (void) initPrefsPanel
 {
   NSUserDefaults *ud;
-  NSEnumerator *e; NSString *key;
+  NSEnumerator *e;
+  NSString *key;
   
   ud = [NSUserDefaults standardUserDefaults];
   if(![ud objectForKey: @"Autosave"] ||
@@ -198,7 +199,7 @@
 {
   NSArray *groups;
   NSMutableArray *retval;
-  int i;
+  NSUInteger i;
 
   groups = [_book groups];
   retval = [NSMutableArray arrayWithCapacity: [groups count]];
@@ -209,7 +210,8 @@
 
       name = [[groups objectAtIndex: i]
 	       valueForProperty: ADGroupNameProperty];
-      if(!name) NSLog(@"Group at %d has no name!\n", i);
+      if(!name)
+	NSLog(@"Group at %ul has no name!\n", (unsigned int)i);
       else [retval addObject: name];
     }
   return retval;
@@ -217,7 +219,7 @@
 
 - (void) selectGroup: (ADGroup*) group
 {
-  int num, i;
+  NSInteger num, i;
 
   if([personView isEditable])
     [self finishEditingPerson];
@@ -271,7 +273,7 @@
   
 - (void) selectPerson: (ADPerson*) person
 {
-  int i;
+  NSUInteger i;
 
   if([personView isEditable])
     [self finishEditingPerson];
@@ -332,7 +334,7 @@
 
 - (void) deletePersonAndSelectNext: (ADPerson*) person
 {
-  int row = [groupsBrowser selectedRowInColumn: 1];
+  NSInteger row = [groupsBrowser selectedRowInColumn: 1];
 
   if(_currentGroup)
     [_currentGroup removeMember: person];
@@ -529,9 +531,8 @@
 
 - (void) doImportPerson: (id) sender
 {
-  int retval;
+  NSInteger retval;
   id obj;
-  int loaded = 0;
   NSString *fname;
   id<ADInputConverting> conv;
   ADConverterManager *man;
@@ -562,9 +563,7 @@
     {
       NSEnumerator *e = [_peopleCache objectEnumerator];
       id other;
-      int retval;
-
-      loaded++;
+      NSInteger retval;
       
       retval = 0; // insert anyway
       while((other = [e nextObject]))
@@ -601,7 +600,7 @@
   ADConverterManager *man;
   NSSavePanel *panel;
   NSString *fname;
-  int retval;
+  NSInteger retval;
   NSArray *a;
   NSEnumerator *e; ADPerson *person;
   id<ADOutputConverting> conv;
@@ -673,7 +672,8 @@
 
 - (void) doSetMe: (id) sender
 {
-  if(![personView person]) return;
+  if(![personView person])
+    return;
   [_book setMe: [personView person]];
   [personView setNeedsDisplay: YES];
   [groupsBrowser reloadColumn: 1];
@@ -682,7 +682,8 @@
 
 - (void) doShowMe: (id) sender
 {
-  if(![_book me]) return;
+  if(![_book me])
+    return;
   [self selectPerson: [_book me]];
 }
 
@@ -692,7 +693,8 @@
   if([[groupsBrowser selectedCells] count] == 1)
     [personView setPerson: [[groupsBrowser selectedCellInColumn: 1]
 			     representedObject]];
-  else [personView setPerson: nil];
+  else
+    [personView setPerson: nil];
 }
 
 - (void) doToggleShared: (id) sender
@@ -796,8 +798,8 @@
   ADGroup *group;
   NSString *name;
   NSString *msg;
-  int retval;
-  int row = [groupsBrowser selectedRowInColumn: 0];
+  NSInteger retval;
+  NSInteger row = [groupsBrowser selectedRowInColumn: 0];
 
   if(row == 0) return; // Can't delete this
 
@@ -810,7 +812,8 @@
 	      name];
   retval = NSRunAlertPanel(_(@"Delete Group?"), msg,
 			       _(@"Yes"), _(@"No"), nil, nil);
-  if(!retval) return;
+  if(!retval)
+    return;
 
   if(![_book removeRecord: group])
     {
@@ -884,7 +887,7 @@
 
 - (void) prefsChangeScreenNameLayout: (id) sender
 {
-  int tag;
+  NSInteger tag;
   ADPerson *p;
 
   tag = [sender selectedTag];
@@ -1015,8 +1018,9 @@ numberOfRowsInColumn: (NSInteger) column
   
   if([sender selectedColumn] == 0)
     {
-      int row;
+      NSInteger row;
       ADGroup *group = nil;
+
       [_currentGroup release];
       _currentGroup = nil;
 
@@ -1036,7 +1040,9 @@ numberOfRowsInColumn: (NSInteger) column
     }
   else
     {
-      NSEnumerator *e; ADPerson *p; BOOL shared;
+      NSEnumerator *e;
+      ADPerson *p;
+      BOOL shared;
       
       if([[sender selectedCells] count] == 1)
 	[personView setPerson: [[sender selectedCellInColumn: 1]
@@ -1097,9 +1103,11 @@ numberOfRowsInColumn: (NSInteger) column
 
 - (void) handleDatabaseChangedExternally: (NSNotification*) note
 {
-  NSString *guid = nil, *uid = nil;
+  NSString *guid = nil;
+  NSString *uid = nil;
 
-  if(_selfChanging) return;
+  if(_selfChanging)
+    return;
 
   if(_currentGroup)
     guid = [[_currentGroup uniqueId] retain];
@@ -1114,13 +1122,15 @@ numberOfRowsInColumn: (NSInteger) column
   if(uid)
     {
       ADPerson *p = (ADPerson*)[_book recordForUniqueId: uid];
-      if(p) [self selectPerson: p];
+      if(p)
+	[self selectPerson: p];
     }
 }
 
 - (void) handleNameChanged: (NSNotification*) note
 {
-  NSDictionary *userInfo; ADPerson *p;
+  NSDictionary *userInfo;
+  ADPerson *p;
   NSString *first, *last, *prop, *val, *scrName;
   ADScreenNameFormat fmt;
   
@@ -1219,7 +1229,7 @@ numberOfRowsInColumn: (NSInteger) column
       
   if([_book hasUnsavedChanges])
     {
-      int retval =
+      NSInteger retval =
 	NSRunAlertPanel(_(@"Save Changes?"),
 			_(@"You have made changes to the database.\n"
 			  @"Should these changes be saved?"),
@@ -1248,7 +1258,7 @@ numberOfRowsInColumn: (NSInteger) column
 
 - (BOOL) validateMenuItem: (NSMenuItem*) anItem
 {
-  int count;
+  NSUInteger count;
 
   count = [[self selectedPersons] count];
   
@@ -1283,9 +1293,10 @@ numberOfRowsInColumn: (NSInteger) column
 - (BOOL) personView: (ADPersonView*) aView
 receivedDroppedPersons: (NSArray*) persons
 {
-  int i;
+  NSUInteger i;
 
-  if(![persons count]) return NO;
+  if(![persons count])
+    return NO;
 
   for(i=0; i<[persons count]; i++)
     {
@@ -1355,7 +1366,8 @@ receivedDroppedPersons: (NSArray*) persons
   if([[[sender draggingPasteboard] types]
        containsObject: ADPeoplePboardType])
     {
-      NSDictionary *d; NSEnumerator *e; 
+      NSDictionary *d;
+      NSEnumerator *e; 
       BOOL _pureLocal, _didSomeWork;
 
       if(![cell representedObject] ||
@@ -1370,7 +1382,8 @@ receivedDroppedPersons: (NSArray*) persons
 	     propertyListForType: ADPeoplePboardType] objectEnumerator];
       while((d = [e nextObject]))
 	{
-	  int pid; NSString *uid; NSArray *adDescr;
+	  int pid;
+	  NSString *uid;
 	  ADPerson *p;
 
 	  if(![d objectForKey: @"UID"] ||
@@ -1380,7 +1393,6 @@ receivedDroppedPersons: (NSArray*) persons
 
 	  pid = [[d objectForKey: @"PID"] intValue];
 	  uid = [d objectForKey: @"UID"];
-	  adDescr = [d objectForKey: @"AD"];
 
 	  p = (ADPerson*)[_book recordForUniqueId: uid];
 
@@ -1391,7 +1403,8 @@ receivedDroppedPersons: (NSArray*) persons
 
 	  if(g)
 	    {
-	      ADPerson *p2; NSEnumerator *e;
+	      ADPerson *p2;
+	      NSEnumerator *e;
 	      BOOL isIn;
 
 	      isIn = NO;
@@ -1440,7 +1453,8 @@ didAcceptDropFromSender: (id<NSDraggingInfo>) sender
 
   if([[pb types] containsObject: ADPeoplePboardType])
     {
-      NSDictionary *d; NSEnumerator *e;
+      NSDictionary *d;
+      NSEnumerator *e;
       BOOL _didSomeWork;
 
       if(!g) goto useVCard;
@@ -1449,7 +1463,8 @@ didAcceptDropFromSender: (id<NSDraggingInfo>) sender
       e = [[pb propertyListForType: ADPeoplePboardType] objectEnumerator];
       while((d = [e nextObject]))
 	{
-	  int pid; NSString *uid; NSArray *adDescr;
+	  int pid;
+	  NSString *uid;
 	  ADPerson *p;
 
 	  if(![d objectForKey: @"UID"] ||
@@ -1459,7 +1474,6 @@ didAcceptDropFromSender: (id<NSDraggingInfo>) sender
 
 	  pid = [[d objectForKey: @"PID"] intValue];
 	  uid = [d objectForKey: @"UID"];
-	  adDescr = [d objectForKey: @"AD"];
 
 	  if(pid != [[NSProcessInfo processInfo] processIdentifier])
 	    continue;
@@ -1491,7 +1505,7 @@ didAcceptDropFromSender: (id<NSDraggingInfo>) sender
       if(o)
 	{
 	  NSString *fmt;
-	  int retval;
+	  NSInteger retval;
 	  
 	  fmt =
 	    [NSString stringWithFormat:
