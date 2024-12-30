@@ -133,8 +133,7 @@
 	[str2 appendString: s];
     }
 
-  str2 = [NSString stringWithUTF8String: [str2 cString]];
-  return str2;
+  return [NSString stringWithUTF8String: [str2 cString]];
 }
 
 - (NSString*) stringByQuotedPrintableEncoding
@@ -262,13 +261,16 @@ static NSArray *knownItems;
   person = [[[ADPerson alloc] init] autorelease];
   [person setValue: [NSDate date] forProperty: ADModificationDateProperty];
   [person setValue: [NSDate date] forProperty: ADCreationDateProperty];
+
+  if (_idx > [_str length])
+    return nil;
   
   str = [_str substringFromIndex: _idx];
 
   lines = [str componentsSeparatedByString: @"\n"];
 
   i = 0;
-  while(i < [lines count])
+  while (i < [lines count])
     {
       NSArray *keyblock, *valueblock;
       BOOL retval;
@@ -281,8 +283,10 @@ static NSArray *knownItems;
 		     intoKeyBlock: &keyblock
 		     valueBlock: &valueblock];
       newIndex = i;
-      while(oldIndex < newIndex)
-	_idx += [[lines objectAtIndex: oldIndex++] length] + 1;
+      while (oldIndex < newIndex)
+	{
+	  _idx += [[lines objectAtIndex: oldIndex++] length] + 1;
+	}
       
       if(retval)
 	{
