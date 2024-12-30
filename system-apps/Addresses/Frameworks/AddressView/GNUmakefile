@@ -1,6 +1,10 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
+VERSION=0.5.0
 FRAMEWORK_NAME=AddressView
+AddressView_CURRENT_VERSION_NAME = 0.5.0
+AddressView_DEPLOY_WITH_CURRENT_VERSION = yes
+
 
 AddressView_OBJC_FILES=\
 			ADPersonView.m                 \

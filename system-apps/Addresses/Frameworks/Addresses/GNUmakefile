@@ -1,6 +1,9 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
+VERSION=0.5.0
 FRAMEWORK_NAME=Addresses
+Addresses_CURRENT_VERSION_NAME = 0.5.0
+Addresses_DEPLOY_WITH_CURRENT_VERSION = yes
 
 Addresses_OBJC_FILES= \
 	ADAddressBook.m         \
