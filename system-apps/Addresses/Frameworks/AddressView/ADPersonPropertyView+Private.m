@@ -75,11 +75,9 @@
 {
   NSString *str;
   NSFont *font;
-  CGFloat w;
 
   str = ADLocalizedPropertyOrLabel(label);
   font = [self boldFont];
-  w = [font widthOfString: str];
   
   str = [str stringByAbbreviatingToFitWidth: _maxLabelWidth
 	     inFont: font];
@@ -496,7 +494,8 @@
       if(![val count])
 	{
 	  NSDictionary *details;
-	  NSString *label; NSMutableDictionary *value;
+	  NSString *label;
+	  NSMutableDictionary *value;
 
 	  label = [self defaultLabel];
 	  value = [self emptyValue];
@@ -515,7 +514,8 @@
 	{
 	  for(i=0; i<[val count]; i++)
 	    {
-	      NSString *label, *value, *identifier;
+	      NSString *label, *identifier;
+	      NSDictionary *value;
 	      NSDictionary *details;
 		
 	      label = [val labelAtIndex: i];
@@ -528,8 +528,8 @@
 			      label, @"Label",
 			      nil];
 	      
-	      [self layoutDictionary: [val valueAtIndex: i]
-		    withLabel: [val labelAtIndex: i]
+	      [self layoutDictionary: value
+		    withLabel: label
 		    details: details
 		    buttons: YES
 		    forEditInRect: &rect];
