@@ -64,7 +64,8 @@ numberOfColumns: (NSInteger) numColumns
 - (void) copyToPasteboard: (NSPasteboard *) pb
 {
   NSMutableArray *arr;
-  NSEnumerator *e; NSCell *c;
+  NSEnumerator *e;
+  NSCell *c;
 
   arr = [NSMutableArray arrayWithCapacity: [[self selectedCells] count]];
   e = [[self selectedCells] objectEnumerator];
@@ -135,6 +136,7 @@ numberOfColumns: (NSInteger) numColumns
 - (void) mouseUp: (NSEvent*) event
 {
   NSInteger row, column;
+
   if(!_didDrag && [event modifierFlags] == 0 &&
      [[self selectedCell] isLeaf])
     {
@@ -173,9 +175,10 @@ numberOfColumns: (NSInteger) numColumns
 
   [contactRows release];
   contactRows = [[NSMutableArray alloc] initWithCapacity: [cells count]];
-  for(i=0; i<[cells count]; i++)
+  for (i=0; i<[cells count]; i++)
     {
       NSInteger row, column;
+
       [self getRow: &row column: &column ofCell: [cells objectAtIndex: i]];
       [contactRows addObject: [NSNumber numberWithInteger: row]];
     }
