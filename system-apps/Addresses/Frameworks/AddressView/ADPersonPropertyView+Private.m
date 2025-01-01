@@ -330,10 +330,13 @@
   id val;
   id cell;
   ADPropertyType type;
-  NSRect r; NSSize allSize; 
-  int i; BOOL showsDefault;
+  NSRect r;
+  NSSize allSize; 
+  NSUInteger i;
+  BOOL showsDefault;
 
-  if(!_property || !_person) return;
+  if(!_property || !_person)
+    return;
 
   val = [_person valueForProperty: _property];
 
@@ -557,26 +560,29 @@
 
 - (void) layoutForDisplay
 {
-  NSRect r; NSSize allSize; 
-  int i;
+  NSRect r;
+  NSSize allSize; 
+  NSUInteger i;
   id cell;
   id val;
   ADPropertyType type;
 
-  if(!_property || !_person) return;
+  if(!_property || !_person)
+    return;
 
   val = [_person valueForProperty: _property];
-
   type = [_person typeOfProperty: _property];
 
   r = NSMakeRect(0, 0, 0, 0); allSize = NSMakeSize(0, 0);
 
-  if(!val) return;
+  if (!val)
+    return;
 
   // convert types
   switch(type)
     {
-    case ADStringProperty: break;
+    case ADStringProperty:
+      break;
     case ADIntegerProperty:
       val = [NSString stringWithFormat: @"%d", [val intValue]];
       break;
@@ -657,10 +663,12 @@
   else if(type == ADMultiDictionaryProperty)
     {
       NSRect rect = NSZeroRect;
-      for(i=0; i<[val count]; i++)
+      for (i=0; i<[val count]; i++)
 	{
-	  NSArray *cells; NSDictionary *details;
-	  NSString *identifier, *label; int j;
+	  NSArray *cells;
+	  NSDictionary *details;
+	  NSString *identifier, *label;
+	  NSUInteger j;
 
 	  label = [val labelAtIndex: i];
 	  identifier = [val identifierAtIndex: i];
@@ -696,7 +704,8 @@
   CGFloat heightBefore, heightAfter;
 
   // clear everything
-  [_cells release]; _cells = [[NSMutableArray alloc] init];
+  [_cells release];
+  _cells = [[NSMutableArray alloc] init];
 
   heightBefore = [self frame].size.height;
   if([self isEditable])
