@@ -1,12 +1,12 @@
 {
 ApplicationDescription = "An Address Book.";
 ApplicationName = "AddressManager";
-ApplicationRelease = "0.4.9";
+ApplicationRelease = "0.5.0";
 ApplicationURL = "http://gap.nongnu.org/addresses/";
 CFBundleIdentifier = "org.gap.AddressManager";
 NSIcon = "AddressManager.tiff";
-Authors = ("The Team of the GNUstep Application Project", "Riccardo Mottola", "Philippe Roussel", "Bj\u00f6rn Giesler <bjoern@giesler.de>");
-Copyright = "Copyright (C) 2003-2017 The GNUstep Application Project\n
+Authors = ("Riccardo Mottola", "Philippe Roussel", "Bj\u00f6rn Giesler <bjoern@giesler.de>");
+Copyright = "Copyright (C) 2003-2025 The GNUstep Application Project\n
 Distributed under the terms of the LGPL.";
 NSTypes = (
 	{
