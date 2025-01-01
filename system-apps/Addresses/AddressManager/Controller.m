@@ -13,7 +13,9 @@
 - (ADPerson*) personWithFirstName: (NSString*) first
 			 lastName: (NSString*) last
 {
-  NSEnumerator *e; ADPerson *p;
+  NSEnumerator *e;
+  ADPerson *p;
+
   e = [[self people] objectEnumerator];
   while((p = [e nextObject]))
     if([[p valueForProperty: ADFirstNameProperty]
@@ -78,7 +80,7 @@
 - (void) awakeFromNib
 {
   NSString *filename;
-  
+
   _fm = [NSFileManager defaultManager];
   _book = [ADAddressBook sharedAddressBook];
   _selfChanging = NO;
@@ -140,7 +142,7 @@
   NSUserDefaults *ud;
   NSEnumerator *e;
   NSString *key;
-  
+
   ud = [NSUserDefaults standardUserDefaults];
   if(![ud objectForKey: @"Autosave"] ||
      ![[ud objectForKey: @"Autosave"] boolValue])
@@ -377,7 +379,8 @@
   ADPerson *p;
 
   p = [personView person];
-  if(!p || ![personView isEditable]) return;
+  if(!p || ![personView isEditable])
+    return;
 
   if(![p valueForProperty: ADLastNameProperty] ||
      ![p valueForProperty: ADFirstNameProperty])
@@ -429,7 +432,9 @@
   ADPerson *p;
 
   p = [personView person];
-  if(!p) return; // nothing to do
+  if(!p)
+    return; // nothing to do
+
   if([personView isEditable])
     [self finishEditingPerson];
   else
@@ -602,7 +607,8 @@
   NSString *fname;
   NSInteger retval;
   NSArray *a;
-  NSEnumerator *e; ADPerson *person;
+  NSEnumerator *e;
+  ADPerson *person;
   id<ADOutputConverting> conv;
 
   if([personView isEditable])
@@ -801,7 +807,8 @@
   NSInteger retval;
   NSInteger row = [groupsBrowser selectedRowInColumn: 0];
 
-  if(row == 0) return; // Can't delete this
+  if(row == 0)
+    return; // Can't delete this
 
   group = [[_book groups] objectAtIndex: row-1];
   name = [group valueForProperty: ADGroupNameProperty];
@@ -868,7 +875,8 @@
 
 - (void) prefsChangeAddressLayout: (id) sender
 {
-  NSString *code, *title; NSEnumerator *e;
+  NSString *code, *title;
+  NSEnumerator *e;
 
   title = [[sender selectedItem] title];
   e = [_countryCodeDict keyEnumerator];
@@ -1133,7 +1141,7 @@ numberOfRowsInColumn: (NSInteger) column
   ADPerson *p;
   NSString *first, *last, *prop, *val, *scrName;
   ADScreenNameFormat fmt;
-  
+
   if([note object] != [personView person])
     return;
 
@@ -1177,7 +1185,8 @@ numberOfRowsInColumn: (NSInteger) column
   ADRecord *r, *r1;
 
   conv = [[ADConverterManager sharedManager] inputConverterWithFile: filename];
-  if(!conv) return NO;
+  if(!conv)
+    return NO;
 
   r1 = nil;
   while((r = [conv nextRecord]))
@@ -1208,7 +1217,7 @@ numberOfRowsInColumn: (NSInteger) column
 - (NSApplicationTerminateReply) applicationShouldTerminate: (NSApplication*) app
 {
   NSUserDefaults *def;
-  
+
   if([personView isEditable])
     [self finishEditingPerson];
 
@@ -1362,7 +1371,7 @@ receivedDroppedPersons: (NSArray*) persons
   g = [cell representedObject];
   if(g && ![g isKindOfClass: [ADGroup class]])
     return NSDragOperationNone;
-  
+
   if([[[sender draggingPasteboard] types]
        containsObject: ADPeoplePboardType])
     {
@@ -1548,4 +1557,3 @@ didAcceptDropFromSender: (id<NSDraggingInfo>) sender
   return NO;
 }
 @end
-
