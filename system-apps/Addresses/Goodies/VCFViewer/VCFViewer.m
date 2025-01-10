@@ -131,7 +131,7 @@
   DESTROY(people);
 }
 
-- (NSString *)currentPath
+- (NSString *)path
 {
     return vcfPath;
 }
