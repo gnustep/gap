@@ -50,7 +50,7 @@
   if([self addressBook] &&
      [[self addressBook]
        respondsToSelector: @selector(setImageDataForPerson:withFile:)])
-    return [[self addressBook] setImageDataForPerson: self withFile: filename];
+    return [(ADLocalAddressBook *)[self addressBook] setImageDataForPerson: self withFile: filename];
   return YES;
 }
 
@@ -61,7 +61,7 @@
 	respondsToSelector: @selector(imageDataFileForPerson:)])
     return nil;
   else
-    return [[self addressBook] imageDataFileForPerson: self];
+    return [(ADLocalAddressBook *)[self addressBook] imageDataFileForPerson: self];
 }
 
 - (BOOL) setImageDataType: (NSString*) type
