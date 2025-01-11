@@ -1059,20 +1059,23 @@ changedHeightFrom: (CGFloat) oldH
 
 - (NSDragOperation) draggingEntered: (id<NSDraggingInfo>) sender
 {
-  BOOL ok; NSPasteboard *pb; NSArray *types;
+  BOOL ok;
+  NSPasteboard *pb;
+  NSArray *types;
 
   if([sender draggingSource] == self ||
      ([[sender draggingSource] isKindOfClass: [NSView class]] &&
       [[sender draggingSource] isDescendantOf: self]))
     return NO;
-  
+
   ok = NO;
   pb = [sender draggingPasteboard];
   types = [pb types];
 
   if([types containsObject: NSFilenamesPboardType])
     {
-      NSArray *arr; NSString *fname, *ext;
+      NSArray *arr;
+      NSString *fname, *ext;
       NSArray *imgExts;
 
       arr = [pb propertyListForType: NSFilenamesPboardType];
@@ -1205,8 +1208,11 @@ changedHeightFrom: (CGFloat) oldH
   else if([types containsObject: NSTIFFPboardType])
     {
       NSData *data = [pb dataForType: NSTIFFPboardType];
-      if(![_person setImageData: data]) return NO;
-      if(![_person setImageDataType: @"tiff"]) return NO;
+
+      if(![_person setImageData: data])
+	return NO;
+      if(![_person setImageDataType: @"tiff"]) return
+						 NO;
       [self layout];
       return YES;
     }
