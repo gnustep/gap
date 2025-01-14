@@ -98,7 +98,7 @@ ADConverterManager *_manager = nil;
   obj = [[[c alloc] initForInput] autorelease];
 
   data = [NSData dataWithContentsOfFile: filename];
-  if (!data)
+  if (!data || [data length] < 5)
     {
       NSLog(@"Error while reading file %@", filename);
       return nil;
@@ -108,17 +108,17 @@ ADConverterManager *_manager = nil;
   string = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
   if (!string)
     {
-      const unichar *data_unichar = (const unichar *)(void *) data;
+      const unichar *data_unichar = (const unichar *)(void *) [data bytes];
 
       NSLog(@"File in is notNSUTF8StringEncoding. vCARD RFC 6350 specifies UTF-8 as only valid encoding");
-      if (data_unichar[0] == 0xFEFF || data_unichar[0] == 0xFFFE)
+      if ((data_unichar[0] == 0xFEFF) || (data_unichar[0] == 0xFFFE))
 	{
 	  NSLog(@"found an UTF-16 BOM");
 
 	  string = [[NSString alloc] initWithData:data encoding:NSUnicodeStringEncoding];
-	}  
+	}
     }
-  
+
   if (!string)
     {
       NSLog(@"Attempting NSISOLatin1StringEncoding");
