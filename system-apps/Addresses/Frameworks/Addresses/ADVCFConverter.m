@@ -445,19 +445,16 @@ static NSArray *knownItems;
   *k = [[keyblock lowercaseString] componentsSeparatedByString: @";"];
   
   value = [str substringFromIndex: r.location+r.length];
-  NSLog(@"value: %@", value);
   if([value isEqualToString: @"="]) // escape to next line
     {
       value = [[arr objectAtIndex: (*retLine)++]
 		stringByTrimmingCharactersInSet: wsp];
-		NSLog(@"value2: %@", value);
       *v = [[value stringByQuotedPrintableDecoding]
 	     componentsSeparatedByString: @";"];
     }
   else
     *v = [[value stringByQuotedPrintableDecoding]
 	   componentsSeparatedByString: @";"];
-  NSLog(@"v: %@", *v);
   return YES;
 }
 
