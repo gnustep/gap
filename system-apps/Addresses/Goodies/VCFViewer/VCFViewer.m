@@ -1,13 +1,9 @@
 // VCFViewer.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // VCF Content Viewer for GWorkspace
 // 
-// $Author: buzzdee $
-// $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2013/10/19 15:25:22 $
 
 #import "VCFViewer.h"
 
@@ -15,73 +11,73 @@
 - (id)initWithFrame:(NSRect)frameRect inspector:(id)insp
 {
   self = [super initWithFrame:frameRect];
-  if (!self)
-    return nil;
+  if (self)
+    {
+      sv = [[[NSScrollView alloc] initWithFrame: NSMakeRect(0, 30, 257, 215)]
+	     autorelease];
+      [sv setHasVerticalScroller: YES];
+      [sv setHasHorizontalScroller: YES];
+      [sv setBorderType: NSBezelBorder];
+      [self addSubview: sv];
 
-  sv = [[[NSScrollView alloc] initWithFrame: NSMakeRect(0, 30, 257, 215)]
-	 autorelease];
-  [sv setHasVerticalScroller: YES];
-  [sv setHasHorizontalScroller: YES];
-  [sv setBorderType: NSBezelBorder];
-  [self addSubview: sv];
+      cv = [[[NSClipView alloc] initWithFrame: [sv frame]] autorelease];
+      [cv setAutoresizesSubviews: YES];
+      [sv setContentView: cv];
 
-  cv = [[[NSClipView alloc] initWithFrame: [sv frame]] autorelease];
-  [cv setAutoresizesSubviews: YES];
-  [sv setContentView: cv];
+      pv = [[[ADPersonView alloc] initWithFrame: NSZeroRect] autorelease];
+      [pv setFillsSuperview: YES];
+      [pv setFontSize: 6.0];
+      [pv setAcceptsDrop: NO];
+      [pv setDelegate: self];
+      [cv setDocumentView: pv];
 
-  pv = [[[ADPersonView alloc] initWithFrame: NSZeroRect] autorelease];
-  [pv setFillsSuperview: YES];
-  [pv setFontSize: 6.0];
-  [pv setAcceptsDrop: NO];
-  [pv setDelegate: self];
-  [cv setDocumentView: pv];
+      pb = [[[NSButton alloc] initWithFrame: NSMakeRect(80, 0, 20, 20)]
+	     autorelease];
+      [pb setImage: [NSImage imageNamed: @"common_ArrowLeft"]];
+      [pb setImagePosition: NSImageOnly];
+      [pb setTarget: self];
+      [pb setAction: @selector(previousPerson:)];
+      [self addSubview: pb];
 
-  pb = [[[NSButton alloc] initWithFrame: NSMakeRect(80, 0, 20, 20)]
-	 autorelease];
-  [pb setImage: [NSImage imageNamed: @"common_ArrowLeft"]];
-  [pb setImagePosition: NSImageOnly];
-  [pb setTarget: self];
-  [pb setAction: @selector(previousPerson:)];
-  [self addSubview: pb];
+      lbl = [[[NSTextField alloc] initWithFrame: NSMakeRect(100, 0, 57, 20)]
+	      autorelease];
+      [lbl setEditable: NO];
+      [lbl setSelectable: NO];
+      [lbl setBezeled: NO];
+      [lbl setDrawsBackground: NO];
+      [lbl setAlignment: NSCenterTextAlignment];
+      [self addSubview: lbl];
 
-  lbl = [[[NSTextField alloc] initWithFrame: NSMakeRect(100, 0, 57, 20)]
-	  autorelease];
-  [lbl setEditable: NO];
-  [lbl setSelectable: NO];
-  [lbl setBezeled: NO];
-  [lbl setDrawsBackground: NO];
-  [lbl setAlignment: NSCenterTextAlignment];
-  [self addSubview: lbl];
+      nb = [[[NSButton alloc] initWithFrame: NSMakeRect(157, 0, 20, 20)]
+	     autorelease];
+      [nb setImage: [NSImage imageNamed: @"common_ArrowRight"]];
+      [nb setImagePosition: NSImageOnly];
+      [nb setTarget: self];
+      [nb setAction: @selector(nextPerson:)];
+      [self addSubview: nb];
 
-  nb = [[[NSButton alloc] initWithFrame: NSMakeRect(157, 0, 20, 20)]
-	 autorelease];
-  [nb setImage: [NSImage imageNamed: @"common_ArrowRight"]];
-  [nb setImagePosition: NSImageOnly];
-  [nb setTarget: self];
-  [nb setAction: @selector(nextPerson:)];
-  [self addSubview: nb];
+      dfb = [[[NSButton alloc] initWithFrame: NSMakeRect(215, 0, 20, 20)]
+	      autorelease];
+      [dfb setTitle: @"-"];
+      [dfb setTarget: self];
+      [dfb setAction: @selector(decreaseFontSize:)];
+      [dfb setContinuous: YES];
+      [self addSubview: dfb];
 
-  dfb = [[[NSButton alloc] initWithFrame: NSMakeRect(215, 0, 20, 20)]
-	  autorelease];
-  [dfb setTitle: @"-"];
-  [dfb setTarget: self];
-  [dfb setAction: @selector(decreaseFontSize:)];
-  [dfb setContinuous: YES];
-  [self addSubview: dfb];
+      ifb = [[[NSButton alloc] initWithFrame: NSMakeRect(237, 0, 20, 20)]
+	      autorelease];
+      [ifb setTitle: @"+"];
+      [ifb setTarget: self];
+      [ifb setAction: @selector(increaseFontSize:)];
+      [ifb setContinuous: YES];
+      [self addSubview: ifb];
 
-  ifb = [[[NSButton alloc] initWithFrame: NSMakeRect(237, 0, 20, 20)]
-	  autorelease];
-  [ifb setTitle: @"+"];
-  [ifb setTarget: self];
-  [ifb setAction: @selector(increaseFontSize:)];
-  [ifb setContinuous: YES];
-  [self addSubview: ifb];
-
-  people = nil;
-  bundlePath = nil;
-  vcfPath = nil;
-  ws = [NSWorkspace sharedWorkspace];  
-  inspector = insp;
+      people = nil;
+      bundlePath = nil;
+      vcfPath = nil;
+      ws = [NSWorkspace sharedWorkspace];  
+      inspector = insp;
+    }
   return self;
 }
 
