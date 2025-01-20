@@ -13,13 +13,13 @@
 #import <Addresses/ADRecord.h>
 
 @protocol ADInputConverting
-- (id)initForInput;
+- (instancetype)initForInput;
 - (BOOL) useString: (NSString*) string;
 - (ADRecord*) nextRecord;
 @end
 
 @protocol ADOutputConverting
-- (id)initForOutput;
+- (instancetype)initForOutput;
 - (BOOL) canStoreMultipleRecords;
 - (void) storeRecord: (ADRecord*) record;
 - (NSString*) string;

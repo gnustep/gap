@@ -21,7 +21,7 @@ ADConverterManager *_manager = nil;
   return _manager;
 }
 
-- (id)init
+- (instancetype)init
 {
   self = [super init];
   if (self)

@@ -21,12 +21,12 @@
 }
 
 /* ADInputConverting */
-- (id)initForInput;
+- (instancetype)initForInput;
 - (BOOL) useString: (NSString*) str;
 - (ADRecord*) nextRecord;
 
 /* ADOutputConverting */
-- (id)initForOutput;
+- (instancetype)initForOutput;
 - (BOOL) canStoreMultipleRecords;
 - (void) storeRecord: (ADRecord*) record;
 - (NSString*) string;

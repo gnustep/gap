@@ -232,7 +232,7 @@ static NSArray *knownItems;
   [super dealloc];
 }
 
-- (id) initForInput
+- (instancetype) initForInput
 {
   if ((self = [super init]))
     {
@@ -306,7 +306,7 @@ static NSArray *knownItems;
 }
 
 /* COutputConverting */
-- (id)initForOutput
+- (instancetype)initForOutput
 {
   if ((self = [super init]))
     {
