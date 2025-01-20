@@ -25,7 +25,8 @@
   [cell setFont: font];
   [cell setAlignment: alignment];
 
-  if(details) [cell setDetails: details];
+  if(details)
+    [cell setDetails: details];
 
   s = [cell cellSize];
   rect->size.width = MAX(rect->size.width, s.width);
@@ -151,7 +152,9 @@
   NSArray *layout, *row;
   NSString *field;
   NSEnumerator *rowEnumerator, *fieldEnumerator;
-  NSSize rowSize; NSRect rowRect; float labelX;
+  NSSize rowSize;
+  NSRect rowRect;
+  float labelX;
   BOOL firstRow;
   NSMutableArray *cells;
   
@@ -623,7 +626,6 @@
     {
       for(i=0; i<[val count]; i++)
 	{
-	  ADPersonPropertyCell *valueCell;
 	  NSString *label, *value, *identifier;
 	  NSSize rowSize;
 	  NSDictionary *details;
@@ -643,11 +645,11 @@
 	  rowSize.width = r.size.width + 5;
 	  rowSize.height = r.size.height;
 	  r.size = NSMakeSize(0, 0);
-	      
-	  valueCell = [self addValueCellForValue: value
-			    inRect: &r
-			    details: details];
-	      
+
+	  [self addValueCellForValue: value
+                              inRect: &r
+                             details: details];
+
 	  rowSize.width += r.size.width;
 	  rowSize.height = MAX(rowSize.height, r.size.height);
 	  r.size = NSMakeSize(0, 0);
