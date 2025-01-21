@@ -66,8 +66,8 @@ typedef enum {
   BOOL _fontSetExternally;
 
   BOOL _editable;
-  int _editingCellIndex;
-  id _textObject;
+  NSUInteger _editingCellIndex;
+  NSText  *_textObject;
   id _delegate;
 
   SEL _clickSel, _changeSel, _canPerformSel, _widthSel, _editInNextSel;
@@ -79,7 +79,8 @@ typedef enum {
   NSDictionary *_labelDict;
 
   BOOL _mouseDownOnSelf;
-  NSString *_propertyForDrag; id _mouseDownCell;
+  NSString *_propertyForDrag;
+  id _mouseDownCell;
 }
 
 + (NSFont*) font;
