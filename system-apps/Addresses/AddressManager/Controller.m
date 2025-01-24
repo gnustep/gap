@@ -114,10 +114,12 @@
   [clipView setAutoresizesSubviews: YES];
   personView = [[ADPersonView alloc] initWithFrame: NSZeroRect];
   [clipView setDocumentView: personView];
+  [personView release];
   [personView setFillsSuperview: YES];
   [personView setForceImage: YES];
 	      
   [scrollView setContentView: clipView];
+  [clipView release];
   [scrollView setHasVerticalScroller: YES];
   [scrollView setHasHorizontalScroller: YES];
   [scrollView setBorderType: NSBezelBorder];
