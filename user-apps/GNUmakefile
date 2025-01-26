@@ -24,7 +24,7 @@ InnerSpace \
 LaternaMagica \
 PictureFrame \
 RemoteDesk \
-Stepulator-osx \
+Stepulator \
 TalkSoup \
 Vespucci
 
