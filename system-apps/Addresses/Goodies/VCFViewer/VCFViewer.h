@@ -1,14 +1,9 @@
 // VCFViewer.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // VCF Content Viewer for GWorkspace
 // 
-// $Author: rmottola $
-// $Locker:  $
-// $Revision: 1.4 $
-// $Date: 2009/09/29 21:20:24 $
-
 
 #import <Foundation/Foundation.h>
 #import <Inspector/ContentViewersProtocol.h>
@@ -21,6 +16,7 @@
 
 @interface VCFViewer: NSView <ContentViewersProtocol>
 {
+  BOOL valid;
   id panel;
   NSArray *people;
   int currentPerson;
@@ -31,6 +27,7 @@
   NSButton *nb, *pb;
   NSTextField *lbl;
   NSButton *ifb, *dfb;
+  NSTextField *errLabel;
 
   NSString *bundlePath;
   NSString *vcfPath;
