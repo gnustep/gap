@@ -566,7 +566,6 @@
   NSRect r;
   NSSize allSize; 
   NSUInteger i;
-  id cell;
   id val;
   ADPropertyType type;
 
