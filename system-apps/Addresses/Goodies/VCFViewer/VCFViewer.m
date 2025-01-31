@@ -22,8 +22,7 @@
   self = [super initWithFrame:frameRect];
   if (self)
     {
-      sv = [[[NSScrollView alloc] initWithFrame: NSMakeRect(0, 30, 257, 215)]
-	     autorelease];
+      sv = [[NSScrollView alloc] initWithFrame: NSMakeRect(0, 30, 257, 215)];
       [sv setHasVerticalScroller: YES];
       [sv setHasHorizontalScroller: YES];
       [sv setBorderType: NSBezelBorder];
@@ -190,10 +189,13 @@
 
   if (!decoded)
     {
-      valid = NO;
-      [sv retain]; //FIXME if not, it gets released
-      [sv removeFromSuperview];
-      [self addSubview: errLabel];
+      if (valid)
+        {
+          valid = NO;
+          // [sv retain]; //FIXME if not, it gets released
+          [sv removeFromSuperview];
+          [self addSubview: errLabel];
+        }
     }
 
   [inspector contentsReadyAt: path];
