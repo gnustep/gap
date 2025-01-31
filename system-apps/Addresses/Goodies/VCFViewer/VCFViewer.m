@@ -135,7 +135,7 @@
     {
       conv = [[ADConverterManager sharedManager]
 	       inputConverterWithFile: path];
-      [people release];
+      DESTROY(people);
 
       if (conv == nil)
 	{
@@ -183,16 +183,17 @@
 	  [nb setEnabled: NO];
 	  [pb setEnabled: NO];
 	}
-
-      [sv setNeedsDisplay: YES];
     }
 
-  if (!decoded)
+  if (decoded)
+    {
+      [sv setNeedsDisplay: YES];
+    }
+  else
     {
       if (valid)
         {
           valid = NO;
-          // [sv retain]; //FIXME if not, it gets released
           [sv removeFromSuperview];
           [self addSubview: errLabel];
         }
@@ -285,6 +286,9 @@
 
 - (void) nextPerson: (id) sender
 {
+  if (!people)
+    return;
+
   currentPerson++;
   if(currentPerson > [people count]-1)
     currentPerson = 0;
@@ -299,6 +303,9 @@
 
 - (void) previousPerson: (id) sender
 {
+  if (!people)
+    return;
+
   currentPerson--;
   if(currentPerson < 0)
     currentPerson = [people count]-1;
