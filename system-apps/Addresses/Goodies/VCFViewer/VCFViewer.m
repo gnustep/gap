@@ -122,10 +122,6 @@
   ADRecord *r;
   NSMutableArray *ppl;
 
-  NSDictionary *attributes;
-  NSString *defApp, *fileType, *extension;
-  NSArray *types;
-
   BOOL decoded;
 
   ASSIGNCOPY(vcfPath, path);
@@ -241,10 +237,6 @@
 
 - (BOOL)canDisplayPath:(NSString *)path
 {
-  id conv;
-  ADRecord *r;
-  NSMutableArray *ppl;
-
   NSDictionary *attributes;
   NSString *defApp, *fileType, *extension;
   NSArray *types;
