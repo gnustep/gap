@@ -173,7 +173,7 @@
 @end
 
 @implementation ADSinglePropertyView
-- (id) initWithFrame: (NSRect) frame
+- (instancetype) initWithFrame: (NSRect) frame
 {
   NSRect r;
 

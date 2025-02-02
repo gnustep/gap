@@ -62,7 +62,7 @@ static NSString *__defaultCountryCode = nil;
 	   @"VCFImage.tiff could not be loaded!\n");
 }
 
-- (id) initWithFrame: (NSRect) frameRect
+- (instancetype) initWithFrame: (NSRect) frameRect
 {
   NSBundle *b;
   NSString *filename;

@@ -17,7 +17,7 @@
   ADPerson *_person;
   BOOL _mouseDownOnSelf, _mouseDragged;
 }
-- (id) initWithFrame: (NSRect) frame;
+- (instancetype) initWithFrame: (NSRect) frame;
 - (void) setTarget: (id) target;
 - (void) setAction: (SEL) sel;
 - (void) mouseDown: (NSEvent*) event;

@@ -241,7 +241,7 @@ static CGFloat _globalFontSize;
   _globalFontSize = size;
 }
 
-- (id)initWithFrame: (NSRect) frame
+- (instancetype)initWithFrame: (NSRect) frame
 {
   NSBundle *b;
   NSString *filename;

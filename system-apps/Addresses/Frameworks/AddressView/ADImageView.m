@@ -1,16 +1,15 @@
 // ADImageView.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address View Framwork for GNUstep
 // 
 
-/* my includes */
 #import "ADImageView.h"
 #import "ADPersonView.h"
 
 @implementation ADImageView
-- (id) initWithFrame: (NSRect) frame
+- (instancetype) initWithFrame: (NSRect) frame
 {
   if ((self = [super initWithFrame: frame]))
     {
