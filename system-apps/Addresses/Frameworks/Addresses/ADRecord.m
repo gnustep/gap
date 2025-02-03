@@ -13,7 +13,7 @@
 #import "ADGroup.h"
 
 @implementation ADRecord
-- (id)init
+- (instancetype) init
 {
   if ((self = [super init]))
     {

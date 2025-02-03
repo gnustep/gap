@@ -615,7 +615,7 @@
 	  r.origin.x += r.size.width + 5; r.size = NSMakeSize(0, 0);
 	}
 
-      cell = [self addValueCellForValue: val inRect: &r];
+      [self addValueCellForValue: val inRect: &r];
       allSize.width += r.size.width;
       allSize.height = MAX(allSize.height, r.size.height);
     }

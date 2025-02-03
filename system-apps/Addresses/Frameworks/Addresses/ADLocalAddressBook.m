@@ -340,7 +340,7 @@ static ADLocalAddressBook *_localAB = nil;
   return YES;
 }
 
-- (id)initWithLocation: (NSString*) location
+- (instancetype) initWithLocation: (NSString*) location
 {
   self = [super init];
   if (self)

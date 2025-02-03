@@ -24,7 +24,7 @@
 
 + (BOOL) makeLocalAddressBookAtLocation: (NSString*) location;
 
-- (id)initWithLocation: (NSString*) location;
+- (instancetype)initWithLocation: (NSString*) location;
 - (NSString*) location;
 @end
 

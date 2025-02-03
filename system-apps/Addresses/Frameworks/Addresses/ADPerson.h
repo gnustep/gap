@@ -43,7 +43,7 @@
 
 - (NSArray*) parentGroups;
 
-- (id) initWithVCardRepresentation: (NSData*) vCardData;
+- (instancetype) initWithVCardRepresentation: (NSData*) vCardData;
 - (NSData *) vCardRepresentation;
 @end
 

@@ -121,7 +121,7 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
   return _envelopeAB;
 }
 
-- initWithPrimaryAddressBook: (ADAddressBook*) book
+- (instancetype) initWithPrimaryAddressBook: (ADAddressBook*) book
 {
   self = [super init];
   if (self)

@@ -56,8 +56,8 @@
 
 // Addresses Extensions
 @interface ADRecord(AddressesExtensions)
-- (id) initWithRepresentation: (NSString*) str
-			 type: (NSString*) type;
+- (instancetype) initWithRepresentation: (NSString*) str
+				   type: (NSString*) type;
 - (NSString*) representationWithType: (NSString*) type;
 
 - (BOOL) readOnly;    // return whether this is a read-only record

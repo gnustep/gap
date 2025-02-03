@@ -210,7 +210,7 @@ static ADScreenNameFormat _scrNameFormat = ADScreenNameLastNameFirst;
   return [[self addressBook] groupsContainingRecord: self];
 }
 
-- (id) initWithVCardRepresentation: (NSData*) vCardData
+- (instancetype) initWithVCardRepresentation: (NSData*) vCardData
 {
   NSString *str = [[[NSString alloc] initWithData: vCardData
 				     encoding: NSUTF8StringEncoding]

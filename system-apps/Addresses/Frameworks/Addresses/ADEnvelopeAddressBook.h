@@ -1,6 +1,6 @@
 // ADEnvelopeAddressBook.h (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -17,7 +17,7 @@
   
 + (ADAddressBook*) sharedAddressBook;
 
-- (id) initWithPrimaryAddressBook: (ADAddressBook*) book;
+- (instancetype) initWithPrimaryAddressBook: (ADAddressBook*) book;
 
 - (BOOL) addAddressBook: (ADAddressBook*) book;
 - (BOOL) removeAddressBook: (ADAddressBook*) book;

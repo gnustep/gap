@@ -1,6 +1,6 @@
 // ADSearchElement.m (this is -*- ObjC -*-)
 // 
-// \author: Björn Giesler <giesler@ira.uka.de>
+// Author: Björn Giesler <giesler@ira.uka.de>
 // 
 // Address Book Framework for GNUstep
 // 
@@ -16,8 +16,8 @@
 
 + (ADSearchElement*) searchElementForConjunction: (ADSearchConjunction) conj
 					children: (NSArray*) children;
-- (id)initWithConjunction: (ADSearchConjunction) conj
-	     children: (NSArray*) children;
+- (instancetype)initWithConjunction: (ADSearchConjunction) conj
+			   children: (NSArray*) children;
 - (void) dealloc;
 - (BOOL) matchesRecord: (ADRecord*) record;
 @end
@@ -29,8 +29,8 @@
   return [[self alloc] initWithConjunction: conj children: children];
 }
 
-- (id) initWithConjunction: (ADSearchConjunction) conj
-	     children: (NSArray*) children
+- (instancetype) initWithConjunction: (ADSearchConjunction) conj
+			    children: (NSArray*) children
 {
   if ((self = [super init]))
     {
@@ -69,11 +69,11 @@
 @end
 
 @implementation ADRecordSearchElement
-- (id) initWithProperty: (NSString*) property
-		  label: (NSString*) label
-		    key: (NSString*) key
-		  value: (id) value
-	     comparison: (ADSearchComparison) comparison
+- (instancetype) initWithProperty: (NSString*) property
+			    label: (NSString*) label
+			      key: (NSString*) key
+			    value: (id) value
+		       comparison: (ADSearchComparison) comparison
 {
   if ((self = [super init]))
     {

@@ -12,7 +12,7 @@
 #import "ADMultiValue.h"
 
 @implementation ADPListConverter
-- (id)initForInput
+- (instancetype)initForInput
 {
   if ((self = [super init]))
     {

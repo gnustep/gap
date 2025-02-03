@@ -25,11 +25,11 @@
   ADSearchComparison _comp;
 }
 
-- (id)initWithProperty: (NSString*) property
-		 label: (NSString*) label
-		   key: (NSString*) key
-		 value: (id) value
-	    comparison: (ADSearchComparison) comparison;
+- (instancetype) initWithProperty: (NSString*) property
+			    label: (NSString*) label
+			      key: (NSString*) key
+			    value: (id) value
+		       comparison: (ADSearchComparison) comparison;
 - (void) dealloc;
 - (BOOL) matchesValue: (id) value;
 - (BOOL) matchesRecord: (ADRecord*) record;

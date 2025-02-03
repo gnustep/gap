@@ -40,7 +40,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 @end
 
 @implementation ADMultiValue
-- (id)initWithMultiValue: (ADMultiValue*) mv
+- (instancetype) initWithMultiValue: (ADMultiValue*) mv
 {
   if ((self = [super init]))
     {
@@ -51,7 +51,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
   return self;
 }
 
-- (id) initWithType: (ADPropertyType) type
+- (instancetype) initWithType: (ADPropertyType) type
 {
   if ((self = [super init]))
     {

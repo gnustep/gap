@@ -12,7 +12,7 @@
   BOOL _done;
   id _plist;
 }
-- (id)initForInput;
+- (instancetype)initForInput;
 - (BOOL) useString: (NSString*) str;
 - (ADRecord*) nextRecord;
 @end

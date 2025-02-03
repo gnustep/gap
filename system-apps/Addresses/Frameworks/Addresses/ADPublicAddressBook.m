@@ -9,8 +9,8 @@
 #import "ADRecord.h"
 
 @implementation ADPublicAddressBook
-- (id)initWithAddressBook: (ADAddressBook*) book
-		 readOnly: (BOOL) ro
+- (instancetype) initWithAddressBook: (ADAddressBook*) book
+			    readOnly: (BOOL) ro
 {
   if ((self = [super init]))
     {

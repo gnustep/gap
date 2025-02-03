@@ -34,8 +34,8 @@
 @end
 
 @interface ADMultiValue(AddressesExtensions)
-- (id) initWithMultiValue: (ADMultiValue*) mv;
-- (id) initWithType: (ADPropertyType) type;
+- (instancetype) initWithMultiValue: (ADMultiValue*) mv;
+- (instancetype) initWithType: (ADPropertyType) type;
 - (NSArray*) contentArray;
 @end
 
