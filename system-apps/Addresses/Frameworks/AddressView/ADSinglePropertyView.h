@@ -24,13 +24,18 @@ typedef enum {
 
 @interface ADSinglePropertyView: NSView
 {
-  NSString *_property, *_prefLabel; ADAutoselectMode _autosel;
+  NSString *_property, *_prefLabel;
+  ADAutoselectMode _autosel;
   
   NSMutableArray *_names, *_namesUnthinned, *_values, *_people;
   ADGroup *_selectedGroup;
   ADAddressBook *_book;
-  id _splitView, _groupsBrowser, _peopleTable, _ptScrollView;
-  id _nameColumn, _propertyColumn;
+  NSSplitView *_splitView;
+  NSBrowser *_groupsBrowser;
+  NSTableView *_peopleTable;
+  NSScrollView *_ptScrollView;
+  NSTableColumn *_nameColumn;
+  NSTableColumn *_propertyColumn;
   id _delegate;
 }
 
