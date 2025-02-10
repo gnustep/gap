@@ -270,14 +270,14 @@
     return;
   _editingCellIndex = i;
   r = [c rect];
-      
+
   t = [_window fieldEditor: YES forObject: c];
+
+  // We invoke this directly even if apple says we shoudn't.
+  // Reason is that GS sets this up only if the view is a NSTextView
+  // put ADPersonPropertyView is a generic NSView subclass
   _textObject = [c setUpFieldEditorAttributes: t];
-  [_textObject setBackgroundColor: [NSColor orangeColor]];
-  [_textObject setTextColor: [NSColor blackColor]];
-  [_textObject setDrawsBackground: YES];
-  [_textObject setString: [c stringValue]];
-  
+
   if([[c stringValue] hasPrefix: @"["])
     {
       [c setStringValue: @""];
@@ -323,8 +323,6 @@
       [_textObject setSelectedRange: NSMakeRange(0, [[c stringValue]
 						      length])];
     }
-
-  [c setStringValue: @""];
 
   [self setNeedsDisplay: YES];
 }

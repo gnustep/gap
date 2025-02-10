@@ -148,6 +148,19 @@
   cell->_details = [_details retain];
   return cell;
 }
+
+- (NSText *) setUpFieldEditorAttributes: (NSText *) textObj
+{
+  NSText *textObject;
+
+  textObject = [super setUpFieldEditorAttributes: textObj];
+  [textObject setBackgroundColor: [NSColor orangeColor]];
+  [textObject setTextColor: [NSColor blackColor]];
+  [textObject setDrawsBackground: YES];
+
+  return textObject;
+}
+
 @end
 
 @implementation ADPersonActionCell
