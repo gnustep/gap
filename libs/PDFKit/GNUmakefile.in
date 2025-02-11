@@ -58,9 +58,6 @@ PDFKit_HAS_RESOURCE_BUNDLE = yes
 PDFKit_RESOURCE_FILES = \
 	Fonts/*
 
-LIB_FREETYPE_LDFLAGS := $(shell pkg-config --libs freetype2)
-LIB_FREETYPE_CFLAGS  := $(shell pkg-config --cflags freetype2)
-
 ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 LIB_FREETYPE_LDFLAGS  += -Wl,-rpath=/usr/X11R6/lib
 endif
@@ -69,9 +66,6 @@ ifeq ($(findstring netbsd, $(GNUSTEP_TARGET_OS)), netbsd)
 LIB_FREETYPE_LDFLAGS  += -Wl,-R/usr/pkg/lib
 endif
 
-
-export LIB_FREETYPE_LDFLAGS
-export LIB_FREETYPE_CFLAGS
 
 ADDITIONAL_INCLUDE_DIRS = -Ixpdf/bridge
 ADDITIONAL_OBJCFLAGS = -Wall
