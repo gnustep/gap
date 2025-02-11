@@ -217,7 +217,7 @@ static ADPropertyType _propTypeFromDict(NSDictionary *dict)
 		   atIndex: (NSUInteger) index
 {
   NSString* identifier;
-  NSMutableDictionary *dict;
+  NSDictionary *dict;
 
   identifier = [self _nextValidID];
 
