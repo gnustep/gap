@@ -244,25 +244,42 @@ if test "$xpdf_cv_func_fseek64" = yes -a "$xpdf_cv_func_ftell64" = yes; then
   AC_DEFINE(HAVE_FSEEK64)
 fi
 
-dnl ##### Check for FreeType 2.x.
-dnl ##### (Note: FT_Get_Name_Index was added in FT 2.0.5, and is
-dnl ##### the reason that Xpdf requires 2.0.5+.)
-smr_CHECK_LIB(freetype2, freetype, [FreeType2 font rasterizer - version 2.0.5+],
-              FT_Get_Name_Index, ft2build.h, -lm)
-AC_SUBST(freetype2_LIBS)
-AC_SUBST(freetype2_CFLAGS)
-if test "x$smr_have_freetype2_library" = xyes; then
+PKG_PROG_PKG_CONFIG
+
+PKG_CHECK_MODULES([freetype2], [freetype2])
+
+if test x"$freetype2_LIBS" != x; then
+  AC_SUBST(freetype2_LIBS)
+  AC_SUBST(freetype2_CFLAGS)
   AC_DEFINE(HAVE_FREETYPE_H)
   AC_DEFINE(HAVE_SPLASH)
 fi
 
 dnl ##### Check for libpng.
-smr_CHECK_LIB(libpng, png, [PNG library], png_write_row, png.h, -lz)
-AC_SUBST(libpng_LIBS)
-AC_SUBST(libpng_CFLAGS)
+# use libpng-config if available
+AC_CHECK_PROG(HAVE_LIBPNG_CONFIG, [libpng-config], yes)
+if test "$HAVE_LIBPNG_CONFIG" = "yes"; then
+  PNG_CFLAGS="`libpng-config --I_opts`"
+  PNG_LDFLAGS="`libpng-config --ldflags`"
+  CPPFLAGS="${CPPFLAGS} $PNG_CFLAGS"
+  LDFLAGS="$PNG_LDFLAGS ${LDFLAGS}"
+  AC_CHECK_HEADERS(png.h)
+  AC_CHECK_LIB(png, png_write_row)
+  if test "$ac_cv_search_write_row" != no; then
+    libpng_CFLAGS="$PNG_CFLAGS"
+    libpng_LFLAGS="$PNG_LDFLAGS"
+    AC_SUBST(libpng_CFLAGS)
+    AC_SUBST(libpng_LIBS)
+    AC_DEFINE([HAVE_LIBPNG], [1])
+  fi
+else
+  AC_MSG_WARN([Can't find libpng-config, guessing required headers and libraries.])
+  AC_CHECK_HEADERS(png.h)
+  AC_CHECK_LIB(png, png_write_row)
+fi
 
 dnl ##### Check for libpaper (Debian).
-smr_CHECK_LIB(libpaper, paper, [Debian libpaper], paperinit, paper.h)
+PKG_CHECK_MODULES([libpaper], [libpaper], [], AC_MSG_WARN([No libpaper]))
 AC_SUBST(libpaper_LIBS)
 AC_SUBST(libpaper_CFLAGS)
 
@@ -288,16 +305,13 @@ AC_CONFIG_FILES([Makefile goo/Makefile fofi/Makefile splash/Makefile xpdf/Makefi
 AC_OUTPUT
 
 dnl ##### Warn user if X is missing.
-if test "x$smr_have_freetype2_library" != xyes; then
-  if test "x$smr_have_freetype2_library" != xyes; then
-    AC_MSG_WARN([Couldn't find FreeType]);
-  fi
-  AC_MSG_WARN([-- You will be able to compile pdftops, pdftotext,
+if test x"$freetype2_LIBS" != x; then
+  AC_MSG_WARN([Could not find FreeType: -- You will be able to compile pdftops, pdftotext,
         pdfinfo, pdffonts, pdfdetach, and pdfimages, but not xpdf
         or pdftoppm])
 fi
 
 dnl ##### Warn user if libpng is missing.
-if test "x$smr_have_libpng_library" != xyes; then
+if test "$ac_cv_lib_png_png_write_row" = no; then
   AC_MSG_WARN([Couldn't find libpng -- you will not be able to build pdftohtml or pdftopng])
 fi

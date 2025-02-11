@@ -645,12 +645,16 @@ EXTRA_CFLAGS
 EXTRA_LIBS
 XPDF_TARGET
 X
-libpaper_CFLAGS
 libpaper_LIBS
-libpng_CFLAGS
+libpaper_CFLAGS
 libpng_LIBS
-freetype2_CFLAGS
+libpng_CFLAGS
+HAVE_LIBPNG_CONFIG
 freetype2_LIBS
+freetype2_CFLAGS
+PKG_CONFIG_LIBDIR
+PKG_CONFIG_PATH
+PKG_CONFIG
 X_EXTRA_LIBS
 X_LIBS
 X_PRE_LIBS
@@ -727,12 +731,6 @@ enable_cmyk
 with_appdef_dir
 with_x
 enable_largefile
-with_freetype2_library
-with_freetype2_includes
-with_libpng_library
-with_libpng_includes
-with_libpaper_library
-with_libpaper_includes
 enable_year2038
 '
       ac_precious_vars='build_alias
@@ -747,7 +745,14 @@ CXX
 CXXFLAGS
 CCC
 XMKMF
-CPP'
+CPP
+PKG_CONFIG
+PKG_CONFIG_PATH
+PKG_CONFIG_LIBDIR
+freetype2_CFLAGS
+freetype2_LIBS
+libpaper_CFLAGS
+libpaper_LIBS'
 
 
 # Initialize some variables set by options.
@@ -1385,18 +1390,6 @@ Optional Packages:
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-appdef-dir       set app-defaults directory
   --with-x                use the X Window System
-  --with-freetype2-library=PATH
-                          use freetype2 library (FreeType2 font rasterizer - version 2.0.5+)
-  --with-freetype2-includes=DIR
-                          set directory for freetype2 headers
-  --with-libpng-library=PATH
-                          use libpng library (PNG library)
-  --with-libpng-includes=DIR
-                          set directory for libpng headers
-  --with-libpaper-library=PATH
-                          use libpaper library (Debian libpaper)
-  --with-libpaper-includes=DIR
-                          set directory for libpaper headers
 
 Some influential environment variables:
   CC          C compiler command
@@ -1410,6 +1403,19 @@ Some influential environment variables:
   CXXFLAGS    C++ compiler flags
   XMKMF       Path to xmkmf, Makefile generator for X Window System
   CPP         C preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  freetype2_CFLAGS
+              C compiler flags for freetype2, overriding pkg-config
+  freetype2_LIBS
+              linker flags for freetype2, overriding pkg-config
+  libpaper_CFLAGS
+              C compiler flags for libpaper, overriding pkg-config
+  libpaper_LIBS
+              linker flags for libpaper, overriding pkg-config
 
 Use these variables to override the choices made by 'configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -6525,7 +6531,293 @@ if test "$xpdf_cv_func_fseek64" = yes -a "$xpdf_cv_func_ftell64" = yes; then
 
 fi
 
-ac_header= ac_cache=
+
+
+
+
+
+
+
+if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
+	if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}pkg-config; ac_word=$2
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+printf %s "checking for $ac_word... " >&6; }
+if test ${ac_cv_path_PKG_CONFIG+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) case $PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir$ac_word$ac_exec_ext"; then
+    ac_cv_path_PKG_CONFIG="$as_dir$ac_word$ac_exec_ext"
+    printf "%s\n" "$as_me:${as_lineno-$LINENO}: found $as_dir$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac ;;
+esac
+fi
+PKG_CONFIG=$ac_cv_path_PKG_CONFIG
+if test -n "$PKG_CONFIG"; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $PKG_CONFIG" >&5
+printf "%s\n" "$PKG_CONFIG" >&6; }
+else
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PKG_CONFIG"; then
+  ac_pt_PKG_CONFIG=$PKG_CONFIG
+  # Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+printf %s "checking for $ac_word... " >&6; }
+if test ${ac_cv_path_ac_pt_PKG_CONFIG+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) case $ac_pt_PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PKG_CONFIG="$ac_pt_PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PKG_CONFIG="$as_dir$ac_word$ac_exec_ext"
+    printf "%s\n" "$as_me:${as_lineno-$LINENO}: found $as_dir$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac ;;
+esac
+fi
+ac_pt_PKG_CONFIG=$ac_cv_path_ac_pt_PKG_CONFIG
+if test -n "$ac_pt_PKG_CONFIG"; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PKG_CONFIG" >&5
+printf "%s\n" "$ac_pt_PKG_CONFIG" >&6; }
+else
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+fi
+
+  if test "x$ac_pt_PKG_CONFIG" = x; then
+    PKG_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+printf "%s\n" "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PKG_CONFIG=$ac_pt_PKG_CONFIG
+  fi
+else
+  PKG_CONFIG="$ac_cv_path_PKG_CONFIG"
+fi
+
+fi
+if test -n "$PKG_CONFIG"; then
+	_pkg_min_version=0.9.0
+	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking pkg-config is at least version $_pkg_min_version" >&5
+printf %s "checking pkg-config is at least version $_pkg_min_version... " >&6; }
+	if $PKG_CONFIG --atleast-pkgconfig-version $_pkg_min_version; then
+		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
+	else
+		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+		PKG_CONFIG=""
+	fi
+fi
+if test -z "$PKG_CONFIG"; then
+	as_fn_error $? "pkg-config not found" "$LINENO" 5
+fi
+
+
+pkg_failed=no
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for freetype2" >&5
+printf %s "checking for freetype2... " >&6; }
+
+if test -n "$freetype2_CFLAGS"; then
+    pkg_cv_freetype2_CFLAGS="$freetype2_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"freetype2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "freetype2") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_freetype2_CFLAGS=`$PKG_CONFIG --cflags "freetype2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$freetype2_LIBS"; then
+    pkg_cv_freetype2_LIBS="$freetype2_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"freetype2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "freetype2") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_freetype2_LIBS=`$PKG_CONFIG --libs "freetype2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+                freetype2_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "freetype2" 2>&1`
+        else
+                freetype2_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "freetype2" 2>&1`
+        fi
+        # Put the nasty error message in config.log where it belongs
+        echo "$freetype2_PKG_ERRORS" >&5
+
+        as_fn_error $? "Package requirements (freetype2) were not met:
+
+$freetype2_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables freetype2_CFLAGS
+and freetype2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+        { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in '$ac_pwd':" >&5
+printf "%s\n" "$as_me: error: in '$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables freetype2_CFLAGS
+and freetype2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See 'config.log' for more details" "$LINENO" 5; }
+else
+        freetype2_CFLAGS=$pkg_cv_freetype2_CFLAGS
+        freetype2_LIBS=$pkg_cv_freetype2_LIBS
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
+
+fi
+
+if test x"$freetype2_LIBS" != x; then
+
+
+  printf "%s\n" "#define HAVE_FREETYPE_H 1" >>confdefs.h
+
+  printf "%s\n" "#define HAVE_SPLASH 1" >>confdefs.h
+
+fi
+
+# use libpng-config if available
+# Extract the first word of "libpng-config", so it can be a program name with args.
+set dummy libpng-config; ac_word=$2
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+printf %s "checking for $ac_word... " >&6; }
+if test ${ac_cv_prog_HAVE_LIBPNG_CONFIG+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -n "$HAVE_LIBPNG_CONFIG"; then
+  ac_cv_prog_HAVE_LIBPNG_CONFIG="$HAVE_LIBPNG_CONFIG" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir$ac_word$ac_exec_ext"; then
+    ac_cv_prog_HAVE_LIBPNG_CONFIG="yes"
+    printf "%s\n" "$as_me:${as_lineno-$LINENO}: found $as_dir$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi ;;
+esac
+fi
+HAVE_LIBPNG_CONFIG=$ac_cv_prog_HAVE_LIBPNG_CONFIG
+if test -n "$HAVE_LIBPNG_CONFIG"; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $HAVE_LIBPNG_CONFIG" >&5
+printf "%s\n" "$HAVE_LIBPNG_CONFIG" >&6; }
+else
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+fi
+
+
+if test "$HAVE_LIBPNG_CONFIG" = "yes"; then
+  PNG_CFLAGS="`libpng-config --I_opts`"
+  PNG_LDFLAGS="`libpng-config --ldflags`"
+  CPPFLAGS="${CPPFLAGS} $PNG_CFLAGS"
+  LDFLAGS="$PNG_LDFLAGS ${LDFLAGS}"
+  ac_header= ac_cache=
 for ac_item in $ac_header_c_list
 do
   if test $ac_cache; then
@@ -6554,383 +6846,21 @@ then :
 printf "%s\n" "#define STDC_HEADERS 1" >>confdefs.h
 
 fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Check whether --with-freetype2-library was given.
-if test ${with_freetype2_library+y}
-then :
-  withval=$with_freetype2_library; smr_cv_with_freetype2_library=$withval
-fi
-
-
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to use freetype2 library" >&5
-printf %s "checking whether to use freetype2 library... " >&6; }
-if test ${smr_cv_with_freetype2_library+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) smr_cv_with_freetype2_library=maybe ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $smr_cv_with_freetype2_library" >&5
-printf "%s\n" "$smr_cv_with_freetype2_library" >&6; }
-
-
-  case x"$smr_cv_with_freetype2_library" in
-      xyes | xmaybe)
-          freetype2_LIBS="-lfreetype"
-          with_freetype2=$smr_cv_with_freetype2_library
-          ;;
-      xno)
-          freetype2_LIBS=
-          with_freetype2=no
-          ;;
-      *)
-          if test -f "$smr_cv_with_freetype2_library"; then
-            freetype2_LIBS=$smr_cv_with_freetype2_library
-          elif test -d "$smr_cv_with_freetype2_library"; then
-            freetype2_LIBS="-L$smr_cv_with_freetype2_library -lfreetype"
-          else
-            as_fn_error $? "argument must be boolean, file, or directory" "$LINENO" 5
-          fi
-          with_freetype2=yes
-          ;;
-  esac
-
-
-
-
-
-
-
-  if test ! x"$with_freetype2" = xno; then
-
-    # If we got this far, then the user didn't explicitly ask not to use
-    # the library.
-
-
-
-
-
-
-
-
-# Check whether --with-freetype2-includes was given.
-if test ${with_freetype2_includes+y}
-then :
-  withval=$with_freetype2_includes; smr_cv_with_freetype2_includes=$withval
-fi
-
-
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking where to find the freetype2 header files" >&5
-printf %s "checking where to find the freetype2 header files... " >&6; }
-if test ${smr_cv_with_freetype2_includes+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) smr_cv_with_freetype2_includes= ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $smr_cv_with_freetype2_includes" >&5
-printf "%s\n" "$smr_cv_with_freetype2_includes" >&6; }
-
-  if test ! x"$smr_cv_with_freetype2_includes" = x; then
-    if test -d "$smr_cv_with_freetype2_includes"; then
-      freetype2_CFLAGS="-I$smr_cv_with_freetype2_includes"
-    else
-      as_fn_error $? "argument must be a directory" "$LINENO" 5
-    fi
-  else
-    freetype2_CFLAGS=
-  fi
-
-        smr_test_CPPFLAGS="${CPPFLAGS+set}"
-  smr_save_CPPFLAGS="$CPPFLAGS"
-  CPPFLAGS="$CPPFLAGS $freetype2_CFLAGS "
-
-             for ac_header in ft2build.h
-do :
-  ac_fn_c_check_header_compile "$LINENO" "ft2build.h" "ac_cv_header_ft2build_h" "$ac_includes_default"
-if test "x$ac_cv_header_ft2build_h" = xyes
-then :
-  printf "%s\n" "#define HAVE_FT2BUILD_H 1" >>confdefs.h
- smr_have_freetype2_header=yes
-else case e in #(
-  e) smr_have_freetype2_header=no ;;
-esac
-fi
-
-done
-
-  if test x"$smr_test_CPPFLAGS" = xset; then
-    CPPFLAGS=$smr_save_CPPFLAGS
-  else
-    unset CPPFLAGS
-  fi
-
-
-
-
-
-
-
-    # We need only look for the library if the header has been found
-    # (or no header is needed).
-    if test $smr_have_freetype2_header != no; then
-
-       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for FT_Get_Name_Index in -lfreetype" >&5
-printf %s "checking for FT_Get_Name_Index in -lfreetype... " >&6; }
-if test ${ac_cv_lib_freetype_FT_Get_Name_Index+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) ac_check_lib_save_LIBS=$LIBS
-LIBS="-lfreetype $freetype2_CFLAGS  $freetype2_LIBS -lm $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.
-   The 'extern "C"' is for builds by C++ compilers;
-   although this is not generally supported in C code supporting it here
-   has little cost and some practical benefit (sr 110532).  */
-#ifdef __cplusplus
-extern "C"
-#endif
-char FT_Get_Name_Index (void);
-int
-main (void)
-{
-return FT_Get_Name_Index ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"
-then :
-  ac_cv_lib_freetype_FT_Get_Name_Index=yes
-else case e in #(
-  e) ac_cv_lib_freetype_FT_Get_Name_Index=no ;;
-esac
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.beam \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_freetype_FT_Get_Name_Index" >&5
-printf "%s\n" "$ac_cv_lib_freetype_FT_Get_Name_Index" >&6; }
-if test "x$ac_cv_lib_freetype_FT_Get_Name_Index" = xyes
-then :
-  smr_have_freetype2_library=yes
-else case e in #(
-  e) smr_have_freetype2_library=no ;;
-esac
-fi
-
-    fi
-
-    if test x"$smr_have_freetype2_library" = xyes; then
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: using freetype2 library" >&5
-printf "%s\n" "using freetype2 library" >&6; }
-    else
-      freetype2_LIBS=
-      freetype2_CFLAGS=
-
-      if test x"$with_freetype2" = xmaybe; then
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: not using freetype2 library" >&5
-printf "%s\n" "not using freetype2 library" >&6; }
-      else
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: requested freetype2 library not found!" >&5
-printf "%s\n" "$as_me: WARNING: requested freetype2 library not found!" >&2;}
-      fi
-    fi
-  fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-if test "x$smr_have_freetype2_library" = xyes; then
-  printf "%s\n" "#define HAVE_FREETYPE_H 1" >>confdefs.h
-
-  printf "%s\n" "#define HAVE_SPLASH 1" >>confdefs.h
-
-fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Check whether --with-libpng-library was given.
-if test ${with_libpng_library+y}
-then :
-  withval=$with_libpng_library; smr_cv_with_libpng_library=$withval
-fi
-
-
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to use libpng library" >&5
-printf %s "checking whether to use libpng library... " >&6; }
-if test ${smr_cv_with_libpng_library+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) smr_cv_with_libpng_library=maybe ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $smr_cv_with_libpng_library" >&5
-printf "%s\n" "$smr_cv_with_libpng_library" >&6; }
-
-
-  case x"$smr_cv_with_libpng_library" in
-      xyes | xmaybe)
-          libpng_LIBS="-lpng"
-          with_libpng=$smr_cv_with_libpng_library
-          ;;
-      xno)
-          libpng_LIBS=
-          with_libpng=no
-          ;;
-      *)
-          if test -f "$smr_cv_with_libpng_library"; then
-            libpng_LIBS=$smr_cv_with_libpng_library
-          elif test -d "$smr_cv_with_libpng_library"; then
-            libpng_LIBS="-L$smr_cv_with_libpng_library -lpng"
-          else
-            as_fn_error $? "argument must be boolean, file, or directory" "$LINENO" 5
-          fi
-          with_libpng=yes
-          ;;
-  esac
-
-
-
-
-
-
-
-  if test ! x"$with_libpng" = xno; then
-
-    # If we got this far, then the user didn't explicitly ask not to use
-    # the library.
-
-
-
-
-
-
-
-
-# Check whether --with-libpng-includes was given.
-if test ${with_libpng_includes+y}
-then :
-  withval=$with_libpng_includes; smr_cv_with_libpng_includes=$withval
-fi
-
-
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking where to find the libpng header files" >&5
-printf %s "checking where to find the libpng header files... " >&6; }
-if test ${smr_cv_with_libpng_includes+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) smr_cv_with_libpng_includes= ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $smr_cv_with_libpng_includes" >&5
-printf "%s\n" "$smr_cv_with_libpng_includes" >&6; }
-
-  if test ! x"$smr_cv_with_libpng_includes" = x; then
-    if test -d "$smr_cv_with_libpng_includes"; then
-      libpng_CFLAGS="-I$smr_cv_with_libpng_includes"
-    else
-      as_fn_error $? "argument must be a directory" "$LINENO" 5
-    fi
-  else
-    libpng_CFLAGS=
-  fi
-
-        smr_test_CPPFLAGS="${CPPFLAGS+set}"
-  smr_save_CPPFLAGS="$CPPFLAGS"
-  CPPFLAGS="$CPPFLAGS $libpng_CFLAGS "
-
-             for ac_header in png.h
-do :
-  ac_fn_c_check_header_compile "$LINENO" "png.h" "ac_cv_header_png_h" "$ac_includes_default"
+ac_fn_c_check_header_compile "$LINENO" "png.h" "ac_cv_header_png_h" "$ac_includes_default"
 if test "x$ac_cv_header_png_h" = xyes
 then :
   printf "%s\n" "#define HAVE_PNG_H 1" >>confdefs.h
- smr_have_libpng_header=yes
-else case e in #(
-  e) smr_have_libpng_header=no ;;
-esac
+
 fi
 
-done
-
-  if test x"$smr_test_CPPFLAGS" = xset; then
-    CPPFLAGS=$smr_save_CPPFLAGS
-  else
-    unset CPPFLAGS
-  fi
-
-
-
-
-
-
-
-    # We need only look for the library if the header has been found
-    # (or no header is needed).
-    if test $smr_have_libpng_header != no; then
-
-       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for png_write_row in -lpng" >&5
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for png_write_row in -lpng" >&5
 printf %s "checking for png_write_row in -lpng... " >&6; }
 if test ${ac_cv_lib_png_png_write_row+y}
 then :
   printf %s "(cached) " >&6
 else case e in #(
   e) ac_check_lib_save_LIBS=$LIBS
-LIBS="-lpng $libpng_CFLAGS  $libpng_LIBS -lz $LIBS"
+LIBS="-lpng  $LIBS"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -6968,192 +6898,38 @@ fi
 printf "%s\n" "$ac_cv_lib_png_png_write_row" >&6; }
 if test "x$ac_cv_lib_png_png_write_row" = xyes
 then :
-  smr_have_libpng_library=yes
-else case e in #(
-  e) smr_have_libpng_library=no ;;
-esac
+  printf "%s\n" "#define HAVE_LIBPNG 1" >>confdefs.h
+
+  LIBS="-lpng $LIBS"
+
 fi
 
-    fi
+  if test "$ac_cv_search_write_row" != no; then
+    libpng_CFLAGS="$PNG_CFLAGS"
+    libpng_LFLAGS="$PNG_LDFLAGS"
 
-    if test x"$smr_have_libpng_library" = xyes; then
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: using libpng library" >&5
-printf "%s\n" "using libpng library" >&6; }
-    else
-      libpng_LIBS=
-      libpng_CFLAGS=
 
-      if test x"$with_libpng" = xmaybe; then
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: not using libpng library" >&5
-printf "%s\n" "not using libpng library" >&6; }
-      else
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: requested libpng library not found!" >&5
-printf "%s\n" "$as_me: WARNING: requested libpng library not found!" >&2;}
-      fi
-    fi
+    printf "%s\n" "#define HAVE_LIBPNG 1" >>confdefs.h
+
   fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Check whether --with-libpaper-library was given.
-if test ${with_libpaper_library+y}
+else
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Can't find libpng-config, guessing required headers and libraries." >&5
+printf "%s\n" "$as_me: WARNING: Can't find libpng-config, guessing required headers and libraries." >&2;}
+  ac_fn_c_check_header_compile "$LINENO" "png.h" "ac_cv_header_png_h" "$ac_includes_default"
+if test "x$ac_cv_header_png_h" = xyes
 then :
-  withval=$with_libpaper_library; smr_cv_with_libpaper_library=$withval
+  printf "%s\n" "#define HAVE_PNG_H 1" >>confdefs.h
+
 fi
 
-
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to use libpaper library" >&5
-printf %s "checking whether to use libpaper library... " >&6; }
-if test ${smr_cv_with_libpaper_library+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) smr_cv_with_libpaper_library=maybe ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $smr_cv_with_libpaper_library" >&5
-printf "%s\n" "$smr_cv_with_libpaper_library" >&6; }
-
-
-  case x"$smr_cv_with_libpaper_library" in
-      xyes | xmaybe)
-          libpaper_LIBS="-lpaper"
-          with_libpaper=$smr_cv_with_libpaper_library
-          ;;
-      xno)
-          libpaper_LIBS=
-          with_libpaper=no
-          ;;
-      *)
-          if test -f "$smr_cv_with_libpaper_library"; then
-            libpaper_LIBS=$smr_cv_with_libpaper_library
-          elif test -d "$smr_cv_with_libpaper_library"; then
-            libpaper_LIBS="-L$smr_cv_with_libpaper_library -lpaper"
-          else
-            as_fn_error $? "argument must be boolean, file, or directory" "$LINENO" 5
-          fi
-          with_libpaper=yes
-          ;;
-  esac
-
-
-
-
-
-
-
-  if test ! x"$with_libpaper" = xno; then
-
-    # If we got this far, then the user didn't explicitly ask not to use
-    # the library.
-
-
-
-
-
-
-
-
-# Check whether --with-libpaper-includes was given.
-if test ${with_libpaper_includes+y}
-then :
-  withval=$with_libpaper_includes; smr_cv_with_libpaper_includes=$withval
-fi
-
-
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking where to find the libpaper header files" >&5
-printf %s "checking where to find the libpaper header files... " >&6; }
-if test ${smr_cv_with_libpaper_includes+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) smr_cv_with_libpaper_includes= ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $smr_cv_with_libpaper_includes" >&5
-printf "%s\n" "$smr_cv_with_libpaper_includes" >&6; }
-
-  if test ! x"$smr_cv_with_libpaper_includes" = x; then
-    if test -d "$smr_cv_with_libpaper_includes"; then
-      libpaper_CFLAGS="-I$smr_cv_with_libpaper_includes"
-    else
-      as_fn_error $? "argument must be a directory" "$LINENO" 5
-    fi
-  else
-    libpaper_CFLAGS=
-  fi
-
-        smr_test_CPPFLAGS="${CPPFLAGS+set}"
-  smr_save_CPPFLAGS="$CPPFLAGS"
-  CPPFLAGS="$CPPFLAGS $libpaper_CFLAGS "
-
-             for ac_header in paper.h
-do :
-  ac_fn_c_check_header_compile "$LINENO" "paper.h" "ac_cv_header_paper_h" "$ac_includes_default"
-if test "x$ac_cv_header_paper_h" = xyes
-then :
-  printf "%s\n" "#define HAVE_PAPER_H 1" >>confdefs.h
- smr_have_libpaper_header=yes
-else case e in #(
-  e) smr_have_libpaper_header=no ;;
-esac
-fi
-
-done
-
-  if test x"$smr_test_CPPFLAGS" = xset; then
-    CPPFLAGS=$smr_save_CPPFLAGS
-  else
-    unset CPPFLAGS
-  fi
-
-
-
-
-
-
-
-    # We need only look for the library if the header has been found
-    # (or no header is needed).
-    if test $smr_have_libpaper_header != no; then
-
-       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for paperinit in -lpaper" >&5
-printf %s "checking for paperinit in -lpaper... " >&6; }
-if test ${ac_cv_lib_paper_paperinit+y}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for png_write_row in -lpng" >&5
+printf %s "checking for png_write_row in -lpng... " >&6; }
+if test ${ac_cv_lib_png_png_write_row+y}
 then :
   printf %s "(cached) " >&6
 else case e in #(
   e) ac_check_lib_save_LIBS=$LIBS
-LIBS="-lpaper $libpaper_CFLAGS  $libpaper_LIBS  $LIBS"
+LIBS="-lpng  $LIBS"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -7166,20 +6942,20 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char paperinit (void);
+char png_write_row (void);
 int
 main (void)
 {
-return paperinit ();
+return png_write_row ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"
 then :
-  ac_cv_lib_paper_paperinit=yes
+  ac_cv_lib_png_png_write_row=yes
 else case e in #(
-  e) ac_cv_lib_paper_paperinit=no ;;
+  e) ac_cv_lib_png_png_write_row=no ;;
 esac
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam \
@@ -7187,45 +6963,91 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam \
 LIBS=$ac_check_lib_save_LIBS ;;
 esac
 fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_paper_paperinit" >&5
-printf "%s\n" "$ac_cv_lib_paper_paperinit" >&6; }
-if test "x$ac_cv_lib_paper_paperinit" = xyes
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_png_png_write_row" >&5
+printf "%s\n" "$ac_cv_lib_png_png_write_row" >&6; }
+if test "x$ac_cv_lib_png_png_write_row" = xyes
 then :
-  smr_have_libpaper_library=yes
-else case e in #(
-  e) smr_have_libpaper_library=no ;;
-esac
+  printf "%s\n" "#define HAVE_LIBPNG 1" >>confdefs.h
+
+  LIBS="-lpng $LIBS"
+
 fi
 
-    fi
-
-    if test x"$smr_have_libpaper_library" = xyes; then
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: using libpaper library" >&5
-printf "%s\n" "using libpaper library" >&6; }
-    else
-      libpaper_LIBS=
-      libpaper_CFLAGS=
-
-      if test x"$with_libpaper" = xmaybe; then
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: not using libpaper library" >&5
-printf "%s\n" "not using libpaper library" >&6; }
-      else
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: requested libpaper library not found!" >&5
-printf "%s\n" "$as_me: WARNING: requested libpaper library not found!" >&2;}
-      fi
-    fi
-  fi
+fi
 
 
+pkg_failed=no
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for libpaper" >&5
+printf %s "checking for libpaper... " >&6; }
+
+if test -n "$libpaper_CFLAGS"; then
+    pkg_cv_libpaper_CFLAGS="$libpaper_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libpaper\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libpaper") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_libpaper_CFLAGS=`$PKG_CONFIG --cflags "libpaper" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$libpaper_LIBS"; then
+    pkg_cv_libpaper_LIBS="$libpaper_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libpaper\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libpaper") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_libpaper_LIBS=`$PKG_CONFIG --libs "libpaper" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
+if test $pkg_failed = yes; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
 
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+                libpaper_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libpaper" 2>&1`
+        else
+                libpaper_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libpaper" 2>&1`
+        fi
+        # Put the nasty error message in config.log where it belongs
+        echo "$libpaper_PKG_ERRORS" >&5
 
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: No libpaper" >&5
+printf "%s\n" "$as_me: WARNING: No libpaper" >&2;}
+elif test $pkg_failed = untried; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: No libpaper" >&5
+printf "%s\n" "$as_me: WARNING: No libpaper" >&2;}
+else
+        libpaper_CFLAGS=$pkg_cv_libpaper_CFLAGS
+        libpaper_LIBS=$pkg_cv_libpaper_LIBS
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
 
-
-
-
+fi
 
 
 
@@ -8533,20 +8355,16 @@ printf "%s\n" "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2
 fi
 
 
-if test "x$smr_have_freetype2_library" != xyes; then
-  if test "x$smr_have_freetype2_library" != xyes; then
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Couldn't find FreeType" >&5
-printf "%s\n" "$as_me: WARNING: Couldn't find FreeType" >&2;};
-  fi
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: -- You will be able to compile pdftops, pdftotext,
+if test x"$freetype2_LIBS" != x; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not find FreeType: -- You will be able to compile pdftops, pdftotext,
         pdfinfo, pdffonts, pdfdetach, and pdfimages, but not xpdf
         or pdftoppm" >&5
-printf "%s\n" "$as_me: WARNING: -- You will be able to compile pdftops, pdftotext,
+printf "%s\n" "$as_me: WARNING: Could not find FreeType: -- You will be able to compile pdftops, pdftotext,
         pdfinfo, pdffonts, pdfdetach, and pdfimages, but not xpdf
         or pdftoppm" >&2;}
 fi
 
-if test "x$smr_have_libpng_library" != xyes; then
+if test "$ac_cv_lib_png_png_write_row" = no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Couldn't find libpng -- you will not be able to build pdftohtml or pdftopng" >&5
 printf "%s\n" "$as_me: WARNING: Couldn't find libpng -- you will not be able to build pdftohtml or pdftopng" >&2;}
 fi

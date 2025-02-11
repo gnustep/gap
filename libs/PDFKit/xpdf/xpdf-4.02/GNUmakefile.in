@@ -57,7 +57,7 @@ all: compile
 configure: Makefile
 
 Makefile:
-	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x --without-libpaper-library 
+	CC=$(CC) CXX=$(CXX) CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' CXXFLAGS='$(CXXFLAGS)' ./configure --without-x 
 
 compile: configure
 	$(MAKE) -f Makefile pdfkit
