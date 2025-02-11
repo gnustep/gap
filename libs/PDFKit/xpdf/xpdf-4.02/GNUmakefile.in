@@ -22,6 +22,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 CC="@CC@"
 CXX="@CXX@"
+AR="@AR@"
+
 
 LDFLAGS := $(LIB_FREETYPE_LDFLAGS)
 export LDFLAGS
