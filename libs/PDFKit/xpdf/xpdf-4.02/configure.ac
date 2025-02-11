@@ -25,31 +25,31 @@ AC_ARG_ENABLE([opi],
   AS_HELP_STRING([--enable-opi],
                  [include support for OPI comments]))
 AS_IF([test "x$enable_opi" = "xyes"],
-      [AC_DEFINE(OPI_SUPPORT)])
+      [AC_DEFINE([OPI_SUPPORT], [], [OPI Support])])
 
 AC_ARG_ENABLE([multithreaded],
   AS_HELP_STRING([--enable-multithreaded],
                  [include support for multithreading]))
 AS_IF([test "x$enable_multithreaded" = "xyes"],
-      [AC_DEFINE(MULTITHREADED)])
+      [AC_DEFINE([MULTITHREADED], [], [Multithreaded])])
 
 AC_ARG_ENABLE([exceptions],
   AS_HELP_STRING([--enable-exceptions],
                  [use C++ exceptions]))
 AS_IF([test "x$enable_exceptions" = "xyes"],
-      [AC_DEFINE(USE_EXCEPTIONS)])
+      [AC_DEFINE([USE_EXCEPTIONS], [], [Exceptions])])
 
 AC_ARG_ENABLE([fixedpoint],
   AS_HELP_STRING([--enable-fixedpoint],
                  [use fixed point (instead of floating point) arithmetic]))
 AS_IF([test "x$enable_fixedpoint" = "xyes"],
-      [AC_DEFINE(USE_FIXEDPOINT)])
+      [AC_DEFINE([USE_FIXEDPOINT], [], [Fixed point])])
 
 AC_ARG_ENABLE([cmyk],
   AS_HELP_STRING([--enable-cmyk],
                  [include support for CMYK rasterization]))
 AS_IF([test "x$enable_cmyk" = "xyes"],
-      [AC_DEFINE(SPLASH_CMYK)])
+      [AC_DEFINE([SPLASH_CMYK], [], [Splash CMYK])])
 
 AC_ARG_WITH([appdef-dir],
   AS_HELP_STRING([--with-appdef-dir],
@@ -82,27 +82,6 @@ EXE=""
 LIBPREFIX="lib"
 AR="ar rc"
 UP_DIR=""
-
-dnl ##### Check for OS/2.
-AC_CACHE_CHECK([for OS/2 (with EMX)],
-xpdf_cv_sys_os2,
-[AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[__EMX__]])],[xpdf_cv_sys_os2=yes],[xpdf_cv_sys_os2=no])])
-if test "$xpdf_cv_sys_os2" = yes; then
-  EXE=".exe"
-  LIBPREFIX=""
-  AR="ar -rc"
-fi
-
-dnl ##### Check for DOS (with DJGPP).
-AC_CACHE_CHECK([for DOS (with DJGPP)],
-xpdf_cv_sys_dos,
-[AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[__DJGPP__]])],[xpdf_cv_sys_dos=yes],[xpdf_cv_sys_dos=no])])
-if test "$xpdf_cv_sys_dos" = yes; then
-  EXE=".exe"
-  LIBPREFIX="lib"
-  AR="ar -rc"
-  UP_DIR="../"
-fi
 
 dnl ##### Do substitutions.
 AC_SUBST(EXE)
@@ -187,7 +166,7 @@ else
 #include <sys/select.h>
 #endif]], [[fd_set fds; FD_ZERO(&fds);]])],[xpdf_ok=yes],[xpdf_ok=no])
     if test $xpdf_ok = yes; then
-      AC_DEFINE(HAVE_BSTRING_H)
+      AC_DEFINE([HAVE_BSTRING_H], [], [have bstring.h])
       AC_MSG_RESULT([need bstring.h])
     else
       AC_MSG_RESULT([problem])
@@ -263,55 +242,6 @@ AC_CHECK_FUNCS(fseek64, xpdf_cv_func_fseek64=yes, xpdf_cv_func_fseek64=no)
 AC_CHECK_FUNCS(ftell64, xpdf_cv_func_ftell64=yes, xpdf_cv_func_ftell64=no)
 if test "$xpdf_cv_func_fseek64" = yes -a "$xpdf_cv_func_ftell64" = yes; then
   AC_DEFINE(HAVE_FSEEK64)
-fi
-
-dnl ##### Check for libXpm.
-if test -z "$no_x"; then
-  smr_CHECK_LIB(Xpm, Xpm, [pixmap library - used only for icon], 
-                XpmCreatePixmapFromData, X11/xpm.h,
-                $X_LIBS $X_PRE_LIBS $X_EXTRA_LIBS -lX11, $X_CFLAGS)
-  AC_SUBST(Xpm_LIBS)
-  AC_SUBST(Xpm_CFLAGS)
-fi
-
-dnl ##### Check for Motif (libXm).
-if test -z "$no_x"; then
-  dnl # XextAddDisplay isn't defined in any header file, so we provide a
-  dnl # bogus prototype (so the compiler doesn't complain) and a bogus
-  dnl # header file (so the smr macro doesn't break).
-  smr_CHECK_LIB(Xext, Xext, [Motif library], 
-                XextAddDisplay, X11/Xlib.h,
-                $X_LIBS $X_PRE_LIBS $X_EXTRA_LIBS -lX11, $X_CFLAGS,
-                [int XextAddDisplay();])
-  AC_SUBST(Xext_LIBS)
-  AC_SUBST(Xext_CFLAGS)
-  smr_CHECK_LIB(Xp, Xp, [Motif library], 
-                XpStartPage, X11/extensions/Print.h,
-                $X_LIBS $X_PRE_LIBS $Xext_LIBS $X_EXTRA_LIBS -lX11, $X_CFLAGS)
-  AC_SUBST(Xp_LIBS)
-  AC_SUBST(Xp_CFLAGS)
-  smr_CHECK_LIB(Xt, Xt, [Motif library], 
-                XtAppInitialize, X11/Intrinsic.h,
-                $X_LIBS $X_PRE_LIBS $X_EXTRA_LIBS -lX11, $X_CFLAGS)
-  AC_SUBST(Xt_LIBS)
-  AC_SUBST(Xt_CFLAGS)
-  smr_CHECK_LIB(Xm, Xm, [Motif library], 
-                XmCreateForm, Xm/XmAll.h,
-                $Xt_LIBS $X_LIBS $X_PRE_LIBS $Xp_LIBS $Xext_LIBS $X_EXTRA_LIBS -lX11, $X_CFLAGS)
-  AC_SUBST(Xm_LIBS)
-  AC_SUBST(Xm_CFLAGS)
-  smr_CHECK_LIB(Sgm, Sgm, [SGI Motif library],
-                SgCreateHorzPanedWindow, Sgm/HPanedW.h,
-                $Xm_LIBS $Xt_LIBS $X_LIBS $X_PRE_LIBS $Xp_LIBS $Xext_LIBS $X_EXTRA_LIBS -lX11, $X_CFLAGS)
-  AC_SUBST(Sgm_LIBS)
-  AC_SUBST(Sgm_CFLAGS)
-
-  dnl # check for XtAppSetExitFlag, which didn't exist prior to X11R6 (?)
-  if test "x$smr_have_Xt_library" = xyes; then
-    AC_CHECK_LIB(Xt, XtAppSetExitFlag,
-		 AC_DEFINE(HAVE_XTAPPSETEXITFLAG), ,
-                 [$Xt_LIBS $X_LIBS $X_PRE_LIBS $Xp_LIBS $Xext_LIBS $X_EXTRA_LIBS -lX11])
-  fi
 fi
 
 dnl ##### Check for FreeType 2.x.
