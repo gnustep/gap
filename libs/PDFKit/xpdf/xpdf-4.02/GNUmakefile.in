@@ -20,8 +20,8 @@
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
-CC=@CC@
-CXX=@CXX@
+CC="@CC@"
+CXX="@CXX@"
 
 LDFLAGS := $(LIB_FREETYPE_LDFLAGS)
 export LDFLAGS

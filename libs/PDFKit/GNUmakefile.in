@@ -79,7 +79,7 @@ ADDITIONAL_LDFLAGS += $(XPDF_OBJ_FILES)  -lm
 ADDITIONAL_LDFLAGS += $(LIB_FREETYPE_LDFLAGS)
 
 # Use C++ to link library
-LD=@CXX@
+LD="@CXX@"
 
 ifeq ($(findstring clang, $(LD)), clang)
 ADDITIONAL_LDFLAGS += -lstdc++ -lobjc
