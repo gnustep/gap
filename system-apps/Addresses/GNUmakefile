@@ -19,7 +19,7 @@ endif
 include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = Addresses
-CVS_MODULE_NAME = Addresses
+SVN_MODULE_NAME = Addresses
 VERSION = 0.5.0
 
 SUBPROJECTS =     \
