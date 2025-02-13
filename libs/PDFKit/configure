@@ -3813,7 +3813,7 @@ export CC
 export CPP
 export CXX
 
-ac_config_files="$ac_config_files GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.02/GNUmakefile"
+ac_config_files="$ac_config_files GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.03/GNUmakefile"
 
 
 cat >confcache <<\_ACEOF
@@ -4520,7 +4520,7 @@ do
     "GNUmakefile") CONFIG_FILES="$CONFIG_FILES GNUmakefile" ;;
     "xpdf/GNUmakefile") CONFIG_FILES="$CONFIG_FILES xpdf/GNUmakefile" ;;
     "xpdf/bridge/GNUmakefile") CONFIG_FILES="$CONFIG_FILES xpdf/bridge/GNUmakefile" ;;
-    "xpdf/xpdf-4.02/GNUmakefile") CONFIG_FILES="$CONFIG_FILES xpdf/xpdf-4.02/GNUmakefile" ;;
+    "xpdf/xpdf-4.03/GNUmakefile") CONFIG_FILES="$CONFIG_FILES xpdf/xpdf-4.03/GNUmakefile" ;;
 
   *) as_fn_error $? "invalid argument: '$ac_config_target'" "$LINENO" 5;;
   esac

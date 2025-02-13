@@ -1,2 +1,2 @@
 # which xpdf sources should be used?
-XPDF_SRC=xpdf-4.02
+XPDF_SRC=xpdf-4.03

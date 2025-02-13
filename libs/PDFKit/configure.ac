@@ -40,7 +40,7 @@ export CC
 export CPP
 export CXX
 
-AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.02/GNUmakefile])
+AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.03/GNUmakefile])
 
 AC_OUTPUT
 
