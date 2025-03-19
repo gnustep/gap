@@ -1,13 +1,4 @@
 #
-#  Test apps makefile for GNUstep X/RAW GUI Backend
-#
-#  Copyright (C) 1997 Free Software Foundation, Inc.
-#
-#  Author: Scott Christley <scottc@net-community.com>
-#  Author: Felipe A. Rodriguez <far@ix.netcom.com>
-#
-#  This file is part of the GNUstep X/RAW GUI Backend.
-#
 #  This library is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU Library General Public
 #  License as published by the Free Software Foundation; either
