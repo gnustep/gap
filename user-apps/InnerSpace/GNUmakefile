@@ -41,6 +41,7 @@ InnerSpace_MAIN_MODEL_FILE=InnerSpace.gorm
 #
 
 ADDITIONAL_GUI_LIBS += 
+ADDITIONAL_INCLUDE_DIRS += -I/usr/X11R6/include
 
 #
 # Resource files
