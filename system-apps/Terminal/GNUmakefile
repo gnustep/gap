@@ -68,6 +68,10 @@ ifeq ($(findstring freebsd, $(GNUSTEP_TARGET_OS)), freebsd)
  Terminal_TOOL_LIBS += -liconv 
 endif
 
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
+ Terminal_TOOL_LIBS += -liconv 
+endif
+
  Terminal_TOOL_LIBS += -lutil
 endif
 
@@ -82,8 +86,7 @@ Terminal_RESOURCE_FILES = \
 	cursor_inverted.tiff TerminalInfo.plist
 
 MAKE_STRINGS_OPTIONS = --aggressive-match --aggressive-remove
-
-
+ADDITIONAL_LIB_DIRS += -L/usr/local/lib
 
 include $(GNUSTEP_MAKEFILES)/application.make
 
