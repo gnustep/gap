@@ -352,7 +352,7 @@
 <label id="method**NSPortMessage**-msgid" />- <code>(unsigned) </code>
           <b>msgid </b>
           <br><em>Description forthcoming.</em>
-
+</section>
 
         
 
@@ -362,7 +362,7 @@
 <label id="method**NSPortMessage**-receivePort" />- <code>(NSPort*) </code>
           <b>receivePort </b>
           <br><em>Description forthcoming.</em>
-
+</section>
 
         
 
@@ -373,7 +373,7 @@
           <b>sendBeforeDate: </b>
           <code>(NSDate*) </code><i>when </i>
           <br><em>Description forthcoming.</em>
-
+</section>
 
         
 
@@ -383,8 +383,7 @@
 <label id="method**NSPortMessage**-sendPort" />- <code>(NSPort*) </code>
           <b>sendPort </b>
           <br><em>Description forthcoming.</em>
-
-
+</section>
         
 
 
@@ -394,7 +393,7 @@
           <b>setMsgid: </b>
           <code>(unsigned) </code><i>anId </i>
           <br><em>Description forthcoming.</em>
-
+</section>
 
         
 
