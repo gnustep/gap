@@ -223,8 +223,12 @@
 
   arp = [NSAutoreleasePool new];
   stopTask = NO;
-  [progressIndicator setIndeterminate:YES];
-  [progressIndicator startAnimation:nil];
+  [progressIndicator performSelectorOnMainThread:@selector(setIndeterminateWithNumber:)
+				      withObject:[NSNumber numberWithBool:YES]
+				   waitUntilDone:NO];
+  [progressIndicator performSelectorOnMainThread:@selector(startAnimation:)
+				      withObject:nil
+				   waitUntilDone:NO];
 
   [targetMissingFiles release];
   [sourceMissingFiles release];
@@ -347,7 +351,9 @@
   NSLog(@"date differing files with same size: %@", dateDiffFiles);
 
   analyzed = YES;
-  [progressIndicator stopAnimation:nil];
+  [progressIndicator performSelectorOnMainThread:@selector(stopAnimation:)
+				      withObject:nil
+				   waitUntilDone:NO];
   
   [arp release];
 }
