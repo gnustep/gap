@@ -29,6 +29,21 @@
 #import "FileArray.h"
 #import "Engine.h"
 
+@implementation NSButton (ThreadExtensions)
+- (void)setEnabledWithNumber:(NSNumber *)flag
+{
+  [self setEnabled:[flag boolValue]];
+}
+@end
+
+@implementation NSProgressIndicator (ThreadExtensions)
+- (void)setIndeterminateWithNumber:(NSNumber *)flag
+{
+  [self setIndeterminate:[flag boolValue]];
+}
+@end
+
+
 @implementation AppController
 
 - (void)dealloc
@@ -177,9 +192,15 @@
   
   arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
 
-  [stopButton setEnabled:YES];
-  [analyzeButton setEnabled:NO];
-  [syncButton setEnabled:NO];
+  [stopButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
+                               withObject:[NSNumber numberWithBool:YES]
+                            waitUntilDone:NO];
+  [analyzeButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
+				  withObject:[NSNumber numberWithBool:NO]
+			       waitUntilDone:NO];
+  [syncButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
+			       withObject:[NSNumber numberWithBool:NO]
+			    waitUntilDone:NO];
 
   [engine setSourceRoot: [sourcePathField stringValue]];
   [engine setTargetRoot: [targetPathField stringValue]];
@@ -195,10 +216,16 @@
   
   [sourceSizeField setStringValue:[FileObject formatSize:[[engine sourceMap] size]]];
   [targetSizeField setStringValue:[FileObject formatSize:[[engine targetMap] size]]];
-  
-  [stopButton setEnabled:NO];
-  [analyzeButton setEnabled:YES];
-  [syncButton setEnabled:YES];
+
+  [stopButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
+			       withObject:[NSNumber numberWithBool:NO]
+			    waitUntilDone:NO];
+  [analyzeButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
+				  withObject:[NSNumber numberWithBool:YES]
+			       waitUntilDone:NO];
+  [syncButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
+			       withObject:[NSNumber numberWithBool:YES]
+			    waitUntilDone:NO];
   [self reportAnalysis];
   
   [arp release];
