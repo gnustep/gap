@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2018 GNUstep Application Project
+ Copyright (C) 2000-2025 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -108,6 +108,7 @@ static double k = 0.025;
 	      pp[0].x = [[linearr objectAtIndex: 0] floatValue];
 	      pp[0].y = [[linearr objectAtIndex: 1] floatValue];
 	      [self addControlAtPoint: pp[0]];
+              [self confirmNewCurve];
             }
 	  
 	  if([str isEqualToString: @"lineto"])
@@ -115,6 +116,7 @@ static double k = 0.025;
 	      pp[0].x = [[linearr objectAtIndex: 0] floatValue];
 	      pp[0].y = [[linearr objectAtIndex: 1] floatValue];
 	      [self addLineToPoint: pp[0]];
+              [self confirmNewCurve];
             }
 	  
 	  if([str isEqualToString: @"curveto"])
