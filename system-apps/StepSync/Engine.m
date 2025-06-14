@@ -358,6 +358,19 @@
   [arp release];
 }
 
+- (BOOL)checkFreeSpace
+{
+  unsigned long long targetFreeSize;
+  unsigned long long sourceFreeSize;
+  NSFileManager *fm = [NSFileManager defaultManager];
+  
+  targetFreeSize = [(NSNumber *)[[fm fileSystemAttributesAtPath:targetRoot] objectForKey:NSFileSystemFreeSize] unsignedLongLongValue];
+  sourceFreeSize = [(NSNumber *)[[fm fileSystemAttributesAtPath:sourceRoot] objectForKey:NSFileSystemFreeSize] unsignedLongLongValue];
+  
+  NSLog(@"source free %lf MBytes, target free %lf MBytes", (double)sourceFreeSize/(1000.0*1000.0), (double)targetFreeSize/(1000.0*1000.0));
+  return YES;
+}
+
 - (void)synchronize
 {
   NSUInteger i;
@@ -375,11 +388,8 @@
     
   if (forceUpdateIfOnlyDateDiffers)
     [sourceModFiles addObjectsFromArray:dateDiffFiles];
-  
-  totalItems = 0;
-  if (updateSource || deleteItems)
-    totalItems += [sourceMissingFiles count];
-  
+
+  // safety
   if (!updateSource && !deleteItems)
     {
       [sourceMissingFiles release];
@@ -387,15 +397,42 @@
       [targetModFiles release];
       targetModFiles = nil;
     }
-    
+  
+  // calculate total items exactly the same way as executed
+  totalItems = 0;
   if (handleDirectories)
     {
-      totalItems += [targetMissingDirs count];
       if (updateSource)
-	totalItems += [sourceMissingDirs count];
+        {
+          totalItems += [sourceMissingDirs count];
+          if (deleteItems)
+            totalItems += [targetMissingDirs count];
+        }
+      else
+        {
+          totalItems += [targetMissingDirs count];
+          if (deleteItems)
+            totalItems += [sourceMissingDirs count];
+        }
     }
-      
-  totalItems += [targetMissingFiles count] + [targetModFiles count] + [sourceModFiles count];
+  
+  if (insertItems)
+    totalItems += [targetMissingFiles count];
+  
+  if (updateItems)
+    totalItems += [sourceModFiles count];
+
+  if (deleteItems && !updateSource)
+    {
+      totalItems += [sourceMissingFiles count];
+    }
+  else if (updateSource)
+    {
+      if (insertItems)
+        totalItems += [sourceMissingFiles count];
+      totalItems += [targetModFiles count];
+    }
+
   [progressIndicator setMinValue:0.0];
   [progressIndicator setMaxValue:(double)totalItems];
   [progressIndicator setDoubleValue:0.0];

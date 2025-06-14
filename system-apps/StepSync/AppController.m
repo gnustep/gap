@@ -228,6 +228,10 @@
 			    waitUntilDone:NO];
   [self reportAnalysis];
   
+  if (![engine checkFreeSpace])
+    {
+      NSLog(@"Maybe not enough free space");
+    }
   [arp release];
 }
 

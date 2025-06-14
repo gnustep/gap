@@ -81,6 +81,7 @@
 - (FileArray *)dateDiffFiles;
 
 - (void)analyze;
+- (BOOL)checkFreeSpace;
 - (void)synchronize;
 
 @end
