@@ -54,8 +54,6 @@
 	{
 	    unichar c = [file characterAtIndex: i];
 
-	    if (i %1000 == 0) NSLog (@"caractères lus : %d", i);
-
 	    if ((!Tag) && (c == '<'))
 	    {
 		// We have a tag ...
@@ -155,7 +153,7 @@
 	    }
 	}
 
-	NSLog (@"Parse terminé !");
+	NSLog (@"Parse termine !");
 
 	[file release];
 	[current release];
