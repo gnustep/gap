@@ -115,7 +115,7 @@
 	
 		while ((key = [enumerator nextObject])) 
 		{
-			id strelem = [[NSString alloc] initWithFormat: @" %@=%@",
+			id strelem = [[NSString alloc] initWithFormat: @" %@=\"\%@\"",
 				key, [elementAttributes objectForKey: key]];
 			id astrelem = [[NSMutableAttributedString alloc] initWithString: strelem];
 			[str appendAttributedString: astrelem];
