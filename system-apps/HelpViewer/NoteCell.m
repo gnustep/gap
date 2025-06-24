@@ -123,7 +123,7 @@
 {
   if (![controlView window])
     return;
-  NSLog(@"draw width: %f", cellFrame.size.width);
+
   [_color set];
 
   NSBezierPath* path = [[NSBezierPath alloc] init];
