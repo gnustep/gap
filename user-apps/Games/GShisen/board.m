@@ -169,7 +169,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
             [tile release];
         }
     }
-    tmptiles = (NSMutableArray *)[tmptiles sortedArrayUsingFunction:(int (*)(id, id, void*))randomizeTiles context:self];
+    tmptiles = (NSMutableArray *)[tmptiles sortedArrayUsingFunction:(NSComparisonResult (*)(id, id, void*))randomizeTiles context:self];
 
     if(tmr && !hadEndOfGame) {
         if([tmr isValid])
@@ -543,7 +543,7 @@ static NSComparisonResult sortScores(NSDictionary *d1, NSDictionary *d2, id self
     [gameData setObject: [NSDate date] forKey: @"date"];
 
     [scores addObject: gameData];
-    [scores sortUsingFunction:(int (*)(id, id, void*))sortScores context:self];
+    [scores sortUsingFunction:(NSComparisonResult (*)(id, id, void*))sortScores context:self];
 		if ([scores count] > numScoresToKeep) {
 			NSRange scoresToZap = NSMakeRange(numScoresToKeep, 
 				[scores count] - numScoresToKeep);
