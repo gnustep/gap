@@ -64,6 +64,7 @@
     if ([elementAttributes objectForKey: @"name"] != nil)
     {
 	name = [NSString stringWithString: [elementAttributes objectForKey: @"name"]];
+        NSLog(@"%@ attribute name; %@", elementName, name);
     }
 
     if ([elementAttributes objectForKey: @"src"] != nil)
@@ -89,6 +90,7 @@
 		Section* newSection = [[Section alloc] initWithHeader: name];
 		if (src != nil)
 		{
+                  NSLog(@"set section to %@ to path |%@|", name, src);
 			[newSection setPath: src];
 		}
 
@@ -213,7 +215,7 @@
 	if (p != nil)
 	{
 		ASSIGN (path, p);
-		//NSLog (@"Handler setPath: %@", p);
+		NSLog (@"[HandlerStructureXLP setPath]: %@", p);
 		content = [[NSData alloc] initWithContentsOfFile: path];
 	}
 }

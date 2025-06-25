@@ -85,6 +85,10 @@ static NSBundle* Bundle = nil;
 		[handler release];
 		loaded = YES;
 	}
+        else
+          {
+            NSLog(@"[Section load] file %@ not found.", path);
+          }
 }
 
 - (NSMutableAttributedString*) contentWithLevel: (int) level {
