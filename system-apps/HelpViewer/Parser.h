@@ -24,12 +24,20 @@
 #include <Foundation/Foundation.h>
 #include "GNUstep.h"
 
+@protocol SAXHandler
+- (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes;
+- (void) endElement: (NSString*) elementName;
+- (void) characters: (NSString*) name;
+@end
+
 @interface Parser : NSObject 
 {
 }
 
-+ (void) parserWithHandler : (id) handler
++ (void) parserWithHandler : (id<SAXHandler>) handler
     withData: (NSData*) data;
-@end    
+@end
+
+NSString *charFromEntity(char *entityName);
 
 #endif

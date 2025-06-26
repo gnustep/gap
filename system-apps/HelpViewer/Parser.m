@@ -19,6 +19,7 @@
 */
 
 #include "Parser.h"
+#include "ModNSString.h"
 
 /*
    I rewrote this very simple SAX-inspired Parser ...
@@ -27,20 +28,22 @@
 
 #define RESET(str) [str release]; str = [[NSMutableString alloc] init];
 
+#define MAX_ENTITY_LEN 16
+
 @implementation Parser
 
-+ (void) parserWithHandler: (id) handler
++ (void) parserWithHandler: (id<SAXHandler>) handler
     withData: (NSData*) data
 {
     //NSString* file = [NSString stringWithContentsOfFile: filename];
     NSString* file = [[NSString alloc] initWithData: data encoding: NSISOLatin1StringEncoding];
     NSMutableString* current = [[NSMutableString alloc] init];
 
-    //NSLog (@"on a chargé le fichier %@", filename);
-
     if (file != nil)
     {
 	int i;
+	unsigned entity = 0;
+	char entityBuf[MAX_ENTITY_LEN+1];
 	BOOL Tag = NO;
 	BOOL EndingTag = NO;
 	BOOL AttributeStarted = NO;
@@ -48,13 +51,40 @@
 	NSString* KeyAttribute = nil;
 	NSMutableDictionary* TagAttributes = nil;
 
-	NSLog (@"file length : %d", [file length]);
+	NSLog (@"file length : %lu", (unsigned long)[file length]);
 
 	for (i=0; i < [file length]; i++)
 	{
 	    unichar c = [file characterAtIndex: i];
 
-	    if ((!Tag) && (c == '<'))
+	    if (!entity && c == '&')
+	      {
+		entity = 1;
+	      }
+	    else if (entity > 0)
+	      {
+		if (c == ';')
+		  {
+		    NSString *entityStr = nil;
+
+		    entityBuf[entity] = '\0';
+		    entityStr = charFromEntity(entityBuf);
+		    if (entityStr)
+		      [current appendString : entityStr];
+		    entity = 0;
+		  }
+		else
+		  {
+		    entityBuf[entity-1] = (char)c;
+		    entity++;
+		    if (entity == MAX_ENTITY_LEN)
+		      {
+			entityBuf[entity] = '\0';
+			NSLog(@"found too long entity name to store in buffer. Got up to |%s|", entityBuf);
+		      }
+		  }
+	      }
+	    else if ((!Tag) && (c == '<'))
 	    {
 		// We have a tag ...
 		Tag = YES;
@@ -73,8 +103,20 @@
 		// We send the tag to the handler
 		if (EndingTag)
 		{
-		    NSLog (@"end tag name : %@", current);
-		    [handler endElement: current];
+		  // <tag/> shortcut detected, start-end together
+		  if ([current length] == 0)
+		    {
+		       NSLog(@"XML short ending. Current is %@ but tag name is %@", current, TagName);
+		       [handler startElement: TagName attributes: TagAttributes];
+		       [handler endElement: TagName];
+		       [TagName release]; TagName = nil;
+		       [KeyAttribute release]; KeyAttribute = nil;
+		       [TagAttributes release]; TagAttributes = nil;
+		    }
+		  else
+		    {
+		      [handler endElement: current];
+		    }
 		    EndingTag = NO;
 		}
 		else
@@ -87,8 +129,6 @@
 		    }
 		    else
 		    {
-			NSLog (@"tag name : %@", TagName);
-			NSLog (@"attributes : %@", TagAttributes);
 			[handler startElement: TagName attributes: TagAttributes];
 		    }
 		    [TagName release]; TagName = nil;
@@ -117,6 +157,11 @@
 			    TagName = [[NSString alloc] initWithString: current];
 			    RESET (current);
 			}
+			else
+			  {
+			    // careful, don't chew spaces inside tag attributes
+			    [current appendString : [NSString stringWithCharacters: &c length: 1]];
+			  }
 		    }
 		    else if (c == '=')
 		    {
@@ -153,7 +198,7 @@
 	    }
 	}
 
-	NSLog (@"Parse termine !");
+	NSLog (@"Parse end !");
 
 	[file release];
 	[current release];
@@ -163,4 +208,171 @@
     }
 }
 
+
 @end
+
+
+NSString *charFromEntity(char *entityName)
+{
+  NSString *entity = nil;
+  unsigned i;
+  unichar c = '\0';
+  
+  struct
+  {
+    char *name;
+    unichar chr;
+  } refs[] = {
+    { "lt"    , '<'       },
+    { "gt"    , '>'       },
+    { "amp"   , '&'       },
+    { "quot"  , '"'       },
+    { "nbsp"  , (unichar)160 },
+    { "iexcl" , (unichar)161 },
+    { "cent"  , (unichar)162 },
+    { "pound" , (unichar)163 },
+    { "curren", (unichar)164 },
+    { "yen"   , (unichar)165 },
+    { "brvbar", (unichar)166 },
+    { "sect"  , (unichar)167 },
+    { "uml"   , (unichar)168 },
+    { "copy"  , (unichar)169 },
+    { "ordf"  , (unichar)170 },
+    { "laquo" , (unichar)171 },
+    { "not"   , (unichar)172 },
+    { "shy"   , (unichar)173 },
+    { "reg"   , (unichar)174 },
+    { "macr"  , (unichar)175 },
+    { "deg"   , (unichar)176 },
+    { "plusmn", (unichar)177 },
+    { "sup2"  , (unichar)178 },
+    { "sup3"  , (unichar)179 },
+    { "acute" , (unichar)180 },
+    { "micro" , (unichar)181 },
+    { "para"  , (unichar)182 },
+    { "middot", (unichar)183 },
+    { "cedil" , (unichar)184 },
+    { "sup1"  , (unichar)185 },
+    { "ordm"  , (unichar)186 },
+    { "raquo" , (unichar)187 },
+    { "frac14", (unichar)188 },
+    { "frac12", (unichar)189 },
+    { "frac34", (unichar)190 },
+    { "iquest", (unichar)191 },
+    { "Agrave", (unichar)192 },
+    { "Aacute", (unichar)193 },
+    { "Acirc" , (unichar)194 },
+    { "Atilde", (unichar)195 },
+    { "Auml"  , (unichar)196 },
+    { "Aring" , (unichar)197 },
+    { "AElig" , (unichar)198 },
+    { "Ccedil", (unichar)199 },
+    { "Egrave", (unichar)200 },
+    { "Eacute", (unichar)201 },
+    { "Ecirc" , (unichar)202 },
+    { "Euml"  , (unichar)203 },
+    { "Igrave", (unichar)204 },
+    { "Iacute", (unichar)205 },
+    { "Icirc" , (unichar)206 },
+    { "Iuml"  , (unichar)207 },
+    { "ETH"   , (unichar)208 },
+    { "Ntilde", (unichar)209 },
+    { "Ograve", (unichar)210 },
+    { "Oacute", (unichar)211 },
+    { "Ocirc" , (unichar)212 },
+    { "Otilde", (unichar)213 },
+    { "Ouml"  , (unichar)214 },
+    { "times" , (unichar)215 },
+    { "Oslash", (unichar)216 },
+    { "Ugrave", (unichar)217 },
+    { "Uacute", (unichar)218 },
+    { "Ucirc" , (unichar)219 },
+    { "Uuml"  , (unichar)220 },
+    { "Yacute", (unichar)221 },
+    { "THORN" , (unichar)222 },
+    { "szlig" , (unichar)223 },
+    { "agrave", (unichar)224 },
+    { "aacute", (unichar)225 },
+    { "acirc" , (unichar)226 },
+    { "atilde", (unichar)227 },
+    { "auml"  , (unichar)228 },
+    { "aring" , (unichar)229 },
+    { "aelig" , (unichar)230 },
+    { "ccedil", (unichar)231 },
+    { "egrave", (unichar)232 },
+    { "eacute", (unichar)233 },
+    { "ecirc" , (unichar)234 },
+    { "euml"  , (unichar)235 },
+    { "igrave", (unichar)236 },
+    { "iacute", (unichar)237 },
+    { "icirc" , (unichar)238 },
+    { "iuml"  , (unichar)239 },
+    { "eth"   , (unichar)240 },
+    { "ntilde", (unichar)241 },
+    { "ograve", (unichar)242 },
+    { "oacute", (unichar)243 },
+    { "ocirc" , (unichar)244 },
+    { "otilde", (unichar)245 },
+    { "ouml"  , (unichar)246 },
+    { "divide", (unichar)247 },
+    { "oslash", (unichar)248 },
+    { "ugrave", (unichar)249 },
+    { "uacute", (unichar)250 },
+    { "ucirc" , (unichar)251 },
+    { "uuml"  , (unichar)252 },
+    { "yacute", (unichar)253 },
+    { "thorn" , (unichar)254 },
+    { "yuml"  , (unichar)255 },
+    { "bull"  , (unichar)8226 }
+  };
+  
+  
+  if (entityName[0] == '#')
+    {
+      NSLog(@"dec/hex entity: %s", entityName);
+      if (strlen(entityName) < 8)
+        {
+          uint32_t val;
+
+          // &#ddd; or &#xhh;
+          if (sscanf(entityName+1, "x%x;", &val) || sscanf(entityName+1, "%d;", &val))
+            {
+              // &#xhh; hex value or &ddd; decimal value
+              if (val > 0xffff)
+                {
+                  unichar       buf[2];
+
+                  /* Convert codepoint outside base plane to surrogate pair
+                   */
+                  val -= 0x010000;
+                  buf[0] = (val / 0x400) + 0xd800;
+                  buf[1] = (val % 0x400) + 0xdc00;
+                  entity = [[NSString alloc] initWithCharacters: buf length: 2];
+                }
+              else
+                {
+                  unichar       uc = (unichar)val;
+
+                  entity = [[NSString alloc] initWithCharacters: &uc length: 1];
+                }
+            }
+        }
+    }
+  else
+    {
+      for (i = 0; i < sizeof(refs)/sizeof(refs[0]); i++)
+        {
+          if (strcmp(refs[i].name, entityName) == 0)
+            {
+              c = refs[i].chr;
+              break;
+            }
+        }
+      if (c != 0)
+        entity = [[NSString alloc] initWithCharacters: &c length: 1];
+      else
+        NSLog(@"entity %s not mapped", entityName); 
+    }
+
+  return AUTORELEASE(entity);
+}
