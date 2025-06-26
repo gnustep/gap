@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+    Copyright (C) 2003 Nicolas Roard <nicolas@roard.com>    
+                  2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,7 +46,7 @@
 	unsigned entity = 0;
 	char entityBuf[MAX_ENTITY_LEN+1];
 	BOOL Tag = NO;
-	BOOL EndingTag = NO;
+	BOOL isEndingTag = NO;
 	BOOL AttributeStarted = NO;
 	NSString* TagName = nil;
 	NSString* KeyAttribute = nil;
@@ -101,8 +102,9 @@
 		Tag = NO;
 
 		// We send the tag to the handler
-		if (EndingTag)
+		if (isEndingTag)
 		{
+		  NSLog(@"Ending tag Current is %@ but tag name is %@ attributes %@", current, TagName, TagAttributes);
 		  // <tag/> shortcut detected, start-end together
 		  if ([current length] == 0)
 		    {
@@ -117,14 +119,13 @@
 		    {
 		      [handler endElement: current];
 		    }
-		    EndingTag = NO;
+		    isEndingTag = NO;
 		}
 		else
 		{
 		    if (TagName == nil)
 		    {
 			// If no tag name, current == tag name ...
-			NSLog (@"no tag name : %@", current);
 			[handler startElement: current attributes: nil];
 		    }
 		    else
@@ -147,7 +148,7 @@
 		    {
 			// We have a closing tag
 			// FIXME : this approach is not optimal and could be wrong
-			EndingTag = YES;
+			isEndingTag = YES;
 		    }
 		    else if (c == ' ')
 		    {
