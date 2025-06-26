@@ -47,7 +47,7 @@
 	char entityBuf[MAX_ENTITY_LEN+1];
 	BOOL Tag = NO;
 	BOOL isEndingTag = NO;
-	BOOL AttributeStarted = NO;
+	BOOL attributeStarted = NO;
 	NSString* TagName = nil;
 	NSString* KeyAttribute = nil;
 	NSMutableDictionary* TagAttributes = nil;
@@ -175,11 +175,11 @@
 			{
 			    TagAttributes = [[NSMutableDictionary alloc] init];
 			}
-			AttributeStarted = NO;
+			attributeStarted = NO;
 		    }
 		    else if (c == '"') 
 		    {
-			if (AttributeStarted)
+			if (attributeStarted)
 			{
 			    [TagAttributes setObject: current forKey: KeyAttribute];
 			    [KeyAttribute release]; KeyAttribute = nil;
@@ -187,7 +187,7 @@
 			}
 			else 
 			{
-			    AttributeStarted = YES;
+			    attributeStarted = YES;
 			    RESET (current);
 			}
 		    }
