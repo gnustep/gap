@@ -36,13 +36,12 @@
 + (void) parserWithHandler: (id<SAXHandler>) handler
     withData: (NSData*) data
 {
-    //NSString* file = [NSString stringWithContentsOfFile: filename];
     NSString* file = [[NSString alloc] initWithData: data encoding: NSISOLatin1StringEncoding];
     NSMutableString* current = [[NSMutableString alloc] init];
 
     if (file != nil)
     {
-	int i;
+	NSUInteger i;
 	unsigned entity = 0;
 	char entityBuf[MAX_ENTITY_LEN+1];
 	BOOL Tag = NO;
