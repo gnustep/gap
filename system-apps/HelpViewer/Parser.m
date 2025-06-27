@@ -48,9 +48,9 @@
 	BOOL Tag = NO;
 	BOOL isEndingTag = NO;
 	BOOL attributeStarted = NO;
-	NSString* TagName = nil;
-	NSString* KeyAttribute = nil;
-	NSMutableDictionary* TagAttributes = nil;
+	NSString* tagName = nil;
+	NSString* keyAttribute = nil;
+	NSMutableDictionary* tagAttributes = nil;
 
 	NSLog (@"file length : %lu", (unsigned long)[file length]);
 
@@ -104,16 +104,16 @@
 		// We send the tag to the handler
 		if (isEndingTag)
 		{
-		  NSLog(@"Ending tag Current is %@ but tag name is %@ attributes %@", current, TagName, TagAttributes);
+		  NSLog(@"Ending tag Current is %@ but tag name is %@ attributes %@", current, tagName, tagAttributes);
 		  // <tag/> shortcut detected, start-end together
 		  if ([current length] == 0)
 		    {
-		       NSLog(@"XML short ending. Current is %@ but tag name is %@", current, TagName);
-		       [handler startElement: TagName attributes: TagAttributes];
-		       [handler endElement: TagName];
-		       [TagName release]; TagName = nil;
-		       [KeyAttribute release]; KeyAttribute = nil;
-		       [TagAttributes release]; TagAttributes = nil;
+		       NSLog(@"XML short ending. Current is %@ but tag name is %@", current, tagName);
+		       [handler startElement: tagName attributes: tagAttributes];
+		       [handler endElement: tagName];
+		       [tagName release]; tagName = nil;
+		       [keyAttribute release]; keyAttribute = nil;
+		       [tagAttributes release]; tagAttributes = nil;
 		    }
 		  else
 		    {
@@ -123,18 +123,18 @@
 		}
 		else
 		{
-		    if (TagName == nil)
+		    if (tagName == nil)
 		    {
 			// If no tag name, current == tag name ...
 			[handler startElement: current attributes: nil];
 		    }
 		    else
 		    {
-			[handler startElement: TagName attributes: TagAttributes];
+			[handler startElement: tagName attributes: tagAttributes];
 		    }
-		    [TagName release]; TagName = nil;
-		    [KeyAttribute release]; KeyAttribute = nil;
-		    [TagAttributes release]; TagAttributes = nil;
+		    [tagName release]; tagName = nil;
+		    [keyAttribute release]; keyAttribute = nil;
+		    [tagAttributes release]; tagAttributes = nil;
 		}
 		RESET (current);
 	    }
@@ -152,10 +152,10 @@
 		    }
 		    else if (c == ' ')
 		    {
-			if (TagName == nil)
+			if (tagName == nil)
 			{
 			    // We set the tag name
-			    TagName = [[NSString alloc] initWithString: current];
+			    tagName = [[NSString alloc] initWithString: current];
 			    RESET (current);
 			}
 			else
@@ -166,14 +166,13 @@
 		    }
 		    else if (c == '=')
 		    {
-			KeyAttribute = [NSString stringWithString: current];
-		        KeyAttribute = RETAIN ([NSString trimString: KeyAttribute]);
-			//KeyAttribute = [[NSString alloc] init];
+			keyAttribute = [NSString stringWithString: current];
+		        keyAttribute = RETAIN ([NSString trimString: keyAttribute]);
 
 			RESET (current);
-			if (TagAttributes == nil) 
+			if (tagAttributes == nil) 
 			{
-			    TagAttributes = [[NSMutableDictionary alloc] init];
+			    tagAttributes = [[NSMutableDictionary alloc] init];
 			}
 			attributeStarted = NO;
 		    }
@@ -181,8 +180,8 @@
 		    {
 			if (attributeStarted)
 			{
-			    [TagAttributes setObject: current forKey: KeyAttribute];
-			    [KeyAttribute release]; KeyAttribute = nil;
+			    [tagAttributes setObject: current forKey: keyAttribute];
+			    [keyAttribute release]; keyAttribute = nil;
 			    RESET (current);
 			}
 			else 
@@ -203,9 +202,9 @@
 
 	[file release];
 	[current release];
-	[TagName release]; 
-	[KeyAttribute release]; 
-	[TagAttributes release]; 
+	[tagName release]; 
+	[keyAttribute release]; 
+	[tagAttributes release]; 
     }
 }
 
