@@ -14,8 +14,8 @@
 			</ul>
 			<br><br>
 			Ces deux tags ont un attribut, <code><b>name</b></code>, permettant de spécifier le nom de la partie ou de la section.
-			Exemple : 
-			<pre><section name="Structure Tags"></pre>
+			Exemple : <br>
+			<pre>&lt;section name=&quot;Structure Tags&quot;&gt;</pre>
 			<br><br>
 			Il y a également une série de tags, similaires au HTML, pour créer des listes 
 			(avec les tags <code>&lt;ul&gt;</code> et <code>&lt;li&gt;</code>).
@@ -52,7 +52,9 @@
 			
 			Vous pouvez référencer des parties ou des sections, en utilisant leur attribut <i>name</i> comme ID; ou vous
 			pouvez définir des points d'ancrages, en utilisante le tag <i>label</i> :
-			<listing><code><b>&lt;label id="RefID"&gt;</b></listing>
+			<listing>
+                        <code>&lt;label id=&quot;RefID&quot;&gt;</code>
+                        </listing>
 	            </section>
                 </section>		    
 
