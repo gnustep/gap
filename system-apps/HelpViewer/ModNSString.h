@@ -24,8 +24,9 @@
 #include <Foundation/Foundation.h>
 #include "GNUstep.h"
 
-@interface NSString (Trim) 
-+ (NSString*) trimString: (NSString*) str ;
+@interface NSString (Trim)
++ (NSString*) trimString: (NSString*) str;
++ (NSString*) trimString: (NSString*) str skipStart: (BOOL)skipStart;
 @end
 
 #endif

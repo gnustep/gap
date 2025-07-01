@@ -29,44 +29,48 @@
 @end
 
 @implementation NSString (Trim)
+
 + (NSString*) trimString: (NSString*) str
 {
-    NSMutableString* ret = [[NSMutableString alloc] initWithString: @""];
-    NSString* spaceChar = @" ";
-    NSString* EOLChar = @"\n";
-    NSString* TabChar = @"\t";
+  return [NSString trimString: str skipStart:YES];
+}
 
-    BOOL space = YES;
++ (NSString*) trimString: (NSString*) str skipStart: (BOOL)skipStart
+{
+    NSMutableString* ret = [[NSMutableString alloc] initWithString: @""];
+    BOOL space = skipStart;
     NSUInteger i;
 
     for (i = 0; i < [str length]; i++)
-    {
-	NSString* current = [str substringWithRange: NSMakeRange (i,1)];
-	if ([current isEqualToString: spaceChar])
-	{
+      {
+        unichar ch = [str characterAtIndex: i];
+
+	if (ch == ' ')
+          {
 	    if (!space) 
-	    {
-		[ret appendString: current];
+              {
+                [ret appendString: [NSString stringWithCharacters:&ch length:1]];
 		space = YES;
-	    }
-	}
-	else if ([current isEqualToString: EOLChar]) {}
-	else if ([current isEqualToString: TabChar])
-	{
+              }
+          }
+	else if (ch == '\n' || ch == '\r')
+          {}
+	else if (ch == '\t')
+          {
 	    if (!space)
-	    {
+              {
 		[ret appendString: @" "];
 		space = YES;
-	    }
-	}
+              }
+          }
 	else
-	{
-	    [ret appendString: current];
+          {
+            [ret appendString: [NSString stringWithCharacters:&ch length:1]];
 	    space = NO;
-	}
-    }
+          }
+      }
 
-    //NSLog (@"trimmed string : <%@> ", ret);
+    NSLog (@"trimmed string : <%@> ", ret);
     return AUTORELEASE(ret);
 }
 @end
