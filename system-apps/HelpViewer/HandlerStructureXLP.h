@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola (rm@gnu.org)
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2025 Riccardo Mottola (rm@gnu.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,6 +43,7 @@
 	NSMutableAttributedString* _currentContent;
 	Section* _firstSection;
 	Section* _currentSection;
+        BOOL _insideStringContent; // for white-space coalescing. Could be more finegrined.
 
 	float current, max;
 }

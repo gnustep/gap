@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -104,6 +104,7 @@
 		_currentContent = [newSection text];
 		[_currentSection retain];
 		[_currentContent retain];
+                _insideStringContent = NO;
 	}
 	else
 	{
@@ -132,6 +133,21 @@
 
 		[str release];
 		[strend release];
+                if (HAVING (@"b")
+                    || HAVING (@"i")
+                    || HAVING (@"sc")
+                    || HAVING (@"code")
+                    || HAVING (@"pre")
+                    )
+                  {
+                    // remain in-string context
+                    // this could be more finegrained with flags specific for tags or a stack of tags
+                    // text outside certain tags still maybe have too much coalescing
+                  }
+                else
+                  {
+                    _insideStringContent = NO;
+                  }
 	}
     }
 }
@@ -167,6 +183,7 @@
 			ASSIGN (_currentSection, parent);
 			ASSIGN (_currentContent, [parent text]);
 		}
+                _insideStringContent = NO;
 	}
 	else
 	{
@@ -177,7 +194,21 @@
 		[str release];
 		[tag release];
 		//NSLog (@"</%@>",elementName);
+                if (HAVING (@"b")
+                    || HAVING (@"i")
+                    || HAVING (@"sc")
+                    || HAVING (@"code")
+                    || HAVING (@"pre")
+                    )
+                  {
+                    // remain in-string context
+                  }
+                else
+                  {
+                    _insideStringContent = NO;
+                  }
 	}
+        
     }
 
 }
@@ -185,20 +216,25 @@
 - (void) characters: (NSString*) name {
     if (_document)
     {
-    	//NSLog (@"characters : %@", name);
+    	NSLog (@"characters : |%@|", name);
 	NSString* str;
 
 	if ([name isEqualToString: @"<"])
 	  str = @"&lt;";
 	else if ([name isEqualToString: @">"])
           str = @"&gt;";
+	else if ([name isEqualToString: @"\""])
+          str = @"&quot;";
 	else
-	  str = [NSString trimString: name];
-	
+          {
+            str = [NSString trimString: name skipStart:!_insideStringContent];
+          }
+        
     	NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString: str];
 	[_currentContent appendAttributedString: astr];
 	//[self addCurrentProgression: [astr length]];
 	[astr release];
+        _insideStringContent = YES;
     }
 }
 
