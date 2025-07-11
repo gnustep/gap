@@ -26,11 +26,11 @@
 
 @interface ArticleFactory : RSSFactory
 
-- (id<RSSArticle>) articleWithHeadline: (NSString*) aHeadline
+- (id<Article>) articleWithHeadline: (NSString*) aHeadline
                                    URL: (NSURL*) aURL
                                content: (NSString*) aContent
                                   date: (NSDate*) aDate;
 
-- (id<RSSArticle>) articleFromDictionary: (NSDictionary*) aDictionary;
+- (id<Article>) articleFromDictionary: (NSDictionary*) aDictionary;
 
 @end
