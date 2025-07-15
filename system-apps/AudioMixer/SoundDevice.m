@@ -27,12 +27,15 @@
 */
 
 #include <linux/soundcard.h>
+#include <sys/ioctl.h>
 #include <fcntl.h>
 #include <unistd.h>
 
 #import <Foundation/Foundation.h>
 #import <SoundDevice.h>
 
+// good for GLIBC, others might have int (MUSL?)
+#define IOCTL_TYPE unsigned long
 
 @implementation SoundDevice
 
@@ -48,10 +51,12 @@
 {
   if ((self = [super init]))
     {
-      int tempOutMain;
+      IOCTL_TYPE tempOutMain;
+      IOCTL_TYPE long mask;
 
       mixerFd = -1;
       tempOutMain = 0;
+      isStereo = NO;
 
       if ((mixerFd = open("/dev/mixer", O_RDWR)) < 0)
 	{
@@ -59,15 +64,28 @@
 	}
 
 
-      if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_VOLUME), &tempOutMain) < 0)
-	{
-	  NSLog(@"Error reading main output volume");
-	}
-      NSLog(@"output main: %d", tempOutMain);
+      if (mixerFd)
+        {
+          isStereo = YES;
+          if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_STEREODEVS), &mask) < 0)
+            {
+              NSLog(@"Mixer is Mono");
+              isStereo = NO;
+            }
+          else
+            {
+              NSLog(@"Mixer is Stereo");
+            }
+          if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_VOLUME), &tempOutMain) < 0)
+            {
+              NSLog(@"Error reading main output volume");
+            }
+          NSLog(@"output main: %lu", tempOutMain);
 
-      outMainLeft = tempOutMain & 0xff;
-      outMainRight = (tempOutMain >> 8) & 0xff;
-      NSLog(@"output main: %d %d", outMainLeft, outMainRight);
+          outMainLeft = tempOutMain & 0xff;
+          outMainRight = (tempOutMain >> 8) & 0xff;
+          NSLog(@"output main: %d %d", outMainLeft, outMainRight);
+        }
     }
 
   return self;
@@ -101,7 +119,7 @@
 
 - (void) setMainLevel: (int)lev withBalance: (int)bal
 {
-  int tempOutMain;
+  IOCTL_TYPE tempOutMain;
 
   outMainLeft  = lev - (bal/2);
   outMainRight = lev + (bal/2);

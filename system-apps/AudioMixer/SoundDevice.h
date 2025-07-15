@@ -32,6 +32,7 @@
 {
   /* OSS stuff */
   int mixerFd; /* mixer file descriptor */
+  BOOL isStereo;
 
   /* **  */
   int outMainLeft;
