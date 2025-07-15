@@ -76,6 +76,18 @@
             {
               NSLog(@"Mixer is Stereo");
             }
+          if (ioctl(mixerFd, SOUND_MIXER_READ_DEVMASK, &mask) < 0)
+            {
+              NSLog(@"Error reading devices");
+            }
+          if (mask & SOUND_MASK_VOLUME)
+            {
+              char labels[SOUND_MIXER_NRDEVICES][16] = SOUND_DEVICE_LABELS;
+              char names[SOUND_MIXER_NRDEVICES][16] = SOUND_DEVICE_NAMES;
+              NSString *devLabel = [NSString stringWithCString:labels[SOUND_MIXER_VOLUME]];
+              NSString *devName = [NSString stringWithCString:names[SOUND_MIXER_VOLUME]];
+              NSLog(@"Volume device is present. Label: %@ Name: %@", devLabel, devName);
+            }
           if (ioctl(mixerFd, SOUND_MIXER_READ_VOLUME, &tempOutMain) < 0)
             {
               NSLog(@"Error reading main output volume");
