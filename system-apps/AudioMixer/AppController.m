@@ -27,6 +27,7 @@
 */
 
 #import "AppController.h"
+#import "SoundDevice.h"
 
 @implementation AppController
 
