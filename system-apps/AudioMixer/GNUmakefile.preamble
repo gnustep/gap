@@ -21,5 +21,6 @@ ADDITIONAL_INCLUDE_DIRS +=
 ADDITIONAL_LIB_DIRS += 
 
 # Additional GUI libraries to link
-ADDITIONAL_GUI_LIBS += -lossaudio
+#ADDITIONAL_GUI_LIBS += -lossaudio
+#ADDITIONAL_GUI_LIBS += -lalsa
 
