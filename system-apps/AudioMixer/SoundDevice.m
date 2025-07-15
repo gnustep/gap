@@ -67,7 +67,7 @@
       if (mixerFd)
         {
           isStereo = YES;
-          if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_STEREODEVS), &mask) < 0)
+          if (ioctl(mixerFd, SOUND_MIXER_READ_STEREODEVS, &mask) < 0)
             {
               NSLog(@"Mixer is Mono");
               isStereo = NO;
@@ -76,7 +76,7 @@
             {
               NSLog(@"Mixer is Stereo");
             }
-          if (ioctl(mixerFd, MIXER_READ(SOUND_MIXER_VOLUME), &tempOutMain) < 0)
+          if (ioctl(mixerFd, SOUND_MIXER_READ_VOLUME, &tempOutMain) < 0)
             {
               NSLog(@"Error reading main output volume");
             }
@@ -112,7 +112,7 @@
 {
   int balance;
 
-  balance = outMainRight - outMainLeft;
+  balance = (outMainRight - outMainLeft);
 
   return balance;
 }
@@ -120,20 +120,26 @@
 - (void) setMainLevel: (int)lev withBalance: (int)bal
 {
   IOCTL_TYPE tempOutMain;
+  int scaledBalance;
 
-  outMainLeft  = lev - (bal/2);
-  outMainRight = lev + (bal/2);
+  scaledBalance = (bal * lev) / 200;
+  outMainLeft  = lev - scaledBalance;
+  outMainRight = lev + scaledBalance;
 
-  tempOutMain = (outMainLeft & 0xff) | ((outMainRight & 0xff) << 8);
-  NSLog(@"output main to set: %d %d", outMainLeft, outMainRight);
-  if (ioctl(mixerFd, MIXER_WRITE(SOUND_MIXER_VOLUME), &tempOutMain) < 0)
+  tempOutMain = ((outMainRight & 0xff) << 8) | (outMainLeft & 0xff);
+  NSLog(@"output main to set: %d %d -> %lu", outMainLeft, outMainRight, tempOutMain);
+
+  outMainLeft = tempOutMain & 0xff;
+  outMainRight = (tempOutMain >> 8) & 0xff;
+  NSLog(@"output main calc back: %d %d", outMainLeft, outMainRight);
+  if (ioctl(mixerFd, SOUND_MIXER_WRITE_VOLUME, &tempOutMain) < 0)
     {
       NSLog(@"Error setting output volume");
     }
 
   outMainLeft = tempOutMain & 0xff;
   outMainRight = (tempOutMain >> 8) & 0xff;
-  NSLog(@"output main read back: %d %d", outMainLeft, outMainRight);
+  NSLog(@"output main read back: %d %d (%lu)", outMainLeft, outMainRight, tempOutMain);
 }
 
 @end
