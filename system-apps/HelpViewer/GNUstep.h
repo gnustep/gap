@@ -25,6 +25,13 @@
 #define __GNUSTEP_GNUSTEP_H_INCLUDED_
 
 #ifdef MACOSX
+
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+typedef int NSInteger;
+typedef unsigned NSUInteger;
+typedef float CGFloat;
+#endif
+
 #ifndef GNUSTEP
 
 #define AUTORELEASE(object)      [object autorelease]
