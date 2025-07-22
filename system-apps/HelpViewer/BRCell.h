@@ -24,6 +24,7 @@
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include <AppKit/NSTextAttachment.h>
+#include "GNUstep.h"
 
 @interface BRCell : NSTextAttachmentCell
 {
