@@ -63,7 +63,7 @@
     [paragraph setHeadIndent: leadingMargin];
     [paragraph setFirstLineHeadIndent: leadingMargin];
     [paragraph setTailIndent: -trailingMargin];
-    [paragraph setLineBreakMode: NSLineBreakByWordWrapping];
+    [paragraph setLineBreakMode: [self lineBreakMode]];
 
       
     NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 

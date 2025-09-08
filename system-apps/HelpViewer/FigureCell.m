@@ -74,7 +74,7 @@
 	      [paragraph setTailIndent: margin];
 	      [paragraph setHeadIndent: 0.0];
 	      [paragraph setFirstLineHeadIndent: 0.0];
-              [paragraph setLineBreakMode: NSLineBreakByWordWrapping];
+              [paragraph setLineBreakMode: [self lineBreakMode]];
 
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
@@ -246,7 +246,7 @@
 	      [paragraph setTailIndent: margin];
 	      [paragraph setHeadIndent: 0.0];
 	      [paragraph setFirstLineHeadIndent: 0.0];
-              [paragraph setLineBreakMode: NSLineBreakByWordWrapping];
+              [paragraph setLineBreakMode: [self lineBreakMode]];
 	      
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
