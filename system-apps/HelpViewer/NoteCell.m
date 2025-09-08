@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
-                  2020-2021 Riccardo Mottola <rm@gnu.org>
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,34 +19,52 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "NoteCell.h"
+#import "NoteCell.h"
 
 @implementation NoteCell
 
-- (id) initWithTextView: (NSTextView*) textview 
+- (id) init
 {
-  if ((self = [super init]))
+  NSLog(@"NoteCell init");
+  if ((self = [super initImageCell:nil]))
     {
-      _image = nil;
       _note = nil;
       _color = nil;
       imageBorder = 4.0;
       leadingMargin = 8.0;
       trailingMargin = 4.0;
-      [self resizeWithTextView: textview];
     }
-  return self;    
+  return self;
+}
+
+- (id) initImageCell:(NSImage *)image
+{
+  NSLog(@"NoteCell initImageCell");
+  if ((self = [self init]))
+    {
+      [self setImage:image];
+    }
+  return self;
+}
+
+- (id) initTextCell:(NSString *)aString
+{
+  NSLog(@"NoteCell initTextCell not implemented");
+  return nil;
 }
 
 - (void) setText: (NSMutableAttributedString*) text
 {
     ASSIGN (_note, text);
+    NSLog(@"NoteCell setText: %@", [text string]);
 
     NSMutableParagraphStyle* paragraph = [NSMutableParagraphStyle new];
     [paragraph setAlignment: NSLeftTextAlignment];
     [paragraph setHeadIndent: leadingMargin];
     [paragraph setFirstLineHeadIndent: leadingMargin];
     [paragraph setTailIndent: -trailingMargin];
+    [paragraph setLineBreakMode: NSLineBreakByWordWrapping];
+
       
     NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 							   forKey: NSParagraphStyleAttributeName];
@@ -57,7 +75,7 @@
 
 - (void) setImage:  (NSImage*) img
 {
-    ASSIGN (_image, img);
+  [super setImage: img];
 }
 
 - (void) setColor: (NSColor*) color
@@ -72,7 +90,7 @@
 
 - (void) resize: (id) sender
 {
-	[self resizeWithTextView: [sender object]];
+    [self resizeWithTextView: [sender object]];
 }
 
 - (void) resizeWithTextView: (NSTextView*) textView
@@ -82,8 +100,10 @@
     CGFloat textHeight = 0.0;
     CGFloat imageWidth = 0.0;
 
-    if (_image)
+    if ([self image])
       {
+        NSImage* _image = [self image];
+      
 	imageWidth = [_image size].width;
 	height = [_image size].height;
 	width = imageWidth;
@@ -99,14 +119,14 @@
 	size.height = 9999.0;
 	if (size.width <= 0)
 	  size.width = [textView bounds].size.width;
-        noteSize = [_note boundingRectWithSize:size options:0].size;
+        noteSize = [_note boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin].size;
 	NSLog(@"input %@ output %@", NSStringFromSize(size), NSStringFromSize(noteSize));
 	textHeight = noteSize.height;
 	if (textHeight > height)
 	  height = textHeight;
 	width += size.width;
       }
-   
+
     NSLog (@"NoteCell: width : %.2f height : %.2f", width, height);
 
     _size = NSMakeSize (width, height);
@@ -115,12 +135,14 @@
 - (void) drawWithFrame: (NSRect) cellFrame
     inView: (NSView*) controlView
 {
-  [super drawWithFrame: cellFrame inView: controlView];
+//  [super drawWithFrame: cellFrame inView: controlView]; // doesn't work on Cocoa, drawInterioWithFrame does not get called
+  [self drawInteriorWithFrame: cellFrame inView: controlView];
 }
 
 - (void) drawInteriorWithFrame: (NSRect) cellFrame
     inView: (NSView*) controlView
 {
+  //  NSLog(@"NoteCell drawInteriorWithFrame: cellFrame: %@ inView: %@", NSStringFromRect(cellFrame), controlView);
   if (![controlView window])
     return;
 
@@ -161,8 +183,10 @@
       NSPoint noteOrigin = NSZeroPoint;
       NSRect noteRect;
 
-      if (_image)
+      if ([self image])
 	{
+          NSImage* _image = [self image];
+
 	  imageWidth = [_image size].width;
 	  imageHeight = [_image size].height;
 

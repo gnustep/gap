@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
-                  2020-2021 Riccardo Mottola <rm@gnu.org>
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,13 +22,12 @@
 #ifndef __NOTE_CELL_H__
 #define __NOTE_CELL_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "GNUstep.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "GNUstep.h"
 
 @interface NoteCell : NSTextAttachmentCell
 {
-    NSImage* _image;
     NSMutableAttributedString* _note;
     NSSize noteSize;
     NSSize _size;
@@ -37,15 +36,16 @@
     CGFloat leadingMargin;
     CGFloat trailingMargin;
 }
-- (id) initWithTextView: (NSTextView*) textview;
+
 - (NSSize) cellSize;
-- (void) setImage: (NSImage*) img;
+
 - (void) setColor: (NSColor*) color;
 - (void) setText: (NSMutableAttributedString*) text;
 - (void) resize: (id) sender;
 - (void) resizeWithTextView: (NSTextView*) textview;
 - (void) drawWithFrame: (NSRect) cellFrame
     inView: (NSView*) controlView;
+
 @end
 
 #endif
