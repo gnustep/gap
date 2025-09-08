@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
-                  2020-2021 Riccardo Mottola <rm@gnu.org>
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@
 
 - (void) resize: (id) sender
 {
-	[self resizeWithTextView: [sender object]];
+  [self resizeWithTextView: [sender object]];
 }
 
 - (void) resizeWithTextView: (NSTextView*) textView
@@ -74,6 +74,7 @@
 	      [paragraph setTailIndent: margin];
 	      [paragraph setHeadIndent: 0.0];
 	      [paragraph setFirstLineHeadIndent: 0.0];
+              [paragraph setLineBreakMode: NSLineBreakByWordWrapping];
 
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
@@ -135,6 +136,7 @@
 {
   CGFloat posY = interspace;
   NSUInteger i;
+
   for (i = 0; i < [legends count]; i++)
     {
       NSRect r;
@@ -143,7 +145,7 @@
       [[current legend] addAttributes: attributes 
 				range: NSMakeRange (0, [[current legend] length])];
       NSSize s = [[current legend] size];
-      //      NSSize s = [[current legend] sizeWithAttributes: attributes];
+      s = [[current legend] boundingRectWithSize:s options:NSStringDrawingUsesLineFragmentOrigin].size;
 
       if (!right)
 	{
@@ -194,8 +196,7 @@
       [path fill];
       [path release];
 
-//    [[current legend] drawAtPoint: t withAttributes: attributes];            
-      [[current legend] drawAtPoint: t];
+      [[current legend] drawInRect:NSMakeRect(t.x, t.y, s.width, s.height)];
 
       NSBezierPath* path2 = [NSBezierPath bezierPath];
           
@@ -245,6 +246,7 @@
 	      [paragraph setTailIndent: margin];
 	      [paragraph setHeadIndent: 0.0];
 	      [paragraph setFirstLineHeadIndent: 0.0];
+              [paragraph setLineBreakMode: NSLineBreakByWordWrapping];
 	      
 	      NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 		    forKey: NSParagraphStyleAttributeName];
