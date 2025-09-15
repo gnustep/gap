@@ -3,15 +3,14 @@
 //  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018-2021 GNUstep. All rights reserved.
+//  Copyright 2018-2025 GNUstep. All rights reserved.
 //
 
 #import "Engine.h"
 #import "FileObject.h"
 #import "FileMap.h"
 #import "FileArray.h"
-
-#import <AppKit/NSProgressIndicator.h>
+#import "AppController.h"
 
 // seconds under which two dates expressed in seconds are considered equals
 // file systems have different granularity, so this is necessary
@@ -41,6 +40,11 @@
       skipThumbFiles = YES;
       forceUpdateIfOnlyDateDiffers = NO;
       dateTimeTolerance = 0;
+
+      progressIsDeterminate = NO;
+      progressMinValue = 0;
+      progressMaxValue = 0;
+      progressCurrentValue = 0;
     }
   return self;
 }
@@ -57,6 +61,31 @@
   [sizeDiffFiles release];
   [dateDiffFiles release];
   [super dealloc];
+}
+
+- (void)setController:(id)ac
+{
+  controller = ac;
+}
+
+- (BOOL) progressIsDeterminate
+{
+  return progressIsDeterminate;
+}
+
+- (NSUInteger) progressMinValue
+{
+  return progressMinValue;
+}
+
+- (NSUInteger) progressMaxValue
+{
+  return progressMaxValue;
+}
+
+- (NSUInteger) progressCurrentValue
+{
+  return progressCurrentValue;
 }
 
 - (BOOL)analyzed
@@ -87,12 +116,6 @@
 - (void)setDeleteItems:(BOOL)flag
 {
   deleteItems = flag;
-}
-
-
-- (void)setProgressIndicator:(NSProgressIndicator *)pi
-{
-  progressIndicator = pi;
 }
 
 - (BOOL)skipHiddenFolders
@@ -135,9 +158,19 @@
   forceUpdateIfOnlyDateDiffers = flag;
 }
 
+- (NSString *)sourceRoot
+{
+  return sourceRoot;
+}
+
 - (void)setSourceRoot: (NSString *)path
 {
   sourceRoot = path;
+}
+
+- (NSString *)targetRoot
+{
+  return targetRoot;
 }
 
 - (void)setTargetRoot: (NSString *)path
@@ -223,19 +256,18 @@
 
   arp = [NSAutoreleasePool new];
   stopTask = NO;
-  [progressIndicator performSelectorOnMainThread:@selector(setIndeterminateWithNumber:)
-				      withObject:[NSNumber numberWithBool:YES]
-				   waitUntilDone:NO];
-  [progressIndicator performSelectorOnMainThread:@selector(startAnimation:)
-				      withObject:nil
-				   waitUntilDone:NO];
+  
+  progressIsDeterminate = NO;
+  [controller performSelectorOnMainThread:@selector(initProgress:)
+			       withObject:self
+			    waitUntilDone:NO];
 
   [targetMissingFiles release];
   [sourceMissingFiles release];
   [targetModFiles release];
   [sourceModFiles release];
   [sizeDiffFiles release];
-  
+
   [sourceMap release];
   sourceMap = [[FileMap alloc] init];
   [sourceMap setRootPath:sourceRoot];
@@ -243,7 +275,7 @@
   [sourceMap setSkipHiddenFiles:skipHiddenFiles];
   [sourceMap setSkipThumbFiles:skipThumbFiles];
 
-  
+
   [sourceMap analyze];
   
   sourceFileDict = [sourceMap files];
@@ -255,7 +287,6 @@
   [targetMap setSkipHiddenFolders:skipHiddenFolders];
   [targetMap setSkipHiddenFiles:skipHiddenFiles];
   [targetMap setSkipThumbFiles:skipThumbFiles];
-  
   [targetMap analyze];
 
   targetFileDict = [targetMap files];
@@ -351,10 +382,10 @@
   NSLog(@"date differing files with same size: %@", dateDiffFiles);
 
   analyzed = YES;
-  [progressIndicator performSelectorOnMainThread:@selector(stopAnimation:)
-				      withObject:nil
-				   waitUntilDone:NO];
-  
+  [controller performSelectorOnMainThread:@selector(finishProgress:)
+                               withObject:nil
+                            waitUntilDone:NO];
+
   [arp release];
 }
 
@@ -384,8 +415,11 @@
   fm = [NSFileManager defaultManager];
 
   stopTask = NO;
-  [progressIndicator setIndeterminate:NO];
-    
+  progressIsDeterminate = YES;
+  [controller performSelectorOnMainThread:@selector(initProgress:)
+                               withObject:self
+                            waitUntilDone:NO];
+
   if (forceUpdateIfOnlyDateDiffers)
     [sourceModFiles addObjectsFromArray:dateDiffFiles];
 
@@ -397,7 +431,7 @@
       [targetModFiles release];
       targetModFiles = nil;
     }
-  
+
   // calculate total items exactly the same way as executed
   totalItems = 0;
   if (handleDirectories)
@@ -433,9 +467,13 @@
       totalItems += [targetModFiles count];
     }
 
-  [progressIndicator setMinValue:0.0];
-  [progressIndicator setMaxValue:(double)totalItems];
-  [progressIndicator setDoubleValue:0.0];
+  progressMinValue = 0;
+  progressMaxValue = totalItems;
+  progressCurrentValue = 0;
+
+  [controller performSelectorOnMainThread:@selector(initProgress:)
+                               withObject:self
+                            waitUntilDone:NO];
 
   if (handleDirectories)
     {
@@ -453,7 +491,10 @@
 		{
 		  NSLog(@"error creating: %@", fullPath);
 		}
-              [progressIndicator incrementBy:1.0];
+              progressCurrentValue++;
+              [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                           withObject:self
+                                        waitUntilDone:NO];
 	    }
 
 	  if (deleteItems)
@@ -468,7 +509,10 @@
 		    {
 		      NSLog(@"error removing: %@", fullPath);
 		    }
-                  [progressIndicator incrementBy:1.0];
+                  progressCurrentValue++;
+                  [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                               withObject:self
+                                            waitUntilDone:NO];
 		}
 	    }
 	}
@@ -486,7 +530,10 @@
 		{
 		  NSLog(@"error creating: %@", fullPath);
 		}
-              [progressIndicator incrementBy:1.0];
+              progressCurrentValue++;
+              [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                           withObject:self
+                                        waitUntilDone:NO];
 	    }
 
 	  if (deleteItems)
@@ -501,7 +548,10 @@
 		    {
 		      NSLog(@"error removing: %@", fullPath);
 		    }
-                  [progressIndicator incrementBy:1.0];
+                  progressCurrentValue++;
+                  [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                               withObject:self
+                                            waitUntilDone:NO];
 		}
 	    }
 	}
@@ -519,7 +569,10 @@
 	  /* TODO should recheck ? */
 	  newAbsolutePath = [[targetMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
 	  [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-          [progressIndicator incrementBy:1.0];
+          progressCurrentValue++;
+          [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                       withObject:self
+                                    waitUntilDone:NO];
 	}
     }
   
@@ -538,7 +591,10 @@
 	    {
 	      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
 	    }
-          [progressIndicator incrementBy:1.0];
+          progressCurrentValue++;
+          [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                       withObject:self
+                                    waitUntilDone:NO];
 	}
     }
 
@@ -555,7 +611,10 @@
 	    {
 	      NSLog(@"Error removing file: %@", [fileObj absolutePath]);
 	    }
-	  [progressIndicator incrementBy:1.0];
+          progressCurrentValue++;
+          [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                       withObject:self
+                                    waitUntilDone:NO];
 	}
     }
   /* copy the files to source */
@@ -572,8 +631,10 @@
 
               /* TODO should recheck ? */
               newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
-              [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
-              [progressIndicator incrementBy:1.0];
+              progressCurrentValue++;
+              [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                           withObject:self
+                                        waitUntilDone:NO];
             }
         }
       for (i = 0; i < [targetModFiles count] && !stopTask; i++)
@@ -589,7 +650,10 @@
 	    {
 	      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
 	    }
-	  [progressIndicator incrementBy:1.0];
+          progressCurrentValue++;
+          [controller performSelectorOnMainThread:@selector(updateProgress:)
+                                       withObject:self
+                                    waitUntilDone:NO];
 	}
     }
 

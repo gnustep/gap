@@ -8,14 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class NSProgressIndicator;
 @class FileMap;
 @class FileArray;
 
 @interface Engine : NSObject
 {
-  NSProgressIndicator *progressIndicator;
-  
+  id controller;
+
   BOOL analyzed;
   BOOL stopTask;
   FileMap *sourceMap;
@@ -41,7 +40,15 @@
   unsigned dateTimeTolerance;
   NSString *sourceRoot;
   NSString *targetRoot;
+  
+  /* progress status */
+  BOOL progressIsDeterminate;
+  NSUInteger progressMinValue;
+  NSUInteger progressMaxValue;
+  NSUInteger progressCurrentValue;
 }
+
+- (void)setController:(id)ac;
 
 - (BOOL)analyzed;
 - (void)setHandleDirectories:(BOOL)flag;
@@ -50,7 +57,6 @@
 - (void)setUpdateItems:(BOOL)flag;
 - (void)setDeleteItems:(BOOL)flag;
 
-- (void)setProgressIndicator:(NSProgressIndicator *)pi;
 - (BOOL)skipHiddenFolders;
 - (void)setSkipHiddenFolders:(BOOL)flag;
 - (BOOL)skipHiddenFiles;
@@ -62,7 +68,10 @@
 - (unsigned)dateTimeTolerance;
 - (void)setDateTimeTolerance: (unsigned)delta;
 
+- (NSString *)sourceRoot;
 - (void)setSourceRoot: (NSString *)path;
+
+- (NSString *)targetRoot;
 - (void)setTargetRoot: (NSString *)path;
 
 - (FileMap *)sourceMap;
@@ -83,5 +92,10 @@
 - (void)analyze;
 - (BOOL)checkFreeSpace;
 - (void)synchronize;
+
+- (BOOL) progressIsDeterminate;
+- (NSUInteger) progressMinValue;
+- (NSUInteger) progressMaxValue;
+- (NSUInteger) progressCurrentValue;
 
 @end

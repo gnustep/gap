@@ -31,14 +31,6 @@
 @class FileMap;
 @class Engine;
 
-@interface NSButton (ThreadExtensions)
-- (void)setEnabledWithNumber:(NSNumber *)enabled;
-@end
-
-@interface NSProgressIndicator (ThreadExtensions)
-- (void)setIndeterminateWithNumber:(NSNumber *)flag;
-@end
-
 @interface AppController : NSObject
 {
   IBOutlet NSTextField *sourcePathField;
@@ -83,5 +75,9 @@
 - (void)reportAnalysis;
 - (IBAction)syncAction:(id)sender;
 - (IBAction)stopTask:(id)sender;
+
+- (void)initProgress:(id)sender;
+- (void)updateProgress:(id)sender;
+- (void)finishProgress:(id)sender;
 
 @end

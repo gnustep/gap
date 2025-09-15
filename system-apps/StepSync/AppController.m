@@ -2,7 +2,7 @@
  Project: StepSync
  AppController.m
  
- Copyright (C) 2017-2021 Free Software Foundation
+ Copyright (C) 2017-2025 Free Software Foundation
  
  Author: Riccardo Mottola
  
@@ -28,20 +28,6 @@
 #import "FileObject.h"
 #import "FileArray.h"
 #import "Engine.h"
-
-@implementation NSButton (ThreadExtensions)
-- (void)setEnabledWithNumber:(NSNumber *)flag
-{
-  [self setEnabled:[flag boolValue]];
-}
-@end
-
-@implementation NSProgressIndicator (ThreadExtensions)
-- (void)setIndeterminateWithNumber:(NSNumber *)flag
-{
-  [self setIndeterminate:[flag boolValue]];
-}
-@end
 
 
 @implementation AppController
@@ -81,13 +67,13 @@
 #if defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6)
   [logView setAutomaticSpellingCorrectionEnabled:NO];
 #endif
-  
+
   [analyzeButton setEnabled:YES];
   [syncButton setEnabled:YES];
   [stopButton setEnabled:NO];
-  
+
   engine = [[Engine alloc] init];
-  [engine setProgressIndicator:progressBar];
+  [engine setController:self];
 }
 
 - (IBAction)showPreferences:(id)sender
@@ -192,51 +178,41 @@
   
   arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
 
-  [stopButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
-                               withObject:[NSNumber numberWithBool:YES]
-                            waitUntilDone:NO];
-  [analyzeButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
-				  withObject:[NSNumber numberWithBool:NO]
-			       waitUntilDone:NO];
-  [syncButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
-			       withObject:[NSNumber numberWithBool:NO]
-			    waitUntilDone:NO];
-
-  [engine setSourceRoot: [sourcePathField stringValue]];
-  [engine setTargetRoot: [targetPathField stringValue]];
-  [defaults setObject: [sourcePathField stringValue] forKey: @"LAST_ANALYZED_SOURCE_PATH"];
-  [defaults setObject: [targetPathField stringValue] forKey: @"LAST_ANALYZED_TARGET_PATH"];
+  [defaults setObject: [engine sourceRoot] forKey: @"LAST_ANALYZED_SOURCE_PATH"];
+  [defaults setObject: [engine targetRoot] forKey: @"LAST_ANALYZED_TARGET_PATH"];
   [engine analyze];
   
-  [sourceDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine sourceMap] directories] count]] description]];
-  [sourceFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine sourceMap] files] count]] description]];
+  [sourceDirNumberField setStringValue:[[NSNumber numberWithUnsignedInteger:[[[engine sourceMap] directories] count]] description]];
+  [sourceFileNumberField setStringValue:[[NSNumber numberWithUnsignedInteger:[[[engine sourceMap] files] count]] description]];
 
-  [targetDirNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine targetMap] directories] count]] description]];
-  [targetFileNumberField setStringValue:[[NSNumber numberWithUnsignedInt:[[[engine targetMap] files] count]] description]];
-  
+  [targetDirNumberField setStringValue:[[NSNumber numberWithUnsignedInteger:[[[engine targetMap] directories] count]] description]];
+  [targetFileNumberField setStringValue:[[NSNumber numberWithUnsignedInteger:[[[engine targetMap] files] count]] description]];
+
   [sourceSizeField setStringValue:[FileObject formatSize:[[engine sourceMap] size]]];
   [targetSizeField setStringValue:[FileObject formatSize:[[engine targetMap] size]]];
 
-  [stopButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
-			       withObject:[NSNumber numberWithBool:NO]
-			    waitUntilDone:NO];
-  [analyzeButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
-				  withObject:[NSNumber numberWithBool:YES]
-			       waitUntilDone:NO];
-  [syncButton performSelectorOnMainThread:@selector(setEnabledWithNumber:)
-			       withObject:[NSNumber numberWithBool:YES]
-			    waitUntilDone:NO];
   [self reportAnalysis];
-  
+
   if (![engine checkFreeSpace])
     {
       NSLog(@"Maybe not enough free space");
     }
+
+  [stopButton setEnabled:NO];
+  [analyzeButton setEnabled:YES];
+  [syncButton setEnabled:YES];
   [arp release];
 }
 
 - (IBAction)analyzeAction:(id)sender
 {
+  [engine setSourceRoot: [sourcePathField stringValue]];
+  [engine setTargetRoot: [targetPathField stringValue]];
+
+  [stopButton setEnabled:YES];
+  [analyzeButton setEnabled:NO];
+  [syncButton setEnabled:NO];
+
   [NSThread detachNewThreadSelector:@selector(performAnalyze:) toTarget:self withObject:nil];
 }
 
@@ -518,7 +494,7 @@
 
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
-   
+
 
   /* -- Files different in size between Source and Target -- */
   [attrStrMut appendAttributedString:sepAttrStr];
@@ -616,7 +592,6 @@
   [attrStrMut appendAttributedString:attrStr];
   [attrStr release];
 
-   
   [self performSelectorOnMainThread:@selector(_appendStringToViewAndScroll:) withObject:attrStrMut waitUntilDone:NO];
 
   [attrStrMut autorelease]; // used on another thread
@@ -628,25 +603,12 @@
   NSAutoreleasePool *arp;
   
   arp = [NSAutoreleasePool new]; // we are in a thread, have our own ARP
-  
+
   if (![engine analyzed])
     [self performAnalyze:sender];
 
-  [engine setSourceRoot: [sourcePathField stringValue]];
-  [engine setTargetRoot:[targetPathField stringValue]];
-  
-  [engine setHandleDirectories: [handleDirectoriesCheck state] == NSOnState];
-  [engine setUpdateSource: [updateSourceCheck state] == NSOnState];
-  [engine setInsertItems: [insertItemsCheck state] == NSOnState];
-  [engine setUpdateItems: [updateItemsCheck state] == NSOnState];
-  [engine setDeleteItems: [deleteItemsCheck state] == NSOnState];
-  
-  [analyzeButton setEnabled:NO];
-  [syncButton setEnabled:NO];
-  [stopButton setEnabled:YES];
-  
   [engine synchronize];
-  
+
   [syncButton setEnabled:NO];
   [analyzeButton setEnabled:YES];
   [stopButton setEnabled:NO];
@@ -655,6 +617,19 @@
 
 - (IBAction)syncAction:(id)sender
 {
+  [engine setSourceRoot: [sourcePathField stringValue]];
+  [engine setTargetRoot:[targetPathField stringValue]];
+
+  [engine setHandleDirectories: [handleDirectoriesCheck state] == NSOnState];
+  [engine setUpdateSource: [updateSourceCheck state] == NSOnState];
+  [engine setInsertItems: [insertItemsCheck state] == NSOnState];
+  [engine setUpdateItems: [updateItemsCheck state] == NSOnState];
+  [engine setDeleteItems: [deleteItemsCheck state] == NSOnState];
+
+  [analyzeButton setEnabled:NO];
+  [syncButton setEnabled:NO];
+  [stopButton setEnabled:YES];
+
   [NSThread detachNewThreadSelector:@selector(performSync:) toTarget:self withObject:nil];
 }
 
@@ -666,10 +641,42 @@
   [ts deleteCharactersInRange:NSMakeRange(0, [[ts mutableString] length])];
 }
 
+- (void)initProgress:(id)sender
+{
+  if ([engine progressIsDeterminate])
+    {
+      [progressBar setIndeterminate:NO];
+      [progressBar stopAnimation:nil];
+      [progressBar setMinValue:[engine progressMinValue]];
+      [progressBar setMaxValue:(double)[engine progressMaxValue]];
+    }
+  else
+    {
+      [progressBar setIndeterminate:YES];
+      [progressBar startAnimation:nil];
+    }
+}
+
+- (void)updateProgress:(id)sender
+{
+  if ([engine progressIsDeterminate])
+    {
+      [progressBar setDoubleValue:[engine progressCurrentValue]];
+    }
+}
+
+- (void)finishProgress:(id)sender
+{
+  if ([engine progressIsDeterminate] == NO)
+    {
+      [progressBar stopAnimation:nil];
+    }
+}
+
 - (void)_appendStringToViewAndScroll:(NSAttributedString *)str
 {
   [str retain];
-  
+
   [[logView textStorage] appendAttributedString: str];
 
   /* we scroll in the next run of the event loop */
