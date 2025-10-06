@@ -36,6 +36,7 @@
       ASSIGN (legend, str);
       point = p;
       rightPos = NO;
+      size = [legend size];
     }
   return self;
 }
@@ -72,9 +73,19 @@
 - (NSMutableAttributedString*) legend { return legend; }
 - (NSPoint) point { return point; }
 - (void) setPoint: (NSPoint) p { point = p; }
-- (CGFloat) height { return height; }
-- (void) setHeight: (CGFloat) h { height = h; }
+
+- (CGFloat) height
+{
+  return size.height;
+}
+
+- (void) setHeight: (CGFloat) h
+{
+  size.height = h;
+}
+
 - (void) setRightPos { rightPos = YES; }
 - (BOOL) isRightPos { return rightPos; }
+
 @end
 

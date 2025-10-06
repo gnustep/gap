@@ -29,19 +29,24 @@
 {
     NSMutableAttributedString* legend;
     NSPoint point;
-    CGFloat height;
+    NSSize size;
     BOOL rightPos;
 }
+
 + (id) legendWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p;
 - (id) initWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p;
 - (NSMutableAttributedString*) legend;
+
 - (NSPoint) point;
 - (CGFloat) height;
 - (void) setHeight: (CGFloat) h;
 - (void) setRightPos;
 - (void) setPoint: (NSPoint) p;
+- (NSSize) size;
+
 - (BOOL) isRightPos;
 - (NSComparisonResult) compareWith: (id)sender;
+
 @end
 
 #endif
