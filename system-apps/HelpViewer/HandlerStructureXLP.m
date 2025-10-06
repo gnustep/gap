@@ -108,8 +108,8 @@
 	}
 	else
 	{
-		id tag = [[NSString alloc] initWithFormat: @"<%@", elementName];
-		id str = [[NSMutableAttributedString alloc] initWithString: tag];
+		NSString *tag = [[NSString alloc] initWithFormat: @"<%@", elementName];
+		NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString: tag];
 
 		[tag release];
 		
@@ -118,14 +118,14 @@
 	
 		while ((key = [enumerator nextObject])) 
 		{
-			id strelem = [[NSString alloc] initWithFormat: @" %@=\"\%@\"",
+			NSString *strelem = [[NSString alloc] initWithFormat: @" %@=\"\%@\"",
 				key, [elementAttributes objectForKey: key]];
-			id astrelem = [[NSMutableAttributedString alloc] initWithString: strelem];
+			NSMutableAttributedString *astrelem = [[NSMutableAttributedString alloc] initWithString: strelem];
 			[str appendAttributedString: astrelem];
 			[astrelem release];
 			[strelem release];
 	    	}
-		id strend = [[NSMutableAttributedString alloc] initWithString: @">"];
+		NSMutableAttributedString *strend = [[NSMutableAttributedString alloc] initWithString: @">"];
 
 		[_currentContent appendAttributedString: str];
 		[_currentContent appendAttributedString: strend];
