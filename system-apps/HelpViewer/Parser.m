@@ -50,178 +50,177 @@
 
 - (BOOL) parse
 {
-    NSString* file = [[NSString alloc] initWithData: _data encoding: NSISOLatin1StringEncoding];
-    NSMutableString* current = [[NSMutableString alloc] init];
+  NSString* file = [[NSString alloc] initWithData: _data encoding: NSISOLatin1StringEncoding];
+  NSMutableString* current = [[NSMutableString alloc] init];
 
-    if (file != nil)
+  if (file != nil)
     {
-	NSUInteger i;
-	unsigned entityIdx = 0;
-	char entityBuf[MAX_ENTITY_LEN+1];
-        BOOL inEntity = NO;;
-	BOOL Tag = NO;
-	BOOL isEndingTag = NO;
-	BOOL attributeStarted = NO;
-	NSString* tagName = nil;
-	NSString* keyAttribute = nil;
-	NSMutableDictionary* tagAttributes = nil;
+      NSUInteger i;
+      unsigned entityIdx = 0;
+      char entityBuf[MAX_ENTITY_LEN+1];
+      BOOL inEntity = NO;;
+      BOOL Tag = NO;
+      BOOL isEndingTag = NO;
+      BOOL attributeStarted = NO;
+      NSString* tagName = nil;
+      NSString* keyAttribute = nil;
+      NSMutableDictionary* tagAttributes = nil;
 
-	NSLog (@"file length : %lu", (unsigned long)[file length]);
-
-	for (i=0; i < [file length]; i++)
+      NSLog (@"file length : %lu", (unsigned long)[file length]);
+        
+      for (i=0; i < [file length]; i++)
 	{
-	    unichar c = [file characterAtIndex: i];
+          unichar c = [file characterAtIndex: i];
 
-	    if (!inEntity && c == '&')
-	      {
-		entityIdx = 0;
-                inEntity = YES;
-	      }
-	    else if (inEntity)
-	      {
-		if (c == ';')
-		  {
-		    NSString *entityStr = nil;
+          if (!inEntity && c == '&')
+            {
+              entityIdx = 0;
+              inEntity = YES;
+            }
+          else if (inEntity)
+            {
+              if (c == ';')
+                {
+                  NSString *entityStr = nil;
 
-		    entityBuf[entityIdx] = '\0';
-		    entityStr = charFromEntity(entityBuf);
-                    if (entityStr)
-                      [current appendString : entityStr];
-		    inEntity = NO;
-		  }
-		else
-		  {
-		    entityBuf[entityIdx] = (char)c;
-		    entityIdx++;
-		    if (entityIdx == MAX_ENTITY_LEN)
-		      {
-			entityBuf[entityIdx-1] = '\0';
-			NSLog(@"found too long entity name to store in buffer. Got up to |%s|", entityBuf);
-		      }
-		  }
-	      }
-	    else if ((!Tag) && (c == '<'))
+                  entityBuf[entityIdx] = '\0';
+                  entityStr = charFromEntity(entityBuf);
+                  if (entityStr)
+                    [current appendString : entityStr];
+                  inEntity = NO;
+                }
+              else
+                {
+                  entityBuf[entityIdx] = (char)c;
+                  entityIdx++;
+                  if (entityIdx == MAX_ENTITY_LEN)
+                    {
+                      entityBuf[entityIdx-1] = '\0';
+                      NSLog(@"found too long entity name to store in buffer. Got up to |%s|", entityBuf);
+                    }
+                }
+            }
+          else if ((!Tag) && (c == '<'))
 	    {
-		// We have a tag ...
-		Tag = YES;
+              // We have a tag ...
+              Tag = YES;
 
-		// We send the previous characters to the handler
-		[_handler characters: current];
-		
-		// We recreate a current string
-		RESET (current);
+              // We send the previous characters to the handler
+              [_handler characters: current];
+
+              // We recreate a current string
+              RESET (current);
 	    }
-	    else if ((Tag) && (c == '>')) 
+          else if ((Tag) && (c == '>')) 
 	    {
-		// We close a tag ...
-		Tag = NO;
+              // We close a tag ...
+              Tag = NO;
 
-		// We send the tag to the handler
-		if (isEndingTag)
+              // We send the tag to the handler
+              if (isEndingTag)
 		{
 		  NSLog(@"Ending tag Current is %@ but tag name is %@ attributes %@", current, tagName, tagAttributes);
 		  // <tag/> shortcut detected, start-end together
 		  if ([current length] == 0)
 		    {
-		       NSLog(@"XML short ending. Current is %@ but tag name is %@", current, tagName);
-		       [_handler startElement: tagName attributes: tagAttributes];
-		       [_handler endElement: tagName];
-		       [tagName release]; tagName = nil;
-		       [keyAttribute release]; keyAttribute = nil;
-		       [tagAttributes release]; tagAttributes = nil;
+                      NSLog(@"XML short ending. Current is %@ but tag name is %@", current, tagName);
+                      [_handler startElement: tagName attributes: tagAttributes];
+                      [_handler endElement: tagName];
+                      [tagName release]; tagName = nil;
+                      [keyAttribute release]; keyAttribute = nil;
+                      [tagAttributes release]; tagAttributes = nil;
 		    }
 		  else
 		    {
 		      [_handler endElement: current];
 		    }
-		    isEndingTag = NO;
+                  isEndingTag = NO;
 		}
-		else
+              else
 		{
-		    if (tagName == nil)
+                  if (tagName == nil)
 		    {
-			// If no tag name, current == tag name ...
-			[_handler startElement: current attributes: nil];
+                      // If no tag name, current == tag name ...
+                      [_handler startElement: current attributes: nil];
 		    }
-		    else
+                  else
 		    {
-			[_handler startElement: tagName attributes: tagAttributes];
+                      [_handler startElement: tagName attributes: tagAttributes];
 		    }
-		    [tagName release]; tagName = nil;
-		    [keyAttribute release]; keyAttribute = nil;
-		    [tagAttributes release]; tagAttributes = nil;
+                  [tagName release]; tagName = nil;
+                  [keyAttribute release]; keyAttribute = nil;
+                  [tagAttributes release]; tagAttributes = nil;
 		}
-		RESET (current);
+              RESET (current);
 	    }
-	    else 
+          else 
 	    {
-		// other character ...
-
-		if (Tag)
+              // other character ...
+              if (Tag)
 		{
-		    if (c == '/')
+                  if (c == '/')
 		    {
-			// We have a closing tag
-			// FIXME : this approach is not optimal and could be wrong
-			isEndingTag = YES;
+                      // We have a closing tag
+                      // FIXME : this approach is not optimal and could be wrong
+                      isEndingTag = YES;
 		    }
-		    else if (c == ' ')
+                  else if (c == ' ')
 		    {
-			if (tagName == nil)
+                      if (tagName == nil)
 			{
-			    // We set the tag name
-			    tagName = [[NSString alloc] initWithString: current];
-			    RESET (current);
+                          // We set the tag name
+                          tagName = [[NSString alloc] initWithString: current];
+                          RESET (current);
 			}
-			else
-			  {
-			    // careful, don't chew spaces inside tag attributes
-			    [current appendString : [NSString stringWithCharacters: &c length: 1]];
-			  }
+                      else
+                        {
+                          // careful, don't chew spaces inside tag attributes
+                          [current appendString : [NSString stringWithCharacters: &c length: 1]];
+                        }
 		    }
-		    else if (c == '=')
+                  else if (c == '=')
 		    {
-			keyAttribute = [NSString stringWithString: current];
-		        keyAttribute = RETAIN ([NSString trimString: keyAttribute]);
+                      keyAttribute = [NSString stringWithString: current];
+                      keyAttribute = RETAIN ([NSString trimString: keyAttribute]);
 
-			RESET (current);
-			if (tagAttributes == nil) 
+                      RESET (current);
+                      if (tagAttributes == nil) 
 			{
-			    tagAttributes = [[NSMutableDictionary alloc] init];
+                          tagAttributes = [[NSMutableDictionary alloc] init];
 			}
-			attributeStarted = NO;
+                      attributeStarted = NO;
 		    }
-		    else if (c == '"') 
+                  else if (c == '"') 
 		    {
-			if (attributeStarted)
+                      if (attributeStarted)
 			{
-			    [tagAttributes setObject: current forKey: keyAttribute];
-			    [keyAttribute release]; keyAttribute = nil;
-			    RESET (current);
+                          [tagAttributes setObject: current forKey: keyAttribute];
+                          [keyAttribute release]; keyAttribute = nil;
+                          RESET (current);
 			}
-			else 
+                      else 
 			{
-			    attributeStarted = YES;
-			    RESET (current);
+                          attributeStarted = YES;
+                          RESET (current);
 			}
 		    }
-		    else
+                  else
 		    [current appendString : [NSString stringWithCharacters: &c length: 1]];
 		}
-		else
+              else
 		[current appendString : [NSString stringWithCharacters: &c length: 1]];
 	    }
 	}
 
-	NSLog (@"Parse end !");
+      NSLog (@"Parse end !");
 
-	[file release];
-	[current release];
-	[tagName release]; 
-	[keyAttribute release]; 
-	[tagAttributes release]; 
+      [file release];
+      [current release];
+      [tagName release]; 
+      [keyAttribute release]; 
+      [tagAttributes release]; 
     }
-    return YES;
+  return YES;
 }
 
 
