@@ -35,7 +35,7 @@
 {
 }
 
-+ (void) parserWithHandler : (id<SAXHandler>) handler
++ (void) parserWithSAXHandler : (id<SAXHandler>) handler
     withData: (NSData*) data;
 @end
 

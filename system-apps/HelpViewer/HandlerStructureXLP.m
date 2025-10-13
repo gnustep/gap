@@ -257,9 +257,9 @@
 }
 - (void) parse {
 	NSLog (@"HandlerStructureXLP parse");
-	//[Parser parserWithHandler: self withData: content];
+	[Parser parserWithSAXHandler: self withData: content];
 	max = (float) [content length];
-	[[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
+	//[[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
 	current = max;
 }
 

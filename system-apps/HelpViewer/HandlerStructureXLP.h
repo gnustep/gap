@@ -25,15 +25,10 @@
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include "HandlerStructure.h"
-//#include "Parser.h"
+#include "Parser.h"
 #include "ModNSString.h"
 
-#ifdef MACOSX
 @interface HandlerStructureXLP : NSObject <HandlerStructure>
-#else
-#include <GNUstepBase/GSXML.h>
-@interface HandlerStructureXLP : GSSAXHandler <HandlerStructure>
-#endif
 {
 	NSMutableArray* pages;
 	NSString* path;

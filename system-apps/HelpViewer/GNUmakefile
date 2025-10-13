@@ -9,7 +9,7 @@ HelpViewer_OBJC_FILES = main.m mainWindowController.m Label.m \
 			HandlerStructureXLP.m \
 			TextFormatterXLP.m \
 			BrowserCell.m NoteCell.m \
-			ModNSString.m BRCell.m Page.m Section.m # Parser.m # Table.m BRCell.m ViewCell.m TextViewCell.m
+			ModNSString.m BRCell.m Page.m Section.m Parser.m # Table.m BRCell.m ViewCell.m TextViewCell.m
 
 HelpViewer_RESOURCE_FILES = Resources/Index.tiff Resources/Back.tiff Resources/Search.tiff Resources/Bookshelf.tiff Resources/HelpViewer.tiff \
 			Resources/helpviewer-200.tiff Resources/Logo.tiff \

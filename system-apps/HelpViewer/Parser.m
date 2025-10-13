@@ -33,7 +33,7 @@
 
 @implementation Parser
 
-+ (void) parserWithHandler: (id<SAXHandler>) handler
++ (void) parserWithSAXHandler: (id<SAXHandler>) handler
     withData: (NSData*) data
 {
     NSString* file = [[NSString alloc] initWithData: data encoding: NSISOLatin1StringEncoding];
