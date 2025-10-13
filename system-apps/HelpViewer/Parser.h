@@ -33,10 +33,16 @@
 
 @interface Parser : NSObject 
 {
+  id<SAXHandler> _handler;
+  NSData *_data;
 }
 
-+ (void) parserWithSAXHandler : (id<SAXHandler>) handler
-    withData: (NSData*) data;
++ (instancetype) parserWithSAXHandler : (id<SAXHandler>) handler withData: (NSData*) data;
+
+- (instancetype) initWithSAXHandler : (id<SAXHandler>) handler withData: (NSData*) data;
+
+
+- (BOOL) parse;
 @end
 
 NSString *charFromEntity(char *entityName);

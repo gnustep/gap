@@ -33,10 +33,24 @@
 
 @implementation Parser
 
-+ (void) parserWithSAXHandler: (id<SAXHandler>) handler
-    withData: (NSData*) data
++ (instancetype) parserWithSAXHandler: (id<SAXHandler>) handler withData: (NSData*) data
 {
-    NSString* file = [[NSString alloc] initWithData: data encoding: NSISOLatin1StringEncoding];
+  return [[[self alloc] initWithSAXHandler: handler withData: data] autorelease];
+}
+
+- (instancetype) initWithSAXHandler: (id<SAXHandler>) handler withData: (NSData*) data
+{
+  if ((self = [super init]))
+    {
+      _data = data;
+      _handler = handler;
+    }
+  return self;
+}
+
+- (BOOL) parse
+{
+    NSString* file = [[NSString alloc] initWithData: _data encoding: NSISOLatin1StringEncoding];
     NSMutableString* current = [[NSMutableString alloc] init];
 
     if (file != nil)
@@ -92,7 +106,7 @@
 		Tag = YES;
 
 		// We send the previous characters to the handler
-		[handler characters: current];
+		[_handler characters: current];
 		
 		// We recreate a current string
 		RESET (current);
@@ -110,15 +124,15 @@
 		  if ([current length] == 0)
 		    {
 		       NSLog(@"XML short ending. Current is %@ but tag name is %@", current, tagName);
-		       [handler startElement: tagName attributes: tagAttributes];
-		       [handler endElement: tagName];
+		       [_handler startElement: tagName attributes: tagAttributes];
+		       [_handler endElement: tagName];
 		       [tagName release]; tagName = nil;
 		       [keyAttribute release]; keyAttribute = nil;
 		       [tagAttributes release]; tagAttributes = nil;
 		    }
 		  else
 		    {
-		      [handler endElement: current];
+		      [_handler endElement: current];
 		    }
 		    isEndingTag = NO;
 		}
@@ -127,11 +141,11 @@
 		    if (tagName == nil)
 		    {
 			// If no tag name, current == tag name ...
-			[handler startElement: current attributes: nil];
+			[_handler startElement: current attributes: nil];
 		    }
 		    else
 		    {
-			[handler startElement: tagName attributes: tagAttributes];
+			[_handler startElement: tagName attributes: tagAttributes];
 		    }
 		    [tagName release]; tagName = nil;
 		    [keyAttribute release]; keyAttribute = nil;
@@ -207,6 +221,7 @@
 	[keyAttribute release]; 
 	[tagAttributes release]; 
     }
+    return YES;
 }
 
 
