@@ -42,8 +42,9 @@
     if (file != nil)
     {
 	NSUInteger i;
-	unsigned entity = 0;
+	unsigned entityIdx = 0;
 	char entityBuf[MAX_ENTITY_LEN+1];
+        BOOL inEntity = NO;;
 	BOOL Tag = NO;
 	BOOL isEndingTag = NO;
 	BOOL attributeStarted = NO;
@@ -57,29 +58,30 @@
 	{
 	    unichar c = [file characterAtIndex: i];
 
-	    if (!entity && c == '&')
+	    if (!inEntity && c == '&')
 	      {
-		entity = 1;
+		entityIdx = 0;
+                inEntity = YES;
 	      }
-	    else if (entity > 0)
+	    else if (inEntity)
 	      {
 		if (c == ';')
 		  {
 		    NSString *entityStr = nil;
 
-		    entityBuf[entity] = '\0';
+		    entityBuf[entityIdx] = '\0';
 		    entityStr = charFromEntity(entityBuf);
-		    if (entityStr)
-		      [current appendString : entityStr];
-		    entity = 0;
+                    if (entityStr)
+                      [current appendString : entityStr];
+		    inEntity = NO;
 		  }
 		else
 		  {
-		    entityBuf[entity-1] = (char)c;
-		    entity++;
-		    if (entity == MAX_ENTITY_LEN)
+		    entityBuf[entityIdx] = (char)c;
+		    entityIdx++;
+		    if (entityIdx == MAX_ENTITY_LEN)
 		      {
-			entityBuf[entity] = '\0';
+			entityBuf[entityIdx-1] = '\0';
 			NSLog(@"found too long entity name to store in buffer. Got up to |%s|", entityBuf);
 		      }
 		  }
@@ -324,9 +326,13 @@ NSString *charFromEntity(char *entityName)
     { "yuml"  , (unichar)255 },
     { "bull"  , (unichar)8226 }
   };
-  
-  
-  if (entityName[0] == '#')
+
+  if (entityName[0] == '\0')
+    {
+      NSLog(@"mapping nil string");
+      return nil;
+    }
+  else if (entityName[0] == '#')
     {
       NSLog(@"dec/hex entity: %s", entityName);
       if (strlen(entityName) < 8)
