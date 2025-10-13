@@ -36,7 +36,7 @@
       ASSIGN (legend, str);
       point = p;
       rightPos = NO;
-      //size = [legend size];
+      size = [legend size];
     }
   return self;
 }

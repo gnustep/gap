@@ -4,24 +4,7 @@
 			Chaque tag doit être fermé avec le tag fermant correspondant.
 			Par exemple, pour mettre un texte en gras, on doit l'entourer avec le tag <code>&lt;b&gt;</code> :
 		       <listing><code>&lt;b&gt;</code><b>votre texte en gras</b><code>&lt;/b&gt;</code></listing>
-                       <listing><code>&lt;b&gt;</code>votre texte en gras<code>&lt;/b&gt;</code></listing>
-                       <listing>&lt;b&gt;votre texte en gras&lt;/b&gt;</listing>
 
-
-                       <listing>votre texte en gras</listing>
-                       <listing>a</listing>
-                       <listing>ab</listing>
-                       <listing>abc</listing>
-                       <listing>abcd</listing>
-                       <listing>abcde</listing>
-                       <listing>abcdexabcde</listing>
-
-                       <listing>abcdexabcdexabcde</listing>
-
-                       <listing>abcdexabcdexabcdexabcdexabcdexabcdexabcde</listing>
-                       
-                       <listing>abcdexabcdexabcdexabcdexabcdexabcdexabcdexabcdexabcdexabcde</listing>
-                       
 		<section name="Tags de structure">
 			Voici les deux tags de structure principaux :
 			<ul>
@@ -71,12 +54,6 @@
 			pouvez définir des points d'ancrages, en utilisante le tag <i>label</i> :
 			<listing>
                         <code>&lt;label id=&quot;RefID&quot;&gt;</code>
-                        </listing>
-                        <listing>
-                        <code>label id=RefID</code>
-                        </listing>
-                        <listing>
-                        label id=RefID
                         </listing>
 	            </section>
                 </section>		    

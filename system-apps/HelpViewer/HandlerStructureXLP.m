@@ -108,8 +108,8 @@
 	}
 	else
 	{
-		NSString *tag = [[NSString alloc] initWithFormat: @"<%@", elementName];
-		NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString: tag];
+		id tag = [[NSString alloc] initWithFormat: @"<%@", elementName];
+		id str = [[NSMutableAttributedString alloc] initWithString: tag];
 
 		[tag release];
 		
@@ -118,14 +118,14 @@
 	
 		while ((key = [enumerator nextObject])) 
 		{
-			NSString *strelem = [[NSString alloc] initWithFormat: @" %@=\"\%@\"",
+			id strelem = [[NSString alloc] initWithFormat: @" %@=\"\%@\"",
 				key, [elementAttributes objectForKey: key]];
-			NSMutableAttributedString *astrelem = [[NSMutableAttributedString alloc] initWithString: strelem];
+			id astrelem = [[NSMutableAttributedString alloc] initWithString: strelem];
 			[str appendAttributedString: astrelem];
 			[astrelem release];
 			[strelem release];
 	    	}
-		NSMutableAttributedString *strend = [[NSMutableAttributedString alloc] initWithString: @">"];
+		id strend = [[NSMutableAttributedString alloc] initWithString: @">"];
 
 		[_currentContent appendAttributedString: str];
 		[_currentContent appendAttributedString: strend];
@@ -257,9 +257,9 @@
 }
 - (void) parse {
 	NSLog (@"HandlerStructureXLP parse");
-	[Parser parserWithSAXHandler: self withData: content];
+	//[Parser parserWithHandler: self withData: content];
 	max = (float) [content length];
-	//[[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
+	[[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
 	current = max;
 }
 
