@@ -217,23 +217,35 @@
     if (_document)
     {
     	NSLog (@"characters : |%@|", name);
-	NSString* str;
+        NSMutableAttributedString* astr;
+        NSUInteger i;
+        NSMutableString *mutStr = [[NSMutableString alloc] init];
 
-	if ([name isEqualToString: @"<"])
-	  str = @"&lt;";
-	else if ([name isEqualToString: @">"])
-          str = @"&gt;";
-	else if ([name isEqualToString: @"\""])
-          str = @"&quot;";
-	else
+        for (i = 0; i < [name length]; i++)
           {
-            str = [NSString trimString: name skipStart:!_insideStringContent];
+            unichar ch;
+
+
+            ch = [name characterAtIndex: i];
+            if (ch == '<')
+              [mutStr appendString: @"&lt;"];
+            else if (ch == '>')
+              [mutStr appendString: @"&gt;"];
+            else if (ch == '&')
+              [mutStr appendString: @"&amp;"];
+            else if (ch == '\'')
+              [mutStr appendString: @"&apos;"];
+            else if (ch == '\"')
+              [mutStr appendString: @"&quot;"];
+            else
+              [mutStr appendString: [NSString stringWithCharacters:&ch length:1]];
           }
-        
-    	NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString: str];
-	[_currentContent appendAttributedString: astr];
-	//[self addCurrentProgression: [astr length]];
-	[astr release];
+        NSString *str = [NSString trimString: mutStr skipStart:!_insideStringContent];
+        astr = [[NSMutableAttributedString alloc] initWithString: str];
+        [_currentContent appendAttributedString: astr];
+        //[self addCurrentProgression: [astr length]];
+        [astr release];
+        [mutStr release];
         _insideStringContent = YES;
     }
 }
@@ -257,8 +269,9 @@
 }
 - (void) parse {
 	NSLog (@"HandlerStructureXLP parse");
-	//[Parser parserWithHandler: self withData: content];
+	
 	max = (float) [content length];
+        //[[Parser parserWithSAXHandler: self withData: content] parse];
 	[[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
 	current = max;
 }
