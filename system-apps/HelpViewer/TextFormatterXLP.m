@@ -454,11 +454,11 @@
 {
 	RELEASE (_currentContent);
 	_currentContent = [[NSMutableAttributedString alloc] init];
-	[Parser parserWithSAXHandler: self withData:
-                   //[[GSHTMLParser parserWithSAXHandler: self withData: 
-		[[text string] dataUsingEncoding:  NSISOLatin1StringEncoding
-                            allowLossyConversion: YES]];
-          //		parse];
+        //	[[Parser parserWithSAXHandler: self withData:
+        [[GSHTMLParser parserWithSAXHandler: self withData: 
+                         [[text string] dataUsingEncoding:  NSISOLatin1StringEncoding
+                                     allowLossyConversion: YES]]
+          parse];
 	return _currentContent;
 }
 

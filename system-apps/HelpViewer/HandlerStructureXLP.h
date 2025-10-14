@@ -25,11 +25,11 @@
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include "HandlerStructure.h"
-//#include "Parser.h"
 #include "ModNSString.h"
 
 #ifdef MACOSX
-@interface HandlerStructureXLP : NSObject <HandlerStructure>
+#include "Parser.h"
+@interface HandlerStructureXLP : NSObject <SAXHandler, HandlerStructure>
 #else
 #include <GNUstepBase/GSXML.h>
 @interface HandlerStructureXLP : GSSAXHandler <HandlerStructure>

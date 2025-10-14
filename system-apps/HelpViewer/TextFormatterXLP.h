@@ -29,9 +29,15 @@
 #include "BRCell.h"
 #include "FigureCell.h"
 #include "NoteCell.h"
-#include "Parser.h"
 
+
+#ifdef MACOSX
+#include "Parser.h"
 @interface TextFormatterXLP : NSObject <SAXHandler, TextFormatter>
+#else
+#include <GNUstepBase/GSXML.h>
+@interface TextFormatterXLP : GSSAXHandler <HandlerStructure>
+#endif
 {
 	NSTextView* textView;
 	NSMutableArray* pages;
