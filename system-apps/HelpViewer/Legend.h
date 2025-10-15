@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
-                  2020-2021 Riccardo Mottola <rm@gnu.org>
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,10 +27,10 @@
 
 @interface Legend : NSObject 
 {
-    NSMutableAttributedString* legend;
-    NSPoint point;
-    NSSize size;
-    BOOL rightPos;
+  NSMutableAttributedString* legend;
+  NSPoint point;
+  NSSize size;
+  BOOL rightPos;
 }
 
 + (id) legendWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p;
@@ -38,13 +38,13 @@
 - (NSMutableAttributedString*) legend;
 
 - (NSPoint) point;
+- (void) setPoint: (NSPoint) p;
 - (CGFloat) height;
 - (void) setHeight: (CGFloat) h;
-- (void) setRightPos;
-- (void) setPoint: (NSPoint) p;
 - (NSSize) size;
+- (BOOL) rightPos;
+- (void) setRightPos;
 
-- (BOOL) isRightPos;
 - (NSComparisonResult) compareWith: (id)sender;
 
 @end

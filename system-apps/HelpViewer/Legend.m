@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
-                  2020-2021 Riccardo Mottola <rm@gnu.org>
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@
 
 + (id) legendWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p
 {
-    Legend* ret = [[Legend alloc] initWithString: str andPoint: p];
-    return AUTORELEASE (ret);
+  Legend* ret = [[Legend alloc] initWithString: str andPoint: p];
+  return AUTORELEASE (ret);
 }
 
 - (id) initWithString: (NSMutableAttributedString*) str andPoint: (NSPoint) p
@@ -56,7 +56,7 @@
     return NSOrderedSame; // in case we cannot tell
 
   otherPoint = [(Legend*)sender point];
-  
+
   if (point.y == otherPoint.y)
     {
       if ((rightPos && (point.x < otherPoint.x)) ||  
@@ -66,13 +66,26 @@
 	}  
     }
   else if (point.y > otherPoint.y)
-    ret = NSOrderedDescending;
+    {
+      ret = NSOrderedDescending;
+    }
   return ret;
 }
 
-- (NSMutableAttributedString*) legend { return legend; }
-- (NSPoint) point { return point; }
-- (void) setPoint: (NSPoint) p { point = p; }
+- (NSMutableAttributedString*) legend
+{
+  return legend;
+}
+
+- (NSPoint) point
+{
+  return point;
+}
+
+- (void) setPoint: (NSPoint) p
+{
+  point = p;
+}
 
 - (CGFloat) height
 {
@@ -89,8 +102,15 @@
   return size;
 }
 
-- (void) setRightPos { rightPos = YES; }
-- (BOOL) isRightPos { return rightPos; }
+- (void) setRightPos
+{
+  rightPos = YES;
+}
+
+- (BOOL) rightPos
+{
+  return rightPos;
+}
 
 @end
 
