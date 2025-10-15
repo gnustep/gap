@@ -36,7 +36,7 @@
       ASSIGN (legend, str);
       point = p;
       rightPos = NO;
-      size = [legend size];
+      size = NSMakeSize(10, 20);
     }
   return self;
 }
@@ -82,6 +82,11 @@
 - (void) setHeight: (CGFloat) h
 {
   size.height = h;
+}
+
+- (NSSize) size
+{
+  return size;
 }
 
 - (void) setRightPos { rightPos = YES; }
