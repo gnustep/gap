@@ -341,7 +341,7 @@
               else if (tDiff > TIME_EPSILON)
                 [sourceModFiles addObject:fileObj];
               if (tDiff < TIME_EPSILON)
-                [targetModFiles addObject:fileObj];
+                [targetModFiles addObject:fileObj2];
             }
           else // same size
             {
@@ -637,6 +637,7 @@
                                         waitUntilDone:NO];
             }
         }
+
       for (i = 0; i < [targetModFiles count] && !stopTask; i++)
 	{
 	  FileObject *fileObj;
@@ -648,7 +649,8 @@
 	  newAbsolutePath = [[sourceMap rootPath] stringByAppendingPathComponent:[fileObj relativePath]];
 	  if([fm removeFileAtPath:newAbsolutePath handler:nil])
 	    {
-	      [fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil];
+	      if (![fm copyPath:[fileObj absolutePath] toPath:newAbsolutePath handler:nil])
+                NSLog(@"copy %@ to %@ failed", [fileObj absolutePath], newAbsolutePath);
 	    }
           progressCurrentValue++;
           [controller performSelectorOnMainThread:@selector(updateProgress:)
