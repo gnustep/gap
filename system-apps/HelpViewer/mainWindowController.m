@@ -128,7 +128,7 @@
   else
     {
       id cell = [sender selectedCellInColumn: column -1];
-      ret = (NSInteger)[[(Section*)[cell section] subs] count];
+      ret = (NSInteger)[[[(BrowserCell*)cell section] subs] count];
     }
 
   return ret;
@@ -150,7 +150,7 @@
   else
     {
       BrowserCell *cell = [sender selectedCellInColumn: column -1];
-      sub = [[(Section *)[cell section] subs] objectAtIndex: row];
+      sub = [[[(BrowserCell*)cell section] subs] objectAtIndex: row];
     }
 
   if (sub != nil)
