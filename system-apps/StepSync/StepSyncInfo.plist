@@ -6,9 +6,10 @@
 	"Riccardo Mottola"
     );
     CFBundleIdentifier = "org.gap.StepSync";
-    Copyright = "Copyright (C) 2017-2021";
+    Copyright = "Copyright (C) 2017-2025";
     CopyrightDescription = "Released under GPL v2+";
     FullVersionID = "1.1";
+    GSHelpContentsFile = "StepSync.help";
     NSExecutable = StepSync;
     NSMainNibFile = "MainMenu.gorm";
     NSPrincipalClass = NSApplication;

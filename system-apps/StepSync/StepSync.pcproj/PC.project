@@ -32,6 +32,7 @@
 	"Engine.h",
 	"FileArray.h"
     );
+    "HELP_FILE" = "StepSync.help";
     IMAGES = (
     );
     INSTALLDIR = "$(HOME)/GNUstep";
@@ -50,6 +51,7 @@
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
     "OBJC_COMPILEROPTIONS" = "";
     "OTHER_RESOURCES" = (
+	"StepSync.help"
     );
     "OTHER_SOURCES" = (
 	"main.m"
@@ -58,7 +60,7 @@
     "PROJECT_AUTHORS" = (
 	"Riccardo Mottola"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (C) 2017-2021";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2017-2025";
     "PROJECT_COPYRIGHT_DESC" = "Released under GPL v2+";
     "PROJECT_CREATOR" = multix;
     "PROJECT_DESCRIPTION" = "File Synchronizer";

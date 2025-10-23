@@ -33,6 +33,7 @@ StepSync_APPLICATION_ICON =
 #
 StepSync_RESOURCE_FILES = \
 Resources/MainMenu.gorm \
+Resources/StepSync.help 
 
 
 #
