@@ -558,9 +558,14 @@
   [attrStrMut appendAttributedString:sepAttrStr];
 
   tempStr = [NSMutableString new];
-  for (i = 0; i < [[engine dateDiffFiles] count]; i++)
+  for (i = 0; i < [[engine dateDiffFilesTargetMod] count]; i++)
     {
-      [tempStr appendString:[[[engine dateDiffFiles] objectAtIndex:i] relativePath]];
+      [tempStr appendString:[[[engine dateDiffFilesTargetMod] objectAtIndex:i] relativePath]];
+      [tempStr appendString:@"\n"];
+    }
+  for (i = 0; i < [[engine dateDiffFilesSourceMod] count]; i++)
+    {
+      [tempStr appendString:[[[engine dateDiffFilesSourceMod] objectAtIndex:i] relativePath]];
       [tempStr appendString:@"\n"];
     }
 
@@ -571,7 +576,7 @@
   [attrStr release];
   [tempStr release];
   
-  tempStr = [NSString stringWithFormat:@"Count: %lu\n", (unsigned long)[[engine dateDiffFiles]  count]];
+  tempStr = [NSString stringWithFormat:@"Count: %lu source - %lu target\n", (unsigned long)[[engine dateDiffFilesSourceMod] count], (unsigned long)[[engine dateDiffFilesTargetMod] count]];
   attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
   [attrStrMut appendAttributedString:attrStr];
@@ -579,7 +584,7 @@
 
   if (nil != [engine sizeDiffFiles])
     {
-      tempStr = [NSString stringWithFormat:@"Size: %@\n", [[engine dateDiffFiles] sizeStr]];
+      tempStr = [NSString stringWithFormat:@"Size: %@ source - %@ target\n", [[engine dateDiffFilesSourceMod] sizeStr], [[engine dateDiffFilesTargetMod] sizeStr]];
       attrStr = [[NSAttributedString alloc] initWithString: tempStr
                                             attributes: textAttributes];
       [attrStrMut appendAttributedString:attrStr];

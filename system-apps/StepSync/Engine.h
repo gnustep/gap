@@ -3,7 +3,7 @@
 //  StepSync
 //
 //  Created by Riccardo Mottola on 19/10/2018.
-//  Copyright 2018-2021 GNUstep. All rights reserved.
+//  Copyright 2018-2025 GNUstep. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -25,7 +25,8 @@
   FileArray *sourceMissingFiles;
   FileArray *sourceModFiles;
   FileArray *targetModFiles;
-  FileArray *dateDiffFiles; // files with same size but different mod date
+  FileArray *dateDiffFilesSourceMod; // files with same size but different mod date
+  FileArray *dateDiffFilesTargetMod; // files with same size but different mod date
   FileArray *sizeDiffFiles; // files with same mod date but different size
 
   BOOL handleDirectories;
@@ -87,7 +88,8 @@
 - (FileArray *)sourceModFiles;
 - (FileArray *)targetModFiles;
 - (FileArray *)sizeDiffFiles;
-- (FileArray *)dateDiffFiles;
+- (FileArray *)dateDiffFilesSourceMod;
+- (FileArray *)dateDiffFilesTargetMod;
 
 - (void)analyze;
 - (BOOL)checkFreeSpace;

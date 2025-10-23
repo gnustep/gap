@@ -29,7 +29,8 @@
       sourceModFiles = nil;
       targetModFiles = nil;
       sizeDiffFiles = nil;
-      dateDiffFiles = nil;
+      dateDiffFilesSourceMod = nil;
+      dateDiffFilesTargetMod = nil;
       handleDirectories = NO;
       updateSource = NO;
       insertItems = NO;
@@ -59,7 +60,8 @@
   [sourceModFiles release];
   [targetModFiles release];
   [sizeDiffFiles release];
-  [dateDiffFiles release];
+  [dateDiffFilesSourceMod release];
+  [dateDiffFilesTargetMod release];
   [super dealloc];
 }
 
@@ -228,10 +230,16 @@
   return sizeDiffFiles;
 }
 
-- (FileArray *)dateDiffFiles
+- (FileArray *)dateDiffFilesSourceMod
 {
-  return dateDiffFiles;
+  return dateDiffFilesSourceMod;
 }
+
+- (FileArray *)dateDiffFilesTargetMod
+{
+  return dateDiffFilesTargetMod;
+}
+
 
 - (FileMap *)sourceMap
 {
@@ -299,7 +307,8 @@
   targetModFiles = [FileArray new];
   sourceModFiles = [FileArray new];
   sizeDiffFiles = [FileArray new];
-  dateDiffFiles = [FileArray new];
+  dateDiffFilesSourceMod = [FileArray new];
+  dateDiffFilesTargetMod = [FileArray new];
 
   /* compare source against target directories */
   en = [sourceDirArray objectEnumerator];
@@ -345,9 +354,18 @@
             }
           else // same size
             {
-              if (fabs(tDiff) > TIME_EPSILON + dateTimeTolerance*60.0)
+              if (fabs(tDiff) < TIME_EPSILON + dateTimeTolerance*60.0)
                 {
-                  [dateDiffFiles addObject:fileObj];
+                  // Nothing we are within tolerance
+                }
+              else if (tDiff > TIME_EPSILON)
+                {
+                  [dateDiffFilesSourceMod addObject:fileObj];
+                  NSLog(@"%@: %@ %@", [fileObj relativePath], [fileObj modifiedDate], [fileObj2 modifiedDate]);
+                }
+              else if (tDiff < TIME_EPSILON)
+                {
+                  [dateDiffFilesTargetMod addObject:fileObj2];
                   NSLog(@"%@: %@ %@", [fileObj relativePath], [fileObj modifiedDate], [fileObj2 modifiedDate]);
                 }
               // else we suppose the file are really identical (or we check MD5 or such)
@@ -379,7 +397,8 @@
   NSLog(@"target modified: %@", targetModFiles);
   NSLog(@"source modified: %@", sourceModFiles);
   NSLog(@"size differing files with same date: %@", sizeDiffFiles);
-  NSLog(@"date differing files with same size: %@", dateDiffFiles);
+  NSLog(@"date differing files with same size source modified: %@", dateDiffFilesSourceMod);
+  NSLog(@"date differing files with same size target modified: %@", dateDiffFilesTargetMod);
 
   analyzed = YES;
   [controller performSelectorOnMainThread:@selector(finishProgress:)
@@ -421,7 +440,10 @@
                             waitUntilDone:NO];
 
   if (forceUpdateIfOnlyDateDiffers)
-    [sourceModFiles addObjectsFromArray:dateDiffFiles];
+    {
+      [sourceModFiles addObjectsFromArray:dateDiffFilesSourceMod];
+      [targetModFiles addObjectsFromArray:dateDiffFilesTargetMod];
+    }
 
   // safety
   if (!updateSource && !deleteItems)
