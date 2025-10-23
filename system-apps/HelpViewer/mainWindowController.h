@@ -37,7 +37,7 @@
   NSTextView* text;
   //XMLHandler* handler;
   id <HandlerStructure> handler;
-  int prevRow;
+
   id window;
 }
 
