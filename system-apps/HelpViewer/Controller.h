@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,9 +22,9 @@
 #ifndef __CONTROLLER_H__
 #define __CONTROLLER_H__
 
-#include <AppKit/AppKit.h>
-#include "mainWindowController.h"
-#include "GNUstep.h"
+#import <AppKit/AppKit.h>
+#import "mainWindowController.h"
+#import "GNUstep.h"
 
 @interface Controller : NSObject
 {
@@ -50,6 +51,7 @@
 - (void) bookshelf: (id) sender;
 - (void) print: (id) sender;
 - (void) initButtons;
+
 @end
 
 #endif

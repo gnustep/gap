@@ -21,24 +21,24 @@
 #ifndef __MAIN_WINDOW_CONTROLLER_H__
 #define __MAIN_WINDOW_CONTROLLER_H__
 
-#include "GNUstep.h"
-#include "Label.h"
-#include "Parser.h"
-#include "HandlerStructure.h"
-#include "HandlerStructureXLP.h"
-#include "TextFormatterXLP.h"
-#include "BrowserCell.h"
+#import "GNUstep.h"
+#import "Label.h"
+#import "Parser.h"
+#import "HandlerStructure.h"
+#import "HandlerStructureXLP.h"
+#import "TextFormatterXLP.h"
+#import "BrowserCell.h"
 
 @interface MainWindowController : NSObject
 {
-	NSTextView* resultTextView;
-	NSBrowser* resultOutlineView;
+  NSTextView* resultTextView;
+  NSBrowser* resultOutlineView;
     
-	NSTextView* text;
-	//XMLHandler* handler;
-	id <HandlerStructure> handler;
-	int prevRow;
-	id window;
+  NSTextView* text;
+  //XMLHandler* handler;
+  id <HandlerStructure> handler;
+  int prevRow;
+  id window;
 }
 
 - (id) initWithTextView: (NSTextView*) text andBrowserView: (NSBrowser*) browser;
@@ -47,6 +47,7 @@
 - (void) setWindow: (id) win;
 - (void) browserClick: (id) sender;
 - (void) print: (id) sender;
+
 @end;
 
 #endif

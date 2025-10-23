@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,63 +19,65 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include <AppKit/AppKit.h>
-#include "Controller.h"
+#import <AppKit/AppKit.h>
+#import "Controller.h"
 
 @implementation Controller
 
 - (void) initButtons 
 {
-    [search setTitle: _(@"Search")];
-    [search setFont: [NSFont systemFontOfSize: 0]];
-    [search setImagePosition: NSImageAbove];
-    [search setImage: [NSImage imageNamed: @"Search.tiff"]];
+  [search setTitle: _(@"Search")];
+  [search setFont: [NSFont systemFontOfSize: 0]];
+  [search setImagePosition: NSImageAbove];
+  [search setImage: [NSImage imageNamed: @"Search.tiff"]];
 
-    [index setTitle: _(@"Index")];
-    [index setFont: [NSFont systemFontOfSize: 0]];
-    [index setImagePosition: NSImageAbove];
-    [index setImage: [NSImage imageNamed: @"Index.tiff"]];
+  [index setTitle: _(@"Index")];
+  [index setFont: [NSFont systemFontOfSize: 0]];
+  [index setImagePosition: NSImageAbove];
+  [index setImage: [NSImage imageNamed: @"Index.tiff"]];
 
-    [back setTitle: _(@"Back")];
-    [back setFont: [NSFont systemFontOfSize: 0]];
-    [back setImagePosition: NSImageAbove];
-    [back setImage: [NSImage imageNamed: @"Back.tiff"]];
+  [back setTitle: _(@"Back")];
+  [back setFont: [NSFont systemFontOfSize: 0]];
+  [back setImagePosition: NSImageAbove];
+  [back setImage: [NSImage imageNamed: @"Back.tiff"]];
 
-    [bookshelf setTitle: _(@"Bookshelf")];
-    [bookshelf setFont: [NSFont systemFontOfSize: 0]];
-    [bookshelf setImagePosition: NSImageAbove];
-    [bookshelf setImage: [NSImage imageNamed: @"Bookshelf.tiff"]];
+  [bookshelf setTitle: _(@"Bookshelf")];
+  [bookshelf setFont: [NSFont systemFontOfSize: 0]];
+  [bookshelf setImagePosition: NSImageAbove];
+  [bookshelf setImage: [NSImage imageNamed: @"Bookshelf.tiff"]];
 }
 
 - (void) awakeFromNib
 {
-    windowController = [[MainWindowController alloc] initWithTextView: textview
-			    andBrowserView: tocview];
+  windowController = [[MainWindowController alloc] initWithTextView: textview
+						     andBrowserView: tocview];
    
-    [infoMenu setAction: @selector (orderFrontStandardInfoPanel:)];
-    [helpMenu setAction: @selector (orderFrontHelpPanel:)];
+  [infoMenu setAction: @selector (orderFrontStandardInfoPanel:)];
+  [helpMenu setAction: @selector (orderFrontHelpPanel:)];
 
-    [self initButtons];
+  [self initButtons];
 
-    [window setTitle: @"HelpViewer"];
-    [windowController setWindow: window];
+  [window setTitle: @"HelpViewer"];
+  [windowController setWindow: window];
 
-    [NSApp setDelegate: self];
+  [NSApp setDelegate: self];
 }
 
-- (void) applicationDidFinishLaunching: (NSNotification *) not {
-    NSArray *args = [[NSProcessInfo processInfo] arguments];
+- (void) applicationDidFinishLaunching: (NSNotification *) not
+{
+  NSArray *args = [[NSProcessInfo processInfo] arguments];
 
-    if ([args count] > 1)
+  if ([args count] > 1)
     {
-	if ([[NSFileManager defaultManager] fileExistsAtPath: [args objectAtIndex: 1]])
+      if ([[NSFileManager defaultManager] fileExistsAtPath: [args objectAtIndex: 1]])
 	{
-	    [windowController loadFile: [args objectAtIndex: 1]];
+	  [windowController loadFile: [args objectAtIndex: 1]];
 	}
     }
 }
+
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
-    return [windowController loadFile: filename];
+  return [windowController loadFile: filename];
 }
 
 - (void) dealloc 
@@ -86,13 +88,15 @@
 
 - (void) openFile: (id) sender
 {
-    NSInteger ret;
-    NSOpenPanel* panel = [NSOpenPanel openPanel];
-    [panel setAllowsMultipleSelection: NO];
-    ret = [panel runModalForTypes: [NSArray arrayWithObject: @"help"]];
-    if (ret == NSOKButton)
+  NSInteger ret;
+  NSOpenPanel* panel;
+
+  panel = [NSOpenPanel openPanel];
+  [panel setAllowsMultipleSelection: NO];
+  ret = [panel runModalForTypes: [NSArray arrayWithObject: @"help"]];
+  if (ret == NSOKButton)
     {
-	[windowController loadFile: [[panel filenames] objectAtIndex: 0]];
+      [windowController loadFile: [[panel filenames] objectAtIndex: 0]];
     }
 }
 
@@ -118,7 +122,7 @@
 
 - (void) print: (id) sender
 {
-	[windowController print: sender];
+  [windowController print: sender];
 }
 
 @end
