@@ -530,12 +530,16 @@ static NSArray *knownItems;
   else if([key isEqualToString: @"bday"])
     {
       NSCalendarDate *d;
+      NSString *bdayStr;
 
+      bdayStr = [v objectAtIndex: 0];
+      
+      NSLog(@"Parsing birthday: %@",  bdayStr);
       d = [NSCalendarDate dateWithString: [v objectAtIndex: 0]
-			  calendarFormat: @"%Y-%d-%m"];
+			  calendarFormat: @"%Y-%m-%d"];
       if(!d)
 	d = [NSCalendarDate dateWithString: [v objectAtIndex: 0]
-			    calendarFormat: @"%Y%d%m"];
+			    calendarFormat: @"%Y%m%d"];
       if(d) 
 	[p setValue: d forProperty: ADBirthdayProperty];
       else
