@@ -242,6 +242,7 @@ NSString *charFromEntity(char *entityName)
     { "gt"    , '>'       },
     { "amp"   , '&'       },
     { "quot"  , '"'       },
+    { "apos"  , '\''      },
     { "nbsp"  , (unichar)160 },
     { "iexcl" , (unichar)161 },
     { "cent"  , (unichar)162 },
