@@ -57,22 +57,24 @@
 - (NSString*) stringByQuotedPrintableDecoding
 {
   NSUInteger i;
-  NSMutableString *str;
+  NSString *str;
   NSMutableString *str2;
+
+
+  // CR+LF
+  str =  [self stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"];
   
-  // process \ escaped chars
-  str = [NSMutableString stringWithString:self];
-  for (i = 0; i < [self length]; i++)
-    {
-      NSRange r;
-      NSString *s;
+  // newlines
+  str =  [self stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
 
-      r = NSMakeRange(i, 1);
-      s = [self substringWithRange: r];
-      if([s isEqualToString: @"\\"])
-        [str deleteCharactersInRange:r];
-    }
+  // '\\'
+  str =  [str stringByReplacingOccurrencesOfString:@"\\\\" withString:@"\\"];
 
+  // \'
+  str =  [str stringByReplacingOccurrencesOfString:@"\\'" withString:@"\'"];
+
+  // \,
+  str =  [str stringByReplacingOccurrencesOfString:@"\\," withString:@","];
 
   str2 = [NSMutableString stringWithCapacity: [str length]];
   for(i = 0; i < [str length]; i++)
@@ -87,12 +89,12 @@
 	  unsigned char c;
 	  NSString *hex;
 	  BOOL hexDecodeWorked;
-	  
+
 	  r = NSMakeRange(i+1, 2);
 	  hex = [str substringWithRange: r];
-	  
+
 	  hexDecodeWorked = YES;
-	  
+
 	  NS_DURING
 	    {
 	      c = (unsigned char)[hex hexLongValue];
@@ -384,13 +386,13 @@ static NSArray *knownItems;
 
   wsp = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   *retLine = line;
-  
+
   str = [[arr objectAtIndex: (*retLine)++]
 	    stringByTrimmingCharactersInSet: wsp];
 
   if (![str length])
     return NO;
-  
+
   /*
    * Unfolding multi-line value fields conforming to RFC 2425
    */
@@ -434,6 +436,7 @@ static NSArray *knownItems;
 #ifdef DEBUGGING  
   NSLog(@"Input line : %@", str);
 #endif
+
   r = [str rangeOfString: @":"];
   if(r.location == NSNotFound)
     {
@@ -453,8 +456,11 @@ static NSArray *knownItems;
 	     componentsSeparatedByString: @";"];
     }
   else
-    *v = [[value stringByQuotedPrintableDecoding]
-	   componentsSeparatedByString: @";"];
+    {
+      *v = [[value stringByQuotedPrintableDecoding]
+             componentsSeparatedByString: @";"];
+    }
+
   return YES;
 }
 
@@ -547,7 +553,10 @@ static NSArray *knownItems;
     }
   
   else if([key isEqualToString: @"note"])
-    [p setValue: [v objectAtIndex: 0] forProperty: ADNoteProperty];
+    {
+      NSLog(@"notes: %@", [v objectAtIndex: 0]);
+      [p setValue: [v objectAtIndex: 0] forProperty: ADNoteProperty];
+    }
 
   // phone -- multi-string
   else if([key isEqualToString: @"tel"])
