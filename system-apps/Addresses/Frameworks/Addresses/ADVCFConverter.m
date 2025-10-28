@@ -715,11 +715,9 @@ static NSArray *knownItems;
       NSString *typeVal;
 
       val = [[props objectAtIndex: i] lowercaseString];
-      NSLog(@"val: %@", val);
       if ([val hasPrefix:@"type="])
         {
           typeVal = [val substringFromIndex:[@"type=" length]];
-          NSLog(@"typeVal: %@", typeVal);
           if (typeVal && [typeVal length] > 0)
             {
               [typeArray addObject:typeVal];
