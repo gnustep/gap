@@ -205,6 +205,7 @@ NSString *base64Encode(NSData* data)
 - (void) integrateKeyBlock: (NSArray*) k
 		valueBlock: (NSArray*) v
 		intoPerson: (ADPerson*) p;
+- (NSArray *) parseTypeParametersFromProperties: (NSArray *) props;
 - (void) appendStringForProperty: (NSString*) property
 			inPerson: (ADPerson*) p;
 - (void) appendStringWithHeader: (NSString*) header
@@ -481,7 +482,7 @@ static NSArray *knownItems;
       NSLog(@"No values in '%@':'%@'\n", k, v);
       return;
     }
-  
+
   key = [k objectAtIndex: 0];
   /*
    * Strip any group from the key (ie item1.ADR)
@@ -563,29 +564,33 @@ static NSArray *knownItems;
     {
       ADMutableMultiValue *mv;
       NSString *val;
+      NSArray *typeArray;
 
       mv = [[[ADMutableMultiValue alloc]
 	      initWithMultiValue: [p valueForProperty: ADPhoneProperty]]
 	     autorelease];
       val = [v objectAtIndex: 0];
-      if([k containsObject: @"fax"])
+
+      typeArray = [self parseTypeParametersFromProperties: k];
+
+      if([typeArray containsObject: @"fax"])
 	{
-	  if([k containsObject: @"home"])
+	  if([typeArray containsObject: @"home"])
 	    [mv addValue: val withLabel: ADPhoneHomeFAXLabel];
 	  else
 	    [mv addValue: val withLabel: ADPhoneWorkFAXLabel];
 	}
-      else if([k containsObject: @"pager"])
+      else if([typeArray containsObject: @"pager"])
 	{
 	  [mv addValue: val withLabel: ADPhonePagerLabel];
 	}
       else // assume "voice" for everything else
 	{
-	  if([k containsObject: @"main"])
+	  if([typeArray containsObject: @"main"])
 	    [mv addValue: val withLabel: ADPhoneMainLabel];
-	  else if([k containsObject: @"cell"])
+	  else if([typeArray containsObject: @"cell"])
 	    [mv addValue: val withLabel: ADPhoneMobileLabel];
-	  else if([k containsObject: @"home"])
+	  else if([typeArray containsObject: @"home"])
 	    [mv addValue: val withLabel: ADPhoneHomeLabel];
 	  else
 	    [mv addValue: val withLabel: ADPhoneWorkLabel];
@@ -691,6 +696,43 @@ static NSArray *knownItems;
   // @"key"   -- public key
   // @"rev"   -- last revision in ISO8601 format, which NSDate can't
   //             parse (yet)
+}
+
+- (NSArray *) parseTypeParametersFromProperties: (NSArray *) props
+{
+  NSMutableArray *typeArray;
+  NSArray *resultArray;
+  NSUInteger i;
+
+  typeArray = [[NSMutableArray alloc] initWithCapacity: [props count]];
+
+  for (i = 0; i < [props count]; i++)
+    {
+      NSString *val;
+      NSString *typeVal;
+
+      val = [[props objectAtIndex: i] lowercaseString];
+      NSLog(@"val: %@", val);
+      if ([val hasPrefix:@"type="])
+        {
+          typeVal = [val substringFromIndex:[@"type=" length]];
+          NSLog(@"typeVal: %@", typeVal);
+          if (typeVal && [typeVal length] > 0)
+            {
+              [typeArray addObject:typeVal];
+            }
+          else
+            {
+              NSLog(@"type results in zero value: %@", val);
+            }
+        }
+    }
+  
+  NSLog(@"extracted types: %@", typeArray);
+
+  resultArray = [NSArray arrayWithArray:typeArray];
+  [typeArray release];
+  return resultArray;
 }
 
 - (void) appendStringForProperty: (NSString*) prop
