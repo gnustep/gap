@@ -110,7 +110,7 @@ ADConverterManager *_manager = nil;
     {
       const unichar *data_unichar = (const unichar *)(void *) [data bytes];
 
-      NSLog(@"File in is notNSUTF8StringEncoding. vCARD RFC 6350 specifies UTF-8 as only valid encoding");
+      NSLog(@"File is not in NSUTF8StringEncoding. vCARD RFC 6350 specifies UTF-8 as only valid encoding");
       if ((data_unichar[0] == 0xFEFF) || (data_unichar[0] == 0xFFFE))
 	{
 	  NSLog(@"found an UTF-16 BOM");
