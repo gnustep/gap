@@ -602,12 +602,14 @@ static NSArray *knownItems;
   else if([key isEqualToString: @"email"])
     {
       ADMutableMultiValue *mv;
+      NSArray *typeArray;
 
       mv = [[[ADMutableMultiValue alloc]
 	      initWithMultiValue: [p valueForProperty: ADEmailProperty]]
 	     autorelease];
 
-      if([k containsObject: @"home"])
+      typeArray = [self parseTypeParametersFromProperties: k];
+      if([typeArray containsObject: @"home"])
 	[mv addValue: [v objectAtIndex: 0] withLabel: ADEmailHomeLabel];
       else
 	[mv addValue: [v objectAtIndex: 0] withLabel: ADEmailWorkLabel];
@@ -618,7 +620,7 @@ static NSArray *knownItems;
   else if([key isEqualToString: @"adr"])
     {
       ADMutableMultiValue *mv;
-
+      NSArray *typeArray;
       NSMutableDictionary *dict;
       NSString *poBox, *extendedAddr, *street, *locality, *region,
 	*postalCode, *countryName;
@@ -627,6 +629,7 @@ static NSArray *knownItems;
 	      initWithMultiValue: [p valueForProperty: ADAddressProperty]]
 	     autorelease];
 
+      typeArray = [self parseTypeParametersFromProperties: k];
       dict = [NSMutableDictionary dictionaryWithCapacity: 6];
       poBox        = [v objectAtIndex: 0];
       extendedAddr = [v objectAtIndex: 1];
@@ -652,7 +655,7 @@ static NSArray *knownItems;
       if(extendedAddr && ![extendedAddr isEqualToString: @""])
 	[dict setObject: extendedAddr forKey: ADAddressExtendedAddressKey];
       
-      if([k containsObject: @"home"])
+      if([typeArray containsObject: @"home"])
 	[mv addValue: dict withLabel: ADAddressHomeLabel];
       else
 	[mv addValue: dict withLabel: ADAddressWorkLabel];
