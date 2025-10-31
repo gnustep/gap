@@ -31,7 +31,7 @@
 - (Section*) sections;
 - (void) setPath: (NSString*) path;
 - (void) setTextView: (NSTextView*) view;
-- (void) parse;
+- (BOOL) parse;
 - (id) initWithSection: (Section*) section;
 @end
 

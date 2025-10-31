@@ -476,38 +476,42 @@
   Class		c = NSClassFromString(@"GSSloppyXMLParser");
   NSString	*s = [text string];
   NSString	*k;
+  id		p = nil;
 
   RELEASE(_currentContent);
   _currentContent = [[NSMutableAttributedString alloc] init];
 
   k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
-  if (k && [k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
+  if (nil == k)
     {
-      [[Parser parserWithSAXHandler: (id<SAXHandler>)self withData:
-	[s dataUsingEncoding:  NSISOLatin1StringEncoding
-	allowLossyConversion: YES]]
-	parse];
+      k = @"GSHTML";
     }
-  else if (c != Nil
-    && k && [k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
+  if ([k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
     {
-      NSXMLParser   	*p;
+      c = [Parser class];
+      p = [c parserWithSAXHandler: (id<SAXHandler>)self withData:
+	[s dataUsingEncoding:  NSISOLatin1StringEncoding
+	allowLossyConversion: YES]];
+    }
+  else if ([k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
+    {
       NSData		*d;
 
+      c = NSClassFromString(@"GSSloppyXMLParser");
       d = [s dataUsingEncoding: NSUTF8StringEncoding];
       p = AUTORELEASE([(NSXMLParser*)[c alloc] initWithData: d]);
       [p _setAcceptHTML: YES];
       [p setDelegate: self];
-      [p parse];
     }
   else
     {
-      [[GSHTMLParser parserWithSAXHandler: self withData:
+      c = NSClassFromString(@"GSHTMLParser");
+      p = [c parserWithSAXHandler: self withData:
 	[s dataUsingEncoding:  NSISOLatin1StringEncoding
-	allowLossyConversion: YES]]
-	parse];
+	allowLossyConversion: YES]];
     }
-
+  NSLog(@"Parsing using '%@'%@", k, (Nil == c ? @" not found!" : @""));
+  [p parse];
   return _currentContent;
 }
 

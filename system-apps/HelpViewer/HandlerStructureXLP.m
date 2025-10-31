@@ -288,9 +288,10 @@
 	}
 }
 
-- (void) parse
+- (BOOL) parse
 {
-  Class		c = NSClassFromString(@"GSSloppyXMLParser");
+  Class		c = Nil;
+  id		p = nil;
   NSString	*k;
 
   NSLog(@"HandlerStructureXLP parse");
@@ -298,15 +299,15 @@
   max = (float) [content length];
 
   k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
-  if (k && [k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
+  if (nil == k) k = @"GSHTML";
+  if ([k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
     {
-      [[Parser parserWithSAXHandler: (id<SAXHandler>)self
-			   withData: content] parse];
+      c = [Parser class];
+      p = [c parserWithSAXHandler: (id<SAXHandler>)self
+			 withData: content];
     }
-  else if (c != Nil
-    && k && [k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
+  else if ([k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
     {
-      NSXMLParser   	*p;
       NSString		*s;
       NSData		*d;
 
@@ -318,16 +319,20 @@
 				    encoding: NSISOLatin1StringEncoding];
 	}
       d = [AUTORELEASE(s) dataUsingEncoding: NSUTF8StringEncoding];
+      c = NSClassFromString(@"GSSloppyXMLParser");
       p = AUTORELEASE([(NSXMLParser*)[c alloc] initWithData: d]);
       [p _setAcceptHTML: YES];
       [p setDelegate: self];
-      [p parse];
     }
   else
     {
-      [[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
+      c = NSClassFromString(@"GSHTMLParser");
+      p = [c parserWithSAXHandler: self withData: content];
     }
+  NSLog(@"Parsing with '%@'%@", k, ((Nil == c) ? @" not found!" : @""));
+  [p parse];
   current = max;
+  return (p ? YES : NO);
 }
 
 - (void) setTextView: (NSTextView*) textview {

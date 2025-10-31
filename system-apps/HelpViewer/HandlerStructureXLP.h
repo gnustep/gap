@@ -47,7 +47,7 @@
 
 	float current, max;
 }
-- (void) parse;
+- (BOOL) parse;
 - (Section*) sections;
 - (void) setPath: (NSString*) path;
 @end
