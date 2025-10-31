@@ -135,7 +135,7 @@
 	[str2 appendString: s];
     }
 
-  return [NSString stringWithUTF8String: [str2 cString]];
+  return [NSString stringWithString:str2];
 }
 
 - (NSString*) stringByQuotedPrintableEncoding
@@ -701,6 +701,14 @@ static NSArray *knownItems;
   //             parse (yet)
 }
 
+
+// Per RFC.
+// These type parameter values can be specified as a parameter list
+// (e.g., TYPE=text;TYPE=voice)
+// or as a value list
+// (e.g., TYPE="text,voice").
+
+
 - (NSArray *) parseTypeParametersFromProperties: (NSArray *) props
 {
   NSMutableArray *typeArray;
@@ -720,7 +728,15 @@ static NSArray *knownItems;
           typeVal = [val substringFromIndex:[@"type=" length]];
           if (typeVal && [typeVal length] > 0)
             {
-              [typeArray addObject:typeVal];
+              // check if there are multiple values
+              if ([typeVal rangeOfString:@","].location != NSNotFound)
+                {
+                  [typeArray addObjectsFromArray:[typeVal componentsSeparatedByString:@","]];
+                }
+              else
+                {
+                  [typeArray addObject:typeVal];
+                }
             }
           else
             {
