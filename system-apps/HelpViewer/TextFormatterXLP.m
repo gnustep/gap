@@ -20,6 +20,12 @@
 */
 
 #include "TextFormatterXLP.h"
+#include "Parser.h"
+#import <Foundation/NSXMLParser.h>
+
+@interface NSXMLParser (sloppy)
+- (void) _setAcceptHTML: (BOOL)flag;
+@end
 
 #define HAVING(str) ([[elementName lowercaseString] isEqualToString: str])
 
@@ -40,7 +46,12 @@
   return self;
 }
 
-- (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes {
+- (void) parser: (NSXMLParser *)parser didStartElement: (NSString *)elementName namespaceURI: (NSString *)namespaceURI qualifiedName: (NSString *)qName attributes: (NSDictionary *)attributeDict
+{
+  [self startElement: elementName attributes: attributeDict];
+}
+
+- (void) startElement: (NSString*) elementName attributes: (NSDictionary*) elementAttributes {
     if (_pre)
     {
     	// verbatim mode
@@ -225,6 +236,11 @@
     }
 }
 
+- (void) parser: (NSXMLParser *)parser didEndElement: (NSString *)elementName namespaceURI: (NSString *)namespaceURI qualifiedName: (NSString *)qName
+{
+  [self endElement: elementName];
+}
+
 - (void) endElement: (NSString*) elementName {
 
 	if HAVING (@"pre")
@@ -315,6 +331,11 @@
 			_information = NO;
 		}
 	}
+}
+
+- (void) parser: (NSXMLParser *)parser foundCharacters: (NSString *)string
+{
+  [self characters: string];
 }
 
 - (void) characters: (NSString*) name {
@@ -452,14 +473,42 @@
 
 - (NSMutableAttributedString*) renderText: (NSMutableAttributedString*) text
 {
-	RELEASE (_currentContent);
-	_currentContent = [[NSMutableAttributedString alloc] init];
-        //	[[Parser parserWithSAXHandler: self withData:
-        [[GSHTMLParser parserWithSAXHandler: self withData: 
-                         [[text string] dataUsingEncoding:  NSISOLatin1StringEncoding
-                                     allowLossyConversion: YES]]
-          parse];
-	return _currentContent;
+  Class		c = NSClassFromString(@"GSSloppyXMLParser");
+  NSString	*s = [text string];
+  NSString	*k;
+
+  RELEASE(_currentContent);
+  _currentContent = [[NSMutableAttributedString alloc] init];
+
+  k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
+  if (k && [k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
+    {
+      [[Parser parserWithSAXHandler: (id<SAXHandler>)self withData:
+	[s dataUsingEncoding:  NSISOLatin1StringEncoding
+	allowLossyConversion: YES]]
+	parse];
+    }
+  else if (c != Nil
+    && k && [k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
+    {
+      NSXMLParser   	*p;
+      NSData		*d;
+
+      d = [s dataUsingEncoding: NSUTF8StringEncoding];
+      p = AUTORELEASE([(NSXMLParser*)[c alloc] initWithData: d]);
+      [p _setAcceptHTML: YES];
+      [p setDelegate: self];
+      [p parse];
+    }
+  else
+    {
+      [[GSHTMLParser parserWithSAXHandler: self withData:
+	[s dataUsingEncoding:  NSISOLatin1StringEncoding
+	allowLossyConversion: YES]]
+	parse];
+    }
+
+  return _currentContent;
 }
 
 - (void) setTextView: (NSTextView*) textview {

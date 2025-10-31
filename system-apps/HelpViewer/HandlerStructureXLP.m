@@ -20,7 +20,12 @@
 */
 
 #include "HandlerStructureXLP.h"
+#include "Parser.h"
+#import <Foundation/NSXMLParser.h>
 
+@interface NSXMLParser (sloppy)
+- (void) _setAcceptHTML: (BOOL)flag;
+@end
 #define HAVING(str) ([[elementName lowercaseString] isEqualToString: str])
 
 @implementation HandlerStructureXLP
@@ -56,7 +61,12 @@
   [super dealloc];
 }
 
-- (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes {
+- (void)parser: (NSXMLParser *)parser didStartElement: (NSString *)elementName namespaceURI: (NSString *)namespaceURI qualifiedName: (NSString *)qName attributes: (NSDictionary *)attributeDict
+{
+  [self startElement: elementName attributes: attributeDict];
+}
+
+- (void) startElement: (NSString*) elementName attributes: (NSDictionary*) elementAttributes {
     //NSLog (@"startElement : <%@>", elementName);
     NSString* name = nil;
     NSString* src = nil;
@@ -152,6 +162,11 @@
     }
 }
 
+- (void)parser: (NSXMLParser *)parser didEndElement: (NSString *)elementName namespaceURI: (NSString *)namespaceURI qualifiedName: (NSString *)qName
+{
+  [self endElement: elementName];
+}
+
 - (void) endElement: (NSString*) elementName {
     //NSLog (@"endElement : <%@>", elementName);
 
@@ -213,6 +228,11 @@
 
 }
 
+- (void) parser: (NSXMLParser *)parser foundCharacters: (NSString *)string
+{
+  [self characters: string];
+}
+
 - (void) characters: (NSString*) name {
     if (_document)
     {
@@ -267,13 +287,47 @@
 		content = [[NSData alloc] initWithContentsOfFile: path];
 	}
 }
-- (void) parse {
-	NSLog (@"HandlerStructureXLP parse");
+
+- (void) parse
+{
+  Class		c = NSClassFromString(@"GSSloppyXMLParser");
+  NSString	*k;
+
+  NSLog(@"HandlerStructureXLP parse");
 	
-	max = (float) [content length];
-        //[[Parser parserWithSAXHandler: self withData: content] parse];
-	[[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
-	current = max;
+  max = (float) [content length];
+
+  k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
+  if (k && [k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
+    {
+      [[Parser parserWithSAXHandler: (id<SAXHandler>)self
+			   withData: content] parse];
+    }
+  else if (c != Nil
+    && k && [k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
+    {
+      NSXMLParser   	*p;
+      NSString		*s;
+      NSData		*d;
+
+      s = [[NSString alloc] initWithData: content
+				encoding: NSUTF8StringEncoding];
+      if (nil == s)
+	{
+	  s = [[NSString alloc] initWithData: content
+				    encoding: NSISOLatin1StringEncoding];
+	}
+      d = [AUTORELEASE(s) dataUsingEncoding: NSUTF8StringEncoding];
+      p = AUTORELEASE([(NSXMLParser*)[c alloc] initWithData: d]);
+      [p _setAcceptHTML: YES];
+      [p setDelegate: self];
+      [p parse];
+    }
+  else
+    {
+      [[GSHTMLParser parserWithSAXHandler: self withData: content] parse];
+    }
+  current = max;
 }
 
 - (void) setTextView: (NSTextView*) textview {
