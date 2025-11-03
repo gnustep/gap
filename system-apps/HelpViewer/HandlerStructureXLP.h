@@ -37,7 +37,7 @@
 {
 	NSMutableArray* pages;
 	NSString* path;
-	NSData* content;
+	NSData* _utf8DataContent;
 
 	BOOL _document;
 	NSMutableAttributedString* _currentContent;

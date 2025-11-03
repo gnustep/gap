@@ -37,7 +37,7 @@
       _firstSection = [[Section alloc] initWithHeader: @"document"];
       _currentSection = _firstSection;
       _document = NO;
-      content = nil;
+      _utf8DataContent = nil;
     }
   return self;
 }
@@ -50,7 +50,7 @@
       _currentSection = _firstSection;
       _currentContent = [section text];
       _document = YES;
-      content = nil;
+      _utf8DataContent = nil;
     }
   return self;
 }
@@ -279,13 +279,25 @@
 - (Section*) sections {
 	return _firstSection;
 }
+
 - (void) setPath: (NSString*) p {
-	if (p != nil)
-	{
-		ASSIGN (path, p);
-		NSLog (@"[HandlerStructureXLP setPath]: %@", p);
-		content = [[NSData alloc] initWithContentsOfFile: path];
-	}
+  if (p != nil)
+    {
+      NSData *dataUnknownEncoding;
+      ASSIGN (path, p);
+      NSLog (@"[HandlerStructureXLP setPath]: %@", p);
+      dataUnknownEncoding = [[NSData alloc] initWithContentsOfFile: path];
+
+      // Check if we need to convert data to UTF-8
+
+      // BOM stuff
+
+      // otherwise assume 8-bit check for encoding in first line
+      // as in <?xml version="1.0" encoding="utf-8"?>
+
+      // otherwise assume UTF-8
+      _utf8DataContent = dataUnknownEncoding;
+    }
 }
 
 - (BOOL) parse
@@ -295,8 +307,6 @@
   NSString	*k;
 
   NSLog(@"HandlerStructureXLP parse");
-	
-  max = (float) [content length];
 
   k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
   if (nil == k) k = @"GSHTML";
@@ -304,34 +314,23 @@
     {
       c = [Parser class];
       p = [c parserWithSAXHandler: (id<SAXHandler>)self
-			 withData: content];
+			 withData: _utf8DataContent];
     }
   else if ([k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
     {
-      NSString		*s;
-      NSData		*d;
-
-      s = [[NSString alloc] initWithData: content
-				encoding: NSUTF8StringEncoding];
-      if (nil == s)
-	{
-	  s = [[NSString alloc] initWithData: content
-				    encoding: NSISOLatin1StringEncoding];
-	}
-      d = [AUTORELEASE(s) dataUsingEncoding: NSUTF8StringEncoding];
       c = NSClassFromString(@"GSSloppyXMLParser");
-      p = AUTORELEASE([(NSXMLParser*)[c alloc] initWithData: d]);
+      p = AUTORELEASE([(NSXMLParser*)[c alloc] initWithData: _utf8DataContent]);
       [p _setAcceptHTML: YES];
       [p setDelegate: self];
     }
   else
     {
       c = NSClassFromString(@"GSHTMLParser");
-      p = [c parserWithSAXHandler: self withData: content];
+      p = [c parserWithSAXHandler: self withData: _utf8DataContent];
     }
   NSLog(@"Parsing with '%@'%@", k, ((Nil == c) ? @" not found!" : @""));
   [p parse];
-  current = max;
+
   return (p ? YES : NO);
 }
 
