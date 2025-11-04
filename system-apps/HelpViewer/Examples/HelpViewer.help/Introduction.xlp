@@ -1,4 +1,5 @@
- 	<section name="Qu'est-ce que c'est que ce programme ?">
+<?xml encoding="ISO-8859-1"?>
+        <section name="Qu'est-ce que c'est que ce programme ?">
 		Il s'agit d'un programme permettant de visualiser de l'aide en ligne. Il peut être utilisé par
 		des programmes GNUstep.
 		<br>

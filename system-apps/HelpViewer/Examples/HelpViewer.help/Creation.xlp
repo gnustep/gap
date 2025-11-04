@@ -1,4 +1,5 @@
-	<section name="Bases" src="Bases.xlp"/>
+<?xml encoding="ISO-8859-1"?>
+        <section name="Bases" src="Bases.xlp"/>
 
 	<section name="Tags Disponibles">
 			Chaque tag doit être fermé avec le tag fermant correspondant.
