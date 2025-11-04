@@ -1,32 +1,32 @@
 	<section name="Bases" src="Bases.xlp"/>
 
 	<section name="Tags Disponibles">
-			Chaque tag doit être fermé avec le tag fermant correspondant.
+			Chaque tag doit Ãªtre fermÃ© avec le tag fermant correspondant.
 			Par exemple, pour mettre un texte en gras, on doit l'entourer avec le tag <code>&lt;b&gt;</code> :
 		       <listing><code>&lt;b&gt;</code><b>votre texte en gras</b><code>&lt;/b&gt;</code></listing>
 
 		<section name="Tags de structure">
 			Voici les deux tags de structure principaux :
 			<ul>
-				<li><code>&lt;part&gt;</code> : déclare une nouvelle partie (chaque partie est visible dans la NSTableView au dessus du texte de l'aide). Au moins un élément part est obligatoire pour un fichier d'aide. Dans le cas contraire le fichier ne sera pas considéré comme valide.</li>
-				<li><code>&lt;section&gt;</code> : déclare une section (vous pouvez imbriquer une section dans une autre pour créer une sous-section, etc.). La numérotation des sections, sous-sections, etc. est faite automatiquement.
+				<li><code>&lt;part&gt;</code> : dÃ©clare une nouvelle partie (chaque partie est visible dans la NSTableView au dessus du texte de l'aide). Au moins un Ã©lÃ©ment part est obligatoire pour un fichier d'aide. Dans le cas contraire le fichier ne sera pas considÃ©rÃ© comme valide.</li>
+				<li><code>&lt;section&gt;</code> : dÃ©clare une section (vous pouvez imbriquer une section dans une autre pour crÃ©er une sous-section, etc.). La numÃ©rotation des sections, sous-sections, etc. est faite automatiquement.
 				</li>
 			</ul>
 			<br><br>
-			Ces deux tags ont un attribut, <code><b>name</b></code>, permettant de spécifier le nom de la partie ou de la section.
+			Ces deux tags ont un attribut, <code><b>name</b></code>, permettant de spÃ©cifier le nom de la partie ou de la section.
 			Exemple : 
 			<pre><section name="Structure Tags"></pre>
 			<br><br>
-			Il y a également une série de tags, similaires au HTML, pour créer des listes 
+			Il y a Ã©galement une sÃ©rie de tags, similaires au HTML, pour crÃ©er des listes 
 			(avec les tags <code>&lt;ul&gt;</code> et <code>&lt;li&gt;</code>).
 		</section>
 
 		<section name="Positionnement">
 			Vous pouvez changer l'alignement du texte avec trois tags :
 			<ul>
-				<li><code><b>&lt;left&gt;</b></code> : pour aligner à gauche</li>
+				<li><code><b>&lt;left&gt;</b></code> : pour aligner Ã  gauche</li>
 				<li><code><b>&lt;center&gt;</b></code> : pour centrer le texte</li>
-				<li><code><b>&lt;right&gt;</b></code> : pour aligner à droite</li>
+				<li><code><b>&lt;right&gt;</b></code> : pour aligner Ã  droite</li>
 			</ul>
 		</section>
 
@@ -36,34 +36,34 @@
 			    <li><code><b>&lt;b&gt;</b></code> : pour mettre le texte en gras</li>
 			    <li><code><b>&lt;i&gt;</b></code> : pour mettre le texte en italique</li>
 			    <li><code><b>&lt;sc&gt;</b></code> : pour mettre le texte en petites majuscules</li>
-			    <li><code><b>&lt;code&gt;</b></code> : pour utiliser une fonte à taille fixe</li>
+			    <li><code><b>&lt;code&gt;</b></code> : pour utiliser une fonte Ã  taille fixe</li>
 			    <li><code><b>&lt;em&gt;</b></code> : mettre l'accent sur cette partie du texte</li>
 			</ul>
 		</section>
 
-		<section name="Réferencer">
-		    Il y a deux possibilitées pour référencer quelque chose :
+		<section name="RÃ©ferencer">
+		    Il y a deux possibilitÃ©es pour rÃ©fÃ©rencer quelque chose :
 		    <ul>
 			<li>lier une url, en utilisant <code><b>&lt;url&gt;</b></code>...<code><b>&lt;/url&gt;</b></code></li>
-			<li>lier à une référence interne, en utilisant <code><b>&lt;ref id="RefID"&gt;</b>your text<b>&lt;/ref&gt;</b></code></li>
+			<li>lier Ã  une rÃ©fÃ©rence interne, en utilisant <code><b>&lt;ref id="RefID"&gt;</b>your text<b>&lt;/ref&gt;</b></code></li>
 		    </ul>
 
-		    <section name="Réferences internes">
+		    <section name="RÃ©ferences internes">
 			
-			Vous pouvez référencer des parties ou des sections, en utilisant leur attribut <i>name</i> comme ID; ou vous
-			pouvez définir des points d'ancrages, en utilisante le tag <i>label</i> :
+			Vous pouvez rÃ©fÃ©rencer des parties ou des sections, en utilisant leur attribut <i>name</i> comme ID; ou vous
+			pouvez dÃ©finir des points d'ancrages, en utilisante le tag <i>label</i> :
 			<listing><code><b>&lt;label id="RefID"&gt;</b></listing>
 	            </section>
                 </section>		    
 
-		<section name="Figure avec légendes">
+		<section name="Figure avec lÃ©gendes">
 
-			Vous pouvez ajouter des légendes à une image qui seront automatiquement dessinées et positionnées. Vous
-			pouvez voir un exemple <ref id="Introduction">ici</ref>. L'avantage étant que quand vous traduirez vos fichiers xlp,
-			il suffira de traduire les tags "légendes" pour mettre à jour les figures. L'autre avantage est que c'est simple
-			à faire, et normalement plus rapide que de dessinner les légendes à la main sous gimp :)
+			Vous pouvez ajouter des lÃ©gendes Ã  une image qui seront automatiquement dessinÃ©es et positionnÃ©es. Vous
+			pouvez voir un exemple <ref id="Introduction">ici</ref>. L'avantage Ã©tant que quand vous traduirez vos fichiers xlp,
+			il suffira de traduire les tags "lÃ©gendes" pour mettre Ã  jour les figures. L'autre avantage est que c'est simple
+			Ã  faire, et normalement plus rapide que de dessinner les lÃ©gendes Ã  la main sous gimp :)
 			<br>
-			Vous pouvez inclure une figure avec légendes avec les tags suivants : 
+			Vous pouvez inclure une figure avec lÃ©gendes avec les tags suivants : 
 			<listing>
 		        <code>&lt;legendfig src="helpviewer-200.tiff"&gt;<br>
 		        &lt;legend x="113" y="31"&gt;Click to view the index&lt;/legend&gt;<br>
@@ -71,9 +71,9 @@
 		        &lt;/legendfig&gt;<br></code>
 			</listing>
 			<br>
-			L'attribut "src" indique le fichier image utilisé, et les tags "legend" déterminent les légendes dessinées.
-			Les attributes "x" et "y" sont les positions, en pixels, de la cible pointée par la légende. Pour déterminer
-			ces attibutes, vous pouvez charger l'image dans un programme comme gimp, les coordonées de la souris
+			L'attribut "src" indique le fichier image utilisÃ©, et les tags "legend" dÃ©terminent les lÃ©gendes dessinÃ©es.
+			Les attributes "x" et "y" sont les positions, en pixels, de la cible pointÃ©e par la lÃ©gende. Pour dÃ©terminer
+			ces attibutes, vous pouvez charger l'image dans un programme comme gimp, les coordonÃ©es de la souris
 			devraient s'afficher quelque part :)
 		</section>
 		
