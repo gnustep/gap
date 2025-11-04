@@ -1,4 +1,5 @@
-/*
+/* -*- mode: objc -*-
+
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
 
@@ -21,18 +22,20 @@
 #ifndef __BRCELL_H__
 #define __BRCELL_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include <AppKit/NSTextAttachment.h>
-#include "GNUstep.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import <AppKit/NSTextAttachment.h>
+#import "GNUstep.h"
 
 @interface BRCell : NSTextAttachmentCell
 {
 }
+
 - (void) drawWithFrame: (NSRect) cellFrame
-    inView: (NSView*) controlView;
+                inView: (NSView*) controlView;
     
-+(BRCell *) sharedBRCell;
++ (BRCell *) sharedBRCell;
+
 @end
 
 #endif

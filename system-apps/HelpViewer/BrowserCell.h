@@ -1,4 +1,5 @@
-/*
+/* -*- mode: objc -*-
+
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
 
@@ -21,21 +22,23 @@
 #ifndef __BROWSER_CELL_H__
 #define __BROWSER_CELL_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-#include "Section.h"
+#import "Section.h"
 
 @interface BrowserCell: NSBrowserCell
 {
-	Section* section;
-	NSImage *image;
+  Section *section;
+  NSImage *image;
 }
+
 - (void) setImage: (NSImage *) theImage;
 - (void) drawWithFrame: (NSRect) theFrame inView: (NSView *) theView;
 - (NSSize) cellSize;
 - (void) setSection: (Section*) sec;
 - (Section*) section;
+
 @end
 
 #endif

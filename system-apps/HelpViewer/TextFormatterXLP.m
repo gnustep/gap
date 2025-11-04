@@ -490,7 +490,7 @@
     {
       c = [Parser class];
       p = [c parserWithSAXHandler: (id<SAXHandler>)self withData:
-	[s dataUsingEncoding:  NSISOLatin1StringEncoding
+	[s dataUsingEncoding:  NSUTF8StringEncoding
 	allowLossyConversion: YES]];
     }
   else if ([k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)

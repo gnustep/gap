@@ -1,4 +1,5 @@
-/*
+/* -*- mode: objc -*-
+
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
                   2020 Riccardo Mottola <rm@gnu.org>
@@ -22,19 +23,20 @@
 #ifndef __FIGURE_CELL_H__
 #define __FIGURE_CELL_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "GNUstep.h"
-#include "Legend.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "GNUstep.h"
+#import "Legend.h"
 
 @interface FigureCell : NSTextAttachmentCell
 {
-    NSImage* _image;
-    NSArray* _legends;
-    NSSize _size;
-    CGFloat border;
-    CGFloat spaceMargin;
+  NSImage *_image;
+  NSArray *_legends;
+  NSSize _size;
+  CGFloat border;
+  CGFloat spaceMargin;
 }
+
 - (id) initWithSize: (NSSize) size; 
 - (NSSize) cellSize;
 - (void) setImage: (NSImage*) img;
@@ -42,7 +44,8 @@
 - (void) resize: (id) sender;
 - (void) resizeWithTextView: (NSTextView*) textView;
 - (void) drawWithFrame: (NSRect) cellFrame
-    inView: (NSView*) controlView;
+                inView: (NSView*) controlView;
+
 @end
 
 #endif

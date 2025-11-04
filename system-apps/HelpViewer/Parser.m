@@ -50,7 +50,7 @@
 
 - (BOOL) parse
 {
-  NSString* file = [[NSString alloc] initWithData: _data encoding: NSISOLatin1StringEncoding];
+  NSString* file = [[NSString alloc] initWithData: _data encoding: NSUTF8StringEncoding];
   NSMutableString* current = [[NSMutableString alloc] init];
 
   if (file != nil)
@@ -194,9 +194,16 @@
 		    {
                       if (attributeStarted)
 			{
-                          [tagAttributes setObject: current forKey: keyAttribute];
-                          [keyAttribute release]; keyAttribute = nil;
-                          RESET (current);
+                          if (keyAttribute != nil)
+                            {
+                              [tagAttributes setObject: current forKey: keyAttribute];
+                              [keyAttribute release]; keyAttribute = nil;
+                              RESET (current);
+                            }
+                          else
+                            {
+                              NSLog(@"Unexpected token \"");
+                            }
 			}
                       else 
 			{

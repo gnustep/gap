@@ -1,4 +1,5 @@
-/*
+/* -*- mode: objc -*-
+
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
 
@@ -21,9 +22,9 @@
 #ifndef __HANDLER_STRUCTURE_H__
 #define __HANDLER_STRUCTURE_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "Section.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "Section.h"
 
 @class Section;
 
