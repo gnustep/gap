@@ -755,7 +755,7 @@ static NSArray *knownItems;
 - (void) appendStringForProperty: (NSString*) prop
 			inPerson: (ADPerson*) p
 {
-  id val; int i; NSString *label, *identifier, *vcfLabel, *hdr, *fmt;
+  id val; int i; NSString *label, *vcfLabel, *hdr, *fmt;
 
   val = [p valueForProperty: prop];
   if(!val || ([val respondsToSelector: @selector(count)] && ![val count]))
@@ -776,7 +776,6 @@ static NSArray *knownItems;
       for(i=0; i<[val count]; i++)
 	{
 	  value = [val valueAtIndex: i];
-	  identifier = [val identifierAtIndex: i];
 	  label = [val labelAtIndex: i];
 	  vcfLabel = @"";
 
@@ -799,9 +798,7 @@ static NSArray *knownItems;
 	  else if([label isEqualToString: ADOtherLabel])
 	    vcfLabel = @"TYPE=OTHER";
 
-	  hdr = [NSString stringWithFormat: @"TEL;%@;X-GNUSTEPLABEL=%@;"
-			  @"X-GNUSTEPID=%@;%d", vcfLabel, label,
-			  identifier, i+1];
+	  hdr = [NSString stringWithFormat: @"TEL;%@", vcfLabel];
 	  [self appendStringWithHeader: hdr
 		value: value];
 	}
@@ -813,7 +810,6 @@ static NSArray *knownItems;
       for(i=0; i<[val count]; i++)
 	{
 	  value = [val valueAtIndex: i];
-	  identifier = [val identifierAtIndex: i];
 	  label = [val labelAtIndex: i];
 	  vcfLabel = @"";
 
@@ -827,8 +823,7 @@ static NSArray *knownItems;
 	    vcfLabel = @"TYPE=OTHER";
 
 	  hdr =
-	    [NSString stringWithFormat: @"EMAIL;INTERNET;%@;X-GNUSTEPLABEL=%@;"
-		      @"X-GNUSTEPID=%@;%d", vcfLabel, label, identifier, i+1];
+	    [NSString stringWithFormat: @"EMAIL;INTERNET;%@", vcfLabel];
 	  [self appendStringWithHeader: hdr
 		value: value];
 	}
@@ -842,7 +837,6 @@ static NSArray *knownItems;
       for(i=0; i<[val count]; i++)
 	{
 	  value = [val valueAtIndex: i];
-	  identifier = [val identifierAtIndex: i];
 	  label = [val labelAtIndex: i];
 	  vcfLabel = @"";
 
@@ -870,9 +864,7 @@ static NSArray *knownItems;
 	  country = [value objectForKey: ADAddressCountryKey];
 	  if(!country) country = @"";
 
-	  hdr = [NSString stringWithFormat: @"ADR;%@;X-GNUSTEPLABEL=%@;"
-			  @"X-GNUSTEPID=%@;%d", vcfLabel, label,
-			  identifier, i+1];
+	  hdr = [NSString stringWithFormat: @"ADR;%@", vcfLabel];
 	  fmt = [NSString stringWithFormat: @"%@;%@;%@;%@;%@;%@;%@",
 			  poBox, extAddr, street, locality, region,
 			  postalCode, country];
