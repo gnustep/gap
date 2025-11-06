@@ -885,7 +885,7 @@ static NSArray *knownItems;
     }
   else if([prop isEqualToString: ADBirthdayProperty])
     [self appendStringWithHeader: @"BDAY"
-	  value: [val descriptionWithCalendarFormat: @"%Y-%d-%m"]];
+	  value: [val descriptionWithCalendarFormat: @"%Y-%m-%d"]];
   else
     NSLog(@"Warning: Unhandled property '%@' in conversion to vcard\n",
 	  prop);
