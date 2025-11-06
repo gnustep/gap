@@ -782,24 +782,24 @@ static NSArray *knownItems;
 
 	  if([label isEqualToString: ADPhoneWorkLabel] ||
 	     [label isEqualToString: ADWorkLabel])
-	    vcfLabel = @"WORK;VOICE;";
+	    vcfLabel = @"TYPE=WORK,VOICE";
 	  else if([label isEqualToString: ADPhoneHomeLabel] ||
 		  [label isEqualToString: ADHomeLabel])
-	    vcfLabel = @"HOME;VOICE;";
+	    vcfLabel = @"TYPE=HOME,VOICE";
 	  else if([label isEqualToString: ADPhoneMobileLabel])
-	    vcfLabel = @"CELL;VOICE;";
+	    vcfLabel = @"TYPE=CELL,VOICE";
 	  else if([label isEqualToString: ADPhoneMainLabel])
-	    vcfLabel = @"PREF;VOICE;";
+	    vcfLabel = @"TYPE=PREF,VOICE";
 	  else if([label isEqualToString: ADPhoneHomeFAXLabel])
-	    vcfLabel = @"HOME;FAX;";
+	    vcfLabel = @"TYPE=HOME,FAX";
 	  else if([label isEqualToString: ADPhoneWorkFAXLabel])
-	    vcfLabel = @"WORK;FAX;";
+	    vcfLabel = @"TYPE=WORK,FAX";
 	  else if([label isEqualToString: ADPhonePagerLabel])
-	    vcfLabel = @"PAGER;";
+	    vcfLabel = @"TYPE=PAGER";
 	  else if([label isEqualToString: ADOtherLabel])
-	    vcfLabel = @"OTHER;";
+	    vcfLabel = @"TYPE=OTHER";
 
-	  hdr = [NSString stringWithFormat: @"TEL;%@X-GNUSTEPLABEL=%@;"
+	  hdr = [NSString stringWithFormat: @"TEL;%@;X-GNUSTEPLABEL=%@;"
 			  @"X-GNUSTEPID=%@;%d", vcfLabel, label,
 			  identifier, i+1];
 	  [self appendStringWithHeader: hdr
@@ -819,15 +819,15 @@ static NSArray *knownItems;
 
 	  if([label isEqualToString: ADEmailWorkLabel] ||
 	     [label isEqualToString: ADWorkLabel])
-	    vcfLabel = @"WORK;";
+	    vcfLabel = @"TYPE=WORK";
 	  else if([label isEqualToString: ADEmailHomeLabel] ||
 		  [label isEqualToString: ADHomeLabel])
-	    vcfLabel = @"HOME;";
+	    vcfLabel = @"TYPE=HOME";
 	  else if([label isEqualToString: ADOtherLabel])
-	    vcfLabel = @"OTHER;";
+	    vcfLabel = @"TYPE=OTHER";
 
 	  hdr =
-	    [NSString stringWithFormat: @"EMAIL;INTERNET;%@X-GNUSTEPLABEL=%@;"
+	    [NSString stringWithFormat: @"EMAIL;INTERNET;%@;X-GNUSTEPLABEL=%@;"
 		      @"X-GNUSTEPID=%@;%d", vcfLabel, label, identifier, i+1];
 	  [self appendStringWithHeader: hdr
 		value: value];
@@ -848,12 +848,12 @@ static NSArray *knownItems;
 
 	  if([label isEqualToString: ADAddressWorkLabel] ||
 	     [label isEqualToString: ADWorkLabel])
-	    vcfLabel = @"WORK;";
+	    vcfLabel = @"TYPE=WORK";
 	  else if([label isEqualToString: ADAddressHomeLabel] ||
 		  [label isEqualToString: ADHomeLabel])
-	    vcfLabel = @"HOME;";
+	    vcfLabel = @"TYPE=HOME";
 	  else if([label isEqualToString: ADOtherLabel])
-	    vcfLabel = @"OTHER;";
+	    vcfLabel = @"TYPE=OTHER";
 
 	  poBox = [value objectForKey: ADAddressPOBoxKey];
 	  if(!poBox) poBox = @"";
@@ -870,7 +870,7 @@ static NSArray *knownItems;
 	  country = [value objectForKey: ADAddressCountryKey];
 	  if(!country) country = @"";
 
-	  hdr = [NSString stringWithFormat: @"ADR;%@X-GNUSTEPLABEL=%@;"
+	  hdr = [NSString stringWithFormat: @"ADR;%@;X-GNUSTEPLABEL=%@;"
 			  @"X-GNUSTEPID=%@;%d", vcfLabel, label,
 			  identifier, i+1];
 	  fmt = [NSString stringWithFormat: @"%@;%@;%@;%@;%@;%@;%@",
