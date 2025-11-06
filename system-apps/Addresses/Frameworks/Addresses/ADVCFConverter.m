@@ -341,7 +341,7 @@ static NSArray *knownItems;
 	     ADMiddleNameProperty, ADTitleProperty, nil];
 
   [_out appendString: @"BEGIN:VCARD\r\n"];
-  [_out appendString: @"VERSION:2.1\r\n"];
+  [_out appendString: @"VERSION:3.0\r\n"];
   [_out appendString: @"X-GENERATOR:Addresses for GNUstep pre-1.0\r\n"];
 
   // Create name ourselves
