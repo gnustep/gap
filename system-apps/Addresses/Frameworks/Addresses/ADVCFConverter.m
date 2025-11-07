@@ -534,6 +534,8 @@ static NSArray *knownItems;
     [p setValue: [v objectAtIndex: 0] forProperty: ADHomePageProperty];
   else if([key isEqualToString: @"fn"])
     [p setValue: [v objectAtIndex: 0] forProperty: ADFormattedNameProperty];
+  else if([key isEqualToString: @"uid"])
+    [p setValue: [v objectAtIndex: 0] forProperty: ADUIDProperty];
   else if([key isEqualToString: @"bday"])
     {
       NSCalendarDate *d;
