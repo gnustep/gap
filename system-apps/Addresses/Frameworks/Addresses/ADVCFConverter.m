@@ -769,6 +769,8 @@ static NSArray *knownItems;
     [self appendStringWithHeader: @"URL" value: val];
   else if([prop isEqualToString: ADNoteProperty])
     [self appendStringWithHeader: @"NOTE" value: val];
+  else if([prop isEqualToString: ADUIDProperty])
+    [self appendStringWithHeader: @"UID" value: val];
   else if([prop isEqualToString: ADPhoneProperty]) // multi-string
     {
       NSString *value;
@@ -870,6 +872,29 @@ static NSArray *knownItems;
 			  postalCode, country];
 	  [self appendStringWithHeader: hdr value: fmt];
 	}      
+    }
+  else if([prop isEqualToString: ADAIMInstantProperty])
+    {
+      NSString *value;
+
+      for(i=0; i<[val count]; i++)
+	{
+	  value = [val valueAtIndex: i];
+	  label = [val labelAtIndex: i];
+	  vcfLabel = @"";
+
+	  if([label isEqualToString: ADAIMWorkLabel])
+	    vcfLabel = @"TYPE=WORK";
+	  else if([label isEqualToString: ADAIMHomeLabel])
+	    vcfLabel = @"TYPE=HOME";
+	  else if([label isEqualToString: ADOtherLabel])
+	    vcfLabel = @"TYPE=OTHER";
+
+	  hdr =
+	    [NSString stringWithFormat: @"IMPP;X-SERVICE-TYPE-AIM;%@:AIM", vcfLabel];
+	  [self appendStringWithHeader: hdr
+		value: value];
+	}
     }
   else if([prop isEqualToString: ADImageProperty])
     {
