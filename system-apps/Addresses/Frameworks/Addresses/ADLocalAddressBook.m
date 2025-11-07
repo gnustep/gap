@@ -566,7 +566,11 @@ static ADLocalAddressBook *_localAB = nil;
   if(uid)
     {
       NSLog(@"Record already contains an UID\n");
-      return NO;
+    }
+  else
+    {
+      uid = [self _nextValidID];
+      [record setValue: uid forProperty: ADUIDProperty];
     }
 
   if([record addressBook])
@@ -575,8 +579,7 @@ static ADLocalAddressBook *_localAB = nil;
       return NO;
     }
       
-  uid = [self _nextValidID];
-  [record setValue: uid forProperty: ADUIDProperty];
+
   [record setAddressBook: self];
   [_unsaved setObject: record forKey: uid];
 
