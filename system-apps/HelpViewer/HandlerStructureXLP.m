@@ -286,6 +286,7 @@
     {
       NSData *dataUnknownEncoding;
       NSStringEncoding enc;
+      const unsigned char *ptr;
 
       ASSIGN (path, p);
       NSLog (@"[HandlerStructureXLP setPath]: %@", p);
@@ -295,11 +296,12 @@
       
       if (length < 4)
         {
-          return;       // Not long enough to determine an encoding
+          NSLog(@"File not long enough");
+          return; // Not long enough to determine an encoding
         }
 
       // Check if we need to convert data to UTF-8
-      const unsigned char	*ptr = (const unsigned char*)[dataUnknownEncoding bytes];
+      ptr = (const unsigned char*)[dataUnknownEncoding bytes];
 
       // Default is UTF-9
       enc = NSUTF8StringEncoding;
@@ -317,7 +319,6 @@
           NSLog(@"found UTF-8 BOM");
           enc = NSUTF8StringEncoding;
         }
-
 
       // look if he have an encoding
       // as in <?xml version="1.0" encoding="utf-8"?>
@@ -342,7 +343,7 @@
                 NSRange xmlTagRange;
 
                 xmlTagRange = NSMakeRange(startRange.location, endRange.location + endRange.length);
-                NSLog(@"inside xmlTag: %@", [contentAsString substringWithRange:xmlTagRange]);
+                NSLog(@"Extracted XML Tag: %@", [contentAsString substringWithRange:xmlTagRange]);
                 encRange = [contentAsString rangeOfString: @"encoding"
                                                   options: NSCaseInsensitiveSearch
                                                   range: xmlTagRange];
@@ -363,20 +364,18 @@
                         NSRange secondQuote;
                         NSRange encValueRange;
                         
-                        NSLog(@"first quote");
                         secondQuoteSearchRange = NSMakeRange(firstQuote.location + firstQuote.length, maxSearchRange.location + maxSearchRange.length - (firstQuote.location + firstQuote.length));
                         NSLog(@"second quote search string |%@|", [contentAsString substringWithRange:secondQuoteSearchRange]);
                         secondQuote = [contentAsString rangeOfString: @"\""
                                                              options: 0
                                                                range: secondQuoteSearchRange];
-                        
                         if (secondQuote.location != NSNotFound)
                           {
-                            encValueRange = NSMakeRange(secondQuoteSearchRange.location, secondQuoteSearchRange.length - secondQuote.length);
+                            encValueRange = NSMakeRange(secondQuoteSearchRange.location, secondQuote.location - secondQuoteSearchRange.location);
                             if (encValueRange.location != NSNotFound)
                               {
                                 encodingString = [contentAsString substringWithRange:encValueRange];
-                                NSLog(@"Encoding ---> |%@|", encodingString);
+                                NSLog(@"Encoding Detected |%@|", encodingString);
 
                                 if ([encodingString isEqualToString:@"ISO-8859-1"])
                                   {
@@ -392,35 +391,30 @@
                                   {
                                     NSLog(@"Found UTF8");
                                     enc = NSUTF8StringEncoding;
-                                  } 
-                              }
+                                  }
+                              } // Encoding found
                           }
                       }
-
                   }
-              }
+              } // XML Tag
           }
-                                  
       }
 
  
-      
-
       // otherwise assume UTF-8
       if (enc == NSUTF8StringEncoding)
         {
-          NSLog(@"utf-8 no conversion");
+          NSLog(@"UTF-8 native, no conversion");
           _utf8DataContent = dataUnknownEncoding;
         }
       else
         {
-          NSLog(@"should convert");
+          NSLog(@"Converting to UTF-8");
           NSString *tempStr;
 
           tempStr = [[NSString alloc] initWithData: dataUnknownEncoding
                                           encoding: enc];
           _utf8DataContent = [tempStr dataUsingEncoding: NSUTF8StringEncoding];
-          
         }
     }
 }
