@@ -43,9 +43,16 @@
   if ((self = [super init]))
     {
       _data = data;
+      [_data retain];
       _handler = handler;
     }
   return self;
+}
+
+- (void) dealloc
+{
+  [_data release];
+  [super dealloc];
 }
 
 - (BOOL) parse
