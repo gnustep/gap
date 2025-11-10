@@ -58,10 +58,10 @@
 - (BOOL) parse
 {
   NSString* file = [[NSString alloc] initWithData: _data encoding: NSUTF8StringEncoding];
-  NSMutableString* current = [[NSMutableString alloc] init];
 
   if (file != nil)
     {
+      NSMutableString* current = [[NSMutableString alloc] init];
       NSUInteger i;
       unsigned entityIdx = 0;
       char entityBuf[MAX_ENTITY_LEN+1];
