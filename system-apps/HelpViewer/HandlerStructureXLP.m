@@ -58,6 +58,7 @@
 - (void) dealloc
 {
   RELEASE (_firstSection);
+  RELEASE (_utf8DataContent);
   [super dealloc];
 }
 
@@ -277,7 +278,7 @@
 - (void) addCurrentProgression: (int) add
 {
 	current += add;
-	NSLog (@"Lu (%d) : %.2f / %.2f (%.2f%)", add, current, max, current*100/max);
+	NSLog (@"Lu (%d) : %.2f / %.2f (%.2f)", add, current, max, current*100/max);
 }
 
 - (Section*) sections {
@@ -401,9 +402,9 @@
                           }
                       }
                   }
-                [contentAsString release];
               } // XML Tag
           }
+        [contentAsString release];
       }
 
  
@@ -412,6 +413,7 @@
         {
           NSLog(@"UTF-8 native, no conversion");
           _utf8DataContent = dataUnknownEncoding;
+          [_utf8DataContent retain];
         }
       else
         {
@@ -421,8 +423,10 @@
           tempStr = [[NSString alloc] initWithData: dataUnknownEncoding
                                           encoding: enc];
           _utf8DataContent = [tempStr dataUsingEncoding: NSUTF8StringEncoding];
+          [_utf8DataContent retain];
           [tempStr release];
         }
+      [dataUnknownEncoding release];
     }
 }
 
@@ -431,6 +435,7 @@
   Class		c = Nil;
   id		p = nil;
   NSString	*k;
+  BOOL          parseSuccesful;
 
   NSLog(@"HandlerStructureXLP parse");
 
@@ -455,9 +460,9 @@
       p = [c parserWithSAXHandler: self withData: _utf8DataContent];
     }
   NSLog(@"Parsing with '%@'%@", k, ((Nil == c) ? @" not found!" : @""));
-  [p parse];
+  parseSuccesful = [p parse];
 
-  return (p ? YES : NO);
+  return parseSuccesful;
 }
 
 - (void) setTextView: (NSTextView*) textview {
