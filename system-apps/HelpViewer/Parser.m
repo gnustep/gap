@@ -189,6 +189,11 @@
 		    }
                   else if (c == '=')
 		    {
+                      if (keyAttribute != nil)
+                        {
+                          [keyAttribute release];
+                        }
+ 
                       keyAttribute = [NSString stringWithString: current];
                       keyAttribute = RETAIN ([NSString stringWithStringByTrimmingSpaces: keyAttribute]);
 
