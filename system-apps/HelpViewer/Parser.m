@@ -104,6 +104,7 @@
                     {
                       entityBuf[entityIdx-1] = '\0';
                       NSLog(@"found too long entity name to store in buffer. Got up to |%s|", entityBuf);
+                      inEntity = NO;
                     }
                 }
             }
