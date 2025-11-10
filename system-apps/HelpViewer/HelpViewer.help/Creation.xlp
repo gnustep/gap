@@ -1,3 +1,4 @@
+<?xml encoding="utf-8"?>
 	<section name="Bases" src="Bases.xlp"/>
 
 	<section name="Tags Disponibles">
@@ -30,7 +31,7 @@
 			</ul>
 		</section>
 
-		<section name="Formatage du Texte">
+		<section name="Text Formatting">
 			Vous pouvez utiliser les tags suivants :
 			<ul>
 			    <li><code><b>&lt;b&gt;</b></code> : pour mettre le texte en gras</li>
@@ -41,40 +42,35 @@
 			</ul>
 		</section>
 
-		<section name="Réferencer">
+		<section name="References">
 		    Il y a deux possibilitées pour référencer quelque chose :
 		    <ul>
 			<li>lier une url, en utilisant <code><b>&lt;url&gt;</b></code>...<code><b>&lt;/url&gt;</b></code></li>
 			<li>lier à une référence interne, en utilisant <code><b>&lt;ref id="RefID"&gt;</b>your text<b>&lt;/ref&gt;</b></code></li>
 		    </ul>
 
-		    <section name="Réferences internes">
+		    <section name="Internal References">
 			
 			Vous pouvez référencer des parties ou des sections, en utilisant leur attribut <i>name</i> comme ID; ou vous
 			pouvez définir des points d'ancrages, en utilisante le tag <i>label</i> :
-			<listing><code><b>&lt;label id="RefID"&gt;</b></listing>
+			<listing><code><b>&lt;label id=&quot;RefID&quot;&gt;</b></listing>
 	            </section>
                 </section>		    
 
-		<section name="Figure avec légendes">
+		<section name="Figure with legends">
 
-			Vous pouvez ajouter des légendes à une image qui seront automatiquement dessinées et positionnées. Vous
-			pouvez voir un exemple <ref id="Introduction">ici</ref>. L'avantage étant que quand vous traduirez vos fichiers xlp,
-			il suffira de traduire les tags "légendes" pour mettre à jour les figures. L'autre avantage est que c'est simple
-			à faire, et normalement plus rapide que de dessinner les légendes à la main sous gimp :)
-			<br>
+                  You can add legends to an image which are autmatically drawn and positioned. You can see an example <ref id="Introduction">here</ref>.  The advantage is that when you need to translate your xlp files, it is enough to translate the &quot;legend&quot tags to update the figures. The other advantage is that it is easy to do and usually faster than to draw manually with gimp :)
+		  <br>
 			Vous pouvez inclure une figure avec légendes avec les tags suivants : 
 			<listing>
-		        <code>&lt;legendfig src="helpviewer-200.tiff"&gt;<br>
-		        &lt;legend x="113" y="31"&gt;Click to view the index&lt;/legend&gt;<br>
+		        <code>&lt;legendfig src=&quot;helpviewer-200.tiff&quot;&gt;<br>
+		        &lt;legend x=&quot;113&quot; y=&quot;31&quot;&gt;Click to view the index&lt;/legend&gt;<br>
 		        ... (etc.)<br>
 		        &lt;/legendfig&gt;<br></code>
 			</listing>
 			<br>
-			L'attribut "src" indique le fichier image utilisé, et les tags "legend" déterminent les légendes dessinées.
-			Les attributes "x" et "y" sont les positions, en pixels, de la cible pointée par la légende. Pour déterminer
-			ces attibutes, vous pouvez charger l'image dans un programme comme gimp, les coordonées de la souris
-			devraient s'afficher quelque part :)
+                        The attribute &quot;src&quot; indicates the file image to be used and the tag &quot;legend&quot; determines the designated legends.
+                        The attributes &quot;x&quot; and &quot;y&quot; are the positions, in pixels, of the target pointed by the legend. To determine these attributes, you can load the images in a program like gimp, the mouse coordinates should be shown somewhere :)
 		</section>
 		
 
