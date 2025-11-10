@@ -158,7 +158,7 @@
 
     printf ("cellFrame : x <%.2f> y <%.2f> w <%.2f> h <%.2f>\n", cellFrame.origin.x,
 	    cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height);
-    printf ("table count : %d \n", [table count]);
+    printf ("table count : %lu \n", (unsigned long)[table count]);
     
     
     for (i = 0; i < [table count]; i++)

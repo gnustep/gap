@@ -87,7 +87,7 @@
     NSMutableAttributedString* ret = [[NSMutableAttributedString alloc] initWithAttributedString: text];
     AUTORELEASE (ret);
 
-    NSLog (@"sections count : %d", [sections count]);
+    NSLog (@"sections count : %lu", (unsigned long)[sections count]);
     for (i=0; i < [sections count]; i++)
     {
 	NSMutableAttributedString* current;
