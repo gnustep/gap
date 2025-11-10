@@ -59,7 +59,7 @@
 
 		<section name="Figure with legends">
 
-                  You can add legends to an image which are autmatically drawn and positioned. You can see an example <ref id="Introduction">here</ref>.  The advantage is that when you need to translate your xlp files, it is enough to translate the &quot;legend&quot tags to update the figures. The other advantage is that it is easy to do and usually faster than to draw manually with gimp :)
+                  You can add legends to an image which are autmatically drawn and positioned. You can see an example <ref id="Introduction">here</ref>.  The advantage is that when you need to translate your xlp files, it is enough to translate the &quot;legend&quot; tags to update the figures. The other advantage is that it is easy to do and usually faster than to draw manually with gimp :)
 		  <br>
 			Vous pouvez inclure une figure avec légendes avec les tags suivants : 
 			<listing>
