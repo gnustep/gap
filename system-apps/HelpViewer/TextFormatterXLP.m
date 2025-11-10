@@ -338,11 +338,19 @@
   [self characters: string];
 }
 
-- (void) characters: (NSString*) name {
+- (void) characters: (NSString*) name
+{
     NSMutableDictionary* attr = [NSMutableDictionary dictionaryWithCapacity: 2];
     NSFont* font = nil;
     NSFontTraitMask FontMask = 0;
     int FontSize = 12;
+
+    if (nil == name || [name length] == 0)
+      {
+        NSLog(@"TextFormatterXLP characters called with empty string, skipping");
+        return;
+      }
+    NSLog(@"TextFormatterXLP characters: |%@|", name);
 
         if (_bold) FontMask = NSBoldFontMask | FontMask;
 	if (_italic) FontMask = NSItalicFontMask | FontMask;

@@ -236,15 +236,13 @@
 - (void) characters: (NSString*) name {
     if (_document)
     {
-    	NSLog (@"characters : |%@|", name);
-        NSMutableAttributedString* astr;
+    	NSLog (@"HandlerStructureXLP characters: |%@|", name);
         NSUInteger i;
         NSMutableString *mutStr = [[NSMutableString alloc] init];
 
         for (i = 0; i < [name length]; i++)
           {
             unichar ch;
-
 
             ch = [name characterAtIndex: i];
             if (ch == '<')
@@ -261,10 +259,16 @@
               [mutStr appendString: [NSString stringWithCharacters:&ch length:1]];
           }
         NSString *str = [NSString trimString: mutStr skipStart:!_insideStringContent];
-        astr = [[NSMutableAttributedString alloc] initWithString: str];
-        [_currentContent appendAttributedString: astr];
-        //[self addCurrentProgression: [astr length]];
-        [astr release];
+        if (str && [str length])
+          {
+            NSMutableAttributedString* astr;
+     
+            astr = [[NSMutableAttributedString alloc] initWithString: str];
+            [_currentContent appendAttributedString: astr];
+            //[self addCurrentProgression: [astr length]];
+            [astr release];
+          }
+
         [mutStr release];
         _insideStringContent = YES;
     }
