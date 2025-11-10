@@ -126,7 +126,7 @@
               // We send the tag to the handler
               if (isEndingTag)
 		{
-		  NSLog(@"Ending tag Current is %@ but tag name is %@ attributes %@", current, tagName, tagAttributes);
+		  NSLog(@"Ending tag, current is %@ but tag name is %@ attributes %@", current, tagName, tagAttributes);
 		  // <tag/> shortcut detected, start-end together
 		  if ([current length] == 0)
 		    {
@@ -148,10 +148,12 @@
                   if (tagName == nil)
 		    {
                       // If no tag name, current == tag name ...
+                      NSLog(@"begin tag %@ with no attributes", current);
                       [_handler startElement: current attributes: nil];
 		    }
                   else
 		    {
+                      NSLog(@"begin tag %@ with %@ attributes", tagName, tagAttributes);
                       [_handler startElement: tagName attributes: tagAttributes];
 		    }
                   [tagName release]; tagName = nil;
@@ -226,6 +228,11 @@
 	    }
 	}
 
+      // we ended without a tag, but have characters left
+      if (current && [current length])
+        {
+          [_handler characters: current];
+        }
       NSLog (@"Parse end !");
 
       [file release];
