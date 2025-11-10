@@ -258,7 +258,7 @@
             else
               [mutStr appendString: [NSString stringWithCharacters:&ch length:1]];
           }
-        NSString *str = [NSString trimString: mutStr skipStart:!_insideStringContent];
+        NSString *str = [NSString stringWithStringByTrimmingSpaces: mutStr skipStart:!_insideStringContent];
         if (str && [str length])
           {
             NSMutableAttributedString* astr;

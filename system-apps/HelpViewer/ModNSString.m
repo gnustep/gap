@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
-                  2020 Riccardo Mottola <rm@gnu.org>
+    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+                  2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,12 +30,12 @@
 
 @implementation NSString (Trim)
 
-+ (NSString*) trimString: (NSString*) str
++ (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str
 {
-  return [NSString trimString: str skipStart:YES];
+  return [NSString stringWithStringByTrimmingSpaces: str skipStart:YES];
 }
 
-+ (NSString*) trimString: (NSString*) str skipStart: (BOOL)skipStart
++ (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str skipStart: (BOOL)skipStart
 {
     NSMutableString* ret = [[NSMutableString alloc] initWithString: @""];
     BOOL space = skipStart;

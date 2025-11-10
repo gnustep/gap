@@ -190,7 +190,7 @@
                   else if (c == '=')
 		    {
                       keyAttribute = [NSString stringWithString: current];
-                      keyAttribute = RETAIN ([NSString trimString: keyAttribute]);
+                      keyAttribute = RETAIN ([NSString stringWithStringByTrimmingSpaces: keyAttribute]);
 
                       RESET (current);
                       if (tagAttributes == nil) 

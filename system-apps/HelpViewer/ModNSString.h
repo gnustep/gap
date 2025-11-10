@@ -25,8 +25,8 @@
 #include "GNUstep.h"
 
 @interface NSString (Trim)
-+ (NSString*) trimString: (NSString*) str;
-+ (NSString*) trimString: (NSString*) str skipStart: (BOOL)skipStart;
++ (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str;
++ (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str skipStart: (BOOL)skipStart;
 @end
 
 #endif
