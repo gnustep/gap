@@ -300,6 +300,7 @@
       
       if (length < 4)
         {
+          [dataUnknownEncoding release];
           NSLog(@"File not long enough");
           return; // Not long enough to determine an encoding
         }
@@ -389,7 +390,7 @@
                                 else if ([encodingString isEqualToString:@"ISO-8859-15"])
                                   {
                                     NSLog(@"Found Latin9");
-                                    enc = NSISOLatin9StringEncoding;
+                                    enc = NSWindowsCP1252StringEncoding;
                                   }
                                 else if ([encodingString isEqualToString:@"UTF-8"])
                                   {
@@ -400,6 +401,7 @@
                           }
                       }
                   }
+                [contentAsString release];
               } // XML Tag
           }
       }
@@ -419,6 +421,7 @@
           tempStr = [[NSString alloc] initWithData: dataUnknownEncoding
                                           encoding: enc];
           _utf8DataContent = [tempStr dataUsingEncoding: NSUTF8StringEncoding];
+          [tempStr release];
         }
     }
 }
@@ -432,7 +435,7 @@
   NSLog(@"HandlerStructureXLP parse");
 
   k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
-  if (nil == k) k = @"GSHTML";
+  if (nil == k) k = @"Internal";
   if ([k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
     {
       c = [Parser class];
