@@ -66,7 +66,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 /*  Define the following if you want to debug the move list features.  */
 /*  #define _DEBUG_MOVE_LISTS_  */
 
-#include <strings.h>
+#include <string.h>
 #include "smartgo.h"
 #include "smgcom.h"
 
