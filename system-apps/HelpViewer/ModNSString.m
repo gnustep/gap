@@ -37,40 +37,49 @@
 
 + (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str skipStart: (BOOL)skipStart
 {
-    NSMutableString* ret = [[NSMutableString alloc] initWithString: @""];
-    BOOL space = skipStart;
-    NSUInteger i;
-
-    for (i = 0; i < [str length]; i++)
-      {
-        unichar ch = [str characterAtIndex: i];
-
-	if (ch == ' ')
-          {
-	    if (!space) 
-              {
-                [ret appendString: [NSString stringWithCharacters:&ch length:1]];
-		space = YES;
-              }
-          }
-	else if (ch == '\n' || ch == '\r')
-          {}
-	else if (ch == '\t')
-          {
-	    if (!space)
-              {
-		[ret appendString: @" "];
-		space = YES;
-              }
-          }
-	else
-          {
-            [ret appendString: [NSString stringWithCharacters:&ch length:1]];
-	    space = NO;
-          }
-      }
-
-    NSLog (@"trimmed string : <%@> ", ret);
-    return AUTORELEASE(ret);
+  return [str stringByTrimmingSpacesSkippingStart: skipStart];
 }
+
+- (NSString*) stringByTrimmingSpacesSkippingStart: (BOOL)flag
+{
+  NSMutableString *retStr; 
+  BOOL space;;
+  NSUInteger i;
+
+  space = flag;
+  retStr = [[NSMutableString alloc] initWithString: @""];
+  for (i = 0; i < [self length]; i++)
+    {
+      unichar ch = [self characterAtIndex: i];
+
+      if (ch == ' ')
+        {
+          if (!space) 
+            {
+              [retStr appendString: [NSString stringWithCharacters:&ch length:1]];
+              space = YES;
+            }
+        }
+      else if (ch == '\n' || ch == '\r')
+        {
+        }
+      else if (ch == '\t')
+        {
+          if (!space)
+            {
+              [retStr appendString: @" "];
+              space = YES;
+            }
+        }
+      else
+        {
+          [retStr appendString: [NSString stringWithCharacters:&ch length:1]];
+          space = NO;
+        }
+    }
+
+  NSLog (@"trimmed string : |%@|", retStr);
+  return [retStr autorelease];
+}
+
 @end

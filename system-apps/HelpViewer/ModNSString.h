@@ -27,6 +27,9 @@
 @interface NSString (Trim)
 + (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str;
 + (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str skipStart: (BOOL)skipStart;
+
+- (NSString*) stringByTrimmingSpacesSkippingStart: (BOOL)flag;
+
 @end
 
 #endif

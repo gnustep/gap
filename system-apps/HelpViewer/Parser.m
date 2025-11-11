@@ -195,8 +195,7 @@
                           [keyAttribute release];
                         }
  
-                      keyAttribute = RETAIN ([NSString stringWithStringByTrimmingSpaces: current]);
-
+                      keyAttribute = RETAIN ([current stringByTrimmingSpaces]);
                       RESET (current);
                       if (tagAttributes == nil) 
 			{
