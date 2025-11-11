@@ -395,7 +395,7 @@
 #ifdef MACOSX
                                     enc = NSWindowsCP1252StringEncoding;
 #else
-                                    enc = NSISOLatin1StringEncoding;
+                                    enc = NSISOLatin9StringEncoding;
 #endif
                                   }
                                 else if ([encodingString isEqualToString:@"UTF-8"])
