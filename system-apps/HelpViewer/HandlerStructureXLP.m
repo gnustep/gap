@@ -391,7 +391,12 @@
                                 else if ([encodingString isEqualToString:@"ISO-8859-15"])
                                   {
                                     NSLog(@"Found Latin9");
+// Cocoa lacks proper Latin 9, let's fall back even if we loose Euro sign
+#ifdef MACOSX
                                     enc = NSWindowsCP1252StringEncoding;
+#else
+                                    enc = NSISOLatin1StringEncoding;
+#endif
                                   }
                                 else if ([encodingString isEqualToString:@"UTF-8"])
                                   {
