@@ -68,7 +68,7 @@ e-mail address: neil@math.mth.pdx.edu  (Internet)
 extern unsigned char p[19][19], ma[19][19];
 extern int currentStone, MAXX, MAXY;
 extern int lib;
-extern countlib(int,int,int);
+extern int countlib(int,int,int);
 
 int fval(int newlib, int minlib)
      /* evaluate new move */
