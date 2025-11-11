@@ -40,6 +40,11 @@
   return [str stringByTrimmingSpacesSkippingStart: skipStart];
 }
 
+- (NSString*) stringByTrimmingSpaces;
+{
+  return [self stringByTrimmingSpacesSkippingStart:YES];
+}
+
 - (NSString*) stringByTrimmingSpacesSkippingStart: (BOOL)flag
 {
   NSMutableString *retStr; 

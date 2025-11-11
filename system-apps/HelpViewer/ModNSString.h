@@ -28,6 +28,7 @@
 + (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str;
 + (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str skipStart: (BOOL)skipStart;
 
+- (NSString*) stringByTrimmingSpaces;
 - (NSString*) stringByTrimmingSpacesSkippingStart: (BOOL)flag;
 
 @end
