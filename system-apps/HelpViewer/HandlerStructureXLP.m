@@ -259,7 +259,7 @@
             else
               [mutStr appendString: [NSString stringWithCharacters:&ch length:1]];
           }
-        NSString *str = [NSString stringWithStringByTrimmingSpaces: mutStr skipStart:!_insideStringContent];
+        NSString *str = [mutStr stringByTrimmingSpacesSkippingStart:!_insideStringContent];
         if (str && [str length])
           {
             NSMutableAttributedString* astr;
@@ -444,7 +444,7 @@
   if ([k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
     {
       c = [Parser class];
-      p = [c parserWithSAXHandler: (id<SAXHandler>)self
+      p = [c parserWithSAXHandler: (id<SAXHandler, NSObject>)self
 			 withData: _utf8DataContent];
     }
   else if ([k caseInsensitiveCompare: @"Sloppy"] == NSOrderedSame)
