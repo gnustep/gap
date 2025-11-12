@@ -492,7 +492,7 @@
   k = [[NSUserDefaults standardUserDefaults] stringForKey: @"Parser"];
   if (nil == k)
     {
-      k = @"GSHTML";
+      k = @"Internal";
     }
   if ([k caseInsensitiveCompare: @"Internal"] == NSOrderedSame)
     {
