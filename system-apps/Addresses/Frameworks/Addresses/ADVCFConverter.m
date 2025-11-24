@@ -538,19 +538,32 @@ static NSArray *knownItems;
     [p setValue: [v objectAtIndex: 0] forProperty: ADUIDProperty];
   else if([key isEqualToString: @"bday"])
     {
-      NSCalendarDate *d;
+      NSCalendarDate *dateInLocalTZ;
       NSString *bdayStr;
 
       bdayStr = [v objectAtIndex: 0];
       
       NSLog(@"Parsing birthday: %@",  bdayStr);
-      d = [NSCalendarDate dateWithString: [v objectAtIndex: 0]
-			  calendarFormat: @"%Y-%m-%d"];
-      if(!d)
-	d = [NSCalendarDate dateWithString: [v objectAtIndex: 0]
-			    calendarFormat: @"%Y%m%d"];
-      if(d) 
-	[p setValue: d forProperty: ADBirthdayProperty];
+      dateInLocalTZ = [NSCalendarDate dateWithString: [v objectAtIndex: 0]
+                                      calendarFormat: @"%Y-%m-%d"];
+      if(!dateInLocalTZ)
+	dateInLocalTZ = [NSCalendarDate dateWithString: [v objectAtIndex: 0]
+                                        calendarFormat: @"%Y%m%d"];
+      if(dateInLocalTZ)
+        {
+	  NSCalendarDate *dateInUTC;
+
+          // internal format is against UTC and so it is saved in the Address Book, convert it
+          dateInUTC = [NSCalendarDate dateWithYear: [dateInLocalTZ yearOfCommonEra]
+	                                     month: [dateInLocalTZ monthOfYear]
+                                               day: [dateInLocalTZ dayOfMonth]
+                                              hour: 12
+                                            minute: 0
+                                            second: 0
+                                          timeZone: [NSTimeZone timeZoneWithName:@"UTC"]];
+
+	  [p setValue: dateInUTC forProperty: ADBirthdayProperty];
+	}
       else
 	NSLog(@"Can't convert %@ to date\n", [v objectAtIndex: 0]);
     }
