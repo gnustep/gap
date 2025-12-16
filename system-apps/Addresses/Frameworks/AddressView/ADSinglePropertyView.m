@@ -21,6 +21,14 @@
 @end
 
 @implementation ADSinglePropertyView (Private)
+- (void) dealloc
+{
+  [_names release];
+  [_namesUnthinned release];
+  [_people release];
+  [_values release];
+  [super dealloc];
+}
 - (void) _buildArrays
 {
   ADPropertyType type;
