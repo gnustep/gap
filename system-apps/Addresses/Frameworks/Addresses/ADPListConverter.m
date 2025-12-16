@@ -100,7 +100,7 @@
 					     calendarFormat: @"%Y-%m-%d"]
 		   forProperty: key];
 	      else if([val isKindOfClass: [NSCalendarDate class]])
-		[r setValue: [val copy] forProperty: key];
+		[r setValue: val forProperty: key];
 	      else
 		NSLog(@"Unknown date class %@\n", [val className]);
 	      break;
