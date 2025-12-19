@@ -1,3 +1,10 @@
+2024-10-02  Yavor Doganov  <yavor@gnu.org>
+
+	* NSObject+Custom.m ([NSObject methodIsAbstract:]): Fix spelling
+	error.
+	* ZipperDocument.m ([ZipperDocument extractIncludingPathInfo:]):
+	Likewise.
+
 2017-08-21 Riccardo Mottola <rm@gnu.org>
 
 	Add specific file icons for different file types.

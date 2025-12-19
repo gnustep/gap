@@ -330,7 +330,7 @@
 	}
       else
 	{
-          message = [NSString stringWithFormat:@"A problem occured expanding archive to %@", path];
+          message = [NSString stringWithFormat:@"A problem occurred expanding archive to %@", path];
 	}
       NSRunAlertPanel(@"Expand", message, nil, nil, nil);
     }

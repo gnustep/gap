@@ -6,7 +6,7 @@
 - (void)methodIsAbstract:(SEL)selector;
 {
     [NSException raise:NSInternalInconsistencyException 
-		format:@"*** No concrete implementation for selector '%@' in class %@. Abstract definition must be overriden.", 
+		format:@"*** No concrete implementation for selector '%@' in class %@. Abstract definition must be overridden.",
 		NSStringFromSelector(selector), NSStringFromClass(isa)];
 }
 
