@@ -1,0 +1,14 @@
+<?xml encoding="ISO-8859-1"?>
+<document>
+
+<header>
+<title>Test Info</title>
+</header>
+
+<plain name="Box Test">
+       One Line
+       <information>Information Box</information>
+       Second Line
+<plain>
+
+</documents>
