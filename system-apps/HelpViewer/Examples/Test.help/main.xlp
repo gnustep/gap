@@ -16,7 +16,7 @@
        Numeric Entity: Perch&#x00e9;
        <pre>Preformatted</pre>
 
-</section>
+       </section>
 
 <chapter src="text-no-enc.xlp" name="Text No Encoding"></chapter>
 <chapter src="text-utf8.xlp" name="Text UTF-8"></chapter>
