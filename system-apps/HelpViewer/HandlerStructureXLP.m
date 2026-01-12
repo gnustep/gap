@@ -62,12 +62,12 @@
   [super dealloc];
 }
 
-- (void)parser: (NSXMLParser *)parser didStartElement: (NSString *)elementName namespaceURI: (NSString *)namespaceURI qualifiedName: (NSString *)qName attributes: (NSDictionary *)attributeDict
+- (void)parser: (NSXMLParser *)parser didStartElement: (NSString *)elementName namespaceURI: (NSString *)namespaceURI qualifiedName: (NSString *)qName attributes: (NSMutableDictionary *)attributeDict
 {
   [self startElement: elementName attributes: attributeDict];
 }
 
-- (void) startElement: (NSString*) elementName attributes: (NSDictionary*) elementAttributes {
+- (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes {
     //NSLog (@"startElement : <%@>", elementName);
     NSString* name = nil;
     NSString* src = nil;

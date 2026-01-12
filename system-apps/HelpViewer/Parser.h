@@ -26,7 +26,7 @@
 #include "GNUstep.h"
 
 @protocol SAXHandler
-- (void) startElement: (NSString*) elementName attributes: (NSDictionary*) elementAttributes;
+- (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes;
 - (void) endElement: (NSString*) elementName;
 - (void) characters: (NSString*) name;
 @end
