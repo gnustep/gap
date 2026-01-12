@@ -7,7 +7,8 @@
 
 <plain name="Box Test">
        One Line
-       <information>Information Box</information>
+       <information>Information Box 1</information>
+       <information>Information Box 2</information>
        Second Line
 </plain>
 
