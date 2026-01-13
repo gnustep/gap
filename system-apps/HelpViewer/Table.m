@@ -152,28 +152,28 @@
 - (void) drawInteriorWithFrame: (NSRect) cellFrame
     inView: (NSView*) controllView
 {
-    int i,j;
-    float width = cellFrame.size.width -3;
+    unsigned i,j;
+    CGFloat width = cellFrame.size.width -3;
     int cols = [self numberOfCols];
 
-    printf ("cellFrame : x <%.2f> y <%.2f> w <%.2f> h <%.2f>\n", cellFrame.origin.x,
+    NSLog(@"cellFrame : x <%.2f> y <%.2f> w <%.2f> h <%.2f>\n", cellFrame.origin.x,
 	    cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height);
-    printf ("table count : %lu \n", (unsigned long)[table count]);
+    NSLog(@"table count : %lu \n", (unsigned long)[table count]);
     
     
     for (i = 0; i < [table count]; i++)
     {
 	NSArray* row = [table objectAtIndex: i];
-	printf ("row count : %d \n", [row count]);
+	NSLog(@"row count : %u \n", (unsigned)[row count]);
 	for (j = 0; j < [row count]; j++)
 	{
 	    NSRect rect;
 	    TableCell* cell = [row objectAtIndex: j];
-	    float widthCell = width / cols;
+	    CGFloat widthCell = width / cols;
 	    rect = NSMakeRect (cellFrame.origin.x + 2 + widthCell*[cell x], 
 			cellFrame.origin.y + 2 + i*16, widthCell*[cell colspan] - 1, 16*[cell rowspan] - 1);
 	    [cell drawWithFrame: rect inView: controllView];
-	    printf ("[%d]==>(%d)\n", i, [cell x]);
+	    NSLog(@"[%u]==>(%u)\n", i, [cell x]);
 	}
     }
 }
