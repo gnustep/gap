@@ -1,7 +1,7 @@
 /* -*- mode: objc -*-
 
-    This file is part of HelpViewer (http://www.roard.com/helpviewer)
-    Copyright (C) 2003      Nicolas Roard (nicolas@roard.com)
+    This file is part of HelpViewer (http://gap.nongnu.org/helpviewer/)
+    Copyright (C) 2003      Nicolas Roard <nicolas@roard.com>
                   2020-2025 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify

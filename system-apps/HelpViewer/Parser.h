@@ -1,5 +1,5 @@
 /*
-    This file is part of HelpViewer (http://www.roard.com/helpviewer)
+    This file is part of HelpViewer (http://gap.nongnu.org/helpviewer/)
     Copyright (C) 2003 Nicolas Roard <nicolas@roard.com>
                   2025 Riccardo Mottola <rm@gnu.org>
 

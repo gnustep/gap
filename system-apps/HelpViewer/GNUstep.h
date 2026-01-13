@@ -74,14 +74,13 @@ typedef float CGFloat;
 #define CREATE_AUTORELEASE_POOL(X) \
 NSAutoreleasePool *(X) = [NSAutoreleasePool new]
 
-#define NSLocalizedString(key, comment) \
-  [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
-
 #define _(X) NSLocalizedString (X, nil)
 #define __(X) X
 
 #define NSLocalizedStaticString(X, Y) X
 
-#endif /* GNUSTEP */
+#endif /* !GNUSTEP */
+
 #endif /* MACOSX */
+
 #endif /* __GNUSTEP_GNUSTEP_H_INCLUDED_ */
