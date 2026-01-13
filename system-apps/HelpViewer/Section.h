@@ -1,6 +1,7 @@
 /*
     This file is part of HelpViewer (http://www.roard.com/helpviewer)
     Copyright (C) 2003 Nicolas Roard (nicolas@roard.com)
+                  2026 Riccardo Mottola (rm@gnu.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -51,8 +52,9 @@
 - (NSString*) header;
 - (NSRange) range;
 - (void) setRange: (NSRange) range;
-- (void) addSub: (Section*) sub;
-- (NSMutableArray*) subs;
+- (void) addSubsection: (Section*) sub;
+- (BOOL) hasSubsections;
+- (NSMutableArray*) subsections;
 - (Section*) parent;
 - (void) setParent: (Section*) par;
 - (void) print;

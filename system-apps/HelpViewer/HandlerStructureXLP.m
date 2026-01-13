@@ -110,7 +110,7 @@
 		if HAVING (@"plain") [newSection setType: SECTION_TYPE_PLAIN];
 
 		[_currentSection setLoaded: YES];
-		[_currentSection addSub: newSection];
+		[_currentSection addSubsection: newSection];
 		_currentSection = newSection;
 		_currentContent = [newSection text];
 		[_currentSection retain];

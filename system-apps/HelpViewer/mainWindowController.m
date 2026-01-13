@@ -123,12 +123,20 @@
   if (column == 0) // First column
     {
       Section* section = [handler sections];
-      ret = (NSInteger)[[section subs] count];
+      if ([section hasSubsections])
+        {
+          ret = (NSInteger)[[section subsections] count];
+        }
     }	
   else
     {
-      id cell = [sender selectedCellInColumn: column -1];
-      ret = (NSInteger)[[[(BrowserCell*)cell section] subs] count];
+      BrowserCell *cell = (BrowserCell *)[sender selectedCellInColumn: column -1];
+      Section* section = [cell section];
+    
+      if ([section hasSubsections])
+        {
+          ret = (NSInteger)[[section subsections] count];
+        }
     }
 
   return ret;
@@ -145,18 +153,25 @@
   if (column == 0) // First column
     {
       Section* section = [handler sections];
-      sub = [[section subs] objectAtIndex: row];
+      if ([section hasSubsections])
+        {
+          sub = [[section subsections] objectAtIndex: row];
+        }
     }
   else
     {
       BrowserCell *cell = [sender selectedCellInColumn: column -1];
-      sub = [[[(BrowserCell*)cell section] subs] objectAtIndex: row];
+      Section *section = [(BrowserCell*)cell section];
+    
+      if ([section hasSubsections])
+        {
+          sub = [[section subsections] objectAtIndex: row];
+        }
     }
 
   if (sub != nil)
     {
-      id subs = [sub subs];
-      if ((subs != nil) && ([subs count] > 0))
+      if ([sub hasSubsections])
 	{
 	  [cell setLeaf: NO];
 	}

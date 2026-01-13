@@ -155,7 +155,14 @@ static NSBundle* Bundle = nil;
     return range;
 }
 
-- (NSMutableArray*) subs {
+- (BOOL) hasSubsections
+{
+  if (subs != nil && [subs count] > 0)
+    return YES;
+  return NO;
+}
+
+- (NSMutableArray*) subsections {
 	return subs;
 };
 
@@ -163,7 +170,7 @@ static NSBundle* Bundle = nil;
     range = prange;
 }
 
-- (void) addSub: (Section*) sub {
+- (void) addSubsection: (Section*) sub {
 	//NSLog (@"addSub: Section (%@)", [sub header]);
 	[sub setParent: self];
 	[subs addObject: sub];
