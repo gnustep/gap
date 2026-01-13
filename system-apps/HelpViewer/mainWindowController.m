@@ -171,12 +171,20 @@
 
   if (sub != nil)
     {
+      NSString *secHeader;
+
+      secHeader = [sub header];
+      if (secHeader == nil)
+        {
+          // Default value if section has no header title
+          secHeader = _(@"Untitled");
+        }
       if ([sub hasSubsections])
 	{
 	  [cell setLeaf: NO];
 	}
       [cell setSection: sub];
-      [cell setStringValue: [sub header]];
+      [cell setStringValue: secHeader];
 
       if ([sub loaded] == NO)
 	{
