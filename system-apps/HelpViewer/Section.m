@@ -120,10 +120,7 @@ static NSBundle* Bundle = nil;
 			[ret appendAttributedString: ttext];
 			for (i=0; i < [subs count]; i++)
 			{
-				id sub = [subs objectAtIndex: i];
-				//id head = [[NSAttributedString alloc] initWithString: [sub header]];
-				//[ret appendAttributedString: head];
-				//[head release];
+				Section *sub = [subs objectAtIndex: i];
 				[ret appendAttributedString: [sub contentWithLevel: level+1]];
 			}
 			[text release];
