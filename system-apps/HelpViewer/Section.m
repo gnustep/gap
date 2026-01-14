@@ -76,62 +76,75 @@ static NSBundle* Bundle = nil;
 	return loaded;
 }
 
-- (void) load {
-	if ([[NSFileManager defaultManager] fileExistsAtPath: path])
-	{
-		id <HandlerStructure, NSObject> handler = [[HandlerStructureXLP alloc] initWithSection: self];
-		[handler setPath: path];
-		[handler parse];
-		[handler release];
-		loaded = YES;
-	}
-        else
-          {
-            NSLog(@"[Section load] file %@ not found.", path);
-          }
+- (void) load
+{
+  if ([[NSFileManager defaultManager] fileExistsAtPath: path])
+    {
+      id <HandlerStructure, NSObject> handler = [[HandlerStructureXLP alloc] initWithSection: self];
+      [handler setPath: path];
+      [handler parse];
+      [handler release];
+      loaded = YES;
+    }
+  else
+    {
+      NSLog(@"[Section load] file %@ not found for header %@", path, header);
+    }
 }
 
-- (NSMutableAttributedString*) contentWithLevel: (int) level {
-	NSUInteger i;
-	id ret = nil;
+- (NSMutableAttributedString*) contentWithLevel: (int) level
+{
+  NSUInteger i;
+  NSAttributedString *ret = nil;
 
-	//NSLog (@"Section contentWithLevel: %d (%@)", level, [self header]);
-	if (rendered)
+  NSLog (@"Section contentWithLevel: %d (%@)", level, [self header]);
+  if (rendered)
+    {
+      ret = [[NSMutableAttributedString alloc] initWithAttributedString: text];
+      [ret autorelease];
+    }
+  else
+    {
+      if (loaded == NO)
 	{
-		ret = [[NSMutableAttributedString alloc] initWithAttributedString: text];
+	  [self load];
+	  if (loaded == NO)
+	    {
+	      NSLog(@"Load failed");
+	    }
 	}
-	else
-	{
-		if (loaded == NO)
-		{
-			[self load];
-		}
-		
-		if ((loaded == YES) && (TextFormatter != nil))
-		{
-			ret = [[NSMutableAttributedString alloc] init];
 
-			if (type != SECTION_TYPE_PLAIN)
-			{
-				id head  = [TextFormatter renderHeader: header withLevel: level];
-				[ret appendAttributedString: head];
-			}
-			id ttext = [TextFormatter renderText: text];
-			[ret appendAttributedString: ttext];
-			for (i=0; i < [subs count]; i++)
-			{
-				Section *sub = [subs objectAtIndex: i];
-				[ret appendAttributedString: [sub contentWithLevel: level+1]];
-			}
-			[text release];
-			text = [[NSMutableAttributedString alloc] initWithAttributedString: ret];
-			rendered = YES;
+      if ((loaded == YES))
+	{
+	  ret = [[NSMutableAttributedString alloc] init];
+
+	  if (type != SECTION_TYPE_PLAIN)
+	    {
+	      id head  = [TextFormatter renderHeader: header withLevel: level];
+	      [ret appendAttributedString: head];
+	    }
+	  id ttext = [TextFormatter renderText: text];
+	  [ret appendAttributedString: ttext];
+	  for (i=0; i < [subs count]; i++)
+	    {
+	      Section *sub;
+	      NSMutableAttributedString *as = nil;
+
+	      sub = [subs objectAtIndex: i];
+	      as = [sub contentWithLevel: level+1];
+	      if (as != nil)
+		{
+		  [ret appendAttributedString: as];
 		}
+	    }
+	  [text release];
+	  text = [[NSMutableAttributedString alloc] initWithAttributedString: ret];
+	  rendered = YES;
+	  [ret autorelease];
 	}
-	//NSLog (@"fin Section contentWithLevel: %d (%@)", level, [self header]);
-	//NSLog (@"on retourne : %@", ret);
-	
-    return AUTORELEASE (ret);
+    }
+
+  return ret;
 }
 
 - (void) setType: (int) t { type = t; }
