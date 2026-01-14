@@ -64,7 +64,6 @@
     [paragraph setFirstLineHeadIndent: leadingMargin];
     [paragraph setTailIndent: -trailingMargin];
     [paragraph setLineBreakMode: [self lineBreakMode]];
-
       
     NSDictionary* attributes = [NSDictionary dictionaryWithObject: paragraph 
 							   forKey: NSParagraphStyleAttributeName];
@@ -97,7 +96,6 @@
 {
     CGFloat height = 0.0;
     CGFloat width = 0.0;
-    CGFloat textHeight = 0.0;
     CGFloat imageWidth = 0.0;
 
     if ([self image])
@@ -115,19 +113,24 @@
 
 	size.width = [textView bounds].size.width - width;
 	size.width -= leadingMargin; // Take in account of the text margins inside the view
-	size.width -= leadingMargin*2;
+	size.width -= trailingMargin;
+        if ([self image])
+          {
+            size.width -= leadingMargin + imageWidth;
+          }
 	size.height = 9999.0;
 	if (size.width <= 0)
-	  size.width = [textView bounds].size.width;
+          {
+	    size.width = [textView bounds].size.width;
+          }
         noteSize = [_note boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin].size;
-	NSLog(@"input %@ output %@", NSStringFromSize(size), NSStringFromSize(noteSize));
-	textHeight = noteSize.height;
-	if (textHeight > height)
-	  height = textHeight;
+	if (noteSize.height > height)
+          {
+	    height = noteSize.height;
+          }
+        noteSize.width = size.width;
 	width += size.width;
       }
-
-    NSLog (@"NoteCell: width : %.2f height : %.2f", width, height);
 
     _size = NSMakeSize (width, height);
 }
