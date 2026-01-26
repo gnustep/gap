@@ -92,11 +92,23 @@
     [self resizeWithTextView: [sender object]];
 }
 
+/*
+
+  +-----+------------------------------+
+  | IMG | Text                         |
+  +-----+------------------------------+
+
+  -> full width always to text view minus margins left & right
+
+ */
 - (void) resizeWithTextView: (NSTextView*) textView
 {
     CGFloat height = 0.0;
     CGFloat width = 0.0;
     CGFloat imageWidth = 0.0;
+
+    width = [textView bounds].size.width - (leadingMargin + trailingMargin);
+    width -= 16; // outer paragraph margin - should be set in an ivar or a constant
 
     if ([self image])
       {
@@ -104,20 +116,20 @@
       
 	imageWidth = [_image size].width;
 	height = [_image size].height;
-	width = imageWidth;
       }
-    
+
+    // Our goal here is to calculate the note size as well as the heigh if it is more than the image
     if (_note)
       {
 	NSSize size;
 
-	size.width = [textView bounds].size.width - width;
-	size.width -= leadingMargin; // Take in account of the text margins inside the view
-	size.width -= trailingMargin;
+	size.width = width;
         if ([self image])
           {
-            size.width -= leadingMargin + imageWidth;
+            size.width -= leadingMargin; // Image has margin at its left
+            size.width -= imageWidth;
           }
+        // now check if the text will be higher than the current ehight (image) or not
 	size.height = 9999.0;
 	if (size.width <= 0)
           {
@@ -129,7 +141,6 @@
 	    height = noteSize.height;
           }
         noteSize.width = size.width;
-	width += size.width;
       }
 
     _size = NSMakeSize (width, height);
