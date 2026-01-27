@@ -77,36 +77,17 @@
   NSBundle* Bundle = [NSBundle bundleWithPath: fileName];
   [Section setBundle: Bundle];
   [handler setPath: [Bundle pathForResource: @"main" ofType: @"xlp"]];
-  [handler parse];
 
-/*
-    string = [handler getPart: 0];
-    Part* currentPage = [handler getPage: 0];
+  if ([handler parse])
+    {
+      [window setTitle: [fileName lastPathComponent]];
+  
+      NSLog (@"loadFile : %@", fileName);
+      [resultOutlineView reloadColumn: 0];
+      [resultOutlineView selectRow:0 inColumn:0];
+      [self browserClick: resultOutlineView];
+    }
 
-    if ([handler title] != nil)
-    {
-    	[window setTitle: [handler title]];
-    }
-    
-    //NSLog (@"string : %@", string);
-    //NSLog (@"currentPage : %@", currentPage);
-    if ((string != nil) && (currentPage != nil))
-    {
-	[currentPage addSubviewsToView: resultTextView];
-	[[resultTextView textStorage] setAttributedString: string];
-	[resultOutlineView reloadData];
-	ret = YES;
-    }
-    else 
-    {
-	NSLog (@"no parts !!!");
-    }
- */
-  NSLog (@"loadFile : %@", fileName);
-  [resultOutlineView reloadColumn: 0];
-  [resultOutlineView selectRow:0 inColumn:0];
-  [self browserClick: resultOutlineView];
-    
   return ret;
 }
 
