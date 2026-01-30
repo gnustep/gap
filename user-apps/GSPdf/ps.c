@@ -1,6 +1,7 @@
 /*
  * ps.c -- Postscript scanning and copying routines.
  * Copyright (C) 1992  Timothy O. Theisen
+ *               2025  Riccardo Mottola
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,7 +46,7 @@
 #define iscomment(a, b)	(strncmp(a, b, length(b)) == 0)
 #define DSCcomment(a) (a[0] == '%' && a[1] == '%')
 
-	/* list of standard paper sizes from Adobe's PPD. */
+/* list of standard paper sizes from Adobe's PPD. */
 
 struct documentmedia papersizes[] = {
     {"BBox",	         0,  0},
@@ -67,10 +68,10 @@ struct documentmedia papersizes[] = {
 };
 
 
-static char *readline();
-static char *gettextline();
-static char *gettext();
-static int  blank();
+static char *psreadline(char *line, int size, FILE *fp, long *position, unsigned *line_len);
+static char *psgettextline(char *line);
+static char *psgettext(char *line, char **next_char);
+static int psisblank(char *line);
 
 /*
  *	psscan -- scan the PostScript file for document structuring comments.
@@ -192,7 +193,7 @@ struct document *psscan(FILE *file)
 	int orientation_set = NONE;
 	int page_bb_set = NONE;
 	int page_media_set = NONE;
-	int preread;		/* flag which tells the readline isn't needed */
+	int preread;		/* flag which tells the psreadline isn't needed */
 	int i;
 	unsigned int maxpages = 0;
 	unsigned int nextpage = 1;	/* Next expected page */
@@ -205,13 +206,13 @@ struct document *psscan(FILE *file)
 	long beginsection;		/* Position of the beginning of the section */
 	unsigned int line_len; 	/* Length of the current line */
 	unsigned int section_len;	/* Place to accumulate the section length */
-	char *next_char;		/* 1st char after text returned by gettext() */
+	char *next_char;		/* 1st char after text returned by psgettext() */
 	char *cp;
 	struct documentmedia *dmp;
 
 	rewind(file);
 	
-	if (readline(line, sizeof line, file, &position, &line_len) == NULL) {
+	if (psreadline(line, sizeof line, file, &position, &line_len) == NULL) {
 		fprintf(stderr, "Warning: empty file.\n");
 		return(NULL);
 	}
@@ -235,7 +236,7 @@ struct document *psscan(FILE *file)
 
 	preread = 0;
 	
-	while (preread || readline(line, sizeof line, file, &position, &line_len)) {
+	while (preread || psreadline(line, sizeof line, file, &position, &line_len)) {
 		if (!preread) {
 			section_len += line_len;
 		}
@@ -247,9 +248,9 @@ struct document *psscan(FILE *file)
 		} else if (line[1] != '%') {
 	    /* Do nothing */
 		} else if (doc->title == NULL && iscomment(line+2, "Title:")) {
-	    doc->title = gettextline(line+length("%%Title:"));
+	    doc->title = psgettextline(line+length("%%Title:"));
 		} else if (doc->date == NULL && iscomment(line+2, "CreationDate:")) {
-	    doc->date = gettextline(line+length("%%CreationDate:"));
+	    doc->date = psgettextline(line+length("%%CreationDate:"));
 		} else if (bb_set == NONE && iscomment(line+2, "BoundingBox:")) {
 	    sscanf(line+length("%%BoundingBox:"), "%s", text);
 	    if (strcmp(text, "(atend)") == 0) {
@@ -351,7 +352,7 @@ struct document *psscan(FILE *file)
 				exit(-1);
 	    }
 			
-	    doc->media[0].name = gettext(line+length("%%DocumentMedia:"), &next_char);
+	    doc->media[0].name = psgettext(line+length("%%DocumentMedia:"), &next_char);
 	    if (doc->media[0].name != NULL) {
 				if (sscanf(next_char, "%f %f", &w, &h) == 2) {
 		    	doc->media[0].width = w + 0.5;
@@ -365,7 +366,7 @@ struct document *psscan(FILE *file)
 	    }
 			
 	    preread=1;
-	    while (readline(line, sizeof line, file, &position, &line_len) 
+	    while (psreadline(line, sizeof line, file, &position, &line_len) 
 														&& DSCcomment(line) && iscomment(line+2, "+")) {
 				section_len += line_len;
 				doc->media = (struct documentmedia *)
@@ -376,7 +377,7 @@ struct document *psscan(FILE *file)
 		    	exit(-1);
 				}
 
-				doc->media[doc->nummedia].name = gettext(line+length("%%+"), &next_char);
+				doc->media[doc->nummedia].name = psgettext(line+length("%%+"), &next_char);
 
 				if (doc->media[doc->nummedia].name != NULL) {
 		    	if (sscanf(next_char, "%f %f", &w, &h) == 2) {
@@ -404,7 +405,7 @@ struct document *psscan(FILE *file)
 				exit(-1);
 	    }
 			
-	    doc->media[0].name = gettext(line+length("%%DocumentPaperSizes:"), &next_char);
+	    doc->media[0].name = psgettext(line+length("%%DocumentPaperSizes:"), &next_char);
 	    if (doc->media[0].name != NULL) {
 				doc->media[0].width = 0;
 				doc->media[0].height = 0;
@@ -434,7 +435,7 @@ struct document *psscan(FILE *file)
 				}
 	    }
 			
-	    while ((cp = gettext(next_char, &next_char))) {
+	    while ((cp = psgettext(next_char, &next_char))) {
 				doc->media = (struct documentmedia *)
 			      realloc(doc->media, (doc->nummedia+1)* sizeof (struct documentmedia));
 				if (doc->media == NULL) {
@@ -473,12 +474,12 @@ struct document *psscan(FILE *file)
 			}
 			
 	    preread=1;
-	    while (readline(line, sizeof line, file, &position, &line_len) 
+	    while (psreadline(line, sizeof line, file, &position, &line_len) 
 														&& DSCcomment(line) && iscomment(line+2, "+")) {
 				section_len += line_len;
 				next_char = line + length("%%+");
 				
-				while ((cp = gettext(next_char, &next_char))) {
+				while ((cp = psgettext(next_char, &next_char))) {
 		    	doc->media = (struct documentmedia *)
 				  				realloc(doc->media, (doc->nummedia+1)*sizeof (struct documentmedia));
 		    	if (doc->media == NULL) {
@@ -522,7 +523,7 @@ struct document *psscan(FILE *file)
 
 
 	if (DSCcomment(line) && iscomment(line+2, "EndComments")) {
-		readline(line, sizeof line, file, &position, &line_len);
+		psreadline(line, sizeof line, file, &position, &line_len);
 		section_len += line_len;
 	}
 	doc->endheader = position;
@@ -532,19 +533,19 @@ struct document *psscan(FILE *file)
 
 	beginsection = position;
 	section_len = line_len;
-	while (blank(line) && readline(line, sizeof line, file, &position, &line_len)) {
+	while (psisblank(line) && psreadline(line, sizeof line, file, &position, &line_len)) {
 		section_len += line_len;
 	}
 
 	if (doc->epsf && DSCcomment(line) && iscomment(line+2, "BeginPreview")) {
 		doc->beginpreview = beginsection;
 		beginsection = 0;
-		while (readline(line, sizeof line, file, &position, &line_len) &&
+		while (psreadline(line, sizeof line, file, &position, &line_len) &&
 	        				!(DSCcomment(line) && iscomment(line+2, "EndPreview"))) {
 			section_len += line_len;
 		}
 		section_len += line_len;
-		readline(line, sizeof line, file, &position, &line_len);
+		psreadline(line, sizeof line, file, &position, &line_len);
 		section_len += line_len;
 		doc->endpreview = position;
 		doc->lenpreview = section_len - line_len;
@@ -557,15 +558,15 @@ struct document *psscan(FILE *file)
 		section_len = line_len;
 	}
 	
-	while (blank(line) &&
-	    			readline(line, sizeof line, file, &position, &line_len)) {
+	while (psisblank(line) &&
+	    			psreadline(line, sizeof line, file, &position, &line_len)) {
 		section_len += line_len;
 	}
 
 	if (DSCcomment(line) && iscomment(line+2, "BeginDefaults")) {
 		doc->begindefaults = beginsection;
 		beginsection = 0;
-		while (readline(line, sizeof line, file, &position, &line_len) &&
+		while (psreadline(line, sizeof line, file, &position, &line_len) &&
 	        					!(DSCcomment(line) && iscomment(line+2, "EndDefaults"))) {
 			section_len += line_len;
 			if (!DSCcomment(line)) {
@@ -579,7 +580,7 @@ struct document *psscan(FILE *file)
 		    	doc->default_page_orientation = LANDSCAPE;
 				}
 			} else if (page_media_set == NONE && iscomment(line+2, "PageMedia:")) {
-				cp = gettext(line+length("%%PageMedia:"), NULL);
+				cp = psgettext(line+length("%%PageMedia:"), NULL);
 				for (dmp = doc->media, i=0; i<doc->nummedia; i++, dmp++) {
 		    	if (strcmp(cp, dmp->name) == 0) {
 						doc->default_page_media = dmp;
@@ -624,7 +625,7 @@ struct document *psscan(FILE *file)
 		}
 	
 		section_len += line_len;
-		readline(line, sizeof line, file, &position, &line_len);
+		psreadline(line, sizeof line, file, &position, &line_len);
 		section_len += line_len;
 		doc->enddefaults = position;
 		doc->lendefaults = section_len - line_len;
@@ -637,7 +638,7 @@ struct document *psscan(FILE *file)
 		section_len = line_len;
 	}
    
-	 while (blank(line) && readline(line, sizeof line, file, &position, &line_len)) {
+	 while (psisblank(line) && psreadline(line, sizeof line, file, &position, &line_len)) {
 		section_len += line_len;
 	}
 
@@ -651,7 +652,7 @@ struct document *psscan(FILE *file)
 		preread = 1;
 
 		while ((preread ||
-				readline(line, sizeof line, file, &position, &line_len)) &&
+				psreadline(line, sizeof line, file, &position, &line_len)) &&
 	        !(DSCcomment(line) &&
 	          	(iscomment(line+2, "EndProlog") ||
 	          		iscomment(line+2, "BeginSetup") ||
@@ -665,7 +666,7 @@ struct document *psscan(FILE *file)
 		}
 		section_len += line_len;
 		if (DSCcomment(line) && iscomment(line+2, "EndProlog")) {
-	    readline(line, sizeof line, file, &position, &line_len);
+	    psreadline(line, sizeof line, file, &position, &line_len);
 	    section_len += line_len;
 		}
 		doc->endprolog = position;
@@ -678,7 +679,7 @@ struct document *psscan(FILE *file)
 			beginsection = position;
 			section_len = line_len;
     }
-    while (blank(line) && readline(line, sizeof line, file, &position, &line_len)) {
+    while (psisblank(line) && psreadline(line, sizeof line, file, &position, &line_len)) {
 			section_len += line_len;
     }
 
@@ -690,7 +691,7 @@ struct document *psscan(FILE *file)
 			beginsection = 0;
 			preread = 1;
 			while ((preread ||
-						readline(line, sizeof line, file, &position, &line_len)) &&
+						psreadline(line, sizeof line, file, &position, &line_len)) &&
 	        		!(DSCcomment(line) &&
 	          		(iscomment(line+2, "EndSetup") ||
 	          			iscomment(line+2, "Page:") ||
@@ -712,7 +713,7 @@ struct document *psscan(FILE *file)
 					}
 	    	} else if (page_media_set == NONE &&
 		        							iscomment(line+2, "PaperSize:")) {
-					cp = gettext(line+length("%%PaperSize:"), NULL);
+					cp = psgettext(line+length("%%PaperSize:"), NULL);
 					for (dmp = doc->media, i=0; i<doc->nummedia; i++, dmp++) {
 		    		/* Note: Paper size comment uses down cased paper size
 		      	* name.  Case insensitive compares are only used for
@@ -762,7 +763,7 @@ struct document *psscan(FILE *file)
 			
 			section_len += line_len;
 			if (DSCcomment(line) && iscomment(line+2, "EndSetup")) {
-	    	readline(line, sizeof line, file, &position, &line_len);
+	    	psreadline(line, sizeof line, file, &position, &line_len);
 	    	section_len += line_len;
 			}
 			doc->endsetup = position;
@@ -775,7 +776,7 @@ struct document *psscan(FILE *file)
 			beginsection = position;
 			section_len = line_len;
     }
-    while (blank(line) && readline(line, sizeof line, file, &position, &line_len)) {
+    while (psisblank(line) && psreadline(line, sizeof line, file, &position, &line_len)) {
 			section_len += line_len;
     }
 
@@ -789,7 +790,7 @@ newpage:
 					exit(-1);
 	    	}
 			}
-			label = gettext(line+length("%%Page:"), &next_char);
+			label = psgettext(line+length("%%Page:"), &next_char);
 			if (sscanf(next_char, "%d", &thispage) != 1) {
 				thispage = 0;
 			}
@@ -822,7 +823,7 @@ newpage:
 			}
 			
 continuepage:
-			while (readline(line, sizeof line, file, &position, &line_len) &&
+			while (psreadline(line, sizeof line, file, &position, &line_len) &&
 	        				!(DSCcomment(line) &&
 	          				(iscomment(line+2, "Page:") ||
 	          						iscomment(line+2, "Trailer") ||
@@ -840,7 +841,7 @@ continuepage:
 					}
 	    	} else if (doc->pages[doc->numpages].media == NULL &&
 																				iscomment(line+2, "PageMedia:")) {
-					cp = gettext(line+length("%%PageMedia:"), NULL);
+					cp = psgettext(line+length("%%PageMedia:"), NULL);
 					for (dmp = doc->media, i=0; i<doc->nummedia; i++, dmp++) {
 		    		if (strcmp(cp, dmp->name) == 0) {
 							doc->pages[doc->numpages].media = dmp;
@@ -850,7 +851,7 @@ continuepage:
 					free(cp);
 	    	} else if (doc->pages[doc->numpages].media == NULL &&
 		        													iscomment(line+2, "PaperSize:")) {
-					cp = gettext(line+length("%%PaperSize:"), NULL);
+					cp = psgettext(line+length("%%PaperSize:"), NULL);
 					for (dmp = doc->media, i=0; i<doc->nummedia; i++, dmp++) {
 		    		/* Note: Paper size comment uses down cased paper size
 		      	* name.  Case insensitive compares are only used for
@@ -924,7 +925,7 @@ continuepage:
 
     preread = 1;
     while ((preread ||
-	    			readline(line, sizeof line, file, &position, &line_len)) &&
+	    			psreadline(line, sizeof line, file, &position, &line_len)) &&
 	    										!(DSCcomment(line) && iscomment(line+2, "EOF"))) {
 			if (!preread) {
 				section_len += line_len;
@@ -934,7 +935,7 @@ continuepage:
 			if (!DSCcomment(line)) {
 	    	/* Do nothing */
 			} else if (iscomment(line+2, "Page:")) {
-	    	free(gettext(line+length("%%Page:"), &next_char));
+	    	free(psgettext(line+length("%%Page:"), &next_char));
 	    	if (sscanf(next_char, "%d", &thispage) != 1) {
 					thispage = 0;
 				}
@@ -1014,7 +1015,7 @@ continuepage:
     }
     section_len += line_len;
     if (DSCcomment(line) && iscomment(line+2, "EOF")) {
-			readline(line, sizeof line, file, &position, &line_len);
+			psreadline(line, sizeof line, file, &position, &line_len);
 			section_len += line_len;
     }
     doc->endtrailer = position;
@@ -1023,13 +1024,13 @@ continuepage:
 #if 0
     section_len = line_len;
     preread = 1;
-    while (preread || readline(line, sizeof line, file, &position, &line_len)) {
+    while (preread || psreadline(line, sizeof line, file, &position, &line_len)) {
 			if (!preread) {
 				section_len += line_len;
 			}	
 			preread = 0;
 			if (DSCcomment(line) && iscomment(line+2, "Page:")) {
-	    	free(gettext(line+length("%%Page:"), &next_char));
+	    	free(psgettext(line+length("%%Page:"), &next_char));
 	    	if (sscanf(next_char, "%d", &thispage) != 1) {
 					thispage = 0;
 				}
@@ -1095,10 +1096,10 @@ void psfree(struct document *doc)
 /*
  * gettextine -- skip over white space and return the rest of the line.
  *               If the text begins with '(' return the text string
- *		 using gettext().
+ *		 using psgettext().
  */
 
-static char *gettextline(char *line)
+static char *psgettextline(char *line)
 {
 	char *cp;
 
@@ -1107,7 +1108,7 @@ static char *gettextline(char *line)
 	}
 	
 	if (*line == '(') {
-		return gettext(line, NULL);
+		return psgettext(line, NULL);
 	} else {
 		size_t len = strlen(line)+1;
  
@@ -1129,7 +1130,7 @@ static char *gettextline(char *line)
  *		   return NULL if nothing is present.
  */
 
-static char *gettext(char *line, char **next_char)
+static char *psgettext(char *line, char **next_char)
 {
 	char text[PSLINELENGTH];	/* Temporary storage for text */
 	char *cp;
@@ -1228,7 +1229,7 @@ static char *gettext(char *line, char **next_char)
 }
 
 /*
- *	readline -- Read the next line in the postscript file.
+ *	psreadline -- Read the next line in the postscript file.
  *                  Automatically skip over data (as indicated by
  *                  %%BeginBinary/%%EndBinary or %%BeginData/%%EndData
  *		    comments.)
@@ -1236,7 +1237,7 @@ static char *gettext(char *line, char **next_char)
  *		    %%BeginDocument/%%EndDocument comments.)
  */
 
-static char *readline(char *line, int size, FILE *fp, long *position, unsigned *line_len)
+static char *psreadline(char *line, int size, FILE *fp, long *position, unsigned *line_len)
 {
 	char text[PSLINELENGTH];	/* Temporary storage for text */
 	char save[PSLINELENGTH];	/* Temporary storage for text */
@@ -1263,7 +1264,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	} else if (iscomment(line+7, "Document:")) {
 		strcpy(save, line+7);
 	
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        		!(DSCcomment(line) && iscomment(line+2, "EndDocument"))) {
 	    *line_len += nbytes;
 		}
@@ -1274,7 +1275,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	} else if (iscomment(line+7, "Feature:")) {
 		strcpy(save, line+7);
 		
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        				!(DSCcomment(line) && iscomment(line+2, "EndFeature"))) {
 	    *line_len += nbytes;
 		}
@@ -1285,7 +1286,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	} else if (iscomment(line+7, "File:")) {
 		strcpy(save, line+7);
 	
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        	!(DSCcomment(line) && iscomment(line+2, "EndFile"))) {
 	    *line_len += nbytes;
 		}
@@ -1296,7 +1297,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	} else if (iscomment(line+7, "Font:")) {
 		strcpy(save, line+7);
 	
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        		!(DSCcomment(line) && iscomment(line+2, "EndFont"))) {
 	    *line_len += nbytes;
 		}
@@ -1307,7 +1308,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	} else if (iscomment(line+7, "ProcSet:")) {
 		strcpy(save, line+7);
 	
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        				!(DSCcomment(line) && iscomment(line+2, "EndProcSet"))) {
 	    *line_len += nbytes;
 		}
@@ -1318,7 +1319,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	} else if (iscomment(line+7, "Resource:")) {
 		strcpy(save, line+7);
 		
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        		!(DSCcomment(line) && iscomment(line+2, "EndResource"))) {
 	    *line_len += nbytes;
 		}
@@ -1347,7 +1348,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 			}
 		}
 	
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        		!(DSCcomment(line) && iscomment(line+2, "EndData"))) {
 	    *line_len += nbytes;
 		}
@@ -1368,7 +1369,7 @@ static char *readline(char *line, int size, FILE *fp, long *position, unsigned *
 	    *line_len += num;
 		}
 		
-		while (readline(line, size, fp, NULL, &nbytes) &&
+		while (psreadline(line, size, fp, NULL, &nbytes) &&
 	        				!(DSCcomment(line) && iscomment(line+2, "EndBinary"))) {
 	    *line_len += nbytes;
 		}
@@ -1519,7 +1520,7 @@ char *pscopyuntil(FILE *from, FILE *to, long begin, long end, const char *commen
 /*
  *	blank -- determine whether the line contains nothing but whitespace.
  */
-static int blank(char *line)
+static int psisblank(char *line)
 {
 	char *cp = line;
 
