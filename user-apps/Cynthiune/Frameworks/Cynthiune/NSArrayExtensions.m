@@ -169,21 +169,35 @@
 
 - (void) addObjectRandomly: (id) object
 {
-  unsigned int randomPos;
-  time_t now;
-  static time_t seedModifier;
-
-  if (object)
-    {
-      seedModifier++;
-      time (&now);
-      srand (now + seedModifier);
-
-      randomPos = ((float) [self count] * rand ()) / RAND_MAX + .5;
-      [self insertObject: object atIndex: randomPos];
+    if (!object) {
+        [NSException raise:NSInvalidArgumentException format:@"'nil' object parameter"];
+        return;
     }
-  else
-    raiseException (@"'nil' object", @"nil 'object' parameter");
+
+    NSUInteger count = [self count];
+    uint32_t randomPos;
+
+    // 1. Try to use arc4random_uniform (Apple, BSD, Modern Linux glibc 2.36+)
+    #if defined(__apple_build_version__) || defined(__FreeBSD__) || defined(__OpenBSD__) || (defined(__GLIBC__) && (__GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 36)))
+        
+        randomPos = arc4random_uniform((uint32_t)count + 1);
+
+    #else
+        // 2. Fallback for Windows and older Linux
+        static BOOL seeded = NO;
+        if (!seeded) {
+            srand((unsigned int)time(NULL));
+            seeded = YES;
+        }
+        
+        // Use 'double' to fix the precision warning and handle RAND_MAX correctly.
+        // Formula: (Random Fraction [0,1]) * (Range)
+        double randomFraction = (double)rand() / (double)RAND_MAX;
+        randomPos = (uint32_t)(randomFraction * (double)count + 0.5);
+        
+    #endif
+
+    [self insertObject:object atIndex:randomPos];
 }
 
 - (void) rotateUpToObject: (id) object
