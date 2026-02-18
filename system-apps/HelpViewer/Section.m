@@ -95,7 +95,7 @@ static NSBundle* Bundle = nil;
 - (NSMutableAttributedString*) contentWithLevel: (int) level
 {
   NSUInteger i;
-  NSAttributedString *ret = nil;
+  NSMutableAttributedString *ret = nil;
 
   NSLog (@"Section contentWithLevel: %d (%@)", level, [self header]);
   if (rendered)
