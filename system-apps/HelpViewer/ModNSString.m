@@ -83,7 +83,6 @@
         }
     }
 
-  NSLog (@"trimmed string : |%@|", retStr);
   return [retStr autorelease];
 }
 
