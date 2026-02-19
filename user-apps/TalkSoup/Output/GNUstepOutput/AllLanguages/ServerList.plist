@@ -1,6 +1,22 @@
 {
 	Servers = (
 	{
+		Name = "Libera.Chat";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.libera.chat";
+			Name = "irc.libera.chat";
+			Port = "6667";
+		}
+		);
+	},
+	{
 		Name = "SlashNET";
 		Entries = (
 		{
