@@ -9,7 +9,7 @@
 	"Riccardo Mottola"
     );
     CFBundleIdentifier = "org.gnustep.HelpViewer";
-    Copyright = "Copyright (c)\\n2003 Nicolas Roard\\n2020-2021 Riccardo Mottola";
+    Copyright = "Copyright (C) 2023 Nicolas Roard, 2020-2026 Riccardo Mottola";
     CopyrightDescription = "This program is released under the GNU GPL 2 or later";
     FullVersionID = "0.4";
     GSHelpType = help;
@@ -23,7 +23,7 @@
 	    NSHumanReadableName = "GNUstep Help Document";
 	    NSIcon = "Icon-hlpd.tiff";
 	    NSName = help;
-	    NSRole = Viewe;
+	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		help
 	    );

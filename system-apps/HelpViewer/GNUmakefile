@@ -57,7 +57,6 @@ Resources/Search.tiff
 # Header files
 #
 HelpViewer_HEADER_FILES = \
-AppController.h \
 BRCell.h \
 BrowserCell.h \
 Controller.h \
@@ -80,7 +79,6 @@ ViewCell.h
 # Objective-C Class files
 #
 HelpViewer_OBJC_FILES = \
-AppController.m \
 BRCell.m \
 BrowserCell.m \
 Controller.m \

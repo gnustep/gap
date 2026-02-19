@@ -2,9 +2,16 @@
     APPLICATIONICON = "HelpViewer.tiff";
     "APP_DOCUMENT_BASED" = YES;
     "APP_TYPE" = GORM;
+    "BUILDER_TARGETS" = (
+	all,
+	install,
+	uninstall,
+	clean,
+	distclean,
+	dist
+    );
     "BUNDLE_IDENTIFIER" = "org.gnustep.HelpViewer";
     "CLASS_FILES" = (
-	"AppController.m",
 	"BRCell.m",
 	"BrowserCell.m",
 	"Controller.m",
@@ -31,7 +38,6 @@
     FRAMEWORKS = (
     );
     "HEADER_FILES" = (
-	"AppController.h",
 	"BRCell.h",
 	"BrowserCell.h",
 	"Controller.h",
@@ -95,7 +101,7 @@
 	"Nicolas Roard",
 	"Riccardo Mottola"
     );
-    "PROJECT_COPYRIGHT" = "Copyright (c)\\n2003 Nicolas Roard\\n2020-2021 Riccardo Mottola";
+    "PROJECT_COPYRIGHT" = "Copyright (C) 2023 Nicolas Roard, 2020-2026 Riccardo Mottola";
     "PROJECT_COPYRIGHT_DESC" = "This program is released under the GNU GPL 2 or later";
     "PROJECT_CREATOR" = "Riccardo Mottola";
     "PROJECT_DESCRIPTION" = "GNUstep Help Viewer";
@@ -104,7 +110,7 @@
 	    NSHumanReadableName = "GNUstep Help Document";
 	    NSIcon = "Icon-hlpd.tiff";
 	    NSName = help;
-	    NSRole = Viewe;
+	    NSRole = Viewer;
 	    NSUnixExtensions = (
 		help
 	    );
