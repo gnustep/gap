@@ -2,6 +2,7 @@
     APPLICATIONICON = "HelpViewer.tiff";
     "APP_DOCUMENT_BASED" = YES;
     "APP_TYPE" = GORM;
+    "BUILDER_PARALLELISM" = 2;
     "BUILDER_TARGETS" = (
 	all,
 	install,
@@ -54,7 +55,8 @@
 	"Table.h",
 	"TextFormatterXLP.h",
 	"TextViewCell.h",
-	"ViewCell.h"
+	"ViewCell.h",
+	"HandlerStructure.h"
     );
     IMAGES = (
 	"Back.tiff",
