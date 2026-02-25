@@ -43,7 +43,7 @@
 	NSMutableAttributedString* _currentContent;
 	Section* _firstSection;
 	Section* _currentSection;
-        BOOL _insideStringContent; // for white-space coalescing. Could be more finegrined.
+   BOOL _insideStringContent; // for white-space coalescing. Could be more finegrined.
 
 	float current, max;
 }

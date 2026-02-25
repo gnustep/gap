@@ -470,8 +470,5 @@
   return parseSuccesful;
 }
 
-- (void) setTextView: (NSTextView*) textview {
-//    textView = textview;
-}
 
 @end

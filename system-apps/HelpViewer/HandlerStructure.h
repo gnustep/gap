@@ -31,7 +31,6 @@
 @protocol HandlerStructure
 - (Section*) sections;
 - (void) setPath: (NSString*) path;
-- (void) setTextView: (NSTextView*) view;
 - (BOOL) parse;
 - (id) initWithSection: (Section*) section;
 @end
