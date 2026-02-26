@@ -33,6 +33,7 @@ HelpViewer_APPLICATION_ICON = HelpViewer.tiff
 #
 HelpViewer_RESOURCE_FILES = \
 Resources/MainMenu.gorm \
+Resources/HelpDocument.gorm \
 Resources/Back.tiff \
 Resources/Bookshelf.tiff \
 Resources/caution.png \
@@ -64,7 +65,7 @@ FigureCell.h \
 HandlerStructureXLP.h \
 Label.h \
 Legend.h \
-mainWindowController.h \
+HelpDocument.h \
 ModNSString.h \
 NoteCell.h \
 Page.h \
@@ -73,7 +74,8 @@ Section.h \
 Table.h \
 TextFormatterXLP.h \
 TextViewCell.h \
-ViewCell.h
+ViewCell.h \
+HandlerStructure.h
 
 #
 # Objective-C Class files
@@ -86,7 +88,7 @@ FigureCell.m \
 HandlerStructureXLP.m \
 Label.m \
 Legend.m \
-mainWindowController.m \
+HelpDocument.m \
 ModNSString.m \
 NoteCell.m \
 Page.m \

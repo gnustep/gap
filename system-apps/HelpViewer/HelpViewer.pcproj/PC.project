@@ -20,7 +20,7 @@
 	"HandlerStructureXLP.m",
 	"Label.m",
 	"Legend.m",
-	"mainWindowController.m",
+	"HelpDocument.m",
 	"ModNSString.m",
 	"NoteCell.m",
 	"Page.m",
@@ -46,7 +46,7 @@
 	"HandlerStructureXLP.h",
 	"Label.h",
 	"Legend.h",
-	"mainWindowController.h",
+	"HelpDocument.h",
 	"ModNSString.h",
 	"NoteCell.h",
 	"Page.h",
@@ -80,7 +80,8 @@
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	"MainMenu.gorm"
+	"MainMenu.gorm",
+	"HelpDocument.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (
@@ -109,6 +110,7 @@
     "PROJECT_DESCRIPTION" = "GNUstep Help Viewer";
     "PROJECT_DOCUMENTTYPES" = (
 	{
+	    NSDocumentClass = HelpDocument;
 	    NSHumanReadableName = "GNUstep Help Document";
 	    NSIcon = "Icon-hlpd.tiff";
 	    NSName = help;
