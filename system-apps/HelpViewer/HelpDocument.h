@@ -1,7 +1,8 @@
 /*
     This file is part of HelpViewer (http://gap.nongnu.org/helpviewer/)
     Copyright (C) 2003 Nicolas Roard <nicolas@roard.com>
-
+                  2025-2026 Riccardo Mottola <rm@gnu.org>
+ 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -18,8 +19,8 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#ifndef __MAIN_WINDOW_CONTROLLER_H__
-#define __MAIN_WINDOW_CONTROLLER_H__
+#ifndef __HELP_DOCUMENT_H__
+#define __HELP_DOCUMENT_H__
 
 #import <AppKit/NSDocument.h>
 

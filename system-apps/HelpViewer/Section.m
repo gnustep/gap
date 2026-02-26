@@ -114,7 +114,7 @@ static NSBundle* Bundle = nil;
 	    }
 	}
 
-      if ((loaded == YES))
+      if (loaded == YES)
 	{
 	  ret = [[NSMutableAttributedString alloc] init];
 

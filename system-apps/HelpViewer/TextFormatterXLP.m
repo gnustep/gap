@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://gap.nongnu.org/helpviewer/)
     Copyright (C) 2003      Nicolas Roard <nicolas@roard.com>
-                  2020-2025 Riccardo Mottola <rm@gnu.org>
+                  2020-2026 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,9 +19,11 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "TextFormatterXLP.h"
-#include "Parser.h"
 #import <Foundation/NSXMLParser.h>
+
+#import "TextFormatterXLP.h"
+#import "Parser.h"
+
 
 @interface NSXMLParser (sloppy)
 - (void) _setAcceptHTML: (BOOL)flag;
@@ -456,13 +458,7 @@
 
 	    NSMutableAttributedString* attStr = [[NSMutableAttributedString alloc] init];
 	    [attStr appendAttributedString: [NSAttributedString attributedStringWithAttachment: BR]];
-    	    
-	    NSFont* font = [[NSFontManager sharedFontManager]
-                convertFont: [NSFont userFontOfSize: 1]
-                toHaveTrait: 0];
 
-	
-    	    //[attStr addAttribute: NSFontAttributeName value: font range: NSMakeRange (0, [attSStr length])];
 	    [paragraphStyle setMaximumLineHeight: (CGFloat) height];
     	    [attStr addAttribute: NSParagraphStyleAttributeName value: paragraphStyle range: NSMakeRange (0, [attStr length])];
 	    [paragraphStyle release];
