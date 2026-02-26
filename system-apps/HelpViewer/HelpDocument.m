@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://gap.nongnu.org/helpviewer/)
     Copyright (C) 2003      Nicolas Roard <nicolas@roard.com>
-                  2020-2024 Riccardo Mottola <rm@gnu.org>
+                  2020-2026 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -123,7 +123,7 @@
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-  NSString *fileName;
+  NSString *fileName = nil;
   BOOL ret = NO;
   
   if ([absoluteURL isFileURL])
