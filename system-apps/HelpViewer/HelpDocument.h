@@ -41,7 +41,7 @@
  
   IBOutlet NSTextView *textView;
   IBOutlet NSBrowser *tocBrowser;
-  IBOutlet NSWindow *window;  // FIXME - check if needed
+  NSWindow *window;  // FIXME - check if needed
 
   //XMLHandler* handler;
   id <HandlerStructure> handler;
