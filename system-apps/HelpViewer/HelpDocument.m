@@ -26,66 +26,128 @@
 #endif
 
 #import <AppKit/NSCell.h> 
-
-#import "mainWindowController.h"
+#import <HelpDocument.h>
 #import "Section.h"
 
-@implementation MainWindowController
+@implementation HelpDocument
 
-- (id) initWithTextView: (NSTextView*) _text andBrowserView:(NSBrowser*) browser
+- (NSString *) windowNibName
 {
-  if ((self = [super init]))
+  return @"HelpDocument";
+}
+
+- (id)init
+{
+  self = [super init];
+  if (self)
     {
-      resultTextView = [_text retain];
-      resultOutlineView = [browser retain];
-
-      [resultTextView setDelegate: self];
-      [resultTextView setTextContainerInset: NSMakeSize (8,8)];
-	
-      [resultOutlineView setDelegate: self];
-      [resultOutlineView setAllowsMultipleSelection: NO];
-      [resultOutlineView setCellClass: [BrowserCell class]];
-      [resultOutlineView setAction: @selector(browserClick:)];
-      [resultOutlineView setTarget: self];
-      //[resultOutlineView setDataSource: self];
-
-
-      //handler = RETAIN ([XMLHandler new]);
-      handler = [HandlerStructureXLP new];
-	
-      [handler setTextView: resultTextView];
-
-      id TextFormatter = [[TextFormatterXLP alloc] init];
-      [TextFormatter setTextView: resultTextView];
-      [Section setTextFormatter: TextFormatter];
-      [TextFormatter release];
+      handler = nil;
     }
   return self;
 }
 
-- (void) print: (id) sender
+- (void) initButtons 
 {
-  [[NSPrintOperation printOperationWithView: resultTextView] runOperation];
+  [search setTitle: _(@"Search")];
+  [search setFont: [NSFont systemFontOfSize: 0]];
+  [search setImagePosition: NSImageAbove];
+  [search setImage: [NSImage imageNamed: @"Search.tiff"]];
+
+  [index setTitle: _(@"Index")];
+  [index setFont: [NSFont systemFontOfSize: 0]];
+  [index setImagePosition: NSImageAbove];
+  [index setImage: [NSImage imageNamed: @"Index.tiff"]];
+  
+  [back setTitle: _(@"Back")];
+  [back setFont: [NSFont systemFontOfSize: 0]];
+  [back setImagePosition: NSImageAbove];
+  [back setImage: [NSImage imageNamed: @"Back.tiff"]];
+  
+  [bookshelf setTitle: _(@"Bookshelf")];
+  [bookshelf setFont: [NSFont systemFontOfSize: 0]];
+  [bookshelf setImagePosition: NSImageAbove];
+  [bookshelf setImage: [NSImage imageNamed: @"Bookshelf.tiff"]];
 }
 
-- (BOOL) loadFile: (NSString*) fileName 
+
+- (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
+  NSLog(@"HelpDocument windowControllerDidLoadNib!");
+
+  [self initButtons];
+
+  [textView setDelegate: self];
+  [textView setTextContainerInset: NSMakeSize (8,8)];
+ 
+  [tocBrowser setDelegate: self];
+  [tocBrowser setAllowsMultipleSelection: NO];
+  [tocBrowser setCellClass: [BrowserCell class]];
+  [tocBrowser setAction: @selector(browserClick:)];
+  [tocBrowser setTarget: self];
+
+  id TextFormatter = [[TextFormatterXLP alloc] init];
+  [TextFormatter setTextView: textView];
+  [Section setTextFormatter: TextFormatter];
+  [TextFormatter release];
+
+  // after parse
+  [tocBrowser reloadColumn: 0];
+  [tocBrowser selectRow:0 inColumn:0];
+  [self browserClick: tocBrowser];
+}
+
+- (void) print: (id) sender
+{
+  [[NSPrintOperation printOperationWithView: textView] runOperation];
+}
+
+- (void) search: (id) sender
+{
+  NSLog (@"Search ...");
+}
+
+- (void) index: (id) sender 
+{
+  NSLog (@"Index ...");
+}
+
+- (void) back: (id) sender
+{
+  NSLog (@"Back ...");
+}
+
+- (void) bookshelf: (id) sender
+{
+  NSLog (@"Bookshelf ...");
+}
+
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+{
+  NSString *fileName;
   BOOL ret = NO;
-
-  ASSIGN (handler, [HandlerStructureXLP new]);
-
-  NSBundle* Bundle = [NSBundle bundleWithPath: fileName];
-  [Section setBundle: Bundle];
-  [handler setPath: [Bundle pathForResource: @"main" ofType: @"xlp"]];
-
-  if ([handler parse])
-    {
-      [window setTitle: [fileName lastPathComponent]];
   
-      NSLog (@"loadFile : %@", fileName);
-      [resultOutlineView reloadColumn: 0];
-      [resultOutlineView selectRow:0 inColumn:0];
-      [self browserClick: resultOutlineView];
+  if ([absoluteURL isFileURL])
+    {
+      fileName = [absoluteURL path];
+    }
+  else
+    {
+      NSLog(@"Non-file paths not supported on load");
+    }
+
+  if (fileName != nil)
+    {
+      ASSIGN (handler, [HandlerStructureXLP new]);
+
+      NSBundle* Bundle = [NSBundle bundleWithPath: fileName];
+      [Section setBundle: Bundle];
+      [handler setPath: [Bundle pathForResource: @"main" ofType: @"xlp"]];
+
+      ret = [handler parse];
+      if (ret)
+        {
+          NSLog (@"loadFile YES : %@", fileName);
+        }
     }
 
   return ret;
@@ -113,7 +175,7 @@
     {
       BrowserCell *cell = (BrowserCell *)[sender selectedCellInColumn: column -1];
       Section* section = [cell section];
-    
+
       if ([section hasSubsections])
         {
           ret = (NSInteger)[[section subsections] count];
@@ -209,11 +271,11 @@
       if ([sub loaded] == NO)
 	{
 	  [sub load];
-	  [resultOutlineView reloadColumn: [resultOutlineView lastColumn]];
-	  [resultOutlineView selectRow: [resultOutlineView selectedRowInColumn: [resultOutlineView lastColumn]]
-			      inColumn: [resultOutlineView lastColumn]];
+	  [tocBrowser reloadColumn: [tocBrowser lastColumn]];
+	  [tocBrowser selectRow: [tocBrowser selectedRowInColumn: [tocBrowser lastColumn]]
+			      inColumn: [tocBrowser lastColumn]];
 	}
-			
+	
       if (([sub type] == SECTION_TYPE_PLAIN)
 	  || ([sub type] == SECTION_TYPE_CHAPTER))
 	{
@@ -222,7 +284,7 @@
 	  id str = [sub contentWithLevel: 0];
 	  // NSLog (@"on a recu : %@ et on va le mettre dans le textview", str);
 	  [str retain];
-	  [[resultTextView textStorage] setAttributedString: str];
+	  [[textView textStorage] setAttributedString: str];
 	  [str release];
 	}
       else if ([sub type] == SECTION_TYPE_NORMAL)
@@ -230,17 +292,15 @@
 	  // We should select the right position in the textview
 	  // (ie, point the user to the right section)
 	}
-      [resultOutlineView reloadColumn: [resultOutlineView lastColumn]];
+      [tocBrowser reloadColumn: [tocBrowser lastColumn]];
     }
   //NSLog (@"FIN browserClick");
 }
 		   
 - (void) dealloc
 {
-  NSLog (@"=== dealloc mainWindowController ===");
+  NSLog (@"=== dealloc HelpDocument ===");
   RELEASE ((NSObject*)handler);
-  RELEASE (resultTextView);
-  RELEASE (resultOutlineView);
   [super dealloc];
 }
 

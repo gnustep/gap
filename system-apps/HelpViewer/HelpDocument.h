@@ -21,6 +21,8 @@
 #ifndef __MAIN_WINDOW_CONTROLLER_H__
 #define __MAIN_WINDOW_CONTROLLER_H__
 
+#import <AppKit/NSDocument.h>
+
 #import "GNUstep.h"
 #import "Label.h"
 #import "Parser.h"
@@ -29,22 +31,23 @@
 #import "TextFormatterXLP.h"
 #import "BrowserCell.h"
 
-@interface MainWindowController : NSObject
+@interface HelpDocument : NSDocument
 {
-  NSTextView* resultTextView;
-  NSBrowser* resultOutlineView;
-    
-  NSTextView* text;
+  id query;
+  id search;
+  id index;
+  id back;
+  id bookshelf;
+ 
+  IBOutlet NSTextView *textView;
+  IBOutlet NSBrowser *tocBrowser;
+  IBOutlet NSWindow *window;  // FIXME - check if needed
+
   //XMLHandler* handler;
   id <HandlerStructure> handler;
-
-  id window;
 }
 
-- (id) initWithTextView: (NSTextView*) text andBrowserView: (NSBrowser*) browser;
 - (void) dealloc;
-- (BOOL) loadFile: (NSString*) fileName;
-- (void) setWindow: (id) win;
 - (void) browserClick: (id) sender;
 - (void) print: (id) sender;
 
