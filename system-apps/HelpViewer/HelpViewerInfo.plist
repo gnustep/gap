@@ -20,6 +20,7 @@
     NSRole = Application;
     NSTypes = (
 	{
+	    NSDocumentClass = HelpDocument;
 	    NSHumanReadableName = "GNUstep Help Document";
 	    NSIcon = "Icon-hlpd.tiff";
 	    NSName = help;
