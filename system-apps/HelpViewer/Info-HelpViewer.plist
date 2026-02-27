@@ -4,6 +4,25 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>help</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Icon-hlpd</string>
+			<key>CFBundleTypeName</key>
+			<string>Help Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+			<key>NSDocumentClass</key>
+			<string>HelpDocument</string>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>HelpViewer</string>
 	<key>CFBundleIconFile</key>

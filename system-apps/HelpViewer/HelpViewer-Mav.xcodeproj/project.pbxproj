@@ -11,7 +11,7 @@
 		851FC9FF2E302D34002B1A84 /* Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D61203E9EAC000A80050 /* Controller.h */; };
 		851FCA002E302D34002B1A84 /* FigureCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D61403E9EAC000A80050 /* FigureCell.h */; };
 		851FCA012E302D34002B1A84 /* Label.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D61803E9EAC000A80050 /* Label.h */; };
-		851FCA022E302D34002B1A84 /* mainWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D61C03E9EAC000A80050 /* mainWindowController.h */; };
+		851FCA022E302D34002B1A84 /* HelpDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D61C03E9EAC000A80050 /* HelpDocument.h */; };
 		851FCA032E302D34002B1A84 /* ModNSString.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D61E03E9EAC000A80050 /* ModNSString.h */; };
 		851FCA042E302D34002B1A84 /* Page.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D62003E9EAC000A80050 /* Page.h */; };
 		851FCA052E302D34002B1A84 /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 7419D62203E9EAC000A80050 /* Parser.h */; };
@@ -38,7 +38,7 @@
 		851FCA1C2E302D34002B1A84 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D61303E9EAC000A80050 /* Controller.m */; };
 		851FCA1D2E302D34002B1A84 /* FigureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D61503E9EAC000A80050 /* FigureCell.m */; };
 		851FCA1E2E302D34002B1A84 /* Label.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D61903E9EAC000A80050 /* Label.m */; };
-		851FCA1F2E302D34002B1A84 /* mainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D61D03E9EAC000A80050 /* mainWindowController.m */; };
+		851FCA1F2E302D34002B1A84 /* HelpDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D61D03E9EAC000A80050 /* HelpDocument.m */; };
 		851FCA202E302D34002B1A84 /* ModNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D61F03E9EAC000A80050 /* ModNSString.m */; };
 		851FCA212E302D34002B1A84 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D62103E9EAC000A80050 /* Page.m */; };
 		851FCA222E302D34002B1A84 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419D62303E9EAC000A80050 /* Parser.m */; };
@@ -52,6 +52,8 @@
 		851FCA2A2E302D34002B1A84 /* TextFormatterXLP.m in Sources */ = {isa = PBXBuildFile; fileRef = 851E62EE2E2A67D100F780E5 /* TextFormatterXLP.m */; };
 		851FCA2B2E302D34002B1A84 /* HandlerStructureXLP.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5A9B2E2EC5BA0031A53D /* HandlerStructureXLP.m */; };
 		851FCA2D2E302D34002B1A84 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		852A6A912F511732001D9C6D /* HelpDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 852A6A8F2F511732001D9C6D /* HelpDocument.nib */; };
+		852A6A932F51174C001D9C6D /* Icon-hlpd.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 852A6A922F51174C001D9C6D /* Icon-hlpd.tiff */; };
 		853D38AF2EC7CB8E0057F739 /* caution.png in Resources */ = {isa = PBXBuildFile; fileRef = 853D38A82EC7CB8E0057F739 /* caution.png */; };
 		853D38B02EC7CB8E0057F739 /* chapter.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 853D38A92EC7CB8E0057F739 /* chapter.tiff */; };
 		853D38B12EC7CB8E0057F739 /* errorloading.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 853D38AA2EC7CB8E0057F739 /* errorloading.tiff */; };
@@ -79,8 +81,8 @@
 		7419D61503E9EAC000A80050 /* FigureCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FigureCell.m; sourceTree = "<group>"; };
 		7419D61803E9EAC000A80050 /* Label.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
 		7419D61903E9EAC000A80050 /* Label.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Label.m; sourceTree = "<group>"; };
-		7419D61C03E9EAC000A80050 /* mainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mainWindowController.h; sourceTree = "<group>"; };
-		7419D61D03E9EAC000A80050 /* mainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = mainWindowController.m; sourceTree = "<group>"; };
+		7419D61C03E9EAC000A80050 /* HelpDocument.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HelpDocument.h; sourceTree = "<group>"; };
+		7419D61D03E9EAC000A80050 /* HelpDocument.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = HelpDocument.m; sourceTree = "<group>"; };
 		7419D61E03E9EAC000A80050 /* ModNSString.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ModNSString.h; sourceTree = "<group>"; };
 		7419D61F03E9EAC000A80050 /* ModNSString.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ModNSString.m; sourceTree = "<group>"; };
 		7419D62003E9EAC000A80050 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
@@ -111,6 +113,8 @@
 		851E62EE2E2A67D100F780E5 /* TextFormatterXLP.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TextFormatterXLP.m; sourceTree = "<group>"; };
 		851FCA322E302D34002B1A84 /* Info-HelpViewer.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-HelpViewer.plist"; sourceTree = "<group>"; };
 		851FCA332E302D34002B1A84 /* HelpViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelpViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		852A6A902F511732001D9C6D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/HelpDocument.nib; sourceTree = "<group>"; };
+		852A6A922F51174C001D9C6D /* Icon-hlpd.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "Icon-hlpd.tiff"; path = "Resources/Icon-hlpd.tiff"; sourceTree = "<group>"; };
 		853D38A82EC7CB8E0057F739 /* caution.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = caution.png; path = Resources/caution.png; sourceTree = "<group>"; };
 		853D38A92EC7CB8E0057F739 /* chapter.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = chapter.tiff; path = Resources/chapter.tiff; sourceTree = "<group>"; };
 		853D38AA2EC7CB8E0057F739 /* errorloading.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = errorloading.tiff; path = Resources/errorloading.tiff; sourceTree = "<group>"; };
@@ -159,8 +163,8 @@
 				85EF5A9B2E2EC5BA0031A53D /* HandlerStructureXLP.m */,
 				7419D61803E9EAC000A80050 /* Label.h */,
 				7419D61903E9EAC000A80050 /* Label.m */,
-				7419D61C03E9EAC000A80050 /* mainWindowController.h */,
-				7419D61D03E9EAC000A80050 /* mainWindowController.m */,
+				7419D61C03E9EAC000A80050 /* HelpDocument.h */,
+				7419D61D03E9EAC000A80050 /* HelpDocument.m */,
 				7419D61E03E9EAC000A80050 /* ModNSString.h */,
 				7419D61F03E9EAC000A80050 /* ModNSString.m */,
 				7419D62003E9EAC000A80050 /* Page.h */,
@@ -231,6 +235,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				852A6A8F2F511732001D9C6D /* HelpDocument.nib */,
+				852A6A922F51174C001D9C6D /* Icon-hlpd.tiff */,
 				853D38B62EC7CBA90057F739 /* note.png */,
 				853D38B72EC7CBA90057F739 /* Point.tiff */,
 				853D38A82EC7CB8E0057F739 /* caution.png */,
@@ -270,7 +276,7 @@
 				851FC9FF2E302D34002B1A84 /* Controller.h in Headers */,
 				851FCA002E302D34002B1A84 /* FigureCell.h in Headers */,
 				851FCA012E302D34002B1A84 /* Label.h in Headers */,
-				851FCA022E302D34002B1A84 /* mainWindowController.h in Headers */,
+				851FCA022E302D34002B1A84 /* HelpDocument.h in Headers */,
 				851FCA032E302D34002B1A84 /* ModNSString.h in Headers */,
 				851FCA042E302D34002B1A84 /* Page.h in Headers */,
 				851FCA052E302D34002B1A84 /* Parser.h in Headers */,
@@ -356,7 +362,9 @@
 				851FCA172E302D34002B1A84 /* Index.tiff in Resources */,
 				851FCA182E302D34002B1A84 /* Search.tiff in Resources */,
 				853D38B42EC7CB8E0057F739 /* notloaded.tiff in Resources */,
+				852A6A932F51174C001D9C6D /* Icon-hlpd.tiff in Resources */,
 				853D38B82EC7CBA90057F739 /* note.png in Resources */,
+				852A6A912F511732001D9C6D /* HelpDocument.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +380,7 @@
 				851FCA1C2E302D34002B1A84 /* Controller.m in Sources */,
 				851FCA1D2E302D34002B1A84 /* FigureCell.m in Sources */,
 				851FCA1E2E302D34002B1A84 /* Label.m in Sources */,
-				851FCA1F2E302D34002B1A84 /* mainWindowController.m in Sources */,
+				851FCA1F2E302D34002B1A84 /* HelpDocument.m in Sources */,
 				851FCA202E302D34002B1A84 /* ModNSString.m in Sources */,
 				851FCA212E302D34002B1A84 /* Page.m in Sources */,
 				851FCA222E302D34002B1A84 /* Parser.m in Sources */,
@@ -405,6 +413,14 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		852A6A8F2F511732001D9C6D /* HelpDocument.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				852A6A902F511732001D9C6D /* English */,
+			);
+			name = HelpDocument.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
