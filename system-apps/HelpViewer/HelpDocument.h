@@ -54,6 +54,7 @@
 - (void) browserClick: (id) sender;
 - (void) print: (id) sender;
 - (NSBundle *) bundle;
+- (TextFormatterXLP *) textFormatter;
 
 @end;
 

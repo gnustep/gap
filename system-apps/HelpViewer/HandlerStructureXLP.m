@@ -291,6 +291,7 @@
 {
   ASSIGN (helpDocument, hd);
   [_firstSection setBundle:[helpDocument bundle]];
+  [_firstSection setTextFormatter:[helpDocument textFormatter]];
 }
 
 - (void) setPath: (NSString*) p
