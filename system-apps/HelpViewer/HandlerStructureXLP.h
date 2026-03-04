@@ -22,19 +22,19 @@
 #ifndef __HANDLER_STRUCTURE_XLP_H__
 #define __HANDLER_STRUCTURE_XLP_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "HandlerStructure.h"
-#include "ModNSString.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "HandlerStructure.h"
+#import "ModNSString.h"
 
 @class HelpDocument;
 
 
 #ifdef MACOSX
-#include "Parser.h"
+#import "Parser.h"
 @interface HandlerStructureXLP : NSObject <SAXHandler, HandlerStructure>
 #else
-#include <GNUstepBase/GSXML.h>
+#import <GNUstepBase/GSXML.h>
 @interface HandlerStructureXLP : GSSAXHandler <HandlerStructure>
 #endif
 {

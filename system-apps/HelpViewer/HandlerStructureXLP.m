@@ -19,8 +19,8 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "HandlerStructureXLP.h"
-#include "Parser.h"
+#import "HandlerStructureXLP.h"
+#import "Parser.h"
 #import <Foundation/NSXMLParser.h>
 
 @interface NSXMLParser (sloppy)

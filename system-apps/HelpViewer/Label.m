@@ -19,7 +19,7 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "Label.h"
+#import "Label.h"
 
 @implementation Label
 

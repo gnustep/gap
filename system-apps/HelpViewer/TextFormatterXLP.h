@@ -34,10 +34,10 @@
 @class HelpDocument;
 
 #ifdef MACOSX
-#include "Parser.h"
+#import "Parser.h"
 @interface TextFormatterXLP : NSObject <SAXHandler, TextFormatter>
 #else
-#include <GNUstepBase/GSXML.h>
+#import <GNUstepBase/GSXML.h>
 @interface TextFormatterXLP : GSSAXHandler <HandlerStructure>
 #endif
 {

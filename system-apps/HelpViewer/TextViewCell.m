@@ -18,7 +18,7 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "TextViewCell.h"
+#import "TextViewCell.h"
 
 @implementation TextViewCell
 

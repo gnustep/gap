@@ -19,7 +19,7 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include <AppKit/AppKit.h>
+#import <AppKit/AppKit.h>
 
 int main (int argc, const char **argv)
 {

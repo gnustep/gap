@@ -21,8 +21,8 @@
 #ifndef __MOD_NSSTRING_H__
 #define __MOD_NSSTRING_H__
 
-#include <Foundation/Foundation.h>
-#include "GNUstep.h"
+#import <Foundation/Foundation.h>
+#import "GNUstep.h"
 
 @interface NSString (Trim)
 + (NSString*) stringWithStringByTrimmingSpaces: (NSString*) str;

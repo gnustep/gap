@@ -21,11 +21,11 @@
 #ifndef __PAGE_H__
 #define __PAGE_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-#include "GNUstep.h"
-#include "Section.h"
+#import "GNUstep.h"
+#import "Section.h"
 
 @interface Part : NSObject
 {

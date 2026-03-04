@@ -22,8 +22,8 @@
 #ifndef __PARSER_H__
 #define __PARSER_H__
 
-#include <Foundation/Foundation.h>
-#include "GNUstep.h"
+#import <Foundation/Foundation.h>
+#import "GNUstep.h"
 
 @protocol SAXHandler
 - (void) startElement: (NSString*) elementName attributes: (NSMutableDictionary*) elementAttributes;

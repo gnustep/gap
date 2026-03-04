@@ -22,11 +22,11 @@
 #ifndef __LABEL_H__
 #define __LABEL_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-#include "Page.h"
-#include "GNUstep.h"
+#import "Page.h"
+#import "GNUstep.h"
 
 @interface Label : NSObject
 {

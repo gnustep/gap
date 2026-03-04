@@ -19,8 +19,8 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "Parser.h"
-#include "ModNSString.h"
+#import "Parser.h"
+#import "ModNSString.h"
 
 /*
    I rewrote this very simple SAX-inspired Parser ...

@@ -20,7 +20,7 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "Legend.h"
+#import "Legend.h"
 
 
 @implementation Legend

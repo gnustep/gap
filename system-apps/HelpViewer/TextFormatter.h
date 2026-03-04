@@ -21,11 +21,11 @@
 #ifndef __TEXT_FORMATTER_H__
 #define __TEXT_FORMATTER_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "Section.h"
-#include "BRCell.h"
-#include "FigureCell.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "Section.h"
+#import "BRCell.h"
+#import "FigureCell.h"
 
 @protocol TextFormatter
 - (NSMutableAttributedString*) renderHeader: (NSString*) header withLevel: (int) level;
