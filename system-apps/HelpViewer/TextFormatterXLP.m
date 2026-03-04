@@ -42,7 +42,7 @@
       legends = nil;
       _currentSection = _firstSection;
       _document = NO;
-      Bundle = nil;
+      _bundle = nil;
       content = nil;
     }
   return self;
@@ -181,7 +181,7 @@
             {
                 src = [NSString stringWithString: [elementAttributes objectForKey: @"src"]];
                 //NSLog (@"src : %@", src);
-                [self addImage: [Bundle pathForResource: [src stringByDeletingPathExtension] ofType: [src pathExtension]]];
+                [self addImage: [_bundle pathForResource: [src stringByDeletingPathExtension] ofType: [src pathExtension]]];
             }
         }
         else if HAVING (@"legendfig") {
@@ -382,7 +382,7 @@
 }
 
 - (void) setBundle: (NSBundle*) bundle {
-	ASSIGN (Bundle, bundle);
+	ASSIGN (_bundle, bundle);
 }
 
 - (NSMutableAttributedString*) renderHeader: (NSString*) header withLevel: (int) level
@@ -615,7 +615,7 @@
 - (void) addLegendFig: (NSString*) imgpath withLegends: (NSArray*) plegends
 {
     NSImage* img = [[NSImage alloc] initWithContentsOfFile: 
-    	[Bundle pathForResource: [imgpath stringByDeletingPathExtension] 
+    	[_bundle pathForResource: [imgpath stringByDeletingPathExtension] 
 	ofType: [imgpath pathExtension]]];
 
     //NSLog (@"addLegendFig: %@ legends : %@", imgpath, plegends);

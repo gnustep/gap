@@ -22,18 +22,18 @@
 #include "Section.h"
 #include "HandlerStructureXLP.h"
 
-static id <TextFormatter> TextFormatter = nil;
-static NSBundle* Bundle = nil;
+static id <TextFormatter> _textFormatter = nil;
+static NSBundle* _bundle = nil;
 
 @implementation Section
 
 + (void) setTextFormatter: (id) obj {
-	ASSIGN (TextFormatter, obj);
+	ASSIGN (_textFormatter, obj);
 }
 
 + (void) setBundle: (NSBundle*) obj {
-	ASSIGN (Bundle, obj);
-	[TextFormatter setBundle: Bundle];
+	ASSIGN (_bundle, obj);
+	[_textFormatter setBundle: _bundle];
 }
 
 - (id) initWithHeader: (NSString*) pheader
@@ -65,7 +65,7 @@ static NSBundle* Bundle = nil;
 }
 
 - (void) setPath: (NSString*) src {
-	ASSIGN (path, [Bundle pathForResource: [src stringByDeletingPathExtension] ofType: [src pathExtension]]);
+	ASSIGN (path, [_bundle pathForResource: [src stringByDeletingPathExtension] ofType: [src pathExtension]]);
 }
 
 - (void) setLoaded: (BOOL) load {
@@ -120,10 +120,10 @@ static NSBundle* Bundle = nil;
 
 	  if (type != SECTION_TYPE_PLAIN)
 	    {
-	      id head  = [TextFormatter renderHeader: header withLevel: level];
+	      id head  = [_textFormatter renderHeader: header withLevel: level];
 	      [ret appendAttributedString: head];
 	    }
-	  id ttext = [TextFormatter renderText: text];
+	  id ttext = [_textFormatter renderText: text];
 	  [ret appendAttributedString: ttext];
 	  for (i=0; i < [subs count]; i++)
 	    {

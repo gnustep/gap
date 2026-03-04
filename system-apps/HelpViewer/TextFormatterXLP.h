@@ -67,7 +67,7 @@
 	int legendX;
 	int legendY;
 
-	NSBundle* Bundle;
+	NSBundle* _bundle;
 }
 - (void) addImage: (NSString*) pathname;
 - (void) addImage: (NSImage*) img onString: (NSMutableAttributedString*) as;
