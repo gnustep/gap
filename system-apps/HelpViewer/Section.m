@@ -19,22 +19,12 @@
     31 Milk Street #960789 Boston, MA 02196 USA
 */
 
-#include "Section.h"
-#include "HandlerStructureXLP.h"
+#import "Section.h"
+#import "TextFormatterXLP.h"
+#import "HandlerStructureXLP.h"
 
-static id <TextFormatter> _textFormatter = nil;
-static NSBundle* _bundle = nil;
 
 @implementation Section
-
-+ (void) setTextFormatter: (id) obj {
-	ASSIGN (_textFormatter, obj);
-}
-
-+ (void) setBundle: (NSBundle*) obj {
-	ASSIGN (_bundle, obj);
-	[_textFormatter setBundle: _bundle];
-}
 
 - (id) initWithHeader: (NSString*) pheader
 {
@@ -47,6 +37,8 @@ static NSBundle* _bundle = nil;
       rendered = NO;
       loaded = NO;
       path = nil;
+      _textFormatter = nil;
+      _bundle = nil;
     }
   return self;
 }
@@ -57,7 +49,22 @@ static NSBundle* _bundle = nil;
   RELEASE (text);
   RELEASE (header);
   RELEASE (path);
+  RELEASE (_textFormatter);
+  RELEASE (_bundle);
   [super dealloc];
+}
+
+- (TextFormatterXLP *) textFormatter
+{
+  return _textFormatter;
+}
+
+- (void) setTextFormatter: (id) obj {
+  ASSIGN (_textFormatter, obj);
+}
+
+- (void) setBundle: (NSBundle*) obj {
+  ASSIGN (_bundle, obj);
 }
 
 - (NSMutableAttributedString*) text {
@@ -131,6 +138,7 @@ static NSBundle* _bundle = nil;
 	      NSMutableAttributedString *as = nil;
 
 	      sub = [subs objectAtIndex: i];
+              [sub setTextFormatter:_textFormatter];
 	      as = [sub contentWithLevel: level+1];
 	      if (as != nil)
 		{

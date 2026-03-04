@@ -26,8 +26,10 @@
 #endif
 
 #import <AppKit/NSCell.h> 
-#import <HelpDocument.h>
+#import "HelpDocument.h"
 #import "Section.h"
+#import "HandlerStructureXLP.h"
+#import "TextFormatterXLP.h"
 
 @implementation HelpDocument
 
@@ -85,10 +87,10 @@
   [tocBrowser setAction: @selector(browserClick:)];
   [tocBrowser setTarget: self];
 
-  id TextFormatter = [[TextFormatterXLP alloc] init];
-  [TextFormatter setTextView: textView];
-  [Section setTextFormatter: TextFormatter];
-  [TextFormatter release];
+  textFormatter = [[TextFormatterXLP alloc] init];
+  [textFormatter setTextView: textView];
+  [textFormatter setHelpDocument: self];
+  [textFormatter release];
 
   // after parse
   [tocBrowser reloadColumn: 0];
@@ -139,9 +141,9 @@
     {
       ASSIGN (handler, [HandlerStructureXLP new]);
 
-      NSBundle* Bundle = [NSBundle bundleWithPath: fileName];
-      [Section setBundle: Bundle];
-      [handler setPath: [Bundle pathForResource: @"main" ofType: @"xlp"]];
+      _bundle = [NSBundle bundleWithPath: fileName];
+      [handler setPath: [_bundle pathForResource: @"main" ofType: @"xlp"]];
+      [handler setHelpDocument: self];
 
       ret = [handler parse];
       if (ret)
@@ -158,6 +160,10 @@
   window = win;
 }
 
+- (NSBundle *) bundle;
+{
+  return _bundle;
+}
 
 - (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
 {
@@ -267,6 +273,7 @@
 
   if (sub != nil)
     {
+      [sub setTextFormatter:textFormatter];
       //NSLog (@"browserClick");
       if ([sub loaded] == NO)
 	{
@@ -301,6 +308,7 @@
 {
   NSLog (@"=== dealloc HelpDocument ===");
   RELEASE ((NSObject*)handler);
+  RELEASE(_bundle);
   [super dealloc];
 }
 

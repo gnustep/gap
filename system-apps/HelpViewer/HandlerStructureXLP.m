@@ -99,6 +99,8 @@
 	{
 		//NSLog (@"<section>name=%@", name);
 		Section* newSection = [[Section alloc] initWithHeader: name];
+		[newSection setBundle:[helpDocument bundle]];
+		[newSection setTextFormatter:[_currentSection textFormatter]];
 		if (src != nil)
 		{
                   NSLog(@"set section to %@ to path |%@|", name, src);
@@ -283,6 +285,12 @@
 
 - (Section*) sections {
 	return _firstSection;
+}
+
+- (void) setHelpDocument: (HelpDocument *) hd
+{
+  ASSIGN (helpDocument, hd);
+  [_firstSection setBundle:[helpDocument bundle]];
 }
 
 - (void) setPath: (NSString*) p

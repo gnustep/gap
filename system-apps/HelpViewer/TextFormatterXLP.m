@@ -23,6 +23,7 @@
 
 #import "TextFormatterXLP.h"
 #import "Parser.h"
+#import "HelpDocument.h"
 
 
 @interface NSXMLParser (sloppy)
@@ -38,11 +39,12 @@
   if ((self = [super init]))
     {
       _firstSection = [[Section alloc] initWithHeader: @"document"];
+      [_firstSection setTextFormatter:self];
       _listCounter = [[NSMutableArray alloc] init];
       legends = nil;
       _currentSection = _firstSection;
       _document = NO;
-      _bundle = nil;
+      helpDocument = nil;
       content = nil;
     }
   return self;
@@ -181,7 +183,7 @@
             {
                 src = [NSString stringWithString: [elementAttributes objectForKey: @"src"]];
                 //NSLog (@"src : %@", src);
-                [self addImage: [_bundle pathForResource: [src stringByDeletingPathExtension] ofType: [src pathExtension]]];
+                [self addImage: [[helpDocument bundle] pathForResource: [src stringByDeletingPathExtension] ofType: [src pathExtension]]];
             }
         }
         else if HAVING (@"legendfig") {
@@ -381,8 +383,10 @@
 	[str release];
 }
 
-- (void) setBundle: (NSBundle*) bundle {
-	ASSIGN (_bundle, bundle);
+- (void) setHelpDocument: (HelpDocument *) hd
+{
+  ASSIGN (helpDocument, hd);
+  [_firstSection setBundle:[helpDocument bundle]];
 }
 
 - (NSMutableAttributedString*) renderHeader: (NSString*) header withLevel: (int) level
@@ -615,7 +619,7 @@
 - (void) addLegendFig: (NSString*) imgpath withLegends: (NSArray*) plegends
 {
     NSImage* img = [[NSImage alloc] initWithContentsOfFile: 
-    	[_bundle pathForResource: [imgpath stringByDeletingPathExtension] 
+    	[[helpDocument bundle] pathForResource: [imgpath stringByDeletingPathExtension]
 	ofType: [imgpath pathExtension]]];
 
     //NSLog (@"addLegendFig: %@ legends : %@", imgpath, plegends);

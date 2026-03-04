@@ -30,7 +30,6 @@
 @protocol TextFormatter
 - (NSMutableAttributedString*) renderHeader: (NSString*) header withLevel: (int) level;
 - (NSMutableAttributedString*) renderText: (NSMutableAttributedString*) text;
-- (void) setBundle: (NSBundle*) bundle;
 @end
 
 #endif

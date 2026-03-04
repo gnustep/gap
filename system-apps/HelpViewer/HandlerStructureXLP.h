@@ -27,6 +27,9 @@
 #include "HandlerStructure.h"
 #include "ModNSString.h"
 
+@class HelpDocument;
+
+
 #ifdef MACOSX
 #include "Parser.h"
 @interface HandlerStructureXLP : NSObject <SAXHandler, HandlerStructure>
@@ -43,13 +46,16 @@
 	NSMutableAttributedString* _currentContent;
 	Section* _firstSection;
 	Section* _currentSection;
-   BOOL _insideStringContent; // for white-space coalescing. Could be more finegrined.
+	BOOL _insideStringContent; // for white-space coalescing. Could be more finegrined.
 
 	float current, max;
+	HelpDocument *helpDocument;
 }
 - (BOOL) parse;
 - (Section*) sections;
 - (void) setPath: (NSString*) path;
+- (void) setHelpDocument: (HelpDocument *)hd;
+
 @end
 
 #endif

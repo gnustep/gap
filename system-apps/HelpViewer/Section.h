@@ -22,11 +22,11 @@
 #ifndef __SECTION_H__
 #define __SECTION_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "GNUstep.h"
-#include "TextFormatter.h"
-#include "HandlerStructure.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "GNUstep.h"
+
+@class TextFormatterXLP;
 
 #define SECTION_TYPE_NORMAL 0
 #define SECTION_TYPE_CHAPTER 1
@@ -44,7 +44,10 @@
     BOOL rendered;
     BOOL loaded;
     NSString* path;
-} 
+    TextFormatterXLP *_textFormatter;
+    NSBundle* _bundle;
+}
+
 - (id) initWithHeader: (NSString*) header;
 - (NSMutableAttributedString*) text;
 - (void) setType: (int) t;
@@ -63,8 +66,9 @@
 - (BOOL) loaded;
 - (void) load;
 - (NSMutableAttributedString*) contentWithLevel: (int) level ;
-+ (void) setTextFormatter: (id) obj;
-+ (void) setBundle: (NSBundle*) obj;
+- (TextFormatterXLP *) textFormatter;
+- (void) setTextFormatter: (id) obj;
+- (void) setBundle: (NSBundle*) obj;
 @end
 
 #endif

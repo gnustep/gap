@@ -46,11 +46,14 @@
 
   //XMLHandler* handler;
   id <HandlerStructure> handler;
+  TextFormatterXLP *textFormatter;
+  NSBundle *_bundle;
 }
 
 - (void) dealloc;
 - (void) browserClick: (id) sender;
 - (void) print: (id) sender;
+- (NSBundle *) bundle;
 
 @end;
 

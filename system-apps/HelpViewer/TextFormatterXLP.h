@@ -22,14 +22,16 @@
 #ifndef __TEXT_FORMATTER_XLP_H__
 #define __TEXT_FORMATTER_XLP_H__
 
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-#include "TextFormatter.h"
-#include "Section.h"
-#include "BRCell.h"
-#include "FigureCell.h"
-#include "NoteCell.h"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+#import "TextFormatter.h"
+#import "Section.h"
+#import "BRCell.h"
+#import "FigureCell.h"
+#import "NoteCell.h"
 
+
+@class HelpDocument;
 
 #ifdef MACOSX
 #include "Parser.h"
@@ -67,13 +69,16 @@
 	int legendX;
 	int legendY;
 
-	NSBundle* _bundle;
+	HelpDocument *helpDocument;
 }
 - (void) addImage: (NSString*) pathname;
 - (void) addImage: (NSImage*) img onString: (NSMutableAttributedString*) as;
 - (void) addLegendFig: (NSString*) imgpath withLegends: (NSArray*) plegends;
 - (void) addNote: (NSMutableAttributedString*) string withImage: (NSImage*) img withColor: (NSColor*) color;
 - (void) addRuleTo: (NSMutableAttributedString*) string withHeight: (CGFloat) height;
+- (void) setTextView: (NSTextView*) textview;
+- (void) setHelpDocument: (HelpDocument *)hd;
+
 @end
 
 #endif
