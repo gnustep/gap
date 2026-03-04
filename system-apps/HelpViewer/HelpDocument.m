@@ -154,11 +154,6 @@
   return ret;
 }
 
-- (void) setWindow: (id) win
-{
-  window = win;
-}
-
 - (NSBundle *) bundle;
 {
   return _bundle;
