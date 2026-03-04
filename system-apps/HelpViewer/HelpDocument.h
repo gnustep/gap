@@ -46,7 +46,7 @@
 
   //XMLHandler* handler;
   id <HandlerStructure> handler;
-  TextFormatterXLP *textFormatter;
+  TextFormatterXLP *_textFormatter;
   NSBundle *_bundle;
 }
 

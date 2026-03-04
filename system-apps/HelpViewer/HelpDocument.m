@@ -43,7 +43,7 @@
   self = [super init];
   if (self)
     {
-      textFormatter = [[TextFormatterXLP alloc] init];
+      _textFormatter = [[TextFormatterXLP alloc] init];
       handler = nil;
     }
   return self;
@@ -88,8 +88,8 @@
   [tocBrowser setAction: @selector(browserClick:)];
   [tocBrowser setTarget: self];
 
-  [textFormatter setTextView: textView];
-  [textFormatter setHelpDocument: self];
+  [_textFormatter setTextView: textView];
+  [_textFormatter setHelpDocument: self];
 
   // after parse
   [tocBrowser reloadColumn: 0];
@@ -166,7 +166,7 @@
 
 - (TextFormatterXLP *) textFormatter
 {
-  return textFormatter;
+  return _textFormatter;
 }
 
 - (NSInteger)browser:(NSBrowser *)sender numberOfRowsInColumn:(NSInteger)column
@@ -311,7 +311,7 @@
   NSLog (@"=== dealloc HelpDocument ===");
   RELEASE ((NSObject*)handler);
   RELEASE(_bundle);
-  RELEASE(textFormatter);
+  RELEASE(_textFormatter);
   [super dealloc];
 }
 
