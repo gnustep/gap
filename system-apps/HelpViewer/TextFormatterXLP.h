@@ -25,11 +25,11 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "TextFormatter.h"
+#import "HandlerStructure.h"
 #import "Section.h"
 #import "BRCell.h"
 #import "FigureCell.h"
 #import "NoteCell.h"
-
 
 @class HelpDocument;
 
