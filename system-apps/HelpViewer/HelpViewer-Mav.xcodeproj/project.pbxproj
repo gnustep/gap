@@ -63,6 +63,7 @@
 		853D38B52EC7CB8E0057F739 /* part.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 853D38AE2EC7CB8E0057F739 /* part.tiff */; };
 		853D38B82EC7CBA90057F739 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 853D38B62EC7CBA90057F739 /* note.png */; };
 		853D38B92EC7CBA90057F739 /* Point.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 853D38B72EC7CBA90057F739 /* Point.tiff */; };
+		856EC1DC2F5A3E1900F5718B /* HelpViewer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 856EC1DB2F5A3E1900F5718B /* HelpViewer.tiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +125,7 @@
 		853D38AE2EC7CB8E0057F739 /* part.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = part.tiff; path = Resources/part.tiff; sourceTree = "<group>"; };
 		853D38B62EC7CBA90057F739 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = note.png; path = Resources/note.png; sourceTree = "<group>"; };
 		853D38B72EC7CBA90057F739 /* Point.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Point.tiff; path = Resources/Point.tiff; sourceTree = "<group>"; };
+		856EC1DB2F5A3E1900F5718B /* HelpViewer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = HelpViewer.tiff; path = Resources/HelpViewer.tiff; sourceTree = "<group>"; };
 		85EF5A992E2EC5BA0031A53D /* HandlerStructure.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HandlerStructure.h; sourceTree = "<group>"; };
 		85EF5A9A2E2EC5BA0031A53D /* HandlerStructureXLP.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HandlerStructureXLP.h; sourceTree = "<group>"; };
 		85EF5A9B2E2EC5BA0031A53D /* HandlerStructureXLP.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = HandlerStructureXLP.m; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				856EC1DB2F5A3E1900F5718B /* HelpViewer.tiff */,
 				852A6A8F2F511732001D9C6D /* HelpDocument.nib */,
 				852A6A922F51174C001D9C6D /* Icon-hlpd.tiff */,
 				853D38B62EC7CBA90057F739 /* note.png */,
@@ -349,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				853D38B22EC7CB8E0057F739 /* information.png in Resources */,
+				856EC1DC2F5A3E1900F5718B /* HelpViewer.tiff in Resources */,
 				853D38B32EC7CB8E0057F739 /* listing.png in Resources */,
 				853D38AF2EC7CB8E0057F739 /* caution.png in Resources */,
 				853D38B52EC7CB8E0057F739 /* part.tiff in Resources */,
