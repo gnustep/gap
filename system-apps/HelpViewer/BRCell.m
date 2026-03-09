@@ -25,50 +25,49 @@
 
 +(BRCell *) sharedBRCell
 {
-static BRCell *brCell;
-    if (!brCell)
-	brCell = [[self alloc] init];
-    return brCell;
+  static BRCell *brCell;
+
+  if (!brCell)
+    brCell = [[self alloc] init];
+  return brCell;
 }
 
 - (void) drawWithFrame: (NSRect) cellFrame
-    inView: (NSView*) controlView
+                inView: (NSView*) controlView
 {
-      if (![controlView window])
-	            return;
+  if (![controlView window])
+    return;
 
-//      int space = 8;
-
-      [[NSColor colorWithCalibratedRed: 0.37 green: 0.44 blue: 0.73 alpha: 1.0] set];
-//      NSRectFill (NSMakeRect (cellFrame.origin.x + space, cellFrame.origin.y, 
-//		  cellFrame.size.width - 2*space, cellFrame.size.height));
-      NSRectFill (cellFrame);
+  [[NSColor colorWithCalibratedRed: 0.37 green: 0.44 blue: 0.73 alpha: 1.0] set];
+  NSRectFill (cellFrame);
 }
 
 -(NSRect) cellFrameForTextContainer: (NSTextContainer *)c
-    proposedLineFragment: (NSRect)lf
-    glyphPosition: (NSPoint)p
-    characterIndex: (NSUInteger)ci
+               proposedLineFragment: (NSRect)lf
+                      glyphPosition: (NSPoint)p
+                     characterIndex: (NSUInteger)ci
 {
-    NSNumber *width,*height;
-    CGFloat w,h;
-    
-    width=[[[c layoutManager] textStorage] attribute: @"BRCellWidth"
-	atIndex: ci
-	effectiveRange: NULL];
-    height=[[[c layoutManager] textStorage] attribute: @"BRCellHeight"
-	atIndex: ci
-	effectiveRange: NULL];
+  NSNumber *width,*height;
+  CGFloat w,h;
 
-    if (width)
-        w=[width floatValue];
-    else
-	w=lf.size.width;
-    if (height)
-        h=[height floatValue];
-    else
-	h=1.0;
-    return NSMakeRect(0,0,w,h);
+  width=[[[c layoutManager] textStorage] attribute: @"BRCellWidth"
+                                           atIndex: ci
+                                    effectiveRange: NULL];
+  height=[[[c layoutManager] textStorage] attribute: @"BRCellHeight"
+                                            atIndex: ci
+                                     effectiveRange: NULL];
+
+  if (width)
+    w = [width floatValue];
+  else
+    w = lf.size.width;
+
+  if (height)
+    h = [height floatValue];
+  else
+    h = 1.0;
+
+  return NSMakeRect(0,0,w,h);
 }
 
 @end
