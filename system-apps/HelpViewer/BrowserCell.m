@@ -1,7 +1,7 @@
 /*
     This file is part of HelpViewer (http://gap.nongnu.org/helpviewer/)
     Copyright (C) 2003 Nicolas Roard <nicolas@roard.com>
-                  2020-2025 Riccardo Mottola <rm@gnu.org>
+                  2020-2026 Riccardo Mottola <rm@gnu.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -69,34 +69,16 @@
       aSize = [image size];
       NSDivideRect(theFrame, &aFrame, &theFrame, 3 + aSize.width, NSMinXEdge);
 
-      /*
-      if ([self drawsBackground])
-        {
-          [[self backgroundColor] set];
-          NSRectFill(aFrame);
-        }
-	*/
-
       aFrame.size = aSize;
-/*
-      if ( [theView isFlipped] )
-        {
-          aFrame.origin.y -= ceil((theFrame.size.height + aFrame.size.height) / 2);
-        }
-      else
-        {
-          aFrame.origin.y -= ceil((theFrame.size.height - aFrame.size.height) / 2);
-        }
-	*/
 
-     aFrame.origin.y += 16;
+      aFrame.origin.y += 16;
 
       [image compositeToPoint: aFrame.origin
-             operation: NSCompositeSourceOver];
+                    operation: NSCompositeSourceOver];
     }
 
   [super drawWithFrame: theFrame
-         inView: theView];
+                inView: theView];
 }
 
 - (NSSize) cellSize
@@ -110,9 +92,14 @@
 }
 
 
-- (Section*) section { return section; }
-- (void) setSection: (Section*) s {
-	ASSIGN (section,s);
+- (Section*) section
+{
+  return section;
+}
+
+- (void) setSection: (Section*) s
+{
+  ASSIGN (section,s);
 }
 
 @end
