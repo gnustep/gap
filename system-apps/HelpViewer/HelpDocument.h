@@ -34,8 +34,8 @@
 
 @interface HelpDocument : NSDocument
 {
-  id query;
-  id search;
+  IBOutlet NSTextField *queryField;
+  IBOutlet NSButton *findButton;
   id index;
   id back;
   id bookshelf;
@@ -49,11 +49,15 @@
   NSBundle *_bundle;
 }
 
+- (IBAction) find: (id) sender;
+
 - (void) dealloc;
 - (void) browserClick: (id) sender;
 - (void) print: (id) sender;
 - (NSBundle *) bundle;
 - (TextFormatterXLP *) textFormatter;
+
+- (BOOL) findString: (NSString *)findString;
 
 @end;
 

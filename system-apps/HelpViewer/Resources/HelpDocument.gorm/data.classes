@@ -29,6 +29,7 @@
 	    "back:",
 	    "bookshelf:",
 	    "browserClick:",
+	    "find:",
 	    "index:",
 	    "openFile:",
 	    "search:"
@@ -37,26 +38,26 @@
     };
     HelpDocument = {
 	Actions = (
+	    "find:",
 	    "browserClick:",
 	    "print:"
 	);
 	Outlets = (
-	    query,
-	    search,
+	    queryField,
+	    findButton,
 	    index,
 	    back,
 	    bookshelf,
 	    textView,
 	    tocBrowser,
-	    window,
 	    handler,
-	    search,
+	    queryField,
+	    findButton,
 	    index,
 	    back,
 	    bookshelf,
 	    textView,
 	    tocBrowser,
-	    window,
 	    "<HandlerStructure>"
 	);
 	Super = NSDocument;

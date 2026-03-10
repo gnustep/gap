@@ -51,10 +51,10 @@
 
 - (void) initButtons 
 {
-  [search setTitle: _(@"Search")];
-  [search setFont: [NSFont systemFontOfSize: 0]];
-  [search setImagePosition: NSImageAbove];
-  [search setImage: [NSImage imageNamed: @"Search.tiff"]];
+  [findButton setTitle: _(@"Find")];
+  [findButton setFont: [NSFont systemFontOfSize: 0]];
+  [findButton setImagePosition: NSImageAbove];
+  [findButton setImage: [NSImage imageNamed: @"Search.tiff"]];
 
   [index setTitle: _(@"Index")];
   [index setFont: [NSFont systemFontOfSize: 0]];
@@ -102,9 +102,20 @@
   [[NSPrintOperation printOperationWithView: textView] runOperation];
 }
 
-- (void) search: (id) sender
+- (IBAction) find: (id) sender
 {
-  NSLog (@"Search ...");
+  NSString *stringToFind;
+
+  stringToFind = [queryField stringValue];
+  if (stringToFind != nil && [stringToFind length] > 0)
+    {
+      if (![self findString: stringToFind])
+	{
+	  NSBeep();
+	}
+      return;
+    }
+  NSBeep();
 }
 
 - (void) index: (id) sender 
@@ -299,6 +310,39 @@
       [tocBrowser reloadColumn: [tocBrowser lastColumn]];
     }
   //NSLog (@"FIN browserClick");
+}
+
+- (BOOL) findString: (NSString *)findString
+{
+  NSRange range;
+  NSRange selectedRange;
+  NSString *string;
+  NSUInteger options = NSLiteralSearch | NSCaseInsensitiveSearch;
+
+  string = [textView string];
+  selectedRange = [textView selectedRange];
+
+  range = NSMakeRange(NSMaxRange(selectedRange),
+		      [string length] - NSMaxRange(selectedRange));
+  range = [string rangeOfString: findString
+			options: options
+			  range: range];
+  if (range.location == NSNotFound)
+    {
+      range = NSMakeRange (0, selectedRange.location);
+      range = [string rangeOfString: findString
+			    options:options
+			      range: range];
+    }
+
+  if (range.location != NSNotFound) 
+    {
+      [textView setSelectedRange: range];
+      [textView scrollRangeToVisible: range];
+      return YES;
+    }
+
+  return NO;
 }
 		   
 - (void) dealloc
