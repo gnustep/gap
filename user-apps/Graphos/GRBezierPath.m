@@ -2,7 +2,7 @@
  Project: Graphos
  GRBezierPath.m
 
- Copyright (C) 2000-2025 GNUstep Application Project
+ Copyright (C) 2000-2026 GNUstep Application Project
 
  Author: Enrico Sersale (original GDraw implementation)
  Author: Ing. Riccardo Mottola
@@ -783,20 +783,21 @@ static double k = 0.025;
       [pathToDraw stroke];
       [NSGraphicsContext restoreGraphicsState];
     }
-    
-    
-  [bzp setLineWidth:1];
-  if([(GRBezierPathEditor *)editor isGroupSelected])
-    {
-      for(i = 0; i < [controlPoints count]; i++)
-        {
-	  cp = [controlPoints objectAtIndex: i];
-          [cp drawControlAsSelected:YES];
-        }
-    }
-  
+
   if ([[NSGraphicsContext currentContext] isDrawingToScreen])
-    [editor draw];
+    {
+      [bzp setLineWidth:1];
+      if([(GRBezierPathEditor *)editor isGroupSelected])
+        {
+          for(i = 0; i < [controlPoints count]; i++)
+            {
+	      cp = [controlPoints objectAtIndex: i];
+	      [cp drawControlAsSelected:YES];
+	    }
+        }
+
+      [editor draw];
+    }
 }
 
 @end
