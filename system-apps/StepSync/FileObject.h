@@ -25,9 +25,13 @@
 
 #import <Foundation/Foundation.h>
 
-#if !defined (GNUSTEP) &&  (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
-typedef unsigned NSUInteger;
-typedef int NSInteger;
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned int
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
 #endif
 
 @interface FileObject : NSObject
