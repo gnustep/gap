@@ -278,7 +278,7 @@ static ADLocalAddressBook *_localAB = nil;
 
       e = [[group subgroups] objectEnumerator];
       while((subgroup = [e nextObject]))
-	[self removeRecord: record forGroup: group recursive: YES];
+	[self removeRecord: record forGroup: subgroup recursive: YES];
     }
       
   return YES;
