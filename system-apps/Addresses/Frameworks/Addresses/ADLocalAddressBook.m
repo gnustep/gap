@@ -253,7 +253,8 @@ static ADLocalAddressBook *_localAB = nil;
 
   memberIds = [NSMutableArray
 		arrayWithArray: [group valueForProperty: ADMemberIDsProperty]];
-  
+
+  doneAnything = NO;
   for(i = 0; i < [memberIds count]; i++)
     {
       NSString *ruid;
