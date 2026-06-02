@@ -267,7 +267,8 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
   NSEnumerator *e;
   ADAddressBook *book;
 
-  if(!_merge) return [_primary people];
+  if(!_merge)
+    return [_primary people];
 
   arr = [NSMutableArray arrayWithCapacity: 20];
   e = [_books objectEnumerator];
@@ -282,7 +283,8 @@ static ADEnvelopeAddressBook *_envelopeAB = nil;
   NSEnumerator *e;
   ADAddressBook *book;
 
-  if(!_merge) return [_primary groups];
+  if(!_merge)
+    return [_primary groups];
 
   arr = [NSMutableArray arrayWithCapacity: 20];
   e = [_books objectEnumerator];
