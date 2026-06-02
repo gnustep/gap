@@ -466,6 +466,7 @@
   p = [[ADPerson alloc] init];
 
   ok = [_book addRecord: p];
+  [p release];
   if(!ok)
     {
       NSRunAlertPanel(_(@"Couldn't create person"),
@@ -749,13 +750,15 @@
   BOOL ok;
 
   oldPerson = [personView person];
-  if(!oldPerson) return;
+  if(!oldPerson)
+    return;
 
   newPerson = [oldPerson copy];
   [newPerson removeValueForProperty: ADFirstNameProperty];
   [newPerson removeValueForProperty: ADLastNameProperty];
 
   ok = [_book addRecord: newPerson];
+  [newPerson release];
   if(!ok)
     {
       NSRunAlertPanel(_(@"Couldn't create person"),
@@ -1135,6 +1138,8 @@ numberOfRowsInColumn: (NSInteger) column
       if(p)
 	[self selectPerson: p];
     }
+  [guid release];
+  [uid release];
 }
 
 - (void) handleNameChanged: (NSNotification*) note
