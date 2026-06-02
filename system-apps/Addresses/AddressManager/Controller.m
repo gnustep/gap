@@ -81,6 +81,7 @@
 {
   NSString *filename;
 
+  [super awakeFromNib];
   _fm = [NSFileManager defaultManager];
   _book = [ADAddressBook sharedAddressBook];
   _selfChanging = NO;
