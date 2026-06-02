@@ -58,6 +58,7 @@
 	return nil;
       r = [r copy];
       [r setReadOnly];
+      [r autorelease];
 
       return (ADPerson*)r;
     }
@@ -82,6 +83,7 @@
     {
       r = [r copy];
       [r setReadOnly];
+      [r autorelease];
     }
   return r;
 }
