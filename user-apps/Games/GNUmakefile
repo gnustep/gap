@@ -21,6 +21,7 @@ Ladder \
 LapisPuzzle \
 GMastermind \
 GMines \
+Gomoku \
 Jigsaw \
 Sudoku
 
