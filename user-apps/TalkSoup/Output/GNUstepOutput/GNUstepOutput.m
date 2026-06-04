@@ -103,7 +103,7 @@ PreferencesController *_PREFS_ = nil;
 @implementation GNUstepOutput
 - init
 {
-  if (self = [super init])
+  if ((self = [super init]))
     {
 	[NSApplication sharedApplication]; // Make sure NSApp is allocated..
 	
