@@ -43,7 +43,7 @@ extern NSString *IRCDefaultsPassword;
 #endif
 
 /* string to attributed string macros for generic and for static strings (known not to be nil */
-#define S2AS(_x) ( (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
+#define S2AS(_x) ( nil != (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
 #define S2AS_s(_x) ( [[[NSAttributedString alloc] initWithString: (_x)] autorelease] )
 
 // Key
