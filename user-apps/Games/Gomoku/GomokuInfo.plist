@@ -1,0 +1,13 @@
+{
+  ApplicationName = "Gomoku.app";
+  ApplicationDescription = "GNUstep Gomoku Game";
+  ApplicationRelease = "Gomoku 1.2.9";
+  FullVersionID = "1.2.9 - 5 Feb 2009";
+  Authors = ("Nicola Pero <nicola.pero@meta-innovation.com>");
+  Copyright = "Copyright (c) 2000-2009 Nicola Pero <nicola.pero@meta-innovation.com>";
+  CopyrightDescription = "Released under the GNU General Public License 2.0";
+
+  /* For Apple Cocoa.  */
+  CFBundleShortVersionString = "1.2.9 - 5 Feb 2009";
+  NSHumanReadableCopyright = "Copyright (c) 2000-2009 Nicola Pero <nicola.pero@meta-innovation.com>\nReleased under the GNU General Public License 2.0";
+}

@@ -1,0 +1,4 @@
+* Allow the user to change the board size while the application 
+  is running;
+* Provide some winning tile icons (the code already support this);
+* etc.

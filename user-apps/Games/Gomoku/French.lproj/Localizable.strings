@@ -1,0 +1,61 @@
+/* main.m */
+
+"Info" = "Info";
+
+"Info Panel..." = "Panneau d'information...";
+
+"Set Difficulty Level..." = "Niveau de difficulté...";
+
+"Help..." = "Aide...";
+
+"Game" = "Jeu";
+
+"New Game" = "Nouvelle Partie";
+
+"Miniaturize" = "Iconifier";
+
+"Close" = "Fermer";
+
+"Windows" = "Fenêtres";
+
+"Arrange" = "Arranger";
+
+"Hide" = "Masquer";
+
+"Quit" = "Quitter";
+
+
+/* Board.m */
+
+"Quits" = "Egalité";
+
+"Game Over" = "Fin de partie";
+
+"Great! You win!" = "Superbe ! Vous avez gagné !";
+
+"Sorry, you loose." = "Désolé, vous avez perdu.";
+
+"Internal Error: unknown difficultyLevel" = "Erreur Interne: niveau de difficulté inconnu";
+
+"OK" = "OK";
+
+
+/* Controller.m */
+
+"Level 0 (Trivial)" = "Niveau 0 (Trivial)";
+
+"Level 1 (Beginner)" = "Niveau 1 (Débutant)";
+
+"Level 2 (Easy)" = "Niveau 2 (Facile)";
+
+"Level 3 (Medium)" = "Niveau 3 (Moyen)";
+
+"Level 4 (Advanced)" = "Niveau 4 (Avancé)";
+
+"Level 5 (Difficult)" = "Niveau 5 (Difficile)";
+
+"Choose Difficulty Level:" = "Choisissez le niveau de difficulté";
+
+"Difficulty level Panel" = "Niveau de Difficulté";
+
+"Gomoku Game"= "Gomoku";

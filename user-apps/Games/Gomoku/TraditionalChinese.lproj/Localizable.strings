@@ -1,0 +1,61 @@
+/* main.m */
+
+"Info" = "說明";
+
+"Info Panel..." = "說明面版...";
+
+"Set Difficulty Level..." = "設定難易度...";
+
+"Help..." = "求助...";
+
+"Game" = "遊戲";
+
+"New Game" = "新遊戲";
+
+"Miniaturize" = "最小化";
+
+"Close" = "關閉";
+
+"Windows" = "視窗";
+
+"Arrange" = "整理";
+
+"Hide" = "隱藏";
+
+"Quit" = "離開";
+
+
+/* Board.m */
+
+"Quits" = "離開";
+
+"Game Over" = "遊戲結束";
+
+"Great! You win!" = "恭喜! 你贏了.";
+
+"Sorry, you loose." = "很抱歉, 你輸了.";
+
+"Internal Error: unknown difficultyLevel" = "內部錯誤, 未知的難易度";
+
+"OK" = "確定";
+
+
+/* Controller.m */
+
+"Level 0 (Trivial)" = "難度 0 (容易)";
+
+"Level 1 (Beginner)" = "難度 1 (入門)";
+
+"Level 2 (Easy)" = "難度 2 (初級)";
+
+"Level 3 (Medium)" = "難度 3 (中級)";
+
+"Level 4 (Advanced)" = "難度 4 (高級)";
+
+"Level 5 (Difficult)" = "難度 5 (最難)";
+
+"Choose Difficulty Level:" = "選擇難易度:";
+
+"Difficulty level Panel" = "難易度面版";
+
+"Gomoku Game"= "五子棋遊戲";

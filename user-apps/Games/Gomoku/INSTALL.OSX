@@ -1,0 +1,55 @@
+This file explains how to compile Gomoku.app on Apple Mac OS X.
+
+REQUIREMENTS
+============
+
+You need gnustep-make to compile Gomoku.app.  Please get a recent
+stable release of gnustep-make from http://www.gnustep.org.
+
+Download the gnustep-make source code.  Start up a unix terminal
+window.  Go in gnustep-make's directory.  Type
+
+  ./configure --prefix=/Users/xxx/GNUstep --with-config-file=/Users/xxx/GNUstep/GNUstep.conf --with-layout=gnustep
+
+(replace '/Users/xxx' with your own user directory, eg /Users/nicola is my case)
+
+this will install gnustep-make into /Users/xxx/GNUstep, which makes it
+really easy to remove it if you want to uninstall it later.
+
+Then, type
+
+ make
+
+and then type
+
+ make install
+
+gnustep-make will be installed into /Users/xxx/GNUstep.  Whenever you
+want to remove your gnustep-make installation, just remove that
+directory.
+
+To set up your gnustep-make environment ready for compilation, you
+need to type
+
+  . /Users/xxx/GNUstep/System/Makefiles/GNUstep.sh
+
+in your terminal window.  Now you are ready to use gnustep-make in
+that terminal window to compile Gomoku.app.  Please note that every
+time you open up a new terminal window, you need to type this command
+again.
+
+COMPILING
+=========
+
+Once you have these things, to compile simply type:
+
+  make
+
+That should compile the program and put it into a directory called
+'Gomoku.app'.  To start the application, double-click on the
+'Gomoku.app' folder in your Finder.
+
+INSTALLING
+==========
+
+To install, just copy your Gomoku.app folder wherever you like.

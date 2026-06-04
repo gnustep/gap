@@ -1,0 +1,65 @@
+/* - * - *
+ * Hungarian translation by Varga Péter <debbug123@freemail.hu>
+ * - * - */
+
+/* main.m */
+
+"Info" = "Infó";
+
+"Info Panel..." = "Infó Ablak...";
+
+"Set Difficulty Level..." = "Nehézségi Szint...";
+
+"Help..." = "Segítség...";
+
+"Game" = "Játék";
+
+"New Game" = "Új Játék";
+
+"Miniaturize" = "Lekicsinyít";
+
+"Close" = "Bezár";
+
+"Windows" = "Ablakok";
+
+"Arrange" = "Elrendez";
+
+"Hide" = "Elrejt";
+
+"Quit" = "Kilép";
+
+
+/* Board.m */
+
+"Quits" = "Kilép";
+
+"Game Over" = "Game Over";
+
+"Great! You win!" = "Jó volt! Nyertél!";
+
+"Sorry, you loose." = "Bocs de ezt jól elvesztetted.";
+
+"Internal Error: unknown difficultyLevel" = "Internal Error: unknown difficultyLevel";
+
+"OK" = "OK";
+
+
+/* Controller.m */
+
+"Level 0 (Trivial)" = "0-ás szint (Hipsz-hopsz)";
+
+"Level 1 (Beginner)" = "1-es szint (Kezdö)";
+
+"Level 2 (Easy)" = "2-es szint (Könnyü)";
+
+"Level 3 (Medium)" = "3-as szint (Közepes)";
+
+"Level 4 (Advanced)" = "4-es szint (Haladó)";
+
+"Level 5 (Difficult)" = "5-ös szint (Nehéz)";
+
+"Choose Difficulty Level:" = "Válassz nehézségi szintet:";
+
+"Difficulty level Panel" = "Nehézségi-szint Ablak";
+
+"Gomoku Game"= "Gomoku Játék";

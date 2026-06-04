@@ -1,0 +1,60 @@
+This file documents building (and optionally installing) Gomoku.app on
+GNUstep.
+
+REQUIREMENTS
+============
+
+First, make sure you have GNUstep installed.  You need at least:
+
+ gnustep-make
+ gnustep-base
+ gnustep-gui
+ gnustep-back (there are different backends available, make sure you
+have one of them)
+
+installed on your system, with the corresponding development headers.
+
+
+COMPILING
+=========
+
+Once you have these things, to compile simply type:
+
+  make
+
+That should compile the program and put it into a directory called
+'Gomoku.app'.  The standard way of starting the program is then:
+
+  openapp ./Gomoku.app
+
+
+INSTALLING
+==========
+
+Type:
+
+  make install
+
+to install the program.  Once installed, you should be able to run it using
+
+  openapp Gomoku.app
+
+
+TROUBLESHOOTING
+===============
+
+If the program doesn't seem to compile, double-check your gnustep
+installation.  If all seems OK, it may be that you have gnustep, but
+it's not setup properly.
+
+Please refer to the gnustep configuration documentation for help.
+
+If you don't want to bother, a quick way of fixing the problem should
+be to source the GNUstep configuration script.  The script is called
+'GNUstep.sh'.  Find the script on your system (on GNU/Linux normally
+it's in /usr/GNUstep/System/Library/Makefiles/GNUstep.sh or in
+/usr/share/GNUstep/Makefiles/GNUstep.sh), then source it:
+
+. /usr/GNUstep/System/Makefiles/GNUstep.sh
+
+Then, try 'make' again.

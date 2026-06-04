@@ -1,0 +1,61 @@
+/* main.m */
+
+"Info" = "Info";
+
+"Info Panel..." = "Imformations Panel...";
+
+"Set Difficulty Level..." = "Sätt Svårighetsgrad...";
+
+"Help..." = "Hjälp...";
+
+"Game" = "Spel";
+
+"New Game" = "Nytt Parti";
+
+"Miniaturize" = "Miniatyrisera";
+
+"Close" = "Stäng";
+
+"Windows" = "Fönster";
+
+"Arrange" = "Sida vid Sida";
+
+"Hide" = "Göm";
+
+"Quit" = "Stäng";
+
+
+/* Board.m */
+
+"Quits" = "Oavgjort";
+
+"Game Over" = "Spelet slut";
+
+"Great! You win!" = "Utmärkt! Du vann!";
+
+"Sorry, you loose." = "Ledsen, men du förlorade.";
+
+"Internal Error: unknown difficultyLevel" = "Internt fel: okänd svårighetsgrad";
+
+"OK" = "OK";
+
+
+/* Controller.m */
+
+"Level 0 (Trivial)" = "Nivå 0 (Trivial)";
+
+"Level 1 (Beginner)" = "Nivå 1 (Nybörjare)";
+
+"Level 2 (Easy)" = "Nivå 2 (Lätt)";
+
+"Level 3 (Medium)" = "Nivå 3 (Medel)";
+
+"Level 4 (Advanced)" = "Nivå 4 (Avancerad)";
+
+"Level 5 (Difficult)" = "Nivå 5 (Svår)";
+
+"Choose Difficulty Level:" = "Välj Svårighetsgrad";
+
+"Difficulty level Panel" = "Svårighetsgrad";
+
+"Gomoku Game"= "Gomoku Spel";
