@@ -104,12 +104,12 @@
   winFrame.origin = NSMakePoint (100, 100);
 
   // Now we can make the window of the exact size 
-  self = [[isa alloc] initWithContentRect: winFrame
-		     styleMask: (NSTitledWindowMask 
-				 | NSClosableWindowMask 
-				 | NSMiniaturizableWindowMask)
-		      backing: NSBackingStoreBuffered
-		      defer: YES];
+  self = [super initWithContentRect: winFrame
+			 styleMask: (NSTitledWindowMask 
+				     | NSClosableWindowMask 
+				     | NSMiniaturizableWindowMask)
+			   backing: NSBackingStoreBuffered
+			     defer: YES];
   [self setTitle: _(@"Difficulty level Panel")];
   [self setReleasedWhenClosed: NO];
   [self setContentView: box_b];
@@ -141,7 +141,7 @@
 {
   NSMatrix *matrix;
   NSRect winFrame;
-  NSImageCell *cell;
+  NSCell *cell;
   int level;
   
   cell = [[NSCell alloc] init];
@@ -228,4 +228,3 @@
 }
 
 @end
-

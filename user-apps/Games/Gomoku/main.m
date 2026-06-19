@@ -37,7 +37,7 @@ int main (int argc, char **argv)
    NSApplication *app;
    NSMenu *mainMenu;
    NSMenu *menu;
-   NSMenuItem *menuItem;
+   id <NSMenuItem> menuItem;
    Controller *controller;
    int cnt;
 

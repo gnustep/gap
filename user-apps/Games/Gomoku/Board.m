@@ -188,12 +188,9 @@ static const tile computerWonFarPattern[4][6] =
 - (id) copyWithZone: (NSZone*)zone
 {
   int i, j;
-  Board	*c = [isa allocWithZone: zone];
+  Board	*c = [[[self class] allocWithZone: zone] initWithRows: size];
 
   c->difficultyLevel = difficultyLevel;
-
-  c->board = malloc (sizeof(tile *) * size * size);
-  c->boardConstants = malloc (sizeof(int) * size * size);
   
   for (i = 0; i < size; i++)
     for (j = 0; j< size; j++)
@@ -881,5 +878,4 @@ static const tile computerWonFarPattern[4][6] =
 }
 
 @end
-
 
