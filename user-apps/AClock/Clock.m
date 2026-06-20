@@ -27,6 +27,7 @@
 #include <math.h>
 
 #import <AppKit/AppKit.h>
+#import <GNUstepBase/GNUstep.h>
 #import "Clock.h"
 #import "NSColorExtensions.h"
 
@@ -47,11 +48,11 @@ static NSArray *dayWeek;
 	int i;
 	numArray[0] = [NSArray arrayWithObjects:@"XII",@"I",@"II",@"III",@"IV",@"V",@"VI",@"VII",@"VIII",@"IX",@"X",@"XI",nil];
 	numArray[1] = [NSArray arrayWithObjects:@"12",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",nil];
-	[numArray[0] retain];
-	[numArray[1] retain];
+	RETAIN(numArray[0]);
+	RETAIN(numArray[1]);
 
 	dayWeek = [NSArray arrayWithObjects:@"su",@"mo",@"tu",@"we",@"th",@"fr",@"sa", nil];
-	[dayWeek retain];
+	RETAIN(dayWeek);
 
 	defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObject:@"1.0 0 0" forKey:@"SecondHandColor"]];
@@ -71,7 +72,9 @@ static NSArray *dayWeek;
 
 	for (i = 0; i < 20; i++)
 	{
-		cuckoo[19 - i] = [[NSImage imageNamed:[NSString stringWithFormat:@"cuckoo%d.png",i]] retain];
+		NSString *imageName;
+		imageName = [NSString stringWithFormat:@"cuckoo%d.png", i];
+		cuckoo[19 - i] = RETAIN([NSImage imageNamed:imageName]);
 	}
 }
 
@@ -100,13 +103,20 @@ static NSArray *dayWeek;
 
 	radius = radius-base_width;
 
-        [font release];
-	font = [[NSFont boldSystemFontOfSize:radius/5] retain];
+        ASSIGN(font, [NSFont boldSystemFontOfSize:radius/5]);
 
-	[_cacheFrame release];
-	_cacheFrame = nil;
-	[_cacheMark release];
-	_cacheMark = nil;
+	DESTROY(_cacheFrame);
+	DESTROY(_cacheMark);
+}
+
+-(void) _invalidateFrameCache
+{
+	DESTROY(_cacheFrame);
+}
+
+-(void) _invalidateMarkCache
+{
+	DESTROY(_cacheMark);
 }
 
 
@@ -122,17 +132,16 @@ static NSArray *dayWeek;
 
 	if (!(self=[super initWithFrame: frame])) return nil;
 
-	faceColor = [[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FaceColor"]] retain];
-	frameColor =[[NSColor colorFromStringRepresentation:[defaults objectForKey: @"FrameColor"]] retain];
-	marksColor = [[NSColor colorFromStringRepresentation:[defaults objectForKey: @"MarksColor"]] retain];
-	handsColor =[[NSColor colorFromStringRepresentation:[defaults objectForKey: @"HandsColor"]] retain];
-	secHandColor =[[NSColor colorFromStringRepresentation:[defaults objectForKey: @"SecondHandColor"]] retain];
+	faceColor = RETAIN([NSColor colorFromStringRepresentation:[defaults objectForKey: @"FaceColor"]]);
+	frameColor = RETAIN([NSColor colorFromStringRepresentation:[defaults objectForKey: @"FrameColor"]]);
+	marksColor = RETAIN([NSColor colorFromStringRepresentation:[defaults objectForKey: @"MarksColor"]]);
+	handsColor = RETAIN([NSColor colorFromStringRepresentation:[defaults objectForKey: @"HandsColor"]]);
+	secHandColor = RETAIN([NSColor colorFromStringRepresentation:[defaults objectForKey: @"SecondHandColor"]]);
 
-	arcColor =
-		[[NSColor colorWithCalibratedRed: 1.0
+	arcColor = RETAIN([NSColor colorWithCalibratedRed: 1.0
 			green: 0.4
 			blue: 0.4
-			alpha: 1.0] retain];
+			alpha: 1.0]);
 	
 	showsAMPM=[defaults boolForKey:@"ShowsAMPM"];
 	numberType=[defaults integerForKey:@"NumberType"];
@@ -141,7 +150,7 @@ static NSArray *dayWeek;
 /*	easter=[defaults boolForKey:@"EvenIStopTheClockItTellsTheRightTimeTwiceADay"];*/
 	faceTrans = [defaults floatForKey:@"FaceTransparency"];
 
-	_timeZone = [[NSTimeZone systemTimeZone] retain];
+	_timeZone = RETAIN([NSTimeZone systemTimeZone]);
 	_tzv = [_timeZone secondsFromGMT];
 
 	handsTime=0;
@@ -155,11 +164,17 @@ static NSArray *dayWeek;
 
 -(void) dealloc
 {
-  [faceColor release];
-  [frameColor release];
-  [marksColor release];
-  [handsColor release];
-  [arcColor release];
+  RELEASE(faceColor);
+  RELEASE(frameColor);
+  RELEASE(marksColor);
+  RELEASE(handsColor);
+  RELEASE(secHandColor);
+  RELEASE(arcColor);
+  RELEASE(font);
+  RELEASE(_date);
+  RELEASE(_timeZone);
+  RELEASE(_cacheFrame);
+  RELEASE(_cacheMark);
   [super dealloc];
 }
 
@@ -173,10 +188,8 @@ static NSArray *dayWeek;
 {
   if (faceColor != c)
     {
-      [faceColor release];
-      faceColor = [c retain];
-      [_cacheFrame release];
-      _cacheFrame = nil;
+      ASSIGN(faceColor, c);
+      [self _invalidateFrameCache];
       [self setNeedsDisplay:YES];
     }
 }
@@ -188,8 +201,7 @@ static NSArray *dayWeek;
 -(void) setNumberType: (int)i
 {
   numberType = i;
-  [_cacheMark release];
-  _cacheMark = nil;
+  [self _invalidateMarkCache];
   [self setNeedsDisplay:YES];
 }
 
@@ -197,10 +209,8 @@ static NSArray *dayWeek;
 {
   if (marksColor != c)
     {
-      [marksColor release];
-      marksColor = [c retain];
-      [_cacheMark release];
-      _cacheMark = nil;
+      ASSIGN(marksColor, c);
+      [self _invalidateMarkCache];
       [self setNeedsDisplay:YES];
     }
 }
@@ -213,8 +223,7 @@ static NSArray *dayWeek;
 -(void) setFaceTransparency:(float)v
 {
   faceTrans = v;
-  [_cacheFrame release];
-  _cacheFrame = nil;
+  [self _invalidateFrameCache];
   [self setNeedsDisplay:YES];
 }
 
@@ -222,10 +231,8 @@ static NSArray *dayWeek;
 {
   if (frameColor != c)
     {
-      [frameColor release];
-      frameColor = [c retain];
-      [_cacheFrame release];
-      _cacheFrame = nil;
+      ASSIGN(frameColor, c);
+      [self _invalidateFrameCache];
       [self setNeedsDisplay:YES];
     }
 }
@@ -234,10 +241,8 @@ static NSArray *dayWeek;
 {
   if (handsColor != c)
     {
-      [handsColor release];
-      handsColor = [c retain];
-      [_cacheFrame release];
-      _cacheFrame = nil;
+      ASSIGN(handsColor, c);
+      [self _invalidateFrameCache];
       [self setNeedsDisplay:YES];
     }
 }
@@ -245,28 +250,23 @@ static NSArray *dayWeek;
 {
   if (secHandColor != c)
     {
-      [secHandColor release];
-      secHandColor = [c retain];
-      [_cacheFrame release];
-      _cacheFrame = nil;
+      ASSIGN(secHandColor, c);
+      [self _invalidateFrameCache];
       [self setNeedsDisplay:YES];
     }
 }
 -(void) setShowsAMPM:(BOOL)ampm
 {
   showsAMPM = ampm;
-  [_cacheMark release];
-  _cacheMark = nil;
+  [self _invalidateMarkCache];
   [self setNeedsDisplay:YES];
 }
 
 -(void) setShadow:(BOOL)sh
 {
   shadow = sh;
-  [_cacheFrame release];
-  _cacheFrame = nil;
-  [_cacheMark release];
-  _cacheMark = nil;
+  [self _invalidateFrameCache];
+  [self _invalidateMarkCache];
   [self setNeedsDisplay:YES];
 }
 
@@ -319,10 +319,8 @@ static NSArray *dayWeek;
 {
   if (font != newfont)
     {
-      [font release];
-      font = [newfont retain];
-      [_cacheMark release];
-      _cacheMark = nil;
+      ASSIGN(font, newfont);
+      [self _invalidateMarkCache];
       [self setNeedsDisplay:YES];
     }
 }
@@ -456,7 +454,7 @@ static NSArray *dayWeek;
 							value:[NSColor blackColor]
 							range:NSMakeRange(0,[str length])];
 				[str drawAtPoint:NSMakePoint(2, 1)];
-				[str release];
+				RELEASE(str);
 
 				str = [[NSMutableAttributedString alloc]
 					initWithString:[dayWeek objectAtIndex:[_date dayOfWeek]]];
@@ -472,6 +470,7 @@ static NSArray *dayWeek;
 							value:[NSColor blackColor]
 							range:NSMakeRange(0,[str length])];
 				[str drawAtPoint:NSMakePoint(1, NSHeight(_bounds) - strSize.height + 1)];
+				RELEASE(str);
 			}
 
 			/* draw face */
@@ -543,7 +542,7 @@ static NSArray *dayWeek;
 							range:NSMakeRange(0,[str length])];
 				strSize = [str size];
 				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2 +1, center.y - radius * 0.71 + strSize.height/2 -1)];
-				[str release];
+				RELEASE(str);
 			}
 
 
@@ -598,7 +597,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.7 - size.width/2 +1, center.y+y*radius*0.7 - size.height/2 -1)];
-						[str release];
+						RELEASE(str);
 
 					}
 					else if (numberType == 0)
@@ -614,7 +613,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.80 - size.width/2.5 +1, center.y+y*radius*0.80 - size.height/2 -1)];
-						[str release];
+						RELEASE(str);
 					}
 
 				}
@@ -637,7 +636,7 @@ static NSArray *dayWeek;
 							range:NSMakeRange(0,[str length])];
 				strSize = [str size];
 				[str drawAtPoint:NSMakePoint(center.x - strSize.width/2, center.y - radius * 0.71 + strSize.height/2)];
-				[str release];
+				RELEASE(str);
 			}
 
 
@@ -703,7 +702,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.7 - size.width/2, center.y+y*radius*0.7 - size.height/2)];
-						[str release];
+						RELEASE(str);
 
 					}
 					else if (numberType == 0)
@@ -719,7 +718,7 @@ static NSArray *dayWeek;
 									range:NSMakeRange(0,[str length])];
 						size = [str size];
 						[str drawAtPoint:NSMakePoint(center.x+x*radius*0.80 - size.width/2.5, center.y+y*radius*0.80 - size.height/2)];
-						[str release];
+						RELEASE(str);
 					}
 
 				}
@@ -958,8 +957,7 @@ static NSArray *dayWeek;
 {
   if (_timeZone != tz)
     {
-      [_timeZone release];
-	   _timeZone = [tz retain];
+      ASSIGN(_timeZone, tz);
     }
 	_tzv = [tz secondsFromGMT];
 	[self setNeedsDisplay: YES];
@@ -974,13 +972,12 @@ static NSArray *dayWeek;
 {
   if (_date != date)
     {
-      [_date release];
-      _date = [date retain];
+      ASSIGN(_date, date);
     } 
 
 	handsTime = [date timeIntervalSinceReferenceDate] + _tzv;
-	[_cacheFrame release];
-	[_cacheMark release];
+	[self _invalidateFrameCache];
+	[self _invalidateMarkCache];
 
 	/*
 	if (easter)

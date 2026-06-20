@@ -25,6 +25,7 @@
  */
 
 #import <AppKit/AppKit.h>
+#import <GNUstepBase/GNUstep.h>
 #import "AppController.h"
 #import "NSColorExtensions.h"
 
@@ -69,12 +70,17 @@ static int rounds_done = 0;	// how often a sound was played already
 - (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)aBool{
   if (rounds_done < rounds - 1) {
 	rounds_done++;
-	[sound play];
+	if (![sound play]) {
+		keepSoundPlaying = NO;
+		rounds_done=0;
+		rounds=0;
+		RELEASE(sound);
+	}
   } else {
   	keepSoundPlaying = NO;
 	rounds_done=0;
 	rounds=0;
-	[sound release];
+	RELEASE(sound);
   }
 }
 
@@ -94,7 +100,8 @@ static int rounds_done = 0;	// how often a sound was played already
 		rounds=1;
 		rounds_done=0;
 		[ring setDelegate: self];
-		[ring play];
+		if (![ring play])
+			RELEASE(ring);
 	}
 	[defaults setObject:useRing?@"YES":@"NO" forKey:@"Ring"];
 	[defaults synchronize];
@@ -213,7 +220,9 @@ static float volume_append = 1.0;
 		[ring setVolume: volume];
 		rounds=1;
 		rounds_done=0;
-		[ring play];
+		[ring setDelegate: self];
+		if (![ring play])
+			RELEASE(ring);
 		extracount--;
 		volume += volume_append;
 		if (volume > 1.0) volume = 1.0;
@@ -318,14 +327,14 @@ static float volume_append = 1.0;
 		action: @selector(openPreferences:)
 		keyEquivalent: nil];
 	[menu setSubmenu: m forItem: [menu addItemWithTitle: _(@"Info") action:NULL keyEquivalent:nil]];
-	[m release];
+	RELEASE(m);
 
 	[menu addItemWithTitle: _(@"Quit")
 		action: @selector(terminate:)
 		keyEquivalent: @"q"];
 
 	[NSApp setMainMenu: menu];
-	[menu release];
+	RELEASE(menu);
 
 	[[NSUserDefaults standardUserDefaults]
 	    registerDefaults:[NSDictionary dictionaryWithObject:@"NO" forKey:@"Cuckoo"]];
@@ -345,10 +354,11 @@ static float volume_append = 1.0;
 	faceImageView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, width, height)];
 	[faceImageView setImage: faceImage];
 	[[win contentView] addSubview:faceImageView];
-	[faceImageView release];
+	RELEASE(faceImageView);
 
 	_clock = [[Clock alloc] initWithFrame: NSMakeRect(0, 0, width, height)];
 	[[win contentView] addSubview:_clock];
+	RELEASE(_clock);
 
 	[_clock setTarget:self];
 	[_clock setAction:@selector(clockUpdate:)];
@@ -430,12 +440,19 @@ NSTimer *ctimer;
 		keepSoundPlaying = YES;
 		[cuckoo setDelegate:self];
 		
-		[cuckoo play];
-		inv = [NSInvocation invocationWithMethodSignature:
+		if ([cuckoo play])
+		{
+			inv = [NSInvocation invocationWithMethodSignature:
 						 [self methodSignatureForSelector:@selector(cuckoo)]];
-		[inv setSelector:@selector(cuckoo)];
-		[inv setTarget:self];
-		ctimer=[NSTimer scheduledTimerWithTimeInterval:0.05 invocation:inv repeats:YES];
+			[inv setSelector:@selector(cuckoo)];
+			[inv setTarget:self];
+			ctimer=[NSTimer scheduledTimerWithTimeInterval:0.05 invocation:inv repeats:YES];
+		}
+		else
+		{
+			RELEASE(cuckoo);
+			cstate = -1;
+		}
 
 	}
 
