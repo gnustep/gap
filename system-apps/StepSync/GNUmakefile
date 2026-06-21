@@ -25,7 +25,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 1.1
 PACKAGE_NAME = StepSync
 APP_NAME = StepSync
-StepSync_APPLICATION_ICON = 
+StepSync_APPLICATION_ICON = StepSync.tiff
 
 
 #
@@ -33,6 +33,8 @@ StepSync_APPLICATION_ICON =
 #
 StepSync_RESOURCE_FILES = \
 Resources/MainMenu.gorm \
+Resources/StepSync.tiff \
+Resources/StepSync.svg \
 Resources/StepSync.help 
 
 

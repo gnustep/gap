@@ -1,5 +1,6 @@
 {
     ApplicationDescription = "File Synchronizer";
+    ApplicationIcon = "StepSync.tiff";
     ApplicationName = StepSync;
     ApplicationRelease = "1.1";
     Authors = (
@@ -11,6 +12,7 @@
     FullVersionID = "1.1";
     GSHelpContentsFile = "StepSync.help";
     NSExecutable = StepSync;
+    NSIcon = "StepSync.tiff";
     NSMainNibFile = "MainMenu.gorm";
     NSPrincipalClass = NSApplication;
     NSRole = Application;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect x="18" y="18" width="476" height="476" rx="92" fill="#e9f1f6"/>
+  <path d="M106 433c81 31 258 27 318-14 18-12 12-34-14-34H110c-37 0-44 32-4 48z" fill="#bccad3"/>
+
+  <g fill="none" stroke="#79a9b8" stroke-width="8" stroke-linecap="round">
+    <circle cx="371" cy="170" r="62"/>
+    <path d="M309 170h124"/>
+    <path d="M371 108c-21 29-21 95 0 124"/>
+    <path d="M371 108c21 29 21 95 0 124"/>
+  </g>
+
+  <path d="M92 192h92l31 36h75c18 0 31 14 29 32l-15 136c-2 18-17 32-35 32H102c-19 0-35-15-36-34L56 231c-1-22 14-39 36-39z" fill="#126fb1"/>
+  <path d="M84 171h91c11 0 21 5 28 14l24 31h83c14 0 27 11 29 25l2 22H65l-4-47c-2-25 9-45 23-45z" fill="#39aee5"/>
+  <path d="M85 241h234l-17 151c-2 17-16 30-33 30H101c-17 0-31-13-32-30L59 250c4-6 13-9 26-9z" fill="#0d5994"/>
+  <path d="M87 196h88c12 0 23 6 30 15l19 25h82" fill="none" stroke="#9ce4ff" stroke-width="10" stroke-linecap="round"/>
+
+  <path d="M330 108h80c19 0 35 16 35 35v248c0 19-16 35-35 35h-80c-19 0-35-16-35-35V143c0-19 16-35 35-35z" fill="#b9c5ce"/>
+  <path d="M410 108h8c19 0 35 16 35 35v248c0 19-16 35-35 35h-8z" fill="#6e7e89"/>
+  <rect x="319" y="138" width="87" height="46" rx="11" fill="#eff5f8"/>
+  <rect x="319" y="207" width="87" height="46" rx="11" fill="#eff5f8"/>
+  <rect x="319" y="276" width="87" height="46" rx="11" fill="#eff5f8"/>
+  <rect x="319" y="345" width="87" height="46" rx="11" fill="#eff5f8"/>
+  <circle cx="431" cy="158" r="7" fill="#ffbf36"/>
+  <circle cx="431" cy="227" r="7" fill="#45d987"/>
+  <circle cx="431" cy="296" r="7" fill="#45d987"/>
+  <path d="M338 162h45M338 231h45M338 300h45M338 369h45" stroke="#5b6b76" stroke-width="8" stroke-linecap="round"/>
+
+  <path d="M176 182h132v-36l70 69-70 69v-36H176z" fill="#13a79f"/>
+  <path d="M337 339H205v36l-70-69 70-69v36h132z" fill="#ef9a2a"/>
+  <path d="M184 191h112" stroke="#b9fff9" stroke-width="8" stroke-linecap="round"/>
+  <path d="M329 330H217" stroke="#ffe6ad" stroke-width="8" stroke-linecap="round"/>
+</svg>
