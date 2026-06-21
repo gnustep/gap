@@ -30,14 +30,15 @@ NAME=PictureFrame
 APP_NAME=$(NAME)
 SUBPROJECTS = SimpleWeather
 
-#$(NAME)_APPLICATION_ICON=icon.tiff
+$(NAME)_APPLICATION_ICON=PictureFrame.tiff
 $(NAME)_MAIN_MODEL_FILE=MainMenu.gorm
 
 $(NAME)_LOCALIZED_RESOURCE_FILES=
 
 $(NAME)_LANGUAGES= English 
 
-$(NAME)_RESOURCE_FILES= English.lproj/MainMenu.gorm \
+$(NAME)_RESOURCE_FILES= PictureFrame.tiff \
+	English.lproj/MainMenu.gorm \
 	English.lproj/Preferences.gorm \
 	SimpleWeather/SimpleWeather.bundle
 
