@@ -25,6 +25,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <stdint.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef MMAP
@@ -43,7 +44,7 @@ unsigned long dbyte;
 
 unsigned char Dnamet[10][100],XJDXnamet[10][100];
 unsigned char *dicbufft[10],dntemp[100];
-unsigned long *jdxbufft[10];
+uint32_t *jdxbufft[10];
 unsigned long dichits[10],dicmiss[10];
 unsigned long indhits[10],indmiss[10];
 unsigned long vbkills=0;
@@ -128,14 +129,14 @@ dbck++; */
 unsigned long jindex(unsigned long it)
 {
 	int vbo, vbl,ibuff;
-	long *myp;
+	uint32_t *myp;
 	long it2;
 	extern int DicNum;
 
 /* indordic=1; */
-	it2 = it*sizeof(long);
+	it2 = it*sizeof(uint32_t);
 	vbo = it2/VBUFFSIZE;   /*page number*/
-	vbl = (it2 % VBUFFSIZE) / sizeof(long); /*offset within page  */
+	vbl = (it2 % VBUFFSIZE) / sizeof(uint32_t); /*offset within page  */
 /* printf("jindex - DN: %d it: %ld vbo: %d vbl: %d\n",it,DicNum,vbo,vbl); */
 
 	if (joffp[DicNum][vbo] == -1)
@@ -232,7 +233,7 @@ void DicSet()
 /*====DicTest check Dictionary and index files=======*/
 void DicTest(int dn)
 {
-	long testwd[1];
+	uint32_t testwd[1];
 	int diclenx;
 
 	extern int jiver;
@@ -247,7 +248,7 @@ void DicTest(int dn)
   	diclenx++;
   	fclose(fpd);
   	fpd = xfopen(XJDXnamet[dn],"rb", &xfilelen);
-	fread(&testwd[0],sizeof(long),1,fpd);
+	fread(&testwd[0],sizeof(uint32_t),1,fpd);
 	if (testwd[0] != (diclenx+jiver))
 	{
 		printf ("The %s dictionary and index files do not match! \n",Dnamet[dn]);
@@ -289,16 +290,16 @@ void DicLoad(int dn)
   	dbyte = diclent[dn];
   	fpd = xfopen(XJDXnamet[dn],"rb", &xfilelen);
         indlent[dn] = xfilelen;
-        jdxbufft[dn] = (unsigned long *)malloc((indlent[dn]+1024) * sizeof(unsigned char));
+        jdxbufft[dn] = (uint32_t *)malloc((indlent[dn]+1024) * sizeof(unsigned char));
         if(jdxbufft[dn] == NULL)
         {
                 fprintf(stderr,"malloc() for index failed.\n");
                 fclose(fpd);
         exit(1);
         }
-	indptrt[dn] = indlent[dn]/sizeof(long)-1;
+	indptrt[dn] = indlent[dn]/sizeof(uint32_t)-1;
         nodread = indlent[dn]/1024+1;
-	fread((long *)jdxbufft[dn],1024,nodread,fpd);
+	fread((uint32_t *)jdxbufft[dn],1024,nodread,fpd);
 	if (jdxbufft[dn][0] != (diclent[dn]+jiver))
 	{
 		printf ("The dictionary and index files do not match! \n");
@@ -334,7 +335,7 @@ void DicLoad(int dn)
 
   	fpi[dn] = xfopen(XJDXnamet[dn],"rb", &xfilelen);
         indlent[dn] = xfilelen;
-	indptrt[dn] = indlent[dn]/sizeof(long)-1;
+	indptrt[dn] = indlent[dn]/sizeof(uint32_t)-1;
 	len = (indlent[dn]/VBUFFSIZE)+1;
         joffp[dn] = (int *)malloc(len * sizeof(int));
         if(joffp[dn] == NULL)
@@ -366,8 +367,8 @@ void DicLoad(int dn)
   	diclent[dn]++;
   	fdi[dn] = xopen(XJDXnamet[dn],&xfilelen);
         indlent[dn] = xfilelen;
-	indptrt[dn] = indlent[dn]/sizeof(long)-1;
-	if ((jdxbufft[dn] = (long *) mmap(0, xfilelen, PROT_READ, MAP_FILE | MAP_SHARED, fdi[dn],0)) == MAP_FAILED)
+	indptrt[dn] = indlent[dn]/sizeof(uint32_t)-1;
+	if ((jdxbufft[dn] = (uint32_t *) mmap(0, xfilelen, PROT_READ, MAP_FILE | MAP_SHARED, fdi[dn],0)) == MAP_FAILED)
 	{
 		printf ("Unable to map %s.xjdx! [%s]\n",DicName(dn),strerror(errno));
 		exit(1);

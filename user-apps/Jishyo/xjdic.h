@@ -71,11 +71,11 @@ typedef struct {
 
 /* STUFF I'VE ADDED FROM xjdserver.c */
 
-long it;
-unsigned char ENVname[50];
-unsigned char cl_rcfile[100];
-int DicNum;
-char DicDir[100];
+extern long it;
+extern unsigned char ENVname[50];
+extern unsigned char cl_rcfile[100];
+extern int DicNum;
+extern char DicDir[100];
 
 /* OTHER STUFF I ADDED */
 
@@ -86,4 +86,6 @@ unsigned char *sch_str, int *sch_resp, long *res_index, int *hit_posn,
 int *res_len, unsigned char *res_str, long *dic_loc );
 
 int slencal (int noch, unsigned char *targ);
-
+unsigned long jindex(unsigned long xit);
+unsigned char dbchar(unsigned long xit);
+int Kstrcmp(int klen, unsigned char *str1);

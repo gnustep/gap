@@ -32,11 +32,8 @@
 #include <signal.h>
 #include "xjdic.h"
 
-unsigned char Dnamet[10][100],XJDXnamet[10][100];
 unsigned char CBname[100];
-unsigned char *dicbufft[10];
-unsigned long diclent[10], indlent[10],indptrt[10];
-int NoDics,CurrDic;
+extern unsigned long indptrt[10];
 int iterlimit;
 
 extern int TRIGGER; 
