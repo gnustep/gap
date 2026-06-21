@@ -42,6 +42,24 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #optional file to include your setup
 -include bundle_config.make
 
+pkg_config_package_exists = $(shell pkg-config --exists $(1) >/dev/null 2>&1 && echo yes)
+
+ifneq (mingw32,$(GNUSTEP_TARGET_OS))
+HAVE_AUDIOFILE = $(call pkg_config_package_exists,audiofile)
+HAVE_ALSA = $(call pkg_config_package_exists,alsa)
+HAVE_AO = $(if $(wildcard /usr/include/ao/ao.h /usr/local/include/ao/ao.h),yes)
+HAVE_AVIFILE = $(if $(wildcard /usr/include/avifile.h /usr/local/include/avifile.h),yes)
+HAVE_ESD = $(if $(wildcard /usr/include/esd.h /usr/local/include/esd.h),yes)
+HAVE_FLAC = $(if $(wildcard /usr/include/FLAC/all.h /usr/local/include/FLAC/all.h),yes)
+HAVE_ID3TAG = $(call pkg_config_package_exists,id3tag)
+HAVE_MAD = $(call pkg_config_package_exists,mad)
+HAVE_MODPLUG = $(if $(wildcard /usr/include/modplug.h /usr/include/libmodplug/modplug.h /usr/local/include/modplug.h /usr/local/include/libmodplug/modplug.h),yes)
+HAVE_MUSEPACK = $(if $(wildcard /usr/include/mpcdec/mpcdec.h /usr/include/mpc/mpcdec.h /usr/local/include/mpcdec/mpcdec.h /usr/local/include/mpc/mpcdec.h),yes)
+HAVE_OSS = $(if $(wildcard /usr/include/soundcard.h /usr/include/sys/soundcard.h /usr/local/include/soundcard.h /usr/local/include/sys/soundcard.h),yes)
+HAVE_TAGLIB = $(call pkg_config_package_exists,taglib_c)
+HAVE_VORBIS = $(call pkg_config_package_exists,vorbisfile)
+endif
+
 FRAMEWORKS_DIRS = Frameworks/Cynthiune
 FRAMEWORKS = Cynthiune
 
@@ -53,53 +71,99 @@ BUNDLES =
 
 ifneq (yes,$(disable-bundles))
 ifneq (yes,$(disable-mp3))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += MP3
+else ifeq (yes,$(HAVE_MAD))
+ifeq (yes,$(HAVE_ID3TAG))
+BUNDLES += MP3
+endif
+endif
 
 ifneq (yes,$(disable-id3tag))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += ID3Tag
+else ifeq (yes,$(HAVE_ID3TAG))
+BUNDLES += ID3Tag
+endif
 endif
 
 endif
 
 ifneq (yes,$(disable-ogg))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += Ogg
+else ifeq (yes,$(HAVE_VORBIS))
+BUNDLES += Ogg
+endif
 
 ifneq (yes,$(disable-vorbistags))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += VorbisTags
+else ifeq (yes,$(HAVE_VORBIS))
+BUNDLES += VorbisTags
+endif
 endif
 
 endif
 
 ifneq (yes,$(disable-audiofile))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += AudioFile
+else ifeq (yes,$(HAVE_AUDIOFILE))
+BUNDLES += AudioFile
+endif
 endif
 
 ifneq (yes,$(disable-flac))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += FLAC
+else ifeq (yes,$(HAVE_FLAC))
+BUNDLES += FLAC
+endif
 
 ifneq (yes,$(disable-flactags))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += FLACTags
+else ifeq (yes,$(HAVE_FLAC))
+BUNDLES += FLACTags
+endif
 endif
 
 endif
 
 ifneq (yes,$(disable-mod))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += Mod ModTags
+else ifeq (yes,$(HAVE_MODPLUG))
+BUNDLES += Mod ModTags
+endif
 endif
 
 ifneq (yes,$(disable-windowsmedia))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += WindowsMedia
+else ifeq (yes,$(HAVE_AVIFILE))
+BUNDLES += WindowsMedia
+endif
 endif
 
 ifneq (yes,$(disable-musepack))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += Musepack
+else ifeq (yes,$(HAVE_MUSEPACK))
+BUNDLES += Musepack
+endif
 endif
 
 ifneq (yes,$(disable-timidity))
 BUNDLES += Timidity
 endif
 ifneq (yes,$(disable-taglib))
+ifeq (mingw32,$(GNUSTEP_TARGET_OS))
 BUNDLES += Taglib
+else ifeq (yes,$(HAVE_TAGLIB))
+BUNDLES += Taglib
+endif
 endif
 
 ifneq (yes,$(disable-asftags))
@@ -119,15 +183,19 @@ else
 ifneq (,$(findstring linux-gnu,$(GNUSTEP_TARGET_OS)))
 
 ifneq (yes,$(disable-alsa))
+ifeq (yes,$(HAVE_ALSA))
 BUNDLES += ALSA
 disable-esound=yes
 disable-ao=yes
+endif
 endif
 
 endif
 
 ifneq (yes,$(disable-oss))
+ifeq (yes,$(HAVE_OSS))
 BUNDLES += OSS
+endif
 endif
 
 # sndio is OpenBSD only
@@ -138,11 +206,15 @@ endif
 endif
 
 ifneq (yes,$(disable-esound))
+ifeq (yes,$(HAVE_ESD))
 BUNDLES += Esound
+endif
 endif
 
 ifneq (yes,$(disable-ao))
+ifeq (yes,$(HAVE_AO))
 BUNDLES += AO
+endif
 endif
 
 # disable arts by default, rarely used
@@ -324,4 +396,3 @@ include frameworks.make
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 include $(GNUSTEP_MAKEFILES)/application.make
 -include GNUmakefile.postamble
-
