@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="panel" x1="24" y1="12" x2="104" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#44546a"/>
+      <stop offset="1" stop-color="#202633"/>
+    </linearGradient>
+    <linearGradient id="slot" x1="0" y1="26" x2="0" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#3a4352"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="36" y1="36" x2="92" y2="92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#52d273"/>
+      <stop offset="1" stop-color="#159a62"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="10" width="104" height="108" rx="14" fill="url(#panel)"/>
+  <rect x="17" y="15" width="94" height="98" rx="10" fill="none" stroke="#6f7f91" stroke-opacity=".55" stroke-width="2"/>
+  <rect x="30" y="28" width="8" height="74" rx="4" fill="url(#slot)"/>
+  <rect x="60" y="28" width="8" height="74" rx="4" fill="url(#slot)"/>
+  <rect x="90" y="28" width="8" height="74" rx="4" fill="url(#slot)"/>
+  <rect x="24" y="58" width="20" height="16" rx="4" fill="url(#accent)" stroke="#d9ffe2" stroke-opacity=".55" stroke-width="2"/>
+  <rect x="54" y="36" width="20" height="16" rx="4" fill="#f0bf45" stroke="#fff0bc" stroke-opacity=".6" stroke-width="2"/>
+  <rect x="84" y="75" width="20" height="16" rx="4" fill="#59a9ff" stroke="#d7ebff" stroke-opacity=".6" stroke-width="2"/>
+  <circle cx="34" cy="105" r="5" fill="#52d273"/>
+  <circle cx="64" cy="105" r="5" fill="#f0bf45"/>
+  <circle cx="94" cy="105" r="5" fill="#59a9ff"/>
+</svg>

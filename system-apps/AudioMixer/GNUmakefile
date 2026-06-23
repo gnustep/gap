@@ -16,7 +16,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.1
 PACKAGE_NAME = AudioMixer
 APP_NAME = AudioMixer
-AudioMixer_APPLICATION_ICON = 
+AudioMixer_APPLICATION_ICON = AudioMixer.xpm
 
 
 #
@@ -24,6 +24,8 @@ AudioMixer_APPLICATION_ICON =
 #
 AudioMixer_RESOURCE_FILES = \
 Resources/AudioMixer.gorm \
+Resources/AudioMixer.xpm \
+Resources/AudioMixer.svg \
 
 
 #
