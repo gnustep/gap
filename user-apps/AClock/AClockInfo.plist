@@ -1,6 +1,6 @@
 {
     ApplicationDescription = "Analog Clock";
-    ApplicationIcon = "AClock.tiff";
+    ApplicationIcon = "AClockIcon.tiff";
     ApplicationName = AClock;
     ApplicationRelease = "0.5.0";
     Authors = (
@@ -14,7 +14,7 @@
     CopyrightDescription = "Released under GPL v2+";
     FullVersionID = "0.5.0";
     NSExecutable = AClock;
-    NSIcon = "AClock.tiff";
+    NSIcon = "AClockIcon.tiff";
     NSMainNibFile = "AClock.gorm";
     NSPrincipalClass = NSApplication;
     NSRole = Application;

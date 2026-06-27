@@ -25,7 +25,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.5.0
 PACKAGE_NAME = AClock
 APP_NAME = AClock
-AClock_APPLICATION_ICON = AClock.tiff
+AClock_APPLICATION_ICON = AClockIcon.tiff
 
 
 #
@@ -34,6 +34,8 @@ AClock_APPLICATION_ICON = AClock.tiff
 AClock_RESOURCE_FILES = \
 Resources/AClock.gorm \
 Resources/AClock.tiff \
+Resources/AClockIcon.svg \
+Resources/AClockIcon.tiff \
 Resources/clock.png \
 Resources/cuckoo0.png \
 Resources/cuckoo1.png \
