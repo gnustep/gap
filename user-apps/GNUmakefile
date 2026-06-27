@@ -25,9 +25,9 @@ LaternaMagica \
 PictureFrame \
 RemoteDesk \
 Stepulator \
-TalkSoup
+TalkSoup \
+Vespucci
 
-#Vespucci
 #
 # Makefiles
 #
