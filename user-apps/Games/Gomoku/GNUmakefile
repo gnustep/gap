@@ -29,6 +29,7 @@ PACKAGE_NAME = Gomoku
 PACKAGE_VERSION = 1.2.9
 
 APP_NAME = Gomoku
+Gomoku_APPLICATION_ICON = GomokuIcon.png
 Gomoku_OBJC_FILES = \
   Board.m \
   Controller.m \
@@ -64,7 +65,8 @@ Gomoku_RESOURCE_FILES = \
   HumanTopRight.png \
   HumanBottomLeft.png \
   HumanBottomRight.png \
-  Gomoku.png
+  Gomoku.png \
+  GomokuIcon.png
 
 Gomoku_LANGUAGES = \
   English \
