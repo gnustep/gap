@@ -1,3 +1,18 @@
+#
+# GNUstep build file for NeXTspim.
+#
+# Build with:
+#   make -f GNUmakefile
+#
+
+ifeq ($(GNUSTEP_MAKEFILES),)
+GNUSTEP_MAKEFILES := $(shell gnustep-config --variable=GNUSTEP_MAKEFILES 2>/dev/null)
+endif
+
+ifeq ($(GNUSTEP_MAKEFILES),)
+$(error GNUstep makefiles were not found. Install gnustep-make and ensure gnustep-config is in PATH)
+endif
+
 include $(GNUSTEP_MAKEFILES)/common.make
 
 APP_NAME = NeXTspim
@@ -29,40 +44,23 @@ NeXTspim_C_FILES = \
 	y.tab.c
 
 NeXTspim_RESOURCE_FILES = \
+	Info-gnustep.plist \
+	NeXTspim.desktop \
 	trap.handler \
 	spim.tiff \
-	Documentation
+	Documentation/NeXTspim.rtf \
+	Documentation/spim.ps \
+	Documentation/cycle.ps
 
 NeXTspim_APPLICATION_ICON = spim.tiff
 
-NeXTspim_CPPFLAGS = -D_DARWIN_C_SOURCE -D_DEFAULT_SOURCE
-NeXTspim_CFLAGS = \
-	-Wall \
-	-Wno-parentheses \
-	-Wno-format \
-	-Wno-pointer-sign \
-	-Wno-unused-variable \
-	-Wno-unused-function \
-	-Wno-implicit-function-declaration \
-	-Wno-int-conversion \
-	-fcommon \
-	-std=gnu89
-
-NeXTspim_OBJCFLAGS = \
-	-Wall \
-	-Wno-parentheses \
-	-Wno-format \
-	-Wno-pointer-sign \
-	-Wno-unused-variable \
-	-Wno-unused-function \
-	-Wno-implicit-function-declaration \
-	-Wno-int-conversion \
-	-fcommon \
-	-fobjc-exceptions
+ADDITIONAL_CPPFLAGS += -D_DEFAULT_SOURCE
+ADDITIONAL_CFLAGS += -Wall -Wno-parentheses -Wno-format -Wno-pointer-sign \
+	-Wno-unused-variable -Wno-unused-function -Wno-implicit-function-declaration \
+	-Wno-int-conversion -fcommon -std=gnu89
+ADDITIONAL_OBJCFLAGS += -Wall -Wno-parentheses -Wno-format -Wno-pointer-sign \
+	-Wno-unused-variable -Wno-unused-function -Wno-implicit-function-declaration \
+	-Wno-int-conversion -fcommon -fobjc-exceptions
+ADDITIONAL_LDFLAGS += -pthread
 
 include $(GNUSTEP_MAKEFILES)/application.make
-
-.PHONY: run
-
-run: all
-	./NeXTspim.app/NeXTspim
