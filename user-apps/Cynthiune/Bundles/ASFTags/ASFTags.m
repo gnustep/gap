@@ -66,13 +66,13 @@ convertGUID (const unsigned char GUID[])
   char *cGUID;
 
   cGUID = malloc (37);
-  sprintf (cGUID, "%.8lX-%.4X-%.4X-%.2X%.2X-%.2X%.2X%.2X%.2X%.2X%.2X",
-           *((unsigned long *) GUID), *((unsigned short *) GUID + 2),
-           *((unsigned short *) GUID + 3), *((unsigned char *) GUID + 8),
-           *((unsigned char *) GUID + 9), *((unsigned char *) GUID + 10),
-           *((unsigned char *) GUID + 11), *((unsigned char *) GUID + 12),
-           *((unsigned char *) GUID + 13), *((unsigned char *) GUID + 14),
-           *((unsigned char *) GUID + 15));
+  sprintf (cGUID, "%.8x-%.4x-%.4x-%.2x%.2x-%.2x%.2x%.2x%.2x%.2x%.2x",
+           *((uint32_t *) GUID), *((uint16_t *) GUID + 4),
+           *((uint16_t *) GUID + 6), *((uint8_t *) GUID + 8),
+           *((uint8_t *) GUID + 9), *((uint8_t *) GUID + 10),
+           *((uint8_t *) GUID + 11), *((uint8_t *) GUID + 12),
+           *((uint8_t *) GUID + 13), *((uint8_t *) GUID + 14),
+           *((uint8_t *) GUID + 15));
 
   return cGUID;
 }
