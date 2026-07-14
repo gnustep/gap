@@ -25,8 +25,11 @@
 # audiofile-config and give priority to it if exists
 #AUDIOFILE_CFLAGS := $(shell audiofile-config --cflags)
 #AUDIOFILE_LIBS := $(shell audiofile-config --libs)
-AUDIOFILE_CFLAGS := $(shell pkg-config --cflags audiofile)
-AUDIOFILE_LIBS := $(shell pkg-config --libs audiofile)
+
+PKG_CONFIG ?= pkg-config
+
+AUDIOFILE_CFLAGS := $(shell $(PKG_CONFIG) --cflags audiofile)
+AUDIOFILE_LIBS := $(shell $(PKG_CONFIG) --libs audiofile)
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(AUDIOFILE_CFLAGS)
 

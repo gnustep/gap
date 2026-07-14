@@ -19,8 +19,10 @@
 # the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-ALSA_CFLAGS := $(shell pkg-config --cflags alsa)
-ALSA_LIBS := $(shell pkg-config --libs alsa)
+PKG_CONFIG ?= pkg-config
+
+ALSA_CFLAGS := $(shell $(PKG_CONFIG) --cflags alsa)
+ALSA_LIBS := $(shell $(PKG_CONFIG) --libs alsa)
 
 ADDITIONAL_INCLUDE_DIRS += $(ALSA_CFLAGS)
 BUNDLE_LIBS += $(ALSA_LIBS)

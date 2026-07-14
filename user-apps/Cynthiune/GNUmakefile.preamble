@@ -28,8 +28,8 @@ ADDITIONAL_CPPFLAGS += -DLOCALBUILD=1
 endif
 
 ifneq (yes,$(disable-musicbrainz))
-_have_musicbrainz5 := $(shell pkg-config --exists libmusicbrainz5 && echo yes)
-_have_musicbrainz3 := $(shell pkg-config --exists libmusicbrainz3 && echo yes)
+_have_musicbrainz5 := $(shell $(PKG_CONFIG) --exists libmusicbrainz5 && echo yes)
+_have_musicbrainz3 := $(shell $(PKG_CONFIG) --exists libmusicbrainz3 && echo yes)
 
 ifeq ($(_have_musicbrainz5), yes)
 ADDITIONAL_CPPFLAGS += -DHAVE_MUSICBRAINZ -DMUSICBRAINZ_5
@@ -48,5 +48,5 @@ endif
 
 ifeq ($(enable-goom), yes)
 ADDITIONAL_CPPFLAGS += -DGOOM=1
-ADDITIONAL_GUI_LIBS += $(shell pkg-config --libs libgoom2)
+ADDITIONAL_GUI_LIBS += $(shell $(PKG_CONFIG)  --libs libgoom2)
 endif

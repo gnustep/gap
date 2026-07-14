@@ -19,14 +19,16 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+PKG_CONFIG ?= pkg-config
+
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 ID3Tag_CFLAGS := -I/MinGW/include
 ID3Tag_LIBS := -lid3tag -lz
 
 BUNDLE_LIBS += $(ID3Tag_LIBS) -L../../Frameworks/Cynthiune/obj
 else
-ID3Tag_CFLAGS := $(shell pkg-config id3tag --cflags)
-ID3Tag_LIBS := $(shell pkg-config id3tag --libs)
+ID3Tag_CFLAGS := $(shell $(PKG_CONFIG) id3tag --cflags)
+ID3Tag_LIBS := $(shell $(PKG_CONFIG) id3tag --libs)
 
 BUNDLE_LIBS += $(ID3Tag_LIBS)
 endif

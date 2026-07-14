@@ -20,6 +20,8 @@
 # Boston, MA 02111-1307, USA.
 #
 
+PKG_CONFIG ?= pkg-config
+
 ifeq ($(GNUSTEP_MAKEFILES),)
  GNUSTEP_MAKEFILES := $(shell gnustep-config --variable=GNUSTEP_MAKEFILES 2>/dev/null)
   ifeq ($(GNUSTEP_MAKEFILES),)
@@ -42,7 +44,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 #optional file to include your setup
 -include bundle_config.make
 
-pkg_config_package_exists = $(shell pkg-config --exists $(1) >/dev/null 2>&1 && echo yes)
+pkg_config_package_exists = $(shell $(PKG_CONFIG) --exists $(1) >/dev/null 2>&1 && echo yes)
 
 ifneq (mingw32,$(GNUSTEP_TARGET_OS))
 HAVE_AUDIOFILE = $(call pkg_config_package_exists,audiofile)
