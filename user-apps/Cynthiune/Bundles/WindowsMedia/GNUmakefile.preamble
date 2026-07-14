@@ -19,8 +19,10 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-AVIFILE_CFLAGS := $(shell avifile-config --cflags)
-AVIFILE_LIBS := $(shell avifile-config --libs)
+PKG_CONFIG ?= pkg-config
+
+AVIFILE_CFLAGS := $(shell $(PKG_CONFIG) avifile --cflags)
+AVIFILE_LIBS := $(shell $(PKG_CONFIG) avifile --libs)
 
 ADDITIONAL_INCLUDE_DIRS += -I../.. $(AVIFILE_CFLAGS)
 BUNDLE_LIBS += $(AVIFILE_LIBS)
