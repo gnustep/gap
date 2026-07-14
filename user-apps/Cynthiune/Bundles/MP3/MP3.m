@@ -76,8 +76,13 @@ testRiffHeader (char *buffer, FILE *_f, int offset)
   if (strncmp (buffer, "WAVE", 4) == 0)
     {
       fseek (_f, 20 + offset, SEEK_SET);
-      fread (&tag, 1, 1, _f);
-      result = (tag == 80 || tag == 85);
+      if (fread (&tag, 1, 1, _f) != 1)
+	{
+	  NSWarnFLog (@"fread failed");
+	  result = NO;
+	}
+      else
+	result = (tag == 80 || tag == 85);
     }
   else
     result = NO;
@@ -502,16 +507,28 @@ audioLinearDither (MadFixed sample, audioDither *dither)
 
       if (offset > -1)
         {
-          fread (buffer, 1, 4, _f);
-          if (!strncmp (buffer, "RIFF", 4))
-            {
-              fseek (_f, 8 + offset, SEEK_SET);
-              fread (buffer, 1, 4, _f);
-              result = testRiffHeader (buffer, _f, offset);
-            }
-          else
-            result = (testMP3Header (buffer)
-                      || !strncmp (buffer, "ID3", 3));
+          if (fread (buffer, 1, 4, _f) > 0)
+	    {
+	      if (!strncmp (buffer, "RIFF", 4))
+		{
+		  fseek (_f, 8 + offset, SEEK_SET);
+		  if (fread (buffer, 1, 4, _f) != 4)
+		    {
+		      NSWarnMLog (@"fread failed");
+		      result = NO;
+		    }
+		  else
+		    result = testRiffHeader (buffer, _f, offset);
+		}
+	      else
+		result = (testMP3Header (buffer)
+			  || !strncmp (buffer, "ID3", 3));
+	    }
+	  else
+	    {
+	      NSWarnMLog (@"fread failed");
+	      result = NO;
+	    }
         }
       else
         result = NO;

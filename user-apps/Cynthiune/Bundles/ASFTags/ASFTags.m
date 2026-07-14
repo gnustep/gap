@@ -278,11 +278,16 @@ readHeaderObject (FILE *asf)
   HeaderObject *newObject;
 
   newObject = malloc (sizeof (HeaderObject));
-  fread (newObject->guid, 16, 1, asf);
-  fread (&(newObject->size), 8, 1, asf);
-  fread (&(newObject->number), 4, 1, asf);
-  fread (&(newObject->res1), 1, 1, asf);
-  fread (&(newObject->res2), 1, 1, asf);
+  if (fread (newObject->guid, 16, 1, asf) != 1)
+    NSWarnFLog (@"fread failed, guid");
+  if (fread (&(newObject->size), 8, 1, asf) != 1)
+    NSWarnFLog (@"fread failed, size");
+  if (fread (&(newObject->number), 4, 1, asf) != 1)
+    NSWarnFLog (@"fread failed, number");
+  if (fread (&(newObject->res1), 1, 1, asf) != 1)
+    NSWarnFLog (@"fread failed, res1");
+  if (fread (&(newObject->res2), 1, 1, asf) != 1)
+    NSWarnFLog (@"fread failed, res2");
 
   if (newObject->res1 != 0x01 || newObject->res2 != 0x02)
     {
@@ -304,8 +309,13 @@ readMetaData (FILE *asf)
   if (objectIsOfType ((ASFObject *) ho, ASF_Header_Object))
     {
       data = malloc (ho->size - 30);
-      fread (data, ho->size - 30, 1, asf);
-      metadata = parseHeaderData (data, ho->size - 30);
+      if (fread (data, ho->size - 30, 1, asf) > 0)
+	metadata = parseHeaderData (data, ho->size - 30);
+      else
+	{
+	  NSWarnFLog (@"fread failed");
+	  metadata = NULL;
+	}
       free (data);
     }
   else
