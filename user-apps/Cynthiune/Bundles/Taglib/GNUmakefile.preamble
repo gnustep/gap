@@ -19,14 +19,16 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+PKG_CONFIG ?= pkg-config
+
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 TAGLIB_CFLAGS = -I/MingW/include/taglib
 TAGLIB_LIBS = -ltag_c -ltag -lz -lstdc++
 
 BUNDLE_LIBS += $(TAGLIB_LIBS) -L../../Frameworks/Cynthiune/obj
 else
-TAGLIB_CFLAGS = $(shell taglib-config --cflags)
-TAGLIB_LIBS = $(shell pkg-config taglib_c --libs)
+TAGLIB_CFLAGS = $(shell $(PKG_CONFIG) taglib_c --cflags)
+TAGLIB_LIBS = $(shell $(PKG_CONFIG) taglib_c --libs)
 
 BUNDLE_LIBS += $(TAGLIB_LIBS)
 endif

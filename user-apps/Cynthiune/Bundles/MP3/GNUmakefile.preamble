@@ -19,6 +19,7 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+PKG_CONFIG ?= pkg-config
 
 ifeq (mingw32, $(GNUSTEP_TARGET_OS))
 MAD_CFLAGS :=
@@ -33,11 +34,11 @@ TAGLIB_LIBS = -ltag_c -ltag -lz -lstdc++
 BUNDLE_LIBS += $(MAD_LIBS) $(ID3Tag_LIBS) $(TAGLIB_LIBS) -L../../Frameworks/Cynthiune/obj
 
 else
-MAD_CFLAGS := $(shell pkg-config mad --cflags)
-MAD_LIBS := $(shell pkg-config mad --libs)
+MAD_CFLAGS := $(shell $(PKG_CONFIG) mad --cflags)
+MAD_LIBS := $(shell $(PKG_CONFIG) mad --libs)
 
-ID3Tag_CFLAGS := $(shell pkg-config id3tag --cflags)
-ID3Tag_LIBS := $(shell pkg-config id3tag --libs)
+ID3Tag_CFLAGS := $(shell $(PKG_CONFIG) id3tag --cflags)
+ID3Tag_LIBS := $(shell $(PKG_CONFIG) id3tag --libs)
 
 BUNDLE_LIBS += $(MAD_LIBS) $(ID3Tag_LIBS)
 endif
