@@ -1,10 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-cd libs
+SCRIPTSDIR="$PWD/scripts"
+
+pushd libs/netclasses
 sudo make distclean
+./configure
 make
-sudo ../scripts/install.sh
-cd ..
+sudo ${SCRIPTSDIR}/install.sh
+popd
+
 make
 sudo ./scripts/install.sh
 
