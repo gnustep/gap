@@ -18,6 +18,7 @@ PACKAGE_NAME = GAPSYSTEM
 
 SUBPROJECTS = \
 Addresses \
+AudioMixer \
 batmon \
 StepSync \
 Terminal \
