@@ -171,7 +171,7 @@ short  p;
     NSString *icon;
     int  controlGState;
     NSRect  pieceRect;
-    NSPoint  backP, endP, winP, roundedBackP;
+    NSPoint  backP, endP, roundedBackP;
     float  incX, incY;
     int  i, increments;
 
@@ -205,8 +205,7 @@ short  p;
     PSgsave();
 	roundedBackP.x = floor(backP.x); 
 	roundedBackP.y = floor(backP.y);
-	winP = [[self superview] convertPoint: roundedBackP fromView: self];
-    PScomposite( winP.x, winP.y, pieceRect.size.width, pieceRect.size.height,
+    PScomposite( roundedBackP.x, roundedBackP.y, pieceRect.size.width, pieceRect.size.height,
 	controlGState, (float)0.0, (float)0.0, NSCompositeCopy );
     PSgrestore();
     [backBitmap unlockFocus];
@@ -221,7 +220,7 @@ short  p;
 
 	/* Restore old background */
 	[self lockFocus];
-	[backBitmap compositeToPoint: backP operation: NSCompositeCopy];
+	[backBitmap compositeToPoint: roundedBackP operation: NSCompositeCopy];
 	[self unlockFocus];
 	[[self window] flushWindow];
 
@@ -234,8 +233,7 @@ short  p;
 	roundedBackP.x = floor(backP.x); 
 	roundedBackP.y = floor(backP.y);
 	pieceRect.origin = roundedBackP;
-	winP = [[self superview] convertPoint: roundedBackP fromView: self];
-	PScomposite( winP.x, winP.y, pieceRect.size.width,
+	PScomposite( roundedBackP.x, roundedBackP.y, pieceRect.size.width,
 			pieceRect.size.height, controlGState, (float)0.0,
 			(float)0.0, NSCompositeCopy );
 	PSgrestore();
@@ -372,7 +370,7 @@ short  p;
     }
 
     else {
-	NSPoint  pickedP, backP, roundedBackP, winP;
+	NSPoint  pickedP, backP, roundedBackP;
 	NSRect  pieceRect, backR;
 	int  r, c;
 	Square  *theSquare;
@@ -412,14 +410,14 @@ short  p;
 	    pieceRect.origin.x = c * pieceRect.size.width;
 	    pieceRect.origin.y = r * pieceRect.size.height;
 	    [theSquare drawBackground: pieceRect inView: self];
+	    backP = pieceRect.origin;
 
 	    /* Save background */ 
 	    [backBitmap lockFocus];
 	    PSgsave();
 		roundedBackP.x = floor(backP.x); 
 		roundedBackP.y = floor(backP.y);
-		winP = [[self superview] convertPoint: roundedBackP fromView: self];
-	    PScomposite( winP.x, winP.y, backR.size.width, backR.size.height,
+	    PScomposite( roundedBackP.x, roundedBackP.y, backR.size.width, backR.size.height,
 	      controlGState, (float)0.0, (float)0.0, NSCompositeCopy );
 	    PSgrestore();
 	    [backBitmap unlockFocus];
@@ -449,8 +447,7 @@ short  p;
 		PSgsave();
 		roundedBackP.x = floor(backP.x); 
 		roundedBackP.y = floor(backP.y);
-		winP = [[self superview] convertPoint: roundedBackP fromView: self];
-		PScomposite( winP.x, winP.y, backR.size.width,
+		PScomposite( roundedBackP.x, roundedBackP.y, backR.size.width,
 					 backR.size.height, controlGState, (float)0.0,
 					 (float)0.0, NSCompositeCopy );
 		PSgrestore();
