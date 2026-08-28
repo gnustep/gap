@@ -1,6 +1,20 @@
 /*
  Project: AClock
- AppController.m
+ AClockIconManager
+- (void) setApplicationIconData: (NSData *)data
+                       badgeText: (NSString *)badgeText
+                    appProcessId: (int)aProcessId;
+- (BOOL) respondsToSelector: (SEL)aSelector;
+
+
+@protocol AClockIconManager
+- (void) setApplicationIconData: (NSData *)data
+                       badgeText: (NSString *)badgeText
+                    appProcessId: (int)aProcessId;
+- (BOOL) respondsToSelector: (SEL)aSelector;
+@end
+
+@implementation AppController.m
 
  Copyright (C) 2003-2021 GNUstep Application Project
 
@@ -36,12 +50,101 @@
 @implementation AppController
 static NSUserDefaults *defaults;
 static Clock* clicon = nil;
+static NSButton* cliconButton = nil;
 static BOOL useCuckoo = NO;
 static BOOL useRing = NO;
 static NSInteger lastHourOfDay = -1;
 BOOL keepSoundPlaying = YES;
 static int rounds = 0;		// how often to play a sound
 static int rounds_done = 0;	// how often a sound was played already
+
+static void UpdateInfoPanelIcon(void)
+{
+	if (cliconButton != nil && clicon != nil)
+	{
+		[cliconButton setImage:[clicon imageRepresentation]];
+		[cliconButton setNeedsDisplay:YES];
+	}
+}
+
+static void UpdateIconManager(NSData *iconData)
+{
+	id manager;
+	SEL selector;
+	NSMethodSignature *signature;
+	NSInvocation *invocation;
+	NSString *badgeText = nil;
+	int processIdentifier;
+
+	manager = [NSConnection rootProxyForConnectionWithRegisteredName:@"GSIconManager"
+									 host:@""];
+	if (manager == nil)
+		return;
+
+	selector = @selector(setApplicationIconData:badgeText:appProcessId:);
+	NS_DURING
+		{
+			signature = [manager methodSignatureForSelector:selector];
+			if (signature != nil)
+				{
+					processIdentifier = [[NSProcessInfo processInfo] processIdentifier];
+					invocation = [NSInvocation invocationWithMethodSignature:signature];
+					[invocation setTarget:manager];
+					[invocation setSelector:selector];
+					[invocation setArgument:&iconData atIndex:2];
+					[invocation setArgument:&badgeText atIndex:3];
+					[invocation setArgument:&processIdentifier atIndex:4];
+					[invocation invoke];
+				}
+		}
+	NS_HANDLER
+		{
+		}
+	NS_ENDHANDLER
+}
+
+static void UpdateApplicationIcon(Clock *clock)
+{
+	if (clock != nil)
+	{
+		static NSImage *iconImage = nil;
+		static Clock *dockClock = nil;
+		NSWindow *iconWindow;
+		NSSize iconSize;
+
+		iconWindow = [NSApp iconWindow];
+		iconSize = [[iconWindow contentView] bounds].size;
+		if (iconSize.width <= 0 || iconSize.height <= 0)
+			iconSize = NSMakeSize(64, 64);
+
+		if (dockClock == nil)
+			dockClock = [[Clock alloc] initWithFrame:NSMakeRect(0, 0, iconSize.width, iconSize.height)];
+		else
+			[dockClock setFrame:NSMakeRect(0, 0, iconSize.width, iconSize.height)];
+
+		[dockClock setFaceColor:[clock faceColor]];
+		[dockClock setFrameColor:[clock frameColor]];
+		[dockClock setMarksColor:[clock marksColor]];
+		[dockClock setHandsColor:[clock handsColor]];
+		[dockClock setSecondHandColor:[clock secondHandColor]];
+		[dockClock setFaceTransparency:[clock faceTransparency]];
+		[dockClock setShowsAMPM:[clock showsAMPM]];
+		[dockClock setShadow:[clock shadow]];
+		[dockClock setSecond:[clock second]];
+		[dockClock setNumberType:[clock numberType]];
+		[dockClock setShowsArc:[clock showsArc]];
+		[dockClock setAlarmInterval:[clock alarmInterval]];
+		if ([clock date] != nil)
+			[dockClock setDate:[clock date]];
+		[dockClock setHandsTimeNoAlarm:[clock handsTime]];
+
+		ASSIGN(iconImage, [dockClock imageRepresentation]);
+		[NSApp setApplicationIconImage:iconImage];
+		UpdateIconManager([dockClock TIFFRepresentation]);
+		[[iconWindow contentView] setNeedsDisplay:YES];
+		[iconWindow displayIfNeeded];
+	}
+}
 
 + (void) initialize
 {
@@ -299,6 +402,7 @@ static float volume_append = 1.0;
 	[des setHandsTimeNoAlarm:st];
 	[des setShowsArc:[src showsArc]];
 	[des setAlarmInterval:[src alarmInterval]];
+	UpdateApplicationIcon(_clock);
 
 }
 
@@ -389,9 +493,15 @@ static float volume_append = 1.0;
       rounds = h12clock?h12clock:12;
       [self playCuckoo];
       lastHourOfDay = hod;
-      if ([defaults boolForKey: @"ShowsDate"])
-	[_clock setDate:d];
     }
+
+  if ([defaults boolForKey: @"ShowsDate"])
+    {
+      [_clock setDate:d];
+      [bigClock setDate:d];
+      [clicon setDate:d];
+    }
+
   if ([_clock showsAMPM])
     {
       [_clock setShowsAMPM:YES];
@@ -409,6 +519,8 @@ static float volume_append = 1.0;
   [_clock setHandsTime: time];
   [bigClock setHandsTime: time];
   [clicon setHandsTime: time];
+  UpdateApplicationIcon(_clock);
+  UpdateInfoPanelIcon();
 }
 
 static int cstate = -1;
@@ -520,13 +632,11 @@ NSTimer *ctimer;
 	lastHourOfDay = [[NSCalendarDate date] hourOfDay];
 
 	if ([defaults boolForKey: @"ShowsDate"])
-			 [_clock setDate:[NSCalendarDate date]];
-	int pulseExp;
-	float f;
-	pulseExp = [defaults integerForKey: @"RefreshRate"];
-	f = 1/exp2(pulseExp);
-	timer=[NSTimer scheduledTimerWithTimeInterval:f invocation:inv repeats:YES];
-
+	{
+		NSCalendarDate *d = [NSCalendarDate date];
+		[_clock setDate:d];
+		[bigClock setDate:d];
+	}
 
 	if ([defaults boolForKey: @"autolaunch"]) {
 	    [NSApp hide: self];
@@ -578,8 +688,8 @@ NSTimer *ctimer;
 						clicon = [[InfoClock alloc] initWithFrame: frame];
 						[clicon setShowsArc:NO];
 						[view setTitle:@""];
-						[view setImage:nil];
-						[view addSubview:clicon];
+						cliconButton = view;
+						[view setImage:[clicon imageRepresentation]];
 						break;
 					}
 				}

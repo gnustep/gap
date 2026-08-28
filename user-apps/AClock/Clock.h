@@ -108,6 +108,8 @@ TODO?
 -(void) setAlarmInterval: (double)time;
 -(void) setHandsTimeNoAlarm: (double)time;
 -(void) setCuckooState:(int)st;
+-(NSImage *) imageRepresentation;
+-(NSData *) TIFFRepresentation;
 
 @end
 

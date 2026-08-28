@@ -25,6 +25,7 @@
  */
 
 #include <math.h>
+#include <string.h>
 
 #import <AppKit/AppKit.h>
 #import <GNUstepBase/GNUstep.h>
@@ -42,6 +43,44 @@ static NSUserDefaults *defaults;
 static NSArray *numArray[2];
 static NSImage *cuckoo[20];
 static NSArray *dayWeek;
+
+static NSImage *
+NewBitmapBackedImage(NSSize size)
+{
+	NSBitmapImageRep *rep;
+	NSImage *image;
+	NSInteger pixelsWide = ceil(size.width);
+	NSInteger pixelsHigh = ceil(size.height);
+
+	if (pixelsWide < 1)
+		pixelsWide = 1;
+	if (pixelsHigh < 1)
+		pixelsHigh = 1;
+
+	rep = [[NSBitmapImageRep alloc]
+		initWithBitmapDataPlanes:NULL
+		pixelsWide:pixelsWide
+		pixelsHigh:pixelsHigh
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:0
+		bitsPerPixel:0];
+
+	if (rep == nil)
+		return [[NSImage alloc] initWithSize:size];
+
+	memset([rep bitmapData], 0, [rep bytesPerRow] * pixelsHigh);
+	[rep setSize:size];
+
+	image = [[NSImage alloc] initWithSize:size];
+	[image addRepresentation:rep];
+	RELEASE(rep);
+
+	return image;
+}
 
 + (void) initialize
 {
@@ -424,9 +463,12 @@ static NSArray *dayWeek;
 	/* no cache window, create one */
 	if (_cacheFrame == nil)
 	{
-		_cacheFrame = [[NSImage alloc] initWithSize:_bounds.size];
+		_cacheFrame = NewBitmapBackedImage(_bounds.size);
 
-		[_cacheFrame lockFocus];
+		if ([[_cacheFrame representations] count] > 0)
+			[_cacheFrame lockFocusOnRepresentation:[[_cacheFrame representations] objectAtIndex:0]];
+		else
+			[_cacheFrame lockFocus];
 		{
 			NSBezierPath *bzp;
 		  
@@ -518,11 +560,14 @@ static NSArray *dayWeek;
 
 	if (_cacheMark == nil)
 	{
-		_cacheMark = [[NSImage alloc] initWithSize:_bounds.size];
+		_cacheMark = NewBitmapBackedImage(_bounds.size);
 
 		/* print numbers and draw mark */
 
-		[_cacheMark lockFocus];
+		if ([[_cacheMark representations] count] > 0)
+			[_cacheMark lockFocusOnRepresentation:[[_cacheMark representations] objectAtIndex:0]];
+		else
+			[_cacheMark lockFocus];
 		if (shadow)
 		{
 			NSColor* black = [NSColor colorWithDeviceRed:0.  green:0. blue:0. alpha:0.2];
@@ -728,8 +773,10 @@ static NSArray *dayWeek;
 		[_cacheMark unlockFocus];
 	}
 
-	[_cacheFrame compositeToPoint:NSZeroPoint
-		operation:NSCompositeSourceAtop];
+	[_cacheFrame drawInRect:[self bounds]
+		fromRect:NSMakeRect(0, 0, [_cacheFrame size].width, [_cacheFrame size].height)
+		operation:NSCompositeSourceOver
+		fraction:1.0];
 
 
 /*
@@ -767,8 +814,10 @@ static NSArray *dayWeek;
 		[abzp stroke];
 	}
 
-	[_cacheMark compositeToPoint:NSZeroPoint
-		operation:NSCompositeSourceAtop];
+	[_cacheMark drawInRect:[self bounds]
+		fromRect:NSMakeRect(0, 0, [_cacheMark size].width, [_cacheMark size].height)
+		operation:NSCompositeSourceOver
+		fraction:1.0];
 
 
 	{
@@ -922,7 +971,7 @@ static NSArray *dayWeek;
 	if (cstate != -1)
 	{
 		[cuckoo[cstate] compositeToPoint:NSMakePoint(-1,12)
-							   operation:NSCompositeSourceAtop];
+							   operation:NSCompositeSourceOver];
 	}
 }
 
@@ -933,6 +982,106 @@ static NSArray *dayWeek;
 		cstate = st;
 		[self setNeedsDisplay:YES];
 	}
+}
+
+-(NSImage *) imageRepresentation
+{
+	NSBitmapImageRep *rep;
+	NSGraphicsContext *context;
+	NSGraphicsContext *oldContext;
+	NSImage *image;
+	NSSize size;
+	NSInteger pixelsWide;
+	NSInteger pixelsHigh;
+
+	size = [self bounds].size;
+	pixelsWide = ceil(size.width);
+	pixelsHigh = ceil(size.height);
+	if (pixelsWide < 1)
+		pixelsWide = 1;
+	if (pixelsHigh < 1)
+		pixelsHigh = 1;
+
+	rep = [[NSBitmapImageRep alloc]
+		initWithBitmapDataPlanes:NULL
+		pixelsWide:pixelsWide
+		pixelsHigh:pixelsHigh
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:0
+		bitsPerPixel:0];
+
+	if (rep == nil)
+		return nil;
+
+	memset([rep bitmapData], 0, [rep bytesPerRow] * pixelsHigh);
+	[rep setSize:size];
+
+	context = [NSGraphicsContext graphicsContextWithBitmapImageRep:rep];
+	oldContext = [NSGraphicsContext currentContext];
+	[NSGraphicsContext setCurrentContext:context];
+	[self drawRect:[self bounds]];
+	[context flushGraphics];
+	[NSGraphicsContext setCurrentContext:oldContext];
+
+	image = AUTORELEASE([[NSImage alloc] initWithSize:size]);
+	[image addRepresentation:rep];
+	RELEASE(rep);
+
+	return image;
+}
+
+-(NSData *) TIFFRepresentation
+{
+	NSBitmapImageRep *rep;
+	NSGraphicsContext *context;
+	NSGraphicsContext *oldContext;
+	NSData *data;
+	NSSize size;
+	NSInteger pixelsWide;
+	NSInteger pixelsHigh;
+
+	size = [self bounds].size;
+	pixelsWide = ceil(size.width);
+	pixelsHigh = ceil(size.height);
+	if (pixelsWide < 1)
+		pixelsWide = 1;
+	if (pixelsHigh < 1)
+		pixelsHigh = 1;
+
+	rep = [[NSBitmapImageRep alloc]
+		initWithBitmapDataPlanes:NULL
+		pixelsWide:pixelsWide
+		pixelsHigh:pixelsHigh
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:0
+		bitsPerPixel:0];
+
+	if (rep == nil)
+		return nil;
+
+	memset([rep bitmapData], 0, [rep bytesPerRow] * pixelsHigh);
+	[rep setSize:size];
+
+	context = [NSGraphicsContext graphicsContextWithBitmapImageRep:rep];
+	oldContext = [NSGraphicsContext currentContext];
+	[NSGraphicsContext setCurrentContext:context];
+	[self drawRect:[self bounds]];
+	[context flushGraphics];
+	[NSGraphicsContext setCurrentContext:oldContext];
+
+	data = [rep representationUsingType:NSTIFFFileType properties:nil];
+	RETAIN(data);
+	RELEASE(rep);
+
+	return AUTORELEASE(data);
 }
 
 
@@ -1003,7 +1152,15 @@ static NSArray *dayWeek;
 
 -(void) setHandsTime: (double)time
 {
+	double oldHandsTime = handsTime;
+
 	handsTime=time;
+
+	if ((int)floor(fmod(oldHandsTime, 86400.) / 43200.)
+	    != (int)floor(fmod(handsTime, 86400.) / 43200.))
+	{
+		[self _invalidateMarkCache];
+	}
 
 	if (handsTime > alarmInterval)
 	{
@@ -1022,7 +1179,15 @@ static NSArray *dayWeek;
 
 -(void) setHandsTimeNoAlarm: (double)time
 {
+	double oldHandsTime = handsTime;
+
 	handsTime=time;
+
+	if ((int)floor(fmod(oldHandsTime, 86400.) / 43200.)
+	    != (int)floor(fmod(handsTime, 86400.) / 43200.))
+	{
+		[self _invalidateMarkCache];
+	}
 
 	[self setAlarmInterval: alarmInterval];
 }
