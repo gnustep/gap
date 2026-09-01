@@ -2,25 +2,20 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     Controller = {
 	Actions = (
-	    "openFile:",
-	    "search:",
-	    "index:",
-	    "back:",
-	    "bookshelf:",
-	    "print:"
 	);
 	Outlets = (
-	    query,
-	    search,
-	    index,
-	    back,
-	    bookshelf,
-	    textview,
-	    tocview,
-	    window,
 	    infoMenu,
 	    helpMenu,
-	    servicesMenu
+	    openRecentMenu,
+	    openRecentMenuItem,
+	    quitMenuItem,
+	    helpMenuItem,
+	    infoMenu,
+	    helpMenu,
+	    openRecentMenu,
+	    openRecentMenuItem,
+	    quitMenuItem,
+	    helpMenuItem
 	);
 	Super = NSObject;
     };
