@@ -19,7 +19,6 @@
 #
 
 include $(GNUSTEP_MAKEFILES)/common.make
-include xpdf-src
 
 PACKAGE_NEEDS_CONFIGURE = YES
 
@@ -29,6 +28,8 @@ NAME=PDFKit
 PACKAGE_NAME=$(NAME)
 CVS_MODULE_NAME=gap/libs/$(NAME)
 CVS_TAG_NAME=$(PACKAGE_NAME)
+
+XPDF_SRC=@XPDF_SRC@
 
 PDFKit_SUBPROJECTS = \
 		xpdf
@@ -84,6 +85,7 @@ ifeq ($(findstring clang, $(LD)), clang)
 ADDITIONAL_LDFLAGS += -lstdc++ -lobjc
 endif
 
+export XPDF_SRC
 
 -include GNUmakefile.preamble
 

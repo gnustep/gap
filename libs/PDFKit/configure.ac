@@ -1,6 +1,8 @@
 AC_PREREQ(2.52)
 AC_INIT(PDFKit, 1.2.0)
 
+XPDF_SRC=xpdf-4.03
+
 if test -z "$GNUSTEP_MAKEFILES"; then
   AC_MSG_ERROR([You must run the GNUstep initialization script first!])
 fi
@@ -37,7 +39,9 @@ export CC
 export CPP
 export CXX
 
-AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/xpdf-4.03/GNUmakefile])
+AC_SUBST(XPDF_SRC)
+
+AC_CONFIG_FILES([GNUmakefile xpdf/GNUmakefile xpdf/bridge/GNUmakefile xpdf/"$XPDF_SRC"/GNUmakefile])
 
 AC_OUTPUT
 

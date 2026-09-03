@@ -19,7 +19,6 @@
 #
 
 include $(GNUSTEP_MAKEFILES)/common.make
-include ../xpdf-src
 
 SUBPROJECT_NAME = xpdf
 
