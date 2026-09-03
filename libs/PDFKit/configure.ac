@@ -23,9 +23,6 @@ if test "$CXX" = ""; then
   CXX=`gnustep-config --variable=CXX`
 fi
 
-AC_PROG_CC
-AC_PROG_CXX
-
 MAKECC=`gnustep-config --variable=CC`
 if test "$CC" != "$MAKECC"; then
   AC_MSG_ERROR([You are running configure with the compiler ($CC) set to a different value from that used by gnustep-make ($MAKECC).  Please run configure again with your environment set to match your gnustep-make])
