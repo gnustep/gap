@@ -1,7 +1,7 @@
 AC_PREREQ(2.52)
 AC_INIT(PDFKit, 1.2.0)
 
-XPDF_SRC=xpdf-4.03
+XPDF_SRC=xpdf-4.05
 
 if test -z "$GNUSTEP_MAKEFILES"; then
   AC_MSG_ERROR([You must run the GNUstep initialization script first!])
