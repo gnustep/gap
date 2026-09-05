@@ -16,7 +16,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.1
 PACKAGE_NAME = GAPPORTEDUTIL
 
-SUBPROJECTS = TimeMon NeXTspim
+SUBPROJECTS = TimeMon NeXTspim Bean FlexiSheet
 
 #
 # Makefiles

@@ -2,6 +2,8 @@
     APPLICATIONICON = "HelpViewer.tiff";
     "APP_DOCUMENT_BASED" = YES;
     "APP_TYPE" = GORM;
+    "BUILDER_ARGS" = (
+    );
     "BUILDER_PARALLELISM" = 2;
     "BUILDER_TARGETS" = (
 	all,
@@ -93,6 +95,8 @@
     );
     MAININTERFACE = "MainMenu.gorm";
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    "NON_PROJECT_FILES" = (
+    );
     "OBJC_COMPILEROPTIONS" = "";
     "OTHER_RESOURCES" = (
     );
