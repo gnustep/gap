@@ -1824,7 +1824,7 @@ NSString *universalTypeForFile(NSString *filename)
 		CFStringEncoding *tmp;
 		int cnt, num = 0;
 		while (cfEncodings[num] != kCFStringEncodingInvalidId) num++;	// Count
-		tmp = malloc(sizeof(CFStringEncoding) * Num);
+		tmp = malloc(sizeof(CFStringEncoding) * num);
 		memcpy(tmp, cfEncodings, sizeof(CFStringEncoding) * num);	// Copy the list
 		allEncodings = [[NSMutableArray alloc] init];			// Now put it in an NSArray
 		for (cnt = 0; cnt < num; cnt++)
@@ -1849,7 +1849,7 @@ NSString *universalTypeForFile(NSString *filename)
 }
 
 //	sort the encodings according to the human-readable name
-int encSort(id array1, id array2, void *context)
+NSInteger encSort(id array1, id array2, void *context)
 {
 	NSString *encName1 = [array1 objectAtIndex:0];
 	NSString *encName2 = [array2 objectAtIndex:0];
@@ -4125,7 +4125,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 -(BOOL)isStationaryPad:(NSString *)path
 {
 #ifndef GNUSTEP
-	static kIsStationary = 0x0800;
+	static const unsigned short kIsStationary = 0x0800;
 	CFURLRef url;
 	FSRef fsRef;
 	FSCatalogInfo catInfo;

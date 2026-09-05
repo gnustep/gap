@@ -159,7 +159,7 @@ NSString *KBTextStorageStatisticsDidChangeNotification = @"KBTextStorageStatisti
 	return [text string];
 }
 
-- (NSDictionary *)attributesAtIndex:(unsigned)index effectiveRange:(NSRangePointer)aRange
+- (NSDictionary *)attributesAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange
 {
 	return [text attributesAtIndex:index effectiveRange:aRange];
 }

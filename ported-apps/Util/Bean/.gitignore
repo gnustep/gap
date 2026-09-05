@@ -1,0 +1,6 @@
+/build/
+/obj/
+/Bean.app/
+*.d
+*.xcuserstate
+xcuserdata/

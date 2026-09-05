@@ -34,11 +34,20 @@
 
 + (void)initialize
 {
-	self = [super init];
+	if (self != [PrefWindowController class]) return;
 	//the path points to a plist file inside the app's resource folder that has factory defaults
 	NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"];
 	//create a dictionary containing the defaults
-	NSDictionary *theDefaults = [NSDictionary dictionaryWithContentsOfFile:defaultsPath];
+	NSMutableDictionary *theDefaults = [NSMutableDictionary dictionaryWithContentsOfFile:defaultsPath];
+#ifdef GNUSTEP
+	// The bundled color data uses Cocoa's typedstream archive format.
+	// Register equivalent colors archived by the active GNUstep runtime.
+	[theDefaults setObject:[NSArchiver archivedDataWithRootObject:[NSColor whiteColor]]
+		forKey:@"altTextColor"];
+	[theDefaults setObject:[NSArchiver archivedDataWithRootObject:
+		[NSColor colorWithCalibratedRed:0.0873 green:0.2249 blue:0.4184 alpha:1.0]]
+		forKey:@"altBackgroundColor"];
+#endif
 	if (theDefaults) {
 		//register them with NSUserDefaults
 		[[NSUserDefaults standardUserDefaults] registerDefaults:theDefaults];

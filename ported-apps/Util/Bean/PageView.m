@@ -125,7 +125,7 @@
 -(void)setNumberOfPages:(int)newNumberOfPages
 {
     numberOfPages = newNumberOfPages;
-    NSLog(@"self = %@, numberOfPages = %d",self,numberOfPages);
+
 }
 
 - (void)setShouldUseAltTextColors:(BOOL)flag
@@ -447,7 +447,7 @@
 	return YES;
 }
 
-- (NSRect)rectForPage:(int)page
+- (NSRect)rectForPage:(NSInteger)page
 {
     return [self documentRectForPageNumber:page-1];  //our pages numbers start from 0; the kit's from 1
 }
