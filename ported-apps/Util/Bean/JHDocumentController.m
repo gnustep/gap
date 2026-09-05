@@ -56,7 +56,7 @@ static JHDocumentController *sharedInstance = nil;
 	//	we need non-localized file type name, which is used as the key to look up the extension for default file type in info.plist
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *type = nil;
-	int formatIndex = nil;
+	int formatIndex = 0;
 
 	//	get index of default save format from popup in Preferences from user defaults
 	formatIndex = [[defaults objectForKey:@"prefDefaultSaveFormatIndex"] intValue];

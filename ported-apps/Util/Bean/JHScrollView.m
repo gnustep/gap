@@ -64,7 +64,7 @@
 	verticalScrollerFrame.size.height = verticalScrollerFrame.size.height - 35 + spacer;
 	[verticalScroller setFrameSize:verticalScrollerFrame.size];
 	[verticalScroller setFrame:verticalScrollerFrame];
-	spacer = nil;
+	spacer = 0;
 	
 }
 

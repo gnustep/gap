@@ -158,7 +158,7 @@
 		docType = nil;
 		formatName = nil;
 	}
-	int formatIndex = nil;
+	int formatIndex = 0;
 	//this binding is done manually since we create the popup's items from scratch
 	formatIndex = [[defaults objectForKey:@"prefDefaultSaveFormatIndex"] intValue];
 	//select item based on saved user defaults

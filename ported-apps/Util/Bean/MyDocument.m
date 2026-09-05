@@ -190,7 +190,7 @@ const OSType kMyAppCreatorCode = 'bEAN';
 		[self setIsDocumentSaved:NO];
 		[self setLossy:NO];
 		[[self layoutManager] setShowInvisibleCharacters:NO]; 
-		[self setDocEncoding:nil];
+		[self setDocEncoding:0];
 		[self setDocEdited:NO];
 		[self setShouldConstrainScroll:YES];
 		[self setCreateDatedBackup:NO];
@@ -928,7 +928,7 @@ NSString *universalTypeForFile(NSString *filename)
 				//	if no string, may be bad/incorrect encoding; we notify user of (potential) problem and try to read file as 'plain text' below
 				else
 				{
-					[self setDocEncoding:nil];
+					[self setDocEncoding:0];
 					[self setDocEncodingString:@"Unknown"];
 				}
 				[textData release];
@@ -1031,7 +1031,7 @@ NSString *universalTypeForFile(NSString *filename)
 			if (tempString)
 			{
 				[newString appendString:tempString];
-				unsigned scanLoc = nil;
+				unsigned scanLoc = 0;
 				scanLoc = [scanner scanLocation];
 				if ((scanLoc + 8) < [htmlString length])
 				{
@@ -2182,14 +2182,22 @@ NSInteger encSort(id array1, id array2, void *context)
 
 //	this retains the typingAttributes, which are ordinarilly reset upon pasting an attachment (cos of a bug)
 //	also fixes a bug with NSTextList which resets font to Lucida Grande
+#ifdef GNUSTEP
+- (BOOL)textView:(NSTextView *)aTextView
+#else
 - (NSDictionary *)textView:(NSTextView *)aTextView
+#endif
 			shouldChangeTypingAttributes:(NSDictionary*)oldTypingAttributes
 			toAttributes:(NSDictionary *)newTypingAttributes
 {
 	//	the if statement prevents an inserted text attachment from causing nil text attributes to follow
 	if ([newTypingAttributes objectForKey:NSAttachmentAttributeName])
 	{
+#ifdef GNUSTEP
+		return NO;
+#else
 		return oldTypingAttributes;
+#endif
 	}
 	
 	//	here we save the typingAttributes so that when an attachment is pasted in replaceCharactersInRange in the textStorage, it is overlaid first with the typingAttributes instead of nil attributes, which makes the inspector controls go crazy among other things
@@ -2219,14 +2227,23 @@ NSInteger encSort(id array1, id array2, void *context)
 					{
 						NSMutableDictionary *betterAttributes = [[newTypingAttributes mutableCopyWithZone:[self zone]] autorelease];
 						[betterAttributes setObject:previousFont forKey:NSFontAttributeName];
+#ifdef GNUSTEP
+						[aTextView setTypingAttributes:betterAttributes];
+						return NO;
+#else
 						return betterAttributes;
+#endif
 					}
 				}
 			}
 		}
 	}
 	
+#ifdef GNUSTEP
+	return YES;
+#else
 	return newTypingAttributes;
+#endif
 	
 	//	this was what we used to do (fix by Omni, refined by Keith Blount)...just here for historical purposes
 	//	return [newTypingAttributes objectForKey:NSAttachmentAttributeName] ? oldTypingAttributes : newTypingAttributes;
@@ -2422,7 +2439,7 @@ NSInteger encSort(id array1, id array2, void *context)
 					s = nil;
 					s = [NSString stringWithFormat:@"%C%C", 0x00A0, 0x00BB];
 				}
-				frChar = nil;
+				frChar = 0;
 			}
 			
 			// 25 Aug 2007 After studying the insertText method of NSTextView in GnuStep, which calls the sequence 1) shouldChangeTextInRange 2) replaceCharactersInRange 2) didChangeText which we do here, I decided to just use it; also, the problem of text being inserted into an empty textStorage and having no attributes is solved because NSTextView calls its own replaceCharactersInRange method which overlays its typing attributes, so the bugfix we added becomes unnecessary			
@@ -2456,7 +2473,7 @@ NSInteger encSort(id array1, id array2, void *context)
 	//	count selected ranges and add them
 	NSEnumerator *rangeEnumerator = [selRanges objectEnumerator];
 	unsigned int i;
-	unichar c = nil;
+	unichar c = 0;
 
 	//	this prepares undo by feeding it strings to be inserted so that it will remember the changed ranges (we don't know what strings will be inserted at this point, but we do know the string lengths).
 	NSEnumerator *rangeEnumerator2 = [selRanges objectEnumerator];
@@ -2516,7 +2533,7 @@ NSInteger encSort(id array1, id array2, void *context)
 					}
 					
 					if (c) [textStorage replaceCharactersInRange:NSMakeRange(range.location + i,1) withString:[NSString stringWithFormat:@"%C", c]];
-					c = nil;
+					c = 0;
 				}
 			}
 			//	convert to straight quotes menu action
@@ -2535,7 +2552,7 @@ NSInteger encSort(id array1, id array2, void *context)
 				{
 					[textStorage replaceCharactersInRange:NSMakeRange(range.location + i,1) withString:[NSString stringWithFormat:@"%C", c]];
 				}
-				c = nil;
+				c = 0;
 			}
 		}
 		[rangeString release];
@@ -2749,7 +2766,6 @@ NSInteger encSort(id array1, id array2, void *context)
 			NSAttributedString *tempStr = [[NSAttributedString alloc] initWithString:[[textStorage string] substringWithRange:range]];
 			wordCnt += [self wordCountForString:tempStr];
 			charCnt += [tempStr length];
-			tempStr = @"";
 			[tempStr release];
 		}
 		//	change status bar to reflect selected word and character totals
@@ -2762,8 +2778,8 @@ NSInteger encSort(id array1, id array2, void *context)
 		[liveWordCountString release];
 		[liveWordCountField setTextColor:[NSColor blueColor]];
 		
-		wordCnt = nil;
-		charCnt = nil;	
+		wordCnt = 0;
+		charCnt = 0;	
 	}
 	//	if no selected text but status text is blue (=showing selected range), then reset usual word count
 	else if ([[liveWordCountField textColor] isEqualTo:[NSColor blueColor]] && !firstRange.length)
@@ -2836,7 +2852,7 @@ NSInteger encSort(id array1, id array2, void *context)
 			/*
 			liveWordCountString = [[NSString alloc] initWithFormat:@"%@ %@ %@ %@ %@ %i", NSLocalizedString(@"Words:", @"Status bar label for number of words in document: Words:"), [self formatForThousands:numberOfWords], NSLocalizedString(@" Characters:", @"status bar label for number of characters in document: Characters:"), [self formatForThousands:numberOfChars], NSLocalizedString(@" Pages:", @"status bar label for number of pages in document: Pages:"), numPages];
 			*/
-			numPages = nil;
+			numPages = 0;
 		}
 		else
 		{
@@ -2851,8 +2867,8 @@ NSInteger encSort(id array1, id array2, void *context)
 		}
 		[liveWordCountField setStringValue:liveWordCountString];
 		[liveWordCountString release];
-		numberOfWords = nil;
-		numberOfChars = nil;
+		numberOfWords = 0;
+		numberOfChars = 0;
 		[liveWordCountField setTextColor:[NSColor blackColor]];
 	}
 }
@@ -3769,8 +3785,8 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
     NSTextView	*textView = [self firstTextView];
 	NSString	*theString = [[[self layoutManager] textStorage] string];
 	int	theStringLength = [[[[textView layoutManager] textStorage] string] length];
-	int	charCnt = nil;
-	int	wordCnt = nil;
+	int	charCnt = 0;
+	int	wordCnt = 0;
 
 	//	count Carriage Returns (Hard Returns), ie, 'newLineMarker' character
 	unichar newLineUnichar = 0x000a;
@@ -3785,13 +3801,13 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 	while (charIndex < theStringLength )
 	{
 		NSRange theFoundRange = [theString rangeOfString:[NSString stringWithFormat:@"%@%@", newLineChar, newLineChar] 
-				options:nil range:NSMakeRange(charIndex,(theStringLength - charIndex))];
+				options:0 range:NSMakeRange(charIndex,(theStringLength - charIndex))];
 		theFoundRangeLocation = theFoundRange.location;
 		if (theFoundRangeLocation < theStringLength)
 		{
 			emptyParagraphCount = emptyParagraphCount + 1;
 			charIndex = theFoundRangeLocation + 1;
-			theFoundRangeLocation = nil;
+			theFoundRangeLocation = 0;
 		}
 		else
 		{
@@ -3863,11 +3879,11 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 	//	line fragment (soft return) count
 	[lineFragCountField setStringValue: [self thousandFormatedStringFromNumber:[NSNumber numberWithInt:numberOfLineFrags]]];
 	
-	wordCnt = nil;
-	charCnt = nil;	
-	lineCount = nil;
-	numberOfLineFrags = nil;
-	emptyParagraphCount = nil;
+	wordCnt = 0;
+	charCnt = 0;	
+	lineCount = 0;
+	numberOfLineFrags = 0;
+	emptyParagraphCount = 0;
 	
 	//	count selected text ranges and add them
 	NSEnumerator *rangeEnumerator = [[textView selectedRanges] objectEnumerator];
@@ -3879,16 +3895,15 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 		NSAttributedString *tempStr = [[NSAttributedString alloc] initWithString:[theString substringWithRange:range]];
 		wordCnt += [self wordCountForString:tempStr];
 		charCnt += [tempStr length];
-		tempStr = @"";
 		[tempStr release];
 	}
 
 	//	selected range(s) character and word count
 	[selWordCountField setStringValue: [self thousandFormatedStringFromNumber:[NSNumber numberWithInt:wordCnt]]];
 	[selCharCountField setStringValue: [self thousandFormatedStringFromNumber:[NSNumber numberWithInt:charCnt]]];
-	wordCnt = nil;
-	charCnt = nil;	
-	theStringLength = nil;
+	wordCnt = 0;
+	charCnt = 0;	
+	theStringLength = 0;
 	
 	if (![self fileName])
 	{
@@ -4882,16 +4897,17 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 {
 	//	native List action is smarter, but less intuitive;
 	//	note: this works on first selected range only (List... works on selectedRanges)
-	NSTextList *theList;
+	NSTextList *theList = nil;
 	//	kind of marker
 	if ([sender tag]==0) //bullet
 	{
-		theList = [[[NSTextList alloc] initWithMarkerFormat:@"{disc}" options:nil] autorelease];
+		theList = [[[NSTextList alloc] initWithMarkerFormat:@"{disc}" options:0] autorelease];
 	}
 	else if ([sender tag]==1) //arabic number and dot
 	{
-		theList = [[[NSTextList alloc] initWithMarkerFormat:@"{decimal}." options:nil] autorelease];
+		theList = [[[NSTextList alloc] initWithMarkerFormat:@"{decimal}." options:0] autorelease];
 	} 
+	if (!theList) return;
 	
 	NSArray *theListArray = [NSArray arrayWithObjects:theList, nil];
 	
@@ -5009,7 +5025,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 {
 	if ([[error domain] isEqualToString:NSCocoaErrorDomain])
 	{
-		NSString *errorString;
+		NSString *errorString = nil;
 		int errorCode = [error code];
 		
 		NSString *docName = [NSString stringWithFormat:@"%@%@%@", NSLocalizedString(@"firstLevelOpenQuote", nil), [self displayName], NSLocalizedString(@"firstLevelCloseQuote", nil)]; 
@@ -5333,7 +5349,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 -(BOOL)backupDocument
 {
 	//	if file has been saved (changed) since opening, make a backup of this 'version' of the document
-	BOOL success;
+	BOOL success = NO;
 	//	using 10.1-3 style for NSDateFormatter
 	int backupFileNumber = 1;
 	//	create date string for date-stamp to add to backup filename
@@ -6034,7 +6050,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 		}
 		else
 		{
-			int attributeLocation = nil;
+			int attributeLocation = 0;
 			int textLength = [textStorage length];
 			//	prevent out-of-bounds exception for attribute:atIndex: below
 			if ([textView selectedRange].location==textLength && textLength > 0)
@@ -6046,8 +6062,8 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 				attributeLocation = [textView selectedRange].location;				
 			}
 			theAttributes = [textStorage attributesAtIndex:attributeLocation effectiveRange:NULL];
-			attributeLocation = nil;
-			textLength = nil;
+			attributeLocation = 0;
+			textLength = 0;
 		}
 	}
 	
@@ -6639,7 +6655,7 @@ todo: selection panel with checkboxes for different types of matching selections
 				[theSelectionRangesArray addObject:[NSValue valueWithRange:theMatchingFontRange]];
 				rangeIsOpen = NO;
 			}
-			charIndex = charIndex++;
+			charIndex++;
 			//end of text and a range is still open, so close it
 			if (charIndex == theStringLength && rangeIsOpen==YES) {
 				[theSelectionRangesArray addObject:[NSValue valueWithRange:theMatchingFontRange]];
@@ -6732,7 +6748,7 @@ todo: selection panel with checkboxes for different types of matching selections
 				[theSelectionRangesArray addObject:[NSValue valueWithRange:theMatchingFontRange]];
 				rangeIsOpen = NO;
 			}
-			charIndex = charIndex++;
+			charIndex++;
 			//end of text and a range is still open, so close it
 			if (charIndex == theStringLength && rangeIsOpen==YES)
 			{
@@ -6793,7 +6809,7 @@ todo: selection panel with checkboxes for different types of matching selections
 				[theSelectionRangesArray addObject:[NSValue valueWithRange:theMatchingFontRange]];
 				rangeIsOpen = NO;
 			}
-			charIndex = charIndex++;
+			charIndex++;
 			//	end of text and a range is still open, so close it
 			if (charIndex == theStringLength && rangeIsOpen==YES)
 			{
@@ -6857,7 +6873,7 @@ todo: selection panel with checkboxes for different types of matching selections
 				[theSelectionRangesArray addObject:[NSValue valueWithRange:theMatchingFontRange]];
 				rangeIsOpen = NO;
 			}
-			charIndex = charIndex++;
+			charIndex++;
 			//	end of text and a range is still open, so close it
 			if (charIndex == theStringLength && rangeIsOpen==YES)
 			{
@@ -6929,7 +6945,7 @@ todo: selection panel with checkboxes for different types of matching selections
 				[theSelectionRangesArray addObject:[NSValue valueWithRange:theMatchingFontRange]];
 				rangeIsOpen = NO;
 			}
-			charIndex = charIndex++;
+			charIndex++;
 			//	end of text and a range is still open, so close it
 			if (charIndex == theStringLength && rangeIsOpen==YES)
 			{
@@ -7791,7 +7807,7 @@ todo: selection panel with checkboxes for different types of matching selections
 		defineWordString = [defineWordString substringWithRange:NSMakeRange(0,nonLetterLocation)];
 	}
 	//	check spelling of word to define with sharedSpellChecker (loaded at didLoadNib) 
-	NSRange misspelledWordRange = [spellChecker checkSpellingOfString:defineWordString startingAt:0 language:nil wrap:NO inSpellDocumentWithTag:nil wordCount:nil];
+	NSRange misspelledWordRange = [spellChecker checkSpellingOfString:defineWordString startingAt:0 language:nil wrap:NO inSpellDocumentWithTag:0 wordCount:nil];
 	//	if misspelled (so no definition through URL scheme is possible), alert user
 	if (misspelledWordRange.length)
 	{
@@ -7828,7 +7844,7 @@ todo: selection panel with checkboxes for different types of matching selections
 	[[NSWorkspace sharedWorkspace] launchApplication:@"Dictionary"];	
 	NSArray *theURLArray = [NSArray arrayWithObject:[NSURL URLWithString:defineWordURLString]];
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"dict:/// "]];	
-	[[NSWorkspace sharedWorkspace] openURLs:theURLArray withAppBundleIdentifier:@"com.apple.Dictionary" options:nil additionalEventParamDescriptor:nil launchIdentifiers:nil];
+	[[NSWorkspace sharedWorkspace] openURLs:theURLArray withAppBundleIdentifier:@"com.apple.Dictionary" options:0 additionalEventParamDescriptor:nil launchIdentifiers:nil];
 }
 
 -(IBAction)testMethod:(id)notification
@@ -8497,7 +8513,7 @@ todo: selection panel with checkboxes for different types of matching selections
 					s = nil;
 				}
 			}
-			q = nil;
+			q = 0;
 		}	
 	}
 }
@@ -8540,16 +8556,15 @@ todo: selection panel with checkboxes for different types of matching selections
 }
 
 - (void)setBackgroundColor:(NSColor *)color {
-	NSColor *aBackgroundColor;
 	[color retain];
-	[aBackgroundColor release];
-	aBackgroundColor = color;
+	[backgroundColor release];
+	backgroundColor = color;
 	// background color of all text views
 	NSArray *textContainers = [[self layoutManager] textContainers];
 	NSEnumerator *e = [textContainers objectEnumerator];
 	NSTextView *tv;
 	while (tv = [e nextObject])
-		[tv setBackgroundColor:aBackgroundColor];
+		[tv setBackgroundColor:backgroundColor];
 }
 
 - (void)setTextViewTextColor:(NSColor*)aColor {
