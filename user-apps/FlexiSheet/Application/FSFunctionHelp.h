@@ -9,13 +9,11 @@
 
 #import <AppKit/AppKit.h>
 
-@class WebView;
-
 @interface FSFunctionHelp : NSObject
 {
     IBOutlet NSBrowser     *groups;
     IBOutlet NSBrowser     *functions;
-    IBOutlet WebView       *helpView;
+    IBOutlet id             helpView;
     
     NSArray                *fNames;
 }

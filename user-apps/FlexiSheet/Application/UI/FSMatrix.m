@@ -567,6 +567,7 @@
     if (select) [editor selectAll:nil];
     [editor setDelegate:self];
     [editor setFont:[style font]];
+    [editor setTextColor:[NSColor blackColor]];
     frame.origin.x += 3;
     frame.origin.y += 2;
     frame.size.width -= 6;

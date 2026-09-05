@@ -10,8 +10,6 @@
 #import "FSFunctionHelp.h"
 #import "FSFunction.h"
 #import "FSOperator.h"
-#import <WebKit/WebView.h>
-#import <WebKit/WebFrame.h>
 
 @implementation FSFunctionHelp
 

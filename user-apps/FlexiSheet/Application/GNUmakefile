@@ -39,6 +39,7 @@ FSTableController.m \
 FSExporter.m \
 FSTableTabs.m \
 FSFunctionHelp.m \
+WebView.m \
 FSWindowController.m \
 FSGraffleExport.m \
 FSWorksheet.m \
