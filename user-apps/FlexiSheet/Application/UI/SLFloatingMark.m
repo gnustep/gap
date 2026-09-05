@@ -72,6 +72,8 @@ Floating marks are semi transparent and overall look like tool tips. "*/
 
 - (void)drawRect:(NSRect)rect
 {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     [[NSColor colorWithDeviceRed:.98 green:.98 blue:0.8 alpha:.9] set];
     NSRectFill(rect);
     if (image) {

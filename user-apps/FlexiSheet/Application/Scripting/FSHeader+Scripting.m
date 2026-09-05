@@ -15,7 +15,7 @@
 // An FSHeader sees itself as a category of it's table.
 {
     NSArray      *allHeaders = [[self table] headers];
-    unsigned int  index = [allHeaders indexOfObjectIdenticalTo:self];
+    NSUInteger    index = [allHeaders indexOfObjectIdenticalTo:self];
 
     if (index != NSNotFound) {
         NSScriptObjectSpecifier *containerRef = [[self table] objectSpecifier];
@@ -36,7 +36,7 @@
 // An FSKeyGroup sees itself as an item of it's group.
 {
     NSArray      *items = [[self group] items];
-    unsigned int  index = [items indexOfObjectIdenticalTo:self];
+    NSUInteger    index = [items indexOfObjectIdenticalTo:self];
 
     if (index != NSNotFound) {
         NSScriptObjectSpecifier *containerRef = [[self group] objectSpecifier];

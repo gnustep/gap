@@ -14,7 +14,7 @@
 - (NSScriptObjectSpecifier*)objectSpecifier;
 {
     NSArray      *allWorksheets = [[self document] worksheetsForTable:[self table]];
-    unsigned int  index = [allWorksheets indexOfObjectIdenticalTo:self];
+    NSUInteger    index = [allWorksheets indexOfObjectIdenticalTo:self];
 
     if (index != NSNotFound) {
         NSScriptObjectSpecifier *containerRef = [[self table] objectSpecifier];

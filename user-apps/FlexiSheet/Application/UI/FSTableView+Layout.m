@@ -381,6 +381,8 @@ NSString  *FSLayoutStylesKey   = @"Styles";
 - (void)drawRect:(NSRect)rect
 // -drawRect is located here because it needs layout information do do the propper drawing.
 {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     NSBezierPath *path = [NSBezierPath bezierPath];
     NSRect        b = [self bounds];
     float         bts = (_pageTabCount > 0)?TAB_HEIGHT:0;

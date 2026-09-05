@@ -41,6 +41,10 @@
 
 #import "FSCore.h"
 #import "FoundationExtentions.h"
+#include <stdint.h>
+#include <inttypes.h>
+
+#define FS_KEY_HEX_WIDTH (2 * sizeof(uintptr_t))
 
 
 @implementation FSKeySet
@@ -510,7 +514,7 @@ void FSkeysetAddKey(FSkeyset *ks, FSKey *aKey)
         }
 
         if ([aKey table] != nil) {
-            char buffer[9];
+            char buffer[FS_KEY_HEX_WIDTH + 1];
 
             // How do we check for this?
             // [NSException raise:@"Mismatch" format:@"Key from different document!"];
@@ -519,8 +523,8 @@ void FSkeysetAddKey(FSkeyset *ks, FSKey *aKey)
 
             // Fix up hashcode
             if (ks->hashcodeChars) {
-                sprintf(buffer, "%08X", (int)aKey);
-                strncpy(ks->hashcodeChars+index*8, buffer, 8);
+                snprintf(buffer, sizeof(buffer), "%0*" PRIXPTR, (int)FS_KEY_HEX_WIDTH, (uintptr_t)aKey);
+                strncpy(ks->hashcodeChars+index*FS_KEY_HEX_WIDTH, buffer, FS_KEY_HEX_WIDTH);
             }
         }
     }
@@ -596,10 +600,10 @@ void FSkeysetGenerateHashcode(FSkeyset *ks)
         int index = 0;
 
         if (ks->hashcodeChars == NULL)
-            ks->hashcodeChars = malloc(8*ks->count + 1);
+            ks->hashcodeChars = malloc(FS_KEY_HEX_WIDTH*ks->count + 1);
 
         while (index < ks->count) {
-            sprintf(ks->hashcodeChars+index*8, "%08X", (int)ks->keys[index]);
+            sprintf(ks->hashcodeChars+index*FS_KEY_HEX_WIDTH, "%0*" PRIXPTR, (int)FS_KEY_HEX_WIDTH, (uintptr_t)ks->keys[index]);
             index++;
         }
     }

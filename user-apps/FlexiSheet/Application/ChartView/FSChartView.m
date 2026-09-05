@@ -21,6 +21,8 @@
 }
 
 - (void)drawRect:(NSRect)rect {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     NSRect     bounds = [self bounds];    
     
     [[NSColor controlColor] set];

@@ -244,6 +244,8 @@ static NSString *FSHeaderPboardType = @"FSHeaderPboardType";
 
 - (void)drawRect:(NSRect)rect
 {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     float         offset = 0;
     int           index;
     NSImage      *image = nil;

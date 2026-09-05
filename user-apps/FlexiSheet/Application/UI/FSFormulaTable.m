@@ -31,6 +31,8 @@
 
 - (void)drawRect:(NSRect)rect
 {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     [super drawRect:rect];
     if (shouldDrawFocusRing) {
         NSSetFocusRingStyle(NSFocusRingOnly);

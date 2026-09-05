@@ -140,6 +140,8 @@
 
 
 - (void)drawRect:(NSRect)rect {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     NSInteger            row, col, max;
     NSRect               frame = {{0,0},{0,0}};
     FSCellStyle         *style;

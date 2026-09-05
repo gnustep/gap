@@ -103,6 +103,8 @@
 
 - (void)drawRect:(NSRect)rect
 {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     NSFont              *font = [NSFont systemFontOfSize:12];
     NSRect               cell = [self bounds];

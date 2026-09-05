@@ -14,7 +14,7 @@
 - (NSScriptObjectSpecifier*)objectSpecifier;
 {
     NSArray      *docsTables = [[self document] tables];
-    unsigned int  index = [docsTables indexOfObjectIdenticalTo:self];
+    NSUInteger    index = [docsTables indexOfObjectIdenticalTo:self];
 
     if (index != NSNotFound) {
         NSScriptObjectSpecifier *containerRef = [(FSDocument*)[self document] objectSpecifier];
@@ -45,10 +45,6 @@
 }
 
 
-- (NSArray*)scriptingKeysets
-{
-    return _keysets;
-}
 
 @end
 

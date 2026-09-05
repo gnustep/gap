@@ -48,6 +48,8 @@
     or the additional area if the dx/dy information tells us so.
     "*/
 {
+    // Keep cell drawing inside the view on modern AppKit.
+    NSRectClip([self bounds]);
     id<FSVarioMatrixDataSource> datasrc = (id<FSVarioMatrixDataSource>)_dataSource;
     
     NSRect   frame;
@@ -120,6 +122,8 @@
 /*" FSVarioMatrix can draw cells that span multiple rows or columns.
     "*/
 {
+    // Keep cell drawing inside the view on modern AppKit.
+    NSRectClip([self bounds]);
     id<FSVarioMatrixDataSource> datasrc = (id<FSVarioMatrixDataSource>)_dataSource;
     int                  row, col;
     NSRect               frame = {{0,0},{0,0}};
@@ -379,6 +383,8 @@
 - (void)resetCursorRects
 /*" The beefed-up version. "*/
 {
+    // Keep cell drawing inside the view on modern AppKit.
+    NSRectClip([self bounds]);
     id<FSVarioMatrixDataSource> datasrc = (id<FSVarioMatrixDataSource>)_dataSource;
     int       row, col, l;
 
@@ -550,6 +556,8 @@
 
 - (NSRect)frameForRow:(int)row column:(int)col
 {
+    // Keep cell drawing inside the view on modern AppKit.
+    NSRectClip([self bounds]);
     id<FSVarioMatrixDataSource> datasrc = (id<FSVarioMatrixDataSource>)_dataSource;
     NSRect   result;
     NSRange  rr = [datasrc matrix:self rowRangeForCell:FSMakeCell(row,col)];
@@ -572,6 +580,8 @@
 - (FSCell)cellAtPoint:(NSPoint)point origin:(NSPoint*)origin size:(NSSize*)size
 /*" Modified from the super method to look for spans. "*/
 {
+    // Keep cell drawing inside the view on modern AppKit.
+    NSRectClip([self bounds]);
     id<FSVarioMatrixDataSource> datasrc = (id<FSVarioMatrixDataSource>)_dataSource;
     FSCell     result = {0,0};
     float      x = 0;

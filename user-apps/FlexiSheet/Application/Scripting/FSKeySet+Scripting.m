@@ -15,7 +15,7 @@
     // Returns the key set with it's reference to a table.
 {
     NSArray      *keysets = [[self table] scriptingKeysets];
-    unsigned int  index = [keysets indexOfObjectIdenticalTo:self];
+    NSUInteger    index = [keysets indexOfObjectIdenticalTo:self];
 
     if (index != NSNotFound) {
         NSScriptObjectSpecifier *containerRef = [[self table] objectSpecifier];

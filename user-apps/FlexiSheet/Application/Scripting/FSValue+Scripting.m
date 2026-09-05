@@ -21,7 +21,7 @@
     // Returns itself always as the key of the group it's in.
 {
     NSArray      *items = [[self group] items];
-    unsigned int  index = [items indexOfObjectIdenticalTo:self];
+    NSUInteger    index = [items indexOfObjectIdenticalTo:self];
 
     if (index != NSNotFound) {
         NSScriptObjectSpecifier *containerRef = [[self group] objectSpecifier];

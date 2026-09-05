@@ -78,7 +78,7 @@
 
 // Header management
 - (NSArray*)headers;
-- (int)indexOfHeader:(FSHeader*)header;
+- (NSUInteger)indexOfHeader:(FSHeader*)header;
 - (void)addHeader:(FSHeader*)newHeader;
 - (void)removeHeader:(FSHeader*)aHeader;
 - (NSString*)nextAvailableHeaderName;
@@ -86,6 +86,7 @@
 - (FSHeader*)headerWithName:(NSString*)name;
 - (NSArray*)headersWithNames:(NSArray*)names;
 
+- (NSArray*)scriptingKeysets;
 - (NSArray*)keySetsForHeaders:(NSArray*)headers;
 
 // Value management

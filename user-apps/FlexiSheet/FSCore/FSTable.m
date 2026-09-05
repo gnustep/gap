@@ -71,6 +71,11 @@ NSString* FSEditRevertedNotification     = @"FSEditReverted";
     This happens when renaming a label to an already used name. "*/
 
 @implementation FSTable
+
+- (NSArray*)scriptingKeysets
+{
+    return _keysets;
+}
 /*" An FSTable instance (also just called a table) is where FlexiSheet stores values.
     Users can give tables a name to reference them by.  Default names for tables are
     Table 1, Table 2, and so forth.
@@ -209,7 +214,7 @@ NSString* FSEditRevertedNotification     = @"FSEditReverted";
 }
 
 
-- (int)indexOfHeader:(FSHeader*)header
+- (NSUInteger)indexOfHeader:(FSHeader*)header
 /*" Returns the index of header (headers are ordered). "*/
 {
     return [_headers indexOfObject:header];

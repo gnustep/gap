@@ -30,6 +30,8 @@
 
 - (void)drawRect:(NSRect)rect
 {
+    // Modern AppKit allows drawing outside a view unless explicitly clipped.
+    NSRectClip([self bounds]);
     NSImage *img = [NSImage imageNamed:@"CornerMenu"];
 
     NSDrawButton([self bounds], rect);
