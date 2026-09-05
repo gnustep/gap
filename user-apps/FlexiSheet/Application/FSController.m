@@ -364,6 +364,10 @@ NSString *FSDefaultFontSizePreference  = @"DefaultFontSize";
 
 - (void)outlineView:(NSOutlineView*)ov willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn*)tc item:(id)item
 {
+    if ([cell respondsToSelector:@selector(setTextColor:)]) {
+        [(NSTextFieldCell*)cell setTextColor:[NSColor blackColor]];
+    }
+
     if ([item isKindOfClass:[FSTable class]]) {
         [cell setImage:[NSImage imageNamed:@"TableSmIcon"]];
         return;
