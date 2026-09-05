@@ -330,6 +330,7 @@
 -(void)setHasMultiplePages:(BOOL)flag;
 //alt text colors
 -(void)updateAltTextColors;
+-(void)applyDefaultTextColorIfNeeded;
 -(void)setShouldUseAltTextColors:(BOOL)flag;
 -(BOOL)shouldUseAltTextColors;
 -(void)setBackgroundColor:(NSColor*)aColor;

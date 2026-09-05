@@ -318,6 +318,7 @@ const OSType kMyAppCreatorCode = 'bEAN';
 	
 	//	the first page must be added before the shared text state can be set up, which we do here
 	[self setupInitialTextViewSharedState];
+	[self applyDefaultTextColorIfNeeded];
 	
 	//	if new document, get default typingAttributes (incl. font) and pagesize/margins that are indicated in Preferences and apply
 	if (loadedText==nil)
@@ -367,6 +368,9 @@ const OSType kMyAppCreatorCode = 'bEAN';
 		if (aFont == nil) aFont = [NSFont systemFontOfSize:[NSFont systemFontSize]];
 		//	add font to typingAttributes
 		if (aFont) [theTypingAttributes setObject:aFont forKey:NSFontAttributeName];
+#ifdef GNUSTEP
+		[theTypingAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+#endif
 		
 		//	apply to textview (for new documents)
 		[[self firstTextView] setTypingAttributes:theTypingAttributes];
@@ -1792,8 +1796,12 @@ NSString *universalTypeForFile(NSString *filename)
 	//	make a dictionary of the attributes
 	NSMutableDictionary *theTypingAttributes = [[[NSMutableDictionary alloc] initWithObjectsAndKeys:theParagraphStyle, 
 				NSParagraphStyleAttributeName, nil] autorelease];
+#ifdef GNUSTEP
+	[theTypingAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+#endif
 	[textStorage addAttribute:NSParagraphStyleAttributeName value:theParagraphStyle range:NSMakeRange(0,[textStorage length])];
 	[[self firstTextView] setTypingAttributes:theTypingAttributes];
+	[self applyDefaultTextColorIfNeeded];
 	//	special case for text files because otherwise you end up widening window and then zooming out - 2 steps
 	//	addendum: actually, it looks like we do the usual thing here; perhaps always should be second case for plain text?
 	if ([defaults boolForKey:@"prefUseFitWidth"])
@@ -2835,6 +2843,47 @@ NSInteger encSort(id array1, id array2, void *context)
 	[[self firstTextView] setBackgroundColor:textViewBackgroundColor];
 }
 
+// GNUstep themes can report a white NSTextView foreground color, which makes
+// normal documents unreadable on Bean's explicit white page background.
+- (void)applyDefaultTextColorIfNeeded
+{
+#ifdef GNUSTEP
+	if ([self shouldUseAltTextColors]) return;
+	NSTextView *textView = [self firstTextView];
+	if (!textView) return;
+
+	NSColor *defaultTextColor = [NSColor blackColor];
+	NSMutableDictionary *typingAttributes = [[[textView typingAttributes] mutableCopy] autorelease];
+	if (!typingAttributes)
+	{
+		typingAttributes = [NSMutableDictionary dictionaryWithCapacity:1];
+	}
+	[typingAttributes setObject:defaultTextColor forKey:NSForegroundColorAttributeName];
+	[textView setTypingAttributes:typingAttributes];
+
+	if ([textStorage length])
+	{
+		NSRange fullRange = NSMakeRange(0, [textStorage length]);
+		unsigned charIndex = 0;
+		while (charIndex < NSMaxRange(fullRange))
+		{
+			NSRange effectiveRange;
+			id textColor = [textStorage attribute:NSForegroundColorAttributeName
+				atIndex:charIndex
+				longestEffectiveRange:&effectiveRange
+				inRange:fullRange];
+			if (!textColor)
+			{
+				[textStorage addAttribute:NSForegroundColorAttributeName
+					value:defaultTextColor
+					range:effectiveRange];
+			}
+			charIndex = NSMaxRange(effectiveRange);
+		}
+	}
+#endif
+}
+
 // ******************* Live Word Count ********************
 
 -(IBAction)liveWordCount:(id)sender
@@ -3578,6 +3627,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 	[[theScrollView verticalScroller] display]; //9 Sept 07 to fix disappearing pageUp/pageDown buttons
 	[self liveWordCount:nil];
 	if (storeTypingAttributes) [[self firstTextView] setTypingAttributes:storeTypingAttributes];
+	[self applyDefaultTextColorIfNeeded];
 }
 
 // ******************* Toggle Ruler Method ********************
@@ -3652,6 +3702,7 @@ void validateToggleItem(NSMenuItem *aCell, BOOL useFirst, NSString *first, NSStr
 											forCharacterRange:NSMakeRange(0, [[textView textStorage] length])];
 		[textView setBackgroundColor:[NSColor whiteColor]];
 		[textView setInsertionPointColor:[NSColor blackColor]];
+		[self applyDefaultTextColorIfNeeded];
 		if (hasMultiplePages)
 		{
 			PageView *pageView = [theScrollView documentView];
