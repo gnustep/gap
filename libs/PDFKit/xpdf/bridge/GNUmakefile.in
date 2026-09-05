@@ -48,4 +48,6 @@ xpdfbridge_OBJC_FILES = \
 xpdfbridge_CC_FILES = \
 	XPDFBridge.cc 
 
+XPDFBridge.cc_FILE_FILTER_OUT_FLAGS = -std=gnu11
+
 include $(GNUSTEP_MAKEFILES)/subproject.make

@@ -26,6 +26,8 @@ Chess_C_FILES=\
 Chess_CC_FILES=\
 	ChessListener.cp
 
+ChessListener.cp_FILE_FILTER_OUT_FLAGS = -std=gnu11
+
 Chess_RESOURCE_FILES=\
 	ApplicationNameImage.tiff\
 	ChessApp.tiff\

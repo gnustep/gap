@@ -74,6 +74,8 @@ WindowsMedia.m
 WindowsMedia_CC_FILES= \
 CWMFile.cpp
 
+CWMFile.cpp_FILE_FILTER_OUT_FLAGS = -std=gnu11
+
 ADDITIONAL_INCLUDE_DIRS += -I../../Frameworks
 
 FRAMEWORKS_DIRS = ../../Frameworks/Cynthiune
