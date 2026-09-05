@@ -30,6 +30,8 @@
     float scaleFactor;
 	BOOL isFitWidth;
 	BOOL isFitPage;
+	id pageUpButton;
+	id pageDownButton;
 }
 
 //adjust view methods
@@ -39,5 +41,6 @@
 - (BOOL)isFitPage;
 - (void)setIsFitWidth:(BOOL)flag;
 - (void)setIsFitPage:(BOOL)flag;
+- (void)setPageUpButton:(id)upButton pageDownButton:(id)downButton;
 
 @end

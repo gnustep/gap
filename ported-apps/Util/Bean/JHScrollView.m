@@ -27,6 +27,34 @@
 
 @implementation JHScrollView
 
+- (void)setPageUpButton:(id)upButton pageDownButton:(id)downButton
+{
+	pageUpButton = upButton;
+	pageDownButton = downButton;
+}
+
+- (void)tilePageUpDownButtons
+{
+	if (!pageUpButton || !pageDownButton || ![self verticalScroller]) { return; }
+
+	NSView *buttonSuperview = [pageUpButton superview];
+	if (!buttonSuperview || buttonSuperview != [pageDownButton superview]) { return; }
+
+	NSView *scrollerSuperview = [[self verticalScroller] superview];
+	if (!scrollerSuperview) { return; }
+
+	NSRect verticalScrollerFrame = [[self verticalScroller] frame];
+	NSPoint buttonOrigin = [buttonSuperview convertPoint:verticalScrollerFrame.origin fromView:scrollerSuperview];
+	NSRect pageUpButtonFrame = [pageUpButton frame];
+	NSRect pageDownButtonFrame = [pageDownButton frame];
+
+	pageUpButtonFrame.origin.x = buttonOrigin.x;
+	pageDownButtonFrame.origin.x = buttonOrigin.x;
+
+	[pageUpButton setFrame:pageUpButtonFrame];
+	[pageDownButton setFrame:pageDownButtonFrame];
+}
+
 #pragma mark -
 #pragma mark ---- Init ----
 //revision 30 DEC 2006 BH
@@ -65,6 +93,7 @@
 	[verticalScroller setFrameSize:verticalScrollerFrame.size];
 	[verticalScroller setFrame:verticalScrollerFrame];
 	spacer = 0;
+	[self tilePageUpDownButtons];
 	
 }
 

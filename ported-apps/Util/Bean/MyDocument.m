@@ -136,6 +136,8 @@ const OSType kMyAppCreatorCode = 'bEAN';
 			return nil;
 		}
 		
+		[theScrollView setPageUpButton:pageUpButton pageDownButton:pageDownButton];
+		
 		//	version compatibility check from Smultron by Peter Borg
 #ifndef GNUSTEP
 		SInt32 systemVersion;
