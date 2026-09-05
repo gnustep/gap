@@ -209,7 +209,7 @@ void setStoneLoc(int x, int y)
   [innerHandicap addRepresentation:[[[NSCustomImageRep alloc] initWithDrawSelector:@selector(drawInnerHandicap:) delegate:self] autorelease]];
   [innerHandicap setSize:stoneSize];
   
-  [self setBackgroundFile:[[[NSUserDefaults standardUserDefaults] objectForKey:@"BackGround"] cString] 
+  [self setBackgroundFile:[[[NSUserDefaults standardUserDefaults] objectForKey:@"Background"] cString] 
  andRemember:NO];
   
   [self startNewGame];
@@ -1325,13 +1325,12 @@ void setStoneLoc(int x, int y)
 
 // The following methods draw the pieces.
   
-  - drawBlackStone:imageRep 
+- drawBlackStone:imageRep 
 {
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
+  PSsetalpha (1.0);
   
   // Draw the stone.
+  PSnewpath();
   PSarc (RADIUS, RADIUS, 
 	 RADIUS, 0.0, 360.0);
   PSsetgray (NSBlack);
@@ -1356,12 +1355,10 @@ void setStoneLoc(int x, int y)
 
 - drawWhiteStone:imageRep 
 {
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) 
-    {
-      PSsetalpha (1.0);
-    }
+  PSsetalpha (1.0);
   
   // Draw the stone.
+  PSnewpath();
   PSarc (RADIUS, RADIUS, 
 	 RADIUS, 0.0, 360.0);
   PSsetgray (NSWhite);
@@ -1387,12 +1384,10 @@ void setStoneLoc(int x, int y)
 
 - drawGrayStone:imageRep 
 {
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) 
-    {
-      PSsetalpha (1.0);
-    }
+  PSsetalpha (1.0);
   
   // Draw the stone.
+  PSnewpath();
   PSarc (RADIUS, RADIUS, 
 	 RADIUS, 0.0, 360.0);
   PSsetgray (NSDarkGray);
@@ -1417,19 +1412,17 @@ void setStoneLoc(int x, int y)
 
 - drawUpperLeft:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
-  PSlineto([self bounds].size.width,RADIUS);
+  PSlineto(STONEWIDTH,RADIUS);
   PSmoveto(RADIUS, RADIUS);
   PSlineto(RADIUS, 0.0);
   PSmoveto(RADIUS-SHADOWOFFSET, RADIUS+SHADOWOFFSET);
-  PSlineto([self bounds].size.width, RADIUS+SHADOWOFFSET);
+  PSlineto(STONEWIDTH, RADIUS+SHADOWOFFSET);
   PSmoveto(RADIUS-SHADOWOFFSET, RADIUS+SHADOWOFFSET);
   PSlineto(RADIUS-SHADOWOFFSET, 0.0);
   PSstroke();
@@ -1439,11 +1432,9 @@ void setStoneLoc(int x, int y)
 
 - drawUpperRight:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
@@ -1461,21 +1452,19 @@ void setStoneLoc(int x, int y)
 
 - drawLowerLeft:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
-  PSlineto([self bounds].size.width,RADIUS);
+  PSlineto(STONEWIDTH,RADIUS);
   PSmoveto(RADIUS, RADIUS);
-  PSlineto(RADIUS, [self bounds].size.height);
+  PSlineto(RADIUS, STONEHEIGHT);
   PSmoveto(RADIUS-SHADOWOFFSET, RADIUS-SHADOWOFFSET);
-  PSlineto([self bounds].size.width, RADIUS-SHADOWOFFSET);
+  PSlineto(STONEWIDTH, RADIUS-SHADOWOFFSET);
   PSmoveto(RADIUS-SHADOWOFFSET, RADIUS-SHADOWOFFSET);
-  PSlineto(RADIUS-SHADOWOFFSET, [self bounds].size.height);
+  PSlineto(RADIUS-SHADOWOFFSET, STONEHEIGHT);
   PSstroke();
 
   return self;
@@ -1483,21 +1472,19 @@ void setStoneLoc(int x, int y)
 
 - drawLowerRight:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
   PSlineto(0.0,RADIUS);
   PSmoveto(RADIUS, RADIUS);
-  PSlineto(RADIUS, [self bounds].size.height);
+  PSlineto(RADIUS, STONEHEIGHT);
   PSmoveto(RADIUS+SHADOWOFFSET, RADIUS-SHADOWOFFSET);
   PSlineto(0.0, RADIUS-SHADOWOFFSET);
   PSmoveto(RADIUS+SHADOWOFFSET, RADIUS-SHADOWOFFSET);
-  PSlineto(RADIUS+SHADOWOFFSET, [self bounds].size.height);
+  PSlineto(RADIUS+SHADOWOFFSET, STONEHEIGHT);
   PSstroke();
 
   return self;
@@ -1505,18 +1492,16 @@ void setStoneLoc(int x, int y)
 
 - drawMidLeft:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
-  PSlineto([self bounds].size.width,RADIUS);
-  PSmoveto(RADIUS, [self bounds].size.height);
+  PSlineto(STONEWIDTH,RADIUS);
+  PSmoveto(RADIUS, STONEHEIGHT);
   PSlineto(RADIUS, 0.0);
-  PSmoveto(RADIUS-SHADOWOFFSET, [self bounds].size.height);
+  PSmoveto(RADIUS-SHADOWOFFSET, STONEHEIGHT);
   PSlineto(RADIUS-SHADOWOFFSET, 0.0);
   PSstroke();
 
@@ -1525,18 +1510,16 @@ void setStoneLoc(int x, int y)
 
 - drawMidRight:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
   PSlineto(0.0,RADIUS);
-  PSmoveto(RADIUS, [self bounds].size.height);
+  PSmoveto(RADIUS, STONEHEIGHT);
   PSlineto(RADIUS, 0.0);
-  PSmoveto(RADIUS+SHADOWOFFSET, [self bounds].size.height);
+  PSmoveto(RADIUS+SHADOWOFFSET, STONEHEIGHT);
   PSlineto(RADIUS+SHADOWOFFSET, 0.0);
   PSstroke();
 
@@ -1545,19 +1528,17 @@ void setStoneLoc(int x, int y)
 
 - drawMidTop:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
   PSlineto(RADIUS,0.0);
   PSmoveto(0.0, RADIUS);
-  PSlineto([self bounds].size.width, RADIUS);
+  PSlineto(STONEWIDTH, RADIUS);
   PSmoveto(0.0, RADIUS+SHADOWOFFSET);
-  PSlineto([self bounds].size.width, RADIUS+SHADOWOFFSET);
+  PSlineto(STONEWIDTH, RADIUS+SHADOWOFFSET);
   PSstroke();
 
   return self;
@@ -1565,19 +1546,17 @@ void setStoneLoc(int x, int y)
 
 - drawMidBottom:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(RADIUS, RADIUS);
-  PSlineto(RADIUS,[self bounds].size.height);
+  PSlineto(RADIUS,STONEHEIGHT);
   PSmoveto(0.0, RADIUS);
-  PSlineto([self bounds].size.width, RADIUS);
+  PSlineto(STONEWIDTH, RADIUS);
   PSmoveto(0.0, RADIUS-SHADOWOFFSET);
-  PSlineto([self bounds].size.width, RADIUS-SHADOWOFFSET);
+  PSlineto(STONEWIDTH, RADIUS-SHADOWOFFSET);
   PSstroke();
 
   return self;
@@ -1585,16 +1564,14 @@ void setStoneLoc(int x, int y)
 
 - drawInnerSquare:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(0.0, RADIUS);
-  PSlineto([self bounds].size.width,RADIUS);
-  PSmoveto(RADIUS, [self bounds].size.height);
+  PSlineto(STONEWIDTH,RADIUS);
+  PSmoveto(RADIUS, STONEHEIGHT);
   PSlineto(RADIUS, 0.0);
   PSstroke();
 
@@ -1603,19 +1580,18 @@ void setStoneLoc(int x, int y)
 
 - drawInnerHandicap:imageRep
 {
+  PSsetalpha (1.0);
   PSsetgray(NSBlack);
   PSsetlinewidth(0.0);
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetalpha (1.0);
-  }
 
   PSnewpath();
   PSmoveto(0.0, RADIUS);
-  PSlineto([self bounds].size.width,RADIUS);
-  PSmoveto(RADIUS, [self bounds].size.height);
+  PSlineto(STONEWIDTH,RADIUS);
+  PSmoveto(RADIUS, STONEHEIGHT);
   PSlineto(RADIUS, 0.0);
   PSstroke();
   
+  PSnewpath();
   PSarc(RADIUS, RADIUS, SHADOWOFFSET, 0.0, 360.0);
   PSfill();
 
@@ -1628,7 +1604,10 @@ void setStoneLoc(int x, int y)
 {
   NSRect tmpRect = {{floor(stoneX), floor(stoneY)},
 		      {floor(STONEWIDTH), floor(STONEHEIGHT)}};
-  [blackStone compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+  PSgsave();
+  PStranslate(tmpRect.origin.x, tmpRect.origin.y);
+  [self drawBlackStone:nil];
+  PSgrestore();
   return self;
 }
 
@@ -1636,7 +1615,10 @@ void setStoneLoc(int x, int y)
 {
   NSRect tmpRect = {{floor(stoneX), floor(stoneY)},
 		      {floor(STONEWIDTH), floor(STONEHEIGHT)}};
-  [whiteStone compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+  PSgsave();
+  PStranslate(tmpRect.origin.x, tmpRect.origin.y);
+  [self drawWhiteStone:nil];
+  PSgrestore();
   return self;
 }
 
@@ -1644,7 +1626,10 @@ void setStoneLoc(int x, int y)
 {
   NSRect tmpRect = {{floor(stoneX), floor(stoneY)},
 		      {floor(STONEWIDTH), floor(STONEHEIGHT)}};
-  [grayStone compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+  PSgsave();
+  PStranslate(tmpRect.origin.x, tmpRect.origin.y);
+  [self drawGrayStone:nil];
+  PSgrestore();
   return self;
 }
 
@@ -1661,32 +1646,35 @@ void setStoneLoc(int x, int y)
   int q;
   NSRect tmpRect = {{floor(stoneX), floor(stoneY)}, {floor(STONEWIDTH), floor(STONEHEIGHT)}};
 
+  PSgsave();
+  PStranslate(tmpRect.origin.x, tmpRect.origin.y);
+
   if ((x == 0) && (y == 0))
-    [upperLeft compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawUpperLeft:nil];
   
   if ((x == 0) && (y == MAXY - 1))
-    [lowerLeft compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawLowerLeft:nil];
   
   if ((x == MAXX - 1) && (y == 0))
-    [upperRight compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawUpperRight:nil];
   
   if ((x == MAXX - 1) && (y == MAXY - 1))
-    [lowerRight compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawLowerRight:nil];
   
   if ((x == 0) && (y > 0) && (y < MAXY - 1))
-    [midLeft compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawMidLeft:nil];
   
   if ((x == MAXX - 1) && (y > 0) && (y < MAXY - 1))
-    [midRight compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawMidRight:nil];
   
   if ((x > 0) && (x < MAXX - 1) && (y == 0))
-    [midTop compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawMidTop:nil];
   
   if ((x > 0) && (x < MAXX - 1) && (y == MAXY - 1))
-    [midBottom compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawMidBottom:nil];
   
   if ((x > 0) && (x < MAXX - 1) && (y > 0) && (y < MAXY - 1))
-    [innerSquare compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawInnerSquare:nil];
     
   if (MAXX < 13)
     q = 2;
@@ -1698,7 +1686,9 @@ void setStoneLoc(int x, int y)
       ((x == MAXX/2) && (y == MAXY/2)) || ((x == MAXX/2) && (y == MAXY-q-1)) ||
       ((x == MAXX-q-1) && (y == q)) || ((x == MAXX-q-1) && (y == MAXY/2)) ||
       ((x == MAXX-q-1) && (y == MAXY-q-1)))
-    [innerHandicap compositeToPoint:tmpRect.origin operation:NSCompositeSourceOver];
+    [self drawInnerHandicap:nil];
+
+  PSgrestore();
 
   return self;
 }
@@ -1709,12 +1699,11 @@ void setStoneLoc(int x, int y)
   
   (&tmpRect)->origin.x = floor(NSMinX(tmpRect));
   (&tmpRect)->origin.y = floor(NSMinY(tmpRect));
-  if ([[NSDPSContext currentContext] isDrawingToScreen]) {
-    PSsetgray (NSWhite);
-    PScompositerect (NSMinX(tmpRect), NSMinY(tmpRect),
-		     NSWidth(tmpRect), NSHeight(tmpRect), NSCompositeCopy);
-  }
-  [backGround compositeToPoint:tmpRect.origin fromRect:tmpRect operation:NSCompositeSourceOver];
+  PSsetalpha (1.0);
+  PSsetgray (NSWhite);
+  PSrectfill (NSMinX(tmpRect), NSMinY(tmpRect), NSWidth(tmpRect), NSHeight(tmpRect));
+  if (backGround != nil)
+    [backGround drawAtPoint:tmpRect.origin fromRect:tmpRect operation:NSCompositeSourceOver fraction:1.0];
   return self;
 }
 
@@ -2091,4 +2080,3 @@ void setStoneLoc(int x, int y)
 }
 
 @end
-
