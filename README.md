@@ -1,5 +1,7 @@
 GNUstep Application Project
 ===
+The contents of this repository have moved to https://github.com/nu-gap.
+
 The GNUstep Application Project delivers you the tools to improve 
 your GNUstep workspace experience. Applications and utilities for 
 your desktop, frameworks and tools for the developer.
